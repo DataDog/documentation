@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Datadog API Documentation - <%= @item[:title] %></title>
+    <link rel="stylesheet" type="text/css" href="/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pygments.css" media="screen">
+    <meta name="generator" content="nanoc 3.2.3">
+  </head>
+  <body>
+    <div id="main">
+      <h1><%= @item[:title] %></h1>
+      <%= yield %>
+    </div>
+    <div id="sidebar">
+      <h2>Basics</h2>
+      <ul>
+        <li><a href="/authentication/">Authentication</a></li>
+        <li><a href="/errors/">Errors and Warnings</a></li>
+      </ul>
+      <h2>Endpoints</h2>
+      <ul>
+        <li><a href="/comments/">Comments</a></li>
+        <li><a href="/dashboards/">Dashboards</a></li>
+        <li><a href="/events/">Events</a></li>
+        <li><a href="/metrics/">Metrics</a></li>
+        <li><a href="/search/">Search</a></li>
+        <li><a href="/tags/">Tags</a></li>
+      </ul>
+      <h2>Client Libraries</h2>
+      <ul>
+        <li><a href="/clients/#python">Python</a></li>
+        <li><a href="/clients/#ruby">Ruby</a></li>
+        <li><a href="/clients/#cli">CLI</a></li>
+      </ul>
+    </div>
+  </body>
+</html>

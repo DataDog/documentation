@@ -1,0 +1,108 @@
+--- 
+title: Comments
+---
+
+<p>Post, edit, delete, and reply to comments.</p>
+
+<h3>Authentication</h3>
+
+<p>Full access. (see <a href="/authentication/">Authentication</a>)</p>
+
+<h2>Post a new comment</h2>
+
+<h3>Request</h3>
+
+<%= request "POST",  "/api/v1/comments" %>
+
+<%= request_headers 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'handle': 'matt',
+  'message': 'A comment posted by matt.'
+}
+eos
+%>
+
+<p>The <code>handle</code> parameter is optional. If unset the comment will be posted as the owner of the given application key.</p>
+
+<h3>Response</h3>
+
+<%= response_headers 201, 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'id': 1234,
+  'handle': 'matt',
+  'message': 'A comment posted by matt.'
+}
+eos
+%>
+
+<h2>Reply to a comment</h2>
+
+<h3>Request</h3>
+
+<%= request "POST",  "/api/v1/comments" %>
+
+<%= request_headers 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'handle': 'carlo',
+  'message': 'A reply posted by carlo.',
+  'related_event_id': 1234
+}
+eos
+%>
+
+<p>The <code>handle</code> parameter is optional. If unset the comment will be posted as the owner of the given application key.</p>
+
+<h3>Response</h3>
+
+<%= response_headers 201, 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'id': 1234,
+  'handle': 'carlo',
+  'message': 'A reply posted by carlo.',
+  'related_event_id': 1234
+}
+eos
+%>
+
+<h2>Edit a comment</h2>
+
+<h3>Request</h3>
+
+<%= request "PUT",  "/api/v1/comments/:comment_id" %>
+
+<%= request_headers 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'handle': 'oli',
+  'message': 'A comment edited by oli.'
+}
+eos
+%>
+
+<p>All fields are optional. Omitted fields will be unchanged.</p>
+
+<h3>Response</h3>
+
+<%= response_headers 200, 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  'id': 1234,
+  'handle': 'oli',
+  'message': 'A comment edited by oli.'
+}
+eos
+%>
+
+<h2>Delete a comment</h2>
+
+<h3>Request</h3>
+
+<%= request "DELETE",  "/api/v1/comments/:comment_id" %>
+
+<h3>Response</h3>
+
+<%= response_headers 204 %>

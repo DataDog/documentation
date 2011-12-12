@@ -1,0 +1,19 @@
+--- 
+title: Home
+---
+
+# <%= @item[:title] %>
+
+This is just some text about the <code>dog</code> command.
+
+<%= request 'GET', 'http://app.datadoghq.com/api/v1/events' %>
+
+<%= response_headers 200, 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  "dash": DASHBOARD_OBJECT,
+  "url": "https://...",
+  "resource": "/api/v1/dash/:dash_id"
+}
+eos
+%>
