@@ -1,0 +1,30 @@
+/* Documentation styles */
+
+code, pre {
+    background-color: #eee;
+}
+
+p code, li code {
+    border: 1px solid #ccc;
+    padding: 0 3px;
+}
+
+pre {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 20px 0;
+    overflow: auto;
+}
+
+pre.http-headers {
+    background-color: #ddd;
+}
+
+pre.http-body {
+    border-top: 0px;
+    margin-top: -20px;
+}
+
+span.request-verb {
+    font-weight: bold;
+}
