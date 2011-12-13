@@ -14,17 +14,18 @@ a {
 
 a:link,
 a:visited {
-  color: #f30;
+  color: #39c;
 }
 
 a:hover {
-  color: #f90;
+  color: #246b8f;
+  color: #1966aa;
 }
 
 #main {
   position: absolute;
 
-  top: 40px;
+  top: 60px;
   left: 280px;
 
   width: 500px;
@@ -64,7 +65,7 @@ a:hover {
 #sidebar {
   position: absolute;
 
-  top: 40px;
+  top: 45px;
   left: 20px;
   width: 200px;
 

@@ -1,3 +1,23 @@
+/* Header */
+
+#head {
+    height: 45px;
+    background: url("/static/bgs.png") repeat-x 0 0;
+}
+
+#logo {
+    display: block;
+    height: 45px;
+    background: url("/static/bgs.png") no-repeat 0 -50px;
+    padding-left: 176px;
+    line-height: 44px;
+    color: white;
+}
+
+#logo span {
+    display: none;
+}
+
 /* Documentation styles */
 
 code, pre {
