@@ -40,6 +40,14 @@ a:hover {
   letter-spacing: -1px;
 }
 
+#main h2 {
+    border-bottom: 1px solid #ccc;
+}
+
+#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
+    margin-bottom: 20px;
+}
+
 #main p {
   margin: 20px 0;
   

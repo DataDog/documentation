@@ -29,6 +29,10 @@ compile '*' do
   end
 end
 
+route '/static/favicon/' do
+  '/favicon.ico'
+end
+
 route '/static/*' do
   item.identifier.chop + '.' + item[:extension]
 end
