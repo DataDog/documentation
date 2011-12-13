@@ -28,6 +28,8 @@ code, pre {
 p code, li code {
     border: 1px solid #ccc;
     padding: 0 3px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 pre {
@@ -35,6 +37,8 @@ pre {
     padding: 5px;
     margin: 20px 0;
     overflow: auto;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 pre.http-headers {
