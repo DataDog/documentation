@@ -17,9 +17,9 @@ title: Dashboards
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'dash': DASHBOARD_OBJECT,
-  'url': 'https://...',
-  'resource': '/api/v1/dash/:dash_id'
+  "dash": DASHBOARD_OBJECT,
+  "url": "https://...",
+  "resource": "/api/v1/dash/:dash_id"
 }
 eos
 %>
@@ -33,7 +33,7 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'dash': DASHBOARD_OBJECT
+  "dash": DASHBOARD_OBJECT
 }
 eos
 %>
@@ -43,9 +43,9 @@ eos
 <%= response_headers 201, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'dash': DASHBOARD_OBJECT,
-  'url': 'https://...',
-  'resource': '/api/v1/dash/:dash_id'
+  "dash": DASHBOARD_OBJECT,
+  "url": "https://...",
+  "resource": "/api/v1/dash/:dash_id"
 }
 eos
 %>
@@ -63,7 +63,7 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'dash': DASHBOARD_OBJECT
+  "dash": DASHBOARD_OBJECT
 }
 eos
 %>
@@ -73,9 +73,9 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'dash': DASHBOARD_OBJECT,
-  'url': 'https://...',
-  'resource': '/api/v1/dash/:dash_id'
+  "dash": DASHBOARD_OBJECT,
+  "url": "https://...",
+  "resource": "/api/v1/dash/:dash_id"
 }
 eos
 %>
@@ -100,12 +100,12 @@ The dashboard object contains some descriptive metadata and a list of graphs. A 
 
 <pre><code class="language-javascript">
 {
-  'title': 'Cassandra Overview',
-  'description': "A high-level view of the Cassandra cluster's health.",
-  'graphs': [
+  "title": "Cassandra Overview",
+  "description": "A high-level view of the Cassandra cluster's health.",
+  "graphs": [
     {
-      'title': 'Cassandra load',
-      'definition': {'requests': [{'q': 'system.cpu.idle{cassandra.host}by{host}'}
+      "title": "Cassandra load",
+      "definition": {"requests": [{"q": "system.cpu.idle{cassandra.host}by{host}"}
     }, ... ]
 }
 </code></pre>

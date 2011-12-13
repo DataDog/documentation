@@ -69,19 +69,19 @@ An event stream must be filtered by the start and end time. Further filtering is
 <%= http_body <<eos
 { "events": [
     {
-      id: "event-1",
-      title: "my first event",
-      priority: "normal",
-      handle: "alq@datadoghq.com",
-      date_happened: 1313769783,
-      source: "nagios",
-      alert_type: "ok",
-      is_aggregate: true,
-      children: [
+      "id": "event-1",
+      "title": "my first event",
+      "priority": "normal",
+      "handle": "alq@datadoghq.com",
+      "date_happened": 1313769783,
+      "source": "nagios",
+      "alert_type": "ok",
+      "is_aggregate": true,
+      "children": [
         {
-          id: "event-100",
-          date_happened: 123459833,
-          alert_type: "error"
+          "id": "event-100",
+          "date_happened": 123459833,
+          "alert_type": "error"
         }, ...
       ]
     }, ...
@@ -101,16 +101,16 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  id: (String) event id,
-  title: (String) event title,
-  text: (String),
-  url: (String) permalink to the event
-  priority: (String) "normal", "low"
-  date_happened: (timestamp) when the event happened
-  source: (String) "Nagios", etc.
-  payload: (any valid JSON type)
-  is_aggregate: (boolean) aggregates lower-level events,
-  children: [Event] sorted list of events that belong to this aggregate
+  "id": (String) event id,
+  "title": (String) event title,
+  "text": (String),
+  "url": (String) permalink to the event
+  "priority": (String) "normal", "low"
+  "date_happened": (timestamp) when the event happened
+  "source": (String) "Nagios", etc.
+  "payload": (any valid JSON type)
+  "is_aggregate": (boolean) aggregates lower-level events,
+  "children": [Event] sorted list of events that belong to this aggregate
 }
 eos
 %>

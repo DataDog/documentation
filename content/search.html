@@ -22,9 +22,9 @@ Full access. (see [Authentication](/authentication/))
 
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
-{ 'results': {
-    'hosts': ['cassandraHostA', 'cassandraHostB', ...],
-    'metrics': ['cassandra.load', 'cassandra.requests', ...]
+{ "results": {
+    "hosts": ["cassandraHostA", "cassandraHostB", ...],
+    "metrics": ["cassandra.load", "cassandra.requests", ...]
   }
 }
 eos
@@ -38,8 +38,8 @@ Use faceting to filter the request by type (see Query Language below for more de
 
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
-{ 'results': {
-    'hosts': ['cassandraHostA', 'cassandraHostB', ...]
+{ "results": {
+    "hosts": ["cassandraHostA", "cassandraHostB", ...]
   }
 }
 eos
@@ -53,8 +53,8 @@ Use faceting to filter the request by type (see Query Language below for more de
 
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
-{ 'results': {
-    'metrics': ['cassandra.load', 'cassandra.requests', ...]
+{ "results": {
+    "metrics": ["cassandra.load", "cassandra.requests", ...]
   }
 }
 eos

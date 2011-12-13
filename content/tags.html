@@ -18,9 +18,9 @@ Full access. (see [Authentication](/authentication/))
 
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
-{ 'tags': [
-    { 'tag1': [ 'host1', 'host2' ] },
-    { 'tag2': [ 'host1', 'host3' ] }
+{ "tags": [
+    { "tag1": [ "host1", "host2" ] },
+    { "tag2": [ "host1", "host3" ] }
   ]
 }
 eos
@@ -37,7 +37,7 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'tags': ['tag1', 'tag2']
+  "tags": ["tag1", "tag2"]
 }
 eos
 %>
@@ -51,7 +51,7 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'tags': ['new_tag1', 'new_tag2']
+  "tags": ["new_tag1", "new_tag2"]
 }
 eos
 %>
@@ -61,7 +61,7 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'tags': ['old_tag', 'new_tag1', 'new_tag2']
+  "tags": ["old_tag", "new_tag1", "new_tag2"]
 }
 eos
 %>
@@ -75,7 +75,7 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'tags': ['new_tag1', 'new_tag2']
+  "tags": ["new_tag1", "new_tag2"]
 }
 eos
 %>
@@ -85,7 +85,7 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'tags': ['new_tag1', 'new_tag2']
+  "tags": ["new_tag1", "new_tag2"]
 }
 eos
 %>

@@ -30,9 +30,9 @@ eos
 <%= response_headers 201, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'id': 1234,
-  'handle': 'matt',
-  'message': 'A comment posted by matt.'
+  "id": 1234,
+  "handle": "matt",
+  "message": "A comment posted by matt."
 }
 eos
 %>
@@ -46,9 +46,9 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'handle': 'carlo',
-  'message': 'A reply posted by carlo.',
-  'related_event_id': 1234
+  "handle": "carlo",
+  "message": "A reply posted by carlo.",
+  "related_event_id": 1234
 }
 eos
 %>
@@ -60,10 +60,10 @@ eos
 <%= response_headers 201, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'id': 1234,
-  'handle': 'carlo',
-  'message': 'A reply posted by carlo.',
-  'related_event_id': 1234
+  "id": 1234,
+  "handle": "carlo",
+  "message": "A reply posted by carlo.",
+  "related_event_id": 1234
 }
 eos
 %>
@@ -77,8 +77,8 @@ eos
 <%= request_headers 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'handle': 'oli',
-  'message': 'A comment edited by oli.'
+  "handle": "oli",
+  "message": "A comment edited by oli."
 }
 eos
 %>
@@ -90,9 +90,9 @@ eos
 <%= response_headers 200, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
-  'id': 1234,
-  'handle': 'oli',
-  'message': 'A comment edited by oli.'
+  "id": 1234,
+  "handle": "oli",
+  "message": "A comment edited by oli."
 }
 eos
 %>
