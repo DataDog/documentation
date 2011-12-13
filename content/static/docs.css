@@ -9,6 +9,7 @@
     display: block;
     height: 45px;
     background: url("/static/bgs.png") no-repeat 0 -50px;
+    margin-left: 30px;
     padding-left: 176px;
     line-height: 44px;
     color: white;

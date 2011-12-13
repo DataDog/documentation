@@ -26,9 +26,9 @@ a:hover {
   position: absolute;
 
   top: 60px;
-  left: 280px;
+  left: 240px;
 
-  width: 500px;
+  width: 650px;
 }
 
 #main h1 {
@@ -46,6 +46,10 @@ a:hover {
 
 #main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
     margin-bottom: 20px;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+    color: inherit;
 }
 
 #main p {
@@ -75,7 +79,7 @@ a:hover {
 
   top: 45px;
   left: 20px;
-  width: 200px;
+  width: 170px;
 
   padding: 20px 20px 0 0;
 
