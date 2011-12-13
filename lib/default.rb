@@ -38,3 +38,7 @@ end
 def request(verb, uri)
   return "<pre><span class=\"request-verb\">#{verb}</span> #{uri}</pre>"
 end
+
+def json(json)
+  return "<pre><code class=\"language-javascript\">#{json}</code></pre>"
+end

@@ -1,0 +1,41 @@
+---
+title: Metrics
+---
+
+Post time series data.
+
+### Authentication
+
+Reporting access. (see [Authentication](/authentication/))
+
+## Post a time series
+
+### Request
+
+<%= request 'POST', '/api/v1/series' %>
+
+<%= request_headers 'Content-Type' => 'application/json' %>
+<%= http_body <<eos
+{
+  "series": [
+    {
+      "metric": "metric.name",
+      "points": [
+         [ 
+           POSIX timestamp,
+           numeric value
+         ], ...
+      ],
+      "type": "gauge",
+      "host": "myhost.mydomain",
+      "device": "device name" # e.g. eth0
+    }, ... ]
+}
+eos
+%>
+
+`host` and `device` are optional. The only currently supported `type` is "gauge".
+
+### Response
+
+<%= response_headers 201 %>
