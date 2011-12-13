@@ -11,8 +11,12 @@
     background: url("/static/bgs.png") no-repeat 0 -50px;
     margin-left: 30px;
     padding-left: 176px;
-    line-height: 44px;
+    line-height: 42px;
     color: white;
+    font-family: monospace;
+    font-size: 38px;
+    font-weight: normal;
+    text-shadow: -1px 1px 0px #6F4A92;
 }
 
 #logo span {

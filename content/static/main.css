@@ -22,21 +22,32 @@ a:hover {
   color: #1966aa;
 }
 
+/* layout */
+
 #main {
-  position: absolute;
-
-  top: 60px;
-  left: 240px;
-
-  width: 650px;
+    width: 650px;
+    position: absolute;
+    top: 60px;
+    left: 210px;
+    padding: 5px 5px 5px 20px;
 }
+
+#sidebar {
+    width: 170px;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    padding: 25px 20px 20px 0;
+    text-align: right;
+    border-right: 1px solid #ddd;
+}
+
+/* typesetting */
 
 #main h1 {
   font-size: 40px;
   font-weight: normal;
-
   line-height: 40px;
-
   letter-spacing: -1px;
 }
 
@@ -54,9 +65,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 
 #main p {
   margin: 20px 0;
-  
   font-size: 15px;
-  
   line-height: 20px;
 }
 
@@ -66,7 +75,6 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 
 #main li {
   font-size: 15px;
-  
   line-height: 20px;
 }
 
@@ -74,40 +82,20 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
   list-style-type: square;
 }
 
-#sidebar {
-  position: absolute;
-
-  top: 45px;
-  left: 20px;
-  width: 170px;
-
-  padding: 20px 20px 0 0;
-
-  border-right: 1px solid #ccc;
-
-  text-align: right;
-}
-
 #sidebar h2 {
   text-transform: uppercase;
-
   font-size: 13px;
-
   color: #333;
-
   letter-spacing: 1px;
-
   line-height: 20px;
 }
 
 #sidebar ul {
   list-style-type: none;
-
   margin: 20px 0;
 }
 
 #sidebar li {
   font-size: 14px;
-
   line-height: 20px;
 }
