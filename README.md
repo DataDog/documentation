@@ -52,9 +52,10 @@ $ rake autocompile
 
 ### Deploy the static site
 
-In order for this to work, you need to have the static site repo
-(DataDog/datadog.github.com) checked out next to this one (i.e. from the root of
-this repo, the static site should be located at `../datadog.github.com/`):
+In order for this to work, you need to have the
+[static site repo](https://github.com/DataDog/datadog.github.com) checked out
+next to this one (i.e. from the root of this repo, the static site should be
+located at `../datadog.github.com/`):
 
 ```
 $ git clone git@github.com:DataDog/datadog.github.com.git
@@ -62,7 +63,7 @@ $ git clone git@github.com:DataDog/datadog.github.com.git
 
 Then run the `release` Rake task, which should do a clean compile of the site
 and then copy all the new files over to the static repo and create a new commit.
-This task will wipe out any uncommitted changes in the static repo.
+**WARNING!** This task will wipe out any uncommitted changes in the static repo.
 
 ```
 $ rake release
