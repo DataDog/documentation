@@ -66,13 +66,5 @@ and then copy all the new files over to the static repo and create a new commit.
 **WARNING!** This task will wipe out any uncommitted changes in the static repo.
 
 ```
-$ rake release
-```
-
-Take a look at the new commit. When you've decided it's to your liking, push it
-to GitHub, and GitHub Pages will do the rest.
-
-```
-$ cd ../datadog.github.com/
-$ git push origin master
+$ bundle exec rake release
 ```
