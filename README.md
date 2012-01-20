@@ -25,19 +25,19 @@ with the included Rake tasks.
 ### Compile the static site:
 
 ```
-$ rake compile
+$ bundle exec rake compile
 ```
 
 ### Run a local webserver to view the compiled site:
 
 ```
-$ rake view
+$ bundle exec rake view
 ```
 
 ### Run a local webserver and auto-update:
 
 ```
-$ rake autocompile
+$ bundle exec rake autocompile
 ```
 
 *I recommend disabling the syntax highlighting if you run the server with autocompile since it's slow. In `Rules`:*
