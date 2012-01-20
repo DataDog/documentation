@@ -1,2 +1,4 @@
 output/
 tmp/
+vendor/*
+.bundle/*
