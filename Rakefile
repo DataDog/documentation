@@ -13,12 +13,16 @@ task :compile do
   sh "bundle exec nanoc compile"
 end
 
+task :view do
+  sh "bundle exec nanoc view"
+end
+
 task :autocompile do
   puts "NOTE: if this is slow, you might want to disable syntax highlighting in the 'Rules' file\n\n"
   sh "bundle exec nanoc autocompile"
 end
 
-task :release => [:compile] do
+task :release => [:clean_all, :compile] do
   if File.directory?('../datadog.github.com/')
     sh "sh rake/release.sh"
   else
