@@ -33,6 +33,10 @@ route '/static/favicon/' do
   '/favicon.ico'
 end
 
+route '/static/CNAME/' do
+  '/CNAME'
+end
+
 route '/static/*' do
   item.identifier.chop + '.' + item[:extension]
 end
