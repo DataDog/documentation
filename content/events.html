@@ -22,13 +22,21 @@ Reporting access for POST. Full access otherwise. (see [Authentication](/authent
 
   "date_happened": POSIX timestamp (default, now)
   "priority": (String) "normal", "low" (default, normal)
-  "related_event_id": (String) id of the related (aggregate) event (default, none)
+  "related_event_id": (String) id of the related (aggregate) event
+		      (default, none)
   "tags": [String] a list of tags (default, none)
+  "alert_type": (String) "error", "warning", "info", "success"
+                (default, info)
+  "source_type_name": (String) type of event (default, none)
 }
 eos
 %>
 
 Only "title" and "text" are required. The rest, if omitted, use their default value.
+
+"source_type_name" can be any of the following keywords:
+
+`nagios`, `hudson`, `jenkins`, `user`, `my apps`, `feed`, `chef`, `puppet`, `git`, `bitbucket`
 
 ### Response
 
