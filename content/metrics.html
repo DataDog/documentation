@@ -28,13 +28,14 @@ Reporting access. (see [Authentication](/authentication/))
       ],
       "type": "metric_type",
       "host": "myhost.mydomain",
-      "device": "eth0"
+      "device": "eth0",
+      "tags": ["tag1", "tag2"]
     }, ... ]
 }
 eos
 %>
 
-`host` and `device` are optional.
+`host`, `device` and tags are optional.
 
 `metric_type` must be one of `gauge` or `counter`.
 
