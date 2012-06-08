@@ -9,6 +9,7 @@ task :clean_all => [:clean] do
   sh "rm -rf output/*"
 end
 
+desc "Build documentation site"
 task :compile do
   sh "bundle exec nanoc compile"
 end
@@ -22,6 +23,7 @@ task :autocompile do
   sh "bundle exec nanoc autocompile"
 end
 
+desc "Publish"
 task :release => [:clean_all, :compile] do
   if File.directory?('../datadog.github.com/')
     sh "sh rake/release.sh"
