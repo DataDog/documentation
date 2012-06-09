@@ -1,0 +1,111 @@
+---
+title: Getting Started with Metrics
+---
+
+This tutorial will walk you through instrumenting your application to send
+custom metrics to Datadog. If you need some help as you go, pop by our
+<a href="irc://irc.freenode.net/datadog">IRC channel</a>.
+
+## DogStatsd
+
+DogStatsd is a metrics aggregation server that implements the Statsd
+protocol, but with a few extensions for Datadog special sauce. It is bundled
+with the Datadog agent (from version FIXME and up), so once that's running
+you're ready to start collecting custom metrics in whatever language you
+use.
+
+The Statsd protocol uses UDP, which is a good fit for instrumentation because
+your application won't block waiting for a response from the server.
+
+     -----------
+    |           |
+    | app.java  |
+    |           | -- UDP -->  ------------                   ------------
+     -----------              |            |                 |            |
+                              |  dogstatsd |   -- HTTPS -->  | datadoghq  |
+     -----------              |            |                 |            |
+    |           | -- UDP -->   ------------                   ------------
+    | worker.py |
+    |           |
+     -----------
+
+     (FIXME add a real image)
+
+## Configuration
+
+By default, DogStatsd runs o
+
+## Installation
+
+- Set up the datadog agent
+- Configure your client.
+
+## Metrics
+
+### Gauges
+
+Gauges measure the value of a particular thing at a
+particular time, like the amount of fuel in a car's gas tank or
+the number of users connected to a system.
+
+    # In Python ...
+    dog.gauge('gas_tank.level', 0.75)
+    dog.gauge('users.active', 1001)
+
+### Counters
+
+Counters track how many times something happened happened, like the number of
+database requests or page views.
+
+    dog.increment('database.query.count')
+    dog.increment('page_view.count')
+
+### Histograms
+
+Histograms track the statistical distribution of a set of values, like the
+duration of database queries or the size of files uploaded by users. Each
+histogram will track the average, minimum, maximum and the 75th, 85th, 95th and
+99th percentiles.
+
+    dog.histogram('database.query.time', 0.5)
+    dog.histogram('file.upload.size', file.get_size())
+
+## Sample Rates
+
+The overhead of sending UDP packets can be too great for some performance
+instensive code paths. If this is the case, Statsd clients support samples
+rates, so a particular metric will only be sent a fraction of the time, but
+scaled up to the proper value on the server. For example, the metric
+
+    dog.histogram('my.histogram', 1, rate=0.5)
+
+will only be sent to the server about half of the time.
+
+## Tags
+
+DogStatsd extends the Statsd protocol to support tags. A tag is a dimension
+that lets you slice and dice metrics from different circumstances. For example,
+if you want to A/B test performance fixes on a hot code path, you could tag the
+duration of each path with the version of the code. For example:
+
+    start_time = time()
+    if random() > 0.5:
+        version = 'old'
+        do_old_thing()
+    else:
+        version = 'new'
+        do_new_thing()
+    duration = time() - start_time
+    dog.histogram('thing.duration', duration, tags='version:' + version)
+
+
+## Your First Metric
+
+
+
+## Clients
+
+- Python
+- Ruby
+- Java
+- Node
