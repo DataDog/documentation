@@ -1,9 +1,9 @@
-begin
-  require 'nanoc3/tasks'
-rescue LoadError
-  require 'rubygems'
-  require 'nanoc3/tasks'
-end
+#begin
+#  require 'nanoc3/tasks'
+#rescue LoadError
+#  require 'rubygems'
+#  require 'nanoc3/tasks'
+#end
 
 task :clean_all => [:clean] do
   sh "rm -rf output/*"
