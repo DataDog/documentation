@@ -8,9 +8,9 @@ title: Getting Started with DogStatsd
   <a href="irc://irc.freenode.net/datadog">IRC channel</a>.
 </p>
 
-The easiest way to custom metrics from your application on to a graph in
-Datadog is to send them to DogStatsd, a metrics aggregation server bundled
-with the Datadog agent. DogStatsd implements the
+The easiest way to get your custom metrics into Datadog is to send them to DogStatsd, 
+a metrics aggregation server bundled with the Datadog agent. 
+DogStatsd implements the
 <a href="https://github.com/etsy/statsd">Statsd</a>
 protocol, along with a few extensions for Datadog special sauce.
 
@@ -46,7 +46,7 @@ just fine, but using a Datadog Statsd client will give you a few extra features
 ## Metrics
 
 We'll walk through the types of metrics supported by DogStatsd in Python, but
-the principles should be easily translated into other languages.
+the principles are easily translated into other languages.
 DogStatsd supports the following types of metrics:
 
 ### Gauges
@@ -112,7 +112,7 @@ multipled by the sample rate to provide an estimate of the real data.
 
 ## Tags
 
-Tags are a Datadog-specific extension to Statsd. They allow you to tag a metric
+Tags are a Datadog specific extension to Statsd. They allow you to tag a metric
 with a dimension that's meaningful to you and slice and dice along that
 dimension in your graphs. For example, suppose you wanted to measure the
 performance of two video rendering algoriths, you could tag the rendering time
