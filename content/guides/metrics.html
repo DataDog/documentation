@@ -73,9 +73,8 @@ histogram will track the average, minimum, maximum and the 75th, 85th, 95th and
 ## Sample Rates
 
 The overhead of sending UDP packets can be too great for some performance
-instensive code paths. If this is the case, Statsd clients support samples
-rates, so a particular metric will only be sent a fraction of the time, but
-scaled up to the proper value on the server. For example, the metric
+instensive code paths. If this is the case, Statsd clients support sampling,
+that is to say, only sending metrics a percentage of the time. For example:
 
     dog.histogram('my.histogram', 1, rate=0.5)
 
@@ -83,8 +82,10 @@ will only be sent to the server about half of the time.
 
 ## Tags
 
-DogStatsd extends the Statsd protocol to support tags. A tag is a dimension
-that lets you slice and dice metrics from different circumstances. For example,
+DogStatsd extends the Statsd protocol to support tags. Adding a tag is a metric
+is like adding a dimension to let you
+
+that lets you slice and dice metrics from different circumstances. For example
 if you want to A/B test performance fixes on a hot code path, you could tag the
 duration of each path with the version of the code. For example:
 
