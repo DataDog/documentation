@@ -6,6 +6,7 @@
 body {
   background: #fff;
   font-family: Georgia, Palatino, Times, 'Times New Roman', sans-serif;
+  letter-spacing:0.7px;
 }
 
 a {
@@ -28,12 +29,12 @@ a:hover {
     width: 650px;
     position: absolute;
     top: 60px;
-    left: 210px;
+    left: 230px;
     padding: 5px 5px 5px 20px;
 }
 
 #sidebar {
-    width: 170px;
+    width: 190px;
     position: absolute;
     top: 60px;
     left: 20px;
@@ -52,10 +53,13 @@ a:hover {
 }
 
 #main h2 {
-    border-bottom: 1px solid #ccc;
+  font-size: 25px;
+  font-weight: normal;
+  border-bottom:1px solid #ddd;
 }
 
 #main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
+    margin-top:10px;
     margin-bottom: 20px;
 }
 
@@ -67,6 +71,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
   margin: 20px 0;
   font-size: 15px;
   line-height: 20px;
+  margin-bottom:20px;
 }
 
 #main ul, #main ol {
@@ -98,4 +103,15 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 #sidebar li {
   font-size: 14px;
   line-height: 20px;
+}
+
+.aside {
+  background-color:#FFF7BB;
+  padding:10px;
+  border:1px solid #E7D82d;
+  margin-bottom:10px;
+}
+
+.strong {
+  font-weight:bold;
 }
