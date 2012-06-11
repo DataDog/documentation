@@ -47,6 +47,10 @@ def pycon(json)
   return "<pre><code class=\"language-pycon\">#{json}</code></pre>"
 end
 
+def python(json)
+  return "<pre><code class=\"language-python\">#{json}</code></pre>"
+end
+
 def console(json)
   return "<pre><code class=\"language-console\">#{json}</code></pre>"
 end

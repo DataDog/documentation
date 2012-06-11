@@ -1,46 +1,53 @@
 ---
-title: Getting Started with Metrics
+title: Getting Started with DogStatsd
 ---
 
-This tutorial will walk you through instrumenting your application to send
-custom metrics to Datadog. If you need some help as you go, pop by our
-<a href="irc://irc.freenode.net/datadog">IRC channel</a>.
+<p class="aside">
+  This tutorial will walk you through instrumenting your application to send
+  custom metrics to Datadog. If you need some help as you go, pop by our
+  <a href="irc://irc.freenode.net/datadog">IRC channel</a>.
+</p>
 
-## DogStatsd
+The easiest way to custom metrics from your application on to a graph in
+Datadog is to send them to DogStatsd, a metrics aggregation server bundled
+with the Datadog agent. DogStatsd implements the
+<a href="https://github.com/etsy/statsd">Statsd</a>
+protocol, along with a few extensions for Datadog special sauce.
 
-DogStatsd is a metrics aggregation server that implements the Statsd
-protocol, but with a few extensions for Datadog special sauce. It is bundled
-with the Datadog agent (from version FIXME and up), so once that's running
-you're ready to start collecting custom metrics in whatever language you
-use.
+## How It Works
 
-The Statsd protocol uses UDP, which is a good fit for instrumentation because
-your application won't block waiting for a response from the server.
+DogStatsd accepts custom application metrics points over
+<a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a>,
+and then periodically aggregates and forwards the metrics to Datadog, where
+they can be graphed on dashboards, trigger alerts and so on. Here's a pretty
+standard DogStatsd network topology:
+<p>
+<img src="/static/images/dogstatsd.png">
+</p>
 
-     -----------
-    |           |
-    | app.java  |
-    |           | -- UDP -->  ------------                   ------------
-     -----------              |            |                 |            |
-                              |  dogstatsd |   -- HTTPS -->  | datadoghq  |
-     -----------              |            |                 |            |
-    |           | -- UDP -->   ------------                   ------------
-    | worker.py |
-    |           |
-     -----------
+UDP is good fit for application instrumentation because it is a fire and
+forget protocol. This means your application won't stop its actual work to wait for a
+response from the metrics server, which is paramount if the metrics
+server is down or inaccessible.
 
-     (FIXME add a real image)
+## Set Up
 
-## Configuration
+Once you have the Datadog Agent up and running, grab a Statsd client for your
+language and you'll be ready to start hacking. Any Statsd client should work
+just fine, but using a Datadog Statsd client will give you a few extra features
+(more on that later). Here are a few:
 
-By default, DogStatsd runs o
-
-## Installation
-
-- Set up the datadog agent
-- Configure your client.
+- [Python](http://pypi.python.org/pypi/python-statsd)
+- [Ruby](https://github.com/github/statsd-ruby)
+- [PHP](https://github.com/seejohnrun/php-statsd)
+- [Java](https://github.com/youdevise/java-statsd-client)
+- [Node.js](https://github.com/sivy/node-statsd)
 
 ## Metrics
+
+We'll walk through the types of metrics supported by DogStatsd in Python, but
+the principles should be easily translated into other languages.
+DogStatsd supports the following types of metrics:
 
 ### Gauges
 
@@ -48,65 +55,133 @@ Gauges measure the value of a particular thing at a
 particular time, like the amount of fuel in a car's gas tank or
 the number of users connected to a system.
 
-    # In Python ...
-    dog.gauge('gas_tank.level', 0.75)
-    dog.gauge('users.active', 1001)
+<%= python <<eof
+dog.gauge('gas_tank.level', 0.75)
+dog.gauge('users.active', 1001)
+eof
+%>
 
 ### Counters
 
 Counters track how many times something happened happened, like the number of
 database requests or page views.
 
-    dog.increment('database.query.count')
-    dog.increment('page_view.count')
+<%= python <<eof
+dog.increment('database.query.count')
+dog.increment('page_view.count')
+eof
+%>
+
 
 ### Histograms
 
 Histograms track the statistical distribution of a set of values, like the
-duration of database queries or the size of files uploaded by users. Each
+duration of a number of database queries or the size of files uploaded by users. Each
 histogram will track the average, minimum, maximum and the 75th, 85th, 95th and
 99th percentiles.
 
-    dog.histogram('database.query.time', 0.5)
-    dog.histogram('file.upload.size', file.get_size())
+<%= python <<eof
+dog.histogram('database.query.time', 0.5)
+dog.histogram('file.upload.size', file.get_size())
+eof
+%>
+
+Histograms are an extension to Statsd, so you'll need to use a client that
+supports them.
+
+### Timers
+
+Statsd only supports histograms for timing, not generic values (like the size
+of uploaded files or the number of rows returned from a query). Timers are
+essentially a special case of histograms, so they are treated in the same manner
+by DogStatsd for backwards compatibility.
 
 ## Sample Rates
 
 The overhead of sending UDP packets can be too great for some performance
-instensive code paths. If this is the case, Statsd clients support sampling,
+instensive code paths. To work around this, Statsd clients support sampling,
 that is to say, only sending metrics a percentage of the time. For example:
 
-    dog.histogram('my.histogram', 1, rate=0.5)
+<%= python <<eof
+dog.histogram('my.histogram', 1, sample_rate=0.5)
+eof
+%>
 
-will only be sent to the server about half of the time.
+will only be sent to the server about half of the time, but it will be
+multipled by the sample rate to provide an estimate of the real data.
 
 ## Tags
 
-DogStatsd extends the Statsd protocol to support tags. Adding a tag is a metric
-is like adding a dimension to let you
-
-that lets you slice and dice metrics from different circumstances. For example
-if you want to A/B test performance fixes on a hot code path, you could tag the
-duration of each path with the version of the code. For example:
-
-    start_time = time()
-    if random() > 0.5:
-        version = 'old'
-        do_old_thing()
-    else:
-        version = 'new'
-        do_new_thing()
-    duration = time() - start_time
-    dog.histogram('thing.duration', duration, tags='version:' + version)
+Tags are a Datadog-specific extension to Statsd. They allow you to tag a metric
+with a dimension that's meaningful to you and slice and dice along that
+dimension in your graphs. For example, suppose you wanted to measure the
+performance of two video rendering algoriths, you could tag the rendering time
+metric with the version of the algorithm you used.
 
 
-## Your First Metric
+Since tags are an extension to Statsd, so you'll need to use a client that
+supports them.
 
 
+<%= python <<eof
 
-## Clients
+# Randomly choose which rendering function we want to use ...
+if random() < 0.5:
+    renderer = old_slow_renderer
+    version = 'old'
+else:
+    renderer = new_shiny_renderer
+    version = 'new'
 
-- Python
-- Ruby
-- Java
-- Node
+start_time = time()
+renderer()
+duration = time() - start_time
+dog.histogram('rendering.duration', tags=[version])
+eof
+%>
+
+## Configuration
+
+DogStatsd supports the following options, all of which can be tweaked in the
+Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
+configuration file</a>:
+
+    # The port DogStatsd runs on. If you change this, make your the apps sending to
+    # it change as well.
+    dogstatsd_port: 8125
+
+    # The number of seconds to wait between flushes to the server.
+    dogstatsd_interval: 10
+
+## Datagram Format
+
+If you want to send metrics to DogStatsd in your own way, here is the format of
+the packets:
+
+`metric.name:value|type|@sample_rate`
+
+Here's  breakdown of the fields:
+
+- `metric.name` should be a String with no colons, bars or @ characters.
+- `value` should be a number
+- type should be `c` for Counter, `g` for Gauge, `h` for Histogram or `ms` for Timer.
+- sample rate is optional and should be a float between 0 and 1 inclusive.
+
+Here are some example datagrams and comments explaining them:
+
+    # Increment the page.views counter.
+    page.views:1|c
+    
+    # Record the fuel tank is half-empty
+    fuel.level:0.5|g
+    
+    # Sample a the song length histogram half of the time.
+    song.length:240|h|@0.5
+    
+    # Increment the users online counter tagged by country of origin.
+    users.online:1|c|#country:china
+
+## Source
+
+DogStatsd is open-sourced under the BSD License. Check out the source
+[here](https://github.com/DataDog/dd-agent).

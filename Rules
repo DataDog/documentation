@@ -23,8 +23,9 @@ compile '*' do
   else
     filter :erb
     filter :kramdown
-    filter :colorize_syntax,
-      :colorizers => {:javascript => :pygmentize, :pycon => :pygmentize, :console => :pygmentize}
+    #filter :colorize_syntax,
+    #  :colorizers => {:javascript => :pygmentize, :pycon => :pygmentize,
+    #  :console => :pygmentize, :python => :pygmentize}
     layout 'default'
   end
 end
