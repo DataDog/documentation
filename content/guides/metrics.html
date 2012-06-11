@@ -99,7 +99,7 @@ by DogStatsd for backwards compatibility.
 ## Sample Rates
 
 The overhead of sending UDP packets can be too great for some performance
-instensive code paths. To work around this, Statsd clients support sampling,
+intensive code paths. To work around this, Statsd clients support sampling,
 that is to say, only sending metrics a percentage of the time. For example:
 
 <%= python <<eof
@@ -114,8 +114,8 @@ multipled by the sample rate to provide an estimate of the real data.
 
 Tags are a Datadog specific extension to Statsd. They allow you to tag a metric
 with a dimension that's meaningful to you and slice and dice along that
-dimension in your graphs. For example, suppose you wanted to measure the
-performance of two video rendering algoriths, you could tag the rendering time
+dimension in your graphs. For example, if you wanted to measure the
+performance of two video rendering algorithms, you could tag the rendering time
 metric with the version of the algorithm you used.
 
 
