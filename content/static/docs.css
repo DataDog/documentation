@@ -26,7 +26,9 @@
 /* Documentation styles */
 
 code, pre {
+    font-family: "Monaco","Consolas","DejaVu Sans Mono",monospace;
     background-color: #eee;
+    font-size:12px;
 }
 
 p code, li code {
