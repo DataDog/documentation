@@ -69,7 +69,6 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 
 #main p {
   margin: 20px 0;
-  font-size: 15px;
   line-height: 20px;
   margin-bottom:20px;
 }
@@ -114,4 +113,21 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 
 .strong {
   font-weight:bold;
+}
+
+.api_table {
+  font-size:13px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.api_table thead th {
+  background-color:#eee;
+  border-bottom:1px solid #bbb;
+  border-top:1px solid #bbb;
+}
+
+.api_table td, .api_table th {
+  padding:8px;
+  border-bottom:1px solid #eee;
 }
