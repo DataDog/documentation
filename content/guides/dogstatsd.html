@@ -12,7 +12,7 @@ The easiest way to get your custom metrics into Datadog is to send them to DogSt
 a metrics aggregation server bundled with the Datadog agent. 
 DogStatsd implements the
 <a href="https://github.com/etsy/statsd">Statsd</a>
-protocol, along with a few extensions for Datadog special sauce.
+protocol, along with a few extensions for special Datadog features.
 
 ## How It Works
 
@@ -24,20 +24,54 @@ they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <img src="/static/images/dogstatsd.png">
 </p>
 
-UDP is good fit for application instrumentation because it is a fire and
+### Aggregation
+
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+time this query is executed. For example:
+
+<%= python <<eof
+def query_my_database():
+    dog.increment('database.query.count')
+    # Run the query ...
+eof
+%>
+
+If this function is executed one hundred times in a flush interval (ten
+seconds by default), it will send DogStatsd one hundred UDP packets that say
+"increment the 'database.query.count' counter". DogStatsd will aggregate these
+points into a single metric value - 100 in this case - and send it to the
+server where it can be graphed.
+
+This means expect DogStatsd to produce one point per metric per flush interval
+while data is being submitted for that metric.
+
+### Why UDP?
+
+Like Statsd, DogStatsd receives points over UDP. UDP is good fit for application 
+instrumentation because it is a fire and
 forget protocol. This means your application won't stop its actual work to wait for a
-response from the metrics server, which is paramount if the metrics
+response from the metrics server, which is very important if the metrics
 server is down or inaccessible.
 
 ## Set Up
 
-Once you have the Datadog Agent up and running, grab a Statsd client for your
-language and you'll be ready to start hacking. Any Statsd client should work
+Once you have the Datadog Agent up and running, grab a DogStatsd client for your
+language and you'll be ready to start hacking. Any Statsd client will work
 just fine, but using a Datadog Statsd client will give you a few extra features
-(more on that later). Here are a few:
+(namely tags and histograms, but more on that later).
+
+### DogStatsd Clients
 
 - [Python](https://github.com/DataDog/dogstatsd-python)
 - [Ruby](https://github.com/DataDog/dogstatsd-ruby)
+
+### Statsd Clients
+
 - [PHP](https://github.com/seejohnrun/php-statsd)
 - [Java](https://github.com/youdevise/java-statsd-client)
 - [Node.js](https://github.com/sivy/node-statsd)
@@ -67,10 +101,9 @@ database requests or page views.
 
 <%= python <<eof
 dog.increment('database.query.count')
-dog.increment('page_view.count')
+dog.increment('page_view.count', 10)
 eof
 %>
-
 
 ### Histograms
 
@@ -157,7 +190,7 @@ configuration file</a>:
 If you want to send metrics to DogStatsd in your own way, here is the format of
 the packets:
 
-`metric.name:value|type|@sample_rate`
+`metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
 Here's  breakdown of the fields:
 
@@ -165,6 +198,8 @@ Here's  breakdown of the fields:
 - `value` should be a number
 - type should be `c` for Counter, `g` for Gauge, `h` for Histogram or `ms` for Timer.
 - sample rate is optional and should be a float between 0 and 1 inclusive.
+- tags are optional, and should be a comma seperated list of tags. colons are
+  used for key value tags.
 
 Here are some example datagrams and comments explaining them:
 
@@ -179,6 +214,9 @@ Here are some example datagrams and comments explaining them:
     
     # Increment the users online counter tagged by country of origin.
     users.online:1|c|#country:china
+
+    # An example putting it all together.
+    users.online:1|c|@0.5|#country:china
 
 ## Source
 
