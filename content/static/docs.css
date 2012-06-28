@@ -8,7 +8,7 @@
 #logo {
     display: block;
     height: 45px;
-    background: url("/static/bgs.png") no-repeat 0 -50px;
+    background: url("/static/logo.png") no-repeat 0 8px;
     margin-left: 30px;
     padding-left: 176px;
     line-height: 42px;

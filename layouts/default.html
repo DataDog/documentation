@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Datadog API Documentation - <%= @item[:title] %></title>
+    <% title = @item[:title] || '' %>
+    <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
     <link rel="stylesheet" type="text/css" href="/static/main.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/docs.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
@@ -10,10 +11,10 @@
   </head>
   <body>
     <div id="head">
-      <h1><a href="/" id="logo"><span>Datadog API Documentation</span></a></h1>
+      <h1><a href="/" id="logo" alt="Datadog Docs"></a></h1>
     </div>
     <div id="main">
-      <h1><%= @item[:title] %></h1>
+      <h1><%= title %></h1>
       <%= yield %>
     </div>
     <div id="sidebar">
