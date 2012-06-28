@@ -5,7 +5,7 @@
 #  require 'nanoc3/tasks'
 #end
 
-task :clean_all => [:clean] do
+task :clean_all do
   sh "rm -rf output/*"
 end
 

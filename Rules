@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 
 # A few helpful tips about the Rules file:
 #
@@ -45,6 +46,14 @@ end
 route '*' do
   # Write item with identifier /foo/ to /foo/index.html
   item.identifier + 'index.html'
+end
+
+compile 'sitemap' do
+  filter :erb
+end
+
+route 'sitemap' do
+  item.identifier.chop + '.xml'
 end
 
 layout '*', :erb
