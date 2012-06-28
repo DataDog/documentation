@@ -10,17 +10,27 @@ title:
 ## Collecting Custom Metrics
 
 This section will walk you through the process of instrumenting your
-application to send custom metrics to Datadog.
+application to send custom metrics to Datadog. Custom metrics will let you
+corrrelate the happenings of your application with system performance
+of your system.
 
-Sending custom metrics to Datadog will give
+There are a few ways to get started with sending metrics to DataDog.
 
 
+#### [DogStatsd](guides/dogstatsd/)
 
-This section describes how send your application's custom metrics to Datadog.
+DogStatsd is a metric aggregation server
+bundled with the Datadog Agent. With you a few lines of code you'll have
+custom metrics ready to be graphed on Datadog.
 
-- [DogStatsd](guides/metrics/): A metrics aggregration server bundled with the
-  Datadog Agent.
-- [Dogstream](guides/dogstream/): A log scraper built in to the Datadog Agent
-- [API](api/): If you have our own source of metrics, post them directly to our
-  API.
+#### [Log Parsing](guides/logs/)
 
+The Datadog Agent can parse application metrics
+from log files. This is a great tool to instrument legacy applications and
+vendor applications.
+
+
+#### [API](/api)
+
+Finally, if you have another source of metrics of your own design, you can hit our
+API directly.
