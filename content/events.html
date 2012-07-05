@@ -28,6 +28,7 @@ Reporting access for POST. Full access otherwise. (see [Authentication](/authent
   "alert_type": (String) "error", "warning", "info", "success"
                 (default, info)
   "source_type_name": (String) type of event (default, none)
+  "aggregation_key": (String) an arbitrary string to use for aggregation
 }
 eos
 %>
@@ -36,7 +37,7 @@ Only "title" and "text" are required. The rest, if omitted, use their default va
 
 "source_type_name" can be any of the following keywords:
 
-`nagios`, `hudson`, `jenkins`, `user`, `my apps`, `feed`, `chef`, `puppet`, `git`, `bitbucket`
+`nagios`, `hudson`, `jenkins`, `user`, `my apps`, `feed`, `chef`, `puppet`, `git`, `bitbucket`, `fabric`, `capistrano`
 
 ### Response
 
@@ -55,6 +56,17 @@ Only "title" and "text" are required. The rest, if omitted, use their default va
 eos
 %>
 
+### Aggregation
+
+When posting related events you can tell Datadog to group them
+by passing an aggregation key. Host names, process IDs,
+customer IDs are often used as aggregation keys. Once aggregated,
+events will be grouped under the same heading in the stream.
+
+While there is no hard limit to the number of events aggregated with
+the same key, you may find that grouping more than a few hundred
+events makes the stream harder to navigate.
+
 ## Get a filtered comment stream
 
 ### Request
@@ -63,7 +75,8 @@ eos
 
 #### Parameters
 
-An event stream must be filtered by the start and end time. Further filtering is possible by priority, sources, or tags.
+An event stream must be filtered by the start and end time. Further
+filtering is possible by priority, sources, or tags.
 
 * `start`: POSIX timestamp
 * `end`: POSIX timestamp
