@@ -41,7 +41,7 @@ Only "title" and "text" are required. The rest, if omitted, use their default va
 
 ### Response
 
-<%= response_headers 201, 'Content-Type' => 'application/json' %>
+<%= response_headers 202, 'Content-Type' => 'application/json' %>
 <%= http_body <<eos
 {
   "id": (Integer) uid
