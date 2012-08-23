@@ -12,6 +12,9 @@ sidebar:
       href: "#gauges"
     - text: Histograms
       href: "#histograms"
+    - text: Tags
+      href: "#tags"
+
 ---
 
 <div class="alert alert-block">
@@ -162,6 +165,14 @@ Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
+
+<!--
+======================================================
+GAUGES
+======================================================
+-->
+
+
 <%= code_tabs("gauges") %>
 
 <div class="tab-content">
@@ -185,6 +196,12 @@ EOF
 %>
   </div>
 </div>
+
+<!--
+======================================================
+HISTOGRAMS
+======================================================
+-->
 
 <h3 id="histograms">Histograms</h3>
 
@@ -224,9 +241,54 @@ statsd.time('database.query.time') do
 end
 EOF
 %>
+  </div>
+</div>
 
 Histograms aren't just for timing though. They can be used to measure the
 distribution of any type of value, like the size of uploaded files by users or
-the number of logins per user.
+
+<!--
+======================================================
+TAGS
+======================================================
+-->
+
+<h3 id="tags">Tags</h3>
+
+Tags are a way of adding dimensions to metrics, so they can be sliced, diced,
+aggregate and compared on the front end. Suppose we wanted to measure the
+performance of two algorithms in the real world, we could sample one metric
+`algorithm.run_time` and specify the version as a tag:
+
+<%= code_tabs("tags") %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="tags-python">
+<%= python <<EOF
+statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things here ...
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="tags-ruby">
+<%= ruby <<EOF
+def algorithm_one()
+  statsd.timed('algorithm.run_time', tags=['algorithm:one']) do
+    # Do fancy things here ...
+  end
+end
+
+def algorithm_two()
+  statsd.timed('algorithm.run_time', tags=['algorithm:two']) do
+    # Do different fancy things here ...
+  end
+end
+EOF
+%>
   </div>
 </div>
