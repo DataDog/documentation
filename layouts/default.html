@@ -4,49 +4,72 @@
     <meta charset="utf-8">
     <% title = @item[:title] || '' %>
     <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
-    <link rel="stylesheet" type="text/css" href="/static/main.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/static/docs.css" media="screen">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
     <meta name="generator" content="nanoc 3.2.3">
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-21102638-4']);
       _gaq.push(['_trackPageview']);
-      
+
       (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    </script> 
+    </script>
   </head>
   <body>
-    <div id="head">
-      <h1><a href="/" id="logo" alt="Datadog Docs"></a></h1>
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Datadog Docs</a>
+        <ul class="nav">
+          <li class="active"><a href="#">Guides</a></li>
+          <li class="active"><a href="#">API</a></li>
+        </ul>
+      </div>
     </div>
-    <div id="main">
-      <h1><%= title %></h1>
-      <%= yield %>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span6 offset2">
+          <h1><%= @item[:title] %> </h1>
+        </div>
+      </div>
     </div>
-    <div id="sidebar">
-      <h2>Guides</h2>
-      <ul>
-        <li><a href="/guides/dogstatsd/">Metrics with DogStatsd</a></li>
-        <li><a href="/guides/logs/">Metrics with Log Parsing</a></li>
-      </ul>
-      <h2>API</h2>
-      <ul>
-        <li><a href="/api/">Overview</a></li>
-        <li><a href="/authentication/">Authentication</a></li>
-        <li><a href="/errors/">Errors and Warnings</a></li>
-        <li><a href="/comments/">Comments</a></li>
-        <li><a href="/dashboards/">Dashboards</a></li>
-        <li><a href="/events/">Events</a></li>
-        <li><a href="/metrics/">Metrics</a></li>
-        <li><a href="/search/">Search</a></li>
-        <li><a href="/tags/">Tags</a></li>
-        <li><a href="/clients/">Libraries</a></li>
-      </ul>
+
+    <div class="container-fluid">
+
+      <div class="row-fluid">
+
+        <!-- sidebar nav -->
+        <div class="span2">
+        <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+          <ul class="nav nav-tabs nav-stacked affix">
+          <% @item[:sidebar][:nav].each do |i| %>
+            <li><a href="<%= i[:link]%>"><%= i[:text] %></a></li>
+          <% end %>
+          </ul>
+        <% end %>
+        &nbsp;
+        </div>
+
+        <!-- main -->
+        <div class="span6 main">
+            <%= yield %>
+        </div>
+      </div>
     </div>
+
+    <script src="/static/jquery-1.7.2.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      //FIXME - move to it's own file.
+      $('.lang-tab').click(function (e) {
+        var el = $(this);
+        var lang = el.attr('lang');
+        $('.' + lang + '-lang-tab').tab('show');
+      });
+    </script>
   </body>
 </html>

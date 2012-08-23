@@ -1,0 +1,169 @@
+---
+title: Custom Metrics
+sidebar:
+  nav:
+    - text: Overview
+      link: "#overview"
+    - text: Setup
+      link: "#setup"
+    - text: Counters
+      link: "#counters"
+    - text: Gauges
+      link: "#gauges"
+    - text: Histograms
+      link: "#histograms"
+---
+
+
+<h3 id="overview">Overview</h3>
+
+Viral whatever shoreditch you probably haven't heard of them, lomo vegan mcsweeney's banksy keytar brunch raw denim chambray salvia. Letterpress art party hoodie, post-ironic occupy keytar fixie gluten-free. Mixtape umami street art, four loko sriracha williamsburg brooklyn ethnic art party sustainable fap. Selvage freegan polaroid, pop-up kogi quinoa narwhal fingerstache aesthetic trust fund tattooed +1 messenger bag brooklyn williamsburg. Pork belly biodiesel etsy salvia, skateboard twee squid street art flexitarian. Four loko sriracha retro, freegan ethnic put a bird on it portland hoodie marfa bicycle rights beard. Odd future swag banksy cray scenester.
+
+
+
+
+<h3 id="setup">Setup</h3>
+
+Let's get set up to submit custom metrics.
+
+
+Now, let's download and set-up a client library:
+
+<%= multi_language_code_tabs("setup") %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="setup-python">
+<%= console <<eof
+$ sudo easy_install dogstatsd-python
+eof
+%>
+  </div>
+  <div class="tab-pane fade in" id="setup-ruby">
+<%= console <<eof
+$ gem install dogstatsd-ruby
+eof
+%>
+  </div>
+</div>
+
+
+
+<h3 id="counters">Counters</h3>
+
+Counters help you count things!
+
+<%= multi_language_code_tabs("counters") %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="counters-python">
+<%= python <<eof
+statsd.increment("page.views")
+eof
+%>
+  </div>
+  <div class="tab-pane fade in" id="counters-ruby">
+<%= ruby <<eof
+statsd.increment("page.views")
+eof
+%>
+  </div>
+</div>
+
+
+<h3 id="gauges">Gauges</h3>
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+
+
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+
+
+
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+
+
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+
+
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+
+<h3 id="histograms">Histograms</h3>
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+DogStatsd's primary function is to aggregate many data points into a single
+metric for a given interval of time (ten seconds by default). Let's walk through an
+example to understand how this works.
+
+Suppose you want to know how many times you are running a database query,
+your application can tell DogStatsd to increment a counter each
+ti
+

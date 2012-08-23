@@ -3,6 +3,7 @@ GEM
   specs:
     adsf (1.0.1)
       rack (>= 1.0.0)
+    builder (3.0.0)
     cri (2.1.0)
     json (1.7.1)
     kramdown (0.13.4)
@@ -25,6 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   adsf
+  builder
   kramdown
   mime-types
   nanoc

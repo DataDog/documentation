@@ -16,6 +16,16 @@ STATUS_CODES = {
   500 => '500 Server Error'
 }
 
+
+# The languages we show in code blocks.
+LANGUAGES = %w{Python Ruby PHP}
+
+# The default active language
+ACTIVE_LANGUAGE = 'Python'
+
+
+
+
 def request_headers(headers={})
   lines = []
   headers.each do |key, value|
@@ -52,6 +62,24 @@ def python(json)
   return "<pre><code class=\"language-python\">#{json}</code></pre>"
 end
 
+def ruby(json)
+  return "<pre><code class=\"language-ruby\">#{json}</code></pre>"
+end
+
 def console(json)
   return "<pre><code class=\"language-console\">#{json}</code></pre>"
+end
+
+def multi_language_code_tabs(section)
+  html = "<ul class=\"nav nav-tabs\" id=\"#{section}-tabs\">"
+  LANGUAGES.each do |lang|
+    l = lang.downcase
+    html += <<-EOF
+      <li class="#{lang == ACTIVE_LANGUAGE ? 'active' : ''}">
+        <a data-toggle="tab" class="lang-tab #{l}-lang-tab" lang="#{l}" href="##{section}-#{l}">#{lang}</a>
+      </li>
+    EOF
+  end
+  html += "</ul>"
+  return html
 end
