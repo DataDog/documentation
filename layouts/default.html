@@ -7,6 +7,18 @@
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
     <meta name="generator" content="nanoc 3.2.3">
+    <style type="text/css">
+      /* FIXME */
+
+      .sidebar {
+        min-width: 200px;
+      }
+
+      .container {
+        float:left;
+      }
+
+    </style>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-21102638-4']);
@@ -19,35 +31,40 @@
       })();
     </script>
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".sidebar">
     <div class="navbar navbar-inverse">
       <div class="navbar-inner">
-        <a class="brand" href="#">Datadog Docs</a>
-        <ul class="nav">
-          <li class="active"><a href="#">Guides</a></li>
-          <li class="active"><a href="#">API</a></li>
-        </ul>
+        <div class="container">
+          <div class="row">
+            <div class="span8 offset1">
+              <a class="brand" href="#">Datadog Docs</a>
+              <ul class="nav">
+                <li class="active"><a href="#">Guides</a></li>
+                <li class="active"><a href="#">API</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span6 offset2">
+    <div class="container">
+      <div class="row">
+        <div class="span8 offset4">
           <h1><%= @item[:title] %> </h1>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container main">
 
-      <div class="row-fluid">
-
+      <div class="row">
         <!-- sidebar nav -->
-        <div class="span2">
+        <div class="span3 offset1">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-          <ul class="nav nav-tabs nav-stacked affix">
+          <ul class="nav nav-tabs nav-stacked affix sidebar">
           <% @item[:sidebar][:nav].each do |i| %>
-            <li><a href="<%= i[:link]%>"><%= i[:text] %></a></li>
+            <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
           <% end %>
           </ul>
         <% end %>
@@ -55,7 +72,7 @@
         </div>
 
         <!-- main -->
-        <div class="span6 main">
+        <div class="span8 main">
             <%= yield %>
         </div>
       </div>

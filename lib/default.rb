@@ -18,7 +18,7 @@ STATUS_CODES = {
 
 
 # The languages we show in code blocks.
-LANGUAGES = %w{Python Ruby PHP}
+LANGUAGES = %w{Python Ruby}
 
 # The default active language
 ACTIVE_LANGUAGE = 'Python'
@@ -70,12 +70,21 @@ def console(json)
   return "<pre><code class=\"language-console\">#{json}</code></pre>"
 end
 
-def multi_language_code_tabs(section)
+def php(code)
+  return "<pre><code class=\"language-php\">#{code}</code></pre>"
+end
+
+
+def language_class(languge)
+  languge == ACTIVE_LANGUAGE ? 'active' : ''
+end
+
+def code_tabs(section)
   html = "<ul class=\"nav nav-tabs\" id=\"#{section}-tabs\">"
   LANGUAGES.each do |lang|
     l = lang.downcase
     html += <<-EOF
-      <li class="#{lang == ACTIVE_LANGUAGE ? 'active' : ''}">
+      <li class="#{language_class(lang)}">
         <a data-toggle="tab" class="lang-tab #{l}-lang-tab" lang="#{l}" href="##{section}-#{l}">#{lang}</a>
       </li>
     EOF
@@ -83,3 +92,4 @@ def multi_language_code_tabs(section)
   html += "</ul>"
   return html
 end
+

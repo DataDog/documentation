@@ -1,169 +1,232 @@
 ---
-title: Custom Metrics
+title: Getting Started with StatsD
 sidebar:
   nav:
     - text: Overview
-      link: "#overview"
+      href: "#overview"
     - text: Setup
-      link: "#setup"
+      href: "#setup"
     - text: Counters
-      link: "#counters"
+      href: "#counters"
     - text: Gauges
-      link: "#gauges"
+      href: "#gauges"
     - text: Histograms
-      link: "#histograms"
+      href: "#histograms"
 ---
 
+<div class="alert alert-block">
+This tutorial teaches how to send your application's custom metrics to Datadog
+with Statsd.
+If you need any help getting started, pop by our <a href="irc://irc.freenode.net/datadog">chat room</a>.
+</div>
+
+<!--
+======================================================
+OVERVIEW
+======================================================
+-->
 
 <h3 id="overview">Overview</h3>
 
-Viral whatever shoreditch you probably haven't heard of them, lomo vegan mcsweeney's banksy keytar brunch raw denim chambray salvia. Letterpress art party hoodie, post-ironic occupy keytar fixie gluten-free. Mixtape umami street art, four loko sriracha williamsburg brooklyn ethnic art party sustainable fap. Selvage freegan polaroid, pop-up kogi quinoa narwhal fingerstache aesthetic trust fund tattooed +1 messenger bag brooklyn williamsburg. Pork belly biodiesel etsy salvia, skateboard twee squid street art flexitarian. Four loko sriracha retro, freegan ethnic put a bird on it portland hoodie marfa bicycle rights beard. Odd future swag banksy cray scenester.
+Sending your application's custom metrics to Datadog will let you correlate
+what's happening your application, your users and your system.
 
+StatsD is a small metrics aggregation server that is bundled with the Datadog
+Agent. You can read about how it works <a
+href="/guides/dogstatsd">here</a>. If you want to dive into code right away,
+read on.
 
+In this tutorial, we'll cover some common instrumentation use cases, like:
 
+- How to count web page views
+- How to time database queries
+- How to measure the amount of free memory
+
+<!--
+======================================================
+SETUP
+======================================================
+-->
 
 <h3 id="setup">Setup</h3>
 
-Let's get set up to submit custom metrics.
+First off, <a href="https://app.datadoghq.com/setup#agent">install</a>
+the Datadog Agent (version 3 or greater), which
+contains our StatsD server, and make sure it's running.
 
+Next, let's set up a client library for your language.
 
-Now, let's download and set-up a client library:
-
-<%= multi_language_code_tabs("setup") %>
+<%= code_tabs("setup") %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="setup-python">
-<%= console <<eof
+First, install the module:
+<%= console <<EOF
 $ sudo easy_install dogstatsd-python
-eof
+EOF
+%>
+And import it, so it's ready to use:
+<%= python <<EOF
+from statsd import statsd
+EOF
 %>
   </div>
   <div class="tab-pane fade in" id="setup-ruby">
-<%= console <<eof
+First, install the module:
+<%= console <<EOF
 $ gem install dogstatsd-ruby
-eof
+EOF
+%>
+And add it to your code:
+<%= ruby <<EOF
+# Import the library
+require 'statsd'
+
+# Create a statsd client instance.
+statsd = Statsd.new
+EOF
 %>
   </div>
+Now we're ready to roll.
 </div>
 
+<!--
+======================================================
+COUNTERS
+======================================================
+-->
 
 
 <h3 id="counters">Counters</h3>
 
-Counters help you count things!
+Counters are used to (ahem) count things. Let's walk through a common example -
+counting web page views. To achieve this, we'll increment a metric called
+`web.page_views` each time our `render_page` function is called.
 
-<%= multi_language_code_tabs("counters") %>
+<%= code_tabs("counters-page-views") %>
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="counters-python">
-<%= python <<eof
-statsd.increment("page.views")
-eof
+  <div class="tab-pane active fade in" id="counters-views-python">
+<%= python <<EOF
+def render_page():
+    """ Render a web page. """
+    statsd.increment('web.page_views')
+    return 'Hello World!'
+EOF
 %>
   </div>
-  <div class="tab-pane fade in" id="counters-ruby">
-<%= ruby <<eof
-statsd.increment("page.views")
-eof
+  <div class="tab-pane fade in" id="counters-views-ruby">
+<%= ruby <<EOF
+def render_page()
+  # Render a web page.
+  statsd.increment('web.page_views')
+  return 'Hello World!'
+end
+EOF
 %>
   </div>
 </div>
 
+We can also count by arbitrary numbers. Suppose we wanted to count the number
+of bytes processed by a file uploading service, we'll increment a metric
+called `file_service.bytes_uploaded` by the size of the file each time our
+`upload_file` function is called:
+
+<%= code_tabs("counters-page-views") %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="counters-views-python">
+<%= python <<EOF
+def upload_file(file):
+    statsd.increment('file_service.bytes_uploaded', file.size())
+    save_file(file)
+    return 'File uploaded!'
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="counters-views-ruby">
+<%= ruby <<EOF
+def upload_file(file)
+  statsd.increment('file_service.bytes_uploaded', file.size())
+  save_file(file)
+  return 'File uploaded!'
+end
+EOF
+%>
+  </div>
+</div>
 
 <h3 id="gauges">Gauges</h3>
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
 
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
+Gauges measure the value of a particular thing over time. Suppose a developer
+wanted to track the amount of free memory on a machine, we can periodically
+sample that value as the metric `system.mem.free`:
 
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
+<%= code_tabs("gauges") %>
 
-
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-
-
-
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-
-
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-
-
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="gauges-python">
+<%= python <<EOF
+# Record the amount of free memory every ten seconds.
+while True:
+    statsd.gauge('system.mem.free', get_free_memory())
+    time.sleep(10)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="gauges-ruby">
+<%= ruby <<EOF
+# Record the amount of free memory every ten seconds.
+while true do
+    statsd.gauge('system.mem.free', get_free_memory())
+    sleep(10)
+end
+EOF
+%>
+  </div>
+</div>
 
 <h3 id="histograms">Histograms</h3>
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
 
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
-DogStatsd's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
+Histograms measure the statistical distribution of a set of values. Histograms
+are a great way of. Suppose we wanted to measure the time to run a database
+query, we can sample each query time with the metric `database.query.time`.
 
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
-ti
+<%= code_tabs("histograms") %>
 
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="histograms-python">
+<%= python <<EOF
+# Track the run time of the database query.
+start_time = time.time()
+results = db.query()
+duration = time.time() - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `timed` decorator as a short-hand for timing functions.
+@statsd.timed('database.query.time')
+def get_data():
+    return db.query()
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="histograms-ruby">
+<%= ruby <<EOF
+start_time = Time.now
+results = db.query()
+duration = Time.now - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `timed` helper as a short-hand for timing blocks
+# of code.
+statsd.time('database.query.time') do
+  return db.query()
+end
+EOF
+%>
+
+Histograms aren't just for timing though. They can be used to measure the
+distribution of any type of value, like the size of uploaded files by users or
+the number of logins per user.
+  </div>
+</div>
