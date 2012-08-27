@@ -11,10 +11,15 @@
 
       .sidebar {
         min-width: 200px;
+        background-color:#efefef;
       }
 
       .container {
         float:left;
+      }
+
+      .header-buttons {
+        float:right;
       }
 
     </style>
@@ -37,10 +42,18 @@
       <div class="navbar-inner">
         <div class="container">
           <div class="row">
-            <div class="span8 offset1">
+            <div class="span11 offset1">
               <a class="brand" href="/">Datadog Docs</a>
               <ul class="nav">
+                <li class="active"><a href="/">Guides</a></li>
+                <li class="active"><a href="/api/">API</a></li>
+                <li class="active"><a href="/help/">Help</a></li>
               </ul>
+              <span class="header-buttons">
+                <a class="btn btn-info" href="https://app.datadoghq.com">Sign In</a>
+                <a class="btn btn-warning" href="https://app.datadoghq.com/signup">Sign Up</a>
+              </span>
+
             </div>
           </div>
         </div>
