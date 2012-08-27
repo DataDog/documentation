@@ -105,7 +105,7 @@ counting web page views. To achieve this, we'll increment a metric called
 <%= code_tabs("counters-page-views") %>
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="counters-views-python">
+  <div class="tab-pane active fade in" id="counters-page-views-python">
 <%= python <<EOF
 def render_page():
     """ Render a web page. """
@@ -114,7 +114,7 @@ def render_page():
 EOF
 %>
   </div>
-  <div class="tab-pane fade in" id="counters-views-ruby">
+  <div class="tab-pane fade in" id="counters-page-views-ruby">
 <%= ruby <<EOF
 def render_page()
   # Render a web page.
@@ -131,10 +131,10 @@ of bytes processed by a file uploading service, we'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
-<%= code_tabs("counters-page-views") %>
+<%= code_tabs("counters-uploaded") %>
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="counters-views-python">
+  <div class="tab-pane active fade in" id="counters-uploaded-python">
 <%= python <<EOF
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
@@ -143,7 +143,7 @@ def upload_file(file):
 EOF
 %>
   </div>
-  <div class="tab-pane fade in" id="counters-views-ruby">
+  <div class="tab-pane fade in" id="counters-uploaded-ruby">
 <%= ruby <<EOF
 def upload_file(file)
   statsd.increment('file_service.bytes_uploaded', file.size())
