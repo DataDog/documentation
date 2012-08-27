@@ -20,13 +20,24 @@ task :view do
   sh "bundle exec nanoc view"
 end
 
+desc "Autocompile the docs site"
 task :autocompile do
-  puts "NOTE: if this is slow, you might want to disable syntax highlighting in the 'Rules' file\n\n"
+  puts "NOTE: if this is slow, run `rake disable_syntax`\n\n"
   sh "bundle exec nanoc autocompile"
 end
 
+desc "Enable syntax highlighting"
+task :enable_syntax do
+  sh("rm -f NO_SYNTAX")
+end
+
+desc "Disable syntax highlighting"
+task :disable_syntax do
+  sh("touch NO_SYNTAX")
+end
+
 desc "Publish"
-task :release => [:clean_all, :test, :compile] do
+task :release => [:clean_all, :enable_syntax, :test, :compile] do
   if File.directory?('../datadog.github.com/')
     sh "sh rake/release.sh"
   else
