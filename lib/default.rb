@@ -58,6 +58,10 @@ def python(json)
   return "<pre><code class=\"language-python\">#{json}</code></pre>"
 end
 
+def pycon(json)
+  return "<pre><code class=\"language-pycon\">#{json}</code></pre>"
+end
+
 def ruby(json)
   return "<pre><code class=\"language-ruby\">#{json}</code></pre>"
 end
