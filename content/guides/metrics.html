@@ -62,18 +62,14 @@ Next, let's set up a client library for your language.
 <%= code_tabs("setup") %>
 
 <div class="tab-content">
+
   <div class="tab-pane active fade in" id="setup-python">
 First, install the module:
-<%= console <<EOF
-$ sudo easy_install dogstatsd-python
-EOF
-%>
+<%= code_snippet("guides-metrics-setup-python.sh") %>
 And import it, so it's ready to use:
-<%= python <<EOF
-from statsd import statsd
-EOF
-%>
+<%= code_snippet("guides-metrics-setup.py") %>
   </div>
+
   <div class="tab-pane fade in" id="setup-ruby">
 First, install the module:
 <%= console <<EOF

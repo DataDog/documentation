@@ -70,6 +70,20 @@ def php(code)
   return "<pre><code class=\"language-php\">#{code}</code></pre>"
 end
 
+def code_snippet(filename)
+  ext_to_lang = {
+    ".php" => "php",
+    ".py"  => "python",
+    ".rb"  => "ruby",
+    ".json" => "json",
+    ".sh" => "console",
+  }
+  code = IO.read(File.join("content/code_snippets", filename))
+  extension = File.extname(filename)
+  language = ext_to_lang[extension]
+  "<pre><code class=\"language-#{language}\">#{code}</code></pre>"
+end
+
 
 def language_class(languge)
   languge == ACTIVE_LANGUAGE ? 'active' : ''
