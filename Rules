@@ -43,7 +43,13 @@ compile '*' do
               :pycon => :pygmentize
           }
     end
-    layout 'default'
+
+
+    if @item.identifier == '/api/'
+      layout 'shell'
+    else
+      layout 'default'
+    end
   end
 end
 

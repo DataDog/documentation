@@ -1,0 +1,13 @@
+<script src="/static/jquery-1.7.2.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  //FIXME - move to it's own file.
+  $(function () {
+    $('.lang-tab').click(function (e) {
+      var el = $(this);
+      var lang = el.attr('lang');
+      $('.' + lang + '-lang-tab').tab('show');
+    });
+  })();
+</script>
+
