@@ -1,66 +1,52 @@
 ---
-title: About the API
+title: Datadog API
+sidebar:
+  nav:
+    - header: About
+    - text: Overview
+      href: "#overview"
+    - text: Authentication
+      href: "#authentication"
+    - text: Requests and Responses
+      href: #requests
+    - header: Endpoints
+    - text: Comments
+      href: #comments
+    - text: Events
+      href: #events
 ---
 
-We provide a programmatic API for exploring and interacting with Datadog. This
-API can be used for simple submission of events and metric series, but can also
-be used to build more interesting and complex tools and integrations (see, for
-example, the [Datadog CLI](/clients/#cli) or the [Datadog Chef
-handler](https://github.com/DataDog/chef-handler-datadog)).
+<h3 id="overview">Overview</h3>
 
-## HTTP
+This section details Datadog's HTTP API. It makes it easy to get data in and
+out of Datadog.
 
-At its core, the Datadog API is a low-level HTTP interface that deals in JSON.
-For example, to post a comment to the stream, you'd send a request that looks
-something like this:
+The Datadog API uses resource-oriented URLs, uses status codes to indicate the
+success or failure of requests and returns JSON from all requests. Let's dive
+in and see how it works.
 
-<%= request 'POST', '/api/v1/comments' %>
-<%= request_headers 'Content-Type' => 'application/json' %>
-<%= http_body <<eos
-{
-  "handle": "matt",
-  "message": "Hello, Datadog!"
-}
-eos
-%>
 
-And you'd get a response back that looks something like this:
+<p class="alert alert-info">
+  There are many <a href="/libraries/">libraries</a>
+  that make it easier to interact with the Datadog API.
+</p>
 
-<%= response_headers 201, 'Content-Type' => 'application/json' %>
-<%= http_body <<eos
-{
-  "id": 1234,
-  "handle": "matt",
-  "message": "Hello, Datadog!",
-  "url": "http://app.datadoghq.com/event/jump_to=1234",
-  "resource": "/api/v1/comments/1234"
-}
-eos
-%>
+<h3 id="authentication">Authentication</h3>
+All Datadog API calls must be authenticated. Requests that write data require
+<em>reporting access</em> and must be authenticated with a valid API key. API
+keys is passed as a query parameter:
 
-## Client
+<code>/api/v1/some/service?api_key=your_api_key</code>
 
-On top of that HTTP interface we've built client libraries in Python and Ruby.
-These libraries give you a higher-level programmatic interface so you can jump
-right in and start instrumenting your existing apps. In Python, posting the same
-comment as above is as simple as:
+Requests that read data require <em>full access</em> and must be authenticated
+with a valid API key and an application key:
 
-<%= pycon <<eos
->>> from dogapi import dog
->>> dog.api_key = 'your_orgs_api_key'
->>> dog.application_key = 'your_application_key'
->>> dog.comment('matt', 'Hello, Datadog!')
-1234
-eos
-%>
+<code>/api/v1/some/service?api_key=your_api_key&application_key=your_application_key</code>
 
-## CLI
+<p class="alert alert-info">
+  You can manage your API and application keys on the <a
+  href="https://app.datadoghq.com/account/settings#api">account settings</a>
+  page.
+</p>
 
-Finally, on top of the Python library we've built command line interface, the
-`dog` command. Once dog is installed, you can post the same comment as above
-comfortabbly from your terminal:
 
-<%= console <<eos
-$ dog comment post --handle="matt" "Hello, Datadog!"
-eos
-%>
