@@ -5,6 +5,8 @@
 #  require 'nanoc3/tasks'
 #end
 
+CODE_SNIPPETS = "content/code_snippets"
+
 task :clean_all do
   sh "rm -rf output/*"
 end
@@ -24,7 +26,7 @@ task :autocompile do
 end
 
 desc "Publish"
-task :release => [:clean_all, :compile] do
+task :release => [:clean_all, :test, :compile] do
   if File.directory?('../datadog.github.com/')
     sh "sh rake/release.sh"
   else
@@ -32,3 +34,11 @@ task :release => [:clean_all, :compile] do
   end
 end
 
+desc "test the code snippets"
+task :test do
+  python_modules = Dir.glob("#{CODE_SNIPPETS}/*.py")
+  for py in python_modules
+    sh("python #{py}")
+  end
+  puts "Python snippets tested!"
+end
