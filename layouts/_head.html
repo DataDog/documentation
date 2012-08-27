@@ -1,0 +1,48 @@
+  <head>
+    <meta charset="utf-8">
+    <% title = @item[:title] || '' %>
+    <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
+    <style type="text/css">
+      /* FIXME */
+
+      .sidebar {
+        min-width: 200px;
+        background-color:#efefef;
+      }
+
+      .container {
+        float:left;
+      }
+
+      .header-buttons {
+        float:right;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21102638-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src="/static/jquery-1.7.2.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      //FIXME - move to it's own file.
+      $(function () {
+        $('.lang-tab').click(function (e) {
+          var el = $(this);
+          var lang = el.attr('lang');
+          $('.' + lang + '-lang-tab').tab('show');
+        });
+      })();
+    </script>
+
+  </head>
