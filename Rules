@@ -33,7 +33,7 @@ compile '*' do
     filter :erb
     filter :kramdown
     #filter :colorize_syntax,
-    #  :colorizers => {:javascript => :pygmentize, :pycon => :pygmentize,
+    #  :colorizers => {:javascript => :pygmentize,
     #  :console => :pygmentize, :python => :pygmentize, :ruby => :pygmentize}
     layout 'default'
   end
