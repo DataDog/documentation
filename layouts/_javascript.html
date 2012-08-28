@@ -10,8 +10,13 @@
     });
 
     $('.lang-btn').click(function (e) {
+
+      // Highlight the others.
+      $('.lang-btn').removeClass('active');
+
       var el = $(this);
       var lang = el.attr('lang');
+      el.addClass('active');
 
       $('.lang').hide();
       $('.lang-' + lang).fadeIn();
