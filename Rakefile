@@ -49,7 +49,8 @@ desc "test the code snippets"
 task :test do
   filetype_to_command = {
     "py" => "python",
- #   "sh" => "sh",
+    "sh" => "sh",
+    "rb" => "ruby",
   }
   filetype_to_command.each do |t,cmd|
     puts "=" * 10
