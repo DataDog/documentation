@@ -1,1 +1,1 @@
-sudo easy_install dogstatsd-python
+easy_install dogstatsd-python
