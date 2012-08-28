@@ -26,8 +26,8 @@ title: API Reference
     </div>
     <%= right_side_div %>
       <div class="btn-group">
-        <div lang="shell" class="lang-btn btn">Shell</div>
-        <div lang="python" class="lang-btn btn">Python</div>
+        <div lang="console" class="lang-btn btn">Shell</div>
+        <div lang="python" class="active lang-btn btn">Python</div>
         <div lang="ruby" class="lang-btn btn">Ruby</div>
       </div>
     </div>
@@ -53,7 +53,11 @@ title: API Reference
     </div>
   </div>
 
-  <!-- AUTHENTICATION -->
+  <!--
+  --------------------------------------------------------------------
+    AUTHENTICATION
+  --------------------------------------------------------------------
+  -->
   <h3 id="authentication">Authentication</h3>
   <div class="row-fluid">
     <%= left_side_div %>
@@ -67,23 +71,9 @@ title: API Reference
     </div>
     <%= right_side_div %>
       <h5>Example Request</h5>
+      <%= lang_code_snippet "api-auth.sh" %>
       <%= lang_code_snippet "api-auth.py" %>
       <%= lang_code_snippet "api-auth.rb" %>
-      <div class="lang lang-ruby">
-        <pre>
-        urby!!1
-        urby!!1
-        urby!!1
-        urby!!1
-        foo.bar()
-        </pre>
-      </div>
-      <h5>Example Response</h5>
-      <div class="lang lang-python">
-        <pre>
-        foo.bar()
-        </pre>
-      </div>
     </div>
   </div>
 
