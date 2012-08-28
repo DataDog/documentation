@@ -19,13 +19,13 @@ title: API Reference
           <ul class="nav">
             <li class="active"><a href="#overview">Overview</a></li>
             <li><a href="#authentication">Authentication</a></li>
-            <li><a href="#">Comments</a></li>
+            <li><a href="#comments">Comments</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <%= right_side_div %>
-      <div class="btn-group">
+    <%= right_side_div%>
+      <div class="btn-group affix">
         <div lang="console" class="lang-btn btn">Shell</div>
         <div lang="python" class="active lang-btn btn">Python</div>
         <div lang="ruby" class="lang-btn btn">Ruby</div>
@@ -118,6 +118,107 @@ If the service is able to handle your request, but some issues are present (e.g.
       <%= code_snippet "api-error.json" %>
       <h5>Example Warning Response</h5>
       <%= code_snippet "api-warning.json" %>
+    </div>
+  </div>
+
+  <!--
+ =====================================================================
+  Metrics
+  ====================================================================
+  -->
+
+  <h3 id="metrics">Metrics</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        The metrics end-point allows you to post and query the time-series data
+        that is graphed on Datadog's dashboards.
+      </p>
+    </div>
+  </div>
+  <h4 id="metrics-post">Post time series points</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        The metrics end-point allows you to post time-series data that can be
+        graphed on Datadog's dashboards.
+      </p>
+      <h5>Arguments</h5>
+      <ul class="arguments">
+        <li>
+          <strong>series [required]</strong>
+          <div> A JSON array of metrics of the form:</div>
+          <ul>
+            <li>
+              <strong>metric [required]</strong>
+              <div>The name of the time series</div>
+            </li>
+            <li>
+              <strong>points [required]</strong>
+              <div>A JSON array of points of the form:
+                  <div>
+                  <code>[[POSIX_timestamp, numeric_value], ...]</code>
+                  </div>
+              </div>
+            </li>
+            <li>
+              <strong>host [optional]</strong> <em>Default is null</em>
+              <div>The name of the host that produced the metric.</div>
+            </li>
+            <li>
+              <strong>tags [optional]</strong> <em>Default is null</em>
+              <div>A list of tags to associated with the metric.</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>POST https://app.datadoghq.com/api/v1/series</code>
+      <h5>Example Request</h5>
+      <% %w{py sh rb}.each do |f| %>
+        <%= lang_code_snippet "api-metrics-post.#{f}" %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+  <!--
+ =====================================================================
+  Comments
+  ====================================================================
+  -->
+
+  <h3 id="comments">Comments</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+      Comments are how discussion happens on Datadog. You can create, edit, delete
+      and reply to comments.
+
+      Comments require <em>full access</em>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Create comments -->
+  <h4 id="comments-create">Create a comment</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <h5>Arguments</h5>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>POST https://app.datadoghq.com/api/v1/comment</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-comment-create.sh" %>
+      <%= lang_code_snippet "api-comment-create.py" %>
+      <h5>Example Warning Response</h5>
+      <%= code_snippet "api-warning.json" %>
+
+
     </div>
   </div>
 
