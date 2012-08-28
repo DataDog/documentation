@@ -33,6 +33,11 @@ title: API Reference
     </div>
   </div>
 
+  <!--
+ =====================================================================
+    OVERVIEW
+  ====================================================================
+  -->
 
   <h3 id="overview">Overview</h3>
   <div class="row-fluid">
@@ -54,9 +59,9 @@ title: API Reference
   </div>
 
   <!--
-  --------------------------------------------------------------------
+ =====================================================================
     AUTHENTICATION
-  --------------------------------------------------------------------
+  ====================================================================
   -->
   <h3 id="authentication">Authentication</h3>
   <div class="row-fluid">
@@ -77,37 +82,42 @@ title: API Reference
     </div>
   </div>
 
-  <!-- AUTHENTICATION -->
-  <h3>Authentication</h3>
+  <!--
+ =====================================================================
+    Success & Errors
+  ====================================================================
+  -->
+
+  <h3>Success and Errors</h3>
   <div class="row-fluid">
     <%= left_side_div %>
-      This section details Datadog's HTTP API. It makes it easy to get data in and
-      out of Datadog.
+      <p>
+      The Datadog API uses HTTP status codes to indicate the success or failure
+      of a request.
+      </p>
 
-      The Datadog API uses resource-oriented URLs, uses status codes to indicate the
-      success or failure of requests and returns JSON from all requests. Let's dive
-      in and see how it works.
+      <p>
+      An error indicates that the service did not successfully handle your request. In addition to the status code, the response may contain a JSON object with an errors array containing more detailed error messages.
+      </p>
+
+      <p>
+If the service is able to handle your request, but some issues are present (e.g. using a deprecated API or API version), the HTTP status code will indicate success and the response body will contain the expected result with the addition of a warnings array containing detailed warning messages.
+      </p>
+
+
+
     </div>
     <%= right_side_div %>
-<pre>
-/v1/charges
-/v1/charges/{CHARGE_ID}
-/v1/coupons
-/v1/coupons/{COUPON_ID}
-/v1/customers
-/v1/customers/{CUSTOMER_ID}
-/v1/customers/{CUSTOMER_ID}/subscription
-/v1/invoices
-/v1/invoices/{INVOICE_ID}
-/v1/invoiceitems
-/v1/invoiceitems/{INVOICEITEM_ID}
-/v1/plans
-/v1/plans/{PLAN_ID}
-/v1/tokens
-/v1/tokens/{TOKEN_ID}
-/v1/events
-/v1/events/{EVENT_ID}
-</pre>
+      <h5>Status Codes</h5>
+      <ul>
+      <% STATUS_CODES.each do |code, value| %>
+        <li> <code><%= value %> </code></li>
+      <% end %>
+      </ul>
+      <h5>Example Error Response</h5>
+      <%= code_snippet "api-error.json" %>
+      <h5>Example Warning Response</h5>
+      <%= code_snippet "api-warning.json" %>
     </div>
   </div>
 
