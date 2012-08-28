@@ -147,7 +147,7 @@ If the service is able to handle your request, but some issues are present (e.g.
       <ul class="arguments">
         <li>
           <strong>series [required]</strong>
-          <div> A JSON array of metrics of the form:</div>
+          <div> A JSON array of metrics of the form. Each metric is of the form:</div>
           <ul>
             <li>
               <strong>metric [required]</strong>
@@ -155,7 +155,7 @@ If the service is able to handle your request, but some issues are present (e.g.
             </li>
             <li>
               <strong>points [required]</strong>
-              <div>A JSON array of points of the form:
+              <div>A JSON array of points. Each point is of the form:
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
