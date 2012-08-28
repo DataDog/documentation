@@ -5,7 +5,7 @@
 #  require 'nanoc3/tasks'
 #end
 
-CODE_SNIPPETS = "content/code_snippets"
+CODE_SNIPPETS = "code_snippets"
 
 task :clean_all do
   sh "rm -rf output/*"

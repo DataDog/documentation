@@ -16,6 +16,14 @@ STATUS_CODES = {
   500 => '500 Server Error'
 }
 
+EXT_TO_LANG = {
+  ".php" => "php",
+  ".py"  => "python",
+  ".rb"  => "ruby",
+  ".json" => "json",
+  ".sh" => "console",
+}
+
 
 # The languages we show in code blocks.
 LANGUAGES = %w{Python Ruby}
@@ -74,20 +82,21 @@ def php(code)
   return "<pre><code class=\"language-php\">#{code}</code></pre>"
 end
 
-def code_snippet(filename)
-  ext_to_lang = {
-    ".php" => "php",
-    ".py"  => "python",
-    ".rb"  => "ruby",
-    ".json" => "json",
-    ".sh" => "console",
-  }
-  code = IO.read(File.join("content/code_snippets", filename))
+def language(filename)
   extension = File.extname(filename)
-  language = ext_to_lang[extension]
-  "<pre><code class=\"language-#{language}\">#{code}</code></pre>"
+  EXT_TO_LANG[extension]
 end
 
+def code_snippet(filename)
+  code = IO.read(File.join("code_snippets", filename))
+  "<pre><code class=\"language-#{language(filename)}\">#{code}</code></pre>"
+end
+
+def lang_code_snippet(filename)
+  code = code_snippet(filename)
+  lang = EXT_TO_LANG
+  "<div class=\"lang lang-#{language(filename)}\">#{code}</div>"
+end
 
 def language_class(languge)
   languge == ACTIVE_LANGUAGE ? 'active' : ''

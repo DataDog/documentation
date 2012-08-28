@@ -8,6 +8,15 @@
       var lang = el.attr('lang');
       $('.' + lang + '-lang-tab').tab('show');
     });
+
+    $('.lang-btn').click(function (e) {
+      var el = $(this);
+      var lang = el.attr('lang');
+
+      $('.lang').hide();
+      $('.lang-' + lang).fadeIn();
+    });
+
   })();
 </script>
 

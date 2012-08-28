@@ -1,52 +1,127 @@
 ---
-title: Datadog API
-sidebar:
-  nav:
-    - header: About
-    - text: Overview
-      href: "#overview"
-    - text: Authentication
-      href: "#authentication"
-    - text: Requests and Responses
-      href: #requests
-    - header: Endpoints
-    - text: Comments
-      href: #comments
-    - text: Events
-      href: #events
+title: API Reference
 ---
 
-<h3 id="overview">Overview</h3>
-
-This section details Datadog's HTTP API. It makes it easy to get data in and
-out of Datadog.
-
-The Datadog API uses resource-oriented URLs, uses status codes to indicate the
-success or failure of requests and returns JSON from all requests. Let's dive
-in and see how it works.
+<%
+  # Some shortcuts for the columns.
+  left_side_div  = '<div class="span5 api-left">'
+  right_side_div = '<div class="span6 api-right">'
+%>
 
 
-<p class="alert alert-info">
-  There are many <a href="/libraries/">libraries</a>
-  that make it easier to interact with the Datadog API.
-</p>
+<div class="container-fluid">
 
-<h3 id="authentication">Authentication</h3>
-All Datadog API calls must be authenticated. Requests that write data require
-<em>reporting access</em> and must be authenticated with a valid API key. API
-keys is passed as a query parameter:
+  <h1><%= @item[:title] %> </h1>
+  <div class="row-fluid api-header-row">
+    <%= left_side_div %>
+      <div class="navbar">
+        <div class="navbar-inner">
+          <ul class="nav">
+            <li class="active"><a href="#overview">Overview</a></li>
+            <li><a href="#authentication">Authentication</a></li>
+            <li><a href="#">Comments</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <%= right_side_div %>
+      <div class="btn-group">
+        <div lang="shell" class="lang-btn btn">Shell</div>
+        <div lang="python" class="lang-btn btn">Python</div>
+        <div lang="ruby" class="lang-btn btn">Ruby</div>
+      </div>
+    </div>
+  </div>
 
-<code>/api/v1/some/service?api_key=your_api_key</code>
 
-Requests that read data require <em>full access</em> and must be authenticated
-with a valid API key and an application key:
+  <h3 id="overview">Overview</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      This section details Datadog's HTTP API. It makes it easy to get data in and
+      out of Datadog.
 
-<code>/api/v1/some/service?api_key=your_api_key&application_key=your_application_key</code>
+      The Datadog API uses resource-oriented URLs, uses status codes to indicate the
+      success or failure of requests and returns JSON from all requests. Let's dive
+      in and see how it works.
+    </div>
+    <%= right_side_div %>
+      <h5>Libraries</h5>
+      There are many client libraries that wrap the Datadog API. <a href="/libraries/">Check them out.</a>
 
-<p class="alert alert-info">
-  You can manage your API and application keys on the <a
-  href="https://app.datadoghq.com/account/settings#api">account settings</a>
-  page.
-</p>
+      <h5>API Endpoint</h5>
+      <code>https://app.datadoghq.com/api/</code>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION -->
+  <h3 id="authentication">Authentication</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        All requests to Datadog's API must be authenticated. Requests that write data require
+        <em>reporting access</em> and require an <code>API key</code>. Requests that read data
+        require <em>full access</em> and also require an <code>application key</code>.
+      </p>
+
+      <p>You can manage your account's API and application keys <a href="https://app.datadoghq.com/account/settings#api">here</a>.</p>
+    </div>
+    <%= right_side_div %>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-auth.py" %>
+      <%= lang_code_snippet "api-auth.rb" %>
+      <div class="lang lang-ruby">
+        <pre>
+        urby!!1
+        urby!!1
+        urby!!1
+        urby!!1
+        foo.bar()
+        </pre>
+      </div>
+      <h5>Example Response</h5>
+      <div class="lang lang-python">
+        <pre>
+        foo.bar()
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION -->
+  <h3>Authentication</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      This section details Datadog's HTTP API. It makes it easy to get data in and
+      out of Datadog.
+
+      The Datadog API uses resource-oriented URLs, uses status codes to indicate the
+      success or failure of requests and returns JSON from all requests. Let's dive
+      in and see how it works.
+    </div>
+    <%= right_side_div %>
+<pre>
+/v1/charges
+/v1/charges/{CHARGE_ID}
+/v1/coupons
+/v1/coupons/{COUPON_ID}
+/v1/customers
+/v1/customers/{CUSTOMER_ID}
+/v1/customers/{CUSTOMER_ID}/subscription
+/v1/invoices
+/v1/invoices/{INVOICE_ID}
+/v1/invoiceitems
+/v1/invoiceitems/{INVOICEITEM_ID}
+/v1/plans
+/v1/plans/{PLAN_ID}
+/v1/tokens
+/v1/tokens/{TOKEN_ID}
+/v1/events
+/v1/events/{EVENT_ID}
+</pre>
+    </div>
+  </div>
+
+
+</div>
 
 

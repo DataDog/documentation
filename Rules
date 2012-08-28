@@ -44,7 +44,6 @@ compile '*' do
           }
     end
 
-
     if @item.identifier == '/api/'
       layout 'shell'
     else
