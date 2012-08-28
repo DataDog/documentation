@@ -47,9 +47,16 @@ end
 
 desc "test the code snippets"
 task :test do
-  python_modules = Dir.glob("#{CODE_SNIPPETS}/*.py")
-  for py in python_modules
-    sh("python #{py}")
+  filetype_to_command = {
+    "py" => "python",
+ #   "sh" => "sh",
+  }
+  filetype_to_command.each do |t,cmd|
+    puts "=" * 10
+    puts "Testing #{t} code snippets"
+    files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
+    files.each do |f|
+      sh("#{cmd} #{f}")
+    end
   end
-  puts "Python snippets tested!"
-end
+ end
