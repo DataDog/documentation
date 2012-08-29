@@ -9,7 +9,7 @@ title: API Reference
 %>
 
 
-<div class="container-fluid">
+<div class="container-fluid api-page">
 
   <h1><%= @item[:title] %> </h1>
   <div class="row-fluid api-header-row">
@@ -184,7 +184,6 @@ If the service is able to handle your request, but some issues are present (e.g.
       <% end %>
     </div>
   </div>
-  <hr />
 
   <!--
  =====================================================================
@@ -245,6 +244,100 @@ If the service is able to handle your request, but some issues are present (e.g.
       <%= lang_code_snippet "api-dashboard-create.py" %>
       <%= lang_code_snippet "api-dashboard-create.rb" %>
       <%= lang_code_snippet "api-dashboard-create.sh" %>
+    </div>
+  </div>
+
+  <!-- update a dashboard -->
+  <h4 id="dashboards-update">Update a Dashboard</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <h5>Arguments</h5>
+      <ul class="arguments">
+        <li>
+          <strong>title [required]</strong>
+          <div>The name of the dashboard.</div>
+        </li>
+        <li>
+          <strong>description [required]</strong>
+          <div>A description of the dashboard's contents.</div>
+        </li>
+        <li>
+          <strong>graphs [required]</strong>
+          <div>A list of graph definitions. Graph definitions follow this form:</div>
+        </li>
+        <ul class="arguments">
+          <li>
+            <strong>title [required]</strong>
+            <div>The name of the graph.</div>
+          </li>
+          <li>
+            <strong>definition [required]</strong>
+            <div>
+              The graph definition. Read the <a href="/guides/graphs/">Graph
+              Guide</a> for more on graphs. Example:
+              <div>
+                <code>
+                  {"requests": [{"q": "system.cpu.idle{*} by {host}"}
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ul>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>PUT /api/v1/dash/:dash_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-dashboard-update.py" %>
+      <%= lang_code_snippet "api-dashboard-update.rb" %>
+      <%= lang_code_snippet "api-dashboard-update.sh" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-dashboard-update-response.py" %>
+      <%= lang_code_snippet "api-dashboard-update-response.rb" %>
+      <%= lang_code_snippet "api-dashboard-update-response.sh" %>
+    </div>
+  </div>
+
+  <!-- delete a dashboard -->
+  <h4 id="dashboards-delete">Delete a Dashboard</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>Delete an existing dashboard. This end-point takes no JSON
+      arguments.</p>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>DELETE /api/v1/dash/:dash_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-dashboard-update.py" %>
+      <%= lang_code_snippet "api-dashboard-update.rb" %>
+      <%= lang_code_snippet "api-dashboard-update.sh" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-dashboard-update-response.py" %>
+      <%= lang_code_snippet "api-dashboard-update-response.rb" %>
+      <%= lang_code_snippet "api-dashboard-update-response.sh" %>
+    </div>
+  </div>
+
+  <!-- get a dashboard -->
+  <h4 id="dashboards-get">Get a Dashboard</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>Fetch an existing dashboard's definition. This end-point takes no JSON
+      arguments.</p>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/dash/:dash_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-dashboard-update.py" %>
+      <%= lang_code_snippet "api-dashboard-update.rb" %>
+      <%= lang_code_snippet "api-dashboard-update.sh" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-dashboard-update-response.py" %>
+      <%= lang_code_snippet "api-dashboard-update-response.rb" %>
+      <%= lang_code_snippet "api-dashboard-update-response.sh" %>
     </div>
   </div>
 
