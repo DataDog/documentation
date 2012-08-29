@@ -13,28 +13,27 @@ title: API Reference
 
 <div class="container-fluid api-page">
 
-  <h1><%= @item[:title] %> </h1>
-  <div class="row-fluid api-header-row">
-    <%= left_side_div %>
-      <div class="navbar">
-        <div class="navbar-inner">
-          <ul class="nav">
-            <li class="active"><a href="#overview">Overview</a></li>
-            <li><a href="#authentication">Authentication</a></li>
-            <li><a href="#metrics">Metrics</a></li>
-            <li><a href="#dashboards">Dashboards</a></li>
-            <li><a href="#comments">Comments</a></li>
-          </ul>
-        </div>
+  <div class="fluid-row floating-header">
+    <h1><%= @item[:title] %> </h1>
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <a class="btn" href="#authentication">Auth</a>
+        <a class="btn" href="#errors">Errors</a>
+        <a class="btn" href="#metrics">Metrics</a>
+        <a class="btn" href="#events">Events</a>
+        <a class="btn" href="#dashboards">Dashboards</a>
+        <a class="btn" href="#tags">Tags</a>
+        <a class="btn" href="#comments">Comments</a>
+        <a class="btn" href="#search">Search</a>
       </div>
-    </div>
-    <%= right_side_div%>
-      <div class="btn-group affix">
+      &nbsp;
+      <div class="btn-group">
         <div lang="console" class="lang-btn btn">Shell</div>
         <div lang="python" class="active lang-btn btn">Python</div>
         <div lang="ruby" class="lang-btn btn">Ruby</div>
       </div>
     </div>
+      &nbsp;
   </div>
 
   <!--
@@ -238,7 +237,7 @@ If the service is able to handle your request, but some issues are present (e.g.
         This end point allows you to query for event details.
       </p>
       <h5>Arguments</h5>
-      <em>This endpoint takes no JSON arguments.</em>
+      <%= no_args %>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
@@ -257,7 +256,7 @@ If the service is able to handle your request, but some issues are present (e.g.
         The event stream can be queried and filterd by time, priority, sources and tags.
       </p>
       <h5>Arguments</h5>
-      <em>This endpoint takes no JSON arguments.</em>
+      <%= no_args %>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
@@ -284,10 +283,6 @@ If the service is able to handle your request, but some issues are present (e.g.
       <p>
         The Dashboards end point allow you to programmatically create, update
         delete and query dashboards.
-      </p>
-      <p class="alert alert-warning">
-        Check out our <a href="/guides/graphs">Guide to Graphs</a> to learn
-        more about our Graph Query Language.
       </p>
     </div>
   </div>
@@ -389,7 +384,7 @@ If the service is able to handle your request, but some issues are present (e.g.
   <div class="row-fluid">
     <%= left_side_div %>
       <p>Delete an existing dashboard.</p>
-      <em>This endpoint takes no JSON arguments.</em>
+      <%= no_args %>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
@@ -410,7 +405,8 @@ If the service is able to handle your request, but some issues are present (e.g.
   <div class="row-fluid">
     <%= left_side_div %>
       <p>Fetch an existing dashboard's definition.</p>
-      <em>This endpoint takes no JSON arguments.</em>
+      <h5>Arguments</h5>
+      <%= no_args %>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
@@ -539,6 +535,57 @@ If the service is able to handle your request, but some issues are present (e.g.
     </div>
   </div>
 
+  <!--
+ =====================================================================
+  Search
+  ====================================================================
+  -->
+
+  <h3 id="search">Search</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        This end point allows you to search for entities in Datadog. The
+        currently searchable entities are:
+      </p>
+      <ul>
+        <li><code>hosts  </code></li>
+        <li><code>metrics</code></li>
+      </ul>
+      <h5>Arguments</h5>
+      <ul class="arguments">
+        <%= argument("q", "The query string") %>
+      </ul>
+      <h5>Query Language</h5>
+      <p>
+        Search queries allow for limited faceting. Available facets are:
+      </p>
+      <ul>
+        <li><code>hosts  </code></li>
+        <li><code>metrics</code></li>
+      </ul>
+      <p>
+        Faceting your search limits your results to only matches of the specified
+        type. Un-faceted queries return results for all possible types.
+      </p>
+      <p>
+        Un-faceted queries are of the form:
+      </p>
+      <code>query_string</code>
+      <p>
+        Faceted queries are of the form:
+      </p>
+      <code>facet:query_string</code>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/search</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-search.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-search-response.py" %>
+    </div>
+  </div>
 
   <!--
  =====================================================================
