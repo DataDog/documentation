@@ -3,4 +3,3 @@
     "metrics": ["web.request.count", "web.request.time"]
   }
 }
-
