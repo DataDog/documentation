@@ -94,8 +94,8 @@ end
 
 def lang_code_snippet(filename)
   code = code_snippet(filename)
-  lang = EXT_TO_LANG
-  "<div class=\"lang lang-#{language(filename)}\">#{code}</div>"
+  lang = language(filename)
+  "<div class=\"lang lang-#{lang}\">#{code}</div>"
 end
 
 def language_class(languge)
