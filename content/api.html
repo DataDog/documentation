@@ -204,8 +204,7 @@ If the service is able to handle your request, but some issues are present (e.g.
   <div class="row-fluid">
     <%= left_side_div %>
       <p>
-        The Dashboards end point allow you to programmatically create, update
-        delete and query dashboards.
+        This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
       </p>
       <h5>Arguments</h5>
       <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
@@ -230,6 +229,45 @@ If the service is able to handle your request, but some issues are present (e.g.
       <%= lang_code_snippet "api-events-post-response.py" %>
     </div>
   </div>
+  <h4 id="events-get">Get an Event</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        This end point allows you to query for event details.
+      </p>
+      <h5>Arguments</h5>
+      <em>This endpoint takes no JSON arguments.</em>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/events/:event_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-events-get.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-events-get-response.py" %>
+    </div>
+  </div>
+
+  <h4 id="events-get">Query the Event Stream</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        The event stream can be queried and filterd by time, priority, sources and tags.
+      </p>
+      <h5>Arguments</h5>
+      <em>This endpoint takes no JSON arguments.</em>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/events</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-events-stream.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-events-stream-response.py" %>
+    </div>
+  </div>
+
+
 
 
   <!--
@@ -348,8 +386,8 @@ If the service is able to handle your request, but some issues are present (e.g.
   <h4 id="dashboards-delete">Delete a Dashboard</h4>
   <div class="row-fluid">
     <%= left_side_div %>
-      <p>Delete an existing dashboard. This end-point takes no JSON
-      arguments.</p>
+      <p>Delete an existing dashboard.</p>
+      <em>This endpoint takes no JSON arguments.</em>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
@@ -369,8 +407,8 @@ If the service is able to handle your request, but some issues are present (e.g.
   <h4 id="dashboards-get">Get a Dashboard</h4>
   <div class="row-fluid">
     <%= left_side_div %>
-      <p>Fetch an existing dashboard's definition. This end-point takes no JSON
-      arguments.</p>
+      <p>Fetch an existing dashboard's definition.</p>
+      <em>This endpoint takes no JSON arguments.</em>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
