@@ -21,7 +21,20 @@
         float:right;
       }
 
+      .floating-header {
+        width:100%;
+background-color:rgba(255,255,255,0.7);
+      }
+
+      .floating-header.affix + h3 {
+        padding-top:80px;
+      }
+
       /* API PAGE STYLING */
+
+      .api-page .language-buttons.btn-group {
+        margin-left:50px;
+      }
 
       .api-page h3 {
         text-transform:uppercase;
@@ -46,11 +59,6 @@
         max-width:500px;
       }
 
-      .api-header-row, .api-header-row .api-right {
-        background-color:white;
-        z-index:100;
-        border:0;
-      }
 
       .api-right {
         padding-left: 10px;
