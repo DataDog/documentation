@@ -195,8 +195,12 @@ If the service is able to handle your request, but some issues are present (e.g.
   <div class="row-fluid">
     <%= left_side_div %>
       <p>
-      The Dashboards end point allow you to programmatically create, update
-      delete and query dashboards.
+        The Dashboards end point allow you to programmatically create, update
+        delete and query dashboards.
+      </p>
+      <p class="alert alert-warning">
+        Check out our <a href="/guides/graphs">Guide to Graphs</a> to learn
+        more about our Graph Query Language.
       </p>
     </div>
   </div>
@@ -225,8 +229,7 @@ If the service is able to handle your request, but some issues are present (e.g.
           <li>
             <strong>definition [required]</strong>
             <div>
-              The graph definition. Read the <a href="/guides/graphs/">Graph
-              Guide</a> for more on graphs. Example:
+              The graph definition. Example:
               <div>
                 <code>
                   {"requests": [{"q": "system.cpu.idle{*} by {host}"}
