@@ -6,6 +6,8 @@ title: API Reference
   # Some shortcuts for the columns.
   left_side_div  = '<div class="span5 api-left">'
   right_side_div = '<div class="span6 api-right">'
+
+  no_args = '<em>This end point takes no JSON arguments.</em>'
 %>
 
 
@@ -423,6 +425,120 @@ If the service is able to handle your request, but some issues are present (e.g.
       <%= lang_code_snippet "api-dashboard-get-response.sh" %>
     </div>
   </div>
+
+  <!--
+ =====================================================================
+  Tags
+  ====================================================================
+  -->
+
+  <h3 id="tags">Tags</h3>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        The tag end point allows you to tag hosts with keywords meaningful to you - like <code>role:database</code>.
+        All metrics sent from a host will have its tags applied.
+      </p>
+    </div>
+  </div>
+
+  <h4 id="tags-get">Get Tags</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        Return a mapping of tags to hosts for your whole infrastructure.
+      </p>
+      <h5>Arguments</h5>
+      <%= no_args %>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/tags/hosts</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-tags-get.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-tags-get-response.py" %>
+    </div>
+  </div>
+
+  <h4 id="tags-get-host">Get Host Tags</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        Return the list of tags that apply to a given host.
+      </p>
+      <h5>Arguments</h5>
+      <%= no_args %>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>GET /api/v1/tags/hosts/:host_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-tags-get-host.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-tags-get-host-response.py" %>
+    </div>
+  </div>
+
+  <h4 id="tags-add">Add Tags to a Host</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        This end point allows you to add tags to a host.
+      </p>
+       <h5>Arguments</h5>
+        <ul class="arguments">
+        <%= argument("tags", "A list of tags to apply to the host") %>
+        </ul>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>POST /api/v1/tags/hosts/:host_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-tags-add.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-tags-add-response.py" %>
+    </div>
+  </div>
+
+  <h4 id="tags-update">Update Host Tags</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        This end point allows you to update all tags for a given host.
+      </p>
+       <h5>Arguments</h5>
+        <ul class="arguments">
+        <%= argument("tags", "A list of tags") %>
+        </ul>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>PUT /api/v1/tags/hosts/:host_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-tags-update.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-tags-update-response.py" %>
+    </div>
+  </div>
+
+  <h4 id="tags-remove">Remove Host Tags</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <p>
+        This end point allows you to update all tags for a given host.
+      </p>
+       <h5>Arguments</h5>
+        <%= no_args %>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>DELETE /api/v1/tags/hosts/:host_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-tags-remove.py" %>
+    </div>
+  </div>
+
 
   <!--
  =====================================================================
