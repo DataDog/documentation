@@ -123,7 +123,7 @@ end
 def argument(name, description, options={})
   is_required = !options.member?(:default)
   r = is_required ? 'required' : 'optional'
-  o = !is_required ? ' default=#{default}' : ''
+  o = !is_required ? ", default=#{options[:default]}" : ''
   return <<-EOF
     <li>
       <strong>#{name} [#{r}#{o}]</strong>
