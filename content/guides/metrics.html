@@ -14,12 +14,12 @@ sidebar:
       href: "#histograms"
     - text: Tags
       href: "#tags"
-
+    - text: Sample Rates
+      href: "#sample-rates"
 ---
 
 <div class="alert alert-block">
-This tutorial teaches how to send your application's custom metrics to Datadog
-with Statsd.
+This tutorial teaches how to send your application's custom metrics to Datadog.
 If you need any help getting started, pop by our <a href="irc://irc.freenode.net/datadog">chat room</a>.
 </div>
 
@@ -125,6 +125,16 @@ EOF
 %>
   </div>
 </div>
+
+That's it. With this one line of code we can start graphing the data.
+Here's an example:
+
+<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%">
+
+<p class="alert alert-warning">
+  Check out our <a href="/guides/graphs/">Guide to Graphs</a> to learn how
+  to create your dashboards.
+</p>
 
 We can also count by arbitrary numbers. Suppose we wanted to count the number
 of bytes processed by a file uploading service, we'll increment a metric
@@ -240,8 +250,33 @@ EOF
   </div>
 </div>
 
-Histograms aren't just for timing though. They can be used to measure the
-distribution of any type of value, like the size of uploaded files by users or
+The above instrumentation will produce the following metrics:
+
+- `database.query.time.count` - the number of times this metric was sampled
+- `database.query.time.avg` - the average time of the sampled values
+- `database.query.time.median` - the median sampled value
+- `database.query.time.max` - the maximum sampled value
+- `database.query.time.95percentile` - the 95th percentile sampled value
+
+These metrics give insight into how different each query time is. We can see
+how long the query usually takes by graphing the `median`. We can see how long
+most queries take by graphing the `95percentile`.
+
+<img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%">
+
+For this toy example, let's say a query time of 1 second is acceptable.
+Our median query time (graphed in purple) is usually less than 100
+milliseconds, which is great. But unfortunately, our 95th percentile (graped in
+blue) has large spikes sometimes nearing three seconds, which is unacceptable.
+This means most of our queries are running just fine, but our worst ones are
+very bad. If the 95th percentile was close to the median, than we would know
+that almost all of our queries are performing just fine.
+
+<p class="alert alert-warning">
+Histograms aren't just for measuring times. They can be used to measure the
+distribution of any type of value, like the size of uploaded files or classroom
+test scores.
+</p>
 
 <!--
 ======================================================
@@ -289,7 +324,7 @@ EOF
   </div>
 </div>
 
-<h3 id="tags">Sample Rates</h3>
+<h3 id="sample-rates">Sample Rates</h3>
 
 Write about smaple rates.
 
