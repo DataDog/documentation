@@ -34,9 +34,9 @@ OVERVIEW
 Sending your application's custom metrics to Datadog will let you correlate
 what's happening your application, your users and your system.
 
-StatsD is a small metrics aggregation server that is bundled with the Datadog
-Agent. You can read about how it works <a
-href="/guides/dogstatsd">here</a>. If you want to dive into code right away,
+Metrics are collected by sending them to StatsD, a small metrics aggregation
+server that is bundled with the Datadog Agent. You can read about how it works <a
+href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -326,8 +326,33 @@ EOF
 
 <h3 id="sample-rates">Sample Rates</h3>
 
-Write about smaple rates.
+Each metric point is sent over UDP to the Statsd server. This can incur a lot
+of overhead for performance intensive code paths. To work around this, Statsd
+supports sample rates, which allows sending a metric a fraction of the time
+and scaling up correctly on the server.
 
 <%= code_tabs("sample-rates") %>
+
+The following code will only send points half of the time:
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="sample-rates-python">
+<%= python <<EOF
+while True:
+  do_something_intense()
+  statsd.increment('loop.count', sample_rate=0.5)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="sample-rates-ruby">
+<%= ruby <<EOF
+while true do
+  do_something_intense()
+  statsd.increment('loop.count', sample_rate=>0.5)
+end
+EOF
+%>
+  </div>
+</div>
 
 
