@@ -37,13 +37,11 @@ task :disable_syntax do
 end
 
 desc "Publish"
-task :release => [:clean_all, :enable_syntax, :test, :compile] do
-  if File.directory?('../datadog.github.com/')
-    sh "sh rake/release.sh"
-  else
-    raise "site repo (https://github.com/DataDog/datadog.github.com) must be cloned to '../datadog.github.com/'"
-  end
+task :release => [:clean_all, :enable_syntax, :compile] do
+  sh("cd output && s3cmd sync . s3://dd-docs-static-site")
 end
+
+
 
 desc "test the code snippets"
 task :test do
