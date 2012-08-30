@@ -245,10 +245,17 @@ If the service is able to handle your request, but some issues are present (e.g.
   <div class="row-fluid">
     <%= left_side_div %>
       <p>
-        The event stream can be queried and filterd by time, priority, sources and tags.
+        The event stream can be queried and filtered by time, priority, sources and tags.
       </p>
       <h5>Arguments</h5>
-      <%= no_args %>
+      <ul class="arguments">
+        <%= argument "start", "POSIX timestamp" %>
+        <%= argument "end", "POSIX timestamp" %>
+        <%= argument "priority", "'low' or 'normal'", :default => "None" %>
+        <%= argument "sources", "A comma seperated list of sources", :default => "None" %>
+        <%= argument "tags", "A comma seperated list of tags", :default => "None" %>
+      </ul>
+
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
