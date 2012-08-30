@@ -148,32 +148,20 @@ If the service is able to handle your request, but some issues are present (e.g.
       </p>
       <h5>Arguments</h5>
       <ul class="arguments">
-        <li>
-          <strong>series [required]</strong>
-          <div> A JSON array of metrics of the form. Each metric is of the form:</div>
-          <ul>
-            <li>
-              <strong>metric [required]</strong>
-              <div>The name of the time series</div>
-            </li>
-            <li>
-              <strong>points [required]</strong>
-              <div>A JSON array of points. Each point is of the form:
-                  <div>
-                  <code>[[POSIX_timestamp, numeric_value], ...]</code>
-                  </div>
-              </div>
-            </li>
-            <li>
-              <strong>host [optional]</strong> <em>Default is null</em>
-              <div>The name of the host that produced the metric.</div>
-            </li>
-            <li>
-              <strong>tags [optional]</strong> <em>Default is null</em>
-              <div>A list of tags to associated with the metric.</div>
-            </li>
-          </ul>
-        </li>
+        <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
+        <ul>
+          <%= argument 'metric', 'The name of the time series' %>
+          <li>
+            <strong>points [required]</strong>
+            <div>A JSON array of points. Each point is of the form:
+                <div>
+                <code>[[POSIX_timestamp, numeric_value], ...]</code>
+                </div>
+            </div>
+          </li>
+          <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
+          <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
+        </ul>
       </ul>
     </div>
     <%= right_side_div %>
