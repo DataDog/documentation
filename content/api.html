@@ -23,8 +23,8 @@ title: API Reference
         <a class="btn" href="#events">Events</a>
         <a class="btn" href="#dashboards">Dashboards</a>
         <a class="btn" href="#tags">Tags</a>
-        <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#search">Search</a>
+        <a class="btn" href="#comments">Comments</a>
       </div>
       &nbsp;
       <div class="btn-group">
@@ -595,18 +595,63 @@ If the service is able to handle your request, but some issues are present (e.g.
   <h4 id="comments-create">Create a comment</h4>
   <div class="row-fluid">
     <%= left_side_div %>
+      <p>
+        Comments are essentially special forms of events that
+        appear in the stream. They can start a new discussion thread or
+        optionally, reply in another thread.
+      </p>
       <h5>Arguments</h5>
+      <ul class="arguments">
+        <%= argument 'message', "The comment text." %>
+        <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
+        <%= argument 'related_event_id', "The id of another comment or event to
+        reply to", :default => 'None' %>
+      </ul>
     </div>
     <%= right_side_div %>
       <h5>Signature</h5>
-      <code>POST https://app.datadoghq.com/api/v1/comment</code>
+      <code>POST api/v1/comments</code>
       <h5>Example Request</h5>
-      <%= lang_code_snippet "api-comment-create.sh" %>
       <%= lang_code_snippet "api-comment-create.py" %>
-      <h5>Example Warning Response</h5>
-      <%= code_snippet "api-warning.json" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-comment-create-response.py" %>
+    </div>
+  </div>
 
+  <!-- Edit comments -->
+  <h4 id="comments-edit">Edit a Comment</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <h5>Arguments</h5>
+      <ul class="arguments">
+        <%= argument 'message', "The comment text.", :default => 'original message' %>
+        <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
+      </ul>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>PUT api/v1/comments/:comment_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-comment-edit.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-comment-create-response.py" %>
+    </div>
+  </div>
 
+  <!-- Edit comments -->
+  <h4 id="comments-delete">Delete a Comment</h4>
+  <div class="row-fluid">
+    <%= left_side_div %>
+      <h5>Arguments</h5>
+      <%= no_args %>
+    </div>
+    <%= right_side_div %>
+      <h5>Signature</h5>
+      <code>DELETE api/v1/comments/:comment_id</code>
+      <h5>Example Request</h5>
+      <%= lang_code_snippet "api-comment-delete.py" %>
+      <h5>Example Response</h5>
+      <%= lang_code_snippet "api-comment-delete-response.py" %>
     </div>
   </div>
 
