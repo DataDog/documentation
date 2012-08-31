@@ -49,6 +49,7 @@ end
 
 
 def get_cached_filename(filename)
+  # Add MD5 hashing?
   "code_snippets/results/result.#{filename}"
 end
 

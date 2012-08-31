@@ -7,4 +7,4 @@ api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 api.comment('matt@example.com', 'Should we use COBOL or Fortran?')
 
 # Reply to a discussion.
-api.comment('matt@example.com', 'Smalltalk?', related_event_id=1234)
+api.comment('joe@example.com', 'Smalltalk?', related_event_id=1234)

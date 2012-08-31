@@ -16,4 +16,4 @@ graphs =  [{
     "title": "Average Memory Free"
 }]
 
-print api.create_dashboard(title, description, graphs)
+api.create_dashboard(title, description, graphs)
