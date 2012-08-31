@@ -213,11 +213,11 @@ If the service is able to handle your request, but some issues are present (e.g.
       <h5>Signature</h5>
       <code>POST /api/v1/events</code>
       <h5>Example Request</h5>
-      <% %w{py sh}.each do |f| %>
+      <% %w{py sh rb}.each do |f| %>
         <%= snippet_code_block "api-events-post.#{f}" %>
       <% end %>
       <h5>Example Response</h5>
-      <% %w{py sh}.each do |f| %>
+      <% %w{py sh rb}.each do |f| %>
         <%= snippet_result_code_block "api-events-post.#{f}" %>
       <% end %>
     </div>
