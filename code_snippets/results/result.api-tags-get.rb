@@ -1,1 +1,1 @@
-["200", {"tags"=>{}}]
+["200", {"tags"=>{"role:database,env:test"=>["test.metric.host"]}}]
