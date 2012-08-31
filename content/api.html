@@ -169,7 +169,7 @@ If the service is able to handle your request, but some issues are present (e.g.
       <code>POST https://app.datadoghq.com/api/v1/series</code>
       <h5>Example Request</h5>
       <% %w{py sh rb}.each do |f| %>
-        <%= lang_code_snippet "api-metrics-post.#{f}" %>
+        <%= snippet_code_block "api-metrics-post.#{f}" %>
       <% end %>
     </div>
   </div>
@@ -213,11 +213,13 @@ If the service is able to handle your request, but some issues are present (e.g.
       <h5>Signature</h5>
       <code>POST /api/v1/events</code>
       <h5>Example Request</h5>
-      <%= lang_code_snippet "api-events-post.py" %>
-      <%= lang_code_snippet "api-events-post.sh" %>
+      <% %w{py sh}.each do |f| %>
+        <%= snippet_code_block "api-events-post.#{f}" %>
+      <% end %>
       <h5>Example Response</h5>
-      <%= lang_code_snippet "api-events-post-response.py" %>
-      <%= lang_code_snippet "api-events-post-response.sh" %>
+      <% %w{py sh}.each do |f| %>
+        <%= snippet_result_code_block "api-events-post.#{f}" %>
+      <% end %>
     </div>
   </div>
   <h4 id="events-get">Get an Event</h4>
@@ -450,9 +452,14 @@ If the service is able to handle your request, but some issues are present (e.g.
       <h5>Signature</h5>
       <code>GET /api/v1/tags/hosts</code>
       <h5>Example Request</h5>
-      <%= lang_code_snippet "api-tags-get.py" %>
+      <%= snippet_code_block "api-tags-get.rb" %>
+      <%= snippet_code_block "api-tags-get.py" %>
+      <%= snippet_code_block "api-tags-get.sh" %>
       <h5>Example Response</h5>
-      <%= lang_code_snippet "api-tags-get-response.py" %>
+      <%= snippet_result_code_block "api-tags-get.rb" %>
+      <%= snippet_result_code_block "api-tags-get.py" %>
+      <%= snippet_result_code_block "api-tags-get.sh" %>
+      <h5>Example Response</h5>
     </div>
   </div>
 

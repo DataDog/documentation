@@ -8,4 +8,4 @@ text = 'And let me tell you all about it here!'
 tags = ['version:1', 'application:web']
 
 # All optional parameters are specified as keyword arguments.
-print api.event_with_response(title, text, tags=tags)
+api.event_with_response(title, text, tags=tags)

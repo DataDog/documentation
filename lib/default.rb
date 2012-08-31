@@ -1,6 +1,10 @@
 # All files in the 'lib' directory will be loaded
 # before nanoc starts compiling.
 
+require 'tempfile'
+require './lib/snippets.rb'
+
+
 STATUS_CODES = {
   200 => '200 OK',
   201 => '201 Created',
@@ -93,7 +97,10 @@ def code_snippet(filename)
 end
 
 def lang_code_snippet(filename)
-  code = code_snippet(filename)
+  return ""
+end
+
+def lang_code_snippet_string(code)
   lang = language(filename)
   "<div class=\"lang lang-#{lang}\">#{code}</div>"
 end
@@ -118,6 +125,28 @@ end
 
 def arguments_list(arguments)
 
+end
+
+# Returned the pretty-printed result of the given code snippet.
+def evaluate_ruby_snippet(filename)
+  contents = IO.read(filename)
+  code = <<-EOF
+    def wrapper
+      #{contents}
+    end
+    require 'pp'
+    pp wrapper()
+  EOF
+
+  file = Tempfile.new('foo')
+  file.write code
+  file.close
+  return %x{ruby #{file.path}}
+ end
+
+def ruby_snippet_result_code(filename)
+  result = evaluate_ruby_snippet("#{CODE_SNIPPETS}/#{filename}")
+  lang_code_snippet_string result
 end
 
 def argument(name, description, options={})
