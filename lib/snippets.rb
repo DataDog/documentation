@@ -1,7 +1,11 @@
 #
-# Code to manage our code snippets. Each code snippet will return the value
-# of it's last line (pretty printed if possible)
+# This module manages the API code snippets. It executes them, formats them for
+# the web and caches the results. To regenerate, remove the result from the
+# cache.
 #
+
+require 'fileutils'
+
 
 CODE_SNIPPET_DIR = "code_snippets"
 
@@ -25,7 +29,12 @@ end
 
 # Return a code block containing the result of the given snippet.
 def snippet_result_code_block(filename)
-  result = eval_snippet(filename)
+  if has_cached_snippet_result(filename)
+    result = get_cached_snippet_result(filename)
+  else
+    result = eval_snippet(filename)
+    cache_snippet_result(filename, result)
+  end
   code_block(result, language(filename))
 end
 
@@ -36,6 +45,28 @@ end
 def code_block(code, language)
   return "<pre class=\"code-block code-block-#{language}\" lang=\"#{language}\">" +
          "<code class=\"language-#{language}\">#{code}</code></pre>"
+end
+
+
+def get_cached_filename(filename)
+  "code_snippets/results/result.#{filename}"
+end
+
+# Return a cached code snippet result.
+def get_cached_snippet_result(filename)
+  IO.read(get_cached_filename(cached_filename))
+end
+
+def has_cached_snippet_result(filename)
+  File.exists? get_cached_filename(filename)
+end
+
+def cache_snippet_result(filename, result)
+  cached_filename = get_cached_filename(filename)
+  FileUtils.mkdir_p File.dirname(cached_filename)
+  File.open(cached_filename,'w') do |f|
+    f.write result
+  end
 end
 
 # Return the language of the given code snippet.
