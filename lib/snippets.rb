@@ -54,7 +54,7 @@ end
 
 # Return a cached code snippet result.
 def get_cached_snippet_result(filename)
-  IO.read(get_cached_filename(cached_filename))
+  IO.read(get_cached_filename(filename))
 end
 
 def has_cached_snippet_result(filename)
