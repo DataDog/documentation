@@ -10,4 +10,4 @@ api.search("hosts:database")
 api.search("metrics:system")
 
 # Search all facets.
-api.search("web")
+api.search("test")
