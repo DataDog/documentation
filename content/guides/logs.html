@@ -1,5 +1,11 @@
 ---
 title: Getting Started with Log Parsing
+sidebar:
+  nav:
+    - text: Parsing Metrics
+      href: "#metrics"
+    - text: Parsing Events
+      href: "#events"
 ---
 
 Log files contain tons of valuable application and business data.
@@ -7,7 +13,7 @@ Unfortunately, this value is oftentimes never realized because log files go
 ignored. The Datadog agent can help remedy this by parsing metrics and events from
 logs, so the data within can ge graphed in real-time, all the time.
 
-## Parsing Metrics
+<h2 id="metrics">Parsing Metrics</h2>
 
 The Datadog agent can read metrics directly from your log files:
 
@@ -131,7 +137,7 @@ eof
 
 And you can test your parsing logic by calling python /path/to/parsers.py.
 
-## Parsing Events
+<h2 id="events">Parsing Events</h2>
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
 `dict` from your custom parsing function, Datadog will treat it as an event instead of a metric.
