@@ -7,7 +7,7 @@
 
 CODE_SNIPPETS = "code_snippets"
 
-task :clean_all do
+task :clean do
   sh "rm -rf output/*"
 end
 
@@ -37,7 +37,7 @@ task :disable_syntax do
 end
 
 desc "Publish"
-task :release => [:clean_all, :enable_syntax, :compile] do
+task :release => [:clean, :enable_syntax, :compile] do
   sh("cd output && s3cmd sync . s3://dd-docs-static-site")
 end
 
