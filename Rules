@@ -32,7 +32,6 @@ compile '*' do
   else
     filter :erb
     filter :kramdown
-    puts @item.identifier
     if not File.exists? 'NO_SYNTAX'
       # Run `touch NO_SYNTAX` to disable syntax highlighting, since it's very
       # slow. Remove it to re-enable.
