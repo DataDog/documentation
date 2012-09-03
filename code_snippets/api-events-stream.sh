@@ -1,7 +1,7 @@
 
 # Note: this end point only accepts form-encoded requests.
 
-curl -G GET  -H "Content-type: application/json" \
+curl -G -H "Content-type: application/json" \
     -d "start=1346272158" \
     -d "end=1346274158" \
     -d "api_key=9775a026f1ca7d1c6c5af9d94d9595a4" \
