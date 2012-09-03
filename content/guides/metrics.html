@@ -16,6 +16,8 @@ sidebar:
       href: "#tags"
     - text: Sample Rates
       href: "#sample-rates"
+    - text: Other Submission Methods
+      href: "#methods"
 ---
 
 <div class="alert alert-block">
@@ -355,4 +357,25 @@ EOF
   </div>
 </div>
 
+<hr>
 
+<h3 id="methods">Other Submission Methods</h3>
+
+Using the Statsd server bundled with the Datadog Agent is the simplest
+way of submtting metrics to Datadog, but it's not
+the only one. Here are some other ways of getting your metrics data into
+Datadog:
+
+<ul>
+  <li>
+    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+  </li>
+  <li>
+    Use codahale's Java <a
+    href="https://github.com/codahale/metrics">metrics</a> library, with the
+<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>
+    backend (thanks to the good folks at
+    <a href="https://github.com/vistarmedia">Vistar Media</a> for the great
+    contribution).
+  </li>
+</ul>
