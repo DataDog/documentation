@@ -6,8 +6,15 @@
         <div class="span12">
           <a class="brand" href="/">Datadog Docs</a>
           <ul class="nav">
-            <li class="active"><a href="/">Guides</a></li>
+            <li class="active dropdown">
+              <a id="nav-guide-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Guides <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
+                <li><a href="/guides/metrics/">Getting Started with Metrics</a></li>
+                <li><a href="/guides/logs/">Getting Started with Log Parsing</a></li>
+              </ul>
+            </li>
             <li class="active"><a href="/api/">API</a></li>
+            <li class="active"><a href="/libraries/">Libraries</a></li>
           </ul>
           <span class="header-buttons">
             <a class="btn btn-info" href="https://app.datadoghq.com">Sign In</a>
