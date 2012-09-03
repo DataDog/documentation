@@ -8,6 +8,7 @@ title: API Reference
   right_side_div = '<div class="span6 api-right">'
 
   no_args = '<em>This end point takes no JSON arguments.</em>'
+  no_response = '<em>This end point does not return JSON on successful requests.</em>'
 %>
 
 
@@ -401,7 +402,7 @@ If the service is able to handle your request, but some issues are present (e.g.
       <%= snippet_code_block "api-dashboard-delete.rb" %>
       <%= snippet_code_block "api-dashboard-delete.sh" %>
       <h5>Example Response</h5>
-      <em>This end point doesn't return JSON on successful requests.</em>
+      <%= no_response %>
     </div>
   </div>
 
@@ -481,9 +482,11 @@ If the service is able to handle your request, but some issues are present (e.g.
       <h5>Example Request</h5>
       <%= snippet_code_block "api-tags-get-host.py" %>
       <%= snippet_code_block "api-tags-get-host.rb" %>
+      <%= snippet_code_block "api-tags-get-host.sh" %>
       <h5>Example Response</h5>
       <%= snippet_result_code_block "api-tags-get-host.py" %>
       <%= snippet_result_code_block "api-tags-get-host.rb" %>
+      <%= snippet_result_code_block "api-tags-get-host.sh" %>
     </div>
   </div>
 
@@ -503,8 +506,10 @@ If the service is able to handle your request, but some issues are present (e.g.
       <code>POST /api/v1/tags/hosts/:host_id</code>
       <h5>Example Request</h5>
       <%= snippet_code_block "api-tags-add.py" %>
+      <%= snippet_code_block "api-tags-add.sh" %>
       <h5>Example Response</h5>
       <%= snippet_result_code_block "api-tags-add.py" %>
+      <%= snippet_result_code_block "api-tags-add.sh" %>
     </div>
   </div>
 
@@ -524,8 +529,10 @@ If the service is able to handle your request, but some issues are present (e.g.
       <code>PUT /api/v1/tags/hosts/:host_id</code>
       <h5>Example Request</h5>
       <%= snippet_code_block "api-tags-update.py" %>
+      <%= snippet_code_block "api-tags-update.sh" %>
       <h5>Example Response</h5>
       <%= snippet_result_code_block "api-tags-update.py" %>
+      <%= snippet_result_code_block "api-tags-update.sh" %>
     </div>
   </div>
 
@@ -543,6 +550,9 @@ If the service is able to handle your request, but some issues are present (e.g.
       <code>DELETE /api/v1/tags/hosts/:host_id</code>
       <h5>Example Request</h5>
       <%= snippet_code_block "api-tags-remove.py" %>
+      <%= snippet_code_block "api-tags-remove.sh" %>
+      <h5>Example Response</h5>
+      <%= no_response %>
     </div>
   </div>
 
