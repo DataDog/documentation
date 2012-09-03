@@ -22,9 +22,9 @@ EXT_TO_LANG = {
 
 # Return a code block containing the given file's code and highlighted for it's
 # language.
-def snippet_code_block(filename)
+def snippet_code_block(filename, options={})
   code = IO.read(File.join(CODE_SNIPPET_DIR, filename))
-  code_block(code, language(filename))
+  code_block(code, language(filename), options)
 end
 
 # Return a code block containing the result of the given snippet.
@@ -42,9 +42,15 @@ end
 # PRIVATE ======================
 
 # Return a code block highlighted for the it's language.
-def code_block(code, language)
-  return "<pre class=\"code-block code-block-#{language}\" lang=\"#{language}\">" +
-         "<code class=\"language-#{language}\">#{code}</code></pre>"
+def code_block(code, language, options={})
+  static = options[:static] or false
+  # If it's static, don't mark it as a code block.
+  if not static
+    attrs = "class=\"code-block code-block-#{language}\" lang=\"#{language}\""
+  else
+    attrs = ""
+  end
+  return "<pre #{attrs}><code class=\"language-#{language}\">#{code}</code></pre>"
 end
 
 
