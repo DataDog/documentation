@@ -14,7 +14,7 @@ this layout provides a sidebar and main column.
     <!-- PAGE TITLE -->
     <div class="container">
       <div class="row">
-        <div class="span8 offset4">
+        <div class="span8 offset3">
           <h1><%= @item[:title] %> </h1>
         </div>
       </div>
@@ -25,7 +25,7 @@ this layout provides a sidebar and main column.
       <div class="row">
 
         <!-- SIDEBAR -->
-        <div class="span3 offset1">
+        <div class="span3">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
           <ul class="nav nav-tabs nav-stacked affix sidebar">
           <% @item[:sidebar][:nav].each do |i| %>
