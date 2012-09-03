@@ -144,7 +144,7 @@ Event parsing is done via the same custom parsing functions as described above, 
 
 Here are the event fields (bold means the field is required):
 
-<table class="api_table" border="0" cellspacing="0" cellpadding="0">
+<table class="table">
 <thead>
 <tr>
 <th>Field</th>
@@ -154,13 +154,13 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<td><strong>msg_title</strong></td>
+<td>msg_title</td>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>
 </tr>
 <tr>
-<td>timestamp</td>
+<th>timestamp</th>
 <td>integer</td>
 <td>Unix epoch timestamp. If omitted, will default to the time that
 the agent parsed the event.</td>
