@@ -2,7 +2,8 @@ curl  -X POST -H "Content-type: application/json" \
 -d '{ "series" :
          [{"metric":"test.metric",
           "points":[[1346340794, 20]],
-          "type":"counter",
+          "type":"gauge",
+          "host":"test.example.com",
           "tags":["environment:test"]}
         ]
     }' \
