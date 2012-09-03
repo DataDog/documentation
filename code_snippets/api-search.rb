@@ -13,4 +13,4 @@ dog.search("hosts:database")
 dog.search("metrics:system")
 
 # Search all facets.
-dog.search("web")
+dog.search("test")
