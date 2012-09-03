@@ -42,21 +42,28 @@
         text-decoration:underline;
       }
 
-
-
       /* API PAGE STYLING */
 
       .floating-header {
+        background-color:rgba(255,255,255,0.6);
         width:100%;
-        background-color:rgba(255,255,255,0.7);
       }
 
-      .floating-header.affix + h3 {
-        padding-top:80px;
+      .floating-header.affix {
+        top:0px;
+      }
+
+      .floating-header.affix + .scrollable-api-docs {
+         margin-top: 120px;
+      }
+
+      .api-page .floating-header .btn-toolbar {
+        margin-bottom:0;
       }
 
       .api-page .language-buttons.btn-group {
         margin-left:50px;
+        margin-bottom:0px;
       }
 
       .api-page h3 {
