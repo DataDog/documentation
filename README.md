@@ -48,8 +48,8 @@ Syntax highlighting is really slow, so to turn it off while developing, run:
 $ rake disable_syntax
 ```
 
-To run it back on:
+To turn it back on:
 
 ```
-$ rake disable_syntax
+$ rake enable_syntax
 ```
