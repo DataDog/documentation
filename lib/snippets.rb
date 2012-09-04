@@ -43,14 +43,14 @@ end
 
 # Return a code block highlighted for the it's language.
 def code_block(code, language, options={})
-  static = options[:static] or false
+  static = options[:static] || false
+  highlight = options[:highlight] || true
+
   # If it's static, don't mark it as a code block.
-  if not static
-    attrs = "class=\"code-block code-block-#{language}\" lang=\"#{language}\""
-  else
-    attrs = ""
-  end
-  return "<pre #{attrs}><code class=\"language-#{language}\">#{code}</code></pre>"
+  pre_class = static ? "" : "code-block code-block-#{language}"
+  # If we don't highlight, don't set the language on the code block
+  code_class = highlight ? "language-#{language}" : ""
+  return "<pre class=\"#{pre_class}\" lang=\"#{language}\"><code class=\"#{code_class}\">#{code}</code></pre>"
 end
 
 

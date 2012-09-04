@@ -40,6 +40,16 @@ def python(json)
   return "<pre><code class=\"language-python\">#{json}</code></pre>"
 end
 
+def console(json)
+  return "<pre><code class=\"language-console\">#{json}</code></pre>"
+end
+
+def ruby(json)
+  return "<pre><code class=\"language-ruby\">#{json}</code></pre>"
+end
+
+
+
 def language(filename)
   extension = File.extname(filename)
   EXT_TO_LANG[extension]
