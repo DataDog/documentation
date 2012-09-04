@@ -38,6 +38,18 @@ def snippet_result_code_block(filename)
   code_block(result, language(filename))
 end
 
+def python(code)
+  code_block(code, "python", :static => true)
+end
+
+def console(code)
+  code_block(code, "console", :static => true)
+end
+
+def ruby(code)
+  code_block(code, "ruby", :static => true)
+end
+
 
 # PRIVATE ======================
 

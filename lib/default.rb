@@ -36,28 +36,10 @@ LANGUAGES = %w{Python Ruby}
 ACTIVE_LANGUAGE = 'Python'
 
 
-def python(json)
-  return "<pre><code class=\"language-python\">#{json}</code></pre>"
-end
-
-def console(json)
-  return "<pre><code class=\"language-console\">#{json}</code></pre>"
-end
-
-def ruby(json)
-  return "<pre><code class=\"language-ruby\">#{json}</code></pre>"
-end
-
-
 
 def language(filename)
   extension = File.extname(filename)
   EXT_TO_LANG[extension]
-end
-
-def code_snippet(filename)
-  code = IO.read(File.join("code_snippets", filename))
-  "<pre><code class=\"language-#{language(filename)}\">#{code}</code></pre>"
 end
 
 def language_class(languge)
