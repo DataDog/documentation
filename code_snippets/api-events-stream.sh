@@ -1,4 +1,3 @@
-
 # Note: this end point only accepts form-encoded requests.
 
 curl -G -H "Content-type: application/json" \
