@@ -36,11 +36,12 @@ task :disable_syntax do
   sh("touch NO_SYNTAX")
 end
 
-desc "Publish"
-task :release => [:clean, :enable_syntax, :compile] do
+desc "Build and release the site to s3"
+task :release => [:clean, :enable_syntax, :compile, :deploy]
+
+task :deploy do
   sh("cd output && s3cmd sync . s3://dd-docs-static-site")
 end
-
 
 
 desc "test the code snippets"
