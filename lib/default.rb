@@ -20,27 +20,12 @@ STATUS_CODES = {
   500 => '500 Server Error'
 }
 
-EXT_TO_LANG = {
-  ".php" => "php",
-  ".py"  => "python",
-  ".rb"  => "ruby",
-  ".json" => "json",
-  ".sh" => "console",
-}
-
-
 # The languages we show in code blocks.
 LANGUAGES = %w{Python Ruby}
 
 # The default active language
 ACTIVE_LANGUAGE = 'Python'
 
-
-
-def language(filename)
-  extension = File.extname(filename)
-  EXT_TO_LANG[extension]
-end
 
 def language_class(languge)
   languge == ACTIVE_LANGUAGE ? 'active' : ''

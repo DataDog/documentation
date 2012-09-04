@@ -13,8 +13,8 @@ EXT_TO_LANG = {
   ".php" => "php",
   ".py"  => "python",
   ".rb"  => "ruby",
-  ".json" => "json",
-  ".sh" => "console",
+  ".sh"  => "console",
+  ".json" => "json"
 }
 
 # PUBLIC ======================
@@ -58,10 +58,14 @@ def code_block(code, language, options={})
   static = options[:static] || false
   highlight = options[:highlight] || true
 
+  if language == 'json' || language == 'console'
+    highlight = false
+  end
+
   # If it's static, don't mark it as a code block.
-  pre_class = static ? "" : "code-block code-block-#{language}"
+  pre_class = (static) ? "" : "code-block code-block-#{language}"
   # If we don't highlight, don't set the language on the code block
-  code_class = highlight ? "language-#{language}" : ""
+  code_class = (highlight && language) ? "language-#{language}" : ""
   return "<pre class=\"#{pre_class}\" lang=\"#{language}\"><code class=\"#{code_class}\">#{code}</code></pre>"
 end
 

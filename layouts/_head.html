@@ -98,11 +98,12 @@
         border-radius:3px;
       }
 
-      .code-block, .lang {
+      /* Only show python code blocks by default */
+      .api-page .code-block {
         display:none;
       }
 
-      .code-block.code-block-python, .lang.lang-python {
+      .api-page .code-block.code-block-python {
         visibility:visible;
         display:block;
       }
