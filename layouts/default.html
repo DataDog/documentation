@@ -49,5 +49,7 @@ this layout provides a sidebar and main column.
 
     <%= render "_javascript" %>
 
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+
   </body>
 </html>
