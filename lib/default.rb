@@ -36,54 +36,8 @@ LANGUAGES = %w{Python Ruby}
 ACTIVE_LANGUAGE = 'Python'
 
 
-
-
-def request_headers(headers={})
-  lines = []
-  headers.each do |key, value|
-    lines << ["#{key}: #{value}"]
-  end
-  return "<pre class=\"http-headers\">#{lines.join("\n")}</pre>"
-end
-
-def response_headers(status, headers={})
-  lines = ["Status: #{STATUS_CODES[status]}"]
-  headers.each do |key, value|
-    lines << ["#{key}: #{value}"]
-  end
-  return "<pre class=\"http-headers\">#{lines.join("\n")}</pre>"
-end
-
-def http_body(json)
-  return "<pre class=\"http-body\"><code class=\"language-javascript\">#{json}</code></pre>"
-end
-
-def request(verb, uri)
-  return "<pre><span class=\"request-verb\">#{verb}</span> #{uri}</pre>"
-end
-
-def json(json)
-  return "<pre><code class=\"language-javascript\">#{json}</code></pre>"
-end
-
 def python(json)
   return "<pre><code class=\"language-python\">#{json}</code></pre>"
-end
-
-def pycon(json)
-  return "<pre><code class=\"language-pycon\">#{json}</code></pre>"
-end
-
-def ruby(json)
-  return "<pre><code class=\"language-ruby\">#{json}</code></pre>"
-end
-
-def console(json)
-  return "<pre><code class=\"language-console\">#{json}</code></pre>"
-end
-
-def php(code)
-  return "<pre><code class=\"language-php\">#{code}</code></pre>"
 end
 
 def language(filename)
@@ -94,15 +48,6 @@ end
 def code_snippet(filename)
   code = IO.read(File.join("code_snippets", filename))
   "<pre><code class=\"language-#{language(filename)}\">#{code}</code></pre>"
-end
-
-def lang_code_snippet(filename)
-  return ""
-end
-
-def lang_code_snippet_string(code)
-  lang = language(filename)
-  "<div class=\"lang lang-#{lang}\">#{code}</div>"
 end
 
 def language_class(languge)
@@ -121,32 +66,6 @@ def code_tabs(section)
   end
   html += "</ul>"
   return html
-end
-
-def arguments_list(arguments)
-
-end
-
-# Returned the pretty-printed result of the given code snippet.
-def evaluate_ruby_snippet(filename)
-  contents = IO.read(filename)
-  code = <<-EOF
-    def wrapper
-      #{contents}
-    end
-    require 'pp'
-    pp wrapper()
-  EOF
-
-  file = Tempfile.new('foo')
-  file.write code
-  file.close
-  return %x{ruby #{file.path}}
- end
-
-def ruby_snippet_result_code(filename)
-  result = evaluate_ruby_snippet("#{CODE_SNIPPETS}/#{filename}")
-  lang_code_snippet_string result
 end
 
 def argument(name, description, options={})
