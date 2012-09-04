@@ -40,31 +40,16 @@ $ bundle exec rake view
 $ bundle exec rake autocompile
 ```
 
-*I recommend disabling the syntax highlighting if you run the server with autocompile since it's slow. In `Rules`:*
+### Toggle Syntax Highlighting
+
+Syntax highlighting is really slow, so to turn it off while developing, run:
 
 ```
-    filter :erb
-    filter :kramdown
-#    filter :colorize_syntax,
-#      :colorizers => {:javascript => :pygmentize}
-    layout 'default'
+$ rake disable_syntax
 ```
 
-### Deploy the static site
-
-In order for this to work, you need to have the
-[static site repo](https://github.com/DataDog/datadog.github.com) checked out
-next to this one (i.e. from the root of this repo, the static site should be
-located at `../datadog.github.com/`):
+To run it back on:
 
 ```
-$ git clone git@github.com:DataDog/datadog.github.com.git
-```
-
-Then run the `release` Rake task, which should do a clean compile of the site
-and then copy all the new files over to the static repo and create a new commit.
-**WARNING!** This task will wipe out any uncommitted changes in the static repo.
-
-```
-$ bundle exec rake release
+$ rake disable_syntax
 ```
