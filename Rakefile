@@ -40,7 +40,7 @@ desc "Build and release the site to s3"
 task :release => [:clean, :enable_syntax, :compile, :deploy]
 
 task :deploy do
-  sh("cd output && s3cmd sync . s3://docs.datadoghq.com")
+  sh("cd output && s3cmd -c ~/.s3cfg.prod sync . s3://docs.datadoghq.com")
 end
 
 
