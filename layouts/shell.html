@@ -8,12 +8,12 @@ this layout provides just a header.
   <%= render "_head" %>
 
   <body>
-
     <%= render "_header" %>
 
     <%= yield %>
 
     <%= render "_javascript" %>
 
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
   </body>
 </html>
