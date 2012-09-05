@@ -1,0 +1,19 @@
+<%#
+this layout provides just a header.
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <%= render "_head" %>
+
+  <body>
+    <%= render "_header" %>
+
+    <%= yield %>
+
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+  </body>
+</html>

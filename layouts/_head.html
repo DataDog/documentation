@@ -1,0 +1,151 @@
+  <head>
+    <meta charset="utf-8">
+    <% title = @item[:title] || '' %>
+    <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
+    <style type="text/css">
+      /* FIXME */
+
+      html {
+        padding-bottom:30px;
+      }
+
+      .brand {
+        position:relative;
+        top:-5px;
+      }
+
+      .row {
+        padding-left:20px;
+      }
+
+      .sidebar {
+        min-width: 200px;
+        max-width:500px;
+        background-color:whiteSmoke;
+        border:1px solid #eee;
+        border-radius:3px;
+      }
+
+      .container {
+        float:left;
+      }
+
+      .header-buttons {
+        float:right;
+      }
+
+      /* home page styling */
+
+      .big_number {
+        font-size:25px;
+      }
+
+     .big_number a {
+        color:inherit;
+        text-decoration:underline;
+      }
+
+      /* API PAGE STYLING */
+
+      .floating-header {
+        background-color:rgba(255,255,255,0.6);
+        width:100%;
+      }
+
+      .floating-header.affix {
+        top:0px;
+      }
+
+      .floating-header.affix + .scrollable-api-docs {
+         margin-top: 120px;
+      }
+
+      .api-page .floating-header .btn-toolbar {
+        margin-bottom:0;
+      }
+
+      .api-page .language-buttons.btn-group {
+        margin-left:50px;
+        margin-bottom:0px;
+      }
+
+      .api-page h3 {
+        text-transform:uppercase;
+        margin-top:25px;
+        padding-top:5px;
+      }
+
+      .api-page h4 {
+        text-transform:uppercase;
+        padding-top:10px;
+        border-top:1px solid #efefef;
+        margin-top:20px;
+      }
+
+      .api-page h5 {
+        text-transform:uppercase;
+        color:#666;
+      }
+
+      .api-left {
+        height:100%;
+        max-width:500px;
+      }
+
+      .api-right {
+        padding-left: 10px;
+        padding-right:10px;
+        padding-bottom:10px;
+        background-color:rgba(32, 59, 117, 0.07);
+        border:1px solid rgba(32, 59, 117, 0.29);
+        border-radius:3px;
+      }
+
+      /* Only show python code blocks by default */
+      .api-page .code-block {
+        display:none;
+      }
+
+      .api-page .code-block.code-block-python {
+        visibility:visible;
+        display:block;
+      }
+
+      .arguments {
+        margin-left: 40px;
+      }
+
+      .arguments strong {
+        /* FIXME - extend bootstrap code element */
+        font-family:Monaco,Menlo,Consolas,"Courier New",monospace;
+        padding:2px 4px;
+        background-color:#F7F7F9;
+        border:1px solid #E1E1E8;
+        font-weight:normal;
+        font-size:85%;
+      }
+
+      .arguments ul {
+          list-style-type:disc;
+      }
+
+      .arguments li {
+          padding:5px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21102638-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </head>

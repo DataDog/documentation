@@ -1,0 +1,1 @@
+easy_install dogstatsd-python

@@ -2,3 +2,4 @@ output/
 tmp/
 vendor/*
 .bundle/*
+NO_SYNTAX
