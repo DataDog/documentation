@@ -1,43 +1,21 @@
 ---
-title:
+title: Get Started with Datadog
+sidebar:
+  nav:
+    - header: Getting Started Guides
+    - text: Guide to Metrics
+      href: "/guides/metrics/"
+    - text: Guide to Log Parsing
+      href: "/guides/logs/"
+    - header: References
+    - text: API
+      href: "/api/"
+    - text: Libraries
+      href: "/libraries/"
+    - text: Help
+      href: "/help/"
 ---
-
-<p class="aside">
-  Welcome to Datadog's documentation site. If you have any questions as you go,
-  pop by our <a href="irc://irc.freenode.net/datadog">IRC channel</a>.
-</p>
-
-## Collecting Custom Metrics
-
-This section will walk you through the process of instrumenting your
-application to send custom metrics to Datadog. Custom metrics will let you
-correlate the happenings of your application with the performance of your
-system.
-
-If we take a look at the graph below, we can that our web request throughput is
-dropping while the load on our database is increasing. Maybe the database is
-a bottleneck and needs investigation.
-
-<p>
-<img src="/static/images/graph.png">
-</p>
-
-There are a few ways to get started with sending metrics to DataDog.
-
-#### [DogStatsd](guides/dogstatsd/)
-
-DogStatsd is a metric aggregation server
-bundled with the Datadog Agent. With you a few lines of code you'll have
-custom metrics ready to be graphed on Datadog.
-
-#### [Log Parsing](guides/logs/)
-
-The Datadog Agent can parse application metrics
-from log files. This is a great tool to instrument legacy and
-vendor applications.
-
-
-#### [API](/api)
-
-Finally, if you have another source of metrics, you can hit our
-API directly.
+<h2 class="big_number alert alert-info">#1.  Collect <a href="/guides/metrics/">metrics.</a></h2>
+<h2 class="big_number alert alert-warning">#2. <a
+href="/guides/graphs/">Graph</a> them.</h2>
+<h2 class="big_number alert alert-success">#3.  Profit!</h2>

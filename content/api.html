@@ -1,66 +1,717 @@
 ---
-title: About the API
+title: API Reference
 ---
 
-We provide a programmatic API for exploring and interacting with Datadog. This
-API can be used for simple submission of events and metric series, but can also
-be used to build more interesting and complex tools and integrations (see, for
-example, the [Datadog CLI](/clients/#cli) or the [Datadog Chef
-handler](https://github.com/DataDog/chef-handler-datadog)).
+<%
+  # Some shortcuts for the columns.
+  left_side_div  = '<div class="span5 api-left">'
+  right_side_div = '<div class="span6 api-right">'
 
-## HTTP
-
-At its core, the Datadog API is a low-level HTTP interface that deals in JSON.
-For example, to post a comment to the stream, you'd send a request that looks
-something like this:
-
-<%= request 'POST', '/api/v1/comments' %>
-<%= request_headers 'Content-Type' => 'application/json' %>
-<%= http_body <<eos
-{
-  "handle": "matt",
-  "message": "Hello, Datadog!"
-}
-eos
+  no_args = '<em>This end point takes no JSON arguments.</em>'
+  no_response = '<em>This end point does not return JSON on successful requests.</em>'
 %>
 
-And you'd get a response back that looks something like this:
 
-<%= response_headers 201, 'Content-Type' => 'application/json' %>
-<%= http_body <<eos
-{
-  "id": 1234,
-  "handle": "matt",
-  "message": "Hello, Datadog!",
-  "url": "http://app.datadoghq.com/event/jump_to=1234",
-  "resource": "/api/v1/comments/1234"
-}
-eos
-%>
+<div class="container-fluid api-page">
 
-## Client
+  <div class="fluid-row floating-header" data-spy="affix" data-offset-top="60">
+    <h1><%= @item[:title] %> </h1>
+    <div class="btn-toolbar">
+      <div class="btn-group api-section-links">
+        <a class="btn" href="#authentication">Auth</a>
+        <a class="btn" href="#errors">Errors</a>
+        <a class="btn" href="#metrics">Metrics</a>
+        <a class="btn" href="#events">Events</a>
+        <a class="btn" href="#dashboards">Dashboards</a>
+        <a class="btn" href="#tags">Tags</a>
+        <a class="btn" href="#search">Search</a>
+        <a class="btn" href="#comments">Comments</a>
+      </div>
+      <div class="btn-group">
+        <div lang="console" class="lang-btn btn">Shell</div>
+        <div lang="python" class="active lang-btn btn">Python</div>
+        <div lang="ruby" class="lang-btn btn">Ruby</div>
+      </div>
+    </div>
+  </div>
 
-On top of that HTTP interface we've built client libraries in Python and Ruby.
-These libraries give you a higher-level programmatic interface so you can jump
-right in and start instrumenting your existing apps. In Python, posting the same
-comment as above is as simple as:
+  <div class="scrollable-api-docs">
 
-<%= pycon <<eos
->>> from dogapi import dog
->>> dog.api_key = 'your_orgs_api_key'
->>> dog.application_key = 'your_application_key'
->>> dog.comment('matt', 'Hello, Datadog!')
-1234
-eos
-%>
+    <!--
+    =====================================================================
+      OVERVIEW
+    ====================================================================
+    -->
 
-## CLI
+    <h3 id="overview">Overview</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        This section details Datadog's HTTP API. It makes it easy to get data in and
+        out of Datadog.
 
-Finally, on top of the Python library we've built command line interface, the
-`dog` command. Once dog is installed, you can post the same comment as above
-comfortabbly from your terminal:
+        The Datadog API uses resource-oriented URLs, uses status codes to indicate the
+        success or failure of requests and returns JSON from all requests. Let's dive
+        in and see how it works.
+      </div>
+      <%= right_side_div %>
+        <h5>Libraries</h5>
+        There are many client libraries that wrap the Datadog API. <a href="/libraries/">Check them out.</a>
 
-<%= console <<eos
-$ dog comment post --handle="matt" "Hello, Datadog!"
-eos
-%>
+        <h5>API Endpoint</h5>
+        <code>https://app.datadoghq.com/api/</code>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+      AUTHENTICATION
+    ====================================================================
+    -->
+    <h3 id="authentication">Authentication</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          All requests to Datadog's API must be authenticated. Requests that write data require
+          <em>reporting access</em> and require an <code>API key</code>. Requests that read data
+          require <em>full access</em> and also require an <code>application key</code>.
+        </p>
+
+        <p>You can manage your account's API and application keys <a href="https://app.datadoghq.com/account/settings#api">here</a>.</p>
+      </div>
+      <%= right_side_div %>
+        <h5>Example</h5>
+        <%= snippet_code_block "api-auth.sh" %>
+        <%= snippet_code_block "api-auth.py" %>
+        <%= snippet_code_block "api-auth.rb" %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+      Success & Errors
+    ====================================================================
+    -->
+
+    <h3 id="errors">Success and Errors</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        The Datadog API uses HTTP status codes to indicate the success or failure
+        of a request.
+        </p>
+
+        <p>
+        An error indicates that the service did not successfully handle your request. In addition to the status code, the response may contain a JSON object with an errors array containing more detailed error messages.
+        </p>
+
+        <p>
+  If the service is able to handle your request, but some issues are present (e.g. using a deprecated API or API version), the HTTP status code will indicate success and the response body will contain the expected result with the addition of a warnings array containing detailed warning messages.
+        </p>
+
+
+
+      </div>
+      <%= right_side_div %>
+        <h5>Status Codes</h5>
+        <ul>
+        <% STATUS_CODES.each do |code, value| %>
+          <li> <code><%= value %> </code></li>
+        <% end %>
+        </ul>
+        <h5>Example Error Response</h5>
+        <%= snippet_code_block "api-error.json", :static => true, :highlight => false %>
+        <h5>Example Warning Response</h5>
+        <%= snippet_code_block "api-warning.json", :static => true, :highlight => false %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+    Metrics
+    ====================================================================
+    -->
+
+    <h3 id="metrics">Metrics</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The metrics end-point allows you to post metrics data so it can
+          be graphed on Datadog's dashboards.
+        </p>
+      </div>
+    </div>
+    <h4 id="metrics-post">Post time series points</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The metrics end-point allows you to post time-series data that can be
+          graphed on Datadog's dashboards.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
+          <ul>
+            <%= argument 'metric', 'The name of the time series' %>
+            <li>
+              <strong>points [required]</strong>
+              <div>A JSON array of points. Each point is of the form:
+                  <div>
+                  <code>[[POSIX_timestamp, numeric_value], ...]</code>
+                  </div>
+              </div>
+            </li>
+            <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
+            <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
+          </ul>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST https://app.datadoghq.com/api/v1/series</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metrics-post.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+    Events
+    ====================================================================
+    -->
+
+    <h3 id="events">Events</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The events service allows you to programatically post events to the
+          stream and fetch events from the stream.
+        </p>
+      </div>
+    </div>
+    <h4 id="events-post">Post an Event</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
+        </p>
+        <h5>Arguments</h5>
+        <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
+        <ul class="arguments">
+          <%= argument("title", 'The event title.') %>
+          <%= argument("text", "The body of the event.") %>
+          <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
+          <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
+          <%= argument("related_event_id", "The id of the aggregate event.", {:default => 'None'}) %>
+          <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
+          <%= argument("alert_type", '"error", "warning", "info" or "success"', {:default => "'info'"}) %>
+          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation.', {:default => 'None'}) %>
+          <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/events</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-events-post.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-events-post.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+    <h4 id="events-get">Get an Event</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to query for event details.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/events/:event_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-events-get.py" %>
+        <%= snippet_code_block "api-events-get.sh" %>
+        <%= snippet_code_block "api-events-get.rb" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-events-get.py" %>
+        <%= snippet_result_code_block "api-events-get.sh" %>
+        <%= snippet_result_code_block "api-events-get.rb" %>
+      </div>
+    </div>
+
+    <h4 id="events-get">Query the Event Stream</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The event stream can be queried and filtered by time, priority, sources and tags.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "start", "POSIX timestamp" %>
+          <%= argument "end", "POSIX timestamp" %>
+          <%= argument "priority", "'low' or 'normal'", :default => "None" %>
+          <%= argument "sources", "A comma seperated list of sources", :default => "None" %>
+          <%= argument "tags", "A comma seperated list of tags", :default => "None" %>
+        </ul>
+
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/events</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-events-stream.py" %>
+        <%= snippet_code_block "api-events-stream.rb" %>
+        <%= snippet_code_block "api-events-stream.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-events-stream.py" %>
+        <%= snippet_result_code_block "api-events-stream.rb" %>
+        <%= snippet_result_code_block "api-events-stream.sh" %>
+      </div>
+    </div>
+
+
+
+
+    <!--
+   =====================================================================
+    Dashboards
+    ====================================================================
+    -->
+
+    <h3 id="dashboards">Dashboards</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The Dashboards end point allow you to programmatically create, update
+          delete and query dashboards.
+        </p>
+      </div>
+    </div>
+    <h4 id="dashboards-post">Create a Dashboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.") %>
+          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
+          <ul class="arguments">
+            <li>
+              <strong>title [required]</strong>
+              <div>The name of the graph.</div>
+            </li>
+            <li>
+              <strong>definition [required]</strong>
+              <div>
+                The graph definition. Example:
+                <div>
+                  <code>
+                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/dash</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-create.py" %>
+        <%= snippet_code_block "api-dashboard-create.rb" %>
+        <%= snippet_code_block "api-dashboard-create.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-create.py" %>
+        <%= snippet_result_code_block "api-dashboard-create.rb" %>
+        <%= snippet_result_code_block "api-dashboard-create.sh" %>
+      </div>
+    </div>
+
+    <!-- update a dashboard -->
+    <h4 id="dashboards-update">Update a Dashboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <li>
+            <strong>title [required]</strong>
+            <div>The name of the dashboard.</div>
+          </li>
+          <li>
+            <strong>description [required]</strong>
+            <div>A description of the dashboard's contents.</div>
+          </li>
+          <li>
+            <strong>graphs [required]</strong>
+            <div>A list of graph definitions. Graph definitions follow this form:</div>
+          </li>
+          <ul class="arguments">
+            <li>
+              <strong>title [required]</strong>
+              <div>The name of the graph.</div>
+            </li>
+            <li>
+              <strong>definition [required]</strong>
+              <div>
+                The graph definition. Read the <a href="/guides/graphs/">Graph
+                Guide</a> for more on graphs. Example:
+                <div>
+                  <code>
+                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-update.py" %>
+        <%= snippet_code_block "api-dashboard-update.rb" %>
+        <%= snippet_code_block "api-dashboard-update.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-update.py" %>
+        <%= snippet_result_code_block "api-dashboard-update.rb" %>
+        <%= snippet_result_code_block "api-dashboard-update.sh" %>
+      </div>
+    </div>
+
+    <!-- delete a dashboard -->
+    <h4 id="dashboards-delete">Delete a Dashboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Delete an existing dashboard.</p>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-delete.py" %>
+        <%= snippet_code_block "api-dashboard-delete.rb" %>
+        <%= snippet_code_block "api-dashboard-delete.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
+    <!-- get a dashboard -->
+    <h4 id="dashboards-get">Get a Dashboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Fetch an existing dashboard's definition.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-get.py" %>
+        <%= snippet_code_block "api-dashboard-get.rb" %>
+        <%= snippet_code_block "api-dashboard-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-get.py" %>
+        <%= snippet_result_code_block "api-dashboard-get.rb" %>
+        <%= snippet_result_code_block "api-dashboard-get.sh" %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+    Tags
+    ====================================================================
+    -->
+
+    <h3 id="tags">Tags</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The tag end point allows you to tag hosts with keywords meaningful to you - like <code>role:database</code>.
+          All metrics sent from a host will have its tags applied.
+        </p>
+      </div>
+    </div>
+
+    <h4 id="tags-get">Get Tags</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Return a mapping of tags to hosts for your whole infrastructure.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/tags/hosts</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-tags-get.rb" %>
+        <%= snippet_code_block "api-tags-get.py" %>
+        <%= snippet_code_block "api-tags-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-tags-get.rb" %>
+        <%= snippet_result_code_block "api-tags-get.py" %>
+        <%= snippet_result_code_block "api-tags-get.sh" %>
+      </div>
+    </div>
+
+    <h4 id="tags-get-host">Get Host Tags</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Return the list of tags that apply to a given host.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/tags/hosts/:host_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-tags-get-host.py" %>
+        <%= snippet_code_block "api-tags-get-host.rb" %>
+        <%= snippet_code_block "api-tags-get-host.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-tags-get-host.py" %>
+        <%= snippet_result_code_block "api-tags-get-host.rb" %>
+        <%= snippet_result_code_block "api-tags-get-host.sh" %>
+      </div>
+    </div>
+
+    <h4 id="tags-add">Add Tags to a Host</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to add tags to a host.
+        </p>
+         <h5>Arguments</h5>
+          <ul class="arguments">
+          <%= argument("tags", "A list of tags to apply to the host") %>
+          </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/tags/hosts/:host_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-tags-add.py" %>
+        <%= snippet_code_block "api-tags-add.sh" %>
+        <%= snippet_code_block "api-tags-add.rb" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-tags-add.py" %>
+        <%= snippet_result_code_block "api-tags-add.sh" %>
+        <%= snippet_result_code_block "api-tags-add.rb" %>
+      </div>
+    </div>
+
+    <h4 id="tags-update">Update Host Tags</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to update all tags for a given host.
+        </p>
+         <h5>Arguments</h5>
+          <ul class="arguments">
+          <%= argument("tags", "A list of tags") %>
+          </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/tags/hosts/:host_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-tags-update.py" %>
+        <%= snippet_code_block "api-tags-update.sh" %>
+        <%= snippet_code_block "api-tags-update.rb" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-tags-update.py" %>
+        <%= snippet_result_code_block "api-tags-update.sh" %>
+        <%= snippet_result_code_block "api-tags-update.rb" %>
+      </div>
+    </div>
+
+    <h4 id="tags-remove">Remove Host Tags</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to update all tags for a given host.
+        </p>
+         <h5>Arguments</h5>
+          <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/tags/hosts/:host_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-tags-remove.py" %>
+        <%= snippet_code_block "api-tags-remove.sh" %>
+        <%= snippet_code_block "api-tags-remove.rb" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+    Search
+    ====================================================================
+    -->
+
+    <h3 id="search">Search</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to search for entities in Datadog. The
+          currently searchable entities are:
+        </p>
+        <ul>
+          <li><code>hosts  </code></li>
+          <li><code>metrics</code></li>
+        </ul>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("q", "The query string") %>
+        </ul>
+        <h5>Query Language</h5>
+        <p>
+          Search queries allow for limited faceting. Available facets are:
+        </p>
+        <ul>
+          <li><code>hosts  </code></li>
+          <li><code>metrics</code></li>
+        </ul>
+        <p>
+          Faceting your search limits your results to only matches of the specified
+          type. Un-faceted queries return results for all possible types.
+        </p>
+        <p>
+          Un-faceted queries are of the form:
+        </p>
+        <code>query_string</code>
+        <p>
+          Faceted queries are of the form:
+        </p>
+        <code>facet:query_string</code>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/search</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-search.py" %>
+        <%= snippet_code_block "api-search.rb" %>
+        <%= snippet_code_block "api-search.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-search.py" %>
+        <%= snippet_result_code_block "api-search.rb" %>
+        <%= snippet_result_code_block "api-search.sh" %>
+      </div>
+    </div>
+
+    <!--
+   =====================================================================
+    Comments
+    ====================================================================
+    -->
+
+    <h3 id="comments">Comments</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        Comments are how discussion happens on Datadog. You can create, edit, delete
+        and reply to comments.
+        </p>
+      </div>
+    </div>
+
+    <!-- Create comments -->
+    <h4 id="comments-create">Create a comment</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Comments are essentially special forms of events that
+          appear in the stream. They can start a new discussion thread or
+          optionally, reply in another thread.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'message', "The comment text." %>
+          <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
+          <%= argument 'related_event_id', "The id of another comment or event to
+          reply to", :default => 'None' %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/comments</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-comment-create.py" %>
+        <%= snippet_code_block "api-comment-create.rb" %>
+        <%= snippet_code_block "api-comment-create.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-comment-create.py" %>
+        <%= snippet_result_code_block "api-comment-create.rb" %>
+        <%= snippet_result_code_block "api-comment-create.sh" %>
+      </div>
+    </div>
+
+    <!-- Edit comments -->
+    <h4 id="comments-edit">Edit a Comment</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'message', "The comment text.", :default => 'original message' %>
+          <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT api/v1/comments/:comment_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-comment-edit.py" %>
+        <%= snippet_code_block "api-comment-edit.rb" %>
+        <%= snippet_code_block "api-comment-edit.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-comment-create.py" %>
+        <%= snippet_result_code_block "api-comment-edit.rb" %>
+        <%= snippet_result_code_block "api-comment-edit.sh" %>
+      </div>
+    </div>
+
+    <!-- Edit comments -->
+    <h4 id="comments-delete">Delete a Comment</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE api/v1/comments/:comment_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-comment-delete.py" %>
+        <%= snippet_code_block "api-comment-delete.rb" %>
+        <%= snippet_code_block "api-comment-delete.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(DD_docs.apiPage);
+  </script>
+<% end %>

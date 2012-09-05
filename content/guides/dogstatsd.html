@@ -8,7 +8,7 @@ title: Getting Started with DogStatsd
   <a href="irc://irc.freenode.net/datadog">IRC channel</a>.
 </p>
 
-The easiest way to get your custom metrics into Datadog is to send them to DogStatsd, 
+The easiest way to get your custom metrics into Datadog is to send them to DogStatsd,
 a metrics aggregation server bundled with the Datadog agent (in versions 3.0
 and above).
 DogStatsd implements the
@@ -53,7 +53,7 @@ while data is being submitted for that metric.
 
 ### Why UDP?
 
-Like Statsd, DogStatsd receives points over UDP. UDP is good fit for application 
+Like Statsd, DogStatsd receives points over UDP. UDP is good fit for application
 instrumentation because it is a fire and
 forget protocol. This means your application won't stop its actual work to wait for a
 response from the metrics server, which is very important if the metrics
@@ -206,13 +206,13 @@ Here are some example datagrams and comments explaining them:
 
     # Increment the page.views counter.
     page.views:1|c
-    
+
     # Record the fuel tank is half-empty
     fuel.level:0.5|g
-    
+
     # Sample a the song length histogram half of the time.
     song.length:240|h|@0.5
-    
+
     # Increment the users online counter tagged by country of origin.
     users.online:1|c|#country:china
 

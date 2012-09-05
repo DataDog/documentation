@@ -1,5 +1,12 @@
 ---
 title: Getting Started with Log Parsing
+sidebar:
+  nav:
+    - header: Guide to Log Parsing
+    - text: Parsing Metrics
+      href: "#metrics"
+    - text: Parsing Events
+      href: "#events"
 ---
 
 Log files contain tons of valuable application and business data.
@@ -7,7 +14,7 @@ Unfortunately, this value is oftentimes never realized because log files go
 ignored. The Datadog agent can help remedy this by parsing metrics and events from
 logs, so the data within can ge graphed in real-time, all the time.
 
-## Parsing Metrics
+<h2 id="metrics">Parsing Metrics</h2>
 
 The Datadog agent can read metrics directly from your log files:
 
@@ -131,14 +138,14 @@ eof
 
 And you can test your parsing logic by calling python /path/to/parsers.py.
 
-## Parsing Events
+<h2 id="events">Parsing Events</h2>
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
 `dict` from your custom parsing function, Datadog will treat it as an event instead of a metric.
 
 Here are the event fields (bold means the field is required):
 
-<table class="api_table" border="0" cellspacing="0" cellpadding="0">
+<table class="table">
 <thead>
 <tr>
 <th>Field</th>
@@ -148,13 +155,13 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<td><strong>msg_title</strong></td>
+<td>msg_title</td>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>
 </tr>
 <tr>
-<td>timestamp</td>
+<th>timestamp</th>
 <td>integer</td>
 <td>Unix epoch timestamp. If omitted, will default to the time that
 the agent parsed the event.</td>
@@ -190,7 +197,7 @@ of the aggregation key</td>
 <td>Name of the host this event originated from. The event will
 automatically get tagged with any tags you've given this host using
 the <a href="https://app.datadoghq.com/infrastructure#tags">tagging
-page</a> or the <a href="http://api.datadoghq.com/tags/">tagging
+page</a> or the <a href="/api/#tags">tagging
 api</a>. The host value is used as part of the aggregation
 key.</td>
 </tr>

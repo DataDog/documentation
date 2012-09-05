@@ -1,52 +1,55 @@
-<!DOCTYPE HTML>
+<%#
+this layout provides a sidebar and main column.
+%>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <% title = @item[:title] || '' %>
-    <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
-    <link rel="stylesheet" type="text/css" href="/static/main.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/static/docs.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
-    <meta name="generator" content="nanoc 3.2.3">
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-21102638-4']);
-      _gaq.push(['_trackPageview']);
-      
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script> 
-  </head>
+
+  <%= render "_head" %>
+
   <body>
-    <div id="head">
-      <h1><a href="/" id="logo" alt="Datadog Docs"></a></h1>
+
+    <%= render "_header" %>
+
+    <!-- PAGE TITLE -->
+    <div class="container">
+      <div class="row">
+        <div class="span8 offset3">
+          <h1><%= @item[:title] %> </h1>
+        </div>
+      </div>
     </div>
-    <div id="main">
-      <h1><%= title %></h1>
-      <%= yield %>
+
+    <div class="container">
+
+      <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="span3">
+        <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+          <ul class="nav nav-tabs nav-stacked affix sidebar">
+          <% @item[:sidebar][:nav].each do |i| %>
+            <% if i[:header] %>
+              <li class="nav-header"><%= i[:header] %></li>
+            <% else %>
+              <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
+            <% end %>
+          <% end %>
+          </ul>
+        <% end %>
+        &nbsp;
+        </div>
+
+        <!-- MAIN -->
+        <div class="span8 main">
+            <%= yield %>
+        </div>
+      </div>
     </div>
-    <div id="sidebar">
-      <h2>Guides</h2>
-      <ul>
-        <li><a href="/guides/dogstatsd/">Metrics with DogStatsd</a></li>
-        <li><a href="/guides/logs/">Metrics with Log Parsing</a></li>
-      </ul>
-      <h2>API</h2>
-      <ul>
-        <li><a href="/api/">Overview</a></li>
-        <li><a href="/authentication/">Authentication</a></li>
-        <li><a href="/errors/">Errors and Warnings</a></li>
-        <li><a href="/comments/">Comments</a></li>
-        <li><a href="/dashboards/">Dashboards</a></li>
-        <li><a href="/events/">Events</a></li>
-        <li><a href="/metrics/">Metrics</a></li>
-        <li><a href="/search/">Search</a></li>
-        <li><a href="/tags/">Tags</a></li>
-        <li><a href="/clients/">Libraries</a></li>
-      </ul>
-    </div>
+
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+
   </body>
 </html>

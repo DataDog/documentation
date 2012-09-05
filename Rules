@@ -32,10 +32,24 @@ compile '*' do
   else
     filter :erb
     filter :kramdown
-    filter :colorize_syntax,
-      :colorizers => {:javascript => :pygmentize, :pycon => :pygmentize,
-      :console => :pygmentize, :python => :pygmentize}
-    layout 'default'
+    if not File.exists? 'NO_SYNTAX'
+      # Run `touch NO_SYNTAX` to disable syntax highlighting, since it's very
+      # slow. Remove it to re-enable.
+      filter :colorize_syntax, :colorizers => {
+              :javascript => :pygmentize,
+              :console => :pygmentize,
+              :python => :pygmentize,
+              :ruby => :pygmentize,
+              :pycon => :pygmentize,
+              :json => :pygmentize
+          }
+    end
+
+    if @item.identifier == '/api/'
+      layout 'shell'
+    else
+      layout 'default'
+    end
   end
 end
 
