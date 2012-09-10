@@ -12,27 +12,31 @@ sidebar:
     - header: Community Libraries
     - text: Java
       href: #community-java
+    - text: Node.js
+      href: #community-node
 ---
 
 There are many libraries available to help you interact with the Datadog API.
 
-<h3 class="python">Python</h3>
+<h4 id="python">Python</h4>
 <ul>
   <li><a href="https://github.com/DataDog/dogapi">DogApi</a> - A Python Datadog API wrapper.</a></li>
   <li><a href="https://github.com/DataDog/dogstatsd-python">dogstatsd-python</a> - A Python Datadog Statsd client.</li>
 </ul>
 
-<h3 class="ruby">Ruby</h3>
+<h4 id="ruby">Ruby</h4>
 <ul>
   <li><a href="https://github.com/DataDog/dogapi-rb">DogApi</a> - A Ruby Datadog API wrapper.</a></li>
   <li><a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby</a> - A Ruby Datadog Statsd client.</li>
 </ul>
 
-<h3 class="php">PHP</h3>
+<h4 id="php">PHP</h4>
 <ul>
   <li><a href="https://github.com/DataDog/php-datadogstatsd">php-datadogstatsd</a> - A
   PHP Statsd client.</li>
 </ul>
+
+<br/>
 
 <h3 class="community">Community Libraries</h3>
 
@@ -40,13 +44,25 @@ Some great folks have written their own libraries to help interact with
 Datadog. Check them out:
 
 <ul>
-  <li>
-    <a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a> -
-    a backend to codahale's <a
-    href="https://github.com/codahale/metrics">metrics</a> library written by
-    <a href="https://github.com/vistarmedia">Vistar Media</a>.
-  </li>
+  <li id="community-java">Java</li>
+  <ul>
+    <li>
+      <a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a> -
+      a backend to codahale's <a
+      href="https://github.com/codahale/metrics">metrics</a> library written by
+      <a href="https://github.com/vistarmedia">Vistar Media</a>.
+    </li>
+  </ul>
+  <li id="community-node">Node.js</li>
+  <ul>
+    <li>
+      <a href="https://github.com/joybro/node-dogstatsd">node-dogstatsd</a>
+      is a Node.js client DogStatsd client, contributed by <a
+      href="https://github.com/joybro">Young Han Lee</a>.
+    </li>
+  </ul>
 </ul>
+<br />
 
 <p class="alert alert-warning">
 If you've written a Datadog library, write us at <a
