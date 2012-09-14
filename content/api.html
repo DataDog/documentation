@@ -114,7 +114,7 @@ title: API Reference
       <%= right_side_div %>
         <h5>Status Codes</h5>
         <ul>
-        <% STATUS_CODES.each do |code, value| %>
+        <% STATUS_CODES.values.sort.each do |value| %>
           <li> <code><%= value %> </code></li>
         <% end %>
         </ul>
