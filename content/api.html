@@ -442,6 +442,10 @@ title: API Reference
         <p>
           The tag end point allows you to tag hosts with keywords meaningful to you - like <code>role:database</code>.
           All metrics sent from a host will have its tags applied.
+
+          When fetching and applying tags to a particular host, you can refer
+          to hosts by name (<code>yourhost.example.com</code>) or id
+          (<code>12345</code>).
         </p>
       </div>
     </div>
@@ -480,7 +484,7 @@ title: API Reference
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>GET /api/v1/tags/hosts/:host_id</code>
+        <code>GET /api/v1/tags/hosts/:host_id_or_host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-get-host.py" %>
         <%= snippet_code_block "api-tags-get-host.rb" %>
@@ -505,7 +509,7 @@ title: API Reference
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST /api/v1/tags/hosts/:host_id</code>
+        <code>POST /api/v1/tags/hosts/:host_id_or_host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-add.py" %>
         <%= snippet_code_block "api-tags-add.sh" %>
@@ -530,7 +534,7 @@ title: API Reference
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>PUT /api/v1/tags/hosts/:host_id</code>
+        <code>PUT /api/v1/tags/hosts/:host_id_or_host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-update.py" %>
         <%= snippet_code_block "api-tags-update.sh" %>
@@ -553,7 +557,7 @@ title: API Reference
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>DELETE /api/v1/tags/hosts/:host_id</code>
+        <code>DELETE /api/v1/tags/hosts/:host_id_or_host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-remove.py" %>
         <%= snippet_code_block "api-tags-remove.sh" %>
