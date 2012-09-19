@@ -13,6 +13,8 @@ sidebar:
       href: "#gauges"
     - text: Histograms
       href: "#histograms"
+    - text: Sets
+      href: "#sets"
     - text: Tags
       href: "#tags"
     - text: Sample Rates
@@ -275,6 +277,43 @@ Histograms aren't just for measuring times. They can be used to measure the
 distribution of any type of value, like the size of uploaded files or classroom
 test scores.
 </p>
+
+
+<!--
+======================================================
+SETS
+======================================================
+-->
+
+
+<h3 id="sets">Sets</h3>
+
+Sets are used to count the number of unique elements in a group. If you want to
+track the number of unique visitor to your site, sets are a great way to do
+that.
+
+<%= code_tabs("sets") %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="sets-python">
+<%= python <<EOF
+def login(self, user_id):
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="sets-ruby">
+<%= ruby <<EOF
+def login(self, user_id)
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
+end
+EOF
+%>
+  </div>
+</div>
+
 
 <!--
 ======================================================
