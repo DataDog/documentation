@@ -115,6 +115,17 @@ eof
 Histograms are an extension to Statsd, so you'll need to use a client that
 supports them.
 
+### Sets
+
+Sets are used to count the number of unique elements in a group. If you want to
+track the number of unique visitor to your site, sets are a great way to do
+that.
+
+<%= python <<eof
+dog.set('users.uniques', user.id)
+eof
+%>
+
 ### Timers
 
 Statsd only supports histograms for timing, not generic values (like the size
@@ -190,7 +201,8 @@ Here's  breakdown of the fields:
 
 - `metric.name` should be a String with no colons, bars or @ characters.
 - `value` should be a number
-- type should be `c` for Counter, `g` for Gauge, `h` for Histogram or `ms` for Timer.
+- type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
+  Timer or `s` for Set.
 - sample rate is optional and should be a float between 0 and 1 inclusive.
 - tags are optional, and should be a comma seperated list of tags. colons are
   used for key value tags.
@@ -205,6 +217,9 @@ Here are some example datagrams and comments explaining them:
 
     # Sample a the song length histogram half of the time.
     song.length:240|h|@0.5
+
+    # Track a unique visitor to the site.
+    users.uniques:1234|s
 
     # Increment the users online counter tagged by country of origin.
     users.online:1|c|#country:china
