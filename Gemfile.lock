@@ -5,7 +5,7 @@ GEM
       rack (>= 1.0.0)
     builder (3.0.0)
     cri (2.1.0)
-    dogapi (1.4.0)
+    dogapi (1.4.2)
       json (>= 1.5.1)
     json (1.7.1)
     kramdown (0.13.4)
@@ -29,7 +29,7 @@ PLATFORMS
 DEPENDENCIES
   adsf
   builder
-  dogapi
+  dogapi (= 1.4.2)
   kramdown
   mime-types
   nanoc

@@ -409,6 +409,28 @@ title: API Reference
     </div>
 
     <!-- get a dashboard -->
+    <h4 id="dashboards-get-all">Get all Dashboards</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Fetch all of your dashboards' definitions.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-get-all.sh" %>
+        <%= snippet_code_block "api-dashboard-get-all.rb" %>
+        <%= snippet_code_block "api-dashboard-get-all.py" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-get-all.sh" %>
+        <%= snippet_result_code_block "api-dashboard-get-all.rb" %>
+        <%= snippet_result_code_block "api-dashboard-get-all.py" %>
+      </div>
+    </div>
+
+    <!-- get a dashboard -->
     <h4 id="dashboards-get">Get a Dashboard</h4>
     <div class="row-fluid">
       <%= left_side_div %>
