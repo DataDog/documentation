@@ -14,7 +14,6 @@ try:
 except requests.exceptions.Timeout as e:
     # If there's a timeout
     self.timeout_event(url, timeout, aggregation_key)
-    return
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)

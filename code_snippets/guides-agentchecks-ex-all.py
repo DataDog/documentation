@@ -30,7 +30,6 @@ class HTTPCheck(AgentCheck):
 
         if r.status_code != 200:
             self.status_code_event(url, r, aggregation_key)
-            return
 
         timing = end_time - start_time
         self.gauge('http.reponse_time', timing, tags=['http_check'])
@@ -52,3 +51,23 @@ class HTTPCheck(AgentCheck):
             'msg_text': '%s returned a status of %s' % (url, r.status_code),
             'aggregation_key': aggregation_key
         })
+
+if __name__ == '__main__':
+    config = {
+        'init_config': {
+            'default_timeout': 5
+        },
+        'instances': [
+            {'url': 'http://google.com'},
+            {'url': 'http://httpbin.org/delay/10', 'timeout': 8},
+            {'url': 'http://httpbin.org/status/400'}
+        ]
+    }
+
+    check = HTTPCheck('http', config['init_config'], {})
+    for instance in config['instances']:
+        print "\nRunning the check against url: %s" % (instance['url'])
+        check.check(instance)
+        if check.has_events():
+            print 'Events: %s' % (check.get_events())
+        print 'Metrics: %s' % (check.get_metrics())
