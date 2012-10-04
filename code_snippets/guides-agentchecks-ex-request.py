@@ -1,6 +1,6 @@
 # Load values from the instance config
 url = instance['url']
-default_timeout = self.config.get('default_timeout', 5)
+default_timeout = self.init_config.get('default_timeout', 5)
 timeout = float(instance.get('timeout', default_time))
 
 # Use a hash of the URL as an aggregation key

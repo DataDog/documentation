@@ -243,9 +243,10 @@ be places into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
 Once the check is in `checks.d`, you can test it by running it as a python
-script. From your Agent root, run:
+script. **Make sure to change the conf.d path in the test method**. From your
+Agent root, run:
 
-    PYTHONPATH=. python checks.d/http.py
+    python checks.d/http.py
 
 You'll see what metrics and events are being generated for each instance.
 

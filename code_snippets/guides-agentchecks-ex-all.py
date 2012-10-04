@@ -12,7 +12,7 @@ class HTTPCheck(AgentCheck):
 
         # Load values from the instance config
         url = instance['url']
-        default_timeout = config.get('default_timeout', 5)
+        default_timeout = self.init_config.get('default_timeout', 5)
         timeout = float(instance.get('timeout', default_timeout))
 
         # Use a hash of the URL as an aggregation key
@@ -53,19 +53,8 @@ class HTTPCheck(AgentCheck):
         })
 
 if __name__ == '__main__':
-    config = {
-        'init_config': {
-            'default_timeout': 5
-        },
-        'instances': [
-            {'url': 'http://google.com'},
-            {'url': 'http://httpbin.org/delay/10', 'timeout': 8},
-            {'url': 'http://httpbin.org/status/400'}
-        ]
-    }
-
-    check = HTTPCheck('http', config['init_config'], {})
-    for instance in config['instances']:
+    check, instances = HTTPCheck.from_yaml('/path/to/conf.d/http.yaml')
+    for instance in instances:
         print "\nRunning the check against url: %s" % (instance['url'])
         check.check(instance)
         if check.has_events():
