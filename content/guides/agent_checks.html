@@ -156,6 +156,39 @@ following will happen:
   - If the response code != 200, an event will be submitted with the URL and
   the response code.
 
+#### Directory structure
+
+Before starting your first check it is worth understanding the checks directory
+structure. There are two places that you will need to add files for your check.
+The first is the `checks.d` folder, which lives in your Agent root.
+
+For all Linux systems, this means you will find it at:
+
+    /usr/share/datadog/checks.d/
+
+For Windows Server >= 2008 you'll find it at:
+
+    C:\Program Files (x86)\Datadog\Agent\checks.d\
+
+    OR
+
+    C:\Program Files\Datadog\Agent\checks.d\
+
+The other folder that you need to care about is `conf.d` which lives in the
+agent configuration root.
+
+For Linux, you'll find it at:
+
+    /etc/dd-agent/conf.d/
+
+For Windows, you'll find it at:
+
+    C:\ProgramData\Datadog\conf.d\
+
+    OR
+
+    C:\Documents and Settings\All Users\Datadog\conf.d\
+
 #### Configuration
 
 First we will want to define how our configuration should look, so that we know
