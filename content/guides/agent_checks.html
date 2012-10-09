@@ -38,7 +38,9 @@ what's happening across your infrastructure. It supports a wide variety of integ
 
 In this guide, we will first show you what is available in the AgentCheck
 interface, then we'll walk step-by-step through the writing of a simple check
-that will the status of configured HTTP endpoints.
+that will the status of configured HTTP endpoints. Any custom checks will be
+included in the main check run loop, meaning they will run every check interval,
+which defaults to 15 seconds.
 
 <!--
 ======================================================
