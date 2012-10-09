@@ -11,8 +11,12 @@ sidebar:
       href: "#interface"
     - text: Configuration
       href: "#config"
+    - text: Directory Structure
+      href: "#directory"
     - text: Your First Check
       href: "#first"
+    - text: An HTTP Check
+      href: "#http"
 ---
 
 <div class="alert alert-block">
@@ -141,25 +145,11 @@ every check will support multiple instances out of the box.
 
 <!--
 ======================================================
-FIRST CHECK
+DIRECTORY STRUCTURE
 ======================================================
 -->
 
-<h3 id="first">Your First Check</h3>
-
-Now we will guide you through the process of writing a basic check that will
-check the status of an HTTP endpoint. On each run of the check, the a GET
-request will be made to the HTTP endpoint. Based on the response, one of the
-following will happen:
-
-  - If the response is successful (response is 200, no timeout) the response
-  time will be submitted as a metric.
-  - If the response times out, an event will be submitted with the URL and
-  timeout.
-  - If the response code != 200, an event will be submitted with the URL and
-  the response code.
-
-#### Directory structure
+<h3 id="directory">Directory Structure</h3>
 
 Before starting your first check it is worth understanding the checks directory
 structure. There are two places that you will need to add files for your check.
@@ -191,6 +181,49 @@ For Windows, you'll find it at:
     OR
 
     C:\Documents and Settings\All Users\Datadog\conf.d\
+
+<!--
+======================================================
+FIRST CHECK
+======================================================
+-->
+
+<h3 id="first">Your First Check</h3>
+
+To start off simple, we'll write a check that does nothing more than send a
+value of 1 for the metric `hello.world`. The configuration file will be very
+simple, including no real information. This will go into `conf.d/hello.yaml`:
+
+<%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
+
+The check itself will inherit from `AgentCheck` and send a gauge of `1` for
+`hello.world` on each call. This will go in `checks.d/hello.py`:
+
+<%= snippet_code_block("guides-agentchecks-hello.py") %>
+
+As you can see, the check interface is really simple and easy to get started
+with. In the next section we'll write a more useful check that will ping HTTP
+services and return interesting data.
+
+<!--
+======================================================
+HTTP CHECK
+======================================================
+-->
+
+<h3 id="http">An HTTP Check</h3>
+
+Now we will guide you through the process of writing a basic check that will
+check the status of an HTTP endpoint. On each run of the check, the a GET
+request will be made to the HTTP endpoint. Based on the response, one of the
+following will happen:
+
+  - If the response is successful (response is 200, no timeout) the response
+  time will be submitted as a metric.
+  - If the response times out, an event will be submitted with the URL and
+  timeout.
+  - If the response code != 200, an event will be submitted with the URL and
+  the response code.
 
 #### Configuration
 
