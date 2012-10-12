@@ -190,6 +190,12 @@ FIRST CHECK
 
 <h3 id="first">Your First Check</h3>
 
+<div class="alert alert-block">
+The names of the configuration and check files must match. If you check
+is called <code>mycheck.py</code> your configuration file <em>must</em> be
+named <code>mycheck.yaml</code>.
+</div>
+
 To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
 simple, including no real information. This will go into `conf.d/hello.yaml`:
