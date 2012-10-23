@@ -248,7 +248,7 @@ results = db.query()
 duration = Time.now - start_time
 statsd.histogram('database.query.time', duration)
 
-# We can also use the `timed` helper as a short-hand for timing blocks
+# We can also use the `time` helper as a short-hand for timing blocks
 # of code.
 statsd.time('database.query.time') do
   return db.query()
