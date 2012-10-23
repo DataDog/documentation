@@ -1,0 +1,150 @@
+---
+title: Configure Services Checks
+sidebar:
+  nav:
+    - header: Guide to Agent Checks
+    - text: Overview
+      href: "#overview"
+    - text: Setup
+      href: "#setup"
+    - text: Configuration
+      href: "#config"
+    - text: HTTP Check Configuration
+      href: "#http_config"
+    - text: TCP Check Configuration
+      href: "#tcp_config"
+---
+
+<div class="alert alert-block">
+This guide requires an agent version >= 3.2.4. Older versions of the agent do
+not include the Services Checks.
+</div>
+
+
+<!--
+======================================================
+OVERVIEW
+======================================================
+-->
+
+<h3 id="overview">Overview</h3>
+
+In this guide, we will show you how you can setup some services checks
+to monitor your services and to be notified when one goes down.
+
+Services checks run in the agent and are called in the main loop but will be processed in separate threads so they don't block the agent.
+
+A service can have two status:
+
+- UP
+- DOWN
+
+Services checks will post an event on your stream when:
+
+- The status of the service has changed.
+- The first status of a service after the restart of the agent is DOWN.
+
+
+<!--
+======================================================
+SETUP
+======================================================
+-->
+
+<h3 id="setup">Setup</h3>
+
+If you have not already setup the Agent, then you should check out the agent
+setup instructions available at: <a href="http://app.datadoghq.com/account/settings#agent">http://app.datadoghq.com/account/settings#agent</a>.
+This page will guide you through installing the agent for your particular OS.
+
+If you run into any issues during the setup, don't hesistate to pop by our
+<a href="irc://irc.freenode.net/datadog">chat room</a> where we'll be happy to
+answer any questions you might have.
+
+<!--
+======================================================
+CONFIGURATION
+======================================================
+-->
+
+<h3 id="config">Configuration</h3>
+
+There are currently two types of services checks:
+
+- HTTP(S) checks
+- TCP checks
+
+As services checks are also Agent checks, they are configured <a href="http://docs.datadoghq.com/guides/agent_checks/#config">the same way</a>.
+
+Each check will have a configuration file that will be placed in the `conf.d`
+directory. Configuration is written using [YAML](http://www.yaml.org/). 
+
+HTTP(S) Check configuration file must be named http_check.yaml
+TCP Check configuration file must be named tcp_check.yaml.
+
+<!--
+======================================================
+HTTP CHECK CONFIGURATION
+======================================================
+-->
+
+<h3 id="http_config">HTTP Check Configuration</h3>
+
+
+
+The HTTP(S) Check configuration file has the following structure:
+
+<%= snippet_code_block("guides-http_check-config.yaml") %>
+
+#### init_config
+
+The *notify* parameter in the *init_config* section allows you to 
+chose which Datadog users will be notified when your service goes down or when your service recovers.
+If you have installed the pagerduty integration or the hipchat integration, you can also notify them.
+This parameter is optional.
+
+#### instances
+
+The *instances* section is a list of instances that this check will be run
+against with the needed parameters.
+
+List of parameters:
+
+- name <b>(mandatory)</b>: A name that must be unique accross all your http checks
+- url <b>(mandatory)</b>: The url you want to monitor
+- username and password (optional): If you want to test pages protected by a basic authentication.
+- timeout (optional): The default value is 10 secs. A timeout to the connection. Service will be supposed down if the connection takes more time than this value
+- notify (optional): To override the global setting set in the *init_config* section.
+
+<!--
+======================================================
+TCP CHECK CONFIGURATION
+======================================================
+-->
+
+<h3 id="tcp_config">TCP Check Configuration</h3>
+
+The TCP Check configuration file has the following structure:
+
+<%= snippet_code_block("guides-tcp_check-config.yaml") %>
+
+#### init_config
+
+The *notify* parameter in the *init_config* section allows you to 
+chose which Datadog users will be notified when your service goes down or when your service recovers.
+If you have installed the pagerduty integration or the hipchat integration, you can also notify them.
+This parameter is optional.
+
+#### instances
+
+The *instances* section is a list of instances that this check will be run
+against with the needed parameters.
+
+List of parameters:
+
+- name <b>(mandatory)</b>: A name that must be unique accross all your tcp checks
+- host <b>(mandatory)</b>: The hostname or IP (v4 or v6) address you want to monitor
+- port <b>(mandatory)</b>: The port on which the check will try to connect to
+- timeout (optional): The default value is 10 secs. A timeout to the connection. Service will be supposed down if the connection takes more time than this value
+- notify (optional): To override the global setting set in the *init_config* section.
+
