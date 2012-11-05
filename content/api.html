@@ -26,6 +26,7 @@ title: API Reference
         <a class="btn" href="#tags">Tags</a>
         <a class="btn" href="#search">Search</a>
         <a class="btn" href="#comments">Comments</a>
+        <a class="btn" href="#alerts">Alerts</a>
       </div>
       <div class="btn-group">
         <div lang="console" class="lang-btn btn">Shell</div>
@@ -734,6 +735,182 @@ title: API Reference
         <%= no_response %>
       </div>
     </div>
+
+    <!--
+    =====================================================================
+    Alerts
+    ====================================================================
+    -->
+
+    <h3 id="alerts">Alerts</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        Alerts allow you to watch a particular metric query and receive a
+        notification when the value either exceeds or falls below the
+        pre-defined threshold.
+        </p>
+      </div>
+    </div>
+
+    <!-- Create alerts -->
+    <h4 id="alerts-create">Create an alert</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'query', "The metric query to alert on." %>
+          <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
+          <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
+          <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/alert</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-create.py" %>
+        <%#= snippet_code_block "api-alert-create.rb" %>
+        <%= snippet_code_block "api-alert-create.sh" %>
+        <h5>Example Response</h5>
+        <%#= snippet_result_code_block "api-alert-create.py" %>
+        <%#= snippet_result_code_block "api-alert-create.rb" %>
+        <%= snippet_result_code_block "api-alert-create.sh" %>
+      </div>
+    </div>
+
+    <!-- Show alerts -->
+    <h4 id="alerts-create">Get an alert's details</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/alert/:alert_id</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-show.py" %>
+        <%#= snippet_code_block "api-alert-show.rb" %>
+        <%= snippet_code_block "api-alert-show.sh" %>
+        <h5>Example Response</h5>
+        <%#= snippet_result_code_block "api-alert-show.py" %>
+        <%#= snippet_result_code_block "api-alert-show.rb" %>
+        <%= snippet_result_code_block "api-alert-show.sh" %>
+      </div>
+    </div>
+
+    <!-- Edit alerts -->
+    <h4 id="alerts-create">Edit an alert</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'query', "The metric query to alert on." %>
+          <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
+          <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
+          <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT api/v1/alert/:alert_id</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-edit.py" %>
+        <%#= snippet_code_block "api-alert-edit.rb" %>
+        <%= snippet_code_block "api-alert-edit.sh" %>
+        <h5>Example Response</h5>
+        <%#= snippet_result_code_block "api-alert-edit.py" %>
+        <%#= snippet_result_code_block "api-alert-edit.rb" %>
+        <%= snippet_result_code_block "api-alert-edit.sh" %>
+      </div>
+    </div>
+
+    <!-- Delete alerts -->
+    <h4 id="alerts-create">Delete an alert</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE api/v1/alert/:alert_id</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-delete.py" %>
+        <%#= snippet_code_block "api-alert-delete.rb" %>
+        <%= snippet_code_block "api-alert-delete.sh" %>
+        <h5>Example Response</h5>
+        <%#= snippet_result_code_block "api-alert-delete.py" %>
+        <%#= snippet_result_code_block "api-alert-delete.rb" %>
+        <%= snippet_result_code_block "api-alert-delete.sh" %>
+      </div>
+    </div>
+
+    <!-- Show all alerts -->
+    <h4 id="alerts-create">Get all alert details</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/alert</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-show-all.py" %>
+        <%#= snippet_code_block "api-alert-show-all.rb" %>
+        <%= snippet_code_block "api-alert-show-all.sh" %>
+        <h5>Example Response</h5>
+        <%#= snippet_result_code_block "api-alert-show-all.py" %>
+        <%#= snippet_result_code_block "api-alert-show-all.rb" %>
+        <%= snippet_result_code_block "api-alert-show-all.sh" %>
+      </div>
+    </div>
+
+    <!-- Mute all alerts -->
+    <h4 id="alerts-create">Mute all alerting</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        Muting will prevent all alerts from notifying through email and posts
+        to the event stream. State changes will only be visible by checking
+        the alert page.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/mute_alerts</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-mute.py" %>
+        <%#= snippet_code_block "api-alert-mute.rb" %>
+        <%= snippet_code_block "api-alert-mute.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
+    <!-- Unmute all alerts -->
+    <h4 id="alerts-create">Unmute all alerting</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/unmute_alerts</code>
+        <h5>Example Request</h5>
+        <%#= snippet_code_block "api-alert-unmute.py" %>
+        <%#= snippet_code_block "api-alert-unmute.rb" %>
+        <%= snippet_code_block "api-alert-unmute.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
   </div>
 
 </div>
