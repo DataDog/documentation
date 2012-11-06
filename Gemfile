@@ -9,4 +9,4 @@ gem 'systemu'
 gem 'w3c_validators'
 gem 'rake'
 gem 'builder'
-gem 'dogapi', "1.4.2"
+gem 'dogapi', '1.5.0'
