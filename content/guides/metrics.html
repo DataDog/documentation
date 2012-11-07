@@ -341,11 +341,11 @@ performance of two algorithms in the real world, we could sample one metric
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
 <%= python <<EOF
-statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
 
-statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
     # Do fancy things here ...
 EOF
