@@ -287,7 +287,7 @@ Once the check is in `checks.d`, you can test it by running it as a python
 script. **Make sure to change the conf.d path in the test method**. From your
 Agent root, run:
 
-    python checks.d/http.py
+    PYTHONPATH=. python checks.d/http.py
 
 You'll see what metrics and events are being generated for each instance.
 
