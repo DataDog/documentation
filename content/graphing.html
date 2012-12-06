@@ -1,0 +1,228 @@
+---
+title: Graphing Primer
+sidebar:
+  nav:
+    - header: Sections
+    - text: Grammar
+      href: #grammar
+    - text: Arithmetic & Functions
+      href: #functions
+---
+
+Here is a short primer to our graphing language.
+
+# Grammar # {#grammar}
+
+The graph definition language is well-formed JSON and is structured in 2 parts:
+
+1. Events
+2. Time Series, a.k.a. Series
+
+```json
+{
+  "requests": [
+    {
+      "q": "system.load.1{cassandra} by {host}"
+    }
+  ],
+  "events": [
+    {
+      "q": "tags:cassandra"
+    }
+  ]
+}
+```
+
+In other words at the highest level the JSON structure is a dictionary with 2 entries:
+1. "events"
+2. "requests"
+
+<h5>Scope</h5>
+
+A scope lets you define what a time series or an event applies to. It can be a host, a device on a host or any arbitrary tag you can think of that contains only alphanumeric characters plus colons and underscores (`[a-zA-Z1-9:_]+`).
+
+Examples of scope (meaning in parenthesis):
+
+```
+host:my_host    (related to a given host)
+host:my_host, device:my_device    (related to a given device on a given host)
+source:my_source     (related to a given datadog agent)
+my_tag    (related to a tagged group of hosts)
+my:tag    (same)
+```
+
+<h5>Events</h5>
+
+You can overlay any event from Datadog. The general format is:
+
+```
+"events": "search query"
+```
+
+For instance to indicate that you want events for machine X and tag Y:
+
+```
+"events": "host:X tags:Y"
+```
+
+<h5>Series</h5>
+
+Series can be represented in 2 fashions:
+1. as independent charts
+2. as stacked areas
+
+Given the nature of the metrics in this example (load), independent make more sense. To add the 5-minute load and the 15-minute load, simply edit the *series* part of the dictionary from
+
+```
+"requests": [
+    {
+      "q": "system.load.1{host:Marcus-Aurelius.local}"
+    }
+  ]
+```
+
+to
+
+```
+"requests": [
+    {
+      "q": "system.load.1{host:Marcus-Aurelius.local}"
+    },
+    {
+      "q": "system.load.5{host:Marcus-Aurelius.local}"
+    },
+    {
+      "q": "system.load.15{host:Marcus-Aurelius.local}"
+    }
+  ]
+```
+
+In other words, add 2 additional dictionaries to the *series* list, each dictionary with 1 element, keyed by the string "q" (stands for query).
+
+The format for the value of the query is simple:
+
+```
+metric{scope, scope, scope}
+```
+
+<h5>Stacked Series</h5>
+
+In the case of related time series you can easily draw them as stacked areas by using the following syntax:
+
+```
+"requests": [
+    {
+      "q": "system.cpu.idle{host:Marcus-Aurelius.local}, system.cpu.system{host:Marcus-Aurelius.local}, system.cpu.iowait{host:Marcus-Aurelius.local}, system.cpu.user{host:Marcus-Aurelius.local}, system.cpu.stolen{host:Marcus-Aurelius.local}"
+    }
+]
+```
+
+Instead of one query per chart you aggregate all queries into one and simply concatenate the queries.
+
+<h5>Slice-n-Stack</h5>
+
+Another common visualization is to represent a metric shared across hosts and stack the results. For instance when selecting a tag that applies to more than 1 host you will see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. Useful to spot wild swings in the distribution of network traffic.
+
+Here's how to do it for any metric:
+```
+"requests" [
+  {
+     "q": "system.net.bytes_rcvd{my_tag,device:eth0} by {host}"
+  }
+]
+```
+
+Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
+
+```json
+"requests" [
+  {
+     "q": "system.net.bytes_rcvd{my_tag} by {host,device}"
+  }
+]
+```
+to get traffic for all the tagged hosts, split by host and network device.
+
+# Arithmetic & Functions # {#functions}
+
+Series also support simple arithmetic and a number of functions.
+
+You can apply functions to metric queries in the graph editor, as long as you
+use the JSON editor.
+
+The general format is:
+
+    function(metric{scope} [by {filter}])
+
+In case of binary operators (+, -, /, *), the format is:
+
+    metric{scope} [by {filter}] operator metric{scope} [by {filter}]
+
+The filter part is optional.
+
+## Arithmetic
+
+You can apply simple arithmetic to Series (+, -, * and /). In this example we graph 5-minute load and its double.
+
+```json
+{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "system.load.5{intake}*2"
+    },
+    {
+      "q": "system.load.5{intake}"
+    }
+  ]
+}
+```
+
+You can also add, substract, multiply and divide Series. Beware that Datadog does not enforce consistency at this point so you *can* add apples and oranges.
+
+```
+{
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "system.cpu.user{apples} / system.cpu.user{oranges}"
+      }
+    ]
+}
+```
+
+## Functions
+
+### Derivation and integration
+
+* dt(query): time delta between points
+* diff(query): value delta between points
+* derivative(query): 1st order derivative, diff / dt
+* integral(query): sum(value * dt)
+* cumsum(query): sum(value)
+* rate(query): 1st order derivate that skips non-monotonically increasing values
+
+### Some syntactic sugar
+
+* derived(query): synonym for derivative
+* per_second(query): synonym for rate
+* per_minute(query):  60 * rate
+* per_hour(query):    3600 * rate
+
+### Moving Averages
+
+* avg_5min(query):   average over past 5 minutes
+* avg_10min(query):  ditto for 10 minutes
+* avg_30min(query):  ...
+* avg_hourly(query): ...
+* avg_daily(query):  ...
+
+## Exponentially-weighted averages using variable decay
+
+(from [pandas](http://pandas.sourceforge.net/generated/pandas.stats.moments.ewma.html))
+
+* ewma_1(query): decay = 1, same as average
+* ewma_3(query): decay = 1/2
+* ewma_5(query): decay = 1/3
+* ewma_10(query): decay = 2/11
+* ewma_20(query): decay = 2/21
