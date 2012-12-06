@@ -50,6 +50,10 @@ def ruby(code)
   code_block(code, "ruby", :static => true)
 end
 
+def json(code)
+  code_block(code, "json", :static => true)
+end
+
 
 # PRIVATE ======================
 
