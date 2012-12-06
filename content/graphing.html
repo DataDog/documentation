@@ -11,218 +11,262 @@ sidebar:
 
 Here is a short primer to our graphing language.
 
-# Grammar # {#grammar}
+## Grammar ## {#grammar}
 
 The graph definition language is well-formed JSON and is structured in 2 parts:
 
 1. Events
 2. Time Series, a.k.a. Series
 
-```json
-{
-  "requests": [
+Here is how they fit together in a JSON dictionary:
+
     {
-      "q": "system.load.1{cassandra} by {host}"
+      "requests": [
+        {
+          "q": "metric{scope}"
+        }
+      ],
+      "events": [
+        {
+          "q": "searchq query"
+        }
+      ]
     }
-  ],
-  "events": [
-    {
-      "q": "tags:cassandra"
-    }
-  ]
-}
-```
 
 In other words at the highest level the JSON structure is a dictionary with 2 entries:
+
 1. "events"
 2. "requests"
 
-<h5>Scope</h5>
-
-A scope lets you define what a time series or an event applies to. It can be a host, a device on a host or any arbitrary tag you can think of that contains only alphanumeric characters plus colons and underscores (`[a-zA-Z1-9:_]+`).
-
-Examples of scope (meaning in parenthesis):
-
-```
-host:my_host    (related to a given host)
-host:my_host, device:my_device    (related to a given device on a given host)
-source:my_source     (related to a given datadog agent)
-my_tag    (related to a tagged group of hosts)
-my:tag    (same)
-```
-
-<h5>Events</h5>
+### Events
 
 You can overlay any event from Datadog. The general format is:
 
-```
-"events": "search query"
-```
+    "events": "search query"
 
 For instance to indicate that you want events for machine X and tag Y:
 
-```
-"events": "host:X tags:Y"
-```
+    "events": "host:X tags:Y"
 
-<h5>Series</h5>
 
-Series can be represented in 2 fashions:
-1. as independent charts
+### Scope
+
+A scope lets you define what a time series or an event applies to. It
+can be a host, a device on a host or any arbitrary tag you can think
+of that contains only alphanumeric characters plus colons and
+underscores (`[a-zA-Z1-9:_]+`).
+
+Examples of scope (meaning in parenthesis):
+
+    host:my_host                      (related to a given host)
+    host:my_host, device:my_device    (related to a given device on a given host)
+    source:my_source                  (related to a given source)
+    my_tag                            (related to a tagged group of hosts)
+    my:tag                            (same)
+    *                                 (wildcard for everything)
+
+### Series
+
+The general format of a Series is:
+
+    function(metric{scope} [by {group}])
+
+The `function` and `group` are optional.
+
+Series can be further combined together via binary operators (+, -, /, *):
+
+    metric{scope} [by {group}] operator metric{scope} [by {group}]
+
+Series are represented in 2 representatinos:
+
+1. as line charts
 2. as stacked areas
+3. as slice-n-stack areas
 
-Given the nature of the metrics in this example (load), independent make more sense. To add the 5-minute load and the 15-minute load, simply edit the *series* part of the dictionary from
+#### Line Charts
 
-```
-"requests": [
-    {
-      "q": "system.load.1{host:Marcus-Aurelius.local}"
-    }
-  ]
-```
+The representation is automatically derived from the `requests` value.
 
-to
+    "requests": [
+        {
+          "q": "metric1{scope}"
+        },
+        {
+          "q": "metric2{scope}"
+        },
+        {
+          "q": "metric3{scope}"
+        }
+      ]
 
-```
-"requests": [
-    {
-      "q": "system.load.1{host:Marcus-Aurelius.local}"
-    },
-    {
-      "q": "system.load.5{host:Marcus-Aurelius.local}"
-    },
-    {
-      "q": "system.load.15{host:Marcus-Aurelius.local}"
-    }
-  ]
-```
-
-In other words, add 2 additional dictionaries to the *series* list, each dictionary with 1 element, keyed by the string "q" (stands for query).
-
-The format for the value of the query is simple:
-
-```
-metric{scope, scope, scope}
-```
-
-<h5>Stacked Series</h5>
+#### Stacked Series
 
 In the case of related time series you can easily draw them as stacked areas by using the following syntax:
 
-```
-"requests": [
-    {
-      "q": "system.cpu.idle{host:Marcus-Aurelius.local}, system.cpu.system{host:Marcus-Aurelius.local}, system.cpu.iowait{host:Marcus-Aurelius.local}, system.cpu.user{host:Marcus-Aurelius.local}, system.cpu.stolen{host:Marcus-Aurelius.local}"
-    }
-]
-```
+    "requests": [
+        {
+          "q": "metric1{scope}, metric2{scope}, metric3{scope}"
+        }
+    ]
 
 Instead of one query per chart you aggregate all queries into one and simply concatenate the queries.
 
-<h5>Slice-n-Stack</h5>
+#### Slice-n-Stack
 
-Another common visualization is to represent a metric shared across hosts and stack the results. For instance when selecting a tag that applies to more than 1 host you will see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. Useful to spot wild swings in the distribution of network traffic.
+Another common visualization is to represent a metric shared across
+hosts and stack the results. For instance when selecting a tag that
+applies to more than 1 host you will see that ingress and egress
+traffic is nicely stacked to give you the sum as well as the split per
+host. Useful to spot wild swings in the distribution of network
+traffic.
 
 Here's how to do it for any metric:
-```
-"requests" [
-  {
-     "q": "system.net.bytes_rcvd{my_tag,device:eth0} by {host}"
-  }
-]
-```
+
+    "requests" [
+      {
+         "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
+      }
+    ]
 
 Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
 
-```json
-"requests" [
-  {
-     "q": "system.net.bytes_rcvd{my_tag} by {host,device}"
-  }
-]
-```
+    "requests" [
+      {
+         "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
+      }
+    ]
+
 to get traffic for all the tagged hosts, split by host and network device.
 
-# Arithmetic & Functions # {#functions}
+## Arithmetic and Functions ## {#functions}
 
 Series also support simple arithmetic and a number of functions.
 
 You can apply functions to metric queries in the graph editor, as long as you
 use the JSON editor.
 
-The general format is:
+### Arithmetic
 
-    function(metric{scope} [by {filter}])
+You can apply simple arithmetic to Series (+, -, * and /). In this
+example we graph 5-minute load and its double.
 
-In case of binary operators (+, -, /, *), the format is:
-
-    metric{scope} [by {filter}] operator metric{scope} [by {filter}]
-
-The filter part is optional.
-
-## Arithmetic
-
-You can apply simple arithmetic to Series (+, -, * and /). In this example we graph 5-minute load and its double.
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
     {
-      "q": "system.load.5{intake}*2"
-    },
-    {
-      "q": "system.load.5{intake}"
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "system.load.5{intake} * 2"
+        },
+        {
+          "q": "system.load.5{intake}"
+        }
+      ]
     }
-  ]
-}
-```
 
-You can also add, substract, multiply and divide Series. Beware that Datadog does not enforce consistency at this point so you *can* add apples and oranges.
+You can also add, substract, multiply and divide series. Beware that
+Datadog does not enforce consistency at this point so you *can* divide
+apples by oranges.
 
-```
-{
-    "viz": "timeseries",
-    "requests": [
-      {
-        "q": "system.cpu.user{apples} / system.cpu.user{oranges}"
-      }
-    ]
-}
-```
+    {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "metric{apples} / metric{oranges}"
+          }
+        ]
+    }
 
-## Functions
+### Functions
 
-### Derivation and integration
+You can apply functions to the result of each query.
 
-* dt(query): time delta between points
-* diff(query): value delta between points
-* derivative(query): 1st order derivative, diff / dt
-* integral(query): sum(value * dt)
-* cumsum(query): sum(value)
-* rate(query): 1st order derivate that skips non-monotonically increasing values
+<table class="table">
+  <tr>
+    <th>Function</th>
+    <th>Description</th>
+  </tr>
+  
+  <tr>
+    <td>dt()</td>
+    <td>time delta between points</td>
+  </tr>
 
-### Some syntactic sugar
+  <tr>
+    <td>diff()</td>
+    <td>value delta between points</td>
+  </tr>
 
-* derived(query): synonym for derivative
-* per_second(query): synonym for rate
-* per_minute(query):  60 * rate
-* per_hour(query):    3600 * rate
+  <tr>
+    <td>derivative()</td>
+    <td>1st order derivative, diff / dt</td>
+  </tr>
 
-### Moving Averages
+  <tr>
+    <td>rate()</td>
+    <td>1st order derivate that skips non-monotonically increasing values</td>
+  </tr>
 
-* avg_5min(query):   average over past 5 minutes
-* avg_10min(query):  ditto for 10 minutes
-* avg_30min(query):  ...
-* avg_hourly(query): ...
-* avg_daily(query):  ...
+  <tr>
+    <td>derived()</td>
+    <td>synonym for derivative</td>
+  </tr>
 
-## Exponentially-weighted averages using variable decay
+  <tr>
+    <td>per_second()</td>
+    <td>synonym for rate</td>
+  </tr>
 
-(from [pandas](http://pandas.sourceforge.net/generated/pandas.stats.moments.ewma.html))
+  <tr>
+    <td>per_minute()</td>
+    <td>60 * rate</td>
+  </tr>
 
-* ewma_1(query): decay = 1, same as average
-* ewma_3(query): decay = 1/2
-* ewma_5(query): decay = 1/3
-* ewma_10(query): decay = 2/11
-* ewma_20(query): decay = 2/21
+  <tr>
+    <td>per_hour()</td>
+    <td>3600 * rate</td>
+  </tr>
+
+  <tr>
+    <td>avg_5min()</td>
+    <td>average over past 5 minutes</td>
+  </tr>
+
+  <tr>
+    <td>avg_10min()</td>
+    <td>average over past 10 minutes</td>
+  </tr>
+
+  <tr>
+    <td>avg_30min()</td>
+    <td>average over past 30 minutes</td>
+  </tr>
+
+  <tr>
+    <td>avg_hourly()</td>
+    <td>...</td>
+  </tr>
+
+  <tr>
+    <td>avg_daily()</td>
+    <td>...</td>
+  </tr>
+
+  <tr>
+    <td>ewma_3()</td>
+    <td>exponentially-moving weighted average with a span of 3</td>
+  </tr>
+
+  <tr>
+    <td>ewma_5()</td>
+    <td>... with a span of 5</td>
+  </tr>
+
+  <tr>
+    <td>ewma_10()</td>
+    <td>... with a span of 10</td>
+  </tr>
+
+  <tr>
+    <td>ewma_20()</td>
+    <td>... with a span of 20</td>
+  </tr>
+</table>
