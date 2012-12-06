@@ -28,7 +28,7 @@ Here is how they fit together in a JSON dictionary:
       ],
       "events": [
         {
-          "q": "searchq query"
+          "q": "search query"
         }
       ]
     }
@@ -48,13 +48,16 @@ For instance to indicate that you want events for machine X and tag Y:
 
     "events": "host:X tags:Y"
 
+or if you're looking to display all errors:
+
+    "events": "status:error"
+
 
 ### Scope
 
-A scope lets you define what a time series or an event applies to. It
-can be a host, a device on a host or any arbitrary tag you can think
-of that contains only alphanumeric characters plus colons and
-underscores (`[a-zA-Z1-9:_]+`).
+A scope lets you filter Series. It can be a host, a device on a host
+or any arbitrary tag you can think of that contains only alphanumeric
+characters plus colons and underscores (`[a-zA-Z1-9:_]+`).
 
 Examples of scope (meaning in parenthesis):
 
@@ -85,7 +88,7 @@ Series are represented in 2 representatinos:
 
 #### Line Charts
 
-The representation is automatically derived from the `requests` value.
+The representation is automatically derived from having multiple `requests` values.
 
     "requests": [
         {
