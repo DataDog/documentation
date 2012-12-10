@@ -3,13 +3,29 @@ title: Graphing Primer
 sidebar:
   nav:
     - header: Sections
+    - text: Find the Graph Editor
+      href: #editor
     - text: Grammar
       href: #grammar
     - text: Arithmetic & Functions
       href: #functions
 ---
 
+<div class="alert alert-info">
 Here is a short primer to our graphing language.
+If you need any help getting started, pop by our <a href="irc://irc.freenode.net/datadog">chat room</a>.
+</div>
+
+## Find the Graph Editor ## {#editor}
+
+On each graph you will find a cog icon that open the graph editor.
+
+<img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
+
+The graph editor has 2 tabs, "Edit" and "JSON". The "JSON" tab is the most flexible and powerful.
+It lets you finely control what is displayed on the graph.
+
+<img src="/static/images/json-editor.png" style="width:100%; border:1px solid #777777"/>
 
 ## Grammar ## {#grammar}
 
@@ -88,6 +104,8 @@ Series are represented in 2 representatinos:
 
 #### Line Charts
 
+<img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
+
 The representation is automatically derived from having multiple `requests` values.
 
     "requests": [
@@ -104,6 +122,8 @@ The representation is automatically derived from having multiple `requests` valu
 
 #### Stacked Series
 
+<img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
+
 In the case of related time series you can easily draw them as stacked areas by using the following syntax:
 
     "requests": [
@@ -116,7 +136,7 @@ Instead of one query per chart you aggregate all queries into one and simply con
 
 #### Slice-n-Stack
 
-Another common visualization is to represent a metric shared across
+A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance when selecting a tag that
 applies to more than 1 host you will see that ingress and egress
 traffic is nicely stacked to give you the sum as well as the split per
