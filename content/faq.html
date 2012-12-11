@@ -2,9 +2,30 @@
 title: FAQ
 ---
 
-<h3>Agent</h3>
+<ol class="outline">
+    <li><a href="#agent">Agent<ol>
+        <li><a href="#agent-config-files">Where are the agent's config files located?</a></li>
+        <li><a href="#agent-version">How can I tell what version of the agent is running?</a></li>
+    </ol></li>
+    <li><a href="#api">API<ol>
+        <li><a href="#api-metric-names">What are valid metric names?</a></li>
+        <li><a href="#api-tags">What are valid tags?</a></li>
+    </ol></li>
+    <li><a href="#arch">Architecture<ol>
+        <li><a href="#arch-cloud-or-server">Is datadog a cloud service or server application?</a></li>
+        <li><a href="#arch-graphite-differences">What's the difference between Graphite's query language and Datadog's?</a></h4>
+    </ol></li>
+</ol>
 
-<h4>Where are the agent's config files located?</h4>
+<!--
+===============================================================================
+    Agent
+===============================================================================
+-->
+
+<h3><a name="agent" href="#agent">Agent</a></h3>
+
+<h4><a name="agent-config-files" href="#agent-config-files">Where are the agent's config files located?</a></h4>
 
 <h5>Linux</h5>
 <ul>
@@ -20,7 +41,7 @@ title: FAQ
     <li>C:\Program Files\Datadog\Agent\checks.d\</li>
 </ul>
 
-<h5>Windows Server 2008 or newer (or XP and newer)</h5>
+<h5>Windows Server 2008 or newer (or Vista and newer)</h5>
 <ul>
     <li>C:\ProgramData\Datadog\datadog.conf</li>
     <li>C:\ProgramData\Datadog\conf.d\</li>
@@ -34,7 +55,9 @@ title: FAQ
     <li>~/.datadog-agent/agent/checks.d/</li>
 </ul>
 
-<h4>How can I tell what version of the agent is running?<h4>
+<!-- ====================================================================== -->
+
+<h4><a name="agent-version" href="#agent-version">How can I tell what version of the agent is running?</a><h4>
 
 <h5>Linux</h5>
 
@@ -44,20 +67,34 @@ title: FAQ
 
 <code>cd /usr/share/datadog/agent &amp;&amp; python -c 'import config; print config.get_version()'</code>
 
-<h3>API</h3>
+<!--
+===============================================================================
+    API
+===============================================================================
+-->
 
-<h4>What are valid metric names?</h4>
+<h3><a name="api" href="#api">API</a></h3>
+
+<h4><a name="api-metric-names" href="#api-metric-names">What are valid metric names?</a></h4>
 <p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. Other characters will get converted to underscores. There is no max length. Unicode is not support.</p>
 
-<h4>What are valid tags?</h4>
+<h4><a name="api-tags" href="#api-tags">What are valid tags?</a></h4>
 <p>Tags must start with a letter, and after that may contain alphanumerics, underscores, minuses, colons, periods and slashes. Other characters will get converted to underscores. Tags can be up to 200 characters long and support unicode.</p>
 
-<h3>Architecture</h3>
+<!--
+===============================================================================
+    Architecture
+===============================================================================
+-->
 
-<h4>Is datadog a cloud service or server application?</h4>
+<h3><a name="arch" href="#arch">Architecture</a></h3>
+
+<h4><a name="arch-cloud-or-server" href="#arch-cloud-or-server">Is datadog a cloud service or server application?</a></h4>
 <p>It's primarily a cloud service, but if you want to collect data on your servers, there is an agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
 
-<h4>What's the difference between Graphite's query language and Datadog's?</h4>
+<!-- ====================================================================== -->
+
+<h4><a name="arch-graphite-differences" href="#archive-graphite-differences">What's the difference between Graphite's query language and Datadog's?</a></h4>
 <p>In terms of metric naming, we differ a little with Graphite in that a metric query is defined by a metric name and a scope, where a scope is one or more tags. To translate:</p>
 
 <blockquote>
@@ -91,3 +128,4 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 <p>Which would graph stacked area series for each http_method value like GET, POST, etc.</p>
 
+<!-- ====================================================================== -->
