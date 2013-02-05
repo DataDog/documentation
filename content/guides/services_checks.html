@@ -119,6 +119,19 @@ List of parameters:
 A service will be marked as down if the request times out
 - notify (optional): To override the global setting set in the *init_config* section.
 
+#### Custom notifying:
+
+You can also set-up your check to only trigger an error after a certain number of failures
+have happend within a certain timeframe. Using the `window` and `threshold` parameters,
+you can tell the alert to <em>only</em> trigger an alert if the check fails `x` times within
+the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
+
+For example, if you have the following configuration for window and threshold:
+
+<%= snippet_code_block("guides-http_check-notify.yaml") %>
+
+You will only be notified if the check fails 3 times within the last 5 tries.
+
 <!--
 ======================================================
 TCP CHECK CONFIGURATION
@@ -153,3 +166,15 @@ List of parameters:
 A service will be marked as down if the request times out
 - notify (optional): To override the global setting set in the *init_config* section.
 
+#### Custom notifying:
+
+You can also set-up your check to only trigger an error after a certain number of failures
+have happend within a certain timeframe. Using the `window` and `threshold` parameters,
+you can tell the alert to <em>only</em> trigger an alert if the check fails `x` times within
+the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
+
+For example, if you have the following configuration for window and threshold:
+
+<%= snippet_code_block("guides-tcp_check-notify.yaml") %>
+
+You will only be notified if the check fails 3 times within the last 5 tries.
