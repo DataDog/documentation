@@ -206,7 +206,6 @@ title: API Reference
           <%= argument("text", "The body of the event.") %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
-          <%= argument("related_event_id", "The id of the aggregate event.", {:default => 'None'}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success"', {:default => "'info'"}) %>
           <%= argument("aggregation_key", 'An arbitrary string to use for aggregation.', {:default => 'None'}) %>
