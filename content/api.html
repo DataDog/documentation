@@ -469,6 +469,11 @@ title: API Reference
           to hosts by name (<code>yourhost.example.com</code>) or id
           (<code>12345</code>).
         </p>
+        <p>
+        The component of your infrastructure responsible for a tag is identified by
+        a <code>source</code>. Valid sources are: nagios, hudson, jenkins, users,
+        feed, chef, puppet, git, bitbucket, fabric, capistrano.
+        </p>
       </div>
     </div>
 
@@ -479,7 +484,9 @@ title: API Reference
           Return a mapping of tags to hosts for your whole infrastructure.
         </p>
         <h5>Arguments</h5>
-        <%= no_args %>
+        <ul class="arguments">
+          <%= argument("source", "Only show tags from a particular source. Otherwise shows all tags.", :default => "None") %>
+        </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -502,7 +509,10 @@ title: API Reference
           Return the list of tags that apply to a given host.
         </p>
         <h5>Arguments</h5>
-        <%= no_args %>
+        <ul class="arguments">
+          <%= argument("source", "Only show tags from a particular source. Otherwise shows all tags.", :default => "None") %>
+          <%= argument("by_source", "Return tags grouped by source.", :default => "False") %>
+        </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -527,6 +537,7 @@ title: API Reference
          <h5>Arguments</h5>
           <ul class="arguments">
           <%= argument("tags", "A list of tags to apply to the host") %>
+          <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
           </ul>
       </div>
       <%= right_side_div %>
@@ -552,6 +563,7 @@ title: API Reference
          <h5>Arguments</h5>
           <ul class="arguments">
           <%= argument("tags", "A list of tags") %>
+          <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
           </ul>
       </div>
       <%= right_side_div %>
@@ -575,7 +587,9 @@ title: API Reference
           This end point allows you to update all tags for a given host.
         </p>
          <h5>Arguments</h5>
-          <%= no_args %>
+          <ul class="arguments">
+          <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
+          </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
