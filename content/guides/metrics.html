@@ -354,13 +354,13 @@ EOF
   <div class="tab-pane fade in" id="tags-ruby">
 <%= ruby <<EOF
 def algorithm_one()
-  statsd.timed('algorithm.run_time', tags=['algorithm:one']) do
+  statsd.timed('algorithm.run_time', tags=>['algorithm:one']) do
     # Do fancy things here ...
   end
 end
 
 def algorithm_two()
-  statsd.timed('algorithm.run_time', tags=['algorithm:two']) do
+  statsd.timed('algorithm.run_time', tags=>['algorithm:two']) do
     # Do different fancy things here ...
   end
 end
