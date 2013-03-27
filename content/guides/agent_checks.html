@@ -7,7 +7,7 @@ sidebar:
       href: "#overview"
     - text: Setup
       href: "#setup"
-    - text: The AgentCheck Interface
+    - text: Agent Check Interface
       href: "#interface"
     - text: Configuration
       href: "#config"
@@ -32,19 +32,13 @@ OVERVIEW
 -->
 
 <h3 id="overview">Overview</h3>
+This guide details how to collect metrics and events from a new data source
+by writing an Agent Check, a Python plugin to the Datadog Agent. We'll 
+look at the `AgentCheck` interface, and then write a simple Agent Check 
+that collects timing metrics and status events from HTTP services.
 
-The Datadog Agent collects a variety of metrics and events from your system,
-from system metrics (CPU, Load, Memory) to metrics from a speficic application
-or service running on your system (Postgresql, Memcached, etc.).
-
-Upon installation, the Agent is able to give you a quick and clear view of
-what's happening across your infrastructure. It supports a wide variety of integrations, and has a simple interface for writing your own checks.
-
-In this guide, we will first show you what is available in the AgentCheck
-interface, then we'll walk step-by-step through the writing of a simple check
-that will the status of configured HTTP endpoints. Any custom checks will be
-included in the main check run loop, meaning they will run every check interval,
-which defaults to 15 seconds.
+Any custom checks will be included in the main check run loop, meaning 
+they will run every check interval, which defaults to 15 seconds.
 
 <!--
 ======================================================
@@ -54,12 +48,10 @@ SETUP
 
 <h3 id="setup">Setup</h3>
 
-If you have not already setup the Agent, then you should check out the agent
-setup instructions available at: <a href="http://app.datadoghq.com/account/settings#agent">http://app.datadoghq.com/account/settings#agent</a>.
-This page will guide you through installing the agent for your particular OS.
-
-If you run into any issues during the setup, don't hesistate to pop by our
-<a href="irc://irc.freenode.net/datadog">chat room</a> where we'll be happy to
+First off, ensure you've properly 
+<a href="http://app.datadoghq.com/account/settings#agent">installed the
+agent</a> on your machine. If you run into any issues during the setup, pop by our
+<a href="irc://irc.freenode.net/datadog">chat room</a> and we'll be happy to
 answer any questions you might have.
 
 <!--
@@ -68,7 +60,7 @@ INTERFACE
 ======================================================
 -->
 
-<h3 id="interface">The AgentCheck Interface</h3>
+<h3 id="interface">Agent Check Interface</h3>
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
 and require a `check()` method that takes one argument, `instance` which is a
@@ -77,7 +69,7 @@ run once per instance defined in the check configuration (discussed later)
 
 #### Sending metrics
 
-Sending metrics in a check is easy! If you're already familiar with the
+Sending metrics in a check is easy. If you're already familiar with the
 methods available in DogstatsD, then the transition will be very simple. If
 you're not already familiar with that interface, you'll find sending metrics is
 a breeze.
@@ -106,6 +98,25 @@ At any time during your check, you can make a call to `self.event(...)` with one
 
 At the end of your check, all events will be collected and flushed with the rest
 of the agent payload.
+
+
+#### Exceptions
+
+If a check cannot run because of improper configuration,  programming error or
+because it could not collect any metrics, it should raise a meaningful exception.
+This exception will be logged, as well as be shown in the Agent info command for
+easy debugging. For example:
+
+    $ sudo /etc/init.d/datadog-agent info
+
+      Checks
+      ======
+      
+        my_custom_check
+        ---------------
+          - instance #0 [ERROR]: ConnectionError('Connection refused.',)
+          - Collected 0 metrics & 0 events
+
 
 #### Logging
 
