@@ -60,3 +60,5 @@ task :test do
     end
   end
  end
+
+task :default => :autocompile
