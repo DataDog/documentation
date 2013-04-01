@@ -1,0 +1,67 @@
+---
+title: Datadog-AWS Cloudwatch Integration
+---
+
+The recommended way to configure Cloudwatch in Datadog is to create a
+new user via the Amazon [IAM
+Console](https://console.aws.amazon.com/iam/home#s=Home) and grant
+that user (or group of user) Amazon EC2 and Cloudwatch *read-only*
+access.
+
+These can be set via policy templates in the console.
+
+Alternatively they can set via Amazon's API according to the following
+specifications:
+
+## Amazon Read-Only Access
+
+    {
+      "Statement": [
+	{
+	  "Action": [
+	    "autoscaling:Describe*",
+	    "cloudformation:DescribeStacks",
+	    "cloudformation:DescribeStackEvents",
+	    "cloudformation:DescribeStackResources",
+	    "cloudformation:GetTemplate",
+	    "cloudfront:Get*",
+	    "cloudfront:List*",
+	    "cloudwatch:Describe*",
+	    "cloudwatch:Get*",
+	    "cloudwatch:List*",
+	    "dynamodb:GetItem",
+	    "dynamodb:BatchGetItem",
+	    "dynamodb:Query",
+	    "dynamodb:Scan",
+	    "dynamodb:DescribeTable",
+	    "dynamodb:ListTables",
+	    "ec2:Describe*",
+	    "elasticache:Describe*",
+	    "elasticbeanstalk:Check*",
+	    "elasticbeanstalk:Describe*",
+	    "elasticbeanstalk:List*",
+	    "elasticbeanstalk:RequestEnvironmentInfo",
+	    "elasticbeanstalk:RetrieveEnvironmentInfo",
+	    "elasticloadbalancing:Describe*",
+	    "iam:List*",
+	    "iam:Get*",
+	    "route53:Get*",
+	    "route53:List*",
+	    "rds:Describe*",
+	    "s3:List*",
+	    "sdb:GetAttributes",
+	    "sdb:List*",
+	    "sdb:Select*",
+	    "ses:Get*",
+	    "ses:List*",
+	    "sns:Get*",
+	    "sns:List*",
+	    "sqs:GetQueueAttributes",
+	    "sqs:ListQueues",
+	    "sqs:ReceiveMessage"
+	  ],
+	  "Effect": "Allow",
+	  "Resource": "*"
+	}
+      ]
+    }
