@@ -7,6 +7,7 @@
 
 CODE_SNIPPETS = "code_snippets"
 
+desc "Clean up generated output files"
 task :clean do
   sh "rm -rf output/*"
 end
@@ -39,6 +40,7 @@ end
 desc "Build and release the site to s3"
 task :release => [:clean, :enable_syntax, :compile, :deploy]
 
+desc "Deploy to S3; Should be used by `rake release`"
 task :deploy do
   sh("cd output && s3cmd -c ~/.s3cfg.prod sync . s3://docs.datadoghq.com")
 end
