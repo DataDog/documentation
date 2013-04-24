@@ -4,3 +4,6 @@ vendor/*
 .bundle/*
 NO_SYNTAX
 .rvmrc
+.ruby-version
+.ruby-gemset
+.rbenv
