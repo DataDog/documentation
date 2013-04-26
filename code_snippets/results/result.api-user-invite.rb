@@ -1,2 +1,3 @@
-["200",
- {"emails"=>["jack@example.com", "jill@example.com"]}]
+["200", 
+    {"emails"=>["jack@example.com", "jill@example.com"]}
+]
