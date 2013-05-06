@@ -41,7 +41,7 @@ To deploy the Agent, we have created a cookbook to assist with deployment.
 Install the latest released version of the Datadog Chef cookbook from the <a href='http://community.opscode.com/'>Community Site</a> via knife, and upload to your Chef Server:
 
     knife cookbook site install datadog
-    knnife cookbook upload datadog
+    knife cookbook upload datadog
 
 You may also be using another tool to manage your cookbook workflow, such as <a href='http://berkshelf.com/'>Berkshelf</a> or <a href='https://github.com/applicationsonline/librarian-chef'>Librarian Chef</a>, in which case you will need to add a line like this to your Berksfile/Cheffile:
 
@@ -91,7 +91,7 @@ Adding the handler is very simple, as you can see in this role snippet:
 
 All we've done is add the `datadog::dd-handler` recipe to the beginning of the node's run list. Adding it to the beginning allows the handler to capture details about everything in it observes after being invoked, so if you added it to the end of the `run_list` and something failed prior to it being executed, you may not receive the full output.
 
-Once set, uppload the role to your Chef Server, and wait. After Chef has run on a few hosts, a new automatic Dashboard will be created, with the relevant Chef Metrics. You can find it in your <a href='https://app.datadoghq.com/dash/list'>Dashboards List</a>, on the right-hand side.
+Once set, upload the role to your Chef Server, and wait. After Chef has run on a few hosts, a new automatic Dashboard will be created, with the relevant Chef Metrics. You can find it in your <a href='https://app.datadoghq.com/dash/list'>Dashboards List</a>, on the right-hand side.
 
 <!--
 ======================================================
@@ -103,7 +103,7 @@ CUSTOMIZATIONS
 
 The Datadog Chef Cookbook provides more integration-specific recipes.
 
-Including one of these recipes in your run list will install any monitoring dependencies, such as any Python modules that are required to monitor that service, as well as write out the correct configuration file
+Including one of these recipes in your run list will install any monitoring dependencies, such as any Python modules that are required to monitor that service, as well as write out the correct configuration file.
 
 Here's an example of how we've extended a `webserver.rb` role file to automatically monitor Apache via Datadog:
 
