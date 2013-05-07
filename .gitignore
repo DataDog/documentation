@@ -4,3 +4,5 @@ vendor/*
 .bundle/*
 NO_SYNTAX
 .rvmrc
+.DS_Store
+.rbenv-version
