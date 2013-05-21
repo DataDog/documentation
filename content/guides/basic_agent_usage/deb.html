@@ -1,0 +1,112 @@
+---
+title: Basic Agent Usage for Debian
+sidebar:
+  nav:
+    - header: Basic Agent Usage for Debian
+    - text: Overview
+      href: "#overview"
+    - text: Starting and Stopping the Agent
+      href: "#starting_and_stopping_the_agent"
+    - text: Status and Information
+      href: "#status_and_information"
+    - text: Configuration
+      href: "#configuration"
+    - text: Troubleshooting
+      href: "#troubleshooting"
+
+---
+
+<!--
+======================================================
+Overview
+======================================================
+-->
+
+<h3 id="overview">Overview</h3>
+
+This guide will outline the basic functionality of the Datadog agent.
+If you haven't installed the agent yet, instructions can be found 
+<a href='https://app.datadoghq.com/account/settings#agent'>here</a>.
+
+
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+
+<h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
+
+To manually start the agent: <br/>
+
+<%= console 'sudo /etc/init.d/datadog-agent start' %>
+
+To stop the agent: <br/>
+
+<%= console 'sudo /etc/init.d/datadog-agent stop' %>
+
+To restart the agent: <br/>
+
+<%= console 'sudo /etc/init.d/datadog-agent restart' %>
+
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+<h3 id="status_and_information">Status and Information</h3>
+
+To receive information about the agent's state:
+
+<%= console 'sudo /etc/init.d/datadog-agent info' %>
+
+Tracebacks for errors can be retrieved by setting the <code>-v</code> flag:
+
+<%= console 'sudo /etc/init.d/datadog-agent info -v' %>
+
+<!-- EA: Right now Debian doesn't support the status command. However, when
+         https://github.com/DataDog/dd-agent/pull/514 is merged, this document
+         should be updated --!>
+
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+<h3 id="configuration">Configuration</h3>
+
+The configuration file for the agent is located at <code>/etc/dd-agent/datadog.conf</code>
+
+Configuration files for integrations are located in <code>/etc/dd-agent/conf.d/</code>
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+First, make sure you are using the correct version of Python. The agent requires version 2.4 or greater. You can check your version by executing:
+
+<%= console "cd /usr/share/datadog/agent && python -c 'import config; print config.get_version()'" %>
+
+Next, try running the <a href='#status_and_information'>info</a> command to see the state of the agent.
+
+Logs for the subsystems are in the following files:
+
+<ul>
+  <li><code>/var/log/datadog/collector.log</code></li>
+  <li><code>/var/log/datadog/dogstatsd.log</code></li>
+  <li><code>/var/log/datadog/forwarder.log</code></li>
+</ul>
+
+<br/>
+
+If you're still having trouble, our support team will be glad to provide further assistance.
+You can contact them in one of the following ways:
+
+<%= render 'contact_info', :heading_size => 5, :hide_datadog => true %>
+

@@ -1,10 +1,12 @@
 <% @heading_size ||= 3 %>
 <% @heading = "h#{ @heading_size }" %>
 
-<<%= @heading %> id="datadog">Using Datadog</<%= @heading %>>
+<% unless @hide_datadog %>
+  <<%= @heading %> id="datadog">Using Datadog</<%= @heading %>>
 
-You can get in touch with our support team by mentioning <code>@support</code>
-in a comment on Datadog.
+  You can get in touch with our support team by mentioning <code>@support</code>
+  in a comment on Datadog.
+<% end %>
 
 <<%= @heading %> id="email">By Email</<%= @heading %>>
 
@@ -17,3 +19,4 @@ href="irc://irc.freenode.net/datadog">IRC room</a> on Freenode.
 
 <<%= @heading %> id="desk">Post a Question</<%= @heading %>>
 <a href="https://datadog.desk.com/customer/portal/questions/new">Post a public question!</a>
+
