@@ -27,6 +27,7 @@ title: API Reference
         <a class="btn" href="#search">Search</a>
         <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#alerts">Alerts</a>
+        <a class="btn" href="#users">Users</a>
       </div>
       <div class="btn-group">
         <div lang="console" class="lang-btn btn">Shell</div>
@@ -921,6 +922,44 @@ title: API Reference
         <%= snippet_code_block "api-alert-unmute.sh" %>
         <h5>Example Response</h5>
         <%= no_response %>
+      </div>
+    </div>
+
+    <!--
+    =====================================================================
+    Users
+    ====================================================================
+    -->
+
+    <h3 id="users">Users</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        You can invite users to join DataDog using the API.
+        </p>
+      </div>
+    </div>
+
+    <!-- Create alerts -->
+    <h4 id="users-invite">Invite Users</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'emails', "A list of email addresses to send an invite to." %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/alert</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-invite.py" %>
+        <%= snippet_code_block "api-user-invite.rb" %>
+        <%= snippet_code_block "api-user-invite.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-invite.py" %>
+        <%= snippet_result_code_block "api-user-invite.rb" %>
+        <%= snippet_result_code_block "api-user-invite.sh" %>
       </div>
     </div>
 
