@@ -1,7 +1,21 @@
 ---
-title: FAQ
----
+title: Frequently Asked Questions
+sidebar:
+  nav:
+    - header: FAQ Topics
+    - text: Agent
+      href: "/faq/#agent"
+    - text: API
+      href: "/faq/#api"
+    - text: Architecture
+      href: "/faq/#architecture"
+    - text: Graphing
+      href: "/faq/#graph"
+    - text: Other
+      href: "/faq/#other"
 
+---
+<!-- Old table of contents
 <ol class="outline">
     <li><a href="#agent">Agent<ol>
         <li><a href="#agent-config-files">Where are the agent's config files located?</a></li>
@@ -19,6 +33,8 @@ title: FAQ
         <li><a href="#graph-sum-grouped">How do I do arithmetic with grouped metrics?</a></li>
     </ol></li>
 </ol>
+-->
+
 
 <!--
 ===============================================================================
@@ -60,15 +76,34 @@ title: FAQ
 
 <!-- ====================================================================== -->
 
-<h4><a name="agent-version" href="#agent-version">How can I tell what version of the agent is running?</a><h4>
+<h4><a name="agent-version" href="#agent-version">How can I troubleshoot?</a><h4>
 
 <h5>Linux</h5>
 
 <p>First try: <code>sudo /etc/init.d/datadog-agent info</code></p>
 
 <p>If that doesn't work, then try:</p>
-
+<p>
 <code>cd /usr/share/datadog/agent &amp;&amp; python -c 'import config; print config.get_version()'</code>
+</p>
+<p>
+You can also check out the logs for any errors:
+
+<br><code>/var/log/datadog/collector.log</code> 
+<br><code>/var/log/datadog/dogstatsd.log</code>
+<br><code>/var/log/datadog/forwarder.log</code>
+
+</p>
+
+<h5>Windows</h5>
+
+<p>
+For agent version 3.7.0 or greater, the equivalent of the info command for Windows is found here:
+<br><a target="_blank" href="http://localhost:17125/status">localhost:17125/status</a>
+<br>
+The logs can be found in the Event Viewer.
+
+</p>
 
 <!--
 ===============================================================================
@@ -79,7 +114,14 @@ title: FAQ
 <h3><a name="api" href="#api">API</a></h3>
 
 <h4><a name="api-metric-names" href="#api-metric-names">What are valid metric names?</a></h4>
-<p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. Other characters will get converted to underscores. There is no max length. Unicode is not support.</p>
+<p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. 
+Other characters will get converted to underscores. There is no max length. Unicode is not support.
+We recommend avoiding spaces. 
+Metrics reported by the agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
+We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, 
+but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are 
+reporting ‘http.nginx.*’, those must be web frontends”). 
+</p>
 
 <h4><a name="api-tags" href="#api-tags">What are valid tags?</a></h4>
 <p>Tags must start with a letter, and after that may contain alphanumerics,
@@ -87,18 +129,37 @@ underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.</p>
 
+<h4>I'm submitting points to the API- anything I should know?</h4>
+<p>We store metric points at the 1 second resolution, but we’d prefer if you only 
+submitted points every 15 seconds. Any metrics with fractions of a second timestamps 
+will get rounded to the nearest second, and if any points have the same timestamp, 
+the latest point will overwrite the previous ones.
+
+We have a soft limit of 100 time series per host, where a time series is 
+defined as a unique combination of metric name and tag.
+</p>
+
 <!--
 ===============================================================================
     Architecture
 ===============================================================================
 -->
 
-<h3><a name="arch" href="#arch">Architecture</a></h3>
+<h3><a name="architecture" href="#architecture">Architecture</a></h3>
 
-<h4><a name="arch-cloud-or-server" href="#arch-cloud-or-server">Is datadog a cloud service or server application?</a></h4>
+<h4><a name="arch-cloud-or-server" href="#arch-cloud-or-server">Is Datadog a cloud service or server application?</a></h4>
 <p>It's primarily a cloud service, but if you want to collect data on your servers, there is an agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
 
 <!-- ====================================================================== -->
+
+<h4>How do I delete a host or metric? </h4>
+<p>
+All hosts or metrics that have not seen data in 24 hours will disappear from the UI; 
+you can still query against them, but it will not appear in drop downs or infrastructure.
+There is not a way to immediately delete a metric.
+
+</p>
+
 
 <h4><a name="arch-graphite-differences" href="#archive-graphite-differences">What's the difference between Graphite's query language and Datadog's?</a></h4>
 <p>In terms of metric naming, we differ a little with Graphite in that a metric query is defined by a metric name and a scope, where a scope is one or more tags. To translate:</p>
@@ -134,6 +195,49 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 <p>Which would graph stacked area series for each http_method value like GET, POST, etc.</p>
 
+<h4>How are hostnames determined?</h4>
+
+<p>
+The hostnames are determined by what the Datadog agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
+You can see all names being detected by the agent by running the info command:
+ <code>/etc/init.d/datadog-agent info</code>
+
+</p>
+
+<h4 id="tagging">Tell me about tagging!</h4>
+<p>
+Tagging within Datadog is a powerful way to easily gather your metrics
+and makes scaling your infrastructure a breeze.
+</p>
+<p>
+For a quick example to demonstrate the power of tagging, perhaps you're 
+looking for a sum of two metrics, which you might normally define as follows:
+<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")</code></pre>
+
+What we recommend doing is leaving off the hostname; it will then default to the host 
+that is sending that point, since they’re different hosts it will be treated as different points:
+<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])  
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])</code></pre>
+
+With these tags you can then do:
+<br>
+<code>sum:page.views{domain:example.com}</code>
+which should give the desired result. 
+<br>
+To get a breakdown by host, you can do:
+<br>
+<code>sum:page.views{domain:example.com} by {host}</code>
+<br>
+Further tagging info can be found <a href="/guides/metrics/#tags">here</a>. 
+<br>
+For information on AWS tagging, please see <a href="/integrations/aws/">here</a>.
+
+
+
+</p>
+
+
 <!-- ====================================================================== -->
 
 <!--
@@ -144,8 +248,97 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 <h3><a name="graph" href="#graph">Graphing</a></h3>
 
-<h4><a name="graph-sum-grouped" href="#graph-sum-grouped">How do I do arithmetic with grouped metrics?</a></h4>
-<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.bar{env:staging}</code> grouped <code>by {host}</code>, write a graph query that looks like:</p>
+<h4><a name="graph-sum-grouped" href="#graph-sum-grouped">How do I do arithmetic with grouped 
+metrics?</a></h4>
+<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.bar{env:staging}</code> 
+grouped <code>by {host}</code>, write a graph query that looks like:</p>
 <pre><code>metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}</code></pre>
 
+<br>
+
+<h4>What's the syntax to sum multiple datapoints into a single line? </h4>
+<p>
+You can switch commas separating the queries into plus signs, like so:
+
+from:
+
+<pre>
+<code>“q”: “sum:system.io.rkb_s{device:sda}*1024,sum:system.io.rkb_s{device:sdb}
+*1024,sum:system.io.rkb_s{device: sdc}*1024”</code></pre>
+
+to:
+
+<pre>
+<code>“q”: “sum:system.io.rkb_s{device:sda}*1024+sum:system.io.rkb_s{device:sdb}
+*1024+sum:system.io.rkb_s{device: sdc}*1024”</code></pre>
+
+</p>
+
+<h4>How do I do graph smoothing?</h4>
+<p>
+You can apply smoothing averages to your series by droping to the JSON editor and 
+adding ‘ewma’, for example:
+add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g. 
+<code>ewma_20(exception.invalid{*})</code>.
+ewma stands for exponentially-moving average and the full list of functions 
+you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+</p>
+
+<h4>Can I stack CPU metrics on the same graph?</h4>
+<p>
+Check out our documentation on <a href="http://docs.datadoghq.com/graphing/">stacked series</a>.
+The metric explorer just does one metric per graph, but you can see a stacked CPU graph 
+on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
+</p>
+
 <!-- ====================================================================== -->
+
+<!--
+===============================================================================
+    Other
+===============================================================================
+-->
+<h3><a name="other" href="#other">Other</a></h3>
+
+<h4 id="team">How do I setup my team in Datadog?</h4>
+<p>
+The admin of the account should enter the email addresses of team members 
+<a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows: 
+<ul>
+<li>When the team member receives the confirmation email, they will be provided 
+with a link to log in directly. The user should not click ‘sign up’ during this process.</li>
+<li>If multiple users from the same organization sign up separately, this will 
+register as different organizations in Datadog. Please reach out to support to 
+have these merged, but please note that all information contained in the 
+account getting merged will not be transferred over.</li>
+<li>The only access controls we have right now are around admin activities 
+(adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.) 
+all users have access to everything; more robust access controls are in our 
+pipeline, but not something we’ve focused a lot of attention on yet.</li>
+<li>To remove a team member use the “disable” button on the same ‘team’ page (only available 
+for admins). You cannot permanently remove users, just disable; disabled users will 
+only be visible to admins on the team page and can’t log in and any session they have 
+open is invalidated. We don’t fully delete them because they might own events, 
+dashboards, etc. which are not supposed to be removed.</li>
+</ul>
+</p>
+
+<h4 id="notify">What do @ notifications do in Datadog?</h4>
+<p>
+<ul>
+<li>@support – this will reach Datadog support directly when posted in your stream.</li>
+<li>@all – this will send a notification to all members of your organization.</li>
+<li>@yourname – this will notify the specific user named ‘yourname’.</li>
+<li>@test@test.com this will send an email to test@test.com, but only if test@test.com 
+is part of the organization.</li>
+<li>If you have hipchat, webhooks, or pagerduty you can use
+<ul>
+<li>@hipchat – posts the event to a hipchat chat room</li>
+<li>@webhooks – alerts whomever is attached to that webhook</li>
+<li>@pagerduty – sends an alert to pagerduty</li>
+</ul>
+
+</li>
+</ul>
+</p>
+

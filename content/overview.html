@@ -1,0 +1,125 @@
+---
+title: Overview
+sidebar:
+  nav:
+    - header: All About Datadog
+    - text: Integrations
+      href: "#integrations"
+    - text: Infrastructure
+      href: "#infrastructure"
+    - text: Events
+      href: "#events"
+    - text: Dashboards
+      href: "#dashboards"
+    - text: Alerting
+      href: "#alerting"
+---
+
+
+<h3>Welcome to Datadog!</h3>
+Our <a target="_blank" href="http://docs.datadoghq.com">docs</a> include specific 
+guides, this page displays Datadog's capabilities at a high level.
+
+<h2 id="integrations">Integrations</h2>
+
+<img src="/static/images/integrations.png" style="width:100%; border:1px solid #777777"/>
+
+<ul>
+<li>40+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, 
+always adding more.</li>
+<li>Custom integrations are available <a target="_blank" href="docs.datadoghq.com/api/">via our API</a>, 
+many documented by our active user community.</li>
+<li>The agent is <a target="_blank" href="https://github.com/DataDog/dd-agent/">open source</a> and you 
+can instrument your own if you'd like.</li>
+<li>Once integrations have been configured, data living in a datacenter or 
+in an online service is treated the same throughout Datadog.</li>
+</ul>
+
+<h2 id="infrastructure">Infrastructure</h2>
+
+<img src="/static/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
+
+<ul>
+<li>All machines show up in the infrastructure overview</li>
+<li>Here you can see the tags applied to each machine; as they're assigned to 
+perform certain roles, tagging allows you to indicate machines have 
+a certain purpose</li>
+<li>We do as much as possible to automatically categorize your servers 
+for you, to create structure in your infrastructure with as little 
+work as possible (unlike explicitly creating all your clusters). 
+Thus if a new machine is tagged, you can immediately see the stats 
+for that machine based on what was previously set up for that tag.</li>
+<li>For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
+
+</li>
+
+</ul>
+
+<h2 id="events">Events</h2>
+
+<img src="/static/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
+
+The Event Stream is based on the same conventions as a blog
+<ul>
+<li>Every event in the stream can be commented on.</li>
+<li>Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation</li>
+<li>You can filter by: user, source, tag, host, status, priority, incident</li>
+</ul>
+
+<img src="/static/images/event_stream_post_incident_history.png" style="width:100%; border:1px solid #777777"/>
+
+For each incident users can:
+<ul>
+<li>Claim it</li>
+<li>Increase/decrease priority</li>
+<li>Comment</li>
+<li>See similar incidents </li>
+<li><a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email</li>
+<li>@support to ask for assistance</li>
+</ul>
+
+<img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
+
+
+<h2 id="dashboards">Dashboards</h2>
+
+<img src="/static/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
+
+Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
+<ul>
+<li>Synchronous mousing across all graphs in a dashboard.	</li>
+<li>Vertical bars are events in the context of the metric.</li>
+<li>Click & drag on a graph to zoom-in on a particular time-frame.</li>
+<li>As you hover over the graph the event stream moves with you.</li>
+<li>Display by zone, host, or total usage.</li>
+<li>Share a graph snapshot that will appear in the stream; clicking on 
+that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
+<li>Graphs can be embedded in an iframe, giving a 3rd party a live graph 
+without access to your data or any other information (via the cog in the upper right of a graph).</li>
+</ul>
+
+
+<h2 id="alerting">Alerting</h2>
+<img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
+
+Alerting gives you the ability to be notified if the aggregate of a specific 
+metric is above or below a certain threshold:
+<ul>
+<li>Across your entire infrastructure</li>
+<li>Per machine (average, max, min, or sum) </li>
+<li>Applies to any metric you want, revenue: data center temperature, etc.</li>
+<li>Multi alerts (by device, host, etc.)</li>
+<li>Set alert notification message, including @ capabilities</li>
+</ul>
+
+<img src="/static/images/alert_setup.png" style="width:100%; border:1px solid #777777"/>
+
+Does the data have to be pushed to Datadog?
+<ol>
+Currently, yes:
+<li>All integrations we have get data flowing almost automatically after 
+launching the agent (intial reporting may take a few minutes, but not longer than 10).</li>
+<li>If you have custom metrics, you can indicate specifically where 
+to pull the data from.</li>
+</ol>
+
