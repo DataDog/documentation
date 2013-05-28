@@ -103,8 +103,8 @@ eof
 
 Histograms track the statistical distribution of a set of values, like the
 duration of a number of database queries or the size of files uploaded by users. Each
-histogram will track the average, minimum, maximum and the 75th, 85th, 95th and
-99th percentiles.
+histogram will track the average, the minimum, the maximum, the median
+and the 95th percentile.
 
 <%= python <<eof
 dog.histogram('database.query.time', 0.5)

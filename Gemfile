@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 gem 'adsf'
 gem 'kramdown'
 gem 'mime-types'

@@ -4,3 +4,8 @@ vendor/*
 .bundle/*
 NO_SYNTAX
 .rvmrc
+.DS_Store
+.rbenv-version
+.ruby-version
+.ruby-gemset
+.rbenv
