@@ -1,0 +1,99 @@
+---
+title: Basic Agent Usage for Windows
+---
+
+<!--
+======================================================
+Overview
+======================================================
+-->
+
+<h3 id="overview">Overview</h3>
+
+This guide will outline the basic functionality of the Datadog agent.
+If you haven't installed the agent yet, instructions can be found 
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>.<br/>
+
+The agent can be installed with a CLI installer (recommended) or a GUI installer.
+It will be installed as a Windows service.
+
+
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+
+<h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
+
+The execution of the agent is controlled by a Windows service. To start/stop/restart the agent,
+go to the Services panel. To open it, execute: <br/>
+
+<%= console 'services.msc' %>
+
+Look for the "Datadog Agent" service. A right click on it gives the different actions: Start, Stop, Restart.
+
+
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+<h3 id="status_and_information">Status and Information</h3>
+
+To check if the agent is running, check if the service status in the Services panel is "Started".
+A process called "ddagent.exe" should also exist in the Task Manager.
+
+To receive more information about the agent's state:
+
+<%= console 'http://localhost:17125/status' %>
+
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+<h3 id="configuration">Configuration</h3>
+
+The configuration file location depends on the version of Windows.
+
+For Windows Server 2003, XP or older
+<ul>
+    <li>Agent configuration: <br>
+        <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
+    <li>Integration configuration: <br>
+        <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
+</ul>
+
+
+For Windows Server 2008, Vista and newer
+<ul>
+    <li>Agent configuration: <br>
+        <code>C:\ProgramData\Datadog\datadog.conf</code></li>
+    <li>Integration configuration: <br>
+        <code>C:\ProgramData\Datadog\conf.d\</code></li>
+</ul>
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+First, check if the agent is running in the Services panel and in the Task Manager.
+
+Next, try running the <a href='#status_and_information'>status page</a> to see the state of the agent.
+
+Logs for the subsystems are available in the Event Viewer.
+
+<br/>
+
+If you're still having trouble, our support team will be glad to provide further assistance.
+You can contact them in one of the following ways:
+
+<%= render 'contact_info', :heading_size => 5, :hide_datadog => true %>
+
