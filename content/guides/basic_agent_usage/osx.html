@@ -10,13 +10,13 @@ Overview
 
 <h3 id="overview">Overview</h3>
 
-This guide will outline the basic functionality of the Datadog agent.
-If you haven't installed the agent yet, instructions can be found 
+This guide will outline the basic functionality of the Datadog Agent.
+If you haven't installed the Agent yet, instructions can be found 
 <a href='https://app.datadoghq.com/account/settings#agent/mac'>here</a>.<br/>
 
-By default, your agent will be installed in its own sandbox located at <code> '~/.datadog-agent'</code>.
+By default, your Agent will be installed in its own sandbox located at <code> '~/.datadog-agent'</code>.
 You’re free to move this folder wherever you like.
-However, this guide will assume that the agent is installed in its default location, so be sure to modify the
+However, this guide will assume that the Agent is installed in its default location, so be sure to modify the
 instructions accordingly if you decide to move it to another location.
 
 
@@ -28,15 +28,15 @@ Starting and Stopping the Agent
 
 <h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
 
-To manually start the agent: <br/>
+To manually start the Agent:
 
 <%= console 'sudo ~/.datadog-agent/bin/agent start' %>
 
-To stop the agent: <br/>
+To stop the Agent:
 
 <%= console 'sudo ~/.datadog-agent/bin/agent stop' %>
 
-To restart the agent: <br/>
+To restart the Agent:
 
 <%= console 'sudo ~/.datadog-agent/bin/agent restart' %>
 
@@ -48,11 +48,11 @@ Status and Information
 
 <h3 id="status_and_information">Status and Information</h3>
 
-To check if the agent is running:
+To check if the Agent is running:
 
 <%= console 'sudo ~/.datadog-agent/bin/agent status' %>
 
-To receive more information about the agent's state:
+To receive more information about the Agent's state:
 
 <%= console 'sudo ~/.datadog-agent/bin/info' %>
 
@@ -68,7 +68,7 @@ Configuration
 
 <h3 id="configuration">Configuration</h3>
 
-The configuration file for the agent is located at <code>~/.datadog-agent/agent/datadog.conf</code>
+The configuration file for the Agent is located at <code>~/.datadog-agent/agent/datadog.conf</code>
 
 Configuration files for integrations are located in <code>~/.datadog-agent/agent/conf.d/</code>
 
@@ -80,7 +80,7 @@ Troubleshooting
 
 <h3 id="troubleshooting">Troubleshooting</h3>
 
-First, make sure you are using the correct version of Python. The agent requires version 2.4 or greater. You can check your version by executing:
+First, make sure you are using the correct version of Python. The Agent requires version 2.4 or greater. You can check your version by executing:
 
 <%= console "cd ~/.datadog-agent/agent && python -c 'import config; print config.get_version()'" %>
 

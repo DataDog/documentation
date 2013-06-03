@@ -10,8 +10,8 @@ Overview
 
 <h3 id="overview">Overview</h3>
 
-This guide will outline the basic functionality of the Datadog agent.
-If you haven't installed the agent yet, instructions can be found 
+This guide will outline the basic functionality of the Datadog Agent.
+If you haven't installed the Agent yet, instructions can be found 
 <a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>.<br/>
 
 <!--
@@ -22,13 +22,13 @@ Starting and Stopping the Agent
 
 <h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
 
-The execution of the agent is controlled by a Windows service. The agent can be started, stopped, and
-restarted from the Services panel. To view the Services panel, execute the following in a <code>cmd.exe</code> shell: <br/>
+The execution of the Agent is controlled by a Windows service. The Agent can be started, stopped, and
+restarted from the Services panel. To view the Services panel, execute the following in a <code>cmd.exe</code> shell:
 
 <%= console 'services.msc' %>
 
 Once you're in the console, find the "Datadog Agent" service. 
-Right clicking on the service will reveal options to start, stop, and restart the agent.
+Right clicking on the service will reveal options to start, stop, and restart the Agent.
 
 
 <!--
@@ -39,10 +39,10 @@ Status and Information
 
 <h3 id="status_and_information">Status and Information</h3>
 
-To check if the agent is running, check if the service status in the Services panel is listed as "Started".
+To check if the Agent is running, check if the service status in the Services panel is listed as "Started".
 A process called "ddagent.exe" should also exist in the Task Manager.
 
-To receive more information about the agent's state, visit the following page in your web browser:
+To receive more information about the Agent's state, visit the following page in your web browser:
 
 <%= console 'http://localhost:17125/status' %>
 
@@ -54,7 +54,7 @@ Configuration
 
 <h3 id="configuration">Configuration</h3>
 
-The configuration file location depends on the version of Windows on which the agent is installed.
+The configuration file location depends on the version of Windows on which the Agent is installed.
 
 For Windows Server 2003, XP or older:
 <ul>
@@ -81,9 +81,9 @@ Troubleshooting
 
 <h3 id="troubleshooting">Troubleshooting</h3>
 
-First, check if the agent is running in the Services panel and in the Task Manager.
+First, check if the Agent is running in the Services panel and in the Task Manager.
 
-Next, try opening the <a href='#status_and_information'>status page</a> to see the state of the agent.
+Next, try opening the <a href='#status_and_information'>status page</a> to see the state of the Agent.
 
 Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.
 
