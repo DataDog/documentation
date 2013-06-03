@@ -1,0 +1,98 @@
+---
+title: Basic Agent Usage for SmartOS
+---
+
+<!--
+======================================================
+OVERVIEW
+======================================================
+-->
+
+<h3 id="overview">Overview</h3>
+
+This guide will outline the basic functionality of the Datadog Agent.
+If you haven't installed the Agent yet, instructions can be found 
+<a href='https://app.datadoghq.com/account/settings#agent/smartos'>here</a>.<br/>
+
+
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+
+<h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
+
+To manually start the Agent: <br/>
+
+<%= console 'svcadm enable datadog' %>
+
+To stop the Agent: <br/>
+
+<%= console 'svcadm disable datadog' %>
+
+To restart the Agent: <br/>
+
+<%= console 'svcadm restart datadog' %>
+
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+<h3 id="status_and_information">Status and Information</h3>
+
+To check if the Agent is running:
+
+<%= console 'svcs datadog' %>
+
+To receive more information about the Agent's state:
+
+<%= console '/opt/local/datadog/bin/info' %>
+
+Tracebacks for errors can be retrieved by setting the <code>-v</code> flag:
+
+<%= console '/opt/local/datadog/bin/info -v' %>
+
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+<h3 id="configuration">Configuration</h3>
+
+The configuration file for the Agent is located at <code>/opt/local/datadog/agent/datadog.conf</code>
+
+Configuration files for integrations are located in <code>/opt/local/datadog/agent/conf.d/</code>
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+First, make sure you are using the correct version of Python. The Agent requires version 2.6 or greater. You can check your version by executing:
+
+<%= console "cd /opt/local/datadog/agent && python -c 'import config; print config.get_version()'" %>
+
+Next, try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
+
+Logs for the subsystems are in the following files:
+
+<ul>
+  <li><code>/opt/local/datadog/logs/supervisord/collector.log</code></li>
+  <li><code>/opt/local/datadog/logs/supervisord/dogstatsd.log</code></li>
+  <li><code>/opt/local/datadog/logs/supervisord/forwarder.log</code></li>
+</ul>
+
+<br/>
+
+If you're still having trouble, our support team will be glad to provide further assistance.
+You can contact them in one of the following ways:
+
+<%= render 'contact_info', :heading_size => 5, :hide_datadog => true %>
+
