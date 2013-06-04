@@ -1,0 +1,22 @@
+<% @heading_size ||= 3 %>
+<% @heading = "h#{ @heading_size }" %>
+
+<% unless @hide_datadog %>
+  <<%= @heading %> id="datadog">Using Datadog</<%= @heading %>>
+
+  You can get in touch with our support team by mentioning <code>@support</code>
+  in a comment on Datadog.
+<% end %>
+
+<<%= @heading %> id="email">By Email</<%= @heading %>>
+
+Reach out at <a href="mailto:support@datadoghq.com">support@datadoghq.com.
+
+<<%= @heading %> id="irc">Over IRC</<%= @heading %>>
+
+If you want to chat in real-time, pop by our <a
+href="irc://irc.freenode.net/datadog">IRC room</a> on Freenode.
+
+<<%= @heading %> id="desk">Post a Question</<%= @heading %>>
+<a href="https://datadog.desk.com/customer/portal/questions/new">Post a public question!</a>
+
