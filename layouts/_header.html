@@ -1,38 +1,40 @@
 <!-- HEADER -->
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse navbar-static-top">
   <div class="navbar-inner">
-    <div class="container">
-      <div class="row">
-        <div class="span12">
+    <div class="<% unless @fluid %>container<% else %>container-fluid<% end %>">
+      <div class="<% unless @fluid %>row<% else %>row-fluid<% end %>">
+        <div class="span4">
           <a class="brand" href="/"><img src="/static/logo.png" alt="Datadog Docs"></a>
+        </div>
+        <div class="span8" id="topmenu">
           <ul class="nav">
-            <li class="active dropdown">
+            <li class="dropdown">
               <a id="nav-guide-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Guides <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
                 <li><a href="/guides/basic_agent_usage/">Getting Started with the Agent</a></li>
-                <li><a href="/guides/metrics/">Getting Started with Metrics</a></li>
-                <li><a href="/guides/logs/">Getting Started with Log Parsing</a></li>
-                <li><a href="/guides/agent_checks/">Getting Started with Agent Checks</a></li>
-                <li><a href="/guides/services_checks/">Getting Started with Service Checks</a></li>
-                <li><a href="/guides/chef/">Getting Started with Chef</a></li>
+                <li><a href="/overview/">Datadog Overview</a></li>
+                <li><a href="/guides/metrics/">Sending Metrics with DogStatsD</a></li>
+                <li><a href="/guides/logs/">Log Parsing in the Agent</a></li>
+                <li><a href="/guides/agent_checks/">Writing an Agent Check</a></li>
+                <li><a href="/guides/services_checks/">Setting up Service Checks</a></li>
+                <li><a href="/guides/chef/">Deploying the Agent with Chef</a></li>
               </ul>
             </li>
-            <li class="active dropdown">
+            <li class="dropdown">
               <a id="nav-reference-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">References <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
-                <li><a href="/api/">API Reference</a></li>
-                <li><a href="/graphing/">Graphing Reference</a></li>
-                <li><a href="/hostnames/">Host Names</a></li>
+                <li><a href="/api/">API</a></li>
                 <li><a href="/libraries/">Libraries</a></li>
-                <li><a href="/guides/dogstatsd/">Statsd</a></li>
+                <li><a href="/graphing/">Graphing</a></li>
+                <li><a href="/hostnames/">Host Names</a></li>
+                <li><a href="/integrations/">Integrations</a></li>
+                <li><a href="/guides/dogstatsd/">DogStatsD</a></li>
               </ul>
             </li>
-            <li class="active"><a href="/help/">Help</a></li>
+            <li><a href="/help/">Help</a></li>
+            <li id="signin"><a class="flexbutton" href="https://app.datadoghq.com">Sign In</a></li>
+            <li id="signup"><a class="flexbutton blueflex" href="https://app.datadoghq.com/signup">Sign Up</a></li>
           </ul>
-          <span class="header-buttons">
-            <a class="btn btn-info" href="https://app.datadoghq.com">Sign In</a>
-            <a class="btn btn-warning" href="https://app.datadoghq.com/signup">Sign Up</a>
-          </span>
         </div>
       </div>
     </div>

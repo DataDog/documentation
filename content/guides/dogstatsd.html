@@ -1,23 +1,45 @@
 ---
-title: Getting Started with DogStatsd
+title: Getting Started with DogStatsD
+sidebar:
+  nav:
+    - header: Official Libraries
+    - text: How It Works
+      href: "#how-it-works"
+    - text: Set Up
+      href: "#set-up"
+    - text: Metrics
+      href: "#metrics"
+    - text: Sample Rates
+      href: "#sample-rates"
+    - text: Tags
+      href: "#tags"
+    - text: Configuration
+      href: "#configuration"
+    - text: Datagram Format
+      href: "#datagram-format"
+    - text: Source
+      href: "#source"
 ---
 
 <p class="aside">
   This tutorial will walk you through instrumenting your application to send
-  custom metrics to Datadog. If you need some help as you go, pop by our
-  <a href="irc://irc.freenode.net/datadog">IRC channel</a>.
+  custom metrics to Datadog. If you need some help as you go, pop by 
+  <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
+  where we'll be happy to answer any questions you might have. (There's a 
+  <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
+  web chat client, too</a>.)
 </p>
 
-The easiest way to get your custom metrics into Datadog is to send them to DogStatsd,
+The easiest way to get your custom metrics into Datadog is to send them to DogStatsD,
 a metrics aggregation server bundled with the Datadog agent (in versions 3.0
 and above).
-DogStatsd implements the
-<a href="https://github.com/etsy/statsd">Statsd</a>
+DogStatsD implements the
+<a href="https://github.com/etsy/statsd">StatsD</a>
 protocol, along with a few extensions for special Datadog features.
 
 ## How It Works
 
-DogStatsd accepts custom application metrics points over
+DogStatsD accepts custom application metrics points over
 <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a>,
 and then periodically aggregates and forwards the metrics to Datadog, where
 they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
@@ -27,12 +49,12 @@ they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 
 ### Aggregation
 
-DogStatsd's primary function is to aggregate many data points into a single
+DogStatsD's primary function is to aggregate many data points into a single
 metric for a given interval of time (ten seconds by default). Let's walk through an
 example to understand how this works.
 
 Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsd to increment a counter each
+your application can tell DogStatsD to increment a counter each
 time this query is executed. For example:
 
 <%= python <<eof
@@ -43,17 +65,17 @@ eof
 %>
 
 If this function is executed one hundred times in a flush interval (ten
-seconds by default), it will send DogStatsd one hundred UDP packets that say
-"increment the 'database.query.count' counter". DogStatsd will aggregate these
+seconds by default), it will send DogStatsD one hundred UDP packets that say
+"increment the 'database.query.count' counter". DogStatsD will aggregate these
 points into a single metric value - 100 in this case - and send it to the
 server where it can be graphed.
 
-This means expect DogStatsd to produce one point per metric per flush interval
+This means expect DogStatsD to produce one point per metric per flush interval
 while data is being submitted for that metric.
 
 ### Why UDP?
 
-Like Statsd, DogStatsd receives points over UDP. UDP is good fit for application
+Like StatsD, DogStatsD receives points over UDP. UDP is good fit for application
 instrumentation because it is a fire and
 forget protocol. This means your application won't stop its actual work to wait for a
 response from the metrics server, which is very important if the metrics
@@ -61,20 +83,20 @@ server is down or inaccessible.
 
 ## Set Up
 
-Once you have the Datadog Agent up and running, grab a DogStatsd client for your
-language and you'll be ready to start hacking. Any Statsd client will work
-just fine, but using a Datadog Statsd client will give you a few extra features
+Once you have the Datadog Agent up and running, grab a DogStatsD client for your
+language and you'll be ready to start hacking. Any StatsD client will work
+just fine, but using a Datadog StatsD client will give you a few extra features
 (namely tags and histograms, but more on that later).
 
-### DogStatsd Clients
+### DogStatsD Clients
 
-You can see the list of Statsd clients on our [libraries page](/libraries/).
+You can see the list of StatsD clients on our [libraries page](/libraries/).
 
 ## Metrics
 
-We'll walk through the types of metrics supported by DogStatsd in Python, but
+We'll walk through the types of metrics supported by DogStatsD in Python, but
 the principles are easily translated into other languages.
-DogStatsd supports the following types of metrics:
+DogStatsD supports the following types of metrics:
 
 ### Gauges
 
@@ -112,7 +134,7 @@ dog.histogram('file.upload.size', file.get_size())
 eof
 %>
 
-Histograms are an extension to Statsd, so you'll need to use a client that
+Histograms are an extension to StatsD, so you'll need to use a client that
 supports them.
 
 ### Sets
@@ -128,15 +150,15 @@ eof
 
 ### Timers
 
-Statsd only supports histograms for timing, not generic values (like the size
+StatsD only supports histograms for timing, not generic values (like the size
 of uploaded files or the number of rows returned from a query). Timers are
 essentially a special case of histograms, so they are treated in the same manner
-by DogStatsd for backwards compatibility.
+by DogStatsD for backwards compatibility.
 
 ## Sample Rates
 
 The overhead of sending UDP packets can be too great for some performance
-intensive code paths. To work around this, Statsd clients support sampling,
+intensive code paths. To work around this, StatsD clients support sampling,
 that is to say, only sending metrics a percentage of the time. For example:
 
 <%= python <<eof
@@ -149,14 +171,14 @@ multipled by the sample rate to provide an estimate of the real data.
 
 ## Tags
 
-Tags are a Datadog specific extension to Statsd. They allow you to tag a metric
+Tags are a Datadog specific extension to StatsD. They allow you to tag a metric
 with a dimension that's meaningful to you and slice and dice along that
 dimension in your graphs. For example, if you wanted to measure the
 performance of two video rendering algorithms, you could tag the rendering time
 metric with the version of the algorithm you used.
 
 
-Since tags are an extension to Statsd, so you'll need to use a client that
+Since tags are an extension to StatsD, so you'll need to use a client that
 supports them.
 
 
@@ -179,11 +201,11 @@ eof
 
 ## Configuration
 
-DogStatsd supports the following options, all of which can be tweaked in the
+DogStatsD supports the following options, all of which can be tweaked in the
 Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
 configuration file</a>:
 
-    # The port DogStatsd runs on. If you change this, make your the apps sending to
+    # The port DogStatsD runs on. If you change this, make your the apps sending to
     # it change as well.
     dogstatsd_port: 8125
 
@@ -192,7 +214,7 @@ configuration file</a>:
 
 ## Datagram Format
 
-If you want to send metrics to DogStatsd in your own way, here is the format of
+If you want to send metrics to DogStatsD in your own way, here is the format of
 the packets:
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
@@ -229,5 +251,5 @@ Here are some example datagrams and comments explaining them:
 
 ## Source
 
-DogStatsd is open-sourced under the BSD License. Check out the source
+DogStatsD is open-sourced under the BSD License. Check out the source
 [here](https://github.com/DataDog/dd-agent).
