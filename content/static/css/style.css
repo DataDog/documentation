@@ -75,7 +75,6 @@ h1, h2, h3 {
 
 .nav.sidebar .nav-header {
   margin-top: 0;
-/*    background-color: #774aa4;*/
   background-color: #9d6ebf;
     color: #fff;
     text-shadow: none;
@@ -105,6 +104,10 @@ h1#pagetitle {
 
 .main > ol > li, .main > ul > li {
     margin-bottom: 6px;
+}
+
+.main > .nav-tabs > li {
+    margin-bottom: -1px;
 }
 
 /* CorpWeb-style Buttons */
@@ -234,7 +237,6 @@ h1#pagetitle {
 
 .api-left {
   height:100%;
-  max-width:500px;
 }
 
 .api-right {

@@ -1,8 +1,8 @@
 <!-- HEADER -->
 <div class="navbar navbar-inverse navbar-static-top">
   <div class="navbar-inner">
-    <div class="container">
-      <div class="row">
+    <div class="<% unless @fluid %>container<% else %>container-fluid<% end %>">
+      <div class="<% unless @fluid %>row<% else %>row-fluid<% end %>">
         <div class="span4">
           <a class="brand" href="/"><img src="/static/logo.png" alt="Datadog Docs"></a>
         </div>
@@ -12,6 +12,7 @@
               <a id="nav-guide-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Guides <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
                 <li><a href="/guides/basic_agent_usage/">Getting Started with the Agent</a></li>
+                <li><a href="/overview/">Datadog Overview</a></li>
                 <li><a href="/guides/metrics/">Sending Metrics with DogStatsD</a></li>
                 <li><a href="/guides/logs/">Log Parsing in the Agent</a></li>
                 <li><a href="/guides/agent_checks/">Writing an Agent Check</a></li>
@@ -28,7 +29,6 @@
                 <li><a href="/hostnames/">Host Names</a></li>
                 <li><a href="/integrations/">Integrations</a></li>
                 <li><a href="/guides/dogstatsd/">DogStatsD</a></li>
-                <li><a href="/overview/">Datadog Overview</a></li>
               </ul>
             </li>
             <li><a href="/help/">Help</a></li>
