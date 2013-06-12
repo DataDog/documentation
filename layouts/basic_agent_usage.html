@@ -14,21 +14,14 @@ to the basic agent usage guide of each platform
 
     <div class="container">
 
-      <!-- PAGE TITLE -->
-      <div class="row">
-        <div class="span8 offset3">
-          <h1><%= @item[:title] %> </h1>
-        </div>
-      </div>
-
       <div class="row">
 
         <!-- SIDEBAR -->
         <div class="span3">
-        <ul class="nav nav-tabs nav-stacked affix sidebar">
+        <ul class="nav nav-tabs nav-stacked sidebar" data-spy="affix" data-offset-top="150">
 
           <!-- AGENT PLATFORM SELECTION -->
-          <li class="nav-header">Getting Started with the Agent</li>
+          <li class="nav-header">Agent Guides by Platform</li>
           <li><a href='/guides/basic_agent_usage/osx/'>Mac OS X</a></li>
           <li><a href='/guides/basic_agent_usage/windows/'>Windows</a></li>
           <li><a href='/guides/basic_agent_usage/deb/'>Debian Squeeze</a></li>
@@ -56,7 +49,9 @@ to the basic agent usage guide of each platform
 
         <!-- MAIN -->
         <div class="span8 main">
-            <%= yield %>
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <%= yield %>
         </div>
       </div>
     </div>

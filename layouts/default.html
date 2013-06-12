@@ -13,19 +13,12 @@ this layout provides a sidebar and main column.
 
     <div class="container">
 
-      <!-- PAGE TITLE -->
-      <div class="row">
-        <div class="span8 offset3">
-          <h1><%= @item[:title] %> </h1>
-        </div>
-      </div>
-
       <div class="row">
 
         <!-- SIDEBAR -->
-        <div class="span3">
+        <div class="span3" id="sidebarcolumn">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-          <ul class="nav nav-tabs nav-stacked affix sidebar">
+          <ul class="nav nav-tabs nav-stacked sidebar" data-spy="affix" data-offset-top="140">
           <% @item[:sidebar][:nav].each do |i| %>
             <% if i[:header] %>
               <li class="nav-header"><%= i[:header] %></li>
@@ -39,12 +32,19 @@ this layout provides a sidebar and main column.
         </div>
 
         <!-- MAIN -->
-        <div class="span8 main">
+        <div class="span9 main">
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
             <%= yield %>
         </div>
       </div>
     </div>
-
+    <div class="container">
+      <div class="row" id="footer">
+        <div class="span12">Found an issue? <a href="https://github.com/DataDog/documentation/issues">Let us know.</a> &bull; Need some help? <a href="/help/">Get in touch.</a></div>
+        <div class="span12">&copy; Datadog, Inc. All rights reserved.</div>
+      </div>
+    </div>
     <%= render "_javascript" %>
 
     <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
