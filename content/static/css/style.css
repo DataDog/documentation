@@ -3,12 +3,11 @@ body {
 }
 
 .navbar-inverse .navbar-inner,
-.navbar-inverse .nav li.dropdown.open>.dropdown-toggle, .navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
-.navbar-inverse .nav li.dropdown.open.active>.dropdown-toggle,
-.navbar-inverse .nav .active > a,
-.navbar-inverse .nav .active > a:hover,
-.navbar-inverse .nav .active > a:focus {
-  background-image: linear-gradient(to bottom,#774aa4,#51326f);
+.navbar-inverse .nav > li.dropdown.open>.dropdown-toggle, .navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
+.navbar-inverse .nav > li.dropdown.open.active>.dropdown-toggle,
+.navbar-inverse .nav > li > a,
+.navbar-inverse .nav > li > a:hover,
+.navbar-inverse .nav > li > a:focus {
   background-image: none;
   background-color: #774aa4;
   color: #e5d2f9;
@@ -16,13 +15,13 @@ body {
 }
 
 .navbar-inverse .navbar-inner {
-    padding-top: 17px;
+    padding-top: 16px;
     min-height: 35px;
-    padding-bottom: 17px;
+    padding-bottom: 15px;
     border-bottom: #9565c6 solid 1px;
 }
 
-.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus {
+.navbar .nav>li>a, .navbar .nav>li>a:hover, .navbar .nav>li>a:focus {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -38,28 +37,22 @@ body {
     display: inline;
 }
 
-#topmenu .nav > .active, .header-buttons {
+#topmenu .nav > li {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-#topmenu .nav > .active > ul {
+#topmenu .nav > li > ul {
     text-align: left;
     text-transform: none;
     text-shadow: none;
 }
 
 .navbar .brand {
-    padding-bottom: 0;
-}
-
-.header-buttons .btn {
-    border-radius: 2em;
-    margin: 0 0.5em;
-    margin-bottom: -16px;
-    display: inline-block;
+    padding: 0;
+    padding-right: 5px;
 }
 
 h1, h2, h3 {
@@ -82,7 +75,8 @@ h1, h2, h3 {
 
 .nav.sidebar .nav-header {
   margin-top: 0;
-    background-color: #774aa4;
+/*    background-color: #774aa4;*/
+  background-color: #9d6ebf;
     color: #fff;
     text-shadow: none;
 }
@@ -115,8 +109,8 @@ h1#pagetitle {
 
 /* CorpWeb-style Buttons */
 
-a.flexbutton,
-a.blueflex {
+.navbar-inverse .nav li > a.flexbutton,
+.navbar-inverse .nav li > a.blueflex {
 	display: inline-block;
 	margin: 0 6px;
 	padding: 6px 18px;
@@ -148,7 +142,7 @@ a.blueflex {
 	border-radius: 18px;
 }
 
-a.flexbutton:hover {
+.navbar-inverse .nav li > a.flexbutton:hover {
 	background: #aa7ad0;
 
 	-webkit-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
@@ -158,7 +152,7 @@ a.flexbutton:hover {
 	box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 }
 
-a.blueflex {
+.navbar-inverse .nav li > a.blueflex {
 
 	background: #5be;
 	border-color: #39c;
@@ -176,7 +170,7 @@ a.blueflex {
 	box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 }
 
-a.blueflex:hover {
+.navbar-inverse .nav li > a.blueflex:hover {
 	background: #6cf;
 
 	-webkit-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
@@ -184,6 +178,11 @@ a.blueflex:hover {
 	-ms-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 	-o-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 	box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+#signin, #signup {
+  float: right;
+  padding-left: 5px;
 }
 
 /* Docs Home */
