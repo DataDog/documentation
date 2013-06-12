@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Metrics
+title: Sending Metrics with DogStatsD
 sidebar:
   nav:
     - header: Guide to Metrics
@@ -26,11 +26,6 @@ sidebar:
       href: "#methods"
 ---
 
-<div class="alert alert-info">
-This tutorial teaches how to send your application's custom metrics to Datadog.
-If you need any help getting started, pop by our <a href="irc://irc.freenode.net/datadog">chat room</a>.
-</div>
-
 <!--
 ======================================================
 OVERVIEW
@@ -39,6 +34,7 @@ OVERVIEW
 
 <h3 id="overview">Overview</h3>
 
+This guide explains how to send your application's custom metrics to Datadog. 
 Sending your application's custom metrics to Datadog will let you correlate
 what's happening with your application, your users and your system.
 
@@ -377,8 +373,8 @@ EOF
 
 <h3 id="sample-rates">Sample Rates</h3>
 
-Each metric point is sent over UDP to the Statsd server. This can incur a lot
-of overhead for performance intensive code paths. To work around this, Statsd
+Each metric point is sent over UDP to the StatsD server. This can incur a lot
+of overhead for performance intensive code paths. To work around this, StatsD
 supports sample rates, which allows sending a metric a fraction of the time
 and scaling up correctly on the server.
 
@@ -410,7 +406,7 @@ EOF
 
 <h3 id="methods">Other Submission Methods</h3>
 
-Using the Statsd server bundled with the Datadog Agent is the simplest
+Using the StatsD server bundled with the Datadog Agent is the simplest
 way of submtting metrics to Datadog, but it's not
 the only one. Here are some other ways of getting your metrics data into
 Datadog:
