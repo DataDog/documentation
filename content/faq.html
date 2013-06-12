@@ -44,66 +44,7 @@ sidebar:
 
 <h3><a name="agent" href="#agent">Agent</a></h3>
 
-<h4><a name="agent-config-files" href="#agent-config-files">Where are the agent's config files located?</a></h4>
-
-<h5>Linux</h5>
-<ul>
-    <li>/etc/dd-agent/datadog.conf</li>
-    <li>/etc/dd-agent/conf.d/</li>
-    <li>/usr/share/datadog/agent/checks.d/</li>
-</ul>
-
-<h5>Windows Server 2003 or older (or XP and older)</h5>
-<ul>
-    <li>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</li>
-    <li>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</li>
-    <li>C:\Program Files\Datadog\Agent\checks.d\</li>
-</ul>
-
-<h5>Windows Server 2008 or newer (or Vista and newer)</h5>
-<ul>
-    <li>C:\ProgramData\Datadog\datadog.conf</li>
-    <li>C:\ProgramData\Datadog\conf.d\</li>
-    <li>C:\Program Files (x86)\Datadog\Agent\checks.d\</li>
-</ul>
-
-<h5>OS X</h5>
-<ul>
-    <li>~/.datadog-agent/agent/datadog.conf</li>
-    <li>~/.datadog-agent/agent/conf.d/</li>
-    <li>~/.datadog-agent/agent/checks.d/</li>
-</ul>
-
-<!-- ====================================================================== -->
-
-<h4><a name="agent-version" href="#agent-version">How can I troubleshoot?</a><h4>
-
-<h5>Linux</h5>
-
-<p>First try: <code>sudo /etc/init.d/datadog-agent info</code></p>
-
-<p>If that doesn't work, then try:</p>
-<p>
-<code>cd /usr/share/datadog/agent &amp;&amp; python -c 'import config; print config.get_version()'</code>
-</p>
-<p>
-You can also check out the logs for any errors:
-
-<br><code>/var/log/datadog/collector.log</code> 
-<br><code>/var/log/datadog/dogstatsd.log</code>
-<br><code>/var/log/datadog/forwarder.log</code>
-
-</p>
-
-<h5>Windows</h5>
-
-<p>
-For agent version 3.7.0 or greater, the equivalent of the info command for Windows is found here:
-<br><a target="_blank" href="http://localhost:17125/status">localhost:17125/status</a>
-<br>
-The logs can be found in the Event Viewer.
-
-</p>
+<p>For any agent-related questions, refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</p>
 
 <!--
 ===============================================================================
