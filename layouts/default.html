@@ -18,7 +18,7 @@ this layout provides a sidebar and main column.
         <!-- SIDEBAR -->
         <div class="span3" id="sidebarcolumn">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-          <ul class="nav nav-tabs nav-stacked sidebar" data-spy="affix" data-offset-top="140">
+          <ul class="nav nav-tabs nav-stacked sidebar">
           <% @item[:sidebar][:nav].each do |i| %>
             <% if i[:header] %>
               <li class="nav-header"><%= i[:header] %></li>
