@@ -64,11 +64,6 @@ h1, h2, h3 {
     width: 220px;
 }
 
-.nav.sidebar.affix {
-    margin-top: 0;
-    top: 20px;
-}
-
 .nav.sidebar .nav-header:first-child {
       border-radius: 4px 4px 0 0;
 }
