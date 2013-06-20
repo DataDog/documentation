@@ -371,6 +371,13 @@ EOF
   </div>
 </div>
 
+<p class="alert alert-warning">
+We store one timeseries per host + metric + tag combination on our backend,
+thus we cannot support infinitely bounded tags. Please don't include endlessly
+growing tags in your metrics, like timestamps or user ids. Please limit each
+metric to 1000 tags.
+</p>
+
 <h3 id="sample-rates">Sample Rates</h3>
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
