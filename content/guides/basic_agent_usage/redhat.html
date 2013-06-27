@@ -51,7 +51,7 @@ To receive more information about the Agent's state:
 
 <%= console 'sudo /etc/init.d/datadog-agent info' %>
 
-Tracebacks for errors can be retrieved by setting the <code>-v</code> flag:
+Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
 
 <%= console 'sudo /etc/init.d/datadog-agent info -v' %>
 
@@ -84,6 +84,7 @@ Next, try running the <a href='#status_and_information'>info</a> command to see 
 Logs for the subsystems are in the following files:
 
 <ul>
+  <li><code>/var/log/supervisor/datadog-supervisord.log</code></li>
   <li><code>/var/log/datadog/collector.log</code></li>
   <li><code>/var/log/datadog/dogstatsd.log</code></li>
   <li><code>/var/log/datadog/forwarder.log</code></li>
