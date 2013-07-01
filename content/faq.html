@@ -44,7 +44,7 @@ sidebar:
 
 <h3><a name="agent" href="#agent">Agent</a></h3>
 
-<p>For any agent-related questions, refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</p>
+<p>For any Agent-related questions, refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</p>
 
 <!--
 ===============================================================================
@@ -58,7 +58,7 @@ sidebar:
 <p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. 
 Other characters will get converted to underscores. There is no max length. Unicode is not support.
 We recommend avoiding spaces. 
-Metrics reported by the agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
 We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, 
 but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are 
 reporting ‘http.nginx.*’, those must be web frontends”). 
@@ -89,7 +89,7 @@ defined as a unique combination of metric name and tag.
 <h3><a name="architecture" href="#architecture">Architecture</a></h3>
 
 <h4><a name="arch-cloud-or-server" href="#arch-cloud-or-server">Is Datadog a cloud service or server application?</a></h4>
-<p>It's primarily a cloud service, but if you want to collect data on your servers, there is an agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
+<p>It's primarily a cloud service, but if you want to collect data on your servers, there is an Agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
 
 <!-- ====================================================================== -->
 
@@ -139,8 +139,8 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 <h4>How are hostnames determined?</h4>
 
 <p>
-The hostnames are determined by what the Datadog agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
-You can see all names being detected by the agent by running the info command:
+The hostnames are determined by what the Datadog Agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
+You can see all names being detected by the Agent by running the info command:
  <code>/etc/init.d/datadog-agent info</code>
 
 </p>

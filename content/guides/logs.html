@@ -11,12 +11,12 @@ sidebar:
 
 Log files contain tons of valuable application and business data.
 Unfortunately, this value is oftentimes never realized because log files go
-ignored. The Datadog agent can help remedy this by parsing metrics and events from
+ignored. The Datadog Agent can help remedy this by parsing metrics and events from
 logs, so the data within can ge graphed in real-time, all the time.
 
 <h2 id="metrics">Parsing Metrics</h2>
 
-The Datadog agent can read metrics directly from your log files:
+The Datadog Agent can read metrics directly from your log files:
 
 - from the Datadog canonical log format, without any additional programming
 - from any other log format, with a customized log parsing function
@@ -32,7 +32,7 @@ For example, imagining the content of `/var/log/web.log` to be:
     me.web.requests 1320786966 157 metric_type=counter unit=request
     me.web.latency 1320786966 250 metric_type=gauge unit=ms
 
-Then all you need for Datadog to read metrics is to add this line to your agent
+Then all you need for Datadog to read metrics is to add this line to your Agent
 configuration file (usually at `/etc/dd-agent/datadog.conf`):
 
     dogstreams: /var/log/web.log
@@ -46,15 +46,15 @@ You can also specify multiple log files like this:
 If you want to parse a different log format - say for a piece of vendor
 or legacy software - you can use a custom Python
 function to extract the proper fields from the log by adding the following line
-to your agent configuration file:
+to your Agent configuration file:
 
     dogstreams: /var/log/web.log:parsers:parse_web
 
 The `parsers:parse_web` portion indicates that the custom Python function lives
-in a package called  parsers in the agent's `PYTHONPATH`, and the parsers package
-has a function named `parse_web`. The agent's `PYTHONPATH` is set in the agent
-startup script, `/etc/init.d/datadog-agent` for agent versions < 2.0, and in the
-supervisor config for agent version >= 2.0.
+in a package called  parsers in the Agent's `PYTHONPATH`, and the parsers package
+has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent
+startup script, `/etc/init.d/datadog-agent` for Agent versions < 2.0, and in the
+supervisor config for Agent version >= 2.0.
 
 ### Writing Parsing Functions
 
@@ -103,7 +103,7 @@ eof
 %>
 
 
-You'll want to be able to test your parser outside of the agent, so for the above example,
+You'll want to be able to test your parser outside of the Agent, so for the above example,
 you might add a test function like this:
 
 <%= python <<eof
@@ -164,7 +164,7 @@ search.</td>
 <th>timestamp</th>
 <td>integer</td>
 <td>Unix epoch timestamp. If omitted, will default to the time that
-the agent parsed the event.</td>
+the Agent parsed the event.</td>
 </tr>
 <tr>
 <td>msg_text</td>
@@ -218,4 +218,4 @@ The aggregation key is a combination of the following fields:
 - host
 
 For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py)
-that is bundled with the agent.
+that is bundled with the Agent.
