@@ -10,4 +10,4 @@ dog = Dogapi::Client.new(api_key, app_key)
 # setting it
 dog = Dogapi::Client.new(api_key)
 
-dog.emit_event(Dogapi::Event.new('Testing done, FTW', :msg_title => 'Title'))
+dog.emit_event(Dogapi::Event.new('msg_text', :msg_title => 'Title'))
