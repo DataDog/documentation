@@ -21,7 +21,7 @@ STATUS_CODES = {
 }
 
 # The languages we show in code blocks.
-LANGUAGES = %w{Python Ruby}
+LANGUAGES = %w{Python Ruby Console}
 
 # The default active language
 ACTIVE_LANGUAGE = 'Python'
@@ -49,10 +49,19 @@ def argument(name, description, options={})
   is_required = !options.member?(:default)
   r = is_required ? 'required' : 'optional'
   o = !is_required ? ", default=#{options[:default]}" : ''
+
+  if options[:lang]
+    lang = " class=\"lang-specific lang-specific-#{options[:lang]}\""
+    lang += ' style="display: none;"' if options[:lang] != ACTIVE_LANGUAGE.downcase
+  else
+    lang = nil
+  end
+
   return <<-EOF
-    <li>
+    <li#{lang}>
       <strong>#{name} [#{r}#{o}]</strong>
       <div>#{description}</div>
     </li>
   EOF
 end
+

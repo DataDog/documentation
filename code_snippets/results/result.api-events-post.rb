@@ -3,11 +3,10 @@
   "event"=>
    {"priority"=>"normal",
     "date_happened"=>1346452418,
-    "handle"=>nil,
-    "title"=>"",
+    "title"=>"Title",
     "url"=>
      "https://app.datadoghq.com/event/jump_to?event_id=1378911893708573827",
-    "text"=>nil,
+    "text"=>"msg_text",
     "tags"=>[],
     "related_event_id"=>nil,
     "id"=>1378911893708573827}}]

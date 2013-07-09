@@ -204,8 +204,12 @@ title: API Reference
         <h5>Arguments</h5>
         <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
-          <%= argument("title", 'The event title.') %>
-          <%= argument("text", "The body of the event.") %>
+          <% %w(console python).each do |l| %>
+            <%= argument "title", 'The event title.', :lang => l %>
+            <%= argument "text", "The body of the event.", :lang => l %>
+          <% end %>
+          <%= argument 'msg_text', 'The text for the message', :lang => 'ruby' %>
+          <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
