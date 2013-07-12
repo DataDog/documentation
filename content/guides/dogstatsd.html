@@ -112,7 +112,7 @@ eof
 
 ### Counters
 
-Counters track how many times something happened, like the number of
+Counters track how many times something happened per second, like the number of
 database requests or page views.
 
 <%= python <<eof
@@ -147,6 +147,9 @@ that.
 dog.set('users.uniques', user.id)
 eof
 %>
+
+Sets are an extension to StatsD, so you'll need to use a client that
+supports them.
 
 ### Timers
 
