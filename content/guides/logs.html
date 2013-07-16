@@ -72,16 +72,17 @@ Where attributes should at least contain the key metric_type, specifying whether
 Here's an example of what `parsers.py` might contain:
 
 <%= python <<eof
-import calendar
+import time
 from datetime import datetime
 
 def parse_web(logger, line):
     # Split the line into fields
     date, metric_name, metric_value, attrs = line.split('|')
 
-    # Convert the iso8601 date into a unix timestamp
+    # Convert the iso8601 date into a unix timestamp, assuming the timestamp
+    # string is in the same timezone as the machine that's parsing it.
     date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
-    date = calendar.timegm(date.timetuple())
+    date = time.mktime(date.timetuple())
 
     # Remove surrounding whitespace from the metric name
     metric_name = metric_name.strip()
