@@ -14,7 +14,8 @@ EXT_TO_LANG = {
   ".py"  => "python",
   ".rb"  => "ruby",
   ".sh"  => "console",
-  ".json" => "json"
+  ".js"  => "javascript",
+  ".json" => "json",
 }
 
 # PUBLIC ======================

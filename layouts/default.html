@@ -13,19 +13,12 @@ this layout provides a sidebar and main column.
 
     <div class="container">
 
-      <!-- PAGE TITLE -->
-      <div class="row">
-        <div class="span8 offset3">
-          <h1><%= @item[:title] %> </h1>
-        </div>
-      </div>
-
       <div class="row">
 
         <!-- SIDEBAR -->
-        <div class="span3">
+        <div class="span3" id="sidebarcolumn">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-          <ul class="nav nav-tabs nav-stacked affix sidebar">
+          <ul class="nav nav-tabs nav-stacked sidebar">
           <% @item[:sidebar][:nav].each do |i| %>
             <% if i[:header] %>
               <li class="nav-header"><%= i[:header] %></li>
@@ -39,12 +32,14 @@ this layout provides a sidebar and main column.
         </div>
 
         <!-- MAIN -->
-        <div class="span8 main">
+        <div class="span9 main">
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
             <%= yield %>
         </div>
       </div>
     </div>
-
+    <%= render "_footer" %>
     <%= render "_javascript" %>
 
     <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>

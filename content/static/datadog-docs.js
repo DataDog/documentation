@@ -21,10 +21,12 @@
             $('.lang-btn').removeClass('active');
             el.addClass('active');
 
-            // Show this language's code blocks.
+            // Show this language's code blocks and language-specific elements
             var lang = el.attr('lang');
             $('.code-block').hide();
             $('.code-block-' + lang).fadeIn();
+            $('.lang-specific').hide();
+            $('.lang-specific-' + lang).fadeIn();
         });
 
         // Compensate for the fixed header when clicking API section links.

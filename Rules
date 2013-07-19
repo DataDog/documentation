@@ -45,8 +45,12 @@ compile '*' do
           }
     end
 
-    if @item.identifier == '/api/'
+    id = @item.identifier
+    case
+    when id == '/api/'
       layout 'shell'
+    when id.match('/guides/basic_agent_usage/')
+      layout 'basic_agent_usage'
     else
       layout 'default'
     end

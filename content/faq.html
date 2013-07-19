@@ -44,66 +44,7 @@ sidebar:
 
 <h3><a name="agent" href="#agent">Agent</a></h3>
 
-<h4><a name="agent-config-files" href="#agent-config-files">Where are the agent's config files located?</a></h4>
-
-<h5>Linux</h5>
-<ul>
-    <li>/etc/dd-agent/datadog.conf</li>
-    <li>/etc/dd-agent/conf.d/</li>
-    <li>/usr/share/datadog/agent/checks.d/</li>
-</ul>
-
-<h5>Windows Server 2003 or older (or XP and older)</h5>
-<ul>
-    <li>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</li>
-    <li>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</li>
-    <li>C:\Program Files\Datadog\Agent\checks.d\</li>
-</ul>
-
-<h5>Windows Server 2008 or newer (or Vista and newer)</h5>
-<ul>
-    <li>C:\ProgramData\Datadog\datadog.conf</li>
-    <li>C:\ProgramData\Datadog\conf.d\</li>
-    <li>C:\Program Files (x86)\Datadog\Agent\checks.d\</li>
-</ul>
-
-<h5>OS X</h5>
-<ul>
-    <li>~/.datadog-agent/agent/datadog.conf</li>
-    <li>~/.datadog-agent/agent/conf.d/</li>
-    <li>~/.datadog-agent/agent/checks.d/</li>
-</ul>
-
-<!-- ====================================================================== -->
-
-<h4><a name="agent-version" href="#agent-version">How can I troubleshoot?</a><h4>
-
-<h5>Linux</h5>
-
-<p>First try: <code>sudo /etc/init.d/datadog-agent info</code></p>
-
-<p>If that doesn't work, then try:</p>
-<p>
-<code>cd /usr/share/datadog/agent &amp;&amp; python -c 'import config; print config.get_version()'</code>
-</p>
-<p>
-You can also check out the logs for any errors:
-
-<br><code>/var/log/datadog/collector.log</code> 
-<br><code>/var/log/datadog/dogstatsd.log</code>
-<br><code>/var/log/datadog/forwarder.log</code>
-
-</p>
-
-<h5>Windows</h5>
-
-<p>
-For agent version 3.7.0 or greater, the equivalent of the info command for Windows is found here:
-<br><a target="_blank" href="http://localhost:17125/status">localhost:17125/status</a>
-<br>
-The logs can be found in the Event Viewer.
-
-</p>
+<p>For any Agent-related questions, refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</p>
 
 <!--
 ===============================================================================
@@ -117,7 +58,7 @@ The logs can be found in the Event Viewer.
 <p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. 
 Other characters will get converted to underscores. There is no max length. Unicode is not support.
 We recommend avoiding spaces. 
-Metrics reported by the agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
 We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, 
 but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are 
 reporting ‘http.nginx.*’, those must be web frontends”). 
@@ -148,7 +89,7 @@ defined as a unique combination of metric name and tag.
 <h3><a name="architecture" href="#architecture">Architecture</a></h3>
 
 <h4><a name="arch-cloud-or-server" href="#arch-cloud-or-server">Is Datadog a cloud service or server application?</a></h4>
-<p>It's primarily a cloud service, but if you want to collect data on your servers, there is an agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
+<p>It's primarily a cloud service, but if you want to collect data on your servers, there is an Agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.</p>
 
 <!-- ====================================================================== -->
 
@@ -198,8 +139,8 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 <h4>How are hostnames determined?</h4>
 
 <p>
-The hostnames are determined by what the Datadog agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
-You can see all names being detected by the agent by running the info command:
+The hostnames are determined by what the Datadog Agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
+You can see all names being detected by the Agent by running the info command:
  <code>/etc/init.d/datadog-agent info</code>
 
 </p>

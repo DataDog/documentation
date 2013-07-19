@@ -1,0 +1,65 @@
+<%#
+this layout provides a sidebar and main column. The sidebar is populated with links
+to the basic Agent usage guide of each platform
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <%= render "_head" %>
+
+  <body>
+
+    <%= render "_header" %>
+
+    <div class="container">
+
+      <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="span3">
+        <ul class="nav nav-tabs nav-stacked sidebar">
+
+          <!-- AGENT PLATFORM SELECTION -->
+          <li class="nav-header">Agent Guides by Platform</li>
+          <li><a href='/guides/basic_agent_usage/osx/'>Mac OS X</a></li>
+          <li><a href='/guides/basic_agent_usage/windows/'>Windows</a></li>
+          <li><a href='/guides/basic_agent_usage/deb/'>Debian Squeeze</a></li>
+          <li><a href='/guides/basic_agent_usage/deb/'>Debian Lenny</a></li>
+          <li><a href='/guides/basic_agent_usage/deb/'>Ubuntu</a></li>
+          <li><a href='/guides/basic_agent_usage/redhat/'>Amazon Linux</a></li>
+          <li><a href='/guides/basic_agent_usage/redhat/'>CentOS 6</a></li>
+          <li><a href='/guides/basic_agent_usage/redhat/'>CentOS 5</a></li>
+          <li><a href='/guides/basic_agent_usage/smartos/'>SmartOS</a></li>
+          <li><a href='/guides/basic_agent_usage/source/'>From Source</a></li>
+
+          <!-- PAGE-SPECIFIC LINKS -->
+          <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+            <% @item[:sidebar][:nav].each do |i| %>
+              <% if i[:header] %>
+                <li class="nav-header"><%= i[:header] %></li>
+              <% else %>
+                <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+        &nbsp;
+        </div>
+
+        <!-- MAIN -->
+        <div class="span8 main">
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "_footer" %>
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+
+  </body>
+</html>

@@ -4,7 +4,7 @@ title: API Reference
 
 <%
   # Some shortcuts for the columns.
-  left_side_div  = '<div class="span5 api-left">'
+  left_side_div  = '<div class="span6 api-left">'
   right_side_div = '<div class="span6 api-right">'
 
   no_args = '<em>This end point takes no JSON arguments.</em>'
@@ -14,7 +14,7 @@ title: API Reference
 
 <div class="container-fluid api-page">
 
-  <div class="fluid-row floating-header" data-spy="affix" data-offset-top="60">
+  <div class="row-fluid floating-header" data-spy="affix" data-offset-top="60">
     <h1><%= @item[:title] %> </h1>
     <div class="btn-toolbar">
       <div class="btn-group api-section-links">
@@ -28,6 +28,8 @@ title: API Reference
         <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#alerts">Alerts</a>
         <a class="btn" href="#users">Users</a>
+        <a class="btn" href="#graphs">Graphs</a>
+        <a class="btn" href="#screenboards">Screenboards</a>
       </div>
       <div class="btn-group">
         <div lang="console" class="lang-btn btn">Shell</div>
@@ -203,8 +205,12 @@ title: API Reference
         <h5>Arguments</h5>
         <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
-          <%= argument("title", 'The event title.') %>
-          <%= argument("text", "The body of the event.") %>
+          <% %w(console python).each do |l| %>
+            <%= argument "title", 'The event title.', :lang => l %>
+            <%= argument "text", "The body of the event.", :lang => l %>
+          <% end %>
+          <%= argument 'msg_text', 'The text for the message', :lang => 'ruby' %>
+          <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
@@ -292,7 +298,7 @@ title: API Reference
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          The Dashboards end point allow you to programmatically create, update
+          The Dashboards end point allows you to programmatically create, update
           delete and query dashboards.
         </p>
       </div>
@@ -960,6 +966,64 @@ title: API Reference
         <%= snippet_result_code_block "api-user-invite.py" %>
         <%= snippet_result_code_block "api-user-invite.rb" %>
         <%= snippet_result_code_block "api-user-invite.sh" %>
+      </div>
+    </div>
+
+    <!--
+    =====================================================================
+    Graph Snapshot
+    ====================================================================
+    -->
+
+    <h3 id="graphs">Graphs</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        You can take graph snapshots using the API.
+        </p>
+      </div>
+    </div>
+
+    <!-- Create alerts -->
+    <h4 id="graph-snapshot">Graph Snapshot</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "metric_query", "The metric query." %>
+          <%= argument "start", "The POSIX timestamp of the start of the query." %>
+          <%= argument "end", "The POSIX timestamp of the end of the query." %>
+          <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/snapshot</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
+
+
+   <!--
+    =====================================================================
+    Screenboard
+    ====================================================================
+    -->
+
+    <h3 id="screenboards">Screenboards</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        You can view the documentation on the Screenboard API at
+        <a href="/api/screenboards/">http://docs.datadoghq.com/api/screenboards/</a>.
+        </p>
       </div>
     </div>
 
