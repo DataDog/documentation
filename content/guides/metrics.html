@@ -24,6 +24,9 @@ sidebar:
     - header: Epilogue
     - text: Other Submission Methods
       href: "#methods"
+    - text: Seeing Your Custom Metrics
+      href: "#custom"
+
 ---
 
 <!--
@@ -431,6 +434,25 @@ Datadog:
     contribution).
   </li>
 </ul>
+
+<h3 id="custom">Seeing Your Custom Metrics</h3>
+
+The quickest way to see your custom metric is to use the metrics explorer. You 
+can navigate to it by clicking the "Metrics" link in the top navigation bar.
+
+Once you're at the metrics explorer you can type in the custom metric you set 
+in the "Graph:" field and it should autocomplete. If it doesn't autocomplete, 
+then it might mean that we haven't received data for that metric in the last 
+few hours.
+
+You can also filter the metric by tag using the "Over:" field, or graph the 
+metric by tag group using the "One graph per:" field.
+
+Note that the metrics explorer doesn't save any of these graphs. If you've 
+created some graphs that you'd like to save, you need to click one of the 
+save buttons at the bottom left, either saving to a new dashboard or to 
+an existing one.
+
 
 <% content_for :javascript do %>
   <script type="text/javascript">
