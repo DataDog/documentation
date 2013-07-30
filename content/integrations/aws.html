@@ -70,3 +70,26 @@ specifications:
       ]
     }
 
+
+<h4>Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?</h4> 
+<p>There are two important distinctions to be aware of:</p>
+<ol>
+<li>In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences
+in one minute leading up to that point, i.e. the rate per 1 minute.  Datadog is
+displaying the raw data from AWS normalized to per second values, regardless of the 
+timeframe selected in AWS, which is why you will probably see our value as lower.</li>
+
+<li>Overall, min/max/avg have a different meaning within AWS than in Datadog. 
+In AWS, average latency, 
+minimum latency, and maximum latency are three distinct metrics that AWS collects.
+When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time 
+series per ELB.
+Within Datadog, when you are selecting 'min', 'max', or 'avg', you are
+controlling how multiple time series will be combined. For example, requesting
+<code>system.cpu.idle</code> without any filter would return one series for each host that
+reports that metric and those series need to be combined to be graphed. On the
+other hand, if you requested <code>system.cpu.idle</code> from a single host, no aggregation
+would be necessary and switching between average and max would yield the same
+result.</li>
+</ol>
+
