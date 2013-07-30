@@ -142,7 +142,7 @@ And you can test your parsing logic by calling python /path/to/parsers.py.
 <h2 id="events">Parsing Events</h2>
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
-`dict` from your custom parsing function, Datadog will treat it as an event instead of a metric.
+`dict` (or a `list` of `dict`) from your custom parsing function, Datadog will treat it as an event instead of a metric.
 
 Here are the event fields (bold means the field is required):
 
@@ -156,13 +156,13 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<td>msg_title</td>
+<th>msg_title</th>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>
 </tr>
 <tr>
-<th>timestamp</th>
+<td>timestamp</td>
 <td>integer</td>
 <td>Unix epoch timestamp. If omitted, will default to the time that
 the Agent parsed the event.</td>
