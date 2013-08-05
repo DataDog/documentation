@@ -44,9 +44,9 @@ You can also specify multiple log files like this:
 ### Parsing Custom Log Formats
 
 If you want to parse a different log format - say for a piece of vendor
-or legacy software - you can use a custom Python
-function to extract the proper fields from the log by adding the following line
-to your Agent configuration file:
+or legacy software - you can use a custom Python function to extract the proper 
+fields from the log by specifying your log file in your Agent configuration
+file in the following format:
 
     dogstreams: /var/log/web.log:parsers:parse_web
 
@@ -55,6 +55,20 @@ in a package called  parsers in the Agent's `PYTHONPATH`, and the parsers packag
 has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent
 startup script, `/etc/init.d/datadog-agent` for Agent versions < 2.0, and in the
 supervisor config for Agent version >= 2.0.
+
+If your parser does **not** live on the Agent's `PYTHONPATH`, you can use an
+alternative syntax to configure your line parser:
+
+    dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
+
+In this format, the agent will attempt to import a function called
+`custom_parser` from `/path/to/my/parsers_module.py`.
+
+If your custom log parser is not working, the first place to check is the
+Agent collector logs. If the Agent is unable to import your function, there will
+be a line with `Could not load Dogstream line parser`. (On the other hand, if
+all goes well you should see `dogstream: parsing {filename} with
+{function name} (requested {config option text})`.)
 
 ### Writing Parsing Functions
 
