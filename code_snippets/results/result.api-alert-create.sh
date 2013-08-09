@@ -5,7 +5,7 @@
     "message": "We may need to add web hosts if this is consistently high.", 
     "name": "Bytes received on host0", 
     "notify_no_data": false, 
-    "query": "sum(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100", 
+    "query": "avg(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100", 
     "silenced": false, 
     "state": "OK"
 }

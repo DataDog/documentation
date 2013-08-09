@@ -1,5 +1,5 @@
 ["200",
- {"query"=>"sum(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100",
+ {"query"=>"avg(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100",
   "silenced"=>true,
   "message"=>"Bytes received on host0",
   "name"=>"We may need to add web hosts if this is consistently high.",
