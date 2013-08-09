@@ -7,4 +7,4 @@ app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 dog = Dogapi::Client.new(api_key, app_key)
 
 # Edit an existing alert
-dog.update_alert(537, "avg(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100", :message => "Bytes received on host0", :name => "We may need to add web hosts if this is consistently high.", :silenced => true)
+dog.update_alert(537, "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100", :message => "Bytes received on host0", :name => "We may need to add web hosts if this is consistently high.", :silenced => true)

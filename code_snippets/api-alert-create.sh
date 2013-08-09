@@ -4,7 +4,7 @@ alert_id=512
 
 curl -X POST -H "Content-type: application/json" \
 -d '{
-      "query": "avg(last_1d):sum:system.net.bytes_rcvd{host:host0} > 100",
+      "query": "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
       "name": "Bytes received on host0",
       "message": "We may need to add web hosts if this is consistently high."
     }' \
