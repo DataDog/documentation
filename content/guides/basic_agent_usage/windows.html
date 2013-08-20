@@ -33,14 +33,20 @@ Right clicking on the service will reveal options to start, stop, and restart th
 
 <!--
 ======================================================
-Status
+Status and Information
 ======================================================
 -->
 
-<h3 id="status">Status</h3>
+<h3 id="status_and_information">Status and Information</h3>
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started".
 A process called "ddagent.exe" should also exist in the Task Manager.
+
+To receive more information about the Agent's state, visit the following page in your web browser:
+
+<%= console 'http://localhost:17125/status' %>
+
+<em>The status command is supported in Agent version 3.7.0 and above</em>
 
 <!--
 ======================================================
