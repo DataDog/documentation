@@ -22,7 +22,15 @@ Starting and Stopping the Agent
 
 <h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
 
-The execution of the Agent is controlled by a Windows service. The Agent can be started, stopped, and
+The execution of the Agent is controlled by a Windows service. 
+
+<h4>For version >= 3.9.1</h4>
+You can use the Datadog Agent Manager that you can find in the Start Menu.
+<p><img src="/static/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
+<p><img src="/static/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
+
+<h4>For version < 3.9.1</h4>
+The Agent can be started, stopped, and
 restarted from the Services panel. To view the Services panel, execute the following in a <code>cmd.exe</code> shell:
 
 <%= console 'services.msc' %>
@@ -38,7 +46,6 @@ Status and Information
 -->
 
 <h3 id="status_and_information">Status and Information</h3>
-
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started".
 A process called "ddagent.exe" should also exist in the Task Manager.
 
@@ -55,6 +62,11 @@ Configuration
 -->
 
 <h3 id="configuration">Configuration</h3>
+<h4>For version >= 3.9.1</h4>
+You can use the Datadog Agent Manager located in the start menu to enable, disable and configure checks.
+You have to restart the agent in order for your changes to be applied.
+
+<h4>For version < 3.9.1</h4>
 
 The configuration file location depends on the version of Windows on which the Agent is installed.
 
@@ -87,8 +99,17 @@ First, check if the Agent is running in the Services panel and in the Task Manag
 
 Next, try opening the <a href='#status_and_information'>status page</a> to see the state of the Agent.
 
-Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr; Application.
+<h4>For version >= 3.9.1</h4>
+Log is available at:
+<ul>
+	<li>For Windows Server 2003, XP or older: <br>
+		<code>C:\ProgramData\Datadog\logs\ddagent.log</code></li>
+	<li>For Windows Server 2008, Vista and newer: <br>
+		<code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
+</ul>
 
+<h4>For version < 3.9.1</h4>
+Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr; Application.
 <br/>
 
 If you're still having trouble, our support team will be glad to provide further assistance.
