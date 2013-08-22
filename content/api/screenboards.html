@@ -64,6 +64,18 @@ Timeframes are all given as short names to represent a value. The available time
 - `2d`: 2 days
 - `1w`: 1 week
 
+### Templating
+
+If you would like to create or update boards that use templated variables, you must have the following attributes in the base payload:
+
+- `templated`: boolean of `true` or `false`
+- `template_variables`: A list of variables you want to be "templateable", e.g.: ["redis_port", "availability-zone"]. The names are arbitrary because you will be able to select *any* tag for the value of the variable.
+
+The final "base" payload of a templated board would look like this:
+
+<%= snippet_code_block "sb-payload-tpl-example.js" %>
+
+
 <h2 id="usage">API Usage</h2>
 
 The Screenboard API is supported in the Python and Ruby clients as well as with simple `curl` commands.
