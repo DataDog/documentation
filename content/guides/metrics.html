@@ -66,7 +66,7 @@ contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
-<%= code_tabs("setup") %>
+<%= code_tabs("setup", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
 
@@ -114,7 +114,7 @@ Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
-<%= code_tabs("counters-page-views") %>
+<%= code_tabs("counters-page-views", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
@@ -148,7 +148,7 @@ of bytes processed by a file uploading service, we'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
-<%= code_tabs("counters-uploaded") %>
+<%= code_tabs("counters-uploaded", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
@@ -163,7 +163,7 @@ EOF
   <div class="tab-pane fade in" id="counters-uploaded-ruby">
 <%= ruby <<EOF
 def upload_file(file)
-  statsd.increment('file_service.bytes_uploaded', file.size())
+  statsd.count('file_service.bytes_uploaded', file.size())
   save_file(file)
   return 'File uploaded!'
 end
@@ -192,7 +192,7 @@ GAUGES
 -->
 
 
-<%= code_tabs("gauges") %>
+<%= code_tabs("gauges", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
@@ -228,7 +228,7 @@ Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query, 
 we can sample each query time with the metric `database.query.time`.
 
-<%= code_tabs("histograms") %>
+<%= code_tabs("histograms", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
@@ -305,7 +305,7 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
 that.
 
-<%= code_tabs("sets") %>
+<%= code_tabs("sets", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
@@ -341,7 +341,7 @@ aggregated and compared on the front end. Suppose we wanted to measure the
 performance of two algorithms in the real world, we could sample one metric
 `algorithm.run_time` and specify the version as a tag:
 
-<%= code_tabs("tags") %>
+<%= code_tabs("tags", languages=%w{Python Ruby}) %>
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
@@ -359,13 +359,13 @@ EOF
   <div class="tab-pane fade in" id="tags-ruby">
 <%= ruby <<EOF
 def algorithm_one()
-  statsd.timed('algorithm.run_time', tags=>['algorithm:one']) do
+  statsd.timed('algorithm.run_time', :tags=>['algorithm:one']) do
     # Do fancy things here ...
   end
 end
 
 def algorithm_two()
-  statsd.timed('algorithm.run_time', tags=>['algorithm:two']) do
+  statsd.timed('algorithm.run_time', :tags=>['algorithm:two']) do
     # Do different fancy things here ...
   end
 end
@@ -405,7 +405,7 @@ EOF
 <%= ruby <<EOF
 while true do
   do_something_intense()
-  statsd.increment('loop.count', sample_rate=>0.5)
+  statsd.increment('loop.count', :sample_rate=>0.5)
 end
 EOF
 %>

@@ -31,9 +31,9 @@ def language_class(languge)
   languge == ACTIVE_LANGUAGE ? 'active' : ''
 end
 
-def code_tabs(section)
+def code_tabs(section, languages=nil)
   html = "<ul class=\"nav nav-tabs\" id=\"#{section}-tabs\">"
-  LANGUAGES.each do |lang|
+  (languages or LANGUAGES).each do |lang|
     l = lang.downcase
     html += <<-EOF
       <li class="#{language_class(lang)}">
