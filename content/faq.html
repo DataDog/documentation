@@ -1,3 +1,5 @@
+What's the syntax to sum multiple datapoints into a single line?
+
 ---
 title: Frequently Asked Questions
 sidebar:
@@ -204,14 +206,14 @@ You can switch commas separating the queries into plus signs, like so:
 from:
 
 <pre>
-<code>“q”: “sum:system.io.rkb_s{device:sda}*1024,sum:system.io.rkb_s{device:sdb}
-*1024,sum:system.io.rkb_s{device: sdc}*1024”</code></pre>
+<code>"q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
+*1024, sum:system.io.rkb_s{device: sdc}*1024"</code></pre>
 
 to:
 
 <pre>
-<code>“q”: “sum:system.io.rkb_s{device:sda}*1024+sum:system.io.rkb_s{device:sdb}
-*1024+sum:system.io.rkb_s{device: sdc}*1024”</code></pre>
+<code>"q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
+*1024 + sum:system.io.rkb_s{device: sdc}*1024"</code></pre>
 
 </p>
 
