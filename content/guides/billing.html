@@ -1,0 +1,135 @@
+---
+title: Billing FAQ
+sidebar:
+  nav:
+    - header: Guides
+    - text: Getting Started with the Agent
+      href: "/guides/basic_agent_usage/"
+    - text: Datadog Overview
+      href: "/overview/"
+    - text: Sending App Metrics
+      href: "/guides/metrics/"
+    - text: Log Parsing in the Agent
+      href: "/guides/logs/"
+    - text: Writing an Agent Check
+      href: "/guides/agent_checks/"
+    - text: Setting up Service Checks
+      href: "/guides/services_checks/"
+    - text: Deploying the Agent with Chef
+      href: "/guides/chef/"
+    - text: Guide to Alerting
+      href: "/guides/alerting/"
+    - text: Billing FAQ
+      href: "/guides/billing/"
+    - header: References
+    - text: API
+      href: "/api/"
+    - text: Libraries
+      href: "/libraries/"
+    - text: Graphing
+      href: "/graphing/"
+    - text: Host Names
+      href: "/hostnames/"
+    - text: Integrations
+      href: "/integrations/"
+    - text: DogStatsD
+      href: "/guides/dogstatsd/"
+---
+<h4>Welcome to Datadog! We occasionally receive questions regarding the specifics
+of our pricing; the basic plans and the most frequently seen questions can be
+found below.</h4>
+
+There are three plans within Datadog: 
+<ol> 
+<li>
+<strong>Free</strong> is only for 5 hosts or less. Free has a single day of data retention. The
+good news is that switching from the Free plan to Pro will not effect your
+setup, so anything you've begun monitoring would not be effected by that status
+change.
+</li>
+<li>  
+<strong>Pro</strong> is for 1-100 hosts and comes with 1 year of data retention.
+Pro includes metric alerts and email support.
+</li> 
+<li> <strong>Enterprise</strong> is for
+100+ hosts or any number of hosts but needing custom adjustments to what is
+offered in the Pro plan. Enterprise comes with unlimited data retention and
+phone support.  Enterprise pricing is based on three factors:
+  <ol> 
+   <li> Data retention requirements and number of custom metrics (base plan includes 1 year retention,
+and 100 custom metrics)</li>
+   <li>  Size of your environment in servers</li>
+   <li>  Payment terms (month to month or annual prepaid)</li> 
+  </ol>
+  </li>
+</ol>
+
+<p>
+For all plans, custom metrics and events are supported but limited to 100
+metrics per host. Custom Metrics refer to any metrics that are not part of our
+regular integration suite, for example using custom checks or API-level metrics
+in your application stack. To clarify, integrations that can potentially emit
+an unlimited number of metrics to us can also count as custom metrics too (e.g:
+JMX / WMI / Nagios / Cacti).
+</p>
+
+<p>
+Pro and Enterprise data retention is for one year at full resolution (maximum
+is one point per second). For greater data retention needs, please reach out to
+sales@datadoghq.com.
+</p>
+
+<p>
+<h5>Each invoice is determined by the high watermark of concurrently running hosts
+for that month.</h5> This is per active host in Datadog, whether or not it's running
+the agent.
+</p>  
+
+<br>
+<h5>Do you support hourly pricing?</h5>
+<p>
+We do support hourly pricing at $0.03 per hour per host or a hybrid
+of monthly and hourly. Here is how that hybrid works: 
+</p>
+<blockquote><p>
+You tell us how many hosts you will run each month and we will bill you for that baseline number of
+hosts at $15 per host (you can change this number at the beginning of each
+month if you like). Then for any hosts beyond the committed number previously
+determined, our billing system will charge you $0.03 per host per hour. This
+works out to be much less expensive for extra hosts that may come up for a
+short period, but a little bit more than monthly rates if you ran on an hourly
+rate all the time (~$23/host/month).  The metering samples how many hosts are
+reporting data once every hour, thus the minimum increment for an hourly server
+is one hour. If that number exceeds your monthly commit, we just charge overage
+for the excess hosts.
+</p></blockquote>
+
+
+<h5>Do non-reporting or inactive hosts count?</h5>
+<p>
+Non-reporting hosts (status '???') do not count towards billing. It might take
+some time (up to 24 hours) for the hosts with the inactive status '???' to drop
+out of the infrastructure view. 
+</p>
+
+<p>
+A transient server that you monitored in Datadog for a short period of time
+will clear out of the infrastructure view after 24 hours of not reporting any
+data. We will still however retain the historical data (for a paid account),
+and you can graph it on a dashboard if you know the specific host by name (or
+by its tags).
+</p>
+
+<h5>How do I see what I'll get charged for this current month?</h5>
+<p>
+There is not currently a way to see what the upcoming bill looks like; as an
+admin you can check out past invoices here:
+https://app.datadoghq.com/account/billing_history
+</p>
+
+<h5>Can I set a specific email address to receive invoices at?</h5>
+<p>
+You can set a specific email address to receive invoices, even if that address
+is not a team member within Datadog (invoices@yourcompany.com) here:
+https://app.datadoghq.com/account/billing
+</p>
