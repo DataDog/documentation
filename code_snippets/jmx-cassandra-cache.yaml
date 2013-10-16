@@ -1,0 +1,4 @@
+conf:
+    - include: 
+       domain: org.apache.cassandra.db
+       type: Caches

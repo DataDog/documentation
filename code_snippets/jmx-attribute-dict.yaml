@@ -1,0 +1,12 @@
+  conf:
+    - include:
+        attribute:
+          maxThreads:
+            alias: tomcat.threads.max
+            metric_type: gauge
+          currentThreadCount:
+            alias: tomcat.threads.count
+            metric_type: gauge
+          bytesReceived:
+            alias: tomcat.bytes_rcvd
+            metric_type: counter
