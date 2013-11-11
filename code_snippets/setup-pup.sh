@@ -1,0 +1,1 @@
+sh -c "$(curl -L http://dtdg.co/dd-agent-source)"
