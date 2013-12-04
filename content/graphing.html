@@ -13,7 +13,7 @@ sidebar:
 
 <h2 id="editor">Find the Graph Editor</h2>
 
-On each graph you will find a cog icon that open the graph editor.
+On each graph you will find a cog icon that opens the graph editor.
 
 <img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
 
@@ -55,7 +55,7 @@ You can overlay any event from Datadog. The general format is:
 
     "events": "search query"
 
-For instance to indicate that you want events for machine X and tag Y:
+For instance, to indicate that you want events for host X and tag Y:
 
     "events": "host:X tags:Y"
 
@@ -66,11 +66,11 @@ or if you're looking to display all errors:
 
 ### Scope
 
-A scope lets you filter Series. It can be a host, a device on a host
+A scope lets you filter a Series. It can be a host, a device on a host
 or any arbitrary tag you can think of that contains only alphanumeric
 characters plus colons and underscores (`[a-zA-Z1-9:_]+`).
 
-Examples of scope (meaning in parenthesis):
+Examples of scope (meaning in parentheses):
 
     host:my_host                      (related to a given host)
     host:my_host, device:my_device    (related to a given device on a given host)
@@ -87,11 +87,11 @@ The general format of a Series is:
 
 The `function` and `group` are optional.
 
-Series can be further combined together via binary operators (+, -, /, *):
+A Series can be further combined together via binary operators (+, -, /, *):
 
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
-Series are represented in 3 representations:
+A Series can be represented in different ways:
 
 1. as line charts
 2. as stacked areas
@@ -119,7 +119,7 @@ The representation is automatically derived from having multiple `requests` valu
 
 <img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
-In the case of related time series you can easily draw them as stacked areas by using the following syntax:
+In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
     "requests": [
         {
@@ -127,15 +127,15 @@ In the case of related time series you can easily draw them as stacked areas by 
         }
     ]
 
-Instead of one query per chart you aggregate all queries into one and simply concatenate the queries.
+Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries.
 
 #### Slice-n-Stack
 
 A useful visualization is to represent a metric shared across
-hosts and stack the results. For instance when selecting a tag that
+hosts and stack the results. For instance, when selecting a tag that
 applies to more than 1 host you will see that ingress and egress
 traffic is nicely stacked to give you the sum as well as the split per
-host. Useful to spot wild swings in the distribution of network
+host. This is useful to spot wild swings in the distribution of network
 traffic.
 
 Here's how to do it for any metric:
@@ -158,15 +158,15 @@ to get traffic for all the tagged hosts, split by host and network device.
 
 <h2 id="functions">Arithmetic and Functions</h2>
 
-Series also support simple arithmetic and a number of functions.
+A Series also supports simple arithmetic and a number of functions.
 
 You can apply functions to metric queries in the graph editor, as long as you
 use the JSON editor.
 
 ### Arithmetic
 
-You can apply simple arithmetic to Series (+, -, * and /). In this
-example we graph 5-minute load and its double.
+You can apply simple arithmetic to a Series (+, -, * and /). In this
+example we graph 5-minute load and its double:
 
     {
       "viz": "timeseries",
@@ -180,7 +180,7 @@ example we graph 5-minute load and its double.
       ]
     }
 
-You can also add, substract, multiply and divide series. Beware that
+You can also add, substract, multiply and divide a Series. Beware that
 Datadog does not enforce consistency at this point so you *can* divide
 apples by oranges.
 
@@ -263,3 +263,15 @@ You can apply functions to the result of each query.
     <td>EWMA with a span of 20</td>
   </tr>
 </table>
+
+Here is an example using the rate() function. The syntax is identical for the other functions.
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+          "stacked": false
+        }
+      ]
+    }
