@@ -55,7 +55,7 @@ You can overlay any event from Datadog. The general format is:
 
     "events": "search query"
 
-For instance, to indicate that you want events for machine X and tag Y:
+For instance, to indicate that you want events for host X and tag Y:
 
     "events": "host:X tags:Y"
 
@@ -91,7 +91,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
-A Series can be represented in 3 ways:
+A Series can be represented in different ways:
 
 1. as line charts
 2. as stacked areas
@@ -264,7 +264,7 @@ You can apply functions to the result of each query.
   </tr>
 </table>
 
-Here is an example using the rate() function. The syntax is identical for the others.
+Here is an example using the rate() function. The syntax is identical for the other functions.
 
     {
       "viz": "timeseries",
