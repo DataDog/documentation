@@ -267,15 +267,64 @@ You can apply functions to the result of each query.
     <td>median()</td>
     <td>Median filter, useful for reducing noise</td>
   </tr>
+
+  <tr>
+    <td>top()</td>
+    <td>Select the top responsive to a given query, according to some ranking method.  Takes four parameters:
+
+      <ul>
+        <li><strong>scoped_query</strong>: a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
+        <li><strong>num_series</strong>: the number of series to be displayed, as an integer.</li>
+        <li><strong>method</strong>: one of <code>'max'</code>, <code>'min'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
+        <li><strong>order</strong>: either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>top_offset()</td>
+    <td>Take the top num_series series within a scoped metric.  Same parameters as <code>top()</code>, except with an additional <strong>offset</strong> parameter, which controls where in the ordered sequence of series the graphing starts.</td>
+  </tr>
+
 </table>
 
-Here is an example using the rate() function. The syntax is identical for the other functions.
+The <code>top()</code> method also has the following convenience functions.
+
+
+
+#### Examples
+
+Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 
     {
       "viz": "timeseries",
       "requests": [
         {
           "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+          "stacked": false
+        }
+      ]
+    }
+
+Here is an example using the top() function:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
+          "stacked": false
+        }
+      ]
+    }
+
+This will show the graphs for the five series with the highest peak system.cpu.iowait values in the query window.  If you want to look at the hosts with the 6th through 10th highest values, use top_offset:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
           "stacked": false
         }
       ]
