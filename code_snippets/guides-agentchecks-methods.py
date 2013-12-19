@@ -6,4 +6,4 @@ self.decrement( ... ) # Decrement a counter metric
 
 self.histogram( ... ) # Sample a histogram metric
 
-self.rate( ... ) # Sample a point, with the rate calcualted at the end of the check
+self.rate( ... ) # Sample a point, with the rate calculated at the end of the check
