@@ -33,11 +33,11 @@ OVERVIEW
 
 <h3 id="overview">Overview</h3>
 This guide details how to collect metrics and events from a new data source
-by writing an Agent Check, a Python plugin to the Datadog Agent. We'll 
-look at the `AgentCheck` interface, and then write a simple Agent Check 
+by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
+look at the `AgentCheck` interface, and then write a simple Agent Check
 that collects timing metrics and status events from HTTP services.
 
-Any custom checks will be included in the main check run loop, meaning 
+Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds.
 
 <!--
@@ -48,11 +48,11 @@ SETUP
 
 <h3 id="setup">Setup</h3>
 
-First off, ensure you've properly 
+First off, ensure you've properly
 <a href="http://app.datadoghq.com/account/settings#agent">installed the
 Agent</a> on your machine. If you run into any issues during the setup, pop by
 our chatroom, <a href="irc://irc.freenode.net/datadog">#datadog on FreeNode</a>,
-and we'll be happy to answer any questions you might have. (There's a 
+and we'll be happy to answer any questions you might have. (There's a
 <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
 web chat client, too</a>.)
 
@@ -113,7 +113,7 @@ easy debugging. For example:
 
       Checks
       ======
-      
+
         my_custom_check
         ---------------
           - instance #0 [ERROR]: ConnectionError('Connection refused.',)
@@ -230,7 +230,7 @@ FIRST CHECK
 <h3 id="first">Your First Check</h3>
 
 <div class="alert alert-block">
-The names of the configuration and check files must match. If you check
+The names of the configuration and check files must match. If your check
 is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
 </div>
@@ -259,7 +259,7 @@ HTTP CHECK
 <h3 id="http">An HTTP Check</h3>
 
 Now we will guide you through the process of writing a basic check that will
-check the status of an HTTP endpoint. On each run of the check, the a GET
+check the status of an HTTP endpoint. On each run of the check, a GET
 request will be made to the HTTP endpoint. Based on the response, one of the
 following will happen:
 
@@ -319,7 +319,7 @@ event method.
 #### Putting All Together
 
 For the last part of this guide, we'll show the entire check. This module would
-be places into the `checks.d` folder as `http.py`. The corresponding
+be placed into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
 Once the check is in `checks.d`, you can test it by running it as a python
