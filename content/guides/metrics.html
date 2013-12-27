@@ -177,7 +177,13 @@ EOF
 Counters are normalized to per-second units. From the "Web Page Views" 
 example above, if one person visited the site per second, the graph would be 
 a straight line at one. To increment or measure values over time please see 
-<a href='#gauges'>gauges</a>.
+<a href='#gauges'>gauges</a>. It should also be noted that for counters coming 
+from another source that are ever-increasing and never get reset, for 
+example for the number of queries across all time from MySQL, we track the rate 
+between flushed values. While there is not currently an elegant solution to 
+get to raw counts within Datadog, you might want to apply a function to
+your series, like cumulative sum or the integral- more on that 
+<a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
 
 
 <h3 id="gauges">Gauges</h3>
@@ -383,6 +389,28 @@ growing tags in your metrics, like timestamps or user ids. Please limit each
 metric to 1000 tags.
 </p>
 
+Tags must start with a letter, and after that may contain alphanumerics,
+underscores, minuses, colons, periods and slashes. Other characters will get
+converted to underscores. Tags can be up to 200 characters long and support
+unicode. Tags will be converted to lowercase as well.
+
+For a quick example to demonstrate the power of tagging, perhaps you're looking
+for a sum of two metrics, which you might normally define as follows:
+<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100),...], host="example.com") 
+Web server 2: api.metric('page.views', [(1317652676, 500),...], host="example.com")</code></pre>
+
+What we recommend doing is leaving off the hostname; it will then default to
+the host that is sending that point, since they’re different hosts it will be
+treated as different points: 
+<pre><code>Web server 1: api.metric('page.views',[(1317652676, 100), ...], tags=['domain:example.com']) 
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])</code></pre>
+
+With these tags you can then do: <br>
+<code>sum:page.views{domain:example.com}</code> which should give the desired
+result.  <br> To get a breakdown by host, you can do: <br>
+<code>sum:page.views{domain:example.com} by {host}</code>
+
+
 <h3 id="sample-rates">Sample Rates</h3>
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
@@ -455,6 +483,14 @@ created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to 
 an existing one.
 
+Metric names must start with a letter and after that may contain ascii
+alphanumerics, underscore and periods. Other characters will get converted to
+underscores. There is no max length. Unicode is not supported. We recommend
+avoiding spaces. Metrics reported by the Agent are in a pseudo-hierarchical
+dotted format (e.g. http.nginx.response_time). We say pseudo-hierarchical
+because we’re not actually enforcing a hierarchy or doing anything with it, but
+we have aspirations to use it to infer things about servers (e.g. “hey, I see
+hostA and hostB are reporting ‘http.nginx.*’, those must be web frontends”).
 
 <% content_for :javascript do %>
   <script type="text/javascript">
