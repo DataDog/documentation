@@ -394,23 +394,6 @@ underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.
 
-For a quick example to demonstrate the power of tagging, perhaps you're looking
-for a sum of two metrics, which you might normally define as follows:
-<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100),...], host="example.com") 
-Web server 2: api.metric('page.views', [(1317652676, 500),...], host="example.com")</code></pre>
-
-What we recommend doing is leaving off the hostname; it will then default to
-the host that is sending that point, since they’re different hosts it will be
-treated as different points: 
-<pre><code>Web server 1: api.metric('page.views',[(1317652676, 100), ...], tags=['domain:example.com']) 
-Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])</code></pre>
-
-With these tags you can then do: <br>
-<code>sum:page.views{domain:example.com}</code> which should give the desired
-result.  <br> To get a breakdown by host, you can do: <br>
-<code>sum:page.views{domain:example.com} by {host}</code>
-
-
 <h3 id="sample-rates">Sample Rates</h3>
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
@@ -490,7 +473,7 @@ longer than 100 characters might make the full name difficult to see within the
 web interface (on legends, dropdown selectors, etc.). Unicode is not supported. We
 recommend avoiding spaces. Metrics reported by the Agent are in a
 pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
-pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing
+pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
 anything with it, but we have aspirations to use it to infer things about
 servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
 must be web frontends").
