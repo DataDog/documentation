@@ -67,7 +67,7 @@ INTERFACE
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
 and require a `check()` method that takes one argument, `instance` which is a
 `dict` having the configuration of a particular instance. The `check` method is
-run once per instance defined in the check configuration (discussed later)
+run once per instance defined in the check configuration (discussed later).
 
 #### Sending metrics
 
@@ -316,7 +316,7 @@ event method.
 
 <%= snippet_code_block("guides-agentchecks-ex-status.py") %>
 
-#### Putting All Together
+#### Putting It All Together
 
 For the last part of this guide, we'll show the entire check. This module would
 be placed into the `checks.d` folder as `http.py`. The corresponding
