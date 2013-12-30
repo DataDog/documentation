@@ -1,3 +1,3 @@
 class HelloCheck(AgentCheck):
-    def check(instance):
+    def check(self, instance):
         self.gauge('hello.world', 1)
