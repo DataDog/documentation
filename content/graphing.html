@@ -267,15 +267,100 @@ You can apply functions to the result of each query.
     <td>median()</td>
     <td>Median filter, useful for reducing noise</td>
   </tr>
+
+  <tr>
+    <td>top()</td>
+    <td>Select the top series responsive to a given query, according to some ranking method.  Takes four parameters:
+
+      <ul>
+        <li>a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
+        <li>the number of series to be displayed, as an integer.</li>
+        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
+        <li>either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>top_offset()</td>
+    <td>Similar to <code>top()</code>, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.</td>
+  </tr>
+
 </table>
 
-Here is an example using the rate() function. The syntax is identical for the other functions.
+The <code>top()</code> method also has the following convenience functions, all of which take a single series list as input:
+
+<div style="margin-left: 30px">
+  <dl>
+    <dt>top5, top10, top15, top20</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
+
+    <dt>top5_max, top10_max, top15_max, top20_max</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
+
+    <dt>top5_min, top10_min, top15_min, top20_min</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
+
+    <dt>top5_area, top10_area, top15_area, top20_area</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
+
+    <dt>top5_l2norm, top10_l2norm, top15_l2norm, top20_l2norm</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
+
+    <dt>bottom5, bottom10, bottom15, bottom20</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
+
+    <dt>bottom5_max, bottom10_max, bottom15_max, bottom20_max</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
+
+    <dt>bottom5_min, bottom10_min, bottom15_min, bottom20_min</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
+
+    <dt>bottom5_area, bottom10_area, bottom15_area, bottom20_area</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
+
+    <dt>bottom5_l2norm, bottom10_l2norm, bottom15_l2norm, bottom20_l2norm</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
+  </dl>
+</div>
+
+#### Examples
+
+Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 
     {
       "viz": "timeseries",
       "requests": [
         {
           "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+          "stacked": false
+        }
+      ]
+    }
+
+Here is an example using the <code>top()</code> function:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
+          "stacked": false
+        }
+      ]
+    }
+
+This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
+
+
+
+To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
           "stacked": false
         }
       ]
