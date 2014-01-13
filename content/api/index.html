@@ -217,8 +217,8 @@ title: API Reference
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
-          <%= argument("alert_type", '"error", "warning", "info" or "success"', {:default => "'info'"}) %>
-          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation.', {:default => 'None'}) %>
+          <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
+          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters.', {:default => 'None'}) %>
           <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
         </ul>
       </div>
