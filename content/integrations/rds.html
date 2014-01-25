@@ -29,9 +29,45 @@ play.
 
 <h2>Step-by-step</h2>
 
-<h3>1. Find your RDS instance tags</h3>
+<h3>1. Set tags for your RDS instance</h3>
+
+First navigate to the AWS Console and open the RDS section to find the
+RDS instance you want to monitor. It should look like:
+
+<img href="/static/images/rds-console.png"/>
+
+Write down the endpoint URL
+(e.g. <strong>mysqlrds.blah.us-east1.rds.amazonaws.com:3306</strong>),
+you will need it when you configure the agent.
+
+Notice the tags section at the bottom. This is where you can view and edit RDS instance tags.
+
+<img href="/static/images/rds-tags.png"/>
+
+Now pick a tag to uniquely identify this instance, e.g. <strong>Key = rdsinstance, Value = my_own_instance</strong>.
+We will use this very tag in the agent configuration, in the graph definitions and in alerts to
+tie together RDS metrics and MySQL/PostgreSQL metrics.
+
+Finally save and you're done with the AWS console part.
 
 <h3>2. Configure an agent and connect to your RDS instance</h3>
 
+The MySQL/PostgreSQL integrations support the tagging of individual
+database instances. Originally designed to allow the monitoring of
+multiple instances on the same machine you can use these tags to your
+advantage.
+
+<%= snippet_code_block(rds-conf.yaml) %>
+
+Then restart the agent and verify that the new check is working by running
+<code>sudo service datadog-agent info</code>.
+
 <h3>3. Visualize RDS and MySQL/PostgreSQL metrics together</h3>
 
+After a few minutes, RDS metrics and MySQL/PostgreSQL metrics will be
+accessible in Datadog in the Metrics Explorer, in Graphs and in
+Alerts.
+
+<h2>Where next?</h2>
+
+Not working? Have questions for us? Please contact our supoprt.
