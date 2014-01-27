@@ -34,7 +34,7 @@ play.
 First navigate to the AWS Console and open the RDS section to find the
 RDS instance you want to monitor. It should look like:
 
-<img href="/static/images/rds-console.png"/>
+<img src="/static/images/rds-console.png" style="width:100%; border:1px solid #777777"/>
 
 Write down the endpoint URL
 (e.g. <strong>mysqlrds.blah.us-east1.rds.amazonaws.com:3306</strong>),
@@ -42,9 +42,9 @@ you will need it when you configure the agent.
 
 Notice the tags section at the bottom. This is where you can view and edit RDS instance tags.
 
-<img href="/static/images/rds-tags.png"/>
+<img src="/static/images/rds-tags.png" style="width:100%; border:1px solid #777777"/>
 
-Now pick a tag to uniquely identify this instance, e.g. <strong>Key = rdsinstance, Value = my_own_instance</strong>.
+Now pick a tag to uniquely identify this instance, e.g. <code>Key = rdsinstance, Value = my_own_instance</code>.
 We will use this very tag in the agent configuration, in the graph definitions and in alerts to
 tie together RDS metrics and MySQL/PostgreSQL metrics.
 
@@ -57,7 +57,9 @@ database instances. Originally designed to allow the monitoring of
 multiple instances on the same machine you can use these tags to your
 advantage.
 
-<%= snippet_code_block(rds-conf.yaml) %>
+Here is an example of <code>mysql.conf</code>, usually found in <code>/etc/dd-agent/conf.d</code>.
+
+<%= snippet_code_block "rds-conf.yaml" %>
 
 Then restart the agent and verify that the new check is working by running
 <code>sudo service datadog-agent info</code>.
