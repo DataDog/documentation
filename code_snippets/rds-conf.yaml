@@ -6,4 +6,4 @@ instances:
     pass: my_password
     port: 3306
     tags: 
-        - rdsinstance:my_own_instance
+      - rdsinstance:my_own_instance
