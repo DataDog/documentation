@@ -32,11 +32,12 @@ collect.  We are going to see how to do so.
 </ul>
 
 
-<h2 id="customization">Customization</h2> JMX Checks allow you to specify a
+<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect some metrics from your JMX 
+application. They also allow you to specify a
 configuration in the yaml file that will be read by JMXFetch to filter which
 metrics it should send back to the Agent.
 <br>
-To begin, here are some commands to view the metrics that are available:
+<h4>Commands to view the metrics that are available:</h4>
 
 <ul>
 <li>
@@ -59,7 +60,16 @@ Start the collection of metrics based on your current configuration and display 
 </li>
 </ul> 
 
+<h4>How to customize what metrics to collect:</h4>
+Like every other Agent Check, JMX Checks have 2 main sections:
+<ul>
+<li><code>init_config</code>: Settings that will be applied to every instances</li>
+<li><code>instances</code>: Settings used to configure instances</li>
+</ul> See <a href='http://docs.datadoghq.com/guides/agent_checks/#config'>this page for more information</a>.<br><br>
 
+JMX checks require a <code>conf</code> section that has to be placed within either the <code>init_config</code> section or the <code>instances</code> section.<br><br>
+
+The <code>conf</code> section will be used to determine what JMX attributes should be collected and sent as metrics to Datadog.
 
 <br /><br /> The configuration section looks like this: <%=snippet_code_block "jmx-basic-conf.yaml" %>
 
@@ -83,14 +93,19 @@ cache. You could use the <code>type: Caches</code> filter: <br /> <br /> <%=snip
 
 <h4>The <code>attribute</code> filter</h4>
 
-The <code>attribute</code> filter can accept two types of values: <br /><br />
-<ul> <li>A list of attributes names:</li> <%= snippet_code_block "jmx-attribute-list.yaml" %> 
-
-<br /><br /> <li>A dictionary whose keys are attributes names:</li> <%=snippet_code_block "jmx-attribute-dict.yaml" %> </ul> In that case you can
+<ul>The <code>attribute</code> filter can accept two types of values: <br /><br />
+<li>A dictionary whose keys are attributes names:</li> <%=snippet_code_block "jmx-attribute-dict.yaml" %> </ul> In that case you can
 specify an alias for the metric that will become the metric name in Datadog.
 You can also specify the metric type either a gauge or a counter. If you choose
-counter, a rate per second will be computed for this metric.  </div>
+counter, a rate per second will be computed for this metric.  
 
+<br><br><li>A list of attributes names:</li><%= snippet_code_block "jmx-attribute-list.yaml" %>
+In that case:<ul>
+    <li>The metric type will be a gauge</li>
+    <li>The metric name will be jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]</li>
+</ul>
+
+</div>
 <h2>Troubleshooting</h2> <h4>The 100 metric limit</h4> Due to the nature of
 these integrations, it is possible to submit an extremely high number of
 metrics directly to Datadog. What we've found in speaking with many customers

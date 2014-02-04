@@ -1,15 +1,21 @@
 conf:
     - include: 
-       domain: my_domain
-       bean: my_bean
+       domain: domain_name
+       type: bean_type
+       name: bean_name
        attribute:
-            attribute1:
+            nameOfAttribute:
                 metric_type: counter
                 alias: jmx.my_metric_name
-            attribute2:
+            nameOf2ndAttribute:
                 metric_type: gauge
                 alias: jmx.my2ndattribute
     - include:
         domain: 2nd_domain
       exclude:
-        bean: excluded_bean
+        bean: 2nd_domain:type=BeanType,tag1=value1,tag2=value2
+        # this line is equivalent to:
+        # domain: 2nd_domain
+        # type: BeanType
+        # tag1: value1
+        # tag2: value2
