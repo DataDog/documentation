@@ -1,0 +1,68 @@
+---
+title: Datadog-Directory Check Integration
+sidebar:
+  nav:
+    - header: Integrations
+    - text: Back to Overview
+      href: "/integrations/"
+---
+<div id="int-overview">
+<h3>Overview</h3>
+<p>Capture metrics from the files in given directories such as number of files, file size, etc.</p>
+
+</div>
+
+From the open-source Agent:
+
+* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example">Directory Check YAML example</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py">Directory Check checks.d</a>
+
+
+<div id="int-configuration">
+<h3>Configuration</h3>
+ <p><em>To capture Directory Check metrics you need to install the Datadog agent.</em></p>
+
+<ol>
+  <li>The Directory Check integration is <b>not supported by Windows for now</b>.</li>
+  <li>Make sure that the user/group that dd-agent runs as has access to stat the files in the desired directories.</li>
+  <li>Configure the agent to connect to your directories.<br>
+      Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>
+        <pre class="textfile"><code>init_config:
+
+instances:
+    # For each instance you *must* provide at least a "directory"
+    #
+    # The following options are available:
+    # "directory" - string, the directory to gather stats for. required
+    # "name" - string, the name to use when tagging the metrics. defaults to the "directory"
+    # "pattern" - string, the `fnmatch` pattern to use when reading the "directory"'s files.
+    #                     default "*"
+    # "recursive" - boolean, when true the stats will recurse into directories. default False
+
+    -  directory: "/path/to/directory"
+       name: "tag_name"
+       pattern: "*.log"
+       recursive: True </code></pre>
+  </li>
+
+  <li>Restart the agent
+        <pre class="linux"><code>sudo /etc/init.d/datadog-agent restart</code></pre>
+  </li>
+
+  <li>Execute the info command
+    <pre class="linux"><code>sudo /etc/init.d/datadog-agent info</code></pre>
+    and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+
+	   <pre class="verification"><code>  Checks
+  ======
+
+  [...]
+
+  directory
+  ---------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events</code></pre>
+  </li>
+
+</ol>
+</div>
