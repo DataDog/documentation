@@ -1,5 +1,5 @@
 ---
-title: Datadog-Directory Check Integration
+title: Directory Check Integration
 sidebar:
   nav:
     - header: Integrations
@@ -8,33 +8,47 @@ sidebar:
 ---
 <div id="int-overview">
 <h3>Overview</h3>
-<p>Capture metrics from the files in given directories such as number of files, file size, etc.</p>
-
+<p>Capture metrics from the files in given directories:
+  <ul>
+    <li>
+      number of files
+    </li>
+    <li>
+      file size
+    </li>
+    <li>
+      age of the last file modification
+    </li>
+    <li>
+      age of the file creation
+    </li>
+  </ul>
+</p>
 </div>
 
-From the open-source Agent:
+From the Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example">Directory Check YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py">Directory Check checks.d</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py">Directory Check script</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example">Directory Check configuration example</a>
 
 
 <div id="int-configuration">
 <h3>Configuration</h3>
- <p><em>To capture Directory Check metrics you need to install the Datadog agent.</em></p>
+ <p><em>To capture Directory Check metrics you need to install the Datadog Agent.</em></p>
 
 <ol>
-  <li>The Directory Check integration is <b>not supported by Windows for now</b>.</li>
-  <li>Make sure that the user/group that dd-agent runs as has access to stat the files in the desired directories.</li>
-  <li>Configure the agent to connect to your directories.<br>
+  <li>The Directory Check integration <b>is not currently supported on Windows systems</b>.</li>
+  <li>Ensure the user account running the Agent (typically <code>dd-agent</code>) has read access to the monitored directory and files.</li>
+  <li>Configure the Agent to connect to your directories.<br>
       Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>
         <pre class="textfile"><code>init_config:
 
 instances:
-    # For each instance you *must* provide at least a "directory"
+    # For each instance, the 'directory' parameter is required, all others are optional.
     #
-    # The following options are available:
-    # "directory" - string, the directory to gather stats for. required
-    # "name" - string, the name to use when tagging the metrics. defaults to the "directory"
+    # Instances take the following parameters:
+    # "directory" - string, the directory to monitor. Required.
+    # "name" - string, tag metrics with specified name. defaults to the "directory"
     # "pattern" - string, the `fnmatch` pattern to use when reading the "directory"'s files.
     #                     default "*"
     # "recursive" - boolean, when true the stats will recurse into directories. default False
@@ -45,7 +59,7 @@ instances:
        recursive: True </code></pre>
   </li>
 
-  <li>Restart the agent
+  <li>Restart the Agent
         <pre class="linux"><code>sudo /etc/init.d/datadog-agent restart</code></pre>
   </li>
 
