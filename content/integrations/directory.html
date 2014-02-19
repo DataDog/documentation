@@ -1,5 +1,5 @@
 ---
-title: Directory Integration
+title: Directory check
 sidebar:
   nav:
     - header: Integrations
@@ -37,7 +37,7 @@ From the Agent:
  <p><em>To capture Directory metrics you need to install the Datadog Agent.</em></p>
 
 <ol>
-  <li>The Directory integration <b>is not currently supported on Windows systems</b>.</li>
+  <li>The Directory check <b>is not currently supported on Windows systems</b>.</li>
   <li>Ensure the user account running the Agent (typically <code>dd-agent</code>) has read access to the monitored directory and files.</li>
   <li>Configure the Agent to connect to your directories.<br>
       Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>
@@ -65,7 +65,7 @@ instances:
 
   <li>Execute the info command
     <pre class="linux"><code>sudo /etc/init.d/datadog-agent info</code></pre>
-    and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+    and verify that the check has passed. The output of the command should contain a section similar to the following:
 
 	   <pre class="verification"><code>  Checks
   ======
