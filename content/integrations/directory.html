@@ -1,5 +1,5 @@
 ---
-title: Directory Check Integration
+title: Directory Integration
 sidebar:
   nav:
     - header: Integrations
@@ -17,10 +17,10 @@ sidebar:
       file size
     </li>
     <li>
-      age of the last file modification
+      age of the last modification
     </li>
     <li>
-      age of the file creation
+      age of the creation
     </li>
   </ul>
 </p>
@@ -28,16 +28,16 @@ sidebar:
 
 From the Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py">Directory Check script</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example">Directory Check configuration example</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py">Directory check script</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example">Directory check configuration example</a>
 
 
 <div id="int-configuration">
 <h3>Configuration</h3>
- <p><em>To capture Directory Check metrics you need to install the Datadog Agent.</em></p>
+ <p><em>To capture Directory metrics you need to install the Datadog Agent.</em></p>
 
 <ol>
-  <li>The Directory Check integration <b>is not currently supported on Windows systems</b>.</li>
+  <li>The Directory integration <b>is not currently supported on Windows systems</b>.</li>
   <li>Ensure the user account running the Agent (typically <code>dd-agent</code>) has read access to the monitored directory and files.</li>
   <li>Configure the Agent to connect to your directories.<br>
       Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>

@@ -1,5 +1,5 @@
 ---
-title: Process Check Integration
+title: Process Integration
 sidebar:
   nav:
     - header: Integrations
@@ -14,15 +14,16 @@ sidebar:
 
 From the Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py">Process Check script</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example">Directory Check configuration example</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py">Process check script</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example">Directory check configuration example</a>
 
 
 <div id="int-configuration">
 <h3>Configuration</h3>
- <p><em>To capture Process Check metrics you need to install the Datadog Agent.</em></p>
+ <p><em>To capture Process metrics you need to install the Datadog Agent.</em></p>
 
 <ol>
+  <li>The Process integration <b>is not currently supported on Windows systems</b>. It will be supported soon with the next Agent version (4.2.0).</li>
   <li>Install the <b><a href="https://code.google.com/p/psutil/">psutil</a> Python library</b>. The easiest way to install psutil from sources is using easy_install:
     <pre class="code-block code-block-console" lang="console"><code class="">easy_install psutil</code></pre>
   </li>
