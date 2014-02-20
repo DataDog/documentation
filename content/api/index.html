@@ -788,6 +788,8 @@ title: API Reference
           <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
           <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
           <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+          <%= argument 'notify_no_data', "Set to 'True' to send a notification if data is missing." :default => "None" %>
+          <%= argument 'timeout_h', "Set to an integer to automatically resolve alert after specified number of hours. In most cases this setting will not be useful because you will only want an alert to resolve once it actually has been fixed." :default => "None" %>
         </ul>
       </div>
       <%= right_side_div %>
