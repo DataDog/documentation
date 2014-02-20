@@ -39,7 +39,7 @@ OVERVIEW
 
 <h3 id="overview">Overview</h3>
 
-This guide explains how to send your application's custom metrics to Datadog. 
+This guide explains how to send your application's custom metrics to Datadog.
 Sending your application's custom metrics to Datadog will let you correlate
 what's happening with your application, your users and your system.
 
@@ -97,7 +97,7 @@ EOF
   </div>
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
-    This tutorial has examples for Python and Ruby, but check out the 
+    This tutorial has examples for Python and Ruby, but check out the
     <a href="/libraries/">libraries page</a> if you use another language.
   </div>
 
@@ -112,8 +112,8 @@ COUNTERS
 
 <h3 id="counters">Counters</h3>
 
-Counters are used to (ahem) count things. Let's walk through a common example -
-counting web page views. To achieve this, we'll increment a metric called
+Counters are used to (ahem) count things. Let’s walk through a common example -
+counting web page views. To achieve this, we’ll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
 <%= code_tabs("counters-page-views", tab_languages) %>
@@ -145,8 +145,14 @@ Here's an example:
 
 <img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%">
 
+Note that StatsD counters are normalized over the flush interval to report
+per-second units. In the graph above, the marker is reporting
+35.33 web page views per second at ~15:24. In contrast, if one person visited
+the webpage each second, the graph would be a flat line at y = 1. To increment or
+measure values over time, please see <a href='#gauges'>gauges</a>.
+
 We can also count by arbitrary numbers. Suppose we wanted to count the number
-of bytes processed by a file uploading service, we'll increment a metric
+of bytes processed by a file uploading service. We'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
@@ -174,15 +180,12 @@ EOF
   </div>
 </div>
 <br>
-Counters are normalized to per-second units. From the "Web Page Views" 
-example above, if one person visited the site per second, the graph would be 
-a straight line at one. To increment or measure values over time please see 
-<a href='#gauges'>gauges</a>. It should also be noted that for counters coming 
-from another source that are ever-increasing and never get reset, for 
-example for the number of queries across all time from MySQL, we track the rate 
-between flushed values. While there is not currently an elegant solution to 
-get to raw counts within Datadog, you might want to apply a function to
-your series, like cumulative sum or the integral- more on that 
+
+Note that for counters coming from another source that are ever-increasing and never
+reset -- for example, the number of queries from MySQL over time -- we track the
+rate between flushed values. While there currently isn't an elegant solution to
+get raw counts within Datadog, you may want to apply a function to
+your series like cumulative sum or integral. There is more information on those
 <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
 
 
@@ -233,7 +236,7 @@ HISTOGRAMS
 <h3 id="histograms">Histograms</h3>
 
 Histograms measure the statistical distribution of a set of values.
-Suppose we wanted to measure the duration of a database query, 
+Suppose we wanted to measure the duration of a database query,
 we can sample each query time with the metric `database.query.time`.
 
 <%= code_tabs("histograms", tab_languages) %>
@@ -450,20 +453,20 @@ Datadog:
 
 <h3 id="custom">Seeing Your Custom Metrics</h3>
 
-The quickest way to see your custom metric is to use the metrics explorer. You 
+The quickest way to see your custom metric is to use the metrics explorer. You
 can navigate to it by clicking the "Metrics" link in the top navigation bar.
 
-Once you're at the metrics explorer you can type in the custom metric you set 
-in the "Graph:" field and it should autocomplete. If it doesn't autocomplete, 
-then it might mean that we haven't received data for that metric in the last 
+Once you're at the metrics explorer you can type in the custom metric you set
+in the "Graph:" field and it should autocomplete. If it doesn't autocomplete,
+then it might mean that we haven't received data for that metric in the last
 few hours.
 
-You can also filter the metric by tag using the "Over:" field, or graph the 
+You can also filter the metric by tag using the "Over:" field, or graph the
 metric by tag group using the "One graph per:" field.
 
-Note that the metrics explorer doesn't save any of these graphs. If you've 
-created some graphs that you'd like to save, you need to click one of the 
-save buttons at the bottom left, either saving to a new dashboard or to 
+Note that the metrics explorer doesn't save any of these graphs. If you've
+created some graphs that you'd like to save, you need to click one of the
+save buttons at the bottom left, either saving to a new dashboard or to
 an existing one.
 
 Metric names must start with a letter and after that may contain ascii
