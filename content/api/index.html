@@ -785,7 +785,7 @@ title: API Reference
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'query', "The metric query to alert on. The syntax is:
-          time_aggr(time_window):space_aggr:metric{tags} [by {tag_key}] operator value, where:
+          time_aggr(time_window):space_aggr:metric{tags} [by {tag_key}] operator int, where:
           - time_aggr = avg, sum, max, min
           - time_window = last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d
           - space_aggr = avg (default), sum, min, max
