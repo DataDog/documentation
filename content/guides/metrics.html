@@ -349,8 +349,8 @@ TAGS
 
 Tags are a way of adding dimensions to metrics, so they can be sliced, diced,
 aggregated and compared on the front end. Suppose we wanted to measure the
-performance of two algorithms in the real world, we could sample one metric
-`algorithm.run_time` and specify the version as a tag:
+performance of two algorithms in the real world. We could sample one metric
+`algorithm.run_time` and specify each version with a tag:
 
 <%= code_tabs("tags", tab_languages) %>
 
@@ -385,17 +385,36 @@ EOF
   </div>
 </div>
 
+Then, on the front end, the metrics can be aggregated as sums or averages,
+or you can specify the minimum or maximum value to be returned. The metrics
+can also be broken down by each identifier. For instance, we could run a
+query like this:
+
+`avg:algorithm.run_time{*} by {algorithm}`
+
+
 <p class="alert alert-warning">
-We store one timeseries per host + metric + tag combination on our backend,
+We store one time series per host + metric + tag combination on our backend,
 thus we cannot support infinitely bounded tags. Please don't include endlessly
 growing tags in your metrics, like timestamps or user ids. Please limit each
 metric to 1000 tags.
 </p>
 
+
 Tags must start with a letter, and after that may contain alphanumerics,
 underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.
+
+For optimal functionality, we recommend constructing tags that use the key:value
+syntax. Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
+Note that `device`, `host`, and `source` are treated specially and cannot be specified
+in the standard way. Check out some of our other docs for how to use these:
+
+- <a href"http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
+- <a href="http://docs.datadoghq.com/api/#tags">tags in the API</a>
+- <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
+- <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
 
 <h3 id="sample-rates">Sample Rates</h3>
 
