@@ -385,12 +385,15 @@ EOF
   </div>
 </div>
 
-Then, on the front end, the metrics can be aggregated as sums or averages,
-or you can specify the minimum or maximum value to be returned. The metrics
-can also be broken down by each identifier. For instance, we could run a
+On the front end, the metric instances can be aggregated as sums or averages,
+or the minimum/maximum can be reported. The metrics can also be broken down by
+each tag 'key' (in the key:value syntax). For instance, we could run a
 query like this:
 
 `avg:algorithm.run_time{*} by {algorithm}`
+
+In this query, all instances of this metric (e.g. across all hosts, indicated by `*`) are averaged
+(`avg`) and broken down by the tag key `algorithm`.
 
 
 <p class="alert alert-warning">
@@ -411,7 +414,7 @@ syntax. Examples of commonly used metric tag keys are `env`, `instance`, `name`,
 Note that `device`, `host`, and `source` are treated specially and cannot be specified
 in the standard way. Check out some of our other docs for how to use these:
 
-- <a href"http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
+- <a href="http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
 - <a href="http://docs.datadoghq.com/api/#tags">tags in the API</a>
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
 - <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
