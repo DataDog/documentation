@@ -158,18 +158,18 @@ title: API Reference
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
           <ul>
-            <%= argument 'metric', 'The name of the time series' %>
-            <li>
+          <%= argument 'metric', 'The name of the time series' %>
+          <li>
               <strong>points [required]</strong>
               <div>A JSON array of points. Each point is of the form:
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
               </div>
-            </li>
-            <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
-            <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-            <%= argument('type', 'The type of the metric - <code>gauge</code>
+          </li>
+          <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
+          <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
+          <%= argument('type', 'The type of the metric - <code>gauge</code>
             or <code>counter</code>.', :default => 'gauge' ) %>
           </ul>
         </ul>
@@ -778,28 +778,39 @@ title: API Reference
       </div>
     </div>
 
+
     <!-- Create alerts -->
     <h4 id="alerts-create">Create an alert</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'query', "The metric query to alert on. The syntax is:
-          time_aggr(time_window):space_aggr:metric{tags} [by {tag_key}] operator int, where:
-          - time_aggr = avg, sum, max, min
-          - time_window = last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d
-          - space_aggr = avg (default), sum, min, max
-          - tags = one or more tags or *
-          - tag_key = 'key' in key:value tag syntax
-          - operator = <, <=, >, >=, ==, !=
-          " %>
-          <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
-          <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
-          <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
-          <%= argument 'notify_no_data', "Set to 'True' to send a notification if data is missing." :default => "None" %>
-          <%= argument 'timeout_h', "Set this value to an integer to automatically resolve the alert after the specified number of hours. For some metrics that report periodically across different tags, it may make sense to set associated alerts to auto-resolve. For instance, if a counter metric only reports when an error occurs, the triggered alert will never resolve because the metric doesn't report 0 errors." :default => "None" %>
+          <li>
+              <strong>query [required]</strong>
+              <div>The metric query to alert on. The syntax is:
+                  <div>
+                  <code>time_aggr(time_window):space_aggr:metric_name{tags} [by {tag_key}] operator int</code>
+                  </div>
+                  The items in square brackets are optional. The accepted arguments for each item are as follows:
+                  <div>
+                    <ul class="arguments">
+                      <li><code>time_aggr</code> avg, sum, max, or min</li>
+                      <li><code>time_window</code> last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d</li>
+                      <li><code>space_aggr</code> avg, sum, min, or max</li>
+                      <li><code>tags</code> one or more tags (comma-separated), or *</li>
+                      <li><code>tag_key</code> a 'key' in key:value tag syntax</li>
+                      <li><code>operator</code> <, <=, >, >=, ==, or !=</li>
+                    </ul>
+                  </div>
+              </div>
+          </li>
+        <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
+        <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
+        <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to 'True' is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+        <%= argument 'notify_no_data', "Set to 'True' to send a notification if data is missing.", :default => "None" %>
+        <%= argument 'timeout_h', "Set this value to an integer to automatically resolve the alert after the specified number of hours. For some metrics that report periodically across different tags, it may make sense to set associated alerts to auto-resolve. For instance, if a counter metric only reports when an error occurs, the triggered alert will never resolve because the metric doesn't report 0 errors.", :default => "None" %>
         </ul>
-      </div>
+        </div>
       <%= right_side_div %>
         <h5>Signature</h5>
         <code>POST api/v1/alert</code>
@@ -811,8 +822,9 @@ title: API Reference
         <%= snippet_result_code_block "api-alert-create.py" %>
         <%= snippet_result_code_block "api-alert-create.rb" %>
         <%= snippet_result_code_block "api-alert-create.sh" %>
+        </div>
       </div>
-    </div>
+
 
     <!-- Show alerts -->
     <h4 id="alerts-get-details">Get an alert's details</h4>
