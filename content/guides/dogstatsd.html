@@ -13,6 +13,8 @@ sidebar:
       href: "#sample-rates"
     - text: Tags
       href: "#tags"
+    - text: Events
+      href: "#events"
     - text: Configuration
       href: "#configuration"
     - text: Datagram Format
@@ -202,6 +204,29 @@ dog.histogram('rendering.duration', tags=[version])
 eof
 %>
 
+## Events
+
+Events are a Datadog specific extension to StatsD. You can post events directly
+to your stream from your DogStatsD client.
+
+
+Since events are an extension to StatsD, so you'll need to use a client that
+supports them.
+
+
+Parameters are described in the <a href="http://docs.datadoghq.com/api/">
+API documentation</a>.
+
+
+<%= python <<eof
+title = "User registration"
+text = "The user 'toto' registered to the application. It is our 42nd user!"
+tags = ["audit:new_user"]
+
+dog.event(title, text, alert_type="info", priority="low", tags=tags)
+eof
+%>
+
 ## Configuration
 
 DogStatsD supports the following options, all of which can be tweaked in the
@@ -232,6 +257,66 @@ Here's  breakdown of the fields:
 - tags are optional, and should be a comma seperated list of tags. colons are
   used for key value tags.
 
+For events, the format is more complex.
+
+`_e{title_length,body_length}:title|body|key1:value1|key2:value2|#tag1:value,tag2`
+
+- `title_length` is the number of UTF-8 characters of the `title`. `body_length`
+  is the number of UTF-8 characters of the `body` (after \n escaping).
+- `title` is the title of the event
+- `body` is the body content of the event. New line character \n has to be
+  replaced by the two characters "\n".
+- `key`:`value` are optional event attributes. Look at the <a href="http://docs.datadoghq.com/api/">
+  API documentation</a> to find what they mean.
+  `key` can be:
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>API field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>t</td>
+      <td>alert_type</td>
+      <td>"error", "warning", "info" or "success". Default: "info".</td>
+    </tr>
+    <tr>
+      <td>k</td>
+      <td>aggregation_key</td>
+      <td>An arbitrary string to use for aggregation.</td>
+    </tr>
+    <tr>
+      <td>s</td>
+      <td>source_type_name</td>
+      <td>The type of event being posted. <br>
+          Options: nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano</td>
+    </tr>
+    <tr>
+      <td>d</td>
+      <td>date_happened</td>
+      <td>POSIX timestamp of the event.</td>
+    </tr>
+    <tr>
+      <td>p</td>
+      <td>priority</td>
+      <td>The priority of the event ("normal" or "low"). Default: "low".</td>
+    </tr>
+    <tr>
+      <td>h</td>
+      <td>hostname</td>
+      <td>Hostname of the host corresponding to this event.</td>
+    </tr>
+  </tbody>
+</table>
+
+- tags are optional, and should be a comma seperated list of tags. colons are
+  used for key value tags.
+
+
 Here are some example datagrams and comments explaining them:
 
     # Increment the page.views counter.
@@ -251,6 +336,9 @@ Here are some example datagrams and comments explaining them:
 
     # An example putting it all together.
     users.online:1|c|@0.5|#country:china
+
+    # A warning event about a user leaving the service.
+    _e{14,62}:A user left us|The user "toto" removed his account :(\nHis mail: toto@mail.com|t:warning|h:host7|#audit:user_left,lang:en
 
 ## Source
 
