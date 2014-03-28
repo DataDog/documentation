@@ -205,6 +205,10 @@ eof
 ## Events
 You can post events to your Datadog event stream. You can tag them, set priority and even aggregate them with other events.
 
+Mandatory parameters:
+- `title` (String) — Event title.
+- `text` (String) — Event text. Supports line breaks.
+
 Aggregation in the stream is made on hostname/event_type/source_type/aggregation_key. If there's no event type, for example, then that won't matter; it will be grouped with other events that don't have an event type.
 
 <%= python <<eof
@@ -213,9 +217,22 @@ Aggregation in the stream is made on hostname/event_type/source_type/aggregation
 statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
 
 # Cry for help
-statsd.event('SO MUCH SNOW', 'Started yesterday and it won\'t stop !!', alert_type='error', tags=['urgent', 'endoftheworld'])
+statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
 eof
 %>
+
+####Parameters
+- Mandatory:
+  - Event title.
+  - Event text. Supports line breaks.
+- Optional:
+  - `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
+  - `hostname` (String, None) — default: None — Assign a hostname to the event.
+  - `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
+  - `priority` (String, None) — default: 'normal' — Can be “normal” or “low”.
+  - `source_type_name` (String, None) — default: None — Assign a source type to the event.
+  - `alert_type` (String, None) — default: 'info' — Can be “error”, “warning”, “info” or “success”.
+  - `tags` - (Array[str], None) — default: None — An array of tags
 
 ## Configuration
 
@@ -274,19 +291,20 @@ Here are some example datagrams and comments explaining them:
 If you want to send events to DogStatsD in your own way, here is the format of
 the packets:
 
-`_e{title.length,text.length}:title|text|d:date_happened|h:hostname|k:aggregation_key|p:priority|s:source_type_name|t:alert_type|#tag1:value,tag2`
+`_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
-Breakdown of the fields:
-
-- `title` (String) — Event title.
-- `text` (String) — Event text. Supports line breaks.
-- `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
-- `hostname` (String, None) — default: None — Assign a hostname to the event.
-- `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
-- `priority` (String, None) — default: 'normal' — Can be “normal” or “low”.
-- `source_type_name` (String, None) — default: None — Assign a source type to the event.
-- `alert_type` (String, None) — default: 'info' — Can be “error”, “warning”, “info” or “success”.
-- `tags` - (Array[str], None) — default: None — An array of tags
+####Parameters
+- Mandatory:
+  - `title` — Event title.
+  - `text` — Event text. Supports line breaks.
+- Optional: `|[key]:[value]`
+  - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is now when none.
+  - `|h:hostname` — default: None — Assign a hostname to the event.
+  - `|k:aggregation_key` — default: None — Assign an aggregation key to the event, to group it with some others.
+  - `|p:priority` — default: 'normal' — Can be “normal” or “low”.
+  - `|s:source_type_name` — default: None — Assign a source type to the event.
+  - `|t:alert_type` — default: 'info' — Can be “error”, “warning”, “info” or “success”.
+  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em>Careful: The `:` in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong>
 
 
 ## Source
