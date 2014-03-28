@@ -23,9 +23,9 @@ sidebar:
 
 <p class="aside">
   This tutorial will walk you through instrumenting your application to send
-  custom metrics to Datadog. If you need some help as you go, pop by 
+  custom metrics to Datadog. If you need some help as you go, pop by
   <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-  where we'll be happy to answer any questions you might have. (There's a 
+  where we'll be happy to answer any questions you might have. (There's a
   <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
   web chat client, too</a>.)
 </p>
@@ -202,6 +202,21 @@ dog.histogram('rendering.duration', tags=[version])
 eof
 %>
 
+## Events
+You can post events to your Datadog event stream. You can tag them, set priority and even aggregate them with other events.
+
+Aggregation in the stream is made on hostname/event_type/source_type/aggregation_key. If there's no event type, for example, then that won't matter; it will be grouped with other events that don't have an event type.
+
+<%= python <<eof
+
+# Post a simple message
+statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
+
+# Cry for help
+statsd.event('SO MUCH SNOW', 'Started yesterday and it won\'t stop !!', alert_type='error', tags=['urgent', 'endoftheworld'])
+eof
+%>
+
 ## Configuration
 
 DogStatsD supports the following options, all of which can be tweaked in the
@@ -216,6 +231,8 @@ configuration file</a>:
     dogstatsd_interval: 10
 
 ## Datagram Format
+
+### Metrics
 
 If you want to send metrics to DogStatsD in your own way, here is the format of
 the packets:
@@ -251,6 +268,26 @@ Here are some example datagrams and comments explaining them:
 
     # An example putting it all together.
     users.online:1|c|@0.5|#country:china
+
+### Events
+
+If you want to send events to DogStatsD in your own way, here is the format of
+the packets:
+
+`_e{title.length,text.length}:title|text|d:date_happened|h:hostname|k:aggregation_key|p:priority|s:source_type_name|t:alert_type|#tag1:value,tag2`
+
+Breakdown of the fields:
+
+- `title` (String) — Event title.
+- `text` (String) — Event text. Supports line breaks.
+- `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
+- `hostname` (String, None) — default: None — Assign a hostname to the event.
+- `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
+- `priority` (String, None) — default: 'normal' — Can be “normal” or “low”.
+- `source_type_name` (String, None) — default: None — Assign a source type to the event.
+- `alert_type` (String, None) — default: 'info' — Can be “error”, “warning”, “info” or “success”.
+- `tags` - (Array[str], None) — default: None — An array of tags
+
 
 ## Source
 
