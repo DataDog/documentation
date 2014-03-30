@@ -20,8 +20,9 @@ performance.
 To get real-time metrics from your MySQL or PostgreSQL instances you
 will need to use a Datadog agent that connects to your RDS instances.
 Because the agent metrics will be tied to the instance where the agent
-is running and not to the actual RDS instance, you will need to use tags to
-connect all metrics together.
+is running and not to the actual RDS instance, you will need to use
+the <code>dbinstanceidentifer</code> tag to connect all metrics
+together.
 
 Once the agent is configured with the same tags as the RDS instance,
 getting MySQL/PostgreSQL metrics in the context of RDS metrics is child's
@@ -29,7 +30,7 @@ play.
 
 <h2>Step-by-step</h2>
 
-<h3>1. Set tags for your RDS instance</h3>
+<h3>1. Gather connection details for your RDS instance</h3>
 
 First navigate to the AWS Console and open the RDS section to find the
 RDS instance you want to monitor. It should look like:
@@ -40,15 +41,10 @@ Write down the endpoint URL
 (e.g. <strong>mysqlrds.blah.us-east1.rds.amazonaws.com:3306</strong>);
 You will need it when you configure the agent.
 
-Notice the tags section at the bottom. This is where you can view and edit RDS instance tags.
+Also make a note of the <code>DB Instance identifier</code>
+(e.g. <strong>mysqlrds</strong>). You will need it to create
+graphs and dashboards.
 
-<img src="/static/images/rds-tags.png" style="width:100%; border:1px solid #777777"/>
-
-Now pick a tag to uniquely identify this instance, e.g. <code>Key = rdsinstance, Value = my_own_instance</code>.
-We will use this very tag in the agent configuration, in the graph definitions and in alerts to
-tie together RDS metrics and MySQL/PostgreSQL metrics.
-
-Finally save your changes and you're done with the AWS console part.
 
 <h3>2. Configure an agent and connect to your RDS instance</h3>
 
@@ -57,7 +53,9 @@ database instances. Originally designed to allow the monitoring of
 multiple instances on the same machine, you can use these tags to your
 advantage.
 
-Here is an example of a configuration for MySQL RDS using <code>mysql.yaml</code>, usually found in <code>/etc/dd-agent/conf.d</code>.
+Here is an example of a configuration for MySQL RDS
+using <code>mysql.yaml</code>, usually found
+in <code>/etc/dd-agent/conf.d</code>.
 
 <%= snippet_code_block "rds-conf.yaml" %>
 
@@ -69,6 +67,10 @@ Then restart the agent and verify that the new check is working by running
 After a few minutes, RDS metrics and MySQL/PostgreSQL metrics will be
 accessible in Datadog in the Metrics Explorer, in Graphs and in
 Alerts.
+
+Here's an example of a graph displaying I/O for the instance <code>mysqlrds</code> using the <code>dbinstanceidentifier</code> tag.
+
+<img src="/static/images/rds-example.png" style="width:100% border:1px #777777"/>
 
 <h2>What's next?</h2>
 
