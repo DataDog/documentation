@@ -2,24 +2,20 @@
 <% @heading = "h#{ @heading_size }" %>
 
 <% unless @hide_datadog %>
-  <<%= @heading %> id="datadog">Using Datadog</<%= @heading %>>
-
-  You can get in touch with our support team by mentioning 
+  <<%= @heading %> id="support">Web Support</<%= @heading %>>
+  You can get in touch with our Support Team by mentioning
   <a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support</a>
-  in a comment on Datadog.
-<% end %>
+  in an event stream post. In addition, we have a livechat service available during the day (EST) from any page within the app.
 
 <<%= @heading %> id="email">By Email</<%= @heading %>>
-
-Reach out at <a href="mailto:support@datadoghq.com">support@datadoghq.com.
+Reach our support team via email at <a href="mailto:support@datadoghq.com">support@datadoghq.com.
 
 <<%= @heading %> id="irc">Over IRC</<%= @heading %>>
+You can visit us and other Datadog users in our IRC channel, <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
+(There's a <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1"> web chat client, too</a>.)
 
-If you want to chat in real-time, pop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a 
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
+<<%= @heading %> id="docs">Datadog Docs</<%= @heading %>>
+Check out our <a href="http://docs.datadoghq.com/">docs</a>, where you'll find references and guides for using Datadog.
 
-<<%= @heading %> id="desk">Post a Question</<%= @heading %>>
-<a href="https://datadog.desk.com/customer/portal/questions/new">Post a public question</a> on our support website!
-
+<<%= @heading %> id="status">Status Page</<%= @heading %>>
+Our <a href="http://status.datadoghq.com/">Status Page</a> has the latest on any performance issues that we are experiencing.
