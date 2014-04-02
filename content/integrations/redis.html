@@ -8,7 +8,7 @@ sidebar:
 ---
 <div id="int-overview">
 <h3>Overview</h3>
-Track and graph your Redis activity and performance metrics with slice-and-dice at 
+Track and graph your Redis activity and performance metrics with slice-and-dice at
 all levels from individual column families to entire clusters.
 
 </div>
@@ -17,8 +17,8 @@ all levels from individual column families to entire clusters.
 Troubleshooting and Questions
 </h3>
 
-Do you have redis-py library, version 2.0.0? You might need to 
-<a href="https://github.com/DataDog/dd-agent/issues/374">upgrade</a> 
+Do you have redis-py library, version 2.4.11 or later? You might need to
+<a href="https://github.com/DataDog/dd-agent/issues/374">upgrade</a>
 if you are having difficulties!
 
 <span class="question">Q: With Redis, even after install python-redis we get this error:</span>
@@ -30,16 +30,16 @@ if you are having difficulties!
 	*Missing redis python module - Failure*
 
 
-A: For CentOS5 we will look for python2.6, use that if it’s available, otherwise 
-we will default to the system python (2.4, in this case). The easiest solution 
-would be to remove Python 2.6 altogether and restart the Agent which should 
+A: For CentOS5 we will look for python2.6, use that if it’s available, otherwise
+we will default to the system python (2.4, in this case). The easiest solution
+would be to remove Python 2.6 altogether and restart the Agent which should
 have it default to 2.4 and the redis checks should then work as expected.
 <br>
 <br>
 
-<span class="question">Q: Can the redis plugin draw metrics from different ports on the same host, 
+<span class="question">Q: Can the redis plugin draw metrics from different ports on the same host,
 if we are running more than 1 redis instance on each server?</span>
-<br>A: Yes! The value for `redis_urls` in your datadog.conf file can be a list of 
+<br>A: Yes! The value for `redis_urls` in your datadog.conf file can be a list of
 comma-separated redis hosts, such as:
 
 ```
@@ -48,7 +48,7 @@ comma-separated redis hosts, such as:
 <br>
 <br>
 
-<span class="question">Q: How do I filter to look at 
+<span class="question">Q: How do I filter to look at
 the stats for a particular DB in a particular environment?</span>
 <br>A: Prebuilt dashboards only allow you to filter on a single tag
 (these are the dashboards you see when
