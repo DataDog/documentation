@@ -63,3 +63,43 @@ can select multiple environments and then select “Save these tiles to:
 a new dashboard.”
 
 <img src="/static/images/metric-explorer-redis.png"/>
+
+<br>
+
+The following metrics are collected by default with the Redis integration:
+
+    redis.aof.buffer_length
+    redis.aof.last_rewrite_time
+    redis.aof.rewrite
+    redis.aof.size
+    redis.clients.biggest_input_buf
+    redis.clients.blocked
+    redis.clients.longest_output_list
+    redis.cpu.sys
+    redis.cpu.sys_children
+    redis.cpu.user
+    redis.cpu.user_children
+    redis.keys.evicted
+    redis.keys.expired
+    redis.mem.fragmentation_ratio
+    redis.mem.lua
+    redis.mem.peak
+    redis.mem.rss
+    redis.mem.used
+    redis.net.clients
+    redis.net.rejected
+    redis.net.slaves
+    redis.perf.latest_fork_usec
+    redis.pubsub.channels
+    redis.pubsub.patterns
+    redis.rdb.bgsave
+    redis.rdb.changes_since_last
+    redis.rdb.last_bgsave_time
+    redis.replication.last_io_seconds_ago
+    redis.replication.sync
+    redis.replication.sync_left_bytes
+    redis.stats.keyspace_hits
+    redis.stats.keyspace_misses  
+    
+
+
