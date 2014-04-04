@@ -7,3 +7,20 @@ sidebar:
       href: "/integrations/"
 ---
 
+
+<div id="int-overview">
+<h3>Overview</h3>
+
+With Webhooks you'll be able to:
+<ul>
+<li> Connect to your services.</li>
+<li> Alert your services when a metric alert is triggered.</li>
+</ul>
+</div>
+
+
+<p>To create a webhook, just enter the URL and a name. Then to use your 
+webhook in Datadog, just add @webhook-name_of_the_webhook in the 
+text of the metric alert you want to trigger the webhook. It will 
+trigger a POST request to the URL you set with the following content in JSON format.</p>
+
