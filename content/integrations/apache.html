@@ -22,6 +22,18 @@ From the open-source Agent:
 * <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a>
 
 
+The following metrics are collected by default with the Apache integration:
+
+    apache.net.bytes
+    apache.net.bytes_per_s
+    apache.net.hits
+    apache.net.request_per_s
+    apache.performance.busy_workers
+    apache.performance.cpu_load
+    apache.performance.idle_workers
+    apache.performance.uptime
+
+
 <div id="int-configuration">
 <h3>Configuration</h3>
  <p><em>To capture Apache metrics you need to install the Datadog agent.</em></p>
