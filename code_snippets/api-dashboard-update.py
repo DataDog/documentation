@@ -16,5 +16,10 @@ graphs =  [{
     },
     "title": "Average Memory Free By Host"
 }]
+template_variables = [{
+	"name": "host1",
+	"prefix": "host",
+	"default": "host:my-host"
+}]
 
 api.update_dashboard(dash_id, title, description, graphs)

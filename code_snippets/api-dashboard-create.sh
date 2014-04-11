@@ -15,5 +15,10 @@ curl  -X POST -H "Content-type: application/json" \
       }],
       "title" : "Average Memory Free Shell",
       "description" : "A dashboard with memory info."
+      "template_variables": [{
+          "name": "host1",
+          "prefix": "host",
+          "default": "host:my-host"
+      }]
     }' \
 "https://app.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"

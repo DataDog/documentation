@@ -16,5 +16,10 @@ curl  -X PUT -H "Content-type: application/json" \
       }],
       "title" : "Sum Memory Free Shell",
       "description" : "A dashboard with memory info."
+      "template_variables": [{
+          "name": "host1",
+          "prefix": "host",
+          "default": "host:my-host"
+      }]
     }' \
 "https://app.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
