@@ -15,27 +15,33 @@ This guide assumes that you already have a SAML Identity Provider up and running
 
 <h2 id="saml">SAML</h2>
 
-SAML (Security Assertion Markup Language) is a framework for communicating authentication information and user attributes between an identity provider and web applications in different domains.  Similar to the way that OpenID allows users to log into Datadog using the credentials associated with a Google account, configuring SAML for your Datadog account will allow users to log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.  You can read more about SAML <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=security">here.</a>
+<a href="http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML (Security Assertion Markup Language)</a> is a framework for communicating authentication information and user attributes between an identity provider and web applications in different domains.  Similar to the way that OpenID allows users to log into Datadog using the credentials associated with a Google account, configuring SAML for your Datadog account will allow users to log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 <h2 id="configure">Configure SAML</h2>
 
 If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
 
+<br>
 <img src="/static/images/saml_1.png" style="width:100%; border:1px solid #777777"/>
+<br><br>
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
 
-1. Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button. <br>
-  <img src="/static/images/saml_choose_file.png" style="width:50%; border:1px solid #777777"/> <br>
+1. Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button. <br><br>
+  <img src="/static/images/saml_choose_file.png" style="width:50%; border:1px solid #777777"/> <br><br>
   After you've chosen the file, click "Upload File". <br>
 2. Datadog’s Service Provider metadata can be found at <a href="https://app.datadoghq.com/account/saml/metadata.xml">https://app.datadoghq.com/account/saml/metadata.xml</a>. You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable SAML button.
 
+<br>
 <img src="/static/images/saml_enable.png" style="width:100%; border:1px solid #777777"/>
+<br><br>
 
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the SAML Configuration page.
 
+<br>
 <img src="/static/images/saml_enabled.png" style="width:100%; border:1px solid #777777"/>
+<br><br>
 
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.
 
@@ -50,6 +56,6 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
   1. **eduPersonPrincipalName**:  The eduPersonPrincipalName must correspond to the user’s Datadog username.  The username is usually the user’s email address.
   2. **sn**: This is optional, and should be set to the user’s surname.
   3. **givenName**: This is optional, and should be set to the user’s first, or given name.
-* If eduPersonPrincipalName exists in the AttributeStatement, the value of this attribute will be used for the username.  If eduPersonPrincipalName is not included in the AttributeStatement, the username will be taken from the NameID in the Subject.  The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
-* If sn and givenName are provided, they will be used to update the user’s name in their Datadog profile.
+* If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute will be used for the username.  If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject.  The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+* If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
 * Datadog’s SP Metadata can be found at <a href="https://app.datadoghq.com/account/saml/metadata.xml">https://app.datadoghq.com/account/saml/metadata.xml</a>.
