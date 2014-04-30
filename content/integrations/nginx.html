@@ -1,5 +1,5 @@
 ---
-title: Datadog-NGiNX Integration
+title: Datadog-NGINX Integration
 sidebar:
   nav:
     - header: Integrations
@@ -9,7 +9,7 @@ sidebar:
 <div id="int-overview">
 <h3>Overview</h3>
 
-Connect NGiNX to Datadog in order to:
+Connect NGINX to Datadog in order to:
 <ul>
 <li> Visualize your web server performance</li>
 <li> Correlate the performance of Nginx with the rest of your applications</li>
@@ -18,14 +18,15 @@ Connect NGiNX to Datadog in order to:
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example">NGiNX YAML Example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py">NGiNX checks.d</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example">NGINX YAML Example</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py">NGINX checks.d</a>
 
-The following metrics are collected by default with the NGiNX integration:
+The following metrics are collected by default with the NGINX integration:
 
     nginx.net.connections
     nginx.net.reading
     nginx.net.request_per_s
-    nginx.net.waiting    
+    nginx.net.waiting
     nginx.net.writing
 
+If you are using NGINX Plus, you can collect many more metrics, as described on the <a href="http://nginx.org/en/docs/http/ngx_http_status_module.html#data">NGINX docs</a>. For a list of the NGINX Plus metric names as you'd see them in Datadog, see <a href="https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python">this file</a>.
