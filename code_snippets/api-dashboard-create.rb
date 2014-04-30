@@ -25,4 +25,4 @@ template_variables = [{
 	"default" => "host:my-host"
 }]
 
-dog.create_dashboard(title, description, graphs)
+dog.create_dashboard(title, description, graphs, template_variables)

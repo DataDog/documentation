@@ -22,4 +22,4 @@ template_variables = [{
 	"default": "host:my-host"
 }]
 
-api.create_dashboard(title, description, graphs)
+api.create_dashboard(title, description, graphs, template_variables)
