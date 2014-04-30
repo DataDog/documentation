@@ -18,7 +18,7 @@ called by the Datadog Agent to connect to the MBean Server and to collect these
 metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd
 server running with the Agent.
 
-JMX Checks have a limit of 100 metrics per instance which should be enough to
+JMX Checks have a limit of 350 metrics per instance which should be enough to
 satisfy your needs as it's really easy to customize which metrics you want to
 collect.  We are going to see how to do so.
 
@@ -110,12 +110,12 @@ In that case:<ul>
 </ul>
 
 </div>
-<h2>Troubleshooting</h2> <h4>The 100 metric limit</h4> Due to the nature of
+<h2>Troubleshooting</h2> <h4>The 350 metric limit</h4> Due to the nature of
 these integrations, it is possible to submit an extremely high number of
 metrics directly to Datadog. What we've found in speaking with many customers
-is that some of these metrics are not needed; thus, we've set the limit at 100
+is that some of these metrics are not needed; thus, we've set the limit at 350
 and below you'll find the tools to both see what you're collecting and to get
 below the limit.
 <p>Begin by using the commands seen <a href='#customization'>above</a> to investigate what metrics are available.
 Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.
-If you believe you need more than 100 metrics, please reach out to <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
+If you believe you need more than 350 metrics, please reach out to <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
