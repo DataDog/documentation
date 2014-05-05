@@ -12,7 +12,7 @@ sidebar:
     - text: Alert conditions
       href: "#conditions"
     - text: No-data alerts
-      href: "#nodata"    
+      href: "#nodata"
     - text: Autoresolving alerts
       href: "#autoresolve"
     - text: Notifying
@@ -27,12 +27,12 @@ sidebar:
 the ability to know when critical changes are occurring.
 Alerts within Datadog notify you when a metric crosses a threshold; they're flexible,
 appear in the event stream, and can be delivered to team members of your choice via email,
-Hipchat room, or whomever is 'oncall' in Pagerduty.
+Hipchat room, or whoever is 'oncall' in Pagerduty.
 To set up an alert, go to the 'Metrics' tab and select 'Manage Alerts'.</p>
 
 <img src="/static/images/alert_1.png" style="width:100%; border:1px solid #777777"/>
 
-<p>Two subtabs will appear, 'Triggered Alerts' and 'Manage Metric Alerts'. 
+<p>Two subtabs will appear, 'Triggered Alerts' and 'Manage Metric Alerts'.
 'Triggered Alerts' are all alerts currently firing. Select 'Manage Metric Alerts' to
 create a new alert.</p>
 
@@ -43,11 +43,11 @@ create a new alert.</p>
 
 <p>There are 5 steps to creating an alert</p>
 <ol>
-<li>Choose the average, minimum, maximum, or sum of a  metric over specific hosts, 
+<li>Choose the average, minimum, maximum, or sum of a  metric over specific hosts,
 tags, regions, devices, etc.</li>
-<li>Choose a simple or multi alert; <a href="#simple">multi-alerts</a> are flexible 
+<li>Choose a simple or multi alert; <a href="#simple">multi-alerts</a> are flexible
 and can be across host, device, role, etc.</li>
-<li>Set the alert conditions; if the metric was above or below a threshold value on average, 
+<li>Set the alert conditions; if the metric was above or below a threshold value on average,
 at least once, or at all times during a time span and to be alerted if the metric
 is receiving no data.</li>
 <li>Say what's happening in the alert and @ notify team members.</li>
@@ -76,7 +76,7 @@ You'll get one alert, when the aggregated value meets the conditions set below.
 This works best to monitor a metric from a single host, like avg of system.cpu.iowait
 over host:bits, or for an aggregate metric across many hosts, like
 sum of nginx.bytes.net over region:us-east.</p>
-      
+
 <p>A multi alert applies the alert to each source, according to your group parameters.
 E.g. to alert on disk space you might group by host and device, creating the
 query: avg of system.disk.in_use over * by host,device. This will trigger a separate
@@ -86,9 +86,9 @@ alert for each device on each host that is running out of space.</p>
 <h4 id="conditions">Alert conditions</h4>
 <img src="/static/images/alert_5_1.png" style="width:100%; border:1px solid #777777"/>
 
-<p>When setting the alert conditions, ensure that the threshold value you use correctly 
-matches the unit that are showing in the graph (for example, bytes vs GB). The 
-'on average' option updates each minute to include the most recent time and dropoff 
+<p>When setting the alert conditions, ensure that the threshold value you use correctly
+matches the unit that are showing in the graph (for example, bytes vs GB). The
+'on average' option updates each minute to include the most recent time and dropoff
 what’s old (not a “moving average”, really a sliding timeframe). The options for
 the time frame are 5, 10, 15, 30, or 60 minutes.</p>
 
@@ -109,8 +109,8 @@ event that the agent died and the host is still up, you would be incorrectly
 alerted. We are working towards supporting this with Service Checks, a feature
 we hope to release in the near future.</p>
 
-<h4 id="autoresolve">Autoresolving alerts</h4> 
-<img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/> 
+<h4 id="autoresolve">Autoresolving alerts</h4>
+<img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
 
 <p>For some metrics that report periodically across different tags,
 it may make sense to have triggered alerts auto-resolve after a certain time
@@ -126,11 +126,11 @@ the metric falls below the given threshold.</p>
 
 <h4 id="notify">Notifying</h4>
 <img src="/static/images/alert_6.png" style="width:100%; border:1px solid #777777"/>
-<p>In the final step of setting up an alert, you can give any necessary commentary 
-for the alert so if it triggers it will alert the correct people with the most context possible. 
-Each graph delivered via email or in the event stream when an alert triggers is a hyperlink 
-to that graph at that exact timeframe. In the body of the message you can <a href="/faq/#notify">@notify</a> 
-members of the team to have it specifically call out to them. You can also do this in 
+<p>In the final step of setting up an alert, you can give any necessary commentary
+for the alert so if it triggers it will alert the correct people with the most context possible.
+Each graph delivered via email or in the event stream when an alert triggers is a hyperlink
+to that graph at that exact timeframe. In the body of the message you can <a href="/faq/#notify">@notify</a>
+members of the team to have it specifically call out to them. You can also do this in
 part 5, 'Notify your team'.</p>
 
 
@@ -138,8 +138,8 @@ part 5, 'Notify your team'.</p>
 <h3 id="faqs">Alerting FAQs</h3>
 <ul>
 <li>Can you alert on a function? Not currently, but we're working towards this!</li>
-<li>Can you alert on an event? Not currently, but we're discussing how we'd like to implement this. 
-As an alternative you can set up an @ notification in the body of the event which would deliver the 
+<li>Can you alert on an event? Not currently, but we're discussing how we'd like to implement this.
+As an alternative you can set up an @ notification in the body of the event which would deliver the
 event via email whenever it occurred.</li>
 
 </ul>

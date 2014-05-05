@@ -9,7 +9,7 @@ dog = Dogapi::Client.new(api_key, app_key)
 # Create a dashboard.
 title = 'My First Metrics'
 description = 'And they are marvelous.'
-graphs =  [{
+graphs = [{
   "definition" => {
     "events" => [],
     "requests "=> [
@@ -19,5 +19,10 @@ graphs =  [{
   },
   "title" => "Average Memory Free"
 }]
+template_variables = [{
+	"name" => "host1",
+	"prefix" => "host",
+	"default" => "host:my-host"
+}]
 
-dog.create_dashboard(title, description, graphs)
+dog.create_dashboard(title, description, graphs, template_variables)

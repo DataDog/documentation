@@ -19,5 +19,10 @@ graphs =  [{
   },
   "title" => "Average Memory Free"
 }]
+template_variables = [{
+	"name" => "host1",
+	"prefix" => "host",
+	"default" => "host:my-host"
+}]
 
-dog.update_dashboard(dash_id, title, description, graphs)
+dog.update_dashboard(dash_id, title, description, graphs, template_variables)

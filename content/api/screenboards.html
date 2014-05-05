@@ -69,7 +69,7 @@ Timeframes are all given as short names to represent a value. The available time
 If you would like to create or update boards that use templated variables, you must have the following attributes in the base payload:
 
 - `templated`: boolean of `true` or `false`
-- `template_variables`: A list of variables you want to be "templateable", e.g.: ["redis_port", "availability-zone"]. The names are arbitrary because you will be able to select *any* tag for the value of the variable.
+- `template_variables`: A list of variables you want to be "templateable."  Variables are defined by a name and optional prefix and default parameters, which determine the list of tags associated with the variable and the variable's initial value.
 
 The final "base" payload of a templated board would look like this:
 
