@@ -284,6 +284,26 @@ You can apply functions to the result of each query.
   </tr>
 
   <tr>
+    <td>hour_before()</td>
+    <td>Metric values from one hour ago</td>
+  </tr>
+
+  <tr>
+    <td>day_before()</td>
+    <td>Metric values from one day ago</td>
+  </tr>
+
+  <tr>
+    <td>week_before()</td>
+    <td>Metric values from one week ago</td>
+  </tr>
+
+  <tr>
+    <td>month_before()</td>
+    <td>Metric values from one month ago</td>
+  </tr>
+
+  <tr>
     <td>top()</td>
     <td>Select the top series responsive to a given query, according to some ranking method.  Takes four parameters:
 
@@ -377,6 +397,17 @@ To look at the hosts with the 6th through 10th highest values (for example), use
         {
           "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
           "stacked": false
+        }
+      ]
+    }
+
+Here is an example using the <code>week_before()</code> function:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
         }
       ]
     }
