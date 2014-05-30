@@ -21,8 +21,8 @@ sidebar:
 
 <ol>
   <p>Installing the Capistrano integration for a particular Capfile will capture each Capistrano task that that Capfile runs, including the roles that the task applies to and any logging output that it emits and submits them as events to Datadog at the end of the execution of all the tasks.</p>
-  <li>Install the <code>dogapi</code> Ruby gem (version &gt;= 1.3.0):
-    <pre class="linux"><code>sudo gem install dogapi --version "&gt;=1.3.0"</code></pre>
+  <li>Install the <code>dogapi</code> Ruby gem (version &gt;= 1.10.0):
+    <pre class="linux"><code>sudo gem install dogapi --version "&gt;=1.10.0"</code></pre>
   </li>
   <li><p>Add this to the beginning of your <code>Capfile</code>:</p>
     <pre class="textfile"><code>require "capistrano/datadog"
