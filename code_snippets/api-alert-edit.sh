@@ -7,6 +7,7 @@ curl -X PUT -H "Content-type: application/json" \
       "query": "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
       "name": "Bytes received on host0",
       "message": "We may need to add web hosts if this is consistently high.",
-      "silenced": true
+      "silenced": true,
+      "silenced_timeout_ts": 1401833000
     }' \
     "https://app.datadoghq.com/api/v1/alert/${alert_id}?api_key=${api_key}&application_key=${app_key}"

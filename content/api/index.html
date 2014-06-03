@@ -888,6 +888,8 @@ title: API Reference
           <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
           <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
           <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+          <%= argument 'silenced_timeout_ts', "An alert with 'silenced' set to True can have a silenced timeout timestamp. When the silenced timeout timestamp expires,
+            the alert gets unmuted.", :default => "None" %>
         </ul>
       </div>
       <%= right_side_div %>
