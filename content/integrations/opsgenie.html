@@ -10,7 +10,7 @@ sidebar:
 <div id="int-overview">
 <h3>Overview</h3>
 
-<h4>Create alerts using @opsgenie:</h4>
+Create alerts using @opsgenie:
 <ul>
 <li> From your event stream</li> 
 <li> By taking a snapshot</li> 
@@ -22,52 +22,41 @@ sidebar:
 <div id="int-configuration">
 
 <h3>Configuration</h3>
-<h4>Create a DataDog integration on OpsGenie</h4>
-		<ul>
-			<li> Go to the <a href="https://www.opsgenie.com/integration/index">OpsGenie Integrations</a> page</li> 
-			<li> Click on the DataDog Tile</li> 
-			<li> Enter your Datadog API key in the dedicated field. You can find your DataDog API key by going to the <a href="https://app.datadoghq.com/account/settings#api">Integration API</a> page. It should look something like this:
+<h4>Create a DataDog integration in OpsGenie</h4>
+		<ol>
+			<li>Log in to your OpsGenie account.</li>
+			<li> Go to the <a href="https://www.opsgenie.com/integration/index">OpsGenie Integrations</a> page.</li> 
+			<li> Click on the DataDog Tile.</li> 
+			<li> Enter your Datadog API key in the dedicated field. You can find your key <a href="https://app.datadoghq.com/account/settings#api">here</a>. It should look like this:
 				<code> 7985646abcdefgh79r0q643q </code>
 			</li> 
-			<li> Choose the recipients in OpsGenie and set up your filters</li>
-			<li> Save the configuration</li>
-			<li> Copy the red key. You will use this in DataDog</li>
-			<li> Add more DataDog integrations on OpsGenie by going to the OpsGenie Integrations page and repeating steps 1-7.</li>
-		</ul>
-<h4>Enable the OpsGenie integration in DataDog</h4>
-		<ul>
-			<li>Select the 'OpsGenie' tile on the <a href="https://app.datadoghq.com/account/settings">Account Integrations</a> page in Datadog.</li>
-			<li> In the Configuration tab, paste the key(s) provided for each DataDog integration (created in OpsGenie) in the <b>DataDog Integration Key</b> field, and choose a unique <b>DataDog Integration Name</b> for it.</li> 
-		</ul>
+			<li> Choose the recipients in OpsGenie and set up your filters.</li>
+			<li> Save the configuration.</li>
+			<li> Copy the red key. You will use this in DataDog.</li>
+			<li> Add more DataDog integrations on OpsGenie by going to the OpsGenie Integrations page and repeating the steps above.</li>
+		</ol>
+<h4>List the integration(s) you made in OpsGenie in DataDog</h4>
+		<ol>
+			<li>In Datadog, select the 'OpsGenie' tile on <a href="https://app.datadoghq.com/account/settings">Account Integrations</a>.</li>
+			<li> In the Configuration tab, paste the key(s) provided for each DataDog integration (created in OpsGenie) in the <b>"DataDog Integration Key"</b> field, and choose a unique <b>"DataDog Integration Name"</b>.</li> 
+			<img src="/static/images/og_integration.png" style="width:100% border:1px #777777">
+		</ol>
 
 </div>
+<div>
 
 <h3>How to Use DataDog and OpsGenie Together</h3>
-<h4>Create and acknowledge an OpsGenie alert from DataDog</h4> 
+<h4>Create, acknowledge and close an OpsGenie alert from DataDog</h4> 
+	<ul>
+		<li> You can create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the “Say What’s Happening” field, section 5, in the Edit Metric Alert.  When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.</li>
+		<li> Someone can acknowledge or close the alert from Datadog with the @opsgenie-acknowledge or @opsgenie-close mentions.</li>
+	</ul>
 
-You can create a Metric Alert on Datadog and put @opsgenie-service_name or @opsgenie in section 5, the “Say What’s Happening” field.  When this DataDog alert is triggered, an event will appear in your event stream and an alert will be created <b>and</b> sent in OpsGenie to the recipients you set-up in your OpsGenie service.
-
-<!-- Insert smaller Edit Metric image -->
-<img src="/static/images/og_metric_alert.png" style="width:100% border:1px #777777">
-
-Someone can acknowledge the alert on Datadog with the @opsgenie-acknowledge mention to say they are working on the issue.
-<img src="/static/images/dd_ack_og_alert.png" style="width:100% border:1px #777777">
-
-<h4>Create, acknowledge and close an alert from OpsGenie in DataDog</h4> 
-
-Similarly, when an alert set-up in OpsGenie is triggered, the reverse will happen, an event will be created in Datadog. The tags and description field from OpsGenie will be carried over to DataDog in the initial error state, which is denoted in red. 
-
-<img src="/static/images/og_create_alert_dd_updated.png" style="width:75% border:1px #777777">
-
-An alert can be acknowledged and closed from Opsgenie. In DataDog, the username of the person who acknowledged this alert will appear in the update and the event state will be updated using the following color code concept: 
-<ul>
-<li>red is an error</li>
-<li>yellow is a warning</li>
-<li>grey is info</li>
-<li>green is success</li>
-</ul>
-
-In this case it will be green as the alert is being closed. 
-<img src="/static/images/og_closed_dd_updated.png" style="width:100% border:1px #777777">
+<h4>Receive, acknowledge and close an alert created by OpsGenie in DataDog</h4> 
+	<ul>
+		<li> When an alert set-up in OpsGenie is triggered, the reverse will happen, an event will be created in Datadog. The tags and description field from OpsGenie will be carried over to DataDog and the alert will initially be in the error state. </li>
+		<li> An alert can be acknowledged and closed from Opsgenie. When this happens, the acknowledged alert in Datadog will be updated with the username of the person who closed this alert.</li>
+	</ul>
+</div>
 
 
