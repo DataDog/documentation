@@ -59,11 +59,12 @@ for that machine based on what was previously set up for that tag.</li>
 
 <img src="/static/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
 
-The Event Stream is based on the same conventions as a blog
+The Event Stream is based on the same conventions as a blog:
 <ul>
 <li>Every event in the stream can be commented on.</li>
 <li>Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation</li>
-<li>You can filter by: user, source, tag, host, status, priority, incident</li>
+<li>You can <a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a> 
+by: user, source, tag, host, status, priority, incident</li>
 </ul>
 
 <img src="/static/images/event_stream_post_incident_history.png" style="width:100%; border:1px solid #777777"/>
@@ -92,6 +93,8 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>Click & drag on a graph to zoom-in on a particular time-frame.</li>
 <li>As you hover over the graph the event stream moves with you.</li>
 <li>Display by zone, host, or total usage.</li>
+<li>We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and 
+<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.</li>
 <li>Share a graph snapshot that will appear in the stream; clicking on 
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
 <li>Graphs can be embedded in an iframe, giving a 3rd party a live graph 
@@ -102,7 +105,7 @@ without access to your data or any other information (via the cog in the upper r
 <h2 id="alerting">Alerting</h2>
 <img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
 
-Alerting gives you the ability to be notified if the aggregate of a specific 
+[Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific 
 metric is above or below a certain threshold:
 <ul>
 <li>Across your entire infrastructure</li>
