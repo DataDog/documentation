@@ -1,0 +1,41 @@
+---
+title: Datadog-SNMP checks
+sidebar:
+  nav:
+    - header: SNMP Integration
+    - text: Configure the SNMP Agent Check 
+      href: "#agent"
+    - text: Use your own Mib
+      href: "#convert-mib"
+    - header: Integrations
+    - text: Back to Overview
+      href: "/integrations/"
+---
+
+### <a name="agent"></a>Configure the SNMP Agent Check
+
+<p>To use the SNMP checks, add a <code>snmp.yaml</code> file to your <code>conf.d</code> directory, following <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/snmp.yaml.example">this example</a>.</p>
+
+<p>For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.</p>
+
+<p>Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:
+<ul>
+
+    <li> Specifying a MIB, a symbol and an index.</li>
+    <li> Specify an OID and the name you want the metric to appear under in Datadog.</li>
+</ul>
+You can also specify the metrics that you want to monitor for every interface by adding the IF-MIB and <a href="http://www.net-snmp.org/docs/mibs/interfaces.html#ifTable">the columns</a> you want to report for your interfaces to the <code>interface_metrics</code> subsection.</p>
+
+
+### <a name="convert-mib"></a>Use your own Mib
+
+<p>To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the <code>build-pysnmp-mibs</code> script that ships with pysnmp.</p>
+
+<p>It has a dependency on <code>smidump</code>, from the libsmi2ldbl package so make sure it is installed. Make also sure that you have all the dependencies of your MIB in your mib folder or it won't be able to convert your MIB correctly.</p>
+
+<p>Run 
+
+<pre><code>$ build-pysnmp-mibs -o YOUR-MIB.py YOUR-MIB.mib</code></pre>
+where YOUR-MIB.mib is the MIB you want to convert.</p>
+
+<p>Put all your pysnmp mibs into a folder and specify this folder's path in your <code>snmp.yaml</code> file, in the <code>init_config</code> section.</p>
