@@ -5,12 +5,22 @@ sidebar:
     - header: FAQ Topics
     - text: Agent
       href: "/faq/#agent"
+    - text: Alerts
+      href: "/faq/#alerts"
     - text: API
       href: "/faq/#api"
     - text: Architecture
       href: "/faq/#architecture"
+    - text: AWS
+      href: "/faq/#aws"
+    - text: Billing
+      href: "/faq/#billing"
     - text: Graphing
       href: "/faq/#graph"
+    - text: Integrations
+      href: "/faq/#integrations"
+    - text: Metrics
+      href: "/faq/#metrics"
     - text: Other
       href: "/faq/#other"
 
@@ -44,7 +54,91 @@ sidebar:
 
 <h3><a name="agent" href="#agent">Agent</a></h3>
 
-<p>For any Agent-related questions, refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</p>
+<h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
+<p>
+<ul>
+<li>Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
+</ul>
+</p>
+
+<h4 id="statsd">Can I use my own StatsD client?</h4>
+<p>
+<ul>
+<li>Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="agent-optional">Is the agent necessary to use Datadog?</h4>
+<p>
+<ul>
+<li>No, it is not. You don't have to install an agent if you only want to submit metrics via our API. You can read more about our API <a href="http://docs.datadoghq.com/api/">here</a>.</li>
+<li>In general, most folks find a lot of value in installing an agent because they get system metrics for free and metrics on common software like mysql, postgres, etc. with just a little bit of configuration. Another advantage is that there is a small statsd server built-in to the agent.</li>
+</ul>
+</p>
+
+<h4 id="hostname-change">How can I change the hostname?</h4>
+<p>
+<ul>
+<li>You can change the hostname by updating your agent’s configuration file called datadog.conf and replacing the value for the “hostname” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
+</ul>
+</p>
+
+<h4 id="agent-uninstall">How do I uninstall the agent?</h4>
+<p>
+<ul>
+<li>Mac OS: <pre><code>$ launchctl unload -w ~/LibraryLaunchAgents/com.datadoghq.Agent.plist
+$ rm -r ~/.datadog-agent
+$ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist</code></pre></li>
+<li>Windows: You can uninstall the agent in Add/Remove Programs</li>
+<li>Linux: <pre><code>$ sudo apt-get remove datadog-agent -y</code></pre></li>
+<li>CentOS 5: <pre><code>$ sudo yum remove datadog-agent-base</code></pre></li>
+<li>CentOS 6: <pre><code>$ sudo yum remove datadog-agent</code></pre></li>
+</ul>
+</p>
+
+<h4 id="agent-stopped">I stopped my agent but I’m still seeing the host in my Datadog account. Why is that?</h4>
+<p>
+<ul>
+<li>It can take up to 24h for the host to disappear from the infrastructure page, but it will only be part of the host count for billing purposes if we're actually receiving data.</li>
+</ul>
+</p>
+
+<h4 id="agent-other">Other Agent-related questions?</h4>
+<p>
+<ul>
+<li>Please refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</li>
+</ul>
+</p>
+
+<!--
+===============================================================================
+    Alerts
+===============================================================================
+-->
+<h3><a name="alerts" href="#alerts">Alerts</a></h3>
+
+<h4 id="no-data">I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?</h4>
+<p>
+<ul>
+<li>For the AWS [No Data] errors, the issue here has to do with how frequently we receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch APIs, data is often delayed by 10 or more minutes, so we generally recommend that an alert for an AWS metric be set to have a threshold window of at least 30 minutes or an hour (you can see this in step 3 of alert creation, “during the last…”).
+Switching the time frame on this alert will resolve this issue, or you can install the agent on some AWS hosts to get more up-to-date data to alert on. Overall, we’re always working towards getting data more efficiently from AWS.</li>
+</ul>
+</p>
+
+<h4 id="alert-disk-utilization">Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used?</h4>
+<p>
+<ul>
+<li>Yes, this can be done! Here is an example for creating a disk space in use alert when at 80% or above:</li>
+<ol>
+<li>Select a metric like "system.disk.in_use".</li>
+<li>Select the "threshold alert" type.</li>
+<li>For set alert grouping, select "simple alert".</li>
+<li>Set alert conditions: Select Above and for the value put 0.8.</li>
+<li>Add a custom message for alert if you'd like.</li>
+</ol>
+<li>You can read more about setting up alerts <a href="http://docs.datadoghq.com/guides/alerting/">here</a>.</li>
+</ul>
+</p>
 
 <!--
 ===============================================================================
@@ -55,13 +149,13 @@ sidebar:
 <h3><a name="api" href="#api">API</a></h3>
 
 <h4><a name="api-metric-names" href="#api-metric-names">What are valid metric names?</a></h4>
-<p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. 
+<p>Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
 Other characters will get converted to underscores. There is no max length. Unicode is not support.
-We recommend avoiding spaces. 
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). 
-We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, 
-but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are 
-reporting ‘http.nginx.*’, those must be web frontends”). 
+We recommend avoiding spaces.
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
+We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
+but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are
+reporting ‘http.nginx.*’, those must be web frontends”).
 </p>
 
 <h4><a name="api-tags" href="#api-tags">What are valid tags?</a></h4>
@@ -71,12 +165,12 @@ converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.</p>
 
 <h4>I'm submitting points to the API- anything I should know?</h4>
-<p>We store metric points at the 1 second resolution, but we’d prefer if you only 
-submitted points every 15 seconds. Any metrics with fractions of a second timestamps 
-will get rounded to the nearest second, and if any points have the same timestamp, 
+<p>We store metric points at the 1 second resolution, but we’d prefer if you only
+submitted points every 15 seconds. Any metrics with fractions of a second timestamps
+will get rounded to the nearest second, and if any points have the same timestamp,
 the latest point will overwrite the previous ones.
 
-We have a soft limit of 100 time series per host, where a time series is 
+We have a soft limit of 100 time series per host, where a time series is
 defined as a unique combination of metric name and tag.
 </p>
 
@@ -95,7 +189,7 @@ defined as a unique combination of metric name and tag.
 
 <h4>How do I delete a host or metric? </h4>
 <p>
-All hosts or metrics that have not seen data in 24 hours will disappear from the UI; 
+All hosts or metrics that have not seen data in 24 hours will disappear from the UI;
 you can still query against them, but it will not appear in drop downs or infrastructure.
 There is not a way to immediately delete a metric.
 
@@ -139,7 +233,7 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 <h4>How are hostnames determined?</h4>
 
 <p>
-The hostnames are determined by what the Datadog Agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>: 
+The hostnames are determined by what the Datadog Agent detects; this is fully documented <a href="http://docs.datadoghq.com/hostnames/">here</a>:
 You can see all names being detected by the Agent by running the info command:
  <code>/etc/init.d/datadog-agent info</code>
 
@@ -151,26 +245,26 @@ Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
 </p>
 <p>
-For a quick example to demonstrate the power of tagging, perhaps you're 
+For a quick example to demonstrate the power of tagging, perhaps you're
 looking for a sum of two metrics, which you might normally define as follows:
 <pre><code>Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")</code></pre>
 
-What we recommend doing is leaving off the hostname; it will then default to the host 
+What we recommend doing is leaving off the hostname; it will then default to the host
 that is sending that point, since they’re different hosts it will be treated as different points:
-<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])  
+<pre><code>Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])</code></pre>
 
 With these tags you can then do:
 <br>
 <code>sum:page.views{domain:example.com}</code>
-which should give the desired result. 
+which should give the desired result.
 <br>
 To get a breakdown by host, you can do:
 <br>
 <code>sum:page.views{domain:example.com} by {host}</code>
 <br>
-Further tagging info can be found <a href="/guides/metrics/#tags">here</a>. 
+Further tagging info can be found <a href="/guides/metrics/#tags">here</a>.
 <br>
 For information on AWS tagging, please see <a href="/integrations/aws/">here</a>.
 
@@ -183,15 +277,93 @@ For information on AWS tagging, please see <a href="/integrations/aws/">here</a>
 
 <!--
 ===============================================================================
+    AWS
+===============================================================================
+-->
+<h3><a name="aws" href="#aws">AWS</a></h3>
+
+<h4 id="duplicate-hosts">I just set up my AWS integration. Why am I seeing duplicate hosts?</h4>
+<p>
+<ul>
+<li>A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.  It takes about 10-20 minutes for the single host’s duplicate names to be aliased. You can read more about hostnames <a href="http://docs.datadoghq.com/hostnames/">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="aws-metrics">What metrics will I get from the AWS integration?</h4>
+<p>
+<ul>
+<li>Our crawlers use the Cloudwatch API, and we collect everything available from it.</li>
+<li>You can read in detail about our AWS integration <a href="http://docs.datadoghq.com/integrations/aws/">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="elb">I can’t filter out my ELB instances - will I be charged for them?</h4>
+<p>
+<ul>
+<li>We do not charge for ELBs (as they can’t be filtered out).</li>
+</ul>
+</p>
+
+<h4 id="aws-delay">Why is there a delay in receiving my data?</h4>
+<p>
+<ul>
+<li>We have seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission. To check for this, run:
+<pre><code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code></pre>
+This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.</li>
+</ul>
+</p>
+
+<h4 id="aws-rds">Can I get my postgres data from RDS?</h4>
+<p>
+<ul>
+<li>Yes you can! Follow the steps below to set this up:
+<ol>
+<li>Install the agent on an ec2 instance that can connect to the RDS instance</li>
+<li>Use the RDS endpoint in <code>conf.d/postgres.yaml</code> (host and port)</li>
+<li>Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code></li>
+<li>Restart the agent</li>
+</ol>
+</li>
+</ul>
+</p>
+
+
+<!--
+===============================================================================
+    Billing
+===============================================================================
+-->
+<h3><a name="billing" href="#billing">Billing</a></h3>
+
+<h4 id="billing-contact">How can I change the Billing contact?</h4>
+<p>
+<ul>
+<li>You can set a specific email address to receive invoices, even if that address is not a team member within Datadog (invoices@yourcompany.com) <a href="https://app.datadoghq.com/account/billing">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="billing-invoice">Where can I get a copy of the invoice?</h4>
+<p>
+<ul>
+<li>As an admin you can check out past invoices <a href="https://app.datadoghq.com/account/billing_history">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="billing-faq">You can read more about billing <a href="http://docs.datadoghq.com/guides/billing/">here</a>.</h4>
+
+
+
+<!--
+===============================================================================
     Graphing
 ===============================================================================
 -->
 
 <h3><a name="graph" href="#graph">Graphing</a></h3>
 
-<h4><a name="graph-sum-grouped" href="#graph-sum-grouped">How do I do arithmetic with grouped 
+<h4><a name="graph-sum-grouped" href="#graph-sum-grouped">How do I do arithmetic with grouped
 metrics?</a></h4>
-<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.bar{env:staging}</code> 
+<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.bar{env:staging}</code>
 grouped <code>by {host}</code>, write a graph query that looks like:</p>
 <pre><code>metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}</code></pre>
 
@@ -217,22 +389,115 @@ to:
 
 <h4>How do I do graph smoothing?</h4>
 <p>
-You can apply smoothing averages to your series by droping to the JSON editor and 
+You can apply smoothing averages to your series by droping to the JSON editor and
 adding ‘ewma’, for example:
-add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g. 
+add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
 <code>ewma_20(exception.invalid{*})</code>.
-ewma stands for exponentially-moving average and the full list of functions 
+ewma stands for exponentially-moving average and the full list of functions
 you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
 </p>
 
 <h4>Can I stack CPU metrics on the same graph?</h4>
 <p>
 Check out our documentation on <a href="http://docs.datadoghq.com/graphing/">stacked series</a>.
-The metric explorer just does one metric per graph, but you can see a stacked CPU graph 
+The metric explorer just does one metric per graph, but you can see a stacked CPU graph
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>
 
 <!-- ====================================================================== -->
+
+
+<!--
+===============================================================================
+    Integrations
+===============================================================================
+-->
+<h3><a name="integrations" href="#integrations">Integrations</a></h3>
+
+<h4 id="integration-metrics">I set up my integration. Why am I not seeing metrics?</h4>
+<p>
+<ul>
+<li>There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
+</ul>
+</p>
+
+<h4 id="integration-data">How is Datadog retrieving my data?</h4>
+<p>
+<ul>
+<li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li>
+<li>All traffic is sent over SSL.</li>
+<li>All communication to Datadog is via HTTPS.</li>
+<li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="integration-edit">I’d like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
+<p>
+<ul>
+<li>Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li>
+</ul>
+</p>
+
+
+<!--
+===============================================================================
+    Metrics
+===============================================================================
+-->
+<h3><a name="metrics" href="#metrics">Metrics</a></h3>
+
+<h4 id="custom-metrics">How do I submit custom metrics?</h4>
+<p>
+<ul>
+<li>You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
+<p>
+<ul>
+<li>StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
+<p>
+<ul>
+<li>Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.</li>
+</ul>
+</p>
+
+<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
+<p>
+<ul>
+<li>Unfortunately, we do not allow adding past data at this time.</li>
+</ul>
+</p>
+
+<h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
+<p>
+This depends on the medium you use to send metrics.
+<ul>
+<li>For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.</li>
+<li>For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.</li>
+<li>For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.</li>
+</ul>
+</p>
+
+<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
+<p>
+We offer reporting in a variety of ways so far, which include:
+<ul>
+<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
+<li>For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.</li>
+<li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
+</ul>
+</p>
+
+<h4 id="metric-other">Any other things about metrics?</h4>
+<p>
+When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
+</p>
 
 <!--
 ===============================================================================
@@ -243,23 +508,23 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 
 <h4 id="team">How do I setup my team in Datadog?</h4>
 <p>
-The admin of the account should enter the email addresses of team members 
-<a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows: 
+The admin of the account should enter the email addresses of team members
+<a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows:
 <ul>
-<li>When the team member receives the confirmation email, they will be provided 
+<li>When the team member receives the confirmation email, they will be provided
 with a link to log in directly. The user should not click ‘sign up’ during this process.</li>
-<li>If multiple users from the same organization sign up separately, this will 
-register as different organizations in Datadog. Please reach out to support to 
-have these merged, but please note that all information contained in the 
+<li>If multiple users from the same organization sign up separately, this will
+register as different organizations in Datadog. Please reach out to support to
+have these merged, but please note that all information contained in the
 account getting merged will not be transferred over.</li>
-<li>The only access controls we have right now are around admin activities 
-(adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.) 
-all users have access to everything; more robust access controls are in our 
+<li>The only access controls we have right now are around admin activities
+(adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.)
+all users have access to everything; more robust access controls are in our
 pipeline, but not something we’ve focused a lot of attention on yet.</li>
-<li>To remove a team member use the “disable” button on the same ‘team’ page (only available 
-for admins). You cannot permanently remove users, just disable; disabled users will 
-only be visible to admins on the team page and can’t log in and any session they have 
-open is invalidated. We don’t fully delete them because they might own events, 
+<li>To remove a team member use the “disable” button on the same ‘team’ page (only available
+for admins). You cannot permanently remove users, just disable; disabled users will
+only be visible to admins on the team page and can’t log in and any session they have
+open is invalidated. We don’t fully delete them because they might own events,
 dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>
@@ -270,7 +535,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 <li>@support – this will reach Datadog support directly when posted in your stream.</li>
 <li>@all – this will send a notification to all members of your organization.</li>
 <li>@yourname – this will notify the specific user named ‘yourname’.</li>
-<li>@test@test.com this will send an email to test@test.com, but only if test@test.com 
+<li>@test@test.com this will send an email to test@test.com, but only if test@test.com
 is part of the organization.</li>
 <li>If you have hipchat, webhooks, or pagerduty you can use
 <ul>
@@ -283,3 +548,21 @@ is part of the organization.</li>
 </ul>
 </p>
 
+<h4 id="security">Are my data and credentials safe?</h4>
+<p>
+<ul>
+<li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li>
+<li>All traffic is sent over SSL.</li>
+<li>All communication to Datadog is via HTTPS.</li>
+<li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li>
+<li>The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li>
+<li>Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.</li>
+</ul>
+</p>
+
+<h4 id="feature-request">I have a feature request. How can I submit it?</h4>
+<p>
+<ul>
+<li>You can send the request to support@datadoghq.com and we will add it to our feature request log.</li>
+</ul>
+</p>
