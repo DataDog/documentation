@@ -56,16 +56,12 @@ sidebar:
 
 <h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
 <p>
-<ul>
-<li>Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
-</ul>
+Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 </p>
 
 <h4 id="statsd">Can I use my own StatsD client?</h4>
 <p>
-<ul>
-<li>Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.</li>
-</ul>
+Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.
 </p>
 
 <h4 id="agent-optional">Is the agent necessary to use Datadog?</h4>
@@ -78,9 +74,7 @@ sidebar:
 
 <h4 id="hostname-change">How can I change the hostname?</h4>
 <p>
-<ul>
-<li>You can change the hostname by updating your agent’s configuration file called datadog.conf and replacing the value for the “hostname” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
-</ul>
+You can change the hostname by updating your agent’s configuration file called datadog.conf and replacing the value for the “hostname” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 </p>
 
 <h4 id="agent-uninstall">How do I uninstall the agent?</h4>
@@ -98,16 +92,12 @@ $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist</code></pre></li>
 
 <h4 id="agent-stopped">I stopped my agent but I’m still seeing the host in my Datadog account. Why is that?</h4>
 <p>
-<ul>
-<li>It can take up to 24h for the host to disappear from the infrastructure page, but it will only be part of the host count for billing purposes if we're actually receiving data.</li>
-</ul>
+It can take up to 24h for the host to disappear from the infrastructure page, but it will only be part of the host count for billing purposes if we're actually receiving data.
 </p>
 
 <h4 id="agent-other">Other Agent-related questions?</h4>
 <p>
-<ul>
-<li>Please refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.</li>
-</ul>
+Please refer to the <a href="/guides/basic_agent_usage/">Basic Agent Usage Guide</a>.
 </p>
 
 <!--
@@ -119,16 +109,14 @@ $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist</code></pre></li>
 
 <h4 id="no-data">I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?</h4>
 <p>
-<ul>
-<li>For the AWS [No Data] errors, the issue here has to do with how frequently we receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch APIs, data is often delayed by 10 or more minutes, so we generally recommend that an alert for an AWS metric be set to have a threshold window of at least 30 minutes or an hour (you can see this in step 3 of alert creation, “during the last…”).
-Switching the time frame on this alert will resolve this issue, or you can install the agent on some AWS hosts to get more up-to-date data to alert on. Overall, we’re always working towards getting data more efficiently from AWS.</li>
-</ul>
+For the AWS [No Data] errors, the issue here has to do with how frequently we receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch APIs, data is often delayed by 10 or more minutes, so we generally recommend that an alert for an AWS metric be set to have a threshold window of at least 30 minutes or an hour (you can see this in step 3 of alert creation, “during the last…”).
+Switching the time frame on this alert will resolve this issue, or you can install the agent on some AWS hosts to get more up-to-date data to alert on. Overall, we’re always working towards getting data more efficiently from AWS.
 </p>
 
 <h4 id="alert-disk-utilization">Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used?</h4>
 <p>
 <ul>
-<li>Yes, this can be done! Here is an example for creating a disk space in use alert when at 80% or above:</li>
+<li>Yes, this can be done! Here is an example for creating a disk space in use alert when at 80% or above:
 <ol>
 <li>Select a metric like "system.disk.in_use".</li>
 <li>Select the "threshold alert" type.</li>
@@ -136,9 +124,11 @@ Switching the time frame on this alert will resolve this issue, or you can insta
 <li>Set alert conditions: Select Above and for the value put 0.8.</li>
 <li>Add a custom message for alert if you'd like.</li>
 </ol>
+</li>
 <li>You can read more about setting up alerts <a href="http://docs.datadoghq.com/guides/alerting/">here</a>.</li>
 </ul>
 </p>
+
 
 <!--
 ===============================================================================
@@ -284,9 +274,7 @@ For information on AWS tagging, please see <a href="/integrations/aws/">here</a>
 
 <h4 id="duplicate-hosts">I just set up my AWS integration. Why am I seeing duplicate hosts?</h4>
 <p>
-<ul>
-<li>A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.  It takes about 10-20 minutes for the single host’s duplicate names to be aliased. You can read more about hostnames <a href="http://docs.datadoghq.com/hostnames/">here</a>.</li>
-</ul>
+A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.  It takes about 10-20 minutes for the single host’s duplicate names to be aliased. You can read more about hostnames <a href="http://docs.datadoghq.com/hostnames/">here</a>.
 </p>
 
 <h4 id="aws-metrics">What metrics will I get from the AWS integration?</h4>
@@ -299,32 +287,25 @@ For information on AWS tagging, please see <a href="/integrations/aws/">here</a>
 
 <h4 id="elb">I can’t filter out my ELB instances - will I be charged for them?</h4>
 <p>
-<ul>
-<li>We do not charge for ELBs (as they can’t be filtered out).</li>
-</ul>
+We do not charge for ELBs (as they can’t be filtered out).
 </p>
 
 <h4 id="aws-delay">Why is there a delay in receiving my data?</h4>
 <p>
-<ul>
-<li>We have seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission. To check for this, run:
+We have seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission. To check for this, run:
 <pre><code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code></pre>
-This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.</li>
-</ul>
+This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
 </p>
 
 <h4 id="aws-rds">Can I get my postgres data from RDS?</h4>
 <p>
-<ul>
-<li>Yes you can! Follow the steps below to set this up:
+Yes you can! Follow the steps below to set this up:
 <ol>
 <li>Install the agent on an ec2 instance that can connect to the RDS instance</li>
 <li>Use the RDS endpoint in <code>conf.d/postgres.yaml</code> (host and port)</li>
 <li>Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code></li>
 <li>Restart the agent</li>
 </ol>
-</li>
-</ul>
 </p>
 
 
@@ -337,16 +318,12 @@ This will output the current system’s date, and then make a request to our end
 
 <h4 id="billing-contact">How can I change the Billing contact?</h4>
 <p>
-<ul>
-<li>You can set a specific email address to receive invoices, even if that address is not a team member within Datadog (invoices@yourcompany.com) <a href="https://app.datadoghq.com/account/billing">here</a>.</li>
-</ul>
+You can set a specific email address to receive invoices, even if that address is not a team member within Datadog (invoices@yourcompany.com) <a href="https://app.datadoghq.com/account/billing">here</a>.
 </p>
 
 <h4 id="billing-invoice">Where can I get a copy of the invoice?</h4>
 <p>
-<ul>
-<li>As an admin you can check out past invoices <a href="https://app.datadoghq.com/account/billing_history">here</a>.</li>
-</ul>
+As an admin you can check out past invoices <a href="https://app.datadoghq.com/account/billing_history">here</a>.
 </p>
 
 <h4 id="billing-faq">You can read more about billing <a href="http://docs.datadoghq.com/guides/billing/">here</a>.</h4>
@@ -416,9 +393,7 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 
 <h4 id="integration-metrics">I set up my integration. Why am I not seeing metrics?</h4>
 <p>
-<ul>
-<li>There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a></li>
-</ul>
+There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 </p>
 
 <h4 id="integration-data">How is Datadog retrieving my data?</h4>
@@ -433,9 +408,7 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 
 <h4 id="integration-edit">I’d like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
 <p>
-<ul>
-<li>Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li>
-</ul>
+Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
 </p>
 
 
@@ -448,30 +421,22 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 
 <h4 id="custom-metrics">How do I submit custom metrics?</h4>
 <p>
-<ul>
-<li>You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.</li>
-</ul>
+You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
 </p>
 
 <h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
 <p>
-<ul>
-<li>StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.</li>
-</ul>
+StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 </p>
 
 <h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
 <p>
-<ul>
-<li>Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.</li>
-</ul>
+Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
 </p>
 
 <h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
 <p>
-<ul>
-<li>Unfortunately, we do not allow adding past data at this time.</li>
-</ul>
+Unfortunately, we do not allow adding past data at this time.
 </p>
 
 <h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
@@ -562,7 +527,5 @@ is part of the organization.</li>
 
 <h4 id="feature-request">I have a feature request. How can I submit it?</h4>
 <p>
-<ul>
-<li>You can send the request to support@datadoghq.com and we will add it to our feature request log.</li>
-</ul>
+You can send the request to support@datadoghq.com and we will add it to our feature request log.
 </p>
