@@ -16,8 +16,9 @@
     "html": "Put your note text in here.",
     "text_align": "left",
     "font_size": 14,
-    "bgcolor": "yellow", // Choose from: [yellow, blue, pink, gray, white]
+    "bgcolor": "yellow", // Choose from: [yellow, blue, pink, gray, white, red, green]
     "tick": true,
     "tick_pos": "50%",
     "tick_edge": "right" // Choose from: [top, right, bottom, left]
+    "auto_refresh": true // Defaults to false
 }
