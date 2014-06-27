@@ -286,3 +286,23 @@ h3 a, h4 a    {color: black}
 ol.outline    {list-style-type: upper-alpha}
 ol.outline ol {list-style-type: decimal}
 span.question {font-weight: bold}
+
+/* Integration specific */
+
+.snmp .hint-icon {
+    position:absolute;
+    width: 15px;
+}
+
+.snmp pre {
+    position:relative;
+    left:20px;
+    width:60%;
+}
+.snmp dd {
+    margin-left:10%;
+}
+
+.snmp dt {
+    margin-top:20px;
+}
