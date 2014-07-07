@@ -6,7 +6,7 @@ api.application_key = '9d945c35fd7cc7abb1088fd0632ef8e25516af74'
 # Submit a single point with a timestamp of `now`
 api.metric('page.views', 1000)
 
-# Submit a point with a timestamp.
+# Submit a point with a timestamp (must be ~current)
 api.metric('my.pair', (1317652676, 15))
 
 # Submit multiple points.
