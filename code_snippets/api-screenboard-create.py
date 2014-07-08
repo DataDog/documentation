@@ -19,4 +19,4 @@ board = {
     ]
 }
 
-result = api.create_screenboard(board)
+api.create_screenboard(board)
