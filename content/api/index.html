@@ -333,8 +333,24 @@ title: API Reference
               </div>
             </li>
           </ul>
-          <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
-        </ul>
+          <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -386,8 +402,24 @@ title: API Reference
               </div>
             </li>
           </ul>
-          <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
-        </ul>
+        <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
