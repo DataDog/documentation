@@ -22,14 +22,14 @@ title: API Reference
         <a class="btn" href="#errors">Errors</a>
         <a class="btn" href="#metrics">Metrics</a>
         <a class="btn" href="#events">Events</a>
-        <a class="btn" href="#dashboards">Dashboards</a>
+        <a class="btn" href="#timeboards">Timeboards</a>
+        <a class="btn" href="#screenboards">Screenboards</a>
         <a class="btn" href="#tags">Tags</a>
         <a class="btn" href="#search">Search</a>
         <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#alerts">Alerts</a>
         <a class="btn" href="#users">Users</a>
         <a class="btn" href="#graphs">Graphs</a>
-        <a class="btn" href="#screenboards">Screenboards</a>
       </div>
       <div class="btn-group">
         <div lang="console" class="lang-btn btn">Shell</div>
@@ -165,7 +165,7 @@ title: API Reference
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
-                  Note that timestamp must be current.
+                  Note that the timestamp must be current.
               </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
@@ -217,8 +217,8 @@ title: API Reference
           <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
-          <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
+          <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
           <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters.', {:default => 'None'}) %>
           <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
@@ -295,20 +295,20 @@ title: API Reference
 
     <!--
    =====================================================================
-    Dashboards
+    Timeboards
     ====================================================================
     -->
 
-    <h3 id="dashboards">Dashboards</h3>
+    <h3 id="timeboards">Timeboards</h3>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          The Dashboards end point allows you to programmatically create, update
-          delete and query dashboards.
+          This endpoint allows you to programmatically create, update
+          delete and query timeboards.
         </p>
       </div>
     </div>
-    <h4 id="dashboards-post">Create a Dashboard</h4>
+    <h4 id="dashboards-post">Create a Timeboard</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -334,23 +334,23 @@ title: API Reference
             </li>
           </ul>
           <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
-          <ul class="arguments">
-            <li>
-              <strong>name [required]</strong>
-              <div>The name of the variable.</div>
-            </li>
-            <li>
-              <strong>prefix [optional, default=None]</strong>
-              <div>
-                The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
-              </div>
-            </li>
-            <li>
-              <strong>default [optional, default=None]</strong>
-              <div>The default value for the template variable on dashboard load</div>
-            </li>
-          </ul>
-        </ul>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -367,7 +367,7 @@ title: API Reference
     </div>
 
     <!-- update a dashboard -->
-    <h4 id="dashboards-update">Update a Dashboard</h4>
+    <h4 id="dashboards-update">Update a Timeboard</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -402,24 +402,24 @@ title: API Reference
               </div>
             </li>
           </ul>
-          <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
-          <ul class="arguments">
-            <li>
-              <strong>name [required]</strong>
-              <div>The name of the variable.</div>
-            </li>
-            <li>
-              <strong>prefix [optional, default=None]</strong>
-              <div>
-                The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
-              </div>
-            </li>
-            <li>
-              <strong>default [optional, default=None]</strong>
-              <div>The default value for the template variable on dashboard load</div>
-            </li>
-          </ul>
-        </ul>
+        <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -436,10 +436,10 @@ title: API Reference
     </div>
 
     <!-- delete a dashboard -->
-    <h4 id="dashboards-delete">Delete a Dashboard</h4>
+    <h4 id="dashboards-delete">Delete a Timeboard</h4>
     <div class="row-fluid">
       <%= left_side_div %>
-        <p>Delete an existing dashboard.</p>
+        <p>Delete an existing timeboard.</p>
         <%= no_args %>
       </div>
       <%= right_side_div %>
@@ -455,10 +455,10 @@ title: API Reference
     </div>
 
     <!-- get a dashboard -->
-    <h4 id="dashboards-get-all">Get all Dashboards</h4>
+    <h4 id="dashboards-get-all">Get all Timeboards</h4>
     <div class="row-fluid">
       <%= left_side_div %>
-        <p>Fetch all of your dashboards' definitions.</p>
+        <p>Fetch all of your timeboards' definitions.</p>
         <h5>Arguments</h5>
         <%= no_args %>
       </div>
@@ -477,7 +477,7 @@ title: API Reference
     </div>
 
     <!-- get a dashboard -->
-    <h4 id="dashboards-get">Get a Dashboard</h4>
+    <h4 id="dashboards-get">Get a Timeboard</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>Fetch an existing dashboard's definition.</p>
@@ -498,6 +498,126 @@ title: API Reference
       </div>
     </div>
 
+
+   <!--
+    =====================================================================
+    Screenboards
+    ====================================================================
+    -->
+
+    <h3 id="screenboards">Screenboards</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+        You can view more detailed documentation on the Screenboard API at
+        <a href="/api/screenboards/">http://docs.datadoghq.com/api/screenboards/</a>.
+        </p>
+      </div>
+    </div>
+
+    <h4 id="screenboards-post">Create a Screenboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.") %>
+          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
+          <ul class="arguments">
+            <li>
+              <strong>title [required]</strong>
+              <div>The name of the graph.</div>
+            </li>
+            <li>
+              <strong>widgets [required]</strong>
+              <div>
+                The widget definition. See <a href="/api/screenboards/">here</a> for more examples.
+              </div>
+            </li>
+          </ul>
+          <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
+          <%= argument("width", "Screenboard width in pixels", :default => "None") %>
+          <%= argument("height", "Height in pixels.", :default => "None") %>
+
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/dash</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-create.py" %>
+        <%= snippet_code_block "api-screenboard-create.rb" %>
+        <%= snippet_code_block "api-screenboard-create.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-screenboard-create.py" %>
+        <%= snippet_result_code_block "api-screenboard-create.rb" %>
+        <%= snippet_result_code_block "api-screenboard-create.sh" %>
+      </div>
+    </div>
+
+
+    <!-- delete a dashboard -->
+    <h4 id="timeboards-delete">Delete a Screenboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Delete an existing screenboard.</p>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/screen/:board_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-delete.py" %>
+        <%= snippet_code_block "api-screenboard-delete.rb" %>
+        <%= snippet_code_block "api-screenboard-delete.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
+    <!-- get a dashboard -->
+    <h4 id="dashboards-get">Get a Screenboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Fetch an existing screenboard's definition.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-get.py" %>
+        <%= snippet_code_block "api-screenboard-get.rb" %>
+        <%= snippet_code_block "api-screenboard-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-screenboard-get.py" %>
+        <%= snippet_result_code_block "api-screenboard-get.rb" %>
+        <%= snippet_result_code_block "api-screenboard-get.sh" %>
+      </div>
+    </div>
+
+    <!-- share a dashboard -->
+    <h4 id="screenboards-share">Share a Screenboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Share an existing screenboard's with a public URL.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-share.py" %>
+        <%= snippet_code_block "api-screenboard-share.rb" %>
+        <%= snippet_code_block "api-screenboard-share.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-screenboard-share.py" %>
+        <%= snippet_result_code_block "api-screenboard-share.rb" %>
+        <%= snippet_result_code_block "api-screenboard-share.sh" %>
+      </div>
+    </div>
     <!--
    =====================================================================
     Tags
@@ -859,6 +979,7 @@ title: API Reference
         </div>
       </div>
 
+
     <!-- Show alerts -->
     <h4 id="alerts-get-details">Get an alert's details</h4>
     <div class="row-fluid">
@@ -1072,22 +1193,6 @@ title: API Reference
       </div>
     </div>
 
-
-   <!--
-    =====================================================================
-    Screenboard
-    ====================================================================
-    -->
-
-    <h3 id="screenboards">Screenboards</h3>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>
-        You can view the documentation on the Screenboard API at
-        <a href="/api/screenboards/">http://docs.datadoghq.com/api/screenboards/</a>.
-        </p>
-      </div>
-    </div>
 
    <!--
     =====================================================================
