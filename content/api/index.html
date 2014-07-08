@@ -165,11 +165,12 @@ title: API Reference
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
+                  Note that the timestamp must be current.
               </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          <%= argument('type', 'The type of the metric - <code>gauge</code>
+          <%= argument('metric_type', 'The type of the metric - <code>gauge</code>
             or <code>counter</code>.', :default => 'gauge' ) %>
           </ul>
         </ul>
@@ -216,6 +217,7 @@ title: API Reference
           <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
+          <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
           <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters.', {:default => 'None'}) %>
@@ -374,7 +376,7 @@ title: API Reference
             <li>
               <strong>definition [required]</strong>
               <div>
-                The graph definition. Read the <a href="/guides/graphs/">Graph
+                The graph definition. Read the <a href="/graphing/">Graph
                 Guide</a> for more on graphs. Example:
                 <div>
                   <code>
@@ -914,7 +916,7 @@ title: API Reference
                   <div>
                     <ul class="arguments">
                       <li><code>time_aggr</code> avg, sum, max, or min</li>
-                      <li><code>time_window</code> last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d</li>
+                      <li><code>time_window</code> last_#m (5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d</li>
                       <li><code>space_aggr</code> avg, sum, min, or max</li>
                       <li><code>tags</code> one or more tags (comma-separated), or *</li>
                       <li><code>tag_key</code> a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)</li>
@@ -977,6 +979,8 @@ title: API Reference
           <%= argument 'name', "The name of the alert.", :default => "dynamic, based on query" %>
           <%= argument 'message', "A message to include with notifications for this alert. Email notifications can be sent to specific users by using the same '@username' notation as events.", :default => "None" %>
           <%= argument 'silenced', "Whether the alert should notify by email and in the event stream. An alert with 'silenced' set to True is effectively muted. The alert will continue to detect state changes, but they will only be visible on the alert list page.", :default => "False" %>
+          <%= argument 'silenced_timeout_ts', "An alert with 'silenced' set to True can have a silenced timeout timestamp. When the silenced timeout timestamp expires,
+            the alert gets unmuted.", :default => "None" %>
         </ul>
       </div>
       <%= right_side_div %>
