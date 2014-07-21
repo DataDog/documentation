@@ -119,7 +119,7 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
 
 Below is the list of events that Datadog will collect from CloudTrail and display in your event stream. If you would like to see other events that are not mentionned here, please reach out to <a href="/help">our support team</a>.
 
-**EC2 Actions**<br/>
+*EC2 Actions**<br/>
 AttachVolume<br/>
 AuthorizeSecurityGroup<br/>
 CreateSecurityGroup<br/>
@@ -257,7 +257,21 @@ result.</li>
 
 #### Metrics delayed?
 
-<p>When using the AWS integration, we're pulling in metrics via the Cloudwatch API. There is a delay that can occur which is a byproduct of how we’re constrained when crawling the CloudWatch APIs. This is a limitation of AWS Cloudwatch; standard metrics are captured by AWS every 3-5 minutes, may not be exposed by the AWS Cloudwatch APIs before 10 minutes and we are then subject to API throttling when we crawl them, which can result in a slight delay. Overall, we're always looking to cut down on this delay and have a faster priority crawler currently in Beta.</p>
 
-<p>For metrics with zero delay, we recommend installing the Datadog Agent on those hosts. We’ve written a bit about this here (especially in relation to CloudWatch):
-<a href="http://www.datadoghq.com/2013/10/dont-fear-the-agent/">www.datadoghq.com/2013/10/dont-fear-the-agent</a></p>
+<p>When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may 
+see a slight delay in metrics from AWS due to some constraints that exist for their API.</p>
+
+<p>To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch 
+APIs have a rate limit that varies based on the combination of authentication credentials, region, 
+and service. Metrics are made available by AWS dependent on the account level. For example, if 
+you are paying for "detailed metrics" within AWS, they are available more quickly. This level 
+of service for detailed metrics also applies to granularity, with some metrics being 
+available per minute and others per five minutes.</p>
+
+<p>On the Datadog side, we do have the ability to prioritize certain metrics within an account 
+to pull them in faster, depending on the circumstances. Please contact 
+<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> for more info on this.</p>
+
+<p>To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve 
+written a bit about this <a target="_blank" href="www.datadoghq.com/2013/10/dont-fear-the-agent">here</a>, 
+especially in relation to CloudWatch.
