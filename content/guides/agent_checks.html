@@ -337,3 +337,21 @@ You'll see what metrics and events are being generated for each instance.
 Here's the full source of the check:
 
 <%= snippet_code_block("guides-agentchecks-ex-all.py") %>
+
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+Custom Agent checks can't be directly called from python and instead
+ need to be called by the agent. To test this, run:
+
+    python agent.py check stormlatency
+
+If your issue continues, please reach out to Support with the help page that
+ lists the paths it installs.
+
