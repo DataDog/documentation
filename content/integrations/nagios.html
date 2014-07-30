@@ -23,3 +23,10 @@ Set up information collection for Nagios in the file
 
 After having Nagios reporting to Datadog for a week, an interactive report on alerting checks can be found 
 <a href="https://app.datadoghq.com/report/nagios">here</a>.
+
+To integrate with Icinga, because it is a fork of Nagios, you should be able to use the Nagios integration to pull in Icinga events. In your datadog.conf, just set:
+
+    nagios_log: /var/log/icinga/icinga.log
+
+Or where ever the Icinga server log lives, if you moved it from the standard location.
+

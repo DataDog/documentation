@@ -21,6 +21,8 @@ sidebar:
       href: "/faq/#integrations"
     - text: Metrics
       href: "/faq/#metrics"
+    - text: Events
+      href: "/faq/#events"
     - text: Other
       href: "/faq/#other"
 
@@ -464,6 +466,86 @@ We offer reporting in a variety of ways so far, which include:
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 </p>
 
+
+<!--
+===============================================================================
+    Events
+===============================================================================
+-->
+<h3><a name="events" href="#other">Events</a></h3>
+
+<h4 id="notify">What do @ notifications do in Datadog?</h4>
+<p>
+<ul>
+<li>@support – this will reach Datadog support directly when posted in your stream.</li>
+<li>@all – this will send a notification to all members of your organization.</li>
+<li>@yourname – this will notify the specific user named ‘yourname’.</li>
+<li>@test@test.com this will send an email to test@test.com, but only if test@test.com
+is part of the organization.</li>
+<li>If you have hipchat, webhooks, or pagerduty you can use
+<ul>
+<li>@hipchat – posts the event to a hipchat chat room</li>
+<li>@webhooks – alerts whomever is attached to that webhook</li>
+<li>@pagerduty – sends an alert to pagerduty</li>
+</ul>
+
+</li>
+</ul>
+</p>
+
+<h4>Searching Events Help</h4>
+
+<p>Your query runs a full text search of events and their comments.  
+You can also target certain event properties, such as the event source or status, by using the following search prefixes:</p>
+
+<ul>
+<li>
+<p>
+<code class="no-highlight"><strong>user:</strong>pup@datadoghq.com</code>
+Find all events with comments by pup@datadoghq.com. </p>
+</li>
+
+<li>
+<p>
+<code class="no-highlight"><strong>sources:</strong>github,chef</code>
+Show events from Github and Chef.</p>
+</li>
+
+<li>        
+<p><code class="no-highlight"><strong>tags:</strong>env-prod,db</code>
+Show events tagged with #env-prod AND #db.</p>
+</li>
+
+<li>             
+<p><code class="no-highlight"><strong>hosts:</strong>db1.myapp.com,db2.myapp.com</code>
+Show events from db1.myapp.com OR db2.myapp.com.</p>
+</li>
+
+<li>        
+<p><code class="no-highlight"><strong>status:</strong>error</code>
+Show only error status events. (supports:</strong> 'error', 'warning', 'success')</p>
+</li>
+
+<li>        
+<p><code class="no-highlight"><strong>priority:</strong>low</code>
+Show only low-priority events. (supports:</strong> 'low' or 'normal'. defaults to 'all')</p>
+</li>
+    
+<li>            
+<p><code class="no-highlight"><strong>incident:</strong>claimed</code>
+Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')</p>
+</li>
+</ul>
+
+<p>Prefixes can easily be combined to make much more complex searches. 
+For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
+</p>
+<p><code>sources:nagios,chef status:error cassandra </code>.</p>
+
+<p>
+Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
+</p>
+
 <!--
 ===============================================================================
     Other
@@ -494,24 +576,6 @@ dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>
 
-<h4 id="notify">What do @ notifications do in Datadog?</h4>
-<p>
-<ul>
-<li>@support – this will reach Datadog support directly when posted in your stream.</li>
-<li>@all – this will send a notification to all members of your organization.</li>
-<li>@yourname – this will notify the specific user named ‘yourname’.</li>
-<li>@test@test.com this will send an email to test@test.com, but only if test@test.com
-is part of the organization.</li>
-<li>If you have hipchat, webhooks, or pagerduty you can use
-<ul>
-<li>@hipchat – posts the event to a hipchat chat room</li>
-<li>@webhooks – alerts whomever is attached to that webhook</li>
-<li>@pagerduty – sends an alert to pagerduty</li>
-</ul>
-
-</li>
-</ul>
-</p>
 
 <h4 id="security">Are my data and credentials safe?</h4>
 <p>
