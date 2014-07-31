@@ -383,6 +383,24 @@ The metric explorer just does one metric per graph, but you can see a stacked CP
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>
 
+<h4>Is there a way to share graphs?</h4>
+<p>
+There are two ways to share a graph or screenboard
+<ul>
+<li>In a time board, pick a graph on a dashboard, 
+click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
+</li>
+<li>
+In a custom screenboard, the middle button in the upper right will generate a URL which gives 
+live and read-only access to just the contents of that screenboard.
+</li>
+</ul>
+</p>
+
+
+
+
+
 <!-- ====================================================================== -->
 
 
@@ -460,6 +478,13 @@ We offer reporting in a variety of ways so far, which include:
 <li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
 </ul>
 </p>
+
+<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
+<p>
+The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
+</p>
+
+
 
 <h4 id="metric-other">Any other things about metrics?</h4>
 <p>
