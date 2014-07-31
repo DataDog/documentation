@@ -23,6 +23,22 @@ For information on running the Agent through a proxy please see <a target="_blan
 for which ranges to allow, please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">here</a>.
 
 
+The Agent has three main parts: the collector, dogstatsd, and the forwarder. 
+<ul>
+<li>The collector runs checks on the current machine for whatever integrations you have 
+and it will capture system metrics like memory and CPU. 
+</li>
+<li>Dogstatsd is a statsd backend server you can send custom metrics to from an application.
+</li>
+<li>The forwader is pushed data from both dogstatsd and the collector and queues 
+it up to be sent to Datadog.
+</li>
+</ul>
+This is all controlled by one supervisor process. We keep this separate so you don't have to have the 
+overhead of each application if you don't want to run all parts (though we generally recommend you do). 
+
+
+
 <!--
 ======================================================
 Agent Troubleshooting
