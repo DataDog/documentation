@@ -56,15 +56,12 @@ sidebar:
 
 <h3><a name="agent" href="#agent">Agent</a></h3>
 
+<!-- this is not currently true
 <h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
 <p>
 Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 </p>
-
-<h4 id="statsd">Can I use my own StatsD client?</h4>
-<p>
-Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.
-</p>
+-->
 
 <h4 id="agent-optional">Is the agent necessary to use Datadog?</h4>
 <p>
@@ -72,6 +69,11 @@ Any StatsD client will work just fine, but using the Datadog DogStatsD client wi
 <li>No, it is not. You don't have to install an agent if you only want to submit metrics via our API. You can read more about our API <a href="http://docs.datadoghq.com/api/">here</a>.</li>
 <li>In general, most folks find a lot of value in installing an agent because they get system metrics for free and metrics on common software like mysql, postgres, etc. with just a little bit of configuration. Another advantage is that there is a small statsd server built-in to the agent.</li>
 </ul>
+</p>
+
+<h4 id="statsd">Can I use my own StatsD client?</h4>
+<p>
+Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.
 </p>
 
 <h4 id="hostname-change">How can I change the hostname?</h4>
