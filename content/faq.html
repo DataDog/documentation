@@ -510,6 +510,11 @@ The Datadog Agent emits a metric named <code>system.disk.in_use</code> which wil
 <p>
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 </p>
+<p>
+For example, let's say you break down used memory by host, you'll get one 
+time series for each host. If you don't break down by host, 
+by default you'll get the average across all hosts. 
+</p>
 
 
 <!--
