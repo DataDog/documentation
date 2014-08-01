@@ -527,16 +527,17 @@ by default you'll get the average across all hosts.
 <h4 id="notify">What do @ notifications do in Datadog?</h4>
 <p>
 <ul>
-<li>@support – this will reach Datadog support directly when posted in your stream.</li>
-<li>@all – this will send a notification to all members of your organization.</li>
-<li>@yourname – this will notify the specific user named ‘yourname’.</li>
-<li>@test@test.com this will send an email to test@test.com, but only if test@test.com
-is part of the organization.</li>
-<li>If you have hipchat, webhooks, or pagerduty you can use
+<li><code>@support</code> – this will reach Datadog support directly when posted in your stream.</li>
+<li><code>@all</code> – this will send a notification to all members of your organization.</li>
+<li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
+<li><code>@test@test.com</code> this will send an email to test@test.com.</li>
+<li>If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
 <ul>
-<li>@hipchat – posts the event to a hipchat chat room</li>
-<li>@webhooks – alerts whomever is attached to that webhook</li>
-<li>@pagerduty – sends an alert to pagerduty</li>
+<li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
+<li><code>@webhook</code> – alerts or triggers whatever is attached to that webhook. Check out
+<a target="_blanks" href="https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/">this blogpost</a> on Webhooks!</li>
+<li><code>@pagerduty</code> or <code>@oncall</code> 
+– sends an alert to Pagerduty. You can also use <code>@pagerduty-acknowledge</code> and <code>@pagerduty-resolve</code>.</li>
 </ul>
 
 </li>
