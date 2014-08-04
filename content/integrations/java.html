@@ -84,6 +84,15 @@ filters will be collected unless it also matches the "exclude" filters (see
 below)</li> <li><code>exclude</code> (<b>optional</b>): Another dictionary of
 filters. Attributes that match these filters won't be collected</li> </ul>
 
+<p>
+For a given bean, metrics get tagged in the following manner:
+<pre><code>mydomain:attr0=val0,attr1=val1</code></pre>
+
+Your metric will be mydomain (or some variation depending on the attribute
+inside the bean) and have the tags <code>attr0:val0, attr1:val1, domain:mydomain</code>.
+</p>
+
+
 <h3>Description of the filters</h3> These dictionaries have some specials keys:
 <br><ul> <li><code>domain</code>: The domain of the attribute (e.g.
 java.lang)</li> <li><code>bean</code> or <code>bean_name</code>: The full bean
