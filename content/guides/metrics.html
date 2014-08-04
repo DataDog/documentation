@@ -103,6 +103,23 @@ EOF
 
 </div>
 
+<h4>Metric names</h4>
+There are a few rules to stick to when naming metrics:
+<ul>
+<li>Metric names must start with a letter</li>
+<li>Can only contain ascii alphanumerics, underscore and periods (other characters will get converted to underscores)</li>
+<li>Should not exceed 200 characters (though less than 100 is genearlly preferred from a UI perspective)</li>
+<li>Unicode is not supported</li>
+<li>We recommend avoiding spaces</li>
+</ul>
+Metrics reported by the Agent are in a
+pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
+pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
+anything with it, but we have aspirations to use it to infer things about
+servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
+must be web frontends").
+
+
 <!--
 ======================================================
 COUNTERS
@@ -490,18 +507,6 @@ Note that the metrics explorer doesn't save any of these graphs. If you've
 created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
 an existing one.
-
-Metric names must start with a letter and after that may contain ascii
-alphanumerics, underscore and periods. Other characters will get converted to
-underscores. We recommend the metric name not exceed 200 characters; even
-longer than 100 characters might make the full name difficult to see within the
-web interface (on legends, dropdown selectors, etc.). Unicode is not supported. We
-recommend avoiding spaces. Metrics reported by the Agent are in a
-pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
-pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
-anything with it, but we have aspirations to use it to infer things about
-servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
-must be web frontends").
 
 
 <% content_for :javascript do %>
