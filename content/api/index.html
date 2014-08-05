@@ -171,7 +171,8 @@ title: API Reference
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
           <%= argument('metric_type', 'The type of the metric - <code>gauge</code>
-            or <code>counter</code>.', :default => 'gauge' ) %>
+            or <code>counter</code> (counter data is expected as a rate). Gauges are 
+                32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
         </ul>
       </div>
