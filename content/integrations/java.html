@@ -118,6 +118,28 @@ In that case:<ul>
     <li>The metric name will be jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]</li>
 </ul>
 
+<p>
+Here is another filtering example:
+
+<pre><code>instances:
+  - host: 127.0.0.1
+    name: jmx_instance
+    port: 9999
+ 
+init_config:
+  conf:
+    - include:
+        bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
+        attribute:
+          - OneMinuteRate
+          - 75thPercentile
+          - 95thPercentile
+          - 99thPercentile
+</code></pre>
+
+
+</p>
+
 </div>
 <h2>Troubleshooting</h2> <h4>The 350 metric limit</h4> Due to the nature of
 these integrations, it is possible to submit an extremely high number of
