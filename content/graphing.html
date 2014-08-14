@@ -9,6 +9,8 @@ sidebar:
       href: "#grammar"
     - text: Arithmetic & Functions
       href: "#functions"
+    - text: "Y-Axis Controls"
+      href: "#yaxis"
 ---
 
 <h2 id="editor">Find the Graph Editor</h2>
@@ -359,6 +361,121 @@ The <code>top()</code> method also has the following convenience functions, all 
   </dl>
 </div>
 
+
+<h4 id="yaxis"> Y-Axis Controls</h4>
+
+The Datadog y-axis controls (currently just via the JSON editor) allow you to:
+<ul>
+ <li>Clip y-axis to specific ranges</li>
+ <li>Remove outliers either by specifying a percentage or an absolute value to remove outliers</li>
+ <li>Change y-axis scale from linear to log, sqrt or power scale</li>
+</ul>
+
+There are three configuration settings:
+<ul>
+<li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for 
+    default behvior. Default value is "auto"</li>
+<li><code>max</code> (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto" 
+    for default behavior. Default value is "auto"</li>
+<li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##" 
+    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
+</ul>
+ 
+Examples:
+ 
+
+<pre><code>"yaxis": {
+    "min": "auto", 
+    "max": 200, 
+    "scale": "log"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "min": 200, 
+    "scale": "sqrt"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "min": 9000, 
+    "max": 10000
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "scale": "pow0.1"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "scale": "pow3"
+}</code></pre>
+ 
+ 
+<h4>Outliers</h4> 
+
+Outliers configuration allows you to automatically change y-axis bounds based on a 
+threshold. Thresholds can be a percentage or an absolute value, and it can apply to 
+both both ends of the graph (lower and upper).
+ 
+For outliers, there are two ways to set up the configuration.
+ 
+To begin, there is a simple configuration where you specify an absolute value or a percentage and all 
+values above the value or all values that sit within the top ##% will be cutoff.
+ 
+Examples:
+ 
+<code>"outliers": 30</code> // all values above 30 will not appear<br>
+<code>"outliers": "5%"</code> // the top 5% of that data will not appear
+ 
+ 
+<p> 
+Advanced configuration works the same way as simple configuration, with the added 
+flexibility of configuring the lower or the upper or both parts of the graph. For 
+example, the following configuration will limit the graph to data points that are 
+not in the bottom 10% nor in the top 30%. 
+
+<pre><code>"outliers": {
+   "top": "30%",
+   "bottom": "10%"
+}</code></pre>
+
+ 
+The following will show all data except those with values higher than 15:
+
+ 
+<pre><code>"outliers": {
+    "above": 15
+}</code></pre>
+ 
+The following will hide data points below 2:
+ 
+<pre><code>"outliers": {
+    "below": 2
+}</code></pre>
+ 
+ 
+ 
+Here is a full JSON example:
+ 
+<pre><code>{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "system.cpu.idle{host:hostname}",
+      "stacked": false
+    }
+  ],
+  "events": [],
+  "yaxis": {
+    "scale": "log"
+  },
+  "outliers": {
+       "top": "5%",
+       "below": 15
+   }
+}</code></pre>
+
+</p>
+
+
 #### Examples
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
@@ -411,3 +528,10 @@ Here is an example using the <code>week_before()</code> function:
         }
       ]
     }
+
+
+
+
+
+
+
