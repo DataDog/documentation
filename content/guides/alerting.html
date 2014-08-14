@@ -7,6 +7,8 @@ sidebar:
       href: "#new"
     - text: Choosing a metric
       href: "#metric"
+    - text: Change alerts
+      href: "#change"
     - text: Simple and Multi alerts
       href: "#simple"
     - text: Alert conditions
@@ -68,6 +70,23 @@ emitting that metric thus one time series.
         When selecting 'max' or 'min', Datadog will take the highest or
 lowest point respectively seen from any of the hosts emitting that metric.
         Select a 'tag' will limit the metric collection to what you've specified.</p>
+
+<h4 id="change">Change Alerts</h4>
+<img src="/static/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
+<p>
+A change alert is triggered when the delta between values is higher than the threshold.
+</p>
+<p>
+A change alert evaluates the difference between a value N minutes ago and now.
+The averaging of the values depends on the timeframe of the alert, e.g. 5m - 30m 
+alerts calculate against a 1-minute moving average, while 1h - 4h alerts will use a 10-minute moving average.
+</p>
+<p>
+On each alert evaluation Datadog will calculate the raw difference (not absolute value) between these two values. 
+An alert is triggered when the delta over time exceeds the limit, where the limit can be a fixed value or a percent of change.
+
+</p>
+
 
 <h4 id="simple">Simple and Multi Alerts</h4>
 <img src="/static/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
