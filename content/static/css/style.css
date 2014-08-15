@@ -287,9 +287,29 @@ ol.outline    {list-style-type: upper-alpha}
 ol.outline ol {list-style-type: decimal}
 span.question {font-weight: bold}
 
+<<<<<<< HEAD
 /* use width instead of max-width in logo because
  * FF and opera ignore max-width in inlined images
  */
 .brand img {
     width: 100%
+}
+/* Integration specific */
+
+.snmp .hint-icon {
+    position:absolute;
+    width: 15px;
+}
+
+.snmp pre {
+    position:relative;
+    left:20px;
+    width:60%;
+}
+.snmp dd {
+    margin-left:10%;
+}
+
+.snmp dt {
+    margin-top:20px;
 }
