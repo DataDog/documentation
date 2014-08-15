@@ -287,7 +287,6 @@ ol.outline    {list-style-type: upper-alpha}
 ol.outline ol {list-style-type: decimal}
 span.question {font-weight: bold}
 
-<<<<<<< HEAD
 /* use width instead of max-width in logo because
  * FF and opera ignore max-width in inlined images
  */
