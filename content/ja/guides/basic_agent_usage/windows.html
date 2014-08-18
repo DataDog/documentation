@@ -1,0 +1,119 @@
+---
+title: Basic Agent Usage for Windows
+---
+
+<!--
+======================================================
+Overview
+======================================================
+-->
+
+<h3 id="overview">Overview</h3>
+
+This guide will outline the basic functionality of the Datadog Agent.
+If you haven't installed the Agent yet, instructions can be found 
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>.<br/>
+
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+
+<h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
+
+The execution of the Agent is controlled by a Windows service. 
+
+<h4>For version >= 3.9.1</h4>
+You can use the Datadog Agent Manager that you can find in the Start Menu.
+<p><img src="/static/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
+<p><img src="/static/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
+
+<h4>For version < 3.9.1</h4>
+The Agent can be started, stopped, and
+restarted from the Services panel. To view the Services panel, execute the following in a <code>cmd.exe</code> shell:
+
+<%= console 'services.msc' %>
+
+Once you're in the console, find the "Datadog Agent" service. 
+Right clicking on the service will reveal options to start, stop, and restart the Agent.
+
+
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+<h3 id="status_and_information">Status and Information</h3>
+To check if the Agent is running, check if the service status in the Services panel is listed as "Started".
+A process called "ddagent.exe" should also exist in the Task Manager.
+
+To receive more information about the Agent's state, visit the <em>status page</em> in your web browser:
+
+<%= console 'http://localhost:17125/status' %>
+
+<em>The status page is supported in Agent version 3.9.1 and above</em>
+
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+<h3 id="configuration">Configuration</h3>
+<h4>For version >= 3.9.1</h4>
+You can use the Datadog Agent Manager located in the start menu to enable, disable and configure checks.
+You have to restart the agent in order for your changes to be applied.
+
+<h4>For version < 3.9.1</h4>
+
+The configuration file location depends on the version of Windows on which the Agent is installed.
+
+For Windows Server 2003, XP or older:
+<ul>
+    <li>Agent configuration: <br>
+        <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
+    <li>Integration configuration: <br>
+        <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
+</ul>
+
+
+For Windows Server 2008, Vista and newer:
+<ul>
+    <li>Agent configuration: <br>
+        <code>C:\ProgramData\Datadog\datadog.conf</code></li>
+    <li>Integration configuration: <br>
+        <code>C:\ProgramData\Datadog\conf.d\</code></li>
+</ul>
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+First, check if the Agent is running in the Services panel and in the Task Manager.
+
+Next, try opening the <a href='#status_and_information'>status page</a> to see the state of the Agent.
+
+<h4>For version >= 3.9.1</h4>
+Log is available at:
+<ul>
+    <li>For Windows Server 2003, XP or older: <br>
+       <code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
+    <li>For Windows Server 2008, Vista and newer: <br>
+        <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
+</ul>
+
+<h4>For version < 3.9.1</h4>
+Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr; Application.
+<br/>
+
+If you're still having trouble, our support team will be glad to provide further assistance.
+You can contact them in one of the following ways:
+
+<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>
+
