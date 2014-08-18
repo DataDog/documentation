@@ -293,3 +293,22 @@ span.question {font-weight: bold}
 .brand img {
     width: 100%
 }
+/* Integration specific */
+
+.snmp .hint-icon {
+    position:absolute;
+    width: 15px;
+}
+
+.snmp pre {
+    position:relative;
+    left:20px;
+    width:60%;
+}
+.snmp dd {
+    margin-left:10%;
+}
+
+.snmp dt {
+    margin-top:20px;
+}
