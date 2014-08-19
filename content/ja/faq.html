@@ -597,6 +597,33 @@ For example, if you wanted to find all open chef or nagios errors that mention c
 Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 </p>
 
+
+<h4>Is it possible to submit events via email?</h4>
+<p>
+Yes! 
+To get started you need to go the API tab in the 
+<a target="_blank" href="https://app.datadoghq.com/account/settings#api">settings page</a>, 
+create one or more API emails. 
+For a monitoring tool that does not allow you to edit the body of the email you need to create a plain-text email, 
+and have that system or tool send alarms or notifications to this email. 
+For systems that allow you to edit the content 
+of the notification emails, you may use a JSON email. In the body of an email sent to a JSON API email you need 
+to include a well formatted JSON event request as per our existing events API (which you can find more details 
+about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>). 
+</p> 
+
+<p>
+Here is an example:
+<pre><code>{
+"title": “Host CPU above 75% for 5 minutes",
+"text": "Host CPU has been above 75% for the last 5 minutes …etc",
+"priority": "normal",
+"tags": ["vsphere", "env:prod", "host:i-a4f761f0", "role:admin"],
+"alert_type": "error"
+}</code></pre>
+</p>
+
+
 <!--
 ===============================================================================
     Other
