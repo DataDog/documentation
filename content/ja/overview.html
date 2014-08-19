@@ -1,23 +1,23 @@
 ---
-title: Datadog Overview
+title: Datadogが提供するサービスの概要
 sidebar:
   nav:
-    - header: All About Datadog
+    - header: Datadogのサービスについて
     - text: Integrations
       href: "#integrations"
-    - text: Infrastructure
+    - text: Infrastructure 機能
       href: "#infrastructure"
-    - text: Events
+    - text: Events 機能
       href: "#events"
-    - text: Dashboards
+    - text: ダッシュボード機能
       href: "#dashboards"
-    - text: Alerting
+    - text: アラート機能
       href: "#alerting"
 ---
 
-So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog 
+So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
 Agent, or maybe you're just curious about [what (else) Datadog can do for you](http://www.datadoghq.com/product/).
-This document gives a high level overview of Datadog's capabilities and how 
+This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
 <h2 id="integrations">Integrations</h2>
@@ -25,13 +25,13 @@ it can help you bring your infrastructure to heel.
 <img src="/static/images/integrations.png" style="width:100%; border:1px solid #777777"/>
 
 <ul>
-<li>60+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, 
+<li>60+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
 always adding more.</li>
-<li>Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>, 
+<li>Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>,
 many documented by our active user community.</li>
-<li>The Agent is <a target="_blank" href="https://github.com/DataDog/dd-agent/">open source</a> and you 
+<li>The Agent is <a target="_blank" href="https://github.com/DataDog/dd-agent/">open source</a> and you
 can instrument your own if you'd like.</li>
-<li>Once integrations have been configured, data living in a datacenter or 
+<li>Once integrations have been configured, data living in a datacenter or
 in an online service is treated the same throughout Datadog.</li>
 </ul>
 
@@ -41,13 +41,13 @@ in an online service is treated the same throughout Datadog.</li>
 
 <ul>
 <li>All machines show up in the infrastructure overview</li>
-<li>Here you can see the tags applied to each machine; as they're assigned to 
-perform certain roles, tagging allows you to indicate machines have 
+<li>Here you can see the tags applied to each machine; as they're assigned to
+perform certain roles, tagging allows you to indicate machines have
 a certain purpose</li>
-<li>We do as much as possible to automatically categorize your servers 
-for you, to create structure in your infrastructure with as little 
-work as possible (unlike explicitly creating all your clusters). 
-Thus if a new machine is tagged, you can immediately see the stats 
+<li>We do as much as possible to automatically categorize your servers
+for you, to create structure in your infrastructure with as little
+work as possible (unlike explicitly creating all your clusters).
+Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.</li>
 <li>For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
 
@@ -63,7 +63,7 @@ The Event Stream is based on the same conventions as a blog:
 <ul>
 <li>Every event in the stream can be commented on.</li>
 <li>Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation</li>
-<li>You can <a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a> 
+<li>You can <a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident</li>
 </ul>
 
@@ -93,11 +93,11 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>Click & drag on a graph to zoom-in on a particular time-frame.</li>
 <li>As you hover over the graph the event stream moves with you.</li>
 <li>Display by zone, host, or total usage.</li>
-<li>We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and 
+<li>We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and
 <a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.</li>
-<li>Share a graph snapshot that will appear in the stream; clicking on 
+<li>Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
-<li>Graphs can be embedded in an iframe, giving a 3rd party a live graph 
+<li>Graphs can be embedded in an iframe, giving a 3rd party a live graph
 without access to your data or any other information (via the cog in the upper right of a graph).</li>
 </ul>
 
@@ -105,7 +105,7 @@ without access to your data or any other information (via the cog in the upper r
 <h2 id="alerting">Alerting</h2>
 <img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
 
-[Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific 
+[Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
 <ul>
 <li>Across your entire infrastructure</li>
@@ -120,9 +120,9 @@ metric is above or below a certain threshold:
 Does the data have to be pushed to Datadog?
 <ol>
 Currently, yes:
-<li>All integrations we have get data flowing almost automatically after 
+<li>All integrations we have get data flowing almost automatically after
 launching the Agent (intial reporting may take a few minutes, but not longer than 10).</li>
-<li>If you have custom metrics, you can indicate specifically where 
+<li>If you have custom metrics, you can indicate specifically where
 to pull the data from.</li>
 </ol>
 
