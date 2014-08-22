@@ -10,7 +10,7 @@ Also, at the moment, the Agent install requires .net framework 2.0 or 3.5.
 **Create** a file called `installDatadogAgent.cmd` with the following contents:
 
     powershell -c "(New-Object System.Net.WebClient).DownloadFile(\"https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli.msi\", \"ddagent.msi\")"
-    msiexec /i ddagent.msi APIKEY="YOUR_API_KEY"
+    msiexec /qn /i ddagent.msi APIKEY="YOUR_API_KEY"
 
 Be sure to replace `YOUR_API_KEY` with your API key found at [here](https://app.datadoghq.com/account/settings#api). 
 The created file will download and install the latest version of the Agent on application deploy.
