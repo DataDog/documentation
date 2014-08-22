@@ -376,8 +376,10 @@ month of data, we will be returning the points at a rollup of far greater than 2
 
 <code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions, 
 which are only intended for metrics submitted in a certain way (for metadata types where 
-that is acceptable).  For example, currently for metrics submitted via statsd, 
-appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly. For a gauge, neither will function.
+that is acceptable).  At present, for metrics submitted as rates or counters via statsd, 
+appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly.
+For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
+<code>.as_rate()</code> will have no effect.
  
 We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query. 
 We will also be building these functions fully into the graph editor in the near 
