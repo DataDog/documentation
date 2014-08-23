@@ -1,0 +1,40 @@
+---
+title: Guide to Dashboard Templating
+sidebar:
+  nav:
+    - header: Guide to Templating
+    - text: Enabling dashboard templating
+      href: "#new"
+    - text: Defining template variables
+      href: "#def"
+    - text: Using template variables in graph editors
+      href: "#graph"
+
+---
+
+<p> Dashboard templating allows you to create dashboards that use variables like <code>$scope</code>
+or <code>$redis</code> in place of specific tags or hosts. You can then dynamically explore the metrics
+across different sets of tags. Simply select a new variable value in the dropdown menu, and that
+value will apply across the dashboard.</p>
+
+<h3 id="new">Enabling dashboard templating</h3>
+<p>To create a new templated dashboard, select the 'Use templated sources for metrics'
+checkbox in the dashboard creation menu.</p>
+
+<img src="/static/images/template_new_dash.png" style="width:100%; border:1px solid #777777" />
+
+<p>To add templating to an existing dashboard, click the 'Toggle Templating' icon in an existing dashboard.</p>
+
+<img src="/static/images/toggle_templating.png" style="width:100%; border:1px solid #777777" />
+
+<h3 id="def">Defining new template variables</h3>
+<img src="/static/images/redis-tpl-panel.png" style="width:100%; border:1px solid #777777" />
+<p>A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.'  A tag group is a prefix shared among several tags, like <code>redis_port</code> for the tags <code>redis_port:6379</code> and <code>redis_port:6280</code>. Setting a tag group eliminates irrelevant tags from the variable's scope selector.
+The 'Default Tag' option determines the initial value for the variable on dashboard load.</p>
+
+<h3 id="graph">Using template variables in graph editors</h3>
+<img src="/static/images/redis-tpl-graph-editor.png" style="width:70%; border:1px solid #777777" />
+<p>Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>redis_port:6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>.
+</p>
+<img src="/static/images/redis-tpl-selector.png" style="width:70%; border:1px solid #777777" />
+
