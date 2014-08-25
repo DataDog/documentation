@@ -1,5 +1,5 @@
 ---
-title: Datadog エージェント入門
+title: Datadog Agent 入門
 ---
 
 <!-- <div class="alert alert-info">
@@ -7,7 +7,7 @@ To get started using the Agent, please select your platform on the sidebar to th
 </div> -->
 
 <div class="alert alert-info">
-Datadog エージェントの利用詳細については、左側のサイドバーからプラットフォームとなるOSを選択してください。
+Datadog Agent の利用詳細については、左側のサイドバーからプラットフォームとなるOSを選択してください。
 </div>
 
 <!--
@@ -26,15 +26,15 @@ The source code for the Datadog Agent can be found <a href='https://github.com/D
 For information on running the Agent through a proxy please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">here</a>;
 for which ranges to allow, please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">here</a>. -->
 
-<h2 id="what_is_the_agent">Datadgo エージェントってなに ?</h2>
+<h2 id="what_is_the_agent">Datadog Agent ってなに ?</h2>
 
-Datadog エージェントは、サーバーホスト上で動作するソフトウェアです。その役割は、システムの監視データーやパフォーマンスデーターをビジネシスに有効に活用していくために、サーバーホスト上のイベントやメトリックを誠実に収集し、Datadogに転送することです。
+Datadog Agent は、サーバーホスト上で動作するソフトウェアです。その役割は、システムの監視データーやパフォーマンスデーターをビジネシスに有効に活用していくために、サーバーホスト上のイベントやメトリックを誠実に収集し、Datadogに転送することです。
 
-Datadog エージェントのソースコードは、<a href='https://github.com/DataDog/dd-agent'>Github</a>で閲覧することができます。
+Datadog Agent のソースコードは、<a href='https://github.com/DataDog/dd-agent'>Github</a>で閲覧することができます。
 
-プロキシーが設置されている環境で、Datadog エージェントがデーターを転送する必要がある場合は、次の<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">ドキュメント"Network Traffic and Proxy Configuration"</a>を参照してください。プロキシーで開放するポートの情報に関しては、<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">"Open Ports"</a>の項目を参照してください。
+プロキシーが設置されている環境で、Datadog Agent がデーターを転送する必要がある場合は、次の<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">ドキュメント"Network Traffic and Proxy Configuration"</a>を参照してください。プロキシーで開放するポートの情報に関しては、<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">"Open Ports"</a>の項目を参照してください。
 
-Datadog エージェントは、次の３つの要素で構成されています: **Collector**, **Dogstatsd**, **Forwarder**
+Datadog Agent は、次の３つの要素で構成されています: **Collector**, **Dogstatsd**, **Forwarder**
 
 <!-- <ul>
 <li>The collector runs checks on the current machine for whatever integrations you have
@@ -55,7 +55,7 @@ overhead of each application if you don't want to run all parts (though we gener
 <li><b>Forwader</b> は、dogstatsd とCollector の両方からデータを受け取り、queueの順番に従ってDatadogに送信します。</li>
 </ul>
 
-**Collector**, **Dogstatsd**, **Forwarder** は、1つのスーパーバイザープロセスによって制御されています。このようにエージェントのプロセスを要素単位で分割しているのは、不要な要素プロセスを停止することにより、エージェント全体のオーバーヘッド負荷を削減することができるようにしているためです。(但し一般的な用途では、要素毎のピロセスの停止はお勧めしません。)
+**Collector**, **Dogstatsd**, **Forwarder** は、1つのスーパーバイザープロセスによって制御されています。このようにDatadog Agent のプロセスを要素単位で分割しているのは、不要な要素プロセスを停止することにより、Datadog Agent 全体のオーバーヘッド負荷を削減することができるようにしているためです。(但し一般的な用途では、要素毎のピロセスの停止はお勧めしません。)
 
 
 <!--
@@ -124,24 +124,24 @@ Here is a quick guide for troubleshooting getting integrations installed:
 		* Check the <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> to see if system metrics are showing up from the host. For example, look for system.cpu.user from the host that is running the Agent and has that integration setup.
 		* If there are still no metrics, check the logs for errors and please send them along, with the info command output, to <a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>. -->
 
-<h3 id="troubleshooting">Datadog エージェント関連のトラブルシューティング</h3>
+<h3 id="troubleshooting">Datadog Agent 関連のトラブルシューティング</h3>
 <p>
-未だDatadog エージェントをインストールしていない場合は、こちらの<a href="https://app.datadoghq.com/account/settings#agent" target="_blank">インストール手順</a>を覧ください。このページにたどり着く直前にエージェント をインストールした場合は、メトリックスが表示されるようになるまでには、数分かかることがあります。インストールが完了し、まずは基本的なメトリックスを確認するには、<a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページが最適です。
+未だDatadog Agent をインストールしていない場合は、こちらの<a href="https://app.datadoghq.com/account/settings#agent" target="_blank">インストール手順</a>を覧ください。このページにたどり着く直前にDatadog Agent をインストールした場合は、メトリックスが表示されるようになるまでには、数分かかることがあります。インストールが完了し、まずは基本的なメトリックスを確認するには、<a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページが最適です。
 </p>
 <p>
-問題が発生していることが疑われる場合は、info コマンドを実行し、エージェントのログを確認してください。 info コマンドと各ログの場所は、OSによって異なります。詳細については、左側のナビゲーションからお使いのOSを選択し、<b>トラブルシューティング</b> の項目を参照してください。
+問題が発生していることが疑われる場合は、info コマンドを実行し、Datadog Agentのログを確認してください。 info コマンドと各ログの場所は、OSによって異なります。詳細については、左側のナビゲーションからお使いのOSを選択し、<b>トラブルシューティング</b> の項目を参照してください。
 
 </p>
 
-<h4 id="issue_installing">エージェントのインストールに関わる問題</h4>
+<h4 id="issue_installing">Datadog Agent のインストールに関わる問題</h4>
 
-エージェントのインストールの過程で、インストールプロセスが一切発生しない問題に遭遇した場合は、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>にご連絡ください。
-その際に、エージェントをインストールしようとしているホストのOS名とバージョン,エージェントのインストール方法とバージョンもご連絡ください。
+Datadog Agent のインストールの過程で、インストールプロセスが一切発生しない問題に遭遇した場合は、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>にご連絡ください。
+その際に、Datadog Agent をインストールしようとしているホストのOS名とバージョン,Datadog Agent のインストール方法とバージョンもご連絡ください。
 更に、エラーメッセージを添付してください。
 
-<h4 id="issue_reporting">エージェントのリポーティングに関わる問題</h4>
+<h4 id="issue_reporting">Datadog Agent のリポーティングに関わる問題</h4>
 
-エージェントのインストールは完了しているがDatadogにデータが表示されていない場合は、次のようにしてトラブルシューティングを行うことができます。
+Datadog Agent のインストールは完了しているがDatadog にデータが表示されていない場合は、次のようにしてトラブルシューティングを行うことができます。
 まず、infoコマンドを実行します。コマンドを実行するための詳細については、左側のナビゲーションにお使いのOSを選択してください。
 
 **infoコマンドの実行によって、問題に関連するエラーの内容は表示されましたか？**
@@ -162,7 +162,7 @@ Here is a quick guide for troubleshooting getting integrations installed:
 
 <h4 id="integrations">Integrationsの動作に関連する問題</h4>
 
-Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" target="_blank">Integrations</a> には、エージェントの<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAMLファイル</a>で設定が必要なものが多々あります。
+Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" target="_blank">Integrations</a> には、Datadog Agent の<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAMLファイル</a>で設定が必要なものが多々あります。
 
 **以下は、Integrationsのインストールに関連する問題のトラブルシュートのクイックガイドです:**
 
@@ -173,7 +173,7 @@ Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" ta
     + <strong>いいえ、表示されていません。</strong>
         * 設定ファイルが正しい場所にあり、正しい名前かを確認してください。
         * YAML のパーサーやシンタックスチェッカーを使って文法を確認してください。各Integrationsの<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAML ファイルのサンプル</a>は、Githubのリポジトリーを参照していください。
-        * 設定ファイルを移動した場合や変更した場合は、エージェントを再起動した後、再度infoコマンド実行しIntegrationsが表示されるか確認してください。
+        * 設定ファイルを移動した場合や変更した場合は、Datadog Agent を再起動した後、再度infoコマンド実行しIntegrationsが表示されるか確認してください。
     + <strong>はい、表示されています。</strong>
         * <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページでそのホストの一般的なメトリックス(CPU, HDD, メモリー等)が表示されているかを確認してください。例えば、Integrationsの設定を進めているホストの`system.cpu.user`選んでみたください。
         * メトリックスが全く表示されていない場合は、ログの中でエラー項目を探し、該当のログ・ファイルとinfoコマンドの出力ファイルとを添付し、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a> までお問い合わせください。　
