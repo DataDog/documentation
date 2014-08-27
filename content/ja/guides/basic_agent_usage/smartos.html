@@ -139,7 +139,10 @@ You can contact them in one of the following ways:
 
 <h3 id="troubleshooting">トラブルシューティング</h3>
 
-まず、次のコマンドを使ってPythonのバージョンを確認してください。Datadog Agent を実行するには、Python-2.6 以上が必要です。
+まず、次のコマンドを実行し、Pythonのバージョンを確認してください。Datadog Agent を実行するには、Python-2.6 以上が必要です。
+
+<%= console "cd /opt/local/datadog/agent && python -c 'import config; print config.get_version()'" %>
+
 バージョン要件を満たしていれば、<a href='#status_and_information'>info</a> コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
 
 それぞれの細分化された要素(機能別)のログ関しては、以下のファイルに記録されています:
