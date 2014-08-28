@@ -344,7 +344,7 @@ As an admin you can check out past invoices <a href="https://app.datadoghq.com/a
 
 <h4><a name="graph-sum-grouped" href="#graph-sum-grouped">How do I do arithmetic with grouped
 metrics?</a></h4>
-<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.bar{env:staging}</code>
+<p>To graph the sum of <code>app.foo.bar{env:staging}</code> and <code>app.foo.baz{env:staging}</code>
 grouped <code>by {host}</code>, write a graph query that looks like:</p>
 <pre><code>metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}</code></pre>
 
