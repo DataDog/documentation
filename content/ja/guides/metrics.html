@@ -1,25 +1,25 @@
 ---
-title: Sending Metrics with DogStatsD
+title: DogStatsD を使った、メトリックスの送信
 sidebar:
   nav:
     - header: Guide to Metrics
-    - text: Overview
+    - text: 概要
       href: "#overview"
-    - text: Setup
+    - text: セットアップ
       href: "#setup"
     - header: Metric Types
-    - text: Counters
+    - text: カウンター
       href: "#counters"
-    - text: Gauges
+    - text: ゲージ
       href: "#gauges"
-    - text: Histograms
+    - text: ヒストグラム
       href: "#histograms"
-    - text: Sets
+    - text: セット
       href: "#sets"
     - header: Options
-    - text: Tags
+    - text: タグ
       href: "#tags"
-    - text: Sample Rates
+    - text: サンプル・レート
       href: "#sample-rates"
     - header: Epilogue
     - text: Other Submission Methods
@@ -37,7 +37,7 @@ OVERVIEW
 ======================================================
 -->
 
-<h3 id="overview">Overview</h3>
+<!-- <h3 id="overview">Overview</h3>
 
 This guide explains how to send your application's custom metrics to Datadog.
 Sending your application's custom metrics to Datadog will let you correlate
@@ -52,7 +52,22 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 - How to count web page views
 - How to time database queries
-- How to measure the amount of free memory
+- How to measure the amount of free memory -->
+
+<h3 id="overview">概要</h3>
+
+このガイドでは、アプリケーションのメトリックをDatadogに送信する方法について説明します。
+Datadogにアプリケーションのメトリックを送信するこで、アプリケーションの状態, ユーザーの行動, システムの状態などを、関連付けて把握できるようになります。
+
+メトリックは、Datadog Agent にバンドルされているDogStatsD という小型のメトリックス集約サーバを介しDatadog に転送されています。DogStatsDの動作の詳細に関しては、<a
+href="/guides/dogstatsd/">"Getting Started with DogStatsD"</a>を参照してください。
+早急に送信用のコードを開発する必要のある場合は、このまま読み進めてください。
+
+このチュートリアルでは、次のようなユースケースを取り上げます:
+
+- Webページのページ・ビューを測定する方法
+- データベースのクエリ時間を測定する方法
+- 空きメモリの量を測定する方法
 
 <!--
 ======================================================
@@ -60,7 +75,7 @@ SETUP
 ======================================================
 -->
 
-<h3 id="setup">Setup</h3>
+<!-- <h3 id="setup">Setup</h3>
 
 First off, <a href="https://app.datadoghq.com/account/settings#agent">install</a>
 the Datadog Agent (version 3 or greater), which
@@ -117,6 +132,62 @@ pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
 pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
 anything with it, but we have aspirations to use it to infer things about
 servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
+must be web frontends"). -->
+
+<h3 id="setup">セットアップ</h3>
+
+まずは、ホストにDogStatsDがバンドルされているDatadog Agent(Ver. 3以降) を<a href="https://app.datadoghq.com/account/settings#agent">インストール</a>し、動作していることを確認します。
+
+次に、開発に使用するプログラミング言語のクライアントライブラリをセットアップします。
+
+<%= code_tabs("setup", tab_languages) %>
+
+<div class="tab-content">
+
+  <div class="tab-pane active fade in" id="setup-python">
+モジュールをインストールします:
+<%= snippet_code_block("guides-metrics-setup-python.sh") %>
+モジュイールをインポートします:
+<%= snippet_code_block("guides-metrics-setup.py") %>
+  </div>
+
+  <div class="tab-pane fade in" id="setup-ruby">
+モジュールをインストールします:
+<%= console <<EOF
+$ gem install dogstatsd-ruby
+EOF
+%>
+モジュールをインポートするためにrequire行を追記します:
+<%= ruby <<EOF
+# Import the library
+require 'statsd'
+
+# Create a statsd client instance.
+statsd = Statsd.new
+EOF
+%>
+  </div>
+  <p>これで、ライブラリーが使えるように成りました。</p>
+  <div class="alert info-block">
+    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/libraries/">Libraries</a>のページを参照してくだい。
+  </div>
+
+</div>
+
+<h4>メトリックスの命名規則</h4>
+メトリックスを命名する際には、次のルールを守ってください:
+<ul>
+<li>Metric names must start with a letter</li>
+<li>Can only contain ascii alphanumerics, underscore and periods (other characters will get converted to underscores)</li>
+<li>Should not exceed 200 characters (though less than 100 is genearlly preferred from a UI perspective)</li>
+<li>Unicode is not supported</li>
+<li>We recommend avoiding spaces</li>
+</ul>
+Metrics reported by the Agent are in a
+pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
+pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
+anything with it, but we have aspirations to use it to infer things about
+servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
 must be web frontends").
 
 
@@ -127,7 +198,7 @@ COUNTERS
 -->
 
 
-<h3 id="counters">Counters</h3>
+<h3 id="counters">カウンター (Counters)</h3>
 
 Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
@@ -206,7 +277,7 @@ your series like cumulative sum or integral. There is more information on those
 <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
 
 
-<h3 id="gauges">Gauges</h3>
+<h3 id="gauges">ゲージ (Gauges)</h3>
 
 Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
@@ -250,7 +321,7 @@ HISTOGRAMS
 ======================================================
 -->
 
-<h3 id="histograms">Histograms</h3>
+<h3 id="histograms">ヒストグラム (Histograms)</h3>
 
 Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
@@ -327,7 +398,7 @@ SETS
 -->
 
 
-<h3 id="sets">Sets</h3>
+<h3 id="sets">セット (Sets)</h3>
 
 Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
@@ -362,7 +433,7 @@ TAGS
 ======================================================
 -->
 
-<h3 id="tags">Tags</h3>
+<h3 id="tags">タグ (Tags)</h3>
 
 Tags are a way of adding dimensions to metrics, so they can be sliced, diced,
 aggregated and compared on the front end. Suppose we wanted to measure the
@@ -436,7 +507,7 @@ in the standard way. Check out some of our other docs for how to use these:
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
 - <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
 
-<h3 id="sample-rates">Sample Rates</h3>
+<h3 id="sample-rates">サンプル・レート (Sample Rates)</h3>
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
 of overhead for performance intensive code paths. To work around this, StatsD
