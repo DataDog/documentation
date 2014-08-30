@@ -1,0 +1,37 @@
+#Priority of contents:
+
+
+## Translation Priority Ranking:
+Hi ———————————————> Low
+A -> B -> C -> D
+
+
+## contents:
+
+### guide
+
+- text: Getting Started with the Agent		(Rank=A: done)
+- text: Datadog Overview 					(Rank=A: done)
+- text: Sending App Metrics				(Rank=B: on-progress)
+- text: Log Parsing in the Agent			(Rank=B: yet)
+- text: Writing an Agent Check				(Rank=C: yet)
+- text: Setting up Service Checks			(Rank=B: yet)
+- text: Deploying the Agent with Chef		(Rank=D: yet)
+- text: Guide to Alerting					(Rank=B: yet)
+- text: Guide to Dashboard Templating		(Rank=B: yet)
+- text: Single Sign On With SAML			(Rank=D: yet)
+
+### Refelence
+
+- text: API								(Rank=C: yet)
+- text: Libraries							(Rank=B: yet)
+- text: Graphing							(Rank=B: yet)
+- text: Host Names						(Rank=C: yet)
+- text: Integrations						(Rank=B: yet)
+- text: DogStatsD							(Rank=D: yet)
+- text: FAQ								(Rank=D: yet)
+- text: Billing FAQ						(Rank=B: yet)
+
+
+
+
