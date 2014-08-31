@@ -2,12 +2,12 @@
 title: DogStatsD を使った、メトリックスの送信
 sidebar:
   nav:
-    - header: Guide to Metrics
+    - header: メトリックスのご案内
     - text: 概要
       href: "#overview"
     - text: セットアップ
       href: "#setup"
-    - header: Metric Types
+    - header: メトリックス・タイプ
     - text: カウンター
       href: "#counters"
     - text: ゲージ
@@ -16,15 +16,15 @@ sidebar:
       href: "#histograms"
     - text: セット
       href: "#sets"
-    - header: Options
+    - header: オプション
     - text: タグ
       href: "#tags"
     - text: サンプル・レート
       href: "#sample-rates"
-    - header: Epilogue
-    - text: Other Submission Methods
+    - header: その他
+    - text: 他の送信方法
       href: "#methods"
-    - text: Seeing Your Custom Metrics
+    - text: カスタム・メトリックスの確認方法
       href: "#custom"
 
 ---
@@ -177,18 +177,16 @@ EOF
 <h4>メトリックスの命名規則</h4>
 メトリックスを命名する際には、次のルールを守ってください:
 <ul>
-<li>Metric names must start with a letter</li>
-<li>Can only contain ascii alphanumerics, underscore and periods (other characters will get converted to underscores)</li>
-<li>Should not exceed 200 characters (though less than 100 is genearlly preferred from a UI perspective)</li>
-<li>Unicode is not supported</li>
-<li>We recommend avoiding spaces</li>
+<li>メトリック名は、文字で始まる必要があります。</li>
+<li>ascii英数字,アンダースコア,ピリオドを、使うことができができます。（他の文字はアンダースコアに変換されます）</li>
+<li>200文字を、超えることができません。 (though less than 100 is genearlly preferred from a UI perspective)</li>
+<li>Unicode は、サポートしていません。</li>
+<li>空白(スペース)は、使用できません。</li>
 </ul>
-Metrics reported by the Agent are in a
-pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say
-pseudo-hierarchical because we're not actually enforcing a hierarchy or doing
-anything with it, but we have aspirations to use it to infer things about
-servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those
-must be web frontends").
+Datadog Agent によって転送されるメトリックは、擬似階層ドット形式 (e.g. http.nginx.response_time)を使用しています。
+ここで"疑似階層"と言っている理由は、この形式をシステムのメトリックスを検索の仕組みとして使っているからです。
+(例:"ねえ、ホストAとホストBが、'http.nginx.*'というメトリックスを送信している。これらは、Webのフロントエンドのメトリックスだよね〜")
+従って、物理的なシステムが、階層構造であるかどうかは気にしていません。
 
 
 <!--
@@ -198,7 +196,7 @@ COUNTERS
 -->
 
 
-<h3 id="counters">カウンター (Counters)</h3>
+<!-- <h3 id="counters">Counters</h3>
 
 Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
@@ -274,14 +272,81 @@ reset -- for example, the number of queries from MySQL over time -- we track the
 rate between flushed values. While there currently isn't an elegant solution to
 get raw counts within Datadog, you may want to apply a function to
 your series like cumulative sum or integral. There is more information on those
-<a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+<a href="http://docs.datadoghq.com/graphing/#functions">here</a>. -->
 
+<h3 id="counters">カウンター (Counters)</h3>
 
-<h3 id="gauges">ゲージ (Gauges)</h3>
+カウンタは、物事を数えるに使用します。
 
-Gauges measure the value of a particular thing over time. Suppose a developer
-wanted to track the amount of free memory on a machine, we can periodically
-sample that value as the metric `system.mem.free`:
+例えば、Webページのビュー数をカウントしたい場合、Webアプリケーションの`render_page`関数が実行された際に、`web.page_views`メトリックスが、増加するよう関数内に`statsd.increment()`行を追記し数値を蓄積しています。
+
+<%= code_tabs("counters-page-views", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="counters-page-views-python">
+<%= python <<EOF
+def render_page():
+    """ Render a web page. """
+    statsd.increment('web.page_views')
+    return 'Hello World!'
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="counters-page-views-ruby">
+<%= ruby <<EOF
+def render_page()
+  # Render a web page.
+  statsd.increment('web.page_views')
+  return 'Hello World!'
+end
+EOF
+%>
+  </div>
+</div>
+
+この1行のコード追記みで、データーのグラフ化を開始することができます。
+
+次のグラフは、Dashboard上に表示したページビュー数の一例です:
+
+<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%">
+
+- 注) DogStatsDのカウンターは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。
+従って、上のグラフのマーカーでは、15:34分に35.33 view/秒という実際には考えられない数値を表示しています。
+対称にもしも、Webページに毎秒1回の訪問しかなかった場合には、グラフは、y = 1 の平坦な線になります。
+一定時間内の数値の増加や測定を目的とする場合は、<a href='#gauges'>ゲージ</a>を参照してください。
+
+任意の数値でカウント値を増すこともできます。
+例えば、ファイルのアップロード・サービスによって処理されたバイト数をカウントしたいとします。
+このような場合は、`upload_file`関数が実行される度に、`file_service.bytes_uploaded`というメトリックスを、ファイルサイズ分づつ増加させていきます:
+
+<%= code_tabs("counters-uploaded", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="counters-uploaded-python">
+<%= python <<EOF
+def upload_file(file):
+    statsd.increment('file_service.bytes_uploaded', file.size())
+    save_file(file)
+    return 'File uploaded!'
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="counters-uploaded-ruby">
+<%= ruby <<EOF
+def upload_file(file)
+  statsd.count('file_service.bytes_uploaded', file.size())
+  save_file(file)
+  return 'File uploaded!'
+end
+EOF
+%>
+  </div>
+</div>
+<br>
+
+- 注）DogStatsDが他のソースから受け取った、リセットが発生せずに増加し続けるカンター値(例えば、MySQLのクエリー数/時間)は、flush interval間のレートを記録していきます。
+現状のDatadogでは、大本のカウント値を取得するための洗練された解決策を持ち合わせいませんが、必要に応じ送信された時系列のデーターに対し数値計算functionを使って累積合計や積分をことも検討してみると良いかもしれません。
+これらのfunctionに関する詳細は、Graphingページの<a href="http://docs.datadoghq.com/graphing/#functions">"Arithmetic and Functions"</a>を参照してください。
 
 
 <!--
@@ -290,6 +355,42 @@ GAUGES
 ======================================================
 -->
 
+
+<!-- <h3 id="gauges">Gauges</h3>
+
+Gauges measure the value of a particular thing over time. Suppose a developer
+wanted to track the amount of free memory on a machine, we can periodically
+sample that value as the metric `system.mem.free`:
+
+<%= code_tabs("gauges", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="gauges-python">
+<%= python <<EOF
+# Record the amount of free memory every ten seconds.
+while True:
+    statsd.gauge('system.mem.free', get_free_memory())
+    time.sleep(10)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="gauges-ruby">
+<%= ruby <<EOF
+# Record the amount of free memory every ten seconds.
+while true do
+    statsd.gauge('system.mem.free', get_free_memory())
+    sleep(10)
+end
+EOF
+%>
+  </div>
+</div> -->
+
+<h3 id="gauges">ゲージ (Gauges)</h3>
+
+ゲージは、一定時間内の特定の値を測定します。
+
+例えば、マシンの空きメモリの量を追跡した場合、空きメモリー量を調らべる関数`get_free_memory()`を定期的に呼び出し`system.mem.free`メトリクスとして抽出し、`statsd.gauge()`で、測定値として処理します:
 
 <%= code_tabs("gauges", tab_languages) %>
 
@@ -315,13 +416,15 @@ EOF
   </div>
 </div>
 
+
 <!--
 ======================================================
 HISTOGRAMS
 ======================================================
 -->
 
-<h3 id="histograms">ヒストグラム (Histograms)</h3>
+
+<!-- <h3 id="histograms">Histograms</h3>
 
 Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
@@ -388,6 +491,72 @@ that almost all of our queries are performing just fine.
 Histograms aren't just for measuring times. They can be used to measure the
 distribution of any type of value, like the size of uploaded files or classroom
 test scores.
+</p> -->
+
+<h3 id="histograms">ヒストグラム (Histograms)</h3>
+
+ヒストグラムは、値の集合の統計的分布を測定します。
+
+例えば、データベースへのクエリ–時間待ち時間を計測したい場合、`database.query.time`メトリックスとしてクエリーの実行に掛かった時間を計測し、`statsd.histogram()`で、集合値として処理します。
+
+<%= code_tabs("histograms", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="histograms-python">
+<%= python <<EOF
+# Track the run time of the database query.
+start_time = time.time()
+results = db.query()
+duration = time.time() - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `timed` decorator as a short-hand for timing functions.
+@statsd.timed('database.query.time')
+def get_data():
+    return db.query()
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="histograms-ruby">
+<%= ruby <<EOF
+start_time = Time.now
+results = db.query()
+duration = Time.now - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `time` helper as a short-hand for timing blocks
+# of code.
+statsd.time('database.query.time') do
+  return db.query()
+end
+EOF
+%>
+  </div>
+</div>
+
+上記のスクリプトは、次のメトリックを同時に生成します:
+
+- `database.query.time.count` - 計測された回数
+- `database.query.time.avg` - 計測された値の平均時間
+- `database.query.time.median` - 計測された値の中央値
+- `database.query.time.max` - 計測された値の最大値
+- `database.query.time.95percentile` - 計測された値の95パーセンタイル値
+
+これらのメトリックスによて、クエリーが処理されるまでの時間のばらつきを把握すことができます。
+`median`をグラフ化することにより、クエリーが処理されるまでの平均時間を知ることができます。
+又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリー処理時間を知ることができます。
+
+<img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%">
+
+この例では、「１秒以内のクエリー処理時間は、容認範囲」として仮定し話を進めます。クエリー処理時間の中央値(紫色線)は、たいてい100ミリ秒以下を示し、容認範囲を推移しています。
+しかし残念ながら、95パーセンタイル値(青色線)には、放置することのできないスパイク状の長処理時間クエリーが確認でき、時には3秒という値になっています。
+
+この2本の線から、ほとんどのクエリーは順調に処理されているが、時折発生する長処理時間のクエリーは深刻であることが分かります。
+対策を施し、95パーセンタイル値が中央値と近接して推移するよにできたら、クエリーは期待通りに処理されるように改善できたことを判断することができます。
+
+<p class="alert alert-warning">
+ヒストグラムは、任意の型の値の分布を測定するために用いることもできます。
+(例えば、"アップロード操作で受け付けたファイルのサイズ"や"試験の点数"のような値の測定に用いることもできます。)
 </p>
 
 
@@ -398,11 +567,39 @@ SETS
 -->
 
 
-<h3 id="sets">セット (Sets)</h3>
+<!-- <h3 id="sets">Sets</h3>
 
 Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
 that.
+
+<%= code_tabs("sets", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="sets-python">
+<%= python <<EOF
+def login(self, user_id):
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="sets-ruby">
+<%= ruby <<EOF
+def login(self, user_id)
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
+end
+EOF
+%>
+  </div>
+</div> -->
+
+<h3 id="sets">セット (Sets)</h3>
+
+セットは、グループ内のユニークな要素をカウントするために使用します。
+
+Webサイトの個別訪問者の数値を追跡する場合は、セットが最適な方法です。
 
 <%= code_tabs("sets", tab_languages) %>
 
@@ -433,7 +630,8 @@ TAGS
 ======================================================
 -->
 
-<h3 id="tags">タグ (Tags)</h3>
+
+<!-- <h3 id="tags">Tags</h3>
 
 Tags are a way of adding dimensions to metrics, so they can be sliced, diced,
 aggregated and compared on the front end. Suppose we wanted to measure the
@@ -505,9 +703,81 @@ in the standard way. Check out some of our other docs for how to use these:
 - <a href="http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
 - <a href="http://docs.datadoghq.com/api/#tags">tags in the API</a>
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
-- <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
+- <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a> -->
 
-<h3 id="sample-rates">サンプル・レート (Sample Rates)</h3>
+<h3 id="tags">タグ (Tags)</h3>
+
+タグは、メトリックスの分類に広がりを持たせるための方法です。ダッシュボードなどのフロントエンドでは、これらのタグを使いメトリックスを、抽出、分類、集約、比較して使います。
+
+例えば、2種類のアルゴリズムの性能を測定したかったとします。
+`algorithm.run_time`メトリックスに`tags=['key:value syntax']`タグをオプションを指定し、計測をします:
+
+<%= code_tabs("tags", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="tags-python">
+<%= python <<EOF
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things here ...
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="tags-ruby">
+<%= ruby <<EOF
+def algorithm_one()
+  statsd.timed('algorithm.run_time', :tags => ['algorithm:one']) do
+    # Do fancy things here ...
+  end
+end
+
+def algorithm_two()
+  statsd.timed('algorithm.run_time', :tags => ['algorithm:two']) do
+    # Do different fancy things here ...
+  end
+end
+EOF
+%>
+  </div>
+</div>
+
+
+フロントエンド上で各メトリックは、和や平均として集計することができます。
+又、最小/最大値を報告することもできます。
+メトリックスは、タグで設定した'key'文字列を使って、'value syntax'ごとに分類することができます。
+例えば、次のようなクエリーを実行することができます:
+
+`avg:algorithm.run_time{*} by {algorithm}`
+
+このクエリーでは、`algorithm.run_time`メトリックスを全てのデーターから検索し、タグ'key'文字列の`algorithm`の'value syntax'文字列ごとに分類集計し、平均を計算します。
+
+<p class="alert alert-warning">
+Datadogのバックエンドでは、ホスト, メトリックス, タグの組み合わせごとに時系列データーを保存しています。
+従って、無限にタグづけされたメトリックスをサポートすることができません。
+ユーザーIDやタイムスタンプなど、無限に増殖する['key':'value syntax']の付与は止めてください。
+それぞれのメトリックスに対し1000種類のタグを限界に付与するようにしてください。
+</p>
+
+タグは文字で開始する必要があり、その後、英数字、アンダースコア、マイナス、コロン、ピリオドやスラッシュを含んでいてもよいです。
+その他の文字はアンダースコアに変換されます。
+タグには、最大200文字で、Unicodeをサポートすることができます。
+タグに使用した文字は、小文字に変換されます。
+
+タグのオプションの機能を利用するために、['key':'vale syntax']構文を利用することを推奨します。
+メトリックスに一般的に使用されるタグの'key'文字列としては、`env`, `instance`, `name`, and `role`があります。
+`device`, `host`, `source`の'key'文字列は、特別な文字列として取り扱われるために、標準的な方法では設定できません。
+特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
+
+- <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
+- <a href="http://docs.datadoghq.com/api/#tags">API レファレンスのtag</a>
+- <a href="http://docs.datadoghq.com/guides/agent_checks/">Datadog Agent チェックの書き方</a>
+- <a href="http://docs.datadoghq.com/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+
+<!--  <h3 id="sample-rates">Sample Rates</h3>
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
 of overhead for performance intensive code paths. To work around this, StatsD
@@ -538,9 +808,43 @@ EOF
   </div>
 </div>
 
+<hr> -->
+
+<h3 id="sample-rates">サンプル・レート (Sample Rates)</h3>
+
+各収集タイミング(ポイン)で発生するデータは、UDPを介しDogStatsDサーバに送信されます。
+パフォーマンスを重視している環境において、このような状況は、高いおバーへド負荷になります。
+この問題を回避するためにDogStatsDでは、サンプル・レートを調整できるようになっています。
+`sample_rate=`をオプションに追記することにより収集タイミング(ポイント)を倍数分の制限することができ、DatadogのDashboardでは時間軸が調整されて表示されるように成ります。
+
+<%= code_tabs("sample-rates") %>
+
+次のコードは、通常の半分のポインのデーターを送信します:
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="sample-rates-python">
+<%= python <<EOF
+while True:
+  do_something_intense()
+  statsd.increment('loop.count', sample_rate=0.5)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="sample-rates-ruby">
+<%= ruby <<EOF
+while true do
+  do_something_intense()
+  statsd.increment('loop.count', :sample_rate => 0.5)
+end
+EOF
+%>
+  </div>
+</div>
+
 <hr>
 
-<h3 id="methods">Other Submission Methods</h3>
+
+<!-- <h3 id="methods">Other Submission Methods</h3>
 
 Using the StatsD server bundled with the Datadog Agent is the simplest
 way of submtting metrics to Datadog, but it's not
@@ -559,9 +863,24 @@ Datadog:
     <a href="https://github.com/vistarmedia">Vistar Media</a> for the great
     contribution).
   </li>
+</ul> -->
+
+<h3 id="methods">他の送信方法</h3>
+
+Datagogにメトリックスを転送するには、Datadog Agent にバンドルされているDogStatsD サーバーを使用する方法が、最も簡単です。
+しかし、それが唯一の方法でhありません。次の方法を使ってもDatadogにメトリックスを送信することができます。
+
+<ul>
+  <li>
+    Datadogの<a href="/api/">HTTP API</a>を使って直接送信する方法
+  </li>
+  <li>
+    codahaleのJava用 metrics ライブラリと（<a href="https://github.com/vistarmedia">Vistar Media</a>が寄贈してくれた)<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>を使って送信する方法
+  </li>
 </ul>
 
-<h3 id="custom">Seeing Your Custom Metrics</h3>
+
+<!-- <h3 id="custom">Seeing Your Custom Metrics</h3>
 
 The quickest way to see your custom metric is to use the metrics explorer. You
 can navigate to it by clicking the "Metrics" link in the top navigation bar.
@@ -577,7 +896,22 @@ metric by tag group using the "One graph per:" field.
 Note that the metrics explorer doesn't save any of these graphs. If you've
 created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
-an existing one.
+an existing one. -->
+
+<h3 id="custom">カスタム・メトリックスの確認方法</h3>
+
+カスタム・メトリックスを参照する最も簡単な方法は、メトリックス・エクスプローラを使用することです。
+Datadogにloginした後、上部のナビゲーションバーにある"Metrics"より"Explor"を選択し、移動することができます。
+
+メトリックス・エクスプローラのページが表示されたらな、"Graph:"の欄にカスタム・メトリックス名を入力します。
+入力時には、自動補完が行われます。
+自動補完がされない場合は、Datadogがそのメトリックスを数時間に渡って受信できていない可能性があります。
+
+"Over:"欄を使うとメトリックスをフィルタリングすることもできます。
+又、"One graph per:"では、メトリックスをタグクループごとにグラフ化することもできます。
+
+メトリックス・エクスプローラの項目に入力し表示されグラフは、自動では保存されません。
+ページに表示されているグラフの保存が必要な場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存てください。
 
 
 <% content_for :javascript do %>
