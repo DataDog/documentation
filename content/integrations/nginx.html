@@ -24,11 +24,9 @@ $ nginx -V |& grep http_stub_status_module
 
 If you see some output with `configure arguments:` and lots of options, then you have it enabled.  Once you have a status-enabled version of nginx, you can set up a URL with for the status module:
 
-```nginx
-location /nginx_status {
-    stub_status;
-}
-```
+    location /nginx_status {
+        stub_status;
+    }
 
 For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAMl config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
 
