@@ -2,27 +2,23 @@
 title: アラート設定方法
 sidebar:
   nav:
-    - header: Guide to Alerting
-    - text: Creating a new alert
+    - header: アラート設定のガイド
+    - text: アラーとの新規設定
       href: "#new"
-    - text: Choosing a metric
+    - text: メトリックスの選定
       href: "#metric"
-    - text: Change alerts
+    - text: メトリックスの変化量によるアラート
       href: "#change"
-    - text: Simple and Multi alerts
+    - text: Simple Alert 又は Multi Alert
       href: "#simple"
-    - text: Alert conditions
+    - text: アラートの条件
       href: "#conditions"
-    - text: No-data alerts
+    - text: データーが届かなくなった時の通知
       href: "#nodata"
-    - text: Autoresolving alerts
+    - text: アラートの自動解除
       href: "#autoresolve"
-    - text: Notifying
+    - text: アラートメッセージ
       href: "#notify"
-    - text: Alerting FAQs
-      href: "#faqs"
-
-
 ---
 
 <!-- <p>Monitoring all of your infrastructure in one place wouldn't be complete without
@@ -206,7 +202,7 @@ event that the agent died and the host is still up, you would be incorrectly
 alerted. We are working towards supporting this with Service Checks, a feature
 we hope to release in the near future.</p> -->
 
-<h4 id="nodata">データーが届かなくなった時のアラート</h4>
+<h4 id="nodata">データーが届かなくなった時の通知</h4>
 
 普通の状態のホストでは、メトリックス・データーを恒常的に送信していることを想定している場合は、そのデーターが届かなく成った場合の通知は非常に便利です。例えば、ホストにインストールされたDatadog Agent は、常に動作し、`system.cpu.iowait` というメトリックス名でiowait値を恒常的に送信してきているはずです。このiowaitの値がしきい値を超えた時に発報するアラートを設定していた場合、データーがDatadog側に届かなくなったことの通知を出をだしておくことは、アラート機能の停止の可能性を知る上で、重要な情報となります。
 
