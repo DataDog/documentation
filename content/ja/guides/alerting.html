@@ -194,7 +194,9 @@ registering a “simple alert” or “multi alert” for a metric that is expec
 reported all the time. Thanks to tags and multi-alerts, this still allows
 one alert to cover a large number of hosts. You can enable this by selecting
 "Notify" in the dropdown beside "if this metric is missing data for more than
-your selected timeframe."</p> <p>On the other hand, if you are monitoring a
+your selected timeframe."</p>
+
+<p>On the other hand, if you are monitoring a
 metric over an auto-scaling group of hosts that may come and go at any time,
 you will get a lot of notifications when hosts are shut down deliberately. In
 that case you should not enable notifications for missing data.</p>
@@ -204,29 +206,11 @@ event that the agent died and the host is still up, you would be incorrectly
 alerted. We are working towards supporting this with Service Checks, a feature
 we hope to release in the near future.</p> -->
 
-<h4 id="nodata">アラートに必要なデーターが受信できない場合のアラート発報</h4>
+<h4 id="nodata">データーが届かなくなった時のアラート</h4>
 
-<p>No-data alerts make it possible to be alerted on a host going down by
-registering a “simple alert” or “multi alert” for a metric that is expected to be
-reported all the time. Thanks to tags and multi-alerts, this still allows
-one alert to cover a large number of hosts. You can enable this by selecting
-"Notify" in the dropdown beside "if this metric is missing data for more than
-your selected timeframe."</p> <p>On the other hand, if you are monitoring a
-metric over an auto-scaling group of hosts that may come and go at any time,
-you will get a lot of notifications when hosts are shut down deliberately. In
-that case you should not enable notifications for missing data.</p>
+普通の状態のホストでは、メトリックス・データーを恒常的に送信していることを想定している場合は、そのデーターが届かなく成った場合の通知は非常に便利です。例えば、ホストにインストールされたDatadog Agent は、常に動作し、`system.cpu.iowait` というメトリックス名でiowait値を恒常的に送信してきているはずです。このiowaitの値がしきい値を超えた時に発報するアラートを設定していた場合、データーがDatadog側に届かなくなったことの通知を出をだしておくことは、アラート機能の停止の可能性を知る上で、重要な情報となります。
 
-<p>This does not entirely encompass host up/down scenarios, because in the
-event that the agent died and the host is still up, you would be incorrectly
-alerted. We are working towards supporting this with Service Checks, a feature
-we hope to release in the near future.</p>
-
-<!-- ノーデータのアラートは「単純警告」またはすべての時間を報告することが期待されているメトリックの「マルチアラート」を登録することで、ダウンするホスト上で警告されることを可能にする。タグとマルチアラートのおかげで、これはまだ1アラートが多数のホストをカバーすることができます。あなたが横にドロップダウンに「通知する」を選択することによって、これを有効にすることができ、「このメトリックは、選択した時間枠を超えるためのデータが欠落している場合。 "
-
-あなたが来て、いつでも行くことができるホストの自動スケーリンググループ上のメトリックを監視している場合のホストが意図的にシャットダウンされたときに一方、あなたは、通知の多くを得るでしょう。その場合、あなたが不足しているデータの通知を有効にしないでください。
-
-エージェントが死亡し、ホストがまだある場合には、あなたが誤って警告を受けることになるので、これは完全に、ホストのアップ/ダウンのシナリオを包含しない。私たちは、サービスチェック、私たちは、近い将来にリリースすることを望む機能でこれをサポートするに向けて取り組んでいます。
- -->
+しかしならがら、構成ホストが自動で増減するオートスケールグループから送られてくるメトリックス・データーの監視では、意図的に不要になた複数のホストを停止した時には、大量の通知を受けることになるでしょう。そのような場合は、通知を無効にすることを検討しても良いかもしれません。
 
 
 <!-- <h4 id="autoresolve">Autoresolving alerts</h4>
@@ -246,18 +230,10 @@ the metric falls below the given threshold.</p> -->
 <h4 id="autoresolve">アラートの自動解除</h4>
 <img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
 
-<p>For some metrics that report periodically across different tags,
-it may make sense to have triggered alerts auto-resolve after a certain time
-period. For example, if you have a counter that reports only when an error is
-fired the alert will never resolve because the metric will never report 0 as
-the number of errors. In this case, you may want to set your alert to resolve
-after 4 hours of inactivity on that metric.
-In most cases this setting will not be useful because you will only want an
-alert to resolve once it actually has been fixed. So in the general case it
-makes sense to leave this as [Never] so that the alert will only resolve when
-the metric falls below the given threshold.</p>
+異なるタグに股がって、定期的に送信されるメトリックスを基にしたアラートでは、発報されたアラートを一定時間後に解除することが合理的かもしれません。例えば、エラーの発生回数を送信するカウンターでは、エラー発生数は0を送信することはないので、アラートは解除されることはありません。このようなケースでは、4時間経過後もメトリックスの変化がなければ、アラートが解除されるように設定しておくと良いかもしれません。
 
-<!-- 異なるタグを介して、定期的に報告し、いくつかの測定基準のために、一定期間の後に、アラートの自動決意を引き起こしたことは意味があります。たとえば、エラーが発射された場合にのみメトリックがエラーの数として0を報告することはありませんので、アラートが解決することはありません報告しカウンターを持っている場合。このケースでは、そのメトリックに対する非アクティブな状態が4時間後に解決するには、アラートを設定したい場合があります。あなただけが実際に修正された後、アラートが解決したいと思うでしょうので、ほとんどの場合、この設定は便利ではありません。だから、一般的なケースでは、メトリックが特定のしきい値を下回ったときにアラートが唯一解決できるようにするために、[決して]としてこれを残すために理にかなっています。 -->
+特定の場合をのぞいて自動解除の設定は、あまりオススメではありません。なぜならばアラートは、「実際に問題が修正された時のみ」解除したいからです。
+従って一般的なケースでは、この部分の設定を`Never` にしておき、メトリックスが設定しきい値以下に戻った際に、アラートが解除されるようにします。
 
 
 <!-- <h4 id="notify">Notifying</h4>
@@ -288,12 +264,3 @@ As an alternative you can set up an @ notification in the body of the event whic
 event via email whenever it occurred.</li>
 
 </ul> -->
-
-<h3 id="faqs">アラート機能に関するFAQs</h3>
-<ul>
-<li>Can you alert on a function? Not currently, but we're working towards this!</li>
-<li>Can you alert on an event? Not currently, but we're discussing how we'd like to implement this.
-As an alternative you can set up an @ notification in the body of the event which would deliver the
-event via email whenever it occurred.</li>
-
-</ul>
