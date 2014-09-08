@@ -79,6 +79,9 @@ specifications:
       ]
     }
 
+Once these credentials are configured within AWS, go into the 
+<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services">AWS integration tile</a> 
+within Datadog to pull this data in.
 
 ### <a name="cloudtrail"></a>CloudTrail integration
 
@@ -89,6 +92,8 @@ AWS CloudTrail records AWS API calls for your account in log files. Datadog can 
 #### How to configure CloudTrail?
 
 First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. <a href="#cloudwatch">See above explanation</a>.
+Besides the instructions below you will also have to configure the separate 
+<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/cloudtrail">Cloudtrail integration tile</a> within Datadog.
 
 CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from.
 

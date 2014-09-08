@@ -9,6 +9,8 @@ sidebar:
       href: "#grammar"
     - text: Arithmetic & Functions
       href: "#functions"
+    - text: "Y-Axis Controls"
+      href: "#yaxis"
 ---
 
 <h2 id="editor">Find the Graph Editor</h2>
@@ -359,6 +361,146 @@ The <code>top()</code> method also has the following convenience functions, all 
   </dl>
 </div>
 
+There are also a few functions you can append to a query which we recommend for expert users only. 
+<p>
+One of these is <code>.rollup()</code>. Appending this function allows you to control the 
+number of points rolled up into a single point. This function takes two parameters, method and time, like so:
+<code>.rollup(method,time)</code>.
+
+The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, 
+or both combined like <code>.rollup(sum,120)</code>. There are some checks on this, 
+though, because for a given time range we do not return more than 350 points. Thus if 
+you're requesting <code>.rollup(20)</code> where 20 is in seconds, and ask for a 
+month of data, we will be returning the points at a rollup of far greater than 20 seconds.
+</p>
+
+<code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions, 
+which are only intended for metrics submitted in a certain way (for metadata types where 
+that is acceptable).  At present, for metrics submitted as rates or counters via statsd, 
+appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly.
+For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
+<code>.as_rate()</code> will have no effect.
+ 
+We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query. 
+We will also be building these functions fully into the graph editor in the near 
+future. For more on <code>.as_count()</code> please see our blog post 
+<a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>. 
+
+
+<h4 id="yaxis"> Y-Axis Controls</h4>
+
+The Datadog y-axis controls (currently just via the JSON editor) allow you to:
+<ul>
+ <li>Clip y-axis to specific ranges</li>
+ <li>Remove outliers either by specifying a percentage or an absolute value to remove outliers</li>
+ <li>Change y-axis scale from linear to log, sqrt or power scale</li>
+</ul>
+
+There are three configuration settings:
+<ul>
+<li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for 
+    default behvior. Default value is "auto"</li>
+<li><code>max</code> (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto" 
+    for default behavior. Default value is "auto"</li>
+<li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##" 
+    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
+</ul>
+ 
+Examples:
+ 
+
+<pre><code>"yaxis": {
+    "min": "auto", 
+    "max": 200, 
+    "scale": "log"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "min": 200, 
+    "scale": "sqrt"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "min": 9000, 
+    "max": 10000
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "scale": "pow0.1"
+}</code></pre>
+ 
+<pre><code>"yaxis": {
+    "scale": "pow3"
+}</code></pre>
+ 
+ 
+<h4>Outliers</h4> 
+
+Outliers configuration allows you to automatically change y-axis bounds based on a 
+threshold. Thresholds can be a percentage or an absolute value, and it can apply to 
+both both ends of the graph (lower and upper).
+ 
+For outliers, there are two ways to set up the configuration.
+ 
+To begin, there is a simple configuration where you specify an absolute value or a percentage and all 
+values above the value or all values that sit within the top ##% will be cutoff.
+ 
+Examples:
+ 
+<code>"outliers": 30</code> // all values above 30 will not appear<br>
+<code>"outliers": "5%"</code> // the top 5% of that data will not appear
+ 
+ 
+<p> 
+Advanced configuration works the same way as simple configuration, with the added 
+flexibility of configuring the lower or the upper or both parts of the graph. For 
+example, the following configuration will limit the graph to data points that are 
+not in the bottom 10% nor in the top 30%. 
+
+<pre><code>"outliers": {
+   "top": "30%",
+   "bottom": "10%"
+}</code></pre>
+
+ 
+The following will show all data except those with values higher than 15:
+
+ 
+<pre><code>"outliers": {
+    "above": 15
+}</code></pre>
+ 
+The following will hide data points below 2:
+ 
+<pre><code>"outliers": {
+    "below": 2
+}</code></pre>
+ 
+ 
+ 
+Here is a full JSON example:
+ 
+<pre><code>{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "system.cpu.idle{host:hostname}",
+      "stacked": false
+    }
+  ],
+  "events": [],
+  "yaxis": {
+    "scale": "log"
+  },
+  "outliers": {
+       "top": "5%",
+       "below": 15
+   }
+}</code></pre>
+
+</p>
+
+
 #### Examples
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
@@ -411,3 +553,10 @@ Here is an example using the <code>week_before()</code> function:
         }
       ]
     }
+
+
+
+
+
+
+
