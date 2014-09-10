@@ -3,18 +3,34 @@
 
 <% unless @hide_datadog %>
 
-<<%= @heading %> id="support">Web サポート:</<%= @heading %>>
+<!-- <<%= @heading %> id="support">Web サポート:</<%= @heading %>>
 Messages in the <a href="http://app.datadoghq.com/event/stream">event stream</a> containing
-<strong>@support</strong> will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app.
+<strong>@support</strong> will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app. -->
 
-<<%= @heading %> id="email">Email:</<%= @heading %>>
-You can also contact our Support Team via email at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.
+### Web でのサポート:
 
-<<%= @heading %> id="irc">IRC:</<%= @heading %>>
+Dashboard上のイベントストリームで、**@support**を含むメッセージは、Datadogのサポートチームに届きます。この方法は、"グラフのスナップショット"や"特定のイベント"を参照してサポートを要請する時に便利です。
+更に東海岸時間の日中のみの対応ですが、Datadogの関連全ページの左下には、ライブチャットサービスへのリンクも準備しています。
+
+<!-- <<%= @heading %> id="email">Email:</<%= @heading %>>
+You can also contact our Support Team via email at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>. -->
+
+### Eメール:
+また、電子メールでもサポートチームに連絡することができます。
+[support@datadoghq.com](mailto:support@datadoghq.com)
+
+
+<!-- <<%= @heading %> id="irc">IRC:</<%= @heading %>>
 Reach out to our team and other Datadog users in our IRC channel, <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>.
-(There's a <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1"> web chat client, too</a>.)
+(There's a <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1"> web chat client, too</a>.) -->
+
+### IRC：
+Datadogのチームメンバーや他のユーザーとの情報交換は、[freenode上の#datadogルーム](irc://irc.freenode.net/datadog)を準備しています。（次のリンクには、[ウェブチャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1)も準備しております。）
 
 
-<<%= @heading %> id="status">サービス・ステータス:</<%= @heading %>>
+<!-- <<%= @heading %> id="status">サービス・ステータス:</<%= @heading %>>
 Our <a href="http://status.datadoghq.com/">Status Page</a> and <a href="http://www.twitter.com/datadogops">Ops twitter account</a> have the latest on any performance issues that we are experiencing.
-<% end %>
+<% end %> -->
+
+### サービス・ステータス:
+Datadogの[サービス・ステータス](http://status.datadoghq.com/)ページと["datadogops"](http://www.twitter.com/datadogops) twitterアカウントでは、サービスの運用状況に関する最新情報を公開しています。

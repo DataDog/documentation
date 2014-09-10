@@ -12,13 +12,13 @@ A -> B -> C -> D
 
 - text: Getting Started with the Agent      (Rank=A: done)
 - text: Datadog Overview                    (Rank=A: done)
-- text: Sending App Metrics                 (Rank=B: 98% done)
-- text: Log Parsing in the Agent            (Rank=B: 90% done)
+- text: Sending App Metrics                 (Rank=B: done)
+- text: Log Parsing in the Agent            (Rank=B: done)
 - text: Writing an Agent Checks             (Rank=C: yet)
 - text: Setting up Service Checks           (Rank=B: yet)
 - text: Deploying the Agent with Chef       (Rank=D: yet)
-- text: Guide to Alerting                   (Rank=B: yet)
-- text: Guide to Dashboard Templating       (Rank=B: yet)
+- text: Guide to Alerting                   (Rank=A: done)
+- text: Guide to Dashboard Templating       (Rank=B: done)
 - text: Single Sign On With SAML            (Rank=D: yet)
 
 ### Refelence
