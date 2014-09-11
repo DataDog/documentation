@@ -41,7 +41,7 @@ sidebar:
     - text: FAQ
       href: "/ja/faq/"
 ---
-<h4>Welcome to Datadog! We occasionally receive questions regarding the specifics
+<!-- <h4>Welcome to Datadog! We occasionally receive questions regarding the specifics
 of our pricing; the basic plans and the most frequently seen questions can be
 found below.</h4>
 
@@ -67,7 +67,27 @@ and 100 custom metrics)</li>
    <li>  Payment terms (month to month or annual prepaid)</li>
   </ol>
   </li>
-</ol>
+</ol> -->
+
+### Datadogへようこそ!
+
+#### 基本的な料金プランの解説と使用料に関するFAQを以下に紹介します。
+
+---
+
+- #### Datadogのモニタリング・サービスには３種類の料金プランがあります:
+
+1. **Free(無償) プラン** は、5台以下のホスト構成のユーザーに対し適用します。Freeプランでは、モニターリングデータの保管期間は1日になります。Free プランからPro プランへの変更においては、Free プランで使っていた設定は全て引き継がれます。従って、既にモニターリングしているシステムがあっても、プラン変更によって影響を受けることはありません。
+
+2. **Pro プラン** は、1-100台以下のホスト構成のユーザーに対して適用します。Pro プランでは、モニターリングデータの保管期間は1年になります。 Pro プランには、メトリックスアラートとemailのサポートが含まれてます。
+
+3. **Enterprise プラン** は、100台以上のホスト構成のユーザー、又は、Pro プランのサービス内容に対して特別な調整が必要なユーザーに対して適応します。
+
+   - Enterprise プランの価格設定の基準は、次の項目になります:
+   1. データーの保管期間と、カスタム・メトリックスの数(基本プランには、保管期間1年と100項目のカスタム・メトリックスが含まれます)
+   2. 運用環境下よりメトリックスを転送するサーバーの総数
+   3. 支払い条件 (月払い、年払い、など)
+
 
 <!-- <p>
 For all plans, custom metrics and events are supported but limited to 100
@@ -78,14 +98,12 @@ an unlimited number of metrics to us can also count as custom metrics (e.g:
 JMX / WMI / Nagios / Cacti).
 </p>
  -->
-<p>
-For all plans, custom metrics and events are supported but limited to 100
-metrics per host. Custom metrics refer to any metrics that are not part of our
-regular integration suite, for example using custom checks or API-level metrics
-in your application stack. To clarify, integrations that can potentially emit
-an unlimited number of metrics to us can also count as custom metrics (e.g:
-JMX / WMI / Nagios / Cacti).
-</p>
+
+カスタム·メトリックとイベントは、全てのプランで使うことができます。
+しかし、カスタム·メトリックは、ホスト当たり100個が上限になります。
+カスタムメトリックとは、"regular integration suite" が一般的に収集するメトリックス以外のメメトリックスを言います。
+例えば、アプリケーション·スタックで実施すカスタム・チェックやAPIレベルのメトリックが該当します。
+更に明確化が必要なポイントとして、JMX, WMI, Nagios, Cactiなどの無限のメトリックスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタム・メトリックスに分類されます。
 
 
 <!-- <p>
@@ -94,11 +112,7 @@ is one point per second). For greater data retention needs, please reach out to 
 sales@datadoghq.com</a>.
 </p> -->
 
-<p>
-Pro and Enterprise data retention is for one year at full resolution (maximum
-is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
-sales@datadoghq.com</a>.
-</p>
+Pro プランとEnterprise プランのデーター保管期間はフル解像度(1ポイント/秒）で、1年です。一般的なプランとして提供しているデーター保管期間の仕様より大きなデーターの保管をご希望の場合は、サポートチームまでご連絡ください。[sales@datadoghq.com](mailto:sales@datadoghq.com)
 
 
 <!-- <p>
@@ -107,15 +121,13 @@ for that month.</h5> This is per active host in Datadog, whether or not it's run
 the agent.
 </p> -->
 
-<p>
-<h5>Each invoice is determined by the high watermark of concurrently running hosts
-for that month.</h5> This is per active host in Datadog, whether or not it's running
-the agent.
-</p>
+---
 
+- #### 請求書は、その月に同時にデーターを転送してきているホスト台数の最高値によって算出されます。
 
-<br>
+ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、DatadogでActivenなホストなホストとして登録されているかどうかで判定します。
 
+---
 <!-- <h5>Do you support hourly pricing?</h5>
 <p>
 We do support hourly pricing at $0.03 per hour per host or a hybrid
@@ -135,24 +147,16 @@ for the excess hosts.
 </p></blockquote>
  -->
 
-<h5>Do you support hourly pricing?</h5>
-<p>
-We do support hourly pricing at $0.03 per hour per host or a hybrid
-of monthly and hourly. Here is how that hybrid works:
-</p>
-<blockquote><p>
-You tell us how many hosts you will run each month and we will bill you for that baseline number of
-hosts at $15 per host (you can change this number at the beginning of each
-month if you like). Then for any hosts beyond the committed number previously
-determined, our billing system will charge you $0.03 per host per hour. This
-works out to be much less expensive for extra hosts that may come up for a
-short period, but a little bit more than monthly rates if you ran on an hourly
-rate all the time (~$23/host/month).  The metering samples how many hosts are
-reporting data once every hour, thus the minimum increment for an hourly server
-is one hour. If that number exceeds your monthly commit, we just charge overage
-for the excess hosts.
-</p></blockquote>
+- #### 時間課金で請求を発行することは、できますか？
 
+$0.03/ホストの使用料を基に、時間課金で請求書を発行すことができます。又、月極の課金形態と時間課金形態の併用も可能です。併用での支払いがどのように機能するかは、次を参照してください:
+
+> まず、月々に請求の基本とな成約ホスト数を申請していただきます。ここで申請したホストに対しては、1台あたり$15/月で請求します。尚、この基本となる台数は、月初に変更することができます。この成約台数を超えた場合につき1台あたり$0.03/hrを請求します。短期間しか使用しないホストが並列で起動するようなケースでは、この併用払いの方法を採用することで使用料を押さえることができます。しかしながら、$0.03を1ヵ月の使用料に置き換えると$23/台と、通常の1台分より割高になります。
+> 課金の方法は、当該時間帯に何台のホストがデーターを転送してきているかを集計します。従って、１台のホストの課金の最低単位は1時間になります。
+> If that number exceeds your monthly commit, we just charge overage
+for the excess hosts.
+
+---
 
 <!-- <h5>Do non-reporting or inactive hosts count?</h5>
 <p>
@@ -161,13 +165,9 @@ some time (up to 24 hours) for the hosts with the inactive status '???' to drop
 out of the infrastructure view.
 </p> -->
 
-<h5>Do non-reporting or inactive hosts count?</h5>
-<p>
-Non-reporting hosts (status '???') do not count towards billing. It might take
-some time (up to 24 hours) for the hosts with the inactive status '???' to drop
-out of the infrastructure view.
-</p>
+- #### データーを受信できないホストとか、非Activeなホストは、請求基準の総数に入りますか?
 
+データーを受信できないホスト(`Status↓` 欄が '???')は、請求基準には含まれません。Dashboaradの`Infrastructure` ビューで、`Status↓` 欄に '???'が表示されているホストに対しては、ビューに掲載されなくなるまでに少々時間(最長24時間)がかかります。
 
 <!-- <p>
 A transient server that you monitored in Datadog for a short period of time
@@ -177,13 +177,9 @@ and you can graph it on a dashboard if you know the specific host by name (or
 by its tags).
 </p> -->
 
-<p>
-A transient server that you monitored in Datadog for a short period of time
-will clear out of the infrastructure view after 24 hours of not reporting any
-data. We will still however retain the historical data (for a paid account),
-and you can graph it on a dashboard if you know the specific host by name (or
-by its tags).
-</p>
+仮サーバー等、短命ホストの監視にDatadogを使った場合、そのホストからデーターを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランに関しては、ダッシュボードにホスト名前が表示されなくなった後も、Datadogに転送されてきたデーターは保管されています。対象のホスト名やタグが分かれば、転送済みデーターを基にダッシュボード上にグラフを表示することができます。
+
+---
 
 
 <!-- <h5>How do I see what I'll get charged for this current month?</h5>
@@ -193,13 +189,11 @@ admin you can check out past invoices
 <a href="https://app.datadoghq.com/account/billing_history">here</a>.
 </p> -->
 
-<h5>How do I see what I'll get charged for this current month?</h5>
-<p>
-There is not currently a way to see what the upcoming bill looks like; as an
-admin you can check out past invoices
-<a href="https://app.datadoghq.com/account/billing_history">here</a>.
-</p>
+- #### 今月の請求額を知る方法はありますか?
 
+ユーザーの皆様が、今月末の請求書の金額を方法を準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
+
+---
 
 <!-- <h5>Can I set a specific email address to receive invoices at?</h5>
 <p>
@@ -208,9 +202,10 @@ is not a team member within Datadog (invoices@yourcompany.com)
 <a href="https://app.datadoghq.com/account/billing">here</a>.
 </p> -->
 
-<h5>Can I set a specific email address to receive invoices at?</h5>
-<p>
-You can set a specific email address to receive invoices, even if that address
-is not a team member within Datadog (invoices@yourcompany.com)
-<a href="https://app.datadoghq.com/account/billing">here</a>.
-</p>
+- #### 請求書を受信するために、アカウント登録とは別のメール・アドレスを設定することはできますか？
+
+請求書の受信用に別のメールアドレスを設定することは可能です。更にそのメール・アドレスが、チームメンバーとしてDatadogに登録されてなくても大丈夫です。(例: invoices@yourcompany.com)
+
+ダッシュボードの[`ユーザー名` タブ -> `billing`](https://app.datadoghq.com/account/billing)から設定ができます。
+
+---
