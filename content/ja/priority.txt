@@ -30,7 +30,7 @@ A -> B -> C -> D
 - text: Integrations                        (Rank=B: yet)
 - text: DogStatsD                           (Rank=D: yet)
 - text: FAQ                                 (Rank=D: yet)
-- text: Billing FAQ                         (Rank=B: yet)
+- text: Billing FAQ                         (Rank=B: done)
 
 
 
