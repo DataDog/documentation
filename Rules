@@ -36,13 +36,13 @@ compile '*' do
       # Run `touch NO_SYNTAX` to disable syntax highlighting, since it's very
       # slow. Remove it to re-enable.
       filter :colorize_syntax, :colorizers => {
-              :javascript => :pygmentize,
-              :console => :pygmentize,
-              :python => :pygmentize,
-              :ruby => :pygmentize,
-              :pycon => :pygmentize,
-              :json => :pygmentize
-          }
+              :javascript => :rouge,  
+              :console => :rouge,
+              :python => :rouge,
+              :ruby => :rouge,
+              :pycon => :rouge,
+              :json => :rouge
+         }
     end
 
     id = @item.identifier
