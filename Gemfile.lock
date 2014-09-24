@@ -60,7 +60,6 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pygmentize (0.0.3)
     rack (1.5.2)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
@@ -96,7 +95,6 @@ DEPENDENCIES
   nanoc
   nokogiri
   oj
-  pygmentize
   rack-contrib
   rack-livereload
   rake
