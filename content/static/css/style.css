@@ -59,6 +59,18 @@ h1, h2, h3 {
     font-family: 'Open Sans', sans-serif;
 }
 
+.nav.search {
+	margin-top: 60px;
+}
+.nav.search .nav-header:first-child {
+      border-radius: 4px 4px 0 0;
+}
+.nav.search .nav-header {
+  margin-top: 0;
+  background-color: #9d6ebf;
+    color: #fff;
+    text-shadow: none;
+}
 .nav.sidebar {
     margin-top: 90px;
     width: 220px;

@@ -8,7 +8,7 @@ guard 'nanoc' do
 end
 
 guard 'livereload' do
-   watch(%r{^output/.+\.(css|js|html)})
+  watch(%r{^output/.+\.(css|js|html)})
 end
 
 guard 'rack', port: '3000'

@@ -55,6 +55,7 @@ GEM
       cri (~> 2.3)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    oj (2.10.2)
     pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -94,6 +95,7 @@ DEPENDENCIES
   mime-types
   nanoc
   nokogiri
+  oj
   pygmentize
   rack-contrib
   rack-livereload

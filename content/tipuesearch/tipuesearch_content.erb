@@ -1,0 +1,12 @@
+<%
+require 'Nokogiri'
+pages = @items.select{ |item| %w{article page documentation}.include? item[:kind] }.collect{ |item|
+  {
+    "title" => item[:title],
+    "text" => Nokogiri::HTML(item.compiled_content).at('body').inner_text,
+    "tags" => "",
+    "loc" => item.rep_named(:default).path
+  }
+}
+%>
+var tipuesearch = {"pages": <%= Oj.dump(pages) %>};
