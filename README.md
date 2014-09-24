@@ -35,21 +35,9 @@ $ bundle exec rake view
 ```
 
 ### Run a local webserver and auto-update:
+(This is now super-quick, so there is no reason not to do this.)
 
 ```
-$ bundle exec rake autocompile
+$ bundle exec guard
 ```
 
-### Toggle Syntax Highlighting
-
-Syntax highlighting is really slow, so to turn it off while developing, run:
-
-```
-$ rake disable_syntax
-```
-
-To turn it back on:
-
-```
-$ rake enable_syntax
-```

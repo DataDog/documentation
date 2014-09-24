@@ -2,7 +2,7 @@
 # before nanoc starts compiling.
 
 require 'tempfile'
-require './lib/snippets.rb'
+# require './lib/snippets.rb'
 
 
 STATUS_CODES = {
