@@ -6,7 +6,7 @@ require 'rake/clean'
 #  require 'nanoc3/tasks'
 # end
 
-CLEAN.include(['output', 'tmp'])
+CLEAN.include(%w(output tmp))
 
 CODE_SNIPPETS = 'code_snippets'
 
@@ -46,6 +46,8 @@ end
 
 desc 'Run Guard, autobuilds/reloads site'
 task :guard do
+  puts 'Auto Compiling and Live Reloading.'
+  puts 'Be Patient...the magic takes a few seconds to start'
   sh 'bundle exec guard'
 end
 

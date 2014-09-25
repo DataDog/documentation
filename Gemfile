@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 gem 'adsf'
 gem 'kramdown'
 gem 'mime-types'
@@ -13,9 +13,9 @@ gem 'dogapi', '~> 1.8.1'
 gem 'rouge'
 gem 'oj'
 group :development do
-	gem 'guard-nanoc'
-	gem 'guard-livereload'
-	gem 'guard-rack'
-	gem 'rack-contrib'
-	gem 'rack-livereload'
+  gem 'guard-nanoc'
+  gem 'guard-livereload'
+  gem 'guard-rack'
+  gem 'rack-contrib'
+  gem 'rack-livereload'
 end
