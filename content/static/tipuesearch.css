@@ -1,0 +1,179 @@
+
+/*
+  Tipue Search 1.1.1
+  Tipue Search Copyright (c) 2012 Tri-State Consultants
+  Tipue Search is free for both both commercial and non-commercial use and released under the MIT License.
+  For the latest release, documentation and licence see http://www.tipue.com/search
+  */
+
+
+#tipue_search_input
+{
+  font-size: 12px;
+  color: #333;
+  padding: 7px 7px 7px 41px;
+  margin-top: 1px;
+  width: 170px;
+  border: 1px solid #d3d3d3;
+  border-radius: 0px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  background: #fff url('images/search.png') no-repeat 15px;
+}
+#tipue_search_input:focus
+{
+  border-color: #c3c3c3;
+  -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+  box-shadow: 0 0 3px rgba(0,0,0,.2);     
+}
+#tipue_search_button
+{
+  width: 60px;
+  height: 33px;
+  margin-top: 1px;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  background: #f1f1f1 url('/images/search.gif') no-repeat center;
+  outline: none;
+}
+#tipue_search_button:hover
+{
+  border: 1px solid #c3c3c3;
+  -moz-box-shadow: 1px 1px 2px #e3e3e3;
+  -webkit-box-shadow: 1px 1px 2px #e3e3e3;
+  box-shadow: 1px 1px 2px #e3e3e3;
+}
+
+#tipue_search_content
+{
+  clear: left;
+  display: none;
+  width: 650px;
+  padding: 0 0 13px 0;
+  margin: 0;
+}
+
+#tipue_search_warning_head
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+#tipue_search_warning
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #555;
+  margin: 13px 0;
+}
+#tipue_search_warning a
+{
+  color: #36c;
+  text-decoration: none;
+}
+#tipue_search_warning a:hover
+{
+  padding-bottom: 1px;
+  border-bottom: 1px solid #ccc;     
+}
+
+#tipue_search_results_count
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #555;
+}
+
+#tipue_search_content_title
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+}
+#tipue_search_content_title a
+{
+  color: #36c;
+  text-decoration: none;
+}
+#tipue_search_content_title a:hover
+{
+  padding-bottom: 1px;
+  border-bottom: 1px solid #ccc;     
+}
+#tipue_search_content_text
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #555;
+  line-height: 20px;
+  padding: 5px 0;
+}
+#tipue_search_content_loc
+{
+  font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  font-size: 13px;
+}
+#tipue_search_content_loc a
+{
+  color: #777;
+  text-decoration: none;
+}
+#tipue_search_content_loc a:hover
+{
+  padding-bottom: 1px;
+  border-bottom: 1px solid #ccc;     
+}
+
+#tipue_search_foot
+{
+  margin: 43px 0 31px 0;
+}
+#tipue_search_foot_boxes
+{
+  padding: 0;
+  margin: 0;
+  font-family: 'Lucida Grande', Verdana, Helvetica, sans-serif;
+  font-size: 11px;
+}
+#tipue_search_foot_boxes li
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+#tipue_search_foot_boxes li a
+{
+  padding: 8px 10px 11px 10px;
+  background-color: #f5f5f5;
+  background: -webkit-linear-gradient(top, #f7f7f7, #f1f1f1);
+  background: -moz-linear-gradient(top, #f7f7f7, #f1f1f1);
+  background: -ms-linear-gradient(top, #f7f7f7, #f1f1f1);
+  background: -o-linear-gradient(top, #f7f7f7, #f1f1f1);
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  color: #444;
+  margin-right: 7px;
+  text-decoration: none;
+  text-align: center;
+}
+#tipue_search_foot_boxes li.current
+{
+  padding: 8px 10px 11px 10px;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  color: #333;
+  margin-right: 7px;
+  text-align: center;
+}
+#tipue_search_foot_boxes li a:hover
+{
+  border: 1px solid #c3c3c3;
+  -moz-box-shadow: 1px 1px 2px #e3e3e3;
+  -webkit-box-shadow: 1px 1px 2px #e3e3e3;
+  box-shadow: 1px 1px 2px #e3e3e3;
+}

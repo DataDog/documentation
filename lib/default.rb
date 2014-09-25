@@ -2,7 +2,8 @@
 # before nanoc starts compiling.
 
 require 'tempfile'
-require './lib/snippets.rb'
+#require './lib/snippets.rb'
+require 'oj'
 
 
 STATUS_CODES = {
@@ -64,4 +65,3 @@ def argument(name, description, options={})
     </li>
   EOF
 end
-

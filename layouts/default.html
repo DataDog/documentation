@@ -17,8 +17,10 @@ this layout provides a sidebar and main column.
 
         <!-- SIDEBAR -->
         <div class="span3" id="sidebarcolumn">
-        <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+
+      
           <ul class="nav nav-tabs nav-stacked sidebar">
+        <% if @item[:sidebar] && @item[:sidebar][:nav] %>
           <% @item[:sidebar][:nav].each do |i| %>
             <% if i[:header] %>
               <li class="nav-header"><%= i[:header] %></li>
@@ -26,8 +28,16 @@ this layout provides a sidebar and main column.
               <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
             <% end %>
           <% end %>
-          </ul>
         <% end %>
+          <li class="nav-header">Documentation Search</li>
+			<li>
+				<form action="/search/">
+					<input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+				</form>
+			</li>
+          </ul>
+
+        
         &nbsp;
         </div>
 
