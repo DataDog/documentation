@@ -20,6 +20,8 @@ $ bundle install --path vendor/bundle
 Once the deps are installed, you should be able to accomplish what you need to
 with the included Rake tasks.
 
+When writing docs, please use Markdown. This site actually uses Kramdown. To learn about the syntax, [see this site][1]
+
 ## Doing stuff
 
 ### Compile the static site:
@@ -40,4 +42,4 @@ $ bundle exec rake view
 ```
 $ bundle exec guard
 ```
-
+[1]: http://kramdown.gettalong.org/quickref.html

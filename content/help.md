@@ -14,9 +14,9 @@ sidebar:
       href: "#status"
 ---
 
-<p>
-If you have any questions about Datadog or a use case our <a href="http://docs.datadoghq.com">Docs</a> didn't mention, we'd love to help! Here's how
+If you have any questions about Datadog or a use case our [Docs][1] didn't mention, we'd love to help! Here's how
 you can reach out to us:
-</p>
 
 <%= render '_contact_info', :heading_size => 3 %>
+
+[1]: http://docs.datadoghq.com
