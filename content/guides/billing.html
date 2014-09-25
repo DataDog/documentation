@@ -40,6 +40,9 @@ sidebar:
 of our pricing; the basic plans and the most frequently seen questions can be
 found below.</h4>
 
+<br>
+<h4><u>Basic Plan</u></h4>
+
 There are three plans within Datadog:
 <ol>
 <li>
@@ -86,6 +89,8 @@ the agent.
 </p>
 
 <br>
+<h4><u>Frequently Asked Questions</u></h4>
+
 <h5>Do you support hourly pricing?</h5>
 <p>
 We do support hourly pricing at $0.03 per hour per host or a hybrid
@@ -118,6 +123,25 @@ will clear out of the infrastructure view after 24 hours of not reporting any
 data. We will still however retain the historical data (for a paid account),
 and you can graph it on a dashboard if you know the specific host by name (or
 by its tags).
+</p>
+
+<h5>How will an AWS integration impact my monthly billing?</h5>
+<p>
+We bill for all hosts running the agent as well as any hosts picked up via the
+AWS integration (not ELBs or other namespaces). You will not get double-charged
+if you are running the agent on a host <b>AND</b> picking it up via AWS integration.
+</p>
+
+<p>
+If you would like to control what metrics you are aggregating via AWS integration,
+select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a>
+and customize accordingly.
+</p>
+
+<h5>How will a VMware integration impact my monthly billing?</h5>
+<p>
+  The base pricing is $15 per virtual machine per month. See above for more
+  general information.
 </p>
 
 <h5>How do I see what I'll get charged for this current month?</h5>
