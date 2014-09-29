@@ -14,36 +14,35 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+require './lib/rule_helper'
 compile 'sitemap' do
   filter :erb
 end
 
-route 'sitemap' do
-  item.identifier.chop + '.xml'
+compile '/tipuesearch/tipuesearch_content/' do
+  filter :erb
+end
+
+compile '/tipuesearch/*/' do
+
 end
 
 compile '/static/*' do
-  # don’t filter or layout
+
 end
 
 compile '*' do
-  if item.binary?
-    # don’t filter binary items
-  else
+  unless item.binary?
     filter :erb
     filter :kramdown
-    if not File.exists? 'NO_SYNTAX'
-      # Run `touch NO_SYNTAX` to disable syntax highlighting, since it's very
-      # slow. Remove it to re-enable.
-      filter :colorize_syntax, :colorizers => {
-              :javascript => :pygmentize,
-              :console => :pygmentize,
-              :python => :pygmentize,
-              :ruby => :pygmentize,
-              :pycon => :pygmentize,
-              :json => :pygmentize
-          }
-    end
+    filter :colorize_syntax, colorizers: {
+      javascript: :rouge,
+      console: :rouge,
+      python: :rouge,
+      ruby: :rouge,
+      pycon: :rouge,
+      json: :rouge
+    }
 
     id = @item.identifier
     case
@@ -60,6 +59,16 @@ compile '*' do
     else
       layout 'default'
     end
+  end
+end
+
+route 'sitemap' do
+  item.identifier.chop + '.xml'
+end
+
+route '/tipuesearch/*' do
+  unless item.identifier.include?('#')
+    "/tipuesearch/#{basename(item.attributes[:filename])}.js"
   end
 end
 

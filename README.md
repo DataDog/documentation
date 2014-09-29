@@ -20,6 +20,8 @@ $ bundle install --path vendor/bundle
 Once the deps are installed, you should be able to accomplish what you need to
 with the included Rake tasks.
 
+When writing docs, please use Markdown. This site actually uses Kramdown. To learn about the syntax, [see this site][1]
+
 ## Doing stuff
 
 ### Compile the static site:
@@ -35,21 +37,9 @@ $ bundle exec rake view
 ```
 
 ### Run a local webserver and auto-update:
+(This is now super-quick, so there is no reason not to do this.)
 
 ```
-$ bundle exec rake autocompile
+$ bundle exec guard
 ```
-
-### Toggle Syntax Highlighting
-
-Syntax highlighting is really slow, so to turn it off while developing, run:
-
-```
-$ rake disable_syntax
-```
-
-To turn it back on:
-
-```
-$ rake enable_syntax
-```
+[1]: http://kramdown.gettalong.org/quickref.html
