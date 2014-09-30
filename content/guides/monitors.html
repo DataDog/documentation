@@ -1,0 +1,359 @@
+---
+title: Guide to Monitoring
+kind: documentation
+sidebar:
+  nav:
+    - header: Guide to Monitoring
+    - text: Hosts
+      href: "#host"
+    - text: Metrics
+      href: "#metric"
+    - text: Integrations
+      href: "#integration"
+    - text: Processes
+      href: "#process"
+    - text: Network
+      href: "#network"
+    - text: Custom Checks
+      href: "#custom"
+    - text: Notifications
+      href: "#notification"
+    - text: Monitor FAQs
+      href: "#faqs"
+---
+
+<p>Monitoring all of your infrastructure in one place wouldn't be complete
+without the ability to know when critical changes are occurring. Datadog gives
+you the ability to create monitors that will actively check metrics, integration
+statuses, processes and more.</p>
+
+<p>Once a monitor is created, you will be notified when the its conditions are
+met. You can notify team members via email, 3rd party services (e.g. Pagerduty
+or Hipchat) or other custom endpoints via webhooks.</p>
+
+<p>Triggered monitors will appear in the event stream, allowing collaboration
+around active issues in your applications or infrastructure. Datadog provides a
+high-level view of open issue on the
+<a href="https://app.datadoghq.com/monitors/triggered">Triggered Monitors</a>
+page as well as general monitor management on the
+<a href="https://app.datadoghq.com/monitors">Manage Monitors</a> page.</p>
+
+<h2 id="create">Creating a Monitor</h2>
+
+Nagivate to the
+<a href="https://app.datadoghq.com/monitors/create">Create Monitors</a> page by
+highlighting the "Monitors" tab in the top menu and selecting the "Create
+Monitors" sub-tab.  You will be presented with a list of monitor types on the
+left. This guide will walk through the configuration of each type.
+
+<img src="/static/images/monitor/nav.png" width="400px">
+
+<h2 id="host">Host Monitors</h2>
+
+<em>Requires Datadog Agent version >= 5.0.0.</em>
+
+<img src="/static/images/monitor/host_monitor.png">
+
+Every Datadog Agent collection reports a heartbeat called
+<code>datadog.agent.up</code> with a status <code>UP</code>. You can monitor
+this heartbeat across one or more hosts.
+
+<ol>
+  <li>Select you <strong>host by name or tags</strong>. Giving a tag will
+  monitor every host that has that tag.</li>
+
+  <li>Select the <strong>no-data timeframe</strong>. If the heartbeat stops
+  reporting for more than the number of minutes you have selected then you will
+  get notified.</li>
+
+  <li>Configure your <strong>notification options</strong>. Refer to the
+    <a href="#notifications">Notifications</a> section of this
+    guide for a detailed walkthrough of the common notification options.</p>
+  </li>
+</ol>
+
+<h2 id="metric">Metric Monitors</h2>
+
+<ol>
+  <li><p>Select the <strong>metric and scope</strong> you want to monitor.</p>
+
+    <img src="/static/images/monitor/metric_scope.png">
+
+    <p>You can create a monitor on any metrics that you are currently sending to
+    Datadog. The standard scoping rules apply here. Please refer to the
+    <a href="/graphing/#scope">scope section</a> of the graphing primer for
+    further information.</p>
+  </li>
+
+  <li><p>Select the alert type.</p>
+
+  <img src="/static/images/monitor/alert_type.png">
+
+  <p>A <strong>threshold alert</strong> will compare the value in the selected
+  timeframe against a given threshold. There are additional options available
+  in the alerting conditions section. This is the standard alert case where you
+  know what sort values are unexpected.</p>
+
+  <p>A <strong>change alert</strong> will look at a recent and determine the
+  change or % change between that value and a value some minutes ago. This sort
+  of alert is useful to track fast spikes or drops in a metric when you might
+  not have an exact "unexpected" threshold. Note: the calculated value is not
+  the absolute value - meaning it will be negative for a downward change.</p>
+  </li>
+
+  <li><p>Select the alert grouping.</p>
+
+  <img src="/static/images/monitor/alert_grouping.png">
+
+  <p>A <strong>simple alert</strong> aggregates over all reporting sources. You
+  will get one alert when the aggregated value meets the conditions set below.
+  This works best to monitor a metric from a single host, like <code>avg</code>
+  of <code>system.cpu.iowait</code> over <code>host:bits</code>, or for an
+  aggregate metric across many hosts like sum of nginx.bytes.net over
+  region:us-east.</p>
+
+  <p>A <strong>multi alert</strong> applies the alert to each source, according
+  to your group parameters. E.g. to alert on disk space you might group by host
+  and device, creating the query:
+  <code>avg:system.disk.in_use{*} by {host,device}</code>.
+  This will trigger a separate alert for each device on each host that is
+  running out of space.</p>
+  </li>
+
+  <li id="metric-conditions"><p>Select the alert conditions.</p>
+  <ul>
+    <li>
+      <p>The <strong>threshold</strong> options vary slightly depending on what
+      alert type you have chosen. For either case, you input a threshold and
+      comparison based on your metric. As you change your threshold, you will
+      see the graph update with a marker showing the cutoff point.</p>
+
+      <p>Note that you can use formatted values in this input based on the
+      metric itself. For example, if you are monitoring
+      <code>system.disk.used</code>, you can give a threshold of
+      <code>20GB</code>.</p>
+
+      <p>For a <strong>threshold alert</strong> you will be able to chose a
+      <em>time aggregation</em> of the data. The alerting engine will generate
+      a single series and perform your selected aggregation.</p>
+
+      <p>Let's look at the details of each option:</p>
+
+      <ul>
+        <li><em>on average</em>: The series will be averaged to produce a single
+        value that will be checked against the threshold.</li>
+
+        <li><em>at least once</em>: If any single value in the generated series
+        crosses the threshold then an alert will be triggered.</li>
+
+        <li><em>at all times</em>: If every point in the generated series is
+        outside the threshold then an alert will be triggered.</li>
+
+        <li><em>in total</em>: If the summation of every point in the series is
+        outside the threshold then an alert will be triggered.</li>
+      </ul>
+
+      <p></p>
+      <p>Note: the <em>on average</em> and <em>at all times</em> aggregations
+      <em>require</em> a full window of data in the final series. This does
+      <em>not</em> mean that each series must be full but that there shouldn't
+      be a gap of more than 1 minute across all aggregated series.</p>
+    </li>
+
+    <li>
+      <p>You can optionally <strong>notify on no data</strong> after a
+      configurable timeframe. At the minimum your chosen timeframe must be
+      greater than 2x the alerting window. For example, if you are alerting over
+      the last 5 minutes then you would need to wait at least 10 minutes before
+      notifying on missing data.
+      </p>
+    </li>
+
+    <li>
+      <p>You can opt to <strong>automatically resolve the monitor from a
+      triggered state</strong>. In general you'll want to leave this option off
+      as you only want an alert to be resolved when it's fixed.</p>
+
+      <p>This most common use-case for this option is when you have very sparse
+      counters, e.g. for errors. When errors stop occuring the metric will stop
+      reporting. This means the monitor will not resolve because there are not
+      anymore values to trigger a resolution.</p>
+    </li>
+  </ul></li>
+
+  <li> <p>Configure your notification options. Refer to the
+    <a href="#notifications">notifications</a> section of this
+    guide for a detailed walkthrough of the common notification fields.</p>
+  </li>
+</ol>
+
+<h2 id="integration">Integration Monitors</h2>
+
+<img src="/static/images/monitor/es_status.png">
+
+On the integration tab you will see a list of your installed integrations. Upon
+selection, you can choose to monitor either a "Status" or a "Metric".
+
+<ul>
+
+  <li>Choosing <strong>Integration Status</strong> will present you with one
+  more service checks for each integration. Please refer to the
+  <a href="#check-alerting">custom monitors</a> section for details on the
+  available options.</li>
+
+  <li>
+  <p>Choosing <strong>Integration Metric</strong> will provide a familiar
+  interface used for a Metric Monitor. You will be able to choose from any of
+  the metrics provided by this integration. Please refer to the
+  <a href="#metric-conditions">alert conditions</a> section for details on the
+  available options.</p>
+  </li>
+</ul>
+
+<h2 id="process">Process Monitors</h2>
+
+<img src="/static/images/monitor/process_monitor.png">
+
+<p>A process monitor will watch the status produced by the
+<code>process.up</code> service check reported by the check in the Agent. At the
+Agent level you can configure thresholds based on the number of matching
+processes.</p>
+
+<p>Read more about configuration on the
+<a href="/integrations/process/">Process Check</a> page.</p>
+
+<p>For each process, a single service check status will be produced. Through
+this creation interface, you can choose which of those checks to monitor and
+at what point they should notify.</p>
+
+<ol>
+  <li>Pick the <strong>process</strong> to monitor. You will see the names
+  configured in any Agent with an active process check.</li>
+
+  <li>Pick <strong>hosts by names or tags</strong>. You will only see hosts or
+  tags that are reporting a status for the selected process.</li>
+
+  <li>Select <strong>alerting options</strong>. Please refer to the
+  <a href="#check-alerting">custom monitors</a> section for details on the
+  available options.</li>
+
+  <li>Configure your <strong>notification options</strong>. Refer to the
+    <a href="#notifications">notifications</a> section of this
+    guide for a detailed walkthrough of the common notification fields.</li>
+</ol>
+
+
+<h2 id="network">Network Monitors</h2>
+
+<img src="/static/images/monitor/network_monitor.png">
+
+<p>Network monitors cover the TCP and HTTP checks available in the Agent. Read
+the <a href="/guides/network_checks">guide to network checks</a> for details
+on Agent configuration.</p>
+
+<strong>Network Status</strong>
+<ol>
+  <li>Choose a <strong>network check</strong>. You will be able to choose from
+  all HTTP and TCP checks being submitted by your Agents.</li>
+
+  <li>Pick <strong>hosts by name and tag</strong>. You will only see hosts or
+  tags reporting the check you have chosen.</li>
+
+  <li>Select <strong>alerting options</strong>. Please refer to the
+  <a href="#check-alerting">custom monitors</a> section for details on the
+  available options.</li>
+
+  <li>Configure your <strong>notification options</strong>. Refer to the
+    <a href="#notifications">notifications</a> section of this
+    guide for a detailed walkthrough of the common notification fields.</li>
+</ol>
+
+<strong>Network Metric</strong>
+<ol>
+  <li>Choose a <strong>network metric</strong>. You will be able to choose
+  either the TCP or HTTP response time metric.</li>
+
+  <li>Pick <strong>hosts by name and tag</strong>. You will only see hosts or
+  tags reporting the metric you have chosen.</li>
+
+  <li>Select <strong>alerting options</strong>. Please refer to the
+  <a href="#metric-conditions">alert conditions</a> section for details on the
+  available options.</li>
+
+  <li>Configure your <strong>notification options</strong>. Refer to the
+    <a href="#notifications">notifications</a> section of this
+    guide for a detailed walkthrough of the common notification fields.</li>
+</ol>
+
+<h2 id="custom">Custom Monitors</h2>
+
+<img src="/static/images/monitor/custom_monitor.png">
+
+Custom monitors encompass any service checks that are not reported by one of the
+out-of-the-box integrations included with the Agent.
+
+<ol>
+  <li>Select your <strong>service check</strong>.</li>
+
+  <li>Select <strong>hosts or tags</strong> that you would like to monitor. The
+  check will run for every unique set of tags from all monitored hosts. For
+  example, the <code>Nginx</code> service check reports one status per
+  <code>{host,port}</code>. So if you have multiple servers running on a single
+  host, then each one will alert separately in the case of failure.</li>
+
+  <li id="check-alerting">Select your alert options.
+
+  <p>You can <strong>define the the conditions</strong> upon which the monitor
+  will notify. For example, you might want to know immediately when your check
+  fails and only have it recover if it stays that way. In this case you might
+  choose to notify on a 1 critical, 1 warning and 4 OK statuses.</p>
+
+  <p>You can optionally <strong>notify on no data</strong> after a configurable
+  timeframe. You must choose at least 2 minutes for your timeframe.</p>
+  </li>
+</ol>
+
+<h2 id="notification">Monitor Notifications</h2>
+
+<p>Notifications are a key component of any monitor. You want to make sure the
+right people get notified so the problem can be resolved as soon as possible.
+</p>
+
+<img src="/static/images/monitor/notification.png">
+
+<ol>
+  <li>Give your monitor a <strong>title</strong>. It is often useful to use a
+  succinct explanation of the monitor so a notified team member can quickly
+  understand what is going on.</li>
+
+  <li><p>Enter a <strong>message</strong> for the monitor. This field allows
+  standard <a href="http://daringfireball.net/projects/markdown/syntax">markdown
+  formatting</a> as well as Datadog's @-notification syntax.</p>
+
+  <p>A common use-case for the monitor message is to include a step-by-step
+  way to resolve the problem. For example if you are monitoring a Database then
+  you might want to include steps for failing over to a standby node. All in
+  all, you should attempt to give as much context to the monitor as possible.
+  </p></li>
+
+  <li>Optionally enable <strong>monitor renotification</strong>. This option is
+  useful to remind your team that a problem is not solved until the monitor is
+  marked as resolved. If enabled, you can configure an escalation message to be
+  sent anytime the monitor renotifies. The original message will be included as
+  well.
+  </li>
+</ol>
+
+<h2 id="faq">Monitor FAQs</h2>
+
+<ul>
+<li>Can you alert on a function? Not currently but this feature is in the works
+and should be released by the end of 2014.</li>
+<li>Can you alert on an event? Not currently, but we're discussing how we'd like
+to implement this. As an alternative you can set up an @ notification in the
+body of the event which would deliver the event via email whenever it occurred.
+</li>
+
+</ul>
+
+
