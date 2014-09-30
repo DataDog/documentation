@@ -128,6 +128,8 @@ this heartbeat across one or more hosts.
       comparison based on your metric. As you change your threshold, you will
       see the graph update with a marker showing the cutoff point.</p>
 
+      <img src="/static/images/monitor/metric_threshold.png">
+
       <p>Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring
       <code>system.disk.used</code>, you can give a threshold of
@@ -289,8 +291,12 @@ on Agent configuration.</p>
 
 <img src="/static/images/monitor/custom_monitor.png">
 
-Custom monitors encompass any service checks that are not reported by one of the
-out-of-the-box integrations included with the Agent.
+<p>Custom monitors encompass any service checks that are not reported by one of
+the out-of-the-box integrations included with the Agent.</p>
+
+<p>Refer to the <a href="/guides/agent_checks/">Guide to Agent Checks</a> for
+detailed information on writing your own checks that send metrics, events,
+or service checks.</p>
 
 <ol>
   <li>Select your <strong>service check</strong>.</li>
