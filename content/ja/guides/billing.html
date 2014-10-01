@@ -75,7 +75,9 @@ and 100 custom metrics)</li>
 
 ---
 
-- #### Datadogのモニタリング・サービスには３種類の料金プランがあります:
+<h4><u>基本プラン</u></h4>
+
+Datadogのモニタリング・サービスには３種類の料金プランがあります:
 
 1. **Free(無償) プラン** は、5台以下のホスト構成のユーザーに対し適用します。Freeプランでは、モニターリングデータの保管期間は1日になります。Free プランからPro プランへの変更においては、Free プランで使っていた設定は全て引き継がれます。従って、既にモニターリングしているシステムがあっても、プラン変更によって影響を受けることはありません。
 
@@ -123,11 +125,13 @@ the agent.
 
 ---
 
-- #### 請求書は、その月に同時にデーターを転送してきているホスト台数の最高値によって算出されます。
+<h4><u>FAQ　(よくあるお問い合わせ)</u></h4>
+
+#### 請求書は、その月に同時にデーターを転送してきているホスト台数の最高値によって算出されます。
 
 ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、DatadogでActivenなホストなホストとして登録されているかどうかで判定します。
 
----
+
 <!-- <h5>Do you support hourly pricing?</h5>
 <p>
 We do support hourly pricing at $0.03 per hour per host or a hybrid
@@ -147,7 +151,7 @@ for the excess hosts.
 </p></blockquote>
  -->
 
-- #### 時間課金で請求を発行することは、できますか？
+#### 時間課金で請求を発行することは、できますか？
 
 $0.03/ホストの使用料を基に、時間課金で請求書を発行すことができます。又、月極の課金形態と時間課金形態の併用も可能です。併用での支払いがどのように機能するかは、次を参照してください:
 
@@ -156,7 +160,6 @@ $0.03/ホストの使用料を基に、時間課金で請求書を発行すこ�
 > If that number exceeds your monthly commit, we just charge overage
 for the excess hosts.
 
----
 
 <!-- <h5>Do non-reporting or inactive hosts count?</h5>
 <p>
@@ -165,7 +168,7 @@ some time (up to 24 hours) for the hosts with the inactive status '???' to drop
 out of the infrastructure view.
 </p> -->
 
-- #### データーを受信できないホストとか、非Activeなホストは、請求基準の総数に入りますか?
+#### データーを受信できないホストとか、非Activeなホストは、請求基準の総数に入りますか?
 
 データーを受信できないホスト(`Status↓` 欄が '???')は、請求基準には含まれません。Dashboaradの`Infrastructure` ビューで、`Status↓` 欄に '???'が表示されているホストに対しては、ビューに掲載されなくなるまでに少々時間(最長24時間)がかかります。
 
@@ -179,7 +182,31 @@ by its tags).
 
 仮サーバー等、短命ホストの監視にDatadogを使った場合、そのホストからデーターを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランに関しては、ダッシュボードにホスト名前が表示されなくなった後も、Datadogに転送されてきたデーターは保管されています。対象のホスト名やタグが分かれば、転送済みデーターを基にダッシュボード上にグラフを表示することができます。
 
----
+
+<!-- <h5>How will an AWS integration impact my monthly billing?</h5>
+<p>
+We bill for all hosts running the agent as well as any hosts picked up via the
+AWS integration (not ELBs or other namespaces). You will not get double-charged
+if you are running the agent on a host <b>AND</b> picking it up via AWS integration.
+</p>
+
+<p>
+If you would like to control what metrics you are aggregating via AWS integration,
+select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a>
+and customize accordingly.
+</p> -->
+
+#### AWS Ingegrationの利用は、毎月の請求額はどのように変化しましか?
+
+Datadogからの請求は、Datadog Agentを実行しているホストとAWS Integrationでピックアップされた全てのホストが対象になります。(但し、ELBや他のnamespaceのものは除きます。)
+AWS IntegrationでピックアップされたホストでDatadog Agentが稼働している場合でも、二重で課金されることは有りません。
+
+もしも、AWS Integrationが転送するメトリックスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
+
+
+#### VMware Ingegrationの利用は、毎月の請求額はどのように変化しましか?
+
+VMwareの仮想マシンごとに月額$15で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
 
 
 <!-- <h5>How do I see what I'll get charged for this current month?</h5>
@@ -189,11 +216,10 @@ admin you can check out past invoices
 <a href="https://app.datadoghq.com/account/billing_history">here</a>.
 </p> -->
 
-- #### 今月の請求額を知る方法はありますか?
+#### 今月の請求額を知る方法はありますか?
 
 ユーザーの皆様が、今月末の請求書の金額を方法を準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
 
----
 
 <!-- <h5>Can I set a specific email address to receive invoices at?</h5>
 <p>
@@ -202,10 +228,8 @@ is not a team member within Datadog (invoices@yourcompany.com)
 <a href="https://app.datadoghq.com/account/billing">here</a>.
 </p> -->
 
-- #### 請求書を受信するために、アカウント登録とは別のメール・アドレスを設定することはできますか？
+#### 請求書を受信するために、アカウント登録とは別のメール・アドレスを設定することはできますか？
 
 請求書の受信用に別のメールアドレスを設定することは可能です。更にそのメール・アドレスが、チームメンバーとしてDatadogに登録されてなくても大丈夫です。(例: invoices@yourcompany.com)
 
 ダッシュボードの[`ユーザー名` タブ -> `billing`](https://app.datadoghq.com/account/billing)から設定ができます。
-
----
