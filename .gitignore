@@ -1,5 +1,6 @@
 output/
 tmp/
+crash.log
 vendor/*
 .bundle/*
 NO_SYNTAX
