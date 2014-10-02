@@ -179,14 +179,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-If a check cannot run because of improper configuration, programming error or
-because it could not collect any metrics, it should raise a meaningful exception.
-This exception will be logged, as well as be shown in the Agent info command for
-easy debugging. For example:
-
-不適切な設定、プログラミングのエラー、いずれかのメトリックスが収集できないなどで、Checkが実行できない場合はには、状況を把握しやすい例外メッセージが必要です。
-
-チェックがあるため、不適切な設定、プログラミングエラーを実行することはできませんか、いずれかのメトリックを収集できなかったので、それは意味のある例外を発生させるかどうか。この例外はログに記録されます、だけでなく、簡単なデバッグのためのエージェントinfoコマンドで表示さ。たとえば、次のように
+不適切な設定、プログラミング時のエラー、いずれかのメトリックスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、ディバッグ時に `datadog-agent info` コマンドで表示できので、ディバッグ時に利用することもできます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -213,6 +206,9 @@ As part of the parent class, you're given a logger at `self.log`, so you can do
 things like `self.log.info('hello')`. The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
 module).
+
+
+
 
 親クラスの一環として、あなたがでロガーを与えられているself.logあなたのようなものを行うことができるように、self.log.info（ 'こんにちは'）を。ログハンドラは次のようになりますかどうかをチェックします。{名前} {name}が（検査モジュールのファイル名に基づいて）小切手の名前です。
 
