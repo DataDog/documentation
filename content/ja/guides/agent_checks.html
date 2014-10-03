@@ -202,15 +202,10 @@ module). -->
 
 #### ログの保存
 
-As part of the parent class, you're given a logger at `self.log`, so you can do
-things like `self.log.info('hello')`. The log handler will be `checks.{name}`
+AgentCheckクラスを承継しているので、親クラスで実装されているロギング機能を `self.log.info('hello')`の形で使うことできます。
+**The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
-module).
-
-
-
-
-親クラスの一環として、あなたがでロガーを与えられているself.logあなたのようなものを行うことができるように、self.log.info（ 'こんにちは'）を。ログハンドラは次のようになりますかどうかをチェックします。{名前} {name}が（検査モジュールのファイル名に基づいて）小切手の名前です。
+module).**
 
 
 <!--
@@ -234,20 +229,15 @@ The configuration file has the following structure:
 
 <h3 id="config">設定</h3>
 
-Each check will have a configuration file that will be placed in the `conf.d`
-directory. Configuration is written using [YAML](http://www.yaml.org/). The
-file name should match the name of the check module (e.g.: `haproxy.py` and
-`haproxy.yaml`).
+Agent Checkには、設定ファイルがあり、その設定ファイルは`conf.d` 以下に置かれています。設定ファイルは、[YAML](http://www.yaml.org/) 形式で記述します。
+設定ファイルの名前は、Agent Checkのモジュールの名前と同じ名前である必要があります。
+(例: モジュール名が`haproxy.py` の場合は、設定ファイル名は、`haproxy.yaml` になります)
 
-The configuration file has the following structure:
-
-各チェックがに置かれる設定ファイルがありますのconf.dの ディレクトリを。コンフィギュレーションは、使用して書かれているYAMLを。（：例えば、ファイル名がチェックモジュールの名前と一致する必要がありhaproxy.pyと haproxy.yamlを）。
-
-構成ファイルには、以下の構造を有する。
+設定ファイルは、以下のようになります:
 
 <%= snippet_code_block("guides-agentchecks-config.yaml") %>
 
-<div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
+<div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
 
 <!-- #### init_config
@@ -258,11 +248,7 @@ configuration options that will be available on every run of the check in
 
 #### init_config
 
-The *init_config* section allows you to have an arbitrary number of global
-configuration options that will be available on every run of the check in
-`self.init_config`.
-
-init_configのセクションでは、チェックインの実行ごとに利用できるようになり、グローバルコンフィギュレーションオプションを任意の数持つことができます self.init_configを。
+*init_config*のセクションでは、Agent Check実行時に利用できるグローバルな設定オプションを複数記述することができます。このオプションは、全てのCheckの実行において`self.init_config`の方法で、アクセスすることができます。
 
 
 <!-- #### instances
@@ -273,11 +259,9 @@ every check will support multiple instances out of the box. -->
 
 #### instances
 
-The *instances* section is a list of instances that this check will be run
-against. Your actual `check()` method is run once per instance. This means that
-every check will support multiple instances out of the box.
+*instances*のセクションは、Checkが実行される全ての対象(instance)のリストになります。
 
-インスタンスセクションには、このチェックがに対して実行されるインスタンスのリストです。あなたの実際のチェック（）メソッドは、インスタンスごとに一度実行されます。これは、すべてのチェックは箱から出して複数のインスタンスをサポートすることを意味します。
+Checkの中で実行される`check()` 関数の実体は、各チェック対象(instance)対して個別に実行されていきます。このことより全てのCheckは、そのままの状態で複数のチェック対象(instance)をサポートしていることを意味しています。
 
 
 <!--
@@ -286,25 +270,24 @@ DIRECTORY STRUCTURE
 ======================================================
 -->
 
-<h3 id="directory">Directory Structure</h3>
+<!-- <h3 id="directory">Directory Structure</h3>
 
 Before starting your first check it is worth understanding the checks directory
 structure. There are two places that you will need to add files for your check.
 The first is the `checks.d` folder, which lives in your Agent root.
 
-For all Linux systems, this means you will find it at:
+For all Linux systems, this means you will find it at: -->
 
-あなたの最初のチェックを開始する前に、それは、小切手のディレクトリ構造を理解する価値があります。あなたがチェック用のファイルを追加する必要があります2つの場所があります。最初はchecks.dのあなたのエージェントのルートに住んでいるフォルダ、。
+<h3 id="directory">ディレクトリーの構造</h3>
 
-すべてのLinuxシステムでは、これはあなたがで見つけることを意味します。
+Checkのプログラミングを始める前に、まず関連するディレクトリーの構造を理解ておくのは重要なことです。Checkで使用するファイルは、２カ所に分けて設置します。
+Check のPython 実行ファイルは、Datadog Agent のルートディレクトリーにある`checks.d` のフォルダーに設置します。
 
+Linux系のシステムは、以下のディレクトリーになります:
 
     /etc/dd-agent/checks.d/
 
-For Windows Server >= 2008 you'll find it at:
-
-のWindows Server> = 2008の場合には、でそれを見つけることができます：
-
+Windows Server > = 2008の場合は、以下のディレクトリーになります:
 
     C:\Program Files (x86)\Datadog\Agent\checks.d\
 
@@ -312,9 +295,7 @@ For Windows Server >= 2008 you'll find it at:
 
     C:\Program Files\Datadog\Agent\checks.d\
 
-For Mac OS X and source installations, you'll find it at:
-
-Mac OS Xとソースインストールでは、でそれを見つけることができます：
+Mac OS Xとソースからインストールした場合は、以下のディレクトリーになります:
 
     ~/.datadog-agent/agent/checks.d/
 
@@ -326,21 +307,13 @@ Mac OS Xとソースインストールでは、でそれを見つけることが
 
     <sandbox_folder>/checks.d/
 
-The other folder that you need to care about is `conf.d` which lives in the
-Agent configuration root.
+Check の設定ファイルは、Datadog Agent の設定ファイルのルートディレクトリーにある`conf.d` になります。
 
-あなたが気にする必要がある他のフォルダがあるのconf.dエージェント構成のルートに住んでいます。
-
-For Linux, you'll find it at:
-
-Linuxの場合、あなたはでそれを見つけることができます：
-
+Linux系のシステムは、以下のディレクトリーになります:
 
     /etc/dd-agent/conf.d/
 
-For Windows, you'll find it at:
-
-Windowsの場合、あなたはでそれを見つけることができます：
+Windowsの場合は、あなたはでそれを見つけることができます：
 
     C:\ProgramData\Datadog\conf.d\
 
@@ -348,9 +321,7 @@ Windowsの場合、あなたはでそれを見つけることができます：
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
-For Mac OS X and source installations, you'll find it at:
-
-Mac OS Xとソースインストールでは、でそれを見つけることができます：
+Mac OS Xとソースからインストールした場合は、以下のディレクトリーになります:
 
     ~/.datadog-agent/agent/conf.d/
 
@@ -362,9 +333,7 @@ Mac OS Xとソースインストールでは、でそれを見つけることが
 
     <sandbox_folder>/conf.d/
 
-You can also add additional checks to a single directory, and point to it in `datadog.conf`:
-
-また、1つのディレクトリに追加のチェックを追加し、それを指すことができdatadog.conf。
+実行ファイルと設定ファイルは、ディフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することもできます:
 
     additional_checksd: /path/to/custom/checks.d/
 
@@ -374,7 +343,7 @@ FIRST CHECK
 ======================================================
 -->
 
-<h3 id="first">Your First Check</h3>
+<!-- <h3 id="first">Your First Check</h3>
 
 <div class="alert alert-block">
 The names of the configuration and check files must match. If your check
@@ -382,8 +351,27 @@ is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
 </div>
 
-設定およびチェックファイルの名前が一致している必要があります。あなたのチェックが呼び出された場合mycheck.pyあなたの設定ファイルがなければならないということmycheck.yaml。
+To start off simple, we'll write a check that does nothing more than send a
+value of 1 for the metric `hello.world`. The configuration file will be very
+simple, including no real information. This will go into `conf.d/hello.yaml`:
 
+<%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
+
+The check itself will inherit from `AgentCheck` and send a gauge of `1` for
+`hello.world` on each call. This will go in `checks.d/hello.py`:
+
+<%= snippet_code_block("guides-agentchecks-hello.py") %>
+
+As you can see, the check interface is really simple and easy to get started
+with. In the next section we'll write a more useful check that will ping HTTP
+services and return interesting data. -->
+
+<h3 id="first">始めてのCheck</h3>
+
+<div class="alert alert-block">
+Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)が一致している必要があります。
+例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
+</div>
 
 To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
@@ -406,6 +394,8 @@ with. In the next section we'll write a more useful check that will ping HTTP
 services and return interesting data.
 
 ご覧のように、チェック·インタフェースは、本当にシンプルで使い始めるのは簡単です。次のセクションでは、HTTPサービスに対してpingを実行し、興味深いデータが返され、より有用な小切手を書きます。
+
+
 
 <!--
 ======================================================
