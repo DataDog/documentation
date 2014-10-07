@@ -24,6 +24,8 @@ sidebar:
       href: "/guides/templating/"
     - text: Single Sign On With SAML
       href: "/guides/saml/"
+    - text: Events via Email
+      href: "/guides/eventsemail/"
 
     - header: References
     - text: API
