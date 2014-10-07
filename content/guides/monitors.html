@@ -33,7 +33,7 @@ or Hipchat) or other custom endpoints via webhooks.</p>
 
 <p>Triggered monitors will appear in the event stream, allowing collaboration
 around active issues in your applications or infrastructure. Datadog provides a
-high-level view of open issue on the
+high-level view of open issues on the
 <a href="https://app.datadoghq.com/monitors/triggered">Triggered Monitors</a>
 page as well as general monitor management on the
 <a href="https://app.datadoghq.com/monitors">Manage Monitors</a> page.</p>
@@ -59,11 +59,11 @@ Every Datadog Agent collection reports a heartbeat called
 this heartbeat across one or more hosts.
 
 <ol>
-  <li>Select you <strong>host by name or tags</strong>. Giving a tag will
-  monitor every host that has that tag.</li>
+  <li>Select your <strong>host by name or tag(s)</strong>. Providing a tag will
+  monitor every host that has that tag or tag combination.</li>
 
   <li>Select the <strong>no-data timeframe</strong>. If the heartbeat stops
-  reporting for more than the number of minutes you have selected then you will
+  reporting for more than the number of minutes you have selected, then you will
   get notified.</li>
 
   <li>Configure your <strong>notification options</strong>. Refer to the
@@ -94,11 +94,15 @@ this heartbeat across one or more hosts.
   in the alerting conditions section. This is the standard alert case where you
   know what sort values are unexpected.</p>
 
-  <p>A <strong>change alert</strong> will look at a recent and determine the
-  change or % change between that value and a value some minutes ago. This sort
-  of alert is useful to track fast spikes or drops in a metric when you might
-  not have an exact "unexpected" threshold. Note: the calculated value is not
-  the absolute value - meaning it will be negative for a downward change.</p>
+  <p>A <strong>change alert</strong> will look at a recent data point and
+  determine the change or % change between that value and a value some minutes
+  ago. The compared data points are 1-minute averages and <em>not</em> a single
+  point.</p>
+
+  <p>This sort of alert is useful to track fast spikes or drops in a metric
+  when you might not have an exact "unexpected" threshold. Note: the calculated
+  value is not the absolute value - meaning it will be negative for a downward
+  change.</p>
   </li>
 
   <li><p>Select the alert grouping.</p>
@@ -125,8 +129,8 @@ this heartbeat across one or more hosts.
     <li>
       <p>The <strong>threshold</strong> options vary slightly depending on what
       alert type you have chosen. For either case, you input a threshold and
-      comparison based on your metric. As you change your threshold, you will
-      see the graph update with a marker showing the cutoff point.</p>
+      comparison type based on your metric. As you change your threshold, you
+      will see the graph update with a marker showing the cutoff point.</p>
 
       <img src="/static/images/monitor/metric_threshold.png">
 
@@ -159,12 +163,14 @@ this heartbeat across one or more hosts.
       <p>Note: the <em>on average</em> and <em>at all times</em> aggregations
       <em>require</em> a full window of data in the final series. This does
       <em>not</em> mean that each series must be full but that there shouldn't
-      be a gap of more than 1 minute across all aggregated series.</p>
+      be a gap of more than 1 minute across all aggregated series. In other
+      words, we recommend using <em>at least once</em> or <em>in total</em> for
+      metrics with > 1 minute interval.</p>
     </li>
 
     <li>
       <p>You can optionally <strong>notify on no data</strong> after a
-      configurable timeframe. At the minimum your chosen timeframe must be
+      configurable timeframe. At the minimum, your chosen timeframe must be
       greater than 2x the alerting window. For example, if you are alerting over
       the last 5 minutes then you would need to wait at least 10 minutes before
       notifying on missing data.
@@ -232,7 +238,7 @@ at what point they should notify.</p>
   <li>Pick the <strong>process</strong> to monitor. You will see the names
   configured in any Agent with an active process check.</li>
 
-  <li>Pick <strong>hosts by names or tags</strong>. You will only see hosts or
+  <li>Pick <strong>hosts by name or tag(s)</strong>. You will only see hosts or
   tags that are reporting a status for the selected process.</li>
 
   <li>Select <strong>alerting options</strong>. Please refer to the
@@ -258,7 +264,7 @@ on Agent configuration.</p>
   <li>Choose a <strong>network check</strong>. You will be able to choose from
   all HTTP and TCP checks being submitted by your Agents.</li>
 
-  <li>Pick <strong>hosts by name and tag</strong>. You will only see hosts or
+  <li>Pick <strong>hosts by name or tag(s)</strong>. You will only see hosts or
   tags reporting the check you have chosen.</li>
 
   <li>Select <strong>alerting options</strong>. Please refer to the
@@ -275,7 +281,7 @@ on Agent configuration.</p>
   <li>Choose a <strong>network metric</strong>. You will be able to choose
   either the TCP or HTTP response time metric.</li>
 
-  <li>Pick <strong>hosts by name and tag</strong>. You will only see hosts or
+  <li>Pick <strong>hosts by name or tag(s)</strong>. You will only see hosts or
   tags reporting the metric you have chosen.</li>
 
   <li>Select <strong>alerting options</strong>. Please refer to the
@@ -309,10 +315,11 @@ or service checks.</p>
 
   <li id="check-alerting">Select your alert options.
 
-  <p>You can <strong>define the the conditions</strong> upon which the monitor
-  will notify. For example, you might want to know immediately when your check
+  <p>While each check run will send a status of either CRITICAL, WARNING or OK,
+  you can choose at what consecutive conditions to cause a state change and a
+  notification. For example, you might want to know immediately when your check
   fails and only have it recover if it stays that way. In this case you might
-  choose to notify on a 1 critical, 1 warning and 4 OK statuses.</p>
+  choose to notify on 1 critical status, 1 warning status and 4 OK statuses.</p>
 
   <p>You can optionally <strong>notify on no data</strong> after a configurable
   timeframe. You must choose at least 2 minutes for your timeframe.</p>
@@ -337,7 +344,7 @@ right people get notified so the problem can be resolved as soon as possible.
   formatting</a> as well as Datadog's @-notification syntax.</p>
 
   <p>A common use-case for the monitor message is to include a step-by-step
-  way to resolve the problem. For example if you are monitoring a Database then
+  way to resolve the problem. For example if you are monitoring a database then
   you might want to include steps for failing over to a standby node. All in
   all, you should attempt to give as much context to the monitor as possible.
   </p></li>
