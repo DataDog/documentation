@@ -301,7 +301,9 @@ right people get notified so the problem can be resolved as soon as possible.
 
 2. Enter a **message** for the monitor. This field allows standard
    [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
-   as well as Datadog's @-notification syntax.
+   as well as Datadog's @-notification syntax. Note: you can notify any
+   non-Datadog users via email by simply adding `@their-email` to the
+   message.
 
    A common use-case for the monitor message is to include a step-by-step way
    to resolve the problem. For example if you are monitoring a database then you
@@ -316,12 +318,20 @@ right people get notified so the problem can be resolved as soon as possible.
 
 ## Monitor FAQs {#faq}
 
-- Can you alert on a function? Not currently but this feature is in the works
-  and should be released by the end of 2014.
+- *Can I manage my monitors progromatically?*
 
-- Can you alert on an event? Not currently, but we're discussing how we'd like
-  to implement this. As an alternative you can set up an @ notification in the
-  body of the event which would deliver the event via email whenever it
-  occurred.
+  Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
+  for detailed information on managing monitors through the API using the
+  available libraries or cURL.
+
+- *Can you alert on a function?*
+
+  Not currently but this feature is in the works and should be released by the end of 2014.
+
+- *Can you alert on an event?*
+
+  Not currently, but we're discussing how we'd like to implement this. As an
+  alternative you can set up an @ notification in the body of the event which
+  would deliver the event via email whenever it occurred.
 
 
