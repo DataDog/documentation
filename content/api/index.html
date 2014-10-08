@@ -32,7 +32,7 @@ kind: documentation
         <a class="btn" href="#users">Users</a>
         <a class="btn" href="#graphs">Graphs</a>
       </div>
-      <div class="btn-group">
+      <div class="btn-group language-links">
         <div lang="console" class="lang-btn btn">Shell</div>
         <div lang="python" class="active lang-btn btn">Python</div>
         <div lang="ruby" class="lang-btn btn">Ruby</div>
@@ -172,7 +172,7 @@ kind: documentation
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
           <%= argument('metric_type', 'The type of the metric - <code>gauge</code>
-            or <code>counter</code> (counter data is expected as a rate). Gauges are 
+            or <code>counter</code> (counter data is expected as a rate). Gauges are
                 32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
         </ul>
