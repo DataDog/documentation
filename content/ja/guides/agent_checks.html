@@ -153,7 +153,7 @@ of the Agent payload. -->
 
 #### イベントの送信
 
-チェックを実行している間は、`self.event(...)`を呼び出すことで、そのイベントの中身を見ることができます。イベントの中身は次のような構造になっている必要があります:
+Check 内でイベントを送信するには、`self.event(...)`を呼び出し、`"argument":`に値を設定することで、そのイベントに関する情報(payload)を設定することができます。イベントの中身は次のような構造になっている必要があります:
 
 <%= snippet_code_block("guides-agentchecks-event.py") %>
 
@@ -373,31 +373,17 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
 </div>
 
-To start off simple, we'll write a check that does nothing more than send a
-value of 1 for the metric `hello.world`. The configuration file will be very
-simple, including no real information. This will go into `conf.d/hello.yaml`:
-
-
-まずは簡単な例として、メトリックス名`hello.world`で、値1を送信するCheckを書いてみます。
-
-シンプルなオフを開始するためには、メトリックの1の値を送信するよりも、何もしません小切手書くつもりhello.worldを。設定ファイルには、本当の情報を含めていない、非常にシンプルになります。これはに入りますのconf.d / hello.yaml：
-
+まずは簡単な例として、メトリックス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に設置し、次の3行のみの非常にシンプな内容になります:
 
 <%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
 
-The check itself will inherit from `AgentCheck` and send a gauge of `1` for
-`hello.world` on each call. This will go in `checks.d/hello.py`:
-
-チェック自体から継承しAgentCheckとゲージ送る1をするため hello.world呼び出しごとに。これはに行くchecks.d / hello.py：
+HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリックス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に設置します:
 
 <%= snippet_code_block("guides-agentchecks-hello.py") %>
 
-As you can see, the check interface is really simple and easy to get started
-with. In the next section we'll write a more useful check that will ping HTTP
-services and return interesting data.
+ごのようにCheckのインタフェースは、シンプルで、簡単に使い始めることができす。
 
-ご覧のように、チェック·インタフェースは、本当にシンプルで使い始めるのは簡単です。次のセクションでは、HTTPサービスに対してpingを実行し、興味深いデータが返され、より有用な小切手を書きます。
-
+次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を送信するCheckを書いてみることにします。
 
 
 <!--
@@ -421,26 +407,15 @@ following will happen:
   the response code. -->
 
 
-<h3 id="http">An HTTP Check</h3>
+<h3 id="http">HTTP のCheck</h3>
 
-Now we will guide you through the process of writing a basic check that will
-check the status of an HTTP endpoint. On each run of the check, a GET
-request will be made to the HTTP endpoint. Based on the response, one of the
-following will happen:
+ここからは、HTTPのエンドポイントの状況を確認するための基本的なCheckの書き方を解説することにします。
+Checkが実行される度に、HTTPのエンドポイントに対してGETリクエストを実行します。
+レスポンスの結果に基づいて次の処理をします:
 
-  - If the response is successful (response is 200, no timeout) the response
-  time will be submitted as a metric.
-  - If the response times out, an event will be submitted with the URL and
-  timeout.
-  - If the response code != 200, an event will be submitted with the URL and
-  the response code.
-
-HTTPチェック
-今、私たちは、HTTPエンドポイントの状態をチェックします基本的なチェックを書き込む処理をガイドします。チェックを実行するたびに、GETリクエストは、HTTPエンドポイントについて説明する。応答に基づいて、次のいずれかが起こります：
-
-応答が成功した場合（応答が200で、タイムアウトなし）応答時間がメトリックとして送信されます。
-タイムアウト応答時間と、イベントがURLとタイムアウトで提出される。
-応答コード！= 200場合、そのイベントは、URLおよびレスポンスコードで送信されます。
+- レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリックスとして送信する。
+- レスポンスがタイムアウトした場合、URLとタイムアウトのイベントを送信する。
+- レスポンスステータスが200以外の場合、URL及びレスポンスコードのイベントを送信する。
 
 
 
@@ -459,25 +434,14 @@ So our final configuration would look something like this:
 <%= snippet_code_block("guides-agentchecks-ex-config.yaml") %> -->
 
 
-#### Configuration
+#### 設定
 
-First we will want to define how our configuration should look, so that we know
-how to handle the structure of the `instance` payload that is passed into the
-call to `check`.
+インスタンス定義の中身がを各Check本体でどのように処理するかを理解するために、
+まず最初に設定ファイルがどのようになるか考えてみることにします。
 
-Besides just defining a URL per call, it'd be nice to allow you to set a timeout
-for each URL. We'd also want to be able to configure a default timeout if no
-timeout value is given for a particular URL.
+設定ファイルには、Checkの実行先のとしてのURLの定義以外に、それぞれのURLに対してのタイムアウトを設定するとより環境に合ったCheckを実行することになります。更に、それぞれのインスタンスでタイムアウトを設定しなかったと時のために、デフォルトのタイムアウトも設定しておくことも必要になるます。
 
-So our final configuration would look something like this:
-
-設定
-
-まず私たちはの構造の処理方法を知っているように、私たちの構成がどのように見えるべきかを定義したいと思うでしょうインスタンスへの呼び出しに渡されるペイロードチェックを。
-
-ちょうど呼び出しごとURLを定義するだけでなく、それはあなたが各URLのタイムアウトを設定できるようにいいだろうと思う。また、タイムアウト値が特定のURLのために指定されていない場合、デフォルトのタイムアウトを設定できるようにしたいと思います。
-
-だから私たちの最終的な構成は次のようになります。
+上記をふまえ、設定ファイルは次のようになります:
 
 
 <%= snippet_code_block("guides-agentchecks-ex-config.yaml") %>
@@ -514,52 +478,29 @@ event method.
 
 <%= snippet_code_block("guides-agentchecks-ex-status.py") %> -->
 
-#### The Check
+#### Check 本体
 
-Now we can start defining our check method. The main part of the check will make
-a request to the URL and time the response time, handling error cases as it goes.
+では、Check 本体の関数の定義することにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
+エラーが発生していれば、エラー条件によって処理をします。
 
-In this snippet, we start a timer, make the GET request using the
-[requests library](http://docs.python-requests.org/en/latest/) and handle and
-errors that might arise.
-
-チェック
-
-今、私たちは私たちのチェック方法の定義を開始することができます。チェックの主な部分は、それが行くようにエラーケースの処理、URLおよび時間応答時間に要求を行います。
-
-このスニペットでは、タイマーを開始使用して、GET要求を行う リクエスト·ライブラリーをして処理し、発生する可能性のあるエラー。
-
+次のスニペットでは、タイマーをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーを処理しています。
 
 <%= snippet_code_block("guides-agentchecks-ex-request.py") %>
 
-If the request passes, we want to submit the timing to Datadog as a metric. Let's
-call it `http.response_time` and tag it with the URL.
-
-リクエストが合格した場合、当社は指標としてDatadogにタイミングを提出したいと思います。のは、それを呼びましょうhttp.response_timeとURLとそれにタグを付ける。
-
+リクエストが成功した場合、レスポンス時間をDatadogへ送信することにします。その際、メトリックス名は、`http.response_time`。URLを、タグとして付記します。
 
 <%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
 
-Finally, we'll want to define what happens in the error cases. We have already
-seen that we call `self.timeout_event` in the case of a URL timeout and
-we call `self.status_code_event` in the case of a bad status code. Let's
-define those methods now.
+最後に、エラー発生時の処理の内容を定義します。
+先のコードで既に、 HTTP リクエストがタイムアウトした場合の`timeout_event` 関数と、レスポンスステータスが200
+以外の場合の`self.status_code_event` 関数を定義しています。
+従って、これらのイベントの関数の中身を定義していきます。
 
-First, we'll define `timeout_event`. Note that we want to aggregate all of these
-events together based on the URL so we will define the aggregation_key as a hash
-of the URL.
-
-最後に、エラーケースで何が起こるかを定義したいと思う。私たちは、すでに私たちが呼んでいることを見てきたself.timeout_eventを、URLのタイムアウトの場合には、私たちは呼んでself.status_code_eventを悪い状態コードの場合には。それでは、これらのメソッドを定義してみましょう。
-
-まず、定義しますtimeout_eventを。私たちは、URLのハッシュとしてaggregation_keyを定義するように、一緒にされたURLに基づいて、これらのイベントのすべてを集約したいことに注意してください。
-
+まず、`timeout_event` を定義します。`self.event()` で注目してほしいのは、`'aggregation_key':` に、先のコードに出ているURLのハッシュである`aggregation_key = md5(url).hexdigest()`を設定している部分です。このaggregation_key を使って、特定のURLに関連したイベントを集約します。
 
 <%= snippet_code_block("guides-agentchecks-ex-timeout.py") %>
 
-Next, we'll define `status_code_event` which looks very similar to the timeout
-event method.
-
-次に、定義しますstatus_code_eventタイムアウトイベントメソッドと非常によく似ています。
+次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容です。
 
 <%= snippet_code_block("guides-agentchecks-ex-status.py") %>
 
@@ -583,20 +524,18 @@ Here's the full source of the check:
 <%= snippet_code_block("guides-agentchecks-ex-all.py") %>
  -->
 
-#### Putting It All Together
+#### 今までの解説をまとめると
 
 For the last part of this guide, we'll show the entire check. This module would
 be placed into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, you can test it by running it as a python
-script. **Make sure to change the conf.d path in the test method**. From your
-Agent root, run:
+このガイドの最後の部分は、Checkの実行コードの全体を載せておきます。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で設置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として設置します。
 
-このガイドの最後の部分に関しては、全体のチェックを紹介します。このモジュールは、中に配置されることになるchecks.dのようにフォルダhttp.py。対応する構成は、中に配置されることになるのconf.dのようにフォルダhttp.yaml。
+Checkに実行ファイルを設置できたら、次のpython スクリプトを使ってテストを実行することができます。
+尚、**`__main__`の部分の`/path/to/conf.d/http.yaml`を、テスト用の設定ファイルの設置してある場所に書き換えてあることを必ず確認してください。**
 
-チェックがになったらchecks.d、あなたはPythonスクリプトとして実行して、それをテストすることができます。試験方法でのconf.dパスを変更してください。あなたのエージェントのルートから、次のコマンドを実行します
-
+Agent のroot から、次のコマンドでテストを実行します:
 
     PYTHONPATH=. python checks.d/http.py
 
@@ -607,7 +546,6 @@ Here's the full source of the check:
 あなたは、インスタンスごとに生成されているかを評価指標とイベントが表示されます。
 
 ここにチェックの完全なソースは次のとおりです。
-
 
 <%= snippet_code_block("guides-agentchecks-ex-all.py") %>
 
@@ -628,19 +566,13 @@ Custom Agent checks can't be directly called from python and instead
 If your issue continues, please reach out to Support with the help page that
  lists the paths it installs. -->
 
-<h3 id="troubleshooting">Troubleshooting</h3>
+<h3 id="troubleshooting">トラブルシュート</h3>
 
-Custom Agent checks can't be directly called from python and instead
- need to be called by the agent. To test this, run:
-
-カスタムエージェントのチェックは、直接のpythonから呼び出され、代わりにエージェントによって呼び出される必要があることはできません。これをテストするには、実行します。
+カスタム Agent Chechは、Pythonコマンドから直接実行できません。代わりに、Datadog Agentを使って、テスト実行するようにします。テストするには、次のようなコマンドを実行します:
 
     sudo -u dd-agent dd-agent check my_check
 
-If your issue continues, please reach out to Support with the help page that
- lists the paths it installs.
-
-あなたの問題が解決しない場合、それはインストールパスが表示されますヘルプページをサポートするための手を差し伸べるしてください。
+問題が解決しない場合、[お問い合わせ](../../help)に記載された方法でサポート要請のご連絡をしていただけると幸いです。
 
 <!-- <h4>Testing Custom Checks on Windows</h4>
 
@@ -655,21 +587,15 @@ in their correct places, you can run the following in shell.exe:
 
 This will output any metrics or events that the check will return. -->
 
-<h4>Testing Custom Checks on Windows</h4>
+<h4>WindowsでのカスタムCheckのテスト</h4>
 
-Testing custom checks on Windows is easy. The Agent install includes a file called shell.exe
-in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
+Windows上でカスタムチェックのテストは簡単です。
+Datadog Agentのインストールには`shell.exe` というDatadog Agent 用のpythonの実行環境が含まれています。
+このファイルは、`Program Files` ディレクトリに保存されています。
 
-Once you're check (called "my_check") is written and you have the .py and .yaml files
-in their correct places, you can run the following in shell.exe:
-
-Windows上でカスタムチェックのテストは簡単です。エージェントのインストールでは、エージェントの環境内でのpythonを実行するために使用できるDatadogエージェントについては、Program FilesディレクトリにSHELL.EXEというファイルが含まれています。
-
-あなたが（「my_check」と呼ばれる）チェックが書かれているしていて、正しい場所での.pyと.yamlファイルを入手したら、SHELL.EXEで次のように実行できます。
+Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.yaml`ファイルの設置が終わったら、次のコマンドを、`shell.exe` で起動したウインドウ内で実行してみてください。
 
     >>> from checks import run_check
     >>> run_check('my_check')
 
-This will output any metrics or events that the check will return.
-
-この意志出力チェックが返され、任意のメトリックやイベント。
+このコマンドは、Checkが送信するメトリックスかイベントを表示します。
