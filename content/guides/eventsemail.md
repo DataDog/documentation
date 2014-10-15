@@ -3,7 +3,7 @@ title: Events via Email
 kind: documentation
 sidebar:
   nav:
-    - header: test
+    - header: Events via Email guide
     - text: Overview
       href: "#overview"
     - text: JSON-Formatted vs Plain Text
@@ -91,7 +91,7 @@ To set up the email, first log in to your Datadog account at
 [https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*,
 then scroll down to *Events API Emails*. This section will show you all the emails
 available for your applications and who created them. Choose the format for your
-messages from the Format: dropdown, then click *Create API Email*.  
+messages from the Format: dropdown, then click *Create API Email*.
 
 ![JSON Event Email API](/static/images/event-email-api.png)
 
