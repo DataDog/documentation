@@ -6,15 +6,15 @@ sidebar:
     - header: メールによるイベント送情のガイド
     - text: 概要
       href: "#overview"
-    - text: JSON-Formatted vs Plain Text
+    - text: JSON形式 vs 平文形式
       href: "#json-vs-plain"
-    - text: Setting up the Email Address
+    - text: メールアドレスの設定
       href: "#setup-address"
     - text: Formatting The JSON Data
       href: "#json-data"
 
 ---
-## Overview {#overview}
+<!-- ## Overview {#overview}
 
 When you need to integrate an application or system with Datadog, you have a
 few choices. The first is using one of our many existing [integrations][integrations].
@@ -28,17 +28,35 @@ There is another option available if you aren't using an application that has
 an integration and you don't want to create an agent check. You can rely on
 the application or system sending an email instead. There are two different ways
 to use Events via Email, depending mostly on whether the application offers you
-the ability to customize the format of the email body being sent.
+the ability to customize the format of the email body being sent. -->
 
-## JSON-Formatted vs Plain Text {#json-vs-plain}
+## 概要 {#overview}
+
+Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
+まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
+これらのIntegrationを使うことによって、最小限の設定作業​で、多種多様なメトリクスやイベントの収集ができるようになります。
+もしも、これから使用するアプリケーション用のIntegrationが準備されていなければ、[Datadog Agentを使ってCheckを独自にプログラミング][agentcheck]することも選択できます。
+この選択肢は、Integarationを利用するよりは手間を要し、又アプリケーションとDatadog Agent がどのように機能しているかの知識の必要とします。
+
+Datadog Agent のCheckをプログラミングしたくない場合には、更に他の選択肢もあります。
+システム又はアプリケーションにメールを送信させることで、Checkの代替わりをさせる選択肢です。
+メールによるイベント情報の送信には、アプリケーション内からメールのボディー文章を生成するための自由度により、この２つの方法が選択できます。
+
+
+<!-- ## JSON-Formatted vs Plain Text {#json-vs-plain}
 
 If you have complete control over the email sent by the application to Datadog,
 then you will probably want to configure a JSON-formatted message to be sent.
 This will allow you to set everything in the event that appears in the event
-stream. Here are examples of each:
+stream. Here are examples of each: -->
 
-### Plain Text
+## JSON形式 vs 平文形式 {#json-vs-plain}
 
+アプリケーションからDatadogに送信するメールを自由にコントロールできるなら、JSON形式でのメッセージ送信の設定をするとよいでしょう。この形式を使うことによって、イベントストリームに表示されるイベントに必要が情報の全てを送信することができるでしょう。
+
+それぞれの例を以下に紹介します:
+
+<!-- ### Plain Text
 
 #### Source Email
 
@@ -57,9 +75,30 @@ Note that the subject of the email becomes the title of the event and the body
 of the email becomes the body of the event. Although it looks like a tag appears
 at the end of the title and body of the event, neither instance are actually
 tags. The sender of the email also appears at the bottom of the event, so be sure
-to take advantage of that to help identify the sending application.
+to take advantage of that to help identify the sending application. -->
 
-### JSON
+### 平文
+
+#### メールの内容
+
+平文でのイベント情報の送信では、3つのフィールドの制御ができます:
+
+- メールアドレス
+- 件名
+- 本文
+
+![Plain Text Email](/static/images/plain-email.png)
+
+#### Datadog タイムラインでのイベント表示
+
+![Plain Text Event](/static/images/plain-event.png)
+
+メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本体になることに注意してください。
+イベントのタイトルと本文の最後にタグが表示されるように見えますが、どちらの部分もDatadogではタグとしては扱われてはいません。
+メールの送信者は、イベント欄の一番下の部分に表示されますのでこの部分を有効に活用しアプリケーションの識別に利用するとよいでしょう。
+
+
+<!-- ### JSON
 
 #### Source Email
 
@@ -83,9 +122,43 @@ If you are testing the email with a standard email client, the body may be conve
 to HTML as a convenience to the user. This will cause the JSON to no longer be
 JSON and the email will be ignored by Datadog.
 
+The allowable JSON keys can be found in the [events API documentation][eventsapi]. -->
+
+### JSON
+
+#### メールの内容
+
+In the source JSON-formatted email, you have 10 fields you can control: sender
+email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
+alert type,  date happened,  host, aggregation key, and source type name.
+
+送信者の電子メールアドレス、および9 JSONのキーまで：ソースJSON形式の電子メールでは、10あなたがコントロールできるフィールドがあります。これらのキーは、タイトル、テキスト、優先度、タグ、アラートタイプ、日付が起こった、ホスト、集約キー、およびソース·タイプ名です。
+
+
+![JSON Email](/static/images/json-email.png)
+
+#### Datadog タイムラインでのイベント表示
+
+![JSON Event](/static/images/json-event.png)
+
+
+In a JSON-formatted email, the subject of the email message is irrelevant as it
+will be replaced by the title in the JSON in the body of the email. All data that
+appears in the event is defined in the JSON in the body of the email. This JSON
+must be well-formed or the message will be ignored. This means that not only should
+it look correct with commas separating key value pairs, it also must be pure JSON.
+If you are testing the email with a standard email client, the body may be converted
+to HTML as a convenience to the user. This will cause the JSON to no longer be
+JSON and the email will be ignored by Datadog.
+
 The allowable JSON keys can be found in the [events API documentation][eventsapi].
 
-## Setting Up The Email Address {#setup-address}
+それは、メールの本文に、JSONでのタイトルに置き換えられますようにJSON形式の電子メールでは、電子メールメッセージの件名は関係ありません。イベントに表示されるすべてのデータは、電子メールの本文に、JSONで定義されています。このJSONは、整形やメッセージは無視されなければなりません。これだけでなく、キーと値のペアを分離するコンマで正しく見えるべきであることを意味し、それはまた、純粋なJSONでなければなりません。あなたは、標準的な電子メールクライアントでメールをテストする場合は、本体は、ユーザーの便宜のために、HTMLに変換することができる。これはもはやJSONをできなくするために、JSONの原因となりますし、電子メールはDatadogによって無視されます。
+
+許容JSONのキーはで見つけることができるイベントのAPIドキュメント。
+
+
+<!-- ## Setting Up The Email Address {#setup-address}
 
 To set up the email, first log in to your Datadog account at
 [https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*,
@@ -93,8 +166,22 @@ then scroll down to *Events API Emails*. This section will show you all the emai
 available for your applications and who created them. Choose the format for your
 messages from the Format: dropdown, then click *Create API Email*.
 
-![JSON Event Email API](/static/images/event-email-api.png)
+![JSON Event Email API](/static/images/event-email-api.png) -->
 
+## メールアドレスの設定 {#setup-address}
+
+To set up the email, first log in to your Datadog account at
+[https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*,
+then scroll down to *Events API Emails*. This section will show you all the emails
+available for your applications and who created them. Choose the format for your
+messages from the Format: dropdown, then click *Create API Email*.
+
+電子メールを設定するには、最初にあなたのDatadogアカウントにログイン https://app.datadoghq.com。からインテグレーション]メニューを選択するAPIをまでスクロールした後、イベントAPIの電子メール。このセクションでは、アプリケーションと誰がそれを作成したために利用可能なすべての電子メールを表示します。ドロップダウン、[Next]をクリックします。フォーマットからのメッセージの形式を選択したAPI Eメールを作成します。
+
+
+
+
+![JSON Event Email API](/static/images/event-email-api.png)
 
 
 [integrations]: /integrations
