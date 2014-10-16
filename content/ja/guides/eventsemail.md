@@ -81,9 +81,9 @@ to take advantage of that to help identify the sending application. -->
 
 #### メールの内容
 
-平文でのイベント情報の送信では、3つのフィールドの制御ができます:
+平文でのイベント情報メールの送信では、、3つのフィールドの制御ができます:
 
-- メールアドレス
+- 送信者メールアドレス
 - 件名
 - 本文
 
@@ -128,12 +128,18 @@ The allowable JSON keys can be found in the [events API documentation][eventsapi
 
 #### メールの内容
 
-In the source JSON-formatted email, you have 10 fields you can control: sender
-email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
-alert type,  date happened,  host, aggregation key, and source type name.
+JSON形式でのイベント情報メールの送信では、10のフィールドの制御ができます。それらは、送信者の電子メールアドレス、および9つのJSONのキー項目です:
 
-送信者の電子メールアドレス、および9 JSONのキーまで：ソースJSON形式の電子メールでは、10あなたがコントロールできるフィールドがあります。これらのキーは、タイトル、テキスト、優先度、タグ、アラートタイプ、日付が起こった、ホスト、集約キー、およびソース·タイプ名です。
-
+- 送信者メールアドレス
+- "title" :
+- "text" :
+- "priority" :
+- "tags" :
+- "alert type" :
+- "date happend" :
+- "host" :
+- "agrregation key" :
+- "source type name" :
 
 ![JSON Email](/static/images/json-email.png)
 
@@ -176,12 +182,15 @@ then scroll down to *Events API Emails*. This section will show you all the emai
 available for your applications and who created them. Choose the format for your
 messages from the Format: dropdown, then click *Create API Email*.
 
-電子メールを設定するには、最初にあなたのDatadogアカウントにログイン https://app.datadoghq.com。からインテグレーション]メニューを選択するAPIをまでスクロールした後、イベントAPIの電子メール。このセクションでは、アプリケーションと誰がそれを作成したために利用可能なすべての電子メールを表示します。ドロップダウン、[Next]をクリックします。フォーマットからのメッセージの形式を選択したAPI Eメールを作成します。
+メールを送信する先を設定するには、[Datadogアカウント][dd-app]にログインし、。`Integrations`メニューから`APIs`を選択し、**Events API Emails**のセクションまで移動します。
 
-
-
+このセクションでは、Datadogがイベント情報を受信るために用意したメールアドレスと、そのメールアドレスの作成者が表示されています。
 
 ![JSON Event Email API](/static/images/event-email-api.png)
+
+新しくメールアドレスを追加する場合は、**New API Email**のセクションで、送信するメールの形式をドロップダウン・メニューで選択し、`Create API Email`をクリックします。
+
+![Event Email Set](/static/images/ja-specific/event_email_set.png)
 
 
 [integrations]: /integrations
