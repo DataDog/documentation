@@ -147,21 +147,18 @@ JSON形式でのイベント情報メールの送信では、10のフィール�
 
 ![JSON Event](/static/images/json-event.png)
 
+JSON形式のメールでは、メールのタイトルは無視され、本文内のtitleで設定した内容に置き換えられます。
+イベントに表示されるすべてのデータは、メールの本文にJSONで定義されている必要があります。
+メール本文に記述するメッセージは、JSON記法に則って正しく整形されている必要があります。
+本文内のJSON記法に問題を発見した場合、そのメールは処理されません。
+従って本文内のJSONメッセージでは、キーと値がコンマを使って正しく記述されると同時に、純粋なJSON記法である必要があることを意味しています。
 
-In a JSON-formatted email, the subject of the email message is irrelevant as it
-will be replaced by the title in the JSON in the body of the email. All data that
-appears in the event is defined in the JSON in the body of the email. This JSON
-must be well-formed or the message will be ignored. This means that not only should
-it look correct with commas separating key value pairs, it also must be pure JSON.
-If you are testing the email with a standard email client, the body may be converted
-to HTML as a convenience to the user. This will cause the JSON to no longer be
-JSON and the email will be ignored by Datadog.
+メールクライアントで本文に書き込むJSONメッセージの適合性をテストしている場合は、使用中のクライアントの設定によって、本文がHTMLに変換されていないかを事前に確認してください。このHTML変換が設定されている場合、本文のメッセージはJSON記法ではない形式の文字列に変換され、Datadogではこのメールを処理しません。
 
-The allowable JSON keys can be found in the [events API documentation][eventsapi].
+あなたは、標準的な電子メールクライアントでメールをテストする場合は、本体は、ユーザーの便宜のために、HTMLに変換することができる。
+これはもはやJSONをできなくするために、JSONの原因となりますし、電子メールはDatadogによって無視されます。
 
-それは、メールの本文に、JSONでのタイトルに置き換えられますようにJSON形式の電子メールでは、電子メールメッセージの件名は関係ありません。イベントに表示されるすべてのデータは、電子メールの本文に、JSONで定義されています。このJSONは、整形やメッセージは無視されなければなりません。これだけでなく、キーと値のペアを分離するコンマで正しく見えるべきであることを意味し、それはまた、純粋なJSONでなければなりません。あなたは、標準的な電子メールクライアントでメールをテストする場合は、本体は、ユーザーの便宜のために、HTMLに変換することができる。これはもはやJSONをできなくするために、JSONの原因となりますし、電子メールはDatadogによって無視されます。
-
-許容JSONのキーはで見つけることができるイベントのAPIドキュメント。
+JSON形式で利用できるキーの詳細は、[events API documentation][eventsapi]で確認することができます。
 
 
 <!-- ## Setting Up The Email Address {#setup-address}
@@ -175,12 +172,6 @@ messages from the Format: dropdown, then click *Create API Email*.
 ![JSON Event Email API](/static/images/event-email-api.png) -->
 
 ## メールアドレスの設定 {#setup-address}
-
-To set up the email, first log in to your Datadog account at
-[https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*,
-then scroll down to *Events API Emails*. This section will show you all the emails
-available for your applications and who created them. Choose the format for your
-messages from the Format: dropdown, then click *Create API Email*.
 
 メールを送信する先を設定するには、[Datadogアカウント][dd-app]にログインし、。`Integrations`メニューから`APIs`を選択し、**Events API Emails**のセクションまで移動します。
 
