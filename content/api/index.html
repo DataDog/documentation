@@ -212,8 +212,8 @@ kind: documentation
         <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
           <% %w(console python).each do |l| %>
-            <%= argument "title", 'The event title.', :lang => l %>
-            <%= argument "text", "The body of the event.", :lang => l %>
+            <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
+            <%= argument "text", "The body of the event. Limited to 4000 characters.", :lang => l %>
           <% end %>
           <%= argument 'msg_text', 'The text for the message', :lang => 'ruby' %>
           <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
