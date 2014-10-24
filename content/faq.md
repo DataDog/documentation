@@ -139,9 +139,8 @@ the last…”). Switching the time frame on this alert will resolve this issue,
 you can install the agent on some AWS hosts to get more up-to-date data to
 alert on. Overall, we’re always working towards getting data more efficiently
 from AWS.
-</p>
 
-#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
+#### Is it possible to set up alerts based on % utilization? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
 
 * Yes, this can be done! Here is an example for creating a disk space in use
 alert when at 80% or above:
@@ -150,9 +149,9 @@ alert when at 80% or above:
   3. For set alert grouping, select "simple alert".
   4. Set alert conditions: Select Above and for the value put 0.8.
   5. Add a custom message for alert if you'd like.
-* You can read more about setting up alerts [here][alerting]</a>.
+* You can read more about setting up alerts [here][alerting].
 
-[alerting]: guides/alerting/
+[alerting]: /guides/alerting/
 <!--
 ===============================================================================
     API
@@ -291,7 +290,7 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-Further tagging info can be found [here][tags]</a>.
+Further tagging info can be found [here][tags].
 
 For information on AWS tagging, please see [here][integration-aws].
 

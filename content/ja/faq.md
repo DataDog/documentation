@@ -10,7 +10,7 @@ sidebar:
       href: "/faq/#alerts"
     - text: APIについて
       href: "/faq/#api"
-    - text: Architectureについて
+    - text: アーキテクチャについて
       href: "/faq/#architecture"
     - text: AWSについて
       href: "/faq/#aws"
@@ -148,7 +148,7 @@ It can take up to 24h for the host to disappear from the infrastructure page,
 but it will only be part of the host count for billing purposes if we're
 actually receiving data.-->
 
-#### ホスト上でDatadog Agentを停止しますたが、Datadogアカウント上には未だそのホストが表示されています。 {#agent-stopped}
+#### ホスト上でDatadog Agentを停止しますたが、ダッシュボード上には未だそのホストが表示されています。 {#agent-stopped}
 
 Infrastructureのページから、ホスト名から消えるのに最長で24時間くらいかかります。
 Agentを停止したのちダッシュボードにホスト名が残っている時間は、そのホストに対しは課金請求を受けることはありません。
@@ -192,23 +192,19 @@ that an alert for an AWS metric be set to have a threshold window of at least
 the last…”). Switching the time frame on this alert will resolve this issue, or
 you can install the agent on some AWS hosts to get more up-to-date data to
 alert on. Overall, we’re always working towards getting data more efficiently
-from AWS.
-</p>-->
+from AWS. -->
 
 ### アラートについて {#alerts}
 
-#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? {#no-data}
+### メトリクスにアラートを設定したところ、なぜか非常に多くの[No Data] アラートが発生します。 {#no-data}
 
-For the AWS [No Data] errors, the issue here has to do with how frequently we
-receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
-APIs, data is often delayed by 10 or more minutes, so we generally recommend
-that an alert for an AWS metric be set to have a threshold window of at least
-30 minutes or an hour (you can see this in step 3 of alert creation, “during
-the last…”). Switching the time frame on this alert will resolve this issue, or
-you can install the agent on some AWS hosts to get more up-to-date data to
-alert on. Overall, we’re always working towards getting data more efficiently
-from AWS.
-</p>
+AWSの[No Data]エラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。
+DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデーターは、10分かそれ以上遅延します。
+従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。
+(この時間枠の設定は、[アラートの設定方法][alerting_ja]ページのアラートの新規設定の第3ステップを参照してください。)
+アラートの発報条件の時間枠を変更することで、この問題は解決するはずです。
+より粒度の細かいデーターでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデーターを基にアラートを設定することをお勧めします。
+
 
 <!--#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
 
@@ -223,19 +219,19 @@ alert when at 80% or above:
 
 [alerting]: guides/alerting/-->
 
-#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
+### リソースの利用率に基づいてアラートを発報することはできますか。例えば、メモリーの利用率が50％になった時や、ディスク領域の使用率が80％になった時など。 {#alert-disk-utilization}
 
-* Yes, this can be done! Here is an example for creating a disk space in use
-alert when at 80% or above:
-  1. Select a metric like "system.disk.in_use".
-  2. Select the "threshold alert" type.
-  3. For set alert grouping, select "simple alert".
-  4. Set alert conditions: Select Above and for the value put 0.8.
-  5. Add a custom message for alert if you'd like.
-* You can read more about setting up alerts [here][alerting]</a>.
+* **はい、可能です。**
+* 詳細については、[アラートの設定方法][alerting_ja]のページを参照してください。
+* 以下が、ディスク使用率が80％の時に発報するアラートの設定手順の概要です:
+  1. `system.disk.in_use` というメトリクスを選択します。
+  2. `threshold alert` タイプを選択します。
+  3. `simple alert` グループタイプを選択します。
+  4. "Set alert conditions:" で、`Above`を選択し、 値に`0.8`を入力します。
+  5. "Say what's happening" にアラートメッセージを設定します。
 
-[alerting]: guides/alerting/
-
+[alerting]: /guides/alerting/
+[alerting_ja]: /ja/guides/alerting/
 
 <!--
 ===============================================================================
@@ -253,20 +249,19 @@ We recommend avoiding spaces.
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
 We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
 but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are
-reporting ‘http.nginx.*’, those must be web frontends”).-->
+reporting ‘http.nginx.*’, those must be web frontends”). -->
 
 ### APIについて {#api}
 
-#### What are valid metric names? {#api-metric-names}
+#### メトリクスの命名規則はありますか。 {#api-metric-names}
 
-Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
-Other characters will get converted to underscores. There is no max length. Unicode is not support.
-We recommend avoiding spaces.
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
-We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
-but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are
-reporting ‘http.nginx.*’, those must be web frontends”).
+- メトリクス名は、ascii英字で始める必要があります。2文字目以降は、ascii英数字、アンダースコア、ピリオドを使用することができます。
+これらの条件に合わない全ての文字は、アンダースコアに変換されます。
+- メトリクス名には、文字数の制限はありません。
+- Unicodeはサポートされていません。
+- 空白は使用しないでください。
 
+Datadog Agentによって送信されるメトリクス名は、疑似階層ドット形式（例：http.nginx.response_time）になります。この形式を採用しているのは、メトリクス名から各サーバーの機能を推測し易くするためです。例えば、「hostAとhostBは、‘http.nginx.*’だから、多分これらはwebのフロントエンドのインスタンスだよね〜」という感じです。
 
 <!--#### What are valid tags? {#api-tags}
 
@@ -275,15 +270,16 @@ underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.-->
 
-#### What are valid tags? {#api-tags}
+#### タグの。命名規則はありますか。 {#api-tags}
 
-Tags must start with a letter, and after that may contain alphanumerics,
-underscores, minuses, colons, periods and slashes. Other characters will get
-converted to underscores. Tags can be up to 200 characters long and support
-unicode. Tags will be converted to lowercase as well.
+- タグ名は、ascii英字で始める必要があります。2文字目以降は、英数字、アンダースコア、マイナス、コロン、ピリオド、スラッシュを使用することができます。これらの条件に合わない全ての文字は、アンダースコアに変換されます。
+- タグ名は、最大が200文字の制限があります。
+- Unicodeをサポートします。
+- タグ名は、全て小文字に変換されます。
 
 
 <!--#### I'm submitting points to the API- anything I should know? {#api-else}
+
 We store metric points at the 1 second resolution, but we’d prefer if you only
 submitted points every 15 seconds. Any metrics with fractions of a second timestamps
 will get rounded to the nearest second, and if any points have the same timestamp,
@@ -292,14 +288,14 @@ the latest point will overwrite the previous ones.
 We have a soft limit of 100 time series per host, where a time series is
 defined as a unique combination of metric name and tag.-->
 
-#### I'm submitting points to the API- anything I should know? {#api-else}
-We store metric points at the 1 second resolution, but we’d prefer if you only
-submitted points every 15 seconds. Any metrics with fractions of a second timestamps
-will get rounded to the nearest second, and if any points have the same timestamp,
-the latest point will overwrite the previous ones.
+#### API経由でメトリクスデーターを送信しようとしています。その際に注意することはありますか。 {#api-else}
 
-We have a soft limit of 100 time series per host, where a time series is
-defined as a unique combination of metric name and tag.
+Datadogでは、1秒の分解能でメトリクスのデーターを保存していますが、15秒間隔でのメトリクス・ポイントのデーター送信を推奨しています。
+タイムスタンプの１秒以下の部分は、最も近い秒単位に丸められます。
+この処理によって、同じタイムスタンプが複数発生した場合、先に受信したデーターは、後から受信したタイムスタンプのデーターによって上書きされます。　
+
+Datadogでは、100個/ホストの時系列データーの制限を設けています。
+ここでいう時系列データーとは、メトリクス名とタグの組み合わせの数になります。
 
 
 <!--
@@ -317,14 +313,13 @@ there is an Agent you'll need to install. We never make any direct connections
 to your infrastructure. For cloud integrations, we connect to them using the
 credentials you provide to us.-->
 
-### Architecture {#architecture}
+### アーキテクチャについて {#architecture}
 
-#### Is Datadog a cloud service or server application? {#arch-cloud-or-server}
+#### Datadogは、クラウドサービスですか、それもとサーバーにインストールするアプリケーションですか。 {#arch-cloud-or-server}
 
-It's primarily a cloud service, but if you want to collect data on your servers,
-there is an Agent you'll need to install. We never make any direct connections
-to your infrastructure. For cloud integrations, we connect to them using the
-credentials you provide to us.
+Datadogは、クラウドサービスです。しかし、サーバー上のメトリクスデータを収集するためには、それらのデーターをDatadogのサービスに転送するためのAgentをインストールする必要があります。
+Datadog側からは、監視対象のインフラに直接コネクションを張るすることはありません。
+AWS Integrationなど、クラウドプロバイダーの監視用のAPIを使ったインテグレーションでは、設定時に記述された認証情報でのみ監視情報を収取します。
 
 
 <!--#### How do I delete a host or metric? {#arch-delete}
@@ -333,11 +328,12 @@ All hosts or metrics that have not seen data in 24 hours will disappear from the
 you can still query against them, but it will not appear in drop downs or infrastructure.
 There is not a way to immediately delete a metric.-->
 
-#### How do I delete a host or metric? {#arch-delete}
+#### ホストやメトリクスを削除る方法はありますか。 {#arch-delete}
 
-All hosts or metrics that have not seen data in 24 hours will disappear from the UI;
-you can still query against them, but it will not appear in drop downs or infrastructure.
-There is not a way to immediately delete a metric.
+**メトリクスを直ちに削除する方法はありません。**
+
+Datadog側でのメトリクス受信が停止していからおよそ24時間経過後、そのメトリクスを送信していたホストはUIに表示されなくなります。UIに表示されなくなった後も、これらのメトリクスやホストの情報をクエリーを使って検索することはできます。
+
 
 
 <!--#### What's the difference between Graphite's query language and Datadog's? {#arch-graphite-differences}
@@ -382,46 +378,51 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 Which would graph stacked area series for each http_method value like GET, POST, etc.
 -->
 
-#### What's the difference between Graphite's query language and Datadog's? {#arch-graphite-differences}
+#### Graphiteのquery languageとDatadogのクエリーを教えてください。 {#arch-graphite-differences}
 
-In terms of metric naming, we differ a little with Graphite in that a metric
-query is defined by a metric name and a scope, where a scope is one or more tags.
-To translate:
+メトリックの命名において、Graphiteとは以下のようにDatadogと異なります。
+
+Graphiteの次の例では:
 
 ~~~
 <application>.requests.<HTTP Method>.<HTTP Method>.<Handler Method>.mean_90
 ~~~
 
-into Datadog, we'd probably say:
+Datadogでは、以下のようになります:
 
 ~~~
 <application>.requests.mean_90{http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>}
 ~~~
 
 
-Where ```<application>.requests.mean_90``` is the metric name, and
-  ```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```
-    are tags, so a concrete example might look like:
+Where ```<application>.requests.mean_90``` is the metric name,
+and ```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>``` are tags,
+so a concrete example might look like:
+
+```<application>.requests.mean_90```は、メトリクス名になり、```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```は、タグになります。
+
+従って、具体的に書くと次のようになります:
 
 ~~~
 foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
 ~~~
 
-To do aggregation, we can specify an aggregator as part of the metric query:
+先のクエリーを使って集計をするには、先頭にaggregatorを追記します:
 
 ~~~
 avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
 ~~~
 
-This will graph a single series that's the average of that metric across the
-intersection of those tags. We support avg, sum, min, max aggregators. If you
-wanted to see all the possible series for a given tag facet, you can say:
+This will graph a single series that's the average of that metric across the　intersection of those tags.  
+Datadogでは、メトリクスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
+
+すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリーを記述することができます:
 
 ~~~
 avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {http_method}
 ~~~
 
-Which would graph stacked area series for each http_method value like GET, POST, etc.
+このクエリーは、GET、POSTなどの各http_methodを積み重ねた時系列のグラフを表示します。
 
 
 <!--#### How are hostnames determined? {#arch-hostnames}
@@ -430,7 +431,7 @@ The hostnames are determined by what the Datadog Agent detects; this is fully
 documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
  ```/etc/init.d/datadog-agent info```-->
  
-#### How are hostnames determined? {#arch-hostnames}
+#### ホスト名はどのように判定され、設定されますか。 {#arch-hostnames}
 
 The hostnames are determined by what the Datadog Agent detects; this is fully
 documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
@@ -475,7 +476,7 @@ Further tagging info can be found [here][tags]</a>.
 
 For information on AWS tagging, please see [here][integration-aws].-->
 
-#### Tell me about tagging! {#tagging}
+#### Datadogを使う上での、タグの使い方について教えて下さい。 {#tagging}
 
 Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
@@ -539,9 +540,9 @@ single host’s duplicate names to be aliased. You can read more about
 hostnames [here][hostnames].
 -->
 
-### AWS {#aws}
+### AWS について{#aws}
 
-#### I just set up my AWS integration. Why am I seeing duplicate hosts? {#duplicate-hosts}
+#### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic
 hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a
@@ -557,7 +558,7 @@ hostnames [here][hostnames].
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
 * You can read in detail about our AWS integration [here][integration-aws].-->
 
-#### What metrics will I get from the AWS integration? {#aws-metrics}
+#### AWS用のIntegrationには、どのようなメトリクスが含まれていますか。 {#aws-metrics}
 
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
 * You can read in detail about our AWS integration [here][integration-aws].
@@ -568,6 +569,8 @@ hostnames [here][hostnames].
 We do not charge for ELBs (as they can’t be filtered out).-->
 
 #### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
+
+#### ELBのインスタンスをフィルターすることができません。これらのELBのインスタンスに対しても請求されますか。 {#aws-elb}
 
 We do not charge for ELBs (as they can’t be filtered out).
 
@@ -586,7 +589,7 @@ This will output the current system’s date, and then make a request to our
 endpoint and grab the date on our end. If these are more than a few minutes
 apart, you may want to look at the time settings on your server.-->
 
-#### Why is there a delay in receiving my data? {#aws-delay}
+#### データーを取得するのになぜ遅延が発生するのですか。 {#aws-delay}
 
 We have seen a few cases where machines have their clock set further in the
 future or the past, which can sometimes cause problems with metric submission.
@@ -610,7 +613,7 @@ Yes you can! Follow the steps below to set this up:
 3. Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
 4. Restart the agent-->
 
-#### Can I get my postgres data from RDS? {#aws-rds}
+#### RDSからpostgresのメトリクスデーターを取得することができますか。 {#aws-rds}
 
 Yes you can! Follow the steps below to set this up:
 
@@ -642,7 +645,7 @@ As an admin you can check out past invoices [here][app-billing-history].-->
 
 ### 請求について {#billing}
 
-#### How can I change the Billing contact? {#billing-contact}
+#### 請求先の変更はどのようにすればよいですか。 {#billing-contact}
 
 You can set a specific email address to receive invoices, even if that address
 is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
@@ -654,7 +657,7 @@ As an admin you can check out past invoices [here][app-billing-history].
 
 ***You can read more about billing [here][billing].***-->
 
-#### Where can I get a copy of the invoice? {#billing-invoice}
+#### 請求書のコピーは、どこから入手できますか。 {#billing-invoice}
 
 As an admin you can check out past invoices [here][app-billing-history].
 
@@ -679,14 +682,13 @@ grouped ```by {host}```, write a graph query that looks like:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
-~~~-->
+~~~ -->
 
 ### グラフ化について {#graph}
 
-#### How do I do arithmetic with grouped metrics? {#graph-sum-grouped}
+#### グループ化したメトリクスの計算はどのようにすればよいですか。 {#graph-sum-grouped}
 
-To graph the sum of ```app.foo.bar{env:staging}``` and ```app.foo.baz{env:staging}```
-grouped ```by {host}```, write a graph query that looks like:
+```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリクス と ```app.foo.baz{env:staging}```メトリクスの足し算の結果をグラフ化するクエリーは、次になります:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
@@ -709,16 +711,18 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~-->
 
-#### What's the syntax to sum multiple datapoints into a single line? {#graph-mult-points}
+#### 複数のデーターポイントの足し算し1つの線にするは、クエリーをどう書けはよいですか。 {#graph-mult-points}
 
-You can switch commas separating the queries into plus signs, from:
+カンマで分割し記述しているクエリーの、コンマをプラス記号に置き換える。
 
+置き換える前:
+    
 ~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
 ~~~
 
-to:
+置き換えた後:
 
 ~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
@@ -734,7 +738,7 @@ add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
 ewma stands for exponentially-moving average and the full list of functions
 you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.-->
 
-#### How do I do graph smoothing? {#graph-smoothing}
+#### グラフのスムージングはどうすいればよいですか。 {#graph-smoothing}
 
 You can apply smoothing averages to your series by droping to the JSON editor and
 adding ‘ewma’, for example:
@@ -751,13 +755,14 @@ The metric explorer just does one metric per graph, but you can see a stacked CP
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>-->
 
-<h4>Can I stack CPU metrics on the same graph?</h4>
-<p>
-Check out our documentation on <a href="http://docs.datadoghq.com/graphing/">stacked series</a>.
-The metric explorer just does one metric per graph, but you can see a stacked CPU graph
-on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
-</p>
+#### 同じグラフにCPUの負荷を積み上げるのにはどうしたらよいですか。
 
+Check out our documentation on [stacked series][stacked series_ja].
+The metric explorer just does one metric per graph, but you can see a stacked CPU graph
+on the [overview page][overview_page_ja] by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
+
+[stacked_series_ja]: /ja/graphing
+[overview_page_ja]: https://app.datadoghq.com/infrastructure
 
 <!--<h4>Is there a way to share graphs?</h4>
 <p>
@@ -773,19 +778,14 @@ live and read-only access to just the contents of that screenboard.
 </ul>
 </p>-->
 
-<h4>Is there a way to share graphs?</h4>
-<p>
+#### Is there a way to share graphs?
+
 There are two ways to share a graph or screenboard
-<ul>
-<li>In a time board, pick a graph on a dashboard,
+
+- In a time board, pick a graph on a dashboard,
 click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
-</li>
-<li>
-In a custom screenboard, the middle button in the upper right will generate a URL which gives
+- In a custom screenboard, the middle button in the upper right will generate a URL which gives
 live and read-only access to just the contents of that screenboard.
-</li>
-</ul>
-</p>
 
 
 <!--<h4>How do I track cron jobs?</h4>
@@ -809,7 +809,7 @@ will send events on every run.
 
 (To get the python client lib you can install it with <code>easy_install dogapi</code>).-->
 
-<h4>How do I track cron jobs?</h4>
+#### How do I track cron jobs?
 
 Often, you set cron jobs that trigger some meaningful script that you want to monitor and
 correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
@@ -825,10 +825,10 @@ library:
 
 
 This will call the command at the end of the script and
-send Datadog events if it exits with a non-zero exit code (i.e. an error). <code>--submit_mode all</code>
+send Datadog events if it exits with a non-zero exit code (i.e. an error). ``--submit_mode all``
 will send events on every run.
 
-(To get the python client lib you can install it with <code>easy_install dogapi</code>).
+(To get the python client lib you can install it with ``easy_install dogapi``).
 
 
 <!-- ====================================================================== -->
@@ -839,27 +839,23 @@ will send events on every run.
     Integrations
 ===============================================================================
 -->
-<h3><a name="integrations" href="#integrations">Integrationについて</a></h3>
 
-<h4 id="integration-metrics">I set up my integration. Why am I not seeing metrics?</h4>
-<p>
+### Integrationについて {#integrations}
+
+#### I set up my integration. Why am I not seeing metrics? {#ntegration-metrics}
+
 There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
-</p>
 
-<h4 id="integration-data">How is Datadog retrieving my data?</h4>
-<p>
-<ul>
-<li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li>
-<li>All traffic is sent over SSL.</li>
-<li>All communication to Datadog is via HTTPS.</li>
-<li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li>
-</ul>
-</p>
+#### How is Datadog retrieving my data? {#ntegration-data}
 
-<h4 id="integration-edit">I’d like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
-<p>
+- Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
+- All traffic is sent over SSL.
+- All communication to Datadog is via HTTPS.
+- The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.
+
+#### I’d like to tweak an integration or write up a new one. Do you accept pull requests? {#integration-edit}
+
 Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
-</p>
 
 
 <!--
@@ -874,12 +870,11 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
 You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
 </p>-->
 
-<h3><a name="metrics" href="#metrics">メトリクスについて</a></h3>
+### メトリクスについて {#metrics}
 
-<h4 id="custom-metrics">How do I submit custom metrics?</h4>
-<p>
+#### How do I submit custom metrics? {#custom-metrics}
+
 You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
-</p>
 
 
 <!--<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
@@ -887,10 +882,9 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 </p>-->
 
-<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
-<p>
+#### Why is my counter metric showing decimal values? {#ounter-values}
+
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
-</p>
 
 
 <!--<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
@@ -899,10 +893,9 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 </p>
 -->
 
-<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
-<p>
+#### Is there a way to submit metrics from my log data? {#og-data-metrics}
+
 Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
-</p>
 
 
 <!--<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
@@ -910,10 +903,9 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 Unfortunately, we do not allow adding past data at this time.
 </p>-->
 
-<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
-<p>
+#### I’d like to add past data to my account. Is there a way to do that? {#ast-data}
+
 Unfortunately, we do not allow adding past data at this time.
-</p>
 
 
 <!--<h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
@@ -926,15 +918,13 @@ This depends on the medium you use to send metrics.
 </ul>
 </p>-->
 
-<h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
-<p>
+#### Correct metric syntax (JSON)? {#metric-syntax}
+
 This depends on the medium you use to send metrics.
-<ul>
-<li>For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.</li>
-<li>For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.</li>
-<li>For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.</li>
-</ul>
-</p>
+
+- For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.
+- For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.
+- For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.
 
 
 <!--<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
@@ -947,15 +937,13 @@ We offer reporting in a variety of ways so far, which include:
 </ul>
 </p>-->
 
-<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
-<p>
+#### Is there a way I can get metric reports? {#etric-reports}
+
 We offer reporting in a variety of ways so far, which include:
-<ul>
-<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
-<li>For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.</li>
-<li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
-</ul>
-</p>
+
+- The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.
+- For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.
+- Metric alerts provide a way to report changes that are outside of what you define as “normal”.
 
 
 <!--<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
@@ -963,10 +951,9 @@ We offer reporting in a variety of ways so far, which include:
 The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
 </p>-->
 
-<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
-<p>
+#### How do I get disk usage as a percentage instead of in bytes? {#metric-disk-usage}
+
 The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
-</p>
 
 
 <!--#### How is data aggregated in graphs
@@ -983,8 +970,7 @@ displayed. Otherwise, you'll see coarser and coarser granularity as the
 amount of time requested increases. We do this time aggregation via
 average,sum,  min, max, or count.-->
 
-#### How is data aggregated in graphs
-{: #metric-aggregation}
+#### How is data aggregated in graphs {#metric-aggregation}
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
 
@@ -1008,15 +994,13 @@ time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 </p>-->
 
-<h4 id="metric-other">Any other things about metrics?</h4>
-<p>
+#### Any other things about metrics? {#metric-other}
+
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
-</p>
-<p>
+
 For example, let's say you break down used memory by host, you'll get one
 time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
-</p>
 
 
 <!--
@@ -1024,6 +1008,7 @@ by default you'll get the average across all hosts.
     Events
 ===============================================================================
 -->
+
 <!--<h3><a name="events" href="#other">イベントについて</a></h3>
 
 <h4 id="notify">What do @ notifications do in Datadog?</h4>
@@ -1046,58 +1031,20 @@ by default you'll get the average across all hosts.
 </ul>
 </p>-->
 
-<h4>Searching Events Help</h4>
+### イベントについて {#events}
 
-<p>Your query runs a full text search of events and their comments.
-You can also target certain event properties, such as the event source or status, by using the following search prefixes:</p>
+#### What do @ notifications do in Datadog? {#notify}
 
-<ul>
-<li>
-<p>
-<code class="no-highlight"><strong>user:</strong>pup@datadoghq.com</code>
-Find all events with comments by pup@datadoghq.com. </p>
-</li>
-
-<li>
-<p>
-<code class="no-highlight"><strong>sources:</strong>github,chef</code>
-Show events from Github and Chef.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>tags:</strong>env-prod,db</code>
-Show events tagged with #env-prod AND #db.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>hosts:</strong>db1.myapp.com,db2.myapp.com</code>
-Show events from db1.myapp.com OR db2.myapp.com.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>status:</strong>error</code>
-Show only error status events. (supports:</strong> 'error', 'warning', 'success')</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>priority:</strong>low</code>
-Show only low-priority events. (supports:</strong> 'low' or 'normal'. defaults to 'all')</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>incident:</strong>claimed</code>
-Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')</p>
-</li>
-</ul>
-
-<p>Prefixes can easily be combined to make much more complex searches.
-For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
-</p>
-<p><code>sources:nagios,chef status:error cassandra </code>.</p>
-
-<p>
-Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
-</p>
+- ``@support`` – this will reach Datadog support directly when posted in your stream.
+- ``@all`` – this will send a notification to all members of your organization.
+- ``@yourname`` – this will notify the specific user named ‘yourname’.
+-  ``@test@test.com`` this will send an email to test@test.com.
+- If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
+    - ``@hipchat-[room-name]`` or ``@slack-[room-name]`` – posts the event or graph to that chat room.
+    - ``@webhook`` – alerts or triggers whatever is attached to that webhook. Check out
+<a target="_blanks" href="https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/">this blogpost</a> on Webhooks!
+    - ``@pagerduty`` or ``@oncall``
+    - sends an alert to Pagerduty. You can also use ``@pagerduty-acknowledge`` and ``@pagerduty-resolve``.
 
 
 <!--<h4>Searching Events Help</h4>
@@ -1153,58 +1100,25 @@ For example, if you wanted to find all open chef or nagios errors that mention c
 Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 </p>-->
 
-<h4>Searching Events Help</h4>
+#### Searching Events Help
 
-<p>Your query runs a full text search of events and their comments.
-You can also target certain event properties, such as the event source or status, by using the following search prefixes:</p>
+Your query runs a full text search of events and their comments.
+You can also target certain event properties, such as the event source or status, by using the following search prefixes:
 
-<ul>
-<li>
-<p>
-<code class="no-highlight"><strong>user:</strong>pup@datadoghq.com</code>
-Find all events with comments by pup@datadoghq.com. </p>
-</li>
+- ``user:pup@datadoghq.com`` Find all events with comments by pup@datadoghq.com. 
+- ``sources:github,chef`` Show events from Github and Chef.
+- ``tags:env-prod,db`` Show events tagged with #env-prod AND #db.
+- ``hosts:db1.myapp.com,db2.myapp.com`` Show events from db1.myapp.com OR db2.myapp.com.
+- ``status:error`` Show only error status events. (supports:'error', 'warning', 'success')
+- ``priority:</strong>low``  Show only low-priority events. (supports:'low' or 'normal'. defaults to 'all')
+- ``incident:claimed`` Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')
 
-<li>
-<p>
-<code class="no-highlight"><strong>sources:</strong>github,chef</code>
-Show events from Github and Chef.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>tags:</strong>env-prod,db</code>
-Show events tagged with #env-prod AND #db.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>hosts:</strong>db1.myapp.com,db2.myapp.com</code>
-Show events from db1.myapp.com OR db2.myapp.com.</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>status:</strong>error</code>
-Show only error status events. (supports:</strong> 'error', 'warning', 'success')</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>priority:</strong>low</code>
-Show only low-priority events. (supports:</strong> 'low' or 'normal'. defaults to 'all')</p>
-</li>
-
-<li>
-<p><code class="no-highlight"><strong>incident:</strong>claimed</code>
-Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')</p>
-</li>
-</ul>
-
-<p>Prefixes can easily be combined to make much more complex searches.
+Prefixes can easily be combined to make much more complex searches.
 For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
-</p>
-<p><code>sources:nagios,chef status:error cassandra </code>.</p>
 
-<p>
+``sources:nagios,chef status:error cassandra ``
+
 Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
-</p>
 
 
 <!--<h4>Is it possible to submit events via email?</h4>
@@ -1232,8 +1146,8 @@ Here is an example:
 }</code></pre>
 </p>-->
 
-<h4>Is it possible to submit events via email?</h4>
-<p>
+#### Is it possible to submit events via email?
+
 Yes!
 To get started you need to go the API tab in the
 <a target="_blank" href="https://app.datadoghq.com/account/settings#api">settings page</a>,
@@ -1244,9 +1158,7 @@ For systems that allow you to edit the content
 of the notification emails, you may use a JSON email. In the body of an email sent to a JSON API email you need
 to include a well formatted JSON event request as per our existing events API (which you can find more details
 about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
-</p>
 
-<p>
 Here is an example:
 <pre><code>{
 "title": “Host CPU above 75% for 5 minutes",
@@ -1255,7 +1167,6 @@ Here is an example:
 "tags": ["vsphere", "env:prod", "host:i-a4f761f0", "role:admin"],
 "alert_type": "error"
 }</code></pre>
-</p>
 
 
 <!--
@@ -1288,30 +1199,28 @@ dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>-->
 
-<h3><a name="other" href="#other">その他</a></h3>
+### その他 {#other}
 
-<h4 id="team">How do I setup my team in Datadog?</h4>
-<p>
+#### How do I setup my team in Datadog? {#team}
+
 The admin of the account should enter the email addresses of team members
 <a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows:
-<ul>
-<li>When the team member receives the confirmation email, they will be provided
+
+- When the team member receives the confirmation email, they will be provided
 with a link to log in directly. The user should not click ‘sign up’ during this process.</li>
-<li>If multiple users from the same organization sign up separately, this will
+- If multiple users from the same organization sign up separately, this will
 register as different organizations in Datadog. Please reach out to support to
 have these merged, but please note that all information contained in the
-account getting merged will not be transferred over.</li>
-<li>The only access controls we have right now are around admin activities
+account getting merged will not be transferred over.
+- The only access controls we have right now are around admin activities
 (adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.)
 all users have access to everything; more robust access controls are in our
-pipeline, but not something we’ve focused a lot of attention on yet.</li>
-<li>To remove a team member use the “disable” button on the same ‘team’ page (only available
+pipeline, but not something we’ve focused a lot of attention on yet.
+- To remove a team member use the “disable” button on the same ‘team’ page (only available
 for admins). You cannot permanently remove users, just disable; disabled users will
 only be visible to admins on the team page and can’t log in and any session they have
 open is invalidated. We don’t fully delete them because they might own events,
-dashboards, etc. which are not supposed to be removed.</li>
-</ul>
-</p>
+dashboards, etc. which are not supposed to be removed.
 
 
 <!--<h4 id="security">Are my data and credentials safe?</h4>
@@ -1326,17 +1235,14 @@ dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>-->
 
-<h4 id="security">Are my data and credentials safe?</h4>
-<p>
-<ul>
-<li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li>
-<li>All traffic is sent over SSL.</li>
-<li>All communication to Datadog is via HTTPS.</li>
-<li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li>
-<li>The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li>
-<li>Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.</li>
-</ul>
-</p>
+#### Are my data and credentials safe? {#security}
+
+- Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
+- All traffic is sent over SSL.
+- All communication to Datadog is via HTTPS.
+- The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.
+- The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
+- Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
 
 
 <!--<h4 id="feature-request">I have a feature request. How can I submit it?</h4>
@@ -1344,7 +1250,6 @@ dashboards, etc. which are not supposed to be removed.</li>
 You can send the request to support@datadoghq.com and we will add it to our feature request log.
 </p>-->
 
-<h4 id="feature-request">I have a feature request. How can I submit it?</h4>
-<p>
+#### I have a feature request. How can I submit it? {#feature-request}
+
 You can send the request to support@datadoghq.com and we will add it to our feature request log.
-</p>
