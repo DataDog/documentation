@@ -16,7 +16,7 @@ sidebar:
       href: "/faq/#aws"
     - text: 請求について
       href: "/faq/#billing"
-    - text: グラフ化について
+    - text: グラフ表示の設定について
       href: "/faq/#graph"
     - text: Integrationについて
       href: "/faq/#integrations"
@@ -408,7 +408,7 @@ foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method
 avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
 ~~~
 
-This will graph a single series that's the average of that metric across the　intersection of those tags.  
+This will graph a single series that's the average of that metric across the　intersection of those tags.
 Datadogでは、メトリクスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
 
 すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリーを記述することができます:
@@ -425,7 +425,7 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 The hostnames are determined by what the Datadog Agent detects; this is fully
 documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
  ```/etc/init.d/datadog-agent info```-->
- 
+
 #### ホスト名はどのように判定され、設定されますか。 {#arch-hostnames}
 
 ホスト名は、Datadog Agentのインストール時に、スクリプトが検出したホスト名になります。詳細に関しては、[Host Name][hostnames_ja]のページを参照してください。尚、Datadog Agentによって検出されたホスト名は、次のinfoコマンドを実行することで確認できます: ```/etc/init.d/datadog-agent info```
@@ -471,41 +471,42 @@ For information on AWS tagging, please see [here][integration-aws].-->
 
 #### Datadogを使う上での、タグの使い方について教えて下さい。 {#tagging}
 
-Tagging within Datadog is a powerful way to easily gather your metrics
-and makes scaling your infrastructure a breeze.
+メトリクスを簡単に集計する上で、タグ付けはとても有効です。
+更にシステムインフラの拡大/縮小への追従という観点でも、柔軟に対応した監視を実現できます。
 
-For a quick example to demonstrate the power of tagging, perhaps you're
-looking for a sum of two metrics, which you might normally define as follows:
+タグ付の有用性を説明するために簡単な例を紹介します。
+例えば、あるメトリクスの合計が欲しいとします。
+まずタグ付の設定をする前は、次のようになっていたとします:
 
 ~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
 ~~~
 
-What we recommend doing is leaving off the hostname; it will then default to the host
-that is sending that point, since they’re different hosts it will be treated as different points:
+Datadogが推奨しているタグ付けの方法は、ホスト名の"example.com"を残し、`tags=['domain:example.com']`と記述する方法です。
+it will then default to the host that is sending that point, since they’re different　hosts it will be treated as different points:
 
 ~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ~~~
 
-With these tags you can then do:
+タグを使って、次のように合計を計算します:
 
 ~~~
 sum:page.views{domain:example.com}
 ~~~
-which should give the desired result.
 
-To get a breakdown by host, you can do:
+これで、各メトリクスの合計を一つの数字にまとめたグラフを表示することができます。
+
+又、合計を表示する際に各メトリクスの内訳を表示したい場合は、次のように記述することもできます:
 
 ~~~
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-Further tagging info can be found [here][tags]</a>.
-
-For information on AWS tagging, please see [here][integration-aws].
+タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリックスの送信"ページの[tag][tags_ja]の項目を参照してください。
+AWSのタグ付けに関する詳細につては、["AWS Integration"][integration-aws_ja]のページを参照してください。
 
 
 [hostnames]: /hostnames/
@@ -537,7 +538,7 @@ single host’s duplicate names to be aliased. You can read more about
 hostnames [here][hostnames].
 -->
 
-### AWS について{#aws}
+### AWSについて {#aws}
 
 #### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
@@ -665,10 +666,9 @@ As an admin you can check out past invoices [here][app-billing-history].-->
 
 #### 請求先の変更はどのようにすればよいですか。 {#billing-contact}
 
-You can set a specific email address to receive invoices, even if that address
-is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
+Datadogの`team`タブ以下で設定したメンバー以外の任意のメールアドレスを請求書の受信者として設定できます。(例:invoices@yourcompany.com)
 
-あなたは、そのアドレスがDatadog（invoices@yourcompany.com）内のチームメンバーでなくても、請求書を受け取るために、特定の電子メールアドレスを設定することができ、ここで。
+請求書受信者のメールアドレスは、[Billing and Plan][app-billing]のページから変更してください。
 
 
 <!--#### Where can I get a copy of the invoice? {#billing-invoice}
@@ -679,18 +679,17 @@ As an admin you can check out past invoices [here][app-billing-history].
 
 #### 請求書のコピーは、どこから入手できますか。 {#billing-invoice}
 
-As an admin you can check out past invoices [here][app-billing-history].
+管理者権限のあるユーザは、[Billing History][app-billing-history]のページから過去の請求状況を確認することができます。
 
-***You can read more about billing [here][billing].***
-
-管理者として、あなたは、過去の請求書をチェックアウトすることができ、ここで。
-
-あなたは、課金についてもっと読むことができますここを。
+**課金に関する詳しい情報は、[課金に関するFAQ][billing_ja]のページを参照してください。**
 
 
 [app-billing]: https://app.datadoghq.com/account/billing
 [app-billing-history]: https://app.datadoghq.com/account/billing_history
 [billing]: /guides/billing/
+[billing_ja]: /ja/guides/billing/
+
+
 <!--
 ===============================================================================
     Graphing
@@ -708,11 +707,11 @@ grouped ```by {host}```, write a graph query that looks like:
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 ~~~ -->
 
-### グラフ化について {#graph}
+### グラフ表示の設定について {#graph}
 
-#### グループ化したメトリクスの計算はどのようにすればよいですか。 {#graph-sum-grouped}
+#### メトリクスを集計しグラフ表示したい場合は、どのようにすればよいですか。 {#graph-sum-grouped}
 
-```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリクス と ```app.foo.baz{env:staging}```メトリクスの足し算の結果をグラフ化するクエリーは、次になります:
+```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリクス と ```app.foo.baz{env:staging}```メトリクスの足し算の結果をグラフ表示するクエリーは、次のようになります:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
@@ -735,12 +734,12 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~-->
 
-#### 複数のデーターポイントの足し算し1つの線にするは、クエリーをどう書けはよいですか。 {#graph-mult-points}
+#### 複数のデーターポイントの合算するは、クエリーをどう書けはよいですか。 {#graph-mult-points}
 
-カンマで分割し記述しているクエリーの、コンマをプラス記号に置き換える。
+カンマで分割し記述しているクエリーの、コンマをプラス記号に置き換えます。
 
 置き換える前:
-    
+
 ~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
@@ -762,17 +761,17 @@ add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
 ewma stands for exponentially-moving average and the full list of functions
 you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.-->
 
-#### グラフのスムージングはどうすいればよいですか。 {#graph-smoothing}
+#### グラフをスムージングするにはどうすいればよいですか。 {#graph-smoothing}
 
-You can apply smoothing averages to your series by droping to the JSON editor and
-adding ‘ewma’, for example:
-add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
-```ewma_20(exception.invalid{*})```.
-ewma stands for exponentially-moving average and the full list of functions
-you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+グラフ右上隅にある歯車マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ何に表示しているデーターに平滑平均を適用することができます。
 
-次の例のように、JSONのエディタにdropingと「EWMA」を追加することで、一連の平滑平均を適用することができます。xは、例えば、あなたの一連の周りに5、10、20にあることができるewma_xのいずれか（...）を追加 ewma_20（exception.invalid { *}） 。EWMAは、指数関数的に、移動平均の略で、適用可能な関数の完全なリストであるここに。
+例: ```ewma_20(exception.invalid{*})```
 
+ewmaは、指数関数の移動平均の略語で、ewma_x(…)のxの部分には、平滑度のよって5、10、20の値を設定することができます。
+
+グラフ表示時に適用可能な関数は、[Graphing Primer][graphing_func_ja]を参照してください。
+
+[graphing_func_ja]: /ja/graphing/#functions
 
 <!--<h4>Can I stack CPU metrics on the same graph?</h4>
 <p>
@@ -781,14 +780,9 @@ The metric explorer just does one metric per graph, but you can see a stacked CP
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>-->
 
-#### 同じグラフにCPUの負荷を積み上げるのにはどうしたらよいですか。
+#### CPU負荷の情報を同じグラフに積み上げるのにはどうすればよいですか。
 
-Check out our documentation on [stacked series][stacked series_ja].
-The metric explorer just does one metric per graph, but you can see a stacked CPU graph
-on the [overview page][overview_page_ja] by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
-
-上の私たちのドキュメントのチェックアウト積み重ねシリーズ。メトリックエクスプローラはちょうどグラフごとに1つのメトリックをしていますが、任意のホストをクリックして概要ページに積載されたCPUのグラフを見ることができ、ここに。
-
+各グラフの右上隅の歯車のマークをクリックし、ポップアップ表示の"Choose metrics and events"のセクションのJSONを編集します。詳細に関しては、グラフ表示の設定ページの[stacked series][stacked_series_ja]を参照してください。
 
 [stacked_series_ja]: /ja/graphing
 [overview_page_ja]: https://app.datadoghq.com/infrastructure
@@ -807,19 +801,12 @@ live and read-only access to just the contents of that screenboard.
 </ul>
 </p>-->
 
-#### Is there a way to share graphs?
+#### グラフを共有する方法はありますか。
 
-There are two ways to share a graph or screenboard
+共有するには、2つの方法があります。共有したいグラフが、タイムボード上にあるかスクリーンボード上にあるかで異なります。
 
-- In a time board, pick a graph on a dashboard,
-click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
-- In a custom screenboard, the middle button in the upper right will generate a URL which gives
-live and read-only access to just the contents of that screenboard.
-
-グラフやscreenboardを共有する二つの方法があります
-
-- タイムボードでは、ダッシュボード上のグラフを選択し、それを編集するためにコグをクリックすると、あなただけの、そのグラフのIFRAMEを生成します「共有」タブを見つけることができます。
-- カスタムscreenboardでは、右上の中央ボタンは、ライブ与えURLを生成し、読み取り専用アクセスをそのscreenboardの内容だけに。
+- タイムボードでは、表示されているグラフを選択し、右上隅に表示されている歯車を選択し、"Choose metrics and events"セクションの"Share"タブを選択します。時間の尺度やグラフのサイズなどを選択した後、`Generate embed code`ボタンをクリックします。新たにホップアポプが表示され、グラフを表示するためのembed codeが表示されます。
+- スクリーンボードでは、右上隅の5個のアイコンの中央のアイコンをクリックすると共有のためのURLが生成されます。このURLにアクセスすると、読み込み専用のライブなスクリーンボードが表示されます。
 
 
 <!--<h4>How do I track cron jobs?</h4>
@@ -843,37 +830,23 @@ will send events on every run.
 
 (To get the python client lib you can install it with <code>easy_install dogapi</code>).-->
 
-#### How do I track cron jobs?
+#### 特定のCron jobの実行状況は、どのように追跡すればよいですか。
 
-Often, you set cron jobs that trigger some meaningful script that you want to monitor and
-correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
+他のメトリクスと相関してホストの状況を監視するためにcron jobにスクリプトを設定していることはよくあると思います。
+例えば、Postgresのテーブルを吸い上げるために、cron.dにVacuumというスクリプトを設定していたとします:
 
     0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 
-Vacuum is particularly resource-intensive though, so you might want Datadog events for
-each time they run so you can correlate metrics and other events with vacuums.
-You can do this with the dogwrap command line tool provided by the dogapi client
-library:
+このVacuumスクリプトはリソースを大量に消費するので、そのスクリプトが実行されたタイミングを他のメトリクスやイベントと関連付けておきたいとします。そこで、スクリプト実行の際に、Datadogへイベントの通知をすることにします。このイベント通知は、dogapiのクライアントライブラリーで提供されているdogwrap command line toolを使うことによって実現できます:
 
-    dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
+    dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode all "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
 
+cronに上記のように実行コマンドを記述すると、Vacuumスクリプト実行される度に、Datadogにイベントが通知されます。
+``--submit_mode errors``と置き換えると、スクリプトが異常終了した時のみイベントの通知をすることができます。
 
-This will call the command at the end of the script and
-send Datadog events if it exits with a non-zero exit code (i.e. an error). ``--submit_mode all``
-will send events on every run.
-
-(To get the python client lib you can install it with ``easy_install dogapi``).
+(Pythonのクライアントライブラリーをインストールするには、次のコマンドを実行します: ``easy_install dogapi``)
 
 
-多くの場合、あなたが監視し、他のメトリックと相関したいいくつかの意味のあるスクリプトをトリガするcronジョブを設定します。たとえば、毎日Postgresのテーブルを真空cron'dスクリプトがあるとします。
-
-0 0 * * psqlの-c '真空冗長my_tableに' >> /var/log/postgres_vacuums.log 2>＆1
-真空は、特にも集中的なリソースなので、彼らはそのようにあなたが掃除したメトリックや他のイベントを相関させることができます実行するたびにDatadogイベントをお勧めします。あなたはdogapiクライアントライブラリが提供するdogwrapコマンドラインツールでこれを行うことができます。
-
-dogwrap -n -k $ API_KEY --submit_modeのエラー "MYTABLEの掃除」「また、psql -c '真空冗長my_tableに「2>＆1 /var/log/postgres_vacuums.log
-これは、スクリプトの終了時にコマンドを呼び出し、それがゼロ以外の終了コード（すなわちエラー）で終了している場合Datadogイベントを送信します。すべてを--submit_mode 実行のたびにイベントを送信します。
-
-（あなたがそれをインストールすることができますlibにpythonのクライアントを取得するにはeasy_installをdogapi）。
 
 
 <!-- ====================================================================== -->
@@ -893,7 +866,7 @@ There a several problems that could cause this.  Send a message to support (supp
 
 ### Integrationについて {#integrations}
 
-#### I set up my integration. Why am I not seeing metrics? {#ntegration-metrics}
+#### Integrationをインストール/設定しましたが、メトリクスが表示されません。 {#ntegration-metrics}
 
 There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 
@@ -907,20 +880,20 @@ There a several problems that could cause this.  Send a message to support (supp
 - All communication to Datadog is via HTTPS.
 - The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.-->
 
-#### How is Datadog retrieving my data? {#ntegration-data}
+#### Datadogは、どのようにしてデーターを収集しますか。 {#ntegration-data}
 
 - Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
 - All traffic is sent over SSL.
 - All communication to Datadog is via HTTPS.
 - The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.
-- トラフィックは常にDatadog、エージェントによって開始されます。いいえセッションは今までに戻ってエージェントにDatadogから開始されていません。
+
+- トラフィックは常にDatadog、エージェントによって開始されます。いいえセッションは今までに戻ってエージェントにDatadogから開始されていません。
 すべてのトラフィックは、SSLを介して送信されます。
 - Datadogへのすべての通信は、HTTPSを介して行われる。
 - フルライセンス契約を見つけることができるここに。
 
 
-
-#### I’d like to tweak an integration or write up a new one. Do you accept pull requests? {#integration-edit}
+#### Ingetrationを改造したり、新たしいIntegrationを開発したいと思っています。それらのコードのPull requestをしてもたい丈夫ですか。 {#integration-edit}
 
 Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
 
@@ -940,7 +913,7 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 
 ### メトリクスについて {#metrics}
 
-#### How do I submit custom metrics? {#custom-metrics}
+#### カスタムメトリクスはどのように送信すればよいですか。 {#custom-metrics}
 
 You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
 
@@ -951,7 +924,7 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 </p>-->
 
-#### Why is my counter metric showing decimal values? {#ounter-values}
+#### 発生回数をカウントしているメトリクスがな少数点付きの数字になるのはなぜですか。 {#ounter-values}
 
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 
@@ -964,7 +937,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 </p>
 -->
 
-#### Is there a way to submit metrics from my log data? {#og-data-metrics}
+#### ログデーターを基にメトリクスを送信することはできますか。 {#og-data-metrics}
 
 Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
 
@@ -976,7 +949,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 Unfortunately, we do not allow adding past data at this time.
 </p>-->
 
-#### I’d like to add past data to my account. Is there a way to do that? {#ast-data}
+#### 新規に登録したアカウントに過去の蓄積したデーターを追加することはできますか。 {#ast-data}
 
 Unfortunately, we do not allow adding past data at this time.
 
@@ -1018,7 +991,8 @@ We offer reporting in a variety of ways so far, which include:
 </ul>
 </p>-->
 
-#### Is there a way I can get metric reports? {#etric-reports}
+メトリクスの状況報告を受けることはできますか。
+#### メトリクスの状況報告を受けることはできますか。 {#etric-reports}
 
 We offer reporting in a variety of ways so far, which include:
 
@@ -1039,7 +1013,7 @@ We offer reporting in a variety of ways so far, which include:
 The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
 </p>-->
 
-#### How do I get disk usage as a percentage instead of in bytes? {#metric-disk-usage}
+#### ハードディスクの利用量を、バイトではなく、パーセントで監視するにはどのようにしたらよいですか。 {#metric-disk-usage}
 
 The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
 
@@ -1060,7 +1034,7 @@ displayed. Otherwise, you'll see coarser and coarser granularity as the
 amount of time requested increases. We do this time aggregation via
 average,sum,  min, max, or count.-->
 
-#### How is data aggregated in graphs {#metric-aggregation}
+#### グラフ上でデーターの集計はどのようにおこなえばよいですか。 {#metric-aggregation}
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
 
@@ -1213,7 +1187,7 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 Your query runs a full text search of events and their comments.
 You can also target certain event properties, such as the event source or status, by using the following search prefixes:
 
-- ``user:pup@datadoghq.com`` Find all events with comments by pup@datadoghq.com. 
+- ``user:pup@datadoghq.com`` Find all events with comments by pup@datadoghq.com.
 - ``sources:github,chef`` Show events from Github and Chef.
 - ``tags:env-prod,db`` Show events tagged with #env-prod AND #db.
 - ``hosts:db1.myapp.com,db2.myapp.com`` Show events from db1.myapp.com OR db2.myapp.com.
@@ -1371,7 +1345,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 - Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
 - Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][service_term]ページで確認することができます。
 - Datadog Agentのソースコードは、オープンソースとしてGithubのDatadogアカウント以下に[dd-agent][dd-agent_repo]として公開しています。
-- 一部のOSのインストール手順では、パスワードを求められることがあります。(例えば、CentOS5にDatadog Agentをインストールする場合)この際のパスワードの入力は、OSにパッケージ類をインストールする際に求められるものです。更に、Datadogではこれらのパスワードは一切保持していません。もしも、インストールスクリプトがどのような操作をしているのかが気になる場合は、ステップバイステップの手順に基づきDatadog Agentをインストールすることもできます。 
+- 一部のOSのインストール手順では、パスワードを求められることがあります。(例えば、CentOS5にDatadog Agentをインストールする場合)この際のパスワードの入力は、OSにパッケージ類をインストールする際に求められるものです。更に、Datadogではこれらのパスワードは一切保持していません。もしも、インストールスクリプトがどのような操作をしているのかが気になる場合は、ステップバイステップの手順に基づきDatadog Agentをインストールすることもできます。
 
 [service_term]: https://app.datadoghq.com/policy/license
 [dd-agent_repo]: https://github.com/DataDog/dd-agent/
