@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions
+title: よくあるご質問(FAQ)
 kind: documentation
 sidebar:
   nav:
@@ -540,18 +540,15 @@ hostnames [here][hostnames].
 
 ### AWSについて {#aws}
 
-#### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
+#### AWS用のIntegrationを設定しました。ホストが重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
-A single host running in EC2 might have an instance ID (i-abcd1234), a generic
-hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a
-meaningful host name provided by an internal DNS server or a config-managed hosts
-file (myhost.mydomain). Datadog creates aliases for host names when there are multiple
-uniquely identifiable names for a single host.  It takes about 10-20 minutes for the
-single host’s duplicate names to be aliased. You can read more about
-hostnames [here][hostnames].
+EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。
+Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。
+従って、実態インスタンスは1つのままです。
+尚、このエリアスの作成には、通常約10〜20分かかります。
+詳細に関しては、[Host Naming][host_naming_ja]のページを参照してください。
 
-EC2で実行している単一のホストは、インスタンスID（I-ABCD1234）、ホストのIPアドレス（IP-192-0-0-1）に基づいて、EC2が提供する汎用的なホスト名、および内部が提供する意味のあるホスト名を持っているかもしれませんDNSサーバまたはコンフィグ管理対象ホストファイル（がmyhost.mydomain）。Datadog、単一のホストのために複数の一意に識別名があるホスト名のエイリアスを作成します。これは、エイリアスされる単一のホストの名前の重複を約10〜20分かかります。あなたは、ホスト名の詳細を読むことができますここに。
-
+[host_naming_ja]: /ja/hostnames/
 
 <!--#### What metrics will I get from the AWS integration? {#aws-metrics}
 
@@ -560,26 +557,17 @@ EC2で実行している単一のホストは、インスタンスID（I-ABCD123
 
 #### AWS用のIntegrationには、どのようなメトリクスが含まれていますか。 {#aws-metrics}
 
-* Our crawlers use the Cloudwatch API, and we collect everything available from it.
-* You can read in detail about our AWS integration [here][integration-aws].
-
-
-- Googleのクローラは、CloudWatchのAPIを使用して、私たちはそれから利用可能なすべてのものを収集する。
-- あなたは私たちのAWS統合について詳細に読むことができますここに。
+- CloudwatchのAPIを使用して収集できる情報は全て収集しています。
+- AWS Integrationについては、[Datadog-AWS Cloudwatch Integration][integration-aws_ja]のページを参照してください。
 
 
 <!--#### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
 
 We do not charge for ELBs (as they can’t be filtered out).-->
 
-#### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
+#### ELBインスタンスを除去することができません。これらのインスタンスに対しても請求されますか。 {#aws-elb}
 
-#### ELBのインスタンスをフィルターすることができません。これらのELBのインスタンスに対しても請求されますか。 {#aws-elb}
-
-We do not charge for ELBs (as they can’t be filtered out).
-
-（これらは除外することはできませんように）私たちはELBsのために充電しないでください。
-
+除去できないELBインスタンスに関して請求されることはありません。
 
 
 <!--#### Why is there a delay in receiving my data? {#aws-delay}
@@ -596,24 +584,17 @@ This will output the current system’s date, and then make a request to our
 endpoint and grab the date on our end. If these are more than a few minutes
 apart, you may want to look at the time settings on your server.-->
 
-#### データーを取得するのになぜ遅延が発生するのですか。 {#aws-delay}
+#### AWSからメトリクスデーターを受信するのに時間がかかるのはなぜですか。 {#aws-delay}
 
-We have seen a few cases where machines have their clock set further in the
-future or the past, which can sometimes cause problems with metric submission.
-To check for this, run:
+インスタンスの現在時間が大幅に進んでいいるか遅れていることが多々あり、この時間のずれがメトリクスデーターの送信/表示の障害になることがあります。
+
+Datadog側の時間とインスタンスの時間の差をチェックするには、次のコマンドを実行します:
 
 ~~~
 date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
 ~~~
 
-This will output the current system’s date, and then make a request to our
-endpoint and grab the date on our end. If these are more than a few minutes
-apart, you may want to look at the time settings on your server.
-
-私たちは、時にはメトリックの提出に問題が発生する可能性がありますマシンが自分の時計が未来や過去にさらに設定されているいくつかのケースを見てきました。これをチェックするには、実行します。
-
-日付-u && -s -v https://app.datadoghq.com/intake 2>カール＆1 | grepの日
-この意志の出力は、現在のシステムの日付、およびその後は私たちのエンドポイントに要求を行い、私たちの最後の日付をつかむ。これらは離れて数分以上である場合は、サーバー上の時刻設定を見てみたいことがあります。
+このコマンドは、現在ログインしているシステムの現在時間を表示し、その後Datadog側へリクエストを発行し、時間をgrepして表示します。もしも、これら二つの時間の差が数分以上ある場合は、インスタンスの現在時間を正しく設定し直してください。
 
 
 <!--#### Can I get my postgres data from RDS? {#aws-rds}
@@ -625,22 +606,18 @@ Yes you can! Follow the steps below to set this up:
 3. Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
 4. Restart the agent-->
 
-#### RDSからpostgresのメトリクスデーターを取得することができますか。 {#aws-rds}
+#### RDSからPostgreSQLのメトリクスデーターを取得することができますか。 {#aws-rds}
 
-Yes you can! Follow the steps below to set this up:
+はい、できます。設定は、次の手順になります。
 
-1. Install the agent on an ec2 instance that can connect to the RDS instance
-2. Use the RDS endpoint in <code>conf.d/postgres.yaml</code> (host and port)
-3. Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
-4. Restart the agent
+1. RDSインスタンスに接続できるEC2インスタンスにDatadog Agentをインストールします。
+2. Datadogの設定をファイルを保存するディレクトリで、RDSのエンドポイント情報(host, port)を、<code>conf.d/postgres.yaml</code>を記述します。
+3. postgres.yamlに、次のタグを追加します。<code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
+4. Datadog Agentを再起動します。
 
-はい、できます！これを設定するには、次の手順に従います。
+詳しくは、[PostgreSQL Integration][postgresql_integration]のタイルを選択し、'configuration'のタブの参照してください。
 
-1. RDSインスタンスに接続できるEC2インスタンスにエージェントをインストールします。
-2. にRDSエンドポイントを使用して、のconf.d / postgres.yaml（ホストとポート）
-3. postgres.yamlでタグを追加します。dbinstanceidentifier：（RDS-instance-idに）、は、EngineName：postgresの
-4. エージェントを再起動します
-
+[postgresql_integration]: https://app.datadoghq.com/account/settings#integrations/postgres
 
 <!--
 ===============================================================================
@@ -862,15 +839,15 @@ cronに上記のように実行コマンドを記述すると、Vacuumスクリ�
 
 #### I set up my integration. Why am I not seeing metrics? {#ntegration-metrics}
 
-There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>-->
+There are several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>-->
 
 ### Integrationについて {#integrations}
 
 #### Integrationをインストール/設定しましたが、メトリクスが表示されません。 {#ntegration-metrics}
 
-There a several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
+メトリクスが表示されない現象には、複数の原因が考えられます。その際は、症状の詳細と共に、Datadog Agent infoのコマンドライン出力、ログ出力、設定ファイルを添付し、サポート窓口(support@datadoghq.com)にご連絡ください。各ファイルが保存されている場所は、[Datadog Agent 入門][basic_agent_usage_ja]のページより使用中のOSを選択し、かくにんしてください。
 
-があり、これを引き起こす可能性がいくつかの問題。サポート（support@datadoghq.com）の問題を説明するメッセージを送信し、エージェント情報、ログ、およびそのメッセージに添付ファイルとして設定ファイルが含まれています。あなたは次のリンクでこれらの場所を見つけて、お使いのOSを選択することができます。http://docs.datadoghq.com/guides/basic_agent_usage/
+[basic_agent_usage_ja]: /ja/guides/basic_agent_usage/
 
 
 <!--#### How is Datadog retrieving my data? {#ntegration-data}
@@ -880,24 +857,24 @@ There a several problems that could cause this.  Send a message to support (supp
 - All communication to Datadog is via HTTPS.
 - The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.-->
 
-#### Datadogは、どのようにしてデーターを収集しますか。 {#ntegration-data}
+#### Datadogは、どのようにしてメトリクスデーターを収集していますか。 {#ntegration-data}
 
-- Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
-- All traffic is sent over SSL.
-- All communication to Datadog is via HTTPS.
-- The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.
-
-- トラフィックは常にDatadog、エージェントによって開始されます。いいえセッションは今までに戻ってエージェントにDatadogから開始されていません。
-すべてのトラフィックは、SSLを介して送信されます。
-- Datadogへのすべての通信は、HTTPSを介して行われる。
-- フルライセンス契約を見つけることができるここに。
+- 通信セッションは、常にDatadog AgentからDatadogのサービスに向かって開始されます。Datadogのサービス側からDatadog Agentに向かっ通信セッションを開始することは一切ありません。
+- すべてのデーター送信は、SSLを介して送信されます。
+- Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
+- Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][service_term]ページで確認することができます。
 
 
-#### Ingetrationを改造したり、新たしいIntegrationを開発したいと思っています。それらのコードのPull requestをしてもたい丈夫ですか。 {#integration-edit}
-
+<!-- <h4 id="integration-edit">I’d like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
+<p>
 Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
+</p> -->
 
-うん！エージェントは、完全にオープンソースであり、見つけることができるここに。
+#### Integrationを、改善したり開発したりしたいと思っています。開発コードのPull requestを受け付けていますか。 {#integration-edit}
+
+はい、できます。 Datadog Agentは、オープンソースです。GithubのDatadogアカウンントの[dd-agent][dd-agent_ja]リポジトリーで公開しています。
+
+[dd-agent_ja]: https://github.com/DataDog/dd-agent/
 
 <!--
 ===============================================================================
@@ -915,21 +892,20 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 
 #### カスタムメトリクスはどのように送信すればよいですか。 {#custom-metrics}
 
-You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
+カスタムメトリクスは、DogStatsDクラインとを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信][metrics_ja]のページを参照してください。
 
-あなたはDogStatsDクライアントでカスタムメトリックスを提出することができます。あなたはこれについての詳細を読むことができますここに。
+[metrics_ja]: /ja/guides/metrics/
 
 <!--<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
 <p>
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 </p>-->
 
-#### 発生回数をカウントしているメトリクスがな少数点付きの数字になるのはなぜですか。 {#ounter-values}
+#### イベントの発生回数をカウントしているメトリクスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
 
-StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
+DogStatsDのカウンターは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信][metrics_ja]のページの[カウンター][counters_ja]を参照してください。
 
-StatsDカウンタは毎秒単位を報告するために、フラッシュ間隔で正規化されている。あなたはこれについての詳細を読むことができますここに。
-
+[counters_ja]: /ja/guides/metrics/#counters
 
 <!--<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
 <p>
@@ -939,9 +915,9 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 
 #### ログデーターを基にメトリクスを送信することはできますか。 {#og-data-metrics}
 
-Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
+はい、できます。 詳細に関しては、[Datadog Agent によるログの解析方法][logs_ja]のページを参照してください。
 
-はい、あります！私たちは、詳細ログの解析ここに。
+[logs_ja]: /ja/guides/logs/
 
 
 <!--<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
@@ -951,9 +927,7 @@ Unfortunately, we do not allow adding past data at this time.
 
 #### 新規に登録したアカウントに過去の蓄積したデーターを追加することはできますか。 {#ast-data}
 
-Unfortunately, we do not allow adding past data at this time.
-
-残念ながら、現時点では、過去のデータを追加することはできません。
+残念ながら現状では、過去に蓄積したデータを追加することはできません。
 
 <!--<h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
 <p>
@@ -965,20 +939,16 @@ This depends on the medium you use to send metrics.
 </ul>
 </p>-->
 
-#### Correct metric syntax (JSON)? {#metric-syntax}
+#### メトリクス送信のためのデーター(JSON)の書き方 {#metric-syntax}
 
-This depends on the medium you use to send metrics.
+メトリクスを送信するために使う方法によって異なります。
 
-- For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.
-- For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.
-- For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.
+- Agent Checkを使って送信する場合は、[Agent Checkの書き方][agent_checks_ja]のページを参照してください。
+- DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリックスの送信][metorics_ja]のページを参照してください。
+- APIを介して送信する場合は、[API Reference][api_post_ja]のページを参照してください。
 
-
-これは、メトリックを送信するために使用するメディアによって異なります。
-
-エージェントのチェックについては、この参照リンクを。
-DogStatsDの場合、これを参照してくださいリンクを。
-APIの場合、これを参照してくださいリンクを。
+[agent_checks_ja]: /ja/guides/agent_checks/
+[api_post_ja]: /ja/api/#metrics-post
 
 
 <!--<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
@@ -991,21 +961,14 @@ We offer reporting in a variety of ways so far, which include:
 </ul>
 </p>-->
 
-メトリクスの状況報告を受けることはできますか。
-#### メトリクスの状況報告を受けることはできますか。 {#etric-reports}
+#### メトリクスの状況のリポートには、どのようなものがありますか。 {#etric-reports}
 
-We offer reporting in a variety of ways so far, which include:
+現状では、次のようなリポートの方法を提供しています：
 
-- The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.
-- For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.
-- Metric alerts provide a way to report changes that are outside of what you define as “normal”.
-
-
-私たちは、これはこれまでさまざまな方法で報告オファー：
-
-どこでもチャートを埋め込む機能。、ダッシュボード上のグラフを選んで、それを編集するためにコグをクリックすると、あなたは、IFRAMEを生成します「共有」タブを見つけることができます。
-週がアラートを過ぎてオーバー行かれると、特定の情報源（例えばpagerduty）のために、あなたのメールボックスにレポートを取得します。
-メトリックのアラートでは、「通常の」として定義したものの外にある変更を報告する方法を提供します。
+- すべての場所のすべてのグラフにスナップショットを撮ってリポートする機能があります。
+グラフを選び、右上隅の歯車のマークをクリックし、`share`タブを選択し`generate`ボタンをクリックすることで、グラフのスナップショットのIFRAMEへのリンク生成することができます。
+- 過去のアラートの状況をリビューできるように、一部の情報ソース(例:pagerduty)では、週に一度メールによるリポートを受信する設定ができます。
+- メトリクスのアラート機能を使うことによって、メトリクスが正常の範囲から外れたさいのリポートを送信することができます。
 
 
 <!--<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
@@ -1015,9 +978,11 @@ The Datadog Agent emits a metric named <code>system.disk.in_use</code> which wil
 
 #### ハードディスクの利用量を、バイトではなく、パーセントで監視するにはどのようにしたらよいですか。 {#metric-disk-usage}
 
-The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
+Datadog Agentがデフォルトで送信しているディスクの使用量関連の情報は2種類あります。
+- <code>system.disk.in_use</code>は、パーセントでディスク使用量を送信しています。
+- <code>system.disk.used</code>は、バイト単位で使用量を送信しています。
 
-Datadogエージェントは、メトリックという名前の発するsystem.disk.in_useパーセンテージであなたのディスク使用量を与えます。
+従って、グラフで<code>system.disk.in_use</code>を指定すれば、パーセントで監視できます。
 
 
 <!--#### How is data aggregated in graphs
@@ -1107,26 +1072,19 @@ by default you'll get the average across all hosts.
 
 #### Datadog内で@マーク付きの通知は、どのように機能しますか。 {#notify}
 
-- ``@support`` – this will reach Datadog support directly when posted in your stream.
-- ``@all`` – this will send a notification to all members of your organization.
-- ``@yourname`` – this will notify the specific user named ‘yourname’.
--  ``@test@test.com`` this will send an email to test@test.com.
-- If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
-    - ``@hipchat-[room-name]`` or ``@slack-[room-name]`` – posts the event or graph to that chat room.
-    - ``@webhook`` – alerts or triggers whatever is attached to that webhook. Check out
-<a target="_blanks" href="https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/">this blogpost</a> on Webhooks!
-    - ``@pagerduty`` or ``@oncall``
-    - sends an alert to Pagerduty. You can also use ``@pagerduty-acknowledge`` and ``@pagerduty-resolve``.
+- ``@support`` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
+- ``@All`` - 組織のすべてのメンバーに通知します。
+- ``@yourname`` - 'yourname'という名前のユーザに通知します。
+- ``@test@test.com`` test@test.comに電子メールを送信します。
+- HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
+    - ``@hipchat-[ルーム名]``または``@slack-[ルーム名]`` - [ルーム名]で指定したチャットルームに、イベントやグラフをポストすることができます。
+    - ``@webhook-[webhook名]`` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio][blog_twilio]のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration][integration_webhooks_ja]のページと、ダッシュボードの[Integration][integration_site]タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
+    - ``@pagerduty``または``@oncall`` - Pagerdutyにアラートを送信します。
+    更に、``@pagerduty-acknowledge`` や ``@pagerduty-resolve``を使って通知することもできます。
 
-- @support -あなたのストリームに掲示するとき、これは直接Datadogサポートに到達します。
-- @All -これは、組織のすべてのメンバーに通知を送信します。
-- @yourname -これは'yournameの'という名前の特定のユーザに通知します。
-- @ test.com @テストこれはtest@test.comに電子メールを送信します。
-- あなたがHipChat、スラック、Webhooks、PagerdutyまたはVictorOpsをお持ちの場合は、使用することができます。
-    - @ hipchat- [部屋名]または@ slack- [部屋名] -ポストそのチャットルームにイベントやグラフ。
-    - @webhook -そのwebhookに接続されているどのようなアラートやトリガされます。チェックアウト これはBlogPostを Webhooksに！
-    - @pagerdutyまたは@oncallは - Pagerdutyにアラートを送信します。また、使用することができ、確認応答pagerduty @とpagerduty-決意@。
-
+[blog_twilio]: https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/
+[integration_webhooks_ja]: /ja/integrations/webhooks/
+[integration_site]: https://app.datadoghq.com/account/settings
 
 
 <!--<h4>Searching Events Help</h4>
@@ -1182,49 +1140,25 @@ For example, if you wanted to find all open chef or nagios errors that mention c
 Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 </p>-->
 
-#### イベントの検索はどのようにすればよいですか。
+#### イベントは、どのように検索すればよいですか。
 
-Your query runs a full text search of events and their comments.
-You can also target certain event properties, such as the event source or status, by using the following search prefixes:
+検索クエリは、イベントとそれに含まれるコンテンツに全文検索を実施します。
+更に、検索用のプレフィックスを使用することにより、イベント·ソースやステータスなどの特定のイベントプロパティを対象に検索をすることもできます。
 
-- ``user:pup@datadoghq.com`` Find all events with comments by pup@datadoghq.com.
-- ``sources:github,chef`` Show events from Github and Chef.
-- ``tags:env-prod,db`` Show events tagged with #env-prod AND #db.
-- ``hosts:db1.myapp.com,db2.myapp.com`` Show events from db1.myapp.com OR db2.myapp.com.
-- ``status:error`` Show only error status events. (supports:'error', 'warning', 'success')
-- ``priority:</strong>low``  Show only low-priority events. (supports:'low' or 'normal'. defaults to 'all')
-- ``incident:claimed`` Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')
+- ``user:pup@datadoghq.com`` pup@datadoghq.comがコメントしている全てのイベントを検索します。
+- ``sources:github,chef`` GithubとChefからのイベントを検索します。
+- ``tags:env-prod,db`` ＃env-prodと#dbとタグ付けされたイベントを検索します。
+- ``hosts:db1.myapp.com,db2.myapp.com`` ホスト名がdb1.myapp.comかdb2.myapp.comから得られたイベントを検索します。
+- ``status:error`` ​ステータスがerrorのイベントを検索します。（statusには、'error','warning','success'があります。）
+- ``priority:low`` 優先度が'low'のイベントを検索します。（priorityには、'low','normal'があります。ディフォルトは、'all'で、全てになります。）
+- ``incident:claimed`` 誰かが対応中を宣言したインシデントを検索します。（inscidentには、'open','claimed','resolved','all'があります。）
 
-Prefixes can easily be combined to make much more complex searches.
-For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
+プレフィックスを組み合わせることによって、複雑な検索も簡単に実行できます。
+例えば、未解決のchefかnagiosのエラーで、cassandraの文字を含むのも検索したい場合は、次のようになります:
 
 ``sources:nagios,chef status:error cassandra ``
 
-Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
-
-あなたのクエリがイベントとそのコメントの全文検索を実行します。また、以下の検索プレフィックスを使用することにより、このようなイベント·ソースやステータスなどの特定のイベントのプロパティをターゲットにできます。
-
-- ユーザー： pup@datadoghq.comが pup@datadoghq.comによるコメントすべてのイベントを検索します。
-
-- ソース： githubの、シェフ Githubにシェフからのショーイベント。
-
-- タグ： ENV-PROD、デシベル ＃のENV-PRODと#dbでタグ付けされたイベントを表示。
-
-- ホスト： db1.myapp.com、db2.myapp.com db1.myapp.com OR db2.myapp.comからショーイベント。
-
-- ステータス：エラー のみ ​​、エラーステータスイベントを表示。（担体：「エラー」、「警告」、「成功」）
-
-- 優先度：低 だけを表示する優先度の低いイベント。（サポートされています。「低」または「通常の」デフォルトは「すべて」に）
-
-- 事件：主張 のみを表示インシデントを主張した。（サポートされています。「オープン」、「解決'主張'、または'すべて'）
-
-プレフィックスが容易にはるかに複雑な検索を行うために組み合わせることができる。あなたはカサンドラに言及開いているすべてのシェフやのnagiosエラーを見つけたい場合は、次のような検索を持っていると思います。
-
-ソース：Nagiosの、シェフのステータス：エラーカサンドラ。
-
-注意：接頭辞に接続されていないこれらのリスト、何のコロンやカンマがフルテキスト検索に行くスペースなしの後。
-
-
+注) コロン(:)とコンマ(,)の後ろには、空白は入りません。プレフィックスの後ろに検索対象の指定の無い場合は、全文検索が実行されます。
 
 
 <!--<h4>Is it possible to submit events via email?</h4>
@@ -1254,22 +1188,13 @@ Here is an example:
 
 #### Datadogへのイベントの送信は、メールでも可能ですか。
 
-Yes!
-To get started you need to go the API tab in the
-<a target="_blank" href="https://app.datadoghq.com/account/settings#api">settings page</a>,
-create one or more API emails.
-For a monitoring tool that does not allow you to edit the body of the email you need to create a plain-text email,
-and have that system or tool send alarms or notifications to this email.
-For systems that allow you to edit the content
-of the notification emails, you may use a JSON email. In the body of an email sent to a JSON API email you need
-to include a well formatted JSON event request as per our existing events API (which you can find more details
-about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
+はい、できます。 まずは、ダッシュボードの`Integration`タブを選択し、次に[`API's`のタブ][integration_apis]で、メールアドレスの追加ページに移動します。'Events API Emails'セクションでイベント情報の送信先のメールを作成します。その後、ここで作成したメールアドレスに向けイベント情報を送信するようにアプリケーションやツールを設定します。
 
-Here is an example:
+送信するメールの本文を自由に構成できる場合は、JSONを選択するとよいでしょう。本文に記述するJSONは、Datadog APIで指定している書式に準拠している必要があります。詳しくは、[API Reference][api]のページの"POST AN EVENT"を参照してください。
 
-うん！開始するには、APIでタブを移動する必要があり 、設定ページ、一つ以上のAPIの電子メールを作成します。あなたはプレーンテキストの電子メールを作成し、そのシステムやツールを持っている必要があり、電子メールの本文を編集することはできません監視ツールの場合はこのメールにアラームや通知メールを送信します。あなたは、通知メールの内容を編集できるようにするシステムでは、JSON形式の電子メールを使用することができます。JSONのAPIのメールに送信される電子メールの本文では、（あなたが詳細について見つけることができる私たちの既存のイベントAPIのあたりにもフォーマット済みのJSONイベント要求含める必要がここに）。
+[integration_apis]: https://app.datadoghq.com/account/settings#api
 
-次に例を示します。
+次に例を示します:
 
 <pre><code>{
 "title": “Host CPU above 75% for 5 minutes",
