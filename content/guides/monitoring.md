@@ -145,9 +145,9 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
       Note the *on average* and *at all times* aggregations *require* a full
       window of data in the final series. This does *not* mean that each series
-      must by full by that there shouldn't be a gap of more than 1 minute across
-      all aggregated series. In other words, we recommend using *at least once*
-      or *in total* for metrics with > 1 minute interval.
+      must be full but that there shouldn't be a gap of more than 1 minute
+      across all aggregated series. In other words, we recommend using *at least
+      once* or *in total* for metrics with > 1 minute interval.
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
