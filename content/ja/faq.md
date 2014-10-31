@@ -999,22 +999,12 @@ displayed. Otherwise, you'll see coarser and coarser granularity as the
 amount of time requested increases. We do this time aggregation via
 average,sum,  min, max, or count.-->
 
-#### グラフ上でデーターの集計はどのようにおこなえばよいですか。 {#metric-aggregation}
+#### グラフ上でデーターの集計されていますか。 {#metric-aggregation}
 
-Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
+Datadogのグラフでは一定の数のデーターポイント情報処理すことができません。従って、グラフに表示している時間が長くなると、この一定の数にデーターポイントが収まるように、データーポイント間の集約が始まります。
 
-Thus, if you are querying for larger timeframes of data, the points
-returned will be more aggregated. The max granularity within Datadog
-is one point per second, so if you had submitted points at that interval
-and requested a very small time interval (in this case, probably less
-than two minutes), you could end up getting all of those exact points
-displayed. Otherwise, you'll see coarser and coarser granularity as the
-amount of time requested increases. We do this time aggregation via
-average,sum,  min, max, or count.
-
-Datadog内では、グラフはメトリックが増加して見た上での時間枠として、ポイント間の凝集が、そのセット番号の下に滞在するが発生し、点のみのセット数を含めることができます。
-
-このように、あなたはより多くのデータの時間枠を照会している場合は、返されるポイントは、より集約されます。あなたがその間隔で点を提出し、非常に小さな時間間隔を要求した（この場合は、おそらく少ない2分以上）を使用すると、表示されるものの正確な点のすべてを得ることを終えることができたかのようにDatadog内の最大粒度は、1秒当たり1ポイントです。そうしないと、時間が要求された量が増加するにつれて、より粗いと粗い粒度が表示されます。私たちは、平均、合計、最小、最大、またはcount経由でこの時間集計を行います。
+従って、長時間のグラフ表示のためにデーターを照会する場合は、照会結果のポイントは高度に集約されたものとなります。
+Datadogの最も細かいデーターの粒度は1秒間隔です。もしもこの精度で送信したデーターを、極短時間枠(2分以下)のグラフ表示のために要求したなら、送信した精度のままのデーターを手にいれることができるでしょう。それ以上の時間枠のグラフ表示では、時間が長くなればなるほど粗いデーターを見ていることになります。この時間時軸の集約は、各ポイントの平均,合計,最小,最大,countの処理を終えた後に処理されます。
 
 
 <!--<h4 id="metric-other">Any other things about metrics?</h4>
@@ -1027,17 +1017,13 @@ time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 </p>-->
 
-#### メトリクスに関するその他の重要事項は。 {#metric-other}
+<!-- #### メトリクスに関するその他の重要事項は。 {#metric-other}
 
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 
 For example, let's say you break down used memory by host, you'll get one
 time series for each host. If you don't break down by host,
-by default you'll get the average across all hosts.
-
-「和/最小/最大/平均 'アグリゲータを使用するとき、私たちはシリーズ全体ではなく、単一のシリーズ内のポイントを見ている。それがスコープされている場合は、最も詳細なレベルだとそう、それはこれらのアグリゲータの切り替えはあなたが見ている値を変更しない可能性があります。
-
-たとえば、あなたが、ホストが使用するメモリを打破しましょう​​、あなたは、ホストごとに1の時系列を得るでしょう。あなたがホストによって分解しない場合、デフォルトでは、すべてのホスト間で平均値を得るでしょう。
+by default you'll get the average across all hosts. -->
 
 
 <!--
