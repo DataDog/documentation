@@ -1,0 +1,13 @@
+{'id': 62628,
+ 'message': u'',
+ 'name': 'avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 200',
+ 'options': {'is_data_sparse': False,
+             'notify_audit': True,
+             'notify_no_data': False,
+             'renotify_interval': None,
+             'silenced': {'*': None},
+             'timeout_h': None},
+ 'org_id': 1499,
+ 'query': 'avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 200',
+ 'state': {},
+ 'type': 'metric alert'}
