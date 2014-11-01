@@ -50,13 +50,13 @@ Right clicking on the service will reveal options to start, stop, and restart th
 Datadog Agentの実行は、Windows serviceによって管理されています。
 
 <!--　<h4>Datadog Agent バージョン >= 3.9.1の場合:</h4>　-->
-<h4>Datadog Agent バージョン 3.9.1　以上の場合:</h4>
+<h4>Datadog Agent バージョン 3.9.1　以降の場合:</h4>
 スタートメニューに表示されるDatadog Agent Managerを使います。
 <p><img src="/static/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
 <p><img src="/static/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
 
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
-<h4>Datadog Agent バージョン 3.9.1　未満の場合:</h4>
+<h4>Datadog Agent バージョン 3.9.1　以前の場合:</h4>
 
 サービスパネルからDatadog Agentの起動, 停止, 再起動をします。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
 
@@ -90,7 +90,7 @@ Datadog Agent の状況に関し更なる情報を取得するには、ブラウ
 
 <%= console 'http://localhost:17125/status' %>
 
-<em>このステータスページは、Datadog Agent 3.9.1以上に実装されています。</em>
+<em>このステータスページは、Datadog Agent 3.9.1以降に実装されています。</em>
 
 <!--
 ======================================================
@@ -130,7 +130,7 @@ For Windows Server 2008, Vista and newer:
 スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック, 有効, 無効ができます。
 設定ファイルの変更を適応するには、Datadog Agent の再起動が必要です。
 
-<h4>Datadog Agent バージョン  3.9.1　未満の場合:</h4>
+<h4>Datadog Agent バージョン  3.9.1　以前の場合:</h4>
 
 設定ファイルの保存場所は、Windowsのバージョンによって異なります。
 
@@ -196,10 +196,10 @@ You can contact them in one of the following ways:
         <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
 </ul>
 
-<h4>Datadog Agent バージョン  3.9.1　未満の場合:</h4>
+<h4>Datadog Agent バージョン  3.9.1　以前の場合:</h4>
 Datadog Agent の各要素のログは、”Event Viewer”で確認できます。Windows Logs &rarr; Application へとメニューを選択してください。
 <br/>
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチームにご連絡</a>ください。
+上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 
 <%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>

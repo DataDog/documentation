@@ -7,7 +7,7 @@ sidebar:
       href: "#overview"
     - text: セットアップ
       href: "#setup"
-    - text: AgentCheckのインターフェース
+    - text: Agent Checkのインターフェース
       href: "#interface"
     - text: 設定
       href: "#config"
@@ -25,7 +25,7 @@ not include the `AgentCheck` interface that we'll be using.
 </div> -->
 
 <div class="alert alert-block">
-サービスチェックを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。 それ以前のバージョンには、AgentCheckのインターフェスは実装されていません。
+Agent Checkを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。 それ以前のバージョンには、Agent Checkのインターフェスは実装されていません。
 </div>
 
 
@@ -47,8 +47,8 @@ they will run every check interval, which defaults to 15 seconds. -->
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を述することで、新しいデータソースからのメトリックスとイベント情報を収集する方法について説明します。
-`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミング・メトリックスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
+このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからのメトリックスとイベント情報を収集する方法について説明します。
+`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリックスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
 
@@ -71,7 +71,7 @@ web chat client, too</a>.) -->
 
 <h3 id="setup">セットアップ</h3>
 
-未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしたインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent のインストールする手順を解説しています。
+未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent のインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -89,11 +89,11 @@ and require a `check()` method that takes one argument, `instance` which is a
 `dict` having the configuration of a particular instance. The `check` method is
 run once per instance defined in the check configuration (discussed later). -->
 
-<h3 id="interface">AgentCheck のインターフェース</h3>
+<h3 id="interface">Agent Check のインターフェース</h3>
 
-すべてのカスタム・チェックは、`checks/__init__.py`に記述されている`AgentCheck`クラスを継承し、`check()`関数をオーバーライドして生成します。
+すべてのカスタムチェックは、`checks/__init__.py`に記述されている`AgentCheck`クラスを継承し、`check()`関数をオーバーライドして生成します。
 `check()` 関数には、そのインスタンスの構成が記述された辞書型の情報を引数に渡します。
-`check()` 関数は、Check設定で定義されてたインスタンスごとに一回実行されることになります。(詳細に関しては、後に回します)
+`check()` 関数は、Check設定で定義されたインスタンスごとに一回実行されることになります。(詳細に関しては、後述します)
 
 
 <!-- #### Sending metrics
@@ -179,7 +179,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリックスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、ディバッグ時に `datadog-agent info` コマンドで表示できので、ディバッグ時に利用することもできます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリックスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -278,16 +278,16 @@ The first is the `checks.d` folder, which lives in your Agent root.
 
 For all Linux systems, this means you will find it at: -->
 
-<h3 id="directory">ディレクトリーの構造</h3>
+<h3 id="directory">ディレクトリの構造</h3>
 
-Checkのプログラミングを始める前に、まず関連するディレクトリーの構造を理解ておくのは重要なことです。Checkで使用するファイルは、２カ所に分けて設置します。
-Check のPython 実行ファイルは、Datadog Agent のルートディレクトリーにある`checks.d` のフォルダーに設置します。
+Checkのプログラミングを始める前に、まず関連するディレクトリの構造を理解しておくのは重要なことです。Checkで使用するファイルは２カ所に分けて設置します。
+Check のPython 実行ファイルは、Datadog Agent のルートディレクトリにある`checks.d` のフォルダに設置します。
 
-Linux系のシステムは、以下のディレクトリーになります:
+Linux系のシステムは、以下のディレクトリになります:
 
     /etc/dd-agent/checks.d/
 
-Windows Server > = 2008の場合は、以下のディレクトリーになります:
+Windows Server > = 2008の場合は、以下のディレクトリになります:
 
     C:\Program Files (x86)\Datadog\Agent\checks.d\
 
@@ -295,7 +295,7 @@ Windows Server > = 2008の場合は、以下のディレクトリーになりま
 
     C:\Program Files\Datadog\Agent\checks.d\
 
-Mac OS Xとソースからインストールした場合は、以下のディレクトリーになります:
+Mac OS Xとソースからインストールした場合は、以下のディレクトリになります:
 
     ~/.datadog-agent/agent/checks.d/
 
@@ -307,13 +307,13 @@ Mac OS Xとソースからインストールした場合は、以下のディレ
 
     <sandbox_folder>/checks.d/
 
-Check の設定ファイルは、Datadog Agent の設定ファイルのルートディレクトリーにある`conf.d` になります。
+Check の設定ファイルは、Datadog Agent の設定ファイルのルートディレクトリにある`conf.d` になります。
 
-Linux系のシステムは、以下のディレクトリーになります:
+Linux系のシステムは、以下のディレクトリになります:
 
     /etc/dd-agent/conf.d/
 
-Windowsの場合は、あなたはでそれを見つけることができます：
+Windowsの場合は、以下のディレクトリになります：
 
     C:\ProgramData\Datadog\conf.d\
 
@@ -321,7 +321,7 @@ Windowsの場合は、あなたはでそれを見つけることができます�
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
-Mac OS Xとソースからインストールした場合は、以下のディレクトリーになります:
+Mac OS Xとソースからインストールした場合は、以下のディレクトリになります:
 
     ~/.datadog-agent/agent/conf.d/
 
@@ -333,7 +333,7 @@ Mac OS Xとソースからインストールした場合は、以下のディレ
 
     <sandbox_folder>/conf.d/
 
-実行ファイルと設定ファイルは、ディフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することもできます:
+実行ファイルと設定ファイルは、デフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することもできます:
 
     additional_checksd: /path/to/custom/checks.d/
 
@@ -409,7 +409,7 @@ following will happen:
 
 <h3 id="http">HTTP のCheck</h3>
 
-ここからは、HTTPのエンドポイントの状況を確認するための基本的なCheckの書き方を解説することにします。
+ここからは、HTTPのエンドポイントの状況を確認するための基本的なCheckの書き方を解説します。
 Checkが実行される度に、HTTPのエンドポイントに対してGETリクエストを実行します。
 レスポンスの結果に基づいて次の処理をします:
 
@@ -436,10 +436,10 @@ So our final configuration would look something like this:
 
 #### 設定
 
-インスタンス定義の中身がを各Check本体でどのように処理するかを理解するために、
+インスタンス定義の中身が各Check本体でどのように処理されるかを理解するために、
 まず最初に設定ファイルがどのようになるか考えてみることにします。
 
-設定ファイルには、Checkの実行先のとしてのURLの定義以外に、それぞれのURLに対してのタイムアウトを設定するとより環境に合ったCheckを実行することになります。更に、それぞれのインスタンスでタイムアウトを設定しなかったと時のために、デフォルトのタイムアウトも設定しておくことも必要になるます。
+設定ファイルには、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行することになります。更に、それぞれのインスタンスでタイムアウトを設定しなかったと時のために、デフォルトのタイムアウトも設定しておくことも必要になります。
 
 上記をふまえ、設定ファイルは次のようになります:
 
@@ -480,14 +480,14 @@ event method.
 
 #### Check 本体
 
-では、Check 本体の関数の定義することにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
+では、Check 本体の関数の定義をすることにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
 エラーが発生していれば、エラー条件によって処理をします。
 
-次のスニペットでは、タイマーをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーを処理しています。
+以下ののセクションでは、タイマーをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーを処理しています。
 
 <%= snippet_code_block("guides-agentchecks-ex-request.py") %>
 
-リクエストが成功した場合、レスポンス時間をDatadogへ送信することにします。その際、メトリックス名は、`http.response_time`。URLを、タグとして付記します。
+リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリックス名は、`http.response_time`。URLを、タグとして付記します。
 
 <%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
 
@@ -526,10 +526,6 @@ Here's the full source of the check:
 
 #### 今までの解説をまとめると
 
-For the last part of this guide, we'll show the entire check. This module would
-be placed into the `checks.d` folder as `http.py`. The corresponding
-configuration would be placed into the `conf.d` folder as `http.yaml`.
-
 このガイドの最後の部分は、Checkの実行コードの全体を載せておきます。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で設置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として設置します。
 
 Checkに実行ファイルを設置できたら、次のpython スクリプトを使ってテストを実行することができます。
@@ -538,10 +534,6 @@ Checkに実行ファイルを設置できたら、次のpython スクリプト�
 Agent のroot から、次のコマンドでテストを実行します:
 
     PYTHONPATH=. python checks.d/http.py
-
-You'll see what metrics and events are being generated for each instance.
-
-Here's the full source of the check:
 
 あなたは、インスタンスごとに生成されているかを評価指標とイベントが表示されます。
 
@@ -568,7 +560,7 @@ If your issue continues, please reach out to Support with the help page that
 
 <h3 id="troubleshooting">トラブルシュート</h3>
 
-カスタム Agent Chechは、Pythonコマンドから直接実行できません。代わりに、Datadog Agentを使って、テスト実行するようにします。テストするには、次のようなコマンドを実行します:
+カスタム Agent checkは、Pythonコマンドから直接実行できません。代わりに、Datadog Agentを使って、テスト実行するようにします。テストするには、次のようなコマンドを実行します:
 
     sudo -u dd-agent dd-agent check my_check
 

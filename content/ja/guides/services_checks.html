@@ -17,7 +17,7 @@ sidebar:
 
 <div class="alert alert-block">
 サービスチェックを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。
-それ以前のバージョンには、サービチェック機能を実装されていません。
+それ以前のバージョンには、サービチェック機能は実装されていません。
 </div>
 
 <!--
@@ -46,11 +46,11 @@ Service checks will post an event on your stream when:
 このガイドでは、Datadogのサービスチェック機能を使って、サービスを監視し、障害が発生した際に通知が受けられるようにする方法を紹介します。
 
 サービスチェックは、Datadog Agent のメインループからコールされます。
-尚コールされたプロセスは、Datadog Agent の処理をブロックすることがないように別スレッドのプロセスで実行されています。
+尚コールされたプロセスは、Datadog Agent の処理をブロックすることがないように別スレッドのプロセスで実行されます。
 
-サービスチェックは、○○に、**UP**または**DOWN**と記述して、起動したり停止することができます。
+サービスチェックは、**UP**または**DOWN**と記述して、起動したり停止することができます。
 
-サービスチェックは、次の状況が発生した際にイベントストリームへエントリーを掲載します:
+サービスチェックは、次の状況が発生した際にイベントストリームへイベントを送信します:
 
 - サービスのステータスが変更されたとき
 - first check で、サービスが停止しているとき
@@ -76,7 +76,7 @@ web chat client, too</a>.) -->
 
 ### セットアップ
 
-未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしたインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent のインストールする手順を解説しています。
+未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブの[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)をクリックし、インストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -109,7 +109,7 @@ TCP Check configuration file must be named tcp_check.yaml. -->
 - HTTP(S) のチェック
 - TCP のチェック
 
-サービスチェックは、Agentチェック機能の一部分です。従って、設定方法も[Agentチェック機能](http://docs.datadoghq.com/guides/agent_checks/#config)で解説した内容と同じになります。
+サービスチェックは、Agent Check機能の一部分です。従って、設定方法も[Agent Check機能](http://docs.datadoghq.com/guides/agent_checks/#config)で解説した内容と同じになります。
 
 それぞれのサービスチェックの設定ファイルは、`conf.d` ディレクトリー以下に設置します。設置する設定ファルは、[YAML](http://www.yaml.org/)形式で記述していきことになります。
 
@@ -173,7 +173,7 @@ You will only be notified if the check fails 3 times within the last 5 tries. --
 
 <h3 id="http_config">HTTP のチェックのための設定</h3>
 
-HTTP(S)のサービスチェックの設定ファイフの構造は、次のように成ります:
+HTTP(S)のサービスチェックの設定ファイルの構造は、次のように成ります:
 
 <%= snippet_code_block("guides-http_check-config.yaml") %>
 
@@ -183,7 +183,7 @@ HTTP(S)のサービスチェックの設定ファイフの構造は、次のよ�
 
 #### init_config
 
-*init_config*セクション内の*notify*パラメータを指定することでサービスが停止した際に、Datadog内のどのユーザーが通知を受けるかを指定することができます。更に、Integrationによって外部のサービス(Pagerduty, Hipchat, etc)と連携してる場合は、それらのサービスに対しても通知をすることができます。
+*init_config*セクション内の*notify*パラメータを指定することでサービスが停止した際に、Datadog内のどのユーザーが通知を受けるかを指定することができます。更に、Integrationによって外部のサービス(Pagerduty, Hipchat, etc)と連携している場合は、それらのサービスに対しても通知をすることができます。
 
 #### instances
 
@@ -202,7 +202,7 @@ HTTP(S)のサービスチェックの設定ファイフの構造は、次のよ�
 
 サービスチェックを設定する際に、一定の時間内に一定回数の障害が発生したことをエラーの条件とすることができます。
 このような通知条件の設定には`window` と`threshold` パラメーターを*instance* セクションに追記します。
-一定の時間枠(`window`)で表現されるチェック回数が`y`の内に、障害回数のしきい値(`threshold`)が`x`回発生した時にのみ発報するように設定するこになります。
+一定の時間枠(`window`)で表現されるチェック回数が`y`の内に、障害回数のしきい値(`threshold`)が`x`回発生した時にのみ通知するように設定することになります。
 
 例えば、次のようなチェック回数(window)と、その回数内でのしきい値(threshold)を指定したとします:
 
@@ -260,13 +260,13 @@ You will only be notified if the check fails 3 times within the last 5 tries.
 
  <h3 id="tcp_config">TCP のチェックのための設定</h3>
 
-TCP のサービスチェックの設定ファイフの構造は、次のように成ります:
+TCP のサービスチェックの設定ファイるの構造は、次のように成ります:
 
 <%= snippet_code_block("guides-tcp_check-config.yaml") %>
 
 #### init_config
 
-*init_config*セクション内の*notify*パラメータを指定することでサービスが停止した際に、Datadog内のどのユーザーが通知を受けるかを指定することができます。更に、Integrationによって外部のサービス(Pagerduty, Hipchat, etc)と連携してる場合は、それらのサービスに対しても通知をすることができます。
+*init_config*セクション内の*notify*パラメータを指定することでサービスが停止した際に、Datadog内のどのユーザーが通知を受けるかを指定することができます。更に、Integrationによって外部のサービス(Pagerduty, Hipchat, etc)と連携しいてる場合は、それらのサービスに対しても通知をすることができます。
 
 #### instances
 
@@ -285,7 +285,7 @@ TCP のサービスチェックの設定ファイフの構造は、次のよう�
 
 サービスチェックを設定する際に、一定の時間内に一定回数の障害が発生したことをエラーの条件とすることができます。
 このような通知条件の設定には`window` と`threshold` パラメーターを*instance* セクションに追記します。
-一定の時間枠(`window`)で表現されるチェック回数が`y`の内に、障害回数のしきい値(`threshold`)が`x`回発生した時にのみ発報するように設定するこになります。
+一定の時間枠(`window`)で表現されるチェック回数が`y`の内に、障害回数のしきい値(`threshold`)が`x`回発生した時にのみ通知するように設定することになります。
 
 例えば、次のようなチェック回数(window)と、その回数内でのしきい値(threshold)を指定したとします:
 
