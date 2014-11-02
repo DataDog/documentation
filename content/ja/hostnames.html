@@ -1,5 +1,5 @@
 ---
-title: Host Naming
+title: ホスト名の規則
 sidebar:
   nav:
     - header: Host Naming
@@ -9,24 +9,52 @@ sidebar:
       href: "#aliases"
 ---
 
+<!-- <div class="alert alert-info">
+  An overview of how we uniquely identify hosts and how they are displayed in
+  Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
+where we'll be happy to answer any questions you might have. (There's a
+<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
+web chat client, too</a>.)
+</div> -->
+
 <div class="alert alert-info">
   An overview of how we uniquely identify hosts and how they are displayed in
   Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a 
+where we'll be happy to answer any questions you might have. (There's a
 <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
 web chat client, too</a>.)
 </div>
 
-<h2 id="agent">Agent Host Names</h2>
+
+<!-- <h2 id="agent">Agent Host Names</h2>
 
 <div class="alert alert-warn">
   This applies to version 3.6 of the Agent and later. If you're having issues
   with host names, we recommend updating to the latest version of the Agent.
+</div> -->
+
+## Agent Host Names {#agent}
+
+<div class="alert alert-warn">
+  This applies to version 3.6 of the Agent and later. If you're having issues
+  with host names, we recommend updating to the latest version of the Agent.
+
+  これは、バージョンのエージェントの3.6以降に適用されます。あなたがホスト名を持つ問題を抱えている場合は、Agentの最新バージョンへの更新を推奨します。
+
+我々は一意にホストを識別し、それらがDatadogどのように表示されるか方法の概要。あなたがより多くの質問がありましたら、立ち寄ってFreenodeの#datadog私たちはあなたが持つかもしれないあらゆる質問にお答えいただきます。（あります あまりにも、ウェブチャットクライアント。）
+
 </div>
+
+
+<!-- The Datadog Agent collects potential hostnames from a number of different
+sources. To see all the names the Agent is detecting, run the Agent info
+command: -->
 
 The Datadog Agent collects potential hostnames from a number of different
 sources. To see all the names the Agent is detecting, run the Agent info
 command:
+
+Datadogエージェントは、多数の異なるソースからの潜在的なホスト名を収集します。エージェントが検知しているすべての名前を表示するには、エージェントのinfoコマンドを実行します。
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -44,9 +72,31 @@ command:
 
     ...
 
+<!-- From these names, a canonical name is picked for the host. This is the name the
+Agent will primarily use to identify itself to Datadog. The other names are
+submitted as well, but only as candidates for <a href="#aliases">aliasing</a>.
+ -->
+
 From these names, a canonical name is picked for the host. This is the name the
 Agent will primarily use to identify itself to Datadog. The other names are
 submitted as well, but only as candidates for <a href="#aliases">aliasing</a>.
+
+これらの名前から、正規名は、ホストのために選択されます。これは、エージェントが主にDatadogに自分自身を識別するために使用する名前です。他の名前も同様に、しかし唯一の候補として提出されるエイリアシング。
+
+正規のホスト名は、次のルールに従って取り出される。最初の一致が選択されます。
+
+
+
+<!-- The canonical host name is picked according to the following rules. The first
+match is selected.
+
+ 1. `agent-hostname`: If a host name is explicitly set in the Agent configuration file.
+ 2. `hostname`: If the DNS host name is not an EC2 default (e.g. `ip-192-0-0-1`).
+ 3. `instance-id`: If the Agent can reach the EC2 metadata endpoint from the host.
+ 4. `hostname`: Fall back on the DNS host name even if it is an EC2 default.
+
+If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
+the current rule fails and passes through to the next. -->
 
 The canonical host name is picked according to the following rules. The first
 match is selected.
@@ -59,7 +109,14 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next.
 
-<h2 id="aliases">Host Aliases</h2>
+エージェントホスト名：ホスト名が明示的にエージェントの設定ファイルで設定されている場合。
+ホスト名：DNSホスト名は、EC2のデフォルトではない場合（例えばIP-192-0-0-1）。
+instance-idに：Agentは、ホストからのEC2メタデータエンドポイントに到達することができます。
+ホスト名：それはEC2のデフォルトであっても、DNSホスト名に頼る。
+名前は明らかに非ユニーク（例えばとして認識されている場合はlocalhost.localdomainを）、現在のルールは失敗し、横に通過する。
+
+
+<!-- <h2 id="aliases">Host Aliases</h2>
 
 A single host running in EC2 might have an
 instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the
@@ -74,5 +131,29 @@ added as aliases for the chosen canonical name.
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
+
+<img src="/static/images/host_aliases.png" style="width:100%; border:1px solid #777777"/> -->
+
+## ホストのエリアス {#aliases}
+
+A single host running in EC2 might have an
+instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the
+host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an
+internal DNS server or a config-managed hosts file (`myhost.mydomain`). Datadog
+creates aliases for host names when there are multiple uniquely identifiable
+names for a single host.
+
+The names collected by the Agent (detailed <a href="agent">above</a>) are
+added as aliases for the chosen canonical name.
+
+You can see a list of all the hosts in your account from the Infrastructure tab
+in Datadog. From the Inspect panel, you can see (among other things) the list of
+aliases associated with each host.
+
+EC2で実行されている単一のホストは、インスタンスID（かもしれないI-ABCD1234）、ホストのIPアドレスに基づいて、EC2が提供する汎用的なホスト名を（IP-192-0-0-1）、内部が提供する意味のあるホスト名DNSサーバまたはコンフィグ管理対象ホストファイル（がmyhost.mydomain）。Datadog、単一のホストのために複数の一意に識別名があるホスト名のエイリアスを作成します。
+
+（詳細Agentによって収集された名前は、上記の）選択した正規名の別名として追加されます。
+
+あなたはDatadogにおけるインフラタブからアカウント内のすべてのホストのリストを見ることができます。点検パネルから、（特に）、各ホストに関連付けられている別名のリストを見ることができます。
 
 <img src="/static/images/host_aliases.png" style="width:100%; border:1px solid #777777"/>
