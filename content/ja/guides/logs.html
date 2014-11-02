@@ -15,15 +15,15 @@ ignored. The Datadog Agent can help remedy this by parsing metrics and events fr
 logs, so the data within can ｂe graphed in real-time, all the time. -->
 
 ログファイルには、アプリケーションとビジネスの貴重なデータが含まれています。
-残念ながら多くの場合、この重要性には気が付かず、ログファイルは放置されています。
-Datadog　Agent は、ログからメトリックとイベントを解析することによって、その中のデーターをリアルタイムでグラフ化するのに役立ちます。
+残念ながら多くの場合この重要性には気が付かずログファイルは放置されています。
+Datadog　Agent は、ログからメトリックスとイベントを解析することによって、その中のデータをリアルタイムでグラフ化するのに役立ちます。
 
 <h2 id="metrics">メトリックスの抽出</h2>
 
 Datadgo Agentは、ログファイルから直接メトリックスを、抽出することができます:
 
-- Datadog の公式ログ・フォーマットの場合は、追加のプログラミングは不要です。
-- Datadog の公式ログ・フォーマット以外の場合は、Pythonによるログ・パーサー関数を準備し、それをimportしてパースします。
+- Datadog の公式ログフォーマットの場合は、追加のプログラミングは不要です。
+- Datadog の公式ログフォーマット以外の場合は、Pythonによるログパース関数を準備し、それをimportして抽出します。
 
 
 <!-- ### Datadog Canonical Log Format
@@ -46,7 +46,7 @@ You can also specify multiple log files like this:
 
     dogstreams: /var/log/web.log, /var/log/db.log, /var/log/cache.log -->
 
-### Datadog の公式ログ・フォーマットの場合
+### Datadog の公式ログフォーマットの場合
 
 Datadogのログは次のようにフォーマットされています:
 
@@ -57,7 +57,7 @@ Datadogのログは次のようにフォーマットされています:
     me.web.requests 1320786966 157 metric_type=counter unit=request
     me.web.latency 1320786966 250 metric_type=gauge unit=ms
 
-Datadog Agent にこのログファイルを解説させるためには、次の行をDatadog Agent の設定ファイル(`/etc/dd-agent/datadog.conf`)に追記します。
+Datadog Agent にこのログファイルを解析させるためには、次の行をDatadog Agent の設定ファイル(`/etc/dd-agent/datadog.conf`)に追記します。
 
     dogstreams: /var/log/web.log
 
@@ -107,21 +107,21 @@ Where attributes should at least contain the key metric_type, specifying whether
 
 ### カスタムフォーマットのログの場合
 
-ベンダー専用のソフトや過去からの残留ソフトなど、Datadgoが公式に使用しているフォーマットと異なるものを解析したいとします。このような場合は、Pythonで記述した関数によってその特殊ログの特定のフィールドを抽出することができます。Python で記述した関数を Datadog Agentから呼び出せるようにするためには、設定ファイルに次のフォーマットで、ログファイルと解析用の関する記述します:
+ベンダー専用のソフトや過去からの残留ソフトなど、Datadgoが公式に使用しているフォーマットと異なるログを解析したいとします。このような場合は、Pythonで記述した関数によってその特殊ログの特定のフィールドを抽出することができます。Python で記述した関数を Datadog Agentから呼び出せるようにするためには、設定ファイルに次のフォーマットで、ログファイルと解析用の関数を記述します:
 
     dogstreams: /var/log/web.log:parsers:parse_web
 
 `parsers:parse_web`の部分の意味は、Datadog Agent の`PYTHONPATH`に`parsers`パッケージが存在し、その中に`parse_web`関数が記述されていることを意味します。
-`PYTHONPATH`は、Datadog Agentの起動スクリプトによって設定されます。Datadog Agent 2.0 未満の場合は,
-`/etc/init.d/datadog-agent`に設定されており、Datadog Agent 2.0 以上の場合は、Datadog Agentのsupervisor の設定ファイルに記述された内容に基づいて設定さています。
+`PYTHONPATH`は、Datadog Agentの起動スクリプトによって設定されます。Datadog Agent 2.0 以前の場合は,
+`/etc/init.d/datadog-agent`に設定されており、Datadog Agent 2.0 以降の場合は、Datadog Agentのsupervisor の設定ファイルに記述された内容に基づいて設定されています。
 
-もしも、パースーのパッケージが`PYTHONPATH`にない場合は、そのパッケージを読み込むために、次のようにパスを付記します:
+もしも、パースのパッケージが`PYTHONPATH`にない場合は、そのパッケージを読み込むために次のようにパスを付記します:
 
     dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 
 このフォーマットでは、Datadog Agentは、`custom_parser` 関数を、`/path/to/my/parsers_module.py` ファイルからimportしようとします。
 
-もしも、カスタム・ログパーサーが機能しない場合は、Datadog Agentのcollectorが出力しているログを確認してください。
+もしも、カスタムログパーサが機能しない場合は、Datadog Agentのcollectorが出力しているログを確認してください。
 Datadog Agentがその関数をimport できていない場合は、`Could not load Dogstream line parser`という行が出力されます。全てが正常に動作している場合は、`dogstream: parsing {filename} with
 {function name} (requested {config option text})`が、出力されます。
 
@@ -139,11 +139,11 @@ Where attributes should at least contain the key metric_type, specifying whether
 
 ### パースのための関数の書き方
 
-カスタム・パース関数は、次の条件を満たしている必要があります:
+カスタムログパース関数は、次の条件を満たしている必要があります:
 
-- パラメーターを2つ受付ます: Python logger オブジェクト (デバッグ目的)と、パースするための現在行の文字列パラメーターです。
+- パラメータを2つ受付ます: Python logger オブジェクト (デバッグ目的)と、パースするための現在行の文字列パラメータです。
 
-- 返される結果の出力は、タプル又は、リストの形式が必要があります:
+- 返される結果の出力は、タプル又は、リストの形式である必要があります:
 
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
 
@@ -222,7 +222,7 @@ eof
 
 And you can test your parsing logic by calling python /path/to/parsers.py. -->
 
-### パーサーの例
+### カスタムログパーサの例
 
 `parsers.py`には、次のような内容が記述されます:
 
@@ -258,7 +258,7 @@ def parse_web(logger, line):
 eof
 %>
 
-Datadog Agent 以外からもパーサーをテストすることをお勧めしますので、先のスクリプトにテスト関数を追記します:
+Datadog Agent 以外からもパーサをテストすることをお勧めしますので、先のスクリプトにテスト関数を追記します:
 
 <%= python <<eof
 def test():
@@ -290,7 +290,7 @@ if __name__ == '__main__':
 eof
 %>
 
-次のようにパーサーを実行し、関数のテストをします。
+次のようにパーサを実行し、関数のテストをします。
 
     python /path/to/parsers.py
 

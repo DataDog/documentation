@@ -19,12 +19,12 @@ sidebar:
     - header: オプション
     - text: タグ
       href: "#tags"
-    - text: サンプル・レート
+    - text: サンプルレート
       href: "#sample-rates"
     - header: その他
     - text: 他の送信方法
       href: "#methods"
-    - text: カスタム・メトリックスの確認方法
+    - text: カスタムメトリックスの確認方法
       href: "#custom"
 
 ---
@@ -56,16 +56,16 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、アプリケーションのメトリックをDatadogに送信する方法について説明します。
-Datadogにアプリケーションのメトリックを送信するこで、アプリケーションの状態, ユーザーの行動, システムの状態などを、関連付けて把握できるようになります。
+このガイドでは、アプリケーションのメトリックスをDatadogに送信する方法について説明します。
+Datadogにアプリケーションのメトリックスを送信することで、アプリケーションの状態, ユーザの行動, システムの状態などを関連付けて把握できるようになります。
 
-メトリックは、Datadog Agent にバンドルされているDogStatsD という小型のメトリックス集約サーバを介しDatadog に転送されています。DogStatsDの動作の詳細に関しては、<a
+メトリックスは、Datadog Agent にバンドルされているDogStatsD という小型のメトリックス集約サーバを介しDatadog に転送されています。DogStatsDの動作の詳細に関しては、<a
 href="/guides/dogstatsd/">"Getting Started with DogStatsD"</a>を参照してください。
 早急に送信用のコードを開発する必要のある場合は、このまま読み進めてください。
 
 このチュートリアルでは、次のようなユースケースを取り上げます:
 
-- Webページのページ・ビューを測定する方法
+- Webページのページビューを測定する方法
 - データベースのクエリ時間を測定する方法
 - 空きメモリの量を測定する方法
 
@@ -136,7 +136,7 @@ must be web frontends"). -->
 
 <h3 id="setup">セットアップ</h3>
 
-まずは、ホストにDogStatsDがバンドルされているDatadog Agent(Ver. 3以降) を<a href="https://app.datadoghq.com/account/settings#agent">インストール</a>し、動作していることを確認します。
+まず、ホストにDogStatsDがバンドルされているDatadog Agent(Ver. 3以降) を<a href="https://app.datadoghq.com/account/settings#agent">インストール</a>し、動作していることを確認します。
 
 次に、開発に使用するプログラミング言語のクライアントライブラリをセットアップします。
 
@@ -147,7 +147,7 @@ must be web frontends"). -->
   <div class="tab-pane active fade in" id="setup-python">
 モジュールをインストールします:
 <%= snippet_code_block("guides-metrics-setup-python.sh") %>
-モジュイールをインポートします:
+モジュールをインポートします:
 <%= snippet_code_block("guides-metrics-setup.py") %>
   </div>
 
@@ -167,7 +167,7 @@ statsd = Statsd.new
 EOF
 %>
   </div>
-  <p>これで、ライブラリーが使えるように成りました。</p>
+  <p>これで、ライブラリが使えるように成りました。</p>
   <div class="alert info-block">
     このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/libraries/">Libraries</a>のページを参照してくだい。
   </div>
@@ -178,12 +178,12 @@ EOF
 メトリックスを命名する際には、次のルールを守ってください:
 <ul>
 <li>メトリック名は、文字で始まる必要があります。</li>
-<li>ascii英数字,アンダースコア,ピリオドを、使うことができができます。（他の文字はアンダースコアに変換されます）</li>
+<li>ascii英数字、アンダースコア、ピリオドを、使うことができができます。（他の文字はアンダースコアに変換されます）</li>
 <li>200文字を、超えることができません。 (though less than 100 is genearlly preferred from a UI perspective)</li>
-<li>Unicode は、サポートしていません。</li>
+<li>Unicode （全角文字）は、サポートしていません。</li>
 <li>空白(スペース)は、使用できません。</li>
 </ul>
-Datadog Agent によって転送されるメトリックは、擬似階層ドット形式 (e.g. http.nginx.response_time)を使用しています。
+Datadog Agent によって転送されるメトリックスは、擬似階層ドット形式 (e.g. http.nginx.response_time)を使用しています。
 ここで"疑似階層"と言っている理由は、この形式をシステムのメトリックスを検索の仕組みとして使っているからです。
 (例:"ねえ、ホストAとホストBが、'http.nginx.*'というメトリックスを送信している。これらは、Webのフロントエンドのメトリックスだよね〜")
 従って、物理的なシステムが、階層構造であるかどうかは気にしていません。
@@ -276,7 +276,7 @@ your series like cumulative sum or integral. There is more information on those
 
 <h3 id="counters">カウンター (Counters)</h3>
 
-カウンタは、物事を数えるに使用します。
+カウンタは、出来事の回数を数えるのに使用します。
 
 例えば、Webページのビュー数をカウントしたい場合、Webアプリケーションの`render_page`関数が実行された際に、`web.page_views`メトリックスが、増加するよう関数内に`statsd.increment()`行を追記し数値を蓄積しています。
 
@@ -304,19 +304,19 @@ EOF
   </div>
 </div>
 
-この1行のコード追記みで、データーのグラフ化を開始することができます。
+この1行のコード追記のみで、データのグラフ化を開始することができます。
 
 次のグラフは、Dashboard上に表示したページビュー数の一例です:
 
 <img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%">
 
-- 注) DogStatsDのカウンターは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。
-従って、上のグラフのマーカーでは、15:34分に35.33 view/秒という実際には考えられない数値を表示しています。
+- 注) DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。
+従って、上のグラフのマーカでは、15:34分に35.33 view/秒という実際には考えられない数値を表示しています。
 それとは逆に、もしもWebページに毎秒1回の訪問しかなかった場合には、グラフは、y = 1 の平坦な線になります。
 一定時間内の数値の増加や測定を目的とする場合は、<a href='#gauges'>ゲージ</a>を参照してください。
 
 任意の数値でカウント値を増すこともできます。
-例えば、ファイルのアップロード・サービスによって処理されたバイト数をカウントしたいとします。
+例えば、ファイルのアップロードサービスによって処理されたバイト数をカウントしたいとします。
 このような場合は、`upload_file`関数が実行される度に、`file_service.bytes_uploaded`というメトリックスを、ファイルサイズ分づつ増加させていきます:
 
 <%= code_tabs("counters-uploaded", tab_languages) %>
@@ -344,8 +344,8 @@ EOF
 </div>
 <br>
 
-- 注）DogStatsDが他のソースから受け取った、リセットが発生せずに増加し続けるカンター値(例えば、MySQLのクエリー数/時間)は、flush interval間のレートを記録していきます。
-現状のDatadogでは、大本のカウント値を取得するための洗練された解決策を持ち合わせいませんが、必要に応じ送信された時系列のデーターに対し数値計算functionを使って累積合計や積分をことも検討してみると良いかもしれません。
+- 注）DogStatsDが他のアプリケーションから受け取った、リセットが発生せずに増加し続けるカウンタ値(例えば、MySQLのクエリ数/時間)は、flush interval間のレートを記録していきます。
+現状のDatadogでは、大本のカウント値を取得するための洗練された解決策を持ち合わせいませんが、必要に応じ送信された時系列のデータに対し数値計算functionを使って累積合計や積分をとることも検討してみると良いかもしれません。
 これらのfunctionに関する詳細は、Graphingページの<a href="http://docs.datadoghq.com/graphing/#functions">"Arithmetic and Functions"</a>を参照してください。
 
 
@@ -390,7 +390,7 @@ EOF
 
 ゲージは、一定時間内の特定の値を測定します。
 
-例えば、マシンの空きメモリの量を追跡した場合、空きメモリー量を調らべる関数`get_free_memory()`を定期的に呼び出し`system.mem.free`メトリクスとして抽出し、`statsd.gauge()`で、測定値として処理します:
+例えば、マシンの空きメモリの量を追跡した場合、空きメモリー量を調べる関数`get_free_memory()`を定期的に呼び出し`system.mem.free`メトリックスとして抽出し、`statsd.gauge()`で、測定値として処理します:
 
 <%= code_tabs("gauges", tab_languages) %>
 
@@ -495,9 +495,9 @@ test scores.
 
 <h3 id="histograms">ヒストグラム (Histograms)</h3>
 
-ヒストグラムは、値の集合の統計的分布を測定します。
+ヒストグラムは、データの統計的分布を測定します。
 
-例えば、データベースへのクエリ–時間待ち時間を計測したい場合、`database.query.time`メトリックスとしてクエリーの実行に掛かった時間を計測し、`statsd.histogram()`で、集合値として処理します。
+例えば、データベースへのクエリ時間待ち時間を計測したい場合、`database.query.time`メトリックスとしてクエリの実行に掛かった時間を計測し、`statsd.histogram()`で、ヒストグラム値として処理します。
 
 <%= code_tabs("histograms", tab_languages) %>
 
@@ -534,7 +534,7 @@ EOF
   </div>
 </div>
 
-上記のスクリプトは、次のメトリックを同時に生成します:
+上記のスクリプトは、次のメトリックスを同時に生成します:
 
 - `database.query.time.count` - 計測された回数
 - `database.query.time.avg` - 計測された値の平均時間
@@ -542,17 +542,17 @@ EOF
 - `database.query.time.max` - 計測された値の最大値
 - `database.query.time.95percentile` - 計測された値の95パーセンタイル値
 
-これらのメトリックスによて、クエリーが処理されるまでの時間のばらつきを把握すことができます。
-`median`をグラフ化することにより、クエリーが処理されるまでの平均時間を知ることができます。
+これらのメトリックスにより、クエリが処理されるまでの時間のばらつきを把握すことができます。
+`median`をグラフ化することにより、クエリが処理されるまでの平均時間を知ることができます。
 又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリー処理時間を知ることができます。
 
 <img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%">
 
-この例では、「１秒以内のクエリー処理時間は、容認範囲」として仮定し話を進めます。クエリー処理時間の中央値(紫色線)は、たいてい100ミリ秒以下を示し、容認範囲を推移しています。
-しかし残念ながら、95パーセンタイル値(青色線)には、放置することのできないスパイク状の長処理時間クエリーが確認でき、時には3秒という値になっています。
+この例では、「１秒以内のクエリ処理時間は、容認範囲」として仮定し話を進めます。クエリ処理時間の中央値(紫色線)は、たいてい100ミリ秒以下を示し、容認範囲を推移しています。
+しかし残念ながら、95パーセンタイル値(青色線)には、放置することのできないスパイク状の長処理時間クエリが確認でき、時には3秒という値になっています。
 
-この2本の線から、ほとんどのクエリーは順調に処理されているが、時折発生する長処理時間のクエリーは深刻であることが分かります。
-対策を施し、95パーセンタイル値が中央値と近接して推移するよにできたら、クエリーは期待通りに処理されるように改善できたことを判断することができます。
+この2本の線から、ほとんどのクエリは順調に処理されているが、時折発生する長処理時間のクエリは深刻であることが分かります。
+対策を施し、95パーセンタイル値が中央値と近接して推移するようにできたら、クエリは期待通りに処理されるように改善できたことを確認することができます。
 
 <p class="alert alert-warning">
 ヒストグラムは、任意の型の値の分布を測定するために用いることもできます。
@@ -599,7 +599,7 @@ EOF
 
 セットは、グループ内のユニークな要素をカウントするために使用します。
 
-Webサイトの個別訪問者の数値を追跡する場合は、セットが最適な方法です。
+Webサイトの個別訪問者の数を追跡する場合は、セットが最適な方法です。
 
 <%= code_tabs("sets", tab_languages) %>
 
@@ -710,7 +710,7 @@ in the standard way. Check out some of our other docs for how to use these:
 タグは、メトリックスの分類に広がりを持たせるための方法です。ダッシュボードなどのフロントエンドでは、これらのタグを使いメトリックスを、抽出、分類、集約、比較して使います。
 
 例えば、2種類のアルゴリズムの性能を測定したかったとします。
-`algorithm.run_time`メトリックスに`tags=['key:value syntax']`タグをオプションを指定し、計測をします:
+`algorithm.run_time`メトリックスに`tags=['key:value syntax']`タグをオプション指定し、計測をします:
 
 <%= code_tabs("tags", tab_languages) %>
 
@@ -746,23 +746,23 @@ EOF
 </div>
 
 
-フロントエンド上で各メトリックは、和や平均として集計することができます。
+フロントエンド上で各メトリックスは、合計や平均として集計することができます。
 又、最小/最大値を報告することもできます。
 メトリックスは、タグで設定した'key'文字列を使って、'value syntax'ごとに分類することができます。
-例えば、次のようなクエリーを実行することができます:
+例えば、次のようなクエリを実行することができます:
 
 `avg:algorithm.run_time{*} by {algorithm}`
 
-このクエリーでは、`algorithm.run_time`メトリックスを全てのデーターから検索し、タグ'key'文字列の`algorithm`の'value syntax'文字列ごとに分類集計し、平均を計算します。
+このクエリでは、`algorithm.run_time`メトリックスを全てのデータから検索し、タグ'key'文字列の`algorithm`の'value syntax'文字列ごとに分類集計し、平均を計算します。
 
 <p class="alert alert-warning">
-Datadogのバックエンドでは、ホスト, メトリックス, タグの組み合わせごとに時系列データーを保存しています。
+Datadogのバックエンドでは、ホスト、メトリックス, タグの組み合わせごとに時系列データを保存しています。
 従って、無限にタグづけされたメトリックスをサポートすることができません。
-ユーザーIDやタイムスタンプなど、無限に増殖する['key':'value syntax']の付与は止めてください。
+ユーザIDやタイムスタンプなど、無限に増殖する['key':'value syntax']の付与は止めてください。
 それぞれのメトリックスに対し1000種類のタグを限界に付与するようにしてください。
 </p>
 
-タグは文字で開始する必要があり、その後、英数字、アンダースコア、マイナス、コロン、ピリオドやスラッシュを含んでいてもよいです。
+タグは文字で開始する必要があり、その後、英数字、アンダースコア、マイナス、コロン、ピリオドやスラッシュが使用できます。
 その他の文字はアンダースコアに変換されます。
 タグには、最大200文字で、Unicodeをサポートすることができます。
 タグに使用した文字は、小文字に変換されます。
@@ -772,8 +772,8 @@ Datadogのバックエンドでは、ホスト, メトリックス, タグの組
 `device`, `host`, `source`の'key'文字列は、特別な文字列として取り扱われるために、標準的な方法では設定できません。
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
 
-- <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
-- <a href="http://docs.datadoghq.com/api/#tags">API レファレンスのtag</a>
+- <a href="http://docs.datadoghq.com/api/#metrics">API リファレンスのmetrics</a>
+- <a href="http://docs.datadoghq.com/api/#tags">API リファレンスのtag</a>
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Datadog Agent チェックの書き方</a>
 - <a href="http://docs.datadoghq.com/guides/logs/">Datadog Agent を使ったログのパース方法</a>
 
@@ -810,16 +810,16 @@ EOF
 
 <hr> -->
 
-<h3 id="sample-rates">サンプル・レート (Sample Rates)</h3>
+<h3 id="sample-rates">サンプルレート (Sample Rates)</h3>
 
-各収集タイミング(ポイン)で発生するデータは、UDPを介しDogStatsDサーバに送信されます。
-パフォーマンスを重視している環境において、このような状況は、高いおバーへド負荷になります。
-この問題を回避するためにDogStatsDでは、サンプル・レートを調整できるようになっています。
-`sample_rate=`をオプションに追記することにより収集タイミング(ポイント)を倍数分の制限することができ、DatadogのDashboardでは時間軸が調整されて表示されるように成ります。
+各収集タイミング(ポイント)で発生するデータは、UDPを介しDogStatsDサーバに送信されます。
+パフォーマンスを重視している環境において、このような状況は、高いオーバヘッド負荷になります。
+この問題を回避するためにDogStatsDでは、サンプルレートを調整できるようになっています。
+`sample_rate=`をオプションに追記することにより収集タイミング(ポイント)を倍数分に制限することができ、DatadogのDashboardでは時間軸が調整されて表示されるように成ります。
 
 <%= code_tabs("sample-rates") %>
 
-次のコードは、通常の半分のポインのデーターを送信します:
+次のコードは、通常の半分のタイミング(ポイント)のデータを送信します:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sample-rates-python">
@@ -867,8 +867,8 @@ Datadog:
 
 <h3 id="methods">他の送信方法</h3>
 
-Datagogにメトリックスを転送するには、Datadog Agent にバンドルされているDogStatsD サーバーを使用する方法が、最も簡単です。
-しかし、それが唯一の方法でhありません。次の方法を使ってもDatadogにメトリックスを送信することができます。
+Datagogにメトリックスを送信するには、Datadog Agent にバンドルされているDogStatsD サーバーを使用する方法が最も簡単です。
+しかし、それが唯一の方法ではありません。次の方法を使ってもDatadogにメトリックスを送信することができます。
 
 <ul>
   <li>
@@ -898,20 +898,20 @@ created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
 an existing one. -->
 
-<h3 id="custom">カスタム・メトリックスの確認方法</h3>
+<h3 id="custom">カスタムメトリックスの確認方法</h3>
 
-カスタム・メトリックスを参照する最も簡単な方法は、メトリックス・エクスプローラを使用することです。
-Datadogにloginした後、上部のナビゲーションバーにある"Metrics"より"Explor"を選択し、移動することができます。
+カスタムメトリックスを確認する最も簡単な方法は、メトリックスエクスプローラを使用することです。
+Datadogにloginした後、上部のナビゲーションバーにある"Metrics"より"Explor"を選択します。
 
-メトリックス・エクスプローラのページが表示されたらな、"Graph:"の欄にカスタム・メトリックス名を入力します。
+メトリックスエクスプローラのページが表示されたら、"Graph:"の欄にカスタムメトリックス名を入力します。
 入力時には、自動補完が行われます。
 自動補完がされない場合は、Datadogがそのメトリックスを数時間に渡って受信できていない可能性があります。
 
 "Over:"欄を使うとメトリックスをフィルタリングすることもできます。
 又、"One graph per:"では、メトリックスをタグクループごとにグラフ化することもできます。
 
-メトリックス・エクスプローラの項目に入力し表示されグラフは、自動では保存されません。
-ページに表示されているグラフの保存が必要な場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存てください。
+メトリックスエクスプローラの項目に入力し表示されたグラフは、自動的に保存されません。
+表示されているグラフの保存が必要な場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存してください。
 
 
 <% content_for :javascript do %>
