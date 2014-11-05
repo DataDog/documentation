@@ -389,15 +389,15 @@ apples by oranges.
 
 ## 演算子と関数 {#functions}
 
-A Series also supports simple arithmetic and a number of functions.
+シリーズは、簡単な演算やいくつかの関数をサポートしています。
 
-You can apply functions to metric queries in the graph editor, as long as you
-use the JSON editor.
+JSONエディタを使用している限り、グラフエディタ内でメトリッククエリに関数を適用することができます。
 
 ### 演算子
 
-You can apply simple arithmetic to a Series (+, -, * and /). In this
-example we graph 5-minute load and its double:
+シリーズには、簡単な演算( +, -, *, / )を適用することができます。
+次の例では、5分間のload averageの値とその倍の数値をグラフ表示することにします:
+
 
     {
       "viz": "timeseries",
@@ -411,9 +411,9 @@ example we graph 5-minute load and its double:
       ]
     }
 
-You can also add, substract, multiply and divide a Series. Beware that
-Datadog does not enforce consistency at this point so you *can* divide
-apples by oranges.
+シリーズ同士を、加算 減算 乗算 除算することもできます。
+Datadogでは、ここでは一貫性を強制していないので、異なるものの除算をすることもできます。
+
 
     {
         "viz": "timeseries",
@@ -557,12 +557,12 @@ You can apply functions to the result of each query.
 
 ### 関数
 
-You can apply functions to the result of each query.
+クエリーの結果に対して関数を適応することがでます。
 
 <table class="table">
   <tr>
-    <th>Function</th>
-    <th>Description</th>
+    <th>関数</th>
+    <th>概要</th>
   </tr>
 
  <tr>
@@ -729,7 +729,7 @@ You can apply functions to the result of each query.
 </div>
  -->
 
-The <code>top()</code> method also has the following convenience functions, all of which take a single series list as input:
+<code>top()</code> 関数には、次のような便利なサブ関数が準備されています。 これらすべての関数の入力はシリーズになります:
 
 <div style="margin-left: 30px">
   <dl>
@@ -797,18 +797,19 @@ We will also be building these functions fully into the graph editor in the near
 future. For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>. -->
 
-There are also a few functions you can append to a query which we recommend for expert users only.
-<p>
+この他にも、クエリ結果に適応する上級者向けの関数が幾つかあります。
+
 One of these is <code>.rollup()</code>. Appending this function allows you to control the
 number of points rolled up into a single point. This function takes two parameters, method and time, like so:
 <code>.rollup(method,time)</code>.
+
 
 The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually,
 or both combined like <code>.rollup(sum,120)</code>. There are some checks on this,
 though, because for a given time range we do not return more than 350 points. Thus if
 you're requesting <code>.rollup(20)</code> where 20 is in seconds, and ask for a
 month of data, we will be returning the points at a rollup of far greater than 20 seconds.
-</p>
+
 
 <code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions,
 which are only intended for metrics submitted in a certain way (for metadata types where
