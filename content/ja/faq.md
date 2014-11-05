@@ -20,7 +20,7 @@ sidebar:
       href: "/faq/#graph"
     - text: Integrationについて
       href: "/faq/#integrations"
-    - text: メトリクスについて
+    - text: メトリックスについて
       href: "/faq/#metrics"
     - text: イベントについて
       href: "/faq/#events"
@@ -76,10 +76,10 @@ that there is a small statsd server built-in to the agent.
 
 #### Datadogを利用するのに、Datadog Agent のインストールは必要ですか。 {#agent-optional}
 
-* いいえ不要です。Datadogが提供するAPIを使ってメトリクスを送信するだけなら、どのAgentをインストール必要も有りません。
-APIの詳細については、[次のページ][api]を参照してください。
-* 一般的には、多くのユーザーがAgentのインスットールに価値を見出しています。
-Agentをインストールすることでシステムのメトリックすが自動に収集できる上、mysqlやpostgresなどのよく使われるソフトウェアのメトリクスが最低限の設定で収集できるようになります。
+* いいえ不要です。Datadogが提供するAPIを使ってメトリックスを送信するだけなら、どのAgentもインストールする必要は有りません。
+APIの詳細については、[次のページ][api_ja]を参照してください。
+* 一般的には、多くのユーザがAgentのインストールに価値を見出しています。
+Agentをインストールすることでシステムのメトリックスが自動に収集できる上、mysqlやpostgresなどのよく使われるソフトウェアのメトリックスが最低限の設定で収集できるようになります。
 
 
 <!--#### Can I use my own StatsD client? {#statsd}
@@ -93,7 +93,7 @@ features [here][dogstatsd].
 
 StatsDのクライアントならどれでも使えます。
 しかし、DatadogのDogStatsDクライアントには、幾つかの追加機能があります。
-DogStatsDクライアントの追加機能の詳細については、[次のページ][dogstatsd]を参照していください。
+DogStatsDクライアントの追加機能の詳細については、[次のページ][dogstatsd_ja]を参照してください。
 
 
 <!--#### How can I change the hostname {#hostname-change}
@@ -106,7 +106,7 @@ agent’s configuration file.-->
 
 #### hostnameはどのように変更すればいいですか。 {#hostname-change}
 
-datadog.confというDatadog Agentの設定ファイル内のhostname”の値を変更し、ファイル更新することでホスト名を変更することができます。
+datadog.confというDatadog Agentの設定ファイル内の“hostname”の値を変更し、ファイル更新することでホスト名を変更することができます。
 設定ファイルの保存先は、[次のページ][basic_agent_usage_ja]の左メニューから、Datadog AgnetをインストールしたOSを選択し、
 **設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
 
@@ -136,7 +136,7 @@ datadog.confというDatadog Agentの設定ファイル内のhostname”の値�
   $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist
   ~~~
 
-* Windows: コントルールパネルから移動し、プログラム追加/削除で削除できます。
+* Windows: コントルールパネルのプログラムの追加/削除で削除できます。
 * Linux: ```$ sudo apt-get remove datadog-agent -y```
 * CentOS 5: ```$ sudo yum remove datadog-agent-base```
 * CentOS 6: ```$ sudo yum remove datadog-agent```
@@ -148,11 +148,11 @@ It can take up to 24h for the host to disappear from the infrastructure page,
 but it will only be part of the host count for billing purposes if we're
 actually receiving data.-->
 
-#### ホスト上でDatadog Agentを停止しますたが、ダッシュボード上には未だそのホストが表示されています。 {#agent-stopped}
+#### ホスト上でDatadog Agentを停止しましたが、ダッシュボード上には未だそのホスト名が表示されています。 {#agent-stopped}
 
 Infrastructureのページから、ホスト名から消えるのに最長で24時間くらいかかります。
 Agentを停止したのちダッシュボードにホスト名が残っている時間は、そのホストに対しは課金請求を受けることはありません。
-課金の判定基準は、メトリクスデーターをDatadog側で受信しているかどうかです。
+課金の判定基準は、メトリックスデータをDatadog側で受信しているかどうかです。
 
 
 <!--#### Other Agent-related questions? {#agent-other}
@@ -169,7 +169,9 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 [basic_agent_usage]: /guides/basic_agent_usage/-->
 
 [api]: /api/
+[api_ja]: /ja/api/
 [dogstatsd]: /guides/dogstatsd/
+[dogstatsd_ja]: /ja/guides/dogstatsd/
 [basic_agent_usage]: /guides/basic_agent_usage/
 [basic_agent_usage_ja]: /ja/guides/basic_agent_usage/
 
@@ -196,14 +198,14 @@ from AWS. -->
 
 ### アラートについて {#alerts}
 
-### メトリクスにアラートを設定したところ、なぜか非常に多くの[No Data] アラートが発生します。 {#no-data}
+### メトリックスにアラートを設定したところ、なぜか非常に多くの[No Data] アラートが発生します。 {#no-data}
 
-AWSの[No Data]エラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。
-DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデーターは、10分かそれ以上遅延します。
-従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。
+AWSの[No Data]エラーの問題は、DatadogがAWSからのメトリックスを受信する頻度に関係しています。
+DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリックスデータは、10分かそれ以上遅延します。
+従って、AWSのメトリックスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。
 (この時間枠の設定は、[アラートの設定方法][alerting_ja]ページのアラートの新規設定の第3ステップを参照してください。)
-アラートの発報条件の時間枠を変更することで、この問題は解決するはずです。
-より粒度の細かいデーターでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデーターを基にアラートを設定することをお勧めします。
+アラートの発生条件の時間枠を変更することで、この問題は解決するはずです。
+より粒度の細かいデータでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリックスデータを基にアラートを設定することをお勧めします。
 
 
 <!--#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
@@ -219,11 +221,11 @@ alert when at 80% or above:
 
 [alerting]: guides/alerting/-->
 
-### リソースの利用率に基づいてアラートを発報することはできますか。例えば、メモリーの利用率が50％になった時や、ディスク領域の使用率が80％になった時など。 {#alert-disk-utilization}
+### リソースの利用率に基づいてアラートを発生することはできますか。例えば、メモリの利用率が50％になった時や、ディスク領域の使用率が80％になった時など。 {#alert-disk-utilization}
 
 * **はい、可能です。**
 * 詳細については、[アラートの設定方法][alerting_ja]のページを参照してください。
-* 以下が、ディスク使用率が80％の時に発報するアラートの設定手順の概要です:
+* 以下が、ディスク使用率が80％の時に発生するアラートの設定手順の概要です:
   1. `system.disk.in_use` というメトリクスを選択します。
   2. `threshold alert` タイプを選択します。
   3. `simple alert` グループタイプを選択します。
@@ -253,15 +255,15 @@ reporting ‘http.nginx.*’, those must be web frontends”). -->
 
 ### APIについて {#api}
 
-#### メトリクスの命名規則はありますか。 {#api-metric-names}
+#### メトリックスの命名規則はありますか。 {#api-metric-names}
 
-- メトリクス名は、ascii英字で始める必要があります。2文字目以降は、ascii英数字、アンダースコア、ピリオドを使用することができます。
+- メトリックス名は、半角英字で始める必要があります。2文字目以降は、半角英数字、アンダースコア、ピリオドを使用することができます。
 これらの条件に合わない全ての文字は、アンダースコアに変換されます。
-- メトリクス名には、文字数の制限はありません。
+- メトリックス名には、文字数の制限はありません。
 - Unicodeはサポートされていません。
 - 空白は使用しないでください。
 
-Datadog Agentによって送信されるメトリクス名は、疑似階層ドット形式（例：http.nginx.response_time）になります。この形式を採用しているのは、メトリクス名から各サーバーの機能を推測し易くするためです。例えば、「hostAとhostBは、‘http.nginx.*’だから、多分これらはwebのフロントエンドのインスタンスだよね〜」という感じです。
+Datadog Agentによって送信されるメトリックス名は、疑似階層ドット形式（例：http.nginx.response_time）になります。この形式を採用しているのは、メトリックス名から各サーバの機能を推測し易くするためです。例えば、「hostAとhostBは、‘http.nginx.*’だから、多分これらはwebのフロントエンドのインスタンスだよね〜」という感じです。
 
 <!--#### What are valid tags? {#api-tags}
 
@@ -272,7 +274,7 @@ unicode. Tags will be converted to lowercase as well.-->
 
 #### タグの。命名規則はありますか。 {#api-tags}
 
-- タグ名は、ascii英字で始める必要があります。2文字目以降は、英数字、アンダースコア、マイナス、コロン、ピリオド、スラッシュを使用することができます。これらの条件に合わない全ての文字は、アンダースコアに変換されます。
+- タグ名は、半角英字で始める必要があります。2文字目以降は、英数字、アンダースコア、マイナス、コロン、ピリオド、スラッシュを使用することができます。これらの条件に合わない全ての文字は、アンダースコアに変換されます。
 - タグ名は、最大が200文字の制限があります。
 - Unicodeをサポートします。
 - タグ名は、全て小文字に変換されます。
@@ -288,14 +290,14 @@ the latest point will overwrite the previous ones.
 We have a soft limit of 100 time series per host, where a time series is
 defined as a unique combination of metric name and tag.-->
 
-#### API経由でメトリクスデーターを送信しようとしています。その際に注意することはありますか。 {#api-else}
+#### API経由でメトリックスデータを送信しようとしています。その際に注意することはありますか。 {#api-else}
 
-Datadogでは、1秒の分解能でメトリクスのデーターを保存していますが、15秒間隔でのメトリクス・ポイントのデーター送信を推奨しています。
+Datadogでは、1秒の分解能でメトリックスのデータを保存していますが、15秒間隔でのメトリックスポイントのデータ送信を推奨しています。
 タイムスタンプの１秒以下の部分は、最も近い秒単位に丸められます。
-この処理によって、同じタイムスタンプが複数発生した場合、先に受信したデーターは、後から受信したタイムスタンプのデーターによって上書きされます。　
+この処理によって、同じタイムスタンプが複数発生した場合、先に受信したデータは、後から受信したタイムスタンプのデータによって上書きされます。　
 
-Datadogでは、100個/ホストの時系列データーの制限を設けています。
-ここでいう時系列データーとは、メトリクス名とタグの組み合わせの数になります。
+Datadogでは、100個/ホストの時系列データの制限を設けています。
+ここでいう時系列データとは、メトリックス名とタグの組み合わせの数になります。
 
 
 <!--
@@ -315,9 +317,9 @@ credentials you provide to us.-->
 
 ### アーキテクチャについて {#architecture}
 
-#### Datadogは、クラウドサービスですか、それもとサーバーにインストールするアプリケーションですか。 {#arch-cloud-or-server}
+#### Datadogは、クラウドサービスですか、それもとサーバにインストールするアプリケーションですか。 {#arch-cloud-or-server}
 
-Datadogは、クラウドサービスです。しかし、サーバー上のメトリクスデータを収集するためには、それらのデーターをDatadogのサービスに転送するためのAgentをインストールする必要があります。
+Datadogは、クラウドサービスです。しかし、サーバ上のメトリックスデータを収集するためには、それらのデータをDatadogのサービスに転送するためのAgentをインストールする必要があります。
 Datadog側からは、監視対象のインフラに直接コネクションを張るすることはありません。
 AWS Integrationなど、クラウドプロバイダーの監視用のAPIを使ったインテグレーションでは、設定時に記述された認証情報でのみ監視情報を収取します。
 
@@ -328,11 +330,11 @@ All hosts or metrics that have not seen data in 24 hours will disappear from the
 you can still query against them, but it will not appear in drop downs or infrastructure.
 There is not a way to immediately delete a metric.-->
 
-#### ホストやメトリクスを削除る方法はありますか。 {#arch-delete}
+#### ホストやメトリックスを削除する方法はありますか。 {#arch-delete}
 
-**メトリクスを直ちに削除する方法はありません。**
+**メトリックスを直ちに削除する方法はありません。**
 
-Datadog側でのメトリクス受信が停止していからおよそ24時間経過後、そのメトリクスを送信していたホストはUIに表示されなくなります。UIに表示されなくなった後も、これらのメトリクスやホストの情報をクエリーを使って検索することはできます。
+Datadog側でのメトリックス受信が停止してからおよそ24時間経過後、そのメトリックスを送信していたホスト名はUIに表示されなくなります。UIに表示されなくなった後も、これらのメトリックスやホストの情報をクエリーを使って検索することはできます。
 
 
 
@@ -394,7 +396,7 @@ Datadogでは、以下のようになります:
 <application>.requests.mean_90{http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>}
 ~~~
 
-```<application>.requests.mean_90```は、メトリクス名になり、```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```は、タグになります。
+```<application>.requests.mean_90```は、メトリックス名になり、```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```は、タグになります。
 
 従って、具体的に書くと次のようになります:
 
@@ -409,7 +411,7 @@ avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_me
 ~~~
 
 This will graph a single series that's the average of that metric across the　intersection of those tags.
-Datadogでは、メトリクスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
+Datadogでは、メトリックスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
 
 すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリーを記述することができます:
 
@@ -471,11 +473,11 @@ For information on AWS tagging, please see [here][integration-aws].-->
 
 #### Datadogを使う上での、タグの使い方について教えて下さい。 {#tagging}
 
-メトリクスを簡単に集計する上で、タグ付けはとても有効です。
+メトリックスを簡単に集計する上で、タグ付けはとても有効です。
 更にシステムインフラの拡大/縮小への追従という観点でも、柔軟に対応した監視を実現できます。
 
 タグ付の有用性を説明するために簡単な例を紹介します。
-例えば、あるメトリクスの合計が欲しいとします。
+例えば、あるメトリックスの合計が欲しいとします。
 まずタグ付の設定をする前は、次のようになっていたとします:
 
 ~~~
@@ -497,9 +499,9 @@ Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:e
 sum:page.views{domain:example.com}
 ~~~
 
-これで、各メトリクスの合計を一つの数字にまとめたグラフを表示することができます。
+これで、各メトリックスの合計を一つの数字にまとめたグラフを表示することができます。
 
-又、合計を表示する際に各メトリクスの内訳を表示したい場合は、次のように記述することもできます:
+又、合計を表示する際に各メトリックスの内訳を表示したい場合は、次のように記述することもできます:
 
 ~~~
 sum:page.views{domain:example.com} by {host}
@@ -540,7 +542,7 @@ hostnames [here][hostnames].
 
 ### AWSについて {#aws}
 
-#### AWS用のIntegrationを設定しました。ホストが重複して表示されるのはどうしてですか。 {#duplicate-hosts}
+#### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
 EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。
 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。
@@ -555,7 +557,7 @@ Datadogでは、単一ホストに対して複数のユニークなホスト名�
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
 * You can read in detail about our AWS integration [here][integration-aws].-->
 
-#### AWS用のIntegrationには、どのようなメトリクスが含まれていますか。 {#aws-metrics}
+#### AWS用のIntegrationには、どのようなメトリックスが含まれていますか。 {#aws-metrics}
 
 - CloudwatchのAPIを使用して収集できる情報は全て収集しています。
 - AWS Integrationについては、[Datadog-AWS Cloudwatch Integration][integration-aws_ja]のページを参照してください。
@@ -584,9 +586,9 @@ This will output the current system’s date, and then make a request to our
 endpoint and grab the date on our end. If these are more than a few minutes
 apart, you may want to look at the time settings on your server.-->
 
-#### AWSからメトリクスデーターを受信するのに時間がかかるのはなぜですか。 {#aws-delay}
+#### AWSからメトリクスデータを受信するのに時間がかかるのはなぜですか。 {#aws-delay}
 
-インスタンスの現在時間が大幅に進んでいいるか遅れていることが多々あり、この時間のずれがメトリクスデーターの送信/表示の障害になることがあります。
+インスタンスの現在時間が大幅に進んでいいるか遅れていることが多々あり、この時間のずれがメトリクスデータの送信/表示の障害になることがあります。
 
 Datadog側の時間とインスタンスの時間の差をチェックするには、次のコマンドを実行します:
 
@@ -606,7 +608,7 @@ Yes you can! Follow the steps below to set this up:
 3. Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
 4. Restart the agent-->
 
-#### RDSからPostgreSQLのメトリクスデーターを取得することができますか。 {#aws-rds}
+#### RDSからPostgreSQLのメトリックスデータを取得することができますか。 {#aws-rds}
 
 はい、できます。設定は、次の手順になります。
 
@@ -686,9 +688,9 @@ metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 
 ### グラフ表示の設定について {#graph}
 
-#### メトリクスを集計しグラフ表示したい場合は、どのようにすればよいですか。 {#graph-sum-grouped}
+#### メトリックスを集計しグラフ表示したい場合は、どのようにすればよいですか。 {#graph-sum-grouped}
 
-```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリクス と ```app.foo.baz{env:staging}```メトリクスの足し算の結果をグラフ表示するクエリーは、次のようになります:
+```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリックス と ```app.foo.baz{env:staging}```メトリックスの足し算の結果をグラフ表示するクエリーは、次のようになります:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
@@ -711,7 +713,7 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~-->
 
-#### 複数のデーターポイントの合算するは、クエリーをどう書けはよいですか。 {#graph-mult-points}
+#### 複数のデータポイントの合算するは、クエリーをどう書けはよいですか。 {#graph-mult-points}
 
 カンマで分割し記述しているクエリーの、コンマをプラス記号に置き換えます。
 
@@ -740,11 +742,11 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 #### グラフをスムージングするにはどうすいればよいですか。 {#graph-smoothing}
 
-グラフ右上隅にある歯車マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ何に表示しているデーターに平滑平均を適用することができます。
+グラフ右上隅にある歯車マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ上に表示しているデータに平滑平均を適用することができます。
 
 例: ```ewma_20(exception.invalid{*})```
 
-ewmaは、指数関数の移動平均の略語で、ewma_x(…)のxの部分には、平滑度のよって5、10、20の値を設定することができます。
+ewmaは、指数関数の移動平均の略語で、ewma_x(…)のxの部分には、平滑度によって5、10、20の値を設定することができます。
 
 グラフ表示時に適用可能な関数は、[Graphing Primer][graphing_func_ja]を参照してください。
 
@@ -782,7 +784,7 @@ live and read-only access to just the contents of that screenboard.
 
 共有するには、2つの方法があります。共有したいグラフが、タイムボード上にあるかスクリーンボード上にあるかで異なります。
 
-- タイムボードでは、表示されているグラフを選択し、右上隅に表示されている歯車を選択し、"Choose metrics and events"セクションの"Share"タブを選択します。時間の尺度やグラフのサイズなどを選択した後、`Generate embed code`ボタンをクリックします。新たにホップアポプが表示され、グラフを表示するためのembed codeが表示されます。
+- タイムボードでは、表示されているグラフを選択し、右上隅に表示されている歯車を選択し、"Choose metrics and events"セクションの"Share"タブを選択します。時間の尺度やグラフのサイズなどを選択した後、`Generate embed code`ボタンをクリックします。新たにホップアップが表示され、グラフを表示するためのembed codeが表示されます。
 - スクリーンボードでは、右上隅の5個のアイコンの中央のアイコンをクリックすると共有のためのURLが生成されます。このURLにアクセスすると、読み込み専用のライブなスクリーンボードが表示されます。
 
 
@@ -818,7 +820,7 @@ will send events on every run.
 
     dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode all "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
 
-cronに上記のように実行コマンドを記述すると、Vacuumスクリプト実行される度に、Datadogにイベントが通知されます。
+cronに上記のように実行コマンドを記述すると、Vacuumスクリプトが実行される度に、Datadogにイベントが通知されます。
 ``--submit_mode errors``と置き換えると、スクリプトが異常終了した時のみイベントの通知をすることができます。
 
 (Pythonのクライアントライブラリーをインストールするには、次のコマンドを実行します: ``easy_install dogapi``)
@@ -843,9 +845,9 @@ There are several problems that could cause this.  Send a message to support (su
 
 ### Integrationについて {#integrations}
 
-#### Integrationをインストール/設定しましたが、メトリクスが表示されません。 {#ntegration-metrics}
+#### Integrationをインストール/設定しましたが、メトリックスが表示されません。 {#ntegration-metrics}
 
-メトリクスが表示されない現象には、複数の原因が考えられます。その際は、症状の詳細と共に、Datadog Agent infoのコマンドライン出力、ログ出力、設定ファイルを添付し、サポート窓口(support@datadoghq.com)にご連絡ください。各ファイルが保存されている場所は、[Datadog Agent 入門][basic_agent_usage_ja]のページより使用中のOSを選択し、かくにんしてください。
+メトリックスが表示されない現象には、複数の原因が考えられます。その際は、症状の詳細と共に、Datadog Agent infoのコマンドライン出力、ログ出力、設定ファイルを添付し、サポート窓口(support@datadoghq.com)にご連絡ください。各ファイルが保存されている場所は、[Datadog Agent 入門][basic_agent_usage_ja]のページより使用中のOSを選択し、確認してください。
 
 [basic_agent_usage_ja]: /ja/guides/basic_agent_usage/
 
@@ -857,10 +859,10 @@ There are several problems that could cause this.  Send a message to support (su
 - All communication to Datadog is via HTTPS.
 - The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.-->
 
-#### Datadogは、どのようにしてメトリクスデーターを収集していますか。 {#ntegration-data}
+#### Datadogは、どのようにしてメトリックスデータを収集していますか。 {#ntegration-data}
 
 - 通信セッションは、常にDatadog AgentからDatadogのサービスに向かって開始されます。Datadogのサービス側からDatadog Agentに向かっ通信セッションを開始することは一切ありません。
-- すべてのデーター送信は、SSLを介して送信されます。
+- すべてのデータ送信は、SSLを介して送信されます。
 - Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
 - Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][service_term]ページで確認することができます。
 
@@ -881,18 +883,18 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
     Metrics
 ===============================================================================
 -->
-<!--<h3><a name="metrics" href="#metrics">メトリクスについて</a></h3>
+<!--<h3><a name="metrics" href="#metrics">メトリックスについて</a></h3>
 
 <h4 id="custom-metrics">How do I submit custom metrics?</h4>
 <p>
 You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
 </p>-->
 
-### メトリクスについて {#metrics}
+### メトリックスについて {#metrics}
 
-#### カスタムメトリクスはどのように送信すればよいですか。 {#custom-metrics}
+#### カスタムメトリックスはどのように送信すればよいですか。 {#custom-metrics}
 
-カスタムメトリクスは、DogStatsDクラインとを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信][metrics_ja]のページを参照してください。
+カスタムメトリックスは、DogStatsDクライアントを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリックスの送信][metrics_ja]のページを参照してください。
 
 [metrics_ja]: /ja/guides/metrics/
 
@@ -901,9 +903,9 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
 </p>-->
 
-#### イベントの発生回数をカウントしているメトリクスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
+#### イベントの発生回数をカウントしているメトリックスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
 
-DogStatsDのカウンターは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信][metrics_ja]のページの[カウンター][counters_ja]を参照してください。
+DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリックスの送信][metrics_ja]のページの[カウンタ][counters_ja]を参照してください。
 
 [counters_ja]: /ja/guides/metrics/#counters
 
@@ -913,7 +915,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 </p>
 -->
 
-#### ログデーターを基にメトリクスを送信することはできますか。 {#og-data-metrics}
+#### ログデータを基にメトリックスを送信することはできますか。 {#og-data-metrics}
 
 はい、できます。 詳細に関しては、[Datadog Agent によるログの解析方法][logs_ja]のページを参照してください。
 
@@ -925,7 +927,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 Unfortunately, we do not allow adding past data at this time.
 </p>-->
 
-#### 新規に登録したアカウントに過去の蓄積したデーターを追加することはできますか。 {#ast-data}
+#### 新規に登録したアカウントに過去の蓄積したデータを追加することはできますか。 {#ast-data}
 
 残念ながら現状では、過去に蓄積したデータを追加することはできません。
 
@@ -939,15 +941,16 @@ This depends on the medium you use to send metrics.
 </ul>
 </p>-->
 
-#### メトリクス送信のためのデーター(JSON)の書き方 {#metric-syntax}
+#### メトリックス送信のためのデータ(JSON)の書き方 {#metric-syntax}
 
-メトリクスを送信するために使う方法によって異なります。
+メトリックスを送信するために使う方法によって異なります。
 
 - Agent Checkを使って送信する場合は、[Agent Checkの書き方][agent_checks_ja]のページを参照してください。
-- DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリックスの送信][metorics_ja]のページを参照してください。
+- DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリックスの送信][metorics_ja]のページを参照してください。d
 - APIを介して送信する場合は、[API Reference][api_post_ja]のページを参照してください。
 
 [agent_checks_ja]: /ja/guides/agent_checks/
+[metorics_ja]: /ja/guides/metrics/
 [api_post_ja]: /ja/api/#metrics-post
 
 
@@ -961,14 +964,14 @@ We offer reporting in a variety of ways so far, which include:
 </ul>
 </p>-->
 
-#### メトリクスの状況のリポートには、どのようなものがありますか。 {#etric-reports}
+#### メトリックスの状況のレポートには、どのようなものがありますか。 {#etric-reports}
 
-現状では、次のようなリポートの方法を提供しています：
+現状では、次のようなレポートの方法を提供しています：
 
-- すべての場所のすべてのグラフにスナップショットを撮ってリポートする機能があります。
+- すべての場所のすべてのグラフにスナップショットを撮ってレポートする機能があります。
 グラフを選び、右上隅の歯車のマークをクリックし、`share`タブを選択し`generate`ボタンをクリックすることで、グラフのスナップショットのIFRAMEへのリンク生成することができます。
-- 過去のアラートの状況をリビューできるように、一部の情報ソース(例:pagerduty)では、週に一度メールによるリポートを受信する設定ができます。
-- メトリクスのアラート機能を使うことによって、メトリクスが正常の範囲から外れたさいのリポートを送信することができます。
+- 過去のアラートの状況をレビューできるように、一部の情報ソース(例:pagerduty)では、週に一度メールによるレポートを受信する設定ができます。
+- メトリックスのアラート機能を使うことによって、メトリックスが正常の範囲から外れたさいのレポートを送信することができます。
 
 
 <!--<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
@@ -999,12 +1002,12 @@ displayed. Otherwise, you'll see coarser and coarser granularity as the
 amount of time requested increases. We do this time aggregation via
 average,sum,  min, max, or count.-->
 
-#### グラフ上でデーターの集計されていますか。 {#metric-aggregation}
+#### グラフ上でデータの集計されていますか。 {#metric-aggregation}
 
-Datadogのグラフでは一定の数のデーターポイント情報処理すことができません。従って、グラフに表示している時間が長くなると、この一定の数にデーターポイントが収まるように、データーポイント間の集約が始まります。
+Datadogのグラフでは一定の数のデータポイント情報処理しかすることができません。従って、グラフに表示している時間が長くなると、この一定の数にデータポイントが収まるように、データポイント間の集約が始まります。
 
-従って、長時間のグラフ表示のためにデーターを照会する場合は、照会結果のポイントは高度に集約されたものとなります。
-Datadogの最も細かいデーターの粒度は1秒間隔です。もしもこの精度で送信したデーターを、極短時間枠(2分以下)のグラフ表示のために要求したなら、送信した精度のままのデーターを手にいれることができるでしょう。それ以上の時間枠のグラフ表示では、時間が長くなればなるほど粗いデーターを見ていることになります。この時間時軸の集約は、各ポイントの平均,合計,最小,最大,countの処理を終えた後に処理されます。
+従って、長時間のグラフ表示のためにデータを照会する場合は、照会結果のポイントは高度に集約されたものとなります。
+Datadogの最も細かいデータの粒度は1秒間隔です。もしもこの精度で送信したデータを、極短時間枠(2分以下)のグラフ表示のために要求したなら、送信した精度のままのデータを手にいれることができるでしょう。それ以上の時間枠のグラフ表示では、時間が長くなればなるほど粗いデータを見ていることになります。この時間時軸の集約は、各ポイントの平均、合計、最小、最大、countの処理を終えた後に処理されます。
 
 
 <!--<h4 id="metric-other">Any other things about metrics?</h4>
@@ -1017,7 +1020,7 @@ time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 </p>-->
 
-<!-- #### メトリクスに関するその他の重要事項は。 {#metric-other}
+<!-- #### メトリックスに関するその他の重要事項は。 {#metric-other}
 
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 
@@ -1059,7 +1062,7 @@ by default you'll get the average across all hosts. -->
 #### Datadog内で@マーク付きの通知は、どのように機能しますか。 {#notify}
 
 - ``@support`` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
-- ``@All`` - 組織のすべてのメンバーに通知します。
+- ``@All`` - 組織のすべてのメンバに通知します。
 - ``@yourname`` - 'yourname'という名前のユーザに通知します。
 - ``@test@test.com`` test@test.comに電子メールを送信します。
 - HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
@@ -1129,7 +1132,7 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 #### イベントは、どのように検索すればよいですか。
 
 検索クエリは、イベントとそれに含まれるコンテンツに全文検索を実施します。
-更に、検索用のプレフィックスを使用することにより、イベント·ソースやステータスなどの特定のイベントプロパティを対象に検索をすることもできます。
+更に、検索用のプレフィックスを使用することにより、イベントソースやステータスなどの特定のイベントプロパティを対象に検索をすることもできます。
 
 - ``user:pup@datadoghq.com`` pup@datadoghq.comがコメントしている全てのイベントを検索します。
 - ``sources:github,chef`` GithubとChefからのイベントを検索します。
@@ -1176,9 +1179,10 @@ Here is an example:
 
 はい、できます。 まずは、ダッシュボードの`Integration`タブを選択し、次に[`API's`のタブ][integration_apis]で、メールアドレスの追加ページに移動します。'Events API Emails'セクションでイベント情報の送信先のメールを作成します。その後、ここで作成したメールアドレスに向けイベント情報を送信するようにアプリケーションやツールを設定します。
 
-送信するメールの本文を自由に構成できる場合は、JSONを選択するとよいでしょう。本文に記述するJSONは、Datadog APIで指定している書式に準拠している必要があります。詳しくは、[API Reference][api]のページの"POST AN EVENT"を参照してください。
+送信するメールの本文を自由に構成できる場合は、JSONを選択するとよいでしょう。本文に記述するJSONは、Datadog APIで指定している書式に準拠している必要があります。詳しくは、[API Reference][api_event_ja]のページの"POST AN EVENT"を参照してください。
 
 [integration_apis]: https://app.datadoghq.com/account/settings#api
+[api_event_ja]: /ja/api/#events-post
 
 次に例を示します:
 
@@ -1223,17 +1227,17 @@ dashboards, etc. which are not supposed to be removed.</li>
 
 ### その他 {#other}
 
-#### チームの設定は、どのようにしてすればよいですか。 {#team}
+#### チームの設定は、どのようにすればよいですか。 {#team}
 
-アカウント管理者が、[ダッシュボードの`team`タブ][register_member]よりチームメンバーの電子メールアドレスを入力する必要があります。
+アカウント管理者が、[ダッシュボードの`team`タブ][register_member]よりチームメンバの電子メールアドレスを入力する必要があります。
 
 チーム管理のベストプラクティスは、次のとおりです:
 
-- チームメンバーとしての確認メールには、Datadogへの直接ログインするためのリンクが提供されます。新メンバーは、このリンクを使いDatadogに直接ログインし、パスワードを設定することができます。この確認プロセスの間に’サインアップ’をクリックしないようにしてください。
-- 同じ組織からの複数のユーザーが個別にユーザー登録をした場合、Datadogではそれぞれ別の組織としてユーザー情報を登録します。同一チームに所属させる必要がある場合は、サーポートにご連絡ください。ただし、すべてのユーザー情報が移行されるわけではないの注意してください。
-- Datadogが提供しているアクセス制御は、管理者活動としてのユーザーの追加/削除、請求書プランの変更などです。ホスト、メトリクス、ダッシュボードなどのデーターという観点では、すべてのユーザーがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
+- チームメンバとしての確認メールには、Datadogへの直接ログインするためのリンクが提供されます。新メンバは、このリンクを使いDatadogに直接ログインし、パスワードを設定することができます。この確認プロセスの間に’サインアップ’をクリックしないようにしてください。
+- 同じ組織からの複数のユーザが個別にユーザ登録をした場合、Datadogではそれぞれ別の組織としてユーザ情報を登録します。同一チームに所属させる必要がある場合は、サポートにご連絡ください。ただし、すべてのユーザ情報が移行されるわけではないの注意してください。
+- Datadogが提供しているアクセス制御は、管理者活動としてのユーザの追加/削除、請求書プランの変更などです。ホスト、メトリクス、ダッシュボードなどのデータという観点では、すべてのユーザがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
 
-- チームメンバーを削除するには、同じ[`team`のページ][register_member]（管理者のみ使用可能）の`disable`ボタンを使用します。チームメンバーに追加したユーザーは、使用停止の状態することはできますが、を完全に削除することはできません。使用停止状態のユーザーは、管理者のチームページにのみに表示され、ログインができなくなると同時に、すでに通信中のセッションもすべて遮断されます。チームメンバーを完全に削除しない理由は、削除操作しようとしているメンバーが同時に削除されることを意図していないイベントやダッシュボードなどの所有者になっている可能性があるからです。
+- チームメンバを削除するには、同じ[`team`のページ][register_member]（管理者のみ使用可能）の`disable`ボタンを使用します。チームメンバに追加したユーザは、使用停止の状態にすることはできますが、チームメンバを完全に削除することはできません。使用停止状態のユーザは、管理者のチームページにのみに表示され、ログインができなくなると同時に、すでに通信中のセッションもすべて遮断されます。チームメンバを完全に削除しない理由は、削除操作しようとしているメンバが同時に削除されることを意図していないイベントやダッシュボードなどの所有者になっている可能性があるからです。
 
 [register_member]: https://app.datadoghq.com/account/team
 
@@ -1249,10 +1253,10 @@ dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>-->
 
-#### データーと認証情報は安全ですか。 {#security}
+#### データと認証情報は安全ですか。 {#security}
 
 - 通信セッションは、常にDatadog AgentからDatadogのサービスに向かって開始されます。Datadogのサービス側からDatadog Agentに向かっ通信セッションを開始することは一切ありません。
-- すべてのデーター送信は、SSLを介して送信されます。
+- すべてのデータ送信は、SSLを介して送信されます。
 - Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
 - Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][service_term]ページで確認することができます。
 - Datadog Agentのソースコードは、オープンソースとしてGithubのDatadogアカウント以下に[dd-agent][dd-agent_repo]として公開しています。
