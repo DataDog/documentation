@@ -843,25 +843,23 @@ There are three configuration settings:
     (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
 </ul> -->
 
-<h4 id="yaxis"> Y軸の操作</h4>
+#### Y軸の操作 {#yaxis}
 
-The Datadog y-axis controls (currently just via the JSON editor) allow you to:
-<ul>
- <li>Clip y-axis to specific ranges</li>
- <li>Remove outliers either by specifying a percentage or an absolute value to remove outliers</li>
- <li>Change y-axis scale from linear to log, sqrt or power scale</li>
-</ul>
+グラフエディタからJSONを編集することで次のようなY軸の制御ができます:
+
+- Y軸の表示範囲の制限
+- パーセンテージか絶対値を指定することより異常値を排除
+- Y軸の線形スケールから対数スケールやパワースケールへの変更
 
 There are three configuration settings:
-<ul>
-<li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for
-    default behvior. Default value is "auto"</li>
-<li><code>max</code> (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto"
-    for default behavior. Default value is "auto"</li>
-<li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
-    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
-</ul>
 
+Y軸を設定するために次の3のオプションがあります:
+
+- <code>min</code> (オプション): Y軸に表示するSpecifies 最小値を指定します。 ここでは、数値か"auto"指定することができます。デフォルト値は、"auto"です。
+- <code>max</code> (オプション): Y軸に表示するSpecifies 最大値を指定します。 ここでは、数値か"auto"指定することができます。デフォルト値は、"auto"です。
+- <code>scale</code> (オプション): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
+    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".
+- <code>scale</code> (オプション): Y軸の目盛りのタイプを指定します。 指定できる値は、"linear", "log", "sqrt", "pow##"(例. pow2, pow0.5)です。デフォルト値は、"linear"です。
 
 <!-- Examples:
 
@@ -933,10 +931,19 @@ Outliers configuration allows you to automatically change y-axis bounds based on
 threshold. Thresholds can be a percentage or an absolute value, and it can apply to
 both both ends of the graph (lower and upper).
 
+外れ値の設定では、自動的に基づき、y軸の境界を変更することができます
+しきい値。閾値は、パーセンテージまたは絶対値にすることができ、それはに適用することができ
+グラフ（下部および上部）の両方の両端。
+
 For outliers, there are two ways to set up the configuration.
+
+異常値を排除するためには、2つの設定方法があります。
 
 To begin, there is a simple configuration where you specify an absolute value or a percentage and all
 values above the value or all values that sit within the top ##% will be cutoff.
+
+開始するには、絶対値またはパーセントとすべてを指定する簡単な構成がある
+トップ##％以内に座る値以上の値またはすべての値がカットオフとなります。
 
 
 <!-- Examples:
@@ -995,40 +1002,33 @@ Here is a full JSON example:
 </p>
  -->
 
-Examples:
+例:
 
-<code>"outliers": 30</code> // all values above 30 will not appear<br>
-<code>"outliers": "5%"</code> // the top 5% of that data will not appear
+<code>"outliers": 30</code> // 値が30以上のデータポイントは除去され、表示されません。<br>
+<code>"outliers": "5%"</code> // 上位5%の値をもったデータポイントは除去され、表示されません。
 
-
-<p>
-Advanced configuration works the same way as simple configuration, with the added
-flexibility of configuring the lower or the upper or both parts of the graph. For
-example, the following configuration will limit the graph to data points that are
-not in the bottom 10% nor in the top 30%.
+高度な設定も、シンプルな設定ど同じような概念で進めることができます。
+高度のな設定では、グラフの下限,上限,その両方の設定がより柔軟にコントロールできるようになっています。
+例えば、次のグラフ設定では、下限10%以上で、上限30%以下のデータポイントのみグラフ表示されるように制限しています。
 
 <pre><code>"outliers": {
    "top": "30%",
    "bottom": "10%"
 }</code></pre>
 
-
-The following will show all data except those with values higher than 15:
-
+次は、値が15以上のデータポイント除去します:
 
 <pre><code>"outliers": {
     "above": 15
 }</code></pre>
 
-The following will hide data points below 2:
+次は、値が2以下のデータポイント除去します:
 
 <pre><code>"outliers": {
     "below": 2
 }</code></pre>
 
-
-
-Here is a full JSON example:
+すべての要素を含んだJSONの例です:
 
 <pre><code>{
   "viz": "timeseries",
@@ -1047,8 +1047,6 @@ Here is a full JSON example:
        "below": 15
    }
 }</code></pre>
-
-</p>
 
 
 <!-- #### Examples
@@ -1105,9 +1103,9 @@ Here is an example using the <code>week_before()</code> function:
     } -->
 
 
-#### Examples
+#### 設定例:
 
-Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
+パラメーターに１つのメトリクスを指定した<code>rate()</code>関数を使った例です。<code>top()</code>と<code>top_offset()</code>以外の関数では、この<code>rate()</code>と同様のシンタックス表記を利用することできます。
 
     {
       "viz": "timeseries",
@@ -1119,7 +1117,7 @@ Here is an example using the <code>rate()</code> function, which takes only a si
       ]
     }
 
-Here is an example using the <code>top()</code> function:
+<code>top()</code> 関数を使用した例::
 
     {
       "viz": "timeseries",
@@ -1131,11 +1129,9 @@ Here is an example using the <code>top()</code> function:
       ]
     }
 
-This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
+この事例では、<code>system.cpu.iowait</code>のピーク値の上位５をグラフに表示します。
 
-
-
-To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
+<code>system.cpu.iowait</code>のピーク値ランキングの第6位から10位のホストを表示するためには、<code>top_offset</code>を使います:
 
     {
       "viz": "timeseries",
@@ -1147,7 +1143,7 @@ To look at the hosts with the 6th through 10th highest values (for example), use
       ]
     }
 
-Here is an example using the <code>week_before()</code> function:
+<code>week_before()</code>関数を使用した例:
 
     {
       "viz": "timeseries",

@@ -504,38 +504,34 @@ Here are some example datagrams and comments explaining them:
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-以下は各フィールドの解説です:
+以下は各フィールドの概要:
 
-- `metric.name` should be a String with no colons, bars or @ characters.
-- `value` should be a number
-- type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
-  Timer or `s` for Set.
-- sample rate is optional and should be a float between 0 and 1 inclusive.
-- tags are optional, and should be a comma seperated list of tags. colons are
-  used for key value tags.
+- `metric.name` ":", "-", "@" 以外の文字列。
+- `value` 数字。
+- 集約タイプの指定は、`c`はCounter, `g`はGauge, `h`はHistogram, `ms`はTimer, `s`はSet.
+- サンプルレートは、オプション指定項目です。 指定する場合は、0~1 の浮動小数点数になります。
+- タグは、オプション指定項目です。タグとタグの間位には","が入ります。キーバリューがセットのタグについては、":"を開いただに挟みます。
+
 
 次は、データグラムのサンプルとその内容の解説です:
 
-    # Increment the page.views counter.
+    # ページビューのカウンターのインクリメント指示を送信
     page.views:1|c
 
-    # Record the fuel tank is half-empty
+    # 自動車の燃料タンクの状況が半分になっている計測結果を送信
     fuel.level:0.5|g
 
-    # Sample a the song length histogram half of the time.
+    # 発生回数の半分の機会に、歌の時間を計測結果を送信
     song.length:240|h|@0.5
 
-    # Track a unique visitor to the site.
+    # サイトへのユニークビジター数の追跡のために、ユーザーIDを送信
     users.uniques:1234|s
 
-    # Increment the users online counter tagged by country of origin.
+    # 国に基づくオンラインユーザーの数をカウントするためのインクリメント指示を送信
     users.online:1|c|#country:china
 
-    # An example putting it all together.
+    # 上記のすべてのコンセプトを取り込んだデータグラムの例
     users.online:1|c|@0.5|#country:china
-
-
-
 
 
 <!-- ### Events
@@ -568,17 +564,17 @@ the packets:
 
 #### 設定項目
 - 必須項目:
-  - `title` — Event title.
-  - `text` — Event text. Supports line breaks.
+  - `title` — イベントのタイトルを指定できます。
+  - `text` — イベントテキストを指定できます。改行をサポートしています。
 - オプション項目: `|[key]:[value]`
-  - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
-  - `|h:hostname` — default: None — Assign a hostname to the event.
-  - `|k:aggregation_key` — default: None — Assign an aggregation key to the event, to group it with some others.
-  - `|p:priority` — default: 'normal' — Can be “normal” or “low”.
-  - `|s:source_type_name` — default: None — Assign a source type to the event.
-  - `|t:alert_type` — default: 'info' — Can be “error”, “warning”, “info” or “success”.
-  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br/>
-  Note: The `:` in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong>
+  - `|d:date_happened` — default: None — イベントにタイムスタンプを指定できます。オプションへの設定がない場合は、現在のUNIX時間が付けられます。
+  - `|h:hostname` — default: None — イベントにホスト名を指定できます。
+  - `|k:aggregation_key` — default: None — 他のイベントとグループ分けするために集約用のキーを指定できます。
+  - `|p:priority` — default: 'normal' — ‘normal’ または ‘low’を指定できます。
+  - `|s:source_type_name` — default: None — イベントにソースタイプを指定します。
+  - `|t:alert_type` — default: 'info' — ‘error’, ‘warning’, ‘info’, ‘success’が指定できます。
+  - `|#tag1:value1,tag2,tag3:value3` — default: None.
+  <strong><em><br/>注: それぞれのタグ文字列に含まれる`:`は、タグの一部です。</em></strong>
 
 
 <!-- ## Source
