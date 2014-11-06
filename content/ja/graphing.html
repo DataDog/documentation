@@ -573,6 +573,7 @@ You can apply functions to the result of each query.
   <tr>
     <td>dt()</td>
     <td>time delta between points</td>
+    <td>time delta between points</td>
   </tr>
 
   <tr>
@@ -799,29 +800,19 @@ future. For more on <code>.as_count()</code> please see our blog post
 
 この他にも、クエリ結果に適応する上級者向けの関数が幾つかあります。
 
-One of these is <code>.rollup()</code>. Appending this function allows you to control the
-number of points rolled up into a single point. This function takes two parameters, method and time, like so:
-<code>.rollup(method,time)</code>.
+上級者向けの関数の一つが``.rollup()``です。この関数をクエリーに追記することで、複数のポイントを単一ポイントにまとめることができます。この関数は、"メソッド"と"時間"の2つのパラメータを引数に指定することができます。(例: ``.rollup(method,time)``)
 
+"メソッド"の部分には、sum/min/max/count/avgを指定することができます。"時間"は、秒単位で指定します。
+"メソッド"と"時間"は、個別に指定(例: ``.rollup(20)``)したり、両方を組み合わせて(例: ``.rollup(sum,120)``)も指定できます。
+この``.rollup()``には、チェック機構があります。
+しかしDatadogのグラフでは表示する時間の範囲に基づき350のデータポイントまでしか保有していないので、期間指定を一ヶ月にした場合は、20秒間隔以上の精度でデータポイントが保有されているため、20秒でのロールアップ``.rollup(20)``は、機能しません。
 
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually,
-or both combined like <code>.rollup(sum,120)</code>. There are some checks on this,
-though, because for a given time range we do not return more than 350 points. Thus if
-you're requesting <code>.rollup(20)</code> where 20 is in seconds, and ask for a
-month of data, we will be returning the points at a rollup of far greater than 20 seconds.
+特定の方法で提出されたメトリクスのためのもう一つの上級者向け関数が、``.as_count（）``と``.as_rate（）`` です。
+現状、DogStatsDの"rate", "counter"を使って送信したメトリクスには、``.as_count（）``と``.as_rate（）``を使うことができますが、"gauges"などのそれ以外のメトリクスでは機能しません。
 
-
-<code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions,
-which are only intended for metrics submitted in a certain way (for metadata types where
-that is acceptable).  At present, for metrics submitted as rates or counters via statsd,
-appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly.
-For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
-<code>.as_rate()</code> will have no effect.
-
-We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query.
-We will also be building these functions fully into the graph editor in the near
-future. For more on <code>.as_count()</code> please see our blog post
-<a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
+``.rollup()``と``.as_count（）``を同じクエリで使用しないでください。
+また、将来的にはこれらの関数は、グラフエディタで簡単に操作できるようになる予定です。
+``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
 
 
 <!-- <h4 id="yaxis"> Y-Axis Controls</h4>
@@ -927,31 +918,30 @@ values above the value or all values that sit within the top ##% will be cutoff.
 
 <h4>異常値(Outlier)</h4>
 
-Outliers configuration allows you to automatically change y-axis bounds based on a
-threshold. Thresholds can be a percentage or an absolute value, and it can apply to
-both both ends of the graph (lower and upper).
+異常値を判定するための閾値を定義することにより、Y軸の上下限を自動的に変更することができます。
+閾値には、パーセンテージまたは絶対値を指定することができます。
+この閾値は、グラフの上限と下限の両方に設定することができます。
 
-外れ値の設定では、自動的に基づき、y軸の境界を変更することができます
-しきい値。閾値は、パーセンテージまたは絶対値にすることができ、それはに適用することができ
-グラフ（下部および上部）の両方の両端。
+##### 異常値を定義するためには、2つの設定方法があります。
 
-For outliers, there are two ways to set up the configuration.
+<!-- To begin, there is a simple configuration where you specify an absolute value or a percentage and all values above the value or all values that sit within the top ##% will be cutoff.
+ -->
 
-異常値を排除するためには、2つの設定方法があります。
-
-To begin, there is a simple configuration where you specify an absolute value or a percentage and all
-values above the value or all values that sit within the top ##% will be cutoff.
-
-開始するには、絶対値またはパーセントとすべてを指定する簡単な構成がある
-トップ##％以内に座る値以上の値またはすべての値がカットオフとなります。
+まず、絶対値を指定し、その値を超えているメトリクスの値を異常値として排除する方法です。次に、パーセンテージを指定し、トップから指定したパーセンテージまでの値を異常値として排除する方法です。
 
 
 <!-- Examples:
 
 <code>"outliers": 30</code> // all values above 30 will not appear<br>
-<code>"outliers": "5%"</code> // the top 5% of that data will not appear
+<code>"outliers": "5%"</code> // the top 5% of that data will not appear -->
+
+記述例:
+
+1. ``"outliers": 30`` // 値が30以上のデータポイントは除去され、表示されません。
+2. ``"outliers": "5%"`` // 上位5%の値をもったデータポイントは除去され、表示されません。
 
 
+<!--
 <p>
 Advanced configuration works the same way as simple configuration, with the added
 flexibility of configuring the lower or the upper or both parts of the graph. For
@@ -1002,12 +992,8 @@ Here is a full JSON example:
 </p>
  -->
 
-例:
+##### 高度な設定も、シンプルな設定ど同じような概念で進めることができます。
 
-<code>"outliers": 30</code> // 値が30以上のデータポイントは除去され、表示されません。<br>
-<code>"outliers": "5%"</code> // 上位5%の値をもったデータポイントは除去され、表示されません。
-
-高度な設定も、シンプルな設定ど同じような概念で進めることができます。
 高度のな設定では、グラフの下限,上限,その両方の設定がより柔軟にコントロールできるようになっています。
 例えば、次のグラフ設定では、下限10%以上で、上限30%以下のデータポイントのみグラフ表示されるように制限しています。
 
@@ -1153,9 +1139,3 @@ Here is an example using the <code>week_before()</code> function:
         }
       ]
     }
-
-
-
-
-
-
