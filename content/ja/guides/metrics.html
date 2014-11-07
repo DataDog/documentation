@@ -7,8 +7,8 @@ sidebar:
       href: "#overview"
     - text: セットアップ
       href: "#setup"
-    - header: メトリックス・タイプ
-    - text: カウンター
+    - header: メトリックスタイプ
+    - text: カウンタ
       href: "#counters"
     - text: ゲージ
       href: "#gauges"
@@ -19,7 +19,7 @@ sidebar:
     - header: オプション
     - text: タグ
       href: "#tags"
-    - text: サンプルレート
+    - text: サンプリングレート
       href: "#sample-rates"
     - header: その他
     - text: 他の送信方法
@@ -177,8 +177,8 @@ EOF
 <h4>メトリックスの命名規則</h4>
 メトリックスを命名する際には、次のルールを守ってください:
 <ul>
-<li>メトリック名は、文字で始まる必要があります。</li>
-<li>ascii英数字、アンダースコア、ピリオドを、使うことができができます。（他の文字はアンダースコアに変換されます）</li>
+<li>メトリックス名は、文字で始まる必要があります。</li>
+<li>半角英数字、アンダースコア、ピリオドを、使うことができができます。（他の文字はアンダースコアに変換されます）</li>
 <li>200文字を、超えることができません。 (though less than 100 is genearlly preferred from a UI perspective)</li>
 <li>Unicode （全角文字）は、サポートしていません。</li>
 <li>空白(スペース)は、使用できません。</li>
@@ -274,7 +274,7 @@ get raw counts within Datadog, you may want to apply a function to
 your series like cumulative sum or integral. There is more information on those
 <a href="http://docs.datadoghq.com/graphing/#functions">here</a>. -->
 
-<h3 id="counters">カウンター (Counters)</h3>
+<h3 id="counters">カウンタ (Counters)</h3>
 
 カウンタは、出来事の回数を数えるのに使用します。
 
@@ -390,7 +390,7 @@ EOF
 
 ゲージは、一定時間内の特定の値を測定します。
 
-例えば、マシンの空きメモリの量を追跡した場合、空きメモリー量を調べる関数`get_free_memory()`を定期的に呼び出し`system.mem.free`メトリックスとして抽出し、`statsd.gauge()`で、測定値として処理します:
+例えば、マシンの空きメモリの量を追跡した場合、空きメモリ量を調べる関数`get_free_memory()`を定期的に呼び出し`system.mem.free`メトリックスとして抽出し、`statsd.gauge()`で、測定値として処理します:
 
 <%= code_tabs("gauges", tab_languages) %>
 
@@ -544,7 +544,7 @@ EOF
 
 これらのメトリックスにより、クエリが処理されるまでの時間のばらつきを把握すことができます。
 `median`をグラフ化することにより、クエリが処理されるまでの平均時間を知ることができます。
-又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリー処理時間を知ることができます。
+又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリ処理時間を知ることができます。
 
 <img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%">
 
@@ -810,16 +810,16 @@ EOF
 
 <hr> -->
 
-<h3 id="sample-rates">サンプルレート (Sample Rates)</h3>
+<h3 id="sample-rates">サンプリングレート (Sample Rates)</h3>
 
 各収集タイミング(ポイント)で発生するデータは、UDPを介しDogStatsDサーバに送信されます。
 パフォーマンスを重視している環境において、このような状況は、高いオーバヘッド負荷になります。
-この問題を回避するためにDogStatsDでは、サンプルレートを調整できるようになっています。
+この問題を回避するためにDogStatsDでは、サンプリングレートを調整できるようになっています。
 `sample_rate=`をオプションに追記することにより収集タイミング(ポイント)を倍数分に制限することができ、DatadogのDashboardでは時間軸が調整されて表示されるように成ります。
 
 <%= code_tabs("sample-rates") %>
 
-次のコードは、通常の半分のタイミング(ポイント)のデータを送信します:
+次のコードは、通常の半分のタイミング(ポイント)でデータを送信します:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sample-rates-python">
@@ -867,7 +867,7 @@ Datadog:
 
 <h3 id="methods">他の送信方法</h3>
 
-Datagogにメトリックスを送信するには、Datadog Agent にバンドルされているDogStatsD サーバーを使用する方法が最も簡単です。
+Datagogにメトリックスを送信するには、Datadog Agent にバンドルされているDogStatsD サーバを使用する方法が最も簡単です。
 しかし、それが唯一の方法ではありません。次の方法を使ってもDatadogにメトリックスを送信することができます。
 
 <ul>

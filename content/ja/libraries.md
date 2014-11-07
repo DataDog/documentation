@@ -234,7 +234,7 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 #### PHP {#community-php}
 
-- [plesk_metrics_datadog](https://github.com/isra00/plesk_datadog_metrics) - [Plesk](http://www.parallels.com/products/plesk/)からメトリクスを収集するためのPHPのスクリプト by [Israel Viana](https://github.com/isra00).
+- [plesk_metrics_datadog](https://github.com/isra00/plesk_datadog_metrics) - [Plesk](http://www.parallels.com/products/plesk/)からメトリックスを収集するためのPHPのスクリプト by [Israel Viana](https://github.com/isra00).
 
 
 #### Go {#community-go}

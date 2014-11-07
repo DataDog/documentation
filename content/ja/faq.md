@@ -226,7 +226,7 @@ alert when at 80% or above:
 * **はい、可能です。**
 * 詳細については、[アラートの設定方法][alerting_ja]のページを参照してください。
 * 以下が、ディスク使用率が80％の時に発生するアラートの設定手順の概要です:
-  1. `system.disk.in_use` というメトリクスを選択します。
+  1. `system.disk.in_use` というメトリックスを選択します。
   2. `threshold alert` タイプを選択します。
   3. `simple alert` グループタイプを選択します。
   4. "Set alert conditions:" で、`Above`を選択し、 値に`0.8`を入力します。
@@ -334,7 +334,7 @@ There is not a way to immediately delete a metric.-->
 
 **メトリックスを直ちに削除する方法はありません。**
 
-Datadog側でのメトリックス受信が停止してからおよそ24時間経過後、そのメトリックスを送信していたホスト名はUIに表示されなくなります。UIに表示されなくなった後も、これらのメトリックスやホストの情報をクエリーを使って検索することはできます。
+Datadog側でのメトリックス受信が停止してからおよそ24時間経過後、そのメトリックスを送信していたホスト名はUIに表示されなくなります。UIに表示されなくなった後も、これらのメトリックスやホストの情報をクエリを使って検索することはできます。
 
 
 
@@ -380,9 +380,9 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 Which would graph stacked area series for each http_method value like GET, POST, etc.
 -->
 
-#### Graphiteのquery languageとDatadogのクエリーを教えてください。 {#arch-graphite-differences}
+#### Graphiteのquery languageとDatadogのクエリを教えてください。 {#arch-graphite-differences}
 
-Graphiteとは以下のように、クエリーの記述方法が少々異なります。
+Graphiteとは以下のように、クエリの記述方法が少々異なります。
 
 Graphiteの次の例では:
 
@@ -404,7 +404,7 @@ Datadogでは、以下のようになります:
 foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
 ~~~
 
-先のクエリーを使って集計をするには、先頭にaggregatorを追記します:
+先のクエリを使って集計をするには、先頭にaggregatorを追記します:
 
 ~~~
 avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
@@ -413,13 +413,13 @@ avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_me
 This will graph a single series that's the average of that metric across the　intersection of those tags.
 Datadogでは、メトリックスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
 
-すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリーを記述することができます:
+すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリを記述することができます:
 
 ~~~
 avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {http_method}
 ~~~
 
-このクエリーは、GET、POSTなどの各http_methodを積み重ねた時系列のグラフを表示します。
+このクエリは、GET、POSTなどの各http_methodを積み重ねた時系列のグラフを表示します。
 
 
 <!--#### How are hostnames determined? {#arch-hostnames}
@@ -586,9 +586,9 @@ This will output the current system’s date, and then make a request to our
 endpoint and grab the date on our end. If these are more than a few minutes
 apart, you may want to look at the time settings on your server.-->
 
-#### AWSからメトリクスデータを受信するのに時間がかかるのはなぜですか。 {#aws-delay}
+#### AWSからメトリックスデータを受信するのに時間がかかるのはなぜですか。 {#aws-delay}
 
-インスタンスの現在時間が大幅に進んでいいるか遅れていることが多々あり、この時間のずれがメトリクスデータの送信/表示の障害になることがあります。
+インスタンスの現在時間が大幅に進んでいいるか遅れていることが多々あり、この時間のずれがメトリックスデータの送信/表示の障害になることがあります。
 
 Datadog側の時間とインスタンスの時間の差をチェックするには、次のコマンドを実行します:
 
@@ -690,7 +690,7 @@ metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 
 #### メトリックスを集計しグラフ表示したい場合は、どのようにすればよいですか。 {#graph-sum-grouped}
 
-```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリックス と ```app.foo.baz{env:staging}```メトリックスの足し算の結果をグラフ表示するクエリーは、次のようになります:
+```by {host}```でグループ化した```app.foo.bar{env:staging}```メトリックス と ```app.foo.baz{env:staging}```メトリックスの足し算の結果をグラフ表示するクエリは、次のようになります:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
@@ -713,9 +713,9 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~-->
 
-#### 複数のデータポイントの合算するは、クエリーをどう書けはよいですか。 {#graph-mult-points}
+#### 複数のデータポイントの合算するは、クエリをどう書けはよいですか。 {#graph-mult-points}
 
-カンマで分割し記述しているクエリーの、コンマをプラス記号に置き換えます。
+カンマで分割し記述しているクエリの、コンマをプラス記号に置き換えます。
 
 置き換える前:
 
@@ -811,12 +811,12 @@ will send events on every run.
 
 #### 特定のCron jobの実行状況は、どのように追跡すればよいですか。
 
-他のメトリクスと相関してホストの状況を監視するためにcron jobにスクリプトを設定していることはよくあると思います。
+他のメトリックスと相関してホストの状況を監視するためにcron jobにスクリプトを設定していることはよくあると思います。
 例えば、Postgresのテーブルを吸い上げるために、cron.dにVacuumというスクリプトを設定していたとします:
 
     0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 
-このVacuumスクリプトはリソースを大量に消費するので、そのスクリプトが実行されたタイミングを他のメトリクスやイベントと関連付けておきたいとします。そこで、スクリプト実行の際に、Datadogへイベントの通知をすることにします。このイベント通知は、dogapiのクライアントライブラリーで提供されているdogwrap command line toolを使うことによって実現できます:
+このVacuumスクリプトはリソースを大量に消費するので、そのスクリプトが実行されたタイミングを他のメトリックスやイベントと関連付けておきたいとします。そこで、スクリプト実行の際に、Datadogへイベントの通知をすることにします。このイベント通知は、dogapiのクライアントライブラリーで提供されているdogwrap command line toolを使うことによって実現できます:
 
     dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode all "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
 
@@ -1235,7 +1235,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 
 - チームメンバとしての確認メールには、Datadogへの直接ログインするためのリンクが提供されます。新メンバは、このリンクを使いDatadogに直接ログインし、パスワードを設定することができます。この確認プロセスの間に’サインアップ’をクリックしないようにしてください。
 - 同じ組織からの複数のユーザが個別にユーザ登録をした場合、Datadogではそれぞれ別の組織としてユーザ情報を登録します。同一チームに所属させる必要がある場合は、サポートにご連絡ください。ただし、すべてのユーザ情報が移行されるわけではないの注意してください。
-- Datadogが提供しているアクセス制御は、管理者活動としてのユーザの追加/削除、請求書プランの変更などです。ホスト、メトリクス、ダッシュボードなどのデータという観点では、すべてのユーザがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
+- Datadogが提供しているアクセス制御は、管理者活動としてのユーザの追加/削除、請求書プランの変更などです。ホスト、メトリックス、ダッシュボードなどのデータという観点では、すべてのユーザがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
 
 - チームメンバを削除するには、同じ[`team`のページ][register_member]（管理者のみ使用可能）の`disable`ボタンを使用します。チームメンバに追加したユーザは、使用停止の状態にすることはできますが、チームメンバを完全に削除することはできません。使用停止状態のユーザは、管理者のチームページにのみに表示され、ログインができなくなると同時に、すでに通信中のセッションもすべて遮断されます。チームメンバを完全に削除しない理由は、削除操作しようとしているメンバが同時に削除されることを意図していないイベントやダッシュボードなどの所有者になっている可能性があるからです。
 

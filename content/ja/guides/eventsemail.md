@@ -34,7 +34,7 @@ the ability to customize the format of the email body being sent. -->
 
 Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
 まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
-これらのIntegrationを使うことによって、最小限の設定作業​で、多種多様なメトリクスやイベントの収集ができるようになります。
+これらのIntegrationを使うことによって、最小限の設定作業​で、多種多様なメトリックスやイベントの収集ができるようになります。
 もしも、これから使用するアプリケーション用のIntegrationが準備されていなければ、[Datadog Agentを使ってCheckを独自にプログラミング][agentcheck]することも選択できます。
 この選択肢は、Integarationを利用するよりは手間を要し、又アプリケーションとDatadog Agent がどのように機能しているかの知識の必要とします。
 
