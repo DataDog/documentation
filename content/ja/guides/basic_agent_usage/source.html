@@ -25,7 +25,7 @@ instructions accordingly if you decide to move them. -->
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
 <a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページのインストール手順も合わせてご参照ください。
 
-Datadog Agentは、仮の設置パスとして<code> '~/.datadog-agent'</code>以下のディレクトリにインンストールされます。この仮のディレクトリは自由に変更することができます。
+Datadog Agentは、仮の設置パスとして<code> '~/.datadog-agent'</code>以下のディレクトリにインストールされます。この仮のディレクトリは自由に変更することができます。
 このガイドでは、Datadog Agent は、この仮の設置パスに存在していることを前提としています。
 ディレクトリを変更した場合は、そのパスに合わせて手順を変更してください。
 
@@ -95,7 +95,7 @@ Datadog Agent のステータスに関する情報を収集する:
 
 <%= console 'sudo ~/.datadog-agent/bin/info info' %>
 
-エラーをトレスバックする: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
+エラーをトレースバックする: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
 
 <%= console 'sudo ~/.datadog-agent/bin/info info -v' %>
 
