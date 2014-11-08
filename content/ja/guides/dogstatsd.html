@@ -54,6 +54,8 @@ they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <img src="/static/images/dogstatsd.png">
 </p> -->
 
+<h2 id="how-it-works"></h2>
+
 ## どのように動作するの
 
 DogStatsDは、アプリケーションのカスタムメトリクスを<a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a>を使って受信し、集計した後、グラフ化表示のために定期的にDatadog側に送信します。
@@ -133,6 +135,8 @@ language and you'll be ready to start hacking. Any StatsD client will work
 just fine, but using a Datadog StatsD client will give you a few extra features
 (namely tags and histograms, but more on that later). -->
 
+<h2 id="set-up"></h2>
+
 ## セットアップ
 
 既にDatadog Agentが起動し動作しているなら、開発に使用しているプログラミング言語に対応したDogSt​​atsDクライアントをインストールすれば、準備完了です。もちろん、一般的なStatsDクライアントでも問題なく動作します。しかし、DogStatsDクラアンを利用すれば、いくつかの追加機能(例: tags、histogramsなど)が使えるようになります。
@@ -152,6 +156,8 @@ You can see the list of StatsD clients on our [libraries page](/libraries/).　-
 We'll walk through the types of metrics supported by DogStatsD in Python, but
 the principles are easily translated into other languages.
 DogStatsD supports the following types of metrics: -->
+
+<h2 id="metrics"></h2>
 
 ## メトリクス
 
@@ -287,6 +293,7 @@ eof
 will only be sent to the server about half of the time, but it will be
 multipled by the sample rate to provide an estimate of the real data. -->
 
+<h2 id="sample-rates"></h2>
 
 ## サンプルレート
 
@@ -331,6 +338,8 @@ duration = time() - start_time
 dog.histogram('rendering.duration', tags=[version])
 eof
 %> -->
+
+<h2 id="tags"></h2>
 
 ## タグ
 
@@ -444,6 +453,8 @@ configuration file</a>:
     # The number of seconds to wait between flushes to the server.
     dogstatsd_interval: 10 -->
 
+<h2 id="configuration"></h2>
+
 ## 設定
 
 DogStatsDでは、UDPパケットの受信ポートとメトリクスの送信間隔を[Datadog Agentの設定ファイル](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example)内で設定することができます。
@@ -495,6 +506,8 @@ Here are some example datagrams and comments explaining them:
     # An example putting it all together.
     users.online:1|c|@0.5|#country:china
  -->
+
+<h2 id="datagram-format"></h2>
 
 ## データグラム
 
@@ -581,6 +594,8 @@ the packets:
 
 DogStatsD is open-sourced under the BSD License. Check out the source
 [here](https://github.com/DataDog/dd-agent). -->
+
+<h2 id="source"></h2>
 
 ## ソースコード
 
