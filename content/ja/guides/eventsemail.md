@@ -181,7 +181,7 @@ messages from the Format: dropdown, then click *Create API Email*.
 ![Event Email Set](/static/images/ja-specific/event_email_set.png)
 
 
-[integrations]: /integrations
-[agentcheck]: /guides/agent_checks
-[eventsapi]: /api/#events
+[integrations]: /ja/integrations
+[agentcheck]: /ja/guides/agent_checks
+[eventsapi]: /ja/api/#events
 [dd-app]: https://app.datadoghq.com
