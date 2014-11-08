@@ -1,0 +1,15 @@
+["200",
+ {"name"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 200",
+  "org_id"=>1499,
+  "options"=>
+   {"notify_no_data"=>false,
+    "notify_audit"=>true,
+    "timeout_h"=>nil,
+    "silenced"=>{"*"=>nil},
+    "is_data_sparse"=>false,
+    "renotify_interval"=>nil},
+  "state"=>{},
+  "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 200",
+  "message"=>"",
+  "type"=>"metric alert",
+  "id"=>62628}]

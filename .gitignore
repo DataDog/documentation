@@ -1,5 +1,6 @@
 output/
 tmp/
+crash.log
 vendor/*
 .bundle/*
 NO_SYNTAX
@@ -9,3 +10,5 @@ NO_SYNTAX
 .ruby-version
 .ruby-gemset
 .rbenv
+.idea
+output.tgz

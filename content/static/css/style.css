@@ -59,6 +59,18 @@ h1, h2, h3 {
     font-family: 'Open Sans', sans-serif;
 }
 
+.nav.search {
+	margin-top: 60px;
+}
+.nav.search .nav-header:first-child {
+      border-radius: 4px 4px 0 0;
+}
+.nav.search .nav-header {
+  margin-top: 0;
+  background-color: #9d6ebf;
+    color: #fff;
+    text-shadow: none;
+}
 .nav.sidebar {
     margin-top: 90px;
     width: 220px;
@@ -208,9 +220,16 @@ h1#pagetitle {
   margin-bottom: 0;
 }
 
-.api-page .language-buttons.btn-group {
-  margin-left: 50px;
-  margin-bottom: 0;
+.api-page .btn-group {
+  margin: 0;
+}
+
+.api-page .api-section-links {
+  margin:0 20px 10px 0;
+}
+
+.api-page .language-links {
+  margin-right:10px;
 }
 
 .api-page h3 {

@@ -1,66 +1,66 @@
-#begin
+require 'rake/clean'
+# begin
 #  require 'nanoc3/tasks'
-#rescue LoadError
+# rescue LoadError
 #  require 'rubygems'
 #  require 'nanoc3/tasks'
-#end
+# end
 
-CODE_SNIPPETS = "code_snippets"
+CLEAN.include(%w(output tmp))
 
-desc "Clean up generated output files"
-task :clean do
-  sh "rm -rf output/*"
-end
+CODE_SNIPPETS = 'code_snippets'
 
-desc "Build documentation site"
+desc 'Build documentation site'
 task :compile do
-  sh "bundle exec nanoc compile"
+  sh 'bundle exec nanoc compile'
 end
 
 task :view do
-  sh "bundle exec nanoc view"
+  sh 'bundle exec nanoc view'
 end
 
-desc "Autocompile the docs site"
-task :autocompile do
-  puts "NOTE: if this is slow, run `rake disable_syntax`\n\n"
-  sh "bundle exec nanoc autocompile"
+namespace :release do
+  desc 'Build and release the site to prod (http://docs.datadoghq.com)'
+  task prod: [:clean, :compile, :"deploy:prod"]
+
+  desc 'Build and release the site to staging (http://docs-staging.datadoghq.com)'
+  task staging: [:clean, :compile, :"deploy:staging"]
 end
 
-desc "Enable syntax highlighting"
-task :enable_syntax do
-  sh("rm -f NO_SYNTAX")
+namespace :deploy do
+  desc 'Deploy to prod S3 bucket; Should be used by `rake release:prod`'
+  task :prod do
+    sh('cd output && s3cmd -c ~/.s3cfg.prod sync . s3://docs.datadoghq.com')
+  end
+
+  desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
+  task :staging do
+    sh('cd output && s3cmd -c ~/.s3cfg.prod sync . s3://docs-staging.datadoghq.com')
+  end
 end
 
-desc "Disable syntax highlighting"
-task :disable_syntax do
-  sh("touch NO_SYNTAX")
-end
-
-desc "Build and release the site to s3"
-task :release => [:clean, :enable_syntax, :compile, :deploy]
-
-desc "Deploy to S3; Should be used by `rake release`"
-task :deploy do
-  sh("cd output && s3cmd -c ~/.s3cfg.prod sync . s3://docs.datadoghq.com")
-end
-
-
-desc "test the code snippets"
+desc 'test the code snippets'
 task :test do
   filetype_to_command = {
-    "py" => "python",
-    "sh" => "sh",
-    "rb" => "ruby",
+    'py' => 'python',
+    'sh' => 'sh',
+    'rb' => 'ruby'
   }
-  filetype_to_command.each do |t,cmd|
-    puts "=" * 10
+  filetype_to_command.each do |t, cmd|
+    puts '=' * 10
     puts "Testing #{t} code snippets"
     files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
     files.each do |f|
       sh("#{cmd} #{f}")
     end
   end
- end
+end
 
-task :default => :autocompile
+desc 'Run Guard, autobuilds/reloads site'
+task :guard do
+  puts 'Auto Compiling and Live Reloading.'
+  puts 'Be Patient...the magic takes a few seconds to start'
+  sh 'bundle exec guard'
+end
+
+task default: :guard

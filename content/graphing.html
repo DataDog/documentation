@@ -11,6 +11,8 @@ sidebar:
       href: "#functions"
     - text: "Y-Axis Controls"
       href: "#yaxis"
+
+kind: documentation
 ---
 
 <h2 id="editor">Find the Graph Editor</h2>
@@ -312,7 +314,7 @@ You can apply functions to the result of each query.
       <ul>
         <li>a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
         <li>the number of series to be displayed, as an integer.</li>
-        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
+        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'last'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
         <li>either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
       </ul>
     </td>
@@ -338,6 +340,9 @@ The <code>top()</code> method also has the following convenience functions, all 
     <dt>top5_min, top10_min, top15_min, top20_min</dt>
     <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
 
+    <dt>top5_last, top10_last, top15_last, top20_last</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
+
     <dt>top5_area, top10_area, top15_area, top20_area</dt>
     <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
 
@@ -352,6 +357,9 @@ The <code>top()</code> method also has the following convenience functions, all 
 
     <dt>bottom5_min, bottom10_min, bottom15_min, bottom20_min</dt>
     <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
+
+    <dt>bottom5_last, bottom10_last, bottom15_last, bottom20_last</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
 
     <dt>bottom5_area, bottom10_area, bottom15_area, bottom20_area</dt>
     <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
