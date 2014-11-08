@@ -7,7 +7,7 @@ sidebar:
       href: "/ja/guides/basic_agent_usage/"
     - text: Datadog が提供するサービスの概要
       href: "/ja/overview/"
-    - text: Datadog へのメトリックスの送信
+    - text: Datadog へのメトリクスの送信
       href: "/ja/guides/metrics/"
     - text: Datadog Agent によるログの解析方法
       href: "/ja/guides/logs/"
@@ -85,13 +85,13 @@ Datadogのモニタリングサービスには３種類の料金プランがあ�
 
 1. **Free プラン(無償)** は、5台以下のホスト構成のユーザに対し適用します。Freeプランでは、モニタリングデータの保管期間は1日になります。Free プランからPro プランへの変更においては、Free プランで使っていた設定は全て引き継がれます。従って、既にモニタリングしているシステムがあっても、プラン変更によって影響を受けることはありません。
 
-2. **Pro プラン** は、1-100台のホスト構成のユーザに対して適用します。Pro プランでは、モニタリングデータの保管期間は1年になります。 Pro プランには、メトリックスアラートとemailのサポートが含まれてます。
+2. **Pro プラン** は、1-100台のホスト構成のユーザに対して適用します。Pro プランでは、モニタリングデータの保管期間は1年になります。 Pro プランには、メトリクスアラートとemailのサポートが含まれてます。
 
 3. **Enterprise プラン** は、100台以上のホスト構成のユーザ、又は、Pro プランのサービス内容に対して特別な調整が必要なユーザに対して適応します。
 
    - Enterprise プランの価格設定の基準は、次の項目になります:
-   1. データの保管期間と、カスタムメトリックスの数(基本プランには、保管期間1年と100項目のカスタムメトリックスが含まれます)
-   2. 運用環境下よりメトリックスを転送するホストの総数
+   1. データの保管期間と、カスタムメトリクスの数(基本プランには、保管期間1年と100項目のカスタムメトリクスが含まれます)
+   2. 運用環境下よりメトリクスを転送するホストの総数
    3. 支払い条件 (月払い、年払い、など)
 
 
@@ -105,11 +105,11 @@ JMX / WMI / Nagios / Cacti).
 </p>
  -->
 
-カスタムメトリックスとイベントは、全てのプランで使うことができます。
-しかし、カスタムメトリックスは、ホスト当たり100個が上限になります。
-カスタムメトリックスとは、"regular integration suite" が一般的に収集するメトリックス以外のメトリックスを言います。
-例えば、アプリケーションスタックで実施するカスタムチェックやAPIレベルのメトリックスが該当します。
-更に明確化が必要なポイントとして、JMX、 WMI、 Nagios、 Cactiなどの無限のメトリックスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタムメトリックスに分類されます。
+カスタムメトリクスとイベントは、全てのプランで使うことができます。
+しかし、カスタムメトリクスは、ホスト当たり100個が上限になります。
+カスタムメトリクスとは、"regular integration suite" が一般的に収集するメトリクス以外のメトリクスを言います。
+例えば、アプリケーションスタックで実施するカスタムチェックやAPIレベルのメトリクスが該当します。
+更に明確化が必要なポイントとして、JMX、 WMI、 Nagios、 Cactiなどの無限のメトリクスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタムメトリクスに分類されます。
 
 
 <!-- <p>
@@ -205,7 +205,7 @@ and customize accordingly.
 Datadogからの請求は、Datadog Agentを実行しているホストとAWS Integrationでピックアップされた全てのホストが対象になります。(但し、ELBや他のnamespaceのものは除きます。)
 AWS IntegrationでピックアップされたホストでDatadog Agentが稼働している場合でも、二重で課金されることは有りません。
 
-もしも、AWS Integrationが転送するメトリックスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
+もしも、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
 
 
 #### VMware Ingegrationの利用は、毎月の請求額はどのように変化しますか?

@@ -5,15 +5,15 @@ sidebar:
     - header: アラート設定のガイド
     - text: アラートの新規設定
       href: "#new"
-    - text: メトリックスの指定
+    - text: メトリクスの指定
       href: "#metric"
-    - text: メトリックスの変化量によるアラート
+    - text: メトリクスの変化量によるアラート
       href: "#change"
     - text: Simple Alert 又は Multi Alert
       href: "#simple"
     - text: アラート条件の設定
       href: "#conditions"
-    - text: メトリックスが届かなくなった時の通知
+    - text: メトリクスが届かなくなった時の通知
       href: "#nodata"
     - text: アラートの自動解除
       href: "#autoresolve"
@@ -40,7 +40,7 @@ create a new alert.</p>
 
 運用しているシステム全体を一箇所で監視する場合、危機的な状況を起こしかねない状態の変化を検知できる機能なしでは完全とは言えません。
 
-Datadog内のアラートは、メトリックスが閾値を超えた時、ユーザに通知する機能を持っています。その通知は、自由度が高く、Dashboardのイベントストリームに表示され、電子メール、Hipchat部屋、またはPagerdutyの「ONCALL」経由で、該当のチームメンバに連絡をすることができます。
+Datadog内のアラートは、メトリクスがしきい値を超えた時、ユーザに通知する機能を持っています。その通知は、自由度が高く、Dashboardのイベントストリームに表示され、電子メール、Hipchat部屋、またはPagerdutyの「ONCALL」経由で、該当のチームメンバに連絡をすることができます。
 
 アラートを設定するには、`Metrics` タブに移動し、`Manage Monitors`を選択します。
 
@@ -77,12 +77,12 @@ is receiving no data.</li>
 
 アラートを設定するための6ステップ
 
-1. アラートのためのメトリックスを定義します。`average`, `minimum`, `maximum`, `sum`などの集計機能を指定し、次に対象となるメトリックスを指定します。メトリックス集計の対象となる`hosts:`,
+1. アラートのためのメトリクスを定義します。`average`, `minimum`, `maximum`, `sum`などの集計機能を指定し、次に対象となるメトリクスを指定します。メトリクス集計の対象となる`hosts:`,
 `tags:`, `regions:`, `devices:`などの範囲パラメーターを指定していきます。
 2. `simple`か`multi alert`を選択します; [`multi-alerts`](#simple) は、非常に柔軟なアラートの設定ができます。
 例えば、[ by `host,device` ]と設定することで、各ホストの異なるdeviceの情報により、別々にアラートを設定することもできます。
 3. アラートの発生条件を設定します; しきい値を`above`(上回った状態)か`below`(下回った状態)かを指定し、次に該当条件の発生頻度を`on average`(平均で),`at least once`(一回でも), or `at all times`(恒常的に)で指定し、最後に継続時間を指定します。
-4. アラートに使っているメトリックスが受信できなくなった際に通知するなどのオプションを設定します。
+4. アラートに使っているメトリクスが受信できなくなった際に通知するなどのオプションを設定します。
 5. アラートの発生時のタイトルとメッセージ本文を設定します。
 6. Pagerduty, slack, HipChat などの外部サービスやチームメンバを、アラート送信先として設定します。
 
@@ -101,16 +101,16 @@ emitting that metric thus one time series.
 lowest point respectively seen from any of the hosts emitting that metric.
         Select a 'tag' will limit the metric collection to what you've specified.</p> -->
 
-<h4 id="metric">１．１ メトリックスの指定</h4>
+<h4 id="metric">１．１ メトリクスの指定</h4>
 
 <img src="/static/images/alert_4.png" style="width:100%; border:1px solid #777777"/>
 
-アラートの使い方の詳しい解説のために、`aws.elb.latency` メトリックスを監視するアラートを設定します。
+アラートの使い方の詳しい解説のために、`aws.elb.latency` メトリクスを監視するアラートを設定します。
 監視対象ホストは、合計5台。1台がステージング用(`env:staging`)で、残りの4台を運用環境(`env:prod`)に使用しているとします。
 
 [ `avg` of `aws.elb.latency` ] を指定した場合は、Datadogでは全てのホストが送信している`aws.elb.latency`の平均値を算出します。次に、[ `avg` of `aws.elb.latency` over `env:prod` ]を指定した場合は、`env:prod`(運用環境)とタグ付けされたホストのみが平均値の算出に使われます。その逆に、[ `avg` of `aws.elb.latency` over `env:staging` ]と指定すると、ステージング用の1台のホストの`aws.elb.latency`になります。
 
-`max`又は`min`を指定した場合は、範囲指定に入っているホストの`aws.elb.latency` メトリックスの最高値か最低値を取得します。
+`max`又は`min`を指定した場合は、範囲指定に入っているホストの`aws.elb.latency` メトリクスの最高値か最低値を取得します。
 
 又、overの次に`tag:`や`host:`を指定することで、`env:`と同様に対象となるホストを絞り込むことができます。
 
@@ -131,10 +131,10 @@ An alert is triggered when the delta over time exceeds the limit, where the limi
 
 </p> -->
 
-<h4 id="change">１．２ メトリックスの変化量によるアラート</h4>
+<h4 id="change">１．２ メトリクスの変化量によるアラート</h4>
 <img src="/static/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
 
-メトリックスの差分が閾値より高い場合、アラートを発生します。
+メトリクスの差分がしきい値より高い場合、アラートを発生します。
 
 `Change Alert`では、[ from `5 minutes` ago ] と指定した場合、[ compared to a `N` minute average ]で表示されている`N`分前と現在の差分を評価します。from以降の指定値が、5分~30分の場合は1分の移動平均(1-minute moving average)になります。1時間~4時間の場合は10分の移動平均(10-minute moving average)、24時間の場合は1時間の移動平均(1-hour moving average)となります。
 
@@ -159,11 +159,11 @@ alert for each device on each host that is running out of space.</p> -->
 <img src="/static/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
 
 `simple alert`は、指定した条件のどれかを満たせば、アラートを発生します。
-アラートは1種類のみで、収集したメトリックスが条件に合致した時に発生されます。
+アラートは1種類のみで、収集したメトリクスが条件に合致した時に発生されます。
 
-例えば、1台のホストからのみ送信されるメトリックス, [ `sum` of `nginx.bytes.net` over `region:us-east` ]という全ホストの平均値, [ `avg` of `system.cpu.iowait`over `host:bits` ]という平均値を監視している場合などに適しています。
+例えば、1台のホストからのみ送信されるメトリクス, [ `sum` of `nginx.bytes.net` over `region:us-east` ]という全ホストの平均値, [ `avg` of `system.cpu.iowait`over `host:bits` ]という平均値を監視している場合などに適しています。
 
-`multi alert`は、**group parameters**(メトリックス収集範囲)に関連して指定した条件に基づいて、個別のアラートを発生します。
+`multi alert`は、**group parameters**(メトリクス収集範囲)に関連して指定した条件に基づいて、個別のアラートを発生します。
 
 例えば、ディスク容量のアラートでは、[ `avg `of `system.disk.in_use` over `*`] と [ `Multi Alert` Trigger a separate alert for each `host:*`,`device:*` ]を組み合わせて、各ホストの各ディバイスごとにアラートを発生する場合に適しています。
 
@@ -201,11 +201,11 @@ event that the agent died and the host is still up, you would be incorrectly
 alerted. We are working towards supporting this with Service Checks, a feature
 we hope to release in the near future.</p> -->
 
-<h4 id="nodata">４．１ メトリックスが届かなくなった時の通知</h4>
+<h4 id="nodata">４．１ メトリクスが届かなくなった時の通知</h4>
 
-普通の状態のホストでは、メトリックスデータを恒常的に送信していることを想定している場合は、そのデータが届かなく成った場合の通知は非常に便利です。例えば、ホストにインストールされたDatadog Agent は、常に動作し、`system.cpu.iowait` というメトリックス名でiowait値を恒常的に送信してきているはずです。このiowaitの値がしきい値を超えた時に発生するアラートを設定していた場合、データーがDatadog側に届かなくなったことの通知を出しておくことは、アラート機能の停止の可能性を知る上で、重要な情報となります。
+普通の状態のホストでは、メトリクスデータを恒常的に送信していることを想定している場合は、そのデータが届かなく成った場合の通知は非常に便利です。例えば、ホストにインストールされたDatadog Agent は、常に動作し、`system.cpu.iowait` というメトリクス名でiowait値を恒常的に送信してきているはずです。このiowaitの値がしきい値を超えた時に発生するアラートを設定していた場合、データーがDatadog側に届かなくなったことの通知を出しておくことは、アラート機能の停止の可能性を知る上で、重要な情報となります。
 
-しかしならがら、ホストから自動で増減するオートスケールグループから送られてくるメトリックスデータの監視では、意図的に不要になった複数のホストを停止した時には、大量の通知を受けることになるでしょう。そのような場合は、通知を無効にすることを検討しても良いかもしれません。
+しかしならがら、ホストから自動で増減するオートスケールグループから送られてくるメトリクスデータの監視では、意図的に不要になった複数のホストを停止した時には、大量の通知を受けることになるでしょう。そのような場合は、通知を無効にすることを検討しても良いかもしれません。
 
 
 <!-- <h4 id="autoresolve">Autoresolving alerts</h4>
@@ -225,10 +225,10 @@ the metric falls below the given threshold.</p> -->
 <h4 id="autoresolve">４．２ アラートの自動解除</h4>
 <img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
 
-異なるタグに股がって、定期的に送信されるメトリックスを基にしたアラートでは、発生したアラートを一定時間後に解除することが合理的かもしれません。例えば、エラーの発生回数を送信するカウンタでは、エラー発生数は0を送信することはないので、アラートは解除されることはありません。このようなケースでは、4時間経過後もメトリックスの変化がなければ、アラートが解除されるように設定しておくと良いかもしれません。
+異なるタグに股がって、定期的に送信されるメトリクスを基にしたアラートでは、発生したアラートを一定時間後に解除することが合理的かもしれません。例えば、エラーの発生回数を送信するカウンタでは、エラー発生数は0を送信することはないので、アラートは解除されることはありません。このようなケースでは、4時間経過後もメトリクスの変化がなければ、アラートが解除されるように設定しておくと良いかもしれません。
 
 特定の場合をのぞいて自動解除の設定は、あまりオススメではありません。なぜならばアラートは、「実際に問題が修正された時のみ」解除したいからです。
-従って一般的なケースでは、この部分の設定を`Never` にしておき、メトリックスが設定しきい値以下に戻った際に、アラートが解除されるようにします。
+従って一般的なケースでは、この部分の設定を`Never` にしておき、メトリクスがしきい値以下に戻った際に、アラートが解除されるようにします。
 
 
 <!-- <h4 id="notify">Notifying</h4>
@@ -246,7 +246,7 @@ part 5, 'Notify your team'.</p> -->
 
 アラート設定の最後は、発生するアラートに添付するコメントの設定です。
 このコメントには、発生したアラートに最も対応してほしい人の注目を喚起するために適切な情報が含まれている必要があります。
-メール添付によって配信されたグラフや、イベント、タイムラインに表示されるグラフは、アラートが発生した瞬間をキャプチャーしたグラフへのハイパーリンクになっています。
+メール添付によって配信されたグラフやイベントストリームに表示されるグラフは、アラートが発生した瞬間をキャプチャーしたグラフへのハイパーリンクにもなっています。
 
 <h4 id="notify1">６．アラート送信先の設定</h4>
 

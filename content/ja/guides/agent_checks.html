@@ -47,8 +47,8 @@ they will run every check interval, which defaults to 15 seconds. -->
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからのメトリックスとイベント情報を収集する方法について説明します。
-`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリックスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
+このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからのメトリクスとイベント情報を収集する方法について説明します。
+`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
 
@@ -120,9 +120,9 @@ your `check` function, all metrics that were submitted will be collected and
 flushed out with the other Agent metrics.
  -->
 
-#### メトリックスの送信
+#### メトリクスの送信
 
-Agent Checkでメトリックスを送信することは非常に簡単です。既にDogStatsDのが提供している関数に精通しているなら、移行は非常に簡単です。
+Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDのが提供している関数に精通しているなら、移行は非常に簡単です。
 未だそれらの関数に慣れていない場合でも、それほど大変ではないというとことがすぐ分かるはずです。
 
 
@@ -138,7 +138,7 @@ Agent Checkでは、次のような関数を利用することができます:
 - `hostname`: (optional) A hostname to associate with this metric. Defaults to the current host.
 - `device_name`: (optional) A device name to associate with this metric.
 
-これらの関数は、チェックロジックのどこからでも呼び出すことができます。これらの関数を使って収集したメトリックスは、`check` 機能の実行の最後に他のAgent メトリックスと共にDatadogのサービスに転送されます。
+これらの関数は、チェックロジックのどこからでも呼び出すことができます。これらの関数を使って収集したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
 
 
 <!-- #### Sending events
@@ -179,7 +179,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリックスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -373,11 +373,11 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
 </div>
 
-まずは簡単な例として、メトリックス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に設置し、次の3行のみの非常にシンプな内容になります:
+まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に設置し、次の3行のみの非常にシンプな内容になります:
 
 <%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
 
-HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリックス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に設置します:
+HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に設置します:
 
 <%= snippet_code_block("guides-agentchecks-hello.py") %>
 
@@ -413,7 +413,7 @@ following will happen:
 Checkが実行される度に、HTTPのエンドポイントに対してGETリクエストを実行します。
 レスポンスの結果に基づいて次の処理をします:
 
-- レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリックスとして送信する。
+- レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリクスとして送信する。
 - レスポンスがタイムアウトした場合、URLとタイムアウトのイベントを送信する。
 - レスポンスステータスが200以外の場合、URL及びレスポンスコードのイベントを送信する。
 
@@ -487,7 +487,7 @@ event method.
 
 <%= snippet_code_block("guides-agentchecks-ex-request.py") %>
 
-リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリックス名は、`http.response_time`。URLを、タグとして付記します。
+リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLを、タグとして付記します。
 
 <%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
 
@@ -590,4 +590,4 @@ Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.
     >>> from checks import run_check
     >>> run_check('my_check')
 
-このコマンドは、Checkが送信するメトリックスかイベントを表示します。
+このコマンドは、Checkが送信するメトリクスかイベントを表示します。

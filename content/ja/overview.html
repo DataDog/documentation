@@ -163,14 +163,14 @@ without access to your data or any other information (via the cog in the upper r
 
 <img src="/static/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
 
-ダッシュボードには、<a target="_blank" href="/graphing/">グラフ化</a>されたパフォーマンスメトリックスがリアルタイムに表示されます。
+ダッシュボードには、<a target="_blank" href="/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
 <li>ダッシュボード内の全てのグラフは、マウスで操作できます。</li>
 <li>グラフ内のビンクの縦の線は、Eventの発生を表しています。</li>
 <li>グラフ上で"Click & drag"することによって、時間軸を変更することができます。</li>
 <li>グラフ上でカーソルを移動することによって、Eventストリームの表示も該当箇所へ自動的に移動していきます。</li>
 <li>zone, host, total usageで、表示することができます。</li>
-<li>グラフ内に表示するメトリックスの<a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
+<li>グラフ内に表示するメトリクスの<a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の歯車マークから)</li>
 </ul>
@@ -203,11 +203,11 @@ to pull the data from.</li>
 <h2 id="alerting">アラート機能</h2>
 <img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
 
-[アラート機能](/ja/guides/alerting/)によって、特定のメトリックスの集計が閾値を超えた場合に通知する機能を実現することができます:
+[アラート機能](/ja/guides/alerting/)によって、特定のメトリクスの集計がしきい値を超えた場合に通知する機能を実現することができます:
 <ul>
-<li>インフラ全体のメトリックスのaverage, max, min, or sumを基に</li>
-<li>ホスト毎のメトリックスのaverage, max, min, or sumを基に</li>
-<li>指定できるメトリックスなら全てOK。例: 売上情報, データーセンターの温度, など</li>
+<li>インフラ全体のメトリクスのaverage, max, min, or sumを基に</li>
+<li>ホスト毎のメトリクスのaverage, max, min, or sumを基に</li>
+<li>指定できるメトリクスなら全てOK。例: 売上情報, データーセンターの温度, など</li>
 <li>同一条件による、別デバイスや別ホストに股がったアラート機能 (by device, host, etc.)</li>
 <li>"@"機能によるグループ毎の通知設定</li>
 </ul>
@@ -218,5 +218,5 @@ to pull the data from.</li>
 <ol>
 はい、必要です。:
 <li>Datadogで公開しているIntegrationsは、Datadog Agent を起動することによって、自動的にデータを送信するように成っています。(初回のデータ送信に関しては、数分の時間を要します。但し、10分以上になることはありません。)</li>
-<li>カスタムメトリックスがある場合は、データの収集先情報を特別に指定することができます。</li>
+<li>カスタムメトリクスがある場合は、データの収集先情報を特別に指定することができます。</li>
 </ol>

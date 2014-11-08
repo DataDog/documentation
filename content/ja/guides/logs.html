@@ -3,7 +3,7 @@ title: Datadog Agent によるログの解析方法
 sidebar:
   nav:
     - header: ログ解析のガイド
-    - text: メトリックスの抽出
+    - text: メトリクスの抽出
       href: "#metrics"
     - text: イベントの抽出
       href: "#events"
@@ -16,11 +16,11 @@ logs, so the data within can ｂe graphed in real-time, all the time. -->
 
 ログファイルには、アプリケーションとビジネスの貴重なデータが含まれています。
 残念ながら多くの場合この重要性には気が付かずログファイルは放置されています。
-Datadog　Agent は、ログからメトリックスとイベントを解析することによって、その中のデータをリアルタイムでグラフ化するのに役立ちます。
+Datadog　Agent は、ログからメトリクスとイベントを解析することによって、その中のデータをリアルタイムでグラフ化するのに役立ちます。
 
-<h2 id="metrics">メトリックスの抽出</h2>
+<h2 id="metrics">メトリクスの抽出</h2>
 
-Datadgo Agentは、ログファイルから直接メトリックスを、抽出することができます:
+Datadgo Agentは、ログファイルから直接メトリクスを、抽出することができます:
 
 - Datadog の公式ログフォーマットの場合は、追加のプログラミングは不要です。
 - Datadog の公式ログフォーマット以外の場合は、Pythonによるログパース関数を準備し、それをimportして抽出します。
