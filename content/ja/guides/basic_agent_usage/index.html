@@ -133,23 +133,23 @@ Here is a quick guide for troubleshooting getting integrations installed:
 
 <h4 id="issue_installing">Datadog Agent のインストールに関わる問題</h4>
 
-Datadog Agent のインストールの過程で、インストールプロセスが一切発生しない問題に遭遇した場合は、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>にご連絡ください。
+Datadog Agentのインストールプロセスが一切実行されないしない状況に遭遇した場合は、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>にご連絡ください。
 その際に、Datadog Agent をインストールしようとしているホストのOS名とバージョン,Datadog Agent のインストール方法とバージョンもご連絡ください。
 更に、エラーメッセージを添付してください。
 
 <h4 id="issue_reporting">Datadog Agent のレポーティングに関わる問題</h4>
 
-Datadog Agent のインストールは完了しているがDatadog にデータが表示されていない場合は、次のようにしてトラブルシューティングを行うことができます。
-まず、infoコマンドを実行します。各OSでのコマンドの使い方については、このページの左側のナビゲーションからお使いのOSを選択してください。
+Datadog Agent のインストールは完了しているがダッシュボードにデータが表示されていない場合は、infoコマンドを使ってトラブルシューティングをすることができます。各OSでのコマンドの使い方については、このページの左側のナビゲーションからお使いのOSを選択し確認てください。
 
 **問題に関連するエラーの内容は、infoコマンドを使って表示できましたか？**
 
-該当するエラーの内容がinfoコマンドによって表示されていない場合は、ログをチェックする必要があります。ログの場所は、先のOS依存のページをご確認ください。
+問題を探るためのエラー情報がinfoコマンドによって表示されていない場合は、ログをチェックすると、エラー情報を発見できるかもしれません。ログの場所についても、先のOS依存のページをご確認ください。
 
 ログをチェックしても問題が解決しない場合は、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>宛に、infoコマンドの出力結果とlogファイルを添付し、ご連絡ください。
 
-<h4 id="machine_time">ホストの時刻を確認してください</h4>
-これまでの経験から、ホストの時刻が大幅に進んでいたり、遅れていたりした場合、メトリクスの転送に問題が起きることが確認されています。
+<h4 id="machine_time">まずは、ホストの時刻を確認してください!</h4>
+
+これまでの経験から、ホストの時刻が大幅に進んでいたり、遅れていたりした場合、メトリクスの転送に問題が起きることが確認されています。まずは、ホストが持っいる時刻が正常に設定されているかを確認してください。
 
 ホストとDatadog側の時刻の差をチェックするには、次のコマンドを実行します:
 
@@ -160,21 +160,20 @@ Datadog Agent のインストールは完了しているがDatadog にデータ�
 
 <h4 id="integrations">Integrationsの動作に関連する問題</h4>
 
-Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" target="_blank">Integrations</a> には、Datadog Agent の<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAMLファイル</a>の設定が必要なものがあります。
+Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" target="_blank">Integrations</a> には、Datadog Agent のYAML形式で書かれた<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">設定ファイル</a>への追記が必要なものがあります。
 
 **以下は、Integrationsのインストールに関連する問題のトラブルシュートのクイックガイドです:**
 
-1. infoコマンドを実行します。 (左側のナビゲーションでOSを選択し、確認してください）
-<br>
-2. Integrationsは、infoコマンドで表示されましたか？
+1. infoコマンドを実行します。 (コマンドの使い方は、各OSのページで確認してください）
+2. トラブルシューティング中のIntegrations名は、infoコマンドで表示されましたか？
 
     + <strong>いいえ、表示されていません。</strong>
         * 設定ファイルが正しい場所にあり、正しい名前かを確認してください。
-        * YAML のパーサやシンタックスチェッカーを使って文法を確認してください。各Integrationsの<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAML ファイルのサンプル</a>は、Githubのリポジトリを参照してください。
-        * 設定ファイルを移動した場合や変更した場合は、Datadog Agent を再起動した後、再度infoコマンド実行しIntegrationsが表示されるか確認してください。
+        * YAML のパーサやシンタックスチェッカーを使って文法を確認してください。各Integrationsの<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAML設定ファイルのサンプル</a>は、Githubのリポジトリを参照してください。
+        * 　YAML設定ファイルを移動したり、変更した場合は、Datadog Agent を再起動した後、再度infoコマンド実行し、Integrationsが表示されるか確認してください。
     + <strong>はい、表示されています。</strong>
         * <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページでそのホストの一般的なメトリクス(CPU, HDD, メモリ等)が表示されているかを確認してください。例えば、Integrationsの設定を進めているホストの`system.cpu.user`選んでみてください。
-        * メトリクスが全く表示されない場合は、ログの中でエラー項目を探し、該当のログファイルとinfoコマンドの出力ファイルとを添付し、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a> までお問い合わせください。　
+        * メトリクスが全く表示されない場合は、ログファイルでエラー情報の状況を出力している部分がないかレビューしてください。その上で、エラー情報を含んでいそうなログファイルとinfoコマンドの出力ファイルとを添付し、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a> までお問い合わせください。　
 
 
 
