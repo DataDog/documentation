@@ -47,7 +47,7 @@ in an online service is treated the same throughout Datadog.</li>
 
 <ul>
 <li>60以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
-<li>カスタム Integrationsは、<a target="_blank" href="http://docs.datadoghq.com/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
+<li>カスタム Integrationsは、<a target="_blank" href="/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
 <li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。</li>
 </ul>
@@ -81,7 +81,7 @@ for that machine based on what was previously set up for that tag.</li>
 <li>全てのホストは、Infrastructureのページに表示されます。</li>
 <li>上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。</li>
 <li>Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタの作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。</li>
-<li>タグ設定の詳細は、<a target="_blank" href="/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。</li>
+<li>タグ設定の詳細は、<a target="_blank" href="/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。</li>
 
 </ul>
 
@@ -121,7 +121,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 
 <ul>
 <li>ストリーム内のすべてのEventにはコメントを付けることができます。</li>
-<li>分散した<a target="_blank" href="/faq/#team">チーム</a>や、問題の調査時に問題点をフォーカスするのに便利です。</li>
+<li>分散した<a target="_blank" href="/ja/faq/#team">チーム</a>や、問題の調査時に問題点をフォーカスするのに便利です。</li>
 <li>by: user, source, tag, host, status, priority, incident 等の項目で、<a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">フィルタリング</a>することができます。</li>
 </ul>
 
@@ -133,7 +133,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>プライオリティの変更(上げる/下げる)</li>
 <li>コメントの追加</li>
 <li>同様なインシデントの閲覧</li>
-<li><a target="_blank" href="/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
+<li><a target="_blank" href="/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
 <li>@support でのサポートの要請</li>
 </ul>
 
@@ -163,14 +163,14 @@ without access to your data or any other information (via the cog in the upper r
 
 <img src="/static/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
 
-ダッシュボードには、<a target="_blank" href="/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
+ダッシュボードには、<a target="_blank" href="/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
 <li>ダッシュボード内の全てのグラフは、マウスで操作できます。</li>
 <li>グラフ内のビンクの縦の線は、Eventの発生を表しています。</li>
 <li>グラフ上で"Click & drag"することによって、時間軸を変更することができます。</li>
 <li>グラフ上でカーソルを移動することによって、Eventストリームの表示も該当箇所へ自動的に移動していきます。</li>
 <li>zone, host, total usageで、表示することができます。</li>
-<li>グラフ内に表示するメトリクスの<a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
+<li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の歯車マークから)</li>
 </ul>
