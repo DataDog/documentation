@@ -60,7 +60,7 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 Datadogにアプリケーションのメトリクスを送信することで、アプリケーションの状態、ユーザの行動、システムの状態などを関連付けて把握できるようになります。
 
-メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["Getting Started with DogStatsD"](/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
+メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"](/ja/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
 
 以下のチュートリアルでは、次のようなユースケースを取り上げます:
 
@@ -170,7 +170,7 @@ EOF
   </div>
   <p>これで、ライブラリーが使えるように成りました。</p>
   <div class="alert info-block">
-    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/libraries/">Libraries</a>のページを参照してくだい。
+    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/ja/libraries/">Libraries</a>のページを参照してくだい。
   </div>
 
 </div>
@@ -776,10 +776,18 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
 
+
+- <a href="/ja/api/#metrics">API レファレンスのmetrics</a>
+- <a href="/ja/api/#tags">API レファレンスのtag</a>
+- <a href="/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
+- <a href="/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+
+<!--
 - <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
 - <a href="http://docs.datadoghq.com/api/#tags">API レファレンスのtag</a>
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Datadog Agent チェックの書き方</a>
 - <a href="http://docs.datadoghq.com/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+-->
 
 <!--  <h3 id="sample-rates">Sample Rates</h3>
 
@@ -876,7 +884,7 @@ Datagogにメトリクスを送信するには、Datadog Agent にバンドル�
 
 <ul>
   <li>
-    Datadogの<a href="/api/">HTTP API</a>を使って直接送信する方法
+    Datadogの<a href="/ja/api/">HTTP API</a>を使って直接送信する方法
   </li>
   <li>
     codahaleのJava用 metrics ライブラリーと（<a href="https://github.com/vistarmedia">Vistar Media</a>が寄贈してくれた)<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>を使って送信する方法
