@@ -245,7 +245,7 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 #### Python {#community-python}
 
-- [scales_datadog](https://github.com/tbarbugli/scales_datadog) - [Scales](https://github.com/Cue/scales)ライブラリのDatadogバックエンド by [Tommaso Barbugli](https://github.com/tbarbugli).
+- [scales_datadog](https://github.com/tbarbugli/scales_datadog) - [Scales](https://github.com/Cue/scales)ライブラリーのDatadogバックエンド by [Tommaso Barbugli](https://github.com/tbarbugli).
 
 <br />
 
@@ -338,22 +338,22 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 #### Google Analytics {#community-google}
 
-- [casperjs-google-analytics-realtime-scrape](https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape) - Datadog APIを使って、Google Analyticsからデータを取り込むためのライブラリ.
+- [casperjs-google-analytics-realtime-scrape](https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape) - Datadog APIを使って、Google Analyticsからデータを取り込むためのライブラリー.
 
 
 #### Pid-stats {#community-pidstats}
 
-- [pid-stats](https://github.com/gitterHQ/pid-stats) - StatsDからプロセス情報を生成するライブラリ by [GitterHQ](https://github.com/gitterHQ).
+- [pid-stats](https://github.com/gitterHQ/pid-stats) - StatsDからプロセス情報を生成するライブラリー by [GitterHQ](https://github.com/gitterHQ).
 
 
 #### Logstash {#community-logstash}
 
-- [dogstatsd.rb](https://gist.github.com/conorbranagan/c001078d148d2cab38a0) - Logstashからデータを取り込むためのライブラリ by Datadogメンバーの[Conor Branagan](https://gist.github.com/conorbranagan/).
+- [dogstatsd.rb](https://gist.github.com/conorbranagan/c001078d148d2cab38a0) - Logstashからデータを取り込むためのライブラリー by Datadogメンバーの[Conor Branagan](https://gist.github.com/conorbranagan/).
 
 
 #### Reverse Color Scheme {#community-colorscheme}
 
-- デフォルトより暗い背景色を設定するためのに、サイトの色味を変更する [CSSライブラリ](http://stylebot.me/styles/4320).
+- デフォルトより暗い背景色を設定するためのに、サイトの色味を変更する [CSSライブラリー](http://stylebot.me/styles/4320).
 
 <br />
 
