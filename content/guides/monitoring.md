@@ -10,8 +10,6 @@ sidebar:
       href: "#metric"
     - text: Integrations
       href: "#integration"
-    - text: Processes
-      href: "#process"
     - text: Network
       href: "#network"
     - text: Custom Checks
@@ -25,7 +23,7 @@ sidebar:
 Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
-statuses, processes and more.
+availability, network endpoints and more.
 
 Once a monitor is created, you will be notified when the its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
@@ -186,6 +184,8 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
+{::comment}
+
 ## Process Monitors {#process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
@@ -213,6 +213,8 @@ point they should notify.
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
+
+{:/comment}
 
 ## Network Monitors {#network}
 
