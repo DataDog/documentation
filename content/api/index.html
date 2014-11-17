@@ -23,6 +23,7 @@ kind: documentation
         <a class="btn" href="#errors">Errors</a>
         <a class="btn" href="#metrics">Metrics</a>
         <a class="btn" href="#events">Events</a>
+        <a class="btn" href="#service_checks">Checks</a>
         <a class="btn" href="#monitors">Monitors</a>
         <a class="btn" href="#timeboards">Timeboards</a>
         <a class="btn" href="#screenboards">Screenboards</a>
@@ -290,6 +291,50 @@ kind: documentation
         <%= snippet_result_code_block "api-events-stream.py" %>
         <%= snippet_result_code_block "api-events-stream.rb" %>
         <%= snippet_result_code_block "api-events-stream.sh" %>
+      </div>
+    </div>
+
+
+    <!--
+   =====================================================================
+    Service Checks
+    ====================================================================
+    -->
+
+    <h3 id="service_checks">Service Checks</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          The service check endpoint allows you to post check statuses for use with
+          monitors.
+        </p>
+      </div>
+    </div>
+    <h4 id="checks-post">Post a Check Run</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <% valid_statuses = "'0': OK, '1': WARNING, '2': CRITICAL, '3': UNKNOWN" %>
+          <%= argument 'check', 'The text for the message' %>
+          <%= argument 'host_name', 'The name of the host submitting the check' %>
+          <%= argument 'status', 'An integer for the status of the check. <div>Options: ' + valid_statuses + '</div>' %>
+          <%= argument 'timestamp', 'POSIX timestamp of the event.', {:default => 'now'} %>
+          <%= argument 'message', 'A description of why this status ocurred', {:default => 'None'} %>
+          <%= argument 'tags', 'A list of key:val tags for this check', {:default => 'None'} %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/check_run</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-checks-post.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-checks-post.#{f}" %>
+        <% end %>
       </div>
     </div>
 
