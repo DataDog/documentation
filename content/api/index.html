@@ -293,214 +293,6 @@ kind: documentation
       </div>
     </div>
 
-
-
-
-    <!--
-   =====================================================================
-    Timeboards
-    ====================================================================
-    -->
-
-    <h3 id="timeboards">Timeboards</h3>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>
-          This endpoint allows you to programmatically create, update
-          delete and query timeboards.
-        </p>
-      </div>
-    </div>
-    <h4 id="dashboards-post">Create a Timeboard</h4>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <h5>Arguments</h5>
-        <ul class="arguments">
-          <%= argument("title", 'The name of the dashboard.') %>
-          <%= argument("description", "A description of the dashboard\'s content.") %>
-          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
-          <ul class="arguments">
-            <li>
-              <strong>title [required]</strong>
-              <div>The name of the graph.</div>
-            </li>
-            <li>
-              <strong>definition [required]</strong>
-              <div>
-                The graph definition. Example:
-                <div>
-                  <code>
-                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
-                  </code>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
-           <ul class="arguments">
-             <li>
-               <strong>name [required]</strong>
-               <div>The name of the variable.</div>
-             </li>
-             <li>
-               <strong>prefix [optional, default=None]</strong>
-               <div>
-                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
-               </div>
-             </li>
-             <li>
-               <strong>default [optional, default=None]</strong>
-               <div>The default value for the template variable on dashboard load</div>
-             </li>
-           </ul>
-           </ul>
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>POST /api/v1/dash</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-dashboard-create.py" %>
-        <%= snippet_code_block "api-dashboard-create.rb" %>
-        <%= snippet_code_block "api-dashboard-create.sh" %>
-        <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-dashboard-create.py" %>
-        <%= snippet_result_code_block "api-dashboard-create.rb" %>
-        <%= snippet_result_code_block "api-dashboard-create.sh" %>
-      </div>
-    </div>
-
-    <!-- update a dashboard -->
-    <h4 id="dashboards-update">Update a Timeboard</h4>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <h5>Arguments</h5>
-        <ul class="arguments">
-          <li>
-            <strong>title [required]</strong>
-            <div>The name of the dashboard.</div>
-          </li>
-          <li>
-            <strong>description [required]</strong>
-            <div>A description of the dashboard's contents.</div>
-          </li>
-          <li>
-            <strong>graphs [required]</strong>
-            <div>A list of graph definitions. Graph definitions follow this form:</div>
-          </li>
-          <ul class="arguments">
-            <li>
-              <strong>title [required]</strong>
-              <div>The name of the graph.</div>
-            </li>
-            <li>
-              <strong>definition [required]</strong>
-              <div>
-                The graph definition. Read the <a href="/graphing/">Graph
-                Guide</a> for more on graphs. Example:
-                <div>
-                  <code>
-                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
-                  </code>
-                </div>
-              </div>
-            </li>
-          </ul>
-        <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
-           <ul class="arguments">
-             <li>
-               <strong>name [required]</strong>
-               <div>The name of the variable.</div>
-             </li>
-             <li>
-               <strong>prefix [optional, default=None]</strong>
-               <div>
-                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
-               </div>
-             </li>
-             <li>
-               <strong>default [optional, default=None]</strong>
-               <div>The default value for the template variable on dashboard load</div>
-             </li>
-           </ul>
-           </ul>
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>PUT /api/v1/dash/:dash_id</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-dashboard-update.py" %>
-        <%= snippet_code_block "api-dashboard-update.rb" %>
-        <%= snippet_code_block "api-dashboard-update.sh" %>
-        <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-dashboard-update.py" %>
-        <%= snippet_result_code_block "api-dashboard-update.rb" %>
-        <%= snippet_result_code_block "api-dashboard-update.sh" %>
-      </div>
-    </div>
-
-    <!-- delete a dashboard -->
-    <h4 id="dashboards-delete">Delete a Timeboard</h4>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>Delete an existing timeboard.</p>
-        <%= no_args %>
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>DELETE /api/v1/dash/:dash_id</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-dashboard-delete.py" %>
-        <%= snippet_code_block "api-dashboard-delete.rb" %>
-        <%= snippet_code_block "api-dashboard-delete.sh" %>
-        <h5>Example Response</h5>
-        <%= no_response %>
-      </div>
-    </div>
-
-    <!-- get a dashboard -->
-    <h4 id="dashboards-get-all">Get all Timeboards</h4>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>Fetch all of your timeboards' definitions.</p>
-        <h5>Arguments</h5>
-        <%= no_args %>
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>GET /api/v1/dash</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-dashboard-get-all.sh" %>
-        <%= snippet_code_block "api-dashboard-get-all.rb" %>
-        <%= snippet_code_block "api-dashboard-get-all.py" %>
-        <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-dashboard-get-all.sh" %>
-        <%= snippet_result_code_block "api-dashboard-get-all.rb" %>
-        <%= snippet_result_code_block "api-dashboard-get-all.py" %>
-      </div>
-    </div>
-
-    <!-- get a dashboard -->
-    <h4 id="dashboards-get">Get a Timeboard</h4>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>Fetch an existing dashboard's definition.</p>
-        <h5>Arguments</h5>
-        <%= no_args %>
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>GET /api/v1/dash/:dash_id</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-dashboard-get.py" %>
-        <%= snippet_code_block "api-dashboard-get.rb" %>
-        <%= snippet_code_block "api-dashboard-get.sh" %>
-        <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-dashboard-get.py" %>
-        <%= snippet_result_code_block "api-dashboard-get.rb" %>
-        <%= snippet_result_code_block "api-dashboard-get.sh" %>
-      </div>
-    </div>
-
     <!--
     =====================================================================
     Monitors
@@ -916,6 +708,213 @@ kind: documentation
         <%= snippet_result_code_block "api-monitor-get-downtimes.py" %>
         <%= snippet_result_code_block "api-monitor-get-downtimes.rb" %>
         <%= snippet_result_code_block "api-monitor-get-downtimes.sh" %>
+      </div>
+    </div>
+
+
+
+    <!--
+   =====================================================================
+    Timeboards
+    ====================================================================
+    -->
+
+    <h3 id="timeboards">Timeboards</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This endpoint allows you to programmatically create, update
+          delete and query timeboards.
+        </p>
+      </div>
+    </div>
+    <h4 id="dashboards-post">Create a Timeboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.") %>
+          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
+          <ul class="arguments">
+            <li>
+              <strong>title [required]</strong>
+              <div>The name of the graph.</div>
+            </li>
+            <li>
+              <strong>definition [required]</strong>
+              <div>
+                The graph definition. Example:
+                <div>
+                  <code>
+                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/dash</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-create.py" %>
+        <%= snippet_code_block "api-dashboard-create.rb" %>
+        <%= snippet_code_block "api-dashboard-create.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-create.py" %>
+        <%= snippet_result_code_block "api-dashboard-create.rb" %>
+        <%= snippet_result_code_block "api-dashboard-create.sh" %>
+      </div>
+    </div>
+
+    <!-- update a dashboard -->
+    <h4 id="dashboards-update">Update a Timeboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <li>
+            <strong>title [required]</strong>
+            <div>The name of the dashboard.</div>
+          </li>
+          <li>
+            <strong>description [required]</strong>
+            <div>A description of the dashboard's contents.</div>
+          </li>
+          <li>
+            <strong>graphs [required]</strong>
+            <div>A list of graph definitions. Graph definitions follow this form:</div>
+          </li>
+          <ul class="arguments">
+            <li>
+              <strong>title [required]</strong>
+              <div>The name of the graph.</div>
+            </li>
+            <li>
+              <strong>definition [required]</strong>
+              <div>
+                The graph definition. Read the <a href="/graphing/">Graph
+                Guide</a> for more on graphs. Example:
+                <div>
+                  <code>
+                    {"requests": [{"q": "system.cpu.idle{*} by {host}"}
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+           <ul class="arguments">
+             <li>
+               <strong>name [required]</strong>
+               <div>The name of the variable.</div>
+             </li>
+             <li>
+               <strong>prefix [optional, default=None]</strong>
+               <div>
+                 The tag prefix associated with the variable.  Only tags with this prefix will appear in the variable dropdown.
+               </div>
+             </li>
+             <li>
+               <strong>default [optional, default=None]</strong>
+               <div>The default value for the template variable on dashboard load</div>
+             </li>
+           </ul>
+           </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-update.py" %>
+        <%= snippet_code_block "api-dashboard-update.rb" %>
+        <%= snippet_code_block "api-dashboard-update.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-update.py" %>
+        <%= snippet_result_code_block "api-dashboard-update.rb" %>
+        <%= snippet_result_code_block "api-dashboard-update.sh" %>
+      </div>
+    </div>
+
+    <!-- delete a dashboard -->
+    <h4 id="dashboards-delete">Delete a Timeboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Delete an existing timeboard.</p>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-delete.py" %>
+        <%= snippet_code_block "api-dashboard-delete.rb" %>
+        <%= snippet_code_block "api-dashboard-delete.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
+    <!-- get a dashboard -->
+    <h4 id="dashboards-get-all">Get all Timeboards</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Fetch all of your timeboards' definitions.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-get-all.sh" %>
+        <%= snippet_code_block "api-dashboard-get-all.rb" %>
+        <%= snippet_code_block "api-dashboard-get-all.py" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-get-all.sh" %>
+        <%= snippet_result_code_block "api-dashboard-get-all.rb" %>
+        <%= snippet_result_code_block "api-dashboard-get-all.py" %>
+      </div>
+    </div>
+
+    <!-- get a dashboard -->
+    <h4 id="dashboards-get">Get a Timeboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Fetch an existing dashboard's definition.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/dash/:dash_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-dashboard-get.py" %>
+        <%= snippet_code_block "api-dashboard-get.rb" %>
+        <%= snippet_code_block "api-dashboard-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-dashboard-get.py" %>
+        <%= snippet_result_code_block "api-dashboard-get.rb" %>
+        <%= snippet_result_code_block "api-dashboard-get.sh" %>
       </div>
     </div>
 
