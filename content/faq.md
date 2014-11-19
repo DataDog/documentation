@@ -1,10 +1,33 @@
 ---
+title: Frequently Asked Questions
+kind: documentation
+sidebar:
+  nav:
+    - header: FAQ Topics
+    - text: Agent
+      href: "/faq/#agent"
+    - text: Alerts
+      href: "/faq/#alerts"
+    - text: API
+      href: "/faq/#api"
+    - text: Architecture
+      href: "/faq/#architecture"
+    - text: AWS
+      href: "/faq/#aws"
+    - text: Billing
+      href: "/faq/#billing"
+    - text: Graphing
+      href: "/faq/#graph"
+    - text: Integrations
+      href: "/faq/#integrations"
+    - text: Metrics
+      href: "/faq/#metrics"
+    - text: Events
+      href: "/faq/#events"
+    - text: Other
+      href: "/faq/#other"
 
-title: Frequently Asked Questions sidebar: nav: - header: FAQ Topics - text: Agent href: "/faq/#agent" - text: Alerts href: "/faq/#alerts" - text: API href: "/faq/#api" - text: Architecture href: "/faq/#architecture" - text: AWS href: "/faq/#aws" - text: Billing href: "/faq/#billing" - text: Graphing href: "/faq/#graph" - text: Integrations href: "/faq/#integrations" - text: Metrics href: "/faq/#metrics" - text: Events href: "/faq/#events" - text: Other
-
-href: "/faq/#other"
--------------------
-
+---
 <!-- Old table of contents
 <ol class="outline">
     <li><a href="#agent">Agent<ol>
@@ -25,6 +48,7 @@ href: "/faq/#other"
 </ol>
 -->
 
+
 <!--
 ===============================================================================
     Agent
@@ -42,40 +66,60 @@ Yes, it is!  You can change the flush interval by updating your agent’s config
 
 #### Is the agent necessary to use Datadog? {#agent-optional}
 
--	No, it is not. You don't have to install an agent if you only want to submit metrics via our API. You can read more about our API [here](/api/).
--	In general, most folks find a lot of value in installing an agent because they get system metrics for free and metrics on common software like mysql, postgres, etc. with just a little bit of configuration. Another advantage is that there is a small statsd server built-in to the agent.
+* No, it is not. You don't have to install an agent if you only want to submit
+metrics via our API. You can read more about our API [here][api].
+* In general, most folks find a lot of value in installing an agent because
+they get system metrics for free and metrics on common software like mysql,
+postgres, etc. with just a little bit of configuration. Another advantage is
+that there is a small statsd server built-in to the agent.
+
 
 #### Can I use my own StatsD client? {#statsd}
 
-Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. You can read more about our clients extra features [here](/guides/dogstatsd/).
+Any StatsD client will work just fine, but using the Datadog DogStatsD client
+will give you a few extra features. You can read more about our clients extra
+features [here][dogstatsd].
+
 
 #### How can I change the hostname {#hostname-change}
 
-You can change the hostname by updating your agent’s configuration file called datadog.conf and replacing the value for the “hostname” key. Use the following link, select your OS in the left column, and go to the [Configuration section](/guides/basic_agent_usage/) to find the location of your agent’s configuration file.
+You can change the hostname by updating your agent’s configuration file called
+datadog.conf and replacing the value for the “hostname” key.  Use the following
+link, select your OS in the left column, and go to
+the [Configuration section][basic_agent_usage] to find the location of your
+agent’s configuration file.
 
 #### How do I uninstall the agent {#agent-uninstall}
 
--	Mac OS:
+* Mac OS:
 
-```
+  ~~~
   $ launchctl unload -w ~/LibraryLaunchAgents/com.datadoghq.Agent.plist
   $ rm -r ~/.datadog-agent
   $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist
-```
+  ~~~
 
--	Windows: You can uninstall the agent in Add/Remove Programs
--	Linux: `$ sudo apt-get remove datadog-agent -y`
--	CentOS 5: `$ sudo yum remove datadog-agent-base`
--	CentOS 6: `$ sudo yum remove datadog-agent`
+* Windows: You can uninstall the agent in Add/Remove Programs
+* Linux: ```$ sudo apt-get remove datadog-agent -y```
+* CentOS 5: ```$ sudo yum remove datadog-agent-base```
+* CentOS 6: ```$ sudo yum remove datadog-agent```
+
+
+
 
 #### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that? {#agent-stopped}
 
-It can take up to 24h for the host to disappear from the infrastructure page, but it will only be part of the host count for billing purposes if we're actually receiving data.
+It can take up to 24h for the host to disappear from the infrastructure page,
+but it will only be part of the host count for billing purposes if we're
+actually receiving data.
 
 #### Other Agent-related questions? {#agent-other}
 
-Please refer to the [Basic Agent Usage Guide](/guides/basic_agent_usage/).
+Please refer to the [Basic Agent Usage Guide][basic_agent_usage].
 
+[api]: /api/
+[dogstatsd]: /guides/dogstatsd/
+[basic_agent_usage]: /guides/basic_agent_usage/
 <!--
 ===============================================================================
     Alerts
@@ -86,18 +130,29 @@ Please refer to the [Basic Agent Usage Guide](/guides/basic_agent_usage/).
 
 #### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? {#no-data}
 
-For the AWS [No Data] errors, the issue here has to do with how frequently we receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch APIs, data is often delayed by 10 or more minutes, so we generally recommend that an alert for an AWS metric be set to have a threshold window of at least 30 minutes or an hour (you can see this in step 3 of alert creation, “during the last…”). Switching the time frame on this alert will resolve this issue, or you can install the agent on some AWS hosts to get more up-to-date data to alert on. Overall, we’re always working towards getting data more efficiently from AWS.
+For the AWS [No Data] errors, the issue here has to do with how frequently we
+receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
+APIs, data is often delayed by 10 or more minutes, so we generally recommend
+that an alert for an AWS metric be set to have a threshold window of at least
+30 minutes or an hour (you can see this in step 3 of alert creation, “during
+the last…”). Switching the time frame on this alert will resolve this issue, or
+you can install the agent on some AWS hosts to get more up-to-date data to
+alert on. Overall, we’re always working towards getting data more efficiently
+from AWS.
+</p>
 
-#### Is it possible to set up alerts based on % utilization? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
+#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
 
--	Yes, this can be done! Here is an example for creating a disk space in use alert when at 80% or above:
-	1.	Select a metric like "system.disk.in_use".
-	2.	Select the "threshold alert" type.
-	3.	For set alert grouping, select "simple alert".
-	4.	Set alert conditions: Select Above and for the value put 0.8.
-	5.	Add a custom message for alert if you'd like.
--	You can read more about setting up alerts [here](/guides/alerting/).
+* Yes, this can be done! Here is an example for creating a disk space in use
+alert when at 80% or above:
+  1. Select a metric like "system.disk.in_use".
+  2. Select the "threshold alert" type.
+  3. For set alert grouping, select "simple alert".
+  4. Set alert conditions: Select Above and for the value put 0.8.
+  5. Add a custom message for alert if you'd like.
+* You can read more about setting up alerts [here][alerting]</a>.
 
+[alerting]: guides/alerting/
 <!--
 ===============================================================================
     API
@@ -108,17 +163,30 @@ For the AWS [No Data] errors, the issue here has to do with how frequently we re
 
 #### What are valid metric names? {#api-metric-names}
 
-Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods. Other characters will get converted to underscores. There is no max length. Unicode is not support. We recommend avoiding spaces. Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are reporting ‘http.nginx.*’, those must be web frontends”).
+Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
+Other characters will get converted to underscores. There is no max length. Unicode is not support.
+We recommend avoiding spaces.
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
+We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
+but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are
+reporting ‘http.nginx.*’, those must be web frontends”).
+
 
 #### What are valid tags? {#api-tags}
 
-Tags must start with a letter, and after that may contain alphanumerics, underscores, minuses, colons, periods and slashes. Other characters will get converted to underscores. Tags can be up to 200 characters long and support unicode. Tags will be converted to lowercase as well.
+Tags must start with a letter, and after that may contain alphanumerics,
+underscores, minuses, colons, periods and slashes. Other characters will get
+converted to underscores. Tags can be up to 200 characters long and support
+unicode. Tags will be converted to lowercase as well.
 
 #### I'm submitting points to the API- anything I should know? {#api-else}
+We store metric points at the 1 second resolution, but we’d prefer if you only
+submitted points every 15 seconds. Any metrics with fractions of a second timestamps
+will get rounded to the nearest second, and if any points have the same timestamp,
+the latest point will overwrite the previous ones.
 
-We store metric points at the 1 second resolution, but we’d prefer if you only submitted points every 15 seconds. Any metrics with fractions of a second timestamps will get rounded to the nearest second, and if any points have the same timestamp, the latest point will overwrite the previous ones.
-
-We have a soft limit of 100 time series per host, where a time series is defined as a unique combination of metric name and tag.
+We have a soft limit of 100 time series per host, where a time series is
+defined as a unique combination of metric name and tag.
 
 <!--
 ===============================================================================
@@ -130,85 +198,107 @@ We have a soft limit of 100 time series per host, where a time series is defined
 
 #### Is Datadog a cloud service or server application? {#arch-cloud-or-server}
 
-It's primarily a cloud service, but if you want to collect data on your servers, there is an Agent you'll need to install. We never make any direct connections to your infrastructure. For cloud integrations, we connect to them using the credentials you provide to us.
+It's primarily a cloud service, but if you want to collect data on your servers,
+there is an Agent you'll need to install. We never make any direct connections
+to your infrastructure. For cloud integrations, we connect to them using the
+credentials you provide to us.
 
 #### How do I delete a host or metric? {#arch-delete}
 
-All hosts or metrics that have not seen data in 24 hours will disappear from the UI; you can still query against them, but it will not appear in drop downs or infrastructure. There is not a way to immediately delete a metric.
+All hosts or metrics that have not seen data in 24 hours will disappear from the UI;
+you can still query against them, but it will not appear in drop downs or infrastructure.
+There is not a way to immediately delete a metric.
 
 #### What's the difference between Graphite's query language and Datadog's? {#arch-graphite-differences}
 
-In terms of metric naming, we differ a little with Graphite in that a metric query is defined by a metric name and a scope, where a scope is one or more tags. To translate:
+In terms of metric naming, we differ a little with Graphite in that a metric
+query is defined by a metric name and a scope, where a scope is one or more tags.
+To translate:
 
-```
+~~~
 <application>.requests.<HTTP Method>.<HTTP Method>.<Handler Method>.mean_90
-```
+~~~
 
 into Datadog, we'd probably say:
 
-```
+~~~
 <application>.requests.mean_90{http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>}
-```
+~~~
 
-Where `<application>.requests.mean_90` is the metric name, and `http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>` are tags, so a concrete example might look like:
 
-```
+Where ```<application>.requests.mean_90``` is the metric name, and
+  ```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```
+    are tags, so a concrete example might look like:
+
+~~~
 foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
-```
+~~~
 
 To do aggregation, we can specify an aggregator as part of the metric query:
 
-```
+~~~
 avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
-```
+~~~
 
-This will graph a single series that's the average of that metric across the intersection of those tags. We support avg, sum, min, max aggregators. If you wanted to see all the possible series for a given tag facet, you can say:
+This will graph a single series that's the average of that metric across the
+intersection of those tags. We support avg, sum, min, max aggregators. If you
+wanted to see all the possible series for a given tag facet, you can say:
 
-```
+~~~
 avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {http_method}
-```
+~~~
 
 Which would graph stacked area series for each http_method value like GET, POST, etc.
 
 #### How are hostnames determined? {#arch-hostnames}
 
-The hostnames are determined by what the Datadog Agent detects; this is fully documented [here](/hostnames/). You can see all names being detected by the Agent by running the info command: `/etc/init.d/datadog-agent info`
+The hostnames are determined by what the Datadog Agent detects; this is fully
+documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
+ ```/etc/init.d/datadog-agent info```
+
 
 #### Tell me about tagging! {#tagging}
 
-Tagging within Datadog is a powerful way to easily gather your metrics and makes scaling your infrastructure a breeze.
+Tagging within Datadog is a powerful way to easily gather your metrics
+and makes scaling your infrastructure a breeze.
 
-For a quick example to demonstrate the power of tagging, perhaps you're looking for a sum of two metrics, which you might normally define as follows:
+For a quick example to demonstrate the power of tagging, perhaps you're
+looking for a sum of two metrics, which you might normally define as follows:
 
-```
+~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
-```
+~~~
 
-What we recommend doing is leaving off the hostname; it will then default to the host that is sending that point, since they’re different hosts it will be treated as different points:
+What we recommend doing is leaving off the hostname; it will then default to the host
+that is sending that point, since they’re different hosts it will be treated as different points:
 
-```
+~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
-```
+~~~
 
 With these tags you can then do:
 
-```
+~~~
 sum:page.views{domain:example.com}
-```
-
+~~~
 which should give the desired result.
 
 To get a breakdown by host, you can do:
 
-```
+~~~
 sum:page.views{domain:example.com} by {host}
-```
+~~~
 
-Further tagging info can be found [here](/guides/metrics/#tags).
+Further tagging info can be found [here][tags]</a>.
 
-For information on AWS tagging, please see [here](/integrations/aws/).
+For information on AWS tagging, please see [here][integration-aws].
+
+
+[hostnames]: /hostnames/
+[tags]: /guides/metrics/#tags
+[integration-aws]: /integrations/aws/
 
 <!-- ====================================================================== -->
 
@@ -222,12 +312,19 @@ For information on AWS tagging, please see [here](/integrations/aws/).
 
 #### I just set up my AWS integration. Why am I seeing duplicate hosts? {#duplicate-hosts}
 
-A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. It takes about 10-20 minutes for the single host’s duplicate names to be aliased. You can read more about hostnames [here](/hostnames/).
+A single host running in EC2 might have an instance ID (i-abcd1234), a generic
+hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a
+meaningful host name provided by an internal DNS server or a config-managed hosts
+file (myhost.mydomain). Datadog creates aliases for host names when there are multiple
+uniquely identifiable names for a single host.  It takes about 10-20 minutes for the
+single host’s duplicate names to be aliased. You can read more about
+hostnames [here][hostnames].
+
 
 #### What metrics will I get from the AWS integration? {#aws-metrics}
 
--	Our crawlers use the Cloudwatch API, and we collect everything available from it.
--	You can read in detail about our AWS integration [here](/integrations/aws/).
+* Our crawlers use the Cloudwatch API, and we collect everything available from it.
+* You can read in detail about our AWS integration [here][integration-aws].
 
 #### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
 
@@ -235,22 +332,29 @@ We do not charge for ELBs (as they can’t be filtered out).
 
 #### Why is there a delay in receiving my data? {#aws-delay}
 
-We have seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission. To check for this, run:
+We have seen a few cases where machines have their clock set further in the
+future or the past, which can sometimes cause problems with metric submission.
+To check for this, run:
 
-```
+~~~
 date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
-```
+~~~
 
-This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
+This will output the current system’s date, and then make a request to our
+endpoint and grab the date on our end. If these are more than a few minutes
+apart, you may want to look at the time settings on your server.
+
 
 #### Can I get my postgres data from RDS? {#aws-rds}
 
 Yes you can! Follow the steps below to set this up:
 
-1.	Install the agent on an ec2 instance that can connect to the RDS instance
-2.	Use the RDS endpoint in <code>conf.d/postgres.yaml</code> (host and port)
-3.	Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
-4.	Restart the agent
+1. Install the agent on an ec2 instance that can connect to the RDS instance
+2. Use the RDS endpoint in <code>conf.d/postgres.yaml</code> (host and port)
+3. Add tags in postgres.yaml: <code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
+4. Restart the agent
+
+
 
 <!--
 ===============================================================================
@@ -258,18 +362,26 @@ Yes you can! Follow the steps below to set this up:
 ===============================================================================
 -->
 
+
 ### Billing {#billing}
+
 
 #### How can I change the Billing contact? {#billing-contact}
 
-You can set a specific email address to receive invoices, even if that address is not a team member within Datadog (invoices@yourcompany.com) [here](https://app.datadoghq.com/account/billing).
+You can set a specific email address to receive invoices, even if that address
+is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
+
 
 #### Where can I get a copy of the invoice? {#billing-invoice}
 
-As an admin you can check out past invoices [here](https://app.datadoghq.com/account/billing_history).
+As an admin you can check out past invoices [here][app-billing-history].
 
-***You can read more about billing [here](/guides/billing/).***
 
+***You can read more about billing [here][billing].***
+
+[app-billing]: https://app.datadoghq.com/account/billing
+[app-billing-history]: https://app.datadoghq.com/account/billing_history
+[billing]: /guides/billing/
 <!--
 ===============================================================================
     Graphing
@@ -280,31 +392,39 @@ As an admin you can check out past invoices [here](https://app.datadoghq.com/acc
 
 #### How do I do arithmetic with grouped metrics? {#graph-sum-grouped}
 
-To graph the sum of `app.foo.bar{env:staging}` and `app.foo.baz{env:staging}` grouped `by {host}`, write a graph query that looks like:
+To graph the sum of ```app.foo.bar{env:staging}``` and ```app.foo.baz{env:staging}```
+grouped ```by {host}```, write a graph query that looks like:
 
-```
+~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
-```
+~~~
+
 
 #### What's the syntax to sum multiple datapoints into a single line? {#graph-mult-points}
 
 You can switch commas separating the queries into plus signs, from:
 
-```
+~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
-```
+~~~
 
 to:
 
-```
+~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
-```
+~~~
 
 #### How do I do graph smoothing? {#graph-smoothing}
 
-You can apply smoothing averages to your series by droping to the JSON editor and adding ‘ewma’, for example: add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.`ewma_20(exception.invalid{*})`. ewma stands for exponentially-moving average and the full list of functions you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+You can apply smoothing averages to your series by droping to the JSON editor and
+adding ‘ewma’, for example:
+add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
+```ewma_20(exception.invalid{*})```.
+ewma stands for exponentially-moving average and the full list of functions
+you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+
 
 <h4>Can I stack CPU metrics on the same graph?</h4>
 <p>
@@ -329,30 +449,34 @@ live and read-only access to just the contents of that screenboard.
 
 <h4>How do I track cron jobs?</h4>
 
-Often, you set cron jobs that trigger some meaningful script that you want to monitor and correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
+Often, you set cron jobs that trigger some meaningful script that you want to monitor and
+correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
 
-```
-0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
-```
+    0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 
-Vacuum is particularly resource-intensive though, so you might want Datadog events for each time they run so you can correlate metrics and other events with vacuums. You can do this with the dogwrap command line tool provided by the dogapi client library:
+Vacuum is particularly resource-intensive though, so you might want Datadog events for
+each time they run so you can correlate metrics and other events with vacuums.
+You can do this with the dogwrap command line tool provided by the dogapi client
+library:
 
-```
-dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
-```
+    dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
 
-This will call the command at the end of the script and send Datadog events if it exits with a non-zero exit code (i.e. an error). <code>--submit_mode all</code> will send events on every run.
+
+This will call the command at the end of the script and
+send Datadog events if it exits with a non-zero exit code (i.e. an error). <code>--submit_mode all</code>
+will send events on every run.
 
 (To get the python client lib you can install it with <code>easy_install dogapi</code>).
 
+
 <!-- ====================================================================== -->
+
 
 <!--
 ===============================================================================
     Integrations
 ===============================================================================
 -->
-
 <h3><a name="integrations" href="#integrations">Integrations</a></h3>
 
 <h4 id="integration-metrics">I set up my integration. Why am I not seeing metrics?</h4>
@@ -533,7 +657,20 @@ For example, if you wanted to find all open chef or nagios errors that mention c
 Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 </p>
 
-<h4>Is it possible to submit events via email?</h4><p> Yes! To get started you need to go the API tab in the<a target="_blank" href="https://app.datadoghq.com/account/settings#api">settings page</a>, create one or more API emails. For a monitoring tool that does not allow you to edit the body of the email you need to create a plain-text email, and have that system or tool send alarms or notifications to this email. For systems that allow you to edit the content of the notification emails, you may use a JSON email. In the body of an email sent to a JSON API email you need to include a well formatted JSON event request as per our existing events API (which you can find more details about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).</p>
+
+<h4>Is it possible to submit events via email?</h4>
+<p>
+Yes!
+To get started you need to go the API tab in the
+<a target="_blank" href="https://app.datadoghq.com/account/settings#api">settings page</a>,
+create one or more API emails.
+For a monitoring tool that does not allow you to edit the body of the email you need to create a plain-text email,
+and have that system or tool send alarms or notifications to this email.
+For systems that allow you to edit the content
+of the notification emails, you may use a JSON email. In the body of an email sent to a JSON API email you need
+to include a well formatted JSON event request as per our existing events API (which you can find more details
+about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
+</p>
 
 <p>
 Here is an example:
@@ -546,16 +683,51 @@ Here is an example:
 }</code></pre>
 </p>
 
+
 <!--
 ===============================================================================
     Other
 ===============================================================================
 -->
-
 <h3><a name="other" href="#other">Other</a></h3>
 
-<h4 id="team">How do I setup my team in Datadog?</h4><p> The admin of the account should enter the email addresses of team members<a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows:<ul><li>When the team member receives the confirmation email, they will be provided with a link to log in directly. The user should not click ‘sign up’ during this process.</li><li>If multiple users from the same organization sign up separately, this will register as different organizations in Datadog. Please reach out to support to have these merged, but please note that all information contained in the account getting merged will not be transferred over.</li><li>The only access controls we have right now are around admin activities (adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.) all users have access to everything; more robust access controls are in our pipeline, but not something we’ve focused a lot of attention on yet.</li><li>To remove a team member use the “disable” button on the same ‘team’ page (only available for admins). You cannot permanently remove users, just disable; disabled users will only be visible to admins on the team page and can’t log in and any session they have open is invalidated. We don’t fully delete them because they might own events, dashboards, etc. which are not supposed to be removed.</li></ul></p>
+<h4 id="team">How do I setup my team in Datadog?</h4>
+<p>
+The admin of the account should enter the email addresses of team members
+<a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows:
+<ul>
+<li>When the team member receives the confirmation email, they will be provided
+with a link to log in directly. The user should not click ‘sign up’ during this process.</li>
+<li>If multiple users from the same organization sign up separately, this will
+register as different organizations in Datadog. Please reach out to support to
+have these merged, but please note that all information contained in the
+account getting merged will not be transferred over.</li>
+<li>The only access controls we have right now are around admin activities
+(adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.)
+all users have access to everything; more robust access controls are in our
+pipeline, but not something we’ve focused a lot of attention on yet.</li>
+<li>To remove a team member use the “disable” button on the same ‘team’ page (only available
+for admins). You cannot permanently remove users, just disable; disabled users will
+only be visible to admins on the team page and can’t log in and any session they have
+open is invalidated. We don’t fully delete them because they might own events,
+dashboards, etc. which are not supposed to be removed.</li>
+</ul>
+</p>
 
-<h4 id="security">Are my data and credentials safe?</h4><p><ul><li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li><li>All traffic is sent over SSL.</li><li>All communication to Datadog is via HTTPS.</li><li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li><li>The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li><li>Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.</li></ul></p>
 
-<h4 id="feature-request">I have a feature request. How can I submit it?</h4><p> You can send the request to support@datadoghq.com and we will add it to our feature request log.</p>
+<h4 id="security">Are my data and credentials safe?</h4>
+<p>
+<ul>
+<li>Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.</li>
+<li>All traffic is sent over SSL.</li>
+<li>All communication to Datadog is via HTTPS.</li>
+<li>The full license agreement can be found <a href="https://app.datadoghq.com/policy/license">here</a>.</li>
+<li>The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.</li>
+<li>Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.</li>
+</ul>
+</p>
+
+<h4 id="feature-request">I have a feature request. How can I submit it?</h4>
+<p>
+You can send the request to support@datadoghq.com and we will add it to our feature request log.
+</p>

@@ -1,6 +1,5 @@
 ---
 title: メールによるイベント情報の送信
-kind: documentation
 sidebar:
   nav:
     - header: メールによるイベント送情のガイド
@@ -12,7 +11,6 @@ sidebar:
       href: "#setup-address"
     - text: Formatting The JSON Data
       href: "#json-data"
-
 ---
 <!-- ## Overview {#overview}
 
