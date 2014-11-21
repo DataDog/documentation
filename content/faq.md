@@ -94,7 +94,7 @@ agent’s configuration file.
 * Mac OS:
 
   ~~~
-  $ launchctl unload -w ~/LibraryLaunchAgents/com.datadoghq.Agent.plist
+  $ launchctl unload -w ~/Library/LaunchAgents/com.datadoghq.Agent.plist
   $ rm -r ~/.datadog-agent
   $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist
   ~~~
