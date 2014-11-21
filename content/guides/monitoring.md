@@ -4,6 +4,8 @@ kind: documentation
 sidebar:
   nav:
     - header: Guide to Monitoring
+    - text: Glossary
+      href: "#glossary"
     - text: Hosts
       href: "#host"
     - text: Metrics
@@ -35,6 +37,17 @@ high-level view of open issues on the
 [Triggered Monitors](https://app.datadoghq.com/monitors/triggered)
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
+
+## Glossary {#glossary}
+
+Here is a quick overview of the different terms used in this guide.
+
+- **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
+- **Check**: Emits one more more statuses.
+- **Monitor**: Sends notifications based on a sequence of check statuses, metric
+  threshold or other alerting conditions.
+- **Monitor type**: host-, metric-, integration-, network-based and custom. See
+  side navigation to drill into a specific type.
 
 ## Creating a Monitor {#create}
 
@@ -267,7 +280,7 @@ Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 
-1. Select your **service check**.
+1. Select your **custom check**.
 
 2. Select **host or tags** that you would like to monitor. The check will run
    for every unique set of tags from all monitored hosts. For example, the
