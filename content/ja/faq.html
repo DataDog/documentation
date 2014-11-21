@@ -296,8 +296,8 @@ We do not charge for ELBs (as they can’t be filtered out).
 
 <h4 id="aws-delay">Why is there a delay in receiving my data?</h4>
 <p>
-We crawl the AWS Cloudwatch API for you, and our crawler runs every 10 minutes. Due to queueing times and API limitations on the Cloudwatch side, delays of 15-16 minutes are normal.
-However, if there are certain AWS namespaces that are very important for you to receive with a reduced latency, shoot us an <a href="mailto:support@datadoghq.com">email</a>.
+If you receive 5-minute metrics from Cloudwatch, there can be up to ~15-20 min delay in receiving your metrics. This is because Cloudwatch makes your data available with a 5-10 minute latency, and we run the crawler every 5 minutes.
+In addition, queuing and Cloudwatch API limitations can add up to another 5 minutes. If you receive 1-minute metrics with Cloudwatch, then their availability delay is about 2 minutes so total latency to view your metrics may be ~10-12 minutes.
 </p>
 
 <h4 id="aws-rds">Can I get my postgres data from RDS?</h4>
