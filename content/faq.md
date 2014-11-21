@@ -332,17 +332,12 @@ We do not charge for ELBs (as they can’t be filtered out).
 
 #### Why is there a delay in receiving my data? {#aws-delay}
 
-We have seen a few cases where machines have their clock set further in the
-future or the past, which can sometimes cause problems with metric submission.
-To check for this, run:
-
-~~~
-date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
-~~~
-
-This will output the current system’s date, and then make a request to our
-endpoint and grab the date on our end. If these are more than a few minutes
-apart, you may want to look at the time settings on your server.
+If you receive 5-minute metrics from Cloudwatch, there can be up to ~15-20 min delay in 
+receiving your metrics. This is because Cloudwatch makes your data available with a 5-10 
+minute latency, and we run the crawler every 5 minutes. In addition, queuing and 
+Cloudwatch API limitations can add up to another 5 minutes. If you receive 1-minute 
+metrics with Cloudwatch, then their availability delay is about 2 minutes so total 
+latency to view your metrics may be ~10-12 minutes.
 
 
 #### Can I get my postgres data from RDS? {#aws-rds}
