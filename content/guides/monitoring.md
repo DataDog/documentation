@@ -12,6 +12,8 @@ sidebar:
       href: "#metric"
     - text: Integrations
       href: "#integration"
+    - text: Process
+      href: "#process"
     - text: Network
       href: "#network"
     - text: Custom Checks
