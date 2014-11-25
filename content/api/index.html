@@ -390,12 +390,13 @@ kind: documentation
               threshold</li>
             </ul>
 
-            <h5>Service Check Queryy</h5>
+            <h5>Service Check Query</h5>
             <code>"check".over(tags).last(count).count_by_status()</code>
             <ul class="arguments">
               <li><code>check</code> name of the check, e.g. datadog.agent.up</li>
-              <li><code>tags</code> one or more tags (comma-separated), or *</li>
-              <li><code>count</code> should be at >= your max threshold (defined
+              <li><code>tags</code> one or more quoted tags (comma-separated),
+              or "*". e.g.: <code>.over("env:prod", "role:db")</code></li>
+              <li><code>count</code> must be at >= your max threshold (defined
               in the <code>options</code>). e.g. if you want to notify on 1
               critical, 3 ok and 2 warn statuses count should be 3.</li>
             </ul>
