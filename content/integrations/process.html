@@ -7,9 +7,13 @@ sidebar:
     - text: Back to System Integrations
       href: "/integrations/system/"
 ---
+
 <div id="int-overview">
 <h3>Overview</h3>
-<p>Capture metrics from specific running processes on a system such as CPU %, I/O metrics, etc.</p>
+<ul>
+  <li>Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.</li>
+  <li>Monitor the status of running processes with <a href="/guides/monitoring#process">Process Monitors</a> (<strong>Requires Datadog Agent >= 5.1.0</strong>).</li>
+</ul>
 
 </div>
 
@@ -24,33 +28,17 @@ From the Agent:
  <p><em>To capture Process metrics you need to install the Datadog Agent.</em></p>
 
 <ol>
-  <li>Install  <b><a href="https://pypi.python.org/pypi/psutil/1.2.1">v1.2.1 of the psutil</a> Python library</b>. The easiest way to install psutil from sources is using easy_install:
-    <pre class="code-block code-block-console" lang="console"><code class="">easy_install psutil</code></pre>
-  </li>
-  <li>Configure the Agent to connect to your processes.<br>
-      Edit <code>/etc/dd-agent/conf.d/process.yaml</code>
+  <li>Configure the Agent to connect to your processes. Our example configuration
+  will monitor the <code>sshd</code> and <code>postgres</code> processes.
+      <p>Edit <code>/etc/dd-agent/conf.d/process.yaml</code></p>
         <pre class="textfile"><code>init_config:
 
-  instances:
-  #  - name: (required) STRING. It will be used to uniquely identify your metrics as
-  #          they will be tagged with this name
-  #    search_string: (required) LIST OF STRINGS. If one of the elements in the list matches,
-  #                    return the counter of all the processes that contain the string
-  #    exact_match: (optional) Boolean. Default to False, if you want to look for an
-  #                 arbitrary string, use exact_match: False, unless use the exact base name
-  #                 of the process
-  #    cpu_check_interval: (optional) CPU percent check interval: 0.1 - 1.0 sec.
-  #
-  # Examples:
-  #
+instances:
    - name: ssh
      search_string: ['ssh', 'sshd']
 
    - name: postgres
-     search_string: ['postgres']
-
-   - name: All
-     search_string: ['All']</code></pre>
+     search_string: ['postgres']</code></pre>
   </li>
 
   <li>Restart the Agent
@@ -69,7 +57,7 @@ From the Agent:
   process
   ---------
       - instance #0 [OK]
-      - Collected 8 metrics & 0 events</code></pre>
+      - Collected 8 metrics &amp; 0 events &amp; 4 service checks</code></pre>
   </li>
 
 </ol>
