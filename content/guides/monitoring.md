@@ -197,8 +197,6 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
-{::comment}
-
 ## Process Monitors {#process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
@@ -226,8 +224,6 @@ point they should notify.
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
-
-{:/comment}
 
 ## Network Monitors {#network}
 
