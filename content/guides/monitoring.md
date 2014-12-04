@@ -333,7 +333,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 ## Monitor FAQs {#faq}
 
-- *Can I manage my monitors progromatically?*
+- *Can I manage my monitors programatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
@@ -341,7 +341,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 - *Can you alert on a function?*
 
-  Not currently but this feature is in the works and should be released by the end of 2014.
+  Not currently but this feature is in the works.
 
 - *Can you alert on an event?*
 
