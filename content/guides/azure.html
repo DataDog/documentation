@@ -4,7 +4,6 @@ kind: documentation
 ---
 
 This guide assumes you are deploying an Azure Cloud Service.
-Also, at the moment, the Agent install requires .net framework 2.0 or 3.5.
 
 ### Install the Agent on instance startup
 
@@ -18,14 +17,6 @@ Also, at the moment, the Agent install requires .net framework 2.0 or 3.5.
     if ERRORLEVEL 1 (
         echo "Datadog Agent service not detected" >> %log%
         echo "Starting the installation" >> %log%
-        reg query "HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5"| findstr /c:"Install    REG_DWORD    0x1"
-
-        if ERRORLEVEL 1 (
-            echo "Installing .NET 3.5" >> %log%
-            powershell -Command "Import-Module ServerManager;Add-WindowsFeature -Name 'Net-Framework-Core'"
-        ) else (
-            echo ".NET 3.5 already installed" >> %log%
-        )
 
         if exist ddagent.msi (
             echo "Already has the installer" >> %log%
