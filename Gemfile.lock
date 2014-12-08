@@ -1,8 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    adsf (1.1.1)
-      rack (>= 1.0.0)
     builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -48,13 +46,12 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
     method_source (0.8.2)
-    mime-types (1.24)
-    mini_portile (0.5.1)
+    mini_portile (0.6.1)
     multi_json (1.10.1)
     nanoc (3.7.3)
       cri (~> 2.3)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
     oj (2.10.2)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -73,7 +70,6 @@ GEM
     slop (3.4.7)
     spoon (0.0.4)
       ffi
-    systemu (2.5.2)
     thor (0.18.1)
     timers (1.1.0)
     w3c_validators (1.2)
@@ -84,14 +80,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  adsf
   builder
   dogapi (~> 1.8.1)
   guard-livereload
   guard-nanoc
   guard-rack
   kramdown
-  mime-types
   nanoc
   nokogiri
   oj
@@ -99,6 +93,4 @@ DEPENDENCIES
   rack-livereload
   rake
   rouge
-  systemu
-  timers
   w3c_validators
