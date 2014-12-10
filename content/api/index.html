@@ -727,23 +727,15 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
-          <li>
-            <strong>scope [optional]</strong>
-            <div>The scope to apply the downtime to, e.g.
-          'host:app2'</div>
-          </li>
-          <li>
-            <strong>start [optional]</strong>
-            <div>POSIX timestamp to start the downtime</div>
-          </li>
-          <li>
-            <strong>end [optional]</strong>
-            <div>POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled</div>
-          </li>
-          <li>
-            <strong>message [optional]</strong>
-            <div>A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events</div>
-          </li>
+          <%= argument 'scope', "The scope to apply the downtime to, e.g.
+          'host:app2'",
+          :default => "original scope" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime",
+          :default => "original start" %>
+          <%= argument 'end', "POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled",
+          :default => "original end" %>
+          <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
+          :default => "original message" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
