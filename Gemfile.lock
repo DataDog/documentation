@@ -8,7 +8,7 @@ GEM
     colored (1.2)
     cri (2.6.1)
       colored (~> 1.2)
-    dogapi (1.8.1)
+    dogapi (1.13.0)
       json (>= 1.5.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -81,7 +81,7 @@ PLATFORMS
 
 DEPENDENCIES
   builder
-  dogapi (~> 1.8.1)
+  dogapi (~> 1.13.0)
   guard-livereload
   guard-nanoc
   guard-rack

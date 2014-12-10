@@ -5,7 +5,7 @@ gem 'nokogiri'
 gem 'w3c_validators'
 gem 'rake'
 gem 'builder'
-gem 'dogapi', '~> 1.8.1'
+gem 'dogapi', '~> 1.13.0'
 gem 'rouge'
 gem 'oj'
 group :development do
