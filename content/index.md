@@ -18,8 +18,8 @@ sidebar:
       href: "/guides/network_checks/"
     - text: Deploying the Agent with Chef
       href: "/guides/chef/"
-    - text: Guide to Alerting
-      href: "/guides/alerting/"
+    - text: Guide to Monitoring
+      href: "/guides/monitoring/"
     - text: Guide to Dashboard Templating
       href: "/guides/templating/"
     - text: Single Sign On With SAML

@@ -582,6 +582,10 @@ kind: documentation
           what, if any, group states to include. Choose from one or more from
           'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
+          <%= argument 'tags', "A comma-separated string indicating
+          what tags, if any, should be used to filter the list of monitors
+          by scope",
+          :default => "None" %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -701,6 +705,8 @@ kind: documentation
           <%= argument 'end', "POSIX timestamp to end the downtime. In the
           default case, the downtime will go until cancelled.",
           :default => "None" %>
+          <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
+          :default => "None" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -713,6 +719,35 @@ kind: documentation
         <%= snippet_result_code_block "api-monitor-schedule-downtime.py" %>
         <%= snippet_result_code_block "api-monitor-schedule-downtime.rb" %>
         <%= snippet_result_code_block "api-monitor-schedule-downtime.sh" %>
+      </div>
+    </div>
+
+    <!-- Update monitor downtime -->
+    <h4 id="update-downtime">Update monitor downtime</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+          <%= argument 'scope', "The scope to apply the downtime to, e.g.
+          'host:app2'",
+          :default => "original scope" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime",
+          :default => "original start" %>
+          <%= argument 'end', "POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled",
+          :default => "original end" %>
+          <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
+          :default => "original message" %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/downtime</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-monitor-update-downtime.py" %>
+        <%= snippet_code_block "api-monitor-update-downtime.rb" %>
+        <%= snippet_code_block "api-monitor-update-downtime.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-monitor-update-downtime.py" %>
+        <%= snippet_result_code_block "api-monitor-update-downtime.rb" %>
+        <%= snippet_result_code_block "api-monitor-update-downtime.sh" %>
       </div>
     </div>
 

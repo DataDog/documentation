@@ -31,6 +31,10 @@ compile '/static/*' do
 
 end
 
+compile '/partials/*' do
+  filter :erb
+end
+
 compile '*' do
   unless item.binary?
     filter :erb
@@ -64,6 +68,10 @@ end
 
 route 'sitemap' do
   item.identifier.chop + '.xml'
+end
+
+route '/partials/*' do
+  nil
 end
 
 route '/tipuesearch/*' do
