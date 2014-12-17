@@ -678,6 +678,10 @@ Here is an example:
 }</code></pre>
 </p>
 
+#### What formatting is available for event text?
+{: #eventformat}
+
+We have adopted Daring Fireball's Markdown throughout the site. To find out more about Markdown, visit the [Markdown docs](http://daringfireball.net/projects/markdown/syntax).
 
 <!--
 ===============================================================================
