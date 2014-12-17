@@ -106,7 +106,7 @@ against with the needed parameters.
 List of parameters:
 
 - name <b>(mandatory)</b>: A name that must be unique across all your HTTP checks
-- url <b>(mandatory)</b>: The url you want to monitor
+- url <b>(mandatory)</b>: The url you want to monitor (Only GET is supported at this time)
 - username (optional): If you want to test pages protected by a basic authentication.
 - password (optional): If you want to test pages protected by a basic authentication.
 - timeout (optional): A timeout for the request, defaulting to 10 seconds.
@@ -123,6 +123,8 @@ For example, if you have the following configuration for window and threshold:
 <%= snippet_code_block("guides-http_check-notify.yaml") %>
 
 You will only be notified if the check fails 3 times within the last 5 tries.
+
+A success is any valid HTTP code less than 400.
 
 <!--
 ======================================================
