@@ -1,9 +1,12 @@
-{'description': 'A new and improved dashboard!',
- 'graphs': [{
-    'definition': {
-       'events': [],
-       'requests': [{'q': 'avg:system.mem.free{*} by {host}'}],
-       'viz': 'timeseries'},
-       'title': 'Average Memory Free By Host'}],
- 'id': 2524,
- 'title': 'My Dashboard'}
+{'dash': {'description': 'A new and improved timeboard!',
+  'graphs': [{'definition': {'events': [],
+     'requests': [{'q': 'avg:system.mem.free{*} by {host}'}],
+     'viz': 'timeseries'},
+    'title': 'Average Memory Free By Host'}],
+  'id': 4953,
+  'template_variables': [{'default': 'host:my-host',
+    'name': 'host1',
+    'prefix': 'host'}],
+  'title': 'My Timeboard'},
+ 'resource': '/api/v1/dash/4953',
+ 'url': '/dash/dash/4953'}

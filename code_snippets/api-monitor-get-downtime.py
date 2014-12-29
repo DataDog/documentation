@@ -7,4 +7,5 @@ options = {
 
 initialize(**options)
 
-api.Tag.delete('hostname')
+# Get a downtime
+api.Downtime.get(2910)
