@@ -65,7 +65,7 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [metrics-datadog][9] - a backend to yammers's [metrics][9] library written by [Coursera][10]. 
   * [metrics-datadog][11] - a backend to codahale's [metrics][11] library extended by [Bazaarvoice][12]. 
   * [Lassie][13] - a Java screenboard API client by [Bazaarvoice][12]. 
-  * [java-dogstatsd-client] [59] - client with support for events and blocking metrics written by [arnabk] [60].
+  * [java-dogstatsd-client] [59] - DogStatsD Client for Java to submit both Events and Metrics written by [arnabk] [60].
 
 #### Node.js
 
