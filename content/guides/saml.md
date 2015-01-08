@@ -94,15 +94,3 @@ The normal workflow is that when the Datadog url is loaded, the browser is redir
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute. 
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
-
-### SAML Strict Mode
-For an org that has the saml_strict_mode feature flag enabled, users can not log in using a username and password on the login page - they must log in via their org's SAML IdP.
-
-Normally users who are invited to an org using SAML will not have a password, so they can't use the login page anyway. However, there are possibilities where a user at a SAML org can have a password
-
-* The user was created before the Org enabled SAML
-* Support added a temporary password and the user reset it In these cases (or in any case where a user has a password in the postgres database) a user can log in either with SAML (via the IdP) or with the login page using their Datadog username and password.
-
-If the saml_strict_mode feature flag is enabled, users can NOT log in with their Datadog username and password, even if a password is set. They must log in via the org's IdP.
-
-SAML Strict Mode does not apply to admin users. Admin users will be able to login via username and password on login even if saml_strict_mode is enabled for that org.
