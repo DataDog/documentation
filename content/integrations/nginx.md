@@ -7,9 +7,8 @@ sidebar:
     - text: Back to Overview
       href: "/integrations/"
 ---
-<div id="int-overview">
-<h3>Overview</h3>
-</div>
+### Overview
+
 
 Connect NGINX to Datadog in order to:
 
@@ -25,11 +24,20 @@ $ nginx -V |& grep http_stub_status_module
 
 If you see some output with `configure arguments:` and lots of options, then you have it enabled.  Once you have a status-enabled version of nginx, you can set up a URL with for the status module:
 
-    location /nginx_status {
-        stub_status;
+    server {
+      listen 80;
+      server_name localhost;
+
+      access_log off;
+      allow 127.0.0.1;
+      deny all;
+
+      location /nginx_status {
+        stub_status on;
+      }
     }
 
-For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAMl config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
+For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
 
 The following metrics are collected by default via the stub status module:
 

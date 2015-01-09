@@ -4,6 +4,8 @@ kind: documentation
 sidebar:
   nav:
     - header: Guide to Monitoring
+    - text: Glossary
+      href: "#glossary"
     - text: Hosts
       href: "#host"
     - text: Metrics
@@ -35,6 +37,17 @@ high-level view of open issues on the
 [Triggered Monitors](https://app.datadoghq.com/monitors/triggered)
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
+
+## Glossary {#glossary}
+
+Here is a quick overview of the different terms used in this guide.
+
+- **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
+- **Check**: Emits one more more statuses.
+- **Monitor**: Sends notifications based on a sequence of check statuses, metric
+  threshold or other alerting conditions.
+- **Monitor type**: host-, metric-, integration-, network-based and custom. See
+  side navigation to drill into a specific type.
 
 ## Creating a Monitor {#create}
 
@@ -184,8 +197,6 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
-{::comment}
-
 ## Process Monitors {#process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
@@ -213,8 +224,6 @@ point they should notify.
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
-
-{:/comment}
 
 ## Network Monitors {#network}
 
@@ -267,7 +276,7 @@ Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 
-1. Select your **service check**.
+1. Select your **custom check**.
 
 2. Select **host or tags** that you would like to monitor. The check will run
    for every unique set of tags from all monitored hosts. For example, the
@@ -320,7 +329,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 ## Monitor FAQs {#faq}
 
-- *Can I manage my monitors progromatically?*
+- *Can I manage my monitors programatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
@@ -328,7 +337,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 - *Can you alert on a function?*
 
-  Not currently but this feature is in the works and should be released by the end of 2014.
+  Not currently but this feature is in the works.
 
 - *Can you alert on an event?*
 
