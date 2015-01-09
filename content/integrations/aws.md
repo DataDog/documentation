@@ -33,23 +33,23 @@ required to take full advantage of the Datadog AWS integration. As we add other 
       "Statement": [
         {
           "Action": [
-            "cloudtrail:DescribeTrails"
-            "cloudtrail:GetTrailStatus"
-            "cloudwatch:Describe*"
-            "cloudwatch:Get*"
-            "cloudwatch:List*"
-            "ec2:Describe*"
-            "elasticloadbalancing:Describe*"
-            "iam:Get*"
-            "iam:List*"
-            "rds:Describe*"
-            "rds:List*"
-            "ses:Get*"
-            "ses:List*"
-            "sns:Get*"
-            "sns:List*"
-            "sqs:GetQueueAttributes"
-            "sqs:ListQueues"
+            "cloudtrail:DescribeTrails",
+            "cloudtrail:GetTrailStatus",
+            "cloudwatch:Describe*",
+            "cloudwatch:Get*",
+            "cloudwatch:List*",
+            "ec2:Describe*",
+            "elasticloadbalancing:Describe*",
+            "iam:Get*",
+            "iam:List*",
+            "rds:Describe*",
+            "rds:List*",
+            "ses:Get*",
+            "ses:List*",
+            "sns:Get*",
+            "sns:List*",
+            "sqs:GetQueueAttributes",
+            "sqs:ListQueues",
             "sqs:ReceiveMessage"
           ],
           "Effect": "Allow",
