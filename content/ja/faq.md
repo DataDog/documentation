@@ -112,19 +112,19 @@ datadog.confというDatadog Agentの設定ファイル内の“hostname”の�
   ~~~
 
 * Windows: You can uninstall the agent in Add/Remove Programs
-* Linux: ```$ sudo apt-get remove datadog-agent -y```
-* CentOS 5: ```$ sudo yum remove datadog-agent-base```
-* CentOS 6: ```$ sudo yum remove datadog-agent```-->
+* Linux: ~~~$ sudo apt-get remove datadog-agent -y~~~
+* CentOS 5: ~~~$ sudo yum remove datadog-agent-base~~~
+* CentOS 6: ~~~$ sudo yum remove datadog-agent~~~-->
 
 #### Datadog Agentは、どのようにアンインストールすればよいですか。 {#agent-uninstall}
 
 -	Mac OS:
 
-```
+~~~
   $ launchctl unload -w ~/LibraryLaunchAgents/com.datadoghq.Agent.plist
   $ rm -r ~/.datadog-agent
   $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist
-```
+~~~
 
 -	Windows: コントルールパネルのプログラムの追加/削除で削除できます。
 -	Linux: `$ sudo apt-get remove datadog-agent -y`
@@ -323,8 +323,8 @@ into Datadog, we'd probably say:
 ~~~
 
 
-Where ```<application>.requests.mean_90``` is the metric name, and
-  ```http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>```
+Where ~~~<application>.requests.mean_90~~~ is the metric name, and
+  ~~~http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>~~~
     are tags, so a concrete example might look like:
 
 ~~~
@@ -354,37 +354,37 @@ Graphiteとは以下のように、クエリの記述方法が少々異なりま
 
 Graphiteの次の例では:
 
-```
+~~~
 <application>.requests.<HTTP Method>.<HTTP Method>.<Handler Method>.mean_90
-```
+~~~
 
 Datadogでは、以下のようになります:
 
-```
+~~~
 <application>.requests.mean_90{http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>}
-```
+~~~
 
 `<application>.requests.mean_90`は、メトリクス名になり、`http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>`は、タグになります。
 
 従って、具体的に書くと次のようになります:
 
-```
+~~~
 foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
-```
+~~~
 
 先のクエリを使って集計をするには、先頭にaggregatorを追記します:
 
-```
+~~~
 avg:foo.requests.mean_90{http_method:GET, handler_class:ThingHandler, handler_method:list}
-```
+~~~
 
 This will graph a single series that's the average of that metric across the　intersection of those tags. Datadogでは、メトリクスの集計用に最小値(min)、最大値(max)、合計値(sum)、平均値(avg)のaggregatorを準備しています。
 
 すべてのタグ要素について時系列のグラフを見たい場合は、次のようなクエリを記述することができます:
 
-```
+~~~
 avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {http_method}
-```
+~~~
 
 このクエリは、GET、POSTなどの各http_methodを積み重ねた時系列のグラフを表示します。
 
@@ -392,7 +392,7 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 The hostnames are determined by what the Datadog Agent detects; this is fully
 documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
- ```/etc/init.d/datadog-agent info```-->
+ ~~~/etc/init.d/datadog-agent info~~~-->
 
 #### ホスト名はどのように判定され、設定されますか。 {#arch-hostnames}
 
@@ -442,31 +442,31 @@ For information on AWS tagging, please see [here][integration-aws].-->
 
 タグ付の有用性を説明するために簡単な例を紹介します。 例えば、あるメトリクスの合計が欲しいとします。 まずタグ付の設定をする前は、次のようになっていたとします:
 
-```
+~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
-```
+~~~
 
 Datadogが推奨しているタグ付けの方法は、ホスト名の"example.com"を残し、`tags=['domain:example.com']`と記述する方法です。 it will then default to the host that is sending that point, since they’re different　hosts it will be treated as different points:
 
-```
+~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
-```
+~~~
 
 タグを使って、次のように合計を計算します:
 
-```
+~~~
 sum:page.views{domain:example.com}
-```
+~~~
 
 これで、各メトリクスの合計を一つの数字にまとめたグラフを表示することができます。
 
 又、合計を表示する際に各メトリクスの内訳を表示したい場合は、次のように記述することもできます:
 
-```
+~~~
 sum:page.views{domain:example.com} by {host}
-```
+~~~
 
 タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリクスの送信"ページの[tag](/ja/guides/metrics/#tags)の項目を参照してください。 AWSのタグ付けに関する詳細につては、["AWS Integration"](/ja/integrations/aws/)のページを参照してください。
 
@@ -535,9 +535,9 @@ apart, you may want to look at the time settings on your server.-->
 
 Datadog側の時間とインスタンスの時間の差をチェックするには、次のコマンドを実行します:
 
-```
+~~~
 date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
-```
+~~~
 
 このコマンドは、現在ログインしているシステムの現在時間を表示し、その後Datadog側へリクエストを発行し、時間をgrepして表示します。もしも、これら二つの時間の差が数分以上ある場合は、インスタンスの現在時間を正しく設定し直してください。
 
@@ -610,8 +610,8 @@ As an admin you can check out past invoices [here][app-billing-history].
 
 #### How do I do arithmetic with grouped metrics? {#graph-sum-grouped}
 
-To graph the sum of ```app.foo.bar{env:staging}``` and ```app.foo.baz{env:staging}```
-grouped ```by {host}```, write a graph query that looks like:
+To graph the sum of ~~~app.foo.bar{env:staging}~~~ and ~~~app.foo.baz{env:staging}~~~
+grouped ~~~by {host}~~~, write a graph query that looks like:
 
 ~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
@@ -623,10 +623,10 @@ metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 
 `by {host}`でグループ化した`app.foo.bar{env:staging}`メトリクス と `app.foo.baz{env:staging}`メトリクスの足し算の結果をグラフ表示するクエリは、次のようになります:
 
-```
+~~~
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 
-```
+~~~
 
 <!--#### What's the syntax to sum multiple datapoints into a single line? {#graph-mult-points}
 
@@ -652,18 +652,18 @@ to:
 
 置き換える前:
 
-```
+~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
 
-```
+~~~
 
 置き換えた後:
 
-```
+~~~
 "q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
-```
+~~~
 
 <!--#### How do I do graph smoothing? {#graph-smoothing}
 
@@ -671,7 +671,7 @@ You can apply smoothing averages to your series by droping to the JSON editor an
 adding ‘ewma’, for example:
 add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
 
-```ewma_20(exception.invalid{*})```.
+~~~ewma_20(exception.invalid{*})~~~.
 ewma stands for exponentially-moving average and the full list of functions
 you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.-->
 
@@ -741,16 +741,16 @@ will send events on every run.
 
 他のメトリクスと相関してホストの状況を監視するためにcron jobにスクリプトを設定していることはよくあると思います。 例えば、Postgresのテーブルを吸い上げるために、cron.dにVacuumというスクリプトを設定していたとします:
 
-```
+~~~
 0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 
-```
+~~~
 
 このVacuumスクリプトはリソースを大量に消費するので、そのスクリプトが実行されたタイミングを他のメトリクスやイベントと関連付けておきたいとします。そこで、スクリプト実行の際に、Datadogへイベントの通知をすることにします。このイベント通知は、dogapiのクライアントライブラリーで提供されているdogwrap command line toolを使うことによって実現できます:
 
-```
+~~~
 dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode all "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
-```
+~~~
 
 cronに上記のように実行コマンドを記述すると、Vacuumスクリプトが実行される度に、Datadogにイベントが通知されます。`--submit_mode errors`と置き換えると、スクリプトが異常終了した時のみイベントの通知をすることができます。
 
