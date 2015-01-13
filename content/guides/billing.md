@@ -84,7 +84,6 @@ This is per active host in Datadog, whether or not it's running the agent.
 We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
 
-
 > You tell us how many hosts you will run each month and we will bill you for that baseline number of
 > hosts at $15 per host (you can change this number at the beginning of each
 > month if you like). Then for any hosts beyond the committed number previously
@@ -95,8 +94,6 @@ of monthly and hourly. Here is how that hybrid works:
 > reporting data once every hour, thus the minimum increment for an hourly server
 > is one hour. If that number exceeds your monthly commit, we just charge overage
 > for the excess hosts.
-
-
 
 ##### Do non-reporting or inactive hosts count?
 
@@ -113,13 +110,16 @@ by its tags).
 
 ##### How will an AWS integration impact my monthly billing?
 
-We bill for all hosts running the agent as well as any hosts picked up via the
-AWS integration (not ELBs or other namespaces). You will not get double-charged
-if you are running the agent on a host <b>AND</b> picking it up via AWS integration.
+We bill for all hosts running the **Agent** as well as any **EC2 instance**
+picked up by the AWS integration. You will not get double-charged if
+you are running the agent on an EC2 instance picked up by AWS
+integration.
 
-If you would like to control what metrics you are aggregating via AWS integration,
-select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a>
-and customize accordingly.
+Other AWS resources (e.g. ELB, EBS, RDS, Dynamo) are not currently
+part of monthly billing. Note that this may change in the future.
+
+If you would like to control which AWS metrics you are collecting,
+select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a> and customize accordingly.
 
 ##### How will a VMware integration impact my monthly billing?
 
