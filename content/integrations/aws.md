@@ -17,10 +17,10 @@ sidebar:
 
 
 ### Configure CloudWatch
-{: #cloudwatch} 
+{: #cloudwatch}
 
 The recommended way to configure Cloudwatch in Datadog is to create a
-new user via the [IAM Console][1] and grant that user (or group of users) a set of permissions. 
+new user via the [IAM Console][1] and grant that user (or group of users) a set of permissions.
 
 At the very least, you need to grant **Amazon EC2, Cloudwatch *read-only* access**.
 
@@ -33,23 +33,23 @@ required to take full advantage of the Datadog AWS integration. As we add other 
       "Statement": [
         {
           "Action": [
-            "cloudtrail:DescribeTrails"
-            "cloudtrail:GetTrailStatus"
-            "cloudwatch:Describe*"
-            "cloudwatch:Get*"
-            "cloudwatch:List*"
-            "ec2:Describe*"
-            "elasticloadbalancing:Describe*"
-            "iam:Get*"
-            "iam:List*"
-            "rds:Describe*"
-            "rds:List*"
-            "ses:Get*"
-            "ses:List*"
-            "sns:Get*"
-            "sns:List*"
-            "sqs:GetQueueAttributes"
-            "sqs:ListQueues"
+            "cloudtrail:DescribeTrails",
+            "cloudtrail:GetTrailStatus",
+            "cloudwatch:Describe*",
+            "cloudwatch:Get*",
+            "cloudwatch:List*",
+            "ec2:Describe*",
+            "elasticloadbalancing:Describe*",
+            "iam:Get*",
+            "iam:List*",
+            "rds:Describe*",
+            "rds:List*",
+            "ses:Get*",
+            "ses:List*",
+            "sns:Get*",
+            "sns:List*",
+            "sqs:GetQueueAttributes",
+            "sqs:ListQueues",
             "sqs:ReceiveMessage"
           ],
           "Effect": "Allow",
@@ -58,7 +58,7 @@ required to take full advantage of the Datadog AWS integration. As we add other 
       ]
     }
 
-Once these credentials are configured within AWS, go into the [AWS integration tile][2] within Datadog to pull this data in. 
+Once these credentials are configured within AWS, go into the [AWS integration tile][2] within Datadog to pull this data in.
 
 
 
@@ -73,28 +73,28 @@ AWS CloudTrail records AWS API calls for your account in log files. Datadog can 
 #### How to configure CloudTrail?
 {: #config-cloudtrail}
 
-First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. See above explanation. Besides the instructions below you will also have to configure the separate [Cloudtrail integration tile][3] within Datadog. 
+First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. See above explanation. Besides the instructions below you will also have to configure the separate [Cloudtrail integration tile][3] within Datadog.
 
-CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from. 
+CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from.
 
 
-1. [Go to your CloudTrail console][4] to enable it. Then select the S3 bucket you wish to use as follows: 
-![](/static/images/cloudtrail_config.png) 
-2. Your user must have access to the S3 bucket you have selected. To grant your user read-only access to your bucket, you would paste the following policy in the IAM console: 
+1. [Go to your CloudTrail console][4] to enable it. Then select the S3 bucket you wish to use as follows:
+![](/static/images/cloudtrail_config.png)
+2. Your user must have access to the S3 bucket you have selected. To grant your user read-only access to your bucket, you would paste the following policy in the IAM console:
 
-        { "Statement": [ 
-          { 
-            "Action": [ 
-              "s3:ListBucket", 
-              "s3:GetBucketLocation", 
-              "s3:GetObject" 
-            ], 
-            "Effect": "Allow", 
-            "Resource": [ 
-              "arn:aws:s3:::your-s3-bucket-name", 
-              "arn:aws:s3:::your-s3-bucket-name/*" 
-            ] 
-          } ] 
+        { "Statement": [
+          {
+            "Action": [
+              "s3:ListBucket",
+              "s3:GetBucketLocation",
+              "s3:GetObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "arn:aws:s3:::your-s3-bucket-name",
+              "arn:aws:s3:::your-s3-bucket-name/*"
+            ]
+          } ]
         }
 
 
@@ -103,115 +103,115 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
 Below is the list of events that Datadog will collect from CloudTrail and display in your event stream. If you would like to see other events that are not mentionned here, please reach out to [our support team][5].
 
 
-**EC2 Actions**  
-AttachVolume  
-AuthorizeSecurityGroup  
-CreateSecurityGroup  
-CreateVolume  
-CreateTags  
-DeleteVolume  
-DeleteTags  
-DetachVolume  
-RebootInstances  
-RevokeSecurityGroupEgress  
-RevokeSecurityGroupIngress  
-RunInstances  
-StartInstances  
-StopInstances  
+**EC2 Actions**
+AttachVolume
+AuthorizeSecurityGroup
+CreateSecurityGroup
+CreateVolume
+CreateTags
+DeleteVolume
+DeleteTags
+DetachVolume
+RebootInstances
+RevokeSecurityGroupEgress
+RevokeSecurityGroupIngress
+RunInstances
+StartInstances
+StopInstances
 TerminateInstances
 
-**RDS Actions**  
-CreateDBInstance  
-RebootDBInstance  
-ModifyDBInstance  
-DeleteDBInstance  
+**RDS Actions**
+CreateDBInstance
+RebootDBInstance
+ModifyDBInstance
+DeleteDBInstance
 
-**IAM Actions**  
-AddRoleToInstanceProfile  
-AddUserToGroup  
-ChangePassword  
-CreateAccessKey  
-CreateAccountAlias  
-CreateGroup  
-CreateInstanceProfile  
-CreateLoginProfile  
-CreateRole  
-CreateSAMLProvider  
-CreateUser  
-CreateVirtualMFADevice  
-DeleteAccessKey  
-DeleteAccountAlias  
-DeleteAccountPasswordPolicy  
-DeleteGroup  
-DeleteGroupPolicy  
-DeleteInstanceProfile  
-DeleteLoginProfile  
-DeleteRole  
-DeleteRolePolicy  
-DeleteSAMLProvider  
-DeleteServerCertificate  
-DeleteSigningCertificate  
-DeleteUser  
-DeleteUserPolicy  
-DeleteVirtualMFADevice  
-PutGroupPolicy  
-PutRolePolicy  
-PutUserPolicy  
-RemoveRoleFromInstanceProfile  
-RemoveUserFromGroup  
-UpdateAccessKey  
-UpdateAccountPasswordPolicy  
-UpdateAssumeRolePolicy  
-UpdateGroup  
-UpdateLoginProfile  
-UpdateSAMLProvider  
-UpdateServerCertificate  
-UpdateSigningCertificate  
-UpdateUser  
-UpdateServerCertificate  
-UpdateSigningCertificate  
+**IAM Actions**
+AddRoleToInstanceProfile
+AddUserToGroup
+ChangePassword
+CreateAccessKey
+CreateAccountAlias
+CreateGroup
+CreateInstanceProfile
+CreateLoginProfile
+CreateRole
+CreateSAMLProvider
+CreateUser
+CreateVirtualMFADevice
+DeleteAccessKey
+DeleteAccountAlias
+DeleteAccountPasswordPolicy
+DeleteGroup
+DeleteGroupPolicy
+DeleteInstanceProfile
+DeleteLoginProfile
+DeleteRole
+DeleteRolePolicy
+DeleteSAMLProvider
+DeleteServerCertificate
+DeleteSigningCertificate
+DeleteUser
+DeleteUserPolicy
+DeleteVirtualMFADevice
+PutGroupPolicy
+PutRolePolicy
+PutUserPolicy
+RemoveRoleFromInstanceProfile
+RemoveUserFromGroup
+UpdateAccessKey
+UpdateAccountPasswordPolicy
+UpdateAssumeRolePolicy
+UpdateGroup
+UpdateLoginProfile
+UpdateSAMLProvider
+UpdateServerCertificate
+UpdateSigningCertificate
+UpdateUser
+UpdateServerCertificate
+UpdateSigningCertificate
 
-**VPC Actions**  
-AssociateDhcpOptions  
-AssociateRouteTable  
-AttachVpnGateway  
-CreateCustomerGateway  
-CreateDhcpOptions  
-CreateRouteTable  
-CreateVpnConnection  
-CreateVpnConnectionRoute  
-CreateVpnGateway  
-DeleteCustomerGateway  
-DeleteDhcpOptions  
-DeleteRouteTable  
-DeleteVpnConnection  
-DeleteVpnConnectionRoute  
-DeleteVpnGateway  
-DetachVpnGateway  
-DisassociateRouteTable  
-ReplaceRouteTableAssociation  
+**VPC Actions**
+AssociateDhcpOptions
+AssociateRouteTable
+AttachVpnGateway
+CreateCustomerGateway
+CreateDhcpOptions
+CreateRouteTable
+CreateVpnConnection
+CreateVpnConnectionRoute
+CreateVpnGateway
+DeleteCustomerGateway
+DeleteDhcpOptions
+DeleteRouteTable
+DeleteVpnConnection
+DeleteVpnConnectionRoute
+DeleteVpnGateway
+DetachVpnGateway
+DisassociateRouteTable
+ReplaceRouteTableAssociation
 
-**ELB Actions**  
-ApplySecurityGroupsToLoadBalancer  
-AttachLoadBalancerToSubnets  
-ConfigureHealthCheck  
-CreateAppCookieStickinessPolicy  
-CreateLBCookieStickinessPolicy  
-CreateLoadBalancer  
-CreateLoadBalancerListeners  
-CreateLoadBalancerPolicy  
-DeleteLoadBalancer  
-DeleteLoadBalancerListeners  
-DeleteLoadBalancerPolicy  
-DeregisterInstancesFromLoadBalancer  
-DetachLoadBalancerFromSubnets  
-DisableAvailabilityZonesForLoadBalancer  
-EnableAvailabilityZonesForLoadBalancer  
-ModifyLoadBalancerAttributes  
-RegisterInstancesWithLoadBalancer  
-SetLoadBalancerListenerSSLCertificate  
-SetLoadBalancerPoliciesForBackendServer  
-SetLoadBalancerPoliciesOfListener  
+**ELB Actions**
+ApplySecurityGroupsToLoadBalancer
+AttachLoadBalancerToSubnets
+ConfigureHealthCheck
+CreateAppCookieStickinessPolicy
+CreateLBCookieStickinessPolicy
+CreateLoadBalancer
+CreateLoadBalancerListeners
+CreateLoadBalancerPolicy
+DeleteLoadBalancer
+DeleteLoadBalancerListeners
+DeleteLoadBalancerPolicy
+DeregisterInstancesFromLoadBalancer
+DetachLoadBalancerFromSubnets
+DisableAvailabilityZonesForLoadBalancer
+EnableAvailabilityZonesForLoadBalancer
+ModifyLoadBalancerAttributes
+RegisterInstancesWithLoadBalancer
+SetLoadBalancerListenerSSLCertificate
+SetLoadBalancerPoliciesForBackendServer
+SetLoadBalancerPoliciesOfListener
 
 
 
@@ -238,7 +238,7 @@ To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. 
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
 
-To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve 
+To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
 written a bit about this [here][7],  especially in relation to CloudWatch.
 
    [1]: https://console.aws.amazon.com/iam/home#s=Home
