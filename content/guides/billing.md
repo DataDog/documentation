@@ -111,8 +111,8 @@ by its tags).
 ##### How will an AWS integration impact my monthly billing?
 
 We bill for all hosts running the **Agent** as well as any **EC2 instance**
-picked up by the AWS integration. You will not get double-charged if
-you are running the agent on an EC2 instance picked up by AWS
+picked up by the AWS integration. You will not get charged twice if
+you are running the Agent on an EC2 instance picked up by the AWS
 integration.
 
 Other AWS resources (e.g. ELB, EBS, RDS, Dynamo) are not currently
