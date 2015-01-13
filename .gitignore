@@ -1,6 +1,7 @@
 crash.log
 output/
 tmp/
+crash.log
 vendor/*
 .bundle/*
 .rvmrc
@@ -10,3 +11,4 @@ vendor/*
 .ruby-gemset
 .rbenv
 .idea
+output.tgz

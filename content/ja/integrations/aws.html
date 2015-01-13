@@ -11,7 +11,7 @@ sidebar:
       href: "#troubleshooting"
     - header: Integrations
     - text: Back to Overview
-      href: "/integrations/"
+      href: "/ja/integrations/"
 ---
 
 
@@ -80,8 +80,8 @@ specifications:
       ]
     }
 
-Once these credentials are configured within AWS, go into the 
-<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services">AWS integration tile</a> 
+Once these credentials are configured within AWS, go into the
+<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services">AWS integration tile</a>
 within Datadog to pull this data in.
 
 ### <a name="cloudtrail"></a>CloudTrail integration
@@ -93,7 +93,7 @@ AWS CloudTrail records AWS API calls for your account in log files. Datadog can 
 #### How to configure CloudTrail?
 
 First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. <a href="#cloudwatch">See above explanation</a>.
-Besides the instructions below you will also have to configure the separate 
+Besides the instructions below you will also have to configure the separate
 <a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/cloudtrail">Cloudtrail integration tile</a> within Datadog.
 
 CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from.
@@ -264,20 +264,20 @@ result.</li>
 #### Metrics delayed?
 
 
-<p>When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may 
+<p>When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may
 see a slight delay in metrics from AWS due to some constraints that exist for their API.</p>
 
-<p>To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch 
-APIs have a rate limit that varies based on the combination of authentication credentials, region, 
-and service. Metrics are made available by AWS dependent on the account level. For example, if 
-you are paying for "detailed metrics" within AWS, they are available more quickly. This level 
-of service for detailed metrics also applies to granularity, with some metrics being 
+<p>To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch
+APIs have a rate limit that varies based on the combination of authentication credentials, region,
+and service. Metrics are made available by AWS dependent on the account level. For example, if
+you are paying for "detailed metrics" within AWS, they are available more quickly. This level
+of service for detailed metrics also applies to granularity, with some metrics being
 available per minute and others per five minutes.</p>
 
-<p>On the Datadog side, we do have the ability to prioritize certain metrics within an account 
-to pull them in faster, depending on the circumstances. Please contact 
+<p>On the Datadog side, we do have the ability to prioritize certain metrics within an account
+to pull them in faster, depending on the circumstances. Please contact
 <a href="mailto:support@datadoghq.com">support@datadoghq.com</a> for more info on this.</p>
 
-<p>To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve 
-written a bit about this <a target="_blank" href="http://www.datadoghq.com/2013/10/dont-fear-the-agent">here</a>, 
+<p>To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
+written a bit about this <a target="_blank" href="http://www.datadoghq.com/2013/10/dont-fear-the-agent">here</a>,
 especially in relation to CloudWatch.</p>
