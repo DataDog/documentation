@@ -1,5 +1,5 @@
 ---
-title: DD-Agentの基本的な使用方法 (OS X）
+title: Agentの基本的な使用方法 (OS X）
 ---
 
 <!--
@@ -21,13 +21,13 @@ instructions accordingly if you decide to move it to another location. -->
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Datadog Agentの基本的な機能を概説します。
-まだDatadog Agent のインストール済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
+このガイドでは、Datadog Agentの基本的な機能を説明します。
+まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
 <a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページのインストール手順も合わせてご参照ください。
 
-Datadog Agentは、仮の設置パスとして<code> '~/.datadog-agent'</code>以下のディレクトリーにインンストールされます。この仮のディレクトリーは自由に移動することができます。
+Datadog Agentは、仮の設置パスとして<code> '~/.datadog-agent'</code>以下のディレクトリにインストールされます。このディレクトリは自由に変更することができます。
 このガイドでは、Datadog Agent は、この仮の設置パスに存在していることを前提としています。
-ディレクトリーを移動した場合は、そのパスに合わせて手順を変更してください。
+ディレクトリを変更した場合は、そのパスに合わせて手順を変更してください。
 
 
 <!--
@@ -52,15 +52,15 @@ To restart the Agent:
 
 <h3 id="starting_and_stopping_the_agent">Datadog Agent の起動と停止</h3>
 
-手動で Datadog Agent を起動する場合:
+Datadog Agent を起動する:
 
 <%= console '~/.datadog-agent/bin/agent start' %>
 
-停止する場合:
+Datadog Agent を停止する:
 
 <%= console '~/.datadog-agent/bin/agent stop' %>
 
-リスタートする場合:
+Datadog Agent をリスタートする:
 
 <%= console '~/.datadog-agent/bin/agent restart' %>
 
@@ -87,15 +87,15 @@ Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>
 
 <h3 id="status_and_information">動作ステータスの確認</h3>
 
-Datadog Agent が起動しているか確認する場合: <em>(ver. 3.8.0 ~)</em>
+Datadog Agent が起動しているか確認する: <em>(ver. 3.8.0 ~)</em>
 
 <%= console '~/.datadog-agent/bin/agent status' %>
 
-Datadog Agent のステータスに関する情報を収集する場合:
+Datadog Agent のステータスに関する情報を収集する:
 
 <%= console '~/.datadog-agent/bin/info info' %>
 
-エラーをトレスバックする場合: <code>-v</code> フラッグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
+エラーをトレースバックする場合: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
 
 <%= console '~/.datadog-agent/bin/info info -v' %>
 
@@ -156,7 +156,7 @@ You can contact them in one of the following ways:
 
 バージョン要件を満たしていれば、<a href='#status_and_information'>info</a> コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
 
-それぞれの細分化された要素(機能別)のログ関しては、以下のファイルに記録されています:
+それぞれの細分化された要素(機能別)のログは、以下のファイルに記録されています:
 
 <ul>
   <li><code>~/.datadog-agent/supervisord/logs/supervisord.log</code></li>
@@ -167,4 +167,4 @@ You can contact them in one of the following ways:
 
 <br/>
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチームにご連絡</a>ください。
+上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。

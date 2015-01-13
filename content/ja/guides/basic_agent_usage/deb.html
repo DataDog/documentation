@@ -1,5 +1,5 @@
 ---
-title: DD-Agentの基本的な使用方法 (Debian系)
+title: Agentの基本的な使用方法 (Debian系)
 ---
 
 <!--
@@ -16,8 +16,8 @@ If you haven't installed the Agent yet, instructions can be found
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Datadog Agentの基本的な機能を概説します。
-まだDatadog Agent のインストール済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
+このガイドでは、Datadog Agentの基本的な機能を説明します。
+まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
 <a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページのインストール手順も合わせてご参照ください。
 
 
@@ -43,15 +43,15 @@ To restart the Agent:
 
 <h3 id="starting_and_stopping_the_agent">Datadog Agent の起動と停止</h3>
 
-手動で Datadog Agent を起動する場合:
+手動で Datadog Agent を起動する:
 
 <%= console 'sudo /etc/init.d/datadog-agent start' %>
 
-停止する場合:
+停止する:
 
 <%= console 'sudo /etc/init.d/datadog-agent stop' %>
 
-リスタートする場合:
+リスタートする:
 
 <%= console 'sudo /etc/init.d/datadog-agent restart' %>
 
@@ -78,15 +78,15 @@ Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>
 
 <h3 id="status_and_information">動作ステータスの確認</h3>
 
-Datadog Agent が起動しているか確認する場合: <em>(ver. 3.8.0 ~)</em>
+Datadog Agent が起動しているか確認する: <em>(ver. 3.8.0 ~)</em>
 
 <%= console 'sudo /etc/init.d/datadog-agent status' %>
 
-Datadog Agent のステータスに関する情報を収集する場合:
+Datadog Agent のステータスに関する情報を収集する:
 
 <%= console 'sudo /etc/init.d/datadog-agent info' %>
 
-エラーをトレスバックする場合: <code>-v</code> フラッグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
+エラーをトレースバックする: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
 
 <%= console 'sudo /etc/init.d/datadog-agent info -v' %>
 
@@ -139,7 +139,7 @@ You can contact them in one of the following ways:
 
 <a href='#status_and_information'>info</a> コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
 
-それぞれの細分化された要素(機能別)のログ関しては、以下のファイルに記録されています:
+それぞれの細分化された要素(機能別)のログは、以下のファイルに記録されています:
 
 <ul>
   <li><code>/var/log/datadog/supervisord.log</code> <em>(ver. 3.8.0 ~)</em></li>
@@ -150,4 +150,4 @@ You can contact them in one of the following ways:
 
 <br/>
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチームにご連絡</a>ください。
+上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
