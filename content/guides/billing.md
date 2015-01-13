@@ -110,8 +110,8 @@ by its tags).
 
 ##### How will an AWS integration impact my monthly billing?
 
-We bill for all hosts running the **Agent** as well as any **EC2 instance**
-picked up by the AWS integration. You will not get charged twice if
+We bill for all hosts running the **Agent** as well as for all **EC2 instances**
+picked up by the AWS integration. You will not get billed twice if
 you are running the Agent on an EC2 instance picked up by the AWS
 integration.
 
