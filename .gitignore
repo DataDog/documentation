@@ -12,3 +12,4 @@ vendor/*
 .rbenv
 .idea
 output.tgz
+remote-compile.sh
