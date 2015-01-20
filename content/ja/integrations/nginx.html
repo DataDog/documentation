@@ -47,7 +47,7 @@ configure arguments: --with-cc-opt='-g -O2 -fstack-protector --param=ssp-buffer-
 
 `configure arguments:`のオプションリストの中に`--with-http_stub_status_module`が含まれていれば、stub statusモジュールは有効です。
 
-オプションの確認が済んだら、stub statusモジュールがリクエストを待ち受けるURLを設定します。次にの2行を稼働しているwebサイトの`server{}`区分に追記します。:
+オプションの確認が済んだら、stub statusモジュールがリクエストを待ち受けるURLを設定します。次にの3行を稼働しているwebサイトの`server{}`区分に追記します:
 
 ~~~
 location /nginx_status {
