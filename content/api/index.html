@@ -25,6 +25,7 @@ kind: documentation
         <a class="btn" href="#events">Events</a>
         <a class="btn" href="#service_checks">Checks</a>
         <a class="btn" href="#monitors">Monitors</a>
+        <a class="btn" href="#downtimes">Downtimes</a>
         <a class="btn" href="#timeboards">Timeboards</a>
         <a class="btn" href="#screenboards">Screenboards</a>
         <a class="btn" href="#tags">Tags</a>
@@ -694,6 +695,21 @@ kind: documentation
       </div>
     </div>
 
+    <!--
+    =====================================================================
+    Downtimes
+    ====================================================================
+    -->
+
+    <h3 id="downtimes">Downtimes</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Downtiming gives you greater control over monitor notifications by allowing you
+        to globally exclude scopes from alerting. Downtime settings, which can be
+        scheduled with start and end times, prevent all alerting related to specified Datadog tags.</p>
+      </div>
+    </div>
+
     <!-- Schedule monitor downtime -->
     <h4 id="schedule-downtime">Schedule monitor downtime</h4>
     <div class="row-fluid">
@@ -707,6 +723,7 @@ kind: documentation
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
+
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -727,6 +744,7 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
+          <%= argument 'id', "The integer id of the downtime to be updated" %>
           <%= argument 'scope', "The scope to apply the downtime to, e.g.
           'host:app2'",
           :default => "original scope" %>
@@ -756,7 +774,7 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <h5>Arguments</h5>
-        <%= no_args %>
+        <%= argument 'id', "The integer id of the downtime to be canceled" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
