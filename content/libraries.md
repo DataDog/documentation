@@ -131,9 +131,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52]. 
 
-#### Logstash
-
-  * [This script ][53] will allow you to get data in from Logstash and was written by Datadog's very own [Conor Branagan][54]. 
 
 #### Reverse Color Scheme
 
