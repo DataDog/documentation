@@ -82,6 +82,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Ruby
 
   * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26]. 
+  * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
 
 #### PHP
 
@@ -202,4 +203,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [58]: https://twitter.com/dbader_org
    [59]: https://github.com/arnabk/java-dogstatsd-client
    [60]: https://github.com/arnabk
-
+   [61]: https://github.com/yyuu/hotdog
+   [62]: https://github.com/yyuu
