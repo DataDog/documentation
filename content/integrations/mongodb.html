@@ -23,7 +23,9 @@ From the open-source Agent:
 * <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example">
 MongoDB YAML example</a>
 * <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py">
-MongoDB checks.d</a>
+Code for the MongoDB check</a>
+
+The user set in <code>mongo.yaml</code> must have the <code>clusterMonitor</code> role.
 
 The following metrics are collected by default with the MongoDB integration:
 
