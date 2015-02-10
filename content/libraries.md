@@ -82,6 +82,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Ruby
 
   * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26]. 
+  * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
 
 #### PHP
 
@@ -130,9 +131,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52]. 
 
-#### Logstash
-
-  * [This script ][53] will allow you to get data in from Logstash and was written by Datadog's very own [Conor Branagan][54]. 
 
 #### Reverse Color Scheme
 
@@ -202,4 +200,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [58]: https://twitter.com/dbader_org
    [59]: https://github.com/arnabk/java-dogstatsd-client
    [60]: https://github.com/arnabk
-
+   [61]: https://github.com/yyuu/hotdog
+   [62]: https://github.com/yyuu
