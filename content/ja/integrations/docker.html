@@ -3,7 +3,7 @@ title: Datadog-Docker インテグレーション
 sidebar:
   nav:
     - header: インテグレーション
-    - text: インデックス
+    - text: インデックスへ戻る
       href: "/ja/integrations/"
 ---
 

@@ -2,8 +2,8 @@
 title: Datadog-NGINX インテグレーション
 sidebar:
   nav:
-    - header: Integrations
-    - text: インデックス
+    - header: インテグレーション
+    - text: インデックスへ戻る
       href: "/ja/integrations/"
 ---
 <!-- <div id="int-overview">

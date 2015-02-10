@@ -2,15 +2,15 @@
 title: Datadog-AWS Cloudwatch インテグレーション
 sidebar:
   nav:
-    - header: AWS integration
+    - header: AWS インテグレーション
     - text: Configure CloudWatch
       href: "#cloudwatch"
     - text: Configure CloudTrail
       href: "#cloudtrail"
     - text: Troubleshooting
       href: "#troubleshooting"
-    - header: Integrations
-    - text: Back to Overview
+    - header: インテグレーション
+    - text: インデックスへ戻る
       href: "/ja/integrations/"
 ---
 
