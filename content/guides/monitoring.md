@@ -27,7 +27,7 @@ the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
 availability, network endpoints and more.
 
-Once a monitor is created, you will be notified when the its conditions are met.
+Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
 Hipchat) or other custom endpoints via webhooks.
 
