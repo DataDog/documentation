@@ -1,7 +1,7 @@
 ---
 title: Using Hour Before
-kind: article
-tags: 
+kind: example
+tags:
     - graphing_functions
     - dashboards
     - json_edit

@@ -1,14 +1,15 @@
 
 <div class="container">
-
-<% items_with_tag(tag).each do |article| %>
-  <h2><%= link_to article[:title], article %></h2>
-  <p><%= article[:summary] %></p>
+<% items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
+  <h2><%= link_to example[:title], example %></h2>
+  <p><%= example[:summary] %></p>
 
   <br>This example can be found in these groups:<br>
-  <% article[:tags].map do |t| %>
-    | <span><a href="/examples/<%= t %>" title="articles tagged with <%= t %>"><%= t %></a></span> |
-  <% end  %>
+ <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
+
 
 <% end %>
+<p><br>
+<a href="/examples/">Return to All Example Groups..</a>
+</p>
 </div>

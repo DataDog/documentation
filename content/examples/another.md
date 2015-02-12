@@ -1,13 +1,13 @@
 ---
 title: Using Another
-kind: article
-tags: 
-    - graphing_functions
+kind: example
+tags:
     - test
+    - exampletest
+summary: this is the summary
 ---
 
 weekafter
 
-<%= count_tags() %>
 
 

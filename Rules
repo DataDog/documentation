@@ -17,7 +17,7 @@
 require './lib/rule_helper'
 
 preprocess do
-  create_tag_pages(nil, {:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(@items.select { |i| i[:kind] == "example" }, {:identifier => "/examples/%%tag%%/"})
 end
 
 compile 'sitemap' do
@@ -65,6 +65,8 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/ja/')
       layout 'default-ja'
+    when id.match('/examples/') && @item[:kind] == 'example'
+      layout 'examplelayout'
     else
       layout 'default'
     end
