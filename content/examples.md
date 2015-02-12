@@ -6,7 +6,7 @@ In this section you will find examples of configurations from across the entire 
 
 <ul>
 <% tag_set(@items.select { |i| i[:kind] == "example" }).sort().each do |tag| %>
-<li><a href="/examples/<%= tag %>/"><%= tag %></a> - (<%=count_tags()[tag] %>)</li>
+<li><a href="/examples/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags()[tag] %>)</li>
 <% end %>
 
 </ul>
