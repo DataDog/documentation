@@ -35,7 +35,7 @@ this layout provides a sidebar and main column.
         <div class="span9 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
-            <small>tags:<%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %></small>
+            <small>tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %></small>
             <br><br>
             <%= yield %>
 
