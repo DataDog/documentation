@@ -4,6 +4,7 @@
 require 'tempfile'
 #require './lib/snippets.rb'
 require 'oj'
+require "nanoc/toolbox"
 
 
 STATUS_CODES = {
