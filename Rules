@@ -17,12 +17,7 @@
 require './lib/rule_helper'
 
 preprocess do
-  create_tag_pages(@items.select { |i| i[:kind] == "example" }.each do |i|
-    i[:tags].each do |t|
-      t = t.downcase
-    end
-  end,
-  {:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
 end
 
 compile 'sitemap' do
@@ -104,9 +99,10 @@ route '/static/*' do
   item.identifier.chop + '.' + item[:extension]
 end
 
+
 route '*' do
   # Write item with identifier /foo/ to /foo/index.html
-  item.identifier + 'index.html'
+  item.identifier.downcase + 'index.html'
 end
 
 layout '*', :erb
