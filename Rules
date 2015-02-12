@@ -15,6 +15,11 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
+
+preprocess do
+  create_tag_pages(nil, {:identifier => "/examples/%%tag%%/"})
+end
+
 compile 'sitemap' do
   filter :erb
 end
