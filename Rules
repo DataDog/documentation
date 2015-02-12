@@ -44,7 +44,7 @@ compile '*' do
   unless item.binary?
     filter :erb
     filter :kramdown
-    filter :colorize_syntax, colorizers: {
+    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
       javascript: :rouge,
       console: :rouge,
       python: :rouge,

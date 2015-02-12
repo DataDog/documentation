@@ -4,12 +4,12 @@
   <h2><%= link_to example[:title], example %></h2>
   <p><%= example[:summary] %></p>
 
-  <br>This example can be found in these groups:<br>
+  This example can be found in these groups:<br>
  <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
 
 
 <% end %>
 <p><br>
-<a href="/examples/">Return to All Example Groups..</a>
+<a href="/examples/">Return to All Example Groups.</a>
 </p>
 </div>
