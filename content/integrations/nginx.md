@@ -22,7 +22,7 @@ The default agent checks require the [nginx stub status module](http://nginx.org
 $ nginx -V |& grep http_stub_status_module
 ```
 
-If you see some output with `configure arguments:` and lots of options, then you have it enabled.  Once you have a status-enabled version of nginx, you can set up a URL with for the status module:
+If you see some output with `configure arguments:` and lots of options, then you have it enabled.  Once you have a status-enabled version of nginx, you can set up a URL for the status module:
 
     server {
       listen 80;
