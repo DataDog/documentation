@@ -1,0 +1,53 @@
+---
+title: Datadog-Bitbucket Integration
+sidebar:
+  nav:
+    - header: Integrations
+    - text: Back to Overview
+      href: "/integrations/"
+---
+
+<div id="int-overview">
+<h3>Overview</h3>
+
+Capture Bitbucket commits and Pull Request events in Datadog to:
+<ul>
+    <li>Correlate your code changes with metrics from other systems </li>
+    <li>Search for commits and pull requests in context </li>
+    <li>Discuss code changes with the team </li>
+</ul>
+
+</div>
+
+<div id="int-configuration">
+
+<h3>Configuration</h3>
+Select 'Bitbucket' <a href="https://app.datadoghq.com/account/settings">here</a> and link your account.
+You can then select which repos you would like to integrate, and if you'd like to
+receive commits and/or pull requests.
+
+</div>
+
+<h3>What to Expect</h3>
+Once the integration is complete, whatever you select (commits and/or pull requests) will populate
+into your Datadog Event Stream.
+<ul>
+    <li>When commits are made</li>
+    <li>When a PR is created</li>
+    <li>When a comment is made/deleted on a PR</li>
+</ul>
+
+If you view a dashboard, in the top left search bar you can type <code>sources:bitbucket</code> to see bitbucket
+events overlayed over your the graphs on that dashboard.
+
+<h3>Limitations</h3>
+Bitbucket knows an issue (<a href="https://bitbucket.org/site/master/issue/8340/pull-request-post-hook-does-not-include">#8340</a>) with some data they send via their PR POST hook:<br/>
+Other Pull Request events can't be used for now
+<ul>
+    <li>Update</li>
+    <li>Decline</li>
+    <li>Approve/Unapprove</li>
+    <li>Merge</li>
+    <li>Close</li>
+    <li>Comment update</li>
+</ul>
