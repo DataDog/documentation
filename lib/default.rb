@@ -5,6 +5,7 @@ require 'tempfile'
 #require './lib/snippets.rb'
 require 'oj'
 require "nanoc/toolbox"
+require "video_info"
 
 
 STATUS_CODES = {
