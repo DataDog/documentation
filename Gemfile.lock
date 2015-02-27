@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.3.7)
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -42,6 +43,7 @@ GEM
       guard
       rake
     hitimes (1.2.2)
+    htmlentities (4.3.3)
     http_parser.rb (0.6.0)
     jsmin (1.0.1)
     json (1.8.2)
@@ -90,6 +92,10 @@ GEM
     thor (0.19.1)
     timers (4.0.1)
       hitimes
+    video_info (2.4.0)
+      addressable
+      htmlentities
+      multi_json
     w3c_validators (1.2)
       json
       nokogiri
@@ -113,4 +119,5 @@ DEPENDENCIES
   rack-livereload
   rake
   rouge
+  video_info
   w3c_validators

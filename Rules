@@ -18,6 +18,7 @@ require './lib/rule_helper'
 
 preprocess do
   create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
 end
 
 compile 'sitemap' do
@@ -71,6 +72,8 @@ compile '*' do
       layout 'default-ja'
     when id.match('/examples/') && @item[:kind] == 'example'
       layout 'examplelayout'
+    when id.match('/videos/') && @item[:kind] == 'video'
+      layout 'videolayout'
     else
       layout 'default'
     end

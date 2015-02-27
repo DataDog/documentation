@@ -9,6 +9,7 @@ gem 'dogapi', '~> 1.13.0'
 gem 'rouge'
 gem 'oj'
 gem 'nanoc-toolbox'
+gem 'video_info'
 group :development do
   gem 'guard-nanoc'
   gem 'guard-livereload'
