@@ -21,7 +21,7 @@ sidebar:
     - text: Monitor FAQs
       href: "#faqs"
 ---
-z
+
 Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
