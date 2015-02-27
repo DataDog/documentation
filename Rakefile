@@ -18,6 +18,9 @@ task :view do
   sh 'bundle exec nanoc view'
 end
 
+desc 'Clean Compile and Check'
+task predeploy: [:clean, :compile, :checks]
+
 namespace :release do
   desc 'Build and release the site to prod (http://docs.datadoghq.com)'
   task prod: [:clean, :compile, :"deploy:prod"]
