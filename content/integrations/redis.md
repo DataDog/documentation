@@ -100,7 +100,7 @@ The following metrics are collected by default with the Redis integration:
     redis.replication.sync
     redis.replication.sync_left_bytes
     redis.stats.keyspace_hits
-    redis.stats.keyspace_misses  
-    
+    redis.stats.keyspace_misses
+
 
 

@@ -28,26 +28,6 @@ sidebar:
       href: "/faq/#other"
 
 ---
-<!-- Old table of contents
-<ol class="outline">
-    <li><a href="#agent">Agent<ol>
-        <li><a href="#agent-config-files">Where are the agent's config files located?</a></li>
-        <li><a href="#agent-version">How can I tell what version of the agent is running?</a></li>
-    </ol></li>
-    <li><a href="#api">API<ol>
-        <li><a href="#api-metric-names">What are valid metric names?</a></li>
-        <li><a href="#api-tags">What are valid tags?</a></li>
-    </ol></li>
-    <li><a href="#arch">Architecture<ol>
-        <li><a href="#arch-cloud-or-server">Is datadog a cloud service or server application?</a></li>
-        <li><a href="#arch-graphite-differences">What's the difference between Graphite's query language and Datadog's?</a></li>
-    </ol></li>
-    <li><a href="#graph">Graphing<ol>
-        <li><a href="#graph-sum-grouped">How do I do arithmetic with grouped metrics?</a></li>
-    </ol></li>
-</ol>
--->
-
 
 <!--
 ===============================================================================
@@ -55,7 +35,8 @@ sidebar:
 ===============================================================================
 -->
 
-### Agent {#agent}
+### Agent
+{: #agent}
 
 <!-- this is not currently true
 <h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
@@ -64,24 +45,27 @@ Yes, it is!  You can change the flush interval by updating your agent’s config
 </p>
 -->
 
-#### Is the agent necessary to use Datadog? {#agent-optional}
+#### Is the agent necessary to use Datadog?
+{: #agent-optional}
 
 * No, it is not. You don't have to install an agent if you only want to submit
 metrics via our API. You can read more about our API [here][api].
 * In general, most folks find a lot of value in installing an agent because
 they get system metrics for free and metrics on common software like mysql,
 postgres, etc. with just a little bit of configuration. Another advantage is
-that there is a small statsd server built-in to the agent.
+that there is a small statsd server built-in to the agent. 
 
 
-#### Can I use my own StatsD client? {#statsd}
+#### Can I use my own StatsD client? 
+{: #statsd}
 
 Any StatsD client will work just fine, but using the Datadog DogStatsD client
 will give you a few extra features. You can read more about our clients extra
 features [here][dogstatsd].
 
 
-#### How can I change the hostname {#hostname-change}
+#### How can I change the hostname 
+{: #hostname-change}
 
 You can change the hostname by updating your agent’s configuration file called
 datadog.conf and replacing the value for the “hostname” key.  Use the following
@@ -89,7 +73,8 @@ link, select your OS in the left column, and go to
 the [Configuration section][basic_agent_usage] to find the location of your
 agent’s configuration file.
 
-#### How do I uninstall the agent {#agent-uninstall}
+#### How do I uninstall the agent 
+{: #agent-uninstall}
 
 * Mac OS:
 
@@ -107,13 +92,15 @@ agent’s configuration file.
 
 
 
-#### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that? {#agent-stopped}
+#### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that? 
+{: #agent-stopped}
 
 It can take up to 24h for the host to disappear from the infrastructure page,
 but it will only be part of the host count for billing purposes if we're
 actually receiving data.
 
-#### Other Agent-related questions? {#agent-other}
+#### Other Agent-related questions? 
+{: #agent-other}
 
 Please refer to the [Basic Agent Usage Guide][basic_agent_usage].
 
@@ -126,11 +113,13 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage].
 ===============================================================================
 -->
 
-### Alerts {#alerts}
+### Alerts 
+{: #alerts}
 
-#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? {#no-data}
+#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? 
+{: #no-data}
 
-For the AWS [No Data] errors, the issue here has to do with how frequently we
+For the AWS No Data errors, the issue here has to do with how frequently we
 receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
 APIs, data is often delayed by 10 or more minutes, so we generally recommend
 that an alert for an AWS metric be set to have a threshold window of at least
@@ -139,9 +128,9 @@ the last…”). Switching the time frame on this alert will resolve this issue,
 you can install the agent on some AWS hosts to get more up-to-date data to
 alert on. Overall, we’re always working towards getting data more efficiently
 from AWS.
-</p>
 
-#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
+#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? 
+{: #alert-disk-utilization}
 
 * Yes, this can be done! Here is an example for creating a disk space in use
 alert when at 80% or above:
@@ -150,7 +139,7 @@ alert when at 80% or above:
   3. For set alert grouping, select "simple alert".
   4. Set alert conditions: Select Above and for the value put 0.8.
   5. Add a custom message for alert if you'd like.
-* You can read more about setting up alerts [here][alerting]</a>.
+* You can read more about setting up alerts [here][alerting].
 
 [alerting]: guides/alerting/
 <!--
@@ -159,9 +148,11 @@ alert when at 80% or above:
 ===============================================================================
 -->
 
-### API {#api}
+### API
+{: #api}
 
-#### What are valid metric names? {#api-metric-names}
+#### What are valid metric names? 
+{: #api-metric-names}
 
 Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
 Other characters will get converted to underscores. There is no max length. Unicode is not support.
@@ -172,14 +163,16 @@ but we have aspirations to use it to infer things about servers (e.g. “hey, I 
 reporting ‘http.nginx.*’, those must be web frontends”).
 
 
-#### What are valid tags? {#api-tags}
+#### What are valid tags? 
+{: #api-tags}
 
 Tags must start with a letter, and after that may contain alphanumerics,
 underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.
 
-#### I'm submitting points to the API- anything I should know? {#api-else}
+#### I'm submitting points to the API- anything I should know? 
+{: #api-else}
 We store metric points at the 1 second resolution, but we’d prefer if you only
 submitted points every 15 seconds. Any metrics with fractions of a second timestamps
 will get rounded to the nearest second, and if any points have the same timestamp,
@@ -194,22 +187,26 @@ defined as a unique combination of metric name and tag.
 ===============================================================================
 -->
 
-### Architecture {#architecture}
+### Architecture 
+{: #architecture}
 
-#### Is Datadog a cloud service or server application? {#arch-cloud-or-server}
+#### Is Datadog a cloud service or server application? 
+{: #arch-cloud-or-server}
 
 It's primarily a cloud service, but if you want to collect data on your servers,
 there is an Agent you'll need to install. We never make any direct connections
 to your infrastructure. For cloud integrations, we connect to them using the
 credentials you provide to us.
 
-#### How do I delete a host or metric? {#arch-delete}
+#### How do I delete a host or metric? 
+{: #arch-delete}
 
 All hosts or metrics that have not seen data in 24 hours will disappear from the UI;
 you can still query against them, but it will not appear in drop downs or infrastructure.
 There is not a way to immediately delete a metric.
 
-#### What's the difference between Graphite's query language and Datadog's? {#arch-graphite-differences}
+#### What's the difference between Graphite's query language and Datadog's? 
+{: #arch-graphite-differences}
 
 In terms of metric naming, we differ a little with Graphite in that a metric
 query is defined by a metric name and a scope, where a scope is one or more tags.
@@ -250,14 +247,16 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 Which would graph stacked area series for each http_method value like GET, POST, etc.
 
-#### How are hostnames determined? {#arch-hostnames}
+#### How are hostnames determined? 
+{: #arch-hostnames}
 
 The hostnames are determined by what the Datadog Agent detects; this is fully
 documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
  ```/etc/init.d/datadog-agent info```
 
 
-#### Tell me about tagging! {#tagging}
+#### Tell me about tagging! 
+{: #tagging}
 
 Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
@@ -291,7 +290,7 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-Further tagging info can be found [here][tags]</a>.
+Further tagging info can be found [here][tags].
 
 For information on AWS tagging, please see [here][integration-aws].
 
@@ -308,9 +307,11 @@ For information on AWS tagging, please see [here][integration-aws].
 ===============================================================================
 -->
 
-### AWS {#aws}
+### AWS 
+{: #aws}
 
-#### I just set up my AWS integration. Why am I seeing duplicate hosts? {#duplicate-hosts}
+#### I just set up my AWS integration. Why am I seeing duplicate hosts? 
+{: #duplicate-hosts}
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic
 hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a
@@ -321,16 +322,19 @@ single host’s duplicate names to be aliased. You can read more about
 hostnames [here][hostnames].
 
 
-#### What metrics will I get from the AWS integration? {#aws-metrics}
+#### What metrics will I get from the AWS integration? 
+{: #aws-metrics}
 
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
 * You can read in detail about our AWS integration [here][integration-aws].
 
-#### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
+#### I can’t filter out my ELB instances - will I be charged for them? 
+{: #aws-elb}
 
 We do not charge for ELBs (as they can’t be filtered out).
 
-#### Why is there a delay in receiving my data? {#aws-delay}
+#### Why is there a delay in receiving my data? 
+{: #aws-delay}
 
 If you receive 5-minute metrics from Cloudwatch, there can be up to ~15-20 min delay in 
 receiving your metrics. This is because Cloudwatch makes your data available with a 5-10 
@@ -340,7 +344,8 @@ metrics with Cloudwatch, then their availability delay is about 2 minutes so tot
 latency to view your metrics may be ~10-12 minutes.
 
 
-#### Can I get my postgres data from RDS? {#aws-rds}
+#### Can I get my postgres data from RDS? 
+{: #aws-rds}
 
 Yes you can! Follow the steps below to set this up:
 
@@ -358,16 +363,19 @@ Yes you can! Follow the steps below to set this up:
 -->
 
 
-### Billing {#billing}
+### Billing 
+{: #billing}
 
 
-#### How can I change the Billing contact? {#billing-contact}
+#### How can I change the Billing contact? 
+{: #billing-contact}
 
 You can set a specific email address to receive invoices, even if that address
 is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
 
 
-#### Where can I get a copy of the invoice? {#billing-invoice}
+#### Where can I get a copy of the invoice? 
+{: #billing-invoice}
 
 As an admin you can check out past invoices [here][app-billing-history].
 
@@ -383,9 +391,11 @@ As an admin you can check out past invoices [here][app-billing-history].
 ===============================================================================
 -->
 
-### Graphing {#graph}
+### Graphing 
+{: #graph}
 
-#### How do I do arithmetic with grouped metrics? {#graph-sum-grouped}
+#### How do I do arithmetic with grouped metrics? 
+{: #graph-sum-grouped}
 
 To graph the sum of ```app.foo.bar{env:staging}``` and ```app.foo.baz{env:staging}```
 grouped ```by {host}```, write a graph query that looks like:
@@ -395,7 +405,8 @@ metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 ~~~
 
 
-#### What's the syntax to sum multiple datapoints into a single line? {#graph-mult-points}
+#### What's the syntax to sum multiple datapoints into a single line? 
+{: #graph-mult-points}
 
 You can switch commas separating the queries into plus signs, from:
 
@@ -411,7 +422,8 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~
 
-#### How do I do graph smoothing? {#graph-smoothing}
+#### How do I do graph smoothing? 
+{: #graph-smoothing}
 
 You can apply smoothing averages to your series by droping to the JSON editor and
 adding ‘ewma’, for example:
@@ -629,12 +641,12 @@ Show events from db1.myapp.com OR db2.myapp.com.</p>
 
 <li>
 <p><code class="no-highlight"><strong>status:</strong>error</code>
-Show only error status events. (supports:</strong> 'error', 'warning', 'success')</p>
+Show only error status events. (<strong>supports:</strong> 'error', 'warning', 'success')</p>
 </li>
 
 <li>
 <p><code class="no-highlight"><strong>priority:</strong>low</code>
-Show only low-priority events. (supports:</strong> 'low' or 'normal'. defaults to 'all')</p>
+Show only low-priority events. (<strong>supports:</strong> 'low' or 'normal'. defaults to 'all')</p>
 </li>
 
 <li>

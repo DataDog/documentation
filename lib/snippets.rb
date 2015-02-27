@@ -7,7 +7,7 @@
 require 'fileutils'
 
 
-CODE_SNIPPET_DIR = "code_snippets"
+CODE_SNIPPET_DIR = "code_snippets" unless defined? CODE_SNIPPET_DIR
 
 EXT_TO_LANG = {
   ".php" => "php",
@@ -16,7 +16,7 @@ EXT_TO_LANG = {
   ".sh"  => "console",
   ".js"  => "javascript",
   ".json" => "json",
-}
+} unless defined? EXT_TO_LANG
 
 # PUBLIC ======================
 

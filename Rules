@@ -43,7 +43,11 @@ end
 compile '*' do
   unless item.binary?
     filter :erb
-    filter :kramdown
+    case item[:extension]
+      when 'md'
+        filter :kramdown
+    end
+    # filter :kramdown
     filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
       javascript: :rouge,
       console: :rouge,
