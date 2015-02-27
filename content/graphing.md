@@ -200,7 +200,7 @@ apples by oranges.
 
 ### Functions
 
-You can apply functions to the result of each query. <a href="/examples/Graphing%20Functions/">Examples</a>
+You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
 
 <table class="table">
   <tr>
