@@ -969,7 +969,7 @@ by default you'll get the average across all hosts. -->
 -	`@yourname` - 'yourname'という名前のユーザに通知します。
 -	`@test@test.com` test@test.comに電子メールを送信します。
 -	HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
-	-	`@hipchat-[ルーム名]`または`@slack-[ルーム名]` - [ルーム名]で指定したチャットルームに、イベントやグラフをポストすることができます。
+	-	`@hipchat-\[ルーム名\]`または`@slack-[ルーム名]` - \[ルーム名\]で指定したチャットルームに、イベントやグラフをポストすることができます。
 	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio](https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/)のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration](/ja/integrations/webhooks/)のページと、ダッシュボードの[Integration](https://app.datadoghq.com/account/settings)タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
 	-	`@pagerduty`または`@oncall` - Pagerdutyにアラートを送信します。 更に、`@pagerduty-acknowledge` や `@pagerduty-resolve`を使って通知することもできます。
 

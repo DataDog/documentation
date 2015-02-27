@@ -39,7 +39,7 @@ From the Agent:
 <ol>
   <li>The Directory check <b>is not currently supported on Windows systems</b>.</li>
   <li>Ensure the user account running the Agent (typically <code>dd-agent</code>) has read access to the monitored directory and files.</li>
-  <li>Configure the Agent to connect to your directories.<br>
+  <li>Configure the Agent to connect to your directories.
       Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>
         <pre class="textfile"><code>init_config:
 

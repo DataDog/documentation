@@ -26,7 +26,8 @@ From the Agent:
   <li>Install  <b><a href="https://pypi.python.org/pypi/psutil/1.2.1">v1.2.1 of the psutil</a> Python library</b>. The easiest way to install psutil from sources is using easy_install:
     <pre class="code-block code-block-console" lang="console"><code class="">easy_install psutil</code></pre>
   </li>
-  <li>Configure the Agent to connect to your processes.<br>
+  <li>Configure the Agent to connect to your processes.
+  
       Edit <code>/etc/dd-agent/conf.d/process.yaml</code>
         <pre class="textfile"><code>init_config:
 

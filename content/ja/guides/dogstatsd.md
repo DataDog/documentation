@@ -63,7 +63,7 @@ DogStatsDは、アプリケーションのカスタムメトリクスを<a href=
 次に図は、DogStatsDを使ったカスタムメトリクスのグラフ化までの構成図です:
 
 <p>
-<img src="/static/images/dogstatsd.png">
+<img src="/static/images/dogstatsd.png"/>
 </p>
 
 
@@ -437,7 +437,7 @@ eof
   - `priority` (String, None) — default: 'normal' — 'normal' または 'low'を指定します。
   - `source_type_name` (String, None) — default: None — イベントにソースタイプを付けます。
   - `alert_type` (String, None) — default: 'info' — 'error', 'warning', 'info', 'success'のどれかを指定します。
-  - `tags` - (Array[str], None) — default: None — タグのリストを付けます。
+  - `tags` - (Array\[str\], None) — default: None — タグのリストを付けます。
 
 
 <!-- ## Configuration
