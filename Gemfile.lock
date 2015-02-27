@@ -38,6 +38,9 @@ GEM
       libnotify
       rb-inotify
       spoon
+    guard-rake (1.0.0)
+      guard
+      rake
     hitimes (1.2.2)
     http_parser.rb (0.6.0)
     jsmin (1.0.1)
@@ -100,6 +103,7 @@ DEPENDENCIES
   guard-livereload
   guard-nanoc
   guard-rack
+  guard-rake
   kramdown
   nanoc
   nanoc-toolbox

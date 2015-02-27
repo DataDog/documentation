@@ -141,7 +141,7 @@ alert when at 80% or above:
   5. Add a custom message for alert if you'd like.
 * You can read more about setting up alerts [here][alerting].
 
-[alerting]: guides/alerting/
+[alerting]: /guides/alerting/
 <!--
 ===============================================================================
     API

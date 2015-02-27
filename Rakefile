@@ -4,6 +4,11 @@ CLEAN.include(%w(output tmp))
 
 CODE_SNIPPETS = 'code_snippets'
 
+desc 'Check site links'
+task :checks do
+  sh 'bundle exec nanoc check ilinks stale'
+end
+
 desc 'Build documentation site'
 task :compile do
   sh 'bundle exec nanoc compile'
