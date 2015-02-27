@@ -14,7 +14,8 @@ sidebar:
       href: "#yaxis"
 ---
 
-<h2 id="editor">Find the Graph Editor</h2>
+## Find the Graph Editor
+{: #editor}
 
 On each graph you will find a cog icon that opens the graph editor.
 
@@ -25,7 +26,8 @@ It lets you finely control what is displayed on the graph.
 
 <img src="/static/images/json-editor.png" style="width:100%; border:1px solid #777777"/>
 
-<h2 id="grammar">Grammar</h2>
+## Grammar
+{: #grammar}
 
 The graph definition language is well-formed JSON and is structured in 2 parts:
 
@@ -446,7 +448,6 @@ Examples:
     "scale": "pow3"
 }</code></pre>
 
-
 <h4>Outliers</h4>
 
 Outliers configuration allows you to automatically change y-axis bounds based on a
@@ -460,7 +461,7 @@ values above the value or all values that sit within the top ##% will be cutoff.
 
 Examples:
 
-<code>"outliers": 30</code> // all values above 30 will not appear<br>
+<code>"outliers": 30</code> // all values above 30 will not appear
 <code>"outliers": "5%"</code> // the top 5% of that data will not appear
 
 
