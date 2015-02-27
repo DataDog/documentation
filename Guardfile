@@ -11,4 +11,8 @@ guard 'livereload' do
   watch(%r{^output/.+\.(css|js|html)})
 end
 
+guard 'rake', :task => 'checks' do
+  watch(%r{^output/.+\.(css|js|html)})
+end
+
 guard 'rack', port: '3000'

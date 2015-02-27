@@ -15,4 +15,5 @@ group :development do
   gem 'guard-rack'
   gem 'rack-contrib'
   gem 'rack-livereload'
+  gem 'guard-rake'
 end
