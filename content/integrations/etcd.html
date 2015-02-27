@@ -58,5 +58,5 @@ And these metrics for follower nodes:
     etcd.self.recv.pkgrate 
     etcd.self.recv.bandwidthrate 
 
-
+Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
 
