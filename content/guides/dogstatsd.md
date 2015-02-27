@@ -45,7 +45,7 @@ DogStatsD accepts custom application metrics points over
 and then periodically aggregates and forwards the metrics to Datadog, where
 they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <p>
-<img src="/static/images/dogstatsd.png">
+<img src="/static/images/dogstatsd.png"/>
 </p>
 
 ### Aggregation
@@ -236,7 +236,7 @@ eof
   - `priority` (String, None) — default: 'normal' — Can be 'normal' or 'low'.
   - `source_type_name` (String, None) — default: None — Assign a source type to the event.
   - `alert_type` (String, None) — default: 'info' — Can be 'error', 'warning', 'info' or 'success'.
-  - `tags` - (Array[str], None) — default: None — An array of tags
+  - `tags` - (Array\[str\], None) — default: None — An array of tags
 
 ## Configuration
 
