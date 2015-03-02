@@ -2,7 +2,7 @@ conf:
     - include: 
        domain: domain_name
        type: bean_type
-       name: bean_name
+       bean: bean_name
        attribute:
             nameOfAttribute:
                 metric_type: counter

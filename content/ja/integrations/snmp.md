@@ -40,7 +40,7 @@ sidebar:
     <dd><em>The name here is the one specified in the MIB but you could use any name.</em></dd>
 
 
-    <dt>Specify a MIB and a table you want to extract information from.<dt>
+    <dt>Specify a MIB and a table you want to extract information from.</dt>
     <dd>
         <span class="hint-icon"><a title="See this MIB's content" href="http://www.net-snmp.org/docs/mibs/interfaces.html#ifTable">&#9758;</a></span>
         <pre><code>metrics:

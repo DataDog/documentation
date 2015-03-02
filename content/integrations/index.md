@@ -52,8 +52,10 @@ The pages below walk through how to integrate, what to expect, and how to troubl
 * <a href="/integrations/capistrano/">Capistrano</a>
 * <a href="/integrations/cassandra/">Cassandra</a>
 * <a href="/integrations/chef/">Chef</a>
+* <a href="/integrations/desk/">Desk</a>
 * <a href="/integrations/docker/">Docker</a>
 * <a href="/integrations/elasticsearch/">ElasticSearch</a>
+* <a href="/integrations/etcd/">Etcd</a>
 * <a href="/integrations/eventviewer/">Event Viewer</a>
 * <a href="/integrations/fabric/">Fabric</a>
 * <a href="/integrations/git/">Git</a>

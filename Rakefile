@@ -4,6 +4,11 @@ CLEAN.include(%w(output tmp))
 
 CODE_SNIPPETS = 'code_snippets'
 
+desc 'Check site links'
+task :checks do
+  sh 'bundle exec nanoc check ilinks stale'
+end
+
 desc 'Build documentation site'
 task :compile do
   sh 'bundle exec nanoc compile'
@@ -12,6 +17,9 @@ end
 task :view do
   sh 'bundle exec nanoc view'
 end
+
+desc 'Clean Compile and Check'
+task predeploy: [:clean, :compile, :checks]
 
 namespace :release do
   desc 'Build and release the site to prod (http://docs.datadoghq.com)'

@@ -11,10 +11,10 @@ sidebar:
 <h3>Overview</h3>
 
 Connect ElasticSearch to Datadog in order to:
-<ul>
-<li> Visualize ElasticSearch performance.</li>
-<li> Correlate ElasticSearch performance with the rest of your applications.</li>
-</ul>
+
+* Visualize ElasticSearch performance.
+* Correlate ElasticSearch performance with the rest of your applications.
+
 </div>
 
 From the open-source Agent:

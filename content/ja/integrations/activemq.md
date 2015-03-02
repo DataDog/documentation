@@ -19,7 +19,8 @@ sidebar:
 
 <div id="int-configuration">
 <h2>Configuration</h2>
-<p><em><b>This integration requires Linux or Mac OS X.</b><br /><br />
+<p><em><b>This integration requires Linux or Mac OS X.</b>
+
   To capture ActiveMQ metrics you need to install the Datadog agent.
 Metrics will be captured using a JMX connection.
 <br /><b>We recommend the use of Oracle's JDK for this integration.</b>
@@ -28,7 +29,7 @@ Metrics will be captured using a JMX connection.
 <ol>
   <li><b>Make sure that <a href="http://activemq.apache.org/jmx.html"> JMX Remote is enabled</a> on your ActiveMQ server.</b>
   </li>
-    <li>Configure the agent to connect to ActiveMQ<br>
+    <li>Configure the agent to connect to ActiveMQ
       Edit <code>${confd_help('<code>conf.d/activemq.yaml</code>')}</code>
         <pre class="textfile"><code>instances:
     -   host: localhost

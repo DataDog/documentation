@@ -249,7 +249,7 @@ configuration.
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [alert-conditions](metric-conditions) section for details on the available
+   [alert-conditions](#metric-conditions) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the

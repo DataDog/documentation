@@ -15,6 +15,12 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
+
+preprocess do
+  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
+end
+
 compile 'sitemap' do
   filter :erb
 end
@@ -38,8 +44,12 @@ end
 compile '*' do
   unless item.binary?
     filter :erb
-    filter :kramdown
-    filter :colorize_syntax, colorizers: {
+    case item[:extension]
+      when 'md'
+        filter :kramdown
+    end
+    # filter :kramdown
+    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
       javascript: :rouge,
       console: :rouge,
       python: :rouge,
@@ -60,6 +70,10 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/ja/')
       layout 'default-ja'
+    when id.match('/examples/') && @item[:kind] == 'example'
+      layout 'examplelayout'
+    when id.match('/videos/') && @item[:kind] == 'video'
+      layout 'videolayout'
     else
       layout 'default'
     end
@@ -92,9 +106,10 @@ route '/static/*' do
   item.identifier.chop + '.' + item[:extension]
 end
 
+
 route '*' do
   # Write item with identifier /foo/ to /foo/index.html
-  item.identifier + 'index.html'
+  item.identifier.downcase + 'index.html'
 end
 
 layout '*', :erb

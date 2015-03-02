@@ -68,7 +68,7 @@ Apacheインテグレーションは、次のメトリクスをディフォル�
 
 <ol>
   <li><b>Make sure that <a href="http://httpd.apache.org/docs/2.0/mod/mod_status.html"><code>mod_status</code></a> is installed on your Apache server</b> with <code>ExtendedStatus</code> set to <code>on</code></li>
-  <li>Configure the agent to connect to Apache<br>
+  <li>Configure the agent to connect to Apache
       Edit <code>/etc/dd-agent/datadog.conf</code>
         <pre class="textfile"><code># -------------------------------------------------------------------------- #
 #   Apache                                                                   #

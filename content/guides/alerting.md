@@ -39,7 +39,7 @@ Two subtabs will appear, 'Triggered Monitors' and 'Manage Monitors'.
 'Triggered Monitors' are all alerts currently firing. Select 'Manage Monitors' to
 create a new alert.
 
-![alert 2](/static/images/alert_2.png)
+![alert 2](/static/images/alert_2.png)
 
 
 ### Create a New Alert
@@ -145,7 +145,7 @@ alerted. We are working towards supporting this with Service Checks, a feature
 we hope to release in the near future.
 
 #### Autoresolving Alerts
-{: #autoresolve}
+{: #autoresolve} 
 
 ![alert auto](/static/images/alert_auto.png)
 
@@ -158,7 +158,7 @@ after 4 hours of inactivity on that metric.
 
 In most cases this setting will not be useful because you will only want an
 alert to resolve once it actually has been fixed. So in the general case it
-makes sense to leave this as [Never] so that the alert will only resolve when
+makes sense to leave this as Never so that the alert will only resolve when
 the metric falls below the given threshold.
 
 #### Notifying
@@ -178,7 +178,7 @@ part 5, 'Notify your team'.
 {: #faqs}
 
 Can you alert on a function?
-: Not currently, but we're working towards this!
+Not currently, but we're working towards this!
 
 Can you alert on an event?
 : Not currently, but we're discussing how we'd like to implement this.
