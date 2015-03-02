@@ -29,7 +29,7 @@ namespace :deploy do
 
   desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
   task :staging do
-    sh('cd output && s3cmd -c ~/.s3cfg.prod sync --dry-run --delete-removed . s3://docs-staging.datadoghq.com')
+    sh('cd output && s3cmd -c ~/.s3cfg.prod sync --delete-removed . s3://docs-staging.datadoghq.com')
   end
 end
 
