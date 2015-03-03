@@ -10,6 +10,8 @@ sidebar:
       href: "#ruby"
     - text: PHP
       href: "#php"
+    - text: C#
+      href: "#c-sharp"
     - header: Community Libraries
     - text: Java
       href: "#community-java"
@@ -29,6 +31,17 @@ sidebar:
       href: "#community-scala"
     - text: Elixir
       href: "#community-elixir"
+    - header: Community Integration Libraries
+    - text: Saltstack
+      href: "#community-integration-saltstack"
+    - text: Ansible
+      href: "#community-integration-ansible"
+    - text: FreeSwitch
+      href: "#community-integration-freeswitch"
+    - text: Google Analytics
+      href: "#community-integration-google-analytics"
+    - text: Pid-stats
+      href: "#community-integration-pid-stats"
 
 
 ---
@@ -49,7 +62,8 @@ There are many libraries available to help you interact with the Datadog API.
 
   * [php-datadogstatsd][5] - A PHP DogStatsD client.
 
-#### C#
+#### C\#
+{: #c-sharp}
 
   * [dogstatsd-csharp-client][6] - A C# DogStatsD client.
   
@@ -60,6 +74,7 @@ There are many libraries available to help you interact with the Datadog API.
 Some great folks have written their own libraries to help interact with Datadog. Check them out: 
 
 #### Java
+{: #community-java}
 
   * [java-dogstatsd-client][7] - a DogStatsD Client for Java written by [Indeed][8]. 
   * [metrics-datadog][9] - a backend to yammers's [metrics][9] library written by [Coursera][10]. 
@@ -68,6 +83,7 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [java-dogstatsd-client] [59] - DogStatsD Client for Java to submit both Events and Metrics written by [arnabk] [60].
 
 #### Node.js
+{: #community-node}
 
   * [node-datadog][14] - a Node.js API client, contributed by [HashGo][15]. 
   * [node-dogstatsd][16] - a Node.js DogStatsD client, contributed by [Young Han Lee][17]. 
@@ -75,59 +91,71 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [datadog-metrics][57] - Node.js API client, contributed by [Daniel Bader][58].
 
 #### Perl
+{: #community-perl}
 
   * [webservice-datadog][20] - a Perl API client, contributed by [Jennifer Pinkham][21]. 
   * [dogstatsd-perl][22] - a Perl DogStatsD client, contributed by [Stefan Goethals][23]. 
 
 #### Ruby
+{: #community-ruby}
 
   * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26]. 
   * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
 
 #### PHP
+{: #community-php}
 
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29]. 
 
 #### Go
+{: #community-go}
 
   * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31]. 
   * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33]. 
 
 #### Python
+{: #community-python}
 
   * [scales_datadog][34] - a Datadog backend for the [Scales][35] library, written by [Tommaso Barbugli][36]. 
 
 #### Scala
+{: #community-scala}
 
   * [datadgog-scala][37] - a Scala API client, written by [Cory Watson][38]. 
 
 #### Elixir
+{: #community-elixir}
 
   * [ExStatsD][39] - an Elixir DogStatsD library by [CargoSense][40]. 
   * [dogstatsd-elixir][41] - a dogstatsd client in Elixir by [Adam Kittelson][42]. 
   
 
 
-### Integration Libraries
+### Community Integration Libraries
 
 #### Saltstack
+{: #community-integration-saltstack}
 
-  * [Datadog Salstack Formula][43]
+  * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45]. 
 
 #### Ansible
+{: #community-integration-ansible}
 
-  * This [Ansible script ][46] is a callback plugin that posts events to your Datadog event stream as you deploy and is written by [Alek Storm][47]. 
+  * This [Ansible script ][46] is a callback plugin that posts events to your Datadog event stream as you deploy. Written by [Alek Storm][47]. 
 
 #### FreeSwitch
+{: #community-integration-freeswitch}
 
   * This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49]. 
 
 #### Google Analytics
+{: #community-integration-google-analytics}
 
   * You can get data into Datadog from Google Analytics using our API with [this library][50]. 
 
 #### Pid-stats
+{: #community-integration-pid-stats}
 
   * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52]. 
 
