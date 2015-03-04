@@ -58,15 +58,27 @@ In other words at the highest level the JSON structure is a dictionary with 2 en
 
 You can overlay any event from Datadog. The general format is:
 
-    "events": "search query"
+    "events": [
+      {
+        "q": "search query"
+      }
+    ]
 
 For instance, to indicate that you want events for host X and tag Y:
 
-    "events": "host:X tags:Y"
+    "events": [
+      {
+        "q": "host:X tags:Y"
+      }
+    ]
 
 or if you're looking to display all errors:
 
-    "events": "status:error"
+    "events": [
+      {
+        "q": "status:error"
+      }
+    ]
 
 
 ### Scope
