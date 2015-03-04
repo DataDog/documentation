@@ -30,7 +30,7 @@ Datadgo Agentは、ログファイルから直接メトリクスを、抽出す�
 
 Datadog logs are formatted as follows:
 
-    metric unix_timestamp value [attribute1=v1 attributes2=v2 ...]
+    metric unix_timestamp value \[attribute1=v1 attributes2=v2 ...\]
 
 For example, imagining the content of `/var/log/web.log` to be:
 

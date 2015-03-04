@@ -27,7 +27,7 @@ the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
 availability, network endpoints and more.
 
-Once a monitor is created, you will be notified when the its conditions are met.
+Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
 Hipchat) or other custom endpoints via webhooks.
 
@@ -38,7 +38,8 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-## Glossary {#glossary}
+## Glossary 
+{: #glossary}
 
 Here is a quick overview of the different terms used in this guide.
 
@@ -49,7 +50,8 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor type**: host-, metric-, integration-, network-based and custom. See
   side navigation to drill into a specific type.
 
-## Creating a Monitor {#create}
+## Creating a Monitor 
+{: #create}
 
 Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
 page by highlighting the "Monitors" tab in the top menu and selecting the
@@ -58,7 +60,8 @@ on the left. This guide will walk through the configuration of each type.
 
 ![nav](/static/images/monitor/nav.png)
 
-## Host Monitors {#host}
+## Host Monitors 
+{: #host}
 
 *Requires Datadog Agent version >= 5.0.0.*
 
@@ -77,7 +80,8 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Metric Monitors {#metric}
+## Metric Monitors 
+{: #metric}
 
 1. Select the metric and scope you want to monitor.
   ![metric scope](/static/images/monitor/metric_scope.png)
@@ -179,7 +183,8 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 
-## Integration Monitors {#integration}
+## Integration Monitors 
+{: #integration}
 
 ![es status](/static/images/monitor/es_status.png)
 
@@ -197,7 +202,8 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
-## Process Monitors {#process}
+## Process Monitors 
+{: #process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
 
@@ -219,13 +225,14 @@ point they should notify.
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](check-alerting) section for details on the available options.
+   [custom monitors](#check-alerting) section for details on the available options.
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Network Monitors {#network}
+## Network Monitors 
+{: #network}
 
 ![network monitor](/static/images/monitor/network_monitor.png)
 
@@ -258,14 +265,15 @@ configuration.
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [alert-conditions](metric-conditions) section for details on the available
+   [alert-conditions](#metric-conditions) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Custom Monitors {#custom}
+## Custom Monitors 
+{: #custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
 
@@ -299,7 +307,8 @@ or service checks.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Monitor Notifications {#notification}
+## Monitor Notifications 
+{: #notification}
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -327,7 +336,8 @@ right people get notified so the problem can be resolved as soon as possible.
    anytime the monitor renotifies. The original message will be included as
    well.
 
-## Monitor FAQs {#faq}
+## Monitor FAQs 
+{: #faq}
 
 - *Can I manage my monitors programatically?*
 

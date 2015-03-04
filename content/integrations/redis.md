@@ -1,10 +1,11 @@
 ---
 title: Datadog-Redis Integration
+kind: documentation
 sidebar:
   nav:
     - header: Integrations
     - text: Back to Overview
-      href: "/ja/integrations/"
+      href: "/integrations/"
 ---
 <div id="int-overview">
 <h3>Overview</h3>
@@ -34,23 +35,22 @@ A: For CentOS5 we will look for python2.6, use that if it’s available, otherwi
 we will default to the system python (2.4, in this case). The easiest solution
 would be to remove Python 2.6 altogether and restart the Agent which should
 have it default to 2.4 and the redis checks should then work as expected.
-<br>
-<br>
 
 <span class="question">Q: Can the redis plugin draw metrics from different ports on the same host,
 if we are running more than 1 redis instance on each server?</span>
-<br>A: Yes! The value for `redis_urls` in your datadog.conf file can be a list of
+
+A: Yes! The value for `redis_urls` in your datadog.conf file can be a list of
 comma-separated redis hosts, such as:
 
 ```
 	redis_urls: localhost:6379, localhost:6380
 ```
-<br>
-<br>
+
 
 <span class="question">Q: How do I filter to look at
 the stats for a particular DB in a particular environment?</span>
-<br>A: Prebuilt dashboards only allow you to filter on a single tag
+
+A: Prebuilt dashboards only allow you to filter on a single tag
 (these are the dashboards you see when
 clicking <a href="https://app.datadoghq.com/account/overview"
 target="_blank">Overview</a>). If you go to the Metrics Explorer
@@ -64,7 +64,6 @@ a new dashboard.”
 
 <img src="/static/images/metric-explorer-redis.png"/>
 
-<br>
 
 The following metrics are collected by default with the Redis integration:
 
@@ -100,3 +99,6 @@ The following metrics are collected by default with the Redis integration:
     redis.replication.sync_left_bytes
     redis.stats.keyspace_hits
     redis.stats.keyspace_misses
+
+
+

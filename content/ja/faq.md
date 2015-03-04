@@ -149,7 +149,7 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 
 [Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。
 
-<!--[api]: /api/
+<!--
 
 
 
@@ -169,9 +169,10 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 
 <!--### Alerts {#alerts}
 
-#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? {#no-data}
+#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? 
+{: #no-data}
 
-For the AWS [No Data] errors, the issue here has to do with how frequently we
+For the AWS No Data errors, the issue here has to do with how frequently we
 receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
 APIs, data is often delayed by 10 or more minutes, so we generally recommend
 that an alert for an AWS metric be set to have a threshold window of at least
@@ -183,9 +184,9 @@ from AWS. -->
 
 ### アラートについて {#alerts}
 
-### メトリクスにアラートを設定したところ、なぜか非常に多くの[No Data] アラートが発生します。 {#no-data}
+### メトリクスにアラートを設定したところ、なぜか非常に多くのNo Data アラートが発生します。 {#no-data}
 
-AWSの[No Data]エラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。 DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデータは、10分かそれ以上遅延します。 従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。 (この時間枠の設定は、[アラートの設定方法](/ja/guides/alerting/)ページのアラートの新規設定の第3ステップを参照してください。) アラートの発生条件の時間枠を変更することで、この問題は解決するはずです。 より粒度の細かいデータでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデータを基にアラートを設定することをお勧めします。
+AWSのNo Dataエラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。 DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデータは、10分かそれ以上遅延します。 従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。 (この時間枠の設定は、[アラートの設定方法](/ja/guides/alerting/)ページのアラートの新規設定の第3ステップを参照してください。) アラートの発生条件の時間枠を変更することで、この問題は解決するはずです。 より粒度の細かいデータでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデータを基にアラートを設定することをお勧めします。
 
 <!--#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
 
@@ -968,7 +969,7 @@ by default you'll get the average across all hosts. -->
 -	`@yourname` - 'yourname'という名前のユーザに通知します。
 -	`@test@test.com` test@test.comに電子メールを送信します。
 -	HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
-	-	`@hipchat-[ルーム名]`または`@slack-[ルーム名]` - [ルーム名]で指定したチャットルームに、イベントやグラフをポストすることができます。
+	-	`@hipchat-\[ルーム名\]`または`@slack-[ルーム名]` - \[ルーム名\]で指定したチャットルームに、イベントやグラフをポストすることができます。
 	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio](https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/)のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration](/ja/integrations/webhooks/)のページと、ダッシュボードの[Integration](https://app.datadoghq.com/account/settings)タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
 	-	`@pagerduty`または`@oncall` - Pagerdutyにアラートを送信します。 更に、`@pagerduty-acknowledge` や `@pagerduty-resolve`を使って通知することもできます。
 

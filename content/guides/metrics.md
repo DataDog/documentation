@@ -161,7 +161,7 @@ EOF
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%">
+<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%"/>
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -197,7 +197,6 @@ EOF
 %>
   </div>
 </div>
-<br>
 
 Note that for counters coming from another source that are ever-increasing and never
 reset -- for example, the number of queries from MySQL over time -- we track the
@@ -304,7 +303,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-<img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%">
+<img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%"/>
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -468,7 +467,6 @@ EOF
   </div>
 </div>
 
-<hr>
 
 <h3 id="methods">Other Submission Methods</h3>
 

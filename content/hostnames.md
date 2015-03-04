@@ -69,7 +69,7 @@ internal DNS server or a config-managed hosts file (`myhost.mydomain`). Datadog
 creates aliases for host names when there are multiple uniquely identifiable
 names for a single host.
 
-The names collected by the Agent (detailed <a href="agent">above</a>) are
+The names collected by the Agent (detailed <a href="#agent">above</a>) are
 added as aliases for the chosen canonical name.
 
 You can see a list of all the hosts in your account from the Infrastructure tab

@@ -4,6 +4,8 @@
 require 'tempfile'
 #require './lib/snippets.rb'
 require 'oj'
+require "nanoc/toolbox"
+require "video_info"
 
 
 STATUS_CODES = {
@@ -19,13 +21,13 @@ STATUS_CODES = {
   409 => '409 Conflict',
   422 => '422 Unprocessable Entity',
   500 => '500 Server Error'
-}
+} unless defined? STATUS_CODES
 
 # The languages we show in code blocks.
-LANGUAGES = %w{Python Ruby Console}
+LANGUAGES = %w{Python Ruby Console} unless defined? LANGUAGES
 
 # The default active language
-ACTIVE_LANGUAGE = 'Python'
+ACTIVE_LANGUAGE = 'Python' unless defined? ACTIVE_LANGUAGE
 
 
 def language_class(languge)

@@ -20,9 +20,26 @@ $ bundle install --path vendor/bundle
 Once the deps are installed, you should be able to accomplish what you need to
 with the included Rake tasks.
 
-When writing docs, please use Markdown. This site actually uses Kramdown. To learn about the syntax, [see this site][1]
+To get the browser refresh working, you should install the LiveReload extension into your browser. Otherwise you will have to do the arduous task
+of clicking refresh yourself.
+
+When writing docs, please use Markdown. This site actually uses Kramdown. To learn about the syntax, [see this site][1].
+
+If you include ANY Markdown in the file, give it an .md extension.
 
 ## Doing stuff
+
+This is easy. Are you ready for it? Run this command:
+```
+rake
+```
+
+Yeah, that's it. This command will compile the site, check 
+for any bad links, and refresh your browser.
+
+Before you push, make sure you verify there are no bad links.
+
+## The old way of Doing stuff
 
 ### Compile the static site:
 

@@ -49,11 +49,11 @@ There are three plans within Datadog:
     good news is that switching from the Free plan to Pro will not affect your
     setup, so anything you've begun monitoring would not be affected by that status
     change.
-1. **Pro** is for 1-100 hosts and comes with 1 year of data retention.
+1. **Pro** is for 6-499 hosts and comes with 1 year of data retention.
     Pro includes metric alerts and email support.
 1. **Enterprise** is for
-    100+ hosts or any number of hosts but needing custom adjustments to what is
-    offered in the Pro plan. Enterprise pricing is based on three factors:
+    500+ hosts or any number of hosts but needing custom adjustments to what is
+    offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
     1. Data retention requirements and number of custom metrics (base plan includes 1 year retention,
 and 100 custom metrics)
     1. Size of your environment in servers

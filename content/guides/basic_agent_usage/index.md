@@ -95,7 +95,7 @@ up through <a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" targ
 Here is a quick guide for troubleshooting getting integrations installed:
 
 1. Run the info command (find this based on your OS in the left column above).
-<br>
+
 2. Is the integration showing up in the info command?
 	
 	+ <strong>No, it's not.</strong>
