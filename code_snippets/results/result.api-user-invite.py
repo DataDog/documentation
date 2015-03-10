@@ -1,1 +1,1 @@
-["jack@example.com", "jill@example.com"]
+{'emails': ['jack@example.com', 'jill@example.com']}

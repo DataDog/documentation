@@ -58,8 +58,8 @@ The pages below walk through how to integrate, what to expect, and how to troubl
 * <a href="/integrations/etcd/">Etcd</a>
 * <a href="/integrations/eventviewer/">Event Viewer</a>
 * <a href="/integrations/fabric/">Fabric</a>
-* <a href="/integrations/git/">Git</a>
 * <a href="/integrations/gearman/">Gearman</a>
+* <a href="/integrations/git/">Git</a>
 * <a href="/integrations/github/">Github</a>
 * <a href="/integrations/haproxy/">HAProxy</a>
 * <a href="/integrations/hipchat/">HipChat</a>
