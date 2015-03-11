@@ -7,4 +7,5 @@ options = {
 
 initialize(**options)
 
-api.Tag.delete('hostname')
+# Mute a host
+api.Monitor.mute('test.host')

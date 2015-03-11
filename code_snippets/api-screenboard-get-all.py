@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Tag.delete('hostname')
+api.Screenboard.get_all()
