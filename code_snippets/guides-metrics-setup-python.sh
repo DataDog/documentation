@@ -1,1 +1,1 @@
-easy_install dogstatsd-python
+pip install datadog

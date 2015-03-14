@@ -1,1 +1,1 @@
-from statsd import statsd
+from datadog import statsd
