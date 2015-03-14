@@ -1,8 +1,11 @@
 conf:
-    - include: 
+    - include:
        domain: domain_name
-       type: bean_type
-       bean: bean_name
+       type:
+         - bean_type
+       bean:
+         - first_bean_name
+         - second_bean_name
        attribute:
             nameOfAttribute:
                 metric_type: counter
@@ -16,6 +19,9 @@ conf:
         bean: 2nd_domain:type=BeanType,tag1=value1,tag2=value2
         # this line is equivalent to:
         # domain: 2nd_domain
-        # type: BeanType
-        # tag1: value1
-        # tag2: value2
+        # type:
+        #   - BeanType
+        # tag1:
+        #   - value1
+        # tag2:
+        #   - value2
