@@ -350,8 +350,8 @@ triggering scope into the message of Multi Alerts.
     trigger, resolve, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-      {{#var}} This text will show {{/var}} only if the variable `var` is true.
-      {{^var}} This text will show {{/var}} only if `var` is NOT true.
+        {{#var}} This text will show {{/var}} only if the variable `var` is true.
+        {{^var}} This text will show {{/var}} only if `var` is NOT true.
 
     The conditional variables available are is_alert, is_recovery, and is_no_data.
     These can also be seen in the "Use message template variables" help box in
