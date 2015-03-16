@@ -390,7 +390,9 @@ triggering scope into the message of Multi Alerts.
 
 - *Can you alert on a function?*
 
-  Yes, with a feature called 'query alerts'. Selecting the 'Source' tab of metric monitors will allow you to alert on custom queries and functions, similar to the JSON editor for graphs.
+  Yes, with a feature called 'query alerts'. Selecting the 'Source' tab of a
+  monitor editor (Step 1) will allow you to alert on custom queries and functions,
+  similar to the JSON editor for graphs.
 
 - *Can you alert on an event?*
 
