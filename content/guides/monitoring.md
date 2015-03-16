@@ -367,7 +367,7 @@ triggering scope into the message of Multi Alerts.
 
     ![no template var](/static/images/monitor/templatevar1.png)
 
-    and here is one that does:
+    and here is one that does (variable is `host.name`, highlighting added):
 
     ![template var](/static/images/monitor/templatevar2.png)
 
