@@ -1,7 +1,6 @@
 ---
 title: Datadog-Lighttpd Integration
 integration_title: Lighttpd
-integration_stub: lighttpd
 kind: integration
 
 ---

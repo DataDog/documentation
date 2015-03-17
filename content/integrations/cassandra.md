@@ -1,7 +1,6 @@
 ---
 title: Datadog-Cassandra Integration
 integration_title: Cassandra
-integration_stub: cassandra
 kind: integration
 ---
 

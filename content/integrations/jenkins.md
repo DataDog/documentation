@@ -1,7 +1,6 @@
 ---
 title: Datadog-Jenkins Integration
 integration_title: Jenkins
-integration_stub: jenkins
 kind: integration
 ---
 

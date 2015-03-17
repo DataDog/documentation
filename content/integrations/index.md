@@ -44,7 +44,7 @@ The pages below walk through how to integrate, what to expect, and how to troubl
 
 <ul>
   <% integration_items.each do |i| %>
-    <li><%= link_to i[:integration_title], '/integrations/'+i[:integration_stub].downcase %></li>
+    <li><%= link_to i[:integration_title], i.path %></li>
 <% end %>
 </ul>
 

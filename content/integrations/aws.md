@@ -1,7 +1,6 @@
 ---
 title: Datadog-AWS Cloudwatch Integration
 integration_title: Amazon Web Services Cloudwatch
-integration_stub: aws
 kind: integration
 sidebar:
   nav:

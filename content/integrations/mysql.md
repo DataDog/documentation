@@ -1,7 +1,6 @@
 ---
 title: Datadog-MySQL Integration
 integration_title: MySQL
-integration_stub: mysql
 kind: integration
 ---
 <div id="int-overview">

@@ -1,7 +1,6 @@
 ---
 title: Datadog-Gearman Integration
 integration_title: Gearman
-integration_stub: gearman
 kind: integration
 ---
 

@@ -1,8 +1,9 @@
 ---
 title: Datadog-Zookeeper Integration
 integration_title: Zookeeper
-integration_stub: zookeeper
+
 kind: integration
+doclevel: basic
 ---
 
 <div id="int-overview">

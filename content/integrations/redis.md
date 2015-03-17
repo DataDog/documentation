@@ -1,7 +1,7 @@
 ---
 title: Datadog-Redis Integration
 integration_title: Redis
-integration_stub: redis
+
 kind: integration
 ---
 

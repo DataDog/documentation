@@ -1,7 +1,7 @@
 ---
 title: Datadog-Varnish Integration
 integration_title: Varnish
-integration_stub: varnish
+
 kind: integration
 ---
 

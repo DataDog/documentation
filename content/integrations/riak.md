@@ -1,7 +1,7 @@
 ---
 title: Datadog-Riak Integration
 integration_title: Riak
-integration_stub: riak
+
 kind: integration
 ---
 

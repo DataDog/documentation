@@ -1,7 +1,6 @@
 ---
 title: Datadog-IIS Integration
 integration_title: IIS
-integration_stub: iis
 kind: integration
 ---
 

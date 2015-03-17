@@ -1,7 +1,7 @@
 ---
 title: Datadog-Memcached Integration
 integration_title: Memcached
-integration_stub: memcached
+
 kind: integration
 ---
 

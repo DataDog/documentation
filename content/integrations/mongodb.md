@@ -1,7 +1,6 @@
 ---
 title: Datadog-MongoDB Integration
 integration_title: MongoDB
-integration_stub: mongodb
 kind: integration
 ---
 

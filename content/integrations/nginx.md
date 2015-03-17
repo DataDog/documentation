@@ -1,7 +1,6 @@
 ---
 title: Datadog-NGINX Integration
 integration_title: nginx
-integration_stub: nginx
 kind: integration
 ---
 ### Overview

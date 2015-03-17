@@ -1,9 +1,8 @@
 ---
 title: Datadog-Cacti Integration
 integration_title: Cacti
-integration_stub: cacti
 kind: integration
-
+doclevel: basic
 ---
 <div id="int-overview">
 <h3>Overview</h3>
