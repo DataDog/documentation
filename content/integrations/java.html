@@ -1,12 +1,8 @@
 ---
 title: "JMX Checks"
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
-
+integration_title: JMX Checks
+integration_stub: java
+kind: integration
 ---
 <div> <h3 id="subtitle">Java, Cassandra, Tomcat, ActiveMQ, Solr</h3> <h2
 id="introduction">Introduction</h2> JMX Checks are agents checks that collect
@@ -103,7 +99,7 @@ top of these parameters, the filters support "custom" keys which means that you
 can filter by bean parameters.
 
 	Example: Let's say you want to collect metrics regarding the Cassandra
-cache. You could use the <code>type:</code> <code>  - Caches</code> filter: <br /> <br /> <%=snippet_code_block "jmx-cassandra-cache.yaml" %>
+cache. You could use the <code>type: Caches</code> filter: <br /> <br /> <%=snippet_code_block "jmx-cassandra-cache.yaml" %>
 
 <h4>The <code>attribute</code> filter</h4>
 

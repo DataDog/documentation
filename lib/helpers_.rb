@@ -13,4 +13,10 @@ def video_items
   @items.select { |item| item[:kind] == 'video'}
 end
 
+def integration_items
+  integrations = @items.select { |item| item[:kind] == 'integration'}
+  integrations.sort_by { |i| i[:integration_title].downcase }
+end
+
+
 

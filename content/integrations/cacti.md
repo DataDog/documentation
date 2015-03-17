@@ -1,11 +1,9 @@
 ---
 title: Datadog-Cacti Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Cacti
+integration_stub: cacti
+kind: integration
+
 ---
 <div id="int-overview">
 <h3>Overview</h3>

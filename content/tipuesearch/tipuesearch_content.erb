@@ -1,6 +1,6 @@
 <%
 require 'nokogiri'
-pages = @items.select{ |item| %w{article page documentation}.include? item[:kind] }.collect{ |item|
+pages = @items.select{ |item| %w{article page documentation integration}.include? item[:kind] }.collect{ |item|
   {
     "title" => item[:title],
     "text" => Nokogiri::HTML(item.compiled_content).at('body').inner_text,
