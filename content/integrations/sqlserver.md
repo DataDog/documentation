@@ -1,11 +1,8 @@
 ---
 title: Datadog-SQL Server Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: SQL Server
+integration_stub: sqlserver
+kind: integration
 ---
 
 <div id="int-overview">

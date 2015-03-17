@@ -1,11 +1,8 @@
 ---
 title: Datadog-New Relic Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: New Relic
+integration_stub: new_relic
+kind: integration
 ---
 
 #### Why do my application-level metrics have different values in New Relic and Datadog?

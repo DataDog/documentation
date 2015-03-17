@@ -1,11 +1,8 @@
 ---
 title: Datadog-Nagios Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Nagios
+integration_stub: nagios
+kind: integration
 ---
 
 <div id="int-overview">
@@ -21,7 +18,7 @@ Capture Nagios activity in Datadog to:
 
 Set up information collection for Nagios by editing the given YAML configuration file <a href="https://github.com/DataDog/dd-agent/blob/5.1.1/conf.d/nagios.yaml.example">nagios.yaml.example</a> and renaming it as nagios.yaml
 
-After having Nagios reporting to Datadog for a week, an interactive report on alerting checks can be found 
+After having Nagios reporting to Datadog for a week, an interactive report on alerting checks can be found
 <a href="https://app.datadoghq.com/report/nagios">here</a>.
 
 To integrate with Icinga, because it is a fork of Nagios, you should be able to use the Nagios integration to pull in Icinga events. Just link to the Icinga configuration instead of the Nagios one.

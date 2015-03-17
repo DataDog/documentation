@@ -1,11 +1,8 @@
 ---
 title: Datadog-Bitbucket Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Bitbucket
+integration_stub: bitbucket
+kind: integration
 ---
 ### Overview
 

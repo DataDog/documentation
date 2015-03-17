@@ -1,6 +1,8 @@
 ---
 title: Datadog-AWS Cloudwatch Integration
-kind: documentation
+integration_title: Amazon Web Services Cloudwatch
+integration_stub: aws
+kind: integration
 sidebar:
   nav:
     - header: AWS integration
@@ -10,9 +12,6 @@ sidebar:
       href: "#cloudtrail"
     - text: Troubleshooting
       href: "#troubleshooting"
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
 ---
 
 

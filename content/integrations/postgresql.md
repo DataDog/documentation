@@ -1,11 +1,8 @@
 ---
 title: Datadog-PostgreSQL Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: PostgreSQL
+integration_stub: postgresql
+kind: integration
 ---
 
 <div id="int-overview">
