@@ -38,7 +38,7 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-## Glossary 
+## Glossary
 {: #glossary}
 
 Here is a quick overview of the different terms used in this guide.
@@ -50,7 +50,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor type**: host-, metric-, integration-, network-based and custom. See
   side navigation to drill into a specific type.
 
-## Creating a Monitor 
+## Creating a Monitor
 {: #create}
 
 Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
@@ -60,7 +60,7 @@ on the left. This guide will walk through the configuration of each type.
 
 ![nav](/static/images/monitor/nav.png)
 
-## Host Monitors 
+## Host Monitors
 {: #host}
 
 *Requires Datadog Agent version >= 5.0.0.*
@@ -80,7 +80,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Metric Monitors 
+## Metric Monitors
 {: #metric}
 
 1. Select the metric and scope you want to monitor.
@@ -183,7 +183,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 
-## Integration Monitors 
+## Integration Monitors
 {: #integration}
 
 ![es status](/static/images/monitor/es_status.png)
@@ -202,7 +202,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
-## Process Monitors 
+## Process Monitors
 {: #process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
@@ -231,7 +231,7 @@ point they should notify.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Network Monitors 
+## Network Monitors
 {: #network}
 
 ![network monitor](/static/images/monitor/network_monitor.png)
@@ -272,7 +272,7 @@ configuration.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Custom Monitors 
+## Custom Monitors
 {: #custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
@@ -307,7 +307,7 @@ or service checks.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Monitor Notifications 
+## Monitor Notifications
 {: #notification}
 
 Notifications are a key component of any monitor. You want to make sure the
@@ -336,7 +336,61 @@ right people get notified so the problem can be resolved as soon as possible.
    anytime the monitor renotifies. The original message will be included as
    well.
 
-## Monitor FAQs 
+
+### Message template variables
+
+Message template variables can be used to customize your monitor notifications.
+This feature is supported in all monitor types. There are two primary use cases
+for template variables: 1) displaying a different message depending on the
+notification type (e.g. triggered, recovered, no data) and 2) incorporating the
+triggering scope into the message of multi alerts.
+
+1. **Conditional variables for different notification types**: You can have a
+    monitor event display a different message depending on whether the event is a
+    trigger, recover, or no data notification. These variables use simple if-else
+    logic with the following syntax:
+
+        {{#var}} This text will show {{/var}} only if the variable `var` is true.
+        {{^var}} This text will show {{/var}} only if `var` is NOT true.
+
+    Here is an example of how you can set it up in the editor:
+
+    ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+
+    The corresponding trigger event notification will look like this:
+
+    ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+
+    and the recovery notification:
+
+    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+
+    The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
+    These can also be seen in the "Use message template variables" help box in
+    Step 3 of the monitor editor.
+
+2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
+    of having a generic message (and finding the triggering tag scope in the alert
+    query definition), a variable can be used in the message for explicitly
+    identifying the triggering scope.
+
+    Here is an example of how you can use template variables for a multi alert:
+
+    ![template var editor](/static/images/monitor/templatevareditor.png)
+
+    and the corresponding event notification:
+
+    ![template var trigger](/static/images/monitor/templatevar.png)
+
+    The tag template variables available depend on the tag group selected in Step 1
+    of the monitor editor. The possible options will automatically populate at the
+    bottom of the "Use message template variables" help box in Step 3 of the editor.
+    These variables can also be used in the monitor titles (names), but note that
+    the variables are only populated in the text of Datadog child events (not the
+    parent, which displays an aggregation summary).
+
+
+## Monitor FAQs
 {: #faq}
 
 - *Can I manage my monitors programatically?*
@@ -347,11 +401,12 @@ right people get notified so the problem can be resolved as soon as possible.
 
 - *Can you alert on a function?*
 
-  Not currently but this feature is in the works.
+  Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
+  alert on custom queries and functions, similar to the JSON editor for graphs.
 
 - *Can you alert on an event?*
 
-  Not currently, but we're discussing how we'd like to implement this. As an
+  Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
 
