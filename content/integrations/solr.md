@@ -1,12 +1,10 @@
 ---
 title: Datadog-Solr Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Solr
+integration_stub: solr
+kind: integration
 ---
+
 For information on Solr, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
 
 The following metrics are collected by default with the SOLR integration:

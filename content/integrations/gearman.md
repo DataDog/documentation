@@ -1,11 +1,8 @@
 ---
 title: Datadog-Gearman Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Gearman
+integration_stub: gearman
+kind: integration
 ---
 
 <div id="int-overview">

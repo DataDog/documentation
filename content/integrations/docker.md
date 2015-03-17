@@ -1,11 +1,8 @@
 ---
 title: Datadog-Docker Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Docker
+integration_stub: docker
+kind: integration
 ---
 
 <div id="int-overview">

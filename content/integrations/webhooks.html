@@ -1,11 +1,8 @@
 ---
 title: Datadog-Webhooks Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Webhooks
+integration_stub: webhooks
+kind: integration
 ---
 
 
@@ -22,9 +19,9 @@ With Webhooks you'll be able to:
 <div id="int-setup">
 <h3>Setup</h3>
 
-<p>To create a webhook, just enter the URL and a name. Then to use your 
-webhook in Datadog, just add @webhook-name_of_the_webhook in the 
-text of the metric alert you want to trigger the webhook. It will 
+<p>To create a webhook, just enter the URL and a name. Then to use your
+webhook in Datadog, just add @webhook-name_of_the_webhook in the
+text of the metric alert you want to trigger the webhook. It will
 trigger a POST request to the URL you set with the following content in JSON format.</p>
 
 <p>You can also specify your own payload in order to add your own fields to the request.

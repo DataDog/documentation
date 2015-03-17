@@ -1,11 +1,8 @@
 ---
 title: Datadog-etcd Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: etcd
+integration_stub: etcd
+kind: integration
 ---
 
 <div id="int-overview">

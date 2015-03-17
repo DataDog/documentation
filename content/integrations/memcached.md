@@ -1,11 +1,8 @@
 ---
 title: Datadog-Memcached Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Memcached
+integration_stub: memcached
+kind: integration
 ---
 
 <div id="int-overview">
