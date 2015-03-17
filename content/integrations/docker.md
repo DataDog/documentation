@@ -1,8 +1,8 @@
 ---
 title: Datadog-Docker Integration
 integration_title: Docker
-integration_stub: docker
 kind: integration
+doclevel: basic
 ---
 
 <div id="int-overview">

@@ -1,7 +1,7 @@
 ---
 title: Datadog-Solr Integration
 integration_title: Solr
-integration_stub: solr
+
 kind: integration
 ---
 

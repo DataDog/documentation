@@ -32,14 +32,19 @@ this layout provides a sidebar and main column.
             <li class="nav-header auto">Other Integrations</li>
               <li><a href="/integrations/">Back to Overview</a></li>
               <% integration_items.each do |i| %>
+              <% basic="" %>
+              <% if i[:doclevel] && i[:doclevel] == 'basic' %>
+                <% basic = " *" %>
+              <% end %>
               <% if i[:title] == @item[:title] %>
                 <li>
                   <%= link_to '> ' + i[:integration_title], '#' %>
                 </li>
               <% else %>
-                <li><%= link_to i[:integration_title], '/integrations/' + i[:integration_stub] %></li>
+                <li><%= link_to i[:integration_title] + basic,i.path %></li>
               <% end %>
                 <% end %>
+                <li><i>* basic level documentation</i></li>
           </ul>
         &nbsp;
         </div>

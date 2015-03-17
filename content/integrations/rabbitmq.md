@@ -1,7 +1,7 @@
 ---
 title: Datadog-RabbitMQ Integration
 integration_title: RabbitMQ
-integration_stub: rabbitmq
+
 kind: integration
 ---
 

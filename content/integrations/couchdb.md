@@ -1,7 +1,6 @@
 ---
 title: Datadog-CouchDB Integration
 integration_title: CouchDB
-integration_stub: couchdb
 kind: integration
 ---
 

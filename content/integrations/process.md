@@ -1,7 +1,7 @@
 ---
 title: Process check
 integration_title: Process Check
-integration_stub: process
+
 kind: integration
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Datadog-PostgreSQL Integration
 integration_title: PostgreSQL
-integration_stub: postgresql
+
 kind: integration
 ---
 

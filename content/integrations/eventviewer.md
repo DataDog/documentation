@@ -1,8 +1,8 @@
 ---
 title: Datadog-Event Viewer Integration
 integration_title: Event Viewer
-integration_stub: eventviewer
 kind: integration
+doclevel: basic
 ---
 
 <div id="int-overview">

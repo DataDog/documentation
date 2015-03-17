@@ -1,7 +1,6 @@
 ---
 title: Datadog-etcd Integration
 integration_title: etcd
-integration_stub: etcd
 kind: integration
 ---
 
