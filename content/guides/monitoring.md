@@ -347,11 +347,23 @@ triggering scope into the message of Multi Alerts.
 
 1. **Conditional variables for different notification types**: You can have a
     monitor event display a different message depending on whether the event is a
-    trigger, resolve, or no data notification. These variables use simple if-else
+    trigger, recover, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
         {{#var}} This text will show {{/var}} only if the variable `var` is true.
         {{^var}} This text will show {{/var}} only if `var` is NOT true.
+
+    Here is an example of how you can set it up in the editor:
+
+    ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+
+    The corresponding trigger event notification will look like this:
+
+    ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+
+    and the recovery notification:
+
+    ![conditional resolve](/static/images/monitor/templateconditionalrecover.png)
 
     The conditional variables available are is_alert, is_recovery, and is_no_data.
     These can also be seen in the "Use message template variables" help box in
@@ -362,14 +374,14 @@ triggering scope into the message of Multi Alerts.
     query definition), a variable can be used in the message for explicitly
     identifying the triggering scope.
 
-    For instance, here is an example Multi Alert event notification that doesn't
-    use template variables:
+    For instance, here is an example of how you can use template variables for a
+    Multi Alert:
 
-    ![no template var](/static/images/monitor/templatevar1.png)
+    ![template var editor](/static/images/monitor/templatevareditor.png)
 
-    and here is one that does (variable is `host.name`, highlighting added):
+    and here is the corresponding event notification:
 
-    ![template var](/static/images/monitor/templatevar2.png)
+    ![template var trigger](/static/images/monitor/templatevar.png)
 
     The tag template variables available depend on the tag group selected in Step 1
     of the monitor editor. The possible options will automatically populate at the
@@ -390,9 +402,8 @@ triggering scope into the message of Multi Alerts.
 
 - *Can you alert on a function?*
 
-  Yes, with a feature called 'query alerts'. Selecting the 'Source' tab of a
-  monitor editor (Step 1) will allow you to alert on custom queries and functions,
-  similar to the JSON editor for graphs.
+  Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
+  alert on custom queries and functions, similar to the JSON editor for graphs.
 
 - *Can you alert on an event?*
 
