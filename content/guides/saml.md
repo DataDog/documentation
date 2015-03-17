@@ -1,6 +1,7 @@
 ---
 title: Single Sign On With SAML
-kind: documentation
+kind: guide
+listorder: 11
 sidebar:
   nav:
     - header: Guide to SAML SSO

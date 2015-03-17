@@ -1,6 +1,7 @@
 ---
 title: Deploying the Datadog Agent to Azure
-kind: documentation
+kind: guide
+listorder: 8
 ---
 
 This guide assumes you are deploying an Azure Cloud Service.

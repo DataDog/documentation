@@ -18,5 +18,8 @@ def integration_items
   integrations.sort_by { |i| i[:integration_title].downcase }
 end
 
-
+def guide_items
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil}
+  guides.sort_by { |item| item[:listorder] }
+end
 

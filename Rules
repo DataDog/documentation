@@ -76,6 +76,8 @@ compile '*' do
       layout 'examplelayout'
     when id.match('/videos/') && @item[:kind] == 'video'
       layout 'videolayout'
+    when id.match('/guides/') && @item[:kind] == 'guide'
+      layout 'guide_layout'
     else
       layout 'default'
     end

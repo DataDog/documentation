@@ -1,6 +1,7 @@
 ---
 title: Deploying the Agent with Chef
-kind: documentation
+kind: guide
+listorder: 7
 sidebar:
   nav:
     - header: Guide to Chef

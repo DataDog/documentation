@@ -1,6 +1,7 @@
 ---
 title: Datadog Overview
-kind: documentation
+kind: guide
+listorder: 2
 sidebar:
   nav:
     - header: All About Datadog
