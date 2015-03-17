@@ -343,7 +343,7 @@ Message template variables can be used to customize your monitor notifications.
 This feature is supported in all monitor types. There are two primary use cases
 for template variables: 1) displaying a different message depending on the
 notification type (e.g. triggered, recovered, no data) and 2) incorporating the
-triggering scope into the message of Multi Alerts.
+triggering scope into the message of multi alerts.
 
 1. **Conditional variables for different notification types**: You can have a
     monitor event display a different message depending on whether the event is a
@@ -363,23 +363,22 @@ triggering scope into the message of Multi Alerts.
 
     and the recovery notification:
 
-    ![conditional resolve](/static/images/monitor/templateconditionalrecover.png)
+    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
-    The conditional variables available are is_alert, is_recovery, and is_no_data.
+    The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
     Step 3 of the monitor editor.
 
-2. **Tag variables for Multi Alerts**: When your monitor is a Multi Alert, instead
+2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
     of having a generic message (and finding the triggering tag scope in the alert
     query definition), a variable can be used in the message for explicitly
     identifying the triggering scope.
 
-    For instance, here is an example of how you can use template variables for a
-    Multi Alert:
+    Here is an example of how you can use template variables for a multi alert:
 
     ![template var editor](/static/images/monitor/templatevareditor.png)
 
-    and here is the corresponding event notification:
+    and the corresponding event notification:
 
     ![template var trigger](/static/images/monitor/templatevar.png)
 
