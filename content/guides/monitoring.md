@@ -353,17 +353,21 @@ triggering scope into the message of multi alerts.
         {{#var}} This text will show {{/var}} only if the variable `var` is true.
         {{^var}} This text will show {{/var}} only if `var` is NOT true.
 
+
     Here is an example of how you can set it up in the editor:
 
     ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+
 
     The corresponding trigger event notification will look like this:
 
     ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
 
+
     and the recovery notification:
 
     ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+
 
     The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
@@ -378,9 +382,11 @@ triggering scope into the message of multi alerts.
 
     ![template var editor](/static/images/monitor/templatevareditor.png)
 
+
     and the corresponding event notification:
 
     ![template var trigger](/static/images/monitor/templatevar.png)
+
 
     The tag template variables available depend on the tag group selected in Step 1
     of the monitor editor. The possible options will automatically populate at the
