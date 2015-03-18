@@ -10,6 +10,8 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 ## Getting started
 
+**NOTE: if you are Datadog Internal, use this on your host os and not on the personal-chef vm. There are a few reports that it will not run on personal-chef. **
+
 Install the dependencies with `bundler`. I like to install them under the
 project root:
 
@@ -33,30 +35,40 @@ This is easy. Are you ready for it? Run this command:
 ```
 rake
 ```
-
+*(If you get a message about libnotify or something else, are you a Datadog employee and running on personal chef? Read the note right below Getting started above.)*
 Yeah, that's it. This command will compile the site, check 
 for any bad links, and refresh your browser.
 
 Before you push, make sure you verify there are no bad links.
 
-## The old way of Doing stuff
+## How to add a new integration
 
-### Compile the static site:
+Create a markdown file under content/integratons. Add the following front matter at the top of the file:
 
-```
-$ bundle exec rake compile
-```
+    ---
+    title: Datadog-<integration name> Integration
+    integration_title: <integration name>
+    kind: integration
+    doclevel: basic
+    ---
 
-### Run a local webserver to view the compiled site:
+If you are writing a lot about the integration, change doclevel to complete or just remove the whole line. Now write the doc. There is no need to update any index, menu, or sidebars. Those are automatically generated. 
 
-```
-$ bundle exec rake view
-```
+## How to add a new Guide
 
-### Run a local webserver and auto-update:
-(This is now super-quick, so there is no reason not to do this.)
+Create a markdown file under content/guides. Add the following front matter at the top of the file:
 
-```
-$ bundle exec guard
-```
+    ---
+    title: <guide title>
+    kind: guide
+    listorder: <where in the list you want the doc to appear>
+    ---
+
+Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated. 
+
+## Things to keep in mind
+
+Make sure all files are lowercase. The Mac is case insensitive when creating links to images and pages, but where the docs are hosted is not. The test will be fine on the Mac but will fail in production.
+
+
 [1]: http://kramdown.gettalong.org/quickref.html
