@@ -70,10 +70,14 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/ja/')
       layout 'default-ja'
-    when id.match('/examples/') && @item[:kind] == 'example'
+    when id.match('/integrations') && @item[:kind] == 'integration'
+      layout 'integration_layout'
+     when id.match('/examples/') && @item[:kind] == 'example'
       layout 'examplelayout'
     when id.match('/videos/') && @item[:kind] == 'video'
       layout 'videolayout'
+    when id.match('/guides/') && @item[:kind] == 'guide'
+      layout 'guide_layout'
     else
       layout 'default'
     end

@@ -1,11 +1,8 @@
 ---
 title: Datadog-Riak Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Riak
+
+kind: integration
 ---
 
 <div id="int-overview">

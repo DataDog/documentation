@@ -1,6 +1,7 @@
 ---
 title: Setting up Network Checks
-kind: documentation
+kind: guide
+listorder: 6
 sidebar:
   nav:
     - header: Guide to Network Checks

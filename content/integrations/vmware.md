@@ -1,11 +1,8 @@
 ---
 title: Datadog-VMware Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: VMware
+
+kind: integration
 ---
 
 <div id="int-overview">

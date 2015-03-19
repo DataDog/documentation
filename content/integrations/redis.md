@@ -1,12 +1,10 @@
 ---
 title: Datadog-Redis Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Redis
+
+kind: integration
 ---
+
 <div id="int-overview">
 <h3>Overview</h3>
 Track and graph your Redis activity and performance metrics with slice-and-dice at

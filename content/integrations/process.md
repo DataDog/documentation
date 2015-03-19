@@ -1,11 +1,8 @@
 ---
 title: Process check
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to System Integrations
-      href: "/integrations/system/"
+integration_title: Process Check
+
+kind: integration
 ---
 
 <div id="int-overview">

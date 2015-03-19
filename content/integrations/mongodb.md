@@ -1,11 +1,7 @@
 ---
 title: Datadog-MongoDB Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: MongoDB
+kind: integration
 ---
 
 <div id="int-overview">
