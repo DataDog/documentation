@@ -1,28 +1,56 @@
 ---
-title: Datadog-Apache Integration
+title: Datadog-Apache インテグレーション
 sidebar:
   nav:
-    - header: Integrations
-    - text: Back to Overview
+    - header: インテグレーション
+    - text: インデックスへ戻る
       href: "/ja/integrations/"
 ---
-<div id="int-overview">
+<!-- <div id="int-overview">
 <h3>Overview</h3>
+
 <p>Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.</p>
 <ul>
   <li>Visualize your web server performance</li>
   <li>Correlate the performance of Apache with the rest of your applications</li>
 </ul>
 
-</div>
+</div> -->
 
-From the open-source Agent:
+### 概要と目的
+{: #int-overview}
+
+Apacheからリアルタイムでメトリクスの収集しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付けてる。
+
+* Webサーバのパフォーマンスの可視化する
+* Apacheのパフォーマンスをインフラに含まれる他のアプリケーションと相互に関連付けて把握する
+
+
+<!-- From the open-source Agent:
 
 * <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example">Apache YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a>
+* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a> -->
+
+### Datadog Agentの関連ソールコードへのリンク
+
+* [Apache checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py)
+* [Apache YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example)
 
 
-The following metrics are collected by default with the Apache integration:
+<!-- The following metrics are collected by default with the Apache integration:
+
+    apache.net.bytes
+    apache.net.bytes_per_s
+    apache.net.hits
+    apache.net.request_per_s
+    apache.performance.busy_workers
+    apache.performance.cpu_load
+    apache.performance.idle_workers
+    apache.performance.uptime -->
+
+### 収集しているメトリクス
+
+Apacheインテグレーションは、次のメトリクスをディフォルトで収集してます:
 
     apache.net.bytes
     apache.net.bytes_per_s
@@ -34,7 +62,7 @@ The following metrics are collected by default with the Apache integration:
     apache.performance.uptime
 
 
-<div id="int-configuration">
+<!-- <div id="int-configuration">
 <h3>Configuration</h3>
  <p><em>To capture Apache metrics you need to install the Datadog agent.</em></p>
 
@@ -61,4 +89,42 @@ then echo -e "&#92;e[0;32mAgent is running&#92;e[0m"; &#92;
 else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
     </li>
 </ol>
-</div>
+</div> -->
+
+
+### 設定
+{: #int-configuration}
+
+**To capture Apache metrics you need to install the Datadog agent.**
+**Apacheのメトリクスを収集するには、Datadog Agentのインストールがつようです。*詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。
+
+1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認してください。
+
+2.Apacheのメトリクスを収集するためのにDatadog Agentの設定ファイルを次のように設定してください。(`mod_status`が、メトリクスを表示しているURLを指定します。)
+
+  `/etc/dd-agent/datadog.conf`の編集例
+
+~~~
+#-------------------------------------------------------------------------#
+# Apache                                                                  #
+#-------------------------------------------------------------------------#
+
+# Url to Apache's status page. You must have mod_status installed.
+# See http://httpd.apache.org/docs/2.0/mod/mod_status.html for details.
+
+apache_status_url: http://YOUR_SERVER_ADDRESS/server-status/?auto
+~~~
+
+3.`datadog.conf`の設定が完了したら、Datadog Agentを再起動します。
+
+~~~
+sudo /etc/init.d/datadog-agent restart
+~~~
+
+4.次のコマンドで再起動の確認をします。
+
+~~~
+if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; ¥
+then echo -e "¥e[0;32mAgent is running&#92;e[0m"; ¥
+else echo -e "¥e[031mAgent is not running&#92;e[0m"; fi
+~~~
