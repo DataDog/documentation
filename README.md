@@ -39,7 +39,9 @@ rake
 Yeah, that's it. This command will compile the site, check 
 for any bad links, and refresh your browser.
 
-Before you push, make sure you verify there are no bad links.
+Before you push, make sure you verify there are no bad links. 
+
+# Your final step should be to exit rake, then run ```rake clean``` then ```rake```. If there are no errors, then and only then push and merge. If there are errors, please don't merge
 
 ## How to add a new integration
 
