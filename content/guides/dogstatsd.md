@@ -14,6 +14,8 @@ sidebar:
       href: "#sample-rates"
     - text: Tags
       href: "#tags"
+    - text: Events
+      href: "#events"
     - text: Configuration
       href: "#configuration"
     - text: Datagram Format
