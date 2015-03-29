@@ -512,52 +512,47 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
     Metrics
 ===============================================================================
 -->
-<h3><a name="metrics" href="#metrics">Metrics</a></h3>
+### Metrics
 
-<h4 id="custom-metrics">How do I submit custom metrics?</h4>
-<p>
-You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
-</p>
+#### How do I submit custom metrics?
 
-<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
-<p>
-StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
-</p>
+You can submit your custom metrics with the DogStatsD client. You can read more about this [here][1]. 
 
-<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
-<p>
-Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
-</p>
 
-<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
-<p>
-Unfortunately, we do not allow adding past data at this time.
-</p>
+#### Why is my counter metric showing decimal values?
 
-<h4 id="metric-syntax">Correct metric syntax (JSON)?</h4>
-<p>
-This depends on the medium you use to send metrics.
-<ul>
-<li>For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.</li>
-<li>For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.</li>
-<li>For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.</li>
-</ul>
-</p>
+StatsD counters are normalized over the flush interval to report per-second units. You can read more about this [here][2]. 
 
-<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
-<p>
-We offer reporting in a variety of ways so far, which include:
-<ul>
-<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
-<li>For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.</li>
-<li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
-</ul>
-</p>
 
-<h4 id="metric-disk-usage">How do I get disk usage as a percentage instead of in bytes?</h4>
-<p>
-The Datadog Agent emits a metric named <code>system.disk.in_use</code> which will give you disk usage as a percentage.
-</p>
+#### Is there a way to submit metrics from my log data?
+
+Yes there is! We detail log parsing [here][3]. 
+
+
+#### I’d like to add past data to my account. Is there a way to do that?
+
+Unfortunately, we do not allow adding past data at this time. 
+
+#### Correct metric syntax (JSON)?
+
+This depends on the medium you use to send metrics. 
+
+  * For an Agent Check, see this [link][4].
+  * For DogStatsD, see this [link][5].
+  * For the API, see this [link][6].
+
+
+#### Is there a way I can get metric reports?
+
+We offer reporting in a variety of ways so far, which include: 
+
+  * The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.
+  * For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.
+  * Metric alerts provide a way to report changes that are outside of what you define as “normal”.
+
+#### How do I get disk usage as a percentage instead of in bytes?
+
+The Datadog Agent emits a metric named `system.disk.in_use` which will give you disk usage as a percentage. 
 
 #### How is data aggregated in graphs
 {: #metric-aggregation}
@@ -572,6 +567,11 @@ than two minutes), you could end up getting all of those exact points
 displayed. Otherwise, you'll see coarser and coarser granularity as the
 amount of time requested increases. We do this time aggregation via
 average,sum,  min, max, or count.
+
+#### What's the difference between system.load.1, system.load.5, and system.load.15?
+{: #systemload1-5-15}
+
+When you run uptime on a *nix system, the three numbers at the end represent system.load.1, system.load.5, and system.load.15. System.load.1 is the system load for the past 1 minute for a single core. Related to these is system.load.norm.1, which is the system.load for the past 1 minute on divided by the number of cores on that machine.
 
 <h4 id="metric-other">Any other things about metrics?</h4>
 <p>
@@ -742,3 +742,10 @@ dashboards, etc. which are not supposed to be removed.</li>
 <p>
 You can send the request to support@datadoghq.com and we will add it to our feature request log.
 </p>
+
+   [1]: http://docs.datadoghq.com/guides/metrics/
+   [2]: http://docs.datadoghq.com/guides/metrics/#counters
+   [3]: http://docs.datadoghq.com/guides/logs/
+   [4]: http://docs.datadoghq.com/guides/agent_checks/#sending-metrics
+   [5]: http://docs.datadoghq.com/guides/dogstatsd/#metrics
+   [6]: http://docs.datadoghq.com/api/#metrics-post
