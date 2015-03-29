@@ -529,9 +529,9 @@ StatsD counters are normalized over the flush interval to report per-second unit
 Yes there is! We detail log parsing [here][3]. 
 
 
-#### I’d like to add past data to my account. Is there a way to do that?
+#### I’d like to add historical data to my account. Is there a way to do that?
 
-Unfortunately, we do not allow adding past data at this time. 
+Unfortunately, we do not allow adding historical data at this time. 
 
 #### Correct metric syntax (JSON)?
 
