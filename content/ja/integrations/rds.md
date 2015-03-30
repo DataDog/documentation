@@ -1,9 +1,9 @@
 ---
-title: Datadog-AWS RDS Integration
+title: Datadog-AWS RDS インテグレーション
 sidebar:
   nav:
-    - header: Integrations
-    - text: Back to Overview
+    - header: インテグレーション
+    - text: インデックスへ戻る
       href: "/ja/integrations/"
 ---
 

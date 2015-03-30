@@ -1,11 +1,7 @@
 ---
 title: Datadog-HAProxy Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: HAProxy
+kind: integration
 ---
 
 <div id="int-overview">

@@ -1,6 +1,7 @@
 ---
 title: Getting Started with the Agent
-kind: documentation
+kind: guide
+listorder: 1
 ---
 
 <div class="alert alert-info">
@@ -31,7 +32,7 @@ and it will capture system metrics like memory and CPU.
 </li>
 <li>Dogstatsd is a statsd backend server you can send custom metrics to from an application.
 </li>
-<li>The forwader is pushed data from both dogstatsd and the collector and queues 
+<li>The forwarder retrieves data from both dogstatsd and the collector and then queues 
 it up to be sent to Datadog.
 </li>
 </ul>

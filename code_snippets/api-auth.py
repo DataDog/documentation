@@ -1,4 +1,8 @@
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = 'api_key'
-api.application_key = 'app_key'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)

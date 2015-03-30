@@ -1,11 +1,8 @@
 ---
 title: Datadog-Lighttpd Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Lighttpd
+kind: integration
+
 ---
 <div id="int-overview">
 <h3>Overview</h3>

@@ -1,11 +1,7 @@
 ---
 title: Datadog-CouchDB Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: CouchDB
+kind: integration
 ---
 
 <div id="int-overview">

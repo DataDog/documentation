@@ -47,14 +47,21 @@
     // Export to global scope.
     window.DD_docs = DD_docs;
 
-    var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage)
-    var noOverride = window.location.href.indexOf("overridelang") == -1;
-    if (noOverride) {
-        if (language.indexOf('ja') > -1 && window.location.pathname.indexOf('/ja/') != 0) {
-            document.location.href = '/ja' + window.location.pathname;
-        } else if (language.indexOf('ja') == -1 && window.location.pathname.indexOf('/ja/') == 0) {
-            document.location.href = window.location.pathname.substring(3);
-        }
-    }
+    // var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage)
+    // var noOverride = window.location.href.indexOf("overridelang") == -1;
+    // if (noOverride) {
+    //     if (language.indexOf('ja') > -1 && window.location.pathname.indexOf('/ja/') != 0) {
+    //         document.location.href = '/ja' + window.location.pathname;
+    //     } else if (language.indexOf('ja') == -1 && window.location.pathname.indexOf('/ja/') == 0) {
+    //         document.location.href = window.location.pathname.substring(3);
+    //     }
+    // }
+
 
 })();
+
+
+$(document).ready(function() {
+     $('#tipue_search_input').tipuesearch();
+});
+

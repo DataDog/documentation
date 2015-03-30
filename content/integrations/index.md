@@ -95,5 +95,9 @@ The pages below walk through how to integrate, what to expect, and how to troubl
 * <a href="/integrations/vmware/">VMWare</a>
 * <a href="/integrations/webhooks/">Webhooks</a>
 * <a href="/integrations/zookeeper/">ZooKeeper</a>
-
-
+=======
+<ul>
+  <% integration_items.each do |i| %>
+    <li><%= link_to i[:integration_title], i.path %></li>
+<% end %>
+</ul>

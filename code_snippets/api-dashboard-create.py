@@ -1,11 +1,15 @@
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
 
 title = "My Timeboard"
 description = "An informative timeboard."
-graphs =  [{
+graphs = [{
     "definition": {
         "events": [],
         "requests": [
@@ -17,9 +21,9 @@ graphs =  [{
 }]
 
 template_variables = [{
-	"name": "host1",
-	"prefix": "host",
-	"default": "host:my-host"
+    "name": "host1",
+    "prefix": "host",
+    "default": "host:my-host"
 }]
 
-api.create_dashboard(title, description, graphs, template_variables)
+api.Timeboard.create(title=title, description=description, graphs=graphs, template_variables=template_variables)

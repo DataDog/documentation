@@ -1,11 +1,11 @@
 ---
 title: System Integrations
-kind: documentation
+integration_title: System Integrations
+
+kind: integration
 sidebar:
   nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+    - header: System Integrations
     - text: Directory check
       href: "/integrations/directory/"
     - text: Process check

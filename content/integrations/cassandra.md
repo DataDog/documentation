@@ -1,11 +1,7 @@
 ---
 title: Datadog-Cassandra Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Cassandra
+kind: integration
 ---
 
 For information on Cassandra, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
