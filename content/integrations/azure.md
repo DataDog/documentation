@@ -37,9 +37,7 @@ Datadog only requires Basic metrics, network and web metrics as well as .Net met
 
 ### Deploy agents
 {: #agents}
-You can either deploy agents manually by following the instructions <a href="/guides/azure/">here</a> or you can use the infrastructure view to enable diagnostics.
-
-(Insert UI page here)
+You can either deploy agents manually by following the instructions <a href="/guides/azure/">here</a>.
 
 ### Troubleshooting
 {: #troubleshooting}
@@ -66,15 +64,3 @@ Please make sure you have enabled diagnostics on your VMs. Diagnostics allows VM
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
    [4]: https://management.azure.com
-=======
-title: Datadog-Microsoft Azure Integration
-integration_title: Microsoft Azure
-kind: integration
-doclevel: basic
----
-
-
-Connect to Microsoft Azure in order to:
-
-* Get metrics from Azure VMs without installing the Agent
-* Tag your Azure VMs Azure-specific information (e.g. location)
