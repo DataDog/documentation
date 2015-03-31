@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Process check
 sidebar:
   nav:
@@ -27,7 +30,7 @@ From the Agent:
     <pre class="code-block code-block-console" lang="console"><code class="">easy_install psutil</code></pre>
   </li>
   <li>Configure the Agent to connect to your processes.
-  
+
       Edit <code>/etc/dd-agent/conf.d/process.yaml</code>
         <pre class="textfile"><code>init_config:
 

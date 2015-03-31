@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Datadog-NGINX インテグレーション
 sidebar:
   nav:

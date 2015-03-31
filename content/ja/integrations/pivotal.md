@@ -1,5 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Pivotal Integration
+integration_title: Pivotal
+kind: integration
+doclevel: basic
 sidebar:
   nav:
     - header: Integrations

@@ -1,5 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Cacti Integration
+integration_title: Cacti
+kind: integration
+doclevel: complete
 sidebar:
   nav:
     - header: Integrations
