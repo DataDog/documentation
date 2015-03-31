@@ -3,6 +3,8 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-SNMP checks
+integration_title: SNMP Check
+kind: integration
 sidebar:
   nav:
     - header: SNMP Integration

@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Redmine Integration
+integration_title: Redmine
+kind: integration
+doclevel: basic
 sidebar:
   nav:
     - header: Integrations
