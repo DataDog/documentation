@@ -3,6 +3,8 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: Datadog-Docker インテグレーション
+integration_title: Docker
+kind: integration
 sidebar:
   nav:
     - header: インテグレーション

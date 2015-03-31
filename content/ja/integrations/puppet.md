@@ -2,10 +2,9 @@
 last_modified: 2015/03/31
 translation_status: original
 language: ja
-last_modified: 2015/03/31
 title: Datadog-Puppet Integration
-ntegration_title: Puppet
-doclevel: basicuppet
+integration_title: Puppet
+doclevel: basic
 kind: integration
 sidebar:
   nav:
