@@ -2,7 +2,7 @@
 last_modified: 2015/03/31
 translation_status: original
 language: ja
-title: Datadog-Bitbucket Integration
+title: Datadog-Bitbucket インテグレーション
 integration_title: Bitbucket
 kind: integration
 doclevel: basic
@@ -12,6 +12,7 @@ sidebar:
     - text: Back to Overview
       href: "/ja/integrations/"
 ---
+
 <div id="int-overview">
 <h3>Overview</h3>
 

@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/03/31
-translation_status: complete
+translation_status: translated
 language: ja
 title: Datadog-Apache インテグレーション
 integration_title: Apache
