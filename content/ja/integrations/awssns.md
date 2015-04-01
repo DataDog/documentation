@@ -2,7 +2,7 @@
 last_modified: 2015/03/31
 translation_status: original
 language: ja
-title: Datadog-AWS SNS Integration
+title: Datadog-AWS SNS インテグレーション
 integration_title: AWS SNS
 kind: integration
 doclevel: basic
