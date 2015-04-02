@@ -127,6 +127,14 @@ On the Datadog side, we do have the ability to prioritize certain metrics within
 To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
 written a bit about this [here][7],  especially in relation to CloudWatch.
 
+
+
+#### Missing metrics?
+
+CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
+
+
+
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
    [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
