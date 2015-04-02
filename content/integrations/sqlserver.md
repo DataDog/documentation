@@ -1,7 +1,7 @@
 ---
 title: Datadog-SQL Server Integration
 integration_title: SQL Server
-integration_stub: sqlserver
+
 kind: integration
 ---
 

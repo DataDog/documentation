@@ -1,7 +1,6 @@
 ---
 title: Datadog-HAProxy Integration
 integration_title: HAProxy
-integration_stub: haproxy
 kind: integration
 ---
 

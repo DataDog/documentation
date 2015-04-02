@@ -1,7 +1,7 @@
 ---
 title: Datadog-VMware Integration
 integration_title: VMware
-integration_stub: vmware
+
 kind: integration
 ---
 

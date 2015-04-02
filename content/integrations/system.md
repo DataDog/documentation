@@ -1,7 +1,7 @@
 ---
 title: System Integrations
 integration_title: System Integrations
-integration_stub: system
+
 kind: integration
 sidebar:
   nav:

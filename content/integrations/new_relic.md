@@ -1,7 +1,6 @@
 ---
 title: Datadog-New Relic Integration
 integration_title: New Relic
-integration_stub: new_relic
 kind: integration
 ---
 

@@ -45,6 +45,7 @@ sidebar:
     - text: FAQ
       href: "/ja/faq/"
 ---
+
 <!-- <h4>Welcome to Datadog! We occasionally receive questions regarding the specifics
 of our pricing; the basic plans and the most frequently seen questions can be
 found below.</h4>
@@ -72,6 +73,7 @@ and 100 custom metrics)</li>
   </ol>
   </li>
 </ol> -->
+
 
 ### Datadogへようこそ!
 

@@ -1,7 +1,6 @@
 ---
 title: Datadog-Elasticsearch Integration
 integration_title: ElasticSearch
-integration_stub: elasticsearch
 kind: integration
 ---
 <div id="int-overview">

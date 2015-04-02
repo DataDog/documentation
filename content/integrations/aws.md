@@ -1,7 +1,6 @@
 ---
 title: Datadog-AWS Cloudwatch Integration
 integration_title: Amazon Web Services Cloudwatch
-integration_stub: aws
 kind: integration
 sidebar:
   nav:
@@ -100,120 +99,7 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
 
 #### What events are collected?
 
-Below is the list of events that Datadog will collect from CloudTrail and display in your event stream. If you would like to see other events that are not mentionned here, please reach out to [our support team][5].
-
-
-**EC2 Actions**
-AttachVolume
-AuthorizeSecurityGroup
-CreateSecurityGroup
-CreateVolume
-CreateTags
-DeleteVolume
-DeleteTags
-DetachVolume
-RebootInstances
-RevokeSecurityGroupEgress
-RevokeSecurityGroupIngress
-RunInstances
-StartInstances
-StopInstances
-TerminateInstances
-
-**RDS Actions**
-CreateDBInstance
-RebootDBInstance
-ModifyDBInstance
-DeleteDBInstance
-
-**IAM Actions**
-AddRoleToInstanceProfile
-AddUserToGroup
-ChangePassword
-CreateAccessKey
-CreateAccountAlias
-CreateGroup
-CreateInstanceProfile
-CreateLoginProfile
-CreateRole
-CreateSAMLProvider
-CreateUser
-CreateVirtualMFADevice
-DeleteAccessKey
-DeleteAccountAlias
-DeleteAccountPasswordPolicy
-DeleteGroup
-DeleteGroupPolicy
-DeleteInstanceProfile
-DeleteLoginProfile
-DeleteRole
-DeleteRolePolicy
-DeleteSAMLProvider
-DeleteServerCertificate
-DeleteSigningCertificate
-DeleteUser
-DeleteUserPolicy
-DeleteVirtualMFADevice
-PutGroupPolicy
-PutRolePolicy
-PutUserPolicy
-RemoveRoleFromInstanceProfile
-RemoveUserFromGroup
-UpdateAccessKey
-UpdateAccountPasswordPolicy
-UpdateAssumeRolePolicy
-UpdateGroup
-UpdateLoginProfile
-UpdateSAMLProvider
-UpdateServerCertificate
-UpdateSigningCertificate
-UpdateUser
-UpdateServerCertificate
-UpdateSigningCertificate
-
-**VPC Actions**
-AssociateDhcpOptions
-AssociateRouteTable
-AttachVpnGateway
-CreateCustomerGateway
-CreateDhcpOptions
-CreateRouteTable
-CreateVpnConnection
-CreateVpnConnectionRoute
-CreateVpnGateway
-DeleteCustomerGateway
-DeleteDhcpOptions
-DeleteRouteTable
-DeleteVpnConnection
-DeleteVpnConnectionRoute
-DeleteVpnGateway
-DetachVpnGateway
-DisassociateRouteTable
-ReplaceRouteTableAssociation
-
-**ELB Actions**
-ApplySecurityGroupsToLoadBalancer
-AttachLoadBalancerToSubnets
-ConfigureHealthCheck
-CreateAppCookieStickinessPolicy
-CreateLBCookieStickinessPolicy
-CreateLoadBalancer
-CreateLoadBalancerListeners
-CreateLoadBalancerPolicy
-DeleteLoadBalancer
-DeleteLoadBalancerListeners
-DeleteLoadBalancerPolicy
-DeregisterInstancesFromLoadBalancer
-DetachLoadBalancerFromSubnets
-DisableAvailabilityZonesForLoadBalancer
-EnableAvailabilityZonesForLoadBalancer
-ModifyLoadBalancerAttributes
-RegisterInstancesWithLoadBalancer
-SetLoadBalancerListenerSSLCertificate
-SetLoadBalancerPoliciesForBackendServer
-SetLoadBalancerPoliciesOfListener
-
-
+You will find the list of events that Datadog will collect from CloudTrail on the [CloudTrail tile][3]. If you would like to see other events that are not mentionned here, please reach out to [our support team][5].
 
 
 
@@ -241,9 +127,31 @@ On the Datadog side, we do have the ability to prioritize certain metrics within
 To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
 written a bit about this [here][7],  especially in relation to CloudWatch.
 
+
+
+#### Missing metrics?
+
+CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
+
+
+
+#### Wrong count of aws.elb.healthy_host_count?
+
+When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
+As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
+This metric should have value you would expect.
+
+
+
+#### Duplicated hosts when installing the agent?
+
+When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
+
+
+
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-   [3]: https://app.datadoghq.com/account/settings#integrations/cloudtrail
+   [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
    [4]: https://console.aws.amazon.com/cloudtrail
    [5]: /help
    [6]: mailto:support@datadoghq.com
