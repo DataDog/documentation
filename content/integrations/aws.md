@@ -135,6 +135,14 @@ CloudWatch's api returns only metrics with datapoints, so if for instance an ELB
 
 
 
+#### Wrong count of aws.elb.healthy_host_count?
+
+When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
+As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
+This metric should have value you would expect.
+
+
+
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
    [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
