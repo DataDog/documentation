@@ -1,6 +1,7 @@
 ---
 title: Datadog - Microsoft Azure Integration
-kind: documentation
+integration_title: Microsoft Azure
+kind: integration
 sidebar:
   nav:
     - header: Azure integration
