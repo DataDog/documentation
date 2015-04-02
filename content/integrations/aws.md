@@ -99,120 +99,7 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
 
 #### What events are collected?
 
-Below is the list of events that Datadog will collect from CloudTrail and display in your event stream. If you would like to see other events that are not mentionned here, please reach out to [our support team][5].
-
-
-**EC2 Actions**
-AttachVolume
-AuthorizeSecurityGroup
-CreateSecurityGroup
-CreateVolume
-CreateTags
-DeleteVolume
-DeleteTags
-DetachVolume
-RebootInstances
-RevokeSecurityGroupEgress
-RevokeSecurityGroupIngress
-RunInstances
-StartInstances
-StopInstances
-TerminateInstances
-
-**RDS Actions**
-CreateDBInstance
-RebootDBInstance
-ModifyDBInstance
-DeleteDBInstance
-
-**IAM Actions**
-AddRoleToInstanceProfile
-AddUserToGroup
-ChangePassword
-CreateAccessKey
-CreateAccountAlias
-CreateGroup
-CreateInstanceProfile
-CreateLoginProfile
-CreateRole
-CreateSAMLProvider
-CreateUser
-CreateVirtualMFADevice
-DeleteAccessKey
-DeleteAccountAlias
-DeleteAccountPasswordPolicy
-DeleteGroup
-DeleteGroupPolicy
-DeleteInstanceProfile
-DeleteLoginProfile
-DeleteRole
-DeleteRolePolicy
-DeleteSAMLProvider
-DeleteServerCertificate
-DeleteSigningCertificate
-DeleteUser
-DeleteUserPolicy
-DeleteVirtualMFADevice
-PutGroupPolicy
-PutRolePolicy
-PutUserPolicy
-RemoveRoleFromInstanceProfile
-RemoveUserFromGroup
-UpdateAccessKey
-UpdateAccountPasswordPolicy
-UpdateAssumeRolePolicy
-UpdateGroup
-UpdateLoginProfile
-UpdateSAMLProvider
-UpdateServerCertificate
-UpdateSigningCertificate
-UpdateUser
-UpdateServerCertificate
-UpdateSigningCertificate
-
-**VPC Actions**
-AssociateDhcpOptions
-AssociateRouteTable
-AttachVpnGateway
-CreateCustomerGateway
-CreateDhcpOptions
-CreateRouteTable
-CreateVpnConnection
-CreateVpnConnectionRoute
-CreateVpnGateway
-DeleteCustomerGateway
-DeleteDhcpOptions
-DeleteRouteTable
-DeleteVpnConnection
-DeleteVpnConnectionRoute
-DeleteVpnGateway
-DetachVpnGateway
-DisassociateRouteTable
-ReplaceRouteTableAssociation
-
-**ELB Actions**
-ApplySecurityGroupsToLoadBalancer
-AttachLoadBalancerToSubnets
-ConfigureHealthCheck
-CreateAppCookieStickinessPolicy
-CreateLBCookieStickinessPolicy
-CreateLoadBalancer
-CreateLoadBalancerListeners
-CreateLoadBalancerPolicy
-DeleteLoadBalancer
-DeleteLoadBalancerListeners
-DeleteLoadBalancerPolicy
-DeregisterInstancesFromLoadBalancer
-DetachLoadBalancerFromSubnets
-DisableAvailabilityZonesForLoadBalancer
-EnableAvailabilityZonesForLoadBalancer
-ModifyLoadBalancerAttributes
-RegisterInstancesWithLoadBalancer
-SetLoadBalancerListenerSSLCertificate
-SetLoadBalancerPoliciesForBackendServer
-SetLoadBalancerPoliciesOfListener
-
-
+You will find the list of events that Datadog will collect from CloudTrail on the [CloudTrail tile][3]. If you would like to see other events that are not mentionned here, please reach out to [our support team][5].
 
 
 
@@ -242,7 +129,7 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-   [3]: https://app.datadoghq.com/account/settings#integrations/cloudtrail
+   [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
    [4]: https://console.aws.amazon.com/cloudtrail
    [5]: /help
    [6]: mailto:support@datadoghq.com
