@@ -1,5 +1,9 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Installing the Agent on Debian 5
+kind:
 ---
 
 ###One-Step

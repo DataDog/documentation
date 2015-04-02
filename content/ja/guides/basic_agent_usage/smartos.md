@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: Agentの基本的な使用方法 (SmartOS)
 ---
 

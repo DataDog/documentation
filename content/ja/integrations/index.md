@@ -5,31 +5,31 @@ language: ja
 title: インテグレーション(Integration)
 sidebar:
   nav:
-    - header: ガイド
-    - text: Datadog Agent 入門
-      href: "/ja/guides/basic_agent_usage/"
-    - text: Datadog が提供するサービスの概要
-      href: "/ja/overview/"
-    - text: Datadog へのメトリクスの送信
-      href: "/ja/guides/metrics/"
-    - text: Datadog Agent によるログの解析方法
-      href: "/ja/guides/logs/"
-    - text: Agent Checkの書き方
-      href: "/ja/guides/agent_checks/"
-    - text: サービスチェックの設定方法
-      href: "/ja/guides/services_checks/"
-    - text: Chef を使ったDatadog Agent のインストール
-      href: "/ja/guides/chef/"
-    - text: Azure WindowsへDatadog Agentのインストール
-      href: "/ja/guides/azure/"
-    - text: アラートの設定方法
-      href: "/ja/guides/alerting/"
-    - text: ダッシュボードテンプレートの作成
-      href: "/ja/guides/templating/"
-    - text: SAML によるシングルサインオン
-      href: "/ja/guides/saml/"
-    - text: メールによるイベント情報の送信
-      href: "/ja/guides/eventsemail"
+#    - header: ガイド
+#    - text: Datadog Agent 入門
+#      href: "/ja/guides/basic_agent_usage/"
+#    - text: Datadog が提供するサービスの概要
+#      href: "/ja/overview/"
+#    - text: Datadog へのメトリクスの送信
+#      href: "/ja/guides/metrics/"
+#    - text: Datadog Agent によるログの解析方法
+#      href: "/ja/guides/logs/"
+#    - text: Agent Checkの書き方
+#      href: "/ja/guides/agent_checks/"
+#    - text: サービスチェックの設定方法
+#      href: "/ja/guides/services_checks/"
+#    - text: Chef を使ったDatadog Agent のインストール
+#      href: "/ja/guides/chef/"
+#    - text: Azure WindowsへDatadog Agentのインストール
+#      href: "/ja/guides/azure/"
+#    - text: アラートの設定方法
+#      href: "/ja/guides/alerting/"
+#    - text: ダッシュボードテンプレートの作成
+#      href: "/ja/guides/templating/"
+#    - text: SAML によるシングルサインオン
+#      href: "/ja/guides/saml/"
+#    - text: メールによるイベント情報の送信
+#      href: "/ja/guides/eventsemail"
 
     - header: レファレンス
     - text: APIレファレンス

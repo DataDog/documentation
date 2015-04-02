@@ -1,6 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: original
+language: ja
 title: Guide to Monitoring
-kind: documentation
+kind: guide
+listorder: 9
 sidebar:
   nav:
     - header: Guide to Monitoring
@@ -335,5 +339,3 @@ right people get notified so the problem can be resolved as soon as possible.
   Not currently, but we're discussing how we'd like to implement this. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
-
-

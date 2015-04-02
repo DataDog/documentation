@@ -1,5 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: ダッシュボードのテンプレートの作成方法
+kind: guide
+listorder: 10
 sidebar:
   nav:
     - header: ダッシュボードの設定ガイド
