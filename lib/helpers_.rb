@@ -20,7 +20,7 @@ def integration_items
 end
 
 def guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:language] == nil }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == nil }
   guides.sort_by { |item| item[:listorder] }
 end
 
@@ -39,6 +39,22 @@ def ja_integration_items
 end
 
 def ja_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete"}
+  guides.sort_by { |item| item[:listorder] }
+end
+
+def ja_guide_items_yet
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == nil }
+  guides_translated = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete"}
+
+  guides_translated.each do |jp_content|
+    guides.each do |en_content|
+      if jp_content.identifier.split('/')[-1] == en_content.identifier.split('/')[-1]
+        guides.delete(en_content)
+        # p jp_content.identifier.split('/')[-1]
+      end
+    end
+  end
+
   guides.sort_by { |item| item[:listorder] }
 end

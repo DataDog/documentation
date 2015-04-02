@@ -6,18 +6,18 @@ this layout provides a sidebar and main column.
 <html lang="en">
   <%= render "_head" %>
   <body>
-    <%= render "_header" %>
+    <%= render "_header-ja" %>
     <div class="container">
       <div class="row">
         <!-- SIDEBAR -->
         <div class="span3" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
-            <li class="nav-header">Documentation Search</li>
+            <!-- <li class="nav-header">Documentation Search</li>
             <li>
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
               </form>
-            </li>
+            </li> -->
             <% if @item[:sidebar] && @item[:sidebar][:nav] %>
               <% @item[:sidebar][:nav].each do |i| %>
                 <% if i[:header] %>
@@ -27,6 +27,17 @@ this layout provides a sidebar and main column.
                 <% end %>
               <% end %>
             <% end %>
+
+            <li class="nav-header">日本語のガイド</li>
+            <% ja_guide_items.each do |i| %>
+                  <li><%= link_to i[:title], i.path %></li>
+            <% end %>
+
+            <li class="nav-header">英語のガイド</li>
+            <% ja_guide_items_yet.each do |i| %>
+                  <li><%= link_to i[:title], i.path %></li>
+            <% end %>
+
           </ul>
         &nbsp;
         </div>
