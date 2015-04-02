@@ -1,17 +1,17 @@
-
 <% id=@item.identifier
 case
 when id.match('/examples/') %>
 
   <div class="container">
   <% items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
-    <h2><%= link_to example[:title], example %></h2>
-    <p><%= example[:summary] %></p>
+    <% if example[:language] == nil %>
+      <h2><%= link_to example[:title], example %></h2>
+      <p><%= example[:summary] %></p>
 
-    This example can be found in these groups:<br>
-   <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
+      This example can be found in these groups:<br>
+     <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
 
-
+    <% end %>
   <% end %>
   <p><br>
   <a href="/examples/">Return to All Example Groups.</a>
@@ -22,13 +22,14 @@ when id.match('/examples/') %>
 
   <div class="container">
   <% items_with_tag(tag, @items.select { |i| i[:kind] == "video" }).each do |video| %>
-    <h2><%= link_to video[:title], video %></h2>
-    <p><%= video[:summary] %></p>
+    <% if video[:language] == nil %>
+      <h2><%= link_to video[:title], video %></h2>
+      <p><%= video[:summary] %></p>
 
-    This video can be found in these groups:<br>
-   <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
+      This video can be found in these groups:<br>
+     <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
 
-
+    <% end %>
   <% end %>
   <p><br>
   <a href="/videos/">Return to All Video Groups.</a>

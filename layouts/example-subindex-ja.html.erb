@@ -1,0 +1,16 @@
+<div class="container">
+
+  <% items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
+    <% if example[:language] == "ja" %>
+      <h2><%= link_to example[:title], example %></h2>
+      <p><%= example[:summary] %></p>
+
+      This example can be found in these groups:<br>
+     <%= tag_links_for(example, [], {:url_format=>"/ja/examples/%%tag%%/"}).join(' | ') %>
+    <% end %>
+  <% end %>
+
+  <p><br>
+  <a href="/ja/examples/">Exampleグループの一覧に戻る</a>
+  </p>
+</div>
