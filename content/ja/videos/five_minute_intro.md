@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Introduction to Datadog in 5 Minutes
 kind: video
 wistiaid: nrw4x798k3

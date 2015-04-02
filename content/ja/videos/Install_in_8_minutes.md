@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Install Five Integrations in 8 Minutes
 kind: video
 wistiaid: ira7wzi1d4

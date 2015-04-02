@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Using week_before() function
 kind: example
 tags:
@@ -8,7 +11,7 @@ tags:
     - "Cassandra Metrics"
 summary: The week_before() function allows you to overlay data from the previous week on your current data.
 ---
-On the [Graphing Primer](http://docs.datadoghq.com/graphing/) page you will find a list of functions you can apply to a graph. There is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions will display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application. 
+On the [Graphing Primer](http://docs.datadoghq.com/graphing/) page you will find a list of functions you can apply to a graph. There is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions will display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 
 Here is an example of cassandra.db.read_count with the week_before value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
