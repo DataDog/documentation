@@ -143,6 +143,12 @@ This metric should have value you would expect.
 
 
 
+#### Duplicated hosts when installing the agent?
+
+When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
+
+
+
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
    [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
