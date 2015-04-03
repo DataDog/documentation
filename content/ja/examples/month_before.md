@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/03/31
-translation_status: original
+translation_status: progress
 language: ja
 title: Using month_before() function
 kind: example

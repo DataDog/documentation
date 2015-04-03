@@ -58,7 +58,13 @@ Integrationをインストール/設定するための細かい手順につい�
 
 **(注:随時、追加/更新中)**
 
-* <a href="/ja/integrations/activemq/">ActiveMQ</a>
+<ul>
+  <% ja_integration_items.each do |i| %>
+    <li><%= link_to i[:integration_title], i.path %></li>
+<% end %>
+</ul>
+
+<!-- * <a href="/ja/integrations/activemq/">ActiveMQ</a>
 * <a href="/ja/integrations/airbrake/">Airbrake</a>
 * <a href="/ja/integrations/apache/">Apache</a>
 * <a href="/ja/integrations/aws/">Amazon Web Services</a>
@@ -107,4 +113,4 @@ Integrationをインストール/設定するための細かい手順につい�
 * <a href="/ja/integrations/varnish/">Varnish</a>
 * <a href="/ja/integrations/vmware/">VMWare</a>
 * <a href="/ja/integrations/webhooks/">Webhooks</a>
-* <a href="/ja/integrations/zookeeper/">ZooKeeper</a>
+* <a href="/ja/integrations/zookeeper/">ZooKeeper</a> -->
