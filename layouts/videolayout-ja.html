@@ -45,7 +45,7 @@ this layout provides a sidebar and main column.
         <!-- MAIN -->
         <div class="span9 main">
           <!-- PAGE TITLE -->
-          <h1 id="pagetitle"><%= @item[:title] %>（日本語）</h1>
+          <h1 id="pagetitle"><%= @item[:title] %></h1>
             <small>tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %></small>
             <br><br>
             <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + @item[:wistiaid]) %>
@@ -53,7 +53,7 @@ this layout provides a sidebar and main column.
 <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
             <%= yield %>
 
-              <a href="/videos/">Return to All Video Groups.</a>
+              <a href="/videos/">ビデオのグループ一覧に戻る</a>
         </div>
 
       </div>

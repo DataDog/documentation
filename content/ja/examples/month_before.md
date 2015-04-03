@@ -10,6 +10,7 @@ tags:
     - JSON Editing
     - "AWS Metrics"
 summary: The month_before() function allows you to overlay data from the previous month on your current data.
+ja_summary: week_before()は、現在のDataに1ヶ月前のDataを重ねて表示するためのファンクションです。
 ---
 On the [Graphing Primer](http://docs.datadoghq.com/graphing/) page you will find a list of functions you can apply to a graph. There is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions will display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 

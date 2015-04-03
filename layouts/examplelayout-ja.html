@@ -45,12 +45,12 @@ this layout provides a sidebar and main column.
         <!-- MAIN -->
         <div class="span9 main">
           <!-- PAGE TITLE -->
-          <h1 id="pagetitle"><%= @item[:title] %> (日本語)</h1>
+          <h1 id="pagetitle"><%= @item[:title] %></h1>
             <small>tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %></small>
             <br><br>
             <%= yield %>
 
-              <a href="/examples/">Return to All Example Groups.</a>
+              <a href="/ja/examples/">サンプルコードのグループ一覧に戻る</a>
         </div>
 
       </div>
