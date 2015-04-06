@@ -27,7 +27,10 @@ These can be set via policy templates in the console or using Amazon's API.
 If you are using RDS, SES, SNS, or other AWS features, you will need to grant the user additional permissions. Here is the current list of permissions
 required to take full advantage of the Datadog AWS integration. As we add other components to the integration, these permissions may change.
 
+
+
     {
+      "Version": "2012-10-17",
       "Statement": [
         {
           "Action": [
@@ -38,9 +41,14 @@ required to take full advantage of the Datadog AWS integration. As we add other 
             "cloudwatch:List*",
             "ec2:Describe*",
             "ec2:Get*",
+            "elasticache:Describe*",
+            "elasticache:List*",
             "elasticloadbalancing:Describe*",
             "iam:Get*",
             "iam:List*",
+            "kinesis:Get*",
+            "kinesis:List*",
+            "kinesis:Describe*",
             "rds:Describe*",
             "rds:List*",
             "ses:Get*",
