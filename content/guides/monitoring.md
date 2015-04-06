@@ -351,9 +351,7 @@ triggering scope into the message of multi alerts.
     trigger, recover, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-        {{#var}} This text will show {{/var}} only if the variable `var` is true.
-        {{^var}} This text will show {{/var}} only if `var` is NOT true.
-
+    ![conditional variables](/static/images/monitor/conditionalvars.png)
 
     Here is an example of how you can set it up in the editor:
 
