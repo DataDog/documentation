@@ -1,6 +1,5 @@
 ---
 title: Guide to Monitoring
-kind: documentation
 sidebar:
   nav:
     - header: Guide to Monitoring
