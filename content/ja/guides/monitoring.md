@@ -5,6 +5,7 @@ language: ja
 title: Guide to Monitoring
 kind: guide
 listorder: 9
+=======
 sidebar:
   nav:
     - header: Guide to Monitoring
