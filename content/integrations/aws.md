@@ -55,6 +55,7 @@ required to take full advantage of the Datadog AWS integration. As we add other 
             "ses:List*",
             "sns:Get*",
             "sns:List*",
+            "sns:Publish",
             "sqs:GetQueueAttributes",
             "sqs:ListQueues",
             "sqs:ReceiveMessage"
