@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/04/14
+translation_status: translated
 language: ja
 title: Datadog-ActiveMQ インテグレーション
 integration_title: ActiveMQ
