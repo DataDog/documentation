@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Microsoft Azure インテグレーション
 integration_title: Microsoft Azure
 kind: integration
+doclevel: complete
 sidebar:
   nav:
     - header: Azure integration
