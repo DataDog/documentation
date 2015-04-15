@@ -6,7 +6,7 @@ CODE_SNIPPETS = 'code_snippets'
 
 desc 'Check site links'
 task :checks do
-  sh 'bundle exec nanoc check ilinks stale'
+  sh 'bundle exec nanoc check ilinks stale no_api_keys'
 end
 
 desc 'Build documentation site'
