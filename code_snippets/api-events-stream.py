@@ -1,4 +1,5 @@
 from datadog import initialize, api
+import time
 
 options = {
     'api_key': 'api_key',
@@ -8,7 +9,7 @@ options = {
 initialize(**options)
 
 
-start_time = 1419436850
-end_time = 1419436870
+start_time = time.time()
+end_time = time.time() + 100
 
 api.Event.query(start=start_time, end=end_time, priority="normal", tags=["application:web"])
