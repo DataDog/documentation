@@ -11,4 +11,4 @@ initialize(**options)
 # Take a graph snapshot
 end = int(time.time())
 start = end - (60 * 60)
-api.Graph.create(metric_query="system.load.1", start=start, end=end)
+api.Graph.create(metric_query="system.load.1{*}", start=start, end=end)
