@@ -27,55 +27,49 @@ value will apply across the dashboard.</p> -->
 この機能を使うことにより、異なるタグの組み合わせを瞬時に切り替えて、システムの状況を多面的に把握することができるようになります。
 
 
-<!-- <h3 id="new">Enabling dashboard templating</h3>
-<p>To create a new templated dashboard, select the 'Use templated sources for metrics'
-checkbox in the dashboard creation menu.</p>
+<!-- <h3 id="def">Editing template variables</h3>
+<p>To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.</p>
+<img src="/static/images/edit-template-variables.png" style="width:70%; border:1px solid #777777; margin-bottom: 15px" />
 
-<img src="/static/images/template_new_dash.png" style="width:100%; border:1px solid #777777" />
+<p>This will open the template variable editing panel.</p>
 
-<p>To add templating to an existing dashboard, click the 'Toggle Templating' icon in an existing dashboard.</p>
-
-<img src="/static/images/toggle_templating.png" style="width:100%; border:1px solid #777777" /> -->
-
-<h3 id="new">テンプレート機能を有効にする</h3>
-
-テンプレート機能を有効にしたダッシュボードを作成するには、`Dashborads` - `New Dashboard` とタブをクリックし、表示された"Create a new Dashboard" ポップアップの中で、他の入力と共に`Use templated sources for metrics`の部分にチェックマークをつけます。
-
-<img src="/static/images/template_new_dash.png" style="width:100%; border:1px solid #777777" />
-
-既存のダッシュボードにテンプレート機能を追加するには、ダッシュボード右上の`Toggle Templating` アイコンをクリックします。　
-
-<img src="/static/images/toggle_templating.png" style="width:100%; border:1px solid #777777" />
-
-
-<!-- <h3 id="def">Defining new template variables</h3>
-<img src="/static/images/redis-tpl-panel.png" style="width:100%; border:1px solid #777777" />
-<p>A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.'  A tag group is a prefix shared among several tags, like <code>redis_port</code> for the tags <code>redis_port:6379</code> and <code>redis_port:6280</code>. Setting a tag group eliminates irrelevant tags from the variable's scope selector.
+<img src="/static/images/redis-template-var.png" style="width:80%; border:1px solid #777777; margin-bottom: 15px" />
+<p>A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.'
+A tag group is a prefix shared among several tags, like <code>redis_port</code> for the tags <code>redis_port:6379</code> and <code>redis_port:6380</code>.
+Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see
+<code>6379</code> and <code>6380</code> in the 'Default Tag' dropdown instead.
 The 'Default Tag' option determines the initial value for the variable on dashboard load.</p> -->
 
-<h3 id="def">テンプレート変数の定義</h3>
+### テンプレート変数の編集
 
-<img src="/static/images/redis-tpl-panel.png" style="width:100%; border:1px solid #777777" />
+テンプレート変数を設定、編集、削除するには、ダッシュボード右上隅の歯車のアイコンをクリックし、アクションメニューから'Edit Template Variables'を選択します。
 
-テンプレート変数は、名前とパラメータの組み合わせで定義されます。
-パラメータは、"タググループ"とそのグループに含まれている"初期タグ"の組み合わせで指定します。
-タググループの`redis_port`は、`redis_port:6379` や`redis_port:6280`のように、システム内で横断的に使用しているタグの接頭文字列です。
-タググループを指定することで、テンプレート変数セレクタのドロップダウンメニューに表示される項目を制限することができます。
-又、初期タグは、ダッシュボードのロード時に処理されるメトリクスの検索方法の初期値を指定しています。
+<img src="/static/images/edit-template-variables.png" style="width:70%; border:1px solid #777777; margin-bottom: 15px" />
+
+この選択により、テンプレート変数エディターを表示します。
+
+<img src="/static/images/redis-template-var.png" style="width:80%; border:1px solid #777777; margin-bottom: 15px" />
+
+テンプレート変数は、名前と'Tag Group'と'Default Tag'のオプションパラメーターで定義されています。
+タググループは、複数のタグに渡り設定されているプレフィックスで、`redis_port:6379`タグや`redis_port:6380`タグの場合の`redis_port`にあたります。
+タググループを設定することによって、変数スコープセレクタから不適切なタグ排除することができます。更にリスト内でプレフィックスを非表示にし、視認性を確保します。結果、`6379`や`6380`というような数字が'Default Tag'がドロップダウンメニューに表示されるようになります。
+'Default Tag'は、ダッシュボードをロードした際のテンプレート変数のデフォルト値になります。
 
 
 <!-- <h3 id="graph">Using template variables in graph editors</h3>
-<img src="/static/images/redis-tpl-graph-editor.png" style="width:70%; border:1px solid #777777" />
-<p>Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>redis_port:6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>.
+<img src="/static/images/redis-tpl-graph-editor.png" style="width:80%; border:1px solid #777777; margin-bottom: 15px" />
+<p>Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>.
 </p>
-<img src="/static/images/redis-tpl-selector.png" style="width:70%; border:1px solid #777777" /> -->
+<img src="/static/images/redis-tpl-selected.png" style="width:85%; border:1px solid #777777; margin-bottom: 15px" /> -->
 
-<h3 id="graph">グラフエディターでテンプレート変数を使う方法</h3>
+### グラフエディターでテンプレート変数を使う方法
 
-<img src="/static/images/redis-tpl-graph-editor.png" style="width:70%; border:1px solid #777777" />
+<img src="/static/images/redis-tpl-graph-editor.png" style="width:80%; border:1px solid #777777; margin-bottom: 15px" />
 
-設定したテンプレート変数は、一般的なタグ、ホスト名、デバイス名などと共にグラフエディターに表示されるようになります。
+<!-- Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>. -->
 
-<img src="/static/images/redis-tpl-selector.png" style="width:70%; border:1px solid #777777" />
+テンプレート変数を設定すると、そのテンプレート変数は一般的なタグ、ホスト名、デバイス名などと共にグラフエディターに表示されるようになります。
 
-ダッシュボード上のテンプレート変数セレクタで、`$redis` (テンプレート変数)に、`redis_port:6379`を指定すると、グラフエディターで`$redis` と指定してあるグラフは全て`redis_port:6379` を基にしたグラフに書き換えられます。
+<img src="/static/images/redis-tpl-selected.png" style="width:85%; border:1px solid #777777; margin-bottom: 15px" />
+
+`$redis`の値として`6379`を設定すると、`redis`を指定したすべてのグラフは、`redis_port:6379` を基にしたグラフに書き換えられます。
