@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/04/02
-translation_status: original
+last_modified: 2015/04/16
+translation_status: Translated
 language: ja
 title: 課金に関するFAQ
 sidebar:
