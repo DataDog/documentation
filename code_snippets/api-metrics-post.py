@@ -22,3 +22,6 @@ api.Metric.send(metric='my.series', points=[(CurrentPosixTime, 15), (CurrentPosi
 
 # Submit a point with a host and tags.
 api.Metric.send(metric='my.series', points=100, host="myhost.example.com", tags=["version:1"])
+
+# Submit multiple metrics
+api.Metric.send([{'metric':'my.series', 'points':15}, {'metric':'my1.series', 'points':16}])
