@@ -122,7 +122,7 @@ This is per active host in Datadog, whether or not it's running the agent. -->
 
 ##### * 請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。
 
-ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されているかどうかで判定します。
+ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されている台数となります。
 
 
 <!-- ####<u>Frequently Asked Questions</u> -->
@@ -183,7 +183,7 @@ and you can graph it on a dashboard if you know the specific host by name (or
 by its tags).
 </p> -->
 
-仮サーバ等、一時的なホストの監視にDatadogを使った場合、そのホストからデータを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランに関しては、ダッシュボードにホスト名が表示されなくなった後も、Datadogに転送されてきたデータは保管されています。対象のホスト名やタグが分かれば、転送済みデータを基にダッシュボード上にグラフを表示することができます。
+仮サーバ等、一時的なホストの監視にDatadogを使った場合、そのホストからデータを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランでは、ダッシュボードにホスト名が表示されなくなった後も、Datadogに転送されてきたデータは保管されています。対象のホスト名やタグが分かれば、転送済みデータを基にダッシュボード上にグラフを表示することができます。
 
 
 <!-- ##### How will an AWS integration impact my monthly billing?
@@ -200,22 +200,22 @@ If you would like to control which AWS metrics you are collecting,
 select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a> and customize accordingly.
  -->
 
-#### AWS Ingegrationの利用は、毎月の請求額はどのように変化しますか?
+#### AWS Ingegrationを利用する場合、毎月の請求額はどのように変化しますか?
 
 Datadogからの請求は、**Datadog Agent** を実行しているホストとAWS Integrationでピックアップされた全て **EC2インスタンス** が対象になります。
 AWS IntegrationによってピックアップされたEC2インスタンスでDatadog Agentが稼働しているものは、二重で課金されることは有りません。
 
-その他のAWSリソース (例: ELB, EBS, RDS, Dynamo) は、現時点では請求の対象対象外です。
-他のAWSリソースの無償での提供は、将来変更される可能性があります。
+その他のAWSリソース (例: ELB, EBS, RDS, Dynamo) は、現時点では請求の対象外です。
+無償での提供は、将来変更される可能性があります。
 
-もしも、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
+もし、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
 
 
 <!-- ##### How will a VMware integration impact my monthly billing?
 
 The base pricing is $15 per virtual machine per month. See above for more general information. -->
 
-#### VMware Ingegrationの利用は、毎月の請求額はどのように変化しますか?
+#### VMware Ingegrationを利用する場合、毎月の請求額はどのように変化しますか?
 
 VMwareの仮想マシンごとに月額$15で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
 
@@ -238,7 +238,7 @@ admin you can check out past invoices
 
 #### 今月の請求額を知る方法はありますか?
 
-ユーザの皆様が、今月末の請求書の金額を知る方法を準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
+ユーザの皆様が、今月末の請求書の金額を知る方法は準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
 
 
 <!-- ##### Can I set a specific email address to receive invoices at?
