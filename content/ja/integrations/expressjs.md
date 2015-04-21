@@ -9,7 +9,6 @@ doclevel: basic
 ---
 
 
-
 Add the connect-datadog middleware to your application to:
 
 * Alert on your response times

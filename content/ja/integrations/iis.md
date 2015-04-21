@@ -6,11 +6,6 @@ title: Datadog-IIS Integration
 integration_title: IIS
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

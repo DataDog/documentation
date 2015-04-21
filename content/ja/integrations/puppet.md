@@ -6,11 +6,6 @@ title: Datadog-Puppet Integration
 integration_title: Puppet
 doclevel: basic
 kind: integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

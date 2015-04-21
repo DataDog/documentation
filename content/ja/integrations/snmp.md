@@ -1,31 +1,41 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/04/17
+translation_status: progress
 language: ja
-title: Datadog-SNMP checks
-integration_title: SNMP Check
+title: Datadog-SNMP インテグレーション
+integration_title: SNMP チェック
 kind: integration
 sidebar:
   nav:
-    - header: SNMP Integration
-    - text: Configure the SNMP Agent Check
+    - header: SNMP インテグレーション
+    - text: SNMP インテグレーションの設定
       href: "#agent"
-    - text: Use your own Mib
+    - text: 独自Mibの変換
       href: "#convert-mib"
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
-<h3><a name="agent"></a>Configure the SNMP Agent Check</h3>
+<!-- <h3><a name="agent"></a>Configure the SNMP Agent Check</h3> -->
+
+### SNMP インテグレーションの設定
+
+
+<!-- <p>To use the SNMP checks, add a <code>snmp.yaml</code> file to your <code>conf.d</code> directory, following <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/snmp.yaml.example">this example</a>.</p> -->
 
 <p>To use the SNMP checks, add a <code>snmp.yaml</code> file to your <code>conf.d</code> directory, following <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/snmp.yaml.example">this example</a>.</p>
 
+
+<!-- <p>For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.</p> -->
+
 <p>For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.</p>
 
-<p> Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:</p>
-<dl class='snmp'>
 
+<!-- <p> Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:</p>
+<dl class='snmp'> -->
+
+<p> Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:</p>
+
+
+<dl class='snmp'>
     <dt> Specify a MIB and the symbol that you want to export</dt>
     <dd>
         <span class="hint-icon"><a title="See this MIB's content" href="http://www.net-snmp.org/docs/mibs/udp.html#udpInDatagrams" >&#9758;</a></span>
@@ -76,7 +86,8 @@ sidebar:
 
 </dl>
 
-<h3><a name="convert-mib"></a>Use your own Mib</h3>
+<!-- <h3><a name="convert-mib"></a>Use your own Mib</h3> -->
+### [独自Mibの変換]()
 
 <p>To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the <code>build-pysnmp-mibs</code> script that ships with pysnmp.</p>
 

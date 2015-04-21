@@ -6,8 +6,6 @@ title: System Integrations
 sidebar:
   nav:
     - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
     - text: Directory check
       href: "/ja/integrations/directory/"
     - text: Process check

@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/04/21
+translation_status: original
+language: ja
 title: Datadog-VMware Integration
 integration_title: VMware
 
@@ -42,16 +45,14 @@ The following metrics are collected by default with the VMware integration (for 
 <h4 id="faq"><u>FAQ</u></h4>
 <div id="setup">
     <h5>How should the Datadog Agent be set up with vCenter and ESX?</h5>
-    
+
     <img src="/static/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
 </div>
 
 <div id="pricing">
     <h5>How will a VMware integration impact my monthly billing?</h5>
-    
+
       The base pricing is $15 per virtual machine per month. For general info on Datadog pricing,
       please visit our <a target="_blank" href="http://docs.datadoghq.com/guides/billing/">Billing
       FAQ</a> page.
 </div>
-
-

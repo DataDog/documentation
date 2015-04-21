@@ -6,11 +6,6 @@ title: Datadog-Event Viewer Integration
 integration_title: Event Viewer
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

@@ -20,7 +20,7 @@ this layout provides a sidebar and main column.
               </form>
             </li> -->
 
-            <!-- <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+            <% if @item[:sidebar] && @item[:sidebar][:nav] %>
               <% @item[:sidebar][:nav].each do |i| %>
                 <% if i[:header] %>
                   <li class="nav-header"><%= i[:header] %></li>
@@ -28,10 +28,10 @@ this layout provides a sidebar and main column.
                   <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
                 <% end %>
               <% end %>
-            <% end %> -->
+            <% end %>
 
             <li class="nav-header auto">インテグレーション</li>
-              <li><a href="/ja/integrations/">Back to Overview</a></li>
+              <li><a href="/ja/integrations/">インテックスへ戻る</a></li>
               <% ja_integration_items.each do |i| %>
               <% basic="" %>
               <% if i[:doclevel] && i[:doclevel] == 'basic' %>

@@ -6,11 +6,6 @@ title: Datadog-Gearman Integration
 integration_title: Gearman
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

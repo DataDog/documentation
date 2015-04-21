@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/04/21
+translation_status: original
+language: ja
 title: Datadog-Windows Management Instrumentation Integration
 integration_title: WMI
 kind: integration

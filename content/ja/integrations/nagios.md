@@ -5,11 +5,6 @@ language: ja
 title: Datadog-Nagios Integration
 integration_title: Nagios
 kind: integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

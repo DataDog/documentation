@@ -5,11 +5,6 @@ language: ja
 title: Datadog-Docker インテグレーション
 integration_title: Docker
 kind: integration
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
 ---
 
 <!-- <div id="int-overview">

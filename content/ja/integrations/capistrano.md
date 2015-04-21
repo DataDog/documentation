@@ -6,11 +6,6 @@ title: Datadog-Capistrano Integration
 integration_title: Capistrano
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 <div id="int-overview">
 <h2>Overview</h2>

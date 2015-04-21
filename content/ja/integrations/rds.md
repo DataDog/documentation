@@ -6,11 +6,6 @@ title: Datadog-AWS RDS インテグレーション
 title: Datadog-AWS RDS Integration
 integration_title: AWS RDS
 kind: integration
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
 ---
 
 In this HOWTO you will learn how to best integrate AWS Relational

@@ -15,9 +15,6 @@ sidebar:
       href: "#cloudtrail"
     - text: Troubleshooting
       href: "#troubleshooting"
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 

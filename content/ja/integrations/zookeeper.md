@@ -6,11 +6,6 @@ title: Datadog-Zookeeper Integration
 integration_title: Zookeeper
 kind: integration
 doclevel: basic
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 <div id="int-overview">
 <h3>Overview</h3>

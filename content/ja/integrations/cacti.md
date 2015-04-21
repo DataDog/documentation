@@ -6,11 +6,6 @@ title: Datadog-Cacti Integration
 integration_title: Cacti
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 <div id="int-overview">
 <h3>Overview</h3>

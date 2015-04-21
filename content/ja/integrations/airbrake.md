@@ -6,11 +6,6 @@ title: Datadog-Airbrake Integration
 integration_title: Airbrake
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 <!-- <div id="int-overview">
 <h2>Overview</h2>
