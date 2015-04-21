@@ -4,11 +4,6 @@ translation_status: original
 language: ja
 last_modified: 2015/03/31
 title: Datadog-RabbitMQ Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

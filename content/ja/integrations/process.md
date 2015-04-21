@@ -3,11 +3,6 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Process check
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to System Integrations
-      href: "/ja/integrations/system/"
 ---
 <div id="int-overview">
 <h3>Overview</h3>

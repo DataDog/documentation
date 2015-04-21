@@ -5,11 +5,6 @@ language: ja
 title: Datadog-Splunk Integration
 integration_title: Splunk
 kind: integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 

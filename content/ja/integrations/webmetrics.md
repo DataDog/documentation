@@ -6,11 +6,6 @@ title: Datadog-Webmetrics Integration
 integration_title: Webmetrics
 kind: integration
 doclevel: basic
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

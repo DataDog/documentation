@@ -6,11 +6,6 @@ title: Datadog-Git Integration
 integration_title: Git
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">

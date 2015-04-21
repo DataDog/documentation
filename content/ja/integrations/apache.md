@@ -6,11 +6,6 @@ title: Datadog-Apache インテグレーション
 integration_title: Apache
 kind: integration
 doclevel: complete
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
 ---
 <!-- <div id="int-overview">
 <h3>Overview</h3>

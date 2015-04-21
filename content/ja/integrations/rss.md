@@ -6,11 +6,6 @@ title: Datadog-RSS Integration
 integration_title: RSS
 kind: integration
 doclevel: basic
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 <div id="int-overview">
