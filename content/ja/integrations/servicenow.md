@@ -1,7 +1,11 @@
 ---
+last_modified: 2015/04/22
+translation_status: original
+language: ja
 title: Datadog-ServiceNow Integration
 integration_title: ServiceNow
 kind: integration
+doclevel: full
 ---
 
 ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog
