@@ -3,30 +3,6 @@ title: Get Started with Datadog
 kind: documentation
 sidebar:
   nav:
-    - header: Guides
-    - text: Getting Started with the Agent
-      href: "/guides/basic_agent_usage/"
-    - text: Datadog Overview
-      href: "/overview/"
-    - text: Sending App Metrics
-      href: "/guides/metrics/"
-    - text: Log Parsing in the Agent
-      href: "/guides/logs/"
-    - text: Writing an Agent Check
-      href: "/guides/agent_checks/"
-    - text: Setting up Service Checks
-      href: "/guides/services_checks/"
-    - text: Deploying the Agent with Chef
-      href: "/guides/chef/"
-    - text: Guide to Monitoring
-      href: "/guides/monitoring/"
-    - text: Guide to Dashboard Templating
-      href: "/guides/templating/"
-    - text: Single Sign On With SAML
-      href: "/guides/saml/"
-    - text: Events via Email
-      href: "/guides/eventsemail/"
-
     - header: References
     - text: API
       href: "/api/"
@@ -60,6 +36,8 @@ sidebar:
 accomplish a particular task with Datadog, while the references are more general (as you might expect).
 It might be a good idea to start with the [Datadog Overview][4], which explains Datadog's
 capabilities at a high level.
+
+**Search for it!** If you know roughly what you are looking for, enter it in the search box on the top left of the sidebar.
 
 **If you have questions, we're here to help.** You can get in touch with
 our support team by mentioning [@support][5] in a comment on Datadog itself, or by

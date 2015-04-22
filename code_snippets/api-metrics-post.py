@@ -1,16 +1,27 @@
-from dogapi import dog_http_api as api
+from datadog import initialize, api
+import time
 
-api.api_key = 'apikey_3'
-api.application_key = '9d945c35fd7cc7abb1088fd0632ef8e25516af74'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+CurrentPosixTime = time.time()
+CurrentPosixTime10 = time.time() + 10
+
+initialize(**options)
 
 # Submit a single point with a timestamp of `now`
-api.metric('page.views', 1000)
+api.Metric.send(metric='page.views', points=1000)
 
 # Submit a point with a timestamp (must be ~current)
-api.metric('my.pair', (1317652676, 15))
+api.Metric.send(metric='my.pair', points=(CurrentPosixTime, 15))
 
 # Submit multiple points.
-api.metric('my.series', [(1317652676, 15), (1317652800, 16)])
+api.Metric.send(metric='my.series', points=[(CurrentPosixTime, 15), (CurrentPosixTime10, 16)])
 
 # Submit a point with a host and tags.
-api.metric('my.series', 100, host="myhost.example.com", tags=["version:1"])
+api.Metric.send(metric='my.series', points=100, host="myhost.example.com", tags=["version:1"])
+
+# Submit multiple metrics
+api.Metric.send([{'metric':'my.series', 'points':15}, {'metric':'my1.series', 'points':16}])

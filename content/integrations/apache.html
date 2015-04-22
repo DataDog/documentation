@@ -1,11 +1,7 @@
 ---
 title: Datadog-Apache Integration
-kind: documentation
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/integrations/"
+integration_title: Apache
+kind: integration
 ---
 <div id="int-overview">
 <h3>Overview</h3>
@@ -18,22 +14,23 @@ sidebar:
 </div>
 
 From the open-source Agent:
+<ul>
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example">Apache YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a>
+<li><a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example">Apache YAML example</a></li>
+<li><a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a></li>
+</ul>
 
-
-The following metrics are collected by default with the Apache integration:
-
-    apache.net.bytes
-    apache.net.bytes_per_s
-    apache.net.hits
-    apache.net.request_per_s
-    apache.performance.busy_workers
-    apache.performance.cpu_load
-    apache.performance.idle_workers
-    apache.performance.uptime
-
+The following metrics are collected by default with the Apache integration:</br></br>
+<ul>
+    <li>apache.net.bytes</li>
+    <li>apache.net.bytes_per_s</li>
+    <li>apache.net.hits</li>
+    <li>apache.net.request_per_s</li>
+    <li>apache.performance.busy_workers</li>
+    <li>apache.performance.cpu_load</li>
+    <li>apache.performance.idle_workers</li>
+    <li>apache.performance.uptime</li>
+</ul>
 
 <div id="int-configuration">
 <h3>Configuration</h3>
@@ -42,24 +39,23 @@ The following metrics are collected by default with the Apache integration:
 <ol>
   <li><b>Make sure that <a href="http://httpd.apache.org/docs/2.0/mod/mod_status.html"><code>mod_status</code></a> is installed on your Apache server</b> with <code>ExtendedStatus</code> set to <code>on</code></li>
   <li>Configure the agent to connect to Apache<br>
-      Edit <code>/etc/dd-agent/datadog.conf</code>
-        <pre class="textfile"><code># -------------------------------------------------------------------------- #
-#   Apache                                                                   #
-# -------------------------------------------------------------------------- #
+      Edit <code>/etc/dd-agent/conf.d/apache.yaml</code><br><br>
+        <pre class="textfile"><code>init_config:
 
-# Url to Apache's status page. You must have mod_status installed.
-# See http://httpd.apache.org/docs/2.0/mod/mod_status.html for details.
-apache_status_url: http://YOUR_SERVER_ADDRESS/server-status/?auto
-
-</code></pre>
-    </li>
+instances:
+    -   apache_status_url: http://example.com/server-status?auto
+        # apache_user: example_user
+        # apache_password: example_password
+        tags:
+            -   instance:foo
+    </code>
+</pre></li>
 
   <li>Restart the agent
         <pre class="linux"><code>sudo /etc/init.d/datadog-agent restart</code></pre>
-
-	<pre class="verification"><code>if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; &#92;
-then echo -e "&#92;e[0;32mAgent is running&#92;e[0m"; &#92;
-else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
+  </li>
+  <li> Verification:
+  <pre class="verification"><code>sudo /etc/init.d/datadog-agent info</code></pre>
     </li>
 </ol>
 </div>

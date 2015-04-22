@@ -15,6 +15,14 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
+
+preprocess do
+  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
+  create_tag_pages(ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
+  create_tag_pages(ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
+end
+
 compile 'sitemap' do
   filter :erb
 end
@@ -31,11 +39,19 @@ compile '/static/*' do
 
 end
 
+compile '/partials/*' do
+  filter :erb
+end
+
 compile '*' do
   unless item.binary?
     filter :erb
-    filter :kramdown
-    filter :colorize_syntax, colorizers: {
+    case item[:extension]
+      when 'md'
+        filter :kramdown
+    end
+    # filter :kramdown
+    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
       javascript: :rouge,
       console: :rouge,
       python: :rouge,
@@ -52,10 +68,26 @@ compile '*' do
       layout 'shell'
     when id.match('/ja/guides/basic_agent_usage/')
       layout 'basic_agent_usage-ja'
-    when id.match('/guides/basic_agent_usage/')
-      layout 'basic_agent_usage'
+    when id.match('/integrations') && @item[:kind] == 'integration' && @item[:language] == 'ja'
+      layout 'integration_layout-ja'
+    when id.match('/ja/examples/') && @item[:kind] == 'example' && @item[:language] == 'ja'
+      layout 'examplelayout-ja'
+    when id.match('/ja/videos/') && @item[:kind] == 'video' && @item[:language] == 'ja'
+      layout 'videolayout-ja'
+    when id.match('/ja/guides/') && @item[:kind] == 'guide' && @item[:language] == 'ja'
+      layout 'guide_layout-ja'
     when id.match('/ja/')
       layout 'default-ja'
+    when id.match('/guides/basic_agent_usage/')
+      layout 'basic_agent_usage'
+    when id.match('/integrations') && @item[:kind] == 'integration'
+      layout 'integration_layout'
+    when id.match('/examples/') && @item[:kind] == 'example'
+      layout 'examplelayout'
+    when id.match('/videos/') && @item[:kind] == 'video'
+      layout 'videolayout'
+    when id.match('/guides/') && @item[:kind] == 'guide'
+      layout 'guide_layout'
     else
       layout 'default'
     end
@@ -64,6 +96,10 @@ end
 
 route 'sitemap' do
   item.identifier.chop + '.xml'
+end
+
+route '/partials/*' do
+  nil
 end
 
 route '/tipuesearch/*' do
@@ -84,9 +120,10 @@ route '/static/*' do
   item.identifier.chop + '.' + item[:extension]
 end
 
+
 route '*' do
   # Write item with identifier /foo/ to /foo/index.html
-  item.identifier + 'index.html'
+  item.identifier.downcase + 'index.html'
 end
 
 layout '*', :erb

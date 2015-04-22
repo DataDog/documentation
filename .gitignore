@@ -1,9 +1,9 @@
+crash.log
 output/
 tmp/
 crash.log
 vendor/*
 .bundle/*
-NO_SYNTAX
 .rvmrc
 .DS_Store
 .rbenv-version
@@ -12,3 +12,4 @@ NO_SYNTAX
 .rbenv
 .idea
 output.tgz
+remote-compile.sh

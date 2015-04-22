@@ -1,6 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: メールによるイベント情報の送信
-kind: documentation
+kind: guide
+listorder: 12
 sidebar:
   nav:
     - header: メールによるイベント送情のガイド
@@ -12,7 +16,6 @@ sidebar:
       href: "#setup-address"
     - text: Formatting The JSON Data
       href: "#json-data"
-
 ---
 <!-- ## Overview {#overview}
 

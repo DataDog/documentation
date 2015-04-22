@@ -11,18 +11,9 @@
             <li class="dropdown">
               <a id="nav-guide-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Guides <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
-                <li><a href="/guides/basic_agent_usage/">Getting Started with the Agent</a></li>
-                <li><a href="/overview/">Datadog Overview</a></li>
-                <li><a href="/guides/metrics/">Sending Metrics with DogStatsD</a></li>
-                <li><a href="/guides/logs/">Log Parsing in the Agent</a></li>
-                <li><a href="/guides/agent_checks/">Writing an Agent Check</a></li>
-                <li><a href="/guides/services_checks/">Setting up Service Checks</a></li>
-                <li><a href="/guides/chef/">Deploying the Agent with Chef</a></li>
-                <li><a href="/guides/azure/">Deploying the Agent to Azure</a></li>
-                <li><a href="/guides/monitoring/">Guide to Monitoring</a></li>
-                <li><a href="/guides/templating/">Guide to Dashboard Templating</a></li>
-                <li><a href="/guides/saml/">Single Sign On With SAML</a></li>
-                <li><a href="/guides/eventsemail">Events via Email</a></li>
+                <% guide_items.each do |i| %>
+                  <li><%= link_to i[:title], i.path %></li>
+                <% end %>
               </ul>
             </li>
             <li class="dropdown">
@@ -34,6 +25,8 @@
                 <li><a href="/hostnames/">Host Names</a></li>
                 <li><a href="/integrations/">Integrations</a></li>
                 <li><a href="/guides/dogstatsd/">DogStatsD</a></li>
+                <li><a href="/examples/">Examples</a></li>
+                <li><a href="/videos/">Videos</a></li>
                 <li><a href="/guides/billing/">Billing</a></li>
                 <li><a href="/faq/">FAQ</a></li>
               </ul>

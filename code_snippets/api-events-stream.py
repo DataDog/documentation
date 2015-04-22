@@ -1,10 +1,15 @@
-from dogapi import dog_http_api as api
+from datadog import initialize, api
+import time
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
 
 
-start_time = 1346272158
-end_time = 1346274158
+start_time = time.time()
+end_time = time.time() + 100
 
-api.stream(start_time, end_time, priority="normal", tags=["application:web"])
+api.Event.query(start=start_time, end=end_time, priority="normal", tags=["application:web"])
