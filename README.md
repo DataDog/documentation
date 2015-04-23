@@ -41,7 +41,7 @@ for any bad links, and refresh your browser.
 
 Before you push, make sure you verify there are no bad links. 
 
-# Your final step should be to exit rake, then run ```rake clean``` then ```rake```. If there are no errors, then and only then push and merge. If there are errors, please don't merge
+# Your final step should be to exit rake, then run ```rake clean``` then ```rake```. If there are no errors, then and only then push and merge. If there are errors, please don't merge. If you have been working on code samples, run ```rake clean``` then ```rake test```
 
 ## How to add a new integration
 
