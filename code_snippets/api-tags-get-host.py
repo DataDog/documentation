@@ -8,4 +8,5 @@ options = {
 initialize(**options)
 
 # Get tags by host id.
-api.Tag.get('hostname')
+hosts = api.Infrastructure.search(q='hosts:')
+print api.Tag.get(hosts['results']['hosts'][0])

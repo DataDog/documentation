@@ -54,6 +54,9 @@ task :test do
     'rb' => 'ruby'
   }
   begin
+    unless File.exist?('tested.code')
+      File.open("tested.code", "w") {}
+    end
     filetype_to_command.each do |t, cmd|
       puts '=' * 10
       puts "Testing #{t} code snippets"
@@ -67,17 +70,21 @@ task :test do
       end
       testfiles = Dir.glob("#{CODE_TEST}/*.#{t}")
       testfiles.each do |f|
-        md5 = Digest::MD5.file(f).hexdigest
-        if File.read('tested.code').include?("#{f} #{md5}\n")
-          print "Already tested #{f}"
-        else
-          sh("#{cmd} #{f}")
-          open('tested.code', 'a') do |file|
-            file << "#{f} #{md5}\n"
+        unless f.include?('guides-')
+          md5 = Digest::MD5.file(f).hexdigest
+          if File.read('tested.code').include?("#{f} #{md5}\n")
+            print "Already tested #{f}"
+          else
+            starttime = Time.now()
+            sh("#{cmd} #{f}")
+            totaltime = Time.now() - starttime
+            print "\nExecution Time: #{totaltime}s\n"
+            open('tested.code', 'a') do |file|
+              file << "#{f} #{md5}\n"
+            end
           end
+          sh("rm #{f}")
         end
-        sh("rm #{f}")
-
       end
     end
   rescue Exception => e

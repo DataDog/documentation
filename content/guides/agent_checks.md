@@ -80,7 +80,19 @@ a breeze.
 
 You have the following methods available to you:
 
-<%= snippet_code_block("guides-agentchecks-methods.py") %>
+    self.gauge( ... ) # Sample a gauge metric
+
+    self.increment( ... ) # Increment a counter metric
+
+    self.decrement( ... ) # Decrement a counter metric
+
+    self.histogram( ... ) # Sample a histogram metric
+
+    self.rate( ... ) # Sample a point, with the rate calculated at the end of the check
+
+    self.count( ... ) # Sample a raw count metric
+
+    self.monotonic_count( ... ) # Sample an increasing counter metric
 
 All of these methods take the following arguments:
 
@@ -98,7 +110,19 @@ flushed out with the other Agent metrics.
 
 At any time during your check, you can make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
 
-<%= snippet_code_block("guides-agentchecks-event.py") %>
+    {
+        "timestamp": int, the epoch timestamp for the event,
+        "event_type": string, the event name,
+        "api_key": string, the api key for your account,
+        "msg_title": string, the title of the event,
+        "msg_text": string, the text body of the event,
+        "aggregation_key": string, a key to use for aggregating events,
+        "alert_type": (optional) string, one of ('error', 'warning', 'success', 'info');
+            defaults to 'info',
+        "source_type_name": (optional) string, the source type name,
+        "host": (optional) string, the name of the host,
+        "tags": (optional) list, a list of tags to associate with this event
+    }
 
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload.
