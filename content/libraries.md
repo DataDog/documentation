@@ -129,6 +129,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [ExStatsD][39] - an Elixir DogStatsD library by [CargoSense][40]. 
   * [dogstatsd-elixir][41] - a dogstatsd client in Elixir by [Adam Kittelson][42]. 
+  * [mtx][65] - an Elixir Datadog client by [synrc][66].
   
 
 
@@ -233,3 +234,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [62]: https://github.com/yyuu
    [63]: https://github.com/PagerDuty/godspeed
    [64]: http://www.pagerduty.com/
+   [65]: https://github.com/synrc/mtx
+   [66]: https://synrc.com/
