@@ -1,6 +1,6 @@
 <%
-require 'nokogiri'
-pages = @items.select{ |item| %w{article page documentation integration guide}.include? item[:kind] }.collect{ |item|
+# for now we are using path exclusion scheme
+pages = @items.select{ |item| ((%w{article page documentation integration guide}.include? item[:kind]) && !(item.identifier.match('/ja/'))) }.collect{ |item|
   {
     "title" => item[:title],
     "text" => Nokogiri::HTML(item.compiled_content).at('body').inner_text,
