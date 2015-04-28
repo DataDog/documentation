@@ -28,7 +28,7 @@ Endpoints
 ======================================================
 -->
 
-<h2 id="endpoints">Endpoints</h2>
+## Endpoints
 
 - create: `POST /api/v1/screen`
 - read: `GET /api/v1/screen/{board_id}`
@@ -38,12 +38,13 @@ Endpoints
 
 For `create`/`read`/`update` endpoints, the body is one JSON payload describing the Screenboard.
 
-<h4>Base Payload:</h4>
+#### Base Payload:
 
 <%= snippet_code_block "sb-payload-example.js" %>
 
 
-<h2 id="notes">General Notes</h2>
+## General Notes
+{: #notes}
 
 ### Sizing and positioning
 
@@ -77,7 +78,8 @@ The final "base" payload of a templated board would look like this:
 <%= snippet_code_block "sb-payload-tpl-example.js" %>
 
 
-<h2 id="usage">API Usage</h2>
+## API Usage
+{: #usage}
 
 The Screenboard API is supported in the Python and Ruby clients as well as with simple `curl` commands.
 
