@@ -66,6 +66,9 @@ task :test do
         text = File.read(f)
         new_contents = text.gsub(/9775a026f1ca7d1c6c5af9d94d9595a4/, ENV['DD_API_KEY'])
         new_contents = new_contents.gsub(/87ce4a24b5553d2e482ea8a8500e71b8ad4554ff/, ENV['DD_APP_KEY'])
+        if cmd == 'sh'
+          new_contents << 'echo $?'
+        end
         File.open("#{CODE_TEST}/#{File.basename(f)}", "w") {|file| file.puts new_contents}
       end
       testfiles = Dir.glob("#{CODE_TEST}/*.#{t}")
@@ -91,6 +94,7 @@ task :test do
     sh("rm -rf #{CODE_TEST}")
     raise e
   end
+  sh("rm -rf #{CODE_TEST}")
 end
 
 desc 'Run Guard, autobuilds/reloads site'

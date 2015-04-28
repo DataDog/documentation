@@ -14,7 +14,7 @@ curl  -X POST -H "Content-type: application/json" \
           "viz": "timeseries"
       }],
       "title" : "Average Memory Free Shell",
-      "description" : "A dashboard with memory info."
+      "description" : "A dashboard with memory info.",
       "template_variables": [{
           "name": "host1",
           "prefix": "host",

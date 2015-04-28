@@ -7,4 +7,4 @@ app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 dog = Dogapi::Client.new(api_key, app_key)
 
 # Get all downtimes
-dog.get_all_downtimes()
+print(dog.get_all_downtimes())
