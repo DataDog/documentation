@@ -87,7 +87,9 @@ sidebar:
 </dl>
 
 <!-- <h3><a name="convert-mib"></a>Use your own Mib</h3> -->
-### [独自Mibの変換]()
+
+### 独自Mibの変換
+{: #convert-mib}
 
 <p>To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the <code>build-pysnmp-mibs</code> script that ships with pysnmp.</p>
 
