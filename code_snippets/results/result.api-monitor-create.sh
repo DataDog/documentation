@@ -11,5 +11,6 @@
     "org_id": 1499,
     "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
     "state": {},
-    "type": "metric alert"
+    "type": "metric alert",
+    "multi": false
 }

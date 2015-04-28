@@ -5,6 +5,7 @@
    "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
    "message"=>"We may need to add web hosts if this is consistently high.",
    "type"=>"metric alert",
+   "multi"=>false,
    "id"=>91879},
   {"name"=>
     "**system.net.bytes_rcvd** over **host:host0** was **> 100** on average during the **last 1h**.",
@@ -20,4 +21,5 @@
    "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
    "message"=>"",
    "type"=>"metric alert",
+   "multi"=>false,
    "id"=>91875}]]
