@@ -1,5 +1,5 @@
 currenttime=$(date +%s)
-currenttime2=$(date -d '+1 hour' +%s)
+currenttime2=$(date -v -1d +%s)
 curl -G -H "Content-type: application/json" \
     -d "metric_query=system.load.1{*}" \
     -d "start=${currenttime}" \

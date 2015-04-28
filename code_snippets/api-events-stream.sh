@@ -1,6 +1,6 @@
 # Note: this end point only accepts form-encoded requests.
 currenttime=$(date +%s)
-currenttime2=$(date -d '+1 hour' +%s)
+currenttime2=$(date -v -1d +%s)
 curl -G -H "Content-type: application/json" \
     -d "start=${currenttime}" \
     -d "end=${currenttime2}" \

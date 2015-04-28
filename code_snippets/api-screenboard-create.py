@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-title = "My Screenboard"
+title = "My Screenboards"
 description = "An informative screenboard."
 width = 1024
 board = [{
