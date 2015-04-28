@@ -1,8 +1,10 @@
 require 'rake/clean'
 
-CLEAN.include(%w(output tmp))
+
+CLEAN.include(%w(output tmp code_test tested.code))
 
 CODE_SNIPPETS = 'code_snippets'
+CODE_TEST = 'code_test'
 
 desc 'Check site links'
 task :checks do
@@ -43,18 +45,44 @@ end
 
 desc 'test the code snippets'
 task :test do
+  require 'digest/md5'
+  sh("rm -rf #{CODE_TEST}")
+  sh("mkdir #{CODE_TEST}")
   filetype_to_command = {
     'py' => 'python',
     'sh' => 'sh',
     'rb' => 'ruby'
   }
-  filetype_to_command.each do |t, cmd|
-    puts '=' * 10
-    puts "Testing #{t} code snippets"
-    files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
-    files.each do |f|
-      sh("#{cmd} #{f}")
+  begin
+    filetype_to_command.each do |t, cmd|
+      puts '=' * 10
+      puts "Testing #{t} code snippets"
+      files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
+      files.each do |f|
+        # sh("cp #{f} #{CODE_TEST}/")
+        text = File.read(f)
+        new_contents = text.gsub(/9775a026f1ca7d1c6c5af9d94d9595a4/, ENV['DD_API_KEY'])
+        new_contents = new_contents.gsub(/87ce4a24b5553d2e482ea8a8500e71b8ad4554ff/, ENV['DD_APP_KEY'])
+        File.open("#{CODE_TEST}/#{File.basename(f)}", "w") {|file| file.puts new_contents}
+      end
+      testfiles = Dir.glob("#{CODE_TEST}/*.#{t}")
+      testfiles.each do |f|
+        md5 = Digest::MD5.file(f).hexdigest
+        if File.read('tested.code').include?("#{f} #{md5}\n")
+          print "Already tested #{f}"
+        else
+          sh("#{cmd} #{f}")
+          open('tested.code', 'a') do |file|
+            file << "#{f} #{md5}\n"
+          end
+        end
+        sh("rm #{f}")
+
+      end
     end
+  rescue Exception => e
+    sh("rm -rf #{CODE_TEST}")
+    raise e
   end
 end
 
