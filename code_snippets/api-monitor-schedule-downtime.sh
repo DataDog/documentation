@@ -4,8 +4,8 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 currenttime=$(date +%s)
 
 curl -X POST -H "Content-type: application/json" \
--d '{
-      "scope": "env:prod",
-      "start": $currenttime
-    }' \
+-d "{
+      \"scope\": \"env:prod\",
+      \"start\": \"${currenttime}\"
+    }" \
     "https://app.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}"
