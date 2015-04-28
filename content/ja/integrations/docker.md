@@ -1,10 +1,10 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Datadog-Docker インテグレーション
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
+integration_title: Docker
+kind: integration
 ---
 
 <!-- <div id="int-overview">

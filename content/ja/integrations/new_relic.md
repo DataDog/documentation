@@ -1,10 +1,8 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-New Relic Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 #### Why do my application-level metrics have different values in New Relic and Datadog?

@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Officially Integrating with Datadog
 sidebar:
   nav:

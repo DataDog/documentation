@@ -1,8 +1,15 @@
 ---
-title: Guide to Monitoring
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
+title: アラート設定のガイド
+kind: guide
+listorder: 9
 sidebar:
   nav:
-    - header: Guide to Monitoring
+    - header: アラート設定のガイド
+    - text: Glossary
+      href: "#glossary"
     - text: Hosts
       href: "#host"
     - text: Metrics
@@ -15,7 +22,7 @@ sidebar:
       href: "#custom"
     - text: Notifications
       href: "#notification"
-    - text: Monitor FAQs
+    - text: アラート設定のFAQs
       href: "#faqs"
 ---
 
@@ -35,7 +42,21 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-## Creating a Monitor {#create}
+## Glossary
+{: #glossary}
+
+Here is a quick overview of the different terms used in this guide.
+
+- **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
+- **Check**: Emits one more more statuses.
+- **Monitor**: Sends notifications based on a sequence of check statuses, metric
+  threshold or other alerting conditions.
+- **Monitor type**: host-, metric-, integration-, network-based and custom. See
+  side navigation to drill into a specific type.
+
+<!-- ## Creating a Monitor {#create} -->
+
+## 新しいアラート項目の作成
 
 Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
 page by highlighting the "Monitors" tab in the top menu and selecting the
@@ -165,7 +186,9 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 
-## Integration Monitors {#integration}
+<!-- ## Integration Monitors {#integration} -->
+
+## インテグレーションが収取メトリクを基にしたアラート {#integration}
 
 ![es status](/static/images/monitor/es_status.png)
 
@@ -183,9 +206,10 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the avaialble
   options.
 
-{::comment}
 
-## Process Monitors {#process}
+<!-- ## Process Monitors {#process} -->
+
+## プロセスの状況を基にしたアラート {#process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
 
@@ -207,15 +231,16 @@ point they should notify.
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](check-alerting) section for details on the available options.
+   [custom monitors](#check-alerting) section for details on the available options.
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-{:/comment}
 
-## Network Monitors {#network}
+<!-- ## Network Monitors {#network} -->
+
+## ネットワーク項目を基にしたアラート {#network}
 
 ![network monitor](/static/images/monitor/network_monitor.png)
 
@@ -255,7 +280,9 @@ configuration.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Custom Monitors {#custom}
+<!-- ## Custom Monitors {#custom} -->
+
+## カスタムメトリクスを基にしたアラート {#custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
 
@@ -274,7 +301,7 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
-3. {:#check-alerting} Select your **alert options**.
+3. {: #check-alerting} Select your **alert options**.
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
@@ -289,7 +316,9 @@ or service checks.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Monitor Notifications {#notification}
+<!-- ## Monitor Notifications {#notification} -->
+
+## アラート通知について {#notification}
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -317,9 +346,11 @@ right people get notified so the problem can be resolved as soon as possible.
    anytime the monitor renotifies. The original message will be included as
    well.
 
-## Monitor FAQs {#faq}
+<!-- ## Monitor FAQs {#faqs} -->
 
-- *Can I manage my monitors progromatically?*
+## アラート設定のFAQs {#faqs}
+
+- - *Can I manage my monitors progromatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
@@ -334,5 +365,3 @@ right people get notified so the problem can be resolved as soon as possible.
   Not currently, but we're discussing how we'd like to implement this. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
-
-

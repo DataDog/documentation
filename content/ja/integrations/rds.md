@@ -1,10 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-AWS RDS インテグレーション
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
+title: Datadog-AWS RDS Integration
+integration_title: AWS RDS
+kind: integration
 ---
 
 In this HOWTO you will learn how to best integrate AWS Relational

@@ -1,10 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Event Viewer Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
+integration_title: Event Viewer
+kind: integration
+doclevel: complete
 ---
 
 <div id="int-overview">

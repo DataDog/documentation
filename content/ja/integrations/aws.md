@@ -1,5 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-AWS Cloudwatch Integration
+integration_title: AWS Cloudwatch
+kind: integration
+doclevel: complete
 sidebar:
   nav:
     - header: AWS integration
@@ -9,9 +15,6 @@ sidebar:
       href: "#cloudtrail"
     - text: Troubleshooting
       href: "#troubleshooting"
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
 ---
 
 

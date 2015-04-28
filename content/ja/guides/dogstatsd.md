@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: DogStatsDの解説
 sidebar:
   nav:
@@ -600,4 +603,3 @@ DogStatsD is open-sourced under the BSD License. Check out the source
 ## ソースコード
 
 DogStatsDは、BSDライセンスでオープンソースとして公開しています。ソースコードは、githubのDatadogアカウント以下の[dd-agent](https://github.com/DataDog/dd-agent)のリポジトリを参照してください。
-

@@ -1,5 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: original
+language: ja
 title: Single Sign On With SAML
+kind: guide
+listorder: 11
 sidebar:
   nav:
     - header: Guide to SAML SSO
@@ -29,9 +34,9 @@ If you are a Datadog Admin, there is a “Configure SAML” option in the drop d
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
 
-1. Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button. 
-  <img src="/static/images/saml_choose_file.png" style="width:50%; border:1px solid #777777"/> 
-  After you've chosen the file, click "Upload File". 
+1. Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button.
+  <img src="/static/images/saml_choose_file.png" style="width:50%; border:1px solid #777777"/>
+  After you've chosen the file, click "Upload File".
 2. Datadog’s Service Provider metadata can be found at <a href="https://app.datadoghq.com/account/saml/metadata.xml">https://app.datadoghq.com/account/saml/metadata.xml</a>. You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable SAML button.
 
@@ -71,4 +76,3 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
  3. **givenName**: The IdP should set `urn:mace:dir:attribute-def:givenName` as the Name of the Attribute
 * If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute will be used for the username.  If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject.  The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
 * If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
-

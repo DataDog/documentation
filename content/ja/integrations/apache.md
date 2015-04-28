@@ -1,10 +1,11 @@
 ---
+last_modified: 2015/04/22
+translation_status: translated
+language: ja
 title: Datadog-Apache インテグレーション
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
+integration_title: Apache
+kind: integration
+doclevel: complete
 ---
 <!-- <div id="int-overview">
 <h3>Overview</h3>
@@ -68,25 +69,24 @@ Apacheインテグレーションは、次のメトリクスをディフォル�
 
 <ol>
   <li><b>Make sure that <a href="http://httpd.apache.org/docs/2.0/mod/mod_status.html"><code>mod_status</code></a> is installed on your Apache server</b> with <code>ExtendedStatus</code> set to <code>on</code></li>
-  <li>Configure the agent to connect to Apache
-      Edit <code>/etc/dd-agent/datadog.conf</code>
-        <pre class="textfile"><code># -------------------------------------------------------------------------- #
-#   Apache                                                                   #
-# -------------------------------------------------------------------------- #
+  <li>Configure the agent to connect to Apache<br>
+      Edit <code>/etc/dd-agent/conf.d/apache.yaml</code><br><br>
+        <pre class="textfile"><code>init_config:
 
-# Url to Apache's status page. You must have mod_status installed.
-# See http://httpd.apache.org/docs/2.0/mod/mod_status.html for details.
-apache_status_url: http://YOUR_SERVER_ADDRESS/server-status/?auto
-
-</code></pre>
-    </li>
+instances:
+    -   apache_status_url: http://example.com/server-status?auto
+        # apache_user: example_user
+        # apache_password: example_password
+        tags:
+            -   instance:foo
+    </code>
+</pre></li>
 
   <li>Restart the agent
         <pre class="linux"><code>sudo /etc/init.d/datadog-agent restart</code></pre>
-
-	<pre class="verification"><code>if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; &#92;
-then echo -e "&#92;e[0;32mAgent is running&#92;e[0m"; &#92;
-else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
+  </li>
+  <li> Verification:
+  <pre class="verification"><code>sudo /etc/init.d/datadog-agent info</code></pre>
     </li>
 </ol>
 </div> -->
@@ -95,24 +95,24 @@ else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
 ### 設定
 {: #int-configuration}
 
-**To capture Apache metrics you need to install the Datadog agent.**
-**Apacheのメトリクスを収集するには、Datadog Agentのインストールがつようです。*詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。
+**Apacheのメトリクスを収集するには、Datadog Agentのインストールがつようです。**  
+*詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。*
 
 1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認してください。
 
-2.Apacheのメトリクスを収集するためのにDatadog Agentの設定ファイルを次のように設定してください。(`mod_status`が、メトリクスを表示しているURLを指定します。)
+2.Apacheのメトリクスを収集するためのにDatadog Agentの設定ファイル`/etc/dd-agent/datadog.conf`を次のように設定してください。(`mod_status`が、メトリクスを表示しているURLを指定します。)
 
   `/etc/dd-agent/datadog.conf`の編集例
 
 ~~~
-#-------------------------------------------------------------------------#
-# Apache                                                                  #
-#-------------------------------------------------------------------------#
+init_config:
 
-# Url to Apache's status page. You must have mod_status installed.
-# See http://httpd.apache.org/docs/2.0/mod/mod_status.html for details.
-
-apache_status_url: http://YOUR_SERVER_ADDRESS/server-status/?auto
+instances:
+-   apache_status_url: http://example.com/server-status?auto
+# apache_user: example_user
+# apache_password: example_password
+tags:
+    -   instance:foo
 ~~~
 
 3.`datadog.conf`の設定が完了したら、Datadog Agentを再起動します。
@@ -124,7 +124,5 @@ sudo /etc/init.d/datadog-agent restart
 4.次のコマンドで再起動の確認をします。
 
 ~~~
-if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; ¥
-then echo -e "¥e[0;32mAgent is running&#92;e[0m"; ¥
-else echo -e "¥e[031mAgent is not running&#92;e[0m"; fi
+sudo /etc/init.d/datadog-agent info
 ~~~

@@ -1,5 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: Datadog Agent によるログの解析方法
+kind: guide
+listorder: 4
 sidebar:
   nav:
     - header: ログ解析のガイド

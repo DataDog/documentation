@@ -1,5 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: Datadog Agent 入門
+kind: guide
+listorder: 1
 ---
 
 <!-- <div class="alert alert-info">
@@ -174,11 +179,3 @@ Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" ta
     + <strong>はい、表示されています。</strong>
         * <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページでそのホストの一般的なメトリクス(CPU, HDD, メモリ等)が表示されているかを確認してください。例えば、Integrationsの設定を進めているホストの`system.cpu.user`選んでみてください。
         * メトリクスが全く表示されない場合は、ログファイルでエラー情報の状況を出力している部分がないかレビューしてください。その上で、エラー情報を含んでいそうなログファイルとinfoコマンドの出力ファイルとを添付し、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a> までお問い合わせください。　
-
-
-
-
-
-
-
-

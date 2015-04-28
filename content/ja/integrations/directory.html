@@ -1,10 +1,10 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Directory check
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to System Integrations
-      href: "/ja/integrations/system/"
+integration_title: Directory Check
+kind: integration
 ---
 <div id="int-overview">
 <h3>Overview</h3>
@@ -39,7 +39,7 @@ From the Agent:
 <ol>
   <li>The Directory check <b>is not currently supported on Windows systems</b>.</li>
   <li>Ensure the user account running the Agent (typically <code>dd-agent</code>) has read access to the monitored directory and files.</li>
-  <li>Configure the Agent to connect to your directories.
+  <li>Configure the Agent to connect to your directories.<br>
       Edit <code>/etc/dd-agent/conf.d/directory.yaml</code>
         <pre class="textfile"><code>init_config:
 

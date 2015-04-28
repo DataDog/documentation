@@ -1,6 +1,9 @@
 ---
-
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: よくあるご質問(FAQ)
+kind: 
 sidebar:
  nav:
   - header: FAQ トピック
@@ -169,7 +172,7 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 
 <!--### Alerts {#alerts}
 
-#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? 
+#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?
 {: #no-data}
 
 For the AWS No Data errors, the issue here has to do with how frequently we
