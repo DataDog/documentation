@@ -10,7 +10,8 @@
         },
         "org_id": 1499,
         "query": "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
-        "type": "metric alert"
+        "type": "metric alert",
+        "multi": false
     },
     {
         "id": 91875,
@@ -27,6 +28,7 @@
         },
         "org_id": 1499,
         "query": "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
-        "type": "metric alert"
+        "type": "metric alert",
+        "multi": false
     }
 ]
