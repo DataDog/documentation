@@ -3,9 +3,9 @@
 Starting and Stopping the Agent
 ======================================================
 -->
-<% if @item[:os] == 'osx' 
+<% if @item[:os] == 'osx'
   $sudo = ''
-  else 
+  else
   $sudo = 'sudo '
 end %>
 
@@ -14,22 +14,22 @@ end %>
 
 
 <% if @item[:os] == 'smartos' %>
-To manually start the Agent: 
+To manually start the Agent:
 
     svcadm enable datadog
 
-To stop the Agent: 
+To stop the Agent:
 
     svcadm disable datadog
 
-To restart the Agent and to reload the configuration files: 
+To restart the Agent and to reload the configuration files:
 
     svcadm restart datadog
 
 <% else %>
 To manually start the Agent:
 
-    <%= $sudo %><%= @item[:servicename] %> start 
+    <%= $sudo %><%= @item[:servicename] %> start
 
 To stop the Agent:
 
@@ -99,11 +99,7 @@ Troubleshooting
 
 <% if @item[:os] == 'smartos' %>
 
-First, make sure you are using the correct version of Python. The Agent requires version 2.6 or greater. You can check your version by executing:
-
-    cd /opt/local/datadog/agent && python -c 'import config; print config.get_version()'
-
-Next, try running the info command to see the state of the Agent.
+Try running the info command to see the state of the Agent.
 
 Logs for the subsystems are in the following files:
 
@@ -112,13 +108,7 @@ Logs for the subsystems are in the following files:
 * ````/opt/local/datadog/logs/supervisord/forwarder.log````
 
 <% else %>
-First, make sure you are using the correct version of Python. The Agent requires version 2.4 or greater. You can check your version by executing:
-
-    cd <%= @item[:servicename] %> && python -c 'import config; print config.get_version()'
-
-Next, try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
-
-You can run the <a href='#status_and_information'>info</a> command to see the state of the Agent.
+Try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
 
 Logs for the subsystems are in the following files:
 
