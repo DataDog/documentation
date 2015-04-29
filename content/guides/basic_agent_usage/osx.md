@@ -36,5 +36,5 @@ instructions accordingly if you decide to move it to another location.
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>
+<%= render '_contact_info', :heading_size => 5, :hide_datadog => false %>
 
