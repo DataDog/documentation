@@ -2,89 +2,125 @@
 last_modified: 2015/04/02
 translation_status: complete
 language: ja
-title: アラート設定のガイド
+title: Monitor機能の設定ガイド
 kind: guide
 listorder: 9
 sidebar:
   nav:
-    - header: アラート設定のガイド
-    - text: Glossary
+    - header: Monitorkの設定ガイド
+    - text: 用語集
       href: "#glossary"
-    - text: Hosts
+    - text: Hosts-Monitor
       href: "#host"
-    - text: Metrics
+    - text: Metrics-Monitor
       href: "#metric"
-    - text: Integrations
+    - text: Integrations-Monitor
       href: "#integration"
-    - text: Network
+    - text: Network-Monitor
       href: "#network"
-    - text: Custom Checks
+    - text: Custom Checks-Monitor
       href: "#custom"
-    - text: Notifications
+    - text: 通知について
       href: "#notification"
-    - text: アラート設定のFAQs
+    - text: Monitorに関するFAQs
       href: "#faqs"
 ---
 
-Monitoring all of your infrastructure in one place wouldn't be complete without
+<!-- Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
-availability, network endpoints and more.
+availability, network endpoints and more. -->
 
-Once a monitor is created, you will be notified when the its conditions are met.
+インフラ全体を一箇所で監視しようとする場合、そのインフラが危機的な状況になっていること検知する方法確立するのは重要な作業です。
+Datadogでは、能動的にメトリクス, インテグレーション, ネットワークの接続状態, その他を能動的に監視してくれるMonitor機能を設定することができます。
+
+
+<!-- Once a monitor is created, you will be notified when the its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
-Hipchat) or other custom endpoints via webhooks.
+Hipchat) or other custom endpoints via webhooks. -->
 
-Triggered monitors will appear in the event stream, allowing collaboration
+一度Monitor機能を設定しておけば、条件が満たされた時には通知を受けることができます。
+電子メールでチームメンバーに通知することもできるし、サードパーティのサービス（例えばPagerdutyまたは
+Hipchat）や、webhooksを使って他のサービスと連携しえ通知を送することもできます。
+
+
+<!-- Triggered monitors will appear in the event stream, allowing collaboration
 around active issues in your applications or infrastructure. Datadog provides a
 high-level view of open issues on the
 [Triggered Monitors](https://app.datadoghq.com/monitors/triggered)
 page as well as general monitor management on the
-[Manage Monitors](https://app.datadoghq.com/monitors) page.
+[Manage Monitors](https://app.datadoghq.com/monitors) page. -->
 
-## Glossary
+通知を送信したMonitorはイベントストリームに表示され、そのアプリケーションやインフラの問題解決に向けたコラボレーションができるようになります。Datadogの[Triggered Monitors](https://app.datadoghq.com/monitors/triggered)のページには、通知済み状態のMonitorの項目がリスト表示されます。[Manage Monitors](https://app.datadoghq.com/monitors)のページには、全てのMonitorが表示され、それらを管理することができるように成っています。
+
+
+## 用語集
 {: #glossary}
 
-Here is a quick overview of the different terms used in this guide.
+<!-- Here is a quick overview of the different terms used in this guide.
 
 - **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
 - **Check**: Emits one more more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: host-, metric-, integration-, network-based and custom. See
-  side navigation to drill into a specific type.
+  side navigation to drill into a specific type. -->
+
+以下は、このガイドで使用している用語の簡単な概要になります。
+
+- **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadog側に送信します。
+- **Check**: Agent Checkのことで、複数をのステータスを送信します。
+- **Monitor**: Agent Checkのステータスとかメトリクスの閾値の確認手順や、その他のアラート条件を元に通知を送信します。
+- **Monitorタイプ**: host-, metric-, integration-, network-based, customがあります。 特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
+
 
 <!-- ## Creating a Monitor {#create} -->
 
-## 新しいアラート項目の作成
+## 新しいMonitorの作成 {#create}
 
-Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
+<!-- Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
 page by highlighting the "Monitors" tab in the top menu and selecting the
 "Create Monitors" sub-tab.  You will be presented with a list of monitor types
-on the left. This guide will walk through the configuration of each type.
+on the left. This guide will walk through the configuration of each type. -->
+
+[New Monitors](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。
+
 
 ![nav](/static/images/monitor/nav.png)
 
-## Host Monitors {#host}
+## ホストを対象にしたMonitor {#host}
 
-*Requires Datadog Agent version >= 5.0.0.*
+<!-- *Requires Datadog Agent version >= 5.0.0.* -->
+
+*Datadog Agent バージョン 5.0.0 以上が必要です。*
+
 
 ![host monitor](/static/images/monitor/host_monitor.png)
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
+すべてDatadogエージェントコレクションは`datadog.agent.up`と呼ばれるハートビートを報告します
+ステータス`UP`と。 1つまたは複数のホスト間で、このハートビートを監視することができます。
+
 1. Select your **host by name or tag(s)**. Providing a tag will monitor every
    host that has that tag or tag combination.
 
+   名前またはタグ（S）で、あなたのホストを選択します。タグを提供することは、そのタグまたはタグの組み合わせを持っているすべてのホストを監視します。
+
 2. Select the **no-data timeframe**. If the heartbeat stops reporting for more
    than the number of minutes you have selected, then you will get notified.
+
+   無データ期間を選択してください。ハートビートは、選択した分の数よりも多くのレポートを停止した場合は、通知を受けてしまいます。
 
 3. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Metric Monitors {#metric}
+   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+
+
+## メトリクスを対象にしたMonitor {#metric}
 
 1. Select the metric and scope you want to monitor.
   ![metric scope](/static/images/monitor/metric_scope.png)
@@ -188,7 +224,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 <!-- ## Integration Monitors {#integration} -->
 
-## インテグレーションが収取メトリクを基にしたアラート {#integration}
+## インテグレーションを対象にしたMonitor {#integration}
 
 ![es status](/static/images/monitor/es_status.png)
 
@@ -209,7 +245,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 
 <!-- ## Process Monitors {#process} -->
 
-## プロセスの状況を基にしたアラート {#process}
+## プロセスを対象にしたMonitor {#process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
 
@@ -240,7 +276,7 @@ point they should notify.
 
 <!-- ## Network Monitors {#network} -->
 
-## ネットワーク項目を基にしたアラート {#network}
+## ネットワークを対象にしたMonitor {#network}
 
 ![network monitor](/static/images/monitor/network_monitor.png)
 
@@ -282,7 +318,7 @@ configuration.
 
 <!-- ## Custom Monitors {#custom} -->
 
-## カスタムメトリクスを基にしたアラート {#custom}
+## カスタムメトリクスを対象にしたMonitor {#custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
 
@@ -318,7 +354,7 @@ or service checks.
 
 <!-- ## Monitor Notifications {#notification} -->
 
-## アラート通知について {#notification}
+## 通知について {#notification}
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -348,7 +384,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 <!-- ## Monitor FAQs {#faqs} -->
 
-## アラート設定のFAQs {#faqs}
+## Monitorに関するFAQs {#faqs}
 
 - - *Can I manage my monitors progromatically?*
 
