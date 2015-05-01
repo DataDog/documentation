@@ -126,13 +126,17 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 ## メトリクスを対象にしたMonitor {#metric}
 
-1. Select the metric and scope you want to monitor.
+<!-- 1. Select the metric and scope you want to monitor. -->
+
+1. メトリクスとそのメトリクスを監視する範囲を設定します。
   ![metric scope](/static/images/monitor/metric_scope.png)
 
-    You can create a monitor on any metrics that you are currently sending to
+    <!-- You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
     [scope section](/graphing/#scope) of the graphing primer for
-    further information.
+    further information. -->
+
+    あなたが現在Datadogに送信されたすべてのメトリックにモニタを作成することができます。標準のスコープ規則が適用されます。詳細については、グラフのプライマーの範囲のセクションを参照してください。
 
 2. Select the alert type.
     ![alert type](/static/images/monitor/alert_type.png)
