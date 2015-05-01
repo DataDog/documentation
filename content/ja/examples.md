@@ -3,7 +3,7 @@ last_modified: 2015/03/31
 translation_status: translated
 language: ja
 title: サンプルコード
-kind:
+kind: documentation
 ---
 <!-- In this section you will find examples of configurations from across the entire product. Each example may include screenshots, code, output, and/or data. If there is something missing you would like to see, let us know. -->
 

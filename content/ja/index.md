@@ -3,7 +3,7 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: Datadogでメトリクスの監視を始めよう！
-kind:
+kind: documentation
 sidebar:
   nav:
 #    - header: ガイド

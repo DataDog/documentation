@@ -128,7 +128,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 <!-- 1. Select the metric and scope you want to monitor. -->
 
-1. メトリクスとそのメトリクスを監視する範囲を設定します。
+1. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
   ![metric scope](/static/images/monitor/metric_scope.png)
 
     <!-- You can create a monitor on any metrics that you are currently sending to
@@ -136,9 +136,13 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     [scope section](/graphing/#scope) of the graphing primer for
     further information. -->
 
-    あなたが現在Datadogに送信されたすべてのメトリックにモニタを作成することができます。標準のスコープ規則が適用されます。詳細については、グラフのプライマーの範囲のセクションを参照してください。
+    Datadogに送信している全てのメトリクスを基にMonitor機能を作成することができます。
+    この項目では、グラフ表示に使っている標準的な検索対象範囲(scope)の規則が適用されます。
+    この規則の詳細に関しては、グラフ表示入門のページの[検索対象範囲(scope)](/ja/graphing/#scope)を参照してください。
 
-2. Select the alert type.
+<!-- 2. Select the alert type. -->
+
+2. アラートのタイプを選択します。
     ![alert type](/static/images/monitor/alert_type.png)
 
     A **threshold alert** will compare the value in the selected
@@ -146,15 +150,24 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     in the alerting conditions section. This is the standard alert case where
     you know what sort values are unexpected.
 
+    しきい値アラートは、指定されたしきい値に照らして選択された時間枠内の値を比較します。アラート条件セクションで利用可能な追加のオプションがあります。これは、ソート値は予想外であるものを知っている標準的な警告ケースです。
+
+
     A **change alert** will look at a recent data point and
     determine the change or % change between that value and a value some minutes
     ago. The compared data points are 1-minute averages and <em>not</em> a
     single point.
 
+    変更の警告は、最近のデータ点を見て、その値といくつかの時間前の値との間の変化または％変化を決定します。比較データポイントは、1分の平均値ではなく、単一の点です。
+
+
     This sort of alert is useful to track fast spikes or drops in a metric
     when you might not have an exact "unexpected" threshold. Note: the
     calculated value is not the absolute value - meaning it will be negative for
     a downward change.
+
+    警告この種のは、あなたが正確な「予想外」のしきい値を持っていない可能性がある場合、メトリックに速いスパイクやドロップを追跡するために有用です。注：計算値は絶対値ではありません - それは下方に変更のマイナスとなるという意味では。
+
 
 3. Select the alert grouping.
     ![alert grouping](/static/images/monitor/alert_grouping.png)
