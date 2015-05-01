@@ -49,8 +49,8 @@ task :test do
   sh("rm -rf #{CODE_TEST}")
   sh("mkdir #{CODE_TEST}")
   filetype_to_command = {
-    'py' => 'python',
     'sh' => 'sh',
+    'py' => 'python',
     'rb' => 'ruby'
   }
   begin
