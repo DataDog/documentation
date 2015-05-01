@@ -98,7 +98,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
+    you know what sort values are expected.
 
     A **change alert** will look at a recent data point and
     determine the change or % change between that value and a value some minutes
