@@ -145,31 +145,35 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 2. アラートのタイプを選択します。
     ![alert type](/static/images/monitor/alert_type.png)
 
-    A **threshold alert** will compare the value in the selected
+    <!-- A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
+    you know what sort values are unexpected. -->
 
-    しきい値アラートは、指定されたしきい値に照らして選択された時間枠内の値を比較します。アラート条件セクションで利用可能な追加のオプションがあります。これは、ソート値は予想外であるものを知っている標準的な警告ケースです。
+    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このタイプは、一般的なアラートのケースで、正常な範囲が値が事前に分かっている場合に使用します。
 
 
-    A **change alert** will look at a recent data point and
+    <!-- A **change alert** will look at a recent data point and
     determine the change or % change between that value and a value some minutes
     ago. The compared data points are 1-minute averages and <em>not</em> a
-    single point.
+    single point. -->
 
-    変更の警告は、最近のデータ点を見て、その値といくつかの時間前の値との間の変化または％変化を決定します。比較データポイントは、1分の平均値ではなく、単一の点です。
+    **change alert**は、最近のデータポイントの値と数分前の値の、変化値または変化率と設定値を比較します。
+    比較しているデータポイントの値は、1分間平均値です。**単一点の値ではありません**ので注意してください。
 
 
-    This sort of alert is useful to track fast spikes or drops in a metric
+    <!-- This sort of alert is useful to track fast spikes or drops in a metric
     when you might not have an exact "unexpected" threshold. Note: the
     calculated value is not the absolute value - meaning it will be negative for
-    a downward change.
+    a downward change. -->
 
-    警告この種のは、あなたが正確な「予想外」のしきい値を持っていない可能性がある場合、メトリックに速いスパイクやドロップを追跡するために有用です。注：計算値は絶対値ではありません - それは下方に変更のマイナスとなるという意味では。
+    この種アラートは、閾値超えて発生するメトリクスのスパイクや急速なドロップを追跡するのに有効です。
+    注: このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
 
 
-3. Select the alert grouping.
+<!-- 3. Select the alert grouping. -->
+
+3. アラートグループを選択します。
     ![alert grouping](/static/images/monitor/alert_grouping.png)
 
     A **simple alert** aggregates over all reporting sources. You will get one
@@ -182,10 +186,17 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     parameters. E.g. to alert on disk space you might group by host and device,
     creating the query:
 
+    単純なアラートがすべてのレポートソースを超える集約します。集計値は、以下の設定された条件を満たしているときに、1つのアラートを取得します。ビット、または領域にわたってnginx.bytes.netの合計のような多くのホスト間の集約メトリックの：これは、ホスト上のsystem.cpu.iowaitの平均と同様に、単一のホストからのメトリックを監視するために最高の作品たち - 東。
+
+    マルチアラートはあなたのグループのパラメータに基づいて、各ソースにアラートを適用します。例えばクエリを作成、あなたがホストとデバイスでグループかもしれないディスクスペースに警告します：
+
         avg:system.disk.in_use{*} by {host,device}
 
     This will trigger a separate alert for each device on each host that is
     running out of space.
+
+    これは、領域が不足している各ホスト上のデバイスごとに個別のアラートをトリガーします。
+    
 
 4. {:#metric-conditions} Select the alert conditions
 
