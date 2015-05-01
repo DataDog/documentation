@@ -414,5 +414,3 @@ triggering scope into the message of multi alerts.
   Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
-
-

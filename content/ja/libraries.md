@@ -3,7 +3,7 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: APIライブラリー
-kind:
+kind: documentation
 sidebar:
   nav:
     - header: 公式ライブラリー
