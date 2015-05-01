@@ -83,10 +83,15 @@ page by highlighting the "Monitors" tab in the top menu and selecting the
 "Create Monitors" sub-tab.  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of each type. -->
 
-[New Monitors](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。
+<!-- [New Monitor](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。 -->
+
+[Create Monitors](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`Create Monitors`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。
+
 
 
 ![nav](/static/images/monitor/nav.png)
+
+<!-- ## Host Monitors {#host} -->
 
 ## ホストを対象にしたMonitor {#host}
 
@@ -97,28 +102,27 @@ on the left. This guide will walk through the configuration of each type. -->
 
 ![host monitor](/static/images/monitor/host_monitor.png)
 
-Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
-with a status `UP`. You can monitor this heartbeat across one or more hosts.
+<!-- Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
+with a status `UP`. You can monitor this heartbeat across one or more hosts. -->
 
-すべてDatadogエージェントコレクションは`datadog.agent.up`と呼ばれるハートビートを報告します
-ステータス`UP`と。 1つまたは複数のホスト間で、このハートビートを監視することができます。
+Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハートビート信号を
+`UP`というステータスで定期的に送信します。
+このイベント信号の状態をMonitor対象に追加することで、Datadog Agentやホストの死活が状態が把握できます。
 
-1. Select your **host by name or tag(s)**. Providing a tag will monitor every
-   host that has that tag or tag combination.
+<!-- 1. Select your **host by name or tag(s)**. Providing a tag will monitor every host that has that tag or tag combination.
 
-   名前またはタグ（S）で、あなたのホストを選択します。タグを提供することは、そのタグまたはタグの組み合わせを持っているすべてのホストを監視します。
+2. Select the **no-data timeframe**. If the heartbeat stops reporting for more than the number of minutes you have selected, then you will get notified.
 
-2. Select the **no-data timeframe**. If the heartbeat stops reporting for more
-   than the number of minutes you have selected, then you will get notified.
+3. Configure your **notification options** Refer to the [Notifications](#notifications) section of this guide for a detailed walkthrough of the common notification options. -->
 
-   無データ期間を選択してください。ハートビートは、選択した分の数よりも多くのレポートを停止した場合は、通知を受けてしまいます。
+1. 項目①では、**ホスト名かタグ**の単一指定か組み合わせ指定ができます。タグを選択した場合は、そのタグ(タグの組み合わせ)が付与されているホストが監視対象になります。
 
-3. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+2. 項目②では、`Check Alert`か`Cluster Alert`を選択します。`Cluster Alert`の特有の設定に関しては、次を参照してください。その後、**Notify if data is missing for more than**の項目で、分単位で時間を設定します。ここで設定した時間を超えてハートビート信号が受信できなかった場合には、通知が送信されます。
 
-   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+3. 項目③④で、通知の設定をします。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
+
+<!-- ## Metric Monitors {#metric} -->
 
 ## メトリクスを対象にしたMonitor {#metric}
 
@@ -382,11 +386,73 @@ right people get notified so the problem can be resolved as soon as possible.
    anytime the monitor renotifies. The original message will be included as
    well.
 
+
+<!-- ### Message template variables -->
+
+### 通知内で使うことのできるテンプレート化された変数
+
+(Message template variables)
+
+Message template variables can be used to customize your monitor notifications.
+This feature is supported in all monitor types. There are two primary use cases
+for template variables: 1) displaying a different message depending on the
+notification type (e.g. triggered, recovered, no data) and 2) incorporating the
+triggering scope into the message of multi alerts.
+
+1. **Conditional variables for different notification types**: You can have a
+   monitor event display a different message depending on whether the event is a
+   trigger, recover, or no data notification. These variables use simple if-else
+   logic with the following syntax:
+
+   ![conditional variables](/static/images/monitor/conditionalvars.png)
+
+   Here is an example of how you can set it up in the editor:
+
+   ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+
+
+   The corresponding trigger event notification will look like this:
+
+   ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+
+
+   and the recovery notification:
+
+   ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+
+
+   The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
+   These can also be seen in the "Use message template variables" help box in
+   Step 3 of the monitor editor.
+
+2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
+   of having a generic message (and finding the triggering tag scope in the alert
+   query definition), a variable can be used in the message for explicitly
+   identifying the triggering scope.
+
+   Here is an example of how you can use template variables for a multi alert:
+
+   ![template var editor](/static/images/monitor/templatevareditor.png)
+
+
+   and the corresponding event notification:
+
+   ![template var trigger](/static/images/monitor/templatevar.png)
+
+
+   The tag template variables available depend on the tag group selected in Step 1
+   of the monitor editor. The possible options will automatically populate at the
+   bottom of the "Use message template variables" help box in Step 3 of the editor.
+   These variables can also be used in the monitor titles (names), but note that
+   the variables are only populated in the text of Datadog child events (not the
+   parent, which displays an aggregation summary).
+
+
 <!-- ## Monitor FAQs {#faqs} -->
 
 ## Monitorに関するFAQs {#faqs}
 
-- - *Can I manage my monitors progromatically?*
+- *Can I manage my monitors programatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
@@ -394,10 +460,11 @@ right people get notified so the problem can be resolved as soon as possible.
 
 - *Can you alert on a function?*
 
-  Not currently but this feature is in the works and should be released by the end of 2014.
+  Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
+  alert on custom queries and functions, similar to the JSON editor for graphs.
 
 - *Can you alert on an event?*
 
-  Not currently, but we're discussing how we'd like to implement this. As an
+  Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
