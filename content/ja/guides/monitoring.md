@@ -256,10 +256,10 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 6. **アラートが発報している状態を、自動的に解除する**オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にはこのオプションはOFFにしておくことをお勧めします。
 
-   This most common use-case for this option is when you have very sparse
+   <!-- This most common use-case for this option is when you have very sparse
    counters, e.g. for errors. When errors stop occuring the metric will stop
    reporting. This means the monitor will not resolve because there are not
-   anymore values to trigger a resolution.
+   anymore values to trigger a resolution. -->
 
    このオプションの最も一般的なユースケースは、非常に時間の離れたエラーのカウンターです。エラーが発生しなくなると、Datadogへのメトリクスのリポーティングも止まります。一度発報状態になったアラートを解除するためのデータが届いていないので、そのアラートを解除するために、自動での解除が必要になります。
 
