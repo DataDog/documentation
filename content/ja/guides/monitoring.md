@@ -195,58 +195,80 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 4. {:#metric-conditions} アラート条件の設定します。
 
-    - The **threshold** options vary slightly depending on what alert type you
+    <!-- - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
       based on your metric. As you change your threshold, you will see the graph
-      update with a marker showing the cutoff point.
+      update with a marker showing the cutoff point. -->
+
+      アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
+
 
       ![metric threshold](/static/images/monitor/metric_threshold.png)
 
-      Note that you can use formatted values in this input based on the
-      metric itself. For example, if you are monitoring `system.disk.used`, you
-      can give a threshold of `20GB`.
+      <!-- Note that you can use formatted values in this input based on the metric itself. For example, if you are monitoring `system.disk.used`, you can give a threshold of `20GB`. -->
 
-      For a **threshold alert** you will be able to chose a *time aggregation*
-      of the data. The alerting engine will generate a single series and perform
-      selected aggregation.
+      メトリクスの閾値を設定する際、その値に単位つけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
-      Let's look at the details of each option:
 
-        - *on average*: The series will be averaged to produce a single
-          value that will be checked against the threshold.
+      <!-- For a **threshold alert** you will be able to chose a *time aggregation* of the data. The alerting engine will generate a single series and perform selected aggregation. -->
 
-        - *at least once*: If any single value in the generated series crosses
-          the threshold then an alert will be triggered.
+      **閾値でアラート通知**する場合は、*時間内に含まれるデータの集計方法*の決めるオプションを選択することができます。アラートエンジンは、別の時系列データを生成し選択された集計を実行します。
 
-        - *at all times*: If every point in the generated series is outside the
-          threshold then an alert will be triggered.
+      <!-- Let's look at the details of each option: -->
 
-        - *in total*: If the summation of every point in the series is outside
-          the threshold then an alert will be triggered.
+      それぞれのオプションの詳細は以下のようになります:
 
-      Note the *on average* and *at all times* aggregations *require* a full
+    <!-- - *on average*: The series will be averaged to produce a single
+      value that will be checked against the threshold.
+    - *at least once*: If any single value in the generated series crosses
+      the threshold then an alert will be triggered.
+    - *at all times*: If every point in the generated series is outside the
+      threshold then an alert will be triggered.
+    - *in total*: If the summation of every point in the series is outside
+      the threshold then an alert will be triggered. -->
+
+      - *on average*(平均): 時系列データには、平均化の処理をし単一の値を導きだします。その後、閾値と比較してチェックします。
+      - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
+      - *at all times*(常時): 生成された時系列データの全てのポイントが閾値外である場合に、アラートが発報されます。
+      - *in total*(合計)： 時系列データの全てのポイントの合計が閾値の外にある場合、アラートが発報されます。
+
+
+      <!-- Note the *on average* and *at all times* aggregations *require* a full
       window of data in the final series. This does *not* mean that each series
       must be full but that there shouldn't be a gap of more than 1 minute
       across all aggregated series. In other words, we recommend using *at least
-      once* or *in total* for metrics with > 1 minute interval.
+      once* or *in total* for metrics with > 1 minute interval. -->
 
-5. You can optionally **notify on no data** after a configurable timeframe. At
-   the minimum, your chosen timeframe must be greater than 2x the alerting
-   window. For example, if you are alerting over the last 5 minutes then you
-   would need to wait at least 10 minutes before notifying on missing data.
+      注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上の間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
 
-6. You can opt to **automatically resolve the monitor from a triggered
+
+      <!-- 5. You can optionally **notify on no data** after a configurable timeframe. At
+      the minimum, your chosen timeframe must be greater than 2x the alerting
+      window. For example, if you are alerting over the last 5 minutes then you
+      would need to wait at least 10 minutes before notifying on missing data. -->
+
+5. 必要に応じて、一定時間以上データーが届かない場合の**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
+
+
+    <!-- 6. You can opt to **automatically resolve the monitor from a triggered
    state**. In general you'll want to leave this option off as you only want
-   an alert to be resolved when it's fixed.
+   an alert to be resolved when it's fixed. -->
+
+6. **アラートが発報している状態を、自動的に解除する**オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にはこのオプションはOFFにしておくことをお勧めします。
 
    This most common use-case for this option is when you have very sparse
    counters, e.g. for errors. When errors stop occuring the metric will stop
    reporting. This means the monitor will not resolve because there are not
    anymore values to trigger a resolution.
 
-7. Configure your **notification options** Refer to the
+   このオプションの最も一般的なユースケースは、非常に時間の離れたエラーのカウンターです。エラーが発生しなくなると、Datadogへのメトリクスのリポーティングも止まります。一度発報状態になったアラートを解除するためのデータが届いていないので、そのアラートを解除するために、自動での解除が必要になります。
+
+
+   <!-- 7. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+   walkthrough of the common notification options. -->
+
+7. 通知の設定をします。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
 
 <!-- ## Integration Monitors {#integration} -->
