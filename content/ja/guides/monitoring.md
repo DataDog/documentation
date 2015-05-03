@@ -140,7 +140,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     この項目では、グラフ表示に使っている標準的な検索対象範囲(scope)の規則が適用されます。
     この規則の詳細に関しては、グラフ表示入門のページの[検索対象範囲(scope)](/ja/graphing/#scope)を参照してください。
 
-<!-- 2. Select the alert type. -->
+    <!-- 2. Select the alert type. -->
 
 2. アラートのタイプを選択します。
     ![alert type](/static/images/monitor/alert_type.png)
@@ -171,34 +171,29 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     注: このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
 
 
-<!-- 3. Select the alert grouping. -->
+    <!-- 3. Select the alert grouping. -->
 
 3. アラートグループを選択します。
     ![alert grouping](/static/images/monitor/alert_grouping.png)
 
-    A **simple alert** aggregates over all reporting sources. You will get one
+    <!-- A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
     best to monitor a metric from a single host, like `avg` of
     `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many
-    hosts like `sum` of `nginx.bytes.net` over `region:us-east`.
+    hosts like `sum` of `nginx.bytes.net` over `region:us-east`. -->
 
-    A **multi alert** applies the alert to each source, according to your group
-    parameters. E.g. to alert on disk space you might group by host and device,
-    creating the query:
+    **simple alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
-    単純なアラートがすべてのレポートソースを超える集約します。集計値は、以下の設定された条件を満たしているときに、1つのアラートを取得します。ビット、または領域にわたってnginx.bytes.netの合計のような多くのホスト間の集約メトリックの：これは、ホスト上のsystem.cpu.iowaitの平均と同様に、単一のホストからのメトリックを監視するために最高の作品たち - 東。
 
-    マルチアラートはあなたのグループのパラメータに基づいて、各ソースにアラートを適用します。例えばクエリを作成、あなたがホストとデバイスでグループかもしれないディスクスペースに警告します：
+    <!-- A **multi alert** applies the alert to each source, according to your group parameters.  to alert on disk space you might group by host and device, creating the query: avg of system.disk.in_use over * by host,device.  This will trigger a separate alert for each device on each host that is running out of space.  Note: Anything reporting this metric that does not have the chosen groups will be ignored during alert evaluation. -->
 
-        avg:system.disk.in_use{*} by {host,device}
+    **multi alert**は、グループのパラメータに基づいて、アラートを通知します。ディスクスペースに関するアラートを通知する場合、ホスト上のデバイス単位でグループ化しておくと良いでしょう。例えば、"`avg` of `system.disk.in_use` over `*`"というメトリクスの場合、Multi Alertのグループを`host,device`と設定します。
+    このように設定することにより、各ホストの各デバイス毎にディスクスペースが無くなった際のアラートを通知することができるようになります。注: この設定によりグループに属していないと判定されたメトリクスは、アラートの判定プロセス際に無視されます。
 
-    This will trigger a separate alert for each device on each host that is
-    running out of space.
 
-    これは、領域が不足している各ホスト上のデバイスごとに個別のアラートをトリガーします。
-    
+    <!-- 4. {:#metric-conditions} Select the alert conditions -->
 
-4. {:#metric-conditions} Select the alert conditions
+4. {:#metric-conditions} アラート条件の設定します。
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
