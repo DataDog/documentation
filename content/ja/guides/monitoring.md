@@ -353,53 +353,41 @@ configuration. -->
 <!-- **Network Status** -->
 **ネットワークステータス**
 
-1. Choose a **network check**. You will be able to choose from all HTTP and TCP
+<!-- 1. Choose a **network check**. You will be able to choose from all HTTP and TCP
    checks being submitted by your Agents.
-
-   <!-- ネットワークチェックを選択します。あなたのエージェントによって提出されているすべてのHTTPおよびTCPチェックから選択することができます。 -->
-
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the check you have chosen.
-
-   <!-- 名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したチェックを報告したホストまたはタグが表示されます。 -->
-
 3. Select **alerting options**. Please refer to the
    [custom monitors](#check-alerting) section for details on the available
    options.
-
-   <!-- オプションを警告選択します。利用可能なオプションの詳細については、カスタムモニタのセクションを参照してください。 -->
-
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+   walkthrough of the common notification options. -->
 
-   <!-- あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。 -->
+1. **ネットワークチェック**を指定します。Datadog Agentによりリポーティングされた全てのHTTPとTCPチェックから選択することができます。
+2. 名前またはタグ（複数可）でホストを指定します。先の**ネットワークチェック**で選択した内容に基づいてホスト名とタグが表示されます。
+3. **アラートオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
+4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
 
 <!-- **Network Metric** -->
 **ネットワークメトリクス**
 
-1. Choose a **network metric**. You will be able to choose either the TCP or
+<!-- 1. Choose a **network metric**. You will be able to choose either the TCP or
    HTTP response time metric.
-
-   <!-- ネットワークメトリックを選択してください。あなたは、TCPまたはHTTP応答時間メトリックのいずれかを選択することができるであろう。 -->
-
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the metric you have chosen.
-
-   <!-- 名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したメトリックをレポートするホストまたはタグが表示されます。 -->
-
 3. Select **alerting options**. Please refer to the
    [alert-conditions](#metric-conditions) section for details on the available
    options.
-
-   <!-- オプションを警告選択します。利用可能なオプションの詳細については、アラート条件のセクションを参照してください。 -->
-
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+   walkthrough of the common notification options. -->
 
-   <!-- あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。 -->
+ 1. **ネットワークメトリクス**を指定します。Datadog Agentによりリポーティングされた全てのHTTPとTCPの応答時間メトリクスから選択することができます。
+ 2. 名前またはタグ（複数可）でホストを指定します。先の**ネットワークメトリクス**で選択した内容に基づいてホスト名とタグが表示されます。
+ 3. **アラートオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
+ 4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
 
 <!-- ## Custom Monitors {#custom} -->
