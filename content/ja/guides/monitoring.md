@@ -277,19 +277,25 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 ![es status](/static/images/monitor/es_status.png)
 
-On the integration tab you will see a list of your installed integrations. Upon
-selection, you can choose to monitor either a "Status" or a "Metric".
+<!-- On the integration tab you will see a list of your installed integrations. Upon
+selection, you can choose to monitor either a "Status" or a "Metric". -->
 
-- Choosing **Integration Status** will present you with one or more service
+インテグレーションタブをクリックすると、既にインストールされているインテグレーションのタイルがタブの下に表示されます。そのタイルを選択すると`Status`と`Metric`というMonitorを選択できるようになります。
+
+<!-- - Choosing **Integration Status** will present you with one or more service
   checks for each integration. Please refer to the
   [custom monitors](#check-alerting) section for details on the
-  available options.
+  available options. -->
 
-- Choosing **Integration Metric** will provide a familiar interface used for a
+- **Monitor Status** を選択すると、そのインテグレーション用のサービスチェックを１つ以上提示します。設定で利用可能なオプションの詳細については、[カスタムモニタ](#check-alerting)のセクションを参照してください。
+
+<!-- - Choosing **Integration Metric** will provide a familiar interface used for a
   interface used for a Metric Monitor. You will be able to choose from any of
   the metrics provided by this integration. Please refer to the
-  [alert conditions](#metric-conditions) section for details on the avaialble
-  options.
+  [alert conditions](#metric-conditions) section for details on the available
+  options. -->
+
+- **Monitor Metric**を選択すると、メトリックMonitorと同等の設定インタフェイスが表示されます。この設定画面の`Select a metrics`の項目では、インテグレーションが収集している全てのメトリクスから選択をすることができます。項目②の"Set alert conditions"のオプションに関しては、先の"メトリクスを対象にしたMonitor"のセクションの[3.アラート条件の設定](#metric-conditions)を参照してください。
 
 
 <!-- ## Process Monitors {#process} -->
@@ -298,29 +304,37 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 
 ![process monitor](/static/images/monitor/process_monitor.png)
 
-A process monitor will watch the status produced by the `process.up` service
+<!-- A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
-thresholds based on the number of matching processes.
+thresholds based on the number of matching processes. -->
 
-Read more about configuration on the [Process Check](/integrations/process/)
-page.
+プロセスを対象したMonitorは、Datadog Agentのサービスチェックによってリポートされる`process.up`の状態を監視しています。
 
-For each process, a single service check status will be produced. Through this
+<!-- Read more about configuration on the [Process Check](/integrations/process/)
+page. -->
+
+設定の詳細については、[プロセスのチェック](/integrations/process/)ページをお読みください。
+
+<!-- For each process, a single service check status will be produced. Through this
 creation interface, you can choose which of those checks to monitor and at what
-point they should notify.
+point they should notify. -->
 
-1. Pick the **process** to monitor. You will see the names configured in any
+各プロセスに対しサービスチェックのステータスが、生成されます。プロセスMonitorの作成画面を介して、どのサービスチェックのステータスを監視し、どのような状態になったときに通知するか設定することができます。
+
+<!-- 1. Pick the **process** to monitor. You will see the names configured in any
    Agent with an active process check.
-
 2. Pick the **hosts by name or tag(s)**. You will only see hosts or tags that
-   are reporting a status for the selected process.
-
+  are reporting a status for the selected process.
 3. Select **alerting options**. Please refer to the
-   [custom monitors](#check-alerting) section for details on the available options.
-
+ [custom monitors](#check-alerting) section for details on the available options.
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+[Notifications](#notifications) section of this guide for a detailed
+walkthrough of the common notification options. -->
+
+1. 監視したい**process**を選択します。Datadog Agentの設定ファイルで有効にしているプロセスチェックの名前が表示されます。
+2.  **ホスト名またはタグ（複数可）**を選択します。先に選択したプロセスのステータス情報に基づいてホスト名とタグが表示されます。
+3. **アラートのオプション**を選択します。利用可能なオプションの詳細については、[custom monitors](#check-alerting)のセクションを参照してください。
+4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
 
 <!-- ## Network Monitors {#network} -->
@@ -329,41 +343,64 @@ point they should notify.
 
 ![network monitor](/static/images/monitor/network_monitor.png)
 
-Network monitors cover the TCP and HTTP checks available in the Agent. Read
+<!-- Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/guides/network_checks) for details on Agent
-configuration.
+configuration. -->
 
-**Network Status**
+ネットワークMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/guides/network_checks) を参照してください。
+
+
+<!-- **Network Status** -->
+**ネットワークステータス**
 
 1. Choose a **network check**. You will be able to choose from all HTTP and TCP
    checks being submitted by your Agents.
 
+   ネットワークチェックを選択します。あなたのエージェントによって提出されているすべてのHTTPおよびTCPチェックから選択することができます。
+
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the check you have chosen.
+
+   名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したチェックを報告したホストまたはタグが表示されます。
 
 3. Select **alerting options**. Please refer to the
    [custom monitors](#check-alerting) section for details on the available
    options.
 
+   オプションを警告選択します。利用可能なオプションの詳細については、カスタムモニタのセクションを参照してください。
+
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-**Network Metric**
+   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+
+
+<!-- **Network Metric** -->
+**ネットワークメトリクス**
 
 1. Choose a **network metric**. You will be able to choose either the TCP or
    HTTP response time metric.
 
+   ネットワークメトリックを選択してください。あなたは、TCPまたはHTTP応答時間メトリックのいずれかを選択することができるであろう。
+
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the metric you have chosen.
+
+   名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したメトリックをレポートするホストまたはタグが表示されます。
 
 3. Select **alerting options**. Please refer to the
    [alert-conditions](#metric-conditions) section for details on the available
    options.
 
+   オプションを警告選択します。利用可能なオプションの詳細については、アラート条件のセクションを参照してください。
+
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
+
+   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+
 
 <!-- ## Custom Monitors {#custom} -->
 
@@ -374,11 +411,17 @@ configuration.
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
 
+カスタムモニタは、エージェントに付属するアウトオブボックスの統合のいずれかによって報告されていないすべてのサービスチェックを包含する。
+
 Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 
+   メトリック、イベント、またはサービスチェックを送信独自の小切手を書くの詳細については、エージェントチェックにガイドを参照してください。
+
 1. Select your **service check**.
+
+   あなたのサービスチェックを選択します。
 
 2. Select **host or tags** that you would like to monitor. The check will run
    for every unique set of tags from all monitored hosts. For example, the
@@ -386,7 +429,12 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
+   あなたが監視したいホストやタグを選択します。チェックは、すべての監視対象ホストからのタグのすべてのユニークなセットのために実行されます。例えば、nginxのサービスチェックが{ホスト、ポート}ごとに状態を報告します。あなたは、単一のホスト上で実行されている複数のサーバーを持っているのであれば、各1は、障害が発生した場合には、別途通知されます。
+
+
 3. {: #check-alerting} Select your **alert options**.
+
+  　アラートオプションを選択します。
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
@@ -394,12 +442,19 @@ or service checks.
    fails and only have it recover if it stays that way. In this case you might
    choose to notify on 1 critical status, 1 warning status and 4 OK statuses.
 
+   各チェックの実行がCRITICAL、WARNINGまたはOKのいずれかのステータスを送信しますが、あなたは状態変化通知を引き起こすように連続したどのような条件で選択することができます。たとえば、あなたはあなたのチェックが失敗した場合はすぐに知りたいだけ、それがそのように留まる場合には回復している場合があります。この場合、あなたは1重要なステータス、1警告ステータスと4 OKステータスに通知することもできます。
+
    You can optionally **notify on no data** after a configurable timeframe. You
    must choose at least 2 minutes for your timeframe.
+
+   必要に応じて設定可能な時間枠の後にはデータに通知することができます。あなたは、あなたの時間枠のために少なくとも2分を選択する必要があります。
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
+
+   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+
 
 <!-- ## Monitor Notifications {#notification} -->
 
@@ -414,22 +469,30 @@ right people get notified so the problem can be resolved as soon as possible.
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
+   お使いのモニターにタイトルを付けます。それは多くの場合、そのように通知され、チームメンバーはすぐに何が起こっているか理解することができ、モニターの簡潔な説明を使用すると便利です。
+
 2. Enter a **message** for the monitor. This field allows standard
    [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
    as well as Datadog's @-notification syntax. Note: you can notify any
    non-Datadog users via email by simply adding `@their-email` to the
    message.
 
+   モニタのメッセージを入力します。このフィールドには、標準のマークダウンフォーマットならびにDatadogの@の-notification構文を可能にします。注：あなたは、単にメッセージへの-メール@追加することで、電子メールを介して任意の非Datadogのユーザーに通知することができます。
+
    A common use-case for the monitor message is to include a step-by-step way
    to resolve the problem. For example if you are monitoring a database then you
    might want to include steps for failing over to a standby node. All in all,
    you should attempt to give as much context to the monitor as possible.
+
+   監視メッセージのための一般的なユースケースは、問題を解決するためのステップバイステップの方法を含むことです。データベースを監視している場合たとえば、あなたはスタンバイ·ノードにフェイルオーバーするためのステップを含めることができます。すべてのすべてで、あなたは、可能なモニターにできるだけ多くのコンテキストを与えることを試みる必要があります。
 
 4. Optionally enable **monitor renotification**. This option is useful to remind
    your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent
    anytime the monitor renotifies. The original message will be included as
    well.
+
+   必要に応じてモニタrenotificationを有効にしてください。このオプションは、解決としてモニターがマークされるまで、問題が解決されていないことをあなたのチームを思い出させるために有用です。有効になっている場合は、エスカレーション·メッセージを設定することができ、いつでもモニターrenotifiesを送信します。元のメッセージが同様に含まれます。
 
 
 <!-- ### Message template variables -->
@@ -444,10 +507,16 @@ for template variables: 1) displaying a different message depending on the
 notification type (e.g. triggered, recovered, no data) and 2) incorporating the
 triggering scope into the message of multi alerts.
 
+メッセージテンプレート変数はモニターの通知をカスタマイズするために使用することができます。この機能は、すべてのモニタ·タイプでサポートされています。 1）通知の種類に応じて異なるメッセージを表示する（例えば、データを回復していない、トリガ）と2）マルチアラートのメッセージにトリガー範囲を組み込む：2主な使用テンプレート変数のケースがあります。
+
+
 1. **Conditional variables for different notification types**: You can have a
    monitor event display a different message depending on whether the event is a
    trigger, recover, or no data notification. These variables use simple if-else
    logic with the following syntax:
+
+   別の通知タイプのための条件変数：あなたは、モニタイベントは、イベントがトリガ、回復、または全くデータ通知であるかどうかに応じて異なるメッセージを表示することができます。これらの変数は、次の構文で簡単なのif-elseロジックを使用します。
+
 
    ![conditional variables](/static/images/monitor/conditionalvars.png)
 
@@ -470,10 +539,21 @@ triggering scope into the message of multi alerts.
    These can also be seen in the "Use message template variables" help box in
    Step 3 of the monitor editor.
 
+   使用可能な条件変数は`is_alert`、` is_recovery`、と `is_no_data`です。
+   これらは、「使用したメッセージテンプレート変数「ヘルプボックス内で見ることができます
+   モニターエディタのステップ3。
+
+
 2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
    of having a generic message (and finding the triggering tag scope in the alert
    query definition), a variable can be used in the message for explicitly
    identifying the triggering scope.
+
+   **マルチアラート**のタグ変数：モニターは、複数のアラート、代わりにある場合
+      一般的なメッセージを持つ（およびアラートでトリガタグスコープを見つけます
+      クエリ定義）は、変数を明示的にするために、メッセージに使用することができます
+      トリガ範囲を特定します。
+
 
    Here is an example of how you can use template variables for a multi alert:
 
@@ -491,6 +571,13 @@ triggering scope into the message of multi alerts.
    These variables can also be used in the monitor titles (names), but note that
    the variables are only populated in the text of Datadog child events (not the
    parent, which displays an aggregation summary).
+
+   利用可能なタグテンプレート変数はステップ1で選択したタググループに依存します
+      モニターエディタの。可能なオプションが自動的に移入されます
+      エディタの手順3で「使用メッセージテンプレート変数「ヘルプボックスの下部。
+      これらの変数は、モニタのタイトル（名前）で使用されるが、ことに注意することができます
+      変数のみDatadog子イベントのテキスト（ないに移入され
+      集計サマリーが表示され、親、）。
 
 
 <!-- ## Monitor FAQs {#faqs} -->
@@ -513,3 +600,15 @@ triggering scope into the message of multi alerts.
   Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
+
+  私は私のモニターは、プログラム的に管理することはできますか？
+
+  はい。利用可能なライブラリやカールを使用して、APIを介してモニタの管理の詳細についてはDatadogのAPIドキュメントを参照してください。
+
+  あなたが関数に警告することができますか？
+
+  はい、モニターエディタの選択「ソース」タブ（ステップ1）を使用すると、グラフのJSONエディタに似たカスタムクエリや機能、上に警告することができます。
+
+  あなたがイベントに警告することができますか？
+
+  現在ないが、我々は、この機能を開発しています。別の方法として、あなたはそれが発生するたびに電子メールを介してイベントを提供するであろうイベントの体内で@通知を設定することができます。
