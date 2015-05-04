@@ -356,24 +356,24 @@ configuration. -->
 1. Choose a **network check**. You will be able to choose from all HTTP and TCP
    checks being submitted by your Agents.
 
-   ネットワークチェックを選択します。あなたのエージェントによって提出されているすべてのHTTPおよびTCPチェックから選択することができます。
+   <!-- ネットワークチェックを選択します。あなたのエージェントによって提出されているすべてのHTTPおよびTCPチェックから選択することができます。 -->
 
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the check you have chosen.
 
-   名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したチェックを報告したホストまたはタグが表示されます。
+   <!-- 名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したチェックを報告したホストまたはタグが表示されます。 -->
 
 3. Select **alerting options**. Please refer to the
    [custom monitors](#check-alerting) section for details on the available
    options.
 
-   オプションを警告選択します。利用可能なオプションの詳細については、カスタムモニタのセクションを参照してください。
+   <!-- オプションを警告選択します。利用可能なオプションの詳細については、カスタムモニタのセクションを参照してください。 -->
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+   <!-- あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。 -->
 
 
 <!-- **Network Metric** -->
@@ -382,46 +382,45 @@ configuration. -->
 1. Choose a **network metric**. You will be able to choose either the TCP or
    HTTP response time metric.
 
-   ネットワークメトリックを選択してください。あなたは、TCPまたはHTTP応答時間メトリックのいずれかを選択することができるであろう。
+   <!-- ネットワークメトリックを選択してください。あなたは、TCPまたはHTTP応答時間メトリックのいずれかを選択することができるであろう。 -->
 
 2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
    the metric you have chosen.
 
-   名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したメトリックをレポートするホストまたはタグが表示されます。
+   <!-- 名前またはタグ（複数可）でホストを選択します。あなただけあなたが選択したメトリックをレポートするホストまたはタグが表示されます。 -->
 
 3. Select **alerting options**. Please refer to the
    [alert-conditions](#metric-conditions) section for details on the available
    options.
 
-   オプションを警告選択します。利用可能なオプションの詳細については、アラート条件のセクションを参照してください。
+   <!-- オプションを警告選択します。利用可能なオプションの詳細については、アラート条件のセクションを参照してください。 -->
 
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+   <!-- あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。 -->
 
 
 <!-- ## Custom Monitors {#custom} -->
 
-## カスタムメトリクスを対象にしたMonitor {#custom}
+## カスタムチェックを対象にしたMonitor {#custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
 
-Custom monitors encompass any service checks that are not reported by one of the
-out-of-the-box integrations included with the Agent.
+<!-- Custom monitors encompass any service checks that are not reported by one of the
+out-of-the-box integrations included with the Agent. -->
 
-カスタムモニタは、エージェントに付属するアウトオブボックスの統合のいずれかによって報告されていないすべてのサービスチェックを包含する。
+カスタムMonitorは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスの監視に使用します。
 
-Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
+<!-- Refer to the [Guide to Agent Checks](/ja/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
-or service checks.
+or service checks. -->
 
-   メトリック、イベント、またはサービスチェックを送信独自の小切手を書くの詳細については、エージェントチェックにガイドを参照してください。
+独自のAgent Checkを使ってメトリクス、イベント、サービスチェックを送信する方法については、[Guide to Agent Checks](/guides/agent_checks/)を参照してください。
 
-1. Select your **service check**.
 
-   あなたのサービスチェックを選択します。
+<!-- 1. Select your **service check**.
 
 2. Select **host or tags** that you would like to monitor. The check will run
    for every unique set of tags from all monitored hosts. For example, the
@@ -429,12 +428,7 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
-   あなたが監視したいホストやタグを選択します。チェックは、すべての監視対象ホストからのタグのすべてのユニークなセットのために実行されます。例えば、nginxのサービスチェックが{ホスト、ポート}ごとに状態を報告します。あなたは、単一のホスト上で実行されている複数のサーバーを持っているのであれば、各1は、障害が発生した場合には、別途通知されます。
-
-
 3. {: #check-alerting} Select your **alert options**.
-
-  　アラートオプションを選択します。
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
@@ -442,34 +436,42 @@ or service checks.
    fails and only have it recover if it stays that way. In this case you might
    choose to notify on 1 critical status, 1 warning status and 4 OK statuses.
 
-   各チェックの実行がCRITICAL、WARNINGまたはOKのいずれかのステータスを送信しますが、あなたは状態変化通知を引き起こすように連続したどのような条件で選択することができます。たとえば、あなたはあなたのチェックが失敗した場合はすぐに知りたいだけ、それがそのように留まる場合には回復している場合があります。この場合、あなたは1重要なステータス、1警告ステータスと4 OKステータスに通知することもできます。
-
    You can optionally **notify on no data** after a configurable timeframe. You
    must choose at least 2 minutes for your timeframe.
 
-   必要に応じて設定可能な時間枠の後にはデータに通知することができます。あなたは、あなたの時間枠のために少なくとも2分を選択する必要があります。
-
 4. Configure your **notification options** Refer to the
    [Notifications](#notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+   walkthrough of the common notification options. -->
 
-   あなたの通知オプションが共通の通知オプションの詳細なチュートリアルについては、このガイドの通知を参照してください設定します。
+1. **サービスチェック**を選択します。
+
+2. 監視したい**ホスト名やタグ（複数可）**を選択します。
+   アラートの為の確認は、監視対象として指定されたホストから送られてくるタグやタグの組み合わせに対して実行されます。例えば、Nginxのサービスチェックが、`{host,port}`毎にステータスを報告しているとします。そしてもしも、単一ホスト上で複数のサーバが稼働している状態であれば、それぞれのサーバの障害は個別に通知されることになります。
+
+3. {: #check-alerting} **アラートオプション** を選択します。
+
+   各サービスチェックが実行されると、CRITICAL、WARNING、OKの何れかのステータスを送信します。`Trigger the alert after selected consecutive failures:`の項目でステータス変更とアラートを通知をするための連続発生回数を指定します。例えば、カスタムMonitorのチェックが失敗した場合には直ちに知りたいが、OK状態が続くまではリカバー状態にはなってほしくないとします。このようなケースではオプションを、1回のCritical、1回のWarning、4回のOKと設定します。
+
+   必要に応じて、一定時間以上データーが届かない場合のnotify on no data(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。
+
+4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
 
 <!-- ## Monitor Notifications {#notification} -->
 
 ## 通知について {#notification}
 
-Notifications are a key component of any monitor. You want to make sure the
-right people get notified so the problem can be resolved as soon as possible.
+<!-- Notifications are a key component of any monitor. You want to make sure the
+right people get notified so the problem can be resolved as soon as possible. -->
+
+通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
+
 
 ![notification](/static/images/monitor/notification.png)
 
-1. Give your monitor a **title**. It is often useful to use a succinct
+<!-- 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
-
-   お使いのモニターにタイトルを付けます。それは多くの場合、そのように通知され、チームメンバーはすぐに何が起こっているか理解することができ、モニターの簡潔な説明を使用すると便利です。
 
 2. Enter a **message** for the monitor. This field allows standard
    [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
@@ -477,60 +479,70 @@ right people get notified so the problem can be resolved as soon as possible.
    non-Datadog users via email by simply adding `@their-email` to the
    message.
 
-   モニタのメッセージを入力します。このフィールドには、標準のマークダウンフォーマットならびにDatadogの@の-notification構文を可能にします。注：あなたは、単にメッセージへの-メール@追加することで、電子メールを介して任意の非Datadogのユーザーに通知することができます。
-
    A common use-case for the monitor message is to include a step-by-step way
    to resolve the problem. For example if you are monitoring a database then you
    might want to include steps for failing over to a standby node. All in all,
    you should attempt to give as much context to the monitor as possible.
 
-   監視メッセージのための一般的なユースケースは、問題を解決するためのステップバイステップの方法を含むことです。データベースを監視している場合たとえば、あなたはスタンバイ·ノードにフェイルオーバーするためのステップを含めることができます。すべてのすべてで、あなたは、可能なモニターにできるだけ多くのコンテキストを与えることを試みる必要があります。
-
-4. Optionally enable **monitor renotification**. This option is useful to remind
+3. Optionally enable **monitor renotification**. This option is useful to remind
    your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent
    anytime the monitor renotifies. The original message will be included as
-   well.
+   well. -->
 
-   必要に応じてモニタrenotificationを有効にしてください。このオプションは、解決としてモニターがマークされるまで、問題が解決されていないことをあなたのチームを思い出させるために有用です。有効になっている場合は、エスカレーション·メッセージを設定することができ、いつでもモニターrenotifiesを送信します。元のメッセージが同様に含まれます。
+1. Monitorの通知に**タイトル**を付けましょう。多くの場合、簡潔な説明を使用することは重要です。なぜならばチームメンバーが、何が起こっているかを直ぐに理解することができるからです。
+
+2. Monitorの通知本文を入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)も資料することができます。更に、`@their-email`構文を使うことにより、Datadogに登録していないメンバーにもメールによって通知を送信することができます。
+
+   Monitorの通知本文の一般的なユースケースは、障害を解決するための詳細な手順を記述することです。例えばデータベースを監視している場合には、セカンダリーとしてスタンバイしているノードのフェールオーバーの手順を記しておくと良いでしょう。全てのケースのおいて、メッセージ本文には可能な限り多くの情報を記すように心がけましょう。
+
+3. 必要に応じて**Monitor renotification**を有効にしてください。このオプションは、発報しているMonitorに解決の旨のチェックマークがつけられまで、チームメンバーに注意喚起を促し続けるためには良い手段です。このオプションを有効にすると、Monitorが再通知する際、オリジナルのメッセージに加えて送信するエスカレーション·メッセージを設定することができます。
 
 
 <!-- ### Message template variables -->
 
-### 通知内で使うことのできるテンプレート化された変数
-
+### 通知内で使うことのできるテンプレート変数
 (Message template variables)
 
-Message template variables can be used to customize your monitor notifications.
+<!-- Message template variables can be used to customize your monitor notifications.
 This feature is supported in all monitor types. There are two primary use cases
 for template variables: 1) displaying a different message depending on the
 notification type (e.g. triggered, recovered, no data) and 2) incorporating the
-triggering scope into the message of multi alerts.
+triggering scope into the message of multi alerts. -->
 
-メッセージテンプレート変数はモニターの通知をカスタマイズするために使用することができます。この機能は、すべてのモニタ·タイプでサポートされています。 1）通知の種類に応じて異なるメッセージを表示する（例えば、データを回復していない、トリガ）と2）マルチアラートのメッセージにトリガー範囲を組み込む：2主な使用テンプレート変数のケースがあります。
+Monitorの通知の内容を状況に応じて書き換えるために変数(template variables)をつかことができます。この機能は、全てのMonitorタイプで使うことができます。
 
+変数(template variables)には、主に2つのユースケースが考えられます。
+
+1. 通知の種類に応じて異なるメッセージを表示したい場合(e.g. triggered, recovered, no data)
+2. `Multi Alert`で、通知本文に障害範囲の(グループ)情報を組み込みたい場合
+
+何か文字列
 
 1. **Conditional variables for different notification types**: You can have a
    monitor event display a different message depending on whether the event is a
    trigger, recover, or no data notification. These variables use simple if-else
    logic with the following syntax:
 
-   別の通知タイプのための条件変数：あなたは、モニタイベントは、イベントがトリガ、回復、または全くデータ通知であるかどうかに応じて異なるメッセージを表示することができます。これらの変数は、次の構文で簡単なのif-elseロジックを使用します。
+   **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(e.g. triggered, recovered, no data)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
 
    ![conditional variables](/static/images/monitor/conditionalvars.png)
 
-   Here is an example of how you can set it up in the editor:
+   <!-- Here is an example of how you can set it up in the editor: -->
+   次が、通知本文の記述の例です:
 
    ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
 
 
-   The corresponding trigger event notification will look like this:
+   <!-- The corresponding trigger event notification will look like this: -->
+   実際に送信されたアラート通知文は、次のようになります:
 
    ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
 
 
-   and the recovery notification:
+   <!-- and the recovery notification: -->
+   リカバーした際の通知文は、次のようになります:
 
    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
@@ -556,11 +568,13 @@ triggering scope into the message of multi alerts.
 
 
    Here is an example of how you can use template variables for a multi alert:
+   次が、`Multi Alert`でtemplate variablesを使った例です。
 
    ![template var editor](/static/images/monitor/templatevareditor.png)
 
 
-   and the corresponding event notification:
+   <!-- and the corresponding event notification: -->
+   実際に送信されたアラート通知文は、次のようになります:
 
    ![template var trigger](/static/images/monitor/templatevar.png)
 
@@ -584,31 +598,34 @@ triggering scope into the message of multi alerts.
 
 ## Monitorに関するFAQs {#faqs}
 
-- *Can I manage my monitors programatically?*
+<!-- - *Can I manage my monitors programatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
-  available libraries or cURL.
+  available libraries or cURL. -->
 
-- *Can you alert on a function?*
+- *Monitorは、プログラム的に管理することはできますか？*
+
+  **はい**。各プログラミング言語毎ライブラリやcURLを使ってMonitorをする方法に関しては、[Datadog APIドキュメント](http://docs.datadoghq.com/api/#alerts)を参照してください。
+
+
+<!-- - *Can you alert on a function?*
 
   Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
-  alert on custom queries and functions, similar to the JSON editor for graphs.
+  alert on custom queries and functions, similar to the JSON editor for graphs. -->
 
-- *Can you alert on an event?*
+- *ファンクションを基にアラートを発報することはできますか？*
+
+  **はい**。Monitor設定の第一ステップで'Source'タブを選択し、グラフを設定する際のJSONエディタと同じように編集することにより、カスタムクエリやファンクションのアラートを設定すことができます。
+
+
+<!-- - *Can you alert on an event?*
 
   Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
-  would deliver the event via email whenever it occurred.
+  would deliver the event via email whenever it occurred. -->
 
-  私は私のモニターは、プログラム的に管理することはできますか？
+- *イベントを基にアラートを発報することはできますか？*
 
-  はい。利用可能なライブラリやカールを使用して、APIを介してモニタの管理の詳細についてはDatadogのAPIドキュメントを参照してください。
-
-  あなたが関数に警告することができますか？
-
-  はい、モニターエディタの選択「ソース」タブ（ステップ1）を使用すると、グラフのJSONエディタに似たカスタムクエリや機能、上に警告することができます。
-
-  あなたがイベントに警告することができますか？
-
-  現在ないが、我々は、この機能を開発しています。別の方法として、あなたはそれが発生するたびに電子メールを介してイベントを提供するであろうイベントの体内で@通知を設定することができます。
+  現状では、**イベントを基にアラートを発報することはできません**。この機能は開発中です。
+  この状況に対応するためのワークアラウンドとして、@-notification構文をイベントの本文に記述しておくことができます。この方法により、イベントが発生した際に、メッセージをemailで送信することがきます。
