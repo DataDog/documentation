@@ -35,6 +35,7 @@ Endpoints
 - update: `PUT /api/v1/screen/{board_id}`
 - delete: `DELETE /api/v1/screen/{board_id}`
 - sharing `GET /api/v1/screen/share/{board_id}`
+- revoke sharing `DELETE /api/v1/screen/share/{board_id}`
 
 For `create`/`read`/`update` endpoints, the body is one JSON payload describing the Screenboard.
 
