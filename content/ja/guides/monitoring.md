@@ -517,14 +517,14 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
 1. 通知の種類に応じて異なるメッセージを表示したい場合(e.g. triggered, recovered, no data)
 2. `Multi Alert`で、通知本文に障害範囲の(グループ)情報を組み込みたい場合
 
-何か文字列
+それぞれの主要ユースケースについて解説します。
 
-1. **Conditional variables for different notification types**: You can have a
+  <!-- 1. **Conditional variables for different notification types**: You can have a
    monitor event display a different message depending on whether the event is a
    trigger, recover, or no data notification. These variables use simple if-else
-   logic with the following syntax:
+   logic with the following syntax: -->
 
-   **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(e.g. triggered, recovered, no data)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
+1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(e.g. triggered, recovered, no data)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
 
    ![conditional variables](/static/images/monitor/conditionalvars.png)
@@ -551,24 +551,19 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
    These can also be seen in the "Use message template variables" help box in
    Step 3 of the monitor editor.
 
-   使用可能な条件変数は`is_alert`、` is_recovery`、と `is_no_data`です。
-   これらは、「使用したメッセージテンプレート変数「ヘルプボックス内で見ることができます
-   モニターエディタのステップ3。
+   使用可能な条件変数は`is_alert`、` is_recovery`、`is_no_data`です。
+   これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることでも見ることができます。
 
 
-2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
+   <!-- 2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
    of having a generic message (and finding the triggering tag scope in the alert
    query definition), a variable can be used in the message for explicitly
-   identifying the triggering scope.
+   identifying the triggering scope. -->
 
-   **マルチアラート**のタグ変数：モニターは、複数のアラート、代わりにある場合
-      一般的なメッセージを持つ（およびアラートでトリガタグスコープを見つけます
-      クエリ定義）は、変数を明示的にするために、メッセージに使用することができます
-      トリガ範囲を特定します。
+2. **Multi Alertのタグ変数**: Monitorを設定する際に`Multi Alert`を利用した場合、通知本文に変数を適用し、明示的にアラートを通知している範囲を表示するようにします。
 
-
-   Here is an example of how you can use template variables for a multi alert:
-   次が、`Multi Alert`でtemplate variablesを使った例です。
+   <!-- Here is an example of how you can use template variables for a multi alert: -->
+   次が、`Multi Alert`でtemplate variablesを使った例です:
 
    ![template var editor](/static/images/monitor/templatevareditor.png)
 
@@ -579,19 +574,14 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
    ![template var trigger](/static/images/monitor/templatevar.png)
 
 
-   The tag template variables available depend on the tag group selected in Step 1
+   <!-- The tag template variables available depend on the tag group selected in Step 1
    of the monitor editor. The possible options will automatically populate at the
    bottom of the "Use message template variables" help box in Step 3 of the editor.
    These variables can also be used in the monitor titles (names), but note that
    the variables are only populated in the text of Datadog child events (not the
-   parent, which displays an aggregation summary).
+   parent, which displays an aggregation summary). -->
 
-   利用可能なタグテンプレート変数はステップ1で選択したタググループに依存します
-      モニターエディタの。可能なオプションが自動的に移入されます
-      エディタの手順3で「使用メッセージテンプレート変数「ヘルプボックスの下部。
-      これらの変数は、モニタのタイトル（名前）で使用されるが、ことに注意することができます
-      変数のみDatadog子イベントのテキスト（ないに移入され
-      集計サマリーが表示され、親、）。
+   利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
 
 <!-- ## Monitor FAQs {#faqs} -->
