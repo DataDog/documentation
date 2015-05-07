@@ -139,9 +139,9 @@ alert when at 80% or above:
   3. For set alert grouping, select "simple alert".
   4. Set alert conditions: Select Above and for the value put 0.8.
   5. Add a custom message for alert if you'd like.
-* You can read more about setting up alerts [here][alerting].
+* You can read more about setting up monitors [here][monitoring].
 
-[alerting]: /guides/alerting/
+[monitoring]: /guides/monitoring/
 <!--
 ===============================================================================
     API
