@@ -34,6 +34,7 @@ required to take full advantage of the Datadog AWS integration. As we add other 
       "Statement": [
         {
           "Action": [
+            "autoscaling:Describe*",
             "cloudtrail:DescribeTrails",
             "cloudtrail:GetTrailStatus",
             "cloudwatch:Describe*",
