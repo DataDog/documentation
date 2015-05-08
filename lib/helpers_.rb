@@ -11,7 +11,7 @@ def example_items
 end
 
 def video_items
-  @items.select { |item| item[:kind] == 'video' && item[:language] == nil }
+  @items.select { |item| item[:kind] == 'video' && item[:language] == 'en' }
 end
 
 def integration_items
