@@ -6,7 +6,11 @@ wistiaid: ira7wzi1d4
 tags:
     - Introduction
     - Installation
-    - blah
+    - PagerDuty
+    - HipChat
+    - AWS
+    - RDS
+    - ElasticSearch
 summary: In about 8 minutes you can get Datadog setup and install integrations with PagerDuty, HipChat, AWS, RDS, and ElasticSearch.
 ---
 

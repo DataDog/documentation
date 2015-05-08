@@ -1,0 +1,16 @@
+---
+title: Matt's Quick Tips - Unsharing Screenboards
+kind: video
+language: en
+wistiaid: l4gfxnyjad
+tags:
+    - Introduction
+    - Dashboards
+    - Screenboards
+    - Permissions
+    - Sharing
+    - Matts Quick Tips
+summary: Learn how to revoke your shared screenboard.
+---
+
+Sharing dashboards with others is a powerful feature in Datadog. But sometimes you need to pull that dashboard down so that people cannot see it anymore. Or maybe the link was shared with the wrong person. In this video you will see how easy it is to revoke a shared dashboard.
