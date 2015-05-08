@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2015/05/08
 translation_status: complete
 language: ja
 title: Monitor機能の設定ガイド
@@ -31,17 +31,17 @@ the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
 availability, network endpoints and more. -->
 
-インフラ全体を一箇所で監視しようとする場合、そのインフラが危機的な状況になっていること検知する方法確立するのは重要な作業です。
-Datadogでは、能動的にメトリクス, インテグレーション, ネットワークの接続状態, その他を能動的に監視してくれるMonitor機能を設定することができます。
+インフラ全体を一箇所で監視しようとする場合、そのインフラが危機的な状況になっていることを検知する方法を確立するのは重要な作業です。
+Datadogでは、能動的にメトリクス, インテグレーション, ネットワークの接続状態, その他を監視してくれるMonitor機能を設定することができます。
 
 
 <!-- Once a monitor is created, you will be notified when the its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
 Hipchat) or other custom endpoints via webhooks. -->
 
-一度Monitor機能を設定しておけば、条件が満たされた時には通知を受けることができます。
-電子メールでチームメンバーに通知することもできるし、サードパーティのサービス（例えばPagerdutyまたは
-Hipchat）や、webhooksを使って他のサービスと連携しえ通知を送することもできます。
+一度Monitor機能を設定しておけば、条件が満たされた時に通知を受けることができます。
+電子メールでチームメンバーに通知することもでき、サードパーティのサービス（例えばPagerdutyまたは
+Hipchat）やwebhooksを使い、他のサービスと連携して通知を送信することもできます。
 
 
 <!-- Triggered monitors will appear in the event stream, allowing collaboration
@@ -51,7 +51,7 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page. -->
 
-通知を送信したMonitorはイベントストリームに表示され、そのアプリケーションやインフラの問題解決に向けたコラボレーションができるようになります。Datadogの[Triggered Monitors](https://app.datadoghq.com/monitors/triggered)のページには、通知済み状態のMonitorの項目がリスト表示されます。[Manage Monitors](https://app.datadoghq.com/monitors)のページには、全てのMonitorが表示され、それらを管理することができるように成っています。
+通知を送信したMonitorはイベントストリームに表示され、そのアプリケーションやインフラの問題解決に向けたコラボレーションができるようになります。Datadogの[Triggered Monitors](https://app.datadoghq.com/monitors/triggered)のページには、通知済み状態のMonitorの項目がリスト表示されます。[Manage Monitors](https://app.datadoghq.com/monitors)のページには全てのMonitorが表示され、それらを管理することができるように成っています。
 
 
 ## 用語集
@@ -68,9 +68,9 @@ page as well as general monitor management on the
 
 以下は、このガイドで使用している用語の簡単な概要になります。
 
-- **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadog側に送信します。
-- **Check**: Agent Checkのことで、複数をのステータスを送信します。
-- **Monitor**: Agent Checkのステータスとかメトリクスの閾値の確認手順や、その他のアラート条件を元に通知を送信します。
+- **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadogに送信します。
+- **Check**: Agent Checkのことで、複数のステータスを送信します。
+- **Monitor**: Agent Checkのステータスやメトリクスの閾値の確認手順、その他のアラート条件を元に通知を送信します。
 - **Monitorタイプ**: host-, metric-, integration-, network-based, customがあります。 特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
 
 
@@ -107,7 +107,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts. -->
 
 Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハートビート信号を
 `UP`というステータスで定期的に送信します。
-このイベント信号の状態をMonitor対象に追加することで、Datadog Agentやホストの死活が状態が把握できます。
+このハートビート信号の状態をMonitor対象に追加することで、Datadog Agentやホストの死活状態が把握できます。
 
 <!-- 1. Select your **host by name or tag(s)**. Providing a tag will monitor every host that has that tag or tag combination.
 
@@ -117,7 +117,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 1. 項目①では、**ホスト名かタグ**の単一指定か組み合わせ指定ができます。タグを選択した場合は、そのタグ(タグの組み合わせ)が付与されているホストが監視対象になります。
 
-2. 項目②では、`Check Alert`か`Cluster Alert`を選択します。`Cluster Alert`の特有の設定に関しては、次を参照してください。その後、**Notify if data is missing for more than**の項目で、分単位で時間を設定します。ここで設定した時間を超えてハートビート信号が受信できなかった場合には、通知が送信されます。
+2. 項目②では、`Check Alert`か`Cluster Alert`を選択します。`Cluster Alert`の特有の設定に関しては、次を参照してください。その後、**Notify if data is missing for more than**の項目で、分単位で時間を設定します。ここで設定した時間を超えてハートビート信号が受信できなかった場合に、通知が送信されます。
 
 3. 項目③④で、通知の設定をします。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
@@ -150,7 +150,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     in the alerting conditions section. This is the standard alert case where
     you know what sort values are unexpected. -->
 
-    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このタイプは、一般的なアラートのケースで、正常な範囲が値が事前に分かっている場合に使用します。
+    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このタイプは一般的なアラートのケースで、正常な範囲か値が事前に分かっている場合に使用します。
 
 
     <!-- A **change alert** will look at a recent data point and
@@ -158,7 +158,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     ago. The compared data points are 1-minute averages and <em>not</em> a
     single point. -->
 
-    **change alert**は、最近のデータポイントの値と数分前の値の、変化値または変化率と設定値を比較します。
+    **change alert**は、最近のデータポイントの値と数分前の値の変化量または変化率を設定値と比較します。
     比較しているデータポイントの値は、1分間平均値です。**単一点の値ではありません**ので注意してください。
 
 
@@ -167,7 +167,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     calculated value is not the absolute value - meaning it will be negative for
     a downward change. -->
 
-    この種アラートは、閾値超えて発生するメトリクスのスパイクや急速なドロップを追跡するのに有効です。
+    この種アラートは、閾値を超えて発生するメトリクスのスパイクや急速なドロップを追跡するのに有効です。
     注: このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
 
 
@@ -227,7 +227,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     - *in total*: If the summation of every point in the series is outside
       the threshold then an alert will be triggered. -->
 
-      - *on average*(平均): 時系列データには、平均化の処理をし単一の値を導きだします。その後、閾値と比較してチェックします。
+      - *on average*(平均): 時系列データには、平均化の処理を行い単一の値を導きだします。その後、閾値と比較してチェックします。
       - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
       - *at all times*(常時): 生成された時系列データの全てのポイントが閾値外である場合に、アラートが発報されます。
       - *in total*(合計)： 時系列データの全てのポイントの合計が閾値の外にある場合、アラートが発報されます。
@@ -239,7 +239,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       across all aggregated series. In other words, we recommend using *at least
       once* or *in total* for metrics with > 1 minute interval. -->
 
-      注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上の間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
+      注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全に揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
 
 
       <!-- 5. You can optionally **notify on no data** after a configurable timeframe. At
@@ -247,14 +247,14 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       window. For example, if you are alerting over the last 5 minutes then you
       would need to wait at least 10 minutes before notifying on missing data. -->
 
-5. 必要に応じて、一定時間以上データーが届かない場合の**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
+5. 必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
 
 
     <!-- 6. You can opt to **automatically resolve the monitor from a triggered
    state**. In general you'll want to leave this option off as you only want
    an alert to be resolved when it's fixed. -->
 
-6. **アラートが発報している状態を、自動的に解除する**オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にはこのオプションはOFFにしておくことをお勧めします。
+6. **アラートが発報している状態を自動的に解除する**オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にこのオプションはOFFにしておくことをお勧めします。
 
    <!-- This most common use-case for this option is when you have very sparse
    counters, e.g. for errors. When errors stop occuring the metric will stop
@@ -295,7 +295,7 @@ selection, you can choose to monitor either a "Status" or a "Metric". -->
   [alert conditions](#metric-conditions) section for details on the available
   options. -->
 
-- **Monitor Metric**を選択すると、メトリックMonitorと同等の設定インタフェイスが表示されます。この設定画面の`Select a metrics`の項目では、インテグレーションが収集している全てのメトリクスから選択をすることができます。項目②の"Set alert conditions"のオプションに関しては、先の"メトリクスを対象にしたMonitor"のセクションの[3.アラート条件の設定](#metric-conditions)を参照してください。
+- **Monitor Metric**を選択すると、メトリックMonitorと同等の設定インターフェイスが表示されます。この設定画面の`Select a metrics`の項目では、インテグレーションが収集している全てのメトリクスから選択することができます。項目②の"Set alert conditions"のオプションに関しては、先の"メトリクスを対象にしたMonitor"のセクションの[3.アラート条件の設定](#metric-conditions)を参照してください。
 
 
 <!-- ## Process Monitors {#process} -->
@@ -308,7 +308,7 @@ selection, you can choose to monitor either a "Status" or a "Metric". -->
 check reported by the check in the Agent. At the Agent level you can configure
 thresholds based on the number of matching processes. -->
 
-プロセスを対象したMonitorは、Datadog Agentのサービスチェックによってリポートされる`process.up`の状態を監視しています。
+プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 
 <!-- Read more about configuration on the [Process Check](/integrations/process/)
 page. -->
@@ -319,7 +319,7 @@ page. -->
 creation interface, you can choose which of those checks to monitor and at what
 point they should notify. -->
 
-各プロセスに対しサービスチェックのステータスが、生成されます。プロセスMonitorの作成画面を介して、どのサービスチェックのステータスを監視し、どのような状態になったときに通知するか設定することができます。
+各プロセスに対しサービスチェックのステータスが生成されます。プロセスMonitorの作成画面を介して、どのサービスチェックのステータスを監視し、どのような状態になったときに通知するか設定することができます。
 
 <!-- 1. Pick the **process** to monitor. You will see the names configured in any
    Agent with an active process check.
@@ -384,7 +384,7 @@ configuration. -->
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options. -->
 
- 1. **ネットワークメトリクス**を指定します。Datadog Agentによりリポーティングされた全てのHTTPとTCPの応答時間メトリクスから選択することができます。
+ 1. **ネットワークメトリクス**を指定します。Datadog Agentによりレポーティングされた全てのHTTPとTCPの応答時間メトリクスから選択することができます。
  2. 名前またはタグ（複数可）でホストを指定します。先の**ネットワークメトリクス**で選択した内容に基づいてホスト名とタグが表示されます。
  3. **アラートオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
  4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
@@ -438,9 +438,9 @@ or service checks. -->
 
 3. {: #check-alerting} **アラートオプション** を選択します。
 
-   各サービスチェックが実行されると、CRITICAL、WARNING、OKの何れかのステータスを送信します。`Trigger the alert after selected consecutive failures:`の項目でステータス変更とアラートを通知をするための連続発生回数を指定します。例えば、カスタムMonitorのチェックが失敗した場合には直ちに知りたいが、OK状態が続くまではリカバー状態にはなってほしくないとします。このようなケースではオプションを、1回のCritical、1回のWarning、4回のOKと設定します。
+   各サービスチェックが実行されると、CRITICAL、WARNING、OKの何れかのステータスを送信します。`Trigger the alert after selected consecutive failures:`の項目でステータス変更とアラートを通知するための連続発生回数を指定します。例えば、カスタムMonitorのチェックが失敗した場合には直ちに知りたいが、OK状態が続くまではリカバー状態にはなってほしくないとします。このようなケースではオプションを、1回のCritical、1回のWarning、4回のOKと設定します。
 
-   必要に応じて、一定時間以上データーが届かない場合のnotify on no data(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。
+   必要に応じて、一定時間以上データが届かない場合のnotify on no data(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。
 
 4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。
 
@@ -478,19 +478,18 @@ right people get notified so the problem can be resolved as soon as possible. --
    anytime the monitor renotifies. The original message will be included as
    well. -->
 
-1. Monitorの通知に**タイトル**を付けましょう。多くの場合、簡潔な説明を使用することは重要です。なぜならばチームメンバーが、何が起こっているかを直ぐに理解することができるからです。
+1. Monitorの通知に**タイトル**を付けましょう。多くの場合、簡潔な説明を使用することが重要です。なぜならばチームメンバーが、何が起こっているかを直ぐに理解することができるからです。
 
-2. Monitorの通知本文を入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)も資料することができます。更に、`@their-email`構文を使うことにより、Datadogに登録していないメンバーにもメールによって通知を送信することができます。
+2. Monitorの通知本文を入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)も資料にすることができます。更に、`@their-email`構文を使うことにより、Datadogに登録していないメンバーにもメールによって通知を送信することができます。
 
-   Monitorの通知本文の一般的なユースケースは、障害を解決するための詳細な手順を記述することです。例えばデータベースを監視している場合には、セカンダリーとしてスタンバイしているノードのフェールオーバーの手順を記しておくと良いでしょう。全てのケースのおいて、メッセージ本文には可能な限り多くの情報を記すように心がけましょう。
+   Monitorの通知本文の一般的なユースケースは、障害を解決するための詳細な手順を記述することです。例えばデータベースを監視している場合には、セカンダリーとしてスタンバイしているノードのフェールオーバーの手順を記しておくと良いでしょう。全てのケースにおいて、メッセージ本文には可能な限り多くの情報を記すように心がけましょう。
 
-3. 必要に応じて**Monitor renotification**を有効にしてください。このオプションは、発報しているMonitorに解決の旨のチェックマークがつけられまで、チームメンバーに注意喚起を促し続けるためには良い手段です。このオプションを有効にすると、Monitorが再通知する際、オリジナルのメッセージに加えて送信するエスカレーション·メッセージを設定することができます。
+3. 必要に応じて**Monitor renotification**を有効にしてください。このオプションは、発報しているMonitorに解決の旨のチェックマークがつけられまで、チームメンバーに注意喚起を促し続けるためには良い手段です。このオプションを有効にすると、Monitorが再通知する際、オリジナルのメッセージに加えて送信するエスカレーションメッセージを設定することができます。
 
 
 <!-- ### Message template variables -->
 
 ### 通知内で使うことのできるテンプレート変数
-(Message template variables)
 
 <!-- Message template variables can be used to customize your monitor notifications.
 This feature is supported in all monitor types. There are two primary use cases
@@ -498,7 +497,7 @@ for template variables: 1) displaying a different message depending on the
 notification type (e.g. triggered, recovered, no data) and 2) incorporating the
 triggering scope into the message of multi alerts. -->
 
-Monitorの通知の内容を状況に応じて書き換えるために変数(template variables)をつかことができます。この機能は、全てのMonitorタイプで使うことができます。
+Monitorの通知の内容を状況に応じて書き換えるために変数(template variables)を使うことができます。この機能は全てのMonitorタイプで使うことができます。
 
 変数(template variables)には、主に2つのユースケースが考えられます。
 
@@ -535,12 +534,12 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
 
-   The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
+   <!-- The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
    These can also be seen in the "Use message template variables" help box in
-   Step 3 of the monitor editor.
+   Step 3 of the monitor editor.-->
 
    使用可能な条件変数は`is_alert`、` is_recovery`、`is_no_data`です。
-   これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることでも見ることができます。
+   これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることで見ることができます。
 
 
    <!-- 2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
@@ -584,7 +583,7 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
 
 - *Monitorは、プログラム的に管理することはできますか？*
 
-  **はい**。各プログラミング言語毎ライブラリやcURLを使ってMonitorをする方法に関しては、[Datadog APIドキュメント](http://docs.datadoghq.com/api/#alerts)を参照してください。
+  **はい**。各プログラミング言語毎ライブラリやURLを使ってMonitorをする方法に関しては、[Datadog APIドキュメント](http://docs.datadoghq.com/api/#alerts)を参照してください。
 
 
 <!-- - *Can you alert on a function?*
@@ -606,4 +605,4 @@ Monitorの通知の内容を状況に応じて書き換えるために変数(tem
 - *イベントを基にアラートを発報することはできますか？*
 
   現状では、**イベントを基にアラートを発報することはできません**。この機能は開発中です。
-  この状況に対応するためのワークアラウンドとして、@-notification構文をイベントの本文に記述しておくことができます。この方法により、イベントが発生した際に、メッセージをemailで送信することがきます。
+  この状況に対応するためのワークアラウンドとして、@-notification構文をイベントの本文に記述しておくことができます。この方法により、イベントが発生した際にメッセージをemailで送信することがきます。
