@@ -22,7 +22,7 @@ when id.match('/examples/') %>
 
   <div class="container">
   <% items_with_tag(tag, @items.select { |i| i[:kind] == "video" }).each do |video| %>
-    <% if video[:language] == nil %>
+    <% if video[:language] == 'en' %>
       <h2><%= link_to video[:title], video %></h2>
       <p><%= video[:summary] %></p>
 
