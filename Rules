@@ -84,7 +84,7 @@ compile '*' do
       layout 'integration_layout'
     when id.match('/examples/') && @item[:kind] == 'example'
       layout 'examplelayout'
-    when id.match('/videos/') && @item[:kind] == 'video'
+    when id.match('/videos/') && @item[:kind] == 'video' && @item[:language] == 'en'
       layout 'videolayout'
     when id.match('/guides/') && @item[:kind] == 'guide'
       layout 'guide_layout'

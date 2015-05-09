@@ -13,8 +13,8 @@ sidebar:
       href: "#events"
     - text: Dashboards
       href: "#dashboards"
-    - text: Alerting
-      href: "#alerting"
+    - text: Monitoring
+      href: "#monitoring"
 ---
 
 So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
@@ -109,12 +109,12 @@ that snapshot returns you to the original dashboard (via the camera in the upper
 without access to your data or any other information (via the cog in the upper right of a graph).
 
 
-## Alerting
-{: alerting}
+## Monitoring
+{: monitoring}
 
 ![](/static/images/alert.png){: tyle="width:100%; border:1px solid #777777"}
 
-[Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific
+[Monitoring](/guides/monitoring/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
 
 * Across your entire infrastructure
