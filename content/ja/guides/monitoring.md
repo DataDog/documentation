@@ -313,7 +313,7 @@ thresholds based on the number of matching processes. -->
 <!-- Read more about configuration on the [Process Check](/integrations/process/)
 page. -->
 
-設定の詳細については、[プロセスのチェック](/integrations/process/)ページをお読みください。
+設定の詳細については、[Process チェック](/ja/integrations/process/)のページをお読みください。
 
 <!-- For each process, a single service check status will be produced. Through this
 creation interface, you can choose which of those checks to monitor and at what
@@ -347,7 +347,7 @@ walkthrough of the common notification options. -->
 the [guide to network checks](/guides/network_checks) for details on Agent
 configuration. -->
 
-ネットワークMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/guides/network_checks) を参照してください。
+ネットワークMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/guides/network_checks) を参照してください。
 
 
 <!-- **Network Status** -->
@@ -401,11 +401,11 @@ out-of-the-box integrations included with the Agent. -->
 
 カスタムMonitorは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスの監視に使用します。
 
-<!-- Refer to the [Guide to Agent Checks](/ja/guides/agent_checks/) for detailed
+<!-- Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks. -->
 
-独自のAgent Checkを使ってメトリクス、イベント、サービスチェックを送信する方法については、[Guide to Agent Checks](/guides/agent_checks/)を参照してください。
+独自のAgent Checkを使ってメトリクス、イベント、サービスチェックを送信する方法については、[「Agent Checkの書き方」](/ja/guides/agent_checks/)を参照してください。
 
 
 <!-- 1. Select your **service check**.
@@ -447,7 +447,7 @@ or service checks. -->
 
 <!-- ## Monitor Notifications {#notification} -->
 
-## 通知について {#notification}
+## 通知について {#notifications}
 
 <!-- Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible. -->
