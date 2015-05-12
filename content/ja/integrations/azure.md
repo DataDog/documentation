@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/05/12
+translation_status: translated
 language: ja
 title: Datadog-Microsoft Azure インテグレーション
 integration_title: Microsoft Azure
