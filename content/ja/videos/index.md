@@ -11,7 +11,7 @@ kind:
 ここで紹介しているビデオ以外で、是非観てみたい内容がある場合は、@support宛てにご要望ください。
 
 <ul>
-<% tag_set(@items.select { |i| i[:kind] == "video" && i[:language] == "ja" }).sort().each do |tag| %>
-  <li><a href="/ja/videos/<%= tag.downcase %>/"><%= tag %></a> - (<%= count_tags()[tag]/2 %>)</li>
+<% tag_set(ja_video_items).sort().each do |tag| %>
+<li><a href="/ja/videos/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags(ja_video_items)[tag] %>)</li>
 <% end %>
 </ul>
