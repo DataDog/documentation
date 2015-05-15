@@ -12,7 +12,7 @@ kind:
 ここに紹介しているサンプルコード以外で、是非掲載してほしい設定項目がある場合は、@support宛てにご要望ください。
 
 <ul>
-<% tag_set(@items.select { |i| i[:kind] == "example" }).sort().each do |tag| %>
-<li><a href="/ja/examples/<%= tag.downcase %>/"><%= tag %></a> - (<%= count_tags()[tag]/2 %>)</li>
+<% tag_set(ja_example_items).sort().each do |tag| %>
+<li><a href="/ja/examples/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags(ja_example_items)[tag] %>)</li>
 <% end %>
 </ul>
