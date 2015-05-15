@@ -3,7 +3,7 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: ホスト名について
-kind: 
+kind: documentation 
 sidebar:
   nav:
     - header: ホスト名のガイド

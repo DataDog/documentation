@@ -3,7 +3,7 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: よくあるご質問(FAQ)
-kind: 
+kind: documentation
 sidebar:
  nav:
   - header: FAQ トピック
