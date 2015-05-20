@@ -2,13 +2,13 @@
 last_modified: 2015/05/20
 translation_status: complete
 language: ja
-title: Agentの基本的な使用方法 (Debian)
+title: Agentの基本的な使用方法 (Fedora)
 kind: documentation
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/
 logdirectory: /var/log/datadog/
-supervisorlog: /var/log/datadog/supervisord.log
+supervisorlog: /var/log/supervisor/datadog-supervisord.log
 ---
 
 <!--
@@ -37,5 +37,6 @@ If you haven't installed the Agent yet, instructions can be found
 You can contact them in one of the following ways: -->
 
 上記の方法を実行しても問題が解決しない場合は、Datadogのサポートチームが問題解決のお手伝いをすことができます。Datadogのサポートチームに連絡を取るには、次のような方法があります。
+
 
 <%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => false %>

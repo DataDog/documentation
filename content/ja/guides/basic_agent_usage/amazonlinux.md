@@ -2,13 +2,13 @@
 last_modified: 2015/05/20
 translation_status: complete
 language: ja
-title: Agentの基本的な使用方法 (Debian)
+title: Agentの基本的な使用方法 (Amazon Linux)
 kind: documentation
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/
 logdirectory: /var/log/datadog/
-supervisorlog: /var/log/datadog/supervisord.log
+supervisorlog: /var/log/supervisor/datadog-supervisord.log
 ---
 
 <!--
