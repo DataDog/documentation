@@ -1,8 +1,0 @@
----
-title: Datadog-Exceptional Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
----

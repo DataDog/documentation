@@ -1,5 +1,9 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: グラフ表示入門
+kind: documentation
 sidebar:
   nav:
     - header: グラフ表示のガイド

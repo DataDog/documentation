@@ -1,10 +1,8 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Datadog-NGINX インテグレーション
-sidebar:
-  nav:
-    - header: インテグレーション
-    - text: インデックスへ戻る
-      href: "/ja/integrations/"
 ---
 <!-- <div id="int-overview">
 <h3>Overview</h3>

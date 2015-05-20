@@ -1,5 +1,10 @@
 ---
+last_modified: 2015/04/02
+translation_status: complete
+language: ja
 title: Deploying the Agent with Chef
+kind: guide
+listorder: 7
 sidebar:
   nav:
     - header: Guide to Chef

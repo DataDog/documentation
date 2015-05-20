@@ -351,9 +351,7 @@ triggering scope into the message of multi alerts.
     trigger, recover, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-        {{#var}} This text will show {{/var}} only if the variable `var` is true.
-        {{^var}} This text will show {{/var}} only if `var` is NOT true.
-
+    ![conditional variables](/static/images/monitor/conditionalvars.png)
 
     Here is an example of how you can set it up in the editor:
 
@@ -416,5 +414,3 @@ triggering scope into the message of multi alerts.
   Not currently, but we're developing this feature. As an
   alternative you can set up an @ notification in the body of the event which
   would deliver the event via email whenever it occurred.
-
-

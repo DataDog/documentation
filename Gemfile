@@ -17,4 +17,5 @@ group :development do
   gem 'rack-contrib'
   gem 'rack-livereload'
   gem 'guard-rake'
+  gem 'digest'
 end

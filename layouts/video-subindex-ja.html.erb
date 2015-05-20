@@ -1,0 +1,17 @@
+<div class="container">
+
+  <% items_with_tag(tag, @items.select { |i| i[:kind] == "video" }).each do |video| %>
+    <% if video[:language] == "ja" %>
+      <h2><%= link_to video[:title], video %></h2>
+      <p><%= video[:ja_summary] %></p>
+
+      <!-- This video can be found in these groups:<br> -->
+      このビデオは、次のグループに属します:<br>
+     <%= tag_links_for(video, [], {:url_format=>"/ja/videos/%%tag%%/"}).join(' | ') %>
+    <% end %>
+  <% end %>
+
+  <p><br>
+  <a href="/ja/videos/">ビデオのグループ一覧に戻る</a>
+  </p>
+</div>

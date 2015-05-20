@@ -1,10 +1,10 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Nagios Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
+integration_title: Nagios
+kind: integration
 ---
 
 <div id="int-overview">

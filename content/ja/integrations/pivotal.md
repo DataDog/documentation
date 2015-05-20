@@ -1,10 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Pivotal Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
+integration_title: Pivotal
+kind: integration
+doclevel: basic
 ---
 
 <div id="int-overview">

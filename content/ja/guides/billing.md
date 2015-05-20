@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/04/16
+translation_status: Translated
+language: ja
 title: 課金に関するFAQ
 sidebar:
   nav:
@@ -46,34 +49,28 @@ sidebar:
       href: "/ja/faq/"
 ---
 
-<!-- <h4>Welcome to Datadog! We occasionally receive questions regarding the specifics
+<!-- #### Welcome to Datadog! We occasionally receive questions regarding the specifics
 of our pricing; the basic plans and the most frequently seen questions can be
-found below.</h4>
+found below.
+
+#### <u>Basic Plan</u>
 
 There are three plans within Datadog:
-<ol>
-<li>
-<strong>Free</strong> is only for 5 hosts or less. Free has a single day of data retention. The
-good news is that switching from the Free plan to Pro will not affect your
-setup, so anything you've begun monitoring would not be affected by that status
-change.
-</li>
-<li>
-<strong>Pro</strong> is for 1-100 hosts and comes with 1 year of data retention.
-Pro includes metric alerts and email support.
-</li>
-<li> <strong>Enterprise</strong> is for
-100+ hosts or any number of hosts but needing custom adjustments to what is
-offered in the Pro plan. Enterprise pricing is based on three factors:
-  <ol>
-   <li> Data retention requirements and number of custom metrics (base plan includes 1 year retention,
-and 100 custom metrics)</li>
-   <li>  Size of your environment in servers</li>
-   <li>  Payment terms (month to month or annual prepaid)</li>
-  </ol>
-  </li>
-</ol> -->
 
+
+1. **Free** is only for 5 hosts or less. Free has a single day of data retention. The
+    good news is that switching from the Free plan to Pro will not affect your
+    setup, so anything you've begun monitoring would not be affected by that status
+    change.
+1. **Pro** is for 6-499 hosts and comes with 1 year of data retention.
+    Pro includes metric alerts and email support.
+1. **Enterprise** is for
+    500+ hosts or any number of hosts but needing custom adjustments to what is
+    offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
+    1. Data retention requirements and number of custom metrics (base plan includes 1 year retention,
+and 100 custom metrics)
+    1. Size of your environment in servers
+    1. Payment terms (month to month or annual prepaid) -->
 
 ### Datadogへようこそ!
 
@@ -81,15 +78,15 @@ and 100 custom metrics)</li>
 
 ---
 
-<h4><u>基本プラン</u></h4>
+#### <u>基本プラン</u>
 
 Datadogのモニタリングサービスには３種類の料金プランがあります:
 
 1. **Free プラン(無償)** は、5台以下のホスト構成のユーザに対し適用します。Freeプランでは、モニタリングデータの保管期間は1日になります。Free プランからPro プランへの変更においては、Free プランで使っていた設定は全て引き継がれます。従って、既にモニタリングしているシステムがあっても、プラン変更によって影響を受けることはありません。
 
-2. **Pro プラン** は、1-100台のホスト構成のユーザに対して適用します。Pro プランでは、モニタリングデータの保管期間は1年になります。 Pro プランには、メトリクスアラートとemailのサポートが含まれてます。
+2. **Pro プラン** は、1-500台のホスト構成のユーザに対して適用します。Pro プランでは、モニタリングデータの保管期間は1年になります。 Pro プランには、メトリクスアラートとemailのサポートが含まれてます。
 
-3. **Enterprise プラン** は、100台以上のホスト構成のユーザ、又は、Pro プランのサービス内容に対して特別な調整が必要なユーザに対して適応します。
+3. **Enterprise プラン** は、500台以上のホスト構成のユーザ、又は、Pro プランのサービス内容に対して特別な調整が必要なユーザに対して適応します。
 
    - Enterprise プランの価格設定の基準は、次の項目になります:
    1. データの保管期間と、カスタムメトリクスの数(基本プランには、保管期間1年と100項目のカスタムメトリクスが含まれます)
@@ -97,14 +94,12 @@ Datadogのモニタリングサービスには３種類の料金プランがあ�
    3. 支払い条件 (月払い、年払い、など)
 
 
-<!-- <p>
-For all plans, custom metrics and events are supported but limited to 100
+<!-- For all plans, custom metrics and events are supported but limited to 100
 metrics per host. Custom metrics refer to any metrics that are not part of our
 regular integration suite, for example using custom checks or API-level metrics
 in your application stack. To clarify, integrations that can potentially emit
 an unlimited number of metrics to us can also count as custom metrics (e.g:
 JMX / WMI / Nagios / Cacti).
-</p>
  -->
 
 カスタムメトリクスとイベントは、全てのプランで使うことができます。
@@ -114,69 +109,67 @@ JMX / WMI / Nagios / Cacti).
 更に明確化が必要なポイントとして、JMX、 WMI、 Nagios、 Cactiなどの無限のメトリクスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタムメトリクスに分類されます。
 
 
-<!-- <p>
-Pro and Enterprise data retention is for one year at full resolution (maximum
+<!-- Pro and Enterprise data retention is for one year at full resolution (maximum
 is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
-sales@datadoghq.com</a>.
-</p> -->
+sales@datadoghq.com</a>. -->
 
 Pro プランとEnterprise プランのデータ保管期間はフル解像度(1ポイント/秒）で、1年です。一般的なプランとして提供しているデータ保管期間の仕様より大きなデータの保管をご希望の場合は、サポートチームまでご連絡ください。[sales@datadoghq.com](mailto:sales@datadoghq.com)
 
 
-<!-- <p>
-<h5>Each invoice is determined by the high watermark of concurrently running hosts
-for that month.</h5> This is per active host in Datadog, whether or not it's running
-the agent.
-</p> -->
+<!-- ##### Each invoice is determined by the high watermark of concurrently running hosts for that month.
 
-**請求金額の基本となるインスタンス数は、当該月に同時に起動していたインスタンス数の最高値にを基準としております。**
+This is per active host in Datadog, whether or not it's running the agent. -->
 
-AWSなどの場合など、Datadog Agentが起動していなくても、ダッシュボードでIngterationを設定することにより監視下に入ったインスタンスは、課金の対象になります。
+##### * 請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。
 
+ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されている台数となります。
+
+
+<!-- ####<u>Frequently Asked Questions</u> -->
 ---
 
-<h4><u>FAQ　(よくあるお問い合わせ)</u></h4>
+#### <u>FAQ　(よくあるお問い合わせ)</u>
 
-#### 請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。
+<!--
+#####Do you support hourly pricing?
 
-ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されているかどうかで判定します。
-
-
-<!-- <h5>Do you support hourly pricing?</h5>
-<p>
 We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
-</p>
-<blockquote><p>
-You tell us how many hosts you will run each month and we will bill you for that baseline number of
-hosts at $15 per host (you can change this number at the beginning of each
-month if you like). Then for any hosts beyond the committed number previously
-determined, our billing system will charge you $0.03 per host per hour. This
-works out to be much less expensive for extra hosts that may come up for a
-short period, but a little bit more than monthly rates if you ran on an hourly
-rate all the time (~$23/host/month).  The metering samples how many hosts are
-reporting data once every hour, thus the minimum increment for an hourly server
-is one hour. If that number exceeds your monthly commit, we just charge overage
-for the excess hosts.
-</p></blockquote>
+
+> You tell us how many hosts you will run each month and we will bill you for that baseline number of
+> hosts at $15 per host (you can change this number at the beginning of each
+> month if you like). Then for any hosts beyond the committed number previously
+> determined, our billing system will charge you $0.03 per host per hour. This
+> works out to be much less expensive for extra hosts that may come up for a
+> short period, but a little bit more than monthly rates if you ran on an hourly
+> rate all the time (~$23/host/month).  The metering samples how many hosts are
+> reporting data once every hour, thus the minimum increment for an hourly server
+> is one hour. If that number exceeds your monthly commit, we just charge overage
+> for the excess hosts.
  -->
 
 #### 時間課金で請求を発行することは、できますか？
 
 $0.03/ホストの使用料を基に、時間課金で請求書を発行することができます。又、月極の課金形態と時間課金形態の併用も可能です。併用での支払いがどのように機能するかは、次を参照してください:
 
-> まず、月々に請求の基本となる成約ホスト数を申請していただきます。ここで申請されたホスト数に対しては、1台あたり$15/月で請求します。尚、この基本となる台数は、月初に変更することができます。この成約台数を超えた場合につき1台あたり$0.03/hrを請求します。短期間しか使用しないホストが並列で起動するようなケースでは、この併用払いの方法を採用することで使用料を押さえることができます。しかしながら、$0.03を1ヵ月の使用料に置き換えると$23/台と、通常の1台分より割高になります。
-> 課金の方法は、当該時間帯に何台のホストがデータを転送してきているかを集計します。従って、１台のホストの課金の最低単位は1時間になります。
-> If that number exceeds your monthly commit, we just charge overage
-for the excess hosts.
+> まず、月々に請求の基本となる成約ホスト数を申請していただきます。
+> ここで申請されたホスト数に対しては、1台あたり$15/月で請求します。
+> 尚、この基本となる台数は、月初に変更することができます。
+> この成約台数を超えた場合につき1台あたり$0.03/hrを請求します。
+> 短期間しか使用しないホストが並列で起動するようなケースでは、この併用払いの方法を採用することで使用料を押さえることができます。
+> しかしながら、$0.03を1ヵ月の使用料に置き換えると$23/台と、通常の1台分より割高になります。
+> 課金の方法は、当該時間帯に何台のホストがデータを転送してきているかを集計します。
+> 従って、１台のホストの課金の最低単位は1時間になります。
+<!-- > If that number exceeds your monthly commit, we just charge overage
+for the excess hosts. -->
 
 
-<!-- <h5>Do non-reporting or inactive hosts count?</h5>
-<p>
+<!-- ##### Do non-reporting or inactive hosts count?
+
 Non-reporting hosts (status '???') do not count towards billing. It might take
 some time (up to 24 hours) for the hosts with the inactive status '???' to drop
 out of the infrastructure view.
-</p> -->
+ -->
 
 #### データを受信できないホストとか、非Activeなホストは、請求基準の総数に入りますか?
 
@@ -190,53 +183,70 @@ and you can graph it on a dashboard if you know the specific host by name (or
 by its tags).
 </p> -->
 
-仮サーバ等、一時的なホストの監視にDatadogを使った場合、そのホストからデータを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランに関しては、ダッシュボードにホスト名が表示されなくなった後も、Datadogに転送されてきたデータは保管されています。対象のホスト名やタグが分かれば、転送済みデータを基にダッシュボード上にグラフを表示することができます。
+仮サーバ等、一時的なホストの監視にDatadogを使った場合、そのホストからデータを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランでは、ダッシュボードにホスト名が表示されなくなった後も、Datadogに転送されてきたデータは保管されています。対象のホスト名やタグが分かれば、転送済みデータを基にダッシュボード上にグラフを表示することができます。
 
 
-<!-- <h5>How will an AWS integration impact my monthly billing?</h5>
-<p>
-We bill for all hosts running the agent as well as any hosts picked up via the
-AWS integration (not ELBs or other namespaces). You will not get double-charged
-if you are running the agent on a host <b>AND</b> picking it up via AWS integration.
-</p>
+<!-- ##### How will an AWS integration impact my monthly billing?
 
-<p>
-If you would like to control what metrics you are aggregating via AWS integration,
-select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a>
-and customize accordingly.
-</p> -->
+We bill for all hosts running the **Agent** as well as for all **EC2 instances**
+picked up by the AWS integration. You will not get billed twice if
+you are running the Agent on an EC2 instance picked up by the AWS
+integration.
 
-#### AWS Ingegrationの利用は、毎月の請求額はどのように変化しますか?
+Other AWS resources (e.g. ELB, EBS, RDS, Dynamo) are not currently
+part of monthly billing. Note that this may change in the future.
 
-Datadogからの請求は、Datadog Agentを実行しているホストとAWS Integrationでピックアップされた全てのホストが対象になります。(但し、ELBや他のnamespaceのものは除きます。)
-AWS IntegrationでピックアップされたホストでDatadog Agentが稼働している場合でも、二重で課金されることは有りません。
+If you would like to control which AWS metrics you are collecting,
+select 'limit metric collection for all accounts' in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services"> AWS Integration tile</a> and customize accordingly.
+ -->
 
-もしも、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
+#### AWS Ingegrationを利用する場合、毎月の請求額はどのように変化しますか?
+
+Datadogからの請求は、**Datadog Agent** を実行しているホストとAWS Integrationでピックアップされた全て **EC2インスタンス** が対象になります。
+AWS IntegrationによってピックアップされたEC2インスタンスでDatadog Agentが稼働しているものは、二重で課金されることは有りません。
+
+その他のAWSリソース (例: ELB, EBS, RDS, Dynamo) は、現時点では請求の対象外です。
+無償での提供は、将来変更される可能性があります。
+
+もし、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
 
 
-#### VMware Ingegrationの利用は、毎月の請求額はどのように変化しますか?
+<!-- ##### How will a VMware integration impact my monthly billing?
+
+The base pricing is $15 per virtual machine per month. See above for more general information. -->
+
+#### VMware Ingegrationを利用する場合、毎月の請求額はどのように変化しますか?
 
 VMwareの仮想マシンごとに月額$15で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
 
 
-<!-- <h5>How do I see what I'll get charged for this current month?</h5>
-<p>
+<!-- ##### How will Docker and other container integrations impact my monthly billing?
+
+The base pricing of $15 per host includes 10 containers. Additional containers cost $1 per container. -->
+
+#### Dockerや他のコンテナ技術を使った場合の請求書への影響は?
+
+基本価格の$15には、10コンテナまでの監視が含まれています。同一ホスト上の11台目以降のコンテナに関しては、$1/container/monthの費用が発生します。
+
+
+<!-- ##### How do I see what I'll get charged for this current month?
+
 There is not currently a way to see what the upcoming bill looks like; as an
 admin you can check out past invoices
 <a href="https://app.datadoghq.com/account/billing_history">here</a>.
-</p> -->
+ -->
 
 #### 今月の請求額を知る方法はありますか?
 
-ユーザの皆様が、今月末の請求書の金額を知る方法を準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
+ユーザの皆様が、今月末の請求書の金額を知る方法は準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
 
 
-<!-- <h5>Can I set a specific email address to receive invoices at?</h5>
-<p>
+<!-- ##### Can I set a specific email address to receive invoices at?
+
 You can set a specific email address to receive invoices, even if that address
 is not a team member within Datadog (invoices@yourcompany.com)
 <a href="https://app.datadoghq.com/account/billing">here</a>.
-</p> -->
+ -->
 
 #### 請求書を受信するために、アカウント登録とは別のメールアドレスを設定することはできますか？
 

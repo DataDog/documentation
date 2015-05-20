@@ -1,10 +1,11 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: Datadog-Cassandra Integration
-sidebar:
-  nav:
-    - header: Integrations
-    - text: Back to Overview
-      href: "/ja/integrations/"
+integration_title: Cassandras
+kind: integration
+doclevel: complete
 ---
 
 For information on Cassandra, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.

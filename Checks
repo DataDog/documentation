@@ -1,0 +1,8 @@
+
+check :no_api_keys do
+  self.output_filenames.each do |fn|
+    if match=File.read(fn).force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/\b([0-9a-f]){32}(?<!9775a026f1ca7d1c6c5af9d94d9595a4)(?![0-9a-f])/)
+      self.add_issue("API Key in here!! - #{match}\nPlease use 9775a026f1ca7d1c6c5af9d94d9595a4 as the API Key", :subject => fn)
+    end
+  end
+end

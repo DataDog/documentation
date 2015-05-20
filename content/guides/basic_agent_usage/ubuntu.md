@@ -27,5 +27,5 @@ If you haven't installed the Agent yet, instructions can be found [here](https:/
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>
+<%= render '_contact_info', :heading_size => 5, :hide_datadog => false %>
 

@@ -10,4 +10,5 @@
   "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
   "message"=>"We may need to add web hosts if this is consistently high.",
   "type"=>"metric alert",
-  "id"=>92089}]
+  "id"=>92089,
+  "multi"=>false}]

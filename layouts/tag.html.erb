@@ -1,17 +1,17 @@
-
 <% id=@item.identifier
 case
 when id.match('/examples/') %>
 
   <div class="container">
   <% items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
-    <h2><%= link_to example[:title], example %></h2>
-    <p><%= example[:summary] %></p>
+    <% if example[:language] == nil %>
+      <h2><%= link_to example[:title], example %></h2>
+      <p><%= example[:summary] %></p>
 
-    This example can be found in these groups:<br>
-   <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
+      This example can be found in these groups:<br>
+     <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
 
-
+    <% end %>
   <% end %>
   <p><br>
   <a href="/examples/">Return to All Example Groups.</a>
@@ -21,14 +21,14 @@ when id.match('/examples/') %>
 <% when id.match('/videos/') %>
 
   <div class="container">
-  <% items_with_tag(tag, @items.select { |i| i[:kind] == "video" }).each do |video| %>
-    <h2><%= link_to video[:title], video %></h2>
-    <p><%= video[:summary] %></p>
-
-    This video can be found in these groups:<br>
-   <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
-
-
+  <% items_with_tag(tag, video_items).each do |video| %>
+      <h2><%= link_to video[:title], video %></h2>
+      <p><%= video[:summary] %></p>
+      <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + video[:wistiaid]) %>
+      <%= link_to "<img src='" + wistiavideo.thumbnail_medium + "?image_play_button=true&image_play_button_color=7b796ae0&image_crop_resized=552x311'/>", video %>
+      <br>
+      This video can be found in these groups:<br>
+     <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
   <% end %>
   <p><br>
   <a href="/videos/">Return to All Video Groups.</a>

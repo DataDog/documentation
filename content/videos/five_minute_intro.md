@@ -1,6 +1,7 @@
 ---
 title: Introduction to Datadog in 5 Minutes
 kind: video
+language: en
 wistiaid: nrw4x798k3
 tags:
     - Introduction

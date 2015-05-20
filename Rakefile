@@ -1,12 +1,14 @@
 require 'rake/clean'
 
-CLEAN.include(%w(output tmp))
+
+CLEAN.include(%w(output tmp code_test tested.code))
 
 CODE_SNIPPETS = 'code_snippets'
+CODE_TEST = 'code_test'
 
 desc 'Check site links'
 task :checks do
-  sh 'bundle exec nanoc check ilinks stale'
+  sh 'bundle exec nanoc check ilinks stale no_api_keys'
 end
 
 desc 'Build documentation site'
@@ -43,19 +45,56 @@ end
 
 desc 'test the code snippets'
 task :test do
+  require 'digest/md5'
+  sh("rm -rf #{CODE_TEST}")
+  sh("mkdir #{CODE_TEST}")
   filetype_to_command = {
-    'py' => 'python',
     'sh' => 'sh',
+    'py' => 'python',
     'rb' => 'ruby'
   }
-  filetype_to_command.each do |t, cmd|
-    puts '=' * 10
-    puts "Testing #{t} code snippets"
-    files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
-    files.each do |f|
-      sh("#{cmd} #{f}")
+  begin
+    unless File.exist?('tested.code')
+      File.open("tested.code", "w") {}
     end
+    filetype_to_command.each do |t, cmd|
+      puts '=' * 10
+      puts "Testing #{t} code snippets"
+      files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
+      files.each do |f|
+        # sh("cp #{f} #{CODE_TEST}/")
+        text = File.read(f)
+        new_contents = text.gsub(/9775a026f1ca7d1c6c5af9d94d9595a4/, ENV['DD_API_KEY'])
+        new_contents = new_contents.gsub(/87ce4a24b5553d2e482ea8a8500e71b8ad4554ff/, ENV['DD_APP_KEY'])
+        if cmd == 'sh'
+          new_contents << 'echo $?'
+        end
+        File.open("#{CODE_TEST}/#{File.basename(f)}", "w") {|file| file.puts new_contents}
+      end
+      testfiles = Dir.glob("#{CODE_TEST}/*.#{t}")
+      testfiles.each do |f|
+        unless f.include?('guides-')
+          md5 = Digest::MD5.file(f).hexdigest
+          if File.read('tested.code').include?("#{f} #{md5}\n")
+            print "Already tested #{f}"
+          else
+            starttime = Time.now()
+            sh("#{cmd} #{f}")
+            totaltime = Time.now() - starttime
+            print "\nExecution Time: #{totaltime}s\n"
+            open('tested.code', 'a') do |file|
+              file << "#{f} #{md5}\n"
+            end
+          end
+          sh("rm #{f}")
+        end
+      end
+    end
+  rescue Exception => e
+    sh("rm -rf #{CODE_TEST}")
+    raise e
   end
+  sh("rm -rf #{CODE_TEST}")
 end
 
 desc 'Run Guard, autobuilds/reloads site'

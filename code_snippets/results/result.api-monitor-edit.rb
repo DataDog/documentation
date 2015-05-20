@@ -6,4 +6,5 @@
   "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
   "message"=>"Bytes received on host0",
   "type"=>"metric alert",
-  "id"=>91879}]
+  "id"=>91879,
+  "multi"=>false}]

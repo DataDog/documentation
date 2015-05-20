@@ -1,5 +1,9 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: お問い合わせ
+kind: documentation
 sidebar:
   nav:
     - header: お問い合わせ

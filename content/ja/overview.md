@@ -1,5 +1,9 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Datadogが提供するサービスの概要
+kind: documentation
 sidebar:
   nav:
     - header: Datadogのサービスについて

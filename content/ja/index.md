@@ -1,33 +1,36 @@
 ---
+last_modified: 2015/03/31
+translation_status: complete
+language: ja
 title: Datadogでメトリクスの監視を始めよう！
+kind: documentation
 sidebar:
   nav:
-    - header: ガイド
-    - text: Datadog Agent 入門
-      href: "/ja/guides/basic_agent_usage/"
-    - text: Datadog が提供するサービスの概要
-      href: "/ja/overview/"
-    - text: Datadog へのメトリクスの送信
-      href: "/ja/guides/metrics/"
-    - text: Datadog Agent によるログの解析方法
-      href: "/ja/guides/logs/"
-    - text: Agent Checkの書き方
-      href: "/ja/guides/agent_checks/"
-    - text: サービスチェックの設定方法
-      href: "/ja/guides/services_checks/"
-    - text: Chef を使ったDatadog Agent のインストール
-      href: "/ja/guides/chef/"
-    - text: Azure WindowsへDatadog Agentのインストール
-      href: "/ja/guides/azure/"
-    - text: アラートの設定方法
-      href: "/ja/guides/alerting/"
-    - text: ダッシュボードテンプレートの作成
-      href: "/ja/guides/templating/"
-    - text: SAML によるシングルサインオン　
-      href: "/ja/guides/saml/"
-    - text: メールによるイベント情報の送信　
-      href: "/ja/guides/eventsemail"
-
+#    - header: ガイド
+#    - text: Datadog Agent 入門
+#      href: "/ja/guides/basic_agent_usage/"
+#    - text: Datadog が提供するサービスの概要
+#      href: "/ja/overview/"
+#    - text: Datadog へのメトリクスの送信
+#      href: "/ja/guides/metrics/"
+#    - text: Datadog Agent によるログの解析方法
+#       href: "/ja/guides/logs/"
+#    - text: Agent Checkの書き方
+#      href: "/ja/guides/agent_checks/"
+#    - text: サービスチェックの設定方法
+#      href: "/ja/guides/services_checks/"
+#    - text: Chef を使ったDatadog Agent のインストール
+#      href: "/ja/guides/chef/"
+#    - text: Azure WindowsへDatadog Agentのインストール
+#      href: "/ja/guides/azure/"
+#    - text: アラートの設定方法
+#      href: "/ja/guides/alerting/"
+#    - text: ダッシュボードテンプレートの作成
+#      href: "/ja/guides/templating/"
+#    - text: SAML によるシングルサインオン　
+#      href: "/ja/guides/saml/"
+#    - text: メールによるイベント情報の送信　
+#      href: "/ja/guides/eventsemail"
     - header: レファレンス
     - text: APIレファレンス
       href: "/ja/api/"
@@ -74,6 +77,3 @@ and we'll take care of it. -->
 **・ドキュメントに不具合があった場合?**
 
 GitHubの[issues](https://github.com/DataDog/documentation/issues)でお知らせください。ご連絡をいただいた情報を基にドキュメントの修正と更なる改善に努めます。
-
-
-

@@ -1,32 +1,35 @@
 ---
+last_modified: 2015/03/31
+translation_status: original
+language: ja
 title: インテグレーション(Integration)
 sidebar:
   nav:
-    - header: ガイド
-    - text: Datadog Agent 入門
-      href: "/ja/guides/basic_agent_usage/"
-    - text: Datadog が提供するサービスの概要
-      href: "/ja/overview/"
-    - text: Datadog へのメトリクスの送信
-      href: "/ja/guides/metrics/"
-    - text: Datadog Agent によるログの解析方法
-      href: "/ja/guides/logs/"
-    - text: Agent Checkの書き方
-      href: "/ja/guides/agent_checks/"
-    - text: サービスチェックの設定方法
-      href: "/ja/guides/services_checks/"
-    - text: Chef を使ったDatadog Agent のインストール
-      href: "/ja/guides/chef/"
-    - text: Azure WindowsへDatadog Agentのインストール
-      href: "/ja/guides/azure/"
-    - text: アラートの設定方法
-      href: "/ja/guides/alerting/"
-    - text: ダッシュボードテンプレートの作成
-      href: "/ja/guides/templating/"
-    - text: SAML によるシングルサインオン
-      href: "/ja/guides/saml/"
-    - text: メールによるイベント情報の送信
-      href: "/ja/guides/eventsemail"
+#    - header: ガイド
+#    - text: Datadog Agent 入門
+#      href: "/ja/guides/basic_agent_usage/"
+#    - text: Datadog が提供するサービスの概要
+#      href: "/ja/overview/"
+#    - text: Datadog へのメトリクスの送信
+#      href: "/ja/guides/metrics/"
+#    - text: Datadog Agent によるログの解析方法
+#      href: "/ja/guides/logs/"
+#    - text: Agent Checkの書き方
+#      href: "/ja/guides/agent_checks/"
+#    - text: サービスチェックの設定方法
+#      href: "/ja/guides/services_checks/"
+#    - text: Chef を使ったDatadog Agent のインストール
+#      href: "/ja/guides/chef/"
+#    - text: Azure WindowsへDatadog Agentのインストール
+#      href: "/ja/guides/azure/"
+#    - text: アラートの設定方法
+#      href: "/ja/guides/alerting/"
+#    - text: ダッシュボードテンプレートの作成
+#      href: "/ja/guides/templating/"
+#    - text: SAML によるシングルサインオン
+#      href: "/ja/guides/saml/"
+#    - text: メールによるイベント情報の送信
+#      href: "/ja/guides/eventsemail"
 
     - header: レファレンス
     - text: APIレファレンス
@@ -55,7 +58,13 @@ Integrationをインストール/設定するための細かい手順につい�
 
 **(注:随時、追加/更新中)**
 
-* <a href="/ja/integrations/activemq/">ActiveMQ</a>
+<ul>
+  <% ja_integration_items.each do |i| %>
+    <li><%= link_to i[:integration_title], i.path %></li>
+<% end %>
+</ul>
+
+<!-- * <a href="/ja/integrations/activemq/">ActiveMQ</a>
 * <a href="/ja/integrations/airbrake/">Airbrake</a>
 * <a href="/ja/integrations/apache/">Apache</a>
 * <a href="/ja/integrations/aws/">Amazon Web Services</a>
@@ -104,4 +113,4 @@ Integrationをインストール/設定するための細かい手順につい�
 * <a href="/ja/integrations/varnish/">Varnish</a>
 * <a href="/ja/integrations/vmware/">VMWare</a>
 * <a href="/ja/integrations/webhooks/">Webhooks</a>
-* <a href="/ja/integrations/zookeeper/">ZooKeeper</a>
+* <a href="/ja/integrations/zookeeper/">ZooKeeper</a> -->
