@@ -31,7 +31,6 @@ kind: documentation
         <a class="btn" href="#hosts">Hosts</a>
         <a class="btn" href="#tags">Tags</a>
         <a class="btn" href="#search">Search</a>
-        <a class="btn" href="#query">Query</a>
         <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#users">Users</a>
         <a class="btn" href="#graphs">Graphs</a>
@@ -147,8 +146,17 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          The metrics end-point allows you to post metrics data so it can
-          be graphed on Datadog's dashboards.
+          The metrics end-point allows you to:
+        </p>
+        <ul>
+          <li>Post metrics data so it can be graphed on Datadog's dashboards</li>
+          <li>Query metrics from any time period</li>
+        </ul>
+        <p>
+          As occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
+        </p>
+        <p>
+          Thus, if you are querying for larger timeframes of data, the points returned will be more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, our algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. We do this time aggregation via averages.
         </p>
       </div>
     </div>
@@ -171,7 +179,7 @@ kind: documentation
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
                   Note that the timestamp must be current.
-              </div>
+              </div>but fin
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
@@ -188,6 +196,38 @@ kind: documentation
         <% %w{py sh rb}.each do |f| %>
           <%= snippet_code_block "api-metrics-post.#{f}" %>
         <% end %>
+      </div>
+    </div>
+    <h4 id="metrics-query">Query time series points</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to query for metrics from any time period.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
+          <%= argument("to", "seconds since the unix epoch", :lang => 'console') %>
+          <%= argument("start", "seconds since the unix epoch", :lang => 'python') %>
+          <%= argument("end", "seconds since the unix epoch", :lang => 'python') %>
+          <%= argument("query", "The query string") %>
+        </ul>
+        <h5>Query Language</h5>
+        <p>
+          Any query used for a graph can be used here. See <a href="/graphing/">here</a> for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity.
+        </p>
+
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET https://app.datadoghq.com/api/v1/query</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-query.py" %>
+        <%= snippet_code_block "api-query.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-query.py" %>
+        <%= snippet_result_code_block "api-query.sh" %>
       </div>
     </div>
 
@@ -1449,48 +1489,6 @@ kind: documentation
       </div>
     </div>
 
-
-    <!--
-   =====================================================================
-    Query
-    ====================================================================
-    -->
-
-    <h3 id="query">Query</h3>
-    <div class="row-fluid">
-      <%= left_side_div %>
-        <p>
-          This end point allows you to query for metrics from any time period.
-        </p>
-        <p>
-          As occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
-        </p>
-        <p>
-          Thus, if you are querying for larger timeframes of data, the points returned will be more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, our algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. We do this time aggregation via averages.
-        </p>
-        <h5>Arguments</h5>
-        <ul class="arguments">
-          <%= argument("from", "seconds since the unix epoch") %>
-          <%= argument("to", "seconds since the unix epoch") %>
-          <%= argument("query", "The query string") %>
-        </ul>
-        <h5>Query Language</h5>
-        <p>
-          Any query used for a graph can be used here. See <a href="/graphing/">here</a> for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity.
-        </p>
-
-      </div>
-      <%= right_side_div %>
-        <h5>Signature</h5>
-        <code>GET https://app.datadoghq.com/api/v1/query</code>
-        <h5>Example Request</h5>
-        <%= snippet_code_block "api-query.py" %>
-        <%= snippet_code_block "api-query.sh" %>
-        <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-query.py" %>
-        <%= snippet_result_code_block "api-query.sh" %>
-      </div>
-    </div>
     <!--
    =====================================================================
     Comments

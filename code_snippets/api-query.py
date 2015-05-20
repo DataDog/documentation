@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from datadog import initialize, api
-from datadog.api.base import HTTPClient
 import time
 
 options = {
@@ -15,5 +14,5 @@ end = start + 3600
 # query for idle CPU for all machines tagged with speed:4000
 query = 'system.cpu.idle{*}by{host}'
 
-results = HTTPClient.request('GET', '/query', **{'from': start, 'to': end, 'query': query})
+results = api.Metric.query(start=start - 3600, end=end, query=query)
 print results
