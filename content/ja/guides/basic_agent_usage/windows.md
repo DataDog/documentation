@@ -15,7 +15,7 @@ Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>.<br/> -->
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>. -->
 
 ### 概要
 
@@ -114,25 +114,25 @@ The configuration file location depends on the version of Windows on which the A
 
 For Windows Server 2003, XP or older:
 <ul>
-    <li>Agent configuration: <br>
+    <li>Agent configuration:
         <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
-    <li>Integration configuration: <br>
+    <li>Integration configuration:
         <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
 </ul>
 
 
 For Windows Server 2008, Vista and newer:
 <ul>
-    <li>Agent configuration: <br>
+    <li>Agent configuration:
         <code>C:\ProgramData\Datadog\datadog.conf</code></li>
-    <li>Integration configuration: <br>
+    <li>Integration configuration:
         <code>C:\ProgramData\Datadog\conf.d\</code></li>
 </ul> -->
 
-<h3 id="configuration">設定ファイルの保存されているディレクトリ</h3>
+### 設定ファイルの保存されているディレクトリ
+{: #configuration}
 
 #### Datadog Agent バージョン >= 3.9.1:
-{: #configuration}
 
 スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック, 有効, 無効ができます。
 設定ファイルの変更を適応するには、Datadog Agent の再起動が必要です。
@@ -142,20 +142,19 @@ For Windows Server 2008, Vista and newer:
 設定ファイルの保存場所は、Windowsのバージョンによって異なります。
 
 Windows Server 2003, XP 又は、それ以前のバージョン:
-<ul>
-    <li>Datadog Agent の設定ファイルの保存先:<br>
-        <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
-    <li>Integrations の設定ファイルの保存先:<br>
-        <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
-</ul>
+
+- Datadog Agent の設定ファイルの保存先:  
+        `C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`
+- Integrations の設定ファイルの保存先:  
+        `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 Windows Server 2008, Vista と、それ以降のバージョン:
-<ul>
-    <li>Datadog Agent の設定ファイルの保存先:<br>
-        <code>C:\ProgramData\Datadog\datadog.conf</code></li>
-    <li>Integrations の設定ファイルの保存先:<br>
-        <code>C:\ProgramData\Datadog\conf.d\</code></li>
-</ul>
+
+- Datadog Agent の設定ファイルの保存先:  
+        `C:\ProgramData\Datadog\datadog.conf`
+- Integrations の設定ファイルの保存先:  
+        `C:\ProgramData\Datadog\conf.d\`
+
 
 
 <!--
@@ -173,15 +172,15 @@ Next, try opening the <a href='#status_and_information'>status page</a> to see t
 <h4>For version >= 3.9.1</h4>
 Log is available at:
 <ul>
-    <li>For Windows Server 2003, XP or older: <br>
+    <li>For Windows Server 2003, XP or older:
        <code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
-    <li>For Windows Server 2008, Vista and newer: <br>
+    <li>For Windows Server 2008, Vista and newer:
         <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
 </ul>
 
 <h4>For version < 3.9.1</h4>
 Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr; Application.
-<br/>
+
 
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
@@ -196,16 +195,16 @@ You can contact them in one of the following ways:
 
 #### Datadog Agent バージョン >= 3.9.1:
 ログの保存場所:
-<ul>
-    <li>Windows Server 2003, XP 又は、それ以前のバージョン:<br>
-       <code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
-    <li>Windows Server 2008, Vista と、それ以降のバージョン:<br>
-        <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
-</ul>
+
+- Windows Server 2003, XP 又は、それ以前のバージョン:  
+      `C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
+- Windows Server 2008, Vista と、それ以降のバージョン:  
+      `C:\ProgramData\datadog\logs\ddagent.log`
 
 #### Datadog Agent バージョン < 3.9.1:
 Datadog Agent の各要素のログは、”Event Viewer”で確認できます。Windows Logs &rarr; Application へとメニューを選択してください。
-<br/>
+
+
 
 上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 

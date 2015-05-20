@@ -34,7 +34,6 @@ If you haven't installed the Agent yet, instructions can be found
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
 
 
-
 <!-- If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways: -->
 
