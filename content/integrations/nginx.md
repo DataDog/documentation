@@ -45,4 +45,4 @@ The following metrics are collected by default via the stub status module:
 
 #### NGINX Plus
 
-If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python) when the instance target is an http status module URL.
+If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/dd-agent/blob/master/tests/checks/fixtures/nginx/nginx_plus_out.python) when the instance target is an http status module URL.
