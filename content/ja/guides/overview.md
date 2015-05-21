@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2015/05/20
 translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
@@ -8,15 +8,17 @@ listorder: 2
 sidebar:
   nav:
     - header: Datadogのサービスについて
-    - text: Integrations 機能
+    - text: 便利なIntegrations
       href: "#integrations"
-    - text: Infrastructure 機能
+    - text: インフラリストの表示
       href: "#infrastructure"
-    - text: Events 機能
+    - text: Host Mapの表示
+      href: "#hostmap"
+    - text: イベントの時系列表示
       href: "#events"
-    - text: dashboards 機能
+    - text: 原因追跡用ダッシュボード
       href: "#dashboards"
-    - text: アラート機能
+    - text: 高度なアラート設定
       href: "#alerting"
 ---
 
@@ -36,7 +38,7 @@ Datadog Agentの[インストール](/ja/guides/basic_agent_usage/)は、無事�
 <img src="/static/images/integrations.png" style="width:100%; border:1px solid #777777"/>
 
 <ul>
-<li>60+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
+<li>100+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
 always adding more.</li>
 <li>Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>,
 many documented by our active user community.</li>
@@ -46,12 +48,12 @@ can instrument your own if you'd like.</li>
 in an online service is treated the same throughout Datadog.</li>
 </ul> -->
 
-<h2 id="integrations">Integrations 機能</h2>
+<h2 id="integrations">簡単で便利なIntegrations</h2>
 
 <img src="/static/images/integrations.png" style="width:100%; border:1px solid #777777"/>
 
 <ul>
-<li>60以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
+<li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
 <li>カスタム Integrationsは、<a target="_blank" href="/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
 <li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。</li>
@@ -78,7 +80,7 @@ for that machine based on what was previously set up for that tag.</li>
 
 </ul> -->
 
-<h2 id="infrastructure">Infrastructure 機能</h2>
+<h2 id="infrastructure">インフラリストの表示</h2>
 
 <img src="/static/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
 
@@ -89,6 +91,35 @@ for that machine based on what was previously set up for that tag.</li>
 <li>タグ設定の詳細は、<a target="_blank" href="/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。</li>
 
 </ul>
+
+
+<!-- ## Host Map
+{: #hostmap}
+
+![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+
+The Host Map can be found under the Infrastructure menu and offers the ability to:
+
+* Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
+* Identify outliers
+* Detect usage patterns
+* Optimize resources
+
+To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -->
+
+## Host Mapの表示
+{: #hostmap}
+
+![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+
+The Host Map can be found under the Infrastructure menu and offers the ability to:
+
+* Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
+* Identify outliers
+* Detect usage patterns
+* Optimize resources
+
+To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 
 
 <!-- <h2 id="events">Events</h2>
@@ -118,7 +149,7 @@ For each incident users can:
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
  -->
 
-<h2 id="events">Events 機能</h2>
+<h2 id="events">イベントの時系列表示</h2>
 
 <img src="/static/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
 
@@ -164,7 +195,7 @@ that snapshot returns you to the original dashboard (via the camera in the upper
 without access to your data or any other information (via the cog in the upper right of a graph).</li>
 </ul> -->
 
-<h2 id="dashboards">ダッシュボード機能</h2>
+<h2 id="dashboards">原因追跡用ダッシュボード</h2>
 
 <img src="/static/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
 
@@ -205,7 +236,7 @@ launching the Agent (intial reporting may take a few minutes, but not longer tha
 to pull the data from.</li>
 </ol> -->
 
-<h2 id="alerting">アラート機能</h2>
+<h2 id="alerting">高度なアラート設定</h2>
 <img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
 
 [アラート機能](/ja/guides/alerting/)によって、特定のメトリクスの集計がしきい値を超えた場合に通知する機能を実現することができます:
