@@ -1,8 +1,8 @@
 ---
-last_modified: 2015/04/02
-translation_status: original
+last_modified: 2015/05/22
+translation_status: complete
 language: ja
-title: Host Map Overview
+title: Host Map の概要
 kind: guide
 listorder: 3
 ---
