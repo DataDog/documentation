@@ -112,14 +112,14 @@ To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -
 
 ![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
 
-The Host Map can be found under the Infrastructure menu and offers the ability to:
+Host Mapは、`Infrastructure`メニューのドロップダウンメニュー内にあります。この表示を使うことにより、次のようなことが可能になります:
 
-* Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
-* Identify outliers
-* Detect usage patterns
-* Optimize resources
+* 運用中のインフラの規模に関わらず、全体像を素早く可視化
+* 外れ値の検出
+* 利用パターンの検出
+* リソース利用の最適化
 
-To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
+Host Map表示について詳しく知り対場合は、[Host Map ガイド](/ja/guides/hostmap)ページを参照してください。
 
 
 <!-- <h2 id="events">Events</h2>
