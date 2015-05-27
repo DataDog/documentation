@@ -1,22 +1,34 @@
 ---
-last_modified: 2015/04/02
-translation_status: original
+last_modified: 2015/05/27
+translation_status: complete
 language: ja
-title: Host Map Overview
+title: Host Map表示の入門
 kind: guide
 listorder: 3
 ---
-## Overview {#overview}
+<!-- ## Overview {#overview}
 
 Host Maps let you see all of your hosts together on one screen, grouped however you want, filtered however you want, with metrics made instantly comprehensible via color and shape. This is a new and simple way to spot outliers, detect usage patterns, avoid resource problems, and make decisions about how to best manage your infrastructure. Host Maps work at any scale, whether you have 10, 100 or 10,000 hosts.
 
-When you use Host Maps, we wanted the experience to be like waving a magic wand, and having every host leap to attention, telling you the high-level story instantly, ready to report further details on demand. The video above shows Host Maps in action.
+When you use Host Maps, we wanted the experience to be like waving a magic wand, and having every host leap to attention, telling you the high-level story instantly, ready to report further details on demand. The video above shows Host Maps in action. -->
 
-## Ways to use it
+## 概要 {#overview}
 
-We built Host Maps for ultimate flexibility; with just a few clicks, you can ask innumerable infrastructure-level questions and get instant, visual answers. Below are some common uses, but we would also love to hear on twitter about the ways you use Host Maps at your company (@datadoghq).
+あなたが欲しいしかし、メトリックが色や形を経て瞬時に理解製であなたは、濾過し、必要がグループ化され、一緒に一つの画面上のすべてのホストを見てみましょうマップをホストします。これは、外れ値を見つける使用パターンを検出し、リソースの問題を回避し、最高のインフラストラクチャを管理する方法についての意思決定を行うための新しい簡単な方法です。ホストマップはあなたが10、100または10,000のホストを持っているかどうか、任意のスケールで動作します。
 
-### Resource Optimization
+あなたがホストマップを使用すると、私たちは、即座にあなたに高レベルの話をして、オンデマンドで更なる詳細を報告する準備が魔法の杖を振って、注意にすべてのホストの飛躍を持つようになり経験を望んでいました。番組上のビデオは、アクションにマップをホストします。
+
+
+<!-- ## Ways to use it
+
+We built Host Maps for ultimate flexibility; with just a few clicks, you can ask innumerable infrastructure-level questions and get instant, visual answers. Below are some common uses, but we would also love to hear on twitter about the ways you use Host Maps at your company (@datadoghq). -->
+
+## Host Mapの操作
+
+Most Hapsには、非常に柔軟なユーザーインターフェースが実装されています。数回のクリックをするだけで、インフラレベルの問い合わせが無数に実行でき、答えを直ちに視覚表示してくれます。以下は、一般的な用途の例です。これ以外にも多くの用途でHost Mapは、有効に機能すると思っているので、みなさんの会社でどんな風に使っているかtwitterでつぶやいてくれると嬉しいです。
+
+
+<!-- ### Resource Optimization
 
 If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big. If you want to reduce your AWS spend, a great place to start is by figuring out what the expensive instances are used for. With Host Maps this is easy. First group by “instance-type” and then group by role or name. Take a look at your expensive instance types, such as c3.8xlarge. Are there any host roles whose CPU is underutilized? If so, you can zoom in to individual hosts and see whether all that computational horsepower has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.
 
@@ -27,6 +39,23 @@ Below is a subset of Datadog’s infrastructure. As you can see, c3.2xlarge inst
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
 ![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
+
+ -->
+
+### リソース利用の最適化
+
+もしもあなたがAWSを使っているんなら、おそらく複数のインスタンスタイプを使い分けていることでしょう。幾つかはメモリーを効率よく使うために最適化され、又或るものは計算のために最適化され、そして幾つかは小さなインスタンスで、他の幾つかは大きなインスタンスになっていたりしているはずです。この上な状況で、AWSへの出費を削減したい場合は、高価なインスタンスがどのように活用されているかを把握することです。この把握作業は、Host Mapを使えば簡単にできます。まず最初に、"インスタンスタイプ"でグループ化し、その後ロールやホスト名でグループ化します。
+
+ロールまたは名前で「インスタンス型」とそのグループによる最初のグループ。このようなc3.8xlargeとしてあなたの高価なインスタンスタイプ、見てみましょう。そのCPU十分に活用されていない任意のホストの役割はありますか？その場合は、個々のホストにズームインし、すべてのこと、計算馬力が最後の数ヶ月で必要とされているかどうか、またはホストのこのグループかどうかを安くインスタンスタイプへの移行のための候補であることができます。
+
+以下のDatadogのインフラのサブセットです。あなたが見ることができるように、c3.2xlargeインスタンスはかなり重くロードされます。
+
+![](/static/images/hostmappart1image2.png)
+
+役割によってc3.2xlargeグループと、サブグループ化をクリックして、下図のように、我々は他の人がほぼアイドリングしている間だけの役割の一部は、ロードされていることがわかりました。我々はc3.xlargeにそれらの7緑のノードをダウングレードした場合、我々は年間ほぼ$13Kを救います。それは調べてみる価値です！ （0.21ドルは、x24時間/日、ホストあたり1時間ごとに保存*365日/年*7ホスト=$12,877.20/年）
+
+![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
+
 
 ### Availability Zone Placement
 
