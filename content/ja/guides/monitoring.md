@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/08
+last_modified: 2015/05/27
 translation_status: complete
 language: ja
 title: Monitor機能の設定ガイド
@@ -207,12 +207,12 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
       <!-- Note that you can use formatted values in this input based on the metric itself. For example, if you are monitoring `system.disk.used`, you can give a threshold of `20GB`. -->
 
-      メトリクスの閾値を設定する際、その値に単位つけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
+      メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
 
       <!-- For a **threshold alert** you will be able to chose a *time aggregation* of the data. The alerting engine will generate a single series and perform selected aggregation. -->
 
-      **閾値でアラート通知**する場合は、*時間内に含まれるデータの集計方法*の決めるオプションを選択することができます。アラートエンジンは、別の時系列データを生成し選択された集計を実行します。
+      **閾値でアラート通知**する場合は、*時間内に含まれるデータの集計方法*を決めるオプションを選択することができます。アラートエンジンは、別の時系列データを生成し選択された集計を実行します。
 
       <!-- Let's look at the details of each option: -->
 
@@ -229,8 +229,8 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
       - *on average*(平均): 時系列データには、平均化の処理を行い単一の値を導きだします。その後、閾値と比較してチェックします。
       - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
-      - *at all times*(常時): 生成された時系列データの全てのポイントが閾値外である場合に、アラートが発報されます。
-      - *in total*(合計)： 時系列データの全てのポイントの合計が閾値の外にある場合、アラートが発報されます。
+      - *at all times*(常時): 生成された時系列データの全てのポイントが閾値を超えている場合に、アラートが発報されます。
+      - *in total*(合計)： 時系列データの全てのポイントの合計が閾値を超えている場合に、アラートが発報されます。
 
 
       <!-- Note the *on average* and *at all times* aggregations *require* a full
@@ -261,7 +261,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
    reporting. This means the monitor will not resolve because there are not
    anymore values to trigger a resolution. -->
 
-   このオプションの最も一般的なユースケースは、非常に時間の離れたエラーのカウンターです。エラーが発生しなくなると、Datadogへのメトリクスのリポーティングも止まります。一度発報状態になったアラートを解除するためのデータが届いていないので、そのアラートを解除するために、自動での解除が必要になります。
+   このオプションの最も一般的なユースケースは、非常に時間の離れたエラーのカウンターです。エラーが発生しなくなると、Datadogへのメトリクスのレポーティングも止まります。一度発報状態になったアラートを解除するためのデータが届いていないので、そのアラートを解除するために、自動での解除が必要になります。
 
 
    <!-- 7. Configure your **notification options** Refer to the
@@ -364,7 +364,7 @@ configuration. -->
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options. -->
 
-1. **ネットワークチェック**を指定します。Datadog Agentによりリポーティングされた全てのHTTPとTCPチェックから選択することができます。
+1. **ネットワークチェック**を指定します。Datadog Agentによりレポーティングされた全てのHTTPとTCPチェックから選択することができます。
 2. 名前またはタグ（複数可）でホストを指定します。先の**ネットワークチェック**で選択した内容に基づいてホスト名とタグが表示されます。
 3. **アラートオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
 4. **通知のオプション**を設定します。尚、通知の設定に関しては、このガイドの[”通知について”](#notifications)の項目を参照してください。

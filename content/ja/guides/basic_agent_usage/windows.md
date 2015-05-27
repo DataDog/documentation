@@ -63,11 +63,11 @@ Datadog Agentの実行は、Windows serviceによって管理されています�
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
 
 #### Datadog Agent バージョン < 3.9.1:
-サービスパネルからDatadog Agentの起動, 停止, 再起動が行えます。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
+サービスパネルからDatadog Agentの起動、停止、再起動が行えます。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
 
 <%= console 'services.msc' %>
 
-サービスパネル<!--コンソール-->に入ったら、"Datadog Agent"というサービスを探します。名前にカーソルを合わせ右クリックすると起動, 停止, 再起動のオプションが表示されます。
+サービスパネル<!--コンソール-->に入ったら、"Datadog Agent"というサービスを探します。名前にカーソルを合わせ右クリックすると起動、停止、再起動のオプションが表示されます。
 
 
 <!--
@@ -134,7 +134,7 @@ For Windows Server 2008, Vista and newer:
 
 #### Datadog Agent バージョン >= 3.9.1:
 
-スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック, 有効, 無効ができます。
+スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック、有効、無効ができます。
 設定ファイルの変更を適応するには、Datadog Agent の再起動が必要です。
 
 #### Datadog Agent バージョン < 3.9.1:
@@ -196,9 +196,9 @@ You can contact them in one of the following ways:
 #### Datadog Agent バージョン >= 3.9.1:
 ログの保存場所:
 
-- Windows Server 2003, XP 又は、それ以前のバージョン:  
+- Windows Server 2003、XP 又は、それ以前のバージョン:  
       `C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
-- Windows Server 2008, Vista と、それ以降のバージョン:  
+- Windows Server 2008、Vista と、それ以降のバージョン:  
       `C:\ProgramData\datadog\logs\ddagent.log`
 
 #### Datadog Agent バージョン < 3.9.1:
