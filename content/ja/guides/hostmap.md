@@ -16,7 +16,10 @@ When you use Host Maps, we wanted the experience to be like waving a magic wand,
 
 ## 概要 {#overview}
 
-あなたが欲しいしかし、メトリックが色や形を経て瞬時に理解製であなたは、濾過し、必要がグループ化され、一緒に一つの画面上のすべてのホストを見てみましょうマップをホストします。これは、外れ値を見つける使用パターンを検出し、リソースの問題を回避し、最高のインフラストラクチャを管理する方法についての意思決定を行うための新しい簡単な方法です。ホストマップはあなたが10、100または10,000のホストを持っているかどうか、任意のスケールで動作します。
+Host Mapを使うことにより、全てのホストを、まとめて1つのスクリーンで見ることができるようになります。そして、それらのホストを自由にグループ化したりフイルターをかけることもできます。画面に表示されているホストは、注目しているメトリクスの状態により色付けされており、状態が瞬時にわかるようになっています。これは、新しくて簡単な
+
+
+これは、外れ値を見つける使用パターンを検出し、リソースの問題を回避し、最高のインフラストラクチャを管理する方法についての意思決定を行うための新しい簡単な方法です。ホストマップはあなたが10、100または10,000のホストを持っているかどうか、任意のスケールで動作します。
 
 あなたがホストマップを使用すると、私たちは、即座にあなたに高レベルの話をして、オンデマンドで更なる詳細を報告する準備が魔法の杖を振って、注意にすべてのホストの飛躍を持つようになり経験を望んでいました。番組上のビデオは、アクションにマップをホストします。
 
@@ -25,9 +28,9 @@ When you use Host Maps, we wanted the experience to be like waving a magic wand,
 
 We built Host Maps for ultimate flexibility; with just a few clicks, you can ask innumerable infrastructure-level questions and get instant, visual answers. Below are some common uses, but we would also love to hear on twitter about the ways you use Host Maps at your company (@datadoghq). -->
 
-## 方法はそれを使用するには
+## Host Mapの操作方法
 
-我々は究極の柔軟性のためのホストマップを構築し、数回クリックするだけで、あなたは無数のインフラレベルの質問をしたり、インスタント、視覚的な回答を得ることができます。以下にいくつかの一般的な用途であるが、我々はまた、あなたの会社（@datadoghq）でホストマップを使用方法についてTwitter上で聞くのが大好きです。
+Host Mapは、究極の柔軟性を持って実装されています。数回クリックするだけで、インフラレベルでの無数のフィルタリングと、そのフィルタリングに対する可視化を即座に実現してくれます。以下に紹介する内容は、一般的な用途の例です。それ以外にもHost Mapによって把握できるよう内容はたくさんあると思います。是非皆さんの会社で考えたHost Mapの使い方をTiwtter(@datadoghq)でシェアしてもらえると嬉しいです。
 
 
 <!-- ### Resource Optimization
