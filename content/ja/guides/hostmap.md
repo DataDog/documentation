@@ -95,7 +95,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 
 <!-- ## More Details -->
-## それぞれの操作の説明
+## Host Mapの各操作の解説
 
 <!-- ### Tags
 
@@ -116,12 +116,12 @@ If some of your hosts are running on AWS, the following AWS-specific tags are av
 
 あなたのホストの一部はAWS上で実行している場合は、次のAWS固有のタグは今おります：
 
-アベイラビリティゾーン
-地域
-画像
-インスタンス型
-セキュリティグループ
-そして、このような「名前」として使用する可能性のあるEC2タグ、
+* アベイラビリティゾーン
+* 地域
+* 画像
+* インスタンス型
+* セキュリティグループ
+* そして、このような「名前」として使用する可能性のあるEC2タグ、
 
 
 <!-- ### Filter by
@@ -143,10 +143,10 @@ Filterable host attributes (automatically provided):
 
 フィルター可能なホストの属性（自動的に提供されます）：
 
-*アップ：ホストがハートビートを報告しています
-*ダウン：ホストがハートビートを報告していません
-*ミュート：Datadogアラートは、このホストのミュートされています
-*エージェント：ホストがdatadogエージェントを実行しています
+* アップ：ホストがハートビートを報告しています
+* ダウン：ホストがハートビートを報告していません
+* ミュート：Datadogアラートは、このホストのミュートされています
+* エージェント：ホストがdatadogエージェントを実行しています
 * agent_issue：多くの場合、リソースへのアクセスに失敗した統合の問題を示しています
 * upgrade_required：Datadogエージェントはアップグレードが必要
 
