@@ -8,8 +8,6 @@ sidebar:
       href: "#python"
     - text: Ruby
       href: "#ruby"
-    - text: PHP
-      href: "#php"
     - text: C#
       href: "#c-sharp"
     - header: Community Libraries
@@ -58,10 +56,6 @@ There are many libraries available to help you interact with the Datadog API.
   * [DogApi][3] - A Ruby Datadog API wrapper.
   * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
 
-#### PHP
-
-  * [php-datadogstatsd][5] - A PHP DogStatsD client.
-
 #### C\#
 {: #c-sharp}
 
@@ -105,6 +99,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### PHP
 {: #community-php}
 
+  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29]. 
 
 #### Go
