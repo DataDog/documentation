@@ -24,7 +24,11 @@ EXT_TO_LANG = {
 # Return a code block containing the given file's code and highlighted for it's
 # language.
 def snippet_code_block(filename, options={})
+  apicomment = "# Make sure you replace the API and or APP key below with the ones for your account\n\n"
   code = IO.read(File.join(CODE_SNIPPET_DIR, filename))
+  if !options[:nocomments]
+    code = "#{apicomment}#{code}"
+  end
   code_block(code, language(filename), options)
 end
 
