@@ -41,7 +41,9 @@ for any bad links, and refresh your browser.
 
 Before you push, make sure you verify there are no bad links. 
 
-# Your final step should be to exit rake, then run ```rake clean``` then ```rake```. If there are no errors, then and only then push and merge. If there are errors, please don't merge. If you have been working on code samples, run ```rake clean``` then ```rake test```. If you didn't work on code samples, don't bother with test.
+**Your final step should be to exit rake, then run ```rake clean``` then ```rake```.**
+
+If there are no errors, then and only then push and merge. **If there are errors, please don't merge.** If you have been working on code samples, run ```rake clean``` then ```rake test```. If you didn't work on code samples, don't bother with test.
 
 If you are using rake test, you need an environment variable for DD_API_KEY and DD_APP_KEY. These should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything. 
 
