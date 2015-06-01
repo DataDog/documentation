@@ -4,7 +4,7 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 ## Pre-requisites
 
- * Ruby
+ * Ruby 2.x.x (if you are using system ruby on OSX, please use rbenv to switch ruby version)
  * RubyGems
  * Bundler
 
@@ -36,16 +36,16 @@ This is easy. Are you ready for it? Run this command:
 rake
 ```
 *(If you get a message about libnotify or something else, are you a Datadog employee and running on personal chef? Read the note right below Getting started above.)*
-Yeah, that's it. This command will compile the site, check 
+Yeah, that's it. This command will compile the site, check
 for any bad links, and refresh your browser.
 
-Before you push, make sure you verify there are no bad links. 
+Before you push, make sure you verify there are no bad links.
 
 **Your final step should be to exit rake, then run ```rake clean``` then ```rake```.**
 
 If there are no errors, then and only then push and merge. **If there are errors, please don't merge.** If you have been working on code samples, run ```rake clean``` then ```rake test```. If you didn't work on code samples, don't bother with test.
 
-If you are using rake test, you need an environment variable for DD_API_KEY and DD_APP_KEY. These should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything. 
+If you are using rake test, you need an environment variable for DD_API_KEY and DD_APP_KEY. These should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
 
 ## How to add a new integration
 
@@ -58,7 +58,7 @@ Create a markdown file under content/integratons. Add the following front matter
     doclevel: basic
     ---
 
-If you are writing a lot about the integration, change doclevel to complete or just remove the whole line. Now write the doc. There is no need to update any index, menu, or sidebars. Those are automatically generated. 
+If you are writing a lot about the integration, change doclevel to complete or just remove the whole line. Now write the doc. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
 ## How to add a new Guide
 
@@ -70,7 +70,7 @@ Create a markdown file under content/guides. Add the following front matter at t
     listorder: <where in the list you want the doc to appear>
     ---
 
-Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated. 
+Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
 ## Things to keep in mind
 
