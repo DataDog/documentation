@@ -10,7 +10,7 @@ GEM
     cri (2.6.1)
       colored (~> 1.2)
     digest (0.0.1)
-    dogapi (1.13.0)
+    dogapi (1.18.0)
       json (>= 1.5.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -107,7 +107,7 @@ PLATFORMS
 DEPENDENCIES
   builder
   digest
-  dogapi (~> 1.13.0)
+  dogapi (~> 1.18.0)
   guard-livereload
   guard-nanoc
   guard-rack
