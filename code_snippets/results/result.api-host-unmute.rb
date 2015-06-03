@@ -1,1 +1,1 @@
-[-1, {}]
+["200", {"action"=>"Unmuted", "hostname"=>"test.host"}]
