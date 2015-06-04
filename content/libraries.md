@@ -8,8 +8,6 @@ sidebar:
       href: "#python"
     - text: Ruby
       href: "#ruby"
-    - text: PHP
-      href: "#php"
     - text: C#
       href: "#c-sharp"
     - header: Community Libraries
@@ -31,6 +29,8 @@ sidebar:
       href: "#community-scala"
     - text: Elixir
       href: "#community-elixir"
+    - text: C#
+      href: "#community-c-sharp"
     - header: Community Integration Libraries
     - text: Saltstack
       href: "#community-integration-saltstack"
@@ -58,16 +58,10 @@ There are many libraries available to help you interact with the Datadog API.
   * [DogApi][3] - A Ruby Datadog API wrapper.
   * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
 
-#### PHP
-
-  * [php-datadogstatsd][5] - A PHP DogStatsD client.
-
 #### C\#
 {: #c-sharp}
 
   * [dogstatsd-csharp-client][6] - A C# DogStatsD client.
-  
-
 
 ### Community Libraries
 
@@ -105,6 +99,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### PHP
 {: #community-php}
 
+  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29]. 
 
 #### Go
@@ -131,7 +126,10 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [dogstatsd-elixir][41] - a dogstatsd client in Elixir by [Adam Kittelson][42]. 
   * [mtx][65] - an Elixir Datadog client by [synrc][66].
   
+#### C\#
+{: #community-c-sharp}
 
+  * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
 
 ### Community Integration Libraries
 
@@ -236,3 +234,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [64]: http://www.pagerduty.com/
    [65]: https://github.com/synrc/mtx
    [66]: https://synrc.com/
+   [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
