@@ -419,7 +419,7 @@ future. For more on <code>.as_count()</code> please see our blog post
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
 <ul>
  <li>Clip y-axis to specific ranges</li>
- <li>Remove outliers either by specifying a percentage or an absolute value to remove outliers</li>
+ <li>Filter series either by specifying a percentage or an absolute value</li>
  <li>Change y-axis scale from linear to log, sqrt or power scale</li>
 </ul>
 
@@ -460,22 +460,25 @@ Examples:
     "scale": "pow3"
 }</code></pre>
 
-<h4>Outliers</h4>
+<h4>Filtering</h4>
 
-Outliers configuration allows you to automatically change y-axis bounds based on a
+Filter configuration allows you to automatically change y-axis bounds based on a
 threshold. Thresholds can be a percentage or an absolute value, and it can apply to
 both both ends of the graph (lower and upper).
 
-For outliers, there are two ways to set up the configuration.
+For y-axis filtering, there are two ways to set up the configuration.
 
 To begin, there is a simple configuration where you specify an absolute value or a percentage and all
 values above the value or all values that sit within the top ##% will be cutoff.
 
 Examples:
 
-<code>"outliers": 30</code> // all values above 30 will not appear
-<code>"outliers": "5%"</code> // the top 5% of that data will not appear
-
+<pre><code>"yaxis": {
+    "filter": 30 // all values above 30 will not appear
+}</code></pre>
+<pre><code>"yaxis": {
+    "filter": "5%" // the top 5% of that data will not appear
+}</code></pre>
 
 <p>
 Advanced configuration works the same way as simple configuration, with the added
@@ -483,23 +486,28 @@ flexibility of configuring the lower or the upper or both parts of the graph. Fo
 example, the following configuration will limit the graph to data points that are
 not in the bottom 10% nor in the top 30%.
 
-<pre><code>"outliers": {
-   "top": "30%",
-   "bottom": "10%"
+<pre><code>"yaxis": {
+    "filter": {
+        "top": "30%",
+        "bottom": "10%"
+    }
 }</code></pre>
 
 
 The following will show all data except those with values higher than 15:
 
-
-<pre><code>"outliers": {
-    "above": 15
+<pre><code>"yaxis": {
+    "filter": {
+        "above": 15
+    }
 }</code></pre>
 
 The following will hide data points below 2:
 
-<pre><code>"outliers": {
-    "below": 2
+<pre><code>"yaxis": {
+    "filter": {
+        "below": 2
+    }
 }</code></pre>
 
 
@@ -517,11 +525,11 @@ Here is a full JSON example:
   "events": [],
   "yaxis": {
     "scale": "log"
+    "filter": {
+         "top": "5%",
+         "below": 15
+     }
   },
-  "outliers": {
-       "top": "5%",
-       "below": 15
-   }
 }</code></pre>
 
 </p>
