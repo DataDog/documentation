@@ -179,7 +179,7 @@ kind: documentation
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
                   Note that the timestamp must be current.
-              </div>but fin
+              </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
@@ -1249,18 +1249,22 @@ kind: documentation
     <%= left_side_div %>
       <h5>Arguments</h5>
       <ul class="arguments">
-        <%= argument("hostname", "The host\'s name to mute.") %>
-        <%= argument("end", "POSIX timestamp when to unmute host. If omitted, host will be muted until explicitly unmuted).", {:default => 'None'}) %>
-        <%= argument("override", "If true and the host is already muted, will overwrite existing end on the host.", {:default => 'False'}) %>
+        <%= argument("end", "POSIX timestamp when the host will be unmuted. If omitted, the host will remain muted until explicitly unmuted.", {:default => 'None'}) %>
+        <%= argument("message", "Message to associate with the muting of this host", {:default => 'None'}) %>
+        <%= argument("override", "If true and the host is already muted, will replace existing host mute settings.", {:default => 'False'}) %>
       </ul>
     </div>
     <%= right_side_div %>
     <h5>Signature</h5>
-      <code>POST /api/v1/host</code>
+      <code>POST /api/v1/host/:hostname/mute</code>
       <h5>Example Request</h5>
+      <%= snippet_code_block "api-host-mute.rb" %>
       <%= snippet_code_block "api-host-mute.py" %>
+      <%= snippet_code_block "api-host-mute.sh" %>
       <h5>Example Response</h5>
+      <%= snippet_result_code_block "api-host-mute.rb" %>
       <%= snippet_result_code_block "api-host-mute.py" %>
+      <%= snippet_result_code_block "api-host-mute.sh" %>
       </div>
     </div>
 
@@ -1268,17 +1272,19 @@ kind: documentation
     <div class="row-fluid">
     <%= left_side_div %>
       <h5>Arguments</h5>
-      <ul class="arguments">
-        <%= argument("hostname", "The host\'s name to unmute.") %>
-      </ul>
+        <%= no_args %>
     </div>
     <%= right_side_div %>
     <h5>Signature</h5>
-      <code>POST /api/v1/host</code>
+      <code>POST /api/v1/host/:hostname/unmute</code>
       <h5>Example Request</h5>
+      <%= snippet_code_block "api-host-unmute.rb" %>
       <%= snippet_code_block "api-host-unmute.py" %>
+      <%= snippet_code_block "api-host-unmute.sh" %>
       <h5>Example Response</h5>
+      <%= snippet_result_code_block "api-host-unmute.rb" %>
       <%= snippet_result_code_block "api-host-unmute.py" %>
+      <%= snippet_result_code_block "api-host-unmute.sh" %>
       </div>
     </div>
 
