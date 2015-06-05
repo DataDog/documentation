@@ -1,19 +1,19 @@
 ---
 last_modified: 2015/05/27
-translation_status: complete
+translation_status: original
 language: ja
-title: Agentの基本的な使用方法 (Red Hat)
+title: Agentの基本的な使用方法 (Ubuntu)
 kind: documentation
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/
 logdirectory: /var/log/datadog/
-supervisorlog: /var/log/supervisor/datadog-supervisord.log
+supervisorlog: /var/log/datadog/supervisord.log
 ---
 
 <!--
 ======================================================
-OVERVIEW
+Overview
 ======================================================
 -->
 
@@ -32,6 +32,7 @@ If you haven't installed the Agent yet, instructions can be found
 
 
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
+
 
 <!-- If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways: -->

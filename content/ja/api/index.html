@@ -1,5 +1,6 @@
 ---
 title: API Reference
+kind: documentation
 ---
 
 <%
@@ -129,9 +130,9 @@ title: API Reference
         <% end %>
         </ul>
         <h5>Example Error Response</h5>
-        <%= snippet_code_block "api-error.json", :static => true, :highlight => false %>
+        <%= snippet_code_block "api-error.json", :static => true, :highlight => false, :nocomments => true %>
         <h5>Example Warning Response</h5>
-        <%= snippet_code_block "api-warning.json", :static => true, :highlight => false %>
+        <%= snippet_code_block "api-warning.json", :static => true, :highlight => false, :nocomments => true %>
       </div>
     </div>
 
@@ -145,8 +146,17 @@ title: API Reference
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          The metrics end-point allows you to post metrics data so it can
-          be graphed on Datadog's dashboards.
+          The metrics end-point allows you to:
+        </p>
+        <ul>
+          <li>Post metrics data so it can be graphed on Datadog's dashboards</li>
+          <li>Query metrics from any time period</li>
+        </ul>
+        <p>
+          As occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
+        </p>
+        <p>
+          Thus, if you are querying for larger timeframes of data, the points returned will be more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, our algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. We do this time aggregation via averages.
         </p>
       </div>
     </div>
@@ -186,6 +196,38 @@ title: API Reference
         <% %w{py sh rb}.each do |f| %>
           <%= snippet_code_block "api-metrics-post.#{f}" %>
         <% end %>
+      </div>
+    </div>
+    <h4 id="metrics-query">Query time series points</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to query for metrics from any time period.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
+          <%= argument("to", "seconds since the unix epoch", :lang => 'console') %>
+          <%= argument("start", "seconds since the unix epoch", :lang => 'python') %>
+          <%= argument("end", "seconds since the unix epoch", :lang => 'python') %>
+          <%= argument("query", "The query string") %>
+        </ul>
+        <h5>Query Language</h5>
+        <p>
+          Any query used for a graph can be used here. See <a href="/graphing/">here</a> for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity.
+        </p>
+
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET https://app.datadoghq.com/api/v1/query</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-query.py" %>
+        <%= snippet_code_block "api-query.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-query.py" %>
+        <%= snippet_result_code_block "api-query.sh" %>
       </div>
     </div>
 
@@ -1176,6 +1218,24 @@ title: API Reference
       </div>
     </div>
 
+    <!-- revoke a screenboard -->
+    <h4 id="screenboards-revoke">Revoke a shared a Screenboard</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>Revoke a currently shared screenboard's.</p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/screen/share/:board_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-revoke.sh" %>
+        <h5>Example Response</h5>
+        <%= no_response %>
+      </div>
+    </div>
+
 
     <!--
    =====================================================================
@@ -1189,18 +1249,22 @@ title: API Reference
     <%= left_side_div %>
       <h5>Arguments</h5>
       <ul class="arguments">
-        <%= argument("hostname", "The host\'s name to mute.") %>
-        <%= argument("end", "POSIX timestamp when to unmute host. If omitted, host will be muted until explicitly unmuted).", {:default => 'None'}) %>
-        <%= argument("override", "If true and the host is already muted, will overwrite existing end on the host.", {:default => 'False'}) %>
+        <%= argument("end", "POSIX timestamp when the host will be unmuted. If omitted, the host will remain muted until explicitly unmuted.", {:default => 'None'}) %>
+        <%= argument("message", "Message to associate with the muting of this host", {:default => 'None'}) %>
+        <%= argument("override", "If true and the host is already muted, will replace existing host mute settings.", {:default => 'False'}) %>
       </ul>
     </div>
     <%= right_side_div %>
     <h5>Signature</h5>
-      <code>POST /api/v1/host</code>
+      <code>POST /api/v1/host/:hostname/mute</code>
       <h5>Example Request</h5>
+      <%= snippet_code_block "api-host-mute.rb" %>
       <%= snippet_code_block "api-host-mute.py" %>
+      <%= snippet_code_block "api-host-mute.sh" %>
       <h5>Example Response</h5>
+      <%= snippet_result_code_block "api-host-mute.rb" %>
       <%= snippet_result_code_block "api-host-mute.py" %>
+      <%= snippet_result_code_block "api-host-mute.sh" %>
       </div>
     </div>
 
@@ -1208,17 +1272,19 @@ title: API Reference
     <div class="row-fluid">
     <%= left_side_div %>
       <h5>Arguments</h5>
-      <ul class="arguments">
-        <%= argument("hostname", "The host\'s name to unmute.") %>
-      </ul>
+        <%= no_args %>
     </div>
     <%= right_side_div %>
     <h5>Signature</h5>
-      <code>POST /api/v1/host</code>
+      <code>POST /api/v1/host/:hostname/unmute</code>
       <h5>Example Request</h5>
+      <%= snippet_code_block "api-host-unmute.rb" %>
       <%= snippet_code_block "api-host-unmute.py" %>
+      <%= snippet_code_block "api-host-unmute.sh" %>
       <h5>Example Response</h5>
+      <%= snippet_result_code_block "api-host-unmute.rb" %>
       <%= snippet_result_code_block "api-host-unmute.py" %>
+      <%= snippet_result_code_block "api-host-unmute.sh" %>
       </div>
     </div>
 
