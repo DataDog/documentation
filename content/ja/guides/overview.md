@@ -10,7 +10,7 @@ sidebar:
     - header: Datadogのサービスについて
     - text: 便利なIntegrations
       href: "#integrations"
-    - text: インフラリストの表示
+    - text: インフラを構成しているホストのリスト表示
       href: "#infrastructure"
     - text: Host Mapの表示
       href: "#hostmap"
@@ -80,17 +80,14 @@ for that machine based on what was previously set up for that tag.</li>
 
 </ul> -->
 
-<h2 id="infrastructure">インフラリストの表示</h2>
+<h2 id="infrastructure">インフラを構成しているホストのリスト表示</h2>
 
 <img src="/static/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
 
-<ul>
-<li>全てのホストは、Infrastructureのページに表示されます。</li>
-<li>上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。</li>
-<li>Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタの作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。</li>
-<li>タグ設定の詳細は、<a target="_blank" href="/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。</li>
-
-</ul>
+* 全てのホストは、`Infrastructure`のページに表示されます。
+* 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
+* Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタを作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。
+* タグ設定の詳細は、<a target="_blank" href="/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。
 
 
 <!-- ## Host Map
@@ -119,7 +116,7 @@ Host Mapは、`Infrastructure`メニューのドロップダウンメニュー�
 * 利用パターンの検出
 * リソース利用の最適化
 
-Host Map表示について詳しく知り対場合は、[Host Map ガイド](/ja/guides/hostmap)ページを参照してください。
+Host Map表示について詳しく知りたい場合は、[Host Map ガイド](/ja/guides/hostmap)ページを参照してください。
 
 
 <!-- <h2 id="events">Events</h2>

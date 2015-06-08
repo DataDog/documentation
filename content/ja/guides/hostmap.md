@@ -1,8 +1,8 @@
 ---
-last_modified: 2015/05/22
+last_modified: 2015/05/27
 translation_status: complete
 language: ja
-title: Host Map の概要
+title: Host Map表示の入門
 kind: guide
 listorder: 3
 ---
@@ -57,7 +57,7 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 c3.2xlargeグループをクリックし、ロールによってサブグループの状態を表示すると、一部の
 ロールのホストに負荷が集中し、他のロールのホストは使われていないことが分かります。これらの緑色で表示されている7台のホストをc3.xlargeへ変更したなら、約$13,000/年を削減することができます。この金額は、調査に値する価値があるのではないでしょうか。( $0.21/hr/host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20/year )
 
-![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
+![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png) -->
 
 
 <!-- ### Availability Zone Placement
