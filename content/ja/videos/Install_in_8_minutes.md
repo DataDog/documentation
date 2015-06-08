@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/08
 translation_status: translated
 language: ja
 title: 8分間でインテグレーション5種をインストール
@@ -8,6 +8,11 @@ wistiaid: ira7wzi1d4
 tags:
     - Introduction
     - Installation
+    - PagerDuty
+    - HipChat
+    - AWS
+    - RDS
+    - ElasticSearch
 summary: In about 8 minutes you can get Datadog setup and install integrations with PagerDuty, HipChat, AWS, RDS, and ElasticSearch.
 ja_summary: Agentをインストールし、PagerDuty, HipChat, AWS, RDS, ElasticSearchインテグレーションをインスールし、監視を開始します。
 ---
