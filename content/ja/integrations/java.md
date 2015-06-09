@@ -6,168 +6,174 @@ title: "JMX Checks"
 integration_title: JMX Checks
 kind: integration
 ---
-<div> <h3 id="subtitle">Java, Cassandra, Tomcat, ActiveMQ, Solr</h3> <h2
-id="introduction">Introduction</h2> JMX Checks are agents checks that collect
-metrics from applications that expose them using <a
-href='http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html'>
-JMX</a>.
+### Java, Cassandra, Tomcat, ActiveMQ, Solr
 
-In order to collect these metrics, a lightweight Java plugin named JMXFetch is
-called by the Datadog Agent to connect to the MBean Server and to collect these
-metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd
-server running with the Agent.
+## Introduction
 
-JMX Checks have a limit of 350 metrics per instance which should be enough to
-satisfy your needs as it's really easy to customize which metrics you want to
-collect.  We are going to see how to do so.
+JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
 
-<h3>Enabling JMX checks</h3>
-<p>The instructions to set up these integrations from within the Datadog Agent can be found here:</p>
-<ul><li><a href='https://app.datadoghq.com/account/settings#integrations/activemq' target='_blank'>Active MQ</a></li>
-<li><a href='https://app.datadoghq.com/account/settings#integrations/cassandra' target='_blank'>Cassandra</a></li>
-<li><a href='https://app.datadoghq.com/account/settings#integrations/java' target='_blank'>Java</a></li>
-<li><a href='https://app.datadoghq.com/account/settings#integrations/solr' target='_blank'>Solr</a></li>
-<li><a href='https://app.datadoghq.com/account/settings#integrations/tomcat' target='_blank'>Tomcat</a></li>
-</ul>
+In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd server running with the Agent.
 
+JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so.
 
-<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect some metrics from your JMX
-application. They also allow you to specify a
-configuration in the yaml file that will be read by JMXFetch to filter which
-metrics it should send back to the Agent.
-<br>
-<h4>Commands to view the metrics that are available:</h4>
+### Enabling JMX checks
+The instructions to set up these integrations from within the Datadog Agent can be found here:
+
+- [Active MQ](https://app.datadoghq.com/account/settings#integrations/activemq)
+- [Cassandra](https://app.datadoghq.com/account/settings#integrations/cassandra)
+- [Java](https://app.datadoghq.com/account/settings#integrations/java)
+- [Solr](https://app.datadoghq.com/account/settings#integrations/solr)
+- [Tomcat](https://app.datadoghq.com/account/settings#integrations/tomcat)
+
+## Customization
+
+JMX Checks have a default configuration that will collect some metrics from your JMX application. They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which metrics it should send back to the Agent.
+
+#### Commands to view the metrics that are available:
 
 <div class="alert alert-info">
     The <code>datadog-agent jmx</code> command ws added in version 4.1.0.
 </div>
 
-<ul>
-<li>
-List attributes that match at least one of your instances configuration: <br><code>sudo /etc/init.d/datadog-agent jmx list_matching_attributes</code>
-</li>
-<li>
-List attributes that do match one of your instances configuration but that are not
-being collected because it would exceed the number of metrics that can be
-collected:<br> <code>sudo /etc/init.d/datadog-agent jmx list_limited_attributes</code>
-</li>
-<li>
-List attributes that will actually be collected by your current instances configuration:<br> <code>sudo /etc/init.d/datadog-agent jmx list_collected_attributes</code>
-</li>
-<li>
-List attributes that don't match any of your instances configuration:<br> <code>sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes</code>
-</li>
-<li>List every attributes available that has a type supported by JMXFetch:<br> <code>sudo /etc/init.d/datadog-agent jmx list_everything</code> </li>
-<li>
-Start the collection of metrics based on your current configuration and display them in the console:<br> <code>sudo /etc/init.d/datadog-agent jmx collect</code>
-</li>
-</ul>
+- List attributes that match at least one of your instances configuration:
 
-<h4>How to customize what metrics to collect:</h4>
+        `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`
+
+- List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be
+collected:
+
+        `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`
+
+- List attributes that will actually be collected by your current instances configuration:
+
+        `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`
+
+- List attributes that don't match any of your instances configuration:
+
+        `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes`
+
+- List every attributes available that has a type supported by JMXFetch:
+
+        `sudo /etc/init.d/datadog-agent jmx list_everything`
+
+- Start the collection of metrics based on your current configuration and display them in the console:
+
+        `sudo /etc/init.d/datadog-agent jmx collect`
+
+#### How to customize what metrics to collect:
+
 Like every other Agent Check, JMX Checks have 2 main sections:
-<ul>
-<li><code>init_config</code>: Settings that will be applied to every instances</li>
-<li><code>instances</code>: Settings used to configure instances</li>
-</ul> See <a href='http://docs.datadoghq.com/guides/agent_checks/#config'>this page for more information</a>.<br><br>
 
-JMX checks require a <code>conf</code> section that has to be placed within either the <code>init_config</code> section or the <code>instances</code> section.<br><br>
+- `init_config`: Settings that will be applied to every instances
+- `instances`: Settings used to configure instances
 
-The <code>conf</code> section will be used to determine what JMX attributes should be collected and sent as metrics to Datadog.
+See [this page for more information](http://docs.datadoghq.com/guides/agent_checks/#config).
 
-<br /><br /> The configuration section looks like this: <%=snippet_code_block "jmx-basic-conf.yaml" %>
+JMX checks require a `conf` section that has to be placed within either the `init_config` section or the `instances` section.
 
-The <code>conf</code> parameter is a list of dictionaries. Only 2 keys are
-allowed in this dictionary: <br /> <ul> <li><code>include</code>
-(<b>mandatory</b>): Dictionary of filters, any attribute that matches these
-filters will be collected unless it also matches the "exclude" filters (see
-below)</li> <li><code>exclude</code> (<b>optional</b>): Another dictionary of
-filters. Attributes that match these filters won't be collected</li> </ul>
+The `conf` section will be used to determine what JMX attributes should be collected and sent as metrics to Datadog.
 
-<p>
+The configuration section looks like this:
+
+<%=snippet_code_block "jmx-basic-conf.yaml" %>
+
+The `conf` parameter is a list of dictionaries. Only 2 keys are
+allowed in this dictionary:
+
+- `include` (**mandatory**): Dictionary of filters, any attribute that matches these filters will be collected unless it also matches the "exclude" filters (see
+below)
+- `exclude` (**optional**): Another dictionary of filters. Attributes that match these filters won't be collected
+
 For a given bean, metrics get tagged in the following manner:
-<pre><code>mydomain:attr0=val0,attr1=val1</code></pre>
+
+        mydomain:attr0=val0,attr1=val1
 
 Your metric will be mydomain (or some variation depending on the attribute
-inside the bean) and have the tags <code>attr0:val0, attr1:val1, domain:mydomain</code>.
-</p>
+inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
 
+### Description of the filters
 
-<h3>Description of the filters</h3> These dictionaries have some specials keys:
-<br><ul> <li><code>domain</code>: The domain of the attribute (e.g.
-java.lang)</li> <li><code>bean</code> or <code>bean_name</code>: A <a href="#update-note">list</a> of full bean
-names (e.g. java.lang:type=Compilation)</li> <li><code>attribute</code>: A <a href="#update-note">list</a>
-or a dictionary of attribute names (see below for more details)</li> </ul> On
-top of these parameters, the filters support "custom" keys which means that you
-can filter by bean parameters.
+These dictionaries have some specials keys:
 
-	Example: Let's say you want to collect metrics regarding the Cassandra
-cache. You could use the <code>type:</code> <code>  - Caches</code> filter: <br /> <br /> <%=snippet_code_block "jmx-cassandra-cache.yaml" %>
+- `domain`: The domain of the attribute (e.g.
+java.lang)
+- `bean` or `bean_name`: A [list](#update-note) of full bean
+names (e.g. java.lang:type=Compilation)
+- `attribute`: A [list](#update-note) or a dictionary of attribute names (see below for more details)
 
-<h4>The <code>attribute</code> filter</h4>
+On top of these parameters, the filters support "custom" keys which means that you can filter by bean parameters.
 
-<ul>The <code>attribute</code> filter can accept two types of values: <br /><br />
-<li>A dictionary whose keys are attributes names:</li> <%=snippet_code_block "jmx-attribute-dict.yaml" %> </ul> In that case you can
-specify an alias for the metric that will become the metric name in Datadog.
-You can also specify the metric type either a gauge or a counter. If you choose
-counter, a rate per second will be computed for this metric.
+Example: Let's say you want to collect metrics regarding the Cassandra
+cache. You could use the `type:` `- Caches` filter:
 
-<br><br><li>A list of attributes names:</li><%= snippet_code_block "jmx-attribute-list.yaml" %>
-In that case:<ul>
-    <li>The metric type will be a gauge</li>
-    <li>The metric name will be jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]</li>
-</ul>
+<%=snippet_code_block "jmx-cassandra-cache.yaml" %>
 
-<p>
+#### The `attribute` filter
+
+The `attribute` filter can accept two types of values:
+
+- A dictionary whose keys are attributes names:
+
+ <%=snippet_code_block "jmx-attribute-dict.yaml" %>
+
+In that case you can specify an alias for the metric that will become the metric name in Datadog.  You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
+
+- A list of attributes names:
+
+<%= snippet_code_block "jmx-attribute-list.yaml" %>
+
+In that case:
+
+- The metric type will be a gauge
+- The metric name will be `jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]`
+
 Here is another filtering example:
 
-<pre><code>instances:
-  - host: 127.0.0.1
-    name: jmx_instance
-    port: 9999
+        instances:
+          - host: 127.0.0.1
+            name: jmx_instance
+            port: 9999
 
-init_config:
-  conf:
-    - include:
-        bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
-        attribute:
-          - OneMinuteRate
-          - 75thPercentile
-          - 95thPercentile
-          - 99thPercentile
-</code></pre>
+        init_config:
+          conf:
+            - include:
+                bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
+                attribute:
+                  - OneMinuteRate
+                  - 75thPercentile
+                  - 95thPercentile
+                  - 99thPercentile
 
+#### Note
+{:#update-note}
 
-</p>
-
-</div>
-<h4 id="update-note">Note</h4>
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
-<pre><code># Datadog Agent > 5.3.0
-conf:
-    - include:
-       domain: domain_name
-       bean:
-         - first_bean_name
-         - second_bean_name
-...
-</code></pre>
-<pre><code># Older Datadog Agent versions
-conf:
-    - include:
-        domain: domain_name
-        bean: first_bean_name
-    - include:
-        domain: domain_name
-        bean: second_bean_name
-...
-</code></pre>
 
-<h2>Troubleshooting</h2> <h4>The 350 metric limit</h4> Due to the nature of
-these integrations, it is possible to submit an extremely high number of
-metrics directly to Datadog. What we've found in speaking with many customers
-is that some of these metrics are not needed; thus, we've set the limit at 350
-and below you'll find the tools to both see what you're collecting and to get
-below the limit.
-<p>Begin by using the commands seen <a href='#customization'>above</a> to investigate what metrics are available.
-Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.
-If you believe you need more than 350 metrics, please reach out to <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
+- Datadog Agent > 5.3.0
+
+        conf:
+            - include:
+               domain: domain_name
+               bean:
+                 - first_bean_name
+                 - second_bean_name
+        ...
+
+- Older Datadog Agent versions
+
+        conf:
+            - include:
+                domain: domain_name
+                bean: first_bean_name
+            - include:
+                domain: domain_name
+                bean: second_bean_name
+        ...
+
+## Troubleshooting
+
+#### The 350 metric limit
+
+Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog. What we've found in speaking with many customers is that some of these metrics are not needed; thus, we've set the limit at 350 and below you'll find the tools to both see what you're collecting and to get below the limit.
+
+Begin by using the commands seen [above](#customization) to investigate what metrics are available.  Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.  If you believe you need more than 350 metrics, please reach out to [support@datadoghq.com](mailto:support@datadoghq.com).

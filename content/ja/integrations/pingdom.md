@@ -6,20 +6,16 @@ title: Datadog-Pingdom Integration
 integration_title: Pingdom
 kind: integration
 ---
-<div id="int-overview">
-<h3>Overview</h3>
-Track all Pingdom downtime events and user-centric performance metrics in Datadog,
-for correlation with other relevant events and metrics
-</div>
 
+### Overview
+{: #int-overview}
 
-<h3>Questions and Troubleshooting</h3>
-<span class="question">Q: How do I get uptime?</span>
-<br> A: Pulling uptime from Pingdom, their API requires passing an interval for each query.
-For a given point in time, the value of uptime depends on how large the interval
-is so we can't record a unique value per check per point in time.
+Track Pingdom downtime events and user-centric performance metrics in Datadog, for correlation with other relevant events and metrics.
 
-<br><span class="question">Q: Does Datadog support transaction checks?</span>
-<br>A: Pingdom does not provide an API for transaction checks,
-so we’re not able to show them in Datadog. The transaction monitor
-feature was in beta until recently, so if it becomes available we will look to support it.
+At this time we track the response_time metric for any sites you configure on the Pingdom website.
+
+### Questions and Troubleshooting
+
+**Q:** Does Datadog support transaction checks?
+
+**A:** Pingdom does not provide an API for transaction checks, so we’re not able to show them in Datadog. The transaction monitor feature was in beta until recently, so if it becomes available we will look to support it.
