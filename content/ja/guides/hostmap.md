@@ -68,7 +68,8 @@ Host maps make it easy to see distributions of machines in each of your availabi
 
 ### アベイラビリティゾーン間でのホストの分布状態の把握
 
-Host Mapを使うことにより、アベイラビリティゾーン（AZ）間でのホストの配置状況を把握することが簡単になります。注目しているホストを抽出し、アベイラビリティゾーン(AZ)間でグループ化します。このようにすることにより、リソースの再配置が必要かとうか一目でわかるようになります。以下の例のように、Datadogでは **role:daniels**ロールのホストが各アベイラビリティゾーン間に不均等に配置されていることがわかります。(danielsは、Datadog内のアプリケーションサーバについているロール名です。)
+Host Mapを使うことにより、アベイラビリティゾーン（AZ）間でのホストの配置状況を把握することが簡単になります。注目しているホストを抽出し、アベイラビリティゾーン(AZ)間でグループ化します。このようにすることにより、リソースの再配置が必要かどうか一目でわかるようになります。以下の例のように、Datadogでは **role:daniels** ロールのホストが各アベイラビリティゾーン間に不均等に配置されていることがわかります。(danielsは、Datadog内のアプリケーションサーバについているロール名です。)
+
 
 ![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png)
 
@@ -140,7 +141,7 @@ Filterable host attributes (automatically provided):
 
 ### タグによるホストの抽出 (Filter by)
 
-'Filter by'は、インフラ全体からサブセットを抽出し、Host Map上で表示する際に利用します。画面の左上隅にあり、操作用の窓でそれぞれのタグ(自動でDatadogが付与しているものも含む)を選択することにより、Host Mapで表示するホストを抽出することができます。'Filter by'の窓に何も入力されていないと、インフラ内でDatadogにメトリクスを送信している全てのホストが表示されます。この状態で特定のサブセットのホストに注目したい場合、'Filter by'の窓にサブセットの条件を入力していきます。例えば、ホストが所属している環境('production', 'staging', etc.)に基づいて各ホストにタグ付けをしていたとします。この様な場合は、 **'production'**を使い表示する必要のない'staging'環境のホストをHost Mapから排除ことができます。更に、その'production'環境で特定のロールにフォーカスしたいなら、そのロール名を'Filter by'に追記します。追記した各フィルターはAND条件で判定され、サブセットが表示されます。
+'Filter by'は、インフラ全体からサブセットを抽出し、Host Map上で表示する際に利用します。画面の左上隅にあり、操作用の窓でそれぞれのタグ(自動でDatadogが付与しているものも含む)を選択することにより、Host Mapで表示するホストを抽出することができます。'Filter by'の窓に何も入力されていないと、インフラ内でDatadogにメトリクスを送信している全てのホストが表示されます。この状態で特定のサブセットのホストに注目したい場合、'Filter by'の窓にサブセットの条件を入力していきます。例えば、ホストが所属している環境('production', 'staging', etc.)に基づいて各ホストにタグ付けをしていたとします。この様な場合は、 **'production'** を使い表示する必要のない'staging'環境のホストをHost Mapから排除ことができます。更に、その'production'環境で特定のロールにフォーカスしたいなら、そのロール名を'Filter by'に追記します。追記した各フィルターはAND条件で判定され、サブセットが表示されます。
 
 Datadogが特別に準備している抽出に利用できるホストの状態に関するタグ (自動的にホストに付与されます):
 
@@ -196,7 +197,7 @@ Note that the “% CPU utilized” metric uses the most reliable and up-to-date 
 
 現状では'Color by'セレクターと'Size by'セレクターは、load、idle、waitなどのCPUに関連したメトリクスに限られていますが、この部分で選択できるメトリクスについては近々増強される予定です。
 
-注) "% CPU utilized"のメトリクスは、 Datadog Agentからか、AWS CloudWatchからか、vSphereからかに関わらず、**最も信頼性の高い最新のCPU使用率の測定値**を表示しています。
+注) "% CPU utilized"のメトリクスは、 Datadog Agentからか、AWS CloudWatchからか、vSphereからかに関わらず、**最も信頼性の高い最新のCPU使用率の測定値** を表示しています。
 
 
 <!-- ### Data freshness and meaning
