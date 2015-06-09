@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/10
+last_modified: 2015/06/09
 translation_status: original
 language: ja
 title: Datadog-Cacti Integration
