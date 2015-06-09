@@ -8,28 +8,23 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture GitHub commits in Datadog to:
-<ul>
-<li> Track new features from code changes</li>
-<li> Identify when new code changes lead to system alerts or build failures</li>
-<li> Discuss code changes with your team in the Datadog Event Stream</li>
-</ul>
 
-</div>
+- Track new features from code changes</li>
+- Identify when new code changes lead to system alerts or build failures
+- Discuss code changes with your team in the Datadog Event Stream
 
-<div id="int-configuration">
+### Configuration
+{:#int-configuration}
 
-<h3>Configuration</h3>
-Select 'Github' <a href="https://app.datadoghq.com/account/settings">here</a> and link your account.
+Select 'Github' [here](https://app.datadoghq.com/account/settings) and link your account.
 You can then select which repos you would like to integrate, which branches, and if you'd like to
 receive commits and/or issues.
 
-</div>
-
-<h3>What to Expect</h3>
+### What to Expect
 Once the integration is complete, whatever you select (commits and/or issues) will populate
 into your Datadog Event Stream.
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/09
 translation_status: original
 language: ja
 title: Datadog-Capistrano Integration
@@ -7,27 +7,24 @@ integration_title: Capistrano
 kind: integration
 doclevel: complete
 ---
-<div id="int-overview">
-<h2>Overview</h2>
-<p>Install the Capistrano Datadog integration to:</p>
-<ul>
-  <li>Capture and search for deploy events in your event stream</li>
-  <li>Correlate deploy events withe metric changes on dashboards</li>
-</ul>
 
-</div>
+### Overview
+{:#int-overview}
 
-<div id="int-configuration">
-<h2>Configuration</h2>
+Install the Capistrano Datadog integration to:
 
-<ol>
-  <p>Installing the Capistrano integration for a particular Capfile will capture each Capistrano task that that Capfile runs, including the roles that the task applies to and any logging output that it emits and submits them as events to Datadog at the end of the execution of all the tasks.</p>
-  <li>Install the <code>dogapi</code> Ruby gem (version &gt;= 1.10.0):
-    <pre class="linux"><code>sudo gem install dogapi --version "&gt;=1.10.0"</code></pre>
-  </li>
-  <li><p>Add this to the beginning of your <code>Capfile</code>:</p>
-    <pre class="textfile"><code>require "capistrano/datadog"
-set :datadog_api_key, "${api_key}"</code></pre>
-  </li>
-</ol>
-</div>
+- Capture and search for deploy events in your event stream
+- Correlate deploy events withe metric changes on dashboards
+
+### Configuration
+{:#int-configuration}
+
+Installing the Capistrano integration for a particular Capfile will capture each Capistrano task that that Capfile runs, including the roles that the task applies to and any logging output that it emits and submits them as events to Datadog at the end of the execution of all the tasks.
+
+- Install the `dogapi` Ruby gem (version &gt;= 1.10.0):
+
+        sudo gem install dogapi --version "&gt;=1.10.0"
+
+- Add this to the beginning of your `Capfile`:
+
+        require "capistrano/datadog" set :datadog_api_key, "${api_key}"
