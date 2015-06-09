@@ -5,24 +5,21 @@ language: ja
 title: Datadog-Jenkins Integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect Jenkins to Datadog in order to:
-<ul>
-<li> Add build & deployment markers on all your dashboards.</li>
-<li> Identify trends in your builds.</li>
-<li> Discuss build failures with your team.</li>
-</ul>
-</div>
+
+- Add build & deployment markers on all your dashboards.
+- Identify trends in your builds.
+- Discuss build failures with your team.
+
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/jenkins.yaml.example">
-Jenkins YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/jenkins.py">
-Jenkins checks.d</a>
+* [Jenkins YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jenkins.yaml.example)
+* [Jenkins checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/jenkins.py)
 
-<p>Successful Jenkins builds will show up as 'low' priority.
+Successful Jenkins builds will show up as 'low' priority.
 In the left column of the event stream, swith the priority to 'all'
-to see both successful and failed builds.</p>
+to see both successful and failed builds.

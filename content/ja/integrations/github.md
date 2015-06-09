@@ -13,7 +13,7 @@ doclevel: complete
 
 Capture GitHub commits in Datadog to:
 
-- Track new features from code changes</li>
+- Track new features from code changes
 - Identify when new code changes lead to system alerts or build failures
 - Discuss code changes with your team in the Datadog Event Stream
 

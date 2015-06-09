@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Capture Kyoto Tycoon metrics in Datadog to:
 
 * Visualize your database server performance

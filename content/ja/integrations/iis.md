@@ -8,22 +8,18 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect IIS to Datadog in order to:
-<ul>
-<li> Visualize your web server performance.</li>
-<li> Correlate the performance of IIS with the rest of your applications.</li>
-</ul>
-</div>
+
+- Visualize your web server performance.
+-  Correlate the performance of IIS with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example">
-IIS YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py">
-IIS checks.d</a>
+* [IIS YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example)
+* [IIS checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py)
 
 The following metrics are collected by default with the IIS integration:
 
@@ -51,4 +47,4 @@ The following metrics are collected by default with the IIS integration:
 
 
 
-Overall metric definitions from IIS can be found <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa394298(v=vs.85).aspx">here</a>.
+Overall metric definitions from IIS can be found [here](http://msdn.microsoft.com/en-us/library/aa394298(v=vs.85).aspx).

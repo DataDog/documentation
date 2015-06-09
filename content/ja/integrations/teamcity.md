@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connect TeamCity to Datadog in order to:
 
 * Monitor your builds and deployments

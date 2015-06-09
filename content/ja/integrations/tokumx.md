@@ -8,9 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
-
 Capture TokuMX metrics in Datadog to:
 
 * Visualize key TokuMX metrics.

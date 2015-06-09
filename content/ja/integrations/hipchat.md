@@ -8,12 +8,10 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect HipChat to Datadog in order to:
-<ul>
-<li> Receive notifications when someone posts on your stream.</li>
-<li> Receive metric alerts and see graphs within Hipchat.</li>
-</ul>
-</div>
+
+- Receive notifications when someone posts on your stream.
+- Receive metric alerts and see graphs within Hipchat.

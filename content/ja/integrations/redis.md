@@ -4,16 +4,15 @@ translation_status: original
 language: ja
 title: Datadog-Redis Integration
 ---
-<div id="int-overview">
-<h3>Overview</h3>
+
+### Overview
+{:#int-overview}
+
 Track and graph your Redis activity and performance metrics with slice-and-dice at
 all levels from individual column families to entire clusters.
 
-</div>
 
-<h3>
-Troubleshooting and Questions
-</h3>
+### Troubleshooting and Questions
 
 Do you have redis-py library, version 2.4.11 or later? You might need to
 <a href="https://github.com/DataDog/dd-agent/issues/374">upgrade</a>

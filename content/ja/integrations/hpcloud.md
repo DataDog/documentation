@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connect to HP Public Cloud to:
 
 * See your HP Cloud Compute hosts in the infrastructure overview

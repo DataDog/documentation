@@ -5,22 +5,18 @@ language: ja
 title: Datadog-MongoDB Integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect MongoDB to Datadog in order to:
-<ul>
-<li>Visualize key MongoDB metrics.</li>
-<li>Correlate MongoDB performance with the rest of your applications.</li>
-</ul>
-</div>
+
+- Visualize key MongoDB metrics.
+- Correlate MongoDB performance with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example">
-MongoDB YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py">
-MongoDB checks.d</a>
+* [MongoDB YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example)
+* [MongoDB checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py)
 
 The following metrics are collected by default with the MongoDB integration:
 
