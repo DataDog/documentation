@@ -66,8 +66,9 @@ Host maps make it easy to see distributions of machines in each of your availabi
 
 ![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png) -->
 
-### アベイラビリティゾーンの配置
+### アベイラビリティゾーン間でのホスト分布状態の把握
 
+Host Mapを使うことにより、アベイラビリティゾーン（AZ）間での
 ホストマップは、それが簡単にあなたのアベイラビリティゾーン（AZ）のそれぞれに機械の分布を参照することを可能にします。あなたはAZでグループ、に興味を持っているホスト用のフィルタと、あなたはすぐにリソースがリバランスが必要かどうかを確認することができます。ダニエルズアベイラビリティゾーン間：下図のように、Datadogで私たちは役割を持つホストの不均一な分布を有します。 （ダニエルズは、社内アプリケーションのいずれかの名前です。）
 
 ![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png)
@@ -95,6 +96,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 
 <!-- ## More Details -->
+
 ## Host Mapの各操作の解説
 
 <!-- ### Tags
