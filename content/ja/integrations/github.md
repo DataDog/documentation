@@ -22,7 +22,7 @@ Capture GitHub commits in Datadog to:
 
 次の目的でGitHubのコミット情報をDatadogと連携します:
 
-- ソースコードの変更から新しいフィーチャの追加を追跡ができる。
+- ソースコードの変更から新しいフューチャの追加を追跡ができる。
 - アラート発生時やビルドの失敗時にソースコードの変更が起因していないかを確認することができる。
 - ソースコードの変更に関し、Datadogのイベントストリーム上でチャットができる。
 
@@ -37,7 +37,7 @@ receive commits and/or issues. -->
 ### 設定
 {:#int-configuration}
 
-Datadogのインテグレーションページで['Github'](https://app.datadoghq.com/account/settings)タイルを選択し、`Configuration`タブから`Sign in with Github`をクリックし、アカウントを設定します。その後リポジトリ、ブイランチ、commits and/or issuesの情報を設定します。
+Datadogのインテグレーションページで['Github'](https://app.datadoghq.com/account/settings)タイルを選択し、`Configuration`タブから`Sign in with Github`をクリックし、アカウントを設定します。その後リポジトリ、ブランチ、コミットなどの情報を設定します。
 
 
 <!-- ### What to Expect

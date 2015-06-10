@@ -21,6 +21,6 @@ Connect HipChat to Datadog in order to:
 
 次の目的で、HipchatとDatadogを連携します:
 
-- Datadog上でチームメンバーがコメントをポストした場合、その内容をHipChatへも送信します。
-- Datadog上で設定したアラートの通知先をHipChatした場合、アラート通知とグラフを送信します。
+- Datadog上でチームメンバーがコメントをポストした場合、その内容をHipChatにも送信します。
+- Datadog上で設定したアラートの通知先をHipChatにした場合、アラート通知とグラフを送信します。
 - Datadog上でチームメンバーがグラフをキャプチャした場合、グラフを送信します。
