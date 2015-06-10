@@ -41,10 +41,8 @@ sidebar:
       href: "/ja/guides/dogstatsd/"
 ---
 
-Being able to
-see all of your metrics from across your infrastructure is key within Datadog.
-While we do have guides to submit [custom metrics](http://docs.datadoghq.com/guides/metrics/) via our [API](http://docs.datadoghq.com/api/) and [code instrumentation](http://docs.datadoghq.com/libraries/),
-it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
+Being able to see all of your metrics from across your infrastructure is key within Datadog.
+While we do have guides to submit [custom metrics](http://docs.datadoghq.com/guides/metrics/) via our [API](http://docs.datadoghq.com/api/) and [code instrumentation](http://docs.datadoghq.com/libraries/), it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 
 If you would like to propose an integration, please reach out to support@datadoghq.com and tell us what metrics you would like to see from that given source.
 
