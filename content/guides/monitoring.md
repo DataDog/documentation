@@ -92,25 +92,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     [scope section](/graphing/#scope) of the graphing primer for
     further information.
 
-2. Select the alert type.
-    ![alert type](/static/images/monitor/alert_type.png)
-
-    A **threshold alert** will compare the value in the selected
-    timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
-
-    A **change alert** will look at a recent data point and
-    determine the change or % change between that value and a value some minutes
-    ago. The compared data points are 1-minute averages and <em>not</em> a
-    single point.
-
-    This sort of alert is useful to track fast spikes or drops in a metric
-    when you might not have an exact "unexpected" threshold. Note: the
-    calculated value is not the absolute value - meaning it will be negative for
-    a downward change.
-
-3. Select the alert grouping.
+2. Select the alert grouping.
     ![alert grouping](/static/images/monitor/alert_grouping.png)
 
     A **simple alert** aggregates over all reporting sources. You will get one
@@ -127,6 +109,24 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
     This will trigger a separate alert for each device on each host that is
     running out of space.
+
+3. Select the alert type.
+    ![alert type](/static/images/monitor/alert_type.png)
+
+    A **threshold alert** will compare the value in the selected
+    timeframe against a given threshold. There are additional options available
+    in the alerting conditions section. This is the standard alert case where
+    you know what sort values are unexpected.
+
+    A **change alert** will compare the change or % change of a value between
+    now and some time ago against a given threshold.
+    The compared data points will not be single points but are computed using
+    the parameters in the *alert conditions* section.
+
+    This type of alert is useful to track fast spikes or drops as well as slow
+    changes in a metric when you might not have an exact "unexpected" threshold.
+    *Note:* the calculated value is not the absolute value - meaning it will be
+    negative for a downward change.
 
 4. {:#metric-conditions} Select the alert conditions
 
@@ -164,6 +164,18 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
       must be full but that there shouldn't be a gap of more than 1 minute
       across all aggregated series. In other words, we recommend using *at least
       once* or *in total* for metrics with > 1 minute interval.
+
+    - When you select the **change alert** option, you will have additional
+    parameters you can adjust.
+      - *change* is an absolute change of the value whereas *% change* is the
+        percentage change of your value compared to its previous value (so if
+        it was a value of 2 and now 4, the *% change* will be 100%).
+      - You can compare the change of the value during a given timeframe by
+        selecting the period you want to compare against. This can range from 5
+        minutes to up to 2 days.
+      - Like the **threshold alert**, you will need to select the
+        *time aggregation* and a *time window* on which the change will be
+        calculated.
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
