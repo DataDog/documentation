@@ -432,9 +432,11 @@ kind: documentation
               threshold</li>
             </ul>
             <div>If you are using the <em>change</em> or <em>pct_change</em>
-             time aggregator, you can use this syntax instead:
-             <code>change(time_aggr(time_window), timeshift)</code> with:
+             time aggregator, you can instead use
+             <code>change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #</code>
+             with:
              <ul class="arguments">
+              <li><code>change_aggr</code> change, pct_change</li>
               <li><code>time_aggr</code> avg, sum, max, min</li>
               <li><code>time_window</code> last_#m (1, 5, 10, 15, or 30),
               last_#h (1, 2, or 4), or last_#d (1 or 2)</li>
