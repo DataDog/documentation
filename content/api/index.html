@@ -418,7 +418,7 @@ kind: documentation
 
             <h5>Metric Alert Query</h5>
 
-            <code>time_aggr(window):space_aggr:metric{tags} [by {key}] operator #</code>
+            <code>time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #</code>
             <ul class="arguments">
               <li><code>time_aggr</code> avg, sum, max, min, change, or pct_change</li>
               <li><code>time_window</code> last_#m (5, 10, 15, or 30),
@@ -431,6 +431,19 @@ kind: documentation
               <li><code>#</code> an integer or decimal number used to set the
               threshold</li>
             </ul>
+            <div>If you are using the <em>change</em> or <em>pct_change</em>
+             time aggregator, you can instead use
+             <code>change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #</code>
+             with:
+             <ul class="arguments">
+              <li><code>change_aggr</code> change, pct_change</li>
+              <li><code>time_aggr</code> avg, sum, max, min</li>
+              <li><code>time_window</code> last_#m (1, 5, 10, 15, or 30),
+              last_#h (1, 2, or 4), or last_#d (1 or 2)</li>
+              <li><code>timeshift</code> #m_ago (5, 10, 15, or 30),
+              #h_ago (1, 2, or 4), or 1d_ago</li>
+             </ul>
+            </div>
 
             <h5>Service Check Query</h5>
             <code>"check".over(tags).last(count).count_by_status()</code>
