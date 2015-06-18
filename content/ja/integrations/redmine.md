@@ -9,15 +9,13 @@ doclevel: basic
 
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture Redmine activity in Datadog to:
-<ul>
-<li> Track your development cycle. </li>
-<li> View open issues in the Datadog event stream.</li>
-<li> Discuss projects with your team.</li>
-</ul>
-</div>
+
+- Track your development cycle.
+- View open issues in the Datadog event stream.
+- Discuss projects with your team.
 
 The Redmine configuration just requires a full URL to the desired activity feed (you can add multiple URLs).

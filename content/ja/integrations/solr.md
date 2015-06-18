@@ -4,7 +4,8 @@ translation_status: original
 language: ja
 title: Datadog-Solr Integration
 ---
-For information on Solr, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
+
+For information on Solr, please see [here](http://docs.datadoghq.com/integrations/java/).
 
 The following metrics are collected by default with the SOLR integration:
 

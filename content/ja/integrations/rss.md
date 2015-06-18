@@ -8,12 +8,10 @@ kind: integration
 doclevel: basic
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture RSS feed activity in Datadog to:
-<ul>
-<li> Add events from custom sources to your stream.</li>
-<li> Discuss feed events with your team.</li>
-</ul>
-</div>
+
+- Add events from custom sources to your stream.
+- Discuss feed events with your team.

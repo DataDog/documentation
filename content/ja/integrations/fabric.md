@@ -8,12 +8,10 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect Fabric to Datadog in order to:
-<ul>
-<li> Capture and search for deploy events in the event stream.</li>
-<li> Correlate deploy events with metric changes on dashboards.</li>
-</ul>
-</div>
+
+- Capture and search for deploy events in the event stream.
+- Correlate deploy events with metric changes on dashboards.

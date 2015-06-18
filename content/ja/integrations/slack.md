@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 * In your Slack account Administration page, go to the Integration tab and choose Datadog.
 * Copy paste the service hook into the field below.
 * Add the channels you want to be able to post to.

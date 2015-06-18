@@ -8,12 +8,10 @@ kind: integration
 doclevel: basic
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture WebMetric alerts in Datadog to:
-<ul>
-<li> Add markers for system failures on all of your dashboards.</li>
-<li> Discuss system alerts with your team.</li>
-</ul>
-</div>
+
+-  Add markers for system failures on all of your dashboards.
+-  Discuss system alerts with your team.

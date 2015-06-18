@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connect your Node.js applications to Datadog to:
 
 * Visualize their performance

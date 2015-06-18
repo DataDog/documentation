@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Install the Google App Engine integration in your Python project to:
 
 * See your Google App Engine services metrics: memcache, task queues, datastores

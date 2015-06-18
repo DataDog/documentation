@@ -7,22 +7,20 @@ integration_title: Elasticsearch
 kind: integration
 doclevel: complete
 ---
-<div id="int-overview">
-<h3>Overview</h3>
+
+### Overview
+{:#int-overview}
 
 Connect ElasticSearch to Datadog in order to:
-<ul>
-<li> Visualize ElasticSearch performance.</li>
-<li> Correlate ElasticSearch performance with the rest of your applications.</li>
-</ul>
-</div>
+
+- Visualize ElasticSearch performance.
+- Correlate ElasticSearch performance with the rest of your applications.
+
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example">
-ElasticSearch YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py">
-ElasticSearch checks.d</a>
+* [ElasticSearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
+* [ElasticSearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
 
 The following metrics are collected by default with the ElasticSearch integration:
 

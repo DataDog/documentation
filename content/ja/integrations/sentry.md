@@ -8,7 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
 Connect Sentry to Datadog to:
 
 * See exceptions in the stream, in real time

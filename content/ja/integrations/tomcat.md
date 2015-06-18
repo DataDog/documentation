@@ -7,4 +7,5 @@ integration_title: Tomcat
 kind: integration
 doclevel: basic
 ---
-For information on Tomcat, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
+
+For information on Tomcat, please see [here](http://docs.datadoghq.com/integrations/java/).
