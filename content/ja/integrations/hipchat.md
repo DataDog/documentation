@@ -1,19 +1,26 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/10
 translation_status: original
 language: ja
-title: Datadog-HipChat Integration
+title: Datadog-HipChat インテグレーション
 integration_title: HipChat
 kind: integration
-doclevel: complete
+doclevel: basic
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+<!-- ### Overview
+{:#int-overview}
 
 Connect HipChat to Datadog in order to:
-<ul>
-<li> Receive notifications when someone posts on your stream.</li>
-<li> Receive metric alerts and see graphs within Hipchat.</li>
-</ul>
-</div>
+
+- Receive notifications when someone posts on your stream.
+- Receive metric alerts and see graphs within Hipchat. -->
+
+### 概要
+{:#int-overview}
+
+次の目的で、HipchatとDatadogを連携します:
+
+- Datadog上でチームメンバーがコメントをポストした場合、その内容をHipChatにも送信します。
+- Datadog上で設定したアラートの通知先をHipChatにした場合、アラート通知とグラフを送信します。
+- Datadog上でチームメンバーがグラフをキャプチャした場合、グラフを送信します。

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2015/05/27
 translation_status: complete
 language: ja
 title: Agent Checkの書き方 (イベントの送信)
@@ -52,7 +52,7 @@ they will run every check interval, which defaults to 15 seconds. -->
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからのメトリクスとイベント情報を収集する方法について説明します。
+このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからメトリクスとイベント情報を収集する方法について説明します。
 `AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
@@ -76,7 +76,7 @@ web chat client, too</a>.) -->
 
 <h3 id="setup">セットアップ</h3>
 
-未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent のインストールする手順を解説しています。
+未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -139,8 +139,8 @@ flushed out with the other Agent metrics.
 
 #### メトリクスの送信
 
-Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDのが提供している関数に精通しているなら、移行は非常に簡単です。
-未だそれらの関数に慣れていない場合でも、それほど大変ではないというとことがすぐ分かるはずです。
+Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDが提供している関数に精通しているなら、移行は非常に簡単です。
+未だそれらの関数に慣れていない場合でも、それほど大変ではないということがすぐに分かるはずです。
 
 
 Agent Checkでは、次のような関数を利用することができます:
@@ -234,7 +234,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージは、 ログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -316,7 +316,7 @@ every check will support multiple instances out of the box. -->
 
 *instances*のセクションは、Checkが実行される全ての対象(instance)のリストになります。
 
-Checkの中で実行される`check()` 関数の実体は、各チェック対象(instance)対して個別に実行されていきます。このことより全てのCheckは、そのままの状態で複数のチェック対象(instance)をサポートしていることを意味しています。
+Checkの中で実行される`check()` 関数の実体は、各チェック対象(instance)に対して個別に実行されていきます。このことより全てのCheckは、そのままの状態で複数のチェック対象(instance)をサポートしていることを意味しています。
 
 
 <!--
@@ -335,8 +335,8 @@ For all Linux systems, this means you will find it at: -->
 
 <h3 id="directory">ディレクトリの構造</h3>
 
-Checkのプログラミングを始める前に、まず関連するディレクトリの構造を理解しておくのは重要なことです。Checkで使用するファイルは２カ所に分けて設置します。
-Check のPython 実行ファイルは、Datadog Agent のルートディレクトリにある`checks.d` のフォルダに設置します。
+Checkのプログラミングを始める前に、まず関連するディレクトリの構造を理解しておくのは重要なことです。Checkで使用するファイルは２カ所に分けて配置します。
+Check のPython 実行ファイルは、Datadog Agent のルートディレクトリにある`checks.d` のフォルダに配置します。
 
 Linux系のシステムは、以下のディレクトリになります:
 
@@ -424,15 +424,15 @@ services and return interesting data. -->
 <h3 id="first">始めてのCheck</h3>
 
 <div class="alert alert-block">
-Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)が一致している必要があります。
+Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)は一致している必要があります。
 例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
 </div>
 
-まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に設置し、次の3行のみの非常にシンプな内容になります:
+まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、次の3行のみの非常にシンプな内容になります:
 
 <%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
 
-HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に設置します:
+HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に配置します:
 
 <%= snippet_code_block("guides-agentchecks-hello.py") %>
 
@@ -491,10 +491,10 @@ So our final configuration would look something like this:
 
 #### 設定
 
-インスタンス定義の中身が各Check本体でどのように処理されるかを理解するために、
+インスタンス定義の中身が各Check本体でどのように処理されるのかを理解するために、
 まず最初に設定ファイルがどのようになるか考えてみることにします。
 
-設定ファイルには、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行することになります。更に、それぞれのインスタンスでタイムアウトを設定しなかったと時のために、デフォルトのタイムアウトも設定しておくことも必要になります。
+設定ファイルには、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行出来ることになります。更に、それぞれのインスタンスでタイムアウトを設定しなかった時のために、デフォルトのタイムアウトを設定しておくことも必要になります。
 
 上記をふまえ、設定ファイルは次のようになります:
 
@@ -535,10 +535,10 @@ event method.
 
 #### Check 本体
 
-では、Check 本体の関数の定義をすることにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
+では、Check 本体の関数を定義することにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
 エラーが発生していれば、エラー条件によって処理をします。
 
-以下ののセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーを処理しています。
+以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理をしています。
 
 <%= snippet_code_block("guides-agentchecks-ex-request.py") %>
 
@@ -546,7 +546,7 @@ event method.
 
 <%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
 
-最後に、エラー発生時の処理の内容を定義します。
+最後に、エラー発生時の処理内容を定義します。
 先のコードで既に、 HTTP リクエストがタイムアウトした場合の`timeout_event` 関数と、レスポンスステータスが200
 以外の場合の`self.status_code_event` 関数を定義しています。
 従って、これらのイベントの関数の中身を定義していきます。
@@ -581,10 +581,10 @@ Here's the full source of the check:
 
 #### 今までの解説をまとめると
 
-このガイドの最後の部分は、Checkの実行コードの全体を載せておきます。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で設置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として設置します。
+このガイドの最後の部分に、Checkの実行コード全体を載せておきます。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で配置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として配置します。
 
-Checkに実行ファイルを設置できたら、次のpython スクリプトを使ってテストを実行することができます。
-尚、**`__main__`の部分の`/path/to/conf.d/http.yaml`を、テスト用の設定ファイルの設置してある場所に書き換えてあることを必ず確認してください。**
+Checkに実行ファイルを配置できたら、次のpython スクリプトを使ってテストを実行することができます。
+尚、**`__main__`の部分の`/path/to/conf.d/http.yaml`を、テスト用の設定ファイルを配置している場所に書き換えてあることを必ず確認してください。**
 
 Agent のroot から、次のコマンドでテストを実行します:
 
@@ -592,7 +592,7 @@ Agent のroot から、次のコマンドでテストを実行します:
 
 あなたは、インスタンスごとに生成されているかを評価指標とイベントが表示されます。
 
-ここにチェックの完全なソースは次のとおりです。
+チェックの完全なソースは次のとおりです。
 
 <%= snippet_code_block("guides-agentchecks-ex-all.py") %>
 
@@ -640,7 +640,7 @@ Windows上でカスタムチェックのテストは簡単です。
 Datadog Agentのインストールには`shell.exe` というDatadog Agent 用のpythonの実行環境が含まれています。
 このファイルは、`Program Files` ディレクトリに保存されています。
 
-Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.yaml`ファイルの設置が終わったら、次のコマンドを、`shell.exe` で起動したウインドウ内で実行してみてください。
+Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.yaml`ファイルの配置が終わったら、次のコマンドを、`shell.exe` で起動したウインドウ内で実行してみてください。
 
     >>> from checks import run_check
     >>> run_check('my_check')

@@ -2,13 +2,13 @@
 last_modified: 2015/04/21
 translation_status: original
 language: ja
-title: Datadog-Windows Management Instrumentation Integration
+title: Datadog-WMI Integration
 integration_title: WMI
 kind: integration
 doclevel: basic
 ---
 
-
+#### Windows Management Instrumentation Integration
 
 Get metrics from your Windows applications/servers with Windows Management Instrumentation (WMI) in real time to
 

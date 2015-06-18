@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connects Mesos to Datadog in order to:
 
 * Visualize your Mesos cluster performance

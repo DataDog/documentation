@@ -4,20 +4,19 @@ translation_status: original
 language: ja
 title: Datadog-MySQL Integration
 ---
-<div id="int-overview">
-<h3>Overview</h3>
+
+### Overview
+{:#int-overview}
 
 Connect MySQL to Datadog in order to:
-<ul>
-<li> Visualize your database performance</li>
-<li> Correlate the performance of MySQL with the rest of your applications</li>
-</ul>
-</div>
+
+- Visualize your database performance
+-  Correlate the performance of MySQL with the rest of your applications
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/mysql.yaml.example">MySQL YAML Example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/mysql.py">MySQL checks.d</a>
+* [Example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mysql.yaml.example)
+* [MySQL checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mysql.py)
 
 The following metrics are collected by default with the MySQL integration:
 

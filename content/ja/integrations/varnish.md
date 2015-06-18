@@ -10,23 +10,19 @@ sidebar:
       href: "/ja/integrations/"
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect Varnish to Datadog in order to:
-<ul>
-<li> Visualize your cache performance in real-time.</li>
-<li> Correlate the performance of Varnish with the rest of your applications.</li>
-</ul>
-</div>
+
+- Visualize your cache performance in real-time.
+- Correlate the performance of Varnish with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example">
-Varnish YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py">
-Varnish checks.d</a>
-
+* [Varnish YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
+* [Varnish checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py)
+* 
 The following metrics are collected by default with the Varnish integration:
 
     varnish.accept_fail

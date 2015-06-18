@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2015/05/20
 translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Windows)
@@ -15,9 +15,9 @@ Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>.<br/> -->
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>here</a>. -->
 
-<h3 id="overview">概要</h3>
+### 概要
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
@@ -48,24 +48,26 @@ restarted from the Services panel. To view the Services panel, execute the follo
 Once you're in the console, find the "Datadog Agent" service.
 Right clicking on the service will reveal options to start, stop, and restart the Agent. -->
 
-<h3 id="starting_and_stopping_the_agent">Datadog Agent の起動と停止</h3>
+### Datadog Agent の起動と停止
+{: #starting_and_stopping_the_agent}
 
 Datadog Agentの実行は、Windows serviceによって管理されています。
 
 <!--　<h4>Datadog Agent バージョン >= 3.9.1の場合:</h4>　-->
-<h4>Datadog Agent バージョン 3.9.1　以降の場合:</h4>
+
+#### Datadog Agent バージョン >= 3.9.1:
 スタートメニューに表示されるDatadog Agent Managerを使います。
 <p><img src="/static/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
 <p><img src="/static/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
 
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
-<h4>Datadog Agent バージョン 3.9.1　以前の場合:</h4>
 
-サービスパネルからDatadog Agentの起動, 停止, 再起動が行えます。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
+#### Datadog Agent バージョン < 3.9.1:
+サービスパネルからDatadog Agentの起動、停止、再起動が行えます。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
 
 <%= console 'services.msc' %>
 
-サービスパネル<!--コンソール-->に入ったら、"Datadog Agent"というサービスを探します。名前にカーソルを合わせ右クリックすると起動, 停止, 再起動のオプションが表示されます。
+サービスパネル<!--コンソール-->に入ったら、"Datadog Agent"というサービスを探します。名前にカーソルを合わせ右クリックすると起動、停止、再起動のオプションが表示されます。
 
 
 <!--
@@ -84,10 +86,10 @@ To receive more information about the Agent's state, visit the <em>status page</
 
 <em>The status page is supported in Agent version 3.9.1 and above</em> -->
 
-<h3 id="status_and_information">動作ステータスの確認</h3>
+### 動作ステータスの確認
+{: #status_and_information}
 
-Datadog Agent が動作していることを確認するには、サービスパネルのステータスが"Started"になっていることを確認します。
-その際、"ddagent.exe" プロセスがタスクマネージャーに表示されていることを確認してください。
+Datadog Agent が動作していることを確認するには、サービスパネルのステータスが"Started"になっていることを確認します。その際、"ddagent.exe" プロセスがタスクマネージャーに表示されていることを確認してください。
 
 Datadog Agent の状況に関し更なる情報を取得するには、ブラウザで次のURLの<em>status page</em>を表示します。
 
@@ -112,46 +114,47 @@ The configuration file location depends on the version of Windows on which the A
 
 For Windows Server 2003, XP or older:
 <ul>
-    <li>Agent configuration: <br>
+    <li>Agent configuration:
         <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
-    <li>Integration configuration: <br>
+    <li>Integration configuration:
         <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
 </ul>
 
 
 For Windows Server 2008, Vista and newer:
 <ul>
-    <li>Agent configuration: <br>
+    <li>Agent configuration:
         <code>C:\ProgramData\Datadog\datadog.conf</code></li>
-    <li>Integration configuration: <br>
+    <li>Integration configuration:
         <code>C:\ProgramData\Datadog\conf.d\</code></li>
 </ul> -->
 
-<h3 id="configuration">設定ファイルの保存されているディレクトリ</h3>
-<h4>Datadog Agent バージョン  3.9.1　以降の場合:</h4>
+### 設定ファイルの保存されているディレクトリ
+{: #configuration}
 
-スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック, 有効, 無効ができます。
+#### Datadog Agent バージョン >= 3.9.1:
+
+スタートメニューにあるDatadog Agent Manager から、設定ファイルのチェック、有効、無効ができます。
 設定ファイルの変更を適応するには、Datadog Agent の再起動が必要です。
 
-<h4>Datadog Agent バージョン  3.9.1　以前の場合:</h4>
+#### Datadog Agent バージョン < 3.9.1:
 
 設定ファイルの保存場所は、Windowsのバージョンによって異なります。
 
 Windows Server 2003, XP 又は、それ以前のバージョン:
-<ul>
-    <li>Datadog Agent の設定ファイルの保存先:<br>
-        <code>C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf</code></li>
-    <li>Integrations の設定ファイルの保存先:<br>
-        <code>C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\</code></li>
-</ul>
+
+- Datadog Agent の設定ファイルの保存先:  
+        `C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`
+- Integrations の設定ファイルの保存先:  
+        `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 Windows Server 2008, Vista と、それ以降のバージョン:
-<ul>
-    <li>Datadog Agent の設定ファイルの保存先:<br>
-        <code>C:\ProgramData\Datadog\datadog.conf</code></li>
-    <li>Integrations の設定ファイルの保存先:<br>
-        <code>C:\ProgramData\Datadog\conf.d\</code></li>
-</ul>
+
+- Datadog Agent の設定ファイルの保存先:  
+        `C:\ProgramData\Datadog\datadog.conf`
+- Integrations の設定ファイルの保存先:  
+        `C:\ProgramData\Datadog\conf.d\`
+
 
 
 <!--
@@ -169,15 +172,15 @@ Next, try opening the <a href='#status_and_information'>status page</a> to see t
 <h4>For version >= 3.9.1</h4>
 Log is available at:
 <ul>
-    <li>For Windows Server 2003, XP or older: <br>
+    <li>For Windows Server 2003, XP or older:
        <code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
-    <li>For Windows Server 2008, Vista and newer: <br>
+    <li>For Windows Server 2008, Vista and newer:
         <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
 </ul>
 
 <h4>For version < 3.9.1</h4>
 Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr; Application.
-<br/>
+
 
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
@@ -190,19 +193,19 @@ You can contact them in one of the following ways:
 最初にサービスパネルとタスクマネージャーでDatadog Agent が動作していることを確認してください。
 次に、<a href='#status_and_information'>ステータスページ</a>をブラウザで表示し、Datadog Agent の状況を確認します。
 
-<h4>Datadog Agent バージョン  3.9.1　以降の場合:</h4>
+#### Datadog Agent バージョン >= 3.9.1:
 ログの保存場所:
-<ul>
-    <li>Windows Server 2003, XP 又は、それ以前のバージョン:<br>
-       <code>C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log</code></li>
-    <li>Windows Server 2008, Vista と、それ以降のバージョン:<br>
-        <code>C:\ProgramData\datadog\logs\ddagent.log</code></li>
-</ul>
 
-<h4>Datadog Agent バージョン  3.9.1　以前の場合:</h4>
+- Windows Server 2003、XP 又は、それ以前のバージョン:  
+      `C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
+- Windows Server 2008、Vista と、それ以降のバージョン:  
+      `C:\ProgramData\datadog\logs\ddagent.log`
+
+#### Datadog Agent バージョン < 3.9.1:
 Datadog Agent の各要素のログは、”Event Viewer”で確認できます。Windows Logs &rarr; Application へとメニューを選択してください。
-<br/>
+
+
 
 上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>
+<%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => true %>

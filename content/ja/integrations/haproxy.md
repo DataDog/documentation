@@ -8,24 +8,19 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture HAProxy activity in Datadog to:
-<ul>
-<li> Visualize HAProxy load-balancing performance.</li>
-<li> Know when a server goes down.</li>
-<li> Correlate the performance of HAProxy with the rest of your applications. </li>
-</ul>
-</div>
 
+- Visualize HAProxy load-balancing performance.
+- Know when a server goes down.
+-  Correlate the performance of HAProxy with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example">
-HAProxy YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py">
-HAProxy checks.d</a>
+* [HAProxy YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example)
+* [HAProxy checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py)
 
 The following metrics are collected by default with the HAProxy integration:
 

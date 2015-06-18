@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connect your Ruby applications to Datadog to:
 
 * Visualize their performance

@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Capture SSH activity into Datadog to:
 
 * Visualize your SSH performance in real-time

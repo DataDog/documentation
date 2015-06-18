@@ -8,8 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
 Connect your PHP applications to Datadog to:
 
 * Visualize their performance

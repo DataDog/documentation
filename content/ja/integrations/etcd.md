@@ -7,24 +7,19 @@ integration_title: etcd
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture etcd metrics in Datadog to:
-<ul>
-<li> Monitor the health of your etcd cluster.</li>
-<li> Know when host configurations may be out of sync.</li>
-<li> Correlate the performance of etcd with the rest of your applications. </li>
-</ul>
-</div>
 
+- Monitor the health of your etcd cluster.
+- Know when host configurations may be out of sync.
+- Correlate the performance of etcd with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example">
-etcd YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py">
-etcd checks.d</a>
+* [etcd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
+* [etcd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py)
 
 The following metrics are collected by default with the etcd integration:
 

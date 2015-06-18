@@ -8,13 +8,11 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Capture Git commits directly from your Git server to:
-<ul>
-<li> Keep track of code changes in real time.</li>
-<li> Add code change markers on all your dashboards.</li>
-<li> Discuss code changes with your team.</li>
-</ul>
-</div>
+
+- Keep track of code changes in real time.
+- Add code change markers on all your dashboards.
+-  Discuss code changes with your team.

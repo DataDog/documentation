@@ -8,19 +8,16 @@ kind: integration
 doclevel: complete
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
+{:#int-overview}
 
 Connect Event Viewer to Datadog in order to:
-<ul>
-<li> Track system and application events in Datadog.</li>
-<li> Correlate system and application events with the rest of your application.</li>
-</ul>
-</div>
+
+- Track system and application events in Datadog.
+- Correlate system and application events with the rest of your application.
+
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example">
-Event Viewer YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py">
-Event Viewer checks.d</a>
+* [Event Viewer YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example)
+* [Event Viewer checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py)

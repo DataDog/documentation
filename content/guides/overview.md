@@ -33,7 +33,7 @@ it can help you bring your infrastructure to heel.
 * Once integrations have been configured, data living in a datacenter or
 in an online service is treated the same throughout Datadog.
 
-##Infrastructure
+## Infrastructure
 {: #infrastructure}
 
 ![](/static/images/infrastructure.png){: style="width:100%; border:1px solid #777777"}
@@ -49,12 +49,12 @@ Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
 * For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
 
-### Host Map
+## Host Map
 {: #hostmap}
 
 ![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
 
-The Host Map can be found under the Infrastructure menu and offers the ability to: 
+The Host Map can be found under the Infrastructure menu and offers the ability to:
 
 * Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
 * Identify outliers
@@ -83,7 +83,7 @@ For each incident users can:
 * Claim it
 * Increase/decrease priority
 * Comment
-* See similar incidents 
+* See similar incidents
 * <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
 * @support to ask for assistance
 
@@ -96,7 +96,7 @@ For each incident users can:
 
 Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
 
-* Synchronous mousing across all graphs in a dashboard.	
+* Synchronous mousing across all graphs in a dashboard.
 * Vertical bars are events in the context of the metric.
 * Click & drag on a graph to zoom-in on a particular time-frame.
 * As you hover over the graph the event stream moves with you.
@@ -118,7 +118,7 @@ without access to your data or any other information (via the cog in the upper r
 metric is above or below a certain threshold:
 
 * Across your entire infrastructure
-* Per machine (average, max, min, or sum) 
+* Per machine (average, max, min, or sum)
 * Applies to any metric you want, revenue: data center temperature, etc.
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
@@ -134,4 +134,3 @@ Currently, yes:
 launching the Agent (intial reporting may take a few minutes, but not longer than 10).
 2. If you have custom metrics, you can indicate specifically where
 to pull the data from.
-

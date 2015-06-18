@@ -1,5 +1,6 @@
 ---
 title: Screenboards API
+kind: documentation
 sidebar:
   nav:
     - header: Overview
@@ -27,22 +28,24 @@ Endpoints
 ======================================================
 -->
 
-<h2 id="endpoints">Endpoints</h2>
+## Endpoints
 
 - create: `POST /api/v1/screen`
 - read: `GET /api/v1/screen/{board_id}`
 - update: `PUT /api/v1/screen/{board_id}`
 - delete: `DELETE /api/v1/screen/{board_id}`
 - sharing `GET /api/v1/screen/share/{board_id}`
+- revoke sharing `DELETE /api/v1/screen/share/{board_id}`
 
 For `create`/`read`/`update` endpoints, the body is one JSON payload describing the Screenboard.
 
-<h4>Base Payload:</h4>
+#### Base Payload:
 
 <%= snippet_code_block "sb-payload-example.js" %>
 
 
-<h2 id="notes">General Notes</h2>
+## General Notes
+{: #notes}
 
 ### Sizing and positioning
 
@@ -76,7 +79,8 @@ The final "base" payload of a templated board would look like this:
 <%= snippet_code_block "sb-payload-tpl-example.js" %>
 
 
-<h2 id="usage">API Usage</h2>
+## API Usage
+{: #usage}
 
 The Screenboard API is supported in the Python and Ruby clients as well as with simple `curl` commands.
 
@@ -94,10 +98,14 @@ CREATE SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_create-python">
 <%= python <<EOF
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
 
 board = {
     "width": 1024,
@@ -115,7 +123,7 @@ board = {
     ]
 }
 
-result = api.create_screenboard(board)
+result = api.Screenboard.create(**board)
 EOF
 %>
 </div>
@@ -191,10 +199,15 @@ UPDATE SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_update-python">
 <%= python <<EOF
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
+
 board_id = 1234
 
 updated_board = {
@@ -213,7 +226,7 @@ updated_board = {
     ]
 }
 
-result = api.update_screenboard(board_id, updated_board)
+result = api.Screenboard.update(board_id, **updated_board)
 EOF
 %>
 </div>
@@ -292,13 +305,18 @@ GET SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_get-python">
 <%= python <<EOF
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
+
 board_id = 1234
 
-result = api.get_screenboard(board_id)
+result = api.Screenboard.get(board_id)
 EOF
 %>
 </div>
@@ -345,13 +363,18 @@ DELETE SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_delete-python">
 <%= python <<EOF
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
+
 board_id = 1234
 
-result = api.delete_screenboard(board_id)
+result = api.Screenboard.delete(board_id)
 EOF
 %>
 </div>
@@ -398,14 +421,18 @@ SHARE SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_share-python">
 <%= python <<EOF
-from dogapi import dog_http_api as api
+from datadog import initialize, api
 
-api.api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
-api.application_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
+
+initialize(**options)
+
 board_id = 1234
 
-result = api.share_screenboard(board_id)
-# result = {"board_id": board_id, "public_url": "https://path/to/sb"}
+result = api.Screenboard.share(board_id)
 EOF
 %>
 </div>

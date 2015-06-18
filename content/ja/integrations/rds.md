@@ -1,78 +1,104 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/06/10
+translation_status: complete
 language: ja
 title: Datadog-AWS RDS インテグレーション
-title: Datadog-AWS RDS Integration
 integration_title: AWS RDS
 kind: integration
 ---
 
-In this HOWTO you will learn how to best integrate AWS Relational
-Database Service (RDS) with Datadog.
+<!-- In this HOWTO you will learn how to best integrate AWS Relational
+Database Service (RDS) with Datadog. -->
 
-<h2>How this works</h2>
+このHOWTOでは、Datadogを使ってAWS Relational Database Service(RDS)を監視する方法を紹介します。 　
 
-RDS provides database instances and reports
-instance metrics via Cloudwatch. Cloudwatch metrics are collected at
-most one per minute and do not provide a comprehensive coverage of RDS
-performance.
 
-To get real-time metrics from your MySQL or PostgreSQL instances you
-will need to use a Datadog agent that connects to your RDS instances.
-Because the agent metrics will be tied to the instance where the agent
-is running and not to the actual RDS instance, you will need to use
-the <code>dbinstanceidentifer</code> tag to connect all metrics
-together.
+<!-- ## How this works -->
 
-Once the agent is configured with the same tags as the RDS instance,
-getting MySQL/PostgreSQL metrics in the context of RDS metrics is child's
-play.
+## AWS RDSのメトリクを包括的に収集する仕組み
 
-<h2>Step-by-step</h2>
+<!-- RDS provides database instances and reports instance metrics via Cloudwatch. Cloudwatch metrics are collected at most one per minute and do not provide a comprehensive coverage of RDS performance.
 
-<h3>1. Gather connection details for your RDS instance</h3>
+To get real-time metrics from your MySQL or PostgreSQL instances you will need to use a Datadog agent that connects to your RDS instances.  Because the agent metrics will be tied to the instance where the agent
+is running and not to the actual RDS instance, you will need to use the `dbinstanceidentifer` tag to connect all metrics together.
 
-First navigate to the AWS Console and open the RDS section to find the
-RDS instance you want to monitor. It should look like:
+Once the agent is configured with the same tags as the RDS instance, getting MySQL/PostgreSQL metrics in the context of RDS metrics is child's play. -->
+
+RDSは、データベース·インスタンスとCloudWatch経由でインスタンスに関するメトリクスのレポートを提供します。CloudWatchのメトリックは、最も収取頻度を上げても1回/1分で、RDSのパフォーマンスについて包括的なガバレッジを提供できているとは言い難いです。
+
+起動中のMySQLやPostgreSQLのRDSインスタンスからのリアルタイムのメトリックを取得するには、これらにRDSインスタンスに接続することができるDatadog Agentが必要です。一般的にDatadog Agentは、Agentが動作しているインスタンスのメトリクスに紐付けられており外部の実RDSインスタンスには紐付けられていないため、このような場合には、`dbinstanceidentifer`タグを設定し、収集したメトリクスの整合性をとる必要があります。
+
+監視対象となるRDSインスタンスのタグを、Datadog Agent上の`dbinstanceidentifer`タグに設定が完了すれば、MySQL/PostgreSQLのメトリクスをRDSメトリクスとして収集することは、非常に簡単な作業なります。
+
+
+<!-- ## Step-by-step -->
+
+## 設定手順
+
+<!-- ### 1. Gather connection details for your RDS instance -->
+
+### 1. RDSインスタンスに接続するための情報を収集します
+
+<!-- First navigate to the AWS Console and open the RDS section to find the RDS instance you want to monitor.  It should look like:
 
 <img src="/static/images/rds-console.png" style="width:100%; border:1px solid #777777"/>
 
-Write down the endpoint URL
-(e.g. <strong>mysqlrds.blah.us-east1.rds.amazonaws.com:3306</strong>);
+Write down the endpoint URL(e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**);
 You will need it when you configure the agent.
 
-Also make a note of the <code>DB Instance identifier</code>
-(e.g. <strong>mysqlrds</strong>). You will need it to create
-graphs and dashboards.
+Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**).  You will need it to create graphs and dashboards. -->
+
+AWSコンソールからRDSのセクションを開き、監視するRDSインスタンスを見つけます。以下のような情報が表示されるはずです。
+
+<img src="/static/images/rds-console.png" style="width:100%; border:1px solid #777777"/>
+
+RDSにアクセスするためのエンドポイントURL(例 **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**)を書き留めます。
+以後、Datadog Angetを設定するときに必要になります。
+
+更に`DB Instance identifier`(例: **mysqlrds**)項目を書き写しておきます。グラフやアラートを設定する際に必要になります。
 
 
-<h3>2. Configure an agent and connect to your RDS instance</h3>
+<!-- ### 2. Configure an agent and connect to your RDS instance -->
 
-The MySQL/PostgreSQL integrations support the tagging of individual
-database instances. Originally designed to allow the monitoring of
-multiple instances on the same machine, you can use these tags to your
-advantage.
+### 2. Datadog Agentを設定し、RDSインスタンスに接続します
 
-Here is an example of a configuration for MySQL RDS
-using <code>mysql.yaml</code>, usually found
-in <code>/etc/dd-agent/conf.d</code>.
+<!-- The MySQL/PostgreSQL integrations support the tagging of individual database instances.  Originally designed to allow the monitoring of multiple instances on the same machine, you can use these tags to your advantage.
+
+Here is an example of a configuration for MySQL RDS using `mysql.yaml`, usually found in `/etc/dd-agent/conf.d`.
 
 <%= snippet_code_block "rds-conf.yaml" %>
 
-Then restart the agent and verify that the new check is working by running
-<code>sudo service datadog-agent info</code> (on linux).
+Then restart the agent and verify that the new check is working by running `sudo service datadog-agent info` (on linux). -->
 
-<h3>3. Visualize RDS and MySQL/PostgreSQL metrics together</h3>
+MySQL/PostgreSQLインテグレーションは、個々のデータベースインスタンスのタグ付けをサポートしています。この機能は、もともと同ーマシン上に複数のインスタンスを起動している場合の監視を目的として設計されました。今回は、この機能を使い、先の工程で確認した情報を設定していきます。
 
-After a few minutes, RDS metrics and MySQL/PostgreSQL metrics will be
-accessible in Datadog in the Metrics Explorer, in Graphs and in
-Alerts.
+以下は、MySQL RDSインスタンスを監視するための`mysql.yaml`の設定例です。`mysql.yaml`は、`/etc/dd-agent/conf.d`のディレクトリ以下に保存されています。
 
-Here's an example of a graph displaying I/O for the instance <code>mysqlrds</code> using the <code>dbinstanceidentifier</code> tag.
+<%= snippet_code_block "rds-conf.yaml" %>
+
+設定ファイルの変更が終わったら、Datadog Agentを再起動します。`sudo service datadog-agent info` (on linux)を実行し、MySQLのCheckが正しく動作しているかを確認します。
+
+
+<!-- ### 3. Visualize RDS and MySQL/PostgreSQL metrics together -->
+
+### 3. RDSとMySQL/PostgreSQLのメトリクスを可視化します
+
+<!-- After a few minutes, RDS metrics and MySQL/PostgreSQL metrics will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts.
+
+Here's an example of a graph displaying I/O for the instance `mysqlrds` using the `dbinstanceidentifier` tag.
+
+<img src="/static/images/rds-example.png" style="width:100% border:1px #777777"/> -->
+
+5分ぐらいするとRDSとMySQL/PostgreSQLのメトリックは、Datadogで使用出来るようになり、Metrics Explorerで検索したり、グラフやアラートで指定できるようになります。
+
+以下は、`dbinstanceidentifier`タグを使用して`mysqlrds`インスタンスのI/Oをグラフ表示する例です。
 
 <img src="/static/images/rds-example.png" style="width:100% border:1px #777777"/>
 
-<h2>What's next?</h2>
+<!-- ## What's next? -->
 
-Not working? Have questions for us? Please contact our <a href="mailto:support@datadoghq.com">support team</a>.
+## 最後に
+
+<!-- Not working? Have questions for us? Please contact our [support team](mailto:support@datadoghq.com). -->
+
+このドキュメント通りに作業をしてもメトリクスを収集できない場合や質問がある場合は、Datadogの[サポートチーム](mailto:support@datadoghq.com) に連絡してみてください。
