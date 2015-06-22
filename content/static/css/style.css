@@ -60,7 +60,7 @@ h1, h2, h3 {
 }
 
 .nav.search {
-	margin-top: 60px;
+  margin-top: 60px;
 }
 .nav.search .nav-header:first-child {
       border-radius: 4px 4px 0 0;
@@ -122,73 +122,73 @@ h1#pagetitle {
 
 .navbar-inverse .nav li > a.flexbutton,
 .navbar-inverse .nav li > a.blueflex {
-	display: inline-block;
-	margin: 0 6px;
-	padding: 6px 18px;
-	height: 24px;
-	line-height: 24px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #fff;
-	text-decoration: none;
-	background: #9d6ebf;
-	border: 1px solid #774aa4; /*#653f8c #543473*/
+  display: inline-block;
+  margin: 0 6px;
+  padding: 6px 18px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  background: #9d6ebf;
+  border: 1px solid #774aa4; /*#653f8c #543473*/
 
-	-webkit-text-shadow: 0 1px 0 #3c2552;
-	-moz-text-shadow: 0 1px 0 #3c2552;
-	-ms-text-shadow: 0 1px 0 #3c2552;
-	-o-text-shadow: 0 1px 0 #3c2552;
-	text-shadow: 0 1px 0 #3c2552;
+  -webkit-text-shadow: 0 1px 0 #3c2552;
+  -moz-text-shadow: 0 1px 0 #3c2552;
+  -ms-text-shadow: 0 1px 0 #3c2552;
+  -o-text-shadow: 0 1px 0 #3c2552;
+  text-shadow: 0 1px 0 #3c2552;
 
-	-webkit-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-ms-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 #ab8fc7, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 
-	-webkit-border-radius: 18px;
-	-moz-border-radius: 18px;
-	-ms-border-radius: 18px;
-	-o-border-radius: 18px;
-	border-radius: 18px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+  border-radius: 18px;
 }
 
 .navbar-inverse .nav li > a.flexbutton:hover {
-	background: #aa7ad0;
+  background: #aa7ad0;
 
-	-webkit-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-ms-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 #bba4d1, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-inverse .nav li > a.blueflex {
 
-	background: #5be;
-	border-color: #39c;
+  background: #5be;
+  border-color: #39c;
 
-	-webkit-text-shadow: 0 -1px 0 #4ad;
-	-moz-text-shadow: 0 -1px 0 #4ad;
-	-ms-text-shadow: 0 -1px 0 #4ad;
-	-o-text-shadow: 0 -1px 0 #4ad;
-	text-shadow: 0 -1px 0 #4ad;
+  -webkit-text-shadow: 0 -1px 0 #4ad;
+  -moz-text-shadow: 0 -1px 0 #4ad;
+  -ms-text-shadow: 0 -1px 0 #4ad;
+  -o-text-shadow: 0 -1px 0 #4ad;
+  text-shadow: 0 -1px 0 #4ad;
 
-	-webkit-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-ms-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 #cde, 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-inverse .nav li > a.blueflex:hover {
-	background: #6cf;
+  background: #6cf;
 
-	-webkit-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-ms-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	-o-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 #def, 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
 }
 
 #signin, #signup {
