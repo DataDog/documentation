@@ -126,3 +126,6 @@ DEPENDENCIES
   rouge
   video_info
   w3c_validators
+
+BUNDLED WITH
+   1.10.2
