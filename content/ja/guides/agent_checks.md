@@ -278,7 +278,19 @@ file name should match the name of the check module (e.g.: `haproxy.py` and
 
 The configuration file has the following structure:
 
-<%= snippet_code_block("guides-agentchecks-config.yaml") %>
+<%= console <<EOF
+init_config:
+    key1: val1
+    key2: val2
+
+instances:
+    - username: jon_smith
+      password: 1234
+
+    - username: jane_smith
+      password: 5678
+EOF
+%>
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div> -->
 
@@ -290,7 +302,19 @@ Agent Checkには、設定ファイルがあり、その設定ファイルは`co
 
 設定ファイルは、以下のようになります:
 
-<%= snippet_code_block("guides-agentchecks-config.yaml") %>
+<%= console <<EOF
+init_config:
+    key1: val1
+    key2: val2
+
+instances:
+    - username: jon_smith
+      password: 1234
+
+    - username: jane_smith
+      password: 5678
+EOF
+%>
 
 <div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
@@ -486,7 +510,20 @@ timeout value is given for a particular URL.
 
 So our final configuration would look something like this:
 
-<%= snippet_code_block("guides-agentchecks-ex-config.yaml") %> -->
+<%= console <<EOF
+init_config:
+    default_timeout: 5
+
+instances:
+    -   url: https://google.com
+
+    -   url: http://httpbin.org/delay/10
+        timeout: 8
+
+    -   url: http://httpbin.org/status/400
+
+EOF
+%> -->
 
 
 #### 設定
@@ -499,8 +536,20 @@ So our final configuration would look something like this:
 上記をふまえ、設定ファイルは次のようになります:
 
 
-<%= snippet_code_block("guides-agentchecks-ex-config.yaml") %>
+<%= console <<EOF
+init_config:
+    default_timeout: 5
 
+instances:
+    -   url: https://google.com
+
+    -   url: http://httpbin.org/delay/10
+        timeout: 8
+
+    -   url: http://httpbin.org/status/400
+
+EOF
+%>
 <!-- #### The Check
 
 Now we can start defining our check method. The main part of the check will make
@@ -510,12 +559,37 @@ In this snippet, we start a timer, make the GET request using the
 [requests library](http://docs.python-requests.org/en/latest/) and handle and
 errors that might arise.
 
-<%= snippet_code_block("guides-agentchecks-ex-request.py") %>
+<%= console <<EOF
+# Load values from the instance config
+url = instance['url']
+default_timeout = self.init_config.get('default_timeout', 5)
+timeout = float(instance.get('timeout', default_time))
+
+# Use a hash of the URL as an aggregation key
+aggregation_key = md5(url).hexdigest()
+
+# Check the URL
+start_time = time.time()
+try:
+    r = requests.get(url, timeout=timeout)
+    end_time = time.time()
+except requests.exceptions.Timeout as e:
+    # If there's a timeout
+    self.timeout_event(url, timeout, aggregation_key)
+
+if r.status_code != 200:
+    self.status_code_event(url, r, aggregation_key)
+EOF
+%>
 
 If the request passes, we want to submit the timing to Datadog as a metric. Let's
 call it `http.response_time` and tag it with the URL.
 
-<%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
+<%= python <<EOF
+timing = end_time - start_time
+self.gauge('http.reponse_time', timing, tags=['http_check'])
+EOF
+%>
 
 Finally, we'll want to define what happens in the error cases. We have already
 seen that we call `self.timeout_event` in the case of a URL timeout and
@@ -526,8 +600,17 @@ First, we'll define `timeout_event`. Note that we want to aggregate all of these
 events together based on the URL so we will define the aggregation_key as a hash
 of the URL.
 
-<%= snippet_code_block("guides-agentchecks-ex-timeout.py") %>
-
+<%= python <<EOF
+def timeout_event(self, url, timeout, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'URL timeout',
+        'msg_text': '%s timed out after %s seconds.' % (url, timeout),
+        'aggregation_key': aggregation_key
+    })
+EOF
+%>
 Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
@@ -540,11 +623,36 @@ event method.
 
 以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理をしています。
 
-<%= snippet_code_block("guides-agentchecks-ex-request.py") %>
+<%= console <<EOF
+# Load values from the instance config
+url = instance['url']
+default_timeout = self.init_config.get('default_timeout', 5)
+timeout = float(instance.get('timeout', default_time))
+
+# Use a hash of the URL as an aggregation key
+aggregation_key = md5(url).hexdigest()
+
+# Check the URL
+start_time = time.time()
+try:
+    r = requests.get(url, timeout=timeout)
+    end_time = time.time()
+except requests.exceptions.Timeout as e:
+    # If there's a timeout
+    self.timeout_event(url, timeout, aggregation_key)
+
+if r.status_code != 200:
+    self.status_code_event(url, r, aggregation_key)
+EOF
+%>
 
 リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLを、タグとして付記します。
 
-<%= snippet_code_block("guides-agentchecks-ex-metric.py") %>
+<%= python <<EOF
+timing = end_time - start_time
+self.gauge('http.reponse_time', timing, tags=['http_check'])
+EOF
+%>
 
 最後に、エラー発生時の処理内容を定義します。
 先のコードで既に、 HTTP リクエストがタイムアウトした場合の`timeout_event` 関数と、レスポンスステータスが200
@@ -553,7 +661,17 @@ event method.
 
 まず、`timeout_event` を定義します。`self.event()` で注目してほしいのは、`'aggregation_key':` に、先のコードに出ているURLのハッシュである`aggregation_key = md5(url).hexdigest()`を設定している部分です。このaggregation_key を使って、特定のURLに関連したイベントを集約します。
 
-<%= snippet_code_block("guides-agentchecks-ex-timeout.py") %>
+<%= python <<EOF
+def timeout_event(self, url, timeout, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'URL timeout',
+        'msg_text': '%s timed out after %s seconds.' % (url, timeout),
+        'aggregation_key': aggregation_key
+    })
+EOF
+%>
 
 次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容です。
 
