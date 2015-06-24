@@ -264,7 +264,7 @@ the packets:
 
 Here's  breakdown of the fields:
 
-- `metric.name` should be a String with no colons, bars or @ characters.
+- `metric.name` should be a String with no colons, bars or @ characters and fit our [naming policy](http://docs.datadoghq.com/faq/#api).
 - `value` should be a number
 - type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
   Timer or `s` for Set.
