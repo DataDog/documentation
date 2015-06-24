@@ -5,13 +5,24 @@ language: ja
 title: Datadog-New Relic Integration
 ---
 
-#### Why do my application-level metrics have different values in New Relic and Datadog?
+#### What does the 'Collect metrics by host' option do ?
+
+When set, Datadog collects application metrics for every associated hosts,
+instead of the overall host throughput based average.
+
+This makes sense when using those metrics separately, i.e.
+"host X has aberrant error rate Y which is problematic, though application Z overall
+across many hosts has an acceptable error rate in aggregate".
+
+This also import New Relic hosts to Datadog Infrastructure section.
+
+#### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
 
 When New Relic computes the aggregate application-level value for
 metrics that are measured at the host level (e.g. response time), they
 compute a weighted average based on each host's measured throughput.
 
-The closest thing you'll see in datadog is the `avg` aggregator, which
+The closest thing you'll see in Datadog is the `avg` aggregator, which
 computes the arithmetic mean of the values. This is also the default
 aggregator, and what you'll get for the simplest query, something like
 `new_relic.web_transaction.average_response_time{*}`. If your hosts all

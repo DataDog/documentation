@@ -76,9 +76,17 @@ Next, let's set up a client library for your language.
 
   <div class="tab-pane active fade in" id="setup-python">
 First, install the module:
-<%= snippet_code_block("guides-metrics-setup-python.sh") %>
+
+<%= console <<EOF
+$ pip install datadog
+EOF
+%>
 And import it, so it's ready to use:
-<%= snippet_code_block("guides-metrics-setup.py") %>
+
+<%= python <<EOF
+from datadog import statsd
+EOF
+%>
   </div>
 
   <div class="tab-pane fade in" id="setup-ruby">
