@@ -23,7 +23,7 @@ Starting in the beta period, we’ve added a new query function called `outliers
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
 
-### 1. Show Outliers in Dashboards
+### 1. Show Outliers in Dashboards or Screenboards
 {: #dashboards}
 
 For example, here is a graph of gunicorn requests by host with outlier detection enabled:
@@ -32,7 +32,7 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
-During the beta period, to setup an outlier detection graph for your data you add two copies of the same metric to the graph: one showing all series in the group in a lightweight, greyscale color palette, and the other filtering to show outlier series only in a bold, warm color palette.
+During the beta period, to set up an outlier detection graph for your data you add two copies of the same metric to the graph: one showing all series in the group in a lightweight, greyscale color palette, and the other filtering to show outlier series only in a bold, warm color palette.
 
 To do so, create a new timeseries graph on your dashboard with two copies of the same metric. Set the first copy (all series) to color:grey, style:dotted, and stroke:thin. Set the second copy (outliers only) to color:warm, style:solid, and stroke:thick. Your screen should look like:
 
@@ -88,7 +88,7 @@ In pseudocode:
 
 ~~~ python
     median_series = pointwise_median(series_list)
-    dists = [dist(series,median_series for series in series_list]
+    dists = [dist(series,median_series) for series in series_list]
     threshold = median(dists)
 ~~~
 
@@ -118,9 +118,9 @@ Meanwhile a higher setting of alpha only identifies the host handling significan
 
 ### Median Absolute Deviation (MAD)
 
-The Median Absolute Deviation (MAD) algorithm is a robust means of calculating variability among data. It is designed to be usable for both normal and non-normal distributions.
+The [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) (MAD) algorithm is a robust method of calculating variability among data. It is designed to be usable for both normal and non-normal distributions.
 
-We use the MAD to calculate an *outlier_factor* which we will compare to points from a series. If the percentage of points in the series that are above the *outlier_factor* is greater than some given threshold, then that series will be considered an outlier.
+We use MAD to calculate an *outlier_factor* which we will compare to points from a series. If the percentage of points in the series that are above the *outlier_factor* is greater than some given threshold, then that series will be considered an outlier.
 
 The calculation of the outlier_factor is as such:
 
