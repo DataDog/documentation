@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/06/25
+translation_status: complete
 language: ja
 title: Datadog-Chef Integration
 integration_title: Chef

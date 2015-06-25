@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/06/25
-translation_status: original
+translation_status: complete
 language: ja
 title: Datadog-New Relic Integration
 integration_title: New Relic
