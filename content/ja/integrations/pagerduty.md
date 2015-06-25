@@ -21,7 +21,7 @@ doclevel: basic
 - See incidents and escalations in your stream as they occur
 - Get a daily reminder of who's on-call -->
 
-PagerDutyのメトリクスを、次のような目的なのためDatadogに送信します:
+次のような目的のために、pagerdutyのメトリクスをDatadogに送信します:
 
 - **@paperduty** を使ってメンションすることにより、イベントストリーム上でインシデントの発動ど解除
 - インシデントとエスカレーションを発生順にイベントストリームで閲覧
