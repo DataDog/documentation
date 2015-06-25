@@ -23,7 +23,7 @@ kind: integration
 
 To install the Datadog Agent via Puppet, please see [here](https://github.com/datadog/puppet-datadog-agent). -->
 
-ような目的のために、PuppetのメトリクスをDatadogに送信します:
+次のような目的のために、PuppetのメトリクスをDatadogに送信します:
 
 - Puppetクライアントからリアルタイムレポートを取得する
 - 管理しているサーバー上のPuppetのパフォーマンスメトリクスを収集する
