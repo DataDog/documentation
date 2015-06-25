@@ -20,7 +20,7 @@ kind: integration
 - Visualize your database performance.
 - Correlate the performance of PostgreSQL with the rest of your applications. -->
 
-次のような目的のために、PostgreSQLのメトリクスをDatadogに送信します:
+次の目的のために、PostgreSQLのメトリクスをDatadogに送信します:
 
 - データベースのパフォーマンスの可視化
 - PostgreSQLのパフォーマンス情報と他アプリケーションの情報を連携
@@ -31,9 +31,9 @@ kind: integration
 * [PostgreSQL YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
 * [PostgreSQL checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
 
-* [PostgreSQLインテグレーションの設定ファイルサンプ](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
+* [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
 * [PostgreSQLインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py)
 
 <!-- The following metrics are collected by default with the PostgreSQL integration:

@@ -20,7 +20,7 @@ doclevel: basic
 - Visualize your database performance
 - Correlate the performance of MySQL with the rest of your applications -->
 
-次のような目的のために、MySQLのメトリクスをDatadogに送信します:
+次の目的のために、MySQLのメトリクスをDatadogに送信します:
 
 - データベースのパフォーマンスの可視化
 - MySQLのパフォーマンス情報と他アプリケーションの情報を連携

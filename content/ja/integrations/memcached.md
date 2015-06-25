@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/25
 translation_status: original
 language: ja
 title: Datadog-Memcached Integration
@@ -20,10 +20,10 @@ doclevel: basic
 - Visualize its performance
 - Correlate the performance of Memcached with the rest of your applications -->
 
-次のような目的のために、MehcachedのメトリクスをDatadogに送信します:
+次の目的のために、MeｍcachedのメトリクスをDatadogに送信します:
 
 - パフォーマンスの可視化
-- Mehcachedのパフォーマンス情報と他アプリケーションの情報を連携
+- Meｍcachedのパフォーマンス情報と他アプリケーションの情報を連携
 
 
 <!-- From the open-source Agent:
@@ -31,7 +31,7 @@ doclevel: basic
 * [Memcache YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
 * [Memcache checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
 
 * [Memcachedインテグレーションの設定ファイルサンプ](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
 * [Memcachedインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py)
