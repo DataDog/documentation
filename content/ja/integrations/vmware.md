@@ -4,8 +4,8 @@ translation_status: original
 language: ja
 title: Datadog-VMware Integration
 integration_title: VMware
-
 kind: integration
+doclevel: basic
 ---
 
 ### Overview

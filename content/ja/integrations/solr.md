@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Solr Integration
+integration_title: Solr
+doclevel: basic
+kind: integration
 ---
 
 For information on Solr, please see [here](http://docs.datadoghq.com/integrations/java/).
