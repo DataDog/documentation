@@ -1,11 +1,23 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/25
 translation_status: original
 language: ja
 title: Datadog-New Relic Integration
+integration_title: New Relic
+kind: integration
+doclevel:
 ---
 
-#### What does the 'Collect metrics by host' option do ?
+## 概要
+{: #int-overview}
+
+次のような目的のために、New RelicのメトリクスをDatadogに送信します:
+
+- New Relic キーメトリクス(レスポンス時間、Apdexスコアなど)をDatadogで収取したメトリクスと連携
+- New Relic が検知したアラートをイベントストリームにも表示
+
+
+<!-- #### What does the 'Collect metrics by host' option do ?
 
 When set, Datadog collects application metrics for every associated hosts,
 instead of the overall host throughput based average.
@@ -14,9 +26,16 @@ This makes sense when using those metrics separately, i.e.
 "host X has aberrant error rate Y which is problematic, though application Z overall
 across many hosts has an acceptable error rate in aggregate".
 
-This also import New Relic hosts to Datadog Infrastructure section.
+This also import New Relic hosts to Datadog Infrastructure section. -->
 
-#### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
+#### *「Collect metrics by host」* オプションの効能
+
+このオプションを設定することよにより、Datadog側では関連ずけられた全てのホストのアプリケーションメトリクスを収集するようになります。(オプションを設定していない状態では、下記に示す"overall host throughput based average"になります。)
+
+メトリクスを個別に扱おうとしている場合は、この方法の方が理にかなっています。例えば、ホストXが問題となるようなエラー率値Yになってるにも関わらず、各ホストに分散するアプリケーションZの集約したエラー率は、容認範囲に収まっている場合がその例です。
+
+
+<!-- #### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
 
 When New Relic computes the aggregate application-level value for
 metrics that are measured at the host level (e.g. response time), they
@@ -49,5 +68,32 @@ New Relic would compute the application-level response time as follows:
     average response time = (73200 + 77500 + 1500) / 645 = 236.0 ms
 
 Whereas we would simply compute the arithmetic mean:
+
+    average response time = (240 + 250 + 50) / 3 = 180.0 ms -->
+
+#### *「Collect metrics by host」* オプションを有効にしています。なぜapplication-levelのメトリクスの示す値がNew RelicとDatadogで違っているのですか。
+
+New Relicが、ホストレベルで測定されたメトリクス(例えば、レスポンス時間)のapplication-levelの集計値のを計算する際、各ホストで測定されたスループットに基づいて加重平均を計算します。
+
+Datadogで最も類似した集計処理が `avg` になりますが、この処理は値の単純平均を計算しています。この処理は、デフォルトの集計処理で、`new_relic.web_transaction.average_response_time{*}` ようなシンプルな集計処理でよく使われます。
+もしも全てのホストがほぼ同じスループットで動作しているなら、Datadogの平均も、Nwe Relicのスループット加重の集計も似たような値を算出するでしょう。しかし、スループットがそれほど均一でない場合は、application-levelの集計値に無視できないほど開きがでるでしょいう。
+
+例えば、3台のホストで構成されているアプリケーションがあるとします。ある時点で、次のようなメトリクス値になっていたとします:
+
+               throughput    response time
+    hostA         305 rpm           240 ms
+    hostB         310 rpm           250 ms
+    hostC          30 rpm            50 ms
+
+New Relicでは、application-levelレスポンス時間を次のように計算しています:
+
+    hostA: 240 ms * 305 rpm = 73200 total time
+    hostB: 250 ms * 310 rpm = 77500 total time
+    hostC:  50 ms *  30 rpm =  1500 total time
+
+    total throughput = 305 + 310 + 30 = 645 rpm
+    average response time = (73200 + 77500 + 1500) / 645 = 236.0 ms
+
+Datadogでは、以下のようにレスポンス時間の単純平均を計算しています:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
