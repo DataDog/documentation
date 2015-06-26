@@ -98,7 +98,7 @@ HTTP CHECK CONFIGURATION
 
 The HTTP(S) Check configuration file has the following structure:
 
-<%= snippet_code_block("guides-http_check-config.yaml") %>
+<%= snippet_code_block("guides-http_check-config.yaml", :nocomments => true) %>
 
 <div class="alert alert-block">Note: Your YAML files must use spaces instead of tabs.</div>
 
@@ -124,7 +124,7 @@ the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
 
 For example, if you have the following configuration for window and threshold:
 
-<%= snippet_code_block("guides-http_check-notify.yaml") %>
+<%= snippet_code_block("guides-http_check-notify.yaml", :nocomments => true) %>
 
 You will only be notified if the check fails 3 times within the last 5 tries.
 
@@ -140,7 +140,7 @@ TCP CHECK CONFIGURATION
 
 The TCP Check configuration file has the following structure:
 
-<%= snippet_code_block("guides-tcp_check-config.yaml") %>
+<%= snippet_code_block("guides-tcp_check-config.yaml", :nocomments => true) %>
 
 #### instances
 
@@ -163,7 +163,7 @@ the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
 
 For example, if you have the following configuration for window and threshold:
 
-<%= snippet_code_block("guides-tcp_check-notify.yaml") %>
+<%= snippet_code_block("guides-tcp_check-notify.yaml", :nocomments => true) %>
 
 You will only be notified if the check fails 3 times within the last 5 tries.
 
