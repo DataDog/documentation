@@ -16,7 +16,7 @@ doclevel: basic
 ### 概要
 {:#int-overview}
 
-次の目的でBtrfsのコミット情報をDatadogと連携します:
+次の目的で、BtrfsのメトリクスをDatadogに送信します:
 
 * Btrfsファイルシステムのパフォーマンスの可視化
 * Btrfsファイルシステムのパフォーマンス情報と他アプリケーションの情報を連携
