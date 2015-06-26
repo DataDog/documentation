@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: System Integrations
+integration_title: System
+kind: integration
+doclevel: basic
 sidebar:
   nav:
     - header: Integrations
