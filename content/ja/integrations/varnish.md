@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Varnish Integration
+integration_title: Varnish
+kind: integration
+doclevel: basic
 sidebar:
   nav:
     - header: Integrations
@@ -22,7 +25,7 @@ From the open-source Agent:
 
 * [Varnish YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
 * [Varnish checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py)
-* 
+*
 The following metrics are collected by default with the Varnish integration:
 
     varnish.accept_fail

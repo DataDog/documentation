@@ -1,9 +1,11 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/06/25
 translation_status: original
 language: ja
-last_modified: 2015/03/31
 title: Datadog-RabbitMQ Integration
+integration_title: RabbitMQ
+doclevel: basic
+kind: integration
 ---
 
 ### Overview

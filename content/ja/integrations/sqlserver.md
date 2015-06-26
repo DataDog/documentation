@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-SQL Server Integration
+integration_title: SQL Server
+doclevel: basic
+kind: integration
 ---
 
 ### Overview
