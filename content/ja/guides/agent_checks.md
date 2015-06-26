@@ -434,12 +434,26 @@ To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
 simple, including no real information. This will go into `conf.d/hello.yaml`:
 
-<%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
+<%= console <<EOF
+init_config:
+
+instances:
+    [{}]
+
+EOF
+%>
 
 The check itself will inherit from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This will go in `checks.d/hello.py`:
 
-<%= snippet_code_block("guides-agentchecks-hello.py") %>
+<%= python <<EOF
+from checks import AgentCheck
+class HelloCheck(AgentCheck):
+    def check(self, instance):
+        self.gauge('hello.world', 1)
+
+EOF
+%>
 
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
@@ -454,12 +468,25 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 
 まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、次の3行のみの非常にシンプな内容になります:
 
-<%= snippet_code_block("guides-agentchecks-hello-config.yaml") %>
+<%= console <<EOF
+init_config:
+
+instances:
+    [{}]
+
+EOF
+%>
 
 HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に配置します:
 
-<%= snippet_code_block("guides-agentchecks-hello.py") %>
+<%= python <<EOF
+from checks import AgentCheck
+class HelloCheck(AgentCheck):
+    def check(self, instance):
+        self.gauge('hello.world', 1)
 
+EOF
+%>
 ごのようにCheckのインタフェースは、シンプルで、簡単に使い始めることができす。
 
 次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を送信するCheckを書いてみることにします。
@@ -614,7 +641,18 @@ EOF
 Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
-<%= snippet_code_block("guides-agentchecks-ex-status.py") %> -->
+<%= python <<EOF
+def status_code_event(self, url, r, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_text': '%s returned a status of %s' % (url, r.status_code),
+        'aggregation_key': aggregation_key
+    })
+EOF
+%>
+ -->
 
 #### Check 本体
 
@@ -675,7 +713,17 @@ EOF
 
 次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容です。
 
-<%= snippet_code_block("guides-agentchecks-ex-status.py") %>
+<%= python <<EOF
+def status_code_event(self, url, r, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_text': '%s returned a status of %s' % (url, r.status_code),
+        'aggregation_key': aggregation_key
+    })
+EOF
+%>
 
 
 <!-- #### Putting It All Together
@@ -694,7 +742,7 @@ You'll see what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 
-<%= snippet_code_block("guides-agentchecks-ex-all.py") %>
+<%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
  -->
 
 #### 今までの解説をまとめると
@@ -712,7 +760,7 @@ Agent のroot から、次のコマンドでテストを実行します:
 
 チェックの完全なソースは次のとおりです。
 
-<%= snippet_code_block("guides-agentchecks-ex-all.py") %>
+<%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
 
 
 <!--
