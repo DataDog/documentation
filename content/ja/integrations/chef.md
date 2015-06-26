@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/06/25
+translation_status: complete
 language: ja
 title: Datadog-Chef Integration
 integration_title: Chef
@@ -8,13 +8,27 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
-{:#int-overview}
+<!-- ### Overview
+{:#int-overview} -->
 
-Connect Chef to Datadog in order to:
+## 概要
+{: #int-overview}
+
+
+<!-- Connect Chef to Datadog in order to:
 
 - Get real-time reports on Chef client runs.
 - Track key Chef performance metrics across all your servers.
 - Quickly identify and discuss failed Chef runs with your team.
 
-To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/).
+To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
+
+次のような目的のために、ChefのメトリクスをDatadogに送信します:
+
+- Chefクライアントからリアルタイムレポートを取得する
+- 管理しているサーバー上のChefのパフォーマンスメトリクスを収集する
+- 期待どうりに完了しなかったChefの実行を検知し、チームと検討する
+
+<!-- To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
+
+Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/guides/chef/)を参照してください。

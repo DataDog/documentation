@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Riak Integration
+integration_title: Riak
+doclevel: basic
+kind: integration
 ---
 
 ### Overview

@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Process check
+integration_title: Process
+doclevel: basic
+kind: integration
 ---
 
 ### Overview

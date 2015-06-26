@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Splunk Integration
 integration_title: Splunk
 kind: integration
+doclevel: basic
 ---
 
 ### Overview
