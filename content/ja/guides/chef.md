@@ -112,7 +112,7 @@ Including one of these recipes in your run list will install any monitoring depe
 
 Here's an example of how we've extended a `webserver.rb` role file to automatically monitor Apache via Datadog:
 
-<%= snippet_code_block("guides-chef-integration-apache.rb") %>
+<%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
 
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to controle what instances of Apache should be monitored by Datadog.
 
