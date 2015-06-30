@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/06/30
-translation_status: original
+translation_status: complete
 language: ja
 title: Directory check
 integration_title: Directory Check
