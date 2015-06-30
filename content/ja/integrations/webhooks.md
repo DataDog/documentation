@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Webhooks Integration
 integration_title: Webhooks
 kind: integration
+doclevel: basic
 ---
 
 ### Overview

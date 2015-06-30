@@ -20,6 +20,7 @@ doclevel: complete
 
 ## 概要
 {: #int-overview}
+
 ActiveMQyよりリアルタイムでメトリクスを収取します。
 
 * ActiveMQサーバーのパフォーマンスを可視化します。
