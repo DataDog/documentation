@@ -5,6 +5,7 @@ language: ja
 title: Datadog-CouchDB Integration
 integration_title: CouchDB
 kind: integration
+doclevel:
 ---
 
 <!-- ### Overview
