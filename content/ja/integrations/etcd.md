@@ -1,11 +1,21 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/06/30
+translation_status: complete
 language: ja
 title: Datadog-etcd Integration
 integration_title: etcd
 kind: integration
+doclevel:
 ---
+
+<!-- ### Overview
+{:#int-overview}
+
+Capture etcd metrics in Datadog to:
+
+- Monitor the health of your etcd cluster.
+- Know when host configurations may be out of sync.
+- Correlate the performance of etcd with the rest of your applications. -->
 
 ### Overview
 {:#int-overview}
@@ -16,10 +26,50 @@ Capture etcd metrics in Datadog to:
 - Know when host configurations may be out of sync.
 - Correlate the performance of etcd with the rest of your applications.
 
+
+<!-- From the open-source Agent:
+
+* [etcd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
+* [etcd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py) -->
+
 From the open-source Agent:
 
 * [etcd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
 * [etcd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py)
+
+
+<!-- The following metrics are collected by default with the etcd integration:
+
+    etcd.store.gets.success
+    etcd.store.gets.fail
+    etcd.store.sets.success
+    etcd.store.sets.fail
+    etcd.store.delete.success
+    etcd.store.delete.fail
+    etcd.store.update.success
+    etcd.store.update.fail
+    etcd.store.create.success
+    etcd.store.create.fail
+    etcd.store.compareandswap.success
+    etcd.store.compareandswap.fail
+    etcd.store.compareanddelete.success
+    etcd.store.compareanddelete.fail
+    etcd.store.expire.count
+    etcd.store.watchers
+    etcd.self.recv.appendrequest.count
+    etcd.self.send.appendrequest.count
+
+Plus the following metrics for leader nodes (note that these values will be undefined for single-member clusters):
+
+    etcd.self.send.pkgrate
+    etcd.self.send.bandwidthrate
+
+And these metrics for follower nodes:
+
+    etcd.self.recv.pkgrate
+    etcd.self.recv.bandwidthrate
+
+Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status. -->
 
 The following metrics are collected by default with the etcd integration:
 
