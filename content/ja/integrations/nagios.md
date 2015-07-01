@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Nagios Integration
 integration_title: Nagios
 kind: integration
+doclevel:
 ---
 
 ### Overview

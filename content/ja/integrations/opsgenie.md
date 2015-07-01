@@ -5,6 +5,7 @@ language: ja
 title: Datadog-OpsGenie Integration
 integration_title: OpsGenie
 kind: integration
+doclevel:
 ---
 
 <!-- <style>

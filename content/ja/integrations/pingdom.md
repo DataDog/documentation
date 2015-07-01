@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Pingdom Integration
 integration_title: Pingdom
 kind: integration
+doclevel:
 ---
 
 ### Overview

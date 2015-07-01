@@ -5,6 +5,7 @@ language: ja
 title: Datadog-SNMP インテグレーション
 integration_title: SNMP チェック
 kind: integration
+doclevel:
 sidebar:
   nav:
     - header: SNMP インテグレーション

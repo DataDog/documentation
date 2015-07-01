@@ -6,6 +6,7 @@ title: Datadog-PostgreSQL Integration
 integration_title: PostgreSQL
 doclevel: basic
 kind: integration
+doclevel:
 ---
 
 <!-- ### Overview
