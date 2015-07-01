@@ -3,23 +3,23 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Lighttpd Integration
+integration_title: Lighttpd
+kind: integration
+doclevel:
 ---
-<div id="int-overview">
-<h3>Overview</h3>
+
+### Overview
+{:#int-overview}
 
 Bring Lighttpd metrics to Datadog to:
-<ul>
-<li> Visualize your web server performance.</li>
-<li> Correlate the performance of Ligttpd with the rest of your applications.</li>
-</ul>
-</div>
+
+- Visualize your web server performance.
+- Correlate the performance of Ligttpd with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/lighttpd.yaml.example">
-Lighttpd YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/lighttpd.py">
-Lighttpd checks.d</a>
+* [Lighttpd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/lighttpd.yaml.example)
+* [Lighttpd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/lighttpd.py)
 
 The following metrics are collected by default with the Lighttpd integration:
 
