@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/09
+last_modified: 2015/07/01
 translation_status: original
 language: ja
 title: Datadog-Cacti Integration
@@ -22,7 +22,7 @@ Connect Cacti to Datadog to:
 次の目的でCactiのコミット情報をDatadogと連携します:
 
 * Cactiファイルシステムのパフォーマンスの可視化
-* Cactiファイルシステムのパフォーマンス情報と他アプリケーションの情報を連携
+* Cactiファイルシステムのパフォーマンス情報と他アプリケーションとの情報の連携
 
 
 <!-- From the open-source Agent:

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-Elasticsearch Integration
@@ -21,7 +21,7 @@ Connect ElasticSearch to Datadog in order to:
 
 次の目的で、ElasticSearchをDatadogと連携します:
 
-* ElasticSearchのパフォーマンス情報の可視化する
+* ElasticSearchのパフォーマンス情報を可視化する
 * ElasticSearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
 
 <!-- From the open-source Agent:

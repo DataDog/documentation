@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/26
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-btrfs Integration
@@ -19,4 +19,4 @@ doclevel: basic
 次の目的で、BtrfsのメトリクスをDatadogに送信します:
 
 * Btrfsファイルシステムのパフォーマンスの可視化
-* Btrfsファイルシステムのパフォーマンス情報と他アプリケーションの情報を連携
+* Btrfsファイルシステムのパフォーマンス情報と他アプリケーションとの情報の連携
