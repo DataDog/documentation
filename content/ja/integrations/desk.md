@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-Desk Integration
@@ -23,7 +23,7 @@ Connect Desk to Datadog to:
 次の目的で、DeskとDatadogを連携します:
 
 - Deskで発生した新しいイベントをDatadogのイベントストリームで表示する
-- ユーザーやステータスごとのケース統計を可視化します
+- ユーザーやステータスごとのケース統計を可視化する
 - サポートチケットのトレンドを、DevOpsの問題点と合わせて把握する
 
 
@@ -43,7 +43,7 @@ Hit the install button, and then you're all set! You will soon be able to select
 ### 設定
 {:#int-configuration}
 
-Deskのアカウントにログインし、`Setting` -> `API` -> `My Application` ページと移動し、APIアプリケーションを追加を追加します。(この操作には、Admin権限が必要です。)
+Deskのアカウントにログインし、`Setting` -> `API` -> `My Application` ページと移動し、APIアプリケーションを追加します。(この操作には、Admin権限が必要です。)
 
 以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成してくれます。
 

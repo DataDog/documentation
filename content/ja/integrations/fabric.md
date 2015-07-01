@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-Fabric Integration
@@ -21,5 +21,5 @@ Connect Fabric to Datadog in order to:
 
 次の目的で、FabricをDatadogと連携します:
 
-* イベントストリーム内で、ディプロイに関するイベントを表示検索するため
-* ダッシュボード上で、ディプロイに関するイベントとメトリクスの変化を同時に把握できるようにするため
+* イベントストリーム内で、デプロイに関するイベントを表示検索するため
+* ダッシュボード上で、デプロイに関するイベントとメトリクスの変化を同時に把握できるようにするため
