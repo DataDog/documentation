@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: original
 language: ja
 title: Datadog-Lighttpd Integration
+integration_title: Lighttpd
+kind: integration
+doclevel:
 ---
 
 ### Overview
