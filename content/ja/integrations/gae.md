@@ -24,5 +24,5 @@ You can also send custom metrics to Datadog. -->
 * Google App Engine servicesのメトリクス(memcache, task queues, datastores)をDatadog側でも表示するため。
 * リクエストに関するメトリクスを表示するため。(例:display percentiles, latency, cost)
 * Google App Engine metricsをバージョンごとにタグ付けし、異なるバージョン間のパフォーマンスの差を比較するため。
-* 
+
 又、カスタムメトリクスをDatadogに送信することもできます。
