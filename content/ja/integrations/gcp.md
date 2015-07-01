@@ -22,4 +22,4 @@ doclevel: basic
 
 * Google Compute Engineのホストを、インフラストラクチャービューに表示する。
 * Google Compute Engineのホストタグをインポートする。
-* Google Compute Engine hostにGCE専用のメタデータータグ(例:zone)を付記する。
+* Google Compute EngineのホストにGCE専用のメタデータータグ(例:zone)を付記する。
