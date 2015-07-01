@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/07/01
+translation_status: complete
 language: ja
 title: Datadog-Fluentd Integration
 integration_title: Fluentd
@@ -8,10 +8,16 @@ kind: integration
 doclevel: basic
 ---
 
-
-
-
-Get metrics from Fluentd in real time to
+<!-- Get metrics from Fluentd in real time to
 
 * Visualize Fluentd performance.
-* Correlate the performance of Fluentd with the rest of your applications.
+* Correlate the performance of Fluentd with the rest of your applications. -->
+
+### 概要
+{:#int-overview}
+
+Get metrics from Fluentd in real time to:
+次の目的で、Fluentdのメトリクスをリアルタイムで収取します:
+
+* Fluentdのパフォーマンスを可視化する
+* Fluentdのパフォーマンスを他のアプリケーションと連携し状況を把握する
