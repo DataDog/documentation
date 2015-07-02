@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/07/02
+translation_status: complete
 language: ja
 title: Datadog-Jenkins Integration
 integration_title: Jenkins

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/07/02
 translation_status: original
 language: ja
 title: "JMX Checks"
