@@ -8,9 +8,21 @@ kind: integration
 doclevel: basic
 ---
 
-Connect mParticle to Datadog and see the following information in real-time in your Datadog dashboard:
+<!-- Connect mParticle to Datadog and see the following information in real-time in your Datadog dashboard:
 
 * Crash Reports
 * 3rd Party Network Performance Data
 * Active Session Details
-* Device CPU, Memory, and Battery Utilization
+* Device CPU, Memory, and Battery Utilization -->
+
+### 概要
+{:#int-overview}
+
+Connect mParticle to Datadog and see the following information in real-time in your Datadog dashboard:
+
+mParticleとDatadogを連携し、ダッシュボードにリアルタイムで以下の情報が表示できるようにします:
+
+* クラッシュレポート(アプリの障害レポート)
+* 3rd Party Network パフォーマンス
+* アクティブなセッションの詳細
+* 端末のCPU、 Memory、 Battery 活用状況など
