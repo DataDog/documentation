@@ -2,7 +2,7 @@
 last_modified: 2015/05/27
 translation_status: complete
 language: ja
-title: Agent Checkの書き方 (イベントの送信)
+title: Agent Checkの書き方
 kind: guide
 listorder: 5
 sidebar:
