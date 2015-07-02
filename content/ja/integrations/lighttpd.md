@@ -21,7 +21,7 @@ Bring Lighttpd metrics to Datadog to:
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 
-- webサーバーのパフォーマンスの可視化
+- webサーバーのパフォーマンスの可視化する
 - lighttpdのメトリクスと他のアプリケーションメトリクスを連携し、状況を把握する
 
 
