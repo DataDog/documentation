@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-ExpressJS Integration
@@ -16,7 +16,7 @@ doclevel: basic
 ### 概要
 {:#int-overview}
 
-次の目的で、ExpressJSから収取したメトリクスをDatadogへ送信します:
+次の目的で、ExpressJSから収集したメトリクスをDatadogへ送信します:
 
 * レスポンス時間に基づいてアラートを発生させる
 * レスポンスコードを監視する

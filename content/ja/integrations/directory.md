@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Directory check
@@ -22,7 +22,7 @@ Capture metrics from the files in given directories:
 
 特定ディレクトリ内のファイルに関するメトリクスをDatadogへ送信します:
 
-- ディレクトリー内のファイル数
+- ディレクトリ内のファイル数
 - ファイルサイズ
 - ファイルの修正からの時間
 - ファイルの作成からの時間
@@ -87,7 +87,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
 ### 設定
 {:#int-configuration}
 
- *ディレクトリ関連のメトリクスを収取するには、Datadog Agentのインストールが必要です。*
+ *ディレクトリ関連のメトリクスを収集するには、Datadog Agentのインストールが必要です。*
 
 - Directory check インテグレーションは、**Windows systemsには対応しておりません**。
 - Datadog Angetが、監視の対象となっているディレクトリやファイルに対して読み込み権限があることを確認してください。
@@ -110,7 +110,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
              pattern: "*.log"
              recursive: True
 
-- Datadog Agentを再起動すます。
+- Datadog Agentを再起動します。
 
       sudo /etc/init.d/datadog-agent restart
 

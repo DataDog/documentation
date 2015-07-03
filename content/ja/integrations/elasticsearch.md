@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-Elasticsearch Integration
@@ -16,24 +16,23 @@ Connect ElasticSearch to Datadog in order to:
 - Visualize ElasticSearch performance.
 - Correlate ElasticSearch performance with the rest of your applications. -->
 
-### Overview
+### 概要
 {:#int-overview}
 
-Connect ElasticSearch to Datadog in order to:
+次の目的で、ElasticSearchをDatadogと連携します:
 
-- Visualize ElasticSearch performance.
-- Correlate ElasticSearch performance with the rest of your applications.
-
+* ElasticSearchのパフォーマンス情報を可視化する
+* ElasticSearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
 
 <!-- From the open-source Agent:
 
 * [ElasticSearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
 * [ElasticSearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py) -->
 
-From the open-source Agent:
+Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
 
-* [ElasticSearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
-* [ElasticSearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
+* [ElasticSearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
+* [ElasticSearchインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
 
 
 <!-- The following metrics are collected by default with the ElasticSearch integration:
@@ -128,7 +127,8 @@ From the open-source Agent:
     elasticsearch.transport.tx_size
     elasticsearch.unassigned_shards -->
 
-The following metrics are collected by default with the ElasticSearch integration:
+
+ElasticSearchインテグレーションがデフォルトで収集しているメトリクス:
 
     elasticsearch.active_primary_shards
     elasticsearch.active_shards

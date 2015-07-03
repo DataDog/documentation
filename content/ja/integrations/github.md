@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Datadog-Github インテグレーション
@@ -22,7 +22,7 @@ Capture GitHub commits in Datadog to:
 
 次の目的でGitHubのコミット情報をDatadogと連携します:
 
-- ソースコードの変更履歴から、新フューチャ追加の追跡するをする。
+- ソースコードの変更履歴から、フューチャ追加の追跡をする。
 - アラート発生時やビルドの失敗時にソースコードの変更が起因していないかを確認する。
 - ソースコードの変更に関し、Datadogのイベントストリーム上でチャットをする。
 
@@ -49,6 +49,6 @@ events overlayed over your the graphs on that dashboard. -->
 
 ### 連携が完了すると
 
-インテグレーションの設定が完了すると、GitHubへのcommitsとissuesのどちらか、または両方のイベントを、Datadogのイベントストリームにも表示することができるようになります。
+インテグレーションの設定が完了すると、GitHubへのcommitsとissuesのどちらか、または両方のイベントを、Datadogのイベントストリームにも表示することが出来るようになります。
 
-Timeboard上では、左上隅の検索窓で`sources:github`と入力すると、グラフ内にgithubから収集したイベントをピンクの線として、合成して表示することができます。
+Timeboard上では、左上隅の検索窓で`sources:github`と入力すると、グラフ内にgithubから収集したイベントをピンクの線として、合成して表示することが出来ます。

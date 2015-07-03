@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/29
+last_modified: 2015/07/01
 translation_status: original
 language: ja
 title: Datadog-CouchDB Integration
@@ -43,9 +43,9 @@ The following metrics are collected by default with the CouchDB integration:
     couchdb.open_os_files
     couchdb.request_time -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
 
-* [CouchDB ンテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example)
+* [CouchDB インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example)
 * [CouchDB インテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/couchdb.py)
 
 

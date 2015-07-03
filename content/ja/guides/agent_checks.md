@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/27
+last_modified: 2015/07/01
 translation_status: complete
 language: ja
 title: Agent Checkの書き方 (イベントの送信)
@@ -30,7 +30,7 @@ not include the `AgentCheck` interface that we'll be using.
 </div> -->
 
 <div class="alert alert-block">
-Agent Checkを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。 それ以前のバージョンには、Agent Checkのインターフェスは実装されていません。
+Agent Checkを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。 それ以前のバージョンには、Agent Checkのインターフェースは実装されていません。
 </div>
 
 
@@ -140,7 +140,7 @@ flushed out with the other Agent metrics.
 #### メトリクスの送信
 
 Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDが提供している関数に精通しているなら、移行は非常に簡単です。
-未だそれらの関数に慣れていない場合でも、それほど大変ではないということがすぐに分かるはずです。
+未だそれらの関数に慣れていない場合でも、それほど大変ではないことがすぐに分かるはずです。
 
 
 Agent Checkでは、次のような関数を利用することができます:
@@ -234,7 +234,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、デバッグ時に `datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -466,7 +466,7 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
 </div>
 
-まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、次の3行のみの非常にシンプな内容になります:
+まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、以下の3行で非常にシンプな内容になります:
 
 <%= console <<EOF
 init_config:
@@ -487,9 +487,9 @@ class HelloCheck(AgentCheck):
 
 EOF
 %>
-ごのようにCheckのインタフェースは、シンプルで、簡単に使い始めることができす。
+ごのようにCheckのインタフェースは、シンプルで、簡単に使い始めることが出来ます。
 
-次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を送信するCheckを書いてみることにします。
+次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を計測してDatadogに送信するCheckを書いてみることにします。
 
 
 <!--
@@ -747,7 +747,7 @@ Here's the full source of the check:
 
 #### 今までの解説をまとめると
 
-このガイドの最後の部分に、Checkの実行コード全体を載せておきます。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で配置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として配置します。
+このガイドの最後に、Checkの実行コード全体を載せてあります。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で配置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として配置します。
 
 Checkに実行ファイルを配置できたら、次のpython スクリプトを使ってテストを実行することができます。
 尚、**`__main__`の部分の`/path/to/conf.d/http.yaml`を、テスト用の設定ファイルを配置している場所に書き換えてあることを必ず確認してください。**
@@ -756,7 +756,7 @@ Agent のroot から、次のコマンドでテストを実行します:
 
     PYTHONPATH=. python checks.d/http.py
 
-あなたは、インスタンスごとに生成されているかを評価指標とイベントが表示されます。
+インスタンスごとに生成されているメトリクスとイベントが表示されます。
 
 チェックの完全なソースは次のとおりです。
 
