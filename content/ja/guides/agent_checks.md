@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Agent Checkの書き方 (イベントの送信)
@@ -20,7 +20,7 @@ sidebar:
       href: "#directory"
     - text: 始めてのチェック
       href: "#first"
-    - text: HTTPのCheck
+    - text: HTTPのチェック
       href: "#http"
 ---
 
@@ -52,7 +52,7 @@ they will run every check interval, which defaults to 15 seconds. -->
 
 <h3 id="overview">概要</h3>
 
-このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからメトリクスとイベント情報を収集する方法について説明します。
+このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからメトリクスとイベント情報を取得する方法について説明します。
 `AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
@@ -167,7 +167,7 @@ Agent Checkでは、次のような関数を利用することができます:
 - `hostname`: (optional) A hostname to associate with this metric. Defaults to the current host.
 - `device_name`: (optional) A device name to associate with this metric.
 
-これらの関数は、チェックロジックのどこからでも呼び出すことができます。これらの関数を使って収集したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
+これらの関数は、チェックロジックのどこからでも呼び出すことができます。これらの関数を使って取得したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
 
 
 <!-- #### Sending events
@@ -257,7 +257,7 @@ module). -->
 
 #### ログの保存
 
-AgentCheckクラスを承継しているので、親クラスで実装されているロギング機能を `self.log.info('hello')`の形で使うことできます。
+AgentCheckクラスを承継しているので、親クラスで実装されているロギング機能を `self.log.info('hello')`の形で使うことが出来ます。
 **The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
 module).**
@@ -412,7 +412,7 @@ Mac OS Xと、ソースからインストールした場合は、以下のディ
 
     <sandbox_folder>/conf.d/
 
-実行ファイルと設定ファイルは、デフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することもできます:
+実行ファイルと設定ファイルは、デフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することも出来ます:
 
     additional_checksd: /path/to/custom/checks.d/
 
@@ -711,7 +711,7 @@ def timeout_event(self, url, timeout, aggregation_key):
 EOF
 %>
 
-次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容です。
+次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容になります。
 
 <%= python <<EOF
 def status_code_event(self, url, r, aggregation_key):
@@ -758,7 +758,7 @@ Agent のroot から、次のコマンドでテストを実行します:
 
 インスタンスごとに生成されているメトリクスとイベントが表示されます。
 
-チェックの完全なソースは次のとおりです。
+チェックの完全なソースは次の通りです。
 
 <%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
 
@@ -806,7 +806,7 @@ Windows上でカスタムチェックのテストは簡単です。
 Datadog Agentのインストールには`shell.exe` というDatadog Agent 用のpythonの実行環境が含まれています。
 このファイルは、`Program Files` ディレクトリに保存されています。
 
-Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.yaml`ファイルの配置が終わったら、次のコマンドを、`shell.exe` で起動したウインドウ内で実行してみてください。
+Agent Check（例えば「my_check」）を書き終え、`.py`ファイルと`.yaml`ファイルの配置が終わったら、次のコマンドを、`shell.exe` で起動したウインドウ内で実行してみて下さい。
 
     >>> from checks import run_check
     >>> run_check('my_check')

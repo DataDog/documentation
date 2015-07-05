@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/22
+last_modified: 2015/07/05
 translation_status: translated
 language: ja
 title: Datadog-Apache インテグレーション
@@ -21,7 +21,7 @@ doclevel: complete
 ### 概要と目的
 {: #int-overview}
 
-Apacheからリアルタイムでメトリクスの収集しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付けてる。
+Apacheからリアルタイムでメトリクスを取得しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付ける。
 
 * Webサーバのパフォーマンスの可視化する
 * Apacheのパフォーマンスをインフラに含まれる他のアプリケーションと相互に関連付けて把握する
@@ -49,9 +49,9 @@ Apacheからリアルタイムでメトリクスの収集しグラフ化する�
     apache.performance.idle_workers
     apache.performance.uptime -->
 
-### 収集しているメトリクス
+### 取得しているメトリクス
 
-Apacheインテグレーションは、次のメトリクスをディフォルトで収集してます:
+Apacheインテグレーションは、次のメトリクスをデフォルトで取得します:
 
     apache.net.bytes
     apache.net.bytes_per_s
@@ -95,12 +95,12 @@ instances:
 ### 設定
 {: #int-configuration}
 
-**Apacheのメトリクスを収集するには、Datadog Agentのインストールがつようです。**  
-*詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。*
+**Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**  
+*詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照して下さい。*
 
-1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認してください。
+1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認して下さい。
 
-2.Apacheのメトリクスを収集するためのにDatadog Agentの設定ファイル`/etc/dd-agent/datadog.conf`を次のように設定してください。(`mod_status`が、メトリクスを表示しているURLを指定します。)
+2.Apacheのメトリクスを取得するためにDatadog Agentの設定ファイル`/etc/dd-agent/datadog.conf`を次のように設定して下さい。(`mod_status`が、メトリクスを表示しているURLを指定します。)
 
   `/etc/dd-agent/datadog.conf`の編集例
 
