@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Docker インテグレーション
@@ -21,9 +21,9 @@ doclevel:
 </ul>
 </div> -->
 
-Dockerからリアルタイムにメトリクスを収集する目的は:
+Dockerからリアルタイムにメトリクスを取得する目的は:
 
-- アプリケーションが稼働しているコンテナのパフォーマンスの収集。
+- アプリケーションが稼働しているコンテナのパフォーマンスの取得。
 - コンテナパフォーマンスの可視化。
 
 
