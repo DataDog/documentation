@@ -234,7 +234,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示できるので、デバッグ時に利用することもできます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示できるので、デバッグ時に利用することが出来ます:
 
 
     $ sudo /etc/init.d/datadog-agent info
@@ -296,7 +296,7 @@ EOF
 
 <h3 id="config">設定</h3>
 
-Agent Checkには、設定ファイルがあり、その設定ファイルは`conf.d` 以下に置かれています。設定ファイルは、[YAML](http://www.yaml.org/) 形式で記述します。
+Agent Checkには設定ファイルがあり、その設定ファイルは`conf.d` 以下に置かれています。設定ファイルは、[YAML](http://www.yaml.org/) 形式で記述します。
 設定ファイルの名前は、Agent Checkのモジュールの名前と同じ名前である必要があります。
 (例: モジュール名が`haproxy.py` の場合は、設定ファイル名は、`haproxy.yaml` になります)
 
@@ -327,7 +327,7 @@ configuration options that will be available on every run of the check in
 
 #### init_config
 
-*init_config*のセクションでは、Agent Check実行時に利用できるグローバルな設定オプションを複数記述することができます。このオプションは、全てのCheckの実行において`self.init_config`の方法で、アクセスすることができます。
+*init_config*のセクションでは、Agent Check実行時に利用できるグローバルな設定オプションを複数記述することが出来ます。このオプションは、全てのCheckの実行において`self.init_config`の方法で、アクセスすることが出来ます。
 
 
 <!-- #### instances
@@ -374,7 +374,7 @@ Windows Server > = 2008の場合は、以下のディレクトリになります
 
     C:\Program Files\Datadog\Agent\checks.d\
 
-Mac OS Xとソースからインストールした場合は、以下のディレクトリになります:
+Mac OS Xと、ソースからインストールした場合は、以下のディレクトリになります:
 
     ~/.datadog-agent/agent/checks.d/
 
@@ -400,7 +400,7 @@ Windowsの場合は、以下のディレクトリになります：
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
-Mac OS Xとソースからインストールした場合は、以下のディレクトリになります:
+Mac OS Xと、ソースからインストールした場合は、以下のディレクトリになります:
 
     ~/.datadog-agent/agent/conf.d/
 
@@ -466,7 +466,7 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 例えば、実行ファイルが<code>mycheck.py</code> の場合、設定ファイルは、<code>mycheck.yaml</code> というファイル名になります。
 </div>
 
-まずは簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、以下の3行で非常にシンプな内容になります:
+まず簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、以下の3行で非常にシンプルな内容になります:
 
 <%= console <<EOF
 init_config:
@@ -487,7 +487,7 @@ class HelloCheck(AgentCheck):
 
 EOF
 %>
-ごのようにCheckのインタフェースは、シンプルで、簡単に使い始めることが出来ます。
+ごのようにCheckのインターフェースは、シンプルで、簡単に使い始めることが出来ます。
 
 次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を計測してDatadogに送信するCheckを書いてみることにします。
 
@@ -519,9 +519,9 @@ following will happen:
 Checkが実行される度に、HTTPのエンドポイントに対してGETリクエストを実行します。
 レスポンスの結果に基づいて次の処理をします:
 
-- レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリクスとして送信する。
-- レスポンスがタイムアウトした場合、URLとタイムアウトのイベントを送信する。
-- レスポンスステータスが200以外の場合、URL及びレスポンスコードのイベントを送信する。
+- レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリクスとして送信します。
+- レスポンスがタイムアウトした場合、URLとタイムアウトのイベントを送信します。
+- レスポンスステータスが200以外の場合、URL及びレスポンスコードのイベントを送信します。
 
 
 
@@ -558,9 +558,9 @@ EOF
 インスタンス定義の中身が各Check本体でどのように処理されるのかを理解するために、
 まず最初に設定ファイルがどのようになるか考えてみることにします。
 
-設定ファイルには、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行出来ることになります。更に、それぞれのインスタンスでタイムアウトを設定しなかった時のために、デフォルトのタイムアウトを設定しておくことも必要になります。
+設定ファイルは、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行出来ることになります。更に、それぞれのインスタンスでタイムアウトを設定しなかった時のために、デフォルトのタイムアウトを設定しておくことも必要になります。
 
-上記をふまえ、設定ファイルは次のようになります:
+上記をふまえると、設定ファイルは次のようになります:
 
 
 <%= console <<EOF
@@ -656,10 +656,10 @@ EOF
 
 #### Check 本体
 
-では、Check 本体の関数を定義することにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンスの時間を計測します。
+では、Check 本体の関数を定義することにします。関数のメインは、設定ファイルで指定したURLに対しHTTP リクエストを実行し、レスポンス時間を計測します。
 エラーが発生していれば、エラー条件によって処理をします。
 
-以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理をしています。
+以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理を行います。
 
 <%= console <<EOF
 # Load values from the instance config
@@ -684,7 +684,7 @@ if r.status_code != 200:
 EOF
 %>
 
-リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLを、タグとして付記します。
+リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLをタグとして付記します。
 
 <%= python <<EOF
 timing = end_time - start_time
@@ -695,7 +695,7 @@ EOF
 最後に、エラー発生時の処理内容を定義します。
 先のコードで既に、 HTTP リクエストがタイムアウトした場合の`timeout_event` 関数と、レスポンスステータスが200
 以外の場合の`self.status_code_event` 関数を定義しています。
-従って、これらのイベントの関数の中身を定義していきます。
+従って、これらのイベントの関数の中身を定義します。
 
 まず、`timeout_event` を定義します。`self.event()` で注目してほしいのは、`'aggregation_key':` に、先のコードに出ているURLのハッシュである`aggregation_key = md5(url).hexdigest()`を設定している部分です。このaggregation_key を使って、特定のURLに関連したイベントを集約します。
 
@@ -749,7 +749,7 @@ Here's the full source of the check:
 
 このガイドの最後に、Checkの実行コード全体を載せてあります。このコードを、`checks.d`フォルダ以下へ、`http.py`のファイル名で配置します。この実行コードに必要な、設定ファイルは、`conf.d`フォルダー以下に、`http.yaml`として配置します。
 
-Checkに実行ファイルを配置できたら、次のpython スクリプトを使ってテストを実行することができます。
+Checkに実行ファイルを配置したら、次のpython スクリプトを使ってテストを実行することが出来ます。
 尚、**`__main__`の部分の`/path/to/conf.d/http.yaml`を、テスト用の設定ファイルを配置している場所に書き換えてあることを必ず確認してください。**
 
 Agent のroot から、次のコマンドでテストを実行します:
@@ -781,7 +781,7 @@ If your issue continues, please reach out to Support with the help page that
 
 <h3 id="troubleshooting">トラブルシュート</h3>
 
-カスタム Agent checkは、Pythonコマンドから直接実行できません。代わりに、Datadog Agentを使って、テスト実行するようにします。テストするには、次のようなコマンドを実行します:
+カスタム Agent checkは、Pythonコマンドから直接実行出来ません。代わりに、Datadog Agentを使って、テスト実行するようにします。テストするには、次のようなコマンドを実行します:
 
     sudo -u dd-agent dd-agent check my_check
 
