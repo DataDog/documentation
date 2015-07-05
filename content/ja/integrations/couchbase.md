@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/29
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Couchbase Integration
@@ -16,7 +16,7 @@ doclevel: basic
 ### 概要
 {:#int-overview}
 
-次の目的のために、CouchbaseのメトリクスをDatadogに送信します:
+次の目的の為に、CouchbaseのメトリクスをDatadogに送信します:
 
 * Couchbaseのメトリクスの可視化
 * Couchbaseのパフォーマンス情報と他アプリケーションの情報を連携

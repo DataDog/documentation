@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Desk Integration
@@ -20,7 +20,7 @@ Connect Desk to Datadog to:
 ## 概要
 {: #int-overview}
 
-次の目的で、DeskとDatadogを連携します:
+次の目的の為に、DeskとDatadogを連携します:
 
 - Deskで発生した新しいイベントをDatadogのイベントストリームで表示する
 - ユーザーやステータスごとのケース統計を可視化する
@@ -45,13 +45,13 @@ Hit the install button, and then you're all set! You will soon be able to select
 
 Deskのアカウントにログインし、`Setting` -> `API` -> `My Application` ページと移動し、APIアプリケーションを追加します。(この操作には、Admin権限が必要です。)
 
-以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成してくれます。
+以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成します。
 
 <img src="/static/images/desk_config.png" style="width:100%; border:1px solid #777777"/>
 
-次に、Datadogインテグレーションページから[Deskのタイル](https://app.datadoghq.com/account/settings#integrations/desk)を選択し、先ほどDeskで生成した認証情報を情報を入力します。
-又このタイルでは、あなたの会社に割り当てられたDeskドメイン名を入力する必要もあります。
+次に、Datadogインテグレーションページから[Deskのタイル](https://app.datadoghq.com/account/settings#integrations/desk)を選択し、先ほどDeskで生成した認証情報を入力します。
+又このタイルでは、あなたの会社に割り当てられたDeskドメイン名を入力する必要があります。
 
-最後に、`install`ボタンをクリックすると設定は終了です。しばらくすると、Deskから収集しているメトリクス( desk.* )をカスタムダッシュボードで選択できるようになります。又、予めDeskインテグレーションに備え付けられた[ダッシュボード](https://app.datadoghq.com/screen/integration/desk)でも、メトリクスが表示されるようになります。
+最後に、`install`ボタンをクリックすると設定は終了です。しばらくすると、Deskから取得したメトリクス( desk.* )をカスタムダッシュボードで選択出来るようになります。又、予めDeskインテグレーションに備え付けられた[ダッシュボード](https://app.datadoghq.com/screen/integration/desk)でも、メトリクスが表示されるようになります。
 
 Deskのインテグレーションに関しては、blog記事[「Keep support on the same page with the Salesforce Desk integration」](https://www.datadoghq.com/2015/02/keep-support-team-page-salesforce-desk-integration/)でも紹介しています。

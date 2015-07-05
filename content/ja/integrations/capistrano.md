@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/29
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Capistrano Integration
@@ -21,8 +21,8 @@ Install the Capistrano Datadog integration to:
 
 次の目的で、Capistranoのインテグレーションをインストールします:
 
-* デプロイイベントをDatadogのイベントストリームに記録し、検索できるようにする。
-* ダッシュボード上で、デプロイイベントとメトリクスの状態を関連付けて表示する。
+* デプロイイベントをDatadogのイベントストリームに記録し、検索できるようにします。
+* ダッシュボード上で、デプロイイベントとメトリクスの状態を関連付けて表示します。
 
 
 <!-- ### Configuration
