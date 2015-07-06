@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/30
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-etcd Integration
@@ -20,10 +20,10 @@ Capture etcd metrics in Datadog to:
 ### 概要
 {:#int-overview}
 
-次の目的で、etcdのメトリクスをDatadogへ送信します:
+次の目的の為に、etcdのメトリクスをDatadogへ送信します:
 
 - etcdクラスターの動作状況を監視する
-- ホストコンフィグレーションが同期状態から外れたことを知るため
+- ホストコンフィグレーションが同期状態から外れたことを知る為
 - etcdのパフォーマンス情報を他のアプリケーションの状態と関連付けて把握する
 
 
@@ -32,7 +32,7 @@ Capture etcd metrics in Datadog to:
 * [etcd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
 * [etcd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [etcd インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
 * [etcd インテグレーションのchecks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py)
@@ -71,7 +71,7 @@ And these metrics for follower nodes:
 
 Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status. -->
 
-etcdインテグレーションがデフォルトで収集しているメトリクス:
+etcdインテグレーションがデフォルトで取得しているメトリクス:
 
     etcd.store.gets.success
     etcd.store.gets.fail
@@ -92,14 +92,14 @@ etcdインテグレーションがデフォルトで収集しているメトリ�
     etcd.self.recv.appendrequest.count
     etcd.self.send.appendrequest.count
 
-更に、リーダーノードに関しては、次のメトリクスも収集しています(注:シングルメンバークラスターでは、これらは、定義されていません。):
+更に、リーダーノードに関しては、次のメトリクスも取得しています(注:シングルメンバークラスターでは、これらは、定義されていません。):
 
     etcd.self.send.pkgrate
     etcd.self.send.bandwidthrate
 
-フォロワーノードに関しては、次のメトリクスを収集しています:
+フォロワーノードに関しては、次のメトリクスを取得しています:
 
     etcd.self.recv.pkgrate
     etcd.self.recv.bandwidthrate
 
-etcdのメトリクスは、ノードのステータスによって`etcd_state:leader`や`etcd_state:follower`のタグが付与されています。このタグによって、ノードステータスごとの集計ができるようになっています。
+etcdのメトリクスは、ノードのステータスによって`etcd_state:leader`や`etcd_state:follower`のタグが付与されています。このタグによって、ノードステータスごとの集計が出来るようになっています。

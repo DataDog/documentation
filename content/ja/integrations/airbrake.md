@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/13
+last_modified: 2015/07/05
 translation_status: translated
 language: ja
 title: Datadog-Airbrake Integration
@@ -22,8 +22,8 @@ doclevel: complete
 AirbrakeとDatadogの連携
 
 * リアルタイムで、例外をイベントストリームに表示します。
-* グラフないで、例外を検索することができるようになります。
-* 例外に関して、イベントストリームでコミュニケーションを取ることができます。
+* グラフ内で、例外を検索することが出来るようになります。
+* 例外に関して、イベントストリームでコミュニケーションを取ることが出来ます。
 
 
 <!-- <div id="int-configuration">
@@ -40,5 +40,5 @@ Airbrakeの”account_name”ページから、アカウント名とトークン
 
 ![](/static/images/ja-specific/snapshot_airbrake_small.png)
 
-特定のプロジェクトのみを連携することもできます。特定のプロジェクトのみをフォローする場合は、プロジェクト名を指定します。  
+特定のプロジェクトのみを連携することも出来ます。特定のプロジェクトだけをフォローする場合は、プロジェクト名を指定します。  
 全てのプロジェクトをフォローする場合、`All projects`にチェックマークを設定します。

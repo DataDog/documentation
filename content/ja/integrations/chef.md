@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Chef Integration
@@ -23,12 +23,12 @@ doclevel: basic
 
 To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
 
-次のような目的のために、ChefのメトリクスをDatadogに送信します:
+次の目的の為に、ChefのメトリクスをDatadogに送信します:
 
 - Chefクライアントからリアルタイムレポートを取得する
-- 管理しているサーバー上のChefのパフォーマンスメトリクスを収集する
-- 期待どうりに完了しなかったChefの実行を検知し、チームと検討する
+- 管理しているサーバー上のChefのパフォーマンスメトリクスを取得する
+- 期待通りに完了しなかったChefの実行を検知し、チームと検討する
 
 <!-- To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
 
-Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/guides/chef/)を参照してください。
+Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/guides/chef/)を参照して下さい。

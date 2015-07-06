@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/29
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Cassandra Integration
@@ -50,7 +50,7 @@ The following metrics are collected by default with the Cassandra integration:
 
 Cassandraに関する情報に関しては、次の[「JMX Checks」](http://docs.datadoghq.com/ja/integrations/java/)を参照してください。
 
-Cassandraインテグレーションがデフォルトで収集しているメトリクス:
+Cassandraインテグレーションがデフォルトで取得しているメトリクス:
 
     cassandra.ActiveCount
     cassandra.BloomFilterDiskSpaceUsed

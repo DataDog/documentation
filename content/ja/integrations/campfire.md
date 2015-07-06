@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: original
 language: ja
 title: Datadog-Campfire Integration
@@ -18,5 +18,5 @@ doclevel: basic
 
 次の目的で、Campfireとの連携をします:
 
-* Datadogのイベントストリームへチームメンバーがホストした際、Campfireへの通知。
-* Datadogで検知したメトリクスアラートをCamfireへ通知。
+* Datadogのイベントストリームへチームメンバーがホストした際、Campfireへ通知します。
+* Datadogで検知したメトリクスアラートをCamfireへ通知します。

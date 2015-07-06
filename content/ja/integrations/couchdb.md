@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: original
 language: ja
 title: Datadog-CouchDB Integration
@@ -19,7 +19,7 @@ Capture CouchDB data in Datadog to:
 ### 概要
 {:#int-overview}
 
-次の目的のため、CouchDBのメトリクスをDatadogに送信します:
+次の目的の為に、CouchDBのメトリクスをDatadogに送信します:
 
 * CouchDBのメトリクスの可視化
 * CouchDBのパフォーマンス情報と他アプリケーションの情報を連携
@@ -43,13 +43,13 @@ The following metrics are collected by default with the CouchDB integration:
     couchdb.open_os_files
     couchdb.request_time -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [CouchDB インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example)
 * [CouchDB インテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/couchdb.py)
 
 
-CouchDBインテグレーションがデフォルトで収集しているメトリクス:
+CouchDBインテグレーションがデフォルトで取得しているメトリクス:
 
     couchdb.database_writes
     couchdb.database_reads

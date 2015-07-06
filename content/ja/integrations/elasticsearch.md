@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
 title: Datadog-Elasticsearch Integration
@@ -19,7 +19,7 @@ Connect ElasticSearch to Datadog in order to:
 ### 概要
 {:#int-overview}
 
-次の目的で、ElasticSearchをDatadogと連携します:
+次の目的の為に、ElasticSearchをDatadogと連携します:
 
 * ElasticSearchのパフォーマンス情報を可視化する
 * ElasticSearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
@@ -29,7 +29,7 @@ Connect ElasticSearch to Datadog in order to:
 * [ElasticSearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
 * [ElasticSearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [ElasticSearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
 * [ElasticSearchインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
@@ -128,7 +128,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     elasticsearch.unassigned_shards -->
 
 
-ElasticSearchインテグレーションがデフォルトで収集しているメトリクス:
+ElasticSearchインテグレーションがデフォルトで取得しているメトリクス:
 
     elasticsearch.active_primary_shards
     elasticsearch.active_shards
