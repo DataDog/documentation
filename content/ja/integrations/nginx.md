@@ -3,6 +3,9 @@ last_modified: 2015/03/31
 translation_status: complete
 language: ja
 title: Datadog-NGINX インテグレーション
+integration_title: NGINX
+kind: integration
+doclevel:
 ---
 <!-- <div id="int-overview">
 <h3>Overview</h3>

@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Apache Kafka Integration
 integration_title: Apache Kafka
 kind: integration
+doclevel:
 ---
 
 To capture Kafka metrics you need to install the Datadog Agent. Metrics will be captured using a JMX connection.

@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS RDS インテグレーション
 integration_title: AWS RDS
 kind: integration
+doclevel:
 ---
 
 <!-- In this HOWTO you will learn how to best integrate AWS Relational
