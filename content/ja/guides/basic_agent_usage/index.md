@@ -165,7 +165,7 @@ Datadog Agent のインストールは完了しているがダッシュボード
 
 <h4 id="integrations">Integrationsの動作に関連する問題</h4>
 
-Dataddogが提供している<a href="http://www.datadoghq.com/integrations/" target="_blank">Integrations</a> には、Datadog Agent のYAML形式で書かれた<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">設定ファイル</a>への追記が必要なものがあります。
+Dataddogが提供している<a href="http://docs.datadoghq.com/ja/integrations/" target="_blank">Integrations</a> には、Datadog Agent の<a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">設定ファイル</a>への追記が必要なものがあります。
 
 **以下は、Integrationsのインストールに関連する問題のトラブルシュートのクイックガイドです:**
 
