@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2015/07/07
+translation_status: complete
 language: ja
 title: Datadog-Tomcat Integration
 integration_title: Tomcat
@@ -8,4 +8,6 @@ kind: integration
 doclevel: basic
 ---
 
-For information on Tomcat, please see [here](http://docs.datadoghq.com/integrations/java/).
+<!-- For information on Tomcat, please see [here](http://docs.datadoghq.com/integrations/java/). -->
+
+Tomcatインテグレーションについては、[「JMX Checks」](http://docs.datadoghq.com/ja/integrations/java/)を参照してください。
