@@ -30,5 +30,5 @@ sidebar:
 
 設定方法に関しては、以下のリンクを参照してください:
 
-* [Directory check](/integrations/directory/) - 任意のディレクトリのファイルに関するメトリクスを送信します。
-* [Process check](integrations/process/)- システム内で動作している任意のプロセスのメトリクスを送信します。
+* [Directory check](/ja/integrations/directory/) - 任意のディレクトリのファイルに関するメトリクスを送信します。
+* [Process check](/ja/integrations/process/)- システム内で動作している任意のプロセスのメトリクスを送信します。
