@@ -512,7 +512,9 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
     Metrics
 ===============================================================================
 -->
+
 ### Metrics
+{: #metrics}
 
 #### How do I submit custom metrics?
 
