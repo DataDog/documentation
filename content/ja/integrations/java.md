@@ -122,7 +122,7 @@ collected:
 
       `sudo /etc/init.d/datadog-agent jmx list_everything`
 
-- 現在の設定に基づいてJMXからのメトリクス収集を開始し、収取しているメトリクスをコンソールに表示する:
+- 設定に基づいてJMXからのメトリクス収集を開始し、コンソールに表示する:
 
       `sudo /etc/init.d/datadog-agent jmx collect`
 
