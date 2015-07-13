@@ -28,9 +28,10 @@ collect.  We are going to see how to do so.
 </ul>
 
 
-<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect some metrics from your JMX
-application. They also allow you to specify a
-configuration in the yaml file that will be read by JMXFetch to filter which
+<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect 13 metrics from your 
+JMX application. A few of these metrics are: jvm.heap_memory, jvm.non_heap_memory, jvm.gc.cms.count...
+So seeing these metrics is a sign that JMXFetch is properly running.
+They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which
 metrics it should send back to the Agent.
 <br>
 <h4>Commands to view the metrics that are available:</h4>
