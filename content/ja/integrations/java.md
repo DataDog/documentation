@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/07/02
-translation_status: original
+last_modified: 2015/07/11
+translation_status: progress
 language: ja
 title: "JMX Checks"
 integration_title: JMX Checks
@@ -99,31 +99,30 @@ collected:
 ##### JMX Checkによって収集可能なメトリクスを調べるためのコマンド:
 
 <div class="alert alert-info">
-    コマンド<code>datadog-agent jmx</code>は、version 4.1.0で追加されました。
+    コマンド<code>datadog-agent jmx</code>は、Datadog Agent version 4.1.0で追加されました。
 </div>
 
-- List attributes that match at least one of your instances configuration:
+- どれかのインスタンスの設定内容に一致したアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`
 
-- List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be
-collected:
+- どれかのインスタンスの設定内容に一致したアトリビュート(属性)で、メトリクスの収集制限を超えているために現状収取されていないアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`
 
-- List attributes that will actually be collected by your current instances configuration:
+- インスタンスの設定内容に基づいて、実際に収集されるアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`
 
-- List attributes that don't match any of your instances configuration:
+- そのインスタンスの設定内容に一致しないアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes`
 
-- List every attributes available that has a type supported by JMXFetch:
+- JMXFetchでサポートされている全てのアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_everything`
 
-- Start the collection of metrics based on your current configuration and display them in the console:
+- 現在の設定に基づいてJMXからのメトリクス収集を開始し、収取しているメトリクスをコンソールに表示する:
 
       `sudo /etc/init.d/datadog-agent jmx collect`
 
