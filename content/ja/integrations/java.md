@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/07/11
-translation_status: progress
+translation_status: complete
 language: ja
 title: "JMX Checks"
 integration_title: JMX Checks
