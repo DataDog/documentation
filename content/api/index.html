@@ -735,6 +735,8 @@ kind: documentation
           <%= argument 'scope', "The scope to apply the mute to. For example,
           if your alert is grouped by {host}, you might mute 'host:app1'",
           :default => "None" %>
+          <%= argument 'all_scopes', "Clear muting across all scopes",
+          :default => "False" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1771,7 +1773,7 @@ kind: documentation
           Get the HTML fragment for a previously generated embed with embed_id.
         </p>
         <p>
-          Returns: A JSON object with 8 elements: 
+          Returns: A JSON object with 8 elements:
         </p>
         <ul>
           <li>embed_id: Token of the embed</li>
@@ -1792,7 +1794,7 @@ kind: documentation
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
           <%= argument "template_variables", "A list of template variables values to replace in queries with form $var. To
-          replace $var with val, use var=val as a parameter.", {:default => "None"} %> 
+          replace $var with val, use var=val as a parameter.", {:default => "None"} %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1814,7 +1816,7 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          Enable a specified embed. 
+          Enable a specified embed.
         </p>at
         <p>
           Returns: A JSON containing the success message <code>{success: [message]}</code>.
@@ -1844,7 +1846,7 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          Revoke a specified embed. 
+          Revoke a specified embed.
         </p>
         <p>
           Returns: A JSON containing the success message <code>{success: [message]}</code>.
