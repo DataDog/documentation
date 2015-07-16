@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/27
+last_modified: 2015/07/15
 translation_status: complete
 language: ja
 title: Datadog Agent 入門
@@ -33,7 +33,7 @@ for which ranges to allow, please see <a target="_blank" href="https://github.co
 
 ## Datadog Agent ってなに ? {#what_is_the_agent}
 
-Datadog Agent は、ターゲットホスト上で動作するソフトウェアです。その役割は、システムの監視データやパフォーマンスデータをビジネスに有効に活用していくために、ターゲットホスト上のイベントやメトリクスを収集し、Datadogに送信することです。
+Datadog Agent は、ターゲットホスト上で動作するソフトウェアです。その役割は、システムの監視データやパフォーマンスデータをビジネスに有効に活用していくために、ターゲットホスト上のイベントやメトリクスを取得し、Datadogに送信することです。
 
 Datadog Agent のソースコードは、[Github](https://github.com/DataDog/dd-agent)で公開しています。
 
@@ -54,7 +54,7 @@ it up to be sent to Datadog.
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the
 overhead of each application if you don't want to run all parts (though we generally recommend you do). -->
 
-- **Collector** は、ターゲットホストのCPU やメモリ等の一般的なシステムメトリクスを収集すると共に、インストールされているIntegrations の情報を収集します。
+- **Collector** は、ターゲットホストのCPU やメモリ等の一般的なシステムメトリクスを取得すると共に、インストールされているIntegrations の情報を取得します。
 - **Dogstatsd** は、ターゲットホストで実行されているアプリケーションやコマンドラインスクリプトからカスタムメトリクスを送信することができるstatsdのサーバです。
 - **Forwader** は、dogstatsd とCollector の両方からデータを受け取り、queueの順番に従ってDatadogに送信します。
 
@@ -129,7 +129,7 @@ Here is a quick guide for troubleshooting getting integrations installed:
 
 ### Datadog Agent のトラブルシューティング {#troubleshooting}
 
-未だDatadog Agent をインストールしていない場合は、こちらの<a href="https://app.datadoghq.com/account/settings#agent" target="_blank">インストール手順</a>をご覧ください。このページにたどり着く直前にDatadog Agent をインストールした場合は、メトリクスが表示されるようになるまでに数分かかることがあります。
+まだDatadog Agent をインストールしていない場合は、こちらの<a href="https://app.datadoghq.com/account/settings#agent" target="_blank">インストール手順</a>をご覧ください。このページにたどり着く直前にDatadog Agent をインストールした場合は、メトリクスが表示されるようになるまでに数分かかることがあります。
 
 インストールが完了し、基本的なメトリクスを確認するには、<a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページが最適です。
 

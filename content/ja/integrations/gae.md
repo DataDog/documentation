@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: original
 language: ja
 title: Datadog-Google App Engine Integration
@@ -19,7 +19,7 @@ You can also send custom metrics to Datadog. -->
 ### 概要
 {:#int-overview}
 
-次の目的で、Google App EngineインテグレーションをPythonプロジェクトにつかします:
+次の目的で、Google App EngineインテグレーションをPythonプロジェクトに使用します:
 
 * Google App Engine servicesのメトリクス(memcache, task queues, datastores)をDatadog側でも表示するため。
 * リクエストに関するメトリクスを表示するため。(例:display percentiles, latency, cost)
