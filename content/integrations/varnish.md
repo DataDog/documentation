@@ -36,6 +36,7 @@ The following metrics are collected by default with the Varnish integration.
     varnish.backend_reuse
     varnish.backend_toolate
     varnish.backend_unhealthy
+    varnish.backend_unused
     varnish.cache_hit
     varnish.cache_hitpass
     varnish.cache_miss
@@ -48,6 +49,7 @@ The following metrics are collected by default with the Varnish integration.
     varnish.dir_dns_hit
     varnish.dir_dns_lookups
     varnish.esi_errors
+    varnish.esi_parse
     varnish.esi_warnings
     varnish.fetch_1xx
     varnish.fetch_204
@@ -150,6 +152,7 @@ The following metrics are collected by default with the Varnish integration.
     varnish.LCK.wstat.locks
     varnish.losthdr
     varnish.n_backend
+    varnish.n_deathrow
     varnish.n_ban
     varnish.n_ban_add
     varnish.n_ban_dups
@@ -161,15 +164,26 @@ The following metrics are collected by default with the Varnish integration.
     varnish.n_gzip
     varnish.n_lru_moved
     varnish.n_lru_nuked
+    varnish.n_lru_saved
     varnish.n_object
     varnish.n_objectcore
     varnish.n_objecthead
     varnish.n_objoverflow
     varnish.n_objsendfile
     varnish.n_objwrite
+    varnish.n_purge
+    varnish.n_purge_add
+    varnish.n_purge_dups
+    varnish.n_purge_obj_test
+    varnish.n_purge_re_test
+    varnish.n_purge_retire
     varnish.n_sess
     varnish.n_sess_mem
+    varnish.n_smf
+    varnish.n_smf_frag
+    varnish.n_smf_large
     varnish.n_vampireobject
+    varnish.n_vbe_conn
     varnish.n_vbc
     varnish.n_vcl
     varnish.n_vcl_avail
@@ -181,6 +195,8 @@ The following metrics are collected by default with the Varnish integration.
     varnish.n_wrk_failed
     varnish.n_wrk_lqueue
     varnish.n_wrk_max
+    varnish.n_wrk_overflow
+    varnish.n_wrk_queue
     varnish.n_wrk_queued
     varnish.s_bodybytes
     varnish.s_fetch
@@ -199,6 +215,15 @@ The following metrics are collected by default with the Varnish integration.
     varnish.shm_flushes
     varnish.shm_records
     varnish.shm_writes
+    varnish.sm_balloc
+    varnish.sm_bfree
+    varnish.sm_nobj
+    varnish.sm_nreq
+    varnish.sma_balloc
+    varnish.sma_bfree
+    varnish.sma_nbytes
+    varnish.sma_nobj
+    varnish.sma_nreq
     varnish.SMA.s0.c_bytes
     varnish.SMA.s0.c_fail
     varnish.SMA.s0.c_freed
