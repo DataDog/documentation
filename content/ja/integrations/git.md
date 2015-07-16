@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Git Integration
@@ -20,8 +20,8 @@ Capture Git commits directly from your Git server to:
 ### 概要
 {:#int-overview}
 
-次の目的で、GitサーバーからGitのコミットをDatadogと連携します:
+次の目的で、GitサーバーからGitのコミット情報をDatadogと連携します:
 
-* リアルタムでコード変更を把握する。
+* リアルタイムでコード変更を把握する。
 * ダッシュボード上に、コード変更のタイミングを記す。
 * チームのメンバーとコードの変更に関し、イベントストリーム上で議論する。

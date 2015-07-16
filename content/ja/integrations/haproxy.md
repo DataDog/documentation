@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-HAProxy Integration
@@ -24,7 +24,7 @@ Capture HAProxy activity in Datadog to:
 
 * HAProxyのロードバランシングパフォーマンスの可視化
 * HAProxyサーバーがダウンしたことを検知する
-* HAProxyのパフォーマスンと他のアプルケーションの情報と関連付けて把握する
+* HAProxyのパフォーマンスと他のアプルケーションの情報を関連付けて把握する
 
 
 <!-- From the open-source Agent:
@@ -32,7 +32,7 @@ Capture HAProxy activity in Datadog to:
 * [HAProxy YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example)
 * [HAProxy checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example)
 * [HAProxyインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py)
@@ -55,7 +55,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     haproxy.warnings.redis_rate
     haproxy.warnings.retr_rate -->
 
-HAProxyインテグレーションがデフォルトで収集しているメトリクス:
+HAProxyインテグレーションがデフォルトで取得しているメトリクス:
 
     haproxy.bytes.in_rate
     haproxy.bytes.out_rate

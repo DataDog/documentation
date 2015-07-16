@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-HP Public Cloud Integration
@@ -21,4 +21,4 @@ doclevel: basic
 
 * HP Cloud Computeのホストを、インフラストラクチャービューに表示する。
 * HP Cloud Computeのホストタグをインポートする。
-* HP Cloud ComputeのホストにGCE専用のメタデータータグ(例:region)を付記する。
+* HP Cloud ComputeのホストにGCE専用のメタデータタグ(例:region)を付記する。

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/02
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Jenkins Integration
@@ -37,10 +37,10 @@ Successful Jenkins builds will show up as 'low' priority.
 In the left column of the event stream, swith the priority to 'all'
 to see both successful and failed builds. -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Jenkinsインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/jenkins.yaml.example)
 * [Jenkinsインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/jenkins.py)
 
 Jenkinsで成功したビルドは、プライオリティー'Low'で表示されます。
-成功したビルドと失敗したビルドの両方を表示するために、イベントストリームの左側コラム内の`PRIORITY`の部分で`All`を選択してください。
+成功したビルドと失敗したビルドの両方を表示するためには、イベントストリームの左側コラム内の`PRIORITY`の部分で`All`を選択してください。
