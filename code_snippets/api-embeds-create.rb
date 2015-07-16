@@ -18,7 +18,7 @@ graph_json = '{
 timeframe = "1_hour"
 size = "medium"
 legend = "no"
-title = "Sick Title!"
+title = "Embed created through API"
 
 # Make API Call
 status, result = dog.create_embed(graph_json, timeframe, size, legend, title)
