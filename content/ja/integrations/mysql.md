@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-MySQL Integration
@@ -20,10 +20,10 @@ doclevel: basic
 - Visualize your database performance
 - Correlate the performance of MySQL with the rest of your applications -->
 
-次の目的のために、MySQLのメトリクスをDatadogに送信します:
+次の目的の為に、MySQLのメトリクスをDatadogに送信します:
 
-- データベースのパフォーマンスの可視化する
-- MySQLのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+- データベースのパフォーマンスを可視化する
+- MySQLのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 <!-- From the open-source Agent:
 
@@ -46,12 +46,12 @@ The following metrics are collected by default with the MySQL integration:
     mysql.performance.table_locks_waited
     mysql.performance.threads_connected -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/mysql.yaml.example)
 * [MySQLインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mysql.py)
 
-MySQLインテグレーションがデフォルトで収集しているメトリクス:
+MySQLインテグレーションがデフォルトで取得しているメトリクス:
 
     mysql.innodb.buffer_pool_size
     mysql.innodb.data_reads

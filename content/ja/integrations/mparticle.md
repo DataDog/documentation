@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/07/16
 translation_status: original
 language: ja
 title: Datadog-mParticle Integration
@@ -18,9 +18,7 @@ doclevel: basic
 ### 概要
 {:#int-overview}
 
-Connect mParticle to Datadog and see the following information in real-time in your Datadog dashboard:
-
-mParticleとDatadogを連携し、ダッシュボードにリアルタイムで以下の情報が表示できるようにします:
+mParticleとDatadogを連携し、ダッシュボードにリアルタイムで以下の情報を表示できるようにします:
 
 * クラッシュレポート(アプリの障害レポート)
 * 3rd Party Network パフォーマンス
