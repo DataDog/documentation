@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Process check
@@ -17,8 +17,8 @@ kind: integration
 ### 概要
 {:#int-overview}
 
-- システム上の特定のプロセスのCPU%、メモリー、I/Oのメトリクスを収取します。
-- [Process Monitors](/guides/monitoring#process)の設定に基づいて動作しているプロセスをのステータスを監視し、アラートをします。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
+- システム上の特定のプロセスのCPU%、メモリー、I/Oのメトリクスを取得します。
+- [Process Monitors](/guides/monitoring#process)の設定に基づいて動作しているプロセスのステータスを監視し、アラートを出力します。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
 
 
 <!-- From the Agent:
@@ -26,7 +26,7 @@ kind: integration
 * [Process check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py)
 * [Process check configuration example](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Process check インテグレーションのscript](https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py)
 * [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example)
@@ -74,7 +74,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
 ### 設定
 {:#int-configuration}
 
- *プロセスメトリクスを収取するには、Datadog Agentのインストールが必要です。*
+ *プロセスメトリクスを取得するには、Datadog Agentのインストールが必要です。*
 
 1. Datadog Agentを監視したいプロセスに接続するように設定をします。以下の例では、 `sshd`と`postgres`のプロセスを監視するように設定をしています。
 

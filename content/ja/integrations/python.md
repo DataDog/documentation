@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Python Integration
@@ -13,7 +13,7 @@ doclevel: basic
 ### 概要
 {:#int-overview}
 
-Pythonの統合は、数行のコードを計測することにより、任意のカスタムメトリックを監視することができます。たとえば、ページビュー数、または任意の関数呼び出しの時間を返すメトリックを持つことができます。 Pythonの統合の詳細については、提出メトリックにガイドを参照してください。高度な使用方法については、リポジトリ内のドキュメントを参照してください
+Pythonの統合は、数行のコードを記述することにより、任意のカスタムメトリクスを監視することが出来ます。たとえば、ページビュー数、または任意の関数呼び出しの時間を返すメトリックを持つことが出来ます。 Pythonの統合の詳細については、メトリクスのガイドを参照してください。高度な使用方法については、リポジトリ内のドキュメントを参照してください
 
 
 <!-- 1. To install from pip:
@@ -60,11 +60,11 @@ Pythonの統合は、数行のコードを計測することにより、任意�
 ### 設定
 {:#configuration}
 
-1. pipをコマンドによりパッケージをインストールします:
+1. pipをインストールします:
 
         pip install datadog
 
-2. 次のようにコードを記述していきます:
+2. 以下のようにコードを記述します:
 
         # Configure the module according to your needs
         from datadog import initialize
@@ -98,4 +98,4 @@ Pythonの統合は、数行のコードを計測することにより、任意�
         stats.start()
         stats.increment('home.page.hits')
 
-3. DatadogのMetrics explorerのページを表示し、収取しようとしているメトリクスがあるか確認します。
+3. DatadogのMetrics explorerのページを表示し、取得しようとしているメトリクスがあるか確認します。
