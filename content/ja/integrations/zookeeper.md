@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Zookeeper Integration
@@ -30,7 +30,7 @@ Connect ZooKeeper to Datadog in order to:
 * [ZooKeeper YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/zk.yaml.example)
 * [ZooKeeper checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/zk.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [ZooKeeper MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/zk.yaml.example)
 * [ZooKeeperインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/zk.py)

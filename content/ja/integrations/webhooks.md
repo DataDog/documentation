@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Webhooks Integration
@@ -62,7 +62,7 @@ If you want to post your webhooks to a service requiring authentication, you can
 
 webhooksインテグレーションを設定するには、`Integrations`タブ-->`Integrations`ドロップダウンメニューと移動し、webhookインテグレーションの設定用ポップアップ画面で、接続先サービスのwebhook URLとそのサービスの名前を入力します。webhookを使ってメッセージを送信するには、アラートの通知欄やイベントでメッセージを書き込む際に、 @webhook-name_of_the_webhook と記述します。この記述を使うことで、アラートの発生時やイベントメッセージに書き込みをした時に、webhookインテグレーションが、設定先URLに対してjson形式でメッセージをPOSTするようになります。
 
-jsonによりペイロードを設定することで、HTTPリクエストに独自のフィールドを追加することができます。
+jsonによりペイロードを設定することで、HTTPリクエストに独自のフィールドを追加することが出来ます。
 
     {
         "id":"$ID",
@@ -99,7 +99,7 @@ webhookインテグレーションの設定用ポップアップ画面内の"Use
 
 最後に、ペイロードをURLエンコードしたい場合は、"Encode as form"欄にチェックマークをつけます。
 
-webhookの認証を必要とするサービスと連携するには、HTTPのベーシック認証を使い、登録するURLの部分を次のように書き換えてください。
+webhookの認証を必要とするサービスと連携するには、HTTPのベーシック認証を使い、登録するURLの部分を次のように書き換えて下さい。
 
 `https://my.service.com` ---> `https://username:password@my.service.com`
 
@@ -188,4 +188,4 @@ URLは記述は次のようになります:
         }
     }
 
-Jiraの場合、先にjsonで記載した内容をURLエンコードしないため、"Encode as form" の欄にチェックマークが入っていないことを確認してください。
+Jiraの場合、先にjsonで記載した内容をURLエンコードしない為、"Encode as form" の欄にチェックマークが入っていないことを確認して下さい。

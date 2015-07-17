@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-VMware Integration
@@ -22,8 +22,8 @@ Install the Datadog VMware vSphere integration to:
 
 次の目的で、DatadogのVMware vSphereインテグレーションをインストールします:
 
-- vSphereのパフォーマンスメトリクスを収集し、Datadogのダッシュボードに表示する
-- vSphere上で発生しているイベントを収集し、ダッシュボード上のグラフ内にマーカー表示する　(vMotion、設定変更、on/offなど)
+- vSphereのパフォーマンスメトリクスを取得し、Datadogのダッシュボードに表示する
+- vSphere上で発生しているイベントを取得し、ダッシュボード上のグラフ内にマーカー表示する　(vMotion、設定変更、on/offなど)
 - vSphereメトリクスにつてイベントストーリーやグラフ上でチームメンバーで検討し、作業を進める
 
 
@@ -48,7 +48,7 @@ vSphereに関するblog記事を準備しています。[「Unified vSphere and 
     mem.overhead
     mem.vmmemctl -->
 
-VMwareインテグレーションが収集しているメトリクスです:
+VMwareインテグレーションが取得しているメトリクスです:
 
     cpu.extra
     cpu.ready
@@ -92,4 +92,4 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 
 1. vSphereが起動しているホストに、Datadog Agentをインストールします。
 2. EXSのVM内にも、Datadog Agentをインストールします。(各VMのシステムメトリクスを収取します)
-3. EXSのVM内に、各アプリケーション向けのインテグレーションを追加します。(各アプリケーションのメトリクスを収集します)
+3. EXSのVM内に、各アプリケーション向けのインテグレーションを追加します。(各アプリケーションのメトリクスを取得します)
