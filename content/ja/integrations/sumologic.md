@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-SumoLogic Integration
@@ -16,7 +16,7 @@ doclevel: basic
 
 次の目的で、Sumo LogicとDatadogを連携します:
 
-* Sumo Logicに蓄積しているログデータをDatadogに収集しているメトリクスと関連付ける
+* Sumo Logicに蓄積しているログデータをDatadogが取得しているメトリクスと関連付ける
 * Sumo Logicへアラート通知を送信する
 
 ### 設定

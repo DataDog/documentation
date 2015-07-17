@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-VictorOps Integration
@@ -66,4 +66,4 @@ If this field is left empty, the default endpoint will be `https://alert.victoro
 
 VictorOps上の特定ユーザーの"Routing Key"を、全てDatadog側に追加しておいてください。(もしもこの欄に指定がない場合は、VictorOpsは、デフォルトグループに対してアラートを通知します。)
 
-使用可能な文字列は、大小文字英数、`_`と`-`が使用可能です。**それ以外の特殊文字などは使用できません。**
+使用可能な文字列は、大小文字英数、`_`と`-`が使用可能です。**それ以外の特殊文字などは使用出来ません。**

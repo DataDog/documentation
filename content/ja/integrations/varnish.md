@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Varnish Integration
@@ -27,7 +27,7 @@ Connect Varnish to Datadog in order to:
 次の目的で、VarnishのメトリクスをDatadogに送信します:
 
 - キャッシュシステムのパフォーマンスを可視化します
-- Varnishのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+- Varnishのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
 <!-- From the open-source Agent:
@@ -35,7 +35,7 @@ Connect Varnish to Datadog in order to:
 * [Varnish YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
 * [Varnish checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Varnishインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
 * [Varnishインテグレーション  checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py)
@@ -144,7 +144,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     varnish.uptime -->
 
 
-Varnishインテグレーションがデフォルトで収集しているメトリクス:
+Varnishインテグレーションがデフォルトで取得しているメトリクス:
 
     varnish.accept_fail
     varnish.backend_busy

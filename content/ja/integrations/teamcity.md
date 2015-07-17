@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-TeamCity Integration
@@ -19,4 +19,4 @@ doclevel: basic
 次の目的で、TeamCityとDatdogを連携します:
 
 * アプリケーションのビルドとデプロイを監視する
-* インテグレーションの全てのステップに関するステータスとビルドタグを収集する
+* インテグレーションの全てのステップに関するステータスとビルドタグを取得する
