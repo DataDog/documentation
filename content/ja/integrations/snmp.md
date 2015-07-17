@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/13
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-SNMP Integration
@@ -11,7 +11,7 @@ sidebar:
     - header: SNMP Integration
     - text: SNMP インテグレーションの設定
       href: "#agent"
-    - text: 独自Mibの変換
+    - text: 独自MIBの変換
       href: "#convert-mib"
 ---
 
@@ -32,7 +32,7 @@ SNMP Checkを使用するには、`conf.d`ディレクトリにある`snmp.yaml.
 <!-- <p> Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:</p>
 <dl class='snmp'> -->
 
-Datadog Agentは、瞬間値や積算値をSNMPから収取できます。次に示す方法で監視対象となる`metrics`を、それぞれのデバイスに対して指定してください:
+Datadog Agentは、瞬間値や積算値をSNMPから取得出来ます。次に示す方法で監視対象となる`metrics`を、それぞれのデバイスに対して指定してください:
 
 
 
@@ -85,13 +85,13 @@ You can also gather tags based on the indices of your row, in case they are mean
         - MIB: UDP-MIB
           symbol: udpInDatagrams
 
-##### OIDとDatadog使用するメトリクス名を指定します。
+##### OIDとDatadogで使用するメトリクス名を指定します。
 
     metrics:
         - OID: 1.3.6.1.2.1.6.5
           name: tcpActiveOpens
 
-##### MIBと情報を収集するテーブルを指定します。
+##### MIBと情報を取得するテーブルを指定します。
 
     metrics:
         - MIB: IF-MIB
@@ -102,9 +102,9 @@ You can also gather tags based on the indices of your row, in case they are mean
             - tag: interface
               column: ifDescr
 
-この方法により、テーブルの全行の情報が収取でき、タグ付けもすることができます。`symbols`のリストを使って収取するメトリクスを指定し、`metric_tags`のリストを使ってそれらのメトリクスに付与しておくタグを指定します。
+この方法により、テーブルの全行の情報が取得でき、タグ付けすることが出来ます。`symbols`のリストを使って取得するメトリクスを指定し、`metric_tags`のリストを使ってそれらのメトリクスに付与しておくタグを指定します。
 
-この例では、各インターフェイスで受信した通信量のレートを収集し、ifDescr列のインターフェース毎に`interface:eth0`のタグを付与します。
+この例では、各インターフェイスで受信した通信量のレートを取得し、ifDescr列のインターフェース毎に`interface:eth0`のタグを付与します。
 
     metrics:
         - MIB: IP-MIB
@@ -115,7 +115,7 @@ You can also gather tags based on the indices of your row, in case they are mean
             - tag: ipversion
               index: 1
 
-必要に応じて行のインデックスに基づいてタグを収集することもできます。この例では、最初の行のインデックスがIPのバージョン（IPv6, IPv4）を見分け、タグ付けするよいうに指定しています。
+必要に応じて行のインデックスに基づいてタグを付与することも出来ます。この例では、最初の行のインデックスがIPのバージョン（IPv6, IPv4）を見分け、タグ付けするように指定しています。
 
 
 <!-- ### Use your own Mib
@@ -133,12 +133,12 @@ where YOUR-MIB.mib is the MIB you want to convert.
 
 Put all your pysnmp mibs into a folder and specify this folder's path in your `snmp.yaml` file, in the `init_config` section.` -->
 
-### 独自Mibの変換
+### 独自MIBの変換
 {: #convert-mib}
 
-独自のMIBを使用するには、ysnmp形式に変換する必要があります。この変換には、pysnmpのパッケージに含まれている`build-pysnmp-mibs`を使うことができます。
+独自のMIBを使用するには、ysnmp形式に変換する必要があります。この変換には、pysnmpのパッケージに含まれている`build-pysnmp-mibs`を使うことが出来ます。
 
-この`build-pysnmp-mibs`を使うには、`smidump`がインストールされている必要があります。従って、`smidump`を包含している`libsmi2ldbl`パッケージが正しくインストールできていることを確認してください。更に、MIBが依存している全てのファイルがmibディレクトリに設置されていることも確認してください。(依存ファイルがない場合は、正しく変換ができません。)
+この`build-pysnmp-mibs`を使うには、`smidump`がインストールされている必要があります。従って、`smidump`を包含している`libsmi2ldbl`パッケージが正しくインストールできていることを確認して下さい。更に、MIBが依存している全てのファイルがmibディレクトリに設置されていることも確認して下さい。(依存ファイルがない場合は、正しく変換ができません。)
 
 変換の実行
 

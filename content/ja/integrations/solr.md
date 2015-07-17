@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Solr Integration
@@ -28,7 +28,7 @@ The following metrics are collected by default with the SOLR integration:
 
 Solrインテグレーションについては、[「JMX Checks」](http://docs.datadoghq.com/ja/integrations/java/)を参照してください。
 
-Solerインテグレーションがデフォルトで収集しているメトリクス:
+Solerインテグレーションがデフォルトで取得しているメトリクス:
 
     solr.cache.evictions
     solr.cache.hits
