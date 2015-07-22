@@ -2,7 +2,7 @@
 last_modified: 2015/04/01
 translation_status: translated
 language: ja
-title: Datadog-AWS MapReduce インテグレーション
+title: Datadog-AWS MapReduce Integration
 integration_title: AWS MapReduce
 kind: integration
 doclevel: basic

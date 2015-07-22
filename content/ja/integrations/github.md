@@ -2,7 +2,7 @@
 last_modified: 2015/06/25
 translation_status: complete
 language: ja
-title: Datadog-Github インテグレーション
+title: Datadog-Github Integration
 integration_title: Github
 kind: integration
 doclevel: complete

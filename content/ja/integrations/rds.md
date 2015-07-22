@@ -2,7 +2,7 @@
 last_modified: 2015/06/25
 translation_status: complete
 language: ja
-title: Datadog-AWS RDS インテグレーション
+title: Datadog-AWS RDS Integration
 integration_title: AWS RDS
 kind: integration
 doclevel:

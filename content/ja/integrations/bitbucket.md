@@ -2,7 +2,7 @@
 last_modified: 2015/06/25
 translation_status: complete
 language: ja
-title: Datadog-Bitbucket インテグレーション
+title: Datadog-Bitbucket Integration
 integration_title: Bitbucket
 kind: integration
 doclevel: basic
