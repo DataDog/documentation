@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-AWS Storage Gateway インテグレーション
+title: Datadog-AWS Storage Gateway Integration
 integration_title: AWS Storage Gateway
 kind: integration
 doclevel: basic

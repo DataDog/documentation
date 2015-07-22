@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-AWS Redshift インテグレーション
+title: Datadog-AWS Redshift Integration
 integration_title: AWS Redshift
 kind: integration
 doclevel: basic

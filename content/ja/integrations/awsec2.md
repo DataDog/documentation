@@ -2,7 +2,7 @@
 last_modified: 2015/04/01
 translation_status: translated
 language: ja
-title: Datadog-AWS EC2 インテグレーション
+title: Datadog-AWS EC2 Integration
 integration_title: AWS EC2
 kind: integration
 doclevel: basic

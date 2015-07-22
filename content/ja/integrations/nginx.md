@@ -2,7 +2,7 @@
 last_modified: 2015/07/16
 translation_status: complete
 language: ja
-title: Datadog-NGINX インテグレーション
+title: Datadog-NGINX Integration
 integration_title: NGINX
 kind: integration
 doclevel:

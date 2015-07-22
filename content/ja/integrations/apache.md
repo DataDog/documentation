@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-Apache インテグレーション
+title: Datadog-Apache Integration
 integration_title: Apache
 kind: integration
 doclevel: complete

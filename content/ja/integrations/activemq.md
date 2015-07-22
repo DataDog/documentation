@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-ActiveMQ インテグレーション
+title: Datadog-ActiveMQ Integration
 integration_title: ActiveMQ
 kind: integration
 doclevel: complete
