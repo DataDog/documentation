@@ -2,7 +2,7 @@
 last_modified: 2015/06/25
 translation_status: original
 language: ja
-title: Datadog-HipChat インテグレーション
+title: Datadog-HipChat Integration
 integration_title: HipChat
 kind: integration
 doclevel: basic

@@ -2,7 +2,7 @@
 last_modified: 2015/04/01
 translation_status: translated
 language: ja
-title: Datadog-AWS SQS インテグレーション
+title: Datadog-AWS SQS Integration
 integration_title: AWS SQS
 kind: integration
 doclevel: basic

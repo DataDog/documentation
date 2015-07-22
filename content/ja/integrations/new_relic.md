@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-New Relic Integration
@@ -11,10 +11,10 @@ doclevel:
 ## 概要
 {: #int-overview}
 
-次のような目的のために、New RelicのメトリクスをDatadogに送信します:
+次の目的の為に、New RelicのメトリクスをDatadogに送信します:
 
-- New Relic キーメトリクス(レスポンス時間、Apdexスコアなど)をDatadogで収取したメトリクスと連携
-- New Relic が検知したアラートをイベントストリームにも表示
+- New Relic キーメトリクス(レスポンス時間、Apdexスコアなど)をDatadogで取得したメトリクスと連携
+- New Relic が検知したアラートをDatadogのイベントストリームにも表示
 
 
 <!-- #### What does the 'Collect metrics by host' option do ?
@@ -30,9 +30,9 @@ This also import New Relic hosts to Datadog Infrastructure section. -->
 
 #### *「Collect metrics by host」* オプションの効能
 
-このオプションを設定することよにより、Datadog側では関連ずけられた全てのホストのアプリケーションメトリクスを収集するようになります。(オプションを設定していない状態では、下記に示す"overall host throughput based average"になります。)
+このオプションを設定する事により、Datadog側では関連付けられた全てのホストのアプリケーションメトリクスを取得するようになります。(オプションを設定していない状態では、下記に示す"overall host throughput based average"になります。)
 
-メトリクスを個別に扱おうとしている場合は、この方法の方が理にかなっています。例えば、ホストXが問題となるようなエラー率値Yになってるにも関わらず、各ホストに分散するアプリケーションZの集約したエラー率は、容認範囲に収まっている場合がその例です。
+メトリクスを個別に扱おうとしている場合は、この方法が理にかなっています。例えば、ホストXが問題となるようなエラー率値Yになっているにも関わらず、各ホストに分散するアプリケーションZの集約したエラー率は、容認範囲に収まっている場合がその例です。
 
 
 <!-- #### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
@@ -73,10 +73,10 @@ Whereas we would simply compute the arithmetic mean:
 
 #### *「Collect metrics by host」* オプションを有効にしています。なぜapplication-levelのメトリクスの示す値がNew RelicとDatadogで違っているのですか。
 
-New Relicが、ホストレベルで測定されたメトリクス(例えば、レスポンス時間)のapplication-levelの集計値のを計算する際、各ホストで測定されたスループットに基づいて加重平均を計算します。
+New Relicが、ホストレベルで測定されたメトリクス(例えば、レスポンス時間)のapplication-levelの集計値を計算する際、各ホストで測定されたスループットに基づいて加重平均を計算します。
 
 Datadogで最も類似した集計処理が `avg` になりますが、この処理は値の単純平均を計算しています。この処理は、デフォルトの集計処理で、`new_relic.web_transaction.average_response_time{*}` ようなシンプルな集計処理でよく使われます。
-もしも全てのホストがほぼ同じスループットで動作しているなら、Datadogの平均も、Nwe Relicのスループット加重の集計も似たような値を算出するでしょう。しかし、スループットがそれほど均一でない場合は、application-levelの集計値に無視できないほど開きがでるでしょいう。
+もしも全てのホストがほぼ同じスループットで動作しているなら、Datadogの平均も、Nwe Relicのスループット加重の集計も似たような値を算出するでしょう。しかし、スループットがそれほど均一でない場合は、application-levelの集計値に無視できないほど開きがでるでしょう。
 
 例えば、3台のホストで構成されているアプリケーションがあるとします。ある時点で、次のようなメトリクス値になっていたとします:
 

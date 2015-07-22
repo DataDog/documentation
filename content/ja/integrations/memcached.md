@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Memcached Integration
@@ -31,9 +31,9 @@ doclevel: basic
 * [Memcache YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
 * [Memcache checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Memcachedインテグレーションの設定ファイルサンプ](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
+* [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
 * [Memcachedインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py)
 
 
@@ -58,7 +58,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収集プログ�
     memcache.total_connections
     memcache.total_items -->
 
-Memcachedインテグレーションがデフォルトで収集しているメトリクス:
+Memcachedインテグレーションがデフォルトで取得しているメトリクス:
 
     memcache.bytes
     memcache.bytes_read
