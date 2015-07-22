@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/02
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Nagios Integration
@@ -23,9 +23,9 @@ Capture Nagios activity in Datadog to:
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 
-* プロダクション環境の障害パターンを一目で識別するため
-* ワンクリックで過去に実施した問題解決方を検索するため
-* 障害に関し、チームメンバーとイベントストリーム上で検討するため
+* プロダクション環境の障害パターンを一目で識別する為
+* ワンクリックで過去に実施した問題解決方法を検索する為
+* 障害に関し、チームメンバーとイベントストリーム上で検討する為
 
 <!-- ### Configuration
 {:#setting}
@@ -58,7 +58,7 @@ Find the Nagios configuration file on your server (usually /etc/nagios3/nagios.c
 
         sudo find /etc -type f -name nagios.cfg
 
-2. Datadog Agentが、Nagiosからメトリクス情報を収取できるように、nagios.yamlを編集します。
+2. Datadog Agentが、Nagiosからメトリクス情報を取得できるように、nagios.yamlを編集します。
 
         init_config:
 

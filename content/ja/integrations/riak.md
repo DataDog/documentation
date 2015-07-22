@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Riak Integration
@@ -19,10 +19,10 @@ Connect Riak to Datadog in order to:
 ### 概要
 {:#int-overview}
 
-次の目的のために、RiakのメトリクスをDatadogに送信します:
+次の目的の為に、RiakのメトリクスをDatadogに送信します:
 
 - Riakのパフォーマンスの可視化する
-- Riakのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+- Riakのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
 <!-- From the open-source Agent:
@@ -30,7 +30,7 @@ Connect Riak to Datadog in order to:
 * [Riak YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example)
 * [Riak checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Riakインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example)
 * [Riakインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py)
@@ -61,7 +61,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     riak.vnode_index_writes
     riak.vnode_puts -->
 
-Raik インテグレーションがデフォルトで収集しているメトリクス:
+Raik インテグレーションがデフォルトで取得しているメトリクス:
 
     riak.memory_atom
     riak.memory_atom_used

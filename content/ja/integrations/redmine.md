@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Redmine Integration
@@ -27,7 +27,7 @@ The Redmine configuration just requires a full URL to the desired activity feed 
 
 * 開発サイクルの追跡と記録
 * Datadogのイベントストリームでオープンになっている案件を確認する
-* 上記の情報に基づいて、チームで検討のディスカンションをする
+* 上記の情報に基づいて、チームでのディスカンションをする
 
 
 ### 設定

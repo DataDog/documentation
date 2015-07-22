@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Pingdom Integration
@@ -18,7 +18,7 @@ At this time we track the response_time metric for any sites you configure on th
 ### 概要
 {: #int-overview}
 
-Pingdomのダウンタイム·イベントやパフォーマンス·メトリックを追跡し、Datadogに送信することで、アプリケーションの他のメトリクスやイベント連携し、インフラ全体の把握ができるようにします。
+Pingdomのダウンタイム·イベントやパフォーマンス·メトリックを追跡し、Datadogに送信することで、アプリケーションの他のメトリクスやイベントと連携し、インフラ全体の把握ができるようにします。
 
 現在のインテグレーションの仕様では、Pingdomで設定した任意のサイトのresponse_timeメトリクスを追跡します。
 
@@ -31,6 +31,6 @@ Pingdomのダウンタイム·イベントやパフォーマンス·メトリッ
 
 ### トラブルシュートと質問
 
-**Q:** Datadogはトランスアクションチェックをサポートしていますか。
+**Q:** Datadogはトランザクションチェックをサポートしていますか。
 
-**A:** Pingdomには、トランザクションチェックと連携するためのAPIが提供されていません。したがって、Datadog側では、トランザクションチェックに関する情報を収取し表示することができません。この機能のAPIが利用可能になった暁には、Datadogのインテグレーションも対応する予定です。
+**A:** Pingdomには、トランザクションチェックと連携するためのAPIが提供されていません。したがって、Datadog側では、トランザクションチェックに関する情報を取得し表示することが出来ません。この機能のAPIが利用可能になった時には、Datadogのインテグレーションも対応する予定です。

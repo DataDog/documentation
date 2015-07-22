@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/07/16
 translation_status: original
 language: ja
 title: Datadog-Lighttpd Integration
@@ -21,7 +21,7 @@ Bring Lighttpd metrics to Datadog to:
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 
-- webサーバーのパフォーマンスを可視化する
+- webサーバのパフォーマンスを可視化する
 - lighttpdのメトリクスと他のアプリケーションメトリクスを連携し、状況を把握する
 
 
@@ -30,7 +30,7 @@ Bring Lighttpd metrics to Datadog to:
 * [Lighttpd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/lighttpd.yaml.example)
 * [Lighttpd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/lighttpd.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 * [Lighttpdインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/lighttpd.yaml.example)
 * [Lighttpdインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/lighttpd.py)
 
@@ -66,7 +66,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     lighttpd.response.status_4xx
     lighttpd.response.status_5xx -->
 
-Lighttpdインテグレーションがデフォルトで収集しているメトリクス:
+Lighttpdインテグレーションがデフォルトで取得しているメトリクス:
 
     lighttpd.connections.state_handle_request
     lighttpd.connections.state_keep_alive

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-RSS Integration
@@ -22,4 +22,4 @@ Capture RSS feed activity in Datadog to:
 RSSフィードで起きているイベントをDatadogと連携します:
 
 * 任意の情報ソースに表示されているイベントを、Datadogのイベントして取り込む
-* RSSフィードイベントをチームのメンバーと検討する
+* RSSフィードイベントをチームメンバーと検討する

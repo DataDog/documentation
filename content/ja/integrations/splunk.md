@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Splunk Integration
@@ -20,14 +20,10 @@ Connect your Splunk log monitoring to be able to:
 ### 概要
 {:#int-overview}
 
-次の目的のために、Splunkのログ監視とDatadogを連携します:
+次の目的の為に、Splunkのログ監視とDatadogを連携します:
 
-- Get notified of your reports.
-- Correlate these reports with your other metrics
-- Collaborate with your team on the events
-
-* ログリポートに基づいて、通知を受ける
-* ログリポートと他のアプリケーションの情報と連携し状況を把握する
+* ログレポートに基づいて、通知を受ける
+* ログレポートと他のアプリケーションの情報を連携し状況を把握する
 * イベントの発生を検知し、チームで共同して作業をする
 
 
@@ -70,7 +66,7 @@ You can now configure your splunk reports to exectue this script in order to get
         "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5, from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
         --aggregation_key $SPLUNK_ARG_3 --type splunk
 
-    - メッセージ部分に @mention 記法を追加することにより、Datadogの通知機能を使って、特定のメンバーにイベントを際転送することもできます。
+    - メッセージ部分に @mention 記法を追加することにより、Datadogの通知機能を使って、特定のメンバーにイベントを再転送することも出来ます。
     - メッセージ部分に使用しているSplunk専用の引数に関しては、Splunkサイトにある[「Community:Use Splunk alerts with scripts to create a ticket in your ticketing system Generate a ticket in your ticketing system from a Splunk alert」](https://wiki.splunk.com/Community:Use_Splunk_alerts_with_scripts_to_create_a_ticket_in_your_ticketing_system)を参照していください。
 
 4. Splunk側でsplunk reportsに`dog-splunk.sh`を実行するように設定し、SplunkのイベントをDatadogへ送信するようにします。

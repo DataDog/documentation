@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Hadoop HDFS Integration
@@ -19,4 +19,4 @@ doclevel: basic
 次の目的で、HDFSのメトリクをDatadogと連携します:
 
 * HDFSのキーメトリクスを可視化する
-* HDFSのパフォーマスンメトリクスと他のアプルケーションの情報と関連付けて把握する
+* HDFSのパフォーマンスメトリクスと他のアプルケーションの情報を関連付けて把握する

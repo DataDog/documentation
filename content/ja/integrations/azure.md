@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-Microsoft Azure インテグレーション
+title: Datadog-Microsoft Azure Integration
 integration_title: Microsoft Azure
 kind: integration
 doclevel: complete

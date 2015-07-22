@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/05
+last_modified: 2015/07/15
 translation_status: complete
 language: ja
 title: Agent Checkの書き方
@@ -53,7 +53,7 @@ they will run every check interval, which defaults to 15 seconds. -->
 <h3 id="overview">概要</h3>
 
 このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからメトリクスとイベント情報を取得する方法について説明します。
-`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を収集する簡単なAgent Checkを記述してみます。
+`AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を取得する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
 
@@ -76,7 +76,7 @@ web chat client, too</a>.) -->
 
 <h3 id="setup">セットアップ</h3>
 
-未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
+まだDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -140,10 +140,10 @@ flushed out with the other Agent metrics.
 #### メトリクスの送信
 
 Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDが提供している関数に精通しているなら、移行は非常に簡単です。
-未だそれらの関数に慣れていない場合でも、それほど大変ではないことがすぐに分かるはずです。
+まだそれらの関数に慣れていない場合でも、それほど大変ではないことがすぐに分かるはずです。
 
 
-Agent Checkでは、次のような関数を利用することができます:
+Agent Checkでは、以下の関数を利用することが出来ます:
 
     self.gauge( ... ) # Sample a gauge metric
 
@@ -159,7 +159,7 @@ Agent Checkでは、次のような関数を利用することができます:
 
     self.monotonic_count( ... ) # Sample an increasing counter metric
 
-全ての関数は、次の引数をとります:
+全ての関数は、以下の引数を取ります:
 
 - `metric`: The name of the metric
 - `value`: The value for the metric (defaults to 1 on increment, -1 on decrement)
@@ -167,7 +167,7 @@ Agent Checkでは、次のような関数を利用することができます:
 - `hostname`: (optional) A hostname to associate with this metric. Defaults to the current host.
 - `device_name`: (optional) A device name to associate with this metric.
 
-これらの関数は、チェックロジックのどこからでも呼び出すことができます。これらの関数を使って取得したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
+これらの関数は、チェックロジックのどこからでも呼び出すことが出来ます。これらの関数を使って取得したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
 
 
 <!-- #### Sending events
@@ -195,7 +195,7 @@ of the Agent payload. -->
 
 #### イベントの送信
 
-Check 内でイベントを送信するには、`self.event(...)`を呼び出し、`"argument":`に値を設定することで、そのイベントに関する情報(payload)を設定することができます。イベントの中身は次のような構造になっている必要があります:
+Check 内でイベントを送信するには、`self.event(...)`を呼び出し、`"argument":`に値を設定することで、そのイベントに関する情報(payload)を設定することが出来ます。イベントの中身は次のような構造になっている必要があります:
 
     {
         "timestamp": int, the epoch timestamp for the event,
@@ -234,7 +234,7 @@ easy debugging. For example:
 
 #### エラーと例外の表示
 
-不適切な設定、プログラミング時のエラー、いずれかのメトリクスが収集できない時など、Checkが実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示できるので、デバッグ時に利用することが出来ます:
+不適切な設定、プログラミング時のエラー、いずれかのメトリクスが取得できない時など、Checkが正常に実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示出来るので、デバッグに利用することが出来ます:
 
 
     $ sudo /etc/init.d/datadog-agent info

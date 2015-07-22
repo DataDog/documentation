@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Gunicorn Integration
@@ -36,11 +36,11 @@ doclevel:
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions. -->
 
-Gumicornメトリクスを収取するためには、Datadog Agentのインストールが必要です。
+Gumicornメトリクスを取得するためには、Datadog Agentのインストールが必要です。
 
-1. 以下に示す方法は、Datadog Agent >= 5.0.0に適応しております。それ以前のDatadog Agentを使用している場合は、Datadog Agentをアップデートするか、旧 Datadog Agentの設定方法に従って設定してください。
+1. 以下に示す方法は、Datadog Agent >= 5.0.0で対応しています。それ以前のDatadog Agentを使用している場合は、Datadog Agentをアップデートするか、旧 Datadog Agentの設定方法に従って設定してください。
 
-2. Gunicornから情報が収集できるようにDatadog Agentの設定ファイルを変更します。
+2. Gunicornから情報が取得できるようにDatadog Agentの設定ファイルを変更します。
 
     Edit conf.d/gunicorn.yaml
 

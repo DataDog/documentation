@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: Datadog-Ruby Integration
@@ -21,4 +21,4 @@ doclevel: basic
 
 * Rubyアプリケーションのパフォーマンスを可視化する
 * Rubyアプリケーションのメトリクスと他のアプリケーションメトリクスを連携し、状況を把握する
-* 関連するすべてのメトリックを監視する
+* 関連するすべてのメトリクスを監視する

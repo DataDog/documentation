@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Pivotal Integration
@@ -21,5 +21,5 @@ Capture Pivotal activity into Datadog to:
 
 次の目的で、 Pivotalの動作状況をDatadogへ送信します:
 
-* ストーリーの基づいて発生しているプロセスを把握し、チームで検討する
+* ストーリーに基づいて発生しているプロセスを把握し、チームで検討する
 * システム内の他のメトリクスやイベントと、ストーリーの完了を関連付けて把握する

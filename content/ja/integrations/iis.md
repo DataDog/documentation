@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-IIS Integration
@@ -22,7 +22,7 @@ Connect IIS to Datadog in order to:
 次の目的で、IISのメトリクスをDatadogに送信します:
 
 * IISのパフォーマンスを可視化する
-* IISのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+* IISのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
 <!-- From the open-source Agent:
@@ -30,7 +30,7 @@ Connect IIS to Datadog in order to:
 * [IIS YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example)
 * [IIS checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example)
 * [IISインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py)
@@ -63,7 +63,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
 
 Overall metric definitions from IIS can be found [here](http://msdn.microsoft.com/en-us/library/aa394298(v=vs.85).aspx). -->
 
-IIS インテグレーションがデフォルトで収集しているメトリクス:
+IIS インテグレーションがデフォルトで取得しているメトリクス:
 
     iis.errors.locked
     iis.errors.not_found

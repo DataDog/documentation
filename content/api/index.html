@@ -688,6 +688,10 @@ kind: documentation
     <h4 id="monitor-unmute-all">Unmute all monitors</h4>
     <div class="row-fluid">
       <%= left_side_div %>
+        <p>
+        Disables muting all monitors. Throws an error if mute all was
+        not enabled previously.
+        </p>
         <h5>Arguments</h5>
         <%= no_args %>
       </div>
@@ -1698,7 +1702,7 @@ kind: documentation
     </div>
 
     <!-- Get All Embeds -->
-    <h4 id="graph-snapshot">Get All Embeds</h4>
+    <h4 id="embeds-get-all">Get All Embeds</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
@@ -1718,18 +1722,18 @@ kind: documentation
         <h5>Signature</h5>
         <code>GET api/v1/graph/embed</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-graph-snapshot.py" %>
-        <%= snippet_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_code_block "api-embeds-get-all.py" %>
+        <%= snippet_code_block "api-embeds-get-all.rb" %>
+        <%= snippet_code_block "api-embeds-get-all.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-graph-snapshot.py" %>
-        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_result_code_block "api-embeds-get-all.py" %>
+        <%= snippet_result_code_block "api-embeds-get-all.rb" %>
+        <%= snippet_result_code_block "api-embeds-get-all.sh" %>
       </div>
     </div>
 
     <!-- Create Embed -->
-    <h4 id="graph-snapshot">Create Embed</h4>
+    <h4 id="embeds-create">Create Embed</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
@@ -1738,6 +1742,9 @@ kind: documentation
         <p>
           Returns: A JSON consisting of the same elements returned by <code>GET api/v1/graph/embed/:embed_id</code>.
           On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <p>
+          Note: If an embed already exists for the exact same query in a given organization, the older embed will be returned instead of creating a new embed.
         </p>
         <h5>Arguments</h5>
         <ul class="arguments">
@@ -1749,24 +1756,26 @@ kind: documentation
           large, and xlarge.", {:default => 'medium'} %>
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
+          <%= argument "title", "Determines graph title. Must be at least 1 character.", 
+          {:default => 'Embed created through API'} %>
         </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
         <code>POST api/v1/graph/embed</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-graph-snapshot.py" %>
-        <%= snippet_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_code_block "api-embeds-create.py" %>
+        <%= snippet_code_block "api-embeds-create.rb" %>
+        <%= snippet_code_block "api-embeds-create.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-graph-snapshot.py" %>
-        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_result_code_block "api-embeds-create.py" %>
+        <%= snippet_result_code_block "api-embeds-create.rb" %>
+        <%= snippet_result_code_block "api-embeds-create.sh" %>
       </div>
     </div>
 
     <!-- Get Specifc Embed -->
-    <h4 id="graph-snapshot">Get Specific Embed</h4>
+    <h4 id="embeds-get">Get Specific Embed</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
@@ -1794,30 +1803,31 @@ kind: documentation
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
           <%= argument "template_variables", "A list of template variables values to replace in queries with form $var. To
-          replace $var with val, use var=val as a parameter.", {:default => "None"} %>
+          replace $var with val, use var=val as a parameter. If any template variables are missing values in the iframe source
+          url, then (*) will be used as the value.", {:default => "None"} %> 
         </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
         <code>GET api/v1/graph/embed/:embed_id</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-graph-snapshot.py" %>
-        <%= snippet_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_code_block "api-embeds-get.py" %>
+        <%= snippet_code_block "api-embeds-get.rb" %>
+        <%= snippet_code_block "api-embeds-get.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-graph-snapshot.py" %>
-        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_result_code_block "api-embeds-get.py" %>
+        <%= snippet_result_code_block "api-embeds-get.rb" %>
+        <%= snippet_result_code_block "api-embeds-get.sh" %>
       </div>
     </div>
 
     <!-- Enable Embed -->
-    <h4 id="graph-snapshot">Enable Embed</h4>
+    <h4 id="embeds-enable">Enable Embed</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          Enable a specified embed.
-        </p>at
+          Enable a specified embed. 
+        </p>
         <p>
           Returns: A JSON containing the success message <code>{success: [message]}</code>.
           On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
@@ -1831,18 +1841,18 @@ kind: documentation
         <h5>Signature</h5>
         <code>GET api/v1/graph/embed/:embed_id/enable</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-graph-snapshot.py" %>
-        <%= snippet_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_code_block "api-embeds-enable.py" %>
+        <%= snippet_code_block "api-embeds-enable.rb" %>
+        <%= snippet_code_block "api-embeds-enable.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-graph-snapshot.py" %>
-        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_result_code_block "api-embeds-enable.py" %>
+        <%= snippet_result_code_block "api-embeds-enable.rb" %>
+        <%= snippet_result_code_block "api-embeds-enable.sh" %>
       </div>
     </div>
 
     <!-- Revoke Embed -->
-    <h4 id="graph-snapshot">Revoke Embed</h4>
+    <h4 id="embeds-revoke">Revoke Embed</h4>
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
@@ -1861,13 +1871,13 @@ kind: documentation
         <h5>Signature</h5>
         <code>GET api/v1/graph/embed/:embed_id/revoke</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-graph-snapshot.py" %>
-        <%= snippet_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_code_block "api-embeds-revoke.py" %>
+        <%= snippet_code_block "api-embeds-revoke.rb" %>
+        <%= snippet_code_block "api-embeds-revoke.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-graph-snapshot.py" %>
-        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+        <%= snippet_result_code_block "api-embeds-revoke.py" %>
+        <%= snippet_result_code_block "api-embeds-revoke.rb" %>
+        <%= snippet_result_code_block "api-embeds-revoke.sh" %>
       </div>
     </div>
 

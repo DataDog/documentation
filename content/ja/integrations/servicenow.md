@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: original
 language: ja
 title: Datadog-ServiceNow Integration
@@ -13,7 +13,7 @@ doclevel: full
 
 <!-- ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog -->
 
-ServiceNowは、エンタープライズレベルのプロセスを一箇所で記録、追跡、マネージするITサービス管理プラットフォームです。このインテグレーションを使うことにより、Datadogが検知したアラートをServiceNow上でチケットとして登録ができるようになります。チケットには、Datadogでキャプチャしたグラフ画像やDatadogに設定したメッセージも追加できます。更に、Datadog側からメッセージを送信し、オープンしているチケットのクローズの処理をすることもできます。
+ServiceNowは、エンタープライズレベルのプロセスを一箇所で記録、追跡、マネージするITサービス管理プラットフォームです。このインテグレーションを使うことにより、Datadogが検知したアラートをServiceNow上でチケットとして登録が出来るようになります。チケットには、Datadogでキャプチャしたグラフ画像やDatadogに設定したメッセージも追加出来ます。更に、Datadog側からメッセージを送信し、オープンしているチケットのクローズ処理をすることも出来ます。
 
 <!-- ### Configure ServiceNow
 
@@ -24,7 +24,7 @@ To configure the ServiceNow integration, enter your ServiceNow instance name, an
 ### 設定
 {:#configuration}
 
-ServiceNowの統合を設定するには、あなたのServiceNowインスタンス名、およびユーザ名とパスワードを入力します。我々はDatadog統合のための新しいユーザーを作成することを推奨します。
+ServiceNowの統合を設定するには、ServiceNowインスタンス名、およびユーザ名とパスワードを入力します。Datadog統合のための新しいユーザーを作成することを推奨します。
 
 ![servicenow integration](/static/images/servicenow-configuration.png)
 
@@ -37,7 +37,7 @@ Now, you can set these alerts to automatically create support tickets and send t
 
 #### Datadogのアラートからサポートチケットを自動で生成する
 
-さて、あなたは自動的にサポートチケットを作成し、ServiceNowのチケットキューに送信するためにこれらのアラートを設定することができます。そこから、あなたのサポートチームは、すでにServiceNow内部に設置していた通信ワークフローを使用して問題が通知されます。あなたがしなければならないのは、警告メッセージに@servicenow言及か、そのモニターの通知リストに@servicenow追加です。
+自動的にサポートチケットを作成し、ServiceNowのチケットキューに送信するためにこれらのアラートを設定することができます。そこから、サポートチームには、すでにServiceNow内部に設置していた通信ワークフローを使用して問題が通知されます。しなければならないのは、警告メッセージに@servicenow言及か、そのモニターの通知リストに@servicenowの追加です。
 
 ![ServiceNow](/static/images/servicenow-02-monitor-page.png)
 
@@ -63,6 +63,6 @@ In addition to automating ticket creation and resolution, you can also use Datad
 
 #### Send Datadog graphs to ServiceNow
 
-チケットの作成と解決を自動化することに加えて、あなたも、あなたのチームの注意が必要Datadogで何かを見るたびに臨時にServiceNowチケットを作成するDatadogを使用することができます。ただ、いずれのTimeboardグラフのスナップショットを共有するためにカメラのアイコンをクリックして、あなたの同僚が、グラフの解釈を助けるためにコメント欄に、いくつかのコンテキストを追加し、@mentionのServiceNowはグラフとServiceNowにコメントを送信します。
+チケットの作成と解決を自動化することに加えて、あなたも、あなたのチームの注意が必要Datadogで何かを見るたびに臨時にServiceNowチケットを作成する為にDatadogを使用することも出来ます。ただ、いずれのTimeboardグラフのスナップショットを共有するためにカメラのアイコンをクリックして、あなたの同僚が、グラフの解釈を助けるためにコメント欄に、いくつかのコンテキストを追加し、@mentionのServiceNowはグラフとServiceNowにコメントを送信します。
 
 ![annotation](/static/images/servicenow-04-mention-servicenow.png)

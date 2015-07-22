@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/11
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: "JMX Checks"
@@ -28,11 +28,11 @@ In order to collect these metrics, a lightweight Java plugin named JMXFetch is c
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so.
 
-JMXチェックは、JMXを使用してそれらを公開アプリケーションからメトリックを収集エージェントをチェックしています。
+JMXチェックは、JMXを使用してそれらの公開アプリケーションからメトリックを取得するエージェントチェックです。
 
-これらのメトリックを収集するために、JMXFetchという名前の軽量のJavaプラグインは、MBeanサーバーに接続し、これらのメトリックを収集するためにDatadogエージェントによって呼び出されます。このプラグインは、エージェントで実行Dogstatsdサーバーを使用してDatadogエージェントにメトリックを送信します。
+これらのメトリックを取得するために、JMXFetchという名前の軽量のJavaプラグインを、MBeanサーバーに接続しDatadogエージェントによって呼び出されます。このプラグインは、エージェントで実行されるDogstatsdサーバーを使用してDatadogエージェントにメトリックを送信します。
 
-JMXのチェックが、それはあなたが収集するメトリックをカスタマイズすることはとても簡単です、あなたのニーズを満たすのに十分であるべきであるインスタンスごとに350メトリックの制限があります。我々はこれを行う方法を確認しようとしています。
+JMXのチェックでは、あなたが取得するメトリックをカスタマイズすることはとても簡単です、取得するメトリックスはインスタンスごとに350メトリックスまでとなっています。
 
 
 
@@ -62,7 +62,7 @@ JMX Checks have a default configuration that will collect some metrics from your
 ### カスタマイズ
 {:#customization}
 
-JMX Checkには、JMXアプリケーションから基本的なメトリックを収集するように初期設定してあります。尚、JMXFetchによって読み込まれるYAMLファイルを設定することにより、Datadog Agentに渡されるJMXアプリケーションから収集したメトリクスを指定することができます。
+JMX Checkには、JMXアプリケーションから基本的なメトリックを取得するように初期設定してあります。尚、JMXFetchによって読み込まれるYAMLファイルを設定することにより、Datadog Agentに渡されるJMXアプリケーションから取得したメトリクスを指定することができます。
 
 
 <!-- #### Commands to view the metrics that are available:
@@ -96,7 +96,7 @@ collected:
 
         `sudo /etc/init.d/datadog-agent jmx collect` -->
 
-##### JMX Checkによって収集可能なメトリクスを調べるためのコマンド:
+##### JMX Checkによって取得可能なメトリクスを調べるためのコマンド:
 
 <div class="alert alert-info">
     コマンド<code>datadog-agent jmx</code>は、Datadog Agent version 4.1.0で追加されました。
@@ -106,11 +106,11 @@ collected:
 
       `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`
 
-- どれかのインスタンスの設定内容に一致したアトリビュート(属性)で、メトリクスの収集制限を超えているために現状収取されていないアトリビュート(属性)のリスト:
+- どれかのインスタンスの設定内容に一致したアトリビュート(属性)で、メトリクスの収集制限を超えているために現状取得されていないアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`
 
-- インスタンスの設定内容に基づいて、実際に収集されるアトリビュート(属性)のリスト:
+- インスタンスの設定内容に基づいて、実際に取得されるアトリビュート(属性)のリスト:
 
       `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`
 
@@ -122,7 +122,7 @@ collected:
 
       `sudo /etc/init.d/datadog-agent jmx list_everything`
 
-- 設定に基づいてJMXからのメトリクス収集を開始し、コンソールに表示する:
+- 設定に基づいてJMXからのメトリクスを取得し、コンソールに表示する:
 
       `sudo /etc/init.d/datadog-agent jmx collect`
 
@@ -158,7 +158,7 @@ For a given bean, metrics get tagged in the following manner:
 Your metric will be mydomain (or some variation depending on the attribute
 inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`. -->
 
-##### 収集するメトリクスをカスタマイズする:
+##### 取得するメトリクスをカスタマイズする:
 
 他のAgent Checkと同じようにJMX Checkも2つのメインセクションで構成されています:
 
@@ -327,7 +327,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 ##### Note
 {:#update-note}
 
-フィルターのリストは、Datadog Agent 5.3.0からサポートされました。もしも、旧バージョンのDatadog Agentを使っている場合は、bean毎に別の`include`文を記述するようにしてください。
+フィルターのリストは、Datadog Agent 5.3.0からサポートされました。もし、旧バージョンのDatadog Agentを使っている場合は、bean毎に別の`include`文を記述するようにしてください。
 
 - Datadog Agent > 5.3.0 を使用している場合
 
@@ -339,7 +339,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
                  - second_bean_name
         ...
 
-- Datadog Agent 5.3.0 以前のを使用している場合
+- Datadog Agent 5.3.0 以前を使用している場合
 
         conf:
             - include:
@@ -365,4 +365,4 @@ Begin by using the commands seen [above](#customization) to investigate what met
 
 これらのインテグレーションは、その特性上大量のメトリクスをDatadogへ送信することが可能です。このような状況下、お客様とのコミュケーションの中で分かったことは、「インテグレーションが送信しているメトリクスの全てが必要な訳ではない」ということでした。従って、これらのインテグレーションから送信できるメトリクスを350個に制限しています。
 
-メトリクスを350以内に収めるために、Datadogではコマンドラインツールを提供しています。上記で紹介したコマンドラインツールを使いどのようなメトリクスが収集可能かを調査し、`exclude`によるフィルターをい設定することによりキーとなるメトリクスを絞り込むことをお勧めします。もしも、JMX関連で、350個以上のメトリクスが必要な場合は、[support@datadoghq.com](mailto:support@datadoghq.com)までご連絡ください。
+メトリクスを350個以内に収めるために、Datadogではコマンドラインツールを提供しています。上記で紹介したコマンドラインツールを使いどのようなメトリクスが取得可能かを調査し、`exclude`によるフィルターを設定することによりキーとなるメトリクスを絞り込むことをお勧めします。もし、JMX関連で、350個以上のメトリクスが必要な場合は、[support@datadoghq.com](mailto:support@datadoghq.com)までご連絡ください。

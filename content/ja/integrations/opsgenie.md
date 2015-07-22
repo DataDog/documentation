@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-OpsGenie Integration
@@ -26,12 +26,11 @@ Create alerts using @opsgenie:
 ### 概要
 {:#int-overview}
 
-Create alerts using @opsgenie:
 OpenGineインテグレーションを使用すると、`@opengenie:`を使ってOpengenieへアラートを送信できます:
 
-- Datadogのイベントストリームへコメントを書き込みをしたい際
-- グラフのスナップショットを撮った際 (メッセージ欄)
-- メトリクスを基にした、アラートが発生した際　(通知メッセージ欄)
+- Datadogのイベントストリームへコメントを書き込む時
+- グラフのスナップショットを撮った時 (メッセージ欄)
+- メトリクスを基にした、アラートが発生した時　(通知メッセージ欄)
 
 
 <!-- ### Configuration
@@ -106,7 +105,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 2. ポップアップの中で、`Configuration`タブを選択します。
 
-3. OpsGenie側で作成したDatadogインテグレーションのAPI keyと名前を、**"Datadog Integration Key"** 欄と　**"Datadog Integration Name"** 欄へペーストしていきます。
+3. OpsGenie側で作成したDatadogインテグレーションのAPI keyと名前を、**"Datadog Integration Key"** 欄と　**"Datadog Integration Name"** 欄へ入力します。
 
 <img src="/static/images/datadog-add-opsgenie-key.png" style="width:100% border:1px #777777;padding-top:15px;" />
 
@@ -118,7 +117,7 @@ Datadog側のMonitor設定のセクション5 **Say What’s Happening** の部�
 
 <img src="/static/images/og_metric_alert.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:20px;" />
 
-Datadog側からOpsGenieに通知したアラートを承認やクローズするには、 DatadogのイベントストリームのOpsGenieの以該当するイベントに @opsgenie-acknowledge や @opsgenie-close を付けてコメントを書き込みます。
+Datadog側からOpsGenieに通知したアラートを承認やクローズするには、 DatadogのイベントストリームのOpsGenieの該当するイベントに @opsgenie-acknowledge や @opsgenie-close を付けてコメントを書き込みます。
 
 <img src="/static/images/dd_ack_og_alert.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
 

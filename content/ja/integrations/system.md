@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/17
 translation_status: complete
 language: ja
 title: System Integrations
@@ -23,7 +23,7 @@ sidebar:
 ### 概要
 {:#int-overview}
 
-ディレクトリ及びプロセスに関するメトリクスを収集し、Datadogへ送信します。
+ディレクトリ及びプロセスに関するメトリクスを取得し、Datadogへ送信します。
 
 ### 設定
 {:#int-configuration}

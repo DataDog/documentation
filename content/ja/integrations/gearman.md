@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Gearman Integration
@@ -33,7 +33,7 @@ Bring Gearman metrics to Datadog to:
 * [Gearman YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/gearmand.yaml.example)
 * [Gearman checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/gearmand.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/gearmand.yaml.example)
 * [Gearmanインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/gearmand.py)
@@ -46,7 +46,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     gearman.unique_tasks
     gearman.workers -->
 
-Gearmanインテグレーションがデフォルトで収集しているメトリクス:
+Gearmanインテグレーションがデフォルトで取得しているメトリクス:
     gearman.queued
     gearman.running
     gearman.unique_tasks

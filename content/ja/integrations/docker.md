@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: complete
 language: ja
-title: Datadog-Docker インテグレーション
+title: Datadog-Docker Integration
 integration_title: Docker
 kind: integration
 doclevel:

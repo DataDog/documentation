@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/07
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Redis Integration
@@ -20,7 +20,7 @@ all levels from individual column families to entire clusters. -->
 次の目的で、RedisのメトリクスをDatadogへ送信します:
 
 - データベースのパフォーマンスの可視化する
-- Redisのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+- Redisのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
 <!-- The following metrics are collected by default with the Redis integration:
@@ -58,7 +58,7 @@ all levels from individual column families to entire clusters. -->
     redis.stats.keyspace_hits
     redis.stats.keyspace_misses -->
 
-Redisインテグレーションがデフォルトで収集しているメトリクス:
+Redisインテグレーションがデフォルトで取得しているメトリクス:
 
     redis.aof.buffer_length
     redis.aof.last_rewrite_time
@@ -137,8 +137,8 @@ a new dashboard.”
 
 ### FAQs
 
-**Q: Redisインテグレーションは、同一ホスト上の異なるポート番号を持ったRedisのインスタンスを監視できますか?**
+**Q: Redisインテグレーションは、同一ホスト上の異なるポート番号を持ったRedisのインスタンスを監視出来ますか?**
 
-A: はい。`datadog.conf`に設定する`redis_urls`は、監視先ホスト&値の組み合わせのリストにすることもできます:
+A: はい。`datadog.conf`に設定する`redis_urls`は、監視先ホスト&値の組み合わせのリストにすることが出来ます:
 
     redis_urls: localhost:6379, localhost:6380

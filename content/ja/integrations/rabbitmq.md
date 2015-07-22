@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-RabbitMQ Integration
@@ -19,10 +19,10 @@ Connect RabbitMQ to Datadog in order to:
 ### 概要
 {:#int-overview}
 
-次の目的のために、RabbitMQのメトリクスをDatadogに送信します:
+次の目的の為に、RabbitMQのメトリクスをDatadogに送信します:
 
-- RabbitMQのパフォーマンスの可視化するp
-- RabbitMQのパフォーマンス情報と他のアプリケーションの情報と連携し状況を把握する
+- RabbitMQのパフォーマンスの可視化する
+- RabbitMQのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
 <!-- From the open-source Agent:
@@ -30,7 +30,7 @@ Connect RabbitMQ to Datadog in order to:
 * [RabbitMQ YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/rabbitmq.yaml.example)
 * [RabbitMQ checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/rabbitmq.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [RabbitMQインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/rabbitmq.yaml.example)
 * [RabbitMQインテグレーション　checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/rabbitmq.py)
@@ -54,7 +54,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     rabbitmq.queue.messages_ready
     rabbitmq.queue.messages_unacknowledged -->
 
-RabbitMQインテグレーションがデフォルトで収集しているメトリクス:
+RabbitMQインテグレーションがデフォルトで取得しているメトリクス:
 
     rabbitmq.node.disk_free
     rabbitmq.node.disk_free_limit
@@ -82,11 +82,11 @@ If you have a Datadog account you can see the integration installation instructi
 ### 設定
 {:#configuration}
 
-*RabbitMQインテグレーションを利用するためには、Datadog Agent >= 3.5.0が必要です。*
+*RabbitMQインテグレーションを利用する為には、Datadog Agent >= 3.5.0が必要です。*
 
 1. RabbitMQには、[Management Plugin](http://www.rabbitmq.com/management.html)が設定されている必要があります。
 
-2. Datadog Agentの設定ファイルを設定し、RabbitMQに接続できるように設定します。
+2. Datadog Agentの設定ファイルを編集し、RabbitMQに接続できるように設定します。
 
     conf.d/rabbitmq.yaml編集します。
 

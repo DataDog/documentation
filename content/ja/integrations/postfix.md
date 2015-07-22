@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/06
+last_modified: 2015/07/16
 translation_status: original
 language: ja
 title: Datadog-Postfix Integration
@@ -13,4 +13,4 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
 ### 概要
 {:#int-overview}
 
-Postfixのメールキューに保留中のメッセージを監視するために、リアルタイムでメトリックを取得します。
+Postfixのメールキュー内の保留中のメッセージを監視する為に、リアルタイムでメトリクスを取得します。

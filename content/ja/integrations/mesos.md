@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/07/16
 translation_status: original
 language: ja
 title: Datadog-Mesos Integration
@@ -17,9 +17,6 @@ doclevel: basic
 {:#int-overview}
 
 次の目的で、MesosのメトリクスをDatadogへ送信します:
-
-* Visualize your Mesos cluster performance
-* Correlate the performance of Mesos with the rest of your applications
 
 * Mesosクラスターのパフォーマンスを可視化する
 * Mesosクラスターのパフォーマンスメトリクスと他のアプリケーションメトリクスを連携し、状況を把握する

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/01
+last_modified: 2015/07/15
 translation_status: complete
 language: ja
 title: Directory check
@@ -33,7 +33,7 @@ Capture metrics from the files in given directories:
 * [Directory check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py)
 * [irectory check configuration example](https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Directoryインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example)
 * [Directoryインテグレーション check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py)
@@ -87,7 +87,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
 ### 設定
 {:#int-configuration}
 
- *ディレクトリ関連のメトリクスを収集するには、Datadog Agentのインストールが必要です。*
+ *ディレクトリ関連のメトリクスを取得するには、Datadog Agentのインストールが必要です。*
 
 - Directory check インテグレーションは、**Windows systemsには対応しておりません**。
 - Datadog Angetが、監視の対象となっているディレクトリやファイルに対して読み込み権限があることを確認してください。
