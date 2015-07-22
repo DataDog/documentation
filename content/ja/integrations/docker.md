@@ -43,7 +43,5 @@ Monitor Docker with Datadog</a>
 
 ブログの日本語訳:
 
-* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/11/docker-ize-datadog-with-agent-containers/">
-コンテナ化したDatadog agentを使ってDockerのモニタリング&管理</a>
-* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/10/monitoring-docker-with-the-datadog/">
-モニタリングサービスのDatadogを使ってDockerをモニタリング&管理</a>
+* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/11/docker-ize-datadog-with-agent-containers/">コンテナ化したDatadog agentを使ってDockerのモニタリング&管理</a>
+* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/10/monitoring-docker-with-the-datadog/">モニタリングサービスのDatadogを使ってDockerをモニタリング&管理</a>

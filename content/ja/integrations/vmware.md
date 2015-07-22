@@ -28,7 +28,7 @@ Install the Datadog VMware vSphere integration to:
 
 
 <!-- We also have an awesome blog post on vSphere which can be seen [here](https://www.datadoghq.com/2014/08/unified-vsphere-app-monitoring-datadog/). -->
-vSphereに関するblog記事を準備しています。[「Unified vSphere and app monitoring with Datadog」])(https://www.datadoghq.com/2014/08/unified-vsphere-app-monitoring-datadog/)も一読してみてください。
+vSphereに関するblog記事を準備しています。[「Unified vSphere and app monitoring with Datadog」](https://www.datadoghq.com/2014/08/unified-vsphere-app-monitoring-datadog/)も一読してみてください。
 
 <!-- The following metrics are collected by default with the VMware integration (for more info, please see [here](https://github.com/DataDog/dd-agent/blob/v5.0.2/checks/libs/vmware/basic_metrics.py)):
 
