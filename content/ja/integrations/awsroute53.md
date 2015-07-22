@@ -2,7 +2,7 @@
 last_modified: 2015/04/01
 translation_status: translated
 language: ja
-title: Datadog-AWS Route 53 インテグレーション
+title: Datadog-AWS Route 53 Integration
 integration_title: AWS Route 53
 kind: integration
 doclevel: basic

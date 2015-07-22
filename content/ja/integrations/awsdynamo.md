@@ -2,7 +2,7 @@
 last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-AWS DynamoDB インテグレーション
+title: Datadog-AWS DynamoDB Integration
 integration_title: AWS DynamoDB
 kind: integration
 doclevel: basic
