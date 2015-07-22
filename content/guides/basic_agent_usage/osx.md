@@ -1,11 +1,11 @@
 ---
 title: Basic Agent Usage for OS X
 kind: documentation
-servicename: ~/.datadog-agent/bin/agent
-serviceinfoname: ~/.datadog-agent/bin/info
-configdirectory: ~/.datadog-agent/agent/
-logdirectory: ~/.datadog-agent/supervisord/logs/
-supervisorlog: ~/.datadog-agent/supervisord/logs/supervisord.log
+servicename: /usr/local/bin/datadog-agent
+serviceinfoname: /usr/local/bin/datadog-agent info
+configdirectory: ~/.datadog-agent/
+logdirectory: /var/log/datadog/
+supervisorlog: /var/log/datadog/supervisord.log
 os: osx
 
 ---
@@ -23,7 +23,7 @@ This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found 
 <a href='https://app.datadoghq.com/account/settings#agent/mac'>here</a>.<br/>
 
-By default, your Agent will be installed in its own sandbox located at <code> '~/.datadog-agent'</code>.
+By default, your Agent will be installed in its own sandbox located at <code> '/opt/datadog-agent'</code>.
 You’re free to move this folder wherever you like.
 However, this guide will assume that the Agent is installed in its default location, so be sure to modify the
 instructions accordingly if you decide to move it to another location.
