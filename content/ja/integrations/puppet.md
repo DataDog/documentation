@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-Puppet Integration
@@ -23,10 +23,10 @@ kind: integration
 
 To install the Datadog Agent via Puppet, please see [here](https://github.com/datadog/puppet-datadog-agent). -->
 
-次のような目的のために、PuppetのメトリクスをDatadogに送信します:
+次の目的の為に、PuppetのメトリクスをDatadogに送信します:
 
 - Puppetクライアントからリアルタイムレポートを取得する
-- 管理しているサーバー上のPuppetのパフォーマンスメトリクスを収集する
-- 期待どうりに完了しなかったPuppetの実行を検知し、チームと検討する
+- 管理しているサーバー上のPuppetのパフォーマンスメトリクスを取得する
+- 期待通りに完了しなかったPuppetの実行を検知し、チームと検討する
 
 Puppetを使ってDatadog Agentをインストールする方法に関しては、[Githubの"DataDog/puppet-datadog-agent"](http://docs.datadoghq.com/ja/guides/chef/)を参照してください。

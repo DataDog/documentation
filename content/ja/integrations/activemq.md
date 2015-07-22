@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/14
+last_modified: 2015/07/05
 translation_status: translated
 language: ja
 title: Datadog-ActiveMQ インテグレーション
@@ -21,7 +21,7 @@ doclevel: complete
 ## 概要
 {: #int-overview}
 
-ActiveMQyよりリアルタイムでメトリクスを収取します。
+ActiveMQyより、リアルタイムでメトリクスを取得します。
 
 * ActiveMQサーバーのパフォーマンスを可視化します。
 * ActiveMQのパフォーマンスメトリクスを他のアプリケーション情報と関連付けられるようにします。
@@ -39,10 +39,10 @@ Metrics will be captured using a JMX connection.
 
 ## 設定
 {: #int-configuration}
-**このインテグレーションでメトリクスを収取するには、LinuxもしくはMac OS X上でActiveMQが動作している必要があります。**
+**このインテグレーションでメトリクスを取得するには、LinuxもしくはMac OS X上でActiveMQが動作している必要があります。**
 
-ActiveMQのメトリクスを収集するには、Datadog Agentをインスタンスをする必要があります。
-メトリクスは、JMXのコネクションを介して収取されます。
+ActiveMQのメトリクスを取得するには、Datadog Agentをインストールする必要があります。
+メトリクスは、JMXのコネクションを介して取得されます。
 
 **このインテグレーションには、Oracle's JDKを推奨します。**
 
@@ -129,7 +129,7 @@ else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
 </div> -->
 
 1. **ActiveMQサーバー上で[JMX Remote](http://activemq.apache.org/jmx.html)が有効になっていることを確認してください。**
-2. ActiveMQに接続できるように、Agentを設定します。  
+2. ActiveMQに接続出来るように、Agentを設定します。  
 `${confd_help('<code>conf.d/activemq.yaml</code>')}`を次のように編集します。
 
         instances:
@@ -199,7 +199,7 @@ else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
 
         sudo /etc/init.d/datadog-agent restart
 
-*確認がにつような場合*
+*確認が必要な場合*
 
     if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; ¥
     then echo -e "&#92;e[0;32mAgent is running&#92;e[0m"; ¥

@@ -87,7 +87,7 @@ The following features are available on request. If you would like access to the
 ### Just in Time Provisioning (JIT Provisioning)
 Normally users must be invited to Datadog, even for organizations with SAML enabled. If a user that has not been invited to Datadog logs in via an Org's IdP, the SAML assertion will be validated, but they will be redirected to a SAML Error page.
 
-Some organizations might not want to have to invite all of their users to Datadog. If the organization has SAML enabled, and the saml_autocreate_user feature flag is enabled, Datadog will automatically create a user in response to a valid SAML assertion that contains a user handle that doesn't exist yet. This way anyone with a valid login on the organization's IdP can use Datadog without needing an invite.
+Some organizations might not want to have to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact support.
 
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 

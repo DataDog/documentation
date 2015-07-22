@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-MongoDB Integration
@@ -20,7 +20,7 @@ doclevel: basic
 - Visualize key MongoDB metrics.
 - Correlate MongoDB performance with the rest of your applications. -->
 
-次のような目的のために、MongoDBのメトリクスをDatadogに送信します:
+次の目的の為に、MongoDBのメトリクスをDatadogに送信します:
 
 - MongoDBのキーメトリクスの可視化
 - MongoDBのパフォーマンス情報と他アプリケーションの情報を連携
@@ -31,9 +31,9 @@ doclevel: basic
 * [MongoDB YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example)
 * [MongoDB checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収取プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [MongoDBインテグレーションの設定ファイルサン](https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example)
+* [MongoDBインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example)
 * [MongoDBインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py)
 
 
@@ -72,7 +72,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収取プログ�
     mongo.stats.storageSize
     mongo.uptime -->
 
-MongoDBインテグレーションがデフォルトで収集しているメトリクス:
+MongoDBインテグレーションがデフォルトで取得しているメトリクス:
 
     mongo.asserts.msg
     mongo.asserts.regular

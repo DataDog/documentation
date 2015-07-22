@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/01
+last_modified: 2015/07/05
 translation_status: translated
 language: ja
 title: Datadog-AWS DynamoDB インテグレーション
@@ -12,6 +12,6 @@ doclevel: basic
 
 Enable this integration to see in Datadog all your DynamoDB metrics. -->
 
-Amazon DynamoDBのは、10ミリ秒未満の安定したレイテンシーを要求するアプリケーションに向けた、高速で柔軟なのNoSQLデータベースサービスです。
+Amazon DynamoDBは、10ミリ秒未満の安定したレイテンシーを要求するアプリケーションに向けた、高速で柔軟なNoSQLデータベースサービスです。
 
 DatadogにすべてのDynamoDBのメトリクスを表示するには、このインテグレーションを有効にします。

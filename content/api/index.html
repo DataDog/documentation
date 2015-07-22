@@ -34,6 +34,7 @@ kind: documentation
         <a class="btn" href="#comments">Comments</a>
         <a class="btn" href="#users">Users</a>
         <a class="btn" href="#graphs">Graphs</a>
+        <a class="btn" href="#embeds">Embeds</a>
       </div>
       <div class="btn-group language-links">
         <div lang="console" class="lang-btn btn">Shell</div>
@@ -183,7 +184,7 @@ kind: documentation
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          <%= argument('metric_type', 'The type of the metric - <code>gauge</code>
+          <%= argument('type', 'The type of the metric - <code>gauge</code>
             or <code>counter</code> (counter data is expected as a rate). Gauges are
                 32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
@@ -1679,6 +1680,194 @@ kind: documentation
       </div>
     </div>
 
+    <!--
+    =====================================================================
+    Embeddable Graphs
+    ====================================================================
+    -->
+
+    <h3 id="embeds">Embeddable Graphs</h3>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          You can interact with embeddable graphs through the API.
+        </p>
+      </div>
+    </div>
+
+    <!-- Get All Embeds -->
+    <h4 id="graph-snapshot">Get All Embeds</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Gets a list of previously created embeddable graphs.
+        </p>
+        <p>
+          Returns: A JSON list containing information on previously created embeds from both the UI 
+          and the API. Each JSON graph response is in the same format as returned by 
+          <code>GET api/v1/graph/embed/:embed_id</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
+
+    <!-- Create Embed -->
+    <h4 id="graph-snapshot">Create Embed</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Creates a new embeddable graph.
+        </p>
+        <p>
+          Returns: A JSON consisting of the same elements returned by <code>GET api/v1/graph/embed/:embed_id</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "graph_json", "The graph definition in JSON. 
+          Same format that is available on the JSON tab of the graph editor" %>
+          <%= argument "timeframe", "The timegrame for the graph. Must be one of 1_hour,
+          4_hours, 1_day, 2_days, and 1_week.", {:default => '1_hour'} %>
+          <%= argument "size", "The size of the graph. Must be one of small, medium,
+          large, and xlarge.", {:default => 'medium'} %>
+          <%= argument "legend", "The flag determining if the graph includes a legend.
+          Must be one of yes or no.", {:default => 'no'} %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/graph/embed</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
+
+    <!-- Get Specifc Embed -->
+    <h4 id="graph-snapshot">Get Specific Embed</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Get the HTML fragment for a previously generated embed with embed_id.
+        </p>
+        <p>
+          Returns: A JSON object with 8 elements: 
+        </p>
+        <ul>
+          <li>embed_id: Token of the embed</li>
+          <li>graph_title: Tile of the graph</li>
+          <li>dash_name: Name of the dashboard the graph is on (null if none)</li>
+          <li>dash_url: URL of the dashboard the graph is on (null if none)</li>
+          <li>shared_by: ID of the use who shared the embed</li>
+          <li>html: HTML fragment for the embed (iframe)</li>
+          <li>revoked: Boolean flag for whther or not the embed is revoked</li>
+        </ul>
+        <p>
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "size", "The size of the graph. Must be one of small, medium,
+          large, and xlarge.", {:default => 'medium'} %>
+          <%= argument "legend", "The flag determining if the graph includes a legend.
+          Must be one of yes or no.", {:default => 'no'} %>
+          <%= argument "template_variables", "A list of template variables values to replace in queries with form $var. To
+          replace $var with val, use var=val as a parameter.", {:default => "None"} %> 
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
+
+    <!-- Enable Embed -->
+    <h4 id="graph-snapshot">Enable Embed</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Enable a specified embed. 
+        </p>at
+        <p>
+          Returns: A JSON containing the success message <code>{success: [message]}</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id/enable</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
+
+    <!-- Revoke Embed -->
+    <h4 id="graph-snapshot">Revoke Embed</h4>
+    <div class="row-fluid">
+      <%= left_side_div %>
+        <p>
+          Revoke a specified embed. 
+        </p>
+        <p>
+          Returns: A JSON containing the success message <code>{success: [message]}</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id/revoke</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-graph-snapshot.py" %>
+        <%= snippet_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_code_block "api-graph-snapshot.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-graph-snapshot.py" %>
+        <%= snippet_result_code_block "api-graph-snapshot.rb" %>
+        <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+      </div>
+    </div>
 
    <!--
     =====================================================================

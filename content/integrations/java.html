@@ -28,9 +28,10 @@ collect.  We are going to see how to do so.
 </ul>
 
 
-<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect some metrics from your JMX
-application. They also allow you to specify a
-configuration in the yaml file that will be read by JMXFetch to filter which
+<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect 13 metrics from your 
+JMX application. A few of these metrics are: jvm.heap_memory, jvm.non_heap_memory, jvm.gc.cms.count...
+So seeing these metrics is a sign that JMXFetch is properly running.
+They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which
 metrics it should send back to the Agent.
 <br>
 <h4>Commands to view the metrics that are available:</h4>
@@ -169,3 +170,8 @@ below the limit.
 <p>Begin by using the commands seen <a href='#customization'>above</a> to investigate what metrics are available.
 Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.
 If you believe you need more than 350 metrics, please reach out to <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
+<h4>Java Path</h4> The agent does not come with a bundled JVM, but will use the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the agent. 
+<br>Alternatively, you can specify the JVM path in the integration's configuration file:
+
+<pre><code>java_bin_path: /path/to/java
+</code></pre>
