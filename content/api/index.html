@@ -260,8 +260,8 @@ kind: documentation
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
             <%= argument "text", "The body of the event. Limited to 4000 characters.", :lang => l %>
           <% end %>
-          <%= argument 'msg_text', 'The text for the message', :lang => 'ruby' %>
-          <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
+          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters.', :lang => 'ruby' %>
+          <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
           <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
