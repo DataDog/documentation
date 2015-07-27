@@ -1,11 +1,12 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2015/07/16
 translation_status: complete
 language: ja
 title: Datadog-PostgreSQL Integration
 integration_title: PostgreSQL
 doclevel: basic
 kind: integration
+doclevel:
 ---
 
 <!-- ### Overview
@@ -20,7 +21,7 @@ kind: integration
 - Visualize your database performance.
 - Correlate the performance of PostgreSQL with the rest of your applications. -->
 
-次の目的のために、PostgreSQLのメトリクスをDatadogに送信します:
+次の目的の為に、PostgreSQLのメトリクスをDatadogに送信します:
 
 - データベースのパフォーマンスの可視化
 - PostgreSQLのパフォーマンス情報と他アプリケーションの情報を連携
@@ -31,7 +32,7 @@ kind: integration
 * [PostgreSQL YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
 * [PostgreSQL checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py) -->
 
-Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
+Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
 * [PostgreSQLインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py)
@@ -60,7 +61,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス収集プログ�
     postgresql.temp_bytes
     postgresql.temp_files  -->
 
-PostgreSQLインテグレーションがデフォルトで収集しているメトリクス:
+PostgreSQLインテグレーションがデフォルトで取得しているメトリクス:
 
     postgresql.buffer_hit
     postgresql.commits

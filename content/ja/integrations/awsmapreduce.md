@@ -1,8 +1,8 @@
 ---
-last_modified: 2015/04/01
+last_modified: 2015/07/05
 translation_status: translated
 language: ja
-title: Datadog-AWS MapReduce インテグレーション
+title: Datadog-AWS MapReduce Integration
 integration_title: AWS MapReduce
 kind: integration
 doclevel: basic
@@ -13,6 +13,6 @@ doclevel: basic
 Enable this integration to see in Datadog all your EMR metrics. -->
 
 
-Amazon Elastic MapReduce（アマゾンEMR）は、大量のデータを迅速かつコスト効率よく処理することを目的としたクラウド上のサービスです。
+Amazon Elastic MapReduce（アマゾンEMR）は、大量のデータを迅速かつコスト効率良く処理することを目的としたクラウド上のサービスです。
 
 DatadogにすべてのAmazon EMRメトリクスを表示するには、このインテグレーションを有効にします。

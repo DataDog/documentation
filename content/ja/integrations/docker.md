@@ -1,10 +1,11 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2015/07/05
 translation_status: complete
 language: ja
-title: Datadog-Docker インテグレーション
+title: Datadog-Docker Integration
 integration_title: Docker
 kind: integration
+doclevel:
 ---
 
 <!-- <div id="int-overview">
@@ -20,10 +21,10 @@ kind: integration
 </ul>
 </div> -->
 
-Dockerからリアルタイムにメトリクスを収集する目的は:
+Dockerからリアルタイムにメトリクスを取得する目的は:
 
-- アプリケーションが稼働しているコンテナのパフォーマンスの収集。
-- コンテナパフォマーンスの可視化。
+- アプリケーションが稼働しているコンテナのパフォーマンスの取得。
+- コンテナパフォーマンスの可視化。
 
 
 <!-- We've written two in depth blog posts on Datadog and Docker::
@@ -42,7 +43,5 @@ Monitor Docker with Datadog</a>
 
 ブログの日本語訳:
 
-* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/11/docker-ize-datadog-with-agent-containers/">
-コンテナ化したDatadog agentを使ってDockerのモニターリング&管理</a>
-* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/10/monitoring-docker-with-the-datadog/">
-モニターリングサービスのDatadogを使ってDockerをモニターリング&管理</a>
+* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/11/docker-ize-datadog-with-agent-containers/">コンテナ化したDatadog agentを使ってDockerのモニタリング&管理</a>
+* <a target="_blank" href="http://jhotta.github.io/blog/2014/06/10/monitoring-docker-with-the-datadog/">モニタリングサービスのDatadogを使ってDockerをモニタリング&管理</a>

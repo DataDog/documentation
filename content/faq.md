@@ -155,7 +155,7 @@ alert when at 80% or above:
 {: #api-metric-names}
 
 Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
-Other characters will get converted to underscores. There is no max length. Unicode is not support.
+Other characters will get converted to underscores. There is no max length. Unicode is not supported.
 We recommend avoiding spaces.
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
 We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
@@ -512,7 +512,9 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
     Metrics
 ===============================================================================
 -->
+
 ### Metrics
+{: #metrics}
 
 #### How do I submit custom metrics?
 

@@ -183,7 +183,7 @@ kind: documentation
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          <%= argument('metric_type', 'The type of the metric - <code>gauge</code>
+          <%= argument('type', 'The type of the metric - <code>gauge</code>
             or <code>counter</code> (counter data is expected as a rate). Gauges are
                 32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
@@ -1317,8 +1317,7 @@ kind: documentation
           All metrics sent from a host will have its tags applied.
 
           When fetching and applying tags to a particular host, you can refer
-          to hosts by name (<code>yourhost.example.com</code>) or id
-          (<code>12345</code>).
+          to hosts by name (<code>yourhost.example.com</code>).
         </p>
         <p>
         The component of your infrastructure responsible for a tag is identified by
