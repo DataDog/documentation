@@ -27,6 +27,21 @@ Connect your Splunk log monitoring to be able to:
     <pre class="linux"><code>#!/bin/bash
 API_KEY= your_api_key
 APP_KEY= your_application_key
+
+# http://docs.datadoghq.com/api/
+#
+# http://docs.splunk.com/Documentation/Splunk/6.2.4/Alert/Configuringscriptedalerts
+#
+#  Arg Value
+#  1   Number of events returned
+#  2   Search terms
+#  3   Fully qualified query string
+#  4   Name of report
+#  5   Trigger reason
+#  6   Browser URL to view the report.
+#  7   Not used for historical reasons.
+#  8   File in which the results for the search are stored. Contains raw results.
+
 dog --api-key $API_KEY --application-key $APP_KEY event post \
 "Found $1 events in splunk" \
 "Matching $2 based on $5, from report $4. More details at $6." \
