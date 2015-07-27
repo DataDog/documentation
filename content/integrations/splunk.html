@@ -18,8 +18,8 @@ Connect your Splunk log monitoring to be able to:
 </div>
 
 
-<p>To receive your reports from Splunk into Datadog, you need to have <code>dogapi</code> installed</p>
-<p><pre class="linux"><code>pip install dogapi</code></pre></p>
+<p>To receive your reports from Splunk into Datadog, you need to have <code>datadog</code> installed</p>
+<p><pre class="linux"><code>pip install datadog</code></pre></p>
 
 <p>Once it is done, <a href="https://app.datadoghq.com/account/settings#api">get your api key and an application key </a>and drop the following
  <code>dog-splunk.sh</code> script into $SPLUNK_HOME/bin/scripts</p>
@@ -27,10 +27,25 @@ Connect your Splunk log monitoring to be able to:
     <pre class="linux"><code>#!/bin/bash
 API_KEY= your_api_key
 APP_KEY= your_application_key
+
+# http://docs.datadoghq.com/api/
+#
+# http://docs.splunk.com/Documentation/Splunk/6.2.4/Alert/Configuringscriptedalerts
+#
+#  Arg Value
+#  1   Number of events returned
+#  2   Search terms
+#  3   Fully qualified query string
+#  4   Name of report
+#  5   Trigger reason
+#  6   Browser URL to view the report.
+#  7   Not used for historical reasons.
+#  8   File in which the results for the search are stored. Contains raw results.
+
 dog --api-key $API_KEY --application-key $APP_KEY event post \
-"Found $SPLUNK_ARG_1 events in splunk" \
-"Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5, from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
---aggregation_key $SPLUNK_ARG_3 --type splunk</code></pre>
+"Found $1 events in splunk" \
+"Matching $2 based on $5, from report $4. More details at $6." \
+--aggregation_key $3 --type splunk</code></pre>
 </p>
 
 <p>You can modify the text of the events by for example using datadog's @mention to notify people of these reports.
