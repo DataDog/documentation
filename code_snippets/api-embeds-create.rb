@@ -20,5 +20,13 @@ size = "medium"
 legend = "no"
 title = "Embed created through API"
 
+# Create parameter hash
+description = {
+  :timeframe => timeframe,
+  :size => size,
+  :legend => legend,
+  :title => title
+}
+
 # Make API Call
-status, result = dog.create_embed(graph_json, timeframe, size, legend, title)
+status, result = dog.create_embed(graph_json, description)
