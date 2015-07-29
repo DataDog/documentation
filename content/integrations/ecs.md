@@ -92,6 +92,7 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
 
 
 
+
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -123,6 +124,7 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
 - Launch a new instance with a ECS-optimized image (you can find details about that [here][2].)
 - At the config step, use this script as User Data in Advanced Details (don't forget to modify the cluster variable to the name of the cluster you want this task to run in).
 It will start the task you defined earlier with the right parameters, and add a few lines to `/etc/rc.local` so that the rebooted instance starts the task.
+
 
 
 
