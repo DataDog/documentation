@@ -92,6 +92,7 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
 
 
 
+
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -126,6 +127,7 @@ It will start the task you defined earlier with the right parameters, and add a 
 
 
 
+
     #!/bin/bash
     cluster="cluster_name"
     echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
@@ -140,6 +142,7 @@ It will start the task you defined earlier with the right parameters, and add a 
     az=$az
     region=$region
     docker start $(docker ps -a | grep docker-dd-agent | sed -e 's/  .*//g')" >> /etc/rc.local
+
 
 #### Dynamic detection and monitoring of running services
 Currently work in progress, more to come soon
