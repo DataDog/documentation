@@ -16,10 +16,9 @@ so that your ECS instances can join a cluster, report metrics and start the task
 
 All of this is explained in the following short guide.
 
-##### Task definition
+#### Task definition
 
 Create a new task in the AWS dashboard. To do so, simply copy-paste the following JSON in the JSON tab of a new task:
-
 
 
     {
@@ -83,13 +82,14 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
       ]
     }
 
+
+
 - Don't forget to replace the API_KEY value with your Datadog API key
-- You might want to add environment variables in the task definition: see [https://registry.hub.docker.com/u/datadog/docker-dd-agent/][1] for details
+- You might want to add environment variables in the task definition: see [https://registry.hub.docker.com/u/datadog/docker-dd-agent/][1]  for details
 
-##### IAM role
+#### IAM role
 
-- Start with creating a new IAM policy called `dd-agent-policy` with this definition:
-
+Start with creating a new IAM policy called `dd-agent-policy` with this definition:
 
 
     {
@@ -118,7 +118,7 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
 **Note:** This IAM policy is needed to give the amazon-ecs-agent all the permissions it needs to function. It also adds the `StartTask` permission so the User script we will use next can start the datadog agent task.
 
 
-##### Create the EC2 instance
+#### Create the EC2 instance
 
 - Launch a new instance with a ECS-optimized image (you can find details about that [here][2].)
 - At the config step, use this script as User Data in Advanced Details (don't forget to modify the cluster variable to the name of the cluster you want this task to run in).
@@ -126,20 +126,28 @@ It will start the task you defined earlier with the right parameters, and add a 
 
 
 
-    #!/bin/bash
-    cluster="cluster_name"
-    echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
-    start ecs
-    yum install -y aws-cli jq
-    instance_arn=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
-    az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
-    region=${az:0:${#az} - 1}
-    aws ecs start-task --cluster $cluster --task-definition dd-agent-task:1 --container-instances $instance_arn --region $region
-    echo "
-    cluster=$cluster
-    az=$az
-    region=$region
-    docker start $(docker ps -a | grep docker-dd-agent | sed -e 's/  .*//g')" >> /etc/rc.local
+        #!/bin/bash
+        cluster="cluster_name"
+        echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
+        start ecs
+        yum install -y aws-cli jq
+        instance_arn=$(curl -s http://localhost:51678/v1/metadata | \
+          jq -r '. | \
+          .ContainerInstanceArn' | \
+          awk -F/ '{print $NF}' )
+        az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+        region=${az:0:${#az} - 1}
+        aws ecs start-task --cluster $cluster \
+          --task-definition dd-agent-task:1 \
+          --container-instances $instance_arn \
+          --region $region
+        echo "
+          cluster=$cluster
+          az=$az
+          region=$region
+          docker start $(docker ps -a | \
+          grep docker-dd-agent | \
+          sed -e 's/  .*//g')" >> /etc/rc.local
 
 
 #### Dynamic detection and monitoring of running services
@@ -147,5 +155,5 @@ Currently work in progress, more to come soon
 
 
 
-    [1]: https://registry.hub.docker.com/u/datadog/docker-dd-agent/
-    [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+[1]: https://registry.hub.docker.com/u/datadog/docker-dd-agent/
+[2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
