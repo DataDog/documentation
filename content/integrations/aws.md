@@ -42,6 +42,8 @@ required to take full advantage of the Datadog AWS integration. As we add other 
             "cloudwatch:List*",
             "ec2:Describe*",
             "ec2:Get*",
+            "ecs:Describe*",
+            "ecs:List*",
             "elasticache:Describe*",
             "elasticache:List*",
             "elasticloadbalancing:Describe*",
