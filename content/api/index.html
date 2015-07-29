@@ -1801,8 +1801,9 @@ kind: documentation
           large, and xlarge.", {:default => 'medium'} %>
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
-          <%= argument "template_variables", "A list of template variables values to replace in queries with form $var. To
-          replace $var with val, use var=val as a parameter. If any template variables are missing values in the iframe source
+          <%= argument "template_variables", "Replace template variables in queries with form $var. To
+          replace $var with val, use var=val as a parameter for each template variable you wish
+          to replace. If any template variables are missing values in the iframe source
           url, then (*) will be used as the value.", {:default => "None"} %> 
         </ul>
       </div>
