@@ -12,7 +12,7 @@ Amazon EC2 Container Service (ECS) is a highly scalable, high performance contai
 
 To monitor your ECS tasks with Datadog, we recommend to run the agent as a container on every ECS instance in your cluster.
 To do so you need to create a Task Definition that runs the agent, an IAM role with the correct rights,
-so that your ECS instances can join a cluster, report metrics and start the task corresponding to the agent, and use a User Script.
+so that your ECS instances can join a cluster, report metrics and start the task corresponding to the agent, and run a User Script.
 
 All of this is explained in the following short guide.
 
@@ -26,7 +26,7 @@ Create a new task in the AWS dashboard. To do so, simply copy-paste the followin
       "containerDefinitions": [
         {
           "name": "dd-agent",
-          "image": "datadog/docker-dd-agent",
+          "image": "datadog/docker-dd-agent:ecs",
           "cpu": "10",
           "memory": "128",
           "entryPoint": [],
@@ -131,23 +131,23 @@ It will start the task you defined earlier with the right parameters, and add a 
         echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
         start ecs
         yum install -y aws-cli jq
-        instance_arn=$(curl -s http://localhost:51678/v1/metadata | \
-          jq -r '. | \
-          .ContainerInstanceArn' | \
-          awk -F/ '{print $NF}' )
+        instance_arn=$(curl -s http://localhost:51678/v1/metadata \
+        | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
         az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
         region=${az:0:${#az} - 1}
-        aws ecs start-task --cluster $cluster \
-          --task-definition dd-agent-task:1 \
-          --container-instances $instance_arn \
-          --region $region
+        aws ecs start-task --cluster $cluster --task-definition dd-agent-task:1 \
+        --container-instances $instance_arn --region $region
         echo "
-          cluster=$cluster
-          az=$az
-          region=$region
-          docker start $(docker ps -a | \
-          grep docker-dd-agent | \
-          sed -e 's/  .*//g')" >> /etc/rc.local
+        cluster=$cluster
+        az=$az
+        region=$region
+        docker start $(docker ps -a | grep docker-dd-agent | \
+        sed -e 's/  .*//g')" >> /etc/rc.local
+
+
+#### That's all!
+
+The Datadog agent is now running on your new ECS instance. Use this user script with every new ECS instance deployment to monitor your cluster's health with Datadog.
 
 
 #### Dynamic detection and monitoring of running services
