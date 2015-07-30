@@ -9,14 +9,20 @@ metrics from applications that expose them using <a
 href='http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html'>
 JMX</a>.
 
-In order to collect these metrics, a lightweight Java plugin named JMXFetch is
-called by the Datadog Agent to connect to the MBean Server and to collect these
-metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd
-server running with the Agent.
-
-JMX Checks have a limit of 350 metrics per instance which should be enough to
-satisfy your needs as it's really easy to customize which metrics you want to
-collect.  We are going to see how to do so.
+<p>
+  In order to collect these metrics, a lightweight Java plugin named JMXFetch is
+  called by the Datadog Agent to connect to the MBean Server and to collect these
+  metrics. This plugin sends metrics to the Datadog Agent using
+  the Dogstatsd server running with the Agent.
+</p>
+<p>
+  JMXFetch also sends service checks that report on the status of your monitored instances.
+</p>
+<p>
+  JMX Checks have a limit of 350 metrics per instance which should be enough to
+  satisfy your needs as it's really easy to customize which metrics you want to
+  collect.  We are going to see how to do so.
+</p>
 
 <h3>Enabling JMX checks</h3>
 <p>The instructions to set up these integrations from within the Datadog Agent can be found here:</p>
@@ -28,16 +34,21 @@ collect.  We are going to see how to do so.
 </ul>
 
 
-<h2 id="customization">Customization</h2> JMX Checks have a default configuration that will collect 13 metrics from your 
-JMX application. A few of these metrics are: jvm.heap_memory, jvm.non_heap_memory, jvm.gc.cms.count...
-So seeing these metrics is a sign that JMXFetch is properly running.
-They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which
-metrics it should send back to the Agent.
-<br>
-<h4>Commands to view the metrics that are available:</h4>
+<h2>Customization</h2>
+<p>
+  JMX Checks have a default configuration that will collect 13 metrics from your
+  JMX application. A few of these metrics are: <code>jvm.heap_memory</code>, <code>jvm.non_heap_memory</code>,
+  <code>jvm.gc.cms.count</code>... So seeing these metrics is a sign that JMXFetch is properly running.
+</p>
+<p>
+  The yaml configuration files allow you to specify which
+  metrics JMXFetch should send back to the Agent.
+</p>
+
+<h4 id="commands">Commands to view the metrics that are available:</h4>
 
 <div class="alert alert-info">
-    The <code>datadog-agent jmx</code> command ws added in version 4.1.0.
+    The <code>datadog-agent jmx</code> command was added in version 4.1.0.
 </div>
 
 <ul>
@@ -61,7 +72,7 @@ Start the collection of metrics based on your current configuration and display 
 </li>
 </ul>
 
-<h4>How to customize what metrics to collect:</h4>
+<h4>How to customize which metrics to collect:</h4>
 Like every other Agent Check, JMX Checks have 2 main sections:
 <ul>
 <li><code>init_config</code>: Settings that will be applied to every instances</li>
@@ -90,27 +101,61 @@ inside the bean) and have the tags <code>attr0:val0, attr1:val1, domain:mydomain
 </p>
 
 
-<h3>Description of the filters</h3> These dictionaries have some specials keys:
-<br><ul> <li><code>domain</code>: The domain of the attribute (e.g.
-java.lang)</li> <li><code>bean</code> or <code>bean_name</code>: A <a href="#update-note">list</a> of full bean
-names (e.g. java.lang:type=Compilation)</li> <li><code>attribute</code>: A <a href="#update-note">list</a>
-or a dictionary of attribute names (see below for more details)</li> </ul> On
-top of these parameters, the filters support "custom" keys which means that you
-can filter by bean parameters.
+<h3>Description of the filters</h3>
+Each <code>include</code> or <code>exclude</code> dictionary supports the following keys:
+<ul>
+  <li>
+    <code>domain</code>: a <a href="#update-note">list</a> of domain names (e.g. <code>java.lang</code>)
+  </li>
+  <li>
+    <code>domain_regex</code>: a <a href="#update-note">list</a> of regexes on the domain name (e.g. <code>java\.lang.*</code>)
+  </li>
+  <li>
+    <code>bean</code> or <code>bean_name</code>: A <a href="#update-note">list</a> of full bean names (e.g. <code>java.lang:type=Compilation</code>)
+  </li>
+  <li>
+    <code>bean_regex</code>: A <a href="#update-note">list</a> of regexes on the full bean names (e.g. <code>java\.lang.*[,:]type=Compilation.*</code>)
+  </li>
+  <li>
+    <code>attribute</code>: A <a href="#update-note">list</a> or a dictionary of attribute names (see below for more details)
+  </li>
+</ul>
 
-	Example: Let's say you want to collect metrics regarding the Cassandra
-cache. You could use the <code>type:</code> <code>  - Caches</code> filter: <br /> <br /> <%=snippet_code_block "jmx-cassandra-cache.yaml" %>
+
+<p>
+  The regexes defined in <code>domain_regex</code> and <code>bean_regex</code> must conform to <a href="http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html">Java's regular expression format</a>.
+</p>
+
+<div class="alert alert-info">
+    The <code>domain_regex</code> and <code>bean_regex</code> filters were added in version 5.5.0.
+</div>
+
+<p>
+  On top of these parameters, the filters support "custom" keys which means that you
+  can filter by bean parameters. For example, if you want to collect metrics regarding the Cassandra
+  cache, you could use the <code>type:</code> <code>  - Caches</code> filter: <%=snippet_code_block "jmx-cassandra-cache.yaml" %>
+</p>
 
 <h4>The <code>attribute</code> filter</h4>
 
-<ul>The <code>attribute</code> filter can accept two types of values: <br /><br />
-<li>A dictionary whose keys are attributes names:</li> <%=snippet_code_block "jmx-attribute-dict.yaml" %> </ul> In that case you can
-specify an alias for the metric that will become the metric name in Datadog.
+<p>The <code>attribute</code> filter can accept two types of values:</p>
+<ul>
+  <li>
+    A dictionary whose keys are attributes names:
+  </li>
+</ul>
+<%=snippet_code_block "jmx-attribute-dict.yaml" %>
+<p>In that case you can specify an alias for the metric that will become the metric name in Datadog.
 You can also specify the metric type either a gauge or a counter. If you choose
-counter, a rate per second will be computed for this metric.
-
-<br><br><li>A list of attributes names:</li><%= snippet_code_block "jmx-attribute-list.yaml" %>
-In that case:<ul>
+counter, a rate per second will be computed for this metric.</p>
+<ul>
+  <li>
+    A list of attributes names:
+  </li>
+</ul>
+<%= snippet_code_block "jmx-attribute-list.yaml" %>
+In that case:
+<ul>
     <li>The metric type will be a gauge</li>
     <li>The metric name will be jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]</li>
 </ul>
@@ -141,7 +186,7 @@ init_config:
 <h4 id="update-note">Note</h4>
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 <pre><code># Datadog Agent > 5.3.0
-conf:
+  conf:
     - include:
        domain: domain_name
        bean:
@@ -150,7 +195,7 @@ conf:
 ...
 </code></pre>
 <pre><code># Older Datadog Agent versions
-conf:
+  conf:
     - include:
         domain: domain_name
         bean: first_bean_name
@@ -161,17 +206,19 @@ conf:
 </code></pre>
 
 <h2>Troubleshooting</h2>
-<h4>The 350 metric limit</h4> Due to the nature of
-these integrations, it is possible to submit an extremely high number of
-metrics directly to Datadog. What we've found in speaking with many customers
-is that some of these metrics are not needed; thus, we've set the limit at 350
-and below you'll find the tools to both see what you're collecting and to get
-below the limit.
-<p>Begin by using the commands seen <a href='#customization'>above</a> to investigate what metrics are available.
-Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.
+<h4>The 350 metric limit</h4>
+<p>
+  Due to the nature of
+  these integrations, it is possible to submit an extremely high number of
+  metrics directly to Datadog. What we've found in speaking with many customers
+  is that some of these metrics are not needed; thus, we've set the limit at 350 metrics.
+</p>
+<p>To see what you're collecting and get below the limit, begin by using the commands seen <a href='#commands'>above</a> to investigate what metrics are available.
+We then recommend creating filters to refine what metrics are collected.
 If you believe you need more than 350 metrics, please reach out to <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
-<h4>Java Path</h4> The agent does not come with a bundled JVM, but will use the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the agent. 
-<br>Alternatively, you can specify the JVM path in the integration's configuration file:
+<h4>Java Path</h4>
+<p>The agent does not come with a bundled JVM, but will use the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the agent.</p>
+<p>Alternatively, you can specify the JVM path in the integration's configuration file:</p>
 
 <pre><code>java_bin_path: /path/to/java
 </code></pre>
