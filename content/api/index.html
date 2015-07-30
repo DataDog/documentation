@@ -1373,7 +1373,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>GET /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>GET /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-get-host.py" %>
         <%= snippet_code_block "api-tags-get-host.rb" %>
@@ -1399,7 +1399,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>POST /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-add.py" %>
         <%= snippet_code_block "api-tags-add.sh" %>
@@ -1425,7 +1425,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>PUT /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>PUT /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-update.py" %>
         <%= snippet_code_block "api-tags-update.sh" %>
@@ -1450,7 +1450,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>DELETE /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>DELETE /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-remove.py" %>
         <%= snippet_code_block "api-tags-remove.sh" %>
@@ -1801,8 +1801,9 @@ kind: documentation
           large, and xlarge.", {:default => 'medium'} %>
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
-          <%= argument "template_variables", "A list of template variables values to replace in queries with form $var. To
-          replace $var with val, use var=val as a parameter. If any template variables are missing values in the iframe source
+          <%= argument "template_variables", "Replace template variables in queries with form $var. To
+          replace $var with val, use var=val as a parameter for each template variable you wish
+          to replace. If any template variables are missing values in the iframe source
           url, then (*) will be used as the value.", {:default => "None"} %> 
         </ul>
       </div>
