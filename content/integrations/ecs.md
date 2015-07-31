@@ -135,14 +135,12 @@ It will start the task you defined earlier with the right parameters, and add a 
         | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
         az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
         region=${az:0:${#az} - 1}
-        aws ecs start-task --cluster $cluster --task-definition dd-agent-task:1 \
-        --container-instances $instance_arn --region $region
         echo "
         cluster=$cluster
         az=$az
         region=$region
-        docker start $(docker ps -a | grep docker-dd-agent | \
-        sed -e 's/  .*//g')" >> /etc/rc.local
+        aws ecs start-task --cluster $cluster --task-definition dd-agent-task:1 \
+        --container-instances $instance_arn --region $region" >> /etc/rc.local
 
 
 #### That's all!
