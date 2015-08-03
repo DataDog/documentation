@@ -44,7 +44,7 @@ The Redis/Memcached integrations support the tagging of individual cache instanc
 	  - host: replica-001.xxxx.use1.cache.amazonaws.com # Endpoint URL from AWS console
 	    port: 6379
 	    tags:
-	  		- cacheclusterid:replicaa-001 \# Cache Cluster ID from AWS console
+	  		- cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
 
 Then restart the agent: `sudo /etc/init.d/datadog-agent restart` (on linux).
 
