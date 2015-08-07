@@ -128,6 +128,7 @@ It will start the task you defined earlier with the right parameters, and add a 
 
         #!/bin/bash
         cluster="cluster_name"
+        task_def="dd-agent-task"
         echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
         start ecs
         yum install -y aws-cli jq
@@ -139,7 +140,7 @@ It will start the task you defined earlier with the right parameters, and add a 
         cluster=$cluster
         az=$az
         region=$region
-        aws ecs start-task --cluster $cluster --task-definition dd-agent-task:1 \
+        aws ecs start-task --cluster $cluster --task-definition $task_def \
         --container-instances $instance_arn --region $region" >> /etc/rc.local
 
 
