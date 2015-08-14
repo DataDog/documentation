@@ -466,7 +466,7 @@ each time they run so you can correlate metrics and other events with vacuums.
 You can do this with the dogwrap command line tool provided by the dogapi client
 library:
 
-    dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
+    dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table'" 2>&1 /var/log/postgres_vacuums.log
 
 
 This will call the command at the end of the script and
