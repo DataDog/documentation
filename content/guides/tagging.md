@@ -22,9 +22,7 @@ sidebar:
 ---
 
 ## Overview 
-Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. To learn more about what tags are at a higher level, review this video.
-
---link to video--
+Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
 ## How to assign tags
 There are three primary ways to assign tags: in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is via the configuration files. 
