@@ -3,7 +3,7 @@ title: Datadog-Docker Integration
 integration_title: Docker
 kind: integration
 doclevel: basic
-adroll_pixel_id: BPNOSTJTQFA3HBFU5WDRCM
+adroll_pixel: true
 ---
 
 <div id="int-overview">
