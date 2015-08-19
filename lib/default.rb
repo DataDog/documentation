@@ -68,11 +68,11 @@ def argument(name, description, options={})
   EOF
 end
 
-def adroll_pixel(pixid)
+def adroll_pixel()
   html = <<-EOF
     <script type="text/javascript">
       adroll_adv_id = "AWPYDAH5JJH2JGSUWJVDKM";
-      adroll_pix_id = "#{pixid}";
+      adroll_pix_id = "BPNOSTJTQFA3HBFU5WDRCM";
       (function () {
         var oldonload = window.onload;
         window.onload = function(){
