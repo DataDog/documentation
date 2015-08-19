@@ -407,6 +407,29 @@ triggering scope into the message of multi alerts.
     parent, which displays an aggregation summary).
 
 
+3. **Conditional variables for different triggering scopes**: You can have a
+   monitor event display a different message depending on the group that's
+   causing a notification.
+
+   The `{{is_match}}` conditional lets you match the triggering context to some
+   string. For example, you might want to notify your db team if a triggering
+   host has `role:db` but notify your app team if the host has `role:app`.
+
+   You can use any of the available tag variables in your condition. A match
+   will be made if the comparison string is anywhere in the resolved variable.
+
+   The variable uses the following format:
+
+       {{#is_match "tag_variable" "comparison_string"}}
+       This will show if comparison_string is in tag_variable.
+       {{/is_match}}
+
+   Here is an example of how you can give a different message depending on the
+   triggering context:
+
+   ![scope match editor](/static/images/monitor/scope_match_editor.png)
+
+
 ## Monitor FAQs
 {: #faq}
 
