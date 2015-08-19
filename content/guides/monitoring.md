@@ -234,7 +234,7 @@ point they should notify.
 1. Pick the **process** to monitor. You will see the names configured in any
    Agent with an active process check.
 
-2. Pick the **hosts by name or tag(s)**. You will only see hosts or tags that
+2. Pick the **monitor scope**. You will only see hosts or tags that
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
@@ -258,7 +258,7 @@ configuration.
 1. Choose a **network check**. You will be able to choose from all HTTP and TCP
    checks being submitted by your Agents.
 
-2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
+2. Pick **monitor scope**. You will only see hosts or tags reporting
    the check you have chosen.
 
 3. Select **alerting options**. Please refer to the
@@ -274,7 +274,7 @@ configuration.
 1. Choose a **network metric**. You will be able to choose either the TCP or
    HTTP response time metric.
 
-2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
+2. Pick **monitor scope**. You will only see hosts or tags reporting
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
