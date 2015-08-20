@@ -17,6 +17,8 @@ sidebar:
       href: "#network"
     - text: Custom Checks
       href: "#custom"
+    - text: Events
+      href: "#event"
     - text: Notifications
       href: "#notification"
     - text: Monitor FAQs
@@ -332,8 +334,9 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 2. Select the alert gouping
 
-3. Select the **alerting conditions**. Please refer to [Metric monitors](#metric)
-    for more details
+3. Select the **alerting conditions**. The **threshold value** and **timeframe**
+    options allows you to set the number of occurence of an event required during
+    a timeframe before triggering the monitor.
 
 4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
     section of this guide for informations.
