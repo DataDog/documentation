@@ -316,9 +316,27 @@ or service checks.
    You can optionally **notify on no data** after a configurable timeframe. You
    must choose at least 2 minutes for your timeframe.
 
-4. Configure your **notification options** Refer to the
+4. Configure your **notification options**. Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
+
+## Event Monitors
+{: #event}
+
+Event monitors allows you to alert when an event matching your query occurs.
+
+![event monitor](/static/images/monitor/event_monitor.png)
+
+1. Select the query and parameters (status, priority, sources and tags) you want
+    to monitor.
+
+2. Select the alert gouping
+
+3. Select the **alerting conditions**. Please refer to [Metric monitors](#metric)
+    for more details
+
+4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
+    section of this guide for informations.
 
 ## Monitor Notifications
 {: #notification}
