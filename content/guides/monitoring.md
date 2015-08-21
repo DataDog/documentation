@@ -17,6 +17,8 @@ sidebar:
       href: "#network"
     - text: Custom Checks
       href: "#custom"
+    - text: Events
+      href: "#event"
     - text: Notifications
       href: "#notification"
     - text: Monitor FAQs
@@ -316,9 +318,28 @@ or service checks.
    You can optionally **notify on no data** after a configurable timeframe. You
    must choose at least 2 minutes for your timeframe.
 
-4. Configure your **notification options** Refer to the
+4. Configure your **notification options**. Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
+
+## Event Monitors
+{: #event}
+
+Event monitors allows you to alert when an event matching your query occurs.
+
+![event monitor](/static/images/monitor/event_monitor.png)
+
+1. Select the query and parameters (status, priority, sources and tags) you want
+    to monitor.
+
+2. Select the alert gouping
+
+3. Select the **alerting conditions**. The **threshold value** and **timeframe**
+    options allows you to set the number of occurence of an event required during
+    a timeframe before triggering the monitor.
+
+4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
+    section of this guide for informations.
 
 ## Monitor Notifications
 {: #notification}
