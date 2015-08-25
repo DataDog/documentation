@@ -12,7 +12,7 @@ default_attributes(
     'apache' => {
       'instances' => [
         { 'status_url' => 'http://localhost:8080/server-status/',
-          'tags' => ['test1', 'test2'] }
+          'tags' => ['extra_tag', 'env:example'] }
       ]
     }
   }
