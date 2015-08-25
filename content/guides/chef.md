@@ -111,6 +111,6 @@ Here's an example of how we've extended a `webserver.rb` role file to automatica
 
 <%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
 
-As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to controle what instances of Apache should be monitored by Datadog.
+As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
 
 Read each recipe file for the exact details of the integration values to pass into the `instances` part of the attributes.
