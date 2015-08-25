@@ -23,12 +23,12 @@ OVERVIEW
 
 <h3 id="overview">Overview</h3>
 
-In this guide, we will explore how to leverage <a href='http://www.opscode.com/chef/'>Chef</a>
+In this guide, we will explore how to leverage <a href="//www.chef.io/chef/" target="_blank">Chef</a>
 to automate installation of the Datadog Agent
 
 Deploying Datadog with Chef is meant to be very simple, and provide you with a method of getting the value of monitoring across all of your infrastructure as simply as possible.
 
-We also provide a Chef <a href='http://docs.chef.io/handlers.html'>Execution and Report Handler</a> that can capture `chef-client` failures as well as metrics related to the Chef run, such as timing and resources updated.
+We also provide a Chef <a href="//docs.chef.io/handlers.html" target="_blank">Execution and Report Handler</a> that can capture `chef-client` failures as well as metrics related to the Chef run, such as timing and resources updated.
 
 <!--
 ======================================================
