@@ -22,7 +22,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 * Staying in the ECS console, create a new task.
 * Click the JSON tab, and replace the default contents by copy-pasting the JSON below, but don't click "Create" yet.
 * Replace *your\_api\_key* with your Datadog API key (enclosed by double quotes).
-* Replace *your\_tag1,your\_tag2* with tags you want to associate with your containers' metrics; details [here](https://registry.hub.docker.com/u/datadog/docker-dd-agent/). If you don't want any tags, remove the whole block for defining tags.
+* Replace *simple-tag-0, tag-key-1:tag-value-1* with tags you want to associate with your containers' metrics; details [here](https://registry.hub.docker.com/u/datadog/docker-dd-agent/). If you don't want any tags, remove the whole block for defining tags.
 * Click "Create".
 
 ~~~~~~~~    
@@ -42,7 +42,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
             },
             {
               "name": "TAGS",
-              "value": "your_tag1,your_tag2"
+              "value": "simple-tag-0, tag-key-1:tag-value-1"
             }
           ],
           "command": [],
