@@ -25,6 +25,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 * Replace *your\_tag1,your\_tag2* with tags you want to associate with your containers' metrics; details [here](https://registry.hub.docker.com/u/datadog/docker-dd-agent/). If you don't want any tags, remove the whole block for defining tags.
 * Click "Create".
 
+~~~~~~~~    
     {
       "family": "dd-agent-task",
       "containerDefinitions": [
@@ -89,13 +90,14 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
         }
       ]
     }
+~~~~~~~~
 
 #### 3. Create an IAM policy
 
 * Using the Identity and Access Management (IAM) console, create the new role called `dd-agent-ecs`. Select type **Amazon EC2 Role for EC2 Container Service**. Don't attach it to any policy during creation.
 * Create a new IAM policy called `dd-agent-policy` with this definition:
 
-```
+~~~~~~~~
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -115,7 +117,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
             }
         ]
     }
-```
+~~~~~~~~
 * Select the newly created policy, and then attach it to the new `dd-agent-ecs` role.
 
 
@@ -127,24 +129,24 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
     *  Select the IAM role you created in step 2 
     *  Paste the script below into User Data under Advanced Details, replacing *"cluster_name"* with name of the cluster you created in step 1.
 
-```
-        #!/bin/bash
-        cluster="cluster_name"
-        task_def="dd-agent-task"
-        echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
-        start ecs
-        yum install -y aws-cli jq
-        instance_arn=$(curl -s http://localhost:51678/v1/metadata \
-        | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
-        az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
-        region=${az:0:${#az} - 1}
-        echo "
-        cluster=$cluster
-        az=$az
-        region=$region
-        aws ecs start-task --cluster $cluster --task-definition $task_def \
-        --container-instances $instance_arn --region $region" >> /etc/rc.local
-```
+~~~~~~~~
+  #!/bin/bash
+  cluster="cluster_name"
+  task_def="dd-agent-task"
+  echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
+  start ecs
+  yum install -y aws-cli jq
+  instance_arn=$(curl -s http://localhost:51678/v1/metadata \
+  | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
+  az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+  region=${az:0:${#az} - 1}
+  echo "
+  cluster=$cluster
+  az=$az
+  region=$region
+  aws ecs start-task --cluster $cluster --task-definition $task_def \
+  --container-instances $instance_arn --region $region" >> /etc/rc.local
+~~~~~~~~
 
 This user script above will:
 
