@@ -16,7 +16,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 4. **Add a user script** to run the ECS defined in step 2, above
 
 #### 1. Create a cluster
-* Using the EC2 Container Service (ECS) console, create a new task. Write down its name.
+* Using the EC2 Container Service (ECS) console, create a new cluster. Write down its name.
 
 #### 2. Define an ECS task
 * Staying in the ECS console, create a new task.
