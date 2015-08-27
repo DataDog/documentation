@@ -54,7 +54,7 @@ Here is a quick overview of the different terms used in this guide.
 ## Creating a Monitor
 {: #create}
 
-Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors/create)
+Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the top menu and selecting the
 "Create Monitors" sub-tab.  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of each type.
@@ -234,7 +234,7 @@ point they should notify.
 1. Pick the **process** to monitor. You will see the names configured in any
    Agent with an active process check.
 
-2. Pick the **hosts by name or tag(s)**. You will only see hosts or tags that
+2. Pick the **monitor scope**. You will only see hosts or tags that
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
@@ -258,7 +258,7 @@ configuration.
 1. Choose a **network check**. You will be able to choose from all HTTP and TCP
    checks being submitted by your Agents.
 
-2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
+2. Pick **monitor scope**. You will only see hosts or tags reporting
    the check you have chosen.
 
 3. Select **alerting options**. Please refer to the
@@ -274,7 +274,7 @@ configuration.
 1. Choose a **network metric**. You will be able to choose either the TCP or
    HTTP response time metric.
 
-2. Pick **hosts by name or tag(s)**. You will only see hosts or tags reporting
+2. Pick **monitor scope**. You will only see hosts or tags reporting
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
@@ -405,6 +405,29 @@ triggering scope into the message of multi alerts.
     These variables can also be used in the monitor titles (names), but note that
     the variables are only populated in the text of Datadog child events (not the
     parent, which displays an aggregation summary).
+
+
+3. **Conditional variables for different triggering scopes**: You can have a
+   monitor event display a different message depending on the group that's
+   causing a notification.
+
+   The `{{is_match}}` conditional lets you match the triggering context to some
+   string. For example, you might want to notify your db team if a triggering
+   host has `role:db` but notify your app team if the host has `role:app`.
+
+   You can use any of the available tag variables in your condition. A match
+   will be made if the comparison string is anywhere in the resolved variable.
+
+   The variable uses the following format:
+
+       {{#is_match "tag_variable" "comparison_string"}}
+       This will show if comparison_string is in tag_variable.
+       {{/is_match}}
+
+   Here is an example of how you can give a different message depending on the
+   triggering context:
+
+   ![scope match editor](/static/images/monitor/scope_match_editor.png)
 
 
 ## Monitor FAQs

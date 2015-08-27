@@ -1,18 +1,18 @@
-conf:
+  conf:
     - include:
-       domain: domain_name
-       type:
-         - bean_type
-       bean:
-         - first_bean_name
-         - second_bean_name
-       attribute:
-            nameOfAttribute:
-                metric_type: counter
-                alias: jmx.my_metric_name
-            nameOf2ndAttribute:
-                metric_type: gauge
-                alias: jmx.my2ndattribute
+        domain: domain_name
+        type:
+          - bean_type
+        bean:
+          - first_bean_name
+          - second_bean_name
+        attribute:
+          nameOfAttribute:
+            metric_type: counter
+            alias: jmx.my_metric_name
+          nameOf2ndAttribute:
+            metric_type: gauge
+            alias: jmx.my2ndattribute
     - include:
         domain: 2nd_domain
       exclude:

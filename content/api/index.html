@@ -258,9 +258,9 @@ kind: documentation
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
-            <%= argument "text", "The body of the event. Limited to 4000 characters.", :lang => l %>
+            <%= argument "text", "The body of the event. Limited to 4000 characters. The text supports "+'<a href="/guides/markdown/">markdown</a>.', :lang => l %>
           <% end %>
-          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters.', :lang => 'ruby' %>
+          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters. The text supports '+'<a href="/guides/markdown/">markdown</a>.', :lang => 'ruby' %>
           <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
