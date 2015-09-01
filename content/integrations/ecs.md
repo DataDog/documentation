@@ -109,7 +109,8 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
                     "ecs:DiscoverPollEndpoint",
                     "ecs:Submit*",
                     "ecs:Poll",
-                    "ecs:StartTask"
+                    "ecs:StartTask",
+                    "ecs:StartTelemetrySession"
                 ],
                 "Resource": [
                     "*"
