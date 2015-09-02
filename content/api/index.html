@@ -463,6 +463,10 @@ kind: documentation
               this monitor. Email notifications can be sent to specific users by
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
+
           <li>
             <strong>options [optional]</strong>
             <div>A dictionary of options for the monitor. There are options that
@@ -591,6 +595,9 @@ kind: documentation
               :default => "dynamic, based on query" %>
           <%= argument 'options', "Refer to the create monitor documentation for
               details on the available options.", :default => "None" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
         </ul>
       </div>
       <%= right_side_div %>
