@@ -99,7 +99,7 @@ end
 
 desc 'Run Guard on Docker environment'
 task :dockerguard do
-  sh 'bundle exec guard -G DockerGuardfile'
+  sh 'bundle exec guard -i -G DockerGuardfile'
 end
 
 desc 'Run Guard, autobuilds/reloads site'
