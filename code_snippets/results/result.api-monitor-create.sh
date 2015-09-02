@@ -2,6 +2,7 @@
     "id": 92090,
     "message": "We may need to add web hosts if this is consistently high.",
     "name": "Bytes received on host0",
+    "tags": ["app:webserver", "frontend"],
     "options": {
         "no_data_timeframe": 20,
         "notify_audit": false,
