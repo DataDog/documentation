@@ -23,12 +23,12 @@ OVERVIEW
 
 <h3 id="overview">Overview</h3>
 
-In this guide, we will explore how to leverage <a href='http://www.opscode.com/chef/'>Chef</a>
+In this guide, we will explore how to leverage [Chef](https://www.chef.io/chef/)
 to automate installation of the Datadog Agent
 
 Deploying Datadog with Chef is meant to be very simple, and provide you with a method of getting the value of monitoring across all of your infrastructure as simply as possible.
 
-We also provide a Chef <a href='http://docs.opscode.com/essentials_handlers.html'>Execution and Report Handler</a> that can capture `chef-client` failures as well as metrics related to the Chef run, such as timing and resources updated.
+We also provide a Chef [Execution and Report Handler](https://docs.chef.io/handlers.html) that can capture `chef-client` failures as well as metrics related to the Chef run, such as timing and resources updated.
 
 <!--
 ======================================================
@@ -38,14 +38,14 @@ DEPLOYING THE AGENT
 
 <h3 id="deployagent">Deploying the Agent</h3>
 
-To deploy the Agent, we have created a cookbook to assist with deployment.
+We created a cookbook to assist with Agent deployment.
 
-Install the latest released version of the Datadog Chef cookbook from the <a href='http://community.opscode.com/'>Community Site</a> via knife, and upload to your Chef Server:
+Install the latest released version of the Datadog Chef cookbook from the [Community Site](https://supermarket.chef.io/cookbooks/datadog) via knife, and upload to your Chef Server:
 
     knife cookbook site install datadog
     knife cookbook upload datadog
 
-You may also be using another tool to manage your cookbook workflow, such as <a href='http://berkshelf.com/'>Berkshelf</a> or <a href='https://github.com/applicationsonline/librarian-chef'>Librarian Chef</a>, in which case you will need to add a line like this to your Berksfile/Cheffile:
+You may also be using another tool to manage your cookbook workflow, such as [Berkshelf](http://berkshelf.com/) or [Librarian Chef](https://github.com/applicationsonline/librarian-chef), in which case you will need to add a line like this to your Berksfile/Cheffile:
 
     cookbook 'datadog'
 
@@ -59,7 +59,7 @@ Here is an example of a `base.rb` role file, typically applied to every host in 
 
 <%= snippet_code_block("guides-chef-base-role-agent.rb") %>
 
-Note that there are two keys needed. Your API Key can be found in Datadog, under the Integrations => API menu item, or click <a href='https://app.datadoghq.com/account/settings#api'>this link</a> to log in and go there directly.
+Note that there are two keys needed. Your API Key can be found in Datadog, under the Integrations => API menu item, or click [this link](https://app.datadoghq.com/account/settings#api) to log in and go there directly.
 
 Then, on the same page, you must create an Application Key for use with Chef. You may name the key whatever you wish, we recommend something like 'chef_appkey' or something of that nature.
 
@@ -93,7 +93,7 @@ Adding the handler is very simple, as you can see in this role snippet:
 
 All we've done is add the `datadog::dd-handler` recipe to the beginning of the node's run list. Adding it to the beginning allows the handler to capture details about everything in it observes after being invoked, so if you added it to the end of the `run_list` and something failed prior to it being executed, you may not receive the full output.
 
-Once set, upload the role to your Chef Server, and wait. After Chef has run on a few hosts, a new automatic Dashboard will be created, with the relevant Chef Metrics. You can find it in your <a href='https://app.datadoghq.com/dash/list'>Dashboards List</a>, on the right-hand side.
+Once set, upload the role to your Chef Server, and wait. After Chef has run on a few hosts, a new automatic Dashboard will be created, with the relevant Chef Metrics. You can find it in your [Dashboards List](https://app.datadoghq.com/dash/list), on the right-hand side.
 
 <!--
 ======================================================
@@ -111,6 +111,6 @@ Here's an example of how we've extended a `webserver.rb` role file to automatica
 
 <%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
 
-As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to controle what instances of Apache should be monitored by Datadog.
+As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
 
 Read each recipe file for the exact details of the integration values to pass into the `instances` part of the attributes.

@@ -97,6 +97,11 @@ task :test do
   sh("rm -rf #{CODE_TEST}")
 end
 
+desc 'Run Guard on Docker environment'
+task :dockerguard do
+  sh 'bundle exec guard -i -G DockerGuardfile'
+end
+
 desc 'Run Guard, autobuilds/reloads site'
 task :guard do
   puts 'Auto Compiling and Live Reloading.'
