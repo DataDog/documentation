@@ -1,5 +1,5 @@
 ---
-title: Outlier Detection (BETA)
+title: Outlier Detection
 kind: documentation
 sidebar:
   nav:
@@ -18,7 +18,7 @@ Outlier Detection is a beta feature. It allows you to detect when some members o
 
 ## How to Use Outlier Detection on Your Data
 
-Starting in the beta period, we’ve added a new query function called `outliers` to our query language. This function acts as a filter, selecting only the series in a group that are outliers compared to the rest of the group.
+We’ve added a new query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
@@ -32,9 +32,9 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
-During the beta period, to set up an outlier detection graph for your data you add two copies of the same metric to the graph: one showing all series in the group in a lightweight, greyscale color palette, and the other filtering to show outlier series only in a bold, warm color palette.
+To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
-To do so, create a new timeseries graph on your dashboard with two copies of the same metric. Set the first copy (all series) to color:grey, style:dotted, and stroke:thin. Set the second copy (outliers only) to color:warm, style:solid, and stroke:thick. Your screen should look like:
+To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
 
 <img src="/static/images/outliers/outliers-dash-choose-metrics.png" style="width:100%; border:1px solid #777777"/>
 
@@ -42,7 +42,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of the 
 
 <img src="/static/images/outliers/outliers-function-selector.png" style="width:25%; border:1px solid #777777"/>
 
-This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors. You’ll also see the outliers function added to the second metric row, including parameters to tune the function:
+This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
 <img src="/static/images/outliers/outliers-algorithm-annotated.png" style="width:100%; border:1px solid #777777"/>
 
@@ -56,13 +56,15 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 <img src="/static/images/outliers/outliers-alert-snapshot.png" style="width:100%; border:1px solid #777777"/>
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new monitor](https://app.datadoghq.com/monitors#create/metric) for the outlier function over our metric:
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for our metric:
 
 <img src="/static/images/outliers/outliers-new-monitor-define-metric.png" style="width:100%; border:1px solid #777777"/>
 
-During the outlier beta period, you’ll need to type the metric query directly into the "Source" tab rather than forming it in the "Edit" tab.
+You will select the metric and scope as with other metric-based monitors.
 
-We want the monitor to detect any outliers: that is, any series that make it through the `outliers` filter function. We can do that by setting the alert conditions to "Above 0", causing the monitor to fire if any outliers make it through the filter:
+In the alert conditions you will select the grouping and timeframe.
+
+You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with an alpha value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
 
 <img src="/static/images/outliers/outliers-new-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
 
