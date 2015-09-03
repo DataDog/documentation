@@ -430,7 +430,7 @@ triggering scope into the message of multi alerts.
     the variables are only populated in the text of Datadog child events (not the
     parent, which displays an aggregation summary).
 
-
+ 
 3. **Conditional variables for different triggering scopes**: You can have a
    monitor event display a different message depending on the group that's
    causing a notification.
