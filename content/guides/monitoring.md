@@ -7,19 +7,21 @@ sidebar:
     - header: Guide to Monitoring
     - text: Glossary
       href: "#glossary"
-    - text: Hosts
+    - text: Host Monitors
       href: "#host"
-    - text: Metrics
+    - text: Metric Monitors
       href: "#metric"
-    - text: Integrations
+    - text: Integration Monitors
       href: "#integration"
-    - text: Network
+    - text: Process Monitors
+      href: "#process"
+    - text: Network Monitors
       href: "#network"
-    - text: Custom Checks
-      href: "#custom"
-    - text: Events
+    - text: Event Monitors
       href: "#event"
-    - text: Notifications
+    - text: Custom Monitors
+      href: "#custom"
+    - text: Monitor Notifications
       href: "#notification"
     - text: Monitor FAQs
       href: "#faqs"
@@ -28,7 +30,7 @@ sidebar:
 Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
 ability to create monitors that will actively check metrics, integration
-availability, network endpoints and more.
+availability, network endpoints, and more.
 
 Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
@@ -50,20 +52,20 @@ Here is a quick overview of the different terms used in this guide.
 - **Check**: Emits one more more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: host-, metric-, integration-, network-based and custom. See
-  side navigation to drill into a specific type.
+- **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
 
 ## Creating a Monitor
 {: #create}
 
 Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
-page by highlighting the "Monitors" tab in the top menu and selecting the
-"Create Monitors" sub-tab.  You will be presented with a list of monitor types
+page by highlighting the "Monitors" tab in the main menu and selecting the
+"Create Monitors" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of each type.
 
 ![nav](/static/images/monitor/nav.png)
 
-## Host Monitors
+### Host Monitors
 {: #host}
 
 *Requires Datadog Agent version >= 5.0.0.*
@@ -83,7 +85,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Metric Monitors
+### Metric Monitors
 {: #metric}
 
 1. Select the metric and scope you want to monitor.
@@ -198,7 +200,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 
-## Integration Monitors
+### Integration Monitors
 {: #integration}
 
 ![es status](/static/images/monitor/es_status.png)
@@ -214,10 +216,10 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 - Choosing **Integration Metric** will provide a familiar interface used for a
   interface used for a Metric Monitor. You will be able to choose from any of
   the metrics provided by this integration. Please refer to the
-  [alert conditions](#metric-conditions) section for details on the avaialble
+  [alert conditions](#metric-conditions) section for details on the available
   options.
 
-## Process Monitors
+### Process Monitors
 {: #process}
 
 ![process monitor](/static/images/monitor/process_monitor.png)
@@ -246,7 +248,7 @@ point they should notify.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Network Monitors
+### Network Monitors
 {: #network}
 
 ![network monitor](/static/images/monitor/network_monitor.png)
@@ -287,7 +289,27 @@ configuration.
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
-## Custom Monitors
+### Event Monitors
+{: #event}
+
+Event monitors allows you to alert when an event matching your query occurs.
+
+![event monitor](/static/images/monitor/event_monitor.png)
+
+1. Select the query and parameters (status, priority, sources and tags) you want
+    to monitor.
+
+2. Select the alert gouping
+
+3. Select the **alerting conditions**. The **threshold value** and **timeframe**
+    options allows you to set the number of occurence of an event required during
+    a timeframe before triggering the monitor.
+
+4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
+    section of this guide for informations.
+
+
+### Custom Monitors
 {: #custom}
 
 ![custom monitor](/static/images/monitor/custom_monitor.png)
@@ -321,25 +343,6 @@ or service checks.
 4. Configure your **notification options**. Refer to the
    [Notifications](#notifications) section of this guide for a detailed
    walkthrough of the common notification options.
-
-## Event Monitors
-{: #event}
-
-Event monitors allows you to alert when an event matching your query occurs.
-
-![event monitor](/static/images/monitor/event_monitor.png)
-
-1. Select the query and parameters (status, priority, sources and tags) you want
-    to monitor.
-
-2. Select the alert gouping
-
-3. Select the **alerting conditions**. The **threshold value** and **timeframe**
-    options allows you to set the number of occurence of an event required during
-    a timeframe before triggering the monitor.
-
-4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
-    section of this guide for informations.
 
 ## Monitor Notifications
 {: #notification}
@@ -464,9 +467,3 @@ triggering scope into the message of multi alerts.
 
   Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
   alert on custom queries and functions, similar to the JSON editor for graphs.
-
-- *Can you alert on an event?*
-
-  Not currently, but we're developing this feature. As an
-  alternative you can set up an @ notification in the body of the event which
-  would deliver the event via email whenever it occurred.
