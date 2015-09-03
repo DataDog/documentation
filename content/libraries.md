@@ -31,6 +31,8 @@ sidebar:
       href: "#community-elixir"
     - text: C#
       href: "#community-c-sharp"
+    - text: R
+      href: "#community-r"
     - header: Community Integration Libraries
     - text: Saltstack
       href: "#community-integration-saltstack"
@@ -130,6 +132,11 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-c-sharp}
 
   * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
+
+#### R
+{: #community-r}
+
+  * [rdog][68] - an R package to analyze Datadog metrics into R
 
 ### Community Integration Libraries
 
@@ -235,3 +242,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [65]: https://github.com/synrc/mtx
    [66]: https://synrc.com/
    [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
+   [68]: https://github.com/alq666/rdog
