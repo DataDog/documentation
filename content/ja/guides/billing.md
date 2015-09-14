@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/16
+last_modified: 2015/08/18
 translation_status: Translated
 language: ja
 title: 課金に関するFAQ
@@ -137,7 +137,7 @@ We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
 
 > You tell us how many hosts you will run each month and we will bill you for that baseline number of
-> hosts at $15 per host (you can change this number at the beginning of each
+> hosts at $18 per host (you can change this number at the beginning of each
 > month if you like). Then for any hosts beyond the committed number previously
 > determined, our billing system will charge you $0.03 per host per hour. This
 > works out to be much less expensive for extra hosts that may come up for a
@@ -153,7 +153,7 @@ of monthly and hourly. Here is how that hybrid works:
 $0.03/ホストの使用料を基に、時間課金で請求書を発行することができます。又、月極の課金形態と時間課金形態の併用も可能です。併用での支払いがどのように機能するかは、次を参照してください:
 
 > まず、月々に請求の基本となる成約ホスト数を申請していただきます。
-> ここで申請されたホスト数に対しては、1台あたり$15/月で請求します。
+> ここで申請されたホスト数に対しては、1台あたり$18/月で請求します。
 > 尚、この基本となる台数は、月初に変更することができます。
 > この成約台数を超えた場合につき1台あたり$0.03/hrを請求します。
 > 短期間しか使用しないホストが並列で起動するようなケースでは、この併用払いの方法を採用することで使用料を押さえることができます。
@@ -213,20 +213,20 @@ AWS IntegrationによってピックアップされたEC2インスタンスでDa
 
 <!-- ##### How will a VMware integration impact my monthly billing?
 
-The base pricing is $15 per virtual machine per month. See above for more general information. -->
+The base pricing is $18 per virtual machine per month. See above for more general information. -->
 
 #### VMware Ingegrationを利用する場合、毎月の請求額はどのように変化しますか?
 
-VMwareの仮想マシンごとに月額$15で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
+VMwareの仮想マシンごとに月額$18で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
 
 
 <!-- ##### How will Docker and other container integrations impact my monthly billing?
 
-The base pricing of $15 per host includes 10 containers. Additional containers cost $1 per container. -->
+The base pricing of $18 per host includes 10 containers. Additional containers cost $1 per container. -->
 
 #### Dockerや他のコンテナ技術を使った場合の請求書への影響は?
 
-基本価格の$15には、10コンテナまでの監視が含まれています。同一ホスト上の11台目以降のコンテナに関しては、$1/container/monthの費用が発生します。
+基本価格の$18には、10コンテナまでの監視が含まれています。同一ホスト上の11台目以降のコンテナに関しては、$1/container/monthの費用が発生します。
 
 
 <!-- ##### How do I see what I'll get charged for this current month?
