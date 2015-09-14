@@ -24,21 +24,30 @@ RabbitMQ checks.d</a>
 
 The following metrics are collected by default with the RabbitMQ integration:
 
-    rabbitmq.node.disk_free
-    rabbitmq.node.disk_free_limit
     rabbitmq.node.fd_used
-    rabbitmq.node.fd_total
-    rabbitmq.node.mem_limit
     rabbitmq.node.mem_used
     rabbitmq.node.run_queue
-    rabbitmq.node.sockets_total
     rabbitmq.node.sockets_used
     rabbitmq.queue.active_consumers
     rabbitmq.queue.consumers
+    rabbitmq.queue.consumer_utilisation
     rabbitmq.queue.memory
     rabbitmq.queue.messages
+    rabbitmq.queue.messages.ack.count
+    rabbitmq.queue.messages.ack.rate
+    rabbitmq.queue.messages.deliver.count
+    rabbitmq.queue.messages.deliver.rate
+    rabbitmq.queue.messages.deliver_get.count
+    rabbitmq.queue.messages.deliver_get.rate
+    rabbitmq.queue.messages.publish.count
+    rabbitmq.queue.messages.publish.rate
+    rabbitmq.queue.messages.rate
     rabbitmq.queue.messages_ready
+    rabbitmq.queue.messages_ready.rate
+    rabbitmq.queue.messages.redeliver.count
+    rabbitmq.queue.messages.redeliver.rate
     rabbitmq.queue.messages_unacknowledged
+    rabbitmq.queue.messages_unacknowledged.rate
 
 
 By default, <code>queue</code> metrics are tagged by queue and <code>node</code> metrics are tagged by node.
