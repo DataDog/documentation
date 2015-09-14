@@ -165,7 +165,9 @@ Edit conf.d/kafka.yaml
                     MeanRate:
                         metric_type: counter
                         alias: kafka.log.flush_rate
+
 And edit conf.d/kafka_consumer.yaml
+
     init_config:
 
     instances:

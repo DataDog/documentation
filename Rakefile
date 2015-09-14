@@ -61,11 +61,12 @@ task :test do
       puts '=' * 10
       puts "Testing #{t} code snippets"
       files = Dir.glob("#{CODE_SNIPPETS}/*.#{t}")
+  sh("echo got here")
       files.each do |f|
         # sh("cp #{f} #{CODE_TEST}/")
         text = File.read(f)
-        new_contents = text.gsub(/9775a026f1ca7d1c6c5af9d94d9595a4/, ENV['DD_API_KEY'])
-        new_contents = new_contents.gsub(/87ce4a24b5553d2e482ea8a8500e71b8ad4554ff/, ENV['DD_APP_KEY'])
+        new_contents = text.gsub(/9775a026f1ca7d1c6c5af9d94d9595a4/, ENV['TEST_DD_API_KEY'])
+        new_contents = new_contents.gsub(/87ce4a24b5553d2e482ea8a8500e71b8ad4554ff/, ENV['TEST_DD_APP_KEY'])
         if cmd == 'sh'
           new_contents << 'echo $?'
         end
@@ -95,6 +96,18 @@ task :test do
     raise e
   end
   sh("rm -rf #{CODE_TEST}")
+end
+
+desc 'clean code samples'
+task :cleancode do
+  sh("rm output/api/index.html")
+  sh("rm output/api/screenboards/index.html")
+  sh 'bundle exec nanoc compile'
+end
+
+desc 'Run Guard on Docker environment'
+task :dockerguard do
+  sh 'bundle exec guard -i -G DockerGuardfile'
 end
 
 desc 'Run Guard, autobuilds/reloads site'

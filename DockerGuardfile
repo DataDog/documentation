@@ -15,8 +15,3 @@ guard 'rake', :task => 'checks' do
   watch(%r{^output/.+\.(css|js|html)})
 end
 
-guard 'rake', :task => 'cleancode' do
-  watch(%r{^code_snippets/.*$})
-end
-
-guard 'rack', port: '3000'
