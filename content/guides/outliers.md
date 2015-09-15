@@ -64,7 +64,7 @@ You will select the metric and scope as with other metric-based monitors.
 
 In the alert conditions you will select the grouping and timeframe.
 
-You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with an alpha value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
+You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with a tolerance value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
 
 <img src="/static/images/outliers/outliers-newer-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
 
