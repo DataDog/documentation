@@ -39,7 +39,7 @@ rake
 Yeah, that's it. This command will compile the site, check
 for any bad links, and refresh your browser.
 
-Before you push, make sure you verify there are no bad links.
+Before you push, make sure you verify there are no bad links by going to localhost:3000.
 
 **Your final step should be to exit rake, then run ```rake clean``` then ```rake```.**
 
