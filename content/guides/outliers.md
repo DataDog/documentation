@@ -36,15 +36,15 @@ To set up an outlier detection graph for your data you add a metric to the graph
 
 To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
 
-<img src="/static/images/outliers/outliers-dash-choose-metrics.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-dash-choose-metrics-newer.png" style="width:100%; border:1px solid #777777"/>
 
-Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" filter function:
+Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" function:
 
-<img src="/static/images/outliers/outliers-function-selector.png" style="width:25%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-function-selector-newer.png" style="width:25%; border:1px solid #777777"/>
 
 This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
-<img src="/static/images/outliers/outliers-algorithm-annotated.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-algorithm-annotated-newer.png" style="width:100%; border:1px solid #777777"/>
 
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 
@@ -66,7 +66,7 @@ In the alert conditions you will select the grouping and timeframe.
 
 You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with an alpha value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
 
-<img src="/static/images/outliers/outliers-new-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-newer-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
 
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 
@@ -92,7 +92,7 @@ We use a simplified form of DBSCAN to detect outliers on time series. We conside
 
 We set the initial distance threshold as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the (Euclidean) distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant
 
-The only parameter we take is **tolerance**, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
+The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
 <img src="/static/images/outliers/outliers-dbscan-cassandra.png" style="width:100%; border:1px solid #777777"/>
 
@@ -106,9 +106,9 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 
 #### Parameters
 
-In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, **tolerance**. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
+In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
 
-Now to mark a time series as an outlier, we use the second parameter, **pct**. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
+Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
 <img src="/static/images/outliers/outliers-mad-az.png" style="width:100%; border:1px solid #777777"/>
 
