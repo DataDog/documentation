@@ -88,14 +88,15 @@ Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance thres
 
 #### Parameters
 
-We use a simplified form of DBSCAN to detect outliers on time series. (We consider each host to be a point in d-dimensions, where d is the number of values in the time series.) Any point can agglomerate, and any point that is not in the largest cluster will be considered an outlier.
+We use a simplified form of DBSCAN to detect outliers on time series. We consider each host to be a point in d-dimensions, where d is the number of elements in the time series. Any point can agglomerate, and any point that is not in the largest cluster will be considered an outlier.
 
-We set the initial distance threshold as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the distance between each host and the median series. The threshold is the median of those distances.
+We set the initial distance threshold as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the (Euclidean) distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant
 
-The only parameter we take is: alpha. This sets the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with an alpha of 3.0 in action on a pool of Cassandra workers:
-
+The only parameter we take is **tolerance**, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
 <img src="/static/images/outliers/outliers-dbscan-cassandra.png" style="width:100%; border:1px solid #777777"/>
+
+You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
 ### Median Absolute Deviation (MAD)
 
@@ -105,13 +106,13 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 
 #### Parameters
 
-In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by 1.4826 and our first parameter, **scale**. The first constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The scale parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
+In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, **tolerance**. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
 
-Now to mark a time series as an outlier, we use the second parameter, **pct**. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a scale of 3 and pct of 20 in action when comparing the average system load by availability zone:
+Now to mark a time series as an outlier, we use the second parameter, **pct**. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
 <img src="/static/images/outliers/outliers-mad-az.png" style="width:100%; border:1px solid #777777"/>
 
-The scale parameter should be tuned depending on expected variability of the data. For example if data is generally within a small range of values then this should be small. On the other hand if points can vary greatly then you want a higher scale so these variabilities do not trigger a false positive.
+The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.
 
 ### DBSCAN vs. MAD
 
@@ -122,9 +123,9 @@ In the following image, we see a group of hosts flushing their buffers together 
 <img src="/static/images/outliers/outliers-flushing.png" style="width:100%; border:1px solid #777777"/>
 
 ### Setting up alerts
-When setting up an outlier alert, an important parameter is the size of the time window. If the window size is too large, by the time an outlier is detected, the bad behavior might have been going on for longer than one would like. If the window size is too short, the alerts will not be as resilient to spikes.
+
+When setting up an outlier alert, an important parameter is the size of the time window. If the window size is too large, by the time an outlier is detected, the bad behavior might have been going on for longer than one would like. If the window size is too short, the alerts will not be as resilient to unimportant, one-off spikes.
 
 Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
-
 
 <img src="/static/images/outliers/outliers-banding.png" style="width:100%; border:1px solid #777777"/>
