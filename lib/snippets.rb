@@ -25,9 +25,12 @@ EXT_TO_LANG = {
 # language.
 def snippet_code_block(filename, options={})
   apicomment = "# Make sure you replace the API and or APP key below with the ones for your account\n\n"
+  if language(filename) == "console"
+    binsh = "#!/bin/sh\n"
+  end
   code = IO.read(File.join(CODE_SNIPPET_DIR, filename))
   if !options[:nocomments]
-    code = "#{apicomment}#{code}"
+    code = "#{binsh}#{apicomment}#{code}"
   end
   code_block(code, language(filename), options)
 end

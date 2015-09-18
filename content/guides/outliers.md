@@ -1,5 +1,5 @@
 ---
-title: Outlier Detection (BETA)
+title: Outlier Detection
 kind: documentation
 sidebar:
   nav:
@@ -12,13 +12,13 @@ sidebar:
       href: "#algorithms"
 ---
 
-Outlier Detection is a beta feature. It allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
+Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
 
 <img src="/static/images/outliers/outliers-metric-alert.png" style="width:100%; border:1px solid #777777"/>
 
 ## How to Use Outlier Detection on Your Data
 
-Starting in the beta period, we’ve added a new query function called `outliers` to our query language. This function acts as a filter, selecting only the series in a group that are outliers compared to the rest of the group.
+We’ve added a new query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
@@ -32,19 +32,19 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
-During the beta period, to set up an outlier detection graph for your data you add two copies of the same metric to the graph: one showing all series in the group in a lightweight, greyscale color palette, and the other filtering to show outlier series only in a bold, warm color palette.
+To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
-To do so, create a new timeseries graph on your dashboard with two copies of the same metric. Set the first copy (all series) to color:grey, style:dotted, and stroke:thin. Set the second copy (outliers only) to color:warm, style:solid, and stroke:thick. Your screen should look like:
+To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
 
-<img src="/static/images/outliers/outliers-dash-choose-metrics.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-dash-choose-metrics-newer.png" style="width:100%; border:1px solid #777777"/>
 
-Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" filter function:
+Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" function:
 
-<img src="/static/images/outliers/outliers-function-selector.png" style="width:25%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-function-selector-newer.png" style="width:25%; border:1px solid #777777"/>
 
-This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors. You’ll also see the outliers function added to the second metric row, including parameters to tune the function:
+This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
-<img src="/static/images/outliers/outliers-algorithm-annotated.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/outliers/outliers-algorithm-annotated-newer.png" style="width:100%; border:1px solid #777777"/>
 
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 
@@ -56,15 +56,17 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 <img src="/static/images/outliers/outliers-alert-snapshot.png" style="width:100%; border:1px solid #777777"/>
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new monitor](https://app.datadoghq.com/monitors#create/metric) for the outlier function over our metric:
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for our metric:
 
 <img src="/static/images/outliers/outliers-new-monitor-define-metric.png" style="width:100%; border:1px solid #777777"/>
 
-During the outlier beta period, you’ll need to type the metric query directly into the "Source" tab rather than forming it in the "Edit" tab.
+You will select the metric and scope as with other metric-based monitors.
 
-We want the monitor to detect any outliers: that is, any series that make it through the `outliers` filter function. We can do that by setting the alert conditions to "Above 0", causing the monitor to fire if any outliers make it through the filter:
+In the alert conditions you will select the grouping and timeframe.
 
-<img src="/static/images/outliers/outliers-new-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
+You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with a tolerance value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
+
+<img src="/static/images/outliers/outliers-newer-monitor-set-conditions.png" style="width:100%; border:1px solid #777777"/>
 
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 
@@ -78,75 +80,52 @@ There are two different outlier detection algorithms you can use on your data: D
 
 ### DBSCAN
 
-[DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) is a popular density-based clustering algorithm that greedily creates clusters by agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
+A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN), a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
 
-We use a simplified form of DBSCAN to detect outliers; any point that is not in the largest cluster will be considered an outlier. We consider each host to be a d-dimensional vector, where d is the number of values in the time series. Any hosts that are within a distance of `alpha x threshold` of each other will get clustered together.
+Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 
-The threshold is calculated as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the distance between each host and the median series. The threshold is the median of those distances.
-
-In pseudocode:
-
-~~~ python
-    median_series = pointwise_median(series_list)
-    dists = [dist(series,median_series) for series in series_list]
-    threshold = median(dists)
-~~~
+<img src="/static/images/outliers/outliers-dbscan-2d.png" style="width:100%; border:1px solid #777777"/>
 
 #### Parameters
 
-DBSCAN accepts the following parameters:
+We use a simplified form of DBSCAN to detect outliers on time series. We consider each host to be a point in d-dimensions, where d is the number of elements in the time series. Any point can agglomerate, and any point that is not in the largest cluster will be considered an outlier.
 
-* **alpha** *(default: 3.0)*: Sets the constant by which the threshold is multiplied.
+We set the initial distance threshold as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the (Euclidean) distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant
 
-For example, to use DBSCAN with an alpha of 3 on system load for a pool of Cassandra workers, we'd use:
+The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
-~~~  python
-    outliers(avg:system.load.norm.15{role:cassandra} by {host}, 'dbscan', 3)
-~~~
+<img src="/static/images/outliers/outliers-dbscan-cassandra.png" style="width:100%; border:1px solid #777777"/>
 
-Given how the threshold is defined, setting alpha to 1.0 will always lead to half the hosts being classified as outliers. In practice we find that the threshold is robust enough that setting alpha to 3.0 or 4.0 is good enough to catch outliers without leading to false positives.
-
-For the typical use case where all the hosts should be exhibiting similar behavior, there should not be much need to tune the parameter. However, if your hosts exhibit "banding" behavior as shown below, some tuning might be required.
-
-The following graphs show a set of hosts where there are several distinct groups. A low setting of alpha marks both the host handling significantly less traffic and the group of hosts that are handling more traffic than the majority as outliers.
-
-<img src="/static/images/outliers/outliers-dbscan-banding.png" style="width:100%; border:1px solid #777777"/>
-
-Meanwhile a higher setting of alpha only identifies the host handling significantly less traffic as an outlier.
-
-<img src="/static/images/outliers/outliers-dbscan-no-banding.png" style="width:100%; border:1px solid #777777"/>
+You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
 ### Median Absolute Deviation (MAD)
 
-The [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) (MAD) algorithm is a robust method of calculating variability among data. It is designed to be usable for both normal and non-normal distributions.
+The  [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
 
-We use MAD to calculate an *outlier_factor* which we will compare to points from a series. If the percentage of points in the series that are above the *outlier_factor* is greater than some given threshold, then that series will be considered an outlier.
-
-The calculation of the outlier_factor is as such:
-
-~~~ python
-    # Calculate the MAD across all series.
-    series_values = flatten_series(series_list)
-    median = median(all_values)
-    deviations = abs(x - median for x in series_values)
-    mad = median(deviations)
-
-    # Outlier factor is calculated from the scale and standard error.
-    # We divide by a normalization constant of 0.6745 to make the scale
-    # 1.0, 2.0, 3.0 represent standard deviations for metrics drawn from a normal
-    # distribution.
-    outlier_factor = (scale * mad) / 0.6745
-~~~
+For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations are the difference between each d<sub>i</sub> and median(D). The MAD is then the median of the absolute values of all the deviations. For example if D = {1, 2, 3, 4, 5, 6, 100}, then the median is 4, the deviations are {-3, -2, -1, 0, 1, 2, 96}, and the MAD is 2. (Note that the standard deviation by contrast is 33.8.)
 
 #### Parameters
 
-MAD accepts the following parameters:
+In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
 
-* **scale** *(default: 2)*: How the MAD should be scaled to calculate the outlier factor. This parameter is tuned depending on expected variability of the data. For example if data is generally within a small range of values then this should be small. On the other hand if points can vary greatly then you want a higher scale so these variabilities do not trigger a false positive.
-* **pct** *(default: 10)*: The percentage of points from a series that are outside the *outlier_factor* for the whole series to be considered an outlier.
+Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
-For example, to use MAD with a scale of 2 and a pct of 10 on system load for a pool of Cassandra workers, we'd use:
+<img src="/static/images/outliers/outliers-mad-az.png" style="width:100%; border:1px solid #777777"/>
 
-~~~  python
-    outliers(avg:system.load.norm.15{role:cassandra} by {host}, 'mad', 2, 10)
-~~~
+The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.
+
+### DBSCAN vs. MAD
+
+So which algorithm should you use? For most outliers, both algorithms will perform well at the default settings. However, there are subtle cases where one algorithm is more appropriate than the other.
+
+In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
+
+<img src="/static/images/outliers/outliers-flushing.png" style="width:100%; border:1px solid #777777"/>
+
+### Setting up alerts
+
+When setting up an outlier alert, an important parameter is the size of the time window. If the window size is too large, by the time an outlier is detected, the bad behavior might have been going on for longer than one would like. If the window size is too short, the alerts will not be as resilient to unimportant, one-off spikes.
+
+Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
+
+<img src="/static/images/outliers/outliers-banding.png" style="width:100%; border:1px solid #777777"/>
