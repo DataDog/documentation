@@ -24,8 +24,7 @@ A `Dockerrun.aws.json` file can be used on its own or zipped up with additional 
 
 The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog agent. You can copy it, and add the definition of your other containers in it. You can then zip it with some content you want to send to the instances which run the previously described containers, and ship it to Beanstalk. For more info about the syntax of this file you can refer to [the Beanstalk documentation](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html).
 
-
-```json
+~~~~~~~~
 {
   "AWSEBDockerrunVersion": 2,
   "volumes": [
@@ -83,7 +82,7 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
     },
   ]
 }
-```
+~~~~~~~~
 
 #### Creating the environment
 
