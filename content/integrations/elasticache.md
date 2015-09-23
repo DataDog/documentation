@@ -1,4 +1,9 @@
-# Datadog-AWS ElastiCache Integration
+---
+title: Datadog-AWS ElastiCache Integration
+integration_title: AWS ElastiCache
+kind: integration
+doclevel: basic
+---
 
 To collect all available ElastiCache metrics, you need to do two things:
 

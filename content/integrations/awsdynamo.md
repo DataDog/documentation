@@ -5,8 +5,12 @@ kind: integration
 doclevel: basic
 ---
 
+Amazon DynamoDB is a fully managed NoSQL database cloud service, part of the AWS portfolio. Fast and easily scalable, it is meant to serve applications which require very low latency, even when dealing with large amounts of data. It supports both document and key-value store models, and has properties of both a database and a distributed hash table.
+
+To start collecting DynamoDB metrics, the only thing you need to do is to set up our integration with AWS CloudWatch by following [these instructions](http://docs.datadoghq.com/integrations/aws/).
 
 
-Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
+![DynamoDB default dashboard](/static/images/dynamodb.png)
 
-Enable this integration to see in Datadog all your DynamoDB metrics.
+
+If you want to learn more about the key DynamoDB performance metrics and how to monitor them, have a look to [this series of posts](https://www.datadoghq.com/blog/top-dynamodb-performance-metrics/).
