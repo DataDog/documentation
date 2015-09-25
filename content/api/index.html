@@ -522,6 +522,22 @@ kind: documentation
               users will be notified on changes to this monitor.
               <p>Default: <code>False</code></p></li>
 
+              <li><code>include_tags</code> a boolean indicating whether
+              notifications from this monitor will automatically insert its
+              triggering tags into the title.
+              <p>Default: <code>True</code></p>
+              <p>Examples:
+
+                <ul>
+                  <li>True:
+                      <p><code>[Triggered on {host:h1}] Monitor Title</code></p></li>
+                  <li>False:
+                      <p><code>[Triggered] Monitor Title</code></p></li>
+                </ul>
+              </p>
+              </li>
+
+
             </ul>
 
             <h5>Service Check Options</h5>
@@ -1715,8 +1731,8 @@ kind: documentation
           Gets a list of previously created embeddable graphs.
         </p>
         <p>
-          Returns: A JSON list containing information on previously created embeds from both the UI 
-          and the API. Each JSON graph response is in the same format as returned by 
+          Returns: A JSON list containing information on previously created embeds from both the UI
+          and the API. Each JSON graph response is in the same format as returned by
           <code>GET api/v1/graph/embed/:embed_id</code>.
         </p>
         <h5>Arguments</h5>
@@ -1754,7 +1770,7 @@ kind: documentation
         </p>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument "graph_json", "The graph definition in JSON. 
+          <%= argument "graph_json", "The graph definition in JSON.
           Same format that is available on the JSON tab of the graph editor" %>
           <%= argument "timeframe", "The timegrame for the graph. Must be one of 1_hour,
           4_hours, 1_day, 2_days, and 1_week.", {:default => '1_hour'} %>
@@ -1762,7 +1778,7 @@ kind: documentation
           large, and xlarge.", {:default => 'medium'} %>
           <%= argument "legend", "The flag determining if the graph includes a legend.
           Must be one of yes or no.", {:default => 'no'} %>
-          <%= argument "title", "Determines graph title. Must be at least 1 character.", 
+          <%= argument "title", "Determines graph title. Must be at least 1 character.",
           {:default => 'Embed created through API'} %>
         </ul>
       </div>
@@ -1811,7 +1827,7 @@ kind: documentation
           <%= argument "template_variables", "Replace template variables in queries with form $var. To
           replace $var with val, use var=val as a parameter for each template variable you wish
           to replace. If any template variables are missing values in the iframe source
-          url, then (*) will be used as the value.", {:default => "None"} %> 
+          url, then (*) will be used as the value.", {:default => "None"} %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1833,7 +1849,7 @@ kind: documentation
     <div class="row-fluid">
       <%= left_side_div %>
         <p>
-          Enable a specified embed. 
+          Enable a specified embed.
         </p>
         <p>
           Returns: A JSON containing the success message <code>{success: [message]}</code>.
