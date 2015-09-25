@@ -269,8 +269,8 @@ Here's  breakdown of the fields:
 - type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
   Timer or `s` for Set.
 - sample rate is optional and should be a float between 0 and 1 inclusive.
-- tags are optional, and should be a comma seperated list of tags. colons are
-  used for key value tags.
+- tags are optional, and should be a comma seperated list of tags. Colons are
+  used for key value tags. Note that the key `device` is reserved, tags like "device:xyc" will be dropped by Datadog.
 
 Here are some example datagrams and comments explaining them:
 
