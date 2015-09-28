@@ -28,9 +28,9 @@ Connect your Splunk log monitoring to be able to:
 API_KEY= your_api_key
 APP_KEY= your_application_key
 dog --api-key $API_KEY --application-key $APP_KEY event post \
-"Found $SPLUNK_ARG_1 events in splunk" \
-"Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5, from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
---aggregation_key $SPLUNK_ARG_3 --type splunk</code></pre>
+"Found $1 events in splunk" \
+"Matching $2 based on $5, from report $4. More details at $6." \
+--aggregation_key $3 --type splunk</code></pre>
 </p>
 
 <p>You can modify the text of the events by for example using datadog's @mention to notify people of these reports.
