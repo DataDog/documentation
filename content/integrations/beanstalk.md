@@ -35,9 +35,9 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
       }
     },
     {
-       "name": "proc_mounts",
+       "name": "proc",
        "host": {
-            "sourcePath": "/proc/mounts"
+            "sourcePath": "/proc/"
       }
     },
     {
@@ -69,14 +69,14 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
           "readOnly": false
         },
         {
-          "sourceVolume": "proc_mounts",
-          "containerPath": "/host/proc/mounts",
-          "readOnly": false
+          "sourceVolume": "proc",
+          "containerPath": "/host/proc",
+          "readOnly": true
         },
         {
           "sourceVolume": "cgroup",
           "containerPath": "/host/sys/fs/cgroup",
-          "readOnly": false
+          "readOnly": true
         }
       ],
     },

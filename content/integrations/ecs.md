@@ -12,7 +12,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 
 1. **Create a cluster** if you don't already have one you want to use
 2. **Define an ECS task** that installs and runs the Agent
-3. **Create an IAM policy** to give the Agent necessary permissions, including permission to be auto-started 
+3. **Create an IAM policy** to give the Agent necessary permissions, including permission to be auto-started
 4. **Add a user script** to run the ECS defined in step 2, above
 
 #### 1. Create a cluster
@@ -56,14 +56,14 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
               "readOnly": false
             },
             {
-              "sourceVolume": "proc_mounts",
-              "containerPath": "/host/proc/mounts",
-              "readOnly": false
+              "sourceVolume": "proc",
+              "containerPath": "/host/proc/",
+              "readOnly": true
             },
             {
               "sourceVolume": "cgroup",
               "containerPath": "/host/sys/fs/cgroup",
-              "readOnly": false
+              "readOnly": true
             }
           ],
           "essential": true
@@ -77,9 +77,9 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
           }
         },
         {
-           "name": "proc_mounts",
+           "name": "proc",
            "host": {
-                "sourcePath": "/proc/mounts"
+                "sourcePath": "/proc/"
           }
         },
         {
@@ -127,7 +127,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 
 * From the EC2 console (not the ECS console) launch a new instance with a ECS-optimized image (detailed launch instructions [here](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)).
 * When you get to the Configure Instance step:
-    *  Select the IAM role you created in step 2 
+    *  Select the IAM role you created in step 2
     *  Paste the script below into User Data under Advanced Details, replacing *"cluster_name"* with name of the cluster you created in step 1.
 
 ~~~~~~~~
@@ -161,4 +161,3 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 
 #### Dynamic detection and monitoring of running services
 Currently work in progress, more to come soon
-
