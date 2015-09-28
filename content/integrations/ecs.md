@@ -63,7 +63,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
             {
               "sourceVolume": "cgroup",
               "containerPath": "/host/sys/fs/cgroup",
-              "readOnly": false
+              "readOnly": true
             }
           ],
           "essential": true
