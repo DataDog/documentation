@@ -1,7 +1,7 @@
 ---
 title: Sending Metrics with DogStatsD
 kind: guide
-listorder: 3
+listorder: 4
 sidebar:
   nav:
     - header: Guide to Metrics
