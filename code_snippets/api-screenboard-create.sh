@@ -5,7 +5,7 @@ curl -X POST -H "Content-type: application/json" \
 -d '{
         "width": 1024,
         "height": 768,
-        "board_title": "dogapi tests",
+        "board_title": "dogapi test",
         "widgets": [
             {
               "type": "image",

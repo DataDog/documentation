@@ -1139,25 +1139,12 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument("title", 'The name of the dashboard.') %>
-          <%= argument("description", "A description of the dashboard\'s content.") %>
-          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
-          <ul class="arguments">
-            <li>
-              <strong>title [required]</strong>
-              <div>The name of the graph.</div>
-            </li>
-            <li>
-              <strong>widgets [required]</strong>
-              <div>
-                The widget definition. See <a href="/api/screenboards/">here</a> for more examples.
-              </div>
-            </li>
-          </ul>
+          <%= argument("board_title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.", :default => "None") %>
+          <%= argument("widgets", "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") %>
           <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
           <%= argument("width", "Screenboard width in pixels", :default => "None") %>
           <%= argument("height", "Height in pixels.", :default => "None") %>
-
         </ul>
       </div>
       <%= right_side_div %>

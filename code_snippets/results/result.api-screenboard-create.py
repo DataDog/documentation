@@ -1,5 +1,5 @@
 {'description': 'An informative screenboard.',
- 'graphs': [{'height': 20,
+ 'widgets': [{'height': 20,
    'type': 'image',
    'url': 'https://path/to/image.jpg',
    'width': 32,
@@ -9,5 +9,5 @@
  'template_variables': [{'default': 'host:my-host',
    'name': 'host1',
    'prefix': 'host'}],
- 'title': 'My Screenboard',
+ 'board_title': 'My Screenboard',
  'width': 1024}
