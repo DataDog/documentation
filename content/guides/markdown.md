@@ -1,7 +1,7 @@
 ---
 title: Using markdown in Datadog events
 kind: guide
-listorder: 8
+listorder: 10
 ---
 
 

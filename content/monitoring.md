@@ -1,7 +1,7 @@
 ---
 title: Monitoring Reference
 kind: documentation
-listorder: 9
+listorder: 11
 sidebar:
   nav:
     - header: Monitoring
@@ -416,7 +416,15 @@ triggering scope into the message of multi alerts.
     the variables are only populated in the text of Datadog child events (not the
     parent, which displays an aggregation summary).
 
- 
+    Some tags identifying your triggering scope will automatically be inserted into
+    the title of your multi alert. If your scope is defined by a lot of tags, your
+    alert title may end up being undesirably long. If you've used template tag variables
+    to include this information in the body of your alert, you can uncheck
+    **Include triggering tags in notification title** to save some space. This will make
+    your notification title look like this:
+
+    ![short template var trigger](/static/images/monitor/templatevar_short.png)
+
 3. **Conditional variables for different triggering scopes**: You can have a
    monitor event display a different message depending on the group that's
    causing a notification.

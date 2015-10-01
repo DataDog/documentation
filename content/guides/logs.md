@@ -1,7 +1,7 @@
 ---
 title: Log Parsing in the Agent
 kind: guide
-listorder: 4
+listorder: 5
 sidebar:
   nav:
     - header: Guide to Log Parsing
@@ -46,7 +46,7 @@ You can also specify multiple log files like this:
 ### Parsing Custom Log Formats
 
 If you want to parse a different log format - say for a piece of vendor
-or legacy software - you can use a custom Python function to extract the proper 
+or legacy software - you can use a custom Python function to extract the proper
 fields from the log by specifying your log file in your Agent configuration
 file in the following format:
 
