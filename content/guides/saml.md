@@ -1,7 +1,7 @@
 ---
 title: Single Sign On With SAML
 kind: guide
-listorder: 11
+listorder: 14
 sidebar:
   nav:
     - header: Guide to SAML SSO
@@ -37,7 +37,7 @@ After you've chosen the file, click "Upload File".
 
 2. Datadog’s Service Provider metadata can be found at [https://app.datadoghq.com/account/saml/metadata.xml][4]. You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable SAML button.
-![][5] 
+![][5]
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the SAML Configuration page.
 ![][6]
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.

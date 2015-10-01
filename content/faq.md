@@ -463,8 +463,7 @@ correlate with other metrics. For example, you might have a cron'd script to vac
 
 Vacuum is particularly resource-intensive though, so you might want Datadog events for
 each time they run so you can correlate metrics and other events with vacuums.
-You can do this with the dogwrap command line tool provided by the dogapi client
-library:
+You can do this with the dogwrap command line tool provided by the <a href="https://github.com/DataDog/datadogpy">datadog python client library</a>:
 
     dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table'" 2>&1 /var/log/postgres_vacuums.log
 
@@ -473,7 +472,7 @@ This will call the command at the end of the script and
 send Datadog events if it exits with a non-zero exit code (i.e. an error). <code>--submit_mode all</code>
 will send events on every run.
 
-(To get the python client lib you can install it with <code>easy_install dogapi</code>).
+(To get the python client lib you can install it with <code>easy_install datadog</code> or <code>pip install datadog</code>).
 
 
 <!-- ====================================================================== -->
