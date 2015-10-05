@@ -2,7 +2,6 @@
 title: Datadog-Consul Integration
 integration_title: Consul
 kind: integration
-doclevel: basic
 ---
 
 ### Overview
@@ -130,3 +129,4 @@ The following metrics are collected by default with the Consul integration:
 	consul.serf.queue.Query.max
 	consul.serf.queue.Query.95percentile
 	
+Furthermore, Consul metrics are tagged with `mode:leader` or `mode:follower`, depending on the node status, so you can easily aggregate metrics by status.
