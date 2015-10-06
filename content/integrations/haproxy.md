@@ -25,20 +25,47 @@ HAProxy checks.d</a>
 
 The following metrics are collected by default with the HAProxy integration:
 
-    haproxy.bytes.in_rate
-    haproxy.bytes.out_rate
-    haproxy.denied.req_rate
-    haproxy.denied.resp_rate
-    haproxy.errors.con_rate
-    haproxy.errors.req_rate
-    haproxy.errors.resp_rate
-    haproxy.queue.current
-    haproxy.requests.rate
-    haproxy.session.current
-    haproxy.session.limit
-    haproxy.session.rate
-    haproxy.warnings.redis_rate
-    haproxy.warnings.retr_rate
+	haproxy.frontend.bytes.in_rate
+	haproxy.frontend.bytes.out_rate
+	haproxy.frontend.denied.req_rate
+	haproxy.frontend.denied.resp_rate
+	haproxy.frontend.errors.req_rate
+	haproxy.frontend.requests.rate
+	haproxy.frontend.response.1xx
+	haproxy.frontend.response.2xx
+	haproxy.frontend.response.3xx
+	haproxy.frontend.response.4xx
+	haproxy.frontend.response.5xx
+	haproxy.frontend.response.other
+	haproxy.frontend.session.current
+	haproxy.frontend.session.limit
+	haproxy.frontend.session.pct
+	haproxy.frontend.session.time
+
+	haproxy.backend.bytes.in_rate
+	haproxy.backend.bytes.out_rate
+	haproxy.backend.connect.time
+	haproxy.backend.denied.req_rate
+	haproxy.backend.denied.resp_rate
+	haproxy.backend.errors.con_rate
+	haproxy.backend.errors.resp_rate
+	haproxy.backend.queue.current
+	haproxy.backend.queue.time
+	haproxy.backend.response.1xx
+	haproxy.backend.response.2xx
+	haproxy.backend.response.3xx
+	haproxy.backend.response.4xx
+	haproxy.backend.response.5xx
+	haproxy.backend.response.other
+	haproxy.backend.response.time
+	haproxy.backend.session.current
+	haproxy.backend.session.limit
+	haproxy.backend.session.pct
+	haproxy.backend.session.rate
+	haproxy.backend.session.time
+	haproxy.backend.warnings.redis_rate
+	haproxy.backend.warnings.retr_rate
+
 
 
 
