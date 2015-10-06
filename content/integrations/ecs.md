@@ -2,7 +2,6 @@
 title: Datadog-AWS ECS Integration
 integration_title: AWS ECS
 kind: integration
-doclevel: basic
 ---
 
 Amazon EC2 Container Service (ECS) is a highly scalable, high performance container management service for Docker containers running on EC2 instances.
