@@ -2,12 +2,11 @@
 title: Datadog-AWS ElastiCache Integration
 integration_title: AWS ElastiCache
 kind: integration
-doclevel: basic
 ---
 
 To collect all available ElastiCache metrics, you need to do two things:
 
-1.  [Turn on the ElastiCache integration](https://www.google.com/url?q=https%3A%2F%2Fapp.datadoghq.com%2Faccount%2Fsettings%23integrations%2Famazon_elasticache&sa=D&sntz=1&usg=AFQjCNF-yA6DxhRObVxskvcLOtHO5auaAg) to pull metrics from ElastiCache into Datadog
+1.  [Turn on the ElastiCache integration](https://app.datadoghq.com/account/settings#integrations/amazon_elasticache) to pull metrics from ElastiCache into Datadog
 2.  Set up the Datadog Agent as described in this article (optional, but recommended)
 
 
