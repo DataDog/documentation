@@ -2,7 +2,6 @@
 title: Datadog-Elastic Beanstalk Integration
 integration_title: AWS Elastic Beanstalk
 kind: integration
-doclevel: basic
 ---
 
 AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.
