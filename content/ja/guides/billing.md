@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/16
+last_modified: 2015/10/14
 translation_status: Translated
 language: ja
 title: 課金に関するFAQ
