@@ -15,3 +15,4 @@ output.tgz
 remote-compile.sh
 code_test
 tested.code
+.sass-cache
