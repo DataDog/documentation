@@ -49,12 +49,12 @@ There are three plans within Datadog:
     good news is that switching from the Free plan to Pro will not affect your
     setup, so anything you've begun monitoring would not be affected by that status
     change.
-1. **Pro** is for 6-499 hosts and comes with 1 year of data retention.
+1. **Pro** is for 6-499 hosts and comes with 13 months of data retention.
     Pro includes metric alerts and email support.
 1. **Enterprise** is for
     500+ hosts or any number of hosts but needing custom adjustments to what is
     offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
-    1. Data retention requirements and number of custom metrics (base plan includes 1 year retention,
+    1. Data retention requirements and number of custom metrics (base plan includes 13 months retention,
 and 100 custom metrics)
     1. Size of your environment in servers
     1. Payment terms (month to month or annual prepaid)
@@ -68,8 +68,9 @@ in your application stack. To clarify, integrations that can potentially emit
 an unlimited number of metrics to us can also count as custom metrics (e.g:
 JMX / WMI / Nagios / Cacti).
 
+For all plans, Docker Containers are supported and 10 free containers per host per hour will be provided.  Additional containers will be billed at $0.002 per container per hour.  In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
 
-Pro and Enterprise data retention is for one year at full resolution (maximum
+Pro and Enterprise data retention is for 13 months at full resolution (maximum
 is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
 sales@datadoghq.com</a>.
 
