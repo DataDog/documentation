@@ -15,7 +15,7 @@ guard 'rake', :task => 'checks' do
   watch(%r{^output/.+\.(css|js|html)})
 end
 
-guard 'rake', :task => 'cleancode' do
+guard 'rake', :task => 'cleancode', :run_on_start => false do
   watch(%r{^code_snippets/.*$})
 end
 

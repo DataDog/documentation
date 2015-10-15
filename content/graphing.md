@@ -17,22 +17,23 @@ sidebar:
 ## Find the Graph Editor
 {: #editor}
 
-On each graph you will find a cog icon that opens the graph editor.
+On each graph you will find a pencil icon that opens the graph editor.
 
-<img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
+![Graphing Overview](/static/images/references-graphing-overview.png)
 
-The graph editor has 2 tabs, "Edit" and "JSON". The "JSON" tab is the most flexible and powerful.
-It lets you finely control what is displayed on the graph.
+The graph editor has three tabs, "Share", "JSON", and "Edit". "Share" will allow you to embed the graph on any external web page. "JSON" is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. "Edit" is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the "JSON" tab.
 
-<img src="/static/images/json-editor.png" style="width:100%; border:1px solid #777777"/>
+![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 
 ## Grammar
 {: #grammar}
 
-The graph definition language is well-formed JSON and is structured in 2 parts:
+The graph definition language is well-formed JSON and is structured in four parts:
 
-1. Events
-2. Time Series, a.k.a. Series
+1. Time Series, a.k.a. Series
+2. Events
+3. Visualization
+4. Y Axis
 
 Here is how they fit together in a JSON dictionary:
 
@@ -46,13 +47,21 @@ Here is how they fit together in a JSON dictionary:
         {
           "q": "search query"
         }
-      ]
+      ], 
+      "viz": "visualization type", 
+      "yaxis": {
+        "yaxisoptionkey": "yaxisoptionvalue"
+      }
     }
 
-In other words at the highest level the JSON structure is a dictionary with 2 entries:
+In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
 
-1. "events"
-2. "requests"
+1. "requests" *
+2. "events"
+3. "viz" *
+4. "yaxis"
+
+\* *only requests and viz are required.*
 
 ### Events
 
