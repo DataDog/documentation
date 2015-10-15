@@ -36,9 +36,9 @@ sidebar:
     - text: DogStatsD
       href: "/guides/dogstatsd/"
 ---
-#### Welcome to Datadog! We occasionally receive questions regarding the specifics
-of our pricing; the basic plans and the most frequently seen questions can be
-found below.
+#### Welcome to Datadog! 
+
+We occasionally receive questions regarding the specifics of our pricing; the basic plans and the most frequently seen questions can be found below.
 
 #### <u>Basic Plan</u>
 
@@ -85,16 +85,16 @@ This is per active host in Datadog, whether or not it's running the agent.
 We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
 
-> You tell us how many hosts you will run each month and we will bill you for that baseline number of
-> hosts at $15 per host (you can change this number at the beginning of each
-> month if you like). Then for any hosts beyond the committed number previously
-> determined, our billing system will charge you $0.03 per host per hour. This
-> works out to be much less expensive for extra hosts that may come up for a
-> short period, but a little bit more than monthly rates if you ran on an hourly
-> rate all the time (~$23/host/month).  The metering samples how many hosts are
-> reporting data once every hour, thus the minimum increment for an hourly server
-> is one hour. If that number exceeds your monthly commit, we just charge overage
-> for the excess hosts.
+You tell us how many hosts you will run each month and we will bill you for that baseline number of
+hosts at $15 per host (you can change this number at the beginning of each
+month if you like). Then for any hosts beyond the committed number previously
+determined, our billing system will charge you $0.03 per host per hour. This
+works out to be much less expensive for extra hosts that may come up for a
+short period, but a little bit more than monthly rates if you ran on an hourly
+rate all the time (~$23/host/month).  The metering samples how many hosts are
+reporting data once every hour, thus the minimum increment for an hourly server
+is one hour. If that number exceeds your monthly commit, we just charge overage
+for the excess hosts.
 
 ##### Do non-reporting or inactive hosts count?
 
