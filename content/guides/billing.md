@@ -128,11 +128,6 @@ select 'limit metric collection for all accounts' in the <a href="https://app.da
 The base pricing is $15 per virtual machine per month. See above for more general information.
 
 
-##### How will Docker and other container integrations impact my monthly billing?
-
-The base pricing of $15 per host includes 10 containers. Additional containers cost $1 per container.
-
-
 ##### How do I see what I'll get charged for this current month?
 
 There is not currently a way to see what the upcoming bill looks like; as an
