@@ -122,6 +122,7 @@ At any time during your check, you can make a call to `self.event(...)` with one
         "source_type_name": (optional) string, the source type name,
         "host": (optional) string, the name of the host,
         "tags": (optional) list, a list of tags to associate with this event
+        "priority": (optional) string which specifies the priority of the event (Normal, Low)
     }
 
 At the end of your check, all events will be collected and flushed with the rest
