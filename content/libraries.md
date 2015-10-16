@@ -149,7 +149,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Ansible
 {: #community-integration-ansible}
 
-  * This [Ansible script ][46] is a callback plugin that posts events to your Datadog event stream as you deploy. Written by [Alek Storm][47]. 
+  * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### FreeSwitch
 {: #community-integration-freeswitch}
@@ -220,8 +220,8 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [43]: https://github.com/DataDog/datadog-formula
    [44]: https://gist.github.com/mastrolinux/6175280
    [45]: https://gist.github.com/mastrolinux
-   [46]: https://gist.github.com/alekstorm/6350729
-   [47]: https://gist.github.com/alekstorm
+   [46]: https://docs.ansible.com/ansible/list_of_monitoring_modules.html
+   [47]: https://github.com/ansible/ansible-modules-extras
    [48]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
    [49]: https://github.com/wimactel
    [50]: https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape

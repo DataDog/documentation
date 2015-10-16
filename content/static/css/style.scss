@@ -1,0 +1,316 @@
+$purple: #774aa4;
+$lightpurple: lighten($purple, 12%); //#e5d2f8;
+$lighterpurple: lighten($purple, 40%);
+$darkpurple: darken($purple, 10%); //#9565c6;
+$blue: #5be;
+$lightblue: lighten($blue, 10%);
+body {
+  padding-bottom: 30px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  a {
+    color: black
+  }
+}
+
+h1#pagetitle {
+  height: 40px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 0;
+  font-size: 30px;
+}
+
+ol.outline {
+  list-style-type: upper-alpha ol {
+    list-style-type: decimal
+  }
+}
+
+
+/* CorpWeb-style Buttons */
+
+.navbar {
+  .navbar-inner,
+  .nav > li.dropdown.open>.dropdown-toggle,
+  .navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
+  .nav > li.dropdown.open.active>.dropdown-toggle,
+  .nav > li > a,
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-image: none;
+    background-color: $purple;
+    color: $lighterpurple;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .6);
+  }
+  .navbar-inner {
+    padding-top: 16px;
+    min-height: 35px;
+    padding-bottom: 15px;
+    border-bottom: $darkpurple solid 1px;
+    .nav li {
+      > a {
+        &.flexbutton {
+          display: inline-block;
+          margin: 0 6px;
+          padding: 6px 18px;
+          height: 24px;
+          line-height: 24px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          text-decoration: none;
+          background: $lightpurple;
+          border: 1px solid #774aa4;
+          border-color: lighten($lightpurple, 2%);
+          /*#653f8c #543473*/
+          // text-shadow: 0 1px 0 #4ad;
+          box-shadow: inset 0 1px 0 lighten($lightpurple, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+          border-radius: 18px;
+        }
+        &.blueflex {
+          background: $blue;
+          border-color: lighten($blue, 2%);
+          box-shadow: inset 0 1px 0 lighten($blue, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+        }
+        &.flexbutton:hover {
+          background: lighten($lightpurple, 5%);
+          box-shadow: inset 0 1px 0 lighten($lightpurple, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+        }
+        &.blueflex:hover {
+          background: lighten($blue, 5%); //#6cf;
+          box-shadow: inset 0 1px 0 lighten($blue, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+  }
+}
+
+.navbar {
+  .nav >li >a,
+  .nav > li > a:hover,
+  .nav>li>a:focus {
+    box-shadow: none;
+    padding-bottom: 0;
+  }
+  .brand {
+    padding: 0;
+    padding-right: 5px;
+  }
+}
+
+#topmenu {
+  text-align: right;
+  .nav {
+    float: none;
+    display: inline;
+    & > li {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      & > ul {
+        text-align: left;
+        text-transform: none;
+        text-shadow: none;
+      }
+    }
+  }
+}
+
+.nav {
+  .search {
+    margin-top: 60px;
+    .nav-header {
+      margin-top: 0;
+      background-color: #9d6ebf;
+      color: #fff;
+      text-shadow: none;
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+    }
+  }
+  &.sidebar {
+    margin-top: 90px;
+    width: 220px;
+    .nav-header {
+      margin-top: 0;
+      background-color: #9d6ebf;
+      color: #fff;
+      text-shadow: none;
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+    }
+  }
+}
+
+.main {
+  > h2 {
+    font-size: 28px;
+    margin: 30px 0 10px;
+  }
+  > h3 {
+    font-size: 24px;
+  }
+  > ol > li,
+  ul > li {
+    margin-bottom: 6px;
+  }
+  .nav-tabs > li {
+    margin-bottom: -1px;
+  }
+  img {
+    width: 100%;
+    border: 1px solid #777777;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+#footer {
+  text-align: center;
+  margin-top: 24px;
+  color: #909090;
+}
+
+#signin,
+#signup {
+  float: right;
+  padding-left: 5px;
+}
+
+
+/* Docs Home */
+
+.big_number a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+
+/* API PAGE STYLING */
+
+.floating-header {
+  background-color: rgba(255, 255, 255, .85);
+  width: 100%;
+  &.affix {
+    top: 0;
+    + .scrollable-api-docs {
+      margin-top: 120px;
+    }
+  }
+}
+
+.api-page {
+  .floating-header .btn-toolbar {
+    margin-bottom: 0;
+  }
+  .btn-group {
+    margin: 0;
+  }
+  .api-section-links {
+    margin: 0 20px 10px 0;
+  }
+  .language-links {
+    margin-right: 10px;
+  }
+  h3 {
+    text-transform: uppercase;
+    margin-top: 25px;
+    padding-top: 5px;
+  }
+  h4 {
+    text-transform: uppercase;
+    padding-top: 10px;
+    border-top: 1px solid #efefef;
+    margin-top: 20px;
+  }
+  h5 {
+    text-transform: uppercase;
+    color: #666;
+  }
+  .code-block {
+    display: none;
+  }
+  .code-block.code-block-python {
+    visibility: visible;
+    display: block;
+  }
+}
+
+.api-left {
+  height: 100%;
+}
+
+.api-right {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(32, 59, 117, 0.07);
+  border: 1px solid rgba(32, 59, 117, 0.29);
+  border-radius: 3px;
+}
+
+.arguments {
+  margin-left: 40px;
+  strong {
+    /* FIXME - extend bootstrap code element */
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    padding: 2px 4px;
+    background-color: #F7F7F9;
+    border: 1px solid #E1E1E8;
+    font-weight: normal;
+    font-size: 85%;
+  }
+  code {
+    color: #333;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  li {
+    padding: 5px;
+  }
+}
+
+span.question {
+  font-weight: bold
+}
+
+
+/* use width instead of max-width in logo because
+ * FF and opera ignore max-width in inlined images
+ */
+
+.brand img {
+  width: 100%
+}
+
+
+/* Integration specific */
+
+.snmp .hint-icon {
+  position: absolute;
+  width: 15px;
+}
+
+.snmp pre {
+  position: relative;
+  left: 20px;
+  width: 60%;
+}
+
+.snmp dd {
+  margin-left: 10%;
+}
+
+.snmp dt {
+  margin-top: 20px;
+}

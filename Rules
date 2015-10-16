@@ -35,6 +35,13 @@ compile '/tipuesearch/*/' do
 
 end
 
+compile '/static/css/*' do
+  unless item.identifier.start_with?('/static/css/_')
+    filter :sass, syntax: :scss, style: :compressed
+    filter :autoprefixer
+  end
+end
+
 compile '/static/*' do
 
 end
@@ -110,6 +117,12 @@ end
 
 route '/static/favicon/' do
   '/favicon.ico'
+end
+
+route '/static/css/*' do
+  unless item.identifier.start_with?('/static/css/_')
+    item.identifier.gsub(/\/$/, '') + '.css'
+  end
 end
 
 route '/static/CNAME/' do
