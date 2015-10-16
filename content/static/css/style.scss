@@ -166,6 +166,12 @@ ol.outline {
   .nav-tabs > li {
     margin-bottom: -1px;
   }
+  img {
+    width: 100%;
+    border: 1px solid #777777;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 #footer {
@@ -237,7 +243,7 @@ ol.outline {
     visibility: visible;
     display: block;
   }
-} 
+}
 
 .api-left {
   height: 100%;
