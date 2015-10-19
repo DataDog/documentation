@@ -16,7 +16,7 @@ this layout provides a sidebar and main column.
       <div class="row">
 
         <!-- SIDEBAR -->
-        <!-- <div class="span3" id="sidebarcolumn">
+        <!-- <div class=".col-md-3" id="sidebarcolumn">
         <% if @item[:sidebar] && @item[:sidebar][:nav] %>
           <ul class="nav nav-tabs nav-stacked sidebar">
           <% @item[:sidebar][:nav].each do |i| %>
@@ -31,7 +31,7 @@ this layout provides a sidebar and main column.
         &nbsp;
         </div> -->
 
-        <div class="span3" id="sidebarcolumn">
+        <div class=".col-md-3" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
             <% if @item[:sidebar] && @item[:sidebar][:nav] %>
               <% @item[:sidebar][:nav].each do |i| %>
@@ -59,7 +59,7 @@ this layout provides a sidebar and main column.
 
 
         <!-- MAIN -->
-        <div class="span9 main">
+        <div class=".col-md-9 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
             <%= yield %>

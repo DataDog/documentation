@@ -10,7 +10,7 @@ this layout provides a sidebar and main column.
     <div class="container">
       <div class="row">
         <!-- SIDEBAR -->
-        <div class="span3" id="sidebarcolumn">
+        <div class=".col-md-3" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
             <li class="nav-header">Documentation Search</li>
             <li>
@@ -32,7 +32,7 @@ this layout provides a sidebar and main column.
         </div>
 
         <!-- MAIN -->
-        <div class="span9 main">
+        <div class=".col-md-9 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
             <small>tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %></small>

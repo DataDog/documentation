@@ -1,3 +1,8 @@
+@import "../bootstrap/scss/_variables.scss";
+.container.main {
+  // padding-top: 60px;
+}
+
 $purple: #774aa4;
 $lightpurple: lighten($purple, 12%); //#e5d2f8;
 $lighterpurple: lighten($purple, 40%);
@@ -32,11 +37,23 @@ ol.outline {
   }
 }
 
-
-/* CorpWeb-style Buttons */
+@media (max-width: $screen-xs-max) {
+  .navbar-inverse .navbar-nav {
+    &>li>a,
+    .open .dropdown-menu >li>a {
+      color: white !important;
+      text-align: left;
+    }
+  }
+}
+.navbar-form {
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
 
 .navbar {
-  .navbar-inner,
+  &,
   .nav > li.dropdown.open>.dropdown-toggle,
   .navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
   .nav > li.dropdown.open.active>.dropdown-toggle,
@@ -48,44 +65,41 @@ ol.outline {
     color: $lighterpurple;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .6);
   }
-  .navbar-inner {
-    padding-top: 16px;
-    min-height: 35px;
-    padding-bottom: 15px;
-    border-bottom: $darkpurple solid 1px;
-    .nav li {
-      > a {
-        &.flexbutton {
-          display: inline-block;
-          margin: 0 6px;
-          padding: 6px 18px;
-          height: 24px;
-          line-height: 24px;
-          font-size: 16px;
-          font-weight: bold;
-          color: #fff;
-          text-decoration: none;
-          background: $lightpurple;
-          border: 1px solid #774aa4;
-          border-color: lighten($lightpurple, 2%);
-          /*#653f8c #543473*/
-          // text-shadow: 0 1px 0 #4ad;
-          box-shadow: inset 0 1px 0 lighten($lightpurple, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-          border-radius: 18px;
-        }
-        &.blueflex {
-          background: $blue;
-          border-color: lighten($blue, 2%);
-          box-shadow: inset 0 1px 0 lighten($blue, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-        }
-        &.flexbutton:hover {
-          background: lighten($lightpurple, 5%);
-          box-shadow: inset 0 1px 0 lighten($lightpurple, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-        }
-        &.blueflex:hover {
-          background: lighten($blue, 5%); //#6cf;
-          box-shadow: inset 0 1px 0 lighten($blue, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-        }
+  padding-top: 16px;
+  min-height: 35px;
+  padding-bottom: 15px;
+  border-bottom: $darkpurple solid 1px;
+  .nav li {
+    > button {
+      &.flexbutton {
+        display: inline-block;
+        // margin: 10px 6px;
+        margin-right: 6px;
+        margin-left: 6px;
+        padding: 6px 18px;
+        // height: 24px;
+        // line-height: 24px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+        background: $lightpurple;
+        border: 1px solid lighten($lightpurple, 2%);
+        // box-shadow: inset 0 1px 0 lighten($lightpurple, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+        border-radius: 18px;
+      }
+      &.blueflex {
+        background: $blue;
+        border-color: lighten($blue, 2%);
+        // box-shadow: inset 0 1px 0 lighten($blue, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+      }
+      &.flexbutton:hover {
+        background: lighten($lightpurple, 5%);
+        box-shadow: inset 0 1px 0 lighten($lightpurple, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+      }
+      &.blueflex:hover {
+        background: lighten($blue, 5%); //#6cf;
+        box-shadow: inset 0 1px 0 lighten($blue, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
       }
     }
   }
@@ -98,7 +112,7 @@ ol.outline {
     box-shadow: none;
     padding-bottom: 0;
   }
-  .brand {
+  .navbar-brand {
     padding: 0;
     padding-right: 5px;
   }
@@ -122,13 +136,20 @@ ol.outline {
     }
   }
 }
-
+#tipue_search_input {
+  border: 0;
+  width: 165px;
+  @media (min-width: $screen-md-min) {
+    width: 215px;
+  }
+}
 .nav {
   .search {
     margin-top: 60px;
     .nav-header {
       margin-top: 0;
-      background-color: #9d6ebf;
+      border: 0;
+      background-color: $purple;
       color: #fff;
       text-shadow: none;
       &:first-child {
@@ -138,15 +159,27 @@ ol.outline {
   }
   &.sidebar {
     margin-top: 90px;
-    width: 220px;
+    width: 170px;
+    @media (min-width: $screen-md-min) {
+      width: 220px;
+    }
     .nav-header {
       margin-top: 0;
       background-color: #9d6ebf;
       color: #fff;
       text-shadow: none;
+      padding-left: 5px;
       &:first-child {
+        border: 0;
         border-radius: 4px 4px 0 0;
       }
+    }
+    li {
+      margin: 0;
+      border-right: 1px solid $lightpurple;
+      border-left: 1px solid $lightpurple;
+      // border-bottom: 1px solid $lightpurple;
+      border-bottom: 1px solid $lighterpurple;
     }
   }
 }
@@ -289,8 +322,8 @@ span.question {
  * FF and opera ignore max-width in inlined images
  */
 
-.brand img {
-  width: 100%
+.navbar-brand img {
+  width: 100%;
 }
 
 

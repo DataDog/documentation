@@ -6,18 +6,22 @@ this layout provides a sidebar and main column.
 <html lang="en">
   <%= render "_head" %>
   <body>
+
     <%= render "_header" %>
     <div class="container">
       <div class="row">
+      <% if !@item.identifier.match("/api/") %>
         <!-- SIDEBAR -->
-        <div class="span3" id="sidebarcolumn">
+        <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
-            <li class="nav-header">Documentation Search</li>
+          <% if @item["language"] == "en" %>
+            <li class="nav-header">Documentation Search</li> 
             <li>
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
               </form>
             </li>
+            <% end %>
             <% if @item[:sidebar] && @item[:sidebar][:nav] %>
               <% @item[:sidebar][:nav].each do |i| %>
                 <% if i[:header] %>
@@ -27,18 +31,22 @@ this layout provides a sidebar and main column.
                 <% end %>
               <% end %>
             <% end %>
-              <li class="nav-header">Guides</li>
-            <% guide_items.each do |i| %>
+              <li class="nav-header"><%= @item["menu_guides"] %> </li>
+              <% this_guide_items = @item["language"] == "en" ? guide_items : ja_guide_items %>
+            <% this_guide_items.each do |i| %>
                   <li><%= link_to i[:title], i.path %></li>
             <% end %>
           </ul>
         &nbsp;
         </div>
-
+        <!-- END SIDEBAR -->
+        <% end %>
         <!-- MAIN -->
-        <div class="span9 main">
+        <div class="col-xs-12 col-sm-9 col-md-9 main">
           <!-- PAGE TITLE -->
+          <% if !@item.identifier.match("/api/") %>
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <% end %>
             <%= yield %>
         </div>
       </div>

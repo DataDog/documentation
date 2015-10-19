@@ -17,6 +17,24 @@
 require './lib/rule_helper'
 
 preprocess do
+  @items.each do |item|
+    language = "en"
+    otherlang = "ja"
+    langpath = ""
+    if item.identifier.match('/ja/')
+      language = "ja"
+      otherlang = ""
+      langpath = "/ja"
+    end
+    phrases = get_local_hash(language)
+    item["language"] = language
+    item["otherlang"] = otherlang
+    item["langpath"] = langpath
+    phrases.each do | key, val |
+      item[key] = val
+    end
+  end
+  
   create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
   create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
   create_tag_pages(ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
@@ -35,6 +53,17 @@ compile '/tipuesearch/*/' do
 
 end
 
+compile '/static/bootstrap/scss/*' do
+end
+
+compile '/static/bootstrap/scss/mixins/*' do
+end
+
+# compile '/static/bootstrap/scss/*' do
+#     filter :sass, syntax: :scss, style: :compressed
+#     filter :autoprefixer
+# end
+
 compile '/static/css/*' do
   unless item.identifier.start_with?('/static/css/_')
     filter :sass, syntax: :scss, style: :compressed
@@ -52,6 +81,7 @@ end
 
 compile '*' do
   unless item.binary?
+
     filter :erb
     case item[:extension]
       when 'md'
@@ -68,11 +98,12 @@ compile '*' do
     }
 
     id = @item.identifier
+
     case
-    when id == '/ja/api/'
-      layout 'shell-ja'
-    when id == '/api/'
-      layout 'shell'
+    # when id == '/ja/api/'
+    #   layout 'shell-ja'
+    # when id == '/api/'
+    #   layout 'shell'
     when id.match('/ja/guides/basic_agent_usage/')
       layout 'basic_agent_usage-ja'
     when id.match('/ja/integrations') && @item[:kind] == 'integration' && @item[:language] == 'ja'
@@ -81,10 +112,6 @@ compile '*' do
       layout 'examplelayout-ja'
     when id.match('/ja/videos/') && @item[:kind] == 'video' && @item[:language] == 'ja'
       layout 'videolayout-ja'
-    when id.match('/ja/guides/') && @item[:kind] == 'guide' && @item[:language] == 'ja'
-      layout 'guide_layout-ja'
-    when id.match('/ja/')
-      layout 'default-ja'
     when id.match('/guides/basic_agent_usage/')
       layout 'basic_agent_usage'
     when id.match('/integrations') && @item[:kind] == 'integration'
@@ -93,8 +120,6 @@ compile '*' do
       layout 'examplelayout'
     when id.match('/videos/') && @item[:kind] == 'video'
       layout 'videolayout'
-    when id.match('/guides/') && @item[:kind] == 'guide'
-      layout 'guide_layout'
     else
       layout 'default'
     end
@@ -118,6 +143,19 @@ end
 route '/static/favicon/' do
   '/favicon.ico'
 end
+
+route '/static/bootstrap/scss/*' do
+    nil
+end
+
+# route '/static/bootstrap/scss/mixins/*' do
+#   nil
+# end
+
+# route '/static/bootstrap/scss/*' do
+#     '/static/bootstrap/css/' + File.basename(item.identifier) + '.css'
+# end
+
 
 route '/static/css/*' do
   unless item.identifier.start_with?('/static/css/_')
