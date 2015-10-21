@@ -8,13 +8,13 @@ guard 'nanoc' do
 end
 
 
-#guard 'rake', :task => 'checks' do
-#  watch(%r{^output/.+\.(css|js|html)})
-#end
+guard 'rake', :task => 'checks' do
+  watch(%r{^output/.+\.(css|js|html)})
+end
 
-#guard 'rake', :task => 'cleancode', :run_on_start => false do
-#  watch(%r{^code_snippets/.*$})
-#end
+guard 'rake', :task => 'cleancode', :run_on_start => false do
+  watch(%r{^code_snippets/.*$})
+end
 
 guard 'rack', port: '3000'
 guard 'livereload' do
