@@ -17,6 +17,12 @@
 require './lib/rule_helper'
 
 preprocess do
+
+  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
+  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
+  create_tag_pages(ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
+  create_tag_pages(ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
+
   @items.each do |item|
     language = "en"
     otherlang = "ja"
@@ -34,11 +40,6 @@ preprocess do
       item[key] = val
     end
   end
-  
-  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
-  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
-  create_tag_pages(ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
-  create_tag_pages(ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
 end
 
 compile 'sitemap' do
@@ -100,10 +101,7 @@ compile '*' do
     id = @item.identifier
 
     case
-    # when id == '/ja/api/'
-    #   layout 'shell-ja'
-    # when id == '/api/'
-    #   layout 'shell'
+    
     when id.match('/ja/guides/basic_agent_usage/')
       layout 'basic_agent_usage-ja'
     when id.match('/ja/integrations') && @item[:kind] == 'integration' && @item[:language] == 'ja'
@@ -116,10 +114,6 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/integrations') && @item[:kind] == 'integration'
       layout 'integration_layout'
-    when id.match('/examples/') && @item[:kind] == 'example'
-      layout 'examplelayout'
-    when id.match('/videos/') && @item[:kind] == 'video'
-      layout 'videolayout'
     else
       layout 'default'
     end

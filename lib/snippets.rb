@@ -24,7 +24,7 @@ EXT_TO_LANG = {
 # Return a code block containing the given file's code and highlighted for it's
 # language.
 def snippet_code_block(filename, options={})
-  apicomment = "# Make sure you replace the API and or APP key below with the ones for your account\n\n"
+  apicomment = "# Make sure you replace the API and/or APP key below\n# with the ones for your account\n\n"
   if language(filename) == "console"
     binsh = "#!/bin/sh\n"
   end

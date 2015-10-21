@@ -5,8 +5,8 @@ kind: documentation
 
 <%
   # Some shortcuts for the columns.
-  left_side_div  = '<div class=".col-md-6 api-left">'
-  right_side_div = '<div class=".col-md-6 api-right">'
+  left_side_div  = '<div class="col-xs-12 col-md-6 api-left">'
+  right_side_div = '<div class="col-xs-12 col-md-6 api-right">'
 
   no_args = '<em>This end point takes no JSON arguments.</em>'
   no_response = '<em>This end point does not return JSON on successful requests.</em>'
@@ -14,35 +14,36 @@ kind: documentation
 
 
 <div class="container api-page">
-
   <div class="row floating-header" data-spy="affix" data-offset-top="60">
     <h1><%= @item[:title] %> </h1>
     <div class="btn-toolbar">
-      <div class="btn-group api-section-links">
-        <a class="btn" href="#authentication">Auth</a>
-        <a class="btn" href="#errors">Errors</a>
-        <a class="btn" href="#metrics">Metrics</a>
-        <a class="btn" href="#events">Events</a>
-        <a class="btn" href="#service_checks">Checks</a>
-        <a class="btn" href="#monitors">Monitors</a>
-        <a class="btn" href="#downtimes">Downtimes</a>
-        <a class="btn" href="#timeboards">Timeboards</a>
-        <a class="btn" href="#screenboards">Screenboards</a>
-        <a class="btn" href="#hosts">Hosts</a>
-        <a class="btn" href="#tags">Tags</a>
-        <a class="btn" href="#search">Search</a>
-        <a class="btn" href="#comments">Comments</a>
-        <a class="btn" href="#users">Users</a>
-        <a class="btn" href="#graphs">Graphs</a>
-        <a class="btn" href="#embeds">Embeds</a>
+      <div class="btn-group api-section-links btn-group-sm">
+        <a class="btn btn-default gradient" href="#authentication">Auth</a>
+        <a class="btn btn-default gradient" href="#errors">Errors</a>
+        <a class="btn btn-default gradient" href="#metrics">Metrics</a>
+        <a class="btn btn-default gradient" href="#events">Events</a>
+        <a class="btn btn-default gradient" href="#service_checks">Checks</a>
+        <a class="btn btn-default gradient" href="#monitors">Monitors</a>
+        <a class="btn btn-default gradient" href="#downtimes">Downtimes</a>
+        <a class="btn btn-default gradient" href="#timeboards">Timeboards</a>
+        <a class="btn btn-default gradient" href="#screenboards">Screenboards</a>
+        <a class="btn btn-default gradient" href="#hosts">Hosts</a>
+        <a class="btn btn-default gradient" href="#tags">Tags</a>
+        <a class="btn btn-default gradient" href="#search">Search</a>
+        <a class="btn btn-default gradient" href="#comments">Comments</a>
+        <a class="btn btn-default gradient" href="#users">Users</a>
+        <a class="btn btn-default gradient" href="#graphs">Graphs</a>
+        <a class="btn btn-default gradient" href="#embeds">Embeds</a>
       </div>
-      <div class="btn-group language-links">
-        <div lang="console" class="lang-btn btn">Shell</div>
-        <div lang="python" class="active lang-btn btn">Python</div>
-        <div lang="ruby" class="lang-btn btn">Ruby</div>
       </div>
-      <div class="btn-group">
-        <a class="btn" href="#troubleshooting">Troubleshooting</a>
+      <div class="btn-toolbar">
+      <div class="btn-group language-links btn-group-sm">
+        <div lang="console" class="lang-btn btn btn-default gradient">Shell</div>
+        <div lang="python" class="active lang-btn btn btn-default gradient">Python</div>
+        <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
+      </div>
+      <div class="btn-group btn-group-sm">
+        <a class="btn btn-default gradient" href="#troubleshooting">Troubleshooting</a>
       </div>
     </div>
   </div>
@@ -171,7 +172,7 @@ kind: documentation
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-          <ul>
+          
           <%= argument 'metric', 'The name of the time series' %>
           <li>
               <strong>points [required]</strong>

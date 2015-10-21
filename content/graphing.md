@@ -17,16 +17,76 @@ sidebar:
 ## Find the Graph Editor
 {: #editor}
 
-On each graph you will find a pencil icon that opens the graph editor.
+On each graph you will find a pencil icon that opens the graph editor on timeboards and a cog that opens the graph editor on screenboards.
 
 ![Graphing Overview](/static/images/references-graphing-overview.png)
 
-The graph editor has three tabs, "Share", "JSON", and "Edit". "Share" will allow you to embed the graph on any external web page. "JSON" is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. "Edit" is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the "JSON" tab.
+The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
+
+
+
+
+## Graphing with the graphical editor interface
+
+When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
+
+![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+
+### 1) Select your visualization
+
+The first step is to select you visualization. As of October 2015 there are six choices for visualizations on timeboards and fifteen choices for visualizations on screenboards.
+
+#### Timeseries
+
+The Timeseries visualization is great for showing one or more datapoints over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }.
+
+<div class="collapse" id="collapseTimeseries" markdown="1">
+  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+</div> 
+
+#### Heatmap
+
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }.
+
+<div class="collapse" id="collapseHeatmap" markdown="1">
+  ![Heatmap](/static/images/references-graphing-hostmap-example.png)
+</div>
+
+#### Distribution
+
+#### Toplist
+
+#### Change
+
+#### Hostmap
+
+<script type="text/javascript">
+jQuery(function(){
+  $('#collapseJSON').on('show.bs.collapse', function(){
+    $('#collapseJSONOpen').hide();
+  })
+  $('#collapseJSON').on('hidden.bs.collapse', function(){
+    $('#collapseJSONOpen').show();
+  })
+})
+</script>
+
+
+[Learn more about the JSON tab](#collapseJSON){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseJSON" id="collapseJSONOpen"}
+
+
+<div class="collapse" id="collapseJSON" markdown="1">
+
+## Graphing with the JSON editor
+
+
+[Close JSON tab details](#collapseJSON){: role="button" data-toggle="collapse" aria-controls="collapseJSON" id="collapseJSONClose"}
 
 ![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 
-## Grammar
+### Grammar
 {: #grammar}
+
 
 The graph definition language is well-formed JSON and is structured in four parts:
 
@@ -79,7 +139,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
-### Functions
+#### Functions
 
 You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
 
@@ -283,15 +343,15 @@ We will also be building these functions fully into the graph editor in the near
 future. For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
 
-### Aggregation Method
+#### Aggregation Method
 
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
 
-### Metrics
+#### Metrics
 
 The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
-### Scope
+#### Scope
 
 A scope lets you filter a Series. It can be a host, a device on a host
 or any arbitrary tag you can think of that contains only alphanumeric
@@ -306,11 +366,11 @@ Examples of scope (meaning in parentheses):
     my:tag                            (same)
     *                                 (wildcard for everything)
 
-### Groups
+#### Groups
 
 For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
 
-### Arithmetic
+#### Arithmetic
 
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
@@ -341,7 +401,7 @@ apples by oranges.
     }
 
 
-## Events
+### Events
 
 You can overlay any event from Datadog. The general format is:
 
@@ -368,7 +428,7 @@ or if you're looking to display all errors:
     ]
 
 
-## Visualization
+### Visualization
 
 Data can be visualized in a few different ways:
 
@@ -386,7 +446,7 @@ The Time Series can be further broken down to:
 3. as slice-n-stack areas
 4. as bar charts
 
-### Line Charts
+#### Line Charts
 
 <img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
 
@@ -404,7 +464,7 @@ The representation is automatically derived from having multiple `requests` valu
         }
       ]
 
-### Stacked Series
+#### Stacked Series
 
 <img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
@@ -418,7 +478,7 @@ In the case of related Time Series, you can easily draw them as stacked areas by
 
 Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries.
 
-### Slice-n-Stack
+#### Slice-n-Stack
 
 A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance, when selecting a tag that
@@ -447,7 +507,7 @@ to get traffic for all the tagged hosts, split by host and network device.
 
 
 
-## Y-Axis Controls
+### Y-Axis Controls
 {: #yaxis}
 
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
@@ -494,7 +554,7 @@ Examples:
         "scale": "pow3"
     }
 
-### Filtering
+#### Filtering
 
 Filter configuration allows you to automatically change y-axis bounds based on a
 threshold. Thresholds can be a percentage or an absolute value, and it can apply to
@@ -568,7 +628,7 @@ Here is a full JSON example:
 
 
 
-### Examples
+#### Examples
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 
@@ -620,3 +680,5 @@ Here is an example using the <code>week_before()</code> function:
         }
       ]
     }
+
+</div>

@@ -3,6 +3,10 @@
   // padding-top: 60px;
 }
 
+$btngrey: #fff;
+$btngrey2: darken($btngrey, 8%);
+$btngrey3: darken($btngrey2, 8%);
+
 $purple: #774aa4;
 $lightpurple: lighten($purple, 12%); //#e5d2f8;
 $lighterpurple: lighten($purple, 40%);
@@ -185,14 +189,14 @@ ol.outline {
 }
 
 .main {
-  > h2 {
+  h2 {
     font-size: 28px;
     margin: 30px 0 10px;
   }
-  > h3 {
+  h3 {
     font-size: 24px;
   }
-  > ol > li,
+  ol > li,
   ul > li {
     margin-bottom: 6px;
   }
@@ -233,15 +237,22 @@ ol.outline {
 .floating-header {
   background-color: rgba(255, 255, 255, .85);
   width: 100%;
+  z-index: 1000;
   &.affix {
     top: 0;
     + .scrollable-api-docs {
-      margin-top: 120px;
+      margin-top: 14 0px;
     }
   }
 }
 
 .api-page {
+  .btn.gradient {
+    background: linear-gradient(to bottom,  $btngrey,$btngrey2); 
+    &:hover, &:focus, &:active {
+      background: linear-gradient(to bottom, $btngrey3, $btngrey2);
+    }
+  }
   .floating-header .btn-toolbar {
     margin-bottom: 0;
   }
@@ -292,7 +303,7 @@ ol.outline {
 }
 
 .arguments {
-  margin-left: 40px;
+  // margin-left: 40px;
   strong {
     /* FIXME - extend bootstrap code element */
     font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
@@ -309,7 +320,7 @@ ol.outline {
     list-style-type: disc;
   }
   li {
-    padding: 5px;
+    // padding: 5px;
   }
 }
 

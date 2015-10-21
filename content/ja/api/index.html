@@ -5,8 +5,8 @@ kind: documentation
 
 <%
   # Some shortcuts for the columns.
-  left_side_div  = '<div class=".col-md-6 api-left">'
-  right_side_div = '<div class=".col-md-6 api-right">'
+  left_side_div  = '<div class="col-xs-12 col-md-6 api-left">'
+  right_side_div = '<div class="col-xs-12 col-md-6 api-right">'
 
   no_args = '<em>This end point takes no JSON arguments.</em>'
   no_response = '<em>This end point does not return JSON on successful requests.</em>'
@@ -14,34 +14,36 @@ kind: documentation
 
 
 <div class="container api-page">
-
   <div class="row floating-header" data-spy="affix" data-offset-top="60">
     <h1><%= @item[:title] %> </h1>
     <div class="btn-toolbar">
-      <div class="btn-group api-section-links">
-        <a class="btn" href="#authentication">Auth</a>
-        <a class="btn" href="#errors">Errors</a>
-        <a class="btn" href="#metrics">Metrics</a>
-        <a class="btn" href="#events">Events</a>
-        <a class="btn" href="#service_checks">Checks</a>
-        <a class="btn" href="#monitors">Monitors</a>
-        <a class="btn" href="#downtimes">Downtimes</a>
-        <a class="btn" href="#timeboards">Timeboards</a>
-        <a class="btn" href="#screenboards">Screenboards</a>
-        <a class="btn" href="#hosts">Hosts</a>
-        <a class="btn" href="#tags">Tags</a>
-        <a class="btn" href="#search">Search</a>
-        <a class="btn" href="#comments">Comments</a>
-        <a class="btn" href="#users">Users</a>
-        <a class="btn" href="#graphs">Graphs</a>
+      <div class="btn-group api-section-links btn-group-sm">
+        <a class="btn btn-default gradient" href="#authentication">Auth</a>
+        <a class="btn btn-default gradient" href="#errors">Errors</a>
+        <a class="btn btn-default gradient" href="#metrics">Metrics</a>
+        <a class="btn btn-default gradient" href="#events">Events</a>
+        <a class="btn btn-default gradient" href="#service_checks">Checks</a>
+        <a class="btn btn-default gradient" href="#monitors">Monitors</a>
+        <a class="btn btn-default gradient" href="#downtimes">Downtimes</a>
+        <a class="btn btn-default gradient" href="#timeboards">Timeboards</a>
+        <a class="btn btn-default gradient" href="#screenboards">Screenboards</a>
+        <a class="btn btn-default gradient" href="#hosts">Hosts</a>
+        <a class="btn btn-default gradient" href="#tags">Tags</a>
+        <a class="btn btn-default gradient" href="#search">Search</a>
+        <a class="btn btn-default gradient" href="#comments">Comments</a>
+        <a class="btn btn-default gradient" href="#users">Users</a>
+        <a class="btn btn-default gradient" href="#graphs">Graphs</a>
+        <a class="btn btn-default gradient" href="#embeds">Embeds</a>
       </div>
-      <div class="btn-group language-links">
-        <div lang="console" class="lang-btn btn">Shell</div>
-        <div lang="python" class="active lang-btn btn">Python</div>
-        <div lang="ruby" class="lang-btn btn">Ruby</div>
       </div>
-      <div class="btn-group">
-        <a class="btn" href="#troubleshooting">Troubleshooting</a>
+      <div class="btn-toolbar">
+      <div class="btn-group language-links btn-group-sm">
+        <div lang="console" class="lang-btn btn btn-default gradient">Shell</div>
+        <div lang="python" class="active lang-btn btn btn-default gradient">Python</div>
+        <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
+      </div>
+      <div class="btn-group btn-group-sm">
+        <a class="btn btn-default gradient" href="#troubleshooting">Troubleshooting</a>
       </div>
     </div>
   </div>
@@ -170,7 +172,7 @@ kind: documentation
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-          <ul>
+          
           <%= argument 'metric', 'The name of the time series' %>
           <li>
               <strong>points [required]</strong>
@@ -257,10 +259,10 @@ kind: documentation
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
-            <%= argument "text", "The body of the event. Limited to 4000 characters.", :lang => l %>
+            <%= argument "text", "The body of the event. Limited to 4000 characters. The text supports "+'<a href="/guides/markdown/">markdown</a>.', :lang => l %>
           <% end %>
-          <%= argument 'msg_text', 'The text for the message', :lang => 'ruby' %>
-          <%= argument "msg_title", 'The event title.', :lang => 'ruby', :default => "''" %>
+          <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters. The text supports '+'<a href="/guides/markdown/">markdown</a>.', :lang => 'ruby' %>
+          <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
           <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
@@ -462,6 +464,10 @@ kind: documentation
               this monitor. Email notifications can be sent to specific users by
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
+
           <li>
             <strong>options [optional]</strong>
             <div>A dictionary of options for the monitor. There are options that
@@ -516,6 +522,22 @@ kind: documentation
               <li><code>notify_audit</code> a boolean indicating whether tagged
               users will be notified on changes to this monitor.
               <p>Default: <code>False</code></p></li>
+
+              <li><code>include_tags</code> a boolean indicating whether
+              notifications from this monitor will automatically insert its
+              triggering tags into the title.
+              <p>Default: <code>True</code></p>
+              <p>Examples:
+
+                <ul>
+                  <li>True:
+                      <p><code>[Triggered on {host:h1}] Monitor Title</code></p></li>
+                  <li>False:
+                      <p><code>[Triggered] Monitor Title</code></p></li>
+                </ul>
+              </p>
+              </li>
+
 
             </ul>
 
@@ -590,6 +612,9 @@ kind: documentation
               :default => "dynamic, based on query" %>
           <%= argument 'options', "Refer to the create monitor documentation for
               details on the available options.", :default => "None" %>
+          <%= argument 'tags', "A list of tags to associate with your monitor.
+              This can help you categorize and filter monitors.",
+              :default => "empty list" %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -687,6 +712,10 @@ kind: documentation
     <h4 id="monitor-unmute-all">Unmute all monitors</h4>
     <div class="row">
       <%= left_side_div %>
+        <p>
+        Disables muting all monitors. Throws an error if mute all was
+        not enabled previously.
+        </p>
         <h5>Arguments</h5>
         <%= no_args %>
       </div>
@@ -734,6 +763,8 @@ kind: documentation
           <%= argument 'scope', "The scope to apply the mute to. For example,
           if your alert is grouped by {host}, you might mute 'host:app1'",
           :default => "None" %>
+          <%= argument 'all_scopes', "Clear muting across all scopes",
+          :default => "False" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1109,25 +1140,12 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument("title", 'The name of the dashboard.') %>
-          <%= argument("description", "A description of the dashboard\'s content.") %>
-          <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
-          <ul class="arguments">
-            <li>
-              <strong>title [required]</strong>
-              <div>The name of the graph.</div>
-            </li>
-            <li>
-              <strong>widgets [required]</strong>
-              <div>
-                The widget definition. See <a href="/api/screenboards/">here</a> for more examples.
-              </div>
-            </li>
-          </ul>
+          <%= argument("board_title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.", :default => "None") %>
+          <%= argument("widgets", "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") %>
           <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
           <%= argument("width", "Screenboard width in pixels", :default => "None") %>
           <%= argument("height", "Height in pixels.", :default => "None") %>
-
         </ul>
       </div>
       <%= right_side_div %>
@@ -1366,7 +1384,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>GET /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>GET /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-get-host.py" %>
         <%= snippet_code_block "api-tags-get-host.rb" %>
@@ -1392,7 +1410,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>POST /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-add.py" %>
         <%= snippet_code_block "api-tags-add.sh" %>
@@ -1418,7 +1436,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>PUT /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>PUT /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-update.py" %>
         <%= snippet_code_block "api-tags-update.sh" %>
@@ -1443,7 +1461,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>DELETE /api/v1/tags/hosts/:host_id_or_host_name</code>
+        <code>DELETE /api/v1/tags/hosts/:host_name</code>
         <h5>Example Request</h5>
         <%= snippet_code_block "api-tags-remove.py" %>
         <%= snippet_code_block "api-tags-remove.sh" %>
@@ -1678,6 +1696,201 @@ kind: documentation
       </div>
     </div>
 
+    <!--
+    =====================================================================
+    Embeddable Graphs
+    ====================================================================
+    -->
+
+    <h3 id="embeds">Embeddable Graphs</h3>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          You can interact with embeddable graphs through the API.
+        </p>
+      </div>
+    </div>
+
+    <!-- Get All Embeds -->
+    <h4 id="embeds-get-all">Get All Embeds</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Gets a list of previously created embeddable graphs.
+        </p>
+        <p>
+          Returns: A JSON list containing information on previously created embeds from both the UI
+          and the API. Each JSON graph response is in the same format as returned by
+          <code>GET api/v1/graph/embed/:embed_id</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-embeds-get-all.py" %>
+        <%= snippet_code_block "api-embeds-get-all.rb" %>
+        <%= snippet_code_block "api-embeds-get-all.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-embeds-get-all.py" %>
+        <%= snippet_result_code_block "api-embeds-get-all.rb" %>
+        <%= snippet_result_code_block "api-embeds-get-all.sh" %>
+      </div>
+    </div>
+
+    <!-- Create Embed -->
+    <h4 id="embeds-create">Create Embed</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Creates a new embeddable graph.
+        </p>
+        <p>
+          Returns: A JSON consisting of the same elements returned by <code>GET api/v1/graph/embed/:embed_id</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <p>
+          Note: If an embed already exists for the exact same query in a given organization, the older embed will be returned instead of creating a new embed.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "graph_json", "The graph definition in JSON.
+          Same format that is available on the JSON tab of the graph editor" %>
+          <%= argument "timeframe", "The timegrame for the graph. Must be one of 1_hour,
+          4_hours, 1_day, 2_days, and 1_week.", {:default => '1_hour'} %>
+          <%= argument "size", "The size of the graph. Must be one of small, medium,
+          large, and xlarge.", {:default => 'medium'} %>
+          <%= argument "legend", "The flag determining if the graph includes a legend.
+          Must be one of yes or no.", {:default => 'no'} %>
+          <%= argument "title", "Determines graph title. Must be at least 1 character.",
+          {:default => 'Embed created through API'} %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST api/v1/graph/embed</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-embeds-create.py" %>
+        <%= snippet_code_block "api-embeds-create.rb" %>
+        <%= snippet_code_block "api-embeds-create.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-embeds-create.py" %>
+        <%= snippet_result_code_block "api-embeds-create.rb" %>
+        <%= snippet_result_code_block "api-embeds-create.sh" %>
+      </div>
+    </div>
+
+    <!-- Get Specifc Embed -->
+    <h4 id="embeds-get">Get Specific Embed</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Get the HTML fragment for a previously generated embed with embed_id.
+        </p>
+        <p>
+          Returns: A JSON object with 8 elements:
+        </p>
+        <ul>
+          <li>embed_id: Token of the embed</li>
+          <li>graph_title: Tile of the graph</li>
+          <li>dash_name: Name of the dashboard the graph is on (null if none)</li>
+          <li>dash_url: URL of the dashboard the graph is on (null if none)</li>
+          <li>shared_by: ID of the use who shared the embed</li>
+          <li>html: HTML fragment for the embed (iframe)</li>
+          <li>revoked: Boolean flag for whther or not the embed is revoked</li>
+        </ul>
+        <p>
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument "size", "The size of the graph. Must be one of small, medium,
+          large, and xlarge.", {:default => 'medium'} %>
+          <%= argument "legend", "The flag determining if the graph includes a legend.
+          Must be one of yes or no.", {:default => 'no'} %>
+          <%= argument "template_variables", "Replace template variables in queries with form $var. To
+          replace $var with val, use var=val as a parameter for each template variable you wish
+          to replace. If any template variables are missing values in the iframe source
+          url, then (*) will be used as the value.", {:default => "None"} %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-embeds-get.py" %>
+        <%= snippet_code_block "api-embeds-get.rb" %>
+        <%= snippet_code_block "api-embeds-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-embeds-get.py" %>
+        <%= snippet_result_code_block "api-embeds-get.rb" %>
+        <%= snippet_result_code_block "api-embeds-get.sh" %>
+      </div>
+    </div>
+
+    <!-- Enable Embed -->
+    <h4 id="embeds-enable">Enable Embed</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Enable a specified embed.
+        </p>
+        <p>
+          Returns: A JSON containing the success message <code>{success: [message]}</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id/enable</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-embeds-enable.py" %>
+        <%= snippet_code_block "api-embeds-enable.rb" %>
+        <%= snippet_code_block "api-embeds-enable.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-embeds-enable.py" %>
+        <%= snippet_result_code_block "api-embeds-enable.rb" %>
+        <%= snippet_result_code_block "api-embeds-enable.sh" %>
+      </div>
+    </div>
+
+    <!-- Revoke Embed -->
+    <h4 id="embeds-revoke">Revoke Embed</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Revoke a specified embed.
+        </p>
+        <p>
+          Returns: A JSON containing the success message <code>{success: [message]}</code>.
+          On failure, the return value will be a JSON containing an error message <code>{errors: [messages]}</code>.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/graph/embed/:embed_id/revoke</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-embeds-revoke.py" %>
+        <%= snippet_code_block "api-embeds-revoke.rb" %>
+        <%= snippet_code_block "api-embeds-revoke.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-embeds-revoke.py" %>
+        <%= snippet_result_code_block "api-embeds-revoke.rb" %>
+        <%= snippet_result_code_block "api-embeds-revoke.sh" %>
+      </div>
+    </div>
 
    <!--
     =====================================================================
