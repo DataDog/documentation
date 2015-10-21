@@ -33,7 +33,7 @@ this layout provides a sidebar and main column.
             <li class="nav-header auto"><%= @item["integrations_other_integrations"] %> <span class="toggle visible-xs-inline">(<a href="#toggleIntegrations" data-toggle="collapse"><%= @item["integrations_toggle_to_show_integrations"] %></a>)<br></span></li>
             <div class="collapse div-collapse" id="toggleIntegrations">
               <li><a href="<%= @item["langpath"] %>/integrations/"><%= @item["integrations_back_to_overview"] %></a></li>
-              <% if @item[:language] == 'en' %>
+              <% if @item["language"] == "en" %>
                 <% all_integrations = integration_items %>
               <% else %>
                 <% all_integrations = ja_integration_items %>
