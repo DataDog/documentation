@@ -412,7 +412,18 @@ span.question {
  */
 
 .navbar-brand img {
-  width: 100%;
+  width: 250px;
+  margin-top: 10px;
+  @media (min-width: 400px) {
+    width: 300px;
+    margin-top: 8px;
+  }
+  @media (min-width: 500px) {
+    width: 100%;
+    margin-top: 0;
+
+  }
+
 }
 
 
