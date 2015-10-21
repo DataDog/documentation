@@ -93,6 +93,38 @@ def get_local_hash(language)
     "footer_mistake_in_the_docs" => {
       "en" => "Mistake in the docs?", 
       "ja" => "ページに掲載した方法にて、お気軽にお声がけ下さい。",  
+    }, 
+    "integrations_other_integrations" => {
+      "en" => "Other Integrations", 
+      "ja" => "インテグレーション",  
+    }, 
+    "integrations_toggle_to_show_integrations" => {
+      "en" => "Toggle to show integrations", 
+      "ja" => "Toggle to show integrations",  
+    }, 
+    "integrations_back_to_overview" => {
+      "en" => "Back to Overview", 
+      "ja" => "インテックスへ戻る",  
+    }, 
+    "integrations_basic_level_integrations" => {
+      "en" => "basic level integration", 
+      "ja" => "basic level integration",  
+    }, 
+    "videos_return_to_all_video_groups" => {
+      "en" => "Return to All Video Groups.", 
+      "ja" => "Return to All Video Groups.",  
+    }, 
+    "examples_return_to_all_example_groups" => {
+      "en" => "Return to All Example Groups.", 
+      "ja" => "Return to All Example Groups.",  
+    }, 
+    "agentusage_agent_guides_by_platform" => {
+      "en" => "Agent Guides by Platform", 
+      "ja" => "Agent インストールガイド",  
+    }, 
+    "agentusage_from_source" => {
+      "en" => "From Source", 
+      "ja" => "Agent インストールガイド",  
     }
 
   }

@@ -162,10 +162,25 @@ ol.outline {
     }
   }
   &.sidebar {
-    margin-top: 90px;
+    margin-top: 20px;
     width: 170px;
     @media (min-width: $screen-md-min) {
       width: 220px;
+      margin-top: 90px;
+    }
+    @media (max-width: $screen-xs-max) {
+      width: auto;
+    }
+    #toggleIntegrations {
+      padding:0;
+      margin:0;
+
+      li {
+        padding: 5px 10px;
+        @media(max-width: $screen-xs-max) {
+          padding: 0;
+        }
+      }
     }
     .nav-header {
       margin-top: 0;
@@ -173,19 +188,82 @@ ol.outline {
       color: #fff;
       text-shadow: none;
       padding-left: 5px;
+      &:after {
+        content: "";
+      }
       &:first-child {
         border: 0;
         border-radius: 4px 4px 0 0;
       }
+      .toggle {
+        font-size: $font-size-small;
+      }
+      @media (max-width: $screen-xs-max) {
+        // display: block;
+        width: 100%;
+        background-color: white;
+        color: black;
+        padding-left: 0;
+        font-size: $font-size-h2;
+        line-height: 20px;
+        &:first-child {
+          border-radius: 0;
+        }
+      }
     }
+
     li {
       margin: 0;
+      
       border-right: 1px solid $lightpurple;
       border-left: 1px solid $lightpurple;
       // border-bottom: 1px solid $lightpurple;
       border-bottom: 1px solid $lighterpurple;
+      @media (max-width: $screen-xs-max) {
+        float: left;
+        width: auto;
+        border: none;
+
+        &:after {
+          content: " | ";
+          padding-right: 5px;
+        }
+        &:last-child:after {
+          content: "";
+        }
+        &>a {
+          padding:0;
+          display: inline;
+        }
+        &.selected_integration>a {
+          text-decoration: underline;
+          color: black;
+        }
+      }
     }
   }
+}
+
+.div-collapse {
+  border-top: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.div-collapse {
+  overflow-x: visible;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+ .div-collapse.collapse {
+   display: block !important;
+   height: auto !important;
+   overflow: visible !important;
+ }
+
 }
 
 .main {

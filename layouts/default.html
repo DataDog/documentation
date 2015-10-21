@@ -49,11 +49,21 @@ this layout provides a sidebar and main column.
           <% end %>
           <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
             <small>
+            <% if @item[:language] == 'en' %>
               tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+              tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/examples/%%tag%%/"}).sort().join(' | ') %>
+            <% end %>
             </small>
             <br><br>
           <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
-            <small>tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %></small>
+            <small>
+            <% if @item[:language] == 'en' %>
+            tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+            tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/videos/%%tag%%/"}).sort().join(' | ') %>
+            <% end %>
+            </small>
             <br><br>
             <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + @item[:wistiaid]) %>
             <a href="//fast.wistia.net/embed/iframe/<%= @item[:wistiaid] %>?popover=true" class="wistia-popover[height=720,playerColor=7b796a,width=1280]"><img src="<%= wistiavideo.thumbnail_medium %>?image_play_button=true&image_play_button_color=7b796ae0&image_crop_resized=552x311" alt="" /></a>
@@ -62,9 +72,9 @@ this layout provides a sidebar and main column.
           <%= yield %>
 
           <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
-             <a href="<%= @item["langpath"] %>/examples/">Return to All Example Groups.</a>
+             <a href="<%= @item["langpath"] %>/examples/"><%= @item["examples_return_to_all_example_groups"] %></a>
           <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
-            <a href="<%= @item["langpath"] %>/examples/">Return to All Video Groups.</a>
+            <a href="<%= @item["langpath"] %>/examples/"><%= @item["videos_return_to_all_video_groups"] %></a>
           <% end %>
         </div>
       </div>
