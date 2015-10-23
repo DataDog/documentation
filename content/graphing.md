@@ -43,11 +43,11 @@ The Metrics Explorer will allow you to play around with different graph settings
 
 ### 2) Select your visualization
 
-Once you have a metric in mind to display in your graph, select your visualization. As of October 2015 there are six choices for visualizations on timeboards and fifteen choices for visualizations on screenboards.
+Once you have a metric in mind to display in your graph, select your visualization. 
 
 #### Timeseries
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }.
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
   ![Timeseries](/static/images/references-graphing-timeseries-example.png)
@@ -55,7 +55,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 
 #### Heatmap
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
   ![Heatmap](/static/images/references-graphing-heatmap-example.png)
@@ -63,7 +63,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 
 #### Distribution
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }.
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
   ![Distribution](/static/images/references-graphing-distribution-example.png)
@@ -72,7 +72,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 
 #### Toplist
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }.
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards. 
 
 <div class="collapse" id="collapseTopList" markdown="1">
   ![TopList](/static/images/references-graphing-toplist-example.png)
