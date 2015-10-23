@@ -32,9 +32,18 @@ When you first open the graph editor window, you will be on the **Edit** tab. He
 
 ![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
 
-### 1) Select your visualization
+Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 
-The first step is to select you visualization. As of October 2015 there are six choices for visualizations on timeboards and fifteen choices for visualizations on screenboards.
+### 1) Choose the Metric to graph
+
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary). 
+
+The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric. 
+
+
+### 2) Select your visualization
+
+Once you have a metric in mind to display in your graph, select your visualization. As of October 2015 there are six choices for visualizations on timeboards and fifteen choices for visualizations on screenboards.
 
 #### Timeseries
 
@@ -78,8 +87,6 @@ The Change graph will show you the change in a value over the time period chosen
   ![Changegraph](/static/images/references-graphing-change-example.png)
 </div>
 
-
-
 #### Hostmap
 
 The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, [click here](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
@@ -89,17 +96,53 @@ The Hostmap will graph any metric for any subset of hosts on the same hostmap vi
 </div>
 
 
-### 2) Choose the Metric to graph
-
 ### 3) Filter and Aggregate to show what you need
+
+#### Filter
+
+Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
+
+#### Aggregation Method
+
+Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum. 
+
+#### Aggregation Groups
+
+After the aggregation method you can determine what constitutes a line or grouping in a graph. If you choose host, then you will have a line (in the case of line graphs) for each host. If you choose role, then there is a line for every role. Then that line will be made up of metrics from all the hosts in that role, aggregated using the method you chose above.
+
+### 4) Rollup to aggregate over time
+
+Regardless of the options chosen above, there will always be some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you will need 14,400 points to display everything. Each graph we display will have about 300 points shown at any given time. 
+
+In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
+
+To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds. 
+
+To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this: 
+
+![rollup example](/static/images/references-graphing-rollup-example.png)
+
+When switching to the JSON view, the query will look like this:
+
+    "q": "avg:system.disk.free{*}.rollup(avg, 60)"
+
+For more about using the JSON view, scroll to the bottom and click the Learn about the JSON tab link.
 
 ### 4) Apply more advanced functions
 
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, fourier transforms, and more. For a list of available functions, scroll to the bottom, click the Learn about the JSON tab link and find the table of functions.
+
 ### 5) Overlay events for additional context
+
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```role:web```.
 
 ### 6) Create a title
 
+If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value. 
+
 ### 7) Save
+
+The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs. 
 
 
 
