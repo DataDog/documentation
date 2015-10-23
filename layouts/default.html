@@ -27,7 +27,7 @@ this layout provides a sidebar and main column.
                 <% if i[:header] %>
                   <li class="nav-header"><%= i[:header] %></li>
                 <% else %>
-                  <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
+                  <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
                 <% end %>
               <% end %>
             <% end %>
