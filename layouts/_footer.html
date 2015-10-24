@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row" id="footer">
-    <div class="span12">Need some help? <a href="/help/">Get in touch.</a> &bull; Mistake in the docs? <a href="https://github.com/DataDog/documentation/issues">Let us know.</a></div>
-    <div class="span12"><a href="/ja">日本語ドキュメントへのリンク。</a></div>
-    <div class="span12">&copy; Datadog, Inc. All rights reserved.</div>
+    <div class=".col-md-12"><%= @item["footer_need_some_help"]%> <a href="<%= @item["langpath"] %>/help/"><%= @item["footer_get_in_touch"] %></a> &bull; <%= @item["footer_mistake_in_the_docs"]%> <a href="https://github.com/DataDog/documentation/issues"><%= @item["footer_let_us_know"]%></a></div>
+    <div class=".col-md-12"><a href="/<%= @item["otherlang"] %>"><%= @item["footer_switch_language"] %></a></div>
+    <div class=".col-md-12">&copy; Datadog, Inc. All rights reserved.</div>
   </div>
 </div>
 

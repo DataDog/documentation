@@ -1,28 +1,30 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.7)
+    addressable (2.3.8)
     adsf (1.2.0)
       rack (>= 1.0.0)
+    autoprefixer-rails (6.0.3)
+      execjs
+      json
     builder (3.2.2)
-    celluloid (0.16.0)
-      timers (~> 4.0.0)
     coderay (1.1.0)
     colored (1.2)
-    cri (2.6.1)
+    cri (2.7.0)
       colored (~> 1.2)
     digest (0.0.1)
-    dogapi (1.18.0)
+    dogapi (1.20.0)
       json (>= 1.5.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    eventmachine (1.0.7)
+    eventmachine (1.0.8)
+    execjs (2.6.0)
     ffi (1.9.6)
     formatador (0.2.5)
-    guard (2.12.4)
+    guard (2.13.0)
       formatador (>= 0.2.4)
-      listen (~> 2.7)
+      listen (~> 3.0.3)
       lumberjack (~> 1.0)
       nenv (~> 0.1)
       notiffany (~> 0.0)
@@ -45,24 +47,22 @@ GEM
     guard-rake (1.0.0)
       guard
       rake
-    hitimes (1.2.2)
-    htmlentities (4.3.3)
+    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     jsmin (1.0.1)
     json (1.8.2)
     kramdown (1.5.0)
     libnotify (0.9.1)
       ffi (>= 1.0.11)
-    listen (2.8.5)
-      celluloid (>= 0.15.2)
+    listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.9)
     method_source (0.8.2)
     mini_portile (0.6.2)
-    multi_json (1.10.1)
-    nanoc (3.7.5)
-      cri (~> 2.3)
+    multi_json (1.11.2)
+    nanoc (3.8.0)
+      cri (~> 2.7)
     nanoc-toolbox (0.2.1)
       jsmin (~> 1.0)
       nanoc (~> 3.7)
@@ -70,32 +70,35 @@ GEM
     nenv (0.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.6)
+    notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oj (2.11.5)
-    pry (0.10.1)
+    oj (2.12.14)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
-    rack-contrib (1.2.0)
-      rack (>= 0.9.1)
+    rack-contrib (1.4.0)
+      rack (>= 1.4)
     rack-livereload (0.3.15)
       rack
     rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    rouge (1.8.0)
+    rouge (1.10.1)
+    sass (3.4.19)
+    sassc (1.7.1)
+      bundler
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
     shellany (0.0.1)
     slop (3.6.0)
     spoon (0.0.4)
       ffi
     thor (0.19.1)
-    timers (4.0.1)
-      hitimes
-    video_info (2.4.0)
+    video_info (2.4.2)
       addressable
       htmlentities
       multi_json
@@ -108,9 +111,10 @@ PLATFORMS
 
 DEPENDENCIES
   adsf
+  autoprefixer-rails
   builder
   digest
-  dogapi (~> 1.18.0)
+  dogapi (~> 1.20.0)
   guard-livereload
   guard-nanoc
   guard-rack
@@ -124,5 +128,9 @@ DEPENDENCIES
   rack-livereload
   rake
   rouge
+  sassc
   video_info
   w3c_validators
+
+BUNDLED WITH
+   1.10.6

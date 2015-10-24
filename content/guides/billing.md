@@ -36,9 +36,9 @@ sidebar:
     - text: DogStatsD
       href: "/guides/dogstatsd/"
 ---
-#### Welcome to Datadog! We occasionally receive questions regarding the specifics
-of our pricing; the basic plans and the most frequently seen questions can be
-found below.
+#### Welcome to Datadog! 
+
+We occasionally receive questions regarding the specifics of our pricing; the basic plans and the most frequently seen questions can be found below.
 
 #### <u>Basic Plan</u>
 
@@ -49,12 +49,12 @@ There are three plans within Datadog:
     good news is that switching from the Free plan to Pro will not affect your
     setup, so anything you've begun monitoring would not be affected by that status
     change.
-1. **Pro** is for 6-499 hosts and comes with 1 year of data retention.
+1. **Pro** is for 6-499 hosts and comes with 13 months of data retention.
     Pro includes metric alerts and email support.
 1. **Enterprise** is for
     500+ hosts or any number of hosts but needing custom adjustments to what is
     offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
-    1. Data retention requirements and number of custom metrics (base plan includes 1 year retention,
+    1. Data retention requirements and number of custom metrics (base plan includes 13 months retention,
 and 100 custom metrics)
     1. Size of your environment in servers
     1. Payment terms (month to month or annual prepaid)
@@ -68,8 +68,9 @@ in your application stack. To clarify, integrations that can potentially emit
 an unlimited number of metrics to us can also count as custom metrics (e.g:
 JMX / WMI / Nagios / Cacti).
 
+For all plans, Docker Containers are supported and 10 free containers per host per hour will be provided.  Additional containers will be billed at $0.002 per container per hour.  In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
 
-Pro and Enterprise data retention is for one year at full resolution (maximum
+Pro and Enterprise data retention is for 13 months at full resolution (maximum
 is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
 sales@datadoghq.com</a>.
 
@@ -84,16 +85,16 @@ This is per active host in Datadog, whether or not it's running the agent.
 We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
 
-> You tell us how many hosts you will run each month and we will bill you for that baseline number of
-> hosts at $15 per host (you can change this number at the beginning of each
-> month if you like). Then for any hosts beyond the committed number previously
-> determined, our billing system will charge you $0.03 per host per hour. This
-> works out to be much less expensive for extra hosts that may come up for a
-> short period, but a little bit more than monthly rates if you ran on an hourly
-> rate all the time (~$23/host/month).  The metering samples how many hosts are
-> reporting data once every hour, thus the minimum increment for an hourly server
-> is one hour. If that number exceeds your monthly commit, we just charge overage
-> for the excess hosts.
+You tell us how many hosts you will run each month and we will bill you for that baseline number of
+hosts at $15 per host (you can change this number at the beginning of each
+month if you like). Then for any hosts beyond the committed number previously
+determined, our billing system will charge you $0.03 per host per hour. This
+works out to be much less expensive for extra hosts that may come up for a
+short period, but a little bit more than monthly rates if you ran on an hourly
+rate all the time (~$23/host/month).  The metering samples how many hosts are
+reporting data once every hour, thus the minimum increment for an hourly server
+is one hour. If that number exceeds your monthly commit, we just charge overage
+for the excess hosts.
 
 ##### Do non-reporting or inactive hosts count?
 
@@ -125,11 +126,6 @@ select 'limit metric collection for all accounts' in the <a href="https://app.da
 
 
 The base pricing is $15 per virtual machine per month. See above for more general information.
-
-
-##### How will Docker and other container integrations impact my monthly billing?
-
-The base pricing of $15 per host includes 10 containers. Additional containers cost $1 per container.
 
 
 ##### How do I see what I'll get charged for this current month?

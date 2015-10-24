@@ -122,11 +122,11 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 
 
 
-#### 4. Add a user script, and launch EC2 instance
+#### 4. Add a user script, and launch EC2 instance (for non-CoreOS users)
 
 * From the EC2 console (not the ECS console) launch a new instance with a ECS-optimized image (detailed launch instructions [here](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)).
-* When you get to the Configure Instance step:
-    *  Select the IAM role you created in step 2
+* When you get to the Configure Instance Details step:
+    *  Select the IAM role you created at step 2
     *  Paste the script below into User Data under Advanced Details, replacing *"cluster_name"* with name of the cluster you created in step 1.
 
 ~~~~~~~~
@@ -152,6 +152,59 @@ This user script above will:
 
 1. start the task defined in step 2 with the right parameters
 2. add a few lines to `/etc/rc.local` so that the rebooted instance starts the task
+
+#### 5. Add a cloud-config User Script, and launch EC2 instance (fore CoreOS users)
+
+* From the EC2 console (not the ECS console) launch a new CoreOS instance that will join an ECS cluster (instructions for a simple CoreOS ECS instance [here](https://coreos.com/os/docs/latest/booting-on-ecs.html)).
+* When you get to the Configure Instance Details step:
+    * Select the IAM role you created at step 2
+    * Paste the following block in User Data under Advanced Details, replace `CLUSTER_NAME` and `YOUR_API_KEY` with the ECS cluster that instance will join and your Datadog API key. This block declares two units with cloud-config, one for the ecs-agent container, used by Amazon ECS to administrate the ECS instance, and one for the dd-agent container, used by Datadog to collect metrics about the system and the tasks running on this ECS instance. Of course it can be modified to include your own tasks as well.
+
+~~~~~~~~
+#cloud-config
+
+coreos:
+  units:
+    - name: amazon-ecs-agent.service
+      command: start
+      runtime: true
+      content: |
+        [Unit]
+        Description=Amazon ECS Agent
+        After=docker.service
+        Requires=docker.service
+        Requires=network-online.target
+        After=network-online.target
+
+        [Service]
+        Environment=ECS_CLUSTER=CLUSTER_NAME
+        Environment=ECS_LOGLEVEL=warn
+        Environment=ECS_CHECKPOINT=true
+        ExecStartPre=-/usr/bin/docker kill ecs-agent
+        ExecStartPre=-/usr/bin/docker rm ecs-agent
+        ExecStartPre=/usr/bin/docker pull amazon/amazon-ecs-agent
+        ExecStart=/usr/bin/docker run --name ecs-agent --env=ECS_CLUSTER=${ECS_CLUSTER} --env=ECS_LOGLEVEL=${ECS_LOGLEVEL} --env=ECS_CHECKPOINT=${ECS_CHECKPOINT} --publish=127.0.0.1:51678:51678 --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/lib/aws/ecs:/data amazon/amazon-ecs-agent
+        ExecStop=/usr/bin/docker stop ecs-agent
+    - name: dd-agent.service
+      command: start
+      runtime: true
+      content: |
+        [Unit]
+        Description=Datadog Agent
+        After=amazon-ecs-agent.service
+        After=docker.service
+        After=network-online.target
+        Requires=amazon-ecs-agent.service
+        Requires=docker.service
+        Requires=network-online.target
+
+        [Service]
+        Environment=API_KEY=YOUR_API_KEY
+        Environment=TAGS=simple-tag-0
+        ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent:ecs
+        ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:ecs
+        ExecStop=/usr/bin/docker stop dd-agent
+~~~~~~~~
 
 #### That's all!
 
