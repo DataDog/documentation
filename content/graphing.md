@@ -1,6 +1,7 @@
 ---
 title: Graphing Primer
 kind: documentation
+has_snippets: True
 sidebar:
   nav:
     - header: Graphing Primer
@@ -133,107 +134,10 @@ For more about using the JSON view, scroll to the bottom and click the Learn abo
 
 ### 4) Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, fourier transforms, and more. For a list of available functions, scroll to the bottom, click the Learn about the JSON tab link and find the table of functions.
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, fourier transforms, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
 
-### 5) Overlay events for additional context
-
-You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```role:web```.
-
-### 6) Create a title
-
-If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value. 
-
-### 7) Save
-
-The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs. 
-
-
-
-
-<script type="text/javascript">
-jQuery(function(){
-  $('#collapseJSON').on('show.bs.collapse', function(){
-    $('#collapseJSONOpen').hide();
-  })
-  $('#collapseJSON').on('hidden.bs.collapse', function(){
-    $('#collapseJSONOpen').show();
-  })
-})
-</script>
-
-
-[Learn more about the JSON tab](#collapseJSON){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseJSON" id="collapseJSONOpen"}
-
-
-<div class="collapse" id="collapseJSON" markdown="1">
-
-## Graphing with the JSON editor
-
-
-[Close JSON tab details](#collapseJSON){: role="button" data-toggle="collapse" aria-controls="collapseJSON" id="collapseJSONClose"}
-
-![JSON Editor](/static/images/references-graphing-jsoneditor.png)
-
-### Grammar
-{: #grammar}
-
-
-The graph definition language is well-formed JSON and is structured in four parts:
-
-1. Requests
-2. Events
-3. Visualization
-4. Y Axis
-
-Here is how they fit together in a JSON dictionary:
-
-    {
-      "requests": [
-        {
-          "q": "metric{scope}"
-        }
-      ],
-      "events": [
-        {
-          "q": "search query"
-        }
-      ], 
-      "viz": "visualization type", 
-      "yaxis": {
-        "yaxisoptionkey": "yaxisoptionvalue"
-      }
-    }
-
-In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
-
-1. "requests" *
-2. "events"
-3. "viz" *
-4. "yaxis"
-
-\* *only requests and viz are required.*
-
-## Requests
-
-The general format for a series is:
-
-    "requests": [
-        {
-          "q": "function(aggregation method:metric{scope} [by {group}])"
-        }
-    ]
-
-The `function` and `group` are optional.
-
-A Series can be further combined together via binary operators (+, -, /, *):
-
-    metric{scope} [by {group}] operator metric{scope} [by {group}]
-
-#### Functions
-
-You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
-
-
+<div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
+<!-- If you make changes here, change it to the table further down as well -->
 <table class="table">
   <tr>
     <th>Function</th>
@@ -250,7 +154,7 @@ You can apply functions to the result of each query. <a href="/examples/graphing
     <td>time delta between points</td>
   </tr>
 
-  <tr>
+  <tr> 
     <td>diff()</td>
     <td>value delta between points</td>
   </tr>
@@ -407,6 +311,282 @@ The <code>top()</code> method also has the following convenience functions, all 
     <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
   </dl>
 </div>
+
+</div>
+
+### 5) Overlay events for additional context
+
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```role:web```.
+
+
+### 6) Create a title
+
+If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value. 
+
+### 7) Save
+
+The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs. 
+
+
+<script type="text/javascript">
+jQuery(function(){
+  $('#collapseJSON').on('show.bs.collapse', function(){
+    $('#collapseJSONOpen').hide();
+  })
+  $('#collapseJSON').on('hidden.bs.collapse', function(){
+    $('#collapseJSONOpen').show();
+  })
+})
+</script>
+
+
+[Learn more about the JSON tab](#collapseJSON){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseJSON" id="collapseJSONOpen"}
+
+
+<div class="collapse" id="collapseJSON" markdown="1">
+
+## Graphing with the JSON editor
+
+
+[Close JSON tab details](#collapseJSON){: role="button" data-toggle="collapse" aria-controls="collapseJSON" id="collapseJSONClose"}
+
+![JSON Editor](/static/images/references-graphing-jsoneditor.png)
+
+### Grammar
+{: #grammar}
+
+
+The graph definition language is well-formed JSON and is structured in four parts:
+
+1. Requests
+2. Events
+3. Visualization
+4. Y Axis
+
+Here is how they fit together in a JSON dictionary:
+
+    {
+      "requests": [
+        {
+          "q": "metric{scope}"
+        }
+      ],
+      "events": [
+        {
+          "q": "search query"
+        }
+      ], 
+      "viz": "visualization type", 
+      "yaxis": {
+        "yaxisoptionkey": "yaxisoptionvalue"
+      }
+    }
+
+In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
+
+1. "requests" *
+2. "events"
+3. "viz" *
+4. "yaxis"
+
+\* *only requests and viz are required.*
+
+## Requests
+
+The general format for a series is:
+
+    "requests": [
+        {
+          "q": "function(aggregation method:metric{scope} [by {group}])"
+        }
+    ]
+
+The `function` and `group` are optional.
+
+A Series can be further combined together via binary operators (+, -, /, *):
+
+    metric{scope} [by {group}] operator metric{scope} [by {group}]
+
+#### Functions
+
+You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
+
+
+<table class="table">
+  <tr>
+    <th>Function</th>
+    <th>Description</th>
+  </tr>
+
+ <tr>
+   <td>cumsum()</td>
+   <td>cumulative sum over visible time window</td>
+ </tr>
+
+  <tr>
+    <td>dt()</td>
+    <td>time delta between points</td>
+  </tr>
+
+  <tr> 
+    <td>diff()</td>
+    <td>value delta between points</td>
+  </tr>
+
+  <tr>
+    <td>derivative()</td>
+    <td>1st order derivative, diff / dt</td>
+  </tr>
+
+  <tr>
+    <td>rate()</td>
+    <td>1st order derivate that skips non-monotonically increasing values</td>
+  </tr>
+
+  <tr>
+    <td>derived()</td>
+    <td>synonym for derivative</td>
+  </tr>
+
+  <tr>
+    <td>per_second()</td>
+    <td>synonym for rate</td>
+  </tr>
+
+  <tr>
+    <td>per_minute()</td>
+    <td>60 * rate</td>
+  </tr>
+
+  <tr>
+    <td>per_hour()</td>
+    <td>3600 * rate</td>
+  </tr>
+
+  <tr>
+    <td>ewma_3()</td>
+    <td>Exponentially Weighted Moving Average with a span of 3</td>
+  </tr>
+
+  <tr>
+    <td>ewma_5()</td>
+    <td>EWMA with a span of 5</td>
+  </tr>
+
+  <tr>
+    <td>ewma_10()</td>
+    <td>EWMA with a span of 10</td>
+  </tr>
+
+  <tr>
+    <td>ewma_20()</td>
+    <td>EWMA with a span of 20</td>
+  </tr>
+
+  <tr>
+    <td>median()</td>
+    <td>Median filter, useful for reducing noise</td>
+  </tr>
+
+  <tr>
+    <td>abs()</td>
+    <td>Absolute value</td>
+  </tr>
+
+
+  <tr>
+    <td>log10()</td>
+    <td>Base-10 logarithm</td>
+  </tr>
+
+  <tr>
+    <td>log2()</td>
+    <td>Base-2 logarithm</td>
+  </tr>
+
+  <tr>
+    <td>hour_before()</td>
+    <td>Metric values from one hour ago</td>
+  </tr>
+
+  <tr>
+    <td>day_before()</td>
+    <td>Metric values from one day ago</td>
+  </tr>
+
+  <tr>
+    <td>week_before()</td>
+    <td>Metric values from one week ago</td>
+  </tr>
+
+  <tr>
+    <td>month_before()</td>
+    <td>Metric values from one month ago</td>
+  </tr>
+
+  <tr>
+    <td>top()</td>
+    <td>Select the top series responsive to a given query, according to some ranking method.  Takes four parameters:
+
+      <ul>
+        <li>a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
+        <li>the number of series to be displayed, as an integer.</li>
+        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'last'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
+        <li>either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>top_offset()</td>
+    <td>Similar to <code>top()</code>, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.</td>
+  </tr>
+
+</table>
+
+The <code>top()</code> method also has the following convenience functions, all of which take a single series list as input:
+
+<div style="margin-left: 30px">
+  <dl>
+    <dt>top5, top10, top15, top20</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
+
+    <dt>top5_max, top10_max, top15_max, top20_max</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
+
+    <dt>top5_min, top10_min, top15_min, top20_min</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
+
+    <dt>top5_last, top10_last, top15_last, top20_last</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
+
+    <dt>top5_area, top10_area, top15_area, top20_area</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
+
+    <dt>top5_l2norm, top10_l2norm, top15_l2norm, top20_l2norm</dt>
+    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
+
+    <dt>bottom5, bottom10, bottom15, bottom20</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
+
+    <dt>bottom5_max, bottom10_max, bottom15_max, bottom20_max</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
+
+    <dt>bottom5_min, bottom10_min, bottom15_min, bottom20_min</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
+
+    <dt>bottom5_last, bottom10_last, bottom15_last, bottom20_last</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
+
+    <dt>bottom5_area, bottom10_area, bottom15_area, bottom20_area</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
+
+    <dt>bottom5_l2norm, bottom10_l2norm, bottom15_l2norm, bottom20_l2norm</dt>
+    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
+  </dl>
+</div>
+
+
 
 There are also a few functions you can append to a query which we recommend for expert users only.
 <p>
