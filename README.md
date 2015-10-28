@@ -60,6 +60,8 @@ Create a markdown file under content/integratons. Add the following front matter
 
 If you are writing a lot about the integration, change doclevel to complete or just remove the whole line. Now write the doc. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
+Every integration should have at least four sections. First include an overview. Second is the Installation process. Third include troubleshooting steps. Fourth should be when you last verified and under what conditions it worked. If someone has already included this, add yours above the previous one so we can see some sort of history. 
+
 ## How to add a new Guide
 
 Create a markdown file under content/guides. Add the following front matter at the top of the file:
