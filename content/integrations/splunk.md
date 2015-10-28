@@ -47,6 +47,22 @@ If you see an error code on each run of runshellscript in splunkd.log, try addin
 
 If the trace file has something like the usage help for the ```dog``` command followed by ```dog: error: unrecognized arguments: OR failed OR severe```, you probably will need to add single quotes around $SPLUNK_ARG_3 on the last line. 
 
+If the trace file include a Traceback that ends with ```pkg_resources.DistributionNotFound``` or something similar, add 3 unsets to the top of your dog-splunk.sh script to make it look like this:
+
+    #!shell
+    #!/bin/bash
+    unset PYTHONHOME
+    unset PYTHONPATH
+    unset LD_LIBRARY_PATH
+    export API_KEY=YOURAPIKEYHERE
+    export APP_KEY=YOURAPPKEYHERE
+    dog --api-key $API_KEY --application-key $APP_KEY event post \
+    "Found $SPLUNK_ARG_1 events in splunk" \
+    "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5," \
+    " from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
+     --aggregation_key $SPLUNK_ARG_3 --type splunk
+
+
 
 ### Customizing
 
