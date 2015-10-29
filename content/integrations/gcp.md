@@ -2,7 +2,6 @@
 title: Datadog-Google Cloud Platform Integration
 integration_title: Google Cloud Platform
 kind: integration
-doclevel: basic
 ---
 
 ### Overview
