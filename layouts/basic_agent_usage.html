@@ -17,21 +17,28 @@ to the basic Agent usage guide of each platform
       <div class="row">
 
         <!-- SIDEBAR -->
-        <div class="span3">
+        <div class="col-md-3 col-sm-3 hidden-xs hidden-print">
         <ul class="nav nav-tabs nav-stacked sidebar">
-
+          <% if @item["language"] == "en" %>
+            <li class="nav-header">Documentation Search</li> 
+            <li>
+              <form action="/search/">
+                <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+              </form>
+            </li>
+            <% end %>
           <!-- AGENT PLATFORM SELECTION -->
-          <li class="nav-header">Agent Guides by Platform</li>
-          <li><a href='/guides/basic_agent_usage/amazonlinux/'>Amazon Linux</a></li>
-          <li><a href='/guides/basic_agent_usage/centos/'>CentOS</a></li>
-          <li><a href='/guides/basic_agent_usage/deb/'>Debian</a></li>
-          <li><a href='/guides/basic_agent_usage/fedora/'>Fedora</a></li>
-          <li><a href='/guides/basic_agent_usage/osx/'>Mac OS X</a></li>
-          <li><a href='/guides/basic_agent_usage/redhat/'>Red Hat</a></li>
-          <li><a href='/guides/basic_agent_usage/smartos/'>SmartOS</a></li>
-          <li><a href='/guides/basic_agent_usage/ubuntu/'>Ubuntu</a></li>
-          <li><a href='/guides/basic_agent_usage/windows/'>Windows</a></li>
-          <li><a href='/guides/basic_agent_usage/source/'>From Source</a></li>
+          <li class="nav-header"><%= @item["agentusage_agent_guides_by_platform"] %></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/amazonlinux/'>Amazon Linux</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/centos/'>CentOS</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/deb/'>Debian</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/fedora/'>Fedora</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/osx/'>Mac OS X</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/redhat/'>Red Hat</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/smartos/'>SmartOS</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/ubuntu/'>Ubuntu</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/windows/'>Windows</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/source/'><%= @item["agentusage_from_source"] %></a></li>
 
           <!-- PAGE-SPECIFIC LINKS -->
           <% if @item[:sidebar] && @item[:sidebar][:nav] %>
@@ -48,7 +55,7 @@ to the basic Agent usage guide of each platform
         </div>
 
         <!-- MAIN -->
-        <div class="span8 main">
+        <div class="col-sm-9 main col-xs-12">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
           <%= yield %>

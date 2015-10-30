@@ -23,7 +23,7 @@ sidebar:
 ---
 
 ### 1. Get the Datadog [Agent][1] running!
-{: .big_number.alert.alert-warning}
+{: .big_number.alert.alert-warning} 
 
 ### 2. Dive into [Metrics][2]!
 {: .big_number.alert.alert-success}

@@ -10,47 +10,55 @@ this layout provides a sidebar and main column.
     <div class="container">
       <div class="row">
         <!-- SIDEBAR -->
-        <div class="span3" id="sidebarcolumn">
+        <div class="col-sm-3 col-xs-12" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
-            <li class="nav-header">Documentation Search</li>
-            <li>
+            <% if @item["language"] == "en" %>
+            <li class="nav-header hidden-xs">Documentation Search</li> 
+            <li class="hidden-xs">
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
               </form>
             </li>
-
+            <% end %>
             <% if @item[:sidebar] && @item[:sidebar][:nav] %>
               <% @item[:sidebar][:nav].each do |i| %>
                 <% if i[:header] %>
-                  <li class="nav-header"><%= i[:header] %></li>
+                  <li class="nav-header hidden-xs"><%= i[:header] %></li>
                 <% else %>
-                  <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
+                  <li class="hidden-xs"><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
                 <% end %>
               <% end %>
             <% end %>
 
-            <li class="nav-header auto">Other Integrations</li>
-              <li><a href="/integrations/">Back to Overview</a></li>
-              <% integration_items.each do |i| %>
+            <li class="nav-header auto"><%= @item["integrations_other_integrations"] %> <span class="toggle visible-xs-inline">(<a href="#toggleIntegrations" data-toggle="collapse"><%= @item["integrations_toggle_to_show_integrations"] %></a>)<br></span></li>
+            <div class="collapse div-collapse" id="toggleIntegrations">
+              <li><a href="<%= @item["langpath"] %>/integrations/"><%= @item["integrations_back_to_overview"] %></a></li>
+              <% if @item["language"] == "en" %>
+                <% all_integrations = integration_items %>
+              <% else %>
+                <% all_integrations = ja_integration_items %>
+              <% end %>
+              <% all_integrations.each do |i| %>
               <% basic="" %>
               <% if i[:doclevel] && i[:doclevel] == 'basic' %>
                 <% basic = " *" %>
               <% end %>
               <% if i[:title] == @item[:title] %>
-                <li>
+                <li class='selected_integration'>
                   <%= link_to '> ' + i[:integration_title], '#' %>
                 </li>
               <% else %>
                 <li><%= link_to i[:integration_title] + basic,i.path %></li>
               <% end %>
                 <% end %>
-                <li><i>* basic level documentation</i></li>
+                <li><i>* <%= @item["integrations_basic_level_integration"] %></i></li>
+                </div>
           </ul>
         &nbsp;
         </div>
 
         <!-- MAIN -->
-        <div class="span9 main">
+        <div class="col-sm-9 col-xs-12 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
             <%= yield %>

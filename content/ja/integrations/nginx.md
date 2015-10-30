@@ -76,11 +76,12 @@ Datadog AgentへNginxインテグレーションを追加するには、`/etc/dd
 設定が完了すると、次のメトリクスを取得出来るようになります:
 
 * **nginx.net.connections**
+* **nginx.net.conn_dropped_per_s**
+* **nginx.net.conn_opened_per_s**
 * **nginx.net.reading**
 * **nginx.net.request_per_s**
 * **nginx.net.waiting**
 * **nginx.net.writing**
-
 
 <!-- #### NGINX Plus -->
 
@@ -89,3 +90,55 @@ Datadog AgentへNginxインテグレーションを追加するには、`/etc/dd
 <!-- If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python) when the instance target is an http status module URL. -->
 
 NGINX Plusを採用している場合、[http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data)を経由し、更に多くのメトリクスを収集することが出来ます。Datadog Agentは、このモジュールにも対応し、[リンク先に示すようなメトリクス](https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python)を取得出来るようになっています。
+
+設定が完了すると、次のメトリクスを取得出来るようになります:
+
+* **nginx.connections.accepted**
+* **nginx.connections.active**
+* **nginx.connections.dropped**
+* **nginx.connections.idle**
+* **nginx.generation**
+* **nginx.load_timestamp**
+* **nginx.pid**
+* **nginx.processes.respawned**
+* **nginx.requests.current**
+* **nginx.requests.total**
+* **nginx.server_zone.discarded**
+* **nginx.server_zone.processing**
+* **nginx.server_zone.received**
+* **nginx.server_zone.requests**
+* **nginx.server_zone.responses.1xx**
+* **nginx.server_zone.responses.2xx**
+* **nginx.server_zone.responses.3xx**
+* **nginx.server_zone.responses.4xx**
+* **nginx.server_zone.responses.5xx**
+* **nginx.server_zone.responses.total**
+* **nginx.server_zone.sent**
+* **nginx.ssl.handshakes**
+* **nginx.ssl.handshakes_failed**
+* **nginx.ssl.session_reuses**
+* **nginx.timestamp**
+* **nginx.upstream.keepalive**
+* **nginx.upstream.peers.active**
+* **nginx.upstream.peers.backup**
+* **nginx.upstream.peers.downstart**
+* **nginx.upstream.peers.downtime**
+* **nginx.upstream.peers.fails**
+* **nginx.upstream.peers.health_checks.checks**
+* **nginx.upstream.peers.health_checks.fails**
+* **nginx.upstream.peers.health_checks.last_passed**
+* **nginx.upstream.peers.health_checks.unhealthy**
+* **nginx.upstream.peers.id**
+* **nginx.upstream.peers.received**
+* **nginx.upstream.peers.requests**
+* **nginx.upstream.peers.responses.1xx**
+* **nginx.upstream.peers.responses.2xx**
+* **nginx.upstream.peers.responses.3xx**
+* **nginx.upstream.peers.responses.4xx**
+* **nginx.upstream.peers.responses.5xx**
+* **nginx.upstream.peers.responses.total**
+* **nginx.upstream.peers.selected**
+* **nginx.upstream.peers.sent**
+* **nginx.upstream.peers.unavail**
+* **nginx.upstream.peers.weight**
+* **nginx.version**

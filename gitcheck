@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+my $commit = $ARGV[0];
+
+$commit = 'HEAD' unless $commit;
+
+# git a list of access times and files
+my @logbook = `git whatchanged --pretty=%ai $commit`;
+
+my %seen;
+my $timestamp;
+my $filename;
+foreach (@logbook) {
+    next if /^$/; # skip emtpy lines
+    if (/^:/) {
+        next unless /content/;
+        next if /static/;
+        chomp ($filename = (split /\t/)[1]);
+        next if $seen{$filename};
+        print "$timestamp $filename\n";
+        $seen{$filename} = 1;
+    } else {
+        chomp ($timestamp = $_);
+    }
+}
