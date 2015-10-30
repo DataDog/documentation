@@ -458,6 +458,24 @@ kind: documentation
               in the <code>options</code>). e.g. if you want to notify on 1
               critical, 3 ok and 2 warn statuses count should be 3.</li>
             </ul>
+
+            <h5>Event Alert Query</h5>
+            <code>events('sources:nagios status:error,warning priority:normal tags: "String query"').rollup("count").last("1h")"</code>
+            <ul class="arguments">
+              <li>
+                <ul class="arguments">
+                  <li><code>string_query</code> free text query to match against event title and text.</li>
+                  <li><code>sources</code> event sources (comma-separated).</li>
+                  <li><code>status</code> event statuses (comma-separated). Valid options: error, warn, and info.</li>
+                  <li><code>priority</code> event priorities (comma-separated). Valid options: low, normal, all.</li>
+                  <li><code>host</code> event reporting host (comma-separated).</li>
+                  <li><code>tags</code> event tags (comma-separated).</li>
+                  <li><code>excluded_tags</code> exluded event tags (comma-separated).</li>
+                </ul>
+              </li>
+              <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
+              <li><code>last</code> the timeframe to roll up the counts. Supported timeframes: s, m, h and d</li>
+            </ul>
           </li>
           <%= argument 'name', "The name of the alert.",
               :default => "dynamic, based on query" %>
