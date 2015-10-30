@@ -109,7 +109,8 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31]. 
   * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33]. 
-  * [godspeed][63] - a dogstatsd client written in Go by [PagerDuty][64]
+  * [godspeed][63] - a dogstatsd client written in Go by [PagerDuty][64].
+  * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
 
 #### Python
 {: #community-python}
@@ -243,3 +244,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [66]: https://synrc.com/
    [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
    [68]: https://github.com/alq666/rdog
+   [69]: https://github.com/rs/xstats
+   [70]: https://github.com/rs
