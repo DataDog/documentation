@@ -16,7 +16,28 @@
 
 require './lib/rule_helper'
 
+
 preprocess do
+
+  # def rchomp(sep = $/)
+  #   self.start_with?(sep) ? self[sep.size..-1] : self
+  # end
+
+  # def snippetizer(item)
+  #   if item["has_snippets"] == "True"
+  #     doc = Nokogiri::HTML.fragment(item.content)
+  #     doc.css(".snippetizer").each do |snippet|
+  #       print snippet
+  # #     # id = @item.identifier.gsub("(/(.+)/", "$&")
+  #       id = item.identifier.chomp('/').rchomp('/') + '-' + snippet['id']
+  # #     # print id
+  # #     # print snippet.content
+  #       new_snippet = {id => snippet.content}
+  #       print new_snippet
+  #       $global_snippets.merge(new_snippet)
+  #     end
+  #   end
+  # end
 
   create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
   create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
@@ -39,6 +60,7 @@ preprocess do
     phrases.each do | key, val |
       item[key] = val
     end
+    # snippetizer(item)
   end
 end
 

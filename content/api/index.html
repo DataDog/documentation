@@ -172,7 +172,7 @@ kind: documentation
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-          
+
           <%= argument 'metric', 'The name of the time series' %>
           <li>
               <strong>points [required]</strong>
@@ -808,7 +808,31 @@ kind: documentation
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
-
+          <li>
+            <strong>recurrence [optional, default=None]</strong>
+            <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
+            <ul>
+              <li>
+                <code>type</code> the type of recurrence. Choose from: <code>days</code>, <code>weeks</code>,
+              <code>months</code>, <code>years</code>.
+              </li>
+              <li>
+                <code>period</code> how often to repeat as an integer. For example to repeat every 3 days, select
+                a type of <code>days</code> and a period of <code>3</code>.
+              </li>
+              <li>
+                <code>week_days</code> (optional) a list of week days to repeat on. Choose from: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code> or <code>Sun</code>. Only applicable when <code>type</code> is <code>weeks</code>. <strong>First letter must be capitalized.</strong>
+              </li>
+              <li>
+                <code>until_occurrences</code> (optional) how many times the downtime will be rescheduled.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+              <li>
+                <code>until_date</code> (optional) the date at which the recurrence should end as a POSIX timestmap.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+            </ul>
+          </li>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -839,6 +863,31 @@ kind: documentation
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
+          <li>
+            <strong>recurrence [optional, default=original recurrence]</strong>
+            <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
+            <ul>
+              <li>
+                <code>type</code> the type of recurrence. Choose from: <code>days</code>, <code>weeks</code>,
+              <code>months</code>, <code>years</code>.
+              </li>
+              <li>
+                <code>period</code> how often to repeat as an integer. For example to repeat every 3 days, select
+                a type of <code>days</code> and a period of <code>3</code>.
+              </li>
+              <li>
+                <code>week_days</code> (optional) a list of week days to repeat on. Choose from: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code> or <code>Sun</code>. Only applicable when <code>type</code> is <code>weeks</code>. <strong>First letter must be capitalized.</strong>
+              </li>
+              <li>
+                <code>until_occurrences</code> (optional) how many times the downtime will be rescheduled.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+              <li>
+                <code>until_date</code> (optional) the date at which the recurrence should end as a POSIX timestmap.
+                <strong><code>until_occurences</code> and <code>until_date</code></strong> are mutually exclusive
+              </li>
+            </ul>
+          </li>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
