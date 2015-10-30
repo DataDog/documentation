@@ -1,4 +1,7 @@
 ---
+last_modified: 2015/10/14
+translation_status: original
+language: ja
 title: Datadog-AWS ELB Integration
 integration_title: AWS ELB
 kind: integration
