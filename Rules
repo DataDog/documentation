@@ -106,6 +106,7 @@ compile '*' do
   unless item.binary?
 
     filter :erb
+
     case item[:extension]
       when 'md'
         filter :kramdown
@@ -133,6 +134,7 @@ compile '*' do
     else
       layout 'default'
     end
+    filter :cache_buster
   end
 end
 
@@ -169,7 +171,9 @@ end
 
 route '/static/css/*' do
   unless item.identifier.start_with?('/static/css/_')
-    item.identifier.gsub(/\/$/, '') + '.css'
+    fp = fingerprint(item[:filename])
+    # item.identifier.chop + fp + '.css'
+    item.identifier.gsub(/\/$/, '') + fp + '.css'
   end
 end
 
