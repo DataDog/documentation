@@ -12,6 +12,7 @@ gem 'oj'
 gem 'nanoc-toolbox'
 gem 'video_info'
 gem 'sassc'
+gem 'nanoc-cachebuster'
 group :development do
   gem 'guard-nanoc'
   gem 'guard-livereload'

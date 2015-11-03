@@ -6,7 +6,8 @@ require 'tempfile'
 require 'oj'
 require "nanoc/toolbox"
 require "video_info"
-
+require "nanoc/cachebuster"
+include Nanoc::Helpers::CacheBusting
 
 STATUS_CODES = {
   200 => '200 OK',
