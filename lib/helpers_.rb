@@ -6,39 +6,39 @@ include Nanoc::Toolbox::Helpers::HtmlTag
 
 
 # general functions
-def example_items
+def collect_example_items
   @items.select { |item| item[:kind] == 'example' && !(item.identifier.match('/ja/')) }
 end
 
-def video_items
+def collect_video_items
   @items.select { |item| item[:kind] == 'video' && !(item.identifier.match('/ja/')) }
 end
 
-def integration_items
+def collect_integration_items
   integrations = @items.select { |item| item[:kind] == 'integration' && !(item.identifier.match('/ja/')) }
   integrations.sort_by { |i| i[:integration_title].downcase }
 end
 
-def guide_items
+def collect_guide_items
   guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && !(item.identifier.match('/ja/')) }
   guides.sort_by { |item| item[:listorder] }
 end
 
 # Japanese specific functions
-def ja_example_items
+def collect_ja_example_items
   @items.select { |item| item[:kind] == 'example' && item[:language] == 'ja' && item.identifier.match('/ja/') }
 end
 
-def ja_video_items
+def collect_ja_video_items
   @items.select { |item| item[:kind] == 'video' && item[:language] == 'ja' && item.identifier.match('/ja/') }
 end
 
-def ja_integration_items
+def collect_ja_integration_items
   integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && item.identifier.match('/ja/') }
   integrations.sort_by { |i| i[:integration_title].downcase }
 end
 
-def ja_guide_items
+def collect_ja_guide_items
   guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
   guides.sort_by { |item| item[:listorder] }
 end
