@@ -15,7 +15,7 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
-require 'Octokit'
+require 'octokit'
 preprocess do
 
   # def rchomp(sep = $/)
