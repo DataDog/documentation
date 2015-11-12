@@ -43,7 +43,7 @@ For step-by-step instructions for an integration, <a href="https://app.datadoghq
 The pages below walk through how to integrate, what to expect, and how to troubleshoot.
 
 <ul>
-  <% integration_items.each do |i| %>
+  <% $integration_items.each do |i| %>
     <li><%= link_to i[:integration_title], i.path %></li>
 <% end %>
 </ul>

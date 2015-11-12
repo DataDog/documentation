@@ -424,7 +424,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 #### Functions
 
-You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
+You can apply functions to the result of each query. <a href="/examples/graphing functions/">Examples</a>
 
 
 <table class="table">

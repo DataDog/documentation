@@ -26,7 +26,6 @@ sidebar:
       href: "/faq/#events"
     - text: Other
       href: "/faq/#other"
-
 ---
 
 <!--

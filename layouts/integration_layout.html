@@ -34,7 +34,7 @@ this layout provides a sidebar and main column.
             <div class="collapse div-collapse" id="toggleIntegrations">
               <li><a href="<%= @item["langpath"] %>/integrations/"><%= @item["integrations_back_to_overview"] %></a></li>
               <% if @item["language"] == "en" %>
-                <% all_integrations = integration_items %>
+                <% all_integrations = $integration_items %>
               <% else %>
                 <% all_integrations = ja_integration_items %>
               <% end %>

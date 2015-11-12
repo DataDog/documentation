@@ -15,8 +15,7 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
-
-
+require 'Octokit'
 preprocess do
 
   # def rchomp(sep = $/)
@@ -38,22 +37,35 @@ preprocess do
   #     end
   #   end
   # end
-
-  create_tag_pages(example_items,{:identifier => "/examples/%%tag%%/"})
-  create_tag_pages(video_items,{:identifier => "/videos/%%tag%%/"})
-  create_tag_pages(ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
-  create_tag_pages(ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
+  if ENV.has_key?('github_personal_token')
+    $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
+    $client.user.login
+  end
+  $en_local_hash = get_local_hash('en')
+  $ja_local_hash = get_local_hash('ja')
+  $example_items = collect_example_items()
+  $video_items = collect_video_items()
+  $ja_example_items = collect_ja_example_items()
+  $ja_video_items = collect_ja_video_items()
+  $integration_items = collect_integration_items()
+  $guide_items = collect_guide_items()
+  $ja_guide_items = collect_ja_guide_items()
+  create_tag_pages($example_items,{:identifier => "/examples/%%tag%%/"})
+  create_tag_pages($video_items,{:identifier => "/videos/%%tag%%/"})
+  create_tag_pages($ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
+  create_tag_pages($ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
 
   @items.each do |item|
     language = "en"
     otherlang = "ja"
     langpath = ""
+    phrases = $en_local_hash
     if item.identifier.match('/ja/')
       language = "ja"
       otherlang = ""
       langpath = "/ja"
+      phrases = $ja_local_hash
     end
-    phrases = get_local_hash(language)
     item["language"] = language
     item["otherlang"] = otherlang
     item["langpath"] = langpath
@@ -95,7 +107,9 @@ compile '/static/css/*' do
 end
 
 compile '/static/*' do
-
+    if @item.identifier.match('cachebustercss')
+      filter :cache_buster
+    end
 end
 
 compile '/partials/*' do
@@ -104,22 +118,26 @@ end
 
 compile '*' do
   unless item.binary?
-
-    filter :erb
-
+    # noerb = item.key?(:noerb)
+    # if  @item.identifier.match('!/static/') 
+    # if ['md', 'html', 'erb'].include? @item[:extension]
+      filter :erb
+    # end
     case item[:extension]
       when 'md'
+
         filter :kramdown
+
     end
     # filter :kramdown
-    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
-      javascript: :rouge,
-      console: :rouge,
-      python: :rouge,
-      ruby: :rouge,
-      pycon: :rouge,
-      json: :rouge
-    }
+    # filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
+    #   javascript: :rouge,
+    #   console: :rouge,
+    #   python: :rouge,
+    #   ruby: :rouge,
+    #   pycon: :rouge,
+    #   json: :rouge
+    # }
 
     id = @item.identifier
 
@@ -134,7 +152,7 @@ compile '*' do
     else
       layout 'default'
     end
-    filter :cache_buster
+    
   end
 end
 
