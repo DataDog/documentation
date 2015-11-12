@@ -1,8 +1,8 @@
 ---
 title: Datadog-AWS RDS Integration
 integration_title: AWS RDS
-
 kind: integration
+git_integration_title: amazon_rds
 ---
 
 In this HOWTO you will learn how to best integrate AWS Relational
@@ -69,6 +69,10 @@ Alerts.
 Here's an example of a graph displaying I/O for the instance <code>mysqlrds</code> using the <code>dbinstanceidentifier</code> tag.
 
 <img src="/static/images/rds-example.png" style="width:100% border:1px #777777"/>
+
+<h2>Metrics</h2>
+
+<%= get_metrics_from_git()%> 
 
 <h2>What's next?</h2>
 

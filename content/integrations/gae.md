@@ -22,16 +22,22 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
 1. Change directory into to your project's application directory. 
 2. Clone our Google App Engine module
-    git clone https://github.com/DataDog/gae_datadog
-3. Edit your project's app.yaml file
-  
-    a. Add the Datadog handler to your app.yaml file:
+    
+        git clone https://github.com/DataDog/gae_datadog
+        
+        {: .lang-shell}
 
+3. Edit your project's app.yaml file
+
+    a. Add the Datadog handler to your app.yaml file:
+    
         handlers:
           # Should probably be at the beginning of the list
           # so it's not clobbered by a catchall route
           - url: /datadog
             script: gae_datadog.datadog.app
+    {: .lang-yaml}
+
 
     b. Set your API key. This should be at the top level of the file and not in the handler section.
 
