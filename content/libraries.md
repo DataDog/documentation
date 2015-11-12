@@ -8,6 +8,8 @@ sidebar:
       href: "#python"
     - text: Ruby
       href: "#ruby"
+    - text: Go
+      href: "#go"
     - text: C#
       href: "#c-sharp"
     - header: Community Libraries
@@ -60,6 +62,10 @@ There are many libraries available to help you interact with the Datadog API.
   * [DogApi][3] - A Ruby Datadog API wrapper.
   * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
 
+#### Go
+
+  * [datadog-go][71] - A Go DogStatsD client.
+
 #### C\#
 {: #c-sharp}
 
@@ -107,9 +113,9 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Go
 {: #community-go}
 
-  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31]. 
-  * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33]. 
-  * [godspeed][63] - a dogstatsd client written in Go by [PagerDuty][64].
+  * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
+  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31].
+  * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
   * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
 
 #### Python
@@ -246,3 +252,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [68]: https://github.com/alq666/rdog
    [69]: https://github.com/rs/xstats
    [70]: https://github.com/rs
+   [71]: https://github.com/DataDog/datadog-go

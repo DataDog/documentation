@@ -37,10 +37,12 @@ preprocess do
   #     end
   #   end
   # end
+
   if ENV.has_key?('github_personal_token')
     $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
     $client.user.login
   end
+
   $en_local_hash = get_local_hash('en')
   $ja_local_hash = get_local_hash('ja')
   $example_items = collect_example_items()
@@ -48,6 +50,7 @@ preprocess do
   $ja_example_items = collect_ja_example_items()
   $ja_video_items = collect_ja_video_items()
   $integration_items = collect_integration_items()
+  $ja_integration_items = collect_ja_integration_items()
   $guide_items = collect_guide_items()
   $ja_guide_items = collect_ja_guide_items()
   create_tag_pages($example_items,{:identifier => "/examples/%%tag%%/"})
@@ -130,14 +133,14 @@ compile '*' do
 
     end
     # filter :kramdown
-    # filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
-    #   javascript: :rouge,
-    #   console: :rouge,
-    #   python: :rouge,
-    #   ruby: :rouge,
-    #   pycon: :rouge,
-    #   json: :rouge
-    # }
+    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
+      javascript: :rouge,
+      console: :rouge,
+      python: :rouge,
+      ruby: :rouge,
+      pycon: :rouge,
+      json: :rouge
+    }
 
     id = @item.identifier
 

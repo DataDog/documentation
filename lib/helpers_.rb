@@ -6,8 +6,6 @@ include Nanoc::Toolbox::Helpers::HtmlTag
 
 # general functions
 
-# $itegration_items = nil
-# def collect_example_items
 def collect_example_items
   @items.select { |item| item[:kind] == 'example' && !(item.identifier.match('/ja/')) }
 end
@@ -36,7 +34,7 @@ def collect_ja_video_items
   @items.select { |item| item[:kind] == 'video' && item[:language] == 'ja' && item.identifier.match('/ja/') }
 end
 
-def ja_integration_items
+def collect_ja_integration_items
   integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && item.identifier.match('/ja/') }
   integrations.sort_by { |i| i[:integration_title].downcase }
 end

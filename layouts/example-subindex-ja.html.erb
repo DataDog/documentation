@@ -1,6 +1,5 @@
 <div class="container">
 
-  <% #items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
   <% items_with_tag(tag, $ja_example_items).each do |example| %>
     <% if example[:language] == "ja" %>
       <h2><%= link_to example[:title], example %></h2>

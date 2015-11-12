@@ -3,7 +3,7 @@ case
 when id.match('/examples/') %>
 
   <div class="container">
-  <% #items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
+
   <% items_with_tag(tag, $example_items).each do |example| %>
     <% if example[:language] == nil %>
       <h2><%= link_to example[:title], example %></h2>
