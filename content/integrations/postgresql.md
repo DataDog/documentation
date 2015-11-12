@@ -2,6 +2,7 @@
 title: Datadog-PostgreSQL Integration
 integration_title: PostgreSQL
 kind: integration
+git_integration_title: postgres
 ---
 
 ###Overview
@@ -12,29 +13,9 @@ Connect PostgreSQL to Datadog in order to:
 * Visualize your database performance.
 * Correlate the performance of PostgreSQL with the rest of your applications.
 
-The following metrics are collected by default with the PostgreSQL integration:
+### Metrics
 
-    postgresql.buffer_hit
-    postgresql.commits
-    postgresql.connections
-    postgresql.dead_rows
-    postgresql.deadlocks
-    postgresql.disk_read
-    postgresql.index_rows_fetched
-    postgresql.index_rows_read
-    postgresql.index_scans
-    postgresql.live_rows
-    postgresql.rollbacks
-    postgresql.rows_deleted
-    postgresql.rows_fetched
-    postgresql.rows_hot_updated
-    postgresql.rows_inserted
-    postgresql.rows_returned
-    postgresql.rows_updated
-    postgresql.seq_rows_read
-    postgresql.seq_scans
-    postgresql.temp_bytes
-    postgresql.temp_files
+<%= get_metrics_from_git()%> 
 
 You can learn more about how we collect these metrics by looking at the source [here](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py).
 

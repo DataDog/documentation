@@ -67,7 +67,12 @@ def get_metrics_from_git
 
   if ENV.has_key?('github_personal_token')
     ititle = @item[:git_integration_title]
-    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
+    if ititle == 'system'
+      ititle2 = 'os'
+    else
+      ititle2 = ititle
+    end
+    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle2+"_metadata.csv").content
     # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
     # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
     metric_string = "<table class='table'>"
