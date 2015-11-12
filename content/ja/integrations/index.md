@@ -59,7 +59,7 @@ Integrationをインストール/設定するための細かい手順につい�
 **(注:随時、追加/更新中)**
 
 <ul>
-  <% ja_integration_items.each do |i| %>
+  <% $ja_integration_items.each do |i| %>
     <li><%= link_to i[:integration_title], i.path %></li>
 <% end %>
 </ul>
