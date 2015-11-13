@@ -110,9 +110,9 @@ compile '/static/css/*' do
 end
 
 compile '/static/*' do
-    if @item.identifier.match('cachebustercss')
-      filter :cache_buster
-    end
+    # if @item.identifier.match('cachebustercss')
+    #   filter :cache_buster
+    # end
 end
 
 compile '/partials/*' do
@@ -192,9 +192,9 @@ end
 
 route '/static/css/*' do
   unless item.identifier.start_with?('/static/css/_')
-    fp = fingerprint(item[:filename])
-    # item.identifier.chop + fp + '.css'
-    item.identifier.gsub(/\/$/, '') + fp + '.css'
+    # fp = fingerprint(item[:filename])
+    item.identifier.chop + '.css'
+    # item.identifier.gsub(/\/$/, '') + fp + '.css'
   end
 end
 
