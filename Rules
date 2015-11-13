@@ -43,6 +43,7 @@ preprocess do
     $client.user.login
   end
 
+  $cbfingerprints = get_cache_bust_fingerprints()
   $en_local_hash = get_local_hash('en')
   $ja_local_hash = get_local_hash('ja')
   $example_items = collect_example_items()
@@ -111,7 +112,7 @@ end
 
 compile '/static/*' do
     # if @item.identifier.match('cachebustercss')
-    #   filter :cache_buster
+    #   filter :erb
     # end
 end
 
@@ -121,26 +122,24 @@ end
 
 compile '*' do
   unless item.binary?
-    # noerb = item.key?(:noerb)
-    # if  @item.identifier.match('!/static/') 
-    # if ['md', 'html', 'erb'].include? @item[:extension]
-      filter :erb
-    # end
+    filter :erb
     case item[:extension]
       when 'md'
-
-        filter :kramdown
+        filter :kramdown, 
+                :syntax_highligher => 'rouge',
+               :syntax_highlighter_opts => { :line_numbers => false }
+      else
+        filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
+          javascript: :rouge,
+          console: :rouge,
+          python: :rouge,
+          ruby: :rouge,
+          pycon: :rouge,
+          json: :rouge
+        }
 
     end
     # filter :kramdown
-    filter :colorize_syntax, :default_colorizer => :rouge, colorizers: {
-      javascript: :rouge,
-      console: :rouge,
-      python: :rouge,
-      ruby: :rouge,
-      pycon: :rouge,
-      json: :rouge
-    }
 
     id = @item.identifier
 
@@ -192,9 +191,9 @@ end
 
 route '/static/css/*' do
   unless item.identifier.start_with?('/static/css/_')
-    # fp = fingerprint(item[:filename])
-    item.identifier.chop + '.css'
-    # item.identifier.gsub(/\/$/, '') + fp + '.css'
+    fp = fingerprint(item[:filename])
+    # item.identifier.chop + '.css'
+    item.identifier.gsub(/\/$/, '') + fp + '.css'
   end
 end
 

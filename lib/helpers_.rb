@@ -101,3 +101,15 @@ def get_metrics_from_git
 return output
 end
 
+def get_cache_bust_fingerprints
+  cbfingerprints = Hash.new()
+  @items.each do |item|
+    if item.identifier.match("bootstrap3")
+      cbfingerprints["bootstrap3"] = fingerprint(item[:filename])
+    elsif item.identifier.match("style")
+      cbfingerprints["style"] = fingerprint(item[:filename])
+    end
+  end
+  return cbfingerprints
+end
+
