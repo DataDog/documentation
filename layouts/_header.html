@@ -17,7 +17,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= @item["menu_guides"] %> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          <% this_guide_items = @item["language"] == "en" ? guide_items : ja_guide_items %>
+          <% this_guide_items = @item["language"] == "en" ? $guide_items : $ja_guide_items %>
             <% this_guide_items.each do |i| %>
               <li>
                 <%= link_to i[:title], i.path %>
@@ -50,12 +50,12 @@
           </form>
         </li>
         <% end %>
-        <li><a href="/help/"><%= @item["menu_help"] %></a></li>
+        <li><a href="<%= @item["langpath"] %>/help/"><%= @item["menu_help"] %></a></li>
         <li id="signin">
-          <button class="btn navbar-btn flexbutton" href="https://app.datadoghq.com"><%= @item["btn_signin"] %></button>
+          <a class="btn navbar-btn flexbutton" href="https://app.datadoghq.com"><%= @item["btn_signin"] %></a>
         </li>
         <li id="signup">
-          <button class="btn navbar-btn flexbutton blueflex" href="https://app.datadoghq.com/signup"><%= @item["btn_signup"] %></button>
+          <a class="btn navbar-btn flexbutton blueflex" href="https://app.datadoghq.com/signup"><%= @item["btn_signup"] %></a>
         </li>
       </ul>
     </div>

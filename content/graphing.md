@@ -9,13 +9,13 @@ sidebar:
       href: "#editor"
     - text: Grammar
       href: "#grammar"
-      collapseid: collapseJSON 
+      collapseid: collapseJSON
     - text: Arithmetic & Functions
       href: "#functions"
-      collapseid: collapseJSON 
+      collapseid: collapseJSON
     - text: "Y-Axis Controls"
       href: "#yaxis"
-      collapseid: collapseJSON 
+      collapseid: collapseJSON
 ---
 
 ## Find the Graph Editor
@@ -40,14 +40,14 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 
 ### 1) Choose the Metric to graph
 
-When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary). 
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary).
 
-The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric. 
+The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 
 
 ### 2) Select your visualization
 
-Once you have a metric in mind to display in your graph, select your visualization. 
+Once you have a metric in mind to display in your graph, select your visualization.
 
 #### Timeseries
 
@@ -55,7 +55,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
   ![Timeseries](/static/images/references-graphing-timeseries-example.png)
-</div> 
+</div>
 
 #### Heatmap
 
@@ -76,7 +76,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 
 #### Toplist
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards. 
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
   ![TopList](/static/images/references-graphing-toplist-example.png)
@@ -108,7 +108,7 @@ Now that you have the metric and a visualization in place, you can filter down t
 
 #### Aggregation Method
 
-Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum. 
+Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum.
 
 #### Aggregation Groups
 
@@ -116,13 +116,13 @@ After the aggregation method you can determine what constitutes a line or groupi
 
 ### 4) Rollup to aggregate over time
 
-Regardless of the options chosen above, there will always be some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you will need 14,400 points to display everything. Each graph we display will have about 300 points shown at any given time. 
+Regardless of the options chosen above, there will always be some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you will need 14,400 points to display everything. Each graph we display will have about 300 points shown at any given time.
 
 In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
 
-To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds. 
+To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
 
-To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this: 
+To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
 ![rollup example](/static/images/references-graphing-rollup-example.png)
 
@@ -154,7 +154,7 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
     <td>time delta between points</td>
   </tr>
 
-  <tr> 
+  <tr>
     <td>diff()</td>
     <td>value delta between points</td>
   </tr>
@@ -210,8 +210,23 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
   </tr>
 
   <tr>
-    <td>median()</td>
-    <td>Median filter, useful for reducing noise</td>
+    <td>median_3()</td>
+    <td>Median filter, useful for reducing noise, with a span of 3</td>
+  </tr>
+
+  <tr>
+    <td>median_5()</td>
+    <td>Median with a span of 5</td>
+  </tr>
+
+  <tr>
+    <td>median_7()</td>
+    <td>Median with a span of 7</td>
+  </tr>
+
+  <tr>
+    <td>median_9()</td>
+    <td>Median with a span of 9</td>
   </tr>
 
   <tr>
@@ -321,11 +336,11 @@ You can repeat all the steps above to add additional metrics to your graph to ad
 
 ### 6) Create a title
 
-If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value. 
+If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
 ### 7) Save
 
-The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs. 
+The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
 
 <script type="text/javascript">
@@ -375,8 +390,8 @@ Here is how they fit together in a JSON dictionary:
         {
           "q": "search query"
         }
-      ], 
-      "viz": "visualization type", 
+      ],
+      "viz": "visualization type",
       "yaxis": {
         "yaxisoptionkey": "yaxisoptionvalue"
       }
@@ -409,7 +424,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 #### Functions
 
-You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
+You can apply functions to the result of each query. <a href="/examples/graphing functions/">Examples</a>
 
 
 <table class="table">
@@ -428,7 +443,7 @@ You can apply functions to the result of each query. <a href="/examples/graphing
     <td>time delta between points</td>
   </tr>
 
-  <tr> 
+  <tr>
     <td>diff()</td>
     <td>value delta between points</td>
   </tr>
@@ -484,8 +499,23 @@ You can apply functions to the result of each query. <a href="/examples/graphing
   </tr>
 
   <tr>
-    <td>median()</td>
-    <td>Median filter, useful for reducing noise</td>
+    <td>median_3()</td>
+    <td>Median filter, useful for reducing noise, with a span of 3</td>
+  </tr>
+
+  <tr>
+    <td>median_5()</td>
+    <td>Median with a span of 5</td>
+  </tr>
+
+  <tr>
+    <td>median_7()</td>
+    <td>Median with a span of 7</td>
+  </tr>
+
+  <tr>
+    <td>median_9()</td>
+    <td>Median with a span of 9</td>
   </tr>
 
   <tr>

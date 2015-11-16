@@ -32,7 +32,7 @@ this layout provides a sidebar and main column.
               <% end %>
             <% end %>
               <li class="nav-header"><%= @item["menu_guides"] %> </li>
-              <% this_guide_items = @item["language"] == "en" ? guide_items : ja_guide_items %>
+              <% this_guide_items = @item["language"] == "en" ? $guide_items : $ja_guide_items %>
             <% this_guide_items.each do |i| %>
                   <li><%= link_to i[:title], i.path %></li>
             <% end %>
@@ -74,7 +74,7 @@ this layout provides a sidebar and main column.
           <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
              <a href="<%= @item["langpath"] %>/examples/"><%= @item["examples_return_to_all_example_groups"] %></a>
           <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
-            <a href="<%= @item["langpath"] %>/examples/"><%= @item["videos_return_to_all_video_groups"] %></a>
+            <a href="<%= @item["langpath"] %>/videos/"><%= @item["videos_return_to_all_video_groups"] %></a>
           <% end %>
         </div>
       </div>

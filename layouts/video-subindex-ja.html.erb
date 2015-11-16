@@ -1,6 +1,7 @@
 <div class="container">
 
-  <% items_with_tag(tag, @items.select { |i| i[:kind] == "video" }).each do |video| %>
+  <% items_with_tag(tag, $ja_video_items).each do |video| %>
+
     <% if video[:language] == "ja" %>
       <h2><%= link_to video[:title], video %></h2>
       <p><%= video[:ja_summary] %></p>
