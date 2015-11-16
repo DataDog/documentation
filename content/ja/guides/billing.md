@@ -1,8 +1,9 @@
 ---
-last_modified: 2015/04/16
+last_modified: 2015/10/14
 translation_status: Translated
 language: ja
 title: 課金に関するFAQ
+kind: documentation
 sidebar:
   nav:
     - header: ガイド
@@ -62,12 +63,12 @@ There are three plans within Datadog:
     good news is that switching from the Free plan to Pro will not affect your
     setup, so anything you've begun monitoring would not be affected by that status
     change.
-1. **Pro** is for 6-499 hosts and comes with 1 year of data retention.
+1. **Pro** is for 6-499 hosts and comes with 13 months of data retention.
     Pro includes metric alerts and email support.
 1. **Enterprise** is for
     500+ hosts or any number of hosts but needing custom adjustments to what is
     offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
-    1. Data retention requirements and number of custom metrics (base plan includes 1 year retention,
+    1. Data retention requirements and number of custom metrics (base plan includes 13 months retention,
 and 100 custom metrics)
     1. Size of your environment in servers
     1. Payment terms (month to month or annual prepaid) -->
@@ -89,7 +90,7 @@ Datadogのモニタリングサービスには３種類の料金プランがあ�
 3. **Enterprise プラン** は、500台以上のホスト構成のユーザ、又は、Pro プランのサービス内容に対して特別な調整が必要なユーザに対して適応します。
 
    - Enterprise プランの価格設定の基準は、次の項目になります:
-   1. データの保管期間と、カスタムメトリクスの数(基本プランには、保管期間1年と100項目のカスタムメトリクスが含まれます)
+   1. データの保管期間と、カスタムメトリクスの数　(基本プランには、13ヶ月のデータ保管期間と100種類のカスタムメトリクスの追加送信枠が含まれます)
    2. 運用環境下よりメトリクスを転送するホストの総数
    3. 支払い条件 (月払い、年払い、など)
 
@@ -107,6 +108,11 @@ JMX / WMI / Nagios / Cacti).
 カスタムメトリクスとは、"regular integration suite" が一般的に収集するメトリクス以外のメトリクスを言います。
 例えば、アプリケーションスタックで実施するカスタムチェックやAPIレベルのメトリクスが該当します。
 更に明確化が必要なポイントとして、JMX、 WMI、 Nagios、 Cactiなどの無限のメトリクスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタムメトリクスに分類されます。
+
+
+<!-- For all plans, Docker Containers are supported and 10 free containers per host per hour will be provided.  Additional containers will be billed at $0.002 per container per hour.  In addition, Enterprise customers can purchase prepaid containers at $1 per container per month. -->
+
+全ての料金プランで、Dockerホスト毎に1時間あたり10個のコンテナーを、単一エージェントの基本料で監視することができます。11個目以降のコンテナーに関しては、$0.002/時間の追加料金で監視することができます。また、エンタープライズの料金プランでは、追加コンテナーを$1/月で前払い購入することもできます。
 
 
 <!-- Pro and Enterprise data retention is for one year at full resolution (maximum

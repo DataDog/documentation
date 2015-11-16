@@ -7,5 +7,5 @@ options = {
 
 initialize(**options)
 
-# Send invites
-api.User.invite(["jack@example.com", "jill@example.com"])
+# Get all users
+api.User.get_all()

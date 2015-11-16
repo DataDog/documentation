@@ -3,6 +3,7 @@ last_modified: 2015/04/02
 translation_status: complete
 language: ja
 title: DogStatsDの解説
+kind: documentation
 sidebar:
   nav:
     - header: ガイド

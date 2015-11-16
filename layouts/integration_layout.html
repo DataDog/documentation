@@ -34,25 +34,24 @@ this layout provides a sidebar and main column.
             <div class="collapse div-collapse" id="toggleIntegrations">
               <li><a href="<%= @item["langpath"] %>/integrations/"><%= @item["integrations_back_to_overview"] %></a></li>
               <% if @item["language"] == "en" %>
-                <% all_integrations = integration_items %>
+                <% all_integrations = $integration_items %>
               <% else %>
-                <% all_integrations = ja_integration_items %>
+                <% all_integrations = $ja_integration_items %>
               <% end %>
               <% all_integrations.each do |i| %>
-              <% basic="" %>
-              <% if i[:doclevel] && i[:doclevel] == 'basic' %>
-                <% basic = " *" %>
-              <% end %>
-              <% if i[:title] == @item[:title] %>
-                <li class='selected_integration'>
-                  <%= link_to '> ' + i[:integration_title], '#' %>
-                </li>
-              <% else %>
-                <li><%= link_to i[:integration_title] + basic,i.path %></li>
-              <% end %>
+                <% basic="" %>
+                <% if i[:doclevel] && i[:doclevel] == 'basic' %>
+                  <% basic = " *" %>
                 <% end %>
-                <li><i>* <%= @item["integrations_basic_level_integration"] %></i></li>
-                </div>
+                <% if i[:title] == @item[:title] %>
+                  <li class='selected_integration'>
+                    <%= link_to '> ' + i[:integration_title], '#' %>
+                  </li>
+                <% else %>
+                  <li><%= link_to i[:integration_title] + basic,i.path %></li>
+                <% end %>
+              <% end %>
+            </div>
           </ul>
         &nbsp;
         </div>

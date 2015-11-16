@@ -2,6 +2,7 @@
 title: Datadog-AWS ECS Integration
 integration_title: AWS ECS
 kind: integration
+git_integration_title: amazon_ecs
 ---
 
 Amazon EC2 Container Service (ECS) is a highly scalable, high performance container management service for Docker containers running on EC2 instances.
@@ -213,3 +214,7 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 
 #### Dynamic detection and monitoring of running services
 Currently work in progress, more to come soon
+
+### Metrics
+
+<%= get_metrics_from_git()%> 

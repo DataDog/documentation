@@ -7,7 +7,8 @@ At Datadog, we want to make sure you have all the tools you need to use and unde
 The videos are organized by keyword. Click on any of the keywords below to find a relevant video.
 
 <ul>
-<% tag_set(video_items).sort().each do |tag| %>
-<li><a href="/videos/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags(video_items)[tag] %>)</li>
+<% tag_set($video_items).sort().each do |tag| %>
+<li><a href="/videos/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags($video_items)[tag] %>)</li>
 <% end %>
 </ul>
+ 

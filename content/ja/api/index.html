@@ -172,7 +172,7 @@ kind: documentation
         <h5>Arguments</h5>
         <ul class="arguments">
           <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-          
+
           <%= argument 'metric', 'The name of the time series' %>
           <li>
               <strong>points [required]</strong>
@@ -410,6 +410,7 @@ kind: documentation
               <ul>
                 <li><code>metric alert</code></li>
                 <li><code>service check</code></li>
+                <li><code>event check</code></li>
               </ul>
             </div>
           </li>
@@ -456,6 +457,24 @@ kind: documentation
               <li><code>count</code> must be at >= your max threshold (defined
               in the <code>options</code>). e.g. if you want to notify on 1
               critical, 3 ok and 2 warn statuses count should be 3.</li>
+            </ul>
+
+            <h5>Event Alert Query</h5>
+            <code>events('sources:nagios status:error,warning priority:normal tags: "string query"').rollup("count").last("1h")"</code>
+            <ul class="arguments">
+              <li><code>event</code>, the event query string:
+                <ul class="arguments">
+                  <li><code>string_query</code> free text query to match against event title and text.</li>
+                  <li><code>sources</code> event sources (comma-separated).</li>
+                  <li><code>status</code> event statuses (comma-separated). Valid options: error, warn, and info.</li>
+                  <li><code>priority</code> event priorities (comma-separated). Valid options: low, normal, all.</li>
+                  <li><code>host</code> event reporting host (comma-separated).</li>
+                  <li><code>tags</code> event tags (comma-separated).</li>
+                  <li><code>excluded_tags</code> exluded event tags (comma-separated).</li>
+                </ul>
+              </li>
+              <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
+              <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
           </li>
           <%= argument 'name', "The name of the alert.",
@@ -1627,31 +1646,136 @@ kind: documentation
     <div class="row">
       <%= left_side_div %>
         <p>
-        You can invite users to join DataDog using the API.
+        You can create, edit, and disable users.
         </p>
       </div>
     </div>
 
-    <!-- Create alerts -->
-    <h4 id="users-invite">Invite Users</h4>
+    <!-- Create user -->
+    <h4>Create User</h4>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'emails', "A list of email addresses to send an invite to." %>
+          <%= argument 'handle', "The user handle, must be a valid email." %>
+          <%= argument 'name', "The name of the user.", :default => 'None' %>
         </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>POST api/v1/invite_users</code>
+        <code>POST api/v1/user</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-user-invite.py" %>
-        <%= snippet_code_block "api-user-invite.rb" %>
-        <%= snippet_code_block "api-user-invite.sh" %>
+        <%= snippet_code_block "api-user-create.py" %>
+        <%= snippet_code_block "api-user-create.rb" %>
+        <%= snippet_code_block "api-user-create.sh" %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-user-invite.py" %>
-        <%= snippet_result_code_block "api-user-invite.rb" %>
-        <%= snippet_result_code_block "api-user-invite.sh" %>
+        <%= snippet_result_code_block "api-user-create.py" %>
+        <%= snippet_result_code_block "api-user-create.rb" %>
+        <%= snippet_result_code_block "api-user-create.sh" %>
+      </div>
+    </div>
+
+    <!-- Get User -->
+    <h4>Get User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-get.py" %>
+        <%= snippet_code_block "api-user-get.rb" %>
+        <%= snippet_code_block "api-user-get.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-get.py" %>
+        <%= snippet_result_code_block "api-user-get.rb" %>
+        <%= snippet_result_code_block "api-user-get.sh" %>
+      </div>
+    </div>
+
+    <!-- Get All Users -->
+    <h4>Get All Users</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= no_args %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET api/v1/user </code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-get-all.py" %>
+        <%= snippet_code_block "api-user-get-all.rb" %>
+        <%= snippet_code_block "api-user-get-all.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-get-all.py" %>
+        <%= snippet_result_code_block "api-user-get-all.rb" %>
+        <%= snippet_result_code_block "api-user-get-all.sh" %>
+      </div>
+    </div>
+
+
+    <!-- Update user -->
+    <h4>Update User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Can only be used with application keys belonging to administrators.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+          <%= argument 'name', "The new name of the user.", :default => 'None' %>
+          <%= argument 'email', "The new email of the user.", :default => 'None' %>
+          <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
+          <%= argument 'is_admin', "The new admin status of the user.", :default => 'None' %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-update.py" %>
+        <%= snippet_code_block "api-user-update.rb" %>
+        <%= snippet_code_block "api-user-update.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-update.py" %>
+        <%= snippet_result_code_block "api-user-update.rb" %>
+        <%= snippet_result_code_block "api-user-update.sh" %>
+      </div>
+    </div>
+
+
+    <!-- Disable User -->
+    <h4>Disable User</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Can only be used with application keys belonging to administrators.
+        </p>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument 'handle', "The handle of the user." %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE api/v1/user/:handle</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-user-disable.py" %>
+        <%= snippet_code_block "api-user-disable.rb" %>
+        <%= snippet_code_block "api-user-disable.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-user-disable.py" %>
+        <%= snippet_result_code_block "api-user-disable.rb" %>
+        <%= snippet_result_code_block "api-user-disable.sh" %>
       </div>
     </div>
 

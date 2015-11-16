@@ -1,10 +1,10 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2015/11/16
 translation_status: original
 language: ja
-title: Setting up Network Checks
+title: Network Check の設定
 kind: guide
-listorder: 6
+listorder: 7
 sidebar:
   nav:
     - header: Guide to Network Checks
