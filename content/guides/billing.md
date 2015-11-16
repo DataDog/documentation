@@ -86,7 +86,7 @@ We do support hourly pricing at $0.03 per hour per host or a hybrid
 of monthly and hourly. Here is how that hybrid works:
 
 You tell us how many hosts you will run each month and we will bill you for that baseline number of
-hosts at $15 per host (you can change this number at the beginning of each
+hosts at $18 per host (you can change this number at the beginning of each
 month if you like). Then for any hosts beyond the committed number previously
 determined, our billing system will charge you $0.03 per host per hour. This
 works out to be much less expensive for extra hosts that may come up for a
@@ -125,7 +125,7 @@ select 'limit metric collection for all accounts' in the <a href="https://app.da
 ##### How will a VMware integration impact my monthly billing?
 
 
-The base pricing is $15 per virtual machine per month. See above for more general information.
+The base pricing is $18 per virtual machine per month. See above for more general information.
 
 
 ##### How do I see what I'll get charged for this current month?
