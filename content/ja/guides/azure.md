@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: Azure WindowsへDatadog Agentのインストール
 kind: guide
-listorder: 8
+listorder: 9
 
 ---
 
