@@ -65,7 +65,7 @@ The following integration sources create tags automatically in Datadog:
 
 
 ### Assigning tags using the configuration files
-The Datadog integrations are all configured via the yaml configuration files located in your agent directories. For more about where to look for your configuration files, refer [to this article][agentinstall]. You can define tags in the configuration file for the overall agent as well as for each integration. In all cases, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
+The Datadog integrations are all configured via the yaml configuration files located in the conf.d directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall]. You can define tags in the configuration file for the overall agent as well as for each integration, though the datadog.conf file is a more traditional ini file. In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
@@ -78,7 +78,7 @@ or
       - secondtag
       - thirdtag
 
-You will see both forms in the configuration files.
+You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid. 
 
 Each tag can be anything you like but you will have the best success with tagging if your tags are key:value pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
 
