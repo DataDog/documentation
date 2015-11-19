@@ -17,7 +17,7 @@
 require './lib/rule_helper'
 require 'octokit'
 preprocess do
-
+  create_redirect_pages
   # def rchomp(sep = $/)
   #   self.start_with?(sep) ? self[sep.size..-1] : self
   # end
@@ -121,11 +121,11 @@ compile '/partials/*' do
 end
 
 compile '*' do
-  unless item.binary?
+  unless item.binary? or item[:title] == 'redirect'
     filter :erb
     case item[:extension]
       when 'md'
-        filter :kramdown, 
+        filter :kramdown,
                 :syntax_highligher => 'rouge',
                :syntax_highlighter_opts => { :line_numbers => false }
       else
@@ -144,7 +144,7 @@ compile '*' do
     id = @item.identifier
 
     case
-    
+
     # when id.match('/ja/guides/basic_agent_usage/')
     #   layout 'basic_agent_usage-ja'
     when id.match('/guides/basic_agent_usage/')
@@ -152,9 +152,11 @@ compile '*' do
     when id.match('/integrations') && @item[:kind] == 'integration'
       layout 'integration_layout'
     else
-      layout 'default'
+      if item[:title] != 'redirect'
+        layout 'default'
+      end
     end
-    
+
   end
 end
 
