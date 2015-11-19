@@ -77,15 +77,15 @@ def get_metrics_from_git
         metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
         if row['interval'] != nil
           metric_string += " every #{row['interval']} seconds"
-        end 
+        end
         metric_string += ")</td><td>#{row['description']}"
         if row['unit_name'] != nil
           metric_string += "<br/>shown as #{row['unit_name']}"
           if row['per_unit_name'] != nil
             metric_string += "/#{row['per_unit_name']}"
-          end 
-        end 
-        
+          end
+        end
+
         metric_string += "</td></tr>"
     end
     metric_string+="</table>"
@@ -109,3 +109,47 @@ def get_cache_bust_fingerprints
   return cbfingerprints
 end
 
+def create_redirect_pages
+  if @config.key?(:redirects)
+    if !@config[:redirects].to_a.empty?
+      @config[:redirects].each do |redirect|
+        raw_content = <<EOF
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>#{redirect[:from]}</title>
+    <meta http-equiv="refresh" content="0;URL='#{redirect[:to]}'" />
+  </head>
+  <body>
+    <p>This page has moved to <a href="#{redirect[:to]}">#{redirect[:to]}</a>.</p>
+  </body>
+</html>
+EOF
+        @items << Nanoc::Item.new(
+            raw_content,
+            {
+              :title => "redirect"
+            },
+            redirect[:from],
+            :binary => false
+          )
+      end
+    end
+  end
+end
+
+# def create_tag_pages(items=nil, options={})
+#       options[:tag_pattern]     ||= "%%tag%%"
+#       options[:title]           ||= options[:tag_pattern]
+#       options[:identifier]      ||= "/tags/#{options[:tag_pattern]}/"
+#       options[:template]        ||= "tag"
+
+#       tag_set(items).each do |tagname|
+#         raw_content = "<%= render('#{options[:template]}', :tag => '#{tagname}') %>"
+#         attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
+#         identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
+
+#         @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
+#       end
+#     end
