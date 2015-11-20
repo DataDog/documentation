@@ -130,7 +130,8 @@ The following metrics are collected by default with the Consul integration:
 	consul.serf.queue.Query.95percentile
 	
 
-Once you’ve registered a health check, the Datadog Agent will automatically tag each service-level check with a tag of the service name (whatever name is given in the check itself), allowing you to monitor group membership at the service level. Each tag is prefixed with `consul_service_id:` followed by the name of the service (e.g. `consul_service_id:redis`, `consul_service_id:cassandra`). All Consul servers have the tag `consul_service_id:consul`. Read more about health checks [here](https://www.consul.io/docs/agent/checks.html).  
 
+For each service that you're monitoring we'll create the `consul.catalog.nodes_up` gauge metric tagged by `consul_service_id` that will let you know how many Consul nodes are running each service. We'll also collect `consul.catalog.service_u` tagged by `consul_node_id` that measures how many services a node is running.
+Finally, we perform a service check `consul.check` that will report on the state of each service.
 
-Furthermore, Consul metrics are tagged with `mode:leader` or `mode:follower`, depending on the node status, so you can easily aggregate metrics by status.
+The other consul metrics collected are not service bound but node bound, and only `consul.peers` is tagged with `mode:leader` or `mode:follower`.
