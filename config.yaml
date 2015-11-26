@@ -80,3 +80,5 @@ redirects:
     to:    /guides/network_checks/?sc
   - from:  /guides/alerting/
     to:    /guides/monitoring/
+  - from:  /overview/
+    to:    /guides/overview/
