@@ -78,7 +78,7 @@ def get_metrics_from_git
         if row['interval'] != nil
           metric_string += " every #{row['interval']} seconds"
         end
-        metric_string += ")</td><td>#{row['description']}"
+        metric_string += ")</td><td>#{row['description'].gsub '^', ' to the '}"
         if row['unit_name'] != nil
           metric_string += "<br/>shown as #{row['unit_name']}"
           if row['per_unit_name'] != nil
