@@ -24,7 +24,7 @@ Because the agent metrics will be tied to the EC2 instance where the agent is ru
 
 Since the Agent is not running on an actual ElastiCache instance, but on a remote machine, the key to setting up this integration correctly is telling the Agent where to collect the metrics from.
 
-### 1. Gather connection details for your ElastiCache instance
+### Gather connection details for your ElastiCache instance
 
 First navigate to the AWS Console, open the ElastiCache section and then the Cache Clusters tab to find the cluster you want to monitor. It should look like:
 
@@ -37,23 +37,24 @@ Then click on the “node” link to access its endpoint URL:
 Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (e.g. **replica-001**). You will need these values to configure the agent and to create graphs and dashboards.
 
 
-### 2. Configure the Agent
+### Configure the Agent
 
 The Redis/Memcached integrations support the tagging of individual cache instances. Originally designed to allow the monitoring of multiple instances on the same machine, you can use these tags to your advantage. Here is an example of a configuration for ElastiCache with Redis using `redisdb.yaml`, usually found in `/etc/dd-agent/conf.d`
 
+    init_config:
 
-	Make sure you replace the API and or APP key below with the ones for your account
-	init\_config:
-	instances:
-	  - host: replica-001.xxxx.use1.cache.amazonaws.com # Endpoint URL from AWS console
-	    port: 6379
-	    tags:
-	  		- cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
+    instances:
+      - host: replica-001.xxxx.use1.cache.amazonaws.com # Endpoint URL from AWS console
+        port: 6379
+        tags:
+          - cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
+{:.language-yaml}
+
 
 Then restart the agent: `sudo /etc/init.d/datadog-agent restart` (on linux).
 
 
-### 3. Visualize ElastiCache and Redis/Memcached metrics together
+### Visualize ElastiCache and Redis/Memcached metrics together
 
 After a few minutes, ElastiCache metrics and Redis/Memcached metrics will be accessible in Datadog for graphing, monitoring, etc.
 

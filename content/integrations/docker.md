@@ -17,7 +17,7 @@ Get metrics from Docker in real time to:
 
 ### Metrics
 
-<%= get_metrics_from_git()%> 
+<%= get_metrics_from_git()%>
 
 We've written two in depth blog posts on Datadog and Docker::
 
@@ -31,30 +31,24 @@ If you want run the Agent inside a container, follow the Docker Agent installati
 1. Make sure that Docker is installed and running on your server
 2. Add the user running the Agent to docker's group.
 
-
-~~~ shell
-usermod -a -G docker dd-agent
-~~~
+        usermod -a -G docker dd-agent
+    {:.language-bash}
 
 
 3. Configure the Agent to connect to Docker. Edit ```conf.d/docker.yaml```
 
-
-
-        #!yaml
         init_config:
 
         instances:
-            - url: "unix://var/run/docker.sock"
-              new_tag_names: true
-
+          - url: "unix://var/run/docker.sock"
+            new_tag_names: true
+    {:.language-yaml}
 
 
 4. Restart the Agent
 5. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
 
-        #!shell
         Checks
         ======
 
