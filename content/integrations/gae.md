@@ -20,17 +20,16 @@ You can also send custom metrics to Datadog.
 
 Ensure that Billing is enabled on your Google App Engine project to collect all metrics
 
-1. Change directory into to your project's application directory. 
+1. Change directory into to your project's application directory.
 2. Clone our Google App Engine module
-    
+
         git clone https://github.com/DataDog/gae_datadog
-        
-        {: .lang-shell}
+{: .lang-shell}
 
 3. Edit your project's app.yaml file
 
     a. Add the Datadog handler to your app.yaml file:
-    
+
         handlers:
           # Should probably be at the beginning of the list
           # so it's not clobbered by a catchall route
@@ -60,15 +59,15 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
 6. Deploy your application. Refer to the Google App Engine documentation for language specific deployment command. For Python apps, it's:
 
-        appcfg.py -A <project id> update app.yaml        
+        appcfg.py -A <project id> update app.yaml
 
 7. Enter the URL for your application in the first text box on the integration configuration screen. If you are using Task queues in the Google Developers Console, you can add them here as well.
 
-At this point you will get a number of metrics for your environment. You can also choose to further instrument your app using the library for whatever language your app is written in. 
+At this point you will get a number of metrics for your environment. You can also choose to further instrument your app using the library for whatever language your app is written in.
 
 For Python apps, you might use the dogapi library. Here is the Getting Started Flask-based Python app, modified to increment a counter each time the main page has been hit:
 
-    #!python
+
     """`main` is the top level module for your Flask application."""
     import os
 
@@ -101,11 +100,11 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
     def application_error(e):
         """Return a custom 500 error."""
         return 'Sorry, unexpected error: {}'.format(e), 500
-
+{:.lang-python}
 
 ### Metrics
 
-Upon installation of the integration you get a number of metrics before instrumenting your app. 
+Upon installation of the integration you get a number of metrics before instrumenting your app.
 
 * gae.memcache.byte_hits
 * gae.memcache.bytes

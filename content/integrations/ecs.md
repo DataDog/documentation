@@ -25,7 +25,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 * Replace *simple-tag-0, tag-key-1:tag-value-1* with tags you want to associate with your containers' metrics; details [here](https://registry.hub.docker.com/u/datadog/docker-dd-agent/). If you don't want any tags, remove the whole block for defining tags.
 * Click "Create".
 
-~~~~~~~~    
+~~~~~~~~
     {
       "family": "dd-agent-task",
       "containerDefinitions": [
@@ -217,4 +217,4 @@ Currently work in progress, more to come soon
 
 ### Metrics
 
-<%= get_metrics_from_git()%> 
+<%= get_metrics_from_git()%>
