@@ -6,14 +6,13 @@ kind: integration
 doclevel: basic
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Capture Pivotal activity into Datadog to:
-<ul>
-<li> See and discuss the progress of each of your stories.</li>
-<li> Correlate story completion with other events and metrics in your system.</li>
-</ul>
-</div>
+
+* See and discuss the progress of each of your stories.
+* Correlate story completion with other events and metrics in your system.
+
+
 
 

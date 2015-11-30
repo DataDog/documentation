@@ -12,7 +12,7 @@ git_integration_title: docker
 
 Get metrics from Docker in real time to:
 
-* Vizualize your containers' performance.
+* Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside.
 
 ### Metrics
