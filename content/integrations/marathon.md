@@ -5,9 +5,6 @@ kind: integration
 doclevel: basic
 ---
 
-
-
-
 Connects Marathon to Datadog in order to:
 
 * Visualize your Marathon framework's performance

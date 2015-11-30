@@ -5,26 +5,22 @@ integration_title: Varnish
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect Varnish to Datadog in order to:
-<ul>
-<li> Visualize your cache performance in real-time.</li>
-<li> Correlate the performance of Varnish with the rest of your applications.</li>
-</ul>
-</div>
+
+  * Visualize your cache performance in real-time.
+  * Correlate the performance of Varnish with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example">
-Varnish YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py">
-Varnish checks.d</a>
+* [ Varnish YAML example][1]
+* [ Varnish checks.d][2]
 
 The following metrics are collected by default with the Varnish integration.
 
-### If you are using Varnish 3.0:
+
+#### If you are using Varnish 3.0:
 
     varnish.accept_fail
     varnish.backend_busy
@@ -245,7 +241,7 @@ The following metrics are collected by default with the Varnish integration.
     varnish.sms_nreq
     varnish.uptime
 
-### If you are using Varnish 4.0:
+#### If you are using Varnish 4.0:
 
     varnish.backend_busy
     varnish.backend_conn
@@ -539,3 +535,6 @@ The following metrics are collected by default with the Varnish integration.
     varnish.vsm_overflow
     varnish.vsm_overflowed
     varnish.vsm_used
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py

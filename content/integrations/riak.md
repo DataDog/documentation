@@ -5,22 +5,16 @@ integration_title: Riak
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect Riak to Datadog in order to:
-<ul>
-<li> Visualize Riak performance and utilization.</li>
-<li> Correlate the performance of Riak with the rest of your applications.</li>
-</ul>
-</div>
+
+  * Visualize Riak performance and utilization.
+  * Correlate the performance of Riak with the rest of your applications.
 
 From the open-source Agent:
-
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example">
-Riak YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py">
-Riak checks.d</a>
+* [ Riak YAML example][1]
+* [ Riak checks.d][2]
 
 The following metrics are collected by default with the Riak integration:
 
@@ -46,7 +40,9 @@ The following metrics are collected by default with the Riak integration:
     riak.vnode_index_reads
     riak.vnode_index_writes
     riak.vnode_puts
-    
-    
 
 
+
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py
