@@ -20,14 +20,14 @@ From the open-source Agent:
 
 The following metrics are collected by default with the Apache integration:
 
-  * apache.net.bytes
-  * apache.net.bytes_per_s
-  * apache.net.hits
-  * apache.net.request_per_s
-  * apache.performance.busy_workers
-  * apache.performance.cpu_load
-  * apache.performance.idle_workers
-  * apache.performance.uptime
+    apache.net.bytes
+    apache.net.bytes_per_s
+    apache.net.hits
+    apache.net.request_per_s
+    apache.performance.busy_workers
+    apache.performance.cpu_load
+    apache.performance.idle_workers
+    apache.performance.uptime
 
 
 ### Configuration

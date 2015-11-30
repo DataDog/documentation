@@ -6,15 +6,15 @@ doclevel: basic
 ---
 ### Overview
 
-Capture commits and pull requests events directly from your bitbucket to: 
+Capture commits and pull requests events directly from your bitbucket to:
 
   * Keep track of code changes in real time
   * Add code change markers on all of your dashboards
   * Discuss code changes with your team
 
-We've written extensively about the Bitbucket integration on our [blog][1]. 
+We've written extensively about the Bitbucket integration on our [blog][1].
 
-   
+
 ### Configuration
 {: #int-configuration}
 

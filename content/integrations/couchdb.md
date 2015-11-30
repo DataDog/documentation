@@ -4,25 +4,21 @@ integration_title: CouchDB
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Capture CouchDB data in Datadog to:
-<ul>
-<li> Visualize key CouchDB metrics.</li>
-<li> Correlate CouchDB performance with the rest of your applications.</li>
-</ul>
-</div>
 
+* Visualize key CouchDB metrics.
+* Correlate CouchDB performance with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example">
-CouchDB YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/couchdb.py">
-CouchDB checks.d</a>
+* [ CouchDB YAML example][1]
+* [ CouchDB checks.d][2]
 
 The following metrics are collected by default with the CouchDB integration:
+
+
 
     couchdb.database_writes
     couchdb.database_reads
@@ -34,5 +30,8 @@ The following metrics are collected by default with the CouchDB integration:
     couchdb.open_databases
     couchdb.open_os_files
     couchdb.request_time
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/couchdb.py
 
 
