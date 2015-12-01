@@ -212,7 +212,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     - If the monitor is in a "no data" state then resolving it will hide it from the
       triggered monitors page.
     - If the monitor is in the triggered state but has stopped reporting data then
-      resolving it will hide it from the triggered state.
+      resolving it will hide it from the triggered monitors page.
 
   Otherwise the monitor will pick up the current state on the next evaluation. In other
   words, if the value is still above/below the configured threshold then the monitor may
