@@ -180,14 +180,11 @@ kind: documentation
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
-                  Note that the timestamp must be current.
+                  Note that the timestamp must be current, and the numeric value is a 32bit float gauge-type value.
               </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          <%= argument('type', 'The type of the metric - <code>gauge</code>
-          or <code>counter</code> (counter data is expected as a sample of the raw counter value, not a delta
-          or time-normalized rate). Gauges are 32bit floats while counters are 64bit integers.', :default => 'gauge' ) %>
           </ul>
         </ul>
       </div>
