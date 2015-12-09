@@ -242,16 +242,13 @@ eof
 
 ## Configuration
 
-DogStatsD supports the following options, all of which can be tweaked in the
+DogStatsD supports the following option, that can be tweaked in the
 Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
 configuration file</a>:
 
     # The port DogStatsD runs on. If you change this, make your the apps sending to
     # it change as well.
     dogstatsd_port: 8125
-
-    # The number of seconds to wait between flushes to the server.
-    dogstatsd_interval: 10
 
 ## Datagram Format
 
