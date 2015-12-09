@@ -20,6 +20,7 @@ There are two ways to have multiple accounts have access to the same data. First
 The new user will receive an email with a link to login.
 
 ### Disable Existing Members
+***NOTE:** You must be an Admin of the team to disable members*
 
 1. Go to the [Team Page][TeamPage].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
@@ -28,6 +29,7 @@ The new user will receive an email with a link to login.
     {: style="width:200px;"}
 
 ### Promote Existing Members to Admin
+***NOTE:** You must be an Admin of the team to promote members*
 
 1. Go to the [Team Page][TeamPage].
 2. Hover over the avatar for the user you wish to disable. Choose **Make Admin** from the menu.
