@@ -4,6 +4,35 @@ integration_title: New Relic
 kind: integration
 ---
 
+### Overview
+Connect to New Relic to:
+
+* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
+* See New Relic alerts in your event stream
+
+### Installation
+
+#### New Relic Alerts in Event Stream
+
+1. On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
+
+        https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}
+
+2. For 'Custom Payload'(s), select JSON 'Payload Type'.
+
+#### New Relic APM Metric Collection
+
+1. Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
+
+    *Note: Metrics can only be imported for New Relic customers at the Pro level or above.*
+
+2. If you wish to tag metrics at an account level, please add an account tag.
+3. Choose whether you want to collect your metrics per hosts or app-wide.
+
+    *Note: Enabling this options will import New Relic hosts to Datadog.*
+
+### Troubleshooting & FAQ
+
 #### What does the 'Collect metrics by host' option do ?
 
 When set, Datadog collects application metrics for every associated hosts,
