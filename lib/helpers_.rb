@@ -97,6 +97,41 @@ def get_metrics_from_git
 return output
 end
 
+def get_units_from_git
+  require 'octokit'
+  require 'base64'
+  require 'csv'
+
+  if ENV.has_key?('github_personal_token')
+    itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
+    unit_string = ""
+    units_by_family = Hash.new([])
+    CSV.parse(Base64.decode64(itext), :headers => true) do |row|
+      # row.each do |unit_id, family, name, plural, short_name, scale_factor|
+      if units_by_family.has_key?(row['family'])
+        units_by_family[row['family']].push(row['name'])
+      else
+        units_by_family[row['family']] = [row['name']]
+      end
+
+    end
+
+    units_by_family.keys.each do |family|
+      unit_string += "<h2>#{family}</h2>"
+      units_by_family[family].each do |unit_name|
+        unit_string += "<ul>"
+        unit_string += "<li>#{unit_name}</li>"
+        unit_string += "</ul>"
+      end
+    end
+    output = unit_string
+  else
+    raise "Github personal token required"
+  end
+
+return output
+end
+
 def get_cache_bust_fingerprints
   cbfingerprints = Hash.new()
   @items.each do |item|
