@@ -1,4 +1,6 @@
 {'dash': {'description': 'An informative timeboard.',
+  'created': '2015-12-17T21:29:40.890824+00:00',
+  'modified': '2015-12-17T21:29:40.890824+00:00',
   'graphs': [{'definition': {'events': [],
      'requests': [{'q': 'avg:system.mem.free{*}'}],
      'viz': 'timeseries'},

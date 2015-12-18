@@ -13,5 +13,7 @@
     "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
     "state": {},
     "type": "metric alert",
-    "multi": false
+    "multi": false,
+    "created": "2015-12-18T16:34:14.014039+00:00",
+    "modified": "2015-12-18T16:34:14.014039+00:00"
 }

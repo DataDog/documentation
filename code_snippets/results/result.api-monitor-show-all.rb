@@ -6,7 +6,9 @@
    "message"=>"We may need to add web hosts if this is consistently high.",
    "type"=>"metric alert",
    "multi"=>false,
-   "id"=>91879},
+   "id"=>91879,
+   "created"=>"2015-12-18T16:34:14.014039+00:00",
+   "modified"=>"2015-12-18T16:34:14.014039+00:00"},
   {"name"=>
     "**system.net.bytes_rcvd** over **host:host0** was **> 100** on average during the **last 1h**.",
    "org_id"=>1499,
@@ -22,4 +24,6 @@
    "message"=>"",
    "type"=>"metric alert",
    "multi"=>false,
-   "id"=>91875}]]
+   "id"=>91875,
+   "created"=>"2015-12-18T16:34:14.014039+00:00",
+   "modified"=>"2015-12-18T16:34:14.014039+00:00"}]]
