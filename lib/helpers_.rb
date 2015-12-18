@@ -91,7 +91,7 @@ def get_metrics_from_git
     metric_string+="</table>"
     output = metric_string
   else
-    output = "Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production."
+    output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
   end
 
 return output
@@ -126,7 +126,8 @@ def get_units_from_git
     end
     output = unit_string
   else
-    raise "Github personal token required"
+    output = "<strong>Units is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+    # raise "Github personal token required"
   end
 
 return output
