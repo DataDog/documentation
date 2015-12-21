@@ -215,7 +215,7 @@ ol.outline {
 
     li {
       margin: 0;
-      
+
       border-right: 1px solid $lightpurple;
       border-left: 1px solid $lightpurple;
       // border-bottom: 1px solid $lightpurple;
@@ -327,7 +327,7 @@ ol.outline {
 
 .api-page {
   .btn.gradient {
-    background: linear-gradient(to bottom,  $btngrey,$btngrey2); 
+    background: linear-gradient(to bottom,  $btngrey,$btngrey2);
     &:hover, &:focus, &:active {
       background: linear-gradient(to bottom, $btngrey3, $btngrey2);
     }
@@ -447,4 +447,13 @@ span.question {
 
 .snmp dt {
   margin-top: 20px;
+}
+
+dd {
+  margin-left: 15px;
+}
+
+dt {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }

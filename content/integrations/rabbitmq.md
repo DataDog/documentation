@@ -5,24 +5,20 @@ integration_title: RabbitMQ
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect RabbitMQ to Datadog in order to:
-<ul>
-<li> Visualize RabbitMQ performance and utilization.</li>
-<li> Correlate the performance of RabbitMQ with the rest of your applications.</li>
-</ul>
-</div>
+
+  * Visualize RabbitMQ performance and utilization.
+  * Correlate the performance of RabbitMQ with the rest of your applications.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/rabbitmq.yaml.example">
-RabbitMQ YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/rabbitmq.py">
-RabbitMQ checks.d</a>
+* [ RabbitMQ YAML example][1]
+* [ RabbitMQ checks.d][2]
 
 The following metrics are collected by default with the RabbitMQ integration:
+
 
     rabbitmq.node.fd_used
     rabbitmq.node.mem_used
@@ -49,10 +45,10 @@ The following metrics are collected by default with the RabbitMQ integration:
     rabbitmq.queue.messages_unacknowledged
     rabbitmq.queue.messages_unacknowledged.rate
 
+By default, `queue` metrics are tagged by queue and `node` metrics are tagged by node. If you have a Datadog account you can see the integration installation instructions [here][3].
 
-By default, <code>queue</code> metrics are tagged by queue and <code>node</code> metrics are tagged by node.
-
-If you have a Datadog account you can see the integration installation instructions
-<a href="https://app.datadoghq.com/account/settings#integrations/rabbitmq">here</a>.
+   [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/rabbitmq.yaml.example
+   [2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/rabbitmq.py
+   [3]: https://app.datadoghq.com/account/settings#integrations/rabbitmq
 
 

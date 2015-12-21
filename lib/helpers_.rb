@@ -67,12 +67,8 @@ def get_metrics_from_git
 
   if ENV.has_key?('github_personal_token')
     ititle = @item[:git_integration_title]
-    if ititle == 'system'
-      ititle2 = 'os'
-    else
-      ititle2 = ititle
-    end
-    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle2+"_metadata.csv").content
+
+    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
     # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
     # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
     metric_string = "<table class='table'>"
@@ -81,21 +77,57 @@ def get_metrics_from_git
         metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
         if row['interval'] != nil
           metric_string += " every #{row['interval']} seconds"
-        end 
-        metric_string += ")</td><td>#{row['description']}"
+        end
+        metric_string += ")</td><td>#{row['description'].gsub '^', ' to the '}"
         if row['unit_name'] != nil
           metric_string += "<br/>shown as #{row['unit_name']}"
           if row['per_unit_name'] != nil
             metric_string += "/#{row['per_unit_name']}"
-          end 
-        end 
-        
+          end
+        end
+
         metric_string += "</td></tr>"
     end
     metric_string+="</table>"
     output = metric_string
   else
-    output = "Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production."
+    output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+  end
+
+return output
+end
+
+def get_units_from_git
+  require 'octokit'
+  require 'base64'
+  require 'csv'
+
+  if ENV.has_key?('github_personal_token')
+    itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
+    unit_string = ""
+    units_by_family = Hash.new([])
+    CSV.parse(Base64.decode64(itext), :headers => true) do |row|
+      # row.each do |unit_id, family, name, plural, short_name, scale_factor|
+      if units_by_family.has_key?(row['family'])
+        units_by_family[row['family']].push(row['name'])
+      else
+        units_by_family[row['family']] = [row['name']]
+      end
+
+    end
+
+    units_by_family.keys.each do |family|
+      unit_string += "<h2>#{family}</h2>"
+      units_by_family[family].each do |unit_name|
+        unit_string += "<ul>"
+        unit_string += "<li>#{unit_name}</li>"
+        unit_string += "</ul>"
+      end
+    end
+    output = unit_string
+  else
+    output = "<strong>Units is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+    # raise "Github personal token required"
   end
 
 return output
@@ -113,3 +145,47 @@ def get_cache_bust_fingerprints
   return cbfingerprints
 end
 
+def create_redirect_pages
+  if @config.key?(:redirects)
+    if !@config[:redirects].to_a.empty?
+      @config[:redirects].each do |redirect|
+        raw_content = <<EOF
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>#{redirect[:from]}</title>
+    <meta http-equiv="refresh" content="0;URL='#{redirect[:to]}'" />
+  </head>
+  <body>
+    <p>This page has moved to <a href="#{redirect[:to]}">#{redirect[:to]}</a>.</p>
+  </body>
+</html>
+EOF
+        @items << Nanoc::Item.new(
+            raw_content,
+            {
+              :title => "redirect"
+            },
+            redirect[:from],
+            :binary => false
+          )
+      end
+    end
+  end
+end
+
+# def create_tag_pages(items=nil, options={})
+#       options[:tag_pattern]     ||= "%%tag%%"
+#       options[:title]           ||= options[:tag_pattern]
+#       options[:identifier]      ||= "/tags/#{options[:tag_pattern]}/"
+#       options[:template]        ||= "tag"
+
+#       tag_set(items).each do |tagname|
+#         raw_content = "<%= render('#{options[:template]}', :tag => '#{tagname}') %>"
+#         attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
+#         identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
+
+#         @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
+#       end
+#     end

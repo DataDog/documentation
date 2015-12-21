@@ -7,8 +7,8 @@ git_integration_title: kubernetes
 
 Get metrics from your Kubelets in real time to:
 
-Vizualize your Kubernetes cluster performance
+* Visualize your Kubernetes cluster performance
 
 ### Metrics
 
-<%= get_metrics_from_git()%> 
+<%= get_metrics_from_git()%>

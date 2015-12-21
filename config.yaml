@@ -67,3 +67,18 @@ base_url: http://docs.datadoghq.com/
 # redirects:
 #   - /overview:
 #     - /guides/overview
+
+# make sure each redirect url starts and ends with a slash (/)
+redirects:
+  - from:  /integrations/rds/
+    to:    /integrations/awsrds/
+  - from:  /integrations/beanstalk/
+    to:    /integrations/awsbeanstalk/
+  - from:  /integrations/elasticache/
+    to:    /integrations/awselasticache/
+  - from:  /guides/services_checks/
+    to:    /guides/network_checks/?sc
+  - from:  /guides/alerting/
+    to:    /guides/monitoring/
+  - from:  /overview/
+    to:    /guides/overview/

@@ -6,19 +6,20 @@ kind: integration
 
 ### Overview
 
-Connect Consul to Datadog in order to:  
-<ul>
-	<li> Correlate the performance of Consul with the rest of your applications</li>  
-	<li> Monitor the health of your Consul cluster</li>  
-</ul>
+Connect Consul to Datadog in order to:
+* Correlate the performance of Consul with the rest of your applications
+* Monitor the health of your Consul cluster
 
-From the open-source Agent:  
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/consul.yaml.example">Consul YAML Example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/consul.py">Consul checks.d</a>
- 
+
+From the open-source Agent:
+
+* [Consul YAML Example][1]
+* [Consul checks.d][2]
+
+
 The following metrics are collected by default with the Consul integration:
-	
+
 	consul.peers
 	consul.catalog.nodes_up
 	consul.consul.rpc.query
@@ -128,9 +129,13 @@ The following metrics are collected by default with the Consul integration:
 	consul.serf.queue.Query.count
 	consul.serf.queue.Query.max
 	consul.serf.queue.Query.95percentile
-	
-
-Once you’ve registered a health check, the Datadog Agent will automatically tag each service-level check with a tag of the service name (whatever name is given in the check itself), allowing you to monitor group membership at the service level. Each tag is prefixed with `consul_service_id:` followed by the name of the service (e.g. `consul_service_id:redis`, `consul_service_id:cassandra`). All Consul servers have the tag `consul_service_id:consul`. Read more about health checks [here](https://www.consul.io/docs/agent/checks.html).  
 
 
-Furthermore, Consul metrics are tagged with `mode:leader` or `mode:follower`, depending on the node status, so you can easily aggregate metrics by status.
+
+For each service that you're monitoring we'll create the `consul.catalog.nodes_up` gauge metric tagged by `consul_service_id` that will let you know how many Consul nodes are running each service. We'll also collect `consul.catalog.service_u` tagged by `consul_node_id` that measures how many services a node is running.
+Finally, we perform a service check `consul.check` that will report on the state of each service.
+
+The other consul metrics collected are not service bound but node bound, and only `consul.peers` is tagged with `mode:leader` or `mode:follower`.
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/consul.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/consul.py

@@ -5,22 +5,20 @@ integration_title: SQL Server
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect SQL Server to Datadog in order to:
-<ul>
-<li> Visualize your database performance.</li>
-<li> Correlate the performance of SQL Server with the rest of your applications.</li>
-</ul>
-</div>
+
+  * Visualize your database performance.
+  * Correlate the performance of SQL Server with the rest of your applications.
+
+
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/sqlserver.yaml.example">
-SQL Server YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/sqlserver.py">
-SQL Server checks.d</a>
+* [ SQL Server YAML example][1]
+* [ SQL Server checks.d][2]
+
 
 The following metrics are collected by default with the SQL Server integration:
 
@@ -35,6 +33,7 @@ The following metrics are collected by default with the SQL Server integration:
     sqlserver.stats.sql_compilations
     sqlserver.stats.sql_recompilations
 
-
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/sqlserver.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/sqlserver.py
 
 

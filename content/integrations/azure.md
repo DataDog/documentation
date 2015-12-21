@@ -42,7 +42,7 @@ You can either deploy agents manually by following the instructions <a href="/gu
 
 ### Troubleshooting
 {: #troubleshooting}
-Here are some common issues you might be seeing. 
+Here are some common issues you might be seeing.
 
 #### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].
