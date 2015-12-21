@@ -15,7 +15,7 @@ Edit conf.d/gunicorn.yaml
         instances:
             -   proc_name: my_web_app
 
-    
+
 3. Restart the Agent
 4. Execute the info command and verify that the integration check has passed.The output of the command should contain a section similar to the following:
 

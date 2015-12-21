@@ -4,24 +4,20 @@ integration_title: Event Viewer
 kind: integration
 ---
 
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect Event Viewer to Datadog in order to:
-<ul>
-<li> Track system and application events in Datadog.</li>
-<li> Correlate system and application events with the rest of your application.</li>
-</ul>
-</div>
+
+* Track system and application events in Datadog.
+* Correlate system and application events with the rest of your application.
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example">
-Event Viewer YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py">
-Event Viewer checks.d</a>
+* [ Event Viewer YAML example][1]
+* [ Event Viewer checks.d][2]
 
-<h3>Configuration</h3>
+### Configuration
+
 
 Use the Windows Event Viewer GUI to list all the event logs you can capture with this integration.
 
@@ -40,3 +36,6 @@ to capture the same kind of events.
 **Note**: the information given by the `Get-EventLog` PowerShell command or the Windows Event Viewer
 GUI may slightly differ from `Get-WmiObject`, so we recommend you to double-check your filters' values
 with `Get-WmiObject` if the integration does not capture the events you set up.
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py

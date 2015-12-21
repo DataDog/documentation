@@ -39,7 +39,7 @@ If you are using Visual Studio, make sure that the file is included in the packa
 
 **Add** the installation task to your `ServiceDefinition.csdef` file by adding the following in the `<Startup>` section:
 
-    <Task commandLine="installDatadogAgent.cmdi YOUR_API_KEY" executionContext="elevated" />
+    <Task commandLine="installDatadogAgent.cmd YOUR_API_KEY" executionContext="elevated" />
 
 
 Be sure to replace `YOUR_API_KEY` with your API key found at [here](https://app.datadoghq.com/account/settings#api).

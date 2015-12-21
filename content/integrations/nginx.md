@@ -35,15 +35,17 @@ If you see some output with `configure arguments:` and lots of options, then you
 
 For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
 
-The following metrics are collected by default via the stub status module:
 
-* **nginx.net.connections**
-* **nginx.net.conn_dropped_per_s**
-* **nginx.net.conn_opened_per_s**
-* **nginx.net.reading**
-* **nginx.net.request_per_s**
-* **nginx.net.waiting**
-* **nginx.net.writing**
+| Metrics collected by default via stub status module |
+|--------------------------------|
+|nginx.net.connections | The current number of active client connections including Waiting connections. |
+|nginx.net.conn_dropped_per_s |
+|nginx.net.conn_opened_per_s |
+|nginx.net.reading | The current number of connections where nginx is reading the request header.|
+|nginx.net.request_per_s | The total number of client requests.|
+|nginx.net.waiting | The current number of idle client connections waiting for a request. |
+|nginx.net.writing | The current number of connections where nginx is writing the response back to the client.|
+{:.table}
 
 The data pulled from the nginx stub status page are described in the [nginx docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 
@@ -54,72 +56,86 @@ If you are using NGINX Plus, you have access to the extended [http_status_module
 The metrics shown for the basic NGINX integration show up differently in the NGINX Plus integration.
 Here are the  metrics name changes from NGINX to NGINX Plus:
 
-* **nginx.net.connections -> nginx.connections.active**
-* **nginx.net.conn_opened_per_s -> nginx.connections.accepted**
-* **nginx.net.conn_dropped_per_s -> nginx.connections.dropped**
-* **nginx.net.request_per_s -> nginx.requests.total**
+| NGINX Metrics | NGINX Plus Metrics |
+|-------------------|-------------------|
+| nginx.net.connections | nginx.connections.active |
+| nginx.net.conn_opened_per_s | nginx.connections.accepted |
+| nginx.net.conn_dropped_per_s | nginx.connections.dropped |
+| nginx.net.request_per_s | nginx.requests.total |
+{:.table}
 
+<br/>
 These metrics do not have a directly related metric, but here are close translations:
 
-* **nginx.net.waiting -> nginx.connections.idle**
- * **nginx.net.waiting**: The current number of idle client connections waiting for a request.
- * **nginx.connections.idle**: The current number of idle client connections.
+| NGINX Metrics | NGINX Plus Metrics |
+|-------------------|-------------------|
+| nginx.net.waiting | nginx.connections.idle|
+ | nginx.net.waiting|  The current number of idle client connections waiting for a request|
+ | nginx.connections.idle| The current number of idle client connections|
+{:.table}
 
+<br/>
 Finally, these metrics have no good translation:
 
-* **nginx.net.reading**: The current number of connections where nginx is reading the request header.
-* **nginx.net.writing**: The current number of connections where nginx is writing the response back to the client.
+| NGINX Metrics | NGINX Plus Metrics |
+|-------------------|-------------------|
+| nginx.net.reading | The current number of connections where nginx is reading the request header. |
+| nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
+{:.table}
 
-Here are some of the metrics collected from NGINX Plus:
+<br/>
 
-* **nginx.connections.accepted**
-* **nginx.connections.active**
-* **nginx.connections.dropped**
-* **nginx.connections.idle**
-* **nginx.generation**
-* **nginx.load_timestamp**
-* **nginx.pid**
-* **nginx.processes.respawned**
-* **nginx.requests.current**
-* **nginx.requests.total**
-* **nginx.server_zone.discarded**
-* **nginx.server_zone.processing**
-* **nginx.server_zone.received**
-* **nginx.server_zone.requests**
-* **nginx.server_zone.responses.1xx**
-* **nginx.server_zone.responses.2xx**
-* **nginx.server_zone.responses.3xx**
-* **nginx.server_zone.responses.4xx**
-* **nginx.server_zone.responses.5xx**
-* **nginx.server_zone.responses.total**
-* **nginx.server_zone.sent**
-* **nginx.ssl.handshakes**
-* **nginx.ssl.handshakes_failed**
-* **nginx.ssl.session_reuses**
-* **nginx.timestamp**
-* **nginx.upstream.keepalive**
-* **nginx.upstream.peers.active**
-* **nginx.upstream.peers.backup**
-* **nginx.upstream.peers.downstart**
-* **nginx.upstream.peers.downtime**
-* **nginx.upstream.peers.fails**
-* **nginx.upstream.peers.health_checks.checks**
-* **nginx.upstream.peers.health_checks.fails**
-* **nginx.upstream.peers.health_checks.last_passed**
-* **nginx.upstream.peers.health_checks.unhealthy**
-* **nginx.upstream.peers.id**
-* **nginx.upstream.peers.received**
-* **nginx.upstream.peers.requests**
-* **nginx.upstream.peers.responses.1xx**
-* **nginx.upstream.peers.responses.2xx**
-* **nginx.upstream.peers.responses.3xx**
-* **nginx.upstream.peers.responses.4xx**
-* **nginx.upstream.peers.responses.5xx**
-* **nginx.upstream.peers.responses.total**
-* **nginx.upstream.peers.selected**
-* **nginx.upstream.peers.sent**
-* **nginx.upstream.peers.unavail**
-* **nginx.upstream.peers.weight**
-* **nginx.version**
+| Other metrics collected in NGINX Plus |
+|--------------------------|
+| nginx.connections.accepted | The total number of accepted client connections.|
+| nginx.connections.active |The current number of active client connections.|
+| nginx.connections.dropped |The total number of dropped client connections.|
+| nginx.connections.idle |The current number of idle client connections.|
+| nginx.generation | The total number of configuration reloads.|
+| nginx.load_timestamp | Time of the last reload of configuration, in milliseconds since Epoch.|
+| nginx.pid | The ID of the worker process that handled status request.|
+| nginx.processes.respawned |The total number of abnormally terminated and respawned child processes.|
+| nginx.requests.current | The current number of client requests.|
+| nginx.requests.total |The total number of client requests.|
+| nginx.server_zone.discarded |The total number of requests completed without sending a response.|
+| nginx.server_zone.processing |The number of client requests that are currently being processed.|
+| nginx.server_zone.received |The total number of bytes received from clients.|
+| nginx.server_zone.requests |The total number of client requests received from clients.|
+| nginx.server_zone.responses.1xx |The number of responses with 1xx status code.|
+| nginx.server_zone.responses.2xx |The number of responses with 2xx status code.|
+| nginx.server_zone.responses.3xx |The number of responses with 3xx status code.|
+| nginx.server_zone.responses.4xx |The number of responses with 4xx status code.|
+| nginx.server_zone.responses.5xx |The number of responses with 5xx status code.|
+| nginx.server_zone.responses.total |The total number of responses sent to clients.|
+| nginx.server_zone.sent |The total number of bytes sent to clients.|
+| nginx.ssl.handshakes |The total number of successful SSL handshakes.|
+| nginx.ssl.handshakes_failed |The total number of failed SSL handshakes.|
+| nginx.ssl.session_reuses |The total number of session reuses during SSL handshake.|
+| nginx.timestamp |Current time in milliseconds since Epoch.|
+| nginx.upstream.keepalive |The current number of idle keepalive connections.|
+| nginx.upstream.peers.active |The current number of active connections.|
+| nginx.upstream.peers.backup |A boolean value indicating whether the server is a backup server.|
+| nginx.upstream.peers.downstart |The time (in milliseconds since Epoch) when the server became “unavail” or “unhealthy”.|
+| nginx.upstream.peers.downtime |Total time the server was in the “unavail” and “unhealthy” states.|
+| nginx.upstream.peers.fails |The total number of unsuccessful attempts to communicate with the server.|
+| nginx.upstream.peers.health_checks.checks |The total number of health check requests made.|
+| nginx.upstream.peers.health_checks.fails |The number of failed health checks.|
+| nginx.upstream.peers.health_checks.last_passed |Boolean indicating if the last health check request was successful and passed tests.|
+| nginx.upstream.peers.health_checks.unhealthy |How many times the server became unhealthy (state “unhealthy”).|
+| nginx.upstream.peers.id |The ID of the server.|
+| nginx.upstream.peers.received |The total number of bytes received from this server.|
+| nginx.upstream.peers.requests |The total number of client requests forwarded to this server.|
+| nginx.upstream.peers.responses.1xx |The number of responses with 1xx status code.|
+| nginx.upstream.peers.responses.2xx |The number of responses with 2xx status code.|
+| nginx.upstream.peers.responses.3xx |The number of responses with 3xx status code.|
+| nginx.upstream.peers.responses.4xx |The number of responses with 4xx status code.|
+| nginx.upstream.peers.responses.5xx |The number of responses with 5xx status code.|
+| nginx.upstream.peers.responses.total |The total number of responses obtained from this server.|
+| nginx.upstream.peers.selected |The time (in milliseconds since Epoch) when the server was last selected to process a request (1.7.5).|
+| nginx.upstream.peers.sent |The total number of bytes sent to this server.|
+| nginx.upstream.peers.unavail |How many times the server became unavailable for client requests (state “unavail”) due to the number of unsuccessful attempts reaching the max_fails threshold.|
+| nginx.upstream.peers.weight |Weight of the server.|
+| nginx.version | Version of nginx. |
+{:.table}
 
 The data pulled from the NGINX Plus status page are described in the [nginx docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).

@@ -33,15 +33,15 @@ To configure the HDFS integration, copy hdfs.yaml.example if the conf.d director
     #     tags:
     #       - optional_tag
 
-## Metrics Available    
+## Metrics Available
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 
-    hdfs.used 
+    hdfs.used
     hdfs.free
     hdfs.capacity
     hdfs.in_use
     hdfs.under_replicated
     hdfs.missing_blocks
-    hdfs.corrupt_blocks 
+    hdfs.corrupt_blocks
 
 You may experience reduced functionality if using hadoop before v2.2.0. For earlier versions, we need to use Snakebite v1.3.9. If using HA Mode, you may want to upgrade.
