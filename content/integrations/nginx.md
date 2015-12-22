@@ -1,6 +1,6 @@
 ---
 title: Datadog-NGINX Integration
-integration_title: nginx
+integration_title: NGINX
 kind: integration
 ---
 ### Overview
@@ -11,6 +11,9 @@ Connect NGINX to Datadog in order to:
 * Visualize your web server performance
 * Correlate the performance of Nginx with the rest of your applications
 
+![NGINX default dashboard](/static/images/nginx.jpg)
+
+Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor NGINX.
 
 The default agent checks require the [nginx stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html), which is not compiled by default.  In debian/ubuntu, this module is enabled in the `nginx-extras` package.  To check if your version of nginx has the stub status module support compiled in, you can run:
 
