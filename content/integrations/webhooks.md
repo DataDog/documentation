@@ -15,9 +15,9 @@ With Webhooks you'll be able to:
 
 ### Setup
 
-To create a webhook, just enter the URL and a name. Then to use your webhook in Datadog, just add @webhook-name_of_the_webhook in the text of the metric alert you want to trigger the webhook. It will trigger a POST request to the URL you set with the following content in JSON format.
+To create a webhook, just enter the URL and a name in the [webhook integration tile](https://app.datadoghq.com/account/settings#integrations/webhooks). Then to use your webhook in Datadog, just add @webhook-name_of_the_webhook in the text of the metric alert you want to trigger the webhook. It will trigger a POST request to the URL you set with the following content in JSON format.
 
-You can also specify your own payload in order to add your own fields to the request. Check the "Use Custom Payload" checkbox and specify your own custom payload, using the following variables. If you want your payload to be URL-encoded, check the "Encode as form" payload and specify your payload in a json format.
+You can also specify your own payload in order to add your own custom fields to the request. Check the "Use Custom Payload" checkbox and specify your own custom payload, using the following variables. If you want your payload to be URL-encoded, check the "Encode as form" payload and specify your payload in a json format.
 
     $ID : ID of the event (ex: 1234567)
     $EVENT_TITLE: Title of the event (ex: [Triggered] [Memory Alert])
