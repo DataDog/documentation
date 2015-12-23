@@ -14,7 +14,6 @@ To start collecting DynamoDB metrics, the only thing you need to do is to set up
 
 Learn more about how to monitor DynamoDB performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-dynamodb-performance-metrics/). We detail the key performance metrics, how to collect them, and how [Medium](https://medium.com/) monitors DynamoDB using Datadog.
 
-
 ### Metrics
 
 <%= get_metrics_from_git()%> 
