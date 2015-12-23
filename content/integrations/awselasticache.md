@@ -4,6 +4,11 @@ integration_title: AWS ElastiCache
 kind: integration
 ---
 
+![ElastiCache Memcached default dashboard](/static/images/elasticache-memcached.png)
+
+Learn more about how to monitor ElastiCache performance metrics, whether you use Redis or Memcached, thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/). We detail the key performance metrics, how to collect them, and how [Coursera](https://www.coursera.org/) monitors ElastiCache using Datadog.
+
+
 To collect all available ElastiCache metrics, you need to do two things:
 
 1.  [Turn on the ElastiCache integration](https://app.datadoghq.com/account/settings#integrations/amazon_elasticache) to pull metrics from ElastiCache into Datadog

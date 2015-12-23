@@ -14,6 +14,11 @@ Get metrics from Docker in real time to:
 * Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside.
 
+![Docker default dashboard](/static/images/docker.png)
+
+Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
+
+
 There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
 
 **Note:** docker_daemon replaces the older docker integration going forward.

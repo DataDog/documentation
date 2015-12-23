@@ -12,6 +12,10 @@ Connect Varnish to Datadog in order to:
   * Visualize your cache performance in real-time.
   * Correlate the performance of Varnish with the rest of your applications.
 
+![Varnish default dashboard](/static/images/varnish.png)
+
+Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.
+
 From the open-source Agent:
 
 * [ Varnish YAML example][1]
