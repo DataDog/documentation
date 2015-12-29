@@ -23,6 +23,7 @@ You can also specify your own payload in order to add your own custom fields to 
     $EVENT_TITLE: Title of the event (ex: [Triggered] [Memory Alert])
     $EVENT_MSG: Text of the event (ex: @webhook-url Sending to the webhook)
     $EVENT_TYPE: Type of the event (ex: metric_alert_monitor)
+    $LAST_UPDATED: Date when the event was last updated .
     $DATE: Date (epoch) where the event happened (ex: 1406662672000)
     $AGGREG_KEY: ID to aggregate events belonging together (ex: 9bd4ac313a4d1e8fae2482df7b77628)
     $ORG_ID: ID of your organization (ex: 11023)
@@ -34,8 +35,10 @@ You can also specify your own payload in order to add your own custom fields to 
     $TAGS: Comma-separated list of the event tags (ex: monitor,name:myService,role:computing-node)
     $ALERT_ID: ID of alert (ex: 1234)
     $ALERT_METRIC: Name of the metric if it's an alert (ex: system.load.1)
-    $ALERT_TRANSITION: Type of alert notification (ex: Triggered)
+    $ALERT_QUERY: Query of the monitor that triggered the webhook
     $ALERT_STATUS: Summary of the alert status (ex: system.load.1 over host:my-host was > 0 at least once during the last 1m)
+    $ALERT_TRANSITION: Type of alert notification (ex: Triggered)
+
 
 If you want to post your webhooks to a service requiring authentication, you can Basic HTTP authentication my modifing your URL from `https://my.service.com` to `https://username:password@my.service.com`.
 
