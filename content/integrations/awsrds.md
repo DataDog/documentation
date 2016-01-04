@@ -38,6 +38,13 @@ Then restart the agent and verify that the new check is working by running `sudo
 
 After a few minutes, RDS metrics and metrics from MySQL, Aurora, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. If you are using MySQL or Aurora on RDS, you will have access to a comprehensive dashboard out of the box that displays many of your database's key metrics. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag. ![][2]
 
+## Monitor
+
+Here is the default dashboard for MySQL on Amazon RDS:
+![RDS MySQL default dashboard](/static/images/rds-mysql.png)
+
+Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
+
 ## Metrics
 
 <%= get_metrics_from_git()%>
