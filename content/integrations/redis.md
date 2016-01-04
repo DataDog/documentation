@@ -10,6 +10,10 @@ git_integration_title: redis
 
 Track and graph your Redis activity and performance metrics with slice-and-dice at all levels from individual column families to entire clusters.
 
+![Redis default dashboard](/static/images/redis.png)
+
+Learn more about how to monitor Redis performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
+
 ###  Troubleshooting and Questions
 
 Do you have redis-py library, version 2.4.11 or later? You might need to [upgrade][1] if you are having difficulties!
