@@ -55,7 +55,6 @@ There are many libraries available to help you interact with the Datadog API.
 #### Python
 
   * [datadogpy][1] - A Python Datadog API wrapper and DogStatsD client.
-  * [dogstatsd-python][2] - A Python DogStatsD client.
 
 #### Ruby
 
@@ -183,7 +182,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 If you've written a Datadog library, write us at [code@datadoghq.com][56] and we'll be happy to add it to the list.
 
    [1]: https://github.com/DataDog/datadogpy
-   [2]: https://github.com/DataDog/dogstatsd-python
    [3]: https://github.com/DataDog/dogapi-rb
    [4]: https://github.com/DataDog/dogstatsd-ruby
    [5]: https://github.com/DataDog/php-datadogstatsd
