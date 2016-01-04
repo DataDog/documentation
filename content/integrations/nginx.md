@@ -2,6 +2,7 @@
 title: Datadog-NGINX Integration
 integration_title: NGINX
 kind: integration
+git_integration_title: nginx
 ---
 ### Overview
 
@@ -9,13 +10,13 @@ kind: integration
 Connect NGINX to Datadog in order to:
 
 * Visualize your web server performance
-* Correlate the performance of Nginx with the rest of your applications
+* Correlate the performance of NGINX with the rest of your applications
 
 ![NGINX default dashboard](/static/images/nginx.jpg)
 
-Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor NGINX.
+Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, [how to collect them](https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html), and [how to use Datadog to monitor NGINX](https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html).
 
-The default agent checks require the [nginx stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html), which is not compiled by default.  In debian/ubuntu, this module is enabled in the `nginx-extras` package.  To check if your version of nginx has the stub status module support compiled in, you can run:
+The default agent checks require the [NGINX stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html), which is not compiled by default.  In debian/ubuntu, this module is enabled in the `nginx-extras` package.  To check if your version of nginx has the stub status module support compiled in, you can run:
 
 ```
 $ nginx -V |& grep http_stub_status_module
@@ -36,21 +37,14 @@ If you see some output with `configure arguments:` and lots of options, then you
       }
     }
 
-For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
+For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [NGINX example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [NGINX agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
 
 
-| Metrics collected by default via stub status module |
-|--------------------------------|
-|nginx.net.connections | The current number of active client connections including Waiting connections. |
-|nginx.net.conn_dropped_per_s |
-|nginx.net.conn_opened_per_s |
-|nginx.net.reading | The current number of connections where nginx is reading the request header.|
-|nginx.net.request_per_s | The total number of client requests.|
-|nginx.net.waiting | The current number of idle client connections waiting for a request. |
-|nginx.net.writing | The current number of connections where nginx is writing the response back to the client.|
-{:.table}
+**Metrics collected by default via stub status module**
 
-The data pulled from the nginx stub status page are described in the [nginx docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
+<%= get_metrics_from_git()%>
+
+The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 
 #### NGINX Plus
 
@@ -73,15 +67,11 @@ These metrics do not have a directly related metric, but here are close translat
 | NGINX Metrics | NGINX Plus Metrics |
 |-------------------|-------------------|
 | nginx.net.waiting | nginx.connections.idle|
- | nginx.net.waiting|  The current number of idle client connections waiting for a request|
- | nginx.connections.idle| The current number of idle client connections|
 {:.table}
 
 <br/>
 Finally, these metrics have no good translation:
 
-| NGINX Metrics | NGINX Plus Metrics |
-|-------------------|-------------------|
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
 {:.table}
@@ -141,4 +131,4 @@ Finally, these metrics have no good translation:
 | nginx.version | Version of nginx. |
 {:.table}
 
-The data pulled from the NGINX Plus status page are described in the [nginx docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).
+The data pulled from the NGINX Plus status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).
