@@ -5,7 +5,7 @@ kind: documentation
 
 A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the app. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
-# How do submission types relate to Datadog in-app types?
+## How do submission types relate to Datadog in-app types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
@@ -24,7 +24,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.set(...)` | set | gauge |
 {:.table}
 
-# What's a use case for changing a metric's type?
+## What's a use case for changing a metric's type?
 
 1. A user has a metric `app.requests.served` that counts requests served, she accidently submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
