@@ -92,7 +92,9 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
 ![](/static/images/cloudtrail_config.png)
 2. Your user must have access to the S3 bucket you have selected. To grant your user read-only access to your bucket, you would paste the following policy in the IAM console:
 
-        { "Statement": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
           {
             "Action": [
               "s3:ListBucket",
