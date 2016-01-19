@@ -17,10 +17,13 @@ sidebar:
 ### Configure CloudWatch
 {: #cloudwatch}
 
-The recommended way to configure Cloudwatch in Datadog is to create a
-new user via the [IAM Console][1] and grant that user (or group of users) a set of permissions.
+The recommended way to configure the AWS integration is to grant a set of permissions to a role and allow Datadog to [assume this role as a third party][8]. An alternative way is to create a new user via the [IAM Console][1] and grant that user a set of permissions.
 
-At the very least, you need to grant **Amazon EC2, Cloudwatch *read-only* access**.
+#### Step 1: create a policy with the appropriate permissions
+
+The first step is to create a policy via the [IAM Console][1] (`DatadogAWSIntegrationPolicy` for instance) and grant it a set of permissions.
+
+At the very least, Datadog needs **Amazon EC2, Cloudwatch *read-only* access**.
 
 These can be set via policy templates in the console or using Amazon's API.
 
@@ -57,10 +60,7 @@ required to take full advantage of the Datadog AWS integration. As we add other 
             "ses:Get*",
             "ses:List*",
             "sns:List*",
-            "sns:Publish",
-            "sqs:GetQueueAttributes",
-            "sqs:ListQueues",
-            "sqs:ReceiveMessage"
+            "sns:Publish"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -68,7 +68,28 @@ required to take full advantage of the Datadog AWS integration. As we add other 
       ]
     }
 
-Once these credentials are configured within AWS, go into the [AWS integration tile][2] within Datadog to pull this data in.
+
+#### Step 2: create a role and allow datadog to assume this role
+
+The second step is to create a **role for Cross-Account Access** (`DatadogAWSIntegrationRole` for instance).
+Select **Allows IAM users from a 3rd party AWS account to access this account.** and set the Account ID to 464622532012 (Datadog's account id), and pick an External ID (a password, see [AWS's documentation][8]). Make sure to leave *Require MFA* disabled.
+Attach the previously created policy (`DatadogAWSIntegrationPolicy` in our example).
+
+Alternatively, to configure the AWS integration with access keys, the second step is to create a user (`DatadogAWSIntegrationUser` for instance). Attach the previously created policy to that user.
+
+
+#### Step 3: Configure it with Datadog
+
+Once these credentials are configured within AWS, go into the [AWS integration tile][2] within Datadog to setup the account.
+
+Select the *Role Delegation* tab to chose this authentification method.
+The first parameter is your AWS Account ID, it can be found in the ARN of the newly created Role.
+The second parameter is your Role name, `DatadogAWSIntegrationRole` in this example.
+The third parameter is the External ID previously set.
+Once these three fields are set and valid, hit *Install Integration* and you're done.
+
+
+Alternatively, to configure the AWS integration with access keys, set the access keys in the *Access Keys* tab.
 
 
 
@@ -83,14 +104,14 @@ AWS CloudTrail records AWS API calls for your account in log files. Datadog can 
 #### How to configure CloudTrail?
 {: #config-cloudtrail}
 
-First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. See above explanation. Besides the instructions below you will also have to configure the separate [Cloudtrail integration tile][3] within Datadog.
+First make sure that you have configured CloudWatch and that the policy you created for Datadog has the **AWS CloudTrail read-only access**. See above explanation. Besides the instructions below you will also have to configure the separate [Cloudtrail integration tile][3] within Datadog.
 
 CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from.
 
 
 1. [Go to your CloudTrail console][4] to enable it. Then select the S3 bucket you wish to use as follows:
 ![](/static/images/cloudtrail_config.png)
-2. Your user must have access to the S3 bucket you have selected. To grant your user read-only access to your bucket, you would paste the following policy in the IAM console:
+2. Create a Policy (`DatadogCloudTrailIntegrationPolicy`) in the IAM console, with the following definition:
 
         {
           "Version": "2012-10-17",
@@ -108,6 +129,7 @@ CloudTrail has to be configured on a per-region basis. Make sure you complete th
             ]
           } ]
         }
+3. Attach this policy to the Role (or User) used by datadog (`DatadogAWSIntegrationPolicy` in the above example)
 
 
 #### What events are collected?
@@ -169,3 +191,4 @@ When installing the agent on an aws host, you might see duplicated hosts on the 
    [5]: /help
    [6]: mailto:support@datadoghq.com
    [7]: http://www.datadoghq.com/2013/10/dont-fear-the-agent
+   [8]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
