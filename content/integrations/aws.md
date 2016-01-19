@@ -17,7 +17,7 @@ sidebar:
 ### Configure CloudWatch
 {: #cloudwatch}
 
-The recommended way to configure the AWS integration is to grant a set of permissions to a role and allow Datadog to [assume this role as a third party][8]. An alternative way is to create a new user via the [IAM Console][1] and grant that user a set of permissions.
+The recommended way to configure the AWS integration is to grant a set of permissions to a role and allow Datadog to [assume this role][8]. An alternative way is to create a new user via the [IAM Console][1] and grant that user a set of permissions.
 
 #### Step 1: Create a policy with the appropriate permissions
 
