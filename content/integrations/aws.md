@@ -14,6 +14,8 @@ sidebar:
       href: "#configuration"
 ---
 
+
+
 # Overview
 
 Connect to Amazon Web Services (AWS) in order to:
@@ -105,6 +107,8 @@ Depending on the services you are using you will need other permissions as well.
 Once these credentials are configured in the AWS IAM Console, go into the [AWS integration tile][2] within Datadog to pull this data in.
 
 # Configuration
+
+![logo](/static/images/integrations-aws-secretentry.png)
 
 Open the [Amazon Web Services tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) in the Datadog application. Add the AWS Access Key and AWS Secret Key for the account created above. You can also optionally add tags to all hosts and metrics. If you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here. On the left side of the window, choose the AWS services you want to enable in Datadog.
 
