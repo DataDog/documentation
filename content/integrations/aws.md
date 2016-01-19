@@ -72,13 +72,13 @@ required to take full advantage of the Datadog AWS integration. As we add other 
 #### Step 2: create a role and allow datadog to assume this role
 
 The second step is to create a **role for Cross-Account Access** (`DatadogAWSIntegrationRole` for instance).
-Select **Allows IAM users from a 3rd party AWS account to access this account.** and set the Account ID to 464622532012 (Datadog's account id), and pick an External ID (a password, see [AWS's documentation][8]). Make sure to leave *Require MFA* disabled.
+Select **Allows IAM users from a 3rd party AWS account to access this account**, set the Account ID to *464622532012* (Datadog's account id), and pick an External ID (it should be a unique password, see [AWS's documentation][8]). Make sure to leave *Require MFA* disabled.
 Attach the previously created policy (`DatadogAWSIntegrationPolicy` in our example).
 
 Alternatively, to configure the AWS integration with access keys, the second step is to create a user (`DatadogAWSIntegrationUser` for instance). Attach the previously created policy to that user.
 
 
-#### Step 3: Configure it with Datadog
+#### Step 3: Configure it within Datadog
 
 Once these credentials are configured within AWS, go into the [AWS integration tile][2] within Datadog to setup the account.
 
