@@ -58,60 +58,88 @@ There are a number of other AWS services that are also available in Datadog but 
 
 # Installation
 
-The only installation steps outside of Datadog is to set up a new user via the IAM  Console and grant that user a specific set of permissions. At the very least for access to EC2 and CloudWatch, attach the following policies:
+There are two integration methods that can be used to allow Datadog to monitor your AWS environment. Both require creating a policy in the AWS Console with a certain set of permissions. The difference between the two is whether you choose to create a role that Datadog has access to which is preferred due to the higher level of security, or create a user and share an AWS Secret and Access Key. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-* AmazonEC2ReadOnlyAccess
-* CloudWatchReadOnlyAccess
+1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
-Depending on the services you are using you will need other permissions as well. Here is the current list of permissions required to take full advantage of the Datadog AWS integrations. As we add other components to the integration, these permissions may change.
-
-    {
-      "Version": "2012-10-17",
-      "Statement": [
         {
-          "Action": [
-            "autoscaling:Describe*",
-            "cloudtrail:DescribeTrails",
-            "cloudtrail:GetTrailStatus",
-            "cloudwatch:Describe*",
-            "cloudwatch:Get*",
-            "cloudwatch:List*",
-            "ec2:Describe*",
-            "ec2:Get*",
-            "ecs:Describe*",
-            "ecs:List*",
-            "elasticache:Describe*",
-            "elasticache:List*",
-            "elasticloadbalancing:Describe*",
-            "iam:Get*",
-            "iam:List*",
-            "kinesis:Get*",
-            "kinesis:List*",
-            "kinesis:Describe*",
-            "rds:Describe*",
-            "rds:List*",
-            "ses:Get*",
-            "ses:List*",
-            "sns:List*",
-            "sns:Publish",
-            "sqs:GetQueueAttributes",
-            "sqs:ListQueues",
-            "sqs:ReceiveMessage"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:Describe*",
+                "cloudtrail:DescribeTrails",
+                "cloudtrail:GetTrailStatus",
+                "cloudwatch:Describe*",
+                "cloudwatch:Get*",
+                "cloudwatch:List*",
+                "ec2:Describe*",
+                "ec2:Get*",
+                "ecs:Describe*",
+                "ecs:List*",
+                "elasticache:Describe*",
+                "elasticache:List*",
+                "elasticloadbalancing:Describe*",
+                "iam:Get*",
+                "iam:List*",
+                "kinesis:Get*",
+                "kinesis:List*",
+                "kinesis:Describe*",
+                "logs:Get*",
+                "logs:Describe*",
+                "logs:TestMetricFilter",
+                "rds:Describe*",
+                "rds:List*",
+                "ses:Get*",
+                "ses:List*",
+                "sns:List*",
+                "sns:Publish",
+                "sqs:GetQueueAttributes",
+                "sqs:ListQueues",
+                "sqs:ReceiveMessage"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ]
         }
-      ]
-    }
 
-Once these credentials are configured in the AWS IAM Console, go into the [AWS integration tile][2] within Datadog to pull this data in.
+    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
+
+2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key:
+    * Create a role and allow Datadog to assume it (**Preferred Option**)
+        1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
+        2.  From the selection, choose Role for Cross-Account Access.
+        3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
+        4.  For Account ID, enter ```464622532012```. Enter a unique password for External ID. You will use this again later in the Datadog tile. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+        5.  Select the policy you created above.
+        6.  Review what you selected and click the **Create Role** button.
+    * Create a user which will have Secret and Access Key associated with it
+        1.  Create a new user in the IAM Console. Name it anything you like.
+        2.  Make sure you leave the **Generate an access key for each user** checked.
+        3.  Click the link to **Show User Security Credentials**.
+        4.  Make a note of the Access Key ID and Secret Access Key in a secure location. You will need this in the Datadog tile. You can also download the credentials.
+
 
 # Configuration
 
 ![logo](/static/images/integrations-aws-secretentry.png)
 
-Open the [Amazon Web Services tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) in the Datadog application. Add the AWS Access Key and AWS Secret Key for the account created above. You can also optionally add tags to all hosts and metrics. If you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here. On the left side of the window, choose the AWS services you want to enable in Datadog.
+Depending on whether you created a role or a user above, choose the appropriate Datadog configuration:
 
+* Configure Role Delegation
+  1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+  2.  Select the **Role Delegation** tab.
+  3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here.
+  5.  Click **Install Integration**.
+
+* Configure Access Key / Secret Key
+  1.   Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+  2.  Select the **Access Keys** tab.
+  3.  Enter your AWS Access Key and AWS Secret Key for the user created above.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here.
+  5.  Click **Install Integration**.
 
 
 # Troubleshooting
