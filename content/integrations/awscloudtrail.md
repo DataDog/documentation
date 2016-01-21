@@ -15,7 +15,8 @@ For information about the rest of the AWS services, see the [AWS tile][1]
 
 # Installation
 
-Configure CloudWatch on AWS and ensure that the user you created for Datadog has the **AWSCloudTrailReadOnlyAccess** policy assigned. Also ensure that the user has access to the S3 bucket you selected for the CloudTrail Trail. Here is an example policy to give access to an S3 bucket.
+Configure CloudWatch on AWS and ensure that the policy you created has the equivalent of the **AWSCloudTrailReadOnlyAccess** policy assigned. The actions in that policy are **s3:ListBucket**, **s3:GetBucketLocation**, and **s3:GetObject**. Also ensure that the policy gives access to the S3 bucket you selected for the CloudTrail Trail. Here is an example policy to give access to an S3 bucket.
+
 
     { "Statement": [
       {
@@ -31,11 +32,12 @@ Configure CloudWatch on AWS and ensure that the user you created for Datadog has
         ]
       } ]
     }
+{:.language-json}
 
 
 # Configuration
 
-Open the AWS CloudTrail tile. The accounts you configured in the Amazon Web Services tile are shown here and you can choose what kinds of events will be collected by Datadog. If you would like to see other events that are not mentionned here, please reach out to [our support team][2].
+Open the AWS CloudTrail tile. The accounts you configured in the Amazon Web Services tile are shown here and you can choose what kinds of events will be collected by Datadog. If you would like to see other events that are not mentioned here, please reach out to [our support team][2].
 
 
 # Troubleshooting
