@@ -4,12 +4,13 @@
     <% title = @item[:title] || '' %>
     <title>Datadog Docs <%= title.empty? ? '' : " - #{title}" %></title>
     <link href="//fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css">
-    <link href="/static/css/bootstrap3.css" rel="stylesheet">
+    <link href="/static/css/bootstrap3<%= $cbfingerprints["bootstrap3"] %>.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/tipuesearch.css">
-    <link href="/static/css/style10212015.css" rel="stylesheet">
+    <link href="/static/css/style<%= $cbfingerprints["style"] %>.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/pygments.css" media="screen">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+     
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 
     <script type="text/javascript">

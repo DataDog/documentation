@@ -204,3 +204,16 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
   Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
   alert on custom queries and functions, similar to the JSON editor for graphs.
+
+- *Can I manually resolve a monitor?*
+
+  Yes, you can manually resolve monitors but it only makes sense in a couple cases:
+
+    - If the monitor is in a "no data" state then resolving it will hide it from the
+      triggered monitors page.
+    - If the monitor is in the triggered state but has stopped reporting data then
+      resolving it will hide it from the triggered monitors page.
+
+  Otherwise the monitor will pick up the current state on the next evaluation. In other
+  words, if the value is still above/below the configured threshold then the monitor may
+  re-trigger upon the next evaluation (in about 60 seconds).

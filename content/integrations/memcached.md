@@ -4,23 +4,17 @@ integration_title: Memcached
 
 kind: integration
 ---
-
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect Memcached to Datadog in order to:
-<ul>
-<li> Visualize its performance</li>
-<li> Correlate the performance of Memcached with the rest of your applications</li>
-</ul>
-</div>
+
+  * Visualize its performance
+  * Correlate the performance of Memcached with the rest of your applications
 
 From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example">
-Memcache YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py">
-Memcache checks.d</a>
+* [ Memcache YAML example][1]
+* [ Memcache checks.d][2]
 
 The following metrics are collected by default with the Memcache integration:
 
@@ -41,5 +35,9 @@ The following metrics are collected by default with the Memcache integration:
     memcache.rusage_user
     memcache.threads
     memcache.total_connections
-    memcache.total_items 
+    memcache.total_items
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py
+
 

@@ -4,6 +4,35 @@ integration_title: New Relic
 kind: integration
 ---
 
+### Overview
+Connect to New Relic to:
+
+* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
+* See New Relic alerts in your event stream
+
+### Installation
+
+#### New Relic Alerts in Event Stream
+
+1. On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
+
+        https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}
+
+2. For 'Custom Payload'(s), select JSON 'Payload Type'.
+
+#### New Relic APM Metric Collection
+
+1. Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
+
+    *Note: Metrics can only be imported for New Relic customers at the Pro level or above.*
+
+2. If you wish to tag metrics at an account level, please add an account tag.
+3. Choose whether you want to collect your metrics per hosts or app-wide.
+
+    *Note: Enabling this options will import New Relic hosts to Datadog.*
+
+### Troubleshooting & FAQ
+
 #### What does the 'Collect metrics by host' option do ?
 
 When set, Datadog collects application metrics for every associated hosts,
@@ -50,3 +79,30 @@ New Relic would compute the application-level response time as follows:
 Whereas we would simply compute the arithmetic mean:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
+
+#### Beta Alerts: How can I include custom tags?
+
+You can include custom tags by utilizing the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, you'll navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. From here, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it will expand to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
+
+    {
+      "account_id": "$ACCOUNT_ID",
+      "account_name": "$ACCOUNT_NAME",
+      "condition_id": "$CONDITION_ID",
+      "condition_name": "$CONDITION_NAME",
+      "current_state": "$EVENT_STATE",
+      "details": "$EVENT_DETAILS",
+      "event_type": "$EVENT_TYPE",
+      "incident_acknowledge_url": "$INCIDENT_ACKNOWLEDGE_URL",
+      "incident_id": "$INCIDENT_ID",
+      "incident_url": "$INCIDENT_URL",
+      "owner": "$EVENT_OWNER",
+      "policy_name": "$POLICY_NAME",
+      "policy_url": "$POLICY_URL",
+      "runbook_url": "$RUNBOOK_URL",
+      "severity": "$SEVERITY",
+      "targets": "$TARGETS",
+      "timestamp": "$TIMESTAMP",
+      "tags": ["application:yourapplication", "host:yourhostname", "sometag"]
+    }
+
+After your modifications are complete, make sure you select 'Update Chanel', for your changes to be saved.

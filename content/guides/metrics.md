@@ -339,7 +339,7 @@ SETS
 <h3 id="sets">Sets</h3>
 
 Sets are used to count the number of unique elements in a group. If you want to
-track the number of unique visitor to your site, sets are a great way to do
+track the number of unique visitors to your site, sets are a great way to do
 that.
 
 <%= code_tabs("sets", tab_languages) %>

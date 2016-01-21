@@ -2,68 +2,67 @@
 title: Datadog-MySQL Integration
 integration_title: MySQL
 kind: integration
+git_integration_title: mysql
 ---
-<div id="int-overview">
-<h3>Overview</h3>
+### Overview
 
 Connect MySQL to Datadog in order to:
-<ul>
-<li> Visualize your database performance</li>
-<li> Correlate the performance of MySQL with the rest of your applications</li>
-</ul>
-</div>
 
-From the open-source Agent:
+  * Visualize your database performance
+  * Correlate the performance of MySQL with the rest of your applications
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/mysql.yaml.example">MySQL YAML Example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/mysql.py">MySQL checks.d</a>
+### Installation
 
-The following metrics are collected by default with the MySQL integration:
+1. Create a ```datadog``` user with replication rights on your MySQL server with the following command, replacing ```<UNIQUEPASSWORD>``` with a unique password:
 
-    mysql.innodb.buffer_pool_free
-    mysql.innodb.buffer_pool_total
-    mysql.innodb.buffer_pool_used
-    mysql.innodb.buffer_pool_utilization
-    mysql.innodb.data_reads
-    mysql.innodb.data_writes
-    mysql.innodb.os_log_fsyncs
-    mysql.innodb.mutex_spin_waits
-    mysql.innodb.mutex_spin_rounds
-    mysql.innodb.mutex_os_waits
-    mysql.innodb.row_lock_waits
-    mysql.innodb.row_lock_time
-    mysql.innodb.current_row_locks
-    mysql.net.connections
-    mysql.net.max_connections
-    mysql.performance.created_tmp_tables
-    mysql.performance.created_tmp_disk_tables
-    mysql.performance.created_tmp_files
-    mysql.performance.key_cache_utilization
-    mysql.performance.open_files
-    mysql.performance.open_tables
-    mysql.performance.queries
-    mysql.performance.questions
-    mysql.performance.slow_queries
-    mysql.performance.table_locks_waited
-    mysql.performance.threads_connected
-    mysql.performance.threads_running
-    mysql.performance.com_select
-    mysql.performance.com_insert
-    mysql.performance.com_update
-    mysql.performance.com_delete
-    mysql.performance.com_insert_select
-    mysql.performance.com_update_multi
-    mysql.performance.com_delete_multi
-    mysql.performance.com_replace_select
-    mysql.performance.qcache_hits
-    mysql.replication.slave_running
-    mysql.replication.seconds_behind_master
+       sudo mysql -e "CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<UNIQUEPASSWORD>';"
+       sudo mysql -e "GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;"
 
-The Agent also collects system metrics from servers running locally:
+2. Verify that the user was created successfully using the following command, replacing ```<UNIQUEPASSWORD>``` with the password above:
 
-    mysql.performance.user_time
-    mysql.performance.kernel_time
+       mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
+       grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
+       echo -e "\033[0;31mCannot connect to MySQL\033[0m"
+       mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
+       echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
+       echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
-And the following metric for Galera Cluster:
+### Configuration
 
-    mysql.galera.wsrep_cluster_size
+1. Edit the mysql.yaml file in your agent's conf.d directory, replacing ```<UNIQUEPASSWORD>``` with the password used above.
+
+       init_config:
+
+       instances:
+         - server: localhost
+           user: datadog
+           pass: <UNIQUEPASSWORD>
+
+           tags:
+               - optional_tag1
+               - optional_tag2
+           options:
+               replication: 0
+               galera_cluster: 1
+
+### Validation
+
+To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
+
+
+    Checks
+    ======
+      [...]
+      mysql
+      -----
+          - instance #0 [OK]
+          - Collected 8 metrics & 0 events
+
+### Metrics
+
+<%= get_metrics_from_git()%>
+
+
+
+
+

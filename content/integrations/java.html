@@ -2,6 +2,7 @@
 title: "JMX Checks"
 integration_title: JMX Checks
 kind: integration
+git_integration_title: java
 ---
 <div> <h3 id="subtitle">Java, Cassandra, Tomcat, ActiveMQ, Solr</h3> <h2
 id="introduction">Introduction</h2> JMX Checks are agents checks that collect
@@ -205,6 +206,10 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 ...
 </code></pre>
 
+<h2>Metrics</h2>
+
+<%= get_metrics_from_git()%>
+
 <h2>Troubleshooting</h2>
 <h4>The 350 metric limit</h4>
 <p>
@@ -222,3 +227,66 @@ If you believe you need more than 350 metrics, please reach out to <a href="mail
 
 <pre><code>java_bin_path: /path/to/java
 </code></pre>
+
+<h4>Monitoring JBoss/WildFly applications</h4>
+<p>
+<div class="alert alert-info">
+    The following instructions will work on version 5.6.0 (and higher) of the Agent
+</div>
+JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) that is not bundled by default with JMXFetch.
+To allow JMXFetch to connect to these applications, configure it as follows:
+<ol>
+  <li>Locate the <code>jboss-cli-client.jar</code> file on your JBoss/WildFly server (by default, its path should be <code>$JBOSS_HOME/bin/client/jboss-cli-client.jar</code>).</li>
+  <li>If JMXFetch is running on a different host than the JBoss/WildFly application, copy <code>jboss-cli-client.jar</code> to a location on the host JMXFetch is running on.</li>
+  <li>Add the path of the jar to the <code>init_config</code> section of your configuration:
+<pre><code># Datadog Agent >= 5.6.0
+
+init_config:
+  custom_jar_paths:
+    - /path/to/jboss-cli-client.jar
+</code></pre>
+  </li>
+  <li>Specify a custom URL that JMXFetch will connect to, in the <code>instances</code> section of your configuration:
+<pre><code># Datadog Agent >= 5.6.0
+
+# The jmx_url may be different depending on the version of JBoss/WildFly you're using
+# and the way you've set up JMX on your server
+# Please refer to the relevant documentation of JBoss/WildFly for more information
+instances:
+  - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
+    name: jboss-application  # Mandatory, but can be set to any value,
+                             # will be used to tag the metrics pulled from that instance
+</code></pre>
+  </li>
+  <li>Restart the agent: <code>sudo /etc/init.d/datadog-agent</code></li>
+</ol>
+</p>
+
+<h4>Monitoring Tomcat with JMX Remote Lifecycle Listener enabled</h4>
+<div class="alert alert-info">
+    The following instructions will work on version 5.6.0 (and higher) of the Agent
+</div>
+If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the <a href="https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener">Tomcat documentation</a> for more information), JMXFetch will need some extra setup to be able to connect to your Tomcat application.
+<ol>
+  <li>Locate the <code>catalina-jmx-remote.jar</code> file on your Tomcat server (by default, its path should be <code>$CATALINA_HOME/lib</code>).</li>
+  <li>If JMXFetch is running on a different host than the Tomcat application, copy <code>catalina-jmx-remote.jar</code> to a location on the host JMXFetch is running on.</li>
+  <li>Add the path of the jar to the <code>init_config</code> section of your configuration:
+<pre><code># Datadog Agent >= 5.6.0
+
+init_config:
+  custom_jar_paths:
+    - /path/to/catalina-jmx-remote.jar
+</code></pre>
+  </li>
+  <li>Specify a custom URL that JMXFetch will connect to, in the <code>instances</code> section of your configuration:
+<pre><code># Datadog Agent >= 5.6.0
+
+# The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
+instances:
+  - jmx_url: "service:jmx:rmi://<hostname>:10002/jndi/rmi://<hostname>:10001/jmxrmi"
+    name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
+                              # will be used to tag the metrics pulled from that instance
+</code></pre>
+  </li>
+  <li>Restart the agent: <code>sudo /etc/init.d/datadog-agent</code></li>
+</ol>

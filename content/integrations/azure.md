@@ -24,6 +24,10 @@ Microsoft Azure supports both PaaS and IaaS (VM) services. Right now Datadog mon
 
 To setup Azure monitoring, go to [Azure integrations][1] and follow instructions on the page.
 
+![Azure default dashboard](/static/images/azure.png)
+
+Learn more about how to monitor Azure performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
+
 #### Enable diagnostics
 To enable agent-less monitoring, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure preview portal][2] then follow the instructions below.
 ![](/static/images/azure_diag_manual.png)
@@ -42,7 +46,7 @@ You can either deploy agents manually by following the instructions <a href="/gu
 
 ### Troubleshooting
 {: #troubleshooting}
-Here are some common issues you might be seeing. 
+Here are some common issues you might be seeing.
 
 #### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].

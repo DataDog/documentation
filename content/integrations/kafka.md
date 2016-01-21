@@ -4,15 +4,15 @@ integration_title: Apache Kafka
 kind: integration
 ---
 
-To capture Kafka metrics you need to install the Datadog Agent. Metrics will be captured using a JMX connection. 
-We recommend the use of Oracle's JDK for this integration. 
+To capture Kafka metrics you need to install the Datadog Agent. Metrics will be captured using a JMX connection.
+We recommend the use of Oracle's JDK for this integration.
 
 This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the JMX Checks documentation for more detailed instructions. If you need to monitor more metrics, please send us an email at support@datadoghq.com
 
 * If you are using the Datadog Agent < 5.0.0, please look at the old documentation for more detailed instructions. The following instructions are for the Datadog Agent >= 5.0.0
 * Configure the Agent to connect to Kafka
 
-Edit conf.d/kafka.yaml
+Edit `conf.d/kafka.yaml`
 
     instances:
     #    -   host: localhost

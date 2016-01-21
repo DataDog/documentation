@@ -331,7 +331,7 @@ The <code>top()</code> method also has the following convenience functions, all 
 
 ### 5) Overlay events for additional context
 
-You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```role:web```.
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
 
 
 ### 6) Create a title
@@ -424,7 +424,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 #### Functions
 
-You can apply functions to the result of each query. <a href="/examples/graphing%20functions/">Examples</a>
+You can apply functions to the result of each query. <a href="/examples/graphing functions/">Examples</a>
 
 
 <table class="table">

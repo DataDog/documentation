@@ -26,7 +26,6 @@ sidebar:
       href: "/faq/#events"
     - text: Other
       href: "/faq/#other"
-
 ---
 
 <!--
@@ -170,6 +169,8 @@ Tags must start with a letter, and after that may contain alphanumerics,
 underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
 unicode. Tags will be converted to lowercase as well.
+
+Note: An exception to this is with trailing underscores, which will be trimmed off of tags (e.g. path:thing_ becomes path:thing).
 
 #### I'm submitting points to the API- anything I should know? 
 {: #api-else}
@@ -604,7 +605,7 @@ by default you'll get the average across all hosts.
 <li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
 <li><code>@webhook</code> – alerts or triggers whatever is attached to that webhook. Check out
 <a target="_blanks" href="https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/">this blogpost</a> on Webhooks!</li>
-<li><code>@pagerduty</code> or <code>@oncall</code>
+<li><code>@pagerduty</code> 
 – sends an alert to Pagerduty. You can also use <code>@pagerduty-acknowledge</code> and <code>@pagerduty-resolve</code>.</li>
 </ul>
 

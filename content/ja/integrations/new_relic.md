@@ -97,3 +97,30 @@ New Relicでは、application-levelレスポンス時間を次のように計算
 Datadogでは、以下のようにレスポンス時間の単純平均を計算しています:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
+
+<!-- #### Beta Alerts: How can I include custom tags?
+
+You can include custom tags by utilizing the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, you'll navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. From here, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it will expand to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
+
+    {
+      "account_id": "$ACCOUNT_ID",
+      "account_name": "$ACCOUNT_NAME",
+      "condition_id": "$CONDITION_ID",
+      "condition_name": "$CONDITION_NAME",
+      "current_state": "$EVENT_STATE",
+      "details": "$EVENT_DETAILS",
+      "event_type": "$EVENT_TYPE",
+      "incident_acknowledge_url": "$INCIDENT_ACKNOWLEDGE_URL",
+      "incident_id": "$INCIDENT_ID",
+      "incident_url": "$INCIDENT_URL",
+      "owner": "$EVENT_OWNER",
+      "policy_name": "$POLICY_NAME",
+      "policy_url": "$POLICY_URL",
+      "runbook_url": "$RUNBOOK_URL",
+      "severity": "$SEVERITY",
+      "targets": "$TARGETS",
+      "timestamp": "$TIMESTAMP",
+      "tags": ["application:yourapplication", "host:yourhostname", "sometag"]
+    }
+
+After your modifications are complete, make sure you select 'Update Chanel', for your changes to be saved. -->

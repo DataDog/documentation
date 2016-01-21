@@ -3,7 +3,8 @@ case
 when id.match('/examples/') %>
 
   <div class="container">
-  <% items_with_tag(tag, @items.select { |i| i[:kind] == "example" }).each do |example| %>
+
+  <% items_with_tag(tag, $example_items).each do |example| %>
     <% if example[:language] == nil %>
       <h2><%= link_to example[:title], example %></h2>
       <p><%= example[:summary] %></p>
@@ -21,7 +22,7 @@ when id.match('/examples/') %>
 <% when id.match('/videos/') %>
 
   <div class="container">
-  <% items_with_tag(tag, video_items).each do |video| %>
+  <% items_with_tag(tag, $video_items).each do |video| %>
       <h2><%= link_to video[:title], video %></h2>
       <p><%= video[:summary] %></p>
       <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + video[:wistiaid]) %>

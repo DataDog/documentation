@@ -27,7 +27,7 @@
               <li class="dropdown">
                 <a id="nav-guide-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">ガイド <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="nav-guide-dropdown">
-                  <% ja_guide_items.each do |i| %>
+                  <% $ja_guide_items.each do |i| %>
                     <li>
                       <%= link_to i[:title], i.path %>
                     </li>
