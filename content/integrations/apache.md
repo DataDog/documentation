@@ -3,8 +3,6 @@ title: Datadog-Apache Integration
 integration_title: Apache
 kind: integration
 newhlevel: true
-checksd: apache
-yamlexample: apache
 ---
 
 # Overview
