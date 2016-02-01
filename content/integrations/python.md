@@ -2,16 +2,19 @@
 title: Datadog-Python Integration
 integration_title: Python
 kind: integration
-doclevel: basic
+newhlevel: true
 ---
 
-The Python integration enables you to monitor any custom metric by instrumenting a few lines of code. For instance, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Python integration, please refer to the guide on submitting metrics. For advanced usage, please refer to the documentation in the repository
+# Overview
+The Python integration enables you to monitor any custom metric by instrumenting a few lines of code. For instance, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Python integration, please refer to the guide on submitting metrics. For advanced usage, please refer to the documentation in the repository. You can also review [the API docs](/api) for details on how to use the API with Python.
 
-1. To install from pip:
+# Installation
+
+1.  To install from pip:
 
         pip install datadog
 
-2. Start instrumenting your code:
+2.  Start instrumenting your code:
 
         # Configure the module according to your needs
         from datadog import initialize
@@ -45,4 +48,10 @@ The Python integration enables you to monitor any custom metric by instrumenting
         stats.start()
         stats.increment('home.page.hits')
 
-3. Go to the Metrics explorer page and see that it just works! 
+# Configuration
+
+There is nothing that you need to do in the Datadog application to configure Python.
+
+# Validation
+
+Go to the [Metrics explorer page](https://app.datadoghq.com/metric/explorer) and see that it just works!
