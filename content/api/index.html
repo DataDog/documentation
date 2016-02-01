@@ -444,6 +444,7 @@ kind: documentation
               #h_ago (1, 2, or 4), or 1d_ago</li>
              </ul>
             </div>
+            <div>You can also use this to create an outlier monitor using the following query: <code>avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0</code></div>
 
             <h5>Service Check Query</h5>
             <code>"check".over(tags).last(count).count_by_status()</code>
@@ -473,6 +474,7 @@ kind: documentation
               <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
               <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
+
           </li>
           <%= argument 'name', "The name of the alert.",
               :default => "dynamic, based on query" %>
