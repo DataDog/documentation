@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from datadog import initialize, api
 import time
 
@@ -9,10 +8,6 @@ options = {
 
 initialize(**options)
 
-start = int(time.time()) - 3600
-end = start + 3600
-# query for idle CPU for all machines tagged with speed:4000
+now = int(time.time())
 query = 'system.cpu.idle{*}by{host}'
-
-results = api.Metric.query(start=start - 3600, end=end, query=query)
-print results
+print api.Metric.query(start=now - 3600, end=now, query=query)
