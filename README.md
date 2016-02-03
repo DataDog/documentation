@@ -45,8 +45,8 @@ and verify that there are no bad links on http://localhost:3000.
 If you've been working on code samples you should also
 
 ```
-export TEST_DD_API_KEY=private_org_key
-export TEST_DD_APP_KEY=private_org_key
+export TEST_DD_API_KEY=test_org_api_key
+export TEST_DD_APP_KEY=test_org_app_key
 rake clean
 rake test
 ```
