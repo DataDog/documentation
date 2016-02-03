@@ -6,19 +6,19 @@ options = {
     'app_key': '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 }
 
-CurrentPosixTime = time.time()
-CurrentPosixTime10 = time.time() + 10
-
 initialize(**options)
+
+now = time.time()
+future_10s = now + 10
 
 # Submit a single point with a timestamp of `now`
 api.Metric.send(metric='page.views', points=1000)
 
 # Submit a point with a timestamp (must be ~current)
-api.Metric.send(metric='my.pair', points=(CurrentPosixTime, 15))
+api.Metric.send(metric='my.pair', points=(now, 15))
 
 # Submit multiple points.
-api.Metric.send(metric='my.series', points=[(CurrentPosixTime, 15), (CurrentPosixTime10, 16)])
+api.Metric.send(metric='my.series', points=[(now, 15), (future_10s, 16)])
 
 # Submit a point with a host and tags.
 api.Metric.send(metric='my.series', points=100, host="myhost.example.com", tags=["version:1"])
