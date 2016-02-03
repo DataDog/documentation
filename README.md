@@ -55,7 +55,7 @@ These keys should be for a test account that does not include dozens of people. 
 
 **If there are errors, please don't merge.**
 
-Within 5 minutes of merging to master, roy will pick it up and deploy automatically. You can see the status in [#documentation](https://dd.slack.com/messages/documentation/) and any problems will show up there.
+Internal Datadog folks: Within 5 minutes of merging to master, it will deploy automatically. You can see the status in #documentation.
 
 ## How to add a new integration
 
