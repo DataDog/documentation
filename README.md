@@ -14,9 +14,6 @@ gem install bundler # and set up your shell / shell profile for it
 rbenv exec bundle install
 ```
 
-To get the browser refresh working, you should install the LiveReload extension into your browser. Otherwise you will have to do the arduous task
-of clicking refresh yourself.
-
 ## Working on Docs
 
 ```
