@@ -55,6 +55,8 @@ These keys should be for a test account that does not include dozens of people. 
 
 **If there are errors, please don't merge.**
 
+Within 5 minutes of merging to master, roy will pick it up and deploy automatically. You can see the status in #documentation and any problems will show up there.
+
 ## How to add a new integration
 
 Create a markdown file under content/integratons. Add the following front matter at the top of the file:
