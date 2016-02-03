@@ -40,7 +40,7 @@ rake clean
 rake
 ```
 
-and verify that there are no bad links on http://localhost:3000.
+and verify that there are no bad links on [http://localhost:3000](http://localhost:3000).
 
 If you've been working on code samples you should also
 
@@ -55,7 +55,7 @@ These keys should be for a test account that does not include dozens of people. 
 
 **If there are errors, please don't merge.**
 
-Within 5 minutes of merging to master, roy will pick it up and deploy automatically. You can see the status in #documentation and any problems will show up there.
+Within 5 minutes of merging to master, roy will pick it up and deploy automatically. You can see the status in [#documentation](https://dd.slack.com/messages/documentation/) and any problems will show up there.
 
 ## How to add a new integration
 
