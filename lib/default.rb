@@ -4,7 +4,6 @@
 require 'tempfile'
 #require './lib/snippets.rb'
 require 'oj'
-require "nanoc/toolbox"
 require "video_info"
 require "nanoc/cachebuster"
 include Nanoc::Helpers::CacheBusting

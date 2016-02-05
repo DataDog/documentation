@@ -1,8 +1,6 @@
-include Nanoc3::Helpers::XMLSitemap
-include Nanoc3::Helpers::Rendering
-include Nanoc3::Helpers::LinkTo
-include Nanoc::Toolbox::Helpers::TaggingExtra
-include Nanoc::Toolbox::Helpers::HtmlTag
+include Nanoc::Helpers::XMLSitemap
+include Nanoc::Helpers::Rendering
+include Nanoc::Helpers::LinkTo
 
 # general functions
 
@@ -175,6 +173,73 @@ EOF
   end
 end
 
+def create_tag_pages(items=nil, options={})
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:identifier]      ||= "/tags/#{options[:tag_pattern]}/"
+  options[:template]        ||= "tag"
+
+  tag_set(items).each do |tagname|
+    raw_content = "<%= render('#{options[:template]}', :tag => '#{tagname}') %>"
+    attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
+    identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
+
+    @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
+  end
+end
+
+def tag_set(items=nil)
+  items ||= @items
+  items.map { |i| i[:tags] }.flatten.uniq.delete_if{|t| t.nil?}
+end
+
+def tag_links_for(item, omit_tags=[], options={})
+  tags = []
+  return tags unless item[:tags]
+
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:file_extension]  ||= ".html"
+  options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
+
+  tags = item[:tags] - omit_tags
+
+  tags.map! do |tag|
+      title = options[:title].gsub(options[:tag_pattern], tag.downcase)
+      url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
+      content_tag('a', title, {:href => url})
+  end
+end
+
+def content_tag(name, content, options={})
+  "<#{name}#{tag_options(options) if options}>#{content}</#{name}>"
+end
+
+def tag_options(options)
+  unless options.empty?
+    attributes = []
+    options.each do |key, value|
+      attributes << %(#{key}="#{value}")
+    end
+    ' ' + attributes.join(' ')
+  end
+end
+
+def count_tags(items=nil)
+  items ||= @items
+  tags = items.map { |i| i[:tags] }.flatten.delete_if{|t| t.nil?}
+  tags.inject(Hash.new(0)) {|h,i| h[i] += 1; h }
+end
+
+def items_with_tag(tag, items=nil)
+  items = sorted_articles if items.nil?
+  items.select { |item| has_tag?( item, tag ) }
+end
+
+def has_tag?(item, tag)
+  return false if item[:tags].nil?
+  item[:tags].include? tag
+end
 # def create_tag_pages(items=nil, options={})
 #       options[:tag_pattern]     ||= "%%tag%%"
 #       options[:title]           ||= options[:tag_pattern]
