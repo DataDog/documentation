@@ -2,20 +2,6 @@
 title: Graphing Primer
 kind: documentation
 has_snippets: True
-sidebar:
-  nav:
-    - header: Graphing Primer
-    - text: Find the Graph Editor
-      href: "#editor"
-    - text: Grammar
-      href: "#grammar"
-      collapseid: collapseJSON
-    - text: Arithmetic & Functions
-      href: "#functions"
-      collapseid: collapseJSON
-    - text: "Y-Axis Controls"
-      href: "#yaxis"
-      collapseid: collapseJSON
 ---
 
 ## Find the Graph Editor
