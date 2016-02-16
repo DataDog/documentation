@@ -31,7 +31,7 @@ The following metrics are collected by default with the CouchDB integration:
     couchdb.open_os_files
     couchdb.request_time
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/couchdb.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/couchdb.py
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/couch.yaml.example
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/couch.py
 
 
