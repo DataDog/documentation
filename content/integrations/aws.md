@@ -49,10 +49,16 @@ There are a number of other AWS services that are also available in Datadog but 
 | CloudFront |
 | CloudSearch |
 | EBS |
+| Elastic MapReduce |
 | ElasticsearchService |
 | Firehose |
 | Lambda |
 | MachineLearning |
+| OpsWorks |
+| S3 |
+| Simple Queing Service |
+| Simple Workflow Service |
+| WorkSpaces |
 {:.table}
 
 
