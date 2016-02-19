@@ -39,7 +39,7 @@ This task will launch the Datadog container. When you need to modify the configu
 16. Scroll down to the **Storage and Logging** section.
 17. In **Mount points** select the **docker_sock** source volume and enter ```/var/run/docker.sock``` in the Container path. Leave the **Read only** checkbox un-checked.
 18. Add another mount point for **proc** and enter ```/host/proc/``` in the Container path. Check the **Read only** checkbox.
-19. Add a third mount point for **cgroup** and enter ```/host/sys/fs/cgroup`` in the Container path. Check the **Read only** checkbox.
+19. Add a third mount point for **cgroup** and enter ```/host/sys/fs/cgroup``` in the Container path. Check the **Read only** checkbox.
 
 ### Create or Modify your IAM Policy
 
