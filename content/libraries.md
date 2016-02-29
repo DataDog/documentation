@@ -42,6 +42,8 @@ sidebar:
       href: "#community-integration-freeswitch"
     - text: Google Analytics
       href: "#community-integration-google-analytics"
+    - text: NGINX LUA
+      href: "#community-integration-nginx-lua"
     - text: Pid-stats
       href: "#community-integration-pid-stats"
     - text: Saltstack
@@ -160,6 +162,11 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * You can get data into Datadog from Google Analytics using our API with [this library][50].
 
+#### NGINX LUA
+{: #community-integration-nginx-lua}
+
+  * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog] module in your LUA scripts.
+
 #### Pid-stats
 {: #community-integration-pid-stats}
 
@@ -248,3 +255,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [69]: https://github.com/rs/xstats
    [70]: https://github.com/rs
    [71]: https://github.com/DataDog/datadog-go
+   [72]: https://github.com/simplifi/ngx_lua_datadog/
