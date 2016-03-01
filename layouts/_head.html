@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <% title = @item[:title] || '' %>
-    <title><%= title.empty? ? '' : "#{title} - " %>Datadog Docs</title>
+    <title><%= title.empty? ? '' : "#{title}" %></title>
 
     <meta itemprop="description" name="description" property="og:description" content="<%= @item[:description] %>" />
 
