@@ -3,6 +3,7 @@ title: Datadog-Chef Integration
 integration_title: Chef
 kind: integration
 doclevel: basic
+git_integration_title: chef
 ---
 ### Overview
 
@@ -17,4 +18,6 @@ To install the Datadog Agent via Chef, please see [here][1].
 [1]: http://docs.datadoghq.com/guides/chef/
 
 
+## Metrics
 
+<%= get_metrics_from_git() %>
