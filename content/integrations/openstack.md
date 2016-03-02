@@ -3,6 +3,7 @@ title: Datadog-OpenStack Integration
 integration_title: OpenStack
 kind: integration
 doclevel: basic
+git_integration_title: openstack
 ---
 
 
@@ -85,3 +86,6 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
           ---------
               - instance #0 [OK]
               - Collected 8 metrics & 0 events
+## Metrics
+
+<%= get_metrics_from_git() %>

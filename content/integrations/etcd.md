@@ -2,6 +2,7 @@
 title: Datadog-etcd Integration
 integration_title: etcd
 kind: integration
+git_integration_title: etcd
 ---
 
 ### Overview
@@ -19,36 +20,10 @@ From the open-source Agent:
 
 
 
-The following metrics are collected by default with the etcd integration:
+## Metrics
 
-    etcd.store.gets.success
-    etcd.store.gets.fail
-    etcd.store.sets.success
-    etcd.store.sets.fail
-    etcd.store.delete.success
-    etcd.store.delete.fail
-    etcd.store.update.success
-    etcd.store.update.fail
-    etcd.store.create.success
-    etcd.store.create.fail
-    etcd.store.compareandswap.success
-    etcd.store.compareandswap.fail
-    etcd.store.compareanddelete.success
-    etcd.store.compareanddelete.fail
-    etcd.store.expire.count
-    etcd.store.watchers
-    etcd.self.recv.appendrequest.count
-    etcd.self.send.appendrequest.count
-
-Plus the following metrics for leader nodes (note that these values will be undefined for single-member clusters):
-
-    etcd.self.send.pkgrate
-    etcd.self.send.bandwidthrate
-
-And these metrics for follower nodes:
-
-    etcd.self.recv.pkgrate
-    etcd.self.recv.bandwidthrate
+<%= get_metrics_from_git()
+%>
 
 Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
 

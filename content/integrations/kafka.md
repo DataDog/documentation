@@ -2,6 +2,7 @@
 title: Datadog-Apache Kafka Integration
 integration_title: Apache Kafka
 kind: integration
+git_integration_title: kafka
 ---
 
 To capture Kafka metrics you need to install the Datadog Agent. Metrics will be captured using a JMX connection.
@@ -193,3 +194,7 @@ And edit conf.d/kafka_consumer.yaml
               - Collected 8 metrics & 0 events
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.
+
+## Metrics
+
+<%= get_metrics_from_git() %>
