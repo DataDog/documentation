@@ -12,6 +12,7 @@ sidebar:
       href: "#installation"
     - text: Configuration
       href: "#configuration"
+git_integration_title: amazon_ses
 ---
 
 # Overview
@@ -19,3 +20,5 @@ sidebar:
 Amazon Simple Email Service (SES) is a cost-effective, outbound-only email-sending service.
 
 Enable this integration to see in Datadog all your SES metrics.
+
+
