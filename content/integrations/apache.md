@@ -3,6 +3,7 @@ title: Datadog-Apache Integration
 integration_title: Apache
 kind: integration
 newhlevel: true
+git_integration_title: apache
 ---
 
 # Overview
@@ -65,14 +66,7 @@ You should see something similar to the following if everything is working corre
 
 The following metrics are collected by default with the Apache integration:
 
-    apache.net.bytes
-    apache.net.bytes_per_s
-    apache.net.hits
-    apache.net.request_per_s
-    apache.performance.busy_workers
-    apache.performance.cpu_load
-    apache.performance.idle_workers
-    apache.performance.uptime
+<%= get_metrics_from_git()%>
 
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example
