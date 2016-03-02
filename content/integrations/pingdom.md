@@ -2,6 +2,7 @@
 title: Datadog-Pingdom Integration
 integration_title: Pingdom
 kind: integration
+git_integration_title: pingdom
 ---
 
 ### Overview
@@ -10,6 +11,10 @@ kind: integration
 Track Pingdom downtime events and user-centric performance metrics in Datadog, for correlation with other relevant events and metrics.
 
 At this time we track the response_time metric for any sites you configure on the Pingdom website.
+
+## Metrics
+
+<%= get_metrics_from_git() %>
 
 ### Questions and Troubleshooting
 

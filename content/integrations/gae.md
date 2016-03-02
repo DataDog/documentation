@@ -2,6 +2,7 @@
 title: Datadog-Google App Engine Integration
 integration_title: Google App Engine
 kind: integration
+git_integration_title: google_app_engine
 ---
 
 
@@ -104,40 +105,8 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
 
 ### Metrics
 
-Upon installation of the integration you get a number of metrics before instrumenting your app.
+<%= get_metrics_from_git() %>
 
-* gae.memcache.byte_hits
-* gae.memcache.bytes
-* gae.memcache.hits
-* gae.memcache.items
-* gae.memcache.misses
-* gae.memcache.oldest_item_age
-* gae.requests.cost.95percentile
-* gae.requests.cost.avg
-* gae.requests.cost.count
-* gae.requests.cost.max
-* gae.requests.cost.min
-* gae.requests.latency.95percentile
-* gae.requests.latency.avg
-* gae.requests.latency.count
-* gae.requests.latency.max
-* gae.requests.latency.min
-* gae.requests.mcycles.95percentile
-* gae.requests.mcycles.avg
-* gae.requests.mcycles.count
-* gae.requests.mcycles.max
-* gae.requests.mcycles.min
-* gae.requests.pending_time.95percentile
-* gae.requests.pending_time.avg
-* gae.requests.pending_time.count
-* gae.requests.pending_time.max
-* gae.requests.pending_time.min
-* gae.requests.response_size.95percentile
-* gae.requests.response_size.avg
-* gae.requests.response_size.count
-* gae.requests.response_size.max
-* gae.requests.response_size.min
-* gae.task_queue.tasks
 
 
 -------------------------

@@ -1,7 +1,7 @@
 ---
 title: Datadog-Memcached Integration
 integration_title: Memcached
-
+git_integration_title: memcached
 kind: integration
 ---
 ### Overview
@@ -16,6 +16,9 @@ From the open-source Agent:
 * [ Memcache YAML example][1]
 * [ Memcache checks.d][2]
 
+## Metrics
+
+<%= get_metrics_from_git() %>
 The following metrics are collected by default with the Memcache integration:
 
     memcache.bytes
