@@ -23,7 +23,4 @@ From the open-source Agent:
 
 
 
-## Metrics
-
-<%= get_metrics_from_git() %>
 
