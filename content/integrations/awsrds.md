@@ -34,7 +34,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
   2.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
   3.  Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
   4.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
-  5.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing <ROLE ARN> with the ARN of the role:
+  5.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing &lt;ROLE ARN> with the ARN of the role:
 
           {
               "Version": "2012-10-17",
@@ -45,7 +45,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
                           "kms:Decrypt"
                       ],
                       "Resource": [
-                          "<ROLE ARN>"
+                          "ROLE ARN>"
                       ]
                   }
               ]

@@ -165,7 +165,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### NGINX LUA
 {: #community-integration-nginx-lua}
 
-  * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog] module in your LUA scripts.
+  * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
 
 #### Pid-stats
 {: #community-integration-pid-stats}
