@@ -22,3 +22,4 @@ Amazon Simple Email Service (SES) is a cost-effective, outbound-only email-sendi
 Enable this integration to see in Datadog all your SES metrics.
 
 
+

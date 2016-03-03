@@ -12,7 +12,7 @@ sidebar:
       href: "#installation"
     - text: Configuration
       href: "#configuration"
-
+git_integration_title: amazon_web_services
 ---
 
 
@@ -148,6 +148,9 @@ Depending on whether you created a role or a user above, choose the appropriate 
   4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here.
   5.  Click **Install Integration**.
 
+## Metrics
+
+<%= get_metrics_from_git() %>
 
 # Troubleshooting
 {: #troubleshooting}

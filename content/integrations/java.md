@@ -126,7 +126,7 @@ In that case you can specify an alias for the metric that will become the metric
 In that case:
 
   * The metric type will be a gauge
-  * The metric name will be jmx.[DOMAIN_NAME].[ATTRIBUTE_NAME]
+  * The metric name will be jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]
 
 Here is another filtering example:
 
