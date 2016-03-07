@@ -3,7 +3,7 @@ title: Basic Agent Usage for OS X
 kind: documentation
 servicename: /usr/local/bin/datadog-agent
 serviceinfoname: /usr/local/bin/datadog-agent info
-configdirectory: ~/.datadog-agent/
+configdirectory: /opt/datadog-agent/etc/
 logdirectory: /var/log/datadog/
 supervisorlog: /var/log/datadog/supervisord.log
 os: osx
