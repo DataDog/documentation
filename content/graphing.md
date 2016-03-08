@@ -373,7 +373,7 @@ jQuery(function(){
 <div class="collapse" id="collapseJSON" markdown="1">
 
 ## Graphing with the JSON editor
-{: #jgraphing}
+{: #graphing}
 
 
 [Close JSON tab details](#collapseJSON){: role="button" data-toggle="collapse" aria-controls="collapseJSON" id="collapseJSONClose"}
@@ -381,7 +381,7 @@ jQuery(function(){
 ![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 
 ### Grammar
-{: #jgrammar}
+{: #grammar}
 
 
 The graph definition language is well-formed JSON and is structured in four parts:
@@ -420,7 +420,7 @@ In other words at the highest level the JSON structure is a dictionary with two,
 \* *only requests and viz are required.*
 
 ## Requests
-{: #jrequests}
+{: #requests}
 
 The general format for a series is:
 
@@ -437,7 +437,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
 #### Functions
-{: #jfunctions}
+{: #functions}
 
 You can apply functions to the result of each query. <a href="/examples/graphing functions/">Examples</a>
 
@@ -659,17 +659,17 @@ future. For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
 
 #### Aggregation Method
-{: #jaggregation}
+{: #aggregation}
 
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
 
 #### Metrics
-{: #jmetrics}
+{: #metrics}
 
 The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
 #### Scope
-{: #jscope}
+{: #scope}
 
 A scope lets you filter a Series. It can be a host, a device on a host
 or any arbitrary tag you can think of that contains only alphanumeric
@@ -685,12 +685,12 @@ Examples of scope (meaning in parentheses):
     *                                 (wildcard for everything)
 
 #### Groups
-{: #jgroups}
+{: #groups}
 
 For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
 
 #### Arithmetic
-{: #jmath}
+{: #math}
 
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
@@ -722,7 +722,7 @@ apples by oranges.
 
 
 ### Events
-{: #jevents}
+{: #events}
 
 You can overlay any event from Datadog. The general format is:
 
@@ -750,7 +750,7 @@ or if you're looking to display all errors:
 
 
 ### Visualization
-{: #jviz}
+{: #viz}
 
 Data can be visualized in a few different ways:
 
@@ -769,7 +769,7 @@ The Time Series can be further broken down to:
 4. as bar charts
 
 #### Line Charts
-{: #jlinecharts}
+{: #linecharts}
 
 <img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
 
@@ -788,7 +788,7 @@ The representation is automatically derived from having multiple `requests` valu
       ]
 
 #### Stacked Series
-{: #jstacked}
+{: #stacked}
 
 <img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
@@ -803,7 +803,7 @@ In the case of related Time Series, you can easily draw them as stacked areas by
 Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries.
 
 #### Slice-n-Stack
-{: #jslice}
+{: #slice}
 
 A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance, when selecting a tag that
@@ -833,7 +833,7 @@ to get traffic for all the tagged hosts, split by host and network device.
 
 
 ### Y-Axis Controls
-{: #jyaxis}
+{: #yaxis}
 
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
 <ul>
@@ -880,7 +880,7 @@ Examples:
     }
 
 #### Filtering
-{: #jfilter}
+{: #filter}
 
 Filter configuration allows you to automatically change y-axis bounds based on a
 threshold. Thresholds can be a percentage or an absolute value, and it can apply to
@@ -955,7 +955,7 @@ Here is a full JSON example:
 
 
 #### Examples
-{: #jexamples}
+{: #examples}
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 
