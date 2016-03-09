@@ -41,4 +41,4 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
 
 <%= get_metrics_from_git()%>
 
-[1] https://github.com/DataDog/dd-agent/blob/master/conf.d/ceph.yaml.example
+[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/ceph.yaml.example
