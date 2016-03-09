@@ -4,20 +4,28 @@ integration_title: Ceph
 kind: integration
 git_integration_title: ceph
 ---
-### Overview
+# Overview
 
 Enable the Datadog-Ceph integration to:
   * Track disk usage across storage pools
   * Receive service checks in case of issues
   * Monitor I/O performance metrics
 
+# Installation
+
 The integration is meant to be enabled on each Ceph monitor host.
 
-1. Adjust the configuration file to match your environment. The default command used to retrieve metrics is `/usr/bin/ceph`. If sudo access is required to run it, please enable the use_sudo flag.
+# Configuration
 
-2. Restart the agent.
+Adjust the configuration file to match your environment. By default the check will use `/usr/bin/ceph` to retrieve metrics; this can be overriden by using the `ceph_cmd` option. If sudo access is required to run it, please enable the use_sudo flag.
 
-3. Execute the info command `/etc/init.d/datadog-agent info` and verify that the integration check was successful. The output should contain a section similar to the following:
+Any extra tags specific to the cluster can be specified under `tags`, as usual.
+
+  * [Ceph YAML example][1]
+
+# Validation
+
+Execute the info command `/etc/init.d/datadog-agent info` and verify that the integration check was successful. The output should contain a section similar to the following:
 
         Checks
         ======
@@ -28,3 +36,9 @@ The integration is meant to be enabled on each Ceph monitor host.
           ----
               - instance #0 [OK]
               - Collected 19 metrics, 0 events & 2 service checks
+
+# Metrics
+
+<%= get_metrics_from_git()%>
+
+[1] https://github.com/DataDog/dd-agent/blob/master/conf.d/ceph.yaml.example
