@@ -23,3 +23,6 @@ Enable this integration to see in Datadog all your SES metrics.
 
 
 
+## Metrics
+
+<%= get_metrics_from_git() %>
