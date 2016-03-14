@@ -24,5 +24,6 @@ template_variables = [{
 	"prefix" => "host",
 	"default" => "host:my-host"
 }]
+read_only=true
 
-dog.create_dashboard(title, description, graphs, template_variables)
+dog.create_dashboard(title, description, graphs, template_variables, read_only)
