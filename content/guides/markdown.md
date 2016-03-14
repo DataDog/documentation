@@ -16,7 +16,7 @@ An example below:
 <pre>
 {
       "title": "Did you hear the news today?",
-      "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\")",
+      "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
       "priority": "normal",
       "tags": ["environment:test"],
       "alert_type": "info"
