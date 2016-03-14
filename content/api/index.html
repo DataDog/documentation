@@ -1053,6 +1053,7 @@ kind: documentation
                <div>The default value for the template variable on dashboard load</div>
              </li>
            </ul>
+           <%= argument("read_only", "The read-only status of the timeboard.", :default => "False") %>
            </ul>
       </div>
       <%= right_side_div %>
@@ -1122,6 +1123,7 @@ kind: documentation
                <div>The default value for the template variable on dashboard load</div>
              </li>
            </ul>
+           <%= argument("read_only", "The read-only status of the timeboard.", :default => "False") %>
            </ul>
       </div>
       <%= right_side_div %>
@@ -1228,6 +1230,7 @@ kind: documentation
           <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
           <%= argument("width", "Screenboard width in pixels", :default => "None") %>
           <%= argument("height", "Height in pixels.", :default => "None") %>
+          <%= argument("read_only", "The read-only status of the screenboard.", :default => "False") %>
         </ul>
       </div>
       <%= right_side_div %>
