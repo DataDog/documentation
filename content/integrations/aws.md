@@ -138,14 +138,14 @@ Depending on whether you created a role or a user above, choose the appropriate 
   1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
   2.  Select the **Role Delegation** tab.
   3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
-  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
   5.  Click **Install Integration**.
 
 * Configure Access Key / Secret Key
   1.   Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
   2.  Select the **Access Keys** tab.
   3.  Enter your AWS Access Key and AWS Secret Key for the user created above.
-  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of instances on AWS, tag them and specify the tag in the limit textbox here.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
   5.  Click **Install Integration**.
 
 ## Metrics
