@@ -39,6 +39,12 @@ From the open-source Agent:
           # The format for the server entry below is:
           # server: mongodb://username:password@host:port/database where database will default to admin
           - server: mongodb://admin:datadog@localhost:27017/admin
+            tags:
+              - key:value
+            additional_metrics:
+              - durability
+              - locks
+              - top
 
 2.  Restart the agent
 
