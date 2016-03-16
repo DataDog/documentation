@@ -152,6 +152,8 @@ Depending on whether you created a role or a user above, choose the appropriate 
 
 <%= get_metrics_from_git() %>
 
+
+
 # Troubleshooting
 {: #troubleshooting}
 
