@@ -3,11 +3,13 @@ title: Datadog-Consul Integration
 integration_title: Consul
 kind: integration
 git_integration_title: consul
+newhlevel: true
 ---
 
-### Overview
+# Overview
 
 Connect Consul to Datadog in order to:
+
 * Correlate the performance of Consul with the rest of your applications
 * Monitor the health of your Consul cluster
 
@@ -19,7 +21,7 @@ From the open-source Agent:
 * [Consul checks.d][2]
 
 
-## Metrics
+# Metrics
 
 <%= get_metrics_from_git() %>
 
