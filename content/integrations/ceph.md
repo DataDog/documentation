@@ -37,8 +37,6 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
               - instance #0 [OK]
               - Collected 19 metrics, 0 events & 2 service checks
 
-# Metrics
 
-<%= get_metrics_from_git()%>
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/ceph.yaml.example
