@@ -63,42 +63,47 @@ def get_metrics_from_git
   require 'base64'
   require 'csv'
 
-  if ENV.has_key?('github_personal_token')
-    ititle = @item[:git_integration_title]
+  begin
+    if ENV.has_key?('github_personal_token')
+      ititle = @item[:git_integration_title]
 
-    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
-    # itext.force_encoding('utf-8')
-    # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
-    # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
-    metric_string = "<table class='table'>"
-    CSV.parse(Base64.decode64(itext), {:headers => true, :converters => :all}) do |row|
-      description = row['description']
-      if description.nil?
-        description = ' '
-      end
-      # row.each do |metric_name, metric_type, interval, unit_name, per_unit_name, description, orientation, integration, short_name |
-        metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
-        if row['interval'] != nil
-          metric_string += " every #{row['interval']} seconds"
+      itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
+      # itext.force_encoding('utf-8')
+      # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
+      # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
+      metric_string = "<table class='table'>"
+      CSV.parse(Base64.decode64(itext), {:headers => true, :converters => :all}) do |row|
+        description = row['description']
+        if description.nil?
+          description = ' '
         end
-        # if row.has_key?("description")
-        metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
-        if row['unit_name'] != nil
-          metric_string += "<br/>shown as #{row['unit_name']}"
-          if row['per_unit_name'] != nil
-            metric_string += "/#{row['per_unit_name']}"
+        # row.each do |metric_name, metric_type, interval, unit_name, per_unit_name, description, orientation, integration, short_name |
+          metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
+          if row['interval'] != nil
+            metric_string += " every #{row['interval']} seconds"
           end
-        end
+          # if row.has_key?("description")
+          metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
+          if row['unit_name'] != nil
+            metric_string += "<br/>shown as #{row['unit_name']}"
+            if row['per_unit_name'] != nil
+              metric_string += "/#{row['per_unit_name']}"
+            end
+          end
 
-        metric_string += "</td></tr>"
+          metric_string += "</td></tr>"
+      end
+      metric_string+="</table>"
+      metric_string.force_encoding('utf-8')
+      output = metric_string
+    else
+      output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
     end
-    metric_string+="</table>"
-    metric_string.force_encoding('utf-8')
-    output = metric_string
-  else
-    output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
-  end
-return output
+  return output
+rescue Exception => e
+  puts "**** There was a problem getting GitHub Metrics for #{@item[:title]} ****"
+  puts e.message
+end
 end
 
 def get_units_from_git
