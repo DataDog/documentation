@@ -21,7 +21,7 @@ Configure the Agent to connect to your processes. Our example configuration will
 
         init_config:
           # used to override the default procfs path, e.g. for docker
-          # containers with the outside fs mounted at /host/proc
+          # containers to see the processes of the host at /host/proc
           # procfs_path: /proc
         instances:
           - name: ssh
