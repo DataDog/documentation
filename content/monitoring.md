@@ -370,7 +370,7 @@ triggering scope into the message of multi alerts.
 
 1. **Conditional variables for different notification types**: You can have a
     monitor event display a different message depending on whether the event is a
-    trigger, recover, or no data notification. These variables use simple if-else
+    trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
     ![conditional variables](/static/images/monitor/conditionalvars.png)
@@ -390,7 +390,7 @@ triggering scope into the message of multi alerts.
     ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
 
-    The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
+    The conditional variables available are `is_alert`, `is_warning`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
     Step 3 of the monitor editor.
 
