@@ -20,7 +20,9 @@ Configure the Agent to connect to your processes. Our example configuration will
 1.  Edit `/etc/dd-agent/conf.d/process.yaml`
 
         init_config:
-
+          # used to override the default procfs path, e.g. for docker
+          # containers with the outside fs mounted at /host/proc
+          # procfs_path: /proc
         instances:
           - name: ssh
             search_string: ['ssh', 'sshd']
