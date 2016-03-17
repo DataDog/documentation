@@ -2,7 +2,7 @@
 title: Datadog-Consul Integration
 integration_title: Consul
 kind: integration
-git_integration_title: consul
+git_integration_title: consulx
 newhlevel: true
 ---
 
