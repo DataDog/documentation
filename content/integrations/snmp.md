@@ -35,6 +35,8 @@ To use the SNMP checks, edit the **snmp.yaml** file in your **conf.d** directory
         snmp_version: 2 # Only required for snmp v1, will default to 2
         timeout: 1 # second, by default
         retries: 5
+        enforce_mib_constraints: true  # if set to false we will not check the values
+                                       # returned meet the MIB constraints. Defaults to True.
         tags:
           - location:front
         metrics:
