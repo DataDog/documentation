@@ -10,4 +10,5 @@
    'name': 'host1',
    'prefix': 'host'}],
  'title': 'My Screenboard',
- 'width': 1024}
+ 'width': 1024,
+ 'read_only': False}

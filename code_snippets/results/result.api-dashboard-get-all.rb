@@ -11,5 +11,6 @@
      "id"=>"2552",
      "description"=>"And they are marvelous.",
      "created"=>"2015-12-17T20:09:33.890824+00:00",
-     "modified"=>"2015-12-17T20:19:22.770834+00:00"}
+     "modified"=>"2015-12-17T20:19:22.770834+00:00",
+     "read_only"=>true}
     ]}]
