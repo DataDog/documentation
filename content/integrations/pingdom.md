@@ -12,6 +12,8 @@ Track Pingdom downtime events and user-centric performance metrics in Datadog, f
 
 At this time we track the response_time metric for any sites you configure on the Pingdom website.
 
+*Note: Events and metrics can only be imported for Pingdom customers at the Starter level or above.*
+
 ## Metrics
 
 <%= get_metrics_from_git() %>
