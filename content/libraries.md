@@ -205,7 +205,7 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [19]: https://github.com/brettlangdon
    [20]: https://github.com/jpinkham/webservice-datadog
    [21]: https://github.com/jpinkham
-   [22]: https://github.com/zipkid/dogstatsd-perl
+   [22]: https://github.com/binary-com/dogstatsd-perl
    [23]: https://github.com/zipkid
    [24]: https://github.com/mavenlink/metriks-dogstatsd
    [25]: https://github.com/eric/metriks
