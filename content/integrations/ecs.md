@@ -21,6 +21,17 @@ This documentation assume you already have a working EC2 Container Service clust
 
 This task will launch the Datadog container. When you need to modify the configuration, you will update this Task Definition as described further down in this guide.
 
+You may either configure the task using the [AWS CLI tools](https://aws.amazon.com/cli/) or using the Amazon Web Console.
+
+#### AWS CLI
+
+1. Download [dd-agent-ecs.json](/static/dd-agent-ecs.json).
+1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
+1. Execute the following command:
+       aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
+
+#### Web UI
+
 1. Log in to your AWS Console and navigate to the EC2 Container Service section.
 2. Click on the cluster you wish to add Datadog to.
 3. Click on **Task Definitions** on the left side and click the button **Create new Task Definition**.
