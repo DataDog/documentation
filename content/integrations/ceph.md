@@ -3,6 +3,7 @@ title: Datadog-Ceph Integration
 integration_title: Ceph
 kind: integration
 git_integration_title: ceph
+newhlevel: true
 ---
 # Overview
 
