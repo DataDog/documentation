@@ -35,7 +35,7 @@ Monitoring in Datadog refers to the ability to notify your team when conditions 
 Here is a quick overview of the different terms used in this guide.
 
 - **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
-- **Check**: Emits one more more statuses.
+- **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
