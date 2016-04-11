@@ -63,6 +63,8 @@ For a given bean, metrics get tagged in the following manner:
 
 Your metric will be mydomain (or some variation depending on the attribute inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
 
+If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
+
 ## Description of the filters
 
 Each `include` or `exclude` dictionary supports the following keys:
