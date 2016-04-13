@@ -43,6 +43,9 @@ data_sources:
     # Set the default encoding for all files in as utf-8
     # See https://github.com/nanoc/nanoc/issues/237 for more
     encoding: utf-8
+  -
+    type:   relnotes
+    items_root: /relnotes/
 
 # Configuration for the “watch” command, which watches a site for changes and
 # recompiles if necessary.

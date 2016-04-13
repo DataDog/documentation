@@ -59,6 +59,7 @@ preprocess do
   create_tag_pages($ja_example_items,{:identifier => "/ja/examples/%%tag%%/", :template => "example-subindex-ja"})
   create_tag_pages($ja_video_items,{:identifier => "/ja/videos/%%tag%%/", :template => "video-subindex-ja"})
 
+
   @items.each do |item|
     language = "en"
     otherlang = "ja"
@@ -151,6 +152,8 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/integrations') && @item[:kind] == 'integration'
       layout 'integration_layout'
+    when id.match('/relnotes') && @item[:kind] =='releasenotes'
+      layout 'default'
     else
       if item[:title] != 'redirect'
         layout 'default'
