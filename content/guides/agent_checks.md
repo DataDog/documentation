@@ -392,7 +392,7 @@ call it `http.response_time` and tag it with the URL.
 
 <%= python <<EOF
 timing = end_time - start_time
-self.gauge('http.reponse_time', timing, tags=['http_check'])
+self.gauge('http.response_time', timing, tags=['http_check'])
 EOF
 %>
 
@@ -426,7 +426,7 @@ def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
         'event_type': 'http_check',
-        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_title': 'Invalid response code for %s' % url,
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
