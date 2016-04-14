@@ -526,6 +526,13 @@ kind: documentation
               triggered state.
               <p>Default: <code>None</code></p></li>
 
+              <li><code>require_full_window</code> a boolean indicating whether
+              this monitor needs a full window of data before it's evaluated. We
+              highly recommend you set this to <code>False</code> for sparse
+              metrics, otherwise some evaluations will be skipped.
+              <p>Default: <code>True</code> for "on average", "at all times" and
+              "in total" aggregation. <code>False</code> otherwise.</p></li>
+
               <li><code>renotify_interval</code> the number of minutes after
               the last notification before a monitor will re-notify on the
               current status. It will only re-notify if it's not resolved.
@@ -539,6 +546,10 @@ kind: documentation
 
               <li><code>notify_audit</code> a boolean indicating whether tagged
               users will be notified on changes to this monitor.
+              <p>Default: <code>False</code></p></li>
+
+              <li><code>locked</code> a boolean indicating whether changes to
+              to this monitor should be restricted to the creator or admins.
               <p>Default: <code>False</code></p></li>
 
               <li><code>include_tags</code> a boolean indicating whether
