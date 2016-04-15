@@ -24,6 +24,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     formatador (0.2.5)
+    git-version-bump (0.15.1)
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (~> 3.0.3)
@@ -51,7 +52,6 @@ GEM
       rake
     htmlentities (4.3.4)
     http_parser.rb (0.6.0)
-    jsmin (1.0.1)
     json (1.8.2)
     kramdown (1.5.0)
     libnotify (0.9.1)
@@ -68,12 +68,8 @@ GEM
       cri (~> 2.7)
     nanoc-cachebuster (0.3.1)
       nanoc (>= 3.3.0)
-    nanoc-toolbox (0.2.1)
-      jsmin (~> 1.0)
-      nanoc (~> 3.7)
-      nokogiri (~> 1.6)
     nenv (0.2.0)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -87,6 +83,7 @@ GEM
       slop (~> 3.4)
     rack (1.6.4)
     rack-contrib (1.4.0)
+      git-version-bump (= 0.15.1)
       rack (>= 1.4)
     rack-livereload (0.3.15)
       rack
@@ -132,8 +129,7 @@ DEPENDENCIES
   kramdown
   nanoc
   nanoc-cachebuster
-  nanoc-toolbox
-  nokogiri (~> 1.6.7.1)
+  nokogiri (~> 1.6.7.2)
   octokit
   oj
   rack-contrib
@@ -145,4 +141,4 @@ DEPENDENCIES
   w3c_validators
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
