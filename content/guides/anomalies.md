@@ -16,7 +16,7 @@ Anomaly detection is an algorithmic feature that allows you to identify when a m
 
 We've added a new query function called `anomalies` to our query language. When you apply this function to series, it returns the usual results along with an expected "normal" range.
 
-Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric for which you have collected less than four weeks of history may yield poor results.
+Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
 ### 1. Visualize Anomalies in Dashboards
 {: #dashboards}
