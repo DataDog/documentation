@@ -8,8 +8,6 @@ sidebar:
       href: "#dashboards"
     - text: Alert on Anomalies
       href: "#alerts"
-    - text: Algorithms & Parameters
-      href: "#algorithms"
 ---
 
 Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account day-of-week and time-of-day patterns. It's well suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon - even though that same level of traffic would be perfectly normal later in the evening.
