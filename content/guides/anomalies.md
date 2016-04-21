@@ -50,7 +50,7 @@ You should now see something like what's shown above, with a handful of selectio
 
 <ol type="a">
   <li>This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the grey band.</li>
-  <li>The 'average distance' option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. The 'percentage' option treats all observations outside of the expected band equally.</li>
+  <li>The 'average distance' option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. (Thresholds between 2 and 3 generally perform well.) The 'percentage' option treats all observations outside of the expected band equally. </li>
   <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
   <li>As with other alerts, smaller time windows lead to faster alerting but can yield more false positives.</li>
 </ol>
