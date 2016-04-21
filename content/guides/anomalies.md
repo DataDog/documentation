@@ -16,7 +16,7 @@ Anomaly detection is an algorithmic feature that allows you to identify when a m
 
 We've added a new query function called `anomalies` to our query language. When you apply this function to series, it returns the usual results along with an expected "normal" range.
 
-Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric for which you have collected less than four weeks of history may yield poor results.
+Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
 ### 1. Visualize Anomalies in Dashboards
 {: #dashboards}
@@ -50,7 +50,7 @@ You should now see something like what's shown above, with a handful of selectio
 
 <ol type="a">
   <li>This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the grey band.</li>
-  <li>The 'average distance' option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. The 'percentage' option treats all observations outside of the expected band equally.</li>
+  <li>The 'average distance' option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. (Thresholds between 2 and 3 generally perform well.) The 'percentage' option treats all observations outside of the expected band equally. </li>
   <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
   <li>As with other alerts, smaller time windows lead to faster alerting but can yield more false positives.</li>
 </ol>
