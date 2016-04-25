@@ -222,11 +222,13 @@ kind: documentation
         <h5>Signature</h5>
         <code>GET https://app.datadoghq.com/api/v1/query</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-query.py" %>
-        <%= snippet_code_block "api-query.sh" %>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metrics-query.#{f}" %>
+        <% end %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-query.py" %>
-        <%= snippet_result_code_block "api-query.sh" %>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metrics-query.#{f}" %>
+        <% end %>
       </div>
     </div>
 
