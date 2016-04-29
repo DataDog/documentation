@@ -171,6 +171,7 @@ The configuration file has the following structure:
 
 <%= console <<EOF
 init_config:
+    min_collection_interval: 20
     key1: val1
     key2: val2
 
@@ -182,6 +183,7 @@ instances:
       password: 5678
 EOF
 %>
+`min_collection_interval` can be added to the init_config section to define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log  stating that collection for this script was skipped.
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
 
