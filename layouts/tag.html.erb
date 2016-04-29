@@ -6,12 +6,11 @@ when id.match('/examples/') %>
 
   <% items_with_tag(tag, $example_items).each do |example| %>
     <% if example[:language] == nil %>
-      <h2><%= link_to example[:title], example %></h2>
+      <p>
+      <font size=5><%= link_to example[:title], example %></font>
       <p><%= example[:summary] %></p>
-
-      This example can be found in these groups:<br>
-     <%= tag_links_for(example, [], {:url_format=>"/examples/%%tag%%/"}).join(' | ') %>
-
+     </p>
+     <br><br>
     <% end %>
   <% end %>
   <p><br>
