@@ -48,6 +48,8 @@ sidebar:
       href: "#community-integration-pid-stats"
     - text: Saltstack
       href: "#community-integration-saltstack"
+    - text: Logstash Output
+      href: "#community-integration-logstash"
 
 ---
 
@@ -162,6 +164,11 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * You can get data into Datadog from Google Analytics using our API with [this library][50].
 
+#### Logstash Output
+{: ##community-integration-logstash}
+
+  * [Logstash Output for Datadog][73]
+
 #### NGINX LUA
 {: #community-integration-nginx-lua}
 
@@ -256,3 +263,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [70]: https://github.com/rs
    [71]: https://github.com/DataDog/datadog-go
    [72]: https://github.com/simplifi/ngx_lua_datadog/
+   [73]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
