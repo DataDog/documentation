@@ -165,7 +165,7 @@ Some great folks have written their own libraries to help interact with Datadog.
   * You can get data into Datadog from Google Analytics using our API with [this library][50].
 
 #### Logstash Output
-{: ##community-integration-logstash}
+{: #community-integration-logstash}
 
   * [Logstash Output for Datadog][73]
 
