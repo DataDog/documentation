@@ -58,52 +58,86 @@ def ja_guide_items_yet
   guides.sort_by { |item| item[:listorder] }
 end
 
+def github_metrics_store_filename
+  'github_metrics'
+end
+
+def get_all_metrics_from_github
+  require 'octokit'
+  require 'pp'
+  require 'yaml'
+  require 'csv'
+
+  allmetrictables = []
+  if ENV.has_key?('github_personal_token')
+    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20 seconds on a good connection, much longer on JetBlue"
+    repo = 'datadog/dogweb'
+    reporootdir = $client.contents(repo, :path => "integration/")
+
+    reporootdir.each do |intdir|
+      if intdir[:type]=="dir"
+        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+        intdirlist.each { |intdircontent|
+          if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
+            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+
+            metric_string = "<table class='table'>"
+            CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
+              description = row['description']
+              if description.nil?
+                description = ' '
+              end
+              metric_string+= "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
+              if row['interval'] != nil
+                metric_string += " every #{row['interval']} seconds"
+              end
+              metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
+              if row['unit_name'] != nil
+                metric_string += "<br/>shown as #{row['unit_name']}"
+                if row['per_unit_name'] != nil
+                  metric_string += "/#{row['per_unit_name']}"
+                end
+              end
+              metric_string += "</td></tr>"
+            end
+            metric_string+="</table>"
+            metric_string.force_encoding('utf-8')
+            allmetrictables << {"integration" => intdir[:name], "table" =>metric_string}
+          end
+        }
+      end
+    end
+    serialize_github_metrics(allmetrictables)
+  end
+  return allmetrictables
+end
+
+def serialize_github_metrics(items)
+  File.open(github_metrics_store_filename, 'a') do |f|
+    Marshal.dump(items, f)
+  end
+end
+
+
 def get_metrics_from_git
   require 'octokit'
   require 'base64'
   require 'csv'
 
+  if File.exist?(github_metrics_store_filename)
+    allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
+  else
+    allmetrics = get_all_metrics_from_github
+  end
+
   begin
-    if ENV.has_key?('github_personal_token')
-      ititle = @item[:git_integration_title]
-
-      itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
-      # itext.force_encoding('utf-8')
-      # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
-      # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
-      metric_string = "<table class='table'>"
-      CSV.parse(Base64.decode64(itext), {:headers => true, :converters => :all}) do |row|
-        description = row['description']
-        if description.nil?
-          description = ' '
-        end
-        # row.each do |metric_name, metric_type, interval, unit_name, per_unit_name, description, orientation, integration, short_name |
-          metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
-          if row['interval'] != nil
-            metric_string += " every #{row['interval']} seconds"
-          end
-          # if row.has_key?("description")
-          metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
-          if row['unit_name'] != nil
-            metric_string += "<br/>shown as #{row['unit_name']}"
-            if row['per_unit_name'] != nil
-              metric_string += "/#{row['per_unit_name']}"
-            end
-          end
-
-          metric_string += "</td></tr>"
-      end
-      metric_string+="</table>"
-      metric_string.force_encoding('utf-8')
-      output = metric_string
-    else
-      output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
-    end
-  return output
-rescue Exception => e
-  puts "**** There was a problem getting GitHub Metrics for #{@item[:title]} ****"
-  puts e.message
-end
+    # if ENV.has_key?('github_personal_token')
+    ititle = @item[:git_integration_title]
+    return allmetrics.find { |h| h['integration'] == ititle}["table"]
+  rescue Exception => e
+    pp "**** There was a problem getting GitHub Metrics for #{@item[:title]} ****"
+    pp e
+  end
 end
 
 def get_units_from_git
