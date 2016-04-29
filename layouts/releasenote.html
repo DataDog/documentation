@@ -1,0 +1,89 @@
+<%#
+this layout provides a sidebar and main column.
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+  <%= render "_head" %>
+  <body>
+
+    <%= render "_header" %>
+    <div class="container">
+      <div class="row">
+      <% if !@item.identifier.match("/api/") %>
+        <!-- SIDEBAR -->
+        <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
+          <ul class="nav nav-tabs nav-stacked sidebar">
+          <% if @item["language"] == "en" %>
+            <li class="nav-header">Documentation Search</li>
+            <li>
+              <form action="/search/">
+                <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+              </form>
+            </li>
+            <% end %>
+            <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+              <% @item[:sidebar][:nav].each do |i| %>
+                <% if i[:header] %>
+                  <li class="nav-header"><%= i[:header] %></li>
+                <% else %>
+                  <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
+                <% end %>
+              <% end %>
+            <% end %>
+              <li class="nav-header"><%= @item["menu_guides"] %> </li>
+              <% this_guide_items = @item["language"] == "en" ? $guide_items : $ja_guide_items %>
+            <% this_guide_items.each do |i| %>
+                  <li><%= link_to i[:title], i.path %></li>
+            <% end %>
+          </ul>
+        &nbsp;
+        </div>
+        <!-- END SIDEBAR -->
+        <% end %>
+        <!-- MAIN -->
+        <div class="col-xs-12 col-sm-9 col-md-9 main">
+          <!-- PAGE TITLE -->
+          <% if !@item.identifier.match("/api/") %>
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <% end %>
+          <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
+            <small>
+            <% if @item[:language] == 'en' %>
+              tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+              tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/examples/%%tag%%/"}).sort().join(' | ') %>
+            <% end %>
+            </small>
+            <br><br>
+          <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
+            <small>
+            <% if @item[:language] == 'en' %>
+            tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+            tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/videos/%%tag%%/"}).sort().join(' | ') %>
+            <% end %>
+            </small>
+            <br><br>
+            <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + @item[:wistiaid]) %>
+            <a href="//fast.wistia.net/embed/iframe/<%= @item[:wistiaid] %>?popover=true" class="wistia-popover[height=720,playerColor=7b796a,width=1280]"><img src="<%= wistiavideo.thumbnail_medium %>?image_play_button=true&image_play_button_color=7b796ae0&image_crop_resized=552x311" alt="" /></a>
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
+          <% end %>
+          <%= yield %>
+
+          <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
+             <a href="<%= @item["langpath"] %>/examples/"><%= @item["examples_return_to_all_example_groups"] %></a>
+          <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
+            <a href="<%= @item["langpath"] %>/videos/"><%= @item["videos_return_to_all_video_groups"] %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render "_footer" %>
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+  </body>
+</html>
+
+

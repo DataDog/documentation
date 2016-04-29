@@ -1,77 +1,119 @@
 require 'octokit'
+require 'base64'
+require 'typhoeus'
+require 'fileutils'
+# require 'yaml'
 
 module Nanoc::DataSources
-  class ReleaseNotes < ::Nanoc::DataSource
+  class ReleaseNotes < Nanoc::DataSource
     identifier :relnotes
 
-    def up
+
+    def store_filename
+      'github_release_notes_items'
     end
 
-    def items
-      load_items.map do |item|
-        Nanoc::Item.new(item[:content], item[:attributes], item[:identifier])
-      end
-    end
-
-    def update
-      print "xxxxxxxxxxxxxxxxxxxxxxxxxxxx in rn update xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    def get_release_notes()
       if ENV.has_key?('github_personal_token')
         $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
         $client.user.login
       end
-      items = []
-      rnitems = get_release_notes_from_git
-      rnitems.map do |rnitem|
-        items<<parse_main_item(rnitem)
+      rnrepo = "technovangelist/Release-Notes"
+      release_note_list =$client.contents(rnrepo, :path => "/")
+      images_list = $client.contents(rnrepo, :path => "/images/")
+      release_notes = []
+
+      release_note_list.each do |rnlist_entry|
+        if rnlist_entry.type =='file' && rnlist_entry.name.end_with?('.yaml')
+          next_release_note = YAML.load(Base64.decode64($client.contents(rnrepo, :path => "/#{rnlist_entry.path}").content))
+
+          next_release_note = {rnlist_entry.name[0..-6].to_s => next_release_note}
+          release_notes << next_release_note
+        end
       end
-      write_items(items)
+
+      hydra = Typhoeus::Hydra.new(max_concurrency: 5)
+      unless File.directory?("content/static/images/rn")
+        FileUtils.mkdir_p("content/static/images/rn")
+      end
+      images_list.each do |image|
+        unless image[:name] == ".DS_Store"
+          request = Typhoeus::Request.new image[:download_url]
+          request.on_complete do |response|
+            open("content/static/images/rn/#{image[:name]}", "wb") do |file|
+              file << response.body
+            end
+          end
+          hydra.queue request
+        end
+      end
+      hydra.run
+
+      return release_notes
     end
 
-    def store_filename
-      'github_release_notes_items.yaml'
-    end
-
-    def load_items
-
-      unless File.exists?(store_filename)
-        update
+    def get_individual_items(releasenoteitems)
+      individual_items = []
+      releasenoteitems.each do |releasenote|
+        releasenote.each do |rndate, categoryvalue|
+          categoryvalue.each do |rncategory, categorycontent|
+            categorycontent.each do |item|
+              item.each do |itemtitle, itemcontent|
+                individual_items << {"Title" => itemtitle, "Category" => rncategory, "Private" => itemcontent["Private"],  "Text" => itemcontent["Text"], "Image" => itemcontent["Image"], "AssociatedIntegration"=>itemcontent["AssociatedIntegration"], "Date" => rndate}
+              end
+            end
+          end
+        end
       end
-      @items ||= File.exists?(store_filename) ? YAML.load_file(store_filename) : []
+      return individual_items
     end
 
     def write_items(items)
-      print "************************** in rn write items**********************"
-      File.open(store_filename, 'w') do |f|
-        YAML.dump(items, f)
+      File.open(store_filename, 'a') do |f|
+        Marshal.dump(items, f)
       end
     end
 
-    def parse_main_item(rnitem)
-      rnitem.map do |categoryname, citem|
-        parse_category_item(categoryname, citem)
+    def format_release_note(rnitem)
+      output = ""
+      begin
+        rnitem.values[0].each do |category|
+          output+= "\#\# #{category[0]}\n\n"
+          category[1].each do |individual_item|
+            if individual_item.values[0]["Private"]==false
+              text = individual_item.values[0]["Text"]
+              text = "<p markdown='1'>" + text.gsub(/\n/, '</p><p markdown="1">') + "</p>"
+              output += "\#\#\# #{individual_item.keys[0]}\n\n"
+              output += "#{text}\n\n"
+              if individual_item.values[0].key?("Image")
+                output += "![#{individual_item.values[0]['Image'][0]}](/static/images/rn/#{individual_item.values[0]['Image'][0]})" +"\n\n"
+              end
+            end
+          end
+        end
+      rescue StandardError => err
+        pp "error in release note formatting #{rnitem.keys[0]} - #{err}"
       end
-      content = %{ReleaseNotes #{rnitem}}
-      attributes = {
-        date: rnitem['date'],
-        kind: 'releasenote'
-      }
-
-      items<< {:content => content, :attributes => attributes, :identifier => "RN-#{rnitem['date']}"}
+      return output
     end
 
-    def parse_category_item(categoryname, citem)
-      # print "#{categoryname} -  #{citem}"
-      content = %{Category Item #{citem}}
-      attributes = {
-        kind: 'releasenotecategory'
-      }
-
-      write_items({:content => content, :attributes => attributes, :identifier => "#{categoryname}"})
-
-    end
-
-    def parse_integration_item
-
+    def items
+      if File.exist?(store_filename)
+        rnitems = Marshal.load(File.binread(store_filename))
+      else
+        rnitems = get_release_notes()
+        write_items(rnitems)
+      end
+      individual_items = get_individual_items(rnitems)
+      finisheditems = []
+      rnitems.each do |rnitem|
+        date = DateTime.strptime(rnitem.keys[0], '%m%d%Y').strftime("%B %-d, %Y")
+        finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0]}, "RN-#{rnitem.keys[0]}")
+      end
+      individual_items.each do |iitem|
+        finisheditems << Nanoc::Item.new(iitem["Text"])
+      end
+      return finisheditems
     end
   end
 end

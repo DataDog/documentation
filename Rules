@@ -152,8 +152,9 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/integrations') && @item[:kind] == 'integration'
       layout 'integration_layout'
-    when id.match('/relnotes') && @item[:kind] =='releasenotes'
-      layout 'default'
+    when id.match('/relnotes')
+      filter :kramdown
+      layout 'releasenote'
     else
       if item[:title] != 'redirect'
         layout 'default'
