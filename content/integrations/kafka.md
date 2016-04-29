@@ -13,7 +13,7 @@ This check has a limit of 350 metrics per instance. The number of returned metri
 * If you are using the Datadog Agent < 5.0.0, please look at the old documentation for more detailed instructions. The following instructions are for the Datadog Agent >= 5.0.0
 * Configure the Agent to connect to Kafka
 
-Edit `conf.d/kafka.yaml`
+Edit `conf.d/kafka.yaml`. Note: Kafka bean names depend on the exact Kafka version you're running. The following configuration is provided as an example, please use the most recent and comprehensive one: https://github.com/DataDog/dd-agent/blob/master/conf.d/kafka.yaml.example.
 
     instances:
     #    -   host: localhost
