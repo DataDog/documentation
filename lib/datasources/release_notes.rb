@@ -111,7 +111,7 @@ module Nanoc::DataSources
         finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0]}, "RN-#{rnitem.keys[0]}")
       end
       individual_items.each do |iitem|
-        finisheditems << Nanoc::Item.new(iitem["Text"])
+        finisheditems << Nanoc::Item.new(iitem["Text"], {}, "#{iitem["Date"]}-#{iitem["Title"]}")
       end
       return finisheditems
     end

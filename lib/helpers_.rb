@@ -7,10 +7,7 @@ include Nanoc::Helpers::LinkTo
 
 def sorted_release_notes
   require 'date'
-  rn = @items.select {|item| item.identifier.match('/relnotes/') && item.identifier != '/relnotes/'}
-  # rn.each do |r|
-  #   pp DateTime.strptime(r[:date], '%m%d%Y').to_time.to_i
-  # end
+  rn = @items.select {|item| item.identifier.match('/relnotes/RN-*')}
   rn.sort_by do |r|
     DateTime.strptime(r[:date], '%m%d%Y').to_time.to_i
   end
