@@ -17,7 +17,7 @@
           "readOnly": true
         },
         {
-          "containerPath": "/host/proc ",
+          "containerPath": "/host/proc",
           "sourceVolume": "proc",
           "readOnly": true
         }
