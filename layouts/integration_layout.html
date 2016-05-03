@@ -60,8 +60,9 @@ this layout provides a sidebar and main column.
         <div class="col-sm-9 col-xs-12 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
-          <div <%if @item[:newhlevel] %>id="pagecontent"<% end %>>
+          <div <% if @item[:newhlevel] %>id="pagecontent"<% end %>>
             <%= yield %>
+
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 include Nanoc::Helpers::XMLSitemap
 include Nanoc::Helpers::Rendering
 include Nanoc::Helpers::LinkTo
+include Nanoc::Helpers::Blogging
 
 # general functions
 
@@ -13,6 +14,16 @@ def sorted_release_notes
   end
   return rn
 end
+
+def sorted_raw_release_notes
+  require 'date'
+  rn = @items.select {|item| item.identifier.match('/relnotes/raw-*')}
+  rn.sort_by do |r|
+    DateTime.strptime(r[:date], '%m%d%Y').to_time.to_i
+  end
+  return rn
+end
+
 def collect_example_items
   @items.select { |item| item[:kind] == 'example' && !(item.identifier.match('/ja/')) }
 end

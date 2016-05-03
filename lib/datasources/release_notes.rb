@@ -59,7 +59,9 @@ module Nanoc::DataSources
           categoryvalue.each do |rncategory, categorycontent|
             categorycontent.each do |item|
               item.each do |itemtitle, itemcontent|
-                individual_items << {"Title" => itemtitle, "Category" => rncategory, "Private" => itemcontent["Private"],  "Text" => itemcontent["Text"], "Image" => itemcontent["Image"], "AssociatedIntegration"=>itemcontent["AssociatedIntegration"], "Date" => rndate}
+                if itemcontent["Private"] != true
+                  individual_items << {"Title" => itemtitle, "Category" => rncategory, "Private" => itemcontent["Private"],  "Text" => itemcontent["Text"], "Image" => itemcontent["Image"], "AssociatedIntegration"=>itemcontent["AssociatedIntegration"], "Date" => rndate}
+                end
               end
             end
           end
@@ -97,6 +99,28 @@ module Nanoc::DataSources
       return output
     end
 
+   def format_raw_release_note(rnitem)
+      output = ""
+      begin
+        rnitem.values[0].each do |category|
+          output+= "\#\# #{category[0]}\n\n"
+          category[1].each do |individual_item|
+            if individual_item.values[0]["Private"]==false
+              text = individual_item.values[0]["Text"]
+              output += "\#\#\# #{individual_item.keys[0]}\n\n"
+              output += "#{text}\n\n"
+              if individual_item.values[0].key?("Image")
+                output += "![#{individual_item.values[0]['Image'][0]}](/static/images/rn/#{individual_item.values[0]['Image'][0]})" +"\n\n"
+              end
+            end
+          end
+        end
+      rescue StandardError => err
+        pp "error in release note formatting #{rnitem.keys[0]} - #{err}"
+      end
+      return output
+    end
+
     def items
       if File.exist?(store_filename)
         rnitems = Marshal.load(File.binread(store_filename))
@@ -108,10 +132,11 @@ module Nanoc::DataSources
       finisheditems = []
       rnitems.each do |rnitem|
         date = DateTime.strptime(rnitem.keys[0], '%m%d%Y').strftime("%B %-d, %Y")
-        finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0]}, "RN-#{rnitem.keys[0]}")
+        finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0], "created_at" => date, "kind" => "releasenote"}, "RN-#{rnitem.keys[0]}")
+        finisheditems << Nanoc::Item.new(format_raw_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0], "created_at" => date, "kind" => "rawreleasenote", "is_hidden" => true}, "raw-#{rnitem.keys[0]}")
       end
       individual_items.each do |iitem|
-        finisheditems << Nanoc::Item.new(iitem["Text"], {}, "#{iitem["Date"]}-#{iitem["Title"]}")
+        finisheditems << Nanoc::Item.new(iitem["Text"], {"title" => iitem["Title"], "kind" => "individualupdate", "category" => iitem["Category"], "image" => iitem["Image"], "AssociatedIntegration" => iitem["AssociatedIntegration"], "date" => iitem["Date"]}, "i-#{iitem["Date"]}-#{iitem["Title"]}")
       end
       return finisheditems
     end

@@ -152,9 +152,16 @@ compile '*' do
       layout 'basic_agent_usage'
     when id.match('/integrations') && @item[:kind] == 'integration'
       layout 'integration_layout'
-    when id.match('/relnotes')
+    when id.match('/relnotes/feed')
+      filter :erb
+
+    when id.match('/relnotes') && @item[:kind] == "releasenote"
       filter :kramdown
       layout 'releasenote'
+
+    when id.match('/relnotes') && @item[:kind] == "rawreleasenote"
+
+
     else
       if item[:title] != 'redirect'
         layout 'default'
@@ -166,6 +173,10 @@ end
 
 route 'sitemap' do
   item.identifier.chop + '.xml'
+end
+
+route 'relnotes/feed' do
+  '/relnotes/feed.xml'
 end
 
 route '/partials/*' do
