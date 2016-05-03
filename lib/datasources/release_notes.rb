@@ -18,7 +18,7 @@ module Nanoc::DataSources
         $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
         $client.user.login
       end
-      rnrepo = "technovangelist/Release-Notes"
+      rnrepo = "datadog/Release-Notes"
       release_note_list =$client.contents(rnrepo, :path => "/")
       images_list = $client.contents(rnrepo, :path => "/images/")
       release_notes = []
