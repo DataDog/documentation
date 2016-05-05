@@ -92,6 +92,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Go
 {: #community-go}
 
+  * [ecsdog][74] - a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd by [ejholmes][75]
   * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
   * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31].
   * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
@@ -264,3 +265,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [71]: https://github.com/DataDog/datadog-go
    [72]: https://github.com/simplifi/ngx_lua_datadog/
    [73]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
+   [74]:https://github.com/remind101/ecsdog
+   [75]: http://ejholmes.io/
