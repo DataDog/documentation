@@ -194,7 +194,7 @@ The `datadog-agent jmx` command was added in version 4.1.0.
 
 # Validation
 
-JMX Checks have a default configuration that will collect 13 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
+JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
 
 # Metrics
 
