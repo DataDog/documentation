@@ -183,7 +183,7 @@ instances:
       password: 5678
 EOF
 %>
-`min_collection_interval` can be added to the init_config section to define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log  stating that collection for this script was skipped.
+`min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
 
