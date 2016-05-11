@@ -47,9 +47,9 @@ The only installation step is to make sure you can open a [JMX remote connection
                     metric_type: gauge
                     alias: jmx.my2ndattribute
               - include:
-                domain: 2nd_domain
-              - exclude:
-                bean: excluded_bean
+                  domain: 2nd_domain
+                exclude:
+                  bean: excluded_bean
 
 
 The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this dictionary:
