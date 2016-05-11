@@ -60,7 +60,7 @@ module Nanoc::DataSources
             categorycontent.each do |item|
               item.each do |itemtitle, itemcontent|
                 if itemcontent["Private"] != true
-                  individual_items << {"Title" => itemtitle, "Category" => rncategory, "Private" => itemcontent["Private"],  "Text" => itemcontent["Text"], "Image" => itemcontent["Image"], "AssociatedIntegration"=>itemcontent["AssociatedIntegration"], "Date" => rndate}
+                  individual_items << {"Title" => itemtitle, "Category" => rncategory, "Private" => itemcontent["Private"],  "Text" => itemcontent["Text"], "Image" => itemcontent["Image"], "AssociatedIntegration"=>itemcontent["AssociatedIntegration"], "Date" => rndate, "Slugline" => itemcontent["Slugline"]}
                 end
               end
             end
@@ -108,6 +108,7 @@ module Nanoc::DataSources
             if individual_item.values[0]["Private"]==false
               text = individual_item.values[0]["Text"]
               output += "\#\#\# #{individual_item.keys[0]}\n\n"
+              output += "slugline: #{individual_item.values[0]['Slugline']}\n\n"
               output += "#{text}\n\n"
               if individual_item.values[0].key?("Image")
                 output += "![#{individual_item.values[0]['Image'][0]}](/static/images/rn/#{individual_item.values[0]['Image'][0]})" +"\n\n"
