@@ -60,6 +60,7 @@ There are a number of other AWS services that are also available in Datadog but 
 | S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
+| Trusted Advisor |
 | WorkSpaces |
 {:.table}
 
@@ -105,7 +106,8 @@ There are two integration methods that can be used to allow Datadog to monitor y
                 "sns:Publish",
                 "sqs:GetQueueAttributes",
                 "sqs:ListQueues",
-                "sqs:ReceiveMessage"
+                "sqs:ReceiveMessage",
+                "support:*"
               ],
               "Effect": "Allow",
               "Resource": "*"
