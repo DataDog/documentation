@@ -81,7 +81,9 @@ Custom parsing functions must:
 
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
 
-Where attributes should at least contain the key metric_type, specifying whether the given metric is a counter or gauge.
+    Where attributes should at least contain the key metric_type, specifying whether the given metric is a counter or gauge.
+    
+    If the line doesn't match, instead return `None`.
 
 ### Example
 

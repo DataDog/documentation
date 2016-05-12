@@ -1,7 +1,7 @@
 require 'rake/clean'
 
 
-CLEAN.include(%w(output tmp code_test tested.code))
+CLEAN.include(%w(output tmp code_test tested.code github_metrics))
 
 CODE_SNIPPETS = 'code_snippets'
 CODE_TEST = 'code_test'
