@@ -56,6 +56,7 @@ There are a number of other AWS services that are also available in Datadog but 
 | Lambda |
 | MachineLearning |
 | OpsWorks |
+| Route53 |
 | S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
@@ -97,6 +98,7 @@ There are two integration methods that can be used to allow Datadog to monitor y
                 "logs:TestMetricFilter",
                 "rds:Describe*",
                 "rds:List*",
+                "route53:List*",
                 "ses:Get*",
                 "ses:List*",
                 "sns:List*",
