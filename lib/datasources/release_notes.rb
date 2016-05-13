@@ -160,7 +160,7 @@ module Nanoc::DataSources
       finisheditems = []
       rnitems.each do |rnitem|
         date = DateTime.strptime(rnitem.keys[0], '%m%d%Y').strftime("%B %-d, %Y")
-        finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0], "created_at" => date, "kind" => "releasenote"}, "RN-#{rnitem.keys[0]}")
+        finisheditems << Nanoc::Item.new(format_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0], "created_at" => date, "kind" => "releasenote"}, "rn-#{rnitem.keys[0]}")
         finisheditems << Nanoc::Item.new(format_raw_release_note(rnitem), {"content" => rnitem.values[0], "title" => "Release Notes for #{date}", "date"=>rnitem.keys[0], "created_at" => date, "kind" => "rawreleasenote", "is_hidden" => true}, "raw-#{rnitem.keys[0]}")
       end
       individual_items.each do |iitem|
