@@ -13,8 +13,8 @@ GEM
     cri (2.7.0)
       colored (~> 1.2)
     digest (0.0.1)
-    dogapi (1.20.0)
-      json (>= 1.5.1)
+    dogapi (1.22.0)
+      multi_json
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -125,7 +125,7 @@ DEPENDENCIES
   autoprefixer-rails
   builder
   digest
-  dogapi (~> 1.20.0)
+  dogapi (~> 1.22.0)
   guard-livereload
   guard-nanoc
   guard-rack

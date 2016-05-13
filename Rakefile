@@ -1,7 +1,6 @@
 require 'rake/clean'
 
-
-CLEAN.include(%w(output tmp code_test tested.code ReleaseNotesSource.yaml github_release_notes_items 'content/static/images/rn'))
+CLEAN.include(%w(output tmp code_test tested.code github_metrics ReleaseNotesSource.yaml github_release_notes_items 'content/static/images/rn'))
 
 CODE_SNIPPETS = 'code_snippets'
 CODE_TEST = 'code_test'

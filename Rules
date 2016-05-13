@@ -81,6 +81,15 @@ preprocess do
   end
 end
 
+
+compile '/partials/*' do
+  filter :erb
+end
+
+route '/partials/*' do
+  nil
+end
+
 compile 'sitemap' do
   filter :erb
 end
@@ -117,9 +126,7 @@ compile '/static/*' do
     # end
 end
 
-compile '/partials/*' do
-  filter :erb
-end
+
 
 compile '*' do
   unless item.binary? or item[:title] == 'redirect'
