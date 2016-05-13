@@ -13,6 +13,7 @@ gem 'video_info'
 gem 'sassc'
 gem 'nanoc-cachebuster'
 gem 'octokit'
+gem 'typhoeus'
 group :development do
   gem 'guard-nanoc'
   gem 'guard-livereload'
