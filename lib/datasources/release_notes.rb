@@ -4,23 +4,62 @@ require 'typhoeus'
 require 'fileutils'
 # require 'yaml'
 
+
+
+def get_rn_images()
+    images = @items.select { |item| item.identifier.match('/static/images/rn/') }
+    if images.count == 0
+      if ENV.has_key?('github_personal_token')
+        $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
+        $client.user.login
+      end
+      rnrepo = "datadog/Release-Notes"
+      imagedir = "content/static/images/rn"
+      images_list = $client.contents(rnrepo, :path => "/images/")
+
+      hydra = Typhoeus::Hydra.new(max_concurrency: 5)
+      unless File.directory?(imagedir)
+        FileUtils.mkdir_p(imagedir)
+      end
+      images_list.each do |image|
+        unless image[:name] == ".DS_Store"
+          request = Typhoeus::Request.new image[:download_url]
+          request.on_complete do |response|
+            open("#{imagedir}/#{image[:name]}", "wb") do |file|
+              file << response.body
+            end
+          end
+          hydra.queue request
+        end
+      end
+      hydra.run
+      Dir.foreach(imagedir) do |fname|
+        next if fname == '.' or fname == '..'
+        @items << Nanoc::Item.new("content/static/images/rn/#{fname}", {:extension => fname.split(/\./)[1]}, "/static/images/rn/#{fname.split(/\./).first}", :binary => true)
+      end
+    end
+end
+
 module Nanoc::DataSources
   class ReleaseNotes < Nanoc::DataSource
     identifier :relnotes
 
+    def rnrepo
+      'datadog/Release-Notes'
+    end
 
     def store_filename
       'github_release_notes_items'
     end
+
 
     def get_release_notes()
       if ENV.has_key?('github_personal_token')
         $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
         $client.user.login
       end
-      rnrepo = "datadog/Release-Notes"
+      # rnrepo = "datadog/Release-Notes"
       release_note_list =$client.contents(rnrepo, :path => "/")
-      images_list = $client.contents(rnrepo, :path => "/images/")
       release_notes = []
 
       release_note_list.each do |rnlist_entry|
@@ -32,25 +71,13 @@ module Nanoc::DataSources
         end
       end
 
-      hydra = Typhoeus::Hydra.new(max_concurrency: 5)
-      unless File.directory?("content/static/images/rn")
-        FileUtils.mkdir_p("content/static/images/rn")
-      end
-      images_list.each do |image|
-        unless image[:name] == ".DS_Store"
-          request = Typhoeus::Request.new image[:download_url]
-          request.on_complete do |response|
-            open("content/static/images/rn/#{image[:name]}", "wb") do |file|
-              file << response.body
-            end
-          end
-          hydra.queue request
-        end
-      end
-      hydra.run
+      # get_rn_images()
+
 
       return release_notes
     end
+
+
 
     def get_individual_items(releasenoteitems)
       individual_items = []

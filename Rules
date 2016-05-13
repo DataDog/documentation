@@ -15,6 +15,8 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
+require './lib/datasources/release_notes'
+
 require 'octokit'
 preprocess do
   create_redirect_pages
@@ -42,7 +44,7 @@ preprocess do
     $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
     $client.user.login
   end
-
+  get_rn_images()
   $cbfingerprints = get_cache_bust_fingerprints()
   $en_local_hash = get_local_hash('en')
   $ja_local_hash = get_local_hash('ja')
@@ -226,6 +228,7 @@ route '/static/CNAME/' do
 end
 
 route '/static/*' do
+  # puts item.identifier
   item.identifier.chop + '.' + item[:extension]
 end
 
