@@ -89,6 +89,7 @@ There are two integration methods that can be used to allow Datadog to monitor y
                 "elasticache:Describe*",
                 "elasticache:List*",
                 "elasticloadbalancing:Describe*",
+                "elasticmapreduce:List*",
                 "iam:Get*",
                 "iam:List*",
                 "kinesis:Get*",
