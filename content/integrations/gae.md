@@ -52,7 +52,7 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
 4. Add ```dogapi``` to the requirements.txt file.
 
-        echo "dogapi" >> requirements.txt
+        echo dogapi >> requirements.txt
 
 5. Ensure the requirements are installed.
 
