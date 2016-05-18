@@ -11,13 +11,13 @@ Datadog automatically keeps track of what is running where, thanks to its Servic
 
 It allows you to define configuration templates for specific images in a distributed configuration store on top of the Datadog Agent which will use them to dynamically reconfigure its checks when your containers ecosystem changes. Whether you use Kubernetes, Amazon ECS, or Docker Swarm to manage your Docker containers, you can now monitor images, such as NGINX or Redis, even if containers running them stopped or new ones started, without interruption or having to restart the Agent.
 
-## How does it work?
+## How it works
 
-The Service Discovery feature is continuously listening to Docker events and spots those triggered when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template you will have defined for this image, and automatically set up its checks according to the new disposition.
+The Service Discovery feature watches for Docker events like when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template for this image, and automatically sets up its checks.
 
-Configuration templates are defined in a single key-value store per cluster. We are currently supporting etcd and Consul. Zookeeper will be added very soon.
+Configuration templates are defined in a single key-value store per cluster. We currently support etcd and Consul.
 
-Even better: if no configuration template is defined in the store for an image, the Agent will try to auto-configure the check by itself. It works for basic checks like Apache, NGINX, Redis among others, which have a simple configuration and no custom credentials required.
+If no configuration template is defined in the store for an image, the Agent will try to auto-configure the check by itself. Currently, auto-configuration works for Apache, Consul, Couch, Couchbase, Elasticsearch, etcd, Kyoto Tycoon, Memcached, Redis and Riak.
 
 ## How to set it up
 
