@@ -52,10 +52,10 @@ metrics via our API. You can read more about our API [here][api].
 * In general, most folks find a lot of value in installing an agent because
 they get system metrics for free and metrics on common software like mysql,
 postgres, etc. with just a little bit of configuration. Another advantage is
-that there is a small statsd server built-in to the agent. 
+that there is a small statsd server built-in to the agent.
 
 
-#### Can I use my own StatsD client? 
+#### Can I use my own StatsD client?
 {: #statsd}
 
 Any StatsD client will work just fine, but using the Datadog DogStatsD client
@@ -63,7 +63,7 @@ will give you a few extra features. You can read more about our clients extra
 features [here][dogstatsd].
 
 
-#### How can I change the hostname 
+#### How can I change the hostname
 {: #hostname-change}
 
 You can change the hostname by updating your agent’s configuration file called
@@ -72,7 +72,7 @@ link, select your OS in the left column, and go to
 the [Configuration section][basic_agent_usage] to find the location of your
 agent’s configuration file.
 
-#### How do I uninstall the agent 
+#### How do I uninstall the agent
 {: #agent-uninstall}
 
 * Mac OS:
@@ -91,14 +91,14 @@ agent’s configuration file.
 
 
 
-#### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that? 
+#### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that?
 {: #agent-stopped}
 
 It can take up to 24h for the host to disappear from the infrastructure page,
 but it will only be part of the host count for billing purposes if we're
 actually receiving data.
 
-#### Other Agent-related questions? 
+#### Other Agent-related questions?
 {: #agent-other}
 
 Please refer to the [Basic Agent Usage Guide][basic_agent_usage].
@@ -112,10 +112,10 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage].
 ===============================================================================
 -->
 
-### Alerts 
+### Alerts
 {: #alerts}
 
-#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts? 
+#### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?
 {: #no-data}
 
 For the AWS No Data errors, the issue here has to do with how frequently we
@@ -128,7 +128,7 @@ you can install the agent on some AWS hosts to get more up-to-date data to
 alert on. Overall, we’re always working towards getting data more efficiently
 from AWS.
 
-#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? 
+#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used?
 {: #alert-disk-utilization}
 
 * Yes, this can be done! Here is an example for creating a disk space in use
@@ -150,7 +150,7 @@ alert when at 80% or above:
 ### API
 {: #api}
 
-#### What are valid metric names? 
+#### What are valid metric names?
 {: #api-metric-names}
 
 Metric names must start with a letter, and after that may contain ascii alphanumerics, underscore and periods.
@@ -162,7 +162,7 @@ but we have aspirations to use it to infer things about servers (e.g. “hey, I 
 reporting ‘http.nginx.*’, those must be web frontends”).
 
 
-#### What are valid tags? 
+#### What are valid tags?
 {: #api-tags}
 
 Tags must start with a letter, and after that may contain alphanumerics,
@@ -172,7 +172,7 @@ unicode. Tags will be converted to lowercase as well.
 
 Note: An exception to this is with trailing underscores, which will be trimmed off of tags (e.g. path:thing_ becomes path:thing).
 
-#### I'm submitting points to the API- anything I should know? 
+#### I'm submitting points to the API- anything I should know?
 {: #api-else}
 We store metric points at the 1 second resolution, but we’d prefer if you only
 submitted points every 15 seconds. Any metrics with fractions of a second timestamps
@@ -188,10 +188,10 @@ defined as a unique combination of metric name and tag.
 ===============================================================================
 -->
 
-### Architecture 
+### Architecture
 {: #architecture}
 
-#### Is Datadog a cloud service or server application? 
+#### Is Datadog a cloud service or server application?
 {: #arch-cloud-or-server}
 
 It's primarily a cloud service, but if you want to collect data on your servers,
@@ -199,14 +199,14 @@ there is an Agent you'll need to install. We never make any direct connections
 to your infrastructure. For cloud integrations, we connect to them using the
 credentials you provide to us.
 
-#### How do I delete a host or metric? 
+#### How do I delete a host or metric?
 {: #arch-delete}
 
 All hosts or metrics that have not seen data in 24 hours will disappear from the UI;
 you can still query against them, but it will not appear in drop downs or infrastructure.
 There is not a way to immediately delete a metric.
 
-#### What's the difference between Graphite's query language and Datadog's? 
+#### What's the difference between Graphite's query language and Datadog's?
 {: #arch-graphite-differences}
 
 In terms of metric naming, we differ a little with Graphite in that a metric
@@ -248,7 +248,7 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 
 Which would graph stacked area series for each http_method value like GET, POST, etc.
 
-#### How are hostnames determined? 
+#### How are hostnames determined?
 {: #arch-hostnames}
 
 The hostnames are determined by what the Datadog Agent detects; this is fully
@@ -256,7 +256,7 @@ documented [here][hostnames]. You can see all names being detected by the Agent 
  ```/etc/init.d/datadog-agent info```
 
 
-#### Tell me about tagging! 
+#### Tell me about tagging!
 {: #tagging}
 
 Tagging within Datadog is a powerful way to easily gather your metrics
@@ -308,10 +308,10 @@ For information on AWS tagging, please see [here][integration-aws].
 ===============================================================================
 -->
 
-### AWS 
+### AWS
 {: #aws}
 
-#### I just set up my AWS integration. Why am I seeing duplicate hosts? 
+#### I just set up my AWS integration. Why am I seeing duplicate hosts?
 {: #duplicate-hosts}
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic
@@ -323,29 +323,29 @@ single host’s duplicate names to be aliased. You can read more about
 hostnames [here][hostnames].
 
 
-#### What metrics will I get from the AWS integration? 
+#### What metrics will I get from the AWS integration?
 {: #aws-metrics}
 
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
 * You can read in detail about our AWS integration [here][integration-aws].
 
-#### I can’t filter out my ELB instances - will I be charged for them? 
+#### I can’t filter out my ELB instances - will I be charged for them?
 {: #aws-elb}
 
 We do not charge for ELBs (as they can’t be filtered out).
 
-#### Why is there a delay in receiving my data? 
+#### Why is there a delay in receiving my data?
 {: #aws-delay}
 
-If you receive 5-minute metrics from Cloudwatch, there can be up to ~15-20 min delay in 
-receiving your metrics. This is because Cloudwatch makes your data available with a 5-10 
-minute latency, and we run the crawler every 5 minutes. In addition, queuing and 
-Cloudwatch API limitations can add up to another 5 minutes. If you receive 1-minute 
-metrics with Cloudwatch, then their availability delay is about 2 minutes so total 
+If you receive 5-minute metrics from Cloudwatch, there can be up to ~15-20 min delay in
+receiving your metrics. This is because Cloudwatch makes your data available with a 5-10
+minute latency, and we run the crawler every 5 minutes. In addition, queuing and
+Cloudwatch API limitations can add up to another 5 minutes. If you receive 1-minute
+metrics with Cloudwatch, then their availability delay is about 2 minutes so total
 latency to view your metrics may be ~10-12 minutes.
 
 
-#### Can I get my postgres data from RDS? 
+#### Can I get my postgres data from RDS?
 {: #aws-rds}
 
 Yes you can! Follow the steps below to set this up:
@@ -364,18 +364,18 @@ Yes you can! Follow the steps below to set this up:
 -->
 
 
-### Billing 
+### Billing
 {: #billing}
 
 
-#### How can I change the Billing contact? 
+#### How can I change the Billing contact?
 {: #billing-contact}
 
 You can set a specific email address to receive invoices, even if that address
 is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
 
 
-#### Where can I get a copy of the invoice? 
+#### Where can I get a copy of the invoice?
 {: #billing-invoice}
 
 As an admin you can check out past invoices [here][app-billing-history].
@@ -392,10 +392,10 @@ As an admin you can check out past invoices [here][app-billing-history].
 ===============================================================================
 -->
 
-### Graphing 
+### Graphing
 {: #graph}
 
-#### How do I do arithmetic with grouped metrics? 
+#### How do I do arithmetic with grouped metrics?
 {: #graph-sum-grouped}
 
 To graph the sum of ```app.foo.bar{env:staging}``` and ```app.foo.baz{env:staging}```
@@ -406,7 +406,7 @@ metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 ~~~
 
 
-#### What's the syntax to sum multiple datapoints into a single line? 
+#### What's the syntax to sum multiple datapoints into a single line?
 {: #graph-mult-points}
 
 You can switch commas separating the queries into plus signs, from:
@@ -423,7 +423,7 @@ to:
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ~~~
 
-#### How do I do graph smoothing? 
+#### How do I do graph smoothing?
 {: #graph-smoothing}
 
 You can apply smoothing averages to your series by droping to the JSON editor and
@@ -518,26 +518,26 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
 
 #### How do I submit custom metrics?
 
-You can submit your custom metrics with the DogStatsD client. You can read more about this [here][1]. 
+You can submit your custom metrics with the DogStatsD client. You can read more about this [here][1].
 
 
 #### Why is my counter metric showing decimal values?
 
-StatsD counters are normalized over the flush interval to report per-second units. You can read more about this [here][2]. 
+StatsD counters are normalized over the flush interval to report per-second units. You can read more about this [here][2].
 
 
 #### Is there a way to submit metrics from my log data?
 
-Yes there is! We detail log parsing [here][3]. 
+Yes there is! We detail log parsing [here][3].
 
 
 #### I’d like to add historical data to my account. Is there a way to do that?
 
-Unfortunately, we do not allow adding historical data at this time. 
+Unfortunately, we do not allow adding historical data at this time.
 
 #### Correct metric syntax (JSON)?
 
-This depends on the medium you use to send metrics. 
+This depends on the medium you use to send metrics.
 
   * For an Agent Check, see this [link][4].
   * For DogStatsD, see this [link][5].
@@ -546,7 +546,7 @@ This depends on the medium you use to send metrics.
 
 #### Is there a way I can get metric reports?
 
-We offer reporting in a variety of ways so far, which include: 
+We offer reporting in a variety of ways so far, which include:
 
   * The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.
   * For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.
@@ -554,7 +554,7 @@ We offer reporting in a variety of ways so far, which include:
 
 #### How do I get disk usage as a percentage instead of in bytes?
 
-The Datadog Agent emits a metric named `system.disk.in_use` which will give you disk usage as a percentage. 
+The Datadog Agent emits a metric named `system.disk.in_use` which will give you disk usage as a percentage.
 
 #### How is data aggregated in graphs
 {: #metric-aggregation}
@@ -596,7 +596,7 @@ by default you'll get the average across all hosts.
 <h4 id="notify">What do @ notifications do in Datadog?</h4>
 <p>
 <ul>
-<li><code>@support</code> – this will reach Datadog support directly when posted in your stream.</li>
+<li><code>@support-datadog</code> – this will reach Datadog support directly when posted in your stream.</li>
 <li><code>@all</code> – this will send a notification to all members of your organization.</li>
 <li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
 <li><code>@test@test.com</code> this will send an email to test@test.com.</li>
@@ -605,7 +605,7 @@ by default you'll get the average across all hosts.
 <li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
 <li><code>@webhook</code> – alerts or triggers whatever is attached to that webhook. Check out
 <a target="_blanks" href="https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio/">this blogpost</a> on Webhooks!</li>
-<li><code>@pagerduty</code> 
+<li><code>@pagerduty</code>
 – sends an alert to Pagerduty. You can also use <code>@pagerduty-acknowledge</code> and <code>@pagerduty-resolve</code>.</li>
 </ul>
 
