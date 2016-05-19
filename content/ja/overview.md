@@ -141,7 +141,7 @@ For each incident users can:
 <li>Comment</li>
 <li>See similar incidents </li>
 <li><a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email</li>
-<li>@support to ask for assistance</li>
+<li>@support-datadog to ask for assistance</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
@@ -168,7 +168,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>コメントの追加</li>
 <li>同様なインシデントの閲覧</li>
 <li><a target="_blank" href="/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
-<li>@support でのサポートの要請</li>
+<li>@support-datadog でのサポートの要請</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>

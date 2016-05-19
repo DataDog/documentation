@@ -64,12 +64,12 @@ capabilities at a high level. -->
 このドキュメントは、ガイドとレファレンスによって構成されています。ガイドでは、特定のタスクをDatadog上で構成することを目的としています。レファレンスでは、より基本的な情報を提供することを目的としています。まずは、Datadogが提供しているモニタリングサービスの機能を解説している["Datadogが提供するサービスの概要"](/ja/overview/)のページをお勧めします。
 
 <!-- **If you have questions, we're here to help.** You can get in touch with
-our support team by mentioning <a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support</a> in a comment on Datadog itself, or by
+our support team by mentioning <a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support-datadog</a> in a comment on Datadog itself, or by
 [email](/help/#email), on [IRC](/help/#irc), or on our [customer service site](/help/#desk). -->
 
 **・何か分からないことがあった場合は?**
 
-弊社<a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support</a>ページよりサポートチームにお問い合わせ下さい。又は、[email](/ja/help/#email)や[IRC](/ja/help/#irc)で、コンタクトいただくこともできます。詳しくは、[お問い合わせ](/ja/help/#desk)ページを参照してください。
+弊社<a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support-datadog</a>ページよりサポートチームにお問い合わせ下さい。又は、[email](/ja/help/#email)や[IRC](/ja/help/#irc)で、コンタクトいただくこともできます。詳しくは、[お問い合わせ](/ja/help/#desk)ページを参照してください。
 
 <!-- **Find a mistake in this documentation?** [Let us know on GitHub](https://github.com/DataDog/documentation/issues)
 and we'll take care of it. -->
