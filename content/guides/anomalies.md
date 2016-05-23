@@ -33,7 +33,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 <img src="/static/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
 
-This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used; current there is only one option: `robust`. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. After successfully adding `anomalies`, your editor should show something like this:
+This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. After successfully adding `anomalies`, your editor should show something like this:
 
 <img src="/static/images/anomalies/final_editor.png" style="width:100%; border:1px solid #777777"/>
 
@@ -49,10 +49,21 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive you monitor is to different types of anomalies.
 
 <ol type="a">
-  <li>This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the grey band.</li>
-  <li>The 'average distance' option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. (Thresholds between 2 and 3 generally perform well.) The 'percentage' option treats all observations outside of the expected band equally. </li>
+  <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the grey band.</li>
+  <li>The "average distance" option will result in the monitor triggering faster for anomalies far outside of the expected band than for anomalies closer to the expected band. (Thresholds between 2 and 3 generally perform well.) The "percentage" option treats all observations outside of the expected band equally. </li>
   <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
   <li>As with other alerts, smaller time windows lead to faster alerting but can yield more false positives.</li>
+  <li>You can change the anomaly detection algorithm used here.</li>
 </ol>
 
 Continue with steps (3) and (4) as you would for any other monitor.
+
+
+### 3. Anomaly Detection Algorithms
+
+We currently offer two different anomaly detection algorithms. Both algorithms will follow the seasonal pattern of the series, and
+will not have their predictions be affected by short anomalies.
+
+* Robust: This algorithm is very stable and its predictions will remain constant even through longer-term anomalies. On the other hand, it will take longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.) This algorithm uses more data and can take longer to load the first time it is run.
+
+* Adaptive: This algorithm is more dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
