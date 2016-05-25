@@ -37,15 +37,15 @@ The only installation step is to make sure you can open a [JMX remote connection
             password: password
             conf:
               - include:
-                domain: my_domain
-                bean: my_bean
-                attribute:
-                  attribute1:
-                    metric_type: counter
-                    alias: jmx.my_metric_name
-                  attribute2:
-                    metric_type: gauge
-                    alias: jmx.my2ndattribute
+                  domain: my_domain
+                  bean: my_bean
+                  attribute:
+                    attribute1:
+                      metric_type: counter
+                      alias: jmx.my_metric_name
+                    attribute2:
+                      metric_type: gauge
+                      alias: jmx.my2ndattribute
               - include:
                   domain: 2nd_domain
                 exclude:
@@ -83,9 +83,9 @@ On top of these parameters, the filters support "custom" keys which means that y
 
     conf:
     - include:
-      domain: org.apache.cassandra.db
-      type:
-        - Caches
+        domain: org.apache.cassandra.db
+        type:
+          - Caches
 
 ## The `attribute` filter
 
@@ -95,16 +95,16 @@ The `attribute` filter can accept two types of values:
 
         conf:
           - include:
-            attribute:
-              maxThreads:
-                alias: tomcat.threads.max
-                metric_type: gauge
-              currentThreadCount:
-                alias: tomcat.threads.count
-                metric_type: gauge
-              bytesReceived:
-              alias: tomcat.bytes_rcvd
-              metric_type: counter
+              attribute:
+                maxThreads:
+                  alias: tomcat.threads.max
+                  metric_type: gauge
+                currentThreadCount:
+                  alias: tomcat.threads.count
+                  metric_type: gauge
+                bytesReceived:
+                  alias: tomcat.bytes_rcvd
+                  metric_type: counter
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
@@ -112,17 +112,17 @@ In that case you can specify an alias for the metric that will become the metric
 
         conf:
           - include:
-            domain: org.apache.cassandra.db
-            attribute:
-              - BloomFilterDiskSpaceUsed
-              - BloomFilterFalsePositives
-              - BloomFilterFalseRatio
-              - Capacity
-              - CompressionRatio
-              - CompletedTasks
-              - ExceptionCount
-              - Hits
-              - RecentHitRate
+              domain: org.apache.cassandra.db
+              attribute:
+                - BloomFilterDiskSpaceUsed
+                - BloomFilterFalsePositives
+                - BloomFilterFalseRatio
+                - Capacity
+                - CompressionRatio
+                - CompletedTasks
+                - ExceptionCount
+                - Hits
+                - RecentHitRate
 
 
 In that case:
@@ -155,21 +155,21 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
     # Datadog Agent > 5.3.0
       conf:
         - include:
-          domain: domain_name
-          bean:
-            - first_bean_name
-            - second_bean_name
+            domain: domain_name
+            bean:
+              - first_bean_name
+              - second_bean_name
     ...
 
 
     # Older Datadog Agent versions
       conf:
         - include:
-          domain: domain_name
-          bean: first_bean_name
+            domain: domain_name
+            bean: first_bean_name
         - include:
-          domain: domain_name
-          bean: second_bean_name
+            domain: domain_name
+            bean: second_bean_name
     ...
 
 ## Commands to view the metrics that are available:
