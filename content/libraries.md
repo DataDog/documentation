@@ -109,7 +109,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 
 #### Node.js
 {: #community-node}
-
+  * [hotshots][76] - a Node.js client for statsd, DogStatsD, and Telegraf written by Brightcove.
   * [node-datadog][14] - a Node.js API client, contributed by [HashGo][15].
   * [node-dogstatsd][16] - a Node.js DogStatsD client, contributed by [Young Han Lee][17].
   * [node-dogapi][18] - a Node.js API client, contributed by [Brett Langdon][19].
@@ -267,3 +267,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [73]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
    [74]:https://github.com/remind101/ecsdog
    [75]: http://ejholmes.io/
+   [76]: https://github.com/brightcove/hot-shots
