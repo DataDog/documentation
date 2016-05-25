@@ -489,9 +489,9 @@ Datadog:
     Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
   </li>
   <li>
-    Use codahale's Java <a
+    Use Dropwizard's Java <a
     href="https://github.com/dropwizard/metrics">metrics</a> library, with the
-<a href="https://github.com/bazaarvoice/metrics-datadog">metrics-datadog</a>
+<a href="https://github.com/coursera/metrics-datadog">metrics-datadog</a>
     backend (thanks to the good folks at
     <a href="http://www.vistarmedia.com/">Vistar Media</a>,
     <a href="https://www.coursera.org">Coursera</a>, and
