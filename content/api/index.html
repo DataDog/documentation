@@ -267,7 +267,7 @@ kind: documentation
           <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
-          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters.', {:default => 'None'}) %>
+          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream.', {:default => 'None'}) %>
           <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
         </ul>
       </div>
