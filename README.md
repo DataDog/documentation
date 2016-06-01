@@ -14,6 +14,13 @@ gem install bundler # and set up your shell / shell profile for it
 rbenv exec bundle install
 ```
 
+As of OS X 10.11 (El Capitan), OpenSSL headers are no longer provided. You will need to install OpenSSL prior to running the bundle install.
+
+```
+brew install openssl
+brew link openssl --force
+```
+
 # Working on Docs
 
 ```
