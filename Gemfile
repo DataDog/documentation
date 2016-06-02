@@ -14,7 +14,7 @@ gem 'sassc'
 gem 'nanoc-cachebuster'
 gem 'octokit'
 gem 'typhoeus'
-gem 'ducktape'
+gem 'therubyracer'
 group :development do
   gem 'guard-nanoc'
   gem 'guard-livereload'
