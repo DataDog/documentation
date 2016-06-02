@@ -389,6 +389,13 @@ ol.outline {
     visibility: visible;
     display: block;
   }
+  /* Offset internal anchors to accommodate for floating nav. */
+  .int-anchor {
+    display: block;
+    visibility: hidden;
+    padding-top: 150px; /* fixed header height*/
+    margin-top: -150px; /* negative fixed header height */
+  }
 }
 
 .api-left {
