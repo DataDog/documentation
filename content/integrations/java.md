@@ -84,8 +84,8 @@ On top of these parameters, the filters support "custom" keys which means that y
     conf:
     - include:
         domain: org.apache.cassandra.db
-      type:
-        - Caches
+        type:
+          - Caches
 
 ## The `attribute` filter
 
@@ -103,8 +103,8 @@ The `attribute` filter can accept two types of values:
                   alias: tomcat.threads.count
                   metric_type: gauge
                 bytesReceived:
-                alias: tomcat.bytes_rcvd
-                metric_type: counter
+                  alias: tomcat.bytes_rcvd
+                  metric_type: counter
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
