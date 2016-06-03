@@ -9,7 +9,7 @@ doclevel: basic
 
 Monitor the state of your Windows Services.
 
-![Windows Service Event](https://app.datadoghq.com/static/v/33.3471/images/setup/windows_service/snapshot-windows-service.png)
+![Windows Service Event](/static/images/windows-service.png)
 
 ### Prerequisites
 

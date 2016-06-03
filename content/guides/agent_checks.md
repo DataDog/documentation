@@ -128,6 +128,23 @@ At any time during your check, you can make a call to `self.event(...)` with one
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload.
 
+#### Sending service checks
+
+Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
+
+The service_check method will accept the following arguments:
+
+- `check_name`: The name of the service check.
+- `status`: An integer describing the service status. You may also use the class status definitions:
+  - `AgentCheck.OK` or `0` for success
+  - `AgentCheck.WARNING` or `1` for warning
+  - `AgentCheck.CRITICAL` or `2` for failure
+  - `AgentCheck.UNKNOWN` or `3` for indeterminate status
+- `tags`: (optional) A list of key:val tags for this check.
+- `timestamp`: (optional) The POSIX timestamp when the check occured.
+- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
+- `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
+- `message`: (optional) Additional information or a description of why this status occured.
 
 #### Exceptions
 
@@ -442,7 +459,7 @@ be placed into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
 Once the check is in `checks.d`, you can test it by running it as a python
-script. **Make sure to change the conf.d path in the test method**. From your
+script. Restart the Agent for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your
 Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
