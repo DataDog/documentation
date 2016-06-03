@@ -16,6 +16,8 @@ sidebar:
       href: "#gauges"
     - text: Histograms
       href: "#histograms"
+    - text: Service Checks
+      href: "#service-checks"
     - text: Sets
       href: "#sets"
     - header: Options
@@ -214,19 +216,17 @@ get raw counts within Datadog, you may want to apply a function to
 your series like cumulative sum or integral. There is more information on those
 <a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
 
+<!--
+======================================================
+GAUGES
+======================================================
+-->
 
 <h3 id="gauges">Gauges</h3>
 
 Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
-
-
-<!--
-======================================================
-GAUGES
-======================================================
--->
 
 
 <%= code_tabs("gauges", tab_languages) %>
@@ -328,6 +328,50 @@ distribution of any type of value, like the size of uploaded files or classroom
 test scores.
 </p>
 
+<!--
+======================================================
+SERVICE CHECKS
+======================================================
+-->
+
+<h3 id="service-checks">Service Checks</h3>
+
+Service checks are used to send information about the status of a service.
+
+<%= code_tabs("service-checks", tab_languages) %>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="service-checks-python">
+<%= python <<EOF
+from datadog.api.constants import CheckStatus
+
+# Report the status of an app.
+name = 'web.app1'
+status = CheckStatus.OK
+host = 'app1'
+message = 'Response: 200 OK'
+
+statsd.service_check(check_name=name, status=status, hostname=host, message=message)
+EOF
+%>
+  </div>
+  <div class="tab-pane fade in" id="service-checks-ruby">
+<%= ruby <<EOF
+# Report the status of an app.
+name = 'web.app1'
+status = Statsd::OK
+opts = {
+  'hostname' => 'app1',
+  'message' => 'Response: 200 OK'
+}
+
+statsd.service_check(name, status, opts)
+EOF
+%>
+  </div>
+</div>
+
+After a service check has been reported, you can use it to trigger a Custom Check monitor.
 
 <!--
 ======================================================
