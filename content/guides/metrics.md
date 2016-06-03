@@ -348,10 +348,9 @@ from datadog.api.constants import CheckStatus
 # Report the status of an app.
 name = 'web.app1'
 status = CheckStatus.OK
-host = 'app1'
 message = 'Response: 200 OK'
 
-statsd.service_check(check_name=name, status=status, hostname=host, message=message)
+statsd.service_check(check_name=name, status=status, message=message)
 EOF
 %>
   </div>
@@ -361,7 +360,6 @@ EOF
 name = 'web.app1'
 status = Statsd::OK
 opts = {
-  'hostname' => 'app1',
   'message' => 'Response: 200 OK'
 }
 
