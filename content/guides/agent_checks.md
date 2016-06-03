@@ -128,6 +128,23 @@ At any time during your check, you can make a call to `self.event(...)` with one
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload.
 
+#### Sending service checks
+
+Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
+
+The service_check method will accept the following arguments:
+
+- `check_name`: The name of the service check.
+- `status`: An integer describing the service status. You may also use the class status definitions:
+  - `AgentCheck.OK` or `0` for success
+  - `AgentCheck.WARNING` or `1` for warning
+  - `AgentCheck.CRITICAL` or `2` for failure
+  - `AgentCheck.UNKNOWN` or `3` for indeterminate status
+- `tags`: (optional) A list of key:val tags for this check.
+- `timestamp`: (optional) The POSIX timestamp when the check occured.
+- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
+- `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
+- `message`: (optional) Additional information or a description of why this status occured.
 
 #### Exceptions
 
