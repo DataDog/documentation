@@ -17,6 +17,15 @@
         $('.lang-btn').click(function (e) {
             var el = $(this);
 
+            // Find the element currently in the view port
+            var scrollElement;
+            $('div.int-anchor').each( function() {
+              if ($(this).offset().top >= window.scrollY) {
+                scrollElement = $(this);
+                return false;
+              }
+            });
+
             // Highlight the active button.
             $('.lang-btn').removeClass('active');
             el.addClass('active');
@@ -27,21 +36,17 @@
             $('.code-block-' + lang).fadeIn();
             $('.lang-specific').hide();
             $('.lang-specific-' + lang).fadeIn();
+
+            // Scroll to the element that was in the viewport (ie retain location).
+            $('html, body').scrollTop(scrollElement.offset().top);
+
+            // Add the language selection to the current URL.
+            if (history.pushState) {
+                url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+                history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
+            }
         });
 
-        // Compensate for the fixed header when clicking API section links.
-        $('.api-section-links a').click(function (event) {
-            event.preventDefault();
-
-            var link = $(this);
-
-            var target = $(link.attr('href'));
-            var offset = $('.floating-header').height();
-
-            $('html, body').animate({
-                scrollTop: target.offset().top - offset
-            }, 0);
-        });
     };
 
     // Export to global scope.
@@ -62,6 +67,14 @@
 
 
 $(document).ready(function() {
-     $('#tipue_search_input').tipuesearch();
+    $('#tipue_search_input').tipuesearch();
+});
+
+// Allow language selection via URL GET parameter.
+$(window).load(function() {
+    if (s = window.location.search.match(/lang=[^&]+/gi)) {
+        lang = s[0].replace(/lang=/gi, '');
+        $('div[lang="' + lang + '"]').click();
+    }
 });
 
