@@ -131,12 +131,12 @@ The above settings can be passed to the dd-agent container through the following
 
 Available tags:
 
-    datadog/docker-dd-agent:service-discovery (has the Docker check preconfigured)
-    datadog/docker-dd-agent:service-discovery-k8s (has the Docker and Kubernetes checks preconfigured)
+    datadog/docker-dd-agent:latest (has the Docker check preconfigured)
+    datadog/docker-dd-agent:kubernetes (has the Docker and Kubernetes checks preconfigured)
 
 example:
 
-    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=localhost -e SD_BACKEND_PORT=4001 datadog/docker-dd-agent:service-discovery-k8s
+    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=localhost -e SD_BACKEND_PORT=4001 datadog/docker-dd-agent:kubernetes
 
 
 ### Monitoring your custom container
@@ -180,5 +180,3 @@ The configuration template is thus defined like this:
 The postgres image only exposes the default port, so appending an index to the port variable is unnecessary.
 
 Now the Agent can be deployed following the Kubernetes instructions and passing the right environment variables to enable service discovery as covered earlier. And whenever a Postgres or NGINX container is deployed, agents will detect them and update the check configurations accordingly.
-
-
