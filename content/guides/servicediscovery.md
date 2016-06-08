@@ -56,18 +56,18 @@ Setup a configuration template in the form of a few keys in a key/value store th
 
 or with curl:
 
-    curl -L -X PUT http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/check_names -d value='["nginx"]'
-    curl -L -X PUT http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/init_configs -d value="[{}]"
-    curl -L -X PUT http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/instances -d value='[{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": ["env:production"]}]'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names -d value='["nginx"]'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs -d value="[{}]"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances -d value='[{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": ["env:production"]}]'
 
 
 If the Agent is configured to use consul instead:
 
-    curl -L http://127.0.0.1:8500/v1/kv/datadog/check_configs/custom-nginx/check_names -XPUT -d '["nginx"]'
-    curl -L http://127.0.0.1:8500/v1/kv/datadog/check_configs/custom-nginx/init_configs -XPUT -d '[{}]'
-    curl -L http://127.0.0.1:8500/v1/kv/datadog/check_configs/custom-nginx/instances -XPUT -d '[{"nginx_status_url": "http://%%host%%/nginx_status/", "tags": ["env:production"]}]'
+    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/check_names -XPUT -d '["nginx"]'
+    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/init_configs -XPUT -d '[{}]'
+    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/instances -XPUT -d '[{"nginx_status_url": "http://%%host%%/nginx_status/", "tags": ["env:production"]}]'
 
-*Notice the format of template variables: `%%host%%`. For now host and port are supported on every platform. Kubernetes users can also use the tags variable that collects relevant tags like the pod name and node name from the Kubernetes API. Support for more variables and platforms is planned, and feature requests are welcome.*
+*Notice the format of template variables: `%%host%%`. For now host and port are supported on every platform. Kubernetes users can also use the `tags` variable that collects relevant tags like the pod name and node name from the Kubernetes API. Support for more variables and platforms is planned, and feature requests are welcome.*
 
 Finally you need to configure all the Agents of the environment to enable service discovery using this store as a backend. To do so, simply edit the datadog.conf file to modify these options:
 
@@ -108,13 +108,13 @@ Sometimes enabling several checks on a single container is needed. For instance 
 In the previous example of the custom nginx image, adding http_check would look like this:
 
     curl -L -X PUT \
-      http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/check_names \
+      http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names \
       -d value='["nginx", "http_check"]'
     curl -L -X PUT \
-      http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/init_configs \
+      http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs \
       -d value="[{}, {}]"
     curl -L -X PUT \
-        http://127.0.0.1:4001/v2/keys/datadog/check_configs/custom-nginx/instances \
+        http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances \
         -d value='[ \
         {"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": ["env:production"]}, \
         {"name": "Test service", "url": "http://%25%25host%25%25/test_endpoint", "timeout": 1}]'
@@ -136,7 +136,7 @@ Available tags:
 
 example:
 
-    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=localhost -e SD_BACKEND_PORT=4001 datadog/docker-dd-agent:kubernetes
+    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] datadog/docker-dd-agent:kubernetes
 
 
 ### Monitoring your custom container
@@ -161,9 +161,9 @@ Following is an example of how to setup templates for an NGINX, PostgreSQL stack
 
 The default NGINX image doesn't have a /nginx_status/ endpoint enabled, so the first step is to enable that as described in the Datadog NGINX tile (click on "Configuration") in a new image which we will name custom-nginx in this example. Once the image is named, the configuration template can be defined this way:
 
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-nginx/check_name -d value="nginx"
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-nginx/init_config -d value="{}"
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-nginx/instance -d value='{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": %25%25tags%25%25}'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_name -d value="nginx"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_config -d value="{}"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instance -d value='{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": "%25%25tags%25%25"}'
 
 The %%tags%% variable will add metadata about the replication controller, the pod name, etc.
 
@@ -173,10 +173,12 @@ Next comes the PostgreSQL configuration. Steps to connect Postgres to Datadog ar
 
 The configuration template is thus defined like this:
 
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-postgres/check_name -d value="postgres"
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-postgres/init_config -d value="{}"
-    curl -L -X PUT http://10.0.65.98:4001/v2/keys/datadog/check_configs/custom-postgres/instance -d value='{"host": "%25%25host%25%25", "port": "%25%25port%25%25", "tags": %25%25tags%25%25}'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/check_name -d value="postgres"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/init_config -d value="{}"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/instance -d value='{"host": "%25%25host%25%25", "port": "%25%25port%25%25", "tags": ["%25%25tags%25%25", env:production]}'
 
 The postgres image only exposes the default port, so appending an index to the port variable is unnecessary.
+
+Looking at the `tags` parameter, you may also notice that it is possible to mix template variables and constant value to achieve mixed tagging.
 
 Now the Agent can be deployed following the Kubernetes instructions and passing the right environment variables to enable service discovery as covered earlier. And whenever a Postgres or NGINX container is deployed, agents will detect them and update the check configurations accordingly.
