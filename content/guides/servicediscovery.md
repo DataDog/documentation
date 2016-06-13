@@ -41,7 +41,26 @@ Here is the structure of a configuration template:
           - instances: [{instance_config}]
         ...
 
+### Docker Image Name
+About image name, specify **only** image name.
 
+
+    # DO
+    /datadog/
+      check_configs/
+        image_name/
+          - check_names: ["check_name_0"]
+          - init_configs: [{init_config}]
+          ...
+
+
+    # DO NOT
+    /datadog/
+      check_configs/
+        repo/user/image_name:tag/
+          - check_names: ["check_name_0"]
+          - init_configs: [{init_config}]
+          ...
 
 ### Setup NGINX
 
