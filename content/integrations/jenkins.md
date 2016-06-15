@@ -5,6 +5,10 @@ kind: integration
 git_integration_title: jenkins
 ---
 
+### Deprecation Warning
+
+This documentation refers to the _deprecated_ Jenkins agent check. Please use this [Jenkins Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Datadog+Plugin) instead.
+
 ### Overview
 
 Connect Jenkins to Datadog in order to discuss build failures with your team.
