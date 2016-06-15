@@ -69,6 +69,8 @@ There are a number of other AWS services that are also available in Datadog but 
 
 There are two integration methods that can be used to allow Datadog to monitor your AWS environment. Both require creating a policy in the AWS Console with a certain set of permissions. The difference between the two is whether you choose to create a role that Datadog has access to which is preferred due to the higher level of security, or create a user and share an AWS Secret and Access Key. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
+Note: GovCloud does not support role based authentication.
+
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
         {
@@ -119,7 +121,7 @@ There are two integration methods that can be used to allow Datadog to monitor y
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
 2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key:
-    * Create a role and allow Datadog to assume it (**Preferred Option**)
+    * Create a role and allow Datadog to assume it (**Preferred Option** - not supported in GovCloud)
         1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
         2.  From the selection, choose Role for Cross-Account Access.
         3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
@@ -139,7 +141,7 @@ There are two integration methods that can be used to allow Datadog to monitor y
 
 Depending on whether you created a role or a user above, choose the appropriate Datadog configuration:
 
-* Configure Role Delegation
+* Configure Role Delegation (not supported in GovCloud)
   1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
   2.  Select the **Role Delegation** tab.
   3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
