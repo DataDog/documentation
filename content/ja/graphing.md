@@ -19,7 +19,7 @@ sidebar:
 
 <!-- <h2 id="editor">Find the Graph Editor</h2>
 
-On each graph you will find a cog icon that opens the graph editor.
+On each graph you will find a pencil icon that opens the graph editor.
 
 <img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
 
@@ -30,7 +30,7 @@ It lets you finely control what is displayed on the graph.
 
 ## グラフエディターの表示方法 {#editor}
 
-グラフを開くと右上隅に歯車があります。この歯車をクリックするとグラフエディターがポップアップします。
+グラフを開くと右上隅に鉛筆マークがあります。このマークをクリックするとグラフエディターがポップアップします。
 
 
 <img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>

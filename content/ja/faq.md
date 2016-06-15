@@ -681,7 +681,7 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 #### グラフをスムージングするにはどうすいればよいですか。 {#graph-smoothing}
 
-グラフ右上隅にある歯車マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ上に表示しているデータに平滑平均を適用することができます。
+グラフ右上隅にある鉛筆マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ上に表示しているデータに平滑平均を適用することができます。
 
 例: `ewma_20(exception.invalid{*})`
 
