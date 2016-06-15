@@ -78,6 +78,14 @@ def get_local_hash(language)
       "en" => "Sign In",
       "ja" => "ログイン",
     },
+    "btn_support_login" => {
+      "en" => "Support Login",
+      "ja" => "サポートログイン",
+    },
+    "btn_free_trial" => {
+      "en" => "Free Trial",
+      "ja" => "無料体験",
+    },
     "footer_switch_language" => {
       "en" => "日本語ドキュメントへのリンク。",
       "ja" => "Read the docs in English",
