@@ -28,19 +28,11 @@ Connect Jenkins to Datadog in order to:
 * Jenkinsでのビルドの状況についてイベントストリームでチームメンバーと検討する
 
 
-<!-- From the open-source Agent:
+<!-- From the open-source Jenkins plugin:
 
-* [Jenkins YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jenkins.yaml.example)
-* [Jenkins checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/jenkins.py)
+* [Jenkins Datadog plugin](https://github.com/DataDog/jenkins-datadog-plugin)
+-->
 
-Successful Jenkins builds will show up as 'low' priority.
-In the left column of the event stream, swith the priority to 'all'
-to see both successful and failed builds. -->
+オープンソースJenkinsプラグインから:
 
-Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
-
-* [Jenkinsインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/jenkins.yaml.example)
-* [Jenkinsインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/jenkins.py)
-
-Jenkinsで成功したビルドは、プライオリティー'Low'で表示されます。
-成功したビルドと失敗したビルドの両方を表示するためには、イベントストリームの左側コラム内の`PRIORITY`の部分で`All`を選択してください。
+* [JenkinsDatadogプラグイン](https://github.com/DataDog/jenkins-datadog-plugin)
