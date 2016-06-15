@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand " href="<%= @item["langpath"] %>/">
-        <img src="/static/logo.png">
+        <img src="/static/dd_docs_logo.png">
       </a>
     </div>
     <div class="collapse navbar-collapse" id="topmenu">
@@ -55,10 +55,10 @@
         <% end %>
         <li><a href="<%= @item["langpath"] %>/help/"><%= @item["menu_help"] %></a></li>
         <li id="signin">
-          <a class="btn navbar-btn flexbutton" href="https://app.datadoghq.com"><%= @item["btn_signin"] %></a>
+          <a class="btn navbar-btn flexbutton blueflex" href="https://app.datadoghq.com/signup"><%= @item["btn_free_trial"] %></a>
         </li>
         <li id="signup">
-          <a class="btn navbar-btn flexbutton blueflex" href="https://app.datadoghq.com/signup"><%= @item["btn_signup"] %></a>
+          <a class="btn navbar-btn flexbutton" href="https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1"><%= @item["btn_support_login"] %></a>
         </li>
       </ul>
     </div>

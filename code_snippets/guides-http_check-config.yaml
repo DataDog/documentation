@@ -1,8 +1,4 @@
 init_config:
-#    notify: 
-#        - user1@myorg
-#        - pagerduty
-
 instances:
 #    -   name: My_first_service
 #        url: http://someurl
@@ -12,6 +8,3 @@ instances:
 
 #    -   name: My_second_service
 #        url: https://otherurl
-#        notify:
-#           - user2@myorg
-#           - pagerduty
