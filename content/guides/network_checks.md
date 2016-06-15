@@ -23,12 +23,6 @@ now refers to statuses sent by the Agent. Refer to the
 <a href="/guides/monitoring">Guide to Monitoring</a> for more information.
 </div>
 
-<!--
-======================================================
-OVERVIEW
-======================================================
--->
-
 <h3 id="overview">Overview</h3>
 
 In this guide, we will show you how you can setup some service checks
@@ -44,12 +38,6 @@ monitor editor. Read the
 <a href="/guides/monitoring#network"> guide to monitoring</a> for
 further information on setting up Network service monitors.
 
-<!--
-======================================================
-SETUP
-======================================================
--->
-
 <h3 id="setup">Setup</h3>
 
 If you have not already setup the Agent, then you should check out the Agent
@@ -61,12 +49,6 @@ chat room, <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
 where we'll be happy to answer any questions you might have. (There's a
 <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
 web chat client, too</a>.)
-
-<!--
-======================================================
-CONFIGURATION
-======================================================
--->
 
 <h3 id="config">Configuration</h3>
 
@@ -82,12 +64,6 @@ directory. Configuration is written using [YAML](http://www.yaml.org/).
 
 HTTP(S) Check configuration file must be named http_check.yaml
 TCP Check configuration file must be named tcp_check.yaml.
-
-<!--
-======================================================
-HTTP CHECK CONFIGURATION
-======================================================
--->
 
 <h3 id="http_config">HTTP Check Configuration</h3>
 
@@ -113,25 +89,6 @@ List of parameters:
 - timeout (optional): A timeout for the request, defaulting to 10 seconds.
 A service will be marked as down if the request times out
 
-#### Custom triggering:
-
-Using the `window` and `threshold` parameters,
-you can tell the service to <em>only</em> send a CRITICAL if the check fails `x` times within
-the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
-
-For example, if you have the following configuration for window and threshold:
-
-<%= snippet_code_block("guides-http_check-notify.yaml", :nocomments => true) %>
-
-You will only be notified if the check fails 3 times within the last 5 tries.
-
-A success is any valid HTTP code less than 400.
-
-<!--
-======================================================
-TCP CHECK CONFIGURATION
-======================================================
--->
 
 <h3 id="tcp_config">TCP Check Configuration</h3>
 
@@ -151,28 +108,4 @@ List of parameters:
 - port <b>(mandatory)</b>: The port on which the check will try to connect to
 - timeout (optional): A timeout for the request, defaulting to 10 seconds.
 A service will be marked as down if the request times out
-
-#### Custom triggering:
-
-Using the `window` and `threshold` parameters,
-you can tell the service to <em>only</em> send a CRITICAL if the check fails `x` times within
-the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
-
-For example, if you have the following configuration for window and threshold:
-
-<%= snippet_code_block("guides-tcp_check-notify.yaml", :nocomments => true) %>
-
-You will only be notified if the check fails 3 times within the last 5 tries.
-
-
-<% content_for :javascript do %>
-<script>
-  $(function() {
-    // Show the name change message if redirected from the old service checks page.
-    if (window.location.href.indexOf('?sc') > 0) {
-      $('#service_check_message').show();
-    }
-  });
-</script>
-<% end %>
 

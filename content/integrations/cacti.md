@@ -3,6 +3,7 @@ title: Datadog-Cacti Integration
 integration_title: Cacti
 kind: integration
 doclevel: basic
+git_integration_title: cacti
 ---
 ### Overview
 
@@ -21,4 +22,6 @@ From the open-source Agent:
 
 
 
+## Metrics
 
+<%= get_metrics_from_git() %>

@@ -3,6 +3,7 @@ title: Datadog-Airbrake Integration
 integration_title: Airbrake
 kind: integration
 doclevel: basic
+git_integration_title: airbrake
 ---
 
 ## Overview
@@ -22,3 +23,6 @@ You can either choose to follow all projects or specify a project name to follow
 If "All projects" box is ticked and a project name is specified, all projects will be followed.
 
 
+## Metrics
+
+<%= get_metrics_from_git()%>

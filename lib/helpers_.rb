@@ -1,8 +1,6 @@
-include Nanoc3::Helpers::XMLSitemap
-include Nanoc3::Helpers::Rendering
-include Nanoc3::Helpers::LinkTo
-include Nanoc::Toolbox::Helpers::TaggingExtra
-include Nanoc::Toolbox::Helpers::HtmlTag
+include Nanoc::Helpers::XMLSitemap
+include Nanoc::Helpers::Rendering
+include Nanoc::Helpers::LinkTo
 
 # general functions
 
@@ -60,41 +58,86 @@ def ja_guide_items_yet
   guides.sort_by { |item| item[:listorder] }
 end
 
+def github_metrics_store_filename
+  'github_metrics'
+end
+
+def get_all_metrics_from_github
+  require 'octokit'
+  require 'pp'
+  require 'yaml'
+  require 'csv'
+
+  allmetrictables = []
+  if ENV.has_key?('github_personal_token')
+    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20 seconds on a good connection, much longer on JetBlue"
+    repo = 'datadog/dogweb'
+    reporootdir = $client.contents(repo, :path => "integration/")
+
+    reporootdir.each do |intdir|
+      if intdir[:type]=="dir"
+        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+        intdirlist.each { |intdircontent|
+          if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
+            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+
+            metric_string = "<table class='table'>"
+            CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
+              description = row['description']
+              if description.nil?
+                description = ' '
+              end
+              metric_string+= "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
+              if row['interval'] != nil
+                metric_string += " every #{row['interval']} seconds"
+              end
+              metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
+              if row['unit_name'] != nil
+                metric_string += "<br/>shown as #{row['unit_name']}"
+                if row['per_unit_name'] != nil
+                  metric_string += "/#{row['per_unit_name']}"
+                end
+              end
+              metric_string += "</td></tr>"
+            end
+            metric_string+="</table>"
+            metric_string.force_encoding('utf-8')
+            allmetrictables << {"integration" => intdir[:name], "table" =>metric_string}
+          end
+        }
+      end
+    end
+    serialize_github_metrics(allmetrictables)
+  end
+  return allmetrictables
+end
+
+def serialize_github_metrics(items)
+  File.open(github_metrics_store_filename, 'a') do |f|
+    Marshal.dump(items, f)
+  end
+end
+
+
 def get_metrics_from_git
   require 'octokit'
   require 'base64'
   require 'csv'
 
-  if ENV.has_key?('github_personal_token')
-    ititle = @item[:git_integration_title]
-
-    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
-    # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
-    # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
-    metric_string = "<table class='table'>"
-    CSV.parse(Base64.decode64(itext), :headers => true) do |row|
-      # row.each do |metric_name, metric_type, interval, unit_name, per_unit_name, description, orientation, integration, short_name |
-        metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
-        if row['interval'] != nil
-          metric_string += " every #{row['interval']} seconds"
-        end
-        metric_string += ")</td><td>#{row['description'].gsub '^', ' to the '}"
-        if row['unit_name'] != nil
-          metric_string += "<br/>shown as #{row['unit_name']}"
-          if row['per_unit_name'] != nil
-            metric_string += "/#{row['per_unit_name']}"
-          end
-        end
-
-        metric_string += "</td></tr>"
-    end
-    metric_string+="</table>"
-    output = metric_string
+  if File.exist?(github_metrics_store_filename)
+    allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
   else
-    output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+    allmetrics = get_all_metrics_from_github
   end
 
-return output
+  begin
+    # if ENV.has_key?('github_personal_token')
+    ititle = @item[:git_integration_title]
+    return allmetrics.find { |h| h['integration'] == ititle}["table"]
+  rescue Exception => e
+    pp "**** There was a problem getting GitHub Metrics for #{@item[:title]} ****"
+    pp e
+  end
 end
 
 def get_units_from_git
@@ -175,6 +218,73 @@ EOF
   end
 end
 
+def create_tag_pages(items=nil, options={})
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:identifier]      ||= "/tags/#{options[:tag_pattern]}/"
+  options[:template]        ||= "tag"
+
+  tag_set(items).each do |tagname|
+    raw_content = "<%= render('#{options[:template]}', :tag => '#{tagname}') %>"
+    attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
+    identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
+
+    @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
+  end
+end
+
+def tag_set(items=nil)
+  items ||= @items
+  items.map { |i| i[:tags] }.flatten.uniq.delete_if{|t| t.nil?}
+end
+
+def tag_links_for(item, omit_tags=[], options={})
+  tags = []
+  return tags unless item[:tags]
+
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:file_extension]  ||= ".html"
+  options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
+
+  tags = item[:tags] - omit_tags
+
+  tags.map! do |tag|
+      title = options[:title].gsub(options[:tag_pattern], tag.downcase)
+      url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
+      content_tag('a', title, {:href => url})
+  end
+end
+
+def content_tag(name, content, options={})
+  "<#{name}#{tag_options(options) if options}>#{content}</#{name}>"
+end
+
+def tag_options(options)
+  unless options.empty?
+    attributes = []
+    options.each do |key, value|
+      attributes << %(#{key}="#{value}")
+    end
+    ' ' + attributes.join(' ')
+  end
+end
+
+def count_tags(items=nil)
+  items ||= @items
+  tags = items.map { |i| i[:tags] }.flatten.delete_if{|t| t.nil?}
+  tags.inject(Hash.new(0)) {|h,i| h[i] += 1; h }
+end
+
+def items_with_tag(tag, items=nil)
+  items = sorted_articles if items.nil?
+  items.select { |item| has_tag?( item, tag ) }
+end
+
+def has_tag?(item, tag)
+  return false if item[:tags].nil?
+  item[:tags].include? tag
+end
 # def create_tag_pages(items=nil, options={})
 #       options[:tag_pattern]     ||= "%%tag%%"
 #       options[:title]           ||= options[:tag_pattern]

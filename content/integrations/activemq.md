@@ -3,6 +3,7 @@ title: Datadog-ActiveMQ Integration
 integration_title: ActiveMQ
 kind: integration
 doclevel: complete
+git_integration_title: activemq
 ---
 
 ## Overview
@@ -98,5 +99,8 @@ Get metrics from ActiveMQ in real time to
         else echo -e "\e[031mAgent is not running\e[0m"; fi
     {:.language-shell}
 
+## Metrics
+
+<%= get_metrics_from_git()%>
 
 [1]: http://activemq.apache.org/jmx.html

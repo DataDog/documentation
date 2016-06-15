@@ -279,6 +279,18 @@ ol.outline {
   ul > li {
     margin-bottom: 6px;
   }
+  ul.intlist {
+    margin: 0 auto;
+    li {
+      border: 0;
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 0;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      height: 50px;
+    }
+  }
   .nav-tabs > li {
     margin-bottom: -1px;
   }
@@ -287,6 +299,17 @@ ol.outline {
     border: 1px solid #777777;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+  #pagecontent {
+    h1 {
+      font-size: 24px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 16px;
+    }
   }
 }
 
@@ -365,6 +388,13 @@ ol.outline {
   .code-block.code-block-python {
     visibility: visible;
     display: block;
+  }
+  /* Offset internal anchors to accommodate for floating nav. */
+  .int-anchor {
+    display: block;
+    visibility: hidden;
+    padding-top: 150px; /* fixed header height*/
+    margin-top: -150px; /* negative fixed header height */
   }
 }
 

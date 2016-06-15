@@ -128,6 +128,23 @@ At any time during your check, you can make a call to `self.event(...)` with one
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload.
 
+#### Sending service checks
+
+Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
+
+The service_check method will accept the following arguments:
+
+- `check_name`: The name of the service check.
+- `status`: An integer describing the service status. You may also use the class status definitions:
+  - `AgentCheck.OK` or `0` for success
+  - `AgentCheck.WARNING` or `1` for warning
+  - `AgentCheck.CRITICAL` or `2` for failure
+  - `AgentCheck.UNKNOWN` or `3` for indeterminate status
+- `tags`: (optional) A list of key:val tags for this check.
+- `timestamp`: (optional) The POSIX timestamp when the check occured.
+- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
+- `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
+- `message`: (optional) Additional information or a description of why this status occured.
 
 #### Exceptions
 
@@ -171,6 +188,7 @@ The configuration file has the following structure:
 
 <%= console <<EOF
 init_config:
+    min_collection_interval: 20
     key1: val1
     key2: val2
 
@@ -182,6 +200,7 @@ instances:
       password: 5678
 EOF
 %>
+`min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
 
@@ -392,7 +411,7 @@ call it `http.response_time` and tag it with the URL.
 
 <%= python <<EOF
 timing = end_time - start_time
-self.gauge('http.reponse_time', timing, tags=['http_check'])
+self.gauge('http.response_time', timing, tags=['http_check'])
 EOF
 %>
 
@@ -426,7 +445,7 @@ def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
         'event_type': 'http_check',
-        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_title': 'Invalid response code for %s' % url,
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
@@ -440,7 +459,7 @@ be placed into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
 Once the check is in `checks.d`, you can test it by running it as a python
-script. **Make sure to change the conf.d path in the test method**. From your
+script. Restart the Agent for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your
 Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
@@ -473,7 +492,7 @@ If your issue continues, please reach out to Support with the help page that
 Testing custom checks on Windows is easy. The Agent install includes a file called shell.exe
 in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
 
-Once you're check (called "my_check") is written and you have the .py and .yaml files
+Once your check (called "my_check") is written and you have the .py and .yaml files
 in their correct places, you can run the following in shell.exe:
 
     >>> from checks import run_check

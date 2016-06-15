@@ -1,7 +1,7 @@
 ---
 title: Datadog-Zookeeper Integration
 integration_title: Zookeeper
-
+git_integration_title: zookeeper
 kind: integration
 doclevel: basic
 ---
@@ -23,5 +23,6 @@ From the open-source Agent:
 
 
 
+## Metrics
 
-
+<%= get_metrics_from_git() %>

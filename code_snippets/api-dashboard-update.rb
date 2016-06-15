@@ -23,6 +23,7 @@ template_variables = [{
 	"name" => "host1",
 	"prefix" => "host",
 	"default" => "host:my-host"
-}]
+}],
+read_only = true
 
-dog.update_dashboard(dash_id, title, description, graphs, template_variables)
+dog.update_dashboard(dash_id, title, description, graphs, template_variables, read_only)

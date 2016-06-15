@@ -19,6 +19,7 @@ curl  -X POST -H "Content-type: application/json" \
           "name": "host1",
           "prefix": "host",
           "default": "host:my-host"
-      }]
+      }],
+      "read_only": "True"
     }' \
 "https://app.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"

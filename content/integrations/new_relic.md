@@ -2,6 +2,7 @@
 title: Datadog-New Relic Integration
 integration_title: New Relic
 kind: integration
+git_integration_title: new_relic
 ---
 
 ### Overview
@@ -30,6 +31,10 @@ Connect to New Relic to:
 3. Choose whether you want to collect your metrics per hosts or app-wide.
 
     *Note: Enabling this options will import New Relic hosts to Datadog.*
+
+## Metrics
+
+<%= get_metrics_from_git() %>
 
 ### Troubleshooting & FAQ
 

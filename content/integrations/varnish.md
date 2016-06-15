@@ -1,6 +1,7 @@
 ---
 title: Datadog-Varnish Integration
 integration_title: Varnish
+git_integration_title: varnish
 
 kind: integration
 ---
@@ -22,6 +23,12 @@ From the open-source Agent:
 * [ Varnish checks.d][2]
 
 The following metrics are collected by default with the Varnish integration.
+
+### Metrics
+
+The following metrics are collected:
+
+<%= get_metrics_from_git() %>
 
 
 #### If you are using Varnish 3.0:

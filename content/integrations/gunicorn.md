@@ -2,6 +2,7 @@
 title: Datadog-Gunicorn Integration
 integration_title: gunicorn
 kind: integration
+git_integration_title: gunicorn
 ---
 
 To capture Gunicorn metrics you need to install the Datadog Agent.
@@ -30,3 +31,7 @@ Edit conf.d/gunicorn.yaml
               - Collected 8 metrics & 0 events
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.
+
+## Metrics
+
+<%= get_metrics_from_git() %>

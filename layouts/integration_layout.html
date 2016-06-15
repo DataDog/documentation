@@ -13,7 +13,7 @@ this layout provides a sidebar and main column.
         <div class="col-sm-3 col-xs-12" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
             <% if @item["language"] == "en" %>
-            <li class="nav-header hidden-xs">Documentation Search</li> 
+            <li class="nav-header hidden-xs">Documentation Search</li>
             <li class="hidden-xs">
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -60,7 +60,9 @@ this layout provides a sidebar and main column.
         <div class="col-sm-9 col-xs-12 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <div <%if @item[:newhlevel] %>id="pagecontent"<% end %>>
             <%= yield %>
+          </div>
         </div>
       </div>
     </div>

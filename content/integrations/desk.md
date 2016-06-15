@@ -2,6 +2,7 @@
 title: Datadog-Desk Integration
 integration_title: Desk
 kind: integration
+git_integration_title: desk
 ---
 ## Overview
 
@@ -27,3 +28,6 @@ Hit the install button, and then you're all set! You will soon be able to select
    [4]: https://www.datadoghq.com/2015/02/keep-support-team-page-salesforce-desk-integration/
 
 
+## Metrics
+
+<%= get_metrics_from_git() %>

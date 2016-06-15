@@ -1,7 +1,7 @@
 ---
 title: Datadog-VMware Integration
 integration_title: VMware
-
+git_integration_title: vsphere
 kind: integration
 ---
 
@@ -13,24 +13,11 @@ Install the Datadog VMware vSphere integration to:
 * Get vSphere events in Datadog and overlay them on top of your metrics (vMotion, configuration changes, on/off...).
 * Interact with your teams on dashboards and the event stream, showing all vSphere data at one glance.
 
-We also have an awesome blog post on vSphere which can be seen [here][1]. The following metrics are collected by default with the VMware integration (for more info, please see [here][2]):
+We also have an awesome blog post on vSphere which can be seen [here][1].
 
+## Metrics
 
-    cpu.extra
-    cpu.ready
-    cpu.usage
-    cpu.usagemhz
-    disk.commandsAborted
-    disk.deviceLatency
-    disk.deviceReadLatency
-    disk.deviceWriteLatency
-    disk.queueLatency
-    disk.totalLatency
-    mem.active
-    mem.compressed
-    mem.consumed
-    mem.overhead
-    mem.vmmemctl
+<%= get_metrics_from_git() %>
 
 
 #### _FAQ_

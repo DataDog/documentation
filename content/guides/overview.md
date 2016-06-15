@@ -85,7 +85,7 @@ For each incident users can:
 * Comment
 * See similar incidents
 * <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
-* @support to ask for assistance
+* @support-datadog to ask for assistance
 
 ![](/static/images/event_stream_claim.png){: style="width:100%; border:1px solid #777777"}
 

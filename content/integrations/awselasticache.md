@@ -2,6 +2,7 @@
 title: Datadog-AWS ElastiCache Integration
 integration_title: AWS ElastiCache
 kind: integration
+git_integration_title: amazon_elasticache
 ---
 
 ![ElastiCache Memcached default dashboard](/static/images/elasticache-memcached.png)
@@ -67,6 +68,9 @@ Here's an example of setting up a graph to combine cache hit metrics from Elasti
 
 ![ElastiCache and Cache metrics](/static/images/elasticache4.png)
 
+## Metrics
+
+<%= get_metrics_from_git() %>
 
 ## What's next?
 

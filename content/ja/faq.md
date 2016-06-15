@@ -950,7 +950,7 @@ by default you'll get the average across all hosts. -->
 <h4 id="notify">What do @ notifications do in Datadog?</h4>
 <p>
 <ul>
-<li><code>@support</code> – this will reach Datadog support directly when posted in your stream.</li>
+<li><code>@support-datadog</code> – this will reach Datadog support directly when posted in your stream.</li>
 <li><code>@all</code> – this will send a notification to all members of your organization.</li>
 <li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
 <li><code>@test@test.com</code> this will send an email to test@test.com.</li>
@@ -971,7 +971,7 @@ by default you'll get the average across all hosts. -->
 
 #### Datadog内で@マーク付きの通知は、どのように機能しますか。 {#notify}
 
--	`@support` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
+-	`@support-datadog` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
 -	`@All` - 組織のすべてのメンバに通知します。
 -	`@yourname` - 'yourname'という名前のユーザに通知します。
 -	`@test@test.com` test@test.comに電子メールを送信します。

@@ -16,7 +16,7 @@ Get metrics from Docker in real time to:
 
 ![Docker default dashboard](/static/images/docker.png)
 
-Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
+Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
 
 
 There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
@@ -44,7 +44,7 @@ There are three ways to setup the Docker integration: install the agent on the h
 
 A few parameters can be changed with environment variables.
 
-* **TAGS** set host tags. Add -e TAGS="simple-tag-0,tag-key-1:tag-value-1" to use [simple-tag-0, tag-key-1:tag-value-1] as host tags.
+* **TAGS** set host tags. Add -e TAGS="simple-tag-0,tag-key-1:tag-value-1" to use \[simple-tag-0, tag-key-1:tag-value-1\] as host tags.
 * **LOG_LEVEL** set logging verbosity (CRITICAL, ERROR, WARNING, INFO, DEBUG). Add -e LOG_LEVEL=DEBUG to turn logs to debug mode.
 * **PROXY_HOST**, **PROXY_PORT**, **PROXY_USER** and **PROXY_PASSWORD** set the proxy configuration.
 * **DD_URL** set the Datadog intake server to send Agent data to (used when using an agent as a proxy )

@@ -16,11 +16,15 @@ sidebar:
       href: "/integrations/"
 ---
 
+### Overview
+
+Datadog's Azure integration currently monitors Virtual Machines (diagnostics must be enabled), and SQL Databases. For any other service, please reach out to [support@datadoghq.com][3].
+Datadog's agent can also be deployed on your Azure virtual machines.
+
 
 ### Configure Azure Monitoring
 {: #monitoring}
 
-Microsoft Azure supports both PaaS and IaaS (VM) services. Right now Datadog monitoring is tailored for IaaS services. But it can also be installed in worker and web roles.
 
 To setup Azure monitoring, go to [Azure integrations][1] and follow instructions on the page.
 
