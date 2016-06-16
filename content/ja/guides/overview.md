@@ -189,7 +189,7 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
 <li>Graphs can be embedded in an iframe, giving a 3rd party a live graph
-without access to your data or any other information (via the cog in the upper right of a graph).</li>
+without access to your data or any other information (via the pencil in the upper right of a graph).</li>
 </ul> -->
 
 <h2 id="dashboards">原因追跡用ダッシュボード</h2>
@@ -205,7 +205,7 @@ without access to your data or any other information (via the cog in the upper r
 <li>zone, host, total usageで、表示することができます。</li>
 <li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
-<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の歯車マークから)</li>
+<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
 
 

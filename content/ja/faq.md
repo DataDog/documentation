@@ -681,7 +681,7 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 #### グラフをスムージングするにはどうすいればよいですか。 {#graph-smoothing}
 
-グラフ右上隅にある歯車マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ上に表示しているデータに平滑平均を適用することができます。
+グラフ右上隅にある鉛筆マークをクリックし、表示されるJSONエディター内で'ewma_20'と追記することで、グラフ上に表示しているデータに平滑平均を適用することができます。
 
 例: `ewma_20(exception.invalid{*})`
 
@@ -705,7 +705,7 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 There are two ways to share a graph or screenboard
 <ul>
 <li>In a time board, pick a graph on a dashboard,
-click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
+click on the pencil to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
 </li>
 <li>
 In a custom screenboard, the middle button in the upper right will generate a URL which gives
@@ -718,7 +718,8 @@ live and read-only access to just the contents of that screenboard.
 
 共有するには、2つの方法があります。共有したいグラフが、タイムボード上にあるかスクリーンボード上にあるかで異なります。
 
-- タイムボードでは、表示されているグラフを選択し、右上隅に表示されている歯車を選択し、"Choose metrics and events"セクションの"Share"タブを選択します。時間の尺度やグラフのサイズなどを選択した後、`Generate embed code`ボタンをクリックします。新たにホップアップが表示され、グラフを表示するためのembed codeが表示されます。 - スクリーンボードでは、右上隅の5個のアイコンの中央のアイコンをクリックすると共有のためのURLが生成されます。このURLにアクセスすると、読み込み専用のライブなスクリーンボードが表示されます。
+- タイムボードでは、表示されているグラフを選択し、右上隅に表示されている鉛筆マークを選択します。"Choose metrics and events"セクションで"Share"タブを選択し、時間の尺度やグラフのサイズなどを選択した後、`Generate embed code`ボタンをクリックします。
+- スクリーンボードでは、右上隅の5個のアイコンの中央のアイコンをクリックすると共有のためのURLが生成されます。このURLにアクセスすると、読み込み専用のライブなスクリーンボードが表示されます。
 
 <!--<h4>How do I track cron jobs?</h4>
 
@@ -872,7 +873,7 @@ This depends on the medium you use to send metrics.
 <p>
 We offer reporting in a variety of ways so far, which include:
 <ul>
-<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the cog to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
+<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the pencil to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
 <li>For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.</li>
 <li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
 </ul>
@@ -882,7 +883,7 @@ We offer reporting in a variety of ways so far, which include:
 
 現状では、次のようなレポートの方法を提供しています：
 
--	すべての場所のすべてのグラフにスナップショットを撮ってレポートする機能があります。 グラフを選び、右上隅の歯車のマークをクリックし、`share`タブを選択し`generate`ボタンをクリックすることで、グラフのスナップショットのIFRAMEへのリンク生成することができます。
+-	すべての場所のすべてのグラフにスナップショットを撮りレポートをする機能があります。レポートをしたいグラフを選び、右上隅の鉛筆マークをクリックし、`share`タブを選択します。設定項目を確認した後、`generate`ボタンをクリックすることで、スナップショットのIFRAMEへのリンクを生成することができます。
 -	過去のアラートの状況をレビューできるように、一部の情報ソース(例:pagerduty)では、週に一度メールによるレポートを受信する設定ができます。
 -	メトリクスのアラート機能を使うことによって、メトリクスが正常の範囲から外れたさいのレポートを送信することができます。
 
