@@ -4,8 +4,6 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 # Setup
 
-**NOTE: if you are Datadog Internal, use this on your host os and not on the personal-chef vm. There are a few reports that it will not run on personal-chef. **
-
 ```
 brew install rbenv # or equivalent on linux
 rbenv install 2.3.0
