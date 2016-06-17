@@ -435,17 +435,15 @@ span.question {
 /* use width instead of max-width in logo because
  * FF and opera ignore max-width in inlined images
  */
-
 .navbar-brand img {
   width: 300px;
   margin-top: 0;
   @media (min-width: 400px) {
     width: 300px;
   }
-  @media (min-width: 500px) {
+  @media (min-width: 320px) {
     width: 100%;
   }
-
 }
 
 
@@ -497,5 +495,11 @@ dt {
     display: block !important;
     height: auto !important;
     overflow: visible !important;
+  }
+}
+@media (max-width:$screen-xs){
+  .navbar-brand{
+    width: 80%!important;
+    max-width: 300px;
   }
 }
