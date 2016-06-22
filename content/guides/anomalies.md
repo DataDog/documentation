@@ -89,6 +89,6 @@ The grey band here makes sense; it is wide enough to capture the noise in the ti
 
 <img src="/static/images/anomalies/disappearing_half_hour.png" style="width:500px; border:1px solid #777777"/>
 
-Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50-9:00 and from 9:10-9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00-9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
+Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
 
 In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It simply means that the individual points in the zoomed in view are not anomalous in isolation. Rather, the fact that many slightly unusual point occur together is what's anomalous.
