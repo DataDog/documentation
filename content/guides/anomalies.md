@@ -58,7 +58,6 @@ You should now see something like what's shown above, with a handful of selectio
 
 Continue with steps (3) and (4) as you would for any other monitor.
 
-
 ### 3. Anomaly Detection Algorithms
 
 We currently offer two different anomaly detection algorithms. Both algorithms will follow the seasonal pattern of the series, and
@@ -67,3 +66,29 @@ will not have their predictions be affected by short anomalies.
 * Robust: This algorithm is very stable and its predictions will remain constant even through longer-term anomalies. On the other hand, it will take longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.) This algorithm uses more data and can take longer to load the first time it is run.
 
 * Adaptive: This algorithm is more dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
+
+## Frequently Asked Questions
+
+### Should I use anomaly detection for everything?
+
+NO! Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views` might be driven by user traffic and thus vary predictably by time of day and day of week. If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
+
+Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
+
+### Why does an anomaly "disappear" when I zoom in?
+
+At different zoom levels, the same query can result in time series with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
+
+The width of the grey band that is drawn by our anomaly detection algorithm is, in part, based on the noisiness of the time series in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
+
+Here's a concrete example to illustrate. The `app.requests` metric is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The chart below shows this series in a graph with a one-day time window.
+
+<img src="/static/images/anomalies/disappearing_day.png" style="width:500px; border:1px solid #777777"/>
+
+The grey band here makes sense; it is wide enough to capture the noise in the time series. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly.
+
+<img src="/static/images/anomalies/disappearing_half_hour.png" style="width:500px; border:1px solid #777777"/>
+
+Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50-9:00 and from 9:10-9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00-9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
+
+In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It simply means that the individual points in the zoomed in view are not anomalous in isolation. Rather, the fact that many slightly unusual point occur together is what's anomalous.
