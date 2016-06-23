@@ -53,5 +53,5 @@ and we'll take care of it.
 [5]: http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog
 [6]: /help/#email
 [7]: /help/#irc
-[8]: /help/#desk
+[8]: https://help.datadoghq.com/hc/en-us/requests/new
 [9]: https://github.com/DataDog/documentation/issues
