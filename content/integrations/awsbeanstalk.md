@@ -49,7 +49,7 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
   "containerDefinitions": [
     {
       "name": "dd-agent",
-      "image": "datadog/docker-dd-agent:ecs",
+      "image": "datadog/docker-dd-agent:latest",
       "environment": [
             {
               "name": "API_KEY",

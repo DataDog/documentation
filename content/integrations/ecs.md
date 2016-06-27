@@ -42,7 +42,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 1. Add another volume with the name ```cgroup``` and source path of ```/cgroup/```.
 1. Click the large **Add container** button.
 1. For **Container name** enter ```dd-agent```.
-1. For **Image** enter ```datadog/docker-dd-agent:ecs```.
+1. For **Image** enter ```datadog/docker-dd-agent:latest```.
 1. For **Maximum memory** enter ```128```.
 1. Scroll down to the **Advanced container configuration** section and enter ```10``` in **CPU units**.
 1. For **Env Variables**, add a **Key** of ```API_KEY``` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a [look at the ECS Configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3).*
@@ -172,8 +172,8 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
                [Service]
                Environment=API_KEY=YOUR_API_KEY
                Environment=TAGS=simple-tag-0
-               ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent:ecs
-               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/ proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:ecs
+               ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent:latest
+               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/ proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:latest
                ExecStop=/usr/bin/docker stop dd-agent
 
 ### That's all!
