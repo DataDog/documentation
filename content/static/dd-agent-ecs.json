@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "dd-agent",
-      "image": "datadog/docker-dd-agent:ecs",
+      "image": "datadog/docker-dd-agent:latest",
       "cpu": 10,
       "memory": 128,
       "essential": true,
