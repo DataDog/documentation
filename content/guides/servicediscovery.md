@@ -139,6 +139,12 @@ example:
     docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] datadog/docker-dd-agent:kubernetes
 
 
+### Using configuration files instead of a configuration store
+If running a configuration store is not possible in your environment but shipping configuration files with the agent is, you can use the [conf.d/auto_conf folder](https://github.com/DataDog/dd-agent/tree/master/conf.d/auto_conf) to store configuration templates. The format is simple and looks like the typical YAML configuration file for checks. One additional field, `docker_images`, is required and identifies the container image(s) to which this configuration should be applied.
+Use existing files in this folder as an example.
+If you use this instead of a K/V store you still need to uncomment `service_discovery_backend: docker` in `datadog.conf`, but `sd_config_backend`, `sd_backend_host` and `sd_backend_port` must be omitted.
+
+
 ### Monitoring your custom container
 
 Service discovery works with any image—one important note though is that for the `%%port%%` variable to be interpolated, the current version needs the container to expose the targeted port. See the NGINX Dockerfile for reference.
