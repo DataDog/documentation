@@ -101,6 +101,7 @@ Note: GovCloud does not support role based authentication.
                 "kinesis:Describe*",
                 "logs:Get*",
                 "logs:Describe*",
+                "logs:FilterLogEvents",
                 "logs:TestMetricFilter",
                 "rds:Describe*",
                 "rds:List*",
