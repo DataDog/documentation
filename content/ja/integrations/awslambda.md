@@ -16,7 +16,7 @@ Enable this integration to begin collecting custom metric from your Lambda funct
 Custom metrics are collected from log lines printed with the following format:
 <code>MONITORING|unix_epoch_timestamp|value|count|my.metric.name|#tag1:value,tag2</code>
 
-Note: This integration requires the AWS permissions <code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>, and <code>logs:FilterLogEvents</code> to be fully enabled.-->
+Note: This integration requires the AWS permissions <code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>, and <code>logs:FilterLogEvents</code> to be fully enabled. Also, counts and gauges are the only metrics types currently supported.-->
 
 ### Overview
 Amazon Lambda は、そのコードで必要とされるコンピューティング・リソースを管理し、自動的にイベントに応答してコードを実行し、計算サービスです。
@@ -26,4 +26,4 @@ Amazon Lambda は、そのコードで必要とされるコンピューティン
 カスタム指標は、この形式で印刷ログの行から収集されます。
 <code>MONITORING|unix_epoch_timestamp|value|count|my.metric.name|#tag1:value,tag2</code>
 
-注：この統合は、AWSの権限<code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>、および<code>logs:FilterLogEvents</code>完全に有効にすることが必要です。
+注：この統合は、AWSの権限<code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>、および<code>logs:FilterLogEvents</code>完全に有効にすることが必要です。また、数とゲージはタイプが現在サポートされている唯一の指標があります。
