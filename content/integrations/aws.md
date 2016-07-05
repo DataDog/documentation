@@ -101,6 +101,7 @@ Note: GovCloud does not support role based authentication.
                 "kinesis:Describe*",
                 "logs:Get*",
                 "logs:Describe*",
+                "logs:FilterLogEvents",
                 "logs:TestMetricFilter",
                 "rds:Describe*",
                 "rds:List*",
@@ -121,8 +122,8 @@ Note: GovCloud does not support role based authentication.
 
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
-2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key:
-    * Create a role and allow Datadog to assume it (**Preferred Option** - not supported in GovCloud)
+2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Note: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
+    * Create a role and allow Datadog to assume it (**Preferred Option** - not supported in GovCloud or China)
         1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
         2.  From the selection, choose Role for Cross-Account Access.
         3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.

@@ -46,7 +46,7 @@ Here is a quick overview of the different terms used in this guide.
 ##Creating a Monitor
 {: #create}
 
-Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
+Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
 "New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
