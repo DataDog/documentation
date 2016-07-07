@@ -60,6 +60,8 @@ After logging in, locate the settings page on the left side of the screen.
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses.
 
 #### Unable to login
+Make sure that you have created an Active Directory, you can use its default domain, for more information see the [azure documentation][5].
+
 If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attache screen shot.
 
 #### No metrics are showing up
@@ -73,3 +75,4 @@ Please make sure you have enabled diagnostics on your VMs. Diagnostics allows VM
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
    [4]: https://management.azure.com
+   [5]: https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
