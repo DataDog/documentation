@@ -80,7 +80,7 @@ Integrating Datadog with Microsoft Azure is a two step process. The first step i
 Learn more about how to monitor Azure performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
 #### Enable diagnostics
-To collect advanced metrics for virtual machines, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure preview portal][2] then follow the instructions below.
+To collect advanced metrics for virtual machines, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
 ![](/static/images/azure_diag_manual.png)
 
 After locating your VM:
