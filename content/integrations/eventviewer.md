@@ -11,10 +11,6 @@ Connect Event Viewer to Datadog in order to:
 * Track system and application events in Datadog.
 * Correlate system and application events with the rest of your application.
 
-From the open-source Agent:
-
-* [ Event Viewer YAML example][1]
-* [ Event Viewer checks.d][2]
 
 ### Configuration
 
@@ -37,5 +33,4 @@ to capture the same kind of events.
 GUI may slightly differ from `Get-WmiObject`, so we recommend you to double-check your filters' values
 with `Get-WmiObject` if the integration does not capture the events you set up.
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py
+<%= insert_example_links(conf: "win32_event_log", check: "win32_event_log")%>

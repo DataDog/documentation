@@ -63,6 +63,8 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
 
 2.  Restart the Agent.
 
+<%= insert_example_links%>
+
 ### Validation
 
 1.  To validate that your integration is working run the Agent's info command. You should see output similar to the following:

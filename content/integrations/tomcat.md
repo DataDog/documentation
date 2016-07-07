@@ -10,6 +10,8 @@ For information on Tomcat, please see [here][1].
 
    [1]: http://docs.datadoghq.com/integrations/java/
 
+<%= insert_example_links(check:"none")%>
+
 
 ## Metrics
 

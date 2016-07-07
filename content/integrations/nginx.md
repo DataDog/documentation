@@ -37,8 +37,9 @@ If you see some output with `configure arguments:` and lots of options, then you
       }
     }
 
-For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [NGINX example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [NGINX agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
+For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).
 
+<%= insert_example_links%>
 
 **All metrics collected for NGINX and NGINX Plus**
 

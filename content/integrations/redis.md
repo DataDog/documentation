@@ -14,6 +14,8 @@ Track and graph your Redis activity and performance metrics with slice-and-dice 
 
 Learn more about how to monitor Redis performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
 
+<%= insert_example_links(conf:"redisdb", check:"redisdb")%>
+
 ###  Troubleshooting and Questions
 
 **Q:** How do I filter to look at the stats for a particular DB in a particular environment?

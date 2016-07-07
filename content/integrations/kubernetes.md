@@ -36,6 +36,8 @@ If DaemonSets are not an option for your Kubernetes cluster, you will need to in
 
 If you would like to customize your Agent configuration, please refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
 
+<%= insert_example_links%>
+
 # Validation
 
 To verify the Datadog agent is running in your environment as a daemonset, execeute:

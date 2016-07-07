@@ -2,7 +2,7 @@
 title: Datadog-Varnish Integration
 integration_title: Varnish
 git_integration_title: varnish
-
+doclevel: basic
 kind: integration
 ---
 
@@ -17,10 +17,8 @@ Connect Varnish to Datadog in order to:
 
 Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.
 
-From the open-source Agent:
+<%= insert_example_links%>
 
-* [ Varnish YAML example][1]
-* [ Varnish checks.d][2]
 
 The following metrics are collected by default with the Varnish integration.
 

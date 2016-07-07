@@ -17,19 +17,9 @@ Capture HAProxy activity in Datadog to:
 
 Learn more about how to monitor HAProxy performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor HAProxy.
 
+<%= insert_example_links%>
 
-From the open-source Agent:
-
-* [ HAProxy YAML example][1]
-* [ HAProxy checks.d][2]
-
-
-
-## Metrics
+### Metrics
 
 <%= get_metrics_from_git() %>
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py
-
 

@@ -8,9 +8,11 @@ newhlevel: true
 # Overview
 
 Enable the Datadog-Ceph integration to:
+
   * Track disk usage across storage pools
   * Receive service checks in case of issues
   * Monitor I/O performance metrics
+
 
 # Installation
 
@@ -22,7 +24,7 @@ Adjust the configuration file to match your environment. By default the check wi
 
 Any extra tags specific to the cluster can be specified under `tags`, as usual.
 
-  * [Ceph YAML example][1]
+<%= insert_example_links%>
 
 # Validation
 
@@ -39,5 +41,3 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
               - Collected 19 metrics, 0 events & 2 service checks
 
 
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/ceph.yaml.example

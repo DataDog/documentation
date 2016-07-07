@@ -13,17 +13,8 @@ Bring Gearman metrics to Datadog to:
 * Know how many tasks are queued or running.
 * Correlate the performance of Gearman with the rest of your applications.
 
-From the open-source Agent:
-
-* [ Gearman YAML example][1]
-* [ Gearman checks.d][2]
-
+<%= insert_example_links(conf: "gearmand", check: "gearmand")%>
 
 ### Metrics
 
 <%= get_metrics_from_git() %>
-
-
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/gearmand.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/gearmand.py

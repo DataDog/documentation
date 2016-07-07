@@ -11,3 +11,5 @@ Connect TeamCity to Datadog in order to:
 
 * Monitor your builds and deployments
 * Collect stats and bind tags to every step of your integration
+
+<%= insert_example_links%>

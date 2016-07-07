@@ -11,10 +11,7 @@ Connect Memcached to Datadog in order to:
   * Visualize its performance
   * Correlate the performance of Memcached with the rest of your applications
 
-From the open-source Agent:
-
-* [ Memcache YAML example][1]
-* [ Memcache checks.d][2]
+<%= insert_example_links(conf:"mcache", check:"mcache")%>
 
 ## Metrics
 

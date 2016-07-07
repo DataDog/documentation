@@ -51,6 +51,8 @@ Edit the ```go-metro.yaml``` file in your agent's ```conf.d``` directory. The fo
           - app.datadoghq.com
 
 
+<%= insert_example_links(conf:"go-metro", check:"none")%>
+
 # Validation
 
 To validate that the check is running correctly, you should see `system.net.tcp.rtt` metrics showing in the Datadog interface. Also, if you run `sudo /etc/init.d/datadog-agent status`, you should see something similar to the following:

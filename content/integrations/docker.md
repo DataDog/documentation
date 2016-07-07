@@ -21,6 +21,8 @@ Learn more about how to monitor Docker performance metrics thanks to [our series
 
 There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
 
+<%= insert_example_links(conf: "docker_daemon", check: "docker_daemon")%>
+
 **Note:** docker_daemon replaces the older docker integration going forward.
 
 ### Installation

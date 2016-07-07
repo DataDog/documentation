@@ -8,16 +8,11 @@ git_integration_title: apache
 
 # Overview
 
-Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
+Get metrics from Apache in real timex; graph them and correlate them with other relevant system metrics and events.
 
   * Visualize your web server performance
   * Correlate the performance of Apache with the rest of your applications
 
-
-From the open-source Agent:
-
-  * [Apache YAML example][1]
-  * [Apache checks.d][2]
 
 # Installation
 
@@ -43,6 +38,8 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 2. Restart the agent
 
         sudo datadog-agent restart
+
+<%= insert_example_links %>
 
 # Validation
 

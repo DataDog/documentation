@@ -99,6 +99,8 @@ Get metrics from ActiveMQ in real time to
         else echo -e "\e[031mAgent is not running\e[0m"; fi
     {:.language-shell}
 
+<%= insert_example_links(check: "none")%>
+
 ## Metrics
 
 <%= get_metrics_from_git()%>
