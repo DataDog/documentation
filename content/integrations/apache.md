@@ -8,7 +8,7 @@ git_integration_title: apache
 
 # Overview
 
-Get metrics from Apache in real timex; graph them and correlate them with other relevant system metrics and events.
+Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 
   * Visualize your web server performance
   * Correlate the performance of Apache with the rest of your applications
