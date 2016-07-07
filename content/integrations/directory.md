@@ -15,11 +15,6 @@ Capture metrics from the files in given directories:
   * age of the creation
 
 
-From the Agent:
-
-* [Directory check script][1]
-* [Directory check configuration example][2]
-
 
 # Configuration
 {:#int-configuration}
@@ -48,6 +43,8 @@ From the Agent:
 
 4.  Restart the Agent
 
+<%= insert_example_links(conf: "directory", check: "directory")%>
+
 # Validation
 
 To validate that the check has passed run the agent info command. The output of the command should contain a section similar to the following:
@@ -62,6 +59,3 @@ To validate that the check has passed run the agent info command. The output of 
         - instance #0 [OK]
         - Collected 8 metrics & 0 events
 
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py
-[2]: https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example

@@ -190,7 +190,7 @@ The `datadog-agent jmx` command was added in version 4.1.0.
 `sudo /etc/init.d/datadog-agent jmx collect`
 
 
-
+<%= insert_example_links(conf: "jmx", check: "none")%>
 
 # Validation
 

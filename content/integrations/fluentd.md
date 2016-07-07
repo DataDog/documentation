@@ -16,6 +16,7 @@ Get metrics from Fluentd in real time to
 
 ![Fluentd Dashboard](/static/images/snapshot-fluentd.png)
 
+
 # Installation
 
 Configure your fluentd to use a monitor agent and plugin id (see doc), for instance:
@@ -55,6 +56,8 @@ Edit conf.d/fluentd.yaml
            plugin_ids:
              - plg1
              - plg2
+
+<%= insert_example_links%>
 
 # Validation
 

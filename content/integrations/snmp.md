@@ -13,10 +13,6 @@ Use the SNMP Agent Check to:
 * Monitor all your network devices
 * Correlate their performance with the rest of your applications
 
-From the open-source Agent:
-
-* [SNMP YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/snmp.yaml.example)
-* [SNMP checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/snmp.py)
 
 # Configuration
 
@@ -49,6 +45,8 @@ To use the SNMP checks, edit the **snmp.yaml** file in your **conf.d** directory
 
 
 For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.
+
+<%= insert_example_links%>
 
 # Usage
 

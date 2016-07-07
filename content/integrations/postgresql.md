@@ -15,20 +15,20 @@ Connect PostgreSQL to Datadog in order to:
 
 ### Metrics
 
-<%= get_metrics_from_git()%> 
+<%= get_metrics_from_git()%>
 
 You can learn more about how we collect these metrics by looking at the source [here](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py).
 
 ### Prerequisites
 To get started with the PostgreSQL integration, create at least a read-only datadog user with proper access to your PostgreSQL Server. Start psql on your PostgreSQL database and run:
 
-    create user datadog with password '<PASSWORD>'; 
+    create user datadog with password '<PASSWORD>';
     grant SELECT ON pg_stat_database to datadog;
 
 To verify the correct permissions you can run the following command:
 
-    psql -h localhost -U datadog postgres -c "select * from pg_stat_database LIMIT(1);"  
-    && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \ ||  
+    psql -h localhost -U datadog postgres -c "select * from pg_stat_database LIMIT(1);"
+    && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \ ||
     echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 
 When it prompts for a password, enter the one used in the first command.
@@ -57,25 +57,25 @@ Go to the datadog conf.d directory (if you aren't sure where this is, refer to [
     #      - my_other_table
 
 
-    # Custom metrics 
-    # Below are some examples of commonly used metrics, 
-    # which are implemented as custom metrics. Uncomment them 
-    # if you want to use them as is, or use as an example for 
-    # creating your own custom metrics. The format for describing 
-    # custom metrics is identical with the one used for common 
-    # metrics in postgres.py 
-    # 
-    # Be extra careful with ensuring proper custom metrics 
-    # description format. If your custom metric does not work 
-    # after an agent restart, look for errors in the output 
-    # of "/etc/init.d/datadog-agent info" command, as well as 
-    # /var/log/datadog/collector.log file. 
+    # Custom metrics
+    # Below are some examples of commonly used metrics,
+    # which are implemented as custom metrics. Uncomment them
+    # if you want to use them as is, or use as an example for
+    # creating your own custom metrics. The format for describing
+    # custom metrics is identical with the one used for common
+    # metrics in postgres.py
+    #
+    # Be extra careful with ensuring proper custom metrics
+    # description format. If your custom metric does not work
+    # after an agent restart, look for errors in the output
+    # of "/etc/init.d/datadog-agent info" command, as well as
+    # /var/log/datadog/collector.log file.
     #
     #    custom_metrics:
-    #    - # Londiste 3 replication lag 
-    #      descriptors: 
+    #    - # Londiste 3 replication lag
+    #      descriptors:
     #        - [consumer_name, consumer_name]
-    #      metrics: 
+    #      metrics:
     #         GREATEST(0, EXTRACT(EPOCH FROM lag)) as lag: [postgresql.londiste_lag, GAUGE]
     #         GREATEST(0, EXTRACT(EPOCH FROM lag)) as last_seen: [postgresql.londiste_last_seen, GAUGE]
     #         pending_events: [postgresql.londiste_pending_events, GAUGE]
@@ -95,4 +95,5 @@ After you restart the agent, you should be able to run the ```info``` command wh
           - Collected 8 metrics & 0 events
 
 
+<%= insert_example_links(conf:"postgres", check:"postgres")%>
 

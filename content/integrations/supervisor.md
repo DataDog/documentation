@@ -10,6 +10,8 @@ git_integration_title: supervisord
 
 Enable the supervisord check to monitor the states of your processes running under supervisord.
 
+<%= insert_example_links(conf:"supervisord", check: "supervisord")%>
+
 
 
 ## Metrics

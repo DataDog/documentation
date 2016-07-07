@@ -3,6 +3,7 @@ title: Datadog-VMware Integration
 integration_title: VMware
 git_integration_title: vsphere
 kind: integration
+doclevel: basic
 ---
 
 #### _Overview_
@@ -14,6 +15,8 @@ Install the Datadog VMware vSphere integration to:
 * Interact with your teams on dashboards and the event stream, showing all vSphere data at one glance.
 
 We also have an awesome blog post on vSphere which can be seen [here][1].
+
+<%= insert_example_links(conf:"vsphere", check:"vsphere")%>
 
 ## Metrics
 

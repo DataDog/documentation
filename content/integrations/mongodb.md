@@ -12,11 +12,6 @@ Connect MongoDB to Datadog in order to:
 * Visualize key MongoDB metrics.
 * Correlate MongoDB performance with the rest of your applications.
 
-From the open-source Agent:
-
-* [ MongoDB YAML example][1]
-* [ Code for the MongoDB check][2]
-
 
 # Installation
 
@@ -47,6 +42,8 @@ From the open-source Agent:
               - top
 
 2.  Restart the agent
+
+<%= insert_example_links(conf:"mongo", check:"mongo")%>
 
 # Validation
 
