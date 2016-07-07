@@ -31,7 +31,7 @@ From the open-source Agent:
 
 # Configuration
 
-1.  Edit your conf.d/mongodb.yaml file as follows:
+1.  Edit your conf.d/mongo.yaml file as follows:
 
         init_config:
 

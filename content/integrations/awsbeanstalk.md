@@ -77,8 +77,8 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
           "containerPath": "/host/sys/fs/cgroup",
           "readOnly": true
         }
-      ],
-    },
+      ]
+    }
   ]
 }
 ~~~~~~~~
