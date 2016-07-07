@@ -31,14 +31,14 @@ Datadog's agent can also be deployed on your Azure virtual machines.
 
 Integrating Datadog with Microsoft Azure is a three step process. 
 
-1. The first step is <a href="#installation1">Getting your tenant ID</a> and passing it to Datadog. 
+1. The first step is <a href="#installation1">Getting your tenant name</a> and passing it to Datadog. 
 2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog
 3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
 
-#### Getting your tenant ID
+#### Getting your Tenant Name
 {: #installation1}
 1. Go to [manage.windowsazure.com][5]
-2. Once the URL redirects, copy the tenant name from the URL. It is the text in between the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
+2. Once the URL redirects, copy the tenant name from the URL. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
 3. Paste the Tenant Name in the form on the Datadog setup page <img src="/static/images/azure/tenant_name_form.png" style="width: 50%;display:block;display:block;"/>
 
 #### Creating the Web Application
@@ -55,7 +55,7 @@ Integrating Datadog with Microsoft Azure is a three step process.
 	- Fill in any details for sign-on URL and App ID URI. These will NOT be used in any way and are simply required as part of the setup process.
 	- i.e. https://app.datadoghq.com	
 9. Click the check mark. You should be on a page that says "Your app has been added!"
-10. Click on "Configure" (Make sure this is configure for the app, not the active directory) <img src="/static/images/azure/configure_click.png" style="width: 50%;display:block;"/>
+10. Click on "Configure" (Make sure you are on the page for the app, not the active directory) <img src="/static/images/azure/configure_click.png" style="width: 50%;display:block;"/>
 11. Scroll down to Client ID. Copy and paste the value into the form on the Datadog setup page <img src="/static/images/azure/client_id_form.png" style="width: 50%;display:block;display:block;"/>
 12. Scroll down to Keys and create a new key (1 or 2 years are both acceptable)
 	- Note: the client secret key will be shown after you save
@@ -105,7 +105,7 @@ After logging in, locate the settings page on the left side of the screen.
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses.
 
-Your tenant name is also available from the URL after navigating to the classic portal. It is the text in between the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
+Your tenant name is also available from the URL after navigating to the classic portal. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
 
 #### Unable to login
 If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screen shot.
