@@ -5,8 +5,8 @@ kind: integration
 sidebar:
   nav:
     - header: Azure integration
-    - text: Configure Monitoring
-      href: "#monitoring"
+    - text: Installation
+      href: "#installation"
     - text: Deploy agents
       href: "#agents"
     - text: Troubleshooting
@@ -22,8 +22,8 @@ Datadog's Azure integration currently monitors Virtual Machines, SQL Databases, 
 Datadog's agent can also be deployed on your Azure virtual machines.
 
 
-### Configure Azure Monitoring
-{: #monitoring}
+### Installation
+{: #installation}
 
 Integrating Datadog with Microsoft Azure is a two step process. The first step is creating a web application in your Active Directory and passing the correct credentials to Datadog, and the second step is giving this application read-access to any subscriptions you would like to monitor.
 
@@ -43,7 +43,7 @@ Integrating Datadog with Microsoft Azure is a two step process. The first step i
 7. Select “Web application and/or web api”
 8. Provide a sign-on URL and App ID URI
 	- These can be any value, they are not needed for authentication 
-	- i.e. http://mydatadogapp123.com	
+	- i.e. https://app.datadoghq.com	
 9. Click the check mark. You should be on a page that says "Your app has been added!"
 10. Click on "Configure" (Make sure this is configure for the app, not the active directory) <img src="/static/images/azure/configure_click.png" style="width: 50%;display:block;"/>
 11. Scroll down to Client ID. Copy and paste the value in the form on the Datadog setup page <img src="/static/images/azure/client_id_form.png" style="width: 50%;display:block;display:block;"/>
@@ -55,6 +55,7 @@ Integrating Datadog with Microsoft Azure is a two step process. The first step i
 16. Under Delegated Permissions, check off “Access Azure Service Management as organization users (preview)” <img src="/static/images/azure/app_permissions_dropdown.png" style="width: 50%;display:block;"/>
 17. Click "Save" at the bottom of the screen 
 18. Scroll back up to Keys, and copy and paste the generated Client Secret key in the form on the Datadog setup page <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
+19. Click "Update Configuration" to complete application creation process
 
 #### Giving Read Permissions to the Application
 
@@ -69,32 +70,18 @@ Integrating Datadog with Microsoft Azure is a two step process. The first step i
 9. Press OK
 10. Repeat this process for any other subscriptions you would like to monitor
 
-**Navigate back to the Datadog setup page, and click "Update Configuration" to complete the installation process**
-
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
-
-
 
 ![Azure default dashboard](/static/images/azure.png)
 
-Learn more about how to monitor Azure performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
-
-#### Enable diagnostics
-To collect advanced metrics for virtual machines, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
-![](/static/images/azure_diag_manual.png)
-
-After locating your VM:
-
-1. Click on the CPU percentage today panel to show metrics panel
-2. Click on Diagnostics
-3. Shift the switch to open
-4. Click OK to save your changes
-
-Datadog only requires Basic metrics, network and web metrics as well as .Net metrics to function correctly. Un-check logs collection could save you some storage space.
+Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
 ### Deploy agents
 {: #agents}
-You can either deploy agents manually by following the instructions <a href="/guides/azure/">here</a>.
+
+1. In the Azure Marketplace, find the Datadog Extension
+2. Use this api key: 0846b8170c3082e33773c413d3ab459e
+3. You can deploy agents manually by following the instructions <a href="/guides/azure/">here</a> 
 
 ### Troubleshooting
 {: #troubleshooting}
@@ -108,11 +95,23 @@ After logging in, locate the settings page on the left side of the screen.
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses.
 
 #### Unable to login
-If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attache screen shot.
+If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screen shot.
 
 #### No metrics are showing up
 Please make sure you have enabled diagnostics on your VMs. Diagnostics allows VMs to collect logging information which includes metrics for CPU, Network etc.
 
+##### Enable diagnostics
+To collect advanced metrics for virtual machines, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
+![](/static/images/azure_diag_manual.png)
+
+After locating your VM:
+
+1. Click on the CPU percentage today panel to show metrics panel
+2. Click on Diagnostics
+3. Shift the switch to open
+4. Click OK to save your changes
+
+Datadog only requires Basic metrics, network and web metrics as well as .Net metrics to function correctly. Un-check logs collection could save you some storage space.
 
 
 
