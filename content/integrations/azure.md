@@ -60,7 +60,7 @@ Integrating Datadog with Microsoft Azure is a two step process. The first step i
 16. Under Delegated Permissions, check off “Access Azure Service Management as organization users (preview)” <img src="/static/images/azure/app_permissions_dropdown.png" style="width: 50%;display:block;"/>
 17. Click "Save" at the bottom of the screen 
 18. Scroll back up to Keys, and copy and paste the generated Client Secret key in the form on the Datadog setup page <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
-19. Click "Update Configuration" to complete application creation process
+19. Click "Install Configuration" to complete application creation process
 
 #### Giving Read Permissions to the Application
 {: #installation2}
@@ -120,9 +120,8 @@ After locating your VM:
 
 1. Click on the CPU percentage today panel to show metrics panel
 2. Click on Diagnostics
-3. Shift the status to on
-4. Datadog only requires "Basic metrics", "Network and web metrics", and ".Net metrics" to function correctly. Un-checking logs collection could save you some storage space.
-5. Click OK to save your changes
+3. Shift the status to on (note: Datadog only requires "Basic metrics", "Network and web metrics", and ".Net metrics" to function correctly. Un-checking logs collection could save you some storage space)
+4. Click OK to save your changes
 
 
 
