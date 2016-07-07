@@ -120,9 +120,8 @@ After locating your VM:
 
 1. Click on the CPU percentage today panel to show metrics panel
 2. Click on Diagnostics
-3. Shift the status to on
-4. Datadog only requires "Basic metrics", "Network and web metrics", and ".Net metrics" to function correctly. Un-checking logs collection could save you some storage space.
-5. Click OK to save your changes
+3. Shift the status to on (note: Datadog only requires "Basic metrics", "Network and web metrics", and ".Net metrics" to function correctly. Un-checking logs collection could save you some storage space)
+4. Click OK to save your changes
 
 
 
