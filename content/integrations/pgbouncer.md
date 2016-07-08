@@ -12,6 +12,8 @@ Connect your PGBouncer to Datadog in order to:
 * Visualize your pools of connections.
 * Monitor the traffic between PostgreSQL and your applications.
 
+<%= insert_example_links%>
+
 ### Metrics
 
 <%= get_metrics_from_git() %>

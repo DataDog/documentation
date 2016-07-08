@@ -138,6 +138,14 @@ def serialize_github_metrics(items)
   end
 end
 
+def insert_example_links(integration: item[:integration_title], conf:  integration.downcase.tr(" ", "_"), check: integration.downcase.tr(" ", "_"), yaml_extension: "example", include_intro: true)
+  example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
+  yaml_example = conf!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/conf.d/" + conf + ".yaml."+yaml_extension+"'> "+ integration + " YAML example</a></li>" : ""
+  checks_file =  check!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/checks.d/" + check + ".py'>" + integration + " checks.d</a></li>" : ""
+
+  example_links += "<ul>" + yaml_example + checks_file + "</ul>\n"
+  return example_links
+end
 
 def get_metrics_from_git
   require 'octokit'

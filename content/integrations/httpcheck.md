@@ -34,6 +34,7 @@ Edit the `http_check.yaml` file in your agent's `conf.d` directory. The followin
 
 There are many other choices available in the example yaml file that deal with specific SSL options.
 
+<%= insert_example_links%>
 
 # Validation
 

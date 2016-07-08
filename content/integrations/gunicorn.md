@@ -5,6 +5,17 @@ kind: integration
 git_integration_title: gunicorn
 ---
 
+### Overview
+
+Capture Gunicorn metrics in Datadog to:
+
+* Visualize your web server performance
+* Correlate the performance of Gunicorn with the rest of your applications
+
+
+
+### Configuration
+
 To capture Gunicorn metrics you need to install the Datadog Agent.
 
 1. If you are using the Datadog Agent < 5.0.0, please look at the old documentation for more detailed instructions. The following instructions are for the Datadog Agent >= 5.0.0
@@ -32,6 +43,8 @@ Edit conf.d/gunicorn.yaml
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.
 
-## Metrics
+<%= insert_example_links%>
+
+### Metrics
 
 <%= get_metrics_from_git() %>

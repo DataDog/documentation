@@ -47,6 +47,7 @@ Get metrics from your app in real time to
             #   - optional_tag1
             #   - optional_tag2
 
+<%= insert_example_links%>
 
 # Validation
 

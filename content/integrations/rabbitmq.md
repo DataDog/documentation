@@ -12,12 +12,9 @@ Connect RabbitMQ to Datadog in order to:
   * Visualize RabbitMQ performance and utilization.
   * Correlate the performance of RabbitMQ with the rest of your applications.
 
-From the open-source Agent:
+<%= insert_example_links%>
 
-* [ RabbitMQ YAML example][1]
-* [ RabbitMQ checks.d][2]
-
-## Metrics
+### Metrics
 
 <%= get_metrics_from_git() %>
 
@@ -25,8 +22,6 @@ From the open-source Agent:
 
 By default, `queue` metrics are tagged by queue and `node` metrics are tagged by node. If you have a Datadog account you can see the integration installation instructions [here][3].
 
-   [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/rabbitmq.yaml.example
-   [2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/rabbitmq.py
    [3]: https://app.datadoghq.com/account/settings#integrations/rabbitmq
 
 

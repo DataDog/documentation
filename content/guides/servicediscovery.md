@@ -21,7 +21,8 @@ If no configuration template is defined in the store for an image, the Agent wil
 
 ## How to set it up
 
-To use Service Discovery, you simply need to to define the configuration templates for the images you want to monitor, in a key-value store on top of the Agent.
+
+To use Service Discovery, you simply need to define the configuration templates for the images you want to monitor, in a key-value store on top of the Agent.
 
 Here is the structure of a configuration template:
 
@@ -78,7 +79,13 @@ Available tags:
 
 example:
 
-    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] datadog/docker-dd-agent:kubernetes
+    docker run -d --name dd-agent \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd \
+     -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
+     -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
+     datadog/docker-dd-agent:kubernetes
 
 
 ### Example: setting up NGINX monitoring
@@ -165,6 +172,13 @@ To make configuration more precise we now use the complete image identifier in t
 In case you need to match different templates with containers running the same image, it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
+
+
+### Using configuration files instead of a configuration store
+
+If running a configuration store is not possible in your environment but shipping configuration files with the agent is, you can use the [conf.d/auto_conf folder](https://github.com/DataDog/dd-agent/tree/master/conf.d/auto_conf) to store configuration templates. The format is simple and looks like the typical YAML configuration file for checks. One additional field, `docker_images`, is required and identifies the container image(s) to which this configuration should be applied.
+Use existing files in this folder as an example.
+If you use this instead of a K/V store you still need to uncomment `service_discovery_backend: docker` in `datadog.conf`, but `sd_config_backend`, `sd_backend_host` and `sd_backend_port` must be omitted.
 
 
 ### Kubernetes users

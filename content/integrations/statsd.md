@@ -30,6 +30,8 @@ An example configuration can be found at [statsd.yaml.example](https://github.co
 
 **PORT**: The admin port of the StatsD server being monitored.
 
+<%= insert_example_links%>
+
 # Validation
 
 Execute the [info command](http://docs.datadoghq.com/guides/basic_agent_usage/) (`/etc/init.d/datadog-agent info` on *NIX) and verify that the integration check was successful.

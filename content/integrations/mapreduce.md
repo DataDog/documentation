@@ -44,6 +44,7 @@ Capture MapReduce metrics to:
 
 2.  Restart the Agent
 
+<%= insert_example_links(conf:"mapreduce", check:"mapreduce")%>
 
 # Validation
 

@@ -27,6 +27,7 @@ Capture Yarn metrics to:
 
 2.  Restart the Agent
 
+<%= insert_example_links(conf:"yarn", check:"yarn")%>
 
 
 # Validation
