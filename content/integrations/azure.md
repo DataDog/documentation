@@ -80,6 +80,7 @@ Integrating Datadog with Microsoft Azure is a three step process.
 8. Click Select
 9. Click OK
 10. Repeat this process for any other subscriptions you would like to monitor
+11. **Please note that Diagnostics must be enabled for ARM deployed VMs to collect metrics. <a href="#diagnostics">See the instructions below</a>**
 
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
 
@@ -113,20 +114,23 @@ If you have experienced error logging in while trying to install the integration
 #### No Metrics Are Showing Up
 Please ensure you completed <a href="#installation3">step three</a> of the installation process, which entails giving read permissions to the Azure application (created in <a href="#installation2">step two</a>) for the subscriptions you want to monitor. 
 
-For ARM deployed VMs, diagnostics must be enabled to collect metrics. See Enable Diagnostics below for instructions.
+For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See Enable Diagnostics below for instructions.
 
 #### Missing Metrics?
-Classicly deployed VMs must have diagnostics enabled to collect advanced metrics. Diagnostics allows VMs to collect logging information which includes metrics for CPU, Network, etc...
+For ARM virtual machines, ensure you have enabled diagnostics and selected the metrics you would like to collect using the instructions below. 
+
+For other missing metrics, please reach out to [support@datadoghq.com][3].  
 
 ##### Enable diagnostics
-To collect advanced metrics for virtual machines, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
+{: #diagnostics}
+Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc... Right now this is only supported by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
 ![](/static/images/azure_diag_manual.png)
 
 After locating your VM:
 
 1. Click on the CPU percentage today panel to show metrics panel
 2. Click on Diagnostics
-3. Shift the status to on (note: Datadog only requires "Basic metrics", "Network and web metrics", and ".Net metrics" to function correctly. Un-checking logs collection could save you some storage space)
+3. Shift the status to on and select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space)
 4. Click OK to save your changes
 
 
