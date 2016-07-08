@@ -122,15 +122,16 @@ Note: GovCloud does not support role based authentication.
 
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
-2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Note: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
-    * Create a role and allow Datadog to assume it (**Preferred Option** - not supported in GovCloud or China)
+2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Using role delegation is more secured as only our AWS account is authorized to assume the role you create.
+    **Note**: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
+    * **Preferred option:** Role-based authentication: create a role and allow Datadog to assume it (not supported in GovCloud or China)
         1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
         2.  From the selection, choose Role for Cross-Account Access.
         3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-        4.  For Account ID, enter ```464622532012```. Enter a unique password for External ID. You will use this again later in the Datadog tile. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+        4.  For Account ID, enter ```464622532012```. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
         5.  Select the policy you created above.
         6.  Review what you selected and click the **Create Role** button.
-    * Create a user which will have Secret and Access Key associated with it
+    * Access Key-based authentication: create a user which will have Secret and Access Key associated with it
         1.  Create a new user in the IAM Console. Name it anything you like.
         2.  Make sure you leave the **Generate an access key for each user** checked.
         3.  Click the link to **Show User Security Credentials**.
