@@ -173,6 +173,13 @@ In case you need to match different templates with containers running the same i
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
 
 
+### Using configuration files instead of a configuration store
+
+If running a configuration store is not possible in your environment but shipping configuration files with the agent is, you can use the [conf.d/auto_conf folder](https://github.com/DataDog/dd-agent/tree/master/conf.d/auto_conf) to store configuration templates. The format is simple and looks like the typical YAML configuration file for checks. One additional field, `docker_images`, is required and identifies the container image(s) to which this configuration should be applied.
+Use existing files in this folder as an example.
+If you use this instead of a K/V store you still need to uncomment `service_discovery_backend: docker` in `datadog.conf`, but `sd_config_backend`, `sd_backend_host` and `sd_backend_port` must be omitted.
+
+
 ### Kubernetes users
 
 Service discovery is particularly useful for container platforms like Kubernetes where by default the user doesn't choose the node on which a container will be scheduled. With service discovery you can simply deploy the Agent container with a DaemonSet and declare your configuration templates for all the containers you plan to launch in the same cluster. To deploy the Agent, simply follow the instruction from the install page for Kubernetes.
