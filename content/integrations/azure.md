@@ -1,5 +1,5 @@
 ---
-title: Datadog - Microsoft Azure Integration
+title: Datadog-Microsoft Azure Integration
 integration_title: Microsoft Azure
 kind: integration
 sidebar:
@@ -22,9 +22,19 @@ sidebar:
 
 ### Overview
 
-Datadog's Azure integration currently monitors Virtual Machines, SQL Databases, and App Services. For any other service, please reach out to [support@datadoghq.com][3].
-Datadog's agent can also be deployed on your Azure virtual machines.
+Connect to Microsft Azure in order to:
 
+* Get metrics from Azure VMs with or without installing the Agent
+* Tag your Azure VMs with Azure-specific information (e.g. location)
+* Get metrics from Azure SQL Databases through the Azure SQL Database API
+* Get metrics from Azure Mobile Apps and Web Apps through the Azure Insights API
+
+Related integrations include:
+
+| [App Service](/integrations/azure_app_services) | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
+| [SQL Database](/integrations/azure_sql_database) | highly scalable relational database in the cloud |
+| [Virtual Machine](/integrations/azure_vm) | virtual machine management service |
+{:.table}
 
 ### Installation
 {: #installation}
@@ -94,6 +104,15 @@ Learn more about how to monitor Azure VM performance metrics with [our series of
 
 1. Follow the steps in the [Azure integrations][1] tile
 2. Manually deploy agents by following the instructions <a href="/guides/azure/">here</a> 
+
+### Metrics
+
+View the specific metrics we collect for each Azure service integration:
+
+* [App Service](/integrations/azure_app_services)
+* [SQL Database](/integrations/azure_sql_database)
+* [Virtual Machine](/integrations/azure_vm)
+
 
 ### Troubleshooting
 {: #troubleshooting}
