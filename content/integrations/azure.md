@@ -13,6 +13,8 @@ sidebar:
       href: "#installation2"
     - text: Deploy agents
       href: "#agents"
+    - text: Metrics
+      href: "#metrics"
     - text: Troubleshooting
       href: "#troubleshooting"
     - header: Integrations
