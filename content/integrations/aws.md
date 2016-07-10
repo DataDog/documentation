@@ -126,7 +126,7 @@ Note: GovCloud does not support role based authentication.
         1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
         2.  From the selection, choose Role for Cross-Account Access.
         3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-        4.  For Account ID, enter ```464622532012```. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+        4.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
         5.  Select the policy you created above.
         6.  Review what you selected and click the **Create Role** button.
     * Access Key-based authentication: create a user which will have Secret and Access Key associated with it
