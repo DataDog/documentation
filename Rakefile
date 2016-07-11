@@ -6,7 +6,7 @@ CLEAN.include(%w(output tmp code_test tested.code github_metrics))
 CODE_SNIPPETS = 'code_snippets'
 CODE_TEST = 'code_test'
 
-desc 'Check site links'
+desc 'Perform various checks'
 task :checks do
   sh 'bundle exec nanoc check ilinks stale no_api_keys'
 end
