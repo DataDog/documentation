@@ -11,31 +11,31 @@ doclevel: complete
 <!-- ### Overview
 {:#int-overview}
 
-Connect ElasticSearch to Datadog in order to:
+Connect Elasticsearch to Datadog in order to:
 
-- Visualize ElasticSearch performance.
-- Correlate ElasticSearch performance with the rest of your applications. -->
+- Visualize Elasticsearch performance.
+- Correlate Elasticsearch performance with the rest of your applications. -->
 
 ### 概要
 {:#int-overview}
 
-次の目的の為に、ElasticSearchをDatadogと連携します:
+次の目的の為に、ElasticsearchをDatadogと連携します:
 
-* ElasticSearchのパフォーマンス情報を可視化する
-* ElasticSearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
+* Elasticsearchのパフォーマンス情報を可視化する
+* Elasticsearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
 
 <!-- From the open-source Agent:
 
-* [ElasticSearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
-* [ElasticSearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py) -->
+* [Elasticsearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
+* [Elasticsearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py) -->
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [ElasticSearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
-* [ElasticSearchインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
+* [Elasticsearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
+* [Elasticsearchインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
 
 
-<!-- The following metrics are collected by default with the ElasticSearch integration:
+<!-- The following metrics are collected by default with the Elasticsearch integration:
 
     elasticsearch.active_primary_shards
     elasticsearch.active_shards
@@ -128,7 +128,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
     elasticsearch.unassigned_shards -->
 
 
-ElasticSearchインテグレーションがデフォルトで取得しているメトリクス:
+Elasticsearchインテグレーションがデフォルトで取得しているメトリクス:
 
     elasticsearch.active_primary_shards
     elasticsearch.active_shards

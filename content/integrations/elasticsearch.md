@@ -1,6 +1,6 @@
 ---
 title: Datadog-Elasticsearch Integration
-integration_title: ElasticSearch
+integration_title: Elasticsearch
 kind: integration
 newhlevel: true
 git_integration_title: elasticsearch
@@ -8,10 +8,10 @@ git_integration_title: elasticsearch
 
 # Overview
 
-Connect ElasticSearch to Datadog in order to:
+Connect Elasticsearch to Datadog in order to:
 
-* Visualize ElasticSearch performance.
-* Correlate ElasticSearch performance with the rest of your applications.
+* Visualize Elasticsearch performance.
+* Correlate Elasticsearch performance with the rest of your applications.
 
 
 
