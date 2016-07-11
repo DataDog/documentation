@@ -708,8 +708,11 @@ kind: documentation
           'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
           <%= argument 'tags', "A comma separated list indicating
-          what tags, if any, should be used to filter the list of monitors
-          by scope",
+          what scope tags (tags contained inside the monitor query), if any,
+          should be used to filter the list of monitors",
+          :default => "None" %>
+          <%= argument 'monitor_tags', "A comma separated list indicating
+          what monitor tags if any, should be used to filter the list of monitors",
           :default => "None" %>
         </ul>
       </div>
