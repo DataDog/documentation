@@ -3,6 +3,7 @@ title: Datadog-Kubernetes Integration
 integration_title: Kubernetes
 kind: integration
 git_integration_title: kubernetes
+newhlevel: true
 ---
 
 # Overview
@@ -49,6 +50,10 @@ If the agent is deployed you will see similar output to the text below, where de
     NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
     dd-agent   3         3         <none>          11h
 
-### Metrics
+# Limitations
+
+Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker/).
+
+# Metrics
 
 <%= get_metrics_from_git()%>
