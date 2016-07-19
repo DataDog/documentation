@@ -13,7 +13,7 @@ Connect your PowerDNS Recursor to Datadog to:
 
 * Visualize its performance
 * Understand query latency
-* Get alerted when something fails or when you're under attack.
+* Get alerted when something fails or when you're under attack
 
 # Configuration
 
