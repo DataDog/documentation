@@ -31,7 +31,7 @@ Function               | Category      | Description
 `top()`                | Rank          | select the top series responsive to a given query, according to some ranking method; see the "Top functions" section below for more details
 `top_offset()`         | Rank          | similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts. For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
 `robust_trend()`       | Filter        | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
-`trend_line()`         | Filter        | fit a ordinary least squares regression line through the metric values
+`trend_line()`         | Filter        | fit an ordinary least squares regression line through the metric values
 `piecewise_constant()` | Filter        | approximate the metric with piecewise function composed of constant-valued segments
 `outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
 {:.table}
@@ -64,6 +64,6 @@ For example, ```bottom10_min()``` retrieves lowest-valued 10 series using the â€
 
 **Robust regression**
 
-The most common type of regression -- ordinary least squares (OLS) regression -- can be heavily influenced by small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the plot below. The original metric is shown as a solid grey line. The orange dashed line is an OLS regression line, and the purple dotted line is a robust regression line. The one short-lived spike in the metric leads to the OLS regression line trending upward, but the robust regression line ignores the spike and does a better job fitting the overall flat trend in the metric.
+The most common type of regression -- ordinary least squares (OLS) regression -- can be heavily influenced by small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the plot below. The original metric is shown as a solid blue line. The purple dashed line is an OLS regression line, and the yellow dashed line is a robust regression line. The one short-lived spike in the metric leads to the OLS regression line trending upward, but the robust regression line ignores the spike and does a better job fitting the overall trend in the metric.
 
 <img src="/static/images/robust-trend.png" style="width:700px; border:1px solid #777777"/>
