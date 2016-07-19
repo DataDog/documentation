@@ -119,7 +119,7 @@ When switching to the JSON view, the query will look like this:
 
 For more about using the JSON view, scroll to the bottom and click the Learn about the JSON tab link.
 
-### 4) Apply more advanced functions
+### 5) Apply more advanced functions
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
 
@@ -130,16 +130,16 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 </div>
 
-### 5) Overlay events for additional context
+### 6) Overlay events for additional context
 
 You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
 
 
-### 6) Create a title
+### 7) Create a title
 
 If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
-### 7) Save
+### 8) Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 

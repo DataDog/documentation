@@ -1,76 +1,69 @@
 
-| Function | Description |
-|----------|-------------|
-|cumsum()| cumulative sum over visible time window |
-| dt() | time delta between points |
-| diff() | value delta between points |
-| derivative() | 1st order derivative, diff / dt |
-| rate() | 1st order derivate that skips non-monotonically increasing values |
-| derived() | synonym for derivative |
-| per_second() | synonym for rate |
-| per_minute() | 60 * rate |
-| per_hour() | 3600 * rate |
-| ewma_3() | Exponentially Weighted Moving Average with a span of 3 |
-| ewma_5() | EWMA with a span of 5 |
-| ewma_10() | EWMA with a span of 10 |
-| ewma_20() | EWMA with a span of 20 |
-| median_3() | Median filter, useful for reducing noise, with a span of 3 |
-| median_5() | Median with a span of 5 |
-| median_7() | Median with a span of 7 |
-| median_9() | Median with a span of 9 |
-| abs() | Absolute value |
-| log10() | Base-10 logarithm |
-| log2() | Base-2 logarithm |
-| hour_before() | Metric values from one hour ago |
-| day_before() | Metric values from one day ago |
-| week_before() | Metric values from one week ago |
-| month_before() | Metric values from one month ago |
-| top() | Select the top series responsive to a given query, according to some ranking method.  Takes four parameters shown below.
-| top_offset() | Similar to <code>top()</code>, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric. |
+Function               | Category      | Description
+-----------------------|---------------|-------------------
+`abs()`                | Arithmetic    | absolute value
+`log2()`               | Arithmetic    | base-2 logarithm
+`log10()`              | Arithmetic    | base-10 logarithm
+`cumsum()`             | Arithmetic    | cumulative sum over visible time window
+`.fill()`              | Interpolation | choose how to interpolate missing values
+`hour_before()`        | Timeshift     | metric values from one hour ago
+`day_before()`         | Timeshift     | metric values from one day ago
+`week_before()`        | Timeshift     | metric values from one week ago
+`month_before()`       | Timeshift     | metric values from one month ago
+`per_second()`         | Rate          | the rate at which the metric changes per second
+`per_minute()`         | Rate          | <code>per_second()</code> * 60
+`per_hour()`           | Rate          | <code>per_second()</code> * 3600
+`dt()`                 | Rate          | time delta between points
+`diff()`               | Rate          | value delta between points
+`derivative()`         | Rate          | 1st order derivative; <code>diff()</code> / <code>dt()</code>
+`integral()`           | Rate          | cumulative sum of point-wise (time delta) * (value delta) over points in the visible time window
+`ewma_3()`             | Smoothing     | exponentially weighted moving average with a span of 3
+`ewma_5()`             | Smoothing     | EWMA with a span of 5
+`ewma_10()`            | Smoothing     | EWMA with a span of 10
+`ewma_20()`            | Smoothing     | EWMA with a span of 20
+`median_3()`           | Smoothing     | rolling median with a span of 3
+`median_5()`           | Smoothing     | rolling median with a span of 5
+`median_7()`           | Smoothing     | rolling median with a span of 7
+`median_9()`           | Smoothing     | rolling median with a span of 9
+`.rollup()`            | Rollup        | override default time aggregation type and time period; see the "Rollup" section below for details
+`count_nonzero()`      | Count         | count all the non-zero values
+`count_not_null()`     | Count         | count all the non-null values
+`top()`                | Rank          | select the top series responsive to a given query, according to some ranking method; see the "Top functions" section below for more details
+`top_offset()`         | Rank          | similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts. For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
+`robust_trend()`       | Filter        | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
+`trend_line()`         | Filter        | fit a ordinary least squares regression line through the metric values
+`piecewise_constant()` | Filter        | approximate the metric with piecewise function composed of constant-valued segments
+`outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
 {:.table}
 
-**Top function parameters**
+**`.as_count()` & `.as_rate()`**
+
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see (our blog post)
+[https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/].
+
+**Rollup**
+
+`.rollup()` is recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
+
+The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we will return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+
+We strongly recommend not using `.rollup()` and `.as_count()` within the same query.
+
+**Top functions**
 
 * a metric query string with some grouping, e.g. ```avg:system.cpu.idle{*} by {host}```
 * the number of series to be displayed, as an integer.
 * one of ```'max'```, ```'min'```, ```'last'```, ```'l2norm'```, or ```'area'```.  ```'area'``` is the signed area under the curve being graphed, which can be negative.  ```'l2norm'``` uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.
 * either ```'desc'``` (rank the results in descending order) or ```'asc'``` (ascending order).
 
-The ```top()``` method also has the following convenience functions, all of which take a single series list as input:
+The ```top()``` method also has convenience functions of the following form, all of which take a single series list as input:
 
-top5, top10, top15, top20
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'mean' metric.
+```[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()```
 
-top5_max, top10_max, top15_max, top20_max
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'max' metric.
+For example, ```bottom10_min()``` retrieves lowest-valued 10 series using the ‘min’ metric.
 
-top5_min, top10_min, top15_min, top20_min
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'min' metric.
+**Robust regression**
 
-top5_last, top10_last, top15_last, top20_last
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'last' metric.
+The most common type of regression -- ordinary least squares (OLS) regression -- can be heavily influenced by small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the plot below. The original metric is shown as a solid grey line. The orange dashed line is an OLS regression line, and the purple dotted line is a robust regression line. The one short-lived spike in the metric leads to the OLS regression line trending upward, but the robust regression line ignores the spike and does a better job fitting the overall flat trend in the metric.
 
-top5_area, top10_area, top15_area, top20_area
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'area' metric.
-
-top5_l2norm, top10_l2norm, top15_l2norm, top20_l2norm
-: Retrieves top-valued \[5, 10, 15, 20] series using the 'l2norm' metric.
-
-bottom5, bottom10, bottom15, bottom20
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'mean' metric.
-
-bottom5_max, bottom10_max, bottom15_max, bottom20_max
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'max' metric.
-
-bottom5_min, bottom10_min, bottom15_min, bottom20_min
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'min' metric.
-
-bottom5_last, bottom10_last, bottom15_last, bottom20_last
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'last' metric.
-
-bottom5_area, bottom10_area, bottom15_area, bottom20_area
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'area' metric.
-
-bottom5_l2norm, bottom10_l2norm, bottom15_l2norm, bottom20_l2norm
-: Retrieves lowest-valued \[5, 10, 15, 20] series using the 'l2norm' metric.
-
+<img src="/static/images/robust-trend.png" style="width:700px; border:1px solid #777777"/>
