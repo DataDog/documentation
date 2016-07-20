@@ -1,8 +1,67 @@
+require 'nokogiri'
 
 check :no_api_keys do
   self.output_filenames.each do |fn|
     if match=File.read(fn).force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/\b([0-9a-f]){32}(?<!9775a026f1ca7d1c6c5af9d94d9595a4)(?![0-9a-f])/)
       self.add_issue("API Key in here!! - #{match}\nPlease use 9775a026f1ca7d1c6c5af9d94d9595a4 as the API Key", :subject => fn)
+    end
+  end
+end
+
+check :integration_format do
+  puts ""
+  overviewimage = Array.new
+  headings = Array.new
+  self.output_filenames.each do |fn|
+    missingfiles =""
+    if fn.include? "output/integration"
+      doc = File.open(fn) { |f| Nokogiri::HTML(f)}
+      integrationlocation = fn.sub('output', 'content').sub('/index.html', '')
+      pagetitle = doc.xpath("//h1[@id='pagetitle']/text()")
+      newhlevel = doc.xpath("//div[@id='pagecontent']")
+
+      if newhlevel.length > 0 
+        #############
+        # New hlevel
+        #############
+
+        # Does the document have the right headings?
+        headings = doc.xpath("//div[@id='pagecontent']/h1").collect {|node| node.text.strip}
+        if headings.include? 'Overview'
+          overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+          if overviewimage.count == 0
+            missingfiles += "\n  - Missing Overview Image"
+          end
+          if (headings & ['Configuration', 'Installation']).empty?
+            missingfiles += "\n  - Missing Config or Installation section"
+          end
+        else
+          missingfiles += "\n  - Not Updated to New Integration Format"
+        end
+      else
+        #############
+        # Old hlevel
+        #############
+
+        missingfiles += "\n  - Using old hlevel"
+        headings = doc.xpath("//div[@id='pagecontent']/h3").collect {|node| node.text.strip}
+        if headings.include? 'Overview'
+          overviewimage = doc.xpath("//img[preceding::h3[contains(text(), 'Overview')] and following::h3[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+          if overviewimage.count == 0
+            missingfiles += "\n  - Missing Overview Image"
+          end
+          if (headings & ['Configuration', 'Installation']).empty?
+            missingfiles += "\n  - Missing Config or Installation section"
+          end
+        else
+          missingfiles += "\n  - Not Updated to New Integration Format"
+        end
+      end
+
+      if missingfiles.length > 0
+        puts "Format Issue: #{pagetitle} (#{integrationlocation}) #{missingfiles}"
+      end
+      
     end
   end
 end
