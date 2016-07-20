@@ -19,6 +19,14 @@ brew install openssl
 brew link openssl --force
 ```
 
+Integrations that have metrics will require your Github Personal Token. For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). After you've generated a token, add the following line to the `.bash_profile` in your home directory:
+
+```
+export github_personal_token=[paste access token here]
+```
+
+You should then run `source ~/.bash_profile` to reload the settings.
+
 # Working on Docs
 
 ```
@@ -59,6 +67,8 @@ rake test
 These keys should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
 
 **If there are errors, please don't merge.**
+
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the Github personal access token information in the setup instructions above.
 
 Internal Datadog folks: Within 5 minutes of merging to master, it will deploy automatically. You can see the status in #documentation.
 
@@ -117,7 +127,7 @@ The validation section should include instructions on how to validate that the i
 
 If the metrics are listed in the integration under dogweb, add an attribute to the frontmatter: `git_integration_title: integration_name` replacing the integration name with the name of the folder for the integration in the dogweb repo.
 
-Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo.
+Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
 
 ### Events
 **Optional**
