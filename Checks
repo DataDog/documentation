@@ -28,12 +28,13 @@ check :integration_format do
         # Does the document have the right headings?
         headings = doc.xpath("//div[@id='pagecontent']/h1").collect {|node| node.text.strip}
         if headings.include? 'Overview'
-          overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
-          if overviewimage.count == 0
-            missingfiles += "\n  - Missing Overview Image"
-          end
           if (headings & ['Configuration', 'Installation']).empty?
             missingfiles += "\n  - Missing Config or Installation section"
+          else
+            overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+            if overviewimage.count == 0
+              missingfiles += "\n  - Missing Overview Image"
+            end
           end
         else
           missingfiles += "\n  - Not Updated to New Integration Format"
@@ -46,12 +47,13 @@ check :integration_format do
         missingfiles += "\n  - Using old hlevel"
         headings = doc.xpath("//div[@id='pagecontent']/h3").collect {|node| node.text.strip}
         if headings.include? 'Overview'
-          overviewimage = doc.xpath("//img[preceding::h3[contains(text(), 'Overview')] and following::h3[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
-          if overviewimage.count == 0
-            missingfiles += "\n  - Missing Overview Image"
-          end
           if (headings & ['Configuration', 'Installation']).empty?
             missingfiles += "\n  - Missing Config or Installation section"
+          else
+            overviewimage = doc.xpath("//img[preceding::h3[contains(text(), 'Overview')] and following::h3[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+            if overviewimage.count == 0
+              missingfiles += "\n  - Missing Overview Image"
+            end
           end
         else
           missingfiles += "\n  - Not Updated to New Integration Format"
