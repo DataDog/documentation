@@ -12,7 +12,7 @@ There are four primary ways to assign tags: inherited from the integration, in t
 
 ### Inheriting tags from an integration
 
-The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, Docker labels, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog. 
+The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, Docker labels, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
 
 The following integration sources create tags automatically in Datadog:
 
@@ -27,10 +27,10 @@ The following integration sources create tags automatically in Datadog:
 | CouchBase | CouchBase Tags,  Instance Name |
 | Docker | Docker Container and Image Name, Container Command, Container Labels |
 | Dyn | Zone, Record Type |
-| ElasticSearch | Host Name, Port Number  |
+| Elasticsearch | Host Name, Port Number  |
 | Etcd | State Leader or Follower |
 | Fluentd | Host Name, Port Number |
-| Google App Engine | Project Name, Version ID, Task Queue | 
+| Google App Engine | Project Name, Version ID, Task Queue |
 | Google Cloud Platform | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name |
 | Go Expvar | Expvar Path |
 | Gunicorn | State Idle or Working, App Name |
@@ -78,7 +78,7 @@ or
       - secondtag
       - thirdtag
 
-You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid. 
+You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid.
 
 Each tag can be anything you like but you will have the best success with tagging if your tags are key:value pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
 

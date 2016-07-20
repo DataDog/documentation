@@ -16,6 +16,8 @@ Connect Honeybadger to Datadog to:
 * Discuss errors with your team
 * Be super awesome
 
+![Honeybadger Event](/static/images/honeybadgerevent.png)
+
 # Installation
 
 To capture errors from Honeybadger:

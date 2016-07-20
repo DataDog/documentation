@@ -14,7 +14,7 @@ Get metrics from your app in real time to
 
   * Visualize performance metrics
 
-![spark dashboard](/static/images/sparkdashboard.png)
+![spark graph](/static/images/sparkgraph.png)
 
 # Configuration
 
