@@ -30,9 +30,9 @@ Function               | Category      | Description
 `count_not_null()`     | Count         | count all the non-null values
 `top()`                | Rank          | select the top series responsive to a given query, according to some ranking method; see the "Top functions" section below for more details
 `top_offset()`         | Rank          | similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts. For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
-`robust_trend()`       | Filter        | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
-`trend_line()`         | Filter        | fit an ordinary least squares regression line through the metric values
-`piecewise_constant()` | Filter        | approximate the metric with piecewise function composed of constant-valued segments
+`robust_trend()`       | Regression    | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
+`trend_line()`         | Regression    | fit an ordinary least squares regression line through the metric values
+`piecewise_constant()` | Regression    | approximate the metric with a piecewise function composed of constant-valued segments
 `outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
 {:.table}
 
