@@ -6,7 +6,6 @@ this layout provides a sidebar and main column.
 <html lang="en">
   <%= render "_head" %>
   <body>
-
     <%= render "_header" %>
     <div class="container">
       <div class="row">
@@ -22,15 +21,7 @@ this layout provides a sidebar and main column.
               </form>
             </li>
             <% end %>
-            <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-              <% @item[:sidebar][:nav].each do |i| %>
-                <% if i[:header] %>
-                  <li class="nav-header"><%= i[:header] %></li>
-                <% else %>
-                  <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
-                <% end %>
-              <% end %>
-            <% end %>
+            <%=show_table_of_contents%>
               <li class="nav-header"><%= @item["menu_guides"] %> </li>
               <% this_guide_items = @item["language"] != "ja" ? $guide_items : $ja_guide_items %>
             <% this_guide_items.each do |i| %>
