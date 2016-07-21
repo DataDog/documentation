@@ -13,7 +13,7 @@ Azure App Service is a platform-as-a-service that runs web, mobile, API and busi
 Get metrics from Azure App Service to:
 
 * Visualize your app performance
-* Correlate the performance of your Azure Apps with the rest of you apps
+* Correlate the performance of your Azure Apps with the rest of your apps
 
 # Installation
 
