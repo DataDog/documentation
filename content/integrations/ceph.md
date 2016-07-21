@@ -41,3 +41,6 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
               - Collected 19 metrics, 0 events & 2 service checks
 
 
+# Metrics
+
+<%= get_metrics_from_git() %>
