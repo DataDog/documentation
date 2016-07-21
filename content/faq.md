@@ -441,21 +441,15 @@ The metric explorer just does one metric per graph, but you can see a stacked CP
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>
 
-<h4>Is there a way to share graphs?</h4>
-<p>
+#### Is there a way to share graphs?
+{: #share-graphs}
+
 There are two ways to share a graph or screenboard
-<ul>
-<li>In a time board, pick a graph on a dashboard,
-click on the pencil to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
-</li>
-<li>
-In a custom screenboard, the middle button in the upper right will generate a URL which gives
-live and read-only access to just the contents of that screenboard.
-</li>
-</ul>
-</p>
 
 <h4>How do I track cron jobs?</h4>
+* In a time board, pick a graph on a dashboard and click on the pencil to edit it. Under step 2, "Choose metrics and events," you’ll find the “share” tab that will generate an IFRAME of just that graph.
+* In a custom screenboard, click the settings cog in the upper right of the screen, then click the "Generate public URL" option. This will create a URL which gives live and read-only access to just the contents of that screenboard.
+
 
 Often, you set cron jobs that trigger some meaningful script that you want to monitor and
 correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
