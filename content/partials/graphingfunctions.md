@@ -5,6 +5,7 @@ Function               | Category      | Description
 `log2()`               | Arithmetic    | base-2 logarithm
 `log10()`              | Arithmetic    | base-10 logarithm
 `cumsum()`             | Arithmetic    | cumulative sum over visible time window
+`integral()`           | Arithmetic    | cumulative sum of ([time delta] x [value delta]) over all consecutive pairs of points in the visible time window
 `.fill()`              | Interpolation | choose how to interpolate missing values
 `hour_before()`        | Timeshift     | metric values from one hour ago
 `day_before()`         | Timeshift     | metric values from one day ago
@@ -16,7 +17,6 @@ Function               | Category      | Description
 `dt()`                 | Rate          | time delta between points
 `diff()`               | Rate          | value delta between points
 `derivative()`         | Rate          | 1st order derivative; <code>diff()</code> / <code>dt()</code>
-`integral()`           | Rate          | cumulative sum of point-wise (time delta) * (value delta) over points in the visible time window
 `ewma_3()`             | Smoothing     | exponentially weighted moving average with a span of 3
 `ewma_5()`             | Smoothing     | EWMA with a span of 5
 `ewma_10()`            | Smoothing     | EWMA with a span of 10
