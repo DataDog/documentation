@@ -1,31 +1,7 @@
 ---
 title: Frequently Asked Questions
 kind: documentation
-sidebar:
-  nav:
-    - header: FAQ Topics
-    - text: Agent
-      href: "/faq/#agent"
-    - text: Alerts
-      href: "/faq/#alerts"
-    - text: API
-      href: "/faq/#api"
-    - text: Architecture
-      href: "/faq/#architecture"
-    - text: AWS
-      href: "/faq/#aws"
-    - text: Billing
-      href: "/faq/#billing"
-    - text: Graphing
-      href: "/faq/#graph"
-    - text: Integrations
-      href: "/faq/#integrations"
-    - text: Metrics
-      href: "/faq/#metrics"
-    - text: Events
-      href: "/faq/#events"
-    - text: Other
-      href: "/faq/#other"
+autotocdepth: 1
 ---
 
 <!--
