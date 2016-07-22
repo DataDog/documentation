@@ -3,13 +3,6 @@ title: Anomaly Detection (BETA)
 kind: guide
 listorder: 16
 beta: true
-sidebar:
-  nav:
-    - header: Anomaly Detection
-    - text: Visualize Anomalies in Dashboards
-      href: "#dashboards"
-    - text: Alert on Anomalies
-      href: "#alerts"
 ---
 
 
