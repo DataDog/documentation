@@ -70,7 +70,7 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
 Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `tag_by`, `constant_tags` and `tag_queries`.
 
-`host` is the optional target of the WMI query, `localhost` is assumed by default if you set this option, make sure that Remote Management is enabled on the target host [see here](https://technet.microsoft.com/en-us/library/Hh921475.aspx) for more information.
+`host` is the optional target of the WMI query, `localhost` is assumed by default. If you set this option, make sure that Remote Management is enabled on the target host [see here](https://technet.microsoft.com/en-us/library/Hh921475.aspx) for more information.
 
 `class` is the name of the WMI class, for example `Win32_OperatingSystem` or `Win32_PerfFormattedData_PerfProc_Process`. You can find many of the standard class names on the [MSDN docs](http://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx).
 
@@ -79,7 +79,7 @@ The `Win32_FormattedData_*` classes provide many useful performance counters by 
 `namespace` is the optionnal WMI namespace to connect to (default to `cimv2`). 
 
 `provider` is the optional WMI provider (default to `32` on Datadog Agent 32-bit or `64`). It is used to request WMI data from the non-default provider. Available options are: `32` or `64`.
-For more information: [https://msdn.microsoft.com/en-us/library/aa393067.aspx](https://msdn.microsoft.com/en-us/library/aa393067.aspx)
+See [MSDN](https://msdn.microsoft.com/en-us/library/aa393067.aspx) for more information.
 
 `metrics` is a list of metrics you want to capture, with each item in the
 list being a set of [WMI property name, metric name, metric type].
