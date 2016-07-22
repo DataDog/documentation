@@ -68,18 +68,9 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
 ## Configuration Options
 
-Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `tag_by`, `constant_tags` and `tag_queries`.
+Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` and `tag_queries`.
 
-`host` is the optional target of the WMI query, `localhost` is assumed by default. If you set this option, make sure that Remote Management is enabled on the target host [see here](https://technet.microsoft.com/en-us/library/Hh921475.aspx) for more information.
-
-`class` is the name of the WMI class, for example `Win32_OperatingSystem` or `Win32_PerfFormattedData_PerfProc_Process`. You can find many of the standard class names on the [MSDN docs](http://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx).
-
-The `Win32_FormattedData_*` classes provide many useful performance counters by default.
-
-`namespace` is the optionnal WMI namespace to connect to (default to `cimv2`). 
-
-`provider` is the optional WMI provider (default to `32` on Datadog Agent 32-bit or `64`). It is used to request WMI data from the non-default provider. Available options are: `32` or `64`.
-See [MSDN](https://msdn.microsoft.com/en-us/library/aa393067.aspx) for more information.
+`class` is the name of the WMI class, for example `Win32_OperatingSystem` or `Win32_PerfFormattedData_PerfProc_Process`. You can find many of the standard class names on the [MSDN docs](http://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx). The `Win32_FormattedData_*` classes provide many useful performance counters by default.
 
 `metrics` is a list of metrics you want to capture, with each item in the
 list being a set of [WMI property name, metric name, metric type].
@@ -92,9 +83,14 @@ list being a set of [WMI property name, metric name, metric type].
 
 - The metric type is from the standard choices for all agent checks, such as gauge, rate, histogram or counter.
 
+`host` is the optional target of the WMI query, `localhost` is assumed by default. If you set this option, make sure that Remote Management is enabled on the target host [see here](https://technet.microsoft.com/en-us/library/Hh921475.aspx) for more information.
+
+`namespace` is the optionnal WMI namespace to connect to (default to `cimv2`). 
+
 `filters` is a list of filters on the WMI query you may want. For example, for a process-based WMI class you may want metrics for only certain processes running on your machine, so you could add a filter for each process name. You can also use the '%' character as a wildcard.
 
-See below for examples.
+`provider` is the optional WMI provider (default to `32` on Datadog Agent 32-bit or `64`). It is used to request WMI data from the non-default provider. Available options are: `32` or `64`.
+See [MSDN](https://msdn.microsoft.com/en-us/library/aa393067.aspx) for more information.
 
 `tag_by` optionally lets you tag each metric with a property from the WMI class you're using. This is only useful when you will have multiple values for your WMI query. The examples below show how you can tag your process metrics with the process name (giving a tag of "name:app_name").
 
