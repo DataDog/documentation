@@ -306,6 +306,29 @@ kind: documentation
       </div>
     </div>
 
+    <div class="int-anchor" id="events-delete"></div><a href="#events-delete"><h4>Delete an Event</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to delete an event.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/events/:event_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-events-delete.py" %>
+        <%= snippet_code_block "api-events-delete.sh" %>
+        <%= snippet_code_block "api-events-delete.rb" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-events-delete.py" %>
+        <%= snippet_result_code_block "api-events-delete.sh" %>
+        <%= snippet_result_code_block "api-events-delete.rb" %>
+      </div>
+    </div>
+
     <div class="int-anchor" id="events-get-all"></div><a href="#events-get-all"><h4>Query the Event Stream</h4></a>
     <div class="row">
       <%= left_side_div %>
