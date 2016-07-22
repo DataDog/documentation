@@ -38,6 +38,7 @@ Related integrations include:
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
+| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
 {:.table}
@@ -56,7 +57,6 @@ There are a number of other AWS services that are also available in Datadog but 
 | Lambda |
 | MachineLearning |
 | OpsWorks |
-| Route53 |
 | S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
