@@ -14,13 +14,13 @@ def collect_video_items
 end
 
 def collect_integration_items
-  integrations = @items.select { |item| item[:kind] == 'integration' && !(item.identifier.match('/ja/')) }
+  integrations = @items.select { |item| item[:kind] == 'integration' && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   integrations.sort_by { |i| i[:integration_title].downcase }
   # $all_itegration_items = integrations
 end
 
 def collect_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && !(item.identifier.match('/ja/')) }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   guides.sort_by { |item| item[:listorder] }
 end
 
@@ -39,12 +39,12 @@ def collect_ja_integration_items
 end
 
 def collect_ja_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
   guides.sort_by { |item| item[:listorder] }
 end
 
 def ja_guide_items_yet
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == nil }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == nil }
   guides_translated = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
 
   guides_translated.each do |jp_content|
