@@ -62,6 +62,7 @@ end
 
 def show_autotoc
   doc = Nokogiri::HTML(@item.compiled_content)
+  maxdepth = @item.attributes.include?(:autotocdepth) ? @item[:autotocdepth]:5
   headers = doc.css("h1, h2, h3, h4, h5, h6")
   if headers.length > 0
     toplevel = headers.min {|a, b| a.name[-1]<=>b.name[-1]}.name[-1].to_i
@@ -70,20 +71,22 @@ def show_autotoc
     toc = ""
     toc+= "<li class='nav-header'>Table of Contents</li>"
     headers.each do |header|
-      style=""
-      case header[:level]
-      when 1
+      if header[:level] <= maxdepth
         style=""
-      when 2
-        style="padding: 5px 25px;"
-      when 3
-        style="padding: 3px 35px;font-size:13px;"
-      when 4
-        style="padding: 2px 45px;font-size:12px;"
-      when 5
-        style="padding: 1px 55px;font-size:10px;"
+        case header[:level]
+        when 1
+          style=""
+        when 2
+          style="padding: 5px 25px;"
+        when 3
+          style="padding: 3px 35px;font-size:13px;"
+        when 4
+          style="padding: 2px 45px;font-size:12px;"
+        when 5
+          style="padding: 1px 55px;font-size:10px;"
+        end
+        toc += "<li><a style='#{style}' href='##{header[:id]}' onclick=\"$('#').collapse('show')\">#{header[:title]}</a></li>"
       end
-      toc += "<li><a style='#{style}' href='##{header[:id]}' onclick=\"$('#').collapse('show')\">#{header[:title]}</a></li>"
     end
   end
   return toc
