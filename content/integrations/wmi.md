@@ -73,7 +73,7 @@ Each WMI query has 2 required options, `class` and `metrics` and six optional op
 `class` is the name of the WMI class, for example `Win32_OperatingSystem` or `Win32_PerfFormattedData_PerfProc_Process`. You can find many of the standard class names on the [MSDN docs](http://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx). The `Win32_FormattedData_*` classes provide many useful performance counters by default.
 
 `metrics` is a list of metrics you want to capture, with each item in the
-list being a set of [WMI property name, metric name, metric type].
+list being a set of \[WMI property name, metric name, metric type].
 
 - The property name is something like `NumberOfUsers` or `ThreadCount`.
   The standard properties are also available on the MSDN docs for each
