@@ -5,7 +5,7 @@ Function               | Category      | Description
 `log2()`               | Arithmetic    | base-2 logarithm
 `log10()`              | Arithmetic    | base-10 logarithm
 `cumsum()`             | Arithmetic    | cumulative sum over visible time window
-`integral()`           | Arithmetic    | cumulative sum of ([time delta] x [value delta]) over all consecutive pairs of points in the visible time window
+`integral()`           | Arithmetic    | cumulative sum of (\[time delta] x \[value delta]) over all consecutive pairs of points in the visible time window
 `.fill()`              | Interpolation | choose how to interpolate missing values
 `hour_before()`        | Timeshift     | metric values from one hour ago
 `day_before()`         | Timeshift     | metric values from one day ago
