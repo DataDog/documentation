@@ -107,9 +107,6 @@ Note: GovCloud does not support role based authentication.
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
-                "sqs:GetQueueAttributes",
-                "sqs:ListQueues",
-                "sqs:ReceiveMessage",
                 "support:*"
               ],
               "Effect": "Allow",

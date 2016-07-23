@@ -1,6 +1,7 @@
 include Nanoc::Helpers::XMLSitemap
 include Nanoc::Helpers::Rendering
 include Nanoc::Helpers::LinkTo
+require 'nokogiri'
 
 # general functions
 
@@ -13,13 +14,13 @@ def collect_video_items
 end
 
 def collect_integration_items
-  integrations = @items.select { |item| item[:kind] == 'integration' && !(item.identifier.match('/ja/')) }
+  integrations = @items.select { |item| item[:kind] == 'integration' && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   integrations.sort_by { |i| i[:integration_title].downcase }
   # $all_itegration_items = integrations
 end
 
 def collect_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && !(item.identifier.match('/ja/')) }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   guides.sort_by { |item| item[:listorder] }
 end
 
@@ -38,12 +39,12 @@ def collect_ja_integration_items
 end
 
 def collect_ja_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
   guides.sort_by { |item| item[:listorder] }
 end
 
 def ja_guide_items_yet
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == nil }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == nil }
   guides_translated = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
 
   guides_translated.each do |jp_content|
@@ -56,6 +57,63 @@ def ja_guide_items_yet
   end
 
   guides.sort_by { |item| item[:listorder] }
+end
+
+
+def show_autotoc
+  doc = Nokogiri::HTML(@item.compiled_content)
+  maxdepth = @item.attributes.include?(:autotocdepth) ? @item[:autotocdepth]:5
+  headers = doc.css("h1, h2, h3, h4, h5, h6")
+  if headers.length > 0
+    toplevel = headers.min {|a, b| a.name[-1]<=>b.name[-1]}.name[-1].to_i
+    headers = headers.map {|h| {level: h.name[-1].to_i - toplevel +1, id: h['id'], title: h.text}}
+    
+    toc = ""
+    toc+= "<li class='nav-header'>Table of Contents</li>"
+    headers.each do |header|
+      if header[:level] <= maxdepth
+        style=""
+        case header[:level]
+        when 1
+          style=""
+        when 2
+          style="padding: 5px 25px;"
+        when 3
+          style="padding: 3px 35px;font-size:13px;"
+        when 4
+          style="padding: 2px 45px;font-size:12px;"
+        when 5
+          style="padding: 1px 55px;font-size:10px;"
+        end
+        toc += "<li><a style='#{style}' href='##{header[:id]}' onclick=\"$('#').collapse('show')\">#{header[:title]}</a></li>"
+      end
+    end
+  end
+  return toc
+end
+
+def show_table_of_contents
+  sidebarnav=""
+  if (@item[:sidebar] && @item[:sidebar][:nav])&&@item[:autotoc]!=true
+    @item[:sidebar][:nav].each do |i|
+      if i[:header]
+        # sidebarnav += "<li class='nav-header'>#{i[:header]}</li>"
+        sidebarnav += "<li class='nav-header'>Table of Contents</li>"
+      else
+        sidebarnav += "<li><a href='#{i[:href]}' onclick=\"$('##{i[:collapseid]}').collapse('show')\">#{i[:text]}</a></li>"
+      end
+    end
+  else
+    sidebarnav = show_autotoc
+  end
+  # <% @item[:sidebar][:nav].each do |i| %>
+  #               <% if i[:header] %>
+  #                 <li class="nav-header"><%= i[:header] %></li>
+  #               <% else %>
+  #                 <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
+  #               <% end %>
+  #             <% end %>
+  return sidebarnav
 end
 
 def github_metrics_store_filename

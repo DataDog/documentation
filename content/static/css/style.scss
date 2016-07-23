@@ -503,3 +503,52 @@ dt {
     max-width: 300px;
   }
 }
+
+
+/*!
+ *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-link:before {
+  content: "\f0c1";
+}
+/*
+ * This code is courtesy Ben Balter, modified by Parker Moore for jekyllrb.com
+ * http://ben.balter.com/2014/03/13/pages-anchor-links/
+ */
+.header-link {
+  position: relative;
+  left: -0.5em;
+  opacity: 0;
+  font-size: 0.8em;
+
+  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  -moz-transition: opacity 0.2s ease-in-out 0.1s;
+  -ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+h1.linked-header,
+h2.linked-header,
+h3.linked-header,
+h4.linked-header,
+h5.linked-header,
+h6.linked-header{
+  margin-left: -22px;
+}
+
+h1:hover .header-link,
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}

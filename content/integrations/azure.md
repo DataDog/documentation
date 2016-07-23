@@ -44,7 +44,7 @@ Related integrations include:
 Integrating Datadog with Microsoft Azure is a three step process. 
 
 1. The first step is <a href="#installation1">Getting your tenant name</a> and passing it to Datadog. 
-2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog
+2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
 3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
 
 #### Getting your Tenant Name
@@ -101,11 +101,11 @@ Naviate to the [Azure VM Default Dashboard][6] to see this dashboard populate wi
 
 Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
-### Deploy agents
+### Deploy Agents
 {: #agents}
 
 1. Follow the steps in the [Azure integrations][1] tile
-2. Manually deploy agents by following the instructions <a href="/guides/azure/">here</a> 
+2. Manually deploy Agents by following the instructions <a href="/guides/azure/">here</a> 
 
 ### Metrics
 
@@ -120,17 +120,17 @@ View the specific metrics we collect for each Azure service integration:
 {: #troubleshooting}
 Here are some common issues you might be seeing.
 
-#### I don't know my tenent name
-To locate your tenent name first log into the classic [Azure portal][5].
+#### I don't know my tenant name
+To locate your tenant name first log into the classic [Azure portal][5].
 After logging in, locate the settings page on the left side of the screen.
 ![](/static/images/azure_tenent.png)
 
-The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses.
+The text in the red box shown in the screenshot above is your tenant name. Please only include text between parentheses.
 
 Your tenant name is also available from the URL after navigating to the classic portal. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
 
 #### Unable to login
-If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screen shot.
+If you have experienced an error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screenshot.
 
 #### No Metrics Are Showing Up
 Please ensure you completed <a href="#installation3">step three</a> of the installation process, which entails giving read permissions to the Azure application (created in <a href="#installation2">step two</a>) for the subscriptions you want to monitor. 
