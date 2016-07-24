@@ -10,6 +10,7 @@ end
 
 check :integration_format do
   puts ""
+  formatoutput=""
   overviewimage = Array.new
   headings = Array.new
   self.output_filenames.each do |fn|
@@ -31,7 +32,9 @@ check :integration_format do
           if (headings & ['Configuration', 'Installation']).empty?
             missingfiles += "\n  - Missing Config or Installation section"
           else
-            overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+            overviewimage = doc.xpath("//p[preceding::h1[@id='overview'] and following::h1[(@id='configuration') or (@id='installation')]]/img/@src") 
+
+            # overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
             if overviewimage.count == 0
               missingfiles += "\n  - Missing Overview Image"
             end
@@ -61,9 +64,11 @@ check :integration_format do
       end
 
       if missingfiles.length > 0
-        puts "Format Issue: #{pagetitle} (#{integrationlocation}) #{missingfiles}"
+        formatoutput += "Format Issue: #{pagetitle} (#{integrationlocation}) #{missingfiles}\n"
       end
       
     end
   end
+  File.open("fileformaterrors", 'w') {|file| file.write(formatoutput)}
+  puts "There are file format errors. Press f <enter> to see them."
 end
