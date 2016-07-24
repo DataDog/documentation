@@ -7,6 +7,8 @@ newhlevel: true
 ---
 # Overview
 
+![Hadoop Yarn](/static/images/hadoopyarngraph.png)
+
 Capture Yarn metrics to:
 
 * Visualize cluster health, performance, and utilization.
