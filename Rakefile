@@ -1,7 +1,7 @@
 require 'rake/clean'
 
 
-CLEAN.include(%w(output tmp code_test tested.code github_metrics))
+CLEAN.include(%w(output tmp code_test tested.code github_metrics fileformaterrors))
 
 CODE_SNIPPETS = 'code_snippets'
 CODE_TEST = 'code_test'
@@ -9,6 +9,11 @@ CODE_TEST = 'code_test'
 desc 'Perform various checks'
 task :checks do
   sh 'bundle exec nanoc check ilinks stale no_api_keys'
+end
+
+desc 'Perform local checks'
+task :localchecks do
+  sh 'bundle exec nanoc check ilinks stale no_api_keys integration_format'
 end
 
 desc 'Build documentation site'
