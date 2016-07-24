@@ -70,5 +70,5 @@ check :integration_format do
     end
   end
   File.open("fileformaterrors", 'w') {|file| file.write(formatoutput)}
-  puts "There are file format errors. Press f <enter> to see them."
+  puts "\033[31mThere are file format errors. Press \033[1mf\033[22m<enter> or look at \033[1mfileformaterrors\033[22m in your editor to see them."
 end
