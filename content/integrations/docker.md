@@ -3,11 +3,11 @@ title: Datadog-Docker Integration
 integration_title: Docker
 kind: integration
 adroll_pixel: true
+newhlevel: true
 git_integration_title: docker
 ---
 
-### Overview
-{: .int-overview}
+# Overview
 
 Get metrics from Docker in real time to:
 
@@ -25,9 +25,9 @@ There are three ways to setup the Docker integration: install the agent on the h
 
 **Note:** docker_daemon replaces the older docker integration going forward.
 
-### Installation
+# Installation
 
-#### Host Installation
+## Host Installation
 
 1. Ensure Docker is running on the host.
 2. Install the agent as described in [the agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
@@ -37,12 +37,12 @@ There are three ways to setup the Docker integration: install the agent on the h
 6. To enable other integrations, use ```docker ps``` to identify the ports used by the corresponding applications.
     ![](/static/images/integrations-docker-dockerps.png)
 
-#### Single Container Installation
+## Single Container Installation
 
 1. Ensure Docker is running on the host.
 2. Install the Docker container as described in [the docker container installation instructions](https://app.datadoghq.com/account/settings#agent/docker).
 
-##### Environment variables
+### Environment variables
 
 A few parameters can be changed with environment variables.
 
@@ -77,11 +77,11 @@ A few parameters can be changed with environment variables.
 
 3. In the application on the Infrastructure List, you should see the host with the blue docker pill next to it indicating that the app is receiving the data correctly.
 
-### Metrics
+# Metrics
 
 <%= get_metrics_from_git()%>
 
-### Troubleshooting
+# Troubleshooting
 
 Single container install not working on Amazon Linux
 : Try using the following command to run the container:
