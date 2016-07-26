@@ -8,6 +8,8 @@ newhlevel: true
 
 # Overview
 
+![RDS Dashboard](/static/images/rdsdashboard.png)
+
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
 ## How this works
@@ -31,10 +33,20 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
   1.  Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
       ![][4]
-  2.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
-  3.  Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
-  4.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
-  5.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing &lt;ROLE ARN> with the ARN of the role:
+  2.  From the IAM Management Console, click on **Encryption Keys**. Click the **Create Key** button.
+  3.  Enter an Alias for the key, such as `lambda-datadog-key`.
+  4.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
+  5.  Encrypt the key you just created by using the [AWS CLI][5]:
+
+          aws kms encrypt --key-id alias/<KMS key name> --plaintext '{"api_key":"<datadog_api_key>", "app_key":"<datadog_app_key>"}'
+
+      The KMS key name should be replaced by the alias of the key you just created. The datadog api and app keys should be replaced by [the api and app keys found here][6].
+
+      The output of this command will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
+  6.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
+  7.  Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
+  8.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
+  9.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing &lt;ENCRYPTION_KEY ARN> with the ARN of the Encryption Key:
 
           {
               "Version": "2012-10-17",
@@ -45,22 +57,12 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
                           "kms:Decrypt"
                       ],
                       "Resource": [
-                          "ROLE ARN>"
+                          "<ENCRYPTION_KEY ARN>"
                       ]
                   }
               ]
           }
 
-  6.  From the IAM Management Console, click on **Encryption Keys**. Click the **Create Key** button.
-  7.  Enter an Alias for the key, such as `lambda-datadog-key`.
-  8.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
-  9.  Encrypt the key you just created by using the [AWS CLI][5]:
-
-          aws kms encrypt --key-id alias/<KMS key name> --plaintext '{"api_key":"<datadog_api_key>", "app_key":"<datadog_app_key>"}'
-
-      The KMS key name should be replaced by the alias of the key you just created. The datadog api and app keys should be replaced by [the api and app keys found here][6].
-
-      The output of this command will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
   10. From the Lambda Management Console, create a new Lambda Function.
   11. On the Select blueprint screen, select the datadog-process-rds-metrics blueprint.
   12. Choose `RDSOSMetrics` from the **Log Group** dropdown.
