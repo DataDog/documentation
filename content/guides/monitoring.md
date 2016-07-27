@@ -2,15 +2,6 @@
 title: Guide to Monitoring
 kind: guide
 listorder: 9
-sidebar:
-  nav:
-    - header: Guide to Monitoring
-    - text: Glossary
-      href: "#glossary"
-    - text: Creating a Monitor
-      href: "#create"
-    - text: Monitor Notifications
-      href: "#notification"
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
@@ -188,6 +179,8 @@ on the left. This guide will walk through the configuration of the Metric type. 
    resolved. If enabled, you can configure an escalation message to be sent
    anytime the monitor renotifies. The original message will be included as
    well.
+
+***Note:*** *Notifications sent out within 20 seconds of each other via email, Hipchat, and Slack are rolled up together. For example, if there are 10 hosts that trigger notifications with the same monitor ID and alert type within 20 seconds, instead of receiving 10 notifications you will only receive one listing out all 10 in one message.*
 
 
 ## Scheduling Downtime
