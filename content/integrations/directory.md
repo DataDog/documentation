@@ -5,7 +5,6 @@ kind: integration
 newhlevel: true
 ---
 # Overview
-{: #int-overview}
 
 Capture metrics from the files in given directories:
 
@@ -17,7 +16,7 @@ Capture metrics from the files in given directories:
 
 
 # Configuration
-{:#int-configuration}
+
 *To capture Directory metrics you need to install the Datadog Agent.*
 
 2.  Ensure the user account running the Agent (typically `dd-agent`) has read access to the monitored directory and files.
@@ -34,6 +33,8 @@ Capture metrics from the files in given directories:
             # "pattern" - string, the `fnmatch` pattern to use when reading the "directory"'s files.
             #                     default "*"
             # "recursive" - boolean, when true the stats will recurse into directories. default False
+            # "countonly" - boolean, when true the stats will only count the number of files matching the pattern. Useful for very large directories.
+
 
             -  directory: "/path/to/directory"
                name: "tag_name"
