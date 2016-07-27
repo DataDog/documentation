@@ -440,7 +440,7 @@ This will call the command at the end of the script and
 send Datadog events if it exits with a non-zero exit code (i.e. an error). `--submit_mode all`
 will send events on every run.
 
-(To get the python client lib you can install it with `easy_install datadog` or `pip install datadog`).
+(To get the python client lib you can install it with `pip install datadog`).
 
 [graphing-1]: /graphing/#functions
 [graphing-2]: /graphing
