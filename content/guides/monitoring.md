@@ -180,7 +180,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
    anytime the monitor renotifies. The original message will be included as
    well.
 
-***Note:*** *Notifications sent out within 20 seconds of each other via email, Hipchat, and Slack are rolled up together. For example, if there are 10 hosts that trigger notifications with the same monitor ID and alert type within 20 seconds, instead of receiving 10 notifications you will only receive one listing out all 10 in one message.*
+***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket will be sent as normal. All other notifications within that 20 seconds will be sent as a single message listing all of them after the first two.*
 
 
 ## Scheduling Downtime
