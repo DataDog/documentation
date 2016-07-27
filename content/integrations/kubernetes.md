@@ -10,7 +10,7 @@ newhlevel: true
 
 Get metrics from your Kubelets in real time to:
 
-* Vizualize your Kubernetes cluster performance
+* Visualize your Kubernetes cluster performance
 * Collect performances metrics for your containers, pods, container namespaces
 * Create monitors on the status of your Kubelets
 * Ingest Kubernetes labels as tags in Datadog.
