@@ -144,15 +144,15 @@ For other missing metrics, please reach out to [support@datadoghq.com][3].
 
 ##### Enable diagnostics
 {: #diagnostics}
-Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc... Right now this is only supported by Windows based machines. To do this, first go to [Azure Portal][2] then follow the instructions below.
-![](/static/images/azure_diag_manual.png)
+Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc... To do this, first go to [Azure Portal][2] then follow the instructions below.
+![](/static/images/azure/azure_enable_diagnostics.png)
 
 After locating your VM:
 
-1. Click on the CPU percentage today panel to show metrics panel
+1. Click on All settings
 2. Click on Diagnostics
-3. Shift the status to on and select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space)
-4. Click OK to save your changes
+3. Shift the status to on and select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
+4. Click Save to save your changes
 
 
 
