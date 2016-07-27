@@ -144,7 +144,7 @@ For other missing metrics, please reach out to [support@datadoghq.com][3].
 
 ##### Enable diagnostics
 {: #diagnostics}
-Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc... To do this, first go to [Azure Portal][2] then follow the instructions below.
+Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. To do this, first go to [Azure Portal][2] then follow the instructions below.
 ![](/static/images/azure/azure_enable_diagnostics.png)
 
 After locating your VM:
