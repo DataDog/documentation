@@ -2,7 +2,6 @@
 title: Datadog-Lighttpd Integration
 integration_title: Lighttpd
 kind: integration
-doclevel: basic
 git_integration_title: lighttpd
 newhlevel: true
 ---
