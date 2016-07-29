@@ -3,6 +3,7 @@ title: HTTP check
 integration_title: HTTP Check
 kind: integration
 newhlevel: true
+update_for_agent: 5.8.5
 ---
 # Overview
 
@@ -30,7 +31,6 @@ Edit the `http_check.yaml` file in your agent's `conf.d` directory. The followin
         tags:
           - url:datadoghq.com
           - env:production
-
 
 There are many other choices available in the example yaml file that deal with specific SSL options.
 
