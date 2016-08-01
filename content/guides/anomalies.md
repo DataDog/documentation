@@ -56,13 +56,13 @@ Continue with steps (3) and (4) as you would for any other monitor.
 
 ### 3. Anomaly Detection Algorithms
 
-We currently offer four different anomaly detection algorithms. All of the algorithms use past history when forming forecasts, however Robust, Agile, and Adaptive detect and use any additional seasonal structure present in the series when forming their predictions.
+We currently offer four different anomaly detection algorithms.
 
 * Basic: This uses a simple lagging rolling quantile computation to make forecasts.
 
-* Agile: A robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It will incorporate the immediate past into its predictions, allowing it to update quicker to level shifts at the expense of being less robust to longer-term anomalies.
+* Agile: A robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
-* Robust: A [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions will remain constant even through longer-term anomalies. On the other hand, it will take longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.) This algorithm uses more data and can take longer to load the first time it is run.
+* Robust: A [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies. On the other hand, it takes longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
 * Adaptive: This algorithm is more dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
 
