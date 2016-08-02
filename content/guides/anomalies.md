@@ -64,7 +64,7 @@ We currently offer four different anomaly detection algorithms.
 
 * Robust: A [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
-* Adaptive: This algorithm is more dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
+* Adaptive: This algorithm is dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
 
 ## Frequently Asked Questions
 
