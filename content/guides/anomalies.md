@@ -56,10 +56,13 @@ Continue with steps (3) and (4) as you would for any other monitor.
 
 ### 3. Anomaly Detection Algorithms
 
-We currently offer two different anomaly detection algorithms. Both algorithms will follow the seasonal pattern of the series, and
-will not have their predictions be affected by short anomalies.
+We currently offer four different anomaly detection algorithms.
 
-* Robust: This algorithm is very stable and its predictions will remain constant even through longer-term anomalies. On the other hand, it will take longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.) This algorithm uses more data and can take longer to load the first time it is run.
+* Basic: This uses a simple lagging rolling quantile computation to make forecasts.
+
+* Agile: A robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
+
+* Robust: A [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
 * Adaptive: This algorithm is more dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
 
