@@ -4,9 +4,12 @@ integration_title: Elasticsearch
 kind: integration
 newhlevel: true
 git_integration_title: elasticsearch
+updated_for_agent: 5.8.5
 ---
 
 # Overview
+
+![Elasticsearch](/static/images/elasticsearchgraph.png)
 
 Connect Elasticsearch to Datadog in order to:
 
@@ -29,7 +32,7 @@ No installation steps are required for this integration
           - url: http://elastic:9200
             # The format for the url entry is url: http://servername:port
 
-2.  Restart the agent
+1.  Restart the agent
 
 <%= insert_example_links(conf: "elastic", check: "elastic")%>
 
@@ -56,6 +59,7 @@ To validate that the integration is working, run ```datadog-agent info```. You s
           - Collected 97 metrics, 0 events & 3 service checks
 
 # Metrics
+
 <%= get_metrics_from_git()%>
 
 
