@@ -2,7 +2,6 @@
 title: Datadog-TeamCity Integration
 integration_title: TeamCity
 kind: integration
-doclevel: basic
 newhlevel: true
 git_integration_title: teamcity
 ---
