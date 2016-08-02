@@ -19,7 +19,7 @@ Capture HAProxy activity in Datadog to:
 
 # Installation
 
-Make sure that stats are enabled on your HAProxy configuration
+Make sure that stats are enabled on your HAProxy configuration. See [this post for guidance on doing this](https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics/).
 
 # Configuration
 
