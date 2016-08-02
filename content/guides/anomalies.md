@@ -58,7 +58,7 @@ Continue with steps (3) and (4) as you would for any other monitor.
 
 We currently offer four different anomaly detection algorithms.
 
-* Basic: This uses a simple lagging rolling quantile computation to make forecasts.
+* Basic: This uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data, and adjusts quickly to changing conditions. However, it has no knowledge of seasonal behavior or longer trends.
 
 * Agile: A robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
