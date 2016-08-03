@@ -20,9 +20,9 @@ graphs = [{
   "title" => "Average Memory Free"
 }]
 template_variables = [{
-	"name" => "host1",
-	"prefix" => "host",
-	"default" => "host:my-host"
+  "name" => "host1",
+  "prefix" => "host",
+  "default" => "host:my-host"
 }]
 read_only=true
 
