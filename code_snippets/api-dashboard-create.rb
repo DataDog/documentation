@@ -12,7 +12,7 @@ description = 'And they are marvelous.'
 graphs = [{
   "definition" => {
     "events" => [],
-    "requests "=> [
+    "requests" => [
       {"q" => "avg:system.mem.free{*}"}
     ],
   "viz" => "timeseries"
