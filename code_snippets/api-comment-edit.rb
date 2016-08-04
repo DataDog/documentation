@@ -1,11 +1,11 @@
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
-comment_id="1382579089039712607"
+api_key = '9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key = '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-# Update a comment.
+# Update a comment
+comment_id = 1382579089039712607
 dog.update_comment(comment_id, :message => "I've changed my mind again")
