@@ -12,7 +12,7 @@ description = 'And they are marvelous.'
 graphs = [{
   "definition" => {
     "events" => [],
-    "requests "=> [
+    "requests"=> [
       {"q" => "avg:system.mem.free{*}"}
     ],
   "viz" => "timeseries"
@@ -24,6 +24,5 @@ template_variables = [{
 	"prefix" => "host",
 	"default" => "host:my-host"
 }]
-read_only=true
 
-dog.create_dashboard(title, description, graphs, template_variables, read_only)
+dog.create_dashboard(title, description, graphs, template_variables)

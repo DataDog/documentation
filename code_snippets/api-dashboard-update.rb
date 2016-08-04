@@ -12,7 +12,7 @@ description = 'This has all the new hotness.'
 graphs =  [{
   "definition" => {
     "events" => [],
-    "requests "=> [
+    "requests"=> [
       {"q" => "avg:system.mem.free{*}"}
     ],
   "viz" => "timeseries"
@@ -23,7 +23,6 @@ template_variables = [{
 	"name" => "host1",
 	"prefix" => "host",
 	"default" => "host:my-host"
-}],
-read_only = true
+}]
 
-dog.update_dashboard(dash_id, title, description, graphs, template_variables, read_only)
+dog.update_dashboard(dash_id, title, description, graphs, template_variables)
