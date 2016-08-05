@@ -3,6 +3,7 @@ title: Datadog-TokuMX Integration
 integration_title: TokuMX
 kind: integration
 git_integration_title: tokumx
+newhlevel: true
 ---
 
 ### Overview
@@ -50,6 +51,8 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
 
         init_config:
 
+        # Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
+        # E.g. mongodb://datadog:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27017/my-db
         instances:
               -   server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017
                   tags:
