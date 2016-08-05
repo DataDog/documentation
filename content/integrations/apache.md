@@ -8,6 +8,8 @@ git_integration_title: apache
 
 # Overview
 
+![Apache Graph](/static/images/apachegraph.png)
+
 Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 
   * Visualize your web server performance
