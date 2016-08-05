@@ -73,7 +73,7 @@ As described above, both the _agile_ and _robust_ algorithms leverage seasonal p
 * `seasonality`: Valid options are `'weekly'`, `'daily'`, or `'hourly'`. This tells the algorithm how often the metric's seasonal pattern repeats itself.
 * `lookback`: Valid options are integers from 3 to 10. This tells the algorithm how many past seasons to look at.
 
-For example, this is a valid anomalies query that uses both of the keyword arguments: `anomalies(gunicorn.requests{*}.as_count(), 'agile', 3, seasonality='daily`, lookback=7)`.
+For example, this is a valid anomalies query that uses both of the keyword arguments: `anomalies(gunicorn.requests{*}.as_count(), 'agile', 3, seasonality='daily', lookback=7)`.
 
 ## Frequently Asked Questions
 
