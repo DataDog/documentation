@@ -4,6 +4,7 @@ integration_title: Java/JMX
 kind: integration
 git_integration_title: java
 newhlevel: true
+updated_for_agent: 5.8.5
 ---
 
 # Introduction
@@ -16,29 +17,44 @@ JMXFetch also sends service checks that report on the status of your monitored i
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's  easy to customize which metrics you want to collect.
 
-
-
 # Installation
 
-The only installation step is to make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
+Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
 # Configuration
 
-1.  Enable the Java/JMX integration [here](https://app.datadoghq.com/account/settings#integrations/java).
-2.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
+1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
 
         init_config:
+          custom_jar_paths: # optional
+            - /path/to/custom/jarfile.jar
 
         instances:
           - host: localhost
             port: 7199
-            name: jmx_instance
             user: username
             password: password
+
+            jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # optional
+
+            name: jmx_instance  # optional
+              java_bin_path: /path/to/java
+              java_options: "-Xmx200m -Xms50m"
+              trust_store_path: /path/to/trustStore.jks
+              trust_store_password: password
+
+            process_name_regex: .*process_name.*
+            tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+            tags:
+              env: stage
+              newTag: test
+
             conf:
               - include:
                   domain: my_domain
-                  bean: my_bean
+                  bean:
+                    - my_bean
+                    - my_second_bean
                   attribute:
                     attribute1:
                       metric_type: counter
@@ -49,8 +65,25 @@ The only installation step is to make sure you can open a [JMX remote connection
               - include:
                   domain: 2nd_domain
                 exclude:
-                  bean: excluded_bean
+                  bean:
+                    - excluded_bean
+              - include:
+                  domain_regex: regex_on_domain
+                exclude:
+                  bean_regex:
+                    - regex_on_excluded_bean
 
+
+## Configuration Options
+
+* `custom_jar_paths` (Optional) - Allows specifying custom jars that will be added to the classpath of the agent's JVM.
+* `jmx_url` - (Optional) - If the agent needs to connect to a non-default JMX URL, specify it here instead of a host and a port. If you use this you need to specify a 'name' for the instance.
+* `name` - (Optional) - Used in conjunction with `jmx_url`.
+* `java_bin_path` - (Optional) - Should be set if the agent cannot find your java executable.
+* `java_options` - (Optional) - Java JVM options
+* `trust_store_path` and `trust_store_password` - (Optional) - Should be set if ssl is enabled.
+* `process_name_regex` - (Optional) - Instead of specifying a host and port or jmx_url, the agent can connect using the attach api. This requires the JDK to be installed and the path to tools.jar to be set.
+* `tools_jar_path` - (Optional) - To be set when process_name_regex is set.
 
 The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this dictionary:
 
@@ -91,7 +124,7 @@ On top of these parameters, the filters support "custom" keys which means that y
 
 The `attribute` filter can accept two types of values:
 
-  *A dictionary whose keys are attributes names:
+*   A dictionary whose keys are attributes names:
 
         conf:
           - include:
@@ -108,7 +141,7 @@ The `attribute` filter can accept two types of values:
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
-  * A list of attributes names:
+*   A list of attributes names:
 
         conf:
           - include:
