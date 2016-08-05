@@ -535,13 +535,13 @@ dt {
   -moz-transition: opacity 0.2s ease-in-out 0.1s;
   -ms-transition: opacity 0.2s ease-in-out 0.1s;
 }
-h1.linked-header,
-h2.linked-header,
-h3.linked-header,
-h4.linked-header,
-h5.linked-header,
+h1.linked-header { margin-left: -30px;}
+h2.linked-header { margin-left: -23px;}
+h3.linked-header { margin-left: -20px;}
+h4.linked-header { margin-left: -14px;}
+h5.linked-header { margin-left: -10px;}
 h6.linked-header{
-  margin-left: -22px;
+  margin-left: -8px;
 }
 
 h1:hover .header-link,
