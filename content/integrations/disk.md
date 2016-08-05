@@ -10,7 +10,7 @@ Get metrics related to disk usage and IO metrics.
 
 # Installation
 
-Included by by default with the Datadog agent installation.
+Included by default with the Datadog agent installation.
 
 # Configuration
 
