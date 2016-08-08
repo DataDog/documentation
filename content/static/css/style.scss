@@ -543,7 +543,14 @@ h5.linked-header { margin-left: -10px;}
 h6.linked-header{
   margin-left: -8px;
 }
-
+#pagecontent {
+  h1.linked-header { margin-left: -20px;}
+  h2.linked-header { margin-left: -14px;}
+  h3.linked-header { margin-left: -10px;}
+  h4.linked-header { margin-left: -14px;}
+  h5.linked-header { margin-left: -10px;}
+  h6.linked-header { margin-left: -8px;}
+}
 h1:hover .header-link,
 h2:hover .header-link,
 h3:hover .header-link,
