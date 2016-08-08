@@ -180,7 +180,7 @@ def insert_example_links(integration: item[:integration_title], conf:  integrati
   return example_links
 end
 
-def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include=@item[:git_integration_title])
+def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
   items_to_include = items_to_include.split(/\s*,\s*/)
   if $allmetrics == nil
     if File.exist?(github_metrics_store_filename)
@@ -191,8 +191,12 @@ def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to
   end
   selectedmetrics = []
   allmetricsforintegration = $allmetrics[itemintegration]
-  items_to_include.each do |item_to_include|
-    selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
+  if items_to_include.count > 0
+    items_to_include.each do |item_to_include|
+      selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
+    end
+  else
+    selectedmetrics = allmetricsforintegration
   end
   return formatmetrics(selectedmetrics)
 end
