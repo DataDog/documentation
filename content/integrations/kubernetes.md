@@ -4,9 +4,11 @@ integration_title: Kubernetes
 kind: integration
 git_integration_title: kubernetes
 newhlevel: true
+updated_for_agent: 5.8.5
 ---
-
 # Overview
+
+![Kubernetes Dashboard](/static/images/k8sdashboard.png)
 
 Get metrics from your Kubelets in real time to:
 
@@ -31,11 +33,51 @@ If you are running Kubernetes >= 1.2.0, you can take advantage of DaemonSets to 
 
 If DaemonSets are not an option for your Kubernetes cluster, you will need to install the Datadog agent as a sidecar container on each Kubernetes node.
 
-    docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY='YOUR_API_KEY_HERE' datadog/docker-dd-agent:kubernetes
+    docker run -d --name dd-agent -h `hostname` \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+      -e API_KEY='YOUR_API_KEY_HERE' datadog/docker-dd-agent:kubernetes
 
 # Configuration
 
-If you would like to customize your Agent configuration, please refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
+Configure the agent by editing the kubernetes.yaml file in conf.d:
+
+    init_config:
+      tags:
+        - optional_tag1
+        - optional_tag2
+
+    instances:
+      # The kubernetes check retrieves metrics from cadvisor running under kubelet.
+      # By default we will assume we're running under docker and will use the address
+      # of the default router to reach the cadvisor api.
+      #
+      # To override, e.g. in the case of a standalone cadvisor instance, use the following:
+      #
+      # host: localhost
+      # port: 4194
+      # method: http
+      - port: 4194
+
+      # use_histogram controls whether we send detailed metrics, i.e. one per container.
+      # When false, we send detailed metrics corresponding to individual containers, tagging by container id
+      # to keep them unique.
+      # When true, we aggregate data based on container image.
+      #
+      # use_histogram: True
+      #
+      # kubelet_port: 10255
+      #
+      # We can define a whitelist of patterns that permit publishing raw metrics.
+      # enabled_rates:
+      #   - cpu.*
+      #   - network.*
+      #
+      # enabled_gauges:
+      #   - filesystem.*
+{:.language-yaml}
+
+Since the agent is deployed as a docker container, refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
 
 <%= insert_example_links%>
 
