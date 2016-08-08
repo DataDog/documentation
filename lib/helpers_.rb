@@ -67,7 +67,7 @@ def show_autotoc
   if headers.length > 0
     toplevel = headers.min {|a, b| a.name[-1]<=>b.name[-1]}.name[-1].to_i
     headers = headers.map {|h| {level: h.name[-1].to_i - toplevel +1, id: h['id'], title: h.text}}
-    
+
     toc = ""
     toc+= "<li class='nav-header'>Table of Contents</li>"
     headers.each do |header|
@@ -126,52 +126,47 @@ def get_all_metrics_from_github
   require 'yaml'
   require 'csv'
 
-  allmetrictables = []
+  $allmetrics = {}
   if ENV.has_key?('github_personal_token')
-    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20 seconds on a good connection, much longer on JetBlue"
-    repo = 'datadog/dogweb'
+    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
+    repo='datadog/dogweb'
     reporootdir = $client.contents(repo, :path => "integration/")
 
     reporootdir.each do |intdir|
-      if intdir[:type]=="dir"
+      if intdir[:type] == "dir"
         intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
-        intdirlist.each { |intdircontent|
+        intdirlist.each {|intdircontent|
           if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
             csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
-
-            metric_string = "<table class='table'>"
+            metrics = []
             CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
-              description = row['description']
-              if description.nil?
-                description = ' '
-              end
-              metric_string+= "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
-              if row['interval'] != nil
-                metric_string += " every #{row['interval']} seconds"
-              end
-              metric_string += ")</td><td>#{description.gsub '^', ' to the '}"
-              if row['unit_name'] != nil
-                metric_string += "<br/>shown as #{row['unit_name']}"
-                if row['per_unit_name'] != nil
-                  metric_string += "/#{row['per_unit_name']}"
-                end
-              end
-              metric_string += "</td></tr>"
+              description = row['description'].nil? ? '' : row['description']
+              metric_name = row['metric_name']
+              metric_type = row['metric_type']
+              metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
+              metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
+              metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
+              metrics << {
+                :name => metric_name,
+                :type => metric_type,
+                :interval => metric_interval,
+                :description => description,
+                :unit => metric_unit,
+                :per_unit => metric_per_unit
+                }
             end
-            metric_string+="</table>"
-            metric_string.force_encoding('utf-8')
-            allmetrictables << {"integration" => intdir[:name], "table" =>metric_string}
+            $allmetrics[intdir['name']] = metrics
           end
         }
       end
     end
-    serialize_github_metrics(allmetrictables)
+    serialize_github_metrics($allmetrics, github_metrics_store_filename)
   end
-  return allmetrictables
+  return $allmetrics
 end
 
-def serialize_github_metrics(items)
-  File.open(github_metrics_store_filename, 'a') do |f|
+def serialize_github_metrics(items, filename)
+  File.open(filename, 'a') do |f|
     Marshal.dump(items, f)
   end
 end
@@ -185,25 +180,37 @@ def insert_example_links(integration: item[:integration_title], conf:  integrati
   return example_links
 end
 
-def get_metrics_from_git
-  require 'octokit'
-  require 'base64'
-  require 'csv'
-
-  if File.exist?(github_metrics_store_filename)
-    allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
-  else
-    allmetrics = get_all_metrics_from_github
+def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include=@item[:git_integration_title])
+  items_to_include = items_to_include.split(/\s*,\s*/)
+  if $allmetrics == nil
+    if File.exist?(github_metrics_store_filename)
+      $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
+    else
+      $allmetrics = get_all_metrics_from_github()
+    end
   end
-
-  begin
-    # if ENV.has_key?('github_personal_token')
-    ititle = @item[:git_integration_title]
-    return allmetrics.find { |h| h['integration'] == ititle}["table"]
-  rescue Exception => e
-    pp "**** There was a problem getting GitHub Metrics for #{@item[:title]} ****"
-    pp e
+  selectedmetrics = []
+  allmetricsforintegration = $allmetrics[itemintegration]
+  items_to_include.each do |item_to_include|
+    selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
   end
+  return formatmetrics(selectedmetrics)
+end
+
+def formatmetrics(selectedmetrics)
+  metrictable = "<table class='table'>"
+  selectedmetrics.each do |metric|
+    metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
+    if metric[:interval]>0
+      metrictable += " every #{metric[:interval]} seconds"
+    end
+    metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
+    metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
+    metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
+    metrictable += "</td></tr>"
+  end
+  metrictable += "</table>"
+  return metrictable
 end
 
 def get_units_from_git
