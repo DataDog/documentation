@@ -3,7 +3,6 @@ title: Datadog-VMware Integration
 integration_title: VMware
 git_integration_title: vsphere
 kind: integration
-doclevel: basic
 newhlevel: true
 ---
 
@@ -73,13 +72,13 @@ Execute the info command and verify that the integration check has passed. The o
 <%= get_metrics_from_git() %>
 
 
-# FAQ
+# Troubleshooting
 
-##### How should the Datadog Agent be set up with vCenter and ESX?
+**How should the Datadog Agent be set up with vCenter and ESX?**
 
-![][3]
+![](/static/images/vmware_agent.png)
 
-##### How will a VMware integration impact my monthly billing?
+**How will a VMware integration impact my monthly billing?**
 
 The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ][4] page.
 
@@ -89,6 +88,4 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 
 
 [1]: https://www.datadoghq.com/2014/08/unified-vsphere-app-monitoring-datadog/
-[2]: https://github.com/DataDog/dd-agent/blob/v5.0.2/checks/libs/vmware/basic_metrics.py
-[3]: /static/images/vmware_agent.png
 [4]: http://docs.datadoghq.com/guides/billing/
