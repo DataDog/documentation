@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 # Overview
 
-![Chef Event](/static/images/chefevent.png)
+![Chef Event](/static/images/chefdashboard.png)
 
 Connect Chef to Datadog in order to:
 
