@@ -94,6 +94,8 @@ Every integration should have the following format:
 ### Overview
 **Absolutely Required.**
 
+The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible. 
+
 The overview section is required and should be a paragraph or two with some bullets of what is interesting about this integration. For example, the following comes from the Docker integration.
 
 Get metrics from Docker in real time to:
@@ -116,6 +118,9 @@ The configuration section should cover anything that you can configure in the Da
 
 At the end of the configuration section include a link to the example configuration files. This should be done by adding `<%= insert_example_links%>`. This method takes a few optional parameters: `conf` is the name of the example YAML file, minus the extension; `check` is the name of the check file, minus the .py extension; setting either `check` or `conf` to `"none"` will hide that line; `include_intro` set to false will show only the list minus the sentence at the top; normally the integration title in the links will come from the pages frontmatter, but setting `integration` will override that, `yaml_extension` will change the extension from example to something else (like "default").
 
+#### Configuration Options
+
+Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for. 
 
 ### Validation
 **Required**
@@ -139,10 +144,6 @@ This is a newer section. If you can describe the events that are part of the int
 
 The troubleshooting section should include anything that answers a question a user might have about the integration. If there is a question that comes up in support about the integration, it should be added here.
 
-### Compatibility
-**Required**
-
-The compatibility section should include which versions this integration has been tested and validated on.
 
 
 # How to add a new Guide
