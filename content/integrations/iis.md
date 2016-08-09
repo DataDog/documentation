@@ -61,6 +61,22 @@ The `sites` parameter allows you to specify a list of sites you want to read met
 from. With sites specified, metrics will be tagged with the site name. If you don't
 define any sites, the check will pull the aggregate values across all sites.
 
+Here's an example of configuration that would check the current machine and a remote machine
+called MYREMOTESERVER. For the remote host we are only pulling metrics from the default site.
+
+    - host: .
+      tags:
+        - myapp1
+      sites:
+        - Default Web Site
+    - host: MYREMOTESERVER
+      username: MYREMOTESERVER\fred
+      password: mysecretpassword
+      is_2008: false
+{:.language-yaml}
+
+* `is_2008` (Optional) - NOTE: because of a typo in IIS6/7 (typically on W2K8) where perfmon reports TotalBytesTransferred as TotalBytesTransfered, you may have to enable this to grab the IIS metrics in that environment.
+
 <%= insert_example_links%>
 
 # Validation
@@ -75,7 +91,7 @@ Check the info page in the Agent Manager and verify that the integration check h
       iis
       ---
           - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+          - Collected 20 metrics & 0 events
 
 # Metrics
 
