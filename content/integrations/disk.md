@@ -74,4 +74,5 @@ You should see something similar to the following if everything is working corre
 
 # Metrics
 
-For details on the metrics collected by the disk check, refer to the metrics in [System check](/integrations/system) that start with `system.disk` and `system.fs`.
+<%= get_metrics_from_git('system', 'system.disk, system.fs') %>
+
