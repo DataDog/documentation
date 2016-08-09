@@ -15,7 +15,7 @@ Get metrics from Tomcat in real time to:
 
 # Installation
 
-Metrics will be captured using a JMX connection. We recommend the use of Oracle's JDK for this integration.
+Metrics will be captured using a JMX connection. Due to [an issue with the OpenJDK and Tomcat](https://bugs.launchpad.net/ubuntu/+source/openjdk-6/+bug/1099903), we recommend the use of Oracle's JDK for this integration.
 
 This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the JMX Checks documentation for more detailed instructions. If you need to monitor more metrics, please send us an email at support@datadoghq.com
 
