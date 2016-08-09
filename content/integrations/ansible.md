@@ -17,6 +17,8 @@ Install the Datadog Ansible callback integration to:
 * Track key Ansible performance metrics across all your servers
 * Quickly identify and discuss failed Ansible runs with your team
 
+For more information about using our integration with Ansible, read [this post on our blog](https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/).
+
 # Installation
 
 1.  Ensure the prerequisite python libraries are installed on the server:
