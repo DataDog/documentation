@@ -30,21 +30,21 @@ task predeploy: [:clean, :compile, :checks]
 
 namespace :release do
   desc 'Build and release the site to prod (http://docs.datadoghq.com)'
-  task prod: [:clean, :compile, :"deploy:prod"]
+  task prod: [:clean, :compile, :checks, :"deploy:prod"]
 
   desc 'Build and release the site to staging (http://docs-staging.datadoghq.com)'
-  task staging: [:clean, :compile, :"deploy:staging"]
+  task staging: [:clean, :compile, :checks, :"deploy:staging"]
 end
 
 namespace :deploy do
   desc 'Deploy to prod S3 bucket; Should be used by `rake release:prod`'
   task :prod do
-    sh('cd output && s3cmd -c ~/.docs-deploy.prod sync --delete-removed --no-mime-magic --guess-mime-type . s3://docs.datadoghq.com')
+    sh('cd output && aws s3 sync --delete --size-only . s3://datadog-docs-prod --acl public-read')
   end
 
   desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
   task :staging do
-    sh("cd output && s3cmd -c ~/.docs-deploy.prod sync --delete-removed --no-mime-magic --guess-mime-type . s3://docs-staging.datadoghq.com")
+    sh("cd output && aws s3 sync --delete --size-only . s3://datadog-docs-staging --acl public-read")
   end
 end
 
