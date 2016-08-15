@@ -12,7 +12,7 @@ git_integration_title: amazon_sqs
 
 Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
 
-Enable this integration to see in Datadog all your SQS metrics.
+Enable this integration to see all your SQS metrics in Datadog.
 
 # Metrics
 
