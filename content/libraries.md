@@ -174,6 +174,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-nginx-lua}
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
+  * [lua-resty-dogstatsd][79] written by [mediba inc][80].
 
 #### Phusion Passenger
 {: #community-integration-passenger}
@@ -275,3 +276,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [76]: https://github.com/brightcove/hot-shots
    [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
    [78]: https://github.com/Sjeanpierre
+   [79]: https://github.com/mediba-system/lua-resty-dogstatsd
+   [80]: http://www.mediba.jp/
