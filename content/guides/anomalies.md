@@ -29,7 +29,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 <img src="/static/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
 
-This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. After successfully adding `anomalies`, your editor should show something like this:
+This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
 
 <img src="/static/images/anomalies/final_editor.png" style="width:100%; border:1px solid #777777"/>
 
