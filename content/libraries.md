@@ -146,7 +146,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Scala
 {: #community-scala}
 
-  * [datadgog-scala][37] - a Scala API client, written by [Cory Watson][38].
+  * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
 ### Community Integration Libraries
 
