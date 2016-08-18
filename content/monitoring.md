@@ -22,7 +22,7 @@ sidebar:
     - text: Custom Monitors
       href: "#custom"
     - text: Monitor Notifications
-      href: "#notification"
+      href: "#notifications"
     - text: Monitor FAQs
       href: "#faqs"
 ---
@@ -331,7 +331,7 @@ or service checks.
    walkthrough of the common notification options.
 
 ## Monitor Notifications
-{: #notification}
+{: #notifications}
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
