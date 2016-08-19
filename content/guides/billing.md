@@ -14,8 +14,6 @@ sidebar:
       href: "/guides/logs/"
     - text: Writing an Agent Check
       href: "/guides/agent_checks/"
-    - text: Setting up Service Checks
-      href: "/guides/services_checks/"
     - text: Deploying the Agent with Chef
       href: "/guides/chef/"
     - text: Guide to Monitoring
