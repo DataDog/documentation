@@ -38,6 +38,7 @@ Related integrations include:
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
+| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
 {:.table}
@@ -56,7 +57,6 @@ There are a number of other AWS services that are also available in Datadog but 
 | Lambda |
 | MachineLearning |
 | OpsWorks |
-| Route53 |
 | S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
@@ -68,6 +68,8 @@ There are a number of other AWS services that are also available in Datadog but 
 # Installation
 
 There are two integration methods that can be used to allow Datadog to monitor your AWS environment. Both require creating a policy in the AWS Console with a certain set of permissions. The difference between the two is whether you choose to create a role that Datadog has access to which is preferred due to the higher level of security, or create a user and share an AWS Secret and Access Key. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
+
+Note: GovCloud does not support role based authentication.
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
@@ -82,6 +84,8 @@ There are two integration methods that can be used to allow Datadog to monitor y
                 "cloudwatch:Describe*",
                 "cloudwatch:Get*",
                 "cloudwatch:List*",
+                "dynamodb:list*",
+                "dynamodb:describe*",
                 "ec2:Describe*",
                 "ec2:Get*",
                 "ecs:Describe*",
@@ -90,24 +94,19 @@ There are two integration methods that can be used to allow Datadog to monitor y
                 "elasticache:List*",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
-                "iam:Get*",
-                "iam:List*",
-                "kinesis:Get*",
+                "elasticmapreduce:Describe*",
                 "kinesis:List*",
                 "kinesis:Describe*",
                 "logs:Get*",
                 "logs:Describe*",
+                "logs:FilterLogEvents",
                 "logs:TestMetricFilter",
                 "rds:Describe*",
                 "rds:List*",
                 "route53:List*",
                 "ses:Get*",
-                "ses:List*",
                 "sns:List*",
                 "sns:Publish",
-                "sqs:GetQueueAttributes",
-                "sqs:ListQueues",
-                "sqs:ReceiveMessage",
                 "support:*"
               ],
               "Effect": "Allow",
@@ -118,15 +117,16 @@ There are two integration methods that can be used to allow Datadog to monitor y
 
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
-2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key:
-    * Create a role and allow Datadog to assume it (**Preferred Option**)
+2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Using role delegation is more secured as only our AWS account is authorized to assume the role you create.
+    **Note**: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
+    * **Preferred option:** Role-based authentication: create a role and allow Datadog to assume it (not supported in GovCloud or China)
         1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
         2.  From the selection, choose Role for Cross-Account Access.
         3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-        4.  For Account ID, enter ```464622532012```. Enter a unique password for External ID. You will use this again later in the Datadog tile. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+        4.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
         5.  Select the policy you created above.
         6.  Review what you selected and click the **Create Role** button.
-    * Create a user which will have Secret and Access Key associated with it
+    * Access Key-based authentication: create a user which will have Secret and Access Key associated with it
         1.  Create a new user in the IAM Console. Name it anything you like.
         2.  Make sure you leave the **Generate an access key for each user** checked.
         3.  Click the link to **Show User Security Credentials**.
@@ -139,7 +139,7 @@ There are two integration methods that can be used to allow Datadog to monitor y
 
 Depending on whether you created a role or a user above, choose the appropriate Datadog configuration:
 
-* Configure Role Delegation
+* Configure Role Delegation (not supported in GovCloud)
   1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
   2.  Select the **Role Delegation** tab.
   3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.

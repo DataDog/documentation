@@ -2,11 +2,11 @@
 title: Datadog-Varnish Integration
 integration_title: Varnish
 git_integration_title: varnish
-
 kind: integration
+newhlevel: true
 ---
 
-### Overview
+# Overview
 
 Connect Varnish to Datadog in order to:
 
@@ -17,21 +17,46 @@ Connect Varnish to Datadog in order to:
 
 Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.
 
-From the open-source Agent:
+# Installation
 
-* [ Varnish YAML example][1]
-* [ Varnish checks.d][2]
+If you're running Varnish 4.1+, you must add the dd-agent user to the varnish group:
+`$ sudo usermod -G varnish -a dd-agent`
+
+# Configuration
+
+<%= insert_example_links%>
+
+# Validation
+
+To ensure the integration is installed correctly, run the agent info command.
+
+    sudo datadog-agent info
+
+You should see something similar to the following if everything is working correctly:
+
+    Checks
+    ======
+
+      [...]
+
+      varnish
+      ------
+          - instance #0 [OK]
+          - Collected 20 metrics & 0 events
+
+# Metrics
 
 The following metrics are collected by default with the Varnish integration.
-
-### Metrics
-
-The following metrics are collected:
 
 <%= get_metrics_from_git() %>
 
 
-#### If you are using Varnish 3.0:
+While the above list contains all possible metrics from our Varnish integration, your environment
+may show only a subset of these metrics depending on which version of Varnish you have installed.
+
+A breakdown by Varnish version is available below.
+
+### Varnish 3.x
 
     varnish.accept_fail
     varnish.backend_busy
@@ -252,7 +277,7 @@ The following metrics are collected:
     varnish.sms_nreq
     varnish.uptime
 
-#### If you are using Varnish 4.0:
+### Varnish 4.x
 
     varnish.backend_busy
     varnish.backend_conn

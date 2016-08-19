@@ -37,8 +37,9 @@ If you see some output with `configure arguments:` and lots of options, then you
       }
     }
 
-For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [NGINX example YAML config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [NGINX agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
+For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).
 
+<%= insert_example_links%>
 
 **All metrics collected for NGINX and NGINX Plus**
 
@@ -46,16 +47,7 @@ For more information on configuration, read the [stub status docs](http://nginx.
 
 #### NGINX (Open Source)
 
-| Metrics collected in NGINX ||
-|--------------------------|----|
-| <strong>nginx.net.writing</strong><br/>(gauge) | The number of connections waiting on upstream responses and/or writing responses back to the client <br/>shown as connection|
-| <strong>nginx.net.waiting</strong><br/>(gauge)| The number of keep-alive connections waiting for work<br/>shown as connection|
-| <strong>nginx.net.reading</strong><br/>(gauge)| The number of connections reading client requets<br/>shown as connection|
-| <strong>nginx.net.connections</strong><br/>(gauge)| Total number of active connections<br/>shown as connection|
-| <strong>nginx.net.request_per_s</strong><br/>(rate)|  Number of requests processed per second<br/>shown as request/second|
-| <strong>nginx.net.conn_opened_per_s</strong><br/>(rate)|  Number of connections opened per second<br/>shown as connection/second|
-| <strong>nginx.net.conn_dropped_per_s</strong><br/>(rate)|  Number of connections dropped per second<br/>shown as connection/second|
-{:.table}
+<%= get_metrics_from_git('nginx', 'nginx.net.writing,nginx.net.waiting,nginx.net.reading,nginx.net.connections,nginx.net.request_per_s,nginx.net.conn_opened_per_s,nginx.net.conn_dropped_per_s' )%>
 
 The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 

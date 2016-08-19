@@ -2,15 +2,6 @@
 title: Guide to Monitoring
 kind: guide
 listorder: 9
-sidebar:
-  nav:
-    - header: Guide to Monitoring
-    - text: Glossary
-      href: "#glossary"
-    - text: Creating a Monitor
-      href: "#create"
-    - text: Monitor Notifications
-      href: "#notification"
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
@@ -46,9 +37,9 @@ Here is a quick overview of the different terms used in this guide.
 ##Creating a Monitor
 {: #create}
 
-Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
+Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
-"Create Monitors" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
+"New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
 
 ![nav](/static/images/monitor/nav.png)
@@ -60,7 +51,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
-    [scope section](/graphing/#scope) of the graphing primer for
+    [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for
     further information.
 
 2. Select the alert grouping.
@@ -189,7 +180,51 @@ on the left. This guide will walk through the configuration of the Metric type. 
    anytime the monitor renotifies. The original message will be included as
    well.
 
+***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket will be sent as normal. All other notifications within that 20 seconds will be sent as a single message listing all of them after the first two.*
 
+
+## Scheduling Downtime
+{: #downtime}
+
+You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
+
+### Manage Downtime
+{: #downtime-manage}
+
+Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
+
+![downtime-nav](/static/images/monitor/downtime-nav.png)
+
+The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
+
+![downtime-manage](/static/images/monitor/downtime-manage.png)
+
+### Schedule Downtime
+{: #downtime-schedule}
+
+To schedule downtime, click the "Schedule Downtime" button in the upper right.
+
+1. Choose what to silence.
+
+   ![downtime-silence](/static/images/monitor/downtime-silence.png)
+
+   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
+
+   If you choose to silence all monitors constrained by a scope, clicking the "Preview affected monitors" will show which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule will also be silenced.
+
+   Note that if a multi alert is included, it will only be silenced for systems covered by the scope. For example, if a downtime scope is set for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog will generate a monitor notification for `host:Y`, but not `host:X`.
+
+2. Set a schedule.
+
+   ![downtime-schedule](/static/images/monitor/downtime-schedule.png)
+
+   You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
+
+3. Add an optional message to notify your team
+
+   ![downtime-notify](/static/images/monitor/downtime-notify.png)
+
+   Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integtration](https://app.datadoghq.com/account/settings#integrations).
 
 ## Monitor FAQs
 {: #faq}

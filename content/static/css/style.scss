@@ -1,4 +1,5 @@
-@import "../bootstrap/scss/_variables.scss";
+@import "../bootstrap/scss/_custom.scss";
+//@import "../bootstrap/scss/_variables.scss";
 .container.main {
   // padding-top: 60px;
 }
@@ -7,11 +8,13 @@ $btngrey: #fff;
 $btngrey2: darken($btngrey, 8%);
 $btngrey3: darken($btngrey2, 8%);
 
+$gray: #555;
+
 $purple: #774aa4;
 $lightpurple: lighten($purple, 12%); //#e5d2f8;
 $lighterpurple: lighten($purple, 40%);
 $darkpurple: darken($purple, 10%); //#9565c6;
-$blue: #5be;
+$blue: #4A90E2;
 $lightblue: lighten($blue, 10%);
 body {
   padding-bottom: 30px;
@@ -45,7 +48,7 @@ ol.outline {
   .navbar-inverse .navbar-nav {
     &>li>a,
     .open .dropdown-menu >li>a {
-      color: white !important;
+      color: $gray;
       text-align: left;
     }
   }
@@ -65,46 +68,42 @@ ol.outline {
   .nav > li > a:hover,
   .nav > li > a:focus {
     background-image: none;
-    background-color: $purple;
-    color: $lighterpurple;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, .6);
+    background-color: $flush;
+    color: $gray;
+    text-shadow:none;
   }
-  padding-top: 16px;
+  padding-top: 10px;
   min-height: 35px;
-  padding-bottom: 15px;
-  border-bottom: $darkpurple solid 1px;
+  padding-bottom: 10px;
+  border-bottom: none;
+  box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.07);
   .nav li {
     > a, button {
       &.flexbutton {
         display: inline-block;
         // margin: 10px 6px;
-        margin-right: 6px;
-        margin-left: 6px;
-        padding: 6px 18px;
+        margin: 0 5px;
+        padding: 8px 15px 5px;
         // height: 24px;
         // line-height: 24px;
         font-size: 16px;
         font-weight: bold;
-        color: #fff;
+        color: $gray;
         text-decoration: none;
-        background: $lightpurple;
-        border: 1px solid lighten($lightpurple, 2%);
+        background: $flush;
+        border: 2px solid $gray;
         // box-shadow: inset 0 1px 0 lighten($lightpurple, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
-        border-radius: 18px;
+        border-radius: 5px;
       }
       &.blueflex {
-        background: $blue;
-        border-color: lighten($blue, 2%);
-        // box-shadow: inset 0 1px 0 lighten($blue, 8%), 0 1px 2px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
+        background: $flush;
+        border-color: $blue;
+        color: $blue;
       }
       &.flexbutton:hover {
-        background: lighten($lightpurple, 5%);
-        box-shadow: inset 0 1px 0 lighten($lightpurple, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
         padding-bottom: 6px;
       }
       &.blueflex:hover {
-        background: lighten($blue, 5%); //#6cf;
-        box-shadow: inset 0 1px 0 lighten($blue, 12%), 0 1px 3px #333, 0 0 0 6px rgba(0, 0, 0, 0.15);
       }
     }
   }
@@ -118,8 +117,11 @@ ol.outline {
     padding-bottom: 0;
   }
   .navbar-brand {
-    padding: 0;
+    padding: 0 0 0 20px;
     padding-right: 5px;
+    width: 300px;
+    height: auto;
+    padding-top: 0;
   }
 }
 
@@ -147,6 +149,10 @@ ol.outline {
   @media (min-width: $screen-md-min) {
     width: 215px;
   }
+}
+.navbar-toggle{
+  margin-top: 8px;
+  margin-bottom:0;
 }
 .nav {
   .search {
@@ -244,7 +250,6 @@ ol.outline {
     }
   }
 }
-
 .div-collapse {
   border-top: 0;
   -webkit-box-shadow: none;
@@ -255,16 +260,6 @@ ol.outline {
   overflow-x: visible;
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
-}
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
- .div-collapse.collapse {
-   display: block !important;
-   height: auto !important;
-   overflow: visible !important;
- }
-
 }
 
 .main {
@@ -321,7 +316,6 @@ ol.outline {
 
 #signin,
 #signup {
-  float: right;
   padding-left: 5px;
 }
 
@@ -441,20 +435,15 @@ span.question {
 /* use width instead of max-width in logo because
  * FF and opera ignore max-width in inlined images
  */
-
 .navbar-brand img {
-  width: 250px;
-  margin-top: 10px;
+  width: 300px;
+  margin-top: 0;
   @media (min-width: 400px) {
     width: 300px;
-    margin-top: 8px;
   }
-  @media (min-width: 500px) {
+  @media (min-width: 320px) {
     width: 100%;
-    margin-top: 0;
-
   }
-
 }
 
 
@@ -486,4 +475,87 @@ dd {
 dt {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+@media (min-width:$screen-md){
+  .navbar-right{
+    padding-top: 6px;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+  }
+  .navbar{
+    .container{
+      padding: 0 20px;
+    }
+  }
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .div-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+@media (max-width:$screen-xs){
+  .navbar-brand{
+    width: 80%!important;
+    max-width: 300px;
+  }
+}
+
+
+/*!
+ *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-link:before {
+  content: "\f0c1";
+}
+/*
+ * This code is courtesy Ben Balter, modified by Parker Moore for jekyllrb.com
+ * http://ben.balter.com/2014/03/13/pages-anchor-links/
+ */
+.header-link {
+  position: relative;
+  left: -0.5em;
+  opacity: 0;
+  font-size: 0.8em;
+
+  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  -moz-transition: opacity 0.2s ease-in-out 0.1s;
+  -ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+h1.linked-header { margin-left: -30px;}
+h2.linked-header { margin-left: -23px;}
+h3.linked-header { margin-left: -20px;}
+h4.linked-header { margin-left: -14px;}
+h5.linked-header { margin-left: -10px;}
+h6.linked-header{
+  margin-left: -8px;
+}
+#pagecontent {
+  h1.linked-header { margin-left: -20px;}
+  h2.linked-header { margin-left: -14px;}
+  h3.linked-header { margin-left: -10px;}
+  h4.linked-header { margin-left: -14px;}
+  h5.linked-header { margin-left: -10px;}
+  h6.linked-header { margin-left: -8px;}
+}
+h1:hover .header-link,
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
 }

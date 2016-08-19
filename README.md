@@ -4,8 +4,6 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 # Setup
 
-**NOTE: if you are Datadog Internal, use this on your host os and not on the personal-chef vm. There are a few reports that it will not run on personal-chef. **
-
 ```
 brew install rbenv # or equivalent on linux
 rbenv install 2.3.0
@@ -20,6 +18,14 @@ As of OS X 10.11 (El Capitan), OpenSSL headers are no longer provided. You will 
 brew install openssl
 brew link openssl --force
 ```
+
+Integrations that have metrics will require your Github Personal Token. For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). After you've generated a token, add the following line to the `.bash_profile` in your home directory:
+
+```
+export github_personal_token=[paste access token here]
+```
+
+You should then run `source ~/.bash_profile` to reload the settings.
 
 # Working on Docs
 
@@ -62,6 +68,8 @@ These keys should be for a test account that does not include dozens of people. 
 
 **If there are errors, please don't merge.**
 
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the Github personal access token information in the setup instructions above.
+
 Internal Datadog folks: Within 5 minutes of merging to master, it will deploy automatically. You can see the status in #documentation.
 
 # How to add a new integration
@@ -86,6 +94,8 @@ Every integration should have the following format:
 ### Overview
 **Absolutely Required.**
 
+The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible. 
+
 The overview section is required and should be a paragraph or two with some bullets of what is interesting about this integration. For example, the following comes from the Docker integration.
 
 Get metrics from Docker in real time to:
@@ -106,6 +116,12 @@ The installation section should cover anything that needs to be installed on the
 
 The configuration section should cover anything that you can configure in the Datadog interface or the agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
 
+At the end of the configuration section include a link to the example configuration files. This should be done by adding `<%= insert_example_links%>`. This method takes a few optional parameters: `conf` is the name of the example YAML file, minus the extension; `check` is the name of the check file, minus the .py extension; setting either `check` or `conf` to `"none"` will hide that line; `include_intro` set to false will show only the list minus the sentence at the top; normally the integration title in the links will come from the pages frontmatter, but setting `integration` will override that, `yaml_extension` will change the extension from example to something else (like "default").
+
+#### Configuration Options
+
+Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for. 
+
 ### Validation
 **Required**
 
@@ -116,7 +132,7 @@ The validation section should include instructions on how to validate that the i
 
 If the metrics are listed in the integration under dogweb, add an attribute to the frontmatter: `git_integration_title: integration_name` replacing the integration name with the name of the folder for the integration in the dogweb repo.
 
-Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo.
+Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
 
 ### Events
 **Optional**
@@ -128,10 +144,6 @@ This is a newer section. If you can describe the events that are part of the int
 
 The troubleshooting section should include anything that answers a question a user might have about the integration. If there is a question that comes up in support about the integration, it should be added here.
 
-### Compatibility
-**Required**
-
-The compatibility section should include which versions this integration has been tested and validated on.
 
 
 # How to add a new Guide

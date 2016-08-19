@@ -1,23 +1,22 @@
 ---
 title: Datadog-Elasticsearch Integration
-integration_title: ElasticSearch
+integration_title: Elasticsearch
 kind: integration
 newhlevel: true
 git_integration_title: elasticsearch
+updated_for_agent: 5.8.5
 ---
 
 # Overview
 
-Connect ElasticSearch to Datadog in order to:
+![Elasticsearch](/static/images/elasticsearchgraph.png)
 
-* Visualize ElasticSearch performance.
-* Correlate ElasticSearch performance with the rest of your applications.
+Connect Elasticsearch to Datadog in order to:
+
+* Visualize Elasticsearch performance.
+* Correlate Elasticsearch performance with the rest of your applications.
 
 
-From the open-source Agent:
-
-* [ ElasticSearch YAML example][1]
-* [ ElasticSearch checks.d][2]
 
 # Installation
 
@@ -33,7 +32,9 @@ No installation steps are required for this integration
           - url: http://elastic:9200
             # The format for the url entry is url: http://servername:port
 
-2.  Restart the agent
+1.  Restart the agent
+
+<%= insert_example_links(conf: "elastic", check: "elastic")%>
 
 # Validation
 
@@ -58,9 +59,7 @@ To validate that the integration is working, run ```datadog-agent info```. You s
           - Collected 97 metrics, 0 events & 3 service checks
 
 # Metrics
+
 <%= get_metrics_from_git()%>
 
 
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py

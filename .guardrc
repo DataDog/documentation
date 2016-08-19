@@ -1,0 +1,4 @@
+Pry.config.editor='vim'
+Pry::Commands.block_command "f", "Spit out format errors" do 
+  output.puts open('fileformaterrors').read
+end

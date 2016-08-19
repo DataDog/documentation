@@ -5,7 +5,6 @@ kind: integration
 newhlevel: true
 ---
 # Overview
-{: #int-overview}
 
 Capture metrics from the files in given directories:
 
@@ -15,14 +14,9 @@ Capture metrics from the files in given directories:
   * age of the creation
 
 
-From the Agent:
-
-* [Directory check script][1]
-* [Directory check configuration example][2]
-
 
 # Configuration
-{:#int-configuration}
+
 *To capture Directory metrics you need to install the Datadog Agent.*
 
 2.  Ensure the user account running the Agent (typically `dd-agent`) has read access to the monitored directory and files.
@@ -39,6 +33,8 @@ From the Agent:
             # "pattern" - string, the `fnmatch` pattern to use when reading the "directory"'s files.
             #                     default "*"
             # "recursive" - boolean, when true the stats will recurse into directories. default False
+            # "countonly" - boolean, when true the stats will only count the number of files matching the pattern. Useful for very large directories.
+
 
             -  directory: "/path/to/directory"
                name: "tag_name"
@@ -47,6 +43,8 @@ From the Agent:
     {:.language-yaml}
 
 4.  Restart the Agent
+
+<%= insert_example_links(conf: "directory", check: "directory")%>
 
 # Validation
 
@@ -62,6 +60,3 @@ To validate that the check has passed run the agent info command. The output of 
         - instance #0 [OK]
         - Collected 8 metrics & 0 events
 
-
-[1]: https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py
-[2]: https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example

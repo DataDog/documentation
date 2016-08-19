@@ -18,7 +18,9 @@ For information about the rest of the AWS services, see the [AWS tile][1]
 Configure CloudWatch on AWS and ensure that the policy you created has the equivalent of the **AWSCloudTrailReadOnlyAccess** policy assigned. The actions in that policy are **s3:ListBucket**, **s3:GetBucketLocation**, and **s3:GetObject**. Also ensure that the policy gives access to the S3 bucket you selected for the CloudTrail Trail. Here is an example policy to give access to an S3 bucket.
 
 
-    { "Statement": [
+    { 
+      "Version": "2012-10-17",
+      "Statement": [
       {
         "Action": [
           "s3:ListBucket",

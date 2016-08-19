@@ -2,6 +2,7 @@
 title: Datadog-Kong Integration
 integration_title: Kong
 kind: integration
+doclevel: basic
 git_integration_title: kong
 newhlevel: true
 ---
@@ -32,6 +33,7 @@ Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
         tags:
             -   instance:bar
 
+<%= insert_example_links%>
 
 # Validation
 

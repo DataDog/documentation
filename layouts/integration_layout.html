@@ -20,15 +20,7 @@ this layout provides a sidebar and main column.
               </form>
             </li>
             <% end %>
-            <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-              <% @item[:sidebar][:nav].each do |i| %>
-                <% if i[:header] %>
-                  <li class="nav-header hidden-xs"><%= i[:header] %></li>
-                <% else %>
-                  <li class="hidden-xs"><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
-                <% end %>
-              <% end %>
-            <% end %>
+            <%= show_table_of_contents %>
 
             <li class="nav-header auto"><%= @item["integrations_other_integrations"] %> <span class="toggle visible-xs-inline">(<a href="#toggleIntegrations" data-toggle="collapse"><%= @item["integrations_toggle_to_show_integrations"] %></a>)<br></span></li>
             <div class="collapse div-collapse" id="toggleIntegrations">

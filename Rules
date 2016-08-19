@@ -150,6 +150,10 @@ compile '*' do
 
     id = @item.identifier
 
+    unless id.match('/api/')
+      filter :header_links
+    end
+
     case
 
     # when id.match('/ja/guides/basic_agent_usage/')

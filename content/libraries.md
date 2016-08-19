@@ -146,7 +146,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Scala
 {: #community-scala}
 
-  * [datadgog-scala][37] - a Scala API client, written by [Cory Watson][38].
+  * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
 ### Community Integration Libraries
 
@@ -174,6 +174,11 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-nginx-lua}
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
+
+#### Phusion Passenger
+{: #community-integration-passenger}
+
+  * Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
 #### Pid-stats
 {: #community-integration-pid-stats}
@@ -268,3 +273,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [74]:https://github.com/remind101/ecsdog
    [75]: http://ejholmes.io/
    [76]: https://github.com/brightcove/hot-shots
+   [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
+   [78]: https://github.com/Sjeanpierre

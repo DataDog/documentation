@@ -7,6 +7,8 @@ newhlevel: true
 ---
 # Overview
 
+![Hadoop Yarn](/static/images/yarndashboard.png)
+
 Capture Yarn metrics to:
 
 * Visualize cluster health, performance, and utilization.
@@ -27,6 +29,7 @@ Capture Yarn metrics to:
 
 2.  Restart the Agent
 
+<%= insert_example_links(conf:"yarn", check:"yarn")%>
 
 
 # Validation

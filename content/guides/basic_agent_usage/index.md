@@ -81,7 +81,7 @@ If not, please send both the full output of the info command and the logs as att
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
-<code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+<code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date</code>
 <p>
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
@@ -90,7 +90,7 @@ If these are more than a few minutes apart, you may want to look at the time set
 
 <h4 id="integrations">Issues getting integrations working</h4>
 
-Datadog has quite a few <a href="http://docs.datadoghq.com/integrations/" target="_blank">integrations</a> which are set 
+Datadog has quite a few <a href="http://docs.datadoghq.com/integrations/" target="_blank">integrations</a> which are set
 up through <a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAML files in the Agent</a>.
 
 Here is a quick guide for troubleshooting getting integrations installed:

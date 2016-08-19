@@ -1,3 +1,4 @@
+require 'nokogiri'
 
 check :no_api_keys do
   self.output_filenames.each do |fn|
@@ -5,4 +6,69 @@ check :no_api_keys do
       self.add_issue("API Key in here!! - #{match}\nPlease use 9775a026f1ca7d1c6c5af9d94d9595a4 as the API Key", :subject => fn)
     end
   end
+end
+
+check :integration_format do
+  puts ""
+  formatoutput=""
+  overviewimage = Array.new
+  headings = Array.new
+  self.output_filenames.each do |fn|
+    missingfiles =""
+    if fn.include? "output/integration"
+      doc = File.open(fn) { |f| Nokogiri::HTML(f)}
+      integrationlocation = fn.sub('output', 'content').sub('/index.html', '')
+      pagetitle = doc.xpath("//h1[@id='pagetitle']/text()")
+      newhlevel = doc.xpath("//div[@id='pagecontent']")
+
+      if newhlevel.length > 0 
+        #############
+        # New hlevel
+        #############
+
+        # Does the document have the right headings?
+        headings = doc.xpath("//div[@id='pagecontent']/h1").collect {|node| node.text.strip}
+        if headings.include? 'Overview'
+          if (headings & ['Configuration', 'Installation']).empty?
+            missingfiles += "\n  - Missing Config or Installation section"
+          else
+            overviewimage = doc.xpath("//p[preceding::h1[@id='overview'] and following::h1[(@id='configuration') or (@id='installation')]]/img/@src") 
+
+            # overviewimage = doc.xpath("//img[preceding::h1[contains(text(), 'Overview')] and following::h1[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+            if overviewimage.count == 0
+              missingfiles += "\n  - Missing Overview Image"
+            end
+          end
+        else
+          missingfiles += "\n  - Not Updated to New Integration Format"
+        end
+      else
+        #############
+        # Old hlevel
+        #############
+
+        missingfiles += "\n  - Using old hlevel"
+        headings = doc.xpath("//div[@id='pagecontent']/h3").collect {|node| node.text.strip}
+        if headings.include? 'Overview'
+          if (headings & ['Configuration', 'Installation']).empty?
+            missingfiles += "\n  - Missing Config or Installation section"
+          else
+            overviewimage = doc.xpath("//img[preceding::h3[contains(text(), 'Overview')] and following::h3[(contains(text(), 'Configuration')) or (contains(text(), 'Installation'))]]/@src")  
+            if overviewimage.count == 0
+              missingfiles += "\n  - Missing Overview Image"
+            end
+          end
+        else
+          missingfiles += "\n  - Not Updated to New Integration Format"
+        end
+      end
+
+      if missingfiles.length > 0
+        formatoutput += "Format Issue: #{pagetitle} (#{integrationlocation}) #{missingfiles}\n"
+      end
+      
+    end
+  end
+  File.open("fileformaterrors", 'w') {|file| file.write(formatoutput)}
+  puts "\033[31mThere are file format errors. Press \033[1mf\033[22m<enter> or look at \033[1mfileformaterrors\033[22m in your editor to see them."
 end
