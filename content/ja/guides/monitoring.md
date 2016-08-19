@@ -86,7 +86,8 @@ Here is a quick overview of the different terms used in this guide.
 {: #create}
 -->
 
-## 新しいMonitorの作成 {#create}
+## 新しいMonitorの作成 
+{: #create}
 
 <!--
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -103,14 +104,16 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 <!-- ## Metric Monitors {#metric} -->
 
-### 監視する対象の設定 {#metric}
+  **監視する対象の設定**
+  {: #metric}
 
 <!--
 1. Select the metric and scope you want to monitor.
  -->
 
-1. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
-  ![metric scope](/static/images/monitor/metric_scope.png)
+1.  メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
+
+    ![metric scope](/static/images/monitor/metric_scope.png)
 
     <!--
     You can create a monitor on any metrics that you are currently sending to
@@ -127,7 +130,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     2. Select the alert grouping.
      -->
 
-2. アラートグループを選択します。
+2.  アラートグループを選択します。
     ![alert grouping](/static/images/monitor/alert_grouping.png)
 
     <!--
@@ -144,9 +147,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     A **multi alert** applies the alert to each source, according to your group
     parameters. E.g. to alert on disk space you might group by host and device,
     creating the query:
-
-        avg:system.disk.in_use{*} by {host,device}
-
+    avg:system.disk.in_use*} by host,device}
     This will trigger a separate alert for each device on each host that is
     running out of space.
     -->
@@ -161,7 +162,8 @@ on the left. This guide will walk through the configuration of the Metric type. 
     3. Select the alert type.
      -->
 
-3. アラートのタイプを選択します。
+3.  アラートのタイプを選択します。
+
     ![alert type](/static/images/monitor/alert_type.png)
 
     <!--
@@ -170,19 +172,12 @@ on the left. This guide will walk through the configuration of the Metric type. 
     in the alerting conditions section. This is the standard alert case where
     you know what sort values are unexpected.
      -->
-
-    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは一般的なアラートであり、正常な範囲か値が事前に分かっている場合に使用します。
-
     <!--
     A **change alert** will compare the change or % change of a value between
     now and some time ago against a given threshold.
     The compared data points will not be single points but are computed using
     the parameters in the *alert conditions* section.
     -->
-
-    **change alert**は、最近のデータポイントの値に対する数分前の値の変化量または変化率と指定した閾値を比較します。
-    比較しているデータポイントの値は単一点の値ではなく、"Set alert conditions"のセクションで指定されたパラメータで計算されたものになります。
-
     <!--
     This type of alert is useful to track fast spikes or drops as well as slow
     changes in a metric when you might not have an exact "unexpected" threshold.
@@ -190,69 +185,68 @@ on the left. This guide will walk through the configuration of the Metric type. 
     negative for a downward change.
     -->
 
+    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは一般的なアラートであり、正常な範囲か値が事前に分かっている場合に使用します。
+
+
+    **change alert**は、最近のデータポイントの値に対する数分前の値の変化量または変化率と指定した閾値を比較します。
+    比較しているデータポイントの値は単一点の値ではなく、"Set alert conditions"のセクションで指定されたパラメータで計算されたものになります。
+
+
     このアラートタイプは、メトリクスのゆっくりとした変化はもちろん、急速なスパイクやドロップを追跡するのに有効であり、そのメトリクスの正常な範囲や値が事前に分かっていない場合に特に有効です。
     注: このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
 
     <!--
-    4. {:#metric-conditions} Select the alert conditions
-
+    4. Select the alert conditions
     ###Define the conditions
-    4. {:#metric-conditions :start="4"} Select the alert conditions
+    4. Select the alert conditions
     -->
-
-### アラート条件の設定
-
-4. {:#metric-conditions :start="4"} アラート条件の設定をします。
-
+    <!-- The **threshold** options vary slightly depending on what alert type you have chosen. For either case, you input a threshold and comparison type based on your metric. As you change your threshold, you will see the graph update with a marker showing the cutoff point.-->
     <!--
-    - The **threshold** options vary slightly depending on what alert type you
-      have chosen. For either case, you input a threshold and comparison type
-      based on your metric. As you change your threshold, you will see the graph
-      update with a marker showing the cutoff point.
-       -->
+    Note that you can use formatted values in this input based on the
+    metric itself. For example, if you are monitoring `system.disk.used`, you
+    can give a threshold of `20GB`.
+    -->
+    <!--
+    For a **threshold alert** you will be able to chose a *time aggregation*
+    of the data. The alerting engine will generate a single series and perform
+    selected aggregation.
+     -->
+    <!--
+    *on average*: The series will be averaged to produce a single
+     value that will be checked against the threshold.
 
-      アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
+    *at least once*: If any single value in the generated series crosses
+     the threshold then an alert will be triggered.
 
-      ![metric threshold](/static/images/monitor/metric_threshold.png)
+    *at all times*: If every point in the generated series is outside the
+     threshold then an alert will be triggered.
 
-      <!--
-      Note that you can use formatted values in this input based on the
-      metric itself. For example, if you are monitoring `system.disk.used`, you
-      can give a threshold of `20GB`.
-       -->
+    *in total*: If the summation of every point in the series is outside
+     the threshold then an alert will be triggered.
+     -->
 
-      メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
+    **アラート条件の設定**
 
-      <!--
-      For a **threshold alert** you will be able to chose a *time aggregation*
-      of the data. The alerting engine will generate a single series and perform
-      selected aggregation.
-       -->
+4.  {:#metric-conditions}アラート条件の設定をします。
 
-      **threshold alert** の場合、*集計期間内に含まれるデータの集計方法* を決めるオプションを選択することができます。アラートエンジンは、別の時系列データを生成し選択された集計を実行します。
+    アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-      <!-- Let's look at the details of each option: -->
+    ![metric threshold](/static/images/monitor/metric_threshold.png)
 
-      それぞれのオプションの詳細は以下のようになります:
+    メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
-　　　　<!--
-       - *on average*: The series will be averaged to produce a single
-         value that will be checked against the threshold.
 
-       - *at least once*: If any single value in the generated series crosses
-         the threshold then an alert will be triggered.
+    **threshold alert** の場合、*集計期間内に含まれるデータの集計方法* を決めるオプションを選択することができます。アラートエンジンは、別の時系列データを生成し選択された集計を実行します。
 
-       - *at all times*: If every point in the generated series is outside the
-         threshold then an alert will be triggered.
+    <!-- Let's look at the details of each option: -->
 
-       - *in total*: If the summation of every point in the series is outside
-         the threshold then an alert will be triggered.
-         -->
+    それぞれのオプションの詳細は以下のようになります:
 
-      - *on average*(平均): 時系列データには、平均化の処理を行い単一の値を導きだします。その後、閾値と比較してチェックします。
-      - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
-      - *at all times*(常時): 生成された時系列データの全てのポイントが閾値を超えている場合に、アラートが発報されます。
-      - *in total*(合計)： 時系列データの全てのポイントの合計が閾値を超えている場合に、アラートが発報されます。
+
+    - *on average*(平均): 時系列データには、平均化の処理を行い単一の値を導きだします。その後、閾値と比較してチェックします。
+    - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
+    - *at all times*(常時): 生成された時系列データの全てのポイントが閾値を超えている場合に、アラートが発報されます。
+    - *in total*(合計)： 時系列データの全てのポイントの合計が閾値を超えている場合に、アラートが発報されます。
 
       <!--
       Note the *on average* and *at all times* aggregations *require* a full
@@ -262,7 +256,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
       once* or *in total* for metrics with > 1 minute interval.
        -->
 
-      注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全に揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
+    - 注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全に揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
 
     <!--
     - When you select the **change alert** option, you will have additional
@@ -279,26 +273,27 @@ on the left. This guide will walk through the configuration of the Metric type. 
         -->
 
       **change alert**オプションを選択している場合は、追加で設定可能な項目があります。
+      
       - *change* は値そのものの変化量を意味し、*% change* はその値の過去の値との変化量を意味します (つまり過去の値が2で現在が4の場合、*% change* は100%になります)。
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
 
-<!--
-5. You can optionally **notify on no data** after a configurable timeframe. At
-   the minimum, your chosen timeframe must be greater than 2x the alerting
-   window. For example, if you are alerting over the last 5 minutes then you
-   would need to wait at least 10 minutes before notifying on missing data.
--->
+      <!--
+      5. You can optionally **notify on no data** after a configurable timeframe. At
+         the minimum, your chosen timeframe must be greater than 2x the alerting
+         window. For example, if you are alerting over the last 5 minutes then you
+         would need to wait at least 10 minutes before notifying on missing data.
+      -->
+    <!--
+    6. You can opt to **automatically resolve the monitor from a triggered
+       state**. In general you'll want to leave this option off as you only want
+       an alert to be resolved when it's fixed.
+    -->
 
-5. 必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
+5.  必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
 
-<!--
-6. You can opt to **automatically resolve the monitor from a triggered
-   state**. In general you'll want to leave this option off as you only want
-   an alert to be resolved when it's fixed.
--->
 
-6. **automatically resolve the monitor from a triggered
+6.  **automatically resolve the monitor from a triggered
    state**(アラートが発報している状態を自動的に解除する)オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にこのオプションはOFFにしておくことをお勧めします。
 
    <!--
@@ -312,7 +307,8 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 <!-- ## Monitor Notifications {#notification} -->
 
-### 通知の設定 {#notifications}
+### 通知の設定 
+{: #notifications}
 
 ![notification](/static/images/monitor/notification.png)
 
@@ -439,7 +435,8 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 <!-- ## Monitor FAQs {#faqs} -->
 
-## Monitorに関するFAQs {#faqs}
+## Monitorに関するFAQs 
+{: #faqs}
 
 <!--
 - *Can I manage my monitors programatically?*
