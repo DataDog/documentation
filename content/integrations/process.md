@@ -1,19 +1,19 @@
 ---
 title: Process check
 integration_title: Process Check
-
+newhlevel: true
 kind: integration
 ---
-### Overview
+# Overview
 
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
   * Monitor the status of running processes with [Process Monitors][1] (**Requires Datadog Agent >= 5.1.0**).
 
-### Installation
+# Installation
 
-N/A
+No installation required.
 
-### Configuration
+# Configuration
 
 Configure the Agent to connect to your processes. Our example configuration will monitor the `ssh`, `sshd`, and `postgres` processes.
 
@@ -40,7 +40,7 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
 
 <%= insert_example_links(conf:"process", check:"process")%>
 
-### Validation
+# Validation
 
 1.  Execute the info command
 
@@ -56,29 +56,18 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
         process
         ---------
             - instance #0 [OK]
-            - Collected 8 metrics & 0 events & 4 service checks
+            - Collected 18 metrics & 0 events & 2 service checks
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 
-### Metrics
+# Metrics
 
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
-| Process Check Metrics |
-|-------------------|
-| system.processes.cpu.pct |
-| system.processes.mem.rss |
-| system.processes.mem.vms |
-| system.processes.number |
-| system.processes.threads |
-| system.processes.involuntary_ctx_switches |
-| system.processes.open_file_descriptors |
-| system.processes.voluntary_ctx_switches |
-{:.table}
+<%= get_metrics_from_git('system', 'system.processes') %>
+
 
    [1]: /guides/monitoring#process
-   [2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py
-   [3]: https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example
 
 
 
