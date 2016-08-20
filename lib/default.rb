@@ -4,7 +4,6 @@
 require 'tempfile'
 #require './lib/snippets.rb'
 require 'oj'
-require "nanoc/toolbox"
 require "video_info"
 require "nanoc/cachebuster"
 include Nanoc::Helpers::CacheBusting
@@ -87,6 +86,31 @@ def adroll_pixel()
         document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
         if(oldonload){oldonload()}};
       }());
+    </script>
+  EOF
+
+  return html
+end
+
+def snowplow_pixel()
+  html = <<-EOF
+    <script type="text/javascript">
+      ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+      p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+      };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+      n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://d33tyra1llx9zy.cloudfront.net/static/js/plow232.js","snowplow"));
+      window.snowplow('newTracker', 'co', 'collector.datadoghq.com', { // Initialise a tracker
+      appId: 'datadog', // Application ID. Make sure you use the same value across all the tags you fire on your trial
+      platform: 'web',
+      cookieDomain: '.datadoghq.com',
+      contexts: {
+        performanceTiming: true,
+        webPage: true
+        }
+      });
+      window.snowplow('enableActivityTracking', 5, 5); // Ping every 30 seconds after 30 seconds
+      window.snowplow('enableLinkClickTracking');
+      window.snowplow('trackPageView');
     </script>
   EOF
 

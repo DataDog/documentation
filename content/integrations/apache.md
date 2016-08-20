@@ -2,10 +2,13 @@
 title: Datadog-Apache Integration
 integration_title: Apache
 kind: integration
+newhlevel: true
+git_integration_title: apache
 ---
 
-### Overview
-{:#int-overview}
+# Overview
+
+![Apache Graph](/static/images/apachegraph.png)
 
 Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 
@@ -13,30 +16,15 @@ Get metrics from Apache in real time; graph them and correlate them with other r
   * Correlate the performance of Apache with the rest of your applications
 
 
-From the open-source Agent:
+# Installation
 
-  * [Apache YAML example][1]
-  * [Apache checks.d][2]
+Make sure that [`mod_status`][3] is installed on your Apache server with `ExtendedStatus` set to `on`
 
-The following metrics are collected by default with the Apache integration:
-
-    apache.net.bytes
-    apache.net.bytes_per_s
-    apache.net.hits
-    apache.net.request_per_s
-    apache.performance.busy_workers
-    apache.performance.cpu_load
-    apache.performance.idle_workers
-    apache.performance.uptime
-
-
-### Configuration
-{:#int-configuration}
+# Configuration
 
 *To capture Apache metrics you need to install the Datadog agent.*
 
-1. **Make sure that [`mod_status`][3] is installed on your Apache server** with `ExtendedStatus` set to `on`
-2. Configure the agent to connect to Apache. Edit `/etc/dd-agent/conf.d/apache.yaml`
+1.  Configure the agent to connect to Apache. Edit `/etc/dd-agent/conf.d/apache.yaml`
 
         init_config:
 
@@ -46,17 +34,39 @@ The following metrics are collected by default with the Apache integration:
             # apache_password: example_password
             tags:
               - instance:foo
+            disable_ssl_validation: true # if you want to disable SSL cert validation
     {:.language-yaml}
 
-3. Restart the agent
+2. Restart the agent
 
-        sudo /etc/init.d/datadog-agent restart
-    {:.language-shell}
+        sudo datadog-agent restart
 
-4. Verification:
+<%= insert_example_links %>
 
-        sudo /etc/init.d/datadog-agent info
-    {:.language-shell}
+# Validation
+
+To ensure the integration is installed correctly, run the agent info command.
+
+    sudo datadog-agent info
+
+You should see something similar to the following if everything is working correctly:
+
+    Checks
+    ======
+
+      [...]
+
+      apache
+      ------
+          - instance #0 [OK]
+          - Collected 8 metrics & 0 events
+
+
+# Metrics
+
+The following metrics are collected by default with the Apache integration:
+
+<%= get_metrics_from_git()%>
 
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example

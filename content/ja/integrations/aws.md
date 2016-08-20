@@ -1,286 +1,214 @@
 ---
-last_modified: 2015/03/31
-translation_status: original
+last_modified: 2016/08/18
+translation_status: tentative
 language: ja
-title: Datadog-AWS Cloudwatch Integration
-integration_title: AWS Cloudwatch
+title: Datadog-AWS Integration
+integration_title: Amazon Web Services
 kind: integration
-doclevel: complete
+newhlevel: true
 sidebar:
   nav:
     - header: AWS integration
-    - text: Configure CloudWatch
-      href: "#cloudwatch"
-    - text: Configure CloudTrail
-      href: "#cloudtrail"
-    - text: Troubleshooting
-      href: "#troubleshooting"
+    - text: Overview
+      href: "#overview"
+    - text: Installation
+      href: "#installation"
+    - text: Configuration
+      href: "#configuration"
+git_integration_title: amazon_web_services
 ---
 
 
-### <a name="cloudwatch"></a>Configure CloudWatch
 
-The recommended way to configure Cloudwatch in Datadog is to create a
-new user via the <a target="_blank" href="https://console.aws.amazon.com/iam/home#s=Home">IAM Console</a>
-and grant that user (or group of user) **Amazon EC2, Cloudwatch and CloudTrail *read-only* access**.
+# Overview
 
-These can be set via policy templates in the console.
+Connect to Amazon Web Services (AWS) in order to:
 
-Alternatively they can set via Amazon's API according to the following
-specifications:
+* See automatic AWS status updates in your stream
+* Get Cloudwatch metrics for EC2 hosts without installing the Agent
+* Tag your EC2 hosts with EC2-specific information (e.g. availability zone)
+* Get Cloudwatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, * OpsWorks, Redshift, Route53, SQS, and SNS
+* See EC2 scheduled maintenances events in your stream.
 
-    {
-      "Statement": [
-        {
-          "Action": [
-            "autoscaling:Describe*",
-            "cloudformation:DescribeStacks",
-            "cloudformation:DescribeStackEvents",
-            "cloudformation:DescribeStackResources",
-            "cloudformation:GetTemplate",
-            "cloudfront:Get*",
-            "cloudfront:List*",
-            "cloudtrail:DescribeTrails",
-            "cloudtrail:GetTrailStatus",
-            "cloudwatch:Describe*",
-            "cloudwatch:Get*",
-            "cloudwatch:List*",
-            "dynamodb:GetItem",
-            "dynamodb:BatchGetItem",
-            "dynamodb:Query",
-            "dynamodb:Scan",
-            "dynamodb:DescribeTable",
-            "dynamodb:ListTables",
-            "ec2:Describe*",
-            "elasticache:Describe*",
-            "elasticbeanstalk:Check*",
-            "elasticbeanstalk:Describe*",
-            "elasticbeanstalk:List*",
-            "elasticbeanstalk:RequestEnvironmentInfo",
-            "elasticbeanstalk:RetrieveEnvironmentInfo",
-            "elasticloadbalancing:Describe*",
-            "iam:List*",
-            "iam:Get*",
-            "route53:Get*",
-            "route53:List*",
-            "rds:Describe*",
-            "rds:ListTagsForResource",
-            "s3:List*",
-            "sdb:GetAttributes",
-            "sdb:List*",
-            "sdb:Select*",
-            "ses:Get*",
-            "ses:List*",
-            "sns:Get*",
-            "sns:List*",
-            "sqs:GetQueueAttributes",
-            "sqs:ListQueues",
-            "sqs:ReceiveMessage"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
-        }
-      ]
-    }
+<!--
+Related integrations include:
 
-Once these credentials are configured within AWS, go into the
-<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services">AWS integration tile</a>
-within Datadog to pull this data in.
+| [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
+| [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
+| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
+| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
+| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
+| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
+| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
+| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
+| [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
+| [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
+{:.table}
+-->
 
-### <a name="cloudtrail"></a>CloudTrail integration
+There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
 
-AWS CloudTrail records AWS API calls for your account in log files. Datadog can read these files and create events in your stream. Here is an example of a CloudTrail event:
+| AutoScaling |
+| Billing |
+| Budgeting |
+| CloudFront |
+| CloudSearch |
+| EBS |
+| Elastic MapReduce |
+| ElasticsearchService |
+| Firehose |
+| Lambda |
+| MachineLearning |
+| OpsWorks |
+| S3 |
+| Simple Queing Service |
+| Simple Workflow Service |
+| Trusted Advisor |
+| WorkSpaces |
+{:.table}
 
-<img src="/static/images/cloudtrail_event.png" style="width:100%; border:1px solid #777777"/>
 
-#### How to configure CloudTrail?
+# Installation
 
-First make sure that you have configured CloudWatch and that the user you created for Datadog has the **AWS CloudTrail read-only access**. <a href="#cloudwatch">See above explanation</a>.
-Besides the instructions below you will also have to configure the separate
-<a target="_blank" href="https://app.datadoghq.com/account/settings#integrations/cloudtrail">Cloudtrail integration tile</a> within Datadog.
+There are two integration methods that can be used to allow Datadog to monitor your AWS environment. Both require creating a policy in the AWS Console with a certain set of permissions. The difference between the two is whether you choose to create a role that Datadog has access to which is preferred due to the higher level of security, or create a user and share an AWS Secret and Access Key. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-CloudTrail has to be configured on a per-region basis. Make sure you complete the two steps below for **all regions** that you want Datadog to collect CloudTrail data from.
+Note: GovCloud does not support role based authentication.
 
-1. <a href="https://console.aws.amazon.com/cloudtrail">Go to your CloudTrail console</a> to enable it. Then select the S3 bucket you wish to use as follows:
-
-    <img src="/static/images/cloudtrail_config.png" style="width:100%; border:1px solid #777777"/>
-
-2. Your user must have access to the S3 bucket you have selected. To grant your user read-only access to your bucket, you would paste the following policy in the IAM console:
+1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
         {
+          "Version": "2012-10-17",
           "Statement": [
             {
               "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketLocation",
-                "s3:GetObject"
+                "autoscaling:Describe*",
+                "cloudtrail:DescribeTrails",
+                "cloudtrail:GetTrailStatus",
+                "cloudwatch:Describe*",
+                "cloudwatch:Get*",
+                "cloudwatch:List*",
+                "dynamodb:list*",
+                "dynamodb:describe*",
+                "ec2:Describe*",
+                "ec2:Get*",
+                "ecs:Describe*",
+                "ecs:List*",
+                "elasticache:Describe*",
+                "elasticache:List*",
+                "elasticloadbalancing:Describe*",
+                "elasticmapreduce:List*",
+                "elasticmapreduce:Describe*",
+                "kinesis:List*",
+                "kinesis:Describe*",
+                "logs:Get*",
+                "logs:Describe*",
+                "logs:FilterLogEvents",
+                "logs:TestMetricFilter",
+                "rds:Describe*",
+                "rds:List*",
+                "route53:List*",
+                "ses:Get*",
+                "sns:List*",
+                "sns:Publish",
+                "support:*"
               ],
               "Effect": "Allow",
-              "Resource": [
-                "arn:aws:s3:::your-s3-bucket-name",
-                "arn:aws:s3:::your-s3-bucket-name/*"
-              ]
+              "Resource": "*"
             }
           ]
         }
 
-#### What events are collected?
+    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
-Below is the list of events that Datadog will collect from CloudTrail and display in your event stream. If you would like to see other events that are not mentionned here, please reach out to <a href="/help">our support team</a>.
-
-*EC2 Actions**<br/>
-AttachVolume<br/>
-AuthorizeSecurityGroup<br/>
-CreateSecurityGroup<br/>
-CreateVolume<br/>
-CreateTags<br/>
-DeleteVolume<br/>
-DeleteTags<br/>
-DetachVolume<br/>
-RebootInstances<br/>
-RevokeSecurityGroupEgress<br/>
-RevokeSecurityGroupIngress<br/>
-RunInstances<br/>
-StartInstances<br/>
-StopInstances<br/>
-TerminateInstances<br/>
-
-**RDS Actions**<br/>
-CreateDBInstance<br/>
-RebootDBInstance<br/>
-ModifyDBInstance<br/>
-DeleteDBInstance<br/>
-
-**IAM Actions**<br/>
-AddRoleToInstanceProfile<br/>
-AddUserToGroup<br/>
-ChangePassword<br/>
-CreateAccessKey<br/>
-CreateAccountAlias<br/>
-CreateGroup<br/>
-CreateInstanceProfile<br/>
-CreateLoginProfile<br/>
-CreateRole<br/>
-CreateSAMLProvider<br/>
-CreateUser<br/>
-CreateVirtualMFADevice<br/>
-DeleteAccessKey<br/>
-DeleteAccountAlias<br/>
-DeleteAccountPasswordPolicy<br/>
-DeleteGroup<br/>
-DeleteGroupPolicy<br/>
-DeleteInstanceProfile<br/>
-DeleteLoginProfile<br/>
-DeleteRole<br/>
-DeleteRolePolicy<br/>
-DeleteSAMLProvider<br/>
-DeleteServerCertificate<br/>
-DeleteSigningCertificate<br/>
-DeleteUser<br/>
-DeleteUserPolicy<br/>
-DeleteVirtualMFADevice<br/>
-PutGroupPolicy<br/>
-PutRolePolicy<br/>
-PutUserPolicy<br/>
-RemoveRoleFromInstanceProfile<br/>
-RemoveUserFromGroup<br/>
-UpdateAccessKey<br/>
-UpdateAccountPasswordPolicy<br/>
-UpdateAssumeRolePolicy<br/>
-UpdateGroup<br/>
-UpdateLoginProfile<br/>
-UpdateSAMLProvider<br/>
-UpdateServerCertificate<br/>
-UpdateSigningCertificate<br/>
-UpdateUser<br/>
-UpdateServerCertificate<br/>
-UpdateSigningCertificate<br/>
-
-**VPC Actions**<br/>
-AssociateDhcpOptions<br/>
-AssociateRouteTable<br/>
-AttachVpnGateway<br/>
-CreateCustomerGateway<br/>
-CreateDhcpOptions<br/>
-CreateRouteTable<br/>
-CreateVpnConnection<br/>
-CreateVpnConnectionRoute<br/>
-CreateVpnGateway<br/>
-DeleteCustomerGateway<br/>
-DeleteDhcpOptions<br/>
-DeleteRouteTable<br/>
-DeleteVpnConnection<br/>
-DeleteVpnConnectionRoute<br/>
-DeleteVpnGateway<br/>
-DetachVpnGateway<br/>
-DisassociateRouteTable<br/>
-ReplaceRouteTableAssociation<br/>
-
-**ELB Actions**<br/>
-ApplySecurityGroupsToLoadBalancer<br/>
-AttachLoadBalancerToSubnets<br/>
-ConfigureHealthCheck<br/>
-CreateAppCookieStickinessPolicy<br/>
-CreateLBCookieStickinessPolicy<br/>
-CreateLoadBalancer<br/>
-CreateLoadBalancerListeners<br/>
-CreateLoadBalancerPolicy<br/>
-DeleteLoadBalancer<br/>
-DeleteLoadBalancerListeners<br/>
-DeleteLoadBalancerPolicy<br/>
-DeregisterInstancesFromLoadBalancer<br/>
-DetachLoadBalancerFromSubnets<br/>
-DisableAvailabilityZonesForLoadBalancer<br/>
-EnableAvailabilityZonesForLoadBalancer<br/>
-ModifyLoadBalancerAttributes<br/>
-RegisterInstancesWithLoadBalancer<br/>
-SetLoadBalancerListenerSSLCertificate<br/>
-SetLoadBalancerPoliciesForBackendServer<br/>
-SetLoadBalancerPoliciesOfListener<br/>
+2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Using role delegation is more secured as only our AWS account is authorized to assume the role you create.
+    **Note**: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
+    * **Preferred option:** Role-based authentication: create a role and allow Datadog to assume it (not supported in GovCloud or China)
+        1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
+        2.  From the selection, choose Role for Cross-Account Access.
+        3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
+        4.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+        5.  Select the policy you created above.
+        6.  Review what you selected and click the **Create Role** button.
+    * Access Key-based authentication: create a user which will have Secret and Access Key associated with it
+        1.  Create a new user in the IAM Console. Name it anything you like.
+        2.  Make sure you leave the **Generate an access key for each user** checked.
+        3.  Click the link to **Show User Security Credentials**.
+        4.  Make a note of the Access Key ID and Secret Access Key in a secure location. You will need this in the Datadog tile. You can also download the credentials.
 
 
-### <a name="troubleshooting"></a>Troubleshooting
+# Configuration
 
-#### Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?
+![logo](/static/images/integrations-aws-secretentry.png)
 
-<p>There are two important distinctions to be aware of:</p>
-<ol>
-<li>In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences
-in one minute leading up to that point, i.e. the rate per 1 minute.  Datadog is
-displaying the raw data from AWS normalized to per second values, regardless of the
-timeframe selected in AWS, which is why you will probably see our value as lower.</li>
+Depending on whether you created a role or a user above, choose the appropriate Datadog configuration:
 
-<li>Overall, min/max/avg have a different meaning within AWS than in Datadog.
-In AWS, average latency,
-minimum latency, and maximum latency are three distinct metrics that AWS collects.
-When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time
-series per ELB.
-Within Datadog, when you are selecting 'min', 'max', or 'avg', you are
-controlling how multiple time series will be combined. For example, requesting
-<code>system.cpu.idle</code> without any filter would return one series for each host that
-reports that metric and those series need to be combined to be graphed. On the
-other hand, if you requested <code>system.cpu.idle</code> from a single host, no aggregation
-would be necessary and switching between average and max would yield the same
-result.</li>
-</ol>
+* Configure Role Delegation (not supported in GovCloud)
+  1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+  2.  Select the **Role Delegation** tab.
+  3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
+  5.  Click **Install Integration**.
 
-#### Metrics delayed?
+* Configure Access Key / Secret Key
+  1.   Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+  2.  Select the **Access Keys** tab.
+  3.  Enter your AWS Access Key and AWS Secret Key for the user created above.
+  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
+  5.  Click **Install Integration**.
+
+## Metrics
+
+<%= get_metrics_from_git() %>
 
 
-<p>When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may
-see a slight delay in metrics from AWS due to some constraints that exist for their API.</p>
 
-<p>To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch
-APIs have a rate limit that varies based on the combination of authentication credentials, region,
-and service. Metrics are made available by AWS dependent on the account level. For example, if
-you are paying for "detailed metrics" within AWS, they are available more quickly. This level
-of service for detailed metrics also applies to granularity, with some metrics being
-available per minute and others per five minutes.</p>
+# Troubleshooting
+{: #troubleshooting}
 
-<p>On the Datadog side, we do have the ability to prioritize certain metrics within an account
-to pull them in faster, depending on the circumstances. Please contact
-<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> for more info on this.</p>
+## Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?
 
-<p>To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
-written a bit about this <a target="_blank" href="http://www.datadoghq.com/2013/10/dont-fear-the-agent">here</a>,
-especially in relation to CloudWatch.</p>
+There are two important distinctions to be aware of:
+
+  1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
+  2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
+
+## Metrics delayed?
+
+When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
+
+To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
+
+On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
+
+To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
+written a bit about this [here][7],  especially in relation to CloudWatch.
+
+
+
+## Missing metrics?
+
+CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
+
+
+
+## Wrong count of aws.elb.healthy_host_count?
+
+When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
+As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
+This metric should have value you would expect.
+
+
+
+## Duplicated hosts when installing the agent?
+
+When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
+
+
+
+   [1]: https://console.aws.amazon.com/iam/home#s=Home
+   [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+
+   [6]: mailto:support@datadoghq.com
+   [7]: http://www.datadoghq.com/2013/10/dont-fear-the-agent

@@ -2,6 +2,7 @@
 title: Datadog-Cassandra Integration
 integration_title: Cassandra
 kind: integration
+git_integration_title: cassandra
 ---
 
 ![Cassandra default dashboard](/static/images/cassandra.png)
@@ -11,39 +12,8 @@ Learn more about how to monitor Cassandra performance metrics thanks to [our ser
 
 For information on JMX Checks, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
 
-The following metrics are collected by default with the Cassandra integration:
+<%= insert_example_links(check: "none")%>
 
-    cassandra.ActiveCount
-    cassandra.BloomFilterDiskSpaceUsed
-    cassandra.BloomFilterFalsePositives
-    cassandra.BloomFilterFalseRatio
-    cassandra.Capacity
-    cassandra.CompletedTasks
-    cassandra.CompletedTasks
-    cassandra.CompressionRatio
-    cassandra.CurrentlyBlockedTasks
-    cassandra.ExceptionCount
-    cassandra.Hits
-    cassandra.LiveDiskSpaceUsed
-    cassandra.LiveSSTableCount
-    cassandra.Load
-    cassandra.MaxRowSize
-    cassandra.MeanRowSize
-    cassandra.MemtableColumnsCount
-    cassandra.MemtableDataSize
-    cassandra.MemtableSwitchCount
-    cassandra.MinRowSize
-    cassandra.PendingTasks
-    cassandra.ReadCount
-    cassandra.RecentHitRate
-    cassandra.Requests
-    cassandra.Size
-    cassandra.TotalBlockedTasks
-    cassandra.TotalDiskSpaceUsed
-    cassandra.TotalReadLatencyMicros
-    cassandra.TotalTimeouts
-    cassandra.TotalWriteLatencyMicros
-    cassandra.UpdateInterval
-    cassandra.WriteCount
-    
+## Metrics
 
+<%= get_metrics_from_git() %>

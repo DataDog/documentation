@@ -130,7 +130,7 @@ Troubleshooting
 
 <!-- <h3 id="troubleshooting">Troubleshooting</h3>
 
-First, make sure you are using the correct version of Python. The Agent requires version 2.6 or 2.7. You can check your version by executing:
+First, make sure you are using the correct version of Python. The Agent requires version 2.7. You can check your version by executing:
 
 <%= console "python -c 'import sys; print sys.version'" %>
 
@@ -154,7 +154,7 @@ You can contact them in one of the following ways:
 
 <h3 id="troubleshooting">トラブルシューティング</h3>
 
-まず、次のコマンドを実行し、Pythonのバージョンを確認してください。Datadog Agent を実行するには、Python-2.6又はPython-2.7が必要です。
+まず、次のコマンドを実行し、Pythonのバージョンを確認してください。Datadog Agent を実行するには、Python-2.7が必要です。
 
 <%= console "python -c 'import sys; print sys.version'" %>
 

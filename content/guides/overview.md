@@ -85,7 +85,7 @@ For each incident users can:
 * Comment
 * See similar incidents
 * <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
-* @support to ask for assistance
+* @support-datadog to ask for assistance
 
 ![](/static/images/event_stream_claim.png){: style="width:100%; border:1px solid #777777"}
 
@@ -106,7 +106,7 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 * Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
 * Graphs can be embedded in an iframe, giving a 3rd party a live graph
-without access to your data or any other information (via the cog in the upper right of a graph).
+without access to your data or any other information (via the pencil in the upper right of a graph).
 
 
 ## Monitoring

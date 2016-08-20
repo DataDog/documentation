@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog Agent 入門
 kind: guide
-listorder: 1
+listorder: 2
 ---
 
 <!-- <div class="alert alert-info">

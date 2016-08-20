@@ -20,7 +20,7 @@ to the basic Agent usage guide of each platform
         <div class="col-md-3 col-sm-3 hidden-xs hidden-print">
         <ul class="nav nav-tabs nav-stacked sidebar">
           <% if @item["language"] == "en" %>
-            <li class="nav-header">Documentation Search</li> 
+            <li class="nav-header">Documentation Search</li>
             <li>
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -31,6 +31,7 @@ to the basic Agent usage guide of each platform
           <li class="nav-header"><%= @item["agentusage_agent_guides_by_platform"] %></li>
           <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/amazonlinux/'>Amazon Linux</a></li>
           <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/centos/'>CentOS</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/docker/'>CoreOS/Docker</a></li>
           <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/deb/'>Debian</a></li>
           <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/fedora/'>Fedora</a></li>
           <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/osx/'>Mac OS X</a></li>

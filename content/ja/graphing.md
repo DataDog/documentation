@@ -1,1143 +1,297 @@
 ---
-last_modified: 2015/03/31
-translation_status: complete
+last_modified: 2016/08/17
+translation_status: tentative
 language: ja
 title: グラフ表示入門
-kind: documentation
-sidebar:
-  nav:
-    - header: グラフ表示のガイド
-    - text: グラフエディターの表示方法
-      href: "#editor"
-    - text: グラフ設定用JSONの書き方
-      href: "#grammar"
-    - text: 演算子と関数
-      href: "#functions"
-    - text: "Y軸の操作"
-      href: "#yaxis"
+kind: guide
+listorder: 4
 ---
-
-<!-- <h2 id="editor">Find the Graph Editor</h2>
-
-On each graph you will find a cog icon that opens the graph editor.
-
-<img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
-
-The graph editor has 2 tabs, "Edit" and "JSON". The "JSON" tab is the most flexible and powerful.
-It lets you finely control what is displayed on the graph.
-
-<img src="/static/images/json-editor.png" style="width:100%; border:1px solid #777777"/> -->
-
-## グラフエディターの表示方法 {#editor}
-
-グラフを開くと右上隅に歯車があります。この歯車をクリックするとグラフエディターがポップアップします。
-
-
-<img src="/static/images/series-overlay-annotated.png" style="width:100%; border:1px solid #777777"/>
-
-ポップアップしたグラフエディターの"Select your visualization"セクションで、表示したいグラフの種類を選択した後、"Choose metrics and events"セクションで、``Edit``タブを選択します。編集の準備ができると、``Edit``タブがグレーに変わり"JSON"の編集が
-可能になるます。
-
-<img src="/static/images/ja-specific/graph_editor_all_ja.png" style="width:100%; border:1px solid #777777"/>
-
-このJSONを編集することにより、グラフ内の表示を細かく制御することができます。
-
-<img src="/static/images/json-editor.png" style="width:100%; border:1px solid #777777"/>
-
-
-<!-- <h2 id="grammar">Grammar</h2>
-
-The graph definition language is well-formed JSON and is structured in 2 parts:
-
-1. Events
-2. Time Series, a.k.a. Series
-
-Here is how they fit together in a JSON dictionary:
-
-    {
-      "requests": [
-        {
-          "q": "metric{scope}"
-        }
-      ],
-      "events": [
-        {
-          "q": "search query"
-        }
-      ]
-    }
-
-In other words at the highest level the JSON structure is a dictionary with 2 entries:
-
-1. "events"
-2. "requests" -->
-
-## グラフ設定用JSONの書き方 {#grammar}
-
-グラフを定義する言語は、JSON形式を採用し、次の2つの要素で構成されています:
-
-1. イベント
-2. 時系列データー(Series)
-
-これら2つの要素が、1つのJSON辞書で表現された例です:
-
-    {
-      "events": [
-        {
-          "q": "search query"
-        }
-      ],
-      "requests": [
-        {
-          "q": "metric{scope}"
-        }
-      ]
-    }
-
-JSON書式の一番外側のカッコ内に、先の2つの要素が"events"と"requests"というエントリーとして記述されています:
-
-1. "events"
-2. "requests"
+<!--
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphingjson)
+-->
+グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
 
 <!--
-### Events
+## Find the Graph Editor
+{: #editor}
 
-You can overlay any event from Datadog. The general format is:
+On each graph you will find a pencil icon that opens the graph editor.
 
-    "events": "search query"
+![Graphing Overview](/static/images/references-graphing-overview.png)
 
-For instance, to indicate that you want events for host X and tag Y:
-
-    "events": "host:X tags:Y"
-
-or if you're looking to display all errors:
-
-    "events": "status:error" -->
-
-
-### イベントの表示
-
-Datadogに保存したイベント情報は、次の書式で記述することでグラフにオーバーレイすることができます:
-
-    "events": "search query"
-
-例えば、ホスト"X"のタグ"Y"が付いたイベントをオーバーレイする場合は:
-
-    "events": "host:X tags:Y"
-
-エラーにステータスをオーバーレイする場合は:
-
-    "events": "status:error"
-
-
-<!-- ### Scope
-
-A scope lets you filter a Series. It can be a host, a device on a host
-or any arbitrary tag you can think of that contains only alphanumeric
-characters plus colons and underscores (`[a-zA-Z1-9:_]+`).
-
-Examples of scope (meaning in parentheses):
-
-    host:my_host                      (related to a given host)
-    host:my_host, device:my_device    (related to a given device on a given host)
-    source:my_source                  (related to a given source)
-    my_tag                            (related to a tagged group of hosts)
-    my:tag                            (same)
-    *                                 (wildcard for everything) -->
-
-### 検索の対象範囲(Scope)
-
-Scopeを指定することで検索対象範囲を限定することができます。スコープでは、ホスト名やホスト上のデバイス、更に英数文字列 (`[a-zA-Z1-9:_]+`)のタグが付与された情報を指定することができます。
-
-検索対象範囲の例 (カッコ内は、対象範囲の解説):
-
-    host:my_host                      (指定されたホスト名に関連した情報)
-    host:my_host, device:my_device    (指定されたホスト名の指定されたデバイスに関連した情報)
-    source:my_source                  (指定された情報ソースに関連した情報)
-    my_tag                            (my_tagで指定されたグループに関連する情報)
-    my:tag                            (同上)
-    *                                 (ワイルドカード)
-
-
-<!-- ### Series
-
-The general format of a Series is:
-
-    function(metric{scope} [by {group}])
-
-The `function` and `group` are optional.
-
-A Series can be further combined together via binary operators (+, -, /, *):
-
-    metric{scope} [by {group}] operator metric{scope} [by {group}]
-
-A Series can be represented in different ways:
-
-1. as line charts
-2. as stacked areas
-3. as slice-n-stack areas
+The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
  -->
 
-### 時系列データ(Series)の検索表示
+## グラフエディターの使用
+{: #editor}
 
-時系列データのクエリは、次のフォーマットになります:
+グラフを開くと右上隅に鉛筆マークがあります。このマークをクリックするとグラフエディターがポップアップします。
 
-    function(metric{scope} [by {group}])
+![Graphing Overview](/static/images/references-graphing-overview.png)
 
-`function`と`group`の部分は、省略することができます。
-
-時系列データは、バイナリー演算子(+, -, /, *)を使うことで、組み合わせて表示することができるようになります:
-
-    metric{scope} [by {group}] operator metric{scope} [by {group}]
-
-時系列データでは、JSON書式の書き方によって次のようなグラフを表示することができます:
-
-1. as 折れ線グラフ
-2. as 積み上げグラフ
-3. as slice-n-stackグラフ
-
-
-<!-- #### Line Charts
-
-<img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
-
-The representation is automatically derived from having multiple `requests` values.
-
-    "requests": [
-        {
-          "q": "metric1{scope}"
-        },
-        {
-          "q": "metric2{scope}"
-        },
-        {
-          "q": "metric3{scope}"
-        }
-      ] -->
-
-#### 折れ線グラフ
-
-<img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
-
-このグラフ表現は、"requests"部に複数の検索クエリを有する場合に自動的に設定されます。
-
-    "requests": [
-        {
-          "q": "metric1{scope}"
-        },
-        {
-          "q": "metric2{scope}"
-        },
-        {
-          "q": "metric3{scope}"
-        }
-      ]
-
-
-<!-- #### Stacked Series
-
-<img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
-
-In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
-
-    "requests": [
-        {
-          "q": "metric1{scope}, metric2{scope}, metric3{scope}"
-        }
-    ]
-
-Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries. -->
-
-#### 積み上げグラフ
-
-<img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
-
-関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます：
-
-
-    "requests": [
-        {
-          "q": "metric1{scope}, metric2{scope}, metric3{scope}"
-        }
-    ]
-
-チャート毎に1つのクエリを表示する代わりに、","でクエリを連結することによって、全てのクエリを1つのグラフに集約することができます。
-
-
-<!-- #### Slice-n-Stack
-
-A useful visualization is to represent a metric shared across
-hosts and stack the results. For instance, when selecting a tag that
-applies to more than 1 host you will see that ingress and egress
-traffic is nicely stacked to give you the sum as well as the split per
-host. This is useful to spot wild swings in the distribution of network
-traffic.
-
-Here's how to do it for any metric:
-
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
-      }
-    ]
-
-Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
-
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
-      }
-    ]
-
-to get traffic for all the tagged hosts, split by host and network device. -->
-
-#### Slice-n-Stackグラフ
-
-異なるホストにまたがるメトリクスを積み上げた結果のグラフが有益な場合もあります。例えば、複数のホストに共通して付されているタグを選択し、それらのホストのネットワークトラフィックの出入りをホスト毎に積み上げたグラフを見てみたいとします。このようなグラフは、ネットワークトラフィックの中で異常が発生していることを発見するのに便利です。
-
-この例は、次のように記述します:
-
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
-      }
-    ]
-
-このケースでは、クエリは1つしか発行できないことに注目してください。
-しかしながら、デバイス単位やホストとデバイスのコンビネーション単位を基準としてスライスすることもできます:
-
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
-      }
-    ]
-
-全てのタグ付けされたホストから、ホストとネットワークデバイスでスライスし、積み上げたグラフを表示します。
-
-
-<!-- <h2 id="functions">Arithmetic and Functions</h2>
-
-A Series also supports simple arithmetic and a number of functions.
-
-You can apply functions to metric queries in the graph editor, as long as you
-use the JSON editor.
-
-### Arithmetic
-
-You can apply simple arithmetic to a Series (+, -, * and /). In this
-example we graph 5-minute load and its double:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
-    }
-
-You can also add, substract, multiply and divide a Series. Beware that
-Datadog does not enforce consistency at this point so you *can* divide
-apples by oranges.
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    } -->
-
-<!-- <h2 id="functions">Arithmetic and Functions</h2>
-
-A Series also supports simple arithmetic and a number of functions.
-
-You can apply functions to metric queries in the graph editor, as long as you
-use the JSON editor.
-
-### Arithmetic
-
-You can apply simple arithmetic to a Series (+, -, * and /). In this
-example we graph 5-minute load and its double:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
-    }
-
-You can also add, substract, multiply and divide a Series. Beware that
-Datadog does not enforce consistency at this point so you *can* divide
-apples by oranges.
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    } -->
-
-## 演算子と関数 {#functions}
-
-シリーズは、簡単な演算やいくつかの関数をサポートしています。
-
-JSONエディターを使用している限り、グラフエディター内でメトリクスクエリに関数を適用することができます。
-
-### 演算子
-
-シリーズには、簡単な演算( +, -, *, / )を適用することができます。
-次の例では、5分間のload averageの値とその倍の数値をグラフ表示することにします:
-
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
-    }
-
-シリーズ同士を、加算 減算 乗算 除算することもできます。
-Datadogでは、ここでは一貫性を強制していないので、異なるものの除算をすることもできます。
-
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    }
-
-
-<!-- ### Functions
-
-You can apply functions to the result of each query.
-
-<table class="table">
-  <tr>
-    <th>Function</th>
-    <th>Description</th>
-  </tr>
-
- <tr>
-   <td>cumsum()</td>
-   <td>cumulative sum over visible time window</td>
- </tr>
-
-  <tr>
-    <td>dt()</td>
-    <td>time delta between points</td>
-  </tr>
-
-  <tr>
-    <td>diff()</td>
-    <td>value delta between points</td>
-  </tr>
-
-  <tr>
-    <td>derivative()</td>
-    <td>1st order derivative, diff / dt</td>
-  </tr>
-
-  <tr>
-    <td>rate()</td>
-    <td>1st order derivate that skips non-monotonically increasing values</td>
-  </tr>
-
-  <tr>
-    <td>derived()</td>
-    <td>synonym for derivative</td>
-  </tr>
-
-  <tr>
-    <td>per_second()</td>
-    <td>synonym for rate</td>
-  </tr>
-
-  <tr>
-    <td>per_minute()</td>
-    <td>60 * rate</td>
-  </tr>
-
-  <tr>
-    <td>per_hour()</td>
-    <td>3600 * rate</td>
-  </tr>
-
-  <tr>
-    <td>ewma_3()</td>
-    <td>Exponentially Weighted Moving Average with a span of 3</td>
-  </tr>
-
-  <tr>
-    <td>ewma_5()</td>
-    <td>EWMA with a span of 5</td>
-  </tr>
-
-  <tr>
-    <td>ewma_10()</td>
-    <td>EWMA with a span of 10</td>
-  </tr>
-
-  <tr>
-    <td>ewma_20()</td>
-    <td>EWMA with a span of 20</td>
-  </tr>
-
-  <tr>
-    <td>median()</td>
-    <td>Median filter, useful for reducing noise</td>
-  </tr>
-
-  <tr>
-    <td>log10()</td>
-    <td>Base-10 logarithm</td>
-  </tr>
-
-  <tr>
-    <td>log2()</td>
-    <td>Base-2 logarithm</td>
-  </tr>
-
-  <tr>
-    <td>hour_before()</td>
-    <td>Metric values from one hour ago</td>
-  </tr>
-
-  <tr>
-    <td>day_before()</td>
-    <td>Metric values from one day ago</td>
-  </tr>
-
-  <tr>
-    <td>week_before()</td>
-    <td>Metric values from one week ago</td>
-  </tr>
-
-  <tr>
-    <td>month_before()</td>
-    <td>Metric values from one month ago</td>
-  </tr>
-
-  <tr>
-    <td>top()</td>
-    <td>Select the top series responsive to a given query, according to some ranking method.  Takes four parameters:
-
-      <ul>
-        <li>a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
-        <li>the number of series to be displayed, as an integer.</li>
-        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'last'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
-        <li>either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
-      </ul>
-    </td>
-  </tr>
-
-  <tr>
-    <td>top_offset()</td>
-    <td>Similar to <code>top()</code>, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.</td>
-  </tr>
-
-</table> -->
-
-### 関数
-
-クエリの結果に対して関数を適応することがでます。
-
-<table class="table">
-  <tr>
-    <th>関数</th>
-    <th>概要</th>
-  </tr>
-
- <tr>
-   <td>cumsum()</td>
-   <td>cumulative sum over visible time window</td>
- </tr>
-
-  <tr>
-    <td>dt()</td>
-    <td>time delta between points</td>
-    <td>time delta between points</td>
-  </tr>
-
-  <tr>
-    <td>diff()</td>
-    <td>value delta between points</td>
-  </tr>
-
-  <tr>
-    <td>derivative()</td>
-    <td>1st order derivative, diff / dt</td>
-  </tr>
-
-  <tr>
-    <td>rate()</td>
-    <td>1st order derivate that skips non-monotonically increasing values</td>
-  </tr>
-
-  <tr>
-    <td>derived()</td>
-    <td>synonym for derivative</td>
-  </tr>
-
-  <tr>
-    <td>per_second()</td>
-    <td>synonym for rate</td>
-  </tr>
-
-  <tr>
-    <td>per_minute()</td>
-    <td>60 * rate</td>
-  </tr>
-
-  <tr>
-    <td>per_hour()</td>
-    <td>3600 * rate</td>
-  </tr>
-
-  <tr>
-    <td>ewma_3()</td>
-    <td>Exponentially Weighted Moving Average with a span of 3</td>
-  </tr>
-
-  <tr>
-    <td>ewma_5()</td>
-    <td>EWMA with a span of 5</td>
-  </tr>
-
-  <tr>
-    <td>ewma_10()</td>
-    <td>EWMA with a span of 10</td>
-  </tr>
-
-  <tr>
-    <td>ewma_20()</td>
-    <td>EWMA with a span of 20</td>
-  </tr>
-
-  <tr>
-    <td>median()</td>
-    <td>Median filter, useful for reducing noise</td>
-  </tr>
-
-  <tr>
-    <td>log10()</td>
-    <td>Base-10 logarithm</td>
-  </tr>
-
-  <tr>
-    <td>log2()</td>
-    <td>Base-2 logarithm</td>
-  </tr>
-
-  <tr>
-    <td>hour_before()</td>
-    <td>Metric values from one hour ago</td>
-  </tr>
-
-  <tr>
-    <td>day_before()</td>
-    <td>Metric values from one day ago</td>
-  </tr>
-
-  <tr>
-    <td>week_before()</td>
-    <td>Metric values from one week ago</td>
-  </tr>
-
-  <tr>
-    <td>month_before()</td>
-    <td>Metric values from one month ago</td>
-  </tr>
-
-  <tr>
-    <td>top()</td>
-    <td>Select the top series responsive to a given query, according to some ranking method.  Takes four parameters:
-
-      <ul>
-        <li>a metric query string with some grouping, e.g. <code>avg:system.cpu.idle{*} by {host}</code></li>
-        <li>the number of series to be displayed, as an integer.</li>
-        <li>one of <code>'max'</code>, <code>'min'</code>, <code>'last'</code>, <code>'l2norm'</code>, or <code>'area'</code>.  <code>'area'</code> is the signed area under the curve being graphed, which can be negative.  <code>'l2norm'</code> uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.</li>
-        <li>either <code>'desc'</code> (rank the results in descending order) or <code>'asc'</code> (ascending order).</li>
-      </ul>
-    </td>
-  </tr>
-
-  <tr>
-    <td>top_offset()</td>
-    <td>Similar to <code>top()</code>, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.</td>
-  </tr>
-
-</table>
-
-
-<!-- The <code>top()</code> method also has the following convenience functions, all of which take a single series list as input:
-
-<div style="margin-left: 30px">
-  <dl>
-    <dt>top5, top10, top15, top20</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
-
-    <dt>top5_max, top10_max, top15_max, top20_max</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
-
-    <dt>top5_min, top10_min, top15_min, top20_min</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
-
-    <dt>top5_last, top10_last, top15_last, top20_last</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
-
-    <dt>top5_area, top10_area, top15_area, top20_area</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
-
-    <dt>top5_l2norm, top10_l2norm, top15_l2norm, top20_l2norm</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
-
-    <dt>bottom5, bottom10, bottom15, bottom20</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
-
-    <dt>bottom5_max, bottom10_max, bottom15_max, bottom20_max</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
-
-    <dt>bottom5_min, bottom10_min, bottom15_min, bottom20_min</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
-
-    <dt>bottom5_last, bottom10_last, bottom15_last, bottom20_last</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
-
-    <dt>bottom5_area, bottom10_area, bottom15_area, bottom20_area</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
-
-    <dt>bottom5_l2norm, bottom10_l2norm, bottom15_l2norm, bottom20_l2norm</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
-  </dl>
-</div>
- -->
-
-<code>top()</code> 関数には、次のような便利なサブ関数が準備されています。 これらすべての関数の入力はシリーズになります:
-
-<div style="margin-left: 30px">
-  <dl>
-    <dt>top5, top10, top15, top20</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
-
-    <dt>top5_max, top10_max, top15_max, top20_max</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
-
-    <dt>top5_min, top10_min, top15_min, top20_min</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
-
-    <dt>top5_last, top10_last, top15_last, top20_last</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
-
-    <dt>top5_area, top10_area, top15_area, top20_area</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
-
-    <dt>top5_l2norm, top10_l2norm, top15_l2norm, top20_l2norm</dt>
-    <dd>Retrieves top-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
-
-    <dt>bottom5, bottom10, bottom15, bottom20</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'mean' metric.</dd>
-
-    <dt>bottom5_max, bottom10_max, bottom15_max, bottom20_max</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'max' metric.</dd>
-
-    <dt>bottom5_min, bottom10_min, bottom15_min, bottom20_min</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'min' metric.</dd>
-
-    <dt>bottom5_last, bottom10_last, bottom15_last, bottom20_last</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'last' metric.</dd>
-
-    <dt>bottom5_area, bottom10_area, bottom15_area, bottom20_area</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'area' metric.</dd>
-
-    <dt>bottom5_l2norm, bottom10_l2norm, bottom15_l2norm, bottom20_l2norm</dt>
-    <dd>Retrieves lowest-valued [5, 10, 15, 20] series using the 'l2norm' metric.</dd>
-  </dl>
-</div>
-
-
-<!-- There are also a few functions you can append to a query which we recommend for expert users only.
-<p>
-One of these is <code>.rollup()</code>. Appending this function allows you to control the
-number of points rolled up into a single point. This function takes two parameters, method and time, like so:
-<code>.rollup(method,time)</code>.
-
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually,
-or both combined like <code>.rollup(sum,120)</code>. There are some checks on this,
-though, because for a given time range we do not return more than 350 points. Thus if
-you're requesting <code>.rollup(20)</code> where 20 is in seconds, and ask for a
-month of data, we will be returning the points at a rollup of far greater than 20 seconds.
-</p>
-
-<code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions,
-which are only intended for metrics submitted in a certain way (for metadata types where
-that is acceptable).  At present, for metrics submitted as rates or counters via statsd,
-appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly.
-For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
-<code>.as_rate()</code> will have no effect.
-
-We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query.
-We will also be building these functions fully into the graph editor in the near
-future. For more on <code>.as_count()</code> please see our blog post
-<a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>. -->
-
-この他にも、クエリ結果に適応する上級者向けの関数が幾つかあります。
-
-上級者向けの関数の一つが``.rollup()``です。この関数をクエリに追記することで、複数のポイントを単一ポイントにまとめることができます。この関数は、"メソッド"と"時間"の2つのパラメータを引数に指定することができます。(例: ``.rollup(method,time)``)
-
-"メソッド"の部分には、sum/min/max/count/avgを指定することができます。"時間"は、秒単位で指定します。
-"メソッド"と"時間"は、個別に指定(例: ``.rollup(20)``)したり、両方を組み合わせて(例: ``.rollup(sum,120)``)も指定できます。
-この``.rollup()``には、チェック機構があります。
-しかしDatadogのグラフでは表示する時間の範囲に基づき350のデータポイントまでしか保有していないので、期間指定を一ヶ月にした場合は、20秒間隔以上の精度でデータポイントが保有されているため、20秒でのロールアップ``.rollup(20)``は、機能しません。
-
-特定の方法で提出されたメトリクスためのもう一つの上級者向け関数が、``.as_count（）``と``.as_rate（）`` です。
-現状、DogStatsDの"rate", "counter"を使って送信したメトリクスには、``.as_count（）``と``.as_rate（）``を使うことができますが、"gauges"などのそれ以外のメトリクスでは機能しません。
-
-``.rollup()``と``.as_count（）``を同じクエリで使用しないでください。
-また、将来的にはこれらの関数は、グラフエディターで簡単に操作できるようになる予定です。
-``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
-
-
-<!-- <h4 id="yaxis"> Y-Axis Controls</h4>
-
-The Datadog y-axis controls (currently just via the JSON editor) allow you to:
-<ul>
- <li>Clip y-axis to specific ranges</li>
- <li>Remove outliers either by specifying a percentage or an absolute value to remove outliers</li>
- <li>Change y-axis scale from linear to log, sqrt or power scale</li>
-</ul>
-
-There are three configuration settings:
-<ul>
-<li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for
-    default behvior. Default value is "auto"</li>
-<li><code>max</code> (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto"
-    for default behavior. Default value is "auto"</li>
-<li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
-    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
-</ul> -->
-
-#### Y軸の操作 {#yaxis}
-
-グラフエディターからJSONを編集することで次のようなY軸の制御ができます:
-
-- Y軸の表示範囲の制限
-- パーセンテージか絶対値を指定することより異常値を排除
-- Y軸の線形スケールから対数スケールやパワースケールへの変更
-
-There are three configuration settings:
-
-Y軸を設定するために次の3のオプションがあります:
-
-- <code>min</code> (オプション): Y軸に表示するSpecifies 最小値を指定します。 ここでは、数値か"auto"指定することができます。デフォルト値は、"auto"です。
-- <code>max</code> (オプション): Y軸に表示するSpecifies 最大値を指定します。 ここでは、数値か"auto"指定することができます。デフォルト値は、"auto"です。
-- <code>scale</code> (オプション): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
-    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".
-- <code>scale</code> (オプション): Y軸の目盛りのタイプを指定します。 指定できる値は、"linear", "log", "sqrt", "pow##"(例. pow2, pow0.5)です。デフォルト値は、"linear"です。
-
-<!-- Examples:
-
-<pre><code>"yaxis": {
-    "min": "auto",
-    "max": 200,
-    "scale": "log"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "min": 200,
-    "scale": "sqrt"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "min": 9000,
-    "max": 10000
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "scale": "pow0.1"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "scale": "pow3"
-}</code></pre> -->
-
-Examples:
-
-<pre><code>"yaxis": {
-    "min": "auto",
-    "max": 200,
-    "scale": "log"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "min": 200,
-    "scale": "sqrt"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "min": 9000,
-    "max": 10000
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "scale": "pow0.1"
-}</code></pre>
-
-<pre><code>"yaxis": {
-    "scale": "pow3"
-}</code></pre>
-
-
-<!-- <h4>Outliers</h4>
-
-Outliers configuration allows you to automatically change y-axis bounds based on a
-threshold. Thresholds can be a percentage or an absolute value, and it can apply to
-both both ends of the graph (lower and upper).
-
-For outliers, there are two ways to set up the configuration.
-
-To begin, there is a simple configuration where you specify an absolute value or a percentage and all
-values above the value or all values that sit within the top ##% will be cutoff. -->
-
-<h4>異常値(Outlier)</h4>
-
-異常値を判定するためのしきい値を定義することにより、Y軸の上下限を自動的に変更することができます。
-しきい値には、パーセンテージまたは絶対値を指定することができます。
-このしきい値は、グラフの上限と下限の両方に設定することができます。
-
-##### 異常値を定義するためには、2つの設定方法があります。
-
-<!-- To begin, there is a simple configuration where you specify an absolute value or a percentage and all values above the value or all values that sit within the top ##% will be cutoff.
- -->
-
-まず、絶対値を指定し、その値を超えているメトリクスの値を異常値として排除する方法です。次に、パーセンテージを指定し、トップから指定したパーセンテージまでの値を異常値として排除する方法です。
-
-
-<!-- Examples:
-
-<code>"outliers": 30</code> // all values above 30 will not appear<br>
-<code>"outliers": "5%"</code> // the top 5% of that data will not appear -->
-
-記述例:
-
-1. ``"outliers": 30`` // 値が30以上のデータポイントは除去され、表示されません。
-2. ``"outliers": "5%"`` // 上位5%の値をもったデータポイントは除去され、表示されません。
-
+グラフエディターには**Share**, **JSON**, **Edit**の3つのタブがあります。 **Share**タブでは、グラフを外部のwebページに挿入するためのコードを取得可能です。　**JSON**タブはより柔軟な設定が可能なエディターである一方、使用するにはグラフを定義する言語を理解しておく必要があります。 **Edit**はデフォルトのタブであり、グラフ表示のオプションをGUIから選択して設定することができます。最新の機能は **JSON**エディターでのみ使用できる場合があります。
 
 <!--
-<p>
-Advanced configuration works the same way as simple configuration, with the added
-flexibility of configuring the lower or the upper or both parts of the graph. For
-example, the following configuration will limit the graph to data points that are
-not in the bottom 10% nor in the top 30%.
+## Graphing with the graphical editor interface
 
-<pre><code>"outliers": {
-   "top": "30%",
-   "bottom": "10%"
-}</code></pre>
+When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
+
+![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+
+Configuring a graph in a dashboard is a multi-step process. The first two steps depend
+-->
+## GUIエディターを使用したグラフ表示
+
+グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgresインテグレーションダッシュボードでのグラフの例です:
+
+![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+
+ダッシュボードの中でグラフを操作するにはいくつかのステップがあります。
+
+<!--
+### 1) Choose the Metric to graph
+
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary).
+
+The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
+-->
+### 1) グラフ表示するメトリクスの選択
+
+グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer](https://app.datadoghq.com/metric/explorer)を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary](https://app.datadoghq.com/metric/summary)を見ることもできます。
+
+メトリクスエクスプローラはさまざまなグラフ表示の設定をアドホックに簡単に試して見てみることができます。メトリクスサマリページでは、各メトリクスの単位やメトリクスのタイプなどをリストから確認することができます。
+
+<!--
+### 2) Select your visualization
+
+Once you have a metric in mind to display in your graph, select your visualization.
+-->
+
+### 2) メトリクスを可視化するグラフ形式の選択
+
+グラフ表示するメトリクスが決まったら、次はメトリクスを可視化するグラフ形式を選択します。
+
+<!--
+#### Timeseries
+
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries is available on both timeboards and screenboards.
+
+<div class="collapse" id="collapseTimeseries" markdown="1">
+  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+</div>
+-->
+
+#### Timeseries (時系列データのグラフ)
+
+Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可視化するのに最適です。グラフ表示する時間の幅は、タイムボード上の設定あるいはスクリーンボードでの各グラフの設定によって決まります。Timeseriesグラフの表示はlines(折れ線グラフ), areas(面グラフ), bars(棒グラフ)を選択できます。Timeseriesグラフの例を見るには、[ここをクリック](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseriesグラフはタイムボードとスクリーンボードの両方で利用することができます。
+
+<div class="collapse" id="collapseTimeseries" markdown="1">
+  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+</div>
+
+<!--
+#### Heatmap
+
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap is available on both timeboards and screenboards.
+
+<div class="collapse" id="collapseHeatmap" markdown="1">
+  ![Heatmap](/static/images/references-graphing-heatmap-example.png)
+</div>
+-->
+
+#### Heatmap (時系列の分布図グラフ)
+
+Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*hosts* )を可視化するのに最適です。 ホストから得られたメトリクスで値が多く分布しているほど、その値の部分は濃い色を示します。Heatmapグラフの例を見るには、[ここをクリック](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmapグラフはタイムボードとスクリーンボードの両方で利用することができます。
+
+<div class="collapse" id="collapseHeatmap" markdown="1">
+  ![Heatmap](/static/images/references-graphing-heatmap-example.png)
+</div>
+
+<!--
+#### Distribution
+
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution is available on both timeboards and screenboards.
+
+<div class="collapse" id="collapseDistribution" markdown="1">
+  ![Distribution](/static/images/references-graphing-distribution-example.png)
+</div>
+-->
+
+#### Distribution (分布図グラフ)
+
+Distributionグラフは多くのタグで集計されたメトリクスを可視化するもう一つの方法です。Heatmapグラフとは異なり、DistributionグラフのX軸は時間ではなくメトリクスの値になり、Y軸はその分布の度数を示します。Distributionグラフの例は、[ここをクリック](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distributionグラフはタイムボードとスクリーンボードの両方で利用することができます。
+
+<div class="collapse" id="collapseDistribution" markdown="1">
+  ![Distribution](/static/images/references-graphing-distribution-example.png)
+</div>
+
+<!--
+#### Toplist
+
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards.
+
+<div class="collapse" id="collapseTopList" markdown="1">
+  ![TopList](/static/images/references-graphing-toplist-example.png)
+</div>
+-->
+
+#### Toplist (メトリクスのランキング)
+
+Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  [ここをクリック](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
+
+<div class="collapse" id="collapseTopList" markdown="1">
+  ![TopList](/static/images/references-graphing-toplist-example.png)
+</div>
+
+<!--
+#### Change
+
+The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, [click here](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
+
+<div class="collapse" id="collapseChangegraph" markdown="1">
+  ![Changegraph](/static/images/references-graphing-change-example.png)
+</div>
+-->
+
+#### Change (メトリクスの変化量グラフ)
+
+Changeグラフは指定した時間枠でのメトリクスの変化量を可視化することができます。Changeグラフの例を見るには、[ここをクリック](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
+
+<div class="collapse" id="collapseChangegraph" markdown="1">
+  ![Changegraph](/static/images/references-graphing-change-example.png)
+</div>
+
+#### Hostmap
+<!--
+The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, [click here](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
+
+<div class="collapse" id="collapseHostmap" markdown="1">
+  ![Hostmap](/static/images/references-graphing-hostmap-example.png)
+</div>
+-->
+Hostmapはメインメニューから利用できるHostmapと同様に、あらゆるメトリクスについて指定したホストのスコープで可視化することができます。Hostmapの例は、[ここをクリック](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
+
+<div class="collapse" id="collapseHostmap" markdown="1">
+  ![Hostmap](/static/images/references-graphing-hostmap-example.png)
+</div>
+
+<!--
+### 3) Filter and Aggregate to show what you need
+
+#### Filter
+
+Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
+-->
+
+## 3) 指定したグラフ表示をフィルタと集計方法の設定で最適化する
+
+#### フィルタ
+
+メトリクスを可視化するグラフ表示の形式が決まったら、今度はフィルタ機能によってグラフ表示させたい特定のホストを抽出します。メトリクスを選択したボックスの右手に、*(everywhere)* とデフォルト表示されているドロップダウンボックスがあるので、そこから抽出したいホストが該当するタグ(複数可)を選択しましょう。なお、タグの詳細に関しては、[Guide to Tagging](/guides/tagging) ページを参照して下さい。
+
+<!--
+#### Aggregation Method
+
+Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum.
+-->
+
+#### 集計の算出方法
+
+フィルタの次は、集計の算出方法の設定です。デフォルトでは平均値をとる**avg by** が選択されていますが、ボックスをクリックすることで**max by**, **min by**, **sum by** も選択することができます。一定間隔で取得されているメトリクスの値には、複数のホストやインスタンスから集められた多様な値が存在していることが多く、ここで選択する集計方法によってそうした多様な値をどのように1つの値として集計するかを決定します。つまり、例えば100のホストからのメトリクスについてグラフ表示する場合、**sum by** を選択すると100ホストから取得しているメトリクスの合計値がグラフ表示されることになります。
+
+<!--
+#### Aggregation Groups
+
+After the aggregation method you can determine what constitutes a line or grouping in a graph. If you choose host, then you will have a line (in the case of line graphs) for each host. If you choose role, then there is a line for every role. Then that line will be made up of metrics from all the hosts in that role, aggregated using the method you chose above.
+-->
+
+#### 集計のグループ指定
+
+集計の算出方法を選択したら、今度はグラフの線1本1本の構成要素が何なのかを決めます。`host`を選択した場合は、それぞれのホストに対してグラフ線が表示されます。あるいはタグで定義している何らかのホストの`ロール`を選択した場合は、その各ロールに対してグラフ線が表示されます。`ロール`を選択した場合は複数のホストがロールごとにグループ化されてグラフ表示されるため、先に選択した**集計の算出方法** によってメトリクスの値が集計されグラフ表示されることになります。
+
+<!--
+### 4) Rollup to aggregate over time
+
+Regardless of the options chosen above, there will always be some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you will need 14,400 points to display everything. Each graph we display will have about 300 points shown at any given time.
+
+In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
+-->
+
+### 4) メトリクスの値のロールアップ(値を丸める)
+
+前述の集計方法の設定にかかわらず、グラフ表示画面の物理的な制約によって適用されているデータ集計の仕組みがあります。例えば、毎秒更新されるメトリクスについて4時間の時間幅でグラフ表示したい場合、すべてを表示するには14,400のデータポイントを表示する必要があります(60x60x4=14,400)。 一方で、各グラフはどのような時間幅を選んだ場合でも表示可能なのは約300データポイントまでです。
+
+上記例では、画面上の単一のデータポイントは48のデータポイントを代表することになります(14,400÷300=
+48)。他の例として、Datadog Agentによって20秒間隔で取得されているメトリクスの場合、1日で4,320のデータポイントが取得されます(24x60x60/20=4,320)。このメトリクスにおいて1日の時間幅でグラフ表示する場合は、5分や10分の間隔で値をロールアップされることも考慮しておくとよいでしょう。
+
+<!--
+To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
+
+To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
+-->
+ロールアップ関数を使う場合は、集計方法を設定したボックスの右手のプラスマークをクリックし、`Rollup`を選択します。そして算出方法でロールアップし、どれくらいの時間間隔でロールアップするかを指定します。
+
+例えば、全てのマシンの利用可能なディスク容量の平均値をとり、そのメトリクスは60秒ごとの平均値としてロールアップしたグラフ表示をさせる場合には、以下のような指定します:
+
+![rollup example](/static/images/references-graphing-rollup-example.png)
+
+<!--
+When switching to the JSON view, the query will look like this:
+
+    "q": "avg:system.disk.free{*}.rollup(avg, 60)"
+
+For more about using the JSON view, scroll to the bottom and click the Learn about the JSON tab link.
+-->
+
+JSONエディターに切り替えると、以下のようなクエリとして記述されます:
+
+    "q": "avg:system.disk.free{*}.rollup(avg, 60)"
+
+JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
+
+<!--
+### 5) Apply more advanced functions
+
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
+-->
+
+### 5) 上級者向けの関数の適用
+
+分析のニーズによっては、他の数値演算関数が必要なこともあるでしょう。変化量や微分、平滑化や回帰計算などがあります。利用可能な関数は、[ここをクリック](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
 
 
-The following will show all data except those with values higher than 15:
+<div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
+<!-- The graphing functions section is a partial -->
 
+<%= @items['/partials/graphingfunctions/'].compiled_content %>
 
-<pre><code>"outliers": {
-    "above": 15
-}</code></pre>
+</div>
 
-The following will hide data points below 2:
+<!--
+### 6) Overlay events for additional context
 
-<pre><code>"outliers": {
-    "below": 2
-}</code></pre>
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
+-->
 
+### 6) メトリクスのグラフ表示にイベントを重ねあわせる
 
+より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。`Overlay Events`ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
 
-Here is a full JSON example:
+<!--
+### 7) Create a title
 
-<pre><code>{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "system.cpu.idle{host:hostname}",
-      "stacked": false
-    }
-  ],
-  "events": [],
-  "yaxis": {
-    "scale": "log"
-  },
-  "outliers": {
-       "top": "5%",
-       "below": 15
-   }
-}</code></pre>
+If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+-->
 
-</p>
- -->
+### 7) タイトルの入力
 
-##### 高度な設定も、シンプルな設定ど同じような概念で進めることができます。
+タイトルを指定しない場合、メトリクスやグラフ表示での指定をもとに自動でタイトルが入力されます。しかしより適切に表現されたタイトルは、ダッシュボード上に多数あるグラフの中で目的をユーザーに示すのに役立ちます。ここでビジネスに役立つ意味を表現するのも価値のあることです。
 
-高度のな設定では、グラフの下限,上限,その両方の設定がより柔軟にコントロールできるようになっています。
-例えば、次のグラフ設定では、下限10%以上で、上限30%以下のデータポイントのみグラフ表示されるように制限しています。
+<!--
+### 8) Save
 
-<pre><code>"outliers": {
-   "top": "30%",
-   "bottom": "10%"
-}</code></pre>
+The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
+-->
+### 8) 保存
 
-次は、値が15以上のデータポイント除去します:
-
-<pre><code>"outliers": {
-    "above": 15
-}</code></pre>
-
-次は、値が2以下のデータポイント除去します:
-
-<pre><code>"outliers": {
-    "below": 2
-}</code></pre>
-
-すべての要素を含んだJSONの例です:
-
-<pre><code>{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "system.cpu.idle{host:hostname}",
-      "stacked": false
-    }
-  ],
-  "events": [],
-  "yaxis": {
-    "scale": "log"
-  },
-  "outliers": {
-       "top": "5%",
-       "below": 15
-   }
-}</code></pre>
-
-
-<!-- #### Examples
-
-Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-          "stacked": false
-        }
-      ]
-    }
-
-Here is an example using the <code>top()</code> function:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-          "stacked": false
-        }
-      ]
-    }
-
-This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
-
-
-
-To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-          "stacked": false
-        }
-      ]
-    }
-
-Here is an example using the <code>week_before()</code> function:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-        }
-      ]
-    } -->
-
-
-#### 設定例:
-
-パラメーターに１つのメトリクスを指定した<code>rate()</code>関数を使った例です。<code>top()</code>と<code>top_offset()</code>以外の関数では、この<code>rate()</code>と同様のシンタックス表記を利用することできます。
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-          "stacked": false
-        }
-      ]
-    }
-
-<code>top()</code> 関数を使用した例::
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-          "stacked": false
-        }
-      ]
-    }
-
-この事例では、<code>system.cpu.iowait</code>のピーク値の上位５をグラフに表示します。
-
-<code>system.cpu.iowait</code>のピーク値ランキングの第6位から10位のホストを表示するためには、<code>top_offset</code>を使います:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-          "stacked": false
-        }
-      ]
-    }
-
-<code>week_before()</code>関数を使用した例:
-
-    {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-        }
-      ]
-    }
+最後に`Save`をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。

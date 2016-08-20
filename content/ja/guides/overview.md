@@ -1,10 +1,9 @@
 ---
-last_modified: 2015/05/20
+last_modified: 2016/08/17
 translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
 kind: guide
-listorder: 2
 sidebar:
   nav:
     - header: Datadogのサービスについて
@@ -18,11 +17,10 @@ sidebar:
       href: "#events"
     - text: 原因追跡用ダッシュボード
       href: "#dashboards"
-    - text: 高度なアラート設定
-      href: "#alerting"
+    - text: 監視とアラート
+      href: "#monitoring"
 ---
-
-
+<!--監視とアラートの項目だけ、若干の修正をしました。まだ英語版と完全に一致していません8/17-->
 <!-- So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
 Agent, or maybe you're just curious about [what (else) Datadog can do for you](http://www.datadoghq.com/product/).
 This document gives a high level overview of Datadog's capabilities and how
@@ -48,9 +46,10 @@ can instrument your own if you'd like.</li>
 in an online service is treated the same throughout Datadog.</li>
 </ul> -->
 
-<h2 id="integrations">簡単で便利なIntegrations</h2>
+## 簡単で便利なIntegrations
+{: #integrations}
 
-<img src="/static/images/integrations.png" style="width:100%; border:1px solid #777777"/>
+![](/static/images/integrations.png){: style="width:100%; border:1px solid #777777"}
 
 <ul>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
@@ -80,9 +79,10 @@ for that machine based on what was previously set up for that tag.</li>
 
 </ul> -->
 
-<h2 id="infrastructure">インフラを構成しているホストのリスト表示</h2>
+## インフラを構成しているホストのリスト表示
+{: #infrastructure}
 
-<img src="/static/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
+![](/static/images/infrastructure.png){: style="width:100%; border:1px solid #777777"}
 
 * 全てのホストは、`Infrastructure`のページに表示されます。
 * 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
@@ -140,15 +140,16 @@ For each incident users can:
 <li>Comment</li>
 <li>See similar incidents </li>
 <li><a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email</li>
-<li>@support to ask for assistance</li>
+<li>@support-datadog to ask for assistance</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
  -->
 
-<h2 id="events">イベントの時系列表示</h2>
+## イベントの時系列表示
+{: #events}
 
-<img src="/static/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
+![](/static/images/event_stream.png){: style="width:100%; border:1px solid #777777"}
 
 Eventの掲載は、ブログと同じ規則に基づいています:
 
@@ -167,7 +168,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>コメントの追加</li>
 <li>同様なインシデントの閲覧</li>
 <li><a target="_blank" href="/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
-<li>@support でのサポートの要請</li>
+<li>@support-datadog でのサポートの要請</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
@@ -189,12 +190,13 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
 <li>Graphs can be embedded in an iframe, giving a 3rd party a live graph
-without access to your data or any other information (via the cog in the upper right of a graph).</li>
+without access to your data or any other information (via the pencil in the upper right of a graph).</li>
 </ul> -->
 
-<h2 id="dashboards">原因追跡用ダッシュボード</h2>
+## 原因追跡用ダッシュボード
+{: dashboards}
 
-<img src="/static/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
+![](/static/images/dashboard_events.png){: style="width:100%; border:1px solid #777777"}
 
 ダッシュボードには、<a target="_blank" href="/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
@@ -205,7 +207,7 @@ without access to your data or any other information (via the cog in the upper r
 <li>zone, host, total usageで、表示することができます。</li>
 <li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
-<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の歯車マークから)</li>
+<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
 
 
@@ -233,10 +235,12 @@ launching the Agent (intial reporting may take a few minutes, but not longer tha
 to pull the data from.</li>
 </ol> -->
 
-<h2 id="alerting">高度なアラート設定</h2>
-<img src="/static/images/alert.png" style="width:100%; border:1px solid #777777"/>
+## 監視とアラート
+{: monitoring}
 
-[アラート機能](/ja/guides/alerting/)によって、特定のメトリクスの集計がしきい値を超えた場合に通知する機能を実現することができます:
+![](/static/images/alert.png){: tyle="width:100%; border:1px solid #777777"}
+
+[Monitor機能](/ja/guides/monitoring/)によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>
 <li>インフラ全体のメトリクスのaverage, max, min, or sumを基に</li>
 <li>ホスト毎のメトリクスのaverage, max, min, or sumを基に</li>

@@ -1,29 +1,28 @@
 ---
 title: Process check
 integration_title: Process Check
-
+newhlevel: true
 kind: integration
 ---
-### Overview
+# Overview
 
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
   * Monitor the status of running processes with [Process Monitors][1] (**Requires Datadog Agent >= 5.1.0**).
 
-From the Agent:
+# Installation
 
-* [Process check script][2]
-* [Process check configuration example][3]
+No installation required.
 
-### Configuration
+# Configuration
 
-_To capture Process metrics you need to install the Datadog Agent._
+Configure the Agent to connect to your processes. Our example configuration will monitor the `ssh`, `sshd`, and `postgres` processes.
 
-Configure the Agent to connect to your processes. Our example configuration will monitor the `sshd` and `postgres` processes.
-
-1. Edit `/etc/dd-agent/conf.d/process.yaml`
+1.  Edit `/etc/dd-agent/conf.d/process.yaml`
 
         init_config:
-
+          # used to override the default procfs path, e.g. for docker
+          # containers to see the processes of the host at /host/proc
+          # procfs_path: /proc
         instances:
           - name: ssh
             search_string: ['ssh', 'sshd']
@@ -31,15 +30,23 @@ Configure the Agent to connect to your processes. Our example configuration will
           - name: postgres
             search_string: ['postgres']
 
-2. Restart the Agent
+2.  Restart the Agent
 
         sudo /etc/init.d/datadog-agent restart
 
-3. Execute the info command
+Refer to the comments in the [process.yaml.example](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example) file for more options.
 
-        sudo /etc/init.d/datadog-agent info
+After the Agent has sent data to Datadog you can visit the [New Monitor section of the application](https://app.datadoghq.com/monitors#create/process) to set up a Monitor. If you only see information on how to configure the process check in the Agent, Datadog has not yet received any process information from the Agent. Use the instructions below to validate whether the Agent has been configured correctly.
 
-4. Verify that the check has passed. The output of the command should contain a section similar to the following:
+<%= insert_example_links(conf:"process", check:"process")%>
+
+# Validation
+
+1.  Execute the info command
+
+        datadog-agent info
+
+2.  Verify that the check has passed. The output of the command should contain a section similar to the following:
 
         Checks
         ======
@@ -49,11 +56,18 @@ Configure the Agent to connect to your processes. Our example configuration will
         process
         ---------
             - instance #0 [OK]
-            - Collected 8 metrics & 0 events & 4 service checks
+            - Collected 18 metrics & 0 events & 2 service checks
+
+Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
+
+# Metrics
+
+Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
+
+<%= get_metrics_from_git('system', 'system.processes') %>
+
 
    [1]: /guides/monitoring#process
-   [2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py
-   [3]: https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example
 
 
 

@@ -12,7 +12,7 @@ description = 'This has all the new hotness.'
 graphs =  [{
   "definition" => {
     "events" => [],
-    "requests "=> [
+    "requests"=> [
       {"q" => "avg:system.mem.free{*}"}
     ],
   "viz" => "timeseries"

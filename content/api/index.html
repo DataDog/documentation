@@ -12,7 +12,6 @@ kind: documentation
   no_response = '<em>This end point does not return JSON on successful requests.</em>'
 %>
 
-
 <div class="container api-page">
   <div class="row floating-header" data-spy="affix" data-offset-top="60">
     <h1><%= @item[:title] %> </h1>
@@ -56,7 +55,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="overview">Overview</h3>
+    <div class="int-anchor" id="overview"></div><a href="#overview"><h3>Overview</h3></a>
     <div class="row">
       <%= left_side_div %>
         This section details Datadog's HTTP API. It makes it easy to get data in and
@@ -80,7 +79,7 @@ kind: documentation
       AUTHENTICATION
     ====================================================================
     -->
-    <h3 id="authentication">Authentication</h3>
+    <div class="int-anchor" id="authentication"></div><a href="#authentication"><h3>Authentication</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -105,7 +104,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="errors">Success and Errors</h3>
+    <div class="int-anchor" id="errors"></div><a href="#errors"><h3>Success and Errors</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -144,7 +143,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="metrics">Metrics</h3>
+    <div class="int-anchor" id="metrics"></div><a href="#metrics"><h3>Metrics</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -162,7 +161,7 @@ kind: documentation
         </p>
       </div>
     </div>
-    <h4 id="metrics-post">Post time series points</h4>
+    <div class="int-anchor" id="metrics-post"></div><a href="#metrics-post"><h4>Post time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -180,7 +179,7 @@ kind: documentation
                   <div>
                   <code>[[POSIX_timestamp, numeric_value], ...]</code>
                   </div>
-                  Note that the timestamp must be current, and the numeric value is a 32bit float gauge-type value.
+                  Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
               </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
@@ -197,7 +196,7 @@ kind: documentation
         <% end %>
       </div>
     </div>
-    <h4 id="metrics-query">Query time series points</h4>
+    <div class="int-anchor" id="metrics-query"></div><a href="#metrics-query"><h4>Query time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -222,11 +221,13 @@ kind: documentation
         <h5>Signature</h5>
         <code>GET https://app.datadoghq.com/api/v1/query</code>
         <h5>Example Request</h5>
-        <%= snippet_code_block "api-query.py" %>
-        <%= snippet_code_block "api-query.sh" %>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metrics-query.#{f}" %>
+        <% end %>
         <h5>Example Response</h5>
-        <%= snippet_result_code_block "api-query.py" %>
-        <%= snippet_result_code_block "api-query.sh" %>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metrics-query.#{f}" %>
+        <% end %>
       </div>
     </div>
 
@@ -236,7 +237,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="events">Events</h3>
+    <div class="int-anchor" id="events"></div><a href="#events"><h3>Events</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -245,7 +246,7 @@ kind: documentation
         </p>
       </div>
     </div>
-    <h4 id="events-post">Post an Event</h4>
+    <div class="int-anchor" id="events-post"></div><a href="#events-post"><h4>Post an Event</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -265,7 +266,7 @@ kind: documentation
           <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
-          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters.', {:default => 'None'}) %>
+          <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream.', {:default => 'None'}) %>
           <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
         </ul>
       </div>
@@ -282,7 +283,7 @@ kind: documentation
         <% end %>
       </div>
     </div>
-    <h4 id="events-get">Get an Event</h4>
+    <div class="int-anchor" id="events-get"></div><a href="#events-get"><h4>Get an Event</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -305,7 +306,30 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="events-get-all">Query the Event Stream</h4>
+    <div class="int-anchor" id="events-delete"></div><a href="#events-delete"><h4>Delete an Event</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          This end point allows you to delete an event.
+        </p>
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>DELETE /api/v1/events/:event_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-events-delete.py" %>
+        <%= snippet_code_block "api-events-delete.sh" %>
+        <%= snippet_code_block "api-events-delete.rb" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-events-delete.py" %>
+        <%= snippet_result_code_block "api-events-delete.sh" %>
+        <%= snippet_result_code_block "api-events-delete.rb" %>
+      </div>
+    </div>
+
+    <div class="int-anchor" id="events-get-all"></div><a href="#events-get-all"><h4>Query the Event Stream</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -342,7 +366,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="service_checks">Service Checks</h3>
+    <div class="int-anchor" id="service_checks"></div><a href="#service_checks"><h3>Service Checks</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -351,7 +375,7 @@ kind: documentation
         </p>
       </div>
     </div>
-    <h4 id="checks-post">Post a Check Run</h4>
+    <div class="int-anchor" id="checks-post"></div><a href="#checks-post"><h4>Post a Check Run</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -385,7 +409,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="monitors">Monitors</h3>
+    <div class="int-anchor" id="monitors"></div><a href="#monitors"><h3>Monitors</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>Monitors allow you to watch a metric or check that you care about,
@@ -396,7 +420,7 @@ kind: documentation
     </div>
 
     <!-- Create monitor -->
-    <h4 id="monitor-create">Create a monitor</h4>
+    <div class="int-anchor" id="monitor-create"></div><a href="#monitor-create"><h4>Create a monitor</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -444,6 +468,7 @@ kind: documentation
               #h_ago (1, 2, or 4), or 1d_ago</li>
              </ul>
             </div>
+            <div>You can also use this to create an outlier monitor using the following query: <code>avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0</code></div>
 
             <h5>Service Check Query</h5>
             <code>"check".over(tags).last(count).count_by_status()</code>
@@ -473,6 +498,7 @@ kind: documentation
               <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
               <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
+
           </li>
           <%= argument 'name', "The name of the alert.",
               :default => "dynamic, based on query" %>
@@ -481,7 +507,7 @@ kind: documentation
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
           <%= argument 'tags', "A list of tags to associate with your monitor.
-              This can help you categorize and filter monitors.",
+              This can help you categorize and filter monitors in the manage monitors page of the UI. Note: it's not currently possible to filter by these tags when querying via the API",
               :default => "empty list" %>
 
           <li>
@@ -524,6 +550,13 @@ kind: documentation
               triggered state.
               <p>Default: <code>None</code></p></li>
 
+              <li><code>require_full_window</code> a boolean indicating whether
+              this monitor needs a full window of data before it's evaluated. We
+              highly recommend you set this to <code>False</code> for sparse
+              metrics, otherwise some evaluations will be skipped.
+              <p>Default: <code>True</code> for "on average", "at all times" and
+              "in total" aggregation. <code>False</code> otherwise.</p></li>
+
               <li><code>renotify_interval</code> the number of minutes after
               the last notification before a monitor will re-notify on the
               current status. It will only re-notify if it's not resolved.
@@ -537,6 +570,10 @@ kind: documentation
 
               <li><code>notify_audit</code> a boolean indicating whether tagged
               users will be notified on changes to this monitor.
+              <p>Default: <code>False</code></p></li>
+
+              <li><code>locked</code> a boolean indicating whether changes to
+              to this monitor should be restricted to the creator or admins.
               <p>Default: <code>False</code></p></li>
 
               <li><code>include_tags</code> a boolean indicating whether
@@ -557,6 +594,20 @@ kind: documentation
 
             </ul>
 
+            <h5>Metric Alert Options</h5>
+
+            <em>These options only apply to metric alerts.</em>
+
+            <ul class="arguments">
+              <li><code>thresholds</code> a dictionary of thresholds by threshold
+              type. Currently we have two threshold types for metric alerts:
+              critical and warning. Critical is defined in the query, but can
+              also be specified in this option. Warning threshold can only be
+              specified using the thresholds option.
+              <p>Example: <code>{'critical': 90, 'warning': 80}</code></p>
+              </li>
+            </ul>
+
             <h5>Service Check Options</h5>
 
             <em>These options only apply to service checks and will be ignored
@@ -569,6 +620,7 @@ kind: documentation
               <p>Default: <code>{'ok': 1, 'critical': 1, 'warning': 1}</code></p>
               </li>
             </ul>
+
           </li>
         </ul>
         </div>
@@ -588,7 +640,7 @@ kind: documentation
 
 
     <!-- Show monitor -->
-    <h4 id="monitor-get-details">Get a monitor's details</h4>
+    <div class="int-anchor" id="monitor-get-details"></div><a href="#monitor-get-details"><h4>Get a monitor's details</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -614,7 +666,7 @@ kind: documentation
     </div>
 
     <!-- Edit monitor -->
-    <h4 id="monitor-edit">Edit a monitor</h4>
+    <div class="int-anchor" id="monitor-edit"></div><a href="#monitor-edit"><h4>Edit a monitor</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -648,7 +700,7 @@ kind: documentation
     </div>
 
     <!-- Delete monitor -->
-    <h4 id="monitor-delete">Delete a monitor</h4>
+    <div class="int-anchor" id="monitor-delete"></div><a href="#monitor-delete"><h4>Delete a monitor</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -669,7 +721,7 @@ kind: documentation
     </div>
 
     <!-- Show all monitors -->
-    <h4 id="monitor-get-all">Get all monitor details</h4>
+    <div class="int-anchor" id="monitor-get-all"></div><a href="#monitor-get-all"><h4>Get all monitor details</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -699,7 +751,7 @@ kind: documentation
     </div>
 
     <!-- Mute all monitors -->
-    <h4 id="monitor-mute-all">Mute all monitors</h4>
+    <div class="int-anchor" id="monitor-mute-all"></div><a href="#monitor-mute-all"><h4>Mute all monitors</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -725,7 +777,7 @@ kind: documentation
     </div>
 
     <!-- Unmute all monitors -->
-    <h4 id="monitor-unmute-all">Unmute all monitors</h4>
+    <div class="int-anchor" id="monitor-unmute-all"></div><a href="#monitor-unmute-all"><h4>Unmute all monitors</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -748,7 +800,7 @@ kind: documentation
     </div>
 
     <!-- Mute a single monitor -->
-    <h4 id="monitor-mute">Mute a monitor</h4>
+    <div class="int-anchor" id="monitor-mute"></div><a href="#monitor-mute"><h4>Mute a monitor</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -772,7 +824,7 @@ kind: documentation
     </div>
 
     <!-- Unmute a single monitor -->
-    <h4 id="monitor-unmute">Unmute a monitor</h4>
+    <div class="int-anchor" id="monitor-unmute"></div><a href="#monitor-unmute"><h4>Unmute a monitor</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -802,7 +854,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="downtimes">Downtimes</h3>
+    <div class="int-anchor" id="downtimes"></div><a href="#downtimes"><h3>Downtimes</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>Downtiming gives you greater control over monitor notifications by allowing you
@@ -812,7 +864,7 @@ kind: documentation
     </div>
 
     <!-- Schedule monitor downtime -->
-    <h4 id="schedule-downtime">Schedule monitor downtime</h4>
+    <div class="int-anchor" id="schedule-downtime"></div><a href="#schedule-downtime"><h4>Schedule monitor downtime</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -865,7 +917,7 @@ kind: documentation
     </div>
 
     <!-- Update monitor downtime -->
-    <h4 id="update-downtime">Update monitor downtime</h4>
+    <div class="int-anchor" id="update-downtime"></div><a href="#update-downtime"><h4>Update monitor downtime</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -920,7 +972,7 @@ kind: documentation
     </div>
 
     <!-- Cancel monitor downtime -->
-    <h4 id="cancel-downtime">Cancel monitor downtime</h4>
+    <div class="int-anchor" id="cancel-downtime"></div><a href="#cancel-downtime"><h4>Cancel monitor downtime</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -939,7 +991,7 @@ kind: documentation
     </div>
 
     <!-- Get a monitor downtime -->
-    <h4 id="get-downtime">Get a monitor downtime</h4>
+    <div class="int-anchor" id="get-downtime"></div><a href="#get-downtime"><h4>Get a monitor downtime</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -958,7 +1010,7 @@ kind: documentation
     </div>
 
     <!-- Get all monitor downtimes -->
-    <h4 id="get-all-downtime">Get all monitor downtimes</h4>
+    <div class="int-anchor" id="get-all-downtime"></div><a href="#get-all-downtime"><h4>Get all monitor downtimes</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -985,7 +1037,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="timeboards">Timeboards</h3>
+    <div class="int-anchor" id="timeboards"></div><a href="#timeboards"><h3>Timeboards</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -994,7 +1046,7 @@ kind: documentation
         </p>
       </div>
     </div>
-    <h4 id="dashboards-post">Create a Timeboard</h4>
+    <div class="int-anchor" id="dashboards-post"></div><a href="#dashboards-post"><h4>Create a Timeboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1035,8 +1087,6 @@ kind: documentation
                <strong>default [optional, default=None]</strong>
                <div>The default value for the template variable on dashboard load</div>
              </li>
-           </ul>
-           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1053,7 +1103,7 @@ kind: documentation
     </div>
 
     <!-- update a dashboard -->
-    <h4 id="dashboards-update">Update a Timeboard</h4>
+    <div class="int-anchor" id="dashboards-update"></div><a href="#dashboards-update"><h4>Update a Timeboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1104,8 +1154,6 @@ kind: documentation
                <strong>default [optional, default=None]</strong>
                <div>The default value for the template variable on dashboard load</div>
              </li>
-           </ul>
-           </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1122,7 +1170,7 @@ kind: documentation
     </div>
 
     <!-- delete a dashboard -->
-    <h4 id="dashboards-delete">Delete a Timeboard</h4>
+    <div class="int-anchor" id="dashboards-delete"></div><a href="#dashboards-delete"><h4>Delete a Timeboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Delete an existing timeboard.</p>
@@ -1141,7 +1189,7 @@ kind: documentation
     </div>
 
     <!-- get a dashboard -->
-    <h4 id="dashboards-get-all">Get all Timeboards</h4>
+    <div class="int-anchor" id="dashboards-get-all"></div><a href="#dashboards-get-all"><h4>Get all Timeboards</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Fetch all of your timeboards' definitions.</p>
@@ -1163,7 +1211,7 @@ kind: documentation
     </div>
 
     <!-- get a dashboard -->
-    <h4 id="dashboards-get">Get a Timeboard</h4>
+    <div class="int-anchor" id="dashboards-get"></div><a href="#dashboards-get"><h4>Get a Timeboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Fetch an existing dashboard's definition.</p>
@@ -1190,7 +1238,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="screenboards">Screenboards</h3>
+    <div class="int-anchor" id="screenboards"></div><a href="#screenboards"><h3>Screenboards</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1200,7 +1248,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="screenboards-post">Create a Screenboard</h4>
+    <div class="int-anchor" id="screenboards-post"></div><a href="#screenboards-post"><h4>Create a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1211,6 +1259,7 @@ kind: documentation
           <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
           <%= argument("width", "Screenboard width in pixels", :default => "None") %>
           <%= argument("height", "Height in pixels.", :default => "None") %>
+          <%= argument("read_only", "The read-only status of the screenboard.", :default => "False") %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1227,9 +1276,37 @@ kind: documentation
       </div>
     </div>
 
+    <h4 id="screenboards-post">Update a Screenboard</h4>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("board_title", 'The name of the dashboard.') %>
+          <%= argument("description", "A description of the dashboard\'s content.", :default => "None") %>
+          <%= argument("widgets", "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") %>
+          <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
+          <%= argument("width", "Screenboard width in pixels", :default => "None") %>
+          <%= argument("height", "Height in pixels.", :default => "None") %>
+          <%= argument("read_only", "The read-only status of the screenboard.", :default => "False") %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/screen/:board_id</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-screenboard-update.py" %>
+        <%= snippet_code_block "api-screenboard-update.rb" %>
+        <%= snippet_code_block "api-screenboard-update.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-screenboard-update.py" %>
+        <%= snippet_result_code_block "api-screenboard-update.rb" %>
+        <%= snippet_result_code_block "api-screenboard-update.sh" %>
+      </div>
+    </div>
+
 
     <!-- delete a dashboard -->
-    <h4 id="timeboards-delete">Delete a Screenboard</h4>
+    <div class="int-anchor" id="timeboards-delete"></div><a href="#timeboards-delete"><h4>Delete a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Delete an existing screenboard.</p>
@@ -1249,7 +1326,7 @@ kind: documentation
     </div>
 
     <!-- get a screenboard -->
-    <h4 id="screenboards-get">Get a Screenboard</h4>
+    <div class="int-anchor" id="screenboards-get"></div><a href="#screenboards-get"><h4>Get a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Fetch an existing screenboard's definition.</p>
@@ -1271,7 +1348,7 @@ kind: documentation
     </div>
 
     <!-- get all screenboards -->
-    <h4 id="screenboards-get-all">Get all Screenboards</h4>
+    <div class="int-anchor" id="screenboards-get-all"></div><a href="#screenboards-get-all"><h4>Get all Screenboards</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Fetch all of your screenboards' definitions.</p>
@@ -1294,7 +1371,7 @@ kind: documentation
 
 
     <!-- share a screenboard -->
-    <h4 id="screenboards-share">Share a Screenboard</h4>
+    <div class="int-anchor" id="screenboards-share"></div><a href="#screenboards-share"><h4>Share a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Share an existing screenboard's with a public URL.</p>
@@ -1316,7 +1393,7 @@ kind: documentation
     </div>
 
     <!-- revoke a screenboard -->
-    <h4 id="screenboards-revoke">Revoke a shared a Screenboard</h4>
+    <div class="int-anchor" id="screenboards-revoke"></div><a href="#screenboards-revoke"><h4>Revoke a shared a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>Revoke a currently shared screenboard's.</p>
@@ -1341,9 +1418,9 @@ kind: documentation
     Hosts
     ====================================================================
     -->
-    <h3 id="hosts">Hosts</h3>
+    <div class="int-anchor" id="hosts"></div><a href="#hosts"><h3>Hosts</h3></a>
 
-    <h4 id="hosts-mute">Mute a Host</h4>
+    <div class="int-anchor" id="hosts-mute"></div><a href="#hosts-mute"><h4>Mute a Host</h4></a>
     <div class="row">
     <%= left_side_div %>
       <h5>Arguments</h5>
@@ -1367,7 +1444,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="hosts-unmute">Unmute a Host</h4>
+    <div class="int-anchor" id="hosts-unmute"></div><a href="#hosts-unmute"><h4>Unmute a Host</h4></a>
     <div class="row">
     <%= left_side_div %>
       <h5>Arguments</h5>
@@ -1393,7 +1470,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="tags">Tags</h3>
+    <div class="int-anchor" id="tags"></div><a href="#tags"><h3>Tags</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1411,7 +1488,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="tags-get">Get Tags</h4>
+    <div class="int-anchor" id="tags-get"></div><a href="#tags-get"><h4>Get Tags</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1436,7 +1513,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="tags-get-host">Get Host Tags</h4>
+    <div class="int-anchor" id="tags-get-host"></div><a href="#tags-get-host"><h4>Get Host Tags</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1462,7 +1539,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="tags-add">Add Tags to a Host</h4>
+    <div class="int-anchor" id="tags-add"></div><a href="#tags-add"><h4>Add Tags to a Host</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1488,7 +1565,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="tags-update">Update Host Tags</h4>
+    <div class="int-anchor" id="tags-update"></div><a href="#tags-update"><h4>Update Host Tags</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1514,7 +1591,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="tags-remove">Remove Host Tags</h4>
+    <div class="int-anchor" id="tags-remove"></div><a href="#tags-remove"><h4>Remove Host Tags</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1543,7 +1620,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="search">Search</h3>
+    <div class="int-anchor" id="search"></div><a href="#search"><h3>Search</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1599,7 +1676,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="comments">Comments</h3>
+    <div class="int-anchor" id="comments"></div><a href="#comments"><h3>Comments</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1610,7 +1687,7 @@ kind: documentation
     </div>
 
     <!-- Create comments -->
-    <h4 id="comments-create">Create a comment</h4>
+    <div class="int-anchor" id="comments-create"></div><a href="#comments-create"><h4>Create a comment</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1641,7 +1718,7 @@ kind: documentation
     </div>
 
     <!-- Edit comments -->
-    <h4 id="comments-edit">Edit a Comment</h4>
+    <div class="int-anchor" id="comments-edit"></div><a href="#comments-edit"><h4>Edit a Comment</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1665,7 +1742,7 @@ kind: documentation
     </div>
 
     <!-- Edit comments -->
-    <h4 id="comments-delete">Delete a Comment</h4>
+    <div class="int-anchor" id="comments-delete"></div><a href="#comments-delete"><h4>Delete a Comment</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1689,7 +1766,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="users">Users</h3>
+    <div class="int-anchor" id="users"></div><a href="#users"><h3>Users</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1699,7 +1776,7 @@ kind: documentation
     </div>
 
     <!-- Create user -->
-    <h4>Create User</h4>
+    <div class="int-anchor" id="user-create"></div><a href="#user-create"><h4>Create User</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1723,7 +1800,7 @@ kind: documentation
     </div>
 
     <!-- Get User -->
-    <h4>Get User</h4>
+    <div class="int-anchor" id="user-get"></div><a href="#user-get"><h4>Get User</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1746,7 +1823,7 @@ kind: documentation
     </div>
 
     <!-- Get All Users -->
-    <h4>Get All Users</h4>
+    <div class="int-anchor" id="user-get-all"></div><a href="#user-get-all"><h4>Get All Users</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1770,7 +1847,7 @@ kind: documentation
 
 
     <!-- Update user -->
-    <h4>Update User</h4>
+    <div class="int-anchor" id="user-update"></div><a href="#user-update"><h4>Update User</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1801,7 +1878,7 @@ kind: documentation
 
 
     <!-- Disable User -->
-    <h4>Disable User</h4>
+    <div class="int-anchor" id="user-disable"></div><a href="#user-disable"><h4>Disable User</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1832,7 +1909,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="graphs">Graphs</h3>
+    <div class="int-anchor" id="graphs"></div><a href="#graphs"><h3>Graphs</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1842,7 +1919,7 @@ kind: documentation
     </div>
 
     <!-- Create alerts -->
-    <h4 id="graph-snapshot">Graph Snapshot</h4>
+    <div class="int-anchor" id="graph-snapshot"></div><a href="#graph-snapshot"><h4>Graph Snapshot</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
@@ -1851,7 +1928,9 @@ kind: documentation
           <%= argument "start", "The POSIX timestamp of the start of the query." %>
           <%= argument "end", "The POSIX timestamp of the end of the query." %>
           <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
+          <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
         </ul>
+        
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1873,7 +1952,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="embeds">Embeddable Graphs</h3>
+    <div class="int-anchor" id="embeds"></div><a href="#embeds"><h3>Embeddable Graphs</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1883,7 +1962,7 @@ kind: documentation
     </div>
 
     <!-- Get All Embeds -->
-    <h4 id="embeds-get-all">Get All Embeds</h4>
+    <div class="int-anchor" id="embeds-get-all"></div><a href="#embeds-get-all"><h4>Get All Embeds</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1914,7 +1993,7 @@ kind: documentation
     </div>
 
     <!-- Create Embed -->
-    <h4 id="embeds-create">Create Embed</h4>
+    <div class="int-anchor" id="embeds-create"></div><a href="#embeds-create"><h4>Create Embed</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -1956,7 +2035,7 @@ kind: documentation
     </div>
 
     <!-- Get Specifc Embed -->
-    <h4 id="embeds-get">Get Specific Embed</h4>
+    <div class="int-anchor" id="embeds-get"></div><a href="#embeds-get"><h4>Get Specific Embed</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -2004,7 +2083,7 @@ kind: documentation
     </div>
 
     <!-- Enable Embed -->
-    <h4 id="embeds-enable">Enable Embed</h4>
+    <div class="int-anchor" id="embeds-enable"></div><a href="#embeds-enable"><h4>Enable Embed</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -2034,7 +2113,7 @@ kind: documentation
     </div>
 
     <!-- Revoke Embed -->
-    <h4 id="embeds-revoke">Revoke Embed</h4>
+    <div class="int-anchor" id="embeds-revoke"></div><a href="#embeds-revoke"><h4>Revoke Embed</h4></a>
     <div class="row">
       <%= left_side_div %>
         <p>
@@ -2069,7 +2148,7 @@ kind: documentation
     ====================================================================
     -->
 
-    <h3 id="troubleshooting">Troubleshooting</h3>
+    <div class="int-anchor" id="troubleshooting"></div><a href="#troubleshooting"><h3>Troubleshooting</h3></a>
     <div class="row">
       <%= left_side_div %>
         <p>We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing

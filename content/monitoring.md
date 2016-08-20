@@ -22,7 +22,7 @@ sidebar:
     - text: Custom Monitors
       href: "#custom"
     - text: Monitor Notifications
-      href: "#notification"
+      href: "#notifications"
     - text: Monitor FAQs
       href: "#faqs"
 ---
@@ -35,7 +35,7 @@ Monitoring in Datadog refers to the ability to notify your team when conditions 
 Here is a quick overview of the different terms used in this guide.
 
 - **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
-- **Check**: Emits one more more statuses.
+- **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
@@ -46,7 +46,7 @@ Here is a quick overview of the different terms used in this guide.
 ## Creating a Monitor
 {: #create}
 
-Nagivate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
+Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
 "Create Monitors" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This document will walk through the configuration of each type.
@@ -331,7 +331,7 @@ or service checks.
    walkthrough of the common notification options.
 
 ## Monitor Notifications
-{: #notification}
+{: #notifications}
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -370,7 +370,7 @@ triggering scope into the message of multi alerts.
 
 1. **Conditional variables for different notification types**: You can have a
     monitor event display a different message depending on whether the event is a
-    trigger, recover, or no data notification. These variables use simple if-else
+    trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
     ![conditional variables](/static/images/monitor/conditionalvars.png)
@@ -390,7 +390,7 @@ triggering scope into the message of multi alerts.
     ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
 
-    The conditional variables available are `is_alert`, `is_recovery`, and `is_no_data`.
+    The conditional variables available are `is_alert`, `is_warning`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
     Step 3 of the monitor editor.
 

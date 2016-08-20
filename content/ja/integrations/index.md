@@ -75,7 +75,7 @@ Integrationをインストール/設定するための細かい手順につい�
 * <a href="/ja/integrations/cassandra/">Cassandra</a>
 * <a href="/ja/integrations/chef/">Chef</a>
 * <a href="/ja/integrations/docker/">Docker</a>
-* <a href="/ja/integrations/elasticsearch/">ElasticSearch</a>
+* <a href="/ja/integrations/elasticsearch/">Elasticsearch</a>
 * <a href="/ja/integrations/eventviewer/">Event Viewer</a>
 * <a href="/ja/integrations/fabric/">Fabric</a>
 * <a href="/ja/integrations/git/">Git</a>

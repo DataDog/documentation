@@ -80,6 +80,15 @@ preprocess do
   end
 end
 
+
+compile '/partials/*' do
+  filter :erb
+end
+
+route '/partials/*' do
+  nil
+end
+
 compile 'sitemap' do
   filter :erb
 end
@@ -116,9 +125,7 @@ compile '/static/*' do
     # end
 end
 
-compile '/partials/*' do
-  filter :erb
-end
+
 
 compile '*' do
   unless item.binary? or item[:title] == 'redirect'
@@ -143,6 +150,10 @@ compile '*' do
 
     id = @item.identifier
 
+    unless id.match('/api/')
+      filter :header_links
+    end
+
     case
 
     # when id.match('/ja/guides/basic_agent_usage/')
@@ -164,9 +175,7 @@ route 'sitemap' do
   item.identifier.chop + '.xml'
 end
 
-route '/partials/*' do
-  nil
-end
+
 
 route '/tipuesearch/*' do
   unless item.identifier.include?('#')

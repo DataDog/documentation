@@ -8,7 +8,7 @@ guard 'rake', :task => 'compile' do
 end
 
 
-guard 'rake', :task => 'checks' do
+guard 'rake', :task => 'localchecks' do
   watch(%r{^output/.+\.(css|js|html)})
 end
 

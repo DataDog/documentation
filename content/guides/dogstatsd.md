@@ -214,8 +214,7 @@ Mandatory fields:
   - `text` (String) — Event text. Supports line breaks.
 
 Events are aggregated on the Event Stream based on: <br/>
-'hostname/event_type/source_type/aggregation_key'<br/>
-If `event_type` is empty, the event will be grouped with other events that don't have an `event_type`.
+'hostname/source_type/aggregation_key'<br/>
 
 <%= python <<eof
 
@@ -232,7 +231,7 @@ eof
   - Event title.
   - Event text. Supports line breaks.
 - Optional:
-  - `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
+  - `date_happened` (Time, None) — default: None — Assign a POSIX timestamp in seconds to the event. Default is now when none.
   - `hostname` (String, None) — default: None — Assign a hostname to the event.
   - `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
   - `priority` (String, None) — default: 'normal' — Can be 'normal' or 'low'.

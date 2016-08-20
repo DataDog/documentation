@@ -20,6 +20,9 @@ You can use the Datadog Agent Manager that you can find in the Start Menu.
 
 ![][3]
 
+You can also use Windows Powershell if you are running on a modern version of Windows: 
+`[start|stop|restart]-service datadogagent`
+
 
 #### For version < 3.9.1
 

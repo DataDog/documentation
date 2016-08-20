@@ -6,7 +6,6 @@ this layout provides a sidebar and main column.
 <html lang="en">
   <%= render "_head" %>
   <body>
-
     <%= render "_header" %>
     <div class="container">
       <div class="row">
@@ -14,25 +13,17 @@ this layout provides a sidebar and main column.
         <!-- SIDEBAR -->
         <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
           <ul class="nav nav-tabs nav-stacked sidebar">
-          <% if @item["language"] == "en" %>
-            <li class="nav-header">Documentation Search</li> 
+          <% if @item["language"] != "ja" %>
+            <li class="nav-header">Documentation Search</li>
             <li>
               <form action="/search/">
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
               </form>
             </li>
             <% end %>
-            <% if @item[:sidebar] && @item[:sidebar][:nav] %>
-              <% @item[:sidebar][:nav].each do |i| %>
-                <% if i[:header] %>
-                  <li class="nav-header"><%= i[:header] %></li>
-                <% else %>
-                  <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
-                <% end %>
-              <% end %>
-            <% end %>
+            <%=show_table_of_contents%>
               <li class="nav-header"><%= @item["menu_guides"] %> </li>
-              <% this_guide_items = @item["language"] == "en" ? $guide_items : $ja_guide_items %>
+              <% this_guide_items = @item["language"] != "ja" ? $guide_items : $ja_guide_items %>
             <% this_guide_items.each do |i| %>
                   <li><%= link_to i[:title], i.path %></li>
             <% end %>
@@ -49,19 +40,19 @@ this layout provides a sidebar and main column.
           <% end %>
           <% if @item.identifier.match("/examples/") && @item[:kind]== 'example' %>
             <small>
-            <% if @item[:language] == 'en' %>
-              tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %>
-            <% else %>
+            <% if @item[:language] == 'ja' %>
               tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/examples/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+              tags: <%= tag_links_for(@item, [], {:url_format=>"/examples/%%tag%%/"}).sort().join(' | ') %>
             <% end %>
             </small>
             <br><br>
           <% elsif @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
             <small>
-            <% if @item[:language] == 'en' %>
-            tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %>
-            <% else %>
+            <% if @item[:language] == 'ja' %>
             tags: <%= tag_links_for(@item, [], {:url_format=>"/ja/videos/%%tag%%/"}).sort().join(' | ') %>
+            <% else %>
+            tags: <%= tag_links_for(@item, [], {:url_format=>"/videos/%%tag%%/"}).sort().join(' | ') %>
             <% end %>
             </small>
             <br><br>

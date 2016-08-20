@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
 kind: guide
-listorder: 2
+listorder: 1
 sidebar:
   nav:
     - header: Datadogのサービスについて
@@ -56,7 +56,7 @@ in an online service is treated the same throughout Datadog.</li>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
 <li>カスタム Integrationsは、<a target="_blank" href="/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
-<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。</li>
+<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。<a href="/ja/integrations/">Integrationに関するドキュメント</a>!</li>
 </ul>
 
 
@@ -141,7 +141,7 @@ For each incident users can:
 <li>Comment</li>
 <li>See similar incidents </li>
 <li><a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email</li>
-<li>@support to ask for assistance</li>
+<li>@support-datadog to ask for assistance</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
@@ -168,7 +168,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>コメントの追加</li>
 <li>同様なインシデントの閲覧</li>
 <li><a target="_blank" href="/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
-<li>@support でのサポートの要請</li>
+<li>@support-datadog でのサポートの要請</li>
 </ul>
 
 <img src="/static/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
@@ -190,7 +190,7 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
 <li>Graphs can be embedded in an iframe, giving a 3rd party a live graph
-without access to your data or any other information (via the cog in the upper right of a graph).</li>
+without access to your data or any other information (via the pencil in the upper right of a graph).</li>
 </ul> -->
 
 <h2 id="dashboards">原因追跡用ダッシュボード</h2>
@@ -206,7 +206,7 @@ without access to your data or any other information (via the cog in the upper r
 <li>zone, host, total usageで、表示することができます。</li>
 <li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
-<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の歯車マークから)</li>
+<li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
 
 

@@ -1,8 +1,7 @@
-include Nanoc3::Helpers::XMLSitemap
-include Nanoc3::Helpers::Rendering
-include Nanoc3::Helpers::LinkTo
-include Nanoc::Toolbox::Helpers::TaggingExtra
-include Nanoc::Toolbox::Helpers::HtmlTag
+include Nanoc::Helpers::XMLSitemap
+include Nanoc::Helpers::Rendering
+include Nanoc::Helpers::LinkTo
+require 'nokogiri'
 
 # general functions
 
@@ -15,13 +14,13 @@ def collect_video_items
 end
 
 def collect_integration_items
-  integrations = @items.select { |item| item[:kind] == 'integration' && !(item.identifier.match('/ja/')) }
+  integrations = @items.select { |item| item[:kind] == 'integration' && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   integrations.sort_by { |i| i[:integration_title].downcase }
   # $all_itegration_items = integrations
 end
 
 def collect_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && !(item.identifier.match('/ja/')) }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && !(item.identifier.match('/ja/')) }
   guides.sort_by { |item| item[:listorder] }
 end
 
@@ -40,12 +39,12 @@ def collect_ja_integration_items
 end
 
 def collect_ja_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
   guides.sort_by { |item| item[:listorder] }
 end
 
 def ja_guide_items_yet
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == nil }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == nil }
   guides_translated = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
 
   guides_translated.each do |jp_content|
@@ -60,41 +59,162 @@ def ja_guide_items_yet
   guides.sort_by { |item| item[:listorder] }
 end
 
-def get_metrics_from_git
+
+def show_autotoc
+  doc = Nokogiri::HTML(@item.compiled_content)
+  maxdepth = @item.attributes.include?(:autotocdepth) ? @item[:autotocdepth]:5
+  headers = doc.css("h1, h2, h3, h4, h5, h6")
+  if headers.length > 0
+    toplevel = headers.min {|a, b| a.name[-1]<=>b.name[-1]}.name[-1].to_i
+    headers = headers.map {|h| {level: h.name[-1].to_i - toplevel +1, id: h['id'], title: h.text}}
+
+    toc = ""
+    toc+= "<li class='nav-header'>Table of Contents</li>"
+    headers.each do |header|
+      if header[:level] <= maxdepth
+        style=""
+        case header[:level]
+        when 1
+          style=""
+        when 2
+          style="padding: 5px 25px;"
+        when 3
+          style="padding: 3px 35px;font-size:13px;"
+        when 4
+          style="padding: 2px 45px;font-size:12px;"
+        when 5
+          style="padding: 1px 55px;font-size:10px;"
+        end
+        toc += "<li><a style='#{style}' href='##{header[:id]}' onclick=\"$('#').collapse('show')\">#{header[:title]}</a></li>"
+      end
+    end
+  end
+  return toc
+end
+
+def show_table_of_contents
+  sidebarnav=""
+  if (@item[:sidebar] && @item[:sidebar][:nav])&&@item[:autotoc]!=true
+    @item[:sidebar][:nav].each do |i|
+      if i[:header]
+        # sidebarnav += "<li class='nav-header'>#{i[:header]}</li>"
+        sidebarnav += "<li class='nav-header'>Table of Contents</li>"
+      else
+        sidebarnav += "<li><a href='#{i[:href]}' onclick=\"$('##{i[:collapseid]}').collapse('show')\">#{i[:text]}</a></li>"
+      end
+    end
+  else
+    sidebarnav = show_autotoc
+  end
+  # <% @item[:sidebar][:nav].each do |i| %>
+  #               <% if i[:header] %>
+  #                 <li class="nav-header"><%= i[:header] %></li>
+  #               <% else %>
+  #                 <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
+  #               <% end %>
+  #             <% end %>
+  return sidebarnav
+end
+
+def github_metrics_store_filename
+  'github_metrics'
+end
+
+def get_all_metrics_from_github
   require 'octokit'
-  require 'base64'
+  require 'pp'
+  require 'yaml'
   require 'csv'
 
+  $allmetrics = {}
   if ENV.has_key?('github_personal_token')
-    ititle = @item[:git_integration_title]
+    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
+    repo='datadog/dogweb'
+    reporootdir = $client.contents(repo, :path => "integration/")
 
-    itext = $client.contents('datadog/dogweb', :path => "integration/"+ititle+"/"+ititle+"_metadata.csv").content
-    # return Base64.decode64(client.contents('datadog/dogweb', :path => "integration/"+@item[:git_integration_title]+"/desc.mako"))
-    # return Base64.decode64(itext) #.gsub!(/<%(inherit|include)[^>]*\/>|<%def[^>]*>[^<]*<\/%def>/, '')
-    metric_string = "<table class='table'>"
-    CSV.parse(Base64.decode64(itext), :headers => true) do |row|
-      # row.each do |metric_name, metric_type, interval, unit_name, per_unit_name, description, orientation, integration, short_name |
-        metric_string += "<tr><td><strong>#{row['metric_name']}</strong><br/>(#{row['metric_type']}"
-        if row['interval'] != nil
-          metric_string += " every #{row['interval']} seconds"
-        end
-        metric_string += ")</td><td>#{row['description'].gsub '^', ' to the '}"
-        if row['unit_name'] != nil
-          metric_string += "<br/>shown as #{row['unit_name']}"
-          if row['per_unit_name'] != nil
-            metric_string += "/#{row['per_unit_name']}"
+    reporootdir.each do |intdir|
+      if intdir[:type] == "dir"
+        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+        intdirlist.each {|intdircontent|
+          if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
+            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+            metrics = []
+            CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
+              description = row['description'].nil? ? '' : row['description']
+              metric_name = row['metric_name']
+              metric_type = row['metric_type']
+              metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
+              metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
+              metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
+              metrics << {
+                :name => metric_name,
+                :type => metric_type,
+                :interval => metric_interval,
+                :description => description,
+                :unit => metric_unit,
+                :per_unit => metric_per_unit
+                }
+            end
+            $allmetrics[intdir['name']] = metrics
           end
-        end
-
-        metric_string += "</td></tr>"
+        }
+      end
     end
-    metric_string+="</table>"
-    output = metric_string
-  else
-    output = "<strong>Metrics table is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+    serialize_github_metrics($allmetrics, github_metrics_store_filename)
   end
+  return $allmetrics
+end
 
-return output
+def serialize_github_metrics(items, filename)
+  File.open(filename, 'a') do |f|
+    Marshal.dump(items, f)
+  end
+end
+
+def insert_example_links(integration: item[:integration_title], conf:  integration.downcase.tr(" ", "_"), check: integration.downcase.tr(" ", "_"), yaml_extension: "example", include_intro: true)
+  example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
+  yaml_example = conf!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/conf.d/" + conf + ".yaml."+yaml_extension+"'> "+ integration + " YAML example</a></li>" : ""
+  checks_file =  check!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/checks.d/" + check + ".py'>" + integration + " checks.d</a></li>" : ""
+
+  example_links += "<ul>" + yaml_example + checks_file + "</ul>\n"
+  return example_links
+end
+
+def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
+  items_to_include = items_to_include.split(/\s*,\s*/)
+  if $allmetrics == nil
+    if File.exist?(github_metrics_store_filename)
+      $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
+    else
+      $allmetrics = get_all_metrics_from_github()
+    end
+  end
+  selectedmetrics = []
+  allmetricsforintegration = $allmetrics[itemintegration]
+  if items_to_include.count > 0
+    items_to_include.each do |item_to_include|
+      selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
+    end
+  else
+    selectedmetrics = allmetricsforintegration
+  end
+  return formatmetrics(selectedmetrics)
+end
+
+def formatmetrics(selectedmetrics)
+  metrictable = "<table class='table'>"
+  selectedmetrics.each do |metric|
+    metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
+    if metric[:interval]>0
+      metrictable += " every #{metric[:interval]} seconds"
+    end
+    metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
+    metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
+    metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
+    metrictable += "</td></tr>"
+  end
+  metrictable += "</table>"
+  return metrictable
 end
 
 def get_units_from_git
@@ -175,6 +295,73 @@ EOF
   end
 end
 
+def create_tag_pages(items=nil, options={})
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:identifier]      ||= "/tags/#{options[:tag_pattern]}/"
+  options[:template]        ||= "tag"
+
+  tag_set(items).each do |tagname|
+    raw_content = "<%= render('#{options[:template]}', :tag => '#{tagname}') %>"
+    attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
+    identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
+
+    @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
+  end
+end
+
+def tag_set(items=nil)
+  items ||= @items
+  items.map { |i| i[:tags] }.flatten.uniq.delete_if{|t| t.nil?}
+end
+
+def tag_links_for(item, omit_tags=[], options={})
+  tags = []
+  return tags unless item[:tags]
+
+  options[:tag_pattern]     ||= "%%tag%%"
+  options[:title]           ||= options[:tag_pattern]
+  options[:file_extension]  ||= ".html"
+  options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
+
+  tags = item[:tags] - omit_tags
+
+  tags.map! do |tag|
+      title = options[:title].gsub(options[:tag_pattern], tag.downcase)
+      url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
+      content_tag('a', title, {:href => url})
+  end
+end
+
+def content_tag(name, content, options={})
+  "<#{name}#{tag_options(options) if options}>#{content}</#{name}>"
+end
+
+def tag_options(options)
+  unless options.empty?
+    attributes = []
+    options.each do |key, value|
+      attributes << %(#{key}="#{value}")
+    end
+    ' ' + attributes.join(' ')
+  end
+end
+
+def count_tags(items=nil)
+  items ||= @items
+  tags = items.map { |i| i[:tags] }.flatten.delete_if{|t| t.nil?}
+  tags.inject(Hash.new(0)) {|h,i| h[i] += 1; h }
+end
+
+def items_with_tag(tag, items=nil)
+  items = sorted_articles if items.nil?
+  items.select { |item| has_tag?( item, tag ) }
+end
+
+def has_tag?(item, tag)
+  return false if item[:tags].nil?
+  item[:tags].include? tag
+end
 # def create_tag_pages(items=nil, options={})
 #       options[:tag_pattern]     ||= "%%tag%%"
 #       options[:title]           ||= options[:tag_pattern]

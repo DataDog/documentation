@@ -2,38 +2,47 @@
 title: Datadog-New Relic Integration
 integration_title: New Relic
 kind: integration
+git_integration_title: new_relic
+newhlevel: true
 ---
 
-### Overview
+# Overview
+
+![New Relic Dashboard](/static/images/newrelicdashboard.png)
+
 Connect to New Relic to:
 
 * See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
 * See New Relic alerts in your event stream
 
-### Installation
+# Installation
 
-#### New Relic Alerts in Event Stream
+## New Relic Alerts in Event Stream
 
-1. On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
+1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
 
         https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}
 
-2. For 'Custom Payload'(s), select JSON 'Payload Type'.
+1.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 
-#### New Relic APM Metric Collection
+## New Relic APM Metric Collection
 
-1. Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
+1.  Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
 
     *Note: Metrics can only be imported for New Relic customers at the Pro level or above.*
 
-2. If you wish to tag metrics at an account level, please add an account tag.
-3. Choose whether you want to collect your metrics per hosts or app-wide.
+1.  If you wish to tag metrics at an account level, please add an account tag.
+1.  Choose whether you want to collect your metrics per hosts or app-wide.
 
     *Note: Enabling this options will import New Relic hosts to Datadog.*
 
-### Troubleshooting & FAQ
+# Metrics
 
-#### What does the 'Collect metrics by host' option do ?
+<%= get_metrics_from_git() %>
+
+# Troubleshooting
+
+**What does the 'Collect metrics by host' option do?**
 
 When set, Datadog collects application metrics for every associated hosts,
 instead of the overall host throughput based average.
@@ -44,7 +53,7 @@ across many hosts has an acceptable error rate in aggregate".
 
 This also import New Relic hosts to Datadog Infrastructure section.
 
-#### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
+**I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?**
 
 When New Relic computes the aggregate application-level value for
 metrics that are measured at the host level (e.g. response time), they
@@ -80,7 +89,7 @@ Whereas we would simply compute the arithmetic mean:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
 
-#### Beta Alerts: How can I include custom tags?
+**Beta Alerts: How can I include custom tags?**
 
 You can include custom tags by utilizing the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, you'll navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. From here, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it will expand to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
 
