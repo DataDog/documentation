@@ -174,7 +174,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-nginx-lua}
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
-  * [lua-resty-dogstatsd][79] written by [mediba inc][80].
+  * [lua-resty-dogstatsd][79] are also available event and service_check of DogStatsD extension, written by [mediba inc][80].
 
 #### Phusion Passenger
 {: #community-integration-passenger}
