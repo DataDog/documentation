@@ -38,7 +38,13 @@ preprocess do
   #   end
   # end
 
-  if ENV.has_key?('github_personal_token')
+  if ENV.has_key?('NANOCRUNSLOW')
+    $goodconnection = false
+  else
+    $goodconnection = true
+  end
+
+  if ENV.has_key?('github_personal_token') && $goodconnection
     $client = $client ||= Octokit::Client.new(:access_token => ENV['github_personal_token'])
     $client.user.login
   end
