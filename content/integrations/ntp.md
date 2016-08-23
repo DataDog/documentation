@@ -2,13 +2,20 @@
 title: Datadog-NTP Check Integration
 integration_title: NTP Check
 kind: integration
-doclevel: basic
 newhlevel: true
 ---
 
 # Overview
 
-The Network Time Protocol (NTP) integration is enabled by default and reports the time offset from an ntp server every 15 minutes.
+![NTP Graph](/static/images/ntpgraph.png)
+
+The Network Time Protocol (NTP) integration is enabled by default and reports the time offset from an ntp server every 15 minutes. When the local agent's time is more than 15 seconds off from the Datadog service and the other hosts that you are monitoring, you may experience:
+
+* Incorrect alert triggers
+* Metric delays
+* Gaps in graphs of metrics
+
+For more information on syncing your system clock with NTP, [see this article in the Datadog Knowledge Base](https://help.datadoghq.com/hc/en-us/articles/204282095-Network-Time-Protocol-NTP-Offset-Issues)
 
 # Installation
 
