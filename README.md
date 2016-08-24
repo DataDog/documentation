@@ -5,7 +5,7 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 # Setup
 
 ```
-brew install rbenv # or equivalent on linux
+brew install rbenv # or equivalent on linux (if you don't know about brew, go to http://brew.sh)
 rbenv install 2.3.0
 rbenv local 2.3.0
 gem install bundler # and set up your shell / shell profile for it
@@ -65,6 +65,14 @@ rake test
 ```
 
 These keys should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
+
+If you have a super slow connection, perhaps on the Amtrak or on a plane, use
+
+```
+rake slow
+```
+
+This command is the same as `rake` but will skip getting metrics from various repositories. Running rake on a train can take 500 seconds, but changing this to `rake slow` makes it less than a minute for a full compile.
 
 **If there are errors, please don't merge.**
 
