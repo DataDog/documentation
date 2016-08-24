@@ -86,7 +86,7 @@ This will add the outliers function to your graph, and you’ll see any outliers
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 -->
 
-Outlier Detectionのアルゴリズムは選択することができます。そして、デフォルトのアルゴリズム(DBSCAN)とそのパラメータの指定によって多くのシナリオでOutlier Detectionを有効に機能させることができるでしょう。しかし、もし検出される外れ値(Outlier)が多すぎたり少なすぎる場合には、アルゴリズムの調整や他のアルゴリズムへの変更をすることができます。詳しくは、後で述べる "Outlier Detectionのアルゴリズムとパラメータ" セクションを参照して下さい。
+Outlier Detectionのアルゴリズムは選択することができます。そして、デフォルトのアルゴリズム(DBSCAN)とそのパラメータの指定によって多くのシナリオでOutlier Detectionを有効に機能させることができるでしょう。しかし、もし検出される外れ値(Outlier)が多すぎたり少なすぎる場合には、アルゴリズムの調整や他のアルゴリズムへの変更ができます。詳しくは、後で述べる "Outlier Detectionのアルゴリズムとパラメータ" セクションを参照して下さい。
 
 <!--
 ### 2. Alert on Outliers
@@ -120,7 +120,7 @@ You can also optionally select an algorithm to use for outlier detection. By def
 -->
 他のメトリクスを対象にしたMonitor同様、メトリクスとそのメトリクスを監視する範囲(スコープ)を選択します。
 
-"alert conditions"では、グルーピングと時間幅を指定します。
+"alert conditions"では、グルーピングと外れ値を検出すべき(Outlier)時間幅を指定します。
 
 Outlier Detectionに使用するアルゴリズムをオプションで選択します。デフォルトではすでにDBSCANアルゴリズムがtolerance 値3で選択されていますが、多くのケースではこれが最適です。より詳しいoutlier 関数とそのパラメータの情報については後述します。
 
@@ -130,7 +130,7 @@ Outlier Detectionに使用するアルゴリズムをオプションで選択し
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 -->
 
-設定したアラートが適切に調整されているか確かめるために、過去をさかのぼってどのように外れ値(Outlier)が検出されアラートされ得るか確認しましょう。画面右上のリバースボタン(<<)で時間幅を操作します。これは、選択しているOutlier Detectionのアルゴリズムのパラメーターを調整するためにも有効な方法です。
+設定したアラートが適切に調整されているか確かめるために、過去をさかのぼってどのように外れ値(Outlier)が検出されアラートされ得るか確認しましょう。画面右上のリバースボタン(<<)で表示されている時間幅を操作します。これは、選択しているOutlier Detectionのアルゴリズムのパラメーターを調整するためにも有効な方法です。
 
 ![](/static/images/outliers/outliers-new-monitor-graph-calibrate.png)
 
@@ -155,7 +155,7 @@ A natural way to group together hosts that are behaving similarly is to use a cl
 Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 -->
 
-### DBSCAN
+### DBSCAN - 密度ベースのクラスタリング手法
 
 同じような挙動をとるホストをグルーピングする自然な方法は、クラスタリングアルゴリズムを使用することです。
 Datadogでは幅広く使われている[DBSCAN](https://en.wikipedia.org/wiki/DBSCAN)と呼ばれる、密度に基づいたクラスタリングアルゴリズムを使用します。DBSCAN はお互いの距離が近い密集したデータポイント群を同一クラスタとして判定します。そして、いくつかの要素を満たすクラスタについて外れ値(Outlier)とみなします。
@@ -256,7 +256,7 @@ Both algorithms are set up to identify outliers that differ from the majority of
 
 ### アラート設定のTips
 
-外れ値(Outlier)についてアラートを設定する場合、重要なパラメータとして時間幅の設定があります。大きすぎる時間幅は、外れ値(Outlier)として検出されるまでの時間の長さのために、異常な挙動の継続を許してしまう可能性があります。
+外れ値(Outlier)についてアラートを設定する場合の重要なパラメータとして、外れ値を検出すべき(Outlier)時間幅の設定があります。大きすぎる時間幅は、外れ値(Outlier)を検出すべき時間幅の大きさのゆえに、異常な挙動の継続を許してしまう可能性があります。
 一方で小さすぎる時間幅では、単発のスパイクのような些細な挙動に対しても過敏に反応してしまいます。
 
 また、いずれのアルゴリズムも、大多数の同様な挙動をもつメトリクスとは異なる外れ値(Outlier)を特定するために設定されます。もし下記のような複数の値の幅を取りうるホストに対してOutlier Detectionを適用する場合には、ホストがそれぞれの値の幅を持つことを示すタグを付与し、そのタグを持つホストごとに別のOutlier Detectionアラートを設定することをおすすめします。
