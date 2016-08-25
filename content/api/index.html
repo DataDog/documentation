@@ -19,6 +19,7 @@ kind: documentation
       <div class="btn-group api-section-links btn-group-sm">
         <a class="btn btn-default gradient" href="#authentication">Auth</a>
         <a class="btn btn-default gradient" href="#errors">Errors</a>
+        <a class="btn btn-default gradient" href="#ratelimiting">Rate Limiting</a>
         <a class="btn btn-default gradient" href="#metrics">Metrics</a>
         <a class="btn btn-default gradient" href="#events">Events</a>
         <a class="btn btn-default gradient" href="#service_checks">Checks</a>
@@ -136,6 +137,39 @@ kind: documentation
         <%= snippet_code_block "api-warning.json", :static => true, :highlight => false, :nocomments => true %>
       </div>
     </div>
+
+
+
+    <!--
+   =====================================================================
+      Rate Limiting
+    ====================================================================
+    -->
+
+    <div class="int-anchor" id="ratelimiting"></div><a href="#ratelimiting"><h3>Rate Limiting</h3></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+        Some of our API endpoints are rate limited.  Once you exceed a certain number of requests in a certain time period we return an error.
+        </p>
+        <p>
+        For rate limited API endpoints we return headers so you can know how close you are to your limit.  If you exceed your limit, you can review these headers to determine when you will be able to try again.
+        </p>
+        <p>
+        Rate limits can be increased from defaults by contacting the Datadog Support team.
+        </p>
+      </div>
+      <%= right_side_div %>
+        <h5>Rate Limit Headers</h5>
+        <ul>
+          <li><code>X-RateLimit-Limit</code>number of requests allowed in a time period</li>
+          <li><code>X-RateLimit-Period</code>length of time in seconds for resets (calendar aligned)</li>
+          <li><code>X-RateLimit-Remaining</code>number of allowed requests left in current time period</li>
+          <li><code>X-RateLimit-Reset</code>time in seconds until next reset</li>
+        </ul>
+      </div>
+    </div>
+
 
     <!--
    =====================================================================
