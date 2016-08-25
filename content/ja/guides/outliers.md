@@ -11,7 +11,7 @@ sidebar:
       href: "#dashboards"
     - text: 外れ値データ(Outlier)をアラートする
       href: "#alerts"
-    - text: レファレンス: Outlier Detection のアルゴリズムとパラメータ
+    - text: レファレンス Outlier Detection のアルゴリズムとパラメータ
       href: "#algorithms"
 ---
 <!--
@@ -142,7 +142,7 @@ To ensure that your alert is properly calibrated, you can set the time window at
 There are two different outlier detection algorithms you can use on your data: DBSCAN and Median Absolute Deviation (MAD). We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. Explanation of each algorithm and its parameters follows.
 -->
 
-## レファレンス: Outlier Detection のアルゴリズムとパラメータ
+## レファレンス Outlier Detection のアルゴリズムとパラメータ
 {: #algorithms}
 
 Outlier Detection では、DBSCAN と Median Absolute Deviation (MAD)の2つのアルゴリズムを使用することができます。まずは、デフォルトのアルゴリズムであるDBSCANから始めることをおすすめします。そして、もし上手く外れ値(Outlier)の検出ができないような場合には、そのパラメータを調整するか、もう一方のアルゴリズムであるMADを試してみてください。以下で、それぞれのアルゴリズムとそのパラメータについて解説します。
