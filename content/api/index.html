@@ -161,6 +161,30 @@ kind: documentation
         </p>
       </div>
     </div>
+
+    <div class="int-anchor" id="metrics-list"></div><a href="#metrics-list"><h4>Get list of active metrics</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Get the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
+        </ul>
+
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET https://app.datadoghq.com/api/v1/metrics</code>
+        <h5>Example Request</h5>
+          <%= snippet_code_block "api-metrics-list.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-metrics-list.sh" %>
+      </div>
+    </div>
+
     <div class="int-anchor" id="metrics-post"></div><a href="#metrics-post"><h4>Post time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
@@ -196,6 +220,7 @@ kind: documentation
         <% end %>
       </div>
     </div>
+
     <div class="int-anchor" id="metrics-query"></div><a href="#metrics-query"><h4>Query time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
