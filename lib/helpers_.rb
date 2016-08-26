@@ -34,7 +34,7 @@ def collect_ja_video_items
 end
 
 def collect_ja_integration_items
-  integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && item.identifier.match('/ja/') }
+  integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && (item[:beta]!=true) && item.identifier.match('/ja/') }
   integrations.sort_by { |i| i[:integration_title].downcase }
 end
 
