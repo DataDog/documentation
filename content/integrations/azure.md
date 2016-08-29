@@ -41,7 +41,53 @@ Related integrations include:
 ### Installation
 {: #installation}
 
-Integrating Datadog with Microsoft Azure is a three step process. 
+Integrating Datadog with Microsoft Azure can be done via the Azure Command Line Interface or through the Azure portals. 
+
+#### Integrating through the Azure CLI
+To integrate Datadog with Azure using the Azure Command Line Interface, make sure you have [Azure CLI installed][7]. 
+
+First, login to the Azure account you want to integrate with Datadog
+
+~~~~
+azure login
+~~~~
+
+Next, configure CLI to be in ARM (Azure Resource Manager) mode
+
+~~~~
+azure config mode arm
+~~~~
+
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name"
+
+~~~~
+azure account show
+~~~~
+
+Create an Active Directory application using the format below.\\
+The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process.\\ 
+The `password` you choose must be copy and pasted into the form on the Azure setup tile under "Client Secret"
+
+~~~~
+azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" --identifier-uris "http://app.datadoghq.com" --password "SomePassword"
+~~~~
+
+Create a Service Principal using the `AppId` returned from the last command.\\
+Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
+
+~~~~
+azure ad sp create {app-id}
+~~~~
+
+Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.\\
+Use the `Object Id` returned from the previous command to fill in `{object-Id}`
+
+~~~~
+azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-Id}/
+~~~~
+
+
+#### Integrating through the Azure Portals
 
 1. The first step is <a href="#installation1">Getting your tenant name</a> and passing it to Datadog. 
 2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
@@ -51,7 +97,7 @@ Integrating Datadog with Microsoft Azure is a three step process.
 {: #installation1}
 1. Go to [manage.windowsazure.com][5]
 2. Once the URL redirects, copy the tenant name from the URL. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
-3. Paste the Tenant Name in the form on the Datadog setup page <img src="/static/images/azure/tenant_name_form.png" style="width: 50%;display:block;display:block;"/>
+3. Paste the Tenant Name in the form on the Azure setup tile <img src="/static/images/azure/tenant_name_form.png" style="width: 50%;display:block;display:block;"/>
 
 #### Creating the Web Application
 {: #installation2}
@@ -68,7 +114,7 @@ Integrating Datadog with Microsoft Azure is a three step process.
 	- i.e. https://app.datadoghq.com	
 9. Click the check mark. You should be on a page that says "Your app has been added!"
 10. Click on "Configure" (Make sure you are on the page for the app, not the active directory) <img src="/static/images/azure/configure_click.png" style="width: 50%;display:block;"/>
-11. Scroll down to Client ID. Copy and paste the value into the form on the Datadog setup page <img src="/static/images/azure/client_id_form.png" style="width: 50%;display:block;display:block;"/>
+11. Scroll down to Client ID. Copy and paste the value into the form on the Azure setup tile <img src="/static/images/azure/client_id_form.png" style="width: 50%;display:block;display:block;"/>
 12. Scroll down to Keys and create a new key (1 or 2 years are both acceptable)
 	- Note: the client secret key will be shown after you save
 13. Scroll down to "Permissions To Other Applications"
@@ -76,10 +122,10 @@ Integrating Datadog with Microsoft Azure is a three step process.
 15. Select Windows Azure Service Management API and click the check mark on the bottom right of the screen
 16. Under Delegated Permissions, check off “Access Azure Service Management as organization users (preview)” <img src="/static/images/azure/app_permissions_dropdown.png" style="width: 50%;display:block;"/>
 17. Click "Save" at the bottom of the screen 
-18. Scroll back up to Keys, and copy and paste the generated Client Secret key into the form on the Datadog setup page <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
+18. Scroll back up to Keys, and copy and paste the generated Client Secret key into the form on the Azure setup tile <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
 19. Click "Install Integration" to complete the application creation process
 
-#### Giving Read Permissions to the Application
+#####Giving Read Permissions to the Application
 {: #installation3}
 
 1. Navigate to [portal.azure.com][2]
@@ -162,3 +208,4 @@ After locating your VM:
    [4]: https://management.azure.com
    [5]: https://manage.windowsazure.com
    [6]: https://app.datadoghq.com/screen/integration/azure_vm
+   [7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
