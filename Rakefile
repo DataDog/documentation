@@ -122,4 +122,10 @@ task :guard do
   sh 'bundle exec guard'
 end
 
+desc 'This is a slow connection, dont collect remote stuff'
+task :slow do
+  ENV['NANOCRUNSLOW'] = "true"
+  Rake::Task[:guard].invoke
+end
+
 task default: :guard

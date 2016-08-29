@@ -12,7 +12,12 @@ Now, you can set these alerts to automatically create support tickets and send t
 
 ![ServiceNow](/static/images/servicenow-02-monitor-page.png)
 
+### Use variables in ticket payload and field mappings
+ 
+Variables can be used in the body of your alerts or in field mappings to ensure rich details from the event are included in ServiceNow.  For example, you can include the title and severity in the appropriate ServiceNow field or you can include a link back to the specific incident in Datadog right from the ServiceNow ticket.
 
+![ServiceNow Variables](/static/images/servicenow-variables.png) 
+ 
 ### Automate support resolution workflow
 
 Once the monitor state returns to normal, the associated support ticket is automatically marked as “resolved”.
