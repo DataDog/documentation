@@ -47,26 +47,44 @@ Integrating Datadog with Microsoft Azure can be done via the Azure Command Line 
 To integrate Datadog with Azure using the Azure Command Line Interface, make sure you have [Azure CLI installed][7]. 
 
 First, login to the Azure account you want to integrate with Datadog
-<pre><code>azure login</code></pre>
+
+~~~~
+azure login
+~~~~
 
 Next, configure CLI to be in ARM (Azure Resource Manager) mode
-<pre><code>azure config mode arm</code></pre>
+
+~~~~
+azure config mode arm
+~~~~
 
 Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name"
-<pre><code>azure account show</code></pre>
 
-Create an Active Directory application using the format below. <br />
-The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process. <br />
+~~~~
+azure account show
+~~~~
+
+Create an Active Directory application using the format below.\\
+The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process.\\ 
 The `password` you choose must be copy and pasted into the form on the Azure setup tile under "Client Secret"
-<pre><code>azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" --identifier-uris "http://app.datadoghq.com" --password "SomePassword"</code></pre>
 
-Create a Service Principal using the `AppId` returned from the last command. <br />
+~~~~
+azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" --identifier-uris "http://app.datadoghq.com" --password "SomePassword"
+~~~~
+
+Create a Service Principal using the `AppId` returned from the last command.\\
 Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
-<pre><code>azure ad sp create {app-id}</code></pre>
 
-Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring. <br />
+~~~~
+azure ad sp create {app-id}
+~~~~
+
+Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.\\
 Use the `Object Id` returned from the previous command to fill in `{object-Id}`
-<pre><code>azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-Id}/</code></pre>
+
+~~~~
+azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-Id}/
+~~~~
 
 
 #### Integrating through the Azure Portals
