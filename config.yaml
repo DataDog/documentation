@@ -76,9 +76,10 @@ redirects:
     to:    /integrations/awsbeanstalk/
   - from:  /integrations/elasticache/
     to:    /integrations/awselasticache/
-  - from:  /guides/services_checks/
-    to:    /guides/network_checks/?sc
   - from:  /guides/alerting/
     to:    /guides/monitoring/
   - from:  /overview/
     to:    /guides/overview/
+  - from:  /guides/network_checks/
+    to:    /integrations/tcpcheck/
+

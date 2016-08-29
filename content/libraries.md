@@ -94,7 +94,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [ecsdog][74] - a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd by [ejholmes][75]
   * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
-  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31].
+  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31] from [Dropbox][81].
   * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
   * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
 
@@ -146,7 +146,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Scala
 {: #community-scala}
 
-  * [datadgog-scala][37] - a Scala API client, written by [Cory Watson][38].
+  * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
 ### Community Integration Libraries
 
@@ -174,6 +174,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-nginx-lua}
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
+  * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 #### Phusion Passenger
 {: #community-integration-passenger}
@@ -226,8 +227,8 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [27]: https://github.com/isra00/plesk_datadog_metrics
    [28]: http://www.parallels.com/products/plesk/
    [29]: https://github.com/isra00
-   [30]: https://github.com/xb95/go-datadog-api
-   [31]: https://github.com/xb95
+   [30]: https://github.com/zorkian/go-datadog-api
+   [31]: https://github.com/zorkian
    [32]: https://github.com/ooyala/go-dogstatsd/
    [33]: https://github.com/ooyala
    [34]: https://github.com/tbarbugli/scales_datadog
@@ -275,3 +276,6 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [76]: https://github.com/brightcove/hot-shots
    [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
    [78]: https://github.com/Sjeanpierre
+   [79]: https://github.com/mediba-system/lua-resty-dogstatsd
+   [80]: http://www.mediba.jp/
+   [81]: https://www.dropbox.com/

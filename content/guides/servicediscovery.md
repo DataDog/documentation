@@ -199,9 +199,9 @@ Following is an example of how to setup templates for an NGINX, PostgreSQL stack
 
 The default NGINX image doesn't have a /nginx_status/ endpoint enabled, so the first step is to enable that as described in the Datadog NGINX tile (click on "Configuration") in a new image which we will name custom-nginx in this example. Once the image is named, the configuration template can be defined this way:
 
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_name -d value="nginx"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_config -d value="{}"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instance -d value='{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": "%25%25tags%25%25"}'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names -d value="nginx"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs -d value="{}"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances -d value='{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": "%25%25tags%25%25"}'
 
 The %%tags%% variable will add metadata about the replication controller, the pod name, etc.
 
@@ -211,9 +211,9 @@ Next comes the PostgreSQL configuration. Steps to connect Postgres to Datadog ar
 
 The configuration template is thus defined like this:
 
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/check_name -d value="postgres"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/init_config -d value="{}"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/instance -d value='{"host": "%25%25host%25%25", "port": "%25%25port%25%25", "tags": ["%25%25tags%25%25", env:production]}'
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/check_names -d value="postgres"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/init_configs -d value="{}"
+    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/instances -d value='{"host": "%25%25host%25%25", "port": "%25%25port%25%25", "tags": ["%25%25tags%25%25", env:production]}'
 
 The postgres image only exposes the default port, so appending an index to the port variable is unnecessary.
 

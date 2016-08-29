@@ -170,21 +170,20 @@ kind: documentation
         </p>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-
+          <%= argument('series', 'A JSON array of metrics where each item in the array contains the following arguments:', :lang => 'console') %>
+          <%= argument('series', 'To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments.', :default => 'None', :lang => 'python') %>
           <%= argument 'metric', 'The name of the time series' %>
           <li>
-              <strong>points [required]</strong>
-              <div>A JSON array of points. Each point is of the form:
-                  <div>
-                  <code>[[POSIX_timestamp, numeric_value], ...]</code>
-                  </div>
-                  Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+            <strong>points [required]</strong>
+            <div>A JSON array of points. Each point is of the form:
+              <div>
+                <code>[[POSIX_timestamp, numeric_value], ...]</code>
               </div>
+              Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+            </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          </ul>
         </ul>
       </div>
       <%= right_side_div %>
