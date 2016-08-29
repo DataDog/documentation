@@ -95,8 +95,6 @@ Note: GovCloud does not support role based authentication.
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
-                "es:List*",
-                "es:Describe*",
                 "kinesis:List*",
                 "kinesis:Describe*",
                 "logs:Get*",
