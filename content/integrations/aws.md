@@ -57,7 +57,8 @@ There are a number of other AWS services that are also available in Datadog but 
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: If you are using GovCloud or have resources on AWS China, contact support to help set up your integration.
+Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please contact support to help set up your AWS integration via API keys.
+
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
