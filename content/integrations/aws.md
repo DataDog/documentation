@@ -3,20 +3,8 @@ title: Datadog-AWS Integration
 integration_title: Amazon Web Services
 kind: integration
 newhlevel: true
-sidebar:
-  nav:
-    - header: AWS integration
-    - text: Overview
-      href: "#overview"
-    - text: Installation
-      href: "#installation"
-    - text: Configuration
-      href: "#configuration"
 git_integration_title: amazon_web_services
 ---
-
-
-
 # Overview
 
 Connect to Amazon Web Services (AWS) in order to:
@@ -67,9 +55,10 @@ There are a number of other AWS services that are also available in Datadog but 
 
 # Installation
 
-There are two integration methods that can be used to allow Datadog to monitor your AWS environment. Both require creating a policy in the AWS Console with a certain set of permissions. The difference between the two is whether you choose to create a role that Datadog has access to which is preferred due to the higher level of security, or create a user and share an AWS Secret and Access Key. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
+Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: GovCloud does not support role based authentication.
+Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please contact support to help set up your AWS integration via API keys.
+
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
@@ -117,43 +106,24 @@ Note: GovCloud does not support role based authentication.
 
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
 
-2.  Choose the approach you want to take. You can either create a role and allow Datadog to assume the role or create a user and share the Access Key and Secret Key. Using role delegation is more secured as only our AWS account is authorized to assume the role you create.
-    **Note**: Amazon doesn't support role delegation in China or GovCloud, please use an Access Key for these regions.
-    * **Preferred option:** Role-based authentication: create a role and allow Datadog to assume it (not supported in GovCloud or China)
-        1.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
-        2.  From the selection, choose Role for Cross-Account Access.
-        3.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-        4.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
-        5.  Select the policy you created above.
-        6.  Review what you selected and click the **Create Role** button.
-    * Access Key-based authentication: create a user which will have Secret and Access Key associated with it
-        1.  Create a new user in the IAM Console. Name it anything you like.
-        2.  Make sure you leave the **Generate an access key for each user** checked.
-        3.  Click the link to **Show User Security Credentials**.
-        4.  Make a note of the Access Key ID and Secret Access Key in a secure location. You will need this in the Datadog tile. You can also download the credentials.
-
-
+2.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
+3.  From the selection, choose Role for Cross-Account Access.
+4.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
+5.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+6.  Select the policy you created above.
+7.  Review what you selected and click the **Create Role** button.
+ 
 # Configuration
 
 ![logo](/static/images/integrations-aws-secretentry.png)
 
-Depending on whether you created a role or a user above, choose the appropriate Datadog configuration:
+1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+2.  Select the **Role Delegation** tab.
+3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
+4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
+5.  Click **Install Integration**.
 
-* Configure Role Delegation (not supported in GovCloud)
-  1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
-  2.  Select the **Role Delegation** tab.
-  3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
-  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
-  5.  Click **Install Integration**.
-
-* Configure Access Key / Secret Key
-  1.   Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
-  2.  Select the **Access Keys** tab.
-  3.  Enter your AWS Access Key and AWS Secret Key for the user created above.
-  4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
-  5.  Click **Install Integration**.
-
-## Metrics
+# Metrics
 
 <%= get_metrics_from_git() %>
 
@@ -162,14 +132,16 @@ Depending on whether you created a role or a user above, choose the appropriate 
 # Troubleshooting
 {: #troubleshooting}
 
-## Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?
+**Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?**
+{:#tshoot-discrepancy}
 
 There are two important distinctions to be aware of:
 
   1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
-## Metrics delayed?
+**Metrics delayed?**
+{:#tshoot-delay}
 
 When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
@@ -182,13 +154,14 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 
-## Missing metrics?
-
+**Missing metrics?**
+{:#tshoot-missing}
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
-## Wrong count of aws.elb.healthy_host_count?
+**Wrong count of aws.elb.healthy_host_count?**
+{:#tshoot-wrongcount}
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
@@ -196,7 +169,8 @@ This metric should have value you would expect.
 
 
 
-## Duplicated hosts when installing the agent?
+**Duplicated hosts when installing the agent?**
+{:#tshoot-duphosts}
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
 
