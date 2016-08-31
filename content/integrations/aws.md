@@ -10,9 +10,9 @@ git_integration_title: amazon_web_services
 Connect to Amazon Web Services (AWS) in order to:
 
 * See automatic AWS status updates in your stream
-* Get Cloudwatch metrics for EC2 hosts without installing the Agent
+* Get CloudWatch metrics for EC2 hosts without installing the Agent
 * Tag your EC2 hosts with EC2-specific information (e.g. availability zone)
-* Get Cloudwatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, * OpsWorks, Redshift, Route53, SQS, and SNS
+* Get CloudWatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, * OpsWorks, Redshift, Route53, SQS, and SNS
 * See EC2 scheduled maintenances events in your stream
 
 Related integrations include:
@@ -104,7 +104,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
           ]
         }
 
-    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
+    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
 
 2.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
 3.  From the selection, choose Role for Cross-Account Access.
@@ -112,7 +112,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 5.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
 6.  Select the policy you created above.
 7.  Review what you selected and click the **Create Role** button.
- 
+
 # Configuration
 
 ![logo](/static/images/integrations-aws-secretentry.png)
@@ -127,25 +127,122 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 
 <%= get_metrics_from_git() %>
 
+# Permissions
 
+The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
+
+* `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
+* `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
+
+Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+
+By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
+
+## Autoscaling
+
+* `autoscaling:DescribeAutoScalingGroups`: Used to list all autoscaling groups.
+* `autoscaling:DescribePolicies`: List available policies (for autocompletion in events and monitors).
+* `autoscaling:DescribeTags`: Used to list tags for a given autoscaling group. This will add ASG custom tags on ASG CloudWatch metrics.
+* `autoscaling:DescribeScalingActivities`: Used to generate events when an ASG scales up or down.
+* `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
+
+## CloudTrail
+
+* `cloudtrail:DescribeTrails`: Used to list trails and find in which s3 bucket they store the trails
+* `cloudtrail:GetTrailStatus`: Used to skip inactive trails
+
+CloudTrail also requires some s3 permissions to access the trails. **These are required on the CloudTrail bucket only**
+* `s3:ListBucket`: List objects in the CloudTrail bucket to get available trails
+* `s3:GetBucketLocation`: Get bucket's region to download trails
+* `s3:GetObject`: Fetch available trails
+
+## DynamoDB
+
+* `dynamodb:ListTables`: Used to list available DynamoDB tables.
+* `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+
+## EC2
+
+* `ec2:DescribeInstanceStatus`: Used by the ELB integration to assert the health of an instance. Used by the EC2 integration to describe the health of all instances.
+* `ec2:DescribeSecurityGroups`: Adds SecurityGroup names and custom tags to ec2 instances.
+* `ec2:DescribeInstances`: Adds tags to ec2 instances and ec2 cloudwatch metrics.
+
+## ECS
+
+* `ecs:ListClusters`: List available clusters.
+* `ecs:ListContainerInstances`: List instances of a cluster.
+* `ecs:DescribeContainerInstances`: Describe instances to add metrics on resources and tasks running, adds cluster tag to ec2 instances.
+
+## Elasticache
+
+* `elasticache:DescribeCacheClusters`: List and describe Cache clusters, to add tags and additional metrics.
+* `elasticache:ListTagsForResource`: List custom tags of a cluster, to add custom tags.
+* `elasticache:DescribeEvents`: Add events avout snapshots and maintenances.
+
+## ELB
+
+* `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
+* `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
+
+## EMR
+
+* `elasticmapreduce:ListClusters`: List available clusters.
+* `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
+
+## Kinesis
+
+* `kinesis:ListStreams`: List available streams.
+* `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
+* `kinesis:ListTagsForStream`: Add custom tags.
+
+## Logs
+
+* `logs:DescribeLogGroups`: List available groups.
+* `logs:DescribeLogStreams`: List available streams for a group.
+* `logs:FilterLogEvents`: Fetch some specific log events for a stream to generate metrics.
+
+## RDS
+
+* `rds:DescribeDBInstances`: Descrive RDS instances to add tags.
+* `rds:ListTagsForResource`: Add custom tags on RDS instances.
+* `rds:DescribeEvents`: Add events related to RDS databases.
+
+## Route53
+
+* `route53:listHealthChecks`: List available health checks.
+* `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
+
+## SES
+
+* `ses:GetSendQuota`: Add metrics about send quotas.
+* `ses:GetSendStatistics`: Add metrics about send statistics.
+
+## SNS
+
+* `sns:ListTopics`: Used to list available topics.
+* `sns:Publish`: Used to publish notifications (monitors or event feed).
+
+## Support
+
+* `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 # Troubleshooting
 {: #troubleshooting}
 
-**Do you believe you're seeing a discrepancy between your data in Cloudwatch and Datadog?**
+**Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
 {:#tshoot-discrepancy}
 
 There are two important distinctions to be aware of:
 
   1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
-  2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
+  2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
 **Metrics delayed?**
 {:#tshoot-delay}
 
-When using the AWS integration, we're pulling in metrics via the Cloudwatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
+When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
-To begin, the Cloudwatch API only offers a metric-by-metric crawl to pull data. The Cloudwatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
+To begin, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
 
@@ -163,7 +260,7 @@ CloudWatch's api returns only metrics with datapoints, so if for instance an ELB
 **Wrong count of aws.elb.healthy_host_count?**
 {:#tshoot-wrongcount}
 
-When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
+When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
 This metric should have value you would expect.
 
