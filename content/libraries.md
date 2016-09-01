@@ -124,7 +124,8 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### PHP
 {: #community-php}
 
-  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley
+  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
+  * [dog-statsd][82] - A fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84].
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
 
 #### Python
@@ -141,7 +142,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### R
 {: #community-r}
 
-  * [rdog][68] - an R package to analyze Datadog metrics into R
+  * [rdog][68] - an R package to analyze Datadog metrics into R.
 
 #### Scala
 {: #community-scala}
@@ -279,3 +280,6 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [79]: https://github.com/mediba-system/lua-resty-dogstatsd
    [80]: http://www.mediba.jp/
    [81]: https://www.dropbox.com/
+   [82]: https://github.com/graze/dog-statsd
+   [83]: https://github.com/thephpleague/statsd
+   [84]: http://tech.graze.com/
