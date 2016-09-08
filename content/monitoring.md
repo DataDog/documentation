@@ -390,7 +390,8 @@ triggering scope into the message of multi alerts.
     ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
 
 
-    The conditional variables available are `is_alert`, `is_warning`, `is_recovery`, and `is_no_data`.
+    The conditional variables available are `is_alert`, `is_alert_recovery`,
+    `is_warning`, `is_warning_recovery`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
     Step 3 of the monitor editor.
 
@@ -447,6 +448,40 @@ triggering scope into the message of multi alerts.
 
    ![scope match editor](/static/images/monitor/scope_match_editor.png)
 
+#### Variable availability
+
+We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
+
+| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
+| **Conditionals** |
+| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
+| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
+| `is_warning` | | Y | Y | Y | Y | Y | |
+| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
+| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
+| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
+| `is_match` | Y | Y | Y | Y | Y | Y | Y |
+| **Variables** |
+| `{{value}}` | | Y | Y | | | | |
+| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
+| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
+| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
+| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
+| Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
+{: .tpl-var-table}
+
+<style>
+  .tpl-var-table tr td {
+    text-align: center;
+    border: 1px #9d6ebf solid;
+    padding: 5px;
+  }
+  .tpl-var-table tr td:first-child {
+    text-align: right;
+  }
+</style>
+
+Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type "{{" to begin a template variable name.
 
 ## Monitor FAQs
 {: #faq}
