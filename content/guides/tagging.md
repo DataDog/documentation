@@ -16,7 +16,15 @@ The easiest method for assigning tags is to rely on the integration. Tags assign
 
 The following integration sources create tags automatically in Datadog:
 
-| Amazon Web Services | Region, Account, Hostname,  Org ID,  AZ, Kernel, Image, Instance Type, Security Group,   Tags assigned in console or via AWS tools |
+| Amazon CloudFront | Distribution |
+| Amazon EC2 | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| Amazon Elastic File System | Filesystem |
+| Amazon Machine Learning | BatchPrediction, DataSource, Evaluation  , MLModel |
+| Amazon Route 53 | Domains, Healthchecks  , HostedZone |
+| Amazon WorkSpaces| WorkSpaces |
+| AWS CloudTrail | CloudTrail |
+| AWS Elastic Load Balancing| Loadbalancer, TargetGroups |
+| AWS Identity and Access Management | Profile Name |
 | AWS SQS | Queue Name |
 | Apache | Apache Host and Port |
 | Azure | Tenant Name, Status, Tags, Subscription ID and Name |
