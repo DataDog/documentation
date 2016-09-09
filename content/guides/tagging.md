@@ -27,7 +27,7 @@ The following integration sources create tags automatically in Datadog:
 | CouchBase | CouchBase Tags,  Instance Name |
 | Docker | Docker Container and Image Name, Container Command, Container Labels |
 | Dyn | Zone, Record Type |
-| Elasticsearch | Host Name, Port Number  |
+| Elasticsearch | Cluster Name,  Host Name, Port Number  |
 | Etcd | State Leader or Follower |
 | Fluentd | Host Name, Port Number |
 | Google App Engine | Project Name, Version ID, Task Queue |
