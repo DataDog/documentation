@@ -3,19 +3,11 @@ title: Datadog-Jenkins Integration
 integration_title: Jenkins
 kind: integration
 git_integration_title: jenkins
+newhlevel: true
 ---
 
-### Overview
+# Overview
 
 Connect Jenkins to Datadog in order to discuss build failures with your team.
 
-From the open-source Jenkins plugin:
-
-* [ Jenkins Datadog Plugin][1]
-
-
-## Metrics
-
-<%= get_metrics_from_git() %>
-
-   [1]: https://github.com/DataDog/jenkins-datadog-plugin
+The integration in the Datadog agent for Jenkins has been deprecated in favor of the open-source Jenkins plugin. For more details about setting up the plugin, [refer to it's page on GitHub](https://github.com/DataDog/jenkins-datadog-plugin).
