@@ -10,6 +10,7 @@ newhlevel: true
 
 ![PHP overview](/static/images/phpfpmoverview.png)
 {: style="max-width: 600px;"}
+
 Enable the PHP-FPM check to monitor the state of your FPM pool and track requests performance.
 
 # Installation
@@ -43,7 +44,14 @@ To validate your installation and configuration, restart the agent and execute t
       php_fpm
       -------
           - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+          - Collected 7 metrics & 0 events & 2 service checks
+
+# Metrics
 
 
+| **php_fpm.listen_queue.size**<br/>(gauge)| Size of the socket queue of pending connections|
+| **php_fpm.processes.active**<br/>(gauge)| Total number of active processes|
+| **php_fpm.processes.idle**<br/>(gauge)| Total number of idle processes |
+| **php_fpm.processes.total**<br/>(gauge)|Total number of processes|
+{:.table}
 
