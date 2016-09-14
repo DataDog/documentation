@@ -45,10 +45,10 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive you monitor is to different types of anomalies.
 
 <ol type="a">
-  <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the gray band.</li>
+  <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.</li>
   <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
-  <li>As with other alerts, smaller time windows lead to faster alerting but can yield more false positives.</li>
-  <li>You can change the anomaly detection algorithm used here.</li>
+  <li>We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.) With small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise. Note that setting this window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with this window size set to 30 minutes, you can can alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%.</li>
+  <li>You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.</li>
 </ol>
 
 Continue with steps (3) and (4) as you would for any other monitor.
@@ -57,13 +57,13 @@ Continue with steps (3) and (4) as you would for any other monitor.
 
 We currently offer four different anomaly detection algorithms.
 
-* Basic: This uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data, and adjusts quickly to changing conditions. However, it has no knowledge of seasonal behavior or longer trends.
+* _Basic_: Use this algorithm for metrics that have no repeating seasonal pattern. _Basic_ uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data, and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
-* Agile: A robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
+* _Agile_: Use this algorithm for seasonal metrics when you want the algorithm to quickly adjust to level shifts in the metric. _Agile_ is a robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
-* Robust: A [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
+* _Robust_: Use this algorithm for seasonal metrics where you expect the metric to be stable and want to consider slow level shifts as anomalies. _Robust_ is a [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
-* Adaptive: This algorithm is dynamic and will adjust its predictions to a metric's changes much more readily. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
+* _Adaptive_: Use this algorithm for seasonal metrics when you find _agile_ and _robust_ to be too sensitive to minor changes in the metrics behavior. This algorithm is dynamic and will adjust its predictions to a metric's changes much more readily than _agile_ or _robust_. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
 
 ## Frequently Asked Questions
 
