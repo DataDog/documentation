@@ -90,3 +90,19 @@ The gray band here makes sense; it is wide enough to capture the noise in the ti
 Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
 
 In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It means that, while the individual points in the zoomed-in view are not anomalous in isolation, the fact that many slightly unusual points occur together is anomalous.
+
+### How can I alert on drops in a metric that routinely has points at/near zero?
+
+Many important metrics represent the success of some user-driven action. For example, `successful.logins` or `checkout.completed`, etc. It can be useful to monitor for anomalous drops in one of those metrics, as this may be an indication that something is preventing successful completion of these events and that the user experience is suffering.
+
+It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
+
+<img src="/static/images/anomalies/raw_profile_updates.png" style="width:500px; border:1px solid #777777"/>
+
+How can we work around this problem? One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
+
+<img src="/static/images/anomalies/rollup_profile_updates.png" style="width:500px; border:1px solid #777777"/>
+
+Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
+
+<img src="/static/images/anomalies/ewma_profile_updates.png" style="width:500px; border:1px solid #777777"/>
