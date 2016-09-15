@@ -19,6 +19,7 @@ The following integration sources create tags automatically in Datadog:
 | Amazon CloudFront | Distribution |
 | Amazon EC2 | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
 | Amazon Elastic File System | Filesystem |
+| Amazon Kinesis | Stream State |
 | Amazon Machine Learning | BatchPrediction, DataSource, Evaluation  , MLModel |
 | Amazon Route 53 | Domains, Healthchecks  , HostedZone |
 | Amazon WorkSpaces| WorkSpaces |
