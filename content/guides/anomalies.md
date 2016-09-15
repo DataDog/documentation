@@ -6,7 +6,7 @@ beta: true
 ---
 
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account day-of-week and time-of-day patterns. It's well suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon - even though that same level of traffic would be perfectly normal later in the evening.
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account seasonal day-of-week and time-of-day patterns. It's well suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon - even though that same level of traffic would be perfectly normal later in the evening.
 
 ## How to Use Anomaly Detection on Your Data
 
@@ -47,7 +47,7 @@ You should now see something like what's shown above, with a handful of selectio
 <ol type="a">
   <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.</li>
   <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
-  <li>We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.) With small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise. Note that setting this window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with this window size set to 30 minutes, you can can alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%.</li>
+  <li>We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.) </li>
   <li>You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.</li>
 </ol>
 
@@ -57,7 +57,7 @@ Continue with steps (3) and (4) as you would for any other monitor.
 
 We currently offer four different anomaly detection algorithms.
 
-* _Basic_: Use this algorithm for metrics that have no repeating seasonal pattern. _Basic_ uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data, and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
+* _Basic_: Use this algorithm for metrics that have no repeating seasonal pattern. _Basic_ uses a simple lagging rolling quantile computation to determine the range of expected values, but it uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 * _Agile_: Use this algorithm for seasonal metrics when you want the algorithm to quickly adjust to level shifts in the metric. _Agile_ is a robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
@@ -72,6 +72,14 @@ We currently offer four different anomaly detection algorithms.
 No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views` might be driven by user traffic and thus vary predictably by time of day and day of week. If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
 
 Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
+
+### For the seasonal algorithms (_robust_, _agile_, and _adaptive_), how much history is analyzed? What types of seasons are included?
+
+All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
+
+_Robust_ and _agile_ assume that the metric has weekly seasonality.
+
+_Adaptive_ can use either hourly, daily, or weekly seasonality. The algorithm analyzes the past behavior of the metric to choose the most appropriate seasonality.
 
 ### Why does an anomaly "disappear" when I zoom in?
 
@@ -91,9 +99,11 @@ Again, the band seems to be reasonably sized, because the non-anomalous data fro
 
 In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It means that, while the individual points in the zoomed-in view are not anomalous in isolation, the fact that many slightly unusual points occur together is anomalous.
 
-### How can I alert on drops in a metric that routinely has points at/near zero?
+### Is it possible to capture anomalies that occur within the bounds?
 
-Many important metrics represent the success of some user-driven action. For example, `successful.logins` or `checkout.completed`, etc. It can be useful to monitor for anomalous drops in one of those metrics, as this may be an indication that something is preventing successful completion of these events and that the user experience is suffering.
+If the reason anomalies are occurring within the bounds is that the volatility of a metric leads to wide bounds that mask true anomalies (as described in the FAQ above), you may be able apply functions to the series to reduce its volatility, leading to narrower bounds and better anomaly detection.
+
+For example, many important metrics (e.g `successful.logins`, `checkouts.completed`, etc.) represent the success of some user-driven action. It can be useful to monitor for anomalous drops in one of those metrics, as this may be an indication that something is preventing successful completion of these events and that the user experience is suffering.
 
 It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
 
