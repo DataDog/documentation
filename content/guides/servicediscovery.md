@@ -60,6 +60,9 @@ You also need to configure the Datadog Agents of the environment to enable servi
     # If you wish otherwise, uncomment this option and modify its value.
     # sd_template_dir: /datadog/check_configs
 
+    # If you Consul store requires token authentication for service discovery, you can define that token here.
+    # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
+
 
 ### Running and configuring the Agent in a container
 
