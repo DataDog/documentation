@@ -96,9 +96,7 @@ appending <code>.as_count()</code> or <code>.as_rate()</code> will function corr
 For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
 <code>.as_rate()</code> will have no effect.
 
-We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query.
-We will also be building these functions fully into the graph editor in the near
-future. For more on <code>.as_count()</code> please see our blog post
+For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
 
 #### Aggregation Method
