@@ -4,12 +4,12 @@ kind: guide
 listorder: 3
 ---
 ### Overview
-Starting with version 5.9 of the Datadog Agent, we are moving integrations from the dd-agent repo on GitHub to the core-integrations and extra-integrations. This move will allow us to have a method to distribute more community-developed integrations, as well as being able to update supported integrations out of band with the Agent. Note: these integrations are not designed for Windows operating systems.
+Starting with version 5.9 of the Datadog Agent, we are moving integrations from the dd-agent repository on GitHub to the integrations-core and integrations-extras repositories. This move will allow us to have a method to distribute more community-developed integrations, as well as being able to update supported integrations out of band with the Agent. Note: these integrations are not designed for Windows operating systems.
 
 The two integration repositories are defined as follows:
 
-* **core-integrations** - Datadog-supported integrations that were formerly found in the core Agent. 
-* **extra-integrations** - Community-supported integrations that have been written according to the guidelines specified by Datadog
+* **[integrations-core](https://github.com/DataDog/integrations-core)** - Datadog-supported integrations that were formerly found in the core Agent. 
+* **[integrations-extras](https://github.com/DataDog/integrations-extras)** - Community-supported integrations that have been written according to the guidelines specified by Datadog
 
 All core integrations will continue to be installed with the agent install. You only have to install an integration in core separately if there is an out of band update to that integration. To either install an out-of-band update to a core integration or to install one of the extra integrations, follow these steps:
 
