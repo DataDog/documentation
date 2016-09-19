@@ -6,6 +6,8 @@ listorder: 3
 ### Overview
 Starting with version 5.9 of the Datadog Agent, we are moving integrations from the dd-agent repository on GitHub to the integrations-core and integrations-extras repositories. This move will allow us to have a method to distribute more community-developed integrations, as well as being able to update supported integrations out of band with the Agent. Note: these integrations are not designed for Windows operating systems.
 
+For more information on adding new integrations to `integrations-extras`, see the guide on the [Integration SDK](/guides/integration_sdk)
+
 The two integration repositories are defined as follows:
 
 * **[integrations-core](https://github.com/DataDog/integrations-core)** - Datadog-supported integrations that were formerly found in the core Agent. 
@@ -27,3 +29,5 @@ All core integrations will continue to be installed with the agent install. You 
 
 1.  Copy the Python script for your chosen integration to the `checks.d` directory where you installed the Agent.
 1.  Copy the corresponding yaml configuration file to the `conf.d` directory where you installed the Agent.
+
+
