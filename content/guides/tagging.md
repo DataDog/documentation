@@ -28,7 +28,7 @@ The following integration sources create tags automatically in Datadog:
 | AWS Identity and Access Management | Profile Name |
 | AWS SQS | Queue Name |
 | Apache | Apache Host and Port |
-| Azure | Tenant Name, Status, Tags, Subscription ID and Name |
+| Azure | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
 | BTRFS | Usage & Replication Type |
 | Chef | Chef Roles |
 | Consul | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
@@ -40,7 +40,7 @@ The following integration sources create tags automatically in Datadog:
 | Etcd | State Leader or Follower |
 | Fluentd | Host Name, Port Number |
 | Google App Engine | Project Name, Version ID, Task Queue |
-| Google Cloud Platform | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name |
+| Google Cloud Platform | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
 | Go Expvar | Expvar Path |
 | Gunicorn | State Idle or Working, App Name |
 | HAProxy | Service Name, Availability, Backend Host, Status, Type |
