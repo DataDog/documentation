@@ -2,7 +2,7 @@
 title: Creating New Integrations
 kind: guide
 autotocdepth: 2
-listorder: 16
+listorder: 4
 ---
 <!-- Additional styling to help file name headers stand out -->
 <style>h5 code{font-size:16px;display:inline-block;margin-top:20px;}</style>
@@ -109,6 +109,15 @@ For more information about writing integration tests, please see [the documentat
 
 A note about terminology: You may notice the variable `flavor` in this file and other areas of testing. *Flavor* is a term we use to denote variations of integrated software, typically versions. This allows you to write one set of tests, but target different *flavors*, variants or versions of the software you are integrating.
 
+##### `conf.yaml.example`
+
+In order to install your integration, users will need to configure the integration for their specific instances. To do this, they'll copy the `conf.yaml.example` file that you provide into their Agent's `conf.d` directory, then update it with their instance specific information.
+
+Your `conf.yaml.example` file should provide two sections:
+
+- `init_config` for any globally configured parameters
+- `instances` for specific instances to integrate. This often includes a server or host address with additional parameters such as authentication information, additional tags and configuration settings.
+
 ##### `manifest.json`
 
 This JSON file provides metadata about your integration and should include:
@@ -212,6 +221,15 @@ As you build your check and test code, you can use the following to run your tes
 
 Travis CI will automatically run tests when you create a pull request. Please ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
 
+#### Installing your integration locally
+
+When your integration is merged into the `integrations-extras` repository, we will generate packages so that others can easily install your integration (see the [Installing Core & Extra Integrations guide](http://docs.datadoghq.com/guides/installcoreextra)). However, you may want to install your integration locally before it's merged.
+
+To run locally, first copy your `check.py` file into the Datadog Agent's `checks.d` directory and rename it to `my_integration.py` (using the actual name of your integration).
+
+Next, copy your `conf.yaml.example` file into the Datadog Agent's `conf.d` directory and rename it to `my_integration.yaml` (again, using the actual name of your integration).
+
+See the Agent Check guide for more information about the [Datadog Agent directory structure](http://docs.datadoghq.com/guides/agent_checks/#directory)).
 
 #### Teardown and cleanup
 
