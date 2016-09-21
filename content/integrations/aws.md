@@ -12,7 +12,7 @@ Connect to Amazon Web Services (AWS) in order to:
 * See automatic AWS status updates in your stream
 * Get CloudWatch metrics for EC2 hosts without installing the Agent
 * Tag your EC2 hosts with EC2-specific information (e.g. availability zone)
-* Get CloudWatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, * OpsWorks, Redshift, Route53, SQS, and SNS
+* Get CloudWatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, OpsWorks, Redshift, Route53, SQS, and SNS
 * See EC2 scheduled maintenances events in your stream
 
 Related integrations include:
@@ -52,15 +52,15 @@ There are a number of other AWS services that are also available in Datadog but 
 | WorkSpaces |
 {:.table}
 
-
 # Installation
 
-Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
+Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better 
+understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
 Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please contact support to help set up your AWS integration via API keys.
 
 
-1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy ```DatadogAWSIntegrationPolicy```, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
+1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
         {
           "Version": "2012-10-17",
@@ -106,10 +106,10 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 
     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
 
-2.  Create a new role in the IAM Console. Name it anything you like, such as ```DatadogAWSIntegrationRole```.
+2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
 3.  From the selection, choose Role for Cross-Account Access.
 4.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-5.  For Account ID, enter ```464622532012``` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+5.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
 6.  Select the policy you created above.
 7.  Review what you selected and click the **Create Role** button.
 
@@ -146,20 +146,29 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 * `autoscaling:DescribeScalingActivities`: Used to generate events when an ASG scales up or down.
 * `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
 
+For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
+
 ## CloudTrail
 
 * `cloudtrail:DescribeTrails`: Used to list trails and find in which s3 bucket they store the trails
 * `cloudtrail:GetTrailStatus`: Used to skip inactive trails
 
+For more information on [CloudTrail policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html), review the documentation on the AWS website.
+
 CloudTrail also requires some s3 permissions to access the trails. **These are required on the CloudTrail bucket only**
+
 * `s3:ListBucket`: List objects in the CloudTrail bucket to get available trails
 * `s3:GetBucketLocation`: Get bucket's region to download trails
 * `s3:GetObject`: Fetch available trails
+
+For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
 ## DynamoDB
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+
+For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 
 ## EC2
 
@@ -167,11 +176,15 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `ec2:DescribeSecurityGroups`: Adds SecurityGroup names and custom tags to ec2 instances.
 * `ec2:DescribeInstances`: Adds tags to ec2 instances and ec2 cloudwatch metrics.
 
+For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html), review the documentation on the AWS website.
+
 ## ECS
 
 * `ecs:ListClusters`: List available clusters.
 * `ecs:ListContainerInstances`: List instances of a cluster.
 * `ecs:DescribeContainerInstances`: Describe instances to add metrics on resources and tasks running, adds cluster tag to ec2 instances.
+
+For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html), review the documentation on the AWS website.
 
 ## Elasticache
 
@@ -179,15 +192,21 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `elasticache:ListTagsForResource`: List custom tags of a cluster, to add custom tags.
 * `elasticache:DescribeEvents`: Add events avout snapshots and maintenances.
 
+For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
+
 ## ELB
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
 
+For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
+
 ## EMR
 
 * `elasticmapreduce:ListClusters`: List available clusters.
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
+
+For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
 
 ## Kinesis
 
@@ -195,11 +214,15 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
-## Logs
+For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
+
+## CloudWatch Logs
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
 * `logs:FilterLogEvents`: Fetch some specific log events for a stream to generate metrics.
+
+For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html), review the documentation on the AWS website.
 
 ## RDS
 
@@ -207,20 +230,28 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `rds:ListTagsForResource`: Add custom tags on RDS instances.
 * `rds:DescribeEvents`: Add events related to RDS databases.
 
+For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html), review the documentation on the AWS website.
+
 ## Route53
 
 * `route53:listHealthChecks`: List available health checks.
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
+
+For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
 
 ## SES
 
 * `ses:GetSendQuota`: Add metrics about send quotas.
 * `ses:GetSendStatistics`: Add metrics about send statistics.
 
+For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html), review the documentation on the AWS website.
+
 ## SNS
 
 * `sns:ListTopics`: Used to list available topics.
 * `sns:Publish`: Used to publish notifications (monitors or event feed).
+
+For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
 
 ## Support
 
