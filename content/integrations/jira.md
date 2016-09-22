@@ -3,52 +3,58 @@ title: Datadog-Jira Integration
 integration_title: Jira
 kind: integration
 doclevel: basic
+newhlevel: true
 ---
 
-### Overview
+# Overview
 
 JIRA is an issue and project tracking system for software teams. This integration allows you to create tickets from triggered alerts in Datadog, and update existing tickets with new information as it arises. Additionally, you can see JIRA ticket creations as events within Datadog to overlay with all of your metrics.
 
-INSERT NEW TICKET EVENT PHOTO HERE
+![settings](/static/images/jira/JiraInstallation9.png)
 
+## Installation
 
+1. Navigate to your Jira account
 
-### Installation
+2. Go to settings (Gear icon) –> Applications
 
-Navigate to your Jira account
+	![settings](/static/images/jira/JiraInstallation2.png){:style="width:75%;"}
 
-Go to settings (Gear icon) –> Applications
-<img src="/static/images/jira/JiraInstallation2.png" style="width: 60%;display:block;"/>
+3. Under "Integrations" in left menu, Select Application Links
 
-Under "Integrations" in left menu, Select Application Links
-<img src="/static/images/jira/JiraInstallation3.png" style="width: 40%;display:block;"/>
+	![settings](/static/images/jira/JiraInstallation3.png){:style="width:75%;"}
 
-Enter app.datadoghq.com as the URL to link –> press "Create new link"
-<img src="/static/images/jira/JiraInstallation4.png" style="width: 60%;display:block;"/>
+4. Enter app.datadoghq.com as the URL to link –> press "Create new link"
 
-Fill in Application Name with any name (used simply for identification)
+	![settings](/static/images/jira/JiraInstallation4.png){:style="width:75%;"}
 
-Leave Generic Application Selected
+5. Fill in Application Name with any name (used simply for identification)
 
-Check "Create Incoming Link"
+6. Leave Generic Application Selected
 
-Press Continue
-<img src="/static/images/jira/JiraInstallation5.png" style="width: 50%;display:block;"/>
+7. Check "Create Incoming Link"
 
-Copy and Paste the Consumer Key, Consumer Name, and Public Key from the Jira tile
+8. Press Continue
 
-Press Continue
-<img src="/static/images/jira/JiraInstallation6.png" style="width: 60%;display:block;"/>
+	![settings](/static/images/jira/JiraInstallation5.png){:style="width:75%;"}
 
-Navigate back to the Jira Tile
+9. Copy and Paste the Consumer Key, Consumer Name, and Public Key from the Jira tile
 
-Copy and paste the URL of your Jira account into the tile from http... to .net i.e https://some-account.atlassian.net
-Press Install
-<img src="/static/images/jira/JiraInstallation7.png" style="width: 60%;display:block;"/>
+10. Press Continue
 
-### Configuration
+	![settings](/static/images/jira/JiraInstallation6.png){:style="width:75%;"}
 
-#### Setting up Ticket Types
+## Configuration
+
+11. Navigate back to the Jira Tile
+
+12. Copy and paste the URL of your Jira account into the tile from http... to .net i.e https://some-account.atlassian.net
+
+13. Press Install
+
+	![settings](/static/images/jira/JiraInstallation7.png){:style="width:75%;"}
+
+### Setting up Ticket Types
 
 After installing the JIRA integration, you can create custom tickets types that can be created within Datadog.
 
@@ -87,20 +93,18 @@ A full list of variables can be seen below.
 |$ALERT_TRANSITION| Type of alert notification *(ex: Triggered)*|
 {:.table}
 
-#### Automatically Create Tickets from Datadog Alerts
+### Automatically Create Tickets from Datadog Alerts
 
 To automatically have JIRA tickets created within Datadog alerts, use the @jira-projectname-issuetype command within the "Say what's happening" section of the new monitor creation process.
 
 A new ticket will be created when this alert is triggered. 
 
-The @jira-update command can be used to update existing tickets. This command will add a comment to the JIRA ticket with NEED MORE INFO
+The @jira-update command can be used to update existing tickets. This command will add a comment to the JIRA ticket with the text followed by the @jira-update command. 
 
 TIP – It might be useful to use the @jira command within an #is_alert or #is_warning variable!
 
-<img src="/static/images/jira/JiraInstallation8.png" style="width: 100%;display:block;"/>
+![settings](/static/images/jira/JiraInstallation8.png)
 
-### Validation
+## Validation
 
 Check to see if you can select a Project when creating a new Ticket Type. If this dropdown is empty, it means the integration is not properly installed (or your Jira account has no Projects!)
-
----
