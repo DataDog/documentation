@@ -6,8 +6,10 @@ git_integration_title: papertrail
 newhlevel: true
 doclevel: basic
 ---
-
 # Overview
+
+![Papertrail example](/static/images/papertrailexample.png)
+{: style="max-width:600px;"}
 
 Use Papertrail and Datadog to:
 
@@ -17,7 +19,26 @@ Use Papertrail and Datadog to:
 
 # Installation
 
-_To capture metrics from Papertrail logs:_
+To capture metrics and events from Papertrail:
 
-  1. In Papertrail's [event viewer](https://papertrailapp.com/tour/viewer), save a search for the log event(s) which should be graphed.
-  2. Activate a Papertrail alert for the search. Provide your Datadog credentials. Papertrail will update Datadog every minute.
+1.  In Papertrail's [event viewer](https://papertrailapp.com/events), save a search for the log event(s) which should be graphed.
+1.  Enter the name for the search and click the **Save & Setup an Alert** button.
+1.  Choose Datadog under Graphing & Metrics.
+
+    ![Papertrail notifications](/static/images/papertrailnotify.png)
+    {: style="max-width:500px;"}
+
+1.  Choose your alert frequency and other details.
+1.  Provide your Datadog API key, enter what you want to name your metric, and optionally enter some tags to associate with the metric. 
+
+    ![Papertrail notifications](/static/images/papertraildetails.png)
+    {: style="max-width:500px;"}
+
+1.  Click the **Create Alert** button.
+
+Papertrail will update Datadog at your chosen interval.
+
+# Configuration
+
+No configuration steps are required for this integration.
+

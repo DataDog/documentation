@@ -19,6 +19,7 @@ kind: documentation
       <div class="btn-group api-section-links btn-group-sm">
         <a class="btn btn-default gradient" href="#authentication">Auth</a>
         <a class="btn btn-default gradient" href="#errors">Errors</a>
+        <a class="btn btn-default gradient" href="#ratelimiting">Rate Limiting</a>
         <a class="btn btn-default gradient" href="#metrics">Metrics</a>
         <a class="btn btn-default gradient" href="#events">Events</a>
         <a class="btn btn-default gradient" href="#service_checks">Checks</a>
@@ -137,6 +138,39 @@ kind: documentation
       </div>
     </div>
 
+
+
+    <!--
+   =====================================================================
+      Rate Limiting
+    ====================================================================
+    -->
+
+    <div class="int-anchor" id="ratelimiting"></div><a href="#ratelimiting"><h3>Rate Limiting</h3></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+        Some of our API endpoints are rate limited.  Once you exceed a certain number of requests in a certain time period we return an error.
+        </p>
+        <p>
+        For rate limited API endpoints we return headers so you can know how close you are to your limit.  If you exceed your limit, you can review these headers to determine when you will be able to try again.
+        </p>
+        <p>
+        Rate limits can be increased from defaults by <a href="/help">contacting the Datadog Support team</a>.
+        </p>
+      </div>
+      <%= right_side_div %>
+        <h5>Rate Limit Headers</h5>
+        <ul>
+          <li><code>X-RateLimit-Limit</code>number of requests allowed in a time period</li>
+          <li><code>X-RateLimit-Period</code>length of time in seconds for resets (calendar aligned)</li>
+          <li><code>X-RateLimit-Remaining</code>number of allowed requests left in current time period</li>
+          <li><code>X-RateLimit-Reset</code>time in seconds until next reset</li>
+        </ul>
+      </div>
+    </div>
+
+
     <!--
    =====================================================================
     Metrics
@@ -161,6 +195,32 @@ kind: documentation
         </p>
       </div>
     </div>
+
+    <div class="lang-specific lang-specific-console">
+    <div class="int-anchor" id="metrics-list"></div><a href="#metrics-list"><h4>Get list of active metrics</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          Get the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
+        </ul>
+
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET https://app.datadoghq.com/api/v1/metrics</code>
+        <h5>Example Request</h5>
+          <%= snippet_code_block "api-metrics-list.sh" %>
+        <h5>Example Response</h5>
+        <%= snippet_result_code_block "api-metrics-list.sh" %>
+      </div>
+    </div>
+    </div>
+
     <div class="int-anchor" id="metrics-post"></div><a href="#metrics-post"><h4>Post time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
@@ -170,21 +230,20 @@ kind: documentation
         </p>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'series', 'A JSON array of metrics of the form. Each metric is of the form:' %>
-
+          <%= argument('series', 'A JSON array of metrics where each item in the array contains the following arguments:', :lang => 'console') %>
+          <%= argument('series', 'To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments.', :default => 'None', :lang => 'python') %>
           <%= argument 'metric', 'The name of the time series' %>
           <li>
-              <strong>points [required]</strong>
-              <div>A JSON array of points. Each point is of the form:
-                  <div>
-                  <code>[[POSIX_timestamp, numeric_value], ...]</code>
-                  </div>
-                  Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+            <strong>points [required]</strong>
+            <div>A JSON array of points. Each point is of the form:
+              <div>
+                <code>[[POSIX_timestamp, numeric_value], ...]</code>
               </div>
+              Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+            </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
           <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
-          </ul>
         </ul>
       </div>
       <%= right_side_div %>
@@ -196,6 +255,7 @@ kind: documentation
         <% end %>
       </div>
     </div>
+
     <div class="int-anchor" id="metrics-query"></div><a href="#metrics-query"><h4>Query time series points</h4></a>
     <div class="row">
       <%= left_side_div %>
@@ -1276,7 +1336,7 @@ kind: documentation
       </div>
     </div>
 
-    <h4 id="screenboards-post">Update a Screenboard</h4>
+    <div class="int-anchor" id="screenboards-put"></div><a href="#screenboards-put"><h4>Update a Screenboard</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>

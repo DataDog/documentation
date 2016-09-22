@@ -1,2 +1,1 @@
-# Deleting events is not yet implemented in the Ruby
-# library. The docs will be updated when it has been implemented.
+["200", {"deleted_event_id"=>"1375909614428331251"}]

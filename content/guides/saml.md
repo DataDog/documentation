@@ -64,7 +64,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 {: #settingattributes}
 
 * Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
-1. **eduPersonPrincipalName**: If specfified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
+1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
 2. **sn**: This is optional, and should be set to the user’s surname.
 3. **givenName**: This is optional, and should be set to the user’s first, or given name.
 * Datadog expects that Attributes use the NameFormat
