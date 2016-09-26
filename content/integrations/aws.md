@@ -57,8 +57,7 @@ There are a number of other AWS services that are also available in Datadog but 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better 
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please contact support to help set up your AWS integration via API keys.
-
+Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 
@@ -122,6 +121,15 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
+
+## Configuration for China and GovCloud
+
+1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
+2.  Select the **Access Keys (GovCloud or China Only)** tab.
+3.  Enter your AWS Access Key and AWS Secret Key. Note: only access and secret keys for China and GovCloud are accepted.
+4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
+5.  Click **Install Integration**.
+
 
 # Metrics
 
