@@ -66,6 +66,16 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 * If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute will be used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
 * If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
 
+## Specific SAML IdP
+
+For more information about configuring specific IdP's, refer to the following Knowledge Base articles:
+
+* [Google](https://help.datadoghq.com/hc/en-us/articles/208139913-How-do-I-configure-Google-as-a-SAML-IdP-)
+* [Microsoft Active Directory Federation Services](https://help.datadoghq.com/hc/en-us/articles/207425226-How-do-I-setup-Microsoft-Active-Directory-Federation-Services-as-a-SAML-IdP-)
+* [NoPassword](https://help.datadoghq.com/hc/en-us/articles/211023623-How-do-I-configure-NoPassword-as-a-SAML-IdP-)
+* [Okta](https://help.datadoghq.com/hc/en-us/articles/210132743-How-do-I-configure-Okta-as-a-SAML-IdP-)
+
+
 ## Additional Features
 {: #additionalfeatures}
 The following features can be enabled through the SAML Configuration dialog.
@@ -84,3 +94,5 @@ The normal workflow is that when the Datadog url is loaded, the browser is redir
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
+
+
