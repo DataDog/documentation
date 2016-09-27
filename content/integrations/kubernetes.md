@@ -36,7 +36,7 @@ If DaemonSets are not an option for your Kubernetes cluster, you will need to in
     docker run -d --name dd-agent -h `hostname` \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-      -e API_KEY='YOUR_API_KEY_HERE' datadog/docker-dd-agent:kubernetes
+      -e API_KEY='YOUR_API_KEY_HERE' -e KUBERNETES=yes datadog/docker-dd-agent:latest
 
 # Configuration
 
