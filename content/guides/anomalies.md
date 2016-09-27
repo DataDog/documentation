@@ -101,6 +101,10 @@ Smaller window sizes will lead to faster alerts, however, with very small window
 
 Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can can alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
 
+### Why does `anomalies` not do anything in the dashboard? Why am I getting "No Data" for an Anomaly Alert?
+
+All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has a couple weeks of history. _Adaptive_ will start working after it has a couple days worth of history.
+
 ### Why does an anomaly "disappear" when I zoom in?
 
 At different zoom levels, the same query can result in time series with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
