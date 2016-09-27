@@ -63,7 +63,8 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       # When false, we send detailed metrics corresponding to individual containers, tagging by container id
       # to keep them unique.
       # When true, we aggregate data based on container image.
-      #
+      # Defaults to false
+      # 
       # use_histogram: True
       #
       # kubelet_port: 10255
