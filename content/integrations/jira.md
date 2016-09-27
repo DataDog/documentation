@@ -12,7 +12,7 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 ![settings](/static/images/jira/JiraInstallation9.png)
 
-## Installation
+# Installation
 
 1. Navigate to your Jira account
 
@@ -44,7 +44,7 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 	![settings](/static/images/jira/JiraInstallation6.png){:style="width:75%;"}
 
-## Configuration
+# Configuration
 
 11. Navigate back to the Jira Tile
 
@@ -54,7 +54,7 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 	![settings](/static/images/jira/JiraInstallation7.png){:style="width:75%;"}
 
-### Setting up Ticket Types
+## Setting up Ticket Types
 
 After installing the JIRA integration, you can create custom tickets types that can be created within Datadog.
 
@@ -93,7 +93,7 @@ A full list of variables can be seen below.
 |$ALERT_TRANSITION| Type of alert notification *(ex: Triggered)*|
 {:.table}
 
-### Automatically Create Tickets from Datadog Alerts
+## Automatically Create Tickets from Datadog Alerts
 
 To automatically have JIRA tickets created within Datadog alerts, use the @jira-projectname-issuetype command within the "Say what's happening" section of the new monitor creation process.
 
@@ -105,6 +105,6 @@ TIP – It might be useful to use the @jira command within an #is_alert or #is_w
 
 ![settings](/static/images/jira/JiraInstallation8.png)
 
-## Validation
+# Validation
 
 Check to see if you can select a Project when creating a new Ticket Type. If this dropdown is empty, it means the integration is not properly installed (or your Jira account has no Projects!)
