@@ -45,7 +45,7 @@ Once SAML is configured in Datadog and your IdP is set up to accept requests fro
 ![][6]
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.
 
-   [2]: /static/images/saml_1.png
+   [2]: /static/images/saml_configure.png
    [3]: /static/images/saml_choose_file.png
    [4]: https://app.datadoghq.com/account/saml/metadata.xml
    [5]: /static/images/saml_enable.png
