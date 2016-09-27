@@ -57,9 +57,7 @@ To validate your installation and configuration, restart the agent and execute t
 
 # Metrics
 
-|**ntp.offset**<br/>(gauge) | Offset in seconds from the ntp server|
-{: .table}
-
+<%= get_metrics_from_git('system', 'ntp') %>
 
 # Events
 
