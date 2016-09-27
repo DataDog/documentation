@@ -28,8 +28,7 @@ Connect to Microsft Azure in order to:
 
 * Get metrics from Azure VMs with or without installing the Agent
 * Tag your Azure VMs with Azure-specific information (e.g. location)
-* Get metrics from Azure SQL Databases through the Azure SQL Database API
-* Get metrics from Azure Mobile Apps and Web Apps through the Azure Insights API
+* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, SQL Database, SQL Elastic Pool, and Virtual Machine Scale Set
 
 Related integrations include:
 
