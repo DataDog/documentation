@@ -100,10 +100,10 @@ EOF
 And add it to your code:
 <%= ruby <<EOF
 # Import the library
-require 'statsd'
+require 'datadog/statsd'
 
 # Create a statsd client instance.
-statsd = Statsd.new
+statsd = Datadog::Statsd.new
 EOF
 %>
   </div>
@@ -358,7 +358,7 @@ EOF
 <%= ruby <<EOF
 # Report the status of an app.
 name = 'web.app1'
-status = Statsd::OK
+status = Datadog::Statsd::OK
 opts = {
   'message' => 'Response: 200 OK'
 }
