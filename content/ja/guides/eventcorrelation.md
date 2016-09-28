@@ -50,3 +50,5 @@ You can use full text search to find all events with the same key tags. For exam
 In the example below, a full text search is performed to find all open chef or nagios errors that mention one or more redis instances that are currently down.
 
 ```sources:nagios,chef status:error redis_* AND down```
+
+Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
