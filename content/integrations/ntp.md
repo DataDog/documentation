@@ -57,7 +57,7 @@ To validate your installation and configuration, restart the agent and execute t
 
 # Metrics
 
-|**ntp.offset**<br>(gauge) | Offset in seconds from the ntp server|
+|**ntp.offset**<br/>(gauge) | Offset in seconds from the ntp server|
 {: .table}
 
 

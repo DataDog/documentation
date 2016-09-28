@@ -30,6 +30,10 @@ Configure the Agent to connect to your processes. Our example configuration will
           - name: postgres
             search_string: ['postgres']
 
+          - name: pid_process
+            pid: 1278 
+            # Do not use search_string when searching by pid or multiple processes will be grabbed
+
 2.  Restart the Agent
 
         sudo /etc/init.d/datadog-agent restart

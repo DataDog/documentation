@@ -6,7 +6,7 @@ beta: true
 ---
 
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account seasonal day-of-week and time-of-day patterns. It's well suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon - even though that same level of traffic would be perfectly normal later in the evening.
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account seasonal day-of-week and time-of-day patterns. It's well-suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening.
 
 ## How to Use Anomaly Detection on Your Data
 
@@ -21,7 +21,7 @@ The chart below shows a dashboard chart that uses anomaly detection. The gray ba
 
 <img src="/static/images/anomalies/dashboard_graph.png" style="width:100%; border:1px solid #777777"/>
 
-To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type and select "lines" from the Display menu. Other visualization types do not yet support anomaly detection. In the chart editor window, you should see something like this:
+To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type.
 
 <img src="/static/images/anomalies/initial_editor.png" style="width:100%; border:1px solid #777777"/>
 
@@ -29,7 +29,9 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 <img src="/static/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
 
-This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
+This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
+
+The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
 
 <img src="/static/images/anomalies/final_editor.png" style="width:100%; border:1px solid #777777"/>
 
@@ -77,11 +79,31 @@ Also, anomaly detection requires historical data to make good predictions. If yo
 
 Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an [outlier monitor](https://docs.datadoghq.com/guides/outliers/) will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won’t be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
 
+### Why can't I use anomaly detection over groups in the dashboard?
+
+Looking at many separate timeseries in a single graph can lead to [spaghettification](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/), and the problem gets only worse once the anomaly detection visualization is added in. You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
+
+<img src="/static/images/anomalies/anomaly_multilines.png" style="width:500px; border:1px solid #777777"/>
+
+### Will past anomalies affect the current predictions?
+
+All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
+
+<img src="/static/images/anomalies/anomalous_history.png" style="width:500px; border:1px solid #777777"/>
+
+The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
+
+<img src="/static/images/anomalies/no_effect.png" style="width:500px; border:1px solid #777777"/>
+
 ### How should I set the window size and alert threshold?
 
 Smaller window sizes will lead to faster alerts, however, with very small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise.
 
 Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can can alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
+
+### Why does `anomalies` not add a gray prediction band in the dashboard? Why am I getting "No Data" for an Anomaly Alert?
+
+All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has a couple weeks of history. _Adaptive_ will start working after it has a couple days worth of history.
 
 ### Why does an anomaly "disappear" when I zoom in?
 
