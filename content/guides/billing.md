@@ -23,17 +23,11 @@ and 100 custom metrics)
     1. Payment terms (month to month or annual prepaid)
   
 
-For all plans, custom metrics and events are supported but limited to 100
-metrics per host. Custom metrics refer to any metrics that are not part of our
-regular integration suite, for example using custom checks or API-level metrics
-in your application stack. To clarify, integrations that can potentially emit
-an unlimited number of metrics to us can also count as custom metrics (e.g:
-JMX / WMI / Nagios / Cacti).
+Custom metrics are supported in every plan. A custom metric is any metric that is not automatically collected by any of [Datadog’s integrations](https://www.datadoghq.com/product/integrations/)—for example custom checks or API-level metrics from your application. Each host may submit up to 100 custom metrics at no additional cost.
 
-For all plans, Docker Containers are supported and 10 free containers per host per hour will be provided.  Additional containers will be billed at $0.002 per container per hour.  In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
+Docker Containers are also supported in every plan. Each host may submit metrics from 10 containers an hour at no additional cost. Additional containers will be billed at $0.002 per container per hour. In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
 
-Pro and Enterprise data retention is for 13 months at full resolution (maximum
-is one point per second). For greater data retention needs, please reach out to [sales@datadoghq.com](mailto:sales@datadoghq.com).
+Pro and Enterprise data retention is for 13 months at full resolution (maximum is one point per second). For greater data retention needs, please reach out to [sales@datadoghq.com](mailto:sales@datadoghq.com).
 
 **Each invoice is determined by the high watermark of concurrently running hosts for that month.**
 
