@@ -598,6 +598,11 @@ kind: documentation
               monitor will notify when data stops reporting.
               <p>Default: <code>false</code></p></li>
 
+              <li><code>new_host_delay</code> Time (in seconds) to allow a host 
+              to boot and applications to fully start before starting the 
+              evaluation of monitor results. Should be a non negative integer.
+              <p>Default: <code>300</code></p></li>
+
               <li><code>no_data_timeframe</code> the number of minutes before a
               monitor will notify when data stops reporting. Must be at least
               2x the monitor timeframe for metric alerts or 2 minutes for
