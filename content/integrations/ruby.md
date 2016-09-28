@@ -42,10 +42,10 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
     Start instrumenting your code using the DogStatsD client:
 
         # Load the dogstats module.
-        require 'statsd'
+        require 'datadog/statsd'
 
         # Create a stats instance.
-        statsd = Statsd.new('localhost', 8125)
+        statsd = Datadog::Statsd.new('localhost', 8125)
 
         # Increment a counter.
         statsd.increment('page.views')
