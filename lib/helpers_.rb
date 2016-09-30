@@ -120,56 +120,57 @@ def github_metrics_store_filename
   'github_metrics'
 end
 
-def get_all_metrics_from_github
-  require 'octokit'
-  require 'pp'
-  require 'yaml'
-  require 'csv'
+# def get_all_metrics_from_github
+#   require 'octokit'
+#   require 'pp'
+#   require 'yaml'
+#   require 'csv'
 
-  $allmetrics = {}
-  if ENV.has_key?('github_personal_token') && $goodconnection
-    pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
-    repo='datadog/dogweb'
-    reporootdir = $client.contents(repo, :path => "integration/")
+#   $allmetrics = {}
+#   if ENV.has_key?('github_personal_token') && $goodconnection
+#     pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
+#     repo='datadog/dogweb'
+#     reporootdir = $client.contents(repo, :path => "integration/")
 
-    reporootdir.each do |intdir|
-      if intdir[:type] == "dir"
-        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
-        intdirlist.each {|intdircontent|
-          if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
-            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
-            metrics = []
-            CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
-              description = row['description'].nil? ? '' : row['description']
-              metric_name = row['metric_name']
-              metric_type = row['metric_type']
-              metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
-              metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
-              metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
-              metrics << {
-                :name => metric_name,
-                :type => metric_type,
-                :interval => metric_interval,
-                :description => description,
-                :unit => metric_unit,
-                :per_unit => metric_per_unit
-                }
-            end
-            $allmetrics[intdir['name']] = metrics
-          end
-        }
-      end
-    end
-    serialize_github_metrics($allmetrics, github_metrics_store_filename)
-  end
-  return $allmetrics
-end
+#     reporootdir.each do |intdir|
+#       if intdir[:type] == "dir"
+#         intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+#         intdirlist.each {|intdircontent|
+#           if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
+#             csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+#             metrics = []
+#             CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
+#               description = row['description'].nil? ? '' : row['description']
+#               metric_name = row['metric_name']
+#               metric_type = row['metric_type']
+#               metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
+#               metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
+#               metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
+#               metrics << {
+#                 :name => metric_name,
+#                 :type => metric_type,
+#                 :interval => metric_interval,
+#                 :description => description,
+#                 :unit => metric_unit,
+#                 :per_unit => metric_per_unit
+#                 }
+#             end
+#             $allmetrics[intdir['name']] = metrics
+#             print '.'
+#           end
+#         }
+#       end
+#     end
+#     serialize_github_metrics($allmetrics, github_metrics_store_filename)
+#   end
+#   return $allmetrics
+# end
 
-def serialize_github_metrics(items, filename)
-  File.open(filename, 'a') do |f|
-    Marshal.dump(items, f)
-  end
-end
+# def serialize_github_metrics(items, filename)
+#   File.open(filename, 'a') do |f|
+#     Marshal.dump(items, f)
+#   end
+# end
 
 def insert_example_links(integration: item[:integration_title], conf:  integration.downcase.tr(" ", "_"), check: integration.downcase.tr(" ", "_"), yaml_extension: "example", include_intro: true)
   example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
@@ -180,39 +181,42 @@ def insert_example_links(integration: item[:integration_title], conf:  integrati
   return example_links
 end
 
-def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
-  items_to_include = items_to_include.split(/\s*,\s*/)
-  if $allmetrics == nil
-    if File.exist?(github_metrics_store_filename)
-      $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
-    else
-      $allmetrics = get_all_metrics_from_github()
-    end
-  end
-  selectedmetrics = []
-  allmetricsforintegration = $allmetrics[itemintegration]
-  if items_to_include.count > 0 && $goodconnection
-    items_to_include.each do |item_to_include|
-      selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
-    end
-  else
-    selectedmetrics = allmetricsforintegration
-  end
-  return formatmetrics(selectedmetrics)
-end
+# def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
+#   items_to_include = items_to_include.split(/\s*,\s*/)
+#   if $allmetrics == nil
+#     if File.exist?(github_metrics_store_filename)
+#       $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
+#     else
+#       $allmetrics = get_all_metrics_from_github()
+#     end
+#   end
+#   selectedmetrics = []
+#   allmetricsforintegration = $allmetrics[itemintegration]
+#   if items_to_include.count > 0 && $goodconnection
+#     items_to_include.each do |item_to_include|
+#       selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
+#     end
+#   else
+#     selectedmetrics = allmetricsforintegration
+#   end
+#   return formatmetrics(selectedmetrics)
+# end
 
 def formatmetrics(selectedmetrics)
   metrictable = "<table class='table'>"
   if $goodconnection
-    selectedmetrics.each do |metric|
-      metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
-      if metric[:interval]>0
-        metrictable += " every #{metric[:interval]} seconds"
+    begin
+      selectedmetrics.each do |metric|
+        metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
+        if metric[:interval]>0
+          metrictable += " every #{metric[:interval]} seconds"
+        end
+        metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
+        metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
+        metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
+        metrictable += "</td></tr>"
       end
-      metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
-      metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
-      metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
-      metrictable += "</td></tr>"
+    rescue
     end
   else
     metrictable += "<tr><td>Metrics would go here if you didn't type rake slow</td></tr>"
@@ -221,41 +225,41 @@ def formatmetrics(selectedmetrics)
   return metrictable
 end
 
-def get_units_from_git
-  require 'octokit'
-  require 'base64'
-  require 'csv'
+# def get_units_from_git
+#   require 'octokit'
+#   require 'base64'
+#   require 'csv'
 
-  if ENV.has_key?('github_personal_token') && $goodconnection
-    itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
-    unit_string = ""
-    units_by_family = Hash.new([])
-    CSV.parse(Base64.decode64(itext), :headers => true) do |row|
-      # row.each do |unit_id, family, name, plural, short_name, scale_factor|
-      if units_by_family.has_key?(row['family'])
-        units_by_family[row['family']].push(row['name'])
-      else
-        units_by_family[row['family']] = [row['name']]
-      end
+#   if ENV.has_key?('github_personal_token') && $goodconnection
+#     itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
+#     unit_string = ""
+#     units_by_family = Hash.new([])
+#     CSV.parse(Base64.decode64(itext), :headers => true) do |row|
+#       # row.each do |unit_id, family, name, plural, short_name, scale_factor|
+#       if units_by_family.has_key?(row['family'])
+#         units_by_family[row['family']].push(row['name'])
+#       else
+#         units_by_family[row['family']] = [row['name']]
+#       end
 
-    end
+#     end
 
-    units_by_family.keys.each do |family|
-      unit_string += "<h2>#{family}</h2>"
-      units_by_family[family].each do |unit_name|
-        unit_string += "<ul>"
-        unit_string += "<li>#{unit_name}</li>"
-        unit_string += "</ul>"
-      end
-    end
-    output = unit_string
-  else
-    output = "<strong>Units is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
-    # raise "Github personal token required"
-  end
+#     units_by_family.keys.each do |family|
+#       unit_string += "<h2>#{family}</h2>"
+#       units_by_family[family].each do |unit_name|
+#         unit_string += "<ul>"
+#         unit_string += "<li>#{unit_name}</li>"
+#         unit_string += "</ul>"
+#       end
+#     end
+#     output = unit_string
+#   else
+#     output = "<strong>Units is auto-populated based on data from a Datadog internal repo. It will be populated when built into production.</strong>"
+#     # raise "Github personal token required"
+#   end
 
-return output
-end
+# return output
+# end
 
 def get_cache_bust_fingerprints
   cbfingerprints = Hash.new()

@@ -1,7 +1,7 @@
 require 'rake/clean'
 
 
-CLEAN.include(%w(output tmp code_test tested.code github_metrics fileformaterrors))
+CLEAN.include(%w(output tmp code_test tested.code github_metrics fileformaterrors localmetricsstore))
 
 CODE_SNIPPETS = 'code_snippets'
 CODE_TEST = 'code_test'
@@ -23,6 +23,24 @@ end
 
 task :view do
   sh 'bundle exec nanoc view'
+end
+
+task :pull do 
+  if File.directory?('../integrations-extras')
+    sh 'cd ../integrations-extras && git checkout master && git pull'
+  else
+    sh 'cd .. && git clone git@github.com:DataDog/integrations-extras.git'
+  end
+  if File.directory?('../integrations-core')
+    sh 'cd ../integrations-core && git checkout master && git pull'
+  else
+    sh 'cd .. && git clone git@github.com:DataDog/integrations-core.git'
+  end
+  if File.directory?('../dogweb')
+    sh 'cd ../dogweb && git checkout prod && git pull'
+  else
+    sh 'cd .. && git clone git@github.com:DataDog/dogweb.git'
+  end
 end
 
 desc 'Clean Compile and Check'
