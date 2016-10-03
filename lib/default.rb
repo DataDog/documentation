@@ -117,7 +117,8 @@ def snowplow_pixel()
   return html
 end
 
-def munchkin()
+# Used by marketing operations and sales teams for tracking leads
+def marketo_pixel()
   html = <<-EOF
     <script type="text/javascript">
       (function() {
