@@ -82,6 +82,11 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
 
+#### Delphi
+{: #community-delphi}
+
+* [datadog-delphi][85] - A statsd client library implemented in Delphi.
+
 #### Elixir
 {: #community-elixir}
 
@@ -283,3 +288,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [82]: https://github.com/graze/dog-statsd
    [83]: https://github.com/thephpleague/statsd
    [84]: http://tech.graze.com/
+   [85]: https://github.com/rfrezino/datadog-delphi
