@@ -4,6 +4,7 @@ integration_title: Jira
 kind: integration
 doclevel: basic
 newhlevel: true
+beta: true
 ---
 
 # Overview
