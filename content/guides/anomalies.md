@@ -6,7 +6,7 @@ beta: true
 ---
 
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account seasonal day-of-week and time-of-day patterns. It's well-suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening.
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your quickly-growing site. As the number is increasing every day, any threshold would be quickly out-dated, whereas anomaly detection can quickly you alert you if there is an unexpected drop in the number of logins potentially indicating an issue with login system.
 
 ## How to Use Anomaly Detection on Your Data
 
