@@ -92,13 +92,13 @@ azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-
 2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
 3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
 
-#### Getting your Tenant Name
+##### Getting your Tenant Name
 {: #installation1}
 1. Go to [manage.windowsazure.com][5]
 2. Once the URL redirects, copy the tenant name from the URL. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
 3. Paste the Tenant Name in the form on the Azure setup tile <img src="/static/images/azure/tenant_name_form.png" style="width: 50%;display:block;display:block;"/>
 
-#### Creating the Web Application
+##### Creating the Web Application
 {: #installation2}
 
 1. Navigate to the “Active Directory” tab on the left-hand menu <img src="/static/images/azure/active_directory_icon.png" style="width: 25%;display:block;"/>
@@ -124,7 +124,7 @@ azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-
 18. Scroll back up to Keys, and copy and paste the generated Client Secret key into the form on the Azure setup tile <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
 19. Click "Install Integration" to complete the application creation process
 
-#####Giving Read Permissions to the Application
+##### Giving Read Permissions to the Application
 {: #installation3}
 
 1. Navigate to [portal.azure.com][2]
@@ -194,9 +194,9 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 After locating your VM:
 
-1. Click on All settings
-2. Click on Diagnostics
-3. Shift the status to on and select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
+1. Click on Diagnostics settings under the Monitoring section
+2. Shift the status to On 
+3. Select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
 4. Click Save to save your changes
 
 
