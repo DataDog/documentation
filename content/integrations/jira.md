@@ -79,7 +79,7 @@ A full list of variables can be seen below.
 |$EVENT_TITLE| Title of the event *(ex: \[Triggered] \[Memory Alert])*|
 |$EVENT_MSG| Text of the event *(ex: @webhook-url Sending to the webhook)*|
 |$EVENT_TYPE| Type of the event *(ex: metric_alert_monitor)*|
-|$LAST_UPDATED| Date when the event was last updated .|
+|$LAST_UPDATED| Date when the event was last updated|
 |$DATE| Date *(epoch) where the event happened *(ex: 1406662672000)*|
 |$AGGREG_KEY| ID to aggregate events belonging together *(ex: 9bd4ac313a4d1e8fae2482df7b77628)*|
 |$ORG_ID| ID of your organization *(ex: 11023)*|
@@ -89,6 +89,7 @@ A full list of variables can be seen below.
 |$LINK| Url of the event *(ex: https://app.datadoghq.com/event/jump_to?event_id=123456)*|
 |$PRIORITY| Priority of the event *(ex: normal)*|
 |$TAGS| Comma-separated list of the event tags *(ex: monitor, name:myService, role:computing-node)*|
+|$TEXT_ONLY_MSG| Text of the event without markdown formatting|
 |$ALERT_ID| ID of alert *(ex: 1234)*|
 |$ALERT_METRIC| Name of the metric if it's an alert *(ex: system.load.1)*|
 |$ALERT_QUERY| Query of the monitor that triggered the webhook|
