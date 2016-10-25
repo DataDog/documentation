@@ -128,11 +128,23 @@ azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-
 {: #installation3}
 
 1. Navigate to [portal.azure.com][2]
-2. Navigate to “Subscriptions” on the left hand menu <img src="/static/images/azure/subscriptions_icon.png" style="width: 25%;display:block;"/>
+2. Navigate to “Subscriptions” on the left hand menu
+
+    ![settings](/static/images/azure/subscriptions_icon.png){:style="width:50%;"}
+
 3. Click on the subscription you would like to monitor
-4. Click on the user icon <img src="/static/images/azure/user_button.png" style="width: 50%;display:block;"/>
-5. Click "Add" User <img src="/static/images/azure/add_user_button.png" style="width: 25%;display:block;"/>
-6. Select “Reader” as a role <img src="/static/images/azure/reader_icon.png" style="width: 25%;display:block;"/>
+4. Click on "Access control (IAM)" in the lefthand menu 
+
+    ![settings](/static/images/azure/access_control_button.png){:style="width:50%;"}
+
+5. Click "Add" 
+
+    ![settings](/static/images/azure/add_user_button.png){:style="width:50%;"}
+
+6. Select “Reader” as a role 
+
+    ![settings](/static/images/azure/reader_icon.png){:style="width:50%;"}
+
 7. Search/select for the name of the Application you just created (i.e. Datadog Auth App)
 8. Click Select
 9. Click OK
