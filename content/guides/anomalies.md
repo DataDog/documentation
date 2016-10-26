@@ -1,8 +1,8 @@
 ---
-title: Anomaly Detection
+title: Anomaly Detection (BETA)
 kind: guide
 listorder: 16
-beta: false
+beta: true
 ---
 
 
@@ -27,9 +27,9 @@ To create an anomaly detection graph, start by adding a timeseries graph to your
 
 <img src="/static/images/anomalies/initial_editor.png" style="width:100%; border:1px solid #777777"/>
 
-Now, click on the + icon (Add functions and modifiers) on the right side of your expression. Choose the “Anomalies” function in the "Algorithms" submenu:
+Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the “Modify your query” box, choose the “anomalies” function:
 
-<img src="/static/images/anomalies/function_menu.png" style="width:500px; border:1px solid #777777"/>
+<img src="/static/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
 
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
 
