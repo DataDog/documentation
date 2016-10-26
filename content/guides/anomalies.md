@@ -21,8 +21,7 @@ Keep in mind that `anomalies` uses the past to predict what is expected in the f
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 
-<b>N.B., The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
-</b>
+<b>Please Note:</b> The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
 
 <img src="/static/images/anomalies/dashboard_graph.png" style="width:100%; border:1px solid #777777"/>
 
