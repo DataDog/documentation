@@ -129,15 +129,17 @@ def get_all_metrics_from_github
   $allmetrics = {}
   if ENV.has_key?('github_personal_token') && $goodconnection
     pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
-    repo='datadog/dogweb'
-    reporootdir = $client.contents(repo, :path => "integration/")
+    repo = 'datadog/dogweb'
+    ref = ENV['branch'] || 'prod'
+    pp "Metrics will be pulled from repo '" + repo + "', branch '" + ref + "'"
+    reporootdir = $client.contents(repo, :path => "integration/", :ref => ref)
 
     reporootdir.each do |intdir|
       if intdir[:type] == "dir"
-        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}", :ref => ref)
         intdirlist.each {|intdircontent|
           if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
-            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}", :ref => ref).content)
             metrics = []
             begin
               CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
@@ -231,7 +233,9 @@ def get_units_from_git
   require 'csv'
 
   if ENV.has_key?('github_personal_token') && $goodconnection
-    itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
+    repo = 'datadog/dogweb'
+    ref = ENV['branch'] || 'prod'
+    itext = $client.contents(repo, :path => "integration/system/units_catalog.csv", :ref => ref).content
     unit_string = ""
     units_by_family = Hash.new([])
     CSV.parse(Base64.decode64(itext), :headers => true) do |row|
