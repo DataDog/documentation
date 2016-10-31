@@ -83,6 +83,9 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
+                "es:ListTags",
+                "es:ListDomainNames",
+                "es:DescribeElasticsearchDomains",
                 "kinesis:List*",
                 "kinesis:Describe*",
                 "logs:Get*",
@@ -215,6 +218,14 @@ For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
 
 For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
+
+## ES
+
+* `es:ListTags`: Add custom ES domain tags to ES metrics
+* `es:ListDomainNames`: Add custom ES domain tags to ES metrics
+* `es:DescribeElasticsearchDomains`: Add custom ES domain tags to ES metrics
+
+For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
 
 ## Kinesis
 
