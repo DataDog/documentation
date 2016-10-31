@@ -24,6 +24,7 @@ Related integrations include:
 | [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
 | [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
+| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
@@ -40,7 +41,6 @@ There are a number of other AWS services that are also available in Datadog but 
 | CloudSearch |
 | EBS |
 | Elastic MapReduce |
-| ElasticsearchService |
 | Firehose |
 | Lambda |
 | MachineLearning |
@@ -83,6 +83,9 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
+                "es:ListTags",
+                "es:ListDomainNames",
+                "es:DescribeElasticsearchDomains",
                 "kinesis:List*",
                 "kinesis:Describe*",
                 "logs:Get*",
@@ -215,6 +218,14 @@ For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
 
 For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
+
+## ES
+
+* `es:ListTags`: Add custom ES domain tags to ES metrics
+* `es:ListDomainNames`: Add custom ES domain tags to ES metrics
+* `es:DescribeElasticsearchDomains`: Add custom ES domain tags to ES metrics
+
+For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
 
 ## Kinesis
 
