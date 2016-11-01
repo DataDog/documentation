@@ -8,6 +8,8 @@ git_integration_title: immunio
 ---
 # Overview
 
+![Immunio Dashboard](/static/images/immunio_dash.png)
+
 Connect IMMUNIO's advanced application security monitoring with Datadog to visualize the impact Attacks have on your web application, and monitor IMMUNIO's automatic protection.
 
 IMMUNIO monitors your applications to detect and defend against all of the following:
