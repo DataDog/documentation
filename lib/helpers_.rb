@@ -129,33 +129,39 @@ def get_all_metrics_from_github
   $allmetrics = {}
   if ENV.has_key?('github_personal_token') && $goodconnection
     pp "Getting all metrics from github after a \'rake clean\'. This takes about 20-60 seconds on a good connection"
-    repo='datadog/dogweb'
-    reporootdir = $client.contents(repo, :path => "integration/")
+    repo = 'datadog/dogweb'
+    ref = ENV['branch'] || 'prod'
+    pp "Metrics will be pulled from repo '" + repo + "', branch '" + ref + "'"
+    reporootdir = $client.contents(repo, :path => "integration/", :ref => ref)
 
     reporootdir.each do |intdir|
       if intdir[:type] == "dir"
-        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}")
+        intdirlist = $client.contents(repo, :path => "/integration/#{intdir[:name]}", :ref => ref)
         intdirlist.each {|intdircontent|
           if intdircontent[:type] == "file" && intdircontent[:name].end_with?("metadata.csv")
-            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}").content)
+            csvcontent = Base64.decode64($client.contents(repo, :path => "integration/#{intdir[:name]}/#{intdircontent[:name]}", :ref => ref).content)
             metrics = []
-            CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
-              description = row['description'].nil? ? '' : row['description']
-              metric_name = row['metric_name']
-              metric_type = row['metric_type']
-              metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
-              metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
-              metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
-              metrics << {
-                :name => metric_name,
-                :type => metric_type,
-                :interval => metric_interval,
-                :description => description,
-                :unit => metric_unit,
-                :per_unit => metric_per_unit
-                }
+            begin
+              CSV.parse(csvcontent, {:headers => true, :converters => :all}) do |row|
+                description = row['description'].nil? ? '' : row['description']
+                metric_name = row['metric_name']
+                metric_type = row['metric_type']
+                metric_unit = row['unit_name'].nil? ? '' : row['unit_name']
+                metric_per_unit = row['per_unit_name'].nil? ? '' : row['per_unit_name']
+                metric_interval = row['interval'].nil? ? 0 : row['interval'].to_i
+                metrics << {
+                  :name => metric_name,
+                  :type => metric_type,
+                  :interval => metric_interval,
+                  :description => description,
+                  :unit => metric_unit,
+                  :per_unit => metric_per_unit
+                  }
+              end
+              $allmetrics[intdir['name']] = metrics
+            rescue
+              pp "An error occured while trying to parse the csv file " + intdircontent[:name] + " from dogweb integrations!"
             end
-            $allmetrics[intdir['name']] = metrics
           end
         }
       end
@@ -227,7 +233,9 @@ def get_units_from_git
   require 'csv'
 
   if ENV.has_key?('github_personal_token') && $goodconnection
-    itext = $client.contents('datadog/dogweb', :path => "integration/system/units_catalog.csv").content
+    repo = 'datadog/dogweb'
+    ref = ENV['branch'] || 'prod'
+    itext = $client.contents(repo, :path => "integration/system/units_catalog.csv", :ref => ref).content
     unit_string = ""
     units_by_family = Hash.new([])
     CSV.parse(Base64.decode64(itext), :headers => true) do |row|
