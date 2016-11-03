@@ -75,14 +75,15 @@ Create a Service Principal using the `AppId` returned from the last command.\\
 Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
 
 ~~~~
-azure ad sp create {app-id}
+azure ad sp create -a {app-id}
 ~~~~
 
 Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.\\
 Use the `Object Id` returned from the previous command to fill in `{object-Id}`
+`{subscription-Id}` is the azure subscription you would like to monitor, and is listed as `ID` in `azure account show` or through the portal
 
 ~~~~
-azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-Id}/
+azure role assignment create --objectId {object-Id} --roleName Reader --subscription {subscription-Id}
 ~~~~
 
 
