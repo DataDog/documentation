@@ -24,11 +24,13 @@ Related integrations include:
 | [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
 | [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
+| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
+| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
 {:.table}
 
 There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
@@ -40,12 +42,10 @@ There are a number of other AWS services that are also available in Datadog but 
 | CloudSearch |
 | EBS |
 | Elastic MapReduce |
-| ElasticsearchService |
 | Firehose |
 | Lambda |
 | MachineLearning |
 | OpsWorks |
-| S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
 | Trusted Advisor |
@@ -54,7 +54,7 @@ There are a number of other AWS services that are also available in Datadog but 
 
 # Installation
 
-Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better 
+Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
 Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
@@ -83,6 +83,9 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
+                "es:ListTags",
+                "es:ListDomainNames",
+                "es:DescribeElasticsearchDomains",
                 "kinesis:List*",
                 "kinesis:Describe*",
                 "logs:Get*",
@@ -92,6 +95,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "rds:Describe*",
                 "rds:List*",
                 "route53:List*",
+                "s3:GetBucketTagging"
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
@@ -216,6 +220,14 @@ For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
 
+## ES
+
+* `es:ListTags`: Add custom ES domain tags to ES metrics
+* `es:ListDomainNames`: Add custom ES domain tags to ES metrics
+* `es:DescribeElasticsearchDomains`: Add custom ES domain tags to ES metrics
+
+For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
+
 ## Kinesis
 
 * `kinesis:ListStreams`: List available streams.
@@ -246,6 +258,12 @@ For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
 For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
+
+## S3
+
+* `s3:GetBucketTagging`: Used to get custom bucket tags
+
+For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
 ## SES
 

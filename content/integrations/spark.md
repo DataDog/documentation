@@ -65,3 +65,6 @@ Get metrics from your app in real time to
             - instance #0 [OK]
             - Collected 0 metrics, 0 events & 2 service checks
 
+# Metrics
+
+<%= get_metrics_from_git()%>

@@ -1,12 +1,14 @@
 ---
-title: Anomaly Detection (BETA)
+title: Anomaly Detection
 kind: guide
 listorder: 16
-beta: true
+beta: false
 ---
 
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account seasonal day-of-week and time-of-day patterns. It's well-suited for metrics with recurring patterns that are hard or impossible to monitor with threshold-based alerting. For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening.
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
+
+For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly you alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
 ## How to Use Anomaly Detection on Your Data
 
@@ -19,15 +21,17 @@ Keep in mind that `anomalies` uses the past to predict what is expected in the f
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 
+**Please Note:** The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
+
 <img src="/static/images/anomalies/dashboard_graph.png" style="width:100%; border:1px solid #777777"/>
 
 To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type.
 
 <img src="/static/images/anomalies/initial_editor.png" style="width:100%; border:1px solid #777777"/>
 
-Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the “Modify your query” box, choose the “anomalies” function:
+Now, click on the + icon (Add functions and modifiers) on the right side of your expression. Choose the “Anomalies” function in the "Algorithms" submenu:
 
-<img src="/static/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
+<img src="/static/images/anomalies/function_menu.png" style="width:500px; border:1px solid #777777"/>
 
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
 
