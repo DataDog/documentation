@@ -30,6 +30,7 @@ Related integrations include:
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
+| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
 {:.table}
 
 There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
@@ -45,7 +46,6 @@ There are a number of other AWS services that are also available in Datadog but 
 | Lambda |
 | MachineLearning |
 | OpsWorks |
-| S3 |
 | Simple Queing Service |
 | Simple Workflow Service |
 | Trusted Advisor |
@@ -54,7 +54,7 @@ There are a number of other AWS services that are also available in Datadog but 
 
 # Installation
 
-Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better 
+Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
 Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
@@ -95,6 +95,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "rds:Describe*",
                 "rds:List*",
                 "route53:List*",
+                "s3:GetBucketTagging"
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
@@ -257,6 +258,12 @@ For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
 For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
+
+## S3
+
+* `s3:GetBucketTagging`: Used to get custom bucket tags
+
+For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
 ## SES
 
