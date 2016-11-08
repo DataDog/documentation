@@ -15,6 +15,8 @@ Enable this integration to begin collecting custom metrics from your Lambda func
 To send custom metrics to Datadog, you must print a log line from your Lambda, using the following format:
 <code>MONITORING|unix_epoch_timestamp|value|metric_type|my.metric.name|#tag1:value,tag2</code>
 
+Please ensure the `unix_epoch_timestamp` is in seconds (not milliseconds).
+
 For example, here is sample snippet for printing a valid custom metric, from your Lambda function (in Python):
 <code>
 unix_epoch_timestamp = int(time.time())
