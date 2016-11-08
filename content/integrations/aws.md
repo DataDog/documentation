@@ -95,7 +95,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "rds:Describe*",
                 "rds:List*",
                 "route53:List*",
-                "s3:GetBucketTagging"
+                "s3:GetBucketTagging",
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
