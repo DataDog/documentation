@@ -17,6 +17,7 @@ Connect to Amazon Web Services (AWS) in order to:
 
 Related integrations include:
 
+| [Billing](/integrations/awsbilling) | billing and budgets |
 | [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
 | [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
 | [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
@@ -36,7 +37,6 @@ Related integrations include:
 There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
 
 | AutoScaling |
-| Billing |
 | Budgeting |
 | CloudFront |
 | CloudSearch |
@@ -67,6 +67,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
             {
               "Action": [
                 "autoscaling:Describe*",
+                "budgets:ViewBudget",
                 "cloudtrail:DescribeTrails",
                 "cloudtrail:GetTrailStatus",
                 "cloudwatch:Describe*",
@@ -159,6 +160,12 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 * `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
 
 For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
+
+## Billing
+
+* `budgets:ViewBudget`: Used to view budget metrics
+
+For more information on [Budget policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html), review the documentation on the AWS website.
 
 ## CloudTrail
 
