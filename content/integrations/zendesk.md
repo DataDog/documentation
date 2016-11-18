@@ -37,11 +37,6 @@ To complete the integration, enter your information in [Datadog](https://app.dat
 1. Paste the Zendesk API Token you received in step 5 above.
 1. Click the Install Integration button.
 
-
-# Configuration
-
-Notification groups
-
 # Metrics
 
 <%= get_metrics_from_git()%>
