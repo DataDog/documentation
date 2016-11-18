@@ -3,7 +3,7 @@ title: Datadog-Jira Integration
 integration_title: Jira
 kind: integration
 doclevel: basic
-newhlevel: truet
+newhlevel: true
 ---
 
 # Overview
