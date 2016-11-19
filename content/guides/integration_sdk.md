@@ -211,6 +211,10 @@ Class TestMyIntegration(AgentCheckTest):
 
 For more information about tests and available test methods, please reference the [AgentCheckTest class in the Datadog Agent repository](https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py)
 
+#### Libraries
+
+The [Datadog Agent](https://github.com/DataDog/dd-agent) provides a number of useful libraries in the [`utils` directory](https://github.com/DataDog/dd-agent/tree/master/utils). These libraries can be helpful when building your integration and we encourage you to use them, but please be aware that these libraries will be moved in the upcoming Datadog Agent version 6.0. We will provide more details regarding integrations and these libraries prior to the Datadog Agent 6.0 release.
+
 #### Testing your integration
 
 As you build your check and test code, you can use the following to run your tests:
