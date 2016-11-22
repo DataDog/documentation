@@ -81,7 +81,7 @@ In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adapt
 
 <img src="/static/images/anomalies/alg_comparison_2.png" style="width:100%; border:1px solid #777777"/>
 
-The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the return to the metric to its original level as an anomaly.
+The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
 
 <img src="/static/images/anomalies/alg_comparison_3.png" style="width:100%; border:1px solid #777777"/>
 
