@@ -73,6 +73,18 @@ We currently offer four different anomaly detection algorithms.
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
+The three figures below illustrate how these four algorithms behave different in various situations. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptice_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
+
+<img src="/static/images/anomalies/alg_comparison_1.png" style="width:100%; border:1px solid #777777"/>
+
+In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
+
+<img src="/static/images/anomalies/alg_comparison_2.png" style="width:100%; border:1px solid #777777"/>
+
+In the third figure below, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
+
+<img src="/static/images/anomalies/alg_comparison_3.png" style="width:100%; border:1px solid #777777"/> 
+
 ## Frequently Asked Questions
 
 ### Should I use anomaly detection for everything?
