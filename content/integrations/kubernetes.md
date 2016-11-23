@@ -142,7 +142,7 @@ The manifest above uses Google's publicly available kube-state-metrics container
 1. Run `make container` to build the container
 1. Run `kubectl apply -f kubernetes`
 
-If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent. For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/kubernetes_state.yaml.example)
+If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent. For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/kubernetes_state.yaml.example). If you have enabled [Service Discovery](http://docs.datadoghq.com/guides/servicediscovery/), the kube state URL will be configured and managed automatically.
 
 # Validation
 
