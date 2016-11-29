@@ -39,7 +39,7 @@ Function               | Category      | Description
 
 **`.as_count()` & `.as_rate()`**
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/).
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
 
 **Rollup**
 

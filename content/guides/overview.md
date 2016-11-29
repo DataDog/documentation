@@ -72,7 +72,7 @@ The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
 * Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation
-* You can <a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
+* You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident
 
 ![](/static/images/event_stream_post_incident_history.png){: style="width:100%; border:1px solid #777777"}
@@ -102,7 +102,7 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 * As you hover over the graph the event stream moves with you.
 * Display by zone, host, or total usage.
 * We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and
-<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.
+<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.
 * Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
 * Graphs can be embedded in an iframe, giving a 3rd party a live graph

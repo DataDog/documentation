@@ -422,7 +422,7 @@ Here is an example:
 We have adopted Daring Fireball's Markdown throughout the site. To find out more
 about Markdown, visit the [Markdown docs][events-4].
 
-[events-1]: https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio
+[events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [events-2]: https://app.datadoghq.com/account/settings#api
 [events-3]: /api#events
 [events-4]: http://daringfireball.net/projects/markdown/syntax

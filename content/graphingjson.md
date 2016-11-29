@@ -97,7 +97,7 @@ For other metrics, including gauges submitted by statsd, <code>.as_count()</code
 <code>.as_rate()</code> will have no effect.
 
 For more on <code>.as_count()</code> please see our blog post
-<a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
+<a target="_blank" href="https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/">here</a>.
 
 #### Aggregation Method
 {: #aggregation}

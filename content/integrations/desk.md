@@ -25,7 +25,7 @@ Hit the install button, and then you're all set! You will soon be able to select
    [1]: /static/images/desk_config.png
    [2]: https://app.datadoghq.com/account/settings#integrations/desk
    [3]: https://app.datadoghq.com/screen/integration/desk
-   [4]: https://www.datadoghq.com/2015/02/keep-support-team-page-salesforce-desk-integration/
+   [4]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/
 
 
 ## Metrics
