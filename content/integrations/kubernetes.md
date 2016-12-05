@@ -146,7 +146,7 @@ If you configure your Kubernetes State Metrics service to run on a different URL
 
 # Validation
 
-To verify the Datadog agent is running in your environment as a daemonset, execeute:
+To verify the Datadog agent is running in your environment as a daemonset, execute:
 
     kubectl get daemonset
 
