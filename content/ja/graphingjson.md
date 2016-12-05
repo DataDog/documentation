@@ -152,7 +152,7 @@ For other metrics, including gauges submitted by statsd, <code>.as_count()</code
 We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query.
 We will also be building these functions fully into the graph editor in the near
 future. For more on <code>.as_count()</code> please see our blog post
-<a target="_blank" href="https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/">here</a>.
+<a target="_blank" href="https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/">here</a>.
 -->
 
 この他にも、クエリ結果に適用する上級者向けの関数が幾つかあります。
@@ -169,7 +169,7 @@ future. For more on <code>.as_count()</code> please see our blog post
 
 ``.rollup()``と``.as_count（）``を同じクエリで使用しないでください。
 また、将来的にはこれらの関数は、グラフエディターで簡単に操作できるようになる予定です(``.rollup()``は利用可能です)。
-``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
+``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
 
 <!-- #### Aggregation Method -->
 #### データポイントの集計

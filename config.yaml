@@ -82,4 +82,6 @@ redirects:
     to:    /guides/overview/
   - from:  /guides/network_checks/
     to:    /integrations/tcpcheck/
+  - from:  /guides/billing/
+    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
 
