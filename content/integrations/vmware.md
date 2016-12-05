@@ -87,5 +87,5 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 
 
 
-[1]: https://www.datadoghq.com/2014/08/unified-vsphere-app-monitoring-datadog/
+[1]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/
 [4]: http://docs.datadoghq.com/guides/billing/
