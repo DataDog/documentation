@@ -168,3 +168,26 @@ To make configuration more precise we now use the complete container image ident
 In case you need to match different templates with containers running the same image, it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
+
+## Configuration templates with Kubernetes annotations
+
+If you're using Kubernetes to orchestrate your containers, you can use Kubernetes pod annotations to store your configuration templates. The basic format is similar to the the structure required for key-value stores.
+
+Here's an example of the Apache YAML file that would correspond to the configuration template [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
+
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: apache
+      annotations:
+        com.datadoghq.sd/check_names: '["apache"]'
+        com.datadoghq.sd/init_configs: '[{}]'
+        com.datadoghq.sd/instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
+      labels:
+        name: apache
+    spec:
+      containers:
+        - name: apache
+          image: httpd
+          ports:
+            - containerPort: 80
