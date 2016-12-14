@@ -22,17 +22,15 @@ To use Service Discovery, you'll first need to run the Datadog Agent as a servic
 
 In Docker Swarm, you can do this by running the following command on one of your manager nodes (using your [API key](https://app.datadoghq.com/account/settings#api)):
 
-```
-docker service create \
-  --name dd-agent \
-  --mode global \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
-  --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-  -e API_KEY=<YOUR API KEY> \
-  -e SD_BACKEND=docker \
-  datadog/docker-dd-agent:latest
-```
+    docker service create \
+      --name dd-agent \
+      --mode global \
+      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+      --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+      --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+      -e API_KEY=<YOUR API KEY> \
+      -e SD_BACKEND=docker \
+      datadog/docker-dd-agent:latest
 
 For Kubernetes, you can follow our [Kubernetes Integration](http://docs.datadoghq.com/integrations/kubernetes/) to create a DaemonSet. We also have [Amazon ECS integration instructions](http://docs.datadoghq.com/integrations/ecs/) available.
 
@@ -56,7 +54,7 @@ To add Service Discovery for your custom container images, you simply need to ad
 
 ## Configuration templates
 
-The configuration templates in the `conf.d/auto_conf` directory are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
+The configuration templates in [the `conf.d/auto_conf` directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf) are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
 
 ### Template variables
 
@@ -75,67 +73,67 @@ Note that for the `host` variable if several networks are found and no key is pa
 
 ## Configuration templates with key-value stores
 
-Service Discovery using configuration templates in the Datadog Agent  `conf.d/auto_conf` directory is a straightforward process, though managing your templates and copying them into the Datadog Agent container (or building your own Datadog Agent container to includ custom configuration templates) can make scaling the process difficult.
+Service Discovery using configuration templates in the Datadog Agent  `conf.d/auto_conf` directory is a straightforward process, though managing your templates and copying them into the Datadog Agent container (or building your own Datadog Agent container to include custom configuration templates) can make scaling this process difficult.
 
-To make configuration template management easier, you can use etcd or Consul, two popular distributed key-value stores commonly used in conjunction with container-based service management.
+To make configuration template management easier, you can use etcd or Consul, two popular distributed key-value stores, as a repository for your templates.
 
 First you'll need to configure etcd or Consul as your Service Discovery backend by either updating the `datadog.conf` file or passing the settings as environment variables when starting the Datadog Agent service.
 
-You can enable etcd or Consul as a service discovery configuration backend by uncommenting and configuring the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` settings. If you are using Consul, you will also need to uncomment and set the `consul_token`
+### Configuring etcd or Consul in `datadog.conf`
 
-```
-# For now only Docker is supported so you just need to un-comment this line.
-service_discovery_backend: docker
+In the `dataodg.conf` file, you can enable etcd or Consul as a service discovery configuration backend by uncommenting and configuring the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` settings. If you are using Consul, you will also need to uncomment and set the `consul_token`.
 
-# Define which key/value store must be used to look for configuration templates.
-# Default is etcd. Consul is also supported.
-sd_config_backend: etcd
+    # For now only Docker is supported so you just need to un-comment this line.
+    service_discovery_backend: docker
 
-# Settings for connecting to the backend. These are the default, edit them if you run a different config.
-sd_backend_host: 127.0.0.1
-sd_backend_port: 4001
+    # Define which key/value store must be used to look for configuration templates.
+    # Default is etcd. Consul is also supported.
+    sd_config_backend: etcd
 
-# By default, the agent will look for the configuration templates under the
-# `/datadog/check_configs` key in the back-end.
-# If you wish otherwise, uncomment this option and modify its value.
-# sd_template_dir: /datadog/check_configs
+    # Settings for connecting to the backend. These are the default, edit them if you run a different config.
+    sd_backend_host: 127.0.0.1
+    sd_backend_port: 4001
 
-# If you Consul store requires token authentication for service discovery, you can define that token here.
-# consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
-```
+    # By default, the agent will look for the configuration templates under the
+    # `/datadog/check_configs` key in the back-end.
+    # If you wish otherwise, uncomment this option and modify its value.
+    # sd_template_dir: /datadog/check_configs
 
-To pass these same settings when starting the Datadog Agent in Docker Swarm, you would run the command:
+    # If you Consul store requires token authentication for service discovery, you can define that token here.
+    # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 
-```
-docker service create \
-  --name dd-agent \
-  --mode global \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
-  --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-  -e API_KEY=$API_KEY \
-  -e SD_BACKEND=docker \
-  -e SD_CONFIG_BACKEND=etcd \
-  -e SD_BACKEND_HOST=127.0.0.1 \
-  -e SD_BACKEND_PORT=4001 \
-  datadog/docker-dd-agent:latest
-```
+### Configuring etcd or Consul using environment variables
+
+To pass the settings listed above as environment variables when starting the Datadog Agent in Docker Swarm, you would run the command:
+
+    docker service create \
+      --name dd-agent \
+      --mode global \
+      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+      --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+      --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+      -e API_KEY=<YOUR API KEY> \
+      -e SD_BACKEND=docker \
+      -e SD_CONFIG_BACKEND=etcd \
+      -e SD_BACKEND_HOST=127.0.0.1 \
+      -e SD_BACKEND_PORT=4001 \
+      datadog/docker-dd-agent:latest
+
+### Template structure in key-value stores
 
 After your Datadog Agent service has been configured to use your Service Discovery configuration backend, you will need to store your configuration templates in the structure:
 
-```
-/datadog/
-  check_configs/
-    docker_image_0/
-      - check_names: ["check_name_0"]
-      - init_configs: [{init_config}]
-      - instances: [{instance_config}]
-    docker_image_1/
-      - check_names: ["check_name_1a", "check_name_1b"]
-      - init_configs: [{init_config_1a}, {init_config_1b}]
-      - instances: [{instance_config_1a}, {instance_config_1b}]
-    ...
-```
+    /datadog/
+      check_configs/
+        docker_image_0/
+          - check_names: ["check_name_0"]
+          - init_configs: [{init_config}]
+          - instances: [{instance_config}]
+        docker_image_1/
+          - check_names: ["check_name_1a", "check_name_1b"]
+          - init_configs: [{init_config_1a}, {init_config_1b}]
+          - instances: [{instance_config_1a}, {instance_config_1b}]
+        ...
 
 Note that in the structure above, you may have multiple checks for a single container. For example you may run a Java service that provides an HTTP API, using the HTTP check and the JMX integration at the same time. To declare that in templates, simply add elements to the `check_names`, `init_configs`, and `instances lists`. These elements will be matched together based on their index in their respective lists.
 
@@ -143,24 +141,20 @@ Note that in the structure above, you may have multiple checks for a single cont
 
 By default, the Datadog Agent supports Service Discovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
 
-```
-docker_images:
-  - httpd
+    docker_images:
+      - httpd
 
-init_config:
+    init_config:
 
-instances:
-  - apache_status_url: http://%%host%%/server-status?auto
-```
+    instances:
+      - apache_status_url: http://%%host%%/server-status?auto
 
 To store the same configuration template in etcd you could run the following commands:
 
-```
-etcdctl mkdir /datadog/check_configs/httpd
-etcdctl set /datadog/check_configs/httpd/check_names '["apache"]'
-etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
-etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
-```
+    etcdctl mkdir /datadog/check_configs/httpd
+    etcdctl set /datadog/check_configs/httpd/check_names '["apache"]'
+    etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
+    etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 
 ### Image name format in the configuration store
 
