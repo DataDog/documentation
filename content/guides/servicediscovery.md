@@ -15,13 +15,13 @@ It allows you to define configuration templates for specific images in a distrib
 
 The Service Discovery feature watches for Docker events like when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template for this image, and automatically sets up its checks.
 
-Configuration templates are defined in a single key-value store per cluster. We currently support etcd and Consul.
+Configuration templates are defined in a single key-value store per cluster. We currently support Etcd, Consul, and Zookeeper.
 
-If no configuration template is defined in the store for an image, the Agent will try to auto-configure the check by itself. Currently, auto-configuration works for Apache, Consul, Couch, Couchbase, Elasticsearch, etcd, Kyoto Tycoon, Memcached, Redis and Riak.
+If no configuration template is defined in the store for an image, the Agent will try to auto-configure the check by itself. Currently, auto-configuration works for Apache, Consul, Couch, Couchbase, Elasticsearch, Etcd, Kyoto Tycoon, Memcached, Redis and Riak.
 
 ## How to set it up
 
-To use Service Discovery, you simply need to define the configuration templates for the images you want to monitor, in a key-value store on top of the Agent.
+To use Service Discovery, you simply need to define the configuration templates for the images you want to monitor, in a key-value store reachable by the agent.
 
 Here is the structure of a configuration template:
 
@@ -42,13 +42,13 @@ Here is the structure of a configuration template:
         ...
 
 
-You also need to configure the Datadog Agents of the environment to enable service discovery using this store as a backend. To do so, edit the datadog.conf file to modify these options as needed:
+You also need to configure the Datadog agents of the environment to enable service discovery using this store as a backend. To do so, edit the datadog.conf file to modify these options as needed:
 
     # For now only docker is supported so you just need to un-comment this line.
     # service_discovery_backend: docker
     #
     # Define which key/value store must be used to look for configuration templates.
-    # Default is etcd. Consul is also supported.
+    # Default is etcd. Consul and Zookeeper are also supported.
     # sd_config_backend: etcd
 
     # Settings for connecting to the backend. These are the default, edit them if you run a different config.
@@ -73,6 +73,7 @@ The above settings can be passed to the dd-agent container through the following
     SD_BACKEND_HOST <-> sd_backend_host
     SD_BACKEND_PORT <-> sd_backend_port
     SD_TEMPLATE_DIR <-> sd_template_dir
+    SD_CONSUL_TOKEN <-> consul_token
 
 examples:
 
@@ -89,7 +90,7 @@ or with the Kubernetes check preconfigured:
     docker run -d --name dd-agent \
      -v /var/run/docker.sock:/var/run/docker.sock \
      -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-     -e API_KEY=[YOUR_API_KEY] -e KUBERNETES=true \
+     -e API_KEY=[YOUR_API_KEY] -e KUBERNETES=yes \
      -e SD_CONFIG_BACKEND=etcd \
      -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
      -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
@@ -200,7 +201,27 @@ Once the cluster is running, simply use the K/V store service IP address and por
 Then write your configuration templates, and let the Agent detect your running pods and take care of re-configuring checks.
 
 
-#### Examples
+
+#### Replacing Etcd with Kubernetes annotations
+
+With version `5.11` we are introducing check configuration through annotations.
+Instead of using a configuration store like etcd or consul you can now store configuration templates directly in your pod definition using Kubernetes annotations - essentially bundling monitoring logic into the deployment logic of your application.
+
+**How it works**:
+
+- just set `service_discovery_backend` to docker. No need for the config store settings, auto configuration will pick up the templates by itself
+- when writing the deployment manifest, add annotations following this format: `service-discovery.datadoghq.com/<container_name>.<field_name>` with `field_name` being `check_names`, `init_configs` or `instances` just like in the standard template keys.
+
+For example if you want to monitor the Datadog agent with the supervisor and HTTP checks, add these annotations to the template:
+
+    service-discovery.datadoghq.com/dd-agent.check_names: '["supervisord", "http_check"]'
+    service-discovery.datadoghq.com/dd-agent.init_configs: '[{}, {}]'
+    service-discovery.datadoghq.com/dd-agent.instances: '[{"name": "dd-agent supervisor", "host": "%%host%%", "tags": "%%tags%%"}, {"name": "dd-agent http check", "url": "http://%%host%%:9001", "timeout": "1"}]'
+
+This configuration format is perfect if you don't already have a KV cluster running and don't want to deploy one just for the agent. The only thing to keep in mind while using this is that updating annotations on live pods will not refresh the checks (as opposed to updating the config in etcd for example). You will need to deploy a new one with the updated annotations.
+
+
+### Examples
 
 Following is an example of how to setup templates for an NGINX, PostgreSQL stack. The example will use etcd as the configuration store.
 
