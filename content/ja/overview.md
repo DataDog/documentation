@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
 kind: guide
-listorder: 2
+listorder: 1
 sidebar:
   nav:
     - header: Datadogのサービスについて
@@ -56,7 +56,7 @@ in an online service is treated the same throughout Datadog.</li>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
 <li>カスタム Integrationsは、<a target="_blank" href="/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
-<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。</li>
+<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。<a href="/ja/integrations/">Integrationに関するドキュメント</a>!</li>
 </ul>
 
 
