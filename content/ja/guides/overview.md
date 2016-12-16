@@ -127,7 +127,7 @@ The Event Stream is based on the same conventions as a blog:
 <ul>
 <li>Every event in the stream can be commented on.</li>
 <li>Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation</li>
-<li>You can <a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
+<li>You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident</li>
 </ul>
 
@@ -156,7 +156,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <ul>
 <li>ストリーム内のすべてのEventにはコメントを付けることができます。</li>
 <li>分散した<a target="_blank" href="/ja/faq/#team">チーム</a>や、問題の調査時に問題点をフォーカスするのに便利です。</li>
-<li>by: user, source, tag, host, status, priority, incident 等の項目で、<a target="_blank" href="https://www.datadoghq.com/2014/05/filter-datadog-events-stream-pinpoint-events-infrastructure/">フィルタリング</a>することができます。</li>
+<li>by: user, source, tag, host, status, priority, incident 等の項目で、<a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">フィルタリング</a>することができます。</li>
 </ul>
 
 <img src="/static/images/event_stream_post_incident_history.png" style="width:100%; border:1px solid #777777"/>
@@ -186,7 +186,7 @@ Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-tim
 <li>As you hover over the graph the event stream moves with you.</li>
 <li>Display by zone, host, or total usage.</li>
 <li>We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and
-<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.</li>
+<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.</li>
 <li>Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).</li>
 <li>Graphs can be embedded in an iframe, giving a 3rd party a live graph
@@ -205,7 +205,7 @@ without access to your data or any other information (via the pencil in the uppe
 <li>グラフ上で"Click & drag"することによって、時間軸を変更することができます。</li>
 <li>グラフ上でカーソルを移動することによって、Eventストリームの表示も該当箇所へ自動的に移動していきます。</li>
 <li>zone, host, total usageで、表示することができます。</li>
-<li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/2014/04/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
+<li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>

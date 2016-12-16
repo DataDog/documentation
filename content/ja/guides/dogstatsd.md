@@ -339,7 +339,7 @@ else:
 start_time = time()
 renderer()
 duration = time() - start_time
-dog.histogram('rendering.duration', tags=[version])
+dog.histogram('rendering.duration', duration, tags=[version])
 eof
 %> -->
 

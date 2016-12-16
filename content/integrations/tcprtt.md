@@ -76,9 +76,4 @@ This is a passive check, so unless there are packets actively being sent to the 
 
 # Metrics
 
-|TCP RTT Metrics|
-|-----|-----|
-|system.net.tcp.rtt|
-|system.net.tcp.rtt.avg|
-|system.net.tcp.rtt.jitter|
-{:.table}
+<%= get_metrics_from_git('system', 'system.net.tcp.rtt') %>

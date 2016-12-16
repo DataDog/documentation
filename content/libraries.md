@@ -82,6 +82,16 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
 
+#### Crystal
+{: #community-crystal}
+
+  * [statsd.cr][86] - A statsd client library implemented in Crystal by [Mike Fiedler][87]
+
+#### Delphi
+{: #community-delphi}
+
+* [datadog-delphi][85] - A statsd client library implemented in Delphi.
+
 #### Elixir
 {: #community-elixir}
 
@@ -94,7 +104,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [ecsdog][74] - a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd by [ejholmes][75]
   * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
-  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31].
+  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31] from [Dropbox][81].
   * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
   * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
 
@@ -124,7 +134,8 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### PHP
 {: #community-php}
 
-  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley
+  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
+  * [dog-statsd][82] - A fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84].
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
 
 #### Python
@@ -141,7 +152,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### R
 {: #community-r}
 
-  * [rdog][68] - an R package to analyze Datadog metrics into R
+  * [rdog][68] - an R package to analyze Datadog metrics into R.
 
 #### Scala
 {: #community-scala}
@@ -174,6 +185,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-nginx-lua}
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
+  * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 #### Phusion Passenger
 {: #community-integration-passenger}
@@ -226,8 +238,8 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [27]: https://github.com/isra00/plesk_datadog_metrics
    [28]: http://www.parallels.com/products/plesk/
    [29]: https://github.com/isra00
-   [30]: https://github.com/xb95/go-datadog-api
-   [31]: https://github.com/xb95
+   [30]: https://github.com/zorkian/go-datadog-api
+   [31]: https://github.com/zorkian
    [32]: https://github.com/ooyala/go-dogstatsd/
    [33]: https://github.com/ooyala
    [34]: https://github.com/tbarbugli/scales_datadog
@@ -275,3 +287,12 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [76]: https://github.com/brightcove/hot-shots
    [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
    [78]: https://github.com/Sjeanpierre
+   [79]: https://github.com/mediba-system/lua-resty-dogstatsd
+   [80]: http://www.mediba.jp/
+   [81]: https://www.dropbox.com/
+   [82]: https://github.com/graze/dog-statsd
+   [83]: https://github.com/thephpleague/statsd
+   [84]: http://tech.graze.com/
+   [85]: https://github.com/rfrezino/datadog-delphi
+   [86]: https://github.com/miketheman/statsd.cr
+   [87]: https://github.com/miketheman

@@ -60,6 +60,9 @@ You also need to configure the Datadog Agents of the environment to enable servi
     # If you wish otherwise, uncomment this option and modify its value.
     # sd_template_dir: /datadog/check_configs
 
+    # If you Consul store requires token authentication for service discovery, you can define that token here.
+    # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
+
 
 ### Running and configuring the Agent in a container
 
@@ -71,12 +74,7 @@ The above settings can be passed to the dd-agent container through the following
     SD_BACKEND_PORT <-> sd_backend_port
     SD_TEMPLATE_DIR <-> sd_template_dir
 
-Available tags:
-
-    datadog/docker-dd-agent:latest (has the Docker check preconfigured)
-    datadog/docker-dd-agent:kubernetes (has the Docker and Kubernetes checks preconfigured)
-
-example:
+examples:
 
     docker run -d --name dd-agent \
      -v /var/run/docker.sock:/var/run/docker.sock \
@@ -84,7 +82,18 @@ example:
      -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd \
      -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
      -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
-     datadog/docker-dd-agent:kubernetes
+     datadog/docker-dd-agent:latest
+
+or with the Kubernetes check preconfigured:
+
+    docker run -d --name dd-agent \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -e API_KEY=[YOUR_API_KEY] -e KUBERNETES=true \
+     -e SD_CONFIG_BACKEND=etcd \
+     -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
+     -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
+     datadog/docker-dd-agent:latest
 
 
 ### Example: setting up NGINX monitoring

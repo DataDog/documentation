@@ -48,4 +48,4 @@ In the example below, a full text search is performed to find all open chef or n
 
 ```sources:nagios,chef status:error redis_* AND down```
 
-
+Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.

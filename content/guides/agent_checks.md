@@ -42,6 +42,13 @@ that collects timing metrics and status events from HTTP services.
 Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds.
 
+<h4 id="check_or_integration">Should you write an Agent Check or an Integration?</h4>
+Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
+
+Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
+
+For more information about how to write an Integration, please see the [Creating New Integrations guide](/guides/integration_sdk/) and check out the [Integrations-Extras Github repo](https://github.com/DataDog/integrations-extras) to see other contributed integrations.
+
 <!--
 ======================================================
 SETUP

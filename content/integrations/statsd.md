@@ -12,7 +12,7 @@ Enable the Datadog StatsD integration to:
   * Monitor uptime and availability of a StatsD server
   * Collecting metrics from a StatsD server's admin interface
 
-**Please note the Datadog Agent includes [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) which serves as a StatsD forwarder. This integration is inteded for monitoring external StatsD servers, and is not needed to send metrics to Datadog using the StatsD protocol.**
+**Please note the Datadog Agent includes [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) which serves as a StatsD forwarder. This integration is intended for monitoring external StatsD servers, and is not needed to send metrics to Datadog using the StatsD protocol.**
 
 # Configuration
 

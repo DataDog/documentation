@@ -113,10 +113,10 @@ EOF
 And add it to your code:
 <%= ruby <<EOF
 # Import the library
-require 'statsd'
+require 'datadog/statsd'
 
 # Create a statsd client instance.
-statsd = Statsd.new
+statsd = Datadog::Statsd.new
 EOF
 %>
   </div>
@@ -178,10 +178,10 @@ EOF
 アプリケーションへモジュールをインポートするためにrequire行を追記します:
 <%= ruby <<EOF
 # Import the library
-require 'statsd'
+require 'datadog/statsd'
 
 # Create a statsd client instance.
-statsd = Statsd.new
+statsd = Datadog::Statsd.new
 EOF
 %>
   </div>

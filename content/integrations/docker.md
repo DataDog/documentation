@@ -108,5 +108,5 @@ We've written several in depth blog posts on Datadog and Docker::
 * [How to Collect Docker Metrics](https://www.datadoghq.com/blog/how-to-collect-docker-metrics/)
 * [8 Surprising Facts about Real Docker Adoption](https://www.datadoghq.com/docker-adoption/)
 * [Monitor Docker on AWS ECS](https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs/)
-* [Dockerize Datadog](https://www.datadoghq.com/2014/06/docker-ize-datadog/)
-* [Monitor Docker with Datadog](https://www.datadoghq.com/2014/06/monitor-docker-datadog/)
+* [Dockerize Datadog](https://www.datadoghq.com/blog/docker-performance-datadog/)
+* [Monitor Docker with Datadog](https://www.datadoghq.com/blog/monitor-docker-datadog/)
