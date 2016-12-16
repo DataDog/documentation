@@ -1,5 +1,5 @@
 ---
-title: Introduction to the HostMap
+title: Introduction to the Host Map
 kind: video
 language: en
 wistiaid: 6m4805jr9t

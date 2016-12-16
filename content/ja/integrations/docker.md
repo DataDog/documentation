@@ -29,16 +29,16 @@ Dockerからリアルタイムにメトリクスを取得する目的は:
 
 <!-- We've written two in depth blog posts on Datadog and Docker::
 
-* <a target="_blank" href="https://www.datadoghq.com/2014/06/docker-ize-datadog/">
+* <a target="_blank" href="https://www.datadoghq.com/blog/docker-performance-datadog/">
 Dockerize Datadog</a>
-* <a target="_blank" href="https://www.datadoghq.com/2014/06/monitor-docker-datadog/">
+* <a target="_blank" href="https://www.datadoghq.com/blog/monitor-docker-datadog/">
 Monitor Docker with Datadog</a> -->
 
 DatadogとDockerについて詳しく書いたブログを掲載しています:
 
-* <a target="_blank" href="https://www.datadoghq.com/2014/06/docker-ize-datadog/">
+* <a target="_blank" href="https://www.datadoghq.com/blog/docker-performance-datadog/">
 Dockerize Datadog</a>
-* <a target="_blank" href="https://www.datadoghq.com/2014/06/monitor-docker-datadog/">
+* <a target="_blank" href="https://www.datadoghq.com/blog/monitor-docker-datadog/">
 Monitor Docker with Datadog</a>
 
 ブログの日本語訳:

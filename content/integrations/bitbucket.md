@@ -14,7 +14,7 @@ Capture commits and pull requests events directly from your bitbucket to:
 
 We've written extensively about the Bitbucket integration on our [blog][1].
 
-![Bitbucket Integration](/static/images/integrations-bitbucket.png)
+![Bitbucket Integration](/static/images/integrations-bitbucket.gif)
 Once the integration is complete, whatever you select (commits and/or pull requests) will populate
 into your Datadog Event Stream.
 
@@ -42,5 +42,5 @@ Each entry in the integration tile is validated when you enter it. There is noth
 
 
 
-[1]: https://www.datadoghq.com/2014/06/understand-code-changes-impact-system-performance-bitbucket-datadog/
+[1]: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
 [2]: https://app.datadoghq.com/account/settings#integrations/bitbucket

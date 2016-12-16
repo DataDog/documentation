@@ -38,7 +38,7 @@ Fill out the form as shown, leaving the latter two URL fields blank. Desk should
 
 Then from your Datadog account, enter the corresponding information on the [Desk tile](https://app.datadoghq.com/account/settings#integrations/desk). You will also need to enter your company's unique Desk domain name.
 
-Hit the install button, and then you're all set! You will soon be able to select desk.* metrics on a custom dashboard or view them on the provided [Desk dashboard](https://app.datadoghq.com/screen/integration/desk). (You can also read about this integration on [our blog](https://www.datadoghq.com/2015/02/keep-support-team-page-salesforce-desk-integration/).) -->
+Hit the install button, and then you're all set! You will soon be able to select desk.* metrics on a custom dashboard or view them on the provided [Desk dashboard](https://app.datadoghq.com/screen/integration/desk). (You can also read about this integration on [our blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).) -->
 
 ### 設定
 {:#int-configuration}
@@ -54,4 +54,4 @@ Deskのアカウントにログインし、`Setting` -> `API` -> `My Application
 
 最後に、`install`ボタンをクリックすると設定は終了です。しばらくすると、Deskから取得したメトリクス( desk.* )をカスタムダッシュボードで選択出来るようになります。又、予めDeskインテグレーションに備え付けられた[ダッシュボード](https://app.datadoghq.com/screen/integration/desk)でも、メトリクスが表示されるようになります。
 
-Deskのインテグレーションに関しては、blog記事[「Keep support on the same page with the Salesforce Desk integration」](https://www.datadoghq.com/2015/02/keep-support-team-page-salesforce-desk-integration/)でも紹介しています。
+Deskのインテグレーションに関しては、blog記事[「Keep support on the same page with the Salesforce Desk integration」](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/)でも紹介しています。

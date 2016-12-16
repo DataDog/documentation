@@ -28,6 +28,6 @@ doclevel: basic
 - コードの変更に関し、Datadogのイベントストリーム上でチャット可能にします
 
 
-<!-- We've written extensively about the Bitbuck integration on our [blog](https://www.datadoghq.com/2014/06/understand-code-changes-impact-system-performance-bitbucket-datadog/). -->
+<!-- We've written extensively about the Bitbuck integration on our [blog](https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/). -->
 
-Datadog blogの[「Understand how code changes impact system performance with Bitbucket and Datadog」](https://www.datadoghq.com/2014/06/understand-code-changes-impact-system-performance-bitbucket-datadog/)に於いても、Bitbucketインテグレーションに関して詳しく記述しています。こちらも合わせてご参照下さい。
+Datadog blogの[「Understand how code changes impact system performance with Bitbucket and Datadog」](https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/)に於いても、Bitbucketインテグレーションに関して詳しく記述しています。こちらも合わせてご参照下さい。

@@ -18,11 +18,23 @@ Connect MongoDB to Datadog in order to:
 1.  To capture MongoDB metrics you need to install the Datadog Agent.
 2.  Create a read-only admin user for Datadog (Admin rights are needed to collect complete server statistics). In the mongo shell, run:
 
+        # Authenticate as the admin user.
         use admin
         db.auth("admin", "admin-password")
+
+        # On MongoDB 2.x, use the addUser command.
         db.addUser("datadog", "<UNIQUEPASSWORD>", true)
-        # Note: if using MongoDB 3.0 or higher, use this addUser command instead
-        db.createUser({"user":"datadog", "pwd": "<UNIQUEPASSWORD>", "roles" : [ 'read', 'clusterMonitor']})
+
+        # On MongoDB 3.x or higher, use the createUser command.
+        db.createUser({
+          "user":"datadog",
+          "pwd": "<UNIQUEPASSWORD>",
+          "roles" : [
+            {role: 'read', db: 'admin' },
+            {role: 'clusterMonitor', db: 'admin'},
+            {role: 'read', db: 'local' }
+          ]
+        })
 
 # Configuration
 
@@ -35,7 +47,8 @@ Connect MongoDB to Datadog in order to:
           # server: mongodb://username:password@host:port/database where database will default to admin
           - server: mongodb://admin:datadog@localhost:27017/admin
             tags:
-              - key:value
+              - mytag1
+              - mytag2
             additional_metrics:
               - durability
               - locks
@@ -67,5 +80,3 @@ Note: many of these metrics are described in the [MongoDB Manual 3.0](https://do
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example
 [2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py
-
-

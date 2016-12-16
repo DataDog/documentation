@@ -45,6 +45,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
 
             process_name_regex: .*process_name.*
             tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+            refresh_beans: 600 # optional (in seconds)
             tags:
               env: stage
               newTag: test
@@ -84,6 +85,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
 * `trust_store_path` and `trust_store_password` - (Optional) - Should be set if ssl is enabled.
 * `process_name_regex` - (Optional) - Instead of specifying a host and port or jmx_url, the agent can connect using the attach api. This requires the JDK to be installed and the path to tools.jar to be set.
 * `tools_jar_path` - (Optional) - To be set when process_name_regex is set.
+* `refresh_beans` - (Optional) - Refresh period for refreshing the matching MBeans list.  Default is 600 seconds.  Decreasing this value may result in increased CPU usage.
 
 The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this dictionary:
 

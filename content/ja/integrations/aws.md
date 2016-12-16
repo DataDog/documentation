@@ -211,4 +211,4 @@ When installing the agent on an aws host, you might see duplicated hosts on the 
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 
    [6]: mailto:support@datadoghq.com
-   [7]: http://www.datadoghq.com/2013/10/dont-fear-the-agent
+   [7]: http://www.datadoghq.com/blog/dont-fear-the-agent
