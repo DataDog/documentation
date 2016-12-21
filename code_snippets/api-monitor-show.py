@@ -8,4 +8,4 @@ options = {
 initialize(**options)
 
 # Get a monitor's details
-api.Monitor.get(2081)
+api.Monitor.get(2081, group_states='all')
