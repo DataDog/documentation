@@ -109,7 +109,7 @@ Here is a comparison of DBSCAN and Scaled DBSCAN with tolerances of 3 on field d
 
 ![](/static/images/outliers/outliers-scaled-dbscan-es.png)
 
-### Median Absolute Deviation (MAD)
+### Median Absolute Deviation (MAD)/Scaled MAD
 
 The  [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
 
