@@ -77,9 +77,9 @@ To ensure that your alert is properly calibrated, you can set the time window at
 {: #algorithms}
 
 
-There are two different types of outlier detection algorithms you can use on your data: DBSCAN/Scaled DBSCAN and MAD (Median Absolute Deviation)/Scaled MAD. We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If your metrics have a larger scale and you are seeing spurious outliers within a closely clustered group, try the scaled algorithms, Scaled DBSCAN or Scaled MAD. Explanation of each algorithm and its parameters follows.
+There are two different types of outlier detection algorithms you can use on your data: DBSCAN/Scaled DBSCAN and MAD (Median Absolute Deviation)/Scaled MAD. We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If your metrics have a larger scale and you are seeing outliers within a closely clustered group, try the scaled algorithms, Scaled DBSCAN or Scaled MAD. Explanation of each algorithm and its parameters follows.
 
-### DBSCAN/Scaled DBSCAN
+### DBSCAN/ScaledDBSCAN
 
 A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN), a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
 
@@ -99,17 +99,17 @@ The only parameter we take is `tolerance`, the constant by which the initial thr
 
 You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
-#### Scaled DBSCAN
+#### ScaledDBSCAN
 
 The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. This can lead to seemingly spurious outliers when the overall scale of the metrics is large compared to the distances between hosts and the median time series. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series will be a constant series at 1002. DBSCAN with a tolerance of 3.0 will identify the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph.
 
-The Scaled DBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
 
-Here is a comparison of DBSCAN and Scaled DBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
+Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
 
 ![](/static/images/outliers/outliers-scaled-dbscan-es.png)
 
-### Median Absolute Deviation (MAD)/Scaled MAD
+### Median Absolute Deviation (MAD)/ScaledMAD
 
 The  [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
 
@@ -125,13 +125,13 @@ Now to mark a time series as an outlier, we use the second parameter, `pct`. If 
 
 The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.
 
-#### Scaled MAD
+#### ScaledMAD
 
 Like for DBSCAN, the MAD algorithm is designed to be independent of the overall magnitude of the metrics. If D = {1000, 1001, 1002, 1005, 1010}, the median is 1002, and the MAD is 2. Even though the point at 1010 seems close to the median in terms of their relative scales, it is still an outlier point for a tolerance of 3.
 
-The Scaled MAD algorithm, like Scaled DBSCAN, considers the relative scales of the MAD and the median. In most cases, it will behave the same as the MAD algorithm does. However, when the MAD of the data set becomes small compared to the median, the measure of deviation becomes proportional to the median. Therefore, determining whether a point is an outlier depends on the overall scale of the metrics.
+The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the MAD and the median. In most cases, it will behave the same as the MAD algorithm does. However, when the MAD of the data set becomes small compared to the median, the measure of deviation becomes proportional to the median. Therefore, determining whether a point is an outlier depends on the overall scale of the metrics.
 
-Here is an example of MAD and Scaled MAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
+Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
 
 ![](/static/images/outliers/outliers-scaled-mad-cassandra.png)
 
@@ -143,7 +143,7 @@ In the following image, we see a group of hosts flushing their buffers together 
 
 ![](/static/images/outliers/outliers-flushing.png)
 
-In most situations, the scaled algorithms will behave the same as their regular counterparts. However, if you are seeing spurious outliers within a closely clustered group and increasing the tolerance doesn’t help, try the scaled algorithms.
+In most situations, the scaled algorithms will behave the same as their regular counterparts. However, if you are seeing outliers within a closely clustered group, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
 
 ### Setting up alerts
 
