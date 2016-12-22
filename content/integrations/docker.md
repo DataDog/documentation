@@ -49,12 +49,20 @@ There are three ways to setup the Docker integration: install the agent on the h
 
 ### Environment variables
 
-Note that in the command above, you are able to pass your API key to the Datadog Agent using Docker's `-e` or environment variable flag. Some other variables you can pass include:
+Note that in the command above, you are able to pass your API key to the Datadog Agent using Docker's `-e` environment variable flag. Some other variables you can pass include:
 
-* **TAGS** sets host tags. You can pass both simple tags and key-value tags. For example, `-e TAGS="simple-tag,tag-key:tag-value"`.
-* **LOG_LEVEL** sets logging verbosity (CRITICAL, ERROR, WARNING, INFO, DEBUG). For example, `-e LOG_LEVEL=DEBUG` will set logging to debug mode.
-* **PROXY_HOST**, **PROXY_PORT**, **PROXY_USER**, and **PROXY_PASSWORD** set the proxy configuration.
-* **DD_URL** sets the Datadog intake server where the agent will send metrics (used when using an agent as a proxy).
+| **Variable** | **Description** |
+|---|---|
+| API_KEY | Sets your Datadog API key. |
+| DD_HOSTNAME | Sets the hostname in the Agent container's datadog.conf file. If this variable is not set, the Agent container will default to using the `Name` field (as reported by the `docker info` command) as the Agent container hostname. |
+| DD_URL | Sets the Datadog intake server URL where the Agent will send data. This is useful when [using an agent as a proxy](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy). |
+| LOG_LEVEL | Sets logging verbosity (CRITICAL, ERROR, WARNING, INFO, DEBUG). For example, `-e LOG_LEVEL=DEBUG` will set logging to debug mode.
+| TAGS | Sets host tags as a comma delimited string. You can pass both simple tags and key-value tags. For example, `-e TAGS="simple-tag, tag-key:tag-value"`. |
+| EC2_TAGS | Enabling this feature allows the agent to query and capture custom tags set using the EC2 API during startup. To enable, set the value to "yes", for example, `-e EC2_TAGS=yes`. Note that this feature requires an [IAM role](https://github.com/DataDog/dd-agent/wiki/Capturing-EC2-tags-at-startup) associated with the instance. |
+| NON_LOCAL_TRAFFIC | Enabling this feature will allow statsd reporting from any external IP. For example, `-e NON_LOCAL_TRAFFIC=yes`. This can be used to report metrics from other containers or systems. See [network configuration](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration) for more details.
+| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD | Sets proxy configuration details. For more information, see the [Agent proxy documentation](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy) |
+| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Service Discovery. For more information, please see the [Service Discovery guide](/guides/servicediscovery/). |
+{:.table}
 
 ### Running the agent container on Amazon Linux
 
