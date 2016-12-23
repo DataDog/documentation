@@ -184,6 +184,48 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](ht
 
 For a more complete example, please see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
 
+# DogStatsD and Docker
+
+Datadog has a huge number of [integrations with common applications](/integrations/), but it can also be used to instrument your custom applications. This is typically using one of the many [Datadog libraries](/libraries/).
+
+Libraries that communicate over HTTP using the [Datadog API](/api/) don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD will need to configure the library to connect to the Agent. Note that each library will handle this configuration differently, so please refer to the individual library's documentation for more details.
+
+After your code is configured you can run your custom application container using [the `--link` option](https://docs.docker.com/engine/reference/run/#/expose-incoming-ports) to create a network connection between your application container and the Datadog Agent container.
+
+## Example: Monitoring a basic Python application
+
+To start monitoring our application, we first need to run the Datadog container using the [Single Container Installation](#single-container-installation) instructions above. Note that the `docker run` command sets the name of the container to `dd-agent`.
+
+Next, we'll need to instrument our code. Here's a basic Flask-based web application:
+
+    from flask import Flask
+    from datadog import initialize, statsd
+
+    # Initialize DogStatsD and set the host.
+    initialize(statsd_host = 'dd-agent')
+
+    app = Flask(__name__)
+
+    @app.route('/')
+    def hello():
+        # Increment a Datadog counter.
+        statsd.increment('my_webapp.page.views')
+
+        return "Hello World!"
+
+    if __name__ == "__main__"
+        app.run()
+
+In our example code above, we set the DogStatsD host to match the Datadog Agent container name, `dd-agent`.
+
+After we build our web application container, we can run it and use the `--link` argument to setup a network connection to the Datadog Agent container:
+
+    docker run -d --name my-web-app \
+      --link dd-agent:dd-agent
+      my-web-app
+
+For another example using DogStatsD, see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
+
 # Additional resources
 
 Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
