@@ -171,7 +171,7 @@ For example, if a container has this label configured as `com.datadoghq.sd.check
 
 ## Configuration templates with Kubernetes annotations
 
-If you're using Kubernetes to orchestrate your containers, you can use Kubernetes pod annotations to store your configuration templates. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
+As of version 5.11 of the Datadog Agent, you can use Kubernetes pod annotations to store your configuration templates. Follow the [Kubernetes integration instructions](/integrations/kubernetes/), then add annotations to your pod definitions. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
 
     annotations:
       service-discovery.datadoghq.com.<Kubernetes Container Name>.check_names: '["check_name_0"]'
