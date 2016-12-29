@@ -19,7 +19,7 @@ Outlier Detection is an algorithmic feature that allows you to detect when some 
 
 ## How to Use Outlier Detection on Your Data
 
-We’ve added a new query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
+We’ve added a query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
@@ -33,7 +33,7 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
-To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
+To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding the `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
 To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
 
