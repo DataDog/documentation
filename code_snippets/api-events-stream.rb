@@ -6,7 +6,7 @@ app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-start_time = Time.now.to_i
-end_time = Time.now.to_i + 100
+end_time = Time.now.to_i 
+start_time = end_time - 100
 
 dog.stream(start_time, end_time, :priority=>"normal", :tags=>["application:web"])
