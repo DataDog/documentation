@@ -28,7 +28,7 @@ Connect to Microsft Azure in order to:
 
 * Get metrics from Azure VMs with or without installing the Agent
 * Tag your Azure VMs with Azure-specific information (e.g. location)
-* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, SQL Database, SQL Elastic Pool, and Virtual Machine Scale Set
+* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, Server Farm, SQL Database, SQL Elastic Pool, and Virtual Machine Scale Set
 
 Related integrations include:
 
@@ -40,7 +40,7 @@ Related integrations include:
 ### Installation
 {: #installation}
 
-Integrating Datadog with Microsoft Azure can be done via the Azure Command Line Interface or through the Azure portals. 
+Integrating Datadog with Microsoft Azure can be done via the Azure Command Line Interface or through the Azure portal 
 
 #### Integrating through the Azure CLI
 To integrate Datadog with Azure using the Azure Command Line Interface, make sure you have [Azure CLI installed][7]. 
@@ -74,15 +74,22 @@ azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" 
 Create a Service Principal using the `AppId` returned from the last command.\\
 Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
 
+azure cli <0.10.2
 ~~~~
 azure ad sp create {app-id}
 ~~~~
 
+azure cli >= 0.10.2:
+~~~~
+azure ad sp create -a {app-id}
+~~~~
+
 Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.\\
 Use the `Object Id` returned from the previous command to fill in `{object-Id}`
+`{subscription-Id}` is the azure subscription you would like to monitor, and is listed as `ID` in `azure account show` or through the portal
 
 ~~~~
-azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-Id}/
+azure role assignment create --objectId {object-Id} --roleName Reader --subscription {subscription-Id}
 ~~~~
 
 
@@ -92,52 +99,75 @@ azure role assignment create --objectId {object-Id} -o Reader -c /{subscription-
 2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
 3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
 
-#### Getting your Tenant Name
+##### Getting your Tenant Name
 {: #installation1}
-1. Go to [manage.windowsazure.com][5]
-2. Once the URL redirects, copy the tenant name from the URL. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
-3. Paste the Tenant Name in the form on the Azure setup tile <img src="/static/images/azure/tenant_name_form.png" style="width: 50%;display:block;display:block;"/>
-
-#### Creating the Web Application
-{: #installation2}
-
-1. Navigate to the “Active Directory” tab on the left-hand menu <img src="/static/images/azure/active_directory_icon.png" style="width: 25%;display:block;"/>
-2. Click on the Active Directory you want to monitor <img src="/static/images/azure/active_directory_name_click.png" style="width: 50%;display:block;"/>
-3. Click on "Applications" <img src="/static/images/azure/application_click.png" style="width: 50%;display:block;"/>
-4. Click "Add" <img src="/static/images/azure/add_application_icon.png" style="width: 50%;display:block;"/>
-5. Click "Add an application my organization is developing"
-6. Give it a name, i.e. Datadog Auth App
-7. Select “Web application and/or web api”
-8. Provide a sign-on URL and App ID URI
-	- Fill in any details for sign-on URL and App ID URI. These will NOT be used in any way and are simply required as part of the setup process.
-	- i.e. https://app.datadoghq.com	
-9. Click the check mark. You should be on a page that says "Your app has been added!"
-10. Click on "Configure" (Make sure you are on the page for the app, not the active directory) <img src="/static/images/azure/configure_click.png" style="width: 50%;display:block;"/>
-11. Scroll down to Client ID. Copy and paste the value into the form on the Azure setup tile <img src="/static/images/azure/client_id_form.png" style="width: 50%;display:block;display:block;"/>
-12. Scroll down to Keys and create a new key (1 or 2 years are both acceptable)
-	- Note: the client secret key will be shown after you save
-13. Scroll down to "Permissions To Other Applications"
-14. Click Add Application
-15. Select Windows Azure Service Management API and click the check mark on the bottom right of the screen
-16. Under Delegated Permissions, check off “Access Azure Service Management as organization users (preview)” <img src="/static/images/azure/app_permissions_dropdown.png" style="width: 50%;display:block;"/>
-17. Click "Save" at the bottom of the screen 
-18. Scroll back up to Keys, and copy and paste the generated Client Secret key into the form on the Azure setup tile <img src="/static/images/azure/client_secret_form.png" style="width: 50%;display:block;display:block;"/>
-19. Click "Install Integration" to complete the application creation process
-
-#####Giving Read Permissions to the Application
-{: #installation3}
 
 1. Navigate to [portal.azure.com][2]
-2. Navigate to “Subscriptions” on the left hand menu <img src="/static/images/azure/subscriptions_icon.png" style="width: 25%;display:block;"/>
-3. Click on the subscription you would like to monitor
-4. Click on the user icon <img src="/static/images/azure/user_button.png" style="width: 50%;display:block;"/>
-5. Click "Add" User <img src="/static/images/azure/add_user_button.png" style="width: 25%;display:block;"/>
-6. Select “Reader” as a role <img src="/static/images/azure/reader_icon.png" style="width: 25%;display:block;"/>
-7. Search/select for the name of the Application you just created (i.e. Datadog Auth App)
-8. Click Select
-9. Click OK
-10. Repeat this process for any other subscriptions you would like to monitor
-11. **Please note that Diagnostics must be enabled for ARM deployed VMs to collect metrics. <a href="#diagnostics">See the instructions below</a>**
+2. In the leftmost blade, select "Azure Active Directory"
+3. Under properties, copy the Directory ID Value
+
+    ![settings](/static/images/azure/Azure_tenant_name.png)
+
+4. Paste the ID under "Tenant Name" in the form on the Azure setup tile 
+
+    ![settings](/static/images/azure/tenant_name_form.png)
+
+##### Creating the Web Application
+{: #installation2}
+
+1. Navigate to the "App Registrations" tab within your Azure Active Directory.
+2. Press "Add"
+3. Enter a name and Sign-on URL for this app. 
+  * These will NOT be used in any way and are simply required as part of the setup process. 
+  * Leave Application "Type as Web app/ API"
+4. Press "Create"
+
+    ![settings](/static/images/azure/Azure_create_ad.png)
+
+5. Once it is created, select the App from the list of App Registrations
+6. Copy the "Application ID" and paste the value into "Client ID" in the form on the Azure setup tile
+    
+    ![settings](/static/images/azure/Azure_client_id.png)
+
+    ![settings](/static/images/azure/client_id_form.png)
+
+7. For the same app, go to "All settings"
+8. Go to "Keys"
+9. Enter a new Client Secret key and press Save
+  * Make sure to note when the key will expire!
+10. When the Secret Key is shown, copy and paste it in "Client Secret" in the form on the Azure setup tile
+
+    ![settings](/static/images/azure/Azure_client_secret.png)
+
+    ![settings](/static/images/azure/client_secret_form.png)
+
+11. Click "Install Integration" to complete the application creation process
+
+##### Giving Read Permissions to the Application
+{: #installation3}
+
+1. Navigate to “Subscriptions” on the left hand menu
+
+    ![settings](/static/images/azure/subscriptions_icon.png){:style="width:50%;"}
+
+2. Click on the subscription you would like to monitor
+3. Click on "Access control (IAM)" in the lefthand menu 
+
+    ![settings](/static/images/azure/access_control_button.png){:style="width:50%;"}
+
+4. Click "Add" 
+
+    ![settings](/static/images/azure/add_user_button.png){:style="width:50%;"}
+
+5. Select “Reader” as a role 
+
+    ![settings](/static/images/azure/reader_icon.png){:style="width:50%;"}
+
+6. Search/select for the name of the Application you just created (i.e. Datadog Auth)
+7. Click Select
+8. Click OK
+9. Repeat this process for any other subscriptions you would like to monitor
+10. **Please note that Diagnostics must be enabled for ARM deployed VMs to collect metrics. <a href="#diagnostics">See the instructions below</a>**
 
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
 
@@ -166,13 +196,16 @@ View the specific metrics we collect for each Azure service integration:
 Here are some common issues you might be seeing.
 
 #### I don't know my tenant name
-To locate your tenant name first log into the classic [Azure portal][5].
-After logging in, locate the settings page on the left side of the screen.
-![](/static/images/azure_tenent.png)
 
-The text in the red box shown in the screenshot above is your tenant name. Please only include text between parentheses.
+1. Navigate to [portal.azure.com][2]
+2. In the leftmost blade, select "Azure Active Directory"
+3. Under properties, it is the Directory ID
 
-Your tenant name is also available from the URL after navigating to the classic portal. It is the text in between (**not including**) the @ and # symbol <img src="/static/images/azure/azure_tenant_url.png" style="width: 75%;display:block;"/>
+    ![settings](/static/images/azure/Azure_tenant_name.png)
+
+Your tenant name is also available from the URL after navigating to the [classic portal][5]. It is the text in between (**not including**) the @ and # symbol
+
+![settings](/static/images/azure/azure_tenant_url.png)
 
 #### Unable to login
 If you have experienced an error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screenshot.
@@ -190,15 +223,15 @@ For other missing metrics, please reach out to [support@datadoghq.com][3].
 ##### Enable diagnostics
 {: #diagnostics}
 Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. To do this, first go to [Azure Portal][2] then follow the instructions below.
-![](/static/images/azure/azure_enable_diagnostics.png)
 
 After locating your VM:
 
-1. Click on All settings
-2. Click on Diagnostics
-3. Shift the status to on and select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
+1. Click on Diagnostics settings under the Monitoring section
+2. Shift the status to On 
+3. Select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
 4. Click Save to save your changes
 
+    ![settings](/static/images/azure/azure_enable_diagnostics.png)
 
 
    [1]: https://app.datadoghq.com/account/settings#integrations/azure

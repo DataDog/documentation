@@ -114,7 +114,7 @@ kind: documentation
         </p>
 
         <p>
-        An error indicates that the service did not successfully handle your request. In addition to the status code, the response may contain a JSON object with an errors array containing more detailed error messages.
+        An error indicates that the service did not successfully handle your request. In addition to the status code, the response may contain a JSON object with an errors array containing more detailed error messages. Note: When using libraries, some errors may throw exceptions rather than return JSON objects.
         </p>
 
         <p>
@@ -605,9 +605,9 @@ kind: documentation
 
               <li><code>no_data_timeframe</code> the number of minutes before a
               monitor will notify when data stops reporting. Must be at least
-              2x the monitor timeframe for metric alerts or 2 minutes for
+              1x the monitor timeframe for metric alerts or 2 minutes for
               service checks.
-              <p>Default: <code>2x timeframe for metric alerts, 2 minutes for
+              <p>Default: <code>1x timeframe for metric alerts, 2 minutes for
               service checks</code></p></li>
 
               <li><code>timeout_h</code> the number of hours of the monitor not
@@ -710,9 +710,14 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'group_states', "A comma-separated string indicating
-          what, if any, group states to include. Choose from one or more from
-          'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
+          <%= argument 'group_states', "If this argument is
+          set, the returned data will include additional information (if
+          available) regarding the specified group states, including the
+          last notification timestamp, last resolution timestamp and
+          details about the last time the monitor was triggered. The
+          argument should include a string list indicating what, if any,
+          group states to include. Choose one or more from 'all', 'alert',
+          'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
         </ul>
       </div>
@@ -791,9 +796,14 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'group_states', "A string list indicating
-          what, if any, group states to include. Choose from one or more from
-          'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
+          <%= argument 'group_states', "If this argument is
+          set, the returned data will include additional information (if
+          available) regarding the specified group states, including the
+          last notification timestamp, last resolution timestamp and
+          details about the last time the monitor was triggered. The
+          argument should include a string list indicating what, if any,
+          group states to include. Choose one or more from 'all', 'alert',
+          'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
           <%= argument 'name', "A string to filter monitors by name",
           :default => "None" %>

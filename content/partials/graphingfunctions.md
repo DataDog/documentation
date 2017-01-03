@@ -33,12 +33,13 @@ Function               | Category      | Description
 `robust_trend()`       | Regression    | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
 `trend_line()`         | Regression    | fit an ordinary least squares regression line through the metric values
 `piecewise_constant()` | Regression    | approximate the metric with a piecewise function composed of constant-valued segments
+`anomalies()`          | Algorithms    | overlay a gray band showing the expected behavior of a series based on past behavior; see our [guide to anomaly detection](/guides/anomalies)
 `outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
 {:.table}
 
 **`.as_count()` & `.as_rate()`**
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/2014/05/visualize-statsd-metrics-counts-graphing/).
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
 
 **Rollup**
 
