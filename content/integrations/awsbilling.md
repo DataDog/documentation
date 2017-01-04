@@ -15,8 +15,9 @@ Enable this integration to see in Datadog all your Billing metrics.
 
 # Installation
 
-The only requirement for this integration is the permission `budgets:ViewBudget`.
+In order to see AWS Budget metrics, the requirement for this integration is the permission `budgets:ViewBudget`.
 
+Note: AWS Budget metrics can only be collected from the AWS master account.
 
 # Metrics
 
