@@ -19,7 +19,7 @@ Outlier Detection is an algorithmic feature that allows you to detect when some 
 
 ## How to Use Outlier Detection on Your Data
 
-We’ve added a query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
+The `outliers` query function, when applied to your query, will return the usual results but with outlier series marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
@@ -33,17 +33,17 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
-To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding the `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
+To set up an outlier detection graph for your data add a metric to the graph showing all series in the groups. Then apply the outlier detection algorithm by adding the `outliers` function on your data. After applying the function, any outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
-To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
+First create a new timeseries graph on your dashboard with your chosen metric. 
 
 ![](/static/images/outliers/outliers-dash-choose-metrics-updated.png)
 
-Now, click on the + icon on the right side of the metrics line. Choose "Algorithms" from the function categories, then one of the four outlier algorithms:
+To enable outlier detection, click on the + icon on the right side of the metrics line. Choose "Algorithms" from the function categories, then one of the four outlier algorithms:
 
 <img src="/static/images/outliers/outliers-algorithm-selector.png" style="width: 75%;" />
 
-This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
+This will apply the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
 ![](/static/images/outliers/outliers-algorithm-annotated-newer.png)
 
@@ -57,7 +57,7 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 ![](/static/images/outliers/outliers-alert-snapshot.png)
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for our metric:
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for the metric:
 
 ![](/static/images/outliers/outliers-new-monitor-define-metric.png)
 
@@ -65,7 +65,7 @@ You will select the metric and scope as with other metric-based monitors.
 
 In the alert conditions you will select the grouping and timeframe.
 
-You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with a tolerance value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
+Then select an algorithm and parameter values to use for outlier detection. 
 
 ![](/static/images/outliers/outliers-newer-monitor-set-conditions.png)
 
