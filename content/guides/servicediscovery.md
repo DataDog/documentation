@@ -3,57 +3,96 @@ title: Guide to Service Discovery with Docker
 kind: guide
 listorder: 10
 ---
-Docker is being adopted rapidly, and for good reason: it simplifies many aspects of running a service in production. But Docker-powered services typically run many more containers than traditional services run hosts, so monitoring is much more complex. Now with platforms like Kubernetes and ECS orchestrating your containers, you may not even know on what host your containers are running—which makes monitoring containers and the images they run even more complex.
 
-How can you monitor a service which is always hopping from one host to another?
+Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/) and platforms like Docker Swarm, Kubernetes and Amazon's ECS make running services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you monitor a service which is dynamically shifting from one host to another?
 
-Datadog automatically keeps track of what is running where, thanks to its Service Discovery feature.
-
-It allows you to define configuration templates for specific images in a distributed configuration store on top of the Datadog Agent which will use them to dynamically reconfigure its checks when your containers ecosystem changes. Whether you use Kubernetes, Amazon ECS, or Docker Swarm to manage your Docker containers, you can now monitor images, such as NGINX or Redis, even if containers running them stopped or new ones started, without interruption or having to restart the Agent.
+Datadog automatically keeps track of what is running where, thanks to its Service Discovery feature. Service Discovery allows you to define configuration templates that will be applied automatically to monitor your containers.
 
 ## How it works
 
+As we consider [the problem of monitoring Docker](https://www.datadoghq.com/blog/the-docker-monitoring-problem/), one strategy is to move from a host-centric model to a service-oriented model. To do this, we'll run the Datadog Agent as a containerized service, rather than using Datadog Agents installed across all of our hosts.
+
 The Service Discovery feature watches for Docker events like when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template for this image, and automatically sets up its checks.
 
-Configuration templates are defined in a single key-value store per cluster. We currently support etcd and Consul.
-
-If no configuration template is defined in the store for an image, the Agent will try to auto-configure the check by itself. Currently, auto-configuration works for Apache, Consul, Couch, Couchbase, Elasticsearch, etcd, Kyoto Tycoon, Memcached, Redis and Riak.
+Configuration templates can be defined by simple template files or as single key-value stores using etcd or Consul.
 
 ## How to set it up
 
-To use Service Discovery, you simply need to define the configuration templates for the images you want to monitor, in a key-value store on top of the Agent.
+To use Service Discovery, you'll first need to run the Datadog Agent as a service.
 
-Here is the structure of a configuration template:
+In Docker Swarm, you can do this by running the following command on one of your manager nodes (using your [API key](https://app.datadoghq.com/account/settings#api)):
 
-    /datadog/
-      check_configs/
-        docker_image_0/
-          - check_names: ["check_name_0"]
-          - init_configs: [{init_config}]
-          - instances: [{instance_config}]
-        docker_image_1/
-          - check_names: ["check_name_1"]
-          - init_configs: [{init_config}]
-          - instances: [{instance_config}]
-        docker_image_2/
-          - check_names: ["check_name_2"]
-          - init_configs: [{init_config}]
-          - instances: [{instance_config}]
-        ...
+    docker service create \
+      --name dd-agent \
+      --mode global \
+      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+      --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+      --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+      -e API_KEY=<YOUR API KEY> \
+      -e SD_BACKEND=docker \
+      datadog/docker-dd-agent:latest
 
+For Kubernetes, you can follow our [Kubernetes Integration](http://docs.datadoghq.com/integrations/kubernetes/) to create a DaemonSet. We also have [Amazon ECS integration instructions](http://docs.datadoghq.com/integrations/ecs/) available.
 
-You also need to configure the Datadog Agents of the environment to enable service discovery using this store as a backend. To do so, edit the datadog.conf file to modify these options as needed:
+By default, the Datadog Agent includes Service Discovery support for:
 
-    # For now only docker is supported so you just need to un-comment this line.
-    # service_discovery_backend: docker
-    #
+- Apache Web Server
+- Consul
+- CouchDB
+- Couchbase
+- Elasticsearch
+- etcd
+- Kube State Metrics
+- Kyoto Tycoon
+- Memcached
+- Redis
+- Riak
+
+These are provided by the configuration templates in the [Datadog Agent `conf.d/auto_conf` directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf).
+
+To add Service Discovery for your custom container images, you simply need to add a configuration template to the `conf.d/auto_conf` directory.
+
+## Configuration templates
+
+The configuration templates in [the `conf.d/auto_conf` directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf) are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
+
+### Template variables
+
+Because orchestration tools like Docker Swarm and Kubernetes automatically run your containers on arbitrary hosts, the host address and port where your service reports metrics will be dynamic. To account for this in your configuration template, you can use the variables `%%host%%` and `%%port%%`.
+
+ When a list of values is expected for the variable and selecting a specific one is mandatory, you can specify the value from the list by appending an underscore followed by an index or key. For example `%%host_0%%` or `%%port_4%%`. Note that indexes begin at 0 and if no index is provided, the last value in the value list ordered increasingly will be used.
+
+Let's take the example of the port variable: a RabbitMQ container with the management module enabled has 6 exposed ports by default. The list of ports as seen by the agent is: `[4369, 5671, 5672, 15671, 15672, 25672]`. **Notice the order. The Agent always sorts values in ascending order.**
+
+The default management port for the rabbitmq image is `15672` with index 4 in the list (starting from 0), so the template variable needs to be `%%port_4%%`.
+
+As of version `5.8.3` of the Datadog Agent, you can also use keys as a suffix when a variable contains a dictionary. This is particularly useful to select an IP address for a container that has several networks attached.
+
+As an example if the rabbitmq container mentioned above is available over two networks `bridge` and `swarm`, using `%%host_swarm%%` will pick the IP address from the swarm network.
+Note that for the `host` variable if several networks are found and no key is passed the agent attempts to use the default `bridge` network.
+
+## Configuration templates with key-value stores
+
+Service Discovery using configuration templates in the Datadog Agent  `conf.d/auto_conf` directory is a straightforward process, though managing your templates and copying them into the Datadog Agent container (or building your own Datadog Agent container to include custom configuration templates) can make scaling this process difficult.
+
+To make configuration template management easier, you can use etcd or Consul, two popular distributed key-value stores, as a repository for your templates.
+
+First you'll need to configure etcd or Consul as your Service Discovery backend by either updating the `datadog.conf` file or passing the settings as environment variables when starting the Datadog Agent service.
+
+### Configuring etcd or Consul in `datadog.conf`
+
+In the `dataodg.conf` file, you can enable etcd or Consul as a service discovery configuration backend by uncommenting and configuring the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` settings. If you are using Consul, you will also need to uncomment and set the `consul_token`.
+
+    # For now only Docker is supported so you just need to un-comment this line.
+    service_discovery_backend: docker
+
     # Define which key/value store must be used to look for configuration templates.
     # Default is etcd. Consul is also supported.
-    # sd_config_backend: etcd
+    sd_config_backend: etcd
 
     # Settings for connecting to the backend. These are the default, edit them if you run a different config.
-    # sd_backend_host: 127.0.0.1
-    # sd_backend_port: 4001
+    sd_backend_host: 127.0.0.1
+    sd_backend_port: 4001
 
     # By default, the agent will look for the configuration templates under the
     # `/datadog/check_configs` key in the back-end.
@@ -63,169 +102,101 @@ You also need to configure the Datadog Agents of the environment to enable servi
     # If you Consul store requires token authentication for service discovery, you can define that token here.
     # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 
+### Configuring etcd or Consul using environment variables
 
-### Running and configuring the Agent in a container
+To pass the settings listed above as environment variables when starting the Datadog Agent in Docker Swarm, you would run the command:
 
-The above settings can be passed to the dd-agent container through the following environment variables:
+    docker service create \
+      --name dd-agent \
+      --mode global \
+      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+      --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+      --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+      -e API_KEY=<YOUR API KEY> \
+      -e SD_BACKEND=docker \
+      -e SD_CONFIG_BACKEND=etcd \
+      -e SD_BACKEND_HOST=127.0.0.1 \
+      -e SD_BACKEND_PORT=4001 \
+      datadog/docker-dd-agent:latest
 
-    SD_BACKEND <-> service_discovery_backend
-    SD_CONFIG_BACKEND <-> sd_config_backend
-    SD_BACKEND_HOST <-> sd_backend_host
-    SD_BACKEND_PORT <-> sd_backend_port
-    SD_TEMPLATE_DIR <-> sd_template_dir
+### Template structure in key-value stores
 
-examples:
+After your Datadog Agent service has been configured to use your Service Discovery configuration backend, you will need to store your configuration templates in the structure:
 
-    docker run -d --name dd-agent \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-     -e API_KEY=[YOUR_API_KEY] -e SD_CONFIG_BACKEND=etcd \
-     -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
-     -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
-     datadog/docker-dd-agent:latest
+    /datadog/
+      check_configs/
+        docker_image_0/
+          - check_names: ["check_name_0"]
+          - init_configs: [{init_config}]
+          - instances: [{instance_config}]
+        docker_image_1/
+          - check_names: ["check_name_1a", "check_name_1b"]
+          - init_configs: [{init_config_1a}, {init_config_1b}]
+          - instances: [{instance_config_1a}, {instance_config_1b}]
+        ...
 
-or with the Kubernetes check preconfigured:
+Note that in the structure above, you may have multiple checks for a single container. For example you may run a Java service that provides an HTTP API, using the HTTP check and the JMX integration at the same time. To declare that in templates, simply add elements to the `check_names`, `init_configs`, and `instances lists`. These elements will be matched together based on their index in their respective lists.
 
-    docker run -d --name dd-agent \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-     -e API_KEY=[YOUR_API_KEY] -e KUBERNETES=true \
-     -e SD_CONFIG_BACKEND=etcd \
-     -e SD_BACKEND=docker -e SD_BACKEND_HOST=[YOUR_ETCD_IP] \
-     -e SD_BACKEND_PORT=[YOUR_ETCD_PORT] \
-     datadog/docker-dd-agent:latest
+### Example: Apache Web Server
 
+By default, the Datadog Agent supports Service Discovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
 
-### Example: setting up NGINX monitoring
+    docker_images:
+      - httpd
 
-The default NGINX image doesn't have the stub_status_module enabled, so we first need to build an image (named `custom-nginx` here) that configures the /nginx_status endpoint.
+    init_config:
 
-Setup a configuration template in the form of a few keys in a key/value store the Agent can reach. Here is an example using etcd:
+    instances:
+      - apache_status_url: http://%%host%%/server-status?auto
 
-    ./etcdctl mkdir /datadog/check_configs/custom-nginx
-    ./etcdctl set /datadog/check_configs/custom-nginx/check_names '["nginx"]'
-    ./etcdctl set /datadog/check_configs/custom-nginx/init_configs '[{}]'
-    ./etcdctl set /datadog/check_configs/custom-nginx/instances '[{"nginx_status_url": "http://%%host%%/nginx_status/", "tags": ["env:production"]}]'
+To store the same configuration template in etcd you could run the following commands:
 
-or with curl:
-
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names -d value='["nginx"]'
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs -d value="[{}]"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances -d value='[{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": ["env:production"]}]'
-
-
-If the Agent is configured to use consul instead:
-
-    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/check_names -XPUT -d '["nginx"]'
-    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/init_configs -XPUT -d '[{}]'
-    curl -L http://consul_ip:consul_port/v1/kv/datadog/check_configs/custom-nginx/instances -XPUT -d '[{"nginx_status_url": "http://%%host%%/nginx_status/", "tags": ["env:production"]}]'
-
-*Notice the format of template variables: `%%host%%`. For now host and port are supported on every platform. Kubernetes users can also use the `tags` variable that collects relevant tags like the pod name and node name from the Kubernetes API. Support for more variables and platforms is planned, and feature requests are welcome.*
-
-Now every Agent will be able to detect an nginx instance running on its host and setup a check for it automatically. No need to restart the Agent every time the container starts or stops, and no other configuration file to modify.
-
-
-### Template variables
-
-To automate the resolution of parameters like the host IP address or its port, the agent uses template variables in this format: `%%variable%%`.
-
-This format can be suffixed with an index when a list of values is expected for the variable, and selecting a specific one is mandatory. It has to look like this: `%%variable_index%%`. If no index is provided, the last value in the value list ordered increasingly will be used.
-
-Let's take the example of the port variable: a rabbitmq container with the management module enabled has 6 exposed ports by default (the docker image with the management module enabled by default is rabbitmq:3-management). The list of ports as seen by the agent is: `[4369, 5671, 5672, 15671, 15672, 25672]`. **Notice the order. The Agent always sorts values in ascending order.**
-
-The default management port for the rabbitmq image is `15672` with index 4 in the list (starting from 0), so the template variable needs to look like `%%port_4%%`.
-
-It is also possible starting from version `5.8.3` of the agent to use keys as a suffix in case a dictionary is expected. This is particularly useful to select an IP address for a container that has several networks attached.
-The format is the same: `%%variable_key%%`.
-
-As an example if the rabbitmq container mentioned above is available over two networks `bridge` and `swarm`, using `%%host_swarm%%` will pick the IP address from the swarm network.
-Note that for the `host` variable if several networks are found and no key is passed the agent attempts to use the default `bridge` network.
-
-
-### Configuring multiple checks for the same image
-
-Sometimes enabling several checks on a single container is needed. For instance if you run a Java service that provides an HTTP API, using the HTTP check and the JMX integration at the same time makes perfect sense. To declare that in templates, simply add elements to the `check_names`, `init_configs`, and `instances lists`. These elements will be matched together based on their index in their respective lists.
-
-#### Example
-
-In the previous example of the custom nginx image, adding http_check would look like this:
-
-    curl -L -X PUT \
-      http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names \
-      -d value='["nginx", "http_check"]'
-    curl -L -X PUT \
-      http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs \
-      -d value="[{}, {}]"
-    curl -L -X PUT \
-        http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances \
-        -d value='[ \
-        {"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": ["env:production"]}, \
-        {"name": "Test service", "url": "http://%25%25host%25%25/test_endpoint", "timeout": 1}]'
-
-
-### Monitoring your custom container
-
-Service discovery works with any image—one important note though is that for the `%%port%%` variable to be interpolated, the current version needs the container to expose the targeted port. See the NGINX Dockerfile for reference.
-
+    etcdctl mkdir /datadog/check_configs/httpd
+    etcdctl set /datadog/check_configs/httpd/check_names '["apache"]'
+    etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
+    etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 
 ### Image name format in the configuration store
 
-Before version `5.8.3` of the agent it was required to truncate the image name to its minimum. i.e. for the image `quay.io/coreos/etcd:latest` the key in the configuration store needed to be `datadog/check_configs/etcd/...`
+Before version `5.8.3` of the Datadog Agent it was required to truncate the image name to its minimum. e.g. for the Docker image `quay.io/coreos/etcd:latest` the key in the configuration store needed to be `datadog/check_configs/etcd/...`
 
-To make configuration more precise we now use the complete image identifier in the key. So the agent will look in `datadog/check_configs/quay.io/coreos/etcd:latest/...`, and fallback to the old format if no template was found to ensure backward compatibility.
+To make configuration more precise we now use the complete container image identifier in the key. So the agent will look in `datadog/check_configs/quay.io/coreos/etcd:latest/...`, and fallback to the old format if no template was found to ensure backward compatibility.
 
 
-#### Using Docker label to specify the template path
+### Using Docker label to specify the template path
 
 In case you need to match different templates with containers running the same image, it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
 
+## Configuration templates with Kubernetes annotations
 
-### Using configuration files instead of a configuration store
+If you're using Kubernetes to orchestrate your containers, you can use Kubernetes pod annotations to store your configuration templates. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
 
-If running a configuration store is not possible in your environment but shipping configuration files with the agent is, you can use the [conf.d/auto_conf folder](https://github.com/DataDog/dd-agent/tree/master/conf.d/auto_conf) to store configuration templates. The format is simple and looks like the typical YAML configuration file for checks. One additional field, `docker_images`, is required and identifies the container image(s) to which this configuration should be applied.
-Use existing files in this folder as an example.
-If you use this instead of a K/V store you still need to uncomment `service_discovery_backend: docker` in `datadog.conf`, but `sd_config_backend`, `sd_backend_host` and `sd_backend_port` must be omitted.
+    annotations:
+      service-discovery.datadoghq.com.<Kubernetes Container Name>.check_names: '["check_name_0"]'
+      service-discovery.datadoghq.com.<Kubernetes Container Name>.init_configs: '[{init_config}]'
+      service-discovery.datadoghq.com.<Kubernetes Container Name>.instances: '[{instance_config}]'
 
+Also similar to the key-value store configuration above, you include multiple checks for a container within in the pod. Each element from `check_names`, `init_configs`, and `instances` will be matched together based on their index. In pods with multiple containers, you can simply include additional annotations using the corresponding Kubernetes container name.
 
-### Kubernetes users
+### Example: Apache Web Server
 
-Service discovery is particularly useful for container platforms like Kubernetes where by default the user doesn't choose the node on which a container will be scheduled. With service discovery you can simply deploy the Agent container with a DaemonSet and declare your configuration templates for all the containers you plan to launch in the same cluster. To deploy the Agent, simply follow the instruction from the install page for Kubernetes.
+Here's an example of the Apache YAML file that would correspond to the configuration template [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
 
-Additionally, installing an etcd cluster on Kubernetes can be done fairly easily. The most important part is to setup a service that is accessible from the Datadog Agent. Instructions to install a simple, 3-node cluster can be found in the etcd repository.
-
-Once the cluster is running, simply use the K/V store service IP address and port as `sd_backend_host` and `sd_backend_port` in datadog.conf (passing the corresponding environment variables to the container makes this easier, see the mapping above).
-
-Then write your configuration templates, and let the Agent detect your running pods and take care of re-configuring checks.
-
-
-#### Examples
-
-Following is an example of how to setup templates for an NGINX, PostgreSQL stack. The example will use etcd as the configuration store.
-
-#### NGINX
-
-The default NGINX image doesn't have a /nginx_status/ endpoint enabled, so the first step is to enable that as described in the Datadog NGINX tile (click on "Configuration") in a new image which we will name custom-nginx in this example. Once the image is named, the configuration template can be defined this way:
-
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/check_names -d value="nginx"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/init_configs -d value="{}"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-nginx/instances -d value='{"nginx_status_url": "http://%25%25host%25%25/nginx_status/", "tags": "%25%25tags%25%25"}'
-
-The %%tags%% variable will add metadata about the replication controller, the pod name, etc.
-
-#### PostgreSQL
-
-Next comes the PostgreSQL configuration. Steps to connect Postgres to Datadog are as usual described in the integration tile. To ease the deployment process we'll assume these steps are automated in a script that is executed in a Dockerfile based on the official postgres Docker image, resulting in a new custom-postgres image.
-
-The configuration template is thus defined like this:
-
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/check_names -d value="postgres"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/init_configs -d value="{}"
-    curl -L -X PUT http://etcd_ip:etcd_port/v2/keys/datadog/check_configs/custom-postgres/instances -d value='{"host": "%25%25host%25%25", "port": "%25%25port%25%25", "tags": ["%25%25tags%25%25", env:production]}'
-
-The postgres image only exposes the default port, so appending an index to the port variable is unnecessary.
-
-Looking at the `tags` parameter, you may also notice that it is possible to mix template variables and constant value to achieve mixed tagging.
-
-Now the Agent can be deployed following the Kubernetes instructions and passing the right environment variables to enable service discovery as covered earlier. And whenever a Postgres or NGINX container is deployed, agents will detect them and update the check configurations accordingly.
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: apache
+      annotations:
+        service-discovery.datadoghq.com.apache.check_names: '["apache"]'
+        service-discovery.datadoghq.com.apache.init_configs: '[{}]'
+        service-discovery.datadoghq.com.apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
+      labels:
+        name: apache
+    spec:
+      containers:
+        - name: apache
+          image: httpd
+          ports:
+            - containerPort: 80

@@ -9,7 +9,7 @@ options = {
 initialize(**options)
 
 
-start_time = time.time()
-end_time = time.time() + 100
+end_time = time.time()
+start_time = end_time - 100
 
 api.Event.query(start=start_time, end=end_time, priority="normal", tags=["application:web"])

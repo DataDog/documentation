@@ -18,7 +18,7 @@ All core integrations will continue to be installed with the agent install. You 
 ### Installing on yum-based systems
 
 1.  Run `yum update` to ensure your system has access to the latest packages.
-1.  Run `yum install dd-check-integration`, replacing `integration` with the name of the chosen integration. So if you are installing `mysql`, then run `apt-get install dd-check-mysql`.  
+1.  Run `yum install dd-check-integration`, replacing `integration` with the name of the chosen integration. So if you are installing `mysql`, then run `yum install dd-check-mysql`.  
 
 ### Installing on apt-get-based systems
 

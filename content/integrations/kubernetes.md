@@ -65,7 +65,7 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       # to keep them unique.
       # When true, we aggregate data based on container image.
       # Defaults to false
-      #
+
       # use_histogram: True
       #
       # kubelet_port: 10255
@@ -158,6 +158,8 @@ If the agent is deployed you will see similar output to the text below, where de
 # Limitations
 
 Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker/).
+
+Additionally please note that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).
 
 # Metrics
 
