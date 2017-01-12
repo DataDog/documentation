@@ -41,7 +41,7 @@ sidebar:
 ### 2. [メトリクス][2]の収集と送信!
 {: .big_number.alert.alert-success}
 
-### 3. メトリクスの[可視化][3]、そして[監視][10]!
+### 3. メトリクスの[可視化][3]、そして[アラート設定][10]!
 {: .big_number.alert.alert-info}
 
 
