@@ -41,7 +41,7 @@ sidebar:
 ### 2. [メトリクス][2]の収集と送信!
 {: .big_number.alert.alert-success}
 
-### 3. メトリクスの[可視化][3]
+### 3. メトリクスの[可視化][3]、そして[監視][10]!
 {: .big_number.alert.alert-info}
 
 
@@ -84,3 +84,4 @@ GitHubの[issues][9]でお知らせください。メッセージ欄の内容を
 [7]: /help/#irc
 [8]: https://help.datadoghq.com/hc/en-us/requests/new
 [9]: https://github.com/DataDog/documentation/issues
+[10]: http://docs.datadoghq.com/ja/guides/monitoring/
