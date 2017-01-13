@@ -87,7 +87,7 @@ The next figure shows how the algorithms react to an hour-long anomaly. _Robust_
 
 The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-insensitive, while _Agile_ and _Adaptive_ are not. In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
 
-<img src="/static/images/anomalies/alg_comparison_4.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/anomalies/alg_comparison_scale.png" style="width:100%; border:1px solid #777777"/>
 
 Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
