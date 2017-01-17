@@ -568,7 +568,7 @@ kind: documentation
               :default => "dynamic, based on query" %>
           <%= argument 'tags', "A list of tags to associate with your monitor.
               When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags.
-              These tags can also help you filter monitors on the <a href='https://app.datadoghq.com/monitors#manage' target='_blank'>manage monitors</a> page of the UI, however they are not visible or editable via the UI.",
+              Tags using the \"service\" key (e.g. <code>service:my-app</code>) will be visible in the corresponding \"service\" field when editing the monitor in the Datadog UI. Tags without the \"service\" key will only be available via the API and will not be visible or editable in the Datadog UI.",
               :default => "empty list" %>
 
           <li>
@@ -813,9 +813,7 @@ kind: documentation
           by scope",
           :default => "None" %>
           <%= argument 'monitor_tags', "A comma separated list indicating
-          what service and/or custom tags (set using the <code>tags</code>
-          argument when creating or editing a monitor via the API), if any,
-          should be used to filter the list of monitors",
+          what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
         </ul>
       </div>
