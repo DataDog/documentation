@@ -4,7 +4,8 @@ translation_status: complete
 language: ja
 title: メールによるイベント情報の送信
 kind: guide
-listorder: 15
+listorder: 19
+list2guide: true
 sidebar:
   nav:
     - header: メールによるイベント送情のガイド

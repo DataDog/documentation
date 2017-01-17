@@ -1,7 +1,9 @@
 ---
 title: Anomaly Detection
 kind: guide
-listorder: 16
+language: ja
+listorder: 21
+list2guide: true
 beta: false
 ---
 
@@ -87,7 +89,7 @@ The next figure shows how the algorithms react to an hour-long anomaly. _Robust_
 
 In the figure below, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-<img src="/static/images/anomalies/alg_comparison_4.png" style="width:100%; border:1px solid #777777"/> 
+<img src="/static/images/anomalies/alg_comparison_4.png" style="width:100%; border:1px solid #777777"/>
 
 ## Frequently Asked Questions
 

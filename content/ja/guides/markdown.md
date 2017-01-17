@@ -4,7 +4,8 @@ translation_status: original
 language: ja
 title: Using markdown in Datadog events
 kind: guide
-listorder: 10
+listorder: 14
+list2guide: true
 ---
 
 

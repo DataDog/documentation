@@ -4,6 +4,8 @@ translation_status: original
 language: ja
 title: Correlating Events with Metrics
 kind: guide
+listorder: 6
+list2guide: true
 ---
 
 

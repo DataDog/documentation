@@ -4,8 +4,8 @@ translation_status: complete
 language: ja
 title: Azure WindowsへDatadog Agentのインストール
 kind: guide
-listorder: 9
-
+listorder: 12
+list2guide: true
 ---
 
 <!-- This guide assumes you are deploying an Azure Cloud Service.

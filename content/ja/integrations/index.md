@@ -9,7 +9,7 @@ sidebar:
 #    - text: Datadog Agent 入門
 #      href: "/ja/guides/basic_agent_usage/"
 #    - text: Datadog が提供するサービスの概要
-#      href: "/ja/overview/"
+#      href: "/ja/guides/overview/"
 #    - text: Datadog へのメトリクスの送信
 #      href: "/ja/guides/metrics/"
 #    - text: Datadog Agent によるログの解析方法

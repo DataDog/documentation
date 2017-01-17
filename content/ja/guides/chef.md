@@ -4,7 +4,8 @@ translation_status: complete
 language: ja
 title: Deploying the Agent with Chef
 kind: guide
-listorder: 8
+listorder: 11
+list2guide: true
 sidebar:
   nav:
     - header: Guide to Chef

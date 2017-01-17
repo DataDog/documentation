@@ -20,12 +20,12 @@ this layout provides a sidebar and main column.
                 <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
               </form>
             </li>
-            <% end %>
+          <% end %>
             <%=show_table_of_contents%>
-              <li class="nav-header"><%= @item["menu_guides"] %> </li>
+              <li class="nav-header"><%= @item["menu_guides"] %></li>
               <% this_guide_items = @item["language"] != "ja" ? $guide_items : $ja_guide_items %>
-            <% this_guide_items.each do |i| %>
-                  <li><%= link_to i[:title], i.path %></li>
+              <% this_guide_items.each do |i| %>
+                <li><%= link_to i[:title], i.path %></li>
             <% end %>
           </ul>
         &nbsp;

@@ -1,10 +1,11 @@
 ---
 last_modified: 2015/11/16
-translation_status: original
+translation_status:
 language: ja
 title: Guide to Tagging
 kind: guide
-listorder: 12
+listorder: 16
+list2guide: true
 ---
 
 ## Overview

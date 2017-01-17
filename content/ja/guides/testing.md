@@ -1,7 +1,10 @@
 ---
+translation_status:
 title: Testing Integrations
 kind: guide
-listorder: 6
+language: ja
+listorder: 10
+list2guide: true
 autotocdepth: 2
 ---
 <style>

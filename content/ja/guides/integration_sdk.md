@@ -1,8 +1,11 @@
 ---
 title: Creating New Integrations
-kind: guide
 autotocdepth: 2
-listorder: 3
+kind: guide
+listorder: 4
+language: ja
+list2guide: true
+translation_status:
 ---
 <!-- Additional styling to help file name headers stand out -->
 <style>h5 code{font-size:16px;display:inline-block;margin-top:20px;}</style>

@@ -4,7 +4,8 @@ translation_status: complete
 language: ja
 title: Agent Checkの書き方
 kind: guide
-listorder: 6
+listorder: 9
+list2guide: true
 sidebar:
   nav:
     - header: Agent Checkのガイド
