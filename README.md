@@ -159,6 +159,7 @@ The troubleshooting section should include anything that answers a question a us
 Create a markdown file under content/guides. Add the following front matter at the top of the file:
 
 For Englsih contents:
+
     ---
     title: <guide title>
     kind: guide
@@ -168,6 +169,7 @@ For Englsih contents:
 Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
 For Japanese contents:
+
     ---
     title: <guide title>
     kind: guide
@@ -180,9 +182,11 @@ For Japanese contents:
 Use translatin_status to display status messages.
 
 [original]
+
 アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。
 
 [progress]
+
 アクセスいただきありがとうございます。こちらのページは現在翻訳を進めています。完全な翻訳には、もうしばらくお待ちください。皆様のご理解のほどよろしくお願いいたします。
 
 
