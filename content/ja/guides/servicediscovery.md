@@ -1,5 +1,5 @@
 ---
-translation_status:
+translation_status: original
 title: Guide to Service Discovery with Docker
 language: ja
 kind: guide

@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/11/16
-translation_status:
+translation_status: original
 language: ja
 title: Guide to Tagging
 kind: guide

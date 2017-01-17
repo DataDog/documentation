@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/04/02
-translation_status: complete
+translation_status: original
 language: ja
 title: Deploying the Agent with Chef
 kind: guide

@@ -1,5 +1,5 @@
 ---
-translation_status:
+translation_status: original
 title: Testing Integrations
 kind: guide
 language: ja

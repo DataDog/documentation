@@ -34,6 +34,16 @@ this layout provides a sidebar and main column.
         <% end %>
         <!-- MAIN -->
         <div class="col-xs-12 col-sm-9 col-md-9 main">
+　　　　　　<% if @item.identifier.match("/ja/") && @item[:translation_status]== 'original'%>
+          <div class="alert alert-warning">
+            アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。
+          </div>
+          <% end %>
+          <% if @item.identifier.match("/ja/") && @item[:translation_status]== 'progress'%>
+          <div class="alert alert-warning">
+            アクセスいただきありがとうございます。こちらのページは現在翻訳を進めています。完全な翻訳には、もうしばらくお待ちください。皆様のご理解のほどよろしくお願いいたします。
+          </dev>
+          <% end %>
           <!-- PAGE TITLE -->
           <% if !@item.identifier.match("/api/") %>
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
