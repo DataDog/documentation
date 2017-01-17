@@ -91,7 +91,7 @@ The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-
 
 Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-<img src="/static/images/anomalies/alg_comparison_4.png" style="width:100%; border:1px solid #777777"/>
+<img src="/static/images/anomalies/alg_comparison_new_metric.png" style="width:100%; border:1px solid #777777"/>
 
 
 ## Frequently Asked Questions
@@ -134,7 +134,7 @@ Note that setting the window size to X minutes doesn't require an anomaly to las
 ### Why am I getting "No Data" for an Anomaly Alert?
 ### How much history do the algorithms require?
 
-All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has at least two weeks of history. _Adaptive_ will start working after it has at least 2 hours worth of history.
+All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has at least two weeks of history. _Adaptive_ will start working after it has at least two hours worth of history.
 
 ### Why does an anomaly "disappear" when I zoom in?
 
