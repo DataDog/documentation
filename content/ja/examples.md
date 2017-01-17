@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/03/31
-translation_status: translated
+translation_status: complete
 language: ja
 title: サンプルコード
 kind: documentation
