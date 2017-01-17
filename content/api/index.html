@@ -2243,7 +2243,7 @@ kind: documentation
           <li>Using the application key instead of API key</li>
           <li>Events are succeeding, but because success events are low priority, they don't show up in the event stream until it is switched to priority 'all'</li>
         </ul>
-        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date</code>
         <br>
         This will output the current system’s date, and then make a request to our endpoint and grab
                the date on our end. If these are more than a few minutes apart,

@@ -174,9 +174,9 @@ For example, if a container has this label configured as `com.datadoghq.sd.check
 If you're using Kubernetes to orchestrate your containers, you can use Kubernetes pod annotations to store your configuration templates. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
 
     annotations:
-      service-discovery.datadoghq.com.<Kubernetes Container Name>.check_names: '["check_name_0"]'
-      service-discovery.datadoghq.com.<Kubernetes Container Name>.init_configs: '[{init_config}]'
-      service-discovery.datadoghq.com.<Kubernetes Container Name>.instances: '[{instance_config}]'
+      service-discovery.datadoghq.com/<Kubernetes Container Name>.check_names: '["check_name_0"]'
+      service-discovery.datadoghq.com/<Kubernetes Container Name>.init_configs: '[{init_config}]'
+      service-discovery.datadoghq.com/<Kubernetes Container Name>.instances: '[{instance_config}]'
 
 Also similar to the key-value store configuration above, you include multiple checks for a container within in the pod. Each element from `check_names`, `init_configs`, and `instances` will be matched together based on their index. In pods with multiple containers, you can simply include additional annotations using the corresponding Kubernetes container name.
 
@@ -189,9 +189,9 @@ Here's an example of the Apache YAML file that would correspond to the configura
     metadata:
       name: apache
       annotations:
-        service-discovery.datadoghq.com.apache.check_names: '["apache"]'
-        service-discovery.datadoghq.com.apache.init_configs: '[{}]'
-        service-discovery.datadoghq.com.apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
+        service-discovery.datadoghq.com/apache.check_names: '["apache"]'
+        service-discovery.datadoghq.com/apache.init_configs: '[{}]'
+        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
       labels:
         name: apache
     spec:

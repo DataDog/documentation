@@ -12,4 +12,4 @@ monitor_id=$(curl -X POST -H "Content-type: application/json" \
     }' \
     "https://app.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
-curl -X POST "https://app.datadoghq.com/api/v1/monitor/${monitor_id}/mute?api_key=${api_key}&application_key=${app_key}"
+curl -X POST "https://app.datadoghq.com/api/v1/monitor/${monitor_id}/unmute?api_key=${api_key}&application_key=${app_key}"
