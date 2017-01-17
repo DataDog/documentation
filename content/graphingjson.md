@@ -213,9 +213,13 @@ To choose a more suitable metric name for display, you can define an alias:
         "aggregator": "avg",
         "alias": "Your metric"
       }
+      {
+        "q": "avg:system.cpu.user",
+        "type": "line",
+        "alias": "Your second metric"
     ]
 
-Note that you can only define one alias per JSON expression.
+Note that you can only define one alias per JSON expression, though you can define several for a given graph.
 
 ### Visualization
 {: #viz}
