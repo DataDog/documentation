@@ -19,6 +19,13 @@ brew install openssl
 brew link openssl --force
 ```
 
+If you are running OS X 10.12 (Sierra), linking OpenSSL as detailed above will throw a warning and the bundle install will fail. To link the OpenSSL headers, run the following after setting the rbenv local version and prior to running the bundle install.
+
+```
+brew install openssl
+rbenv exec bundle config --local build.eventmachine --with-opt-dir=/usr/local/opt/openssl
+```
+
 Integrations that have metrics will require your Github Personal Token. For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). After you've generated a token, add the following line to the `.bash_profile` in your home directory:
 
 ```
