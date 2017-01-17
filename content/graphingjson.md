@@ -214,7 +214,7 @@ To choose a more suitable metric name for display, you can define an alias:
         "alias": "Your metric"
       }
       {
-        "q": "avg:system.cpu.user",
+        "q": "avg:system.cpu.user{*}",
         "type": "line",
         "alias": "Your second metric"
     ]
