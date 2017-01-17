@@ -34,12 +34,12 @@ def collect_ja_video_items
 end
 
 def collect_ja_integration_items
-  integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && (item[:beta]!=true) && item.identifier.match('/ja/') }
+  integrations = @items.select { |item| item[:kind] == 'integration' && item[:language] == 'ja' && (item[:beta]!= true) && item.identifier.match('/ja/') }
   integrations.sort_by { |i| i[:integration_title].downcase }
 end
 
 def collect_ja_guide_items
-  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!=true) && item[:language] == 'ja' && item[:translation_status] == "complete" && item.identifier.match('/ja/') }
+  guides = @items.select{ |item| item[:kind] == 'guide' && item[:listorder] != nil && (item[:beta]!= true) && item[:language] == 'ja' && item[:list2guide] == true && item.identifier.match('/ja/') }
   guides.sort_by { |item| item[:listorder] }
 end
 
@@ -93,6 +93,30 @@ def show_autotoc
 end
 
 def show_table_of_contents
+  sidebarnav=""
+  if (@item[:sidebar] && @item[:sidebar][:nav])&&@item[:autotoc]!=true
+    @item[:sidebar][:nav].each do |i|
+      if i[:header]
+        # sidebarnav += "<li class='nav-header'>#{i[:header]}</li>"
+        sidebarnav += "<li class='nav-header'>Table of Contents</li>"
+      else
+        sidebarnav += "<li><a href='#{i[:href]}' onclick=\"$('##{i[:collapseid]}').collapse('show')\">#{i[:text]}</a></li>"
+      end
+    end
+  else
+    sidebarnav = show_autotoc
+  end
+  # <% @item[:sidebar][:nav].each do |i| %>
+  #               <% if i[:header] %>
+  #                 <li class="nav-header"><%= i[:header] %></li>
+  #               <% else %>
+  #                 <li><a href="<%= i[:href]%>" onclick="$('#<%= i[:collapseid] %>').collapse('show')"><%= i[:text] %></a></li>
+  #               <% end %>
+  #             <% end %>
+  return sidebarnav
+end
+
+def show_table_of_contents_jp
   sidebarnav=""
   if (@item[:sidebar] && @item[:sidebar][:nav])&&@item[:autotoc]!=true
     @item[:sidebar][:nav].each do |i|

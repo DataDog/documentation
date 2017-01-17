@@ -9,7 +9,7 @@ sidebar:
     - text: Getting Started with the Agent
       href: "/ja/guides/basic_agent_usage/"
     - text: Datadog Overview
-      href: "/ja/overview/"
+      href: "/ja/guides/overview/"
     - text: Sending App Metrics
       href: "/ja/guides/metrics/"
     - text: Log Parsing in the Agent

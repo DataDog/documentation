@@ -4,7 +4,8 @@ translation_status: complete
 language: ja
 title: Datadog Agent によるログの解析方法
 kind: guide
-listorder: 6
+listorder: 8
+list2guide: true
 sidebar:
   nav:
     - header: ログ解析のガイド
