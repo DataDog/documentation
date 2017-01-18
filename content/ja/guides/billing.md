@@ -4,50 +4,6 @@ translation_status: complete
 language: ja
 title: 課金に関するFAQ
 kind: documentation
-sidebar:
-  nav:
-    - header: ガイド
-    - text: Datadog Agent 入門
-      href: "/ja/guides/basic_agent_usage/"
-    - text: Datadog が提供するサービスの概要
-      href: "/ja/guides/overview/"
-    - text: Datadog へのメトリクスの送信
-      href: "/ja/guides/metrics/"
-    - text: Datadog Agent によるログの解析方法
-      href: "/ja/guides/logs/"
-    - text: Agent Check の書き方
-      href: "/ja/guides/agent_checks/"
-    - text: サービスチェックの設定方法
-      href: "/ja/guides/services_checks/"
-    - text: Chef を使ったDatadog Agent のインストール
-      href: "/ja/guides/chef/"
-    - text: Azure WindowsへDatadog Agentのインストール
-      href: "/ja/guides/azure/"
-    - text: アラート設定方法
-      href: "/ja/guides/alerting/"
-    - text: ダッシュボード・テンプレートの作成
-      href: "/ja/guides/templating/"
-    - text: SAML によるシングルサインオン　
-      href: "/ja/guides/saml/"
-    - text: メール経由でのイベント情報送信　
-      href: "/ja/guides/eventsemail"
-    - header: レファレンス
-    - text: API
-      href: "/ja/api/"
-    - text: Libraries
-      href: "/ja/libraries/"
-    - text: Graphing
-      href: "/ja/graphing/"
-    - text: Host Names
-      href: "/ja/hostnames/"
-    - text: Integrations
-      href: "/ja/integrations/"
-    - text: DogStatsD
-      href: "/ja/guides/dogstatsd/"
-    - text: 課金に関するFAQ
-      href: "/ja/guides/billing/"
-    - text: FAQ
-      href: "/ja/faq/"
 ---
 
 <!-- #### Welcome to Datadog! We occasionally receive questions regarding the specifics
@@ -73,13 +29,12 @@ and 100 custom metrics)
     1. Size of your environment in servers
     1. Payment terms (month to month or annual prepaid) -->
 
-### Datadogへようこそ!
 
-#### 基本的な料金プランの説明と使用料に関するFAQを以下に紹介します。
+**基本的な料金プランの説明と使用料に関するFAQを以下に紹介します。**
 
 ---
 
-#### <u>基本プラン</u>
+## <u>基本プラン</u>
 
 Datadogのモニタリングサービスには３種類の料金プランがあります:
 
@@ -126,15 +81,14 @@ Pro プランとEnterprise プランのデータ保管期間はフル解像度(1
 
 This is per active host in Datadog, whether or not it's running the agent. -->
 
-##### * 請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。
+**請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。**
 
 ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されている台数となります。
 
 
 <!-- ####<u>Frequently Asked Questions</u> -->
----
 
-#### <u>FAQ　(よくあるお問い合わせ)</u>
+## <u>FAQ　(よくあるお問い合わせ)</u>
 
 <!--
 #####Do you support hourly pricing?
