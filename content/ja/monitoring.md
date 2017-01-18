@@ -2,7 +2,7 @@
 last_modified: 2016/08/17
 translation_status: complete
 language: ja
-title: Monitoringレファレンス
+title: アラートの設定
 kind: documentation
 listorder: 5
 sidebar:
