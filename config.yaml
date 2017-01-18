@@ -85,3 +85,6 @@ redirects:
   - from:  /guides/billing/
     to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
 
+commonfilters:
+  - phrase: 'info command'
+    link: /guides/basic_agent_usage/ubuntu/
