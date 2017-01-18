@@ -9,7 +9,7 @@ def generate_ja_pages
 
 
 
-  japanese_prefix = "<div class='alert alert-info'><strong>NOTICE:</strong> The following content has not yet been translated from English.</div>\n\n"
+  japanese_prefix = "<div class='alert alert-info'><strong>NOTICE:</strong> アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>\n\n"
   missingpages.each do |page|
     newitem = @items[page]
     content = newitem.raw_content
