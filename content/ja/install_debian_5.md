@@ -1,6 +1,6 @@
 ---
 last_modified: 2015/03/31
-translation_status: complete
+translation_status: original
 language: ja
 title: Installing the Agent on Debian 5
 kind: documentation

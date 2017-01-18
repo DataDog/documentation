@@ -28,7 +28,7 @@ def get_local_hash(language)
     },
     "menu_references_monitoring" => {
       "en" => "Monitoring",
-      "ja" => "Monitoring",
+      "ja" => "アラート設定",
     },
     "menu_references_graphing" => {
       "en" => "Graphing",
@@ -36,11 +36,11 @@ def get_local_hash(language)
     },
     "menu_references_graphingjson" => {
       "en" => "Graphing using JSON",
-      "ja" => "Graphing using JSON",
+      "ja" => "JSONを使ったグラフの設定",
     },
     "menu_references_host_names" => {
       "en" => "Host Names",
-      "ja" => "グラフ表示入門",
+      "ja" => "ホスト名について",
     },
     "menu_references_integrations" => {
       "en" => "Integrations",
@@ -132,11 +132,11 @@ def get_local_hash(language)
     },
     "agentusage_agent_guides_by_platform" => {
       "en" => "Agent Guides by Platform",
-      "ja" => "Agent インストールガイド",
+      "ja" => "Agentのインストール方法",
     },
     "agentusage_from_source" => {
       "en" => "From Source",
-      "ja" => "Agent インストールガイド",
+      "ja" => "コードリポジトリを使ったインストール",
     }
 
   }
