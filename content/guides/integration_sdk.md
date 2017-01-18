@@ -17,7 +17,7 @@ You will also need [Wget](https://www.gnu.org/software/wget/). Wget is already i
 
 We've written [a gem](https://rubygems.org/gems/datadog-sdk-testing) and a set of scripts to help you get set up, ease development, and provide testing. To begin:
 
-1. Fork the [integrations-extras repository](https://github.com/DataDog/integrations-extras) on Github and clone the repository on your dev environment.
+1. Fork the [integrations-extras repository](https://github.com/DataDog/integrations-extras) on Github and clone the repository to your dev environment.
 2. Run `gem install bundler`
 3. Run `bundle install`
 
