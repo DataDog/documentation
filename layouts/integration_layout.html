@@ -52,6 +52,14 @@ this layout provides a sidebar and main column.
         <div class="col-sm-9 col-xs-12 main">
           <!-- PAGE TITLE -->
           <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <%if @item[:beta]%>
+          <div class="alert alert-danger">
+          <strong>BETA:</strong> This content describes a feature currently in beta.
+          We are actively working on completing the feature but the docs may get out of
+          sync with the feature as it is updated. If you have any issues, contact support
+          for assistance.
+          </div>
+          <% end%>
           <div <%if @item[:newhlevel] %>id="pagecontent"<% end %>>
             <%= yield %>
           </div>
@@ -65,5 +73,3 @@ this layout provides a sidebar and main column.
 
   </body>
 </html>
-
-
