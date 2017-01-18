@@ -56,7 +56,7 @@ GEM
     kramdown (1.5.0)
     libnotify (0.9.1)
       ffi (>= 1.0.11)
-    libv8 (3.16.14.15)
+    libv8 (3.16.14.17)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -147,4 +147,4 @@ DEPENDENCIES
   w3c_validators
 
 BUNDLED WITH
-   1.12.5
+   1.13.7
