@@ -158,8 +158,8 @@ compile '*' do
 
     unless id.match('/api/')
       filter :header_links
+      filter :insert_common_links
     end
-
     case
 
     # when id.match('/ja/guides/basic_agent_usage/')
