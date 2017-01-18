@@ -4,7 +4,8 @@ translation_status: original
 language: ja
 title: Single Sign On With SAML
 kind: guide
-listorder: 14
+listorder: 18
+list2guide: true
 sidebar:
   nav:
     - header: Guide to SAML SSO

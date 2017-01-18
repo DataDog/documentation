@@ -102,7 +102,7 @@ Every integration should have the following format:
 ### Overview
 **Absolutely Required.**
 
-The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible. 
+The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible.
 
 The overview section is required and should be a paragraph or two with some bullets of what is interesting about this integration. For example, the following comes from the Docker integration.
 
@@ -128,7 +128,7 @@ At the end of the configuration section include a link to the example configurat
 
 #### Configuration Options
 
-Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for. 
+Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for.
 
 ### Validation
 **Required**
@@ -158,6 +158,8 @@ The troubleshooting section should include anything that answers a question a us
 
 Create a markdown file under content/guides. Add the following front matter at the top of the file:
 
+For Englsih contents:
+
     ---
     title: <guide title>
     kind: guide
@@ -165,6 +167,27 @@ Create a markdown file under content/guides. Add the following front matter at t
     ---
 
 Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
+
+For Japanese contents:
+
+    ---
+    title: <guide title>
+    kind: guide
+    listorder: <where in the list you want the doc to appear>
+    language: ja
+    list2guide: <true or false to list in sidebar>
+    translation_status: <complete, progress org original>
+    ---
+
+Use translatin_status to display status messages.
+
+[original]
+
+アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。
+
+[progress]
+
+アクセスいただきありがとうございます。こちらのページは現在翻訳を進めています。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。
 
 
 [1]: http://kramdown.gettalong.org/quickref.html

@@ -4,7 +4,8 @@ translation_status: complete
 language: ja
 title: Monitor(監視)機能の設定ガイド
 kind: guide
-listorder: 9
+listorder: 13
+list2guide: true
 sidebar:
   nav:
     - header: Monitorの設定ガイド
@@ -86,7 +87,7 @@ Here is a quick overview of the different terms used in this guide.
 {: #create}
 -->
 
-## 新しいMonitorの作成 
+## 新しいMonitorの作成
 {: #create}
 
 <!--
@@ -273,7 +274,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
         -->
 
       **change alert**オプションを選択している場合は、追加で設定可能な項目があります。
-      
+
       - *change* は値そのものの変化量を意味し、*% change* はその値の過去の値との変化量を意味します (つまり過去の値が2で現在が4の場合、*% change* は100%になります)。
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
@@ -307,7 +308,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 <!-- ## Monitor Notifications {#notification} -->
 
-### 通知の設定 
+### 通知の設定
 {: #notifications}
 
 ![notification](/static/images/monitor/notification.png)
@@ -435,7 +436,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 <!-- ## Monitor FAQs {#faqs} -->
 
-## Monitorに関するFAQs 
+## Monitorに関するFAQs
 {: #faqs}
 
 <!--
