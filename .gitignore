@@ -3,7 +3,6 @@ output/
 tmp/
 crash.log
 vendor/*
-.bundle/*
 .rvmrc
 .DS_Store
 .rbenv-version
