@@ -132,11 +132,11 @@ def get_local_hash(language)
     },
     "agentusage_agent_guides_by_platform" => {
       "en" => "Agent Guides by Platform",
-      "ja" => "Agent インストールガイド",
+      "ja" => "Agentのインストール方法",
     },
     "agentusage_from_source" => {
       "en" => "From Source",
-      "ja" => "Agent インストールガイド",
+      "ja" => "コードリポジトリを使ったインストール",
     }
 
   }

@@ -1,6 +1,8 @@
 ---
 title: Metric Types
 kind: documentation
+language: ja
+translation_status: original
 ---
 
 A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the app. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
