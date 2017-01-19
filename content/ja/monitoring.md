@@ -30,10 +30,10 @@ sidebar:
       href: "#faqs"
 ---
 <!--
-Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitoring](/guides/monitoring) for an introduction.
+Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 -->
 
-このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitoring) ページを参照して下さい。
+このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
 
 ## 用語集
 {: #glossary}
