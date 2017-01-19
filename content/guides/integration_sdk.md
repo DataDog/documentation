@@ -17,7 +17,7 @@ You will also need [Wget](https://www.gnu.org/software/wget/). Wget is already i
 
 We've written [a gem](https://rubygems.org/gems/datadog-sdk-testing) and a set of scripts to help you get set up, ease development, and provide testing. To begin:
 
-1. Clone the [integrations-extras repository](https://github.com/DataDog/integrations-extras) on Github
+1. Fork the [integrations-extras repository](https://github.com/DataDog/integrations-extras) on Github and clone the repository to your dev environment.
 2. Run `gem install bundler`
 3. Run `bundle install`
 
@@ -225,6 +225,17 @@ As you build your check and test code, you can use the following to run your tes
 
 Travis CI will automatically run tests when you create a pull request. Please ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
 
+#### Docker test environments
+
+At Datadog we're using Docker containers for testing environments and we highly encourage you to do the same. Containers are lightweight, easy to manage, and provide consistent, standardized environments for each test run.
+
+For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) uses the [official MySQL container](https://hub.docker.com/_/mysql/) and involves four main tasks
+
+1. `before_install` - Prior to starting our new Docker test environment, we need to ensure that any previous Docker test environments are stopped and removed.
+2. `install` - The install task performs the Docker `run` which will start the MySQL test server.
+3. `before_script` - This task first ensures that the MySQL server is running, then connects to the server to perform some setup tasks. We highly recommend that you keep setup tasks in your `test_integration.py` file when possible, but we recognize that sometimes setup and configurations will need to be performed prior to the python test script.
+4. `cleanup` - After the tests are complete, the Docker test environment is stopped and removed.
+
 #### Installing your integration locally
 
 When your integration is merged into the `integrations-extras` repository, we will generate packages so that others can easily install your integration (see the [Installing Core & Extra Integrations guide](http://docs.datadoghq.com/guides/installcoreextra)). However, you may want to install your integration locally before it's merged.
@@ -242,3 +253,10 @@ When you have finished building your integration, you can run `rake clean_env` t
 ### Submitting Your integration
 
 Once you have completed the development of your integration, submit a [pull request](https://github.com/DataDog/integrations-extras/compare) to have Datadog review your integration. After we've reviewed your integration, we will approve and merge your pull request or provide feedback and next steps required for approval.
+
+### Other Considerations
+
+In our experience building integrations, we've also faced a number of challenges. As your write your tests, here are a few things to consider:
+
+* Test clusters. Testing single instances of your software is often easier, but tests are more useful when run against setups that are representative of real-world uses. For example, MongoDB is typically used with sharding and replica set features, so [our tests reflect that](https://github.com/DataDog/integrations-core/tree/master/mongo/ci).
+* Consider generating calculated metrics in addition to raw metrics. For example, many databases will have slow, but less frequently run queries. So it's often useful to look at percentiles. For example, our MySQL integration includes a calculated metric for the [95th percentile query execution time](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169).
