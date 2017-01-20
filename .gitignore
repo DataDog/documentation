@@ -17,3 +17,4 @@ tested.code
 .sass-cache
 github_metrics
 fileformaterrors
+autogen_files.log
