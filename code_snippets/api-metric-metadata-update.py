@@ -10,7 +10,7 @@ initialize(**options)
 metric = 'system.net.bytes_sent'
 params = {
     'description': 'My custom description',
-    'short name': 'bytes sent',
+    'short_name': 'bytes sent',
     'type': 'gauge',
     'unit': 'byte',
     'per_unit': 'second'
