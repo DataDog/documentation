@@ -529,7 +529,7 @@ kind: documentation
       <%= left_side_div %>
         <p>Monitors allow you to watch a metric or check that you care about,
         notifying your team when some defined threshold is exceeded. Please
-        refer to the <a href="/guides/monitoring">Guide to Monitoring</a> for more
+        refer to the <a href="/guides/monitors">Guide to Monitors</a> for more
         information on creating monitors.</p>
       </div>
     </div>
@@ -622,7 +622,8 @@ kind: documentation
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
           <%= argument 'tags', "A list of tags to associate with your monitor.
-              This can help you categorize and filter monitors in the manage monitors page of the UI. Note: it's not currently possible to filter by these tags when querying via the API",
+              When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags.
+              Tags using the \"service\" key (e.g. <code>service:my-app</code>) will be visible in the corresponding \"service\" field when editing the monitor in the Datadog UI. Tags without the \"service\" key will only be available via the API and will not be visible or editable in the Datadog UI.",
               :default => "empty list" %>
 
           <li>
@@ -866,9 +867,8 @@ kind: documentation
           what tags, if any, should be used to filter the list of monitors
           by scope",
           :default => "None" %>
-          <%= argument 'monitor_tags', "A comma-separated list indicating
-          what service and/or custom tags, if any, should be used to filter
-          the list of monitors",
+          <%= argument 'monitor_tags', "A comma separated list indicating
+          what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
         </ul>
       </div>
@@ -2296,7 +2296,7 @@ kind: documentation
           <li>Using the application key instead of API key</li>
           <li>Events are succeeding, but because success events are low priority, they don't show up in the event stream until it is switched to priority 'all'</li>
         </ul>
-        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date</code>
         <br>
         This will output the current system’s date, and then make a request to our endpoint and grab
                the date on our end. If these are more than a few minutes apart,

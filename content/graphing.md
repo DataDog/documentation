@@ -3,7 +3,7 @@ title: Graphing Primer
 kind: documentation
 has_snippets: True
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 
 ## Find the Graph Editor
 {: #editor}
@@ -117,7 +117,7 @@ When switching to the JSON view, the query will look like this:
 
     "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 
-For more about using the JSON view, scroll to the bottom and click the Learn about the JSON tab link.
+For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### 5) Apply more advanced functions
 
@@ -143,3 +143,4 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
+[1]: /graphingjson

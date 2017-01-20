@@ -27,7 +27,7 @@ sidebar:
       href: "#faqs"
 ---
 
-Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitoring](/guides/monitoring) for an introduction.
+Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 
 ## Glossary
 {: #glossary}

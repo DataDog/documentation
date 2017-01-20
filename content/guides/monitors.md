@@ -1,5 +1,5 @@
 ---
-title: Guide to Monitoring
+title: Guide to Monitors
 kind: guide
 listorder: 9
 ---

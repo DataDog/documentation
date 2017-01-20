@@ -1,52 +1,8 @@
 ---
 last_modified: 2015/04/16
-translation_status: Translated
+translation_status: complete
 language: ja
 title: 課金に関するFAQ
-sidebar:
-  nav:
-    - header: ガイド
-    - text: Datadog Agent 入門
-      href: "/ja/guides/basic_agent_usage/"
-    - text: Datadog が提供するサービスの概要
-      href: "/ja/overview/"
-    - text: Datadog へのメトリクスの送信
-      href: "/ja/guides/metrics/"
-    - text: Datadog Agent によるログの解析方法
-      href: "/ja/guides/logs/"
-    - text: Agent Check の書き方
-      href: "/ja/guides/agent_checks/"
-    - text: サービスチェックの設定方法
-      href: "/ja/guides/services_checks/"
-    - text: Chef を使ったDatadog Agent のインストール
-      href: "/ja/guides/chef/"
-    - text: Azure WindowsへDatadog Agentのインストール
-      href: "/ja/guides/azure/"
-    - text: アラート設定方法
-      href: "/ja/guides/alerting/"
-    - text: ダッシュボード・テンプレートの作成
-      href: "/ja/guides/templating/"
-    - text: SAML によるシングルサインオン　
-      href: "/ja/guides/saml/"
-    - text: メール経由でのイベント情報送信　
-      href: "/ja/guides/eventsemail"
-    - header: レファレンス
-    - text: API
-      href: "/ja/api/"
-    - text: Libraries
-      href: "/ja/libraries/"
-    - text: Graphing
-      href: "/ja/graphing/"
-    - text: Host Names
-      href: "/ja/hostnames/"
-    - text: Integrations
-      href: "/ja/integrations/"
-    - text: DogStatsD
-      href: "/ja/guides/dogstatsd/"
-    - text: 課金に関するFAQ
-      href: "/ja/guides/billing/"
-    - text: FAQ
-      href: "/ja/faq/"
 ---
 
 <!-- #### Welcome to Datadog! We occasionally receive questions regarding the specifics
