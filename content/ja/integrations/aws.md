@@ -47,7 +47,7 @@ Connect to Amazon Web Services (AWS) in order to:
 | [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
 {:.table} -->
 
-関連しているインテグレーションは以下になります:
+関連しているAWS系サービスのインテグレーションは以下になります:
 
 | [Billing](/ja/integrations/awsbilling) | billing and budgets |
 | [CloudTrail](/ja/integrations/awscloudtrail) | Access to log files and AWS API calls |
