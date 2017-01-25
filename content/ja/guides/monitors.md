@@ -78,15 +78,15 @@ Here is a quick overview of the different terms used in this guide.
 - **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadogに送信します。
 - **Check**: Agent Checkのことで、複数のステータスを送信します。
 - **Monitor**: Agent Checkのステータスやメトリクスの閾値の確認手順、その他のアラート条件を元に通知を送信します。
-- **Monitorタイプ**: host-, metric-, integration-, process-, network-, event-based, customがあります。 特定のMonitorタイプの詳細に関しては、[Monitoring Reference](/monitoring) ページを参照して下さい。
-- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
+- **Monitorタイプ**: host-, metric-, integration-, process-, network-, event-based, customがあります。 特定のMonitorタイプの詳細に関しては、[Monitoringレファレンス](/ja/monitoring) ページを参照して下さい。
+- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/ja/guides/tagging) ページを参照して下さい。
 
 <!--
 ## Creating a Monitor
 {: #create}
 -->
 
-## 新しいMonitorの作成 
+## 新しいMonitorの作成
 {: #create}
 
 <!--
@@ -96,7 +96,7 @@ page by highlighting the "Monitors" tab in the main menu and selecting the
 on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
  -->
 
-[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoring Reference](/monitoring)ページを参照して下さい。
+[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitoring)ページを参照して下さい。
 
 <!-- [New Monitor](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。 -->
 
@@ -273,7 +273,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
         -->
 
       **change alert**オプションを選択している場合は、追加で設定可能な項目があります。
-      
+
       - *change* は値そのものの変化量を意味し、*% change* はその値の過去の値との変化量を意味します (つまり過去の値が2で現在が4の場合、*% change* は100%になります)。
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
@@ -307,7 +307,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 <!-- ## Monitor Notifications {#notification} -->
 
-### 通知の設定 
+### 通知の設定
 {: #notifications}
 
 ![notification](/static/images/monitor/notification.png)
@@ -435,7 +435,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 <!-- ## Monitor FAQs {#faqs} -->
 
-## Monitorに関するFAQs 
+## Monitorに関するFAQs
 {: #faqs}
 
 <!--
