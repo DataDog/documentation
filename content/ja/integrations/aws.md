@@ -104,14 +104,24 @@ Connect to Amazon Web Services (AWS) in order to:
 {:.table}
 
 
-# Installation
+<!-- # Installation
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
+Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below. -->
 
-1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
+# 導入･設定
+
+Amazon Web Services用のインテグレーションを導入するには、AWS IAMを使用してロール委任を設定する必要があります。
+ロール委任の機能をよりよく理解するには、AWSが公開している[IAMのベストプラクティス](http://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#delegate-using-roles)を参照してください。
+
+注：現状、GovCloudと中国リージョンでは、AWS IAMのロール委任機能がサポートされていません。 これらのリージョンに対してインテグレーションを設定しようとしている場合は、[GovCloudと中国リージョンでの設定](#configuration-for-china-and-govcloud)のセクションへ進んでください。
+
+
+<!-- 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change. -->
+
+1. まず、[IAMコンソール][1]に移動し、新しいポリシーを作成します。 その新しく作ったポリシーを`DatadogAWSIntegrationPolicy`として登録します。ここで設定する名前は自由です選択することができます。Datadogが提供するすべてのAWS系インテグレーションを活用するには、次に紹介するJSONの内容を使ってください。尚、AWS系インテグレーションに新コンポーネントを追加する際に、アクセス許可の項目が変更されることがあります。
 
         {
           "Version": "2012-10-17",
@@ -161,14 +171,24 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
           ]
         }
 
-    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
+<!--     If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below. -->
 
-2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
+今回紹介した権限をすべて付与することに不安がある場合は、、少なくとも`AmazonEC2ReadOnlyAccess`と`CloudWatchReadOnlyAccess`という既存のポリシーを付与してください。各AWS系インテグレーションが必要としている権限の詳細については、下記の[権限](#permissions)セクションを参照してください。
+
+<!-- 2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
 3.  From the selection, choose Role for Cross-Account Access.
 4.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
 5.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
 6.  Select the policy you created above.
-7.  Review what you selected and click the **Create Role** button.
+7.  Review what you selected and click the **Create Role** button. -->
+
+2. IAMコンソールで新しいロールを作成します。新しく作ったロールに`DatadogAWSIntegrationRole`のような名前を付けます。
+3. "ロールタイプの選択"のページで、`クロスアカウントアクセスのロール`を選択します。
+4. "AWS アカウントとサードパーティ AWS アカウント間のアクセス権を提供します" の右にある[選択]ボタンをクリックします。
+5. 「アカウントID」に`464622532012`（DatadogのアカウントID）と入力します。このアカウントIDを入力することで、AWSが提供しているデータへDatadogが読み取りのみの権限範囲でアクセスすることを許可します。「外部ID」には、Datadogの[AWSインテグレーションタイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)内に表示された"AWS External ID"を入力します。尚、MFAの使用は、無効にしたままにしておいてください。外部IDの詳細については、[「IAMユーザーガイド」](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)のドキュメントを参照してください。
+6. 上記で作成したポリシー(例:`DatadogAWSIntegrationPolicy`)を選択します。
+7. 選択した内容を確認し、**ロールの作成**ボタンをクリックします。
+
 
 # Configuration
 
