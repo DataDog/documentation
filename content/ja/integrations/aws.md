@@ -363,51 +363,88 @@ For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
-# Troubleshooting
+<!-- # Troubleshooting
+{: #troubleshooting} -->
+
+# トラブルシューティング
 {: #troubleshooting}
 
-**Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
+<!-- **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
+{:#tshoot-discrepancy} -->
+
+**◇ CloudWatchに表示されているデータとDatadogが表示しているデータの間に矛盾があるのではと感じた場合**
 {:#tshoot-discrepancy}
 
-There are two important distinctions to be aware of:
+<!-- There are two important distinctions to be aware of:
 
   1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
-  2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
+  2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result. -->
 
-**Metrics delayed?**
+
+このようなケースでは、二つの重要な違いに注意してください。
+
+  1. AWSのカウンターでグラフを'sum','1minute'に設定した場合、その時点までの1分間に発生した合計の発生数を表示します。つまり1分あたりの発生率を表示します。Datadogでは、AWSで選択したタイムフレームに関係なく、AWSから収集した生データを秒単位の値に正規化して表示しています。この秒単位での正規化の結果、Datadogで表示されている値が低いという現象になることがあります。
+  2. min/max/avgは、AWS内とDatadog内では異なる意味を持ちます。AWS内では、”average latency”,
+”minimum latency”, ”maximum latency”は、AWSが個別に収集している3つの異なるメトリックです。 それとは異なり、DatadogがAWS CloudWatchからメトリックを取得する際には、ELBなど毎に”average latency”の値みを時系列データとして収集しています。これを理解した上で、Datadog内での'min', 'max', 'avg'は、タグなどを使ったグループ化によって複数存在する時系列”average latency”値のデータを空間軸的に対してどう集約していくかをコントロールしています。例えば複数のホストが存在している環境下で`system.cpu.idle`の値を単一線としてグラフ化する場合、複数の時系列`system.cpu.idle`データを一つの時系列データへと集約する必要が出てきます。このようなケースでの集約の方法をコントロールしています。これとは逆に、`system.cpu.idle`値を単一ホストから収集してグラフ化している場合、時系列データの集約は不要となり、”average”と”max”を切り替えても結果は同じになります。
+
+<!-- **Metrics delayed?**
+{:#tshoot-delay} -->
+
+**◇ メトリクスの遅延が気になる場合**
 {:#tshoot-delay}
 
-When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
+<!-- When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
 To begin, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
 
 To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
-written a bit about this [here][7],  especially in relation to CloudWatch.
+written a bit about this [here][7],  especially in relation to CloudWatch. -->
+
+AWSインテグレーションは、CloudWatch APIを経由してメトリックを取得しています。従って、AWSのAPIコールに存在するいくつかの制約のために、メトリクスの収集に若干の遅延が生じることがあります。
+
+まず、CloudWatch API経由では、個別のメトリックに対してクロールを実行する方法でしかデータの収集を提供していません。そして、CloudWatchのAPI実行は、認証資格情報,リージョン,サービスの組み合わせを元に異なった実行レート制限を持っています。又メトリック集取の可用性は、AWSのアカウントのレベルに応じて異なっています。例えば、AWSで"詳細モニタリング"に料金を払っている場合、メトリクスはより迅速に収集可能な状態になります。更に、"詳細モニタリング"のサービスレベルはデータの細分性にも適応され、メトリックの一部では1分間隔のデータポイントになり、その他では5分間隔のデータポイントになります。
+
+又、Datadogでは、特定の必要性に対応するためにアカウント内の特定のメトリックを優先的にクロールする機能を備えています。この機能の詳細や設定依頼については[support@datadoghq.com][6]までお問い合わせください。
+
+実質的にゼロ遅延でメトリックを取得するには、ホストにDatadog Agentをインストールすることをお勧めします。
+次の[リンク先][7]では、Datadog AgentとCloudwatchの違いや関係性について詳しく説明しています。
 
 
+<!-- **Missing metrics?**
+{:#tshoot-missing} -->
 
-**Missing metrics?**
+**◇ タイル内の一覧に表示されているメトリクスの一部のみが収集できていない場合**
 {:#tshoot-missing}
-CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
+
+<!-- CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog. -->
+
+CloudWatchのAPIは、データポイントが存在しているメトリックのみをコールの結果として返信します。たとえば、ELBにインスタンスが未だアタッチされていない場合、ELBに関連するメトリックはDatadog上で表示されません。
 
 
+<!-- **Wrong count of aws.elb.healthy_host_count?**
+{:#tshoot-wrongcount} -->
 
-**Wrong count of aws.elb.healthy_host_count?**
+**◇ `aws.elb.healthy_host_count`のカウント値が予想と異なっている場合**
 {:#tshoot-wrongcount}
 
-When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
+<!-- When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
-This metric should have value you would expect.
+This metric should have value you would expect. -->
+
+ELBでクロスゾーンロードバランシングのオプションが有効になっている場合、ELBに接続されているすべてのインスタンスが（CloudWatch側の）すべてのA-Zの一部とみなされるため、1aに2インスタンス、abに3インスタンスがある場合、 AZあたりに5つのインスタンスが表示されます。(合計で10インスタンスになります。)この値は直感的では無いため、このクロスゾーンロードバランシングのオプションが有効かどうかに関係なく、AZ毎の健全なインスタンスの数を表示する新しいメトリック`aws.elb.host_count`を追加しました。このメトリック値には、ELBユーザが直感的に認知している通りの値が表示されるはずです。
 
 
+<!-- **Duplicated hosts when installing the agent?**
+{:#tshoot-duphosts} -->
 
-**Duplicated hosts when installing the agent?**
+**◇ Agentをインストールした直後に、同一ホストが2個表示に分かれて表示されている場合**
 {:#tshoot-duphosts}
 
-When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
+<!-- When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing. -->
 
+ホストにAgentをインストールする際に`datadog.conf`内でホスト名を指定した場合、Datadogサイトのインフラページに数時間に渡りホストが重複して表示されることが有ります。重複して表示されるようになったホストは、数時間後には表示されなくなるようにバックエンド処理が実行されます。バックエンド処理が適応されるまで表示されていた重複ホストには請求は発生しません。
 
 
    [1]: https://console.aws.amazon.com/iam/home#s=Home
