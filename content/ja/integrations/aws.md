@@ -212,16 +212,33 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 <%= get_metrics_from_git() %>
 
-# Permissions
+<!-- # Permissions
 
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
 * `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
 
-Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.　-->
 
-By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
+# アクセス権限の設定
+
+AWSインテグレーションが収集しているデータは、基本的にAWS CloudWatchを介して取得しています。従って最低でも、以下のAPIアクションをIAMポリシーの設定で許可する必要があります。
+
+* `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
+* `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
+
+<!-- * `cloudwatch:ListMetrics`　CloudWatchにより提供されているメトリック一覧の取得を可能にします。
+* `cloudwatch:GetMetricStatistic`　各メトリックのデータポイントの取得を可能します。 -->
+
+上記のアクションと以下にリストされているアクションには、`List*`や`Get*`などのワイルドカードを使用しIAMポリシー内に記述することができます。厳格なポリシーが必要な場合は、下記に掲載したような完全なアクション名を使用してください。各アクションの詳細に関しては、サービス毎にAmazonが公開しているAPIドキュメントを参照してください。
+
+
+<!-- By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics. -->
+
+---
+
+**AWSインテグレーションは、下記に紹介したエンドポイントからデータを読み取れるようにAPIアクションを追加することで、CloudWatchを介して収集したメトリックにタグを追加したり、新たなメトリックを収集できるようになります。**
 
 ## Autoscaling
 
@@ -231,35 +248,51 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 * `autoscaling:DescribeScalingActivities`: Used to generate events when an ASG scales up or down.
 * `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
 
-For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
+<!-- For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS web site. -->
+
+[Autoscaling](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## Billing
 
 * `budgets:ViewBudget`: Used to view budget metrics
 
-For more information on [Budget policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html), review the documentation on the AWS website.
+<!-- For more information on [Budget policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html), review the documentation on the AWS website. -->
+
+[Budget](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## CloudTrail
 
 * `cloudtrail:DescribeTrails`: Used to list trails and find in which s3 bucket they store the trails
 * `cloudtrail:GetTrailStatus`: Used to skip inactive trails
 
-For more information on [CloudTrail policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html), review the documentation on the AWS website.
+<!-- For more information on [CloudTrail policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html), review the documentation on the AWS website.
 
-CloudTrail also requires some s3 permissions to access the trails. **These are required on the CloudTrail bucket only**
+CloudTrail also requires some s3 permissions to access the trails. **These are required on the CloudTrail bucket only** -->
+
+[CloudTrail](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
+CloudTrailからデータを集取するためにはt、trailsにアクセスするためにS3へのAPIアクションを追加する必要があります。**CloudTrailが利用しているバケットにの対して、以下のアクションを追加します。**
 
 * `s3:ListBucket`: List objects in the CloudTrail bucket to get available trails
 * `s3:GetBucketLocation`: Get bucket's region to download trails
 * `s3:GetObject`: Fetch available trails
 
-For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
+<!-- For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website. -->
+
+[S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## DynamoDB
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
 
-For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
+<!-- For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website. -->
+
+[DynamoDB](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## EC2
 
@@ -267,7 +300,10 @@ For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/late
 * `ec2:DescribeSecurityGroups`: Adds SecurityGroup names and custom tags to ec2 instances.
 * `ec2:DescribeInstances`: Adds tags to ec2 instances and ec2 cloudwatch metrics.
 
-For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html), review the documentation on the AWS website.
+<!-- For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html), review the documentation on the AWS website. -->
+
+[EC2](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## ECS
 
@@ -275,7 +311,10 @@ For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `ecs:ListContainerInstances`: List instances of a cluster.
 * `ecs:DescribeContainerInstances`: Describe instances to add metrics on resources and tasks running, adds cluster tag to ec2 instances.
 
-For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html), review the documentation on the AWS website.
+<!-- For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html), review the documentation on the AWS website. -->
+
+[ECS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## Elasticache
 
@@ -283,21 +322,30 @@ For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `elasticache:ListTagsForResource`: List custom tags of a cluster, to add custom tags.
 * `elasticache:DescribeEvents`: Add events avout snapshots and maintenances.
 
-For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
+<!-- For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website. -->
+
+[Elasticache](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## ELB
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
 
-For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
+<!-- For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website. -->
+
+[ELB](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## EMR
 
 * `elasticmapreduce:ListClusters`: List available clusters.
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
 
-For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
+<!-- For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website. -->
+
+[EMR](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## ES
 
@@ -305,7 +353,10 @@ For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `es:ListDomainNames`: Add custom ES domain tags to ES metrics
 * `es:DescribeElasticsearchDomains`: Add custom ES domain tags to ES metrics
 
-For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
+<!-- For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website. -->
+
+[ES](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## Kinesis
 
@@ -313,7 +364,10 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 * `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
-For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
+<!-- For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website. -->
+
+[Kinesis](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## CloudWatch Logs
 
@@ -321,7 +375,10 @@ For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/lates
 * `logs:DescribeLogStreams`: List available streams for a group.
 * `logs:FilterLogEvents`: Fetch some specific log events for a stream to generate metrics.
 
-For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html), review the documentation on the AWS website.
+<!-- For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html), review the documentation on the AWS website. -->
+
+[CloudWatch Logs](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## RDS
 
@@ -329,39 +386,60 @@ For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/I
 * `rds:ListTagsForResource`: Add custom tags on RDS instances.
 * `rds:DescribeEvents`: Add events related to RDS databases.
 
-For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html), review the documentation on the AWS website.
+<!-- For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html), review the documentation on the AWS website. -->
+
+[RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## Route53
 
 * `route53:listHealthChecks`: List available health checks.
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
-For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
+<!-- For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website. -->
+
+[Route53](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## S3
 
 * `s3:ListAllMyBuckets`: Used to list available buckets
 * `s3:GetBucketTagging`: Used to get custom bucket tags
 
-For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
+<!-- For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website. -->
+
+[S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## SES
 
 * `ses:GetSendQuota`: Add metrics about send quotas.
 * `ses:GetSendStatistics`: Add metrics about send statistics.
 
-For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html), review the documentation on the AWS website.
+<!-- For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html), review the documentation on the AWS website. -->
+
+[SES](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html)html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
+
 
 ## SNS
 
 * `sns:ListTopics`: Used to list available topics.
 * `sns:Publish`: Used to publish notifications (monitors or event feed).
 
-For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
+<!-- For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website. -->
+
+[SNS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html)に関するIAMポリシーの詳細に関しては、AWSが提供しているドキュメントを参照してください。
+
 
 ## Support
 
-* `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
+* `support:*`: Used to add metrics about service limits.
+
+<!-- Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html) -->
+
+注：[AWS側にある制限](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)のため、この項目の設定には完全なアクセス権が必要です。
+
 
 # Troubleshooting
 {: #troubleshooting}
