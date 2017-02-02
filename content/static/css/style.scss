@@ -563,3 +563,15 @@ h5:hover .header-link,
 h6:hover .header-link {
   opacity: 1;
 }
+
+/*
+ * Tracing API Page
+ * Hide all code blocks
+ */
+.tracing-api .code-block {
+  display: none;
+}
+/* Set the default language code block */
+.tracing-api .code-block-console {
+  display: block;
+}
