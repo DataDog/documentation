@@ -128,4 +128,26 @@ task :slow do
   Rake::Task[:guard].invoke
 end
 
+desc 'Enabing Japanese lang-assitant on'
+task :jp do
+  ENV['JPASSIST'] = "true"
+  Rake::Task[:guard].invoke
+end
+
+desc 'This is a slow connection, dont collect remote stuff with Japanese lang-assitant files'
+task :slowjp do
+  ENV['NANOCRUNSLOW'] = "true"
+  ENV['JPASSIST'] = "true"
+  Rake::Task[:guard].invoke
+end
+
+desc 'Removing Japanese lang-assitant files'
+task :rmjpfiles do
+  sh("rm -f updated_files.txt")
+  sh("rm -f autogen_files.log")
+end
+
+desc 'Clean and remove Japanese lang-assitant files'
+task cleanjp: [:clean, :rmjpfiles]
+
 task default: :guard
