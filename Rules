@@ -19,6 +19,7 @@ require './lib/generate_ja_pages'
 require 'octokit'
 preprocess do
   create_redirect_pages
+  list_update_pages
   generate_ja_pages
   # def rchomp(sep = $/)
   #   self.start_with?(sep) ? self[sep.size..-1] : self
