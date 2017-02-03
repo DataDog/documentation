@@ -30,17 +30,17 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
   </div>
 </div>
 
-#### Spans
+#### Traces
 
 <div class="row">
   <%= left_side_div %>
     <h5>Arguments</h5>
     <ul class="arguments">
-      <%= argument('spans', 'A list of spans as JSON objects containing the span information:
+      <%= argument('traces', 'A list of traces. Traces are a list of spans as JSON objects containing the span information:
         <ul>
+          <li><code>trace_id</code> - <em>Required.</em> The unique integer ID of the trace containing this span.</li>
           <li><code>span_id</code> - <em>Required.</em> The span integer ID.</li>
           <li><code>name</code> - <em>Required.</em> The span name.</li>
-          <li><code>trace_id</code> - <em>Required.</em> The unique integer ID of the trace containing this span.</li>
           <li><code>resource</code> - <em>Required.</em> The resource you are tracing.</li>
           <li><code>service</code> - <em>Required.</em>The service name.</li>
           <li><code>type</code> - <em>Required.</em> The type of request.</li>
@@ -54,11 +54,13 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
       ') %>
     </ul>
 
+    Note: You may send multiple spans within a trace array and each span within a trace should use the same trace_id. You may also send multiple traces.
+
   </div>
 
   <%= right_side_div %>
     <h5>Signature</h5>
-    <code>PUT /spans</code>
+    <code>PUT /v0.3/traces</code>
 
     <h5>Example Request</h5>
     <% %w{sh py rb go}.each do |f| %>

@@ -8,21 +8,21 @@ SPAN_ID=($RANDOM % 1000000)
 START=$(date +%s%N)
 
 # Do things...
-sleep 5
+sleep 2
 
 # Stop the timer.
 DURATION=$(($(date +%s%N) - $START))
 
 # Send the trace.
 curl -X PUT -H "Content-type: application/json" \
-  -d "[{
+  -d "[[{
     \"trace_id\": $TRACE_ID,
     \"span_id\": $SPAN_ID,
     \"name\": \"span_name\",
     \"resource\": \"/home\",
-    \"service\": \"my-flask-app\",
+    \"service\": \"pseudo_service\",
     \"type\": \"web\",
     \"start\": $START,
     \"duration\": $DURATION
-  }]" \
-  http://localhost:7777/spans
+  }]]" \
+  http://localhost:7777/v0.3/traces
