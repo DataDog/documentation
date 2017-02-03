@@ -56,6 +56,10 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
 
     Note: You may send multiple spans within a trace array and each span within a trace should use the same trace_id. You may also send multiple traces.
 
+    <h5>Response</h5>
+
+    The Agent will return a 200 status code and the text "OK" if the traces were successfully delivered. If delivery fails, a 500 status code and an error message will be returned. Note that successful delivery does <em>not</em> mean the traces are accepted. Traces may be dropped after successful delivery. For more information about your traces, please refer to your agent log.
+
   </div>
 
   <%= right_side_div %>
