@@ -1,6 +1,8 @@
-# This will return a 200 if the trace was accepted
-# or a 500 if there was an error.
-print(response.status_code)
-
-# This will print the string "OK" or an error message.
+# response.text will contain the string "OK"
+# if the traces were successfully delvered
+# to the agent or an error message if not.
+# Note that successful delivery does not
+# mean the traces were accepted. Please
+# refer to the agent log for more
+# information.
 print(response.text)
