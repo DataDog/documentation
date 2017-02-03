@@ -13,7 +13,7 @@ sleep 2
 # Stop the timer.
 DURATION=$(($(date +%s%N) - $START))
 
-# Send the trace.
+# Send the traces.
 curl -X PUT -H "Content-type: application/json" \
   -d "[[{
     \"trace_id\": $TRACE_ID,
