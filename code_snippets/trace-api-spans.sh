@@ -5,13 +5,13 @@ TRACE_ID=($RANDOM % 1000000)
 SPAN_ID=($RANDOM % 1000000)
 
 # Start a timer.
-START=$(gdate +%s%N)
+START=$(date +%s%N)
 
 # Do things...
 sleep 5
 
 # Stop the timer.
-DURATION=$(($(gdate +%s%N) - $START))
+DURATION=$(($(date +%s%N) - $START))
 
 # Send the trace.
 curl -X PUT -H "Content-type: application/json" \
