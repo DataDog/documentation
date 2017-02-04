@@ -45,7 +45,7 @@ func main() {
         SpanId: span_id,
         Name: "span_name",
         Resource: "/home",
-        Service: "pseudo_service",
+        Service: "service_name",
         Type: "web",
         Start: start,
         Duration: duration}}}

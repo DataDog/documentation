@@ -1,6 +1,7 @@
 ---
 title: Tracing API
 kind: guide
+autotocdepth: 2
 listorder: 10
 ---
 
@@ -10,7 +11,7 @@ Datadog's APM allows you to collect performance metrics by tracing your code to 
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some official libraries that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog APM library.
 
-### Requirements
+### API
 
 <%
   # Some shortcuts for the columns.
@@ -30,7 +31,7 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
   </div>
 </div>
 
-#### Traces
+<h4 id="traces" class="tracing-api">Traces</h4>
 
 <div class="row">
   <%= left_side_div %>
@@ -68,17 +69,17 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
 
     <h5>Example Request</h5>
     <% %w{sh py rb go}.each do |f| %>
-      <%= snippet_code_block "trace-api-spans.#{f}", :nocomments => true %>
+      <%= snippet_code_block "trace-api-traces.#{f}", :nocomments => true %>
     <% end %>
 
     <h5>Example Response</h5>
     <% %w{sh py rb go}.each do |f| %>
-      <%= snippet_result_code_block "trace-api-spans.#{f}" %>
+      <%= snippet_result_code_block "trace-api-traces.#{f}" %>
     <% end %>
   </div>
 </div>
 
-#### Services
+<h4 id="services" class="tracing-api">Services</h4>
 
 <div class="row">
   <%= left_side_div %>

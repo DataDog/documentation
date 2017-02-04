@@ -566,8 +566,11 @@ h6:hover .header-link {
 
 /*
  * Tracing API Page
- * Hide all code blocks
  */
+h4.tracing-api {
+  margin-top: 20px;
+}
+/* Hide all code blocks */
 .tracing-api .code-block {
   display: none;
 }

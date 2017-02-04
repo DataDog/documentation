@@ -21,7 +21,7 @@ traces = [[{
     "span_id": span_id,
     "name": "span_name",
     "resource": "/home",
-    "service": "pseudo_service",
+    "service": "service_name",
     "type": "web",
     "start": start,
     "duration": duration

@@ -20,7 +20,7 @@ curl -X PUT -H "Content-type: application/json" \
     \"span_id\": $SPAN_ID,
     \"name\": \"span_name\",
     \"resource\": \"/home\",
-    \"service\": \"pseudo_service\",
+    \"service\": \"service_name\",
     \"type\": \"web\",
     \"start\": $START,
     \"duration\": $DURATION
