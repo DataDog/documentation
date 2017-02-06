@@ -25,6 +25,6 @@ traces = [[{
     "type": "web",
     "start": start,
     "duration": duration
-  }]]
+}]]
 
 response = requests.put("http://localhost:7777/v0.3/traces", json=traces)

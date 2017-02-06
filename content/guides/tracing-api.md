@@ -85,14 +85,19 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
   <%= left_side_div %>
     <h5>Arguments</h5>
     <ul class="arguments">
-      <%= argument('services', 'A list of services as JSON objects containing the service information:
+      <%= argument('service', 'A service as a JSON object containing the service name mapped to application and application type information:
         <ul>
-          <li><code>service</code> - <em>Required.</em>The service name.</li>
-          <li><code>app</code> - <em>Required.</em> The the name of the application.</li>
+          <li><code>service</code> - <em>Required.</em>The service name as a dictionary key.</li>
+          <li><code>app</code> - <em>Required.</em> The name of the application.</li>
           <li><code>app_type</code> - <em>Required.</em> The type of application.</li>
         </ul>
       ') %>
     </ul>
+
+    <h5>Response</h5>
+
+    The Agent will return a 200 status code and the text "OK" if the service was successfully delivered. If delivery fails, a 500 status code and an error message will be returned. For more information about your service, please refer to your agent log.
+
   </div>
 
   <%= right_side_div %>

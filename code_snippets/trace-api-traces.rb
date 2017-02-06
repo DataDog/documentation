@@ -24,7 +24,7 @@ traces = [[{
     'type' => 'web',
     'start' => start,
     'duration' => duration
-  }]]
+}]]
 
 uri = URI('http://localhost:7777/v0.3/traces')
 request = Net::HTTP::Put.new(uri)
@@ -32,5 +32,5 @@ request.body = JSON.generate(traces)
 request.content_type = 'application/json'
 
 response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-  http.request(request)
+    http.request(request)
 end
