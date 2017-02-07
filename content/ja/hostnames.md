@@ -1,13 +1,13 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2017/02/07
 translation_status: complete
 language: ja
 title: ホスト名について
-kind: documentation 
+kind: documentation
 sidebar:
   nav:
     - header: ホスト名のガイド
-    - text: Datadog Agentによる正式ホスト名の決め方
+    - text: Agentによる標準ホスト名の決め方
       href: "#agent"
     - text: ホスト名のエリアス
       href: "#aliases"
@@ -22,8 +22,8 @@ web chat client, too</a>.)
 </div> -->
 
 <div class="alert alert-info">
-Datadog Agentがホストの名称をどのように識別し、そのホスト名がサービスサイト内でどのように表示されるかの
-概要です。ホスト名の選定に関し詳細な質問がある場合は、<a href="../help">お問い合わせ</a>ページに掲載している方法でご連絡ください。
+Datadog Agentがホスト名をどのように識別し、そのホスト名がDatadog のUI 上でどのように表示されるかを解説します。
+尚、ホスト名の選定に関しこのドキュメントでカバーできていない内容の質問がある場合は、[お問い合わせ][j1]ページに掲載している方法でご連絡ください。
 </div>
 
 
@@ -34,19 +34,38 @@ Datadog Agentがホストの名称をどのように識別し、そのホスト�
   with host names, we recommend updating to the latest version of the Agent.
 </div> -->
 
-## Datadog Agentによる正式ホスト名の決め方 {#agent}
+## DAgentによる標準ホスト名の決め方
+{: #agent}
 
 <div class="alert alert-warn">
-  このページの内容は、Datadog Agent 3.6以降を対象にしています。ホスト名に関し問題を抱えている場合は、最新バージョンのDatadog Agentにアップデートすることを推奨します。
+  このページの内容は、Datadog Agent 3.6 以降を対象にしています。ホスト名に関し問題を抱えている場合は、Datadog Agent を最新バージョンにアップデートすることを推奨します。
 </div>
 
 
 <!-- The Datadog Agent collects potential hostnames from a number of different
 sources. To see all the names the Agent is detecting, run the Agent info
-command: -->
+command: 
+
+    $ sudo /etc/init.d/datadog-agent info
+
+    ...
+
+    Hostnames
+    =========
+
+      hostname: my.special.hostname
+      agent-hostname: my.special.hostname
+      ec2-hostname: ip-192-0-0-1.internal
+      instance-id: i-deadbeef
+      socket-hostname: myhost
+      socket-fqdn: myhost.mydomain
+
+    ...
+-->
 
 Datadog Agentは、異なるソースからのホスト名の候補を収集しています。
 Datadog Agentが検知している全ての名前を確認するには、datadog-agentコマンドにinfoオプションを付けて実行します:
+
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -64,12 +83,13 @@ Datadog Agentが検知している全ての名前を確認するには、datadog
 
     ...
 
+
 <!-- From these names, a canonical name is picked for the host. This is the name the
 Agent will primarily use to identify itself to Datadog. The other names are
 submitted as well, but only as candidates for <a href="#aliases">aliasing</a>.
  -->
 
-Datadog Agentが見つけ出した複数のホスト名候補の中から、正式ホスト名が選び出されます。この正式ホスト名は、Datadog AgentがDatadogのサービスに対し自分自身を識別するために使用されます。他のホスト名候補もメトリクスデータ内の付随情報として送信され、<a href="#aliases">ホスト名のエリアス</a>の候補として使われます。
+Datadog Agentが見つけ出した複数のホスト名候補の中から、標準として使うホスト名が選び出されます。この標準ホスト名は、Agent が送信しているメトリックデータを、Datadog バックエンドで識別させるために使用されます。他のホスト名候補もメトリックデータ内の付随情報として送信され、[ホスト名のエリアス][j2]の候補として使われます。
 
 
 <!-- The canonical host name is picked according to the following rules. The first
@@ -83,7 +103,7 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next. -->
 
-正式ホスト名は、次のルールに従って決定されます。最初に一致したルールで、正式ホスト名が選択されます。
+ 標準ホスト名は、次のルールに従って決定されます。最初に一致したルールで、標準ホスト名が選択されます。
 
 1. `agent-hostname`: Datadog Agentの設定ファイル内でホスト名が、明示的に設定されている場合。
 2. `hostname`: DNS ホスト名が、EC2のデフォルト仕様ではない場合（例えばIP-192-0-0-1）。
@@ -111,14 +131,17 @@ aliases associated with each host.
 
 <img src="/static/images/host_aliases.png" style="width:100%; border:1px solid #777777"/> -->
 
-## ホスト名のエリアス {#aliases}
+## ホスト名のエリアス
+{: #aliases}
 
 EC2上で起動したインスタンス(ホスト)には、インスタンスID（`I-ABCD1234`）、IPアドレスに基づいて付けられた汎用的なホスト名（`IP-192-0-0-1`）、そして、hostsファイルやDNSによって管理されているホスト名(`myhost.mydomain`)があります。
 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。
 
-Datadog Agentによって検出されたホストの名称は、正式ホスト名のエイリアスとして追加登録されます。
+Datadog Agentによって検出されたホストの名称は、標準ホスト名のエイリアスとして追加登録されます。
 
-ダッシュボードの`Infrastructure`タブからアカウント内のすべてのホストを見ることができます。
-リスト内のホスト名の横にマウスポインターを持っていくと表示される`Inspect`ボタンをクリックし、表示されるインスペクションパネルで、関連付けられているホスト名のエリアスを確認することができます。
+ダッシュボードの`Infrastructure` タブ内のドロップダウンメニューから`Infrastructure List` を選択すると、監視対象になっているホストのリストを表示することができます。リスト内の標準ホスト名にポインターを持っていくと`Inspect` ボタンが表示されます。これをクリックし、表示されるインスペクションパネルの標準ホスト名の下にある名前を確認することで、ホスト名のエリアスを確認することができます。
 
 <img src="/static/images/host_aliases.png" style="width:100%; border:1px solid #777777"/>
+
+[j1]: /ja/help
+[j2]: ./#aliases
