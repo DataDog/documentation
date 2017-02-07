@@ -810,7 +810,7 @@ kind: documentation
           :default => "None" %>
           <%= argument 'tags', "A comma separated list indicating
           what tags, if any, should be used to filter the list of monitors
-          by scope",
+          by scope, e.g. <code>host:host0</code>. For more information, see the <code>tags</code> parameter for the appropriate <code>query</code> argument in the <a href='#monitor-create'>Create a monitor</a> section above.",
           :default => "None" %>
           <%= argument 'monitor_tags', "A comma separated list indicating
           what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
