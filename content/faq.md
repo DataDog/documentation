@@ -45,11 +45,21 @@ agent’s configuration file.
 
 * Mac OS:
 
-  ~~~
-  $ launchctl unload -w ~/Library/LaunchAgents/com.datadoghq.Agent.plist
-  $ rm -r ~/.datadog-agent
-  $ rm ~/Library/LaunchAgents/com.datadoghq.Agent.plist
-  ~~~
+  Stop and Close the Datadog Agent: via the bone icon in the Tray. 
+
+  Drag the Datadog Application from the application folder to the Trash Bin. 
+
+  `$ sudo rm -rf /opt/datadog-agent` <br />
+  `$ sudo rm -rf /usr/local/bin/datadog-agent` <br />
+  `$ sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks`
+
+
+  If you ran the optional install commands to have the Agent run at boot time, you will also need to run the following to finish uninstalling:
+
+  
+  `$ sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist` <br />
+  `$ sudo  rm /Library/LaunchDaemons/com.datadoghq.agent.plist` <br />
+  
 
 * Windows: You can uninstall the agent in Add/Remove Programs
 * Linux: `$ sudo apt-get remove datadog-agent -y`
@@ -422,7 +432,7 @@ Here is an example:
 We have adopted Daring Fireball's Markdown throughout the site. To find out more
 about Markdown, visit the [Markdown docs][events-4].
 
-[events-1]: https://www.datadoghq.com/2014/07/send-alerts-sms-customizable-webhooks-twilio
+[events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [events-2]: https://app.datadoghq.com/account/settings#api
 [events-3]: /api#events
 [events-4]: http://daringfireball.net/projects/markdown/syntax

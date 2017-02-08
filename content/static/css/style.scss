@@ -150,9 +150,13 @@ ol.outline {
     width: 215px;
   }
 }
-.navbar-toggle{
+.navbar-toggle {
   margin-top: 8px;
   margin-bottom:0;
+  border-color: $gray;
+  .icon-bar {
+    background-color: $gray;
+  }
 }
 .nav {
   .search {

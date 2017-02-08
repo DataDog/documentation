@@ -8,7 +8,7 @@ beta: false
 
 Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
-For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly you alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
+For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
 ## How to Use Anomaly Detection on Your Data
 
@@ -73,6 +73,27 @@ We currently offer four different anomaly detection algorithms.
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
+The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
+
+<img src="/static/images/anomalies/alg_comparison_1.png" style="width:100%; border:1px solid #777777"/>
+
+In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
+
+<img src="/static/images/anomalies/alg_comparison_2.png" style="width:100%; border:1px solid #777777"/>
+
+The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
+
+<img src="/static/images/anomalies/alg_comparison_3.png" style="width:100%; border:1px solid #777777"/>
+
+The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-insensitive, while _Agile_ and _Adaptive_ are not. In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
+
+<img src="/static/images/anomalies/alg_comparison_scale.png" style="width:100%; border:1px solid #777777"/>
+
+Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
+
+<img src="/static/images/anomalies/alg_comparison_new_metric.png" style="width:100%; border:1px solid #777777"/>
+
+
 ## Frequently Asked Questions
 
 ### Should I use anomaly detection for everything?
@@ -107,11 +128,11 @@ The second graph shows the same metric, a day later. Even though it uses the pre
 
 Smaller window sizes will lead to faster alerts, however, with very small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise.
 
-Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can can alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
+Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can get alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
 
-### Why does `anomalies` not add a gray prediction band in the dashboard? Why am I getting "No Data" for an Anomaly Alert?
+### Why does `anomalies` not add a gray prediction band in the dashboard? / Why am I getting "No Data" for an Anomaly Alert? / How much history do the algorithms require?
 
-All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has a couple weeks of history. _Adaptive_ will start working after it has a couple days worth of history.
+All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has at least two weeks of history. _Adaptive_ will start working after it has at least two hours worth of history.
 
 ### Why does an anomaly "disappear" when I zoom in?
 

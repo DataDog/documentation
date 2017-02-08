@@ -77,9 +77,18 @@ redirects:
   - from:  /integrations/elasticache/
     to:    /integrations/awselasticache/
   - from:  /guides/alerting/
-    to:    /guides/monitoring/
+    to:    /guides/monitors/
   - from:  /overview/
     to:    /guides/overview/
   - from:  /guides/network_checks/
     to:    /integrations/tcpcheck/
+  - from:  /guides/billing/
+    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
+  - from:  /guides/monitoring/
+    to:    /guides/monitors/
+  - from:  /ja/guides/monitoring/
+    to:    /ja/guides/monitors/
 
+commonfilters:
+  - phrase: 'info command'
+    link: /guides/basic_agent_usage/ubuntu/

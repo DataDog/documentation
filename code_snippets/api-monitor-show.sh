@@ -14,4 +14,5 @@ monitor_id=$(curl -X POST -H "Content-type: application/json" \
 
 curl -G "https://app.datadoghq.com/api/v1/monitor/${monitor_id}" \
      -d "api_key=${api_key}" \
-     -d "application_key=${app_key}"
+     -d "application_key=${app_key}" \
+     -d "group_states=all"

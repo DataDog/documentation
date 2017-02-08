@@ -27,7 +27,8 @@ If you are running Kubernetes >= 1.2.0, you can take advantage of DaemonSets to 
 
 1. Download the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest file.
 1. Launch dd-agent:
-       kubectl create -f dd-agent.yaml
+
+    kubectl create -f dd-agent.yaml
 
 ## Manual Installation
 
@@ -64,7 +65,7 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       # to keep them unique.
       # When true, we aggregate data based on container image.
       # Defaults to false
-      # 
+
       # use_histogram: True
       #
       # kubelet_port: 10255
@@ -82,11 +83,72 @@ Since the agent is deployed as a docker container, refer to the Agent [container
 
 <%= insert_example_links%>
 
+## Kubernetes State Metrics
+
+If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
+
+To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
+
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: kube-state-metrics
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: kube-state-metrics
+        spec:
+          containers:
+          - name: kube-state-metrics
+            image: gcr.io/google_containers/kube-state-metrics:v0.3.0
+            ports:
+            - name: metrics
+              containerPort: 8080
+            resources:
+              requests:
+                memory: 30Mi
+                cpu: 100m
+              limits:
+                memory: 50Mi
+                cpu: 200m
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+      labels:
+        app: kube-state-metrics
+      name: kube-state-metrics
+    spec:
+      ports:
+      - name: metrics
+        port: 8080
+        targetPort: metrics
+        protocol: TCP
+      selector:
+        app: kube-state-metrics
+{:.language-yaml}
+
+Then deploy it by running:
+
+    kubectl create -f kube-state-metrics.yaml
+
+The manifest above uses Google's publicly available kube-state-metrics container. If you would like to build your own, you can do so by:
+
+1. Clone the [kube-state-metrics Github repository](https://github.com/kubernetes/kube-state-metrics)
+1. Run `make container` to build the container
+1. Run `kubectl apply -f kubernetes`
+
+If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent. For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/kubernetes_state.yaml.example). If you have enabled [Service Discovery](/guides/servicediscovery/), the kube state URL will be configured and managed automatically.
+
 # Validation
 
-To verify the Datadog agent is running in your environment as a daemonset, execeute:
+To verify the Datadog agent is running in your environment as a daemonset, execute:
 
-    $ kubectl get daemonset
+    kubectl get daemonset
 
 If the agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
 
@@ -96,6 +158,8 @@ If the agent is deployed you will see similar output to the text below, where de
 # Limitations
 
 Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker/).
+
+Additionally please note that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).
 
 # Metrics
 

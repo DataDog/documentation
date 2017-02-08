@@ -28,7 +28,7 @@ def get_local_hash(language)
     },
     "menu_references_monitoring" => {
       "en" => "Monitoring",
-      "ja" => "Monitoring",
+      "ja" => "アラート設定",
     },
     "menu_references_graphing" => {
       "en" => "Graphing",
@@ -36,11 +36,11 @@ def get_local_hash(language)
     },
     "menu_references_graphingjson" => {
       "en" => "Graphing using JSON",
-      "ja" => "Graphing using JSON",
+      "ja" => "JSONを使ったグラフの設定",
     },
     "menu_references_host_names" => {
       "en" => "Host Names",
-      "ja" => "グラフ表示入門",
+      "ja" => "ホスト名について",
     },
     "menu_references_integrations" => {
       "en" => "Integrations",
@@ -90,21 +90,21 @@ def get_local_hash(language)
       "en" => "日本語ドキュメントへのリンク。",
       "ja" => "Read the docs in English",
     },
-    "footer_let_us_know" => {
-      "en" => "Let us know.",
-      "ja" => "にてご連絡を頂けると幸いです。",
-    },
     "footer_need_some_help" => {
       "en" => "Need some help? ",
-      "ja" => "お問い合わせ",
-    },
-    "footer_get_in_touch" => {
-      "en" => "Get in touch.",
       "ja" => "お困りの場合は、",
     },
     "footer_mistake_in_the_docs" => {
       "en" => "Mistake in the docs?",
-      "ja" => "ページに掲載した方法にて、お気軽にお声がけ下さい。",
+      "ja" => "ドキュメント内の不備を見つけた場合は、",
+    },
+    "footer_get_in_touch" => {
+      "en" => "Get in touch.",
+      "ja" => "お気軽にお声がけ下さい。",
+    },
+    "footer_let_us_know" => {
+      "en" => "Let us know.",
+      "ja" => "ご連絡を頂けると助かります。",
     },
     "integrations_other_integrations" => {
       "en" => "Other Integrations",

@@ -28,22 +28,24 @@ You can also specify your own payload in order to add your own custom fields to 
 |$ID | ID of the event *(ex: 1234567)*|
 |$EVENT_TITLE| Title of the event *(ex: \[Triggered] \[Memory Alert])*|
 |$EVENT_MSG| Text of the event *(ex: @webhook-url Sending to the webhook)*|
-|$EVENT_TYPE| Type of the event *(ex: metric_alert_monitor)*|
+|$EVENT_TYPE| Type of the event *(values: `metric_alert_monitor`, `event_alert`, or `service_check`)*|
 |$LAST_UPDATED| Date when the event was last updated .|
-|$DATE| Date *(epoch) where the event happened *(ex: 1406662672000)*|
+|$DATE| Date *(epoch)* where the event happened *(ex: 1406662672000)*|
 |$AGGREG_KEY| ID to aggregate events belonging together *(ex: 9bd4ac313a4d1e8fae2482df7b77628)*|
 |$ORG_ID| ID of your organization *(ex: 11023)*|
 |$ORG_NAME| Name of your organization *(ex: Datadog)*|
 |$USER| User posting the event that triggered the webhook *(ex: rudy)*|
 |$SNAPSHOT| Url of the image if the event contains a snapshot *(ex: https://url.to.snpashot.com/)*|
 |$LINK| Url of the event *(ex: https://app.datadoghq.com/event/jump_to?event_id=123456)*|
-|$PRIORITY| Priority of the event *(ex: normal)*|
-|$TAGS| Comma-separated list of the event tags *(ex: monitor, name:myService, role:computing-node)*|
+|$PRIORITY| Priority of the event *(values: `normal` or `low`)*|
+|$TAGS| Comma-separated list of the event tags *(ex: `monitor, name:myService, role:computing-node`)*|
 |$ALERT_ID| ID of alert *(ex: 1234)*|
-|$ALERT_METRIC| Name of the metric if it's an alert *(ex: system.load.1)*|
+|$ALERT_TITLE| Title of the alert|
+|$ALERT_METRIC| Name of the metric if it's an alert *(ex: `system.load.1`)*|
+|$ALERT_SCOPE| Comma-separated list of tags triggering the alert *(ex: `availability-zone:us-east-1a, role:computing-node`)*|
 |$ALERT_QUERY| Query of the monitor that triggered the webhook|
 |$ALERT_STATUS| Summary of the alert status *(ex: system.load.1 over host:my-host was > 0 at least once during the last 1m)*|
-|$ALERT_TRANSITION| Type of alert notification *(ex: Triggered)*|
+|$ALERT_TRANSITION| Type of alert notification *(values: `Triggered` or `Recovered`)*|
 {:.table}
 
 If you want to post your webhooks to a service requiring authentication, you can Basic HTTP authentication my modifing your URL from `https://my.service.com` to `https://username:password@my.service.com`.
@@ -69,7 +71,7 @@ replacing `To` with your phone number and `From` with the one twilio attributed 
 ### Creating an issue in Jira
 
 Use as URL:
-`https://jirauser:jirapassword@yourdomain.atlassian.net/rest/api/2/issue`
+`https://{Your-Jira-Username}:{Your-Jira-Password}@{Your-Domain}.atlassian.net/rest/api/2/issue`
 and as payload
 
     {
@@ -86,4 +88,3 @@ and as payload
     }
 {:.language-json}
 Don't check the "Encode as form" checkbox.
-

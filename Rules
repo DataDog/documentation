@@ -15,9 +15,19 @@
 #   because “*” matches zero or more characters.
 
 require './lib/rule_helper'
+require './lib/generate_ja_pages'
 require 'octokit'
 preprocess do
   create_redirect_pages
+
+  if ENV.has_key?('JPASSIST')
+    $jpassist = true
+    list_update_pages
+  else
+    $jpassist = false
+  end
+
+  generate_ja_pages
   # def rchomp(sep = $/)
   #   self.start_with?(sep) ? self[sep.size..-1] : self
   # end
@@ -158,8 +168,8 @@ compile '*' do
 
     unless id.match('/api/')
       filter :header_links
+      filter :insert_common_links
     end
-
     case
 
     # when id.match('/ja/guides/basic_agent_usage/')

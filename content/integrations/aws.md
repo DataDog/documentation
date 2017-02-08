@@ -97,6 +97,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "rds:List*",
                 "route53:List*",
                 "s3:GetBucketTagging",
+                "s3:ListAllMyBuckets",
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
@@ -268,6 +269,7 @@ For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/lates
 
 ## S3
 
+* `s3:ListAllMyBuckets`: Used to list available buckets
 * `s3:GetBucketTagging`: Used to get custom bucket tags
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
@@ -341,4 +343,4 @@ When installing the agent on an aws host, you might see duplicated hosts on the 
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 
    [6]: mailto:support@datadoghq.com
-   [7]: http://www.datadoghq.com/2013/10/dont-fear-the-agent
+   [7]: http://www.datadoghq.com/blog/dont-fear-the-agent

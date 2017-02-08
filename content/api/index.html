@@ -474,7 +474,7 @@ kind: documentation
       <%= left_side_div %>
         <p>Monitors allow you to watch a metric or check that you care about,
         notifying your team when some defined threshold is exceeded. Please
-        refer to the <a href="/guides/monitoring">Guide to Monitoring</a> for more
+        refer to the <a href="/guides/monitors">Guide to Monitors</a> for more
         information on creating monitors.</p>
       </div>
     </div>
@@ -567,7 +567,8 @@ kind: documentation
               using the same '@username' notation as events.",
               :default => "dynamic, based on query" %>
           <%= argument 'tags', "A list of tags to associate with your monitor.
-              This can help you categorize and filter monitors in the manage monitors page of the UI. Note: it's not currently possible to filter by these tags when querying via the API",
+              When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags.
+              Tags using the \"service\" key (e.g. <code>service:my-app</code>) will be visible in the corresponding \"service\" field when editing the monitor in the Datadog UI. Tags without the \"service\" key will only be available via the API and will not be visible or editable in the Datadog UI.",
               :default => "empty list" %>
 
           <li>
@@ -598,16 +599,16 @@ kind: documentation
               monitor will notify when data stops reporting.
               <p>Default: <code>false</code></p></li>
 
-              <li><code>new_host_delay</code> Time (in seconds) to allow a host 
-              to boot and applications to fully start before starting the 
+              <li><code>new_host_delay</code> Time (in seconds) to allow a host
+              to boot and applications to fully start before starting the
               evaluation of monitor results. Should be a non negative integer.
               <p>Default: <code>300</code></p></li>
 
               <li><code>no_data_timeframe</code> the number of minutes before a
               monitor will notify when data stops reporting. Must be at least
-              2x the monitor timeframe for metric alerts or 2 minutes for
+              1x the monitor timeframe for metric alerts or 2 minutes for
               service checks.
-              <p>Default: <code>2x timeframe for metric alerts, 2 minutes for
+              <p>Default: <code>1x timeframe for metric alerts, 2 minutes for
               service checks</code></p></li>
 
               <li><code>timeout_h</code> the number of hours of the monitor not
@@ -710,9 +711,14 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'group_states', "A comma-separated string indicating
-          what, if any, group states to include. Choose from one or more from
-          'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
+          <%= argument 'group_states', "If this argument is
+          set, the returned data will include additional information (if
+          available) regarding the specified group states, including the
+          last notification timestamp, last resolution timestamp and
+          details about the last time the monitor was triggered. The
+          argument should include a string list indicating what, if any,
+          group states to include. Choose one or more from 'all', 'alert',
+          'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
         </ul>
       </div>
@@ -791,9 +797,14 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument 'group_states', "A string list indicating
-          what, if any, group states to include. Choose from one or more from
-          'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'",
+          <%= argument 'group_states', "If this argument is
+          set, the returned data will include additional information (if
+          available) regarding the specified group states, including the
+          last notification timestamp, last resolution timestamp and
+          details about the last time the monitor was triggered. The
+          argument should include a string list indicating what, if any,
+          group states to include. Choose one or more from 'all', 'alert',
+          'warn', or 'no data'. Example: 'alert,warn'",
           :default => "None" %>
           <%= argument 'name', "A string to filter monitors by name",
           :default => "None" %>
@@ -801,9 +812,8 @@ kind: documentation
           what tags, if any, should be used to filter the list of monitors
           by scope",
           :default => "None" %>
-          <%= argument 'monitor_tags', "A comma-separated list indicating 
-          what service and/or custom tags, if any, should be used to filter 
-          the list of monitors",
+          <%= argument 'monitor_tags', "A comma separated list indicating
+          what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
         </ul>
       </div>
@@ -2001,7 +2011,7 @@ kind: documentation
           <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
           <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
         </ul>
-        
+
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -2231,7 +2241,7 @@ kind: documentation
           <li>Using the application key instead of API key</li>
           <li>Events are succeeding, but because success events are low priority, they don't show up in the event stream until it is switched to priority 'all'</li>
         </ul>
-        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+        <p>To check your timestamp is correct run:<br> <code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date</code>
         <br>
         This will output the current system’s date, and then make a request to our endpoint and grab
                the date on our end. If these are more than a few minutes apart,

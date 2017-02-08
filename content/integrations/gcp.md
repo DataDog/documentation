@@ -15,7 +15,15 @@ Connect to Google Cloud Platform to:
 
 ### Installation
 
-From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access you can add the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
+From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
+
+Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the "Limit Metric Collection" textbox. Only hosts that match one of the defined tags will be imported into Datadog. Wildcards, such as '?' (for single characters) and '*' (for multiple characters) can also be used. Host matching a given tag can also be excluded by adding '!' before the tag.
+
+~~~
+e.x. datadog:monitored,env:production,instance-type:c1.*
+~~~
+
+![settings](/static/images/GCPSetup.png)
 
 ### Metrics
 

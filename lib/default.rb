@@ -98,7 +98,7 @@ def snowplow_pixel()
       ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
       p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
       };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-      n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://d33tyra1llx9zy.cloudfront.net/static/js/plow232.js","snowplow"));
+      n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://don08600y3gfm.cloudfront.net/ps3b/static/js/plow232.js","snowplow"));
       window.snowplow('newTracker', 'co', 'collector.datadoghq.com', { // Initialise a tracker
       appId: 'datadog', // Application ID. Make sure you use the same value across all the tags you fire on your trial
       platform: 'web',
