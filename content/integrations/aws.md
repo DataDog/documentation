@@ -101,6 +101,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
+                "sqs:ListQueues",
                 "support:*"
               ],
               "Effect": "Allow",
