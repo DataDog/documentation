@@ -187,15 +187,19 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 以下の図は、これらの4つのアルゴリズムがどのように動作し、いつ異なるかを示しています。
 
-最初の図内の _basic_ では、正常な値域から逸脱したデータポイントの異常(anomalies)を検知しますが、正常域帯に繰り返しの季節パターンを組み入れられていません。 対照的に、_robust_、_agile_、および _adaptive_ は、全て季節パターンを認識し、より微妙なデータポイントの異常を検出することができます。（例えば、メトリックが最小値の付近でほぼ横ばい状態になっている場合です）
+最初の図内の _basic_ では、正常な値域から逸脱したデータポイントの異常(anomalies)を検知しますが、メトリクス
+予測域帯に繰り返しの季節パターンを組み入れられていません。 対照的に、_robust_、_agile_、および _adaptive_ は、全て季節パターンを認識し、より微妙なデータポイントの異常を検出することができます。（例えば、メトリックが最小値の付近でほぼ横ばい状態になっている場合です）
 
 <img src="/static/images/anomalies/alg_comparison_1.png" style="width:100%; border:1px solid #777777"/>
 
-次の図では、メトリックの傾向レベルが、突然シフトしています。 _Agile_ と _adaptive_ は、_robust_ より素早くレベルシフトに順応しています。 又、_robust_ の正常域の幅は、レベルシフト後の不確実性を反映して増加します。_agile_　と　_adaptive_ の正常域の幅は変更されません。_Basic_は、このシナリオには明らかに不適切なことがわかります。最後に、このメトリックには、週単位の周期で繰り返されるの強い季節性パターンが表示されます。
+次の図では、メトリックの傾向レベルが、突然シフトしています。 _Agile_ と _adaptive_ は、_robust_ より素早くレベルシフトに順応しています。 又、_robust_ のメトリクス
+予測域の幅は、レベルシフト後の不確実性を反映して増加します。_agile_　と　_adaptive_ のメトリクス
+予測域の幅は変更されません。_Basic_は、このシナリオには明らかに不適切なことがわかります。最後に、このメトリックには、週単位の周期で繰り返されるの強い季節性パターンが表示されます。
 
 <img src="/static/images/anomalies/alg_comparison_2.png" style="width:100%; border:1px solid #777777"/>
 
-次の図は、アルゴリズムが一時間の異常(anomalies)にどのように反応するかを示しています。 _Robust_ は、この異常(anomalies)を完全に無視します。他のアルゴリズムでは異常(anomalies)が、新しい正常域への適応を促しています。_Agile_ と _adaptive_ では、メトリックの元のレベルへの復帰を異常として検知するほど、素早く適応が進んでいます。
+次の図は、アルゴリズムが一時間の異常(anomalies)にどのように反応するかを示しています。 _Robust_ は、この異常(anomalies)を完全に無視します。他のアルゴリズムでは異常(anomalies)が、新しいメトリクス
+予測域への適応を促しています。_Agile_ と _adaptive_ では、メトリックの元のレベルへの復帰を異常として検知するほど、素早く適応が進んでいます。
 
 <img src="/static/images/anomalies/alg_comparison_3.png" style="width:100%; border:1px solid #777777"/>
 
@@ -203,7 +207,9 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 <img src="/static/images/anomalies/alg_comparison_scale.png" style="width:100%; border:1px solid #777777"/>
 
-最後に、各アルゴリズムが新しいメトリックをどのように処理するかを見ていきます。_Robust_と _agile_ には、新しいメトリックの収集を始めた後数週間は正常域帯が表示されません。 _Basic_ と _adaptive_ では、メトリックが最初に表示された直後に正常域帯の表示を開始します。 _Adaptive_ では、メトリックの1日周期の季節性パターンを予測に使いますが、_basic_ では、最近の値の範囲を使うだけです。
+最後に、各アルゴリズムが新しいメトリックをどのように処理するかを見ていきます。_Robust_と _agile_ には、新しいメトリックの収集を始めた後数週間はメトリクス
+予測域帯が表示されません。 _Basic_ と _adaptive_ では、メトリックが最初に表示された直後にメトリクス
+予測域帯の表示を開始します。 _Adaptive_ では、メトリックの1日周期の季節性パターンを予測に使いますが、_basic_ では、最近の値の範囲を使うだけです。
 
 <img src="/static/images/anomalies/alg_comparison_new_metric.png" style="width:100%; border:1px solid #777777"/>
 
@@ -228,13 +234,9 @@ Take care when creating multi-alerts. A metric such as `service.requests_served{
 
 また、Anomaly Detectionは効果的な予測値のために過去の時系列データを必要としますので、もしメトリクスの収集を始めてから数時間あるいは数日である場合、Anomaly Detectionは恐らく有効には機能しないでしょう。
 
----
+multi-alertsを作成するときは、特に注意してください。 `service.requests_served {*}`などのメトリックはanomaly detection には適していますが、おそらく`service.requests_served{*} by {host}`は、そうではありません。複数のホストがロードバランシングされている場合、グループ内の他のホストと異なった動作をしているホストを検出するためには[outlier monitor](https://docs.datadoghq.com/guides/outliers/)が適しています。
 
-Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an [outlier monitor](https://docs.datadoghq.com/guides/outliers/) will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won’t be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
-
----
-
-複数のアラートを作成するときは注意してください。 service.requests_served {*}などのメトリックは異常検出には適していますが、{host}によるservice.requests_served {*}はおそらくそうではありません。 ホストのロードバランシングが行われている場合、異常な動作をしているホストを検出するためには異常値モニタが適しています。 サービスの規模が大きくなると、異常検出が開始されるまでの履歴が最小限になるまで、新しいホストはまったく監視されず、それらのホストによって処理される要求の数が不安定になるため警告がノイズになる可能性があります 。
+又、サービスがスケールアップしホストが新しく起動してきた場合、anomaly detectionが必要としてる履歴データが揃うまでの期間は、それらの新しいホストは監視対象として機能しません。更に監視対象として準備ができた後も、これらのホストによって処理されるリクエスト数が不安定なために、意図していないアラートが発生することがあるでしょう。
 
 
 <!--### Why can't I use anomaly detection over groups in the dashboard?
@@ -246,8 +248,23 @@ Looking at many separate timeseries in a single graph can lead to [spaghettifica
 You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
 
 <img src="/static/images/anomalies/anomaly_multilines.png" style="width:500px; border:1px solid #777777"/>
+-->
 
-### Will past anomalies affect the current predictions?
+### ダッシュボード上で、グループに対してanomaly detectionを使用できないのはなぜですか？
+
+特定のグラフ内で多数の独立した時系列データを観ようとすると、[スパゲッティ現象](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/)が発生する可能性が高くなります。anomaly detection の視覚化では、この傾向が更に強くなり、問題が悪化する可能性が高いです。
+
+<img src="/static/images/anomalies/spaghetti.png" style="width:500px; border:1px solid #777777"/>
+
+You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
+
+特定のグラフ内に複数の時系列データを表示したい場合は、1つずつ追加することをお勧めします。又、グレーのメトリクス
+予測域を示す帯はマウスオーバー時にのみ表示されます。
+
+<img src="/static/images/anomalies/anomaly_multilines.png" style="width:500px; border:1px solid #777777"/>
+
+
+<!-- ### Will past anomalies affect the current predictions?
 
 All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
 
@@ -258,31 +275,15 @@ The second graph shows the same metric, a day later. Even though it uses the pre
 <img src="/static/images/anomalies/no_effect.png" style="width:500px; border:1px solid #777777"/>
 -->
 
-### Why can't I use anomaly detection over groups in the dashboard?
+### 過去の異常(anomalies)が、現在の予測に影響しますか？
 
-Looking at many separate timeseries in a single graph can lead to [spaghettification](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/), and the problem gets only worse once the anomaly detection visualization is added in.
-
-1つのグラフで多くの別々の時系列データを見ると、スパゲッティングが発生する可能性があり、異常検出の視覚化が追加されると問題は悪化します。
-
-<img src="/static/images/anomalies/spaghetti.png" style="width:500px; border:1px solid #777777"/>
-
-You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
-
-ただし、1つのグラフに複数の系列を1つずつ追加することはできます。 グレーの封筒はマウスオーバー時にのみ表示されます。
-
-<img src="/static/images/anomalies/anomaly_multilines.png" style="width:500px; border:1px solid #777777"/>
-
-### Will past anomalies affect the current predictions?
-
-All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
-
-_Basic_以外のすべてのアルゴリズムは、膨大な量の履歴データを使用しているため、ほとんどの異常に対して堅牢です。 最初のグラフでは、メトリックが0に下がった後もエンベロープがどのように400Kに留まっているのか、それが1日を通してどのように継続しているのかをご確認ください。
+_Basic_ 以外の全てのアルゴリズムは、膨大な量の履歴データを使用しているため、ほとんどの場合において異常(anomalies)の影響を受けることはないです。 次のグラフでは、メトリックが0Kに下がった後もメトリクス
+予測域帯が400K付近に留まり、それが1日を通して継続していることをご確認できます。
 
 <img src="/static/images/anomalies/anomalous_history.png" style="width:500px; border:1px solid #777777"/>
 
-The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
-
-2番目のグラフは、同じメトリックを1日後に示しています。 エンベロープの計算では前日を使用していますが、その後発生した異常の影響を受けません。
+2番目のグラフでは、1日後の同一メトリックの状態を示しています。 メトリクス
+予測域帯の計算には前日のデータを使用していますが、前日に発生した異常(anomalies)の影響を受けません。
 
 <img src="/static/images/anomalies/no_effect.png" style="width:500px; border:1px solid #777777"/>
 
@@ -294,33 +295,23 @@ Smaller window sizes will lead to faster alerts, however, with very small window
 Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can get alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
 -->
 
-### How should I set the window size and alert threshold?
+###どのようにてアラートの評価対象時間としきい値を設定すればよいですか？
 
-Smaller window sizes will lead to faster alerts, however, with very small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise.
+評価対象時間が短くなると、アラートは短い時間で反応するようになります。しかし、極めて短い対象時間(10分未満)を設定しまうと、メトリックに多くのノイズが含まれているように見えることが多く、異常(anomalies)とノイズの違いを識別することが困難になります。
 
-Note that setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. You can tune the threshold to control how long an anomaly must last to trigger an alert. For example, with the window size set to 30 minutes, you can get alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%)
+**注)** 評価対象時間をX分に設定しても、アラートが検知/実行されるためには異常(anomalies)状態がX分継続する必要はありません。しきい値を調整することで、アラートが検知/実行されるまでの時間を制御することができます。例えば、評価対象時間を30分に設定した場合、しきい値を5/30 = 17％に設定することで、異常が5分間続くとアラートが実行されます。
 
----
+過去の「評価対象時間としきい値の組み合わせ」の試行錯誤の結果によると、評価時間を15分~1時間に設定し、しきい値を "> 40％" に設定した場合、最も信頼できる異常(anomalies)アラートになることが分かりました。
 
-###どのようにウィンドウサイズとアラートのしきい値を設定する必要がありますか？
-
-ウィンドウサイズが小さくなるとアラートが速くなりますが、ウィンドウが非常に小さい（10分未満）と、メトリックがノイズに見えることが多く、異常とノイズの違いを視覚化することが困難になります。
-
-ウィンドウのサイズをX分に設定すると、アラートがトリガーされる前にX分続くことはありません。 しきい値を調整して、アラートをトリガーするまでの時間を制御することができます。 たとえば、ウィンドウサイズを30分に設定した場合、しきい値を5/30 = 17％に設定することで、異常が5分間続くとアラートが表示されます。 つまり、ウィンドウのサイズが15分から1時間の間、しきい値がより高い側（> 40％）にある場合、異常アラートが最も信頼できることがわかりました
 
 <!-- ### Why does `anomalies` not add a gray prediction band in the dashboard? / Why am I getting "No Data" for an Anomaly Alert? / How much history do the algorithms require?
 
 All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has at least two weeks of history. _Adaptive_ will start working after it has at least two hours worth of history.
 -->
 
-### Why does `anomalies` not add a gray prediction band in the dashboard? / Why am I getting "No Data" for an Anomaly Alert? / How much history do the algorithms require?
+### ダッシュボードにグレーの予測バンドを表示しないのですか？ / 異常(anomalies)アラートで"No Data"が表示されるのはなぜですか？ /各アルゴリズムにはどのくらいの履歴データが必要ですか？
 
-All the algorithms besides _Basic_ require historical data before they can start making predictions. If your metric has only started reporting data for a short while, then _Agile_ and _Robust_ won't try to make any predictions until it has at least two weeks of history. _Adaptive_ will start working after it has at least two hours worth of history.
-
-
-### なぜアノマリーはダッシュボードにグレーの予測バンドを追加しないのですか？ /異常なアラートの「データなし」が表示されるのはなぜですか？ /アルゴリズムにはどのくらいの履歴が必要ですか？
-
-_Basic_以外のすべてのアルゴリズムでは、予測を開始する前に履歴データが必要です。 メトリックでデータの報告が開始されたばかりの場合、_Agile_と_Robust_は少なくとも2週間の履歴があるまで予測を行いません。 _Adaptive_は少なくとも2時間分の履歴があると作業を開始します。
+_Basic_ 以外の全てのアルゴリズムは、予測ために履歴データを必要としています。_Agile_ と _Robust_ は、少なくとも2週間の履歴データがあるまで予測を開始しません。 _Adaptive_ は、2時間分の履歴データがあれば検知を開始します。
 
 
 <!--
@@ -384,40 +375,22 @@ Another option is to apply the `ewma()` function to take a moving average. Like 
 <img src="/static/images/anomalies/ewma_profile_updates.png" style="width:500px; border:1px solid #777777"/>
 -->
 
-### Is it possible to capture anomalies that occur within the bounds?
+### グレー範囲内で発生する異常(anomalies)を検知することは可能ですか？
 
-If the reason anomalies are occurring within the bounds is that the volatility of a metric leads to wide bounds that mask true anomalies (as described in the FAQ above), you may be able apply functions to the series to reduce its volatility, leading to narrower bounds and better anomaly detection.
+特別の理由があり異常(anomalies)がグレー範囲内で発生している場合。例えば、メトリックの変化率大きくメトリクス
+予測域の幅が広くなり、本当は異常(anomalies)で有るはずのデータポイントが覆い隠されてしまっている場合など。(上記のFAQで説明したように...）
+このような場合には、時系列データに予め変化率を平準化ための関数操作をしておくと、予測域の幅を狭く抑えることができ、anomaly detection の精度が向上します。
 
-For example, many important metrics (e.g., `successful.logins`, `checkouts.completed`, etc.) represent the success of some user-driven action. It can be useful to monitor for anomalous drops in one of those metrics, as this may be an indication that something is preventing successful completion of these events and that the user experience is suffering.
+例えば、`successful.logins`, `checkouts.completed`などは、ユーザ操作の成功を表す重要なメトリクスです。これらのメトリクスのどれかに異常的なドロップが発生していないかを監視することは有意義なことです。なぜならば、何かがこれらのイベントの正常な完了を妨げ、ユーザーエクスペリエンスを落としていることを指摘している可能性が有るからです。
 
-It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
-
-
-<img src="/static/images/anomalies/raw_profile_updates.png" style="width:500px; border:1px solid #777777"/>
-
-How can we work around this problem? One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
-
-<img src="/static/images/anomalies/rollup_profile_updates.png" style="width:500px; border:1px solid #777777"/>
-
-Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
-
-<img src="/static/images/anomalies/ewma_profile_updates.png" style="width:500px; border:1px solid #777777"/>
-
-
-###範囲内で発生する異常をキャプチャすることは可能ですか？
-
-理由の異常が境界内で発生している場合は、メトリックのボラティリティが真の異常を隠す広い境界につながる（上記のFAQで説明したように）場合、そのシリーズにボラティリティを減らすために関数を適用できる可能性がありますより良い異常検出が可能です。
-
-例えば、多くの重要な指標（例えば、「成功。ログイン」、「チェックアウト済み」など）は、ユーザ主導の行動の成功を表している。これらのメトリックの1つの異常なドロップを監視すると便利です。これは、何かがこれらのイベントの正常な完了を妨げていることやユーザーエクスペリエンスが苦しんでいることを示している可能性があります。
-
-これらのメトリックは、特に、短い時間枠でメトリックを表示する場合に、ゼロまたはそれに近い点を持つことが一般的です。残念なことに、これにより、異常検出予測の境界にゼロが含まれ、測定基準の異常なドロップを検出できなくなります。例を以下に示します。
+しかしながら、短い時間枠(短い時間に多くのデータ)でメトリックを表示する場合には特に、これらのメトリクスはゼロまたはそれに近い値を多く持っていることが一般的です。残念ならが、これらの値により anomaly detection の予測域帯にはゼロが含まれるようになってしまい、メトリックの落ち込みを検出できなくなります。以下の図を参照してみてください。
 
 <img src="/static/images/anomalies/raw_profile_updates.png" style="width:500px; border:1px solid #777777"/>
 
-この問題を回避するにはどうしたらいいですか？ 1つのアプローチは、より大きな間隔の使用を強制するために `rollup（）`を追加することです。 `rollup（）`は、グラフ上の単一のポイントに集計される秒数を引数として取ります。 たとえば、 `rollup（120）`を適用すると、2分ごとに1ポイントの系列になります。 間隔を広げると、ゼロはまれになり、正しく異常に分類できます。 上記のシリーズと同じですが、2分間のロールアップが適用されています。
+この問題を回避するために考えられるアプローチの一つは、データポイントの粒度を調整するため `rollup()` を、時系列データに適応しておく方法です。`rollup()` は、グラフ上で単一ポイントに集約される時間(秒数)を引数として取ります。`rollup(120)`を適用すると、2分ごとに1ポイントの時系列データに変換されます。 データの粒度を荒くすると、ゼロの発生頻度は極端に減り、注目すべき意義のあるゼロ値は異常(anomalies)として適切に判定されるようになります。以下の図は、上記の時系列シリーズですが、`rollup(120)` を適用しています。
 
 <img src="/static/images/anomalies/rollup_profile_updates.png" style="width:500px; border:1px solid #777777"/>
 
-別のオプションは `ewma（）`関数を適用して移動平均を取ることです。 ロールアップと同様に、この関数は断続的なゼロを滑らかにして、メトリックの低下を異常として正しく識別できるようにします。
+別のオプションして考えられるのは、 `ewma()` 関数を適用して移動平均を取ることです。この関数は、rollupと同様に断続的なゼロの発生を排除し、メトリックの落ち込みを異常(anomalies)として正しく識別できるようにします。
 
 <img src="/static/images/anomalies/ewma_profile_updates.png" style="width:500px; border:1px solid #777777"/>
