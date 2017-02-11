@@ -1,6 +1,6 @@
 ---
 last_modified: 2017/02/11
-translation_status: progress
+translation_status: complete
 language: ja
 title: DogStatsDの解説
 autotocdepth: 1
