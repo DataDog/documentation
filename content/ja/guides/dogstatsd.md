@@ -1,27 +1,9 @@
 ---
-last_modified: 2015/04/02
-translation_status: complete
+last_modified: 2017/02/11
+translation_status: progress
 language: ja
 title: DogStatsDの解説
-sidebar:
-  nav:
-    - header: ガイド
-    - text: どのように動作するの
-      href: "#how-it-works"
-    - text: セットアップ
-      href: "#set-up"
-    - text: メトリクス
-      href: "#metrics"
-    - text: サンプルレート
-      href: "#sample-rates"
-    - text: タグ
-      href: "#tags"
-    - text: 設定
-      href: "#configuration"
-    - text: データグラム
-      href: "#datagram-format"
-    - text: ソースコード
-      href: "#source"
+autotocdepth: 1
 ---
 
 <!-- <p class="aside">
@@ -56,8 +38,6 @@ they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <p>
 <img src="/static/images/dogstatsd.png">
 </p> -->
-
-<h2 id="how-it-works"></h2>
 
 ## どのように動作するの
 
@@ -138,9 +118,7 @@ language and you'll be ready to start hacking. Any StatsD client will work
 just fine, but using a Datadog StatsD client will give you a few extra features
 (namely tags and histograms, but more on that later). -->
 
-<h2 id="set-up"></h2>
-
-## セットアップ
+## Dogstatsdを使ってメトリックを送信するためのセットアップ
 
 既にDatadog Agentが起動し動作しているなら、開発に使用しているプログラミング言語に対応したDogSt​​atsDクライアントをインストールすれば、準備完了です。もちろん、一般的なStatsDクライアントでも問題なく動作します。しかし、DogStatsDクラアンを利用すれば、いくつかの追加機能(例: tags、histogramsなど)が使えるようになります。
 
@@ -159,8 +137,6 @@ You can see the list of StatsD clients on our [libraries page](/libraries/).　-
 We'll walk through the types of metrics supported by DogStatsD in Python, but
 the principles are easily translated into other languages.
 DogStatsD supports the following types of metrics: -->
-
-<h2 id="metrics"></h2>
 
 ## メトリクス
 
@@ -219,7 +195,7 @@ eof
 Histograms track the statistical distribution of a set of values, like the
 duration of a number of database queries or the size of files uploaded by users. Each
 histogram will track the average, the minimum, the maximum, the median
-and the 95th percentile.
+and the 95th percentile and the count.
 
 <%= python <<eof
 dog.histogram('database.query.time', 0.5)
@@ -232,7 +208,7 @@ supports them. -->
 
 ### Histograms (ヒストグラム)
 
-データベースへのクエリ実行時間やユーザーによってアップロードされたファイルのサイズなどの集計数のように、ヒストグラムは、値の集合の度数分布を追跡します。各ヒストグラムは、平均値、最小値、最大値、中央値及び95パーセンタイルを追跡します。
+データベースへのクエリ実行時間やユーザーによってアップロードされたファイルのサイズなどの集計数のように、ヒストグラムは、値の集合の度数分布を追跡します。各ヒストグラムは、平均値、最小値、最大値、中央値及び95パーセンタイルとカウントを追跡します。
 
 
 <%= python <<eof
@@ -296,8 +272,6 @@ eof
 will only be sent to the server about half of the time, but it will be
 multipled by the sample rate to provide an estimate of the real data. -->
 
-<h2 id="sample-rates"></h2>
-
 ## サンプルレート
 
 高いパフォーマンスを求められるプリグラムコードの部分では、UDPパケットを送信する部分は大きな負荷になることがあります。この問題を回避するために、DogStatsDクライアントは、サンプルレートの変更をサポートしています。これは、メトリクスの一定割合を指定し、送信回数を削減するとことです。
@@ -342,8 +316,6 @@ dog.histogram('rendering.duration', duration, tags=[version])
 eof
 %> -->
 
-<h2 id="tags"></h2>
-
 ## タグ
 
 タグは、Datadogでのみで使うことができるStatsDへの拡張です。タグは、メトリクスの分類に多面性を持たせ、多種多彩な切り口でのグラフ表示を可能にします。例えば、異なる2つのビデオレンダリングアルゴリズムの性能を測定したい場合は、アルゴリズムのバージョンをメトリクスにタグ付けして識別することができます。
@@ -378,7 +350,6 @@ Mandatory fields:
 
 Events are aggregated on the Event Stream based on: <br/>
 'hostname/event_type/source_type/aggregation_key'<br/>
-If `event_type` is empty, the event will be grouped with other events that don't have an `event_type`.
 
 <%= python <<eof
 
@@ -400,10 +371,7 @@ eof
   - `text` (String) — イベントテキスト。改行をサポートしています。
 
 イベントは、イベントストリーム上で次の分類によって集約されます：
-
 ‘hostname/event_type/source_type/aggregation_key’
-
-`event_type`に情報がない場合、そのイベントは、他の`event_type`が空のイベントとグループ化されます。
 
 <%= python <<eof
 
@@ -421,20 +389,20 @@ eof
   - Event title.
   - Event text. Supports line breaks.
 - Optional:
-  - `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
+  - `date_happened` (Time, None) — default: None — Assign a POSIX timestamp in seconds to the event. Default is now when none.
   - `hostname` (String, None) — default: None — Assign a hostname to the event.
   - `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
   - `priority` (String, None) — default: 'normal' — Can be 'normal' or 'low'.
   - `source_type_name` (String, None) — default: None — Assign a source type to the event.
   - `alert_type` (String, None) — default: 'info' — Can be 'error', 'warning', 'info' or 'success'.
-  - `tags` - (Array[str], None) — default: None — An array of tags -->
+  - `tags` - (Array\[str\], None) — default: None — An array of tags -->
 
 #### 設定項目
 - 必須項目:
   - `title` (String) — イベントのタイトル。
   - `text` (String) — イベントテキスト。改行をサポートしています。
 - オプション項目:
-  - `date_happened` (Time, None) — default: None — イベントにタイムスタンプを付けます。
+  - `date_happened` (Time, None) — default: None — イベントに秒単位までを表現するPOSIXのタイムスタンプを付けます。
   - `hostname` (String, None) — default: None — イベントにホスト名を付けます。
   - `aggregation_key` (String, None) — default: None — 他のイベントとグループ分けするために集約用のキーを付けます。
   - `priority` (String, None) — default: 'normal' — 'normal' または 'low'を指定します。
@@ -452,22 +420,15 @@ configuration file</a>:
     # The port DogStatsD runs on. If you change this, make your the apps sending to
     # it change as well.
     dogstatsd_port: 8125
+-->
 
-    # The number of seconds to wait between flushes to the server.
-    dogstatsd_interval: 10 -->
-
-<h2 id="configuration"></h2>
-
-## 設定
+## DogStatsDの設定
 
 DogStatsDでは、UDPパケットの受信ポートとメトリクスの送信間隔を[Datadog Agentの設定ファイル](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example)内で設定することができます。
 
     # The port DogStatsD runs on. If you change this, make your the apps sending to
     # it change as well.
     dogstatsd_port: 8125
-
-    # The number of seconds to wait between flushes to the server.
-    dogstatsd_interval: 10
 
 
 <!-- ## Datagram Format
@@ -481,13 +442,13 @@ the packets:
 
 Here's  breakdown of the fields:
 
-- `metric.name` should be a String with no colons, bars or @ characters.
+- `metric.name` should be a String with no colons, bars or @ characters　and fit our [naming policy](http://docs.datadoghq.com/faq/#api).
 - `value` should be a number
 - type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
   Timer or `s` for Set.
 - sample rate is optional and should be a float between 0 and 1 inclusive.
 - tags are optional, and should be a comma seperated list of tags. colons are
-  used for key value tags.
+  used for key value tags. Note that the key `device` is reserved, tags like "device:xyc" will be dropped by Datadog.
 
 Here are some example datagrams and comments explaining them:
 
@@ -510,8 +471,6 @@ Here are some example datagrams and comments explaining them:
     users.online:1|c|@0.5|#country:china
  -->
 
-<h2 id="datagram-format"></h2>
-
 ## データグラム
 
 ### メトリクス
@@ -522,12 +481,11 @@ Here are some example datagrams and comments explaining them:
 
 以下は各フィールドの概要:
 
-- `metric.name` ":", "-", "@" 以外の文字列。
+- `metric.name` ":", "-", "@" 以外の文字列。詳しくは、[ネーミング規則](http://docs.datadoghq.com/faq/#api)を参照してください。
 - `value` 数字。
 - 集約タイプの指定は、`c`はCounter, `g`はGauge, `h`はHistogram, `ms`はTimer, `s`はSet.
 - サンプルレートは、オプション指定項目です。 指定する場合は、0~1 の浮動小数点数になります。
-- タグは、オプション指定項目です。タグとタグの間位には","が入ります。キーバリューがセットのタグについては、":"を開いただに挟みます。
-
+- タグは、オプション指定項目です。タグとタグの間位には","が入ります。キーバリューがセットのタグについては、":"を開いただに挟みます。(注) `device:`タグはDatadog内で既に使用しているため、"device:xyc"のようなタグを付与しても削除されます。
 
 次は、データグラムのサンプルとその内容の解説です:
 
@@ -593,12 +551,49 @@ the packets:
   <strong><em><br/>注: それぞれのタグ文字列に含まれる`:`は、タグの一部です。</em></strong>
 
 
+<!-- ### Service Checks
+
+If you want to send service checks to DogStatsD, here is the format of the packets:
+
+`_sc|name|status|metadata`
+
+#### Fields
+- Mandatory:
+  - `name` — service check name string, shouldn't contain any `|`
+  - `status` — digit corresponding to the status you're reporting (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
+- Optional metadata `|metadata`:
+It's either nothing, or a combination of those suffixes:
+  - `|d:timestamp` — Assign a timestamp to the check. Default is the current Unix epoch timestamp when not supplied.
+  - `|h:hostname` — default: None — Assign a hostname to the event.
+  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br />Note: The `:` in tags is part of the tag list string and
+  has no parsing purpose like for the other parameters.</em></strong>
+  - `|m:service_check_message` — A message describing the current state of the service check. <em>This field should always be
+positioned last among the metadata fields.</em>
+-->
+
+### サービス Check
+
+DogSt​​atsD にサービス Check の結果を送信したい場合は、以下がパケットのフォーマットになります:
+
+`_sc|name|status|metadata`
+
+#### 設定項目
+- 必須項目:
+  - `name` — サービス check 名前を指定します。 `|`の文字が含まれてないようにしてください。
+  - `status` — 送信したいステータスを数値でしていします。 (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
+- オプション項目: `|metadata`
+何も指定しないか、次の項目の組み合わせを指定します:
+  - `|d:timestamp` — タイムスタンプを指定できます。オプションへの設定がない場合は、現在のUNIX 時間が付けられます。
+  - `|h:hostname` — default: None — ホスト名を指定できます。
+  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br />注: 他のパラメータのケースと異なり、`:` は、tags 文字列の一部として判断されます。</em></strong>
+  - `|m:service_check_message` — サービス check 現在のステートの詳細を表現するメッセージを付記します。<em>このフィールドは、必ず最後尾に記述してください。</em>
+
+
 <!-- ## Source
 
 DogStatsD is open-sourced under the BSD License. Check out the source
 [here](https://github.com/DataDog/dd-agent). -->
 
-<h2 id="source"></h2>
 
 ## ソースコード
 
