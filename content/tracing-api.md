@@ -1,8 +1,7 @@
 ---
 title: Tracing API
-kind: guide
+kind: documentation
 autotocdepth: 2
-listorder: 10
 ---
 
 ### Overview

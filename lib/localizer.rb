@@ -22,6 +22,10 @@ def get_local_hash(language)
       "en" => "API",
       "ja" => "APIレファレンス",
     },
+    "menu_references_tracing_api" => {
+      "en" => "Tracing API",
+      "ja" => "Tracing APIレファレンス",
+    },
     "menu_references_libraries" => {
       "en" => "Libraries",
       "ja" => "APIライブラリー",
