@@ -6,6 +6,8 @@ sidebar:
     - header: References
     - text: API
       href: "/api/"
+    - text: Tracing API
+      href: "/tracing-api/"
     - text: Libraries
       href: "/libraries/"
     - text: Graphing
