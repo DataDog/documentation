@@ -1,5 +1,5 @@
 ---
-last_modified: 2016/08/24
+last_modified: 2017/02/14
 translation_status: completed
 language: ja
 title: Outlier Detection
