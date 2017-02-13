@@ -4,6 +4,7 @@ translation_status: completed
 language: ja
 title: Outlier Detection
 kind: guide
+listorder: 16
 sidebar:
   nav:
     - header: Outlier Detection

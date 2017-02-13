@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: ダッシュボードのテンプレートの作成方法
 kind: guide
-listorder: 10
+listorder: 13
 sidebar:
   nav:
     - header: ダッシュボードの設定ガイド
