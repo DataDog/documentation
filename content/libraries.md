@@ -189,6 +189,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-logstash}
 
   * [Logstash Output for Datadog][73]
+  * [Logstash Output for Dogstatsd][88]
 
 #### NGINX LUA
 {: #community-integration-nginx-lua}
@@ -305,3 +306,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [85]: https://github.com/rfrezino/datadog-delphi
    [86]: https://github.com/miketheman/statsd.cr
    [87]: https://github.com/miketheman
+   [88]: https://github.com/brigade/logstash-output-dogstatsd
