@@ -1,6 +1,6 @@
 ---
 last_modified: 2017/02/13
-translation_status: progress
+translation_status: complete
 language: ja
 title: Host Map表示の入門
 kind: guide
