@@ -147,7 +147,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
-* `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
+* `cloudwatch:GetMetricStatistics` to fetch data points for a given metric.
 
 Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
 
