@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/15
+last_modified: 2017/02/14
 translation_status: complete
 language: ja
 title: Datadog Agent 入門
@@ -39,9 +39,9 @@ Datadog Agent のソースコードは、[Github](https://github.com/DataDog/dd-
 
 プロキシが設置されている環境で、Datadog Agent がデータを送信する必要がある場合は、次の<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">ドキュメント"Network Traffic and Proxy Configuration"</a>を参照してください。プロキシで開放するポートの情報に関しては、<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">"Open Ports"</a>の項目を参照してください。
 
-Datadog Agent は、次の３つの要素で構成されています: **Collector**, **Dogstatsd**, **Forwarder**
 
-<!-- <ul>
+<!-- The Agent has three main parts: the collector, dogstatsd, and the forwarder.
+<ul>
 <li>The collector runs checks on the current machine for whatever integrations you have
 and it will capture system metrics like memory and CPU.
 </li>
@@ -53,6 +53,8 @@ it up to be sent to Datadog.
 </ul>
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the
 overhead of each application if you don't want to run all parts (though we generally recommend you do). -->
+
+Datadog Agent は、次の３つの要素で構成されています: **Collector**, **Dogstatsd**, **Forwarder**
 
 - **Collector** は、ターゲットホストのCPU やメモリ等の一般的なシステムメトリクスを取得すると共に、インストールされているIntegrations の情報を取得します。
 - **Dogstatsd** は、ターゲットホストで実行されているアプリケーションやコマンドラインスクリプトからカスタムメトリクスを送信することができるstatsdのサーバです。
@@ -127,7 +129,8 @@ Here is a quick guide for troubleshooting getting integrations installed:
 		* Check the <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> to see if system metrics are showing up from the host. For example, look for system.cpu.user from the host that is running the Agent and has that integration setup.
 		* If there are still no metrics, check the logs for errors and please send them along, with the info command output, to <a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>. -->
 
-### Datadog Agent のトラブルシューティング {#troubleshooting}
+### Datadog Agent のトラブルシューティング
+{: #troubleshooting}
 
 まだDatadog Agent をインストールしていない場合は、こちらの<a href="https://app.datadoghq.com/account/settings#agent" target="_blank">インストール手順</a>をご覧ください。このページにたどり着く直前にDatadog Agent をインストールした場合は、メトリクスが表示されるようになるまでに数分かかることがあります。
 

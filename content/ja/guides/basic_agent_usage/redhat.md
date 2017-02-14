@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/27
+last_modified: 2017/02/14
 translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Red Hat)
@@ -23,13 +23,18 @@ OVERVIEW
 {: #overview}
 
 <!-- This guide will outline the basic functionality of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found
-<a href='https://app.datadoghq.com/account/settings#agent'>here</a>. -->
+If you haven't installed the Agent yet, instructions can be found <a href='https://app.datadoghq.com/account/settings#agent'>here</a>.
+-->
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
 <a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページに移動し、インストールの手順を確認してください。
 
+
+<!-- The process to upgrade from the previous version of the agent is to simply re-run the installation.
+-->
+
+以前のバージョンのAgnet から最新版にアップグレードするには、単純にAgent の再インストールを実行してください。
 
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
 
