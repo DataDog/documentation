@@ -10,7 +10,7 @@ sidebar:
       href: "#php"
     - text: Ruby
       href: "#ruby"
-    - text; JAVA
+    - text: JAVA
       href: "#java"
     - text: Go
       href: "#go"
