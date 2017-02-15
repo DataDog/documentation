@@ -16,4 +16,4 @@ params = {
     'per_unit': 'second'
 }
 
-print api.Metadata.update(metric_name=metric, **params)
+api.Metadata.update(metric_name=metric, **params)

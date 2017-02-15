@@ -9,4 +9,4 @@ initialize(**options)
 
 metric = 'system.cpu.idle'
 
-print api.Metadata.get(metric_name=metric)
+api.Metadata.get(metric_name=metric)
