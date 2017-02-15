@@ -1,5 +1,5 @@
 ---
-last_modified: 2017/02/14
+last_modified: 2017/02/15
 translation_status: complete
 language: ja
 title: メトリックのタイプ
