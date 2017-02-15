@@ -19,7 +19,7 @@ Enable this integration to see in Datadog all your S3 metrics.
 
 * **Daily Storage Metrics**
 
-	The only requirement for this integration is the permission `s3:GetBucketTagging`.
+	The only requirement to monitor daily metrics is the permission `s3:GetBucketTagging`.
 
 * **Request Metrics**
 
