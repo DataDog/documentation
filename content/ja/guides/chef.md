@@ -34,12 +34,13 @@ Deploying Datadog with Chef is meant to be very simple, and provide you with a m
 We also provide a Chef [Execution and Report Handler](https://docs.chef.io/handlers.html) that can capture `chef-client` failures as well as metrics related to the Chef run, such as timing and resources updated. -->
 
 
-概要
-このガイドでは、シェフを活用してDatadog Agentのインストールを自動化する方法を探求します
+### 概要
 
-シェフと一緒にDatadogを導入することは、非常に簡単であり、可能な限り簡単にすべてのインフラストラクチャにわたって監視の価値を得る方法を提供します。
+このガイドでは、[chef](https://www.chef.io/chef/) を活用して Datadog Agent のインストールを自動化する方法を解説します。
 
-また、シェフの実行とレポートハンドラを提供し、シェフのクライアントの失敗やタイミングやリソースの更新など、シェフの実行に関するメトリクスを取得できます。
+Chefを使って Datadog を導入することは、非常に簡単です。そして、最も簡単にインフラ全体からメトリクスを集取し、監視の意義を引き出す方法になります。
+
+更にDatadogでは、[Chefの実行とレポートハンドラ](https://docs.chef.io/handlers.html)を提供しています。これは、Chefの実行タイミングや更新リーソースなどのメトリクスを収集するのみでなく、`chef-client`の失敗に関しても情報を取得しています。
 
 
 <!--
