@@ -40,7 +40,7 @@ We also provide a Chef [Execution and Report Handler](https://docs.chef.io/handl
 
 Chefを使って Datadog を導入することは、非常に簡単です。そして、最も簡単にインフラ全体からメトリクスを集取し、監視の意義を引き出す方法になります。
 
-更にDatadogでは、[Chefの実行とレポートハンドラ](https://docs.chef.io/handlers.html)を提供しています。これは、Chefの実行タイミングや更新リーソースなどのメトリクスを収集するのみでなく、`chef-client`の失敗に関しても情報を取得しています。
+更に Datadog では、[Chef の実行とレポートハンドラ](https://docs.chef.io/handlers.html)を提供しています。これは、Chef の実行タイミングや更新リーソースなどのメトリクスを収集するのみでなく、`chef-client` の失敗に関しても情報を取得しています。
 
 
 <!--
@@ -86,42 +86,42 @@ The next time Chef runs, it should install the Agent and set the configuration f
 
 **NOTE:** If you are using another cookbook to define these attributes, use a higher attribute precedence level than `default`. -->
 
-### エージェントの展開
+### Agent のディプロイ
 
-エージェントの展開を支援するための料理本を作成しました。
+Agent のディプロイを支援するための cookbook を作成しました。
 
-ナイフを介してコミュニティサイトからDatadog Chef料理の最新版をインストールし、Chefサーバーにアップロードしてください：
+最新版の Datadog Chef cookbook をインストールするには、[コミュニティサイト](https://supermarket.chef.io/cookbooks/datadog) から、knife コマンドを使って、 Chef サーバにアップロードしてください:
 
     knife cookbook site install datadog
-    knife cookbook upload datadoghq
+    knife cookbook upload datadog
 
-また、BerkshelfやLibrarian Chefのようなあなたの料理のワークフローを管理する別のツールを使用しているかもしれません。この場合、Berksfile / Cheffileに次のような行を追加する必要があります：
+また、[Berkshelf](http://berkshelf.com/) や[Librarian Chef](https://github.com/applicationsonline/librarian-chef) のような cookbook ワークフローの管理をするツールを使用することも可能です。その場合、Berksfile / Cheffile に次のような行を追加します:
 
     cookbook 'datadog'
 
-シェフサーバーにクックブックをアップロードするためのツールの指示に従ってください。
+その後、ツールの指示に従って Chef サーバに cookbook をアップロードしてください。
 
-cookbookのレシピをノードのrun_listに追加する前に、エージェント固有の詳細をエージェント設定ファイルに追加する必要があります。
+アップロードした cookbook の recipe をノードの`run_list` に追加する前に、Agent の設定ファイルに、Datadog アカウントに関連した情報(API キー, APP キー など)を追加する必要があります。
 
-これは、通常、ロールファイルまたは環境ファイル、または属性を宣言する別の料理ブックを介して行われます。
+通常このプロセスは、`role` ファイルや`environment` ファイルなど介して設定するか、attribute(属性) を宣言する別の cookbook を介して行います。
 
-次に、組織のすべてのホストに適用されるbase.rbロールファイルの例を示します。
+以下に、組織内の全てのホストに適用する `base.rb` role ファイルの一般例を紹介します。
 
 <%= snippet_code_block("guides-chef-base-role-agent.rb") %>
 
-2つのキーが必要であることに注意してください。あなたのAPIキーはDatadogのIntegrations => APIメニュー項目にあります。このリンクをクリックすると、ログインして直接そこに行くことができます。
+基本的に、二種類のキーが必要になることに注目してください。API キーは、Datadogのサイトで、"Integrations" タブ => "APIs" メニュー項目以下にあります。この[リンク](https://app.datadoghq.com/account/settings#api)をクリックすると、ログインして直接そのペ時にアクセスすることができます。
 
-同じページで、シェフと一緒に使用するためのアプリケーションキーを作成する必要があります。あなたが望むところに鍵を付けることができます。私たちは 'chef_appkey'かそのようなものを推奨します。
+次に、同一ページで、Chef の設定で使うための App キーを作成すます。App キーの名前は自由に設定できます。しかしながら、'chef_appkey' のようなキーの用途を推測しやすい名前をお勧めします。
 
-上記のように属性に両方の値を指定します。
+取得した attributes を上記で紹介したように指定します。
 
-次に、Chef Serverにロールファイルをアップロードします。
+次に、Chef サーバに role ファイルをアップロードします:
 
     knife role from file roles/base.rb
 
-シェフが次に実行されるときには、エージェントをインストールし、APIとアプリケーションキーを使用して設定ファイルを設定する必要があります。
+Chefが次に実行されるタイミングでAgentがインストールされ、attributesに指定した API キーと App キーの情報を使用して設定ファイルが設置されます。
 
-注：別の料理本を使用してこれらの属性を定義する場合は、デフォルトよりも高い属性優先レベルを使用してください。
+**注:** 別のcookbookを使用してこれらのattriburesを定義する場合は、`default` よりも高い attribute precedence レベルを使用してください。
 
 
 <!--
