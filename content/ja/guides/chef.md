@@ -2,7 +2,7 @@
 last_modified: 2017/02/19
 translation_status: complete
 language: ja
-title: Deploying the Agent with Chef
+title: Chef を使った Agent のデプロイ
 kind: guide
 listorder: 8
 sidebar:
