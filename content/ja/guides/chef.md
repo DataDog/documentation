@@ -86,9 +86,9 @@ The next time Chef runs, it should install the Agent and set the configuration f
 
 **NOTE:** If you are using another cookbook to define these attributes, use a higher attribute precedence level than `default`. -->
 
-### Agent のディプロイ
+### Agent のデプロイ
 
-Agent のディプロイを支援するための cookbook を作成しました。
+Agent のデプロイを支援するための cookbook を作成しました。
 
 最新版の Datadog Chef cookbook をインストールするには、[コミュニティサイト](https://supermarket.chef.io/cookbooks/datadog) から、knife コマンドを使って、 Chef サーバにアップロードしてください:
 
@@ -148,19 +148,19 @@ Once set, upload the role to your Chef Server, and wait. After Chef has run on a
 
 ### ハンドラのデプロイ
 
-あなたのシェフランの可視性をさらに高めるために、Datadogシェフハンドラーを使用してシェフの実行を監視することができます。
+"Chef run" のプロセスから更に多くの情報を集取するために、 Datadogが公開している Chef ハンドラーを使用して Chef の実行状況を監視することができます。
 
-これはシェフの出力をDatadogのイベントストリームに戻すという付加価値があるため、失敗を迅速に強調し、チーム間で議論し、解決することができます。
+この仕組みは "Chef run" の実行結果を Datadog のイベントストリームに報告し、実行時の異常に素早く焦点を当て、チーム間で議論し、解決することができるという付加価値を提供しています。
 
-成功は通常 "低"優先順位に、失敗は "通常"優先順位に、同じノードがシェフ実行に合格するとパックは "低"優先順位になります。
+通常、"Chef run" の成功通知の重要性は "Low" になり、失敗通知は "Normal" になります。この失敗ノードが "Chef run" に成功すると それら一連の通知を"Low"になります。
 
-このロールのスニペットからわかるように、ハンドラの追加は非常に簡単です：
+以下の role のスニペットからわかるように、ハンドラの追加は非常に簡単です：
 
 <%= snippet_code_block("guides-chef-base-role-handler.rb") %>
 
-すべての作業は、ノードの実行リストの先頭にdatadog :: dd-handlerレシピを追加するだけです。これを最初に追加すると、呼び出された後のすべての詳細をキャプチャすることができます。したがって、run_listの最後に追加して実行する前に何かが失敗した場合、完全な出力が得られないことがあります。
+上記では、`datadog::dd-handler` recipe を、ノードの run list の先頭に追加しただけす。これを先頭に追加することで、これ以降に呼び出されたすべての内容をキャプチャすることができるようにるからです。もしも、`run_list` の最後にハンドラを追加した場合は、ハンドラが実行される前に発生した失敗に関して情報が集められていないため、完全な結果を得ることができません。
 
-設定したら、シェフサーバーにロールをアップロードしてお待ちください。シェフがいくつかのホストで実行された後、関連するシェフメトリックを持つ新しい自動ダッシュボードが作成されます。ダッシュボードリスト、右側のsidで見つけることができます
+`datadog::dd-handler` を run list を設定したら、Chef サーバ に role をアップロードして待ちます。"Chef run" がいくつかのホストで実行されると、メトリクスが Datadog にレポートされ、Chef メトリクスに関連したダッシュボードが自動で生成されます。Chef のデフォルト ダッシュボードは、[Dashboards List](https://app.datadoghq.com/dash/list) ページの右コラムで見つけることができます。
 
 
 <!--
@@ -180,6 +180,9 @@ Here's an example of how we've extended a `webserver.rb` role file to automatica
 <%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
 
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
+
+
+
 
 Read each recipe file for the exact details of the integration values to pass into the `instances` part of the attributes. -->
 
