@@ -15,10 +15,10 @@ Event Correlation refers to overlaying events on top of a dashboard graph and is
 ## 概 要
 {: .overview}
 
-"イベントの相関"とは、ダッシュボード内のグラフの上にイベントの発生タイミングを上書きすることをいいます。これは、Datadogを使ってインフラの状態の分析する際には非常に強力な機能です。この"イベントの相関"は、次の二つの方法で、実現することができます。
+"イベントの相関"とは、ダッシュボード内のグラフの上にイベントの発生タイミングを上書きすることをいいます。これは、Datadogを使って状況を分析する際には非常に強力な機能です。この"イベントの相関"は、次の二つの方法で、実現することができます。
 
-1. ダッシュボードの表示内容を設定する時、相関を設定しておく。
-2. ダッシュボードを表示しているときにアドホックに相関を開始する。
+1. ダッシュボードの表示内容を設定する際に、グラフ設定に相関を設定しておく。
+2. ダッシュボードを表示しているときに、検索窓よりアドホックに相関を開始する。
 
 
 <!-- ## Event Correlation at Design Time
@@ -33,7 +33,7 @@ Setup event correlation at design time by editing any graph on both Time Boards 
 
 ![Search Box](/static/images/guides-eventcorrelation-screenboard.png)
 
-タイムボードとスクリーンボードの両方のグラフを編集し、グラフにイベントを追加することで、デザイン時にイベント相関を設定できます。 詳細については、[Graphing Primer]（/ graphing /）を参照してください。 イベントの追加[UIの使用]（追加のコンテキストの/グラフ表示/オーバーレイイベント）、またはページのさらに下のJSONインターフェイスを使用して詳細を確認できます。
+TimeBoard でも ScreenBoard でも、グラフの表示内容を編集する際に"イベントの相関"を設定することができます。詳細については、[グラフ表示入門](/ja/graphing/)を参照してください。UI を使用した"イベントの相関"の設定方法に関しては、先のページの["6) メトリクスのグラフ表示にイベントを重ねあわせる""](ja/graphing/#section-7)を参照してください。JSON インターフェイスを使用して設定する場合は、["JSONを使用したグラフ表示入門"](/ja/graphingjson)ページで詳細を確認してください。
 
 
 <!-- ## Event Correlation at View Time
@@ -48,15 +48,23 @@ Setup event correlation at view time by adding a query in the Search box at the 
 
 ![Search Box](/static/images/guides-eventcorrelation-searchbox.png)
 
-任意のタイムボードダッシュボードウィンドウの左上にある[検索]ボックスにクエリを追加することにより、ビュー時にイベント相関を設定します。 これにより、設計時に追加されたすべてのイベントが置き換えられますが、その特定のダッシュボード上のすべてのグラフにイベントが適用されます。
+TimeBoard を表示している場合は、左上の検索ボックスにクエリを入力することで"イベントの相関"を始めることができます。新たにクエリを入力することにより、ダッシュボードを設定した際にグラフ内に設置した"イベントの相関"はリセットされ、新たに入力されたクエリがダッシュボード上の全てのグラフに適用されます。
 
 
 <!-- ## Event Query Language
 {: #eql}
 
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
+-->
+
+## "イベントの相関"をする際のクエリの書き方
+{: #eql}
+
+特定のイベントプロパティを使ってフィルタリングすることでフルテキスト検索にかける結果の範囲を絞り込むことができます。
+詳細については、下のリストを参照してください。プロパティによるフィルタには、完全一致が必要です。文字列の一部では機能しません。
 
 
+<!--
 | Filter | Description |
 |--------|-------------|
 |user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
@@ -69,22 +77,16 @@ You can narrow down your search by filtering on certain event properties. See th
 |incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
 {:.table} -->
 
-## "イベントの相関"をする際のクエリの書き方
-{: #eql}
-
-特定のイベントプロパティをフィルタリングすることで検索範囲を絞り込むことができます。 詳細については、下のフィルタのリストを参照してください。 フィルタは完全一致検索を実行し、部分文字列では機能しません。
-
-
 | Filter | Description |
 |--------|-------------|
-|user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
-|sources:github,chef|Show events from Github OR Chef.|
-|tags:env-prod OR db|Show events tagged with #env-prod OR #db.|
-|tags:security-group:sg-123 AND role:common-node|Show events tagged with #security-group:sg-123 AND #role:common-node.|
-|hosts:i-0ade23e6,db.myapp.com|Show events from i-0ade23e6 OR db.myapp.com.|
-|status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
-|priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
-|incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
+|user:pup@datadoghq.com|pup@datadoghq.com がコメントしたイベントを検索し表示します|
+|sources:github,chef|Github か Chef のインテグレーションによってポストされたイベントを検索し表示します|
+|tags:env-prod OR db|#env-prod か #db のタグの付いたイベントを検索し表示します|
+|tags:security-group:sg-123 AND role:common-node|#security-group:sg-123 と #role:common-node のタグ付いたイベントを検索し表示します|
+|hosts:i-0ade23e6,db.myapp.com|ホスト i-0ade23e6 か db.myapp.com からのイベントを検索し表示します|
+|status:error|ステータスが "error" のイベントを検索し表示します <br/> (supports: 'error', 'warning', 'success')|
+|priority:low|プライオリティが "low" のイベントを検索し表示します <br/> (supports: 'low' or 'normal'. defaults to 'all')|
+|incident:claimed|インシデントが "claimed" のイベントを検索し表示します <br/> (supports: 'open', 'claimed', 'resolved', or 'all')|
 {:.table}
 
 
@@ -99,12 +101,12 @@ In the example below, a full text search is performed to find all open chef or n
 Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
  -->
 
-フルテキスト検索は、フィルタを適用した後に検索クエリで提供されるすべてのキーワードに対して機能します。 全文検索では、イベントテキスト、タイトル、タグ、イベントにコメントしたユーザー、イベントに関連付けられたホスト名とデバイス、関連する情報が表示されます。
+先に紹介したフィルターの実施結果に対して、キーワードによるフルテキスト検索が機能します。フルテキスト検索は、イベントテキスト、タイトル、タグ、イベントにコメントしたユーザ、イベントに関連付けられたホスト名とデバイス、そのた関連する情報の対して実行されます。
 
-フルテキスト検索を使用して、同じキータグを持つすべてのイベントを見つけることができます。 たとえば、#serviceキーですべてのイベントを表示するには#serviceを検索します。
+フルテキスト検索を使用して、同じキータグを持つすべてのイベントを見つけることもできます。 たとえば、#service キーを含んだすべてのイベントを表示するには #service を検索します。
 
-以下の例では、フルテキスト検索が実行され、現在開いている1つ以上の赤いインスタンスを示す開いているシェフまたはナギオスのエラーをすべて検索します。
+以下の例では、Chef と Nagios のエラーを対象に、フルテキスト検索により、未解決でredisのインスタンス名を含んでいるイベントを検索しています。
 
-ソース：ナギオス、シェフのステータス：error redis_ * AND down
+```sources:nagios,chef status:error redis_* AND down```
 
-ブール論理などの高度なクエリ言語機能の一部は、イベントストリームページでのみ機能し、グラフタイルやスクリーンボードウィジェットでは機能しないことに注意してください。
+**注:** 尚、ブール理論などの一部の高度なクエリ機能は、イベント ストリームのページでのみ機能し、TimeBoard のグラフ タイルや ScreenBoard のグラフ ウィジェットでは機能しません。
