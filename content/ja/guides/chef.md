@@ -182,19 +182,18 @@ Here's an example of how we've extended a `webserver.rb` role file to automatica
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
 
 
-
-
 Read each recipe file for the exact details of the integration values to pass into the `instances` part of the attributes. -->
 
 ### カスタマイズ
-Datadog Chef Cookbookは、より統合的なレシピを提供します。
 
-実行リストにこれらのレシピの1つを含めると、そのサービスを監視するために必要なPythonモジュールや正しい設定ファイルを書き出すなどの監視依存関係がインストールされます。
+Datadog の Chef Cookbook には、各インテグレーションの適応を目的とした recipe もあります。
 
-次に、webserver.rbロールファイルを拡張して、Datadog経由で自動的にApacheを監視する方法の例を示します。
+これらの recipe を run list に追加することで、インテグレーションを使った監視に必要な他の依存部品をインストールします。例えば、特定のサービスの監視に必要な python モジュールや、設定ファイルを書き出します。
+
+以下は、Datadog を使って Apache を監視するめに、`webserver.rb` のrole ファイルを拡張した例です:
 
 <%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
 
-ご覧のとおり、実行リストにdatadog :: apacheレシピを追加し、Datadogで監視するApacheのインスタンスを制御するための属性をいくつか用意しました。
+run list に `datadog::apache` recipe を追加し、Datadog で監視する Apache インスタンスに関連する attribute を指定しています。
 
-各レシピファイルを読んで、インテグレーション値の正確な詳細を調べ、属性のインスタンスの一部に渡します。
+インテグレーションの設定をする際に、`instances` attribute の部分で扱うことのできる設定項目については、各 recipe ファイルを参照してください。
