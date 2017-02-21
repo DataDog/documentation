@@ -21,14 +21,14 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
   no_response = '<em>This end point does not return JSON on successful requests.</em>'
 %>
 
-<div class="btn-toolbar">
+<!--div class="btn-toolbar">
   <div class="btn-group language-links btn-group-sm">
     <div lang="console" class="active lang-btn btn btn-default gradient">Shell</div>
     <div lang="python" class="lang-btn btn btn-default gradient">Python</div>
     <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
     <div lang="golang" class="lang-btn btn btn-default gradient">Go</div>
   </div>
-</div>
+</div-->
 
 <h4 id="traces" class="tracing-api">Traces</h4>
 
@@ -67,12 +67,12 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
     <code>PUT /v0.3/traces</code>
 
     <h5>Example Request</h5>
-    <% %w{sh py rb go}.each do |f| %>
+    <% %w{sh}.each do |f| %>
       <%= snippet_code_block "trace-api-traces.#{f}", :nocomments => true %>
     <% end %>
 
     <h5>Example Response</h5>
-    <% %w{sh py rb go}.each do |f| %>
+    <% %w{sh}.each do |f| %>
       <%= snippet_result_code_block "trace-api-traces.#{f}" %>
     <% end %>
   </div>
@@ -104,12 +104,12 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
     <code>PUT /v0.3/services</code>
 
     <h5>Example Request</h5>
-    <% %w{sh py rb go}.each do |f| %>
+    <% %w{sh}.each do |f| %>
       <%= snippet_code_block "trace-api-services.#{f}", :nocomments => true %>
     <% end %>
 
     <h5>Example Response</h5>
-    <% %w{sh py rb go}.each do |f| %>
+    <% %w{sh}.each do |f| %>
       <%= snippet_result_code_block "trace-api-services.#{f}" %>
     <% end %>
   </div>
