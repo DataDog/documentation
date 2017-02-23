@@ -225,7 +225,7 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [4]: https://github.com/DataDog/dogstatsd-ruby
    [5]: https://github.com/DataDog/php-datadogstatsd
    [6]: https://github.com/DataDog/dogstatsd-csharp-client
-   [7]: https://github.com/datadoghq/java-dogstatsd-client
+   [7]: https://github.com/datadog/java-dogstatsd-client
    [8]: http://www.indeed.com/
    [9]: https://github.com/coursera/metrics-datadog
    [10]: https://www.coursera.org/
