@@ -1,0 +1,18 @@
+FROM ruby:2.3.0-slim
+EXPOSE 3000
+
+# Update apt repos.
+RUN apt-get update
+
+# Fix the locale to prevent encoding errors.
+ENV LANG C.UTF-8  
+
+# Update libraries.
+RUN apt-get -y install libgtkmm-3.0-dev pidgin-libnotify
+
+# Install bundler and gem bundle.
+RUN gem install bundler
+RUN mkdir /dev_setup
+COPY ./Gemfile /dev_setup/
+COPY ./Gemfile.lock /dev_setup/
+RUN cd /dev_setup && bundle install
