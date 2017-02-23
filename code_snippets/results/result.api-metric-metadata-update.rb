@@ -1,5 +1,5 @@
 {
-  "description" => "My custom description",
+ "description" => "My custom description",
  "short_name" => "bytes sent",
  "integration" => nil,
  "statsd_interval" => nil,
