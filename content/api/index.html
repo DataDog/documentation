@@ -303,7 +303,7 @@ kind: documentation
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>GET https://app.datadoghq.com/api/v1/metrics/:metric_name</code>
+        <code>GET /api/v1/metrics/:metric_name</code>
         <h5>Example Request</h5>
         <% %w{py sh rb}.each do |f| %>
           <%= snippet_code_block "api-metric-metadata-get.#{f}" %>
@@ -324,17 +324,17 @@ kind: documentation
 
         <h5>Arguments</h5>
         <ul class="arguments">
-          <%= argument("type", "metric type such as 'gauge' or 'rate'", :lang => 'console') %>
-          <%= argument("description", "string description of the metric", :lang => 'console') %>
-          <%= argument("short_name", "short name string of the metric", :lang => 'python') %>
-          <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'", :lang => 'python') %>
+          <%= argument("type", "metric type such as 'gauge' or 'rate'") %>
+          <%= argument("description", "string description of the metric") %>
+          <%= argument("short_name", "short name string of the metric") %>
+          <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'") %>
           <%= argument("per_unit", "'per' unit of the metric such as 'second' in 'bytes per second'") %>
           <%= argument("statsd_interval", "if applicable, statds flush interval in seconds for the metric") %>
         </ul>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
-        <code>PUT https://app.datadoghq.com/api/v1/metrics/:metric_name</code>
+        <code>PUT /api/v1/metrics/:metric_name</code>
         <h5>Example Request</h5>
         <% %w{py sh rb}.each do |f| %>
           <%= snippet_code_block "api-metric-metadata-update.#{f}" %>
