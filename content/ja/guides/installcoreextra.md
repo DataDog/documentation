@@ -2,7 +2,7 @@
 last_modified: 2017/02/22
 translation_status: complete
 language: ja
-title: Installing Core & Extra Integrations
+title: integration-core と、integration-extra のインストール
 kind: guide
 listorder: 3
 ---
@@ -14,9 +14,10 @@ For more information on adding new integrations to `integrations-extras`, see th
 
 ### 概要
 
-Datadog Agentのバージョン5.9から、GitHubのdd-agentリポジトリから、統合コアおよび統合エクストラリポジトリへの統合を進めています。 この動きにより、より多くのコミュニティで開発された統合を配布する方法と、サポートされている統合をエージェントと帯域外で更新できる方法があります。 注：これらの統合は、Windowsオペレーティングシステム用に設計されたものではありません。
+Datadog Agent のバージョン 5.9 より、旧来 GitHub の dd-agent リポジトリ内に存在していたインテグレーション コードを integrations-core (コア インテグレーション) と integrations-extras (追加インテグレーション) に分類/分離し、それぞれ個別のレポジトリで管理することになりました。このことにより、コミュニティにより開発されてたインテグレーションの配布の道を開くと同時に、Agentの更新タイミングに縛られない新規インテグレーションの追加を実現していきます。(注): これらのインテグレーションは、Windows OS 用に設計されたものではありません。
 
-インテグレーション - エクストラへの新しいインテグレーションの追加の詳細については、インテグレーションSDKのガイドを参照してください
+`integrations-extras`に、新しいインテグレーションを開発/追加する方法に関しては、[Integration SDK](/guides/integration_sdk) を参照してください。
+
 
 <!-- The two integration repositories are defined as follows:
 
@@ -25,21 +26,25 @@ Datadog Agentのバージョン5.9から、GitHubのdd-agentリポジトリか�
 
 All core integrations will continue to be installed with the agent install. You only have to install an integration in core separately if there is an out of band update to that integration. To either install an out-of-band update to a core integration or to install one of the extra integrations, follow these steps: -->
 
-2つの統合レポジトリは、以下のように定義されています。
+上記で定義した二つのインテグレーション レポジトリは、以下のように定義されています。
 
-integrations-core - 以前はコアエージェントに含まれていたDatadogでサポートされていた統合。
-integations-extras - Datadogで指定されたガイドラインに従って作成されたコミュニティ対応の統合
-すべてのコアインテグレーションは、引き続きエージェントのインストールとともにインストールされます。 その統合への帯域外更新がある場合は、統合をコアに個別にインストールするだけで済みます。 コア統合に帯域外更新をインストールするか、追加の統合の1つをインストールするには、次の手順を実行します。
+* **[integrations-core](https://github.com/DataDog/integrations-core)** - Datadogが公式にサポートしているインテグレーション。これまでは、Agent-core 内に存在していたもの。
+* **[integrations-extras](https://github.com/DataDog/integrations-extras)** - Datadog が公開しているガイドラインに従い、コミュニティにより開発されたインテグレーション。
+
+すべてのコア インテグレーションは、引き続き Agent のインストールと共にインストールされます。特定インテグレーションのみの更新が発生していた場合にのみ、追加のインストレーションが必要になります。
+
+特定インテグレーションのみの更新をコアインテグレーションに適応したり、追加インテグレーションをインストールするには、次の手順を実行してください。手順は、次のようになります:
+
 
 <!-- ### Installing on yum-based systems
 
 1.  Run `yum update` to ensure your system has access to the latest packages.
 1.  Run `yum install dd-check-integration`, replacing `integration` with the name of the chosen integration. So if you are installing `mysql`, then run `yum install dd-check-mysql`. -->
 
-### yumベースのシステムへのインストール
+### yum ベースのシステムへのインストール
 
-1. システムが最新のパッケージにアクセスできるようにyum updateを実行してください。
-2. yum install dd-check-integrationを実行し、統合を選択した統合の名前に置き換えます。 したがって、mysqlをインストールする場合は、yum install dd-check-mysqlを実行します。
+1. システムが最新のパッケージにアクセスできるように、`yum update` を実行します。
+2. `yum install dd-check-integration` を実行します。この際、`integration` の部分をインストールしたいインテグレーション名にします。従って、`mysql` をインストールしたい場合は、`yum install dd-check-mysql` を実行します。
 
 
 <!-- ### Installing on apt-get-based systems
@@ -47,10 +52,10 @@ integations-extras - Datadogで指定されたガイドラインに従って作�
 1.  Run `apt-get update` to ensure your system has access to the latest packages.
 1.  Run `apt-get install dd-check-integration`, replacing `integration` with the name of the chosen integration. So if you are installing `mysql`, then run `apt-get install dd-check-mysql`. -->
 
-### apt-get-basedシステムへのインストール
+### apt-get ベースのシステムへのインストール
 
-1. システムが最新のパッケージにアクセスできるようにapt-get updateを実行してください。
-2. apt-get install dd-check-integrationを実行し、統合を選択した統合の名前に置き換えます。 したがって、mysqlをインストールする場合は、apt-get install dd-check-mysqlを実行します。
+1. システムが最新のパッケージにアクセスできるように `apt-get update` を実行します。
+2. `apt-get install dd-check-integration` を実行します。この際、`integration` の部分をインストールしたいインテグレーション名にします。従って、`mysql` をインストールしたい場合は、`apt-get install dd-check-mysql` を実行します。
 
 
 <!-- ### Installing on systems with no package management
@@ -58,7 +63,19 @@ integations-extras - Datadogで指定されたガイドラインに従って作�
 1.  Copy the Python script for your chosen integration to the `checks.d` directory where you installed the Agent.
 1.  Copy the corresponding yaml configuration file to the `conf.d` directory where you installed the Agent. -->
 
-### パッケージ管理のないシステムへのインストール
+### パッケージ管理を採用していないシステムへのインストール
 
-1. 選択した統合用のPythonスクリプトを、エージェントをインストールしたchecks.dディレクトリにコピーします。
-2. 対応するyaml構成ファイルを、エージェントをインストールしたconf.dディレクトリにコピーします。
+1. インストールしたいインテグレーション用の Python スクリプトを、 Agent の `checks.d` ディレクトリにコピーします。
+2. 先にインストールしたインテグレーションに対応する yaml 形式の設定ファイルを、Agent の `conf.d` ディレクトリにコピーします。
+
+
+
+
+
+
+
+
+
+
+
+
