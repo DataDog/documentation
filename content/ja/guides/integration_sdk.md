@@ -1,8 +1,8 @@
 ---
 last_modified: 2017/02/23
-translation_status: progress
+translation_status: complete
 language: ja
-title: 新インテグレーションの作成
+title: 新規インテグレーションの作成
 kind: guide
 autotocdepth: 2
 listorder: 3
@@ -19,9 +19,9 @@ You will also need [Wget](https://www.gnu.org/software/wget/). Wget is already i
 
 ### 要件
 
-Ruby環境が必要です。 Rubyのインストールの詳細については、Rubyのインストールマニュアルを参照してください。
+[Ruby](https://www.ruby-lang.org) 実行環境が必要です。 Ruby のインストールについては、[the Ruby installation documentation](https://www.ruby-lang.org/en/documentation/installation/) を参照してください。
 
-Wgetも必要です。 WgetはほとんどのLinuxシステムにインストール済みで、Homebrewを使用してMacにインストールすることも、Chocolateyを使用してWindowsにインストールすることも簡単です。
+[Wget](https://www.gnu.org/software/wget/) も必要です。 ほとんどのLinuxシステムでは、Wget はインストール済みのはずです。Macの場合は、[Homebrew](http://brew.sh/) を使うと簡単にインストールするができます。Windowsの場合は、[Chocolatey](https://chocolatey.org/)を使ってください。
 
 
 <!-- ### Setup
@@ -34,15 +34,13 @@ We've written [a gem](https://rubygems.org/gems/datadog-sdk-testing) and a set o
 
 ### セットアップ
 
-私たちは、セットアップと開発の容易化とテストの提供に役立つ宝石と一連のスクリプトを書いています。始める：
+開発環境のセットアップ、素早い開発、テストのために、[gem](https://rubygems.org/gems/datadog-sdk-testing) ファイルとスクリプトを公開しています。
 
-1. Fork the [integrations-extras repository](https://github.com/DataDog/integrations-extras) on Github and clone the repository to your dev environment.
-2. Run `gem install bundler`
-3. Run `bundle install`
+まずは:
 
-1. Githubのintegations-extrasリポジトリをフォークし、あなたの開発環境にリポジトリをクローンします。
-2. gem install bundlerを実行する
-3. バンドルインストールを実行する
+1. Github の  [integrations-extras](https://github.com/DataDog/integrations-extras) リポジトリをフォークし、ローカルの開発環境にリポジトリをクローンします。
+2. `gem install bundler` を実行します。
+3. `bundle install` を実行します。
 
 
 <!-- Once the required Ruby gems have been installed by Bundler, you can easily create a [Python](https://www.python.org/) environment:
@@ -51,13 +49,10 @@ We've written [a gem](https://rubygems.org/gems/datadog-sdk-testing) and a set o
 2. Run `source venv/bin/activate` to activate the installed Python virtual environment. To exit the virtual environment, run `deactivate`. You can learn more about the Python virtual environment on the [Virtualenv documentation](https://virtualenv.pypa.io/en/stable/).
  -->
 
-必要なRuby宝石がBundlerによってインストールされたら、簡単にPython環境を作成できます：
+Bundler により、Ruby gems が正しくインストールされていれば、次のコマンドで簡単にPython環境を作成できます:
 
-1. Run `rake setup_env`. This will install a Python virtual environment along with all the components necessary for integration development.
-2. Run `source venv/bin/activate` to activate the installed Python virtual environment. To exit the virtual environment, run `deactivate`. You can learn more about the Python virtual environment on the [Virtualenv documentation](https://virtualenv.pypa.io/en/stable/).
-
-1. `rake setup_env` を実行します。これにより、Python 仮想環境と、統合開発に必要なすべてのコンポーネントがインストールされます。
-2. `source venv/bin/activate` を実行して、インストールされている Python 仮想環境をアクティブにします。仮想環境を終了するには、非アクティブ化を実行します。 Python 仮想環境について詳しくは、 Virtualenv のドキュメントを参照してください。
+1. `rake setup_env` を実行します。これにより、Python 仮想環境と、インテグレーションの開発に必要なすべてのコンポーネントがインストールされます。
+2. `source venv/bin/activate` を実行します。このコマンドにより、Python 仮想環境をアクティブにします。 この仮想環境を終了するには、`deactivate` を実行します。 Python の仮想環境については、[Virtualenv のドキュメント](https://virtualenv.pypa.io/en/stable/)を参照してください。
 
 
 <!-- ### Building an integration
@@ -68,18 +63,19 @@ This will create a new directory, `my_integration`, that contains all the files 
  -->
 
 ### インテグレーションの開発
-rake generate：skeleton [my_integration]を実行することで、新しい統合のスケルトンを生成することができます。ここで、 "my_integration"は新しい統合の名前です（注：統合名を角括弧で囲む必要があります）。
 
-これにより、新しい統合に必要なすべてのファイルが格納されたmy_integrationという新しいディレクトリが作成されます。これにより、.travis.ymlおよびcircle.ymlの継続的な統合ファイルに新しい統合のエントリが作成され、新しいビルドが作成されるたびにテストが実行されるようになります。
+`rake generate:skeleton[my_integration]` を実行することで、新しいインテグレーションのスケルトンを生成することができます。"my_integration"　は、新しいインテグレーションの名前になります。 (注: インテグレーション名は、角括弧で囲む必要があります）
+
+この `rake` コマンドにより、新しいインテグレーションに必要なすべてのファイルが格納された `my_integration` というディレクトリが作成されます。このコマンドは、インテグレーションの新しいビルドが作成された際に、自動でテストが走るように, `.travis.yml` および `circle.yml` という継続的インテグレーションに必要なファイルを生成します。
 
 
 <!-- #### Integration files
 
 New integrations should contain the following files: -->
 
-#### 統合ファイル
+#### インテグレーションに必要なファイル
 
-新しい統合には、次のファイルが含まれている必要があります。
+新しいインテグレーションには、次のファイルが含まれている必要があります。
 
 
 <!-- ##### `README.md`
@@ -87,7 +83,7 @@ New integrations should contain the following files: -->
 Your README file should provide the following sections:
 
 - **Overview** (required): Let others know what they can expect to do with your integration.
-- **Overview** (required):: Provide information about how to install your integration.
+- **Installation** (required): Provide information about how to install your integration.
 - **Configuration** (required): Detail any steps necessary to configure your integration or the service you are integrating.
 - **Validation** (required): How can users ensure the integration is working as intended?
 - **Compatibility** (required): List the version(s) of the application or service that your integration has been tested and validated against.
@@ -95,11 +91,12 @@ Your README file should provide the following sections:
 - **Events**: Include a list of events if your integration provides any.
 - **Troubleshooting**: Help other users by sharing solutions to common problems they might experience. -->
 
-##### README.md
+##### `README.md`
 
 READMEファイルには、次のセクションがあります。
+
 - **Overview** (required): 他の人に、あなたの統合に期待できることを伝えましょう。
-- **Overview** (required): 統合のインストール方法に関する情報を提供します。
+- **Installation** (required): 統合のインストール方法に関する情報を提供します。
 - **Configuration** (required): 統合するサービスまたは統合するサービスを構成するために必要なステップの詳細。
 - **Validation** (required): ユーザーはどのようにして統合が意図どおりに機能することを確認できますか？
 - **Compatibility** (required): 統合がテストされ検証されたアプリケーションまたはサービスのバージョンを列挙します。
@@ -203,7 +200,7 @@ For more information about writing integration tests, please see [the documentat
 
 A note about terminology: You may notice the variable `flavor` in this file and other areas of testing. *Flavor* is a term we use to denote variations of integrated software, typically versions. This allows you to write one set of tests, but target different *flavors*, variants or versions of the software you are integrating. -->
 
-##### `ci / my_integration.rake`
+##### `ci/my_integration.rake`
 
 テスト環境にテスト環境が必要な場合は、 `install`と` cleanup`タスクを使用してテスト環境を設定し、解凍することができます。
 
@@ -343,9 +340,9 @@ CSVにはヘッダー行と次の列が含まれている必要があります�
 
 **`interval`**: レートとカウントの間の変換に使用されるインターバル。これは、 `metric_type`が` rate`型に設定されている場合に必要です。
 
-**`unit_name`**: 収集している測定単位のラベル。タイプごとにグループ化された以下のユニットが利用可能です：
+**`unit_name`**: 収集している測定単位のラベル。タイプごとにグループ化された以下のユニットが利用可能です:
 
-  - **バイト**: `bit`、` byte`、 `kibibyte`、` mebibyte`、 `gibibyte`、` tebibyte`、 `pebibyte`、` exbibyte`
+  - **バイト**: `bit`、` byte`、 `kibibyte`、` mebibyte`、 `gibibyte`、` tebibyte`、 `pebibyte`、` exbibyte`
   - **Cache**: `eviction`、` get`、 `hit`、` miss`、 `set`
   - **データベース**: `アサーション`、 `カラム`、 `コマンド`、 `コミット`、 `カーソル`、 `ドキュメント`、 `フェッチ`、 `フラッシュ`、 `インデックス`、 `キー` `照合`、 `質問`、 `レコード`、 `リフレッシュ`、 `行`、 `スキャン`、 `シャード`、 `テーブル`、 `チケット`トランザクション '、'待機 '
   - **ディスク**: `ブロック`、 `ファイル`、 `iノード`、 `セクター`
@@ -415,9 +412,9 @@ For more information about tests and available test methods, please reference th
 
 統合テストでは、統合しているソフトウェアからDatadogエージェントがメトリックを正しく受信して記録していることを確認します。
 
-統合によって収集された各指標のテストは必要ありませんが、可能な限り多くのカバレッジを提供することを強くお勧めします。テストで `self.coverage_report（）`メソッドを実行すると、どのメトリックが対象となっているかを知ることができます。
+統合によって収集された各指標のテストは必要ありませんが、可能な限り多くのカバレッジを提供することを強くお勧めします。テストで `self.coverage_report()`メソッドを実行すると、どのメトリックが対象となっているかを知ることができます。
 
-`test_my_integration.py`の例です:
+`test_my_integration.py` の例です:
 
 ~~~
 # Example test_my_integraion.py
@@ -436,7 +433,7 @@ Class TestMyIntegration(AgentCheckTest):
     self.coverage_report()
 ~~~
 
-テストと利用可能なテスト方法の詳細については、Datadog Agentリポジトリの[AgentCheckTestクラス]（https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py）を参照してください。
+テストと利用可能なテスト方法の詳細については、Datadog Agentリポジトリの[AgentCheckTestクラス](https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py)を参照してください。
 
 
 <!-- #### Libraries
@@ -445,7 +442,7 @@ The [Datadog Agent](https://github.com/DataDog/dd-agent) provides a number of us
 
 #### ライブラリについて
 
-[Datadog Agent]（https://github.com/DataDog/dd-agent）は、[utils`ディレクトリ]（https://github.com/DataDog/dd-agent/tree）に数多くの便利なライブラリを提供しています / master / utils）。 これらのライブラリは、統合を構築する際に役立つ可能性があります。これらのライブラリは、今後のDatadog Agentバージョン6.0で移動されることにご注意ください。 Datadog Agent 6.0リリースより前の統合とこれらのライブラリに関する詳細を提供します。
+[Datadog Agent](https://github.com/DataDog/dd-agent)は、[utils`ディレクトリ](https://github.com/DataDog/dd-agent/tree/master/utils)に数多くの便利なライブラリを提供しています。 これらのライブラリは、統合を構築する際に役立つ可能性があります。これらのライブラリは、今後のDatadog Agentバージョン6.0で移動されることにご注意ください。 Datadog Agent 6.0リリースより前の統合とこれらのライブラリに関する詳細を提供します。
 
 
 <!-- #### Testing your integration
@@ -484,7 +481,7 @@ For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.
 
 Datadogでは、テスト環境用のDockerコンテナを使用しています。同じことをお勧めします。コンテナは軽量で管理が容易で、各テストの実行に一貫した標準化された環境を提供します。
 
-たとえば、MySQLの統合では、[`ci / mysql.rake`ファイル（https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake）は[公式MySQLコンテナ]（https://hub.docker.com/_/mysql/）にあり、4つの主なタスク
+たとえば、MySQLの統合では、[`ci / mysql.rake`ファイル](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) は[公式MySQLコンテナ](https://hub.docker.com/_/mysql/)にあり、4つの主なタスク
 
 1. `before_install` - 新しいDockerテスト環境を開始する前に、以前のDockerテスト環境を停止して削除する必要があります。
 2. `install` - インストールタスクは、MySQLテストサーバを起動するDocker` run`を実行します。
@@ -504,13 +501,13 @@ See the Agent Check guide for more information about the [Datadog Agent director
 
 #### ローカルホストにインテグレーションをインストールする
 
-統合が `integations-extras`リポジトリにマージされると、他の人が簡単に統合をインストールできるようにパッケージを生成します（[Core＆Extra Integrationsのインストールガイド]（http://docs.datadoghq.com/guides/を参照）。 installcoreextra））。 ただし、統合前に統合をローカルにインストールしたい場合があります。
+統合が `integations-extras`リポジトリにマージされると、他の人が簡単に統合をインストールできるようにパッケージを生成します。[Core＆Extra Integrationsのインストールガイド](http://docs.datadoghq.com/guides/installcoreextra)を参照。 ただし、統合前に統合をローカルにインストールしたい場合があります。
 
-ローカルで実行するには、まず、 `check.py`ファイルをDatadog Agentの` checks.d`ディレクトリにコピーし、その名前をmy_integration.pyに変更します（実際の名前を使用します）。
+ローカルで実行するには、まず、 `check.py` ファイルを Datadog Agent の` checks.d`ディレクトリにコピーし、その名前を my_integration.py に変更します（実際の名前を使用します）。
 
-次に、あなたの `conf.yaml.example`ファイルをDatadog Agentの` conf.d`ディレクトリにコピーし、それを `my_integration.yaml`に名前を変更します（再び、あなたの統合の実際の名前を使用します）。
+次に、あなたの `conf.yaml.example` ファイルを Datadog Agent の ` conf.d` ディレクトリにコピーし、それを `my_integration.yaml` に名前を変更します（再び、あなたの統合の実際の名前を使用します）。
 
-[Datadog Agentのディレクトリ構造]（http://docs.datadoghq.com/guides/agent_checks/#directory）の詳細については、エージェントチェックのガイドを参照してください。
+[Datadog Agentのディレクトリ構造](http://docs.datadoghq.com/guides/agent_checks/#directory) の詳細については、エージェントチェックのガイドを参照してください。
 
 
 <!-- #### Teardown and cleanup
@@ -519,7 +516,7 @@ When you have finished building your integration, you can run `rake clean_env` t
 
 #### 停止とクリーンアップ
 
-統合を完了したら、 `rake clean_env`を実行してPython仮想環境を削除することができます。
+統合を完了したら、 `rake clean_env` を実行して Python 仮想環境を削除することができます。
 
 
 <!-- ### Submitting Your integration
@@ -528,7 +525,7 @@ Once you have completed the development of your integration, submit a [pull requ
 
 ### インテグレーションの提出
 
-統合の開発が完了したら、[プルリクエスト]（https://github.com/DataDog/integrations-extras/compare）を送信して、Datadogが統合をレビューするようにします。 統合の見直しが完了したら、プルリクエストを承認してマージしたり、承認に必要なフィードバックと次のステップを提供します。
+統合の開発が完了したら、[プルリクエスト](https://github.com/DataDog/integrations-extras/compare) を送信して、Datadog が統合をレビューするようにします。 統合の見直しが完了したら、プルリクエストを承認してマージしたり、承認に必要なフィードバックと次のステップを提供します。
 
 
 <!-- ### Other Considerations
@@ -542,5 +539,5 @@ In our experience building integrations, we've also faced a number of challenges
 
 私たちの経験を積み重ねることで、私たちはいくつかの課題に直面してきました。 あなたのテストを書く際には、以下の点を考慮する必要があります。
 
-* クラスタをテストします。 ソフトウェアの単一のインスタンスをテストするほうが簡単ですが、実際の使用を代表するセットアップに対して実行すると、テストがより便利になります。 たとえば、MongoDBは通常シャーディングとレプリカセットの機能で使用されるため、[私たちのテストには反映されています]（https://github.com/DataDog/integrations-core/tree/master/mongo/ci）。
-* 生のメトリックに加えて計算されたメトリックを生成することを検討してください。 たとえば、多くのデータベースでは、低速ですが頻繁に実行されるクエリはありません。 したがって、パーセンタイルを見ることはしばしば有用です。 たとえば、MySQLの統合には、[95番目のパーセンタイルクエリの実行時間]（https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169）の計算メトリックが含まれています。
+* クラスタをテストします。 ソフトウェアの単一のインスタンスをテストするほうが簡単ですが、実際の使用を代表するセットアップに対して実行すると、テストがより便利になります。 たとえば、MongoDB は通常シャーディングとレプリカセットの機能で使用されるため、[私たちのテストには反映されています](https://github.com/DataDog/integrations-core/tree/master/mongo/ci)。
+* 生のメトリックに加えて計算されたメトリックを生成することを検討してください。 たとえば、多くのデータベースでは、低速ですが頻繁に実行されるクエリはありません。 したがって、パーセンタイルを見ることはしばしば有用です。 たとえば、MySQLの統合には、[95番目のパーセンタイルクエリの実行時間](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169)の計算メトリックが含まれています。
