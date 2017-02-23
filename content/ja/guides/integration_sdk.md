@@ -95,14 +95,14 @@ Your README file should provide the following sections:
 
 READMEファイルには、次のセクションがあります。
 
-- **Overview** (required): 他の人に、あなたの統合に期待できることを伝えましょう。
-- **Installation** (required): 統合のインストール方法に関する情報を提供します。
-- **Configuration** (required): 統合するサービスまたは統合するサービスを構成するために必要なステップの詳細。
-- **Validation** (required): ユーザーはどのようにして統合が意図どおりに機能することを確認できますか？
-- **Compatibility** (required): 統合がテストされ検証されたアプリケーションまたはサービスのバージョンを列挙します。
-- **Metrics** (required): 統合で提供されるメトリックのリストを含めます。
-- **Events**: あなたの統合が何かを提供する場合、イベントのリストを含めます。
-- **Troubleshooting**: 経験のある一般的な問題に対する解決策を他のユーザーに教えてもらう。
+- **Overview** (required): インテグレーションでどのようなことができるかの概要を書きます。
+- **Installation** (required): インテグレーションをインストールする方法を書きます。
+- **Configuration** (required): ステップ バイ ステップで、インテグレーションを設定するために必要なステップや外部サービスの設定の手順を書きます。
+- **Validation** (required): インテグレーションが正しく動作してるのを確認する方法を書きます。
+- **Compatibility** (required): インテグレーションがテストされ検証されたアプリケーションまたはサービスのバージョンを書きます。
+- **Metrics** (required): インテグレーションで集取できるメトリックのリストを書きます。
+- **Events**: インテグレーションでレポーティングしているイベントのリストを書きます。
+- **Troubleshooting**: 一般的な問題に対する解決策を他のユーザーと共有します。
 
 
 <!-- ##### `check.py`
@@ -141,7 +141,7 @@ If you need to import any third party libraries, you can add them to the `requir
 
 ##### `check.py`
 
-チェックロジックが存在するはずのファイル。スケルトン関数は、チェックロジックを配置する必要がある `check` メソッドを含む、統合のための統合クラスを定型化します。
+Check のロジックが記述されているファイルです。インテグレーションクラスのひな形が提供されています。このクラスの `check` 関数にメトリクスを収集するためのロジックを記述します。
 
 例えば:
 
@@ -168,9 +168,9 @@ class MyIntegrationCheck(AgentCheck):
     })
 ~~~
 
-チェックの作成とDatadogエージェントへのメトリックの送信方法の詳細については、[エージェントチェックガイドの作成]（http://docs.datadoghq.com/guides/agent_checks/）を参照してください。
+Check の書き方と Datadog Agent へのメトリックの送信方法の詳細については、 ["Agent Checkの書き方"](http://docs.datadoghq.com/ja/guides/agent_checks/) を参照してください。
 
-サードパーティライブラリをインポートする必要がある場合は、それらを `requirements.txt`ファイルに追加することができます。
+サード パーティのライブラリをインポートする必要がある場合は、それらを、 `requirements.txt` ファイルに追記します。
 
 
 <!-- ##### `ci/my_integration.rake`
@@ -202,7 +202,7 @@ A note about terminology: You may notice the variable `flavor` in this file and 
 
 ##### `ci/my_integration.rake`
 
-テスト環境にテスト環境が必要な場合は、 `install`と` cleanup`タスクを使用してテスト環境を設定し、解凍することができます。
+このインテグレーションのテストに専用のテスト環境が必要な場合は、 `install` と ` cleanup` タスクを使用してテスト環境を構築し、取り壊すことができます。
 
 例えば:
 
@@ -223,9 +223,9 @@ namespace :ci do
       $(docker run -p 80:80 --name my_int_container -d my_docker)
 ~~~
 
-統合テストの作成の詳細については、[Datadogエージェントリポジトリのドキュメント]（https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests）を参照してください。 `install_requirements`や` sleep_for`のようなヘルパー関数については、[ci common library]（https://github.com/DataDog/dd-agent/blob/master/ci/common.rb）を参照することもできます。
+インテグレーションのテストを書くための詳細については、[the documentation in the Datadog agent repository](https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests) を参照してください。又、 `install_requirements` や ` sleep_for`のようなヘルパー関数については、[ci common library](https://github.com/DataDog/dd-agent/blob/master/ci/common.rb) を参照することもできます。
 
-用語についての注意：このファイルやテストの他の領域では、変数 `flavor`に気付くかもしれません。 *Flavor* は、一般的なバージョンの統合ソフトウェアのバリエーションを表すために使用する用語です。これにより、一連のテストを書くことができますが、統合しようとしているソフトウェアの種類、バージョン、バージョンなどをターゲットにすることができます。
+用語について: このファイルやテストを見ていると、`flavor` 変数に気付いたかもしれませね。*Flavor* は、インテグレーション ソフトウェアの一般的なバリエーションを表すために使用する用語です。これにより、ソフト ウェアの派生種や異なるバージョンに対して、１セットのテストで、*flavors* を変えてテストが実施できるようになります。
 
 
 <!-- ##### `conf.yaml.example`
@@ -239,12 +239,12 @@ Your `conf.yaml.example` file should provide two sections:
 
 ##### `conf.yaml.example`
 
-統合をインストールするには、特定のインスタンスの統合を設定する必要があります。 これを行うために、彼らは `conf.yaml.example`ファイルをあなたのエージェントの` conf.d`ディレクトリにコピーし、インスタンス固有の情報で更新します。
+インテグレーションのインストールには、インスタンス内でそのインテグレーションを設定する必要があります。設定内容を Agent の渡すためには、`conf.yaml.example` ファイルを Agnet の `conf.d` ディレクトリにコピーし、その中にインスタンス固有の情報を記述する必要があります。
 
-あなたの `conf.yaml.example`ファイルは2つのセクションを提供する必要があります:
+`conf.yaml.example` ファイルには、次の2つのセクションが必要です:
 
-- すべてのグローバルに設定されたパラメータに対する `init_config`
-- 特定のインスタンスを統合するための `インスタンス '。 これには、認証情報、追加タグ、構成設定などの追加パラメータを含むサーバーまたはホストアドレスが含まれることがよくあります。
+- `init_config`: グローバルな設定用パラメータを記述するセクション。
+- `instances`: 特定のインスタンスに対する設定を記述セクション。一般的にこのセクションには、サーバーまたはホストのIPアドレスと、それに付随した認証情報、追加タグ、設定構成などの追加パラメータを記述します。
 
 
 <!-- ##### `manifest.json`
@@ -264,16 +264,16 @@ You can reference one of the existing integrations for an example of the manifes
 
 ##### `manifest.json`
 
-このJSONファイルは、統合に関するメタデータを提供し、次のものを含める必要があります。
+この JSON ファイルには、インテグレーションに関するメタデータを記述し、次のものを含める必要があります。
 
-- **`maintainer`**: この統合に関する連絡先となる有効なメールアドレスを入力してください。
-- **`manifest_version`**: このマニフェストファイルのバージョン。
-- **`max_agent_version`**: あなたの統合と互換性のあるDatadogエージェントの最大バージョン。メジャーバージョンでの統合の安定性を維持するために最善を尽くしています。統合がDatadogエージェントの新しいリリースで壊れている場合は、この番号を設定して[Datadogエージェントプロジェクトで問題を提出]してください（https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md ＃submitting-issues）。
-- **`min_agent_version`**: あなたの統合と互換性のあるDatadogエージェントの最小バージョン。
-- **`name`**: あなたの統合の名前。
-- **`short_description`**: あなたの統合の簡単な説明を提供します。
-- **`support`**: コミュニティが提供する統合として、これは" contrib "に設定する必要があります。 Datadogスタッフによって指示された場合にのみ、これを別の値に設定してください。
-- **`version`**: あなたの統合の現在のバージョン。
+- **`maintainer`**: このインテグレーションに関して連絡先を受けることができるメールアドレスを書きます。
+- **`manifest_version`**: このマニフェスト ファイルのバージョンを書きます。
+- **`max_agent_version`**: このインテグレーションと互換性のある Datadog Agent の最新バージョンを書きます。インテグレーションの安定動作の確保作業は、メジャーバージョンの更新時に最善を尽くします。もしも、インテグレーションが Datadog Agent の新しいリリースで動作しなくなった場合は、動作しなくなったバージョン番号を書いて、[submit an issue on the Datadog Agent project](https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md#submitting-issues) へ連絡してください。
+- **`min_agent_version`**: このインテグレーションと互換性のあるDatadog Agentの最も古いバージョン。
+- **`name`**: このインテグレーションの名前を書きます。
+- **`short_description`**: このインテグレーションの簡単な説明を書きます。
+- **`support`**: コミュニティで提供するインテグレーションの場合は、 "contrib" と記述します。Datadog のスタッフよって指示があった場合にのみ、この部分を別の値で設定してください。
+- **`version`**: 現在のインテグレーションのバージョンを書きます。
 
 
 <!-- ##### `metadata.csv`
@@ -326,9 +326,9 @@ If the unit name is not listed above, please leave this value blank. To add a un
 
 ##### `metadata.csv`
 
-メタデータCSVには、統合が提供するメトリックのリストと、そのメトリックに対してどのグラフおよびアラートを提供できるかについてDatadog Webアプリケーションに通知するための基本的な詳細が含まれています。
+メタデータ CSV には、インテグレーションが提供するメトリックのリストと、そのメトリックに対しDatadog Webアプリケーションがどのグラフやアラートを準備するべきかを伝えるための情報を記述します。
 
-CSVにはヘッダー行と次の列が含まれている必要があります。
+CSV には、以下の情報を記述したコラム ヘッダ行が必要です。
 
 **`metric_name`** (required): ダッシュボードまたはモニタの作成時にDatadog Webアプリケーションに表示されるメトリックの名前。多くの場合、この名前はプロバイダ、サービス、メトリック（例えば、 `aws.ec2.disk_write_ops`）やアプリケーション、アプリケーション機能、メトリック（例えば、` apache.net.request_per_s`）のピリオド区切りの組み合わせです。
 
@@ -342,34 +342,36 @@ CSVにはヘッダー行と次の列が含まれている必要があります�
 
 **`unit_name`**: 収集している測定単位のラベル。タイプごとにグループ化された以下のユニットが利用可能です:
 
-  - **バイト**: `bit`、` byte`、 `kibibyte`、` mebibyte`、 `gibibyte`、` tebibyte`、 `pebibyte`、` exbibyte`
-  - **Cache**: `eviction`、` get`、 `hit`、` miss`、 `set`
-  - **データベース**: `アサーション`、 `カラム`、 `コマンド`、 `コミット`、 `カーソル`、 `ドキュメント`、 `フェッチ`、 `フラッシュ`、 `インデックス`、 `キー` `照合`、 `質問`、 `レコード`、 `リフレッシュ`、 `行`、 `スキャン`、 `シャード`、 `テーブル`、 `チケット`トランザクション '、'待機 '
-  - **ディスク**: `ブロック`、 `ファイル`、 `iノード`、 `セクター`
-  - **周波数**: 「ヘルツ」、「キロヘルツ」、「メガヘルツ」、「ギガヘルツ」
-  - **一般**： `バッファ`、 `チェック`、 `電子メール`、 `エラー`、 `イベント`、 `ゴミ`、 `コレクション`、 `item`、` location`、 `monitor`、リソース、サンプル、ステージ、タスク、時刻、ユニット、ワーカー、ライトのうちの少なくとも1つを含むことを特徴とする請求項1に記載の方法。
-  - **メモリ**: `ページ`、 `スプリット`
-  - **マネー**: `セント`、 `ドル`
-  - **ネットワーク**: `接続`、 `データグラム`、 `メッセージ`、 `パケット`、 `ペイロード`、 `要求`、 `レスポンス`、 `セグメント`、 `タイムアウト`
-  - **パーセンテージ**: `apdex`、` fraction`、 `percent`、` percent_nano`
-  - **システム**: `コア`、 `フォールト`、 `ホスト`、 `インスタンス`、 `ノード`、 `プロセス`、 `サービス`
-  - **時間**: 「マイクロ秒」、「ミリ秒」、「秒」、「分」、「時」、「日」、「週」
+  - **Bytes**: `bit`, `byte`, `kibibyte`, `mebibyte`, `gibibyte`, `tebibyte`, `pebibyte`, `exbibyte`
+  - **Cache**: `eviction`, `get`,  `hit`,  `miss`,  `set`
+  - **Database**: `assertion`, `column`, `command`, `commit`, `cursor`, `document`, `fetch`, `flush`, `index`, `key`, `lock`, `merge`, `object`, `offset`, `query`, `question`, `record`, `refresh`, `row`, `scan`, `shard`, `table`, `ticket`, `transaction`, `wait`
+  - **Disk**: `block`, `file`, `inode`, `sector`
+  - **Frequency**: `hertz`, `kilohertz`, `megahertz`, `gigahertz`
+  - **General**: `buffer`, `check`, `email`, `error`, `event`, `garbage`,  `collection`, `item`, `location`, `monitor`, `occurrence`, `operation`, `read`, `resource`, `sample`, `stage`, `task`, `time`, `unit`, `worker`, `write`
+  - **Memory**: `page`, `split`
+  - **Money**: `cent`, `dollar`
+  - **Network**: `connection`, `datagram`, `message`, `packet`, `payload`, `request`, `response`, `segment`, `timeout`
+  - **Percentage**: `apdex`, `fraction`, `percent`, `percent_nano`
+  - **System**: `core`, `fault`, `host`, `instance`, `node`, `process`, `service`, `thread`
+  - **Time**: `microsecond`, `millisecond`, `second`, `minute`, `hour`, `day`, `week`
 
-ユニット名が上記のリストにない場合は、この値を空白のままにしてください。このリスティングにユニットを追加するには、[issue]（https://github.com/DataDog/integrations-extras/issues）
+ユニット名が上記のリストにない場合は、この値を空白のままにしてください。このリストにユニットを追加する必要がある場合は、[issue](https://github.com/DataDog/integrations-extras/issues) 欄からコンタクトしてください。
 
-**`per_unit_name`**: ユニット単位のメトリックを集めている場合は、ここに追加のユニット名を与えることができ、それは` unit_name`と組み合わされます。たとえば、 "request"の `unit_name`と` second 'の `per_unit_name`を指定すると、" 1秒あたりの要求数 "というメトリックが得られます。提供されている場合、これは上記の利用可能なユニットの値でなければなりません。
+**`per_unit_name`**: ユニット単位のメトリックを集めている場合は、ここに追加のユニット名を与えることができ、それは` unit_name`と組み合わされます。たとえば、 "request"の `unit_name`と`second` の `per_unit_name` を指定すると、" 1秒あたりの要求数 "というメトリックが得られます。提供されている場合、これは上記の利用可能なユニットの値でなければなりません。
 
 **`description`**: このメトリックが表す情報の基本的な説明（最大400文字）。
 
-**`orientation`** (required): ` -1`、 `0`、または` 1`の整数。
+**`orientation`** (required): `-1`、 `0`、または `1` の整数。
 
-  - `-1`は小さい値が良いことを示します。例えば、 `mysql.performance.slow_queries`や` varnish.fetch_failed`のように、カウント数が少ない方が望ましいです。
-  - `0`は、値に固有のプリファレンスがないことを示します。例えば、 `rabbitmq.queue.messages`や` postgresql.rows_inserted`のように、値の大きさや好みの設定がない場合は、システムのビジネス目標に依存します。
-   - `1`は大きな値が良いことを示します。たとえば、より高い稼働時間の場合は `mesos.stats.uptime_secs`、より多くのキャッシュヒットが必要な場合は` mysql.performance.key_cache_utilization`などです。
+  - `-1`は小さい値が良いことを示します。例えば、 `mysql.performance.slow_queries` や `varnish.fetch_failed`のように、カウント数が少ない方が望ましいです。
+  - `0` は、値に固有のプリファレンスがないことを示します。例えば、 `rabbitmq.queue.messages` や ` postgresql.rows_inserted` のように、値の大きさや好みの設定がない場合は、システムのビジネス目標に依存します。
+   - `1` は大きな値が良いことを示します。たとえば、より高い稼働時間の場合は `mesos.stats.uptime_secs`、より多くのキャッシュヒットが必要な場合は `mysql.performance.key_cache_utilization` などです。
 
-** `integration`** (required): これはあなたの統合の名前と一致しなければなりません。 （例：「my_integration」）。
+**`integration`** (required): これはあなたのインテグレーション
+予測域の名前と一致しなければなりません。 （例：「my_integration」）。
 
-** `short_name` **: メトリック名のより人間が読めて簡略化したバージョン。例えば、 `postgresql.index_blocks_read`は` idx blks read`に設定されます。人間の可読性と簡潔さよりもわかりやすいものを目指してください。統合名を繰り返さないでください。 `short_name`を` metric_name`よりも短く、分かりやすくすることができない場合は、このフィールドを空白のままにしておきます。
+**`short_name`**: メトリック名のより人間が読めて簡略化したバージョン。例えば、 `postgresql.index_blocks_read` は`idx blks read` に設定されます。人間の可読性と簡潔さよりもわかりやすいものを目指してください。インテグレーション
+予測域名を繰り返さないでください。 `short_name` を `metric_name` よりも短く、分かりやすくすることができない場合は、このフィールドを空白のままにしておきます。
 
 
 <!-- ##### `requirements.txt`
@@ -378,7 +380,8 @@ If you require any additional Python libraries, you can list them here and they 
 
 ##### `requirements.txt`
 
-追加のPythonライブラリが必要な場合は、ここにリストすることができ、他のPythonライブラリが統合を使用するときにpipによって自動的にインストールされます
+追加のPythonライブラリが必要な場合は、ここにリストすることができ、他のPythonライブラリがインテグレーション
+予測域を使用するときにpipによって自動的にインストールされます
 
 
 <!-- ##### `test_my_integration.py`
@@ -410,9 +413,12 @@ For more information about tests and available test methods, please reference th
 
 ##### `test_my_integration.py`
 
-統合テストでは、統合しているソフトウェアからDatadogエージェントがメトリックを正しく受信して記録していることを確認します。
+インテグレーション
+予測域テストでは、インテグレーション
+予測域しているソフトウェアからDatadogエージェントがメトリックを正しく受信して記録していることを確認します。
 
-統合によって収集された各指標のテストは必要ありませんが、可能な限り多くのカバレッジを提供することを強くお勧めします。テストで `self.coverage_report()`メソッドを実行すると、どのメトリックが対象となっているかを知ることができます。
+インテグレーション
+予測域によって収集された各指標のテストは必要ありませんが、可能な限り多くのカバレッジを提供することを強くお勧めします。テストで `self.coverage_report()`メソッドを実行すると、どのメトリックが対象となっているかを知ることができます。
 
 `test_my_integration.py` の例です:
 
@@ -442,7 +448,9 @@ The [Datadog Agent](https://github.com/DataDog/dd-agent) provides a number of us
 
 #### ライブラリについて
 
-[Datadog Agent](https://github.com/DataDog/dd-agent)は、[utils`ディレクトリ](https://github.com/DataDog/dd-agent/tree/master/utils)に数多くの便利なライブラリを提供しています。 これらのライブラリは、統合を構築する際に役立つ可能性があります。これらのライブラリは、今後のDatadog Agentバージョン6.0で移動されることにご注意ください。 Datadog Agent 6.0リリースより前の統合とこれらのライブラリに関する詳細を提供します。
+[Datadog Agent](https://github.com/DataDog/dd-agent)は、[utils`ディレクトリ](https://github.com/DataDog/dd-agent/tree/master/utils)に数多くの便利なライブラリを提供しています。 これらのライブラリは、インテグレーション
+予測域を構築する際に役立つ可能性があります。これらのライブラリは、今後のDatadog Agentバージョン6.0で移動されることにご注意ください。 Datadog Agent 6.0リリースより前のインテグレーション
+予測域とこれらのライブラリに関する詳細を提供します。
 
 
 <!-- #### Testing your integration
@@ -481,7 +489,8 @@ For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.
 
 Datadogでは、テスト環境用のDockerコンテナを使用しています。同じことをお勧めします。コンテナは軽量で管理が容易で、各テストの実行に一貫した標準化された環境を提供します。
 
-たとえば、MySQLの統合では、[`ci / mysql.rake`ファイル](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) は[公式MySQLコンテナ](https://hub.docker.com/_/mysql/)にあり、4つの主なタスク
+たとえば、MySQLのインテグレーション
+予測域では、[`ci / mysql.rake`ファイル](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) は[公式MySQLコンテナ](https://hub.docker.com/_/mysql/)にあり、4つの主なタスク
 
 1. `before_install` - 新しいDockerテスト環境を開始する前に、以前のDockerテスト環境を停止して削除する必要があります。
 2. `install` - インストールタスクは、MySQLテストサーバを起動するDocker` run`を実行します。
@@ -501,11 +510,16 @@ See the Agent Check guide for more information about the [Datadog Agent director
 
 #### ローカルホストにインテグレーションをインストールする
 
-統合が `integations-extras`リポジトリにマージされると、他の人が簡単に統合をインストールできるようにパッケージを生成します。[Core＆Extra Integrationsのインストールガイド](http://docs.datadoghq.com/guides/installcoreextra)を参照。 ただし、統合前に統合をローカルにインストールしたい場合があります。
+インテグレーション
+予測域が `integations-extras`リポジトリにマージされると、他の人が簡単にインテグレーション
+予測域をインストールできるようにパッケージを生成します。[Core＆Extra Integrationsのインストールガイド](http://docs.datadoghq.com/guides/installcoreextra)を参照。 ただし、インテグレーション
+予測域前にインテグレーション
+予測域をローカルにインストールしたい場合があります。
 
 ローカルで実行するには、まず、 `check.py` ファイルを Datadog Agent の` checks.d`ディレクトリにコピーし、その名前を my_integration.py に変更します（実際の名前を使用します）。
 
-次に、あなたの `conf.yaml.example` ファイルを Datadog Agent の ` conf.d` ディレクトリにコピーし、それを `my_integration.yaml` に名前を変更します（再び、あなたの統合の実際の名前を使用します）。
+次に、あなたの `conf.yaml.example` ファイルを Datadog Agent の `conf.d` ディレクトリにコピーし、それを `my_integration.yaml` に名前を変更します（再び、あなたのインテグレーション
+予測域の実際の名前を使用します）。
 
 [Datadog Agentのディレクトリ構造](http://docs.datadoghq.com/guides/agent_checks/#directory) の詳細については、エージェントチェックのガイドを参照してください。
 
@@ -516,7 +530,8 @@ When you have finished building your integration, you can run `rake clean_env` t
 
 #### 停止とクリーンアップ
 
-統合を完了したら、 `rake clean_env` を実行して Python 仮想環境を削除することができます。
+インテグレーション
+予測域を完了したら、 `rake clean_env` を実行して Python 仮想環境を削除することができます。
 
 
 <!-- ### Submitting Your integration
@@ -525,7 +540,10 @@ Once you have completed the development of your integration, submit a [pull requ
 
 ### インテグレーションの提出
 
-統合の開発が完了したら、[プルリクエスト](https://github.com/DataDog/integrations-extras/compare) を送信して、Datadog が統合をレビューするようにします。 統合の見直しが完了したら、プルリクエストを承認してマージしたり、承認に必要なフィードバックと次のステップを提供します。
+インテグレーション
+予測域の開発が完了したら、[プルリクエスト](https://github.com/DataDog/integrations-extras/compare) を送信して、Datadog がインテグレーション
+予測域をレビューするようにします。 インテグレーション
+予測域の見直しが完了したら、プルリクエストを承認してマージしたり、承認に必要なフィードバックと次のステップを提供します。
 
 
 <!-- ### Other Considerations
@@ -540,4 +558,5 @@ In our experience building integrations, we've also faced a number of challenges
 私たちの経験を積み重ねることで、私たちはいくつかの課題に直面してきました。 あなたのテストを書く際には、以下の点を考慮する必要があります。
 
 * クラスタをテストします。 ソフトウェアの単一のインスタンスをテストするほうが簡単ですが、実際の使用を代表するセットアップに対して実行すると、テストがより便利になります。 たとえば、MongoDB は通常シャーディングとレプリカセットの機能で使用されるため、[私たちのテストには反映されています](https://github.com/DataDog/integrations-core/tree/master/mongo/ci)。
-* 生のメトリックに加えて計算されたメトリックを生成することを検討してください。 たとえば、多くのデータベースでは、低速ですが頻繁に実行されるクエリはありません。 したがって、パーセンタイルを見ることはしばしば有用です。 たとえば、MySQLの統合には、[95番目のパーセンタイルクエリの実行時間](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169)の計算メトリックが含まれています。
+* 生のメトリックに加えて計算されたメトリックを生成することを検討してください。 たとえば、多くのデータベースでは、低速ですが頻繁に実行されるクエリはありません。 したがって、パーセンタイルを見ることはしばしば有用です。 たとえば、MySQLのインテグレーション
+予測域には、[95番目のパーセンタイルクエリの実行時間](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169)の計算メトリックが含まれています。
