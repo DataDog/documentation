@@ -42,7 +42,8 @@ You should then run `source ~/.bash_profile` to reload the settings.
 An alternative to setting up the development environment as explained above is to use the Docker container development environment.
 
 ```
-# Build the docker image. This takes a lot of time.
+# From within the documentation folder:
+# Build the docker image. This can take 15-20 minutes.
 docker build -f DockerfileDev -t dd-docs:latest .
 
 # Run the docker container.
