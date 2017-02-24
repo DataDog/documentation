@@ -330,17 +330,17 @@ If the unit name is not listed above, please leave this value blank. To add a un
 
 CSV には、以下の情報を記述したコラム ヘッダ行が必要です。
 
-**`metric_name`** (required): ダッシュボードまたはモニタの作成時にDatadog Webアプリケーションに表示されるメトリックの名前。多くの場合、この名前はプロバイダ、サービス、メトリック（例えば、 `aws.ec2.disk_write_ops`）やアプリケーション、アプリケーション機能、メトリック（例えば、` apache.net.request_per_s`）のピリオド区切りの組み合わせです。
+**`metric_name`** (required): ダッシュボードまたはモニタの作成時にDatadog Web アプリケーションに表示されるメトリックの名前です。多くの場合、この名前はプロバイダ、サービス、メトリック（例えば、 `aws.ec2.disk_write_ops` ）やアプリケーション、アプリケーションの機能、メトリック(例えば、 `apache.net.request_per_s` )をピリオドで繋いだものになります。
 
-**`metric_type`** (required): 報告しているメトリックのタイプ。これは、Datadog Webアプリケーションがデータをどのように処理して表示するかに影響します。受け入れられる値は `count`、` gauge`、 `rate`です。
+**`metric_type`** (required): レポーティングしているメトリックのタイプ。この情報は、Datadog Web アプリケーションがデータをどのように処理して表示するかに影響します。設定できる値は `count`、` gauge`、 `rate`です。
 
-  - `count`: カウントは、発生した特定のイベントの数です。カウントを報告するときは、以前の提出以降に記録された新しいイベント（デルタ）の数だけを提出する必要があります。たとえば、 `aws.apigateway.5xxerror`メトリックは、サーバ側エラーの数の` count`です。
-  - `gauge`: 特定の時点で値を追跡するメトリックです。たとえば、 `docker.io.read_bytes`は、1秒当たりに読み取られるバイト数の` guage`です。
-  - `rate`: 時間の経過とともにメトリックを評価します（したがって、通常は` per_unit_name`値が含まれます）。たとえば、 `lighttpd.response.status_2xx`は1秒当たりに生成される2xxステータスコードの数をキャプチャする` rate`メトリックです。
+  - `count`: カウントは、特定のイベントの発生数です。カウントの値をレポーティングするときは、前回の送信以降に記録された新しいイベントの数(差分値)だけを送信する必要があります。例えば、 `aws.apigateway.5xxerror`メトリックは、サーバ側で発生しているエラー数の `count` 値です。
+  - `gauge`: 特定の時点での値を記録するメトリックです。たとえば、 `docker.io.read_bytes` は、1秒当たりに読み取られるバイト数の `guage` 値です。
+  - `rate`: 発生回数を経過時間で割ったメトリックです。 (従って、通常は `per_unit_name` 値の指定が含まれます）。たとえば、 `lighttpd.response.status_2xx` は、一秒当たりに生成される 2xx ステータスコードの数をキャプチャする `rate` 値です。
 
-**`interval`**: レートとカウントの間の変換に使用されるインターバル。これは、 `metric_type`が` rate`型に設定されている場合に必要です。
+**`interval`**: インターバルは、`rate` と `count` の変換に使用されます。metric_type` に `rate` 型が設定されている場合に必要です。
 
-**`unit_name`**: 収集している測定単位のラベル。タイプごとにグループ化された以下のユニットが利用可能です:
+**`unit_name`**: 収集しているメトリックの測定単位です。各タイプでは、以下の様なユニットが利用可能です:
 
   - **Bytes**: `bit`, `byte`, `kibibyte`, `mebibyte`, `gibibyte`, `tebibyte`, `pebibyte`, `exbibyte`
   - **Cache**: `eviction`, `get`,  `hit`,  `miss`,  `set`
@@ -357,21 +357,23 @@ CSV には、以下の情報を記述したコラム ヘッダ行が必要です
 
 ユニット名が上記のリストにない場合は、この値を空白のままにしてください。このリストにユニットを追加する必要がある場合は、[issue](https://github.com/DataDog/integrations-extras/issues) 欄からコンタクトしてください。
 
-**`per_unit_name`**: ユニット単位のメトリックを集めている場合は、ここに追加のユニット名を与えることができ、それは` unit_name`と組み合わされます。たとえば、 "request"の `unit_name`と`second` の `per_unit_name` を指定すると、" 1秒あたりの要求数 "というメトリックが得られます。提供されている場合、これは上記の利用可能なユニットの値でなければなりません。
+**`per_unit_name`**: ユニット単位のメトリックを集めている場合は、ここに追加のユニット名を与えることができ、それは` unit_name`と組み合わされます。
 
-**`description`**: このメトリックが表す情報の基本的な説明（最大400文字）。
+
+例えば、 "request" という `unit_name` と "second" という `per_unit_name` を指定すると、"requests per second" というメトリックが得られます。この値を指定する場合は、上記にリストした利用可能なユニットでなければなりません。
+
+**`description`**: このメトリックの基本的な説明になります。（最大400文字）。
 
 **`orientation`** (required): `-1`、 `0`、または `1` の整数。
 
-  - `-1`は小さい値が良いことを示します。例えば、 `mysql.performance.slow_queries` や `varnish.fetch_failed`のように、カウント数が少ない方が望ましいです。
-  - `0` は、値に固有のプリファレンスがないことを示します。例えば、 `rabbitmq.queue.messages` や ` postgresql.rows_inserted` のように、値の大きさや好みの設定がない場合は、システムのビジネス目標に依存します。
-   - `1` は大きな値が良いことを示します。たとえば、より高い稼働時間の場合は `mesos.stats.uptime_secs`、より多くのキャッシュヒットが必要な場合は `mysql.performance.key_cache_utilization` などです。
+  - `-1`は、小さい値が良いことを示します。例えば、 `mysql.performance.slow_queries` や `varnish.fetch_failed`のように、カウント数が少ない方が望ましいことを示しています。
+  - `0` は、値に特定のプレがレンスがないことを示します。例えば、 `rabbitmq.queue.messages` や ` postgresql.rows_inserted` のように、値の大きさにプレファレンスがない場合は、システムが達成しなくてはならないアウトプットに依存していることを示しています。
+   - `1` は、大きな値が良いことを示します。例えば、 `mesos.stats.uptime_secs` は、より高い稼働時間が好ましく、 `mysql.performance.key_cache_utilization` は、より高いキャッシュヒットが好ましいことを示しています。
 
-**`integration`** (required): これはあなたのインテグレーション
-予測域の名前と一致しなければなりません。 （例：「my_integration」）。
+**`integration`** (required): インテグレーションの名前です。metadataの **name** と一致していなければなりません。 (例: "my_integration")
 
-**`short_name`**: メトリック名のより人間が読めて簡略化したバージョン。例えば、 `postgresql.index_blocks_read` は`idx blks read` に設定されます。人間の可読性と簡潔さよりもわかりやすいものを目指してください。インテグレーション
-予測域名を繰り返さないでください。 `short_name` を `metric_name` よりも短く、分かりやすくすることができない場合は、このフィールドを空白のままにしておきます。
+**`short_name`**: 人間に読みやすくする目的で、簡略化したバージョンのメトリック名です。例えば、 `postgresql.index_blocks_read` は、 `idx blks read` を指定します。
+短さよりも、可読性と分かりやすさを優先してください。又、インテグレーション名を繰り返し指定しないでください。 `short_name` を `metric_name` よりも短く、分かりやすくす表現することができない場合は、このフィールドを空白のままにしてください。
 
 
 <!-- ##### `requirements.txt`
@@ -380,8 +382,7 @@ If you require any additional Python libraries, you can list them here and they 
 
 ##### `requirements.txt`
 
-追加のPythonライブラリが必要な場合は、ここにリストすることができ、他のPythonライブラリがインテグレーション
-予測域を使用するときにpipによって自動的にインストールされます
+追加のPythonライブラリが必要な場合は、このリストに追記します。他のユーザが、このインテグレーションをインストールした際に、pipによって自動的でにインストールされるようになります。
 
 
 <!-- ##### `test_my_integration.py`
@@ -413,12 +414,9 @@ For more information about tests and available test methods, please reference th
 
 ##### `test_my_integration.py`
 
-インテグレーション
-予測域テストでは、インテグレーション
-予測域しているソフトウェアからDatadogエージェントがメトリックを正しく受信して記録していることを確認します。
+インテグレーションのテストは、インテグレーションが監視対象ソフトウェアから正しくメトリックを記録し、Datadog Agent がその情報を正しく受け取れているかを確認します。
 
-インテグレーション
-予測域によって収集された各指標のテストは必要ありませんが、可能な限り多くのカバレッジを提供することを強くお勧めします。テストで `self.coverage_report()`メソッドを実行すると、どのメトリックが対象となっているかを知ることができます。
+インテグレーションによって収集された全メトリクスのテストは、強制していませんが、可能な限り高いカバレッジを強くお願いしています。テスト内で `self.coverage_report()` 関数を実行することで、どのメトリックがテストの対象に含まれているかを知ることができます。
 
 `test_my_integration.py` の例です:
 
@@ -439,7 +437,7 @@ Class TestMyIntegration(AgentCheckTest):
     self.coverage_report()
 ~~~
 
-テストと利用可能なテスト方法の詳細については、Datadog Agentリポジトリの[AgentCheckTestクラス](https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py)を参照してください。
+テストと利用可能なテスト関数の詳細については、 [AgentCheckTest class in the Datadog Agent repository](https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py) を参照してください。
 
 
 <!-- #### Libraries
@@ -448,9 +446,7 @@ The [Datadog Agent](https://github.com/DataDog/dd-agent) provides a number of us
 
 #### ライブラリについて
 
-[Datadog Agent](https://github.com/DataDog/dd-agent)は、[utils`ディレクトリ](https://github.com/DataDog/dd-agent/tree/master/utils)に数多くの便利なライブラリを提供しています。 これらのライブラリは、インテグレーション
-予測域を構築する際に役立つ可能性があります。これらのライブラリは、今後のDatadog Agentバージョン6.0で移動されることにご注意ください。 Datadog Agent 6.0リリースより前のインテグレーション
-予測域とこれらのライブラリに関する詳細を提供します。
+[Datadog Agent](https://github.com/DataDog/dd-agent)の、 [`utils` ディレクトリ](https://github.com/DataDog/dd-agent/tree/master/utils) には、複数の便利なライブラリがあります。これらのライブラリは、インテグレーションの開発に役立ちますので採用をお勧めします。しかしながら、これらのライブラリは、 Datadog Agent v6.0 で、別のレポジトリに移動される可能性があることを認識しておいてください。 Datadog Agent v6.0 のリリースまでには、インテグレーション開発の方向性とこれらのライブラリの管理に関する詳細を提供したいと考えています。
 
 
 <!-- #### Testing your integration
@@ -465,13 +461,13 @@ Travis CI will automatically run tests when you create a pull request. Please en
 
 #### インテグレーションのテスト
 
-チェックとテストコードをビルドするときは、次のようにテストを実行します。
+Check とそのテスト コードを開発したら、次のステップでテストを実行します。
 
-- `rake lint`: 潜在的なエラーをコード化する
-- `rake ci:run[my_integration]`: `test_my_integration.py`ファイルで作成したテストを実行します。
-- `rake ci:run[default]`: 私たちが作成した追加の一般的なテストに加えて、あなたが作成したテストを実行します。
+- `rake lint`: lintを使って潜在的なエラーを探索します。
+- `rake ci:run[my_integration]`: `test_my_integration.py`ファイルに記述したテスト項目を実行します。
+- `rake ci:run[default]`: Datadog が準備している一般的なテスト項目を追加して、テストを実行します。
 
-トラビスCIは、プルリクエストを作成すると自動的にテストを実行します。 徹底的なテストカバレッジがあること、プルリクエストを提出する前にすべてのテストに合格していることを確認してください。
+Pull Request をすると、Travis CI を使ってテストが自動実行されます。 Pull Request を提出する際は、やり残しのないテストカバレッジと、全てのテストに合格していることを今一度確認してください。
 
 
 <!-- #### Docker test environments
@@ -487,15 +483,14 @@ For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.
 
 #### Dockerのテスト環境
 
-Datadogでは、テスト環境用のDockerコンテナを使用しています。同じことをお勧めします。コンテナは軽量で管理が容易で、各テストの実行に一貫した標準化された環境を提供します。
+Datadog では、テスト環境用に Docker コンテナを使用しています。インテグレーションの開発の際には、類似の環境で開発されることをお勧めします。コンテナは、軽量で管理が容易な上、各テストの実行に一貫した標準環境を提供してくれます。
 
-たとえば、MySQLのインテグレーション
-予測域では、[`ci / mysql.rake`ファイル](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) は[公式MySQLコンテナ](https://hub.docker.com/_/mysql/)にあり、4つの主なタスク
+例えば MySQL のインテグレーションの場合、[`ci/mysql.rake` file](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) は、[official MySQL container](https://hub.docker.com/_/mysql/) を使用し、次の四つのステップで docker 環境を準備することができます。
 
-1. `before_install` - 新しいDockerテスト環境を開始する前に、以前のDockerテスト環境を停止して削除する必要があります。
-2. `install` - インストールタスクは、MySQLテストサーバを起動するDocker` run`を実行します。
-3. `before_script` - この作業ではまず、MySQLサーバが稼働していることを確認してから、サーバに接続していくつかの設定作業を行います。可能であれば、設定タスクを `test_integration.py`ファイルに保存することを強くお勧めしますが、時にはセットアップと設定をPythonテストスクリプトの前に実行する必要があることを認識しています。
-4. `cleanup` - テストが完了すると、Dockerテスト環境が停止され、削除されます。
+1. `before_install` - Docker での新しいテスト環境を開始する前に、以前の使った Docker のテスト環境が停止して削除されていることを確認する必要があります。
+2. `install` - `install` タスクは、 Docker の `run` を実行し、 MySQL テストサーバを起動します。
+3. `before_script` - この作業ではまず、 MySQL サーバが稼働していることを確認し、サーバに接続して事前設定の作業を行います。可能であれば、この事前設定のタスクを `test_integration.py` ファイルに記述することを強くお勧めします。尚、状況によって事前設定を Python テスト スクリプトの前に実行する必要がある場合は、臨機応変に対応してください。
+4. `cleanup` - テストが完了すると、 Docker のテスト環境が停止され、削除されます。
 
 
 <!-- #### Installing your integration locally
@@ -510,28 +505,22 @@ See the Agent Check guide for more information about the [Datadog Agent director
 
 #### ローカルホストにインテグレーションをインストールする
 
-インテグレーション
-予測域が `integations-extras`リポジトリにマージされると、他の人が簡単にインテグレーション
-予測域をインストールできるようにパッケージを生成します。[Core＆Extra Integrationsのインストールガイド](http://docs.datadoghq.com/guides/installcoreextra)を参照。 ただし、インテグレーション
-予測域前にインテグレーション
-予測域をローカルにインストールしたい場合があります。
+インテグレーションが `integations-extras` リポジトリにマージされると、他の人が簡単にインテグレーションをインストールできるようにパッケージを生成します。([Installing Core & Extra Integrations guide](http://docs.datadoghq.com/guides/installcoreextra) を参照してください。) 尚、マージの前にそのインテグレーションをローカルホストにインストールしたい場合があるかもしれません。
 
-ローカルで実行するには、まず、 `check.py` ファイルを Datadog Agent の` checks.d`ディレクトリにコピーし、その名前を my_integration.py に変更します（実際の名前を使用します）。
+ローカルで実行するには、まず、 `check.py` ファイルを Datadog Agent の` checks.d` ディレクトリにコピーし、その名前を `my_integration.py`(インテグレーションの実際の名前) に変更します。
 
-次に、あなたの `conf.yaml.example` ファイルを Datadog Agent の `conf.d` ディレクトリにコピーし、それを `my_integration.yaml` に名前を変更します（再び、あなたのインテグレーション
-予測域の実際の名前を使用します）。
+次に、`conf.yaml.example` ファイルを Datadog Agent の `conf.d` ディレクトリにコピーし、それを `my_integration.yaml`(再び、インテグレーションの実際の名前) に名前を変更します。
 
-[Datadog Agentのディレクトリ構造](http://docs.datadoghq.com/guides/agent_checks/#directory) の詳細については、エージェントチェックのガイドを参照してください。
+[Datadog Agent のディレクトリ構造](http://docs.datadoghq.com//ja/guides/agent_checks/#directory) については、Agent Chechの書き方のガイドを参照してください。
 
 
 <!-- #### Teardown and cleanup
 
 When you have finished building your integration, you can run `rake clean_env` to remove the Python virtual environment. -->
 
-#### 停止とクリーンアップ
+#### 開発環境の解体とクリーンアップ
 
-インテグレーション
-予測域を完了したら、 `rake clean_env` を実行して Python 仮想環境を削除することができます。
+インテグレーションの開発が終わったら、 `rake clean_env` を実行し Python の仮想環境を削除することができます。
 
 
 <!-- ### Submitting Your integration
@@ -540,10 +529,7 @@ Once you have completed the development of your integration, submit a [pull requ
 
 ### インテグレーションの提出
 
-インテグレーション
-予測域の開発が完了したら、[プルリクエスト](https://github.com/DataDog/integrations-extras/compare) を送信して、Datadog がインテグレーション
-予測域をレビューするようにします。 インテグレーション
-予測域の見直しが完了したら、プルリクエストを承認してマージしたり、承認に必要なフィードバックと次のステップを提供します。
+インテグレーションの開発が終わったら、[pull request](https://github.com/DataDog/integrations-extras/compare) を提出し、Datadog のメンバーがレビューできるようにします。メンバーによるレビューが終わると、pull request の承認のために必要な次のステップをフィードバックしたり、承認とマージをします。
 
 
 <!-- ### Other Considerations
@@ -553,10 +539,14 @@ In our experience building integrations, we've also faced a number of challenges
 * Test clusters. Testing single instances of your software is often easier, but tests are more useful when run against setups that are representative of real-world uses. For example, MongoDB is typically used with sharding and replica set features, so [our tests reflect that](https://github.com/DataDog/integrations-core/tree/master/mongo/ci).
 * Consider generating calculated metrics in addition to raw metrics. For example, many databases will have slow, but less frequently run queries. So it's often useful to look at percentiles. For example, our MySQL integration includes a calculated metric for the [95th percentile query execution time](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169). -->
 
-### その他の考慮事項
+### その他
 
-私たちの経験を積み重ねることで、私たちはいくつかの課題に直面してきました。 あなたのテストを書く際には、以下の点を考慮する必要があります。
+過去のインテグレーション開発で、多くことを学んできました。 Check 関数やテストを書く際には、以下の点も検討してみてください。
 
-* クラスタをテストします。 ソフトウェアの単一のインスタンスをテストするほうが簡単ですが、実際の使用を代表するセットアップに対して実行すると、テストがより便利になります。 たとえば、MongoDB は通常シャーディングとレプリカセットの機能で使用されるため、[私たちのテストには反映されています](https://github.com/DataDog/integrations-core/tree/master/mongo/ci)。
-* 生のメトリックに加えて計算されたメトリックを生成することを検討してください。 たとえば、多くのデータベースでは、低速ですが頻繁に実行されるクエリはありません。 したがって、パーセンタイルを見ることはしばしば有用です。 たとえば、MySQLのインテグレーション
-予測域には、[95番目のパーセンタイルクエリの実行時間](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169)の計算メトリックが含まれています。
+* クラスタ環境でのテストの検討:
+
+    単一インスタンスでソフトウェアをテストするのは、それほど難しくなりません。しかし、実際の使用環境に近い環境で最終テストを実行する方が、テストしての価値が高いです。例えば、 MongoDB の通常の利用シーンでは、シャーディングとレプリカセットの機能を使っています。[Datadogのテスト](https://github.com/DataDog/integrations-core/tree/master/mongo/ci) では、そのことを考慮しクラスター環境でのテストコードを、開発しています。
+
+* Raw メトリックに加えて、計算/加工されたメトリックを生成するこの検討:
+
+    例えば、多くのデータベースでは、低速だが頻繁に実行されないクエリが実行されているはずです。これらのクエリのパーセンタイルを把握することは、一般的に価値のあることです。Datadogが提供している MySQL のインテグレーションでは、クエリ実行時間の Raw データから [95th パーセンタイル値](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169)を計算し、メトリックとして送信するようにしています。
