@@ -10,7 +10,7 @@ listorder: 10
 <!-- ### Overview
 Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
 
-The detailed smarkdown yntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.
+The detailed markdown syntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.
 Please note that embedding HTML in markdown is not supported with in Datadog.
 
 To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`
@@ -28,13 +28,13 @@ An example below:
 
 ### 概要
 
-Datadogイベントテキストはマークダウンをサポートします。 このガイドは、Markdownを使用してDatadogイベントのフォーマットを整えるのに役立ちます。
+Datadog へ送信するイベントのテキストは、markdown 表記をサポートします。 このガイドは、markdown 表記を使用して、イベント内のテキストをフォーマットする方法を解説します。
 
-詳しいsmarkdown yntaxはここで見つけることができます。 markdownにHTMLを埋め込むことは、Datadogではサポートされていません。
+markdown syntax の詳細については、[次を](http://daringfireball.net/projects/markdown/syntax#lin)参照してください。尚、 HTML 書式を markdown に埋め込む裏技は、Datadog ではサポートしていません。
 
-イベントテキストでMarkdownを使用するには、テキストブロックを%%% \ nで開始し、テキストブロックを\ n %%%で終了する必要があります
+イベント用のテキストで markdown を使用するには、そのテキストブロックを `%%% \n` `\n %%%` を囲む必要があります。
 
-以下の例：
+以下が、例です：
 
 <pre>
 {
@@ -53,8 +53,6 @@ For example, the following url: "http://catchpoint.com/session_id:123456"
 
 Should be encoded to: "http://catchpoint.com/session_id%3A123456" -->
 
-注意：Markdownブロックにリンクを埋め込む場合は、URLが正しくエンコードされていることを確認してください。
+**注**: markdown ブロックにリンクを埋め込む場合は、正しくURLエンコーディングされていることを確認してください。
 
-たとえば、次のURL： "http://catchpoint.com/session_id:123456"
-
-"http://catchpoint.com/session_id%3A123456"にコード化する必要があります。
+例えば、次のような "http://catchpoint.com/session_id:123456" `:` の入ったURLは、"http://catchpoint.com/session_id%3A123456" にコード化してください。
