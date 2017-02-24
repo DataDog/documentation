@@ -292,6 +292,61 @@ kind: documentation
       </div>
     </div>
 
+    <div class="int-anchor" id="metrics-metadata-get"></div><a href="#metrics-metadata-get"><h4>View metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to get metadata about a specific metric.
+        </p>
+
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="int-anchor" id="metrics-metadata-update"></div><a href="#metrics-metadata-update"><h4>Edit metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to edit fields of a metric's metadata.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("type", "metric type such as 'gauge' or 'rate'") %>
+          <%= argument("description", "string description of the metric") %>
+          <%= argument("short_name", "short name string of the metric") %>
+          <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'") %>
+          <%= argument("per_unit", "'per' unit of the metric such as 'second' in 'bytes per second'") %>
+          <%= argument("statsd_interval", "if applicable, statds flush interval in seconds for the metric") %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-update.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-update.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
     <!--
    =====================================================================
     Events
