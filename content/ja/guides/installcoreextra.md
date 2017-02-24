@@ -14,7 +14,7 @@ For more information on adding new integrations to `integrations-extras`, see th
 
 ### 概要
 
-Datadog Agent のバージョン 5.9 より、旧来 GitHub の dd-agent リポジトリ内に存在していたインテグレーション コードを integrations-core (コア インテグレーション) と integrations-extras (追加インテグレーション) に分類/分離し、それぞれ個別のレポジトリで管理することになりました。このことにより、コミュニティにより開発されてたインテグレーションの配布の道を開くと同時に、Agentの更新タイミングに縛られない新規インテグレーションの追加を実現していきます。(注): これらのインテグレーションは、Windows OS 用に設計されたものではありません。
+Datadog Agent のバージョン 5.12 より、旧来 GitHub の dd-agent リポジトリ内に存在していたインテグレーション コードを integrations-core (コア インテグレーション) と integrations-extras (追加インテグレーション) に分類/分離し、それぞれ個別のレポジトリで管理することになりました。このことにより、コミュニティにより開発されてたインテグレーションの配布の道を開くと同時に、Agentの更新タイミングに縛られない新規インテグレーションの追加を実現していきます。(注): これらのインテグレーションは、Windows OS 用に設計されたものではありません。
 
 `integrations-extras`に、新しいインテグレーションを開発/追加する方法に関しては、[Integration SDK](/guides/integration_sdk) を参照してください。
 
