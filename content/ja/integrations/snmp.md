@@ -19,12 +19,7 @@ sidebar:
 
 ### SNMP インテグレーションの設定
 
-
-<!-- To use the SNMP checks, add a `snmp.yaml` file to your `conf.d` directory, following [this example](https://github.com/DataDog/dd-agent/blob/master/conf.d/snmp.yaml.example). -->
-
 SNMP Checkを使用するには、`conf.d`ディレクトリにある`snmp.yaml.example`をコピーし、`snmp.yaml`を追加します。
-
-<!-- For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed. -->
 
 デバイスを監視するには、少なくともIP_ADDRESSと認証方法を指定する必要があります。又、アクセスするポート番号の指定がない場合は、デフォルトとして161番ポートを使用します。
 

@@ -21,15 +21,10 @@ kind: integration
 - [Process Monitors](/guides/monitoring#process)の設定に基づいて動作しているプロセスのステータスを監視し、アラートを出力します。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
 
 
-<!-- From the Agent:
-
-* [Process check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py)
-* [Process check configuration example](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Process check インテグレーションのscript](https://github.com/DataDog/dd-agent/blob/master/checks.d/process.py)
-* [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example)
+* [Process check インテグレーションのscript](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
+* [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
 
 
 <!-- ### Configuration
@@ -37,7 +32,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 
  *To capture Process metrics you need to install the Datadog Agent.*
 
-1. Configure the Agent to connect to your processes. Our example configuration will monitor the `sshd` and `postgres` processes.  
+1. Configure the Agent to connect to your processes. Our example configuration will monitor the `sshd` and `postgres` processes.
    Edit `/etc/dd-agent/conf.d/process.yaml`
 
         init_config:

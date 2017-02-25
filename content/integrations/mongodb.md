@@ -78,5 +78,5 @@ To validate that the integration is working, run ```datadog-agent info```. You s
 
 Note: many of these metrics are described in the [MongoDB Manual 3.0](https://docs.mongodb.org/manual/reference/command/dbStats/)
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/mongo.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/mongo.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/mongo/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/mongo/check.py

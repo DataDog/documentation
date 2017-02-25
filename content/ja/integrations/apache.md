@@ -29,13 +29,13 @@ Apacheからリアルタイムでメトリクスを取得しグラフ化する�
 
 <!-- From the open-source Agent:
 
-* <a href="https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example">Apache YAML example</a>
-* <a href="https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py">Apache checks.d</a> -->
+* <a href="https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example">Apache YAML example</a>
+* <a href="https://github.com/DataDog/integrations-core/blob/master/apache/check.py">Apache checks.d</a> -->
 
 ### Datadog Agentの関連ソールコードへのリンク
 
-* [Apache checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py)
-* [Apache YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example)
+* [Apache checks.d](https://github.com/DataDog/integrations-core/blob/master/apache/check.py)
+* [Apache YAML example](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example)
 
 
 <!-- The following metrics are collected by default with the Apache integration:
@@ -95,7 +95,7 @@ instances:
 ### 設定
 {: #int-configuration}
 
-**Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**  
+**Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**
 *詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照して下さい。*
 
 1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認して下さい。
