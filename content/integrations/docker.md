@@ -21,6 +21,8 @@ Get metrics from Docker in real time to:
 
 There are three ways to setup the Docker integration: install the agent on the host, on a single privileged container, and on each individual container.
 
+Whichever you choose, your system will need to have cgroup memory management enabled for the check to succeed. Check out our [Docker agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
+
 ## Host Installation
 
 1. Ensure Docker is running on the host.
