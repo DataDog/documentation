@@ -28,13 +28,18 @@ Connect to Microsft Azure in order to:
 
 * Get metrics from Azure VMs with or without installing the Agent
 * Tag your Azure VMs with Azure-specific information (e.g. location)
-* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, Server Farm, SQL Database, SQL Elastic Pool, and Virtual Machine Scale Set
+* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, Server Farm (App Service Plan), SQL Database, SQL Elastic Pool, and Virtual Machine Scale Set
 
 Related integrations include:
 
 | [App Service](/integrations/azure_app_services) | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
+| [Batch Service](/integrations/azure_batch) | managed task scheduler and processor |
+| [Event Hub](/integrations/azure_event_hub) | large scale data stream managed service |
+| [Redis Cache](/integrations/azure_redis_cache) | managed data cache |
 | [SQL Database](/integrations/azure_sql_database) | highly scalable relational database in the cloud |
+| [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool) | manage the performance of multiple databases |
 | [Virtual Machine](/integrations/azure_vm) | virtual machine management service |
+| [Virtual Machine Scale Set](/integrations/azure_vm_scale_set) | deploy, manage, and autoscale a set of identical VMs |
 {:.table}
 
 ### Installation
