@@ -26,16 +26,10 @@ Capture etcd metrics in Datadog to:
 - ホストコンフィグレーションが同期状態から外れたことを知る為
 - etcdのパフォーマンス情報を他のアプリケーションの状態と関連付けて把握する
 
-
-<!-- From the open-source Agent:
-
-* [etcd YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
-* [etcd checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [etcd インテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/etcd.yaml.example)
-* [etcd インテグレーションのchecks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/etcd.py)
+* [etcd インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/etcd/conf.yaml.example)
+* [etcd インテグレーションのchecks.d](https://github.com/DataDog/integrations-core/blob/master/etcd/check.py)
 
 
 <!-- The following metrics are collected by default with the etcd integration:

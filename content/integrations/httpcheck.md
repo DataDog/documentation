@@ -52,7 +52,7 @@ Other settings available include:
 | `ca_certs` | This setting will allow you to override the default certificate path as specified in `init_config` |
 | `check_certificate_expiration` | When `check_certificate_expiration` is enabled, the service check will check the expiration date of the SSL certificate. Note that this will cause the SSL certificate to be validated, regardless of the value of the `disable_ssl_validation` setting. |
 | `days_warning` & `days_critical` | When `check_certificate_expiration` is enabled, these settings will raise a warning or critical alert when the SSL certificate is within the specified number of days from expiration. |
-| `headers` | This parameter allows you to send additional headers with the request. Please see the [example YAML file](https://github.com/DataDog/dd-agent/blob/master/conf.d/http_check.yaml.example) for additional information and caveats. |
+| `headers` | This parameter allows you to send additional headers with the request. Please see the [example YAML file](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) for additional information and caveats. |
 | `skip_event` | When enabled, the check will not create an event. This is useful to avoid duplicates with a server side service check. This defaults to `false`. |
 | `no_proxy` | If set, the check will bypass proxy settings and attempt to reach the check url directly. This defaults to `false`. |
 | `allow_redirects` | This setting allows the service check to follow HTTP redirects and defaults to `true`.

@@ -25,16 +25,10 @@ Connect Riak to Datadog in order to:
 - Riakのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
-<!-- From the open-source Agent:
-
-* [Riak YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example)
-* [Riak checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Riakインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/riak.yaml.example)
-* [Riakインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/riak.py)
-
+* [Riakインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/riak/conf.yaml.example)
+* [Riakインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/riak/check.py)
 
 <!-- The following metrics are collected by default with the Riak integration:
 

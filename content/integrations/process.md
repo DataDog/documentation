@@ -31,14 +31,14 @@ Configure the Agent to connect to your processes. Our example configuration will
             search_string: ['postgres']
 
           - name: pid_process
-            pid: 1278 
+            pid: 1278
             # Do not use search_string when searching by pid or multiple processes will be grabbed
 
 2.  Restart the Agent
 
         sudo /etc/init.d/datadog-agent restart
 
-Refer to the comments in the [process.yaml.example](https://github.com/DataDog/dd-agent/blob/master/conf.d/process.yaml.example) file for more options.
+Refer to the comments in the [process.yaml.example](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example) file for more options.
 
 After the Agent has sent data to Datadog you can visit the [New Monitor section of the application](https://app.datadoghq.com/monitors#create/process) to set up a Monitor. If you only see information on how to configure the process check in the Agent, Datadog has not yet received any process information from the Agent. Use the instructions below to validate whether the Agent has been configured correctly.
 
