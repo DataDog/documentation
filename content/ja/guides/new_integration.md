@@ -2,7 +2,8 @@
 last_modified: 2017/02/24
 translation_status: complete
 language: ja
-title: Officially Integrating with Datadog
+title_org: Officially Integrating with Datadog
+title: 公式インテグレーションのリクエストについて
 kind: guide
 listorder: 15
 ---
@@ -10,13 +11,14 @@ listorder: 15
 <!-- Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 -->
 
-インフラストラクチャ全体からすべてのメトリックを見ることができることは、Datadog内で重要です。 GoogleのAPIとコード計測ツールを使用してカスタム指標を送信するガイドがありますが、特定のソースが公式の統合になることを望む可能性があります。全体的に、我々が構築する統合における最大の決定要因は、クライアントの要求です。
+全てのメトリックをインフラ全体から収集できるようにすることは、Datadog を使う上で重要なことです。
+[API][2] と最小限の[コード修正][3]で、[カスタム メトリクス][1]を送信できるようにするためのガイドを提供しているのは、そのためです。しかし、特定のソース(サービスやミドルウェアなど)にむけた公式のインテグレーションが存在すればよいのにと思うこともあるでしょう。我々が開発するインテグレーションの選定の最大要因は、クライアントからのリクエストの状況になります。
 
 
 <!-- If you would like to propose an integration, please reach out to support@datadoghq.com and tell us what metrics you would like to see from that given source.
  -->
 
-統合を提案したい場合は、support@datadoghq.comに連絡して、そのソースからどのような指標を見たいか教えてください。
+公式インテグレーションの開発をリクエストしたい場合は、[support@datadoghq.com](mailto:support@datadoghq.com)に連絡して、ターゲットとなるソースからどのようなメトリクスを収集したいかを教えてください。
 
 
 <!-- If you manage or work with a service and would like to see Datadog integrate it, the following information is needed:
@@ -30,17 +32,16 @@ listorder: 15
 
 We will also need a short blurb describing the integration as well as the correct image to use across our site. -->
 
-あなたがサービスを管理したり、サービスを利用していて、Datadogがそのサービスを統合して見たい場合は、以下の情報が必要です。
+もしも、 特定のサービスやアプリを管理していたり開発していて、それに対するインテグレーションを Datadog に開発して欲しい場合は、以下の情報が必要です。
 
-  * データはどのようにDatadogに取り込まれますか？現在、3つのオプションがあります。
-    1. データをソースからDatadogにプッシュする
-    2. データソースのAPIをクロールする
-    3. Datadog Agentがソースから情報を取得するようにする
-  * ソースから得られるメトリックとタグは何ですか？
-  * 統合ごとに生成されるデフォルトのダッシュボードには、どのようなメトリックを含める必要がありますか？
+  * Datadog へ、データはどのように提供まれますか? 現在、3つのオプションがあります。
+    1. データを、ソース(サービスサイトなど)から Datadog へプッシュする
+    2. データソースの API を、 Datadog からクロールする
+    3. Datadog Agent がソースから情報を取得するようにする
+  * ソースから集取するべきメトリックとタグは、何ですか?
+  * インテグレーションのデフォルトのダッシュボードには、どのようなメトリックを含める必要がありますか?
 
-私たちはまた、私たちのサイト全体で使用するための正しいイメージと同様に、統合について説明する短い吹き出しを必要とします。
-
+更に、サイト全体で使用するロゴなどのイメージや、そのインテグレーションについて説明するための短い文章も必要になります。
 
 
    [1]: http://docs.datadoghq.com/guides/metrics/
