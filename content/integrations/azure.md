@@ -35,6 +35,8 @@ Related integrations include:
 | [App Service](/integrations/azure_app_services) | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
 | [Batch Service](/integrations/azure_batch) | managed task scheduler and processor |
 | [Event Hub](/integrations/azure_event_hub) | large scale data stream managed service |
+| [IOT Hub](/integrations/azure_iot_hub) | connect, monitor, and manage billions of IOT assets |
+| [Logic App](/integrations/azure_logic_app) | quickly build powerful integration solutions |
 | [Redis Cache](/integrations/azure_redis_cache) | managed data cache |
 | [SQL Database](/integrations/azure_sql_database) | highly scalable relational database in the cloud |
 | [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool) | manage the performance of multiple databases |
