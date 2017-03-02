@@ -26,15 +26,10 @@ doclevel: basic
 - Meｍcachedのパフォーマンス情報と他アプリケーションの情報を連携
 
 
-<!-- From the open-source Agent:
-
-* [Memcache YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
-* [Memcache checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/mcache.yaml.example)
-* [Memcachedインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/mcache.py)
+* [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mcache/conf.yaml.example)
+* [Memcachedインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/mcache/check.py)
 
 
 <!-- The following metrics are collected by default with the Memcache integration:

@@ -231,4 +231,4 @@ For further examples of testing Datadog integrations, you can view the test file
 
 #### Datadog Agent Checks
 
-For examples of Agent Check tests, you can view the test files for [agent checks](https://github.com/DataDog/dd-agent/tree/master/tests/checks/integration) such as [`test_http_check.py` file](https://github.com/DataDog/dd-agent/blob/master/tests/checks/integration/test_http_check.py).
+For examples of Agent Check tests, you can view the test files for [agent checks](https://github.com/DataDog/dd-agent/tree/master/tests/checks/integration) such as [`test_http_check.py` file](https://github.com/DataDog/integrations-core/blob/master/http_check/test_http_check.py).

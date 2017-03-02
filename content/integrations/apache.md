@@ -69,6 +69,6 @@ The following metrics are collected by default with the Apache integration:
 <%= get_metrics_from_git()%>
 
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/apache/check.py
 [3]: http://httpd.apache.org/docs/2.0/mod/mod_status.html

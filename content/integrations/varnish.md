@@ -572,5 +572,5 @@ A breakdown by Varnish version is available below.
     varnish.vsm_overflowed
     varnish.vsm_used
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/varnish/check.py

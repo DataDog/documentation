@@ -25,15 +25,10 @@ Connect IIS to Datadog in order to:
 * IISのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
-<!-- From the open-source Agent:
-
-* [IIS YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example)
-* [IIS checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/iis.yaml.example)
-* [IISインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/iis.py)
+* [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/iis/conf.yaml.example)
+* [IISインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/iis/check.py)
 
 
 <!-- The following metrics are collected by default with the IIS integration:

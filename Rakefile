@@ -141,6 +141,12 @@ task :slowjp do
   Rake::Task[:guard].invoke
 end
 
+desc 'Build documentation site'
+task :compilejp do
+  ENV['JPASSIST'] = "true"
+  Rake::Task[:compile].invoke
+end
+
 desc 'Removing Japanese lang-assitant files'
 task :rmjpfiles do
   sh("rm -f updated_files.txt")
