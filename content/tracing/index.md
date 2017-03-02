@@ -2,6 +2,8 @@
 title: Tracing (APM)
 kind: Documentation
 autotocdepth: 2
+hideguides: true
+customnav: tracingnav
 ---
 
 ### Overview
@@ -29,31 +31,39 @@ With our infrastructure monitoring, metrics are sent to the Datadog Agent, which
 
 1.  [Restart the Agent](/guides/basic_agent_usage/)
 
+#### Running the agent in Docker
+
+To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher)and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
+
+For additional information, please reference [the project README on Github](https://github.com/DataDog/docker-dd-agent/blob/master/README.md#tracing--apm)
+
 #### Instrument your application
 
 To instrument your application, please select one of the following supported languages.
 
-- Go
-- Python
-- Ruby
+- [Go](/tracing/go)
+- [Python](/tracing/python)
+- [Ruby](/tracing/ruby)
 
 To instrument an application written in a language that does not yet have official library support, please reference the [Tracing API](/tracing/api).
 
 ### Configuration
 
-The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options. Additionally, configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
+The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options. Additionally, some configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
 
 | File setting | Env variable | Description |
 |---|---|---|
-| `apm_enabled` | `DD_APM_ENABLED` | This setting appears under the `[Main]` section of the configuration file. The Datadog Agent will accept trace metrics when the value is set to `true`. The default value is `false`. |
-| **[trace.sampler]** |
-| `extra_sample_rate` | - | |
-| `max_traces_per_second` | - | |
-| **[trace.receiver]** |
+| **main** |
+| `apm_enabled` | `DD_APM_ENABLED` | The Datadog Agent will accept trace metrics when the value is set to `true`. The default value is `false`. |
+| **trace.sampler** |
+| `extra_sample_rate` | - | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
+| `max_traces_per_second` | - | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.|
+| **trace.receiver** |
 | `receiver_port` | `DD_RECEIVER_PORT` | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`. |
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
+{:.table}
 
-### Tutorials
+For more information about the Datadog Agent, see the [Getting Started guide](/guides/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
 ### Additional resources
 
