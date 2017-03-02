@@ -1,14 +1,18 @@
 ---
-last_modified: 2016/08/17
+last_modified: 2017/02/07
 translation_status: complete
 language: ja
 title: JSONを使用したグラフ表示入門
 kind: documentation
 ---
+
 <!--
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page](/graphing)
+
 ## Graphing with the JSON editor
 {: #graphing}
+
+![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 -->
 
 グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門](/ja/graphing)を参照して下さい。
@@ -18,11 +22,10 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 
-<!--### Grammar-->
-### JSON書式の構文
+
+<!--### Grammar
 {: #grammar}
 
-<!--
 The graph definition language is well-formed JSON and is structured in four parts:
 
 1. Requests
@@ -32,6 +35,9 @@ The graph definition language is well-formed JSON and is structured in four part
 
 Here is how they fit together in a JSON dictionary:
 -->
+
+### JSON書式の構文
+{: #grammar}
 
 グラフを定義する言語は、JSON形式を採用し、次の4つの要素で構成されています:
 
@@ -70,7 +76,7 @@ In other words at the highest level the JSON structure is a dictionary with two,
 \* *only requests and viz are required.*
 -->
 
-JSON書式の一番外側のカッコ内に、先の要素が下記のエントリーとして記述されています:
+JSON書式の一番外側のカッコ内に、先の要素が下記のエントリー項目として記述されています:
 
 1. "requests" *
 2. "events"
@@ -79,10 +85,9 @@ JSON書式の一番外側のカッコ内に、先の要素が下記のエント�
 
 \* *"requests"と"viz"は必ず指定する必要があります。*
 
-<!--## Requests-->
-## Requests (メトリクスの時系列データ, Series)
-{: #requests}
-<!--
+<!--## Requests
+{: #requests｝
+
 The general format for a series is:
 
     "requests": [
@@ -98,6 +103,9 @@ A Series can be further combined together via binary operators (+, -, /, *):
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 -->
 
+## Requests (メトリクスの時系列データ, Series)
+{: #requests}
+
 時系列データのクエリは、次のフォーマットになります:
 
     "requests": [
@@ -112,21 +120,29 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
-<!--#### Functions-->
-#### 関数
+
+<!--#### Functions
 {: #functions}
 
-<!--
 You can apply functions to the result of each query.
 
 A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="/examples/graphing functions/">Examples</a>
 -->
+
+#### 関数
+{: #functions}
+
 それぞれのクエリの結果に対して関数を適用することができます。
 
 これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="/examples/graphing functions/">Examples for Graphing Functions</a>
 本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
 
+<div class='alert alert-info'><strong>NOTICE: </strong>現況、各関数の詳細に関しては、英文のみになります。</div>
+
 <%= @items['/partials/graphingfunctions/'].compiled_content %>
+
+<div class='alert alert-info'><strong>NOTICE: </strong>ここまでが、各関数の詳細になります。</div>
+
 
 <!--
 There are also a few functions you can append to a query which we recommend for expert users only.
@@ -155,6 +171,8 @@ future. For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/">here</a>.
 -->
 
+
+
 この他にも、クエリ結果に適用する上級者向けの関数が幾つかあります。
 
 上級者向けの関数の一つが``.rollup()``です。この関数をクエリに追記することで、複数のポイントを単一ポイントにまとめることができます。この関数は、"メソッド"と"時間"の2つのパラメータを引数に指定することができます。(例: ``.rollup(method,time)``)
@@ -171,29 +189,34 @@ future. For more on <code>.as_count()</code> please see our blog post
 また、将来的にはこれらの関数は、グラフエディターで簡単に操作できるようになる予定です(``.rollup()``は利用可能です)。
 ``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
 
-<!-- #### Aggregation Method -->
+
+<!--#### Aggregation Method
+{: #aggregation}
+
+In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
+-->
+
 #### データポイントの集計
 {: #aggregation}
 
-<!--
-In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
--->
 多くの場合、利用可能なデータポイントの数は画面に表示可能なデータポイントの数を上回ります。これに対応するため、データポイントは4つの集計方法{average,  max, min, sum}の1つにより集計されています。
 
-<!-- #### Metrics -->
+
+<!--#### Metrics
+{: #metrics}
+
+The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
+-->
+
 #### メトリクスの確認
 {: #metrics}
 
-<!--
-The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
--->
 メトリクスはグラフ表示の要です。現在利用可能なメトリクスは [Metrics Summary](https://app.datadoghq.com/metric/summary) にてリスト表示することができます。各メトリクスをクリックしてそのメトリクスがどのようなデータを取得しているか、あるいはタグやホストなどの関連する詳しい情報を確認します。
 
-<!-- #### Scope -->
-#### 対象範囲の指定(Scope, スコープ)
+
+<!--#### Scope
 {: #scope}
 
-<!--
 A scope lets you filter a Series. It can be a host, a device on a host
 or any arbitrary tag you can think of that contains only alphanumeric
 characters plus colons and underscores (`[a-zA-Z0-9:_]+`).
@@ -208,6 +231,9 @@ Examples of scope (meaning in parentheses):
     *                                 (wildcard for everything)
 -->
 
+#### 対象範囲の指定(Scope, スコープ)
+{: #scope}
+
 スコープを指定することで時系列データの対象範囲を限定することができます。スコープでは、ホスト名やホスト上のデバイス、更に英数文字列 (`[a-zA-Z1-9:_]+`)のタグが付与された情報を指定することができます。
 
 範囲指定の例 (カッコ内は、対象範囲の解説):
@@ -219,20 +245,22 @@ Examples of scope (meaning in parentheses):
     my:tag                            (同上)
     *                                 (ワイルドカード)
 
-<!-- #### Groups -->
+
+<!--#### Groups
+{: #groups
+
+For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
+-->
+
 #### グループの指定
 {: #groups}
 
-<!--
-For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
--->
 どのメトリクスにおいても、複数のホストからのデータによって構成され得ています。そうしたデータは通常、時間間隔ごとにすべてのホストからのデータが単一の値に集計されますが、あらゆるタグによってデータを分離して取得することができます。あるメトリクスに対してホストごとにデータポイントを分けて見たい場合、{host}グループの指定を行います。
 
-<!-- #### Arithmetic -->
-#### 演算子の利用
+
+<!--#### Arithmetic
 {: #math}
 
-<!--
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
 
@@ -262,6 +290,9 @@ apples by oranges.
     }
 -->
 
+#### 演算子の利用
+{: #math}
+
 時系列データには、簡単な演算( +, -, *, / )を適用することができます。
 次の例では、5分間のload averageの値とその倍の数値をグラフ表示することにします:
 
@@ -289,11 +320,10 @@ Datadogでは、ここでは一貫性を強制していないので、*異なる
         ]
     }
 
-<!-- ### Events -->
-### イベントの表示
+
+<!--### Events
 {: #events}
 
-<!--
 You can overlay any event from Datadog. The general format is:
 
     "events": [
@@ -319,6 +349,9 @@ or if you're looking to display all errors:
     ]
 -->
 
+### イベントの表示
+{: #events}
+
 Datadogに保存したイベント情報は、次の書式で記述することでグラフにオーバーレイすることができます:
 
     "events": [
@@ -343,10 +376,74 @@ Datadogに保存したイベント情報は、次の書式で記述すること�
       }
     ]
 
-### グラフによる可視化
+
+<!--### Aliasing
+{: #alias}
+
+Some long metric expressions are unwieldily and don't fit in the timeseries legend, inspector, or cursor label. 
+
+Long metric expressions with the same prefix are undistinguishable in the legend:
+
+![screen shot 2016-04-12 at 3 12 09 pm](https://cloud.githubusercontent.com/assets/2548712/14472397/0a6d3f68-00c1-11e6-8b38-1c2d38265e75.png)
+
+Long metric expressions can be too long to render on cursor hover:
+
+![screen shot 2016-04-12 at 3 16 47 pm](https://cloud.githubusercontent.com/assets/2548712/14472546/9e093542-00c1-11e6-8ede-83357c98cb31.png)
+
+To choose a more suitable metric name for display, you can define an alias:
+
+    "requests": [
+      {
+        "q": "avg:system.load.1{*}",
+        "type": "line",
+        "conditional_formats": [],
+        "aggregator": "avg",
+        "alias": "Your metric"
+      }
+      {
+        "q": "avg:system.cpu.user{*}",
+        "type": "line",
+        "alias": "Your second metric"
+    ]
+
+Note that you can only define one alias per JSON expression, though you can define several for a given graph.
+-->
+
+### エリアス作成
+{: #alias}
+
+長いメトリック式は扱いにくく、時系列グラフの余白、インスペクタ、またはカーソルラベルには収まりません。
+
+特に先頭部分の表記が同じ場合、それらを見分けることができなくなってしまいます:
+
+![screen shot 2016-04-12 at 3 12 09 pm](https://cloud.githubusercontent.com/assets/2548712/14472397/0a6d3f68-00c1-11e6-8b38-1c2d38265e75.png)
+
+カーソルをグラフ上に置いた時に表示されるラベルからもはみ出してしまい、全体を読み取ることができません:
+
+![screen shot 2016-04-12 at 3 16 47 pm](https://cloud.githubusercontent.com/assets/2548712/14472546/9e093542-00c1-11e6-8ede-83357c98cb31.png)
+
+これらの問題に対処し一目瞭然で理解できるメトリクス名をUIに表示するために、エリアス名を設定することができます:
+
+    "requests": [
+      {
+        "q": "avg:system.load.1{*}",
+        "type": "line",
+        "conditional_formats": [],
+        "aggregator": "avg",
+        "alias": "Your metric"
+      }
+      {
+        "q": "avg:system.cpu.user{*}",
+        "type": "line",
+        "alias": "Your second metric"
+    ]
+
+注）エリアス名は、メロトリックを呼び出すクエリのJSON 式毎に一つの制限になります。グラフ内では複数のクエリJSON 式を記述することができるので、ぞれぞれのクエリJSON 式毎にエリアス名を設定することができます。
+
+
+<!--### Visualization
 {: #viz}
 
-<!--
 Data can be visualized in a few different ways:
 
 1. Time Series
@@ -364,6 +461,9 @@ The Time Series can be further broken down to:
 4. as bar charts
 -->
 
+### グラフによる可視化
+{: #viz}
+
 データポイントを可視化するグラフ形式にはいくつかの種類があります:
 
 1. Time Series (時系列データのグラフ)
@@ -380,13 +480,20 @@ The Time Series can be further broken down to:
 3. slice-n-stackグラフ
 4. 棒グラフ
 
-<!-- #### Line Charts -->
+
+<!-- #### Line Charts
+{: #linecharts}
+
+<img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
+
+The representation is automatically derived from having multiple `requests` values. 
+-->
+
 #### 折れ線グラフ
 {: #linecharts}
 
 <img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
 
-<!-- The representation is automatically derived from having multiple `requests` values. -->
 このグラフ表現は、`requests`部に複数の検索クエリを有する場合に自動的に設定されます。
 
     "requests": [
@@ -403,13 +510,18 @@ The Time Series can be further broken down to:
 
 これにより、複数の時系列データのグラフを重ね合わせて表示することができます。
 
-<!-- #### Stacked Series -->
+<!-- #### Stacked Series
+{: #stacked}
+
+<img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
+
+In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
+
 #### 積み上げグラフ
 {: #stacked}
 
 <img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
-<!-- In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
 関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます:
 
     "requests": [
@@ -419,12 +531,12 @@ The Time Series can be further broken down to:
     ]
 
 <!-- Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries. -->
+
 チャート毎に1つのクエリを表示する代わりに","ですべてのクエリを連結することによって、全てのクエリを1つのグラフに積み上げて表示することができます。
 
-#### Slice-n-Stack
+<!-- #### Slice-n-Stack
 {: #slice}
 
-<!--
 A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance, when selecting a tag that
 applies to more than 1 host you will see that ingress and egress
@@ -433,7 +545,27 @@ host. This is useful to spot wild swings in the distribution of network
 traffic.
 
 Here's how to do it for any metric:
+
+    "requests" [
+      {
+         "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
+      }
+    ]
+
+Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
+
+    "requests" [
+      {
+         "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
+      }
+    ]
+
+to get traffic for all the tagged hosts, split by host and network device.
 -->
+
+#### Slice-n-Stack
+{: #slice}
+
 異なるホストにまたがるメトリクスを積み上げた結果のグラフが有益な場合もあります。例えば、複数のホストに共通して付されているタグを選択し、それらのホストのネットワークトラフィックの出入りをホスト毎に積み上げたグラフを見てみたいとします。このようなグラフは、ネットワークトラフィックの中で異常が発生していることを発見するのに便利です。
 
 この例は、次のように記述します:
@@ -444,11 +576,9 @@ Here's how to do it for any metric:
       }
     ]
 
-<!--
-Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
--->
 このケースでは、クエリは1つしか発行できないことに注目してください。
 しかしながら、デバイス単位やホストとデバイスの組み合わせを基準としてスライスすることもできます:
+
 
     "requests" [
       {
@@ -456,14 +586,15 @@ Note that in this case you can only have 1 query. But you can also split by devi
       }
     ]
 
-<!--to get traffic for all the tagged hosts, split by host and network device.-->
 全てのタグ付けされたホストから、ホストとネットワークデバイスでスライスし、積み上げたグラフを表示します。
 
+
 <!-- ### Y-Axis Controls -->
-### Y軸の操作
+
+
+<!-- ### Y-Axis Controls
 {: #yaxis}
 
-<!--
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
 <ul>
  <li>Clip y-axis to specific ranges</li>
@@ -480,20 +611,48 @@ There are three configuration settings:
 <li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
     (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
 </ul>
+
+Examples:
+
+    "yaxis": {
+        "min": "auto",
+        "max": 200,
+        "scale": "log"
+    }
+
+    "yaxis": {
+        "min": 200,
+        "scale": "sqrt"
+    }
+
+    "yaxis": {
+        "min": 9000,
+        "max": 10000
+    }
+
+    "yaxis": {
+        "scale": "pow0.1"
+    }
+
+    "yaxis": {
+        "scale": "pow3"
+    }
 -->
 
+### Y軸の操作
+{: #yaxis}
+
 グラフエディターからJSONを編集することで次のようなY軸の制御ができます(現時点ではJSONエディターのみの機能):
-<ul>
- <li>Y軸の表示範囲の指定</li>
- <li>パーセンテージか絶対値のいずれかを指定することより時系列データをフィルタ</li>
- <li>Y軸の目盛りを線形スケールから対数スケールや指数スケールへ変更</li>
-</ul>
+
+ * Y軸の表示範囲の指定
+ * パーセンテージか絶対値のいずれかを指定することより時系列データをフィルタ
+ * Y軸の目盛りを線形スケールから対数スケールや指数スケールへ変更
 
 Y軸を設定するために次の3のオプションがあります:
 
-- <code>min</code> (オプション): Y軸に表示する最小値を指定します。 ここでは、数値か"auto"を指定することができます。デフォルト値は、"auto"です。
-- <code>max</code> (オプション): Y軸に表示する最大値を指定します。 ここでは、数値か"auto"を指定することができます。デフォルト値は、"auto"です。
-- <code>scale</code> (オプション): Y軸の目盛りのタイプを指定します。 指定できる値は、"linear", "log", "sqrt", "pow##"(例. pow2, pow0.5)です。デフォルト値は、"linear"です。
+* `min` (オプション): Y軸に表示する最小値を指定します。 ここでは、数値か"auto"を指定することができます。デフォルト値は、"auto"です。
+* `max` (オプション): Y軸に表示する最大値を指定します。 ここでは、数値か"auto"を指定することができます。デフォルト値は、"auto"です。
+* `scale` (オプション): Y軸の目盛りのタイプを指定します。 指定できる値は、"linear", "log", "sqrt", "pow##"(例. pow2, pow0.5)です。デフォルト値は、"linear"です。
 
 Examples:
 
@@ -521,11 +680,10 @@ Examples:
         "scale": "pow3"
     }
 
-<!-- #### Filtering -->
-#### Y軸のフィルタリング
+
+<!-- #### Filtering
 {: #filter}
 
-<!--
 Filter configuration allows you to automatically change y-axis bounds based on a
 threshold. Thresholds can be a percentage or an absolute value, and it can apply to
 both both ends of the graph (lower and upper).
@@ -534,7 +692,20 @@ For y-axis filtering, there are two ways to set up the configuration.
 
 To begin, there is a simple configuration where you specify an absolute value or a percentage and all
 values above the value or all values that sit within the top ##% will be cutoff.
+
+Examples:
+
+    "yaxis": {
+        "filter": 30 // 値が30以上のデータポイントは除去され、表示されません
+    }
+
+    "yaxis": {
+        "filter": "5%" // 上位5%の値をもったデータポイントは除去され、表示されません
+    }
 -->
+
+#### Y軸のフィルタリング
+{: #filter}
 
 Y軸にフィルタリングの閾値を定義することにより、Y軸の上下限を自動的に変更することができます。
 閾値には、パーセンテージまたは絶対値を指定することができます。
@@ -554,11 +725,19 @@ Examples:
         "filter": "5%" // 上位5%の値をもったデータポイントは除去され、表示されません
     }
 
+
 <!--
 Advanced configuration works the same way as simple configuration, with the added
 flexibility of configuring the lower or the upper or both parts of the graph. For
 example, the following configuration will limit the graph to data points that are
 not in the bottom 10% nor in the top 30%.
+
+    "yaxis": {
+        "filter": {
+            "top": "30%",
+            "bottom": "10%"
+        }
+    }
 -->
 
 高度な設定も、シンプルな設定ど同じような概念で進めることができます。
@@ -572,7 +751,15 @@ not in the bottom 10% nor in the top 30%.
         }
     }
 
-<!-- The following will show all data except those with values higher than 15: -->
+
+<!-- The following will show all data except those with values higher than 15: 
+    "yaxis": {
+        "filter": {
+            "above": 15
+        }
+    }
+-->
+
 次は、値が15以上のデータポイント除去します:
 
     "yaxis": {
@@ -581,7 +768,16 @@ not in the bottom 10% nor in the top 30%.
         }
     }
 
-<!-- The following will hide data points below 2: -->
+
+<!-- The following will hide data points below 2: 
+
+"yaxis": {
+        "filter": {
+            "below": 2
+        }
+    }
+-->
+
 次は、値が2以下のデータポイント除去します:
 
     "yaxis": {
@@ -590,7 +786,28 @@ not in the bottom 10% nor in the top 30%.
         }
     }
 
-<!-- Here is a full JSON example: -->
+
+<!-- Here is a full JSON example: 
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "system.cpu.idle{host:hostname}",
+          "stacked": false
+        }
+      ],
+      "events": [],
+      "yaxis": {
+        "scale": "log"
+        "filter": {
+             "top": "5%",
+             "below": 15
+         }
+      },
+    }
+-->
+
 すべての要素を含んだJSON表記の例です:
 
     {
@@ -611,14 +828,27 @@ not in the bottom 10% nor in the top 30%.
       },
     }
 
-<!-- #### Examples -->
+
+<!-- #### Examples
+{: #examples}
+
+Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+          "stacked": false
+        }
+      ]
+    }
+-->
+
 #### 設定例
 {: #examples}
 
-<!--
-Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
--->
-パラメーターに１つのメトリクスを指定した<code>rate()</code>関数を使った例です。<code>top()</code>と<code>top_offset()</code>以外の関数では、この<code>rate()</code>と同様のシンタックス表記を利用することできます。
+パラメーターに１つのメトリクスを指定した`rate()`関数を使った例です。`top()`と`top_offset()`以外の関数では、この`rate()`と同様のシンタックス表記を利用することできます。
 
     {
       "viz": "timeseries",
@@ -630,8 +860,20 @@ Here is an example using the <code>rate()</code> function, which takes only a si
       ]
     }
 
-<!-- Here is an example using the <code>top()</code> function: -->
-<code>top()</code> 関数を使用した例:
+<!-- Here is an example using the <code>top()</code> function:
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
+          "stacked": false
+        }
+      ]
+    }
+
+-->
+
+`top()` 関数を使用した例:
 
     {
       "viz": "timeseries",
@@ -643,15 +885,26 @@ Here is an example using the <code>rate()</code> function, which takes only a si
       ]
     }
 
+
 <!--
 This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
 
 To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
+          "stacked": false
+        }
+      ]
+    }
 -->
 
-この例では、<code>system.cpu.iowait</code>のピーク値の上位5位をグラフに表示します。
+この例では、`system.cpu.iowait`のピーク値の上位5位をグラフに表示します。
 
-<code>system.cpu.iowait</code>のピーク値ランキングの第6位から10位のホストを表示するためには、<code>top_offset</code>を使います:
+`system.cpu.iowait`のピーク値ランキングの第6位から10位のホストを表示するためには、`top_offset`を使います:
 
     {
       "viz": "timeseries",
@@ -663,8 +916,19 @@ To look at the hosts with the 6th through 10th highest values (for example), use
       ]
     }
 
-<!-- Here is an example using the <code>week_before()</code> function: -->
-<code>week_before()</code>関数を使用した例:
+<!-- Here is an example using the <code>week_before()</code> function:
+
+    {
+      "viz": "timeseries",
+      "requests": [
+        {
+          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
+        }
+      ]
+    }
+-->
+
+`week_before()`関数を使用した例:
 
     {
       "viz": "timeseries",
