@@ -88,6 +88,8 @@ redirects:
     to:    /guides/monitors/
   - from:  /ja/guides/monitoring/
     to:    /ja/guides/monitors/
+  - from:  /ja/guides/network_checks/
+    to:    /ja/integrations/tcpcheck/
 
 commonfilters:
   - phrase: 'info command'
