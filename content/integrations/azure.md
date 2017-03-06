@@ -81,12 +81,14 @@ azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" 
 Create a Service Principal using the `AppId` returned from the last command.\\
 Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
 
-azure cli <0.10.2
+azure cli <0.10.2:
+
 ~~~~
 azure ad sp create {app-id}
 ~~~~
 
 azure cli >= 0.10.2:
+
 ~~~~
 azure ad sp create -a {app-id}
 ~~~~
