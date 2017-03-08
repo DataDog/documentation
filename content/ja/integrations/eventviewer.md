@@ -24,13 +24,7 @@ Connect Event Viewer to Datadog in order to:
 * Datdog内で、システムやアプリケーションに関するイベントを追跡する
 * システムやアプリケーションに関するイベントをその他のアプリケーションと関連付ける
 
-
-<!-- From the open-source Agent:
-
-* [Event Viewer YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example)
-* [Event Viewer checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Event Viewer インテグレーションの設定ファイルサンプ](https://github.com/DataDog/dd-agent/blob/master/conf.d/win32_event_log.yaml.example)
-* [Event Viewer インテグレーション　checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/win32_event_log.py)
+* [Event Viewer インテグレーションの設定ファイルサンプ](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/conf.yaml.example)
+* [Event Viewer インテグレーション　checks.d](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/checks.py)

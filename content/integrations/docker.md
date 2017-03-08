@@ -27,7 +27,7 @@ There are three ways to setup the Docker integration: install the agent on the h
 2. Install the agent as described in [the agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
 3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
 4. Add the agent user to the docker group: `usermod -a -G docker dd-agent`
-5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/docker_daemon.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
+5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     ![](/static/images/integrations-docker-dockerps.png)
 
@@ -174,7 +174,7 @@ Our `Dockerfile` simply takes the standard [Datadog docker image](https://hub.do
     FROM datadog/docker-dd-agent
     ADD conf.d/redisdb.yaml /etc/dd-agent/conf.d/redisdb.yaml
 
-Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/redisdb.yaml.example) and tells the Datadog agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
+Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) and tells the Datadog agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
 
     init_config:
 

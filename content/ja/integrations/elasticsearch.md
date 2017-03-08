@@ -24,15 +24,10 @@ Connect Elasticsearch to Datadog in order to:
 * Elasticsearchのパフォーマンス情報を可視化する
 * Elasticsearchのパフォーマンス情報とそれ以外のアプリケーションの状況を関連付けて把握する
 
-<!-- From the open-source Agent:
-
-* [Elasticsearch YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
-* [Elasticsearch checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Elasticsearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/elastic.yaml.example)
-* [Elasticsearchインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/elastic.py)
+* [Elasticsearchインテグレーションの設定ファイルサンプル](https://github.com/DataDog//integrations-core/blob/master/directory/conf.yaml.example)
+* [Elasticsearchインテグレーション checks.d](https://github.com/DataDog//integrations-core/blob/master/elastic/check.py)
 
 
 <!-- The following metrics are collected by default with the Elasticsearch integration:

@@ -48,13 +48,13 @@ By default, the Datadog Agent includes Service Discovery support for:
 - Redis
 - Riak
 
-These are provided by the configuration templates in the [Datadog Agent `conf.d/auto_conf` directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf).
+These are provided by the configuration templates in the Datadog Agent `conf.d/auto_conf` directory.
 
 To add Service Discovery for your custom container images, you simply need to add a configuration template to the `conf.d/auto_conf` directory.
 
 ## Configuration templates
 
-The configuration templates in [the `conf.d/auto_conf` directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf) are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
+The configuration templates in conf.d/auto_conf` directory are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
 
 ### Template variables
 
@@ -139,7 +139,7 @@ Note that in the structure above, you may have multiple checks for a single cont
 
 ### Example: Apache Web Server
 
-By default, the Datadog Agent supports Service Discovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
+By default, the Datadog Agent supports Service Discovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example):
 
     docker_images:
       - httpd
@@ -171,7 +171,7 @@ For example, if a container has this label configured as `com.datadoghq.sd.check
 
 ## Configuration templates with Kubernetes annotations
 
-As of version 5.11 of the Datadog Agent, you can use Kubernetes pod annotations to store your configuration templates. Follow the [Kubernetes integration instructions](/integrations/kubernetes/), then add annotations to your pod definitions. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
+As of version 5.12 of the Datadog Agent, you can use Kubernetes pod annotations to store your configuration templates. Follow the [Kubernetes integration instructions](/integrations/kubernetes/), then add annotations to your pod definitions. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
 
     annotations:
       service-discovery.datadoghq.com/<Kubernetes Container Name>.check_names: '["check_name_0"]'
@@ -182,7 +182,7 @@ Also similar to the key-value store configuration above, you include multiple ch
 
 ### Example: Apache Web Server
 
-Here's an example of the Apache YAML file that would correspond to the configuration template [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/dd-agent/blob/master/conf.d/auto_conf/apache.yaml):
+Here's an example of the Apache YAML file that would correspond to the configuration template [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example):
 
     apiVersion: v1
     kind: Pod

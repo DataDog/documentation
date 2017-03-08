@@ -26,16 +26,10 @@ doclevel:
 - データベースのパフォーマンスの可視化
 - PostgreSQLのパフォーマンス情報と他アプリケーションの情報を連携
 
-
-<!-- From the open-source Agent:
-
-* [PostgreSQL YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
-* [PostgreSQL checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/postgres.yaml.example)
-* [PostgreSQLインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/postgres.py)
+* [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/postgres/conf.yaml.example)
+* [PostgreSQLインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/postgres/check.py)
 
 <!-- The following metrics are collected by default with the PostgreSQL integration:
 
