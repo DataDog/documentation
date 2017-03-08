@@ -22,9 +22,9 @@ def get_local_hash(language)
       "en" => "API",
       "ja" => "APIレファレンス",
     },
-    "menu_references_tracing_api" => {
-      "en" => "Tracing API",
-      "ja" => "Tracing APIレファレンス",
+    "menu_references_tracing" => {
+      "en" => "Tracing (APM)",
+      "ja" => "Tracing (APM)",
     },
     "menu_references_libraries" => {
       "en" => "Libraries",
@@ -141,7 +141,44 @@ def get_local_hash(language)
     "agentusage_from_source" => {
       "en" => "From Source",
       "ja" => "Agent インストールガイド",
-    }
+    },
+
+    "customnav_tracingnav_tracing" => {
+      "en" => "Tracing (APM)",
+      "ja" => "Tracing (APM)",
+    },
+    "customnav_tracingnav_install" => {
+      "en" => "Installation & Configuration",
+      "ja" => "Installation & Configuration",
+    },
+    "customnav_tracingnav_terminology" => {
+      "en" => "Terminology",
+      "ja" => "Terminology",
+    },
+    "customnav_tracingnav_faq" => {
+      "en" => "Frequently Asked Questions",
+      "ja" => "Frequently Asked Questions",
+    },
+    "customnav_tracingnav_langs" => {
+      "en" => "Supported Languages",
+      "ja" => "Supported Languages",
+    },
+    "customnav_tracingnav_go" => {
+      "en" => "Go",
+      "ja" => "Go",
+    },
+    "customnav_tracingnav_py" => {
+      "en" => "Python",
+      "ja" => "Python",
+    },
+    "customnav_tracingnav_rb" => {
+      "en" => "Ruby",
+      "ja" => "Ruby",
+    },
+    "customnav_tracingnav_api" => {
+      "en" => "Tracing API",
+      "ja" => "Tracing API",
+    },
 
   }
   local_phrases = {}

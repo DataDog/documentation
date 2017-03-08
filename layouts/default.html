@@ -22,10 +22,15 @@ this layout provides a sidebar and main column.
             </li>
             <% end %>
             <%=show_table_of_contents%>
+            <% if @item[:customnav] %>
+              <%= render 'partials/customnav-' + @item[:customnav] %>
+            <% end %>
+            <% if not @item[:hideguides] %>
               <li class="nav-header"><%= @item["menu_guides"] %> </li>
               <% this_guide_items = @item["language"] != "ja" ? $guide_items : $ja_guide_items %>
-            <% this_guide_items.each do |i| %>
-                  <li><%= link_to i[:title], i.path %></li>
+              <% this_guide_items.each do |i| %>
+                <li><%= link_to i[:title], i.path %></li>
+              <% end %>
             <% end %>
           </ul>
         &nbsp;
