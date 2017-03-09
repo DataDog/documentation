@@ -235,7 +235,7 @@ def formatmetrics(selectedmetrics)
     metrictable += "<tr><td>Metrics would go here if you didn't type rake slow</td></tr>"
   end
   metrictable += "</table>"
-  return metrictable
+  return metrictable.force_encoding("utf-8")
 end
 
 def get_units_from_git
