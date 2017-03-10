@@ -199,7 +199,7 @@ end
 
 def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
   if itemintegration.nil? then
-    print("\n\n","========\n", "Missing: 'git_integration_title' in the header setting\n", "========\n\n")
+    print("\n\n========\n", "[error] Missing: 'git_integration_title' in the header setting", "\n========\n\n")
   else
     items_to_include = items_to_include.split(/\s*,\s*/)
     if $allmetrics == nil
@@ -217,6 +217,9 @@ def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to
       end
     else
       selectedmetrics = allmetricsforintegration
+    end
+    if selectedmetrics.nil? then
+      print("\n\n========\n", "[info] 'selectedmetrics' is nil. 'git_integration_title: ", itemintegration, "'", "\n========\n\n")
     end
   end
   return formatmetrics(selectedmetrics)
