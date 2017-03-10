@@ -198,22 +198,26 @@ def insert_example_links(integration: item[:integration_title], conf:  integrati
 end
 
 def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to_include="")
-  items_to_include = items_to_include.split(/\s*,\s*/)
-  if $allmetrics == nil
-    if File.exist?(github_metrics_store_filename)
-      $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
-    else
-      $allmetrics = get_all_metrics_from_github()
-    end
-  end
-  selectedmetrics = []
-  allmetricsforintegration = $allmetrics[itemintegration]
-  if items_to_include.count > 0 && $goodconnection
-    items_to_include.each do |item_to_include|
-      selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
-    end
+  if itemintegration.nil? then
+    print("\n\n","========\n", "Missing: 'git_integration_title' in the header setting\n", "========\n\n")
   else
-    selectedmetrics = allmetricsforintegration
+    items_to_include = items_to_include.split(/\s*,\s*/)
+    if $allmetrics == nil
+      if File.exist?(github_metrics_store_filename)
+        $allmetrics = Marshal.load(File.binread(github_metrics_store_filename))
+      else
+        $allmetrics = get_all_metrics_from_github()
+      end
+    end
+    selectedmetrics = []
+    allmetricsforintegration = $allmetrics[itemintegration]
+    if items_to_include.count > 0 && $goodconnection
+      items_to_include.each do |item_to_include|
+        selectedmetrics = selectedmetrics + allmetricsforintegration.select {|metric| metric[:name].include?(item_to_include)}
+      end
+    else
+      selectedmetrics = allmetricsforintegration
+    end
   end
   return formatmetrics(selectedmetrics)
 end
