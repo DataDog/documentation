@@ -4,6 +4,7 @@ integration_title: Google Stackdriver Logging
 kind: integration
 doclevel: basic
 newhlevel: true
+git_integration_title: google_stackdriver_logging
 ---
 
 # Overview
@@ -20,4 +21,4 @@ If you haven't already, set up the [Google Cloud Platform integration first](/in
 
 # Metrics
 
-See the `gcp.logging.*` metrics on the [Google Cloud Platform integration page](/integrations/google_cloud_platform#metrics) 
+<%= get_metrics_from_git() %>

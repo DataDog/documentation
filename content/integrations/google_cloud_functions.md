@@ -1,9 +1,10 @@
 ---
-title: Datadog-Google Functions Integration
-integration_title: Google Functions
+title: Datadog-Google Cloud Functions Integration
+integration_title: Google Cloud Functions
 kind: integration
 doclevel: basic
 newhlevel: true
+git_integration_title: google_cloud_functions
 ---
 
 # Overview
@@ -20,4 +21,4 @@ If you haven't already, set up the [Google Cloud Platform integration first](/in
 
 # Metrics
 
-See the `gcp.functions.*` metrics on the [Google Cloud Platform integration page](/integrations/google_cloud_platform#metrics) 
+<%= get_metrics_from_git() %>

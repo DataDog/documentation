@@ -4,6 +4,7 @@ integration_title: Google VPN
 kind: integration
 doclevel: basic
 newhlevel: true
+git_integration_title: google_cloud_vpn
 ---
 
 # Overview
@@ -20,4 +21,4 @@ If you haven't already, set up the [Google Cloud Platform integration first](/in
 
 # Metrics
 
-See the `gcp.vpn.*` metrics on the [Google Cloud Platform integration page](/integrations/google_cloud_platform#metrics) 
+<%= get_metrics_from_git() %>

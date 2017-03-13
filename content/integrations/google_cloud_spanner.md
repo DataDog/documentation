@@ -20,4 +20,4 @@ If you haven't already, set up the [Google Cloud Platform integration first](/in
 
 # Metrics
 
-See the `gcp.spanner.*` metrics on the [Google Cloud Platform integration page](/integrations/google_cloud_platform#metrics) 
+Look for `gcp.spanner.*` metrics within the Datadog App
