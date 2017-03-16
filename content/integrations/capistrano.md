@@ -2,7 +2,7 @@
 title: Datadog-Capistrano Integration
 integration_title: Capistrano
 kind: integration
-doclevel:basic
+doclevel: basic
 newhlevel: true
 ---
 # Overview
