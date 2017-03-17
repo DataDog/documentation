@@ -207,10 +207,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
-#### Reverse Color Scheme
-
-  * To get a darker background than default, you can use [this CSS library][55] to flip the colors.
-
 #### Saltstack
 {: #community-integration-saltstack}
 
