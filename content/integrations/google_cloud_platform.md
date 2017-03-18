@@ -13,6 +13,24 @@ Connect to Google Cloud Platform to:
 * Import your Google Compute Engine host tags
 * Tag your Google Compute Engine hosts with additional compute-specific metadata (e.g. zone)
 
+Related integrations include:
+
+| [App Engine](/integrations/google_app_engine) | platform as a service to build scalable applications |
+| [Big Query](/integrations/google_cloud_big_query) | enterprise data warehouse |
+| [CloudSQL](/integrations/google_cloudsql) | MySQL database service |
+| [Compute Engine](/integrations/google_compute_engine) | high performance virtual machines |
+| [Container Engine](/integrations/google_container_engine) | kubernetes, managed by google |
+| [Datastore](/integrations/google_cloud_datastore) | NoSQL database |
+| [Firebase](/integrations/google_cloud_firebase) | mobile platform for application development |
+| [Functions](/integrations/google_cloud_functions) | A serverless platform for building event-based microservices |
+| [Machine Learning](/integrations/google_cloud_ml) | machine learning services |
+| [Pub/Sub](/integrations/google_cloud_pubsub) | real-time messaging service |
+| [Spanner](/integrations/google_cloud_spanner) | horizontally scalable, globally consistent, relational database service |
+| [Stackdriver Logging](/integrations/google_stackdriver_logging) | real-time log management and analysis  |
+| [Storage](/integrations/google_cloud_storage) | unified object storage |
+| [VPN](/integrations/google_cloud_vpn) | managed network functionality |
+{:.table}
+
 ### Installation
 
 From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
