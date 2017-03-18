@@ -28,3 +28,5 @@ WORKDIR /docs
 
 # Replace the html dir with a symlink to docs
 RUN rm -rf /usr/share/nginx/html && ln -s /docs/output /usr/share/nginx/html
+
+CMD /bin/sh -c "/usr/sbin/nginx; /bin/sh"

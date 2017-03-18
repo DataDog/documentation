@@ -21,6 +21,12 @@ task :compile do
   sh 'bundle exec nanoc compile'
 end
 
+desc 'Build documentation site'
+task :compileslow do
+  ENV['NANOCRUNSLOW'] = "true"
+  sh 'bundle exec nanoc compile'
+end
+
 task :view do
   sh 'bundle exec nanoc view'
 end
