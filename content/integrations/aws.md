@@ -31,7 +31,7 @@ Related integrations include:
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
-| [Simple Queue Service (SNS)](/integrations/awssqs) | messaging queue service |
+| [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
 | [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
 {:.table}
 
