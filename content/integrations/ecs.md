@@ -173,7 +173,7 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
                Environment=API_KEY=YOUR_API_KEY
                Environment=TAGS=simple-tag-0
                ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent:latest
-               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/ proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:latest
+               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:latest
                ExecStop=/usr/bin/docker stop dd-agent
 
 ### That's all!
