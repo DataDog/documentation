@@ -44,6 +44,7 @@ namespace :deploy do
 
   desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
   task :staging do
+    sh("cp staging-robots.txt output/robots.txt")
     sh("cd output && aws s3 sync --delete --size-only . s3://datadog-docs-staging --acl public-read")
   end
 end
