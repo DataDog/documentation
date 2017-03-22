@@ -40,6 +40,7 @@ When you first open the graph editor window, you will be on the **Edit** tab. He
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 -->
+
 ## GUIエディターを使用したグラフ表示
 
 グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgresインテグレーションダッシュボードでのグラフの例です:
@@ -55,6 +56,7 @@ When you create a graph, you will probably have a metric in mind that you want t
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 -->
+
 ### 1) グラフ表示するメトリクスの選択
 
 グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer](https://app.datadoghq.com/metric/explorer)を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary](https://app.datadoghq.com/metric/summary)を見ることもできます。
@@ -292,6 +294,7 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 -->
+
 ### 8) 保存
 
 最後に`Save`をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。
