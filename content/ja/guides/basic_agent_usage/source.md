@@ -1,8 +1,8 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2017/02/14
 translation_status: complete
 language: ja
-title: Agentの基本的な使用方法(ソースから)
+title: Agentの基本的な使用方法(ソースコードから)
 ---
 
 <!--
@@ -86,7 +86,8 @@ To receive more information about the Agent's state:
 
 Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
 
-<%= console 'sudo ~/.datadog-agent/bin/info -v' %> -->
+<%= console 'sudo ~/.datadog-agent/bin/info -v' %>
+-->
 
 <h3 id="status_and_information">動作ステータスの確認</h3>
 
@@ -113,7 +114,8 @@ Configuration
 
 The configuration file for the Agent is located at <code>~/.datadog-agent/agent/datadog.conf</code>
 
-Configuration files for integrations are located in <code>~/.datadog-agent/agent/conf.d/</code> -->
+Configuration files for integrations are located in <code>~/.datadog-agent/agent/conf.d/</code>
+-->
 
 <h3 id="configuration">設定ファイルの保存されているディレクトリ</h3>
 
@@ -170,5 +172,7 @@ You can contact them in one of the following ways:
 </ul>
 
 <br/>
+<br/>
+上記の方法を実行しても問題が解決しない場合は、Datadogのサポートチームが問題解決のお手伝いをすることができます。Datadogのサポートチームに連絡を取るには、次のような方法があります。
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
+<%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => false %>

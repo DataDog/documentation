@@ -140,7 +140,7 @@ def get_local_hash(language)
     },
     "agentusage_from_source" => {
       "en" => "From Source",
-      "ja" => "Agent インストールガイド",
+      "ja" => "ソースコードから",
     }
 
   }
