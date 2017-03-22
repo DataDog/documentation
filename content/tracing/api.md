@@ -2,13 +2,15 @@
 title: Tracing API
 kind: documentation
 autotocdepth: 2
+hideguides: true
+customnav: tracingnav
 ---
 
 ### Overview
 
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
-Tracing data is sent to the Datadog Agent via an HTTP API. We provide some official libraries that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog APM library.
+Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
 ### API
 
@@ -38,8 +40,8 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some offic
     <ul class="arguments">
       <%= argument('traces', 'A list of traces. Traces are a list of spans as JSON objects containing the span information:
         <ul>
-          <li><code>trace_id</code> - <em>Required.</em> The unique integer ID of the trace containing this span.</li>
-          <li><code>span_id</code> - <em>Required.</em> The span integer ID.</li>
+          <li><code>trace_id</code> - <em>Required.</em> The unique integer (64-bit unsigned) ID of the trace containing this span.</li>
+          <li><code>span_id</code> - <em>Required.</em> The span integer (64-bit unsigned) ID.</li>
           <li><code>name</code> - <em>Required.</em> The span name.</li>
           <li><code>resource</code> - <em>Required.</em> The resource you are tracing.</li>
           <li><code>service</code> - <em>Required.</em>The service name.</li>
