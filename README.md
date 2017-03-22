@@ -170,6 +170,11 @@ Describe each of the options available in the YAML file. This will often be the 
 
 The validation section should include instructions on how to validate that the integration is successfully working.
 
+### Troubleshooting
+**Optional**
+
+The troubleshooting section should include anything that answers a question a user might have about the integration. If there is a question that comes up in support about the integration, it should be added here.
+
 ### Metrics
 **Required for integrations that have metrics**
 
@@ -180,13 +185,12 @@ Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use yo
 ### Events
 **Optional**
 
-This is a newer section. If you can describe the events that are part of the integration, it should go here.
+Include a list of events if the integration provides any.
 
-### Troubleshooting
+### Service Checks
 **Optional**
 
-The troubleshooting section should include anything that answers a question a user might have about the integration. If there is a question that comes up in support about the integration, it should be added here.
-
+Include a list of service checks if the integration provides any.
 
 
 # How to add a new Guide
