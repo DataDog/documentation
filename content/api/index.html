@@ -240,6 +240,7 @@ kind: documentation
                 <code>[[POSIX_timestamp, numeric_value], ...]</code>
               </div>
               Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+              Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
             </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
@@ -287,6 +288,61 @@ kind: documentation
         <h5>Example Response</h5>
         <% %w{py sh rb}.each do |f| %>
           <%= snippet_result_code_block "api-metrics-query.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="int-anchor" id="metrics-metadata-get"></div><a href="#metrics-metadata-get"><h4>View metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to get metadata about a specific metric.
+        </p>
+
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="int-anchor" id="metrics-metadata-update"></div><a href="#metrics-metadata-update"><h4>Edit metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to edit fields of a metric's metadata.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("type", "metric type such as 'gauge' or 'rate'", {:default => 'None'}) %>
+          <%= argument("description", "string description of the metric", {:default => 'None'}) %>
+          <%= argument("short_name", "short name string of the metric", {:default => 'None'}) %>
+          <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'", {:default => 'None'}) %>
+          <%= argument("per_unit", "'per' unit of the metric such as 'second' in 'bytes per second'", {:default => 'None'}) %>
+          <%= argument("statsd_interval", "if applicable, statds flush interval in seconds for the metric", {:default => 'None'}) %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-update.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-update.#{f}" %>
         <% end %>
       </div>
     </div>
@@ -810,7 +866,7 @@ kind: documentation
           :default => "None" %>
           <%= argument 'tags', "A comma separated list indicating
           what tags, if any, should be used to filter the list of monitors
-          by scope",
+          by scope, e.g. <code>host:host0</code>. For more information, see the <code>tags</code> parameter for the appropriate <code>query</code> argument in the <a href='#monitor-create'>Create a monitor</a> section above.",
           :default => "None" %>
           <%= argument 'monitor_tags', "A comma separated list indicating
           what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",

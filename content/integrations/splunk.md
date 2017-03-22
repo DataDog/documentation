@@ -30,7 +30,7 @@ Once it is done, [get your api key and an application key](https://app.datadoghq
     #!/bin/bash
     export API_KEY=YOURAPIKEYHERE
     export APP_KEY=YOURAPPKEYHERE
-    dog --api-key $API_KEY --application-key $APP_KEY event post \
+    /opt/datadog-agent/bin/dog --api-key $API_KEY --application-key $APP_KEY event post \
     "Found $SPLUNK_ARG_1 events in splunk" \
     "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5," \
     " from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
@@ -56,7 +56,7 @@ If the trace file include a Traceback that ends with ```pkg_resources.Distributi
     unset LD_LIBRARY_PATH
     export API_KEY=YOURAPIKEYHERE
     export APP_KEY=YOURAPPKEYHERE
-    dog --api-key $API_KEY --application-key $APP_KEY event post \
+    /opt/datadog-agent/bin/dog --api-key $API_KEY --application-key $APP_KEY event post \
     "Found $SPLUNK_ARG_1 events in splunk" \
     "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5," \
     " from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \

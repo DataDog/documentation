@@ -6,8 +6,12 @@ sidebar:
     - header: Official Libraries
     - text: Python
       href: "#python"
+    - text: PHP
+      href: "#php"
     - text: Ruby
       href: "#ruby"
+    - text: JAVA
+      href: "#java"
     - text: Go
       href: "#go"
     - text: C#
@@ -64,6 +68,9 @@ There are many libraries available to help you interact with the Datadog API.
 
   * [datadog-go][71] - A Go DogStatsD client.
 
+#### JAVA
+  * [java-dogstatsd-client][7] - a DogStatsD Client for Java written by [Indeed][8] and Datadog.
+
 #### Python
 
   * [datadogpy][1] - A Python Datadog API wrapper and DogStatsD client.
@@ -72,6 +79,10 @@ There are many libraries available to help you interact with the Datadog API.
 
   * [DogApi][3] - A Ruby Datadog API wrapper.
   * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
+
+#### PHP
+
+  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
 
 ### Community Libraries
 
@@ -112,7 +123,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Java
 {: #community-java}
 
-  * [java-dogstatsd-client][7] - a DogStatsD Client for Java written by [Indeed][8].
   * [metrics-datadog][9] - a backend to yammers's metrics library written by [Coursera][10].
   * [Lassie][13] - a Java screenboard API client by [Bazaarvoice][12].
   * [java-dogstatsd-client] [59] - DogStatsD Client for Java to submit both Events and Metrics written by [arnabk] [60].
@@ -134,7 +144,6 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### PHP
 {: #community-php}
 
-  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
   * [dog-statsd][82] - A fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84].
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
 
@@ -180,6 +189,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 {: #community-integration-logstash}
 
   * [Logstash Output for Datadog][73]
+  * [Logstash Output for Dogstatsd][88]
 
 #### NGINX LUA
 {: #community-integration-nginx-lua}
@@ -215,7 +225,7 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [4]: https://github.com/DataDog/dogstatsd-ruby
    [5]: https://github.com/DataDog/php-datadogstatsd
    [6]: https://github.com/DataDog/dogstatsd-csharp-client
-   [7]: https://github.com/indeedeng/java-dogstatsd-client
+   [7]: https://github.com/DataDog/java-dogstatsd-client
    [8]: http://www.indeed.com/
    [9]: https://github.com/coursera/metrics-datadog
    [10]: https://www.coursera.org/
@@ -296,3 +306,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [85]: https://github.com/rfrezino/datadog-delphi
    [86]: https://github.com/miketheman/statsd.cr
    [87]: https://github.com/miketheman
+   [88]: https://github.com/brigade/logstash-output-dogstatsd

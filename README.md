@@ -4,11 +4,39 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 # Setup
 
+Install Rbenv and Ruby 2.3.0:
+
 ```
 brew install rbenv # or equivalent on linux (if you don't know about brew, go to http://brew.sh)
 rbenv install 2.3.0
 rbenv local 2.3.0
-gem install bundler # and set up your shell / shell profile for it
+```
+
+To configure this Ruby to take precedence over the system Ruby, add the following to your `~/.bash_profile` (or similar file for your shell):
+
+```
+eval "$(rbenv init -)"
+```
+
+Open a new shell or `source` your `~/.bash_profile` and install bundler:
+
+```
+gem install bundler
+```
+
+One dependency of the project - the `therubyracer` gem - requires a specific of the V8 Javascript engine. Install the correct V8 first and then install version `0.12.2` of `therubyracer`:
+
+```
+brew tap homebrew/versions
+brew install v8-315
+brew link --force v8-315
+gem install libv8 -- --with-system-v8
+gem install therubyracer -v '0.12.2'
+```
+
+Then, from the root of the project repo, install all the gems:
+
+```
 rbenv exec bundle install
 ```
 

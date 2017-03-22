@@ -31,6 +31,7 @@ Related integrations include:
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
+| [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
 | [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
 {:.table}
 
@@ -46,7 +47,6 @@ There are a number of other AWS services that are also available in Datadog but 
 | Lambda |
 | MachineLearning |
 | OpsWorks |
-| Simple Queing Service |
 | Simple Workflow Service |
 | Trusted Advisor |
 | WorkSpaces |
@@ -147,7 +147,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
-* `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
+* `cloudwatch:GetMetricStatistics` to fetch data points for a given metric.
 
 Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
 
@@ -288,6 +288,12 @@ For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `sns:Publish`: Used to publish notifications (monitors or event feed).
 
 For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
+
+## SQS
+
+* `sqs:ListQueues`: Used to list alive queues.
+
+For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html), review the documentation on the AWS website.
 
 ## Support
 

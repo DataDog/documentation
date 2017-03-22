@@ -19,6 +19,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 ![JSON Editor](/static/images/references-graphing-jsoneditor.png)
 
 <!--### Grammar-->
+
 ### JSON書式の構文
 {: #grammar}
 
@@ -80,6 +81,7 @@ JSON書式の一番外側のカッコ内に、先の要素が下記のエント�
 \* *"requests"と"viz"は必ず指定する必要があります。*
 
 <!--## Requests-->
+
 ## Requests (メトリクスの時系列データ, Series)
 {: #requests}
 <!--
@@ -113,6 +115,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
     metric{scope} [by {group}] operator metric{scope} [by {group}]
 
 <!--#### Functions-->
+
 #### 関数
 {: #functions}
 
@@ -172,6 +175,7 @@ future. For more on <code>.as_count()</code> please see our blog post
 ``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
 
 <!-- #### Aggregation Method -->
+
 #### データポイントの集計
 {: #aggregation}
 
@@ -181,6 +185,7 @@ In most cases, the number of data points available outnumbers the maximum number
 多くの場合、利用可能なデータポイントの数は画面に表示可能なデータポイントの数を上回ります。これに対応するため、データポイントは4つの集計方法{average,  max, min, sum}の1つにより集計されています。
 
 <!-- #### Metrics -->
+
 #### メトリクスの確認
 {: #metrics}
 
@@ -190,6 +195,7 @@ The metric is the main focus of the graph. You can find the list of metrics avai
 メトリクスはグラフ表示の要です。現在利用可能なメトリクスは [Metrics Summary](https://app.datadoghq.com/metric/summary) にてリスト表示することができます。各メトリクスをクリックしてそのメトリクスがどのようなデータを取得しているか、あるいはタグやホストなどの関連する詳しい情報を確認します。
 
 <!-- #### Scope -->
+
 #### 対象範囲の指定(Scope, スコープ)
 {: #scope}
 
@@ -220,6 +226,7 @@ Examples of scope (meaning in parentheses):
     *                                 (ワイルドカード)
 
 <!-- #### Groups -->
+
 #### グループの指定
 {: #groups}
 
@@ -229,6 +236,7 @@ For any given metric, data may come from a number of hosts. The data will normal
 どのメトリクスにおいても、複数のホストからのデータによって構成され得ています。そうしたデータは通常、時間間隔ごとにすべてのホストからのデータが単一の値に集計されますが、あらゆるタグによってデータを分離して取得することができます。あるメトリクスに対してホストごとにデータポイントを分けて見たい場合、{host}グループの指定を行います。
 
 <!-- #### Arithmetic -->
+
 #### 演算子の利用
 {: #math}
 
@@ -290,6 +298,7 @@ Datadogでは、ここでは一貫性を強制していないので、*異なる
     }
 
 <!-- ### Events -->
+
 ### イベントの表示
 {: #events}
 
@@ -381,6 +390,7 @@ The Time Series can be further broken down to:
 4. 棒グラフ
 
 <!-- #### Line Charts -->
+
 #### 折れ線グラフ
 {: #linecharts}
 
@@ -404,6 +414,7 @@ The Time Series can be further broken down to:
 これにより、複数の時系列データのグラフを重ね合わせて表示することができます。
 
 <!-- #### Stacked Series -->
+
 #### 積み上げグラフ
 {: #stacked}
 
@@ -460,6 +471,7 @@ Note that in this case you can only have 1 query. But you can also split by devi
 全てのタグ付けされたホストから、ホストとネットワークデバイスでスライスし、積み上げたグラフを表示します。
 
 <!-- ### Y-Axis Controls -->
+
 ### Y軸の操作
 {: #yaxis}
 
@@ -522,6 +534,7 @@ Examples:
     }
 
 <!-- #### Filtering -->
+
 #### Y軸のフィルタリング
 {: #filter}
 
@@ -612,6 +625,7 @@ not in the bottom 10% nor in the top 30%.
     }
 
 <!-- #### Examples -->
+
 #### 設定例
 {: #examples}
 

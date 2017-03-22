@@ -44,6 +44,7 @@ namespace :deploy do
 
   desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
   task :staging do
+    sh("cp staging-robots.txt output/robots.txt")
     sh("cd output && aws s3 sync --delete --size-only . s3://datadog-docs-staging --acl public-read")
   end
 end
@@ -139,6 +140,12 @@ task :slowjp do
   ENV['NANOCRUNSLOW'] = "true"
   ENV['JPASSIST'] = "true"
   Rake::Task[:guard].invoke
+end
+
+desc 'Build documentation site'
+task :compilejp do
+  ENV['JPASSIST'] = "true"
+  Rake::Task[:compile].invoke
 end
 
 desc 'Removing Japanese lang-assitant files'

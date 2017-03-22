@@ -16,6 +16,7 @@ EXT_TO_LANG = {
   ".sh"  => "console",
   ".js"  => "javascript",
   ".json" => "json",
+  ".go" => "golang",
 } unless defined? EXT_TO_LANG
 
 # PUBLIC ======================
@@ -60,6 +61,10 @@ end
 
 def json(code)
   code_block(code, "json", :static => true)
+end
+
+def golang(code)
+  code_block(code, "golang", :static => true)
 end
 
 

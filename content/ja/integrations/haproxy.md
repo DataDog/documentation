@@ -26,16 +26,10 @@ Capture HAProxy activity in Datadog to:
 * HAProxyサーバーがダウンしたことを検知する
 * HAProxyのパフォーマンスと他のアプルケーションの情報を関連付けて把握する
 
-
-<!-- From the open-source Agent:
-
-* [HAProxy YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example)
-* [HAProxy checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/haproxy.yaml.example)
-* [HAProxyインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/haproxy.py)
+* [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/haproxy/conf.yaml.example)
+* [HAProxyインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/haproxy/check.py)
 
 
 <!-- The following metrics are collected by default with the HAProxy integration:

@@ -3,7 +3,6 @@ title: Datadog-AWS Lambda Integration
 integration_title: AWS Lambda
 kind: integration
 doclevel: basic
-beta: true
 git_integration_title: amazon_lambda
 ---
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: メールによるイベント情報の送信
@@ -33,7 +33,8 @@ the application or system sending an email instead. There are two different ways
 to use Events via Email, depending mostly on whether the application offers you
 the ability to customize the format of the email body being sent. -->
 
-## 概要 {#overview}
+## 概要
+{: #overview}
 
 Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
 まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
@@ -53,11 +54,13 @@ then you will probably want to configure a JSON-formatted message to be sent.
 This will allow you to set everything in the event that appears in the event
 stream. Here are examples of each: -->
 
-## JSON形式 vs 平文形式 {#json-vs-plain}
+## JSON形式 vs 平文形式
+{: #json-vs-plain}
 
 アプリケーションからDatadogに送信するメールを自由にコントロールできるなら、JSON形式でのメッセージ送信の設定をするとよいでしょう。この形式を使うことによって、イベントストリームに表示されるイベントに必要な情報の全てを送信することができるでしょう。
 
 それぞれの例を以下に紹介します:
+
 
 <!-- ### Plain Text
 
@@ -80,11 +83,11 @@ at the end of the title and body of the event, neither instance are actually
 tags. The sender of the email also appears at the bottom of the event, so be sure
 to take advantage of that to help identify the sending application. -->
 
-### 平文
+### 平文形式
 
 #### メールの内容
 
-平文でのイベント情報メールの送信では、、3個のフィールドが制御できます:
+平文形式でのイベント情報メールの送信では、、3個のフィールドが制御できます:
 
 - 送信者メールアドレス
 - 件名
@@ -96,7 +99,7 @@ to take advantage of that to help identify the sending application. -->
 
 ![Plain Text Event](/static/images/plain-event.png)
 
-メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本体になることに注意してください。
+**注)** メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本体になることに注意してください。
 イベントのタイトルと本文の最後にタグが表示されるように見えますが、どちらの部分もDatadogではタグとしては扱われてはいません。
 メールの送信者は、イベント欄の一番下の部分に表示されますのでこの部分を有効に活用しアプリケーションの識別に利用するとよいでしょう。
 
@@ -127,7 +130,7 @@ JSON and the email will be ignored by Datadog.
 
 The allowable JSON keys can be found in the [events API documentation][eventsapi]. -->
 
-### JSON
+### JSON形式
 
 #### メールの内容
 

@@ -1,3 +1,0 @@
----
-BUNDLE_BUILD__LIBV8: "--with-system-v8"
-BUNDLE_BUILD__EVENTMACHINE: "--with-cppflags=-I/usr/local/opt/openssl/include"

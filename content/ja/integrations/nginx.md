@@ -56,7 +56,7 @@ location /nginx_status {
 }
 ~~~
 
-<!-- For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAMl config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example) or take a look at the [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py).
+<!-- For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).  For some more insight into configuring the agent, check out the [nginx example YAMl config](https://github.com/DataDog/integrations-core/blob/master/nginx/conf.yaml.example)  or take a look at the [nginx agent plugin](https://github.com/DataDog/integrations-core/blob/master/nginx/check.py).
 
 The following metrics are collected by default via the stub status module: -->
 
@@ -71,7 +71,7 @@ Reading: 0 Writing: 1 Waiting: 0
 
 stub statusモジュールの設定方法の詳細に関しては、 [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html)を参照して下さい。
 
-Datadog AgentへNginxインテグレーションを追加するには、`/etc/dd-agent/conf.d`以下にnginx.yamlを設置し、先のURL(`URL/nginx_status`)を指定します。設定に必要な記述内容の詳細は、[nginx example YAMl config](https://github.com/DataDog/dd-agent/blob/master/conf.d/nginx.yaml.example)を参考にして下さい。(さらに詳しい情報が必要な場合は、インテグレーションのソースコード: [nginx agent plugin](https://github.com/DataDog/dd-agent/blob/master/checks.d/nginx.py)を参照して下さい。)
+Datadog AgentへNginxインテグレーションを追加するには、`/etc/dd-agent/conf.d`以下にnginx.yamlを設置し、先のURL(`URL/nginx_status`)を指定します。設定に必要な記述内容の詳細は、[nginx example YAMl config](https://github.com/DataDog/integrations-core/blob/master/nginx/conf.yaml.example) を参考にして下さい。(さらに詳しい情報が必要な場合は、インテグレーションのソースコード: [nginx agent plugin](https://github.com/DataDog/integrations-core/blob/master/nginx/check.py)を参照して下さい。)
 
 設定が完了すると、次のメトリクスを取得出来るようになります:
 
@@ -87,9 +87,7 @@ Datadog AgentへNginxインテグレーションを追加するには、`/etc/dd
 
 #### NGINX Plusについて
 
-<!-- If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python) when the instance target is an http status module URL. -->
-
-NGINX Plusを採用している場合、[http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data)を経由し、更に多くのメトリクスを収集することが出来ます。Datadog Agentは、このモジュールにも対応し、[リンク先に示すようなメトリクス](https://github.com/DataDog/dd-agent/blob/master/tests/data/nginx_plus_out.python)を取得出来るようになっています。
+NGINX Plusを採用している場合、[http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data)を経由し、更に多くのメトリクスを収集することが出来ます。Datadog Agentは、このモジュールにも対応し、[リンク先に示すようなメトリクス](https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python)を取得出来るようになっています。
 
 設定が完了すると、次のメトリクスを取得出来るようになります:
 
