@@ -1,17 +1,11 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard 'nanoc' do
-  watch('config.yaml') # Change this to config.yaml if you use the old config file name
+guard 'rake', :task => 'compile' do
   watch('Rules')
   watch(%r{^(content|layouts|lib)/.*$})
 end
 
-guard 'livereload' do
+guard 'rake', :task => 'localchecks' do
   watch(%r{^output/.+\.(css|js|html)})
 end
-
-guard 'rake', :task => 'checks' do
-  watch(%r{^output/.+\.(css|js|html)})
-end
-
