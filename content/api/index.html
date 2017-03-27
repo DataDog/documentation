@@ -1996,7 +1996,7 @@ kind: documentation
           <%= argument 'name', "The new name of the user.", :default => 'None' %>
           <%= argument 'email', "The new email of the user.", :default => 'None' %>
           <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
-          <%= argument 'is_admin', "The new admin status of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The new access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user).", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
