@@ -192,6 +192,10 @@ Include a list of events if the integration provides any.
 
 Include a list of service checks if the integration provides any.
 
+### Further Reading
+**Optional**
+
+Include any links to Docs guides or Datadog blog articles that highlight the integration.
 
 # How to add a new Guide
 
