@@ -1920,6 +1920,7 @@ kind: documentation
         <ul class="arguments">
           <%= argument 'handle', "The user handle, must be a valid email." %>
           <%= argument 'name', "The name of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user). <em>Note: users can be created with admin access role only with application keys belonging to administrators.</em>", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
