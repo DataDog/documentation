@@ -273,7 +273,6 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [52]: https://github.com/gitterHQ
    [53]: https://gist.github.com/conorbranagan/c001078d148d2cab38a0
    [54]: https://gist.github.com/conorbranagan/
-   [55]: http://stylebot.me/styles/4320
    [56]: mailto:code@datadoghq.com
    [57]: https://www.npmjs.com/package/datadog-metrics
    [58]: https://twitter.com/dbader_org
