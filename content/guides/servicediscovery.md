@@ -54,7 +54,7 @@ To add Service Discovery for your custom container images, you simply need to ad
 
 ## Configuration templates
 
-The configuration templates in conf.d/auto_conf` directory are nearly identical to the example YAML configuration files provided in [the Datadog `conf.d` directory](https://github.com/DataDog/dd-agent/tree/master/conf.d), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
+The configuration templates in conf.d/auto_conf` directory are nearly identical to the example YAML configuration files provided in [each integration's directory](https://github.com/DataDog/integrations-core), but with one important field added. The `docker_images` field is required and identifies the container image(s) to which the configuration template should be applied.
 
 ### Template variables
 
