@@ -18,12 +18,9 @@ end
 
 desc 'Build documentation site'
 task :compile do
-  sh 'bundle exec nanoc compile'
-end
-
-desc 'Build documentation site'
-task :compileslow do
-  ENV['NANOCRUNSLOW'] = "true"
+  unless ENV.key?("github_personal_token")
+    ENV['NANOCRUNSLOW'] = "true"
+  end
   sh 'bundle exec nanoc compile'
 end
 
