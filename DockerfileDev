@@ -29,6 +29,5 @@ WORKDIR /docs
 # Replace the html dir with a symlink to docs
 RUN rm -rf /usr/share/nginx/html && ln -s /docs/output /usr/share/nginx/html
 
-WORKDIR /docs
-ENV BUNDLE_GEMFILE "/docs/Gemfile
-ENTRYPOINT /bin/sh -c "/docs/bin/docker-run.sh"
+ENV BUNDLE_GEMFILE "/docs/Gemfile"
+CMD /bin/sh -c "/docs/bin/docker-run.sh"
