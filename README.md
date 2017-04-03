@@ -79,8 +79,11 @@ docker run -ti \
 
 The command above assumes you have set up your Github Personal Token as described earlier. If you have not, you should replace `$github_personal_token` with your token.
 
-To compile the docs site, run `rake clean` and `rake compile`. Note that running the default `rake` task will start Guard, however Guard will not automatically compile the site when files change, nor is it needed to serve the docs site (that's handled by Nginx).
+The container will automatically run the rake process and create the documentation html files. Once the process completes, you can view the docs in any browser by visiting http://localhost:3000.
 
+You should edit the documentation files on your host machine and docker container will automatically regenerate files as it sees updates.
+
+If the docker container does not automatically detect your file changes, please see the Troubleshooting documentation on the [Docker Hub project](https://hub.docker.com/r/jyee/docker-dd-docs/).
 
 # Working on Docs
 
