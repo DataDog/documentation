@@ -44,9 +44,6 @@ If DaemonSets are not an option for your Kubernetes cluster, you will need to in
 Configure the agent by editing the kubernetes.yaml file in conf.d:
 
     init_config:
-      tags:
-        - optional_tag1
-        - optional_tag2
 
     instances:
       # The kubernetes check retrieves metrics from cadvisor running under kubelet.
@@ -77,6 +74,11 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       #
       # enabled_gauges:
       #   - filesystem.*
+      #
+      # Custom tags that should be applied to kubernetes metrics
+      # tags:
+      #  - optional_tag1
+      #  - optional_tag2
 {:.language-yaml}
 
 Since the agent is deployed as a docker container, refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).

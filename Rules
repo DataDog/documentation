@@ -97,11 +97,11 @@ preprocess do
 end
 
 
-compile '/partials/*' do
+compile '/layouts/partials/*' do
   filter :erb
 end
 
-route '/partials/*' do
+route '/layouts/partials/*' do
   nil
 end
 
