@@ -2066,6 +2066,7 @@ kind: documentation
           <%= argument "end", "The POSIX timestamp of the end of the query." %>
           <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
           <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
+          <%= argument "title", "A title for the graph. If no title is specified, the graph will not have a title.", {:default => 'None'} %>
         </ul>
 
       </div>
