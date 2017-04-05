@@ -1,18 +1,16 @@
 ---
-title: Datadog-AWS SQS Integration
-integration_title: AWS SQS
+title: Datadog-AWS CloudFront Integration
+integration_title: AWS CloudFront
 kind: integration
+git_integration_title: amazon_cloudfront
 newhlevel: true
-git_integration_title: amazon_sqs
 ---
 
 # Overview
 
-![SQS Dashboard](/static/images/sqsdashboard.png)
+Amazon CloudFront is a global content delivery network (CDN) service that accelerates delivery of your websites, APIs, video content or other web assets.
 
-Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
-
-Enable this integration to see all your SQS metrics in Datadog.
+Enable this integration to see in Datadog all your CloudFront metrics.
 
 # Installation
 
@@ -20,11 +18,10 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 # Configuration
 
-In the Amazon Web Services integration tile, ensure that SQS is checked under metric collection.
+In the Amazon Web Services integration tile, ensure that CloudFront is checked under metric collection.
 
 # Metrics
 
 <%= get_metrics_from_git()%>
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
-

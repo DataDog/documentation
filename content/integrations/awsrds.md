@@ -27,7 +27,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 * **Standard RDS Integration**
 
-  No installation is required for the Standard RDS integration.
+  If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
 * **Enhanced RDS Integration**
 
@@ -162,6 +162,9 @@ Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks t
 In addition to the metrics you get from the database engines you will also get the following RDS metrics:
 
 <%= get_metrics_from_git()%>
+
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+
 
    [1]: /static/images/rds-console.png
    [2]: /static/images/aurora-rds-dash.png

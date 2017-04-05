@@ -1,18 +1,16 @@
 ---
-title: Datadog-AWS SQS Integration
-integration_title: AWS SQS
+title: Datadog-AWS Key Management Service Integration
+integration_title: AWS Key Management Service
 kind: integration
+git_integration_title: amazon_kms
 newhlevel: true
-git_integration_title: amazon_sqs
 ---
 
 # Overview
 
-![SQS Dashboard](/static/images/sqsdashboard.png)
+AWS Key Management Service (KMS) is a managed service that makes it easy for you to create and control the encryption keys used to encrypt your data.
 
-Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
-
-Enable this integration to see all your SQS metrics in Datadog.
+Enable this integration to see in Datadog all your KMS metrics.
 
 # Installation
 
@@ -20,11 +18,10 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 # Configuration
 
-In the Amazon Web Services integration tile, ensure that SQS is checked under metric collection.
+In the Amazon Web Services integration tile, ensure that KMS is checked under metric collection.
 
 # Metrics
 
 <%= get_metrics_from_git()%>
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
-

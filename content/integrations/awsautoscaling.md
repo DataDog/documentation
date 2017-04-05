@@ -1,18 +1,16 @@
 ---
-title: Datadog-AWS SQS Integration
-integration_title: AWS SQS
+title: Datadog-AWS Auto Scaling Integration
+integration_title: AWS Auto Scaling
 kind: integration
+git_integration_title: amazon_auto_scaling
 newhlevel: true
-git_integration_title: amazon_sqs
 ---
 
 # Overview
 
-![SQS Dashboard](/static/images/sqsdashboard.png)
+Amazon Auto Scaling is a service to launch or terminate EC2 instances automatically based on user-defined policies.
 
-Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
-
-Enable this integration to see all your SQS metrics in Datadog.
+Enable this integration to see in Datadog all your Auto Scaling metrics.
 
 # Installation
 
@@ -20,11 +18,10 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 # Configuration
 
-In the Amazon Web Services integration tile, ensure that SQS is checked under metric collection.
+In the Amazon Web Services integration tile, ensure that Auto Scaling is checked under metric collection.
 
 # Metrics
 
 <%= get_metrics_from_git()%>
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
-
