@@ -27,6 +27,9 @@ The network check is enabled by default. If you would like to make any changes t
         # matching the given regex:
         # excluded_interface_re: my-network-interface.*
 
+**Note:** To collect connection state metrics, enable the option `collect_connection_state:` by changing it to **true**.
+
+
 # Metrics
 
 <%= get_metrics_from_git('system', 'system.net') %>
