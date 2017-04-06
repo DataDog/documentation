@@ -96,7 +96,7 @@ A full list of variables can be seen below.
 
 ## Automatically Create Tickets from Datadog Alerts
 
-To automatically have JIRA tickets created within Datadog alerts, use the @jira-projectname-issue type command within the "Say what's happening" section of the new monitor creation process.
+To automatically have JIRA tickets created within Datadog alerts, use the @jira-projectname-issue_type command within the "Say what's happening" section of the new monitor creation process.
 
 A new ticket will be created when this alert is triggered. 
 
