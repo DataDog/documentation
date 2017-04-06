@@ -6,7 +6,11 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 ## Github personal token
 
-Integrations that have metrics will require your Github Personal Token. For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). After you've generated a token, add the following line to the `.bash_profile` in your home directory:
+Integrations that have metrics will attempt to read the metrics metadata list from the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
+
+For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
+
+After you've generated a token, add the following line to the `.bash_profile` in your home directory:
 
 ```
 export github_personal_token=[paste access token here]
@@ -14,7 +18,7 @@ export github_personal_token=[paste access token here]
 
 You should then run `source ~/.bash_profile` to reload the settings.
 
-## Running the Docker dev environment.
+## Running the Docker dev environment
 
 The Documentation build process is easily handled using the Docker container. First [install docker](https://store.docker.com/search?type=edition&offering=community) then run the following command from within the documentation folder.
 
@@ -27,7 +31,15 @@ docker run -ti \
   jyee/docker-dd-docs
 ```
 
-The command above assumes you have set up your Github Personal Token as described earlier. If you have not, you should replace `$github_personal_token` with your token.
+The command above assumes you have set up your Github Personal Token as described earlier. If you are not a Datadog employee, simply omit the environment variable line and run:
+
+```
+# From within the documentation folder:
+docker run -ti \
+  -v $PWD:/docs \
+  -p 3000:80 \
+  jyee/docker-dd-docs
+```
 
 The container will run the rake process and create the documentation html files. Once the process completes, you can view the docs in any browser by visiting http://localhost:3000.
 
