@@ -191,6 +191,7 @@ For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+* `dynamodb:ListTagsOfResource`: Used to collect all tags on a DynamoDB resource.
 
 For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 
