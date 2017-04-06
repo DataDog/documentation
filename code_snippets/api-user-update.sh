@@ -3,5 +3,5 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 user=test@datadoghq.com
 
 curl -X PUT -H "Content-type: application/json" \
-    -d '{"email":"test+1@datadoghq.com","name":"alt user"}' \
+    -d '{"email":"test+1@datadoghq.com","name":"alt user", "access_role":"ro"}' \
     "https://app.datadoghq.com/api/v1/user/${user}?api_key=${api_key}&application_key=${app_key}"
