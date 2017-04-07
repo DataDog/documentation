@@ -39,7 +39,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
 2. Restart the agent
 
-        sudo datadog-agent restart
+        sudo /etc/init.d/datadog-agent restart
 
 <%= insert_example_links %>
 
@@ -47,7 +47,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
 To ensure the integration is installed correctly, run the agent info command.
 
-    sudo datadog-agent info
+    sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
 
