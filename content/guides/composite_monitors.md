@@ -20,17 +20,17 @@ You can choose up to 10 individual monitors to add to the new composite monitor.
 
 After you choose your first monitor, the UI will indicate its alert type:
 
-![create-composite-1](/static/images/composite_monitors/create-composite-2.png)
+![create-composite-2](/static/images/composite_monitors/create-composite-2.png)
 
 Recall that each Datadog monitor has one of two alert types: simple, or multi-alert. You may create composite monitors from individual monitors with different alert types, but if you choose more than one multi-alert monitor, then *all* multi-alert monitors in the composite monitor must use the same grouping. In the screenshot below, monitor 'a' is grouped by `availability-zone`, but monitor 'b' is grouped by `host`:
 
-![create-composite-1](/static/images/composite_monitors/create-composite-4.png)
+![create-composite-4](/static/images/composite_monitors/create-composite-4.png)
 
 You cannot create such a composite monitor.
 
 Furthermore, even if all chosen multi-alert monitors use the same grouping, they must *also* have at least one overlapping element. In the screenshot below, both monitors are grouped by `host` but the UI still indicates that the two monitors are incompatible:
 
-![create-composite-1](/static/images/composite_monitors/create-composite-5.png)
+![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
 Since there's still a Group Matching Error, we can assume that these monitors apply to disjoint sets of hosts. 
 
@@ -40,11 +40,13 @@ As soon as you select a compatible second monitor, the UI will:
 2. Show the current status of each individual monitor, and
 3. Show the current status of the proposed composite monitor, given the default trigger condition.
 
-![create-composite-1](/static/images/composite_monitors/create-composite-3.png)
+![create-composite-3](/static/images/composite_monitors/create-composite-3.png)
 
 ### Write a trigger condition
 
-Write the trigger condition for the composite monitor using boolean operators. Refer to individual monitors by their labels in the monitor creation form (i.e. a, b, c, etc). You can use parentheses to control operator precedence. The following are some example trigger conditions:
+In the 'trigger from' field, write the trigger condition using boolean operators. Refer to individual monitors by their labels in the monitor Creation form (i.e. a, b, c, etc). You can use parentheses to control operator precedence. 
+
+Here are some example trigger conditions:
 
 ```
 a && b
@@ -52,13 +54,17 @@ a && b
 (a || b) && (c || d)
 ```
 
-Outside of a composite monitor's Create/Edit tabs, its individual monitors are known by their numeric monitor IDs:
+Outside of a composite monitor's Creation/Edit forms (e.g. on its Status page), its individual monitors are known by their numeric IDs:
 
-![create-composite-1](/static/images/composite_monitors/composite-status.png)
+![composite-status](/static/images/composite_monitors/composite-status.png)
 
 The trigger condition is also known as the monitor's query.
 
 ### Set a notification message
 
-## How Composite monitor status is computed
+Write a notification message as you would with any other monitor. Notifications for the composite monitor will also show the status of individual monitors:
+
+![composite](/static/images/composite_monitors/composite-notification.png)
+
+## Computing composite status
 
