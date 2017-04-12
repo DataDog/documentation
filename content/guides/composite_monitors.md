@@ -68,7 +68,7 @@ Outside of a composite monitor's New Monitor and Edit forms (e.g. on its Status 
 
 ![composite-status](/static/images/composite_monitors/composite-status.png)
 
-In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things — a metric, tags, an `avg` function, a group-by, etc — a composite monitor's query is simply its trigger condition, defined in terms of its constituent monitors.
+In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things — a metric, tags, an aggregation function like `avg`, a group-by, etc — a composite monitor's query is simply its trigger condition, defined in terms of its constituent monitors.
 
 For two non-composite monitors with the following queries:
 
