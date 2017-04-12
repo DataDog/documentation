@@ -144,28 +144,30 @@ If even one individual monitor is multi-alert, then the composite monitor is als
 
 Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alerts — are unchanging. 
 
-The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at *one* point in time:
+The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at one point in time:
 
-| monitor A    | monitor B| monitor C | composite status (A && B && C) |
-|--------------|----------|-----------|--------------------------------|
-| True (web01) | True     | True      | True - triggered!              |
-| False (web02)| True     | True      | False                          |
-| True (web03) | True     | True      | True - triggered!              |
-| False (web04)| True     | True      | False                          |
+|source | monitor A    | monitor B| monitor C | composite status (A && B && C) |
+|-------|--------------|----------|-----------|--------------------------------|
+| web01 | Alert        | Warn     | Alert     | Alert - triggered!             |
+| web02 | Ok           | Warn     | Alert     | Ok                             |
+| web03 | Warn         | Warn     | Alert     | Alert - triggered!             |
+| web04 | Skipped      | Warn     | Alert     | Skipped                        |
 {:.table}
 
 In this cycle, you would receive two alerts.
 
 #### Many multi-alert monitors
 
-Now consider a scenario where monitor B is multi-alert, too, and is also grouped by host. The number of alerts per cycle will be, at most, the number of common reporting sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in an evaluation cycle. Here's an example cycle:
+Now consider a scenario where monitor B is multi-alert, too, and is also grouped by host. The number of alerts per cycle will be, at most, the number of common reporting sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in an evaluation cycle. 
 
-| monitor A    | monitor B    | monitor C | composite status |
-|--------------|--------------|-----------|------------------|
-| True (web04) | True (web04) | True      | True - alert!    |
-| False (web05)| True (web05) | True      | False            |
+Here's an example cycle:
+
+|source | monitor A | monitor B | monitor C  | composite status  |
+|-------|-----------|-----------|------------|-------------------|
+| web04 | Unknown   | Warn      | Alert      | Alert - triggered!|
+| web05 | Ok        | Ok        | Alert      | Ok                |
 {:.table}
 
 In this cycle, you would receive one alert.
 
-If the multi-alert monitors share no common reporting sources — if monitor B only has web06 through web09 reporting, for example — the composite monitor has zero cases to consider and will not trigger.
+If the multi-alert monitors share no common reporting sources — e.g. if monitor B later only has web06 through web09 reporting — the composite monitor has zero cases to consider and will never trigger.
