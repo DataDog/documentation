@@ -51,23 +51,27 @@ As soon as you select a compatible second monitor, the UI will:
 In the 'trigger when' field, write your desired trigger condition using boolean operators. Refer to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions. 
 
 These are all valid trigger conditions: 
-  
-`!(a && b)`<br />
-`a || b && !c`<br />
-`(a || b) && (c || d)`<br />
-  
+ 
+~~~
+!(a && b)
+a || b && !c
+(a || b) && (c || d)
+~~~
+
 Outside of a composite monitor's New Monitor and Edit forms (e.g. on its Status page), its individual monitors are known by their numeric IDs:
 
 ![composite-status](/static/images/composite_monitors/composite-status.png)
 
-In the API, a composite monitor's trigger condition is known as its query. Just as two non-composite monitors may be defined by the following queries:
+In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things — a metric, tags, an `avg` function, a group-by, etc — a composite monitor's query is simply its trigger condition, defined in terms of its constituent monitors.
+
+For two non-composite monitors with the following queries:
 
 ~~~
 "avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # monitor ID: 1234
 "avg(last_1m):avg:system.cpu.system{role:database} > 50" # monitor ID: 5678
 ~~~
 
-A composite monitor's query is defined only in terms of its constituent monitors, e.g. `"1234 && 5678"`.
+a composite monitor's query is simply `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 
 
 ### Write a notification message
@@ -77,7 +81,7 @@ Write a notification message as you would with any other monitor, using the @-sy
 ~~~
 [Triggered] AAA Steve Test Composite 1
 
-Steve, your composite monitor triggered! @steve@example.com
+Steve, your composite monitor has triggered! @steve@example.com
 
 Query: 51253 || 51719
 
@@ -100,21 +104,21 @@ After setting any other miscellaneous options, click 'Save'.
 
 ## How composite monitors work
 
-This section uses examples to show how many alerts a composite monitor may generate, and when Datadog considers the status to be alert-worthy.
+In this section, we look at a few examples to show **how** and **when** Datadog will alert for composite monitors.
 
-### How many alerts?
+### How to alert?
 
-Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. How many simultaneous alerts may you potentially receive from the composite monitor? It depends on the alert types of its individual monitors. Let's look at three examples with varying individual monitors.
+Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. How many simultaneous alerts might you potentially receive from the composite monitor? It depends on its individual monitors' alert types. 
+
+Let's look at three examples with varying individual monitors. We'll consider how the composite monitor behaves in each case.
 
 #### All simple alert monitors
 
-The composite monitor also has a simple alert type; it can only send one alert per evaluation cycle. The composite monitor triggers when the queries for A, B, and C are all true at the same time.
+The composite monitor also has a simple alert type, i.e. it will only send up to one alert per evaluation cycle. The composite monitor triggers when the queries for A, B, and C are all true at the same time.
 
 #### One multi-alert monitor (monitor A)
 
-The composite monitor has a multi-alert type. If monitor A has 4 sources (i.e. hosts) reporting - web01 through web04 - you may receive up to 4 alerts each time Datadog evaluates the composite monitor. For a given evaluation cycle, monitor A's status may vary across its sources, but the statuses of simple alert monitors B and C are unchanging.
-
-Here's an example cycle:
+The composite monitor has a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to evaluate. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging:
 
 | monitor A | monitor B | monitor C | composite status |
 | --------- | --------- | --------- | ---------------- |
@@ -124,13 +128,11 @@ Here's an example cycle:
 | F (web04) | T         | T         | F                |
 {:.table}
 
-You will receive two alerts for this cycle.
+In this cycle, you would receive two alerts.
 
 #### Many multi-alert monitors (monitors A and B)
 
-The composite monitor has a multi-alert type, but the number of alerts per cycle will be, at most, the number of common sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web10 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You will only receive up to two alerts in a cycle.
-
-Here's an example cycle:
+The composite monitor has a multi-alert type, but the number of alerts per cycle will be, at most, the number of common sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in a cycle:
 
 | monitor A | monitor B | monitor C | composite status |
 |-----------|-----------|-----------|------------------|
@@ -138,7 +140,7 @@ Here's an example cycle:
 | F (web05) | T (web05) | T         | F                |
 {:.table}
 
-You will receive one alert for this cycle.
+In this cycle, you would receive one alert.
 
 Remember: all multi-alert monitors used in a composite monitor _must_ use the same group-by. If they do, and there are multiple groups in the group-by, the groups must appear in the same order. For example, a monitor grouped by `{host,environment}` and another grouped by `{environment,host}` cannot be used together in a composite monitor.
 
