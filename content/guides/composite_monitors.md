@@ -10,7 +10,7 @@ listorder: 9
 
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. Choose two or more existing monitors - monitor A and monitor B, say - and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
-After you create a composite monitor, you can modify it just as you would an individual monitor. To change the trigger condidtion, edit the composite monitor. To change one of its constituent monitors, though - e.g. to disable its notifications in favor of the composite notification - simply edit that individual monitor.
+After you create a composite monitor, you can modify it just as you would an individual monitor. To change the trigger condition, edit the composite monitor. To change one of its constituent monitors, though - e.g. to disable its notifications in favor of the composite notification - simply edit that individual monitor.
 
 ## Creating composite monitors
 
