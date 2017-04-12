@@ -110,11 +110,31 @@ After setting any other miscellaneous options, click 'Save'.
 
 ## How composite monitors work
 
-In this section, we look at a few examples to show **how** and **when** Datadog will alert on composite monitors.
+This section describes:
 
-### How many alerts per evaluation cycle?
+1. How we compute the status of a composite monitor, and 
+2. How many alerts a composite monitor may generate in different scenarios.
 
-Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. How many simultaneous alerts might you potentially receive from the composite monitor? That depends on its individual monitors' alert types. 
+### How we compute trigger conditions
+
+Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
+
+Recall the seven statuses a monitor may have, in order of increasing severity: `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, and `Ignored` — are not alert-worthy (i.e. false).
+
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
+
+Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors:
+
+| monitor A   | monitor B  | monitor C  | composite status    |
+|-------------|------------|------------|---------------------|
+| No Data (T) | Warn (T)   | Unknown (T)| Warn (T) - alert!   |
+| Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)              |
+| Alert (T)   | Warn (T)   | Unknown (T)| Alert (T) - alert!  |
+| No Data (T) | No Data (T)| Unknown (T)| Unknown (T) - alert!|
+
+Three of the four scenarios will generate an alert. But how _many_ alerts might you potentially receive from the composite monitor? That depends on the alert types of its individual monitors.
+
+### How many alerts you will get
 
 If all individual monitors — A, B annd C — are simple alerts, the composite monitor will also have a simple alert type, meaning it will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
 
@@ -122,7 +142,9 @@ If even one individual monitor is multi-alert, then the composite monitor is als
 
 #### One multi-alert monitor
 
-Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alerts — are unchanging. Here's an example evaluation cycle:
+Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alerts — are unchanging. 
+
+The table above showed the composite monitor status across four points in time. In this example, the table shows the status of each multi-alert case, all at *one* point in time:
 
 | monitor A    | monitor B| monitor C | composite status (A && B && C) |
 |--------------|----------|-----------|--------------------------------|
@@ -147,19 +169,3 @@ Now consider a scenario where monitor B is multi-alert, too, and also grouped by
 In this cycle, you would receive one alert.
 
 If the multi-alert monitors share no common reporting sources — if monitor B only has web06 through web09 reporting, for example — the composite monitor has zero cases to consider and will not trigger.
-
-### Alert-worthiness
-
-The previous section considered monitor statuses in binary terms: true, or false. But a monitor can have statuses other than simply `Alert` and `OK`. Possible statuses include (in order of increasing severity): `OK`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Above, what true and false actually refer to is whether or not a given status should trigger an alert (true) or not (false). In other words: the status' **alert-worthiness**. 
-
-Composite monitors consider statuses from `No Data` up to `Alert` to be alert-worthy. When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
-
-Let's look again at the previous example that used only one multi-alert monitor. This table includes status detail, but still indicates the alert-worthiness of each status with T or F:
-
-| monitor A           | monitor B | monitor C       | composite status     |
-| ------------------- | --------- | --------------- | -------------------- |
-| No Data (T) (web01) | Warn (T)  | Unknown (T)     | Warn (T) - alert!    |
-| Skipped (F) (web02) | Warn (T)  | Unknown (T)     | Skipped (F)          |
-| Alert (T) (web03)   | Warn (T)  | Unknown (T)     | Alert (T) - alert!   |
-| OK (F) (web04)      | Warn (T)  | Unknown (T)     | OK (F)               |
-{:.table}
