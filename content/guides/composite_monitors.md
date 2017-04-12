@@ -114,11 +114,11 @@ Let's look at three examples with varying individual monitors. We'll consider ho
 
 #### All simple alert monitors
 
-The composite monitor also has a simple alert type, i.e. it will only send up to one alert per evaluation cycle. The composite monitor triggers when the queries for A, B, and C are all true at the same time.
+The composite monitor will also have a simple alert type, i.e. it will only send up to one alert per evaluation cycle. The composite monitor triggers when the queries for A, B, and C are all true at the same time.
 
 #### One multi-alert monitor (monitor A)
 
-The composite monitor has a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to evaluate. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging:
+The composite monitor will have a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to evaluate. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging:
 
 | monitor A | monitor B | monitor C | composite status |
 | --------- | --------- | --------- | ---------------- |
@@ -132,7 +132,7 @@ In this cycle, you would receive two alerts.
 
 #### Many multi-alert monitors (monitors A and B)
 
-The composite monitor has a multi-alert type, but the number of alerts per cycle will be, at most, the number of common sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in a cycle:
+The composite monitor will have a multi-alert type, but the number of alerts per cycle will be, at most, the number of common sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in a cycle:
 
 | monitor A | monitor B | monitor C | composite status |
 |-----------|-----------|-----------|------------------|
