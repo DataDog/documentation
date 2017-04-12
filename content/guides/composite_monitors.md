@@ -118,7 +118,7 @@ The composite monitor will also have a simple alert type, i.e. it will only send
 
 #### One multi-alert monitor (monitor A)
 
-The composite monitor will have a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to evaluate. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging:
+The composite monitor will have a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging:
 
 | monitor A | monitor B | monitor C | composite status |
 | --------- | --------- | --------- | ---------------- |
