@@ -108,7 +108,7 @@ In this section, we look at a few examples to show **how** and **when** Datadog 
 
 ### How to alert?
 
-Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. How many simultaneous alerts might you potentially receive from the composite monitor? It depends on its individual monitors' alert types. 
+Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. How many simultaneous alerts might you potentially receive from the composite monitor? That depends on its individual monitors' alert types. 
 
 Let's look at three examples with varying individual monitors. We'll consider how the composite monitor behaves in each case.
 
