@@ -26,7 +26,7 @@ You can choose up to 10 individual monitors to use in the new composite monitor.
 * Individual monitors may be all simple alert monitors, all multi-alert monitors, or a combination of simple and multi-alert
 * If more than one multi-alert monitor is chosen, then **all** multi-alert monitors in the composite monitor must:
   1. Use the same grouping (e.g. a monitor grouped by `{host}` cannot be used with one grouped by `{environment}`) AND the same group ordering (e.g. a monitor grouped by `{host,device}` cannot be used with one grouped by `{device,host}`)
-  2. Have at least one group element in common (e.g. a monitor that applies only to `environment:dev` cannot be used with one that applies only to `{environment:prod}`)
+  2. Have at least one group element in common (e.g. a monitor that applies only to `environment:dev` cannot be used with one that applies only to `environment:prod`)
 
 After you choose your first monitor, the UI will indicate its alert type and current status:
 
