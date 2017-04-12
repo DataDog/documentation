@@ -104,7 +104,7 @@ After setting any other miscellaneous options, click 'Save'.
 
 ## How composite monitors work
 
-In this section, we look at a few examples to show **how** and **when** Datadog will alert for composite monitors.
+In this section, we look at a few examples to show **how** and **when** Datadog will alert on composite monitors.
 
 ### How to alert?
 
