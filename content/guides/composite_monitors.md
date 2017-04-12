@@ -150,7 +150,7 @@ The previous section considered monitor statuses in binary terms: true, or false
 
 Composite monitors consider statuses from `No Data` up to `Alert` to be alert-worthy. When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
-Let's look again at the previous example that used one multi-alert monitor, this time with status detail:
+Let's look again at the previous example that used only one multi-alert monitor. This table includes status detail, but still indicates the alert-worthiness of each status with T or F:
 
 | monitor A           | monitor B | monitor C       | composite status     |
 | ------------------- | --------- | --------------- | -------------------- |
