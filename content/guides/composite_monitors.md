@@ -119,7 +119,7 @@ This section describes:
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have, in order of increasing severity: `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, and `Ignored` — are not alert-worthy (i.e. false).
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, and `Ignored` — are not alert-worthy (i.e. false).
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
