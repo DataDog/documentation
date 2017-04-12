@@ -148,7 +148,7 @@ Remember: all multi-alert monitors used in a composite monitor _must_ use the sa
 
 The previous section considered monitor statuses in binary terms: true, or false. But a monitor can have statuses other than simply `Alert` and `OK`. Possible statuses include (in order of increasing severity): `OK`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Above, what true and false actually refer to is whether or not a given status should trigger an alert (true) or not (false). In other words: the status' **alert-worthiness**. 
 
-Composite monitors consider statuses from `No Data` up to `Alert` to be alert-worthy. When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors. When a composite monitor does not evaluate as alert worthy, it inherits the _least_ severe status.
+Composite monitors consider statuses from `No Data` up to `Alert` to be alert-worthy. When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
 Let's look again at the previous example that used one multi-alert monitor, this time with status detail:
 
