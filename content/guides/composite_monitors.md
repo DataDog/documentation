@@ -20,19 +20,25 @@ In Datadog, go to the New Monitor page and select 'Composite Monitor' from the l
 
 ### Choose individual monitors
 
-You can choose up to 10 individual monitors to use in the new composite monitor. The individual monitors cannot themselves be composite monitors. 
+You can choose up to 10 individual monitors to use in the new composite monitor. When choosing monitors, the following rules apply:
+
+* No individual monitor may itself be a composite monitor
+* Individual monitors may be all simple alert monitors, all multi-alert monitors, or a combination of simple and multi-alert
+* If more than one multi-alert monitor is chosen, then **all** multi-alert monitors in the composite monitor must:
+  1. Use the same grouping (e.g. a monitor grouped by `{host}` cannot be used with one grouped by `{environment}`) AND the same group ordering (e.g. a monitor grouped by `{host,device}` cannot be used with one grouped by `{device,host}`)
+  2. Have at least one group element in common (e.g. a monitor that applies only to `environment:dev` cannot be used with one that applies only to `{environment:prod}`)
 
 After you choose your first monitor, the UI will indicate its alert type and current status:
 
 ![create-composite-2](/static/images/composite_monitors/create-composite-2.png)
 
-Recall that each Datadog monitor has one of two alert types: simple, or multi-alert. You may create composite monitors from individual monitors of different alert types (e.g. one simple alert monitor and one multi-alert monitor), but if you choose more than one multi-alert monitor, then *all* multi-alert monitors in the composite monitor must use the same grouping. In the screenshot below, monitor 'a' is grouped by `availability-zone`, but monitor 'b' is grouped by `host`:
+In the screenshot below, monitor 'a' is grouped by `availability-zone`, but monitor 'b' is grouped by `host`:
 
 ![create-composite-4](/static/images/composite_monitors/create-composite-4.png)
 
 You cannot create such a composite monitor.
 
-Furthermore, even if all chosen multi-alert monitors use the same grouping, they must *also* have at least one reporting source (i.e. host) in common. In the screenshot below, both monitors are grouped by `host`, yet the UI indicates that the two monitors are incompatible:
+In _this_ screenshot, both monitors are grouped by `{host}`, yet the UI indicates that the two monitors are incompatible:
 
 ![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
@@ -142,7 +148,7 @@ The composite monitor will have a multi-alert type, but the number of alerts per
 
 In this cycle, you would receive one alert.
 
-Remember: all multi-alert monitors used in a composite monitor _must_ use the same group-by. And if they do, and there are multiple groups in the group-by, the groups must appear in the same order. For example, a monitor grouped by `{host,environment}` and another grouped by `{environment,host}` cannot be used together in a composite monitor.
+Remember: all multi-alert monitors used in a composite monitor _must_ use the same group-by.
 
 ### When to alert?
 
