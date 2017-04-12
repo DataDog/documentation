@@ -120,25 +120,25 @@ Let's look at three examples with varying individual monitors. We'll consider ho
 
 #### All simple alert monitors
 
-The composite monitor will also have a simple alert type, i.e. it will only send up to one alert per evaluation cycle. The composite monitor triggers when the queries for A, B, and C are all true at the same time.
+If monitors A, B, and C are all simple alerts, the composite monitor will also have a simple alert type. It will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
 
-#### One multi-alert monitor (monitor A)
+#### One multi-alert monitor
 
-The composite monitor will have a multi-alert type. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alert types — are unchanging. Here's an example cycle:
+If even one monitor is multi-alert - monitor A, for example - the composite monitor will also be multi-alert. If monitor A has 4 reporting sources — hosts web01 through web04 — you may receive up to 4 alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C — which are simple alerts — are unchanging. Here's an example evaluation cycle:
 
-| monitor A    | monitor B| monitor C | composite status |
-|--------------|----------|-----------| ---------------- |
-| True (web01) | True     | True      | True - triggered!|
-| False (web02)| True     | True      | F                |
-| True (web03) | True     | True      | True - triggered!|
-| False (web04)| True     | True      | False            |
+| monitor A    | monitor B| monitor C | composite status (A && B && C) |
+|--------------|----------|-----------|--------------------------------|
+| True (web01) | True     | True      | True - triggered!              |
+| False (web02)| True     | True      | F                              |
+| True (web03) | True     | True      | True - triggered!              |
+| False (web04)| True     | True      | False                          |
 {:.table}
 
 In this cycle, you would receive two alerts.
 
-#### Many multi-alert monitors (monitors A and B)
+#### Many multi-alert monitors
 
-The composite monitor will have a multi-alert type, but the number of alerts per cycle will be, at most, the number of common sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in a cycle. Here's an example cycle:
+Now consider the case where monitor B is multi-alert, too. The composite monitor will again be a multi-alert, but the number of alerts per cycle will be, at most, the number of common reporting sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in an evaluation cycle. Here's an example cycle:
 
 | monitor A    | monitor B    | monitor C | composite status |
 |--------------|--------------|-----------|------------------|
@@ -148,7 +148,7 @@ The composite monitor will have a multi-alert type, but the number of alerts per
 
 In this cycle, you would receive one alert.
 
-Remember: all multi-alert monitors used in a composite monitor _must_ use the same group-by.
+If the multi-alert monitors share no common reporting sources — if monitor B only has web06 through web09 reporting, for example — the composite monitor has zero cases to consider and will not trigger.
 
 ### When to alert?
 
