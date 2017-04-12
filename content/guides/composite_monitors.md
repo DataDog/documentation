@@ -48,7 +48,7 @@ As soon as you select a compatible second monitor, the UI will:
 
 ### Set a trigger condition
 
-In the 'trigger when' field, write your desired trigger condition using boolean operators. Refer to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions. 
+In the 'trigger when' field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions. 
 
 These are all valid trigger conditions: 
  
