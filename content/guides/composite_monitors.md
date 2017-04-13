@@ -113,12 +113,12 @@ When a composite monitor evaluates as alert-worthy, it inherits the most severe 
 
 Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors:
 
-| monitor A   | monitor B  | monitor C  | composite status    |
-|-------------|------------|------------|---------------------|
-| No Data (T) | Warn (T)   | Unknown (T)| Warn (T) - alert!   |
-| Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)              |
-| Alert (T)   | Warn (T)   | Unknown (T)| Alert (T) - alert!  |
-| No Data (T) | No Data (T)| Unknown (T)| Unknown (T) - alert!|
+| monitor A   | monitor B  | monitor C  | composite status        |
+|-------------|------------|------------|-------------------------|
+| No Data (T) | Warn (T)   | Unknown (T)| Warn (T) - triggered!   |
+| Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
+| Alert (T)   | Warn (T)   | Unknown (T)| Alert (T) - triggered!  |
+| No Data (T) | No Data (T)| Unknown (T)| Unknown (T) - triggered!|
 {:.table}
 
 Three of the four scenarios will generate an alert. But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
@@ -151,10 +151,10 @@ Now consider a scenario where monitor B is multi-alert, too, and is also grouped
 
 Here's an example cycle:
 
-|source | monitor A | monitor B | monitor C  | composite status  |
-|-------|-----------|-----------|------------|-------------------|
-| web04 | Unknown   | Warn      | Alert      | Alert - triggered!|
-| web05 | Ok        | Ok        | Alert      | Ok                |
+|source | monitor A | monitor B | monitor C  | composite status (A && B && C) |
+|-------|-----------|-----------|------------|--------------------------------|
+| web04 | Unknown   | Warn      | Alert      | Alert - triggered!             |
+| web05 | Ok        | Ok        | Alert      | Ok                             |
 {:.table}
 
 In this cycle, you would receive one alert.
