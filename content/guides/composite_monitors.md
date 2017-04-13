@@ -104,7 +104,13 @@ This section uses examples to show 1) how trigger conditions are computed and 2)
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, and `Ignored` — are not alert-worthy (i.e. false).
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy.
+
+Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's false by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
+
+If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
+
+A composite monitor cannot be configured to consider `No Data` alert-worthy for one of its constituent monitors but not for others: it's all or none.
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
@@ -156,22 +162,12 @@ Here's an example cycle:
 
 In this cycle, you would receive one alert.
 
-If the multi-alert monitors share no common reporting sources — e.g. if monitor B later only has web06 through web09 reporting — the composite monitor has zero cases to consider and will never trigger.
+In identifying common reporting sources, composite monitors only look at reporting sources' tag _values_ (i.e. `web04`), not the tag names (i.e. `host`). This makes it possible for composite monitors to use multi-alert monitors with different group-bys.
 
-## Caveats and Gotchas
-
-### Multi-alert monitors and common reporting sources
-
-As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at reporting sources' _values_ (i.e. `web04`), not the group-by clause (i.e. `host`). This makes it possible for composite monitors to use multi-alert monitors with different group-bys.
-
-If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source and would compute its trigger condition.
+If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
 
 Often, two monitors grouped by different tags will tend not to have reporting sources whose values collide — e.g. `web04` and `web05` for monitor A and `dev` and `prod` for monitor D. But in the event that they do, a composite monitor that uses these two monitors _is_ be capable of triggering an alert.
 
-Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision new hosts). This is why it's possible for composite monitors to use multi-alert monitors with the same group-by, but which initially have no reporting sources in common; they might in the future.
+Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common. They _might_ in the future.
 
-Use your best judgement to combine multi-alert monitors that makes sense together.
-
-### Composite monitors and `notify_no_data`
-
-
+Use your best judgement to choose multi-alert monitors that makes sense together.
