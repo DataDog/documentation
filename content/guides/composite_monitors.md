@@ -36,7 +36,7 @@ Even if you choose multi-alert monitors with the same group-by, the UI may still
 
 ![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
-Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For further understanding, [read more below](#many-multi-alert-monitors).
+Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For further understanding, [read more below](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning, the UI will populate the 'trigger when' field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
@@ -158,19 +158,9 @@ Here's an example cycle:
 
 In this cycle, you would receive one alert.
 
-In identifying common reporting sources, composite monitors only look at reporting sources' tag _values_ (i.e. `web04`), not the tag names (i.e. `host`). This makes it possible for composite monitors to use multi-alert monitors with different group-bys.
-
-If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
-
-Often, two monitors grouped by different tags will tend not to have reporting sources whose values collide, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But in the event that they do, a composite monitor that uses these two monitors _is_ be capable of triggering an alert.
-
-Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common; they _might_ in the future.
-
-Use your best judgement to choose multi-alert monitors that makes sense together.
-
 ### Caveats
 
-#### Controlling the alert-worthiness of status `No Data`
+#### Controlling the alert-worthiness of `No Data`
 
 Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's disabled by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
 
@@ -179,3 +169,13 @@ If no constituent monitors have `notify_no_data` enabled but you want to receive
 A composite monitor cannot be configured to consider `No Data` alert-worthy for one of its constituent monitors but not for others: it's all or none.
 
 #### How composite monitors select common reporting sources
+
+As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at reporting sources' tag _values_ (i.e. `web04`), not the tag names (i.e. `host`). This makes it possible for composite monitors to use multi-alert monitors with different group-bys.
+
+If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
+
+Often, two monitors grouped by different tags will tend to have reporting sources whose values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But in the event that they do, a composite monitor that uses two such monitors _is_ capable of triggering an alert.
+
+Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common; they _might_ in the future.
+
+Use your best judgement to choose multi-alert monitors that makes sense together.
