@@ -100,7 +100,7 @@ After setting any other miscellaneous options, click 'Save'.
 
 This section describes:
 
-1. How we compute the status of a composite monitor, and 
+1. How Datadog computes the status of a composite monitor, and 
 2. How many alerts a composite monitor may generate in different scenarios.
 
 ### How we compute trigger conditions
