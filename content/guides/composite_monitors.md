@@ -123,7 +123,7 @@ Consider a composite monitor that uses three individual monitors — A, B, and C
 
 Three of the four scenarios will generate an alert. But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
-### How many alerts you will get
+### How many alerts you will receive
 
 If all individual monitors are simple alerts, the composite monitor will also have a simple alert type, meaning it will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
 
