@@ -100,7 +100,7 @@ After setting any other miscellaneous options, click 'Save'.
 
 ## How composite monitors work
 
-This section uses examples to show 1) how we compute trigger conditions and 2) how many alerts you will receive in different scenarios.
+This section uses examples to show how we compute trigger conditions and how many alerts you may receive in different scenarios.
 
 ### How we compute trigger conditions
 
