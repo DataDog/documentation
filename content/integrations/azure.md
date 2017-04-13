@@ -38,7 +38,6 @@ Related integrations include:
 | [IOT Hub](/integrations/azure_iot_hub) | connect, monitor, and manage billions of IOT assets |
 | [Logic App](/integrations/azure_logic_app) | quickly build powerful integration solutions |
 | [Redis Cache](/integrations/azure_redis_cache) | managed data cache |
-| [Storage](/integrations/azure_storage) | blob, file, queue, and table storage |
 | [SQL Database](/integrations/azure_sql_database) | highly scalable relational database in the cloud |
 | [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool) | manage the performance of multiple databases |
 | [Virtual Machine](/integrations/azure_vm) | virtual machine management service |
@@ -222,7 +221,6 @@ View the specific metrics we collect for each Azure service integration:
 * [IOT Hub](/integrations/azure_iot_hub#metrics) 
 * [Logic App](/integrations/azure_logic_app#metrics)
 * [Redis Cache](/integrations/azure_redis_cache#metrics)
-* [Storage](/integrations/azure_storage#metrics) 
 * [SQL Database](/integrations/azure_sql_database#metrics)
 * [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool#metrics)
 * [Virtual Machine](/integrations/azure_vm#metrics)
