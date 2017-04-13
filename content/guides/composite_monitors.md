@@ -170,11 +170,11 @@ A composite monitor cannot be configured to consider `No Data` alert-worthy for 
 
 #### How composite monitors select common reporting sources
 
-As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at reporting sources' tag _values_ (i.e. `web04`), not the tag names (i.e. `host`). This technically makes it possible for composite monitors to trigger on multi-alert monitors that group by different tags.
+As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for composite monitors to trigger on multi-alert monitors that group by different tags.
 
-If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
+For example, if the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
 
-Often, two monitors grouped by different tags tend to have reporting sources whose values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But if and when they do overlap, a composite monitor that uses two such monitors is capable of triggering an alert.
+Often, two monitors grouped by different tags tend to have reporting sources whose values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But if and when they do overlap, a composite monitor that uses two such monitors becomes capable of triggering an alert.
 
 Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors that group by the same tag, but which initially have no reporting sources in common; they _might_ in the future.
 
