@@ -34,7 +34,7 @@ Even if you choose multi-alert monitors with the same group-by, the UI may still
 
 ![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
-Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For further understanding, [read more below](#multi-alert-monitors-and-common-reporting-sources).
+Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For further understanding, [read more below](#many-multi-alert-monitors).
 
 When you select a second monitor that doesn't cause a warning, the UI will populate the 'trigger when' field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
