@@ -120,7 +120,7 @@ Consider a composite monitor that uses three individual monitors — A, B, and C
 | Skipped (F) | No Data (F)| Unknown (T)| No Data (F)             |
 {:.table}
 
-Two of the four scenarios will trigger an alert, even though the individual monitors do not all have the most severe status, `Alert` (in two cases, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
+Two of the four scenarios will trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
 ### How many alerts you will receive
 
