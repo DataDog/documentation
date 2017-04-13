@@ -100,7 +100,7 @@ After setting any other miscellaneous options, click 'Save'.
 
 ## How composite monitors work
 
-This section uses examples to show 1) how trigger conditions are computed and 2) how many alerts a composite monitor may generate in different scenarios.
+This section uses examples to show 1) how we compute trigger conditions and 2) how many alerts you will receive in different scenarios.
 
 ### How we compute trigger conditions
 
@@ -108,7 +108,7 @@ Datadog doesn't compute `A && B && C` any differently than you would expect, but
 
 Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy.
 
-Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's false by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
+Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's disabled by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
 
 If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
 
