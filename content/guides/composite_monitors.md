@@ -20,35 +20,23 @@ In Datadog, go to the New Monitor page and select 'Composite Monitor' from the l
 
 ### Choose individual monitors
 
-You can choose up to 10 individual monitors to use in the new composite monitor. When choosing monitors, the following rules apply:
+Choose up to 10 individual monitors to use in the new composite monitor. You can mix and match monitors of different alert types; they can all be simple alerts, all multi-alerts, or a combination of the two. No individual monitor may itself be a composite monitor.
 
-* No individual monitor may itself be a composite monitor
-* Individual monitors may be all simple alert monitors, all multi-alert monitors, or a combination of simple and multi-alert
-* If more than one multi-alert monitor is chosen, then **all** multi-alert monitors in the composite monitor must:
-  1. Use the same grouping (e.g. a monitor grouped by `{host}` cannot be used with one grouped by `{environment}`) AND the same group ordering (e.g. a monitor grouped by `{host,device}` cannot be used with one grouped by `{device,host}`)
-  2. Have at least one group element in common (e.g. a monitor that applies only to `environment:dev` cannot be used with one that applies only to `environment:prod`)
-
-After you choose your first monitor, the UI will indicate its alert type and current status:
+After you choose your first monitor, the UI will show its alert type and current status:
 
 ![create-composite-2](/static/images/composite_monitors/create-composite-2.png)
 
-In the screenshot below, monitor 'a' is grouped by `availability-zone`, but monitor 'b' is grouped by `host`:
+If you choose a multi-alert monitor, the UI will show its group-by clause (e.g `host`) and how many unique sources (e.g. how many hosts) are currently reporting. When combining many multi-alert monitors, you should almost always choose monitors that [have the same group-by](#Multi-alert monitors and common reporting sources). If you don't, the UI will warn you that such a composite monitor may never trigger:
 
 ![create-composite-4](/static/images/composite_monitors/create-composite-4.png)
 
-You cannot create such a composite monitor.
-
-In _this_ screenshot, both monitors are grouped by `{host}`, yet the UI indicates that the two monitors are incompatible:
+Even if you do choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
 
 ![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
-Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors have no reporting sources in common.
+Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common.
 
-As soon as you select a compatible second monitor, the UI will:
-
-1. Populate the 'trigger when' field with the default trigger condition `a && b`,
-2. Show the current status of each individual monitor, and
-3. Show the current status of the proposed composite monitor, given the default trigger condition.
+When you select a second monitor that doesn't cause a warning, the UI will populate the 'trigger when' field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
 ![create-composite-3](/static/images/composite_monitors/create-composite-3.png)
 
@@ -136,7 +124,7 @@ Three of the four scenarios will generate an alert. But how _many_ alerts might 
 
 ### How many alerts you will get
 
-If all individual monitors — A, B and C — are simple alerts, the composite monitor will also have a simple alert type, meaning it will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
+If all individual monitors are simple alerts, the composite monitor will also have a simple alert type, meaning it will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
 
@@ -171,3 +159,9 @@ Here's an example cycle:
 In this cycle, you would receive one alert.
 
 If the multi-alert monitors share no common reporting sources — e.g. if monitor B later only has web06 through web09 reporting — the composite monitor has zero cases to consider and will never trigger.
+
+## Caveats and Gotchas
+
+### Multi-alert monitors and common reporting sources
+
+
