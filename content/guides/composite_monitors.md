@@ -108,7 +108,7 @@ Recall the seven statuses a monitor may have (in order of increasing severity): 
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
-Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors:
+Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | monitor A   | monitor B  | monitor C  | composite status        |
 |-------------|------------|------------|-------------------------|
