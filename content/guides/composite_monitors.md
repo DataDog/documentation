@@ -26,15 +26,15 @@ After you choose your first monitor, the UI will show its alert type and current
 
 ![create-composite-2](/static/images/composite_monitors/create-composite-2.png)
 
-If you choose a multi-alert monitor, the UI will show its group-by clause (e.g. `host`) and how many unique sources (e.g. how many hosts) are currently reporting. When combining many multi-alert monitors, you should almost always choose monitors that have the same group-by. If you don't, the UI will warn you that such a composite monitor may never trigger:
+If you choose a multi-alert monitor, the UI will show its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI will warn you that such a composite monitor may never trigger:
 
 ![create-composite-4](/static/images/composite_monitors/create-composite-4.png)
 
-Even if you do choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
+Even if you choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
 
 ![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
 
-Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For better understanding, [read below](#multi-alert-monitors-and-common-reporting-sources).
+Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no reporting sources in common. If there are no common reporting sources, Datadog cannot compute a status for the composite monitor. For further understanding, [read more below](#multi-alert-monitors-and-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning, the UI will populate the 'trigger when' field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
@@ -118,11 +118,11 @@ Consider a composite monitor that uses three individual monitors — A, B, and C
 | No Data (T) | No Data (T)| Unknown (T)| Unknown (T) - triggered!|
 {:.table}
 
-Three of the four scenarios will generate an alert. But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
+Three of the four scenarios will trigger an alert even though the individual monitors do not all have `Alert` status (in two cases, _none_ are). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
 ### How many alerts you will receive
 
-If all individual monitors are simple alerts, the composite monitor will also have a simple alert type, meaning it will only send up to one alert per evaluation cycle. The composite monitor will trigger when the queries for A, B, and C are all true at the same time.
+If all individual monitors are simple alerts, the composite monitor will also have a simple alert type; the composite monitor will trigger a single alert when the queries for A, B, and C are all true at the same time.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
 
@@ -161,6 +161,16 @@ If the multi-alert monitors share no common reporting sources — e.g. if monito
 ## Caveats and Gotchas
 
 ### Multi-alert monitors and common reporting sources
+
+As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at reporting sources' _values_ (i.e. `web04`), not the group-by clause (i.e. `host`). This makes it possible for composite monitors to use multi-alert monitors with different group-bys.
+
+If the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source and would compute its trigger condition.
+
+Often, two monitors grouped by different tags will tend not to have reporting sources whose values collide — e.g. `web04` and `web05` for monitor A and `dev` and `prod` for monitor D. But in the event that they do, a composite monitor that uses these two monitors _is_ be capable of triggering an alert.
+
+Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision new hosts). This is why it's possible for composite monitors to use multi-alert monitors with the same group-by, but which initially have no reporting sources in common; they might in the future.
+
+Use your best judgement to combine multi-alert monitors that makes sense together.
 
 ### Composite monitors and `notify_no_data`
 
