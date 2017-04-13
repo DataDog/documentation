@@ -8,4 +8,4 @@ curl -X PUT -H "Content-type: application/json" \
       \"app_type\": \"web\"
     }
   }" \
-  http://localhost:7777/v0.3/services
+  http://localhost:8126/v0.3/services
