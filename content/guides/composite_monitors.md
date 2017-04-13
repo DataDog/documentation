@@ -166,7 +166,7 @@ Just like non-composite monitors, each composite monitor has the field `notify_n
 
 If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
 
-A composite monitor cannot be configured to consider `No Data` alert-worthy for one of its constituent monitors but not for others: it's all or none.
+A composite monitor cannot be configured to consider `No Data` alert-worthy for some of its constituent monitors but not for others; it's all or none.
 
 #### How composite monitors select common reporting sources
 
