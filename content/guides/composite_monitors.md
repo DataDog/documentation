@@ -168,6 +168,6 @@ If the example above included a multi-alert monitor 'D' grouped by `environment`
 
 Often, two monitors grouped by different tags will tend not to have reporting sources whose values collide, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But in the event that they do, a composite monitor that uses these two monitors _is_ be capable of triggering an alert.
 
-Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common. They _might_ in the future.
+Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common; they _might_ in the future.
 
 Use your best judgement to choose multi-alert monitors that makes sense together.
