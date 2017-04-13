@@ -106,13 +106,7 @@ This section uses examples to show 1) how we compute trigger conditions and 2) h
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `No Data`, `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy.
-
-Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's disabled by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
-
-If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
-
-A composite monitor cannot be configured to consider `No Data` alert-worthy for one of its constituent monitors but not for others: it's all or none.
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, [you can configure `No Data` to be alert-worthy](#controlling-the-alert-worthiness-of-status-no-data).
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 
@@ -120,13 +114,13 @@ Consider a composite monitor that uses three individual monitors — A, B, and C
 
 | monitor A   | monitor B  | monitor C  | composite status        |
 |-------------|------------|------------|-------------------------|
-| No Data (T) | Warn (T)   | Unknown (T)| Warn (T) - triggered!   |
+| Unknown (T) | Warn (T)   | Unknown (T)| Warn (T) - triggered!   |
 | Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
 | Alert (T)   | Warn (T)   | Unknown (T)| Alert (T) - triggered!  |
-| No Data (T) | No Data (T)| Unknown (T)| Unknown (T) - triggered!|
+| No Data (F) | No Data (T)| Unknown (T)| Unknown (T) - triggered!|
 {:.table}
 
-Three of the four scenarios will trigger an alert even though the individual monitors do not all have `Alert` status (in two cases, _none_ are). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
+Three of the four scenarios will trigger an alert, even though the individual monitors do not all have the most severe status, `Alert` (in two cases, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
 ### How many alerts you will receive
 
@@ -173,3 +167,15 @@ Often, two monitors grouped by different tags will tend not to have reporting so
 Furthermore, as with an individual multi-alert monitors, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors which use the same group-by, but which initially have no reporting sources in common; they _might_ in the future.
 
 Use your best judgement to choose multi-alert monitors that makes sense together.
+
+### Caveats
+
+#### Controlling the alert-worthiness of status `No Data`
+
+Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's disabled by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
+
+If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
+
+A composite monitor cannot be configured to consider `No Data` alert-worthy for one of its constituent monitors but not for others: it's all or none.
+
+#### How composite monitors select common reporting sources
