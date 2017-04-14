@@ -16,6 +16,8 @@ For information about the rest of the AWS services, see the [AWS tile][1]
 
 # Installation
 
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+
 Configure Route 53 on AWS and ensure that the policy you created has the **route53:List*** action allowed. Here is an example policy to give access to Route 53 health checks.
 
     {
@@ -36,10 +38,12 @@ Configure Route 53 on AWS and ensure that the policy you created has the **route
 
 # Configuration
 
-No additional configuration is necessary after you have configured your account in the [Amazon Web Services tile][1].
+In the Amazon Web Services integration tile, ensure that Route53 is checked under metric collection.
 
-#Metrics
+# Metrics
 
 <%= get_metrics_from_git()%>
+
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
 [1]: /integrations/aws

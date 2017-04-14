@@ -193,7 +193,7 @@ or if you're looking to display all errors:
 ### Aliasing
 {: #alias}
 
-Some long metric expressions are unwieldily and don't fit in the timeseries legend, inspector, or cursor label. 
+Some long metric expressions are unwieldily and don't fit in the timeseries legend, inspector, or cursor label.
 
 Long metric expressions with the same prefix are undistinguishable in the legend:
 
@@ -314,7 +314,7 @@ The Datadog y-axis controls (currently just via the JSON editor) allow you to:
  <li>Change y-axis scale from linear to log, sqrt or power scale</li>
 </ul>
 
-There are three configuration settings:
+There are four configuration settings:
 <ul>
 <li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for
     default behvior. Default value is "auto"</li>
@@ -322,6 +322,8 @@ There are three configuration settings:
     for default behavior. Default value is "auto"</li>
 <li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
     (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
+<li><code>units</code> (optional): Specifies whether to show the metric unit along the y-axis. Possible values: "true"
+    or "false". Default is "false".</li>
 </ul>
 
 Examples:
@@ -349,6 +351,10 @@ Examples:
 
     "yaxis": {
         "scale": "pow3"
+    }
+
+    "yaxis": {
+        "units": "true"
     }
 
 #### Filtering

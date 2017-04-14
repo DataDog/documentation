@@ -12,44 +12,47 @@ Connect to Amazon Web Services (AWS) in order to:
 * See automatic AWS status updates in your stream
 * Get CloudWatch metrics for EC2 hosts without installing the Agent
 * Tag your EC2 hosts with EC2-specific information (e.g. availability zone)
-* Get CloudWatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, OpsWorks, Redshift, Route53, SQS, and SNS
 * See EC2 scheduled maintenances events in your stream
+* Collect CloudWatch metrics and events from many other AWS products
+
 
 Related integrations include:
 
+| [API Gateway](/integrations/awsapigateway) | create, publish, maintain, and secure APIs |
+| [Autoscaling](/integrations/awsautoscaling) | scale EC2 capacity |
 | [Billing](/integrations/awsbilling) | billing and budgets |
+| [CloudFront](/integrations/awscloudfront) | glocal content delivery network |
 | [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
+| [CloudSearch](/integrations/awscloudsearch) | Access to log files and AWS API calls |
 | [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
+| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
+| [Elastic Block Store (EBS)](/integrations/awsebs) | persistent block level storage volumes |
+| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
+| [Elastic File System (EFS)](/integrations/awsefs) | shared file storage |
+| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [Elastic Map Reduce (EMR)](/integrations/awsemr) | data processing using Hadoop |
 | [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
+| [Firehose](/integrations/awsfirehose) | capture and load streaming data |
+| [IOT](/integrations/awsiot) | connect IOT devices with cloud services |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
+| [Key Management Service (KMS)](/integrations/awskms) | create and control encryption keys |
+| [Lambda](/integrations/awslambda) | serverless computing |
+| [Machine Learning (ML)](/integrations/awsml) | create machine learning models |
+| [OpsWorks](/integrations/awsopsworks) | configuration management |
+| [Polly](/integrations/awspolly) | text-speech service |
+| [Redshift](/integrations/awsredshift) | data warehouse solution |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
 | [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
 | [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table}
-
-There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
-
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
+| [Simple Workflow Service (SWF)](/integrations/awsswf) | cloud workflow management |
+| [Storage Gateway](/integrations/awsstoragegateway) | hybrid cloud storage |
+| [Web Application Firewall (WAF)](/integrations/awswaf) | protect web applications from common web exploits |
+| [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
 {:.table}
 
 # Installation
@@ -188,6 +191,7 @@ For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+* `dynamodb:ListTagsOfResource`: Used to collect all tags on a DynamoDB resource.
 
 For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 

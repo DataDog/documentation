@@ -1920,6 +1920,7 @@ kind: documentation
         <ul class="arguments">
           <%= argument 'handle', "The user handle, must be a valid email." %>
           <%= argument 'name', "The name of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user). <em>Note: users can be created with admin access role only with application keys belonging to administrators.</em>", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1996,7 +1997,7 @@ kind: documentation
           <%= argument 'name', "The new name of the user.", :default => 'None' %>
           <%= argument 'email', "The new email of the user.", :default => 'None' %>
           <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
-          <%= argument 'is_admin', "The new admin status of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The new access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user).", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -2066,6 +2067,7 @@ kind: documentation
           <%= argument "end", "The POSIX timestamp of the end of the query." %>
           <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
           <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
+          <%= argument "title", "A title for the graph. If no title is specified, the graph will not have a title.", {:default => 'None'} %>
         </ul>
 
       </div>
