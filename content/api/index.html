@@ -1013,6 +1013,7 @@ kind: documentation
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
+          <%= argument 'monitor_id', "The id of a specific monitor to apply the downtime to.", :required => false, :default => "None" %>
           <li>
             <strong>recurrence [optional, default=None]</strong>
             <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
