@@ -69,6 +69,9 @@ For two non-composite monitors with the following queries:
 
 a composite monitor's query is simply `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 
+### Configure behavior for `No Data`
+
+As with a non-composite monitor, you may configure whether or not a composite monitor triggers when it has the `No Data` status. Whatever you choose here will not affect the constituent monitors' `notify_no_data` settings.
 
 ### Write a notification message
 
@@ -96,7 +99,9 @@ Query: 51253 || 51719
 The monitor was last triggered at Fri Mar 24 2017 15:56:21 EDT (28 secs ago)
 ~~~
 
-After setting any other miscellaneous options, click 'Save'.
+### Save the monitor
+
+After setting any other miscellaneous options, click 'Save'. Remember: each option only affects the composite monitor.
 
 ## How composite monitors work
 
@@ -106,9 +111,9 @@ This section uses examples to show how we compute trigger conditions and how man
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, [you can configure `No Data` to be alert-worthy](#controlling-the-alert-worthiness-of-status-no-data).
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest — `Ok`, `Skipped`, `Ignored`, and `No Data` — are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) function causes a result — individual or composite — to be either `Alert` or `Ok`. If monitor A has any alert-worthy status, `!A` is `OK`. If A has any alert-**un**worthy status, `!A` is `Alert`.
 
 Consider a composite monitor that uses three individual monitors — A, B, and C — and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
@@ -158,23 +163,13 @@ Here's an example cycle:
 
 In this cycle, you would receive one alert.
 
-### Caveats
+### How composite monitors select common reporting sources
 
-#### Controlling the alert-worthiness of `No Data`
+As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for a composite monitor to trigger on multi-alert monitors that group by different tags.
 
-Just like non-composite monitors, each composite monitor has the field `notify_no_data`. It's disabled by default, i.e. `No Data` is not alert-worthy. However, if _any_ of its constituent monitors have `notify_no_data` enabled, then the composite monitor considers `No Data` to be alert-worthy for _all_ constituent monitors (and of course, for itself). For individual monitors with `notify_no_data` disabled, `No Data` remains alert-**un**worthy only in the context of that individual monitor's own notification policy.
+If the example above had included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
 
-If no constituent monitors have `notify_no_data` enabled but you want to receive alerts on `No Data` for the composite monitor, enable `notify_no_data` for the composite monitor only.
-
-A composite monitor cannot be configured to consider `No Data` alert-worthy for some of its constituent monitors but not for others; it's all or none.
-
-#### How composite monitors select common reporting sources
-
-As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for composite monitors to trigger on multi-alert monitors that group by different tags.
-
-For example, if the example above included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
-
-Often, two monitors grouped by different tags tend to have reporting sources whose values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But if and when they do overlap, a composite monitor that uses two such monitors becomes capable of triggering an alert.
+Often, two monitors grouped by different tags tend to have reporting sources whose tag values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But if and when they do overlap, a composite monitor that uses two such monitors becomes capable of triggering an alert.
 
 Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors that group by the same tag, but which initially have no reporting sources in common; they _might_ in the future.
 
