@@ -26,8 +26,7 @@ To send custom metrics to Datadog, you must print a log line from your Lambda, u
 Please ensure the `unix_epoch_timestamp` is in seconds (not milliseconds).
 
 For example, here is sample snippet for printing a valid custom metric, from your Lambda function (in Python):
-<code>
-unix_epoch_timestamp = int(time.time())
+<code>unix_epoch_timestamp = int(time.time())
 value = 42
 metric_type = 'count'
 metric_name = 'my.metric.name'
