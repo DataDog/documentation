@@ -75,33 +75,37 @@ As with a non-composite monitor, you may configure whether or not a composite mo
 
 ### Write a notification message
 
-Write a notification message as you would with any other monitor, using the @-syntax (e.g. @you@example.com) to notify individuals or teams. In addition to your own message, notifications for the composite monitor will show the status of the individual monitors:
+Write a notification message as you would with any other monitor, using the @-syntax (e.g. @you@example.com) to notify individuals or teams:
+
+![writing-notification](/static/images/composite_monitors/writing-notification.png)
+
+In addition to your own message, delivered notifications (e.g. emails) for the composite monitor will show the status of the individual monitors:
 
 ~~~
-[Triggered] AAA Steve Test Composite 1
+[Triggered] CPU + Memory composite monitor
 
-Steve, your composite monitor has triggered! @steve@example.com
+Database servers are high on CPU usage AND low on memory. @kent@datadoghq.com
 
-Query: 51253 || 51719
+Query: 1896131 && 1896130
 
-1 Alert | 3 OK
+1 Alert | 4 OK
 
-* AAA Steve Test 1
-  ID: 51253
-  2 availability-zone groups
-  1 Alert | 3 OK
+* CPU monitor for database servers
+  ID: 1896131
+  5 host groups
+  1 Alert | 4 OK
 
-* AAA Steve Test 2
-  ID: 51719
-  1 availability-zone group
-  4 OK
+* Memory monitor for database servers
+  ID: 1896130
+  5 host groups
+  1 Alert | 4 OK
 
-The monitor was last triggered at Fri Mar 24 2017 15:56:21 EDT (28 secs ago)
+The monitor was last triggered at Mon Apr 17 2017 11:31:47 EDT (28 secs ago)
 ~~~
 
 ### Save the monitor
 
-After setting any other miscellaneous options, click 'Save'. Remember: each option only affects the composite monitor.
+After setting any other miscellaneous options, click 'Save'. Remember: each option you select only affects the composite monitor, not its constituent monitors.
 
 ## How composite monitors work
 
