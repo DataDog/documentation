@@ -46,7 +46,7 @@ When you select a second monitor that doesn't cause a warning, the UI will popul
 
 In the 'trigger when' field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions. 
 
-These are all valid trigger conditions: 
+The following are all valid trigger conditions: 
  
 ~~~
 !(a && b)
@@ -54,7 +54,7 @@ a || b && !c
 (a || b) && (c || d)
 ~~~
 
-Outside of a composite monitor's New Monitor and Edit forms (e.g. on its Status page), its individual monitors are known by their numeric IDs:
+Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
 
 ![composite-status](/static/images/composite_monitors/composite-status.png)
 
@@ -169,7 +169,7 @@ In this cycle, you would receive one alert.
 
 ### How composite monitors select common reporting sources
 
-As [explained above](#many-multi-alert-monitors), composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for a composite monitor to trigger on multi-alert monitors that group by different tags.
+As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for a composite monitor to trigger on multi-alert monitors that group by different tags.
 
 If the example above had included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
 
