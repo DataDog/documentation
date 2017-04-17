@@ -16,7 +16,7 @@ _Note: this guide refers variously to 'individual monitors', 'constituent monito
 
 ## Creating composite monitors
 
-In Datadog, go to the New Monitor page and select 'Composite Monitor' from the list of monitor types:
+In Datadog, go to the [New Monitor](https://app.datadoghq.com/monitors#create) page and select 'Composite' from the list of monitor types:
 
 ![choose-composite-type](/static/images/composite_monitors/select-monitor-type.png)
 
