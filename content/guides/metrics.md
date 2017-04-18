@@ -522,7 +522,7 @@ EOF
 <h3 id="methods">Other Submission Methods</h3>
 
 Using the StatsD server bundled with the Datadog Agent is the simplest
-way of submtting metrics to Datadog, but it's not
+way of submitting metrics to Datadog, but it's not
 the only one. Here are some other ways of getting your metrics data into
 Datadog:
 
