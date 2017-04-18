@@ -728,6 +728,13 @@ kind: documentation
               specified using the thresholds option.
               <p>Example: <code>{'critical': 90, 'warning': 80}</code></p>
               </li>
+              <li><code>evaluation_delay</code> Time (in seconds) to delay
+              evaluation, as a non-negative integer. For example, if the value
+              is set to 300 (5min), the timeframe is set to last_5m and the
+              time is 7:00, the monitor will evaluate data from 6:50 to 6:55.
+              This is useful for AWS CloudWatch and other backfilled metrics to
+              ensure the monitor will always have data during evaluation.
+              </li>
             </ul>
 
             <h5>Service Check Options</h5>
@@ -1013,6 +1020,7 @@ kind: documentation
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
+          <%= argument 'monitor_id', "The id of a specific monitor to apply the downtime to.", :required => false, :default => "None" %>
           <li>
             <strong>recurrence [optional, default=None]</strong>
             <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
