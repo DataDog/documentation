@@ -64,22 +64,42 @@ Next, configure CLI to be in ARM (Azure Resource Manager) mode
 azure config mode arm
 ~~~~
 
-Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name"
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
 
 ~~~~
 azure account show
 ~~~~
 
-Create an Active Directory application using the format below.\\
-The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process.\\ 
-The `password` you choose must be copy and pasted into the form on the Azure setup tile under "Client Secret"
+__For Azure CLI 1.0__
+
++ Create an application as a service principal using the format below. The `name` is NOT used in any way and is simply required as part of the setup process.
++ The `password` you choose must be copied and pasted into the form on the Azure setup tile under "Client Secret".
++ You must also pass the "Client ID" of the application into Datadog. The "Client ID" is the unique ID generated from this command, shown under Service Principal Name. It is _not_ the Object ID. 
+
+~~~
+azure ad sp create -n {name} -p {password}
+~~~
+
++ Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.
++ Use the `Object Id` returned from the previous command to fill in `{object-Id}`.
+`{subscription-Id}` is the azure subscription you would like to monitor, and is listed as `ID` in `azure account show` or through the portal
+
+~~~
+azure role assignment create --objectId {object-Id} -o Reader -c /subscriptions/{subscription-Id}/
+~~~
+
+__For Azure CLI < 1.0__
+
++ Create an Active Directory application using the format below.
++ The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process. 
++ The `password` you choose must be copied and pasted into the form on the Azure setup tile under "Client Secret"
 
 ~~~~
 azure ad app create --name "DatadogAuth" --home-page "http://app.datadoghq.com" --identifier-uris "http://app.datadoghq.com" --password "SomePassword"
 ~~~~
 
-Create a Service Principal using the `AppId` returned from the last command.\\
-Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
++ Create a Service Principal using the `AppId` returned from the last command.
++ Copy and paste this `AppId` into the form on the Azure setup tile under "Client ID"
 
 azure cli <0.10.2:
 
@@ -93,8 +113,8 @@ azure cli >= 0.10.2:
 azure ad sp create -a {app-id}
 ~~~~
 
-Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.\\
-Use the `Object Id` returned from the previous command to fill in `{object-Id}`
++ Grant the Service Principal the "Reader" role for the subscription you are interested in monitoring.
++ Use the `Object Id` returned from the previous command to fill in `{object-Id}`
 `{subscription-Id}` is the azure subscription you would like to monitor, and is listed as `ID` in `azure account show` or through the portal
 
 ~~~~
@@ -195,9 +215,16 @@ Learn more about how to monitor Azure VM performance metrics with [our series of
 
 View the specific metrics we collect for each Azure service integration:
 
-* [App Service](/integrations/azure_app_services)
-* [SQL Database](/integrations/azure_sql_database)
-* [Virtual Machine](/integrations/azure_vm)
+* [App Service](/integrations/azure_app_services#metrics) 
+* [Batch Service](/integrations/azure_batch#metrics) 
+* [Event Hub](/integrations/azure_event_hub#metrics) 
+* [IOT Hub](/integrations/azure_iot_hub#metrics) 
+* [Logic App](/integrations/azure_logic_app#metrics)
+* [Redis Cache](/integrations/azure_redis_cache#metrics)
+* [SQL Database](/integrations/azure_sql_database#metrics)
+* [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool#metrics)
+* [Virtual Machine](/integrations/azure_vm#metrics)
+* [Virtual Machine Scale Set](/integrations/azure_vm_scale_set#metrics)
 
 
 ### Troubleshooting
