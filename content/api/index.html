@@ -1005,12 +1005,15 @@ kind: documentation
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
-          <%= argument 'scope', "The scope to which the downtime will apply, e.g.
-          'host:app2'." %>
-          <%= argument 'monitor_id', "A single monitor to which the downtime will apply.", :default=>"None" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime. In the default case, the downtime will start immediately.", :default=>"None" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime. In the
-          default case, the downtime will go until cancelled.",
+          <%= argument 'scope', "The scope(s) to which the downtime will apply, e.g.
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." %>
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If no monitor_id is provided,
+          the downtime will apply to all monitors.", :default=>"None" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment
+          it is created.", :default=>"None" %>
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be active indefinitely
+          (or until cancelled).",
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
@@ -1062,12 +1065,15 @@ kind: documentation
         <h5>Arguments</h5>
           <%= argument 'id', "The integer id of the downtime to be updated" %>
           <%= argument 'scope', "The scope to which the downtime will apply, e.g.
-          'host:app2'.",
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to anything that matches ALL scopes (i.e. scope1 && scope2..), not ANY scope (i.e. ||)",
           :default => "original scope" %>
-          <%= argument 'monitor_id', "A single monitor to which the downtime will apply.", :default=>"original monitor_id" %>
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If no monitor_id is provided,
+          the downtime will apply to all monitors.", :default=>"original monitor_id" %>
           <%= argument 'start', "POSIX timestamp to start the downtime",
           :default => "original start" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled",
+          <%= argument 'end', "POSIX timestamp to end the downtime If not provided, the downtime will be active indefinitely
+          (or until cancelled).",
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
@@ -1136,7 +1142,7 @@ kind: documentation
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
-        <%= argument 'scope', "Cancel all downtimes with the given 'scope', where 'scope' may be a comma-separated list, e.g. 'role:db,db-slave'" %>
+        <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'role:db,role:db-slave'." %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
