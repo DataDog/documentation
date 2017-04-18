@@ -4,9 +4,12 @@ integration_title: Microsoft Azure Storage
 kind: integration
 git_integration_title: azure_storage
 newhlevel: true
+beta: true
 ---
 
 # Overview
+
+This feature is currently in Beta. To enable it for your account, please reach out to <support@datadoghq.com>
 
 Azure Storage is the cloud storage solution for modern applications that rely on durability, availability, and scalability to meet the needs of their customers. It provides the following four services: Blob storage, Table storage, Queue storage, and File storage
 
