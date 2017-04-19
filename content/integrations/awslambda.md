@@ -21,11 +21,12 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
 To send custom metrics to Datadog, you must print a log line from your Lambda, using the following format:
-<code>MONITORING|unix_epoch_timestamp|value|metric_type|my.metric.name|#tag1:value,tag2</code>
+`MONITORING|unix_epoch_timestamp|value|metric_type|my.metric.name|#tag1:value,tag2`
 
 Please ensure the `unix_epoch_timestamp` is in seconds (not milliseconds).
 
 For example, here is sample snippet for printing a valid custom metric, from your Lambda function (in Python):
+
 ~~~
 unix_epoch_timestamp = int(time.time())
 value = 42
@@ -37,7 +38,7 @@ print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
 ))
 ~~~
 
-Note: This integration requires the AWS permissions <code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>, and <code>logs:FilterLogEvents</code> to be fully enabled. Also, counts and gauges are the only metrics types currently supported.
+Note: This integration requires the AWS permissions `logs:DescribeLogGroups`, `logs:DescribeLogStreams`, and `logs:FilterLogEvents` to be fully enabled. Also, counts and gauges are the only metrics types currently supported.
 
 # Metrics
 
