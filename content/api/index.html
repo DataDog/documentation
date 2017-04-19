@@ -548,13 +548,14 @@ kind: documentation
                 <li><code>metric alert</code></li>
                 <li><code>service check</code></li>
                 <li><code>event alert</code></li>
+                <li><code>composite</code></li>
               </ul>
             </div>
           </li>
           <li>
             <strong>query [required]</strong>
-            <div>The monitor query to notify on with syntax varying depending
-            on what type of monitor you are creating.</div>
+            <div>The query defines when the monitor will trigger. Query syntax depends
+            on what type of monitor you are creating:</div>
 
             <h5>Metric Alert Query</h5>
 
@@ -614,6 +615,9 @@ kind: documentation
               <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
               <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
+
+            <h5>Composite Query</h5>
+            <div><code>12345 && 67890</code>, where <code>12345</code> and <code>67890</code> are the IDs of non-composite monitors</div>
 
           </li>
           <%= argument 'name', "The name of the alert.",
