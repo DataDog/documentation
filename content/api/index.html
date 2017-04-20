@@ -1016,11 +1016,15 @@ kind: documentation
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
-          <%= argument 'scope', "The scope to apply the downtime to, e.g.
-          'host:app2'" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime. In the default case, the downtime will start immediately.", :default=>"None" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime. In the
-          default case, the downtime will go until cancelled.",
+          <%= argument 'scope', "The scope(s) to which the downtime will apply, e.g.
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." %>
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
+          the downtime will apply to all monitors.", :default=>"None" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment
+          it is created.", :default=>"None" %>
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
@@ -1050,6 +1054,7 @@ kind: documentation
               </li>
             </ul>
           </li>
+          <%= argument 'timezone', "The timezone for the downtime.", :default => "UTC" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1071,12 +1076,16 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'id', "The integer id of the downtime to be updated" %>
-          <%= argument 'scope', "The scope to apply the downtime to, e.g.
-          'host:app2'",
+          <%= argument 'scope', "The scope to which the downtime will apply, e.g.
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.",
           :default => "original scope" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime",
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
+          the downtime will apply to all monitors.", :default=>"original monitor_id" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime.",
           :default => "original start" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled",
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
@@ -1105,6 +1114,7 @@ kind: documentation
               </li>
             </ul>
           </li>
+          <%= argument 'timezone', "The timezone for the downtime.", :default => "original timezone" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1136,6 +1146,23 @@ kind: documentation
         <%= snippet_code_block "api-monitor-cancel-downtime.sh" %>
         <h5>Example Response</h5>
         <%= no_response %>
+      </div>
+    </div>
+
+    <!-- Cancel monitor downtime by scope -->
+    <div class="int-anchor" id="cancel-downtim-by-scope"></div><a href="#cancel-downtime-by-scope"><h4>Cancel monitor downtimes by scope</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'role:db,role:db-slave'." %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/downtime/cancel/by_scope</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-monitor-cancel-downtime-by-scope.sh" %>
+        <h5>Example Response</h5>
+        <code>{"cancelled_ids":[123456789,123456790]}</code>
       </div>
     </div>
 
