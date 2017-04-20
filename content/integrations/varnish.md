@@ -30,7 +30,7 @@ If you're running Varnish 4.1+, you must add the dd-agent user to the varnish gr
 
 To ensure the integration is installed correctly, run the agent info command.
 
-    sudo datadog-agent info
+    sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
 
