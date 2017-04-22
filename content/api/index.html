@@ -1019,12 +1019,12 @@ kind: documentation
           <%= argument 'scope', "The scope(s) to which the downtime will apply, e.g.
           'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
           applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." %>
-          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If no monitor_id is provided,
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
           the downtime will apply to all monitors.", :default=>"None" %>
           <%= argument 'start', "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment
           it is created.", :default=>"None" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be active indefinitely
-          (or until cancelled).",
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
@@ -1078,14 +1078,14 @@ kind: documentation
           <%= argument 'id', "The integer id of the downtime to be updated" %>
           <%= argument 'scope', "The scope to which the downtime will apply, e.g.
           'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
-          applies to anything that matches ALL scopes (i.e. scope1 && scope2..), not ANY scope (i.e. ||)",
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.",
           :default => "original scope" %>
-          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If no monitor_id is provided,
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
           the downtime will apply to all monitors.", :default=>"original monitor_id" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime",
+          <%= argument 'start', "POSIX timestamp to start the downtime.",
           :default => "original start" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime If not provided, the downtime will be active indefinitely
-          (or until cancelled).",
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
