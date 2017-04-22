@@ -467,7 +467,7 @@ We provide a number of different types of monitors and not all variables are ava
 | `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
 | `{{ok_threshold}}` | | | Y | Y | Y| Y | |
 | `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
+| Additional variables | Contextual | | Contextual<br/>`{{check_message}}` | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
 {: .tpl-var-table}
 
 <style>
