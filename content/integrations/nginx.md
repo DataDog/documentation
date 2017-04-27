@@ -6,7 +6,6 @@ git_integration_title: nginx
 ---
 ### Overview
 
-
 Connect NGINX to Datadog in order to:
 
 * Visualize your web server performance
@@ -53,7 +52,7 @@ The data pulled from the nginx stub status page are described in the [NGINX docs
 
 #### NGINX Plus
 
-If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics]https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python) when the instance target is an http status module URL.
+If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python) when the instance target is an http status module URL.
 
 The metrics shown for the basic NGINX integration show up differently in the NGINX Plus integration.
 Here are the  metrics name changes from NGINX to NGINX Plus:

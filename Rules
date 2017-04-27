@@ -101,7 +101,15 @@ compile '/layouts/partials/*' do
   filter :erb
 end
 
+compile '/partials/*' do
+  filter :erb
+end
+
 route '/layouts/partials/*' do
+  nil
+end
+
+route '/partials/*' do
   nil
 end
 
