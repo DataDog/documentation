@@ -369,7 +369,7 @@ kind: documentation
           This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
         </p>
         <h5>Arguments</h5>
-        <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
+        <% valid_sources = "nagios, hudson, jenkins, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
