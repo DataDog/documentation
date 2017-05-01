@@ -171,7 +171,7 @@ For example, if a container has this label configured as `com.datadoghq.sd.check
 
 ## Configuration templates with Kubernetes annotations
 
-As of version 5.12 of the Datadog Agent, you can use Kubernetes pod annotations to store your configuration templates. Follow the [Kubernetes integration instructions](/integrations/kubernetes/), then add annotations to your pod definitions. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
+As of version **5.12** of the Datadog Agent, you can use Kubernetes pod annotations to store your configuration templates. Follow the [Kubernetes integration instructions](/integrations/kubernetes/), then add annotations to your **pod** definitions. The basic format looks similar to the structure used in the key-value store configuration above, but for Kubernetes it takes the form:
 
     annotations:
       service-discovery.datadoghq.com/<Kubernetes Container Name>.check_names: '["check_name_0"]'
@@ -179,6 +179,8 @@ As of version 5.12 of the Datadog Agent, you can use Kubernetes pod annotations 
       service-discovery.datadoghq.com/<Kubernetes Container Name>.instances: '[{instance_config}]'
 
 Also similar to the key-value store configuration above, you include multiple checks for a container within in the pod. Each element from `check_names`, `init_configs`, and `instances` will be matched together based on their index. In pods with multiple containers, you can simply include additional annotations using the corresponding Kubernetes container name.
+
+Note that if you are using deployments instead of pod configuration, you only need to add the annotations to the metadata of the spec/template, which will add it to your pod metadata.
 
 ### Example: Apache Web Server
 
@@ -200,3 +202,31 @@ Here's an example of the Apache YAML file that would correspond to the configura
           image: httpd
           ports:
             - containerPort: 80
+
+### Example 2: MySQL using annotations on Kubernetes deployment
+
+Here's an example of the YAML file to use when doing a native integration for a RDS MySQL/Aurora instance with a Kubernetes deployment (see [awsrds integration guide for more details](http://docs.datadoghq.com/integrations/awsrds/). Note that this node does nothing, just allows the datadog agent pod running on the same node as this pod to get the metrics gathering:
+
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+        name: rds-metrics
+    spec:
+        replicas: 1
+        template:
+            metadata:
+                annotations:
+                    service-discovery.datadoghq.com/rds-metrics.check_names: '["mysql"]'
+                    service-discovery.datadoghq.com/rds-metrics.init_configs: '[{}]'
+                    service-discovery.datadoghq.com/rds-metrics.instances: '[{"server": "myrdsdb.cluster-blablabla.us-east-1.rds.amazonaws.com", "user": "myuser", "pass": "myPrettyPwd", "port": 3306, "tags": ["dbinstanceidentifier:myrdsdb-0"]}]'
+            spec:
+                containers:
+                    image: gcr.io/google_containers/pause-amd64:3.0
+                    name: rds-metrics
+                    resources:
+                        limits:
+                            cpu: 100m
+                            memory: 50Mi
+                        requests:
+                            cpu: 50m
+                            memory: 30Mi    
