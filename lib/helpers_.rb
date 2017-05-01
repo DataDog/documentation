@@ -178,7 +178,13 @@ def serialize_github_metrics(items, filename)
 end
 
 def insert_example_links(integration: item[:integration_title], conf:  integration.downcase.tr(" ", "_"), check: integration.downcase.tr(" ", "_"), yaml_extension: "example", include_intro: true)
-  example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
+
+  if item[:language] == 'ja' then
+    example_links = include_intro ? "このインテグレーションで設定可能な項目の詳細に関しては、 GitHub 内の次のファイルを参照してください:\n" : ""
+  else
+    example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
+  end
+
   integrationwebroot='https://github.com/Datadog/integrations-core/blob/master/'
 
   yaml_example = ""
