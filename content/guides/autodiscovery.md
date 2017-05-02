@@ -1,5 +1,5 @@
 ---
-title: Guide to using Auto Discovery with Docker
+title: Guide to using Autodiscovery with Docker
 kind: guide
 listorder: 10
 ---
