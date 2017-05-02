@@ -6,19 +6,19 @@ listorder: 10
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/) and platforms like Docker Swarm, Kubernetes and Amazon's ECS make running services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you monitor a service which is dynamically shifting from one host to another?
 
-Datadog automatically keeps track of what is running where, thanks to its Service Discovery feature. Service Discovery allows you to define configuration templates that will be applied automatically to monitor your containers.
+Datadog automatically keeps track of what is running where, thanks to its Autodiscovery feature. Autodiscovery allows you to define configuration templates that will be applied automatically to monitor your containers.
 
 ## How it works
 
 As we consider [the problem of monitoring Docker](https://www.datadoghq.com/blog/the-docker-monitoring-problem/), one strategy is to move from a host-centric model to a service-oriented model. To do this, we'll run the Datadog Agent as a containerized service, rather than using Datadog Agents installed across all of our hosts.
 
-The Service Discovery feature watches for Docker events like when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template for this image, and automatically sets up its checks.
+The Autodiscovery feature watches for Docker events like when a container is created, destroyed, started or stopped. When one of these happens, the Agent identifies which service is impacted, loads the configuration template for this image, and automatically sets up its checks.
 
 Configuration templates can be defined by simple template files or as single key-value stores using etcd or Consul.
 
 ## How to set it up
 
-To use Service Discovery, you'll first need to run the Datadog Agent as a service.
+To use Autodiscovery, you'll first need to run the Datadog Agent as a service.
 
 In Docker Swarm, you can do this by running the following command on one of your manager nodes (using your [API key](https://app.datadoghq.com/account/settings#api)):
 
@@ -34,7 +34,7 @@ In Docker Swarm, you can do this by running the following command on one of your
 
 For Kubernetes, you can follow our [Kubernetes Integration](http://docs.datadoghq.com/integrations/kubernetes/) to create a DaemonSet. We also have [Amazon ECS integration instructions](http://docs.datadoghq.com/integrations/ecs/) available.
 
-By default, the Datadog Agent includes Service Discovery support for:
+By default, the Datadog Agent includes Autodiscovery support for:
 
 - Apache Web Server
 - Consul
@@ -50,7 +50,7 @@ By default, the Datadog Agent includes Service Discovery support for:
 
 These are provided by the configuration templates in the Datadog Agent `conf.d/auto_conf` directory.
 
-To add Service Discovery for your custom container images, you simply need to add a configuration template to the `conf.d/auto_conf` directory.
+To add Autodiscovery for your custom container images, you simply need to add a configuration template to the `conf.d/auto_conf` directory.
 
 ## Configuration templates
 
@@ -73,11 +73,11 @@ Note that for the `host` variable if several networks are found and no key is pa
 
 ## Configuration templates with key-value stores
 
-Service Discovery using configuration templates in the Datadog Agent  `conf.d/auto_conf` directory is a straightforward process, though managing your templates and copying them into the Datadog Agent container (or building your own Datadog Agent container to include custom configuration templates) can make scaling this process difficult.
+Using Autodiscovery with the configuration templates in the Datadog Agent  `conf.d/auto_conf` directory is a straightforward process, though managing your templates and copying them into the Datadog Agent container (or building your own Datadog Agent container to include custom configuration templates) can make scaling this process difficult.
 
 To make configuration template management easier, you can use etcd or Consul, two popular distributed key-value stores, as a repository for your templates.
 
-First you'll need to configure etcd or Consul as your Service Discovery backend by either updating the `datadog.conf` file or passing the settings as environment variables when starting the Datadog Agent service.
+First you'll need to configure etcd or Consul as your Autoiscovery backend by either updating the `datadog.conf` file or passing the settings as environment variables when starting the Datadog Agent service.
 
 ### Configuring etcd or Consul in `datadog.conf`
 
@@ -121,7 +121,7 @@ To pass the settings listed above as environment variables when starting the Dat
 
 ### Template structure in key-value stores
 
-After your Datadog Agent service has been configured to use your Service Discovery configuration backend, you will need to store your configuration templates in the structure:
+After your Datadog Agent service has been configured to use your Autodiscovery configuration backend, you will need to store your configuration templates in the structure:
 
     /datadog/
       check_configs/
@@ -139,7 +139,7 @@ Note that in the structure above, you may have multiple checks for a single cont
 
 ### Example: Apache Web Server
 
-By default, the Datadog Agent supports Service Discovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example):
+By default, the Datadog Agent supports Autodiscovery for the Apache Web Server through the [`conf.d/auto_conf/apache.yaml` file](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example):
 
     docker_images:
       - httpd
