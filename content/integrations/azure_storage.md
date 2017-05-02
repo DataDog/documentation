@@ -12,7 +12,7 @@ newhlevel: true
 
 Azure Storage is the cloud storage solution for modern applications that rely on durability, availability, and scalability to meet the needs of their customers. It provides the following four services: Blob storage, Table storage, Queue storage, and File storage
 
-Enable this integration to see capacity and transaction metrics from Azure Storage (Blob only) in Datadog. 
+Enable this integration to see capacity and transaction metrics from Azure Storage in Datadog. Note that capacity metrics are only available for Blob storage.
 
 ![dash](/static/images/azure/storage_dash.png)
 
