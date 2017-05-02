@@ -90,6 +90,8 @@ redirects:
     to:    /ja/guides/monitors/
   - from:  /ja/guides/network_checks/
     to:    /ja/integrations/tcpcheck/
+  - from:  /guides/servicediscovery/
+    to:    /guides/autodiscovery/
 
 commonfilters:
   - phrase: 'info command'
