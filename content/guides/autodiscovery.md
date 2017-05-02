@@ -81,7 +81,7 @@ First you'll need to configure etcd or Consul as your Service Discovery backend 
 
 ### Configuring etcd or Consul in `datadog.conf`
 
-In the `dataodg.conf` file, you can enable etcd or Consul as a configuration backend by uncommenting and configuring the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` settings. If you are using Consul, you will also need to uncomment and set the `consul_token`.
+In the `datadog.conf` file, you can enable etcd or Consul as a configuration backend by uncommenting and configuring the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` settings. If you are using Consul, you will also need to uncomment and set the `consul_token`.
 
     # For now only Docker is supported so you just need to un-comment this line.
     service_discovery_backend: docker
