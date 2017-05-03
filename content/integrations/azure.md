@@ -55,14 +55,32 @@ To integrate Datadog with Azure using the Azure Command Line Interface, make sur
 
 First, login to the Azure account you want to integrate with Datadog
 
+__For Azure CLI 2.0__
+
+~~~~
+az login
+~~~~
+
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
+
+~~~~
+az account show
+~~~~
+
++ Create an application as a service principal using the format below. 
++ Grant the Service Principal the "reader" role for the subscription(s) you would like to monitor.
++ The `appID` generated from this command must be pasted into the "Client ID" text box in the Azure installation form in Datadog.
++ NOTE, you may add  `--name {some-name}` to use a hand-picked name. Otherwise Azure will generate a unique one. The `Name` will not be used in any way in the setup process.
++ NOTE, you may add  `--password {some-password}` to use a hand-picked password. Otherwise Azure will generate a unique one. This password must be copied and pasted into the "Client Secret" text box in the Azure installation form in Datadog.
+
+~~~
+az ad sp create-for-rbac --role reader --scopes /subscriptions/{subscription_id}
+~~~
+
+__For Azure CLI 1.0__
+
 ~~~~
 azure login
-~~~~
-
-Next, configure CLI to be in ARM (Azure Resource Manager) mode
-
-~~~~
-azure config mode arm
 ~~~~
 
 Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
@@ -70,8 +88,6 @@ Run the account show command and copy & paste the `Tenant ID` value into the for
 ~~~~
 azure account show
 ~~~~
-
-__For Azure CLI 1.0__
 
 + Create an application as a service principal using the format below. The `name` is NOT used in any way and is simply required as part of the setup process.
 + The `password` you choose must be copied and pasted into the form on the Azure setup tile under "Client Secret".
@@ -90,6 +106,17 @@ azure role assignment create --objectId {object-Id} -o Reader -c /subscriptions/
 ~~~
 
 __For Azure CLI < 1.0__
+
+~~~~
+azure login
+~~~~
+
+
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
+
+~~~~
+azure account show
+~~~~
 
 + Create an Active Directory application using the format below.
 + The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process. 
