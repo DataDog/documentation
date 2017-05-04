@@ -24,7 +24,7 @@ sidebar:
 
 ### Overview
 
-Connect to Microsft Azure in order to:
+Connect to Microsoft Azure in order to:
 
 * Get metrics from Azure VMs with or without installing the Agent
 * Tag your Azure VMs with Azure-specific information (e.g. location)
