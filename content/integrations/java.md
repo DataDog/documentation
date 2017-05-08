@@ -38,10 +38,10 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
             jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # optional
 
             name: jmx_instance  # optional
-              java_bin_path: /path/to/java
-              java_options: "-Xmx200m -Xms50m"
-              trust_store_path: /path/to/trustStore.jks
-              trust_store_password: password
+            java_bin_path: /path/to/java
+            java_options: "-Xmx200m -Xms50m"
+            trust_store_path: /path/to/trustStore.jks
+            trust_store_password: password
 
             process_name_regex: .*process_name.*
             tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
