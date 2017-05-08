@@ -28,6 +28,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
         init_config:
           custom_jar_paths: # optional
             - /path/to/custom/jarfile.jar
+          #is_jmx: true
 
         instances:
           - host: localhost
