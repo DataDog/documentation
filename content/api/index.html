@@ -882,6 +882,8 @@ kind: documentation
           <%= argument 'monitor_tags', "A comma separated list indicating
           what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
+          <%= argument 'with_downtimes', "If this argument is set to <code>true</code>, then the returned data will include all current downtimes for each monitor.",
+          :default => "false" %>
         </ul>
       </div>
       <%= right_side_div %>
