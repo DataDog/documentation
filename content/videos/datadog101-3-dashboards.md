@@ -38,3 +38,11 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 * [Other widgets](?wtime=641)
 * [Creating a public read-only version of a dashboard](?wtime=671)
 * [Templating](?wtime=689)
+
+
+For more information, be sure to check out these links talked about in the video:
+
+* [Graphing documentation](http://dtdg.co/101-graph)
+* [What is the difference between a ScreenBoard and a TimeBoard?](http://dtdg.co/101-screenvstime)
+* [Filter your Datadog Events Stream to pinpoint issues in your infrastructure](http://dtdg.co/101-eventstream)
+* [Correlating Events with Metrics](http://dtdg.co/101-correlation)
