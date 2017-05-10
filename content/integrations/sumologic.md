@@ -13,11 +13,12 @@ Enable the Sumo Logic integration to:
 
 ## Installation
 
-There are two parts to the SumoLogic integration, based on the direction of information between the products. You can send alerts and events from Datadog to Sumologic and you can have SumoLogic send data to Datadog.
+Datadog integration with SumoLogic is two-part: send alerts and events from Datadog to Sumologic, or have SumoLogic send data to Datadog. You can enable one or both.
 
 ### Datadog to SumoLogic
 
-1. Login to SumoLogic.
+
+1. Login to SumoLogic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Collection**.
 3. Click the **Add Collector** link at the top left. ![Hosted Collection](/static/images/integrations-sumo-hostedcollector.png)
 4. Choose **Hosted Collector**.
@@ -31,7 +32,7 @@ There are two parts to the SumoLogic integration, based on the direction of info
 
 ### SumoLogic to Datadog
 
-1. Login to SumoLogic.
+1. Login to SumoLogic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Connections**.
 3. Click the **Add** button.
 4. Click the **Datadog** button. ![Click the Datadog Button](/static/images/integrations-sumo-connectiontype.png)
