@@ -56,12 +56,12 @@ Related integrations include:
 ### Installation
 {: #installation}
 
-Integrating Datadog with Microsoft Azure can be done via the Azure Command Line Interface or through the Azure portal 
+You can integrate your Microsoft Azure account with Datadog using the Azure CLI tool or the Azure portal.
 
 #### Integrating through the Azure CLI
 {: #installation_cli}
 
-To integrate Datadog with Azure using the Azure Command Line Interface, make sure you have [Azure CLI installed][7]. 
+To integrate Datadog with Azure using the Azure CLI, make sure you have [Azure CLI installed][7]. 
 
 First, login to the Azure account you want to integrate with Datadog
 
@@ -163,9 +163,9 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 #### Integrating through the Azure Portals
 {: #installation_portal}
 
-1. The first step is <a href="#installation1">Getting your tenant name</a> and passing it to Datadog. 
-2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
-3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
+1. <a href="#installation1">Get your tenant name</a> and pass it to Datadog. 
+2. <a href="#installation2">Create a web application</a> in your Active Directory and pass the correct credentials to Datadog.
+3. <a href="#installation3">Give this application read-access</a> to any subscriptions you would like to monitor.
 
 ##### Getting your Tenant Name
 {: #installation1}
@@ -249,10 +249,10 @@ Learn more about how to monitor Azure VM performance metrics with [our series of
 
 Optionally, you can limit the Azure VMs that are pulled into Datadog by entering tags in the "Optionally filter to VMs with tag" textbox. This comma separated list of tags (in the form 'key:value') defines a filter that we will use when collecting metrics from Azure VMs. Wildcards, such as '?' (for single characters) and '*' (for multiple characters) can also be used. Only VMs that match one of the defined tags will be imported into Datadog. The rest will be ignored.
 
-VMs matching a given tag can also be excluded by adding '!' before the tag. 
+VMs matching a given tag can also be excluded by adding '!' before the tag. For example:
 
 ~~~
-e.x. datadog:monitored,env:production,!env:staging,instance-type:c1.*
+datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ~~~
 
 ![settings](/static/images/azure/filter_form.png)
