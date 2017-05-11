@@ -23,8 +23,6 @@ Pingdom events can be added by configuring the relevant [Integration Status Moni
     (If you have a Team account, you can use your own credentials and specify the account you wish to pull checks from.)
 1.  You can ignore some checks by unchecking them or add some tags to the events that are going to be generated.
 
-Note: Pingdom does not provide an API for transaction checks, so we’re not able to show them in Datadog.
-
 # Metrics
 
 <%= get_metrics_from_git() %>
