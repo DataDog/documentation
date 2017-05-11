@@ -13,10 +13,9 @@ Enable the Sumo Logic integration to:
 
 ## Installation
 
-Datadog integration with SumoLogic is two-part: send alerts and events from Datadog to Sumologic, or have SumoLogic send data to Datadog. You can enable one or both.
+Datadog integration with SumoLogic is two-part: send alerts and events from Datadog to Sumologic, or have SumoLogic send log data to Datadog. You can enable one or both.
 
 ### Datadog to SumoLogic
-
 
 1. Login to SumoLogic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Collection**.
@@ -28,7 +27,6 @@ Datadog integration with SumoLogic is two-part: send alerts and events from Data
 8. Go to the [SumoLogic Integration settings](https://app.datadoghq.com/account/settings#integrations/sumo_logic) screen in Datadog.
 9. Enter the name you want to assign to the collector and the URL from above.
 10. Next time you want to send a message from Datadog to SumoLogic, use **@sumologic-{YOUR COLLECTOR NAME}**.
-
 
 ### SumoLogic to Datadog
 
