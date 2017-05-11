@@ -6,10 +6,7 @@ kind: integration
 
 ## Overview
 
-Enable the Sumo Logic integration to:
-
-* correlate your log data with Datadog metrics
-* send your alerts to Sumo Logic
+Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log data to your Datadog event stream, and you can use Sumo Logic as a notification channel from Datadog alerts and events. In other words, each service can inform the other.
 
 ## Installation
 
