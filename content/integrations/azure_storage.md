@@ -4,7 +4,6 @@ integration_title: Microsoft Azure Storage
 kind: integration
 git_integration_title: azure_storage
 newhlevel: true
-beta: true
 ---
 
 # Overview
@@ -13,9 +12,7 @@ beta: true
 
 Azure Storage is the cloud storage solution for modern applications that rely on durability, availability, and scalability to meet the needs of their customers. It provides the following four services: Blob storage, Table storage, Queue storage, and File storage
 
-Enable this integration to see in Datadog capacity (Blob only) and transaction metrics from your Azure Storage accounts. 
-
-To turn on this feature for your account, please reach out to <support@datadoghq.com>
+Enable this integration to see capacity and transaction metrics from Azure Storage in Datadog. Note that capacity metrics are only available for Blob storage.
 
 ![dash](/static/images/azure/storage_dash.png)
 

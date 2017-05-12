@@ -1,9 +1,10 @@
 ---
-title: Datadog-Google Spannger Integration
+title: Datadog-Google Spanner Integration
 integration_title: Google Spanner
 kind: integration
 doclevel: basic
 newhlevel: true
+git_integration_title: google_cloud_spanner
 ---
 
 # Overview
@@ -20,4 +21,4 @@ If you haven't already, set up the [Google Cloud Platform integration first](/in
 
 # Metrics
 
-Look for `gcp.spanner.*` metrics within the Datadog App
+<%= get_metrics_from_git() %>

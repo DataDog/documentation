@@ -7,10 +7,18 @@ sidebar:
     - header: Azure integration
     - text: Installation
       href: "#installation"
-    - text: Creating the Web Application
+    - text: Integrating through the Azure CLI
+      href: "#installation_cli"
+    - text: Integrating through the Azure Portals
+      href: "#installation_portal"
+    - text: Getting your Tenant Name
       href: "#installation1"
-    - text: Giving Read Permissions to the Application
+    - text: Creating the Web Application
       href: "#installation2"
+    - text: Giving Read Permissions to the Application
+      href: "#installation3"
+    - text: Configuration
+      href: "#configuration"
     - text: Deploy agents
       href: "#agents"
     - text: Metrics
@@ -24,7 +32,7 @@ sidebar:
 
 ### Overview
 
-Connect to Microsft Azure in order to:
+Connect to Microsoft Azure in order to:
 
 * Get metrics from Azure VMs with or without installing the Agent
 * Tag your Azure VMs with Azure-specific information (e.g. location)
@@ -48,21 +56,41 @@ Related integrations include:
 ### Installation
 {: #installation}
 
-Integrating Datadog with Microsoft Azure can be done via the Azure Command Line Interface or through the Azure portal 
+You can integrate your Microsoft Azure account with Datadog using the Azure CLI tool or the Azure portal.
 
 #### Integrating through the Azure CLI
-To integrate Datadog with Azure using the Azure Command Line Interface, make sure you have [Azure CLI installed][7]. 
+{: #installation_cli}
+
+To integrate Datadog with Azure using the Azure CLI, make sure you have [Azure CLI installed][7]. 
 
 First, login to the Azure account you want to integrate with Datadog
 
+__For Azure CLI 2.0__
+
+~~~~
+az login
+~~~~
+
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
+
+~~~~
+az account show
+~~~~
+
++ Create an application as a service principal using the format below. 
++ Grant the Service Principal the "reader" role for the subscription(s) you would like to monitor.
++ The `appID` generated from this command must be pasted into the "Client ID" text box in the Azure installation form in Datadog.
++ NOTE, you may add  `--name {some-name}` to use a hand-picked name. Otherwise Azure will generate a unique one. The `Name` will not be used in any way in the setup process.
++ NOTE, you may add  `--password {some-password}` to use a hand-picked password. Otherwise Azure will generate a unique one. This password must be copied and pasted into the "Client Secret" text box in the Azure installation form in Datadog.
+
+~~~
+az ad sp create-for-rbac --role reader --scopes /subscriptions/{subscription_id}
+~~~
+
+__For Azure CLI 1.0__
+
 ~~~~
 azure login
-~~~~
-
-Next, configure CLI to be in ARM (Azure Resource Manager) mode
-
-~~~~
-azure config mode arm
 ~~~~
 
 Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
@@ -70,8 +98,6 @@ Run the account show command and copy & paste the `Tenant ID` value into the for
 ~~~~
 azure account show
 ~~~~
-
-__For Azure CLI 1.0__
 
 + Create an application as a service principal using the format below. The `name` is NOT used in any way and is simply required as part of the setup process.
 + The `password` you choose must be copied and pasted into the form on the Azure setup tile under "Client Secret".
@@ -90,6 +116,17 @@ azure role assignment create --objectId {object-Id} -o Reader -c /subscriptions/
 ~~~
 
 __For Azure CLI < 1.0__
+
+~~~~
+azure login
+~~~~
+
+
+Run the account show command and copy & paste the `Tenant ID` value into the form on the Azure setup tile under "Tenant Name/ID"
+
+~~~~
+azure account show
+~~~~
 
 + Create an Active Directory application using the format below.
 + The `name`, `home-page`, and `identifiter-uris` will be NOT used in any way and are simply required as part of the setup process. 
@@ -124,10 +161,11 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 
 
 #### Integrating through the Azure Portals
+{: #installation_portal}
 
-1. The first step is <a href="#installation1">Getting your tenant name</a> and passing it to Datadog. 
-2. The second step is <a href="#installation2">Creating a web application</a> in your Active Directory and passing the correct credentials to Datadog.
-3. The third step is <a href="#installation3">Giving this application read-access</a> to any subscriptions you would like to monitor.
+1. <a href="#installation1">Get your tenant name</a> and pass it to Datadog. 
+2. <a href="#installation2">Create a web application</a> in your Active Directory and pass the correct credentials to Datadog.
+3. <a href="#installation3">Give this application read-access</a> to any subscriptions you would like to monitor.
 
 ##### Getting your Tenant Name
 {: #installation1}
@@ -138,7 +176,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 
     ![settings](/static/images/azure/Azure_tenant_name.png)
 
-4. Paste the ID under "Tenant Name" in the form on the Azure setup tile 
+4. Paste the ID under "Tenant Name/ID" in the form on the Azure setup tile 
 
     ![settings](/static/images/azure/tenant_name_form.png)
 
@@ -206,13 +244,28 @@ Naviate to the [Azure VM Default Dashboard][6] to see this dashboard populate wi
 
 Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
+### Configuration
+{: #configuration}
+
+Optionally, you can limit the Azure VMs that are pulled into Datadog by entering tags in the "Optionally filter to VMs with tag" textbox. This comma separated list of tags (in the form 'key:value') defines a filter that we will use when collecting metrics from Azure VMs. Wildcards, such as '?' (for single characters) and '*' (for multiple characters) can also be used. Only VMs that match one of the defined tags will be imported into Datadog. The rest will be ignored.
+
+VMs matching a given tag can also be excluded by adding '!' before the tag. For example:
+
+~~~
+datadog:monitored,env:production,!env:staging,instance-type:c1.*
+~~~
+
+![settings](/static/images/azure/filter_form.png)
+
 ### Deploy Agents
 {: #agents}
 
-1. Follow the steps in the [Azure integrations][1] tile
-2. Manually deploy Agents by following the instructions <a href="/guides/azure/">here</a> 
+1. Navigate to your VM in the Azure Portal > Settings > Extenstions > Add > Select Datadog Agent. Use an API key found <a href="https://app.datadoghq.com/account/settings#api">here</a> 
+2. Manually deploy Agents by following the instructions <a href="/guides/azure/">here</a>
+3. Install based on operating system or CICD tool <a href="https://app.datadoghq.com/account/settings#agent"> using these instructions</a>
 
 ### Metrics
+{: #metrics}
 
 View the specific metrics we collect for each Azure service integration:
 

@@ -28,6 +28,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
         init_config:
           custom_jar_paths: # optional
             - /path/to/custom/jarfile.jar
+          #is_jmx: true
 
         instances:
           - host: localhost
@@ -38,10 +39,10 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
             jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # optional
 
             name: jmx_instance  # optional
-              java_bin_path: /path/to/java
-              java_options: "-Xmx200m -Xms50m"
-              trust_store_path: /path/to/trustStore.jks
-              trust_store_password: password
+            java_bin_path: /path/to/java
+            java_options: "-Xmx200m -Xms50m"
+            trust_store_path: /path/to/trustStore.jks
+            trust_store_password: password
 
             process_name_regex: .*process_name.*
             tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
@@ -79,6 +80,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
 
 * `custom_jar_paths` (Optional) - Allows specifying custom jars that will be added to the classpath of the agent's JVM.
 * `jmx_url` - (Optional) - If the agent needs to connect to a non-default JMX URL, specify it here instead of a host and a port. If you use this you need to specify a 'name' for the instance.
+* `is_jmx` (Optional) - Allows creating different configuration files for each application rather than using a single long jmx file. Include the option in each configuration file.
 * `name` - (Optional) - Used in conjunction with `jmx_url`.
 * `java_bin_path` - (Optional) - Should be set if the agent cannot find your java executable.
 * `java_options` - (Optional) - Java JVM options

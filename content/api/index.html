@@ -369,7 +369,7 @@ kind: documentation
           This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
         </p>
         <h5>Arguments</h5>
-        <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
+        <% valid_sources = "nagios, hudson, jenkins, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
@@ -882,6 +882,8 @@ kind: documentation
           <%= argument 'monitor_tags', "A comma separated list indicating
           what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
+          <%= argument 'with_downtimes', "If this argument is set to <code>true</code>, then the returned data will include all current downtimes for each monitor.",
+          :default => "false" %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1150,11 +1152,11 @@ kind: documentation
     </div>
 
     <!-- Cancel monitor downtime by scope -->
-    <div class="int-anchor" id="cancel-downtim-by-scope"></div><a href="#cancel-downtime-by-scope"><h4>Cancel monitor downtimes by scope</h4></a>
+    <div class="int-anchor" id="cancel-downtime-by-scope"></div><a href="#cancel-downtime-by-scope"><h4>Cancel monitor downtimes by scope</h4></a>
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
-        <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'role:db,role:db-slave'." %>
+        <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'." %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>

@@ -90,7 +90,10 @@ redirects:
     to:    /ja/guides/monitors/
   - from:  /ja/guides/network_checks/
     to:    /ja/integrations/tcpcheck/
-
+  - from:  /guides/servicediscovery/
+    to:    /guides/autodiscovery/
+  - from: /videos/setuprailsapm/
+    to:   /videos/apmsetup-rails/
 commonfilters:
   - phrase: 'info command'
     link: /guides/basic_agent_usage/ubuntu/
