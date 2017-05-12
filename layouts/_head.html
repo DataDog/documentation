@@ -30,4 +30,16 @@
 
     </script>
     <script src="https://use.fontawesome.com/700fac0342.js"></script>
+    <% if @item.identifier.match("/videos/") && @item[:kind]== 'video' %>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+        <meta name="twitter:card" content="player" />
+        <meta name="twitter:site" content="@datadoghq" />
+        <meta name="twitter:title" content="Sample Player Card" />
+        <meta name="twitter:description" content="<%= @item[:summary] %>" />
+        <meta name="twitter:player" content="<%= @item.identifier + 'twcard'%>" />
+        <meta name="twitter:player:width" content="480" />
+        <meta name="twitter:player:height" content="480" />
+        <meta name="twitter:player:stream" content="https://fast.wistia.net/embed/iframe/<%= @item[:wistiaid] %>" />
+        <meta name="twitter:player:stream:content_type" content="video/mp4" />
+    <% end %>
   </head>
