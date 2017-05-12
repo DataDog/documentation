@@ -195,6 +195,19 @@ compile '*' do
   end
 end
 
+compile '/videos/*/', :rep => :twcard do
+  if item[:kind] == 'video'
+    filter :erb
+    layout 'twcard'
+  end
+end
+
+route '/videos/*/', :rep => :twcard do
+  if item[:kind] == 'video'
+    item.identifier + 'twcard/index.html'
+  end
+end
+
 route 'sitemap' do
   item.identifier.chop + '.xml'
 end
