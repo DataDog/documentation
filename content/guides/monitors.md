@@ -226,10 +226,27 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
-## Monitor FAQs
+## Managing Monitors
+{: #manage}
+
+The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search on all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor among the search results.
+
+Run a string search against monitor titles and message bodies. Filter monitors by one or more attributes: status, scope, type, muted/not muted, creator, ID, service tags, team tags, env tags, notification target, and metric or service check monitored. For the most advanced search, combine string search and attribute filters using an Elasticsearch-like syntax.
+
+### Find the Monitors
+
+Search your monitors in two ways: choose monitor attributes using the checkboxes on the left, or write a query — using string search and/or attribute filters — in the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the query (or write one from scratch), the checkboxes update to reflect the change.
+
+#### Check the boxes
+
+#### Write your own query
+
+### Manage chosen Monitors
+
+## FAQs
 {: #faq}
 
-- *Can I manage my monitors programatically?*
+- *Can I manage my monitors programmatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
