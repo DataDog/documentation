@@ -226,8 +226,11 @@ The `datadog-agent jmx` command was added in version 4.1.0.
   * Start the collection of metrics based on your current configuration and display them in the console:
 `sudo /etc/init.d/datadog-agent jmx collect`
 
+For more details about configuring this integration refer to the following file(s) on GitHub:
 
-<%= insert_example_links(conf: "jmx", check: "none")%>
+<li> [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example) </li>
+
+<!-- <%= insert_example_links(conf: "jmx", check: "none")%> -->
 
 # Validation
 
