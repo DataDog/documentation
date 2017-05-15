@@ -261,7 +261,7 @@ When you don't need to search monitor titles and bodies for specific text, your 
 * The Muted checkbox appears under the Status field, but Muted is actually its own field; checking it adds `muted:true` to your query, not `status:muted`.
 * The Metric/Check field is always called `metric` in the query, e.g. selecting the check `http.can_connect` adds `metric:http.can_connect` to your query.
 
-For fields that have a large and unbounded number of values across all monitors—Service tag, Scope, Metric/Check, Notification—use the field-specific search bars to find the value you're looking for.
+For fields that have an arbitrary (i.e. large) number of values across all monitors—Service tag, Scope, Metric/Check, Notification—use the field-specific search bars to find the value you're looking for.
 
 When you need to run a more complex search than the checkboxes allow, use the search bar to edit your query or write a new one.
 
