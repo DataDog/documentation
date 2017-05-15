@@ -267,7 +267,7 @@ When you need to run a more complex search than the checkboxes allow, use the se
 
 #### Write a query
 
-The most common reason to write a query is to search for specific text in monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `name:postgresql`.
+The most common reason to write a query is to search for specific text across all monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `name:postgresql`.
 
 Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe how it is *not* like Elasticsearch syntax:
 
