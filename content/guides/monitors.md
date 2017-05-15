@@ -265,7 +265,7 @@ For fields that have an arbitrary (i.e. large) number of values across all monit
 
 When you need to run a more complex search than the checkboxes allow, use the search bar to edit your query or write a new one.
 
-#### Write your own query
+#### Write a query
 
 The most common reason to write a query is to search for specific text in monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `name:postgresql`.
 
