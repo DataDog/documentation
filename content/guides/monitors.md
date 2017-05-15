@@ -254,7 +254,7 @@ To run a search, construct your query using the checkboxes on the left and/or th
 
 When you don't need to search monitor titles and bodies for specific text, your search is a quick click or two away. Check as many boxes as you need to find your desired monitors, keeping the following in mind:
 
-* Checking attributes from different fields will AND the values, e.g. `status:Alert type:Metric` (no operator between the two search terms implies AND)
+* Checking attributes from different fields will AND the values, e.g. `status:Alert type:Metric` (the lack of an operator between the two search terms implies AND)
 * Checking attributes within the same field will often OR the values, e.g. `status:(Alert OR Warn)`, but there are some exceptions: checking multiple scopes or service tags ANDs them.
 * Some fields do not allow you to select multiple values, e.g. when you tick a metric or service check, the other metrics/checks disappear from the list until you untick your selection.
 * The Triggered checkbox under the Status field means `status:(Alert OR Warn OR "No Data")`, not `status:Triggered`. Triggered is not a valid monitor status.
@@ -280,9 +280,9 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and control preceden
 
 ### Manage chosen Monitors
 
-When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by checking the topmost checkbox next to the STATUS column heading. Modify 
+When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by checking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-
+To edit an individual monitor, hover over it and use the buttons to the far right in its row. To see more detail on a monitor, click its Name to visit its status page.
 
 ## FAQs
 {: #faq}
