@@ -298,7 +298,7 @@ the packets:
 #### Fields
 - Mandatory:
   - `title` — Event title.
-  - `text` — Event text. Supports line breaks.
+  - `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
 - Optional: `|[key]:[value]`
   - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
   - `|h:hostname` — default: None — Assign a hostname to the event.
