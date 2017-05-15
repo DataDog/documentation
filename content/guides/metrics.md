@@ -2,34 +2,7 @@
 title: Sending Metrics with DogStatsD
 kind: guide
 listorder: 4
-sidebar:
-  nav:
-    - header: Guide to Metrics
-    - text: Overview
-      href: "#overview"
-    - text: Setup
-      href: "#setup"
-    - header: Metric Types
-    - text: Counters
-      href: "#counters"
-    - text: Gauges
-      href: "#gauges"
-    - text: Histograms
-      href: "#histograms"
-    - text: Service Checks
-      href: "#service-checks"
-    - text: Sets
-      href: "#sets"
-    - header: Options
-    - text: Tags
-      href: "#tags"
-    - text: Sample Rates
-      href: "#sample-rates"
-    - header: Epilogue
-    - text: Other Submission Methods
-      href: "#methods"
-    - text: Seeing Your Custom Metrics
-      href: "#custom"
+
 
 ---
 
