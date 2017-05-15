@@ -16,7 +16,7 @@ Connect your PGBouncer to Datadog in order to:
 
 ### Configuration
 
-To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgbouncer.yaml` and mak the appropriate changes.
+To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgbouncer.yaml` and make the appropriate changes.
 
 
     init_config:
@@ -45,7 +45,12 @@ When you run datadog-agent info you should see something like the following:
         pgbouncer
         -----------
           - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+          - Collected 39 metrics, 0 events & 1 service check
 ### Metrics
 
 <%= get_metrics_from_git() %>
+
+### Service Checks
+
+**pgbouncer.can_connect**
+: Agent is able to connect to the pgbouncer instance
