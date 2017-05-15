@@ -267,9 +267,9 @@ When you need to run a more complex search than the checkboxes allow, use the se
 
 #### Write your own query
 
-The most common reason to write a query is to search for specific text in monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, not both, qualify the term with the field name, e.g. `name:postgresql`.
+The most common reason to write a query is to search for specific text in monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `name:postgresql`.
 
-Otherwise, you can use boolean operators (AND, OR, and NOT) and control precedence with parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe it by pointing out how it is *not* like Elasticsearch syntax:
+Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe how it is *not* like Elasticsearch syntax:
 
 * Regular expressions are not supported
 * Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
@@ -280,9 +280,9 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and control preceden
 
 ### Manage chosen Monitors
 
-When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by checking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
+When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-To edit an individual monitor, hover over it and use the buttons to the far right in its row. To see more detail on a monitor, click its Name to visit its status page.
+To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
 ## FAQs
 {: #faq}
