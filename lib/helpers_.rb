@@ -218,14 +218,35 @@ def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to
   return formatmetrics(selectedmetrics)
 end
 
+def arraytoenglishlist(inputarray)
+  outputstring = ""
+
+  if inputarray.size == 1
+    outputstring = inputarray[0]
+  elsif inputarray.size == 2
+    outputstring = "#{inputarray[0]} and #{inputarray[1]}"
+  elsif inputarray.size > 2
+    outputstring = "#{inputarray[0..-2].join(', ')}, and #{inputarray[-1]}"
+  end
+
+  return outputstring
+end
+
 def formatmetrics(selectedmetrics)
+  platformmetrics = @item.attributes.has_key?(:platformmetrics)?@item[:platformmetrics]:{}
   metrictable = "<table class='table'>"
   if $goodconnection
     selectedmetrics.each do |metric|
-      metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
+      platformexceptions = ""
+      if platformmetrics.has_key?(:"#{metric[:name]}")
+        platformexceptions = " <i>**#{arraytoenglishlist(platformmetrics[:"#{metric[:name]}"])} only</i>"
+      end
+
+      metrictable += "<tr><td><strong>#{metric[:name]}</strong>#{platformexceptions}<br/>(#{metric[:type]}"
       if metric[:interval]>0
         metrictable += " every #{metric[:interval]} seconds"
       end
+
       metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
       metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
       metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
@@ -235,6 +256,7 @@ def formatmetrics(selectedmetrics)
     metrictable += "<tr><td>Metrics would go here if you didn't type rake slow</td></tr>"
   end
   metrictable += "</table>"
+
   return metrictable.force_encoding("utf-8")
 end
 
