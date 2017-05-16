@@ -3,12 +3,25 @@ title: Network check
 integration_title: Network Check
 kind: integration
 newhlevel: true
+platformmetrics:
+  system.net.tcp.retrans_packs:
+    - BSD
+  system.net.tcp.sent_packs:
+    - BSD
+  system.net.tcp.rcv_packs:
+    - BSD
+  system.net.tcp.retrans_segs:
+    - Solaris
+  system.net.tcp.in_segs:
+    - Solaris
+  system.net.tcp.out_segs:
+    - Solaris
 ---
 # Overview
 
 ![Network Dashboard](/static/images/netdashboard.png)
 
-The network check collects TCP and IP network metrics from the agent's host. 
+The network check collects TCP and IP network metrics from the agent's host.
 
 
 # Configuration
