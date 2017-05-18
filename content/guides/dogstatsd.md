@@ -1,5 +1,5 @@
 ---
-title: Getting Started with DogStatsD
+title: What is DogStatsD?
 kind: documentation
 sidebar:
   nav:
@@ -25,250 +25,279 @@ sidebar:
 ---
 
 <p class="aside">
-  This tutorial will walk you through instrumenting your application to send
-  custom metrics to Datadog. If you need some help as you go, pop by
-  <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-  where we'll be happy to answer any questions you might have. (There's a
-  <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-  web chat client, too</a>.)
+This page explains what DogStatsD is, how it works, and what data it accepts.
 </p>
 
-The easiest way to get your custom metrics into Datadog is to send them to DogStatsD,
-a metrics aggregation server bundled with the Datadog Agent (in versions 3.0
-and above).
-DogStatsD implements the
-<a href="https://github.com/etsy/statsd">StatsD</a>
-protocol, along with a few extensions for special Datadog features.
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements 
+the <a href="https://github.com/etsy/statsd">StatsD</a> protocol and adds a few Datadog-specific
+extensions:
+
+* Histogram and Set metric types
+* Service checks and Events
+* Tagging
 
 ## How It Works
 
-DogStatsD accepts custom application metrics points over
-<a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a>,
-and then periodically aggregates and forwards the metrics to Datadog, where
-they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
+DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application 
+can fire metrics at DogStatsD and resume its work without waiting for a response. If DogStatsD ever crashes 
+or starts to perform poorly, your application won't skip a beat.
+
 <p>
 <img src="/static/images/dogstatsd.png"/>
 </p>
 
-### Aggregation
+As it receives data, DogStatsD aggregates multiple data points for a given metric into a single
+data point over a period of time called the flush interval. Let's walk through an
+example to see how this works.
 
-DogStatsD's primary function is to aggregate many data points into a single
-metric for a given interval of time (ten seconds by default). Let's walk through an
-example to understand how this works.
-
-Suppose you want to know how many times you are running a database query,
-your application can tell DogStatsD to increment a counter each
-time this query is executed. For example:
+Suppose you want to know how many times your Python application is calling a particular database query. 
+Your application can tell DogStatsD to increment a counter each time the query is called:
 
 <%= python <<eof
 def query_my_database():
     dog.increment('database.query.count')
-    # Run the query ...
+    # Run the query...
 eof
 %>
 
-If this function is executed one hundred times in a flush interval (ten
-seconds by default), it will send DogStatsD one hundred UDP packets that say
-"increment the 'database.query.count' counter". DogStatsD will aggregate these
-points into a single metric value - 100 in this case - and send it to the
-server where it can be graphed.
-
-This means expect DogStatsD to produce one point per metric per flush interval
-while data is being submitted for that metric.
-
-### Why UDP?
-
-Like StatsD, DogStatsD receives points over UDP. UDP is good fit for application
-instrumentation because it is a fire and
-forget protocol. This means your application won't stop its actual work to wait for a
-response from the metrics server, which is very important if the metrics
-server is down or inaccessible.
+If this function executes one hundred times during a flush interval (ten
+seconds, by default), it will send DogStatsD one hundred UDP packets that say
+"increment the counter 'database.query.count'". DogStatsD will aggregate these
+points into a single metric value—100 in this case—and send it to Datadog
+where it will be stored and available for graphing alongside the rest of your metrics.
 
 ## Set Up
 
-Once you have the Datadog Agent up and running, grab a DogStatsD client for your
-language and you'll be ready to start hacking. Any StatsD client will work
-just fine, but using a Datadog StatsD client will give you a few extra features
-(namely tags and histograms, but more on that later).
+Once you have the Datadog Agent installed on your application servers/containers—or anywhere
+your application can reliably reach—grab the [DogStatsD client library](/libraries/) for your
+application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
-### DogStatsD Clients
+By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the
+`dogstatsd_port` option in the main 
+<a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
+Agent configuration file</a>:
 
-You can see the list of StatsD clients on our [libraries page](/libraries/).
+    # Make sure your client is sending to the same port.
+    dogstatsd_port: 18125
 
-## Metrics
+Restart DogStatsD to effect the change.
 
-We'll walk through the types of metrics supported by DogStatsD in Python, but
-the principles are easily translated into other languages.
-DogStatsD supports the following types of metrics:
+## Data Types
 
-### Gauges
+While StatsD only accepts metrics, DogStatsD accepts all three data types that Datadog supports: metrics, events, and service checks. This section briefly describes each data type and gives you an idea of how (and what) you might instrument for each type.
 
-Gauges measure the value of a particular thing at a
-particular time, like the amount of fuel in a car's gas tank or
-the number of users connected to a system.
-
-<%= python <<eof
-dog.gauge('gas_tank.level', 0.75)
-dog.gauge('users.active', 1001)
-eof
-%>
-
-### Counters
-
-Counters track how many times something happened per second, like the number of
-database requests or page views.
-
-<%= python <<eof
-dog.increment('database.query.count')
-dog.increment('page_view.count', 10)
-eof
-%>
-
-### Histograms
-
-Histograms track the statistical distribution of a set of values, like the
-duration of a number of database queries or the size of files uploaded by users. Each
-histogram will track the average, the minimum, the maximum, the median,
-the 95th percentile and the count.
-
-<%= python <<eof
-dog.histogram('database.query.time', 0.5)
-dog.histogram('file.upload.size', file.get_size())
-eof
-%>
-
-Histograms are an extension to StatsD, so you'll need to use a client that
-supports them.
-
-### Sets
-
-Sets are used to count the number of unique elements in a group. If you want to
-track the number of unique visitor to your site, sets are a great way to do
-that.
-
-<%= python <<eof
-dog.set('users.uniques', user.id)
-eof
-%>
-
-Sets are an extension to StatsD, so you'll need to use a client that
-supports them.
-
-### Timers
-
-StatsD only supports histograms for timing, not generic values (like the size
-of uploaded files or the number of rows returned from a query). Timers are
-essentially a special case of histograms, so they are treated in the same manner
-by DogStatsD for backwards compatibility.
-
-## Sample Rates
-
-The overhead of sending UDP packets can be too great for some performance
-intensive code paths. To work around this, StatsD clients support sampling,
-that is to say, only sending metrics a percentage of the time. For example:
-
-<%= python <<eof
-dog.histogram('my.histogram', 1, sample_rate=0.5)
-eof
-%>
-
-will only be sent to the server about half of the time, but it will be
-multipled by the sample rate to provide an estimate of the real data.
-
-## Tags
-
-Tags are a Datadog specific extension to StatsD. They allow you to tag a metric
-with a dimension that's meaningful to you and slice and dice along that
-dimension in your graphs. For example, if you wanted to measure the
-performance of two video rendering algorithms, you could tag the rendering time
-metric with the version of the algorithm you used.
-
-
-Since tags are an extension to StatsD, so you'll need to use a client that
-supports them.
-
-
-<%= python <<eof
-
-# Randomly choose which rendering function we want to use ...
-if random() < 0.5:
-    renderer = old_slow_renderer
-    version = 'old'
-else:
-    renderer = new_shiny_renderer
-    version = 'new'
-
-start_time = time()
-renderer()
-duration = time() - start_time
-dog.histogram('rendering.duration', duration, tags=[version])
-eof
-%>
-
-## Events
-You can post events to your Datadog event stream. You can tag them, set priority and even aggregate them with other events.
-
-Mandatory fields:
-
-  - `title` (String) — Event title.
-  - `text` (String) — Event text. Supports line breaks.
-
-Events are aggregated on the Event Stream based on: <br/>
-'hostname/source_type/aggregation_key'<br/>
-
-<%= python <<eof
-
-# Post a simple message
-statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
-
-# Cry for help
-statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
-eof
-%>
-
-#### Fields
-- Mandatory:
-  - Event title.
-  - Event text. Supports line breaks.
-- Optional:
-  - `date_happened` (Time, None) — default: None — Assign a POSIX timestamp in seconds to the event. Default is now when none.
-  - `hostname` (String, None) — default: None — Assign a hostname to the event.
-  - `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
-  - `priority` (String, None) — default: 'normal' — Can be 'normal' or 'low'.
-  - `source_type_name` (String, None) — default: None — Assign a source type to the event.
-  - `alert_type` (String, None) — default: 'info' — Can be 'error', 'warning', 'info' or 'success'.
-  - `tags` - (Array\[str\], None) — default: None — An array of tags
-
-## Configuration
-
-DogStatsD supports the following option, that can be tweaked in the
-Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
-configuration file</a>:
-
-    # The port DogStatsD runs on. If you change this, make your the apps sending to
-    # it change as well.
-    dogstatsd_port: 8125
-
-## Datagram Format
+Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in other DogStatsD client libraries.
 
 ### Metrics
 
-If you want to send metrics to DogStatsD in your own way, here is the format of
-the packets:
+The first three metrics types—gauges, counters, and timers—will be familiar to StatsD users. The last two—histograms and sets—are specific to DogStatsD.
+
+#### Gauges
+
+Gauges measure the ebb and flow of a particular metric value over time, like the number of active users on a website:
+
+<%= python <<EOF
+from datadog import statsd
+
+statsd.gauge('users.active', get_active_users())
+EOF
+%>
+
+#### Counters
+
+Counters track how many times something happened _per second_, like the rate of page views for a website:
+
+<%= python <<EOF
+from datadog import statsd
+
+def render_page():
+  statsd.increment('mywebsite.page_views') # add 1
+  # Render the page...
+EOF
+%>
+
+With this one line of code we can start graphing the data:
+
+<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%"/>
+
+DogStatsD normalizes counters over the flush interval to report
+per-second units. In the graph above, the marker is reporting
+35.33 web page views per second at ~15:24. In contrast, if one person visited
+the webpage each second, the graph would be a flat line at y = 1.
+
+To increment or measure values over time rather than per second, use a gauge.
+
+#### Timers
+
+Timers measure the amount of time a piece of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
+
+<%= python <<EOF
+from datadog import statsd
+
+@statsd.timed('mywebsite.page_render.time')
+def render_page():
+  # Render the page...
+EOF
+%>
+
+or with a context manager:
+
+<%= python <<EOF
+from datadog import statsd
+
+def render_page():
+  # First some stuff we don't want to time
+  boilerplate_setup()
+
+  # Now start the timer
+  with statsd.timed('mywebsite.page_render.time'):
+    # Render the page...
+EOF
+%>
+
+In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
+
+- `mywebsite.page_render.time.count` - the number of times the render time was sampled
+- `mywebsite.page_render.time.avg` - the average render time
+- `mywebsite.page_render.time.median` - the median render time
+- `mywebsite.page_render.time.max` - the maximum render time
+- `mywebsite.page_render.time.95percentile` - the 95th percentile render time
+
+Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see next section), you'll be sending the same data to Datadog.
+
+#### Histograms
+
+Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
+
+<%= python <<EOF
+from datadog import statsd
+
+...
+start_time = time.time()
+page = render_page()
+duration = time.time() - start_time
+statsd.histogram('mywebsite.page_render.time', duration)
+
+def render_page():
+  # Render the page...
+EOF
+%>
+
+This will produce the same 5 metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
+
+But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
+
+<%= python <<EOF
+
+def handle_file(file):
+  # calculate file_size...
+  # ..
+  # .
+
+  statsd.histogram('mywebsite.user_uploads.file_size', file_size)
+  return file_size
+EOF
+%>
+
+Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
+
+#### Sets
+
+Sets count the number of unique elements in a group. To track the number of unique visitors 
+to your site, use a set:
+
+<%= python <<EOF
+def login(self, user_id):
+    statsd.set('users.uniques', user_id)
+    # Now log the user in ...
+EOF
+%>
+
+Sets are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
+
+### Metric option: Sample Rates
+
+Since the overhead of sending UDP packets can be too great for some performance
+intensive code paths, DogStatsD clients support sampling,
+i.e. only sending metrics a percentage of the time. The following code sends
+a histogram metric only about half of the time:
+
+<%= python <<EOF
+dog.histogram('my.histogram', 1, sample_rate=0.5)
+EOF
+%>
+
+Before sending the metric to Datadog, DogStatsD will use the `sample_rate` to 
+correct the metric value, i.e. to estimate what it would have been without sampling.
+
+You can specify a sample rate for any type of metric.
+
+## Events
+
+DogStatsD can emit events to your Datadog event stream. A common use case is to emit events when rarely-visited code paths execute, like errors and excetions:
+
+<%= python <<EOF
+from datadog import statsd
+
+def render_page():
+  try:
+    # Render the page...
+    # ..
+  except RenderError as err:
+    statsd.event('Page render error!', err.message, alert_type='error')
+EOF
+%>
+
+## Service Checks
+
+Finally, DogStatsD can send service checks to Datadog. You can use checks to track the status of services your application depends on:
+
+<%= python <<EOF
+from datadog import statsd
+
+conn = get_redis_conn()
+if not conn:
+  statsd.service_check('mywebsite.can_connect_redis', statsd.CRITICAL)
+else:
+  statsd.service_check('mywebsite.can_connect_redis', statsd.OK)
+  # Do your redis thing...
+EOF
+%>
+
+## Tagging
+
+You can add tags to any metric, event, or service check you send to DogStatsD. For example, you could compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+<%= python <<EOF
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things (maybe faster?) here ...
+EOF
+%>
+
+Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
+
+## Datagram Format
+
+This section specifies the raw datagram format for each data type DogStatsD accepts. You don't need to know this if
+you're using any of the DogStatsD client libraries, but if you want to send data to DogStatsD without the libraries
+or you're writing your own library, here's how to format the data.
+
+### Metrics
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-Here's  breakdown of the fields:
+- `metric.name` — a string with no colons, bars, or @ characters. Must fit our [naming policy](http://docs.datadoghq.com/faq/#api).
+- `value` — an integer or float
+- `type` — `c` for counter, `g` for gauge, `h` for histogram, `ms` for timer, `s` for set.
+- `sample rate` (optional) — a float between 0 and 1, inclusive.
+- `tags` (optional) — a comma seperated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a tag like `device:foobar`.
 
-- `metric.name` should be a String with no colons, bars or @ characters and fit our [naming policy](http://docs.datadoghq.com/faq/#api).
-- `value` should be a number
-- type should be `c` for Counter, `g` for Gauge, `h` for Histogram, `ms` for
-  Timer or `s` for Set.
-- sample rate is optional and should be a float between 0 and 1 inclusive.
-- tags are optional, and should be a comma seperated list of tags. Colons are
-  used for key value tags. Note that the key `device` is reserved, tags like "device:xyc" will be dropped by Datadog.
-
-Here are some example datagrams and comments explaining them:
+Here are some example datagrams:
 
     # Increment the page.views counter.
     page.views:1|c
@@ -290,13 +319,10 @@ Here are some example datagrams and comments explaining them:
 
 ### Events
 
-If you want to send events to DogStatsD in your own way, here is the format of
-the packets:
-
 `_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
-#### Fields
-- Mandatory:
+- Required:
+  - `_e` - the datagram must begin with `_e`
   - `title` — Event title.
   - `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
 - Optional: `|[key]:[value]`
@@ -311,23 +337,18 @@ the packets:
 
 ### Service Checks
 
-If you want to send service checks to DogStatsD, here is the format of the packets:
-
 `_sc|name|status|metadata`
 
-#### Fields
-- Mandatory:
-  - `name` — service check name string, shouldn't contain any `|`
-  - `status` — digit corresponding to the status you're reporting (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
-- Optional metadata `|metadata`:
-It's either nothing, or a combination of those suffixes:
-  - `|d:timestamp` — Assign a timestamp to the check. Default is the current Unix epoch timestamp when not supplied.
-  - `|h:hostname` — default: None — Assign a hostname to the event.
-  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br />Note: The `:` in tags is part of the tag list string and
-  has no parsing purpose like for the other parameters.</em></strong>
-  - `|m:service_check_message` — A message describing the current state of the service check. <em>This field should always be
-positioned last among the metadata fields.</em>
-
+- `_sc` — the datagram must begin with `_sc`
+- `name` — service check name string, shouldn't contain any `|`
+- `status` — digit corresponding to the status you're reporting (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
+- `metadata` (optional) — provide any of the following:
+  - `d:timestamp` — Assign a timestamp to the check. Default is the current Unix epoch timestamp.
+  - `h:hostname` — Assign a hostname to the event. No default.
+  - `#tag1:value1,tag2,tag3:value3` — <strong><em><br />Note: The `:` in tags is part of the tag list string and
+  has no parsing purpose like for the other parameters.</em></strong> No default.
+  - `m:service_check_message` — A message describing the current state of the service check. <em>This field should always be
+positioned last among the metadata fields.</em> No default.
 
 
 ## Source
