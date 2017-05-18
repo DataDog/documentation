@@ -92,7 +92,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 * **Native Database Integration**
 
-  1.  Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory.
+  1.  Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory. Please complete the setup steps for the database found in their relevant documents( [MySQL](http://docs.datadoghq.com/integrations/mysql/), [PostgreSQL](http://docs.datadoghq.com/integrations/postgresql/), [SQL Server](http://docs.datadoghq.com/integrations/sqlserver/) )  
       a.  If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
 
           init_config:
