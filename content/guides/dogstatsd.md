@@ -178,20 +178,18 @@ def render_page():
 EOF
 %>
 
-This will produce the same 5 metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
+This produces the same five metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
 
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
 <%=python <<EOF
 from datadog import statsd
 
-def handle_file(file):
-  # calculate file_size...
-  # ..
-  # .
+def handle_file(file, file_size):
+  # Handle the file...
 
   statsd.histogram('mywebsite.user_uploads.file_size', file_size)
-  return file_size
+  return
 EOF
 %>
 
@@ -223,10 +221,10 @@ dog.histogram('my.histogram', 1, sample_rate=0.5)
 EOF
 %>
 
-Before sending the metric to Datadog, DogStatsD will use the `sample_rate` to 
+Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to 
 correct the metric value, i.e. to estimate what it would have been without sampling.
 
-You can specify a sample rate for any type of metric.
+You can specify a sample rate for any metric type.
 
 ## Events
 
