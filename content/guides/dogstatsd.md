@@ -39,7 +39,7 @@ extensions:
 ## How It Works
 
 DogStatsD accepts your custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application 
-can fire metrics at DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
+can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 <p>
 <img src="/static/images/dogstatsd.png"/>
