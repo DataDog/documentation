@@ -84,7 +84,7 @@ Restart DogStatsD to effect the change.
 
 ## Data Types
 
-While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section gives you an idea of how (and for what) you might use each type.
+While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section shows typical use cases for each type.
 
 Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in other DogStatsD client libraries.
 
