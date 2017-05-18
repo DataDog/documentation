@@ -100,7 +100,7 @@ EOF
 
 #### Counters
 
-Counters track how many times something happens _per second_, like page views for a website:
+Counters track how many times something happens _per second_, like page views:
 
 <%= python <<EOF
 from datadog import statsd
@@ -124,7 +124,7 @@ To increment or measure values over time rather than per second, use a gauge.
 
 #### Timers
 
-Timers measure the amount of time a piece of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
+Timers measure the amount of time a section of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
 
 <%= python <<EOF
 from datadog import statsd
@@ -158,7 +158,7 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 - `mywebsite.page_render.time.max` - the maximum render time
 - `mywebsite.page_render.time.95percentile` - the 95th percentile render time
 
-Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see next section), you'll be sending the same data to Datadog.
+Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see below), you'll be sending the same data to Datadog.
 
 #### Histograms
 
