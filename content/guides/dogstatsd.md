@@ -1,5 +1,5 @@
 ---
-title: What is DogStatsD?
+title: DogStatsD
 kind: documentation
 sidebar:
   nav:
@@ -42,7 +42,7 @@ DogStatsD accepts custom metrics, events, and service checks over UDP and period
 <img src="/static/images/dogstatsd.png"/>
 </p>
 
-As it receives data, DogStatsD aggregates multiple data points for a given metric into a single
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single
 data point over a period of time called the flush interval. Let's walk through an
 example to see how this works.
 
@@ -58,7 +58,7 @@ eof
 If this function executes one hundred times during a flush interval (ten
 seconds, by default), it will send DogStatsD one hundred UDP packets that say
 "increment the counter 'database.query.count'". DogStatsD will aggregate these
-points into a single metric value—100 in this case—and send it to Datadog
+points into a single metric value—100, in this case—and send it to Datadog
 where it will be stored and available for graphing alongside the rest of your metrics.
 
 ## Set Up
@@ -182,7 +182,7 @@ This will produce the same 5 metrics shown in the Timers section above: count, a
 
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
-<%= python <<EOF
+<%=python <<EOF
 from datadog import statsd
 
 def handle_file(file):
