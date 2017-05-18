@@ -84,7 +84,7 @@ Restart DogStatsD to effect the change.
 
 ## Data Types
 
-While StatsD only accepts metrics, DogStatsD accepts all three data types that Datadog supports: metrics, events, and service checks. This section briefly describes each data type and gives you an idea of how (and what) you might instrument for each type.
+While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section gives you an idea of how (and for what) you might use each type.
 
 Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in other DogStatsD client libraries.
 
@@ -94,7 +94,7 @@ The first three metrics types—gauges, counters, and timers—will be familiar 
 
 #### Gauges
 
-Gauges measure the ebb and flow of a particular metric value over time, like the number of active users on a website:
+Gauges track the ebb and flow of a particular metric value over time, like the number of active users on a website:
 
 <%= python <<EOF
 from datadog import statsd
@@ -105,7 +105,7 @@ EOF
 
 #### Counters
 
-Counters track how many times something happened _per second_, like the rate of page views for a website:
+Counters track how many times something happens _per second_, like page views for a website:
 
 <%= python <<EOF
 from datadog import statsd
@@ -188,6 +188,7 @@ This will produce the same 5 metrics shown in the Timers section above: count, a
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
 <%= python <<EOF
+from datadog import statsd
 
 def handle_file(file):
   # calculate file_size...
@@ -234,7 +235,7 @@ You can specify a sample rate for any type of metric.
 
 ## Events
 
-DogStatsD can emit events to your Datadog event stream. A common use case is to emit events when rarely-visited code paths execute, like errors and excetions:
+DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and excetions in Datadog:
 
 <%= python <<EOF
 from datadog import statsd
@@ -250,7 +251,7 @@ EOF
 
 ## Service Checks
 
-Finally, DogStatsD can send service checks to Datadog. You can use checks to track the status of services your application depends on:
+Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
 <%= python <<EOF
 from datadog import statsd
@@ -291,30 +292,30 @@ or you're writing your own library, here's how to format the data.
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-- `metric.name` — a string with no colons, bars, or @ characters. Must fit our [naming policy](http://docs.datadoghq.com/faq/#api).
-- `value` — an integer or float
-- `type` — `c` for counter, `g` for gauge, `h` for histogram, `ms` for timer, `s` for set.
+- `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy](http://docs.datadoghq.com/faq/#api).
+- `value` — an integer or float.
+- `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
 - `sample rate` (optional) — a float between 0 and 1, inclusive.
 - `tags` (optional) — a comma seperated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a tag like `device:foobar`.
 
 Here are some example datagrams:
 
-    # Increment the page.views counter.
+    # Increment the page.views counter
     page.views:1|c
 
     # Record the fuel tank is half-empty
     fuel.level:0.5|g
 
-    # Sample a the song length histogram half of the time.
+    # Sample the song length histogram half of the time
     song.length:240|h|@0.5
 
-    # Track a unique visitor to the site.
+    # Track a unique visitor to the site
     users.uniques:1234|s
 
-    # Increment the users online counter tagged by country of origin.
+    # Increment the active users counter, tag by country of origin
     users.online:1|c|#country:china
 
-    # An example putting it all together.
+    # Track active China users and use a sample rate
     users.online:1|c|@0.5|#country:china
 
 ### Events
@@ -324,7 +325,7 @@ Here are some example datagrams:
 - Required:
   - `_e` - the datagram must begin with `_e`
   - `title` — Event title.
-  - `text` — Event text. Supports line breaks.
+  - `text` — Event text. Escape the slash in any line breaks (`\\n`).
 - Optional: `|[key]:[value]`
   - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
   - `|h:hostname` — default: None — Assign a hostname to the event.
@@ -351,10 +352,12 @@ Here are some example datagrams:
 positioned last among the metadata fields.</em> No default.
 
 
-## Source
+## Related Reading
 
-DogStatsD is open-sourced under the BSD License. Check out the source
-[here](https://github.com/DataDog/dd-agent).
+The [Libraries page](/libraries/) can help you find a DogStatsD client library to suit your needs.
+
+[**DogStatsD source code**](https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py) — DogStatsD is open-sourced under the BSD License. 
+
 
 
 
