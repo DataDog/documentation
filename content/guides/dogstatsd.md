@@ -36,7 +36,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 
 ## How It Works
 
-DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application can fire metrics at DogStatsD and resume its work without waiting for a response. If DogStatsD ever crashes or starts to perform poorly, your application won't skip a beat.
+DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 <p>
 <img src="/static/images/dogstatsd.png"/>
