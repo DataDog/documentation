@@ -94,6 +94,15 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 <img src="/static/images/anomalies/alg_comparison_new_metric.png" style="width:100%; border:1px solid #777777"/>
 
 
+### 4. Advanced Options
+
+As described above, both the _agile_ and _robust_ algorithms leverage seasonal patterns in your data when detecting anomalies. By default, these algorithms look only for weekly seasonal patterns over the past six weeks. For most cases, this works well, but what if you know that your metric exhibits hourly seasonal patterns, not weekly patterns? You can optionally specify one or both of the following keyword arguments in the JSON tab of the query editor of a dashboard:
+
+* `seasonality`: Valid options are `'weekly'`, `'daily'`, or `'hourly'`. This tells the algorithm how often the metric's seasonal pattern repeats itself.
+* `lookback`: Valid options are integers from 3 to 10. This tells the algorithm how many past seasons to look at.
+
+For example, this is a valid anomalies query that uses both of the keyword arguments: `anomalies(gunicorn.requests{*}.as_count(), 'agile', 3, seasonality='daily', lookback=7)`.
+
 ## Frequently Asked Questions
 
 ### Should I use anomaly detection for everything?
