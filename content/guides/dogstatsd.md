@@ -315,40 +315,34 @@ Here are some example datagrams:
 
 ### Events
 
-`_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2`
+`_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
-- Required:
-  - `_e` - the datagram must begin with `_e`
-  - `title` — Event title.
-  - `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
-- Optional: `|[key]:[value]`
-  - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
-  - `|h:hostname` — default: None — Assign a hostname to the event.
-  - `|k:aggregation_key` — default: None — Assign an aggregation key to the event, to group it with some others.
-  - `|p:priority` — default: 'normal' — Can be “normal” or “low”.
-  - `|s:source_type_name` — default: None — Assign a source type to the event.
-  - `|t:alert_type` — default: 'info' — Can be “error”, “warning”, “info” or “success”.
-  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br/>
-  Note: The `:` in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong>
+- `_e` - The datagram must begin with `_e`
+- `title` — Event title.
+- `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
+- `|d:timestamp` (optional) — Add a timestamp to the event. Default is the current Unix epoch timestamp.
+- `|h:hostname` (optional) - Add a hostname to the event. No default.
+- `|k:aggregation_key` (optional) — Assign an aggregation key to the event, to group it with some others. No default.
+- `|p:priority` (optional) — Set to 'normal' or 'low'. Default 'normal'.
+- `|s:source_type_name` (optional) - Add a source type to the event. No default.
+- `|t:alert_type` (optional) — Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
+- `|#tag1:value1,tag2,tag3:value3...` (optional)— <strong><em><br/>
+  The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
 
 ### Service Checks
 
-`_sc|name|status|metadata`
+`_sc|name|status|d:timestamp|h:hostname|#tag1:value1,tag2,tag3:value3,...|m:service_check_message`
 
 - `_sc` — the datagram must begin with `_sc`
 - `name` — service check name string, shouldn't contain any `|`
 - `status` — digit corresponding to the status you're reporting (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
-- `metadata` (optional) — provide any of the following:
-  - `d:timestamp` — Assign a timestamp to the check. Default is the current Unix epoch timestamp.
-  - `h:hostname` — Assign a hostname to the event. No default.
-  - `#tag1:value1,tag2,tag3:value3` — <strong><em><br />Note: The `:` in tags is part of the tag list string and
-  has no parsing purpose like for the other parameters.</em></strong> No default.
-  - `m:service_check_message` — A message describing the current state of the service check. <em>This field should always be
-positioned last among the metadata fields.</em> No default.
-
+- `d:timestamp` (optional) — Add a timestamp to the check. Default is the current Unix epoch timestamp.
+- `h:hostname` (optional) — Add a hostname to the event. No default.
+- `#tag1:value1,tag2,tag3:value3` (optional) — <strong><em><br />The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
+- `m:service_check_message` (optional) — Add a message describing the current state of the service check. <em>This field MUST be positioned last among the metadata fields.</em> No default.
 
 ## Related Reading
 
-The [Libraries page](/libraries/) can help you find a DogStatsD client library to suit your needs.
+[Libraries page](/libraries/) — find a DogStatsD client library to suit your needs.
 
-[**DogStatsD source code**](https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py) — DogStatsD is open-sourced under the BSD License.
+[DogStatsD source code](https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py) — DogStatsD is open-sourced under the BSD License.
