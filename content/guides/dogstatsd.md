@@ -99,7 +99,7 @@ Gauges track the ebb and flow of a particular metric value over time, like the n
 <%= python <<EOF
 from datadog import statsd
 
-statsd.gauge('users.active', get_active_users())
+statsd.gauge('mywebsite.users.active', get_active_users())
 EOF
 %>
 
