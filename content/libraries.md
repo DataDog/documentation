@@ -114,7 +114,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
-### Community Tracing Libraries
+### Community Tracing (APM) Libraries
 
 #### C\#
 {: #community-tracing-csharp}
@@ -146,7 +146,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### Zipkin
 {: #community-tracing-zipkin}
 
-  * [dd-zipkin-proxy][95] - A simple Zipkin to datadog proxy for Datadog's new tracing feature.
+  * [dd-zipkin-proxy][95] - A simple Zipkin-to-Datadog proxy.
 
 ### Community Integration Libraries
 
