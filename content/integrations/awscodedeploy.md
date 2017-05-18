@@ -20,7 +20,7 @@ Enable this integration to see AWS CodeDeploy deployment events and metrics in D
 
 1. If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 2. Install the integration [on the CodeDeploy tile](https://app.datadoghq.com/account/settings#integrations/amazon_codedeploy).
-3. Add the `"codedeploy:List*"` and `"codedeploy:BatchGetDeployments"` actions to your Datadog policy in AWS.
+3. Add the `"codedeploy:List*"` and `"codedeploy:BatchGet*"` actions to your Datadog policy in AWS.
 
 # Metrics
 
