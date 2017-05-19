@@ -213,7 +213,7 @@ EOF
 
 Sets are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
-### Metric option: Sample Rates
+#### Metric option: Sample Rates
 
 Since the overhead of sending UDP packets can be too great for some performance
 intensive code paths, DogStatsD clients support sampling,
@@ -230,7 +230,7 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 You can specify a sample rate for any metric type.
 
-## Events
+### Events
 
 DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and excetions in Datadog:
 
@@ -246,7 +246,7 @@ def render_page():
 EOF
 %>
 
-## Service Checks
+### Service Checks
 
 Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
