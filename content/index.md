@@ -49,7 +49,7 @@ our support team by mentioning [@support-datadog][5] in a comment on Datadog its
 and we'll take care of it.
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /guides/metrics/
+[2]: /guides/dogstatsd/
 [3]: /graphing/
 [4]: /overview/
 [5]: http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog

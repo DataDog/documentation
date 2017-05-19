@@ -472,7 +472,7 @@ sum:page.views{domain:example.com}
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリクスの送信"ページの[tag](/ja/guides/metrics/#tags)の項目を参照してください。 AWSのタグ付けに関する詳細につては、["AWS Integration"](/ja/integrations/aws/)のページを参照してください。
+タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリクスの送信"ページの[tag](/ja/guides/tagging)の項目を参照してください。 AWSのタグ付けに関する詳細につては、["AWS Integration"](/ja/integrations/aws/)のページを参照してください。
 
 <!-- ====================================================================== -->
 
@@ -814,23 +814,23 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
 
 <h4 id="custom-metrics">How do I submit custom metrics?</h4>
 <p>
-You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
+You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/dogstatsd/">here</a>.
 </p>-->
 
 ### メトリクスについて {#metrics}
 
 #### カスタムメトリクスはどのように送信すればよいですか。 {#custom-metrics}
 
-カスタムメトリクスは、DogStatsDクライアントを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページを参照してください。
+カスタムメトリクスは、DogStatsDクライアントを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/dogstatsd/)のページを参照してください。
 
 <!--<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
 <p>
-StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
+StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/dogstatsd/#counters">here</a>.
 </p>-->
 
 #### イベントの発生回数をカウントしているメトリクスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
 
-DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページの[カウンタ](/ja/guides/metrics/#counters)を参照してください。
+DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/dogstatsd/)のページの[カウンタ](/ja/guides/dogstatsd/#counters)を参照してください。
 
 <!--<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
 <p>
@@ -866,7 +866,7 @@ This depends on the medium you use to send metrics.
 メトリクスを送信するために使う方法によって異なります。
 
 -	Agent Checkを使って送信する場合は、[Agent Checkの書き方](/ja/guides/agent_checks/)のページを参照してください。
--	DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページを参照してください。d
+-	DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリクスの送信](/ja/guides/dogstatsd/)のページを参照してください。d
 -	APIを介して送信する場合は、[API Reference](/ja/api/#metrics-post)のページを参照してください。
 
 <!--<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
