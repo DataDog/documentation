@@ -336,7 +336,7 @@ Here are some example datagrams:
     # Send an exception
     _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
 
-    # Send an event with text containing newlines
+    # Send an event with a newline in the text
     _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 
 ### Service Checks
@@ -354,7 +354,7 @@ Here are some example datagrams:
 Here's an example datagram:
 
     # Send a CRITICAL status for a remote connection
-    _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis instance refused connection
+    _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
 
 ## Related Reading
