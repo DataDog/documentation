@@ -9,7 +9,7 @@ git_integration_title: statsd
 
 This Agent check monitors the availability and uptime of non-Datadog StatsD servers. It also tracks the rate StatsD servers are receiving metrics.
 
-This check does NOT forward application metrics from StatsD servers to Datadog. See [that metrics guide] to learn how to do that.
+This check does NOT forward application metrics from StatsD servers to Datadog.
 
 # Configuration
 
