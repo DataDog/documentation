@@ -3,7 +3,6 @@ title: DogStatsD
 kind: documentation
 sidebar:
   nav:
-    - header: Official Libraries
     - text: How It Works
       href: "#how-it-works"
     - text: Set Up
@@ -35,6 +34,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Tagging
 
 ## How It Works
+{: #howitworks}
 
 DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
@@ -62,6 +62,7 @@ points into a single metric value—100, in this case—and send it to Datadog
 where it will be stored and available for graphing alongside the rest of your metrics.
 
 ## Set Up
+{: #setup}
 
 Once you have the Datadog Agent installed on your application servers/containers—or anywhere
 your application can reliably reach—grab the [DogStatsD client library](/libraries/) for your
@@ -78,16 +79,19 @@ Agent configuration file</a>:
 Restart DogStatsD to effect the change.
 
 ## Data Types
+{: #datatypes}
 
 While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section shows typical use cases for each type.
 
 Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in other DogStatsD client libraries.
 
 ### Metrics
+{: #metrics}
 
 The first three metrics types—gauges, counters, and timers—will be familiar to StatsD users. The last two—histograms and sets—are specific to DogStatsD.
 
 #### Gauges
+{: #gauges}
 
 Gauges track the ebb and flow of a particular metric value over time, like the number of active users on a website:
 
@@ -99,6 +103,7 @@ EOF
 %>
 
 #### Counters
+{: #counters}
 
 Counters track how many times something happens _per second_, like page views:
 
@@ -123,6 +128,7 @@ the webpage each second, the graph would be a flat line at y = 1.
 To increment or measure values over time rather than per second, use a gauge.
 
 #### Timers
+{: #timers}
 
 Timers measure the amount of time a section of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
 
@@ -161,6 +167,7 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see below), you'll be sending the same data to Datadog.
 
 #### Histograms
+{: #histograms}
 
 Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
 
@@ -196,6 +203,7 @@ EOF
 Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
 #### Sets
+{: #sets}
 
 Sets count the number of unique elements in a group. To track the number of unique visitors 
 to your site, use a set:
@@ -210,6 +218,7 @@ EOF
 Sets are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
 #### Metric option: Sample Rates
+{: #samplerate}
 
 Since the overhead of sending UDP packets can be too great for some performance
 intensive code paths, DogStatsD clients support sampling,
@@ -227,6 +236,7 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 **Sample rates only work with counter, histogram, and timer metrics.**
 
 ### Events
+{: #events}
 
 DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and excetions in Datadog:
 
@@ -243,6 +253,7 @@ EOF
 %>
 
 ### Service Checks
+{: #servicechecks}
 
 Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
@@ -259,6 +270,7 @@ EOF
 %>
 
 ## Tagging
+{: #tagging}
 
 You can add tags to any metric, event, or service check you send to DogStatsD. For example, you could compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
@@ -276,12 +288,14 @@ EOF
 Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
 ## Datagram Format
+{: #dataformats}
 
 This section specifies the raw datagram format for each data type DogStatsD accepts. You don't need to know this if
 you're using any of the DogStatsD client libraries, but if you want to send data to DogStatsD without the libraries
 or you're writing your own library, here's how to format the data.
 
 ### Metrics
+{: #metricformat}
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
@@ -312,6 +326,7 @@ Here are some example datagrams:
     users.online:1|c|@0.5|#country:china
 
 ### Events
+{: #eventformat}
 
 `_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
@@ -336,6 +351,7 @@ Here are some example datagrams:
     _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 
 ### Service Checks
+{: #checkformat}
 
 `_sc|name|status|d:timestamp|h:hostname|#tag1:value1,tag2,tag3:value3,...|m:service_check_message`
 

@@ -7,7 +7,7 @@ newhlevel: true
 
 # Overview
 
-The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/guides/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
+The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. Please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
 
 Datadog offers two libraries to assist you with the implementation of Ruby application metrics:
 

@@ -76,7 +76,7 @@ GitHubの[issues][9]でお知らせください。メッセージ欄の内容を
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /guides/metrics/
+[2]: /guides/dogstatsd/
 [3]: /graphing/
 [4]: /overview/
 [5]: https://app.datadoghq.com/event/stream
@@ -84,7 +84,7 @@ GitHubの[issues][9]でお知らせください。メッセージ欄の内容を
 [7]: /help/#irc
 [8]: https://help.datadoghq.com/hc/en-us/requests/new
 [9]: https://github.com/DataDog/documentation/issues
-[102]: /ja/guides/metrics/
+[102]: /ja/guides/dogstatsd/
 [103]: /ja/graphing/
 [104]: /ja/guides/overview/
 [106]: /ja/help/#email

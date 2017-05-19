@@ -275,7 +275,7 @@ For information on AWS tagging, please see [here][architecture-3].
 Admins have just a few extra capabilities that standard users do not have. This includes access to billing info, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
 
 [architecture-1]: /hostnames/
-[architecture-2]: /guides/metrics/#tags
+[architecture-2]: /guides/tagging
 [architecture-3]: /integrations/aws/
 
 <!--
@@ -652,8 +652,8 @@ For example, let's say you break down used memory by host, you'll get one
 time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 
-[metrics-1]: /guides/metrics/
-[metrics-2]: /guides/metrics/#counters
+[metrics-1]: /guides/dogstatsd
+[metrics-2]: /guides/dogstatsd/#counters
 [metrics-3]: /guides/logs/
 [metrics-4]: /guides/agent_checks/#sending-metrics
 [metrics-5]: /guides/dogstatsd/#metrics
