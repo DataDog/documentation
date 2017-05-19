@@ -228,7 +228,7 @@ EOF
 Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to 
 correct the metric value, i.e. to estimate what it would have been without sampling.
 
-You can specify a sample rate for any metric type.
+**Sample rates only work with counter, histogram, and timer metrics.**
 
 ### Events
 
@@ -292,7 +292,7 @@ or you're writing your own library, here's how to format the data.
 - `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy](http://docs.datadoghq.com/faq/#api).
 - `value` — an integer or float.
 - `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
-- `sample rate` (optional) — a float between 0 and 1, inclusive.
+- `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics.
 - `tags` (optional) — a comma seperated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a tag like `device:foobar`.
 
 Here are some example datagrams:
@@ -317,12 +317,12 @@ Here are some example datagrams:
 
 ### Events
 
-`_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2`
+`_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
 - `_e` - the datagram must begin with `_e`
 - `title` — Event title.
 - `text` — Event text. Escape the slash in any line breaks (`\\n`).
-- `|d:date_happened` (optional) — Add a timestamp to the event. Default is the current Unix epoch timestamp.
+- `|d:timestamp` (optional) — Add a timestamp to the event. Default is the current Unix epoch timestamp.
 - `|h:hostname` (optional) - Add a hostname to the event. No default.
 - `|k:aggregation_key` (optional) — Assign an aggregation key to the event, to group it with some others. No default.
 - `|p:priority` (optional) — Set to 'normal' or 'low'. Default 'normal'.
@@ -331,19 +331,30 @@ Here are some example datagrams:
 - `|#tag1:value1,tag2,tag3:value3...` (optional)— <strong><em><br/>
   The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
 
+Here are some example datagrams:
+
+    # Send an exception
+    _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
+
+    # Send an event with text containing newlines
+    _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
+
 ### Service Checks
 
-`_sc|name|status|metadata`
+`_sc|name|status|d:timestamp|h:hostname|#tag1,tag2:val2|m:message`
 
 - `_sc` — the datagram must begin with `_sc`
-- `name` — service check name string, shouldn't contain any `|`
-- `status` — digit corresponding to the status you're reporting (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
-- `metadata` (all optional) — provide any of the following:
-  - `d:timestamp` — Add a timestamp to the check. Default is the current Unix epoch timestamp.
-  - `h:hostname` — Add a hostname to the event. No default.
-  - `#tag1:value1,tag2,tag3:value3` — <strong><em><br />The colon in tags is part of the tag list string and
-  has no parsing purpose like for the other parameters.</em></strong> No default.
-  - `m:service_check_message` — Add a message describing the current state of the service check. <em>This field MUST be positioned last among the metadata fields.</em> No default.
+- `name` — Service check name.
+- `status` — Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3)
+- `d:timestamp` (optional) — Add a timestamp to the check. Default is the current Unix epoch timestamp.
+- `h:hostname` (optional) — Add a hostname to the event. No default.
+- `#tag1:value1,tag2,tag3:value3` (optional) — <strong><em><br />The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
+- `m:service_check_message` (optional) — Add a message describing the current state of the service check. <em>This field MUST be positioned last among the metadata fields.</em> No default.
+
+Here's an example datagram:
+
+    # Send a CRITICAL status for a remote connection
+    _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis instance refused connection
 
 
 ## Related Reading
