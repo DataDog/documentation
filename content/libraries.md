@@ -155,6 +155,16 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
+#### Consul
+{: #community-integration-consul}
+
+  * Publish consul service counts into Datadog via dogstatsd with [this library][96].
+
+#### Dogscaler
+{: #community-integration-dogscaler}
+
+  * Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
+
 #### FreeSwitch
 {: #community-integration-freeswitch}
 
@@ -289,3 +299,5 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [93]: https://github.com/gchaincl/dd-go-opentracing
    [94]: https://github.com/jcchavezs/dd-trace-php/tree/master/src/DdTrace
    [95]: https://github.com/flachnetz/dd-zipkin-proxy
+   [96]: https://github.com/zendesk/consul2dogstats
+   [97]: https://github.com/cvent/dogscaler
