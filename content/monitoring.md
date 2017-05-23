@@ -426,6 +426,10 @@ triggering scope into the message of multi alerts.
 
     ![short template var trigger](/static/images/monitor/templatevar_short.png)
 
+    Note that content of template variables is escaped by default. If your variable
+    contains json or code that you would like to not escape, then use triple braces
+    instead of double braces (e.g. `{{{event.text}}}`).
+
 3. **Conditional variables for different triggering scopes**: You can have a
    monitor event display a different message depending on the group that's
    causing a notification.
