@@ -31,7 +31,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 the <a href="https://github.com/etsy/statsd">StatsD</a> protocol and adds a few Datadog-specific
 extensions:
 
-* Histogram and Set metric types
+* Histogram metric type
 * Service checks and Events
 * Tagging
 
@@ -92,7 +92,7 @@ Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/l
 ### Metrics
 {: #metrics}
 
-The first three metrics types—gauges, counters, and timers—will be familiar to StatsD users. The last two—histograms and sets—are specific to DogStatsD.
+The first four metrics types—gauges, counters, timers, and sets—will be familiar to StatsD users. The last one—histograms—is specific to DogStatsD.
 
 #### Gauges
 {: #gauges}
@@ -130,6 +130,19 @@ per-second units. In the graph above, the marker is reporting
 the webpage each second, the graph would be a flat line at y = 1.
 
 To increment or measure values over time rather than per second, use a gauge.
+
+#### Sets
+{: #sets}
+
+Sets count the number of unique elements in a group. To track the number of unique visitors 
+to your site, use a set:
+
+<%= python <<EOF
+def login(self, user_id):
+    statsd.set('users.uniques', user_id)
+    # Now log the user in ...
+EOF
+%>
 
 #### Timers
 {: #timers}
@@ -205,21 +218,6 @@ EOF
 %>
 
 Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
-
-#### Sets
-{: #sets}
-
-Sets count the number of unique elements in a group. To track the number of unique visitors 
-to your site, use a set:
-
-<%= python <<EOF
-def login(self, user_id):
-    statsd.set('users.uniques', user_id)
-    # Now log the user in ...
-EOF
-%>
-
-Sets are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
 #### Metric option: Sample Rates
 {: #samplerate}
