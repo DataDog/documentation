@@ -107,6 +107,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### R
 {: #community-r}
 
+  * [datadogr][98] - a simple R package to query for metrics.
   * [rdog][68] - an R package to analyze Datadog metrics into R.
 
 #### Scala
@@ -301,3 +302,4 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [95]: https://github.com/flachnetz/dd-zipkin-proxy
    [96]: https://github.com/zendesk/consul2dogstats
    [97]: https://github.com/cvent/dogscaler
+   [98]: https://cran.r-project.org/package=datadogr
