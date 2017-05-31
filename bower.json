@@ -1,0 +1,8 @@
+{
+  "name": "datadog",
+  "homepage": "https://www.datadoghq.com/",
+  "private": true,
+  "dependencies": {
+    "jquery": "1.11.1"
+  }
+}

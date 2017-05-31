@@ -1,0 +1,123 @@
+title: "Docs"
+baseURL: "http://localhost:1313/"
+
+# language
+languageCode: "en-us"
+defaultcontentlanguageinsubdir: false
+defaultcontentlanguage: "en"
+
+languages:
+  en:
+    weight: 1
+    menu:
+      main_references:
+        - identifier: menu_references_api
+          name: "API"
+          url: "/api/"
+          weight: -500
+        - identifier: menu_references_tracing
+          name: "Tracing"
+          url: "/tracing/"
+          weight: -500
+        - identifier: menu_references_libraries
+          name: ""
+          url: "/libraries/"
+          weight: -500
+        - identifier: menu_references_monitoring
+          name: ""
+          url: "/monitoring/"
+          weight: -500
+        - identifier: menu_references_graphing
+          name: ""
+          url: "/graphing/"
+          weight: -500
+        - identifier: menu_references_host_names
+          name: ""
+          url: "/hostnames/"
+          weight: -500
+        - identifier: menu_references_integrations
+          name: ""
+          url: "/integrations/"
+          weight: -500
+        - identifier: menu_references_dogstatsd
+          name: ""
+          url: "/guides/dogstatsd/"
+          weight: -500
+        - identifier: menu_references_examples
+          name: ""
+          url: "/examples/"
+          weight: -500
+        - identifier: menu_references_videos
+          name: ""
+          url: "/videos/"
+          weight: -500
+        - identifier: menu_references_billing
+          name: ""
+          url: "/guides/billing/"
+          weight: -500
+        - identifier: menu_references_faq
+          name: ""
+          url: "/faq/"
+          weight: -500
+  ja:
+    weight: 2
+    menu:
+      main_references:
+        - identifier: menu_references_api
+          name: "API"
+          url: "/api/"
+          weight: -500
+        - identifier: menu_references_tracing
+          name: "Tracing"
+          url: "/tracing/"
+          weight: -500
+        - identifier: menu_references_libraries
+          name: ""
+          url: "/libraries/"
+          weight: -500
+        - identifier: menu_references_monitoring
+          name: ""
+          url: "/monitoring/"
+          weight: -500
+        - identifier: menu_references_graphing
+          name: ""
+          url: "/graphing/"
+          weight: -500
+        - identifier: menu_references_host_names
+          name: ""
+          url: "/hostnames/"
+          weight: -500
+        - identifier: menu_references_integrations
+          name: ""
+          url: "/integrations/"
+          weight: -500
+        - identifier: menu_references_dogstatsd
+          name: ""
+          url: "/guides/dogstatsd/"
+          weight: -500
+        - identifier: menu_references_examples
+          name: ""
+          url: "/examples/"
+          weight: -500
+        - identifier: menu_references_videos
+          name: ""
+          url: "/videos/"
+          weight: -500
+        - identifier: menu_references_billing
+          name: ""
+          url: "/guides/billing/"
+          weight: -500
+        - identifier: menu_references_faq
+          name: ""
+          url: "/faq/"
+          weight: -500
+
+# build settings
+buildfuture: true
+builddrafts: true
+
+params:
+    footer_scripts:
+      - snowplow: false
+      - marketo: false
+      - adroll: false

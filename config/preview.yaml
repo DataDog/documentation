@@ -1,0 +1,10 @@
+---
+baseurl: https://corpsite-preview.datadoghq.com/
+buildfuture: true
+builddrafts: true
+params:
+  footer_scripts:
+    - snowplow: false
+    - tagmanager: true
+    - mixpanel: false
+  environment: preview

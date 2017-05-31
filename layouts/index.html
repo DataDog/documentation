@@ -1,0 +1,35 @@
+{{ partial "header.html" . }}
+{{ partial "navbar.html" . }}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
+                <ul class="nav nav-tabs nav-stacked sidebar">
+                {{ if ne .Site.Language.Lang "ja"}}
+                  <li class="nav-header">Documentation Search</li>
+                  <li>
+                    <form action="/search/">
+                      <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+                    </form>
+                  </li>
+                  {{ end }}
+
+                    {{ range $k, $v := (where (where .Site.Pages "Params.sidebar" "!=" nil) ".Site.Language.Lang" "!=" "ja" ) }}
+
+                       <li><a href="{{$v.Permalink}}">{{ $v.Title }} {{$v.Params.header }}</a></li>
+                    {{ end }}
+
+                    <%=show_table_of_contents%>
+
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 main">
+                main content
+            </div>
+        </div>
+
+    </div>
+
+{{ partial "container-footer.html" . }}
+{{ partial "footer.html" . }}

@@ -1,0 +1,128 @@
+- id: footer_hiring
+  translation: "人材募集中"
+
+- id: menu_guides
+  translation: "ガイド"
+
+- id: menu_references
+  translation: "レファレンス"
+
+- id: menu_references_api
+  translation: "APIレファレンス"
+
+- id: menu_references_tracing
+  translation: "Tracing (APM)"
+
+- id: menu_references_libraries
+  translation: "APIライブラリー"
+
+- id: menu_references_monitoring
+  translation: "アラート設定"
+
+- id: menu_references_graphing
+  translation: "グラフ表示入門"
+
+- id: menu_references_graphingjson
+  translation: "JSONを使ったグラフの設定"
+
+- id: menu_references_host_names
+  translation: "ホスト名について"
+
+- id: menu_references_integrations
+  translation: "インテグレーション"
+
+- id: menu_references_dogstatsd
+  translation: "DogStatsDの解説"
+
+- id: menu_references_examples
+  translation: "サンプルコード"
+
+- id: menu_references_videos
+  translation: "ビデオ"
+
+- id: menu_references_billing
+  translation: "課金に関するFAQ"
+
+- id: menu_references_faq
+  translation: "FAQ"
+
+- id: menu_help
+  translation: "お問い合わせ"
+
+- id: btn_signup
+  translation: "新規登録"
+
+- id: btn_signin
+  translation: "ログイン"
+
+- id: btn_support_login
+  translation: "サポートログイン"
+
+- id: btn_free_trial
+  translation: "無料体験"
+
+- id: footer_switch_language
+  translation: "Read the docs in English"
+
+- id: footer_need_some_help
+  translation: "お困りの場合は、"
+
+- id: footer_mistake_in_the_docs
+  translation: "ドキュメント内の不備を見つけた場合は、"
+
+- id: footer_get_in_touch
+  translation: "お気軽にお声がけ下さい。"
+
+- id: footer_let_us_know
+  translation: "ご連絡を頂けると助かります。"
+
+- id: integrations_other_integrations
+  translation: "インテグレーション"
+
+- id: integrations_toggle_to_show_integrations
+  translation: "Toggle to show integrations"
+
+- id: integrations_back_to_overview
+  translation: "インテックスへ戻る"
+
+- id: integrations_basic_level_integrations
+  translation: "basic level integration"
+
+- id: videos_return_to_all_video_groups
+  translation: "Return to All Video Groups."
+
+- id: examples_return_to_all_example_groups
+  translation: "Return to All Example Groups."
+
+- id: agentusage_agent_guides_by_platform
+  translation: "Agent インストールガイド"
+
+- id: agentusage_from_source
+  translation: "Agent インストールガイド"
+
+- id: customnav_tracingnav_tracing
+  translation: "Tracing (APM)"
+
+- id: customnav_tracingnav_install
+  translation: "Installation & Configuration"
+
+- id: customnav_tracingnav_terminology
+  translation: "Terminology"
+
+- id: customnav_tracingnav_faq
+  translation: "Frequently Asked Questions"
+
+- id: customnav_tracingnav_langs
+  translation: "Supported Languages"
+
+- id: customnav_tracingnav_go
+  translation: "Go"
+
+- id: customnav_tracingnav_py
+  translation: "Python"
+
+- id: customnav_tracingnav_rb
+  translation: "Ruby"
+
+- id: customnav_tracingtranslation
+  translation: "Tracing API"

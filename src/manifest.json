@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "main-dd.js": {
+      "files": [
+        "js/datadog-docs.js"
+      ],
+      "vendor": [
+        "src/js/vendor/jquery.js",
+        "src/js/vendor/bootstrap.min.js",
+        "src/js/vendor/tipuesearch/tipuesearch-set.js",
+        "src/js/vendor/tipuesearch/tipuesearch_content.js",
+        "src/js/vendor/tipuesearch/tipuesearch.js",
+        "src/js/vendor/jquery.tocible.js"
+      ],
+      "main": true
+    },
+    "main-dd.css": {
+      "files": [
+        "scss/style.scss"
+      ],
+      "vendor": [
+        "src/scss/vendor/tipuesearch.css",
+        "src/scss/vendor/pygments.css"
+      ],
+      "main": true
+    },
+    "jquery.js": {
+      "bower": [
+        "jquery"
+      ]
+    }
+  },
+  "config": {
+    "devUrl": "http://localhost:1313/"
+  },
+  "paths": {
+    "source": "src/",
+    "dist": "static/",
+    "html": "layouts/partials/"
+  }
+}
