@@ -291,26 +291,26 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 ## FAQs
 {: #faq}
 
-- *Can I manage my monitors programmatically?*
+*Can I manage my monitors programmatically?*
 
-  Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
-  for detailed information on managing monitors through the API using the
-  available libraries or cURL.
+Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
+for detailed information on managing monitors through the API using the
+available libraries or cURL.
 
-- *Can you alert on a function?*
+*Can I alert on a function?*
 
-  Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
-  alert on custom queries and functions, similar to the JSON editor for graphs.
+Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
+alert on custom queries and functions, similar to the JSON editor for graphs.
 
-- *Can I manually resolve a monitor?*
+*Can I manually resolve a monitor?*
 
-  Yes, you can manually resolve monitors but it only makes sense in a couple cases:
+Yes, you can manually resolve monitors but it only makes sense in a couple cases:
 
-    - If the monitor is in a "no data" state then resolving it will hide it from the
-      triggered monitors page.
-    - If the monitor is in the triggered state but has stopped reporting data then
-      resolving it will hide it from the triggered monitors page.
+- If the monitor is in a "no data" state then resolving it will hide it from the
+triggered monitors page.
+- If the monitor is in the triggered state but has stopped reporting data then
+resolving it will hide it from the triggered monitors page.
 
-  Otherwise the monitor will pick up the current state on the next evaluation. In other
-  words, if the value is still above/below the configured threshold then the monitor may
-  re-trigger upon the next evaluation (in about 60 seconds).
+Otherwise the monitor will pick up the current state on the next evaluation. In other
+words, if the value is still above/below the configured threshold then the monitor may
+re-trigger upon the next evaluation (in about 60 seconds).
