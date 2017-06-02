@@ -192,7 +192,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 # Configuration
 
-{{< img src="integrations-aws-secretentry.png" >}}
+![logo](/static/images/integrations-aws-secretentry.png)
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.
@@ -315,7 +315,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs
+## CloudWatch Logs and Lambda
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
@@ -364,7 +364,7 @@ For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 # Troubleshooting
-
+{: #troubleshooting}
 
 **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
 {:#tshoot-discrepancy}

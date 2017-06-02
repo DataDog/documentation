@@ -18,7 +18,7 @@ Connect Desk to Datadog to:
 - View trends in support tickets alongside DevOps issues -->
 
 ## 概要
-
+{: #int-overview}
 
 次の目的の為に、DeskとDatadogを連携します:
 

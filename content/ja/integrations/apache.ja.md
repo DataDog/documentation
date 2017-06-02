@@ -19,7 +19,7 @@ doclevel: complete
 </div> -->
 
 ### 概要と目的
-
+{: #int-overview}
 
 Apacheからリアルタイムでメトリクスを取得しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付ける。
 
@@ -93,7 +93,7 @@ instances:
 
 
 ### 設定
-
+{: #int-configuration}
 
 **Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**
 *詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照して下さい。*

@@ -114,7 +114,7 @@ You can also gather tags based on the indices of your row, in case they are mean
 
 
 <!-- ### Use your own Mib
-
+{: #convert-mib}
 
 To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the `build-pysnmp-mibs` script that ships with pysnmp.
 
@@ -129,7 +129,7 @@ where YOUR-MIB.mib is the MIB you want to convert.
 Put all your pysnmp mibs into a folder and specify this folder's path in your `snmp.yaml` file, in the `init_config` section.` -->
 
 ### 独自MIBの変換
-
+{: #convert-mib}
 
 独自のMIBを使用するには、ysnmp形式に変換する必要があります。この変換には、pysnmpのパッケージに含まれている`build-pysnmp-mibs`を使うことが出来ます。
 

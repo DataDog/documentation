@@ -34,7 +34,7 @@ to use Events via Email, depending mostly on whether the application offers you
 the ability to customize the format of the email body being sent. -->
 
 ## 概要
-
+{: #overview}
 
 Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
 まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
@@ -55,7 +55,7 @@ This will allow you to set everything in the event that appears in the event
 stream. Here are examples of each: -->
 
 ## JSON形式 vs 平文形式
-
+{: #json-vs-plain}
 
 アプリケーションからDatadogに送信するメールを自由にコントロールできるなら、JSON形式でのメッセージ送信の設定をするとよいでしょう。この形式を使うことによって、イベントストリームに表示されるイベントに必要な情報の全てを送信することができるでしょう。
 
@@ -70,11 +70,11 @@ In the source plain text email, you only have three fields you can control: send
 email address, subject, and body.
 
 
-{{< img src="plain-email.png" >}}
+![Plain Text Email](/static/images/plain-email.png)
 
 #### Datadog Event
 
-{{< img src="plain-event.png" >}}
+![Plain Text Event](/static/images/plain-event.png)
 
 
 Note that the subject of the email becomes the title of the event and the body
@@ -93,11 +93,11 @@ to take advantage of that to help identify the sending application. -->
 - 件名
 - 本文
 
-{{< img src="plain-email.png" >}}
+![Plain Text Email](/static/images/plain-email.png)
 
 #### イベントストリームでのイベント表示
 
-{{< img src="plain-event.png" >}}
+![Plain Text Event](/static/images/plain-event.png)
 
 **注)** メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本体になることに注意してください。
 イベントのタイトルと本文の最後にタグが表示されるように見えますが、どちらの部分もDatadogではタグとしては扱われてはいません。
@@ -112,11 +112,11 @@ In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
 alert type,  date happened,  host, aggregation key, and source type name.
 
-{{< img src="json-email.png" >}}
+![JSON Email](/static/images/json-email.png)
 
 #### Datadog Event
 
-{{< img src="json-event.png" >}}
+![JSON Event](/static/images/json-event.png)
 
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
@@ -147,11 +147,11 @@ JSON形式でのイベント情報メールの送信では、10個のフィー�
 - "agrregation key" :
 - "source type name" :
 
-{{< img src="json-email.png" >}}
+![JSON Email](/static/images/json-email.png)
 
 #### イベントストリームでのイベント表示
 
-{{< img src="json-event.png" >}}
+![JSON Event](/static/images/json-event.png)
 
 JSON形式のメールでは、メールのタイトルは無視され、本文内のtitleで設定した内容に置き換えられます。
 イベントに表示されるすべてのデータは、メールの本文にJSONで定義されている必要があります。
@@ -172,7 +172,7 @@ then scroll down to *Events API Emails*. This section will show you all the emai
 available for your applications and who created them. Choose the format for your
 messages from the Format: dropdown, then click *Create API Email*.
 
-{{< img src="event-email-api.png" >}} -->
+![JSON Event Email API](/static/images/event-email-api.png) -->
 
 ## メールアドレスの設定 {#setup-address}
 
@@ -180,11 +180,11 @@ messages from the Format: dropdown, then click *Create API Email*.
 
 このセクションでは、Datadogがイベント情報を受信するために用意したメールアドレスと、そのメールアドレスの作成者が表示されています。
 
-{{< img src="event-email-api.png" >}}
+![JSON Event Email API](/static/images/event-email-api.png)
 
 新しくメールアドレスを追加する場合は、**New API Email**のセクションで、送信するメールの形式をドロップダウンメニューで選択し、`Create API Email`をクリックします。
 
-{{< img src="ja-specific/event_email_set.png" >}}
+![Event Email Set](/static/images/ja-specific/event_email_set.png)
 
 
 [integrations]: /ja/integrations

@@ -12,7 +12,7 @@ kind: integration
 {:#int-overview} -->
 
 ## 概要
-
+{: #int-overview}
 
 
 <!-- Connect Puppet to Datadog in order to:

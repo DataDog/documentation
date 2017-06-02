@@ -60,7 +60,7 @@ Hipchat）やwebhooksを使い、他のサービスと連携して通知を送�
 通知を送信したMonitorはイベントストリームに表示され、そのアプリケーションやインフラの問題解決に向けたコラボレーションができるようになります。Datadogの[Triggered Monitors](https://app.datadoghq.com/monitors/triggered)のページには、通知済み状態のMonitorの項目がリスト表示されます。[Manage Monitors](https://app.datadoghq.com/monitors)のページには全てのMonitorが表示され、それらを管理することができるように成っています。
 
 ## 用語集
-
+{: #glossary}
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -83,11 +83,11 @@ Here is a quick overview of the different terms used in this guide.
 
 <!--
 ## Creating a Monitor
-
+{: #create}
 -->
 
 ## 新しいMonitorの作成
-
+{: #create}
 
 <!--
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -100,12 +100,12 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 <!-- [New Monitor](https://app.datadoghq.com/monitors/create)のページへ移動するには、トップメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、これらのMonitorタイプの設定方法を解説していきます。 -->
 
-{{< img src="monitor/nav.png" >}}
+![nav](/static/images/monitor/nav.png)
 
 <!-- ## Metric Monitors {#metric} -->
 
   **監視する対象の設定**
-
+  {: #metric}
 
 <!--
 1. Select the metric and scope you want to monitor.
@@ -113,7 +113,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 1.  メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
 
-    {{< img src="monitor/metric_scope.png" >}}
+    ![metric scope](/static/images/monitor/metric_scope.png)
 
     <!--
     You can create a monitor on any metrics that you are currently sending to
@@ -131,7 +131,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
      -->
 
 2.  アラートグループを選択します。
-    {{< img src="monitor/alert_grouping.png" >}}
+    ![alert grouping](/static/images/monitor/alert_grouping.png)
 
     <!--
     A **simple alert** aggregates over all reporting sources. You will get one
@@ -164,7 +164,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 3.  アラートのタイプを選択します。
 
-    {{< img src="monitor/alert_type.png" >}}
+    ![alert type](/static/images/monitor/alert_type.png)
 
     <!--
     A **threshold alert** will compare the value in the selected
@@ -231,7 +231,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
     アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    {{< img src="monitor/metric_threshold.png" >}}
+    ![metric threshold](/static/images/monitor/metric_threshold.png)
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -308,9 +308,9 @@ on the left. This guide will walk through the configuration of the Metric type. 
 <!-- ## Monitor Notifications {#notification} -->
 
 ### 通知の設定
+{: #notifications}
 
-
-{{< img src="monitor/notification.png" >}}
+![notification](/static/images/monitor/notification.png)
 
 <!--
 1. Give your monitor a **title**. It is often useful to use a succinct
@@ -352,7 +352,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 <!-- ## Scheduling Downtime -->
 
 ## ダウンタイムを設定する
-
+{: #downtime}
 
 <!--
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
@@ -360,7 +360,7 @@ You may occasionally need to shut systems down or take them offline to perform m
 ■◎ここから◎■
 
 ### ダウンタイムの管理
-
+{: #downtime-manage}
 
 <!--
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
@@ -368,7 +368,7 @@ Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) pa
 
 [Manage Downtime](https://app.datadog.com/monitors#/downtime) のページへ移動するには、メインメニューの"Monitors"タブからドロップダウンメニューの"Manage Downtime" を選択します。 他のMonitor設定ページの上部にある"Manage Downtime" リンクを選択することで移動することも可能です。
 
-{{< img src="monitor/downtime-nav.png" >}}
+![downtime-nav](/static/images/monitor/downtime-nav.png)
 
 <!--
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
@@ -376,17 +376,17 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 
 "Manage Downtime"ページでは、アクティブなものとスケジュールされたもの、両方のダウンタイムのリストが表示されます。各ダウンタイムを選択することで、対象となるホストとMonitor設定の詳細を確認することができます。
 
-{{< img src="monitor/downtime-manage.png" >}}
+![downtime-manage](/static/images/monitor/downtime-manage.png)
 
 ### ダウンタイムのスケジュール
-
+{: #downtime-schedule}
 
 <!--
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   {{< img src="monitor/downtime-silence.png" >}}
+   ![downtime-silence](/static/images/monitor/downtime-silence.png)
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -399,7 +399,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. 停止するMonitorを選択
 
-   {{< img src="monitor/downtime-silence.png" >}}
+   ![downtime-silence](/static/images/monitor/downtime-silence.png)
 
    停止したい特定のMonitorを指定するか、ここでは特定のMonitorは指定せずすべてのMonitorを停止の対象とします。続いて、ダウンタイムの対象を限定するために、特定のホスト、デバイス、あるいは任意のタグによって範囲(スコープ)の設定をします。範囲(スコープ)の設定については、グラフ表示入門のページのJSONの使用方法、[対象範囲の指定(scope)](/ja/graphing/#scope)も併せて参照してください。
 
@@ -410,33 +410,33 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 <!--
 2. Set a schedule.
 
-   {{< img src="monitor/downtime-schedule.png" >}}
+   ![downtime-schedule](/static/images/monitor/downtime-schedule.png)
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   {{< img src="monitor/downtime-notify.png" >}}
+   ![downtime-notify](/static/images/monitor/downtime-notify.png)
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integtration](https://app.datadoghq.com/account/settings#integrations).
 -->
 
 2. スケジュールを設定
 
-   {{< img src="monitor/downtime-schedule.png" >}}
+   ![downtime-schedule](/static/images/monitor/downtime-schedule.png)
 
    ダウンタイムをスケジュールする日時をここで設定します。あるいは、空欄のままにしてダウンタイムを即刻開始することもできます。また、定期的な計画停止のために繰り返しのスケジュールを設定することも可能です。
 
 3. チームに通知するためのメッセージ本文を追加で設定
 
-   {{< img src="monitor/downtime-notify.png" >}}
+   ![downtime-notify](/static/images/monitor/downtime-notify.png)
 
    ダウンタイム設定についてチームに通知するメッセージを入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)でも記述することができます。"Notify your team"フィールドでは、メッセージを送りたいチームメンバー個人あるいは特定のサービス(インストール済みのインテグレーション)を選択することができます。 [integtration](https://app.datadoghq.com/account/settings#integrations).
 
 <!-- ## Monitor FAQs {#faqs} -->
 
 ## Monitorに関するFAQs
-
+{: #faqs}
 
 <!--
 - *Can I manage my monitors programatically?*

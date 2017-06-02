@@ -38,11 +38,11 @@ If you are an AWS user, you probably use a variety of instance types. Some insta
 
 Below is a subset of Datadog’s infrastructure. As you can see, c3.2xlarge instances are pretty heavily loaded.
 
-{{< img src="hostmappart1image2.png" >}}
+![](/static/images/hostmappart1image2.png)
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
-{{< img src="hostmappart1image3.png" >}} -->
+![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png) -->
 
 ### リソースの最適化
 
@@ -52,26 +52,26 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 
 以下は、Datadogで使用しているインスタンスの一部です。各グループの状態からc3.2xlargeグループには、かなりの負荷がかかっていることが分かります。
 
-{{< img src="hostmappart1image2.png" >}}
+![](/static/images/hostmappart1image2.png)
 
 c3.2xlargeグループをクリックし、ロールによってサブグループの状態を表示すると、一部の
 ロールのホストに負荷が集中し、他のロールのホストは使われていないことが分かります。これらの緑色で表示されている7台のホストをc3.xlargeへ変更することで、約$13,000/年を削減することができます。この金額は、調査に値する価値があるのではないでしょうか。( $0.21/hr/host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20/year )
 
-{{< img src="hostmappart1image3.png" >}}
+![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
 
 
 <!-- ### Availability Zone Placement
 
 Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, at Datadog we have an uneven distribution of hosts with role:daniels across availability zones. (Daniels is the name of one of our internal applications.)
 
-{{< img src="hostmappart1image4.png" >}} -->
+![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png) -->
 
 ### アベイラビリティゾーン間でのホストの分布状態の把握
 
 Host Mapを使うことにより、アベイラビリティゾーン（AZ）間でのホストの配置状況を把握することが簡単になります。注目しているホストを抽出し、アベイラビリティゾーン(AZ)間でグループ化します。このようにすることにより、リソースの再配置が必要かどうか一目でわかるようになります。以下の例のように、Datadogでは **role:daniels** ロールのホストが各アベイラビリティゾーン間に不均等に配置されていることがわかります。(danielsは、Datadog内のアプリケーションサーバについているロール名です。)
 
 
-{{< img src="hostmappart1image4.png" >}}
+![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png)
 
 
 <!-- ### Problem Investigation
@@ -80,9 +80,9 @@ Imagine you are having a problem in production. Maybe the CPUs on some of your h
 
 Below is a screenshot from a recent issue we had a Datadog. As you can see, some hosts had much less usable memory than others, despite being part of the same cluster. Why? We grouped by machine image in Host Maps, and the problem was immediately clear: there were in fact two different images in use, and one of them had become overloaded.
 
-{{< img src="hostmappart1image5.png" >}}
+![Datadog Host Maps Two Memory Usage Bands](/static/images/hostmappart1image5.png)
 
-{{< img src="hostmappart1image6.png" >}} -->
+![Datadog Host Maps Two Image Groups](/static/images/hostmappart1image6.png) -->
 
 ### 原因の特定の補助
 
@@ -90,9 +90,9 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 以下は、Datadogで発生した障害のスクリーンショットです。グラフからわかるように、同じクラスタに属しているにも関わらず、幾つかのホストでは他のホストより使用可能なメモリが少ない状態です。なぜこのような状況が発生するのでしょう。そこで、Host Mapを使って仮装マシンのイメージごとにホストを分類してみました。その結果、問題の原因は即座にわかりました。同一クラスタ内で2種類の異なる仮想マシンイメージがあり、その内の片方がオーバーロード状態になっていました。
 
-{{< img src="hostmappart1image5.png" >}}
+![Datadog Host Maps Two Memory Usage Bands](/static/images/hostmappart1image5.png)
 
-{{< img src="hostmappart1image6.png" >}}
+![Datadog Host Maps Two Image Groups](/static/images/hostmappart1image6.png)
 
 
 <!-- ## More Details -->
@@ -157,33 +157,33 @@ Datadogが特別に準備している抽出に利用できるホストの状態�
 
 ‘Group hosts by tags’ spatially arranges your hosts into clusters, or groups. Any host in a group shares the tag or tags you group by. A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts will be further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-{{< img src="hostmappart2image2.png" >}} -->
+![Datadog Host Maps AZ Instance Groups](/static/images/hostmappart2image2.png) -->
 
 ### タグによるホストのグループ化 (Group by)
 
 'Group by'は、タグを指定することによりホストをクラスタやグループへ立体的に配置し表示します。グループ化されたホストは、共通のタグが付与されています。簡単な例として、AWSのアベイラビリティゾーンによりグループ化してみます。この状態で第二のタグ(インスタンスタイプ)を設定することにより、ホストは、更に細かいグループに分類されていきます。以下の様に、大きなグループとしてアベイラビリティゾーンでグループ化され、その中で細分化されたグループとしてインスタンスタイプでグループ化されます。
 
-{{< img src="hostmappart2image2.png" >}}
+![Datadog Host Maps AZ Instance Groups](/static/images/hostmappart2image2.png)
 
 
 <!-- ### Zoom in
 
 When you’ve identified a host that you want to investigate, click it for details. You will zoom in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they will be listed under the “Apps” header in the host’s detail pane, as in the screenshot below.) Click the name of an integration, and you will get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
-{{< img src="blog-host-maps-01.png" >}} -->
+![Datadog Host Maps Zoom In](/static/images/blog-host-maps-01.png) -->
 
 ### ズームイン機能
 
 調査対象のホストが特定できたら、そのホストをクリックし詳細を確認していきます。クリックすることで、そのホストにズームインし、メトリクスを送信している6種類のインテグレーションを表示します。(6種類以上のインテグレーションを導入している場合は、ホストの詳細ペインの"Apps"以下にリスト表示されます)　どれかのインテグレーション名をクリックすると、そのインテグレーションの簡易版のダッシュボードを表示することができます。下のスクリーンショットでは、"system"インテグレーションをクリックし、CPUの利用量、メモリーの利用量、ディスクレーテンシーなどの簡易版ダッシュボードを表示しています。
 
-{{< img src="blog-host-maps-01.png" >}}
+![Datadog Host Maps Zoom In](/static/images/blog-host-maps-01.png)
 
 
 <!-- ### Shapes and colors
 
 By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
-{{< img src="hostmappart2image4.png" >}}
+![Datadog Host Maps Using Color And Size](/static/images/hostmappart2image4.png)
 
 Today the ‘Color by’ selector and ‘Size by’ selector contain only CPU-based metrics: load, idle, wait, etc. We will be adding additional metrics in the very near future.
 
@@ -193,7 +193,7 @@ Note that the “% CPU utilized” metric uses the most reliable and up-to-date 
 
 各ホスト(六角形)の色は、デフォルトではCPU使用率を表現するように設定されています。色相は緑から赤の範囲に設定されており、CPU使用率0%から100%に対応しています。CPU利用率以外にも別のメトリクスを'Color by'窓で選択することが可能です。Host Mapでは、第二のスケール軸を表現するために、'Size by'窓で設定できる六角型のサイズを使っています。下のスクリーンショットでは六角形のサイズは、コアの数が異なる場合でも比較できるように正規化した15分間の平均負荷を表しています。
 
-{{< img src="hostmappart2image4.png" >}}
+![Datadog Host Maps Using Color And Size](/static/images/hostmappart2image4.png)
 
 現状では'Color by'セレクターと'Size by'セレクターは、load、idle、waitなどのCPUに関連したメトリクスに限られていますが、この部分で選択できるメトリクスについては近々増強される予定です。
 
