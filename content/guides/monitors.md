@@ -282,11 +282,11 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to w
 
 When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-~[manage-monitors-mute](/static/images/monitor/manage-monitors-mute.png)
+![manage-monitors-mute](/static/images/monitor/manage-monitors-mute.png)
 
 To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-~[manage-monitors-hover-clone](/static/images/monitor/manage-monitors-hover-clone.png)
+![manage-monitors-hover-clone](/static/images/monitor/manage-monitors-hover-clone.png)
 
 ## FAQs
 {: #faq}
