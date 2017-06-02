@@ -1,0 +1,20 @@
+<%#
+this layout provides just a header.
+%>
+
+<!DOCTYPE html>
+<html lang="ja">
+
+  <%= render "_head" %>
+
+  <body>
+    <%= render "_header-ja", :fluid => true %>
+
+    <%= yield %>
+
+    <%= render "_footer-ja" %>
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+  </body>
+</html>

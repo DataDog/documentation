@@ -1,0 +1,72 @@
+<%#
+this layout provides a sidebar and main column. The sidebar is populated with links
+to the basic Agent usage guide of each platform
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <%= render "_head" %>
+
+  <body>
+
+    <%= render "_header" %>
+
+    <div class="container">
+
+      <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="col-md-3 col-sm-3 hidden-xs hidden-print">
+        <ul class="nav nav-tabs nav-stacked sidebar">
+          <% if @item["language"] == "en" %>
+            <li class="nav-header">Documentation Search</li>
+            <li>
+              <form action="/search/">
+                <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+              </form>
+            </li>
+            <% end %>
+          <!-- AGENT PLATFORM SELECTION -->
+          <li class="nav-header"><%= @item["agentusage_agent_guides_by_platform"] %></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/amazonlinux/'>Amazon Linux</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/centos/'>CentOS</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/docker/'>CoreOS/Docker</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/deb/'>Debian</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/fedora/'>Fedora</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/osx/'>Mac OS X</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/redhat/'>Red Hat</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/ubuntu/'>Ubuntu</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/windows/'>Windows</a></li>
+          <li><a href='<%= @item["langpath"] %>/guides/basic_agent_usage/source/'><%= @item["agentusage_from_source"] %></a></li>
+
+          <!-- PAGE-SPECIFIC LINKS -->
+          <% if @item[:sidebar] && @item[:sidebar][:nav] %>
+            <% @item[:sidebar][:nav].each do |i| %>
+              <% if i[:header] %>
+                <li class="nav-header"><%= i[:header] %></li>
+              <% else %>
+                <li><a href="<%= i[:href]%>"><%= i[:text] %></a></li>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+        &nbsp;
+        </div>
+
+        <!-- MAIN -->
+        <div class="col-sm-9 main col-xs-12">
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "_footer" %>
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+
+  </body>
+</html>

@@ -1,0 +1,144 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.8)
+    adsf (1.2.0)
+      rack (>= 1.0.0)
+    autoprefixer-rails (6.0.3)
+      execjs
+      json
+    builder (3.2.2)
+    coderay (1.1.0)
+    colored (1.2)
+    cri (2.7.0)
+      colored (~> 1.2)
+    digest (0.0.1)
+    dogapi (1.22.0)
+      multi_json
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
+    eventmachine (1.0.8)
+    execjs (2.6.0)
+    faraday (0.9.2)
+      multipart-post (>= 1.2, < 3)
+    ffi (1.9.6)
+    formatador (0.2.5)
+    git-version-bump (0.15.1)
+    guard (2.13.0)
+      formatador (>= 0.2.4)
+      listen (~> 3.0.3)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-livereload (2.4.0)
+      em-websocket (~> 0.5)
+      guard (~> 2.8)
+      multi_json (~> 1.8)
+    guard-nanoc (1.0.3)
+      guard (~> 2.8)
+      nanoc (~> 3.6)
+    guard-rack (2.0.0)
+      ffi
+      guard (~> 2.3)
+      libnotify
+      rb-inotify
+      spoon
+    guard-rake (1.0.0)
+      guard
+      rake
+    http_parser.rb (0.6.0)
+    json (1.8.2)
+    kramdown (1.5.0)
+    libnotify (0.9.1)
+      ffi (>= 1.0.11)
+    libv8 (3.16.14.15)
+    listen (3.0.3)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+    lumberjack (1.0.9)
+    method_source (0.8.2)
+    mini_portile2 (2.0.0)
+    multi_json (1.11.2)
+    multipart-post (2.0.0)
+    nanoc (3.8.0)
+      cri (~> 2.7)
+    nanoc-cachebuster (0.3.1)
+      nanoc (>= 3.3.0)
+    nenv (0.2.0)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    notiffany (0.0.8)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
+    octokit (4.1.1)
+      sawyer (~> 0.6.0, >= 0.5.3)
+    oj (2.12.14)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rack (1.6.4)
+    rack-contrib (1.4.0)
+      git-version-bump (= 0.15.1)
+      rack (>= 1.4)
+    rack-livereload (0.3.15)
+      rack
+    rake (10.4.2)
+    rb-fsevent (0.9.4)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
+    ref (2.0.0)
+    rouge (1.10.1)
+    sass (3.4.19)
+    sassc (1.7.1)
+      bundler
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
+    sawyer (0.6.0)
+      addressable (~> 2.3.5)
+      faraday (~> 0.8, < 0.10)
+    shellany (0.0.1)
+    slop (3.6.0)
+    spoon (0.0.4)
+      ffi
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
+    thor (0.19.1)
+    w3c_validators (1.2)
+      json
+      nokogiri
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  adsf
+  autoprefixer-rails
+  builder
+  digest
+  dogapi (~> 1.22.0)
+  guard-livereload
+  guard-nanoc
+  guard-rack
+  guard-rake
+  kramdown
+  nanoc
+  nanoc-cachebuster
+  nokogiri (~> 1.6.7.2)
+  octokit
+  oj
+  rack-contrib
+  rack-livereload
+  rake
+  rouge
+  sassc
+  therubyracer
+  w3c_validators
+
+BUNDLED WITH
+   1.13.6

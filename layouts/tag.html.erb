@@ -1,0 +1,41 @@
+<% id=@item.identifier
+case
+when id.match('/examples/') %>
+
+  <div class="container">
+
+  <% items_with_tag(tag, $example_items).each do |example| %>
+    <% if example[:language] == nil %>
+      <p>
+      <font size=5><%= link_to example[:title], example %></font>
+      <p><%= example[:summary] %></p>
+     </p>
+     <br><br>
+    <% end %>
+  <% end %>
+  <p><br>
+  <a href="/examples/">Return to All Example Groups.</a>
+  </p>
+  </div>
+
+<% when id.match('/videos/') %>
+
+  <div>
+  <% items_with_tag(tag, $video_items).each do |video| %>
+      <h2><%= link_to video[:title], video %></h2>
+      <p><%= video[:summary] %></p>
+      <script src="https://fast.wistia.com/embed/medias/<%= video[:wistiaid] %>.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_<%= video[:wistiaid] %> popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;width:100%">&nbsp;</span></div></div>
+
+      <br>
+      This video can be found in these groups:<br>
+     <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
+  <% end %>
+  <p><br>
+  <a href="/videos/">Return to All Video Groups.</a>
+  </p>
+  </div>
+
+
+
+
+<% end %>

@@ -1,0 +1,75 @@
+<%#
+this layout provides a sidebar and main column.
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+  <%= render "_head" %>
+  <body>
+    <%= render "_header" %>
+    <div class="container">
+      <div class="row">
+        <!-- SIDEBAR -->
+        <div class="col-sm-3 col-xs-12" id="sidebarcolumn">
+          <ul class="nav nav-tabs nav-stacked sidebar">
+            <% if @item["language"] == "en" %>
+            <li class="nav-header hidden-xs">Documentation Search</li>
+            <li class="hidden-xs">
+              <form action="/search/">
+                <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+              </form>
+            </li>
+            <% end %>
+            <%= show_table_of_contents %>
+
+            <li class="nav-header auto"><%= @item["integrations_other_integrations"] %> <span class="toggle visible-xs-inline">(<a href="#toggleIntegrations" data-toggle="collapse"><%= @item["integrations_toggle_to_show_integrations"] %></a>)<br></span></li>
+            <div class="collapse div-collapse" id="toggleIntegrations">
+              <li><a href="<%= @item["langpath"] %>/integrations/"><%= @item["integrations_back_to_overview"] %></a></li>
+              <% if @item["language"] == "en" %>
+                <% all_integrations = $integration_items %>
+              <% else %>
+                <% all_integrations = $ja_integration_items %>
+              <% end %>
+              <% all_integrations.each do |i| %>
+                <% basic="" %>
+                <% if i[:doclevel] && i[:doclevel] == 'basic' %>
+                  <% basic = " *" %>
+                <% end %>
+                <% if i[:title] == @item[:title] %>
+                  <li class='selected_integration'>
+                    <%= link_to '> ' + i[:integration_title], '#' %>
+                  </li>
+                <% else %>
+                  <li><%= link_to i[:integration_title] + basic,i.path %></li>
+                <% end %>
+              <% end %>
+            </div>
+          </ul>
+        &nbsp;
+        </div>
+
+        <!-- MAIN -->
+        <div class="col-sm-9 col-xs-12 main">
+          <!-- PAGE TITLE -->
+          <h1 id="pagetitle"><%= @item[:title] %> </h1>
+          <%if @item[:beta]%>
+          <div class="alert alert-danger">
+          <strong>BETA:</strong> This content describes a feature currently in beta.
+          We are actively working on completing the feature but the docs may get out of
+          sync with the feature as it is updated. If you have any issues, contact support
+          for assistance.
+          </div>
+          <% end%>
+          <div <%if @item[:newhlevel] %>id="pagecontent"<% end %>>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render "_footer" %>
+    <%= render "_javascript" %>
+
+    <%= content_for(@item, :javascript) || '<!-- No page Javascript -->' %>
+
+  </body>
+</html>

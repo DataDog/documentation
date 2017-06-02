@@ -1,0 +1,133 @@
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+<% if @item[:os] == 'osx'
+  $sudo = ''
+  else
+  $sudo = 'sudo '
+end %>
+
+### Starting and Stopping the Agent
+{: #starting_and_stopping_the_agent}
+
+
+<% if @item[:os] == 'smartos' %>
+To manually start the Agent:
+
+    svcadm enable datadog
+
+To stop the Agent:
+
+    svcadm disable datadog
+
+To restart the Agent and to reload the configuration files:
+
+    svcadm restart datadog
+
+<% else %>
+To manually start the Agent:
+
+    <%= $sudo %><%= @item[:servicename] %> start
+
+To stop the Agent:
+
+    <%= $sudo %><%= @item[:servicename] %> stop
+
+To restart the Agent and to reload the configuration files:
+
+    <%= $sudo %><%= @item[:servicename] %> restart
+<% end %>
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+### Status and Information
+{: #status_and_information}
+
+<% if @item[:os] == 'smartos' %>
+To check if the Agent is running:
+
+    svcs datadog
+
+To receive more information about the Agent’s state:
+
+    /opt/local/datadog/bin/info
+
+Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)*
+
+    /opt/local/datadog/bin/info -v
+
+<% else %>
+To check if the Agent is running: *(since 3.8.0)*
+
+    <%= $sudo %><%= @item[:servicename] %> status
+
+To receive information about the Agent's state:
+
+    <%= $sudo %><%= @item[:serviceinfoname] %>
+
+Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)*
+
+    <%= $sudo %><%= @item[:serviceinfoname] %> -v
+
+More information about the metrics, events and service checks for an integration can be retrieved with the check command:
+
+    <%= $sudo %><%= @item[:servicename] %> check [integration]
+
+Add the check_rate argument to get the most recent values for rates:
+
+    <%= $sudo %><%= @item[:servicename] %> check [integration] check_rate
+
+<%= $sudo %>
+  <%= @item[:servicename] %> check [integration]
+
+<% end %>
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+### Configuration
+{: #configuration}
+
+The configuration file for the Agent is located at ````<%= @item[:configdirectory] %>datadog.conf````
+
+Configuration files for integrations are located in ````<%= @item[:configdirectory] %>conf.d/````
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+### Troubleshooting
+{: #troubleshooting}
+
+<% if @item[:os] == 'smartos' %>
+
+Try running the info command to see the state of the Agent.
+
+Logs for the subsystems are in the following files:
+
+* ````/opt/local/datadog/logs/supervisord/collector.log````
+* ````/opt/local/datadog/logs/supervisord/dogstatsd.log````
+* ````/opt/local/datadog/logs/supervisord/forwarder.log````
+
+<% else %>
+Try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
+
+Logs for the subsystems are in the following files:
+
+* ````<%= @item[:supervisorlog] %>```` *(since 3.8.0)*
+* ````<%= @item[:logdirectory] %>collector.log````
+* ````<%= @item[:logdirectory] %>dogstatsd.log````
+* ````<%= @item[:logdirectory] %>forwarder.log````
+
+<% end %>
+
+<br/>
