@@ -226,10 +226,68 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
-## Monitor FAQs
+## Managing Monitors
+{: #manage}
+
+The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
+
+### Find the Monitors
+
+Advanced search lets you query monitors by any combination of monitor attributes:
+
+* `title` and `message` — text search
+* `status` — Alert, Warn, No Data, Ok 
+* `scope` — e.g. *, role:master-db
+* `type` — metric, integration, apm, etc
+* `muted`
+* `creator`
+* `id`
+* `service` — tags
+* `team` — tags
+* `env` — tags
+* `notification` — the monitor's notification target, e.g. you@example.com, slack-ops-oncall
+* `metric` — the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
+
+To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query; there's no 'Search' button to click.
+
+#### Check the boxes
+
+When you don't need to search monitor titles and bodies for specific text, your search is a quick click or two away. Check as many boxes as you need to find your desired monitors, keeping the following in mind:
+
+* Checking attributes from different fields will AND the values, e.g. `status:Alert type:Metric` (the lack of an operator between the two search terms implies AND)
+* Checking attributes within the same field will often OR the values, e.g. `status:(Alert OR Warn)`, but there are some exceptions. For example, checking multiple scopes or service tags ANDs them.
+* Some fields do not allow you to select multiple values, e.g. when you tick a metric or service check, the other metrics/checks disappear from the list until you untick your selection.
+* The Triggered checkbox under the Status field means `status:(Alert OR Warn OR "No Data")`, not `status:Triggered`. Triggered is not a valid monitor status.
+* The Muted checkbox appears under the Status field, but Muted is actually its own field; checking it adds `muted:true` to your query, not `status:muted`.
+* The Metric/Check field is always called `metric` in the query, e.g. selecting the check `http.can_connect` adds `metric:http.can_connect` to your query.
+
+For fields that have an arbitrary (i.e. large) number of values across all monitors—Service tag, Scope, Metric/Check, Notification—use the field-specific search bars to find the value you're looking for.
+
+When you need to run a more complex search than the checkboxes allow, use the search bar to edit your query or write a new one.
+
+#### Write a query
+
+The most common reason to write a query is to search for specific text across all monitor titles and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the title or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `title:postgresql`.
+
+Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe how it is *not* like Elasticsearch syntax:
+
+* Regular expressions are not supported
+* Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
+* Proximity searches are not supported, but the [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness) operator is
+* Ranges are not supported
+* Boosting is not supported
+* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and ` ` (whitespace).
+
+### Manage chosen Monitors
+
+When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
+
+To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
+
+## FAQs
 {: #faq}
 
-- *Can I manage my monitors programatically?*
+- *Can I manage my monitors programmatically?*
 
   Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
   for detailed information on managing monitors through the API using the
