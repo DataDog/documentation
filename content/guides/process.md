@@ -27,19 +27,19 @@ Supports: **Amazon Linux, CentOS, Debian, RHEL, Ubuntu**
 
 To start the Agent:
 
-    $ sudo /etc/init.d/dd-process-agent start`
+    $ sudo /etc/init.d/dd-process-agent start
  
 To stop the Agent: 
   
-    $ sudo /etc/init.d/dd-process-agent stop`
+    $ sudo /etc/init.d/dd-process-agent stop
  
 To check if the Agent is running:
 
-    $ sudo /etc/init.d/dd-process-agent status`
+    $ sudo /etc/init.d/dd-process-agent status
 
 ### Updating
   
-**Amazon Linux, RHEL**
+**Amazon Linux, RHEL, CentOS**
 
     $ sudo yum makecache
     $ sudo yum update dd-process-agent
@@ -51,7 +51,7 @@ To check if the Agent is running:
  
 ### Removing
 
-**Amazon Linux, RHE, CentOS**
+**Amazon Linux, RHEL, CentOS**
 
     $ sudo yum remove dd-process-agent
  
