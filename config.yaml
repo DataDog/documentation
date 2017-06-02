@@ -70,6 +70,8 @@ base_url: http://docs.datadoghq.com
 
 # make sure each redirect url starts and ends with a slash (/)
 redirects:
+  - from:  /integrations/gcp/
+    to:    /integrations/google_cloud_platform/
   - from:  /integrations/rds/
     to:    /integrations/awsrds/
   - from:  /integrations/beanstalk/
