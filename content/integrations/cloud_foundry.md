@@ -20,9 +20,9 @@ If you do NOT administer a Cloud Foundry deployment—i.e. if you're an end user
 
 # Prerequisites
 
-The instructions below assume you have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You may use either major version of the BOSH CLI—[v1](https://bosh.io/docs/bosh-cli.html) or [v2](https://bosh.io/docs/cli-v2.html#install)—to configure and deploy each integration.
+You need to have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration, though you may use either major version—[v1](https://bosh.io/docs/bosh-cli.html) or [v2](https://bosh.io/docs/cli-v2.html#install).
 
-To configure the Datadog plugin for BOSH Health Monitor, you MUST have a `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director.
+To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director.
 
 # Install, Deploy, and Configure
 
@@ -36,10 +36,10 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You c
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://url/to/datadog/agent/datadog-agent-x.y.z.tgz
+bosh upload release https://github.com/DataDog/datadog-agent-boshrelease/releases/download/1.0.5130/datadog-agent-release-1.0.5130.tgz
 
 # BOSH CLI v2
-bosh upload-release https://url/to/datadog/agent/datadog-agent-x.y.z.tgz
+bosh upload-release https://github.com/DataDog/datadog-agent-boshrelease/releases/download/1.0.5130/datadog-agent-release-1.0.5130.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Agent BOSH Release repository](https://github.com/DataDog/datadog-agent-boshrelease).
@@ -52,7 +52,7 @@ Add the following to your BOSH Director's runtime configuration file (e.g. `runt
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_YOU_UPLOADED> # i.e. x.y.z
+    version: <VERSION_YOU_UPLOADED> # i.e. 1.0.5130
 
 addons:
 - name: datadog
@@ -136,10 +136,10 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://url/to/datadog/nozzle/datadog-firehose-nozzle-x.y.z.tgz
+bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-61.tgz
 
 # BOSH CLI v2
-bosh upload-release https://url/to/datadog/nozzle/datadog-firehose-nozzle-x.y.z.tgz
+bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-61.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository](https://github.com/DataDog/datadog-firehose-nozzle-release).
@@ -205,8 +205,9 @@ In the same manifest, add the Datadog Nozzle release name and version:
 releases:
 # - name: some-other-release
 #   version: x.y.z
+# ...
   - name: datadog-firehose-nozzle
-    version: $VERSION_YOU_UPLOADED # i.e. x.y.z
+    version: $VERSION_YOU_UPLOADED # i.e. 61
 ~~~
 
 #### Redeploy the deployment to deploy the Nozzle
