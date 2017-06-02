@@ -6,7 +6,7 @@ kind: documentation
 There are many libraries available to help you interact with the Datadog API.
 
 #### C\#
-{: #c-sharp}
+
 
   * [dogstatsd-csharp-client][6] - A C# DogStatsD client.
 
@@ -35,29 +35,29 @@ There are many libraries available to help you interact with the Datadog API.
 Some great folks have written their own libraries to help interact with Datadog. Check them out:
 
 #### C\#
-{: #community-c-sharp}
+
 
   * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
 
 #### Crystal
-{: #community-crystal}
+
 
   * [statsd.cr][86] - A statsd client library implemented in Crystal by [Mike Fiedler][87]
 
 #### Delphi
-{: #community-delphi}
+
 
 * [datadog-delphi][85] - A statsd client library implemented in Delphi.
 
 #### Elixir
-{: #community-elixir}
+
 
   * [ExStatsD][39] - an Elixir DogStatsD library by [CargoSense][40].
   * [dogstatsd-elixir][41] - a dogstatsd client in Elixir by [Adam Kittelson][42].
   * [mtx][65] - an Elixir Datadog client by [synrc][66].
 
 #### Go
-{: #community-go}
+
 
   * [ecsdog][74] - a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd by [ejholmes][75]
   * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
@@ -67,14 +67,14 @@ Some great folks have written their own libraries to help interact with Datadog.
 
 
 #### Java
-{: #community-java}
+
 
   * [metrics-datadog][9] - a backend to yammers's metrics library written by [Coursera][10].
   * [Lassie][13] - a Java screenboard API client by [Bazaarvoice][12].
   * [java-dogstatsd-client] [59] - DogStatsD Client for Java to submit both Events and Metrics written by [arnabk] [60].
 
 #### Node.js
-{: #community-node}
+
   * [hotshots][76] - a Node.js client for statsd, DogStatsD, and Telegraf written by Brightcove.
   * [node-datadog][14] - a Node.js API client, contributed by [HashGo][15].
   * [node-dogstatsd][16] - a Node.js DogStatsD client, contributed by [Young Han Lee][17].
@@ -82,123 +82,123 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [datadog-metrics][57] - Node.js API client, contributed by [Daniel Bader][58].
 
 #### Perl
-{: #community-perl}
+
 
   * [webservice-datadog][20] - a Perl API client, contributed by [Jennifer Pinkham][21].
   * [dogstatsd-perl][22] - a Perl DogStatsD client, contributed by [Stefan Goethals][23].
 
 #### PHP
-{: #community-php}
+
 
   * [dog-statsd][82] - A fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84].
   * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
 
 #### Python
-{: #community-python}
+
 
   * [scales_datadog][34] - a Datadog backend for the [Scales][35] library, written by [Tommaso Barbugli][36].
 
 #### Ruby
-{: #community-ruby}
+
 
   * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26].
   * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
 
 #### R
-{: #community-r}
+
 
   * [rdog][68] - an R package to analyze Datadog metrics into R.
 
 #### Scala
-{: #community-scala}
+
 
   * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
 ### Community Tracing (APM) Libraries
 
 #### C\#
-{: #community-tracing-csharp}
+
 
   * [DatadogSharp][89] - A C# Datadog client that supports DogStatsD and APM.
 
 #### Elixir
-{: #community-tracing-elixir}
+
 
   * [spandex][90] - A Datadog APM reporting library.
 
 #### Java
-{: #community-tracing-java}
+
 
   * [apm-client][91] - A Java client for Datadog APM.
 
 #### OpenTracing
-{: #community-tracing-opentracing}
+
 
   * [datadog-tracer-js][92] - OpenTracing tracer implementation for Datadog in JavaScript.
 
   * [dd-go-opentracing][93] - OpenTracing tracer implementation for Datadog in Go.
 
 #### PHP
-{: #community-tracing-php}
+
 
   * [dd-trace-php][94] - A PHP tracing implementation for Datadog.
 
 #### Zipkin
-{: #community-tracing-zipkin}
+
 
   * [dd-zipkin-proxy][95] - A simple Zipkin-to-Datadog proxy.
 
 ### Community Integration Libraries
 
 #### Ansible
-{: #community-integration-ansible}
+
 
   * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### Consul
-{: #community-integration-consul}
+
 
   * Publish consul service counts into Datadog via dogstatsd with [this library][96].
 
 #### Dogscaler
-{: #community-integration-dogscaler}
+
 
   * Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
-{: #community-integration-freeswitch}
+
 
   * This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
 #### Google Analytics
-{: #community-integration-google-analytics}
+
 
   * You can get data into Datadog from Google Analytics using our API with [this library][50].
 
 #### Logstash Output
-{: #community-integration-logstash}
+
 
   * [Logstash Output for Datadog][73]
   * [Logstash Output for Dogstatsd][88]
 
 #### NGINX LUA
-{: #community-integration-nginx-lua}
+
 
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 #### Phusion Passenger
-{: #community-integration-passenger}
+
 
   * Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
 #### Pid-stats
-{: #community-integration-pid-stats}
+
 
   * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
 #### Saltstack
-{: #community-integration-saltstack}
+
 
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].

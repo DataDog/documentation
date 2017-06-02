@@ -1,6 +1,7 @@
 ---
 title: Billing FAQ
 kind: documentation
+external_redirect: https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
 ---
 We occasionally receive questions regarding the specifics of our pricing; the basic plans and the most frequently seen questions can be found below.
 
@@ -21,7 +22,7 @@ There are three plans within Datadog:
 and 100 custom metrics)
     1. Size of your environment in servers
     1. Payment terms (month to month or annual prepaid)
-  
+
 
 Custom metrics are supported in every plan. A custom metric is any metric that is not automatically collected by any of [Datadog’s integrations](https://www.datadoghq.com/product/integrations/)—for example custom checks or API-level metrics from your application. Each host may submit up to 100 custom metrics at no additional cost.
 
@@ -38,11 +39,11 @@ This is per active host in Datadog, whether or not it's running the agent.
 **Do you support hourly pricing?**
 {:#do-you-support-hourly-pricing}
 
-Yes. Our standard hourly rate for Datadog Pro is $0.03 per host per hour. You 
-can choose to pay for all of your monitored hosts hourly, or commit to a subset 
-of hosts upfront on a monthly or annual plan and pay any additional hosts on an 
-hourly basis, billed at the end of each month. This works out to be much less 
-expensive for extra hosts that may come up for a short period, but a bit more 
+Yes. Our standard hourly rate for Datadog Pro is $0.03 per host per hour. You
+can choose to pay for all of your monitored hosts hourly, or commit to a subset
+of hosts upfront on a monthly or annual plan and pay any additional hosts on an
+hourly basis, billed at the end of each month. This works out to be much less
+expensive for extra hosts that may come up for a short period, but a bit more
 than monthly/annual rates if you ran on an hourly rate all the time.
 
 
@@ -72,7 +73,7 @@ Other AWS resources (e.g. ELB, EBS, RDS, Dynamo) are not currently
 part of monthly billing. Note that this may change in the future.
 
 If you would like to control which AWS metrics you are collecting,
-select 'limit metric collection for all accounts' in the 
+select 'limit metric collection for all accounts' in the
 [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) and customize accordingly.
 
 **How will a VMware integration impact my monthly billing?**

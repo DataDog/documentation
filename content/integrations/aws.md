@@ -304,7 +304,7 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 # Troubleshooting
-{: #troubleshooting}
+
 
 **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
 {:#tshoot-discrepancy}

@@ -45,7 +45,7 @@ For `create`/`read`/`update` endpoints, the body is one JSON payload describing 
 
 
 ## General Notes
-{: #notes}
+
 
 ### Sizing and positioning
 
@@ -80,7 +80,7 @@ The final "base" payload of a templated board would look like this:
 
 
 ## API Usage
-{: #usage}
+
 
 The Screenboard API is supported in the Python and Ruby clients as well as with simple `curl` commands.
 

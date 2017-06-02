@@ -35,7 +35,7 @@ Outlier Detectionはダッシュボード上の時系列データのグラフと
 
 <!--
 ### 1. Show Outliers in Dashboards or Screenboards
-{: #dashboards}
+
 
 For example, here is a graph of gunicorn requests by host with outlier detection enabled:
 
@@ -43,7 +43,7 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 -->
 
 ### 1. Outlier Detectionをダッシュボードで可視化する
-{: #dashboards}
+
 
 下記はOutlier Detectionを適用したメトリクス、gunicornのホストごとのリクエスト数のグラフ表示例です:
 
@@ -97,7 +97,7 @@ Outlier Detectionのアルゴリズムは選択することができます。そ
 
 <!--
 ### 2. Alert on Outliers
-{: #alerts}
+
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
@@ -107,7 +107,7 @@ For example, to alert when a Cassandra host is abnormally loaded compared to the
 -->
 
 ### 2. 外れ値データ(Outlier)をアラートする
-{: #alerts}
+
 
 監視すべき重要なグループにおいて外れ値データ(Outlier)を検出したときにアラートするMonitorを設定します。
 
@@ -151,13 +151,13 @@ To ensure that your alert is properly calibrated, you can set the time window at
 
 <!--
 ## Reference: Outlier Algorithms and Parameters
-{: #algorithms}
+
 
 There are two different outlier detection algorithms you can use on your data: DBSCAN and Median Absolute Deviation (MAD). We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. Explanation of each algorithm and its parameters follows.
 -->
 
 ## レファレンス Outlier Detection のアルゴリズムとパラメータ
-{: #algorithms}
+
 
 Outlier Detection では、DBSCAN と Median Absolute Deviation (MAD)の2つのアルゴリズムを使用することができます。まずは、デフォルトのアルゴリズムであるDBSCANから始めることをおすすめします。そして、もし上手く外れ値(Outlier)の検出ができないような場合には、そのパラメータを調整するか、もう一方のアルゴリズムであるMADを試してみてください。以下で、それぞれのアルゴリズムとそのパラメータについて解説します。
 

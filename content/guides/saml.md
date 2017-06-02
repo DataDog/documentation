@@ -11,7 +11,7 @@ This guide assumes that you already have a SAML Identity Provider up and running
 Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
-{: #configuresaml}
+
 If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
 {{< img src="saml_configure.png" >}}
 
@@ -35,7 +35,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
    [6]: /static/images/saml_enabled.png
 
 ## Datadog Service Provider Details
-{: #ddspdetails}
+
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
@@ -47,7 +47,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
    [7]: https://app.datadoghq.com/account/saml/metadata.xml
 
 ##  Setting Attributes
-{: #settingattributes}
+
 
 * Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
@@ -77,7 +77,7 @@ For more information about configuring specific IdP's, refer to the following Kn
 
 
 ## Additional Features
-{: #additionalfeatures}
+
 The following features can be enabled through the SAML Configuration dialog.
 
 ### Just in Time Provisioning (JIT Provisioning)

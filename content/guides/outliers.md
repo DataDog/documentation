@@ -25,7 +25,7 @@ You can use this function to display and alert on outliers in your data. To try 
 
 
 ### 1. Show Outliers in Dashboards or Screenboards
-{: #dashboards}
+
 
 For example, here is a graph of gunicorn requests by host with outlier detection enabled:
 
@@ -51,7 +51,7 @@ There are several outlier detection algorithms you can choose. The default algor
 
 
 ### 2. Alert on Outliers
-{: #alerts}
+
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
@@ -74,7 +74,7 @@ To ensure that your alert is properly calibrated, you can set the time window at
 {{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 
 ## Reference: Outlier Algorithms and Parameters
-{: #algorithms}
+
 
 
 There are two different types of outlier detection algorithms you can use on your data: DBSCAN/ScaledDBSCAN and MAD/ScaledMAD. We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If you have metrics on a larger scale that look to be closely clustered but the DBSCAN/MAD algorithms are identifying some as outliers, try the scaled algorithms. Explanation of each algorithm and its parameters follows.

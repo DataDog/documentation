@@ -23,7 +23,7 @@ This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
 ## Integrations
-{: #integrations}
+
 
 {{< img src="integrations.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -34,7 +34,7 @@ it can help you bring your infrastructure to heel.
 in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
-{: #infrastructure}
+
 
 {{< img src="infrastructure.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -50,7 +50,7 @@ for that machine based on what was previously set up for that tag.
 * For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
 
 ## Host Map
-{: #hostmap}
+
 
 {{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -64,7 +64,7 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 
 ## Events
-{: #events}
+
 
 {{< img src="event_stream.png" >}}{: style="width:100%; border:1px solid #777777"}
 

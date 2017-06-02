@@ -16,7 +16,7 @@ Get metrics from ActiveMQ in real time to
 
 
 # Configuration
-{: #int-configuration}
+
 
 ***This integration requires Linux or Mac OS X.***
 

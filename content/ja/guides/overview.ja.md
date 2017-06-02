@@ -47,7 +47,7 @@ in an online service is treated the same throughout Datadog.</li>
 </ul> -->
 
 ## 簡単で便利なIntegrations
-{: #integrations}
+
 
 {{< img src="integrations.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -80,7 +80,7 @@ for that machine based on what was previously set up for that tag.</li>
 </ul> -->
 
 ## インフラを構成しているホストのリスト表示
-{: #infrastructure}
+
 
 {{< img src="infrastructure.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -91,7 +91,7 @@ for that machine based on what was previously set up for that tag.</li>
 
 
 <!-- ## Host Map
-{: #hostmap}
+
 
 {{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -105,7 +105,7 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -->
 
 ## Host Mapの表示
-{: #hostmap}
+
 
 {{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
 
@@ -147,7 +147,7 @@ For each incident users can:
  -->
 
 ## イベントの時系列表示
-{: #events}
+
 
 {{< img src="event_stream.png" >}}{: style="width:100%; border:1px solid #777777"}
 

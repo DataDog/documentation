@@ -21,7 +21,7 @@ sidebar:
 <!-- ### Configure Azure Monitoring -->
 
 ### Azure監視機能の設定
-{: #monitoring}
+
 
 <!-- Microsoft Azure supports both PaaS and IaaS (VM) services. Right now Datadog monitoring is tailored for IaaS services. But it can also be installed in worker and web roles. -->
 
@@ -65,7 +65,7 @@ Datadogの監視が正しく動作するためには、"Basic metrics", "network
 <!-- ### Deploy agents -->
 
 ### Datadog Agentのインストール
-{: #agents}
+
 
 #### Azureポータルからのインストール
 
@@ -95,7 +95,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 <!-- ### Troubleshooting -->
 
 ### トラブルシュート
-{: #troubleshooting}
+
 
 <!-- Here are some common issues you might be seeing. -->
 

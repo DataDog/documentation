@@ -54,12 +54,12 @@ Related integrations include:
 {:.table}
 
 ### Installation
-{: #installation}
+
 
 You can integrate your Microsoft Azure account with Datadog using the Azure CLI tool or the Azure portal.
 
 #### Integrating through the Azure CLI
-{: #installation_cli}
+
 
 To integrate Datadog with Azure using the Azure CLI, make sure you have [Azure CLI installed][7].
 
@@ -161,14 +161,14 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 
 
 #### Integrating through the Azure Portals
-{: #installation_portal}
+
 
 1. <a href="#installation1">Get your tenant name</a> and pass it to Datadog.
 2. <a href="#installation2">Create a web application</a> in your Active Directory and pass the correct credentials to Datadog.
 3. <a href="#installation3">Give this application read-access</a> to any subscriptions you would like to monitor.
 
 ##### Getting your Tenant Name
-{: #installation1}
+
 
 1. Navigate to [portal.azure.com][2]
 2. In the leftmost blade, select "Azure Active Directory"
@@ -181,7 +181,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
     {{< img src="azure/tenant_name_form.png" >}}
 
 ##### Creating the Web Application
-{: #installation2}
+
 
 1. Navigate to the "App Registrations" tab within your Azure Active Directory.
 2. Press "Add"
@@ -212,7 +212,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 11. Click "Install Integration" to complete the application creation process
 
 ##### Giving Read Permissions to the Application
-{: #installation3}
+
 
 1. Navigate to “Subscriptions” on the left hand menu
 
@@ -245,7 +245,7 @@ Naviate to the [Azure VM Default Dashboard][6] to see this dashboard populate wi
 Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
 ### Configuration
-{: #configuration}
+
 
 Optionally, you can limit the Azure VMs that are pulled into Datadog by entering tags in the "Optionally filter to VMs with tag" textbox. This comma separated list of tags (in the form 'key:value') defines a filter that we will use when collecting metrics from Azure VMs. Wildcards, such as '?' (for single characters) and '*' (for multiple characters) can also be used. Only VMs that match one of the defined tags will be imported into Datadog. The rest will be ignored.
 
@@ -258,14 +258,14 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 {{< img src="azure/filter_form.png" >}}
 
 ### Deploy Agents
-{: #agents}
+
 
 1. Navigate to your VM in the Azure Portal > Settings > Extenstions > Add > Select Datadog Agent. Use an API key found <a href="https://app.datadoghq.com/account/settings#api">here</a>
 2. Manually deploy Agents by following the instructions <a href="/guides/azure/">here</a>
 3. Install based on operating system or CICD tool <a href="https://app.datadoghq.com/account/settings#agent"> using these instructions</a>
 
 ### Metrics
-{: #metrics}
+
 
 View the specific metrics we collect for each Azure service integration:
 
@@ -282,7 +282,7 @@ View the specific metrics we collect for each Azure service integration:
 
 
 ### Troubleshooting
-{: #troubleshooting}
+
 Here are some common issues you might be seeing.
 
 #### I don't know my tenant name
@@ -311,7 +311,7 @@ For ARM virtual machines, ensure you have enabled diagnostics and selected the m
 For other missing metrics, please reach out to [support@datadoghq.com][3].
 
 ##### Enable diagnostics
-{: #diagnostics}
+
 Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. To do this, first go to [Azure Portal][2] then follow the instructions below.
 
 After locating your VM:

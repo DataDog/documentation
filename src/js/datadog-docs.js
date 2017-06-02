@@ -74,6 +74,7 @@ $(document).ready(function() {
     var subheading;
 
     var toc = window.Datadog.toc;
+    var tocdepth = window.Datadog.tocdepth;
 
     headings = {
 
@@ -107,6 +108,10 @@ $(document).ready(function() {
                     subheading = null;
                 }
                 console.log('here');
+            }
+
+            if(tocdepth == 1){
+                subheading = null;
             }
 
             this.initToc(header, subheading);

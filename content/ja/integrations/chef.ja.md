@@ -12,7 +12,7 @@ doclevel: basic
 {:#int-overview} -->
 
 ## 概要
-{: #int-overview}
+
 
 
 <!-- Connect Chef to Datadog in order to:

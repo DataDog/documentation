@@ -6,7 +6,7 @@ has_snippets: True
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 
 ## Find the Graph Editor
-{: #editor}
+
 
 On each graph you will find a pencil icon that opens the graph editor.
 

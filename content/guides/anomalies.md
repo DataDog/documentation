@@ -17,7 +17,7 @@ We've added a new query function called `anomalies` to our query language. When 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
 ### 1. Visualize Anomalies in Dashboards
-{: #dashboards}
+
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 
@@ -40,7 +40,7 @@ The function has two parameters. The first parameter is for selecting which algo
 <img src="/static/images/anomalies/final_editor.png" style="width:100%; border:1px solid #777777"/>
 
 ### 2. Alert on Anomalies
-{: #alerts}
+
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
 

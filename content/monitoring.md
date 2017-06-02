@@ -30,7 +30,7 @@ sidebar:
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 
 ## Glossary
-{: #glossary}
+
 
 Here is a quick overview of the different terms used in this guide.
 
@@ -44,7 +44,7 @@ Here is a quick overview of the different terms used in this guide.
 
 
 ## Creating a Monitor
-{: #create}
+
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
@@ -52,7 +52,7 @@ page by highlighting the "Monitors" tab in the main menu and selecting the
 on the left. This document will walk through the configuration of each type.
 
 ### Host Monitors
-{: #host}
+
 
 *Requires Datadog Agent version >= 5.0.0.*
 
@@ -72,7 +72,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 ### Metric Monitors
-{: #metric}
+
 
 1. Select the metric and scope you want to monitor.
   {{< img src="monitor/metric_scope.png" >}}
@@ -187,7 +187,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 
 ### Integration Monitors
-{: #integration}
+
 
 {{< img src="monitor/es_status.png" >}}
 
@@ -206,7 +206,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   options.
 
 ### Process Monitors
-{: #process}
+
 
 {{< img src="monitor/process_monitor.png" >}}
 
@@ -235,7 +235,7 @@ point they should notify.
    walkthrough of the common notification options.
 
 ### Network Monitors
-{: #network}
+
 
 {{< img src="monitor/network_monitor.png" >}}
 
@@ -276,7 +276,7 @@ configuration.
    walkthrough of the common notification options.
 
 ### Event Monitors
-{: #event}
+
 
 Event monitors allows you to alert when an event matching your query occurs.
 
@@ -296,7 +296,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 
 ### Custom Monitors
-{: #custom}
+
 
 {{< img src="monitor/custom_monitor.png" >}}
 
@@ -331,7 +331,7 @@ or service checks.
    walkthrough of the common notification options.
 
 ## Monitor Notifications
-{: #notifications}
+
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -488,7 +488,7 @@ We provide a number of different types of monitors and not all variables are ava
 Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type "{{" to begin a template variable name.
 
 ## Monitor FAQs
-{: #faq}
+
 
 - *Can I manage my monitors programatically?*
 

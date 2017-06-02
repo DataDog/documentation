@@ -8,20 +8,20 @@ kind: documentation
 <!--
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page](/graphing)
 ## Graphing with the JSON editor
-{: #graphing}
+
 -->
 
 グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門](/ja/graphing)を参照して下さい。
 
 ## JSONエディターを使用したグラフ表示
-{: #graphing}
+
 
 {{< img src="references-graphing-jsoneditor.png" >}}
 
 <!--### Grammar-->
 
 ### JSON書式の構文
-{: #grammar}
+
 
 <!--
 The graph definition language is well-formed JSON and is structured in four parts:
@@ -83,7 +83,7 @@ JSON書式の一番外側のカッコ内に、先の要素が下記のエント�
 <!--## Requests-->
 
 ## Requests (メトリクスの時系列データ, Series)
-{: #requests}
+
 <!--
 The general format for a series is:
 
@@ -117,7 +117,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 <!--#### Functions-->
 
 #### 関数
-{: #functions}
+
 
 <!--
 You can apply functions to the result of each query.
@@ -177,7 +177,7 @@ future. For more on <code>.as_count()</code> please see our blog post
 <!-- #### Aggregation Method -->
 
 #### データポイントの集計
-{: #aggregation}
+
 
 <!--
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
@@ -187,7 +187,7 @@ In most cases, the number of data points available outnumbers the maximum number
 <!-- #### Metrics -->
 
 #### メトリクスの確認
-{: #metrics}
+
 
 <!--
 The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
@@ -197,7 +197,7 @@ The metric is the main focus of the graph. You can find the list of metrics avai
 <!-- #### Scope -->
 
 #### 対象範囲の指定(Scope, スコープ)
-{: #scope}
+
 
 <!--
 A scope lets you filter a Series. It can be a host, a device on a host
@@ -228,7 +228,7 @@ Examples of scope (meaning in parentheses):
 <!-- #### Groups -->
 
 #### グループの指定
-{: #groups}
+
 
 <!--
 For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
@@ -238,7 +238,7 @@ For any given metric, data may come from a number of hosts. The data will normal
 <!-- #### Arithmetic -->
 
 #### 演算子の利用
-{: #math}
+
 
 <!--
 You can apply simple arithmetic to a Series (+, -, * and /). In this
@@ -300,7 +300,7 @@ Datadogでは、ここでは一貫性を強制していないので、*異なる
 <!-- ### Events -->
 
 ### イベントの表示
-{: #events}
+
 
 <!--
 You can overlay any event from Datadog. The general format is:
@@ -353,7 +353,7 @@ Datadogに保存したイベント情報は、次の書式で記述すること�
     ]
 
 ### グラフによる可視化
-{: #viz}
+
 
 <!--
 Data can be visualized in a few different ways:
@@ -392,7 +392,7 @@ The Time Series can be further broken down to:
 <!-- #### Line Charts -->
 
 #### 折れ線グラフ
-{: #linecharts}
+
 
 <img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
 
@@ -416,7 +416,7 @@ The Time Series can be further broken down to:
 <!-- #### Stacked Series -->
 
 #### 積み上げグラフ
-{: #stacked}
+
 
 <img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
@@ -433,7 +433,7 @@ The Time Series can be further broken down to:
 チャート毎に1つのクエリを表示する代わりに","ですべてのクエリを連結することによって、全てのクエリを1つのグラフに積み上げて表示することができます。
 
 #### Slice-n-Stack
-{: #slice}
+
 
 <!--
 A useful visualization is to represent a metric shared across
@@ -473,7 +473,7 @@ Note that in this case you can only have 1 query. But you can also split by devi
 <!-- ### Y-Axis Controls -->
 
 ### Y軸の操作
-{: #yaxis}
+
 
 <!--
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
@@ -536,7 +536,7 @@ Examples:
 <!-- #### Filtering -->
 
 #### Y軸のフィルタリング
-{: #filter}
+
 
 <!--
 Filter configuration allows you to automatically change y-axis bounds based on a
@@ -627,7 +627,7 @@ not in the bottom 10% nor in the top 30%.
 <!-- #### Examples -->
 
 #### 設定例
-{: #examples}
+
 
 <!--
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.

@@ -19,7 +19,7 @@ doclevel: complete
 </div> -->
 
 ## 概要
-{: #int-overview}
+
 
 ActiveMQyより、リアルタイムでメトリクスを取得します。
 
@@ -38,7 +38,7 @@ Metrics will be captured using a JMX connection.
 
 
 ## 設定
-{: #int-configuration}
+
 **このインテグレーションでメトリクスを取得するには、LinuxもしくはMac OS X上でActiveMQが動作している必要があります。**
 
 ActiveMQのメトリクスを取得するには、Datadog Agentをインストールする必要があります。
@@ -129,7 +129,7 @@ else echo -e "&#92;e[031mAgent is not running&#92;e[0m"; fi</code></pre>
 </div> -->
 
 1. **ActiveMQサーバー上で[JMX Remote](http://activemq.apache.org/jmx.html)が有効になっていることを確認してください。**
-2. ActiveMQに接続出来るように、Agentを設定します。  
+2. ActiveMQに接続出来るように、Agentを設定します。
 `${confd_help('<code>conf.d/activemq.yaml</code>')}`を次のように編集します。
 
         instances:

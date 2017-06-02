@@ -36,7 +36,7 @@ Monitoring in Datadog refers to the ability to notify your team when conditions 
 このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
 
 ## 用語集
-{: #glossary}
+
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -58,7 +58,7 @@ Here is a quick overview of the different terms used in this guide.
 - **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
 
 ## 新しいMonitorの作成
-{: #create}
+
 
 <!--
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -70,7 +70,7 @@ on the left. This document will walk through the configuration of each type.
 [Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このドキュメントでは、これらの各Monitorタイプの設定方法について解説していきます。
 
 ### ホストを対象にしたMonitor
-{: #host}
+
 
 <!-- *Requires Datadog Agent version >= 5.0.0.* -->
 *Datadog Agent バージョン 5.0.0 以上が必要です。*
@@ -105,7 +105,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 3. 通知の設定をします。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
 
 ### メトリクスを対象にしたMonitor
-{: #metric}
+
 
 <!--
 1. Select the metric and scope you want to monitor.
@@ -295,7 +295,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 
 ### インテグレーションを対象にしたMonitor
-{: #integration}
+
 
 {{< img src="monitor/es_status.png" >}}
 
@@ -323,7 +323,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 
 
 ### プロセスを対象にしたMonitor
-{: #process}
+
 
 {{< img src="monitor/process_monitor.png" >}}
 
@@ -367,7 +367,7 @@ point they should notify.
 4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
 
 ### ネットワークを対象にしたMonitor
-{: #network}
+
 
 {{< img src="monitor/network_monitor.png" >}}
 
@@ -430,7 +430,7 @@ configuration.
 4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
 
 ### イベントを対象にしたMonitor
-{: #event}
+
 
 <!--
 Event monitors allows you to alert when an event matching your query occurs.
@@ -460,7 +460,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
 
 ### カスタムチェックを対象にしたMonitor
-{: #custom}
+
 
 {{< img src="monitor/custom_monitor.png" >}}
 
@@ -507,7 +507,7 @@ or service checks.
 2. 監視したい**ホスト名やタグ（複数可）**を選択します。
    アラートが通知されるの為の確認は、監視対象として指定されたホストから送られてくるタグやタグの組み合わせに対して実行されます。例えば、Nginxのサービスチェックが、`{host,port}`毎にステータスを報告しているとします。そしてもしも、単一ホスト上で複数のサーバが稼働している状態であれば、それぞれのサーバの障害は個別に通知されることになります。
 
-3. {: #check-alerting} **アラートのオプション** を選択します。
+3.  **アラートのオプション** を選択します。
 
    各サービスチェックが実行されると、CRITICAL、WARNING、OKの何れかのステータスを送信します。`Trigger the alert after selected consecutive failures:`の項目でステータス変更とアラートを通知するための連続発生回数を指定します。例えば、カスタムMonitorのチェックが失敗した場合には直ちに知りたいが、OK状態が続くまではリカバー状態にはなってほしくないとします。このようなケースではオプションを、1回のCritical、1回のWarning、4回のOKと設定します。
 
@@ -517,7 +517,7 @@ or service checks.
 
 
 ## 通知の設定
-{: #notifications}
+
 
 <!--
 Notifications are a key component of any monitor. You want to make sure the
@@ -718,7 +718,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
 
 ## Monitorに関するFAQs
-{: #faq}
+
 
 <!--
 - *Can I manage my monitors programatically?*

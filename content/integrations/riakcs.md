@@ -6,7 +6,7 @@ kind: integration
 ---
 
 ### Overview
-{: #int-overview}
+
 
 Capture Riak CS (Cloud Storage) metrics in Datadog to:
 

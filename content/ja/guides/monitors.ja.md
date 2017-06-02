@@ -60,7 +60,7 @@ Hipchat）やwebhooksを使い、他のサービスと連携して通知を送�
 通知を送信したMonitorはイベントストリームに表示され、そのアプリケーションやインフラの問題解決に向けたコラボレーションができるようになります。Datadogの[Triggered Monitors](https://app.datadoghq.com/monitors/triggered)のページには、通知済み状態のMonitorの項目がリスト表示されます。[Manage Monitors](https://app.datadoghq.com/monitors)のページには全てのMonitorが表示され、それらを管理することができるように成っています。
 
 ## 用語集
-{: #glossary}
+
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -83,11 +83,11 @@ Here is a quick overview of the different terms used in this guide.
 
 <!--
 ## Creating a Monitor
-{: #create}
+
 -->
 
 ## 新しいMonitorの作成
-{: #create}
+
 
 <!--
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -105,7 +105,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 <!-- ## Metric Monitors {#metric} -->
 
   **監視する対象の設定**
-  {: #metric}
+
 
 <!--
 1. Select the metric and scope you want to monitor.
@@ -308,7 +308,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 <!-- ## Monitor Notifications {#notification} -->
 
 ### 通知の設定
-{: #notifications}
+
 
 {{< img src="monitor/notification.png" >}}
 
@@ -352,7 +352,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 <!-- ## Scheduling Downtime -->
 
 ## ダウンタイムを設定する
-{: #downtime}
+
 
 <!--
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
@@ -360,7 +360,7 @@ You may occasionally need to shut systems down or take them offline to perform m
 ■◎ここから◎■
 
 ### ダウンタイムの管理
-{: #downtime-manage}
+
 
 <!--
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
@@ -379,7 +379,7 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 {{< img src="monitor/downtime-manage.png" >}}
 
 ### ダウンタイムのスケジュール
-{: #downtime-schedule}
+
 
 <!--
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
@@ -436,7 +436,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 <!-- ## Monitor FAQs {#faqs} -->
 
 ## Monitorに関するFAQs
-{: #faqs}
+
 
 <!--
 - *Can I manage my monitors programatically?*

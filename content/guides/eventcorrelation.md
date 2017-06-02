@@ -10,20 +10,20 @@ listorder: 4
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
 
 ## Event Correlation at Design Time
-{: #designtime}
+
 
 {{< img src="guides-eventcorrelation-screenboard.png" >}}
 Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer](/graphing/). You can find details about adding events [using the UI](/graphing/#overlay-events-for-additional-context) or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
-{: #viewtime}
+
 
 
 {{< img src="guides-eventcorrelation-searchbox.png" >}}
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
 
 ## Event Query Language
-{: #eql}
+
 
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
 
