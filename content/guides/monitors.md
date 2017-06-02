@@ -235,18 +235,18 @@ The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you r
 
 Advanced search lets you query monitors by any combination of monitor attributes:
 
-* Title and message body (text search)
-* Status — Alert, Warn, No Data, Ok 
-* Scope — e.g. *, role:master-db
-* Type — metric, integration, apm, etc
-* Muted (or not)
-* Creator — who created the monitor
-* ID
-* Service tags
-* Team tags
-* Env tags
-* Notification target — e.g. you@example.com, slack-ops-oncall
-* Metric or service check monitored — e.g. system.cpu.user, http.can_connect
+* `title` and `message` — text search
+* `status` — Alert, Warn, No Data, Ok 
+* `scope` — e.g. *, role:master-db
+* `type` — metric, integration, apm, etc
+* `muted`
+* `creator`
+* `id`
+* `service` — tags
+* `team` — tags
+* `env` — tags
+* `notification` — the monitor's notification target, e.g. you@example.com, slack-ops-oncall
+* `metric` — the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
 
 To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query; there's no 'Search' button to click.
 
@@ -255,7 +255,7 @@ To run a search, construct your query using the checkboxes on the left and/or th
 When you don't need to search monitor titles and bodies for specific text, your search is a quick click or two away. Check as many boxes as you need to find your desired monitors, keeping the following in mind:
 
 * Checking attributes from different fields will AND the values, e.g. `status:Alert type:Metric` (the lack of an operator between the two search terms implies AND)
-* Checking attributes within the same field will often OR the values, e.g. `status:(Alert OR Warn)`, but there are some exceptions: checking multiple scopes or service tags ANDs them.
+* Checking attributes within the same field will often OR the values, e.g. `status:(Alert OR Warn)`, but there are some exceptions. For example, checking multiple scopes or service tags ANDs them.
 * Some fields do not allow you to select multiple values, e.g. when you tick a metric or service check, the other metrics/checks disappear from the list until you untick your selection.
 * The Triggered checkbox under the Status field means `status:(Alert OR Warn OR "No Data")`, not `status:Triggered`. Triggered is not a valid monitor status.
 * The Muted checkbox appears under the Status field, but Muted is actually its own field; checking it adds `muted:true` to your query, not `status:muted`.
@@ -267,7 +267,7 @@ When you need to run a more complex search than the checkboxes allow, use the se
 
 #### Write a query
 
-The most common reason to write a query is to search for specific text across all monitor names (i.e. titles) and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the name or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `name:postgresql`.
+The most common reason to write a query is to search for specific text across all monitor titles and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the title or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `title:postgresql`.
 
 Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe how it is *not* like Elasticsearch syntax:
 
@@ -276,7 +276,7 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to w
 * Proximity searches are not supported, but the [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness) operator is
 * Ranges are not supported
 * Boosting is not supported
-* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are: `-`, `(`, `)`, `"`, `~`, `*`, `:`
+* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and ` ` (whitespace).
 
 ### Manage chosen Monitors
 
