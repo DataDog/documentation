@@ -272,7 +272,7 @@ On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Dat
 
 The BOSH Health Monitor Datadog plugin emits an event to Datadog for any alert it receives from your deployment's BOSH Agents. Read the [BOSH Health Monitor docs](https://bosh.io/docs/monitoring.html) to see what kinds of alerts might show up in your Datadog event stream.
 
-The BOSH Agent sets a severity for each alert it generates, and the Datadog Health Monitor plugin uses that severity to prioritize the event. An alert with severity Alert, Critical, or Error becomes a Normal priority event in Datadog. An alert with other severities becomes a Low priority event.
+The BOSH Agent sets a severity for each alert it generates, and the Datadog Health Monitor plugin uses that severity to prioritize the event it emits. Alerts with an Error, Critical, or Alert severity become Normal priority events in Datadog. Alerts with any other severity become Low priority events.
 
 # Metrics
 
