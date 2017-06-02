@@ -9,7 +9,7 @@ updated_for_agent: 5.8.5
 
 # Overview
 
-![Elasticsearch](/static/images/elasticsearchgraph.png)
+{{< img src="elasticsearchgraph.png" >}}
 
 Connect Elasticsearch to Datadog in order to:
 

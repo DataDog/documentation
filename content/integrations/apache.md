@@ -8,7 +8,7 @@ git_integration_title: apache
 
 # Overview
 
-![Apache Graph](/static/images/apachegraph.png)
+{{< img src="apachegraph.png" >}}
 
 Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 

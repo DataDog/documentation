@@ -124,7 +124,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 
 # Configuration
 
-![logo](/static/images/integrations-aws-secretentry.png)
+{{< img src="integrations-aws-secretentry.png" >}}
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.

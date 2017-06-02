@@ -19,7 +19,7 @@ platformmetrics:
 ---
 # Overview
 
-![Network Dashboard](/static/images/netdashboard.png)
+{{< img src="netdashboard.png" >}}
 
 The network check collects TCP and IP network metrics from the agent's host.
 

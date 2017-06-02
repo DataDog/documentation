@@ -10,7 +10,7 @@ updated_for_agent: 5.8.5
 
 Monitor the state of your Windows Services.
 
-![Windows Service Event](/static/images/windows-service.png)
+{{< img src="windows-service.png" >}}
 
 # Configuration
 

@@ -19,17 +19,17 @@ If you are an AWS user, you probably use a variety of instance types. Some insta
 
 Below is a subset of Datadog’s infrastructure. As you can see, c3.2xlarge instances are pretty heavily loaded.
 
-![](/static/images/hostmappart1image2.png)
+{{< img src="hostmappart1image2.png" >}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
-![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
+{{< img src="hostmappart1image3.png" >}}
 
 ### Availability Zone Placement
 
 Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, at Datadog we have an uneven distribution of hosts with role:daniels across availability zones. (Daniels is the name of one of our internal applications.)
 
-![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png)
+{{< img src="hostmappart1image4.png" >}}
 
 ### Problem Investigation
 
@@ -37,9 +37,9 @@ Imagine you are having a problem in production. Maybe the CPUs on some of your h
 
 Below is a screenshot from a recent issue we had a Datadog. As you can see, some hosts had much less usable memory than others, despite being part of the same cluster. Why? We grouped by machine image in Host Maps, and the problem was immediately clear: there were in fact two different images in use, and one of them had become overloaded.
 
-![Datadog Host Maps Two Memory Usage Bands](/static/images/hostmappart1image5.png)
+{{< img src="hostmappart1image5.png" >}}
 
-![Datadog Host Maps Two Image Groups](/static/images/hostmappart1image6.png)
+{{< img src="hostmappart1image6.png" >}}
 
 ## More Details
 
@@ -73,19 +73,19 @@ Filterable host attributes (automatically provided):
 
 ‘Group hosts by tags’ spatially arranges your hosts into clusters, or groups. Any host in a group shares the tag or tags you group by. A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts will be further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-![Datadog Host Maps AZ Instance Groups](/static/images/hostmappart2image2.png)
+{{< img src="hostmappart2image2.png" >}}
 
 ### Zoom in
 
 When you’ve identified a host that you want to investigate, click it for details. You will zoom in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they will be listed under the “Apps” header in the host’s detail pane, as in the screenshot below.) Click the name of an integration, and you will get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
-![Datadog Host Maps Zoom In](/static/images/blog-host-maps-01.png)
+{{< img src="blog-host-maps-01.png" >}}
 
 ### Shapes and colors
 
 By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
-![Datadog Host Maps Using Color And Size](/static/images/hostmappart2image4.png)
+{{< img src="hostmappart2image4.png" >}}
 
 Today the ‘Color by’ selector and ‘Size by’ selector contain only CPU-based metrics: load, idle, wait, etc. We will be adding additional metrics in the very near future.
 

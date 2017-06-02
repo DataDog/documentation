@@ -14,7 +14,7 @@ Get metrics from your app in real time to
 
   * Visualize performance metrics
 
-![spark graph](/static/images/sparkgraph.png)
+{{< img src="sparkgraph.png" >}}
 
 # Configuration
 

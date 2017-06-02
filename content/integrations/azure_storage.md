@@ -14,7 +14,7 @@ Azure Storage is the cloud storage solution for modern applications that rely on
 
 Enable this integration to see capacity and transaction metrics from Azure Storage in Datadog. Note that capacity metrics are only available for Blob storage.
 
-![dash](/static/images/azure/storage_dash.png)
+{{< img src="azure/storage_dash.png" >}}
 
 
 # Installation
@@ -22,8 +22,8 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 1.  If you haven't already, set up the [Main Azure Integration](/integrations/azure).
 2.  For each storage account that you want to monitor, create the required monitoring tables and generate the SAS token with the Azure Storage integration setup CLI. **Instructions and a script for completing this step can be found [here](https://github.com/DataDog/azure-storage-dd)**
 3.  Paste the storage account name and SAS token generated from the CLI tool into the form in the [Azure Storage Tile][1]
-	
-	![tile](/static/images/azure/storage_tile.png)
+
+	{{< img src="azure/storage_tile.png" >}}
 
 4.  Once you have done this for each Storage Account you wish to monitor, click Update Configuration.
 

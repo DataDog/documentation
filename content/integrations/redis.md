@@ -9,7 +9,7 @@ updated_for_agent: 5.8.5
 
 # Overview
 
-![Redis default dashboard](/static/images/redis.png)
+{{< img src="redis.png" >}}
 
 Track and graph your Redis activity and performance metrics with slice-and-dice at all levels
 from individual column families to entire clusters.
@@ -73,7 +73,7 @@ clicking [Overview][2]). If you go to the [Metrics Explorer][3], you can select 
 metrics you want to see and what you want to see it over.  In the ‘Over:’ section
 you can select multiple environments and then select “Save these tiles to: a new dashboard.”
 
-![](/static/images/metric-explorer-redis.png)
+{{< img src="metric-explorer-redis.png" >}}
 
 ### Metrics
 

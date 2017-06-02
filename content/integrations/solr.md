@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 # Overview
 
-![Solr Graph](/static/images/solrgraph.png)
+{{< img src="solrgraph.png" >}}
 
 Get metrics from Solr in real time to
 

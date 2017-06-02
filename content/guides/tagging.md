@@ -118,12 +118,12 @@ After you have assigned tags at the host and integration level, you can start us
 ### Using tags in the Events List
 The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter ```tags:``` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:sobotka. So the search text is ```tags:role:sobotka```.
 
-![Events List and Tags](/static/images/eventtags.png)
+{{< img src="eventtags.png" >}}
 
 ### Using tags in Dashboards
 You can use tags to narrow down the metrics to display on a dashboard grapm, or to create groups of metrics to display. To narrow down the metrics to display, enter the tag in the over: textbox. You will now be looking at a chosen metric over all the hosts that have that particular tag assigned. To group using tags, enter the key part of the tag in the group: textbox. For instance, if you have a timeseries graph and you have assigned the tags ```role:database```, ```role:frontend```, and ```role:loadbalancer```, you will get one line in your timeseries graph representing all the machines with the database, another of machines wth the frontend, and third of machines with the loadbalancer.
 
-![Tags in Dashboards](/static/images/dashboardtags.png)
+{{< img src="dashboardtags.png" >}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
 
@@ -131,13 +131,13 @@ You can also use tags to overlay events on the dashboard. This works in exactly 
 
 To filter the list of hosts in the Infrastructure list, enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you will see each role as a group heading followed by the hosts with that tag.
 
-![Tags in the Infrastructure List](/static/images/infrastructuretags.png)
+{{< img src="infrastructuretags.png" >}}
 
 ### Using tags in Monitors
 
 When defining a monitor, you can use tags to allow the monitor to apply to any subset of hosts across your environment.
 
-![Tags in Monitors](/static/images/monitortags.png)
+{{< img src="monitortags.png" >}}
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

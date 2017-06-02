@@ -194,8 +194,8 @@ gulp.task('watch', function () {
   //     blacklist: ['/wp-admin/**']
   //   }
   // });
-  gulp.watch([path.source + 'scss/**/*'], ['scss']);
-  gulp.watch([path.source + 'js/**/*'], ['js']);
+  gulp.watch([path.source + 'scss/**/*'], ['styles']);
+  gulp.watch([path.source + 'js/**/*'], ['scripts']);
 });
 
 // ### Build

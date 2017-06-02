@@ -1,0 +1,52 @@
+{{ $sidebar := .Params.sidebar }}
+{{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) and (.Site.Language.Lang "==" "en" ) }}
+
+<ul class="nav nav-tabs nav-stacked sidebar">
+  {{ if ne .Site.Language.Lang "ja"}}
+    <li class="nav-header">Documentation Search</li>
+    <li>
+      <form action="/search/">
+      <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+      </form>
+    </li>
+  {{ end }}
+  {{ if $.Params.sidebar.nav }}
+    <li class='nav-header'>Table of Contents</li>
+    {{ range $k, $v := $.Params.sidebar.nav }}
+
+      {{ if $v.header }}
+
+      {{ else }}
+
+        <li><a href="{{ $v.href }}">{{ $v.text }}</a></li>
+
+      {{ end }}
+
+    {{ end }}
+  {{ end }}
+
+  {{ if in .File.Path "basic_agent_usage" }}
+
+    {{ range .Site.Menus.basic_agent }}
+
+      <li><a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+
+    {{ end }}
+
+  {{ else }}
+
+    <li id="toc-box"></li>
+
+    {{ if $guides }} <li class="nav-header">Guides</li> {{ end }}
+
+    {{ range sort $guides "Params.listorder" "asc" }}
+
+      {{ if and ( isset .Params "listorder" ) ( ne .Params.beta true ) }}
+          <li><a href="{{.Permalink}}">{{ .Title }}</a></li>
+      {{ end }}
+
+    {{ end }}
+
+  {{ end }}
+</ul>
+

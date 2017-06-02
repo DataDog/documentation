@@ -7,7 +7,7 @@ newhlevel: true
 ---
 # Overview
 
-![Lighttpd Dashboard](/static/images/lighttpddashboard.png)
+{{< img src="lighttpddashboard.png" >}}
 
 Bring Lighttpd metrics to Datadog to:
 
@@ -34,7 +34,7 @@ Bring Lighttpd metrics to Datadog to:
             -   lighttpd_status_url: http://example.com/server-status?auto
                 tags:
                     -   instance:foo
-        
+
 2.  Restart the Agent
 
 # Validation

@@ -8,7 +8,7 @@ newhlevel: true
 
 # Overview
 
-![RDS Dashboard](/static/images/rdsdashboard.png)
+{{< img src="rdsdashboard.png" >}}
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
@@ -153,7 +153,7 @@ To validate that the native database integration is working, run `datadog-agent 
 After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag. ![][2]
 
 Here is the default dashboard for MySQL on Amazon RDS:
-![RDS MySQL default dashboard](/static/images/rds-mysql.png)
+{{< img src="rds-mysql.png" >}}
 
 Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
 

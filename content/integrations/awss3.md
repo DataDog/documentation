@@ -9,7 +9,7 @@ git_integration_title: amazon_s3
 
 # Overview
 
-![S3 Dashboard](/static/images/s3_db_screenshot.png)
+{{< img src="s3_db_screenshot.png" >}}
 
 Amazon Simple Storage Service (S3) is a highly available and scalable cloud storage service.
 

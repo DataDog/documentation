@@ -67,7 +67,78 @@
 
 
 $(document).ready(function() {
+
     $('#tipue_search_input').tipuesearch();
+
+    var header;
+    var subheading;
+
+    var toc = window.Datadog.toc;
+
+    headings = {
+
+        'init': function(){
+
+            this.h1s = $('.main h1');
+            this.h2s = $('.main h2');
+            this.h3s = $('.main h3');
+            this.h4s = $('.main h4');
+            this.listHeadings();
+            this.setHeadings();
+
+        },
+        'listHeadings': function() {
+            //console.log('h1s', this.h1s.length);
+            // console.log('h2s', this.h2s.length);
+            // console.log('h3s', this.h3s.length);
+            // console.log('h4s', this.h4s.length);
+        },
+        'setHeadings': function(){
+
+            if(this.h2s.length > 0 && this.h3s.length > 0 ) {
+                header = 'h2';
+                subheading = 'h3';
+                console.log('ther');
+            }else if(this.h2s.length == 0 && this.h3s.length > 0 ) {
+                header = 'h3';
+                if(this.h4s.length > 0){
+                    subheading = 'h4';
+                }else{
+                    subheading = null;
+                }
+                console.log('here');
+            }
+
+            this.initToc(header, subheading);
+
+        },
+        'initToc': function(header, subheading) {
+
+            this.header = header;
+            this.subheading = subheading;
+
+            // console.log(header);
+            // console.log(subheading);
+
+            $('body').tocible({
+                heading: this.header, //[selector], the first level heading
+                subheading: this.subheading, //[selector], the second level heading
+                reference:'#toc-box', //[selector], reference element for horizontal positioning
+                title: '', //[selector or string], title of the menu
+                hash: false, //[boolean], setting true will enable URL hashing on click
+                //offsetTop: 300, //[number], spacing/margin above the menu
+                speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
+                collapsible: false, //[boolean], enabling true will auto collapse sub level heading not being scrolled into
+                maxWidth: null //[number], set max-width of the navigation menu
+            });
+        }
+    }
+
+    if(toc) {
+        console.log(toc);
+        headings.init();
+    }
+
 });
 
 // Allow language selection via URL GET parameter.
@@ -77,4 +148,3 @@ $(window).load(function() {
         $('div[lang="' + lang + '"]').click();
     }
 });
-

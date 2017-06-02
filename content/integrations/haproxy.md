@@ -9,7 +9,7 @@ newhlevel: true
 
 # Overview
 
-![HAProxy default dashboard](/static/images/haproxydash.png)
+{{< img src="haproxydash.png" >}}
 
 Capture HAProxy activity in Datadog to:
 

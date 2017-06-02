@@ -7,9 +7,9 @@ newhlevel: true
 
 # Overview
 
-![System Core](/static/images/syscoredash.png)
+{{< img src="syscoredash.png" >}}
 
-The System Core integration collects information about the host's CPU Cores. 
+The System Core integration collects information about the host's CPU Cores.
 
 # Installation
 
@@ -27,10 +27,10 @@ To validate your installation and configuration, restart the agent and execute t
     Checks
     ======
       [...]
-      system_core                                                              
-      -----------                                                              
-        - instance #0 [OK]                                                     
-        - Collected 33 metrics, 0 events & 1 service check                     
+      system_core
+      -----------
+        - instance #0 [OK]
+        - Collected 33 metrics, 0 events & 1 service check
 
 
 # Metrics

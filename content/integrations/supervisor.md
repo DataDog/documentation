@@ -8,7 +8,7 @@ git_integration_title: supervisord
 
 # Overview
 
-![Supervisor Event](/static/images/supervisorevent.png)
+{{< img src="supervisorevent.png" >}}
 
 Enable the supervisord check to monitor the states of your processes running under supervisord.
 
@@ -46,20 +46,20 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 1.  Configure the Agent to connect to the supervisor daemon. Edit conf.d/supervisord.yaml:
 
 
-        
+
 
         init_config:
 
         instances:
-          - name: server0   
-            host: localhost  
+          - name: server0
+            host: localhost
             port: 9001
           - name: server1
             host: localhost
             port: 9002
           - name: server2
             socket: unix:///var/run//supervisor.sock
-            host: http://127.0.0.1 
+            host: http://127.0.0.1
     {:.language-yaml}
 
 1.  Restart the Agent
@@ -80,7 +80,7 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 # Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
-    
+
     Checks
     ======
 

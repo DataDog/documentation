@@ -14,7 +14,7 @@ Get metrics from Docker in real time to:
 * Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside them.
 
-![Docker default dashboard](/static/images/docker.png)
+{{< img src="docker.png" >}}
 
 
 # Installation
@@ -31,7 +31,7 @@ Whichever you choose, your system will need to have cgroup memory management ena
 4. Add the agent user to the docker group: `usermod -a -G docker dd-agent`
 5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
-    ![](/static/images/integrations-docker-dockerps.png)
+    {{< img src="integrations-docker-dockerps.png" >}}
 
 <%= insert_example_links(conf: "docker_daemon", check: "docker_daemon")%>
 

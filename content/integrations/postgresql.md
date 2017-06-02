@@ -8,7 +8,7 @@ newhlevel: true
 
 # Overview
 
-![PostgreSQL Graph](/static/images/pggraph.png)
+{{< img src="pggraph.png" >}}
 Connect PostgreSQL to Datadog in order to:
 
 * Visualize your database performance.
@@ -26,7 +26,7 @@ To verify the correct permissions you can run the following command:
 
     psql -h localhost -U datadog postgres -c \
     "select * from pg_stat_database LIMIT(1);"
-    && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \ 
+    && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \
     || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 {:.language-shell}
 
@@ -53,7 +53,7 @@ When it prompts for a password, enter the one used in the first command.
 * `ssl` (Optional) - Defaults to False. Whether to use SSL to connect.
 * `tags` (Optional) - Dictionary of tags
 * `relations` (Optional) - Dictionary of per-relation (table) metrics that you want to track. Each relation generates 10 metrics + 10 metrics per index.
-  
+
   By default all schemas are included. To track relations from specific schemas only, use the following syntax:
 
       relations:
@@ -67,8 +67,8 @@ When it prompts for a password, enter the one used in the first command.
 
 
 ## Custom metrics
- 
-Below are some examples of commonly used metrics, which are implemented as custom metrics. Uncomment them if you want to use them as is, or use as an example for creating your own custom metrics. 
+
+Below are some examples of commonly used metrics, which are implemented as custom metrics. Uncomment them if you want to use them as is, or use as an example for creating your own custom metrics.
 
 The format for describing custome metrics is identical with the one used for common metrics in `postgres.py`. Be extra careful with ensuring proper custom metrics description format. If your custom metric does not work after an agent restart, look for errors in the output of `/etc/init.d/datadog-agent info` command, as well as `/var/log/datadog/collector.log` file.
 
@@ -78,15 +78,15 @@ The format for describing custome metrics is identical with the one used for com
         - [consumer_name, consumer_name]
       metrics:
         >
-          GREATEST(0, EXTRACT(EPOCH FROM lag)) as lag: 
+          GREATEST(0, EXTRACT(EPOCH FROM lag)) as lag:
           [postgresql.londiste_lag, GAUGE]
         >
-          GREATEST(0, EXTRACT(EPOCH FROM lag)) as last_seen: 
+          GREATEST(0, EXTRACT(EPOCH FROM lag)) as last_seen:
           [postgresql.londiste_last_seen, GAUGE]
         pending_events: [postgresql.londiste_pending_events, GAUGE]
-      query: 
+      query:
         >
-          SELECT consumer_name, %s from pgq.get_consumer_info() 
+          SELECT consumer_name, %s from pgq.get_consumer_info()
           where consumer_name !~ 'watermark$';
       relation: false
     collect_function_metrics: False

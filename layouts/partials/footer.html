@@ -1,7 +1,34 @@
+        {{ if $.Params.sidebar.nav }}
+          <script type="text/javascript">
+            window.Datadog = window.Datadog || {};
+            window.Datadog.toc = false;
+          </script>
+
+        {{ else }}
+
+          <script type="text/javascript">
+            window.Datadog = window.Datadog || {};
+            window.Datadog.toc = true;
+          </script>
+
+        {{ end }}
+
+        {{ if $.Params.autotocdepth }}
+          <script type="text/javascript">
+            window.Datadog = window.Datadog || {};
+            window.Datadog.tocdepth = true;
+          </script>
+        {{ end }}
+
+
+        {{ if in .File.Path "basic_agent_usage" }}
+          <script type="text/javascript">
+            window.Datadog = window.Datadog || {};
+            window.Datadog.toc = false;
+          </script>
+        {{ end }}
+
         <script src="/js/main-dd.js"></script>
-
         {{ partial "footer-scripts.html" .}}
-
     </body>
 </html>
-

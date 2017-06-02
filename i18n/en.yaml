@@ -135,3 +135,35 @@
 
 - id: customnav_tracingnav_api
   translation: "Tracing API"
+
+# Basic agent menu
+
+- id: amazonlinux
+  translation: "Amazon Linux"
+
+- id: centos
+  translation: "CentOS"
+
+- id: docker
+  translation: "CoreOS/Docker"
+
+- id: deb
+  translation: "Debian"
+
+- id: fedora
+  translation: "Fedora"
+
+- id: osx
+  translation: "Mac OS X"
+
+- id: redhat
+  translation: "Red Hat"
+
+- id: ubuntu
+  translation: "Ubuntu"
+
+- id: windows
+  translation: "Windows"
+
+- id: source
+  translation: "From Source"

@@ -101,5 +101,5 @@ Logs for the subsystems are in the following files:
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => false %>
+{{< partial "_contact_info.html" >}}
 

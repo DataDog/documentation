@@ -8,7 +8,7 @@ newhlevel: true
 ---
 # Overview
 
-![Fastly Graph](/static/images/fastlygraph.png)
+{{< img src="fastlygraph.png" >}}
 
 Connect to Fastly to see key Fastly metrics (like cache coverage and header size) in context with the rest of your Datadog metrics.
 

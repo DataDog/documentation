@@ -8,7 +8,7 @@ newhlevel: true
 
 # Overview
 
-![PHP overview](/static/images/phpfpmoverview.png)
+{{< img src="phpfpmoverview.png" >}}
 {: style="max-width: 600px;"}
 
 Enable the PHP-FPM check to monitor the state of your FPM pool and track requests performance.

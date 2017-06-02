@@ -40,7 +40,7 @@ Azureの監視を設定するには、[Azure integrations][1] に移動し、イ
 
 Datadog Agentをインストールせずに監視するには、Azureのdiagnostics機能を有効にします。現状、この機能はWindowsベースのVMについてのみ対応しています。有効にするには、[Azureのポータル][2]に移動し、次のインストラクションに従って操作をします。
 
-![](/static/images/azure_diag_manual.png)
+{{< img src="azure_diag_manual.png" >}}
 
 
 <!-- After locating your VM:
@@ -105,13 +105,13 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 <!-- #### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].
 After logging in, locate the settings page on the left side of the screen.
-![](/static/images/azure_tenent.png)
+{{< img src="azure_tenent.png" >}}
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses. -->
 
 #### Tenent name(テナント名)がわかりません。
 Tenent nameを知るためには、まず[Azureのポータル][4]へログインします。その後、スクリーンの左側にあるメニューからSETTINGS(設定)を探し、クリックします。赤枠で囲った部分がTenent name(テナント名)になります。
-![](/static/images/azure_tenent.png)
+{{< img src="azure_tenent.png" >}}
 
 
 <!-- #### Unable to login

@@ -16,7 +16,7 @@ On the [Graphing Primer](http://docs.datadoghq.com/graphing/) page you will find
 
 Here is an example of nginx.net.connections with the day_before value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
-![simple.day_before.example](/static/images/simple_day_before_example.png)
+{{< img src="simple_day_before_example.png" >}}
 
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 

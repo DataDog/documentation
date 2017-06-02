@@ -15,7 +15,7 @@ sidebar:
 
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
 
-![](/static/images/outliers/outliers-metric-alert.png)
+{{< img src="outliers/outliers-metric-alert.png" >}}
 
 ## How to Use Outlier Detection on Your Data
 
@@ -29,15 +29,15 @@ You can use this function to display and alert on outliers in your data. To try 
 
 For example, here is a graph of gunicorn requests by host with outlier detection enabled:
 
-![](/static/images/outliers/outliers-graph-dbscan-gunicorn.png)
+{{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
 
 To set up an outlier detection graph for your data add a metric to the graph showing all series in the groups. Then apply the outlier detection algorithm by adding the `outliers` function on your data. After applying the function, any outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
-First create a new timeseries graph on your dashboard with your chosen metric. 
+First create a new timeseries graph on your dashboard with your chosen metric.
 
-![](/static/images/outliers/outliers-dash-choose-metrics-updated.png)
+{{< img src="outliers/outliers-dash-choose-metrics-updated.png" >}}
 
 To enable outlier detection, click on the + icon on the right side of the metrics line. Choose "Algorithms" from the function categories, then one of the four outlier algorithms:
 
@@ -45,7 +45,7 @@ To enable outlier detection, click on the + icon on the right side of the metric
 
 This will apply the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
-![](/static/images/outliers/outliers-algorithm-annotated-newer.png)
+{{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 
@@ -55,23 +55,23 @@ There are several outlier detection algorithms you can choose. The default algor
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
-![](/static/images/outliers/outliers-alert-snapshot.png)
+{{< img src="outliers/outliers-alert-snapshot.png" >}}
 
 For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for the metric:
 
-![](/static/images/outliers/outliers-new-monitor-define-metric.png)
+{{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
 
 You will select the metric and scope as with other metric-based monitors.
 
 In the alert conditions you will select the grouping and timeframe.
 
-Then select an algorithm and parameter values to use for outlier detection. 
+Then select an algorithm and parameter values to use for outlier detection.
 
-![](/static/images/outliers/outliers-newer-monitor-set-conditions.png)
+{{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 
-![](/static/images/outliers/outliers-new-monitor-graph-calibrate.png)
+{{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 
 ## Reference: Outlier Algorithms and Parameters
 {: #algorithms}
@@ -85,7 +85,7 @@ A natural way to group together hosts that are behaving similarly is to use a cl
 
 Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 
-![](/static/images/outliers/outliers-dbscan-2d.png)
+{{< img src="outliers/outliers-dbscan-2d.png" >}}
 
 #### Parameters
 
@@ -95,7 +95,7 @@ We set the initial distance threshold as follows. We create a new median time se
 
 The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
-![](/static/images/outliers/outliers-dbscan-cassandra.png)
+{{< img src="outliers/outliers-dbscan-cassandra.png" >}}
 
 You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
@@ -107,7 +107,7 @@ The ScaledDBSCAN algorithm scales the distance threshold according to the relati
 
 Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
 
-![](/static/images/outliers/outliers-scaled-dbscan-es.png)
+{{< img src="outliers/outliers-scaled-dbscan-es.png" >}}
 
 ### MAD/ScaledMAD
 
@@ -121,7 +121,7 @@ In our case, the data set is the set of all points in every time series. We take
 
 Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
-![](/static/images/outliers/outliers-mad-az.png)
+{{< img src="outliers/outliers-mad-az.png" >}}
 
 The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.
 
@@ -133,7 +133,7 @@ The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the
 
 Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
 
-![](/static/images/outliers/outliers-scaled-mad-cassandra.png)
+{{< img src="outliers/outliers-scaled-mad-cassandra.png" >}}
 
 ### DBSCAN vs. MAD
 
@@ -141,7 +141,7 @@ So which algorithm should you use? For most outliers, any algorithm will perform
 
 In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
 
-![](/static/images/outliers/outliers-flushing.png)
+{{< img src="outliers/outliers-flushing.png" >}}
 
 #### Scaled vs. Regular Algorithms
 
@@ -153,5 +153,5 @@ When setting up an outlier alert, an important parameter is the size of the time
 
 Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
-![](/static/images/outliers/outliers-banding.png)
+{{< img src="outliers/outliers-banding.png" >}}
 

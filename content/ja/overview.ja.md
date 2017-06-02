@@ -94,7 +94,7 @@ for that machine based on what was previously set up for that tag.</li>
 <!-- ## Host Map
 {: #hostmap}
 
-![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -108,7 +108,7 @@ To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -
 ## Host Mapの表示
 {: #hostmap}
 
-![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
 
 Host Mapは、`Infrastructure`メニューのドロップダウンメニュー内にあります。この表示を使うことにより、次のようなことが可能になります:
 

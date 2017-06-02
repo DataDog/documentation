@@ -7,7 +7,7 @@ newhlevel: true
 ---
 # Overview
 
-![DynamoDB default dashboard](/static/images/dynamodb.png)
+{{< img src="dynamodb.png" >}}
 
 Amazon DynamoDB is a fully managed NoSQL database cloud service, part of the AWS portfolio. Fast and easily scalable, it is meant to serve applications which require very low latency, even when dealing with large amounts of data. It supports both document and key-value store models, and has properties of both a database and a distributed hash table.
 
@@ -21,6 +21,6 @@ This integration requires the permissions `dynamodb:list*` and `dynamodb:describ
 
 # Metrics
 
-<%= get_metrics_from_git()%> 
+<%= get_metrics_from_git()%>
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

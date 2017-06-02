@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 # Overview
 
-![Chef Event](/static/images/chefdashboard.png)
+{{< img src="chefdashboard.png" >}}
 
 Chef is a popular configuration management tool written in Ruby and Erlang. If you manage your compute instances with Chef and want to use it to install the Datadog agent, [check out our guide for that](http://docs.datadoghq.com/guides/chef/). *This* page is about sending Chef metrics to Datadog.
 

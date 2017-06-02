@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 # Overview
 
-![RabbitMQ Dashboard](/static/images/rabbitmqdashboard.png)
+{{< img src="rabbitmqdashboard.png" >}}
 
 Connect RabbitMQ to Datadog in order to:
 

@@ -19,7 +19,7 @@
 
               <ul class="dropdown-menu" aria-labelledby="download">
               {{ range sort $guides "Params.listorder" "asc" }}
-                <li><a href="/{{ .Permalink }}">{{ .Title }}</a></li>
+                <li><a href="{{ .Permalink | absLangURL }}">{{ .Title }}</a></li>
               {{ end }}
               </ul>
             </li>

@@ -10,7 +10,7 @@ beta: true
 
 Please contact support at <support@datdoghq.com> to enable this feature for your account.
 
-![CodeDeploy default dashboard](/static/images/monitor-aws-codedeploy-dashboard.png)
+{{< img src="monitor-aws-codedeploy-dashboard.png" >}}
 
 AWS CodeDeploy is a service that automates code deployment to instances in the cloud and on-premise.
 

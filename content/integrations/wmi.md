@@ -8,7 +8,7 @@ git_integration_title: wmi
 
 # Overview
 
-![WMI Metric](/static/images/wmimetric.png)
+{{< img src="wmimetric.png" >}}
 
 Get metrics from your Windows applications/servers with Windows Management Instrumentation (WMI) in real time to
 
@@ -26,7 +26,7 @@ If you are only collecting standard metrics from Microsoft Windows and other pac
 
 To learn more about using System.Diagnostics, refer to [the MSDN documentation here](https://msdn.microsoft.com/en-us/library/system.diagnostics.performancecounter(v=vs.110).aspx). After adding your metric you should be able to find it in WMI. To browse the WMI namespaces you may find this tool useful: [WMI Explorer](https://wmie.codeplex.com/). You can find the same information with Powershell [here](https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/getting-wmi-objects--get-wmiobject-). Also review the information in the [Datadog Knowledge Base article](https://help.datadoghq.com/hc/en-us/articles/205016075-How-to-retrieve-WMI-metrics).
 
-If you assign the new metric a category of My_New_Metric, the WMI path will be 
+If you assign the new metric a category of My_New_Metric, the WMI path will be
 `\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric`
 
 If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to force the computer to reregister the performance libraries with WMI.
@@ -34,10 +34,10 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
 # Configuration
 
-1.  Click the **Install Integration** button on the WMI Integration Tile. 
+1.  Click the **Install Integration** button on the WMI Integration Tile.
 2.  Open the Datadog Agent Manager on the Windows server.
 3.  Edit the `Wmi Check` configuration.
-  
+
         init_config:
 
         instances:
@@ -62,7 +62,7 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
     Note that the default configuration uses the filter clause to limit the metrics pulled. Either set the filters to valid values or remove them as shown above to collect the metrics.
 
-    The metrics definitions include three components: class property in WMI, metric name as it appears in Datadog, and the metric type. 
+    The metrics definitions include three components: class property in WMI, metric name as it appears in Datadog, and the metric type.
 
 4.  Restart the agent.
 
@@ -85,7 +85,7 @@ list being a set of \[WMI property name, metric name, metric type].
 
 `host` is the optional target of the WMI query, `localhost` is assumed by default. If you set this option, make sure that Remote Management is enabled on the target host [see here](https://technet.microsoft.com/en-us/library/Hh921475.aspx) for more information.
 
-`namespace` is the optionnal WMI namespace to connect to (default to `cimv2`). 
+`namespace` is the optionnal WMI namespace to connect to (default to `cimv2`).
 
 `filters` is a list of filters on the WMI query you may want. For example, for a process-based WMI class you may want metrics for only certain processes running on your machine, so you could add a filter for each process name. You can also use the '%' character as a wildcard.
 
@@ -107,7 +107,7 @@ See [MSDN](https://msdn.microsoft.com/en-us/library/aa393067.aspx) for more info
 - 'target property' contains the value to tag with
 
 It translates to a WMI query:
- 
+
     SELECT 'target property' FROM 'target class' WHERE 'link target class property' = 'link source property'
 
 Note: setting this will cause any instance number to be removed from tag_by values
@@ -122,7 +122,7 @@ This feature is available starting with version 5.3 of the agent
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
-![wmivalidate](/static/images/wmivalidate.png)
+{{< img src="wmivalidate.png" >}}
 {: style="width:400px;"}
 
 

@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 # Overview
 
-![IIS Graph](/static/images/iisgraph.png)
+{{< img src="iisgraph.png" >}}
 
 Connect IIS to Datadog in order to:
 

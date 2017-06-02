@@ -14,51 +14,102 @@ languages:
         - identifier: menu_references_api
           name: "API"
           url: "/api/"
-          weight: -500
+          weight: 10
         - identifier: menu_references_tracing
           name: "Tracing"
           url: "/tracing/"
-          weight: -500
+          weight: 20
         - identifier: menu_references_libraries
           name: ""
           url: "/libraries/"
-          weight: -500
+          weight: 30
         - identifier: menu_references_monitoring
           name: ""
           url: "/monitoring/"
-          weight: -500
+          weight: 40
         - identifier: menu_references_graphing
           name: ""
           url: "/graphing/"
-          weight: -500
+          weight: 50
         - identifier: menu_references_host_names
           name: ""
           url: "/hostnames/"
-          weight: -500
+          weight: 60
         - identifier: menu_references_integrations
           name: ""
           url: "/integrations/"
-          weight: -500
+          weight: 70
         - identifier: menu_references_dogstatsd
           name: ""
           url: "/guides/dogstatsd/"
-          weight: -500
+          weight: 80
         - identifier: menu_references_examples
           name: ""
           url: "/examples/"
-          weight: -500
+          weight: 90
         - identifier: menu_references_videos
           name: ""
           url: "/videos/"
-          weight: -500
+          weight: 100
         - identifier: menu_references_billing
           name: ""
           url: "/guides/billing/"
-          weight: -500
+          weight: 110
         - identifier: menu_references_faq
           name: ""
           url: "/faq/"
-          weight: -500
+          weight: 120
+      basic_agent:
+        - identifier: amazonlinux
+          name: ""
+          url: /guides/basic_agent_usage/amazonlinux/
+          weight: 100
+
+        - identifier: centos
+          name: ""
+          url: /guides/basic_agent_usage/centos/
+          weight: 100
+
+        - identifier: docker
+          name: ""
+          url: /guides/basic_agent_usage/docker/
+          weight: 100
+
+        - identifier: deb
+          name: ""
+          url: /guides/basic_agent_usage/deb/
+          weight: 100
+
+        - identifier: fedora
+          name: ""
+          url: /guides/basic_agent_usage/fedora/
+          weight: 100
+
+        - identifier: osx
+          name: ""
+          url: /guides/basic_agent_usage/osx/
+          weight: 100
+
+        - identifier: redhat
+          name: ""
+          url: /guides/basic_agent_usage/redhat/
+          weight: 100
+
+        - identifier: ubuntu
+          name: ""
+          url: /guides/basic_agent_usage/ubuntu/
+          weight: 100
+
+        - identifier: windows
+          name: ""
+          url: /guides/basic_agent_usage/windows/
+          weight: 100
+
+        - identifier: source
+          name: ""
+          url: /guides/basic_agent_usage/source/
+          weight: 100
+
   ja:
     weight: 2
     menu:
@@ -66,58 +117,67 @@ languages:
         - identifier: menu_references_api
           name: "API"
           url: "/api/"
-          weight: -500
+          weight: 10
         - identifier: menu_references_tracing
           name: "Tracing"
           url: "/tracing/"
-          weight: -500
+          weight: 20
         - identifier: menu_references_libraries
           name: ""
           url: "/libraries/"
-          weight: -500
+          weight: 30
         - identifier: menu_references_monitoring
           name: ""
           url: "/monitoring/"
-          weight: -500
+          weight: 40
         - identifier: menu_references_graphing
           name: ""
           url: "/graphing/"
-          weight: -500
+          weight: 50
         - identifier: menu_references_host_names
           name: ""
           url: "/hostnames/"
-          weight: -500
+          weight: 60
         - identifier: menu_references_integrations
           name: ""
           url: "/integrations/"
-          weight: -500
+          weight: 70
         - identifier: menu_references_dogstatsd
           name: ""
           url: "/guides/dogstatsd/"
-          weight: -500
+          weight: 80
         - identifier: menu_references_examples
           name: ""
           url: "/examples/"
-          weight: -500
+          weight: 90
         - identifier: menu_references_videos
           name: ""
           url: "/videos/"
-          weight: -500
+          weight: 100
         - identifier: menu_references_billing
           name: ""
           url: "/guides/billing/"
-          weight: -500
+          weight: 110
         - identifier: menu_references_faq
           name: ""
           url: "/faq/"
-          weight: -500
+          weight: 120
 
 # build settings
 buildfuture: true
 builddrafts: true
 
 params:
-    footer_scripts:
-      - snowplow: false
-      - marketo: false
-      - adroll: false
+  img_url: "http://localhost:1313/"
+  imgix:
+    header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
+    header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
+    header_gif: "?ch=Width,Save-Data&fm=gif"
+    jpg: "?fm=jpg&auto=format&lossless=true"
+    png: "?fm=png&auto=format&lossless=1"
+    gif: ""
+  static_url: "http://localhost:1313/"
+  footer_scripts:
+    - snowplow: false
+    - marketo: false
+    - adroll: false

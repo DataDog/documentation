@@ -20,7 +20,7 @@ Overview
 {: #overview}
 
 This guide will outline the basic functionality of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found 
+If you haven't installed the Agent yet, instructions can be found
 <a href='https://app.datadoghq.com/account/settings#agent/mac'>here</a>.<br/>
 
 By default, your Agent will be installed in its own sandbox located at <code> '/opt/datadog-agent'</code>.
@@ -36,5 +36,5 @@ instructions accordingly if you decide to move it to another location.
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => false %>
+{{< partial "_contact_info.html" >}}
 

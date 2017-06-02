@@ -37,5 +37,5 @@ After you've configured your `Capfile` and have run at least one Capistrano task
 2. Either enter `sources:capistrano` in the Search bar, or click 'Capistrano' in the FROM list of integrations on the left.
 3. Either enter `priority:all` in the Search bar, or click 'All' in the PRIORITY list on the left. Capistrano tasks are submitted with Low priority by default, so if you're only viewing Normal priority events - which you will be, by default - you won't see your Capistrano tasks in the event stream.
 
-![Capistrano Events](/static/images/capistranoevents.gif)
+{{< img src="capistranoevents.gif" >}}
 

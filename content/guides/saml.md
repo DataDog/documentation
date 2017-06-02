@@ -13,13 +13,13 @@ Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/
 ## Configure SAML
 {: #configuresaml}
 If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
-![](/static/images/saml_configure.png)
+{{< img src="saml_configure.png" >}}
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
 
 1.  Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button.
 
-    ![](/static/images/saml_choose_file.png)
+    {{< img src="saml_choose_file.png" >}}
 
     After you've chosen the file, click "Upload File".
 

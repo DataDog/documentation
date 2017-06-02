@@ -17,7 +17,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 On each graph you will find a pencil icon that opens the graph editor.
 
-![Graphing Overview](/static/images/references-graphing-overview.png)
+{{< img src="references-graphing-overview.png" >}}
 
 The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
  -->
@@ -27,7 +27,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 グラフを開くと右上隅に鉛筆マークがあります。このマークをクリックするとグラフエディターがポップアップします。
 
-![Graphing Overview](/static/images/references-graphing-overview.png)
+{{< img src="references-graphing-overview.png" >}}
 
 グラフエディターには**Share**, **JSON**, **Edit**の3つのタブがあります。 **Share**タブでは、グラフを外部のwebページに挿入するためのコードを取得可能です。　**JSON**タブはより柔軟な設定が可能なエディターである一方、使用するにはグラフを定義する言語を理解しておく必要があります。 **Edit**はデフォルトのタブであり、グラフ表示のオプションをGUIから選択して設定することができます。最新の機能は **JSON**エディターでのみ使用できる場合があります。
 
@@ -36,7 +36,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+{{< img src="references-graphing-edit-window.png" >}}
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 -->
@@ -45,7 +45,7 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 
 グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgresインテグレーションダッシュボードでのグラフの例です:
 
-![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+{{< img src="references-graphing-edit-window.png" >}}
 
 ダッシュボードの中でグラフを操作するにはいくつかのステップがあります。
 
@@ -79,7 +79,7 @@ Once you have a metric in mind to display in your graph, select your visualizati
 The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+  {{< img src="references-graphing-timeseries-example.png" >}}
 </div>
 -->
 
@@ -88,7 +88,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可視化するのに最適です。グラフ表示する時間の幅は、タイムボード上の設定あるいはスクリーンボードでの各グラフの設定によって決まります。Timeseriesグラフの表示はlines(折れ線グラフ), areas(面グラフ), bars(棒グラフ)を選択できます。Timeseriesグラフの例を見るには、[ここをクリック](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseriesグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+  {{< img src="references-graphing-timeseries-example.png" >}}
 </div>
 
 <!--
@@ -97,7 +97,7 @@ Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可
 The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-  ![Heatmap](/static/images/references-graphing-heatmap-example.png)
+  {{< img src="references-graphing-heatmap-example.png" >}}
 </div>
 -->
 
@@ -106,7 +106,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*hosts* )を可視化するのに最適です。 ホストから得られたメトリクスで値が多く分布しているほど、その値の部分は濃い色を示します。Heatmapグラフの例を見るには、[ここをクリック](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmapグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-  ![Heatmap](/static/images/references-graphing-heatmap-example.png)
+  {{< img src="references-graphing-heatmap-example.png" >}}
 </div>
 
 <!--
@@ -115,7 +115,7 @@ Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*h
 The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-  ![Distribution](/static/images/references-graphing-distribution-example.png)
+  {{< img src="references-graphing-distribution-example.png" >}}
 </div>
 -->
 
@@ -124,7 +124,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 Distributionグラフは多くのタグで集計されたメトリクスを可視化するもう一つの方法です。Heatmapグラフとは異なり、DistributionグラフのX軸は時間ではなくメトリクスの値になり、Y軸はその分布の度数を示します。Distributionグラフの例は、[ここをクリック](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distributionグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-  ![Distribution](/static/images/references-graphing-distribution-example.png)
+  {{< img src="references-graphing-distribution-example.png" >}}
 </div>
 
 <!--
@@ -133,7 +133,7 @@ Distributionグラフは多くのタグで集計されたメトリクスを可�
 The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
-  ![TopList](/static/images/references-graphing-toplist-example.png)
+  {{< img src="references-graphing-toplist-example.png" >}}
 </div>
 -->
 
@@ -142,7 +142,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  [ここをクリック](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTopList" markdown="1">
-  ![TopList](/static/images/references-graphing-toplist-example.png)
+  {{< img src="references-graphing-toplist-example.png" >}}
 </div>
 
 <!--
@@ -151,7 +151,7 @@ Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない�
 The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, [click here](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  ![Changegraph](/static/images/references-graphing-change-example.png)
+  {{< img src="references-graphing-change-example.png" >}}
 </div>
 -->
 
@@ -160,7 +160,7 @@ The Change graph will show you the change in a value over the time period chosen
 Changeグラフは指定した時間枠でのメトリクスの変化量を可視化することができます。Changeグラフの例を見るには、[ここをクリック](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  ![Changegraph](/static/images/references-graphing-change-example.png)
+  {{< img src="references-graphing-change-example.png" >}}
 </div>
 
 #### Hostmap
@@ -168,13 +168,13 @@ Changeグラフは指定した時間枠でのメトリクスの変化量を可�
 The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, [click here](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
-  ![Hostmap](/static/images/references-graphing-hostmap-example.png)
+  {{< img src="references-graphing-hostmap-example.png" >}}
 </div>
 -->
 Hostmapはメインメニューから利用できるHostmapと同様に、あらゆるメトリクスについて指定したホストのスコープで可視化することができます。Hostmapの例は、[ここをクリック](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
-  ![Hostmap](/static/images/references-graphing-hostmap-example.png)
+  {{< img src="references-graphing-hostmap-example.png" >}}
 </div>
 
 <!--
@@ -235,7 +235,7 @@ To create a single line that represents the total available disk space on averag
 
 例えば、全てのマシンの利用可能なディスク容量の平均値をとり、そのメトリクスは60秒ごとの平均値としてロールアップしたグラフ表示をさせる場合には、以下のような指定します:
 
-![rollup example](/static/images/references-graphing-rollup-example.png)
+{{< img src="references-graphing-rollup-example.png" >}}
 
 <!--
 When switching to the JSON view, the query will look like this:

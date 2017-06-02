@@ -7,7 +7,7 @@ update_for_agent: 5.8.5
 ---
 # Overview
 
-![Network Graphs](/static/images/netgraphs.png)
+{{< img src="netgraphs.png" >}}
 
 TCP checks run in the agent and can verify whether or not a TCP service is up or down and responds in a certain time.
 

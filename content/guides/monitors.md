@@ -42,12 +42,12 @@ page by highlighting the "Monitors" tab in the main menu and selecting the
 "New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
 
-![nav](/static/images/monitor/nav.png)
+{{< img src="monitor/nav.png" >}}
 
 ###Choose what to monitor
 
 1. Select the metric and scope you want to monitor.
-  ![metric scope](/static/images/monitor/metric_scope.png)
+  {{< img src="monitor/metric_scope.png" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
@@ -55,7 +55,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     further information.
 
 2. Select the alert grouping.
-    ![alert grouping](/static/images/monitor/alert_grouping.png)
+    {{< img src="monitor/alert_grouping.png" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -73,7 +73,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     running out of space.
 
 3. Select the alert type.
-    ![alert type](/static/images/monitor/alert_type.png)
+    {{< img src="monitor/alert_type.png" >}}
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -98,7 +98,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      ![metric threshold](/static/images/monitor/metric_threshold.png)
+      {{< img src="monitor/metric_threshold.png" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -157,7 +157,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 ###Setup Notifications
 {: #notification}
 
-![notification](/static/images/monitor/notification.png)
+{{< img src="monitor/notification.png" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -193,11 +193,11 @@ You may occasionally need to shut systems down or take them offline to perform m
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
-![downtime-nav](/static/images/monitor/downtime-nav.png)
+{{< img src="monitor/downtime-nav.png" >}}
 
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-![downtime-manage](/static/images/monitor/downtime-manage.png)
+{{< img src="monitor/downtime-manage.png" >}}
 
 ### Schedule Downtime
 {: #downtime-schedule}
@@ -206,7 +206,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   ![downtime-silence](/static/images/monitor/downtime-silence.png)
+   {{< img src="monitor/downtime-silence.png" >}}
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -216,13 +216,13 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
 
-   ![downtime-schedule](/static/images/monitor/downtime-schedule.png)
+   {{< img src="monitor/downtime-schedule.png" >}}
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   ![downtime-notify](/static/images/monitor/downtime-notify.png)
+   {{< img src="monitor/downtime-notify.png" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 

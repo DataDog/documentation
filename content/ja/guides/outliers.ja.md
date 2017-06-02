@@ -10,12 +10,12 @@ autotocdepth: 2
 <!--
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
 
-![](/static/images/outliers/outliers-metric-alert.png)
+{{< img src="outliers/outliers-metric-alert.png" >}}
 -->
 
 Outlier Detectionはアルゴリズムベースの異常検出機能であり、グループ内の特定の個体に他とは異なる挙動がみられた際に外れ値データ(Outlier)として検出することができます。例えば、Webサーバー群の特定の1サーバーが異常なリクエスト数を処理しているような場合に検出し、これをリプレースすべきか判断することができます。あるいは、特定のAWSアベイラビリティゾーン(AZ)において、他のAZより多めの500(5XX)エラーを生じていることを早めに検出することで、そのAZに迫りつつある問題を察知することができるかもしれません。
 
-![](/static/images/outliers/outliers-metric-alert.png)
+{{< img src="outliers/outliers-metric-alert.png" >}}
 
 
 <!--
@@ -39,7 +39,7 @@ Outlier Detectionはダッシュボード上の時系列データのグラフと
 
 For example, here is a graph of gunicorn requests by host with outlier detection enabled:
 
-![](/static/images/outliers/outliers-graph-dbscan-gunicorn.png)
+{{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
 -->
 
 ### 1. Outlier Detectionをダッシュボードで可視化する
@@ -47,7 +47,7 @@ For example, here is a graph of gunicorn requests by host with outlier detection
 
 下記はOutlier Detectionを適用したメトリクス、gunicornのホストごとのリクエスト数のグラフ表示例です:
 
-![](/static/images/outliers/outliers-graph-dbscan-gunicorn.png)
+{{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
 
 
 <!--
@@ -57,7 +57,7 @@ To set up an outlier detection graph for your data you add a metric to the graph
 
 To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
 
-![](/static/images/outliers/outliers-dash-choose-metrics-newer.png)
+{{< img src="outliers/outliers-dash-choose-metrics-newer.png" >}}
 -->
 
 時系列データの1つが外れ値データ(Outlier)としてマークされています: 当該の時間幅において、グループ内の他とは明らかに異なる低いトラフィックをさばいていることがわかります。
@@ -66,7 +66,7 @@ Outlier Detectionをグラフ表示に適用するには、対象とするグル
 
 まず、選択したメトリクスでダッシュボード上に時系列データのグラフを作成する際には、グラフエディターは以下のようになっているでしょう:
 
-![](/static/images/outliers/outliers-dash-choose-metrics-newer.png)
+{{< img src="outliers/outliers-dash-choose-metrics-newer.png" >}}
 
 
 <!--
@@ -76,7 +76,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of the 
 
 This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
-![](/static/images/outliers/outliers-algorithm-annotated-newer.png)
+{{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 -->
 
 そしてここで、メトリクスの選択ボックスの右手にあるプラスマークをクリックします。“Modify your query”ボックスで "outliers" 関数を選択します:
@@ -85,7 +85,7 @@ This will add the outliers function to your graph, and you’ll see any outliers
 
 これで"outliers" 関数がグラフ表示に追加され、外れ値(Outlier)の時系列データが太字に暖色でマークされることになります。
 
-![](/static/images/outliers/outliers-algorithm-annotated-newer.png)
+{{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 
 
 <!--
@@ -101,7 +101,7 @@ Outlier Detectionのアルゴリズムは選択することができます。そ
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
-![](/static/images/outliers/outliers-alert-snapshot.png)
+{{< img src="outliers/outliers-alert-snapshot.png" >}}
 
 For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for our metric:
 -->
@@ -111,12 +111,12 @@ For example, to alert when a Cassandra host is abnormally loaded compared to the
 
 監視すべき重要なグループにおいて外れ値データ(Outlier)を検出したときにアラートするMonitorを設定します。
 
-![](/static/images/outliers/outliers-alert-snapshot.png)
+{{< img src="outliers/outliers-alert-snapshot.png" >}}
 
 例えば、Cassandraのホストについてグループ内の他とくらべて異常に負荷が掛かっている場合にアラートをしたい場合、
 [新規outlier monitor の作成](https://app.datadoghq.com/monitors#create/algorithm) ページに進みます:
 
-![](/static/images/outliers/outliers-new-monitor-define-metric.png)
+{{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
 
 
 <!--
@@ -126,7 +126,7 @@ In the alert conditions you will select the grouping and timeframe.
 
 You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with a tolerance value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
 
-![](/static/images/outliers/outliers-newer-monitor-set-conditions.png)
+{{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 -->
 
 他のメトリクスを対象にしたMonitor同様、メトリクスとそのメトリクスを監視する範囲(スコープ)を選択します。
@@ -135,18 +135,18 @@ You can also optionally select an algorithm to use for outlier detection. By def
 
 Outlier Detectionに使用するアルゴリズムをオプションで選択します。デフォルトではすでにDBSCANアルゴリズムがtolerance 値3で選択されていますが、多くのケースではこれが最適です。より詳しいoutlier 関数とそのパラメータの情報については後述します。
 
-![](/static/images/outliers/outliers-newer-monitor-set-conditions.png)
+{{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
 
 <!--
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 
-![](/static/images/outliers/outliers-new-monitor-graph-calibrate.png)
+{{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 -->
 
 設定したアラートが適切に調整されているか確かめるために、過去をさかのぼってどのように外れ値(Outlier)が検出されアラートされ得るか確認しましょう。画面右上のリバースボタン(<<)で表示されている時間幅を操作します。これは、選択しているOutlier Detectionのアルゴリズムのパラメーターを調整するためにも有効な方法です。
 
-![](/static/images/outliers/outliers-new-monitor-graph-calibrate.png)
+{{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 
 
 <!--
@@ -169,7 +169,7 @@ A natural way to group together hosts that are behaving similarly is to use a cl
 
 Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 
-![](/static/images/outliers/outliers-dbscan-2d.png)
+{{< img src="outliers/outliers-dbscan-2d.png" >}}
 -->
 
 ### DBSCAN - 密度ベースのクラスタリング手法
@@ -180,7 +180,7 @@ Datadogでは幅広く使われている[DBSCAN](https://en.wikipedia.org/wiki/D
 伝統的にDBSCANは、1)2点間の距離が近いかどうかを判定する閾値となるパラメータ 𝜀 (eps)と、2)点が密集しているとみなすために必要な半径 𝜀 (eps)の円に収まるべき最小のデータポイント数、という2つのパラメータを使用します。
 下記イメージは、ある平面上のデータポイントに対してDBSCANアルゴリズムを適用した例です。2つのクラスタがあり、大きな点は近傍の点と密集しているとみなすのに十分近い距離、そして数があると判定されています。一方で小さな色付きの点は、大きな点の半径 𝜀 (eps)の円の内側にあるものの密集していると判定はされていません。そして、小さな黒い点は外れ値(Outlier)です。
 
-![](/static/images/outliers/outliers-dbscan-2d.png)
+{{< img src="outliers/outliers-dbscan-2d.png" >}}
 
 
 <!--
@@ -201,14 +201,14 @@ Datadogでは外れ値(Outlier)を検出するために、DBSCANを簡略化し�
 <!--
 The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
-![](/static/images/outliers/outliers-dbscan-cassandra.png)
+{{< img src="outliers/outliers-dbscan-cassandra.png" >}}
 
 You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 -->
 
 DatadogのDBSCANで使用するパラメータは`tolerance`のみであり、DBスキャンの距離のパラメータ 𝜀 (eps)を算出するために閾値の初期値はこの定数によって乗じられます。次は、CassandraワーカープールについてDBSCANをtolerance 値3.0で適用した例です:
 
-![](/static/images/outliers/outliers-dbscan-cassandra.png)
+{{< img src="outliers/outliers-dbscan-cassandra.png" >}}
 
 対象とするホストのグループがどれくらい似たような挙動を持つか次第で、この`tolerance`パラメータを調整して下さい。大きな値を設定するほど、特定のホストがグループ内の他と比べてより大きく外れた挙動をとることを許容(tolerance)することになります。つまり、大きな値を設定するほど、太字に暖色でマークされる外れ値(Outlier)の時系列データは少なくなり、検出モレが生じる可能性が出てきます。
 
@@ -235,7 +235,7 @@ In our case, the data set is the set of all points in every time series. We take
 
 Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
-![](/static/images/outliers/outliers-mad-az.png)
+{{< img src="outliers/outliers-mad-az.png" >}}
 -->
 
 #### MADのパラメータ
@@ -244,7 +244,7 @@ Datadogでは、データセットは各時系列ごと、それぞれの時系�
 
 そして特定の時系列データを外れ値(Outlier)とマークするために、2つめのパラメータである`pct` を使用します。もしある時系列データの`pct`%のデータポイントが外れ値(Outlier)だと判定された場合に、その時系列データ全体を外れ値(Outlier)とマークすることになります。次のグラフ表示は、中央絶対偏差(MAD)アルゴリズムで`tolerance` は3,`pct` は20(%)と指定した場合での、AWSアベイラビリティゾーン(AZ)ごとのシステムのロードアベレージを表示したものです。
 
-![](/static/images/outliers/outliers-mad-az.png)
+{{< img src="outliers/outliers-mad-az.png" >}}
 
 
 <!--
@@ -260,7 +260,7 @@ So which algorithm should you use? For most outliers, both algorithms will perfo
 
 In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
 
-![](/static/images/outliers/outliers-flushing.png)
+{{< img src="outliers/outliers-flushing.png" >}}
 -->
 
 ### DBSCAN か MAD か
@@ -269,7 +269,7 @@ In the following image, we see a group of hosts flushing their buffers together 
 
 下記のイメージのグラフはあるホストのグループがバッファをフラッシュしていることがメトリクスから見られますが、多くのホストがフラッシュしてから若干の遅れをもってフラッシュしている特定のホストがあります。DBSCANはこのホストを外れ値(Outlier)として検出する一方で、MADは検出しません。バッファがいつフラッシュされるかは注目すべきことではないので、このようなケースではMADの使用が適切です。グループ内での同時刻の発生は、ホストを同時に再起動したことによる人為的なものなどがあり得ます。その一方で、もし下記のイメージがバッファのフラッシュでなくスケジュールされたジョブによるものであれば、グループ内のホストで同時刻に発生しているべきです。そうした場合には、DBSCANの使用が最適な選択といえます。(訳者注：この違いは、DBSCANが時系列データ全体を対象にクラスタリングを実施してOutlierとしてマークするかどうかを判定するのに対し、MADは各時刻ごとに一旦外れ値かどうかの判定を実施したうえで時系列データの外れ値含有率からOutlierとしてマークするためにおこります。端的に言えば、DBSCANは見た目どおりの大まかなグラフの形状の類似性を見ているがMADはそうではなく、同時刻における点(値)のばらつきだけを見ている、となります。)
 
-![](/static/images/outliers/outliers-flushing.png)
+{{< img src="outliers/outliers-flushing.png" >}}
 
 <!--
 ### Setting up alerts
@@ -278,7 +278,7 @@ When setting up an outlier alert, an important parameter is the size of the time
 
 Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
-![](/static/images/outliers/outliers-banding.png)
+{{< img src="outliers/outliers-banding.png" >}}
 -->
 
 ### アラート設定のTips
@@ -288,4 +288,4 @@ Both algorithms are set up to identify outliers that differ from the majority of
 
 また、いずれのアルゴリズムも、大多数の同様な挙動をもつメトリクスとは異なる外れ値(Outlier)を特定するために設定されます。もし下記のような複数の値の幅を取りうるホストに対してOutlier Detectionを適用する場合には、ホストがそれぞれの値の幅を持つことを示すタグを付与し、そのタグを持つホストごとに別のOutlier Detectionアラートを設定することをおすすめします。
 
-![](/static/images/outliers/outliers-banding.png)
+{{< img src="outliers/outliers-banding.png" >}}

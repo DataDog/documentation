@@ -596,3 +596,39 @@ h4.tracing-api {
     border: none;
   }
 }
+
+// tocible styles to match sidebar
+#toc-box {
+  border: none;
+}
+.nav-tabs {
+  .tocible {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    li a {
+      margin-right: 2px;
+      line-height: 1.42857;
+      border: 1px solid transparent;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      &:hover {
+        border-color: #eee #eee #ddd;
+        text-decoration: none;
+        background-color: #eee;
+      }
+    }
+    .tocible_subheading a {
+      padding: 5px 25px;
+    }
+  }
+}
+
+.main {
+  img {
+    border: 1px solid #777;
+  }
+}

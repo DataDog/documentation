@@ -14,7 +14,7 @@ Get metrics from Fluentd in real time to
 * Visualize Fluentd performance.
 * Correlate the performance of Fluentd with the rest of your applications.
 
-![Fluentd Dashboard](/static/images/snapshot-fluentd.png)
+{{< img src="snapshot-fluentd.png" >}}
 
 
 # Installation

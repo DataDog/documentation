@@ -1,0 +1,64 @@
+{{/* set img path based on page type and what is passed */}}
+{{ if or (findRE "/" (.Get "src")) (not (eq .Page.Type "blog")) }}
+  {{ $.Scratch.Add "_img" (print $.Site.Params.img_url "images/" (.Get "src")) }}
+{{ else }}
+  {{ $.Scratch.Add "_img" (print $.Site.Params.img_url "images/" .Page.Type "/" .Page.Slug "/" (.Get "src")) }}
+{{ end }}
+{{ $img := $.Scratch.Get "_img" }}
+
+{{ $image_type_arr := split (.Get "src") "." }}
+
+{{ $image_ext := index $image_type_arr 1 }}
+
+{{ if eq $image_ext "gif" }}
+  {{ $.Scratch.Add "img_param" "ch=Width,Save-Data&fm=gif" }}
+
+{{ else if .Get "img_param" | len }}
+
+  {{ .Get "img_param" | $.Scratch.Add "img_param" }}
+
+{{ else }}
+
+  {{ $.Scratch.Add "img_param" "ch=Width,DPR&w=660&auto=format" }}
+
+{{ end }}
+
+{{ $img_param := $.Scratch.Get "img_param" }}
+
+{{/* override default imgix request params for popup img */}}
+{{ if .Get "pop_param" | len }}
+  {{ .Get "pop_param" | $.Scratch.Add "pop_param" }}
+{{ else }}
+  {{ $.Scratch.Add "pop_param" "fit=max" }}
+{{ end }}
+{{ $pop_param := $.Scratch.Get "pop_param" }}
+
+{{ $figure_class :=  .Get "figure_class" }}
+<span class="shortcode-wrapper shortcode-img">
+  <figure {{if $figure_class}}class="{{ $figure_class }}" {{end}}>
+    {{- if .Get "popup" -}}
+      <a href="{{ print $img "?" $pop_param | relURL }}" class="pop">
+    {{- else if .Get "href" -}}
+      <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
+         {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
+    {{- end -}}
+    <img class="{{- if .Get "responsive" }} img-responsive {{ end }}"
+         src="{{ print $img "?" $img_param | relURL }}"
+         alt="{{ with .Get "alt"}}{{.}}{{end}}"
+         {{ if eq .Page.Type "blog" }}
+           srcset="{{ print $img "?" $img_param | relURL }}"
+           sizes="(max-width: 991px) 100vw, 660px"
+         {{ end }}
+    >
+    {{- if .Get "popup" -}}
+      </a>
+    {{- else if .Get "href" -}}
+      </a>
+    {{- end -}}
+    {{ if .Get "caption" }}
+      {{ with .Get "caption" }}
+          <figcaption>{{.}}</figcaption>
+      {{ end }}
+    {{ end }}
+  </figure>
+</span>
