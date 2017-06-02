@@ -24,9 +24,7 @@ You need to have a working Cloud Foundry deployment and access to the BOSH Direc
 
 To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director.
 
-# Install, Deploy, and Configure
-
-## Install the Datadog Agent BOSH Release
+# Install the Datadog Agent BOSH Release
 
 Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You can upload the latest release to your BOSH Director and then easily install it on every node in your deployment as an [addon](https://bosh.io/docs/runtime-config.html#addons) (i.e. the same way a Director deploys the BOSH Agent to all nodes).
 
@@ -114,7 +112,7 @@ bosh -n -d yourDeployment deploy yourDeploymentManifest.yml
 
 Since runtime configuration applies globally, BOSH will redeploy every node in your deployment. If you have more than one deployment, redeploy those, too, to install the Datadog Agent everywhere.
 
-### Verify the Agent installs
+### Verify the Agent is installed everywhere
 
 The easiest way to check that Agent installs were successful is to filter for them in the [Host map page](https://app.datadoghq.com/infrastructure/map) in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag, so filter by that, and optionally group hosts by any tag you wish (e.g. `bosh_job`), as in the following screenshot:
 
@@ -124,7 +122,7 @@ Click on any host to zoom in, then click 'system' within its hexagon to make sur
 
 ![cloud-foundry-host-map-detail](/static/images/cloud-foundry-host-map-detail.png)
 
-## Deploy the Datadog Firehose Nozzle
+# Deploy the Datadog Firehose Nozzle
 
 As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, you can add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing Cloud Foundry deployment that has a working Loggregator Firehose.
 
@@ -227,7 +225,7 @@ On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Dat
 
 ![cloud-foundry-nozzle-metrics](/static/images/cloud-foundry-nozzle-metrics.png)
 
-## Configure the Datadog plugin for BOSH Health Monitor
+# Configure the Datadog plugin for BOSH Health Monitor
 
 This plugin is packaged with the BOSH Health Monitor, so if the Health Monitor is already installed and running on your BOSH Director, you simply need to configure the plugin and redeploy the Director.
 
