@@ -276,7 +276,7 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to w
 * Proximity searches are not supported, but the [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness) operator is
 * Ranges are not supported
 * Boosting is not supported
-* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and ` ` (whitespace).
+* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace.
 
 ### Manage chosen Monitors
 
