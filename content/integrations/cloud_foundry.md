@@ -62,9 +62,10 @@ addons:
   properties:
     dd:
       use_dogstatsd: yes
-      dogstatsd_port: 18125 # Many Cloud Foundry deployments have their own StatsD listening on port 8125
+      dogstatsd_port: 18125               # Many CF deployments have a StatsD already on port 8125
       api_key: <YOUR_DATADOG_API_KEY>
-      tags: ["cloudfoundry_deployment_1"] # any tags you wish 
+      tags: ["cloudfoundry_deployment_1"] # any tags you wish
+      generate_processes: true            # to enable the process check
 ~~~
 
 If you don't have a local copy of the runtime configuration, get it from the Director (`bosh runtime-config`) and add the above to it. If the Director's runtime configuration is empty, add the above to a new `runtime.yml`.
@@ -78,6 +79,19 @@ For each extra Agent check you want to enable across your deployment, add its co
     dd:
       integrations:
         directory:
+          init_config: {}
+          instances:
+            directory: "."</code></pre>
+        #process:
+        #  init_config: {}
+        #...
+~~~
+
+The configuration under each check name should look the same as if you were configuring the check in its own file in the Agent's conf.d directory.
+
+You cannot configure a check for a subset of nodes in your deployment; everything you configure in `runtime.yml` will apply to every node.
+
+To customize configuration for the default checks—system, network, disk, and ntp—see the [full list of configuration options](https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec) for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 
@@ -183,6 +197,8 @@ jobs:
 
 You can set `metrics_prefix` to anything you like, but if you want to use the default Cloud Foundry screenboard and to see metrics metadata in dashboards and graphs, set it to `cloudfoundry.nozzle.`.
 
+See [all configuration options](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec) for the Datadog Firehose Nozzle.
+
 In the same manifest, add the Datadog Nozzle release name and version:
 
 ~~~
@@ -266,8 +282,3 @@ The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.noz
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events) and ValueMetrics; it ignores LogMessages, Errors, and ContainerMetrics.
 
 <%= get_metrics_from_git()%>
-
-# Further Reading
-
-* See [all configuration options](https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec) for the Datadog Agent BOSH release
-* See [all configuration options](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec) for the Datadog plugin for BOSH Health Monitor
