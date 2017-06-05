@@ -8,7 +8,7 @@ beta: true
 ---
 # Overview
 
-Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you—the deployment administrator—track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
+Any Cloud Foundry deployment can send metrics and events to Datadog that help you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
 
 There are three points of integration with Datadog, each of which achieves a different goal:
 
@@ -16,7 +16,7 @@ There are three points of integration with Datadog, each of which achieves a dif
 * **Datadog Firehose Nozzle** — Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 * **Datadog plugin for BOSH Health Monitor** — Configure your BOSH Director's Health Monitor to send heartbeats (as metrics) and alerts (as events) from each node's BOSH Agent to Datadog.
 
-If you do NOT administer a Cloud Foundry deployment—i.e. if you're an end user deploying applications onto a Cloud Foundry deployment—this page cannot help you.
+These integrations are meant for Cloud Foundry deployment administrators, not end users.
 
 # Prerequisites
 
