@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 title: DogStatsD
-=======
-title: What is DogStatsD?
->>>>>>> c647b5df714d0b916297944acdae27b5d0ae3d6a
 kind: documentation
 sidebar:
   nav:
