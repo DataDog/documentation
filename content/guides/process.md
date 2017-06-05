@@ -4,7 +4,7 @@ kind: guide
 listorder: 16
 beta: true
 ---
-Beta - For support or to report any issues, contact process-support@datadoghq.com.
+**Beta - For support or to report any issues, contact [process-support@datadoghq.com](mailto:process-support@datadoghq.com).**
 
 ### Introduction
  
