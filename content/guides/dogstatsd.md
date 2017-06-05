@@ -61,7 +61,7 @@ seconds, by default), it will send DogStatsD one hundred UDP packets that say
 points into a single metric value—100, in this case—and send it to Datadog
 where it will be stored and available for graphing alongside the rest of your metrics.
 
-## Set Up
+## Setup
 {: #setup}
 
 Once you have the Datadog Agent installed on your application servers/containers—or anywhere
