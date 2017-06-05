@@ -130,8 +130,7 @@ To increment or measure values over time rather than per second, use a gauge.
 #### Sets
 {: #sets}
 
-Sets count the number of unique elements in a group. To track the number of unique visitors 
-to your site, use a set:
+Sets count the number of unique elements in a group. To track the number of unique visitors to your site, use a set:
 
 <%= python <<EOF
 def login(self, user_id):
