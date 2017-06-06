@@ -194,7 +194,7 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ~~~
 
-See [all configuration options](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec) for the Datadog Firehose Nozzle.
+To see all available configuration options, check the [Datadog Firehose Nozzle repository](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec).
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
