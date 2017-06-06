@@ -179,7 +179,7 @@ jobs:
     datadog:
       api_key: <YOUR_DATADOG_API_KEY>
       api_url: https://app.datadoghq.com/api/v1/series
-      flush_duration_seconds: 15          # seconds between flushes to Datadog. Default is 15.
+      flush_duration_seconds: 15 # seconds between flushes to Datadog. Default is 15.
     loggregator:
       # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' will do
       traffic_controller_url: <LOGGREGATOR_URL> # e.g. ws://traffic-controller.your-cf-domain.com:8081
