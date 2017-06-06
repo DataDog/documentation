@@ -130,10 +130,10 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-62.tgz
+bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/62/datadog-firehose-nozzle-release.tgz
 
 # BOSH CLI v2
-bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-62.tgz
+bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/62/datadog-firehose-nozzle-release.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository](https://github.com/DataDog/datadog-firehose-nozzle-release).
