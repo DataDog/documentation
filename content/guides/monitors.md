@@ -276,7 +276,13 @@ Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to w
 * Proximity searches are not supported, but the [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness) operator is
 * Ranges are not supported
 * Boosting is not supported
-* The set of [reserved characters](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_reserved_characters) for monitor search is more limited. The characters are `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace.
+
+Finally, The following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace. To search monitor fields that include any of them, wrap the field string in quotes: `status:Alert AND "chef-client"` is a valid query string; `status:Alert AND chef-client` is not.
+
+There are a few caveats regarding quoted fields:
+
+* You may use `.` with or without surrounding quotes, as it commonly appears in some fields: `metric:system.cpu.idle` is valid.
+* You may NOT use wildcard search inside quoted strings: `"chef-client*"`, while valid syntactically, won't return a monitor titled `"chef-client failing"` because the `*` is treated literally.
 
 ### Manage chosen Monitors
 
