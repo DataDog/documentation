@@ -32,10 +32,10 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You c
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://github.com/DataDog/datadog-agent-boshrelease/releases/download/1.0.5130/datadog-agent-release-1.0.5130.tgz
+bosh upload release 
 
 # BOSH CLI v2
-bosh upload-release https://github.com/DataDog/datadog-agent-boshrelease/releases/download/1.0.5130/datadog-agent-release-1.0.5130.tgz
+bosh upload-release 
 ~~~
 
 If you'd like to create your own release, see the [Datadog Agent BOSH Release repository](https://github.com/DataDog/datadog-agent-boshrelease).
@@ -48,7 +48,7 @@ Add the following to your BOSH Director's runtime configuration file (e.g. `runt
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_YOU_UPLOADED> # specify the real version, e.g. 1.0.5130, not 'latest'
+    version: <VERSION_YOU_UPLOADED> # specify the real version, i.e. x.y.z, not 'latest'
 
 addons:
 - name: datadog
@@ -63,6 +63,8 @@ addons:
       tags: ["cloudfoundry_deployment_1"] # any tags you wish
       generate_processes: true            # to enable the process check
 ~~~
+
+To see which `datadog-agent` release version you uploaded earlier, run `bosh releases`.
 
 If you don't have a local copy of the runtime configuration, get it from the Director (`bosh runtime-config`) and add the above to it. If the Director's runtime configuration is empty, add the above to a new `runtime.yml`.
 
@@ -130,10 +132,10 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/62/datadog-firehose-nozzle-release.tgz
+bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 
 # BOSH CLI v2
-bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/62/datadog-firehose-nozzle-release.tgz
+bosh upload-release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository](https://github.com/DataDog/datadog-firehose-nozzle-release).
@@ -202,8 +204,10 @@ releases:
 #   version: x.y.z
 # ...
   - name: datadog-firehose-nozzle
-    version: $VERSION_YOU_UPLOADED # specify the real version, e.g. 62, not 'latest' 
+    version: $VERSION_YOU_UPLOADED # specify the real version, i.e. x.y.z, not 'latest' 
 ~~~
+
+To see which `datadog-firehose-nozzle` release version you uploaded earlier, run `bosh releases`.
 
 ### Redeploy the deployment
 
