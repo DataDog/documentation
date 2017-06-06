@@ -222,7 +222,7 @@ bosh -n -d cf-manifest deploy cf-manifest.yml
 
 ### Verify the Nozzle is collecting
 
-On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning with the prefix you configured (i.e. `cloudfoundry.nozzle`):
+On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 ![cloud-foundry-nozzle-metrics](/static/images/cloud-foundry-nozzle-metrics.png)
 
