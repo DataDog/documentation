@@ -66,7 +66,7 @@ addons:
 
 To see which `datadog-agent` release version you uploaded earlier, run `bosh releases`.
 
-If you don't have a local copy of the runtime configuration, get it from the Director (`bosh runtime-config`) and add the above to it. If the Director's runtime configuration is empty, add the above to a new `runtime.yml`.
+If you don't have a local copy of the runtime configuration, create a `runtime.yml` with the current runtime configuration (`bosh runtime-config`) and add the above YAML to it. If the Director's runtime configuration is empty, create a new `runtime.yml` containing only the above YAML.
 
 ### Enable extra Agent checks
 
