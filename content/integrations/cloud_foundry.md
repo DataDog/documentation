@@ -22,7 +22,7 @@ These integrations are meant for Cloud Foundry deployment administrators, not en
 
 You need to have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI—[v1](https://bosh.io/docs/bosh-cli.html) or [v2](https://bosh.io/docs/cli-v2.html#install).
 
-To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director. If you don't have such a file, you will need to generate one.
+To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director. If you don't have such a file, you'll need to [create one](https://bosh.io/docs/cli-envs.html#deployment-state).
 
 # Install the Datadog Agent BOSH Release
 
