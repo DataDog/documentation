@@ -22,7 +22,7 @@ These integrations are meant for Cloud Foundry deployment administrators, not en
 
 You need to have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI—[v1](https://bosh.io/docs/bosh-cli.html) or [v2](https://bosh.io/docs/cli-v2.html#install).
 
-To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director.
+To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director. If you don't have such a file, you will need to generate one.
 
 # Install the Datadog Agent BOSH Release
 
@@ -48,7 +48,7 @@ Add the following to your BOSH Director's runtime configuration file (e.g. `runt
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_YOU_UPLOADED> # i.e. 1.0.5130
+    version: <VERSION_YOU_UPLOADED> # specify the real version, e.g. 1.0.5130, not 'latest'
 
 addons:
 - name: datadog
@@ -130,10 +130,10 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 
 ~~~
 # BOSH CLI v1
-bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-61.tgz
+bosh upload release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-62.tgz
 
 # BOSH CLI v2
-bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-61.tgz
+bosh upload-release https://github.com/DataDog/datadog-firehose-nozzle-release/releases/download/61/datadog-firehose-nozzle-release-62.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository](https://github.com/DataDog/datadog-firehose-nozzle-release).
@@ -178,7 +178,6 @@ jobs:
       api_key: <YOUR_DATADOG_API_KEY>
       api_url: https://app.datadoghq.com/api/v1/series
       flush_duration_seconds: 15          # seconds between flushes to Datadog. Default is 15.
-      metric_prefix: cloudfoundry.nozzle. # namespace for all nozzle metrics
     loggregator:
       # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' will do
       traffic_controller_url: <LOGGREGATOR_URL> # e.g. ws://traffic-controller.your-cf-domain.com:8081
@@ -193,8 +192,6 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ~~~
 
-You can set `metrics_prefix` to anything you like, but if you want to use the default Cloud Foundry screenboard and to see metrics metadata in dashboards and graphs, set it to `cloudfoundry.nozzle.`.
-
 See [all configuration options](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec) for the Datadog Firehose Nozzle.
 
 In the same manifest, add the Datadog Nozzle release name and version:
@@ -205,7 +202,7 @@ releases:
 #   version: x.y.z
 # ...
   - name: datadog-firehose-nozzle
-    version: $VERSION_YOU_UPLOADED # i.e. 61
+    version: $VERSION_YOU_UPLOADED # specify the real version, e.g. 62, not 'latest' 
 ~~~
 
 ### Redeploy the deployment
@@ -250,9 +247,9 @@ instance_groups:
 
 ### Redeploy the Director
 
-BOSH cannot simply configure the plugin and restart the Health Monitor; it must redeploy the Director entirely. **To do this without without fully wiping the Director—including its persistent disks and its PostgreSQL database—you MUST have a `state.json` (or similarly named) file that accurately reflects the current state of your Director.**
+BOSH cannot simply configure the plugin and restart the Health Monitor; it must destroy the Director and redeploy it as a new instance. To do this while retaining the Director's current disk and database, you MUST redeploy using a `state.json` (or similarly named) file that accurately reflects the current state of your Director. If you don't have such a file, follow the BOSH docs on [Deployment State](https://bosh.io/docs/cli-envs.html#deployment-state) to create a basic `state.yml`.
 
-You may use [bosh-init](https://bosh.io/docs/install-bosh-init.html) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, it expects a state file named `bosh-state.yml`.
+You may use [bosh-init](https://bosh.io/docs/install-bosh-init.html) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
 
 ~~~
 # bosh-init (legacy)
