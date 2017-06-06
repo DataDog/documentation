@@ -228,7 +228,7 @@ On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Dat
 
 # Configure the Datadog plugin for BOSH Health Monitor
 
-This plugin is packaged with the BOSH Health Monitor, so if the Health Monitor is already installed and running on your BOSH Director, you simply need to configure the plugin and redeploy the Director.
+The plugin is packaged with the BOSH Health Monitor, so if the Health Monitor is already installed and running on your BOSH Director, you simply need to configure the plugin and redeploy the Director.
 
 ### Add the configuration
 
