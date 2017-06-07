@@ -63,10 +63,6 @@ Go:
     link: https://github.com/gchaincl/dd-go-opentracing
     trace: true
     notes: OpenTracing Tracer implementation for Datadog in Go
-  - name: dd-zipskin-proxy
-    link: https://github.com/flachnetz/dd-zipkin-proxy
-    trace: true
-    notes: A simple Zipkin-to-Datadog proxy
 Java:
   - name: java-dogstatsd-client
     link: https://github.com/DataDog/java-dogstatsd-client
