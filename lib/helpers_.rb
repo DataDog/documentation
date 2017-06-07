@@ -260,6 +260,39 @@ def formatmetrics(selectedmetrics)
   return metrictable.force_encoding("utf-8")
 end
 
+def print_library_table
+  require 'yaml'
+
+  table_markdown = "|Language|Library|API|DogStatsD|Trace (APM)|Officially supported?|Notes|\n|---\n"
+  libraries = YAML.load_file('libraries.yml')
+  libraries.each do |lang, libs|
+    libs.each_with_index do |lib, i|
+      first_col = i == 0 ? "**#{lang}**" : ''
+      api = lib.has_key?('api') ? 'yes' : 'no'
+      dogstatsd = lib.has_key?('dogstatsd') ? 'yes' : 'no'
+      trace = lib.has_key?('trace') ? 'yes' : 'no'
+      official = lib.has_key?('official') ? '**yes**' : 'no'
+      authors = ''
+      if lib.has_key?('authors')
+        if lib['authors'].respond_to?(:join)
+          authors = lib['authors'].join(', ')
+        else
+          authors = lib['authors']
+        end
+      end
+      if authors != ''
+        authors = "Written by #{authors}"
+      end
+      notes = lib.has_key?('notes') ? lib['notes'] : ''
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{api}|#{dogstatsd}|#{trace}|#{official}|#{notes}. #{authors}\n"
+    end
+    table_markdown += "|---\n"
+  end
+
+  table_markdown += "{:.table}"
+  return table_markdown
+end
+
 def get_units_from_git
   require 'octokit'
   require 'base64'

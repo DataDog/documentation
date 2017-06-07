@@ -3,32 +3,55 @@ title: Libraries
 kind: documentation
 ---
 
-There are many libraries available to help you interact with the Datadog API.
+The following table lists the official, Datadog-supported client libraries for the Datadog API and DogStatsD:
 
-#### C\#
-{: #c-sharp}
 
-  * [dogstatsd-csharp-client][6] - A C# DogStatsD client.
+<%= print_library_table %>
 
-#### Go
 
-  * [datadog-go][71] - A Go DogStatsD client.
 
-#### JAVA
-  * [java-dogstatsd-client][7] - a DogStatsD Client for Java written by [Indeed][8] and Datadog.
-
-#### Python
-
-  * [datadogpy][1] - A Python Datadog API wrapper and DogStatsD client.
-
-#### Ruby
-
-  * [DogApi][3] - A Ruby Datadog API wrapper.
-  * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
-
-#### PHP
-
-  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
+|Language|Library|API?|DogStatsD?|Trace(APM)?|Support|Notes|
+|---
+|**C\#**|[dogstatsd-csharp-client][6]|no|yes|no|official||
+||[DatadogSharp][89]|no|yes|yes|community|
+|---
+|**Crystal**|[statsd.cr][86]|no|yes|no|community|Written by [Mike Fiedler][87]|
+|---
+|**Delphi**|[datadog-delphi][85]|no|yes|no|community||
+|---
+|**Elixir**|[ExStatsD][39]|no|yes|no|community|Written by [CargoSense][40]
+||[dogstatsd-elixir][41]|no|yes|no|community|Written by by [Adam Kittelson][42]
+||[mtx][65]|no|yes|no|community|Written by [synrc][66]|
+|---
+|**Go**|[datadog-go][71]|no|yes|no|official||
+||[godspeed][63]|no|yes|no|community|Written by [PagerDuty][64]
+||[go-dogstatsd][32]|no|yes|no|community|Written by [Ooyala][33]
+||[xstats][69]|no|yes|no|community|Written by [Olivier Poitrey][70]
+||[go-datadog-api][30]|yes|no|no|community|Written by [Mark Smith][31] from [Dropbox][81]
+|---
+|**Java**|[java-dogstatsd-client][7]|no|yes|no|official|Written by [Indeed][8] and Datadog|
+||[Lassie][13]|yes|no|no|community|Only for creating screenboards
+||[java-dogstatsd-client][59]|no|yes|no|community|Written by [arnabk][60]
+|---
+|**Node.js**|[hotshots][76]|no|yes|no|community|Written by Brightcove
+||[node-dogstatsd][16]|no|yes|no|Written by [Young Han Lee][17]
+||[node-datadog][14]|yes|no|no|Written by [HashGo][15]
+||[node-dogapi][18]|yes|no|no|community|Written by [Brett Langdon][19]
+||[datadog-metrics][57]|yes|no|no|community|Written by [Daniel Bader][58]
+|---
+|**Perl**|[webservice-datadog][20]|yes|no|no|community|Written by [Jennifer Pinkham][21]
+||[dogstatsd-perl][22]|no|yes|no|community|Written by [Stefan Goethals][23]
+|---
+|**PHP**|[php-datadogstatsd][5]|no|yes|no|official|Written by Alex Corley
+||[dog-statsd][82]|no|yes|no|community|Fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84]
+||[dd-trace-php][94]|no|no|yes|community||
+|---
+|**Python**|[datadogpy][1]|yes|yes|no|official||
+|---
+|**Ruby**|[DogApi][3]|yes|no|no|official||
+||[dogstatsd-ruby][4]|no|yes|no|official||
+|---
+{:.table}
 
 ### Community Libraries
 
@@ -204,6 +227,15 @@ Some great folks have written their own libraries to help interact with Datadog.
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
 
+
+
+MISC STUFF (doesn't fit in the table well)
+
+  * [scales_datadog][34] - a Datadog backend for the [Scales][35] library, written by [Tommaso Barbugli][36].
+  * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
+  * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26].
+  * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
+  * [dd-zipkin-proxy][95] - A simple Zipkin-to-Datadog proxy.
 
 If you've written a Datadog library, write us at [code@datadoghq.com][56] and we'll be happy to add it to the list.
 
