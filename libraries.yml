@@ -41,7 +41,7 @@ Go:
     official: true
     dogstatsd: true
   - name: dd-trace-go
-    link: github.com/DataDog/dd-trace-go
+    link: https://github.com/DataDog/dd-trace-go
     official: true
     trace: true
   - name: godspeed
