@@ -85,6 +85,7 @@ Java:
     api: true
     dogstatsd: true
     notes: A reporting bridge between Dropwizard metrics and Datadog
+    authors: Coursera
 Javascript:
   - name: datadog-tracer-js
     link: https://github.com/rochdev/datadog-tracer-js
