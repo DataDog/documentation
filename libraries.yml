@@ -33,7 +33,7 @@ Elixir:
     link: https://github.com/synrc/mtx
     dogstatsd: true
   - name: spandex
-    link: 
+    link: https://github.com/albert-io/spandex
     trace: true
 Go:
   - name: datadog-go
