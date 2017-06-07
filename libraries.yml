@@ -1,0 +1,173 @@
+C#:
+  - name: dogstatsd-csharp-client
+    link: https://github.com/DataDog/dogstatsd-csharp-client
+    official: true
+    dogstatsd: true
+  - name: DatadogSharp
+    link: https://github.com/neuecc/DatadogSharp
+    dogstatsd: true
+    trace: true
+  - name: metrics.net-datadog
+    link: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
+    dogstatsd: true
+    notes: A .NET translation of the metrics-datadog Java adapter
+Crystal:
+  - name: statsd.cr
+    link: https://github.com/miketheman/statsd.cr
+    dogstatsd: true
+    authors: Mike Fiedler
+Delphi:
+  - name: datadog-delphi
+    link: https://github.com/rfrezino/datadog-delphi
+    dogstatsd: true
+Elixir:
+  - name: ExStatsD
+    link: https://github.com/CargoSense/ex_statsd
+    dogstatsd: true
+    authors: CargoSense
+  - name: dogstatsd-elixir
+    link: https://github.com/adamkittelson/dogstatsd-elixir
+    dogstatsd: true
+    authors: Adam Kittelson
+  - name: mtx
+    link: https://github.com/synrc/mtx
+    dogstatsd: true
+  - name: spandex
+    link: 
+    trace: true
+Go:
+  - name: datadog-go
+    link: https://github.com/DataDog/datadog-go
+    official: true
+    dogstatsd: true
+  - name: dd-trace-go
+    link: github.com/DataDog/dd-trace-go
+    official: true
+    trace: true
+  - name: godspeed
+    link: https://github.com/PagerDuty/godspeed
+    dogstatsd: true
+    authors: PagerDuty
+  - name: go-dogstatsd
+    link: https://github.com/ooyala/go-dogstatsd/
+    dogstatsd: true
+  - name: xstats
+    link: https://github.com/rs/xstats
+    dogstatsd: true
+    authors: Olivier Poitrey
+  - name: go-datadog-api
+    link: https://github.com/zorkian/go-datadog-api
+    api: true
+    authors: Mark Smith from Dropbox
+  - name: dd-go-opentracing
+    link: https://github.com/gchaincl/dd-go-opentracing
+    trace: true
+    notes: OpenTracing Tracer implementation for Datadog in Go
+  - name: dd-zipskin-proxy
+    link: https://github.com/flachnetz/dd-zipkin-proxy
+    trace: true
+    notes: A simple Zipkin-to-Datadog proxy
+Java:
+  - name: java-dogstatsd-client
+    link: https://github.com/DataDog/java-dogstatsd-client
+    official: true
+    dogstatsd: true
+    authors: ['Indeed', 'Datadog']
+  - name: Lassie
+    link: https://github.com/bazaarvoice/lassie
+    api: true
+    notes: Only for creating screenboards
+  - name: java-dogstatsd-client
+    link: https://github.com/arnabk/java-dogstatsd-client
+    dogstatsd: true
+    notes: A fork of Indeed's java-dogstatsd-client; supports events and blocking metrics
+  - name: apm-client
+    link: https://github.com/chonton/apm-client
+    trace: true
+  - name: metrics-datadog
+    link: https://github.com/coursera/metrics-datadog
+    api: true
+    dogstatsd: true
+    notes: A reporting bridge between Dropwizard metrics and Datadog
+Javascript:
+  - name: datadog-tracer-js
+    link: https://github.com/rochdev/datadog-tracer-js
+    trace: true
+    notes: OpenTracing API implementation in Javascript (both Node and browser)
+Node.js:
+  - name: hot-shots
+    link: https://github.com/brightcove/hot-shots
+    dogstatsd: true
+    authors: Brightcove
+  - name: node-dogstatsd
+    link: https://github.com/joybro/node-dogstatsd
+    dogstatsd: true
+    authors: Young Han Lee
+  - name: node-datadog
+    link: https://github.com/HashGo/node-datadog
+    api: true
+    authors: HashGo
+  - name: node-dogapi
+    link: https://github.com/brettlangdon/node-dogapi
+    api: true
+    authors: Brett Langdon
+  - name: datadog-metrics
+    link: https://www.npmjs.com/package/datadog-metrics
+    api: true
+    authors: Daniel Bader
+Perl:
+  - name: webservice-datadog
+    link: https://github.com/jpinkham/webservice-datadog
+    api: true
+    authors: Jennifer Pinkham
+  - name: dogstatsd-perl
+    link: https://github.com/binary-com/dogstatsd-perl
+    dogstatsd: true
+    authors: Stefan Goethals
+PHP:
+  - name: php-datadogstatsd
+    link: https://github.com/DataDog/php-datadogstatsd
+    official: true
+    dogstatsd: true
+    notes: Written by Alex Corley
+  - name: dog-statsd
+    link: https://github.com/graze/dog-statsd
+    dogstatsd: true
+    notes: A fork of thephpleague/statsd with additional Datadog features by Graze
+  - name: dd-trace-php
+    link: https://github.com/jcchavezs/dd-trace-php/
+    trace: true
+Python:
+  - name: datadogpy
+    link: https://github.com/DataDog/datadogpy
+    official: true 
+    api: true
+    dogstatsd: true
+    notes: Also includes an API client CLI tool, 'dog'
+R:
+  - name: datadogr
+    link: https://cran.r-project.org/package=datadogr
+    api: true
+    notes: A simple R package to query for metrics
+  - name: rdog
+    link: https://github.com/alq666/rdog
+    api: true
+    notes: An R package to analyze Datadog metrics into R
+Ruby:
+  - name: DogApi
+    link: https://github.com/DataDog/dogapi-rb
+    official: true
+    api: true
+  - name: dogstatsd-ruby
+    link: https://github.com/DataDog/dogstatsd-ruby
+    official: true
+    dogstatsd: true
+  - name: ddtrace
+    link: https://github.com/DataDog/dd-trace-rb
+    official: true
+    trace: true
+Scala:
+  - name: datadog-scala
+    link: https://github.com/gphat/datadog-scala
+    api: true
+    authors: Cory Watson

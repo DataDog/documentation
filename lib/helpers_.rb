@@ -263,7 +263,7 @@ end
 def print_library_table
   require 'yaml'
 
-  table_markdown = "|Language|Library|API|DogStatsD|Trace (APM)|Officially supported?|Notes|\n|---\n"
+  table_markdown = "|Language|Library|API|DogStatsD|Trace (APM)|Datadog-supported?|Notes|\n|---\n"
   libraries = YAML.load_file('libraries.yml')
   libraries.each do |lang, libs|
     libs.each_with_index do |lib, i|
@@ -275,16 +275,17 @@ def print_library_table
       authors = ''
       if lib.has_key?('authors')
         if lib['authors'].respond_to?(:join)
-          authors = lib['authors'].join(', ')
+          authors = "Written by #{lib['authors'].join(', ')}"
         else
-          authors = lib['authors']
+          authors = "Written by #{lib['authors']}"
         end
       end
-      if authors != ''
-        authors = "Written by #{authors}"
-      end
       notes = lib.has_key?('notes') ? lib['notes'] : ''
-      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{api}|#{dogstatsd}|#{trace}|#{official}|#{notes}. #{authors}\n"
+      if notes != '' && !notes.end_with?('.')
+        notes = "#{notes}."
+      end
+      last_col = "#{notes} #{authors}".strip!
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{api}|#{dogstatsd}|#{trace}|#{official}|#{last_col}\n"
     end
     table_markdown += "|---\n"
   end
