@@ -126,7 +126,7 @@ PHP:
     link: https://github.com/DataDog/php-datadogstatsd
     official: true
     dogstatsd: true
-    notes: Written by Alex Corley
+    authors: Alex Corley
   - name: dog-statsd
     link: https://github.com/graze/dog-statsd
     dogstatsd: true
