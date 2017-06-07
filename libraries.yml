@@ -140,6 +140,10 @@ Python:
     api: true
     dogstatsd: true
     notes: Also includes an API client CLI tool, 'dog'
+  - name: dd-trace-py
+    link: https://github.com/DataDog/dd-trace-py
+    official: true
+    trace: true
 R:
   - name: datadogr
     link: https://cran.r-project.org/package=datadogr
