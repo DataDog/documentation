@@ -145,6 +145,7 @@ Python:
     link: https://github.com/DataDog/dd-trace-py
     official: true
     trace: true
+    notes: Pip package is named ddtrace
 R:
   - name: datadogr
     link: https://cran.r-project.org/package=datadogr
@@ -163,10 +164,11 @@ Ruby:
     link: https://github.com/DataDog/dogstatsd-ruby
     official: true
     dogstatsd: true
-  - name: ddtrace
+  - name: dd-trace-rb
     link: https://github.com/DataDog/dd-trace-rb
     official: true
     trace: true
+    notes: Gem is named ddtrace
 Scala:
   - name: datadog-scala
     link: https://github.com/gphat/datadog-scala
