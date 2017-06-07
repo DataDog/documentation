@@ -28,6 +28,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 1. Download [dd-agent-ecs.json](/static/dd-agent-ecs.json).
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
+
        aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 
 #### Web UI
