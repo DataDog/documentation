@@ -6,7 +6,7 @@ hideguides: true
 customnav: tracingnav
 ---
 
-#### What are the naming criteria for service names, resources, etc?
+#### What are the naming criteria for services, resources, etc?
 
 * Service names and resource names **must be lowercase, alphanumeric characters**.
 * Service names and metadata keys are limited to **a maximum length of 50 characters**.
