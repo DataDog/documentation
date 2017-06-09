@@ -1,0 +1,33 @@
+{{ $name := $.name }}
+{{ $description := $.description }}
+{{ $options := $.options }}
+
+
+{{ $.context.Scratch.Add "lang" "" }}
+{{ $.context.Scratch.Add "lang" "" }}
+
+{{ $is_required := $options.default | default "required" }}
+
+{{ $.context.Scratch.Add "ro" ""}}
+
+{{ if eq $is_required "required" }}
+
+  {{ $.context.Scratch.Set "ro" "required" }}
+
+{{ else if $options.default }}
+
+  {{ $.context.Scratch.Set "ro" (printf "optional, default=%s" $options.default ) }}
+
+{{ else }}
+
+  {{ $.context.Scratch.Set "ro" "optional" }}
+
+{{ end }}
+
+<h1>{{ $is_required }}</h1>
+
+  {{ $lang := (printf "class=\"lang-specific lang-specific%s\"" $options.lang ) }}
+  <li {{ $lang | safeHTMLAttr -}}><strong>{{- $name }} [{{ $.context.Scratch.Get "ro" }}]</strong><div>{{- $description -}}</div></li>
+
+
+

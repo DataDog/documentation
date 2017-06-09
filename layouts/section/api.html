@@ -205,6 +205,7 @@
             <h5>Arguments</h5>
             <ul class="arguments">
               <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
+              {{ partial "argument.html" (dict "context" $dot "name" "from" "description" "seconds since the unix epoch" "options" (dict "lang" "console") )}}
             </ul>
 
           </div>
@@ -228,9 +229,12 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument('series', 'A JSON array of metrics where each item in the array contains the following arguments:', :lang => 'console') %>
-              <%= argument('series', 'To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments.', :default => 'None', :lang => 'python') %>
-              <%= argument 'metric', 'The name of the time series' %>
+              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "A JSON array of metrics where each item in the array contains the following arguments:" "options" (dict "lang" "console") )}}
+
+              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments." "options" (dict "lang" "python" "default" "None") )}}
+
+              {{ partial "argument.html" (dict "context" $dot "name" "metric" "description" "The name of the time series" )}}
+
               <li>
                 <strong>points [required]</strong>
                 <div>A JSON array of points. Each point is of the form:
