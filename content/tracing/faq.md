@@ -49,7 +49,7 @@ If tracing is working properly, you will see flushed payload messages similar to
 
 #### Why am I getting `[Errno 111] Connection refused` errors in my application logs?
 
-Either the trace functionality is not running, or your application is having trouble connecting to the Datadog Agent. By default, the tracer client libraries submit to localhost on port 8126. If this is not where your Trace Agent is listening—perhaps it's listening in a Docker container—configure your tracer client, e.g. `tracer.configure(hostname="172.17.0.1")`.
+Either the Trace Agent is not running, or your tracer client isn't configured correctly. By default, the tracer client libraries submit to localhost on port 8126. If this is not where your Trace Agent is listening—perhaps it's listening in some other Docker container—point your tracer client to where it's running, e.g. `tracer.configure(hostname="172.17.0.1")`.
 
 Alternatively, you can reconfigure the Trace Agent's bind host by setting the DD_BIND_HOST environment variable or the `bind_host` option in `/etc/dd-agent/datadog.conf`.
 
