@@ -2,8 +2,6 @@
 {{ $description := $.description }}
 {{ $options := $.options }}
 
-
-{{ $.context.Scratch.Add "lang" "" }}
 {{ $.context.Scratch.Add "lang" "" }}
 
 {{ $is_required := $options.default | default "required" }}
@@ -24,10 +22,17 @@
 
 {{ end }}
 
-<h1>{{ $is_required }}</h1>
+{{ if and $options.lang (ne $options.nag "python" ) }}
 
-  {{ $lang := (printf "class=\"lang-specific lang-specific%s\"" $options.lang ) }}
-  <li {{ $lang | safeHTMLAttr -}}><strong>{{- $name }} [{{ $.context.Scratch.Get "ro" }}]</strong><div>{{- $description -}}</div></li>
+  {{ $.context.Scratch.Add "style_hide" "style=\"display:none;\" "}}
+
+{{ end }}
+
+{{ $hide := $.context.Scratch.Get "style_hide" }}
+
+{{ $lang := (printf "class=\"lang-specific lang-specific-%s\" %s" $options.lang $hide) }}
+
+<li {{ $lang | safeHTMLAttr -}}><strong>{{- $name }} [{{ $.context.Scratch.Get "ro" }}]</strong><div>{{- $description -}}</div></li>
 
 
 
