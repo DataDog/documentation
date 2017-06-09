@@ -5,8 +5,13 @@ kind: documentation
 
 The following table lists official and community contributed client libraries for the Datadog API, DogStatsD, and the Tracing (APM) API. Many of the libraries are for submitting metrics, events, and service checks to Datadog, but some are for other purposes (see the **Notes** column).
 
+### Classic Client Libraries
 
-<%= print_library_table %>
+<%= print_classic_library_table %>
+
+### Tracing (APM) Client Libraries
+
+<%= print_tracing_library_table %>
 
 
 ### Community Integrations
