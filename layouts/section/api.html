@@ -214,7 +214,7 @@
             <h5>Example Request</h5>
               {{ partial "snippet-code-block" (dict "context" . "file" "api-metrics-list.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-metrics-list.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-metrics-list.sh" ) }}
           </div>
         </div>
         </div>
@@ -311,15 +311,11 @@
             <code>GET /api/v1/metrics/:metric_name</code>
             <h5>Example Request</h5>
             {{ range $ext := (slice "py" "sh" "rb" ) }}
-
               {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-get.%s" $ext ) ) }}
-
             {{ end }}
             <h5>Example Response</h5>
             {{ range $ext := (slice "py" "sh" "rb" ) }}
-
               {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-get.%s" $ext ) ) }}
-
             {{ end }}
           </div>
         </div>
@@ -344,14 +340,15 @@
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
             <code>PUT /api/v1/metrics/:metric_name</code>
-            <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-metric-metadata-update.#{f}" %>
-            <% end %>
-            <h5>Example Response</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_result_code_block "api-metric-metadata-update.#{f}" %>
-            <% end %>
+              <h5>Example Request</h5>
+              {{ range $ext := (slice "py" "sh" "rb" ) }}
+                {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-update.%s" $ext ) ) }}
+              {{ end }}
+              <h5>Example Response</h5>
+              {{ range $ext := (slice "py" "sh" "rb" ) }}
+                {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-update.%s" $ext ) ) }}
+              {{ end }}
+            </div>
           </div>
         </div>
 
@@ -398,13 +395,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/events</code>
             <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-events-post.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+              {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-events-post.%s" $ext ) ) }}
+            {{ end }}
             <h5>Example Response</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_result_code_block "api-events-post.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+              {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-events-post.%s" $ext ) ) }}
+            {{ end }}
           </div>
         </div>
         <div class="int-anchor" id="events-get"></div><a href="#events-get"><h4>Get an Event</h4></a>
@@ -424,9 +421,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.sh" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.rb" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.sh" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-get.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-get.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-get.rb" ) }}
           </div>
         </div>
 
@@ -447,9 +444,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.sh" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.rb" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.sh" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-delete.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-delete.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-delete.rb" ) }}
           </div>
         </div>
 
@@ -477,9 +474,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-stream.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-stream.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-events-stream.sh" ) }}
           </div>
         </div>
 
@@ -517,13 +514,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/check_run</code>
             <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-checks-post.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+              {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-checks-post.%s" $ext ) ) }}
+            {{ end }}
             <h5>Example Response</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_result_code_block "api-checks-post.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+              {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-checks-post.%s" $ext ) ) }}
+            {{ end }}
           </div>
         </div>
 
@@ -1390,9 +1387,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.py" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.sh" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get-all.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get-all.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get-all.py" ) }}
           </div>
         </div>
 
@@ -1412,9 +1409,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-dashboard-get.sh" ) }}
           </div>
         </div>
 
@@ -1456,9 +1453,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-create.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-create.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-create.sh" ) }}
           </div>
         </div>
 
@@ -1484,9 +1481,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-update.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-update.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-update.sh" ) }}
           </div>
         </div>
 
@@ -1527,9 +1524,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get.sh" ) }}
           </div>
         </div>
 
@@ -1549,9 +1546,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get-all.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get-all.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-get-all.sh" ) }}
           </div>
         </div>
 
@@ -1572,9 +1569,9 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.rb" ) }}
             {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.py" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.rb" ) }}
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-share.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-share.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-screenboard-share.sh" ) }}
           </div>
         </div>
 
