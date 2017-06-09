@@ -9,10 +9,10 @@ customnav: tracingnav
 #### What are the naming criteria for services, resources, etc?
 
 * Service names and resource names **must be lowercase, alphanumeric characters**.
-* Service names and metadata keys are limited to **a maximum length of 50 characters**.
-* Metadata and resource names have **a maximum length of 5000 bytes**.
-* Names should not have spaces (they will be replaced with underscores).
-* Resource and service names end up appearing in metrics, [metric naming rules](http://docs.datadoghq.com/faq/#api-metric-names) also apply.
+* Service names and metadata keys **cannot have more than 50 characters in length**.
+* Metadata and resource names **cannot exceed 5000 bytes in size**.
+* Service, resource, and metadata names cannot contain spaces (spaces will be replaced with underscores).
+* Resource and service names must adhere to [metric naming rules](http://docs.datadoghq.com/faq/#api-metric-names).
 
 #### How long is tracing data stored?
 
