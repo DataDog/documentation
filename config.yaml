@@ -5,6 +5,11 @@ baseURL: "http://localhost:1313/"
 languageCode: "en-us"
 defaultcontentlanguageinsubdir: false
 defaultcontentlanguage: "en"
+pygmentsuseclasses: true
+
+taxonomies:
+  tag: "tags"
+  video: "videos"
 
 languages:
   en:

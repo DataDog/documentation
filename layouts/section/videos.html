@@ -8,22 +8,27 @@
     </div>
     <div class="col-xs-12 col-sm-9 col-md-9 main">
       <h1 id="pagetitle">{{ .Title }}</h1>
-      {{.Content}}
+      <p>At Datadog, we want to make sure you have all the tools you need to use and understand our products. Some people learn better with text, some with pictures, some with video, and some prefer a mixture of everything. In this section we present the videos we have created. If there is a video you think we need to produce to help solve a common problem, suggest it via a <a href="http://help.datadoghq.com">support ticket</a> or reach out on to us on Twitter via <a href="http://twitter.com/datadoghq">@datadoghq</a>.</p>
+      <p>The videos are organized by keyword. Click on any of the keywords below to find a relevant video.</p>
 
-      {{ $videos := (where .Site.Pages "Params.kind" "==" "video" ) }}
+      <section>
+        {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+          {{ if eq "videos" $taxonomyname }}
 
-      {{ printf "%#v" $videos }}
+            {{ range $key, $value := $taxonomy }}
+              <ul>
+              {{ $count := (len $value.Pages )}}
 
-      {{ range $videos }}
-        <li><a href="{{.Permalink}}"> (tag count)</a></li>
-      {{ end }}
-
-      {{ range ($videos).GroupByParam "tags" }}
-        {{ . }}
-      {{ end }}
+              <li><a href="{{$.Site.BaseURL}}videos/{{$key}}">{{ $key }}</a> - ({{ $count }})</li>
+              </ul>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      </section>
 
     </div>
   </div>
 </div>
+
 {{ partial "container-footer.html" . }}
 {{ partial "footer.html" . }}

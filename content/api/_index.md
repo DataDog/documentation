@@ -2357,9 +2357,3 @@ kind: documentation
   </div>
 
 </div>
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    $(DD_docs.apiPage);
-  </script>
-<% end %>

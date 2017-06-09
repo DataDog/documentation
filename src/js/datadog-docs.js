@@ -68,8 +68,6 @@
 
 $(document).ready(function() {
 
-    $('#tipue_search_input').tipuesearch();
-
     var header;
     var subheading;
 
@@ -79,6 +77,8 @@ $(document).ready(function() {
     headings = {
 
         'init': function(){
+
+            $('#tipue_search_input').tipuesearch();
 
             this.h1s = $('.main h1');
             this.h2s = $('.main h2');

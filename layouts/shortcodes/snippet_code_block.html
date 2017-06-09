@@ -1,0 +1,5 @@
+{{ $snippet := (.Get 0) }}
+
+<pre>
+{{readFile (printf "code_snippets/%s" $snippet) }}
+</pre>

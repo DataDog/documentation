@@ -1,40 +1,48 @@
 
 {{ partial "header.html" . }}
 {{ partial "navbar.html" . }}
+{{ $dot := . }}
+
+{{ $status_code := (dict "200" "200" "OK" "201" "201" "Created" "202" "202" "Accepted" "204" "204" "No Content" "301" "301" "Moved Permanently" "304" "304" "Not Modified" "401" "401" "Unauthorized" "403" "403 Forbidden" "404" "404" "Not Found" "409" "409" "Conflict" "422" "422" "Unprocessable" "Entity" "500" "500" "Server Error" )}}
+
 
     <div class="container api-page">
       <div class="row floating-header" data-spy="affix" data-offset-top="60">
-        <h1>{{.Title}}</h1>
-        <div class="btn-toolbar">
-          <div class="btn-group api-section-links btn-group-sm">
-            <a class="btn btn-default gradient" href="#authentication">Auth</a>
-            <a class="btn btn-default gradient" href="#errors">Errors</a>
-            <a class="btn btn-default gradient" href="#ratelimiting">Rate Limiting</a>
-            <a class="btn btn-default gradient" href="#metrics">Metrics</a>
-            <a class="btn btn-default gradient" href="#events">Events</a>
-            <a class="btn btn-default gradient" href="#service_checks">Checks</a>
-            <a class="btn btn-default gradient" href="#monitors">Monitors</a>
-            <a class="btn btn-default gradient" href="#downtimes">Downtimes</a>
-            <a class="btn btn-default gradient" href="#timeboards">Timeboards</a>
-            <a class="btn btn-default gradient" href="#screenboards">Screenboards</a>
-            <a class="btn btn-default gradient" href="#hosts">Hosts</a>
-            <a class="btn btn-default gradient" href="#tags">Tags</a>
-            <a class="btn btn-default gradient" href="#search">Search</a>
-            <a class="btn btn-default gradient" href="#comments">Comments</a>
-            <a class="btn btn-default gradient" href="#users">Users</a>
-            <a class="btn btn-default gradient" href="#graphs">Graphs</a>
-            <a class="btn btn-default gradient" href="#embeds">Embeds</a>
-          </div>
-          </div>
+        <div class="col-xs-12">
+
+          <h1>{{.Title}}</h1>
           <div class="btn-toolbar">
-          <div class="btn-group language-links btn-group-sm">
-            <div lang="console" class="lang-btn btn btn-default gradient">Shell</div>
-            <div lang="python" class="active lang-btn btn btn-default gradient">Python</div>
-            <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
+            <div class="btn-group api-section-links btn-group-sm">
+              <a class="btn btn-default gradient" href="#authentication">Auth</a>
+              <a class="btn btn-default gradient" href="#errors">Errors</a>
+              <a class="btn btn-default gradient" href="#ratelimiting">Rate Limiting</a>
+              <a class="btn btn-default gradient" href="#metrics">Metrics</a>
+              <a class="btn btn-default gradient" href="#events">Events</a>
+              <a class="btn btn-default gradient" href="#service_checks">Checks</a>
+              <a class="btn btn-default gradient" href="#monitors">Monitors</a>
+              <a class="btn btn-default gradient" href="#downtimes">Downtimes</a>
+              <a class="btn btn-default gradient" href="#timeboards">Timeboards</a>
+              <a class="btn btn-default gradient" href="#screenboards">Screenboards</a>
+              <a class="btn btn-default gradient" href="#hosts">Hosts</a>
+              <a class="btn btn-default gradient" href="#tags">Tags</a>
+              <a class="btn btn-default gradient" href="#search">Search</a>
+              <a class="btn btn-default gradient" href="#comments">Comments</a>
+              <a class="btn btn-default gradient" href="#users">Users</a>
+              <a class="btn btn-default gradient" href="#graphs">Graphs</a>
+              <a class="btn btn-default gradient" href="#embeds">Embeds</a>
+            </div>
+            </div>
+            <div class="btn-toolbar">
+            <div class="btn-group language-links btn-group-sm">
+              <div lang="console" class="lang-btn btn btn-default gradient">Shell</div>
+              <div lang="python" class="active lang-btn btn btn-default gradient">Python</div>
+              <div lang="ruby" class="lang-btn btn btn-default gradient">Ruby</div>
+            </div>
+            <div class="btn-group btn-group-sm">
+              <a class="btn btn-default gradient" href="#troubleshooting">Troubleshooting</a>
+            </div>
           </div>
-          <div class="btn-group btn-group-sm">
-            <a class="btn btn-default gradient" href="#troubleshooting">Troubleshooting</a>
-          </div>
+
         </div>
       </div>
 
@@ -49,7 +57,7 @@
         <div class="int-anchor" id="overview"></div><a href="#overview"><h3>Overview</h3></a>
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
-            This section details Datadog's HTTP API. It makes it easy to get data in and
+            This section details Datadogs HTTP API. It makes it easy to get data in and
             out of Datadog.
 
             The Datadog API uses resource-oriented URLs, uses status codes to indicate the
@@ -83,9 +91,9 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Example</h5>
-            <%= snippet_code_block "api-auth.sh" %>
-            <%= snippet_code_block "api-auth.py" %>
-            <%= snippet_code_block "api-auth.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-auth.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-auth.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-auth.rb" ) }}
           </div>
         </div>
 
@@ -117,14 +125,14 @@
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Status Codes</h5>
             <ul>
-            <% STATUS_CODES.values.sort.each do |value| %>
-              <li> <code><%= value %> </code></li>
-            <% end %>
+            {{ range $code, $message := $status_code }}
+              <li><code>{{ $code }} {{ $message }}</code></li>
+            {{ end }}
             </ul>
             <h5>Example Error Response</h5>
-            <%= snippet_code_block "api-error.json", :static => true, :highlight => false, :nocomments => true %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-error.json" "static" true "disable_highlight" true) }}
             <h5>Example Warning Response</h5>
-            <%= snippet_code_block "api-warning.json", :static => true, :highlight => false, :nocomments => true %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-warning.json" "static" true "disable_highlight" true) }}
           </div>
         </div>
 
@@ -204,9 +212,9 @@
             <h5>Signature</h5>
             <code>GET https://app.datadoghq.com/api/v1/metrics</code>
             <h5>Example Request</h5>
-              <%= snippet_code_block "api-metrics-list.sh" %>
+              {{ partial "snippet-code-block" (dict "context" . "file" "api-metrics-list.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-metrics-list.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-metrics-list.sh" ) }}
           </div>
         </div>
         </div>
@@ -241,9 +249,11 @@
             <h5>Signature</h5>
             <code>POST https://app.datadoghq.com/api/v1/series</code>
             <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-metrics-post.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+
+              {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-metrics-post.%s" $ext ) ) }}
+
+            {{ end }}
           </div>
         </div>
 
@@ -272,13 +282,17 @@
             <h5>Signature</h5>
             <code>GET https://app.datadoghq.com/api/v1/query</code>
             <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-metrics-query.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+
+              {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-metrics-query.%s" $ext ) ) }}
+
+            {{ end }}
             <h5>Example Response</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_result_code_block "api-metrics-query.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+
+              {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-metrics-query.%s" $ext ) ) }}
+
+            {{ end }}
           </div>
         </div>
 
@@ -296,13 +310,17 @@
             <h5>Signature</h5>
             <code>GET /api/v1/metrics/:metric_name</code>
             <h5>Example Request</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_code_block "api-metric-metadata-get.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+
+              {{ partial "snippet-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-get.%s" $ext ) ) }}
+
+            {{ end }}
             <h5>Example Response</h5>
-            <% %w{py sh rb}.each do |f| %>
-              <%= snippet_result_code_block "api-metric-metadata-get.#{f}" %>
-            <% end %>
+            {{ range $ext := (slice "py" "sh" "rb" ) }}
+
+              {{ partial "snippet-result-code-block" (dict "context" $dot "file" (printf "api-metric-metadata-get.%s" $ext ) ) }}
+
+            {{ end }}
           </div>
         </div>
 
@@ -402,13 +420,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/events/:event_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-events-get.py" %>
-            <%= snippet_code_block "api-events-get.sh" %>
-            <%= snippet_code_block "api-events-get.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.rb" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-events-get.py" %>
-            <%= snippet_result_code_block "api-events-get.sh" %>
-            <%= snippet_result_code_block "api-events-get.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-get.rb" ) }}
           </div>
         </div>
 
@@ -425,13 +443,13 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/events/:event_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-events-delete.py" %>
-            <%= snippet_code_block "api-events-delete.sh" %>
-            <%= snippet_code_block "api-events-delete.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.rb" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-events-delete.py" %>
-            <%= snippet_result_code_block "api-events-delete.sh" %>
-            <%= snippet_result_code_block "api-events-delete.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-delete.rb" ) }}
           </div>
         </div>
 
@@ -455,13 +473,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/events</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-events-stream.py" %>
-            <%= snippet_code_block "api-events-stream.rb" %>
-            <%= snippet_code_block "api-events-stream.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-events-stream.py" %>
-            <%= snippet_result_code_block "api-events-stream.rb" %>
-            <%= snippet_result_code_block "api-events-stream.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-events-stream.sh" ) }}
           </div>
         </div>
 
@@ -751,13 +769,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/monitor</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-create.py" %>
-            <%= snippet_code_block "api-monitor-create.rb" %>
-            <%= snippet_code_block "api-monitor-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-create.py" %>
-            <%= snippet_result_code_block "api-monitor-create.rb" %>
-            <%= snippet_result_code_block "api-monitor-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-create.sh" ) }}
             </div>
           </div>
 
@@ -783,13 +801,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/monitor/:monitor_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-show.py" %>
-            <%= snippet_code_block "api-monitor-show.rb" %>
-            <%= snippet_code_block "api-monitor-show.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-show.py" %>
-            <%= snippet_result_code_block "api-monitor-show.rb" %>
-            <%= snippet_result_code_block "api-monitor-show.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show.sh" ) }}
           </div>
         </div>
 
@@ -817,13 +835,13 @@
             <h5>Signature</h5>
             <code>PUT /api/v1/monitor/:monitor_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-edit.py" %>
-            <%= snippet_code_block "api-monitor-edit.rb" %>
-            <%= snippet_code_block "api-monitor-edit.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-edit.py" %>
-            <%= snippet_result_code_block "api-monitor-edit.rb" %>
-            <%= snippet_result_code_block "api-monitor-edit.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-edit.sh" ) }}
           </div>
         </div>
 
@@ -838,13 +856,13 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/monitor/:monitor_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-delete.py" %>
-            <%= snippet_code_block "api-monitor-delete.rb" %>
-            <%= snippet_code_block "api-monitor-delete.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-delete.py" %>
-            <%= snippet_result_code_block "api-monitor-delete.rb" %>
-            <%= snippet_result_code_block "api-monitor-delete.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-delete.sh" ) }}
           </div>
         </div>
 
@@ -880,13 +898,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/monitor</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-show-all.py" %>
-            <%= snippet_code_block "api-monitor-show-all.rb" %>
-            <%= snippet_code_block "api-monitor-show-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-show-all.py" %>
-            <%= snippet_result_code_block "api-monitor-show-all.rb" %>
-            <%= snippet_result_code_block "api-monitor-show-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-show-all.sh" ) }}
           </div>
         </div>
 
@@ -906,13 +924,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/monitor/mute_all</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-mute-all.py" %>
-            <%= snippet_code_block "api-monitor-mute-all.rb" %>
-            <%= snippet_code_block "api-monitor-mute-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-mute-all.py" %>
-            <%= snippet_result_code_block "api-monitor-mute-all.rb" %>
-            <%= snippet_result_code_block "api-monitor-mute-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute-all.sh" ) }}
           </div>
         </div>
 
@@ -931,9 +949,9 @@
             <h5>Signature</h5>
             <code>POST /api/v1/monitor/unmute_all</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-unmute-all.py" %>
-            <%= snippet_code_block "api-monitor-unmute-all.rb" %>
-            <%= snippet_code_block "api-monitor-unmute-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute-all.sh" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -953,13 +971,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/monitor/:monitor_id/mute</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-mute.py" %>
-            <%= snippet_code_block "api-monitor-mute.rb" %>
-            <%= snippet_code_block "api-monitor-mute.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-mute.py" %>
-            <%= snippet_result_code_block "api-monitor-mute.rb" %>
-            <%= snippet_result_code_block "api-monitor-mute.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-mute.sh" ) }}
           </div>
         </div>
 
@@ -978,13 +996,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/monitor/:monitor_id/unmute</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-unmute.py" %>
-            <%= snippet_code_block "api-monitor-unmute.rb" %>
-            <%= snippet_code_block "api-monitor-unmute.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-unmute.py" %>
-            <%= snippet_result_code_block "api-monitor-unmute.rb" %>
-            <%= snippet_result_code_block "api-monitor-unmute.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-unmute.sh" ) }}
           </div>
         </div>
 
@@ -1052,13 +1070,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/downtime</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-schedule-downtime.py" %>
-            <%= snippet_code_block "api-monitor-schedule-downtime.rb" %>
-            <%= snippet_code_block "api-monitor-schedule-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-schedule-downtime.py" %>
-            <%= snippet_result_code_block "api-monitor-schedule-downtime.rb" %>
-            <%= snippet_result_code_block "api-monitor-schedule-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-schedule-downtime.sh" ) }}
           </div>
         </div>
 
@@ -1112,13 +1130,13 @@
             <h5>Signature</h5>
             <code>PUT /api/v1/downtime/:downtime_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-update-downtime.py" %>
-            <%= snippet_code_block "api-monitor-update-downtime.rb" %>
-            <%= snippet_code_block "api-monitor-update-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-update-downtime.py" %>
-            <%= snippet_result_code_block "api-monitor-update-downtime.rb" %>
-            <%= snippet_result_code_block "api-monitor-update-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-update-downtime.sh" ) }}
           </div>
         </div>
 
@@ -1133,9 +1151,9 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/downtime/:downtime_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-cancel-downtime.py" %>
-            <%= snippet_code_block "api-monitor-cancel-downtime.rb" %>
-            <%= snippet_code_block "api-monitor-cancel-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-cancel-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-cancel-downtime.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-cancel-downtime.sh" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -1152,7 +1170,7 @@
             <h5>Signature</h5>
             <code>POST /api/v1/downtime/cancel/by_scope</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-cancel-downtime-by-scope.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-cancel-downtime-by-scope.sh" ) }}
             <h5>Example Response</h5>
             <code>{"cancelled_ids":[123456789,123456790]}</code>
           </div>
@@ -1169,11 +1187,11 @@
             <h5>Signature</h5>
             <code>GET /api/v1/downtime/:downtime_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-get-downtime.py" %>
-            <%= snippet_code_block "api-monitor-get-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtime.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-get-downtime.py" %>
-            <%= snippet_result_code_block "api-monitor-get-downtime.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtime.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtime.sh" ) }}
           </div>
         </div>
 
@@ -1189,13 +1207,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/downtime</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-monitor-get-downtimes.py" %>
-            <%= snippet_code_block "api-monitor-get-downtimes.rb" %>
-            <%= snippet_code_block "api-monitor-get-downtimes.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-monitor-get-downtimes.py" %>
-            <%= snippet_result_code_block "api-monitor-get-downtimes.rb" %>
-            <%= snippet_result_code_block "api-monitor-get-downtimes.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-monitor-get-downtimes.sh" ) }}
           </div>
         </div>
 
@@ -1260,13 +1278,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/dash</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-dashboard-create.py" %>
-            <%= snippet_code_block "api-dashboard-create.rb" %>
-            <%= snippet_code_block "api-dashboard-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-dashboard-create.py" %>
-            <%= snippet_result_code_block "api-dashboard-create.rb" %>
-            <%= snippet_result_code_block "api-dashboard-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-create.sh" ) }}
           </div>
         </div>
 
@@ -1327,13 +1345,13 @@
             <h5>Signature</h5>
             <code>PUT /api/v1/dash/:dash_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-dashboard-update.py" %>
-            <%= snippet_code_block "api-dashboard-update.rb" %>
-            <%= snippet_code_block "api-dashboard-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-dashboard-update.py" %>
-            <%= snippet_result_code_block "api-dashboard-update.rb" %>
-            <%= snippet_result_code_block "api-dashboard-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-update.sh" ) }}
           </div>
         </div>
 
@@ -1348,9 +1366,9 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/dash/:dash_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-dashboard-delete.py" %>
-            <%= snippet_code_block "api-dashboard-delete.rb" %>
-            <%= snippet_code_block "api-dashboard-delete.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-delete.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-delete.sh" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -1368,13 +1386,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/dash</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-dashboard-get-all.sh" %>
-            <%= snippet_code_block "api-dashboard-get-all.rb" %>
-            <%= snippet_code_block "api-dashboard-get-all.py" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.py" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-dashboard-get-all.sh" %>
-            <%= snippet_result_code_block "api-dashboard-get-all.rb" %>
-            <%= snippet_result_code_block "api-dashboard-get-all.py" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get-all.py" ) }}
           </div>
         </div>
 
@@ -1390,13 +1408,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/dash/:dash_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-dashboard-get.py" %>
-            <%= snippet_code_block "api-dashboard-get.rb" %>
-            <%= snippet_code_block "api-dashboard-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-dashboard-get.py" %>
-            <%= snippet_result_code_block "api-dashboard-get.rb" %>
-            <%= snippet_result_code_block "api-dashboard-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-dashboard-get.sh" ) }}
           </div>
         </div>
 
@@ -1434,13 +1452,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/screen</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-create.py" %>
-            <%= snippet_code_block "api-screenboard-create.rb" %>
-            <%= snippet_code_block "api-screenboard-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-screenboard-create.py" %>
-            <%= snippet_result_code_block "api-screenboard-create.rb" %>
-            <%= snippet_result_code_block "api-screenboard-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-create.sh" ) }}
           </div>
         </div>
 
@@ -1462,13 +1480,13 @@
             <h5>Signature</h5>
             <code>PUT /api/v1/screen/:board_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-update.py" %>
-            <%= snippet_code_block "api-screenboard-update.rb" %>
-            <%= snippet_code_block "api-screenboard-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-screenboard-update.py" %>
-            <%= snippet_result_code_block "api-screenboard-update.rb" %>
-            <%= snippet_result_code_block "api-screenboard-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-update.sh" ) }}
           </div>
         </div>
 
@@ -1484,9 +1502,9 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/screen/:board_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-delete.py" %>
-            <%= snippet_code_block "api-screenboard-delete.rb" %>
-            <%= snippet_code_block "api-screenboard-delete.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-delete.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-delete.sh" ) }}
             <h5>Example Response</h5>
             <!-- TO FIX -->
             <em>This end point does not return JSON on successful requests.</em>
@@ -1505,13 +1523,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/screen/:board_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-get.py" %>
-            <%= snippet_code_block "api-screenboard-get.rb" %>
-            <%= snippet_code_block "api-screenboard-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-screenboard-get.py" %>
-            <%= snippet_result_code_block "api-screenboard-get.rb" %>
-            <%= snippet_result_code_block "api-screenboard-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get.sh" ) }}
           </div>
         </div>
 
@@ -1527,13 +1545,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/screen</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-get-all.py" %>
-            <%= snippet_code_block "api-screenboard-get-all.rb" %>
-            <%= snippet_code_block "api-screenboard-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-screenboard-get-all.py" %>
-            <%= snippet_result_code_block "api-screenboard-get-all.rb" %>
-            <%= snippet_result_code_block "api-screenboard-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-get-all.sh" ) }}
           </div>
         </div>
 
@@ -1550,13 +1568,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/screen/share/:board_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-share.py" %>
-            <%= snippet_code_block "api-screenboard-share.rb" %>
-            <%= snippet_code_block "api-screenboard-share.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-screenboard-share.py" %>
-            <%= snippet_result_code_block "api-screenboard-share.rb" %>
-            <%= snippet_result_code_block "api-screenboard-share.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-share.sh" ) }}
           </div>
         </div>
 
@@ -1572,9 +1590,9 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/screen/share/:board_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-screenboard-revoke.py" %>
-            <%= snippet_code_block "api-screenboard-revoke.rb" %>
-            <%= snippet_code_block "api-screenboard-revoke.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-revoke.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-revoke.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-screenboard-revoke.sh" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -1602,13 +1620,13 @@
         <h5>Signature</h5>
           <code>POST /api/v1/host/:hostname/mute</code>
           <h5>Example Request</h5>
-          <%= snippet_code_block "api-host-mute.rb" %>
-          <%= snippet_code_block "api-host-mute.py" %>
-          <%= snippet_code_block "api-host-mute.sh" %>
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.rb" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.py" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.sh" ) }}
           <h5>Example Response</h5>
-          <%= snippet_result_code_block "api-host-mute.rb" %>
-          <%= snippet_result_code_block "api-host-mute.py" %>
-          <%= snippet_result_code_block "api-host-mute.sh" %>
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.rb" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.py" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-mute.sh" ) }}
           </div>
         </div>
 
@@ -1622,13 +1640,13 @@
         <h5>Signature</h5>
           <code>POST /api/v1/host/:hostname/unmute</code>
           <h5>Example Request</h5>
-          <%= snippet_code_block "api-host-unmute.rb" %>
-          <%= snippet_code_block "api-host-unmute.py" %>
-          <%= snippet_code_block "api-host-unmute.sh" %>
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.rb" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.py" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.sh" ) }}
           <h5>Example Response</h5>
-          <%= snippet_result_code_block "api-host-unmute.rb" %>
-          <%= snippet_result_code_block "api-host-unmute.py" %>
-          <%= snippet_result_code_block "api-host-unmute.sh" %>
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.rb" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.py" ) }}
+          {{ partial "snippet-code-block" (dict "context" . "file" "api-host-unmute.sh" ) }}
           </div>
         </div>
 
@@ -1671,13 +1689,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/tags/hosts</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-tags-get.rb" %>
-            <%= snippet_code_block "api-tags-get.py" %>
-            <%= snippet_code_block "api-tags-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-tags-get.rb" %>
-            <%= snippet_result_code_block "api-tags-get.py" %>
-            <%= snippet_result_code_block "api-tags-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get.sh" ) }}
           </div>
         </div>
 
@@ -1697,13 +1715,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/tags/hosts/:host_name</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-tags-get-host.py" %>
-            <%= snippet_code_block "api-tags-get-host.rb" %>
-            <%= snippet_code_block "api-tags-get-host.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-tags-get-host.py" %>
-            <%= snippet_result_code_block "api-tags-get-host.rb" %>
-            <%= snippet_result_code_block "api-tags-get-host.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-get-host.sh" ) }}
           </div>
         </div>
 
@@ -1723,13 +1741,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/tags/hosts/:host_name</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-tags-add.py" %>
-            <%= snippet_code_block "api-tags-add.sh" %>
-            <%= snippet_code_block "api-tags-add.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.rb" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-tags-add.py" %>
-            <%= snippet_result_code_block "api-tags-add.sh" %>
-            <%= snippet_result_code_block "api-tags-add.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-add.rb" ) }}
           </div>
         </div>
 
@@ -1749,13 +1767,13 @@
             <h5>Signature</h5>
             <code>PUT /api/v1/tags/hosts/:host_name</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-tags-update.py" %>
-            <%= snippet_code_block "api-tags-update.sh" %>
-            <%= snippet_code_block "api-tags-update.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.rb" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-tags-update.py" %>
-            <%= snippet_result_code_block "api-tags-update.sh" %>
-            <%= snippet_result_code_block "api-tags-update.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-update.rb" ) }}
           </div>
         </div>
 
@@ -1774,9 +1792,9 @@
             <h5>Signature</h5>
             <code>DELETE /api/v1/tags/hosts/:host_name</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-tags-remove.py" %>
-            <%= snippet_code_block "api-tags-remove.sh" %>
-            <%= snippet_code_block "api-tags-remove.rb" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-remove.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-remove.sh" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-tags-remove.rb" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -1828,13 +1846,13 @@
             <h5>Signature</h5>
             <code>GET /api/v1/search</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-search.py" %>
-            <%= snippet_code_block "api-search.rb" %>
-            <%= snippet_code_block "api-search.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-search.py" %>
-            <%= snippet_result_code_block "api-search.rb" %>
-            <%= snippet_result_code_block "api-search.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-search.sh" ) }}
           </div>
         </div>
 
@@ -1875,13 +1893,13 @@
             <h5>Signature</h5>
             <code>POST api/v1/comments</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-comment-create.py" %>
-            <%= snippet_code_block "api-comment-create.rb" %>
-            <%= snippet_code_block "api-comment-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-comment-create.py" %>
-            <%= snippet_result_code_block "api-comment-create.rb" %>
-            <%= snippet_result_code_block "api-comment-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-create.sh" ) }}
           </div>
         </div>
 
@@ -1899,13 +1917,13 @@
             <h5>Signature</h5>
             <code>PUT api/v1/comments/:comment_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-comment-edit.py" %>
-            <%= snippet_code_block "api-comment-edit.rb" %>
-            <%= snippet_code_block "api-comment-edit.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-comment-edit.py" %>
-            <%= snippet_result_code_block "api-comment-edit.rb" %>
-            <%= snippet_result_code_block "api-comment-edit.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-edit.sh" ) }}
           </div>
         </div>
 
@@ -1920,9 +1938,9 @@
             <h5>Signature</h5>
             <code>DELETE api/v1/comments/:comment_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-comment-delete.py" %>
-            <%= snippet_code_block "api-comment-delete.rb" %>
-            <%= snippet_code_block "api-comment-delete.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-delete.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-delete.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-comment-delete.sh" ) }}
             <h5>Example Response</h5>
             <em>This end point does not return JSON on successful requests.</em>
           </div>
@@ -1958,13 +1976,13 @@
             <h5>Signature</h5>
             <code>POST api/v1/user</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-user-create.py" %>
-            <%= snippet_code_block "api-user-create.rb" %>
-            <%= snippet_code_block "api-user-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-user-create.py" %>
-            <%= snippet_result_code_block "api-user-create.rb" %>
-            <%= snippet_result_code_block "api-user-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-create.sh" ) }}
           </div>
         </div>
 
@@ -1981,13 +1999,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/user/:handle</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-user-get.py" %>
-            <%= snippet_code_block "api-user-get.rb" %>
-            <%= snippet_code_block "api-user-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-user-get.py" %>
-            <%= snippet_result_code_block "api-user-get.rb" %>
-            <%= snippet_result_code_block "api-user-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get.sh" ) }}
           </div>
         </div>
 
@@ -2004,13 +2022,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/user </code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-user-get-all.py" %>
-            <%= snippet_code_block "api-user-get-all.rb" %>
-            <%= snippet_code_block "api-user-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-user-get-all.py" %>
-            <%= snippet_result_code_block "api-user-get-all.rb" %>
-            <%= snippet_result_code_block "api-user-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-get-all.sh" ) }}
           </div>
         </div>
 
@@ -2035,13 +2053,13 @@
             <h5>Signature</h5>
             <code>PUT api/v1/user/:handle</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-user-update.py" %>
-            <%= snippet_code_block "api-user-update.rb" %>
-            <%= snippet_code_block "api-user-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-user-update.py" %>
-            <%= snippet_result_code_block "api-user-update.rb" %>
-            <%= snippet_result_code_block "api-user-update.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-update.sh" ) }}
           </div>
         </div>
 
@@ -2062,13 +2080,13 @@
             <h5>Signature</h5>
             <code>DELETE api/v1/user/:handle</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-user-disable.py" %>
-            <%= snippet_code_block "api-user-disable.rb" %>
-            <%= snippet_code_block "api-user-disable.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-user-disable.py" %>
-            <%= snippet_result_code_block "api-user-disable.rb" %>
-            <%= snippet_result_code_block "api-user-disable.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-user-disable.sh" ) }}
           </div>
         </div>
 
@@ -2106,13 +2124,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/graph/snapshot</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-graph-snapshot.py" %>
-            <%= snippet_code_block "api-graph-snapshot.rb" %>
-            <%= snippet_code_block "api-graph-snapshot.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-graph-snapshot.py" %>
-            <%= snippet_result_code_block "api-graph-snapshot.rb" %>
-            <%= snippet_result_code_block "api-graph-snapshot.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-graph-snapshot.sh" ) }}
           </div>
         </div>
 
@@ -2152,13 +2170,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/graph/embed</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-embeds-get-all.py" %>
-            <%= snippet_code_block "api-embeds-get-all.rb" %>
-            <%= snippet_code_block "api-embeds-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-embeds-get-all.py" %>
-            <%= snippet_result_code_block "api-embeds-get-all.rb" %>
-            <%= snippet_result_code_block "api-embeds-get-all.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get-all.sh" ) }}
           </div>
         </div>
 
@@ -2194,13 +2212,13 @@
             <h5>Signature</h5>
             <code>POST api/v1/graph/embed</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-embeds-create.py" %>
-            <%= snippet_code_block "api-embeds-create.rb" %>
-            <%= snippet_code_block "api-embeds-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-embeds-create.py" %>
-            <%= snippet_result_code_block "api-embeds-create.rb" %>
-            <%= snippet_result_code_block "api-embeds-create.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-create.sh" ) }}
           </div>
         </div>
 
@@ -2242,13 +2260,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/graph/embed/:embed_id</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-embeds-get.py" %>
-            <%= snippet_code_block "api-embeds-get.rb" %>
-            <%= snippet_code_block "api-embeds-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-embeds-get.py" %>
-            <%= snippet_result_code_block "api-embeds-get.rb" %>
-            <%= snippet_result_code_block "api-embeds-get.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-get.sh" ) }}
           </div>
         </div>
 
@@ -2272,13 +2290,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/graph/embed/:embed_id/enable</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-embeds-enable.py" %>
-            <%= snippet_code_block "api-embeds-enable.rb" %>
-            <%= snippet_code_block "api-embeds-enable.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-embeds-enable.py" %>
-            <%= snippet_result_code_block "api-embeds-enable.rb" %>
-            <%= snippet_result_code_block "api-embeds-enable.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-enable.sh" ) }}
           </div>
         </div>
 
@@ -2302,13 +2320,13 @@
             <h5>Signature</h5>
             <code>GET api/v1/graph/embed/:embed_id/revoke</code>
             <h5>Example Request</h5>
-            <%= snippet_code_block "api-embeds-revoke.py" %>
-            <%= snippet_code_block "api-embeds-revoke.rb" %>
-            <%= snippet_code_block "api-embeds-revoke.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.sh" ) }}
             <h5>Example Response</h5>
-            <%= snippet_result_code_block "api-embeds-revoke.py" %>
-            <%= snippet_result_code_block "api-embeds-revoke.rb" %>
-            <%= snippet_result_code_block "api-embeds-revoke.sh" %>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.py" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.rb" ) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-embeds-revoke.sh" ) }}
           </div>
         </div>
 
@@ -2347,12 +2365,6 @@
       </div>
 
     </div>
-
-    <% content_for :javascript do %>
-      <script type="text/javascript">
-        $(DD_docs.apiPage);
-      </script>
-    <% end %>
 
 {{ partial "container-footer.html" . }}
 

@@ -29,6 +29,19 @@
         {{ end }}
 
         <script src="/js/main-dd.js"></script>
+
+        {{ if eq .RelPermalink "/api/" }}
+          <script type="text/javascript">
+            window.Datadog = window.Datadog || {};
+            window.Datadog.toc = false;
+
+            jQuery(document).ready(function($){
+              $(DD_docs.apiPage);
+            });
+
+          </script>
+        {{ end }}
+
         {{ partial "footer-scripts.html" .}}
     </body>
 </html>
