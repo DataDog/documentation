@@ -204,8 +204,7 @@
 
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
-              {{ partial "argument.html" (dict "context" $dot "name" "from" "description" "seconds since the unix epoch" "options" (dict "lang" "console") )}}
+              {{ partial "argument.html" (dict "context" $dot "name" "from" "description" "seconds since the unix epoch" "lang" "console")}}
             </ul>
 
           </div>
@@ -229,9 +228,9 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "A JSON array of metrics where each item in the array contains the following arguments:" "options" (dict "lang" "console") )}}
+              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "A JSON array of metrics where each item in the array contains the following arguments:" "lang" "console" )}}
 
-              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments." "options" (dict "lang" "python" "default" "None") )}}
+              {{ partial "argument.html" (dict "context" $dot "name" "series" "description" "To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments." "lang" "python" "default" "None" )}}
 
               {{ partial "argument.html" (dict "context" $dot "name" "metric" "description" "The name of the time series" )}}
 
@@ -245,8 +244,8 @@
                   Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
                 </div>
               </li>
-              <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
-              <%= argument('tags', 'A list of tags associated with the metric.', :default => 'None' ) %>
+              {{ partial "argument.html" (dict "context" $dot "name" "host" "description" "The name of the host that produced the metric." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags associated with the metric." "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -270,11 +269,11 @@
 
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("from", "seconds since the unix epoch", :lang => 'console') %>
-              <%= argument("to", "seconds since the unix epoch", :lang => 'console') %>
-              <%= argument("start", "seconds since the unix epoch", :lang => 'python') %>
-              <%= argument("end", "seconds since the unix epoch", :lang => 'python') %>
-              <%= argument("query", "The query string") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "from" "description" "seconds since the unix epoch" "lang" "console") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "to" "description" "seconds since the unix epoch" "lang" "console") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "seconds since the unix epoch" "lang" "python") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "seconds since the unix epoch" "lang" "python") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "query" "description" "The query strong" )}}
             </ul>
             <h5>Query Language</h5>
             <p>
@@ -333,12 +332,12 @@
 
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("type", "metric type such as 'gauge' or 'rate'", {:default => 'None'}) %>
-              <%= argument("description", "string description of the metric", {:default => 'None'}) %>
-              <%= argument("short_name", "short name string of the metric", {:default => 'None'}) %>
-              <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'", {:default => 'None'}) %>
-              <%= argument("per_unit", "'per' unit of the metric such as 'second' in 'bytes per second'", {:default => 'None'}) %>
-              <%= argument("statsd_interval", "if applicable, statds flush interval in seconds for the metric", {:default => 'None'}) %>
+              {{ partial "argument.html" (dict "context" $dot "name" "type" "description" "metric type such as 'gauge' or 'rate'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "description" "description" "string description of the metric" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "short_name" "description" "short name string of the metric" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "unit" "description" "primary unit of the metric such as 'byte' or 'operation'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "per_unit" "description" "'per' unit of the metric such as 'second' in 'bytes per second'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "statsd_interval" "description" "if applicable, statds flush interval in seconds for the metric" "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -378,21 +377,24 @@
               This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
             </p>
             <h5>Arguments</h5>
-            <% valid_sources = "nagios, hudson, jenkins, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
+            {{ $valid_sources := "nagios, hudson, jenkins, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano" }}
             <ul class="arguments">
-              <% %w(console python).each do |l| %>
-                <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
-                <%= argument "text", "The body of the event. Limited to 4000 characters. The text supports "+'<a href="/guides/markdown/">markdown</a>.', :lang => l %>
-              <% end %>
-              <%= argument 'msg_text', 'The text for the message. Limited to 4000 characters. The text supports '+'<a href="/guides/markdown/">markdown</a>.', :lang => 'ruby' %>
-              <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
-              <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
-              <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
-              <%= argument("host", "Host name to associate with the event. Any tags associated with the host will also be applied to this event.", {:default => 'None'}) %>
-              <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
-              <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
-              <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream.', {:default => 'None'}) %>
-              <%= argument("source_type_name", 'The type of event being posted. <div>Options: ' + valid_sources + '</div>', {:default => 'None'}) %>
+              {{ range (slice "console" "python") }}
+
+                {{ partial "argument.html" (dict "context" $dot "name" . "description" "The body of the event. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" . ) }}
+
+              {{ end }}
+              {{ partial "argument.html" (dict "context" $dot "name" "msg_text" "description" "The text for the message. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" "ruby") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "msg_title" "description" "The event title. Limited to 100 characters." "lang" "ruby" "default" "''") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "date_happened" "description" "POSIX timestamp of the event." "default" "now") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "priority" "description" "The priority of the event ('normal' or 'low')." "default" "'normal'") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "host" "description" "Host name to associate with the event. Any tags associated with the host will also be applied to this event." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to apply to the event." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "alert_type" "description" "\"error\", \"warning\", \"info\" or \"success\"." "default" "'info'") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "" "description" "") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "aggregation_key" "description" "An arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream." "default" "None") }}
+
+              {{ partial "argument.html" (dict "context" $dot "name" "source_type_name" "description" (printf "The type of event being posted. <div>Options: %s</div>" $valid_sources) "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -462,11 +464,11 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument "start", "POSIX timestamp" %>
-              <%= argument "end", "POSIX timestamp" %>
-              <%= argument "priority", "'low' or 'normal'", :default => "None" %>
-              <%= argument "sources", "A comma separated string of sources", :default => "None" %>
-              <%= argument "tags", "A comma separated string of tags", :default => "None" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "POSIX timestamp" )}}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "POSIX timestamp" )}}
+              {{ partial "argument.html" (dict "context" $dot "name" "priority" "description" "'low' or 'normal'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "sources" "description" "A comma separated string of sources" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A comma separated string of tags" "default" "None") }}
             </ul>
 
           </div>
@@ -505,13 +507,15 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <% valid_statuses = "'0': OK, '1': WARNING, '2': CRITICAL, '3': UNKNOWN" %>
-              <%= argument 'check', 'The text for the message' %>
-              <%= argument 'host_name', 'The name of the host submitting the check' %>
-              <%= argument 'status', 'An integer for the status of the check. <div>Options: ' + valid_statuses + '</div>' %>
-              <%= argument 'timestamp', 'POSIX timestamp of the event.', {:default => 'now'} %>
-              <%= argument 'message', 'A description of why this status occurred', {:default => 'None'} %>
-              <%= argument 'tags', 'A list of key:val tags for this check', {:default => 'None'} %>
+              {{ $valid_statuses := "'0': OK, '1': WARNING, '2': CRITICAL, '3': UNKNOWN" }}
+              {{ partial "argument.html" (dict "context" $dot "name" "check" "description" "The text for the message") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "host_name" "description" "The name of the host submitting the check") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "status" "description" (printf "An integer for the status of the check. <div>Options: %s </div>" $valid_statuses) ) }}
+
+              {{ partial "argument.html" (dict "context" $dot "name" "timestamp" "description" "POSIX timestamp of the event." "default" "now") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A description of why this status occurred" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of key:val tags for this check" "default" "None") }}
+
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -629,17 +633,9 @@
                 <div><code>12345 && 67890</code>, where <code>12345</code> and <code>67890</code> are the IDs of non-composite monitors</div>
 
               </li>
-              <%= argument 'name', "The name of the alert.",
-                  :default => "dynamic, based on query" %>
-              <%= argument 'message', "A message to include with notifications for
-                  this monitor. Email notifications can be sent to specific users by
-                  using the same '@username' notation as events.",
-                  :default => "dynamic, based on query" %>
-              <%= argument 'tags', "A list of tags to associate with your monitor.
-                  When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags.
-                  Tags using the \"service\" key (e.g. <code>service:my-app</code>) will be visible in the corresponding \"service\" field when editing the monitor in the Datadog UI. Tags without the \"service\" key will only be available via the API and will not be visible or editable in the Datadog UI.",
-                  :default => "empty list" %>
-
+              {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "The name of the alert." "default" "dynamic, based on query") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events." "default" "dynamic, based on query") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags. will only be available via the API and will not be visible or editable in the Datadog UI." "default" "empty list") }}
               <li>
                 <strong>options [optional]</strong>
                 <div>A dictionary of options for the monitor. There are options that
@@ -787,15 +783,7 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'group_states', "If this argument is
-              set, the returned data will include additional information (if
-              available) regarding the specified group states, including the
-              last notification timestamp, last resolution timestamp and
-              details about the last time the monitor was triggered. The
-              argument should include a string list indicating what, if any,
-              group states to include. Choose one or more from 'all', 'alert',
-              'warn', or 'no data'. Example: 'alert,warn'",
-              :default => "None" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "group_states" "description" "If this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'" "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -818,18 +806,11 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'query', "The metric query to alert on." %>
-              <%= argument 'name', "The name of the monitor.",
-                  :default => "dynamic, based on query" %>
-              <%= argument 'message', "A message to include with notifications for
-                  this monitor. Email notifications can be sent to specific users by
-                  using the same '@username' notation as events.",
-                  :default => "dynamic, based on query" %>
-              <%= argument 'options', "Refer to the create monitor documentation for
-                  details on the available options.", :default => "None" %>
-              <%= argument 'tags', "A list of tags to associate with your monitor.
-                  This can help you categorize and filter monitors.",
-                  :default => "empty list" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "query" "description" "The metric query to alert on.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "The name of the monitor." "default" "dynamic, based on query") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events." "default" "dynamic, based on query") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "options" "description" "Refer to the create monitor documentation for details on the available options." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to associate with your monitor. This can help you categorize and filter monitors." "default" "empty list") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -873,26 +854,11 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'group_states', "If this argument is
-              set, the returned data will include additional information (if
-              available) regarding the specified group states, including the
-              last notification timestamp, last resolution timestamp and
-              details about the last time the monitor was triggered. The
-              argument should include a string list indicating what, if any,
-              group states to include. Choose one or more from 'all', 'alert',
-              'warn', or 'no data'. Example: 'alert,warn'",
-              :default => "None" %>
-              <%= argument 'name', "A string to filter monitors by name",
-              :default => "None" %>
-              <%= argument 'tags', "A comma separated list indicating
-              what tags, if any, should be used to filter the list of monitors
-              by scope, e.g. <code>host:host0</code>. For more information, see the <code>tags</code> parameter for the appropriate <code>query</code> argument in the <a href='#monitor-create'>Create a monitor</a> section above.",
-              :default => "None" %>
-              <%= argument 'monitor_tags', "A comma separated list indicating
-              what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
-              :default => "None" %>
-              <%= argument 'with_downtimes', "If this argument is set to <code>true</code>, then the returned data will include all current downtimes for each monitor.",
-              :default => "true" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "group_states" "description" "If this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "A string to filter monitors by name" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A comma separated list indicating what tags, if any, should be used to filter the list of monitorsby scope, e.g. <code>host:host0</code>. For more information, see the <code>tags</code> parameter for the appropriate <code>query</code> argument in the <a href='#monitor-create'>Create a monitor</a> section above." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "monitor_tags" "description" "A comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "with_downtimes" "description" "If this argument is set to <code>true</code>, then the returned data will include all current downtimes for each monitor." "default" "true") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -939,10 +905,7 @@
         <div class="int-anchor" id="monitor-unmute-all"></div><a href="#monitor-unmute-all"><h4>Unmute all monitors</h4></a>
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
-            <p>
-            Disables muting all monitors. Throws an error if mute all was
-            not enabled previously.
-            </p>
+            <p>Disables muting all monitors. Throws an error if mute all was not enabled previously.</p>
             <h5>Arguments</h5>
             <em>This end point takes no JSON arguments.</em>'
           </div>
@@ -963,10 +926,8 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              <%= argument 'scope', "The scope to apply the mute to, e.g. role:db",
-              :default => "None" %>
-              <%= argument 'end', "A POSIX timestamp for when the mute should end",
-              :default => "None" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "scope" "description" "The scope to apply the mute to, e.g. role:db" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "A POSIX timestamp for when the mute should end" "default" "None") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -987,11 +948,8 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              <%= argument 'scope', "The scope to apply the mute to. For example,
-              if your alert is grouped by {host}, you might mute 'host:app1'",
-              :default => "None" %>
-              <%= argument 'all_scopes', "Clear muting across all scopes",
-              :default => "False" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "scope" "description" "The scope to apply the mute to. For example, if your alert is grouped by {host}, you might mute 'host:app1'" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "all_scopes" "description" "Clear muting across all scopes" "default" "False") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1016,9 +974,7 @@
         <div class="int-anchor" id="downtimes"></div><a href="#downtimes"><h3>Downtimes</h3></a>
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
-            <p>Downtiming gives you greater control over monitor notifications by allowing you
-            to globally exclude scopes from alerting. Downtime settings, which can be
-            scheduled with start and end times, prevent all alerting related to specified Datadog tags.</p>
+            <p>Downtiming gives you greater control over monitor notifications by allowing you to globally exclude scopes from alerting. Downtime settings, which can be scheduled with start and end times, prevent all alerting related to specified Datadog tags.</p>
           </div>
         </div>
 
@@ -1027,19 +983,12 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              <%= argument 'scope', "The scope(s) to which the downtime will apply, e.g.
-              'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
-              applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." %>
-              <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
-              the downtime will apply to all monitors.", :default=>"None" %>
-              <%= argument 'start', "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment
-              it is created.", :default=>"None" %>
-              <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
-              (i.e. until you cancel it).",
-              :default => "None" %>
-              <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
-              :default => "None" %>
-              <%= argument 'monitor_id', "The id of a specific monitor to apply the downtime to.", :required => false, :default => "None" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "scope" "description" "The scope(s) to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "monitor_id" "description" "A single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment it is created." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it)." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "monitor_id" "description" "The id of a specific monitor to apply the downtime to." "default" "None") }}
               <li>
                 <strong>recurrence [optional, default=None]</strong>
                 <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
@@ -1065,7 +1014,7 @@
                   </li>
                 </ul>
               </li>
-              <%= argument 'timezone', "The timezone for the downtime.", :default => "UTC" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "timezone" "description" "The timezone for the downtime." "default" "UTC") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1086,20 +1035,12 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              <%= argument 'id', "The integer id of the downtime to be updated" %>
-              <%= argument 'scope', "The scope to which the downtime will apply, e.g.
-              'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
-              applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.",
-              :default => "original scope" %>
-              <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
-              the downtime will apply to all monitors.", :default=>"original monitor_id" %>
-              <%= argument 'start', "POSIX timestamp to start the downtime.",
-              :default => "original start" %>
-              <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
-              (i.e. until you cancel it).",
-              :default => "original end" %>
-              <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
-              :default => "original message" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "id" "description" "The integer id of the downtime to be updated") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "scope" "description" "The scope to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." "default" "original scope") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "monitor_id" "description" "A single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "POSIX timestamp to start the downtime." "default" "original") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it)." "default" "original end") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events" "default" "original message") }}
               <li>
                 <strong>recurrence [optional, default=original recurrence]</strong>
                 <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
@@ -1125,7 +1066,7 @@
                   </li>
                 </ul>
               </li>
-              <%= argument 'timezone', "The timezone for the downtime.", :default => "original timezone" %>
+              {{ partial "argument.html" (dict "context" $dot "name" "timezone" "description" "The timezone for the downtime." "default" "original timezone") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1146,7 +1087,7 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-            <%= argument 'id', "The integer id of the downtime to be canceled" %>
+            {{ partial "argument.html" (dict "context" $dot "name" "id" "description" "The integer id of the downtime to be canceled") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1165,7 +1106,7 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-            <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'." %>
+            {{ partial "argument.html" (dict "context" $dot "name" "scope" "description" "Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'.") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1201,8 +1142,7 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              <%= argument 'current_only', "Only return downtimes that are active
-              when the request is made.", :default => false %>
+              {{ partial "argument.html" (dict "context" $dot "name" "current_only" "description" "Only return downtimes that are activewhen the request is made." "default" "false") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -1238,9 +1178,9 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("title", 'The name of the dashboard.') %>
-              <%= argument("description", "A description of the dashboard\'s content.") %>
-              <%= argument("graphs", "A list of graph definitions. Graph definitions follow this form:") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "The name of the dashboard.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "description" "description" "A description of the dashboard's content.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "graphs" "description" "A list of graph definitions. Graph definitions follow this form:") }}
               <ul class="arguments">
                 <li>
                   <strong>title [required]</strong>
@@ -1258,7 +1198,7 @@
                   </div>
                 </li>
               </ul>
-              <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "template_variables" "description" "A list of template variables for using Dashboard templating. Template variable definitions follow this form:" "default" "None") }}
                <ul class="arguments">
                  <li>
                    <strong>name [required]</strong>
@@ -1325,7 +1265,7 @@
                   </div>
                 </li>
               </ul>
-            <%= argument("template_variables", "A list of template variables for using Dashboard templating. Template variable definitions follow this form:", :default => "None") %>
+            {{ partial "argument.html" (dict "context" $dot "name" "template_variables" "description" "A list of template variables for using Dashboard templating. Template variable definitions follow this form:" "default" "None") }}
                <ul class="arguments">
                  <li>
                    <strong>name [required]</strong>
@@ -1440,13 +1380,13 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("board_title", 'The name of the dashboard.') %>
-              <%= argument("description", "A description of the dashboard\'s content.", :default => "None") %>
-              <%= argument("widgets", "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") %>
-              <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
-              <%= argument("width", "Screenboard width in pixels", :default => "None") %>
-              <%= argument("height", "Height in pixels.", :default => "None") %>
-              <%= argument("read_only", "The read-only status of the screenboard.", :default => "False") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "board_title" "description" "The name of the dashboard.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "description" "description" "A description of the dashboard's content." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "widgets" "description" "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "template_variables" "description" "A list of template variables for using Dashboard templating." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "width" "description" "Screenboard width in pixels" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "height" "description" "Height in pixels." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "read_only" "description" "The read-only status of the screenboard." "default" "False") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1468,13 +1408,13 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("board_title", 'The name of the dashboard.') %>
-              <%= argument("description", "A description of the dashboard\'s content.", :default => "None") %>
-              <%= argument("widgets", "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") %>
-              <%= argument("template_variables", "A list of template variables for using Dashboard templating.", :default => "None") %>
-              <%= argument("width", "Screenboard width in pixels", :default => "None") %>
-              <%= argument("height", "Height in pixels.", :default => "None") %>
-              <%= argument("read_only", "The read-only status of the screenboard.", :default => "False") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "board_title" "description" "The name of the dashboard.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "description" "description" "A description of the dashboard's content." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "widgets" "description" "A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "template_variables" "description" "A list of template variables for using Dashboard templating." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "width" "description" "Screenboard width in pixels" "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "height" "description" "Height in pixels." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "read_only" "description" "The read-only status of the screenboard." "default" "False") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1612,9 +1552,9 @@
         <div class="col-xs-12 col-md-6 api-left">
           <h5>Arguments</h5>
           <ul class="arguments">
-            <%= argument("end", "POSIX timestamp when the host will be unmuted. If omitted, the host will remain muted until explicitly unmuted.", {:default => 'None'}) %>
-            <%= argument("message", "Message to associate with the muting of this host", {:default => 'None'}) %>
-            <%= argument("override", "If true and the host is already muted, will replace existing host mute settings.", {:default => 'False'}) %>
+            {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "POSIX timestamp when the host will be unmuted. If omitted, the host will remain muted until explicitly unmuted." "default" "None") }}
+            {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "Message to associate with the muting of this host" "default" "None") }}
+            {{ partial "argument.html" (dict "context" $dot "name" "override" "description" "If true and the host is already muted, will replace existing host mute settings." "default" "False") }}
           </ul>
         </div>
         <div class="col-xs-12 col-md-6 api-right">
@@ -1683,7 +1623,7 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("source", "Only show tags from a particular source. Otherwise shows all tags.", :default => "None") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "source" "description" "Only show tags from a particular source. Otherwise shows all tags." "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1708,8 +1648,8 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("source", "Only show tags from a particular source. Otherwise shows all tags.", :default => "None") %>
-              <%= argument("by_source", "Return tags grouped by source.", :default => "False") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "source" "description" "Only show tags from a particular source. Otherwise shows all tags." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "by_source" "description" "Return tags grouped by source." "default" "False") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1734,8 +1674,8 @@
             </p>
              <h5>Arguments</h5>
               <ul class="arguments">
-              <%= argument("tags", "A list of tags to apply to the host") %>
-              <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to apply to the host") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "source" "description" "The source of the tags (e.g. chef, puppet)." "default" "users") }}
               </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1760,8 +1700,8 @@
             </p>
              <h5>Arguments</h5>
               <ul class="arguments">
-              <%= argument("tags", "A list of tags") %>
-              <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "source" "description" "The source of the tags (e.g. chef, puppet)." "default" "users") }}
               </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1786,7 +1726,7 @@
             </p>
              <h5>Arguments</h5>
               <ul class="arguments">
-              <%= argument("source", "The source of the tags (e.g. chef, puppet).", :default => "users") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "source" "description" "The source of the tags (e.g. chef, puppet)." "default" "users") }}
               </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1820,7 +1760,7 @@
             </ul>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument("q", "The query string") %>
+              {{ partial "argument.html" (dict "context" $dot "name" "q" "description" "The query string") }}
             </ul>
             <h5>Query Language</h5>
             <p>
@@ -1884,10 +1824,9 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'message', "The comment text." %>
-              <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
-              <%= argument 'related_event_id', "The id of another comment or event to
-              reply to", :default => 'None' %>
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "The comment text.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "handle" "description" "The handle of the user making the comment." "default" "application key owner") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "related_event_id" "description" "The id of another comment or event to reply to" "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1910,8 +1849,8 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'message', "The comment text.", :default => 'original message' %>
-              <%= argument 'handle', "The handle of the user making the comment.", :default => 'application key owner' %>
+              {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "The comment text." "default" "original message") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "handle" "description" "The handle of the user making the comment." "default" "application key owner") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1968,9 +1907,9 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'handle', "The user handle, must be a valid email." %>
-              <%= argument 'name', "The name of the user.", :default => 'None' %>
-              <%= argument 'access_role', "The access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user). <em>Note: users can be created with admin access role only with application keys belonging to administrators.</em>", :default => 'st' %>
+              {{ partial "argument.html" (dict "context" $dot "name" "handle" "description" "The user handle, must be a valid email.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "The name of the user." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "access_role" "description" "The access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user). <em>Note: users can be created with admin access role only with application keys belonging to administrators.</em>" "default" "st") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -1993,7 +1932,7 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'handle', "The handle of the user." %>
+              {{ partial "argument.html" (dict "context" $dot "handle" "" "description" "The handle of the user.") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -2043,11 +1982,11 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'handle', "The handle of the user." %>
-              <%= argument 'name', "The new name of the user.", :default => 'None' %>
-              <%= argument 'email', "The new email of the user.", :default => 'None' %>
-              <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
-              <%= argument 'access_role', "The new access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user).", :default => 'st' %>
+              {{ partial "argument.html" (dict "context" $dot "name" "handle" "description" "The handle of the user.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "The new name of the user." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "email" "description" "The new email of the user." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "disabled" "description" "The new disabled status of the user." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "access_role" "description" "The new access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user)." "default" "st") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -2074,7 +2013,7 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument 'handle', "The handle of the user." %>
+              {{ partial "argument.html" (dict "context" $dot "name" "handle" "description" "The handle of the user.") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -2112,12 +2051,12 @@
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument "metric_query", "The metric query." %>
-              <%= argument "start", "The POSIX timestamp of the start of the query." %>
-              <%= argument "end", "The POSIX timestamp of the end of the query." %>
-              <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
-              <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
-              <%= argument "title", "A title for the graph. If no title is specified, the graph will not have a title.", {:default => 'None'} %>
+              {{ partial "argument.html" (dict "context" $dot "name" "metric_query" "description" "The metric query.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "The POSIX timestamp of the start of the query.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "The POSIX timestamp of the end of the query.") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "event_query" "description" "A query that will add event bands to the graph." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "graph_def" "description" "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "A title for the graph. If no title is specified, the graph will not have a title." "default" "None") }}
             </ul>
 
           </div>
@@ -2197,16 +2136,11 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument "graph_json", "The graph definition in JSON.
-              Same format that is available on the JSON tab of the graph editor" %>
-              <%= argument "timeframe", "The timegrame for the graph. Must be one of 1_hour,
-              4_hours, 1_day, 2_days, and 1_week.", {:default => '1_hour'} %>
-              <%= argument "size", "The size of the graph. Must be one of small, medium,
-              large, and xlarge.", {:default => 'medium'} %>
-              <%= argument "legend", "The flag determining if the graph includes a legend.
-              Must be one of yes or no.", {:default => 'no'} %>
-              <%= argument "title", "Determines graph title. Must be at least 1 character.",
-              {:default => 'Embed created through API'} %>
+              {{ partial "argument.html" (dict "context" $dot "name" "graph_json" "description" "The graph definition in JSON. Same format that is available on the JSON tab of the graph editor") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "timeframe" "description" "The timegrame for the graph. Must be one of 1_hour, 4_hours, 1_day, 2_days, and 1_week." "default" "1_hour") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "size" "description" "The size of the graph. Must be one of small, medium, large, and xlarge." "default" "medium") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "legend" "description" "The flag determining if the graph includes a legend. Must be one of yes or no." "default" "no") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "Determines graph title. Must be at least 1 character." "default" "Embed created through API") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
@@ -2247,14 +2181,9 @@
             </p>
             <h5>Arguments</h5>
             <ul class="arguments">
-              <%= argument "size", "The size of the graph. Must be one of small, medium,
-              large, and xlarge.", {:default => 'medium'} %>
-              <%= argument "legend", "The flag determining if the graph includes a legend.
-              Must be one of yes or no.", {:default => 'no'} %>
-              <%= argument "template_variables", "Replace template variables in queries with form $var. To
-              replace $var with val, use var=val as a parameter for each template variable you wish
-              to replace. If any template variables are missing values in the iframe source
-              url, then (*) will be used as the value.", {:default => "None"} %>
+              {{ partial "argument.html" (dict "context" $dot "name" "size" "description" "The size of the graph. Must be one of small, medium, large, and xlarge." "default" "medium") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "legend" "description" "The flag determining if the graph includes a legend. Must be one of yes or no." "default" "no") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "template_variables" "description" "Replace template variables in queries with form $var. To replace $var with val, use var=val as a parameter for each template variable you wish to replace. If any template variables are missing values in the iframe source url, then (*) will be used as the value." "default" "None") }}
             </ul>
           </div>
           <div class="col-xs-12 col-md-6 api-right">
