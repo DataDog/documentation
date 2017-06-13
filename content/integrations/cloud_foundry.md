@@ -4,7 +4,6 @@ integration_title: Cloud Foundry
 kind: integration
 git_integration_title: cloud_foundry
 newhlevel: true
-beta: true
 ---
 # Overview
 
