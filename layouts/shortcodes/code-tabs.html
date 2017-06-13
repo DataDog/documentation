@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs" id="{{ .Get "section" }}-tabs">
+{{ $section := .Get "section" }}
+{{ range .Site.Params.languages }}
+{{ $lang := (lower .) }}
+  <li class="{{if eq $lang "python"}} active{{end}}">
+    <a data-toggle="tab" class="lang-tab {{ $lang }}-lang-tab" lang="{{$lang}}" href="#{{$section}}-{{$lang}}">{{.}}</a>
+  </li>
+{{ end }}
+</ul>
