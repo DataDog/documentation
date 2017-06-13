@@ -15,12 +15,12 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 
 <%= print_tracing_library_table %>
 
-### Community Integrations
+### Community Projects
 
 #### Ansible
 {: #community-integration-ansible}
 
-In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
+In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### Consul
 {: #community-integration-consul}
@@ -68,7 +68,6 @@ This [library][51] will allow you to generate process information from StatsD, g
 
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
-
 
 If you've written a Datadog library and would like to add it to this page, write us at [code@datadoghq.com][9].
 
