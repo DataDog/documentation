@@ -263,15 +263,15 @@ end
 def print_classic_library_table
   require 'yaml'
 
-  table_markdown = "|Language|Library|Datadog-supported?|API|DogStatsD|Notes|\n|---\n"
+  table_markdown = "|Language|Library|Official|API|DogStatsD|Notes|\n|---\n"
   libraries = YAML.load_file('libraries.yml')
   libraries = libraries['Classic']
   libraries.each do |lang, libs|
     libs.each_with_index do |lib, i|
       first_col = i == 0 ? "**#{lang}**" : ''
-      api = lib.has_key?('api') ? 'yes' : 'no'
-      dogstatsd = lib.has_key?('dogstatsd') ? 'yes' : 'no'
-      official = lib.has_key?('official') ? '**yes**' : 'no'
+      api = lib.has_key?('api') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      dogstatsd = lib.has_key?('dogstatsd') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
       authors = ''
       if lib.has_key?('authors')
         if lib['authors'].respond_to?(:join)
@@ -297,13 +297,13 @@ end
 def print_tracing_library_table
   require 'yaml'
 
-  table_markdown = "|Language|Library|Datadog-supported?|Notes|\n|---\n"
+  table_markdown = "|Language|Library|Official|Notes|\n|---\n"
   libraries = YAML.load_file('libraries.yml')
   libraries = libraries['Tracing']
   libraries.each do |lang, libs|
     libs.each_with_index do |lib, i|
       first_col = i == 0 ? "**#{lang}**" : ''
-      official = lib.has_key?('official') ? '**yes**' : 'no'
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
       authors = ''
       if lib.has_key?('authors')
         if lib['authors'].respond_to?(:join)
