@@ -15,7 +15,7 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 
 <%= print_tracing_library_table %>
 
-### Community Projects
+### Community Integrations
 
 #### Ansible
 {: #community-integration-ansible}
