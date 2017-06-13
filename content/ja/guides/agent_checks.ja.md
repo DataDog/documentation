@@ -278,7 +278,7 @@ file name should match the name of the check module (e.g.: `haproxy.py` and
 
 The configuration file has the following structure:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     key1: val1
     key2: val2
@@ -289,8 +289,7 @@ instances:
 
     - username: jane_smith
       password: 5678
-EOF
-%>
+{{< /highlight >}}
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div> -->
 
@@ -302,7 +301,7 @@ Agent Checkには設定ファイルがあり、その設定ファイルは`conf.
 
 設定ファイルは、以下のようになります:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     key1: val1
     key2: val2
@@ -313,8 +312,7 @@ instances:
 
     - username: jane_smith
       password: 5678
-EOF
-%>
+{{< /highlight >}}
 
 <div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
@@ -434,26 +432,24 @@ To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
 simple, including no real information. This will go into `conf.d/hello.yaml`:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
 
 instances:
     [{}]
 
-EOF
-%>
+{{< /highlight >}}
 
 The check itself will inherit from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This will go in `checks.d/hello.py`:
 
-<%= python <<EOF
+{{< highlight python >}}
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 
-EOF
-%>
+{{< /highlight >}}
 
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
@@ -468,25 +464,23 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 
 まず簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、以下の3行で非常にシンプルな内容になります:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
 
 instances:
     [{}]
 
-EOF
-%>
+{{< /highlight >}}
 
 HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に配置します:
 
-<%= python <<EOF
+{{< highlight python >}}
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 
-EOF
-%>
+{{< /highlight >}}
 ごのようにCheckのインターフェースは、シンプルで、簡単に使い始めることが出来ます。
 
 次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を計測してDatadogに送信するCheckを書いてみることにします。
@@ -537,7 +531,7 @@ timeout value is given for a particular URL.
 
 So our final configuration would look something like this:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     default_timeout: 5
 
@@ -549,8 +543,7 @@ instances:
 
     -   url: http://httpbin.org/status/400
 
-EOF
-%> -->
+{{< /highlight >}} -->
 
 
 #### 設定
@@ -563,7 +556,7 @@ EOF
 上記をふまえると、設定ファイルは次のようになります:
 
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     default_timeout: 5
 
@@ -575,8 +568,7 @@ instances:
 
     -   url: http://httpbin.org/status/400
 
-EOF
-%>
+{{< /highlight >}}
 <!-- #### The Check
 
 Now we can start defining our check method. The main part of the check will make
@@ -586,7 +578,7 @@ In this snippet, we start a timer, make the GET request using the
 [requests library](http://docs.python-requests.org/en/latest/) and handle and
 errors that might arise.
 
-<%= console <<EOF
+{{< highlight console >}}
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -606,17 +598,15 @@ except requests.exceptions.Timeout as e:
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
-EOF
-%>
+{{< /highlight >}}
 
 If the request passes, we want to submit the timing to Datadog as a metric. Let's
 call it `http.response_time` and tag it with the URL.
 
-<%= python <<EOF
+{{< highlight python >}}
 timing = end_time - start_time
 self.gauge('http.reponse_time', timing, tags=['http_check'])
-EOF
-%>
+{{< /highlight >}}
 
 Finally, we'll want to define what happens in the error cases. We have already
 seen that we call `self.timeout_event` in the case of a URL timeout and
@@ -627,7 +617,7 @@ First, we'll define `timeout_event`. Note that we want to aggregate all of these
 events together based on the URL so we will define the aggregation_key as a hash
 of the URL.
 
-<%= python <<EOF
+{{< highlight python >}}
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -636,12 +626,11 @@ def timeout_event(self, url, timeout, aggregation_key):
         'msg_text': '%s timed out after %s seconds.' % (url, timeout),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
 Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
-<%= python <<EOF
+{{< highlight python >}}
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -650,8 +639,7 @@ def status_code_event(self, url, r, aggregation_key):
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
  -->
 
 #### Check 本体
@@ -661,7 +649,7 @@ EOF
 
 以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理を行います。
 
-<%= console <<EOF
+{{< highlight console >}}
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -681,16 +669,14 @@ except requests.exceptions.Timeout as e:
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
-EOF
-%>
+{{< /highlight >}}
 
 リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLをタグとして付記します。
 
-<%= python <<EOF
+{{< highlight python >}}
 timing = end_time - start_time
 self.gauge('http.reponse_time', timing, tags=['http_check'])
-EOF
-%>
+{{< /highlight >}}
 
 最後に、エラー発生時の処理内容を定義します。
 先のコードで既に、 HTTP リクエストがタイムアウトした場合の`timeout_event` 関数と、レスポンスステータスが200
@@ -699,7 +685,7 @@ EOF
 
 まず、`timeout_event` を定義します。`self.event()` で注目してほしいのは、`'aggregation_key':` に、先のコードに出ているURLのハッシュである`aggregation_key = md5(url).hexdigest()`を設定している部分です。このaggregation_key を使って、特定のURLに関連したイベントを集約します。
 
-<%= python <<EOF
+{{< highlight python >}}
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -708,12 +694,11 @@ def timeout_event(self, url, timeout, aggregation_key):
         'msg_text': '%s timed out after %s seconds.' % (url, timeout),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
 
 次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容になります。
 
-<%= python <<EOF
+{{< highlight python >}}
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -722,8 +707,7 @@ def status_code_event(self, url, r, aggregation_key):
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
 
 
 <!-- #### Putting It All Together

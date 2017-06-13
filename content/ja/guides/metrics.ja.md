@@ -66,32 +66,28 @@ Next, let's set up a client library for your language.
 
   <div class="tab-pane active fade in" id="setup-python">
 First, install the module:
-<%= console <<EOF
+{{< highlight console >}}
 $ pip install datadog
-EOF
-%>
+{{< /highlight >}}
 And import it, so it's ready to use:
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import statsd
-EOF
-%>
+{{< /highlight >}}
   </div>
 
   <div class="tab-pane fade in" id="setup-ruby">
 First, install the module:
-<%= console <<EOF
+{{< highlight console >}}
 $ gem install dogstatsd-ruby
-EOF
-%>
+{{< /highlight >}}
 And add it to your code:
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Import the library
 require 'datadog/statsd'
 
 # Create a statsd client instance.
 statsd = Datadog::Statsd.new
-EOF
-%>
+{{< /highlight >}}
   </div>
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
@@ -130,33 +126,29 @@ must be web frontends"). -->
   <div class="tab-pane active fade in" id="setup-python">
 
 プログラム言語へモジュールをインストールします:
-<%= console <<EOF
+{{< highlight console >}}
 $ pip install datadog
-EOF
-%>
+{{< /highlight >}}
 
 アプリケーションへモジュールをインポートします:
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import statsd
-EOF
-%>
+{{< /highlight >}}
   </div>
 
   <div class="tab-pane fade in" id="setup-ruby">
 プログラム言語へモジュールをインストールします:
-<%= console <<EOF
+{{< highlight console >}}
 $ gem install dogstatsd-ruby
-EOF
-%>
+{{< /highlight >}}
 アプリケーションへモジュールをインポートするためにrequire行を追記します:
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Import the library
 require 'datadog/statsd'
 
 # Create a statsd client instance.
 statsd = Datadog::Statsd.new
-EOF
-%>
+{{< /highlight >}}
   </div>
   <p>これで、ライブラリーが使えるように成りました。</p>
   <div class="alert info-block">
@@ -196,23 +188,21 @@ counting web page views. To achieve this, we'll increment a metric called
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
-<%= python <<EOF
+{{< highlight python >}}
 def render_page():
     """ Render a web page. """
     statsd.increment('web.page_views')
     return 'Hello World!'
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="counters-page-views-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def render_page()
   # Render a web page.
   statsd.increment('web.page_views')
   return 'Hello World!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -236,23 +226,21 @@ called `file_service.bytes_uploaded` by the size of the file each time our
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
-<%= python <<EOF
+{{< highlight python >}}
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
     save_file(file)
     return 'File uploaded!'
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="counters-uploaded-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def upload_file(file)
   statsd.count('file_service.bytes_uploaded', file.size())
   save_file(file)
   return 'File uploaded!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 <br>
@@ -274,23 +262,21 @@ your series like cumulative sum or integral. There is more information on those
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
-<%= python <<EOF
+{{< highlight python >}}
 def render_page():
     """ Render a web page. """
     statsd.increment('web.page_views')
     return 'Hello World!'
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="counters-page-views-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def render_page()
   # Render a web page.
   statsd.increment('web.page_views')
   return 'Hello World!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -313,23 +299,21 @@ EOF
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
-<%= python <<EOF
+{{< highlight python >}}
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
     save_file(file)
     return 'File uploaded!'
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="counters-uploaded-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def upload_file(file)
   statsd.count('file_service.bytes_uploaded', file.size())
   save_file(file)
   return 'File uploaded!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 <br>
@@ -356,23 +340,21 @@ sample that value as the metric `system.mem.free`:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
-<%= python <<EOF
+{{< highlight python >}}
 # Record the amount of free memory every ten seconds.
 while True:
     statsd.gauge('system.mem.free', get_free_memory())
     time.sleep(10)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="gauges-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Record the amount of free memory every ten seconds.
 while true do
     statsd.gauge('system.mem.free', get_free_memory())
     sleep(10)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div> -->
 
@@ -386,23 +368,21 @@ EOF
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
-<%= python <<EOF
+{{< highlight python >}}
 # Record the amount of free memory every ten seconds.
 while True:
     statsd.gauge('system.mem.free', get_free_memory())
     time.sleep(10)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="gauges-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Record the amount of free memory every ten seconds.
 while true do
     statsd.gauge('system.mem.free', get_free_memory())
     sleep(10)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -424,7 +404,7 @@ we can sample each query time with the metric `database.query.time`.
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
-<%= python <<EOF
+{{< highlight python >}}
 # Track the run time of the database query.
 start_time = time.time()
 results = db.query()
@@ -435,11 +415,10 @@ statsd.histogram('database.query.time', duration)
 @statsd.timed('database.query.time')
 def get_data():
     return db.query()
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="histograms-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 start_time = Time.now
 results = db.query()
 duration = Time.now - start_time
@@ -450,8 +429,7 @@ statsd.histogram('database.query.time', duration)
 statsd.time('database.query.time') do
   return db.query()
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -493,7 +471,7 @@ test scores.
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
-<%= python <<EOF
+{{< highlight python >}}
 # Track the run time of the database query.
 start_time = time.time()
 results = db.query()
@@ -504,11 +482,10 @@ statsd.histogram('database.query.time', duration)
 @statsd.timed('database.query.time')
 def get_data():
     return db.query()
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="histograms-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 start_time = Time.now
 results = db.query()
 duration = Time.now - start_time
@@ -519,8 +496,7 @@ statsd.histogram('database.query.time', duration)
 statsd.time('database.query.time') do
   return db.query()
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -567,21 +543,19 @@ that.
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
-<%= python <<EOF
+{{< highlight python >}}
 def login(self, user_id):
     # Log the user in ...
     statsd.set('users.uniques', user_id)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sets-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def login(self, user_id)
     # Log the user in ...
     statsd.set('users.uniques', user_id)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div> -->
 
@@ -595,21 +569,19 @@ Webサイトなどの個別訪問者数を追跡する場合は、セットが�
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
-<%= python <<EOF
+{{< highlight python >}}
 def login(self, user_id):
     # Log the user in ...
     statsd.set('users.uniques', user_id)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sets-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def login(self, user_id)
     # Log the user in ...
     statsd.set('users.uniques', user_id)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -632,7 +604,7 @@ performance of two algorithms in the real world. We could sample one metric
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
-<%= python <<EOF
+{{< highlight python >}}
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -640,11 +612,10 @@ def algorithm_one():
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
     # Do fancy things here ...
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="tags-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def algorithm_one()
   statsd.timed('algorithm.run_time', :tags => ['algorithm:one']) do
     # Do fancy things here ...
@@ -656,8 +627,7 @@ def algorithm_two()
     # Do different fancy things here ...
   end
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -706,7 +676,7 @@ in the standard way. Check out some of our other docs for how to use these:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
-<%= python <<EOF
+{{< highlight python >}}
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -714,11 +684,10 @@ def algorithm_one():
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
     # Do fancy things here ...
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="tags-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def algorithm_one()
   statsd.timed('algorithm.run_time', :tags => ['algorithm:one']) do
     # Do fancy things here ...
@@ -730,8 +699,7 @@ def algorithm_two()
     # Do different fancy things here ...
   end
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -786,27 +754,25 @@ of overhead for performance intensive code paths. To work around this, StatsD
 supports sample rates, which allows sending a metric a fraction of the time
 and scaling up correctly on the server.
 
-<%= code_tabs("sample-rates") %>
+{{< code-tabs section="sample-rates" >}}
 
 The following code will only send points half of the time:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sample-rates-python">
-<%= python <<EOF
+{{< highlight python >}}
 while True:
   do_something_intense()
   statsd.increment('loop.count', sample_rate=0.5)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sample-rates-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 while true do
   do_something_intense()
   statsd.increment('loop.count', :sample_rate => 0.5)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -819,27 +785,25 @@ DogStatsDがメトリクスデータを生成するための基データ(サン�
 この問題を回避するためにDogStatsDでは、サンプルレートを調整できるようになっています。
 `sample_rate=`をオプションに追記することにより基データを制限することができ、制限し送信しなかった基データは、自動的に補われるよなっています。
 
-<%= code_tabs("sample-rates") %>
+{{< code-tabs section="sample-rates" >}}
 
 次のコードは、基データ発生の1/2の機会に、データポイントを送信します:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sample-rates-python">
-<%= python <<EOF
+{{< highlight python >}}
 while True:
   do_something_intense()
   statsd.increment('loop.count', sample_rate=0.5)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sample-rates-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 while true do
   do_something_intense()
   statsd.increment('loop.count', :sample_rate => 0.5)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 

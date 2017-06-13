@@ -80,12 +80,11 @@ Suppose you want to know how many times you are running a database query,
 your application can tell DogStatsD to increment a counter each
 time this query is executed. For example:
 
-<%= python <<eof
+{{< highlight python >}}
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
-eof
-%>
+{{< /highlight >}}
 
 If this function is executed one hundred times in a flush interval (ten
 seconds by default), it will send DogStatsD one hundred UDP packets that say
@@ -104,12 +103,11 @@ DogSt​​atsDの主な機能は、所定の時間間隔（デフォルトで�
 
 次のようになります:
 
-<%= python <<eof
+{{< highlight python >}}
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
-eof
-%>
+{{< /highlight >}}
 
 この関数が、次のメトリクス送信タイミング(デフォルトでは10秒間隔)までに100回実行されたとします。この関数は、100個の、"'database.query.count'を、カウント"というUDPパケットを送信します。
 DogStatDは、これらのUDPパケットが送られたデータポイントを集計し、メトリクス値に置き換えます。
@@ -175,21 +173,19 @@ Gauges measure the value of a particular thing at a
 particular time, like the amount of fuel in a car's gas tank or
 the number of users connected to a system.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.gauge('gas_tank.level', 0.75)
 dog.gauge('users.active', 1001)
-eof
-%> -->
+{{< /highlight >}} -->
 
 ### Gauges (ゲージ)
 
 車両のガソリンタンク内の燃料量やシステムに接続しているユーザーの数などゲージは、ある時間の対象物の値を測定します。
 
-<%= python <<eof
+{{< highlight python >}}
 dog.gauge('gas_tank.level', 0.75)
 dog.gauge('users.active', 1001)
-eof
-%>
+{{< /highlight >}}
 
 
 <!-- ### Counters
@@ -197,21 +193,19 @@ eof
 Counters track how many times something happened per second, like the number of
 database requests or page views.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.increment('database.query.count')
 dog.increment('page_view.count', 10)
-eof
-%> -->
+{{< /highlight >}} -->
 
 ### Counters (カウンタ)
 
 データベースへのリクエストやページビューのようにカウンタは、毎秒の発生回数を追跡します。
 
-<%= python <<eof
+{{< highlight python >}}
 dog.increment('database.query.count')
 dog.increment('page_view.count', 10)
-eof
-%>
+{{< /highlight >}}
 
 
 <!-- ### Histograms
@@ -221,11 +215,10 @@ duration of a number of database queries or the size of files uploaded by users.
 histogram will track the average, the minimum, the maximum, the median
 and the 95th percentile.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('database.query.time', 0.5)
 dog.histogram('file.upload.size', file.get_size())
-eof
-%>
+{{< /highlight >}}
 
 Histograms are an extension to StatsD, so you'll need to use a client that
 supports them. -->
@@ -235,11 +228,10 @@ supports them. -->
 データベースへのクエリ実行時間やユーザーによってアップロードされたファイルのサイズなどの集計数のように、ヒストグラムは、値の集合の度数分布を追跡します。各ヒストグラムは、平均値、最小値、最大値、中央値及び95パーセンタイルを追跡します。
 
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('database.query.time', 0.5)
 dog.histogram('file.upload.size', file.get_size())
-eof
-%>
+{{< /highlight >}}
 
 ヒストグラムは、StatsDの拡張です。この機能が必要な場合は、DogStatsDクライアントを使用する必要があります。
 
@@ -250,10 +242,9 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
 that.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.set('users.uniques', user.id)
-eof
-%>
+{{< /highlight >}}
 
 Sets are an extension to StatsD, so you'll need to use a client that
 supports them. -->
@@ -262,10 +253,9 @@ supports them. -->
 
 セットは、グループ内のユニークな要素の数をカウントするために使用します。サイトへのユニークビジター数を追跡したい場合は、セットが最も適しています。
 
-<%= python <<eof
+{{< highlight python >}}
 dog.set('users.uniques', user.id)
-eof
-%>
+{{< /highlight >}}
 
 セットは、StatsDの拡張です。この機能が必要な場合は、DogStatsDクライアントを使用する必要があります。
 
@@ -288,10 +278,9 @@ The overhead of sending UDP packets can be too great for some performance
 intensive code paths. To work around this, StatsD clients support sampling,
 that is to say, only sending metrics a percentage of the time. For example:
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('my.histogram', 1, sample_rate=0.5)
-eof
-%>
+{{< /highlight >}}
 
 will only be sent to the server about half of the time, but it will be
 multipled by the sample rate to provide an estimate of the real data. -->
@@ -304,10 +293,9 @@ multipled by the sample rate to provide an estimate of the real data. -->
 
 例えば:
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('my.histogram', 1, sample_rate=0.5)
-eof
-%>
+{{< /highlight >}}
 
 この例では、実際の半分のデータポイントのデータをDogStatsDサーバに送信するよいうになります。しかし、メトリクスの生成には、受信値をサンプルレートの逆数倍し、実際の値の推定するようになっています。
 
@@ -325,7 +313,7 @@ Since tags are an extension to StatsD, so you'll need to use a client that
 supports them.
 
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Randomly choose which rendering function we want to use ...
 if random() < 0.5:
@@ -339,8 +327,7 @@ start_time = time()
 renderer()
 duration = time() - start_time
 dog.histogram('rendering.duration', duration, tags=[version])
-eof
-%> -->
+{{< /highlight >}} -->
 
 <h2 id="tags"></h2>
 
@@ -350,7 +337,7 @@ eof
 
 タグは、StatsDの拡張です。この機能が必要な場合は、DogStatsDクライアントを使用する必要があります。
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Randomly choose which rendering function we want to use ...
 if random() < 0.5:
@@ -364,8 +351,7 @@ start_time = time()
 renderer()
 duration = time() - start_time
 dog.histogram('rendering.duration', tags=[version])
-eof
-%>
+{{< /highlight >}}
 
 
 <!-- ## Events
@@ -380,15 +366,14 @@ Events are aggregated on the Event Stream based on: <br/>
 'hostname/event_type/source_type/aggregation_key'<br/>
 If `event_type` is empty, the event will be grouped with other events that don't have an `event_type`.
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Post a simple message
 statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
 
 # Cry for help
 statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
-eof
-%> -->
+{{< /highlight >}} -->
 
 ## イベント
 
@@ -405,15 +390,14 @@ eof
 
 `event_type`に情報がない場合、そのイベントは、他の`event_type`が空のイベントとグループ化されます。
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Post a simple message
 statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
 
 # Cry for help
 statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
-eof
-%>
+{{< /highlight >}}
 
 
 <!-- #### Fields

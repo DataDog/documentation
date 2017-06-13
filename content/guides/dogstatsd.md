@@ -60,12 +60,11 @@ Suppose you want to know how many times you are running a database query,
 your application can tell DogStatsD to increment a counter each
 time this query is executed. For example:
 
-<%= python <<eof
+{{< highlight python >}}
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
-eof
-%>
+{{< /highlight >}}
 
 If this function is executed one hundred times in a flush interval (ten
 seconds by default), it will send DogStatsD one hundred UDP packets that say
@@ -107,22 +106,20 @@ Gauges measure the value of a particular thing at a
 particular time, like the amount of fuel in a car's gas tank or
 the number of users connected to a system.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.gauge('gas_tank.level', 0.75)
 dog.gauge('users.active', 1001)
-eof
-%>
+{{< /highlight >}}
 
 ### Counters
 
 Counters track how many times something happened per second, like the number of
 database requests or page views.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.increment('database.query.count')
 dog.increment('page_view.count', 10)
-eof
-%>
+{{< /highlight >}}
 
 ### Histograms
 
@@ -131,11 +128,10 @@ duration of a number of database queries or the size of files uploaded by users.
 histogram will track the average, the minimum, the maximum, the median,
 the 95th percentile and the count.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('database.query.time', 0.5)
 dog.histogram('file.upload.size', file.get_size())
-eof
-%>
+{{< /highlight >}}
 
 Histograms are an extension to StatsD, so you'll need to use a client that
 supports them.
@@ -146,10 +142,9 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
 that.
 
-<%= python <<eof
+{{< highlight python >}}
 dog.set('users.uniques', user.id)
-eof
-%>
+{{< /highlight >}}
 
 Sets are an extension to StatsD, so you'll need to use a client that
 supports them.
@@ -167,10 +162,9 @@ The overhead of sending UDP packets can be too great for some performance
 intensive code paths. To work around this, StatsD clients support sampling,
 that is to say, only sending metrics a percentage of the time. For example:
 
-<%= python <<eof
+{{< highlight python >}}
 dog.histogram('my.histogram', 1, sample_rate=0.5)
-eof
-%>
+{{< /highlight >}}
 
 will only be sent to the server about half of the time, but it will be
 multipled by the sample rate to provide an estimate of the real data.
@@ -188,7 +182,7 @@ Since tags are an extension to StatsD, so you'll need to use a client that
 supports them.
 
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Randomly choose which rendering function we want to use ...
 if random() < 0.5:
@@ -202,8 +196,7 @@ start_time = time()
 renderer()
 duration = time() - start_time
 dog.histogram('rendering.duration', duration, tags=[version])
-eof
-%>
+{{< /highlight >}}
 
 ## Events
 You can post events to your Datadog event stream. You can tag them, set priority and even aggregate them with other events.
@@ -216,15 +209,14 @@ Mandatory fields:
 Events are aggregated on the Event Stream based on: <br/>
 'hostname/source_type/aggregation_key'<br/>
 
-<%= python <<eof
+{{< highlight python >}}
 
 # Post a simple message
 statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
 
 # Cry for help
 statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
-eof
-%>
+{{< /highlight >}}
 
 #### Fields
 - Mandatory:

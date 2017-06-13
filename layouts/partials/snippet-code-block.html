@@ -4,7 +4,7 @@
 
 {{ $file_ext := (index (split $file ".") 1) }}
 
-{{ $disable_highlight := $.disable_highlight }}
+{{ $highlight := $.highlight }}
 {{ $static := $.static }}
 
 {{ $ext_to_lang := (dict "php" "php" "py" "python" "rb" "ruby" "sh" "console" "js" "javascript" "json" "json" "go" "golang")}}
@@ -37,13 +37,13 @@
 
       {{ end }}
 
-      {{- if $disable_highlight -}}
-        <div class="code-block code-block-{{$v}}"><pre><code>{{- $.context.Scratch.Get "file" -}}</code></pre></div>
-      {{- else -}}
+      {{ if $highlight }}
         <div class="code-block code-block-{{$v}}">
         {{- highlight ($.context.Scratch.Get "file") $v "" -}}
         </div>
-      {{- end -}}
+      {{ else }}
+        <div class="code-block code-block-{{$v}}"><pre><code>{{- $.context.Scratch.Get "file" -}}</code></pre></div>
+      {{ end }}
 
     {{- end -}}
 

@@ -182,6 +182,10 @@ params:
     png: "?fm=png&auto=format&lossless=1"
     gif: ""
   static_url: "http://localhost:1313/"
+  languages:
+    - Python
+    - Ruby
+    - Console
   footer_scripts:
     - snowplow: false
     - marketo: false
