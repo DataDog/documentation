@@ -467,8 +467,7 @@ You'll see what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 
-<%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
-
+{{< snippet-code-block file="guides-agentchecks-ex-all.py" nocomments="true" >}}
 
 <!--
 ======================================================

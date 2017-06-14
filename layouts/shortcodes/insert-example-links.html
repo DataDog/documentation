@@ -1,0 +1,63 @@
+
+{{ $integration := ((.Get "integration") | default .Page.Params.integration_title) }}
+
+{{ $conf := (.Get "conf" | default (replace (lower $integration ) " " "_")) }}
+{{ $check := (.Get "check" | default (replace (lower $integration ) " " "_")) }}
+{{ $yaml_extension := "example" }}
+{{ $include_intro := .Get "include_intro" }}
+
+{{ if $conf }}
+
+  {{ $.Scratch.Set "conf" $conf }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "conf" $integration }}
+
+{{ end }}
+
+{{ if $check }}
+
+  {{ $.Scratch.Set "check" $check }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "check" $integration }}
+
+{{ end }}
+
+{{ if $include_intro }}
+
+  {{ $.Scratch.Set "intro" "For more details about configuring this integration refer to the following file(s) on GitHub:\n" }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "intro" "" }}
+
+{{ end }}
+
+{{ $example_links := ($.Scratch.Get "intro") }}
+
+{{ $integrationwebroot := "https://github.com/Datadog/integrations-core/blob/master/" }}
+
+{{ if ne ($.Scratch.Get "conf") "none" }}
+
+  {{ $url := (printf "%s%s/conf.yaml.example" $integrationwebroot ($.Scratch.Get "conf") ) }}
+  {{ $yaml_example := (printf "<li><a href='%s'>%s YAML example</a></li>" $url $integration ) }}
+  {{ $.Scratch.Set "yaml_example" $yaml_example }}
+
+{{ end }}
+
+{{ if ne ($.Scratch.Get "check") "none" }}
+
+  {{ $url := (printf "%s%s/check.py" $integrationwebroot $check) }}
+
+  {{ $checks_file := (printf "<li><a href=%s>%s checks.d</a></li>" $url $integration) }}
+
+  {{ $.Scratch.Set "checks_file" $checks_file }}
+
+{{ end }}
+
+{{ $example_links := (printf "<ul>%s%s</ul>" ($.Scratch.Get "yaml_example" | default "") ($.Scratch.Get "checks_file" | default "") ) }}
+
+{{ $example_links | safeHTML }}

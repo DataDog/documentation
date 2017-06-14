@@ -61,7 +61,7 @@ Connect MySQL to Datadog in order to:
     See the metrics section below to see a list of the new metrics provided by each of the metric options.
 
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

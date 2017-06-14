@@ -18,7 +18,7 @@ Connect your PowerDNS Recursor to Datadog to:
 # Configuration
 
 Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_recursor.yaml
-    
+
     init_config:
 
     instances:
@@ -27,7 +27,7 @@ Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_re
         api_key: pdns_api_key
 
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

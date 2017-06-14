@@ -46,7 +46,7 @@ To use the SNMP checks, edit the **snmp.yaml** file in your **conf.d** directory
 
 For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Usage
 

@@ -140,7 +140,7 @@ HTTP CHECK CONFIGURATION
 
 The HTTP(S) Check configuration file has the following structure:
 
-<%= snippet_code_block("guides-http_check-config.yaml") %>
+{{< snippet-code-block file="guides-http_check-config.yaml" >}}
 
 <div class="alert alert-block">Note: Your YAML files must use spaces instead of tabs.</div>
 
@@ -176,7 +176,7 @@ the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
 
 For example, if you have the following configuration for window and threshold:
 
-<%= snippet_code_block("guides-http_check-notify.yaml") %>
+{{< snippet-code-block file="guides-http_check-notify.yaml" >}}
 
 You will only be notified if the check fails 3 times within the last 5 tries. -->
 
@@ -184,7 +184,7 @@ You will only be notified if the check fails 3 times within the last 5 tries. --
 
 HTTP(S)のサービスチェックの設定ファイルの構造は、次のように成ります:
 
-<%= snippet_code_block("guides-http_check-config.yaml") %>
+{{< snippet-code-block file="guides-http_check-config.yaml" >}}
 
 <div class="alert alert-block">
 注) YAML ファイルでは、タブを使わず、スペースを使って記述してください。
@@ -215,7 +215,7 @@ HTTP(S)のサービスチェックの設定ファイルの構造は、次のよ�
 
 例えば、次のようなチェック回数(window)と、その回数内でのしきい値(threshold)を指定したとします:
 
-<%= snippet_code_block("guides-http_check-notify.yaml") %>
+{{< snippet-code-block file="guides-http_check-notify.yaml" >}}
 
 過去5回のチェックの内で、3回失敗した場合にのみ通知されます。
 
@@ -229,7 +229,7 @@ TCP CHECK CONFIGURATION
 
 The TCP Check configuration file has the following structure:
 
-<%= snippet_code_block("guides-tcp_check-config.yaml") %>
+{{< snippet-code-block file="guides-tcp_check-config.yaml" >}}
 
 #### init_config
 
@@ -262,7 +262,7 @@ the last `y` attempts where `x` is the `threshold` and `y` is the `window`.
 
 For example, if you have the following configuration for window and threshold:
 
-<%= snippet_code_block("guides-tcp_check-notify.yaml") %>
+{{< snippet-code-block file="guides-tcp_check-notify.yaml" >}}
 
 You will only be notified if the check fails 3 times within the last 5 tries.
  -->
@@ -271,7 +271,7 @@ You will only be notified if the check fails 3 times within the last 5 tries.
 
 TCP のサービスチェックの設定ファイるの構造は、次のように成ります:
 
-<%= snippet_code_block("guides-tcp_check-config.yaml") %>
+{{< snippet-code-block file="guides-tcp_check-config.yaml" >}}
 
 #### init_config
 
@@ -298,6 +298,6 @@ TCP のサービスチェックの設定ファイるの構造は、次のよう�
 
 例えば、次のようなチェック回数(window)と、その回数内でのしきい値(threshold)を指定したとします:
 
-<%= snippet_code_block("guides-tcp_check-notify.yaml") %>
+{{< snippet-code-block file="guides-tcp_check-notify.yaml" >}}
 
 過去5回のチェックの内で、3回失敗した場合にのみ通知されます。

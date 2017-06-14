@@ -50,7 +50,7 @@ Make sure that stats are enabled on your HAProxy configuration. See [this post f
 
 Learn more about how to monitor HAProxy performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor HAProxy.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ### Metrics
 

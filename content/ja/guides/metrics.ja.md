@@ -5,9 +5,12 @@ language: ja
 title: DogStatsD を使った、メトリクスの送信
 kind: guide
 listorder: 3
+js_dd_docs_methods:
+  - metricsGuidePage
+languages:
+  - Python
+  - Ruby
 ---
-
-<% tab_languages = %w{Python Ruby} %>
 
 <!--
 ======================================================
@@ -119,7 +122,7 @@ must be web frontends"). -->
 
 次に、開発に使用するプログラミング言語に向けたクライアントライブラリーをインストール&セットアップします。
 
-<%= code_tabs("setup", tab_languages) %>
+{{< code-tabs section="setup" >}}
 
 <div class="tab-content">
 
@@ -258,7 +261,7 @@ your series like cumulative sum or integral. There is more information on those
 
 例えば、Webページのビュー数をカウントしたい場合、Webアプリケーションの`render_page`関数が実行された際に、`web.page_views`メトリクスが、増加するよう関数内に`statsd.increment()`行を追記しカウント値を蓄積しています。
 
-<%= code_tabs("counters-page-views", tab_languages) %>
+{{< code-tabs section="counters-page-views" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
@@ -295,7 +298,7 @@ end
 例えばファイルのアップロードサービスで、処理されたバイト数をカウントしたいとします。
 このようなケースでは、`upload_file`関数が実行される度に、`file_service.bytes_uploaded`というメトリクスを、ファイルサイズの値を使って増加させることができます:
 
-<%= code_tabs("counters-uploaded", tab_languages) %>
+{{< code-tabs section="counters-uploaded" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
@@ -364,7 +367,7 @@ end
 
 例えば、マシンの空きメモリの量を追跡した場合、空きメモリ量を調べる関数`get_free_memory()`を定期的に呼び出し、`statsd.gauge()`で、メトリクス`system.mem.free`の測定値`get_free_memory()`として処理します:
 
-<%= code_tabs("gauges", tab_languages) %>
+{{< code-tabs section="guagues" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
@@ -467,7 +470,7 @@ test scores.
 
 例えば、データベースへのクエリ時間待ち時間を計測したい場合、クエリの実行に掛かった時間を計測し、`statsd.histogram()`で、メトリクス`database.query.time`のヒストグラム値`duration`として処理します:
 
-<%= code_tabs("histograms", tab_languages) %>
+{{< code-tabs section="historgrams" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
@@ -565,7 +568,7 @@ end
 
 Webサイトなどの個別訪問者数を追跡する場合は、セットが最適です。
 
-<%= code_tabs("sets", tab_languages) %>
+{{< code-tabs section="sets" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
@@ -672,7 +675,7 @@ in the standard way. Check out some of our other docs for how to use these:
 例えば、2種類のアルゴリズムの性能を測定したい場合、
 メトリクス`algorithm.run_time`にタグとして`tags=['key:value syntax']`をオプション指定し、計測結果を送信します:
 
-<%= code_tabs("tags", tab_languages) %>
+{{< code-tabs section="tags" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
@@ -878,10 +881,3 @@ Datadogにloginした後、上部のナビゲーションバーにある``Metric
 
 メトリクスエクスプローラの項目に入力し表示されたグラフは、自動的に保存されません。
 メトリクスエクスプローラの操作によって表示されたグラフを保存する必要がある場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存してください。
-
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    $(DD_docs.metricsGuidePage);
-  </script>
-<% end %>

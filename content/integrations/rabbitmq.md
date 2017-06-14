@@ -51,7 +51,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
 * `queues` or `queues_regexes` - **optional** - Use the `queues` or `queues_regexes` parameters to specify the queues you'd like to collect metrics on (up to 200 queues). If you have less than 200 queues, you don't have to set this parameter, the metrics will be collected on all the queues by. default. If you have set up vhosts, set the queue names as `vhost_name/queue_name`. If you have `tag_families` enabled, the first captured group in the regex will be used as the queue_family tag.  See the link to the example YAML below for more.
 * `vhosts` - **optional** - By default a list of all vhosts is fetched and each one will be checked using the aliveness API. If you prefer only certain vhosts to be monitored with service checks then you can list the vhosts you care about.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 
 # Validation

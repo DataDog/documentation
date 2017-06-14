@@ -1,7 +1,7 @@
 ---
 title: Using week_before() function
 kind: example
-tags:
+examples:
     - "Graphing Functions"
     - Dashboards
     - JSON Editing

@@ -94,7 +94,7 @@ The format for describing custome metrics is identical with the one used for com
 {:.language-yaml}
 
 
-<%= insert_example_links(conf:"postgres", check:"postgres")%>
+{{< insert-example-links conf="postgres" check="postgres" >}}
 
 # Validation
 

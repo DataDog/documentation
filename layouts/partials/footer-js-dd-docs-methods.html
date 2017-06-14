@@ -1,0 +1,11 @@
+{{ $methods := $.Params.js_dd_docs_methods }}
+
+<script type="text/javascript">
+
+  {{ range $methods }}
+
+    {{ (print "$(DD_docs.%s" .) }};
+
+  {{ end }}
+
+</script>

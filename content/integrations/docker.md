@@ -33,7 +33,7 @@ Whichever you choose, your system will need to have cgroup memory management ena
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     {{< img src="integrations-docker-dockerps.png" >}}
 
-<%= insert_example_links(conf: "docker_daemon", check: "docker_daemon")%>
+{{< insert-example-links conf="docker_daemon" check="docker_daemon" >}}
 
 **Note:** docker_daemon has replaced the older docker integration.
 

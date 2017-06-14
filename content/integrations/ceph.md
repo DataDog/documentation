@@ -24,7 +24,7 @@ Adjust the configuration file to match your environment. By default the check wi
 
 Any extra tags specific to the cluster can be specified under `tags`, as usual.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

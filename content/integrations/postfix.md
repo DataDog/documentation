@@ -12,7 +12,7 @@ newhlevel: true
 
 Get metrics from Postfix in real time to monitor the messages pending in your Postfix mail queues.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Configuration
 

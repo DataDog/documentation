@@ -42,7 +42,7 @@ Refer to the comments in the [process.yaml.example](https://github.com/DataDog/i
 
 After the Agent has sent data to Datadog you can visit the [New Monitor section of the application](https://app.datadoghq.com/monitors#create/process) to set up a Monitor. If you only see information on how to configure the process check in the Agent, Datadog has not yet received any process information from the Agent. Use the instructions below to validate whether the Agent has been configured correctly.
 
-<%= insert_example_links(conf:"process", check:"process")%>
+{{< insert-example-links conf="process" check="process" >}}
 
 # Validation
 

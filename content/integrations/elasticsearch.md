@@ -34,7 +34,7 @@ No installation steps are required for this integration
 
 1.  Restart the agent
 
-<%= insert_example_links(conf: "elastic", check: "elastic")%>
+{{< insert-example-links conf="elastic" check="elastic" >}}
 
 # Validation
 

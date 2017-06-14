@@ -43,7 +43,9 @@ You can use the Datadog Agent Manager that you can find in the Start Menu.
 The Agent can be started, stopped, and
 restarted from the Services panel. To view the Services panel, execute the following in a <code>cmd.exe</code> shell:
 
-<%= console 'services.msc' %>
+
+    services.msc
+
 
 Once you're in the console, find the "Datadog Agent" service.
 Right clicking on the service will reveal options to start, stop, and restart the Agent. -->
@@ -65,7 +67,9 @@ Datadog Agentの実行は、Windows serviceによって管理されています�
 #### Datadog Agent バージョン < 3.9.1:
 サービスパネルからDatadog Agentの起動、停止、再起動が行えます。サービスパネルの画面を表示するには、コマンドプロンプト<code>cmd.exe</code> shell にて次のコマンドを実行します。
 
-<%= console 'services.msc' %>
+
+    services.msc
+
 
 サービスパネル<!--コンソール-->に入ったら、"Datadog Agent"というサービスを探します。名前にカーソルを合わせ右クリックすると起動、停止、再起動のオプションが表示されます。
 
@@ -82,7 +86,9 @@ A process called "ddagent.exe" should also exist in the Task Manager.
 
 To receive more information about the Agent's state, visit the <em>status page</em> in your web browser:
 
-<%= console 'http://localhost:17125/status' %>
+
+    http://localhost:17125/status
+
 
 <em>The status page is supported in Agent version 3.9.1 and above</em> -->
 
@@ -93,7 +99,9 @@ Datadog Agent が動作していることを確認するには、サービスパ
 
 Datadog Agent の状況に関し更なる情報を取得するには、ブラウザで次のURLの<em>status page</em>を表示します。
 
-<%= console 'http://localhost:17125/status' %>
+
+    http://localhost:17125/status
+
 
 <em>このステータスページは、Datadog Agent 3.9.1以降に実装されています。</em>
 
@@ -143,16 +151,16 @@ For Windows Server 2008, Vista and newer:
 
 Windows Server 2003, XP 又は、それ以前のバージョン:
 
-- Datadog Agent の設定ファイルの保存先:  
+- Datadog Agent の設定ファイルの保存先:
         `C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`
-- Integrations の設定ファイルの保存先:  
+- Integrations の設定ファイルの保存先:
         `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 Windows Server 2008, Vista と、それ以降のバージョン:
 
-- Datadog Agent の設定ファイルの保存先:  
+- Datadog Agent の設定ファイルの保存先:
         `C:\ProgramData\Datadog\datadog.conf`
-- Integrations の設定ファイルの保存先:  
+- Integrations の設定ファイルの保存先:
         `C:\ProgramData\Datadog\conf.d\`
 
 
@@ -196,9 +204,9 @@ You can contact them in one of the following ways:
 #### Datadog Agent バージョン >= 3.9.1:
 ログの保存場所:
 
-- Windows Server 2003、XP 又は、それ以前のバージョン:  
+- Windows Server 2003、XP 又は、それ以前のバージョン:
       `C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
-- Windows Server 2008、Vista と、それ以降のバージョン:  
+- Windows Server 2008、Vista と、それ以降のバージョン:
       `C:\ProgramData\datadog\logs\ddagent.log`
 
 #### Datadog Agent バージョン < 3.9.1:

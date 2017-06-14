@@ -121,12 +121,13 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### 5) Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, <a href="#collapseGraphicFunctionTable" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable">click here</a>.
+
 
 <div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
 <!-- The graphing functions section is a partial -->
 
-<%= @items['/partials/graphingfunctions/'].compiled_content %>
+{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
 </div>
 

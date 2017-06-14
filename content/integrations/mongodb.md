@@ -56,7 +56,7 @@ Connect MongoDB to Datadog in order to:
 
 2.  Restart the agent
 
-<%= insert_example_links(conf:"mongo", check:"mongo")%>
+{{< insert-example-links conf="mongo" check="mongo" >}}
 
 # Validation
 

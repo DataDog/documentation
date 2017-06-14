@@ -23,12 +23,12 @@ If you haven't installed the Agent yet, instructions can be found
 
 The process to upgrade from the previous version of the agent is to simply re-run the installation.
 
-<%= render 'partials/BasicAgentUsage-nix' %>
+{{< partial name="BasicAgentUsage-nix" >}}
 
 <br/>
 
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-{{< partial "_contact_info.html" >}}
+{{< partial name="_contact_info.html" >}}
 

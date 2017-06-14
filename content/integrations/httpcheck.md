@@ -59,7 +59,7 @@ Other settings available include:
 | `tags` | A list of arbitrary tags that will be associated with the check. For more information about tags, please see our [Guide to tagging](/guides/tagging/) and blog post, [The power of tagged metrics](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) |
 {:.table}
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

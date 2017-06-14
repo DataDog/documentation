@@ -744,7 +744,7 @@ Agent のroot から、次のコマンドでテストを実行します:
 
 チェックの完全なソースは次の通りです。
 
-<%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
+{{< snippet-code-block file="guides-agentchecks-ex-all.py" nocomments="true">}}
 
 
 <!--

@@ -431,8 +431,8 @@ And edit conf.d/kafka_consumer.yaml
       #     my_consumer:
       #       my_topic: [0, 1, 4, 12]
 
-<%= insert_example_links(check: "none")%>
-<%= insert_example_links(integration: "Apache Kafka Consumer", conf: "kafka_consumer", check: "kafka_consumer",  include_intro: false)%>
+{{< insert-example-links check="none" >}}
+{{< insert-example-links integration="Apache Kafka Consumer" conf="kafka_consumer" check="kafka_consumer" include_intro="false" >}}
 # Validation
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  The output should contain a section similar to the following:

@@ -51,7 +51,7 @@ Edit the ```go-metro.yaml``` file in your agent's ```conf.d``` directory. The fo
           - app.datadoghq.com
 
 
-<%= insert_example_links(conf:"go-metro", check:"none")%>
+{{< insert-example-links conf="go-metro" check="none" >}}
 
 # Validation
 

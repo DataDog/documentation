@@ -27,7 +27,7 @@ To configure the RiakCS integration, copy riakcs.yaml.example if the conf.d dire
         #port: 8080 # port used by your riakcs node
         #s3_root: s3.amazonaws.com #
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ### Metrics
 

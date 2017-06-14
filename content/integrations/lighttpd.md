@@ -14,7 +14,7 @@ Bring Lighttpd metrics to Datadog to:
 * Visualize your web server performance.
 * Correlate the performance of Ligttpd with the rest of your applications.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Installation
 

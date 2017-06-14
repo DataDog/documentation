@@ -44,7 +44,7 @@ Capture metrics from the files in given directories:
 
 4.  Restart the Agent
 
-<%= insert_example_links(conf: "directory", check: "directory")%>
+{{< insert-example-links conf="directory" check="directory" >}}
 
 # Validation
 

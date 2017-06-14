@@ -1,7 +1,7 @@
 ---
 title: Using day_before() function
 kind: example
-tags:
+examples:
     - "Graphing Functions"
     - Dashboards
     - JSON Editing

@@ -13,7 +13,7 @@ Connect ZooKeeper to Datadog in order to:
 * Correlate the performance of ZooKeeper with the rest of your applications.
 
 
-<%= insert_example_links(conf:"zk", check:"zk")%>
+{{< insert-example-links conf="zk" check="zk" >}}
 
 {{< img src="zookeepergraph.png" >}}
 

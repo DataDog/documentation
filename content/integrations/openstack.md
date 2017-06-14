@@ -86,7 +86,7 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
               - instance #0 [OK]
               - Collected 8 metrics & 0 events
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ### Metrics
 

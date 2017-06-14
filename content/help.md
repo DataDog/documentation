@@ -17,6 +17,6 @@ sidebar:
 If you have any questions about Datadog or a use case our [Docs][1] didn't mention, we'd love to help! Here's how
 you can reach out to us:
 
-{{< partial "_contact_info.html" >}}
+{{< partial name="_contact_info.html" >}}
 
 [1]: http://docs.datadoghq.com

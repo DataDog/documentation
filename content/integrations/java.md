@@ -230,7 +230,7 @@ For more details about configuring this integration refer to the following file(
 
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
-<!-- <%= insert_example_links(conf: "jmx", check: "none")%> -->
+<!-- {{< insert-example-links conf="jmx" check="none" >}} -->
 
 # Validation
 

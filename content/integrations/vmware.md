@@ -51,7 +51,7 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
 * `all_metrics` (Optional) - When set to true, this will collect EVERY metric from vCenter, which means a LOT of metrics you probably do not care about. We have selected a set of metrics that are interesting to monitor for you if false.
 * `event_config` (Optional) - Event config is a dictionary. For now the only switch you can flip is collect_vcenter_alarms which will send as events the alarms set in vCenter.
 
-<%= insert_example_links(conf:"vsphere", check:"vsphere")%>
+{{< insert-example-links conf="vsphere" check="vsphere" >}}
 
 # Validation
 

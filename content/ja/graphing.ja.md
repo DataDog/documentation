@@ -259,13 +259,13 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 ### 5) 上級者向けの関数の適用
 
-分析のニーズによっては、他の数値演算関数が必要なこともあるでしょう。変化量や微分、平滑化や回帰計算などがあります。利用可能な関数は、[ここをクリック](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
+分析のニーズによっては、他の数値演算関数が必要なこともあるでしょう。変化量や微分、平滑化や回帰計算などがあります。利用可能な関数は、<a href="#collapseGraphicFunctionTable" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable">ここをクリック</a>..
 
 
 <div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
 <!-- The graphing functions section is a partial -->
 
-<%= @items['/partials/graphingfunctions/'].compiled_content %>
+{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
 </div>
 

@@ -12,7 +12,7 @@ Capture CouchDB data in Datadog to:
 * Visualize key CouchDB metrics.
 * Correlate CouchDB performance with the rest of your applications.
 
-<%= insert_example_links(conf: "couch", check: "couch")%>
+{{< insert-example-links conf="couch" check="couch" >}}
 
 
 ## Metrics

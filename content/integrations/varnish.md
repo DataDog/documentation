@@ -24,7 +24,7 @@ If you're running Varnish 4.1+, you must add the dd-agent user to the varnish gr
 
 # Configuration
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

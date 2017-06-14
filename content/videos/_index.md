@@ -14,5 +14,3 @@ The videos are organized by keyword. Click on any of the keywords below to find 
 <li><a href="/videos/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags($video_items)[tag] %>)</li>
 <% end %>
 </ul>
-
-TEST

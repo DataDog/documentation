@@ -13,7 +13,7 @@ Connect Consul to Datadog in order to:
 * Correlate the performance of Consul with the rest of your applications
 * Monitor the health of your Consul cluster
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 
 # Metrics

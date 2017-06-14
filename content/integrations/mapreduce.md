@@ -46,7 +46,7 @@ Install Datadog Agent on the Master Node where the ResourceManager is running.
 
 1.  Restart the Agent
 
-<%= insert_example_links(conf:"mapreduce", check:"mapreduce")%>
+{{< insert-example-links conf="mapreduce" check="mapreduce" >}}
 
 # Validation
 

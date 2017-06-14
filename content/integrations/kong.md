@@ -33,7 +33,7 @@ Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
         tags:
             -   instance:bar
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

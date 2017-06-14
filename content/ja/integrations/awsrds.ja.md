@@ -67,7 +67,7 @@ RDSにアクセスするためのエンドポイントURL(例 **mysqlrds.blah.us
 
 Here is an example of a configuration for MySQL RDS using `mysql.yaml`, usually found in `/etc/dd-agent/conf.d`.
 
-<%= snippet_code_block "rds-conf.yaml" %>
+{{< snippet-code-block file="rds-conf.yaml" >}}
 
 Then restart the agent and verify that the new check is working by running `sudo service datadog-agent info` (on linux). -->
 
@@ -75,7 +75,7 @@ MySQL/PostgreSQLインテグレーションは、個々のデータベースイ�
 
 以下は、MySQL RDSインスタンスを監視するための`mysql.yaml`の設定例です。`mysql.yaml`は、`/etc/dd-agent/conf.d`のディレクトリ以下に保存されています。
 
-<%= snippet_code_block "rds-conf.yaml" %>
+{{< snippet-code-block file="rds-conf.yaml" >}}
 
 設定ファイルの変更が終わったら、Datadog Agentを再起動します。`sudo service datadog-agent info` (on linux)を実行し、MySQLのCheckが正しく動作しているかを確認します。
 

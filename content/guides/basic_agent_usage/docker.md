@@ -8,5 +8,5 @@ For details on how to work with the agent on Docker and on CoreOS, see the [Dock
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-{{< partial "_contact_info.html" >}}
+{{< partial name="_contact_info.html" >}}
 

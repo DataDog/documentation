@@ -55,7 +55,7 @@ Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following
 * `skip_event` (Optional) - Defaults to false. Set to true to skip creating an event. This option will be removed in a future version and will default to true.
 * `tags` (Optional) - Tags to be assigned to the metric.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

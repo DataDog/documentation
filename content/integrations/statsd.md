@@ -27,7 +27,7 @@ An example configuration can be found at [statsd.yaml.example](https://github.co
 
 **PORT**: The admin port of the StatsD server being monitored.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

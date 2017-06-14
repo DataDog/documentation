@@ -31,15 +31,21 @@ Starting and Stopping the Agent
 
 To manually start the Agent:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent start' %>
+
+    sudo ~/.datadog-agent/bin/agent start
+
 
 To stop the Agent: <br/>
 
-<%= console 'sudo ~/.datadog-agent/bin/agent stop' %>
+
+    sudo ~/.datadog-agent/bin/agent stop
+
 
 To restart the Agent: <br/>
 
-<%= console 'sudo ~/.datadog-agent/bin/agent restart' %>
+
+    sudo ~/.datadog-agent/bin/agent restart
+
 
 <!--
 ======================================================
@@ -51,15 +57,21 @@ Status and Information
 
 To check if the Agent is running:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent status' %>
+
+    sudo ~/.datadog-agent/bin/agent status
+
 
 To receive more information about the Agent's state:
 
-<%= console 'sudo ~/.datadog-agent/bin/info' %>
+
+    sudo ~/.datadog-agent/bin/info
+
 
 Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
 
-<%= console 'sudo ~/.datadog-agent/bin/info -v' %>
+
+    sudo ~/.datadog-agent/bin/info -v
+
 
 <!--
 ======================================================
@@ -83,7 +95,7 @@ Troubleshooting
 
 First, make sure you are using the correct version of Python. The Agent requires version 2.7. You can check your version by executing:
 
-<%= console "python -c 'import sys; print sys.version'" %>
+    python -c 'import sys; print sys.version'
 
 Next, try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
 
@@ -101,5 +113,5 @@ Logs for the subsystems are in the following files:
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-{{< partial "_contact_info.html" >}}
+{{< partial name="_contact_info.html" >}}
 

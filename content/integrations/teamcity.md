@@ -59,7 +59,7 @@ Connect TeamCity to Datadog to create events for each build in order to:
 
 2. Restart the Agent
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

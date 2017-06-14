@@ -57,7 +57,7 @@ Edit conf.d/fluentd.yaml
              - plg1
              - plg2
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

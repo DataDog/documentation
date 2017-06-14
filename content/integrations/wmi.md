@@ -15,7 +15,7 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 * Visualize their performance.
 * Correlate their activity with the rest of your applications.
 
-<%= insert_example_links(conf:"wmi_check", check:"wmi_check")%>
+{{< insert-example-links conf="wmi_check" check="wmi_check" >}}
 
 # Installation
 

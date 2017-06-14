@@ -1,3 +1,9 @@
-{{ $partial_name := (.Get 0) }}
+{{ $partial_name := .Get "name" }}
 
-{{ partial $partial_name }}
+{{ $markdown := .Get "markdown" }}
+
+{{ if $markdown }}
+  {{ partial $partial_name . | markdownify}}
+{{ else }}
+  {{ partial $partial_name . }}
+{{ end }}

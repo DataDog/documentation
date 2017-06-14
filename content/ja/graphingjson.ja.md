@@ -129,7 +129,7 @@ A few of these functions have been further explained in a series of examples. Vi
 これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="/examples/graphing functions/">Examples for Graphing Functions</a>
 本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
 
-<%= @items['/partials/graphingfunctions/'].compiled_content %>
+{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
 <!--
 There are also a few functions you can append to a query which we recommend for expert users only.

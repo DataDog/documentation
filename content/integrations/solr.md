@@ -224,7 +224,7 @@ The `datadog-agent jmx` command was added in version 4.1.0.
 
 
 
-<%= insert_example_links(check:"none")%>
+{{< insert-example-links check="none" >}}
 
 # Validation
 

@@ -41,7 +41,7 @@ For `create`/`read`/`update` endpoints, the body is one JSON payload describing 
 
 #### Base Payload:
 
-<%= snippet_code_block "sb-payload-example.js" %>
+{{< snippet-code-block file="sb-payload-example.js" >}}
 
 
 ## General Notes
@@ -76,7 +76,7 @@ If you would like to create or update boards that use templated variables, you m
 
 The final "base" payload of a templated board would look like this:
 
-<%= snippet_code_block "sb-payload-tpl-example.js" %>
+{{< snippet-code-block file="sb-payload-tpl-example.js" >}}
 
 
 ## API Usage
@@ -456,20 +456,20 @@ curl -X GET \
 
 <h3 id="timeseries-widget">Timeseries Widget</h3>
 
-<%= snippet_code_block "sb-timeseries-widget.js" %>
+{{< snippet-code-block file="sb-timeseries-widget.js" >}}
 
 <h3 id="event-stream-widget">Event Stream Widget</h3>
 
-<%= snippet_code_block "sb-event-stream-widget.js" %>
+{{< snippet-code-block file="sb-event-stream-widget.js" >}}
 
 <h3 id="query-value-widget">Query Value Widget</h3>
 
-<%= snippet_code_block "sb-query-value-widget.js" %>
+{{< snippet-code-block file="sb-query-value-widget.js" >}}
 
 <h3 id="image-widget">Image Widget</h3>
 
-<%= snippet_code_block "sb-image-widget.js" %>
+{{< snippet-code-block file="sb-image-widget.js" >}}
 
 <h3 id="note-widget">Note Widget</h3>
 
-<%= snippet_code_block "sb-note-widget.js" %>
+{{< snippet-code-block file="sb-note-widget.js" >}}

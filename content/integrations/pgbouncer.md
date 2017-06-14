@@ -33,7 +33,7 @@ To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgboun
           - role:main
 
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ### Validation
 

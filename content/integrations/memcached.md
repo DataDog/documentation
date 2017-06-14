@@ -13,7 +13,7 @@ Connect Memcached to Datadog in order to:
 * Visualize its performance
 * Correlate the performance of Memcached with the rest of your applications
 
-<%= insert_example_links(conf:"mcache", check:"mcache")%>
+{{< insert-example-links conf="mcache" check="mcache" >}}
 
 # Configuration
 

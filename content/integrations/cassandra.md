@@ -12,7 +12,7 @@ Learn more about how to monitor Cassandra performance metrics thanks to [our ser
 
 For information on JMX Checks, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
 
-<%= insert_example_links(check: "none")%>
+{{< insert-example-links check="none" >}}
 
 ## Metrics
 

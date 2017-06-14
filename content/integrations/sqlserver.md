@@ -13,9 +13,7 @@ Connect SQL Server to Datadog in order to:
   * Visualize your database performance.
   * Correlate the performance of SQL Server with the rest of your applications.
 
-
-<%= insert_example_links(conf: "sqlserver", check: "sqlserver") %>
-
+{{< insert-example-links conf="sqlserver" check="sqlserver" >}}
 
 ## Metrics
 

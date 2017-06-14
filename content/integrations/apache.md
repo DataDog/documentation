@@ -41,7 +41,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
         sudo /etc/init.d/datadog-agent restart
 
-<%= insert_example_links %>
+{{< insert-example-links >}}
 
 # Validation
 

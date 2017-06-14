@@ -38,7 +38,7 @@ If you see some output with `configure arguments:` and lots of options, then you
 
 For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 **All metrics collected for NGINX and NGINX Plus**
 

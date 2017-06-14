@@ -43,29 +43,41 @@ Starting and Stopping the Agent
 
 To manually start the Agent:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent start' %>
+
+    sudo ~/.datadog-agent/bin/agent start
+
 
 To stop the Agent: <br/>
 
-<%= console 'sudo ~/.datadog-agent/bin/agent stop' %>
+
+    sudo ~/.datadog-agent/bin/agent stop
+
 
 To restart the Agent: <br/>
 
-<%= console 'sudo ~/.datadog-agent/bin/agent restart' %> -->
+
+    sudo ~/.datadog-agent/bin/agent restart
+ -->
 
 <h3 id="starting_and_stopping_the_agent">Datadog Agent の起動と停止</h3>
 
 手動で Datadog Agent を起動する:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent start' %>
+
+    sudo ~/.datadog-agent/bin/agent start
+
 
 停止する:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent stop' %>
+
+    sudo ~/.datadog-agent/bin/agent stop
+
 
 リスタートする:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent restart' %>
+
+    sudo ~/.datadog-agent/bin/agent restart
+
 
 
 <!--
@@ -78,29 +90,41 @@ Status and Information
 
 To check if the Agent is running:
 
-<%= console 'sudo ~/.datadog-agent/bin/agent status' %>
+
+    sudo ~/.datadog-agent/bin/agent status
+
 
 To receive more information about the Agent's state:
 
-<%= console 'sudo ~/.datadog-agent/bin/info' %>
+
+    sudo ~/.datadog-agent/bin/info
+
 
 Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
 
-<%= console 'sudo ~/.datadog-agent/bin/info -v' %> -->
+
+    sudo ~/.datadog-agent/bin/info -v
+ -->
 
 <h3 id="status_and_information">動作ステータスの確認</h3>
 
 Datadog Agent が起動しているか確認する: <em>(ver. 3.8.0 ~)</em>
 
-<%= console 'sudo ~/.datadog-agent/bin/agent status' %>
+
+    sudo ~/.datadog-agent/bin/agent status
+
 
 Datadog Agent のステータスに関する情報を収集する:
 
-<%= console 'sudo ~/.datadog-agent/bin/info info' %>
+
+    sudo ~/.datadog-agent/bin/info info
+
 
 エラーをトレースバックする: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
 
-<%= console 'sudo ~/.datadog-agent/bin/info info -v' %>
+
+    sudo ~/.datadog-agent/bin/info info -v
+
 
 
 <!--

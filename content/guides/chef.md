@@ -57,7 +57,7 @@ This is commonly done via `role` or `environment` files, or another cookbook dec
 
 Here is an example of a `base.rb` role file, typically applied to every host in an organization.
 
-<%= snippet_code_block("guides-chef-base-role-agent.rb") %>
+{{< snippet-code-block file="guides-chef-base-role-agent.rb" >}}
 
 Note that there are two keys needed. Your API Key can be found in Datadog, under the Integrations => API menu item, or click [this link](https://app.datadoghq.com/account/settings#api) to log in and go there directly.
 
@@ -89,7 +89,7 @@ Successes typically will be found in the "Low" priority, whereas failures are of
 
 Adding the handler is very simple, as you can see in this role snippet:
 
-<%= snippet_code_block("guides-chef-base-role-handler.rb") %>
+{{< snippet-code-block file="guides-chef-base-role-handler.rb" >}}
 
 All we've done is add the `datadog::dd-handler` recipe to the beginning of the node's run list. Adding it to the beginning allows the handler to capture details about everything in it observes after being invoked, so if you added it to the end of the `run_list` and something failed prior to it being executed, you may not receive the full output.
 
@@ -109,7 +109,7 @@ Including one of these recipes in your run list will install any monitoring depe
 
 Here's an example of how we've extended a `webserver.rb` role file to automatically monitor Apache via Datadog:
 
-<%= snippet_code_block("guides-chef-integration-apache.rb", :nocomments => true) %>
+{{< snippet-code-block file="guides-chef-integration-apache.rb" nocomments="true" >}}
 
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
 

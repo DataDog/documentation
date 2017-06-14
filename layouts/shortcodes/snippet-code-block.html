@@ -1,3 +1,5 @@
 {{ $dot := . }}
 {{ $file := .Get ("file") }}
-{{- partial "snippet-code-block.html" (dict "context" $dot "file" $file ) -}}
+{{ $nocomments := .Get "nocomments" }}
+
+{{- partial "snippet-code-block.html" (dict "context" $dot "file" $file "nocomments" $nocomments ) -}}

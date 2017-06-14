@@ -73,7 +73,7 @@ You can apply functions to the result of each query.
 
 A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="/examples/graphing functions/">Examples</a>
 
-<%= @items['/partials/graphingfunctions/'].compiled_content %>
+{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
 
 There are also a few functions you can append to a query which we recommend for expert users only.

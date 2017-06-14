@@ -2,12 +2,12 @@
 title: Sending Metrics with DogStatsD
 kind: guide
 listorder: 4
-
-
+js_dd_docs_methods:
+  - metricsGuidePage
+languages:
+  - Python
+  - Ruby
 ---
-
-<% tab_languages = %w{Python Ruby} %>
-
 <!--
 ======================================================
 OVERVIEW
@@ -45,7 +45,7 @@ contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
-<%= code_tabs("setup", tab_languages) %>
+{{< code-tabs section="setup" >}}
 
 <div class="tab-content">
 
@@ -114,7 +114,7 @@ Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
-<%= code_tabs("counters-page-views", tab_languages) %>
+
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
@@ -152,7 +152,7 @@ of bytes processed by a file uploading service. We'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
-<%= code_tabs("counters-uploaded", tab_languages) %>
+{{< code-tabs section="counters-uploaded" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
@@ -193,8 +193,7 @@ Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
-
-<%= code_tabs("gauges", tab_languages) %>
+{{< code-tabs section="guages" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
@@ -228,7 +227,7 @@ Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
 we can sample each query time with the metric `database.query.time`.
 
-<%= code_tabs("histograms", tab_languages) %>
+{{< code-tabs section="histograms" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
@@ -299,7 +298,7 @@ SERVICE CHECKS
 
 Service checks are used to send information about the status of a service.
 
-<%= code_tabs("service-checks", tab_languages) %>
+{{< code-tabs section="service-checks" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="service-checks-python">
@@ -343,7 +342,7 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitors to your site, sets are a great way to do
 that.
 
-<%= code_tabs("sets", tab_languages) %>
+{{< code-tabs section="sets" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
@@ -377,7 +376,7 @@ aggregated and compared on the front end. Suppose we wanted to measure the
 performance of two algorithms in the real world. We could sample one metric
 `algorithm.run_time` and specify each version with a tag:
 
-<%= code_tabs("tags", tab_languages) %>
+{{< code-tabs section="tags" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
@@ -449,7 +448,7 @@ of overhead for performance intensive code paths. To work around this, StatsD
 supports sample rates, which allows sending a metric a fraction of the time
 and scaling up correctly on the server.
 
-<%= code_tabs("sample-rates", tab_languages) %>
+{{< code-tabs section="sample-rates" >}}
 
 The following code will only send points half of the time:
 
@@ -512,10 +511,3 @@ Note that the metrics explorer doesn't save any of these graphs. If you've
 created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
 an existing one.
-
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    $(DD_docs.metricsGuidePage);
-  </script>
-<% end %>

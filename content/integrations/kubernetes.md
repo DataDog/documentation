@@ -83,7 +83,7 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
 
 Since the agent is deployed as a docker container, refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ## Kubernetes State Metrics
 

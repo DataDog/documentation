@@ -22,7 +22,7 @@ To configure the DNS Service Check, edit the dns_check.yaml file in your conf.d 
         nameserver: 127.0.0.1
         timeout: 8
 
-<%= insert_example_links(conf: "dns_check", check: "dns_check")%>
+{{< insert-example-links conf="dns_check" check="dns_check" >}}
 
 # Validation
 

@@ -47,7 +47,7 @@ We detail the key performance metrics, how to collect them, and how to use Datad
         set the value here. Warning: It may impact the performance of your redis instance
 * `command_stats` - (Optional) - Collect INFO COMMANDSTATS output as metrics.
 
-<%= insert_example_links(conf:"redisdb", check:"redisdb")%>
+{{< insert-example-links conf="redisdb" check="redisdb" >}}
 
 # Validation
 

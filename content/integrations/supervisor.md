@@ -75,7 +75,7 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 * `server_check` (Optional) - Defaults to true. Service check for connection to supervisord server.
 * `socket` (Optional) - If using supervisorctl to communicate with supervisor, a socket is needed.
 
-<%= insert_example_links(conf:"supervisord", check: "supervisord")%>
+{{< insert-example-links conf="supervisord" check="supervisord" >}}
 
 # Validation
 

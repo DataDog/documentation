@@ -13,7 +13,7 @@ Capture etcd metrics in Datadog to:
 * Know when host configurations may be out of sync.
 * Correlate the performance of etcd with the rest of your applications.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ## Metrics
 

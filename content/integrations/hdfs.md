@@ -48,8 +48,8 @@ Capture NameNode and DataNode HDFS metrics in Datadog to:
 
 3.  Restart the Agent
 
-<%= insert_example_links(integration: "HDFS NameNode")%>
-<%= insert_example_links(integration: "HDFS DataNode", include_intro: false)%>
+{{< insert-example-links integration="HDFS NameNode" >}}
+{{< insert-example-links integration="HDFS DataNode" include_intro="false" >}}
 
 # Validation
 

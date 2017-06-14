@@ -77,7 +77,7 @@ called MYREMOTESERVER. For the remote host we are only pulling metrics from the 
 
 * `is_2008` (Optional) - NOTE: because of a typo in IIS6/7 (typically on W2K8) where perfmon reports TotalBytesTransferred as TotalBytesTransfered, you may have to enable this to grab the IIS metrics in that environment.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 # Validation
 

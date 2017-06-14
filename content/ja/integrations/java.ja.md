@@ -142,7 +142,7 @@ The `conf` section will be used to determine what JMX attributes should be colle
 
 The configuration section looks like this:
 
-<%=snippet_code_block "jmx-basic-conf.yaml" %>
+{{< snippet-code-block file="jmx-basic-conf.yaml" >}}
 
 The `conf` parameter is a list of dictionaries. Only 2 keys are
 allowed in this dictionary:
@@ -173,7 +173,7 @@ The `conf` section will be used to determine what JMX attributes should be colle
 
 The configuration section looks like this:
 
-<%=snippet_code_block "jmx-basic-conf.yaml" %>
+{{< snippet-code-block file="jmx-basic-conf.yaml" >}}
 
 The `conf` parameter is a list of dictionaries. Only 2 keys are
 allowed in this dictionary:
@@ -205,7 +205,7 @@ On top of these parameters, the filters support "custom" keys which means that y
 Example: Let's say you want to collect metrics regarding the Cassandra
 cache. You could use the `type:` `- Caches` filter:
 
-<%=snippet_code_block "jmx-cassandra-cache.yaml" %> -->
+{{< snippet-code-block file="jmx-cassandra-cache.yaml" >}} -->
 
 #### Description of the filters
 
@@ -222,7 +222,7 @@ On top of these parameters, the filters support "custom" keys which means that y
 Example: Let's say you want to collect metrics regarding the Cassandra
 cache. You could use the `type:` `- Caches` filter:
 
-<%=snippet_code_block "jmx-cassandra-cache.yaml" %>
+{{< snippet-code-block file="jmx-cassandra-cache.yaml" >}}
 
 
 <!-- #### The `attribute` filter
@@ -231,13 +231,13 @@ The `attribute` filter can accept two types of values:
 
 - A dictionary whose keys are attributes names:
 
- <%=snippet_code_block "jmx-attribute-dict.yaml" %>
+ {{< snippet-code-block file="jmx-attribute-dict.yaml" >}}
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog.  You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
 - A list of attributes names:
 
-<%= snippet_code_block "jmx-attribute-list.yaml" %>
+{{< snippet-code-block file="jmx-attribute-list.yaml" >}}
 
 In that case:
 
@@ -267,13 +267,13 @@ The `attribute` filter can accept two types of values:
 
 - A dictionary whose keys are attributes names:
 
- <%=snippet_code_block "jmx-attribute-dict.yaml" %>
+ {{< snippet-code-block file="jmx-attribute-dict.yaml" >}}
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog.  You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
 - A list of attributes names:
 
-<%= snippet_code_block "jmx-attribute-list.yaml" %>
+{{< snippet-code-block file="jmx-attribute-list.yaml" >}}
 
 In that case:
 

@@ -1,6 +1,20 @@
 <ul class="nav nav-tabs" id="{{ .Get "section" }}-tabs">
 {{ $section := .Get "section" }}
-{{ range .Site.Params.languages }}
+
+{{ $params_languages := .Page.Params.languages }}
+
+{{ if $params_languages }}
+
+  {{ $.Scratch.Set "languages" $params_languages }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "languages" .Site.Params.languages }}
+
+{{ end }}
+
+{{ range $.Scratch.Get "languages" }}
+
 {{ $lang := (lower .) }}
   <li class="{{if eq $lang "python"}} active{{end}}">
     <a data-toggle="tab" class="lang-tab {{ $lang }}-lang-tab" lang="{{$lang}}" href="#{{$section}}-{{$lang}}">{{.}}</a>

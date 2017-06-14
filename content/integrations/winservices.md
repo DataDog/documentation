@@ -60,4 +60,4 @@ After you restart the agent, check the info page in the Agent Manager and verify
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-<%= insert_example_links(conf:"windows_service", check:"windows_service")%>
+{{< insert-example-links conf="windows_service" check="windows_service" >}}

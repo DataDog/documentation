@@ -33,4 +33,4 @@ to capture the same kind of events.
 GUI may slightly differ from `Get-WmiObject`, so we recommend you to double-check your filters' values
 with `Get-WmiObject` if the integration does not capture the events you set up.
 
-<%= insert_example_links(conf: "win32_event_log", check: "win32_event_log")%>
+{{< insert-example-links conf="win32_event_log" check="win32_event_log" >}}
