@@ -136,7 +136,8 @@ For more information about building custom Docker containers with the Datadog Ag
 
 # Deprecated metrics
 
-The following metrics are reported by a deprecated check and will be eventually removed from the catalog:
+The following metrics are reported by the [docker](https://github.com/DataDog/integrations-core/tree/5.14.x/docker) check
+that has been deprecated and will be removed in the Agent version 5.15. The metrics will be removed from the catalog as well:
 
 * **docker.mem.active_anon**
 * **docker.mem.inactive_anon**
@@ -149,7 +150,7 @@ The following metrics are reported by a deprecated check and will be eventually 
 * **docker.mem.pgpgout**
 * **docker.mem.unevictable**
 
-The following metrics are now reported with a different name and will be eventually removed from the catalog:
+The following metrics are now reported with a different name and will be removed from the catalog when releasing the Agent version 5.15:
 
 * **docker.disk.used** (now reported as **docker.data.used**)
 * **docker.disk.free** (now reported as **docker.data.free**)
