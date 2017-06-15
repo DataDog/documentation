@@ -55,7 +55,7 @@ Connect TeamCity to Datadog to create events for each build in order to:
             # Optional, any additional tags you'd like to add to the event
             # tags:
             #   - test
-    {:.language-yaml}
+
 
 2. Restart the Agent
 

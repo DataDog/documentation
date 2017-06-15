@@ -79,7 +79,7 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       # tags:
       #  - optional_tag1
       #  - optional_tag2
-{:.language-yaml}
+
 
 Since the agent is deployed as a docker container, refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
 
@@ -132,7 +132,7 @@ To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the fol
         protocol: TCP
       selector:
         app: kube-state-metrics
-{:.language-yaml}
+
 
 Then deploy it by running:
 

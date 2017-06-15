@@ -33,7 +33,7 @@ Configure Route 53 on AWS and ensure that the policy you created has the **route
         }
       ]
     }
-{:.language-json}
+
 
 
 # Configuration

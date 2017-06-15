@@ -62,5 +62,5 @@ To validate your installation and configuration, restart the agent and execute t
 | **php_fpm.processes.active**<br/>(gauge)| Total number of active processes|
 | **php_fpm.processes.idle**<br/>(gauge)| Total number of idle processes |
 | **php_fpm.processes.total**<br/>(gauge)|Total number of processes|
-{:.table}
+
 

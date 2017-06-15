@@ -60,7 +60,7 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
           - name: server2
             socket: unix:///var/run//supervisor.sock
             host: http://127.0.0.1
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 

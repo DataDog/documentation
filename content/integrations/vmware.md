@@ -37,7 +37,7 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
             host: vcenter.domain.com
             username: datadog-readonly@vsphere.local
             password: mypassword
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 

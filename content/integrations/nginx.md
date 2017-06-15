@@ -63,7 +63,7 @@ Here are the  metrics name changes from NGINX to NGINX Plus:
 | nginx.net.conn_opened_per_s | nginx.connections.accepted |
 | nginx.net.conn_dropped_per_s | nginx.connections.dropped |
 | nginx.net.request_per_s | nginx.requests.total |
-{:.table}
+
 
 <br/>
 These metrics do not have a directly related metric, but here are close translations:
@@ -71,14 +71,14 @@ These metrics do not have a directly related metric, but here are close translat
 | NGINX Metrics | NGINX Plus Metrics |
 |-------------------|-------------------|
 | nginx.net.waiting | nginx.connections.idle|
-{:.table}
+
 
 <br/>
 Finally, these metrics have no good translation:
 
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
-{:.table}
+
 
 
 The data pulled from the NGINX Plus status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).

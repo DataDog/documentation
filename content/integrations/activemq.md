@@ -87,17 +87,17 @@ Get metrics from ActiveMQ in real time to
                 MemoryPercentUsage:
                   alias: activemq.broker.memory_pct
                   metric_type: gauge
-    {:.language-yaml}
+
 
 3. Restart the agent
 
         sudo /etc/init.d/datadog-agent restart
-    {:.language-shell}
+
 
         if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; \
         then echo -e "\e[0;32mAgent is running\e[0m"; \
         else echo -e "\e[031mAgent is not running\e[0m"; fi
-    {:.language-shell}
+
 
 {{< insert-example-links check="none" >}}
 

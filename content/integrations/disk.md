@@ -56,7 +56,7 @@ This configuration does not require any explicit configuration to begin monitito
       # get metrics for all partitions. use_mount should be set to yes (to avoid
       # collecting empty device names) when using this option.
       # all_partitions: no
-{:.language-yaml}
+
 
 # Validation
 

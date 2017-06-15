@@ -1,9 +1,10 @@
 title: "Docs"
 baseURL: "http://localhost:1313/"
+metadataformat: "yaml"
 
 # language
-#defaultContentLanguage: "en"
-defaultcontentlanguageinsubdir: false
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
 
 pygmentsuseclasses: true
 
@@ -12,10 +13,10 @@ taxonomies:
   video: "videos"
   example: "examples"
 
-Languages:
+languages:
   en:
-    languageName: "English"
-    languageCode: "en-US"
+    #languageName: "English"
+    #languageCode: "en-US"
     weight: 0
     menu:
       main_references:
@@ -119,7 +120,7 @@ Languages:
           weight: 100
 
   ja:
-    languagename: "日本語"
+    #languagename: "日本語"
     weight: 1
     menu:
       main_references:
@@ -171,10 +172,12 @@ Languages:
           name: ""
           url: "/faq/"
           weight: 120
+  fr:
+    weight: 2
 
 # build settings
-buildfuture: true
-builddrafts: true
+# buildfuture: true
+# builddrafts: true
 
 params:
   img_url: "http://localhost:1313/"
@@ -186,7 +189,7 @@ params:
     png: "?fm=png&auto=format&lossless=1"
     gif: ""
   static_url: "http://localhost:1313/"
-  languages:
+  code_languages:
     - Python
     - Ruby
     - Console

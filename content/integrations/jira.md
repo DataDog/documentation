@@ -92,7 +92,7 @@ A full list of variables can be seen below.
 |$ALERT_QUERY| Query of the monitor that triggered the webhook|
 |$ALERT_STATUS| Summary of the alert status *(ex: system.load.1 over host:my-host was > 0 at least once during the last 1m)*|
 |$ALERT_TRANSITION| Type of alert notification *(ex: Triggered)*|
-{:.table}
+
 
 ## Automatically Create Tickets from Datadog Alerts
 

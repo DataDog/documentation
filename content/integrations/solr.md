@@ -95,7 +95,7 @@ Make sure that JMX Remote is enabled on your Tomcat server. For information on J
                 avgRequestsPerSecond:
                   alias: solr.search_handler.avg_requests_per_sec
                   metric_type: gauge
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 
@@ -139,7 +139,7 @@ The `attribute` filter can accept two types of values:
             bytesReceived:
               alias: tomcat.bytes_rcvd
               metric_type: counter
-  {:.language-yaml}
+
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
@@ -158,7 +158,7 @@ In that case you can specify an alias for the metric that will become the metric
             - ExceptionCount
             - Hits
             - RecentHitRate
-  {:.language-yaml}
+
 
 In that case:
 
@@ -181,7 +181,7 @@ Here is another filtering example:
             - 75thPercentile
             - 95thPercentile
             - 99thPercentile
-{:.language-yaml}
+
 
 ## Note
 
@@ -203,7 +203,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
         - include:
           domain: domain_name
           bean: second_bean_name
-{:.language-yaml}
+
 
 ## Commands to view the metrics that are available:
 

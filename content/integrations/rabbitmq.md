@@ -36,7 +36,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
               - queue1
             vhosts:
               - vhost1
-    {:.language-yaml}
+
 
 
 1.  Restart the Agent

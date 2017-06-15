@@ -34,7 +34,7 @@ Configure CloudWatch on AWS and ensure that the policy you created has the equiv
         ]
       } ]
     }
-{:.language-json}
+
 
 
 # Configuration

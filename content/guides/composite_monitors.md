@@ -127,7 +127,7 @@ Consider a composite monitor that uses three individual monitors — A, B, and C
 | Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
 | Alert (T)   | Warn (T)   | Unknown (T)| Alert (T) - triggered!  |
 | Skipped (F) | No Data (F)| Unknown (T)| Skipped (F)             |
-{:.table}
+
 
 Two of the four scenarios will trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (and in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
@@ -149,7 +149,7 @@ The previous table showed the composite monitor status across four points in tim
 | web02 | Ok           | Warn     | Alert     | Ok                             |
 | web03 | Warn         | Warn     | Alert     | Alert - triggered!             |
 | web04 | Skipped      | Warn     | Alert     | Skipped                        |
-{:.table}
+
 
 In this cycle, you would receive two alerts.
 
@@ -163,7 +163,7 @@ Here's an example cycle:
 |-------|-----------|-----------|------------|--------------------------------|
 | web04 | Unknown   | Warn      | Alert      | Alert - triggered!             |
 | web05 | Ok        | Ok        | Alert      | Ok                             |
-{:.table}
+
 
 In this cycle, you would receive one alert.
 

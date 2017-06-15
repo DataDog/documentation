@@ -41,7 +41,7 @@ Configure the Agent using the Agent Manager
           - host: . # "." means the current host
             services:
               - wmiApSrv # service names are not case-sensitive
-    {:.language-yaml}
+
 
 1.  Restart the agent.
 

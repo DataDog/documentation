@@ -101,7 +101,7 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
     def application_error(e):
         """Return a custom 500 error."""
         return 'Sorry, unexpected error: {}'.format(e), 500
-{:.lang-python}
+
 
 ### Metrics
 

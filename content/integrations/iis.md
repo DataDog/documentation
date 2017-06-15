@@ -39,7 +39,7 @@ Connect IIS to Datadog in order to:
             tags:
               - mytag1
               - mytag2
-    {:.language-yaml}
+
 
 1.  Restart the Agent using the Agent Manager (or restart the service)
 
@@ -73,7 +73,7 @@ called MYREMOTESERVER. For the remote host we are only pulling metrics from the 
       username: MYREMOTESERVER\fred
       password: mysecretpassword
       is_2008: false
-{:.language-yaml}
+
 
 * `is_2008` (Optional) - NOTE: because of a typo in IIS6/7 (typically on W2K8) where perfmon reports TotalBytesTransferred as TotalBytesTransfered, you may have to enable this to grab the IIS metrics in that environment.
 

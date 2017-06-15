@@ -29,7 +29,7 @@ Related integrations include:
 | [Stackdriver Logging](/integrations/google_stackdriver_logging) | real-time log management and analysis  |
 | [Storage](/integrations/google_cloud_storage) | unified object storage |
 | [VPN](/integrations/google_cloud_vpn) | managed network functionality |
-{:.table}
+
 
 ### Installation
 

@@ -46,7 +46,7 @@ You can also specify your own payload in order to add your own custom fields to 
 |$ALERT_QUERY| Query of the monitor that triggered the webhook|
 |$ALERT_STATUS| Summary of the alert status *(ex: system.load.1 over host:my-host was > 0 at least once during the last 1m)*|
 |$ALERT_TRANSITION| Type of alert notification *(values: `Triggered` or `Recovered`)*|
-{:.table}
+
 
 If you want to post your webhooks to a service requiring authentication, you can Basic HTTP authentication my modifing your URL from `https://my.service.com` to `https://username:password@my.service.com`.
 
@@ -63,7 +63,7 @@ and as payload
         "From":"+1347XXXXXX",
         "Body":"$EVENT_TITLE \n Related Graph: $SNAPSHOT"
     }
-{:.language-json}
+
 
 
 replacing `To` with your phone number and `From` with the one twilio attributed to you. Check the **Encode as form** checkbox.
@@ -86,5 +86,5 @@ and as payload
             "summary": "$EVENT_TITLE"
         }
     }
-{:.language-json}
+
 Don't check the "Encode as form" checkbox.

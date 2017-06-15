@@ -35,7 +35,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
             tags:
               - instance:foo
             disable_ssl_validation: true # if you want to disable SSL cert validation
-    {:.language-yaml}
+
 
 2. Restart the agent
 

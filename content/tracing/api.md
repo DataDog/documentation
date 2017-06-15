@@ -57,15 +57,11 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
     <h5>Signature</h5>
     <code>PUT /v0.3/traces</code>
 
-    <h5>Example Request</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_code_block "trace-api-traces.#{f}", :nocomments => true %>
-    <% end %>
-
+<h5>Example Request</h5>
+{{< snippet-code-block file="trace-api-traces." languages="sh" nocomments="true" >}}
     <h5>Example Response</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_result_code_block "trace-api-traces.#{f}" %>
-    <% end %>
+{{< snippet-result-code-block file="trace-api-traces." languages="sh" >}}
+
   </div>
 </div>
 
@@ -93,15 +89,12 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
     <h5>Signature</h5>
     <code>PUT /v0.3/services</code>
 
-    <h5>Example Request</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_code_block "trace-api-services.#{f}", :nocomments => true %>
-    <% end %>
+<h5>Example Request</h5>
+{{< snippet-code-block file="trace-api-services." languages="sh" nocomments="true" >}}
 
-    <h5>Example Response</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_result_code_block "trace-api-services.#{f}" %>
-    <% end %>
+<h5>Example Response</h5>
+{{< snippet-result-code-block file="trace-api-services." languages="sh" >}}
+
   </div>
 </div>
 

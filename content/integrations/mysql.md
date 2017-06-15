@@ -115,7 +115,7 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.performance.table_locks_immediate.rate | RATE |
 | mysql.performance.threads_cached | GAUGE |
 | mysql.performance.threads_created | MONOTONIC |
-{:.table}
+
 
 |`extra_innodb_metrics` adds the following metrics:|
 |----------|--------|
@@ -204,18 +204,18 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.innodb.x_lock_os_waits | RATE |
 | mysql.innodb.x_lock_spin_rounds | RATE |
 | mysql.innodb.x_lock_spin_waits | RATE |
-{:.table}
+
 
 |`extra_performance_metrics` adds the following metrics:|
 |----------|--------|
 | mysql.performance.query_run_time.avg | GAUGE |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE |
-{:.table}
+
 
 |`schema_size_metrics` adds the following metric:|
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
-{:.table}
+
 
 
 

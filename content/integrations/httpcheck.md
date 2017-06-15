@@ -57,7 +57,7 @@ Other settings available include:
 | `no_proxy` | If set, the check will bypass proxy settings and attempt to reach the check url directly. This defaults to `false`. |
 | `allow_redirects` | This setting allows the service check to follow HTTP redirects and defaults to `true`.
 | `tags` | A list of arbitrary tags that will be associated with the check. For more information about tags, please see our [Guide to tagging](/guides/tagging/) and blog post, [The power of tagged metrics](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) |
-{:.table}
+
 
 {{< insert-example-links >}}
 

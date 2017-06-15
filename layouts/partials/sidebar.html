@@ -1,9 +1,6 @@
 {{ $sidebar := .Params.sidebar }}
 {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) }}
-{{ range $guides }}
-  {{ .Lang }}
-{{ end }}
-<h1>{{ .Site.Language.Lang }}</h1>
+
 <ul class="nav nav-tabs nav-stacked sidebar">
   {{ if ne .Site.Language.Lang "ja"}}
     <li class="nav-header">Documentation Search</li>

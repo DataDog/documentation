@@ -31,7 +31,7 @@ Connect Memcached to Datadog in order to:
             options:
               items: false  # set to true if you wish to collect items memcached stats.
               slabs: false  # set to true if you wish to collect slabs memcached stats.
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 

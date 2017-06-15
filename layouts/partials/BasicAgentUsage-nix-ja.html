@@ -4,18 +4,21 @@ Starting and Stopping the Agent
 ======================================================
 -->
 
-<% if @item[:os] == 'osx'
-  $sudo = ''
-  else
-  $sudo = 'sudo '
-end %>
+{{ if eq .Page.Params.os "osx" }}
+
+    {{ $.Scratch.Set "sudo" "" }}
+
+{{ else }}
+
+    {{ $.Scratch.Set "sudo" "sudo " }}
+
+{{ end }}
 
 <!-- ### Starting and Stopping the Agent -->
 
 ### Datadog Agent の起動と停止
-{: #starting_and_stopping_the_agent}
 
-<% if @item[:os] == 'smartos' %>
+{{ if eq .Page.Params.os "smartos" }}
 <!-- To manually start the Agent: -->
 手動で Datadog Agent を起動する:
 
@@ -30,7 +33,7 @@ Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
 
     svcadm restart datadog
 
-<% else %>
+{{ else }}
 <!-- To manually start the Agent: -->
 手動で Datadog Agent を起動する:
 
@@ -45,7 +48,7 @@ Datadog Agentを停止する:
 Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
 
     <%= $sudo %><%= @item[:servicename] %> restart
-<% end %>
+{{ end }}
 
 <!--
 ======================================================
@@ -56,9 +59,8 @@ Status and Information
 <!-- ### Status and Information -->
 
 ### 動作ステータスの確認
-{: #status_and_information}
 
-<% if @item[:os] == 'smartos' %>
+{{ if eq .Page.Params.os "smartos" }}
 <!-- To check if the Agent is running: -->
 Datadog Agent が起動しているかを確認する:
 
@@ -74,7 +76,7 @@ Datadog Agent のステータスに関する情報を収集する:
 
     /opt/local/datadog/bin/info -v
 
-<% else %>
+{{ else }}
 <!-- To check if the Agent is running: *(since 3.8.0)* -->
 Datadog Agent が起動しているかを確認する: *(since 3.8.0)*
 
@@ -90,7 +92,7 @@ Datadog Agent のステータスに関する情報を収集する:
 
     <%= $sudo %><%= @item[:serviceinfoname] %> -v
 
-<% end %>
+{{ end }}
 <!--
 ======================================================
 Configuration
@@ -100,7 +102,6 @@ Configuration
 <!-- ### Configuration -->
 
 ### 設定ファイルの保存されているディレクトリ
-{: #configuration}
 
 <!-- The configuration file for the Agent is located at ````<%= @item[:configdirectory] %>datadog.conf````
 
@@ -119,9 +120,8 @@ Troubleshooting
 <!-- ### Troubleshooting -->
 
 ### トラブルシューティング
-{: #troubleshooting}
 
-<% if @item[:os] == 'smartos' %>
+{{ if eq .Page.Params.os "smartos" }}
 
 <!-- Try running the info command to see the state of the Agent. -->
 <a href='#status_and_information'>info</a>コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
@@ -133,7 +133,7 @@ Datadog Agentに内包されている機能の個別ログは、以下のファ�
 * ````/opt/local/datadog/logs/supervisord/dogstatsd.log````
 * ````/opt/local/datadog/logs/supervisord/forwarder.log````
 
-<% else %>
+{{ else }}
 <!-- Try running the <a href='#status_and_information'>info</a> command to see the state of the Agent. -->
 <a href='#status_and_information'>info</a>コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
 
@@ -145,6 +145,5 @@ Datadog Agentに内包されている機能の個別ログは、以下のファ�
 * ````<%= @item[:logdirectory] %>dogstatsd.log````
 * ````<%= @item[:logdirectory] %>forwarder.log````
 
-<% end %>
-
+{{ end }}
 <br/>

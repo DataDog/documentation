@@ -40,7 +40,7 @@ Capture metrics from the files in given directories:
                name: "tag_name"
                pattern: "*.log"
                recursive: True
-    {:.language-yaml}
+
 
 4.  Restart the Agent
 

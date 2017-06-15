@@ -51,7 +51,7 @@ Related integrations include:
 | [SQL Database Elastic Pool](/integrations/azure_sql_elastic_pool) | manage the performance of multiple databases |
 | [Virtual Machine](/integrations/azure_vm) | virtual machine management service |
 | [Virtual Machine Scale Set](/integrations/azure_vm_scale_set) | deploy, manage, and autoscale a set of identical VMs |
-{:.table}
+
 
 ### Installation
 

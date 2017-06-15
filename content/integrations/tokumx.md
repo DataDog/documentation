@@ -18,14 +18,14 @@ Capture TokuMX metrics in Datadog to:
 1.  Install the Python MongoDB module on your MongoDB server using the following command:
 
         sudo pip install --upgrade "pymongo<3.0"
-    {:.language-shell}
+
 
 2.  You can verify that the module is installed using this command:
 
         python -c "import pymongo" 2>&1 | grep ImportError && \
         echo -e "\033[0;31mpymongo python module - Missing\033[0m" || \
         echo -e "\033[0;32mpymongo python module - OK\033[0m"
-    {:.language-shell}
+
 
 3.  Start the mongo shell.
 4.  Create a read-only admin user for datadog using the following command. Make sure you replace ```<UNIQUEPASSWORD>``` with a unique password for the user. Datadog needs admin rights to collect complete server statistics.
@@ -62,7 +62,7 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
                   tags:
                       - mytag1
                       - mytag2
-    {:.language-yaml}
+
 
 2.  Restart the Agent.
 

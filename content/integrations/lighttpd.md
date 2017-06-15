@@ -66,7 +66,7 @@ The following metrics are collected for either Lighttpd1 and Lighttpd2:
 |lighttpd.performance.busy_servers|
 |lighttpd.performance.idle_server|
 |lighttpd.performance.uptime|
-{:.table}
+
 
 |Metrics collected for Lighttpd2|
 |--------------------------------|
@@ -94,6 +94,6 @@ The following metrics are collected for either Lighttpd1 and Lighttpd2:
 |lighttpd.response.status_3xx|
 |lighttpd.response.status_4xx|
 |lighttpd.response.status_5xx|
-{:.table}
+
 
 

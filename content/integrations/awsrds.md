@@ -104,7 +104,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
               port: 3306
               tags:
                 - dbinstanceidentifier:my_own_instance
-      {:.language-yaml}
+
 
       b.  If you are using PostgreSQL, then edit postgres.yaml:
 
@@ -118,7 +118,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
               dbname: db_name
               tags:
                 - dbinstanceidentifier:my_own_instance
-      {:.language-yaml}
+
 
       c.  If you are using Microsoft SQL Server, then edit sqlserver.yaml
 
@@ -130,7 +130,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
               password: my_password
               tags:
                 - dbinstanceidentifier:my_own_instance
-      {:.language-yaml}
+
 
   2.  Restart the agent.
 

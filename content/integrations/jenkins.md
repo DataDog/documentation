@@ -47,7 +47,7 @@ You will start to see Jenkins events in the Event Stream when the plugin is up a
 
 | **jenkins.job.duration**<br/>(gauge)| Build duration <br/>*shown as seconds*|
 | **jenkins.job.completed**<br/>(count)| Jobs completed|
-{:.table}
+
 
 # Events
 

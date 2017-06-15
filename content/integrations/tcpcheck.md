@@ -41,7 +41,7 @@ Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following
         collect_response_time: true
         tags:
           - demo:matt
-{:.language-yaml}
+
 
 ## Configuration Options
 

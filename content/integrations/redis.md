@@ -32,7 +32,7 @@ We detail the key performance metrics, how to collect them, and how to use Datad
               - optional_tag2
             keys:
               - key1
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 

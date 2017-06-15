@@ -27,7 +27,7 @@ Connect ZooKeeper to Datadog in order to:
           - host: localhost
             port: 2181
             timeout: 3
-    {:.language-yaml}
+
 1.  Restart the Agent
 
 # Validation

@@ -85,7 +85,7 @@ If you are modifying the IAM Policy you created for your cluster, you may only n
                }
            ]
        }
-    {:.language-xml}
+
 8. Click **Create Policy**
 
 ### Create a new instance including a startup script
@@ -117,7 +117,7 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
        region=$region
        aws ecs start-task --cluster $cluster --task-definition $task_def \
          --container-instances $instance_arn --region $region" >> /etc/rc.local
-    {:.language-shell}
+
 
     This user script above will:
 

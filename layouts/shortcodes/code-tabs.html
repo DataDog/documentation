@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs" id="{{ .Get "section" }}-tabs">
 {{ $section := .Get "section" }}
 
-{{ $params_languages := .Page.Params.languages }}
+{{ $params_languages := .Page.Params.code_languages }}
 
 {{ if $params_languages }}
 
@@ -9,7 +9,7 @@
 
 {{ else }}
 
-  {{ $.Scratch.Set "languages" .Site.Params.languages }}
+  {{ $.Scratch.Set "languages" .Site.Params.code_languages }}
 
 {{ end }}
 

@@ -45,19 +45,19 @@ The following test methods are provided by the `AgentCheckTest` class. For more 
 ##### `coverage_report()`
 
 Prints the test coverage status of metrics, events, service checks and service metadata. Also lists items for each that lack test coverage.
-{:.func-p}
+
 
 ##### `print_current_state()`
 
 Prints a report of the metrics, events, service checks, service metadata and warnings provided by the integration.
-{:.func-p}
+
 
 #### Run Checks Methods
 
 ##### `run_check(config, agent_config=None, mocks=None, force_reload=False)`
 
 Parameters:
-{:.func-p}
+
 
 * **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
 
@@ -71,7 +71,7 @@ Parameters:
     ]
 }
 ~~~
-{:.func-code}
+
 
 * **agent_config** (*dictionary*) – A customized Datadog agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
@@ -82,22 +82,22 @@ Parameters:
     'get_nodes_with_service': self.mock_get_nodes_with_service,
 }
 ~~~
-{:.func-code}
+
 
 * **force_reload** (*boolean*) – Reload the check before running it.
 
 ##### `run_check_twice(config, agent_config=None, mocks=None, force_reload=False)`
 
 Similar to `run_check`, this method will run the check twice with a 1 second delay between runs.
-{:.func-p}
+
 
 ##### `run_check_n(config, agent_config=None, mocks=None, force_reload=False, repeat=1, sleep=1)`
 
 Similar to `run_check`, this method will run the check multiple times.
-{:.func-p}
+
 
 Parameters:
-{:.func-p}
+
 
 * **repeat** (*integer*) – The number of times the check will run.
 * **sleep** (*integer*) – The delay in seconds between check runs.
@@ -107,7 +107,7 @@ Parameters:
 ##### `assertMetric(metric_name, value=None, tags=None, count=None, at_least=1, hostname=None, device_name=None, metric_type=None)`
 
 Parameters:
-{:.func-p}
+
 
 * **metric_name** (*string*) – The name of the metric.
 * **value** (*variable*) – The value for the metric.
@@ -124,7 +124,7 @@ Parameters:
 ##### `assertMetricTagPrefix(metric_name, tag_prefix, count=None, at_least=1)`
 
 Parameters:
-{:.func-p}
+
 
 * **metric_name** (*string*) – The name of the metric.
 * **tag_prefix** (*string*) – Match metrics with tags that begin with this string.
@@ -134,7 +134,7 @@ Parameters:
 ##### `assertMetricTag(metric_name, tag, count=None, at_least=1)`
 
 Parameters:
-{:.func-p}
+
 
 * **metric_name** (*string*) – The name of the metric.
 * **tag** (*string*) – The tag associated with the metric.
@@ -146,7 +146,7 @@ Parameters:
 ##### `assertServiceMetadata(meta_keys, count=None, at_least=1)`
 
 Parameters:
-{:.func-p}
+
 
 * **meta_keys** (*list of strings*) – A list of metadata keys.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
@@ -166,7 +166,7 @@ Parameters:
 ##### `assertServiceCheckUnknown(service_check_name, tags=None, count=None, at_least=1)`
 
 Parameters:
-{:.func-p}
+
 
 * **service_check_name** (*string*) – The name of the service check.
 * **tags** (*list of strings*) – The tags associated with the service check.
@@ -179,7 +179,7 @@ Parameters:
 ##### `assertEvent(msg_text, count=None, at_least=1, exact_match=True, tags=None, **kwargs)`
 
 Parameters:
-{:.func-p}
+
 
 * **msg_text** (*string*) – The event message text.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
@@ -196,7 +196,7 @@ Parameters:
 ##### `assertWarning(warning, count=None, at_least=1, exact_match=True)`
 
 Parameters:
-{:.func-p}
+
 
 * **warning** (*string*) – The warning message text.
 * **count** (*integer*) – The number of candidate warnings the assertion should test for. Typical values are:
@@ -215,10 +215,10 @@ The `AgentCheckTest` class provides some useful test methods that are not specif
 ##### `assertNotIn(first, second)`
 
 These methods test if the first argument is contained in the second argument using Python's `in` operator.
-{:.func-p}
+
 
 Parameters:
-{:.func-p}
+
 
 * **first** (*multiple types*) – The "needle" data.
 * **second** (*multiple types*) – The "haystack" data.

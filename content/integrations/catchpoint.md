@@ -32,7 +32,7 @@ To get Catchpoint alerts into your stream, login into the Catchpoint Portal and 
 1. Enter the template Name e.g. DataDog and set the Format to JSON.
 1. Use the following JSON Template and Save it.
 
-    {:.language-json}
+
         {
             "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
             "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",

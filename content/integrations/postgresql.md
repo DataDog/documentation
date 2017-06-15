@@ -20,7 +20,7 @@ To get started with the PostgreSQL integration, create at least a read-only data
 
     create user datadog with password '<PASSWORD>';
     grant SELECT ON pg_stat_database to datadog;
-{:.language-sql}
+
 
 To verify the correct permissions you can run the following command:
 
@@ -28,7 +28,7 @@ To verify the correct permissions you can run the following command:
     "select * from pg_stat_database LIMIT(1);"
     && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \
     || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-{:.language-shell}
+
 
 When it prompts for a password, enter the one used in the first command.
 
@@ -41,7 +41,7 @@ When it prompts for a password, enter the one used in the first command.
         instances:
           - host: localhost
             port: 5432
-    {:.language-yaml}
+
 
 1.  Restart the agent.
 
@@ -61,7 +61,7 @@ When it prompts for a password, enter the one used in the first command.
           schemas:
             - public
             - prod
-  {:.language-yaml}
+
 * `collect_function_metrics` (Optional) - Collect metrics regarding PL/pgSQL functions from pg_stat_user_functions
 * `collect_count_metrics` (Optional) - Collect count metrics, default value is True for backward compatibility but they migth be slow, suggested value is False.
 
@@ -91,7 +91,7 @@ The format for describing custome metrics is identical with the one used for com
       relation: false
     collect_function_metrics: False
     collect_count_metrics: False
-{:.language-yaml}
+
 
 
 {{< insert-example-links conf="postgres" check="postgres" >}}

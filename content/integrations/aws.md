@@ -53,7 +53,7 @@ Related integrations include:
 | [Storage Gateway](/integrations/awsstoragegateway) | hybrid cloud storage |
 | [Web Application Firewall (WAF)](/integrations/awswaf) | protect web applications from common web exploits |
 | [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
-{:.table}
+
 
 # Installation
 

@@ -61,7 +61,7 @@ The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastruc
 | **trace.receiver** |
 | `receiver_port` | `DD_RECEIVER_PORT` | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`. |
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
-{:.table}
+
 
 For more information about the Datadog Agent, see the [Getting Started guide](/guides/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
