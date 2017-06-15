@@ -134,6 +134,28 @@ For more information about building custom Docker containers with the Datadog Ag
 
 <%= get_metrics_from_git()%>
 
+# Deprecated metrics
+
+The following metrics are reported by the [docker](https://github.com/DataDog/integrations-core/tree/5.14.x/docker) check
+that has been deprecated and will be removed in the Agent version 5.15. The metrics will be removed from the catalog as well:
+
+* **docker.mem.active_anon**
+* **docker.mem.inactive_anon**
+* **docker.mem.active_file**
+* **docker.mem.inactive_file**
+* **docker.mem.mapped_file**
+* **docker.mem.pgfault**
+* **docker.mem.pgmajfault**
+* **docker.mem.pgpgin**
+* **docker.mem.pgpgout**
+* **docker.mem.unevictable**
+
+The following metrics are now reported with a different name and will be removed from the catalog when releasing the Agent version 5.15:
+
+* **docker.disk.used** (now reported as **docker.data.used**)
+* **docker.disk.free** (now reported as **docker.data.free**)
+* **docker.disk.total** (now reported as **docker.data.total**)
+
 # Compose and the Datadog Agent
 
 [Compose](https://docs.docker.com/compose/overview/) is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.

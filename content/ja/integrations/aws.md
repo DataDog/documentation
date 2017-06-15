@@ -315,7 +315,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs
+## CloudWatch Logs and Lambda
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
