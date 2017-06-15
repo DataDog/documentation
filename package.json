@@ -25,6 +25,7 @@
     "node": ">= 4.5"
   },
   "dependencies": {
+    "bower": "1.8.0",
     "node-sass": "^4.1",
     "asset-builder": "^1.1",
     "browser-sync": "^2.8",
