@@ -1,0 +1,111 @@
+stages:
+  - bootstrap
+  - build
+  - pre-deploy
+  - deploy
+  - post-deploy
+  - cleanup
+
+variables:
+  # images used for build, test, deploy
+  BUILD_IMAGE: "727006795293.dkr.ecr.us-east-1.amazonaws.com/documentation:latest"
+  # hugo configs, used to direct building the site
+  PREVIEW_CONFIG: "config/preview.yaml"
+  # s3 deploy destinations
+  PREVIEW_BUCKET: "datadog-docs-preview"
+  STATIC_BUCKET: "origin-static-assets"
+  # domains
+  PREVIEW_DOMAIN: "https://corpsite-preview.datadoghq.com/"
+  STATIC_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/"
+  IMAGE_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/img/"
+  # webhooks
+  SLACK_URL: "https://hooks.slack.com/services/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"
+  # build folder
+  ARTIFACT_RESOURCE: "public"
+
+# ================== copy scripts =============== #
+before_script:
+  - find gitlab/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
+  - find gitlab/etc/ -type f -exec cp {} /etc \;  # load configs
+  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
+
+# ================== templates ================== #
+.base_template: &base_template
+  image: ${BUILD_IMAGE}
+  tags:
+    - docker
+
+# ================== bootstrap ================== #
+build_docker_image:
+  stage: bootstrap
+  before_script: [] # override the top-level entry
+  when: manual
+  tags:
+    - container-builder
+  script:
+    - docker build -t $BUILD_IMAGE -f gitlab/Dockerfile gitlab
+    - docker push $BUILD_IMAGE
+  except:
+    - tags
+
+# ================== preview ================== #
+# If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
+build_preview:
+  <<: *base_template
+  stage: build
+  environment: "preview"
+  variables:
+    BUCKET: ${PREVIEW_BUCKET}
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+    MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+  script:
+    - version_static_assets
+    - build_hugo_site
+    - collect_static_assets
+    - remove_static_from_repo
+    - push_site_to_s3
+#    - notify_slack "${MESSAGE}"
+    - create_artifact
+  only:
+    - /pull/\/.*/
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_images:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "images" "${URL}" "True" "False" "True"
+  only:
+    - /pull/\/.*/
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_static:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "static" "${URL}" "True" "False" "True"
+  only:
+    - /pull/\/.*/
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_links:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "links" "${URL}" "True" "False" "True"
+  only:
+    - /pull/\/.*/
+    - /.+?\/[a-zA-Z0-9_-]+/
