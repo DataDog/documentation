@@ -51,7 +51,6 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
           <li><code>parent_id</code> - <em>Optional.</em> The span integer ID of the parent span.</li>
           <li><code>error</code> - <em>Optional.</em> Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the <code>meta</code> property.</li>
           <li><code>meta</code> - <em>Optional.</em> A dictionary of key-value metadata. e.g. tags.</li>
-          <li><code>metrics</code> - <em>Optional.</em> A dictionary of key-value metrics data. <em>Note: keys must be strings, values must be numeric.</em></li>
         </ul>
       ') %>
     </ul>

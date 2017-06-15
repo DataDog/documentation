@@ -63,7 +63,7 @@ Note that in the command above, you are able to pass your API key to the Datadog
 | EC2_TAGS | Enabling this feature allows the agent to query and capture custom tags set using the EC2 API during startup. To enable, set the value to "yes", for example, `-e EC2_TAGS=yes`. Note that this feature requires an [IAM role](https://github.com/DataDog/dd-agent/wiki/Capturing-EC2-tags-at-startup) associated with the instance. |
 | NON_LOCAL_TRAFFIC | Enabling this feature will allow statsd reporting from any external IP. For example, `-e NON_LOCAL_TRAFFIC=yes`. This can be used to report metrics from other containers or systems. See [network configuration](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration) for more details.
 | PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD | Sets proxy configuration details. For more information, see the [Agent proxy documentation](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy) |
-| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Service Discovery. For more information, please see the [Service Discovery guide](/guides/servicediscovery/). |
+| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Autodiscovery. For more information, please see the [Autodiscovery guide](/guides/autodiscovery/). |
 {:.table}
 
 ### Running the agent container on Amazon Linux
@@ -133,6 +133,28 @@ For more information about building custom Docker containers with the Datadog Ag
 # Metrics
 
 <%= get_metrics_from_git()%>
+
+# Deprecated metrics
+
+The following metrics are reported by the [docker](https://github.com/DataDog/integrations-core/tree/5.14.x/docker) check
+that has been deprecated and will be removed in the Agent version 5.15. The metrics will be removed from the catalog as well:
+
+* **docker.mem.active_anon**
+* **docker.mem.inactive_anon**
+* **docker.mem.active_file**
+* **docker.mem.inactive_file**
+* **docker.mem.mapped_file**
+* **docker.mem.pgfault**
+* **docker.mem.pgmajfault**
+* **docker.mem.pgpgin**
+* **docker.mem.pgpgout**
+* **docker.mem.unevictable**
+
+The following metrics are now reported with a different name and will be removed from the catalog when releasing the Agent version 5.15:
+
+* **docker.disk.used** (now reported as **docker.data.used**)
+* **docker.disk.free** (now reported as **docker.data.free**)
+* **docker.disk.total** (now reported as **docker.data.total**)
 
 # Compose and the Datadog Agent
 

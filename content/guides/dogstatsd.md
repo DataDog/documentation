@@ -245,7 +245,7 @@ DogStatsD supports the following option, that can be tweaked in the
 Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
 configuration file</a>:
 
-    # The port DogStatsD runs on. If you change this, make your the apps sending to
+    # The port DogStatsD runs on. If you change this, make sure the apps sending to
     # it change as well.
     dogstatsd_port: 8125
 
@@ -298,7 +298,7 @@ the packets:
 #### Fields
 - Mandatory:
   - `title` — Event title.
-  - `text` — Event text. Supports line breaks.
+  - `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
 - Optional: `|[key]:[value]`
   - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
   - `|h:hostname` — default: None — Assign a hostname to the event.

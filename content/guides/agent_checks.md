@@ -394,7 +394,7 @@ errors that might arise.
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
-timeout = float(instance.get('timeout', default_time))
+timeout = float(instance.get('timeout', default_timeout))
 
 # Use a hash of the URL as an aggregation key
 aggregation_key = md5(url).hexdigest()

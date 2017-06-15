@@ -56,7 +56,7 @@ for that machine based on what was previously set up for that tag.
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
-* Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
+* Quickly visualize your entire environment regardless of whether it's 5, 500, or 50,000 hosts.
 * Identify outliers
 * Detect usage patterns
 * Optimize resources

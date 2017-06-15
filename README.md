@@ -4,57 +4,13 @@ Built with [nanoc](http://nanoc.stoneship.org/), a static website generation too
 
 # Setup
 
-Install Rbenv and Ruby 2.3.0:
+## Github personal token
 
-```
-brew install rbenv # or equivalent on linux (if you don't know about brew, go to http://brew.sh)
-rbenv install 2.3.0
-rbenv local 2.3.0
-```
+Integrations that have metrics will attempt to read the metrics metadata list from the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
 
-To configure this Ruby to take precedence over the system Ruby, add the following to your `~/.bash_profile` (or similar file for your shell):
+For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
 
-```
-eval "$(rbenv init -)"
-```
-
-Open a new shell or `source` your `~/.bash_profile` and install bundler:
-
-```
-gem install bundler
-```
-
-One dependency of the project - the `therubyracer` gem - requires a specific of the V8 Javascript engine. Install the correct V8 first and then install version `0.12.2` of `therubyracer`:
-
-```
-brew tap homebrew/versions
-brew install v8-315
-brew link --force v8-315
-gem install libv8 -- --with-system-v8
-gem install therubyracer -v '0.12.2'
-```
-
-Then, from the root of the project repo, install all the gems:
-
-```
-rbenv exec bundle install
-```
-
-As of OS X 10.11 (El Capitan), OpenSSL headers are no longer provided. You will need to install OpenSSL prior to running the bundle install.
-
-```
-brew install openssl
-brew link openssl --force
-```
-
-If you are running OS X 10.12 (Sierra), linking OpenSSL as detailed above will throw a warning and the bundle install will fail. To link the OpenSSL headers, run the following after setting the rbenv local version and prior to running the bundle install.
-
-```
-brew install openssl
-rbenv exec bundle config --local build.eventmachine --with-opt-dir=/usr/local/opt/openssl
-```
-
-Integrations that have metrics will require your Github Personal Token. For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). After you've generated a token, add the following line to the `.bash_profile` in your home directory:
+After you've generated a token, add the following line to the `.bash_profile` in your home directory:
 
 ```
 export github_personal_token=[paste access token here]
@@ -62,18 +18,64 @@ export github_personal_token=[paste access token here]
 
 You should then run `source ~/.bash_profile` to reload the settings.
 
-# Working on Docs
+## Running the Docker dev environment
+
+The Documentation build process is easily handled using the Docker container. First [install docker](https://store.docker.com/search?type=edition&offering=community) then run the following command from within the documentation folder.
 
 ```
+# From within the documentation folder:
+docker run -ti \
+  -v $PWD:/docs \
+  -p 3000:80 \
+  -e github_personal_token=$github_personal_token \
+  jyee/docker-dd-docs
+```
+
+The command above assumes you have set up your Github Personal Token as described earlier. If you are not a Datadog employee, simply omit the environment variable line and run:
+
+```
+# From within the documentation folder:
+docker run -ti \
+  -v $PWD:/docs \
+  -p 3000:80 \
+  jyee/docker-dd-docs
+```
+
+The container will run the rake process and create the documentation html files. Once the process completes, you can view the docs in any browser by visiting http://localhost:3000.
+
+You should edit the documentation files on your host machine and docker container will automatically regenerate files as it sees updates. If the container does not recognize your file changes, you may need to run the rake process manually (see below for more details).
+
+## Running commands in Docker
+
+Depending on your host environment, the Guard process may not receive file update triggers. If this happens, you can start the Docker container and get a command prompt by running:
+
+```
+# From within the documentation folder:
+docker run -ti \
+  -v $PWD:/docs \
+  -p 3000:80 \
+  -e github_personal_token=$github_personal_token \
+  jyee/docker-dd-docs \
+  /bin/sh
+
+# Once you reach the container command prompt,
+# Start the Nginx web server by running:
+nginx
+
+# Then run rake to clean and compile the documentation:
+rake clean && rake
+
+# Whenever you make add or update a file, recompile using:
 rake
 ```
 
-If you get an error, make sure you're running on the host.
+## Advanced setup
 
-Yeah, that's it. This command will compile the site, check
-for any bad links, and refresh your browser.
+If you cannot run the Docker container or you would otherwise like to setup the documentation development environment locally, please see the ADVANCED.md file fore more information.
 
-This site uses Kramdown. To learn about the syntax, [see this site][1].
+# Working on Docs
+
+This site uses Kramdown. To learn about the syntax, [see this site](http://kramdown.gettalong.org/quickref.html).
 
 If you include ANY Markdown in a file, give it an .md extension.
 
@@ -81,39 +83,13 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 # Releasing
 
-Before push/merging, make sure to
-
-```
-rake clean
-rake
-```
-
-and verify that there are no bad links on [http://localhost:3000](http://localhost:3000).
-
-If you've been working on code samples you should also
-
-```
-export TEST_DD_API_KEY=test_org_api_key
-export TEST_DD_APP_KEY=test_org_app_key
-rake clean
-rake test
-```
-
-These keys should be for a test account that does not include dozens of people. There are several samples that mute and unmute everything. Everyone in the org will be notified. If you are the only one in the org, you won't be getting angry emails from others asking you to stop muting everything.
-
-If you have a super slow connection, perhaps on the Amtrak or on a plane, use
-
-```
-rake slow
-```
-
-This command is the same as `rake` but will skip getting metrics from various repositories. Running rake on a train can take 500 seconds, but changing this to `rake slow` makes it less than a minute for a full compile.
+Before push/merging, make sure to restart the Docker container. This will ensure a full clean and rebuild. Next, verify that there are no bad links on [http://localhost:3000](http://localhost:3000).
 
 **If there are errors, please don't merge.**
 
 If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the Github personal access token information in the setup instructions above.
 
-Internal Datadog folks: Within 5 minutes of merging to master, it will deploy automatically. You can see the status in #documentation.
+Within 5 minutes of merging to master, it will deploy automatically. You can see the status in the internal Datadog Slack #documentation channel.
 
 # How to add a new integration
 
@@ -137,7 +113,7 @@ Every integration should have the following format:
 ### Overview
 **Absolutely Required.**
 
-The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible. 
+The first thing in the Overview should be a representative image for the integration. Try to make it as interesting as possible.
 
 The overview section is required and should be a paragraph or two with some bullets of what is interesting about this integration. For example, the following comes from the Docker integration.
 
@@ -163,7 +139,7 @@ At the end of the configuration section include a link to the example configurat
 
 #### Configuration Options
 
-Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for. 
+Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for.
 
 ### Validation
 **Required**
@@ -210,4 +186,3 @@ Create a markdown file under content/guides. Add the following front matter at t
 Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
 
-[1]: http://kramdown.gettalong.org/quickref.html

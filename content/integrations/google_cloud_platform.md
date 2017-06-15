@@ -35,13 +35,25 @@ Related integrations include:
 
 From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
 
+We require the user who configures the integration to have the permissions:  
+
+~~~
+https://www.googleapis.com/auth/compute.readonly
+https://www.googleapis.com/auth/monitoring.read
+~~~
+
+[Billing must also be enbled for the account(s) you wish to monitor.][1]
+
+
 Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the "Limit Metric Collection" textbox. Only hosts that match one of the defined tags will be imported into Datadog. Wildcards, such as '?' (for single characters) and '*' (for multiple characters) can also be used. Host matching a given tag can also be excluded by adding '!' before the tag.
 
 ~~~
-e.x. datadog:monitored,env:production,instance-type:c1.*
+e.x. datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ~~~
 
 ![settings](/static/images/GCPSetup.png)
+
+**NOTE: `gcp.loadbalancing.*` metrics are available as part of a Google specifc Beta. To see these metrics in Datadog, please contact your Google representative/support and ask to join the Stackdriver Loadbalancing metrics Beta.**
 
 ### Metrics
 
@@ -62,3 +74,5 @@ Tags are automatically assigned based on a variety of configuration options with
 * Name
 
 To learn more about tags in the Datadog platform, refer to the [Guide to Tagging](/guides/tagging)
+
+[1]: https://support.google.com/cloud/answer/6293499?hl=en

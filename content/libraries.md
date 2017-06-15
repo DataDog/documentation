@@ -1,60 +1,6 @@
 ---
 title: Libraries
 kind: documentation
-sidebar:
-  nav:
-    - header: Official Libraries
-    - text: Python
-      href: "#python"
-    - text: PHP
-      href: "#php"
-    - text: Ruby
-      href: "#ruby"
-    - text: JAVA
-      href: "#java"
-    - text: Go
-      href: "#go"
-    - text: C#
-      href: "#c-sharp"
-    - header: Community Libraries
-    - text: C#
-      href: "#community-c-sharp"
-    - text: Elixir
-      href: "#community-elixir"
-    - text: Go
-      href: "#community-go"
-    - text: Java
-      href: "#community-java"
-    - text: Node.js
-      href: "#community-node"
-    - text: Perl
-      href: "#community-perl"
-    - text: PHP
-      href: "#community-php"
-    - text: Python
-      href: "#community-python"
-    - text: Ruby
-      href: "#community-ruby"
-    - text: Scala
-      href: "#community-scala"
-    - text: R
-      href: "#community-r"
-    - header: Community Integration Libraries
-    - text: Ansible
-      href: "#community-integration-ansible"
-    - text: FreeSwitch
-      href: "#community-integration-freeswitch"
-    - text: Google Analytics
-      href: "#community-integration-google-analytics"
-    - text: NGINX LUA
-      href: "#community-integration-nginx-lua"
-    - text: Pid-stats
-      href: "#community-integration-pid-stats"
-    - text: Saltstack
-      href: "#community-integration-saltstack"
-    - text: Logstash Output
-      href: "#community-integration-logstash"
-
 ---
 
 There are many libraries available to help you interact with the Datadog API.
@@ -161,6 +107,7 @@ Some great folks have written their own libraries to help interact with Datadog.
 #### R
 {: #community-r}
 
+  * [datadogr][98] - a simple R package to query for metrics.
   * [rdog][68] - an R package to analyze Datadog metrics into R.
 
 #### Scala
@@ -168,12 +115,56 @@ Some great folks have written their own libraries to help interact with Datadog.
 
   * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
 
+### Community Tracing (APM) Libraries
+
+#### C\#
+{: #community-tracing-csharp}
+
+  * [DatadogSharp][89] - A C# Datadog client that supports DogStatsD and APM.
+
+#### Elixir
+{: #community-tracing-elixir}
+
+  * [spandex][90] - A Datadog APM reporting library.
+
+#### Java
+{: #community-tracing-java}
+
+  * [apm-client][91] - A Java client for Datadog APM.
+
+#### OpenTracing
+{: #community-tracing-opentracing}
+
+  * [datadog-tracer-js][92] - OpenTracing tracer implementation for Datadog in JavaScript.
+
+  * [dd-go-opentracing][93] - OpenTracing tracer implementation for Datadog in Go.
+
+#### PHP
+{: #community-tracing-php}
+
+  * [dd-trace-php][94] - A PHP tracing implementation for Datadog.
+
+#### Zipkin
+{: #community-tracing-zipkin}
+
+  * [dd-zipkin-proxy][95] - A simple Zipkin-to-Datadog proxy.
+
 ### Community Integration Libraries
 
 #### Ansible
 {: #community-integration-ansible}
 
   * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
+
+#### Consul
+{: #community-integration-consul}
+
+  * Publish consul service counts into Datadog via dogstatsd with [this library][96].
+
+#### Dogscaler
+{: #community-integration-dogscaler}
+
+  * Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
 {: #community-integration-freeswitch}
@@ -302,3 +293,13 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [86]: https://github.com/miketheman/statsd.cr
    [87]: https://github.com/miketheman
    [88]: https://github.com/brigade/logstash-output-dogstatsd
+   [89]: https://github.com/neuecc/DatadogSharp
+   [90]: https://github.com/albert-io/spandex
+   [91]: https://github.com/chonton/apm-client
+   [92]: https://github.com/rochdev/datadog-tracer-js
+   [93]: https://github.com/gchaincl/dd-go-opentracing
+   [94]: https://github.com/jcchavezs/dd-trace-php/tree/master/src/DdTrace
+   [95]: https://github.com/flachnetz/dd-zipkin-proxy
+   [96]: https://github.com/zendesk/consul2dogstats
+   [97]: https://github.com/cvent/dogscaler
+   [98]: https://cran.r-project.org/package=datadogr

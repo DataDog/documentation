@@ -189,38 +189,6 @@ or if you're looking to display all errors:
       }
     ]
 
-
-### Aliasing
-{: #alias}
-
-Some long metric expressions are unwieldily and don't fit in the timeseries legend, inspector, or cursor label.
-
-Long metric expressions with the same prefix are undistinguishable in the legend:
-
-![screen shot 2016-04-12 at 3 12 09 pm](https://cloud.githubusercontent.com/assets/2548712/14472397/0a6d3f68-00c1-11e6-8b38-1c2d38265e75.png)
-
-Long metric expressions can be too long to render on cursor hover:
-
-![screen shot 2016-04-12 at 3 16 47 pm](https://cloud.githubusercontent.com/assets/2548712/14472546/9e093542-00c1-11e6-8ede-83357c98cb31.png)
-
-To choose a more suitable metric name for display, you can define an alias:
-
-    "requests": [
-      {
-        "q": "avg:system.load.1{*}",
-        "type": "line",
-        "conditional_formats": [],
-        "aggregator": "avg",
-        "alias": "Your metric"
-      }
-      {
-        "q": "avg:system.cpu.user{*}",
-        "type": "line",
-        "alias": "Your second metric"
-    ]
-
-Note that you can only define one alias per JSON expression, though you can define several for a given graph.
-
 ### Visualization
 {: #viz}
 
