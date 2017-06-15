@@ -2,9 +2,9 @@ title: "Docs"
 baseURL: "http://localhost:1313/"
 
 # language
-languageCode: "en-us"
+#defaultContentLanguage: "en"
 defaultcontentlanguageinsubdir: false
-defaultcontentlanguage: "en"
+
 pygmentsuseclasses: true
 
 taxonomies:
@@ -12,9 +12,11 @@ taxonomies:
   video: "videos"
   example: "examples"
 
-languages:
+Languages:
   en:
-    weight: 1
+    languageName: "English"
+    languageCode: "en-US"
+    weight: 0
     menu:
       main_references:
         - identifier: menu_references_api
@@ -117,7 +119,8 @@ languages:
           weight: 100
 
   ja:
-    weight: 2
+    languagename: "日本語"
+    weight: 1
     menu:
       main_references:
         - identifier: menu_references_api
