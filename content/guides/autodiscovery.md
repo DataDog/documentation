@@ -4,19 +4,17 @@ kind: guide
 listorder: 10
 ---
 
+<div class="alert alert-info">
+Originally, the Autodiscovery feature was called Service Discovery: just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to service discovery, it solves a more specific problem. The feature name was changed to discourage undue comparisons to Consul, etcd, and other general service discovery tools.<br/><br/>Autodiscovery is still sometimes called Service Discovery throughout the Agent's code and in configuration options.
+</div>
+
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
 The Datadog Agent automatically keeps track of what services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
-<should the following be a note/footnote?>
-
-Originally, the Autodiscovery feature was called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to general service discovery, it solves a more specific problem, so the feature name was changed to discourage undue comparisons to Consul, etcd, and other service discovery tools.
-
-Autodiscovery is still known as Service Discovery throughout the Agent's code and in configuration options.
-
 # How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is static, like the environment in which it runs. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously applies every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service. <more elaboration?>
+In a traditional non-container environment, Datadog Agent configuration is, like the environment in which it runs, static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously applies every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service. <more elaboration?>
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -32,7 +30,7 @@ Finally, Autodiscovery can load check templates from places other than disk. Oth
 
 When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it must decide which checks to enable given the containers that are currently running.
 
-As the Agent inspects each template, it creates a mapping of service identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the identifier keys in the identifier-to-template mapping. For each match, the Agent creates a static check configuration by substituting the matching container's IP address and port into the corresponding template, and enables the check. Any time it finds another instance of the same kind of container—whether it's an additional container or the previous one redeployed—it will build and enable another configuration.
+As the Agent inspects each template and its service identifiers, it creates a mapping of service identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the identifier keys in the identifier-to-template mapping. For each match, the Agent creates a static check configuration by substituting the matching container's IP address and port into the corresponding template, and enables the check. Any time it finds another instance of the same kind of container—whether it's an additional container or the previous one redeployed—it will build and enable another configuration.
 
 The Agent watches for Docker events—container creation, destruction, starts, and stops—and recomputes check configurations from the templates on such events.
 
