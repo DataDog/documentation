@@ -8,7 +8,7 @@ stages:
 
 variables:
   # images used for build, test, deploy
-  BUILD_IMAGE: "727006795293.dkr.ecr.us-east-1.amazonaws.com/documentation:latest"
+  BUILD_IMAGE: "727006795293.dkr.ecr.us-east-1.amazonaws.com/documentation"
   # hugo configs, used to direct building the site
   PREVIEW_CONFIG: "config/preview.yaml"
   # s3 deploy destinations
