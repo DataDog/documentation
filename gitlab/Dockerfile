@@ -16,8 +16,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt && \
 
 # gulp
 RUN npm install --global --production gulp-cli && \
-	npm install --global bower && \
-    npm install && bower install
+    npm install
 
 # install hugo
 ENV HUGO_VERSION 0.19
