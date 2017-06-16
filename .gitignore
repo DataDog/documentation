@@ -1,12 +1,6 @@
 # Hugo
 public/
 
-# bower
-bower_components/
-
-# Terraform
-.terraform/
-
 # Logs
 logs
 *.log
@@ -23,12 +17,6 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
-
-# nyc test coverage
-.nyc_output
-
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
 
 # node-waf configuration
 .lock-wscript
@@ -80,10 +68,3 @@ Temporary Items
 # local dev
 *.js.map
 *.css.map
-blog-dd*
-blog-lib-dd*
-main-dd*
-main-lib-dd*
-icons-dd*
-static/**/jquery*
-static/**/createjs*
