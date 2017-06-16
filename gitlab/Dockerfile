@@ -16,7 +16,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt && \
 
 # gulp
 RUN npm install --global --production gulp-cli && \
-	npm install --global --production bower && \
+	npm install --global bower && \
     npm install
 
 # install hugo
