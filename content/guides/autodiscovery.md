@@ -72,7 +72,7 @@ In any case, you only need to provide one environment variable to enable Autodis
 
 ## Setting up Check Templates
 
-### In Files (Auto-conf)
+### Template Source: Files (Auto-conf)
 
 The Agent loads any template files in its `conf.d/auto_conf` directory. The docker-dd-agent container comes pre-packaged with several templates:
 
@@ -104,7 +104,7 @@ instances:
 
 It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide one or more service identifiers to Autodiscovery. In this case, the identifier refers to the [official Docker Hub httpd](https://hub.docker.com/_/httpd/) container. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
-### In a Key-value Store
+### Template Source: Key-value Store
 
 Autodiscovery supports Consul, etcd, and Zookeeper as template sources. To use a KV store, configure its parameters in `datadog.conf` or in environment variables passed to docker-dd-agent when starting the container.
 
@@ -172,7 +172,7 @@ Autodiscovery expects a key-value hierarchy like the following:
     ...
 ~~~
 
-Each template is defined as a three-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section is not required here; service identifiers appear as first-level keys under `check_config`. The file-based template in the previous section didn't need a check name; the Agent infers it from the filename.
+Each template is defined as a three-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section is not required here; service identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name; the Agent infers it from the filename.)
 
 The following etcd commands create an Apache check template equivalent to that from the previous section:
 
@@ -195,7 +195,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Again, the list order matters. The HTTP check will only work if all its elements have the same index (1) across the lists.
 
-### In Kubernetes Pod Annotations
+### Template Source: Kubernetes Pod Annotations
 
 Since version 5.12 of the Datadog Agent, you can store check templates in Kubernetes pod annotations. Autodiscovery detects if the Agent is running on Kubernetes and searches all pod annotations for templates if so; you don't have to configure it as a template source as you do with key-value stores.
 
@@ -237,7 +237,7 @@ spec:
 
 # Reference
 
-### Template Variable Indexing
+### Template Variable Indexes
 
 For containers that have many IP addresses or listens on many ports, you can tell Autodiscovery which ones to choose by appending an underscore to the template variable, followed by an index, e.g. `%%host_0%%`, `%%port_4%%`. After inspecting the container, Autodiscovery sorts the IPs and ports **numerically and in ascending order**. For a container that listens on ports 80, 443, and 8443, `%%port_0%%` refers to port 80. Unindexed template variables refer to the last item in the sorted list, so in this case, `%%port%%` means port 8443.
 
