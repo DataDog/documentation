@@ -6,9 +6,9 @@ listorder: 10
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent automatically keeps track of what services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recomputes check configurations as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
+The Datadog Agent automatically keeps track of what services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
-(should the following be a note/footnote?)
+<should the following be a note/footnote?>
 
 Originally, the Autodiscovery feature was called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to general service discovery, it solves a more specific problem, so the feature name was changed to discourage undue comparisons to Consul, etcd, and other service discovery tools.
 
@@ -16,15 +16,15 @@ Autodiscovery is still known as Service Discovery throughout the Agent's code an
 
 # How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is static, like the environment in which it runs. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously applies every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service. <sentence about what if static service goes down? wait for it to come back up>
+In a traditional non-container environment, Datadog Agent configuration is static, like the environment in which it runs. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously applies every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service. <more elaboration?>
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
 ### The Differences
 
-First, Autodiscovery uses **templates** for check configuration, wherein two [template variables](link to below)—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values, e.g. `expvar_url: http://%%host%%:%%port%%`. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static files are not suitable for checks that need to find network endpoints.
+First, Autodiscovery uses **templates** for check configuration wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values, e.g. `expvar_url: http://%%host%%:%%port%%`. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static files are not suitable for checks that need to find network endpoints. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one using [template variable indexes](#template-variable-indexes).
 
-Second, because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs a [**service identifier**](link to below) for each template so it can find values for the template variables. For Docker, this means identifying the container(s) whose IP(s) and port(s) should be substituted into the template. Autodiscovery can identify Docker containers by image name or label.
+Second, because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs a **service identifier** for each template so it can find values for the template variables. For Docker, this means identifying the container(s) whose IP(s) and port(s) should be substituted into the template. Autodiscovery can identify Docker containers by [image name or label](#service-identifiers).
 
 Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value (KV) stores like Consul, and, when running on Kubernetes, pod annotations.
 
@@ -44,7 +44,7 @@ There are a few caveats:
 
 ---
 
-The next section clarifies this abstract description of Autodiscovery with plenty of examples.
+The next section clarifies this abstract description of Autodiscovery with some examples.
 
 # How to set it up
 
@@ -241,7 +241,7 @@ spec:
 
 For containers that have many IP addresses or listens on many ports, you can tell Autodiscovery which ones to choose by appending an underscore to the template variable, followed by an index, e.g. `%%host_0%%`, `%%port_4%%`. After inspecting the container, Autodiscovery sorts the IPs and ports **numerically and in ascending order**. For a container that listens on ports 80, 443, and 8443, `%%port_0%%` refers to port 80. Unindexed template variables refer to the last item in the sorted list, so in this case, `%%port%%` means port 8443.
 
-You can also add a network name suffix to the `%%host%%` variable—`%%host_bridge%%`, `%%host_swarm%%`, etc—for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the `bridge` IP address.
+You can also add a network name suffix to the `%%host%%` variable—`%%host_bridge%%`, `%%host_swarm%%`, etc—for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the container's bridge network IP address.
 
 ### Service Identifiers
 
