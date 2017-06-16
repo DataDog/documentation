@@ -10,7 +10,7 @@ The Datadog Agent automatically keeps track of what services are running where, 
 
 (should the following be a note/footnote?)
 
-Originally, the Autodiscovery feature was called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to general service discovery, it solves a more specific problem, so the feature name was changed to prevent undue comparisons to Consul, etcd, and other service discovery tools.
+Originally, the Autodiscovery feature was called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to general service discovery, it solves a more specific problem, so the feature name was changed to discourage undue comparisons to Consul, etcd, and other service discovery tools.
 
 Autodiscovery is still known as Service Discovery throughout the Agent's code and in configuration options.
 
@@ -208,9 +208,9 @@ annotations:
   service-discovery.datadoghq.com/<Kubernetes Container Name>.instances: '[<INSTANCE_CONFIG>]'
 ~~~
 
-It's very similar to the template format for key-value stores. The beginning indicator for a template here is `service-discovery.datadoghq.com` (for key-value stores it was `/datadog/check_configs`). Kubernetes container names function as the service identifiers.
+It's very similar to the template format for key-value stores. Autodiscovery looks for annotation keys beginning with `service-discovery.datadoghq.com/`. Kubernetes container names function as the service identifiers.
 
-The following pod annotation defines two templates equivalent to those from the end of the previous section:
+The following pod annotation defines two templates—equivalent to those from the end of the previous section—for `apache` containers:
 
 ~~~
 apiVersion: v1
