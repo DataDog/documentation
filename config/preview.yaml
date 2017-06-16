@@ -1,10 +1,6 @@
 ---
-baseurl: https://corpsite-preview.datadoghq.com/
+baseurl: d2cx6t4ssmwdrv.cloudfront.net/
 buildfuture: true
 builddrafts: true
 params:
-  footer_scripts:
-    - snowplow: false
-    - tagmanager: true
-    - mixpanel: false
   environment: preview

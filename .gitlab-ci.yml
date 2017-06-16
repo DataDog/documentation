@@ -15,7 +15,7 @@ variables:
   PREVIEW_BUCKET: "datadog-docs-preview"
   STATIC_BUCKET: "origin-static-assets"
   # domains
-  PREVIEW_DOMAIN: "https://corpsite-preview.datadoghq.com/"
+  PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net"
   STATIC_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/"
   IMAGE_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/img/"
   # webhooks

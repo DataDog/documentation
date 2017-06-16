@@ -2,16 +2,16 @@ title: "Docs"
 baseURL: "http://localhost:1313/"
 metadataformat: "yaml"
 
-# language
-defaultContentLanguage: "en"
-defaultContentLanguageInSubdir: false
-
 pygmentsuseclasses: true
 
 taxonomies:
   tag: "tags"
   video: "videos"
   example: "examples"
+
+# language
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
 
 languages:
   en:
@@ -174,10 +174,6 @@ languages:
           weight: 120
   fr:
     weight: 2
-
-# build settings
-# buildfuture: true
-# builddrafts: true
 
 params:
   img_url: "http://localhost:1313/"
