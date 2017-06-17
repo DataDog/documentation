@@ -108,7 +108,7 @@ Autodiscovery supports Consul, etcd, and Zookeeper as template sources. To use a
 
 #### Configure in `datadog.conf`
 
-In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the KV type—`etcd`, `consul`, or `zookeeper`—and the IP address and port where your KV store is listening:
+In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the backend type—`etcd`, `consul`, or `zookeeper`—and the IP address and port where your KV store is listening:
 
 ~~~
 # For now only Docker is supported so you just need to un-comment this line.
@@ -156,9 +156,7 @@ docker service create \
 
 ---
 
-With the KV store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`.
-
-Autodiscovery expects a key-value hierarchy like the following: 
+With the KV store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like the following: 
 
 ~~~
 /datadog/
@@ -170,7 +168,7 @@ Autodiscovery expects a key-value hierarchy like the following:
     ...
 ~~~
 
-Each template is defined as a three-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section is not required here; service identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name; the Agent infers it from the filename.)
+Each template is defined as a three-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which was used to provide service identifiers to Autodiscovery, is not required here; for KV store template sources, service identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name; the Agent infers it from the filename.)
 
 The following etcd commands create an Apache check template equivalent to that from the previous section:
 
@@ -191,7 +189,7 @@ etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
 ~~~
 
-Again, the list order matters. The HTTP check will only work if all its elements have the same index (1) across the lists (they do).
+Again, the list orders matter. The HTTP check will only work if all its elements have the same index (1) across the lists (they do).
 
 ### Template Source: Kubernetes Pod Annotations
 
