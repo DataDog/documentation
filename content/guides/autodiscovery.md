@@ -108,7 +108,7 @@ Autodiscovery supports Consul, etcd, and Zookeeper as template sources. To use a
 
 #### Configure in `datadog.conf`
 
-In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the KV type—`etcd`, `consul`, or `zookeeper`—and the location of your KV store:
+In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the KV type—`etcd`, `consul`, or `zookeeper`—and the IP address and port where your KV store is listening:
 
 ~~~
 # For now only Docker is supported so you just need to un-comment this line.
