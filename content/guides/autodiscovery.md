@@ -5,7 +5,7 @@ listorder: 10
 ---
 
 <div class="alert alert-info">
-Originally, the Autodiscovery feature was called Service Discovery: just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to service discovery, it solves a more specific problem. The feature name was changed to discourage undue comparisons to Consul, etcd, and other general service discovery tools.<br/><br/>Autodiscovery is still sometimes called Service Discovery throughout the Agent's code and in configuration options.
+Autodiscovery was previously called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to service discovery, it solves a more specific problem. The feature name was changed to discourage undue comparisons to Consul, etcd, and other general service discovery tools.<br/><br/>Autodiscovery is still sometimes called Service Discovery throughout the Agent's code and in configuration options.
 </div>
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
