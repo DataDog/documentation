@@ -18,7 +18,7 @@ In a traditional non-container environment, Datadog Agent configuration is, like
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
-### The Differences
+### Different Configuration
 
 First, Autodiscovery uses **templates** for check configuration wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static files are not suitable for checks that need to find network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
 
@@ -26,7 +26,7 @@ Second, because templates don't identify specific instances of a monitored servi
 
 Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value (KV) stores like Consul, and, when running on Kubernetes, pod annotations.
 
-### The Algorithm
+### Different Execution
 
 When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it must decide which checks to enable given the containers that are currently running.
 
