@@ -20,25 +20,25 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-First, Autodiscovery uses **templates** for check configuration wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static files are not suitable for checks that need to find network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
+First, Autodiscovery uses **templates** for check configuration wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static files are not suitable for checks that collect data from network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
 
-Second, because templates don't identify specific instances of a monitored service—which host? which port?—Autodiscovery needs a **service identifier** for each template so it can find values for the template variables. For Docker, this means identifying the container(s) whose IP(s) and port(s) should be substituted into the template. Autodiscovery can identify Docker containers by [image name or label](#service-identifiers).
+Second, because templates don't identify specific instances of a monitored service—which host? which port?—Autodiscovery needs a **service identifier** for each template so it can find real values for the template variables. For Docker, this means identifying the container(s) whose IP(s) and port(s) should be substituted into the template. Autodiscovery can identify Docker containers by [image name or label](#service-identifiers).
 
 Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value (KV) stores like Consul, and, when running on Kubernetes, pod annotations.
 
 ### Different Execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it must decide which checks to enable given the containers that are currently running.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it decides which checks to enable given the containers that are currently running.
 
-As the Agent inspects each template and its service identifiers, it creates a mapping of service identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the identifier keys in the identifier-to-template mapping. For each match, the Agent creates a static check configuration by substituting the matching container's IP address and port into the corresponding template, and enables the check. Any time it finds another instance of the same kind of container—whether it's an additional container or the previous one redeployed—it will build and enable another configuration.
+As the Agent inspects each template and its service identifiers, it builds a mapping of service identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the service identifiers (keys) in the identifier-to-template mapping. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port into the corresponding template. Then it enables the check.
 
-The Agent watches for Docker events—container creation, destruction, starts, and stops—and recomputes check configurations from the templates on such events.
+The Agent watches for Docker events—container creation, destruction, starts, and stops—and recomputes check configurations from the templates on such events. Any time Autodiscovery finds another instance of the some service it had previously generated configuration for—whether it's an additional container or the previous one redeployed—it builds and enables another static configuration.
 
 There are a few caveats:
 
-* The Agent caches templates it gets from KV stores. Changes to KV store templates require a restart of the Agent.
-* <something about precedence of templates when multiple sources provided>
-* ???
+- The Agent caches templates it gets from KV stores. Changes to KV store templates require a restart of the Agent.
+- something about precedence of templates when multiple sources provided?
+- others?
 
 ---
 
