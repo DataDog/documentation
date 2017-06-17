@@ -137,7 +137,7 @@ Restart the Agent to effect the configuration change.
 
 #### Configure in environment variables
 
-If you prefer to use environment variables, pass the options to the container when starting it::
+If you prefer to use environment variables, pass the options to the container when starting it:
 
 ~~~
 docker service create \
