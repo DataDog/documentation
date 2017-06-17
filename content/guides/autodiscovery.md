@@ -10,7 +10,7 @@ Originally, the Autodiscovery feature was called Service Discovery: just as tool
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent automatically keeps track of what services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 # How it Works
 
@@ -20,7 +20,7 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-First, Autodiscovery uses **templates** for check configuration, wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) your containers on arbitrary hosts, static configuration files are not suitable for checks that collect data from network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
+First, Autodiscovery uses **templates** for check configuration, wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) containers on arbitrary hosts, static configuration files are not suitable for checks that collect data from network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
 
 Second, because templates don't identify specific instances of a monitored service—which host? which port?—Autodiscovery needs one or more **service identifiers** for each template so it can find real values for the template variables. For Docker, service identifiers are [image names or container labels](#service-identifiers). With identifiers in hand, Autodiscovery can figure out which IP(s) and port(s) to substitute into the template.
 
@@ -131,13 +131,13 @@ sd_backend_port: 4001
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 ~~~
 
-If you are using Consul and it requires token authentication, set `consul_token`.
+If you are using Consul and the Consul cluster requires token authentication, set `consul_token`.
 
 Restart the Agent to effect the configuration change.
 
 #### Configure in environment variables
 
-If you prefer to use environment variables, pass the options to the container when starting it:
+If you prefer to use environment variables, pass the same options to the container when starting it:
 
 ~~~
 docker service create \
@@ -191,7 +191,7 @@ etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
 ~~~
 
-Again, the list order matters. The HTTP check will only work if all its elements have the same index (1) across the lists.
+Again, the list order matters. The HTTP check will only work if all its elements have the same index (1) across the lists (they do).
 
 ### Template Source: Kubernetes Pod Annotations
 
