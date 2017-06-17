@@ -31,10 +31,10 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You c
 
 ~~~
 # BOSH CLI v1
-bosh upload release 
+bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 
 # BOSH CLI v2
-bosh upload-release 
+bosh upload-release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ~~~
 
 If you'd like to create your own release, see the [Datadog Agent BOSH Release repository](https://github.com/DataDog/datadog-agent-boshrelease).
@@ -119,7 +119,7 @@ The easiest way to check that Agent installs were successful is to filter for th
 
 ![cloud-foundry-host-map](/static/images/cloud-foundry-host-map.png)
 
-Click on any host to zoom in, then click 'system' within its hexagon to make sure Datadog is receiving metrics for it:
+Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
 ![cloud-foundry-host-map-detail](/static/images/cloud-foundry-host-map-detail.png)
 
