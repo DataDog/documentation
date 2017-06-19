@@ -1,7 +1,7 @@
 ---
 title: Guide to Dashboard Templating
 kind: guide
-listorder: 13
+listorder: 18
 sidebar:
   nav:
     - header: Guide to Templating

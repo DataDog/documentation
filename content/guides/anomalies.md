@@ -1,7 +1,7 @@
 ---
 title: Anomaly Detection
 kind: guide
-listorder: 16
+listorder: 22
 beta: false
 ---
 

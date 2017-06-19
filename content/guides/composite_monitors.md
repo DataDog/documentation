@@ -1,7 +1,7 @@
 ---
 title: Guide to Composite Monitors
 kind: guide
-listorder: 9
+listorder: 14
 ---
 
 ***If you're unfamiliar with the basics of Datadog Monitors, first read the [Guide to Monitors](/guides/monitors)***

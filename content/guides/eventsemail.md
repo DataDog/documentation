@@ -1,7 +1,7 @@
 ---
 title: Events via Email
 kind: guide
-listorder: 15
+listorder: 20
 sidebar:
   nav:
     - header: Events via Email guide
