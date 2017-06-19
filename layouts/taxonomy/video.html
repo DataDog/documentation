@@ -7,19 +7,23 @@
       {{ partial "sidebar.html" . }}
     </div>
     <div class="col-xs-12 col-sm-9 col-md-9 main">
-      <h1 id="pagetitle">{{ .Title }}</h1>
-      <p>At Datadog, we want to make sure you have all the tools you need to use and understand our products. Some people learn better with text, some with pictures, some with video, and some prefer a mixture of everything. In this section we present the videos we have created. If there is a video you think we need to produce to help solve a common problem, suggest it via a <a href="http://help.datadoghq.com">support ticket</a> or reach out on to us on Twitter via <a href="http://twitter.com/datadoghq">@datadoghq</a>.</p>
-      <p>The videos are organized by keyword. Click on any of the keywords below to find a relevant video.</p>
+      <h1 id="pagetitle">{{ .Title | humanize }}</h1>
 
-      <section>
-        {{ .Kind }}
-
-        {{ .Type }}
-
-
-        test layouts/taxonomy/video.html
-
-        {{ .Data }}
+      <section id="main">
+        <div>
+          {{ range (sort .Data.Pages "BaseFileName") }}
+              <h1>{{ .Title }}</h1>
+              <p>{{ .Params.summary }}</p>
+              {{ partial "video" .Params.wistiaid }}
+              <br>
+              This video can be found in these groups:<br>
+              {{ $videos := .Params.videos }}
+              {{ range $i, $el := $videos }}
+                <a href="/videos/{{ $el | urlize }}/">{{ $el | lower }}</a>{{ if lt (add $i 1) ($videos | len)}} | {{ end }}
+              {{ end }}
+              <p>&nbsp;</p>
+          {{ end }}
+        </div>
       </section>
 
     </div>

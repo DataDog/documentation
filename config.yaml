@@ -4,10 +4,12 @@ metadataformat: "yaml"
 
 pygmentsuseclasses: true
 
+# taxonomies
 taxonomies:
   tag: "tags"
   video: "videos"
   example: "examples"
+preserveTaxonomyNames: true
 
 # language
 defaultContentLanguage: "en"
