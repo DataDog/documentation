@@ -227,7 +227,7 @@ For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/l
 ## EFS
 
 * `elasticfilesystem:DescribeTags`: Gets custom tags applied to file systems
-* `elasticfilesystem:DescribeFileSystems`: Provides us a list of active file systems
+* `elasticfilesystem:DescribeFileSystems`: Provides a list of active file systems
 
 For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html), review the documentation on the AWS website.
 
