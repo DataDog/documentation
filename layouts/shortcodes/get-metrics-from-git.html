@@ -20,25 +20,29 @@
 
 {{ $name_space := (index $params 1) }}
 
-<table class="table">
-  <tbody>
-  {{ range $k, $v := (index $data $metrics) }}
+  {{ if $metrics }}
 
-    {{ if (in $v.metric_name $name_space) }}
+  <table class="table">
+    <tbody>
+    {{ range $k, $v := (index $data $metrics) }}
 
-      <tr>
-        <td>
-        <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-        <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-        </td>
-      </tr>
+      {{ if (in $v.metric_name $name_space) }}
+
+        <tr>
+          <td>
+          <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+          <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+          </td>
+        </tr>
+
+      {{ end }}
+
 
     {{ end }}
-
+    </tbody>
+  </table>
 
   {{ end }}
-  </tbody>
-</table>
 
 {{ else }}
 
