@@ -9,7 +9,7 @@ Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). P
 The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 <div class="alert alert-info">
-Autodiscovery was previously called Service Discovery.
+Autodiscovery was previously called Service Discovery. It is still known as Service Discovery in the Agent's code and in configuration options.
 </div>
 
 # How it Works
