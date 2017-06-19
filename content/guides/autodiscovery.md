@@ -4,13 +4,13 @@ kind: guide
 listorder: 10
 ---
 
-<div class="alert alert-info">
-Autodiscovery was previously called Service Discovery. Just as tools like Consul and etcd help services discover each others network locations, Autodiscovery helps the Datadog Agent discover its monitored services' locations. But while Autodiscovery is analagous to service discovery, it solves a more specific problem. The feature name was changed to discourage undue comparisons to Consul, etcd, and other general service discovery tools.<br/><br/>Autodiscovery is still sometimes called Service Discovery throughout the Agent's code and in configuration options.
-</div>
-
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
 The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
+
+<div class="alert alert-info">
+Autodiscovery was previously called Service Discovery.
+</div>
 
 # How it Works
 
