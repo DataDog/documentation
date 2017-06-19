@@ -1,7 +1,7 @@
 ---
 title: Outlier Detection
 kind: guide
-listorder: 16
+listorder: 23
 sidebar:
   nav:
     - header: Outlier Detection

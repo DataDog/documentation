@@ -5,7 +5,7 @@ language: ja
 title: Matt's Quick Tips - ダッシュボードの変更を禁止
 kind: video
 wistiaid: e3xlxsjkwy
-tags:
+videos:
     - Introduction
     - Dashboards
     - Permissions

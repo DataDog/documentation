@@ -4,7 +4,6 @@ translation_status: tentative
 language: ja
 title: グラフ表示入門
 kind: guide
-listorder: 4
 ---
 <!--
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphingjson)

@@ -1,0 +1,14 @@
+bash
+curl
+gcc
+git
+lftp
+libffi-dev
+musl-dev
+openssl-dev
+py-pip
+python
+python-dev
+sshpass
+python3
+python3-dev

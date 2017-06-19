@@ -5,7 +5,7 @@ language: ja
 title: Host Map 入門
 kind: video
 wistiaid: 6m4805jr9t
-tags:
+videos:
     - Introduction
     - Host Map
 summary: Learn the basics of the host map.

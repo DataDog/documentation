@@ -3,7 +3,7 @@ title: Datadog 101 - Aggregation
 kind: video
 language: en
 wistiaid: x9ljpqfu3m
-tags:
+videos:
     - Datadog 101
 summary: Understanding how and why we aggregate your data
 ---

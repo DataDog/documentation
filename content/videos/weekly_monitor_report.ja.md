@@ -5,7 +5,7 @@ language: ja
 title: Matt's Quick Tips - 週刊監視レポートの概要
 kind: video
 wistiaid: kzcivp7n6k
-tags:
+videos:
     - Introduction
     - Datadog Emails
     - Monitors

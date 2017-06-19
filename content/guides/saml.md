@@ -1,7 +1,7 @@
 ---
 title: Single Sign On With SAML
 kind: guide
-listorder: 14
+listorder: 19
 
 ---
 This guide assumes that you already have a SAML Identity Provider up and running.
