@@ -69,6 +69,19 @@ This [library][51] will allow you to generate process information from StatsD, g
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
 
+### Community Agent Ports
+
+#### FreeBSD
+{: #community-agent-ports-freebsd}
+
+  * [FreeBSD dd-agent port][99]
+
+#### NixOS
+{: #community-agent-ports-nixos}
+
+  * [dd-agent nixpkg][100]
+
+
 If you've written a Datadog library and would like to add it to this page, write us at [code@datadoghq.com][9].
 
    [1]: https://github.com/DataDog/datadogpy
@@ -167,3 +180,5 @@ If you've written a Datadog library and would like to add it to this page, write
    [96]: https://github.com/zendesk/consul2dogstats
    [97]: https://github.com/cvent/dogscaler
    [98]: https://cran.r-project.org/package=datadogr
+   [99]: https://github.com/urosgruber/dd-agent-FreeBSD
+   [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
