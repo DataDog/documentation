@@ -1,0 +1,7 @@
+system:
+  - metric_name: ntp.offset
+    metric_type: gauge
+  - metric_name: system.processes.mem.pct
+    metric_type: gauge
+  - metric_name: system.processes.cpu.pct
+    metric_type: gauge
