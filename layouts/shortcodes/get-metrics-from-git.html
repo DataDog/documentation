@@ -1,0 +1,60 @@
+{{ $params := .Params }}
+
+{{ $integration_name := .Page.Params.git_integration_title }}
+
+{{ if (.Get 0 ) }}
+
+  {{ $.Scratch.Set "integration" (.Get 0) }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "integration" $integration_name }}
+
+{{ end }}
+
+{{ $metrics := $.Scratch.Get "integration" }}
+
+{{ $data := index $.Page.Site.Data.integrations $metrics }}
+
+{{ if (index $params 1 ) }}
+
+{{ $name_space := (index $params 1) }}
+
+<table class="table">
+  <tbody>
+  {{ range $k, $v := (index $data $metrics) }}
+
+    {{ if (in $v.metric_name $name_space) }}
+
+      <tr>
+        <td>
+        <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+        <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+        </td>
+      </tr>
+
+    {{ end }}
+
+
+  {{ end }}
+  </tbody>
+</table>
+
+{{ else }}
+
+  {{ if $metrics }}
+    <table class="table">
+      <tbody>
+      {{ range $k, $v := (index $data $metrics) }}
+        <tr>
+          <td>
+          <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+          <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+          </td>
+        </tr>
+      {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+
+{{ end }}
