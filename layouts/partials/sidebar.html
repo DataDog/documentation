@@ -2,6 +2,8 @@
 {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) }}
 
 <ul class="nav nav-tabs nav-stacked sidebar">
+
+  <!-- search -->
   {{ if ne .Site.Language.Lang "ja"}}
     <li class="nav-header">Documentation Search</li>
     <li>
@@ -11,10 +13,7 @@
     </li>
   {{ end }}
 
-  {{ if and (eq .Site.Language.Lang "ja") (not (.Params.sidebar.nav) ) }}
-    <li class='nav-header'>Table of Contents</li>
-  {{ end }}
-
+  <!-- table of contents -->
   {{ if $.Params.sidebar.nav }}
     <li class='nav-header'>Table of Contents</li>
     {{ range $k, $v := $.Params.sidebar.nav }}
@@ -28,6 +27,12 @@
       {{ end }}
 
     {{ end }}
+  {{ else if len .Data.Pages }}
+    <li class='nav-header'>Table of Contents</li>
+    <li class='nav-header'>{{ i18n "table_of_contents" }}</li>
+      {{ range (sort .Data.Pages "BaseFileName") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
   {{ end }}
 
   {{ if in .File.Path "basic_agent_usage" }}
@@ -39,10 +44,13 @@
     {{ end }}
 
   {{ else }}
-
     <li id="toc-box"></li>
 
-    {{ if $guides }} <li class="nav-header">Guides</li> {{ end }}
+    {{ if $guides }}
+      <li class="nav-header">{{ i18n "menu_guides" }}</li>
+    {{ else }}
+      <li class='nav-header'>Table of Contents</li>
+    {{ end }}
 
     {{ range sort $guides "Params.listorder" "asc" }}
 
@@ -54,4 +62,3 @@
 
   {{ end }}
 </ul>
-

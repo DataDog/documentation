@@ -10,9 +10,3 @@ kind: documentation
 このセクションでは、各種設定例をサービス全般に渡って紹介しています。
 各設定例には、スクリーンショット、コード、出力結果、およびデータ等が含まれています。
 ここに紹介しているサンプルコード以外で、是非掲載してほしい設定項目がある場合は、@support宛てにご要望ください。
-
-<ul>
-<% tag_set($ja_example_items).sort().each do |tag| %>
-<li><a href="/ja/examples/<%= tag.downcase %>/"><%= tag %></a> - (<%=count_tags($ja_example_items)[tag] %>)</li>
-<% end %>
-</ul>

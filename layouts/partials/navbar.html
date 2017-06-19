@@ -15,7 +15,7 @@
         <div class="navbar-collapse collapse" id="topmenu">
           <ul class="nav navbar-nav navbar-right">
            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guides <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ i18n "menu_guides" }} <span class="caret"></span></a>
 
               <ul class="dropdown-menu" aria-labelledby="download">
               {{ range sort $guides "Params.listorder" "asc" }}
@@ -24,7 +24,7 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a id="nav-reference-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+              <a id="nav-reference-dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ i18n "menu_references" }} <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="nav-guide-dropdown">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main_references }}
