@@ -1,7 +1,7 @@
 ---
 title: Sending Metrics with DogStatsD
 kind: guide
-listorder: 4
+listorder: 7
 js_dd_docs_methods:
   - metricsGuidePage
 code_languages:

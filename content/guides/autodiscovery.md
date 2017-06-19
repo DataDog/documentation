@@ -1,7 +1,7 @@
 ---
 title: Guide to using Autodiscovery with Docker
 kind: guide
-listorder: 10
+listorder: 15
 ---
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/) and platforms like Docker Swarm, Kubernetes and Amazon's ECS make running services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you monitor a service which is dynamically shifting from one host to another?

@@ -1,7 +1,7 @@
 ---
 title: Officially Integrating with Datadog
 kind: guide
-listorder: 15
+listorder: 21
 ---
 Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 

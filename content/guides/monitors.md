@@ -1,7 +1,7 @@
 ---
 title: Guide to Monitors
 kind: guide
-listorder: 8
+listorder: 13
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***

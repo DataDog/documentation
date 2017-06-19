@@ -1,7 +1,7 @@
 ---
 title: Correlating Events with Metrics
 kind: guide
-listorder: 4
+listorder: 6
 ---
 
 ## Overview
