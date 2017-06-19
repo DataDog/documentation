@@ -85,6 +85,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "elasticache:Describe*",
                 "elasticache:List*",
                 "elasticfilesystem:DescribeTags",
+                "elasticfilesystem:DescribeFileSystems",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
@@ -225,7 +226,8 @@ For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/l
 
 ## EFS
 
-* `elasticfilesystem:DescribeTags`: Add custom EFS tags to EFS metrics.
+* `elasticfilesystem:DescribeTags`: Gets custom tags applied to file systems
+* `elasticfilesystem:DescribeFileSystems`: Provides a list of active file systems
 
 For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html), review the documentation on the AWS website.
 
