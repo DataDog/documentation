@@ -47,9 +47,7 @@
     {{ range sort $guides "Params.listorder" "asc" }}
 
       {{ if (and ( isset .Params "listorder" ) ( ne .Params.beta true )) }}
-          {{ if gt .Params.listorder -1 }}
           <li><a href="{{.Permalink}}">{{ .Title }}</a></li>
-          {{ end }}
       {{ end }}
 
     {{ end }}
