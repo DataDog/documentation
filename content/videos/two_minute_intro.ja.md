@@ -5,7 +5,7 @@ language: ja
 title: ２分間でDatadogを紹介
 kind: video
 wistiaid: ywu4jabmlf
-tags:
+videos:
     - Introduction
 summary: Don't have 5 minutes? How about 2? That's enough to get a good overview of what Datadog has to offer.
 ja_summary: たった５分、いや２分でDatadogの概要と魅力をお伝えします。
