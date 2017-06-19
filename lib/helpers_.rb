@@ -260,6 +260,72 @@ def formatmetrics(selectedmetrics)
   return metrictable.force_encoding("utf-8")
 end
 
+def print_classic_library_table
+  require 'yaml'
+
+  table_markdown = "|Language|Library|Official|API|DogStatsD|Notes|\n|---\n"
+  libraries = YAML.load_file('libraries.yml')
+  libraries = libraries['Classic']
+  libraries.each do |lang, libs|
+    libs.each_with_index do |lib, i|
+      first_col = i == 0 ? "**#{lang}**" : ''
+      api = lib.has_key?('api') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      dogstatsd = lib.has_key?('dogstatsd') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      authors = ''
+      if lib.has_key?('authors')
+        if lib['authors'].respond_to?(:join)
+          authors = "Written by #{lib['authors'].join(', ')}"
+        else
+          authors = "Written by #{lib['authors']}"
+        end
+      end
+      notes = lib.has_key?('notes') ? lib['notes'] : ''
+      if notes != '' && !notes.end_with?('.')
+        notes = "#{notes}."
+      end
+      last_col = "#{notes} #{authors}".strip!
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{official}|#{api}|#{dogstatsd}|#{last_col}\n"
+    end
+    table_markdown += "|---\n"
+  end
+
+  table_markdown += "{:.table}"
+  return table_markdown
+end
+
+def print_tracing_library_table
+  require 'yaml'
+
+  table_markdown = "|Language|Library|Official|Notes|\n|---\n"
+  libraries = YAML.load_file('libraries.yml')
+  libraries = libraries['Tracing']
+  libraries.each do |lang, libs|
+    libs.each_with_index do |lib, i|
+      first_col = i == 0 ? "**#{lang}**" : ''
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      authors = ''
+      if lib.has_key?('authors')
+        if lib['authors'].respond_to?(:join)
+          authors = "Written by #{lib['authors'].join(', ')}"
+        else
+          authors = "Written by #{lib['authors']}"
+        end
+      end
+      notes = lib.has_key?('notes') ? lib['notes'] : ''
+      if notes != '' && !notes.end_with?('.')
+        notes = "#{notes}."
+      end
+      last_col = "#{notes} #{authors}".strip!
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{official}|#{last_col}\n"
+    end
+    table_markdown += "|---\n"
+  end
+
+  table_markdown += "{:.table}"
+  return table_markdown
+end
+
 def get_units_from_git
   require 'octokit'
   require 'base64'
