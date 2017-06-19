@@ -12,7 +12,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 <!--
 ## Find the Graph Editor
-{: #editor}
+
 
 On each graph you will find a pencil icon that opens the graph editor.
 

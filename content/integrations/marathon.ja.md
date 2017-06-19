@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate the performance of Marathon with the rest of your Mesos applications -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 

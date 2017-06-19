@@ -15,7 +15,7 @@ doclevel:
 </style> -->
 
 <!-- ## Overview
-{:#int-overview}
+
 
 Create alerts using @opsgenie:
 
@@ -24,7 +24,7 @@ Create alerts using @opsgenie:
 - When a metric alert is triggered -->
 
 ### 概要
-{:#int-overview}
+
 
 OpenGineインテグレーションを使用すると、`@opengenie:`を使ってOpengenieへアラートを送信できます:
 
@@ -34,7 +34,7 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 
 <!-- ### Configuration
-{:#int-configuration}
+
 
 #### Create a Datadog integration in OpsGenie
 
@@ -83,7 +83,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 <img src="/images/og_closed_dd_updated.png" style="width:100% border:1px #777777;padding-bottom:10px;" /> -->
 
 ### 設定
-{:#int-configuration}
+
 
 #### OpsGenie側でDatadogインテグレーションを作成する
 

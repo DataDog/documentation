@@ -24,12 +24,12 @@ When a metric alert is triggered -->
 4. Back to Datadog, paste the API key in the next section here -->
 
 ### 概要
-{:#int-overview}
+
 
 VictorOpsと連携することで、Datadogで検知したアラートを、非常に高い制度での通知とエスカレーションを実現します。
 
 ### 設定
-{:#int-setup}
+
 
 1. VictorOpsのサイトでインテグレーションの設定ページを表示します。
 

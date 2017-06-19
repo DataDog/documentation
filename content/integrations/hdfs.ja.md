@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate HDFS performance with the rest of your applications -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、HDFSのメトリクをDatadogと連携します:
 

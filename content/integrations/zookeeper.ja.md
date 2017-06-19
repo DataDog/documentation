@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect ZooKeeper to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect ZooKeeper to Datadog in order to:
 - Correlate the performance of ZooKeeper with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、ZooKeeperとDatadogを連携します:
 

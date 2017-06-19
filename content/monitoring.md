@@ -118,7 +118,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-4. {:#metric-conditions} Select the alert conditions
+4.  Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
@@ -315,7 +315,7 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
-3. {:#check-alerting} Select your **alert options**.
+3.  Select your **alert options**.
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a

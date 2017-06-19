@@ -16,7 +16,7 @@ sidebar:
 Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Simply select a new variable value in the dropdown menu, and that value will apply across the dashboard.
 
 ### Editing template variables
-{:#def}
+
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 
@@ -31,7 +31,7 @@ This will open the template variable editing panel.
 A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
 
 ### Using template variables in graph editors
-{:#graph}
+
 
 ![][3]
 {:style="width:80%;"}

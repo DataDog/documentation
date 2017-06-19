@@ -172,7 +172,7 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 <!--### Alerts {#alerts}
 
 #### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?
-{: #no-data}
+
 
 For the AWS No Data errors, the issue here has to do with how frequently we
 receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
@@ -898,7 +898,7 @@ Datadog Agentがデフォルトで送信しているディスクの使用量関�
 従って、グラフで<code>system.disk.in_use</code>を指定すれば、パーセントで監視できます。
 
 <!--#### How is data aggregated in graphs
-{: #metric-aggregation}
+
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
 

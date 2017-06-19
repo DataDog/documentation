@@ -9,7 +9,7 @@ kind: integration
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect SQL Server to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect SQL Server to Datadog in order to:
 - Correlate the performance of SQL Server with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、SQLサーバーとDatadogを連携します:
 

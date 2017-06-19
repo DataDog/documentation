@@ -25,7 +25,7 @@ it can help you bring your infrastructure to heel.
 ## Integrations
 
 
-{{< img src="integrations.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="integrations.png" >}}
 
 * About 100 integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, always adding more.
 * Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>, many documented by our active user community.
@@ -36,7 +36,7 @@ in an online service is treated the same throughout Datadog.
 ## Infrastructure
 
 
-{{< img src="infrastructure.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="infrastructure.png" >}}
 
 * All machines show up in the infrastructure overview
 * Here you can see the tags applied to each machine; as they're assigned to
@@ -52,7 +52,7 @@ for that machine based on what was previously set up for that tag.
 ## Host Map
 
 
-{{< img src="hostmap-overview.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="hostmap-overview.png" >}}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -66,7 +66,7 @@ To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 ## Events
 
 
-{{< img src="event_stream.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="event_stream.png" >}}
 
 The Event Stream is based on the same conventions as a blog:
 
@@ -75,7 +75,7 @@ The Event Stream is based on the same conventions as a blog:
 * You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident
 
-{{< img src="event_stream_post_incident_history.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="event_stream_post_incident_history.png" >}}
 
 
 For each incident users can:
@@ -87,12 +87,12 @@ For each incident users can:
 * <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
 * @support-datadog to ask for assistance
 
-{{< img src="event_stream_claim.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="event_stream_claim.png" >}}
 
 ## Dashboards
 {: dashboards}
 
-{{< img src="dashboard_events.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="dashboard_events.png" >}}
 
 Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
 
@@ -112,7 +112,7 @@ without access to your data or any other information (via the pencil in the uppe
 ## Monitoring
 {: monitoring}
 
-{{< img src="alert.png" >}}{: tyle="width:100%; border:1px solid #777777"}
+{{< img src="alert.png" >}}
 
 [Monitoring](/guides/monitoring/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -123,7 +123,7 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-{{< img src="alert_setup.png" >}}{: style="width:100%; border:1px solid #777777"}
+{{< img src="alert_setup.png" >}}
 
 
 Does the data have to be pushed to Datadog?

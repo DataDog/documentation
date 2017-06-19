@@ -9,7 +9,7 @@ doclevel: full
 ---
 
 ### 概要
-{:#int-overview}
+
 
 <!-- ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog -->
 
@@ -22,7 +22,7 @@ To configure the ServiceNow integration, enter your ServiceNow instance name, an
 ![servicenow integration](/images/servicenow-configuration.png) -->
 
 ### 設定
-{:#configuration}
+
 
 ServiceNowの統合を設定するには、ServiceNowインスタンス名、およびユーザ名とパスワードを入力します。Datadog統合のための新しいユーザーを作成することを推奨します。
 

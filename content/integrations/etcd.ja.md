@@ -9,7 +9,7 @@ doclevel:
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture etcd metrics in Datadog to:
 
@@ -18,7 +18,7 @@ Capture etcd metrics in Datadog to:
 - Correlate the performance of etcd with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、etcdのメトリクスをDatadogへ送信します:
 

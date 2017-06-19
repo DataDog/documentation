@@ -46,7 +46,7 @@ The following metrics are collected by default with the Cassandra integration:
     cassandra.WriteCount -->
 
 ### 概要
-{:#int-overview}
+
 
 Cassandraに関する情報に関しては、次の[「JMX Checks」](http://docs.datadoghq.com/ja/integrations/java/)を参照してください。
 

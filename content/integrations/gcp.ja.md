@@ -16,7 +16,7 @@ doclevel: basic
 
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、Google Cloud PlatformとDatadogを連携します:
 
