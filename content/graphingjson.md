@@ -211,7 +211,7 @@ The Time Series can be further broken down to:
 #### Line Charts
 
 
-<img src="/static/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -230,7 +230,7 @@ The representation is automatically derived from having multiple `requests` valu
 #### Stacked Series
 
 
-<img src="/static/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 

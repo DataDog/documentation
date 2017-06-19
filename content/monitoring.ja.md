@@ -75,7 +75,7 @@ on the left. This document will walk through the configuration of each type.
 <!-- *Requires Datadog Agent version >= 5.0.0.* -->
 *Datadog Agent バージョン 5.0.0 以上が必要です。*
 
-![host monitor](/static/images/monitor/host_monitor.png)
+![host monitor](/images/monitor/host_monitor.png)
 
 <!--
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
@@ -109,7 +109,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 <!--
 1. Select the metric and scope you want to monitor.
-  ![metric scope](/static/images/monitor/metric_scope.png)
+  ![metric scope](/images/monitor/metric_scope.png)
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
@@ -118,7 +118,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 -->
 
 1. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
-  ![metric scope](/static/images/monitor/metric_scope.png)
+  ![metric scope](/images/monitor/metric_scope.png)
 
   Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
   この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
@@ -126,7 +126,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 <!--
 2. Select the alert grouping.
-    ![alert grouping](/static/images/monitor/alert_grouping.png)
+    ![alert grouping](/images/monitor/alert_grouping.png)
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -144,7 +144,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     running out of space.
 -->
 2. アラートグループを選択します。
-    ![alert grouping](/static/images/monitor/alert_grouping.png)
+    ![alert grouping](/images/monitor/alert_grouping.png)
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -156,7 +156,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 <!--
 3. Select the alert type.
-    ![alert type](/static/images/monitor/alert_type.png)
+    ![alert type](/images/monitor/alert_type.png)
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -175,7 +175,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 -->
 
 3. アラートのタイプを選択します。
-    ![alert type](/static/images/monitor/alert_type.png)
+    ![alert type](/images/monitor/alert_type.png)
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは一般的なアラートであり、正常な範囲か値が事前に分かっている場合に使用します。
 
@@ -192,7 +192,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      ![metric threshold](/static/images/monitor/metric_threshold.png)
+      ![metric threshold](/images/monitor/metric_threshold.png)
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -227,7 +227,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    ![metric threshold](/static/images/monitor/metric_threshold.png)
+    ![metric threshold](/images/monitor/metric_threshold.png)
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -297,7 +297,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 ### インテグレーションを対象にしたMonitor
 {: #integration}
 
-![es status](/static/images/monitor/es_status.png)
+![es status](/images/monitor/es_status.png)
 
 <!--
 On the integration tab you will see a list of your installed integrations. Upon
@@ -325,7 +325,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 ### プロセスを対象にしたMonitor
 {: #process}
 
-![process monitor](/static/images/monitor/process_monitor.png)
+![process monitor](/images/monitor/process_monitor.png)
 
 <!--
 A process monitor will watch the status produced by the `process.up` service
@@ -369,7 +369,7 @@ point they should notify.
 ### ネットワークを対象にしたMonitor
 {: #network}
 
-![network monitor](/static/images/monitor/network_monitor.png)
+![network monitor](/images/monitor/network_monitor.png)
 
 <!--
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
@@ -438,7 +438,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 イベントを対象にしたMonitorでは、指定した条件に合致する場合にアラートで通知することができます。
 
-![event monitor](/static/images/monitor/event_monitor.png)
+![event monitor](/images/monitor/event_monitor.png)
 
 <!--
 1. Select the query and parameters (status, priority, sources and tags) you want
@@ -462,7 +462,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 ### カスタムチェックを対象にしたMonitor
 {: #custom}
 
-![custom monitor](/static/images/monitor/custom_monitor.png)
+![custom monitor](/images/monitor/custom_monitor.png)
 
 <!--
 Custom monitors encompass any service checks that are not reported by one of the
@@ -526,7 +526,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
-![notification](/static/images/monitor/notification.png)
+![notification](/images/monitor/notification.png)
 
 <!--
 1. Give your monitor a **title**. It is often useful to use a succinct
@@ -585,21 +585,21 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    ![conditional variables](/static/images/monitor/conditionalvars.png)
+    ![conditional variables](/images/monitor/conditionalvars.png)
 
     Here is an example of how you can set it up in the editor:
 
-    ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+    ![conditional editor](/images/monitor/templateconditionaleditor.png)
 
 
     The corresponding trigger event notification will look like this:
 
-    ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+    ![conditional trigger](/images/monitor/templateconditionaltrigger.png)
 
 
     and the recovery notification:
 
-    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+    ![conditional recovery](/images/monitor/templateconditionalrecover.png)
 
 
     The conditional variables available are `is_alert`, `is_warning`, `is_recovery`, and `is_no_data`.
@@ -609,19 +609,19 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
-   ![conditional variables](/static/images/monitor/conditionalvars.png)
+   ![conditional variables](/images/monitor/conditionalvars.png)
 
    次が、通知本文の記述の例です:
 
-   ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+   ![conditional editor](/images/monitor/templateconditionaleditor.png)
 
    実際に送信されたアラート通知文は、次のようになります:
 
-   ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+   ![conditional trigger](/images/monitor/templateconditionaltrigger.png)
 
    リカバーした際の通知文は、次のようになります:
 
-   ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+   ![conditional recovery](/images/monitor/templateconditionalrecover.png)
 
    使用可能な条件変数は`is_alert`、`is_warning`、`is_recovery`、`is_no_data`です。
    これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることで見ることができます。
@@ -634,23 +634,23 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     Here is an example of how you can use template variables for a multi alert:
 
-    ![template var editor](/static/images/monitor/templatevareditor.png)
+    ![template var editor](/images/monitor/templatevareditor.png)
 
 
     and the corresponding event notification:
 
-    ![template var trigger](/static/images/monitor/templatevar.png)
+    ![template var trigger](/images/monitor/templatevar.png)
 -->
 
 2. **Multi Alertのためのタグ変数**: 設定しているMonitorが`Multi Alert`の場合(タグによってグループが指定されている場合)は、通知のタイトルや本文にタグ変数を適用し、アラート発報の範囲(スコープ)を明示することができます。
 
     次が、`Multi Alert`でtemplate variables(タグ変数)を使った例です:
 
-    ![template var editor](/static/images/monitor/templatevareditor.png)
+    ![template var editor](/images/monitor/templatevareditor.png)
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    ![template var trigger](/static/images/monitor/templatevar.png)
+    ![template var trigger](/images/monitor/templatevar.png)
 
 <!--
     The tag template variables available depend on the tag group selected in Step 1
@@ -667,14 +667,14 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    ![short template var trigger](/static/images/monitor/templatevar_short.png)
+    ![short template var trigger](/images/monitor/templatevar_short.png)
 -->
 
    利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
    一方で、アラートを通知する範囲(スコープ)を指定しているタグには自動的にタイトルに挿入されるものがあります。このため、範囲指定のために多くのタグを使用している場合にはアラートのタイトルが不必要に長くなる可能性があります。もしタグ変数をアラート本文に使用しているのであれば、スペースを節約するために**Include triggering tags in notification title** のチェックを外すことも有効です。この設定によってアラートのタイトルは以下のようになります。
 
-   ![short template var trigger](/static/images/monitor/templatevar_short.png)
+   ![short template var trigger](/images/monitor/templatevar_short.png)
 
 <!--
 3. **Conditional variables for different triggering scopes**: You can have a
@@ -697,7 +697,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   ![scope match editor](/static/images/monitor/scope_match_editor.png)
+   ![scope match editor](/images/monitor/scope_match_editor.png)
 -->
 
 3. **アラート発報の範囲(スコープ)の違いに基づいた条件変数**: Monitorによってアラート発報されたグループによって異なった通知本文を表示することができます。
@@ -714,7 +714,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
    次が、アラート発報の範囲情報に基づいて異なる本文を表示する例です:
 
-   ![scope match editor](/static/images/monitor/scope_match_editor.png)
+   ![scope match editor](/images/monitor/scope_match_editor.png)
 
 
 ## Monitorに関するFAQs

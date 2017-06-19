@@ -42,7 +42,7 @@
                   </ul>
                 {{else}}
                   <li>
-                  <a href="{{.URL}}">
+                  <a href="{{.URL | absLangURL }}">
                       <span>{{ ( i18n .Identifier ) }}</span>
                   </a>
                 {{end}}

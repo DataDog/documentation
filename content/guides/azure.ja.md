@@ -90,4 +90,4 @@ On deploy you should see your new hosts appear on your infrastructure overview: 
 
 デプロイが終われば、Datadogダッシュボードの`Ingrastractures`タブから表示されるホストリストに新しいホストが加わっているはずです:
 
-<img src="/static/images/azure_infrastructure_overview.png" alt="infrastructure view"/>
+<img src="/images/azure_infrastructure_overview.png" alt="infrastructure view"/>

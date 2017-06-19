@@ -54,7 +54,7 @@ DogStatsD accepts custom application metrics points over
 and then periodically aggregates and forwards the metrics to Datadog, where
 they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <p>
-<img src="/static/images/dogstatsd.png">
+<img src="/images/dogstatsd.png">
 </p> -->
 
 <h2 id="how-it-works"></h2>
@@ -66,7 +66,7 @@ DogStatsDは、アプリケーションのカスタムメトリクスを<a href=
 次に図は、DogStatsDを使ったカスタムメトリクスのグラフ化までの構成図です:
 
 <p>
-<img src="/static/images/dogstatsd.png"/>
+<img src="/images/dogstatsd.png"/>
 </p>
 
 

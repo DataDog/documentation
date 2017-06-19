@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ .Site.Title }}</title>
+    <title>{{ .Params.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

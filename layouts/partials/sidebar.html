@@ -10,6 +10,11 @@
       </form>
     </li>
   {{ end }}
+
+  {{ if and (eq .Site.Language.Lang "ja") (not (.Params.sidebar.nav) ) }}
+    <li class='nav-header'>Table of Contents</li>
+  {{ end }}
+
   {{ if $.Params.sidebar.nav }}
     <li class='nav-header'>Table of Contents</li>
     {{ range $k, $v := $.Params.sidebar.nav }}

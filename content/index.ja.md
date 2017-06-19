@@ -34,7 +34,6 @@ sidebar:
 ### 3. [Graph them!][3]
 {: .big_number.alert.alert-info}
  -->
-
 ### 1. Datadog [Agent][1] のインストールと起動 !
 {: .big_number.alert.alert-warning}
 

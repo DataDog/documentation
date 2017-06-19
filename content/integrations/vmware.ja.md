@@ -75,7 +75,7 @@ VMwareインテグレーションが取得しているメトリクスです:
 ##### How should the Datadog Agent be set up with vCenter and ESX?
 {:#setup}
 
-<img src="/static/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
 
 ##### How will a VMware integration impact my monthly billing?
 {:#pricing}
@@ -88,7 +88,7 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 ##### vCenterとESXを監視するためのDatadog Agentの配置
 {:#setup}
 
-<img src="/static/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
 
 1. vSphereが起動しているホストに、Datadog Agentをインストールします。
 2. EXSのVM内にも、Datadog Agentをインストールします。(各VMのシステムメトリクスを収取します)

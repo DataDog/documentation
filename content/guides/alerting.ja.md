@@ -37,13 +37,13 @@ appear in the event stream, and can be delivered to team members of your choice 
 Hipchat room, or whoever is 'oncall' in Pagerduty.
 To set up an alert, go to the 'Metrics' tab and select 'Manage Alerts'.</p>
 
-<img src="/static/images/alert_1.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_1.png" style="width:100%; border:1px solid #777777"/>
 
 <p>Two subtabs will appear, 'Triggered Alerts' and 'Manage Metric Alerts'.
 'Triggered Alerts' are all alerts currently firing. Select 'Manage Metric Alerts' to
 create a new alert.</p>
 
-<img src="/static/images/alert_2.png" style="width:100%; border:1px solid #777777"/> -->
+<img src="/images/alert_2.png" style="width:100%; border:1px solid #777777"/> -->
 
 運用しているシステム全体を一箇所で監視する場合、危機的な状況を起こしかねない状態の変化を検知できる機能なしでは完全とは言えません。
 
@@ -51,18 +51,18 @@ Datadog内のアラートは、メトリクスがしきい値を超えた時、�
 
 アラートを設定するには、`Metrics` タブに移動し、`Manage Monitors`を選択します。
 
-<img src="/static/images/ja-specific/alert_1.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/ja-specific/alert_1.png" style="width:100%; border:1px solid #777777"/>
 
 `Triggered Monitors` と`Manage Monitors` という補助的なタブが表示されます。
 `Triggered Monitors` には、発生したアラートのリストが表示されています。
 
-<img src="/static/images/ja-specific/alert_2.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/ja-specific/alert_2.png" style="width:100%; border:1px solid #777777"/>
 
 新しくアラートを設定する場合は、`Manage Monitors` を選択します。
 
 
 <!-- <h3 id="new">Creating a new alert</h3>
-<img src="/static/images/alert_3.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_3.png" style="width:100%; border:1px solid #777777"/>
 
 <p>There are 5 steps to creating an alert</p>
 <ol>
@@ -80,7 +80,7 @@ is receiving no data.</li>
 
 <h3 id="new">アラートの新規設定</h3>
 
-<img src="/static/images/ja-specific/alert_3.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/ja-specific/alert_3.png" style="width:100%; border:1px solid #777777"/>
 
 アラートを設定するための6ステップ
 
@@ -95,7 +95,7 @@ is receiving no data.</li>
 
 
 <!-- <h4 id="metric">Choosing a metric</h4>
-<img src="/static/images/alert_4.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_4.png" style="width:100%; border:1px solid #777777"/>
 <p>To get into detail on how to use alerts, let's take aws.elb.latency as an example.
 Let's also say there are 5 hosts, 1 in staging and the rest in prod.</p>
 
@@ -110,7 +110,7 @@ lowest point respectively seen from any of the hosts emitting that metric.
 
 <h4 id="metric">１．１ メトリクスの指定</h4>
 
-<img src="/static/images/alert_4.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_4.png" style="width:100%; border:1px solid #777777"/>
 
 アラートの使い方の詳しい解説のために、`aws.elb.latency` メトリクスを監視するアラートを設定します。
 監視対象ホストは、合計5台。1台がステージング用(`env:staging`)で、残りの4台を運用環境(`env:prod`)に使用しているとします。
@@ -123,7 +123,7 @@ lowest point respectively seen from any of the hosts emitting that metric.
 
 
 <!-- <h4 id="change">Change Alerts</h4>
-<img src="/static/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
 <p>
 A change alert is triggered when the delta between values is higher than the threshold.
 </p>
@@ -139,7 +139,7 @@ An alert is triggered when the delta over time exceeds the limit, where the limi
 </p> -->
 
 <h4 id="change">１．２ メトリクスの変化量によるアラート</h4>
-<img src="/static/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/change_alert.png" style="width:100%; border:1px solid #777777"/>
 
 メトリクスの差分がしきい値より高い場合、アラートを発生します。
 
@@ -149,7 +149,7 @@ An alert is triggered when the delta over time exceeds the limit, where the limi
 
 
 <!-- <h4 id="simple">Simple and Multi Alerts</h4>
-<img src="/static/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
 <p>A simple alert aggregates over all reporting sources.
 You'll get one alert, when the aggregated value meets the conditions set below.
 This works best to monitor a metric from a single host, like avg of system.cpu.iowait
@@ -163,7 +163,7 @@ alert for each device on each host that is running out of space.</p> -->
 
 <h4 id="simple">２．Simple Alert 又は Multi Alert</h4>
 
-<img src="/static/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_5.png" style="width:100%; border:1px solid #777777"/>
 
 `simple alert`は、指定した条件のどれかを満たせば、アラートを発生します。
 アラートは1種類のみで、収集したメトリクスが条件に合致した時に発生されます。
@@ -176,7 +176,7 @@ alert for each device on each host that is running out of space.</p> -->
 
 
 <!-- <h4 id="conditions">Alert conditions</h4>
-<img src="/static/images/alert_5_1.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_5_1.png" style="width:100%; border:1px solid #777777"/>
 
 <p>When setting the alert conditions, ensure that the threshold value you use correctly
 matches the unit that are showing in the graph (for example, bytes vs GB). The
@@ -185,7 +185,7 @@ what’s old (not a “moving average”, really a sliding timeframe). The optio
 the time frame are 5, 10, 15, 30, or 60 minutes.</p> -->
 
 <h4 id="conditions">３．アラート条件の設定</h4>
-<img src="/static/images/alert_5_1.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_5_1.png" style="width:100%; border:1px solid #777777"/>
 
 アラート条件を設定する場合は、グラフに表示されている単位と、しきい値の単位が一致していることを確認してください。( 例えば:、bytes vs GB ）`on average` オプションでは、1分ごとに新しい値を追加し、最も古い値を削除して平均値を更新していきます。(時間軸を実際にずらす方式です、移動平均ではありません)このオプションが有効なのは、`5 minutes`, `10 minutes`, `15 minutes`, `30 minutes`, `60 minutes`の場合になります。
 
@@ -216,7 +216,7 @@ we hope to release in the near future.</p> -->
 
 
 <!-- <h4 id="autoresolve">Autoresolving alerts</h4>
-<img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
 
 <p>For some metrics that report periodically across different tags,
 it may make sense to have triggered alerts auto-resolve after a certain time
@@ -230,7 +230,7 @@ makes sense to leave this as [Never] so that the alert will only resolve when
 the metric falls below the given threshold.</p> -->
 
 <h4 id="autoresolve">４．２ アラートの自動解除</h4>
-<img src="/static/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_auto.png" style="width:100%; border:1px solid #777777"/>
 
 異なるタグに股がって、定期的に送信されるメトリクスを基にしたアラートでは、発生したアラートを一定時間後に解除することが合理的かもしれません。例えば、エラーの発生回数を送信するカウンタでは、エラー発生数は0を送信することはないので、アラートは解除されることはありません。このようなケースでは、4時間経過後もメトリクスの変化がなければ、アラートが解除されるように設定しておくと良いかもしれません。
 
@@ -239,7 +239,7 @@ the metric falls below the given threshold.</p> -->
 
 
 <!-- <h4 id="notify">Notifying</h4>
-<img src="/static/images/alert_6.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_6.png" style="width:100%; border:1px solid #777777"/>
 <p>In the final step of setting up an alert, you can give any necessary commentary
 for the alert so if it triggers it will alert the correct people with the most context possible.
 Each graph delivered via email or in the event stream when an alert triggers is a hyperlink
@@ -249,7 +249,7 @@ part 5, 'Notify your team'.</p> -->
 
 <h4 id="notify">５．アラートメッセージの設定</h4>
 
-<img src="/static/images/alert_6.png" style="width:100%; border:1px solid #777777"/>
+<img src="/images/alert_6.png" style="width:100%; border:1px solid #777777"/>
 
 アラート設定の最後は、発生するアラートに添付するコメントの設定です。
 このコメントには、発生したアラートに最も対応してほしい人の注目を喚起するために適切な情報が含まれている必要があります。
