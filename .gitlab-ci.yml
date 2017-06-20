@@ -15,7 +15,7 @@ variables:
   PREVIEW_BUCKET: "datadog-docs-preview"
   STATIC_BUCKET: "origin-static-assets"
   # domains
-  PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net/"
+  PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net"
   # webhooks
   SLACK_URL: "https://hooks.slack.com/services/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"
   # build folder
