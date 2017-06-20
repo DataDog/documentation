@@ -40,14 +40,14 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 1. Log in to your OpsGenie account and go to the [OpsGenie Integrations](https://www.opsgenie.com/integration/index) page.
 2. As seen below, filter for Datadog and click on the tile.
-        <img src="/images/opsgenie-int-index.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="opsgenie-int-index.png" >}}
 3. Enter your Datadog API key from the [Integrations > APIs page](https://app.datadoghq.com/account/settings#api) in the dedicated field. The key looks like this:
-        <img src="/images/where-is-dd-key.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="where-is-dd-key.png" >}}
 4. Choose the recipients in OpsGenie and set up your filters.
 5. Change the name of the integration if necessary.
 6. Save the configuration.
 7. Copy the red key and the name. You will use this in Datadog.
-        <img src="/images/opsgenie-add-api-key.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="opsgenie-add-api-key.png" >}}
 8. Add more DataDog integrations on OpsGenie by going to the [OpsGenie Integration](https://www.opsgenie.com/integration/index) page and repeating the steps above.
 
 #### List the integration(s) you made in OpsGenie in Datadog
@@ -58,7 +58,7 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 3. Paste the key(s) provided for each Datadog integration (created in OpsGenie) in the **"Datadog Integration Key"** field, and enter the **"Datadog Integration Name"**.
 
-<img src="/images/datadog-add-opsgenie-key.png" style="width:100% border:1px #777777;padding-top:15px;" />
+{{< img src="datadog-add-opsgenie-key.png" >}}
 
 ### How to Use Datadog and OpsGenie Together
 
@@ -66,21 +66,21 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the **Say What’s Happening** field, section 5, in the Edit Metric Alert. When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.
 
-<img src="/images/og_metric_alert.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:20px;" />
+{{< img src="og_metric_alert.png" >}}
 
 Acknowledge or close OpsGenie alerts from Datadog using @opsgenie-acknowledge or @opsgenie-close mentions in the Comments field of an OpsGenie event in Datadog.
 
-<img src="/images/dd_ack_og_alert.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
+{{< img src="dd_ack_og_alert.png" >}}
 
 #### Receive, acknowledge and close Datadog alerts created by OpsGenie
 
 Set-up alerts in OpsGenie. When that alert is triggered, an event will be created in Datadog. The tags and description field from the OpsGenie alert will be carried over to Datadog.
 
-<img src="/images/og_create_alert_dd_updated.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
+{{< img src="og_create_alert_dd_updated.png" >}}
 
 Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the associated event in Datadog will be updated with the username of the person who closed this alert.
 
-<img src="/images/og_closed_dd_updated.png" style="width:100% border:1px #777777;padding-bottom:10px;" /> -->
+{{< img src="og_closed_dd_updated.png" >}} -->
 
 ### 設定
 
@@ -89,14 +89,14 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 1. OpsGenieアカウントにログインし、[OpsGenie Integrations](https://www.opsgenie.com/integration/index) ページに移動します。
 2. 以下の図のようにDatadogのサービスインテグレーションを検索します。
-        <img src="/images/opsgenie-int-index.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="opsgenie-int-index.png" >}}
 3. Datadogサイトの[Integrations > APIs page](https://app.datadoghq.com/account/settings#api)で生成したAPI keyを入力します。
-        <img src="/images/where-is-dd-key.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="where-is-dd-key.png" >}}
 4. OpsGenie内での受信者を選択し、フィルタを設定します。
 5. 必要に応じてのDatadog側に表示するインテグレーションの名前を変更します。
 6. 設定を保存します。
 7. 以下に赤色で表示されているOpsGenie側のAPI keyとステップ4で決めたインテグレーション名をコピーします。
-        <img src="/images/opsgenie-add-api-key.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:10px;" />
+        {{< img src="opsgenie-add-api-key.png" >}}
 8. 更に別のDatadogインテグレーションを[OpsGenie Integration](https://www.opsgenie.com/integration/index)に追加する場合は、ステップ2からステップ7を繰り返します。
 
 #### OpsGenie側で作成したインテグレーションをDatadog側に追加していきます
@@ -107,7 +107,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 3. OpsGenie側で作成したDatadogインテグレーションのAPI keyと名前を、**"Datadog Integration Key"** 欄と　**"Datadog Integration Name"** 欄へ入力します。
 
-<img src="/images/datadog-add-opsgenie-key.png" style="width:100% border:1px #777777;padding-top:15px;" />
+{{< img src="datadog-add-opsgenie-key.png" >}}
 
 ### DatadogとOpsGenieを連携して使う方法
 
@@ -115,18 +115,18 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 Datadog側のMonitor設定のセクション5 **Say What’s Happening** の部分に @opsgenie-service_name や @opsgenie とメッセージに送信先を書き、OpsGenieへのアラートを作成していきます。Datadog側でこのアラートが動作した際に、OpsGenie側の受診者に通知が送られます。
 
-<img src="/images/og_metric_alert.png" style="width:100% border:1px #777777;padding-top:15px;padding-bottom:20px;" />
+{{< img src="og_metric_alert.png" >}}
 
 Datadog側からOpsGenieに通知したアラートを承認やクローズするには、 DatadogのイベントストリームのOpsGenieの該当するイベントに @opsgenie-acknowledge や @opsgenie-close を付けてコメントを書き込みます。
 
-<img src="/images/dd_ack_og_alert.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
+{{< img src="dd_ack_og_alert.png" >}}
 
 #### Receive, acknowledge and close Datadog alerts created by OpsGenie
 
 次の画像は、OpsGenie側でアラートが動作した際に表示したい内容を設定する画面です。OpsGenie側でアラートが動作すると、OpsGenie側でアラートに設定したタグと詳細が付されたイベントがDatadog側にも登録されます。
 
-<img src="/images/og_create_alert_dd_updated.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
+{{< img src="og_create_alert_dd_updated.png" >}}
 
 発生したOpsGenieのアラートにOpsGenie上で承認やクローズすると、Datadog上の関連イベントは、OpsGenieのアラートを処理を行った人の名前で更新されます。
 
-<img src="/images/og_closed_dd_updated.png" style="width:100% border:1px #777777;padding-bottom:10px;" />
+{{< img src="og_closed_dd_updated.png" >}}

@@ -71,7 +71,7 @@ Outlier Detectionをグラフ表示に適用するには、対象とするグル
 <!--
 Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" function:
 
-<img src="/images/outliers/outliers-function-selector-newer.png" style="width: 25%;" />
+{{< img src="outliers/outliers-function-selector-newer.png" >}}
 
 This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
@@ -80,7 +80,7 @@ This will add the outliers function to your graph, and you’ll see any outliers
 
 そしてここで、メトリクスの選択ボックスの右手にあるプラスマークをクリックします。“Modify your query”ボックスで "outliers" 関数を選択します:
 
-<img src="/images/outliers/outliers-function-selector-newer.png" style="width: 25%;" />
+{{< img src="outliers/outliers-function-selector-newer.png" >}}
 
 これで"outliers" 関数がグラフ表示に追加され、外れ値(Outlier)の時系列データが太字に暖色でマークされることになります。
 

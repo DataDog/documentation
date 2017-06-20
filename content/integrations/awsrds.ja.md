@@ -42,7 +42,7 @@ RDSは、データベースインスタンスとCloudWatch経由でインスタ�
 
 <!-- First navigate to the AWS Console and open the RDS section to find the RDS instance you want to monitor.  It should look like:
 
-<img src="/images/rds-console.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="rds-console.png" >}}
 
 Write down the endpoint URL(e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**);
 You will need it when you configure the agent.
@@ -51,7 +51,7 @@ Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**).  You will 
 
 AWSコンソールからRDSのセクションを開き、監視するRDSインスタンスを見つけます。以下のような情報が表示されるはずです。
 
-<img src="/images/rds-console.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="rds-console.png" >}}
 
 RDSにアクセスするためのエンドポイントURL(例 **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**)を記録します。
 以後、Datadog Angetを設定するときに必要になります。
@@ -88,13 +88,13 @@ MySQL/PostgreSQLインテグレーションは、個々のデータベースイ�
 
 Here's an example of a graph displaying I/O for the instance `mysqlrds` using the `dbinstanceidentifier` tag.
 
-<img src="/images/rds-example.png" style="width:100% border:1px #777777"/> -->
+{{< img src="rds-example.png" >}} -->
 
 5分ぐらいするとRDSとMySQL/PostgreSQLのメトリクスは、Datadogで使用出来るようになり、Metrics Explorerでの検索、グラフやアラートでの指定が出来るようになります。
 
 以下は、`dbinstanceidentifier`タグを使用して`mysqlrds`インスタンスのI/Oをグラフ表示する例です。
 
-<img src="/images/rds-example.png" style="width:100% border:1px #777777"/>
+{{< img src="rds-example.png" >}}
 
 <!-- ## What's next? -->
 
