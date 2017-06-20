@@ -66,7 +66,7 @@ You should see something similar to the following if everything is working corre
 
 The following metrics are collected by default with the Apache integration:
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "system" "system.cpu" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/master/apache/check.py
