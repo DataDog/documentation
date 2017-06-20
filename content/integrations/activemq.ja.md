@@ -19,7 +19,7 @@ doclevel: complete
 </div> -->
 
 ## 概要
-{: #int-overview}
+
 
 ActiveMQyより、リアルタイムでメトリクスを取得します。
 
@@ -38,7 +38,7 @@ Metrics will be captured using a JMX connection.
 
 
 ## 設定
-{: #int-configuration}
+
 **このインテグレーションでメトリクスを取得するには、LinuxもしくはMac OS X上でActiveMQが動作している必要があります。**
 
 ActiveMQのメトリクスを取得するには、Datadog Agentをインストールする必要があります。

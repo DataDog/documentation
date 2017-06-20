@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture HAProxy activity in Datadog to:
 
@@ -18,7 +18,7 @@ Capture HAProxy activity in Datadog to:
 -  Correlate the performance of HAProxy with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、HAProxyの動作状況をDatadogと連携します:
 

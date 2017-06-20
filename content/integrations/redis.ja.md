@@ -9,13 +9,13 @@ kind: integration
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Track and graph your Redis activity and performance metrics with slice-and-dice at
 all levels from individual column families to entire clusters. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、RedisのメトリクスをDatadogへ送信します:
 

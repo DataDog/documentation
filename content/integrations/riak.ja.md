@@ -9,7 +9,7 @@ kind: integration
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Riak to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect Riak to Datadog in order to:
 - Correlate the performance of Riak with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、RiakのメトリクスをDatadogに送信します:
 

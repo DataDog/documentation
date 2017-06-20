@@ -14,7 +14,7 @@ doclevel: basic
 * be notified when a metric alert is triggered -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、Campfireとの連携をします:
 

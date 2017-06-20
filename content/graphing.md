@@ -38,7 +38,7 @@ Once you have a metric in mind to display in your graph, select your visualizati
 
 #### Timeseries
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries is available on both timeboards and screenboards.
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, {{< collapse id="collapseTimeseries" >}}click here{{< /collapse >}}. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
   {{< img src="references-graphing-timeseries-example.png" >}}
@@ -46,7 +46,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 
 #### Heatmap
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap is available on both timeboards and screenboards.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, {{< collapse id="collapseHeatmap" >}}click here{{< /collapse >}}. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
   {{< img src="references-graphing-heatmap-example.png" >}}
@@ -54,7 +54,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 
 #### Distribution
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution is available on both timeboards and screenboards.
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, {{< collapse id="collapseDistribution" >}}click here{{< /collapse >}}. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
   {{< img src="references-graphing-distribution-example.png" >}}
@@ -63,7 +63,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 
 #### Toplist
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards.
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  {{< collapse id="collapseTopList" >}}click here{{< /collapse >}}. Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
   {{< img src="references-graphing-toplist-example.png" >}}
@@ -72,7 +72,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 #### Change
 
-The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, [click here](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
+The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, {{< collapse id="collapseChangegraph" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
   {{< img src="references-graphing-change-example.png" >}}
@@ -80,7 +80,7 @@ The Change graph will show you the change in a value over the time period chosen
 
 #### Hostmap
 
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, [click here](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
+The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, {{< collapse id="collapseHostmap" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
   {{< img src="references-graphing-hostmap-example.png" >}}

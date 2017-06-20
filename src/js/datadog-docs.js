@@ -139,6 +139,12 @@ $(document).ready(function() {
         }
     }
 
+    $('table').each(function() {
+        if(!$(this).hasClass('table')) {
+            $(this).addClass('table');
+        }
+    });
+
     if(toc) {
         console.log(toc);
         headings.init();

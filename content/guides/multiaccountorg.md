@@ -6,8 +6,7 @@ listorder: 24
 
 There are two ways to have multiple accounts have access to the same data. First, you can simply add multiple users to the same team from the [Team Page](https://app.datadoghq.com/account/team). The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between orgs from the avatar menu in the main menu.
 
-{{< img src="guides-multacct-switchaccts.png" >}}
-{:style="width:200px;"}
+{{< img src="guides-multacct-switchaccts.png" style="width:200px;" >}}
 
 ## Teams
 
@@ -25,8 +24,7 @@ The new user will receive an email with a link to login.
 1. Go to the [Team Page][TeamPage].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
 
-    {{< img src="guides-multacct-disable.png" >}}
-    {: style="width:200px;"}
+    {{< img src="guides-multacct-disable.png" style="width:200px;" >}}
 
 ### Promote Existing Members to Admin
 ***NOTE:** You must be an Admin of the team to promote members*

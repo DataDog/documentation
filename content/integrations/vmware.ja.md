@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Install the Datadog VMware vSphere integration to:
 
@@ -18,7 +18,7 @@ Install the Datadog VMware vSphere integration to:
 - Interact with your teams on dashboards and the event stream, showing all vSphere data at one glance. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、DatadogのVMware vSphereインテグレーションをインストールします:
 
@@ -70,23 +70,23 @@ VMwareインテグレーションが取得しているメトリクスです:
 
 
 <!-- #### FAQ
-{:#faq}
+
 
 ##### How should the Datadog Agent be set up with vCenter and ESX?
-{:#setup}
+
 
 <img src="/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
 
 ##### How will a VMware integration impact my monthly billing?
-{:#pricing}
+
 
 The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](http://docs.datadoghq.com/guides/billing/) page. -->
 
 #### FAQ
-{:#faq}
+
 
 ##### vCenterとESXを監視するためのDatadog Agentの配置
-{:#setup}
+
 
 <img src="/images/vmware_agent.png" style="width:100%; border:1px solid #777777"/>
 

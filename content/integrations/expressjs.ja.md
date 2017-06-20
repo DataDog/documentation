@@ -14,7 +14,7 @@ doclevel: basic
 * Monitor your response code -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、ExpressJSから取得したメトリクスをDatadogへ送信します:
 

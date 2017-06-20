@@ -15,7 +15,7 @@ doclevel: basic
 * Monitor any relevant metric -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、RubyアプリケーションのメトリクスをDatadogへ送信します:
 

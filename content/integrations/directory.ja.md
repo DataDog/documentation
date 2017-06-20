@@ -18,7 +18,7 @@ Capture metrics from the files in given directories:
 - age of the creation -->
 
 ### 概要
-{:#int-overview}
+
 
 特定ディレクトリ内のファイルに関するメトリクスをDatadogへ送信します:
 
@@ -79,7 +79,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
             - Collected 8 metrics & 0 events -->
 
 ### 設定
-{:#int-configuration}
+
 
  *ディレクトリ関連のメトリクスを取得するには、Datadog Agentのインストールが必要です。*
 

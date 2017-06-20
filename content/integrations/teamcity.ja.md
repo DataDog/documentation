@@ -14,7 +14,7 @@ doclevel: basic
 * Collect stats and bind tags to every step of your integration -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、TeamCityとDatdogを連携します:
 

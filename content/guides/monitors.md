@@ -91,7 +91,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     negative for a downward change.
 
 ###Define the conditions
-4. {:#metric-conditions :start="4"} Select the alert conditions
+4. Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type

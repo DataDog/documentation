@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect IIS to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect IIS to Datadog in order to:
 -  Correlate the performance of IIS with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、IISのメトリクスをDatadogに送信します:
 

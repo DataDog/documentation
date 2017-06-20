@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、MySQLのメトリクスをDatadogに送信します:
 

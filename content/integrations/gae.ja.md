@@ -17,7 +17,7 @@ doclevel: basic
 You can also send custom metrics to Datadog. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、Google App EngineインテグレーションをPythonプロジェクトに使用します:
 

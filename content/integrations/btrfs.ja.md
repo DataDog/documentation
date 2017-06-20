@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate the performance of Btrfs file system with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、BtrfsのメトリクスをDatadogに送信します:
 

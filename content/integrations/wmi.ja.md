@@ -16,7 +16,7 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 * Correlate their activity with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 #### Windows Management Instrumentation(WMI) Integration
 

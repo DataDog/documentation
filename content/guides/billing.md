@@ -37,7 +37,7 @@ This is per active host in Datadog, whether or not it's running the agent.
 ## Frequently Asked Questions
 
 **Do you support hourly pricing?**
-{:#do-you-support-hourly-pricing}
+
 
 Yes. Our standard hourly rate for Datadog Pro is $0.03 per host per hour. You
 can choose to pay for all of your monitored hosts hourly, or commit to a subset
@@ -48,7 +48,7 @@ than monthly/annual rates if you ran on an hourly rate all the time.
 
 
 **Do non-reporting or inactive hosts count?**
-{:#do-non-reporting-or-inactive-hosts-count}
+
 
 Non-reporting hosts (status '???') do not count towards billing. It might take
 some time (up to 24 hours) for the hosts with the inactive status '???' to drop
@@ -62,7 +62,7 @@ by its tags).
 
 
 **How will an AWS integration impact my monthly billing?**
-{:#how-will-an-aws-integration-impact-my-monthly-billing}
+
 
 We bill for all hosts running the **Agent** as well as for all **EC2 instances**
 picked up by the AWS integration. You will not get billed twice if
@@ -77,20 +77,20 @@ select 'limit metric collection for all accounts' in the
 [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) and customize accordingly.
 
 **How will a VMware integration impact my monthly billing?**
-{:#how-will-a-vmware-integration-impact-my-monthly-billing}
+
 
 The base pricing is $15 per virtual machine per month. See above for more general information.
 
 
 **How do I see what I'll get charged for this current month?**
-{:#how-do-i-see-what-ill-get-charged-for-this-current-month}
+
 
 There is not currently a way to see what the upcoming bill looks like; as an
 admin you can [review past invoices here](https://app.datadoghq.com/account/billing_history).
 
 
 **Can I set a specific email address to receive invoices at?**
-{:#can-i-set-a-specific-email-address-to-receive-invoices-at}
+
 
 You can [set a specific email address to receive invoices here](https://app.datadoghq.com/account/billing), even if that address
 is not a team member within Datadog (eg. `invoices@yourcompany.com`).

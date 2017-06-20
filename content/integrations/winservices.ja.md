@@ -11,6 +11,6 @@ doclevel: basic
 <!-- Monitor the state of your Windows Services. -->
 
 ### 概要
-{:#int-overview}
+
 
 Windowsサービスのステートを監視します。

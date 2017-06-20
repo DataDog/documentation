@@ -16,61 +16,62 @@ The easiest method for assigning tags is to rely on the integration. Tags assign
 
 The following integration sources create tags automatically in Datadog:
 
-| Amazon CloudFront | Distribution |
-| Amazon EC2 | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| Amazon Elastic File System | Filesystem |
-| Amazon Kinesis | Stream State |
-| Amazon Machine Learning | BatchPrediction, DataSource, Evaluation  , MLModel |
-| Amazon Route 53 | Domains, Healthchecks  , HostedZone |
-| Amazon WorkSpaces| WorkSpaces |
-| AWS CloudTrail | CloudTrail |
-| AWS Elastic Load Balancing| Loadbalancer, TargetGroups |
-| AWS Identity and Access Management | Profile Name |
-| AWS SQS | Queue Name |
-| Apache | Apache Host and Port |
-| Azure | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| BTRFS | Usage & Replication Type |
-| Chef | Chef Roles |
-| Consul | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
-| CouchDB | Database Name,  Instance Name |
-| CouchBase | CouchBase Tags,  Instance Name |
-| Docker | Docker Container and Image Name, Container Command, Container Labels |
-| Dyn | Zone, Record Type |
-| Elasticsearch | Cluster Name,  Host Name, Port Number  |
-| Etcd | State Leader or Follower |
-| Fluentd | Host Name, Port Number |
-| Google App Engine | Project Name, Version ID, Task Queue |
-| Google Cloud Platform | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| Go Expvar | Expvar Path |
-| Gunicorn | State Idle or Working, App Name |
-| HAProxy | Service Name, Availability, Backend Host, Status, Type |
-| HTTP Check | URL, Instance |
-| IIS | Site |
-| Jenkins | Job Name, Build Number, Branch, and Results |
-| JMX | JMX Tags |
-| Kafka | Topic |
-| Kubernetes | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
-| Marathon | URL |
-| Memcached | Host, Port,  Request, Cache Hit or Miss |
-| Mesos | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
-| Mongo | Server Name |
-| OpenStack | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| PHP FPM | Pool Name |
-| Pivotal | Current State, Owner, Labels, Requester, Story Type |
-| Postfix | Queue, Instance |
-| * Puppet | Puppet Tags |
-| RabbitMQ | Node, Queue Name, Vhost, Policy, Host |
-| Redis | Host, Port,  Slave or Master |
-| RiakCS | Aggregation Key |
-| SNMP | Device IP Address |
-| Supervisord | Server Name, Process Name |
-| TeamCity | Tags, Code Deployments, Build Number |
-| TokuMX | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
-| Varnish | Name, Backend |
-| VSphere | Host, Datacenter, Server, Instance |
-| Win32 Events | Event ID |
-| Windows Services | Service Name |
-{: .table}
+|                                       |                                                                               |
+| :-------------------------------------|:------------------------------------------------------------------------------|
+| Amazon CloudFront                     | Distribution |
+| Amazon EC2                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| Amazon Elastic File System            | Filesystem |
+| Amazon Kinesis                        | Stream State |
+| Amazon Machine Learning               | BatchPrediction, DataSource, Evaluation  , MLModel |
+| Amazon Route 53                       | Domains, Healthchecks  , HostedZone |
+| Amazon WorkSpaces                     | WorkSpaces |
+| AWS CloudTrail                        | CloudTrail |
+| AWS Elastic Load Balancing            | Loadbalancer, TargetGroups |
+| AWS Identity and Access Management    | Profile Name |
+| AWS SQS                               | Queue Name |
+| Apache                                | Apache Host and Port |
+| Azure                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| BTRFS                                 | Usage & Replication Type |
+| Chef                                  | Chef Roles |
+| Consul                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
+| CouchDB                               | Database Name,  Instance Name |
+| CouchBase                             | CouchBase Tags,  Instance Name |
+| Docker                                | Docker Container and Image Name, Container Command, Container Labels |
+| Dyn                                   | Zone, Record Type |
+| Elasticsearch                         | Cluster Name,  Host Name, Port Number  |
+| Etcd                                  | State Leader or Follower |
+| Fluentd                               | Host Name, Port Number |
+| Google App Engine                     | Project Name, Version ID, Task Queue |
+| Google Cloud Platform                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| Go Expvar                             | Expvar Path |
+| Gunicorn                              | State Idle or Working, App Name |
+| HAProxy                               | Service Name, Availability, Backend Host, Status, Type |
+| HTTP Check                            | URL, Instance |
+| IIS                                   | Site |
+| Jenkins                               | Job Name, Build Number, Branch, and Results |
+| JMX                                   | JMX Tags |
+| Kafka                                 | Topic |
+| Kubernetes                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
+| Marathon                              | URL |
+| Memcached                             | Host, Port,  Request, Cache Hit or Miss |
+| Mesos                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| Mongo                                 | Server Name |
+| OpenStack                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
+| PHP FPM                               | Pool Name |
+| Pivotal                               | Current State, Owner, Labels, Requester, Story Type |
+| Postfix                               | Queue, Instance |
+| * Puppet                              | Puppet Tags |
+| RabbitMQ                              | Node, Queue Name, Vhost, Policy, Host |
+| Redis                                 | Host, Port,  Slave or Master |
+| RiakCS                                | Aggregation Key |
+| SNMP                                  | Device IP Address |
+| Supervisord                           | Server Name, Process Name |
+| TeamCity                              | Tags, Code Deployments, Build Number |
+| TokuMX                                | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
+| Varnish                               | Name, Backend |
+| VSphere                               | Host, Datacenter, Server, Instance |
+| Win32 Events                          | Event ID |
+| Windows Services                      | Service Name |
 
 
 ### Assigning tags using the configuration files

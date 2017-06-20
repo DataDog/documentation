@@ -30,13 +30,13 @@ Datadogは`anomalies`と呼ぶ新しいクエリ関数を追加しています�
 
 <!--
 ### 1. Visualize Anomalies in Dashboards
-{: #dashboards}
+
 
 The chart below shows a dashboard chart that uses anomaly detection. The grey band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 -->
 
 ### 1. Anomaly Detectionをダッシュボードで可視化する
-{: #dashboards}
+
 
 下記では、Anomaly Detectionを適用したメトリクスのグラフを表示しています。グレーのバンドは過去の挙動から期待されるメトリクスの正常な変動幅を示しています。青と赤の折れ線は、実際に取得されたメトリクスの値です。また、青い線は正常な変動幅に収まっており、赤い線は変動幅を逸脱していることを示しています。
 
@@ -68,7 +68,7 @@ This will add anomaly detection to your expression, and you should immediately s
 
 <!--
 ### 2. Alert on Anomalies
-{: #alerts}
+
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
 
@@ -76,7 +76,7 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 -->
 
 ### 2. Anomaly Detectionで異常値をアラートする
-{: #alerts}
+
 
 ダッシュボード上でAnomaly Detectionを可視化するのに加えて、Anomaly Detectionで判定されたメトリクスの異常値を元にアラートMonitorを作成することができます。
 [New Monitor](https://app.datadoghq.com/monitors#/create) ページから新規アラートMonitorの作成を選択し、"Metric"(メトリクスを対象にしたアラート)を選択します。step(1)では他のメトリクスアラートと同様に設定をし、step(2)で"Anomaly Alert"を選択します。
@@ -122,7 +122,7 @@ We currently offer four different anomaly detection algorithms.
 -->
 
 ### 3.Anomaly Detectionのアルゴリズム
-{: #algorithms}
+
 
 現時点で、4つの異なるAnomaly Detectionのアルゴリズムを提供しています。
 

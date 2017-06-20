@@ -14,7 +14,7 @@ doclevel: basic
 * Analyze the QPS made by zone or record type thanks to advanced graphing tools -->
 
 ### 概要
-{:#int-overview}
+
 
 高度なグラフ機能とイベント機能によってゾーンを監視します。
 

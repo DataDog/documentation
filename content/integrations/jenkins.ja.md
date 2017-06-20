@@ -9,7 +9,7 @@ doclevel:
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Jenkins to Datadog in order to:
 
@@ -18,7 +18,7 @@ Connect Jenkins to Datadog in order to:
 - Discuss build failures with your team. -->
 
 ### 概要
-{:#int-overview}
+
 
 Connect Jenkins to Datadog in order to:
 次の目的で、JenkinsとDatadogを連携します:
