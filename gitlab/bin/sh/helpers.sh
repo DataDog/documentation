@@ -28,7 +28,7 @@ collect_static_assets() {
     # ============ collect static assets now, we don't want them as part of the artifact ============ #
     start_step
     echo "---------"
-    echo "Collecting static assets to s3://${STATIC_BUCKET}/ from ${ARTIFACT_RESOURCE}/"
+    echo "Collecting static assets to s3://${STATIC_BUCKET}/documentation/ from ${ARTIFACT_RESOURCE}/"
     s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
           --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
