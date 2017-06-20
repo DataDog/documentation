@@ -42,7 +42,7 @@ For more information on configuration, read the [stub status docs](http://nginx.
 
 **All metrics collected for NGINX and NGINX Plus**
 
-<%= get_metrics_from_git()%>
+
 
 #### NGINX (Open Source)
 

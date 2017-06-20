@@ -187,4 +187,4 @@ Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscove
 
 ### Metrics
 
-<%= get_metrics_from_git()%>
+

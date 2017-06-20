@@ -57,7 +57,7 @@ e.x. datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 ### Tags Assigned

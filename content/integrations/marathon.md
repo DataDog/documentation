@@ -51,4 +51,4 @@ Connects Marathon to Datadog in order to:
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

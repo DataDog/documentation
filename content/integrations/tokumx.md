@@ -86,4 +86,4 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

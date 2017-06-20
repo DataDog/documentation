@@ -42,4 +42,4 @@ The network check is enabled by default. If you would like to make any changes t
 
 # Metrics
 
-<%= get_metrics_from_git('system', 'system.net') %>
+{{< get-metrics-from-git "system" "system.net" >}}

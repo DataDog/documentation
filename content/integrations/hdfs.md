@@ -75,7 +75,6 @@ Execute the info command and verify that the integration check has passed. The o
 
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 
-<%= get_metrics_from_git()
-%>
+{{< get-metrics-from-git >}}
 
 You may experience reduced functionality if using hadoop before v2.2.0. For earlier versions, we need to use Snakebite v1.3.9. If using HA Mode, you may want to upgrade.

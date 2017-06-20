@@ -1,0 +1,5 @@
+postfix:
+- interval: ""
+  metric_name: postfix.queue.size
+  metric_type: gauge
+  unit_name: email

@@ -26,4 +26,4 @@ If "All projects" box is ticked and a project name is specified, all projects wi
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+

@@ -24,7 +24,7 @@ In the Amazon Web Services integration tile, ensure that SQS is checked under me
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 

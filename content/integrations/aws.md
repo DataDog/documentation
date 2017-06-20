@@ -143,7 +143,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 # Permissions
 

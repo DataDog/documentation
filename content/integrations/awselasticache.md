@@ -70,7 +70,7 @@ Here's an example of setting up a graph to combine cache hit metrics from Elasti
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 ## What's next?
 

@@ -49,7 +49,6 @@ Execute the info command and verify that the integration check has passed. The o
 
 # Metrics
 
-<%= get_metrics_from_git()
-%>
+{{< get-metrics-from-git >}}
 
 

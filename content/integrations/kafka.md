@@ -450,4 +450,4 @@ To validate that the integration is working, restart the agent and then run the 
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

@@ -39,7 +39,7 @@ To complete the integration, enter your information in [Datadog](https://app.dat
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 # Events
 

@@ -66,5 +66,4 @@ Execute the info command and verify that the integration check has passed. The o
 
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 
-<%= get_metrics_from_git()
-%>
+{{< get-metrics-from-git >}}

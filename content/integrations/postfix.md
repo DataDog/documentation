@@ -72,4 +72,4 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

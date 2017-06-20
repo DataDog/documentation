@@ -72,52 +72,52 @@ languages:
           weight: 120
       basic_agent:
         - identifier: amazonlinux
-          name: ""
+          name: "Amazon Linux"
           url: /guides/basic_agent_usage/amazonlinux/
-          weight: 100
+          weight: 10
 
         - identifier: centos
-          name: ""
+          name: "CentOs"
           url: /guides/basic_agent_usage/centos/
-          weight: 100
+          weight: 20
 
         - identifier: docker
-          name: ""
+          name: "CoreOS/Docker"
           url: /guides/basic_agent_usage/docker/
-          weight: 100
+          weight: 30
 
         - identifier: deb
-          name: ""
+          name: "Debian"
           url: /guides/basic_agent_usage/deb/
-          weight: 100
+          weight: 40
 
         - identifier: fedora
-          name: ""
+          name: "Fedora"
           url: /guides/basic_agent_usage/fedora/
-          weight: 100
+          weight: 50
 
         - identifier: osx
-          name: ""
+          name: "Mac OS X"
           url: /guides/basic_agent_usage/osx/
-          weight: 100
+          weight: 60
 
         - identifier: redhat
-          name: ""
+          name: "Red Hat"
           url: /guides/basic_agent_usage/redhat/
-          weight: 100
+          weight: 70
 
         - identifier: ubuntu
-          name: ""
+          name: "Ubuntu"
           url: /guides/basic_agent_usage/ubuntu/
-          weight: 100
+          weight: 80
 
         - identifier: windows
-          name: ""
+          name: "Windows"
           url: /guides/basic_agent_usage/windows/
-          weight: 100
+          weight: 90
 
         - identifier: source
-          name: ""
+          name: "From Source"
           url: /guides/basic_agent_usage/source/
           weight: 100
 

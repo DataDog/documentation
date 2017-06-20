@@ -95,7 +95,7 @@ Check the info page in the Agent Manager and verify that the integration check h
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 

@@ -38,7 +38,7 @@ Connect to New Relic to:
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 # Troubleshooting
 

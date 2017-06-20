@@ -1,0 +1,17 @@
+btrfs:
+- interval: ""
+  metric_name: system.disk.btrfs.total
+  metric_type: gauge
+  unit_name: byte
+- interval: ""
+  metric_name: system.disk.btrfs.used
+  metric_type: gauge
+  unit_name: byte
+- interval: ""
+  metric_name: system.disk.btrfs.free
+  metric_type: gauge
+  unit_name: byte
+- interval: ""
+  metric_name: system.disk.btrfs.usage
+  metric_type: gauge
+  unit_name: fraction

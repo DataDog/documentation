@@ -31,5 +31,5 @@ To configure the RiakCS integration, copy riakcs.yaml.example if the conf.d dire
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 

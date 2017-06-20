@@ -25,6 +25,6 @@ Pingdom events can be added by configuring the relevant [Integration Status Moni
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 

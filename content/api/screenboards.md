@@ -130,55 +130,55 @@ result = api.Screenboard.create(**board)
 
 <div class="tab-pane fade in" id="screenboard_create-ruby">
 {{< highlight ruby >}}
-    require 'rubygems'
-    require 'dogapi'
+require 'rubygems'
+require 'dogapi'
 
-    api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-    app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 
-    dog = Dogapi::Client.new(api_key, app_key)
+dog = Dogapi::Client.new(api_key, app_key)
 
-    board = {
-        "width" => 1024,
-        "height" => 768,
-        "board_title" => "dogapi test",
-        "widgets" => [
-            {
-              "type" => "image",
-              "height" => 20,
-              "width" => 32,
-              "y" => 7,
-              "x" => 32,
-              "url" => "https://path/to/image.jpg"
-            }
-        ]
-    }
+board = {
+    "width" => 1024,
+    "height" => 768,
+    "board_title" => "dogapi test",
+    "widgets" => [
+        {
+          "type" => "image",
+          "height" => 20,
+          "width" => 32,
+          "y" => 7,
+          "x" => 32,
+          "url" => "https://path/to/image.jpg"
+        }
+    ]
+}
 
-    result = dog.create_screenboard(board)
+result = dog.create_screenboard(board)
 {{< /highlight >}}
 </div>
 <div class="tab-pane fade in" id="screenboard_create-console">
 {{< highlight shell >}}
-    api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-    app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=9775a026f1ca7d1c6c5af9d94d9595a4
+app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 
-    curl -X POST -H "Content-type: application/json" \
-    -d '{
-            "width": 1024,
-            "height": 768,
-            "board_title": "dogapi test",
-            "widgets": [
-                {
-                  "type": "image",
-                  "height": 20,
-                  "width": 32,
-                  "y": 7,
-                  "x": 32,
-                  "url": "https://path/to/image.jpg"
-                }
-            ]
-        }' \
-    "https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+curl -X POST -H "Content-type: application/json" \
+-d '{
+        "width": 1024,
+        "height": 768,
+        "board_title": "dogapi test",
+        "widgets": [
+            {
+              "type": "image",
+              "height": 20,
+              "width": 32,
+              "y": 7,
+              "x": 32,
+              "url": "https://path/to/image.jpg"
+            }
+        ]
+    }' \
+"https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
 </div>
 </div>
@@ -197,18 +197,75 @@ UPDATE SCREENBOARD
 
 <div class="tab-pane active fade in" id="screenboard_update-python">
 {{< highlight python >}}
-    from datadog import initialize, api
+from datadog import initialize, api
 
-    options = {
-        'api_key': 'api_key',
-        'app_key': 'app_key'
-    }
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
 
-    initialize(**options)
+initialize(**options)
 
-    board_id = 1234
+board_id = 1234
 
-    updated_board = {
+updated_board = {
+    "width": 1024,
+    "height": 768,
+    "board_title": "dogapi test",
+    "widgets": [
+        {
+          "type": "image",
+          "height": 25,
+          "width": 35,
+          "y": 7,
+          "x": 32,
+          "url": "https://path/to/new_image.jpg"
+        }
+    ]
+}
+
+result = api.Screenboard.update(board_id, **updated_board)
+{{< /highlight >}}
+</div>
+
+<div class="tab-pane fade in" id="screenboard_update-ruby">
+{{< highlight ruby >}}
+require 'rubygems'
+require 'dogapi'
+
+api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+board_id = 1234
+
+dog = Dogapi::Client.new(api_key, app_key)
+
+updated_board = {
+    "width" => 1024,
+    "height" => 768,
+    "board_title" => "dogapi test",
+    "widgets" => [
+        {
+          "type" => "image",
+          "height" => 25,
+          "width" => 35,
+          "y" => 7,
+          "x" => 32,
+          "url" => "https://path/to/new_image.jpg"
+        }
+    ]
+}
+
+result = dog.update_screenboard(board_id, updated_board)
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_update-console">
+{{< highlight shell >}}
+api_key=9775a026f1ca7d1c6c5af9d94d9595a4
+app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+board_id=1234
+
+curl -X PUT -H "Content-type: application/json" \
+-d '{
         "width": 1024,
         "height": 768,
         "board_title": "dogapi test",
@@ -222,65 +279,8 @@ UPDATE SCREENBOARD
               "url": "https://path/to/new_image.jpg"
             }
         ]
-    }
-
-    result = api.Screenboard.update(board_id, **updated_board)
-    {{< /highlight >}}
-</div>
-
-<div class="tab-pane fade in" id="screenboard_update-ruby">
-{{< highlight ruby >}}
-    require 'rubygems'
-    require 'dogapi'
-
-    api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-    app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
-    board_id = 1234
-
-    dog = Dogapi::Client.new(api_key, app_key)
-
-    updated_board = {
-        "width" => 1024,
-        "height" => 768,
-        "board_title" => "dogapi test",
-        "widgets" => [
-            {
-              "type" => "image",
-              "height" => 25,
-              "width" => 35,
-              "y" => 7,
-              "x" => 32,
-              "url" => "https://path/to/new_image.jpg"
-            }
-        ]
-    }
-
-    result = dog.update_screenboard(board_id, updated_board)
-    {{< /highlight >}}
-</div>
-<div class="tab-pane fade in" id="screenboard_update-console">
-{{< highlight shell >}}
-    api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-    app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
-    board_id=1234
-
-    curl -X PUT -H "Content-type: application/json" \
-    -d '{
-            "width": 1024,
-            "height": 768,
-            "board_title": "dogapi test",
-            "widgets": [
-                {
-                  "type": "image",
-                  "height": 25,
-                  "width": 35,
-                  "y": 7,
-                  "x": 32,
-                  "url": "https://path/to/new_image.jpg"
-                }
-            ]
-        }' \
-    "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+    }' \
+"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
 </div>
 </div>
@@ -300,43 +300,43 @@ GET SCREENBOARD
 
   <div class="tab-pane active fade in" id="screenboard_get-python">
 {{< highlight python >}}
-    from datadog import initialize, api
+from datadog import initialize, api
 
-    options = {
-        'api_key': 'api_key',
-        'app_key': 'app_key'
-    }
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
 
-    initialize(**options)
+initialize(**options)
 
-    board_id = 1234
+board_id = 1234
 
-    result = api.Screenboard.get(board_id)
+result = api.Screenboard.get(board_id)
 {{< /highlight >}}
 </div>
 
 <div class="tab-pane fade in" id="screenboard_get-ruby">
 {{< highlight ruby >}}
-    require 'rubygems'
-    require 'dogapi'
+require 'rubygems'
+require 'dogapi'
 
-    api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-    app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
-    board_id = 1234
+api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+board_id = 1234
 
-    dog = Dogapi::Client.new(api_key, app_key)
+dog = Dogapi::Client.new(api_key, app_key)
 
-    result = dog.get_screenboard(board_id)
+result = dog.get_screenboard(board_id)
 {{< /highlight >}}
 </div>
 <div class="tab-pane fade in" id="screenboard_get-console">
 {{< highlight shell >}}
-    api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-    app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
-    board_id=1234
+api_key=9775a026f1ca7d1c6c5af9d94d9595a4
+app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+board_id=1234
 
-    curl -X GET \
-    "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X GET \
+"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -355,43 +355,43 @@ DELETE SCREENBOARD
 
 <div class="tab-pane active fade in" id="screenboard_delete-python">
 {{< highlight python >}}
-    from datadog import initialize, api
+from datadog import initialize, api
 
-    options = {
-        'api_key': 'api_key',
-        'app_key': 'app_key'
-    }
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
 
-    initialize(**options)
+initialize(**options)
 
-    board_id = 1234
+board_id = 1234
 
-    result = api.Screenboard.delete(board_id)
+result = api.Screenboard.delete(board_id)
 {{< /highlight >}}
 </div>
 <div class="tab-pane fade in" id="screenboard_delete-ruby">
 {{< highlight ruby >}}
-    require 'rubygems'
-    require 'dogapi'
+require 'rubygems'
+require 'dogapi'
 
-    api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-    app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
-    board_id = 1234
+api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+board_id = 1234
 
-    dog = Dogapi::Client.new(api_key, app_key)
+dog = Dogapi::Client.new(api_key, app_key)
 
-    result = dog.delete_screenboard(board_id)
+result = dog.delete_screenboard(board_id)
 {{< /highlight >}}
 </div>
 <div class="tab-pane fade in" id="screenboard_delete-console">
 {{< highlight shell >}}
-    api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-    app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
-    board_id=1234
+api_key=9775a026f1ca7d1c6c5af9d94d9595a4
+app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+board_id=1234
 
-    curl -X DELETE \
-    "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
-    {{< /highlight >}}
+curl -X DELETE \
+"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+{{< /highlight >}}
   </div>
 </div>
 
@@ -411,42 +411,42 @@ SHARE SCREENBOARD
 {{< highlight python >}}
 from datadog import initialize, api
 
-    options = {
-        'api_key': 'api_key',
-        'app_key': 'app_key'
-    }
+options = {
+    'api_key': 'api_key',
+    'app_key': 'app_key'
+}
 
-    initialize(**options)
+initialize(**options)
 
-    board_id = 1234
+board_id = 1234
 
-    result = api.Screenboard.share(board_id)
+result = api.Screenboard.share(board_id)
 {{< /highlight >}}
 </div>
 
 <div class="tab-pane fade in" id="screenboard_share-ruby">
 {{< highlight ruby >}}
-    require 'rubygems'
-    require 'dogapi'
+require 'rubygems'
+require 'dogapi'
 
-    api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-    app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
-    board_id = 1234
+api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
+app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+board_id = 1234
 
-    dog = Dogapi::Client.new(api_key, app_key)
+dog = Dogapi::Client.new(api_key, app_key)
 
-    result = dog.share_screenboard(board_id)
-    # result = {"board_id" => board_id, "public_url" => "https://path/to/sb"}
+result = dog.share_screenboard(board_id)
+# result = {"board_id" => board_id, "public_url" => "https://path/to/sb"}
 {{< /highlight >}}
 </div>
 <div class="tab-pane fade in" id="screenboard_share-console">
 {{< highlight shell >}}
-    api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-    app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
-    board_id=1234
+api_key=9775a026f1ca7d1c6c5af9d94d9595a4
+app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+board_id=1234
 
-    curl -X GET \
-    "https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X GET \
+"https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
 
 {{< /highlight >}}
 </div>
