@@ -22,7 +22,7 @@ Fill out the form as shown, leaving the latter two URL fields blank. Desk should
 Then from your Datadog account, enter the corresponding information on the [Desk tile][2]. You will also need to enter your company's unique Desk domain name.
 Hit the install button, and then you're all set! You will soon be able to select desk.* metrics on a custom dashboard or view them on the provided [Desk dashboard][3]. (You can also read about this integration on [our blog][4].)
 
-   [1]: /static/images/desk_config.png
+   [1]: /images/desk_config.png
    [2]: https://app.datadoghq.com/account/settings#integrations/desk
    [3]: https://app.datadoghq.com/screen/integration/desk
    [4]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/

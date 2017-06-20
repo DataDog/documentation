@@ -166,9 +166,9 @@ In addition to the metrics you get from the database engines you will also get t
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
 
-   [1]: /static/images/rds-console.png
-   [2]: /static/images/aurora-rds-dash.png
+   [1]: /images/rds-console.png
+   [2]: /images/aurora-rds-dash.png
    [3]: mailto:support@datadoghq.com
-   [4]: /static/images/rds-enhanced-install.png
+   [4]: /images/rds-enhanced-install.png
    [5]: http://aws.amazon.com/documentation/cli/
    [6]: https://app.datadoghq.com/account/settings#api

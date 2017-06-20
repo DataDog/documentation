@@ -19,6 +19,6 @@ Once you have Pagerduty integrated, you can check out our custom [Pagerduty Inci
 
    [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide/
    [2]: https://app.datadoghq.com/report/pagerduty
-   [3]: /static/images/pagerduty_incident_trends.png
+   [3]: /images/pagerduty_incident_trends.png
 
 
