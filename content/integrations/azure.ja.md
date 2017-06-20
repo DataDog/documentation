@@ -85,7 +85,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 
 #### 手作業でのインストール
 
-<!-- You can either deploy agents manually by following the instructions <a href="/guides/azure/">here</a>. -->
+<!-- You can either deploy agents manually by following the instructions <a href="https://docs.datadoghq.com/guides/azure/">here</a>. -->
 
 次の手順に従って、手作業でDatadog Agentをインストールすることも出来ます。
 

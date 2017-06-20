@@ -26,7 +26,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -95,7 +95,7 @@ statsd = Datadog::Statsd.new
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
     This tutorial has examples for Python and Ruby, but check out the
-    <a href="/libraries/">libraries page</a> if you use another language.
+    <a href="https://docs.datadoghq.com/libraries/">libraries page</a> if you use another language.
   </div>
 
 </div>
@@ -155,7 +155,7 @@ statsd = Datadog::Statsd.new
   </div>
   <p>これで、ライブラリーが使えるように成りました。</p>
   <div class="alert info-block">
-    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/ja/libraries/">Libraries</a>のページを参照してくだい。
+    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="https://docs.datadoghq.com/ja/libraries/">Libraries</a>のページを参照してくだい。
   </div>
 
 </div>
@@ -738,10 +738,10 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
 
 
-- <a href="/ja/api/#metrics">API レファレンスのmetrics</a>
-- <a href="/ja/api/#tags">API レファレンスのtag</a>
-- <a href="/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
-- <a href="/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+- <a href="https://docs.datadoghq.com/ja/api/#metrics">API レファレンスのmetrics</a>
+- <a href="https://docs.datadoghq.com/ja/api/#tags">API レファレンスのtag</a>
+- <a href="https://docs.datadoghq.com/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
+- <a href="https://docs.datadoghq.com/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
 
 <!--
 - <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
@@ -822,7 +822,7 @@ Datadog:
 
 <ul>
   <li>
-    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+    Submit metrics directly to Datadog's <a href="https://docs.datadoghq.com/api/">HTTP API</a>
   </li>
   <li>
     Use codahale's Java <a
@@ -841,7 +841,7 @@ Datagogにメトリクスを送信するには、Datadog Agent にバンドル�
 
 <ul>
   <li>
-    Datadogの<a href="/ja/api/">HTTP API</a>を使って直接送信する方法
+    Datadogの<a href="https://docs.datadoghq.com/ja/api/">HTTP API</a>を使って直接送信する方法
   </li>
   <li>
     codahaleのJava用 metrics ライブラリーと（<a href="https://github.com/vistarmedia">Vistar Media</a>が寄贈してくれた)<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>を使って送信する方法

@@ -22,7 +22,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -79,7 +79,7 @@ statsd = Datadog::Statsd.new
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
     This tutorial has examples for Python and Ruby, but check out the
-    <a href="/libraries/">libraries page</a> if you use another language.
+    <a href="https://docs.datadoghq.com/libraries/">libraries page</a> if you use another language.
   </div>
 
 </div>
@@ -480,7 +480,7 @@ Datadog:
 
 <ul>
   <li>
-    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+    Submit metrics directly to Datadog's <a href="https://docs.datadoghq.com/api/">HTTP API</a>
   </li>
   <li>
     Use Dropwizard's Java <a

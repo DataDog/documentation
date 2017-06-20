@@ -47,7 +47,7 @@ for you, to create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
+* For more on tagging, please see <a target="_blank" href="https://docs.datadoghq.com/faq/#tagging">here</a>.
 
 ## Host Map
 
@@ -71,7 +71,7 @@ To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation
+* Great for distributed <a target="_blank" href="https://docs.datadoghq.com/faq/#team">teams</a> and maintaining the focus of an investigation
 * You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident
 
@@ -84,7 +84,7 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
+* <a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email
 * @support-datadog to ask for assistance
 
 {{< img src="event_stream_claim.png" >}}
@@ -93,7 +93,7 @@ For each incident users can:
 
 {{< img src="dashboard_events.png" >}}
 
-Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
+Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
 
 * Synchronous mousing across all graphs in a dashboard.
 * Vertical bars are events in the context of the metric.

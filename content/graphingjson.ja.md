@@ -122,11 +122,11 @@ A Series can be further combined together via binary operators (+, -, /, *):
 <!--
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="/examples/graphing functions/">Examples</a>
+A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/examples/graphing functions/">Examples</a>
 -->
 それぞれのクエリの結果に対して関数を適用することができます。
 
-これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="/examples/graphing functions/">Examples for Graphing Functions</a>
+これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="https://docs.datadoghq.com/examples/graphing functions/">Examples for Graphing Functions</a>
 本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
 
 {{< include-markdown "layouts/partials/graphingfunctions.md" >}}

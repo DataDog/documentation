@@ -243,7 +243,7 @@ the metric falls below the given threshold.</p> -->
 <p>In the final step of setting up an alert, you can give any necessary commentary
 for the alert so if it triggers it will alert the correct people with the most context possible.
 Each graph delivered via email or in the event stream when an alert triggers is a hyperlink
-to that graph at that exact timeframe. In the body of the message you can <a href="/faq/#notify">@notify</a>
+to that graph at that exact timeframe. In the body of the message you can <a href="https://docs.datadoghq.com/faq/#notify">@notify</a>
 members of the team to have it specifically call out to them. You can also do this in
 part 5, 'Notify your team'.</p> -->
 
@@ -258,7 +258,7 @@ part 5, 'Notify your team'.</p> -->
 <h4 id="notify1">６．アラート送信先の設定</h4>
 
 
-メッセージ本文では、Datadogの<a href="/ja/faq/#notify">@notify</a>機能を埋め込んで、特定のメンバにのみ連絡が届くようにすることもできます。この特定のメンバへのアラートは、設定項目のパート5も同じことができるようになっています。
+メッセージ本文では、Datadogの<a href="https://docs.datadoghq.com/ja/faq/#notify">@notify</a>機能を埋め込んで、特定のメンバにのみ連絡が届くようにすることもできます。この特定のメンバへのアラートは、設定項目のパート5も同じことができるようになっています。
 
 
 <!-- <h3 id="faqs">Alerting FAQs</h3>

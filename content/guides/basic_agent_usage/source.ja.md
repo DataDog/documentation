@@ -195,4 +195,4 @@ You can contact them in one of the following ways:
 
 <br/>
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
+上記の方法を実行しても問題が解決しない場合は、 <a href="https://docs.datadoghq.com/ja/help/" target="_top">サポートチーム</a>にご連絡ください。

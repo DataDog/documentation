@@ -86,9 +86,9 @@ class LinkChecker(object):
         if link.startswith('//'):
             link = 'https:' + link
         if link.startswith('/'):
-            link = 'https://www.datadoghq.com' + link
+            link = self.domain + link
         if 'http' not in link:
-            link = 'https://www.datadoghq.com/' + link
+            link = self.domain + link
         return link
 
     def check_link(self, link):

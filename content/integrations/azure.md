@@ -261,7 +261,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 
 1. Navigate to your VM in the Azure Portal > Settings > Extenstions > Add > Select Datadog Agent. Use an API key found <a href="https://app.datadoghq.com/account/settings#api">here</a>
-2. Manually deploy Agents by following the instructions <a href="/guides/azure/">here</a>
+2. Manually deploy Agents by following the instructions <a href="https://docs.datadoghq.com/guides/azure/">here</a>
 3. Install based on operating system or CICD tool <a href="https://app.datadoghq.com/account/settings#agent"> using these instructions</a>
 
 ### Metrics
