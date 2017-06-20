@@ -14,36 +14,41 @@ var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
+var manifest = require('./src/manifest.json');
 
-// See https://github.com/austinpray/asset-builder
-var manifest = require('asset-builder')('./src/manifest.json');
-
-// `path` - Paths to base asset directories. With trailing slashes.
-// - `path.source` - Path to the source files. Default: `assets/`
-// - `path.dist` - Path to the build directory. Default: `dist/`
+// asset manifest is a json object containing paths to dependencies
 var path = manifest.paths;
-
-// `config` - Store arbitrary configuration values here.
-var config = manifest.config || {};
-
-// `globs` - These ultimately end up in their respective `gulp.src`.
-// - `globs.js` - Array of asset-builder JS dependency objects. Example:
-//   ```
-//   {type: 'js', name: 'main.js', globs: []}
-//   ```
-// - `globs.css` - Array of asset-builder CSS dependency objects. Example:
-//   ```
-//   {type: 'css', name: 'main.css', globs: []}
-//   ```
-// - `globs.fonts` - Array of font path globs.
-// - `globs.images` - Array of image path globs.
-// - `globs.bower` - Array of all the main Bower files.
-var globs = manifest.globs;
 
 // `project` - paths to first-party assets.
 // - `project.js` - Array of first-party JS assets.
 // - `project.css` - Array of first-party CSS assets.
-var project = manifest.getProjectGlobs();
+var project = {
+  "fonts": ["src/fonts/**/*"],
+  "images": ["src/images/**/*"],
+  "js": [],
+  "css": [],
+  "globs": []
+};
+
+// build dependencies and globs
+for (var fileName in manifest.dependencies) {
+  if (fileName.indexOf('.js') > -1) {
+    project["js"] = project["js"].concat(manifest.dependencies[fileName]["files"]);
+  }
+  if (fileName.indexOf('.css') > -1) {
+    project["css"] = project["css"].concat(manifest.dependencies[fileName]["files"]);
+  }
+  var fileNameArray = fileName.split(".");
+  console.log();
+  project.globs.push(
+    {
+      "type": fileNameArray[fileNameArray.length - 1],
+      "name": fileName,
+      "globs": manifest.dependencies[fileName]["files"].concat(manifest.dependencies[fileName]["vendor"])
+    }
+  );
+}
+
 
 // CLI options
 var enabled = {
@@ -134,17 +139,20 @@ var writeToManifest = function (directory) {
 // raised. If the `--production` flag is set: this task will fail outright.
 gulp.task('styles', ['wiredep'], function () {
   var merged = merge();
-  manifest.forEachDependency('css', function (dep) {
-    var cssTasksInstance = cssTasks(dep.name);
-    if (!enabled.failStyleTask) {
-      cssTasksInstance.on('error', function (err) {
-        console.error(err.message);
-        this.emit('end');
-      });
+  for (var i in project["globs"]) {
+    var dep = project["globs"][i];
+    if (dep["type"] == 'css') {
+      var cssTasksInstance = cssTasks(dep.name);
+      if (!enabled.failStyleTask) {
+        cssTasksInstance.on('error', function (err) {
+          console.error(err.message);
+          this.emit('end');
+        });
+      }
+      merged.add(gulp.src(dep.globs, {base: 'scss'})
+        .pipe(cssTasksInstance));
     }
-    merged.add(gulp.src(dep.globs, {base: 'scss'})
-      .pipe(cssTasksInstance));
-  });
+  }
   return merged
     .pipe(writeToManifest('css'));
 });
@@ -154,12 +162,15 @@ gulp.task('styles', ['wiredep'], function () {
 // and project JS.
 gulp.task('scripts', function () {
   var merged = merge();
-  manifest.forEachDependency('js', function (dep) {
-    merged.add(
-      gulp.src(dep.globs, {base: 'js'})
-        .pipe(jsTasks(dep.name))
-    );
-  });
+  for (var i in project["globs"]) {
+    var dep = project["globs"][i];
+    if (dep["type"] == 'js') {
+      merged.add(
+        gulp.src(dep.globs, {base: 'js'})
+          .pipe(jsTasks(dep.name))
+      );
+    }
+  }
   return merged
     .pipe(writeToManifest('js'));
 });
@@ -168,7 +179,7 @@ gulp.task('scripts', function () {
 // `gulp jshint` - Lints configuration JSON and project JS.
 gulp.task('jshint', function () {
   return gulp.src([
-    'bower.json', 'gulpfile.js'
+    'gulpfile.js'
   ].concat(project.js))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))

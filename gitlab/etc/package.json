@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "node-sass": "^4.1",
-    "asset-builder": "^1.1",
     "browser-sync": "^2.8",
     "del": "^2.2",
     "gulp": "^3.9",

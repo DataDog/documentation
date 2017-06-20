@@ -18,9 +18,7 @@
     <li class='nav-header'>Table of Contents</li>
     {{ range $k, $v := $.Params.sidebar.nav }}
 
-      {{ if $v.header }}
-
-      {{ else }}
+      {{ if not $v.header }}
 
         <li><a href="{{ $v.href }}">{{ $v.text }}</a></li>
 
