@@ -105,7 +105,8 @@ build_hugo_site() {
     # URL
     # ============ generate hugo config file ============ #
     start_step
-    if [[ "${BUCKET}" == *"preview"* ]]; then
+    echo "building config for: ${CI_ENVIRONMENT_NAME}"
+    if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
       printf "User-agent: *\nDisallow: /" >> "static/robots.txt"  # add a robots.txt to the preview site
     fi
     build_config.py -d "${URL}" -b "${CI_COMMIT_REF_NAME}" -p "${ARTIFACT_RESOURCE}" "config.yaml" "${CONFIG}" || fail_step "${FUNCNAME}";
