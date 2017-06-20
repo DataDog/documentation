@@ -78,4 +78,4 @@ Not sure how to execute the last two steps? Visit the Agent Usage Guide for more
 
 ## Metrics
 
-<%= get_metrics_from_git()  %>
+{{< get-metrics-from-git >}}

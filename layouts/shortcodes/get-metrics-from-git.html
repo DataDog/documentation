@@ -16,49 +16,52 @@
 
 {{ $data := index $.Page.Site.Data.integrations $metrics }}
 
-{{ if (index $params 1 ) }}
+{{ if and ($metrics) ($data)}}
 
-{{ $name_space := (index $params 1) }}
+  {{ if (index $params 1 ) }}
 
-  {{ if $metrics }}
+    {{ $name_space := (index $params 1) }}
 
-  <table class="table">
-    <tbody>
-    {{ range $k, $v := (index $data $metrics) }}
+    {{ if $metrics }}
 
-      {{ if (in $v.metric_name $name_space) }}
-
-        <tr>
-          <td>
-          <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-          <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-          </td>
-        </tr>
-
-      {{ end }}
-
-
-    {{ end }}
-    </tbody>
-  </table>
-
-  {{ end }}
-
-{{ else }}
-
-  {{ if $metrics }}
     <table class="table">
       <tbody>
       {{ range $k, $v := (index $data $metrics) }}
-        <tr>
-          <td>
-          <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-          <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-          </td>
-        </tr>
+
+        {{ if (in $v.metric_name $name_space) }}
+
+          <tr>
+            <td>
+            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+            <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+            </td>
+          </tr>
+
+        {{ end }}
+
+
       {{ end }}
       </tbody>
     </table>
-  {{ end }}
 
+    {{ end }}
+
+  {{ else }}
+
+    {{ if $metrics }}
+      <table class="table">
+        <tbody>
+        {{ range $k, $v := (index $data $metrics) }}
+          <tr>
+            <td>
+            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+            <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+            </td>
+          </tr>
+        {{ end }}
+        </tbody>
+      </table>
+    {{ end }}
+
+  {{ end }}
 {{ end }}
