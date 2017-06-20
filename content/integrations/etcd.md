@@ -17,7 +17,6 @@ Capture etcd metrics in Datadog to:
 
 ## Metrics
 
-<%= get_metrics_from_git()
-%>
+{{< get-metrics-from-git >}}
 
 Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
