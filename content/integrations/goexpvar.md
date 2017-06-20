@@ -17,4 +17,4 @@ Use the Datadog Expvar Agent check to:
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

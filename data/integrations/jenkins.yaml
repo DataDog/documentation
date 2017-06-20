@@ -1,0 +1,9 @@
+jenkins:
+- interval: ""
+  metric_name: jenkins.job.duration
+  metric_type: gauge
+  unit_name: second
+- interval: ""
+  metric_name: jenkins.job.completed
+  metric_type: gauge
+  unit_name: event

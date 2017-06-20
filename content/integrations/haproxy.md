@@ -54,5 +54,5 @@ Learn more about how to monitor HAProxy performance metrics thanks to [our serie
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 

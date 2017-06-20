@@ -17,4 +17,4 @@ Bring Gearman metrics to Datadog to:
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

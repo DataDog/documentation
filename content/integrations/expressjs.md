@@ -15,4 +15,4 @@ Add the connect-datadog middleware to your application to:
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

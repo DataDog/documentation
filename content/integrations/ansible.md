@@ -38,4 +38,4 @@ To install the Datadog Agent using Ansible, refer to the [installation documenta
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

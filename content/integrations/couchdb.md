@@ -17,4 +17,4 @@ Capture CouchDB data in Datadog to:
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

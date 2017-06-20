@@ -26,4 +26,4 @@ If using multiple Service IDs from one account, please enter an API token on eac
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

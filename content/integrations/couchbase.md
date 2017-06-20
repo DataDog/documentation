@@ -17,4 +17,4 @@ Get metrics from Couchbase in real time to
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

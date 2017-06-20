@@ -216,7 +216,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 # Permissions
 
