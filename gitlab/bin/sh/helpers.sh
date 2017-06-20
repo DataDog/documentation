@@ -177,7 +177,7 @@ push_site_to_s3() {
     start_step
     echo "attempting to push to s3://${BUCKET}/$(set_site_destination ${CI_COMMIT_REF_NAME})..."
     # long cache - includes assets that need to be loaded first
-    s3cmd put --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
+    s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
           --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
           "${ARTIFACT_RESOURCE}/" s3://${BUCKET}/$(set_site_destination "${BUCKET}" "${CI_COMMIT_REF_NAME}")
