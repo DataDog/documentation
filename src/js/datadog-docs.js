@@ -127,7 +127,7 @@ $(document).ready(function() {
                 heading: this.header, //[selector], the first level heading
                 subheading: this.subheading, //[selector], the second level heading
                 reference:'#toc-box', //[selector], reference element for horizontal positioning
-                title: 'Table Of Contents', //[selector or string], title of the menu
+                title: 'Table of Contents', //[selector or string], title of the menu
                 hash: false, //[boolean], setting true will enable URL hashing on click
                 //offsetTop: 300, //[number], spacing/margin above the menu
                 speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
