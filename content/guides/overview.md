@@ -90,7 +90,6 @@ For each incident users can:
 {{< img src="event_stream_claim.png" >}}
 
 ## Dashboards
-{: dashboards}
 
 {{< img src="dashboard_events.png" >}}
 
@@ -110,7 +109,6 @@ without access to your data or any other information (via the pencil in the uppe
 
 
 ## Monitoring
-{: monitoring}
 
 {{< img src="alert.png" >}}
 

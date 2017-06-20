@@ -194,7 +194,6 @@ without access to your data or any other information (via the pencil in the uppe
 </ul> -->
 
 ## 原因追跡用ダッシュボード
-{: dashboards}
 
 ![](/images/dashboard_events.png)
 
@@ -236,7 +235,6 @@ to pull the data from.</li>
 </ol> -->
 
 ## 監視とアラート
-{: monitoring}
 
 ![](/images/alert.png)
 
