@@ -5,7 +5,7 @@ language: ja
 title: 8分間で5種類のインテグレーションをインストール
 kind: video
 wistiaid: ira7wzi1d4
-tags:
+videos:
     - Introduction
     - Installation
     - PagerDuty

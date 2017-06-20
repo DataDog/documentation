@@ -5,7 +5,7 @@ language: ja
 title: Matt's Quick Tips - Screenboardの共有
 kind: video
 wistiaid: old1t5trj4
-tags:
+videos:
     - Introduction
     - Dashboards
     - Screenboards

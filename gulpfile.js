@@ -13,7 +13,7 @@ var plumber = require('gulp-plumber');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
-var jshint       = require('gulp-jshint');
+var jshint = require('gulp-jshint');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./src/manifest.json');
@@ -166,7 +166,7 @@ gulp.task('scripts', function () {
 
 // ### JSHint
 // `gulp jshint` - Lints configuration JSON and project JS.
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   return gulp.src([
     'bower.json', 'gulpfile.js'
   ].concat(project.js))
@@ -202,8 +202,8 @@ gulp.task('watch', function () {
 // `gulp build` - Run all the build tasks but don't clean up beforehand.
 // Generally you should be running `gulp` instead of `gulp build`.
 gulp.task('build', function (callback) {
-  runSequence('scss',
-    'js',
+  runSequence('styles',
+    'scripts',
     callback);
 });
 

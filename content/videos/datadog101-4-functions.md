@@ -3,7 +3,7 @@ title: Datadog 101 - Functions
 kind: video
 language: en
 wistiaid: gl60wag74v
-tags:
+videos:
     - Datadog 101
     - Dashboards
 
