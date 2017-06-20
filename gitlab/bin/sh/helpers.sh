@@ -200,16 +200,21 @@ test_site_links() {
     filters="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
 
     curr_dir=$(pwd)"/${ARTIFACT_RESOURCE}"
-    check_links.py "${1}" -p 5 -f "${filters}" -d "${2}" --check_all "${3}" \
+
+    domain=${2}
+    if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
+        domain="${2}/${CI_COMMIT_REF_NAME}"
+    fi
+    check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
     --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
 
     # update trello with broken external links
-#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
-#        echo "updating trello"
-#        source /etc/trello_config.sh
-#        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
-#        --list_id "${list_id}" --members "${members}"
-#    fi
+	#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+	#        echo "updating trello"
+	#        source /etc/trello_config.sh
+	#        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
+	#        --list_id "${list_id}" --members "${members}"
+	#    fi
 
     # update status
     if [[ $? != 0 ]]; then
