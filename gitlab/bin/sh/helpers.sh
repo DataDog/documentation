@@ -28,11 +28,11 @@ collect_static_assets() {
     # ============ collect static assets now, we don't want them as part of the artifact ============ #
     start_step
     echo "---------"
-    echo "Collecting static assets to s3://${STATIC_BUCKET}/documentation/ from ${ARTIFACT_RESOURCE}/"
+    echo "Collecting static assets to s3://${STATIC_BUCKET}/ from ${ARTIFACT_RESOURCE}/"
     s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
           --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
-          "${ARTIFACT_RESOURCE}/" s3://${STATIC_BUCKET}/documentation/ || (echo "failed to collect static to s3://${STATIC_BUCKET}/" && fail_step "${FUNCNAME}")
+          "${ARTIFACT_RESOURCE}/" s3://${STATIC_BUCKET}/ || (echo "failed to collect static to s3://${STATIC_BUCKET}/" && fail_step "${FUNCNAME}")
     echo "Done collecting static."
     pass_step  "${FUNCNAME}"
 }
@@ -43,7 +43,7 @@ remove_static_from_repo() {
     start_step
     echo "---------"
     echo "Removing static from repo."
-    find "${ARTIFACT_RESOURCE}" -type d -name "img" -print | xargs rm -rf
+    find "${ARTIFACT_RESOURCE}" -type d -name "images" -print | xargs rm -rf
     echo "Done removing static from repo."
     pass_step  "${FUNCNAME}"
 }

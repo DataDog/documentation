@@ -64,9 +64,8 @@ build_preview:
   script:
     - version_static_assets
     - build_hugo_site
-    - collect_static_assets
-    - remove_static_from_repo
     - push_site_to_s3
+    - remove_static_from_repo
     - create_artifact
   only:
     - /pull/\/.*/
