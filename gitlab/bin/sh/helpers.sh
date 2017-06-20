@@ -115,6 +115,7 @@ build_hugo_site() {
     echo "---------"
     echo "Building hugo with build.yaml based on ${CONFIG}; referencing ${URL}"
     # fail hugo build on WARN or ERROR
+    hugo version
     if hugo --config="build.yaml" --verbose 2>&1 | grep -E  "WARN|ERROR" | grep -v "No theme set" > /tmp/hugo.log; then
         echo "done."
     fi
