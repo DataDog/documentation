@@ -204,7 +204,7 @@ test_site_links() {
 
     domain=${2}
     if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
-        domain="${2}/${CI_COMMIT_REF_NAME}"
+        domain="${2}${CI_COMMIT_REF_NAME}"
     fi
     check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
     --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
