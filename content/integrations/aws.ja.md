@@ -30,78 +30,84 @@ Connect to Amazon Web Services (AWS) in order to:
 
 <!-- Related integrations include:
 
-| [Billing](/integrations/awsbilling) | billing and budgets |
-| [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
-| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
-| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table} -->
+|                                                               |                                                                               |
+| :-------------------------------------------------------------|:------------------------------------------------------------------------------|
+| [Billing](/integrations/awsbilling)                           | billing and budgets                                                           |
+| [CloudTrail](/integrations/awscloudtrail)                     | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/integrations/awsdynamo)                          | NoSQL Database                                                                |
+| [Elastic Beanstalk](/integrations/awsbeanstalk)               | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2)           | resizable compute capacity in the cloud                                       |
+| [ElastiCache](/integrations/awselasticache)                   | in-memory cache in the cloud                                                  |
+| [Elastic Load Balancing (ELB)](/integrations/awselb)          | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [EC2 Container Service (ECS)](/integrations/ecs)              | container management service that supports Docker containers                  |
+| [Elasticsearch Service (ES)](/integrations/awses)             |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Kinesis](/integrations/awskinesis)                           | service for real-time processing of large, distributed data streams           |
+| [Relational Database Service (RDS)](/integrations/awsrds)     | relational database in the cloud                                              |
+| [Route 53](/integrations/awsroute53)                          | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/integrations/awsses)            | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/integrations/awssns)      | alert and notifications                                                       |
+| [Simple Storage Service (S3)](/integrations/awss3)            | highly available and scalable cloud storage service                           |
+ -->
 
 関連しているAWS系サービスのインテグレーションは以下になります:
 
-| [Billing](/ja/integrations/awsbilling) | billing and budgets |
-| [CloudTrail](/ja/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [Dynamo DB](/ja/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/ja/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/ja/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/ja/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/ja/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [EC2 Container Service (ECS)](/ja/integrations/ecs) | container management service that supports Docker containers |
-| [Elasticsearch Service (ES)](/ja/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Relational Database Service (RDS)](/ja/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/ja/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/ja/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/ja/integrations/awssns) | alert and notifications |
-| [Simple Storage Service (S3)](/ja/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table}
+|                                                               |                                                                               |
+| :-------------------------------------------------------------|:------------------------------------------------------------------------------|
+| [Billing](/ja/integrations/awsbilling)                        | billing and budgets                                                           |
+| [CloudTrail](/ja/integrations/awscloudtrail)                  | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/ja/integrations/awsdynamo)                       | NoSQL Database                                                                |
+| [Elastic Beanstalk](/ja/integrations/awsbeanstalk)            | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Cloud Compute (EC2)](/ja/integrations/awsec2)        | resizable compute capacity in the cloud                                       |
+| [ElastiCache](/ja/integrations/awselasticache)                | in-memory cache in the cloud                                                  |
+| [Elastic Load Balancing (ELB)](/ja/integrations/awselb)       | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [EC2 Container Service (ECS)](/ja/integrations/ecs)           | container management service that supports Docker containers                  |
+| [Elasticsearch Service (ES)](/ja/integrations/awses)          |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Kinesis](/integrations/awskinesis)                           | service for real-time processing of large, distributed data streams           |
+| [Relational Database Service (RDS)](/ja/integrations/awsrds)  | relational database in the cloud                                              |
+| [Route 53](/ja/integrations/awsroute53)                       | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/ja/integrations/awsses)         | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/ja/integrations/awssns)   | alert and notifications                                                       |
+| [Simple Storage Service (S3)](/ja/integrations/awss3)         | highly available and scalable cloud storage service                           |
 
 
 <!-- There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
 
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Queing Service |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
-{:.table} -->
+|                           |                                                                               |
+| :-------------------------|
+| AutoScaling               |
+| Budgeting                 |
+| CloudFront                |
+| CloudSearch               |
+| EBS                       |
+| Elastic MapReduce         |
+| Firehose                  |
+| Lambda                    |
+| MachineLearning           |
+| OpsWorks                  |
+| Simple Queing Service     |
+| Simple Workflow Service   |
+| Trusted Advisor           |
+| WorkSpaces                |
+ -->
 
 上記以外にもDatadogと連携することができる他のAWSサービスがあります。それらのサービスについては、AWSインテグレーションまたはCloudTrailインテグレーション出設定することができます。現状では以下がそれらの他のAWSサービスになります。これらは状況にあわせて順次追加されます:
 
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Queing Service |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
-{:.table}
+|                           |                                                                               |
+| :-------------------------|
+| AutoScaling               |
+| Budgeting                 |
+| CloudFront                |
+| CloudSearch               |
+| EBS                       |
+| Elastic MapReduce         |
+| Firehose                  |
+| Lambda                    |
+| MachineLearning           |
+| OpsWorks                  |
+| Simple Queing Service     |
+| Simple Workflow Service   |
+| Trusted Advisor           |
+| WorkSpaces                |
 
 
 <!-- # Installation

@@ -456,23 +456,23 @@ triggering scope into the message of multi alerts.
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
-| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
-| **Conditionals** |
-| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
-| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
-| `is_warning` | | Y | Y | Y | Y | Y | |
-| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
-| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
-| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
-| `is_match` | Y | Y | Y | Y | Y | Y | Y |
-| **Variables** |
-| `{{value}}` | | Y | Y | | | | |
-| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
-| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
-| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
-| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual<br/>`{{check_message}}` | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-{: .tpl-var-table}
+|                       | [host](#host)     | [metric](#metric)             | [integration](#integration)           | [process](#process)               | [network](#network)                                   | [custom check](#custom)   | [event](#event)   |
+| :---------------------|:------------------|:------------------------------|:--------------------------------------|:----------------------------------|:------------------------------------------------------|:--------------------------|:------------------|
+| **Conditionals**      |
+| `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning`          |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning_recovery` |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| **Variables**         |
+| `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
+| `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `{{warn_threshold}}`  | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
 
 <style>
   .tpl-var-table tr td {
