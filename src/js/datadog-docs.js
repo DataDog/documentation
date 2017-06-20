@@ -123,17 +123,19 @@ $(document).ready(function() {
             // console.log(header);
             // console.log(subheading);
 
-            $('body').tocible({
-                heading: this.header, //[selector], the first level heading
-                subheading: this.subheading, //[selector], the second level heading
-                reference:'#toc-box', //[selector], reference element for horizontal positioning
-                title: 'Table of Contents', //[selector or string], title of the menu
-                hash: false, //[boolean], setting true will enable URL hashing on click
-                //offsetTop: 300, //[number], spacing/margin above the menu
-                speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
-                collapsible: false, //[boolean], enabling true will auto collapse sub level heading not being scrolled into
-                maxWidth: null //[number], set max-width of the navigation menu
-            });
+            if(this.header.length > 0 || this.subheading.length > 0) {
+                $('body').tocible({
+                    heading: this.header, //[selector], the first level heading
+                    subheading: this.subheading, //[selector], the second level heading
+                    reference: '#toc-box', //[selector], reference element for horizontal positioning
+                    title: 'Table of Contents', //[selector or string], title of the menu
+                    hash: false, //[boolean], setting true will enable URL hashing on click
+                    //offsetTop: 300, //[number], spacing/margin above the menu
+                    speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
+                    collapsible: false, //[boolean], enabling true will auto collapse sub level heading not being scrolled into
+                    maxWidth: null //[number], set max-width of the navigation menu
+                });
+            }
         }
     }
 

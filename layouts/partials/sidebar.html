@@ -26,11 +26,14 @@
 
     {{ end }}
   {{ else if len .Data.Pages }}
+    {{ if in .Kind "taxonomy" }}
+    {{ else }}
     <li class='nav-header'>Table of Contents</li>
     <li class='nav-header'>{{ i18n "table_of_contents" }}</li>
       {{ range (sort .Data.Pages "BaseFileName") }}
         <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{ end }}
+    {{ end }}
   {{ end }}
 
   {{ if in .File.Path "basic_agent_usage" }}
