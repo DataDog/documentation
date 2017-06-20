@@ -37,4 +37,4 @@ You can contact them in one of the following ways: -->
 
 上記の方法を実行しても問題が解決しない場合は、Datadogのサポートチームが問題解決のお手伝いをすることができます。Datadogのサポートチームに連絡を取るには、次のような方法があります。
 
-<%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => false %>
+{{< partial name="_contact_info-ja" markdown="true" >}}

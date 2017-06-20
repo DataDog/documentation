@@ -31,7 +31,7 @@ The source code for the Datadog Agent can be found <a href='https://github.com/D
 For information on running the Agent through a proxy please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">here</a>;
 for which ranges to allow, please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">here</a>. -->
 
-## Datadog Agent ってなに ? {#what_is_the_agent}
+## Datadog Agent ってなに ?
 
 Datadog Agent は、ターゲットホスト上で動作するソフトウェアです。その役割は、システムの監視データやパフォーマンスデータをビジネスに有効に活用していくために、ターゲットホスト上のイベントやメトリクスを取得し、Datadogに送信することです。
 

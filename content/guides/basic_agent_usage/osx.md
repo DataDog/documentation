@@ -17,7 +17,6 @@ Overview
 -->
 
 ### Overview
-{: #overview}
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
@@ -29,12 +28,12 @@ However, this guide will assume that the Agent is installed in its default locat
 instructions accordingly if you decide to move it to another location.
 
 
-<%= render 'partials/BasicAgentUsage-nix' %>
+{{< partial name="BasicAgentUsage-nix" markdown="true" >}}
 
 <br/>
 
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => false %>
+{{< partial name="_contact_info" markdown="true" >}}
 

@@ -35,7 +35,9 @@
 
   {{ if in .File.Path "basic_agent_usage" }}
 
-    {{ range .Site.Menus.basic_agent }}
+    <li class="nav-header">Agent Guides by Platform</li>
+
+    {{ range .Site.Menus.basic_agent.ByWeight }}
 
       <li><a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
 

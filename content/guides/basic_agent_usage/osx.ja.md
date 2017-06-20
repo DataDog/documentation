@@ -34,11 +34,11 @@ If you haven't installed the Agent yet, instructions can be found
 Datadog Agentは、仮の設置パスとして `~/.datadog-agent`以下のディレクトリにインストールされます。このディレクトリは自由に変更することができます。 このガイドでは、Datadog Agent は、この仮の設置パスに存在していることを前提としています。 ディレクトリを変更した場合は、そのパスに合わせて手順を変更してください。
 
 
-<%= render 'partials/BasicAgentUsage-nix-ja' %>
+{{< partial name="BasicAgentUsage-nix-ja" markdown="true" >}}
 
 <!-- If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways: -->
 
 上記の方法を実行しても問題が解決しない場合は、Datadogのサポートチームが問題解決のお手伝いをすることができます。Datadogのサポートチームに連絡を取るには、次のような方法があります。
 
-<%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => false %>
+{{< partial name="_contact_info-ja" markdown="true" >}}
