@@ -65,7 +65,6 @@ build_preview:
     - collect_static_assets
     - remove_static_from_repo
     - push_site_to_s3
-#    - notify_slack "${MESSAGE}"
     - create_artifact
   only:
     - /pull/\/.*/
