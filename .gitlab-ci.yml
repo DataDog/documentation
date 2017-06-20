@@ -47,6 +47,8 @@ build_docker_image:
     - docker push $BUILD_IMAGE
   except:
     - tags
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
