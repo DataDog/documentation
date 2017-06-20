@@ -76,8 +76,8 @@ def build_config(proj_path, base, override, distro=None, branch=None, public_dir
     content_new = recurse_dict(yaml_main)
 
     if 'preview' in override and distro and branch:
-        content_new['baseurl'] = distro + '%s/' % branch
-        print(content_new['baseurl'])
+        content_new['baseURL'] = distro + '%s/' % branch
+        print(content_new['baseURL'])
         content_new['params']['branch'] = "%s" % branch
         print(content_new['params']['branch'])
         content_new['params']['static_url'] = distro + '%s/' % branch
