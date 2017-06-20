@@ -127,6 +127,18 @@
 - id: customnav_tracingtranslation
   translation: "Tracing API"
 
+- id: groups_return_to_videos
+  translation: "ビデオのグループ一覧に戻る"
+
+- id: groups_return_to_examples
+  translation: "サンプルコードのグループ一覧に戻る"
+
+- id: video_categories
+  translation: "このビデオは、次のグループに属します:"
+
+- id: example_categories
+  translation: "このサンプルコードは次のグループにも属します:"
+
 # Basic agent menu
 
 - id: amazonlinux
