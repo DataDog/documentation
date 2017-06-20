@@ -76,4 +76,4 @@ You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
 
-<img src="/images/host_aliases.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="host_aliases.png" >}}

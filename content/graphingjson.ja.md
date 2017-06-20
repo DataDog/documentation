@@ -394,7 +394,7 @@ The Time Series can be further broken down to:
 #### 折れ線グラフ
 
 
-<img src="/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="multi-lines.png" >}}
 
 <!-- The representation is automatically derived from having multiple `requests` values. -->
 このグラフ表現は、`requests`部に複数の検索クエリを有する場合に自動的に設定されます。
@@ -417,7 +417,7 @@ The Time Series can be further broken down to:
 
 #### 積み上げグラフ
 
-<img src="/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="slice-n-stack.png" >}}
 
 <!-- In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
 関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます:

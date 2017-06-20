@@ -109,7 +109,7 @@ You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
 
-<img src="/images/host_aliases.png" style="width:100%; border:1px solid #777777"/> -->
+{{< img src="host_aliases.png" >}} -->
 
 ## ホスト名のエリアス {#aliases}
 
@@ -121,4 +121,4 @@ Datadog Agentによって検出されたホストの名称は、正式ホスト�
 ダッシュボードの`Infrastructure`タブからアカウント内のすべてのホストを見ることができます。
 リスト内のホスト名の横にマウスポインターを持っていくと表示される`Inspect`ボタンをクリックし、表示されるインスペクションパネルで、関連付けられているホスト名のエリアスを確認することができます。
 
-<img src="/images/host_aliases.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="host_aliases.png" >}}
