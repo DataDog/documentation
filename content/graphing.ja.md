@@ -137,7 +137,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 #### Toplist (メトリクスのランキング)
 
-Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  [ここをクリック](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
+Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  (#collapseTopList){{< collapse id="collapseTopList" >}}ここをクリック{{< /collapse >}}. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTopList" markdown="1">
   ![TopList](/images/references-graphing-toplist-example.png)
