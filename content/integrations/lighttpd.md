@@ -55,7 +55,7 @@ Bring Lighttpd metrics to Datadog to:
 
 The following metrics are collected for either Lighttpd1 and Lighttpd2:
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 |Metrics collected for Lighttpd1|
 |--------------------------------|

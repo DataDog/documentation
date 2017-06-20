@@ -78,7 +78,7 @@ To validate your installation and configuration, restart the agent and execute t
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 |`extra_status_metrics` adds the following metrics:|
 |----------|--------|

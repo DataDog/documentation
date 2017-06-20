@@ -16,4 +16,4 @@ For information on JMX Checks, please see <a href="http://docs.datadoghq.com/int
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

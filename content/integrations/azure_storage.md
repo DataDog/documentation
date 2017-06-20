@@ -30,7 +30,7 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 **NOTE: It may take up to an hour for Azure to generate and populate the minute-metric table for a Storage Account. This delay will occur when first adding a Storage Account to monitor in Datadog**
 
 # Metrics
-<%= get_metrics_from_git()%>
+
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure_storage

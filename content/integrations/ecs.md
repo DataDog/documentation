@@ -187,4 +187,4 @@ Datadog's <a href="/guides/autodiscovery/">Autodiscovery</a> can be used in conj
 
 ### Metrics
 
-<%= get_metrics_from_git()%>
+

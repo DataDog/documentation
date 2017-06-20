@@ -30,7 +30,7 @@ Create a `gunicorn.yaml` in the Datadog Agent's `conf.d` directory:
 init_config:
 
 instances:
-  # as set 
+  # as set
   # 1) in your app's config.py (proc_name = <YOUR_APP_NAME>), OR
   # 2) via CLI (gunicorn --name <YOUR_APP_NAME> your:app)
   - proc_name: <YOUR_APP_NAME>
@@ -109,7 +109,7 @@ The gunicorn check is compatible with all major platforms.
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 # Service Checks
 

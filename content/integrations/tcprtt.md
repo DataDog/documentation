@@ -76,4 +76,4 @@ This is a passive check, so unless there are packets actively being sent to the 
 
 # Metrics
 
-<%= get_metrics_from_git('system', 'system.net.tcp.rtt') %>
+{{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}

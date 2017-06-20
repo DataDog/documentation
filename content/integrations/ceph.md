@@ -43,4 +43,4 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

@@ -238,7 +238,7 @@ JMX Checks have a default configuration that will collect 11 metrics from your J
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 
 # Troubleshooting

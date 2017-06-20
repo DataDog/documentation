@@ -1,0 +1,9 @@
+supervisord:
+- interval: ""
+  metric_name: supervisord.process.count
+  metric_type: gauge
+  unit_name: process
+- interval: ""
+  metric_name: supervisord.process.uptime
+  metric_type: gauge
+  unit_name: second

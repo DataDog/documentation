@@ -1,0 +1,13 @@
+fluentd:
+- interval: ""
+  metric_name: fluentd.retry_count
+  metric_type: gauge
+  unit_name: time
+- interval: ""
+  metric_name: fluentd.buffer_queue_length
+  metric_type: gauge
+  unit_name: buffer
+- interval: ""
+  metric_name: fluentd.buffer_total_queued_size
+  metric_type: gauge
+  unit_name: byte

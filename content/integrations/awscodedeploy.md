@@ -24,7 +24,7 @@ Enable this integration to see AWS CodeDeploy deployment events and metrics in D
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 # Events
 

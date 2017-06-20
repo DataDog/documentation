@@ -48,7 +48,7 @@ You should see something similar to the following if everything is working corre
 
 The following metrics are collected by default with the Varnish integration.
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 While the above list contains all possible metrics from our Varnish integration, your environment

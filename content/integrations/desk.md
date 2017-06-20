@@ -30,4 +30,4 @@ Hit the install button, and then you're all set! You will soon be able to select
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

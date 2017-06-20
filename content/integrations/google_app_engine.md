@@ -103,7 +103,7 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 

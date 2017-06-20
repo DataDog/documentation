@@ -15,4 +15,4 @@ Monitor your zones with advanced graphs and events.
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

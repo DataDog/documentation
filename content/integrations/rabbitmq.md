@@ -70,7 +70,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 

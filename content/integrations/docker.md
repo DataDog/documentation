@@ -132,7 +132,7 @@ For more information about building custom Docker containers with the Datadog Ag
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 # Deprecated metrics
 

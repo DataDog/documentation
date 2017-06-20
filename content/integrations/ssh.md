@@ -17,4 +17,4 @@ Capture SSH activity into Datadog to:
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

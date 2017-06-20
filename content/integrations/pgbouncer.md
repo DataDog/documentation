@@ -48,7 +48,7 @@ When you run datadog-agent info you should see something like the following:
           - Collected 39 metrics, 0 events & 1 service check
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 ### Service Checks
 

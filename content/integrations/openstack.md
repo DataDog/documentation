@@ -90,4 +90,4 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
 
 ### Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
