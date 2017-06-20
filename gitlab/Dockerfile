@@ -19,7 +19,7 @@ RUN npm install --global --production gulp-cli && \
     npm install
 
 # install hugo
-ENV HUGO_VERSION 0.19
+ENV HUGO_VERSION 0.23
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-64bit
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /tmp/
 RUN  tar -xvzf /tmp/${HUGO_BINARY}.tar.gz -C /tmp/ \
