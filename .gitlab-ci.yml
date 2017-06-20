@@ -48,6 +48,7 @@ build_docker_image:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
 build_preview:
@@ -68,6 +69,7 @@ build_preview:
   only:
     - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_images:
   <<: *base_template
@@ -81,6 +83,7 @@ test_preview_images:
   only:
     - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_static:
   <<: *base_template
@@ -94,6 +97,7 @@ test_preview_static:
   only:
     - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_links:
   <<: *base_template
@@ -107,3 +111,4 @@ test_preview_links:
   only:
     - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
