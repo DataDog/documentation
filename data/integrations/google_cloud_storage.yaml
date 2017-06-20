@@ -1,0 +1,13 @@
+google_cloud_storage:
+- interval: ""
+  metric_name: gcp.storage.api.request_count
+  metric_type: count
+  unit_name: request
+- interval: ""
+  metric_name: gcp.storage.network.received_bytes_count
+  metric_type: count
+  unit_name: byte
+- interval: ""
+  metric_name: gcp.storage.network.sent_bytes_count
+  metric_type: count
+  unit_name: byte

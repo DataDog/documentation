@@ -1,0 +1,25 @@
+ansible:
+- interval: ""
+  metric_name: ansible.elapsed_time
+  metric_type: gauge
+  unit_name: second
+- interval: ""
+  metric_name: ansible.task.ok
+  metric_type: gauge
+  unit_name: task
+- interval: ""
+  metric_name: ansible.task.failures
+  metric_type: gauge
+  unit_name: task
+- interval: ""
+  metric_name: ansible.task.skipped
+  metric_type: gauge
+  unit_name: task
+- interval: ""
+  metric_name: ansible.task.unreachable
+  metric_type: gauge
+  unit_name: task
+- interval: ""
+  metric_name: ansible.task.changed
+  metric_type: gauge
+  unit_name: task

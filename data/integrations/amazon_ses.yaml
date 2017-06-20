@@ -1,0 +1,25 @@
+amazon_ses:
+- interval: ""
+  metric_name: aws.ses.max_24_hour_send
+  metric_type: gauge
+  unit_name: event
+- interval: ""
+  metric_name: aws.ses.sent_last_24_hours
+  metric_type: gauge
+  unit_name: event
+- interval: ""
+  metric_name: aws.ses.bounces
+  metric_type: gauge
+  unit_name: response
+- interval: ""
+  metric_name: aws.ses.complaints
+  metric_type: gauge
+  unit_name: message
+- interval: ""
+  metric_name: aws.ses.deliveryattempts
+  metric_type: gauge
+  unit_name: event
+- interval: ""
+  metric_name: aws.ses.rejects
+  metric_type: gauge
+  unit_name: response

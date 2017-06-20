@@ -1,0 +1,25 @@
+google_cloud_functions:
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_times.avg
+  metric_type: gauge
+  unit_name: nanosecond
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_times.samplecount
+  metric_type: count
+  unit_name: occurrence
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_times.max
+  metric_type: gauge
+  unit_name: nanosecond
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_times.min
+  metric_type: gauge
+  unit_name: nanosecond
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_times.sumsqdev
+  metric_type: gauge
+  unit_name: nanosecond
+- interval: ""
+  metric_name: gcp.cloudfunctions.function.execution_count
+  metric_type: count
+  unit_name: occurrence

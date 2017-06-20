@@ -1,0 +1,17 @@
+amazon_cloudsearch:
+- interval: ""
+  metric_name: aws.cloudsearch.index_utilization
+  metric_type: gauge
+  unit_name: percent
+- interval: ""
+  metric_name: aws.cloudsearch.partitions
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: aws.cloudsearch.searchable_documents
+  metric_type: gauge
+  unit_name: ""
+- interval: "60"
+  metric_name: aws.cloudsearch.successful_requests
+  metric_type: count
+  unit_name: ""

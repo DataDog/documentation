@@ -1,0 +1,25 @@
+amazon_route53:
+- interval: ""
+  metric_name: aws.route53.health_check_percentage_healthy
+  metric_type: gauge
+  unit_name: percent
+- interval: ""
+  metric_name: aws.route53.health_check_status
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: aws.route53.connection_time
+  metric_type: gauge
+  unit_name: millisecond
+- interval: ""
+  metric_name: aws.route53.time_to_first_byte
+  metric_type: gauge
+  unit_name: millisecond
+- interval: ""
+  metric_name: aws.route53.sslhandshake_time
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: aws.route53.child_health_check_healthy_count
+  metric_type: gauge
+  unit_name: ""

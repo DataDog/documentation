@@ -1,0 +1,17 @@
+amazon_billing:
+- interval: ""
+  metric_name: aws.billing.estimated_charges
+  metric_type: gauge
+  unit_name: dollar
+- interval: ""
+  metric_name: aws.billing.actual_spend
+  metric_type: gauge
+  unit_name: dollar
+- interval: ""
+  metric_name: aws.billing.forecasted_spend
+  metric_type: gauge
+  unit_name: dollar
+- interval: ""
+  metric_name: aws.billing.budget_limit
+  metric_type: gauge
+  unit_name: dollar

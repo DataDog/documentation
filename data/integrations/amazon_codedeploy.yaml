@@ -1,0 +1,9 @@
+amazon_codedeploy:
+- interval: ""
+  metric_name: aws.codedeploy.deployment
+  metric_type: count
+  unit_name: event
+- interval: ""
+  metric_name: aws.codedeploy.deployment.run_time
+  metric_type: gauge
+  unit_name: second

@@ -1,0 +1,5 @@
+amazon_elasticbeanstalk:
+- interval: ""
+  metric_name: aws.elasticbeanstalk.environment_health
+  metric_type: gauge
+  unit_name: ""

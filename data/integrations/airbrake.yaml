@@ -1,0 +1,5 @@
+airbrake:
+- interval: ""
+  metric_name: airbrake.exception_rate
+  metric_type: gauge
+  unit_name: occurrence
