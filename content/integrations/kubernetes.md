@@ -165,4 +165,4 @@ Additionally please note that Heapster must be running in [standalone mode](http
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+

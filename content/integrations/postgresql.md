@@ -116,7 +116,7 @@ After you restart the agent, you should be able to run the ```info``` command wh
 
 # Metrics
 
-<%= get_metrics_from_git()%>
+
 
 
 
