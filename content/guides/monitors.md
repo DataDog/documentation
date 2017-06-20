@@ -90,7 +90,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-###Define the conditions
+### Define the conditions
 4. Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
