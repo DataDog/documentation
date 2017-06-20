@@ -1,6 +1,8 @@
 ---
-baseurl: d2cx6t4ssmwdrv.cloudfront.net/
+baseurl: https://d2cx6t4ssmwdrv.cloudfront.net/
 buildfuture: true
 builddrafts: true
 params:
   environment: preview
+  img_url: "https://d2cx6t4ssmwdrv.cloudfront.net/"
+  static_url: "https://d2cx6t4ssmwdrv.cloudfront.net/"
