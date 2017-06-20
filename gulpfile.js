@@ -44,7 +44,7 @@ for (var fileName in manifest.dependencies) {
     {
       "type": fileNameArray[fileNameArray.length - 1],
       "name": fileName,
-      "globs": manifest.dependencies[fileName]["files"].concat(manifest.dependencies[fileName]["vendor"])
+      "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"])
     }
   );
 }
