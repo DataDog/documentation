@@ -7,7 +7,6 @@ kind: integration
 
 
 ### Overview
-{: int-overview}
 
 Connect your Splunk log monitoring to be able to:
 
@@ -68,17 +67,17 @@ If the trace file include a Traceback that ends with ```pkg_resources.Distributi
 
 The script file uses variables made available by Splunk. If you would like to customize the message, refer to the following table of variables:
 
-
-| $SPLUNK_ARG_0 | Script Name |
-| $SPLUNK_ARG_1 | Number of events returned |
-| $SPLUNK_ARG_2 | Search terms |
-| $SPLUNK_ARG_3 | Fully qualified query string |
-| $SPLUNK_ARG_4 | Name of saved search |
-| $SPLUNK_ARG_5 | Trigger reason (for example, "The number of events was greater than 1") |
-| $SPLUNK_ARG_6 | Browser URL to view the saved search |
-| $SPLUNK_ARG_7 | *option removed in version 3.6* |
-| $SPLUNK_ARG_8 | File in which the results for this search are stored (contains raw results) |
-{: .table}
+|               |                                                                               |
+| :------------ |:------------------------------------------------------------------------------|
+| $SPLUNK_ARG_0 | Script Name                                                                   |
+| $SPLUNK_ARG_1 | Number of events returned                                                     |
+| $SPLUNK_ARG_2 | Search terms                                                                  |
+| $SPLUNK_ARG_3 | Fully qualified query string                                                  |
+| $SPLUNK_ARG_4 | Name of saved search                                                          |
+| $SPLUNK_ARG_5 | Trigger reason (for example, "The number of events was greater than 1")       |
+| $SPLUNK_ARG_6 | Browser URL to view the saved search                                          |
+| $SPLUNK_ARG_7 | *option removed in version 3.6*                                               |
+| $SPLUNK_ARG_8 | File in which the results for this search are stored (contains raw results)   |
 
 
 You can modify the text of the events by for example using datadog's @mention to notify people of these reports.

@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Event Viewer to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect Event Viewer to Datadog in order to:
 - Correlate system and application events with the rest of your application. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、Event ViewerをDatadogと連携します:
 

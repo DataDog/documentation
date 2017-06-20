@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture GitHub commits in Datadog to:
 
@@ -18,7 +18,7 @@ Capture GitHub commits in Datadog to:
 - Discuss code changes with your team in the Datadog Event Stream -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的でGitHubのコミット情報をDatadogと連携します:
 
@@ -28,14 +28,14 @@ Capture GitHub commits in Datadog to:
 
 
 <!-- ### Configuration
-{:#int-configuration}
+
 
 Select 'Github' [here](https://app.datadoghq.com/account/settings) and link your account.
 You can then select which repos you would like to integrate, which branches, and if you'd like to
 receive commits and/or issues. -->
 
 ### 設定
-{:#int-configuration}
+
 
 Datadogのインテグレーションページで['Github'](https://app.datadoghq.com/account/settings)タイルを選択し、`Configuration`タブから`Sign in with Github`をクリックし、アカウントを設定します。その後リポジトリ、ブランチ、コミットなどの情報を設定します。
 

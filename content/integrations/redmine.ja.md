@@ -10,7 +10,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture Redmine activity in Datadog to:
 
@@ -21,7 +21,7 @@ Capture Redmine activity in Datadog to:
 The Redmine configuration just requires a full URL to the desired activity feed (you can add multiple URLs). -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、Rdmine上での活動状況をDatadogと連携します:
 
@@ -31,6 +31,6 @@ The Redmine configuration just requires a full URL to the desired activity feed 
 
 
 ### 設定
-{:#int-configuration}
+
 
 RedmineのRSSフィードを公開しているURLを、インテグレーションのタイル内の該当欄に記述し設定します。(複数のURLを設定することも可能です。)

@@ -13,7 +13,7 @@ doclevel: basic
 See key Fastly metrics (like cache coverage and header size) in context with the rest of your Datadog metrics -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、FastlyをDatadogと連携します:
 

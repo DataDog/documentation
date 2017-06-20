@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate the performance of Fluentd with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 <!--
 Get metrics from Fluentd in real time to:

@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Bring Gearman metrics to Datadog to:
 
@@ -18,7 +18,7 @@ Bring Gearman metrics to Datadog to:
 - Correlate the performance of Gearman with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 Bring Gearman metrics to Datadog to:
 次の目的で、GearmanのメトリクスをDatadogと連携します:

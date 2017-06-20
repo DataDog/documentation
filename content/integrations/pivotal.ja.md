@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture Pivotal activity into Datadog to:
 
@@ -17,7 +17,7 @@ Capture Pivotal activity into Datadog to:
 - Correlate story completion with other events and metrics in your system. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、 Pivotalの動作状況をDatadogへ送信します:
 

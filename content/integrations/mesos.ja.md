@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate the performance of Mesos with the rest of your applications -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、MesosのメトリクスをDatadogへ送信します:
 

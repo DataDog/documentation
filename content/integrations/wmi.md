@@ -122,8 +122,7 @@ This feature is available starting with version 5.3 of the agent
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
-{{< img src="wmivalidate.png" >}}
-{: style="width:400px;"}
+{{< img src="wmivalidate.png" style="width:400px;" >}}
 
 
 

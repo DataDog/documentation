@@ -118,7 +118,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-4. {:#metric-conditions} Select the alert conditions
+4.  Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
@@ -315,7 +315,7 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
-3. {:#check-alerting} Select your **alert options**.
+3.  Select your **alert options**.
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
@@ -456,23 +456,23 @@ triggering scope into the message of multi alerts.
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
-| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
-| **Conditionals** |
-| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
-| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
-| `is_warning` | | Y | Y | Y | Y | Y | |
-| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
-| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
-| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
-| `is_match` | Y | Y | Y | Y | Y | Y | Y |
-| **Variables** |
-| `{{value}}` | | Y | Y | | | | |
-| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
-| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
-| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
-| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual<br/>`{{check_message}}` | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-{: .tpl-var-table}
+|                       | [host](#host)     | [metric](#metric)             | [integration](#integration)           | [process](#process)               | [network](#network)                                   | [custom check](#custom)   | [event](#event)   |
+| :---------------------|:------------------|:------------------------------|:--------------------------------------|:----------------------------------|:------------------------------------------------------|:--------------------------|:------------------|
+| **Conditionals**      |
+| `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning`          |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning_recovery` |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| **Variables**         |
+| `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
+| `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `{{warn_threshold}}`  | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
 
 <style>
   .tpl-var-table tr td {

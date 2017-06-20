@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture RSS feed activity in Datadog to:
 
@@ -17,7 +17,7 @@ Capture RSS feed activity in Datadog to:
 - Discuss feed events with your team. -->
 
 ### 概要
-{:#int-overview}
+
 
 RSSフィードで起きているイベントをDatadogと連携します:
 

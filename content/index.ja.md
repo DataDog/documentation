@@ -26,22 +26,16 @@ sidebar:
 ---
 
 <!-- ### 1. Get the Datadog [Agent][1] running!
-{: .big_number.alert.alert-warning}
 
 ### 2. Dive into [Metrics][2]!
-{: .big_number.alert.alert-success}
 
 ### 3. [Graph them!][3]
-{: .big_number.alert.alert-info}
  -->
 ### 1. Datadog [Agent][1] のインストールと起動 !
-{: .big_number.alert.alert-warning}
 
 ### 2. [メトリクス][102]の収集と送信!
-{: .big_number.alert.alert-success}
 
 ### 3. メトリクスの[可視化][103]、そして[アラート設定][111]!
-{: .big_number.alert.alert-info}
 
 
 <!-- **Not sure where to look?** Our documentation is split into guides and references. Guides explain how to

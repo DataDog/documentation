@@ -139,6 +139,23 @@ $(document).ready(function() {
         }
     }
 
+    $('table').each(function() {
+        if(!$(this).hasClass('table')) {
+            $(this).addClass('table');
+        }
+    });
+
+    $('h2, h3, h4, h5').each(function() {
+        var id = $(this).attr('id') || '';
+        var iconfa = '<i class="fa fa-link" aria-hidden="true"></i>';
+        var iconglyph = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
+        var markup = '<a class="header-link" href="#'+id+'">'+iconglyph+'</a>';
+        if(!$(this).hasClass('linked-header')) {
+            $(this).addClass('linked-header');
+            $(this).prepend(markup);
+        }
+    });
+
     if(toc) {
         console.log(toc);
         headings.init();

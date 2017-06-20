@@ -47,9 +47,9 @@ in an online service is treated the same throughout Datadog.</li>
 </ul> -->
 
 ## 簡単で便利なIntegrations
-{: #integrations}
 
-![](/images/integrations.png){: style="width:100%; border:1px solid #777777"}
+
+![](/images/integrations.png)
 
 <ul>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
@@ -80,9 +80,9 @@ for that machine based on what was previously set up for that tag.</li>
 </ul> -->
 
 ## インフラを構成しているホストのリスト表示
-{: #infrastructure}
 
-![](/images/infrastructure.png){: style="width:100%; border:1px solid #777777"}
+
+![](/images/infrastructure.png)
 
 * 全てのホストは、`Infrastructure`のページに表示されます。
 * 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
@@ -91,9 +91,9 @@ for that machine based on what was previously set up for that tag.</li>
 
 
 <!-- ## Host Map
-{: #hostmap}
 
-![](/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+
+![](/images/hostmap-overview.png)
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -105,9 +105,9 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -->
 
 ## Host Mapの表示
-{: #hostmap}
 
-![](/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+
+![](/images/hostmap-overview.png)
 
 Host Mapは、`Infrastructure`メニューのドロップダウンメニュー内にあります。この表示を使うことにより、次のようなことが可能になります:
 
@@ -147,9 +147,9 @@ For each incident users can:
  -->
 
 ## イベントの時系列表示
-{: #events}
 
-![](/images/event_stream.png){: style="width:100%; border:1px solid #777777"}
+
+![](/images/event_stream.png)
 
 Eventの掲載は、ブログと同じ規則に基づいています:
 
@@ -194,9 +194,8 @@ without access to your data or any other information (via the pencil in the uppe
 </ul> -->
 
 ## 原因追跡用ダッシュボード
-{: dashboards}
 
-![](/images/dashboard_events.png){: style="width:100%; border:1px solid #777777"}
+![](/images/dashboard_events.png)
 
 ダッシュボードには、<a target="_blank" href="/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
@@ -236,9 +235,8 @@ to pull the data from.</li>
 </ol> -->
 
 ## 監視とアラート
-{: monitoring}
 
-![](/images/alert.png){: tyle="width:100%; border:1px solid #777777"}
+![](/images/alert.png)
 
 [Monitor機能](/ja/guides/monitoring/)によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>

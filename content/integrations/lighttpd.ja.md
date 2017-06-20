@@ -9,7 +9,7 @@ doclevel:
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Bring Lighttpd metrics to Datadog to:
 
@@ -17,7 +17,7 @@ Bring Lighttpd metrics to Datadog to:
 - Correlate the performance of Lighttpd with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 

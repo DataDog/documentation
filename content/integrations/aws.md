@@ -307,7 +307,7 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 
 **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
-{:#tshoot-discrepancy}
+
 
 There are two important distinctions to be aware of:
 
@@ -315,7 +315,7 @@ There are two important distinctions to be aware of:
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
 **Metrics delayed?**
-{:#tshoot-delay}
+
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
@@ -329,13 +329,13 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 **Missing metrics?**
-{:#tshoot-missing}
+
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
 **Wrong count of aws.elb.healthy_host_count?**
-{:#tshoot-wrongcount}
+
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
@@ -344,7 +344,7 @@ This metric should have value you would expect.
 
 
 **Duplicated hosts when installing the agent?**
-{:#tshoot-duphosts}
+
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
 

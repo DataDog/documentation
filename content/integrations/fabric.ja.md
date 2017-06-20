@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Fabric to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect Fabric to Datadog in order to:
 - Correlate deploy events with metric changes on dashboards. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、FabricをDatadogと連携します:
 

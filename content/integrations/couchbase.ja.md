@@ -14,7 +14,7 @@ doclevel: basic
 * Correlate Couchbase performance with the rest of your applications -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、CouchbaseのメトリクスをDatadogに送信します:
 

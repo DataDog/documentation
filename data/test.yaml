@@ -1,0 +1,73 @@
+test:
+  - metric_name: apache.net.bytes
+    metric_type: gauge
+    interval:
+    unit_name: byte
+    per_unit_name:
+    description: The total number of bytes served.
+    orientation: 0
+    integration: apache
+    short_name: B served
+  - metric_name: apache.net.bytes_per_s
+    metric_type: gauge
+    interval:
+    unit_name: byte
+    per_unit_name: second
+    description: The number of bytes served per second.
+    orientation: 0
+    integration: apache
+    short_name: B per sec
+  - metric_name: apache.net.hits
+    metric_type: gauge
+    interval:
+    unit_name: request
+    per_unit_name:
+    description: The total number of requests performed.
+    orientation: 0
+    integration: apache
+    short_name: requests
+  - metric_name: apache.net.request_per_s
+    metric_type: gauge
+    interval:
+    unit_name: request
+    per_unit_name: second
+    description: The number of requests performed per second.
+    orientation: 0
+    integration: apache
+    short_name: requests per sec
+  - metric_name: apache.performance.cpu_load
+    metric_type: gauge
+    interval:
+    unit_name: percent
+    per_unit_name:
+    description: The percent of CPU used.
+    orientation: 0
+    integration: apache
+    short_name: cpu load
+  - metric_name: apache.performance.busy_workers
+    metric_type: gauge
+    interval:
+    unit_name: thread
+    per_unit_name:
+    description: The number of workers serving requests.
+    orientation: 0
+    integration: apache
+    short_name: busy workers
+  - metric_name: apache.performance.idle_workers
+    metric_type: gauge
+    interval:
+    unit_name: thread
+    per_unit_name:
+    description: The number of idle workers.
+    orientation: 0
+    integration: apache
+    short_name: idle workers
+  - metric_name: apache.performance.uptime
+    metric_type: gauge
+    interval:
+    unit_name: second
+    per_unit_name:
+    description: The amount of time the server has been running.
+    orientation: 0
+    integration: apache
+    short_name: uptime

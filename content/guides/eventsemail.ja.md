@@ -34,7 +34,7 @@ to use Events via Email, depending mostly on whether the application offers you
 the ability to customize the format of the email body being sent. -->
 
 ## 概要
-{: #overview}
+
 
 Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
 まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
@@ -55,7 +55,7 @@ This will allow you to set everything in the event that appears in the event
 stream. Here are examples of each: -->
 
 ## JSON形式 vs 平文形式
-{: #json-vs-plain}
+
 
 アプリケーションからDatadogに送信するメールを自由にコントロールできるなら、JSON形式でのメッセージ送信の設定をするとよいでしょう。この形式を使うことによって、イベントストリームに表示されるイベントに必要な情報の全てを送信することができるでしょう。
 

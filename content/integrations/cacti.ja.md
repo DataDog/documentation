@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Cacti to Datadog to:
 
@@ -17,7 +17,7 @@ Connect Cacti to Datadog to:
 - Correlate metrics captured by Cacti with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的でCactiのコミット情報をDatadogと連携します:
 

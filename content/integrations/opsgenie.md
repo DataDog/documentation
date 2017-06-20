@@ -6,7 +6,7 @@ kind: integration
 ---
 
 ## Overview
-{:#int-overview}
+
 
 Create alerts using @opsgenie:
 
@@ -15,7 +15,7 @@ Create alerts using @opsgenie:
   * When a metric alert is triggered
 
 ## Configuration
-{:#int-configuration}
+
 
 ### Create a Datadog integration in OpsGenie
 

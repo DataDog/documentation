@@ -18,15 +18,15 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 2. Go to settings (Gear icon) –> Applications
 
-	{{< img src="jira/JiraInstallation2.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation2.png" style="width:75%;" >}}
 
 3. Under "Integrations" in left menu, Select Application Links
 
-	{{< img src="jira/JiraInstallation3.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation3.png" style="width:75%;" >}}
 
 4. Enter app.datadoghq.com as the URL to link –> press "Create new link"
 
-	{{< img src="jira/JiraInstallation4.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation4.png" style="width:75%;" >}}
 
 5. Fill in Application Name with any name (used simply for identification)
 
@@ -36,13 +36,13 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 8. Press Continue
 
-	{{< img src="jira/JiraInstallation5.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation5.png" style="width:75%;" >}}
 
 9. Copy and Paste the Consumer Key, Consumer Name, and Public Key from the Jira tile
 
 10. Press Continue
 
-	{{< img src="jira/JiraInstallation6.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation6.png" style="width:75%;" >}}
 
 # Configuration
 
@@ -52,7 +52,7 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 13. Press Install
 
-	{{< img src="jira/JiraInstallation7.png" >}}{:style="width:75%;"}
+	{{< img src="jira/JiraInstallation7.png" style="width:75%;">}}
 
 ## Setting up Ticket Types
 
