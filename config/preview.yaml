@@ -4,5 +4,5 @@ buildfuture: true
 builddrafts: true
 params:
   environment: preview
-  img_url: "https://d2cx6t4ssmwdrv.cloudfront.net/"
-  static_url: "https://d2cx6t4ssmwdrv.cloudfront.net/"
+  img_url: "https://d2cx6t4ssmwdrv.cloudfront.net/documentation/"
+  static_url: "https://d2cx6t4ssmwdrv.cloudfront.net/documentation/"
