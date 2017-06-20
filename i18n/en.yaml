@@ -136,6 +136,19 @@
 - id: customnav_tracingnav_api
   translation: "Tracing API"
 
+# taxonomies
+- id: groups_return_to_videos
+  translation: "Return to All Video Groups."
+
+- id: groups_return_to_examples
+  translation: "Return to All Example Groups."
+
+- id: video_categories
+  translation: "This video can be found in these groups:"
+
+- id: example_categories
+  translation: "This example can be found in these groups:"
+
 # Basic agent menu
 
 - id: amazonlinux

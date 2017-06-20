@@ -14,7 +14,7 @@ sidebar:
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Varnish to Datadog in order to:
 
@@ -22,7 +22,7 @@ Connect Varnish to Datadog in order to:
 - Correlate the performance of Varnish with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、VarnishのメトリクスをDatadogに送信します:
 

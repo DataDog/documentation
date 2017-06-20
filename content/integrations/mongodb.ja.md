@@ -9,10 +9,10 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview} -->
+ -->
 
 ## 概要
-{: #int-overview}
+
 
 
 <!-- Connect MongoDB to Datadog in order to:

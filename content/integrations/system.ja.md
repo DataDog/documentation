@@ -21,12 +21,12 @@ sidebar:
 * <a href="/integrations/process/">Process check</a> - Capture metrics from specific running processes on a system. -->
 
 ### 概要
-{:#int-overview}
+
 
 ディレクトリ及びプロセスに関するメトリクスを取得し、Datadogへ送信します。
 
 ### 設定
-{:#int-configuration}
+
 
 設定方法に関しては、以下のリンクを参照してください:
 

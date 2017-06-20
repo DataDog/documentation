@@ -9,7 +9,7 @@ kind: integration
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect RabbitMQ to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect RabbitMQ to Datadog in order to:
 - Correlate the performance of RabbitMQ with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、RabbitMQのメトリクスをDatadogに送信します:
 
@@ -74,7 +74,7 @@ If you have a Datadog account you can see the integration installation instructi
 初期設定で、`queue`メトリクスは"queue"、`node`メトリクスは"node"とタグ付けされています。
 
 ### 設定
-{:#configuration}
+
 
 *RabbitMQインテグレーションを利用する為には、Datadog Agent >= 3.5.0が必要です。*
 

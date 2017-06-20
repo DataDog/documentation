@@ -14,7 +14,7 @@ doclevel: basic
 * Instrument your own metrics -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、Go ExpvarのAgent Checkを活用します:
 

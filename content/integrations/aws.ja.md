@@ -30,78 +30,84 @@ Connect to Amazon Web Services (AWS) in order to:
 
 <!-- Related integrations include:
 
-| [Billing](/integrations/awsbilling) | billing and budgets |
-| [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
-| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
-| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table} -->
+|                                                               |                                                                               |
+| :-------------------------------------------------------------|:------------------------------------------------------------------------------|
+| [Billing](/integrations/awsbilling)                           | billing and budgets                                                           |
+| [CloudTrail](/integrations/awscloudtrail)                     | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/integrations/awsdynamo)                          | NoSQL Database                                                                |
+| [Elastic Beanstalk](/integrations/awsbeanstalk)               | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2)           | resizable compute capacity in the cloud                                       |
+| [ElastiCache](/integrations/awselasticache)                   | in-memory cache in the cloud                                                  |
+| [Elastic Load Balancing (ELB)](/integrations/awselb)          | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [EC2 Container Service (ECS)](/integrations/ecs)              | container management service that supports Docker containers                  |
+| [Elasticsearch Service (ES)](/integrations/awses)             |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Kinesis](/integrations/awskinesis)                           | service for real-time processing of large, distributed data streams           |
+| [Relational Database Service (RDS)](/integrations/awsrds)     | relational database in the cloud                                              |
+| [Route 53](/integrations/awsroute53)                          | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/integrations/awsses)            | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/integrations/awssns)      | alert and notifications                                                       |
+| [Simple Storage Service (S3)](/integrations/awss3)            | highly available and scalable cloud storage service                           |
+ -->
 
 関連しているAWS系サービスのインテグレーションは以下になります:
 
-| [Billing](/ja/integrations/awsbilling) | billing and budgets |
-| [CloudTrail](/ja/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [Dynamo DB](/ja/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/ja/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/ja/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/ja/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/ja/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [EC2 Container Service (ECS)](/ja/integrations/ecs) | container management service that supports Docker containers |
-| [Elasticsearch Service (ES)](/ja/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Relational Database Service (RDS)](/ja/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/ja/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/ja/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/ja/integrations/awssns) | alert and notifications |
-| [Simple Storage Service (S3)](/ja/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table}
+|                                                               |                                                                               |
+| :-------------------------------------------------------------|:------------------------------------------------------------------------------|
+| [Billing](/ja/integrations/awsbilling)                        | billing and budgets                                                           |
+| [CloudTrail](/ja/integrations/awscloudtrail)                  | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/ja/integrations/awsdynamo)                       | NoSQL Database                                                                |
+| [Elastic Beanstalk](/ja/integrations/awsbeanstalk)            | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Cloud Compute (EC2)](/ja/integrations/awsec2)        | resizable compute capacity in the cloud                                       |
+| [ElastiCache](/ja/integrations/awselasticache)                | in-memory cache in the cloud                                                  |
+| [Elastic Load Balancing (ELB)](/ja/integrations/awselb)       | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [EC2 Container Service (ECS)](/ja/integrations/ecs)           | container management service that supports Docker containers                  |
+| [Elasticsearch Service (ES)](/ja/integrations/awses)          |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Kinesis](/integrations/awskinesis)                           | service for real-time processing of large, distributed data streams           |
+| [Relational Database Service (RDS)](/ja/integrations/awsrds)  | relational database in the cloud                                              |
+| [Route 53](/ja/integrations/awsroute53)                       | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/ja/integrations/awsses)         | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/ja/integrations/awssns)   | alert and notifications                                                       |
+| [Simple Storage Service (S3)](/ja/integrations/awss3)         | highly available and scalable cloud storage service                           |
 
 
 <!-- There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
 
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Queing Service |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
-{:.table} -->
+|                           |                                                                               |
+| :-------------------------|
+| AutoScaling               |
+| Budgeting                 |
+| CloudFront                |
+| CloudSearch               |
+| EBS                       |
+| Elastic MapReduce         |
+| Firehose                  |
+| Lambda                    |
+| MachineLearning           |
+| OpsWorks                  |
+| Simple Queing Service     |
+| Simple Workflow Service   |
+| Trusted Advisor           |
+| WorkSpaces                |
+ -->
 
 上記以外にもDatadogと連携することができる他のAWSサービスがあります。それらのサービスについては、AWSインテグレーションまたはCloudTrailインテグレーション出設定することができます。現状では以下がそれらの他のAWSサービスになります。これらは状況にあわせて順次追加されます:
 
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Queing Service |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
-{:.table}
+|                           |                                                                               |
+| :-------------------------|
+| AutoScaling               |
+| Budgeting                 |
+| CloudFront                |
+| CloudSearch               |
+| EBS                       |
+| Elastic MapReduce         |
+| Firehose                  |
+| Lambda                    |
+| MachineLearning           |
+| OpsWorks                  |
+| Simple Queing Service     |
+| Simple Workflow Service   |
+| Trusted Advisor           |
+| WorkSpaces                |
 
 
 <!-- # Installation
@@ -364,10 +370,10 @@ For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 # Troubleshooting
-{: #troubleshooting}
+
 
 **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
-{:#tshoot-discrepancy}
+
 
 There are two important distinctions to be aware of:
 
@@ -375,7 +381,7 @@ There are two important distinctions to be aware of:
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
 **Metrics delayed?**
-{:#tshoot-delay}
+
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
@@ -389,13 +395,13 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 **Missing metrics?**
-{:#tshoot-missing}
+
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
 **Wrong count of aws.elb.healthy_host_count?**
-{:#tshoot-wrongcount}
+
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
@@ -404,7 +410,7 @@ This metric should have value you would expect.
 
 
 **Duplicated hosts when installing the agent?**
-{:#tshoot-duphosts}
+
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
 

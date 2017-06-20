@@ -13,7 +13,7 @@ doclevel: basic
 Enable this integration to see in Datadog all your Ops Works metrics. -->
 
 ### 概要
-{:#int-overview}
+
 
 AWS OpsWorks は、すべての形状およびサイズのアプリケーションを容易にデプロイおよび操作できるアプリケーション管理サービスです。
 

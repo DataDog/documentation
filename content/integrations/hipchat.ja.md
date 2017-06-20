@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect HipChat to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect HipChat to Datadog in order to:
 - Receive metric alerts and see graphs within Hipchat. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、HipchatとDatadogを連携します:
 

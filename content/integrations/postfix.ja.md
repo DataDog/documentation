@@ -11,6 +11,6 @@ doclevel: basic
 Get metrics from Postfix in real time to monitor the messages pending in your Postfix mail queues.
 
 ### 概要
-{:#int-overview}
+
 
 Postfixのメールキュー内の保留中のメッセージを監視する為に、リアルタイムでメトリクスを取得します。

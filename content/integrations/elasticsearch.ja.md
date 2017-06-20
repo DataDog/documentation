@@ -9,7 +9,7 @@ doclevel: complete
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Connect Elasticsearch to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect Elasticsearch to Datadog in order to:
 - Correlate Elasticsearch performance with the rest of your applications. -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的の為に、ElasticsearchをDatadogと連携します:
 

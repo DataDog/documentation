@@ -20,7 +20,7 @@ In order to collect these metrics, a lightweight Java plugin named JMXFetch is c
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so. -->
 
 ### 概要
-{:#int-overview}
+
 
 JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
 
@@ -60,7 +60,7 @@ Datadog Agent内でJMXを使ったインテグレーションを設定する手�
 JMX Checks have a default configuration that will collect some metrics from your JMX application. They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which metrics it should send back to the Agent. -->
 
 ### カスタマイズ
-{:#customization}
+
 
 JMX Checkには、JMXアプリケーションから基本的なメトリックを取得するように初期設定してあります。尚、JMXFetchによって読み込まれるYAMLファイルを設定することにより、Datadog Agentに渡されるJMXアプリケーションから取得したメトリクスを指定することができます。
 
@@ -299,7 +299,7 @@ Here is another filtering example:
 
 
 <!-- #### Note
-{:#update-note}
+
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 
@@ -325,7 +325,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
         ... -->
 
 ##### Note
-{:#update-note}
+
 
 フィルターのリストは、Datadog Agent 5.3.0からサポートされました。もし、旧バージョンのDatadog Agentを使っている場合は、bean毎に別の`include`文を記述するようにしてください。
 

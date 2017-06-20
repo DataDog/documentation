@@ -51,7 +51,7 @@ Once you're in the console, find the "Datadog Agent" service.
 Right clicking on the service will reveal options to start, stop, and restart the Agent. -->
 
 ### Datadog Agent の起動と停止
-{: #starting_and_stopping_the_agent}
+
 
 Datadog Agentの実行は、Windows serviceによって管理されています。
 
@@ -93,7 +93,7 @@ To receive more information about the Agent's state, visit the <em>status page</
 <em>The status page is supported in Agent version 3.9.1 and above</em> -->
 
 ### 動作ステータスの確認
-{: #status_and_information}
+
 
 Datadog Agent が動作していることを確認するには、サービスパネルのステータスが"Started"になっていることを確認します。その際、"ddagent.exe" プロセスがタスクマネージャーに表示されていることを確認してください。
 
@@ -138,7 +138,7 @@ For Windows Server 2008, Vista and newer:
 </ul> -->
 
 ### 設定ファイルの保存されているディレクトリ
-{: #configuration}
+
 
 #### Datadog Agent バージョン >= 3.9.1:
 

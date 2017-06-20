@@ -15,7 +15,7 @@ doclevel: basic
 * Discuss exceptions with your team -->
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、SentryをDatadogと連携します:
 

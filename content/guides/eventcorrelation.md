@@ -5,7 +5,6 @@ listorder: 6
 ---
 
 ## Overview
-{: .overview}
 
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
 

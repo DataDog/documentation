@@ -193,10 +193,10 @@ Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
-{{< code-tabs section="guages" >}}
+{{< code-tabs section="guagesmeasure" >}}
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="gauges-python">
+  <div class="tab-pane active fade in" id="guagesmeasure-python">
 {{< highlight python >}}
 # Record the amount of free memory every ten seconds.
 while True:
@@ -204,7 +204,7 @@ while True:
     time.sleep(10)
 {{< /highlight >}}
   </div>
-  <div class="tab-pane fade in" id="gauges-ruby">
+  <div class="tab-pane fade in" id="guagesmeasure-ruby">
 {{< highlight ruby >}}
 # Record the amount of free memory every ten seconds.
 while true do

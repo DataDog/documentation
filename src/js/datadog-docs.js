@@ -99,7 +99,6 @@ $(document).ready(function() {
             if(this.h2s.length > 0 && this.h3s.length > 0 ) {
                 header = 'h2';
                 subheading = 'h3';
-                console.log('ther');
             }else if(this.h2s.length == 0 && this.h3s.length > 0 ) {
                 header = 'h3';
                 if(this.h4s.length > 0){
@@ -107,7 +106,6 @@ $(document).ready(function() {
                 }else{
                     subheading = null;
                 }
-                console.log('here');
             }
 
             if(tocdepth == 1){
@@ -129,7 +127,7 @@ $(document).ready(function() {
                 heading: this.header, //[selector], the first level heading
                 subheading: this.subheading, //[selector], the second level heading
                 reference:'#toc-box', //[selector], reference element for horizontal positioning
-                title: '', //[selector or string], title of the menu
+                title: 'Table of Contents', //[selector or string], title of the menu
                 hash: false, //[boolean], setting true will enable URL hashing on click
                 //offsetTop: 300, //[number], spacing/margin above the menu
                 speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
@@ -138,6 +136,23 @@ $(document).ready(function() {
             });
         }
     }
+
+    $('table').each(function() {
+        if(!$(this).hasClass('table')) {
+            $(this).addClass('table');
+        }
+    });
+
+    $('h2, h3, h4, h5').each(function() {
+        var id = $(this).attr('id') || '';
+        var iconfa = '<i class="fa fa-link" aria-hidden="true"></i>';
+        var iconglyph = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
+        var markup = '<a class="header-link" href="#'+id+'">'+iconglyph+'</a>';
+        if(!$(this).hasClass('linked-header')) {
+            $(this).addClass('linked-header');
+            $(this).prepend(markup);
+        }
+    });
 
     if(toc) {
         console.log(toc);

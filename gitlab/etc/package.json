@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "node-sass": "^4.1",
-    "asset-builder": "^1.1",
     "browser-sync": "^2.8",
     "del": "^2.2",
     "gulp": "^3.9",
@@ -46,7 +45,6 @@
     "merge-stream": "^1.0",
     "minimist": "^1.1",
     "traverse": "^0.6",
-    "wiredep": "^4.0",
     "run-sequence": "^1.1.4"
   }
 }

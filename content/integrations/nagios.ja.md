@@ -9,7 +9,7 @@ doclevel:
 ---
 
 <!-- ### Overview
-{:#int-overview}
+
 
 Capture Nagios activity in Datadog to:
 
@@ -19,7 +19,7 @@ Capture Nagios activity in Datadog to:
 
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
 
@@ -28,7 +28,7 @@ Capture Nagios activity in Datadog to:
 * 障害に関し、チームメンバーとイベントストリーム上で検討する為
 
 <!-- ### Configuration
-{:#setting}
+
 
 1. If you are using the Datadog Agent < 5.0.0, please look at the old documentation for more detailed instructions.
 
@@ -50,7 +50,7 @@ Find the Nagios configuration file on your server (usually /etc/nagios3/nagios.c
         sudo /etc/init.d/datadog-agent restart -->
 
 ### 設定
-{:#configuration}
+
 
 ここに紹介する設定方法は、Datadog Agent 5.0.0以降を対象にしています。それ以前のバージョンを使用してる場合は、[「Deprecated instructions to install python dependencies for the Datadog Agent」](https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent)のページを参照してください。
 

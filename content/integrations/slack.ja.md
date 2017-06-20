@@ -9,7 +9,7 @@ doclevel: basic
 ---
 
 ### 概要
-{:#int-overview}
+
 
 次の目的で、SlackとDatadogを連携します:
 
@@ -23,7 +23,7 @@ doclevel: basic
 * Tick the checkbox if you want to be notified for every comment, otherwise you will need to use the @slack-channel_name syntax. -->
 
 ### 設定
-{:#configuration}
+
 
 * Slackのアカウント管理ページの`Integration`タブに移動し、Datadogを選択します。
 * 管理ページに表示されている **Slack Service Hook** をコピーし、Datadogのインテグレーションタイルの`configuration`タブの該当欄へペーストします。
