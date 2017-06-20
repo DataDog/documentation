@@ -196,20 +196,6 @@ test_site_links() {
     # CHECK_EXTERNAL
     # VERBOSE
 
-    ## filters - if change was only to content
-    # get added, copied, or modified files it this commit
-    # replace the file name with the build file name (will this break pages that use a slug??? yes.)
-    # replace content with
-	#    filters=$(git diff HEAD^ HEAD --name-only --diff-filter=ACM | sed -ne "s@\.md@\/index\.html@p" | sed -ne "s@content@${ARTIFACT_RESOURCE}@p")
-	#    if [[ ${filters} != "" ]]; then
-	#        # so we can get a dozen or so changed files back
-	         # changed file names do not always translate to their html counterparts... so
-	         # for each changed file, if it is a .md file, then we need to
-	#        filters="$(pwd)/${filters}"
-	#    else
-	#        filters="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
-	#    fi
-
     start_step
     filters="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
 
@@ -217,13 +203,13 @@ test_site_links() {
     check_links.py "${1}" -p 5 -f "${filters}" -d "${2}" --check_all "${3}" \
     --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
 
-    # update gobs trello with broken external links
-    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
-        echo "updating gobs trello"
-        source /etc/trello_config.sh
-        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
-        --list_id "${list_id}" --members "${members}"
-    fi
+    # update trello with broken external links
+#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+#        echo "updating trello"
+#        source /etc/trello_config.sh
+#        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
+#        --list_id "${list_id}" --members "${members}"
+#    fi
 
     # update status
     if [[ $? != 0 ]]; then
