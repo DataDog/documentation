@@ -3,21 +3,16 @@
 Starting and Stopping the Agent
 ======================================================
 -->
-{{ if eq .Page.Params.os "osx" }}
-
-    {{ $.Scratch.Set "sudo" "" }}
-
-{{ else }}
-
-    {{ $.Scratch.Set "sudo" "sudo " }}
-
-{{ end }}
-
-{{ $sudo := $.Scratch.Get "sudo" }}
+<% if @item[:os] == 'osx'
+  $sudo = ''
+  else
+  $sudo = 'sudo '
+end %>
 
 ### Starting and Stopping the Agent
 
-{{ if eq .Page.Params.os "smartos" }}
+
+<% if @item[:os] == 'smartos' %>
 To manually start the Agent:
 
     svcadm enable datadog
@@ -30,20 +25,19 @@ To restart the Agent and to reload the configuration files:
 
     svcadm restart datadog
 
-{{ else }}
+<% else %>
 To manually start the Agent:
 
-    {{ $sudo }}{{.Page.Params.servicename }} start
+    <%= $sudo %><%= @item[:servicename] %> start
 
 To stop the Agent:
 
-    {{ $sudo }}{{.Page.Params.servicename }} stop
+    <%= $sudo %><%= @item[:servicename] %> stop
 
 To restart the Agent and to reload the configuration files:
 
-    {{ $sudo }}{{.Page.Params.servicename }} restart
-
-{{ end }}
+    <%= $sudo %><%= @item[:servicename] %> restart
+<% end %>
 <!--
 ======================================================
 Status and Information
@@ -52,7 +46,7 @@ Status and Information
 
 ### Status and Information
 
-{{ if eq .Page.Params.os "smartos" }}
+<% if @item[:os] == 'smartos' %>
 To check if the Agent is running:
 
     svcs datadog
@@ -65,28 +59,28 @@ Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0
 
     /opt/local/datadog/bin/info -v
 
-{{ else }}
+<% else %>
 To check if the Agent is running: *(since 3.8.0)*
 
-    {{ $sudo }}{{.Page.Params.servicename }} status
+    <%= $sudo %><%= @item[:servicename] %> status
 
 To receive information about the Agent's state:
 
-    {{ $sudo }}{{.Page.Params.serviceinfoname}}
+    <%= $sudo %><%= @item[:serviceinfoname] %>
 
 Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)*
 
-    {{ $sudo }}{{.Page.Params.serviceinfoname}} -v
+    <%= $sudo %><%= @item[:serviceinfoname] %> -v
 
 More information about the metrics, events and service checks for an integration can be retrieved with the check command:
 
-    {{ $sudo }}{{.Page.Params.servicename }} check [integration]
+    <%= $sudo %> dd-agent check [integration]
 
 Add the check_rate argument to get the most recent values for rates:
 
-    {{ $sudo }}{{.Page.Params.servicename }} check [integration] check_rate
+    <%= $sudo %> dd-agent check [integration] check_rate
 
-{{ end }}
+<% end %>
 <!--
 ======================================================
 Configuration
@@ -95,9 +89,9 @@ Configuration
 
 ### Configuration
 
-The configuration file for the Agent is located at ````{{.Page.Params.configdirectory}}datadog.conf````
+The configuration file for the Agent is located at ````<%= @item[:configdirectory] %>datadog.conf````
 
-Configuration files for integrations are located in ````{{.Page.Params.configdirectory}}conf.d/````
+Configuration files for integrations are located in ````<%= @item[:configdirectory] %>conf.d/````
 
 <!--
 ======================================================
@@ -107,7 +101,7 @@ Troubleshooting
 
 ### Troubleshooting
 
-{{ if eq .Page.Params.os "smartos" }}
+<% if @item[:os] == 'smartos' %>
 
 Try running the info command to see the state of the Agent.
 
@@ -117,16 +111,16 @@ Logs for the subsystems are in the following files:
 * ````/opt/local/datadog/logs/supervisord/dogstatsd.log````
 * ````/opt/local/datadog/logs/supervisord/forwarder.log````
 
-{{ else }}
+<% else %>
 Try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
 
 Logs for the subsystems are in the following files:
 
-* ````{{.Page.Params.supervisorlog}}```` *(since 3.8.0)*
-* ````{{.Page.Params.logdirectory}}collector.log````
-* ````{{.Page.Params.logdirectory}}dogstatsd.log````
-* ````{{.Page.Params.logdirectory}}forwarder.log````
+* ````<%= @item[:supervisorlog] %>```` *(since 3.8.0)*
+* ````<%= @item[:logdirectory] %>collector.log````
+* ````<%= @item[:logdirectory] %>dogstatsd.log````
+* ````<%= @item[:logdirectory] %>forwarder.log````
 
-{{ end }}
+<% end %>
 
 <br/>

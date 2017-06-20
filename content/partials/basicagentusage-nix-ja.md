@@ -1,0 +1,146 @@
+<!--
+======================================================
+Starting and Stopping the Agent
+======================================================
+-->
+
+<% if @item[:os] == 'osx'
+  $sudo = ''
+  else
+  $sudo = 'sudo '
+end %>
+
+<!-- ### Starting and Stopping the Agent -->
+
+### Datadog Agent の起動と停止
+
+<% if @item[:os] == 'smartos' %>
+<!-- To manually start the Agent: -->
+手動で Datadog Agent を起動する:
+
+    svcadm enable datadog
+
+<!-- To stop the Agent: -->
+Datadog Agentを停止する:
+    svcadm disable datadog
+
+<!-- To restart the Agent and to reload the configuration files: -->
+Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
+
+    svcadm restart datadog
+
+<% else %>
+<!-- To manually start the Agent: -->
+手動で Datadog Agent を起動する:
+
+    <%= $sudo %><%= @item[:servicename] %> start
+
+<!-- To stop the Agent: -->
+Datadog Agentを停止する:
+
+    <%= $sudo %><%= @item[:servicename] %> stop
+
+<!-- To restart the Agent and to reload the configuration files: -->
+Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
+
+    <%= $sudo %><%= @item[:servicename] %> restart
+<% end %>
+
+<!--
+======================================================
+Status and Information
+======================================================
+-->
+
+<!-- ### Status and Information -->
+
+### 動作ステータスの確認
+
+<% if @item[:os] == 'smartos' %>
+<!-- To check if the Agent is running: -->
+Datadog Agent が起動しているかを確認する:
+
+    svcs datadog
+
+<!-- To receive more information about the Agent’s state: -->
+Datadog Agent のステータスに関する情報を収集する:
+
+    /opt/local/datadog/bin/info
+
+<!-- Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)* -->
+エラーをトレースするために`-v`フラグをinfoコマンドに追記し実行する: *(ver. 3.8.0 ~)*
+
+    /opt/local/datadog/bin/info -v
+
+<% else %>
+<!-- To check if the Agent is running: *(since 3.8.0)* -->
+Datadog Agent が起動しているかを確認する: *(since 3.8.0)*
+
+    <%= $sudo %><%= @item[:servicename] %> status
+
+<!-- To receive information about the Agent's state: -->
+Datadog Agent のステータスに関する情報を収集する:
+
+    <%= $sudo %><%= @item[:serviceinfoname] %>
+
+<!-- Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)* -->
+エラーをトレースするために`-v`フラグをinfoコマンドに追記し実行する: *(ver. 3.8.0 ~)*
+
+    <%= $sudo %><%= @item[:serviceinfoname] %> -v
+
+<% end %>
+<!--
+======================================================
+Configuration
+======================================================
+-->
+
+<!-- ### Configuration -->
+
+### 設定ファイルの保存されているディレクトリ
+
+<!-- The configuration file for the Agent is located at ````<%= @item[:configdirectory] %>datadog.conf````
+
+Configuration files for integrations are located in ````<%= @item[:configdirectory] %>conf.d/```` -->
+
+Datadog Agent の設定ファイルの保存先 ````<%= @item[:configdirectory] %>datadog.conf````
+
+インストールしたIntegrations の設定ファイルの保存先 ````<%= @item[:configdirectory] %>conf.d/````
+
+<!--
+======================================================
+Troubleshooting
+======================================================
+-->
+
+<!-- ### Troubleshooting -->
+
+### トラブルシューティング
+
+<% if @item[:os] == 'smartos' %>
+
+<!-- Try running the info command to see the state of the Agent. -->
+<a href='#status_and_information'>info</a>コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
+
+<!-- Logs for the subsystems are in the following files: -->
+Datadog Agentに内包されている機能の個別ログは、以下のファイルに記録されています:
+
+* ````/opt/local/datadog/logs/supervisord/collector.log````
+* ````/opt/local/datadog/logs/supervisord/dogstatsd.log````
+* ````/opt/local/datadog/logs/supervisord/forwarder.log````
+
+<% else %>
+<!-- Try running the <a href='#status_and_information'>info</a> command to see the state of the Agent. -->
+<a href='#status_and_information'>info</a>コマンドを実行することによって、Datadog Agentのステータス情報を表示することができます。
+
+<!-- Logs for the subsystems are in the following files: -->
+Datadog Agentに内包されている機能の個別ログは、以下のファイルに記録されています:
+
+* ````<%= @item[:supervisorlog] %>```` *(since 3.8.0)*
+* ````<%= @item[:logdirectory] %>collector.log````
+* ````<%= @item[:logdirectory] %>dogstatsd.log````
+* ````<%= @item[:logdirectory] %>forwarder.log````
+
+<% end %>
+
+<br/>

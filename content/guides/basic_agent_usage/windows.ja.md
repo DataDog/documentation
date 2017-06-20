@@ -193,7 +193,7 @@ Logs for the subsystems are available in Event Viewer, under Windows Logs &rarr;
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %>
+{{< partial name="_contact_info-ja" markdown="true" >}}
  -->
 
 <h3 id="troubleshooting">トラブルシューティング</h3>
@@ -216,4 +216,4 @@ Datadog Agent の各要素のログは、”Event Viewer”で確認できます
 
 上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 
-<%= render '_contact_info-ja', :heading_size => 5, :hide_datadog => true %>
+{{< partial name="_contact_info-ja" markdown="true" >}}

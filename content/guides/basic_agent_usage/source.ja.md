@@ -174,7 +174,7 @@ Logs for the subsystems are in the following files:
 If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
-<%= render '_contact_info', :heading_size => 5, :hide_datadog => true %> -->
+{{< partial name="_contact_info-ja" markdown="true" >}} -->
 
 <h3 id="troubleshooting">トラブルシューティング</h3>
 
