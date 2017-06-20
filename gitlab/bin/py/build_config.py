@@ -82,7 +82,8 @@ def build_config(proj_path, base, override, distro=None, branch=None, public_dir
         print(content_new['params']['branch'])
         content_new['params']['static_url'] = distro + '%s/' % branch
         print(content_new['params']['static_url'])
-
+        content_new['params']['img_url'] = distro + '%s/' % branch
+        print(content_new['params']['img_url'])
     content_new['publishDir'] = public_dir
 
     with open(os.path.join(proj_path, 'build.yaml'), 'w', encoding='utf-8') as open_write:
