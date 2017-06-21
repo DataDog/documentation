@@ -256,6 +256,8 @@ class LinkCheck(LinkChecker):
                 'tel:',
                 'irc:',
                 'file:',
+                'localhost:',
+                'url.to.snpashot.com',
                 'app.datadoghq.com'
             ]
             is_valid = not any([pattern in link for pattern in nope_list])
