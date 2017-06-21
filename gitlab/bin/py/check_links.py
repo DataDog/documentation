@@ -255,6 +255,7 @@ class LinkCheck(LinkChecker):
                 'mailto:',
                 'tel:',
                 'irc:',
+                'file:',
                 'app.datadoghq.com'
             ]
             is_valid = not any([pattern in link for pattern in nope_list])
