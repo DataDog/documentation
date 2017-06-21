@@ -70,6 +70,7 @@ $(document).ready(function() {
 
     var header;
     var subheading;
+    var subsubheading;
 
     var toc = window.Datadog.toc;
     var tocdepth = window.Datadog.tocdepth;
@@ -95,30 +96,33 @@ $(document).ready(function() {
             // console.log('h4s', this.h4s.length);
         },
         'setHeadings': function(){
+            header = 'h2';
+            subheading = 'h3';
+            subsubheading = 'h4';
 
-            if(this.h2s.length > 0 && this.h3s.length > 0 ) {
-                header = 'h2';
-                subheading = 'h3';
-            }else if(this.h2s.length == 0 && this.h3s.length > 0 ) {
+            if(this.h2s.length == 0 && this.h3s.length > 0 ) {
                 header = 'h3';
                 if(this.h4s.length > 0){
                     subheading = 'h4';
+                    subsubheading = '';
                 }else{
                     subheading = null;
+                    subsubheading = '';
                 }
             }
 
-            if(tocdepth == 1){
+            if(parseInt(tocdepth) == 1){
                 subheading = null;
             }
 
-            this.initToc(header, subheading);
+            this.initToc(header, subheading, subsubheading);
 
         },
-        'initToc': function(header, subheading) {
+        'initToc': function(header, subheading, subsubheading) {
 
             this.header = header;
             this.subheading = subheading;
+            this.subsubheading = subsubheading;
 
             // console.log(header);
             // console.log(subheading);
@@ -127,6 +131,7 @@ $(document).ready(function() {
                 $('body').tocible({
                     heading: this.header, //[selector], the first level heading
                     subheading: this.subheading, //[selector], the second level heading
+                    subsubheading: this.subsubheading,
                     reference: '#toc-box', //[selector], reference element for horizontal positioning
                     title: 'Table of Contents', //[selector or string], title of the menu
                     hash: false, //[boolean], setting true will enable URL hashing on click

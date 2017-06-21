@@ -14,6 +14,7 @@
   var defaults = {
 		heading:'h2',
 		subheading:'h3',
+	  	subsubheading:'h4',
 		reference:'.ref',
 		title:'',
 		hash:false,
@@ -28,7 +29,7 @@
 		var current_target;
 
 		return this.each(function(){
-			var wrapper = $(this), nav, ref, heading, subheading, left;
+			var wrapper = $(this), nav, ref, heading, subheading, subsubheading, left;
 
 			wrapper.find('.tocible').remove();
 
@@ -60,6 +61,7 @@
 
 			heading = wrapper.find(opts.heading);
 			subheading = wrapper.find(opts.subheading);
+			subsubheading = wrapper.find(opts.subsubheading);
 
 			heading.add(subheading).each(function() {
 				var el = $(this), href, title, type, anchor, list;
@@ -71,6 +73,8 @@
 					type = 'heading';
 				} else if(el.is(subheading)) {
 					type = 'subheading';
+				} else if(el.is(subsubheading)) {
+					type = 'subsubheading';
 				}
 
 				anchor = $('<a/>', {text:title, href:href});
@@ -96,6 +100,46 @@
 				});
 
 			});
+
+			if(subsubheading.length) {
+                subheading.add(subsubheading).each(function () {
+                    var el = $(this), href, title, type, anchor, list;
+
+                    href = el.attr('id') ? '#' + el.attr('id') : '#';
+                    title = el.text();
+
+                    if (el.is(heading)) {
+                        type = 'heading';
+                    } else if (el.is(subheading)) {
+                        type = 'subheading';
+                    } else if (el.is(subsubheading)) {
+                        type = 'subsubheading';
+                    }
+
+                    anchor = $('<a/>', {text: title, href: href});
+                    list = $('<li/>', {'class': 'tocible_' + type});
+                    list.append(anchor).appendTo('.tocible > ul');
+
+                    anchor.click(function (e) {
+                        e.preventDefault();
+
+                        var offset = el.offset();
+
+                        if (opts.hash) {
+                            var winTop = $(window).scrollTop();
+
+                            if (history.pushState) {
+                                history.pushState({}, document.title, href);
+                            } else {
+                                window.location.hash = href;
+                                $(window).scrollTop(winTop);
+                            }
+                        }
+                        $('html, body').stop(true).animate({scrollTop: offset.top - 110}, opts.speed);
+                    });
+
+                });
+            }
 
 			contain = function(){
 				var winTop = $(window).scrollTop(), wrapTop = wrapper.offset().top;
