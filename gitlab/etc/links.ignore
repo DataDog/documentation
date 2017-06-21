@@ -1,0 +1,13 @@
+# links starting with the following patterns will be ignored by linkchecker
+linkedin.com/share
+reddit.com/submit
+twitter.com/share
+mailto:
+tel:
+irc:
+file:
+localhost:
+url.to.snpashot.com
+app.datadoghq.com
+some-account.atlassian.net
+bitbucket.org/groupname/reponame

@@ -248,18 +248,8 @@ class LinkCheck(LinkChecker):
                 return False
 
             # other no-no links
-            nope_list = [
-                'linkedin.com/share',
-                'reddit.com/submit',
-                'twitter.com/share',
-                'mailto:',
-                'tel:',
-                'irc:',
-                'file:',
-                'localhost:',
-                'url.to.snpashot.com',
-                'app.datadoghq.com'
-            ]
+            with open('/etc/links.ignore') as ignore_links:
+                nope_list = ignore_links.readlines()
             is_valid = not any([pattern in link for pattern in nope_list])
             return is_valid
         except TypeError:  # we expect link to be a string, if it is not then bail
