@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Connect Cacti to Datadog to:
@@ -16,7 +16,7 @@ Connect Cacti to Datadog to:
 - Visualize Cacti metrics in Datadog.
 - Correlate metrics captured by Cacti with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的でCactiのコミット情報をDatadogと連携します:

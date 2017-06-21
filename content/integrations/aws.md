@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 git_integration_title: amazon_web_services
 ---
-# Overview
+## Overview
 
 Connect to Amazon Web Services (AWS) in order to:
 
@@ -55,7 +55,7 @@ Related integrations include:
 | [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
 
 
-# Installation
+## Installation
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
@@ -122,7 +122,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 6.  Select the policy you created above.
 7.  Review what you selected and click the **Create Role** button.
 
-# Configuration
+## Configuration
 
 {{< img src="integrations-aws-secretentry.png" >}}
 
@@ -132,7 +132,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-## Configuration for China and GovCloud
+### Configuration for China and GovCloud
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
@@ -141,11 +141,11 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 5.  Click **Install Integration**.
 
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 
-# Permissions
+## Permissions
 
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
@@ -156,7 +156,7 @@ Note that these actions and the ones listed below are included in the Policy Doc
 
 By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
 
-## Autoscaling
+### Autoscaling
 
 * `autoscaling:DescribeAutoScalingGroups`: Used to list all autoscaling groups.
 * `autoscaling:DescribePolicies`: List available policies (for autocompletion in events and monitors).
@@ -166,13 +166,13 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 
 For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
 
-## Billing
+### Billing
 
 * `budgets:ViewBudget`: Used to view budget metrics
 
 For more information on [Budget policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html), review the documentation on the AWS website.
 
-## CloudTrail
+### CloudTrail
 
 * `cloudtrail:DescribeTrails`: Used to list trails and find in which s3 bucket they store the trails
 * `cloudtrail:GetTrailStatus`: Used to skip inactive trails
@@ -187,7 +187,7 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
-## DynamoDB
+### DynamoDB
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
@@ -195,7 +195,7 @@ For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 
-## EC2
+### EC2
 
 * `ec2:DescribeInstanceStatus`: Used by the ELB integration to assert the health of an instance. Used by the EC2 integration to describe the health of all instances.
 * `ec2:DescribeSecurityGroups`: Adds SecurityGroup names and custom tags to ec2 instances.
@@ -203,7 +203,7 @@ For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/late
 
 For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html), review the documentation on the AWS website.
 
-## ECS
+### ECS
 
 * `ecs:ListClusters`: List available clusters.
 * `ecs:ListContainerInstances`: List instances of a cluster.
@@ -211,7 +211,7 @@ For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html), review the documentation on the AWS website.
 
-## Elasticache
+### Elasticache
 
 * `elasticache:DescribeCacheClusters`: List and describe Cache clusters, to add tags and additional metrics.
 * `elasticache:ListTagsForResource`: List custom tags of a cluster, to add custom tags.
@@ -219,21 +219,21 @@ For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
 
-## ELB
+### ELB
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
-## EMR
+### EMR
 
 * `elasticmapreduce:ListClusters`: List available clusters.
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
 
 For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
 
-## ES
+### ES
 
 * `es:ListTags`: Add custom ES domain tags to ES metrics
 * `es:ListDomainNames`: Add custom ES domain tags to ES metrics
@@ -241,7 +241,7 @@ For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
 
-## Kinesis
+### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
 * `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
@@ -249,7 +249,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs
+### CloudWatch Logs
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
@@ -257,7 +257,7 @@ For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/lates
 
 For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html), review the documentation on the AWS website.
 
-## RDS
+### RDS
 
 * `rds:DescribeDBInstances`: Descrive RDS instances to add tags.
 * `rds:ListTagsForResource`: Add custom tags on RDS instances.
@@ -265,41 +265,41 @@ For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/I
 
 For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html), review the documentation on the AWS website.
 
-## Route53
+### Route53
 
 * `route53:listHealthChecks`: List available health checks.
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
 For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
 
-## S3
+### S3
 
 * `s3:ListAllMyBuckets`: Used to list available buckets
 * `s3:GetBucketTagging`: Used to get custom bucket tags
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
-## SES
+### SES
 
 * `ses:GetSendQuota`: Add metrics about send quotas.
 * `ses:GetSendStatistics`: Add metrics about send statistics.
 
 For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html), review the documentation on the AWS website.
 
-## SNS
+### SNS
 
 * `sns:ListTopics`: Used to list available topics.
 * `sns:Publish`: Used to publish notifications (monitors or event feed).
 
 For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
 
-## SQS
+### SQS
 
 * `sqs:ListQueues`: Used to list alive queues.
 
 For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html), review the documentation on the AWS website.
 
-## Support
+### Support
 
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 

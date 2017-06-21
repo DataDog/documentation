@@ -6,7 +6,7 @@ kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 Get metrics from your base system about the CPU, IO, load, memory, processes, swap, and uptime. Other system-related checks can be found here:
 
@@ -14,10 +14,10 @@ Get metrics from your base system about the CPU, IO, load, memory, processes, sw
 * [Disk Check](/integrations/disk) - Capture metrics about the disk
 * [Process check](/integrations/process/) - Capture metrics from specific running processes on a system.
 
-# Configuration
+## Configuration
 
 No configuration is necessary for the system.
 
-# Metrics
+## Metrics
 
 <%= get_metrics_from_git('system', 'system.cpu,system.io,system.load,system.mem,system.proc,system.processes,system.swap,system.uptime') %>

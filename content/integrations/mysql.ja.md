@@ -8,7 +8,7 @@ kind: integration
 doclevel: basic
 ---
 
-### 概要
+## 概要
 
 
 次の目的の為に、MySQLのメトリクスをDatadogに送信します:

@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Connect Fabric to Datadog in order to:
 

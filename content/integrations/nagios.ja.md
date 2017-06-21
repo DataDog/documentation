@@ -18,7 +18,7 @@ Capture Nagios activity in Datadog to:
 - Discuss service failures with your team. -->
 
 
-### 概要
+## 概要
 
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:
@@ -49,7 +49,7 @@ Find the Nagios configuration file on your server (usually /etc/nagios3/nagios.c
 
         sudo /etc/init.d/datadog-agent restart -->
 
-### 設定
+## 設定
 
 
 ここに紹介する設定方法は、Datadog Agent 5.0.0以降を対象にしています。それ以前のバージョンを使用してる場合は、[「Deprecated instructions to install python dependencies for the Datadog Agent」](https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent)のページを参照してください。

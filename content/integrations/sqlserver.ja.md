@@ -16,7 +16,7 @@ Connect SQL Server to Datadog in order to:
 - Visualize your database performance.
 - Correlate the performance of SQL Server with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、SQLサーバーとDatadogを連携します:

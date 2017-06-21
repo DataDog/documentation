@@ -6,7 +6,7 @@ git_integration_title: papertrail
 newhlevel: true
 doclevel: basic
 ---
-# Overview
+## Overview
 
 {{< img src="papertrailexample.png" style="max-width:600px;" >}}
 
@@ -15,7 +15,7 @@ Use Papertrail and Datadog to:
   * Turn freeform log data into actionable metrics
   * Avoid silo-ed operational knowledge. See and correlate log-derived metrics alongside app- and system-level metrics.
 
-# Installation
+## Installation
 
 To capture metrics from Papertrail:
 
@@ -34,7 +34,7 @@ To capture metrics from Papertrail:
 
 Papertrail will update Datadog at your chosen interval.
 
-# Configuration
+## Configuration
 
 No configuration steps are required for this integration.
 

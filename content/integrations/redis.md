@@ -7,7 +7,7 @@ git_integration_title: redis
 updated_for_agent: 5.8.5
 ---
 
-# Overview
+## Overview
 
 {{< img src="redis.png" >}}
 
@@ -18,7 +18,7 @@ Learn more about how to monitor Redis performance metrics thanks to
 [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/).
 We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to the Redis server. Edit conf.d/redisdb.yaml:
 
@@ -36,7 +36,7 @@ We detail the key performance metrics, how to collect them, and how to use Datad
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `unix_socket_path` - (Optional) - Can be used instead of `host` and `port`.
 * `db`, `password`, and `socket_timeout` - (Optional) - Additional connection options.
@@ -49,7 +49,7 @@ We detail the key performance metrics, how to collect them, and how to use Datad
 
 {{< insert-example-links conf="redisdb" check="redisdb" >}}
 
-# Validation
+## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -63,7 +63,7 @@ We detail the key performance metrics, how to collect them, and how to use Datad
             - instance #0 [OK]
             - Collected 8 metrics & 0 events
 
-#  Troubleshooting and Questions
+## Troubleshooting and Questions
 
 **Q:** How do I filter to look at the stats for a particular DB in a particular environment?
 
@@ -75,7 +75,7 @@ you can select multiple environments and then select “Save these tiles to: a n
 
 {{< img src="metric-explorer-redis.png" >}}
 
-### Metrics
+## Metrics
 
 
 

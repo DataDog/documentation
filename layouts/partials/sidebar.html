@@ -1,5 +1,8 @@
 {{ $sidebar := .Params.sidebar }}
 {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) }}
+{{ $integrations := ( where .Site.Pages "Params.kind" "==" "integration" ) }}
+{{ $currentURL := .URL }}
+{{ $lastUrlElement := index (last 1 (split (delimit (split .URL "/") "," "") ",")) 0 }}
 
 <ul class="nav nav-tabs nav-stacked sidebar">
 
@@ -48,19 +51,29 @@
 
   {{ else }}
     <li id="toc-box"></li>
-
-    {{ if $guides }}
-      <li class="nav-header">{{ i18n "menu_guides" }}</li>
+    {{ if eq .Params.Kind "integration" }}
+      <li class="nav-header">Other Integrations</li>
+      <li class="integration"><a href="/integrations/">Back to Overview</a></li>
+      {{ range $integrations }}
+          <li class="integration"><a href="{{.Permalink}}">
+            {{ if eq $lastUrlElement .File.TranslationBaseName }}&gt;{{ end }}
+            {{ .Params.integration_title }}
+          </a></li>
+      {{ end }}
     {{ else }}
-      <li class='nav-header'>Table of Contents</li>
-    {{ end }}
-
-    {{ range sort $guides "Params.listorder" "asc" }}
-
-      {{ if (and ( isset .Params "listorder" ) ( ne .Params.beta true )) }}
-          <li><a href="{{.Permalink}}">{{ .Title }}</a></li>
+      {{ if $guides }}
+        <li class="nav-header">{{ i18n "menu_guides" }}</li>
+      {{ else }}
+        <li class='nav-header'>Table of Contents</li>
       {{ end }}
 
+      {{ range sort $guides "Params.listorder" "asc" }}
+
+        {{ if (and ( isset .Params "listorder" ) ( ne .Params.beta true )) }}
+            <li><a href="{{.Permalink}}">{{ .Title }}</a></li>
+        {{ end }}
+
+      {{ end }}
     {{ end }}
 
   {{ end }}

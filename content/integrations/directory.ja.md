@@ -8,7 +8,7 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 Capture metrics from the files in given directories:
 
@@ -17,7 +17,7 @@ Capture metrics from the files in given directories:
 - age of the last modification
 - age of the creation -->
 
-### 概要
+## 概要
 
 
 特定ディレクトリ内のファイルに関するメトリクスをDatadogへ送信します:
@@ -33,7 +33,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 * [Directoryインテグレーション check script](https://github.com/DataDog//integrations-core/blob/master/directory/check.py)
 
 
-<!-- ### Configuration
+<!-- ## Configuration
  *To capture Directory metrics you need to install the Datadog Agent.*
 
 - The Directory check **is not currently supported on Windows systems**.
@@ -78,7 +78,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
             - instance #0 [OK]
             - Collected 8 metrics & 0 events -->
 
-### 設定
+## 設定
 
 
  *ディレクトリ関連のメトリクスを取得するには、Datadog Agentのインストールが必要です。*

@@ -23,12 +23,12 @@ When a metric alert is triggered -->
 3. Copy your key
 4. Back to Datadog, paste the API key in the next section here -->
 
-### 概要
+## 概要
 
 
 VictorOpsと連携することで、Datadogで検知したアラートを、非常に高い制度での通知とエスカレーションを実現します。
 
-### 設定
+## 設定
 
 
 1. VictorOpsのサイトでインテグレーションの設定ページを表示します。
@@ -60,9 +60,9 @@ Special characters are not allowed in the names. Upper/lower case letters, numbe
 If this field is left empty, the default endpoint will be `https://alert.victorops.com/integrations/datadog/20140523/alert` -->
 
 
-### VictorOps Routing Keysについて
+## VictorOps Routing Keysについて
 
-#### VictorOps上の特定のユーザーに対してのアラート
+### VictorOps上の特定のユーザーに対してのアラート
 
 VictorOps上の特定ユーザーの"Routing Key"を、全てDatadog側に追加しておいてください。(もしもこの欄に指定がない場合は、VictorOpsは、デフォルトグループに対してアラートを通知します。)
 

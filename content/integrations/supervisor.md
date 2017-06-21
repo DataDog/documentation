@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: supervisord
 ---
 
-# Overview
+## Overview
 
 {{< img src="supervisorevent.png" >}}
 
@@ -14,7 +14,7 @@ Enable the supervisord check to monitor the states of your processes running und
 
 For more about using the Supervisor integration, read [the post on our blog](https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor/).
 
-# Installation
+## Installation
 
 
 There are two ways to get started with the supervisord check.
@@ -41,7 +41,7 @@ to monitor per instance.
 
 See [the supervisor configuration docs](http://supervisord.org/configuration.html)for more information on configuring supervisord sockets and inet http servers.
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to the supervisor daemon. Edit conf.d/supervisord.yaml:
 
@@ -64,7 +64,7 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `name` (Required) - An arbitrary name to identify the supervisord server.
 * `host` (Optional) - Defaults to localhost. The host where supervisord server is running.
@@ -77,7 +77,7 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 
 {{< insert-example-links conf="supervisord" check="supervisord" >}}
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 

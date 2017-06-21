@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Connect Riak to Datadog in order to:
 

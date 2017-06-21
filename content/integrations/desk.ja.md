@@ -8,7 +8,7 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Connect Desk to Datadog to:
@@ -27,7 +27,7 @@ Connect Desk to Datadog to:
 - サポートチケットのトレンドを、DevOpsの問題点と合わせて把握する
 
 
-<!-- ### Configuration
+<!-- ## Configuration
 
 
 From your Desk account, add an API application on the Settings -> API -> My Applications page (you made need administrator privileges.
@@ -40,7 +40,7 @@ Then from your Datadog account, enter the corresponding information on the [Desk
 
 Hit the install button, and then you're all set! You will soon be able to select desk.* metrics on a custom dashboard or view them on the provided [Desk dashboard](https://app.datadoghq.com/screen/integration/desk). (You can also read about this integration on [our blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).) -->
 
-### 設定
+## 設定
 
 
 Deskのアカウントにログインし、`Setting` -> `API` -> `My Application` ページと移動し、APIアプリケーションを追加します。(この操作には、Admin権限が必要です。)

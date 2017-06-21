@@ -15,7 +15,7 @@ doclevel: basic
 * Tag your Google Compute Engine hosts with additional compute-specific metadata (e.g. zone) -->
 
 
-### 概要
+## 概要
 
 
 次の目的で、Google Cloud PlatformとDatadogを連携します:

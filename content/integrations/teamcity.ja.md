@@ -13,7 +13,7 @@ doclevel: basic
 * Monitor your builds and deployments
 * Collect stats and bind tags to every step of your integration -->
 
-### 概要
+## 概要
 
 
 次の目的で、TeamCityとDatdogを連携します:

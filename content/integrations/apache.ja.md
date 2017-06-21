@@ -18,7 +18,7 @@ doclevel: complete
 
 </div> -->
 
-### 概要と目的
+## 概要と目的
 
 
 Apacheからリアルタイムでメトリクスを取得しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付ける。
@@ -32,7 +32,7 @@ Apacheからリアルタイムでメトリクスを取得しグラフ化する�
 * <a href="https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example">Apache YAML example</a>
 * <a href="https://github.com/DataDog/integrations-core/blob/master/apache/check.py">Apache checks.d</a> -->
 
-### Datadog Agentの関連ソールコードへのリンク
+## Datadog Agentの関連ソールコードへのリンク
 
 * [Apache checks.d](https://github.com/DataDog/integrations-core/blob/master/apache/check.py)
 * [Apache YAML example](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example)
@@ -49,7 +49,7 @@ Apacheからリアルタイムでメトリクスを取得しグラフ化する�
     apache.performance.idle_workers
     apache.performance.uptime -->
 
-### 取得しているメトリクス
+## 取得しているメトリクス
 
 Apacheインテグレーションは、次のメトリクスをデフォルトで取得します:
 
@@ -92,7 +92,7 @@ instances:
 </div> -->
 
 
-### 設定
+## 設定
 
 
 **Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**

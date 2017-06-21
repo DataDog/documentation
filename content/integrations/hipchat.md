@@ -6,18 +6,18 @@ newhlevel: true
 git_integration_title: hipchat
 ---
 
-# Overview
+## Overview
 
 Connect HipChat to Datadog in order to:
 
 * Receive notifications when someone posts on your stream.
 * Receive metric alerts and see graphs within Hipchat.
 
-# Installation
+## Installation
 
 No installation steps are required for this integration
 
-# Configuration
+## Configuration
 
 1. [Create a new access token](https://www.hipchat.com/admin/api) for Datadog. Only notification level acccess is required.
 1. Copy your key and enter it in the [HipChat integration tile](https://app.datadoghq.com/account/settings#integrations/hipchat).
@@ -29,7 +29,7 @@ You can now share graphs or send alerts to HipChat rooms using the syntax @hipch
 
 *NOTICE : If your chat name contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names.
 
-# Metrics
+## Metrics
 
 This integration does not provide metrics.
 

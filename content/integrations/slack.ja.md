@@ -8,7 +8,7 @@ kind: integration
 doclevel: basic
 ---
 
-### 概要
+## 概要
 
 
 次の目的で、SlackとDatadogを連携します:
@@ -22,7 +22,7 @@ doclevel: basic
 * Add the channels you want to be able to post to.
 * Tick the checkbox if you want to be notified for every comment, otherwise you will need to use the @slack-channel_name syntax. -->
 
-### 設定
+## 設定
 
 
 * Slackのアカウント管理ページの`Integration`タブに移動し、Datadogを選択します。

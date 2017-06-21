@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Capture RSS feed activity in Datadog to:
 

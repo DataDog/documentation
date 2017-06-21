@@ -13,7 +13,7 @@ doclevel: basic
 * be notified when someone posts on your stream
 * be notified when a metric alert is triggered -->
 
-### 概要
+## 概要
 
 
 次の目的で、Campfireとの連携をします:

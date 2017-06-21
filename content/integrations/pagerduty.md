@@ -5,7 +5,7 @@ integration_title: PagerDuty
 kind: integration
 doclevel: basic
 ---
-### Overview
+## Overview
 
 Connect PagerDuty to Datadog in order to:
 

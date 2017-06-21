@@ -6,13 +6,13 @@ git_integration_title: amazon_rds
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 {{< img src="rdsdashboard.png" >}}
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
-## How this works
+### How this works
 
 There are 3 options for monitoring RDS instances. You can choose to use standard or enhanced, and then optionally turn on the native database integration as well if you wish.
 
@@ -23,7 +23,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 * **RDS + Native Database Integration** - You can also choose to turn on the Native Database Integration. This is available for MySQL, Aurora, MariaDB, SQL Server, and Postgres engine types. To get the metrics from RDS and the ones from the native integration to match up, you will need to use the `dbinstanceidentifier` tag on the native integration based on the identifier you assign to the RDS instance. The RDS instances will automatically have the tag assigned.
 
 
-# Installation
+## Installation
 
 * **Standard RDS Integration**
 
@@ -134,7 +134,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
   2.  Restart the agent.
 
-# Validation
+## Validation
 
 To validate that the native database integration is working, run `datadog-agent info`. You should see something like the following:
 
@@ -148,7 +148,7 @@ To validate that the native database integration is working, run `datadog-agent 
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Usage
+## Usage
 
 After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag. ![][2]
 
@@ -157,7 +157,7 @@ Here is the default dashboard for MySQL on Amazon RDS:
 
 Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
 
-# Metrics
+## Metrics
 
 In addition to the metrics you get from the database engines you will also get the following RDS metrics:
 

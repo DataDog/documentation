@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: gearman
 ---
 
-### Overview
+## Overview
 
 Bring Gearman metrics to Datadog to:
 
@@ -15,6 +15,6 @@ Bring Gearman metrics to Datadog to:
 
 {{< insert-example-links conf="gearmand" check="gearmand" >}}
 
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}

@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Capture Nagios activity in Datadog to:
 

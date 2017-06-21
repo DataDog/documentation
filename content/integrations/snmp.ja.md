@@ -17,7 +17,7 @@ sidebar:
 
 <!-- ### Configure the SNMP Agent Check -->
 
-### SNMP インテグレーションの設定
+## SNMP インテグレーションの設定
 
 SNMP Checkを使用するには、`conf.d`ディレクトリにある`snmp.yaml.example`をコピーし、`snmp.yaml`を追加します。
 
@@ -39,7 +39,7 @@ Datadog Agentは、瞬間値や積算値をSNMPから取得出来ます。次に
         - MIB: UDP-MIB
           symbol: udpInDatagrams
 
-#### Specify an OID and the name you want the metric to appear under in Datadog.
+### Specify an OID and the name you want the metric to appear under in Datadog.
 
     metrics:
         - OID: 1.3.6.1.2.1.6.5
@@ -47,7 +47,7 @@ Datadog Agentは、瞬間値や積算値をSNMPから取得出来ます。次に
 
 *The name here is the one specified in the MIB but you could use any name.*
 
-#### Specify a MIB and a table you want to extract information from.
+### Specify a MIB and a table you want to extract information from.
 
     metrics:
         - MIB: IF-MIB
@@ -74,19 +74,19 @@ In this example the agent would gather the rate of octets received on each inter
 
 You can also gather tags based on the indices of your row, in case they are meaningful. In this example, the first row index contains the ip version that the row describes (ipv4 vs. ipv6) -->
 
-##### MIBとエクスポートしたいシンボルを指定します。
+### MIBとエクスポートしたいシンボルを指定します。
 
     metrics:
         - MIB: UDP-MIB
           symbol: udpInDatagrams
 
-##### OIDとDatadogで使用するメトリクス名を指定します。
+### OIDとDatadogで使用するメトリクス名を指定します。
 
     metrics:
         - OID: 1.3.6.1.2.1.6.5
           name: tcpActiveOpens
 
-##### MIBと情報を取得するテーブルを指定します。
+### MIBと情報を取得するテーブルを指定します。
 
     metrics:
         - MIB: IF-MIB
@@ -113,7 +113,7 @@ You can also gather tags based on the indices of your row, in case they are mean
 必要に応じて行のインデックスに基づいてタグを付与することも出来ます。この例では、最初の行のインデックスがIPのバージョン（IPv6, IPv4）を見分け、タグ付けするように指定しています。
 
 
-<!-- ### Use your own Mib
+<!-- ## Use your own Mib
 
 
 To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the `build-pysnmp-mibs` script that ships with pysnmp.
@@ -128,7 +128,7 @@ where YOUR-MIB.mib is the MIB you want to convert.
 
 Put all your pysnmp mibs into a folder and specify this folder's path in your `snmp.yaml` file, in the `init_config` section.` -->
 
-### 独自MIBの変換
+## 独自MIBの変換
 
 
 独自のMIBを使用するには、ysnmp形式に変換する必要があります。この変換には、pysnmpのパッケージに含まれている`build-pysnmp-mibs`を使うことが出来ます。

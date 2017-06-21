@@ -23,7 +23,7 @@ Create alerts using @opsgenie:
 - By taking a snapshot
 - When a metric alert is triggered -->
 
-### 概要
+## 概要
 
 
 OpenGineインテグレーションを使用すると、`@opengenie:`を使ってOpengenieへアラートを送信できます:
@@ -33,10 +33,10 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 - メトリクスを基にした、アラートが発生した時　(通知メッセージ欄)
 
 
-<!-- ### Configuration
+<!-- ## Configuration
 
 
-#### Create a Datadog integration in OpsGenie
+### Create a Datadog integration in OpsGenie
 
 1. Log in to your OpsGenie account and go to the [OpsGenie Integrations](https://www.opsgenie.com/integration/index) page.
 2. As seen below, filter for Datadog and click on the tile.
@@ -82,10 +82,10 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 {{< img src="og_closed_dd_updated.png" >}} -->
 
-### 設定
+## 設定
 
 
-#### OpsGenie側でDatadogインテグレーションを作成する
+### OpsGenie側でDatadogインテグレーションを作成する
 
 1. OpsGenieアカウントにログインし、[OpsGenie Integrations](https://www.opsgenie.com/integration/index) ページに移動します。
 2. 以下の図のようにDatadogのサービスインテグレーションを検索します。
@@ -99,7 +99,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
         {{< img src="opsgenie-add-api-key.png" >}}
 8. 更に別のDatadogインテグレーションを[OpsGenie Integration](https://www.opsgenie.com/integration/index)に追加する場合は、ステップ2からステップ7を繰り返します。
 
-#### OpsGenie側で作成したインテグレーションをDatadog側に追加していきます
+### OpsGenie側で作成したインテグレーションをDatadog側に追加していきます
 
 1. Datadog側の[`Integrations`](https://app.datadoghq.com/account/settings)ページから、OpsGenieのタイルを選択します。
 
@@ -109,9 +109,9 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 {{< img src="datadog-add-opsgenie-key.png" >}}
 
-### DatadogとOpsGenieを連携して使う方法
+## DatadogとOpsGenieを連携して使う方法
 
-#### DatadogからOpsGenieアラートを作成、承認、クローズする方法
+### DatadogからOpsGenieアラートを作成、承認、クローズする方法
 
 Datadog側のMonitor設定のセクション5 **Say What’s Happening** の部分に @opsgenie-service_name や @opsgenie とメッセージに送信先を書き、OpsGenieへのアラートを作成していきます。Datadog側でこのアラートが動作した際に、OpsGenie側の受診者に通知が送られます。
 
@@ -121,7 +121,7 @@ Datadog側からOpsGenieに通知したアラートを承認やクローズす�
 
 {{< img src="dd_ack_og_alert.png" >}}
 
-#### Receive, acknowledge and close Datadog alerts created by OpsGenie
+### Receive, acknowledge and close Datadog alerts created by OpsGenie
 
 次の画像は、OpsGenie側でアラートが動作した際に表示したい内容を設定する画面です。OpsGenie側でアラートが動作すると、OpsGenie側でアラートに設定したタグと詳細が付されたイベントがDatadog側にも登録されます。
 

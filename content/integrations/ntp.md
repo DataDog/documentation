@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 {{< img src="ntpgraph.png" >}}
 
@@ -17,11 +17,11 @@ The Network Time Protocol (NTP) integration is enabled by default and reports th
 
 For more information on syncing your system clock with NTP, [see this article in the Datadog Knowledge Base](https://help.datadoghq.com/hc/en-us/articles/204282095-Network-Time-Protocol-NTP-Offset-Issues)
 
-# Installation
+## Installation
 
 No installation steps are required for this integration.
 
-# Configuration
+## Configuration
 
 1.  The ntp check is enabled by default. If you would like to make any changes to the configuration, move `ntp.yaml.default` to `ntp.yaml` and edit:
 
@@ -32,14 +32,14 @@ No installation steps are required for this integration.
 
 1.  Restart the agent
 
-## Configuration Options
+### Configuration Options
 
 * `host` (Optional) - Host name of alternate ntp server, for example `pool.ntp.org`
 * `port` (Optional) - What port to use
 * `version` (Optional) - ntp version
 * `timeout` (Optional) - Response timeout
 
-# Validation
+## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
 
@@ -53,13 +53,13 @@ To validate your installation and configuration, restart the agent and execute t
           - instance #0 [OK]
           - Collected 1 metric & 0 events
 
-# Usage
+## Usage
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git "system" "ntp" >}}
 
-# Events
+## Events
 
 No events are included with this integration.
 

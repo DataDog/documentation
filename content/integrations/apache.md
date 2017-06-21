@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: apache
 ---
 
-# Overview
+## Overview
 
 {{< img src="apachegraph.png" >}}
 
@@ -16,7 +16,7 @@ Get metrics from Apache in real time; graph them and correlate them with other r
   * Correlate the performance of Apache with the rest of your applications
 
 
-# Installation
+## Installation
 
 Make sure that [`mod_status`][3] is installed on your Apache server with `ExtendedStatus` set to `on`
 
@@ -43,7 +43,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -62,7 +62,7 @@ You should see something similar to the following if everything is working corre
           - Collected 8 metrics & 0 events
 
 
-# Metrics
+## Metrics
 
 The following metrics are collected by default with the Apache integration:
 

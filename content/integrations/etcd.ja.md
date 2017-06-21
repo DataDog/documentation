@@ -8,7 +8,7 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Capture etcd metrics in Datadog to:
@@ -17,7 +17,7 @@ Capture etcd metrics in Datadog to:
 - Know when host configurations may be out of sync.
 - Correlate the performance of etcd with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、etcdのメトリクスをDatadogへ送信します:

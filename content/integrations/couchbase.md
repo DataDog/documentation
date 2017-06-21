@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: couchbase
 ---
 
-### Overview
+## Overview
 
 Get metrics from Couchbase in real time to
 
@@ -15,6 +15,6 @@ Get metrics from Couchbase in real time to
 
 {{< insert-example-links >}}
 
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}

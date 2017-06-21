@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: activemq
 ---
 
-# Overview
+## Overview
 
 Get metrics from ActiveMQ in real time to
 
@@ -15,7 +15,7 @@ Get metrics from ActiveMQ in real time to
 * Correlate the performance of ActiveMQ with the rest of your applications
 
 
-# Configuration
+## Configuration
 
 
 ***This integration requires Linux or Mac OS X.***
@@ -101,7 +101,7 @@ Get metrics from ActiveMQ in real time to
 
 {{< insert-example-links check="none" >}}
 
-# Metrics
+## Metrics
 
 
 
