@@ -41,7 +41,7 @@ DogStatsD implements the
 protocol, along with a few extensions for special Datadog features. -->
 
 <p class="aside">
-  このチュートリアルでは、開発しているアプリケーションからDatadogへカスタムメトリクスを送信する方法を順を追って説明していきます。チュートリアルを読み進めていく上でサポートが必要な場合は、<a href="../../help/">お問い合わせ</a>ページで消化している方法でご連絡ください。
+  このチュートリアルでは、開発しているアプリケーションからDatadogへカスタムメトリクスを送信する方法を順を追って説明していきます。チュートリアルを読み進めていく上でサポートが必要な場合は、<a href="/help/">お問い合わせ</a>ページで消化している方法でご連絡ください。
 </p>
 
 Datadogにカスタムメトリクスを取り込ませる最も簡単な方法はDogStatsDを使うことです。DogStatsDは、Datadog Agent 3.0以上に同胞されているメトリクス集約サーバです。DogStatsDは、<a href="https://github.com/etsy/statsd">StatsD</a>プロトコルをサポートすると共に、datadog専用の機能にも対応するよう拡張されています。
@@ -54,7 +54,7 @@ DogStatsD accepts custom application metrics points over
 and then periodically aggregates and forwards the metrics to Datadog, where
 they can be graphed on dashboards. Here's a pretty standard DogStatsd setup:
 <p>
-<img src="/images/dogstatsd.png">
+{{< img src="dogstatsd.png" >}}
 </p> -->
 
 <h2 id="how-it-works"></h2>
@@ -66,7 +66,7 @@ DogStatsDは、アプリケーションのカスタムメトリクスを<a href=
 次に図は、DogStatsDを使ったカスタムメトリクスのグラフ化までの構成図です:
 
 <p>
-<img src="/images/dogstatsd.png"/>
+{{< img src="dogstatsd.png" >}}
 </p>
 
 

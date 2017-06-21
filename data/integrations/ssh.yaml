@@ -1,0 +1,5 @@
+ssh:
+- interval: ""
+  metric_name: sftp.response_time
+  metric_type: gauge
+  unit_name: second

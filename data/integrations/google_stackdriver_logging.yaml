@@ -1,0 +1,13 @@
+google_stackdriver_logging:
+- interval: ""
+  metric_name: gcp.logging.byte_count
+  metric_type: count
+  unit_name: byte
+- interval: ""
+  metric_name: gcp.logging.dropped_log_entry_count
+  metric_type: count
+  unit_name: entry
+- interval: ""
+  metric_name: gcp.logging.log_entry_count
+  metric_type: count
+  unit_name: entry

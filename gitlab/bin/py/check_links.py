@@ -86,9 +86,9 @@ class LinkChecker(object):
         if link.startswith('//'):
             link = 'https:' + link
         if link.startswith('/'):
-            link = 'https://www.datadoghq.com' + link
+            link = self.domain + link.lstrip('/')
         if 'http' not in link:
-            link = 'https://www.datadoghq.com/' + link
+            link = self.domain + link.lstrip('/')
         return link
 
     def check_link(self, link):
@@ -255,6 +255,9 @@ class LinkCheck(LinkChecker):
                 'mailto:',
                 'tel:',
                 'irc:',
+                'file:',
+                'localhost:',
+                'url.to.snpashot.com',
                 'app.datadoghq.com'
             ]
             is_valid = not any([pattern in link for pattern in nope_list])

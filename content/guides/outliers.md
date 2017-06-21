@@ -41,7 +41,7 @@ First create a new timeseries graph on your dashboard with your chosen metric.
 
 To enable outlier detection, click on the + icon on the right side of the metrics line. Choose "Algorithms" from the function categories, then one of the four outlier algorithms:
 
-<img src="/images/outliers/outliers-algorithm-selector.png" style="width: 75%;" />
+{{< img src="outliers/outliers-algorithm-selector.png" >}}
 
 This will apply the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 

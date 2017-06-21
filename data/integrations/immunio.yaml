@@ -1,0 +1,17 @@
+immunio:
+- interval: ""
+  metric_name: immunio.requests
+  metric_type: count
+  unit_name: request
+- interval: ""
+  metric_name: immunio.attacks
+  metric_type: count
+  unit_name: occurrence
+- interval: ""
+  metric_name: immunio.failed_login
+  metric_type: count
+  unit_name: occurrence
+- interval: ""
+  metric_name: immunio.mitigated.captcha
+  metric_type: count
+  unit_name: occurrence

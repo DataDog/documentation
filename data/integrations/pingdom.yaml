@@ -1,0 +1,9 @@
+pingdom:
+- interval: ""
+  metric_name: pingdom.response_time
+  metric_type: gauge
+  unit_name: millisecond
+- interval: ""
+  metric_name: pingdom.uptime
+  metric_type: gauge
+  unit_name: second

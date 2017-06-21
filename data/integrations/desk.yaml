@@ -1,0 +1,9 @@
+desk:
+- interval: ""
+  metric_name: desk.all_open_cases
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: desk.cases
+  metric_type: gauge
+  unit_name: ""

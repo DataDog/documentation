@@ -1,0 +1,17 @@
+zendesk:
+- interval: ""
+  metric_name: zendesk.ticket.count
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: zendesk.satisfaction.rating
+  metric_type: gauge
+  unit_name: ""
+- interval: ""
+  metric_name: zendesk.tickets_today
+  metric_type: gauge
+  unit_name: ""
+- interval: "300"
+  metric_name: zendesk.recent_tickets
+  metric_type: count
+  unit_name: ""

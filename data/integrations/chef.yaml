@@ -1,0 +1,13 @@
+chef:
+- interval: ""
+  metric_name: chef.resources.elapsed_time
+  metric_type: gauge
+  unit_name: second
+- interval: ""
+  metric_name: chef.resources.total
+  metric_type: gauge
+  unit_name: resource
+- interval: ""
+  metric_name: chef.resources.updated
+  metric_type: gauge
+  unit_name: resource

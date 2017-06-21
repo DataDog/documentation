@@ -9,7 +9,7 @@ import re
 STATICS = ['img', 'pdf', 'scripts', 'styles']
 VALID_REFILES = ['.html', '.xml', '.css', '.js', '.txt', '.md']
 SRC_FOLDERS = ['layouts']
-STATICS_ROOT = ['static/scripts', 'static/styles']
+STATICS_ROOT = ['static/css', 'static/js']
 
 
 def version_files():

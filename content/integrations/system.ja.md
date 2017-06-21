@@ -17,8 +17,8 @@ sidebar:
 
 <!-- Get metrics from your system directories and processes. Check links below to see the configuration instructions:
 
-* <a href="/integrations/directory/">Directory check</a> - Capture metrics from the files in given directories.
-* <a href="/integrations/process/">Process check</a> - Capture metrics from specific running processes on a system. -->
+* <a href="https://docs.datadoghq.com/integrations/directory/">Directory check</a> - Capture metrics from the files in given directories.
+* <a href="https://docs.datadoghq.com/integrations/process/">Process check</a> - Capture metrics from specific running processes on a system. -->
 
 ### 概要
 

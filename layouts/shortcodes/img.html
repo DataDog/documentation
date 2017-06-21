@@ -1,29 +1,6 @@
 {{/* set img path based on page type and what is passed */}}
-{{ if or (findRE "/" (.Get "src")) (not (eq .Page.Type "blog")) }}
-  {{ $.Scratch.Add "_img" (print $.Site.Params.img_url "images/" (.Get "src")) }}
-{{ else }}
-  {{ $.Scratch.Add "_img" (print $.Site.Params.img_url "images/" .Page.Type "/" .Page.Slug "/" (.Get "src")) }}
-{{ end }}
+{{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" (.Get "src")) }}
 {{ $img := $.Scratch.Get "_img" }}
-
-{{ $image_type_arr := split (.Get "src") "." }}
-
-{{ $image_ext := index $image_type_arr 1 }}
-
-{{ if eq $image_ext "gif" }}
-  {{ $.Scratch.Add "img_param" "ch=Width,Save-Data&fm=gif" }}
-
-{{ else if .Get "img_param" | len }}
-
-  {{ .Get "img_param" | $.Scratch.Add "img_param" }}
-
-{{ else }}
-
-  {{ $.Scratch.Add "img_param" "ch=Width,DPR&w=660&auto=format" }}
-
-{{ end }}
-
-{{ $img_param := $.Scratch.Get "img_param" }}
 
 {{/* override default imgix request params for popup img */}}
 {{ if .Get "pop_param" | len }}
@@ -43,12 +20,8 @@
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
     <img class="{{- if .Get "responsive" }} img-responsive {{ end }}"
-         src="{{ print $img "?" $img_param | relURL }}"
+         src="{{ print $img }}"
          alt="{{ with .Get "alt"}}{{.}}{{end}}"
-         {{ if eq .Page.Type "blog" }}
-           srcset="{{ print $img "?" $img_param | relURL }}"
-           sizes="(max-width: 991px) 100vw, 660px"
-         {{ end }}
     >
     {{- if .Get "popup" -}}
       </a>

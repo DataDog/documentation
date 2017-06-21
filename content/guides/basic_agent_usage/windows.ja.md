@@ -36,8 +36,8 @@ The execution of the Agent is controlled by a Windows service.
 
 <h4>For version >= 3.9.1</h4>
 You can use the Datadog Agent Manager that you can find in the Start Menu.
-<p><img src="/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
-<p><img src="/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
+<p>{{< img src="windows-start-menu.png" >}}</p>
+<p>{{< img src="manager-snapshot.png" >}}</p>
 
 <h4>For version < 3.9.1</h4>
 The Agent can be started, stopped, and
@@ -59,8 +59,8 @@ Datadog Agentの実行は、Windows serviceによって管理されています�
 
 #### Datadog Agent バージョン >= 3.9.1:
 スタートメニューに表示されるDatadog Agent Managerを使います。
-<p><img src="/images/windows-start-menu.png" style="width:50%; border:1px solid #777777" /></p>
-<p><img src="/images/manager-snapshot.png" style="width:80%; border:1px solid #777777" /></p>
+<p>{{< img src="windows-start-menu.png" >}}</p>
+<p>{{< img src="manager-snapshot.png" >}}</p>
 
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
 
@@ -214,6 +214,6 @@ Datadog Agent の各要素のログは、”Event Viewer”で確認できます
 
 
 
-上記の方法を実行しても問題が解決しない場合は、 <a href="/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
+上記の方法を実行しても問題が解決しない場合は、 <a href="https://docs.datadoghq.com/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 
 {{< partial name="_contact_info-ja" markdown="true" >}}

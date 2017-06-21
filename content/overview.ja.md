@@ -35,7 +35,7 @@ Datadog Agentの[インストール](/ja/guides/basic_agent_usage/)は、無事�
 
 <!-- <h2 id="integrations">Integrations</h2>
 
-<img src="/images/integrations.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="integrations.png" >}}
 
 <ul>
 <li>100+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
@@ -50,19 +50,19 @@ in an online service is treated the same throughout Datadog.</li>
 
 <h2 id="integrations">簡単で便利なIntegrations</h2>
 
-<img src="/images/integrations.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="integrations.png" >}}
 
 <ul>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
-<li>カスタム Integrationsは、<a target="_blank" href="/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
+<li>カスタム Integrationsは、<a target="_blank" href="https://docs.datadoghq.com/ja/api/">Datadog API</a>を介し開発することができます。これらのAPIは、活発なユーザーコミュニティによってドキュメント化が進められています。</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
-<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。<a href="/ja/integrations/">Integrationに関するドキュメント</a>!</li>
+<li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。<a href="https://docs.datadoghq.com/ja/integrations/">Integrationに関するドキュメント</a>!</li>
 </ul>
 
 
 <!-- <h2 id="infrastructure">Infrastructures</h2>
 
-<img src="/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="infrastructure.png" >}}
 
 <ul>
 <li>All machines show up in the infrastructure overview</li>
@@ -74,7 +74,7 @@ for you, to create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.</li>
-<li>For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
+<li>For more on tagging, please see <a target="_blank" href="https://docs.datadoghq.com/faq/#tagging">here</a>.
 
 </li>
 
@@ -82,12 +82,12 @@ for that machine based on what was previously set up for that tag.</li>
 
 <h2 id="infrastructure">インフラを構成しているホストのリスト表示</h2>
 
-<img src="/images/infrastructure.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="infrastructure.png" >}}
 
 * 全てのホストは、`Infrastructure`のページに表示されます。
 * 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
 * Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタを作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。
-* タグ設定の詳細は、<a target="_blank" href="/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。
+* タグ設定の詳細は、<a target="_blank" href="https://docs.datadoghq.com/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。
 
 
 
@@ -122,17 +122,17 @@ Host Map表示について詳しく知り対場合は、[Host Map ガイド](/ja
 
 <!-- <h2 id="events">Events</h2>
 
-<img src="/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream.png" >}}
 
 The Event Stream is based on the same conventions as a blog:
 <ul>
 <li>Every event in the stream can be commented on.</li>
-<li>Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation</li>
+<li>Great for distributed <a target="_blank" href="https://docs.datadoghq.com/faq/#team">teams</a> and maintaining the focus of an investigation</li>
 <li>You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident</li>
 </ul>
 
-<img src="/images/event_stream_post_incident_history.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream_post_incident_history.png" >}}
 
 For each incident users can:
 <ul>
@@ -140,26 +140,26 @@ For each incident users can:
 <li>Increase/decrease priority</li>
 <li>Comment</li>
 <li>See similar incidents </li>
-<li><a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email</li>
+<li><a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email</li>
 <li>@support-datadog to ask for assistance</li>
 </ul>
 
-<img src="/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream_claim.png" >}}
  -->
 
 <h2 id="events">イベントの時系列表示</h2>
 
-<img src="/images/event_stream.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream.png" >}}
 
 Eventの掲載は、ブログと同じ規則に基づいています:
 
 <ul>
 <li>ストリーム内のすべてのEventにはコメントを付けることができます。</li>
-<li>分散した<a target="_blank" href="/ja/faq/#team">チーム</a>や、問題の調査時に問題点をフォーカスするのに便利です。</li>
+<li>分散した<a target="_blank" href="https://docs.datadoghq.com/ja/faq/#team">チーム</a>や、問題の調査時に問題点をフォーカスするのに便利です。</li>
 <li>by: user, source, tag, host, status, priority, incident 等の項目で、<a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">フィルタリング</a>することができます。</li>
 </ul>
 
-<img src="/images/event_stream_post_incident_history.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream_post_incident_history.png" >}}
 
 ユーザは、インシデント(出来事)に対して次の操作ができます:
 <ul>
@@ -167,18 +167,18 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>プライオリティの変更(上げる/下げる)</li>
 <li>コメントの追加</li>
 <li>同様なインシデントの閲覧</li>
-<li><a target="_blank" href="/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
+<li><a target="_blank" href="https://docs.datadoghq.com/ja/faq/#notify">@ notify</a>を使ったチームメンバーへの通知やemail送信</li>
 <li>@support-datadog でのサポートの要請</li>
 </ul>
 
-<img src="/images/event_stream_claim.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="event_stream_claim.png" >}}
 
 
 <!-- <h2 id="dashboards">dashboards</h2>
 
-<img src="/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="dashboard_events.png" >}}
 
-Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
+Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
 <ul>
 <li>Synchronous mousing across all graphs in a dashboard.	</li>
 <li>Vertical bars are events in the context of the metric.</li>
@@ -195,23 +195,23 @@ without access to your data or any other information (via the pencil in the uppe
 
 <h2 id="dashboards">原因追跡用ダッシュボード</h2>
 
-<img src="/images/dashboard_events.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="dashboard_events.png" >}}
 
-ダッシュボードには、<a target="_blank" href="/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
+ダッシュボードには、<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
 <li>ダッシュボード内の全てのグラフは、マウスで操作できます。</li>
 <li>グラフ内のビンクの縦の線は、Eventの発生を表しています。</li>
 <li>グラフ上で"Click & drag"することによって、時間軸を変更することができます。</li>
 <li>グラフ上でカーソルを移動することによって、Eventストリームの表示も該当箇所へ自動的に移動していきます。</li>
 <li>zone, host, total usageで、表示することができます。</li>
-<li>グラフ内に表示するメトリクスの<a target="_blank" href="/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
+<li>グラフ内に表示するメトリクスの<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
 
 
 <!-- <h2 id="alerting">Alerting</h2>
-<img src="/images/alert.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="alert.png" >}}
 
 [Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -223,7 +223,7 @@ metric is above or below a certain threshold:
 <li>Set alert notification message, including @ capabilities</li>
 </ul>
 
-<img src="/images/alert_setup.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="alert_setup.png" >}}
 
 Does the data have to be pushed to Datadog?
 <ol>
@@ -235,7 +235,7 @@ to pull the data from.</li>
 </ol> -->
 
 <h2 id="alerting">高度なアラート設定</h2>
-<img src="/images/alert.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="alert.png" >}}
 
 [アラート機能](/ja/guides/alerting/)によって、特定のメトリクスの集計がしきい値を超えた場合に通知する機能を実現することができます:
 <ul>
@@ -246,7 +246,7 @@ to pull the data from.</li>
 <li>"@"機能によるグループ毎の通知設定</li>
 </ul>
 
-<img src="/images/alert_setup.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="alert_setup.png" >}}
 
 アラート機能のためのデータは、Datadogに送信する必要がありますか?
 <ol>

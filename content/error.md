@@ -3,8 +3,8 @@ title: Uh oh, Something Went Wrong
 kind: documentation
 ---
 
-<img src="/images/sad_bits.png">
+{{< img src="sad_bits.png" >}}
 
 <p class="alert alert-error pull-left">
-Head back <a href="/">home</a> and start again.
+Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
 </p>

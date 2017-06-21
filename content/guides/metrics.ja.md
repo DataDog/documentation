@@ -26,7 +26,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -95,7 +95,7 @@ statsd = Datadog::Statsd.new
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
     This tutorial has examples for Python and Ruby, but check out the
-    <a href="/libraries/">libraries page</a> if you use another language.
+    <a href="https://docs.datadoghq.com/libraries/">libraries page</a> if you use another language.
   </div>
 
 </div>
@@ -155,7 +155,7 @@ statsd = Datadog::Statsd.new
   </div>
   <p>これで、ライブラリーが使えるように成りました。</p>
   <div class="alert info-block">
-    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="/ja/libraries/">Libraries</a>のページを参照してくだい。
+    このチュートリアルでは、PythonとRubyの例を掲載しています。他のプログラミング言語を利用する場合は、<a href="https://docs.datadoghq.com/ja/libraries/">Libraries</a>のページを参照してくだい。
   </div>
 
 </div>
@@ -212,7 +212,7 @@ end
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-<img src="/images/graph-guides-metrics-page-views.png" style="width:100%">
+{{< img src="graph-guides-metrics-page-views.png" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -287,7 +287,7 @@ end
 
 次のグラフは、先の方法で収集したメトリクスをグラフ表示した例です:
 
-<img src="/images/graph-guides-metrics-page-views.png" style="width:100%">
+{{< img src="graph-guides-metrics-page-views.png" >}}
 
 - 注) DogStatsDのデフォルト設定では10秒間隔でメトリクスをDatadogへ送信しています。カウンタは、この送信間隔の間の総カウント値を1秒間の数値に換算し、情報を送信しています。
 従って、上のグラフのマーカでは、15:34分に35.33 view/秒という実際には考えられない数値を表示しています。
@@ -448,7 +448,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-<img src="/images/graph-guides-metrics-query-times.png" style="width:100%">
+{{< img src="graph-guides-metrics-query-times.png" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -515,7 +515,7 @@ end
 `median`をグラフ化することにより、クエリが処理されるまでの一般的な時間(中央値)を把握することができます。
 又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリ処理時間を把握することができます。
 
-<img src="/images/graph-guides-metrics-query-times.png" style="width:100%">
+{{< img src="graph-guides-metrics-query-times.png" >}}
 
 この例では、「クエリ処理時間の容認範囲は、１秒以内」と仮定し話を進めます。クエリ処理時間の中央値(紫色線)は、概ね100ミリ秒以下を示し、容認範囲を推移しています。
 しかし残念ながら、95パーセンタイル値(青色線)では、放置することのできない長時間クエリがスパイク状に発生しているのが確認でき、長い時には3秒という値になっています。
@@ -738,10 +738,10 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
 
 
-- <a href="/ja/api/#metrics">API レファレンスのmetrics</a>
-- <a href="/ja/api/#tags">API レファレンスのtag</a>
-- <a href="/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
-- <a href="/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+- <a href="https://docs.datadoghq.com/ja/api/#metrics">API レファレンスのmetrics</a>
+- <a href="https://docs.datadoghq.com/ja/api/#tags">API レファレンスのtag</a>
+- <a href="https://docs.datadoghq.com/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
+- <a href="https://docs.datadoghq.com/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
 
 <!--
 - <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
@@ -822,7 +822,7 @@ Datadog:
 
 <ul>
   <li>
-    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+    Submit metrics directly to Datadog's <a href="https://docs.datadoghq.com/api/">HTTP API</a>
   </li>
   <li>
     Use codahale's Java <a
@@ -841,7 +841,7 @@ Datagogにメトリクスを送信するには、Datadog Agent にバンドル�
 
 <ul>
   <li>
-    Datadogの<a href="/ja/api/">HTTP API</a>を使って直接送信する方法
+    Datadogの<a href="https://docs.datadoghq.com/ja/api/">HTTP API</a>を使って直接送信する方法
   </li>
   <li>
     codahaleのJava用 metrics ライブラリーと（<a href="https://github.com/vistarmedia">Vistar Media</a>が寄贈してくれた)<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>を使って送信する方法
