@@ -7,7 +7,7 @@ newhlevel: true
 doclevel: basic
 ---
 
-# Overview
+## Overview
 
 Connect your PowerDNS Recursor to Datadog to:
 
@@ -15,7 +15,7 @@ Connect your PowerDNS Recursor to Datadog to:
 * Understand query latency
 * Get alerted when something fails or when you're under attack
 
-# Configuration
+## Configuration
 
 Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_recursor.yaml
 
@@ -29,7 +29,7 @@ Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_re
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 1.  Restart the Agent
 2.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
@@ -45,6 +45,6 @@ Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_re
               - Collected 8 metrics & 0 events
 
 
-# Metrics
+## Metrics
 
 

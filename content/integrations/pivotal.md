@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-# Overview
+## Overview
 
 Connect Pivotal Tracker to Datadog to:
 

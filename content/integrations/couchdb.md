@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: couchdb
 ---
 
-### Overview
+## Overview
 
 Capture CouchDB data in Datadog to:
 

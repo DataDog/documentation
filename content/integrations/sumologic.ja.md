@@ -11,7 +11,7 @@ doclevel: basic
 <!-- 1. Enable the Datadog integration on the Sumo Logic side
 2. To send Datadog events and alerts to Sumo Logic, create a new HTTP Collector in Sumo Logic (Manage > Collectors > Add Collector) and copy paste the collector's url. -->
 
-### 概要
+## 概要
 
 
 次の目的で、Sumo LogicとDatadogを連携します:
@@ -19,7 +19,7 @@ doclevel: basic
 * Sumo Logicに蓄積しているログデータをDatadogが取得しているメトリクスと関連付ける
 * Sumo Logicへアラート通知を送信する
 
-### 設定
+## 設定
 
 
 1. Sumo Logic側(Manage > Collectors > Add Collector)でHTTP Collectorを作成します。

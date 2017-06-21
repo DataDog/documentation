@@ -15,7 +15,7 @@ doclevel: basic
 * Active Session Details
 * Device CPU, Memory, and Battery Utilization -->
 
-### 概要
+## 概要
 
 
 mParticleとDatadogを連携し、ダッシュボードにリアルタイムで以下の情報を表示できるようにします:

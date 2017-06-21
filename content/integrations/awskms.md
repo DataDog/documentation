@@ -6,21 +6,21 @@ git_integration_title: amazon_kms
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 AWS Key Management Service (KMS) is a managed service that makes it easy for you to create and control the encryption keys used to encrypt your data.
 
 Enable this integration to see in Datadog all your KMS metrics.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that KMS is checked under metric collection.
 
-# Metrics
+## Metrics
 
 
 

@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: etcd
 ---
 
-### Overview
+## Overview
 
 Capture etcd metrics in Datadog to:
 

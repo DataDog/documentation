@@ -15,6 +15,6 @@ Capture SSH activity into Datadog to:
 
 {{< insert-example-links conf="ssh_check" check="ssh_check" >}}
 
-## Metrics
+# Metrics
 
 {{< get-metrics-from-git >}}

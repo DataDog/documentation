@@ -6,13 +6,13 @@ doclevel: basic
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 Monitor the state of your Windows Services.
 
 {{< img src="windows-service.png" >}}
 
-# Configuration
+## Configuration
 
 Configure the Agent using the Agent Manager
 
@@ -45,7 +45,7 @@ Configure the Agent using the Agent Manager
 
 1.  Restart the agent.
 
-# Validation
+## Validation
 
 After you restart the agent, check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 

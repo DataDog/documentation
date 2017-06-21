@@ -30,7 +30,7 @@ print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
 
 Note: This integration requires the AWS permissions <code>logs:DescribeLogGroups</code>, <code>logs:DescribeLogStreams</code>, and <code>logs:FilterLogEvents</code> to be fully enabled. Also, counts and gauges are the only metrics types currently supported.-->
 
-### Overview
+## Overview
 Amazon Lambda は、そのコードで必要とされるコンピューティング・リソースを管理し、自動的にイベントに応答してコードを実行し、計算サービスです。
 
 あなたのラムダ関数からカスタムメトリック収集を開始するには、この統合を有効にし、Datadogでそれらを参照してください。

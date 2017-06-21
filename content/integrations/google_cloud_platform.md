@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: google_cloud_platform
 ---
 
-### Overview
+## Overview
 
 Connect to Google Cloud Platform to:
 
@@ -31,7 +31,7 @@ Related integrations include:
 | [VPN](/integrations/google_cloud_vpn) | managed network functionality |
 
 
-### Installation
+## Installation
 
 From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
 
@@ -55,12 +55,12 @@ e.x. datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 **NOTE: `gcp.loadbalancing.*` metrics are available as part of a Google specifc Beta. To see these metrics in Datadog, please contact your Google representative/support and ask to join the Stackdriver Loadbalancing metrics Beta.**
 
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 
 
-### Tags Assigned
+## Tags Assigned
 
 Tags are automatically assigned based on a variety of configuration options with regards to Google Cloud Platform and the Google Compute Engine. The following tags will be automatically assigned:
 

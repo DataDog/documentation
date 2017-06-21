@@ -16,7 +16,7 @@ Bring Lighttpd metrics to Datadog to:
 - Visualize your web server performance.
 - Correlate the performance of Lighttpd with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、LighttpdのメトリクスをDatadogへ送信します:

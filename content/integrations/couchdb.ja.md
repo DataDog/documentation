@@ -8,7 +8,7 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Capture CouchDB data in Datadog to:
@@ -16,7 +16,7 @@ Capture CouchDB data in Datadog to:
 -  Visualize key CouchDB metrics.
 -  Correlate CouchDB performance with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、CouchDBのメトリクスをDatadogに送信します:

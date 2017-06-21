@@ -13,7 +13,7 @@ doclevel: basic
 * Visualize your database server performance
 * Correlate the performance of Kyoto Tycoon with the rest of your applications -->
 
-### 概要
+## 概要
 
 
 次の目的で、Kyoto TycoonのメトリクスをDatadogへ送信します:

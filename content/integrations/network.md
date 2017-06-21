@@ -17,14 +17,14 @@ platformmetrics:
   system.net.tcp.out_segs:
     - Solaris
 ---
-# Overview
+## Overview
 
 {{< img src="netdashboard.png" >}}
 
 The network check collects TCP and IP network metrics from the agent's host.
 
 
-# Configuration
+## Configuration
 
 The network check is enabled by default. If you would like to make any changes to the check, rename `network.yaml.default` to `network.yaml` and edit:
 
@@ -40,6 +40,6 @@ The network check is enabled by default. If you would like to make any changes t
         # matching the given regex:
         # excluded_interface_re: my-network-interface.*
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git "system" "system.net" >}}

@@ -14,7 +14,7 @@ doclevel: basic
 * Search for exceptions in your graphs
 * Discuss exceptions with your team -->
 
-### 概要
+## 概要
 
 
 次の目的で、SentryをDatadogと連携します:

@@ -6,7 +6,7 @@ git_integration_title: new_relic
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 {{< img src="newrelicdashboard.png" >}}
 
@@ -15,9 +15,9 @@ Connect to New Relic to:
 * See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
 * See New Relic alerts in your event stream
 
-# Installation
+## Installation
 
-## New Relic Alerts in Event Stream
+### New Relic Alerts in Event Stream
 
 1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
 
@@ -25,7 +25,7 @@ Connect to New Relic to:
 
 1.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 
-## New Relic APM Metric Collection
+### New Relic APM Metric Collection
 
 1.  Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
 
@@ -36,11 +36,11 @@ Connect to New Relic to:
 
     *Note: Enabling this options will import New Relic hosts to Datadog.*
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 
-# Troubleshooting
+## Troubleshooting
 
 **What does the 'Collect metrics by host' option do?**
 

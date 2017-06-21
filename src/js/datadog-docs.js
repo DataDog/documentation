@@ -96,26 +96,40 @@ $(document).ready(function() {
             // console.log('h4s', this.h4s.length);
         },
         'setHeadings': function(){
-            header = 'h2';
-            subheading = 'h3';
-            subsubheading = 'h4';
+            header = '';
+            subheading = '';
+            subsubheading = '';
 
-            if(this.h2s.length == 0 && this.h3s.length > 0 ) {
-                header = 'h3';
-                if(this.h4s.length > 0){
-                    subheading = 'h4';
-                    subsubheading = '';
-                }else{
-                    subheading = null;
-                    subsubheading = '';
+            if(this.h2s.length && this.h3s.length && this.h4s.length) {
+                header = 'h2';
+                subheading = 'h3';
+                subsubheading = 'h4';
+            } else {
+                if(this.h2s.length > 0 && this.h3s.length == 0 && this.h4s.length == 0) {
+                    header = 'h2';
+                } else if(this.h2s.length > 0 && this.h3s.length > 0) {
+                    header = 'h2';
+                    subheading = 'h3';
+                } else if(this.h2s.length == 0 && this.h3s.length > 0) {
+                    header = 'h3';
+                    if(this.h4s.length) {
+                        subheading = 'h4';
+                    }
+                } else if(this.h2s.length == 0 && this.h3s.length == 0 && this.h4s.length > 0) {
+                    header = 'h4';
+                    if(this.h5s.length) {
+                        subheading = 'h5';
+                    }
                 }
             }
 
             if(parseInt(tocdepth) == 1){
-                subheading = null;
+                subheading = '';
             }
 
-            this.initToc(header, subheading, subsubheading);
+            if(header !== '') {
+                this.initToc(header, subheading, subsubheading);
+            }
 
         },
         'initToc': function(header, subheading, subsubheading) {

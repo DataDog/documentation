@@ -10,7 +10,7 @@ doclevel: basic
 
 <!-- The Python integration enables you to monitor any custom metric by instrumenting a few lines of code. For instance, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Python integration, please refer to the guide on submitting metrics. For advanced usage, please refer to the documentation in the repository -->
 
-### 概要
+## 概要
 
 
 Pythonの統合は、数行のコードを記述することにより、任意のカスタムメトリクスを監視することが出来ます。たとえば、ページビュー数、または任意の関数呼び出しの時間を返すメトリックを持つことが出来ます。 Pythonの統合の詳細については、メトリクスのガイドを参照してください。高度な使用方法については、リポジトリ内のドキュメントを参照してください
@@ -57,7 +57,7 @@ Pythonの統合は、数行のコードを記述することにより、任意�
 3. Go to the Metrics explorer page and see that it just works!
  -->
 
-### 設定
+## 設定
 
 
 1. pipをインストールします:

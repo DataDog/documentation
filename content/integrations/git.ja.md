@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Capture Git commits directly from your Git server to:
@@ -17,7 +17,7 @@ Capture Git commits directly from your Git server to:
 - Add code change markers on all your dashboards.
 - Discuss code changes with your team. -->
 
-### 概要
+## 概要
 
 
 次の目的で、GitサーバーからGitのコミット情報をDatadogと連携します:

@@ -16,7 +16,7 @@ Connect Riak to Datadog in order to:
 - Visualize Riak performance and utilization.
 - Correlate the performance of Riak with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、RiakのメトリクスをDatadogに送信します:

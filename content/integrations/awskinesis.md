@@ -6,21 +6,21 @@ newhlevel: true
 git_integration_title: amazon_kinesis
 ---
 
-# Overview
+## Overview
 
 Amazon Kinesis is a fully managed, cloud-based service for real-time processing of large, distributed data streams.
 
 Enable this integration to see in Datadog all your Kinesis metrics, and collect custom Kinesis tags.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that Kinesis is checked under metric collection.
 
-# Metrics
+## Metrics
 
 
 

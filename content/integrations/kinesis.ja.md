@@ -12,7 +12,7 @@ doclevel: basic
 
 Enable this integration to see in Datadog all your Kinesis metrics, and collect custom Kinesis tags. -->
 
-### 概要
+## 概要
 
 
 Amazon Kinesis は、大規模な分散データストリームをリアルタイムで処理するための完全管理型のクラウドベースのサービスです。

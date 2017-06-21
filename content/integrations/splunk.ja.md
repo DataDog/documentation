@@ -17,7 +17,7 @@ Connect your Splunk log monitoring to be able to:
 - Correlate these reports with your other metrics
 - Collaborate with your team on the events -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、Splunkのログ監視とDatadogを連携します:
@@ -47,7 +47,7 @@ Refer [here](https://wiki.splunk.com/Community:Use_Splunk_alerts_with_scripts_to
 
 You can now configure your splunk reports to exectue this script in order to get published into Datadog -->
 
-### 設定
+## 設定
 
 
 1. pythonパッケージの`datadog`をインストールします。

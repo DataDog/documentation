@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: cacti
 ---
-### Overview
+## Overview
 
 Connect Cacti to Datadog to:
 

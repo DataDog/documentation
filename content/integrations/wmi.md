@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: wmi
 ---
 
-# Overview
+## Overview
 
 {{< img src="wmimetric.png" >}}
 
@@ -17,7 +17,7 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 
 {{< insert-example-links conf="wmi_check" check="wmi_check" >}}
 
-# Installation
+## Installation
 
 If you are only collecting standard metrics from Microsoft Windows and other packaged applications, there are no installation steps. If you need to define new metrics to collect from your application, then you have a few options:
 
@@ -32,7 +32,7 @@ If you assign the new metric a category of My_New_Metric, the WMI path will be
 If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to force the computer to reregister the performance libraries with WMI.
 
 
-# Configuration
+## Configuration
 
 1.  Click the **Install Integration** button on the WMI Integration Tile.
 2.  Open the Datadog Agent Manager on the Windows server.
@@ -66,7 +66,7 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
 4.  Restart the agent.
 
-## Configuration Options
+### Configuration Options
 
 Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` and `tag_queries`.
 
@@ -118,7 +118,7 @@ This feature is available starting with version 5.3 of the agent
 
 
 
-# Validation
+## Validation
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 

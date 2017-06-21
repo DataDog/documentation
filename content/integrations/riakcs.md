@@ -5,7 +5,7 @@ git_integration_title: riakcs
 kind: integration
 ---
 
-### Overview
+## Overview
 
 
 Capture Riak CS (Cloud Storage) metrics in Datadog to:
@@ -13,7 +13,7 @@ Capture Riak CS (Cloud Storage) metrics in Datadog to:
 * Visualize key RiakCS metrics.
 * Correlate RiakCS performance with the rest of your applications.
 
-### Configuration
+## Configuration
 
 To configure the RiakCS integration, copy riakcs.yaml.example if the conf.d directory to riakcs.yaml and make the appropriate changes.
 
@@ -29,7 +29,7 @@ To configure the RiakCS integration, copy riakcs.yaml.example if the conf.d dire
 
 {{< insert-example-links >}}
 
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 

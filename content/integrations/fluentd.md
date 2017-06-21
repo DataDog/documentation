@@ -8,7 +8,7 @@ newhlevel: true
 ---
 
 
-# Overview
+## Overview
 Get metrics from Fluentd in real time to
 
 * Visualize Fluentd performance.
@@ -17,7 +17,7 @@ Get metrics from Fluentd in real time to
 {{< img src="snapshot-fluentd.png" >}}
 
 
-# Installation
+## Installation
 
 Configure your fluentd to use a monitor agent and plugin id (see doc), for instance:
 
@@ -42,7 +42,7 @@ Configure your fluentd to use a monitor agent and plugin id (see doc), for insta
       </server>
     </match>
 
-# Configuration
+## Configuration
 
 Configure the Agent to connect to fluentd, and set the plugins id you want to monitor
 Edit conf.d/fluentd.yaml
@@ -59,7 +59,7 @@ Edit conf.d/fluentd.yaml
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 1.  Restart the Agent
 2.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:

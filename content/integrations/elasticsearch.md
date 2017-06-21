@@ -7,7 +7,7 @@ git_integration_title: elasticsearch
 updated_for_agent: 5.8.5
 ---
 
-# Overview
+## Overview
 
 {{< img src="elasticsearchgraph.png" >}}
 
@@ -18,11 +18,11 @@ Connect Elasticsearch to Datadog in order to:
 
 
 
-# Installation
+## Installation
 
 No installation steps are required for this integration
 
-# Configuration
+## Configuration
 
 1.  Edit your conf.d/elastic.yaml file as follows:
 
@@ -36,7 +36,7 @@ No installation steps are required for this integration
 
 {{< insert-example-links conf="elastic" check="elastic" >}}
 
-# Validation
+## Validation
 
 To validate that the integration is working, run ```datadog-agent info```. You should see results similar to the following:
 
@@ -58,7 +58,7 @@ To validate that the integration is working, run ```datadog-agent info```. You s
           - instance #0 [OK]
           - Collected 97 metrics, 0 events & 3 service checks
 
-# Metrics
+## Metrics
 
 
 

@@ -13,7 +13,7 @@ doclevel: basic
 * Visualize key TokuMX metrics.
 * Correlate TokuMX performance with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、TokuMXのメトリクスをDatadogと連携します:

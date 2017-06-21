@@ -6,7 +6,7 @@ git_integration_title: postgres
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 {{< img src="pggraph.png" >}}
 Connect PostgreSQL to Datadog in order to:
@@ -14,7 +14,7 @@ Connect PostgreSQL to Datadog in order to:
 * Visualize your database performance.
 * Correlate the performance of PostgreSQL with the rest of your applications.
 
-# Installation
+## Installation
 
 To get started with the PostgreSQL integration, create at least a read-only datadog user with proper access to your PostgreSQL Server. Start psql on your PostgreSQL database and run:
 
@@ -32,7 +32,7 @@ To verify the correct permissions you can run the following command:
 
 When it prompts for a password, enter the one used in the first command.
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to PostgreSQL. Edit conf.d/postgres.yaml:
 
@@ -45,7 +45,7 @@ When it prompts for a password, enter the one used in the first command.
 
 1.  Restart the agent.
 
-## Configuration Options
+### Configuration Options
 
 * `username` (Optional)
 * `password` (Optional)
@@ -66,7 +66,7 @@ When it prompts for a password, enter the one used in the first command.
 * `collect_count_metrics` (Optional) - Collect count metrics, default value is True for backward compatibility but they migth be slow, suggested value is False.
 
 
-## Custom metrics
+### Custom metrics
 
 Below are some examples of commonly used metrics, which are implemented as custom metrics. Uncomment them if you want to use them as is, or use as an example for creating your own custom metrics.
 
@@ -96,7 +96,7 @@ The format for describing custome metrics is identical with the one used for com
 
 {{< insert-example-links conf="postgres" check="postgres" >}}
 
-# Validation
+## Validation
 
 
 After you restart the agent, you should be able to run the ```info``` command which will now include a section like this if the PostgreSQL integration is working:
@@ -114,7 +114,7 @@ After you restart the agent, you should be able to run the ```info``` command wh
 
 
 
-# Metrics
+## Metrics
 
 
 

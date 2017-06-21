@@ -6,7 +6,7 @@ kind: integration
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Use the SNMP Agent Check to:
 
@@ -14,7 +14,7 @@ Use the SNMP Agent Check to:
 * Correlate their performance with the rest of your applications
 
 
-# Configuration
+## Configuration
 
 To use the SNMP checks, edit the **snmp.yaml** file in your **conf.d** directory as follows:
 
@@ -48,17 +48,17 @@ For each device that you want to monitor, you need to specify at least an ip_add
 
 {{< insert-example-links >}}
 
-# Usage
+## Usage
 
 Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the ```metrics``` subsection using one of the following methods:
 
-## Specify a MIB and the symbol that you want to export
+### Specify a MIB and the symbol that you want to export
 
     metrics:
       - MIB: UDP-MIB
         symbol: udpInDatagrams
 
-## Specify an OID and the name you want the metric to appear under in Datadog
+### Specify an OID and the name you want the metric to appear under in Datadog
 
     metrics:
       - OID: 1.3.6.1.2.1.6.5
@@ -66,7 +66,7 @@ Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Spec
 
 *The name here is the one specified in the MIB but you could use any name.*
 
-## Specify a MIB and a table you want to extract information from
+### Specify a MIB and a table you want to extract information from
 
     metrics:
       - MIB: IF-MIB
@@ -94,13 +94,13 @@ In this example the agent would gather the rate of octets received on each inter
 
 You can also gather tags based on the indices of your row, in case they are meaningful. In this example, the first row index contains the ip version that the row describes (ipv4 vs. ipv6)
 
-## Use your own Mib
+### Use your own Mib
 
 To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the ```build-pysnmp-mibs``` script that ships with pysnmp.
 
 It has a dependency on ```smidump```, from the libsmi2ldbl package so make sure it is installed. Make also sure that you have all the dependencies of your MIB in your mib folder or it won't be able to convert your MIB correctly.
 
-### Run
+#### Run
 
     $ build-pysnmp-mibs -o YOUR-MIB.py YOUR-MIB.mib
 

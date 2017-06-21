@@ -5,7 +5,7 @@ git_integration_title: zookeeper
 kind: integration
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connect ZooKeeper to Datadog in order to:
 
@@ -17,7 +17,7 @@ Connect ZooKeeper to Datadog in order to:
 
 {{< img src="zookeepergraph.png" >}}
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to ZooKeeper. Edit conf.d/zk.yaml
 
@@ -30,7 +30,7 @@ Connect ZooKeeper to Datadog in order to:
 
 1.  Restart the Agent
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 

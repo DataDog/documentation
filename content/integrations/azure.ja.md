@@ -18,9 +18,9 @@ sidebar:
 ---
 
 
-<!-- ### Configure Azure Monitoring -->
+<!-- ## Configure Azure Monitoring -->
 
-### Azure監視機能の設定
+## Azure監視機能の設定
 
 
 <!-- Microsoft Azure supports both PaaS and IaaS (VM) services. Right now Datadog monitoring is tailored for IaaS services. But it can also be installed in worker and web roles. -->
@@ -34,7 +34,7 @@ Azureの監視を設定するには、[Azure integrations][1] に移動し、イ
 
 <!-- #### Enable diagnostics -->
 
-#### Diagnosticsを有効にする。
+### Diagnosticsを有効にする。
 
 <!-- To enable agent-less monitoring, you must enable diagnostics. Right now this is only support by Windows based machines. To do this, first go to [Azure preview portal][2] then follow the instructions below. -->
 
@@ -62,12 +62,12 @@ VMを指定した後の手順:
 Datadogの監視が正しく動作するためには、"Basic metrics", "network and web metrics", ".Net metrics"を有効にする必要があります。更に、"logs collection"のチェックマークを外すことでストレージのスペースを節約することもできます。
 
 
-<!-- ### Deploy agents -->
+<!-- ## Deploy agents -->
 
-### Datadog Agentのインストール
+## Datadog Agentのインストール
 
 
-#### Azureポータルからのインストール
+### Azureポータルからのインストール
 
 Datadogは、Azure Extension Managerに対応しています。これにより、AzureのポータルからDatadog Agentをインストールすることが出来ます。Azure上で起動しているVMがWindowsかLinuxに関わらず、ワンクリックでDatadog Agentをインストールすることが出来ます。ワンクリックでのインストールを実行するには、[
 Azureのポータル](http://portal.azure.com)から、運用中のVMを選択するか、新しいVMを起動しDatadog Agentの追加をクリックします。
@@ -83,7 +83,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 [Datadog APIキー](https://app.datadoghq.com/azure/landing/)は、Azureのインテグレーションタイル内で見つけることが出来ます。
 
 
-#### 手作業でのインストール
+### 手作業でのインストール
 
 <!-- You can either deploy agents manually by following the instructions <a href="https://docs.datadoghq.com/guides/azure/">here</a>. -->
 
@@ -92,9 +92,9 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 - [Azure WindowsへDatadog Agentのインストール](/ja//guides/azure/)
 
 
-<!-- ### Troubleshooting -->
+<!-- ## Troubleshooting -->
 
-### トラブルシュート
+## トラブルシュート
 
 
 <!-- Here are some common issues you might be seeing. -->
@@ -102,34 +102,34 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 次に一般的に遭遇しやすいトラブルの対処方法を紹介します。
 
 
-<!-- #### I don't know my tenent name
+<!-- ### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].
 After logging in, locate the settings page on the left side of the screen.
 ![](/images/azure_tenent.png)
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses. -->
 
-#### Tenent name(テナント名)がわかりません。
+### Tenent name(テナント名)がわかりません。
 Tenent nameを知るためには、まず[Azureのポータル][4]へログインします。その後、スクリーンの左側にあるメニューからSETTINGS(設定)を探し、クリックします。赤枠で囲った部分がTenent name(テナント名)になります。
 ![](/images/azure_tenent.png)
 
 
-<!-- #### Unable to login
+<!-- ### Unable to login
 If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attache screen shot. -->
 
-#### ログインすることが出来ません。
+### ログインすることが出来ません。
 Azureのインテグレーションをインストールする際にログインすることが出来ない場合は、お気兼ねなく[support@datadoghq.com][3]にお問い合わせ下さい。お問い合わせの際は、スクリーンショット画像の添付をお願いします。
 
 
-<!-- #### No metrics are showing up
+<!-- ### No metrics are showing up
 Please make sure you have enabled diagnostics on your VMs. Diagnostics allows VMs to collect logging information which includes metrics for CPU, Network etc. -->
 
-#### メトリクスが表示されません。
+### メトリクスが表示されません。
 
-##### Agentをインストールしていない場合:
+#### Agentをインストールしていない場合:
 VM上でDiagnostics機能が"ON"になっていることを確認して下さい。このDiagnostics機能は、各VMがCPU, Networkなどのログ情報を取得することを許可します。
 
-##### Agentをインストールした場合で、Agentからのメトリクスが表示されない場合:
+#### Agentをインストールした場合で、Agentからのメトリクスが表示されない場合:
 VMが持っている時間が、正しく設定されているか確認して下さい。Datadogに送信されるメトリクス情報に記録されている時間が、現在の時間と大きく離れているとグラフに表示されないことが有ります。
 
 

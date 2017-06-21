@@ -21,7 +21,7 @@ Connect Varnish to Datadog in order to:
 - Visualize your cache performance in real-time.
 - Correlate the performance of Varnish with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、VarnishのメトリクスをDatadogに送信します:

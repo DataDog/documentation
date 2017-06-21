@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Capture GitHub commits in Datadog to:
@@ -17,7 +17,7 @@ Capture GitHub commits in Datadog to:
 - Identify when new code changes lead to system alerts or build failures
 - Discuss code changes with your team in the Datadog Event Stream -->
 
-### 概要
+## 概要
 
 
 次の目的でGitHubのコミット情報をDatadogと連携します:
@@ -27,14 +27,14 @@ Capture GitHub commits in Datadog to:
 - ソースコードの変更に関し、Datadogのイベントストリーム上でチャットをする。
 
 
-<!-- ### Configuration
+<!-- ## Configuration
 
 
 Select 'Github' [here](https://app.datadoghq.com/account/settings) and link your account.
 You can then select which repos you would like to integrate, which branches, and if you'd like to
 receive commits and/or issues. -->
 
-### 設定
+## 設定
 
 
 Datadogのインテグレーションページで['Github'](https://app.datadoghq.com/account/settings)タイルを選択し、`Configuration`タブから`Sign in with Github`をクリックし、アカウントを設定します。その後リポジトリ、ブランチ、コミットなどの情報を設定します。
@@ -47,7 +47,7 @@ into your Datadog Event Stream.
 If you view a dashboard, in the top left search bar you can type `sources:github` to see github
 events overlayed over your the graphs on that dashboard. -->
 
-### 連携が完了すると
+## 連携が完了すると
 
 インテグレーションの設定が完了すると、GitHubへのcommitsとissuesのどちらか、または両方のイベントを、Datadogのイベントストリームにも表示することが出来るようになります。
 
