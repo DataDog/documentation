@@ -22,4 +22,7 @@ sidebar:
       href: "/faq/"
     - text: Billing FAQ
       href: "/guides/billing/"
+aliases:
+  - /basic_agent_usage/
+  - /guides/
 ---

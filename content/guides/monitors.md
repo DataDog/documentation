@@ -2,6 +2,8 @@
 title: Guide to Monitors
 kind: guide
 listorder: 13
+aliases:
+  - /guides/monitoring
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***

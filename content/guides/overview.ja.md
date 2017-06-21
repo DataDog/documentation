@@ -19,6 +19,8 @@ sidebar:
       href: "#dashboards"
     - text: 監視とアラート
       href: "#monitoring"
+aliases:
+  - /ja/overview
 ---
 <!--監視とアラートの項目だけ、若干の修正をしました。まだ英語版と完全に一致していません8/17-->
 <!-- So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog

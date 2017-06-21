@@ -89,7 +89,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 
 次の手順に従って、手作業でDatadog Agentをインストールすることも出来ます。
 
-- [Azure WindowsへDatadog Agentのインストール](/ja//guides/azure/)
+- [Azure WindowsへDatadog Agentのインストール](/ja/guides/azure/)
 
 
 <!-- ## Troubleshooting -->

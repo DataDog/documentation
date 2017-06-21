@@ -15,6 +15,8 @@ sidebar:
       href: "#dashboards"
     - text: Monitoring
       href: "#monitoring"
+aliases:
+  - /overview
 ---
 
 So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog

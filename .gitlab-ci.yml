@@ -67,7 +67,6 @@ build_preview:
     - remove_static_from_repo
     - create_artifact
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
     - docs-hugo
 
@@ -81,7 +80,6 @@ test_preview_images:
     - pull_artifact_from_s3
     - test_site_links "images" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
     - docs-hugo
 
@@ -95,7 +93,6 @@ test_preview_static:
     - pull_artifact_from_s3
     - test_site_links "static" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
     - docs-hugo
 
@@ -109,6 +106,5 @@ test_preview_links:
     - pull_artifact_from_s3
     - test_site_links "links" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
     - docs-hugo

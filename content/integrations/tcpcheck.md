@@ -4,6 +4,9 @@ integration_title: TCP Check
 kind: integration
 newhlevel: true
 update_for_agent: 5.8.5
+aliases:
+  - /guides/network_checks
+  - /ja/guides/network_checks
 ---
 ## Overview
 
