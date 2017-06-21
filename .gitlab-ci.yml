@@ -79,9 +79,6 @@ test_preview_images:
     URL: ${PREVIEW_DOMAIN}
   script:
     - pull_artifact_from_s3
-    - find "${ARTIFACT_RESOURCE}" -name '*.html' -type f -exec grep -vl 'http-equiv="refresh"' {} /dev/null \; | \
-        sed -ne "s@${ARTIFACT_RESOURCE}@$(pwd)/${ARTIFACT_RESOURCE}@p" | \
-        cat > ${ARTIFACT_RESOURCE}/digest.txt
     - test_site_links "images" "${URL}" "True" "True" "True"
   only:
     - /pull/\/.*/
