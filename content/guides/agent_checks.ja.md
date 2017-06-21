@@ -76,7 +76,7 @@ web chat client, too</a>.) -->
 
 <h3 id="setup">セットアップ</h3>
 
-まだDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](../basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
+まだDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](/basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -769,7 +769,7 @@ If your issue continues, please reach out to Support with the help page that
 
     sudo -u dd-agent dd-agent check my_check
 
-問題が解決しない場合、[お問い合わせ](../../help)に記載された方法でサポート要請のご連絡をしていただけると幸いです。
+問題が解決しない場合、[お問い合わせ](/help)に記載された方法でサポート要請のご連絡をしていただけると幸いです。
 
 <!-- <h4>Testing Custom Checks on Windows</h4>
 
