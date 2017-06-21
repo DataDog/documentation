@@ -6519,5 +6519,8 @@ h4.tracing-api {
 .nav-tabs .tocible .tocible_subheading a {
   padding: 5px 25px; }
 
+.nav-tabs .tocible .tocible_subsubheading a {
+  padding: 3px 35px; }
+
 .main img {
   border: 1px solid #777; }
