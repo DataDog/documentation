@@ -47,47 +47,47 @@ When it prompts for a password, enter the one used in the first command.
 
 ## Configuration Options
 
-* `username` (Optional)
-* `password` (Optional)
-* `dbname` (Optional) - Name of the database you want to monitor
-* `ssl` (Optional) - Defaults to False. Whether to use SSL to connect.
-* `tags` (Optional) - Dictionary of tags
-* `relations` (Optional) - Dictionary of per-relation (table) metrics that you want to track. Each relation generates 10 metrics + 10 metrics per index.
-
-  By default all schemas are included. To track relations from specific schemas only, use the following syntax:
+* `username` (Optional) - The user account used to collect metrics, set in the [Installation section above](#installation)
+* `password` (Optional) - The password for the user account.
+* `dbname` (Optional) - The name of the database you want to monitor.
+* `ssl` (Optional) - Defaults to False. Indicates whether to use an SSL connection.
+* `use_psycopg2` (Optional) - Defaults to False. Setting this option to `True` will force the Datadog Agent to collect PostgreSQL metrics using psycopg2 instead of pg8000. Note that pyscopg2 does not support SSL connections.
+* `tags` (Optional) - A list of tags applied to all metrics collected. Tags may be simple strings or key-value pairs.
+* `relations` (Optional) - By default, all schemas are included. Add specific schemas here to collect metrics for schema relations. Each relation will generate 10 metrics and an additional 10 metrics per index. Use the following structure to declare relations:
 
       relations:
-        - relation_name: another_table
+        - relation_name: my_relation
           schemas:
-            - public
-            - prod
+            - my_schema_1
+            - my_schema_2
   {:.language-yaml}
+
 * `collect_function_metrics` (Optional) - Collect metrics regarding PL/pgSQL functions from pg_stat_user_functions
-* `collect_count_metrics` (Optional) - Collect count metrics, default value is True for backward compatibility but they migth be slow, suggested value is False.
+* `collect_count_metrics` (Optional) - Collect count metrics. The default value is `True` for backward compatibility, but this might be slow. The recommended value is `False`.
 
 
 ## Custom metrics
 
 PostgreSQL custom metrics can be collected by mapping SQL query results to metrics in Datadog. This mapping is expressed using four components: descriptors, metrics, query, and relation.
 
-* **Descriptors** are a sequence of tuples matching a column name or alias from the custom metric query to a tag in Datadog. In the example below, `relname` is mapped to `table`. Custom metrics in Datadog can then be filtered and aggregated by `table` tag.
-* **Metrics** are mappings from a query column or column function to a tuple containing the Datadog custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the sum of the `idx_scan` column is mapped to the Datadog custom metric name `postgresql.idx_scan_count_by_table`.
+* **Descriptors** are a sequence of tuples matching a column name or alias from the custom metric query to a tag in Datadog. In the example below, `relname` is mapped to `schema`. Custom metrics in Datadog can then be filtered and aggregated by `schema` tag.
+* **Metrics** are mappings from a query column or column function to a tuple containing the Datadog custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the sum of the `idx_scan` column is mapped to the Datadog custom metric name `postgresql.idx_scan_count_by_schema`.
 * **Query** is where you'll construct the SQL query to obtain your custom metrics. Each column name in your select query should have a corresponding tuple in the Descriptors section. Each column listed in the Metrics section will be substituted for the `%s` in the query.
-* **Relation** indicates whether to include table relations specified in the [configuration options above](#configuration-options). If set to `true`, the last `%s` in the Query will be set to the list of table names specified in the Relations configuration option.
+* **Relation** indicates whether to include schema relations specified in the [configuration options above](#configuration-options). If set to `true`, the last `%s` in the Query will be set to the list of schema names specified in the Relations configuration option.
 
 ### Example 1
 
     custom_metrics:
       # All index scans & reads
       - descriptors:
-          - [relname, table]
+          - [relname, schema]
         metrics:
-            SUM(idx_scan) as idx_scan_count: [postgresql.idx_scan_count_by_table, RATE]
-            SUM(idx_tup_read) as idx_read_count: [postgresql.idx_read_count_by_table, RATE]
+            SUM(idx_scan) as idx_scan_count: [postgresql.idx_scan_count_by_schema, RATE]
+            SUM(idx_tup_read) as idx_read_count: [postgresql.idx_read_count_by_schema, RATE]
         query: SELECT relname, %s FROM pg_stat_all_indexes GROUP BY relname;
         relation: false
 
-The example above will provide two custom metrics in Datadog: `postgresql.idx_scan_count_by_table` and `postgresql.idx_read_count_by_table`. Both metrics will be filterable by the `table` tag.
+The example above will provide two custom metrics in Datadog: `postgresql.idx_scan_count_by_schema` and `postgresql.idx_read_count_by_schema`. Both metrics will be filterable by the `schema` tag.
 
 ### Example 2
 
