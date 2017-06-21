@@ -2,209 +2,63 @@
 title: Libraries
 kind: documentation
 ---
+### API and DogStatsD Client Libraries
 
-There are many libraries available to help you interact with the Datadog API.
+The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
 
-#### C\#
+{{< classic-libraries-table >}}
 
+### Tracing (APM) Client Libraries
 
-  * [dogstatsd-csharp-client][6] - A C# DogStatsD client.
+The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
 
-#### Go
+{{< tracing-libraries-table >}}
 
-  * [datadog-go][71] - A Go DogStatsD client.
-
-#### JAVA
-  * [java-dogstatsd-client][7] - a DogStatsD Client for Java written by [Indeed][8] and Datadog.
-
-#### Python
-
-  * [datadogpy][1] - A Python Datadog API wrapper and DogStatsD client.
-
-#### Ruby
-
-  * [DogApi][3] - A Ruby Datadog API wrapper.
-  * [dogstatsd-ruby][4] - A Ruby DogStatsD client.
-
-#### PHP
-
-  * [php-datadogstatsd][5] - An extremely simple PHP DogStatsD client written by Alex Corley.
-
-### Community Libraries
-
-Some great folks have written their own libraries to help interact with Datadog. Check them out:
-
-#### C\#
-
-
-  * [metrics.net-datadog][67] - a .NET translation of the metrics-to-datadog java adapter
-
-#### Crystal
-
-
-  * [statsd.cr][86] - A statsd client library implemented in Crystal by [Mike Fiedler][87]
-
-#### Delphi
-
-
-* [datadog-delphi][85] - A statsd client library implemented in Delphi.
-
-#### Elixir
-
-
-  * [ExStatsD][39] - an Elixir DogStatsD library by [CargoSense][40].
-  * [dogstatsd-elixir][41] - a dogstatsd client in Elixir by [Adam Kittelson][42].
-  * [mtx][65] - an Elixir Datadog client by [synrc][66].
-
-#### Go
-
-
-  * [ecsdog][74] - a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd by [ejholmes][75]
-  * [godspeed][63] - a feature-rich dogstatsd client written in Go by [PagerDuty][64].
-  * [go-datadog-api][30] - a Go wrapper for our API by [Mark Smith][31] from [Dropbox][81].
-  * [go-dogstatsd][32] - a dogstatsd client written in Go by [Ooyala][33].
-  * [xstats][69] - a generic client for service instrumentation using dogstatsd in Go by [Olivier Poitrey][70].
-
-
-#### Java
-
-
-  * [metrics-datadog][9] - a backend to yammers's metrics library written by [Coursera][10].
-  * [Lassie][13] - a Java screenboard API client by [Bazaarvoice][12].
-  * [java-dogstatsd-client] [59] - DogStatsD Client for Java to submit both Events and Metrics written by [arnabk] [60].
-
-#### Node.js
-
-  * [hotshots][76] - a Node.js client for statsd, DogStatsD, and Telegraf written by Brightcove.
-  * [node-datadog][14] - a Node.js API client, contributed by [HashGo][15].
-  * [node-dogstatsd][16] - a Node.js DogStatsD client, contributed by [Young Han Lee][17].
-  * [node-dogapi][18] - a Node.js API client, contributed by [Brett Langdon][19].
-  * [datadog-metrics][57] - Node.js API client, contributed by [Daniel Bader][58].
-
-#### Perl
-
-
-  * [webservice-datadog][20] - a Perl API client, contributed by [Jennifer Pinkham][21].
-  * [dogstatsd-perl][22] - a Perl DogStatsD client, contributed by [Stefan Goethals][23].
-
-#### PHP
-
-
-  * [dog-statsd][82] - A fork of [thephpleague/statsd][83] with additional Datadog features by [Graze][84].
-  * [plesk_metrics_datadog][27] - a PHP script to collect metrics from [Plesk][28] by [Israel Viana][29].
-
-#### Python
-
-
-  * [scales_datadog][34] - a Datadog backend for the [Scales][35] library, written by [Tommaso Barbugli][36].
-
-#### Ruby
-
-
-  * [metricks-dogstatsd][24] - a backend for the popular [Metriks][25] gem, written by [Mavenlink][26].
-  * [hotdog][61] - A command-line interface contributed by [Yuu Yamashita][62].
-
-#### R
-
-
-  * [rdog][68] - an R package to analyze Datadog metrics into R.
-
-#### Scala
-
-
-  * [datadog-scala][37] - a Scala API client, written by [Cory Watson][38].
-
-### Community Tracing (APM) Libraries
-
-#### C\#
-
-
-  * [DatadogSharp][89] - A C# Datadog client that supports DogStatsD and APM.
-
-#### Elixir
-
-
-  * [spandex][90] - A Datadog APM reporting library.
-
-#### Java
-
-
-  * [apm-client][91] - A Java client for Datadog APM.
-
-#### OpenTracing
-
-
-  * [datadog-tracer-js][92] - OpenTracing tracer implementation for Datadog in JavaScript.
-
-  * [dd-go-opentracing][93] - OpenTracing tracer implementation for Datadog in Go.
-
-#### PHP
-
-
-  * [dd-trace-php][94] - A PHP tracing implementation for Datadog.
-
-#### Zipkin
-
-
-  * [dd-zipkin-proxy][95] - A simple Zipkin-to-Datadog proxy.
-
-### Community Integration Libraries
+### Community Integrations
 
 #### Ansible
-
-
-  * In addition to our official integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
+In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### Consul
-
-
-  * Publish consul service counts into Datadog via dogstatsd with [this library][96].
+Publish consul service counts into Datadog via dogstatsd with [this library][96].
 
 #### Dogscaler
-
-
-  * Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
+Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
-
-
-  * This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
 #### Google Analytics
-
-
-  * You can get data into Datadog from Google Analytics using our API with [this library][50].
+You can get data into Datadog from Google Analytics using our API with [this library][50].
 
 #### Logstash Output
-
-
   * [Logstash Output for Datadog][73]
   * [Logstash Output for Dogstatsd][88]
 
 #### NGINX LUA
-
-
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 #### Phusion Passenger
-
-
-  * Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
+Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
 #### Pid-stats
-
-
-  * This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
+This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
 #### Saltstack
-
-
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
 
+### Community Agent Ports
 
-If you've written a Datadog library, write us at [code@datadoghq.com][56] and we'll be happy to add it to the list.
+#### FreeBSD
+  * [FreeBSD dd-agent port][99]
+
+#### NixOS
+  * [dd-agent nixpkg][100]
+
+
+If you've written a Datadog library and would like to add it to this page, write us at [code@datadoghq.com][9].
 
    [1]: https://github.com/DataDog/datadogpy
    [3]: https://github.com/DataDog/dogapi-rb
@@ -277,7 +131,7 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [71]: https://github.com/DataDog/datadog-go
    [72]: https://github.com/simplifi/ngx_lua_datadog/
    [73]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
-   [74]:https://github.com/remind101/ecsdog
+   [74]: https://github.com/remind101/ecsdog
    [75]: http://ejholmes.io/
    [76]: https://github.com/brightcove/hot-shots
    [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
@@ -301,3 +155,6 @@ If you've written a Datadog library, write us at [code@datadoghq.com][56] and we
    [95]: https://github.com/flachnetz/dd-zipkin-proxy
    [96]: https://github.com/zendesk/consul2dogstats
    [97]: https://github.com/cvent/dogscaler
+   [98]: https://cran.r-project.org/package=datadogr
+   [99]: https://github.com/urosgruber/dd-agent-FreeBSD
+   [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
