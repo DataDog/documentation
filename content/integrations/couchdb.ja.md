@@ -27,7 +27,7 @@ Capture CouchDB data in Datadog to:
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [CouchDB インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/couchdb/conf.yaml.example)
-* [CouchDB インテグレーション checks.d](ttps://github.com/DataDog/integrations-core/blob/master/couchdb/check.py)
+* [CouchDB インテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/couchdb/check.py)
 
 
 CouchDBインテグレーションがデフォルトで取得しているメトリクス:
