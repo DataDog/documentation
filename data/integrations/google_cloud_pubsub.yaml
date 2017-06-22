@@ -1,109 +1,163 @@
 google_cloud_pubsub:
-- interval: ""
+- description: Approximate size of the message backlog in a subscription.
+  interval: ""
   metric_name: gcp.pubsub.subscription.backlog_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Cost of operations per subscription measured.
+  interval: ""
   metric_name: gcp.pubsub.subscription.byte_cost
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of configuration changes for subscriptions.
+  interval: ""
   metric_name: gcp.pubsub.subscription.config_updates_count
   metric_type: count
+  per_unit_name: ""
   unit_name: occurrence
-- interval: ""
+- description: Number of ModifyAckDeadline operations.
+  interval: ""
   metric_name: gcp.pubsub.subscription.mod_ack_deadline_message_operation_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of ModifyAckDeadline requests.
+  interval: ""
   metric_name: gcp.pubsub.subscription.mod_ack_deadline_request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Messages delivered but not yet acknowledged.
+  interval: ""
   metric_name: gcp.pubsub.subscription.num_outstanding_messages
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Messages pending to be delivered.
+  interval: ""
   metric_name: gcp.pubsub.subscription.num_undelivered_messages
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Age of the oldest unacknowledged message in a subscription.
+  interval: ""
   metric_name: gcp.pubsub.subscription.oldest_unacked_message_age
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Number of acknowledge message operations.
+  interval: ""
   metric_name: gcp.pubsub.subscription.pull_ack_message_operation_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Delta count of message pull acknowledgement requests.
+  interval: ""
   metric_name: gcp.pubsub.subscription.pull_ack_request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Number of pull message operations.
+  interval: ""
   metric_name: gcp.pubsub.subscription.pull_message_operation_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of message pull requests.
+  interval: ""
   metric_name: gcp.pubsub.subscription.pull_request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Number of message push attempts.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Byte cost of operations per topic.
+  interval: ""
   metric_name: gcp.pubsub.topic.byte_cost
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of configuration changes for topics.
+  interval: ""
   metric_name: gcp.pubsub.topic.config_updates_count
   metric_type: count
+  per_unit_name: ""
   unit_name: occurrence
-- interval: ""
+- description: Number of publish message operations.
+  interval: ""
   metric_name: gcp.pubsub.topic.send_message_operation_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of message send requests.
+  interval: ""
   metric_name: gcp.pubsub.topic.send_request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Average of push request latencies.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_latencies.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Sample Count for push request latencies.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_latencies.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Maximum of push request latencies.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_latencies.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Minimum of push request latencies.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_latencies.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Sum of Squared Deviation for push request latencies.
+  interval: ""
   metric_name: gcp.pubsub.subscription.push_request_latencies.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Average of publish message sizes.
+  interval: ""
   metric_name: gcp.pubsub.topic.message_sizes.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sample Count for publish message sizes.
+  interval: ""
   metric_name: gcp.pubsub.topic.message_sizes.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum of publish message sizes.
+  interval: ""
   metric_name: gcp.pubsub.topic.message_sizes.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Minimum of publish message sizes.
+  interval: ""
   metric_name: gcp.pubsub.topic.message_sizes.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sum of Squared Deviation for publish message sizes.
+  interval: ""
   metric_name: gcp.pubsub.topic.message_sizes.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte

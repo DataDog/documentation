@@ -1,73 +1,109 @@
 go_expvar:
-- interval: ""
+- description: Bytes allocated and not yet freed
+  interval: ""
   metric_name: go_expvar.memstats.alloc
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of frees
+  interval: ""
   metric_name: go_expvar.memstats.frees
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Bytes allocated and not yet freed
+  interval: ""
   metric_name: go_expvar.memstats.heap_alloc
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Bytes in idle spans
+  interval: ""
   metric_name: go_expvar.memstats.heap_idle
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Bytes in non-idle spans
+  interval: ""
   metric_name: go_expvar.memstats.heap_inuse
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total number of allocated objects
+  interval: ""
   metric_name: go_expvar.memstats.heap_objects
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Bytes released to the OS
+  interval: ""
   metric_name: go_expvar.memstats.heap_released
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Bytes obtained from system
+  interval: ""
   metric_name: go_expvar.memstats.heap_sys
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of pointer lookups
+  interval: ""
   metric_name: go_expvar.memstats.lookups
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of mallocs
+  interval: ""
   metric_name: go_expvar.memstats.mallocs
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of garbage collections
+  interval: ""
   metric_name: go_expvar.memstats.num_gc
   metric_type: gauge
+  per_unit_name: ""
   unit_name: garbage collection
-- interval: ""
+- description: 95th percentile of recent GC pause durations
+  interval: ""
   metric_name: go_expvar.memstats.pause_ns.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average of recent GC pause durations
+  interval: ""
   metric_name: go_expvar.memstats.pause_ns.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Number of submitted GC pause durations
+  interval: ""
   metric_name: go_expvar.memstats.pause_ns.count
   metric_type: rate
+  per_unit_name: second
   unit_name: sample
-- interval: ""
+- description: Max GC pause duration
+  interval: ""
   metric_name: go_expvar.memstats.pause_ns.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median GC pause duration
+  interval: ""
   metric_name: go_expvar.memstats.pause_ns.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Total GC pause duration over lifetime of process
+  interval: ""
   metric_name: go_expvar.memstats.pause_total_ns
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Bytes allocated (even if freed)
+  interval: ""
   metric_name: go_expvar.memstats.total_alloc
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte

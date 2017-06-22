@@ -1,25 +1,43 @@
 amazon_route53:
-- interval: ""
+- description: The percentage of Amazon Route 53 health checkers that consider the
+    selected endpoint to be healthy.
+  interval: ""
   metric_name: aws.route53.health_check_percentage_healthy
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The status of the health check endpoint that CloudWatch is checking.
+    1 indicates healthy, and 0 indicates unhealthy.
+  interval: ""
   metric_name: aws.route53.health_check_status
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time that it took Amazon Route 53 health checkers to establish
+    a TCP connection with the endpoint.
+  interval: ""
   metric_name: aws.route53.connection_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The average time that it took Amazon Route 53 health checkers to receive
+    the first byte of the response to an HTTP or HTTPS request.
+  interval: ""
   metric_name: aws.route53.time_to_first_byte
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The average time that it took Amazon Route 53 health checkers to complete
+    the SSL handshake.
+  interval: ""
   metric_name: aws.route53.sslhandshake_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: For a calculated health check, the number of health checks that are
+    healthy among the health checks that Amazon Route 53 is monitoring.
+  interval: ""
   metric_name: aws.route53.child_health_check_healthy_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""

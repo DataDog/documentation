@@ -1,65 +1,579 @@
 powerdns_recursor:
-- interval: ""
+- description: The number of entries in the cache
+  interval: ""
   metric_name: powerdns.recursor.cache_entries
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: ""
+  unit_name: entry
+- description: The number of entries in the negative answer cache
+  interval: ""
+  metric_name: powerdns.recursor.negcache_entries
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: entry
+- description: The number of entries in the packet cache
+  interval: ""
+  metric_name: powerdns.recursor.packetcache_entries
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: entry
+- description: The number of servers that failed to resolve
+  interval: ""
+  metric_name: powerdns.recursor.failed_host_entries
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: server
+- description: The number of MThreads currently running
+  interval: ""
   metric_name: powerdns.recursor.concurrent_queries
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: ""
+  unit_name: query
+- description: The number of entries in the throttle map
+  interval: ""
+  metric_name: powerdns.recursor.throttle_entries
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: entry
+- description: The number of outgoing udp queries per second
+  interval: ""
   metric_name: powerdns.recursor.all_outqueries
   metric_type: gauge
-  unit_name: operation
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second NOT answered within 1 second
+  interval: ""
   metric_name: powerdns.recursor.answers_slow
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered within 1 millisecond
+  interval: ""
   metric_name: powerdns.recursor.answers0_1
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered within 10 milliseconds
+  interval: ""
   metric_name: powerdns.recursor.answers1_10
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered within 100 milliseconds
+  interval: ""
   metric_name: powerdns.recursor.answers10_100
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered within 1 second
+  interval: ""
   metric_name: powerdns.recursor.answers100_1000
   metric_type: gauge
-  unit_name: unit
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: The number of cache hits per second
+  interval: ""
   metric_name: powerdns.recursor.cache_hits
   metric_type: gauge
-  unit_name: operation
-- interval: ""
+  per_unit_name: second
+  unit_name: hit
+- description: The number of cache misses per second
+  interval: ""
   metric_name: powerdns.recursor.cache_misses
   metric_type: gauge
-  unit_name: operation
-- interval: ""
-  metric_name: powerdns.recursor.noerror_answers
+  per_unit_name: second
+  unit_name: miss
+- description: The number of queries per second chained to existing outstanding query
+  interval: ""
+  metric_name: powerdns.recursor.chain_resends
   metric_type: gauge
-  unit_name: operation
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: The number of mismatches in character case per second
+  interval: ""
+  metric_name: powerdns.recursor.case_mismatches
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of unparseable packets per second
+  interval: ""
+  metric_name: powerdns.recursor.client_parse_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of outgoing queries dropped per second because of 'dont
+    query' setting
+  interval: ""
+  metric_name: powerdns.recursor.dont_outqueries
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of outgoing queries per second over IPv6
+  interval: ""
+  metric_name: powerdns.recursor.ipv6_outqueries
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: ""
+- description: The number of end-user-initiated IPv6 UDP queries with the RD bit set
+  interval: ""
+  metric_name: powerdns.recursor.ipv6_questions
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of NXDOMAIN answers per second
+  interval: ""
+  metric_name: powerdns.recursor.nxdomain_answers
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: The maximum amount of thread stack ever used
+  interval: ""
+  metric_name: powerdns.recursor.max_mthread_stack
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of outgoing UDP query timeouts per second
+  interval: ""
   metric_name: powerdns.recursor.outgoing_timeouts
   metric_type: gauge
-  unit_name: operation
-- interval: ""
-  metric_name: powerdns.recursor.questions
+  per_unit_name: second
+  unit_name: timeout
+- description: The number of questions per second dropped due to having reached concurrent
+    query limit
+  interval: ""
+  metric_name: powerdns.recursor.over_capacity_drops
   metric_type: gauge
-  unit_name: operation
-- interval: ""
+  per_unit_name: second
+  unit_name: query
+- description: The number of packet cache hits per second
+  interval: ""
+  metric_name: powerdns.recursor.packetcache_hits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: hit
+- description: The number of packet cache misses per second
+  interval: ""
+  metric_name: powerdns.recursor.packetcache_misses
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: miss
+- description: The number of packets dropped per second because of Lua policy decision
+  interval: ""
+  metric_name: powerdns.recursor.policy_drops
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The average latency in microseconds exponentially weighted over past
+    'latency-statistic-size' packets
+  interval: ""
+  metric_name: powerdns.recursor.qa_latency
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: microsecond
+- description: The number of server replied packets per second that could not be parsed
+  interval: ""
+  metric_name: powerdns.recursor.server_parse_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of SERVFAIL answers per second
+  interval: ""
   metric_name: powerdns.recursor.servfail_answers
   metric_type: gauge
-  unit_name: operation
-- interval: ""
+  per_unit_name: second
+  unit_name: response
+- description: The number of times per second PowerDNS considers itself spoofed and
+    drops data
+  interval: ""
+  metric_name: powerdns.recursor.spoof_prevents
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of CPU milliseconds spent in 'system' mode
+  interval: ""
+  metric_name: powerdns.recursor.sys_msec
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of outgoing queries dropped per second because of 'dont
+    query' setting
+  interval: ""
+  metric_name: powerdns.recursor.tcp_client_overflow
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of active TCP/IP clients per second
+  interval: ""
+  metric_name: powerdns.recursor.tcp_clients
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of outgoing TCP queries per second
+  interval: ""
   metric_name: powerdns.recursor.tcp_outqueries
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of throttled outgoing UDP queries per second
+  interval: ""
+  metric_name: powerdns.recursor.throttled_out
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of TCP questions denied per second because of allow-from
+    restrictions
+  interval: ""
+  metric_name: powerdns.recursor.unauthorized_tcp
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of UDP questions denied per second because of allow-from
+    restrictions
+  interval: ""
+  metric_name: powerdns.recursor.unauthorized_udp
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of unexpected answers per second from remote servers
+  interval: ""
+  metric_name: powerdns.recursor.unexpected_packets
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number times per second nameservers were unreachable
+  interval: ""
+  metric_name: powerdns.recursor.unreachables
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of seconds PowerDNS has been running
+  interval: ""
+  metric_name: powerdns.recursor.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: The number of CPU milliseconds spent in 'user' mode
+  interval: ""
+  metric_name: powerdns.recursor.user_msec
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of NOERROR answers per second
+  interval: ""
+  metric_name: powerdns.recursor.noerror_answers
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of user initiated udp queries per second
+  interval: ""
+  metric_name: powerdns.recursor.questions
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of incoming tcp queries per second
+  interval: ""
   metric_name: powerdns.recursor.tcp_questions
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
+- description: Number of queries per second NOT answered by auth4s within 1 second;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth4_answers_slow
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth4s within 1 millisecond;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth4_answers0_1
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth4s within 10 milliseconds;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth4_answers1_10
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth4s within 100 milliseconds;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth4_answers10_100
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth4s within 1 second; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth4_answers100_1000
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second NOT answered by auth6s within 1 second;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth6_answers_slow
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth6s within 1 millisecond;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth6_answers0_1
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth6s within 10 milliseconds;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth6_answers1_10
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth6s within 100 milliseconds;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth6_answers10_100
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: Number of queries per second answered by auth6s within 1 second; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.auth6_answers100_1000
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of records dropped per second because of 'delegation only'
+    setting; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dlg_only_drops
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: record
+- description: The number of records dropped per second because of 'delegation only'
+    setting; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dlg_only_drops
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: record
+- description: The number of queries received per second with the DO bit set; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_queries
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: record
+- description: The number of DNSSEC validations per second that had the Bogus state;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_result_bogus
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of DNSSEC validations per second that had the Indeterminate
+    state; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_result_indeterminate
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of DNSSEC validations per second that had the Insecure state;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_result_insecure
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of DNSSEC validations per second that had the NTA (negative
+    trust anchor) state; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_result_nta
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of DNSSEC validations per second that had the Secure state;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_result_secure
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of DNSSEC validations performed per second; Available since
+    pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.dnssec_validations
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of servers per second that sent a valid EDNS PING response;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.edns_ping_matches
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: server
+- description: The number of servers per second that sent an invalid EDNS PING response;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.edns_ping_mismatches
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: server
+- description: The number of non-query packets received per second on server sockets
+    that should only get queries; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.ignored_packets
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of erroneous packets received per second; Available since
+    pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.no_error_packets
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of queries per second sent without EDNS; Available since
+    pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.noedns_outqueries
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of queries per second sent without EDNS PING; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.noping_outqueries
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of times per second an nsset was dropped because it no longer
+    worked; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.nsset_invalidations
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of entries in the NS speeds map; Available since pdns_recursor
+    v4.x
+  interval: ""
+  metric_name: powerdns.recursor.nsspeeds_entries
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: entry
+- description: The number of timeouts per second for outgoing UDP IPv4 queries; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.outgoing4_timeouts
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: timeout
+- description: The number of timeouts per second for outgoing UDP IPv6 queries; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.outgoing6_timeouts
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: timeout
+- description: The number of packets per second that were sent a custom answer by
+    the RPZ/filter engine; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_custom
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second that were not actioned upon by the
+    RPZ/filter engine; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_noaction
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second dropped by the RPZ/filter engine;
+    Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_drop
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second that were replied to with NXDOMAIN
+    by the RPZ/filter engine; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_nxdomain
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second that were replied to with NODATA by
+    the RPZ/filter engine; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_nodata
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second that were forced to TCP by the RPZ/filter
+    engine; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.policy_result_truncate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The amount of memory consumed by PowerDNS in bytes; Available since
+    pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.real_memory_usage
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of queries per second that could not be performed due to
+    resource limits; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.resource_limits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of questions per second that were dropped because they were
+    too old; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.too_old_drops
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: query
+- description: The number of packets per second that were received faster than the
+    OS could process them; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.udp_in_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of UDP packets per second where an ICMP response was received
+    saying the remote port was not listening; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.udp_noport_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of packets per second that were received faster than the
+    OS could process them; Available since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.udp_in_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
+- description: The number of errors per second caused in the UDP receive buffer; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.udp_recvbuf_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of errors per second caused in the UDP send buffer; Available
+    since pdns_recursor v4.x
+  interval: ""
+  metric_name: powerdns.recursor.udp_sndbuf_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error

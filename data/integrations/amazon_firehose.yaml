@@ -1,185 +1,280 @@
 amazon_firehose:
-- interval: ""
+- description: The total number of bytes indexed to Amazon ElasticSearch.
+  interval: ""
   metric_name: aws.firehose.delivery_to_elasticsearch_bytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of records indexed to Amazon ElasticSearch.
+  interval: ""
   metric_name: aws.firehose.delivery_to_elasticsearch_records
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Fraction of records successfully indexed to Amazon ElasticSearch.
+  interval: ""
   metric_name: aws.firehose.delivery_to_elasticsearch_success
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: "60"
+- description: Total number of records successfully indexed to Amazon ElasticSearch.
+  interval: "60"
   metric_name: aws.firehose.delivery_to_elasticsearch_success.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of bytes copied to Amazon Redshift per delivery.
+  interval: ""
   metric_name: aws.firehose.delivery_to_redshift_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of bytes copied to Amazon Redshift.
+  interval: "60"
   metric_name: aws.firehose.delivery_to_redshift_bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of records copied to Amazon Redshift.
+  interval: "60"
   metric_name: aws.firehose.delivery_to_redshift_records
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of records copied to Amazon Redshift per delivery.
+  interval: ""
   metric_name: aws.firehose.delivery_to_redshift_records.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Fraction of successful Redshift COPY commands
+  interval: ""
   metric_name: aws.firehose.delivery_to_redshift_success
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: "60"
+- description: Total number of successful Redshift COPY commands
+  interval: "60"
   metric_name: aws.firehose.delivery_to_redshift_success.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of bytes delivered to Amazon S3 per delivery.
+  interval: ""
   metric_name: aws.firehose.delivery_to_s_3bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of bytes delivered to Amazon S3.
+  interval: "60"
   metric_name: aws.firehose.delivery_to_s_3bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Age (from getting into Firehose to now) of the oldest record in Firehose.
+    Any record older than this age has been delivered to the S3 bucket.
+  interval: ""
   metric_name: aws.firehose.delivery_to_s_3data_freshness
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: "60"
+- description: The total number of records delivered to Amazon S3.
+  interval: "60"
   metric_name: aws.firehose.delivery_to_s_3records
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of records delivered to Amazon S3 per delivery.
+  interval: ""
   metric_name: aws.firehose.delivery_to_s_3records.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Fraction of successful deliveries to S3
+  interval: ""
   metric_name: aws.firehose.delivery_to_s_3success
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: "60"
+- description: Sum of successful deliveries to S3
+  interval: "60"
   metric_name: aws.firehose.delivery_to_s_3success.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time taken per DescribeDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.describe_delivery_stream_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per DescribeDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.describe_delivery_stream_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of DescribeDeliveryStream requests.
+  interval: "60"
   metric_name: aws.firehose.describe_delivery_stream_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of bytes ingested into the Firehose delivery stream.
+  interval: ""
   metric_name: aws.firehose.incoming_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of records ingested into the Firehose delivery stream.
+  interval: "60"
   metric_name: aws.firehose.incoming_records
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time taken per ListDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.list_delivery_stream_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per ListDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.list_delivery_stream_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of ListDeliveryStream requests.
+  interval: "60"
   metric_name: aws.firehose.list_delivery_stream_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time taken per ListDeliveryStreams operation.
+  interval: ""
   metric_name: aws.firehose.list_delivery_streams_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per ListDeliveryStreams operation.
+  interval: ""
   metric_name: aws.firehose.list_delivery_streams_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of ListDeliveryStreams requests.
+  interval: "60"
   metric_name: aws.firehose.list_delivery_streams_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The total number of bytes put to the Firehose delivery stream using
+    PutRecord.
+  interval: "60"
   metric_name: aws.firehose.put_record_bytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average number of bytes per PutRecord request
+  interval: ""
   metric_name: aws.firehose.put_record_bytes.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average time taken per PutRecord operation.
+  interval: ""
   metric_name: aws.firehose.put_record_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per PutRecord operation.
+  interval: ""
   metric_name: aws.firehose.put_record_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of PutRecord requests.
+  interval: "60"
   metric_name: aws.firehose.put_record_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The total number of bytes put to the Firehose delivery stream using
+    PutRecordBatch.
+  interval: "60"
   metric_name: aws.firehose.put_record_batch_bytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average number of bytes per PutRecordBatch request.
+  interval: ""
   metric_name: aws.firehose.put_record_batch_bytes.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average time taken per PutRecordBatch operation.
+  interval: ""
   metric_name: aws.firehose.put_record_batch_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per PutRecordBatch operation.
+  interval: ""
   metric_name: aws.firehose.put_record_batch_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of records from PutRecordBatch operations.
+  interval: "60"
   metric_name: aws.firehose.put_record_batch_records
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Average number of records per PutRecordBatch operation.
+  interval: ""
   metric_name: aws.firehose.put_record_batch_records.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Total number of PutRecordBatch requests.
+  interval: "60"
   metric_name: aws.firehose.put_record_batch_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time taken per UpdateDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.update_delivery_stream_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per UpdateDeliveryStream operation.
+  interval: ""
   metric_name: aws.firehose.update_delivery_stream_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of UpdateDeliveryStream requests.
+  interval: "60"
   metric_name: aws.firehose.update_delivery_stream_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average time taken per UpdateFirehose operation.
+  interval: ""
   metric_name: aws.firehose.update_firehose_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time taken per UpdateFirehose operation.
+  interval: ""
   metric_name: aws.firehose.update_firehose_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Total number of UpdateFirehose requests.
+  interval: "60"
   metric_name: aws.firehose.update_firehose_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""

@@ -1,29 +1,46 @@
 azure_vm_scale_set:
-- interval: ""
+- description: Total bytes read from disk
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.disk_read_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Disk Read IOPS
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.disk_read_operations_sec
   metric_type: gauge
+  per_unit_name: second
   unit_name: read
-- interval: ""
+- description: Total bytes written to disk
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.disk_write_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Disk Write IOPS
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.disk_write_operations_sec
   metric_type: gauge
+  per_unit_name: second
   unit_name: write
-- interval: ""
+- description: The number of bytes received on all network interfaces by the Virtual
+    Machine(s) (Incoming Traffic)
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.network_in
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of bytes out on all network interfaces by the Virtual Machine(s)
+    (Outgoing Traffic)
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.network_out
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The percentage of allocated compute units that are currently in use
+    by the Virtual Machine(s)
+  interval: ""
   metric_name: azure.compute_virtualmachinescalesets.percentage_cpu
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent

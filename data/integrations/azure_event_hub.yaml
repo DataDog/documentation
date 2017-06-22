@@ -1,53 +1,79 @@
 azure_event_hub:
-- interval: "60"
+- description: Event Hub archive messages in backlog for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.archive_backlog_messages
   metric_type: count
+  per_unit_name: ""
   unit_name: message
-- interval: "60"
+- description: Event Hub archived message throughput in a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.archive_message_throughput
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: "60"
+- description: Event Hub archived messages in a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.archive_messages
   metric_type: count
+  per_unit_name: ""
   unit_name: message
-- interval: "60"
+- description: Event Hub incoming message throughput for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.incoming_bytes_per_sec
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: "60"
+- description: Event Hub outgoing message throughput for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.outgoing_bytes_per_sec
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: "60"
+- description: Total failed requests for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.failed_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Total incoming messages for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.incoming_messages
   metric_type: count
+  per_unit_name: ""
   unit_name: message
-- interval: "60"
+- description: Total incoming requests for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.incoming_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Total internal server errors for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.internal_server_errors
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: Total other errors for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.other_errors
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: Total outgoing messages for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.outgoing_messages
   metric_type: count
+  per_unit_name: ""
   unit_name: message
-- interval: "60"
+- description: Total successful requests for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.successful_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Total server busy errors for a namespace
+  interval: "60"
   metric_name: azure.eventhub_namespaces.server_busy_errors
   metric_type: count
+  per_unit_name: ""
   unit_name: error

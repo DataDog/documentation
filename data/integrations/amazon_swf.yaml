@@ -1,85 +1,134 @@
 amazon_swf:
-- interval: "60"
+- description: The count of activity tasks that were canceled.
+  interval: "60"
   metric_name: aws.swf.activity_tasks_canceled
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The time interval, in milliseconds, between the time when the activity
+    was scheduled to when it closed.
+  interval: ""
   metric_name: aws.swf.activity_task_schedule_to_close_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The time interval, in milliseconds, between the time when the activity
+    task was scheduled and when it started.
+  interval: ""
   metric_name: aws.swf.activity_task_schedule_to_start_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The count of activity tasks that completed.
+  interval: "60"
   metric_name: aws.swf.activity_tasks_completed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of activity tasks that failed.
+  interval: "60"
   metric_name: aws.swf.activity_tasks_failed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The time interval, in milliseconds, between the time that the decision
+    task was started and the time it was closed.
+  interval: ""
   metric_name: aws.swf.activity_task_start_to_close_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The time interval, in milliseconds, between the time that the decision
+    task was scheduled and the time it was picked up by a worker and started.
+  interval: ""
   metric_name: aws.swf.decision_task_schedule_to_start_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The count of decision tasks that have been completed.
+  interval: "60"
   metric_name: aws.swf.decision_tasks_completed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The time interval, in milliseconds, between the time that the decision
+    task was started and the time it was closed.
+  interval: ""
   metric_name: aws.swf.decision_task_start_to_close_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of activity tasks that were scheduled but timed out on close.
+  interval: "60"
   metric_name: aws.swf.scheduled_activity_tasks_timed_out_on_close
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of activity tasks that were scheduled but timed out on start.
+  interval: "60"
   metric_name: aws.swf.scheduled_activity_tasks_timed_out_on_start
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of activity tasks that were started but timed out on close.
+  interval: "60"
   metric_name: aws.swf.started_activity_tasks_timed_out_on_close
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of activity tasks that were started but timed out due to
+    a heartbeat timeout.
+  interval: "60"
   metric_name: aws.swf.started_activity_tasks_timed_out_on_heartbeat
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of decision tasks that started but timed out on closing.
+  interval: "60"
   metric_name: aws.swf.started_decision_tasks_timed_out_on_close
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of workflows that were canceled.
+  interval: "60"
   metric_name: aws.swf.workflows_canceled
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of workflows that were completed.
+  interval: "60"
   metric_name: aws.swf.workflows_completed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of workflows that continued as new.
+  interval: "60"
   metric_name: aws.swf.workflows_continued_as_new
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of workflows that failed.
+  interval: "60"
   metric_name: aws.swf.workflows_failed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The time, in milliseconds, between the time the workflow started and
+    the time it closed.
+  interval: ""
   metric_name: aws.swf.workflow_start_to_close_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The count of workflows that were terminated.
+  interval: "60"
   metric_name: aws.swf.workflows_terminated
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The count of workflows that timed out, for any reason.
+  interval: "60"
   metric_name: aws.swf.workflows_timed_out
   metric_type: count
+  per_unit_name: ""
   unit_name: ""

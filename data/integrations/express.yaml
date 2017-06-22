@@ -1,269 +1,403 @@
 express:
-- interval: "10"
+- description: The rate of requests that generate responses with a 100 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.100
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 101 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.101
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 102 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.102
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 200 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.200
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 201 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.201
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 202 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.202
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 203 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.203
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 204 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.204
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 205 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.205
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 206 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.206
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 207 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.207
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 208 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.208
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 226 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.226
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 300 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.300
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 301 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.301
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 302 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.302
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 303 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.303
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 304 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.304
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 305 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.305
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 306 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.306
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 307 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.307
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 308 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.308
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 400 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.400
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 401 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.401
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 402 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.402
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 403 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.403
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 404 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.404
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 405 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.405
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 406 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.406
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 407 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.407
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 408 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.408
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 409 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.409
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 410 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.410
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 411 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.411
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 412 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.412
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 413 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.413
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 414 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.414
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 415 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.415
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 416 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.416
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 417 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.417
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 421 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.421
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 422 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.422
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 423 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.423
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 424 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.424
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 425 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.425
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 426 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.426
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 428 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.428
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 429 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.429
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 431 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.431
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 451 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.451
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 500 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.500
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 501 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.501
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 502 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.502
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 503 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.503
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 504 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.504
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 505 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.505
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 506 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.506
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 507 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.507
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 508 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.508
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 510 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.510
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of requests that generate responses with a 511 status code.
+  interval: "10"
   metric_name: node.express.router.response_code.511
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The rate of all requests that receive a response.
+  interval: "10"
   metric_name: node.express.router.response_code.all
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The 95th percentile of response time.
+  interval: "10"
   metric_name: node.express.router.response_time.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "10"
+- description: The average response time.
+  interval: "10"
   metric_name: node.express.router.response_time.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "10"
+- description: The rate of responses received.
+  interval: "10"
   metric_name: node.express.router.response_time.count
   metric_type: rate
+  per_unit_name: second
   unit_name: response
-- interval: "10"
+- description: The maximum response time.
+  interval: "10"
   metric_name: node.express.router.response_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "10"
+- description: The median response time.
+  interval: "10"
   metric_name: node.express.router.response_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond

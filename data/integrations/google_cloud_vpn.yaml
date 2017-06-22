@@ -1,53 +1,79 @@
 google_cloud_vpn:
-- interval: ""
+- description: Ingress packets dropped for tunnel.
+  interval: ""
   metric_name: gcp.vpn.network.dropped_received_packets_count
   metric_type: count
+  per_unit_name: ""
   unit_name: packet
-- interval: ""
+- description: Egress packets dropped for tunnel.
+  interval: ""
   metric_name: gcp.vpn.network.dropped_sent_packets_count
   metric_type: count
+  per_unit_name: ""
   unit_name: packet
-- interval: ""
+- description: Ingress bytes for tunnel.
+  interval: ""
   metric_name: gcp.vpn.network.received_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Egress bytes for tunnel.
+  interval: ""
   metric_name: gcp.vpn.network.sent_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Indicates successful tunnel establishment if greater than 0.
+  interval: ""
   metric_name: gcp.vpn.tunnel_established
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Number of best routes received by router.
+  interval: ""
   metric_name: gcp.router.best_received_routes_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: route
-- interval: ""
+- description: Number of routes received on a bgp session.
+  interval: ""
   metric_name: gcp.router.bgp.received_routes_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: route
-- interval: ""
+- description: Number of routes sent on a bgp session.
+  interval: ""
   metric_name: gcp.router.bgp.sent_routes_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: route
-- interval: ""
+- description: Indicator for successful bgp session establishment.
+  interval: ""
   metric_name: gcp.router.bgp.session_up
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Number of BGP sessions on the router that are down.
+  interval: ""
   metric_name: gcp.router.bgp_sessions_down_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: session
-- interval: ""
+- description: Number of BGP sessions on the router that are up.
+  interval: ""
   metric_name: gcp.router.bgp_sessions_up_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: session
-- interval: ""
+- description: Router status up or down
+  interval: ""
   metric_name: gcp.router.router_up
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Number of routes sent by router.
+  interval: ""
   metric_name: gcp.router.sent_routes_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: route

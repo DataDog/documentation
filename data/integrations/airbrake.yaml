@@ -1,5 +1,7 @@
 airbrake:
-- interval: ""
+- description: The rate of exceptions.
+  interval: ""
   metric_name: airbrake.exception_rate
   metric_type: gauge
+  per_unit_name: minute
   unit_name: occurrence

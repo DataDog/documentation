@@ -1,453 +1,711 @@
 system:
-- interval: ""
+- description: The time difference between the local clock and the NTP reference clock.
+  interval: ""
   metric_name: ntp.offset
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The percent of time the CPU spent running the virtual processor. Only
+    applies to hypervisors.
+  interval: ""
   metric_name: system.cpu.guest
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Percent of time the CPU spent in an idle state.
+  interval: ""
   metric_name: system.cpu.idle
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percentage of time that the processor is spending on handling Interrupts.
+  interval: ""
   metric_name: system.cpu.interrupt
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent waiting for IO operations to complete.
+  interval: ""
   metric_name: system.cpu.iowait
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the virtual CPU spent waiting for the hypervisor
+    to service another virtual CPU. Only applies to virtual machines.
+  interval: ""
   metric_name: system.cpu.stolen
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent running the kernel.
+  interval: ""
   metric_name: system.cpu.system
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent running user space processes.
+  interval: ""
   metric_name: system.cpu.user
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The amount of disk space that is free.
+  interval: ""
   metric_name: system.disk.free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of disk space in use as a fraction of the total.
+  interval: ""
   metric_name: system.disk.in_use
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Percent of time spent reading from disk.
+  interval: ""
   metric_name: system.disk.read_time_pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total amount of disk space.
+  interval: ""
   metric_name: system.disk.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of disk space in use.
+  interval: ""
   metric_name: system.disk.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Percent of time spent writing to disk.
+  interval: ""
   metric_name: system.disk.write_time_pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The number of free inodes.
+  interval: ""
   metric_name: system.fs.inodes.free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: inode
-- interval: ""
+- description: The number of inodes in use as a fraction of the total.
+  interval: ""
   metric_name: system.fs.inodes.in_use
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The total number of inodes.
+  interval: ""
   metric_name: system.fs.inodes.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: inode
-- interval: ""
+- description: The number of inodes in use.
+  interval: ""
   metric_name: system.fs.inodes.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: inode
-- interval: ""
+- description: The average queue size of requests issued to the device.
+  interval: ""
   metric_name: system.io.avg_q_sz
   metric_type: gauge
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: The average size of requests issued to the device.
+  interval: ""
   metric_name: system.io.avg_rq_sz
   metric_type: gauge
+  per_unit_name: ""
   unit_name: sector
-- interval: ""
+- description: The average time for I/O requests issued to the device to be served.
+    This includes the time spent by the requests in queue and the time spent servicing
+    them.
+  interval: ""
   metric_name: system.io.await
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Byte transfer rate for this device.
+  interval: ""
   metric_name: system.io.bytes_per_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The average time for read requests issued to the device to be served.
+    This includes the time spent by the requests in queue and the time spent servicing
+    them.
+  interval: ""
   metric_name: system.io.r_await
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The number of read requests issued to the device per second.
+  interval: ""
   metric_name: system.io.r_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: The number of kibibytes read from the device per second.
+  interval: ""
   metric_name: system.io.rkb_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: kibibyte
-- interval: ""
+- description: The number of read requests merged per second that were queued to the
+    device.
+  interval: ""
   metric_name: system.io.rrqm_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: The average service time for requests issued to the device.
+  interval: ""
   metric_name: system.io.svctm
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The percent of CPU time during which I/O requests were issued to the
+    device
+  interval: ""
   metric_name: system.io.util
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The average time for write requests issued to the device to be served.
+    This includes the time spent by the requests in queue and the time spent servicing
+    them.
+  interval: ""
   metric_name: system.io.w_await
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The number of write requests issued to the device per second.
+  interval: ""
   metric_name: system.io.w_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: The number of kibibytes written to the device per second.
+  interval: ""
   metric_name: system.io.wkb_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: kibibyte
-- interval: ""
+- description: The number of write requests merged per second that were queued to
+    the device.
+  interval: ""
   metric_name: system.io.wrqm_s
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: The average system load over one minute.
+  interval: ""
   metric_name: system.load.1
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average system load over fifteen minutes.
+  interval: ""
   metric_name: system.load.15
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average system load over five minutes.
+  interval: ""
   metric_name: system.load.5
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average system load over one minute normalized by the number of
+    CPUs.
+  interval: ""
   metric_name: system.load.norm.1
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average system load over fifteen minutes normalized by the number
+    of CPUs.
+  interval: ""
   metric_name: system.load.norm.15
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average system load over five minutes normalized by the number
+    of CPUs.
+  interval: ""
   metric_name: system.load.norm.5
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The amount of physical RAM used for file buffers.
+  interval: ""
   metric_name: system.mem.buffered
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of physical RAM used as cache memory.
+  interval: ""
   metric_name: system.mem.cached
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of physical memory for which space has been reserved on
+    the disk paging file in case it must be written back to disk.
+  interval: ""
   metric_name: system.mem.committed
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of free RAM.
+  interval: ""
   metric_name: system.mem.free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of physical memory used by the OS for objects that cannot
+    be written to disk, but must remain in physical memory as long as they are allocated.
+  interval: ""
   metric_name: system.mem.nonpaged
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of the page file that's free.
+  interval: ""
   metric_name: system.mem.page_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of the page file in use as a fraction of the total.
+  interval: ""
   metric_name: system.mem.page_pct_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The amount of memory dedicated to the lowest page table level.
+  interval: ""
   metric_name: system.mem.page_tables
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size of the page file
+  interval: ""
   metric_name: system.mem.page_total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of the page file in use.
+  interval: ""
   metric_name: system.mem.page_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of physical memory used by the OS for objects that can be
+    written to disk when they are not in use.
+  interval: ""
   metric_name: system.mem.paged
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of usable physical RAM as a fraction of the total.
+  interval: ""
   metric_name: system.mem.pct_usable
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The amount of physical RAM used as shared memory.
+  interval: ""
   metric_name: system.mem.shared
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of memory used by the kernel to cache data structures for
+    its own use.
+  interval: ""
   metric_name: system.mem.slab
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total amount of physical RAM.
+  interval: ""
   metric_name: system.mem.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The sum of free, buffered, and cached physical RAM.
+  interval: ""
   metric_name: system.mem.usable
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of RAM in use.
+  interval: ""
   metric_name: system.mem.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of bytes received on a device per second.
+  interval: ""
   metric_name: system.net.bytes_rcvd
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The number of bytes sent from a device per second.
+  interval: ""
   metric_name: system.net.bytes_sent
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The number of packets of data received by the interface.
+  interval: ""
   metric_name: system.net.packets_in.count
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: The number of packet receive errors detected by the device driver.
+  interval: ""
   metric_name: system.net.packets_in.error
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: The number of packets of data transmitted by the interface.
+  interval: ""
   metric_name: system.net.packets_out.count
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: The number of packet transmit errors detected by the device driver.
+  interval: ""
   metric_name: system.net.packets_out.error
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: The number of TCP segments received.
+  interval: ""
   metric_name: system.net.tcp.in_segs
   metric_type: gauge
+  per_unit_name: second
   unit_name: segment
-- interval: ""
+- description: The number of TCP segments transmitted.
+  interval: ""
   metric_name: system.net.tcp.out_segs
   metric_type: gauge
+  per_unit_name: second
   unit_name: segment
-- interval: ""
+- description: The number of TCP packets received.
+  interval: ""
   metric_name: system.net.tcp.rcv_packs
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: The number of TCP packets retransmitted.
+  interval: ""
   metric_name: system.net.tcp.retrans_packs
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: The number of TCP segments retransmitted.
+  interval: ""
   metric_name: system.net.tcp.retrans_segs
   metric_type: gauge
+  per_unit_name: second
   unit_name: segment
-- interval: ""
+- description: The number of TCP packets transmitted.
+  interval: ""
   metric_name: system.net.tcp.sent_packs
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: "10"
+- description: The TCP round trip time.
+  interval: "10"
   metric_name: system.net.tcp.rtt
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "10"
+- description: The average TCP round trip time as typically computed by the TCP stack.
+  interval: "10"
   metric_name: system.net.tcp.rtt.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "10"
+- description: The TCP round trip time jitter.
+  interval: "10"
   metric_name: system.net.tcp.rtt.jitter
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The rate of UDP datagrams delivered to UDP users.
+  interval: ""
   metric_name: system.net.udp.in_datagrams
   metric_type: gauge
+  per_unit_name: second
   unit_name: datagram
-- interval: ""
+- description: The rate of received UDP datagrams that could not be delivered for
+    reasons other than the lack of an application at the destination port.
+  interval: ""
   metric_name: system.net.udp.in_errors
   metric_type: gauge
+  per_unit_name: second
   unit_name: datagram
-- interval: ""
+- description: The rate of received UDP datagrams for which there was no application
+    at the destination port.
+  interval: ""
   metric_name: system.net.udp.no_ports
   metric_type: gauge
+  per_unit_name: second
   unit_name: datagram
-- interval: ""
+- description: The rate of UDP datagrams sent from this entity.
+  interval: ""
   metric_name: system.net.udp.out_datagrams
   metric_type: gauge
+  per_unit_name: second
   unit_name: datagram
-- interval: ""
+- description: The rate of UDP datagrams lost because there was no room in the receive
+    buffer.
+  interval: ""
   metric_name: system.net.udp.rcv_buf_errors
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: The rate of UDP datagrams lost because there was no room in the send
+    buffer.
+  interval: ""
   metric_name: system.net.udp.snd_buf_errors
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: The number of processes.
+  interval: ""
   metric_name: system.proc.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: process
-- interval: ""
+- description: The number of threads that are observed as delayed in the processor
+    ready queue and are waiting to be executed.
+  interval: ""
   metric_name: system.proc.queue_length
   metric_type: gauge
+  per_unit_name: ""
   unit_name: thread
-- interval: ""
+- description: The process CPU utilization.
+  interval: ""
   metric_name: system.processes.cpu.pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The number of involuntary context switches performed by this process.
+  interval: ""
   metric_name: system.processes.involuntary_ctx_switches
   metric_type: gauge
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: The number of bytes read from disk by this process.
+  interval: ""
   metric_name: system.processes.ioread_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of disk reads by this process.
+  interval: ""
   metric_name: system.processes.ioread_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: read
-- interval: ""
+- description: The number of bytes written to disk by this process.
+  interval: ""
   metric_name: system.processes.iowrite_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of disk writes by this process.
+  interval: ""
   metric_name: system.processes.iowrite_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: write
-- interval: ""
+- description: The number of minor page faults per second for this process.
+  interval: ""
   metric_name: system.processes.mem.page_faults.minor_faults
   metric_type: gauge
+  per_unit_name: second
   unit_name: occurrence
-- interval: ""
+- description: The number of minor page faults per second for children of this process.
+  interval: ""
   metric_name: system.processes.mem.page_faults.children_minor_faults
   metric_type: gauge
+  per_unit_name: second
   unit_name: occurrence
-- interval: ""
+- description: The number of major page faults per second for this process.
+  interval: ""
   metric_name: system.processes.mem.page_faults.major_faults
   metric_type: gauge
+  per_unit_name: second
   unit_name: occurrence
-- interval: ""
+- description: The number of major page faults per second for children of this process.
+  interval: ""
   metric_name: system.processes.mem.page_faults.children_major_faults
   metric_type: gauge
+  per_unit_name: second
   unit_name: occurrence
-- interval: ""
+- description: The process memory consumption.
+  interval: ""
   metric_name: system.processes.mem.pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The non-swapped physical memory a process has used and cannot be shared
+    with another process.
+  interval: ""
   metric_name: system.processes.mem.real
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The non-swapped physical memory a process has used. aka "Resident Set
+    Size".
+  interval: ""
   metric_name: system.processes.mem.rss
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total amount of virtual memory used by the process. aka "Virtual
+    Memory Size".
+  interval: ""
   metric_name: system.processes.mem.vms
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of processes.
+  interval: ""
   metric_name: system.processes.number
   metric_type: gauge
+  per_unit_name: ""
   unit_name: process
-- interval: ""
+- description: The number of file descriptors used by this process.
+  interval: ""
   metric_name: system.processes.open_file_descriptors
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of handles used by this process.
+  interval: ""
   metric_name: system.processes.open_handles
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of threads used by this process.
+  interval: ""
   metric_name: system.processes.threads
   metric_type: gauge
+  per_unit_name: ""
   unit_name: thread
-- interval: ""
+- description: The number of voluntary context switches performed by this process.
+  interval: ""
   metric_name: system.processes.voluntary_ctx_switches
   metric_type: gauge
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: The amount of swap used as cache memory.
+  interval: ""
   metric_name: system.swap.cached
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of free swap space.
+  interval: ""
   metric_name: system.swap.free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of swap space in use as a fraction of the total.
+  interval: ""
   metric_name: system.swap.pct_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The total amount of swap space.
+  interval: ""
   metric_name: system.swap.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of swap space in use.
+  interval: ""
   metric_name: system.swap.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The amount of time the system has been working and available.
+  interval: ""
   metric_name: system.uptime
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The total percent of time the CPU spent on this process.
+  interval: ""
   metric_name: process.stat.cpu.total_pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total percent of time the CPU spent on this process normalized
+    by the number of CPUs.
+  interval: ""
   metric_name: process.stat.cpu.total_pct.norm
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent on this process in user space.
+  interval: ""
   metric_name: process.stat.cpu.user_pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent on this process in user space normalized
+    by the number of CPUs.
+  interval: ""
   metric_name: process.stat.cpu.user_pct.norm
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent on this process in the kernel.
+  interval: ""
   metric_name: process.stat.cpu.system_pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The percent of time the CPU spent on this process in the kernel normalized
+    by the number of CPUs.
+  interval: ""
   metric_name: process.stat.cpu.system_pct.norm
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The number of threads used by this process.
+  interval: ""
   metric_name: process.stat.cpu.num_threads
   metric_type: gauge
+  per_unit_name: ""
   unit_name: thread
-- interval: ""
+- description: The non-swapped physical memory a process has used. aka "Resident Set
+    Size".
+  interval: ""
   metric_name: process.stat.memory.rss
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The process memory utilization as a percentage of the total system
+    memory.
+  interval: ""
   metric_name: process.stat.memory.rss.pct
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total amount of virtual memory used by the process. aka "Virtual
+    Memory Size".
+  interval: ""
   metric_name: process.stat.memory.vms
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte

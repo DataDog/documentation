@@ -1,73 +1,109 @@
 riakcs:
-- interval: ""
+- description: Mean latency of BLOCK GET operations performed
+  interval: ""
   metric_name: riakcs.block_get.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of BLOCK PUT operations performed
+  interval: ""
   metric_name: riakcs.block_put.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of BLOCK DELETE operations performed
+  interval: ""
   metric_name: riakcs.block_delete.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of GET operations performed
+  interval: ""
   metric_name: riakcs.object_get.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of PUT operations performed
+  interval: ""
   metric_name: riakcs.object_put.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of DELETE operations performed
+  interval: ""
   metric_name: riakcs.object_delete.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of GET BUCKETS operations performed
+  interval: ""
   metric_name: riakcs.service_get_buckets.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of BUCKET DELETE operations performed
+  interval: ""
   metric_name: riakcs.bucket_delete.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Mean latency of BUCKET CREATE operations performed
+  interval: ""
   metric_name: riakcs.bucket_create.latency_mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: microsecond
-- interval: ""
+- description: Rate of BLOCK GET operations performed
+  interval: ""
   metric_name: riakcs.block_get.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of BLOCK PUT operations performed
+  interval: ""
   metric_name: riakcs.block_put.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of BLOCK DELETE operations performed
+  interval: ""
   metric_name: riakcs.block_delete.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of GET operations performed
+  interval: ""
   metric_name: riakcs.object_get.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of PUT operations performed
+  interval: ""
   metric_name: riakcs.object_put.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of DELETE operations performed
+  interval: ""
   metric_name: riakcs.object_delete.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of GET BUCKETS operations performed
+  interval: ""
   metric_name: riakcs.service_get_buckets.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of BUCKET DELETE operations performed
+  interval: ""
   metric_name: riakcs.bucket_delete.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: Rate of BUCKET CREATE operations performed
+  interval: ""
   metric_name: riakcs.bucket_create.meter_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation

@@ -1,117 +1,175 @@
 etcd:
-- interval: ""
+- description: Rate of successful get requests
+  interval: ""
   metric_name: etcd.store.gets.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed get requests
+  interval: ""
   metric_name: etcd.store.gets.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of successful set requests
+  interval: ""
   metric_name: etcd.store.sets.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed set requests
+  interval: ""
   metric_name: etcd.store.sets.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of successful delete requests
+  interval: ""
   metric_name: etcd.store.delete.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed delete requests
+  interval: ""
   metric_name: etcd.store.delete.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of successful update requests
+  interval: ""
   metric_name: etcd.store.update.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed update requests
+  interval: ""
   metric_name: etcd.store.update.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of successful create requests
+  interval: ""
   metric_name: etcd.store.create.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed create requests
+  interval: ""
   metric_name: etcd.store.create.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of compare and swap requests success
+  interval: ""
   metric_name: etcd.store.compareandswap.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of compare and swap requests failure
+  interval: ""
   metric_name: etcd.store.compareandswap.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of compare and delete requests success
+  interval: ""
   metric_name: etcd.store.compareanddelete.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of compare and delete requests failure
+  interval: ""
   metric_name: etcd.store.compareanddelete.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of expired keys
+  interval: ""
   metric_name: etcd.store.expire.count
   metric_type: gauge
+  per_unit_name: second
   unit_name: eviction
-- interval: ""
+- description: Rate of watchers
+  interval: ""
   metric_name: etcd.store.watchers
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Rate of packets received
+  interval: ""
   metric_name: etcd.self.send.pkgrate
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: Rate of bytes received
+  interval: ""
   metric_name: etcd.self.send.bandwidthrate
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of packets sent
+  interval: ""
   metric_name: etcd.self.recv.pkgrate
   metric_type: gauge
+  per_unit_name: second
   unit_name: packet
-- interval: ""
+- description: Rate of bytes sent
+  interval: ""
   metric_name: etcd.self.recv.bandwidthrate
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of append requests this node has processed
+  interval: ""
   metric_name: etcd.self.recv.appendrequest.count
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of append requests this node has sent
+  interval: ""
   metric_name: etcd.self.send.appendrequest.count
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of failed Raft RPC requests
+  interval: ""
   metric_name: etcd.leader.counts.fail
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Rate of successful Raft RPC requests
+  interval: ""
   metric_name: etcd.leader.counts.success
   metric_type: gauge
+  per_unit_name: second
   unit_name: request
-- interval: ""
+- description: Current latency to each peer in the cluster
+  interval: ""
   metric_name: etcd.leader.latency.current
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average latency to each peer in the cluster
+  interval: ""
   metric_name: etcd.leader.latency.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Minimum latency to each peer in the cluster
+  interval: ""
   metric_name: etcd.leader.latency.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Maximum latency to each peer in the cluster
+  interval: ""
   metric_name: etcd.leader.latency.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Standard deviation latency to each peer in the cluster
+  interval: ""
   metric_name: etcd.leader.latency.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond

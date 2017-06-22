@@ -1,85 +1,127 @@
 azure_batch:
-- interval: ""
+- description: Average number of cores in the batch account
+  interval: ""
   metric_name: azure.batch_batchaccounts.core_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: core
-- interval: ""
+- description: Number of nodes being created
+  interval: ""
   metric_name: azure.batch_batchaccounts.creating_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of idle nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.idle_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of nodes leaving the Pool
+  interval: ""
   metric_name: azure.batch_batchaccounts.leaving_pool_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of offline nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.offline_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Total number of pools that have been created
+  interval: ""
   metric_name: azure.batch_batchaccounts.pool_create_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of pool deletes that have completed
+  interval: ""
   metric_name: azure.batch_batchaccounts.pool_delete_complete_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of pool deletes that have started
+  interval: ""
   metric_name: azure.batch_batchaccounts.pool_delete_start_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of pool resizes that have completed
+  interval: ""
   metric_name: azure.batch_batchaccounts.pool_resize_complete_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of pool resizes that have started
+  interval: ""
   metric_name: azure.batch_batchaccounts.pool_resize_start_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Number of rebooting nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.rebooting_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of reimaging nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.reimaging_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of running nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.running_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of nodes where the Start Task has failed
+  interval: ""
   metric_name: azure.batch_batchaccounts.start_task_failed_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of nodes starting
+  interval: ""
   metric_name: azure.batch_batchaccounts.starting_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Total number of tasks that have completed
+  interval: ""
   metric_name: azure.batch_batchaccounts.task_complete_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of tasks that have completed in a failed state
+  interval: ""
   metric_name: azure.batch_batchaccounts.task_fail_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Total number of tasks that have started
+  interval: ""
   metric_name: azure.batch_batchaccounts.task_start_event
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: Average number of nodes in the batch account
+  interval: ""
   metric_name: azure.batch_batchaccounts.total_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of unusable nodes
+  interval: ""
   metric_name: azure.batch_batchaccounts.unusable_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Number of nodes waiting for the Start Task to complete
+  interval: ""
   metric_name: azure.batch_batchaccounts.waiting_for_start_task_node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node

@@ -1,181 +1,277 @@
 amazon_kinesis:
-- interval: "60"
+- description: Average number of bytes per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_bytes
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Minimum number of bytes per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_bytes.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Maximum number of bytes per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_bytes.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Total number of bytes returned over all GetRecords operations
+  interval: "60"
   metric_name: aws.kinesis.get_records_bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Average number of records per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_records
   metric_type: gauge
+  per_unit_name: operation
   unit_name: record
-- interval: "60"
+- description: Minimum number of records per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_records.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Maximum number of records per GetRecords operation
+  interval: "60"
   metric_name: aws.kinesis.get_records_records.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Total number of records returned over all GetRecords operations
+  interval: "60"
   metric_name: aws.kinesis.get_records_records.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Average Difference between the current time and when the last record
+    of a GetRecords call was written to the stream.
+  interval: "60"
   metric_name: aws.kinesis.get_records_iterator_age
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: "60"
+- description: Maximum Difference between the current time and when the last record
+    of a GetRecords call was written to the stream.
+  interval: "60"
   metric_name: aws.kinesis.get_records_iterator_age.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: "60"
+- description: Difference between the current time and when the last record of a GetRecords
+    call was written to the stream.
+  interval: "60"
   metric_name: aws.kinesis.get_records_iterator_age_milliseconds
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Difference between the current time and when the last record of a GetRecords
+    call was written to the stream.
+  interval: "60"
   metric_name: aws.kinesis.get_records_iterator_age_milliseconds.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Average time taken per GetRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.get_records_latency
   metric_type: gauge
+  per_unit_name: operation
   unit_name: millisecond
-- interval: "60"
+- description: Maximum time taken per GetRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.get_records_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Number of successful GetRecords operations per stream.
+  interval: "60"
   metric_name: aws.kinesis.get_records_success
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: "60"
+- description: Average number of bytes successfully put to the Amazon Kinesis stream
+    per operation.
+  interval: "60"
   metric_name: aws.kinesis.incoming_bytes
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Total number of bytes successfully put to the Amazon Kinesis stream.
+  interval: "60"
   metric_name: aws.kinesis.incoming_bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Total number of records sucessfully put to the Amazon Kinesis stream.
+  interval: "60"
   metric_name: aws.kinesis.incoming_records
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Average number of records sucessfully put to the Amazon Kinesis stream
+    per operation.
+  interval: "60"
   metric_name: aws.kinesis.incoming_records.average
   metric_type: gauge
+  per_unit_name: operation
   unit_name: record
-- interval: "60"
+- description: Average number of bytes per PutRecord operation
+  interval: "60"
   metric_name: aws.kinesis.put_record_bytes
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Minimum number of bytes per PutRecord operation
+  interval: "60"
   metric_name: aws.kinesis.put_record_bytes.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Maximum number of bytes per PutRecord operation
+  interval: "60"
   metric_name: aws.kinesis.put_record_bytes.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Total number of bytes for all PutRecord operation
+  interval: "60"
   metric_name: aws.kinesis.put_record_bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Average time taken per PutRecord operation.
+  interval: "60"
   metric_name: aws.kinesis.put_record_latency
   metric_type: gauge
+  per_unit_name: operation
   unit_name: millisecond
-- interval: "60"
+- description: Maximum time taken per PutRecord operation.
+  interval: "60"
   metric_name: aws.kinesis.put_record_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Number of successful PutRecord operations per Amazon Kinesis stream.
+  interval: "60"
   metric_name: aws.kinesis.put_record_success
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: "60"
+- description: Total number of bytes for all PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_bytes.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Maximum number of bytes per PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_bytes.maximum
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Minimum number of bytes per PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_bytes.minimum
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Average number of bytes per PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_bytes
   metric_type: gauge
+  per_unit_name: operation
   unit_name: byte
-- interval: "60"
+- description: Average time taken per PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_latency
   metric_type: gauge
+  per_unit_name: operation
   unit_name: millisecond
-- interval: "60"
+- description: Maximum time taken for all PutRecords operation.
+  interval: "60"
   metric_name: aws.kinesis.put_records_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Number of successful PutRecords operations per Amazon Kinesis stream.
+  interval: "60"
   metric_name: aws.kinesis.put_records_success
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: "60"
+- description: Average number of records per PutRecords operation
+  interval: "60"
   metric_name: aws.kinesis.put_records_records
   metric_type: gauge
+  per_unit_name: operation
   unit_name: record
-- interval: "60"
+- description: Maximum number of records for PutRecords operations
+  interval: "60"
   metric_name: aws.kinesis.put_records_records.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Minimum number of records for PutRecords operations
+  interval: "60"
   metric_name: aws.kinesis.put_records_records.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Total number of records for PutRecords operations
+  interval: "60"
   metric_name: aws.kinesis.put_records_records.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Number of records rejected due to throttling for the stream
+  interval: "60"
   metric_name: aws.kinesis.write_provisioned_throughput_exceeded
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Average of records rejected due to throttling for the stream
+  interval: "60"
   metric_name: aws.kinesis.write_provisioned_throughput_exceeded.average
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Minimum number of records rejected due to throttling for the stream
+  interval: "60"
   metric_name: aws.kinesis.write_provisioned_throughput_exceeded.minimum
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Maximum number of records rejected due to throttling for the stream
+  interval: "60"
   metric_name: aws.kinesis.write_provisioned_throughput_exceeded.maximum
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Number of GetRecords calls throttled for the stream
+  interval: "60"
   metric_name: aws.kinesis.read_provisioned_throughput_exceeded
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Average of GetRecords calls throttled for the stream
+  interval: "60"
   metric_name: aws.kinesis.read_provisioned_throughput_exceeded.average
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Minimum number of GetRecords calls throttled for the stream
+  interval: "60"
   metric_name: aws.kinesis.read_provisioned_throughput_exceeded.minimum
   metric_type: count
+  per_unit_name: ""
   unit_name: record
-- interval: "60"
+- description: Maximum number of GetRecords calls throttled for the stream
+  interval: "60"
   metric_name: aws.kinesis.read_provisioned_throughput_exceeded.maximum
   metric_type: count
+  per_unit_name: ""
   unit_name: record

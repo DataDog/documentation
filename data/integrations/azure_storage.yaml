@@ -1,165 +1,279 @@
 azure_storage:
-- interval: "60"
+- description: 'The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousAuthorizationError. '
+  interval: "60"
   metric_name: azure.storage.anonymous_authorization_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousClientOtherError. '
+  interval: "60"
   metric_name: azure.storage.anonymous_client_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousClientTimeoutError. '
+  interval: "60"
   metric_name: azure.storage.anonymous_client_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousNetworkError.
+  interval: "60"
   metric_name: azure.storage.anonymous_network_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousServerOtherError. '
+  interval: "60"
   metric_name: azure.storage.anonymous_server_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousServerTimeoutError. '
+  interval: "60"
   metric_name: azure.storage.anonymous_server_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of successful anonymous requests made to a storage service
+    or the specified API operation.
+  interval: "60"
   metric_name: azure.storage.anonymous_success
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: The number of anonymous requests to a storage service or the specified
+    API operation that returned an AnonymousThrottlingError.
+  interval: "60"
   metric_name: azure.storage.anonymous_throttling_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of authenticated requests to a storage service or the specified
+    API operation that returned an AuthorizationError. '
+  interval: "60"
   metric_name: azure.storage.authorization_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The percentage of availability for the storage service or the specified
+    API operation. '
+  interval: "60"
   metric_name: azure.storage.availability
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The average end-to-end latency of successful requests made to a storage
+    service or the specified API operation in milliseconds
+  interval: "60"
   metric_name: azure.storage.average_e2_e_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The average latency used by Azure Storage to process a successful request
+    in milliseconds.
+  interval: "60"
   metric_name: azure.storage.average_server_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The amount of storage used by the storage account’s Blob service in
+    bytes.
+  interval: "60"
   metric_name: azure.storage.capacity
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of authenticated requests to a storage service or the specified
+    API operation that returned a ClientOtherError.
+  interval: "60"
   metric_name: azure.storage.client_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of authenticated requests to a storage service or the specified
+    API operation that returned a ClientTimeoutError. '
+  interval: "60"
   metric_name: azure.storage.client_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of blob containers in the storage account’s Blob service.
+  interval: "60"
   metric_name: azure.storage.container_count
   metric_type: count
+  per_unit_name: ""
   unit_name: container
-- interval: "60"
+- description: The number of authenticated requests to a storage service or the specified
+    API operation that returned a NetworkError.
+  interval: "60"
   metric_name: azure.storage.network_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of committed and uncommitted blobs in the storage account’s
+    Blob service.
+  interval: "60"
   metric_name: azure.storage.object_count
   metric_type: count
+  per_unit_name: ""
   unit_name: object
-- interval: "60"
+- description: The percentage of requests that failed with an AuthorizationError.
+  interval: "60"
   metric_name: azure.storage.percent_authorization_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: 'The percentage of requests that failed with a ClientOtherError. '
+  interval: "60"
   metric_name: azure.storage.percent_client_other_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The percentage of requests that failed with a NetworkError.
+  interval: "60"
   metric_name: azure.storage.percent_network_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: 'The percentage of requests that failed with a ServerOtherError. '
+  interval: "60"
   metric_name: azure.storage.percent_server_other_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The percentage of successful requests.
+  interval: "60"
   metric_name: azure.storage.percent_success
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The percentage of requests that failed with a throttling error.
+  interval: "60"
   metric_name: azure.storage.percent_throttling_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The percentage of requests that failed with a timeout error. This number
+    includes both client and server timeouts.
+  interval: "60"
   metric_name: azure.storage.percent_timeout_error
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The number of SAS requests to a storage service or the specified API
+    operation that returned an SASAuthorizationError.
+  interval: "60"
   metric_name: azure.storage.sas_authorization_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of SAS requests to a storage service or the specified API
+    operation that returned an SASClientOtherError.
+  interval: "60"
   metric_name: azure.storage.sas_client_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of SAS requests to a storage service or the specified API
+    operation that returned an SASClientTimeoutError.
+  interval: "60"
   metric_name: azure.storage.sas_client_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of SAS requests to a storage service or the specified API
+    operation that returned a SASNetworkError. '
+  interval: "60"
   metric_name: azure.storage.sas_network_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of SAS requests to a storage service or the specified API
+    operation that returned an SASServerOtherError.
+  interval: "60"
   metric_name: azure.storage.sas_server_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of SAS requests to a storage service or the specified API
+    operation that returned an SASServerTimeoutError.
+  interval: "60"
   metric_name: azure.storage.sas_server_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of successful Shared Access Signature (SAS) requests made
+    to a storage service or the specified API operation.
+  interval: "60"
   metric_name: azure.storage.sas_success
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: 'The number of SAS requests to a storage service or the specified API
+    operation that returned a SASThrottlingError. '
+  interval: "60"
   metric_name: azure.storage.sas_throttling_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of authenticated requests to a storage service or the specified
+    API operation that returned a ServerOtherError. '
+  interval: "60"
   metric_name: azure.storage.server_other_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: 'The number of authenticated requests to a storage service or the specified
+    API operation that returned a ServerTimeoutError. '
+  interval: "60"
   metric_name: azure.storage.server_timeout_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of successful requests made to a storage service or the
+    specified API operation.
+  interval: "60"
   metric_name: azure.storage.success
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: The number of authenticated requests to a storage service or the specified
+    API operation that returned a ThrottlingError
+  interval: "60"
   metric_name: azure.storage.throttling_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: The number of billable requests
+  interval: "60"
   metric_name: azure.storage.total_billable_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: The amount of egress data in bytes.
+  interval: "60"
   metric_name: azure.storage.total_egress
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The amount of ingress data in bytes.
+  interval: "60"
   metric_name: azure.storage.total_ingress
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of requests made to a storage service or the specified API
+    operation. This number includes successful and failed requests as well as requests
+    which produced errors.
+  interval: "60"
   metric_name: azure.storage.total_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request

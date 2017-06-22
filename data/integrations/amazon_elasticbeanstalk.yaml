@@ -1,5 +1,8 @@
 amazon_elasticbeanstalk:
-- interval: ""
+- description: 'The health status of your environment: 0 is OK - 1 is Info - 5 is
+    Unknown - 10 is No data - 15 is Warning - 20 is Degraded - 25 is Severe'
+  interval: ""
   metric_name: aws.elasticbeanstalk.environment_health
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""

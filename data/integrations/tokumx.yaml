@@ -1,577 +1,929 @@
 tokumx:
-- interval: ""
+- description: The number of message assertions raised per second.
+  interval: ""
   metric_name: tokumx.asserts.msgps
   metric_type: gauge
+  per_unit_name: second
   unit_name: assertion
-- interval: ""
+- description: The number of regular assertions raised per second.
+  interval: ""
   metric_name: tokumx.asserts.regularps
   metric_type: gauge
+  per_unit_name: second
   unit_name: assertion
-- interval: ""
+- description: The number of times that the rollover counters roll over per second.
+    The counters rollover to zero every 2^30 assertions.
+  interval: ""
   metric_name: tokumx.asserts.rolloversps
   metric_type: gauge
+  per_unit_name: second
   unit_name: assertion
-- interval: ""
+- description: The number of user assertions raised per second.
+  interval: ""
   metric_name: tokumx.asserts.userps
   metric_type: gauge
+  per_unit_name: second
   unit_name: assertion
-- interval: ""
+- description: The number of warnings raised per second.
+  interval: ""
   metric_name: tokumx.asserts.warningps
   metric_type: gauge
+  per_unit_name: second
   unit_name: assertion
-- interval: ""
+- description: The number of unused available incoming connections the database can
+    provide.
+  interval: ""
   metric_name: tokumx.connections.available
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: The number of connections to the database server from clients.
+  interval: ""
   metric_name: tokumx.connections.current
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: The total number of cursors that have timed out since the server process
+    started.
+  interval: ""
   metric_name: tokumx.cursors.timedOut
   metric_type: gauge
+  per_unit_name: ""
   unit_name: cursor
-- interval: ""
+- description: The number of cursors that tokumx is maintaining for clients.
+  interval: ""
   metric_name: tokumx.cursors.totalOpen
   metric_type: gauge
+  per_unit_name: ""
   unit_name: cursor
-- interval: ""
+- description: The number of checkpoints that have failed for any reason.
+  interval: ""
   metric_name: tokumx.ft.alerts.checkpointFailures
   metric_type: gauge
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: The number of requests for Document-level Locks in the locktree that
+    are waiting for other requests to release their locks.
+  interval: ""
   metric_name: tokumx.ft.alerts.locktreeRequestsPending
   metric_type: gauge
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Rate at which a thread had to wait more than 1 second for evictions
+    to create space in the cachetable for it to page in data it needed.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.cachePressure.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) that a thread had to wait more
+    than 1 second for evictions to create space in the cachetable for it to page in
+    data it needed.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.cachePressure.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which the begin checkpoint phase of checkpoint has run (these
+    should be fairly quick).
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.checkpointBegin.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) that a begin checkpoint phase
+    has spent blocking other threads.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.checkpointBegin.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which fsync operations took more than 1 second.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.fsync.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) spent performing fsync operations
+    that took longer than 1 second.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.fsync.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which a thread had to wait more than 1 second to acquire a
+    document-level lock in the locktree.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.locktreeWait.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) spent by threads waiting more
+    than 1 second to acquire a document-level lock in the locktree.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.locktreeWait.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which a thread had to wait more than 1 second to acquire a
+    document-level lock because the locktree was at the memory limit and needed to
+    run escalation.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.locktreeWaitEscalation.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) spent by threads waiting more
+    than 1 second to acquire a document-level lock because the locktree was at the
+    memory limit and needed to run escalation.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.locktreeWaitEscalation.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which a writing client had to wait more than 100ms for access
+    to the log buffer.
+  interval: ""
   metric_name: tokumx.ft.alerts.longWaitEvents.logBufferWaitps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Rate of full evictions of leaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.leaf.clean.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of full evictions of leaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.leaf.clean.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Rate of full evictions of leaf nodes that need to be written back to
+    disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.leaf.dirty.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of full evictions of leaf nodes that need to be written back to
+    disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.leaf.dirty.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) spent performing full evictions
+    leaf nodes, including the time spent serializing, compressing, and writing those
+    nodes to disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.leaf.dirty.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate of full evictions of nonleaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.nonleaf.clean.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of full evictions of nonleaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.nonleaf.clean.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Rate of full evictions of nonleaf nodes that need to be written back
+    to disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.nonleaf.dirty.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of full evictions of nonleaf nodes that need to be written back
+    to disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.nonleaf.dirty.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Fraction of time (microseconds/second) spent performing full evictions
+    nonleaf nodes, including the time spent serializing, compressing, and writing
+    those nodes to disk.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.full.nonleaf.dirty.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate of partial evictions of leaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.partial.leaf.clean.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of partial evictions of leaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.partial.leaf.clean.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Rate of partial evictions of nonleaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.partial.nonleaf.clean.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: Rate of partial evictions of nonleaf nodes.
+  interval: ""
   metric_name: tokumx.ft.cachetable.evictions.partial.nonleaf.clean.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Rate of internal cache misses. This metric is similar to MongoDB’s
+    btree misses and page faults.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: miss
-- interval: ""
+- description: Rate of full internal cache misses.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.full.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: miss
-- interval: ""
+- description: Fraction of time (microseconds/second) the database has had to wait
+    for a disk read to complete for a full cache miss.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.full.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate of partial internal cache misses.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.partial.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: miss
-- interval: ""
+- description: Fraction of time (microseconds/second) the database has had to wait
+    for a disk read to complete for a partial cache miss.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.partial.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time (microseconds/second) the database has had to wait
+    for a disk read to complete for cache misses.
+  interval: ""
   metric_name: tokumx.ft.cachetable.miss.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Total amount of uncompressed data currently in the database's internal
+    cache.
+  interval: ""
   metric_name: tokumx.ft.cachetable.size.current
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total amount of uncompressed data that will fit in TokuMX’s internal
+    cache.
+  interval: ""
   metric_name: tokumx.ft.cachetable.size.limit
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total size of nodes that are currently queued up to be written to disk
+    for eviction.
+  interval: ""
   metric_name: tokumx.ft.cachetable.size.writing
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Fraction of time (microseconds/second) that a begin checkpoint phase
+    has spent blocking other threads.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.begin.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Rate at which checkpoints are completed.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: The time spent, in seconds, by the most recently completed checkpoint.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.lastComplete.time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Fraction of time (seconds/second) spent doing checkpoints.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate at which leaf nodes are written to disk during checkpoints,
+    after compression.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.leaf.bytes.compressedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate at which leaf nodes are written to disk during checkpoints,
+    before compression.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.leaf.bytes.uncompressedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate at which leaf nodes are written to disk during checkpoints.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.leaf.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: write
-- interval: ""
+- description: The fraction of time spent writing leaf nodes to disk during checkpoints.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.leaf.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate at which nonleaf nodes are written to disk during checkpoints,
+    after compression.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.nonleaf.bytes.compressedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate at which nonleaf nodes are written to disk during checkpoints,
+    before compression.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.nonleaf.bytes.uncompressedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate at which nonleaf nodes are written to disk during checkpoints.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.nonleaf.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: write
-- interval: ""
+- description: The fraction of time spent writing nonleaf nodes to disk during checkpoints.
+  interval: ""
   metric_name: tokumx.ft.checkpoint.write.nonleaf.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The size ratio of leaf nodes before and after compression.
+  interval: ""
   metric_name: tokumx.ft.compressionRatio.leaf
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The size ratio of nonleaf nodes before and after compression.
+  interval: ""
   metric_name: tokumx.ft.compressionRatio.nonleaf
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The size ratio of nodes before and after compression.
+  interval: ""
   metric_name: tokumx.ft.compressionRatio.overall
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate at which the database flushed the operating system’s file
+    buffers to disk.
+  interval: ""
   metric_name: tokumx.ft.fsync.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The fraction of time (microseconds/second) used to fsync to disk.
+  interval: ""
   metric_name: tokumx.ft.fsync.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Total memory the locktree is currently using.
+  interval: ""
   metric_name: tokumx.ft.locktree.size.current
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum number of bytes that the locktree is allowed to use.
+  interval: ""
   metric_name: tokumx.ft.locktree.size.limit
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The rate at which the logger writes to disk.
+  interval: ""
   metric_name: tokumx.ft.log.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate of of individual log writes.
+  interval: ""
   metric_name: tokumx.ft.log.countps
   metric_type: gauge
+  per_unit_name: second
   unit_name: write
-- interval: ""
+- description: The fraction of time spent performing log writes.
+  interval: ""
   metric_name: tokumx.ft.log.timeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent compressing leaf nodes before writing them to
+    disk (for checkpoint or when evicted while dirty).
+  interval: ""
   metric_name: tokumx.ft.serializeTime.leaf.compressps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent decompressing leaf nodes before writing them
+    to disk (for checkpoint or when evicted while dirty).
+  interval: ""
   metric_name: tokumx.ft.serializeTime.leaf.decompressps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent deserializing leaf nodes and their partitions
+    after reading them off disk.
+  interval: ""
   metric_name: tokumx.ft.serializeTime.leaf.deserializeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent serializing leaf nodes and their partitions
+    after reading them off disk.
+  interval: ""
   metric_name: tokumx.ft.serializeTime.leaf.serializeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent compressing nonleaf nodes before writing them
+    to disk (for checkpoint or when evicted while dirty).
+  interval: ""
   metric_name: tokumx.ft.serializeTime.nonleaf.compressps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent decompressing nonleaf nodes before writing them
+    to disk (for checkpoint or when evicted while dirty).
+  interval: ""
   metric_name: tokumx.ft.serializeTime.nonleaf.decompressps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent deserializing nonleaf nodes and their partitions
+    after reading them off disk.
+  interval: ""
   metric_name: tokumx.ft.serializeTime.nonleaf.deserializeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: Fraction of time spent serializing nonleaf nodes and their partitions
+    after reading them off disk.
+  interval: ""
   metric_name: tokumx.ft.serializeTime.nonleaf.serializeps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The amount of memory currently used by the database process.
+  interval: ""
   metric_name: tokumx.mem.resident
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The amount of virtual memory used by the database process.
+  interval: ""
   metric_name: tokumx.mem.virtual
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The number of documents deleted per second.
+  interval: ""
   metric_name: tokumx.metrics.document.deletedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: document
-- interval: ""
+- description: The number of documents inserted per second.
+  interval: ""
   metric_name: tokumx.metrics.document.insertedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: document
-- interval: ""
+- description: The number of documents returned by queries per second.
+  interval: ""
   metric_name: tokumx.metrics.document.returnedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: document
-- interval: ""
+- description: The number of documents updated per second.
+  interval: ""
   metric_name: tokumx.metrics.document.updatedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: document
-- interval: ""
+- description: The number of getLastError operations per second with a specified write
+    concern (i.e. w) that wait for one or more members of a replica set to acknowledge
+    the write operation.
+  interval: ""
   metric_name: tokumx.metrics.getLastError.wtime.numps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of times per second that write concern operations have timed
+    out as a result of the wtimeout threshold to getLastError.
+  interval: ""
   metric_name: tokumx.metrics.getLastError.wtime.totalMillisps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: The fraction of time (ms/s) spent performing getLastError operations
+    with write concern (i.e. w) that wait for one or more members of a replica set
+    to acknowledge the write operation.
+  interval: ""
   metric_name: tokumx.metrics.getLastError.wtimeoutsps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate of queries that contain the _id field.
+  interval: ""
   metric_name: tokumx.metrics.operation.idhackps
   metric_type: gauge
+  per_unit_name: second
   unit_name: query
-- interval: ""
+- description: The rate of queries that return sorted numbers that cannot perform
+    the sort operation using an index.
+  interval: ""
   metric_name: tokumx.metrics.operation.scanAndOrderps
   metric_type: gauge
+  per_unit_name: second
   unit_name: query
-- interval: ""
+- description: The rate of index items scanned during queries and query-plan evaluation.
+  interval: ""
   metric_name: tokumx.metrics.queryExecutor.scannedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of batches applied across all databases per second.
+  interval: ""
   metric_name: tokumx.metrics.repl.apply.batches.numps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The fraction of time (ms/s) spent applying operations from the oplog.
+  interval: ""
   metric_name: tokumx.metrics.repl.apply.batches.totalMillisps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate of oplog operations.
+  interval: ""
   metric_name: tokumx.metrics.repl.apply.opsps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of operations in the oplog buffer.
+  interval: ""
   metric_name: tokumx.metrics.repl.buffer.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: The current size of the contents of the oplog buffer.
+  interval: ""
   metric_name: tokumx.metrics.repl.buffer.sizeBytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The rate at which data is read from the replication sync source.
+  interval: ""
   metric_name: tokumx.metrics.repl.network.bytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate of getmore operations.
+  interval: ""
   metric_name: tokumx.metrics.repl.network.getmores.numps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The fraction of time (ms/s) spent collecting data from getmore operations.
+  interval: ""
   metric_name: tokumx.metrics.repl.network.getmores.totalMillisps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate of operations read from the replication source.
+  interval: ""
   metric_name: tokumx.metrics.repl.network.opsps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The rate at which oplog query processes are created.
+  interval: ""
   metric_name: tokumx.metrics.repl.network.readersCreatedps
   metric_type: gauge
+  per_unit_name: second
   unit_name: process
-- interval: ""
+- description: The rate at which operations are inserted into the oplog.
+  interval: ""
   metric_name: tokumx.metrics.repl.oplog.insert.numps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The fraction of time (ms/s) spent inserting operations into the oplog.
+  interval: ""
   metric_name: tokumx.metrics.repl.oplog.insert.totalMillisps
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: ""
+- description: The rate (in bytes) at which data is inserted into the oplog.
+  interval: ""
   metric_name: tokumx.metrics.repl.oplog.insertBytesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The rate at which documents are deleted from collections with a ttl
+    index.
+  interval: ""
   metric_name: tokumx.metrics.ttl.deletedDocumentsps
   metric_type: gauge
+  per_unit_name: second
   unit_name: document
-- interval: ""
+- description: The number of times per second the background process removes documents
+    from collections with a ttl index.
+  interval: ""
   metric_name: tokumx.metrics.ttl.passesps
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: The total number of commands per second issued to the database.
+  interval: ""
   metric_name: tokumx.opcounters.commandps
   metric_type: gauge
+  per_unit_name: second
   unit_name: command
-- interval: ""
+- description: The number of delete operations per second.
+  interval: ""
   metric_name: tokumx.opcounters.deleteps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of getmore operations per second.
+  interval: ""
   metric_name: tokumx.opcounters.getmoreps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of insert operations per second.
+  interval: ""
   metric_name: tokumx.opcounters.insertps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The total number of queries per second.
+  interval: ""
   metric_name: tokumx.opcounters.queryps
   metric_type: gauge
+  per_unit_name: second
   unit_name: query
-- interval: ""
+- description: The number of update operations per second.
+  interval: ""
   metric_name: tokumx.opcounters.updateps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The total number of replicated commands issued to the database per
+    second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.commandps
   metric_type: gauge
+  per_unit_name: second
   unit_name: command
-- interval: ""
+- description: The number of replicated delete operations per second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.deleteps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of replicated getmore operations per second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.getmoreps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of replicated insert operations per second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.insertps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The total number of replicated queries per second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.queryps
   metric_type: gauge
+  per_unit_name: second
   unit_name: query
-- interval: ""
+- description: The number of replicated update operations per second.
+  interval: ""
   metric_name: tokumx.opcountersRepl.updateps
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The number of objects or documents in this collection.
+  interval: ""
   metric_name: tokumx.stats.coll.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: document
-- interval: ""
+- description: The number of indexes on this collection.
+  interval: ""
   metric_name: tokumx.stats.coll.nindexes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The number of indexes currently being built.
+  interval: ""
   metric_name: tokumx.stats.coll.nindexesbeingbuilt
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The total size in memory of all records in a collection. Does not include
+    the record header, but does include the record’s padding. Does not include the
+    size of any indexes associated with the collection.
+  interval: ""
   metric_name: tokumx.stats.coll.size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total amount of storage allocated to this collection for document
+    storage.
+  interval: ""
   metric_name: tokumx.stats.coll.storageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size of all indexes on this collection.
+  interval: ""
   metric_name: tokumx.stats.coll.totalIndexSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size on disk of all indexes on this collection (after compression).
+  interval: ""
   metric_name: tokumx.stats.coll.totalIndexStorageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size of the data held in this database including the padding
+    factor.
+  interval: ""
   metric_name: tokumx.stats.dataSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average size of each document.
+  interval: ""
   metric_name: tokumx.stats.db.avgObjSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of collections in the database.
+  interval: ""
   metric_name: tokumx.stats.db.collections
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The total size of the data held in this database including the padding
+    factor.
+  interval: ""
   metric_name: tokumx.stats.db.dataSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of indexes across all collections in the database.
+  interval: ""
   metric_name: tokumx.stats.db.indexes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The total size of all indexes created on this database.
+  interval: ""
   metric_name: tokumx.stats.db.indexSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size on disk of all indexes created on this database (after
+    compression).
+  interval: ""
   metric_name: tokumx.stats.db.indexStorageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of documents in the database across all collections.
+  interval: ""
   metric_name: tokumx.stats.db.objects
   metric_type: gauge
+  per_unit_name: ""
   unit_name: document
-- interval: ""
+- description: The total amount of space allocated to collections in this database
+    for document storage.
+  interval: ""
   metric_name: tokumx.stats.db.storageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The average size of each index entry.
+  interval: ""
   metric_name: tokumx.stats.idx.avgObjSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of documents in this index.
+  interval: ""
   metric_name: tokumx.stats.idx.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The number of delete operations performed on this index.
+  interval: ""
   metric_name: tokumx.stats.idx.deletes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: The number of insert operations performed on this index.
+  interval: ""
   metric_name: tokumx.stats.idx.inserts
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: The number of index entries scanned for queries using this index.
+  interval: ""
   metric_name: tokumx.stats.idx.nscanned
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The number of collection objects examined after scanning an index entry
+    for a query using this index.
+  interval: ""
   metric_name: tokumx.stats.idx.nscannedObjects
   metric_type: gauge
+  per_unit_name: ""
   unit_name: object
-- interval: ""
+- description: The number of query operations performed using this index.
+  interval: ""
   metric_name: tokumx.stats.idx.queries
   metric_type: gauge
+  per_unit_name: ""
   unit_name: query
-- interval: ""
+- description: The total size of this index.
+  interval: ""
   metric_name: tokumx.stats.idx.size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total size on disk of this index (after compression).
+  interval: ""
   metric_name: tokumx.stats.idx.storageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of indexes across all collections in the database.
+  interval: ""
   metric_name: tokumx.stats.indexes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: index
-- interval: ""
+- description: The total size of all indexes created on this database.
+  interval: ""
   metric_name: tokumx.stats.indexSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of documents in the database across all collections.
+  interval: ""
   metric_name: tokumx.stats.objects
   metric_type: gauge
+  per_unit_name: ""
   unit_name: document
-- interval: ""
+- description: The total amount of space allocated to collections in this database
+    for document storage.
+  interval: ""
   metric_name: tokumx.stats.storageSize
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The time that the tokumx process has been active.
+  interval: ""
   metric_name: tokumx.uptime
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second

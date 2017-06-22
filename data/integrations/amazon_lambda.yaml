@@ -1,29 +1,50 @@
 amazon_lambda:
-- interval: ""
+- description: Measures the average elapsed wall clock time from when the function
+    code starts executing as a result of an invocation to when it stops executing.
+  interval: ""
   metric_name: aws.lambda.duration
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Measures the maximum elapsed wall clock time from when the function
+    code starts executing as a result of an invocation to when it stops executing.
+  interval: ""
   metric_name: aws.lambda.duration.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Measures the minimum elapsed wall clock time from when the function
+    code starts executing as a result of an invocation to when it stops executing.
+  interval: ""
   metric_name: aws.lambda.duration.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Measures the total execution time of the lambda function executing.
+  interval: ""
   metric_name: aws.lambda.duration.sum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: Measures the number of invocations that failed due to errors in the
+    function (response code 4XX).
+  interval: "60"
   metric_name: aws.lambda.errors
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Measures the number of times a function is invoked in response to an
+    event or invocation API call.
+  interval: "60"
   metric_name: aws.lambda.invocations
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Measures the number of Lambda function invocation attempts that were
+    throttled due to invocation rates exceeding the customer’s concurrent limits (error
+    code 429). Failed invocations may trigger a retry attempt that succeeds.
+  interval: "60"
   metric_name: aws.lambda.throttles
   metric_type: count
+  per_unit_name: ""
   unit_name: ""

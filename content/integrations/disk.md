@@ -79,5 +79,5 @@ You should see something similar to the following if everything is working corre
 
 ## Metrics
 
-<%= get_metrics_from_git('system', 'system.disk, system.fs') %>
+{{< get-metrics-from-git "system" "system.disk system.fs">}}
 

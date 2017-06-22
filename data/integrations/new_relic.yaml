@@ -1,133 +1,202 @@
 new_relic:
-- interval: ""
+- description: Ratio of satisfactory response times to unsatisfactory response times
+  interval: ""
   metric_name: new_relic.apdex.score
   metric_type: gauge
+  per_unit_name: ""
   unit_name: apdex
-- interval: ""
+- description: Ratio of satisfactory response times to unsatisfactory response times
+  interval: ""
   metric_name: new_relic.application_summary.apdex_score
   metric_type: gauge
+  per_unit_name: ""
   unit_name: apdex
-- interval: ""
+- description: Threshold ratio of satisfactory response times to unsatisfactory response
+    times
+  interval: ""
   metric_name: new_relic.application_summary.apdex_target
   metric_type: gauge
+  per_unit_name: ""
   unit_name: apdex
-- interval: ""
+- description: Number of concurrent instances serving the application
+  interval: ""
   metric_name: new_relic.application_summary.concurrent_instance_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: instance
-- interval: ""
+- description: Ratio of the number of errors reported by the application to the total
+    number of served requests
+  interval: ""
   metric_name: new_relic.application_summary.error_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Number of hosts serving the application
+  interval: ""
   metric_name: new_relic.application_summary.host_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: host
-- interval: ""
+- description: Number of instances serving the application
+  interval: ""
   metric_name: new_relic.application_summary.instance_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: instance
-- interval: ""
+- description: Application response time
+  interval: ""
   metric_name: new_relic.application_summary.response_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Number of requests served by the application
+  interval: ""
   metric_name: new_relic.application_summary.throughput
   metric_type: gauge
+  per_unit_name: minute
   unit_name: request
-- interval: ""
+- description: Average time spent in database queries, exclusive of any time instrumented
+    by other metrics
+  interval: ""
   metric_name: new_relic.database.all.average_exclusive_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Number of errors reported by the application
+  interval: ""
   metric_name: new_relic.errors.all.errors_per_minute
   metric_type: gauge
+  per_unit_name: minute
   unit_name: error
-- interval: ""
+- description: Average response time of web transactions served by the application
+  interval: ""
   metric_name: new_relic.web_transaction.average_response_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Number of web transaction requests served by the application
+  interval: ""
   metric_name: new_relic.web_transaction.requests_per_minute
   metric_type: gauge
+  per_unit_name: minute
   unit_name: request
-- interval: ""
+- description: Count of monitors
+  interval: ""
   metric_name: new_relic.synthetics_summary.monitors.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: monitor
-- interval: ""
+- description: Frequency of the monitor
+  interval: ""
   metric_name: new_relic.synthetics_summary.monitors.frequency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: minute
-- interval: ""
+- description: Count of locations associated with the monitor
+  interval: ""
   metric_name: new_relic.synthetics_summary.locations.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: location
-- interval: ""
+- description: Total time for the monitor run
+  interval: ""
   metric_name: new_relic.synthetic_check.duration
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Size of the body request to the server
+  interval: ""
   metric_name: new_relic.synthetic_check.total_request_body_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Size of the header request to the server
+  interval: ""
   metric_name: new_relic.synthetic_check.total_request_header_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Size of the response header returned by the server
+  interval: ""
   metric_name: new_relic.synthetic_check.total_response_header_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Size of the response body returned by the server
+  interval: ""
   metric_name: new_relic.synthetic_check.total_response_body_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Count of monitor runs
+  interval: ""
   metric_name: new_relic.synthetic_check.count
   metric_type: count
+  per_unit_name: ""
   unit_name: check
-- interval: ""
+- description: Count of monitor failures
+  interval: ""
   metric_name: new_relic.synthetic_check.errors
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: ""
+- description: Count of requests
+  interval: ""
   metric_name: new_relic.synthetic_request.count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Average time the requests were blocked
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_blocked.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time the requests were establishing a connection
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_connect.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time the requests were resolving DNS
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_dns.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time the requests were receiving data
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_receive.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time the requests were sending data
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_send.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time establishing an SSL connection
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_ssl.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time the requests were waiting
+  interval: ""
   metric_name: new_relic.synthetic_request.duration_wait.average
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average resources load time
+  interval: ""
   metric_name: new_relic.synthetic_request.resources_load_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average time spent by third parties
+  interval: ""
   metric_name: new_relic.synthetic_request.time_spent_third_parties
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond

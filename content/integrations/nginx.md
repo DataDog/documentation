@@ -42,11 +42,11 @@ For more information on configuration, read the [stub status docs](http://nginx.
 
 **All metrics collected for NGINX and NGINX Plus**
 
-
+{{< get-metrics-from-git >}}
 
 ### NGINX (Open Source)
 
-<%= get_metrics_from_git('nginx', 'nginx.net.writing,nginx.net.waiting,nginx.net.reading,nginx.net.connections,nginx.net.request_per_s,nginx.net.conn_opened_per_s,nginx.net.conn_dropped_per_s' )%>
+{{< get-metrics-from-git "nginx" "nginx.net.writing nginx.net.waiting nginx.net.reading nginx.net.connections nginx.net.request_per_s nginx.net.conn_opened_per_s nginx.net.conn_dropped_per_s" >}}
 
 The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 

@@ -1,29 +1,43 @@
 amazon_efs:
-- interval: ""
+- description: Number of Amazon EC2 instances that are connected to a file system
+  interval: ""
   metric_name: aws.efs.client_connections
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.data_write_iobytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.data_read_iobytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.total_iobytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.metadata_iobytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.burst_credit_balance
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: aws.efs.permitted_throughput
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""

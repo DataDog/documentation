@@ -1,369 +1,1243 @@
 couchbase:
-- interval: ""
+- description: Free hard disk space
+  interval: ""
   metric_name: couchbase.hdd.free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Used hard disk space
+  interval: ""
   metric_name: couchbase.hdd.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total hard disk space
+  interval: ""
   metric_name: couchbase.hdd.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Hard disk quota
+  interval: ""
   metric_name: couchbase.hdd.quota_total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Hard disk used for data
+  interval: ""
   metric_name: couchbase.hdd.used_by_data
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: RAM in use
+  interval: ""
   metric_name: couchbase.ram.used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total RAM
+  interval: ""
   metric_name: couchbase.ram.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: RAM quota
+  interval: ""
   metric_name: couchbase.ram.quota_total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: RAM used for data
+  interval: ""
   metric_name: couchbase.ram.used_by_data
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Average background wait time
+  interval: ""
   metric_name: couchbase.by_bucket.avg_bg_wait_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Average disk commit time
+  interval: ""
   metric_name: couchbase.by_bucket.avg_disk_commit_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: 'Average disk update time '
+  interval: ""
+  metric_name: couchbase.by_bucket.avg_disk_update_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: microseconds
+- description: Bytes read
+  interval: ""
+  metric_name: couchbase.by_bucket.bg_wait_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Bytes read
+  interval: ""
   metric_name: couchbase.by_bucket.bytes_read
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Bytes written
+  interval: ""
   metric_name: couchbase.by_bucket.bytes_written
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Compare and Swap bad values
+  interval: ""
+  metric_name: couchbase.by_bucket.cas_badval
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: badval
+- description: Compare and Swap hits
+  interval: ""
   metric_name: couchbase.by_bucket.cas_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Compare and Swap misses
+  interval: ""
   metric_name: couchbase.by_bucket.cas_misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Compare and Swap gets
+  interval: ""
   metric_name: couchbase.by_bucket.cmd_get
   metric_type: gauge
+  per_unit_name: ""
   unit_name: get
-- interval: ""
+- description: Compare and swap sets
+  interval: ""
   metric_name: couchbase.by_bucket.cmd_set
   metric_type: gauge
+  per_unit_name: ""
   unit_name: set
-- interval: ""
+- description: Couch docs total size on disk in bytes
+  interval: ""
   metric_name: couchbase.by_bucket.couch_docs_actual_disk_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch docs data size in bytes
+  interval: ""
   metric_name: couchbase.by_bucket.couch_docs_data_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch docs total size in bytes
+  interval: ""
   metric_name: couchbase.by_bucket.couch_docs_disk_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch docs fragmentation
+  interval: ""
   metric_name: couchbase.by_bucket.couch_docs_fragmentation
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Size of object data for spatial views
+  interval: ""
+  metric_name: couchbase.by_bucket.couch_spatial_data_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Amount of disk space occupied by spatial views
+  interval: ""
+  metric_name: couchbase.by_bucket.couch_spatial_disk_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Spatial operations
+  interval: ""
+  metric_name: couchbase.by_bucket.couch_spatial_ops
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: operation
+- description: Couch total disk size
+  interval: ""
   metric_name: couchbase.by_bucket.couch_total_disk_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Size of object data for views
+  interval: ""
+  metric_name: couchbase.by_bucket.couch_views_data_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Amount of disk space occupied by views
+  interval: ""
+  metric_name: couchbase.by_bucket.couch_views_disk_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: View fragmentation
+  interval: ""
   metric_name: couchbase.by_bucket.couch_views_fragmentation
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: View operations
+  interval: ""
   metric_name: couchbase.by_bucket.couch_views_ops
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: CPU idle milliseconds
+  interval: ""
   metric_name: couchbase.by_bucket.cpu_idle_ms
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: CPU utilization percentage
+  interval: ""
   metric_name: couchbase.by_bucket.cpu_utilization_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Current bucket connections
+  interval: ""
   metric_name: couchbase.by_bucket.curr_connections
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
-  metric_name: couchbase.by_bucket.curr_items
-  metric_type: gauge
-  unit_name: item
-- interval: ""
+- description: Total number of items
+  interval: ""
   metric_name: couchbase.by_bucket.curr_items_tot
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of active items in memory
+  interval: ""
+  metric_name: couchbase.by_bucket.curr_items
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Decrement hits
+  interval: ""
   metric_name: couchbase.by_bucket.decr_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Decrement misses
+  interval: ""
   metric_name: couchbase.by_bucket.decr_misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Delete hits
+  interval: ""
   metric_name: couchbase.by_bucket.delete_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Delete misses
+  interval: ""
   metric_name: couchbase.by_bucket.delete_misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Disk commits
+  interval: ""
   metric_name: couchbase.by_bucket.disk_commit_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Disk updates
+  interval: ""
   metric_name: couchbase.by_bucket.disk_update_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Disk write queue depth
+  interval: ""
   metric_name: couchbase.by_bucket.disk_write_queue
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Disk reads per second
+  interval: ""
   metric_name: couchbase.by_bucket.ep_bg_fetched
   metric_type: gauge
+  per_unit_name: second
   unit_name: fetch
-- interval: ""
+- description: Cache miss rate
+  interval: ""
   metric_name: couchbase.by_bucket.ep_cache_miss_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Cache miss ratio
+  interval: ""
   metric_name: couchbase.by_bucket.ep_cache_miss_ratio
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Number of backoffs for fts DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of fts DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of fts items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of fts items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of fts producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for fts DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_fts_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of backoffs for indexes DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of indexes DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of indexes items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of indexes items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of indexes producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for indexes DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_2i_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of backoffs for other DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of other DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of other items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of other items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of other producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for other DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_other_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of backoffs for replica DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of replica DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of replica items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of replica items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of replica producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for replica DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_replica_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of backoffs for views DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of views DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of views items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of views items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of views producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for views DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_views_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of backoffs for xdcr DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_backoff
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: backoff
+- description: Number of xdcr DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of xdcr items remaining to be sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_items_remaining
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of xdcr items sent
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_items_sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of xdcr producers
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: producer
+- description: Number bytes per second being sent for xdcr DCP connections
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_dcp_xdcr_total_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total Drained items on disk queue
+  interval: ""
   metric_name: couchbase.by_bucket.ep_diskqueue_drain
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total enqueued items on disk queue
+  interval: ""
   metric_name: couchbase.by_bucket.ep_diskqueue_fill
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total number of items waiting to be written to disk
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_diskqueue_items
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of items currently being written
+  interval: ""
   metric_name: couchbase.by_bucket.ep_flusher_todo
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of times a transaction failed to commit due to storage errors
+  interval: ""
   metric_name: couchbase.by_bucket.ep_item_commit_failed
   metric_type: gauge
+  per_unit_name: ""
   unit_name: error
-- interval: ""
+- description: Total amount of user data cached in RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_kv_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The maximum amount of memory this bucket can use
+  interval: ""
   metric_name: couchbase.by_bucket.ep_max_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Mem usage high water mark for auto-evictions
+  interval: ""
   metric_name: couchbase.by_bucket.ep_mem_high_wat
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Mem usage low water mark for auto-evictions
+  interval: ""
   metric_name: couchbase.by_bucket.ep_mem_low_wat
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total amount of item metadata consuming RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_meta_data_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Number of non-resident items
+  interval: ""
   metric_name: couchbase.by_bucket.ep_num_non_resident
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of delete operations per second for this bucket as the target
+    for XDCR
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_num_ops_del_meta
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: Number of delRetMeta operations per second for this bucket as the target
+    for XDCR
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_num_ops_del_ret_meta
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: Number of read operations per second for this bucket as the target
+    for XDCR
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_num_ops_get_meta
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: Number of set operations per second for this bucket as the target for
+    XDCR
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_num_ops_set_meta
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: Number of setRetMeta operations per second for this bucket as the target
+    for XDCR
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_num_ops_set_ret_meta
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: Number of times item values got ejected from memory to disk
+  interval: ""
   metric_name: couchbase.by_bucket.ep_num_value_ejects
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of times unrecoverable OOMs happened while processing operations
+  interval: ""
   metric_name: couchbase.by_bucket.ep_oom_errors
   metric_type: gauge
+  per_unit_name: ""
   unit_name: error
-- interval: ""
+- description: Create operations
+  interval: ""
   metric_name: couchbase.by_bucket.ep_ops_create
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Update operations
+  interval: ""
   metric_name: couchbase.by_bucket.ep_ops_update
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Extra memory used by transient data like persistence queues or checkpoints
+  interval: ""
   metric_name: couchbase.by_bucket.ep_overhead
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of items queued for storage
+  interval: ""
   metric_name: couchbase.by_bucket.ep_queue_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of resident items
+  interval: ""
   metric_name: couchbase.by_bucket.ep_resident_items_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total drained items in the replica queue
+  interval: ""
   metric_name: couchbase.by_bucket.ep_tap_replica_queue_drain
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total drained items in the queue
+  interval: ""
   metric_name: couchbase.by_bucket.ep_tap_total_queue_drain
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total enqueued items in the queue
+  interval: ""
   metric_name: couchbase.by_bucket.ep_tap_total_queue_fill
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of remaining items for replication
+  interval: ""
   metric_name: couchbase.by_bucket.ep_tap_total_total_backlog_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of times recoverable OOMs happened while processing operations
+  interval: ""
   metric_name: couchbase.by_bucket.ep_tmp_oom_errors
   metric_type: gauge
+  per_unit_name: ""
   unit_name: error
-- interval: ""
+- description: Total number of vBuckets for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.ep_vb_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of evictions
+  interval: ""
   metric_name: couchbase.by_bucket.evictions
   metric_type: gauge
+  per_unit_name: ""
   unit_name: eviction
-- interval: ""
+- description: Number of get hits
+  interval: ""
   metric_name: couchbase.by_bucket.get_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Number of get misses
+  interval: ""
   metric_name: couchbase.by_bucket.get_misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Number of streaming requests now idle
+  interval: ""
+  metric_name: couchbase.by_bucket.hibernated_requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Rate of streaming request wakeups
+  interval: ""
+  metric_name: couchbase.by_bucket.hibernated_waked
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Hit ratio
+  interval: ""
   metric_name: couchbase.by_bucket.hit_ratio
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Number of increment hits
+  interval: ""
   metric_name: couchbase.by_bucket.incr_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Number of increment misses
+  interval: ""
   metric_name: couchbase.by_bucket.incr_misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Free memory
+  interval: ""
+  metric_name: couchbase.by_bucket.mem_actual_free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Used memory
+  interval: ""
+  metric_name: couchbase.by_bucket.mem_actual_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Free memory
+  interval: ""
   metric_name: couchbase.by_bucket.mem_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Total available memory
+  interval: ""
   metric_name: couchbase.by_bucket.mem_total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Engine's total memory usage (deprecated)
+  interval: ""
   metric_name: couchbase.by_bucket.mem_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: System memory usage
+  interval: ""
+  metric_name: couchbase.by_bucket.mem_used_sys
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total number of misses
+  interval: ""
   metric_name: couchbase.by_bucket.misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Total number of operations
+  interval: ""
   metric_name: couchbase.by_bucket.ops
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of page faults
+  interval: ""
   metric_name: couchbase.by_bucket.page_faults
   metric_type: gauge
+  per_unit_name: ""
   unit_name: page
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: couchbase.by_bucket.replication_docs_rep_queue
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: couchbase.by_bucket.replication_meta_latency_aggr
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Number of HTTP requests
+  interval: ""
+  metric_name: couchbase.by_bucket.rest_requests
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Total amount of swap available
+  interval: ""
+  metric_name: couchbase.by_bucket.swap_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 'Amount of swap used '
+  interval: ""
+  metric_name: couchbase.by_bucket.swap_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Number of items per second being ejected to disk from active vBuckets
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_eject
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Amount of active user data cached in RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_itm_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Amount of active item metadata consuming RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_meta_data_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of non resident vBuckets in the active state for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_num_non_resident
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of active items
+  interval: ""
   metric_name: couchbase.by_bucket.vb_active_num
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: New items per second being inserted into active vBuckets in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_ops_create
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Number of items updated on active vBucket per second for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_ops_update
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Sum of disk queue item age in milliseconds
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Total drained items in the queue
+  interval: ""
   metric_name: couchbase.by_bucket.vb_active_queue_drain
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of active items per second being put on the active item disk
+    queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_active_queue_fill
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Number of active items in the queue
+  interval: ""
   metric_name: couchbase.by_bucket.vb_active_queue_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of resident items
+  interval: ""
   metric_name: couchbase.by_bucket.vb_active_resident_items_ratio
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Average age in seconds of active items in the active item queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_avg_active_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Average age in seconds of pending items in the pending item queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_avg_pending_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Average age in seconds of replica items in the replica item queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_avg_replica_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Average age of items in the queue
+  interval: ""
   metric_name: couchbase.by_bucket.vb_avg_total_queue_age
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Number of items in pending vBuckets
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_curr_items
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of items per second being ejected to disk from pending vBuckets
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_eject
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Amount of pending user data cached in RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_itm_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Amount of pending item metadata consuming RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_meta_data_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of non resident vBuckets in the pending state for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_num_non_resident
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of pending items
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_num
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of pending create operations
+  interval: ""
   metric_name: couchbase.by_bucket.vb_pending_ops_create
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of items updated on pending vBucket per second for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_ops_update
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Sum of disk pending queue item age in milliseconds
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Total drained pending items in the queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_queue_drain
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Total enqueued pending items on disk queue
+  interval: ""
   metric_name: couchbase.by_bucket.vb_pending_queue_fill
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of pending items in the queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_queue_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of resident pending items
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_pending_resident_items_ratio
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of in memory items
+  interval: ""
   metric_name: couchbase.by_bucket.vb_replica_curr_items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of items per second being ejected to disk from replica vBuckets
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_eject
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Amount of replica user data cached in RAM in this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_itm_memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Total metadata memory
+  interval: ""
   metric_name: couchbase.by_bucket.vb_replica_meta_data_memory
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of non resident vBuckets in the replica state for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_num_non_resident
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Number of replica vBuckets
+  interval: ""
   metric_name: couchbase.by_bucket.vb_replica_num
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of replica create operations
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_ops_create
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: operation
+- description: Number of items updated on replica vBucket per second for this bucket
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_ops_update
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: item
+- description: Sum of disk replica queue item age in milliseconds
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Total drained replica items in the queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_queue_drain
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Total enqueued replica items on disk queue
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_queue_fill
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Replica items in disk queue
+  interval: ""
   metric_name: couchbase.by_bucket.vb_replica_queue_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Number of resident replica items
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_replica_resident_items_ratio
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: item
+- description: Sum of disk queue item age in milliseconds
+  interval: ""
+  metric_name: couchbase.by_bucket.vb_total_queue_age
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Number of cross-datacenter replication operations
+  interval: ""
   metric_name: couchbase.by_bucket.xdc_ops
   metric_type: gauge
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of active items in memory
+  interval: ""
   metric_name: couchbase.by_node.curr_items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Total number of items
+  interval: ""
   metric_name: couchbase.by_node.curr_items_tot
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: Couch docs data size in bytes
+  interval: ""
   metric_name: couchbase.by_node.couch_docs_data_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch docs total size on disk in bytes
+  interval: ""
   metric_name: couchbase.by_node.couch_docs_actual_disk_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch views data size on disk in bytes
+  interval: ""
   metric_name: couchbase.by_node.couch_views_data_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Couch views total size on disk in bytes
+  interval: ""
   metric_name: couchbase.by_node.couch_views_actual_disk_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of in memory items
+  interval: ""
   metric_name: couchbase.by_node.vb_replica_curr_items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.cpu_sys_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.cpu_user_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.gc_num
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.gc_pause_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.gc_pause_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.memory_system
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.memory_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.memory_usage
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_active_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_completed_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_per_sec_15min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_per_sec_1min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_per_sec_5min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_prepared_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_time_80percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_time_95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_time_99percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_time_mean
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.request_time_median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: ""
+  interval: ""
+  metric_name: couchbase.query.total_threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread

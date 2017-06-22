@@ -1,25 +1,41 @@
 amazon_cloudfront:
-- interval: "60"
+- description: The percentage of all requests for which the HTTP status code is 4xx.
+  interval: "60"
   metric_name: aws.cloudfront.4xx_error_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The percentage of all requests for which the HTTP status code is 5xx.
+  interval: "60"
   metric_name: aws.cloudfront.5xx_error_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS
+    requests.
+  interval: "60"
   metric_name: aws.cloudfront.bytes_downloaded
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of bytes uploaded to your origin with CloudFront using POST
+    and PUT requests.
+  interval: "60"
   metric_name: aws.cloudfront.bytes_uploaded
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of requests for all HTTP methods and for both HTTP and HTTPS
+    requests.
+  interval: "60"
   metric_name: aws.cloudfront.requests
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The percentage of all requests for which the HTTP status code is 4xx
+    or 5xx.
+  interval: "60"
   metric_name: aws.cloudfront.total_error_rate
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent

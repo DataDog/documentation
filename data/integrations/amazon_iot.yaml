@@ -1,109 +1,181 @@
 amazon_iot:
-- interval: "60"
+- description: AWS IoT could not authorize a connect request from a client on an MQTT
+    topic.
+  interval: "60"
   metric_name: aws.iot.connect_auth_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT rejected a connect request from a client on an MQTT topic because
+    the MQTT message did not meet the requirements defined in AWS IoT Limits.
+  interval: "60"
   metric_name: aws.iot.connect_client_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT failed to process a client connect request on an MQTT topic
+    because an internal error occurred.
+  interval: "60"
   metric_name: aws.iot.connect_server_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT successfully processed a client connect request on an MQTT
+    topic.
+  interval: "60"
   metric_name: aws.iot.connect_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT did not process a client connect request on an MQTT topic because
+    the client exceeded the allowed connect request rate.
+  interval: "60"
   metric_name: aws.iot.connect_throttle
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT received a DeleteThingShadow request.
+  interval: "60"
   metric_name: aws.iot.deletethingshadow_accepted
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT received a GetThingShadow request.
+  interval: "60"
   metric_name: aws.iot.getthingshadow_accepted
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT received a ping message.
+  interval: "60"
   metric_name: aws.iot.ping_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT could not authorize a publish request from a client.
+  interval: "60"
   metric_name: aws.iot.publishin_auth_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT rejected a publish request from a client because the MQTT message
+    did not meet the requirements defined in AWS IoT Limits.
+  interval: "60"
   metric_name: aws.iot.publishin_client_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT failed to process a client publish request because an internal
+    error occurred.
+  interval: "60"
   metric_name: aws.iot.publishin_server_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: A client successfully published an MQTT message.
+  interval: "60"
   metric_name: aws.iot.publishin_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT did not process a client publish request because the client
+    exceeded the allowed inbound message rate.
+  interval: "60"
   metric_name: aws.iot.publishin_throttle
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT could not authorize the publish request from the message broker.
+  interval: "60"
   metric_name: aws.iot.publishout_auth_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT rejected the publish out request from the message broker because
+    the MQTT message did not meet the requirements defined in AWS IoT Limits.
+  interval: "60"
   metric_name: aws.iot.publishout_client_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT successfully published a message to the connected client.
+  interval: "60"
   metric_name: aws.iot.publishout_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT executed a rule.
+  interval: "60"
   metric_name: aws.iot.rules_executed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT could not authorize a subscribe request from a client on an
+    MQTT topic.
+  interval: "60"
   metric_name: aws.iot.subscribe_auth_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT rejected a subscribe request from a client on an MQTT topic
+    because the MQTT message did not meet the requirements defined in AWS IoT Limits.
+  interval: "60"
   metric_name: aws.iot.subscribe_client_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT failed to process a client subscribe request on an MQTT topic
+    because an internal error occurred.
+  interval: "60"
   metric_name: aws.iot.subscribe_server_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT successfully processed a client subscribe request on an MQTT
+    topic.
+  interval: "60"
   metric_name: aws.iot.subscribe_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT did not process a client subscribe request on an MQTT topic
+    because the client exceeded the allowed subscribe request rate.
+  interval: "60"
   metric_name: aws.iot.subscribe_throttle
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT rejected an unsubscribe request from a client on an MQTT topic
+    because the MQTT message did not meet the requirements defined in AWS IoT Limits.
+  interval: "60"
   metric_name: aws.iot.unsubscribe_client_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT failed to process a client unsubscribe request on an MQTT topic
+    because an internal error occurred.
+  interval: "60"
   metric_name: aws.iot.unsubscribe_server_error
   metric_type: count
+  per_unit_name: ""
   unit_name: error
-- interval: "60"
+- description: AWS IoT successfully processed a client unsubscribe request on an MQTT
+    topic.
+  interval: "60"
   metric_name: aws.iot.unsubscribe_success
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT did not process a client unsubscribe request on an MQTT topic
+    because the client exceeded the allowed unsubscribe request rate.
+  interval: "60"
   metric_name: aws.iot.unsubscribe_throttle
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: AWS IoT received a UpdateThingShadow request.
+  interval: "60"
   metric_name: aws.iot.updatethingshadow_accepted
   metric_type: count
+  per_unit_name: ""
   unit_name: ""

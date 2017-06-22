@@ -1,37 +1,57 @@
 kong:
-- interval: ""
+- description: Total number of tables in the database.
+  interval: ""
   metric_name: kong.table.count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: table
-- interval: ""
+- description: Number of items in each table of the database.
+  interval: ""
   metric_name: kong.table.items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: row
-- interval: ""
+- description: Total number of accepted client connections.
+  interval: ""
   metric_name: kong.connections_accepted
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Current number of active client connections including Waiting connections.
+  interval: ""
   metric_name: kong.connections_active
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Total number of handled connections. (Same as accepts unless resource
+    limits were reached).
+  interval: ""
   metric_name: kong.connections_handled
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Current number of connections where Kong is reading the request header.
+  interval: ""
   metric_name: kong.connections_reading
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Current number of idle client connections waiting for a request.
+  interval: ""
   metric_name: kong.connections_waiting
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Current number of connections where nginx is writing the response back
+    to the client.
+  interval: ""
   metric_name: kong.connections_writing
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Total number of client requests.
+  interval: ""
   metric_name: kong.total_requests
   metric_type: gauge
+  per_unit_name: ""
   unit_name: request

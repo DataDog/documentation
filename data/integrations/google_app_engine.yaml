@@ -1,253 +1,389 @@
 google_app_engine:
-- interval: ""
+- description: Sum of key and value bytes in successful get() and contains()
+  interval: ""
   metric_name: gcp.gae.memcache.byte_hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sum of key and value sizes for all live entries currently in cache
+  interval: ""
   metric_name: gcp.gae.memcache.bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The counter of "successful" MemcacheService.get(Object) or MemcacheService.contains(Object)
+    operations
+  interval: ""
   metric_name: gcp.gae.memcache.hits
   metric_type: gauge
+  per_unit_name: ""
   unit_name: hit
-- interval: ""
+- description: Number of entries currently "alive" in the cache
+  interval: ""
   metric_name: gcp.gae.memcache.items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: The counter of "unsuccessful" MemcacheService.get(Object) or MemcacheService.contains(Object)
+    operations
+  interval: ""
   metric_name: gcp.gae.memcache.misses
   metric_type: gauge
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Milliseconds since last access of least-recently-used live entry
+  interval: ""
   metric_name: gcp.gae.memcache.oldest_item_age
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The 95th percentile estimated fractional dollar cost of this request
+  interval: ""
   metric_name: gcp.gae.requests.cost.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The average estimated fractional dollar cost of this request
+  interval: ""
   metric_name: gcp.gae.requests.cost.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The number of times the cost metric was sampled
+  interval: ""
   metric_name: gcp.gae.requests.cost.count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: The maximum estimated fractional dollar cost of this request
+  interval: ""
   metric_name: gcp.gae.requests.cost.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The minimum estimated fractional dollar cost of this request
+  interval: ""
   metric_name: gcp.gae.requests.cost.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The 95th percentile of time required to process request in seconds
+  interval: ""
   metric_name: gcp.gae.requests.latency.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The Average time required to process request in seconds
+  interval: ""
   metric_name: gcp.gae.requests.latency.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The number of times the request latency metric was sampled
+  interval: ""
   metric_name: gcp.gae.requests.latency.count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: The maximum time required to process request in seconds
+  interval: ""
   metric_name: gcp.gae.requests.latency.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The minimum time required to process request in seconds
+  interval: ""
   metric_name: gcp.gae.requests.latency.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The 95th percentile of machine cycles used to process request
+  interval: ""
   metric_name: gcp.gae.requests.mcycles.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of machine cycles used to process request
+  interval: ""
   metric_name: gcp.gae.requests.mcycles.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of times the mcycles metric was sampled
+  interval: ""
   metric_name: gcp.gae.requests.mcycles.count
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The maximum number of machine cycles used to process request
+  interval: ""
   metric_name: gcp.gae.requests.mcycles.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The minimum number of machine cycles used to process request
+  interval: ""
   metric_name: gcp.gae.requests.mcycles.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The 95th percentile of time this request spent in the pending request
+    queue
+  interval: ""
   metric_name: gcp.gae.requests.pending_time.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The Average time this request spent in the pending request queue
+  interval: ""
   metric_name: gcp.gae.requests.pending_time.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The number of times the pending request metric was sampled
+  interval: ""
   metric_name: gcp.gae.requests.pending_time.count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: The maximum time this request spent in the pending request queue
+  interval: ""
   metric_name: gcp.gae.requests.pending_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The minimum time this request spent in the pending request queue
+  interval: ""
   metric_name: gcp.gae.requests.pending_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The 95th percentile of size in bytes sent back to client by request
+  interval: ""
   metric_name: gcp.gae.requests.response_size.95percentile
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The Average size in bytes sent back to client by request
+  interval: ""
   metric_name: gcp.gae.requests.response_size.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of times the response size metric was sampled
+  interval: ""
   metric_name: gcp.gae.requests.response_size.count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: The maximum size in bytes sent back to client by request
+  interval: ""
   metric_name: gcp.gae.requests.response_size.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The minimum size in bytes sent back to client by request
+  interval: ""
   metric_name: gcp.gae.requests.response_size.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The number of tasks remaining in the queue
+  interval: ""
   metric_name: gcp.gae.task_queue.tasks
   metric_type: gauge
+  per_unit_name: ""
   unit_name: task
-- interval: ""
+- description: Interceptions performed to prevent DoS attacks.
+  interval: ""
   metric_name: gcp.gae.http.server.dos_intercept_count
   metric_type: count
+  per_unit_name: ""
   unit_name: occurrence
-- interval: ""
+- description: Failed requests due to the app being over quota.
+  interval: ""
   metric_name: gcp.gae.http.server.quota_denial_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: HTTP responses.
+  interval: ""
   metric_name: gcp.gae.http.server.response_count
   metric_type: count
+  per_unit_name: ""
   unit_name: response
-- interval: ""
+- description: Number of HTTP responses by serve style.
+  interval: ""
   metric_name: gcp.gae.http.server.response_style_count
   metric_type: count
+  per_unit_name: ""
   unit_name: response
-- interval: ""
+- description: Memcache utilization as 1/100th Memcache Compute Units.
+  interval: ""
   metric_name: gcp.gae.memcache.centi_mcu_count
   metric_type: count
+  per_unit_name: ""
   unit_name: unit
-- interval: ""
+- description: Count of memcache key operations.
+  interval: ""
   metric_name: gcp.gae.memcache.operation_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: Number of bytes received by app from the memcache API.
+  interval: ""
   metric_name: gcp.gae.memcache.received_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of bytes sent by app through the memcache API.
+  interval: ""
   metric_name: gcp.gae.memcache.sent_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: CPU usage.
+  interval: ""
   metric_name: gcp.gae.system.cpu.usage
   metric_type: gauge
+  per_unit_name: ""
   unit_name: megahertz
-- interval: ""
+- description: Number of App Engine instances.
+  interval: ""
   metric_name: gcp.gae.system.instance_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: instance
-- interval: ""
+- description: Total memory used by running instances.
+  interval: ""
   metric_name: gcp.gae.system.memory.usage
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Incoming network traffic.
+  interval: ""
   metric_name: gcp.gae.system.network.received_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Outgoing network traffic.
+  interval: ""
   metric_name: gcp.gae.system.network.sent_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Number of Cloud Tasks API calls.
+  interval: ""
   metric_name: gcp.cloudtasks.api.request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Number of task attempts.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_count
   metric_type: count
+  per_unit_name: ""
   unit_name: attempt
-- interval: ""
+- description: Average HTTP response latency.
+  interval: ""
   metric_name: gcp.gae.http.server.response_latencies.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Sample Count for HTTP response latency.
+  interval: ""
   metric_name: gcp.gae.http.server.response_latencies.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Maximum HTTP response latency.
+  interval: ""
   metric_name: gcp.gae.http.server.response_latencies.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Minimum HTTP response latency.
+  interval: ""
   metric_name: gcp.gae.http.server.response_latencies.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Sum of Squared Deviation for HTTP response latency.
+  interval: ""
   metric_name: gcp.gae.http.server.response_latencies.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Average delay between each scheduled and actual attempt times.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_delays.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Sample Count for delay between each scheduled and actual attempt times.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_delays.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Maximum delay between each scheduled and actual attempt times.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_delays.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Minimum delay between each scheduled and actual attempt times.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_delays.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Sum of Squared Deviation for delay between each scheduled and actual
+    attempt times.
+  interval: ""
   metric_name: gcp.cloudtasks.queue.task_attempt_delays.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: Total number of CPU cores allocated to an App Engine flexible environment
+    version.
+  interval: ""
   metric_name: gcp.gae.flex.cpu.reserved_cores
   metric_type: gauge
+  per_unit_name: ""
   unit_name: core
-- interval: ""
+- description: The percentage of allocated CPU in use across an App Engine flexible
+    environment version. Note that some machine types allow bursting above 100%.
+  interval: ""
   metric_name: gcp.gae.flex.cpu.utilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Count of bytes read from disk across an App Engine flexible environment
+    version.
+  interval: ""
   metric_name: gcp.gae.flex.disk.read_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Delta count of bytes written from disk across an App Engine flexible
+    environment version.
+  interval: ""
   metric_name: gcp.gae.flex.disk.write_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Count of incoming network bytes across all VMs in an App Engine flexible
+    environment version
+  interval: ""
   metric_name: gcp.gae.flex.network.received_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Count of outgoing network bytes across all VMs in an App Engine flexible
+    environment version
+  interval: ""
   metric_name: gcp.gae.flex.network.sent_bytes_count
   metric_type: count
+  per_unit_name: ""
   unit_name: byte

@@ -1,33 +1,49 @@
 consul:
-- interval: ""
+- description: '# of Nodes with service status `critical` from those registered'
+  interval: ""
   metric_name: consul.catalog.nodes_critical
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: '# of Nodes with service status `passing` from those registered'
+  interval: ""
   metric_name: consul.catalog.nodes_passing
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: '# of Nodes'
+  interval: ""
   metric_name: consul.catalog.nodes_up
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: '# of Nodes with service status `warning` from those registered'
+  interval: ""
   metric_name: consul.catalog.nodes_warning
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: ""
+- description: Total critical services on nodes
+  interval: ""
   metric_name: consul.catalog.services_critical
   metric_type: gauge
+  per_unit_name: ""
   unit_name: service
-- interval: ""
+- description: Total passing services on nodes
+  interval: ""
   metric_name: consul.catalog.services_passing
   metric_type: gauge
+  per_unit_name: ""
   unit_name: service
-- interval: ""
+- description: Total services registered on nodes
+  interval: ""
   metric_name: consul.catalog.services_up
   metric_type: gauge
+  per_unit_name: ""
   unit_name: service
-- interval: ""
+- description: Total warning services on nodes
+  interval: ""
   metric_name: consul.catalog.services_warning
   metric_type: gauge
+  per_unit_name: ""
   unit_name: service

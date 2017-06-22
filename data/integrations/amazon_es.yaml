@@ -1,177 +1,295 @@
 amazon_es:
-- interval: ""
+- description: The number of failed automated snapshots for the cluster.
+  interval: ""
   metric_name: aws.es.automated_snapshot_failure
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Indicates whether all index shards are allocated to nodes in the cluster.
+  interval: ""
   metric_name: aws.es.cluster_statusgreen
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Indicates whether both primary and replica shards of at least one index
+    are not allocated to nodes in a cluster.
+  interval: ""
   metric_name: aws.es.cluster_statusred
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Indicates whether replica shards are not allocated to nodes in a cluster.
+  interval: ""
   metric_name: aws.es.cluster_statusyellow
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The total used space in megabytes for a cluster.
+  interval: ""
   metric_name: aws.es.cluster_used_space
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The remaining CPU credits available for data nodes in the cluster.
+  interval: ""
   metric_name: aws.es.cpucredit_balance
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average percentage of CPU resources used across all nodes in the
+    cluster.
+  interval: ""
   metric_name: aws.es.cpuutilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The minimum percentage of CPU resources used by any node in the cluster.
+  interval: ""
   metric_name: aws.es.cpuutilization.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The maximum percentage of CPU resources used by any node in the cluster.
+  interval: ""
   metric_name: aws.es.cpuutilization.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total number of deleted documents across all indices in the cluster.
+  interval: ""
   metric_name: aws.es.deleted_documents
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average number of pending input and output (I/O) requests for an
+    EBS volume. across all nodes in the cluster
+  interval: ""
   metric_name: aws.es.disk_queue_depth
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The minimum number for any node in the cluster of pending input and
+    output (I/O) requests for an EBS volume.
+  interval: ""
   metric_name: aws.es.disk_queue_depth.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The maximum number for any node in the cluster of pending input and
+    output (I/O) requests for an EBS volume.
+  interval: ""
   metric_name: aws.es.disk_queue_depth.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The average free space, in megabytes, across all the data nodes in
+    a cluster.
+  interval: ""
   metric_name: aws.es.free_storage_space
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The free space, in megabytes, for the single data node with the least
+    available free space in a cluster.
+  interval: ""
   metric_name: aws.es.free_storage_space.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The free space, in megabytes, for the single data node with the most
+    available free space in a cluster.
+  interval: ""
   metric_name: aws.es.free_storage_space.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The free space, in megabytes, for all data nodes in the cluster.
+  interval: ""
   metric_name: aws.es.free_storage_space.sum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The average percentage of the Java heap used for all data nodes in
+    the cluster.
+  interval: ""
   metric_name: aws.es.jvmmemory_pressure
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The minimum percentage of the Java heap used by any data node in the
+    cluster.
+  interval: ""
   metric_name: aws.es.jvmmemory_pressure.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The maximum percentage of the Java heap used by any data node in the
+    cluster.
+  interval: ""
   metric_name: aws.es.jvmmemory_pressure.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The maximum percentage of CPU resources used by the dedicated master
+    nodes.
+  interval: ""
   metric_name: aws.es.master_cpuutilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: This metric is not relevant and can be ignored. The service does not
+    use master nodes as data nodes.
+  interval: ""
   metric_name: aws.es.master_free_storage_space
   metric_type: gauge
+  per_unit_name: ""
   unit_name: mebibyte
-- interval: ""
+- description: The maximum percentage of the Java heap used for all dedicated master
+    nodes in the cluster.
+  interval: ""
   metric_name: aws.es.master_jvmmemory_pressure
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The remaining CPU credits available for dedicated master nodes in the
+    cluster.
+  interval: ""
   metric_name: aws.es.master_cpucredit_balance
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of nodes in the Amazon ES cluster.
+  interval: ""
   metric_name: aws.es.nodes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of input and output (I/O) operations per second for read
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_iops
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The minimum number for any node of input and output (I/O) operations
+    per second for read operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_iops.minimum
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The maximum number for any node of input and output (I/O) operations
+    per second for read operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_iops.maximum
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The latency, in seconds, for read operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The minimum latency for any node, in seconds, for read operations on
+    EBS volumes.
+  interval: ""
   metric_name: aws.es.read_latency.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The maximum latency for any node, in seconds, for read operations on
+    EBS volumes.
+  interval: ""
   metric_name: aws.es.read_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The throughput, in bytes per second, for read operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_throughput
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The minimum throughput for any node, in bytes per second, for read
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_throughput.minimum
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The maximum throughput for any node, in bytes per second, for read
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.read_throughput.maximum
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The total number of searchable documents across all indices in the
+    cluster.
+  interval: ""
   metric_name: aws.es.searchable_documents
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of input and output (I/O) operations per second for write
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_iops
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The minimum number for any node of input and output (I/O) operations
+    per second for write operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_iops.minimum
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The maximum number for any node of input and output (I/O) operations
+    per second for write operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_iops.maximum
   metric_type: gauge
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The latency, in seconds, for write operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The minimum latency for any node, in seconds, for write operations
+    on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_latency.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The maximum latency for any node, in seconds, for write operations
+    on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The throughput, in bytes per second, for write operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_throughput
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The minimum throughput for any node, in bytes per second, for write
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_throughput.minimum
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The maximum throughput for any node, in bytes per second, for write
+    operations on EBS volumes.
+  interval: ""
   metric_name: aws.es.write_throughput.maximum
   metric_type: gauge
+  per_unit_name: second
   unit_name: byte

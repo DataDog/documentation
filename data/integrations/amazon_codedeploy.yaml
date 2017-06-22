@@ -1,9 +1,13 @@
 amazon_codedeploy:
-- interval: ""
+- description: Count of deployments.
+  interval: ""
   metric_name: aws.codedeploy.deployment
   metric_type: count
+  per_unit_name: ""
   unit_name: event
-- interval: ""
+- description: The run time in seconds from deployment creation to completion.
+  interval: ""
   metric_name: aws.codedeploy.deployment.run_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second

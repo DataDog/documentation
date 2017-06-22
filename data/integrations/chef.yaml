@@ -1,13 +1,19 @@
 chef:
-- interval: ""
+- description: Total time elapsed during the Chef Client Run.
+  interval: ""
   metric_name: chef.resources.elapsed_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Total count of resources managed by Chef.
+  interval: ""
   metric_name: chef.resources.total
   metric_type: gauge
+  per_unit_name: ""
   unit_name: resource
-- interval: ""
+- description: Total count of resources updated in the Chef Client Run.
+  interval: ""
   metric_name: chef.resources.updated
   metric_type: gauge
+  per_unit_name: ""
   unit_name: resource

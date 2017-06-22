@@ -1,33 +1,53 @@
 amazon_api_gateway:
-- interval: "60"
+- description: The number of client-side errors
+  interval: "60"
   metric_name: aws.apigateway.4xxerror
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: "60"
+- description: The number of server-side errors
+  interval: "60"
   metric_name: aws.apigateway.5xxerror
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: "60"
+- description: The number call to API methods
+  interval: "60"
   metric_name: aws.apigateway.count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: "60"
+- description: The number of requests served from the API cache
+  interval: "60"
   metric_name: aws.apigateway.cache_hit_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: "60"
+- description: The number of requests served from the back end when API caching is
+    enabled
+  interval: "60"
   metric_name: aws.apigateway.cache_miss_count
   metric_type: count
+  per_unit_name: ""
   unit_name: operation
-- interval: ""
+- description: The average time between when requests are received and when responses
+    returned
+  interval: ""
   metric_name: aws.apigateway.latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum time between when requests are received and when responses
+    returned
+  interval: ""
   metric_name: aws.apigateway.latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The minimum time between when requests are received and when responses
+    returned
+  interval: ""
   metric_name: aws.apigateway.latency.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond

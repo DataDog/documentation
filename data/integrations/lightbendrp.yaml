@@ -1,801 +1,1211 @@
 lightbendrp:
-- interval: ""
+- description: Total number of running actors in this actor class or group.
+  interval: ""
   metric_name: lightbend.actors.running_actors
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Maximum number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Average number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Median number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Minimum number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 75th percentile number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 95th percentile number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 98th percentile number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 99th percentile number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 99.9th percentile number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Standard deviation for the number of messages in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Maximum time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the time that messages are in an actor's mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average rate of messages processed by an actor.
+  interval: ""
   metric_name: lightbend.actors.processed_messages.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of messages processed by an actor.
+  interval: ""
   metric_name: lightbend.actors.processed_messages.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of messages processed by an actor.
+  interval: ""
   metric_name: lightbend.actors.processed_messages.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of messages processed by an actor.
+  interval: ""
   metric_name: lightbend.actors.processed_messages.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of messages processed by an actor.
+  interval: ""
   metric_name: lightbend.actors.processed_messages.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Maximum time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the time for actor message processing.
+  interval: ""
   metric_name: lightbend.actors.processing_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average rate of messages sent by an actor.
+  interval: ""
   metric_name: lightbend.actors.sent_messages.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of messages sent by an actor.
+  interval: ""
   metric_name: lightbend.actors.sent_messages.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of messages sent by an actor.
+  interval: ""
   metric_name: lightbend.actors.sent_messages.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of messages sent by an actor.
+  interval: ""
   metric_name: lightbend.actors.sent_messages.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of messages sent by an actor.
+  interval: ""
   metric_name: lightbend.actors.sent_messages.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Maximum number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Average number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Median number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Minimum number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 75th percentile number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 95th percentile number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 98th percentile number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 99th percentile number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: 99.9th percentile number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Standard deviation for the number of messages in an actor's stash.
+  interval: ""
   metric_name: lightbend.actors.stash_size.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: message
-- interval: ""
+- description: Average rate of actor failures.
+  interval: ""
   metric_name: lightbend.actors.actor_failure.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 1 minute rate of actor failures.
+  interval: ""
   metric_name: lightbend.actors.actor_failure.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 15 minute rate of actor failures.
+  interval: ""
   metric_name: lightbend.actors.actor_failure.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 5 minute rate of actor failures.
+  interval: ""
   metric_name: lightbend.actors.actor_failure.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: Total number of actor failures.
+  interval: ""
   metric_name: lightbend.actors.actor_failure.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: Average rate of actor dead letters.
+  interval: ""
   metric_name: lightbend.actors.dead_letter.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of actor dead letters.
+  interval: ""
   metric_name: lightbend.actors.dead_letter.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of actor dead letters.
+  interval: ""
   metric_name: lightbend.actors.dead_letter.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of actor dead letters.
+  interval: ""
   metric_name: lightbend.actors.dead_letter.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of actor dead letters.
+  interval: ""
   metric_name: lightbend.actors.dead_letter.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of unhandled actor messages.
+  interval: ""
   metric_name: lightbend.actors.unhandled_message.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of unhandled actor messages.
+  interval: ""
   metric_name: lightbend.actors.unhandled_message.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of unhandled actor messages.
+  interval: ""
   metric_name: lightbend.actors.unhandled_message.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of unhandled actor messages.
+  interval: ""
   metric_name: lightbend.actors.unhandled_message.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of unhandled actor messages.
+  interval: ""
   metric_name: lightbend.actors.unhandled_message.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of actor log errors.
+  interval: ""
   metric_name: lightbend.actors.log_error.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 1 minute rate of actor log errors.
+  interval: ""
   metric_name: lightbend.actors.log_error.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 15 minute rate of actor log errors.
+  interval: ""
   metric_name: lightbend.actors.log_error.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: 5 minute rate of actor log errors.
+  interval: ""
   metric_name: lightbend.actors.log_error.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: Total number of actor log errors.
+  interval: ""
   metric_name: lightbend.actors.log_error.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: error
-- interval: ""
+- description: Average rate of actor log warnings.
+  interval: ""
   metric_name: lightbend.actors.log_warning.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of actor log warnings.
+  interval: ""
   metric_name: lightbend.actors.log_warning.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of actor log warnings.
+  interval: ""
   metric_name: lightbend.actors.log_warning.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of actor log warnings.
+  interval: ""
   metric_name: lightbend.actors.log_warning.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of actor log warnings.
+  interval: ""
   metric_name: lightbend.actors.log_warning.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of threshold limit events for actor mailbox size.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size_limit.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of threshold limit events for actor mailbox size.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size_limit.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of threshold limit events for actor mailbox size.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size_limit.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of threshold limit events for actor mailbox size.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size_limit.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of threshold limit events for actor mailbox size.
+  interval: ""
   metric_name: lightbend.actors.mailbox_size_limit.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of threshold limit events for time in actor mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time_limit.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of threshold limit events for time in actor mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time_limit.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of threshold limit events for time in actor mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time_limit.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of threshold limit events for time in actor mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time_limit.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of threshold limit events for time in actor mailbox.
+  interval: ""
   metric_name: lightbend.actors.mailbox_time_limit.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of threshold limit events for actor message processing
+    time.
+  interval: ""
   metric_name: lightbend.actors.processing_time_limit.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of threshold limit events for actor message processing
+    time.
+  interval: ""
   metric_name: lightbend.actors.processing_time_limit.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of threshold limit events for actor message processing
+    time.
+  interval: ""
   metric_name: lightbend.actors.processing_time_limit.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of threshold limit events for actor message processing
+    time.
+  interval: ""
   metric_name: lightbend.actors.processing_time_limit.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of threshold limit events for actor message processing
+    time.
+  interval: ""
   metric_name: lightbend.actors.processing_time_limit.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Average rate of threshold limit events for actor stash size.
+  interval: ""
   metric_name: lightbend.actors.stash_size_limit.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of threshold limit events for actor stash size.
+  interval: ""
   metric_name: lightbend.actors.stash_size_limit.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of threshold limit events for actor stash size.
+  interval: ""
   metric_name: lightbend.actors.stash_size_limit.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of threshold limit events for actor stash size.
+  interval: ""
   metric_name: lightbend.actors.stash_size_limit.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of threshold limit events for actor stash size.
+  interval: ""
   metric_name: lightbend.actors.stash_size_limit.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Current number of tasks being processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing
   metric_type: gauge
+  per_unit_name: ""
   unit_name: task
-- interval: ""
+- description: Maximum time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the time for processing tasks in a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.processing_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Current number of tasks queued to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: task
-- interval: ""
+- description: Maximum queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile queue time for tasks waiting to be processed by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile queue time for tasks waiting to be processed by a
+    dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the queue time for tasks waiting to be processed
+    by a dispatcher.
+  interval: ""
   metric_name: lightbend.dispatchers.queue_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Parallelism setting for a fork/join thread pool.
+  interval: ""
   metric_name: lightbend.dispatchers.parallelism
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Current size of a thread pool.
+  interval: ""
   metric_name: lightbend.dispatchers.pool_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Estimate of the number of active threads in a thread pool.
+  interval: ""
   metric_name: lightbend.dispatchers.active_threads
   metric_type: gauge
+  per_unit_name: ""
   unit_name: thread
-- interval: ""
+- description: Estimate of the number of running threads (not blocked) in a fork/join
+    thread pool.
+  interval: ""
   metric_name: lightbend.dispatchers.running_threads
   metric_type: gauge
+  per_unit_name: ""
   unit_name: thread
-- interval: ""
+- description: Estimate of the number of queued tasks in a fork/join thread pool.
+  interval: ""
   metric_name: lightbend.dispatchers.queued_tasks
   metric_type: gauge
+  per_unit_name: ""
   unit_name: task
-- interval: ""
+- description: Average rate of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_messages.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_messages.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_messages.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_messages.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_messages.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Average rate of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_messages.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 1 minute rate of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_messages.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 15 minute rate of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_messages.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: 5 minute rate of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_messages.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Total number of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_messages.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Maximum size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Average size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Median size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Minimum size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 75th percentile size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 95th percentile size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 98th percentile size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 99th percentile size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 99.9th percentile size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Standard deviation for the size of remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_sent_message_size.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Average size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Median size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Minimum size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 75th percentile size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 95th percentile size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 98th percentile size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 99th percentile size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: 99.9th percentile size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Standard deviation for the size of remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_received_message_size.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the time for serialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_serialization_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Maximum time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.mean
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Median time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.median
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Minimum time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 75th percentile time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.p75
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 95th percentile time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.p95
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 98th percentile time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.p98
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99th percentile time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.p99
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: 99.9th percentile time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.p999
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Standard deviation for the time for deserialization of remote messages.
+  interval: ""
   metric_name: lightbend.actors.remote_deserialization_time.stddev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: nanosecond
-- interval: ""
+- description: Average rate of threshold limit events for large remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_sent.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of threshold limit events for large remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_sent.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of threshold limit events for large remote messages
+    sent.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_sent.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of threshold limit events for large remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_sent.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of threshold limit events for large remote messages sent.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_sent.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of threshold limit events for large remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_received.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of threshold limit events for large remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_received.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of threshold limit events for large remote messages
+    received.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_received.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of threshold limit events for large remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_received.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of threshold limit events for large remote messages received.
+  interval: ""
   metric_name: lightbend.actors.remote_large_message_received.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of Akka cluster domain events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_domain_event.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of Akka cluster domain events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_domain_event.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of Akka cluster domain events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_domain_event.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of Akka cluster domain events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_domain_event.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of Akka cluster domain events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_domain_event.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of Akka cluster member events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_member_event.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of Akka cluster member events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_member_event.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of Akka cluster member events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_member_event.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of Akka cluster member events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_member_event.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of Akka cluster member events.
+  interval: ""
   metric_name: lightbend.remote_nodes.cluster_member_event.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average rate of Akka remote node quarantined events.
+  interval: ""
   metric_name: lightbend.remote_nodes.node_quarantined_event.mean_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 1 minute rate of Akka remote node quarantined events.
+  interval: ""
   metric_name: lightbend.remote_nodes.node_quarantined_event.min1_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 15 minute rate of Akka remote node quarantined events.
+  interval: ""
   metric_name: lightbend.remote_nodes.node_quarantined_event.min15_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: 5 minute rate of Akka remote node quarantined events.
+  interval: ""
   metric_name: lightbend.remote_nodes.node_quarantined_event.min5_rate
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Total number of Akka remote node quarantined events.
+  interval: ""
   metric_name: lightbend.remote_nodes.node_quarantined_event.samples
   metric_type: gauge
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Current phi accrual value for Akka remote node failure detection.
+  interval: ""
   metric_name: lightbend.remote_nodes.phi_accrual_value
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Current phi accrual threshold value for Akka remote node failure detection.
+  interval: ""
   metric_name: lightbend.self_nodes.phi_accrual_threshold_value
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""

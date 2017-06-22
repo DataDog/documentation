@@ -1,53 +1,82 @@
 amazon_redshift:
-- interval: ""
+- description: The percentage of CPU utilization. For clusters, this metric represents
+    an aggregation of all nodes (leader and compute) CPU utilization values.
+  interval: ""
   metric_name: aws.redshift.cpuutilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The number of database connections to a cluster.
+  interval: ""
   metric_name: aws.redshift.database_connections
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Indicates the health of the cluster. 1 indicates healthy, and 0 indicates
+    unhealthy.
+  interval: ""
   metric_name: aws.redshift.health_status
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Indicates whether the cluster is in maintenance mode. 1 indicates on,
+    and 0 indicates off.
+  interval: ""
   metric_name: aws.redshift.maintenance_mode
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: The rate at which the node or cluster receives data.
+  interval: "60"
   metric_name: aws.redshift.network_receive_throughput
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: "60"
+- description: The rate at which the node or cluster writes data.
+  interval: "60"
   metric_name: aws.redshift.network_transmit_throughput
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: ""
+- description: The percent of disk space used.
+  interval: ""
   metric_name: aws.redshift.percentage_disk_space_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The average number of disk read operations per second.
+  interval: "60"
   metric_name: aws.redshift.read_iops
   metric_type: rate
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The average amount of time taken for disk read I/O operations.
+  interval: ""
   metric_name: aws.redshift.read_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: "60"
+- description: The average number of bytes read from disk per second.
+  interval: "60"
   metric_name: aws.redshift.read_throughput
   metric_type: rate
+  per_unit_name: second
   unit_name: byte
-- interval: "60"
+- description: The average number of write operations per second.
+  interval: "60"
   metric_name: aws.redshift.write_iops
   metric_type: rate
+  per_unit_name: second
   unit_name: operation
-- interval: ""
+- description: The average amount of time taken for disk write I/O operations.
+  interval: ""
   metric_name: aws.redshift.write_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: "60"
+- description: The average number of bytes written to disk per second.
+  interval: "60"
   metric_name: aws.redshift.write_throughput
   metric_type: rate
+  per_unit_name: second
   unit_name: byte

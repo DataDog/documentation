@@ -1,49 +1,73 @@
 google_cloud_datastore:
-- interval: ""
+- description: Datastore API calls.
+  interval: ""
   metric_name: gcp.datastore.api.request_count
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: ""
+- description: Datastore index writes.
+  interval: ""
   metric_name: gcp.datastore.index.write_count
   metric_type: count
+  per_unit_name: ""
   unit_name: write
-- interval: ""
+- description: Average of sizes of read entities.
+  interval: ""
   metric_name: gcp.datastore.entity.read_sizes.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sample Count for sizes of read entities.
+  interval: ""
   metric_name: gcp.datastore.entity.read_sizes.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum of sizes of read entities.
+  interval: ""
   metric_name: gcp.datastore.entity.read_sizes.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Minimum of sizes of read entities.
+  interval: ""
   metric_name: gcp.datastore.entity.read_sizes.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sum of Squared Deviation for sizes of read entities.
+  interval: ""
   metric_name: gcp.datastore.entity.read_sizes.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Average of sizes of written entities.
+  interval: ""
   metric_name: gcp.datastore.entity.write_sizes.avg
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sample Count for sizes of written entities.
+  interval: ""
   metric_name: gcp.datastore.entity.write_sizes.samplecount
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Maximum of sizes of written entities.
+  interval: ""
   metric_name: gcp.datastore.entity.write_sizes.max
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Minimum of sizes of written entities.
+  interval: ""
   metric_name: gcp.datastore.entity.write_sizes.min
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Sum of Squared Deviation for sizes of written entities.
+  interval: ""
   metric_name: gcp.datastore.entity.write_sizes.sumsqdev
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte

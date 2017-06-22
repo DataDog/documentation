@@ -1,9 +1,13 @@
 dyn:
-- interval: ""
+- description: The number of DNS queries to a given zone.
+  interval: ""
   metric_name: dyn.qps
   metric_type: gauge
+  per_unit_name: second
   unit_name: query
-- interval: ""
+- description: The number of DNS zone note changes.
+  interval: ""
   metric_name: dyn.changes
   metric_type: gauge
+  per_unit_name: second
   unit_name: event

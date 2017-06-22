@@ -1,93 +1,147 @@
 amazon_dynamodb:
-- interval: "60"
+- description: Number of failed attempts to perform conditional writes.
+  interval: "60"
   metric_name: aws.dynamodb.conditional_check_failed_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Number of read capacity units consumed over the specified time period.
+  interval: "60"
   metric_name: aws.dynamodb.consumed_read_capacity_units
   metric_type: gauge
+  per_unit_name: minute
   unit_name: unit
-- interval: "60"
+- description: Number of write capacity units consumed over the specified time period.
+  interval: "60"
   metric_name: aws.dynamodb.consumed_write_capacity_units
   metric_type: gauge
+  per_unit_name: minute
   unit_name: unit
-- interval: "60"
+- description: Number of write capacity units consumed when adding a new global secondary
+    index to a table.
+  interval: "60"
   metric_name: aws.dynamodb.online_index_consumed_write_capacity
   metric_type: gauge
+  per_unit_name: minute
   unit_name: unit
-- interval: "60"
+- description: Percentage of completion when a new global secondary index is being
+    added to a table.
+  interval: "60"
   metric_name: aws.dynamodb.online_index_percentage_progress
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: Number of write throttle events that occur when adding a new global
+    secondary index to a table.
+  interval: "60"
   metric_name: aws.dynamodb.online_index_throttle_events
   metric_type: gauge
+  per_unit_name: ""
   unit_name: event
-- interval: "60"
+- description: Number of provisioned read capacity units for a table or a global secondary
+    index.
+  interval: "60"
   metric_name: aws.dynamodb.provisioned_read_capacity_units
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit
-- interval: "60"
+- description: Number of provisioned write capacity units for a table or a global
+    secondary index.
+  interval: "60"
   metric_name: aws.dynamodb.provisioned_write_capacity_units
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit
-- interval: "60"
+- description: Number of read events that exceeded the preset provisioned throughput
+    limits in the specified time period.
+  interval: "60"
   metric_name: aws.dynamodb.read_throttle_events
   metric_type: count
+  per_unit_name: ""
   unit_name: read
-- interval: "60"
+- description: The average number of items returned by a scan or query operation.
+  interval: "60"
   metric_name: aws.dynamodb.returned_item_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: The maximum number of items returned by a scan or query operation.
+  interval: "60"
   metric_name: aws.dynamodb.returned_item_count.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: The minimum number of items returned by a scan or query operation.
+  interval: "60"
   metric_name: aws.dynamodb.returned_item_count.minimum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: The total number of items returned by a scan or query operation.
+  interval: "60"
   metric_name: aws.dynamodb.returned_item_count.sum
   metric_type: count
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: The number of scan or query operations.
+  interval: "60"
   metric_name: aws.dynamodb.returned_item_count.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: The average latency for successful requests.
+  interval: ""
   metric_name: aws.dynamodb.successful_request_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The maximum latency for successful requests.
+  interval: ""
   metric_name: aws.dynamodb.successful_request_latency.maximum
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The total number of successful requests.
+  interval: "60"
   metric_name: aws.dynamodb.successful_request_latency.samplecount
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Number of requests generating a 500 status code response.
+  interval: "60"
   metric_name: aws.dynamodb.system_errors
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Number of user requests that exceeded the preset provisioned throughput
+    limits.
+  interval: "60"
   metric_name: aws.dynamodb.throttled_requests
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Number of requests generating an HTTP 400 status code response.
+  interval: "60"
   metric_name: aws.dynamodb.user_errors
   metric_type: count
+  per_unit_name: ""
   unit_name: request
-- interval: "60"
+- description: Number of write events that exceeded the preset provisioned throughput
+    limits in the specified time period.
+  interval: "60"
   metric_name: aws.dynamodb.write_throttle_events
   metric_type: count
+  per_unit_name: ""
   unit_name: write
-- interval: "60"
+- description: Approximate size of the table (updated every 6h).
+  interval: "60"
   metric_name: aws.dynamodb.table_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Approximate number of items in table (updated every 6h).
+  interval: "60"
   metric_name: aws.dynamodb.item_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item

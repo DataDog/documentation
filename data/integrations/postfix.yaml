@@ -1,5 +1,7 @@
 postfix:
-- interval: ""
+- description: The number of mails in this queue.
+  interval: ""
   metric_name: postfix.queue.size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: email

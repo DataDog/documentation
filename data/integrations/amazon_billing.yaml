@@ -1,17 +1,26 @@
 amazon_billing:
-- interval: ""
+- description: The estimated charges for your AWS usage. This can either be estimated
+    charges for one service or a roll-up of estimated charges for all services.
+  interval: ""
   metric_name: aws.billing.estimated_charges
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The actual spending costs for your budget period
+  interval: ""
   metric_name: aws.billing.actual_spend
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The forecasted spending costs for your budget period
+  interval: ""
   metric_name: aws.billing.forecasted_spend
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar
-- interval: ""
+- description: The spending limit for your budget period
+  interval: ""
   metric_name: aws.billing.budget_limit
   metric_type: gauge
+  per_unit_name: ""
   unit_name: dollar

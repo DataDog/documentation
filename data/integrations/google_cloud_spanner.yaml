@@ -1,17 +1,25 @@
 google_cloud_spanner:
-- interval: "60"
+- description: Rate of Cloud Spanner API requests.
+  interval: "60"
   metric_name: gcp.spanner.api.request_count
   metric_type: rate
+  per_unit_name: second
   unit_name: request
-- interval: "60"
+- description: Utilization of provisioned CPU
+  interval: "60"
   metric_name: gcp.spanner.instance.cpu.utilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: fraction
-- interval: "60"
+- description: Number of nodes
+  interval: "60"
   metric_name: gcp.spanner.instance.node_count
   metric_type: gauge
+  per_unit_name: ""
   unit_name: node
-- interval: "60"
+- description: Amount of used storage in bytes
+  interval: "60"
   metric_name: gcp.spanner.instance.storage.used_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte

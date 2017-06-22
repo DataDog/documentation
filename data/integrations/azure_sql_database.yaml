@@ -1,73 +1,109 @@
 azure_sql_database:
-- interval: "60"
+- description: Count of connection attempts blocked by the firewall
+  interval: "60"
   metric_name: azure.sql_servers_databases.blocked_by_firewall
   metric_type: count
+  per_unit_name: ""
   unit_name: connection
-- interval: "60"
+- description: Count of failed connections
+  interval: "60"
   metric_name: azure.sql_servers_databases.connection_failed
   metric_type: count
+  per_unit_name: ""
   unit_name: connection
-- interval: "60"
+- description: Count of successful connections
+  interval: "60"
   metric_name: azure.sql_servers_databases.connection_successful
   metric_type: count
+  per_unit_name: ""
   unit_name: connection
-- interval: "60"
+- description: Count of deadlocks
+  interval: "60"
   metric_name: azure.sql_servers_databases.deadlock
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Database throughput units utilization limit
+  interval: ""
   metric_name: azure.sql_servers_databases.dtu_limit
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit
-- interval: ""
+- description: Database throughput units used
+  interval: ""
   metric_name: azure.sql_servers_databases.dtu_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: azure.sql_servers_databases.sessions_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Percent of the maximum size for the database used
+  interval: ""
   metric_name: azure.sql_servers_databases.storage_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Total size of the database
+  interval: ""
   metric_name: azure.sql_servers_databases.storage
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: ""
+  interval: ""
   metric_name: azure.sql_servers_databases.workers_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Average CPU utilization
+  interval: ""
   metric_name: azure.sql_servers_databases.cpu_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Average IO utilization
+  interval: ""
   metric_name: azure.sql_servers_databases.physical_data_read_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Average log utilization
+  interval: ""
   metric_name: azure.sql_servers_databases.log_write_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: In-Memory OLTP storage percent
+  interval: ""
   metric_name: azure.sql_servers_databases.xtp_storage_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Database throughput units utilization
+  interval: ""
   metric_name: azure.sql_servers_databases.dtu_consumption_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Data warehouse units utilization
+  interval: ""
   metric_name: azure.sql_servers_databases.dwu_consumption_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Data warehouse units utilization limit
+  interval: ""
   metric_name: azure.sql_servers_databases.dwu_limit
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit
-- interval: ""
+- description: Data warehouse units used
+  interval: ""
   metric_name: azure.sql_servers_databases.dwu_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: unit

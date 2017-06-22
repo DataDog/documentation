@@ -12,46 +12,51 @@
 
 {{ end }}
 
-{{ $metrics := $.Scratch.Get "integration" }}
+{{ $integration := $.Scratch.Get "integration" }}
 
-{{ $data := index $.Page.Site.Data.integrations $metrics }}
+{{ $data := index $.Page.Site.Data.integrations $integration }}
 
-{{ if and ($metrics) ($data)}}
+{{ if and ($integration) ($data) }} {{/* An integration is set and datafile exists */}}
 
-  {{ if (index $params 1 ) }}
+  {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
-    {{ $name_space := (index $params 1) }}
+      {{ $name_space := (index $params 1) }}
 
-    {{ if $metrics }}
+      {{ $data_metrics := (index $data $integration) }}
 
-    <table class="table">
-      <tbody>
-      {{ range $k, $v := (index $data $metrics) }}
+      {{ $metric_namespaces := (split $name_space " ") }}
 
-        {{ if (in $v.metric_name $name_space) }}
-
-          <tr>
-            <td>
-            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-            <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-            </td>
-          </tr>
-
-        {{ end }}
-
-
-      {{ end }}
-      </tbody>
-    </table>
-
-    {{ end }}
-
-  {{ else }}
-
-    {{ if $metrics }}
       <table class="table">
         <tbody>
-        {{ range $k, $v := (index $data $metrics) }}
+
+          {{ range $i, $m := $metric_namespaces }}
+
+            {{ range $v := $data_metrics }}
+
+              {{ if (hasPrefix $v.metric_name $m) }}
+
+                <tr>
+                  <td>
+                  <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+                  <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+                  </td>
+                </tr>
+
+              {{ end }}
+
+            {{ end }}
+
+          {{ end }}
+        </tbody>
+      </table>
+
+  {{ else }} {{/* No param set load default integration from front matter */}}
+
+    {{ if $integration }}
+
+      <table class="table">
+        <tbody>
+        {{ range $k, $v := (index $data $integration) }}
           <tr>
             <td>
             <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
@@ -64,4 +69,5 @@
     {{ end }}
 
   {{ end }}
+
 {{ end }}

@@ -1,225 +1,396 @@
 amazon_elasticache:
-- interval: "60"
+- description: Memcached - The number of bytes that have been read from the network
+    by the cache node.
+  interval: "60"
   metric_name: aws.elasticache.bytes_read_into_memcached
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Redis - The total number of bytes allocated by Redis.
+  interval: ""
   metric_name: aws.elasticache.bytes_used_for_cache
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Memcached - The number of bytes used to store cache items.
+  interval: ""
   metric_name: aws.elasticache.bytes_used_for_cache_items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Memcached - The number of bytes currently used by hash tables.
+  interval: ""
   metric_name: aws.elasticache.bytes_used_for_hash
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Memcached - The number of bytes that have been written to the network
+    by the cache node.
+  interval: "60"
   metric_name: aws.elasticache.bytes_written_out_from_memcached
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Redis - The number of successful key lookups.
+  interval: "60"
   metric_name: aws.elasticache.cache_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Redis - The number of unsuccessful key lookups.
+  interval: "60"
   metric_name: aws.elasticache.cache_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Memcached - The number of CAS (check and set) requests the cache has
+    received where the Cas value did not match the Cas value stored.
+  interval: "60"
   metric_name: aws.elasticache.cas_badval
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Memcached - The number of CAS requests the cache has received where
+    the requested key was found and the Cas value matched.
+  interval: "60"
   metric_name: aws.elasticache.cas_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of CAS requests the cache has received where
+    the key requested was not found.
+  interval: "60"
   metric_name: aws.elasticache.cas_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Memcached - The cumulative number of config get requests.
+  interval: "60"
   metric_name: aws.elasticache.cmd_config_get
   metric_type: count
+  per_unit_name: ""
   unit_name: get
-- interval: "60"
+- description: Memcached - The cumulative number of config set requests.
+  interval: "60"
   metric_name: aws.elasticache.cmd_config_set
   metric_type: count
+  per_unit_name: ""
   unit_name: set
-- interval: "60"
+- description: Memcached - The number of flush commands the cache has received.
+  interval: "60"
   metric_name: aws.elasticache.cmd_flush
   metric_type: count
+  per_unit_name: ""
   unit_name: flush
-- interval: "60"
+- description: Memcached - The number of get commands the cache has received.
+  interval: "60"
   metric_name: aws.elasticache.cmd_get
   metric_type: count
+  per_unit_name: ""
   unit_name: get
-- interval: "60"
+- description: Memcached - The number of set commands the cache has received.
+  interval: "60"
   metric_name: aws.elasticache.cmd_set
   metric_type: count
+  per_unit_name: ""
   unit_name: set
-- interval: "60"
+- description: Memcached - The cumulative number of touch requests.
+  interval: "60"
   metric_name: aws.elasticache.cmd_touch
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The percentage of CPU utilization.
+  interval: ""
   metric_name: aws.elasticache.cpuutilization
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Memcached - The current number of configurations stored.
+  interval: ""
   metric_name: aws.elasticache.curr_config
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Redis - The number of client connections, excluding connections from
+    read replicas.  Memcached - A count of the number of connections connected to
+    the cache at an instant in time.
+  interval: ""
   metric_name: aws.elasticache.curr_connections
   metric_type: gauge
+  per_unit_name: ""
   unit_name: connection
-- interval: ""
+- description: Redis - The number of items in the cache. This is derived from the
+    Redis keyspace statistic, summing all of the keys in the entire keyspace.  Memcached
+    - A count of the number of items currently stored in the cache.
+  interval: ""
   metric_name: aws.elasticache.curr_items
   metric_type: gauge
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: Memcached - The number of decrement requests the cache has received
+    where the requested key was found.
+  interval: "60"
   metric_name: aws.elasticache.decr_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of decrement requests the cache has received
+    where the requested key was not found.
+  interval: "60"
   metric_name: aws.elasticache.decr_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Memcached - The number of delete requests the cache has received where
+    the requested key was found.
+  interval: "60"
   metric_name: aws.elasticache.delete_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of delete requests the cache has received where
+    the requested key was not found.
+  interval: "60"
   metric_name: aws.elasticache.delete_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Memcached - The number of valid items evicted from the least recently
+    used cache (LRU) which were never touched after being set.
+  interval: "60"
   metric_name: aws.elasticache.evicted_unfetched
   metric_type: count
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: Redis - The number of keys that have been evicted due to the maxmemory
+    limit.  Memcached - The number of non-expired items the cache evicted to allow
+    space for new writes.
+  interval: "60"
   metric_name: aws.elasticache.evictions
   metric_type: count
+  per_unit_name: ""
   unit_name: eviction
-- interval: "60"
+- description: Memcached - The number of expired items reclaimed from the LRU which
+    were never touched after being set.
+  interval: "60"
   metric_name: aws.elasticache.expired_unfetched
   metric_type: count
+  per_unit_name: ""
   unit_name: item
-- interval: ""
+- description: The amount of free memory available on the host.
+  interval: ""
   metric_name: aws.elasticache.freeable_memory
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Memcached - The number of get requests the cache has received where
+    the key requested was found.
+  interval: "60"
   metric_name: aws.elasticache.get_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of get requests the cache has received where
+    the key requested was not found.
+  interval: "60"
   metric_name: aws.elasticache.get_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Redis - The total number of get types of commands. This is derived
+    from the Redis commandstats statistic by summing all of the get types of commands
+    (get, mget, hget, etc.)
+  interval: "60"
   metric_name: aws.elasticache.get_type_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Redis - The total number of commands that are hash-based. This is derived
+    from the Redis commandstats statistic by summing all of the commands that act
+    upon one or more hashes.
+  interval: "60"
   metric_name: aws.elasticache.hash_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Redis - The total number of HyperLogLog based commands. This is derived
+    from the Redis commandstats statistic by summing all of the pf type of commands
+    (pfadd, pfcount, pfmerge).
+  interval: "60"
   metric_name: aws.elasticache.hyper_log_log_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Memcached - The number of increment requests the cache has received
+    where the key requested was found.
+  interval: "60"
   metric_name: aws.elasticache.incr_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of increment requests the cache has received
+    where the key requested was not found.
+  interval: "60"
   metric_name: aws.elasticache.incr_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: "60"
+- description: Redis - The total number of commands that are key-based. This is derived
+    from the Redis commandstats statistic by summing all of the commands that act
+    upon one or more keys.
+  interval: "60"
   metric_name: aws.elasticache.key_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Redis - The total number of commands that are list-based. This is derived
+    from the Redis commandstats statistic by summing all of the commands that act
+    upon one or more lists.
+  interval: "60"
   metric_name: aws.elasticache.list_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: The number of bytes the host has read from the network.
+  interval: "60"
   metric_name: aws.elasticache.network_bytes_in
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The number of bytes the host has written to the network.
+  interval: "60"
   metric_name: aws.elasticache.network_bytes_out
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Redis - The total number of connections that have been accepted by
+    the server during this period.  Memcached - The number of new connections the
+    cache has received. This is derived from the memcached total_connections statistic
+    by recording the change in total_connections across a period of time. This will
+    always be at least 1, due to a connection reserved for a ElastiCache.
+  interval: "60"
   metric_name: aws.elasticache.new_connections
   metric_type: count
+  per_unit_name: ""
   unit_name: connection
-- interval: "60"
+- description: Memcached - The number of new items the cache has stored. This is derived
+    from the memcached total_items statistic by recording the change in total_items
+    across a period of time.
+  interval: "60"
   metric_name: aws.elasticache.new_items
   metric_type: count
+  per_unit_name: ""
   unit_name: item
-- interval: "60"
+- description: Redis - The total number of key expiration events.  Memcached - The
+    number of expired items the cache evicted to allow space for new writes.
+  interval: "60"
   metric_name: aws.elasticache.reclaimed
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Redis - For primaries with attached replicas, ReplicationBytes reports
+    the number of bytes that the primary is sending to all of its replicas. This metric
+    is representative of the write load on the replication group. For replicas and
+    standalone primaries, ReplicationBytes is always 0.
+  interval: ""
   metric_name: aws.elasticache.replication_bytes
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Redis - This metric is only applicable for a cache node running as
+    a read replica. It represents how far behind, in seconds, the replica is in applying
+    changes from the primary cache cluster.
+  interval: ""
   metric_name: aws.elasticache.replication_lag
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: Redis - This binary metric returns 1 whenever a background save (forked
+    or forkless) is in progress, and 0 otherwise. A background save process is typically
+    used during snapshots and syncs. These operations can cause degraded performance.
+    Using the SaveInProgress metric, you can diagnose whether or not degraded performance
+    was caused by a background save process.
+  interval: ""
   metric_name: aws.elasticache.save_in_progress
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Redis - The total number of commands that are set-based. This is derived
+    from the Redis commandstats statistic by summing all of the commands that act
+    upon one or more sets.
+  interval: "60"
   metric_name: aws.elasticache.set_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Redis - The total number of set types of commands. This is derived
+    from the Redis commandstats statistic by summing all of the set types of commands
+    (set, hset, etc.)
+  interval: "60"
   metric_name: aws.elasticache.set_type_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Memcached - The total number of slab pages that have been moved.
+  interval: "60"
   metric_name: aws.elasticache.slabs_moved
   metric_type: count
+  per_unit_name: ""
   unit_name: ""
-- interval: "60"
+- description: Redis - The total number of commands that are sorted set-based. This
+    is derived from the Redis commandstats statistic by summing all of the commands
+    that act upon one or more sorted sets.
+  interval: "60"
   metric_name: aws.elasticache.sorted_set_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: "60"
+- description: Redis - The total number of commands that are string-based. This is
+    derived from the Redis commandstats statistic by summing all of the commands that
+    act upon one or more strings.
+  interval: "60"
   metric_name: aws.elasticache.string_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: command
-- interval: ""
+- description: The amount of swap used on the host.
+  interval: ""
   metric_name: aws.elasticache.swap_usage
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: Memcached - The number of keys that have been touched and were given
+    a new expiration time.
+  interval: "60"
   metric_name: aws.elasticache.touch_hits
   metric_type: count
+  per_unit_name: ""
   unit_name: hit
-- interval: "60"
+- description: Memcached - The number of items that have been touched, but were not
+    found.
+  interval: "60"
   metric_name: aws.elasticache.touch_misses
   metric_type: count
+  per_unit_name: ""
   unit_name: miss
-- interval: ""
+- description: Memcached - The amount of unused memory the cache can use to store
+    items. This is derived from the memcached statistics limit_maxbytes and bytes
+    by subtracting bytes from limit_maxbytes.
+  interval: ""
   metric_name: aws.elasticache.unused_memory
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Redis - Returns 1 if the node is master, 0 otherwise.
+  interval: ""
   metric_name: aws.elasticache.is_master
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: Redis - The total number of geo spatial based commands.
+  interval: ""
   metric_name: aws.elasticache.geo_spatial_based_cmds
   metric_type: count
+  per_unit_name: ""
   unit_name: ""

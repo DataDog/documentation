@@ -1,77 +1,122 @@
 amazon_storage_gateway:
-- interval: ""
+- description: Percent of application reads served from the cache.
+  interval: ""
   metric_name: aws.storagegateway.cache_hit_percent
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Percent of the gateway's cache that has not been persisted to AWS.
+  interval: ""
   metric_name: aws.storagegateway.cache_percent_dirty
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: Percent use of the gateway's cache storage.
+  interval: ""
   metric_name: aws.storagegateway.cache_percent_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: "60"
+- description: The total number of compressed bytes that the gateway downloaded from
+    AWS.
+  interval: "60"
   metric_name: aws.storagegateway.cloud_bytes_downloaded
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of compressed bytes that the gateway uploaded to AWS.
+  interval: "60"
   metric_name: aws.storagegateway.cloud_bytes_uploaded
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of milliseconds spent reading data from AWS.
+  interval: ""
   metric_name: aws.storagegateway.cloud_download_latency
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: "60"
+- description: The number of bytes waiting to be written to AWS. These bytes are kept
+    in your gateway's working storage.
+  interval: "60"
   metric_name: aws.storagegateway.queued_writes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of bytes read from your on-premises applications in
+    the reporting period for all volumes in the gateway.
+  interval: "60"
   metric_name: aws.storagegateway.read_bytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of milliseconds spent to do read operations from your
+    on-premises applications for all volumes in the gateway.
+  interval: ""
   metric_name: aws.storagegateway.read_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond
-- interval: ""
+- description: The time since the last available recovery point.
+  interval: ""
   metric_name: aws.storagegateway.time_since_last_recovery_point
   metric_type: gauge
+  per_unit_name: ""
   unit_name: second
-- interval: ""
+- description: The total size of the cache in bytes. This metric applies only to the
+    gateway-cached volume setup.
+  interval: ""
   metric_name: aws.storagegateway.total_cache_size
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total amount of unused space in the gateway's upload buffer.
+  interval: ""
   metric_name: aws.storagegateway.upload_buffer_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Percent use of the gateway's upload buffer.
+  interval: ""
   metric_name: aws.storagegateway.upload_buffer_percent_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total number of bytes being used in the gateway's upload buffer.
+  interval: ""
   metric_name: aws.storagegateway.upload_buffer_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total amount of unused space in the gateway's working storage.
+  interval: ""
   metric_name: aws.storagegateway.working_storage_free
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: Percent use of the gateway's upload buffer.
+  interval: ""
   metric_name: aws.storagegateway.working_storage_percent_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: percent
-- interval: ""
+- description: The total number of bytes being used in the gateway's upload buffer.
+  interval: ""
   metric_name: aws.storagegateway.working_storage_used
   metric_type: gauge
+  per_unit_name: ""
   unit_name: byte
-- interval: "60"
+- description: The total number of bytes written to your on-premises applications
+    for all volumes in the gateway.
+  interval: "60"
   metric_name: aws.storagegateway.write_bytes
   metric_type: count
+  per_unit_name: ""
   unit_name: byte
-- interval: ""
+- description: The total number of milliseconds spent to do write operations from
+    your on-premises applications for all volumes in the gateway.
+  interval: ""
   metric_name: aws.storagegateway.write_time
   metric_type: gauge
+  per_unit_name: ""
   unit_name: millisecond

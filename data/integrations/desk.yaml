@@ -1,9 +1,13 @@
 desk:
-- interval: ""
+- description: The total number of open cases.
+  interval: ""
   metric_name: desk.all_open_cases
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""
-- interval: ""
+- description: The number of cases opened during the current day.
+  interval: ""
   metric_name: desk.cases
   metric_type: gauge
+  per_unit_name: ""
   unit_name: ""

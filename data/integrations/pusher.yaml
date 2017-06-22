@@ -1,77 +1,115 @@
 pusher:
-- interval: ""
+- description: Messages sent over time
+  interval: ""
   metric_name: pusher.messages
   metric_type: count
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: API Requests sent over time
+  interval: ""
   metric_name: pusher.messages.api_request
   metric_type: count
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Webhooks sent over time
+  interval: ""
   metric_name: pusher.messages.webhook
   metric_type: count
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Presence events sent over time
+  interval: ""
   metric_name: pusher.messages.presence_event
   metric_type: count
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Broadcast messages sent over time
+  interval: ""
   metric_name: pusher.messages.broadcast
   metric_type: count
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Client events received sent over time
+  interval: ""
   metric_name: pusher.messages.client_event.received
   metric_type: count
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Client events sent over time
+  interval: ""
   metric_name: pusher.messages.client_event.sent
   metric_type: count
+  per_unit_name: second
   unit_name: event
-- interval: ""
+- description: Average message size
+  interval: ""
   metric_name: pusher.message_size.avg
   metric_type: gauge
+  per_unit_name: message
   unit_name: byte
-- interval: ""
+- description: Maximum message size
+  interval: ""
   metric_name: pusher.message_size.max
   metric_type: gauge
+  per_unit_name: message
   unit_name: byte
-- interval: ""
+- description: 95th percentile message size
+  interval: ""
   metric_name: pusher.message_size.p95
   metric_type: gauge
+  per_unit_name: message
   unit_name: byte
-- interval: ""
+- description: Messages count sent over time
+  interval: ""
   metric_name: pusher.message_size.count
   metric_type: rate
+  per_unit_name: second
   unit_name: message
-- interval: ""
+- description: Median message size
+  interval: ""
   metric_name: pusher.message_size.median
   metric_type: gauge
+  per_unit_name: message
   unit_name: byte
-- interval: ""
+- description: Concurrent connections per second
+  interval: ""
   metric_name: pusher.connections
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Non-secure connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.non_secure
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Non-secure sockjs connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.non_secure.sockjs
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Non-secure websocket connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.non_secure.ws
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Secure connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.secure
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Secure sockjs connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.secure.sockjs
   metric_type: count
+  per_unit_name: second
   unit_name: connection
-- interval: ""
+- description: Secure websocket connections per 5 seconds
+  interval: ""
   metric_name: pusher.connections.secure.ws
   metric_type: count
+  per_unit_name: second
   unit_name: connection
