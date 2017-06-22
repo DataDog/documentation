@@ -6,47 +6,41 @@ listorder: 10
 
 Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Platforms like Docker Swarm, Kubernetes, and Amazon's ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which container types each check should apply to. The Agent enables, disables, and recompiles static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to. The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 <div class="alert alert-info">
-Autodiscovery was previously called Service Discovery. It is still known as Service Discovery in the Agent's code and in configuration options.
+Autodiscovery was previously called Service Discovery, and it is still called that in the Agent's code and in configuration options.
 </div>
 
 # How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is, like the environment in which it runs, static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously applies every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service. When an Agent check cannot connect to such a service, it's probably not because the service was re-homed somewhere else; either the service is down, or the check configuration was unable to reach the service to begin with. In any case, the Agent continues to attempt connecting to the service until an administrator steps in to troubleshoot.
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance). When an Agent check cannot connect to such a service, it's probably not because the service was re-homed somewhere else; either the service is down, or the check configuration was unable to reach the service to begin with. In any case, the Agent check retries its failed connection attempts indefinitely.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-First, Autodiscovery uses **templates** for check configuration, wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Docker Swarm deploy (and redeploy) containers on arbitrary hosts, static configuration files are not suitable for checks that collect data from network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
+First, Autodiscovery uses **templates** for check configuration, wherein two template variables—`%%host%%` and `%%port%%`—appear in place of any normally-hardcoded network option values. Because orchestration platforms like Kubernetes deploy (and redeploy) containers on arbitrary hosts, static configuration files are not suitable for checks that collect data from network endpoints. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
 
-Second, because templates don't identify specific instances of a monitored service—which host? which port?—Autodiscovery needs one or more **service identifiers** for each template so it can find real values for the template variables. For Docker, service identifiers are [image names or container labels](#service-identifiers). With identifiers in hand, Autodiscovery can figure out which IP(s) and port(s) to substitute into the template.
+Second, because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs one or more **container identifiers** for each template so it can find real values for the template variables. For Docker, container identifiers are [image names or container labels](#service-identifiers). With identifiers in hand, Autodiscovery can figure out which IP(s) and port(s) to substitute into the template.
 
 Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value (KV) stores like Consul, and, when running on Kubernetes, pod annotations.
 
 ### Different Execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it decides which checks to enable given the containers that are currently running.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it decides which checks to enable after inspecting all currently running containers.
 
-As the Agent inspects each template and its service identifiers, it builds a mapping of service identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the service identifiers (keys) in the identifier-to-template mapping. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port into the corresponding template. Then it enables the check.
+As the Agent inspects each template and its container identifiers, it builds an internal mapping of container identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the container identifiers in the identifier-to-template mapping. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port into the corresponding template. Then it enables the check.
 
-The Agent watches for Docker events—container creation, destruction, starts, and stops—and recompiles check configurations from the templates on such events. Any time Autodiscovery finds another instance of the some service it had previously generated configuration for—whether it's an additional container or the previous one redeployed—it builds and enables another static configuration.
+The Agent watches for Docker events—container creation, destruction, starts, and stops—and regenerates check configurations from the templates on such events. Any time Autodiscovery finds another instance of the same service it had previously generated configuration for—whether it's an additional container or the previous one redeployed—it builds and enables another static configuration.
 
 There are a few caveats:
 
-- The Agent caches templates it gets from KV stores. Changes to KV store templates require a restart of the Agent.
-- something about precedence of templates when multiple sources provided?
-- others?
-
----
-
-The next section clarifies this abstract description of Autodiscovery with some examples.
+- something about precedence of templates when multiple sources provided? (KV store > k8s annotations > files?)
 
 # How to set it up
 
-No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. Then you'll write check templates, storing them in one or more template sources.
+No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. Then you'll write check templates, storing them in one or more template sources. You will also provide one or more container identifiers with each template; how you'll do that depends on the template source you use.
 
 ## Running the Agent Container
 
@@ -64,7 +58,7 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
       -e SD_BACKEND=docker \
       datadog/docker-dd-agent:latest
 
-Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported environment variables.
+Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables](https://github.com/DataDog/docker-dd-agent#environment-variables).
 
 In any case, you only need to provide one environment variable to enable Autodiscovery: `SD_BACKEND=docker`. (docker is the only supported backend)
 
@@ -100,7 +94,7 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ~~~
 
-It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide one or more service identifiers to Autodiscovery. In this case, the identifier refers to the [official Docker Hub httpd](https://hub.docker.com/_/httpd/) container. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
+It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide one or more container identifiers to Autodiscovery. In this case, the identifier refers to the [official Docker Hub httpd](https://hub.docker.com/_/httpd/) container. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
 ### Template Source: Key-value Store
 
@@ -161,14 +155,14 @@ With the KV store enabled as a template source, the Agent looks for templates un
 ~~~
 /datadog/
   check_configs/
-    docker_image_1/                 # service identifier, e.g. httpd
+    docker_image_1/                 # container identifier, e.g. httpd
       - check_names: [<CHECK_NAME>] # e.g. apache
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
 ~~~
 
-Each template is defined as a three-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which was used to provide service identifiers to Autodiscovery, is not required here; for KV store template sources, service identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name; the Agent infers it from the filename.)
+Each template is defined as a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which was used to provide container identifiers to Autodiscovery, is not required here; for KV store template sources, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name; the Agent infers it from the filename.)
 
 The following etcd commands create an Apache check template equivalent to that from the previous section:
 
@@ -181,7 +175,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-The following alternative etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template:
+The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template:
 
 ~~~
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
@@ -189,7 +183,7 @@ etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
 ~~~
 
-Again, the list orders matter. The HTTP check will only work if all its elements have the same index (1) across the lists (they do).
+Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of the configuration have the same index across the three lists (they do—the index is 1).
 
 ### Template Source: Kubernetes Pod Annotations
 
@@ -204,7 +198,7 @@ annotations:
   service-discovery.datadoghq.com/<Kubernetes Container Name>.instances: '[<INSTANCE_CONFIG>]'
 ~~~
 
-It's very similar to the template format for key-value stores. Autodiscovery looks for annotation keys beginning with `service-discovery.datadoghq.com/`. Kubernetes container names function as the service identifiers.
+It's very similar to the template format for key-value stores. Autodiscovery looks for annotation keys beginning with `service-discovery.datadoghq.com/`. Kubernetes container names function as the container identifiers.
 
 The following pod annotation defines two templates—equivalent to those from the end of the previous section—for `apache` containers:
 
