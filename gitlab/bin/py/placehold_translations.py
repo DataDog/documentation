@@ -34,7 +34,6 @@ def diff_globs(base, compare):
 
 
 def create_placeholder_file(template, new_glob):
-    print("creating placeholder for {0}".format(template))
     new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
     with open(template) as o_file:
         content = o_file.read()
@@ -45,6 +44,7 @@ def create_placeholder_file(template, new_glob):
 
     with open(new_dest, 'w') as o_file:
         o_file.write(content)
+        print("creating placeholder for {0} at {1}".format(template, new_dest))
 
     return new_dest
 
