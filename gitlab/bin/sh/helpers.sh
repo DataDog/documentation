@@ -147,7 +147,7 @@ minify_html() {
 
 placehold_translations() {
 	start_step
-    placehold_translations.py -c "config.yaml" -f "content/";
+    placehold_translations.py -c "config.yaml" -f "content/" || fail_step "${FUNCNAME}";
 	pass_step "${FUNCNAME}"
 }
 

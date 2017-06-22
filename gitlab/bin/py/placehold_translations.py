@@ -34,6 +34,7 @@ def diff_globs(base, compare):
 
 
 def create_placeholder_file(template, new_glob):
+    print("creating placeholder for {0}".format(template))
     new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
     with open(template) as o_file:
         content = o_file.read()
@@ -63,6 +64,7 @@ def main():
         info = lang[l]
         lang_glob = create_glob(files_location=options["files_location"], lang=l, disclaimer=info["disclaimer"])
         diff = diff_globs(base=default_glob, compare=lang_glob)
+        print("building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
             create_placeholder_file(template=f, new_glob=lang_glob)
 
