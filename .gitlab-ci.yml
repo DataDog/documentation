@@ -62,7 +62,9 @@ build_preview:
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
   script:
     - version_static_assets
+    - placehold_translations
     - build_hugo_site
+    - minify_html
     - push_site_to_s3
     - remove_static_from_repo
     - create_artifact

@@ -145,6 +145,13 @@ minify_html() {
 }
 
 
+placehold_translations() {
+	start_step
+    placehold_translations.py -c "${ARTIFACT_RESOURCE}/config.yaml" -f "${ARTIFACT_RESOURCE}/content/";
+	pass_step "${FUNCNAME}"
+}
+
+
 push_site_to_s3() {
     # $1: BUCKET
     # $2: BRANCH
