@@ -147,7 +147,7 @@ minify_html() {
 
 placehold_translations() {
 	start_step
-    placehold_translations.py -c "${ARTIFACT_RESOURCE}/config.yaml" -f "${ARTIFACT_RESOURCE}/content/";
+    placehold_translations.py -c "config.yaml" -f "content/";
 	pass_step "${FUNCNAME}"
 }
 
