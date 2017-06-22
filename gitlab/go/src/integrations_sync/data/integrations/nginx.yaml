@@ -1,0 +1,341 @@
+nginx:
+- description: The number of connections waiting on upstream responses and/or writing
+    responses back to the client.
+  interval: ""
+  metric_name: nginx.net.writing
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of keep-alive connections waiting for work.
+  interval: ""
+  metric_name: nginx.net.waiting
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of connections reading client requets.
+  interval: ""
+  metric_name: nginx.net.reading
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The total number of active connections.
+  interval: ""
+  metric_name: nginx.net.connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Rate of requests processed.
+  interval: ""
+  metric_name: nginx.net.request_per_s
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Rate of connections opened.
+  interval: ""
+  metric_name: nginx.net.conn_opened_per_s
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Rate of connections dropped.
+  interval: ""
+  metric_name: nginx.net.conn_dropped_per_s
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: The total number of accepted client connections.
+  interval: ""
+  metric_name: nginx.connections.accepted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The current number of active client connections.
+  interval: ""
+  metric_name: nginx.connections.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The total number of dropped client connections.
+  interval: ""
+  metric_name: nginx.connections.dropped
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The current number of idle client connections.
+  interval: ""
+  metric_name: nginx.connections.idle
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The total number of configuration reloads.
+  interval: ""
+  metric_name: nginx.generation
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Time of the last reload of configuration (time since Epoch).
+  interval: ""
+  metric_name: nginx.load_timestamp
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The ID of the worker process that handled status request.
+  interval: ""
+  metric_name: nginx.pid
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total number of abnormally terminated and respawned child processes.
+  interval: ""
+  metric_name: nginx.processes.respawned
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The current number of client requests.
+  interval: ""
+  metric_name: nginx.requests.current
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The total number of client requests.
+  interval: ""
+  metric_name: nginx.requests.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The total number of requests completed without sending a response.
+  interval: ""
+  metric_name: nginx.server_zone.discarded
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The number of client requests that are currently being processed.
+  interval: ""
+  metric_name: nginx.server_zone.processing
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The total amount of data received from clients.
+  interval: ""
+  metric_name: nginx.server_zone.received
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total number of client requests received from clients.
+  interval: ""
+  metric_name: nginx.server_zone.requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The number of responses with 1xx status code.
+  interval: ""
+  metric_name: nginx.server_zone.responses.1xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 2xx status code.
+  interval: ""
+  metric_name: nginx.server_zone.responses.2xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 3xx status code.
+  interval: ""
+  metric_name: nginx.server_zone.responses.3xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 4xx status code.
+  interval: ""
+  metric_name: nginx.server_zone.responses.4xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 5xx status code.
+  interval: ""
+  metric_name: nginx.server_zone.responses.5xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The total number of responses sent to clients.
+  interval: ""
+  metric_name: nginx.server_zone.responses.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The total amount of data sent to clients.
+  interval: ""
+  metric_name: nginx.server_zone.sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total number of successful SSL handshakes.
+  interval: ""
+  metric_name: nginx.ssl.handshakes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total number of failed SSL handshakes.
+  interval: ""
+  metric_name: nginx.ssl.handshakes_failed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total number of session reuses during SSL handshake.
+  interval: ""
+  metric_name: nginx.ssl.session_reuses
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Current time since Epoch.
+  interval: ""
+  metric_name: nginx.timestamp
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The current number of idle keepalive connections.
+  interval: ""
+  metric_name: nginx.upstream.keepalive
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The current number of active connections.
+  interval: ""
+  metric_name: nginx.upstream.peers.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: A boolean value indicating whether the server is a backup server.
+  interval: ""
+  metric_name: nginx.upstream.peers.backup
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The time (since Epoch) when the server became “unavail” or “unhealthy”.
+  interval: ""
+  metric_name: nginx.upstream.peers.downstart
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Total time the server was in the “unavail” and “unhealthy” states.
+  interval: ""
+  metric_name: nginx.upstream.peers.downtime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The total number of unsuccessful attempts to communicate with the server.
+  interval: ""
+  metric_name: nginx.upstream.peers.fails
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total number of health check requests made.
+  interval: ""
+  metric_name: nginx.upstream.peers.health_checks.checks
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of failed health checks.
+  interval: ""
+  metric_name: nginx.upstream.peers.health_checks.fails
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Boolean indicating if the last health check request was successful
+    and passed tests.
+  interval: ""
+  metric_name: nginx.upstream.peers.health_checks.last_passed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: How many times the server became unhealthy (state “unhealthy”).
+  interval: ""
+  metric_name: nginx.upstream.peers.health_checks.unhealthy
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The ID of the server.
+  interval: ""
+  metric_name: nginx.upstream.peers.id
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total amount of data received from this server.
+  interval: ""
+  metric_name: nginx.upstream.peers.received
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total number of client requests forwarded to this server.
+  interval: ""
+  metric_name: nginx.upstream.peers.requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: The number of responses with 1xx status code.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.1xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 2xx status code.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.2xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 3xx status code.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.3xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 4xx status code.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.4xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The number of responses with 5xx status code.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.5xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The total number of responses obtained from this server.
+  interval: ""
+  metric_name: nginx.upstream.peers.responses.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: The time (since Epoch) when the server was last selected to process
+    a request (1.7.5).
+  interval: ""
+  metric_name: nginx.upstream.peers.selected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The total amount of data sent to this server.
+  interval: ""
+  metric_name: nginx.upstream.peers.sent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: How many times the server became unavailable for client requests (state
+    “unavail”) due to the number of unsuccessful attempts reaching the max_fails threshold.
+  interval: ""
+  metric_name: nginx.upstream.peers.unavail
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Weight of the server.
+  interval: ""
+  metric_name: nginx.upstream.peers.weight
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Version of nginx.
+  interval: ""
+  metric_name: nginx.version
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""

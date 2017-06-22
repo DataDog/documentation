@@ -1,0 +1,13 @@
+supervisord:
+- description: The number of supervisord monitored processes
+  interval: ""
+  metric_name: supervisord.process.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The process uptime
+  interval: ""
+  metric_name: supervisord.process.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second

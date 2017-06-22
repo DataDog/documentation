@@ -1,0 +1,64 @@
+sqlserver:
+- description: The ratio of data pages found and read from the buffer cache over all
+    data page requests.
+  interval: ""
+  metric_name: sqlserver.buffer.cache_hit_ratio
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Duration that a page resides in the buffer pool.
+  interval: ""
+  metric_name: sqlserver.buffer.page_life_expectancy
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: The number of batch requests per second.
+  interval: ""
+  metric_name: sqlserver.stats.batch_requests
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of SQL compilations per second.
+  interval: ""
+  metric_name: sqlserver.stats.sql_compilations
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of SQL re-compilations per second.
+  interval: ""
+  metric_name: sqlserver.stats.sql_recompilations
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of user connections.
+  interval: ""
+  metric_name: sqlserver.stats.connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of times per second that SQL Server is unable to retain
+    a lock right away for a resource.
+  interval: ""
+  metric_name: sqlserver.stats.lock_waits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: The number of page splits per second.
+  interval: ""
+  metric_name: sqlserver.access.page_splits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: operation
+- description: The number of processes blocked.
+  interval: ""
+  metric_name: sqlserver.stats.procs_blocked
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The number of pages flushed to disk per second by a checkpoint or other
+    operation that require all dirty pages to be flushed.
+  interval: ""
+  metric_name: sqlserver.buffer.checkpoint_pages
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: page

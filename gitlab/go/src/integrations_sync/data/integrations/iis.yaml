@@ -1,0 +1,131 @@
+iis:
+- description: The amount of time the IIS server has been running
+  interval: ""
+  metric_name: iis.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: The number of bytes served per second
+  interval: ""
+  metric_name: iis.net.bytes_sent
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The number of bytes received per second
+  interval: ""
+  metric_name: iis.net.bytes_rcvd
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The total number of bytes transferred per second
+  interval: ""
+  metric_name: iis.net.bytes_total
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The number of active connections
+  interval: ""
+  metric_name: iis.net.num_connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of files sent per second
+  interval: ""
+  metric_name: iis.net.files_sent
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: file
+- description: The number of files received per second
+  interval: ""
+  metric_name: iis.net.files_rcvd
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: file
+- description: The number of connection attempts per second
+  interval: ""
+  metric_name: iis.net.connection_attempts
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: The number of GET requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.get
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of POST requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.post
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of HEAD requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.head
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of PUT requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.put
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of DELETE requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.delete
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of OPTIONS requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.options
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of TRACE requests per second
+  interval: ""
+  metric_name: iis.httpd_request_method.trace
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of not found errors per second (typically reported as an
+    HTTP 404 response code)
+  interval: ""
+  metric_name: iis.errors.not_found
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of locked errors per second (typically reported as an HTTP
+    423 response code)
+  interval: ""
+  metric_name: iis.errors.locked
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: The number of requests from users over an anonymous connection per
+    second
+  interval: ""
+  metric_name: iis.users.anon
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of requests from users over a non-anonymous connection per
+    second
+  interval: ""
+  metric_name: iis.users.nonanon
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of Common Gateway Interface requests executed per second
+  interval: ""
+  metric_name: iis.requests.cgi
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The number of ISAPI requests executed per second
+  interval: ""
+  metric_name: iis.requests.isapi
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request

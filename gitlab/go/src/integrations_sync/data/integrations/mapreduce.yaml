@@ -1,0 +1,217 @@
+mapreduce:
+- description: Max elapsed time since the application started
+  interval: ""
+  metric_name: mapreduce.job.elapsed_time.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average elapsed time since the application started
+  interval: ""
+  metric_name: mapreduce.job.elapsed_time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Median elapsed time since the application started
+  interval: ""
+  metric_name: mapreduce.job.elapsed_time.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: 95th percentile elapsed time since the application started
+  interval: ""
+  metric_name: mapreduce.job.elapsed_time.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of times the elapsed time was sampled
+  interval: ""
+  metric_name: mapreduce.job.elapsed_time.count
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: ""
+- description: Total number of maps
+  interval: ""
+  metric_name: mapreduce.job.maps_total
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of completed maps
+  interval: ""
+  metric_name: mapreduce.job.maps_completed
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of reduces
+  interval: ""
+  metric_name: mapreduce.job.reduces_total
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of completed reduces
+  interval: ""
+  metric_name: mapreduce.job.reduces_completed
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: 'Number of pending maps '
+  interval: ""
+  metric_name: mapreduce.job.maps_pending
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of running maps
+  interval: ""
+  metric_name: mapreduce.job.maps_running
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of pending reduces
+  interval: ""
+  metric_name: mapreduce.job.reduces_pending
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of running reduces
+  interval: ""
+  metric_name: mapreduce.job.reduces_running
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of new reduce attempts
+  interval: ""
+  metric_name: mapreduce.job.new_reduce_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of running reduce attempts
+  interval: ""
+  metric_name: mapreduce.job.running_reduce_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed reduce attempts
+  interval: ""
+  metric_name: mapreduce.job.failed_reduce_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of killed reduce attempts
+  interval: ""
+  metric_name: mapreduce.job.killed_reduce_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of successful reduce attempts
+  interval: ""
+  metric_name: mapreduce.job.successful_reduce_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of new map attempts
+  interval: ""
+  metric_name: mapreduce.job.new_map_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of running map attempts
+  interval: ""
+  metric_name: mapreduce.job.running_map_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed map attempts
+  interval: ""
+  metric_name: mapreduce.job.failed_map_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of killed map attempts
+  interval: ""
+  metric_name: mapreduce.job.killed_map_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of successful map attempts
+  interval: ""
+  metric_name: mapreduce.job.successful_map_attempts
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Counter value of reduce tasks
+  interval: ""
+  metric_name: mapreduce.job.counter.reduce_counter_value
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Counter value of map tasks
+  interval: ""
+  metric_name: mapreduce.job.counter.map_counter_value
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Counter value of all tasks
+  interval: ""
+  metric_name: mapreduce.job.counter.total_counter_value
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Max of all map tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.map.task.elapsed_time.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average of all map tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.map.task.elapsed_time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Median of all map tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.map.task.elapsed_time.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: 95th percentile of all map tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.map.task.elapsed_time.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of times the map tasks elapsed time were sampled
+  interval: ""
+  metric_name: mapreduce.job.map.task.elapsed_time.count
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: ""
+- description: Max of all reduce tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.reduce.task.elapsed_time.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average of all reduce tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.reduce.task.elapsed_time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Median of all reduce tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.reduce.task.elapsed_time.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: 95th percentile of all reduce tasks elapsed time
+  interval: ""
+  metric_name: mapreduce.job.reduce.task.elapsed_time.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of times the reduce tasks elapsed time were sampled
+  interval: ""
+  metric_name: mapreduce.job.reduce.task.elapsed_time.count
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: ""

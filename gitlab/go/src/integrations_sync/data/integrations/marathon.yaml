@@ -1,0 +1,62 @@
+marathon:
+- description: Number of defined apps
+  interval: ""
+  metric_name: marathon.apps
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Backoff time multiplication factor for each consecutive failed task
+    launch
+  interval: ""
+  metric_name: marathon.backoffFactor
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Task backoff period
+  interval: ""
+  metric_name: marathon.backoffSeconds
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Number of CPU's this application needs per instance
+  interval: ""
+  metric_name: marathon.cpus
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Disk that is needed for the application
+  interval: ""
+  metric_name: marathon.disk
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Number of instances of this application to start
+  interval: ""
+  metric_name: marathon.instances
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Memory that is needed for the application per instance
+  interval: ""
+  metric_name: marathon.mem
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Number of tasks running
+  interval: ""
+  metric_name: marathon.tasksRunning
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: Number of tasks staged to run
+  interval: ""
+  metric_name: marathon.tasksStaged
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: Number of apps waiting for deployment
+  interval: ""
+  metric_name: marathon.queue.size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""

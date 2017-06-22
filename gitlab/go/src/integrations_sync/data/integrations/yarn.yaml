@@ -1,0 +1,230 @@
+yarn:
+- description: The number of submitted apps
+  interval: ""
+  metric_name: yarn.metrics.apps_submitted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The number of completed apps
+  interval: ""
+  metric_name: yarn.metrics.apps_completed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The number of pending apps
+  interval: ""
+  metric_name: yarn.metrics.apps_pending
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The number of running apps
+  interval: ""
+  metric_name: yarn.metrics.apps_running
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The number of failed apps
+  interval: ""
+  metric_name: yarn.metrics.apps_failed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The number of killed apps
+  interval: ""
+  metric_name: yarn.metrics.apps_killed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The size of reserved memory
+  interval: ""
+  metric_name: yarn.metrics.reserved_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The amount of available memory
+  interval: ""
+  metric_name: yarn.metrics.available_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The amount of allocated memory
+  interval: ""
+  metric_name: yarn.metrics.allocated_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The amount of total memory
+  interval: ""
+  metric_name: yarn.metrics.total_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The number of reserved virtual cores
+  interval: ""
+  metric_name: yarn.metrics.reserved_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The number of available virtual cores
+  interval: ""
+  metric_name: yarn.metrics.available_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The number of allocated virtual cores
+  interval: ""
+  metric_name: yarn.metrics.allocated_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The total number of virtual cores
+  interval: ""
+  metric_name: yarn.metrics.total_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The number of containers allocated
+  interval: ""
+  metric_name: yarn.metrics.containers_allocated
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of containers reserved
+  interval: ""
+  metric_name: yarn.metrics.containers_reserved
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of containers pending
+  interval: ""
+  metric_name: yarn.metrics.containers_pending
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total number of nodes
+  interval: ""
+  metric_name: yarn.metrics.total_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The number of active nodes
+  interval: ""
+  metric_name: yarn.metrics.active_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The number of lost nodes
+  interval: ""
+  metric_name: yarn.metrics.lost_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The number of unhealthy nodes
+  interval: ""
+  metric_name: yarn.metrics.unhealthy_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The number of decommissioned nodes
+  interval: ""
+  metric_name: yarn.metrics.decommissioned_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The number of rebooted nodes
+  interval: ""
+  metric_name: yarn.metrics.rebooted_nodes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: node
+- description: The progress of the application as a percent
+  interval: ""
+  metric_name: yarn.apps.progress
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: percent
+- description: The time in which application started (in ms since epoch)
+  interval: ""
+  metric_name: yarn.apps.started_time
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: second
+- description: The time in which the application finished (in ms since epoch)
+  interval: ""
+  metric_name: yarn.apps.finished_time
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: second
+- description: The elapsed time since the application started (in ms)
+  interval: ""
+  metric_name: yarn.apps.elapsed_time
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: second
+- description: The sum of memory in MB allocated to the applications running containers
+  interval: ""
+  metric_name: yarn.apps.allocated_mb
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The sum of virtual cores allocated to the applications running containers
+  interval: ""
+  metric_name: yarn.apps.allocated_vcores
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: core
+- description: The number of containers currently running for the application
+  interval: ""
+  metric_name: yarn.apps.running_containers
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of memory the application has allocated (megabyte-seconds)
+  interval: ""
+  metric_name: yarn.apps.memory_seconds
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: second
+- description: The amount of CPU resources the application has allocated (virtual
+    core-seconds)
+  interval: ""
+  metric_name: yarn.apps.vcore_seconds
+  metric_type: rate
+  per_unit_name: ""
+  unit_name: second
+- description: The last time the node reported its health (in ms since epoch)
+  interval: ""
+  metric_name: yarn.node.last_health_update
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The total amount of memory currently used on the node (in MB)
+  interval: ""
+  metric_name: yarn.node.used_memory_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The total amount of memory currently available on the node (in MB)
+  interval: ""
+  metric_name: yarn.node.avail_memory_mb
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The total number of vCores currently used on the node
+  interval: ""
+  metric_name: yarn.node.used_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The total number of vCores available on the node
+  interval: ""
+  metric_name: yarn.node.available_virtual_cores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The total number of containers currently running on the node
+  interval: ""
+  metric_name: yarn.node.num_containers
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""

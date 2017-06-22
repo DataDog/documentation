@@ -1,0 +1,223 @@
+mesos_slave:
+- description: Number of CPUs available
+  interval: ""
+  metric_name: mesos.stats.system.cpus_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Load average for the past 15 minutes
+  interval: ""
+  metric_name: mesos.stats.system.load_15min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Load average for the past minutes
+  interval: ""
+  metric_name: mesos.stats.system.load_1min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Load average for the past 5 minutes
+  interval: ""
+  metric_name: mesos.stats.system.load_5min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Free memory
+  interval: ""
+  metric_name: mesos.stats.system.mem_free_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total memory
+  interval: ""
+  metric_name: mesos.stats.system.mem_total_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Task cpu
+  interval: ""
+  metric_name: mesos.state.task.cpu
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Task memory
+  interval: ""
+  metric_name: mesos.state.task.mem
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Task disk
+  interval: ""
+  metric_name: mesos.state.task.disk
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Number of failed tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_failed
+  metric_type: count
+  per_unit_name: ""
+  unit_name: task
+- description: Number of finished tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_finished
+  metric_type: count
+  per_unit_name: ""
+  unit_name: task
+- description: Number of killed tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_killed
+  metric_type: count
+  per_unit_name: ""
+  unit_name: task
+- description: Number of lost tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_lost
+  metric_type: count
+  per_unit_name: ""
+  unit_name: task
+- description: Number of running tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_running
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: Number of staging tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_staging
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: Number of starting tasks
+  interval: ""
+  metric_name: mesos.slave.tasks_starting
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: Whether this slave is registered with a master
+  interval: ""
+  metric_name: mesos.stats.registered
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Slave uptime
+  interval: ""
+  metric_name: mesos.stats.uptime_secs
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Percentage of allocated CPUs
+  interval: ""
+  metric_name: mesos.slave.cpus_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: Number of allocated CPUs
+  interval: ""
+  metric_name: mesos.slave.cpus_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of CPUs
+  interval: ""
+  metric_name: mesos.slave.cpus_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Percentage of allocated disk space
+  interval: ""
+  metric_name: mesos.slave.disk_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: Allocated disk space
+  interval: ""
+  metric_name: mesos.slave.disk_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Disk space
+  interval: ""
+  metric_name: mesos.slave.disk_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Percentage of allocated memory
+  interval: ""
+  metric_name: mesos.slave.mem_percent
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: Allocated memory
+  interval: ""
+  metric_name: mesos.slave.mem_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Total memory
+  interval: ""
+  metric_name: mesos.slave.mem_total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: Number of executors registering
+  interval: ""
+  metric_name: mesos.slave.executors_registering
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of executors running
+  interval: ""
+  metric_name: mesos.slave.executors_running
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of terminated executors
+  interval: ""
+  metric_name: mesos.slave.executors_terminated
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of terminating executors
+  interval: ""
+  metric_name: mesos.slave.executors_terminating
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of active frameworks
+  interval: ""
+  metric_name: mesos.slave.frameworks_active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of invalid framework messages
+  interval: ""
+  metric_name: mesos.slave.invalid_framework_messages
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number of invalid status updates
+  interval: ""
+  metric_name: mesos.slave.invalid_status_updates
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of errors encountered during slave recovery
+  interval: ""
+  metric_name: mesos.slave.recovery_errors
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: error
+- description: Number of valid framework messages
+  interval: ""
+  metric_name: mesos.slave.valid_framework_messages
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number of valid status updates
+  interval: ""
+  metric_name: mesos.slave.valid_status_updates
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""

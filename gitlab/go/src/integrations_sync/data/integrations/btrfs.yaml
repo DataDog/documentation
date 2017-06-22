@@ -1,0 +1,25 @@
+btrfs:
+- description: The total amount of space on a device
+  interval: ""
+  metric_name: system.disk.btrfs.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The used space on a device
+  interval: ""
+  metric_name: system.disk.btrfs.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The free space on a device
+  interval: ""
+  metric_name: system.disk.btrfs.free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of space used on a device as a fraction of the total
+  interval: ""
+  metric_name: system.disk.btrfs.usage
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction

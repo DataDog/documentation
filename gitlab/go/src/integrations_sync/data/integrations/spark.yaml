@@ -1,0 +1,304 @@
+spark:
+- description: Number of tasks in the application
+  interval: ""
+  metric_name: spark.job.num_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of active tasks in the application
+  interval: ""
+  metric_name: spark.job.num_active_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of skipped tasks in the application
+  interval: ""
+  metric_name: spark.job.num_skipped_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed tasks in the application
+  interval: ""
+  metric_name: spark.job.num_failed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of active stages in the application
+  interval: ""
+  metric_name: spark.job.num_active_stages
+  metric_type: rate
+  per_unit_name: second
+  unit_name: stage
+- description: Number of completed stages in the application
+  interval: ""
+  metric_name: spark.job.num_completed_stages
+  metric_type: rate
+  per_unit_name: second
+  unit_name: stage
+- description: Number of skipped stages in the application
+  interval: ""
+  metric_name: spark.job.num_skipped_stages
+  metric_type: rate
+  per_unit_name: second
+  unit_name: stage
+- description: Number of failed stages in the application
+  interval: ""
+  metric_name: spark.job.num_failed_stages
+  metric_type: rate
+  per_unit_name: second
+  unit_name: stage
+- description: Number of active tasks in the application's stages
+  interval: ""
+  metric_name: spark.stage.num_active_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of complete tasks in the application's stages
+  interval: ""
+  metric_name: spark.stage.num_complete_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed tasks in the application's stages
+  interval: ""
+  metric_name: spark.stage.num_failed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Fraction of time (ms/s) spent by the executor in the application's
+    stages
+  interval: ""
+  metric_name: spark.stage.executor_run_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Input bytes in the application's stages
+  interval: ""
+  metric_name: spark.stage.input_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Input records in the application's stages
+  interval: ""
+  metric_name: spark.stage.input_records
+  metric_type: rate
+  per_unit_name: second
+  unit_name: record
+- description: Output bytes in the application's stages
+  interval: ""
+  metric_name: spark.stage.output_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Output records in the application's stages
+  interval: ""
+  metric_name: spark.stage.output_records
+  metric_type: rate
+  per_unit_name: second
+  unit_name: record
+- description: Number of bytes read during a shuffle in the application's stages
+  interval: ""
+  metric_name: spark.stage.shuffle_read_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of records read during a shuffle in the application's stages
+  interval: ""
+  metric_name: spark.stage.shuffle_read_records
+  metric_type: rate
+  per_unit_name: second
+  unit_name: record
+- description: Number of shuffled bytes in the application's stages
+  interval: ""
+  metric_name: spark.stage.shuffle_write_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of shuffled records in the application's stages
+  interval: ""
+  metric_name: spark.stage.shuffle_write_records
+  metric_type: rate
+  per_unit_name: second
+  unit_name: record
+- description: Number of bytes spilled to disk in the application's stages
+  interval: ""
+  metric_name: spark.stage.memory_bytes_spilled
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Max size on disk of the spilled bytes in the application's stages
+  interval: ""
+  metric_name: spark.stage.disk_bytes_spilled
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of RDD blocks in the driver
+  interval: ""
+  metric_name: spark.driver.rdd_blocks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: block
+- description: Amount of memory used in the driver
+  interval: ""
+  metric_name: spark.driver.memory_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Amount of disk used in the driver
+  interval: ""
+  metric_name: spark.driver.disk_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of active tasks in the driver
+  interval: ""
+  metric_name: spark.driver.active_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed tasks in the driver
+  interval: ""
+  metric_name: spark.driver.failed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of completed tasks in the driver
+  interval: ""
+  metric_name: spark.driver.completed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of total tasks in the driver
+  interval: ""
+  metric_name: spark.driver.total_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Fraction of time (ms/s) spent by the driver
+  interval: ""
+  metric_name: spark.driver.total_duration
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Number of input bytes in the driver
+  interval: ""
+  metric_name: spark.driver.total_input_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of bytes read during a shuffle in the driver
+  interval: ""
+  metric_name: spark.driver.total_shuffle_read
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of shuffled bytes in the driver
+  interval: ""
+  metric_name: spark.driver.total_shuffle_write
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Maximum memory used in the driver
+  interval: ""
+  metric_name: spark.driver.max_memory
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of persisted RDD blocks in the application's executors
+  interval: ""
+  metric_name: spark.executor.rdd_blocks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: block
+- description: Amount of memory used for cached RDDs in the application's executors
+  interval: ""
+  metric_name: spark.executor.memory_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Amount of disk space used by persisted RDDs in the application's executors
+  interval: ""
+  metric_name: spark.executor.disk_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of active tasks in the application's executors
+  interval: ""
+  metric_name: spark.executor.active_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of failed tasks in the application's executors
+  interval: ""
+  metric_name: spark.executor.failed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Number of completed tasks in the application's executors
+  interval: ""
+  metric_name: spark.executor.completed_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Total number of tasks in the application's executors
+  interval: ""
+  metric_name: spark.executor.total_tasks
+  metric_type: rate
+  per_unit_name: second
+  unit_name: task
+- description: Fraction of time (ms/s) spent by the application's executors executing
+    tasks
+  interval: ""
+  metric_name: spark.executor.total_duration
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Total number of input bytes in the application's executors
+  interval: ""
+  metric_name: spark.executor.total_input_bytes
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Total number of bytes read during a shuffle in the application's executors
+  interval: ""
+  metric_name: spark.executor.total_shuffle_read
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Total number of shuffled bytes in the application's executors
+  interval: ""
+  metric_name: spark.executor.total_shuffle_write
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Maximum memory available for caching RDD blocks in the application's
+    executors
+  interval: ""
+  metric_name: spark.executor_memory
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Number of persisted RDD partitions in the application
+  interval: ""
+  metric_name: spark.rdd.num_partitions
+  metric_type: rate
+  per_unit_name: second
+  unit_name: ""
+- description: Number of in-memory cached RDD partitions in the application
+  interval: ""
+  metric_name: spark.rdd.num_cached_partitions
+  metric_type: rate
+  per_unit_name: second
+  unit_name: ""
+- description: Amount of memory used in the application's persisted RDDs
+  interval: ""
+  metric_name: spark.rdd.memory_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte
+- description: Amount of disk space used by persisted RDDs in the application
+  interval: ""
+  metric_name: spark.rdd.disk_used
+  metric_type: rate
+  per_unit_name: second
+  unit_name: byte

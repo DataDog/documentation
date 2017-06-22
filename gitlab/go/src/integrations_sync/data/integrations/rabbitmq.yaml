@@ -1,0 +1,159 @@
+rabbitmq:
+- description: Used file descriptors
+  interval: ""
+  metric_name: rabbitmq.node.fd_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Memory used in bytes
+  interval: ""
+  metric_name: rabbitmq.node.mem_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average number of Erlang processes waiting to run
+  interval: ""
+  metric_name: rabbitmq.node.run_queue
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: Number of file descriptors used as sockets
+  interval: ""
+  metric_name: rabbitmq.node.sockets_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of network partitions this node is seeing
+  interval: ""
+  metric_name: rabbitmq.node.partitions
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of active consumers, consumers that can immediately receive
+    any messages sent to the queue
+  interval: ""
+  metric_name: rabbitmq.queue.active_consumers
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of consumers
+  interval: ""
+  metric_name: rabbitmq.queue.consumers
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The ratio of time that a queue's consumers can take new messages
+  interval: ""
+  metric_name: rabbitmq.queue.consumer_utilisation
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Bytes of memory consumed by the Erlang process associated with the
+    queue, including stack, heap and internal structures
+  interval: ""
+  metric_name: rabbitmq.queue.memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Count of the total messages in the queue
+  interval: ""
+  metric_name: rabbitmq.queue.messages
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Count per second of the total messages in the queue
+  interval: ""
+  metric_name: rabbitmq.queue.messages.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Number of messages ready to be delivered to clients
+  interval: ""
+  metric_name: rabbitmq.queue.messages_ready
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number per second of messages ready to be delivered to clients
+  interval: ""
+  metric_name: rabbitmq.queue.messages_ready.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Number of messages delivered to clients but not yet acknowledged
+  interval: ""
+  metric_name: rabbitmq.queue.messages_unacknowledged
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number per second of messages delivered to clients but not yet acknowledged
+  interval: ""
+  metric_name: rabbitmq.queue.messages_unacknowledged.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Number of messages delivered to clients and acknowledged
+  interval: ""
+  metric_name: rabbitmq.queue.messages.ack.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number per second of messages delivered to clients and acknowledged
+  interval: ""
+  metric_name: rabbitmq.queue.messages.ack.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Count of messages delivered in acknowledgement mode to consumers
+  interval: ""
+  metric_name: rabbitmq.queue.messages.deliver.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Count of messages delivered in acknowledgement mode to consumers
+  interval: ""
+  metric_name: rabbitmq.queue.messages.deliver.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Sum of messages delivered in acknowledgement mode to consumers, in
+    no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get,
+    and in no-acknowledgement mode in response to basic.get.
+  interval: ""
+  metric_name: rabbitmq.queue.messages.deliver_get.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Rate per second of the sum of messages delivered in acknowledgement
+    mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement
+    mode in response to basic.get, and in no-acknowledgement mode in response to basic.get.
+  interval: ""
+  metric_name: rabbitmq.queue.messages.deliver_get.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Count of messages published
+  interval: ""
+  metric_name: rabbitmq.queue.messages.publish.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Rate per second of messages published
+  interval: ""
+  metric_name: rabbitmq.queue.messages.publish.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Count of subset of messages in deliver_get which had the redelivered
+    flag set
+  interval: ""
+  metric_name: rabbitmq.queue.messages.redeliver.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Rate per second of subset of messages in deliver_get which had the
+    redelivered flag set
+  interval: ""
+  metric_name: rabbitmq.queue.messages.redeliver.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message

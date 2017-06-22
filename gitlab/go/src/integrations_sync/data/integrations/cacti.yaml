@@ -1,0 +1,181 @@
+cacti:
+- description: The number of hosts monitored by Cacti
+  interval: ""
+  metric_name: cacti.hosts.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: host
+- description: The number of metrics collected from Cacti
+  interval: ""
+  metric_name: cacti.metrics.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of Cacti RRD files
+  interval: ""
+  metric_name: cacti.rrd.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: file
+- description: The amount of disk space that is free - last polling value
+  interval: ""
+  metric_name: system.disk.free.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space that is free - max polling value
+  interval: ""
+  metric_name: system.disk.free.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space that is free - min polling value
+  interval: ""
+  metric_name: system.disk.free.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space that is used - last polling value
+  interval: ""
+  metric_name: system.disk.used.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space that is used - max polling value
+  interval: ""
+  metric_name: system.disk.used.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space that is used - min polling value
+  interval: ""
+  metric_name: system.disk.used.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The average system load over one minute - last polling value
+  interval: ""
+  metric_name: system.load.1.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over one minute - max polling value
+  interval: ""
+  metric_name: system.load.1.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over one minute - min polling value
+  interval: ""
+  metric_name: system.load.1.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over 15 minute - last polling value
+  interval: ""
+  metric_name: system.load.15.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over 15 minute - max polling value
+  interval: ""
+  metric_name: system.load.15.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over 15 minute - min polling value
+  interval: ""
+  metric_name: system.load.15.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over five minute - last polling value
+  interval: ""
+  metric_name: system.load.5.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over five minute - max polling value
+  interval: ""
+  metric_name: system.load.5.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The average system load over five minute - min polling value
+  interval: ""
+  metric_name: system.load.5.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of physical RAM used for file buffers - last polling value
+  interval: ""
+  metric_name: system.mem.buffered.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of physical RAM used for file buffers - max polling value
+  interval: ""
+  metric_name: system.mem.buffered.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of physical RAM used for file buffers - min polling value
+  interval: ""
+  metric_name: system.mem.buffered.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The system ping latency - avg polling value
+  interval: ""
+  metric_name: system.ping.latency
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The system ping latency - max polling value
+  interval: ""
+  metric_name: system.ping.latency.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of processes running - last polling value
+  interval: ""
+  metric_name: system.proc.running.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The number of processes running - max polling value
+  interval: ""
+  metric_name: system.proc.running.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The number of processes running - min polling value
+  interval: ""
+  metric_name: system.proc.running.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The amount of free swap space - max polling value
+  interval: ""
+  metric_name: system.swap.free.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of logged in users - last polling value
+  interval: ""
+  metric_name: system.users.current.last
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of logged in users - max polling value
+  interval: ""
+  metric_name: system.users.current.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of logged in users - min polling value
+  interval: ""
+  metric_name: system.users.current.min
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""

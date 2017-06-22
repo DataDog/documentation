@@ -1,0 +1,19 @@
+kafka_consumer:
+- description: Current message offset on broker.
+  interval: ""
+  metric_name: kafka.broker_offset
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: offset
+- description: Lag in messages between consumer and broker.
+  interval: ""
+  metric_name: kafka.consumer_lag
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: offset
+- description: Current message offset on consumer.
+  interval: ""
+  metric_name: kafka.consumer_offset
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: offset

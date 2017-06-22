@@ -1,0 +1,118 @@
+process:
+- description: The process CPU utilization.
+  interval: ""
+  metric_name: system.processes.cpu.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The number of involuntary context switches performed by this process.
+  interval: ""
+  metric_name: system.processes.involuntary_ctx_switches
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event
+- description: The number of bytes read from disk by this process.
+  interval: ""
+  metric_name: system.processes.ioread_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of disk reads by this process.
+  interval: ""
+  metric_name: system.processes.ioread_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: read
+- description: The number of bytes written to disk by this process.
+  interval: ""
+  metric_name: system.processes.iowrite_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of disk writes by this process.
+  interval: ""
+  metric_name: system.processes.iowrite_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: write
+- description: The number of minor page faults per second for this process.
+  interval: ""
+  metric_name: system.processes.mem.page_faults.minor_faults
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: occurrence
+- description: The number of minor page faults per second for children of this process.
+  interval: ""
+  metric_name: system.processes.mem.page_faults.children_minor_faults
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: occurrence
+- description: The number of major page faults per second for this process.
+  interval: ""
+  metric_name: system.processes.mem.page_faults.major_faults
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: occurrence
+- description: The number of major page faults per second for children of this process.
+  interval: ""
+  metric_name: system.processes.mem.page_faults.children_major_faults
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: occurrence
+- description: The process memory consumption.
+  interval: ""
+  metric_name: system.processes.mem.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The non-swapped physical memory a process has used and cannot be shared
+    with another process.
+  interval: ""
+  metric_name: system.processes.mem.real
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The non-swapped physical memory a process has used. aka "Resident Set
+    Size".
+  interval: ""
+  metric_name: system.processes.mem.rss
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total amount of virtual memory used by the process. aka "Virtual
+    Memory Size".
+  interval: ""
+  metric_name: system.processes.mem.vms
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of processes.
+  interval: ""
+  metric_name: system.processes.number
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: process
+- description: The number of file descriptors used by this process.
+  interval: ""
+  metric_name: system.processes.open_file_descriptors
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of handles used by this process.
+  interval: ""
+  metric_name: system.processes.open_handles
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of threads used by this process.
+  interval: ""
+  metric_name: system.processes.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of voluntary context switches performed by this process.
+  interval: ""
+  metric_name: system.processes.voluntary_ctx_switches
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event

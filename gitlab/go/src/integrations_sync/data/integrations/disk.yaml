@@ -1,0 +1,61 @@
+disk:
+- description: The amount of disk space that is free.
+  interval: ""
+  metric_name: system.disk.free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space in use as a fraction of the total.
+  interval: ""
+  metric_name: system.disk.in_use
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Percent of time spent reading from disk.
+  interval: ""
+  metric_name: system.disk.read_time_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The total amount of disk space.
+  interval: ""
+  metric_name: system.disk.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of disk space in use.
+  interval: ""
+  metric_name: system.disk.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Percent of time spent writing to disk.
+  interval: ""
+  metric_name: system.disk.write_time_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The number of free inodes.
+  interval: ""
+  metric_name: system.fs.inodes.free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: inode
+- description: The number of inodes in use as a fraction of the total.
+  interval: ""
+  metric_name: system.fs.inodes.in_use
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The total number of inodes.
+  interval: ""
+  metric_name: system.fs.inodes.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: inode
+- description: The number of inodes in use.
+  interval: ""
+  metric_name: system.fs.inodes.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: inode

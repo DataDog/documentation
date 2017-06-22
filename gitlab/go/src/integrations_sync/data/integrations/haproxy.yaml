@@ -1,0 +1,256 @@
+haproxy:
+- description: Number of backend hosts.
+  interval: ""
+  metric_name: haproxy.backend_hosts
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: host
+- description: Rate of bytes in on backend hosts.
+  interval: ""
+  metric_name: haproxy.backend.bytes.in_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Rate of bytes out on backend hosts.
+  interval: ""
+  metric_name: haproxy.backend.bytes.out_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average connect time over the last 1024 requests.
+  interval: ""
+  metric_name: haproxy.backend.connect.time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of requests denied due to security concerns.
+  interval: ""
+  metric_name: haproxy.backend.denied.req_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Number of responses denied due to security concerns.
+  interval: ""
+  metric_name: haproxy.backend.denied.resp_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Rate of requests that encountered an error trying to connect to a backend
+    server.
+  interval: ""
+  metric_name: haproxy.backend.errors.con_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: Rate of responses aborted due to error.
+  interval: ""
+  metric_name: haproxy.backend.errors.resp_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: Number of requests without an assigned backend.
+  interval: ""
+  metric_name: haproxy.backend.queue.current
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Average queue time over the last 1024 requests.
+  interval: ""
+  metric_name: haproxy.backend.queue.time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Backend HTTP responses with 1xx code.
+  interval: ""
+  metric_name: haproxy.backend.response.1xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Backend HTTP responses with 2xx code.
+  interval: ""
+  metric_name: haproxy.backend.response.2xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Backend HTTP responses with 3xx code.
+  interval: ""
+  metric_name: haproxy.backend.response.3xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Backend HTTP responses with 4xx code.
+  interval: ""
+  metric_name: haproxy.backend.response.4xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Backend HTTP responses with 5xx code.
+  interval: ""
+  metric_name: haproxy.backend.response.5xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Backend HTTP responses with other code (protocol error).
+  interval: ""
+  metric_name: haproxy.backend.response.other
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Average response time over the last 1024 requests (0 for TCP).
+  interval: ""
+  metric_name: haproxy.backend.response.time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of active backend sessions.
+  interval: ""
+  metric_name: haproxy.backend.session.current
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Configured backend session limit.
+  interval: ""
+  metric_name: haproxy.backend.session.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Percentage of sessions in use (backend.session.current/backend.session.limit
+    * 100).
+  interval: ""
+  metric_name: haproxy.backend.session.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: Number of backend sessions created per second.
+  interval: ""
+  metric_name: haproxy.backend.session.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Average total session time over the last 1024 requests.
+  interval: ""
+  metric_name: haproxy.backend.session.time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Number of seconds since the last UP<->DOWN transition
+  interval: ""
+  metric_name: haproxy.backend.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: Number of times a connection to a server was retried.
+  interval: ""
+  metric_name: haproxy.backend.warnings.redis_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: Number of times a request was redispatched to another server.
+  interval: ""
+  metric_name: haproxy.backend.warnings.retr_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: Number of hosts by status (UP/DOWN/NOLB/MAINT).
+  interval: ""
+  metric_name: haproxy.count_per_status
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: host
+- description: Rate of bytes in on frontend hosts.
+  interval: ""
+  metric_name: haproxy.frontend.bytes.in_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Rate of bytes out on frontend hosts.
+  interval: ""
+  metric_name: haproxy.frontend.bytes.out_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Number of requests denied due to security concerns.
+  interval: ""
+  metric_name: haproxy.frontend.denied.req_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Number of responses denied due to security concerns.
+  interval: ""
+  metric_name: haproxy.frontend.denied.resp_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Rate of request errors.
+  interval: ""
+  metric_name: haproxy.frontend.errors.req_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error
+- description: Number of HTTP requests per second.
+  interval: ""
+  metric_name: haproxy.frontend.requests.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Frontend HTTP responses with 1xx code.
+  interval: ""
+  metric_name: haproxy.frontend.response.1xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Frontend HTTP responses with 2xx code.
+  interval: ""
+  metric_name: haproxy.frontend.response.2xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Frontend HTTP responses with 3xx code.
+  interval: ""
+  metric_name: haproxy.frontend.response.3xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Frontend HTTP responses with 4xx code.
+  interval: ""
+  metric_name: haproxy.frontend.response.4xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Frontend HTTP responses with 5xx code.
+  interval: ""
+  metric_name: haproxy.frontend.response.5xx
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Frontend HTTP responses with other code (protocol error).
+  interval: ""
+  metric_name: haproxy.frontend.response.other
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: response
+- description: Number of active frontend sessions.
+  interval: ""
+  metric_name: haproxy.frontend.session.current
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Configured backend session limit.
+  interval: ""
+  metric_name: haproxy.frontend.session.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Percentage of sessions in use (frontend.session.current/frontend.session.limit
+    * 100).
+  interval: ""
+  metric_name: haproxy.frontend.session.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: Number of frontend sessions created per second.
+  interval: ""
+  metric_name: haproxy.frontend.session.rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection

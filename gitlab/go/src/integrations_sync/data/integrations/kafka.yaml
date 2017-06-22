@@ -1,0 +1,259 @@
+kafka:
+- description: Outgoing byte rate.
+  interval: "10"
+  metric_name: kafka.net.bytes_out
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Incoming byte rate.
+  interval: "10"
+  metric_name: kafka.net.bytes_in
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Rejected byte rate.
+  interval: "10"
+  metric_name: kafka.net.bytes_rejected
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Incoming message rate.
+  interval: '10 '
+  metric_name: kafka.messages_in
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: message
+- description: Number of client fetch request failures.
+  interval: "10"
+  metric_name: kafka.request.fetch.failed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Rate of client fetch request failures per second.
+  interval: "10"
+  metric_name: kafka.request.fetch.failed_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Average time for a produce request.
+  interval: "10"
+  metric_name: kafka.request.produce.time.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Time for produce requests for 99th percentile.
+  interval: "10"
+  metric_name: kafka.request.produce.time.99percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Rate of failed produce requests per second.
+  interval: "10"
+  metric_name: kafka.request.produce.failed_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Number of failed produce requests.
+  interval: "10"
+  metric_name: kafka.request.produce.failed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Average time per fetch request.
+  interval: "10"
+  metric_name: kafka.request.fetch.time.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Time for fetch requests for 99th percentile.
+  interval: "10"
+  metric_name: kafka.request.fetch.time.99percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Average time for a request to update metadata.
+  interval: "10"
+  metric_name: kafka.request.update_metadata.time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Time for update metadata requests for 99th percentile.
+  interval: "10"
+  metric_name: kafka.request.update_metadata.time.99percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average time for metadata request.
+  interval: "10"
+  metric_name: kafka.request.metadata.time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Time for metadata requests for 99th percentile.
+  interval: "10"
+  metric_name: kafka.request.metadata.time.99percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average time for an offset request.
+  interval: "10"
+  metric_name: kafka.request.offsets.time.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Time for offset requests for 99th percentile.
+  interval: "10"
+  metric_name: kafka.request.offsets.time.99percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Average fraction of time the request handler threads are idle.
+  interval: "10"
+  metric_name: kafka.request.handler.avg.idle.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Rate of replicas leaving the ISR pool.
+  interval: "10"
+  metric_name: kafka.replication.isr_shrinks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: node
+- description: Rate of replicas joining the ISR pool.
+  interval: "10"
+  metric_name: kafka.replication.isr_expands
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: node
+- description: Leader election rate.
+  interval: "10"
+  metric_name: kafka.replication.leader_elections
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Unclean leader election rate.
+  interval: "10"
+  metric_name: kafka.replication.unclean_leader_elections
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Number of unreplicated partitions.
+  interval: "10"
+  metric_name: kafka.replication.under_replicated_partitions
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Log flush rate.
+  interval: "10"
+  metric_name: kafka.log.flush_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: flush
+- description: Number of delayed consumer requests.
+  interval: "10"
+  metric_name: kafka.consumer.delayed_requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Rate of delayed consumer request expiration.
+  interval: "10"
+  metric_name: kafka.consumer.expires_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: eviction
+- description: Rate of delayed producer request expiration.
+  interval: "10"
+  metric_name: kafka.expires_sec
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: eviction
+- description: Rate of request expiration on followers.
+  interval: "10"
+  metric_name: kafka.follower.expires_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: eviction
+- description: Number of producer requests delayed.
+  interval: "10"
+  metric_name: kafka.producer.delayed_requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Rate of producer request expiration.
+  interval: "10"
+  metric_name: kafka.producer.expires_per_seconds
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: eviction
+- description: Number of producer requests per second.
+  interval: "10"
+  metric_name: kafka.producer.request_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Number of producer responses per second.
+  interval: "10"
+  metric_name: kafka.producer.response_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Producer average request latency.
+  interval: "10"
+  metric_name: kafka.producer.request_latency_avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: Producer bytes out rate.
+  interval: "10"
+  metric_name: kafka.producer.bytes_out
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Producer message rate.
+  interval: "10"
+  metric_name: kafka.producer.message_rate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Producer I/O wait time.
+  interval: "10"
+  metric_name: kafka.producer.io_wait
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: nanosecond
+- description: Maximum consumer lag.
+  interval: "10"
+  metric_name: kafka.consumer.max_lag
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: offset
+- description: The minimum rate at which the consumer sends fetch requests to a broker.
+  interval: "10"
+  metric_name: kafka.consumer.fetch_rate
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: request
+- description: Consumer bytes in rate.
+  interval: "10"
+  metric_name: kafka.consumer.bytes_in
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Rate of consumer message consumption.
+  interval: "10"
+  metric_name: kafka.consumer.messages_in
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: message
+- description: Rate of offset commits to ZooKeeper.
+  interval: "10"
+  metric_name: kafka.consumer.zookeeper_commits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: write
+- description: Rate of offset commits to Kafka.
+  interval: "10"
+  metric_name: kafka.consumer.kafka_commits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: write

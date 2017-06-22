@@ -1,0 +1,13 @@
+jenkins:
+- description: The duration of a job
+  interval: ""
+  metric_name: jenkins.job.duration
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: The count of completed jobs
+  interval: ""
+  metric_name: jenkins.job.completed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event

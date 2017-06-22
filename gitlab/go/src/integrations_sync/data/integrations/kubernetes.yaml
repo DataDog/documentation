@@ -1,0 +1,79 @@
+kubernetes:
+- description: The number of cores in this machine.
+  interval: ""
+  metric_name: kubernetes.cpu.capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The percentage of CPU time used
+  interval: ""
+  metric_name: kubernetes.cpu.usage.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent_nano
+- description: The limit of cpu cores set
+  interval: ""
+  metric_name: kubernetes.cpu.limits
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The requested cpu cores
+  interval: ""
+  metric_name: kubernetes.cpu.requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The amount of disk used
+  interval: ""
+  metric_name: kubernetes.filesystem.usage
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The percentage of disk used
+  interval: ""
+  metric_name: kubernetes.filesystem.usage_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The amount of memory (in bytes) in this machine
+  interval: ""
+  metric_name: kubernetes.memory.capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The limit of memory set
+  interval: ""
+  metric_name: kubernetes.memory.limits
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The requested memory
+  interval: ""
+  metric_name: kubernetes.memory.requests
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of memory used
+  interval: ""
+  metric_name: kubernetes.memory.usage
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of bytes per second received
+  interval: ""
+  metric_name: kubernetes.network.rx_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The amount of bytes per second transmitted
+  interval: ""
+  metric_name: kubernetes.network.tx_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The amount of network errors per second
+  interval: ""
+  metric_name: kubernetes.network_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: error

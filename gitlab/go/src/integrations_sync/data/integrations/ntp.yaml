@@ -1,0 +1,7 @@
+ntp:
+- description: The time difference between the local clock and the NTP reference clock.
+  interval: ""
+  metric_name: ntp.offset
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second

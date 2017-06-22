@@ -1,0 +1,91 @@
+activemq_xml:
+- description: On average  the amount of time (ms) that messages remained enqueued.
+  interval: "10"
+  metric_name: activemq.queue.avg_enqueue_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of consumers connected
+  interval: "10"
+  metric_name: activemq.queue.consumer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of producers connected
+  interval: "10"
+  metric_name: activemq.queue.producer_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The max  the amount of time (ms) that messages remained enqueued.
+  interval: "10"
+  metric_name: activemq.queue.max_enqueue_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The min  the amount of time (ms) that messages remained enqueued.
+  interval: "10"
+  metric_name: activemq.queue.min_enqueue_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The percentage of memory currently in use
+  interval: "10"
+  metric_name: activemq.queue.memory_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The amount of messages that remained queued.
+  interval: "10"
+  metric_name: activemq.queue.size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of messages that remained dequeued.
+  interval: "10"
+  metric_name: activemq.queue.dequeue_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of messages that have been dispatched.
+  interval: "10"
+  metric_name: activemq.queue.dispatch_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of messages that have been enqueued.
+  interval: "10"
+  metric_name: activemq.queue.enqueue_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of messages that have been expired.
+  interval: "10"
+  metric_name: activemq.queue.expired_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of messages that have been in flight.
+  interval: "10"
+  metric_name: activemq.queue.in_flight_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The percentage of store in use.
+  interval: "10"
+  metric_name: activemq.broker.store_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The percentage of temporary in use.
+  interval: "10"
+  metric_name: activemq.broker.temp_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The percentage of memory in use.
+  interval: "10"
+  metric_name: activemq.broker.memory_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent

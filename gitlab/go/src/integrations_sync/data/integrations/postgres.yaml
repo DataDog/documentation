@@ -1,0 +1,306 @@
+postgres:
+- description: The number of active connections to this database.
+  interval: ""
+  metric_name: postgresql.connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of transactions that have been committed in this database.
+  interval: ""
+  metric_name: postgresql.commits
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: transaction
+- description: The number of transactions that have been rolled back in this database.
+  interval: ""
+  metric_name: postgresql.rollbacks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: transaction
+- description: The number of disk blocks read in this database.
+  interval: ""
+  metric_name: postgresql.disk_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block
+- description: 'The number of times disk blocks were found in the buffer cache, preventing
+    the need to read from the database. '
+  interval: ""
+  metric_name: postgresql.buffer_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: hit
+- description: The number of rows returned by queries in this database
+  interval: ""
+  metric_name: postgresql.rows_returned
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of rows fetched by queries in this database
+  interval: ""
+  metric_name: postgresql.rows_fetched
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of rows inserted by queries in this database
+  interval: ""
+  metric_name: postgresql.rows_inserted
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of rows updated by queries in this database
+  interval: ""
+  metric_name: postgresql.rows_updated
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of rows deleted by queries in this database
+  interval: ""
+  metric_name: postgresql.rows_deleted
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The disk space used by this database.
+  interval: ""
+  metric_name: postgresql.database_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of deadlocks detected in this database
+  interval: ""
+  metric_name: postgresql.deadlocks
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of data written to temporary files by queries in this database.
+  interval: ""
+  metric_name: postgresql.temp_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The number of temporary files created by queries in this database.
+  interval: ""
+  metric_name: postgresql.temp_files
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: file
+- description: The number of scheduled checkpoints that were performed.
+  interval: ""
+  metric_name: postgresql.bgwriter.checkpoints_timed
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of requested checkpoints that were performed.
+  interval: ""
+  metric_name: postgresql.bgwriter.checkpoints_requested
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of buffers written during checkpoints.
+  interval: ""
+  metric_name: postgresql.bgwriter.buffers_checkpoint
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of buffers written by the background writer.
+  interval: ""
+  metric_name: postgresql.bgwriter.buffers_clean
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of times the background writer stopped a cleaning scan due
+    to writing too many buffers.
+  interval: ""
+  metric_name: postgresql.bgwriter.maxwritten_clean
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of buffers written directly by a backend.
+  interval: ""
+  metric_name: postgresql.bgwriter.buffers_backend
+  metric_type: count
+  per_unit_name: ""
+  unit_name: buffer
+- description: The number of buffers allocated
+  interval: ""
+  metric_name: postgresql.bgwriter.buffers_alloc
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The of times a backend had to execute its own fsync call instead of
+    the background writer.
+  interval: ""
+  metric_name: postgresql.bgwriter.buffers_backend_fsync
+  metric_type: count
+  per_unit_name: ""
+  unit_name: ""
+- description: The total amount of checkpoint processing time spent writing files
+    to disk.
+  interval: ""
+  metric_name: postgresql.bgwriter.write_time
+  metric_type: count
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The total amount of checkpoint processing time spent synchronizing
+    files to disk.
+  interval: ""
+  metric_name: postgresql.bgwriter.sync_time
+  metric_type: count
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of locks active for this database.
+  interval: ""
+  metric_name: postgresql.locks
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: lock
+- description: The number of sequential scans initiated on this table.
+  interval: ""
+  metric_name: postgresql.seq_scans
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of live rows fetched by sequential scans.
+  interval: ""
+  metric_name: postgresql.seq_rows_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of index scans initiated on this table.
+  interval: ""
+  metric_name: postgresql.index_scans
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of live rows fetched by index scans.
+  interval: ""
+  metric_name: postgresql.index_rows_fetched
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The number of rows HOT updated, meaning no separate index update was
+    needed.
+  interval: ""
+  metric_name: postgresql.rows_hot_updated
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The estimated number of live rows.
+  interval: ""
+  metric_name: postgresql.live_rows
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: row
+- description: The estimated number of dead rows.
+  interval: ""
+  metric_name: postgresql.dead_rows
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: row
+- description: The number of index entries returned by scans on this index.
+  interval: ""
+  metric_name: postgresql.index_rows_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: row
+- description: The total disk space used by the specified table. Includes TOAST, free
+    space map, and visibility map. Excludes indexes.
+  interval: ""
+  metric_name: postgresql.table_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total disk space used by indexes attached to the specified table.
+  interval: ""
+  metric_name: postgresql.index_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total disk space used by the table, including indexes and TOAST
+    data.
+  interval: ""
+  metric_name: postgresql.total_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of user tables in this database.
+  interval: ""
+  metric_name: postgresql.table.count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: table
+- description: ' The maximum number of client connections allowed to this database.'
+  interval: ""
+  metric_name: postgresql.max_connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: The number of connections to this database as a fraction of the maximum
+    number of allowed connections.
+  interval: ""
+  metric_name: postgresql.percent_usage_connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The current replication delay in seconds. Only available with postgresql
+    9.1 and newer
+  interval: ""
+  metric_name: postgresql.replication_delay
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second
+- description: The current replication delay in bytes. Only available with postgresql
+    9.2 and newer
+  interval: ""
+  metric_name: postgres.replication_delay_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of disk blocks read from this table.
+  interval: ""
+  metric_name: postgresql.heap_blocks_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block
+- description: The number of buffer hits in this table.
+  interval: ""
+  metric_name: postgresql.heap_blocks_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: hit
+- description: The number of disk blocks read from all indexes on this table.
+  interval: ""
+  metric_name: postgresql.index_blocks_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block
+- description: The number of buffer hits in all indexes on this table.
+  interval: ""
+  metric_name: postgresql.index_blocks_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: hit
+- description: The number of disk blocks read from this table's TOAST table.
+  interval: ""
+  metric_name: postgresql.toast_blocks_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block
+- description: The number of buffer hits in this table's TOAST table.
+  interval: ""
+  metric_name: postgresql.toast_blocks_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: hit
+- description: The number of disk blocks read from this table's TOAST table index.
+  interval: ""
+  metric_name: postgresql.toast_index_blocks_read
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block
+- description: The number of buffer hits in this table's TOAST table index.
+  interval: ""
+  metric_name: postgresql.toast_index_blocks_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: block

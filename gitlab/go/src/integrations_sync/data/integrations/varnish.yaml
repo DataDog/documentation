@@ -1,0 +1,2066 @@
+varnish:
+- description: Accept failures.
+  interval: ""
+  metric_name: varnish.accept_fail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Maximum number of connections to a backend was reached.
+  interval: ""
+  metric_name: varnish.backend_busy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Successful connections to a backen.
+  interval: ""
+  metric_name: varnish.backend_conn
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Backend connection failures.
+  interval: ""
+  metric_name: varnish.backend_fail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Backend connections with keep-alive that are returned to the pool of
+    connections.
+  interval: ""
+  metric_name: varnish.backend_recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Backend requests.
+  interval: ""
+  metric_name: varnish.backend_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Backend connection retries.
+  interval: ""
+  metric_name: varnish.backend_retry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Recycled connections that has were reused.
+  interval: ""
+  metric_name: varnish.backend_reuse
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Backend connections closed because they were idle too long.
+  interval: ""
+  metric_name: varnish.backend_toolate
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Backend connections not tried because the backend was unhealthy.
+  interval: ""
+  metric_name: varnish.backend_unhealthy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Bans in system, including bans superseded by newer bans and bans already
+    checked by the ban-lurker.
+  interval: ""
+  metric_name: varnish.bans
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Bans added to ban list.
+  interval: ""
+  metric_name: varnish.bans_added
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Bans which are no longer active, either because they got checked by
+    the ban-lurker or superseded by newer identical bans.
+  interval: ""
+  metric_name: varnish.bans_completed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Bans deleted from ban list.
+  interval: ""
+  metric_name: varnish.bans_deleted
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Bans replaced by later identical bans.
+  interval: ""
+  metric_name: varnish.bans_dups
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Times the ban-lurker waited for lookups.
+  interval: ""
+  metric_name: varnish.bans_lurker_contention
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Objects killed by ban-lurker.
+  interval: ""
+  metric_name: varnish.bans_lurker_obj_killed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Bans and objects tested against each other by the ban-lurker.
+  interval: ""
+  metric_name: varnish.bans_lurker_tested
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Tests and objects tested against each other by the ban-lurker. 'ban
+    req.url == foo && req.http.host == bar' counts as one in 'bans_tested' and as
+    two in 'bans_tests_tested'.
+  interval: ""
+  metric_name: varnish.bans_lurker_tests_tested
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Bans which use obj.* variables. These bans can possibly be washed by
+    the ban-lurker.
+  interval: ""
+  metric_name: varnish.bans_obj
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Objects killed by bans during object lookup.
+  interval: ""
+  metric_name: varnish.bans_obj_killed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Bytes used by the persisted ban lists.
+  interval: ""
+  metric_name: varnish.bans_persisted_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Extra bytes accumulated through dropped and completed bans in the persistent
+    ban lists.
+  interval: ""
+  metric_name: varnish.bans_persisted_fragmentation
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Bans which use req.* variables. These bans can not be washed by the
+    ban-lurker.
+  interval: ""
+  metric_name: varnish.bans_req
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Bans and objects tested against each other during hash lookup.
+  interval: ""
+  metric_name: varnish.bans_tested
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Tests and objects tested against each other during lookup. 'ban req.url
+    == foo && req.http.host == bar' counts as one in 'bans_tested' and as two in 'bans_tests_tested'.
+  interval: ""
+  metric_name: varnish.bans_tests_tested
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Requests sent to sleep without a worker thread because they found a
+    busy object.
+  interval: ""
+  metric_name: varnish.busy_sleep
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests taken off the busy object sleep list and and rescheduled.
+  interval: ""
+  metric_name: varnish.busy_wakeup
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests served from the cache.
+  interval: ""
+  metric_name: varnish.cache_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests passed to a backend where the decision to pass them found
+    in the cache.
+  interval: ""
+  metric_name: varnish.cache_hitpass
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests fetched from a backend server.
+  interval: ""
+  metric_name: varnish.cache_miss
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Client connections accepted.
+  interval: ""
+  metric_name: varnish.client_conn
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connection dropped, no session.
+  interval: ""
+  metric_name: varnish.client_drop
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connection dropped late.
+  interval: ""
+  metric_name: varnish.client_drop_late
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Parseable client requests seen.
+  interval: ""
+  metric_name: varnish.client_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests that were malformed in some drastic way.
+  interval: ""
+  metric_name: varnish.client_req_400
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: 'Requests that were missing a Content-Length: header.'
+  interval: ""
+  metric_name: varnish.client_req_411
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Requests that were too big.
+  interval: ""
+  metric_name: varnish.client_req_413
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: 'Requests with a bad Expect: header.'
+  interval: ""
+  metric_name: varnish.client_req_417
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: DNS director full DNS cache.
+  interval: ""
+  metric_name: varnish.dir_dns_cache_full
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: DNS director failed lookup.
+  interval: ""
+  metric_name: varnish.dir_dns_failed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: DNS director cached lookup hit.
+  interval: ""
+  metric_name: varnish.dir_dns_hit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: DNS director lookups.
+  interval: ""
+  metric_name: varnish.dir_dns_lookups
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Edge Side Includes (ESI) parse errors.
+  interval: ""
+  metric_name: varnish.esi_errors
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Edge Side Includes (ESI) parse warnings.
+  interval: ""
+  metric_name: varnish.esi_warnings
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Objects mailed to expiry thread for handling.
+  interval: ""
+  metric_name: varnish.exp_mailed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Objects received by expiry thread for handling.
+  interval: ""
+  metric_name: varnish.exp_received
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Back end response with no body because of 1XX response (Informational).
+  interval: ""
+  metric_name: varnish.fetch_1xx
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response with no body because of 204 response (No Content).
+  interval: ""
+  metric_name: varnish.fetch_204
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response with no body because of 304 response (Not Modified).
+  interval: ""
+  metric_name: varnish.fetch_304
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response's body length could not be determined and/or had
+    bad headers.
+  interval: ""
+  metric_name: varnish.fetch_bad
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response bodies that were chunked.
+  interval: ""
+  metric_name: varnish.fetch_chunked
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Fetch wanted close.
+  interval: ""
+  metric_name: varnish.fetch_close
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response bodies with EOF.
+  interval: ""
+  metric_name: varnish.fetch_eof
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response fetches that failed.
+  interval: ""
+  metric_name: varnish.fetch_failed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end HEAD requests.
+  interval: ""
+  metric_name: varnish.fetch_head
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end response bodies with Content-Length.
+  interval: ""
+  metric_name: varnish.fetch_length
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Back end fetches that failed because no thread was available.
+  interval: ""
+  metric_name: varnish.fetch_no_thread
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Number of responses served by backends with http < 1.1
+  interval: ""
+  metric_name: varnish.fetch_oldhttp
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Number of responses that have zero length.
+  interval: ""
+  metric_name: varnish.fetch_zero
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: HCB inserts.
+  interval: ""
+  metric_name: varnish.hcb_insert
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: HCB lookups with lock.
+  interval: ""
+  metric_name: varnish.hcb_lock
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: HCB lookups without lock.
+  interval: ""
+  metric_name: varnish.hcb_nolock
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.backend.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.backend.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.backend.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.backend.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.ban.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.ban.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.ban.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.ban.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.busyobj.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.busyobj.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.busyobj.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.cli.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.cli.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.cli.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.cli.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.exp.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.exp.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.exp.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.exp.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.hcb.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.hcb.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.hcb.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.hcb.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.hcl.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.hcl.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.hcl.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.hcl.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.herder.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.herder.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.herder.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.herder.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.hsl.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.hsl.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.hsl.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.hsl.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.lru.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.lru.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.lru.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.lru.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.mempool.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.mempool.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.mempool.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.nbusyobj.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.nbusyobj.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.nbusyobj.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.objhdr.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.objhdr.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.objhdr.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.objhdr.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.pipestat.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.pipestat.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.pipestat.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.sess.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.sess.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.sess.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.sessmem.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.sessmem.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.sessmem.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.sessmem.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.sma.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.sma.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.sma.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.sma.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.smf.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.smf.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.smf.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.smf.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.smp.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.smp.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.smp.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.smp.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.sms.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.sms.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.sms.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.sms.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.stat.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.stat.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.stat.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.stat.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.vbe.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.vbe.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.vbe.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.vbe.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.vbp.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.vbp.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.vbp.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.vbp.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.vcapace.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.vcapace.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.vcapace.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.vcl.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.vcl.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.vcl.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.vcl.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.vxid.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.vxid.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.vxid.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.wq.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.wq.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.wq.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.wq.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Collisions.
+  interval: ""
+  metric_name: varnish.LCK.wstat.colls
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Created locks.
+  interval: ""
+  metric_name: varnish.LCK.wstat.creat
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Destroyed locks.
+  interval: ""
+  metric_name: varnish.LCK.wstat.destroy
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: Lock operations.
+  interval: ""
+  metric_name: varnish.LCK.wstat.locks
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: lock
+- description: HTTP header overflows.
+  interval: ""
+  metric_name: varnish.losthdr
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.busyobj.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req0.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.req1.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess0.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.sess1.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Allocations.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.allocs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Frees.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.frees
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: In use.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.live
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: In pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.pool
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Pool ran dry.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.randry
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Recycled from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.recycle
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too many for pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.surplus
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Size allocated.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.sz_needed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size requested.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.sz_wanted
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Timed out from pool.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.timeout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Too small to recycle.
+  interval: ""
+  metric_name: varnish.MEMPOOL.vbc.toosmall
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Child processes that died due to signals.
+  interval: ""
+  metric_name: varnish.MGT.child_died
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: Child processes that produced core dumps.
+  interval: ""
+  metric_name: varnish.MGT.child_dump
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: Child processes the were cleanly stopped.
+  interval: ""
+  metric_name: varnish.MGT.child_exit
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: Child processes that panicked.
+  interval: ""
+  metric_name: varnish.MGT.child_panic
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: Child processes that started.
+  interval: ""
+  metric_name: varnish.MGT.child_start
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: Child processes that exited with an unexpected return code.
+  interval: ""
+  metric_name: varnish.MGT.child_stop
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: process
+- description: ""
+  interval: ""
+  metric_name: varnish.MGT.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of backends.
+  interval: ""
+  metric_name: varnish.n_backend
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Active bans.
+  interval: ""
+  metric_name: varnish.n_ban
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: New bans added.
+  interval: ""
+  metric_name: varnish.n_ban_add
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Duplicate bans removed.
+  interval: ""
+  metric_name: varnish.n_ban_dups
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Objects tested.
+  interval: ""
+  metric_name: varnish.n_ban_obj_test
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Regexps tested against.
+  interval: ""
+  metric_name: varnish.n_ban_re_test
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Old bans deleted.
+  interval: ""
+  metric_name: varnish.n_ban_retire
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Objects that expired from cache because of TTL.
+  interval: ""
+  metric_name: varnish.n_expired
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Gunzip operations.
+  interval: ""
+  metric_name: varnish.n_gunzip
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Gzip operations.
+  interval: ""
+  metric_name: varnish.n_gzip
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Move operations done on the LRU list.
+  interval: ""
+  metric_name: varnish.n_lru_moved
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: operation
+- description: Objects forcefully evicted from storage to make room for new objects.
+  interval: ""
+  metric_name: varnish.n_lru_nuked
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: operation
+- description: Purged objects.
+  interval: ""
+  metric_name: varnish.n_obj_purged
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: object structs made.
+  interval: ""
+  metric_name: varnish.n_object
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: objectcore structs made.
+  interval: ""
+  metric_name: varnish.n_objectcore
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: objecthead structs made.
+  interval: ""
+  metric_name: varnish.n_objecthead
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Objects overflowing workspace.
+  interval: ""
+  metric_name: varnish.n_objoverflow
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Objects sent with sendfile.
+  interval: ""
+  metric_name: varnish.n_objsendfile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Objects sent with write.
+  interval: ""
+  metric_name: varnish.n_objwrite
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Purges executed.
+  interval: ""
+  metric_name: varnish.n_purges
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event
+- description: sess structs made.
+  interval: ""
+  metric_name: varnish.n_sess
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: sess_mem structs made.
+  interval: ""
+  metric_name: varnish.n_sess_mem
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Unresurrected objects.
+  interval: ""
+  metric_name: varnish.n_vampireobject
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: vbc structs made.
+  interval: ""
+  metric_name: varnish.n_vbc
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Total VCLs loaded.
+  interval: ""
+  metric_name: varnish.n_vcl
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Available VCLs.
+  interval: ""
+  metric_name: varnish.n_vcl_avail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: Discarded VCLs.
+  interval: ""
+  metric_name: varnish.n_vcl_discard
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: object
+- description: waitinglist structs made.
+  interval: ""
+  metric_name: varnish.n_waitinglist
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Worker threads.
+  interval: ""
+  metric_name: varnish.n_wrk
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: Worker threads created.
+  interval: ""
+  metric_name: varnish.n_wrk_create
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Dropped work requests.
+  interval: ""
+  metric_name: varnish.n_wrk_drop
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Worker threads not created.
+  interval: ""
+  metric_name: varnish.n_wrk_failed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Work request queue length.
+  interval: ""
+  metric_name: varnish.n_wrk_lqueue
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Worker threads limited.
+  interval: ""
+  metric_name: varnish.n_wrk_max
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Queued work requests.
+  interval: ""
+  metric_name: varnish.n_wrk_queued
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Thread pools.
+  interval: ""
+  metric_name: varnish.pools
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Total body size.
+  interval: ""
+  metric_name: varnish.s_bodybytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Backend fetches.
+  interval: ""
+  metric_name: varnish.s_fetch
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Total header size.
+  interval: ""
+  metric_name: varnish.s_hdrbytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Passed requests.
+  interval: ""
+  metric_name: varnish.s_pass
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Pipe sessions seen.
+  interval: ""
+  metric_name: varnish.s_pipe
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Total request bytes received for piped sessions.
+  interval: ""
+  metric_name: varnish.s_pipe_hdrbytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total number of bytes forwarded from clients in pipe sessions.
+  interval: ""
+  metric_name: varnish.s_pipe_in
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total number of bytes forwarded to clients in pipe sessions.
+  interval: ""
+  metric_name: varnish.s_pipe_out
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Requests.
+  interval: ""
+  metric_name: varnish.s_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: Total request body bytes received.
+  interval: ""
+  metric_name: varnish.s_req_bodybytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total request header bytes received.
+  interval: ""
+  metric_name: varnish.s_req_hdrbytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total response body bytes transmitted.
+  interval: ""
+  metric_name: varnish.s_resp_bodybytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Total response header bytes transmitted.
+  interval: ""
+  metric_name: varnish.s_resp_hdrbytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Client connections.
+  interval: ""
+  metric_name: varnish.s_sess
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Synthetic responses made.
+  interval: ""
+  metric_name: varnish.s_synth
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: response
+- description: Client connections closed.
+  interval: ""
+  metric_name: varnish.sess_closed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connections accepted.
+  interval: ""
+  metric_name: varnish.sess_conn
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connections dropped due to lack of worker thread.
+  interval: ""
+  metric_name: varnish.sess_drop
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connections dropped due to a full queue.
+  interval: ""
+  metric_name: varnish.sess_dropped
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Failures to accept a TCP connection. Either the client changed its
+    mind, or the kernel ran out of some resource like file descriptors.
+  interval: ""
+  metric_name: varnish.sess_fail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: ""
+  interval: ""
+  metric_name: varnish.sess_herd
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: ""
+  interval: ""
+  metric_name: varnish.sess_linger
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: ""
+  interval: ""
+  metric_name: varnish.sess_pipe_overflow
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: ""
+  interval: ""
+  metric_name: varnish.sess_pipeline
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: Client connections queued to wait for a thread.
+  interval: ""
+  metric_name: varnish.sess_queued
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: ""
+  interval: ""
+  metric_name: varnish.sess_readahead
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: connection
+- description: SHM MTX contention.
+  interval: ""
+  metric_name: varnish.shm_cont
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: SHM cycles through buffer.
+  interval: ""
+  metric_name: varnish.shm_cycles
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: SHM flushes due to overflow.
+  interval: ""
+  metric_name: varnish.shm_flushes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: SHM records.
+  interval: ""
+  metric_name: varnish.shm_records
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: SHM writes.
+  interval: ""
+  metric_name: varnish.shm_writes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Total space allocated by this storage.
+  interval: ""
+  metric_name: varnish.SMA.s0.c_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Times the storage has failed to provide a storage segment.
+  interval: ""
+  metric_name: varnish.SMA.s0.c_fail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Total space returned to this storage.
+  interval: ""
+  metric_name: varnish.SMA.s0.c_freed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Times the storage has been asked to provide a storage segment.
+  interval: ""
+  metric_name: varnish.SMA.s0.c_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Storage allocations outstanding.
+  interval: ""
+  metric_name: varnish.SMA.s0.g_alloc
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event
+- description: Space allocated from the storage.
+  interval: ""
+  metric_name: varnish.SMA.s0.g_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Space left in the storage.
+  interval: ""
+  metric_name: varnish.SMA.s0.g_space
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total space allocated by this storage.
+  interval: ""
+  metric_name: varnish.SMA.Transient.c_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Times the storage has failed to provide a storage segment.
+  interval: ""
+  metric_name: varnish.SMA.Transient.c_fail
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Total space returned to this storage.
+  interval: ""
+  metric_name: varnish.SMA.Transient.c_freed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Times the storage has been asked to provide a storage segment.
+  interval: ""
+  metric_name: varnish.SMA.Transient.c_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Storage allocations outstanding.
+  interval: ""
+  metric_name: varnish.SMA.Transient.g_alloc
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event
+- description: Space allocated from the storage.
+  interval: ""
+  metric_name: varnish.SMA.Transient.g_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Space left in the storage.
+  interval: ""
+  metric_name: varnish.SMA.Transient.g_space
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: SMS space allocated.
+  interval: ""
+  metric_name: varnish.sms_balloc
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: SMS space freed.
+  interval: ""
+  metric_name: varnish.sms_bfree
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: SMS outstanding space.
+  interval: ""
+  metric_name: varnish.sms_nbytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: SMS outstanding allocations.
+  interval: ""
+  metric_name: varnish.sms_nobj
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: event
+- description: SMS allocator requests.
+  interval: ""
+  metric_name: varnish.sms_nreq
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: event
+- description: Length of session queue waiting for threads.
+  interval: ""
+  metric_name: varnish.thread_queue_len
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Number of threads.
+  interval: ""
+  metric_name: varnish.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: Threads created.
+  interval: ""
+  metric_name: varnish.threads_created
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: thread
+- description: Threads destroyed.
+  interval: ""
+  metric_name: varnish.threads_destroyed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: thread
+- description: Threads that failed to get created.
+  interval: ""
+  metric_name: varnish.threads_failed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: thread
+- description: Threads that were needed but couldn't be created because of a thread
+    pool limit.
+  interval: ""
+  metric_name: varnish.threads_limited
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: thread
+- description: ""
+  interval: ""
+  metric_name: varnish.uptime
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Loaded VMODs.
+  interval: ""
+  metric_name: varnish.vmods
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: object
+- description: Space which will soon (max 1 minute) be freed in the shared memory
+    used to communicate with tools like varnishstat, varnishlog etc.
+  interval: ""
+  metric_name: varnish.vsm_cooling
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Free space in the shared memory used to communicate with tools like
+    varnishstat, varnishlog etc.
+  interval: ""
+  metric_name: varnish.vsm_free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Data which does not fit in the shared memory used to communicate with
+    tools like varnishstat, varnishlog etc.
+  interval: ""
+  metric_name: varnish.vsm_overflow
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total data which did not fit in the shared memory used to communicate
+    with tools like varnishstat, varnishlog etc.
+  interval: ""
+  metric_name: varnish.vsm_overflowed
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Used space in the shared memory used to communicate with tools like
+    varnishstat, varnishlog etc.
+  interval: ""
+  metric_name: varnish.vsm_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte

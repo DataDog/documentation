@@ -1,0 +1,98 @@
+pgbouncer:
+- description: The request rate
+  interval: ""
+  metric_name: pgbouncer.stats.requests_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The total network traffic received
+  interval: ""
+  metric_name: pgbouncer.stats.bytes_received_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The total network traffic sent
+  interval: ""
+  metric_name: pgbouncer.stats.bytes_sent_per_second
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Time spent by pgbouncer actively querying PostgreSQL
+  interval: ""
+  metric_name: pgbouncer.stats.total_query_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: microsecond
+- description: The average number of requests per second in last stat period
+  interval: ""
+  metric_name: pgbouncer.stats.avg_req
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: request
+- description: The client network traffic received
+  interval: ""
+  metric_name: pgbouncer.stats.avg_recv
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The client network traffic sent
+  interval: ""
+  metric_name: pgbouncer.stats.avg_sent
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The average query duration
+  interval: ""
+  metric_name: pgbouncer.stats.avg_query
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: microsecond
+- description: Client connections linked to server connection and able to process
+    queries
+  interval: ""
+  metric_name: pgbouncer.pools.cl_active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Client connections waiting on a server connection
+  interval: ""
+  metric_name: pgbouncer.pools.cl_waiting
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Server connections linked to a client connection
+  interval: ""
+  metric_name: pgbouncer.pools.sv_active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Server connections idle and ready for a client query
+  interval: ""
+  metric_name: pgbouncer.pools.sv_idle
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Server connections idle more than server_check_delay, needing server_check_query
+  interval: ""
+  metric_name: pgbouncer.pools.sv_used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Server connections currently running either server_reset_query or server_check_query
+  interval: ""
+  metric_name: pgbouncer.pools.sv_tested
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Server connections currently in the process of logging in
+  interval: ""
+  metric_name: pgbouncer.pools.sv_login
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection
+- description: Age of oldest unserved client connection
+  interval: ""
+  metric_name: pgbouncer.pools.maxwait
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: second

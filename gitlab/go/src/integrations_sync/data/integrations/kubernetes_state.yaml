@@ -1,0 +1,308 @@
+kubernetes_state:
+- description: The total CPU resources of the node
+  interval: ""
+  metric_name: kubernetes_state.node.cpu_capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The total memory resources of the node
+  interval: ""
+  metric_name: kubernetes_state.node.memory_capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The total pod resources of the node
+  interval: ""
+  metric_name: kubernetes_state.node.pods_capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The CPU resources of a node that are available for scheduling
+  interval: ""
+  metric_name: kubernetes_state.node.cpu_allocatable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The memory resources of a node that are available for scheduling
+  interval: ""
+  metric_name: kubernetes_state.node.memory_allocatable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The pod resources of a node that are available for scheduling
+  interval: ""
+  metric_name: kubernetes_state.node.pods_allocatable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of replicas per deployment
+  interval: ""
+  metric_name: kubernetes_state.deployment.replicas
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of available replicas per deployment
+  interval: ""
+  metric_name: kubernetes_state.deployment.replicas_available
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of unavailable replicas per deployment
+  interval: ""
+  metric_name: kubernetes_state.deployment.replicas_unavailable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of updated replicas per deployment
+  interval: ""
+  metric_name: kubernetes_state.deployment.replicas_updated
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of desired replicas per deployment
+  interval: ""
+  metric_name: kubernetes_state.deployment.replicas_desired
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether a deployment is paused
+  interval: ""
+  metric_name: kubernetes_state.deployment.paused
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Maximum number of unavailable replicas during a rolling update
+  interval: ""
+  metric_name: kubernetes_state.deployment.rollingupdate.max_unavailable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of nodes running at least one daemon pod and that are supposed
+    to
+  interval: ""
+  metric_name: kubernetes_state.daemonset.scheduled
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of nodes running a daemon pod but are not supposed to
+  interval: ""
+  metric_name: kubernetes_state.daemonset.misscheduled
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of nodes that should be running the daemon pod
+  interval: ""
+  metric_name: kubernetes_state.daemonset.desired
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether the pod is ready to serve requests
+  interval: ""
+  metric_name: kubernetes_state.pod.ready
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Reports the status of the scheduling process for the pod with its tags
+  interval: ""
+  metric_name: kubernetes_state.pod.scheduled
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether the containers readiness check succeeded
+  interval: ""
+  metric_name: kubernetes_state.container.ready
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether the container is currently in running state
+  interval: ""
+  metric_name: kubernetes_state.container.running
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether the container is currently in terminated state
+  interval: ""
+  metric_name: kubernetes_state.container.terminated
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Whether the container is currently in waiting state
+  interval: ""
+  metric_name: kubernetes_state.container.waiting
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of restarts per container
+  interval: ""
+  metric_name: kubernetes_state.container.restarts
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of requested cpu cores by a container
+  interval: ""
+  metric_name: kubernetes_state.container.cpu_requested
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The number of requested memory bytes by a container
+  interval: ""
+  metric_name: kubernetes_state.container.memory_requested
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The limit on cpu cores to be used by a container
+  interval: ""
+  metric_name: kubernetes_state.container.cpu_limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: The limit on memory to be used by a container
+  interval: ""
+  metric_name: kubernetes_state.container.memory_limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of replicas per ReplicaSet
+  interval: ""
+  metric_name: kubernetes_state.replicaset.replicas
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of fully labeled replicas per ReplicaSet
+  interval: ""
+  metric_name: kubernetes_state.replicaset.fully_labeled_replicas
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of ready replicas per ReplicaSet
+  interval: ""
+  metric_name: kubernetes_state.replicaset.replicas_ready
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Number of desired pods for a ReplicaSet
+  interval: ""
+  metric_name: kubernetes_state.replicaset.replicas_desired
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed number of pods used for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.pods.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed number of services used for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed number of persistent volume claims used for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.persistentvolumeclaims.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed number of node ports used for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.nodeports.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed number of loadbalancers used for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.loadbalancers.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Observed sum of CPU cores requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.cpu.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: Observed sum of memory bytes requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.memory.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Observed sum of storage bytes requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.storage.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Observed sum of limits for CPU cores for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.limits.cpu.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: Observed sum of limits for memory bytes for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.limits.memory.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Hard limit of the number of pods for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.pods.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Hard limit of the number of services for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Hard limit of the number of PVC for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.persistentvolumeclaims.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Hard limit of the number of node ports for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.nodeports.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Hard limit of the number of loadbalancers for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.services.loadbalancers.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: Hard limit on the total of CPU core requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.cpu.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: Hard limit on the total of memory bytes requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.memory.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Hard limit on the total of storage bytes requested for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.requests.storage.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Hard limit on the sum of CPU core limits for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.limits.cpu.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: cpu
+- description: Hard limit on the sum of memory bytes limits for a resource quota
+  interval: ""
+  metric_name: kubernetes_state.resourcequota.limits.memory.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
