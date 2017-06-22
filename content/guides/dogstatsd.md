@@ -7,7 +7,7 @@ kind: documentation
 This page explains what DogStatsD is, how it works, and what data it accepts.
 </p>
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the <a href="https://github.com/etsy/statsd">StatsD</a> protocol and adds a few Datadog-specific extensions:
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD](https://github.com/etsy/statsd) protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
 * Service checks and Events
@@ -49,9 +49,7 @@ your application can reliably reach—grab the [DogStatsD client library](/libra
 application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the
-`dogstatsd_port` option in the main 
-<a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
-Agent configuration file</a>:
+`dogstatsd_port` option in the main [Agent configuration file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example):
 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 18125
