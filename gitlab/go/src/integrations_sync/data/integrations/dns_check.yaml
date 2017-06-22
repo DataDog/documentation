@@ -1,8 +1,0 @@
-dns_check:
-- description: The response time for DNS query for a given record, tagged by hostname,
-    e.g. 'hostname:example.com'.
-  interval: ""
-  metric_name: dns.response_time
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: second

@@ -1,8 +1,0 @@
-http_check:
-- description: The response time of an HTTP request to a given url, tagged by url,
-    e.g. 'url:http://example.com'.
-  interval: ""
-  metric_name: network.http.response_time
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: second
