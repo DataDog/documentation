@@ -28,7 +28,7 @@ across many hosts has an acceptable error rate in aggregate".
 
 This also import New Relic hosts to Datadog Infrastructure section. -->
 
-#### *「Collect metrics by host」* オプションの効能
+### *「Collect metrics by host」* オプションの効能
 
 このオプションを設定する事により、Datadog側では関連付けられた全てのホストのアプリケーションメトリクスを取得するようになります。(オプションを設定していない状態では、下記に示す"overall host throughput based average"になります。)
 
@@ -71,7 +71,7 @@ Whereas we would simply compute the arithmetic mean:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms -->
 
-#### *「Collect metrics by host」* オプションを有効にしています。なぜapplication-levelのメトリクスの示す値がNew RelicとDatadogで違っているのですか。
+### *「Collect metrics by host」* オプションを有効にしています。なぜapplication-levelのメトリクスの示す値がNew RelicとDatadogで違っているのですか。
 
 New Relicが、ホストレベルで測定されたメトリクス(例えば、レスポンス時間)のapplication-levelの集計値を計算する際、各ホストで測定されたスループットに基づいて加重平均を計算します。
 

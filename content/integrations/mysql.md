@@ -5,14 +5,14 @@ kind: integration
 git_integration_title: mysql
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connect MySQL to Datadog in order to:
 
   * Visualize your database performance
   * Correlate the performance of MySQL with the rest of your applications
 
-# Installation
+## Installation
 
 1.  Create a ```datadog``` user with replication rights on your MySQL server with the following command, replacing ```<UNIQUEPASSWORD>``` with a unique password:
 
@@ -33,7 +33,7 @@ Connect MySQL to Datadog in order to:
         echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
         echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
-# Configuration
+## Configuration
 
 1. Edit the mysql.yaml file in your agent's conf.d directory, replacing ```<UNIQUEPASSWORD>``` with the password used above.
 
@@ -63,7 +63,7 @@ Connect MySQL to Datadog in order to:
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
 
@@ -76,7 +76,7 @@ To validate your installation and configuration, restart the agent and execute t
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
 
 

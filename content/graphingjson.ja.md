@@ -122,11 +122,11 @@ A Series can be further combined together via binary operators (+, -, /, *):
 <!--
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="/examples/graphing functions/">Examples</a>
+A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/examples/graphing functions/">Examples</a>
 -->
 それぞれのクエリの結果に対して関数を適用することができます。
 
-これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="/examples/graphing functions/">Examples for Graphing Functions</a>
+これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="https://docs.datadoghq.com/examples/graphing functions/">Examples for Graphing Functions</a>
 本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
 
 {{< include-markdown "layouts/partials/graphingfunctions.md" >}}
@@ -394,7 +394,7 @@ The Time Series can be further broken down to:
 #### 折れ線グラフ
 
 
-<img src="/images/multi-lines.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="multi-lines.png" >}}
 
 <!-- The representation is automatically derived from having multiple `requests` values. -->
 このグラフ表現は、`requests`部に複数の検索クエリを有する場合に自動的に設定されます。
@@ -417,7 +417,7 @@ The Time Series can be further broken down to:
 
 #### 積み上げグラフ
 
-<img src="/images/slice-n-stack.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="slice-n-stack.png" >}}
 
 <!-- In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
 関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます:

@@ -7,7 +7,7 @@ git_integration_title: azure_iot_hub
 newhlevel: true
 ---
 
-# Overview
+## Overview
  Azure IOT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices.
 
 Get metrics from Azure IOT Hub to:
@@ -15,8 +15,8 @@ Get metrics from Azure IOT Hub to:
 * Visualize the performance of your IOT Hubs
 * Correlate the performance of your IOT Hubs with your applications
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-# Metrics
+## Metrics

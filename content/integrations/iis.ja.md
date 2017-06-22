@@ -16,7 +16,7 @@ Connect IIS to Datadog in order to:
 - Visualize your web server performance.
 -  Correlate the performance of IIS with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、IISのメトリクスをDatadogに送信します:

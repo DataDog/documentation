@@ -15,7 +15,7 @@ Each row in the table can be expanded for more contextual information about an i
 
 Checking “show summary graphs” at the top of the page will graph metrics for all processes that are shown in the table.
 
-<img src="/images/process/live_process_preview.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="process/live_process_preview.png" >}}
 
 ### One-step Installation
 

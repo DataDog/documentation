@@ -13,7 +13,7 @@ doclevel: basic
 * Get information and monitor into your application memory usage
 * Instrument your own metrics -->
 
-### 概要
+## 概要
 
 
 次の目的で、Go ExpvarのAgent Checkを活用します:

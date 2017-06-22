@@ -1,0 +1,13 @@
+amazon_waf:
+- interval: "60"
+  metric_name: aws.waf.allowed_requests
+  metric_type: count
+  unit_name: request
+- interval: "60"
+  metric_name: aws.waf.blocked_requests
+  metric_type: count
+  unit_name: request
+- interval: "60"
+  metric_name: aws.waf.counted_requests
+  metric_type: count
+  unit_name: request

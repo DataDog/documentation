@@ -28,7 +28,7 @@
           </script>
         {{ end }}
 
-        <script src="/js/main-dd.js"></script>
+        <script src="{{ .Site.BaseURL }}js/main-dd.js"></script>
 
         {{ if eq .RelPermalink "/api/" }}
           <script type="text/javascript">

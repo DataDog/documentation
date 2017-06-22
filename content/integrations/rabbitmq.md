@@ -6,7 +6,7 @@ kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 {{< img src="rabbitmqdashboard.png" >}}
 
@@ -15,11 +15,11 @@ Connect RabbitMQ to Datadog in order to:
 * Visualize RabbitMQ performance and utilization.
 * Correlate the performance of RabbitMQ with the rest of your applications.
 
-# Installation
+## Installation
 
 The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ documentation](https://www.rabbitmq.com/management.html) for information on how to install the plugin.
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to RabbitMQ. Edit conf.d/rabbitmq.yaml
 
@@ -41,7 +41,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `rabbitmq_api_url` - **required** - Points to the api url of the [RabbitMQ Managment Plugin](http://www.rabbitmq.com/management.html)
 * `rabbitmq_user` - **optional** - Defaults to 'guest'
@@ -54,7 +54,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
 {{< insert-example-links >}}
 
 
-# Validation
+## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -68,7 +68,7 @@ The RabbitMQ check requires the Management Plugin. Refer to [the RabbitMQ docume
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 

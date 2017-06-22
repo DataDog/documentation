@@ -6,17 +6,17 @@ newhlevel: true
 git_integration_title: amazon_lambda
 ---
 
-# Overview
+## Overview
 
 Amazon Lambda is a compute service that runs code in response to events and automatically manages the compute resources required by that code.
 
 Enable this integration to begin collecting Cloudwatch & custom metrics from your Lambda functions.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
@@ -40,7 +40,7 @@ print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
 
 Note: This integration requires the AWS permissions `logs:DescribeLogGroups`, `logs:DescribeLogStreams`, and `logs:FilterLogEvents` to be fully enabled. Also, counts and gauges are the only metrics types currently supported.
 
-# Metrics
+## Metrics
 
  
 

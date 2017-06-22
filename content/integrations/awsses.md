@@ -6,21 +6,21 @@ newhlevel: true
 git_integration_title: amazon_ses
 ---
 
-# Overview
+## Overview
 
 Amazon Simple Email Service (SES) is a cost-effective, outbound-only email-sending service.
 
 Enable this integration to see in Datadog all your SES metrics.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). The only requirement for this integration is the permission `ses:get`.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that SES is checked under metric collection.
 
-# Metrics
+## Metrics
 
 
 

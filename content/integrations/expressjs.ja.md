@@ -13,7 +13,7 @@ doclevel: basic
 * Alert on your response times
 * Monitor your response code -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、ExpressJSから取得したメトリクスをDatadogへ送信します:

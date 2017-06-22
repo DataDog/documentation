@@ -70,6 +70,7 @@ $(document).ready(function() {
 
     var header;
     var subheading;
+    var subsubheading;
 
     var toc = window.Datadog.toc;
     var tocdepth = window.Datadog.tocdepth;
@@ -95,45 +96,65 @@ $(document).ready(function() {
             // console.log('h4s', this.h4s.length);
         },
         'setHeadings': function(){
+            header = '';
+            subheading = '';
+            subsubheading = '';
 
-            if(this.h2s.length > 0 && this.h3s.length > 0 ) {
+            if(this.h2s.length && this.h3s.length && this.h4s.length) {
                 header = 'h2';
                 subheading = 'h3';
-            }else if(this.h2s.length == 0 && this.h3s.length > 0 ) {
-                header = 'h3';
-                if(this.h4s.length > 0){
-                    subheading = 'h4';
-                }else{
-                    subheading = null;
+                subsubheading = 'h4';
+            } else {
+                if(this.h2s.length > 0 && this.h3s.length == 0 && this.h4s.length == 0) {
+                    header = 'h2';
+                } else if(this.h2s.length > 0 && this.h3s.length > 0) {
+                    header = 'h2';
+                    subheading = 'h3';
+                } else if(this.h2s.length == 0 && this.h3s.length > 0) {
+                    header = 'h3';
+                    if(this.h4s.length) {
+                        subheading = 'h4';
+                    }
+                } else if(this.h2s.length == 0 && this.h3s.length == 0 && this.h4s.length > 0) {
+                    header = 'h4';
+                    if(this.h5s.length) {
+                        subheading = 'h5';
+                    }
                 }
             }
 
-            if(tocdepth == 1){
-                subheading = null;
+            if(parseInt(tocdepth) == 1){
+                subheading = '';
             }
 
-            this.initToc(header, subheading);
+            if(header !== '') {
+                this.initToc(header, subheading, subsubheading);
+            }
 
         },
-        'initToc': function(header, subheading) {
+        'initToc': function(header, subheading, subsubheading) {
 
             this.header = header;
             this.subheading = subheading;
+            this.subsubheading = subsubheading;
 
             // console.log(header);
             // console.log(subheading);
 
-            $('body').tocible({
-                heading: this.header, //[selector], the first level heading
-                subheading: this.subheading, //[selector], the second level heading
-                reference:'#toc-box', //[selector], reference element for horizontal positioning
-                title: 'Table of Contents', //[selector or string], title of the menu
-                hash: false, //[boolean], setting true will enable URL hashing on click
-                //offsetTop: 300, //[number], spacing/margin above the menu
-                speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
-                collapsible: false, //[boolean], enabling true will auto collapse sub level heading not being scrolled into
-                maxWidth: null //[number], set max-width of the navigation menu
-            });
+            if(this.header.length > 0 || this.subheading.length > 0) {
+                $('body').tocible({
+                    heading: this.header, //[selector], the first level heading
+                    subheading: this.subheading, //[selector], the second level heading
+                    subsubheading: this.subsubheading,
+                    reference: '#toc-box', //[selector], reference element for horizontal positioning
+                    title: 'Table of Contents', //[selector or string], title of the menu
+                    hash: false, //[boolean], setting true will enable URL hashing on click
+                    //offsetTop: 300, //[number], spacing/margin above the menu
+                    speed: 10, //[number or string ('slow' & 'fast')], duration of the animation when jumping to the clicked content
+                    collapsible: false, //[boolean], enabling true will auto collapse sub level heading not being scrolled into
+                    maxWidth: null //[number], set max-width of the navigation menu
+                });
+            }
         }
     }
 

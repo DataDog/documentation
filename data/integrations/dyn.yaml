@@ -1,0 +1,9 @@
+dyn:
+- interval: ""
+  metric_name: dyn.qps
+  metric_type: gauge
+  unit_name: query
+- interval: ""
+  metric_name: dyn.changes
+  metric_type: gauge
+  unit_name: event

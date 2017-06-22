@@ -457,8 +457,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -6184,6 +6184,12 @@ ol.outline {
         line-height: 20px; }
         .nav.sidebar .nav-header:first-child {
           border-radius: 0; } }
+  .nav.sidebar .tocible_header {
+    margin-top: 0;
+    background-color: #9d6ebf;
+    color: #fff;
+    text-shadow: none;
+    padding-left: 5px; }
   .nav.sidebar li {
     margin: 0;
     border-right: 1px solid #966ebd;
@@ -6512,6 +6518,9 @@ h4.tracing-api {
 
 .nav-tabs .tocible .tocible_subheading a {
   padding: 5px 25px; }
+
+.nav-tabs .tocible .tocible_subsubheading a {
+  padding: 3px 35px; }
 
 .main img {
   border: 1px solid #777; }

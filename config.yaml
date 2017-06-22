@@ -19,6 +19,7 @@ languages:
   en:
     #languageName: "English"
     #languageCode: "en-US"
+    disclaimer: ""
     weight: 0
     menu:
       main_references:
@@ -124,6 +125,7 @@ languages:
   ja:
     #languagename: "日本語"
     weight: 1
+    disclaimer: "アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。"
     menu:
       main_references:
         - identifier: menu_references_api
@@ -176,6 +178,7 @@ languages:
           weight: 120
 
 params:
+  environment: local
   img_url: "http://localhost:1313/"
   imgix:
     header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"

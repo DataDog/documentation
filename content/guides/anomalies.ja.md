@@ -40,7 +40,7 @@ The chart below shows a dashboard chart that uses anomaly detection. The grey ba
 
 下記では、Anomaly Detectionを適用したメトリクスのグラフを表示しています。グレーのバンドは過去の挙動から期待されるメトリクスの正常な変動幅を示しています。青と赤の折れ線は、実際に取得されたメトリクスの値です。また、青い線は正常な変動幅に収まっており、赤い線は変動幅を逸脱していることを示しています。
 
-<img src="/images/anomalies/dashboard_graph.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="anomalies/dashboard_graph.png" >}}
 
 <!--
 To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type and select "lines" from the Display menu. Other visualization types do not yet support anomaly detection. In the chart editor window, you should see something like this:
@@ -48,7 +48,7 @@ To create an anomaly detection graph, start by adding a timeseries graph to your
 
 Anomaly Detectionの利用を開始するには、メトリクスの時系列グラフをダッシュボードに追加することから始めます。下記に示したように、グラフの可視化は "Timeseries" を、グラフ形式を"lines" (折れ線グラフ)として選択します。他の可視化タイプはAnomaly Detectionでは現時点でサポートされておりません。エディター画面は以下のようになります:
 
-<img src="/images/anomalies/initial_editor.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="anomalies/initial_editor.png" >}}
 
 <!--
 Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the “Modify your query” box, choose the “anomalies” function:
@@ -56,7 +56,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 次に、メトリクスの各設定ボックスの右手、プラスマークをクリックします。“Modify your query”ボックスで "anomalies" 関数を選択します:
 
-<img src="/images/anomalies/function_menu.png" style="width:225px; border:1px solid #777777"/>
+{{< img src="anomalies/function_menu.png" >}}
 
 <!--
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. After successfully adding `anomalies`, your editor should show something like this:
@@ -64,7 +64,7 @@ This will add anomaly detection to your expression, and you should immediately s
 
 これによりAnomaly Detectionが適用され、即時グラフのプレビュー画面にグレーのバンドが表示されます。この関数は2つのパラメーターを持っています。1つは、どのアルゴリズムを使用するか。もう1つは`bounds` とラベルされており、グレーのバンドの幅を調整するために使用します。正しく設定されると、エディター画面の表示は以下のようになります:
 
-<img src="/images/anomalies/final_editor.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="anomalies/final_editor.png" >}}
 
 <!--
 ### 2. Alert on Anomalies
@@ -81,7 +81,7 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 ダッシュボード上でAnomaly Detectionを可視化するのに加えて、Anomaly Detectionで判定されたメトリクスの異常値を元にアラートMonitorを作成することができます。
 [New Monitor](https://app.datadoghq.com/monitors#/create) ページから新規アラートMonitorの作成を選択し、"Metric"(メトリクスを対象にしたアラート)を選択します。step(1)では他のメトリクスアラートと同様に設定をし、step(2)で"Anomaly Alert"を選択します。
 
-<img src="/images/anomalies/monitor_options.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="anomalies/monitor_options.png" >}}
 
 <!--
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive you monitor is to different types of anomalies.
@@ -167,12 +167,12 @@ Anomaly Detectionアルゴリズムによって描画されるグレーのバン
 
 ここで具体的な例を見てみましょう。`app.requests` メトリクスは非常にノイジーですが、平均値としては8で一定です。ある日、9:00頃に始まった10分間の異常な時間帯があり、その10分間の平均値は10でした。下記のグラフはこの時系列データを1日の時間幅で表したものです。それぞれのデータポイントは5分間を集計したものになっています。
 
-<img src="/images/anomalies/disappearing_day.png" style="width:500px; border:1px solid #777777"/>
+{{< img src="anomalies/disappearing_day.png" >}}
 
 <!--
 The grey band here makes sense; it is wide enough to capture the noise in the time series. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
 
-<img src="/images/anomalies/disappearing_half_hour.png" style="width:500px; border:1px solid #777777"/>
+{{< img src="anomalies/disappearing_half_hour.png" >}}
 
 Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
 
@@ -181,7 +181,7 @@ In general, if an anomaly disappears when you zoom in, this doesn't mean that it
 
 この例ではグレーのバンドは適切といえます。この時系列データのノイズを捉えるのに十分な広さの幅です。しかし、9:00頃に始まったノイズを明確に捉えるにはやや狭い幅ともいえます。では、次のグラフはどうでしょうか。ズームインしたグラフは異常な10分間を含む30分の時間幅で表されています。それぞれのデータポイントは10秒間を集計したものになっています。
 
-<img src="/images/anomalies/disappearing_half_hour.png" style="width:500px; border:1px solid #777777"/>
+{{< img src="anomalies/disappearing_half_hour.png" >}}
 
 繰り返しになりますが、この例でもグレーのバンドは適切のように見えます。なぜなら、異常ではない8:50から9:00と9:10から9:20のデータはバンドの内側に収まっているからです。バンドは狭くさえすれば、いかなる正常なデータも異常値として切り出せます。このバンドが前のグラフよりも8倍近く広くなっていることにお気づきでしょうか？ この9:00から9:10の異常な10分間では、他の部分の時系列データとは少し違うように見えますが、バンドの外側に飛び抜けるほどのものではありません。
 

@@ -13,7 +13,7 @@ doclevel: basic
 * See SNS messages as events in your stream
 * Send alert and event notifications to SNS -->
 
-### 概要
+## 概要
 
 
 次の目的で、AWS SNS(Simple Notification Service)をDatadogと連携します:

@@ -14,7 +14,7 @@ kind: integration
 Track and graph your Redis activity and performance metrics with slice-and-dice at
 all levels from individual column families to entire clusters. -->
 
-### 概要
+## 概要
 
 
 次の目的で、RedisのメトリクスをDatadogへ送信します:
@@ -93,7 +93,7 @@ Redisインテグレーションがデフォルトで取得しているメトリ
     redis.stats.keyspace_hits
     redis.stats.keyspace_misses
 
-<!-- ### Troubleshooting and Questions
+<!-- ## Troubleshooting and Questions
 
 Do you have redis-py library, version 2.4.11 or later? You might need to
 <a href="https://github.com/DataDog/dd-agent/issues/374">upgrade</a>
@@ -132,10 +132,10 @@ to see and what you want to see it over.  In the ‘Over:’ section you
 can select multiple environments and then select “Save these tiles to:
 a new dashboard.”
 
-<img src="/images/metric-explorer-redis.png"/> -->
+{{< img src="metric-explorer-redis.png" >}} -->
 
 
-### FAQs
+## FAQs
 
 **Q: Redisインテグレーションは、同一ホスト上の異なるポート番号を持ったRedisのインスタンスを監視出来ますか?**
 

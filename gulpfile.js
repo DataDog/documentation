@@ -134,7 +134,7 @@ var writeToManifest = function (directory) {
 // Run `gulp -T` for a task summary
 
 // ### Styles
-// `gulp styles` - Compiles, combines, and optimizes Bower CSS and project CSS.
+// `gulp styles` - Compiles, combines, and optimizes project CSS.
 // By default this task will only log a warning if a precompiler error is
 // raised. If the `--production` flag is set: this task will fail outright.
 gulp.task('styles', function () {
@@ -158,8 +158,7 @@ gulp.task('styles', function () {
 });
 
 // ### Scripts
-// `gulp scripts` - Runs JSHint then compiles, combines, and optimizes Bower JS
-// and project JS.
+// `gulp scripts` - Runs JSHint then compiles, combines, and optimizes project JS.
 gulp.task('scripts', function () {
   var merged = merge();
   for (var i in project["globs"]) {

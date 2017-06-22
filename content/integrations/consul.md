@@ -6,7 +6,7 @@ git_integration_title: consul
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Connect Consul to Datadog in order to:
 
@@ -16,7 +16,7 @@ Connect Consul to Datadog in order to:
 {{< insert-example-links >}}
 
 
-# Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 

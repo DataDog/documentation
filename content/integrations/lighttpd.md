@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: lighttpd
 newhlevel: true
 ---
-# Overview
+## Overview
 
 {{< img src="lighttpddashboard.png" >}}
 
@@ -16,11 +16,11 @@ Bring Lighttpd metrics to Datadog to:
 
 {{< insert-example-links >}}
 
-# Installation
+## Installation
 
 1.  Make sure that `mod_status` is installed on your Lighttpd server
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to Lighttpd. Edit conf.d/lighttpd.yaml
 
@@ -37,7 +37,7 @@ Bring Lighttpd metrics to Datadog to:
 
 2.  Restart the Agent
 
-# Validation
+## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -51,7 +51,7 @@ Bring Lighttpd metrics to Datadog to:
               - instance #0 [OK]
               - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
 The following metrics are collected for either Lighttpd1 and Lighttpd2:
 

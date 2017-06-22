@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Capture HAProxy activity in Datadog to:
@@ -17,7 +17,7 @@ Capture HAProxy activity in Datadog to:
 - Know when a server goes down.
 -  Correlate the performance of HAProxy with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、HAProxyの動作状況をDatadogと連携します:

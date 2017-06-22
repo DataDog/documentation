@@ -26,6 +26,8 @@ sidebar:
       href: "#downtime-schedule"
     - text: Monitorに関するFAQs
       href: "#faqs"
+aliases:
+  - /ja/guides/monitoring
 ---
 
 <!--

@@ -86,9 +86,9 @@ class LinkChecker(object):
         if link.startswith('//'):
             link = 'https:' + link
         if link.startswith('/'):
-            link = 'https://www.datadoghq.com' + link
+            link = self.domain + link.lstrip('/')
         if 'http' not in link:
-            link = 'https://www.datadoghq.com/' + link
+            link = self.domain + link.lstrip('/')
         return link
 
     def check_link(self, link):
@@ -248,15 +248,8 @@ class LinkCheck(LinkChecker):
                 return False
 
             # other no-no links
-            nope_list = [
-                'linkedin.com/share',
-                'reddit.com/submit',
-                'twitter.com/share',
-                'mailto:',
-                'tel:',
-                'irc:',
-                'app.datadoghq.com'
-            ]
+            with open('/etc/links.ignore') as ignore_links:
+                nope_list = ignore_links.readlines()
             is_valid = not any([pattern in link for pattern in nope_list])
             return is_valid
         except TypeError:  # we expect link to be a string, if it is not then bail

@@ -20,7 +20,7 @@ Capture Redmine activity in Datadog to:
 
 The Redmine configuration just requires a full URL to the desired activity feed (you can add multiple URLs). -->
 
-### 概要
+## 概要
 
 
 次の目的で、Rdmine上での活動状況をDatadogと連携します:
@@ -30,7 +30,7 @@ The Redmine configuration just requires a full URL to the desired activity feed 
 * 上記の情報に基づいて、チームでのディスカンションをする
 
 
-### 設定
+## 設定
 
 
 RedmineのRSSフィードを公開しているURLを、インテグレーションのタイル内の該当欄に記述し設定します。(複数のURLを設定することも可能です。)

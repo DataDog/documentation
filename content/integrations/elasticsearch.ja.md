@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Connect Elasticsearch to Datadog in order to:
@@ -16,7 +16,7 @@ Connect Elasticsearch to Datadog in order to:
 - Visualize Elasticsearch performance.
 - Correlate Elasticsearch performance with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、ElasticsearchをDatadogと連携します:

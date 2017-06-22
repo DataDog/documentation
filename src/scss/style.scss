@@ -182,6 +182,24 @@ ol.outline {
     @media (max-width: $screen-xs-max) {
       width: auto;
     }
+    li.integration {
+      padding:5px 10px;
+      margin:0;
+      a {
+        padding:0;
+        color: #337ab7;
+        text-decoration: none;
+        background:none;
+        border:none;
+        &:hover {
+          color: #23527c;
+          text-decoration: underline;
+        }
+      }
+      @media(max-width: $screen-xs-max) {
+        padding: 0;
+      }
+    }
     #toggleIntegrations {
       padding:0;
       margin:0;
@@ -613,6 +631,9 @@ h4.tracing-api {
     }
     .tocible_subheading a {
       padding: 5px 25px;
+    }
+    .tocible_subsubheading a {
+      padding: 3px 35px;
     }
   }
 }

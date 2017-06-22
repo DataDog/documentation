@@ -7,6 +7,6 @@
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/main-dd.css">
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main-dd.css">
   </head>
   <body>

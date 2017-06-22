@@ -8,14 +8,14 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Track Pingdom downtime events and user-centric performance metrics in Datadog, for correlation with other relevant events and metrics.
 
 At this time we track the response_time metric for any sites you configure on the Pingdom website. -->
 
-### 概要
+## 概要
 
 
 Pingdomのダウンタイム·イベントやパフォーマンス·メトリックを追跡し、Datadogに送信することで、アプリケーションの他のメトリクスやイベントと連携し、インフラ全体の把握ができるようにします。
@@ -23,13 +23,13 @@ Pingdomのダウンタイム·イベントやパフォーマンス·メトリッ
 現在のインテグレーションの仕様では、Pingdomで設定した任意のサイトのresponse_timeメトリクスを追跡します。
 
 
-<!-- ### Questions and Troubleshooting
+<!-- ## Questions and Troubleshooting
 
 **Q:** Does Datadog support transaction checks?
 
 **A:** Pingdom does not provide an API for transaction checks, so we’re not able to show them in Datadog. The transaction monitor feature was in beta until recently, so if it becomes available we will look to support it. -->
 
-### トラブルシュートと質問
+## トラブルシュートと質問
 
 **Q:** Datadogはトランザクションチェックをサポートしていますか。
 

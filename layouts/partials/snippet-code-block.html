@@ -37,7 +37,7 @@
 
       {{ end }}
 
-      {{ if $highlight }}
+      {{ if and $highlight (not (eq $v "console"))}}
         <div class="code-block code-block-{{$v}}">
         {{- highlight ($.context.Scratch.Get "file") $v "" -}}
         </div>

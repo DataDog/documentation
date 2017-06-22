@@ -15,9 +15,7 @@ variables:
   PREVIEW_BUCKET: "datadog-docs-preview"
   STATIC_BUCKET: "origin-static-assets"
   # domains
-  PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net"
-  STATIC_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/"
-  IMAGE_DOMAIN: "https://don08600y3gfm.cloudfront.net/documentation/img/"
+  PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net/"
   # webhooks
   SLACK_URL: "https://hooks.slack.com/services/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"
   # build folder
@@ -47,6 +45,9 @@ build_docker_image:
     - docker push $BUILD_IMAGE
   except:
     - tags
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
@@ -61,15 +62,15 @@ build_preview:
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
   script:
     - version_static_assets
+    - placehold_translations
     - build_hugo_site
-    - collect_static_assets
-    - remove_static_from_repo
+    - minify_html
     - push_site_to_s3
-#    - notify_slack "${MESSAGE}"
+    - remove_static_from_repo
     - create_artifact
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_images:
   <<: *base_template
@@ -79,10 +80,10 @@ test_preview_images:
     URL: ${PREVIEW_DOMAIN}
   script:
     - pull_artifact_from_s3
-    - test_site_links "images" "${URL}" "True" "False" "True"
+    - test_site_links "images" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_static:
   <<: *base_template
@@ -92,10 +93,10 @@ test_preview_static:
     URL: ${PREVIEW_DOMAIN}
   script:
     - pull_artifact_from_s3
-    - test_site_links "static" "${URL}" "True" "False" "True"
+    - test_site_links "static" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo
 
 test_preview_links:
   <<: *base_template
@@ -105,7 +106,7 @@ test_preview_links:
     URL: ${PREVIEW_DOMAIN}
   script:
     - pull_artifact_from_s3
-    - test_site_links "links" "${URL}" "True" "False" "True"
+    - test_site_links "links" "${URL}" "True" "True" "True"
   only:
-    - /pull/\/.*/
     - /.+?\/[a-zA-Z0-9_-]+/
+    - docs-hugo

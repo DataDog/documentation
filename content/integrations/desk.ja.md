@@ -8,7 +8,7 @@ kind: integration
 doclevel:
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Connect Desk to Datadog to:
@@ -27,27 +27,27 @@ Connect Desk to Datadog to:
 - サポートチケットのトレンドを、DevOpsの問題点と合わせて把握する
 
 
-<!-- ### Configuration
+<!-- ## Configuration
 
 
 From your Desk account, add an API application on the Settings -> API -> My Applications page (you made need administrator privileges.
 
 Fill out the form as shown, leaving the latter two URL fields blank. Desk should then generate a consumer key, consumer secret, access token, and access secret for your application.
 
-<img src="/images/desk_config.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="desk_config.png" >}}
 
 Then from your Datadog account, enter the corresponding information on the [Desk tile](https://app.datadoghq.com/account/settings#integrations/desk). You will also need to enter your company's unique Desk domain name.
 
 Hit the install button, and then you're all set! You will soon be able to select desk.* metrics on a custom dashboard or view them on the provided [Desk dashboard](https://app.datadoghq.com/screen/integration/desk). (You can also read about this integration on [our blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).) -->
 
-### 設定
+## 設定
 
 
 Deskのアカウントにログインし、`Setting` -> `API` -> `My Application` ページと移動し、APIアプリケーションを追加します。(この操作には、Admin権限が必要です。)
 
 以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成します。
 
-<img src="/images/desk_config.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="desk_config.png" >}}
 
 次に、Datadogインテグレーションページから[Deskのタイル](https://app.datadoghq.com/account/settings#integrations/desk)を選択し、先ほどDeskで生成した認証情報を入力します。
 又このタイルでは、あなたの会社に割り当てられたDeskドメイン名を入力する必要があります。

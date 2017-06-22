@@ -4,7 +4,7 @@ integration_title: NGINX
 kind: integration
 git_integration_title: nginx
 ---
-### Overview
+## Overview
 
 Connect NGINX to Datadog in order to:
 
@@ -44,13 +44,13 @@ For more information on configuration, read the [stub status docs](http://nginx.
 
 
 
-#### NGINX (Open Source)
+### NGINX (Open Source)
 
 <%= get_metrics_from_git('nginx', 'nginx.net.writing,nginx.net.waiting,nginx.net.reading,nginx.net.connections,nginx.net.request_per_s,nginx.net.conn_opened_per_s,nginx.net.conn_dropped_per_s' )%>
 
 The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 
-#### NGINX Plus
+### NGINX Plus
 
 If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python) when the instance target is an http status module URL.
 

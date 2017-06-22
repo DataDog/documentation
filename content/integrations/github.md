@@ -5,7 +5,7 @@ kind: integration
 ---
 
 
-### Overview
+## Overview
 
 
 Capture GitHub commits in Datadog to:
@@ -16,12 +16,12 @@ Capture GitHub commits in Datadog to:
 
 
 
-### Configuration
+## Configuration
 
 
 Select 'Github' [on the account settings screen][1] and link your account. You can then select which repos you would like to integrate, which branches, and if you'd like to receive commits and/or issues.
 
-### What to Expect
+## What to Expect
 
 
 Once the integration is complete, whatever you select (commits and/or issues) will populate into your Datadog Event Stream. If you view a dashboard, in the top left search bar you can type `sources:github` to see github events overlayed over your the graphs on that dashboard.

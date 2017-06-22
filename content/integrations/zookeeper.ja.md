@@ -16,7 +16,7 @@ Connect ZooKeeper to Datadog in order to:
 - Visualize ZooKeeper performance and utilization.
 - Correlate the performance of ZooKeeper with the rest of your applications. -->
 
-### 概要
+## 概要
 
 
 次の目的で、ZooKeeperとDatadogを連携します:

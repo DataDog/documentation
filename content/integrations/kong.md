@@ -7,7 +7,7 @@ git_integration_title: kong
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Connect Kong to Datadog to:
 
@@ -15,7 +15,7 @@ Connect Kong to Datadog to:
 * Correlate the performance of Kong with the rest of your applications
 
 
-# Configuration
+## Configuration
 
 Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
 
@@ -35,7 +35,7 @@ Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  You should see output that validates that the check passed.
 

@@ -17,7 +17,7 @@ Connect Jenkins to Datadog in order to:
 - Identify trends in your builds.
 - Discuss build failures with your team. -->
 
-### 概要
+## 概要
 
 
 Connect Jenkins to Datadog in order to:

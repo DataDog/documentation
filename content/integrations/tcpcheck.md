@@ -4,8 +4,11 @@ integration_title: TCP Check
 kind: integration
 newhlevel: true
 update_for_agent: 5.8.5
+aliases:
+  - /guides/network_checks
+  - /ja/guides/network_checks
 ---
-# Overview
+## Overview
 
 {{< img src="netgraphs.png" >}}
 
@@ -13,11 +16,11 @@ TCP checks run in the agent and can verify whether or not a TCP service is up or
 
 Also see the related [HTTP Checks](/integrations/httpcheck).
 
-# Installation
+## Installation
 
 No installation is required
 
-# Configuration
+## Configuration
 
 Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following yaml file will check both ports 22 and 443 on 192.168.22.1 with timeouts of 10 seconds. The response time will be available in the metric `network.tcp.response_time`.
 
@@ -43,7 +46,7 @@ Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following
           - demo:matt
 
 
-## Configuration Options
+### Configuration Options
 
 * `name` (Required) - Name of the service. This will be included as a tag: `instance:<name>`.
 * `host` (Required) - Host to be checked. This will be included as a tag: `url:<host>:<port>`.
@@ -57,7 +60,7 @@ Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following
 
 {{< insert-example-links >}}
 
-# Validation
+## Validation
 
 Execute the agent info command and verify that the integration check was successful. The output should contain a section similar to the following:
 

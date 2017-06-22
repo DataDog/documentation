@@ -5,7 +5,7 @@ git_integration_title: pgbouncer
 kind: integration
 
 ---
-### Overview
+## Overview
 
 Connect your PGBouncer to Datadog in order to:
 
@@ -14,7 +14,7 @@ Connect your PGBouncer to Datadog in order to:
 * Be notified about pgbouncer failovers and events.
 
 
-### Configuration
+## Configuration
 
 To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgbouncer.yaml` and make the appropriate changes.
 
@@ -35,7 +35,7 @@ To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgboun
 
 {{< insert-example-links >}}
 
-### Validation
+## Validation
 
 When you run datadog-agent info you should see something like the following:
 
@@ -46,11 +46,11 @@ When you run datadog-agent info you should see something like the following:
         -----------
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 1 service check
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 
-### Service Checks
+## Service Checks
 
 **pgbouncer.can_connect**
 : Agent is able to connect to the pgbouncer instance

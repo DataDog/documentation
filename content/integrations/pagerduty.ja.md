@@ -8,10 +8,10 @@ kind: integration
 doclevel: basic
 ---
 
-<!-- ### Overview
+<!-- ## Overview
  -->
 
-### 概要
+## 概要
 
 
 
@@ -32,10 +32,10 @@ doclevel: basic
 
 Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends](https://app.datadoghq.com/report/pagerduty).
 
-<img src="/images/pagerduty_incident_trends.png" style="width:100%; border:1px solid #777777" /> -->
+{{< img src="pagerduty_incident_trends.png" >}} -->
 
 Pagerdutyが公開している [次のドキュメント](http://www.pagerduty.com/docs/guides/datadog-integration-guide/) も合わせて参照可能です。
 
 インテグレーションの設定が完了すると、以下のような[Pagerduty Incident Trends](https://app.datadoghq.com/report/pagerduty)リポートを毎週emailで受信することが出来ます。
 
-<img src="/images/pagerduty_incident_trends.png" style="width:100%; border:1px solid #777777" />
+{{< img src="pagerduty_incident_trends.png" >}}

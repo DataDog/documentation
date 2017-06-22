@@ -6,7 +6,7 @@ git_integration_title: google_app_engine
 ---
 
 
-### Overview
+## Overview
 
 Install the Google App Engine integration in your Python project to:
 
@@ -17,7 +17,7 @@ Install the Google App Engine integration in your Python project to:
 You can also send custom metrics to Datadog.
 
 
-### Installation
+## Installation
 
 Ensure that Billing is enabled on your Google App Engine project to collect all metrics
 
@@ -101,7 +101,7 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
         return 'Sorry, unexpected error: {}'.format(e), 500
 
 
-### Metrics
+## Metrics
 
 {{< get-metrics-from-git >}}
 

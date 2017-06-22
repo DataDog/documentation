@@ -9,7 +9,7 @@ doclevel:
 ---
 <!-- ### Java, Cassandra, Tomcat, ActiveMQ, Solr -->
 
-#### Java, Cassandra, Tomcat, ActiveMQ, Solrのインテグレーションで使用しています。
+## Java, Cassandra, Tomcat, ActiveMQ, Solrのインテグレーションで使用しています。
 
 <!-- ## Introduction
 
@@ -19,7 +19,7 @@ In order to collect these metrics, a lightweight Java plugin named JMXFetch is c
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so. -->
 
-### 概要
+## 概要
 
 
 JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
@@ -45,7 +45,7 @@ The instructions to set up these integrations from within the Datadog Agent can 
 - [Solr](https://app.datadoghq.com/account/settings#integrations/solr)
 - [Tomcat](https://app.datadoghq.com/account/settings#integrations/tomcat) -->
 
-#### JMX Checkを有効にする方法
+### JMX Checkを有効にする方法
 Datadog Agent内でJMXを使ったインテグレーションを設定する手順に関しては、以下のリンクを参照してください:
 
 - [Active MQ](https://app.datadoghq.com/account/settings#integrations/activemq)
@@ -96,7 +96,7 @@ collected:
 
         `sudo /etc/init.d/datadog-agent jmx collect` -->
 
-##### JMX Checkによって取得可能なメトリクスを調べるためのコマンド:
+#### JMX Checkによって取得可能なメトリクスを調べるためのコマンド:
 
 <div class="alert alert-info">
     コマンド<code>datadog-agent jmx</code>は、Datadog Agent version 4.1.0で追加されました。
@@ -158,7 +158,7 @@ For a given bean, metrics get tagged in the following manner:
 Your metric will be mydomain (or some variation depending on the attribute
 inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`. -->
 
-##### 取得するメトリクスをカスタマイズする:
+#### 取得するメトリクスをカスタマイズする:
 
 他のAgent Checkと同じようにJMX Checkも2つのメインセクションで構成されています:
 
@@ -190,7 +190,7 @@ Your metric will be mydomain (or some variation depending on the attribute
 inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
 
 
-<!-- ### Description of the filters
+<!-- ## Description of the filters
 
 These dictionaries have some specials keys:
 
@@ -207,7 +207,7 @@ cache. You could use the `type:` `- Caches` filter:
 
 {{< snippet-code-block file="jmx-cassandra-cache.yaml" >}} -->
 
-#### Description of the filters
+### Description of the filters
 
 These dictionaries have some specials keys:
 
@@ -225,7 +225,7 @@ cache. You could use the `type:` `- Caches` filter:
 {{< snippet-code-block file="jmx-cassandra-cache.yaml" >}}
 
 
-<!-- #### The `attribute` filter
+<!-- ### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
@@ -261,7 +261,7 @@ Here is another filtering example:
                   - 95thPercentile
                   - 99thPercentile -->
 
-##### The `attribute` filter
+#### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
@@ -298,7 +298,7 @@ Here is another filtering example:
                   - 99thPercentile
 
 
-<!-- #### Note
+<!-- ### Note
 
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
@@ -324,7 +324,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
                 bean: second_bean_name
         ... -->
 
-##### Note
+#### Note
 
 
 フィルターのリストは、Datadog Agent 5.3.0からサポートされました。もし、旧バージョンのDatadog Agentを使っている場合は、bean毎に別の`include`文を記述するようにしてください。
@@ -353,15 +353,15 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 
 <!-- ## Troubleshooting
 
-#### The 350 metric limit
+### The 350 metric limit
 
 Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog. What we've found in speaking with many customers is that some of these metrics are not needed; thus, we've set the limit at 350 and below you'll find the tools to both see what you're collecting and to get below the limit.
 
 Begin by using the commands seen [above](#customization) to investigate what metrics are available.  Once you have seen all metrics that are available, we recommend creating filters to refine what metrics are collected.  If you believe you need more than 350 metrics, please reach out to [support@datadoghq.com](mailto:support@datadoghq.com). -->
 
-### トラブルシューティング
+## トラブルシューティング
 
-#### 送信可能なメトリクス数の上限について (350個)
+### 送信可能なメトリクス数の上限について (350個)
 
 これらのインテグレーションは、その特性上大量のメトリクスをDatadogへ送信することが可能です。このような状況下、お客様とのコミュケーションの中で分かったことは、「インテグレーションが送信しているメトリクスの全てが必要な訳ではない」ということでした。従って、これらのインテグレーションから送信できるメトリクスを350個に制限しています。
 

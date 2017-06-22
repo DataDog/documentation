@@ -1,0 +1,9 @@
+amazon_machine_learning:
+- interval: "60"
+  metric_name: aws.ml.predict_count
+  metric_type: count
+  unit_name: ""
+- interval: "60"
+  metric_name: aws.ml.predict_failure_count
+  metric_type: count
+  unit_name: ""

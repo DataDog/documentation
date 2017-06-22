@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: moxtra
 ---
 
-# Overview
+## Overview
 
 Moxtra delivers an embeddable, multilayered cloud collaboration service that lets people work on the go or at their desks.
 
@@ -16,7 +16,7 @@ Integrate Moxtra to
 * Be notified when a metric alert is triggered
 * Share your graphs with your team
 
-# Installation
+## Installation
 
 To enable this integration...
 
@@ -24,7 +24,7 @@ To enable this integration...
 2.  Search for Datadog and Add the integration.
 
 
-# Configuration
+## Configuration
 
 1.  Click the **Install Integration** button on the Moxtra Integration Tile.
 2.  Add your Webhook URL to Datadog's webhooks-enabled services [here](https://app.datadoghq.com/account/settings#integrations/webhooks).

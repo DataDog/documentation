@@ -6,7 +6,7 @@ git_integration_title: azure_storage
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 
 
@@ -17,7 +17,7 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 {{< img src="azure/storage_dash.png" >}}
 
 
-# Installation
+## Installation
 
 1.  If you haven't already, set up the [Main Azure Integration](/integrations/azure).
 2.  For each storage account that you want to monitor, create the required monitoring tables and generate the SAS token with the Azure Storage integration setup CLI. **Instructions and a script for completing this step can be found [here](https://github.com/DataDog/azure-storage-dd)**
@@ -29,7 +29,7 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 
 **NOTE: It may take up to an hour for Azure to generate and populate the minute-metric table for a Storage Account. This delay will occur when first adding a Storage Account to monitor in Datadog**
 
-# Metrics
+## Metrics
 
 
 

@@ -12,7 +12,7 @@ doclevel: basic
 
 Enable this integration to see in Datadog all your ElastiCache metrics. -->
 
-### 概要
+## 概要
 
 
 Amazon ElastiCache は、メモリ内キャッシュのデプロイ、運用、スケーリングをクラウド内で簡単に実行出来るウェブサービスです。

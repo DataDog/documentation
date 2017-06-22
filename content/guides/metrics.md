@@ -22,7 +22,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -79,7 +79,7 @@ statsd = Datadog::Statsd.new
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
     This tutorial has examples for Python and Ruby, but check out the
-    <a href="/libraries/">libraries page</a> if you use another language.
+    <a href="https://docs.datadoghq.com/libraries/">libraries page</a> if you use another language.
   </div>
 
 </div>
@@ -139,7 +139,7 @@ end
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-<img src="/images/graph-guides-metrics-page-views.png" style="width:100%"/>
+{{< img src="graph-guides-metrics-page-views.png" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -272,7 +272,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-<img src="/images/graph-guides-metrics-query-times.png" style="width:100%"/>
+{{< img src="graph-guides-metrics-query-times.png" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -480,7 +480,7 @@ Datadog:
 
 <ul>
   <li>
-    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+    Submit metrics directly to Datadog's <a href="https://docs.datadoghq.com/api/">HTTP API</a>
   </li>
   <li>
     Use Dropwizard's Java <a

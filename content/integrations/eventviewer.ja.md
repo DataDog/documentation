@@ -8,7 +8,7 @@ kind: integration
 doclevel: complete
 ---
 
-<!-- ### Overview
+<!-- ## Overview
 
 
 Connect Event Viewer to Datadog in order to:
@@ -16,7 +16,7 @@ Connect Event Viewer to Datadog in order to:
 - Track system and application events in Datadog.
 - Correlate system and application events with the rest of your application. -->
 
-### 概要
+## 概要
 
 
 次の目的の為に、Event ViewerをDatadogと連携します:

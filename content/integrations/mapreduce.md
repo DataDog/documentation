@@ -6,18 +6,18 @@ git_integration_title: mapreduce
 newhlevel: true
 updated_for_agent: 5.8.0
 ---
-# Overview
+## Overview
 
 Capture MapReduce metrics to:
 
 * Analyze and inspect individual MapReduce jobs and tasks.
 * Visualize performance of individual tasks.
 
-# Installation
+## Installation
 
 Install Datadog Agent on the Master Node where the ResourceManager is running.
 
-# Configuration
+## Configuration
 
 1.  Configure the agent to connect to the ResourceManager: Edit conf.d/mapreduce.yaml
 
@@ -48,7 +48,7 @@ Install Datadog Agent on the Master Node where the ResourceManager is running.
 
 {{< insert-example-links conf="mapreduce" check="mapreduce" >}}
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -62,7 +62,7 @@ Execute the info command and verify that the integration check has passed. The o
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 

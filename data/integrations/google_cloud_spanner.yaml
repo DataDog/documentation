@@ -1,0 +1,17 @@
+google_cloud_spanner:
+- interval: "60"
+  metric_name: gcp.spanner.api.request_count
+  metric_type: rate
+  unit_name: request
+- interval: "60"
+  metric_name: gcp.spanner.instance.cpu.utilization
+  metric_type: gauge
+  unit_name: fraction
+- interval: "60"
+  metric_name: gcp.spanner.instance.node_count
+  metric_type: gauge
+  unit_name: node
+- interval: "60"
+  metric_name: gcp.spanner.instance.storage.used_bytes
+  metric_type: gauge
+  unit_name: byte

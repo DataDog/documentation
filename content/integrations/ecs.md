@@ -25,7 +25,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 
 #### AWS CLI
 
-1. Download [dd-agent-ecs.json](/static/dd-agent-ecs.json).
+1. Download [dd-agent-ecs.json](/json/dd-agent-ecs.json).
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
        aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
@@ -183,8 +183,8 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 
 #### Dynamic detection and monitoring of running services
 
-Datadog's <a href="/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
+Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
-### Metrics
+## Metrics
 
 

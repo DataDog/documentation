@@ -43,7 +43,7 @@ remove_static_from_repo() {
     start_step
     echo "---------"
     echo "Removing static from repo."
-    find "${ARTIFACT_RESOURCE}" -type d -name "img" -print | xargs rm -rf
+    find "${ARTIFACT_RESOURCE}" -type d -name "images" -print | xargs rm -rf
     echo "Done removing static from repo."
     pass_step  "${FUNCNAME}"
 }
@@ -105,7 +105,8 @@ build_hugo_site() {
     # URL
     # ============ generate hugo config file ============ #
     start_step
-    if [[ "${CI_COMMIT_REF_NAME}" == *"preview"* ]]; then
+    echo "building config for: ${CI_ENVIRONMENT_NAME}"
+    if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
       printf "User-agent: *\nDisallow: /" >> "static/robots.txt"  # add a robots.txt to the preview site
     fi
     build_config.py -d "${URL}" -b "${CI_COMMIT_REF_NAME}" -p "${ARTIFACT_RESOURCE}" "config.yaml" "${CONFIG}" || fail_step "${FUNCNAME}";
@@ -115,6 +116,7 @@ build_hugo_site() {
     echo "---------"
     echo "Building hugo with build.yaml based on ${CONFIG}; referencing ${URL}"
     # fail hugo build on WARN or ERROR
+    hugo version
     if hugo --config="build.yaml" --verbose 2>&1 | grep -E  "WARN|ERROR" | grep -v "No theme set" > /tmp/hugo.log; then
         echo "done."
     fi
@@ -140,6 +142,13 @@ minify_html() {
     files="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
     minify_html.py "${files}" || fail_step "${FUNCNAME}";
     pass_step  "${FUNCNAME}"
+}
+
+
+placehold_translations() {
+	start_step
+    placehold_translations.py -c "config.yaml" -f "content/" || fail_step "${FUNCNAME}";
+	pass_step "${FUNCNAME}"
 }
 
 
@@ -175,7 +184,7 @@ push_site_to_s3() {
     start_step
     echo "attempting to push to s3://${BUCKET}/$(set_site_destination ${CI_COMMIT_REF_NAME})..."
     # long cache - includes assets that need to be loaded first
-    s3cmd put --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
+    s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
           --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
           "${ARTIFACT_RESOURCE}/" s3://${BUCKET}/$(set_site_destination "${BUCKET}" "${CI_COMMIT_REF_NAME}")
@@ -195,34 +204,27 @@ test_site_links() {
     # CHECK_EXTERNAL
     # VERBOSE
 
-    ## filters - if change was only to content
-    # get added, copied, or modified files it this commit
-    # replace the file name with the build file name (will this break pages that use a slug??? yes.)
-    # replace content with
-	#    filters=$(git diff HEAD^ HEAD --name-only --diff-filter=ACM | sed -ne "s@\.md@\/index\.html@p" | sed -ne "s@content@${ARTIFACT_RESOURCE}@p")
-	#    if [[ ${filters} != "" ]]; then
-	#        # so we can get a dozen or so changed files back
-	         # changed file names do not always translate to their html counterparts... so
-	         # for each changed file, if it is a .md file, then we need to
-	#        filters="$(pwd)/${filters}"
-	#    else
-	#        filters="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
-	#    fi
-
     start_step
     filters="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
 
     curr_dir=$(pwd)"/${ARTIFACT_RESOURCE}"
-    check_links.py "${1}" -p 5 -f "${filters}" -d "${2}" --check_all "${3}" \
+
+	# update links for the branch
+    domain=${2}
+    if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
+        domain="${2}${CI_COMMIT_REF_NAME}/"
+    fi
+
+    check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
     --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
 
-    # update gobs trello with broken external links
-    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
-        echo "updating gobs trello"
-        source /etc/trello_config.sh
-        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
-        --list_id "${list_id}" --members "${members}"
-    fi
+    # update trello with broken external links
+	#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+	#        echo "updating trello"
+	#        source /etc/trello_config.sh
+	#        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
+	#        --list_id "${list_id}" --members "${members}"
+	#    fi
 
     # update status
     if [[ $? != 0 ]]; then
