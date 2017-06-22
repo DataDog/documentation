@@ -277,8 +277,8 @@ or you're writing your own library, here's how to format the data.
 - `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy](http://docs.datadoghq.com/faq/#api).
 - `value` — an integer or float.
 - `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
-- `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics.
-- `tags` (optional) — a comma seperated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a tag like `device:foobar`.
+- `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
+- `tags` (optional) — a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a user-added tag like `device:foobar`.
 
 Here are some example datagrams:
 
@@ -310,7 +310,7 @@ Here are some example datagrams:
 - `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
 - `|d:timestamp` (optional) — Add a timestamp to the event. Default is the current Unix epoch timestamp.
 - `|h:hostname` (optional) - Add a hostname to the event. No default.
-- `|k:aggregation_key` (optional) — Assign an aggregation key to the event, to group it with some others. No default.
+- `|k:aggregation_key` (optional) — Add an aggregation key to group the event with others that have the same key. No default.
 - `|p:priority` (optional) — Set to 'normal' or 'low'. Default 'normal'.
 - `|s:source_type_name` (optional) - Add a source type to the event. No default.
 - `|t:alert_type` (optional) — Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
