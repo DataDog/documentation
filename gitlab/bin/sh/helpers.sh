@@ -152,6 +152,11 @@ placehold_translations() {
 }
 
 
+sync_integration_metrics() {
+	integrations_sync --token ${GITHUB_TOKEN}
+}
+
+
 push_site_to_s3() {
     # $1: BUCKET
     # $2: BRANCH
@@ -227,10 +232,10 @@ test_site_links() {
 	#    fi
 
     # update status
-#    if [[ $? != 0 ]]; then
-#        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
-#        exit 1
-#    fi
+	#    if [[ $? != 0 ]]; then
+	#        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
+	#        exit 1
+	#    fi
     pass_step  "${FUNCNAME}"
 }
 
