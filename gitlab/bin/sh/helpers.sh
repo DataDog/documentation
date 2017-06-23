@@ -7,7 +7,7 @@ version_static_assets() {
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
         echo "Time for a node headache... "
-        test -d "node_modules" || echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .
+        test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
         if [[ "${BUCKET}" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
@@ -227,10 +227,10 @@ test_site_links() {
 	#    fi
 
     # update status
-    if [[ $? != 0 ]]; then
-        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
-        exit 1
-    fi
+#    if [[ $? != 0 ]]; then
+#        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
+#        exit 1
+#    fi
     pass_step  "${FUNCNAME}"
 }
 
@@ -296,30 +296,6 @@ start_timer() {
 
 stop_timer() {
     export process_stop_time=$(($(date +%s) - ${process_start_time}))
-}
-
-
-post_dd_event() {
-    # $1: title
-    # $2: text
-    # $3: success / failure
-    dd_post_api.py "event" \
-        --title "${1}" \
-        --description ${2} \
-        --result "${3}"
-}
-
-
-post_dd_metric() {
-    # $1: metric name
-    # $2: points
-    # $3: step_name
-    # $4: success / failure
-    dd_post_api.py "metric" \
-        --metric "${1}" \
-        --points ${2} \
-        --step_name "${3}" \
-        --step_status "${4}"
 }
 
 

@@ -29,7 +29,7 @@ Capture metrics from the files in given directories:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Directoryインテグレーションの設定ファイルサンプル](ttps://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example)
+* [Directoryインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example)
 * [Directoryインテグレーション check script](https://github.com/DataDog//integrations-core/blob/master/directory/check.py)
 
 
