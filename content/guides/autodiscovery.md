@@ -80,7 +80,7 @@ Storing templates as local files is easy to understand and doesn't require an ex
 
 There are two ways to provide templates:
 
-* Add them to each host running docker-dd-agent and [mount the directory](https://github.com/DataDog/docker-dd-agent#configuration-files) that contains them into docker-dd-agent when you start the container.
+* Add them to each host that runs docker-dd-agent, and [mount the directory](https://github.com/DataDog/docker-dd-agent#configuration-files) that contains them into docker-dd-agent when you start the container
 * Package them into your own release of docker-dd-agent
 
 #### Example: Apache check
