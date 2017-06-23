@@ -279,11 +279,13 @@ start_step() {
     start_timer
 }
 
+
 pass_step() {
     stop_timer
     echo -e "\e[38;5;198mprocess finished in ${process_stop_time}s\e[0m"
     # post_dd_metric "corpsite.deploy_step.duration" ${process_stop_time} "${1}" "success"
 }
+
 
 fail_step() {
     # $1: step name

@@ -9,7 +9,7 @@ CONFIG = config.yaml
 ARTIFACT_NAME = public
 URL = http://localhost:1313/
 CI_ENVIRONMENT_NAME = local
-FETCH_INTEGRATIONS = false
+FETCH_INTEGRATIONS = true
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -46,7 +46,7 @@ hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual en
 
 pre-build: source-helpers  ## gulp tasks; gather external content & data.
 	@gulp build --silent; \
-	if [ ${FETCH_INTEGRATIONS} == true ]; then integrations_sync --token ${github_personal_token} || true; fi; \
+	if [ ${FETCH_INTEGRATIONS} == true ]; then integrations_sync_osx --token ${github_personal_token} || true; fi; \
 	placehold_translations.py -c "config.yaml" -f "content/";
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
