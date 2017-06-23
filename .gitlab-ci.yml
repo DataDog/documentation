@@ -63,7 +63,7 @@ build_preview:
   script:
     - version_static_assets
     - placehold_translations
-    - sync_integration_metrics
+    # - sync_integration_metrics
     - build_hugo_site
     - minify_html
     - push_site_to_s3
