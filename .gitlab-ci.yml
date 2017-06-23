@@ -18,6 +18,7 @@ variables:
   PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net/"
   # webhooks
   SLACK_URL: "https://hooks.slack.com/services/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"
+  SLACK_CHANNEL: "#guac-ops"
   # build folder
   ARTIFACT_RESOURCE: "public"
 

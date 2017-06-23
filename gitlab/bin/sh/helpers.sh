@@ -310,14 +310,8 @@ stop_timer() {
 notify_slack() {
     url="${LIVE_DOMAIN}"
 
-    if [[ ${CI_COMMIT_REF_NAME} == "core-staging" ]]; then
-        url="${STAGING_DOMAIN}"
-    fi
-    if [[ ${CI_COMMIT_REF_NAME} == "content-deploy" ]]; then
-        url="${PREVIEW_DOMAIN}content-deploy/"
-    fi
     user=""
-    channel="#guac-ops"
+    channel="${SLACK_CHANNEL}"
 
     if [[ ${CI_ENVIRONMENT_NAME} == "preview" ]]; then
       url="${PREVIEW_DOMAIN}${CI_COMMIT_REF_NAME}/"
