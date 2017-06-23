@@ -222,7 +222,7 @@ test_site_links() {
     fi
 
     check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
-    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
+    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1 --ignore "/etc/links.ignore"
 
     # update trello with broken external links
 	#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
