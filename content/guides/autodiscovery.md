@@ -28,15 +28,11 @@ Finally, Autodiscovery can load check templates from places other than disk. Oth
 
 ### Different Execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources (not just one or the other). But unlike in a traditional Agent setup, it doesn't run all checks all the time; it decides which checks to enable after inspecting all currently running containers.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all currently running containers.
 
-As the Agent inspects each template and its container identifiers, it builds an internal mapping of container identifiers to template YAML (or JSON). Then, it inspects every running Docker container on the Agent's host, looking for containers that match any of the container identifiers in the identifier-to-template mapping. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port into the corresponding template. Then it enables the check.
+As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each template with a container identifier that matches the container, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
 
-The Agent watches for Docker events—container creation, destruction, starts, and stops—and regenerates check configurations from the templates on such events. Any time Autodiscovery finds another instance of the same service it had previously generated configuration for—whether it's an additional container or the previous one redeployed—it builds and enables another static configuration.
-
-There are a few caveats:
-
-- something about precedence of templates when multiple sources provided? (KV store > k8s annotations > files?)
+The Agent watches for Docker events—container creation, destruction, starts, and stops—and enables, disables, and regenerates static check configurations on such events.
 
 # How to set it up
 
@@ -263,4 +259,14 @@ To make configuration more precise we now use the complete container image ident
 In case you need to match different templates with containers running the same image, it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
+
+#### Template Source Precedence
+
+If you provide the same check type via multiple template sources, the Agent will prefer, in increasing order of preference:
+
+* File
+* Kubernetes annotation
+* Key-value store
+
+That is, if a `redisdb` template is configured both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
