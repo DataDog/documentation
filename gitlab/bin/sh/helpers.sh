@@ -319,7 +319,7 @@ notify_slack() {
     user=""
     channel="#guac-ops"
 
-    if [[ ${CI_COMMIT_REF_NAME} == *"/"* ]]; then
+    if [[ ${CI_ENVIRONMENT_NAME} == "preview" ]]; then
       url="${PREVIEW_DOMAIN}${CI_COMMIT_REF_NAME}/"
       user="${CI_COMMIT_REF_NAME%%/*}"
       channel="@${user}"
