@@ -153,7 +153,7 @@ placehold_translations() {
 
 
 sync_integration_metrics() {
-	arch
+	uname -a
 	integrations_sync_linux --token ${GITHUB_TOKEN}
 }
 
