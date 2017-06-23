@@ -6153,6 +6153,21 @@ ol.outline {
   @media (max-width: 767px) {
     .nav.sidebar {
       width: auto; } }
+  .nav.sidebar li.integration {
+    padding: 5px 10px;
+    margin: 0; }
+    .nav.sidebar li.integration a {
+      padding: 0;
+      color: #337ab7;
+      text-decoration: none;
+      background: none;
+      border: none; }
+      .nav.sidebar li.integration a:hover {
+        color: #23527c;
+        text-decoration: underline; }
+    @media (max-width: 767px) {
+      .nav.sidebar li.integration {
+        padding: 0; } }
   .nav.sidebar #toggleIntegrations {
     padding: 0;
     margin: 0; }

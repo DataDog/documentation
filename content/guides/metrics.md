@@ -115,9 +115,10 @@ counting web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
 
+{{< code-tabs section="counters-metrics" >}}
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="counters-page-views-python">
+  <div class="tab-pane active fade in" id="counters-metrics-python">
 {{< highlight python >}}
 def render_page():
     """ Render a web page. """
@@ -125,7 +126,7 @@ def render_page():
     return 'Hello World!'
 {{< /highlight >}}
   </div>
-  <div class="tab-pane fade in" id="counters-page-views-ruby">
+  <div class="tab-pane fade in" id="counters-metrics-ruby">
 {{< highlight ruby >}}
 def render_page()
   # Render a web page.
