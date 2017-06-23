@@ -14,7 +14,7 @@ Autodiscovery was previously called Service Discovery. It's still called Service
 
 # How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you (or someone else) troubleshoots the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or correctly configures the Agent check.
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you (or someone else) troubleshoots the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
