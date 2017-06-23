@@ -52,8 +52,8 @@
   {{ else }}
     <li id="toc-box"></li>
     {{ if eq .Params.Kind "integration" }}
-      <li class="nav-header">Other Integrations</li>
-      <li class="integration"><a href="/integrations/">Back to Overview</a></li>
+      <li class="nav-header">{{ i18n "integrations_other_integrations" }}</li>
+      <li class="integration"><a href="/integrations/">{{ i18n "integrations_back_to_overview" }}</a></li>
       {{ range $integrations }}
           <li class="integration"><a href="{{.Permalink}}">
             {{ if eq $lastUrlElement .File.TranslationBaseName }}&gt;{{ end }}

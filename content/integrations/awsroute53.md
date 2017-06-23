@@ -42,7 +42,7 @@ In the Amazon Web Services integration tile, ensure that Route53 is checked unde
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 

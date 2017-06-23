@@ -36,7 +36,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor type**: host-, metric-, integration-, process-, network-, event-based, and custom. See side navigation to drill into a specific type.
 - **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
 
-##Creating a Monitor
+## Creating a Monitor
 
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -46,7 +46,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 {{< img src="monitor/nav.png" >}}
 
-###Choose what to monitor
+### Choose what to monitor
 
 1. Select the metric and scope you want to monitor.
   {{< img src="monitor/metric_scope.png" >}}
@@ -156,7 +156,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
    reporting. This means the monitor will not resolve because there are not
    anymore values to trigger a resolution.
 
-###Setup Notifications
+### Setup Notifications
 
 
 {{< img src="monitor/notification.png" >}}
@@ -165,18 +165,12 @@ on the left. This guide will walk through the configuration of the Metric type. 
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
-2. Enter a **message** for the monitor. This field allows standard
-   [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
-   as well as Datadog's @-notification syntax. Note: you can notify any
-   non-Datadog users via email by simply adding `@their-email` to the
-   message.
+2. Enter a **message** for the monitor. This field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
+   as well as Datadog's @-notification syntax. Note: you can notify any non-Datadog users via email by simply adding `@their-email` to the message.
 
-   A common use-case for the monitor message is to include a step-by-step way
-   to resolve the problem. For example if you are monitoring a database then you
-   might want to include steps for failing over to a standby node. All in all,
-   you should attempt to give as much context to the monitor as possible.
+   A common use-case for the monitor message is to include a step-by-step way to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
-4. Optionally enable **monitor renotification**. This option is useful to remind
+3. Optionally enable **monitor renotification**. This option is useful to remind
    your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent
    anytime the monitor renotifies. The original message will be included as

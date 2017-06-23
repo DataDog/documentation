@@ -31,6 +31,6 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure_storage

@@ -1,1 +1,684 @@
-docker: []
+docker:
+- description: The fraction of time the CPU is executing system calls on behalf of
+    processes of this container
+  interval: ""
+  metric_name: docker.cpu.system
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: 95th percentile of docker.cpu.system
+  interval: ""
+  metric_name: docker.cpu.system.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Average value of docker.cpu.system
+  interval: ""
+  metric_name: docker.cpu.system.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The rate that the value of docker.cpu.system was sampled
+  interval: ""
+  metric_name: docker.cpu.system.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.cpu.system
+  interval: ""
+  metric_name: docker.cpu.system.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Median value of docker.cpu.system
+  interval: ""
+  metric_name: docker.cpu.system.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The fraction of time the CPU is under direct control of processes of
+    this container
+  interval: ""
+  metric_name: docker.cpu.user
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: 95th percentile of docker.cpu.user
+  interval: ""
+  metric_name: docker.cpu.user.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Average value of docker.cpu.user
+  interval: ""
+  metric_name: docker.cpu.user.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The rate that the value of docker.cpu.user was sampled
+  interval: ""
+  metric_name: docker.cpu.user.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.cpu.user
+  interval: ""
+  metric_name: docker.cpu.user.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Median value of docker.cpu.user
+  interval: ""
+  metric_name: docker.cpu.user.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Number of times the cgroup has been throttled
+  interval: ""
+  metric_name: docker.cpu.throttled
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The amount of memory that is being used to cache data from disk (e.g.
+    memory contents that can be associated precisely with a block on a block device)
+  interval: ""
+  metric_name: docker.mem.cache
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile value of docker.mem.cache
+  interval: ""
+  metric_name: docker.mem.cache.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.mem.cache
+  interval: ""
+  metric_name: docker.mem.cache.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.mem.cache was sampled
+  interval: ""
+  metric_name: docker.mem.cache.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.mem.cache
+  interval: ""
+  metric_name: docker.mem.cache.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.mem.cache
+  interval: ""
+  metric_name: docker.mem.cache.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of non-cache memory that belongs to the container's processes.
+    Used for stacks, heaps, etc.
+  interval: ""
+  metric_name: docker.mem.rss
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile value of docker.mem.rss
+  interval: ""
+  metric_name: docker.mem.rss.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.mem.rss
+  interval: ""
+  metric_name: docker.mem.rss.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.mem.rss was sampled
+  interval: ""
+  metric_name: docker.mem.rss.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.mem.rss
+  interval: ""
+  metric_name: docker.mem.rss.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.mem.rss
+  interval: ""
+  metric_name: docker.mem.rss.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of swap currently used by the container
+  interval: ""
+  metric_name: docker.mem.swap
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile value of docker.mem.swap
+  interval: ""
+  metric_name: docker.mem.swap.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.mem.swap
+  interval: ""
+  metric_name: docker.mem.swap.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.mem.swap was sampled
+  interval: ""
+  metric_name: docker.mem.swap.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.mem.swap
+  interval: ""
+  metric_name: docker.mem.swap.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.mem.swap
+  interval: ""
+  metric_name: docker.mem.swap.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of "active" RSS memory. Active memory is not swapped to
+    disk
+  interval: ""
+  metric_name: docker.mem.active_anon
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of "inactive" RSS memory. Inactive memory is swapped to
+    disk when necessary
+  interval: ""
+  metric_name: docker.mem.inactive_anon
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of "active" cache memory. Active memory is reclaimed by
+    the system only after "inactive" has been reclaimed
+  interval: ""
+  metric_name: docker.mem.active_file
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of "inactive" cache memory. Inactive memory may be reclaimed
+    first when the system needs memory
+  interval: ""
+  metric_name: docker.mem.inactive_file
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of memory mapped by the processes in the control group
+  interval: ""
+  metric_name: docker.mem.mapped_file
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that processes in the container trigger page faults by accessing
+    a nonexistent or protected part of its virtual address space. Usually a page fault
+    of this type results in a segmentation fault
+  interval: ""
+  metric_name: docker.mem.pgfault
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The rate that processes in the container trigger page faults by accessing
+    a part virtual address space that was swapped out or corresponded to a mapped
+    file. Usually a page fault of type results in fetching data from disk instead
+    of from memory
+  interval: ""
+  metric_name: docker.mem.pgmajfault
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The rate at which pages are "charged" (added to the accounting) of
+    a cgroup
+  interval: ""
+  metric_name: docker.mem.pgpgin
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: page
+- description: The rate at which pages are "uncharged" (removed from the accounting)
+    of a cgroup
+  interval: ""
+  metric_name: docker.mem.pgpgout
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: page
+- description: The amount of memory that cannot be reclaimed. Usually this memory
+    contains sensitive data and has been locked to ensure that it never swaps to disk
+  interval: ""
+  metric_name: docker.mem.unevictable
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total size of all the files in the container which have been created
+    or changed by processes running in the container
+  interval: ""
+  metric_name: docker.container.size_rw
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile of docker.container.size_rw
+  interval: ""
+  metric_name: docker.container.size_rw.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.container.size_rw
+  interval: ""
+  metric_name: docker.container.size_rw.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.container.size_rw was sampled
+  interval: ""
+  metric_name: docker.container.size_rw.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.size_rw
+  interval: ""
+  metric_name: docker.container.size_rw.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.container.size_rw
+  interval: ""
+  metric_name: docker.container.size_rw.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Total size of all the files in the container
+  interval: ""
+  metric_name: docker.container.size_rootfs
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile of docker.container.size_rootfs
+  interval: ""
+  metric_name: docker.container.size_rootfs.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.container.size_rootfs
+  interval: ""
+  metric_name: docker.container.size_rootfs.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.container.size_rw was sampled
+  interval: ""
+  metric_name: docker.container.size_rootfs.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.size_rootfs
+  interval: ""
+  metric_name: docker.container.size_rootfs.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.container.size_rootfs
+  interval: ""
+  metric_name: docker.container.size_rootfs.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of containers running on this host
+  interval: ""
+  metric_name: docker.containers.running
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of containers stopped on this host
+  interval: ""
+  metric_name: docker.containers.stopped
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of top-level images
+  interval: ""
+  metric_name: docker.images.available
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of intermediate images, which are intermediate layers that
+    make up other images
+  interval: ""
+  metric_name: docker.images.intermediate
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The memory limit for the container, if set
+  interval: ""
+  metric_name: docker.mem.limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile of docker.mem.limit. Ordinarily this value will not
+    change
+  interval: ""
+  metric_name: docker.mem.limit.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.mem.limit. Ordinarily this value will not change
+  interval: ""
+  metric_name: docker.mem.limit.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.mem.limit was sampled
+  interval: ""
+  metric_name: docker.mem.limit.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.mem.limit. Ordinarily this value will not change
+  interval: ""
+  metric_name: docker.mem.limit.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.mem.limit. Ordinarily this value will not change
+  interval: ""
+  metric_name: docker.mem.limit.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The swap + memory limit for the container, if set
+  interval: ""
+  metric_name: docker.mem.sw_limit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: 95th percentile of docker.mem.sw_limit. Ordinarily this value will
+    not change
+  interval: ""
+  metric_name: docker.mem.sw_limit.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average value of docker.mem.sw_limit. Ordinarily this value will not
+    change
+  interval: ""
+  metric_name: docker.mem.sw_limit.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The rate that the value of docker.mem.sw_limit was sampled
+  interval: ""
+  metric_name: docker.mem.sw_limit.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.mem.sw_limit. Ordinarily this value will not change
+  interval: ""
+  metric_name: docker.mem.sw_limit.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Median value of docker.mem.sw_limit. Ordinarily this value will not
+    change
+  interval: ""
+  metric_name: docker.mem.sw_limit.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The fraction of used memory to available memory, if the limit is set
+  interval: ""
+  metric_name: docker.mem.in_use
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: 95th percentile of docker.mem.in_use
+  interval: ""
+  metric_name: docker.mem.in_use.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Average value of docker.mem.in_use
+  interval: ""
+  metric_name: docker.mem.in_use.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The rate that the value of docker.mem.in_use was sampled
+  interval: ""
+  metric_name: docker.mem.in_use.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.mem.in_use
+  interval: ""
+  metric_name: docker.mem.in_use.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Median value of docker.container.mem.in_use
+  interval: ""
+  metric_name: docker.mem.in_use.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The fraction of used swap + memory to available swap + memory, if the
+    limit is set
+  interval: ""
+  metric_name: docker.mem.sw_in_use
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: 95th percentile of docker.mem.sw_in_use
+  interval: ""
+  metric_name: docker.mem.sw_in_use.95percentile
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Average value of docker.mem.sw_in_use
+  interval: ""
+  metric_name: docker.mem.sw_in_use.avg
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The rate that the value of docker.mem.sw_in_use was sampled
+  interval: ""
+  metric_name: docker.mem.sw_in_use.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.mem.sw_in_use
+  interval: ""
+  metric_name: docker.mem.sw_in_use.max
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Median value of docker.container.mem.sw_in_use
+  interval: ""
+  metric_name: docker.mem.sw_in_use.median
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: Bytes read per second from disk by the processes of the container
+  interval: ""
+  metric_name: docker.io.read_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: 95th percentile of docker.io.read_bytes
+  interval: ""
+  metric_name: docker.io.read_bytes.95percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average value of docker.io.read_bytes
+  interval: ""
+  metric_name: docker.io.read_bytes.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The rate that the value of docker.io.read_bytes was sampled
+  interval: ""
+  metric_name: docker.io.read_bytes.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.io.read_bytes
+  interval: ""
+  metric_name: docker.io.read_bytes.max
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Median value of docker.container.io.read_bytes
+  interval: ""
+  metric_name: docker.io.read_bytes.median
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Bytes written per second to disk by the processes of the container
+  interval: ""
+  metric_name: docker.io.write_bytes
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: 95th percentile of docker.io.write_bytes
+  interval: ""
+  metric_name: docker.io.write_bytes.95percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average value of docker.io.write_bytes
+  interval: ""
+  metric_name: docker.io.write_bytes.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The rate that the value of docker.io.write_bytes was sampled
+  interval: ""
+  metric_name: docker.io.write_bytes.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.io.write_bytes
+  interval: ""
+  metric_name: docker.io.write_bytes.max
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Median value of docker.container.io.write_bytes
+  interval: ""
+  metric_name: docker.io.write_bytes.median
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Size of all layers of the image on disk
+  interval: ""
+  metric_name: docker.image.virtual_size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Size of all layers of the image on disk
+  interval: ""
+  metric_name: docker.image.size
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Bytes received per second from the network
+  interval: ""
+  metric_name: docker.net.bytes_rcvd
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: 95th percentile of docker.net.bytes_rcvd
+  interval: ""
+  metric_name: docker.net.bytes_rcvd.95percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average value of docker.net.bytes_rcvd
+  interval: ""
+  metric_name: docker.net.bytes_rcvd.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The rate that the value of docker.net.bytes_rcvd was sampled
+  interval: ""
+  metric_name: docker.net.bytes_rcvd.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.net.bytes_rcvd
+  interval: ""
+  metric_name: docker.net.bytes_rcvd.max
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Median value of docker.container.net.bytes_rcvd
+  interval: ""
+  metric_name: docker.net.bytes_rcvd.median
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Bytes sent per second to the network
+  interval: ""
+  metric_name: docker.net.bytes_sent
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: 95th percentile of docker.net.bytes_sent_bytes
+  interval: ""
+  metric_name: docker.net.bytes_sent_bytes.95percentile
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average value of docker.net.bytes_sent_bytes
+  interval: ""
+  metric_name: docker.net.bytes_sent_bytes.avg
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: The rate that the value of docker.net.bytes_sent_bytes was sampled
+  interval: ""
+  metric_name: docker.net.bytes_sent_bytes.count
+  metric_type: rate
+  per_unit_name: second
+  unit_name: sample
+- description: Max value of docker.container.net.bytes_sent_bytes
+  interval: ""
+  metric_name: docker.net.bytes_sent_bytes.max
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Median value of docker.container.net.bytes_sent_bytes
+  interval: ""
+  metric_name: docker.net.bytes_sent_bytes.median
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: byte
+- description: Average number of bytes the container's disk uses
+  interval: ""
+  metric_name: docker.disk.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average number of bytes the container's disk has free
+  interval: ""
+  metric_name: docker.disk.free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: Average number of total bytes in the container's disk
+  interval: ""
+  metric_name: docker.disk.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte

@@ -13,7 +13,7 @@ AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web ap
 
 ## Installation
 
-If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). 
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
 ## Configuration
 
@@ -101,6 +101,6 @@ This step is explained in [the multicontainer Docker tutorial](http://docs.aws.a
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

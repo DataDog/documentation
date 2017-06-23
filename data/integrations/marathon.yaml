@@ -54,9 +54,3 @@ marathon:
   metric_type: gauge
   per_unit_name: ""
   unit_name: task
-- description: Number of apps waiting for deployment
-  interval: ""
-  metric_name: marathon.queue.size
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: ""

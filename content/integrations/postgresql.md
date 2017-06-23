@@ -116,7 +116,4 @@ After you restart the agent, you should be able to run the ```info``` command wh
 
 ## Metrics
 
-
-
-
-
+{{< get-metrics-from-git >}}

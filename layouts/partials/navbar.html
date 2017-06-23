@@ -1,4 +1,4 @@
-    {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) and (.Site.Language.Lang "==" "en" ) }}
+    {{ $guides := (where (where (where .Site.Pages "Params.kind" "==" "guide") "Params.beta" "!=" "true" ) "Params.listorder" "!=" nil ) and (.Site.Language.Lang "==" "en" ) }}
 
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -53,7 +53,7 @@
               </ul>
 
             </li>
-            <li><a href="{{ .Site.BaseURL | absLangURL }}help/">{{ i18n "menu_help" }}</a></li>
+            <li><a href="{{ "help/" | relLangURL }}">{{ i18n "menu_help" }}</a></li>
 
             <li id="signin">
               <a class="btn navbar-btn flexbutton blueflex" href="https://app.datadoghq.com/signup">{{ i18n "btn_free_trial" }}</a>

@@ -161,7 +161,7 @@ Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks t
 
 In addition to the metrics you get from the database engines you will also get the following RDS metrics:
 
-
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 

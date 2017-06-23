@@ -20,3 +20,5 @@ Get metrics from Azure IOT Hub to:
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
 ## Metrics
+
+{{< get-metrics-from-git >}}

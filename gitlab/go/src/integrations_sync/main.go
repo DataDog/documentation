@@ -269,10 +269,10 @@ func main() {
 			os.Exit(1)
 		}
 
-		ref, _, err := client.Git.GetRefs(ctx, "DataDog", flag_repo_name, "refs/heads/master")
+		ref, _, err := client.Git.GetRefs(ctx, "DataDog", flag_repo_name, "refs/heads/prod")
 
 		check(err)
-
+		newopt.Ref = "prod"
 		repo_tar, _, err := client.Repositories.GetArchiveLink(
 			ctx, "DataDog", flag_repo_name, github.Zipball, newopt)
 
@@ -306,7 +306,7 @@ func main() {
 		check(zip_err)
 
 		private_repo_folder := "Datadog-" + repo_name + "-" + *p.Object.SHA
-
+		fmt.Println(private_repo_folder)
 		dogweb_integration_folder := private_repo_folder + "/integration"
 
 		filepath.Walk(dogweb_integration_folder, func(path string, info os.FileInfo, err error) error {
@@ -340,7 +340,7 @@ func main() {
 			return nil
 		})
 
-		os.RemoveAll(private_repo_folder)
+		//os.RemoveAll(private_repo_folder)
 		os.RemoveAll("dogweb.zip")
 		os.Exit(0)
 	}

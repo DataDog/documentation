@@ -61,5 +61,5 @@ To validate that the integration is working, run ```datadog-agent info```. You s
 ## Metrics
 
 
-
+{{< get-metrics-from-git >}}
 

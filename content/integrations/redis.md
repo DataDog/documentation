@@ -77,7 +77,7 @@ you can select multiple environments and then select “Save these tiles to: a n
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 [2]: https://app.datadoghq.com/account/overview
 [3]: https://app.datadoghq.com/metric/explorer

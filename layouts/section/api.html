@@ -118,8 +118,6 @@
       If the service is able to handle your request, but some issues are present (e.g. using a deprecated API or API version), the HTTP status code will indicate success and the response body will contain the expected result with the addition of a warnings array containing detailed warning messages.
             </p>
 
-
-
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Status Codes</h5>
@@ -129,9 +127,9 @@
             {{ end }}
             </ul>
             <h5>Example Error Response</h5>
-            {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-error.json" "static" true) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-error.json" "static" true "nocomments" true "highlight" false) }}
             <h5>Example Warning Response</h5>
-            {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-warning.json" "static" true) }}
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-warning.json" "static" true "nocomments" true "highlight" false) }}
           </div>
         </div>
 

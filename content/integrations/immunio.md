@@ -47,7 +47,7 @@ To validate your installation and configuration, restart the agent and execute t
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 ## Events
 

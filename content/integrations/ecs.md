@@ -188,3 +188,4 @@ Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscove
 ## Metrics
 
 
+{{< get-metrics-from-git >}}

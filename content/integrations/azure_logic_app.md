@@ -21,4 +21,4 @@ If you haven't already, set up the [Microsoft Azure integration first](/integrat
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}

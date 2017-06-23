@@ -23,6 +23,6 @@ Learn more about how to monitor ELB performance metrics thanks to [our series of
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

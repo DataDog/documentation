@@ -67,4 +67,4 @@ Get metrics from your app in real time to
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}

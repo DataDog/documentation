@@ -47,4 +47,4 @@ Configure the Agent to connect to the PowerDNS Recursor. Edit conf.d/powerdns_re
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}

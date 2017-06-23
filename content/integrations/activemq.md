@@ -103,6 +103,7 @@ Get metrics from ActiveMQ in real time to
 
 ## Metrics
 
+{{< get-metrics-from-git >}}
 
 
 [1]: http://activemq.apache.org/jmx.html

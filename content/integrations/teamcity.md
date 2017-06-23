@@ -77,4 +77,6 @@ Execute the `datadog info` command and verify that the integration check has pas
 
 ## Metrics
 
+{{< get-metrics-from-git >}}
+
 This integration only create events. It will not return any metrics.

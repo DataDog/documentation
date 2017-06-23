@@ -21,4 +21,4 @@ Datadogそのものや、この[ドキュメントサイト](http://docs.datadog
 
 **弊社サポートチームへのコンタクト方法は、以下になります。**
 
-<%= render '_contact_info-ja', :heading_size => 3 %>
+{{< partial name="_contact_info-ja.html" >}}
