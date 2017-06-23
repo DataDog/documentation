@@ -181,12 +181,9 @@ func parse_csv_to_yaml(integration string, csv_file string) {
 	_, err := exists(csv_file)
 
 	if err != nil {
-		fmt.Println("csv_file doesn't exist", err)
+		fmt.Println(err)
 	}
 
-	if integration == "activemq_xml" {
-		fmt.Println("active mq csv_file ", csv_file)
-	}
 	dat, err := os.Open(csv_file)
 
 	if err != nil {
@@ -410,8 +407,6 @@ func main() {
 
 				if matched {
 					integration := strings.Split(path, "/")
-					fmt.Println(integration)
-					//fmt.Println(integration[1], path)
 					parse_csv_to_yaml(integration[1], pwd+"/"+path)
 
 				}
