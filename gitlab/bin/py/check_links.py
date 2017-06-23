@@ -17,6 +17,17 @@ import cssutils
 import requests
 
 
+class Colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    ERROR = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 class LinkChecker(object):
     """
     base class for the link checker. very check type should be its own class.
@@ -27,7 +38,8 @@ class LinkChecker(object):
 
     STATIC_REG = '(\.)(js|css|pdf|txt|log|png|jpe?g|gif|ico)'
 
-    def __init__(self, src_path, files, processes, domain, static_domain, check_all, verbose, external, timeout):
+    def __init__(self, src_path, files, processes, domain, static_domain, check_all, verbose, external, timeout,
+                 ignore):
         self.src_path = src_path
         self.files = files.split()
         self.processes = int(processes)
@@ -39,7 +51,8 @@ class LinkChecker(object):
         self.external = True if external == "True" else False
         self.timeout = int(timeout)
         self.internal_domain_regex = 'localhost:1313|%s' % self.domain
-        print('pool: {0}.\non: {1}\ndomain: {1}\ncheck_all: {3}'.format(
+        self.ignore = ignore
+        print('pool: {0}\non: {1}\ndomain: {1}\ncheck_all: {3}'.format(
             self.processes,
             self.src_path,
             self.domain,
@@ -110,20 +123,20 @@ class LinkChecker(object):
                 response = requests.get(link.strip(), allow_redirects=True, headers=headers, timeout=self.timeout)
                 if int(response.status_code) not in [200, 206, 405, 422, 999]:
                     if re.search(self.internal_domain_regex, link) or re.search(LinkChecker.STATIC_REG, link):
-                        print('ERROR %s: %s' % (response.status_code, repr(link)))
+                        print('{0}ERROR: {1} timed out{2}'.format(Colors.ERROR, response.status_code, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'error')
                     else:
-                        print('WARN %s: %s' % (response.status_code, repr(link)))
+                        print('{0}WARN: {1} timed out{2}'.format(Colors.WARNING, response.status_code, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'warn')
             except requests.RequestException as e:
                 if 'timed out' in e.__str__():
-                    print('WARN: %s timed out' % repr(link))
+                    print('{0}WARN: {1} timed out{2}'.format(Colors.WARNING, repr(link), Colors.ENDC))
                 else:
                     if re.search(self.internal_domain_regex, link) or re.search(LinkChecker.STATIC_REG, link):
-                        print('ERROR %s: %s' % (500, repr(link)))
+                        print('{0}ERROR: {1} timed out{2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'error')
                     else:
-                        print('WARN %s: %s' % (500, repr(link)))
+                        print('{0}WARN: {1} timed out{2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'warn')
 
     def register_bad_link(self, bad_link, l_type):
@@ -248,8 +261,8 @@ class LinkCheck(LinkChecker):
                 return False
 
             # other no-no links
-            with open('/etc/links.ignore') as ignore_links:
-                nope_list = ignore_links.readlines()
+            with open(self.ignore) as ignore_links:
+                nope_list = ignore_links.read().splitlines()
             is_valid = not any([pattern in link for pattern in nope_list])
             return is_valid
         except TypeError:  # we expect link to be a string, if it is not then bail
@@ -261,9 +274,6 @@ class LinkCheck(LinkChecker):
         :param page_path: path to page
         :return: list of links on a page
         """
-        # if self.verbose:
-        #     print('Pulling links from: %s' % page_path)
-        # a links
         anc_links = LinkChecker.parse_page(page_path).find_all('a', class_=lambda x: x != 'no-check', href=True)
         anc_links = [anc['href'] for anc in anc_links if self.validate_link(anc.get('href'))]
 
@@ -298,6 +308,7 @@ def main():
     parser.add_option("-v", "--verbose", help="print all messages")
     parser.add_option("-e", "--external", help="check external links")
     parser.add_option("-T", "--timeout", help="seconds to try link for", default=1)
+    parser.add_option("-i", "--ignore", help="path to links.ignore", default="")
 
     (options, args) = parser.parse_args()
 
@@ -317,7 +328,7 @@ def main():
         print('Please fix the following broken %s and try again.\n %s' % (args[0], errors))
         sys.exit(1)
     else:
-        print('No broken %s found' % args[0])
+        print('{0}OK. No broken {1} found{2}'.format(Colors.OKBLUE, args[0], Colors.ENDC))
         sys.exit(0)
 
 
