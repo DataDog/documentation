@@ -100,7 +100,7 @@ instances:
 It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide one or more container identifiers to Autodiscovery. In this case, the identifier refers to the [official Docker Hub httpd](https://hub.docker.com/_/httpd/) container. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
 <div class="alert alert-info">
-You must provide only the short name of the container image, e.g. `httpd`. Do NOT provide the fully qualified name, e.g. `library/httpd:latest`. 
+You must provide only the short name of the container image, e.g. httpd. Do NOT provide the fully qualified name, e.g. library/httpd:latest. 
 </div>
 
 ### Template Source: Key-value Store
