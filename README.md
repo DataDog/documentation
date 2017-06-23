@@ -1,7 +1,5 @@
 # Documentation site for Datadog
 
-# Documentation site for Datadog
-
 Built with [hugo](https://gohugo.io/), a static website generation tool.
 
 # Setup
