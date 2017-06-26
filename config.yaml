@@ -121,6 +121,42 @@ languages:
           name: "From Source"
           url: /guides/basic_agent_usage/source/
           weight: 100
+      tracingnav:
+        - identifier: customnav_tracingnav_tracing
+          url: #
+          weight: 10
+
+        - identifier: customnav_tracingnav_install
+          url: /tracing/
+          weight: 20
+
+        - identifier: customnav_tracingnav_terminology
+          url: /tracing/terminology/
+          weight: 30
+
+        - identifier: customnav_tracingnav_faq
+          url: /tracing/faq/
+          weight: 40
+
+        - identifier: customnav_tracingnav_langs
+          url: #
+          weight: 50
+
+        - identifier: customnav_tracingnav_go
+          url: /tracing/go/
+          weight: 60
+
+        - identifier: customnav_tracingnav_python
+          url: /tracing/python/
+          weight: 70
+
+        - identifier: customnav_tracingnav_ruby
+          url: /tracing/ruby/
+          weight: 80
+
+        - identifier: customnav_tracingnav_api
+          url: /tracing/api/
+          weight: 90
 
   ja:
     #languagename: "日本語"

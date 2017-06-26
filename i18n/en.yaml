@@ -180,3 +180,31 @@
 
 - id: source
   translation: "From Source"
+
+# Tracing menu
+- id: customnav_tracingnav_tracing
+  translation:  "Tracing (APM)"
+
+- id: customnav_tracingnav_install
+  translation:  "Installation & Configuation"
+
+- id: customnav_tracingnav_terminology
+  translation:  "Terminology"
+
+- id: customnav_tracingnav_faq
+  translation:  "Frequently Asked Qestions"
+
+- id: customnav_tracingnav_langs
+  translation:  "Supported Languages"
+
+- id: customnav_tracingnav_go
+  translation:  "Go"
+
+- id: customnav_tracingnav_python
+  translation:  "Python"
+
+- id: customnav_tracingnav_ruby
+  translation:  "Ruby"
+
+- id: customnav_tracingnav_api
+  translation:  "Tracing API"

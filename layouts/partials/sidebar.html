@@ -1,4 +1,5 @@
 {{ $sidebar := .Params.sidebar }}
+{{ $custom_sidebar := .Params.customnav }}
 {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) }}
 {{ $integrations := ( where .Site.Pages "Params.kind" "==" "integration" ) }}
 {{ $currentURL := .URL }}
@@ -15,6 +16,24 @@
       </form>
     </li>
   {{ end }}
+
+{{ if $custom_sidebar }}
+{{ $nav_headers := (slice "customnav_tracingnav_tracing" "customnav_tracingnav_langs")}}
+  <li id="toc-box"></li>
+  {{ range .Site.Menus.tracingnav -}}
+
+    {{ if in $nav_headers .Identifier }}
+    <li class="nav-header">{{ i18n .Identifier }}</li>
+    {{ else }}
+
+    <li class="">
+      <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+    </li>
+    {{ end }}
+
+  {{ end }}
+
+{{ else }}
 
   <!-- table of contents -->
   {{ if $.Params.sidebar.nav }}
@@ -77,4 +96,6 @@
     {{ end }}
 
   {{ end }}
+
+{{ end }}
 </ul>
