@@ -116,7 +116,7 @@ Classic:
   Python:
     - name: datadogpy
       link: https://github.com/DataDog/datadogpy
-      official: true 
+      official: true
       api: true
       dogstatsd: true
       notes: Also includes an API client CLI tool, 'dog'
@@ -151,7 +151,7 @@ Tracing:
       notes: Also supports DogStatsD
   Elixir:
     - name: spandex
-      link: https://github.com/albert-io/spandex
+      link: https://github.com/zachdaniel/spandex
   Go:
     - name: dd-trace-go
       link: https://github.com/DataDog/dd-trace-go
