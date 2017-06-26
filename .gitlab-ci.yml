@@ -18,6 +18,7 @@ variables:
   PREVIEW_DOMAIN: "https://d2cx6t4ssmwdrv.cloudfront.net/"
   # webhooks
   SLACK_URL: "https://hooks.slack.com/services/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"
+  SLACK_CHANNEL: "#guac-ops"
   # build folder
   ARTIFACT_RESOURCE: "public"
 
@@ -63,9 +64,11 @@ build_preview:
   script:
     - version_static_assets
     - placehold_translations
+    # - sync_integration_metrics
     - build_hugo_site
     - minify_html
     - push_site_to_s3
+    - notify_slack "${MESSAGE}"
     - remove_static_from_repo
     - create_artifact
   only:

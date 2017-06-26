@@ -7,7 +7,7 @@ version_static_assets() {
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
         echo "Time for a node headache... "
-        test -d "node_modules" || echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .
+        test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
         if [[ "${BUCKET}" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
@@ -152,6 +152,12 @@ placehold_translations() {
 }
 
 
+sync_integration_metrics() {
+	uname -a
+	integrations_sync_linux --token ${GITHUB_TOKEN}
+}
+
+
 push_site_to_s3() {
     # $1: BUCKET
     # $2: BRANCH
@@ -216,7 +222,7 @@ test_site_links() {
     fi
 
     check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
-    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1
+    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 1 --ignore "/etc/links.ignore"
 
     # update trello with broken external links
 	#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
@@ -227,10 +233,10 @@ test_site_links() {
 	#    fi
 
     # update status
-    if [[ $? != 0 ]]; then
-        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
-        exit 1
-    fi
+	#    if [[ $? != 0 ]]; then
+	#        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
+	#        exit 1
+	#    fi
     pass_step  "${FUNCNAME}"
 }
 
@@ -274,11 +280,13 @@ start_step() {
     start_timer
 }
 
+
 pass_step() {
     stop_timer
     echo -e "\e[38;5;198mprocess finished in ${process_stop_time}s\e[0m"
     # post_dd_metric "corpsite.deploy_step.duration" ${process_stop_time} "${1}" "success"
 }
+
 
 fail_step() {
     # $1: step name
@@ -299,43 +307,13 @@ stop_timer() {
 }
 
 
-post_dd_event() {
-    # $1: title
-    # $2: text
-    # $3: success / failure
-    dd_post_api.py "event" \
-        --title "${1}" \
-        --description ${2} \
-        --result "${3}"
-}
-
-
-post_dd_metric() {
-    # $1: metric name
-    # $2: points
-    # $3: step_name
-    # $4: success / failure
-    dd_post_api.py "metric" \
-        --metric "${1}" \
-        --points ${2} \
-        --step_name "${3}" \
-        --step_status "${4}"
-}
-
-
 notify_slack() {
     url="${LIVE_DOMAIN}"
 
-    if [[ ${CI_COMMIT_REF_NAME} == "core-staging" ]]; then
-        url="${STAGING_DOMAIN}"
-    fi
-    if [[ ${CI_COMMIT_REF_NAME} == "content-deploy" ]]; then
-        url="${PREVIEW_DOMAIN}content-deploy/"
-    fi
     user=""
-    channel="#guac-ops"
+    channel="${SLACK_CHANNEL}"
 
-    if [[ ${CI_COMMIT_REF_NAME} == *"/"* ]]; then
+    if [[ ${CI_ENVIRONMENT_NAME} == "preview" ]]; then
       url="${PREVIEW_DOMAIN}${CI_COMMIT_REF_NAME}/"
       user="${CI_COMMIT_REF_NAME%%/*}"
       channel="@${user}"

@@ -68,3 +68,6 @@ Temporary Items
 # local dev
 *.js.map
 *.css.map
+
+# virtual env
+hugpython/
