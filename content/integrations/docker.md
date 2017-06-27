@@ -19,16 +19,16 @@ Get metrics from Docker in real time to:
 
 # Installation
 
-There are two ways to setup the Docker integration: install the agent on the host or on a single sidecar container.
+To collect Docker metrics about all your containers, you will run **one** Datadog Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container. We recommend the latter.
 
-Whichever you choose, your system will need to have cgroup memory management enabled for the check to succeed. Check out our [Docker agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
+Whichever you choose, your hosts need to have cgroup memory management enabled for the Docker check to succeed. See the [docker-dd-agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
 
 ## Host Installation
 
 1. Ensure Docker is running on the host.
-2. Install the agent as described in [the agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
+2. Install the Agent as described in [the Agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
 3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
-4. Add the agent user to the docker group: `usermod -a -G docker dd-agent`
+4. Add the Agent user to the docker group: `usermod -a -G docker dd-agent`
 5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     ![](/static/images/integrations-docker-dockerps.png)
@@ -37,7 +37,7 @@ Whichever you choose, your system will need to have cgroup memory management ena
 
 **Note:** docker_daemon has replaced the older docker integration.
 
-## Single Container Installation
+## Container Installation
 
 1. Ensure Docker is running on the host.
 2. As per [the docker container installation instructions](https://app.datadoghq.com/account/settings#agent/docker), run:
@@ -102,21 +102,9 @@ For example, the first version of the Docker image that will bundle the Datadog 
 
 For more information about building custom Docker containers with the Datadog Agent, the Alpine Linux based image, versioning, and more, please reference [our `docker-dd-agent` project on Github](https://github.com/DataDog/docker-dd-agent).
 
-## Each Container Installation
-
-1. Ensure Docker is running on the host.
-2. Add a RUN command to the Dockerfile as listed in [the agent installation instructions in the app](https://app.datadoghq.com/account/settings#agent) for the OS used in the container. For instance, if the container is based on an Ubuntu image, the `Dockerfile` would look similar to the following:
-
-        FROM ubuntu:16.04
-        RUN DD_API_KEY={YOUR API KEY} \
-          bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/.../install_agent.sh)"
-
-
-    NOTE: Always refer to the instructions in the app for the latest version of the install command.
-
 # Validate Installation
 
-1. Restart the agent.
+1. Restart the Agent.
 2. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
         Checks
@@ -197,7 +185,7 @@ Our `Dockerfile` simply takes the standard [Datadog docker image](https://hub.do
     FROM datadog/docker-dd-agent
     ADD conf.d/redisdb.yaml /etc/dd-agent/conf.d/redisdb.yaml
 
-Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) and tells the Datadog agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
+Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) and tells the Datadog Agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
 
     init_config:
 
