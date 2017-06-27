@@ -96,6 +96,8 @@ redirects:
     to:    /guides/autodiscovery/
   - from: /videos/setuprailsapm/
     to:   /videos/apmsetup-rails/
+  - from: /tracing-api/
+    to:   /tracing/api/
 commonfilters:
   - phrase: 'info command'
     link: /guides/basic_agent_usage/ubuntu/
