@@ -73,7 +73,7 @@ print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
 unix_epoch_timestamp = int(time.time())
 metric_type = 'histogram'
 metric_name = 'my.metric.name.hist'
-tags = ['tag1:value', 'tag2']2
+tags = ['tag1:value', 'tag2']
 
 for i in xrange(0,10):
 	print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
