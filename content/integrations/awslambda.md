@@ -90,9 +90,9 @@ unix_epoch_timestamp = int(time.time())
 value = 1
 metric_type = 'check'
 metric_name = 'my.metric.name.check'
-tags = ['tag1:value', 'tag2']
-print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
-	timestamp, value, metric_type, metric_name, ','.join(tags)
+
+print('MONITORING|{0}|{1}|{2}|{3}'.format(
+	timestamp, value, metric_type, metric_name
 ))
 ~~~
 
