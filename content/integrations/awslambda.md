@@ -81,7 +81,7 @@ for i in xrange(0,10):
 ))
 ~~~
 
-Note: Using the histogram metric type provides `avg, count, max, min 95p, and median` values
+Note: Using the histogram metric type provides `avg, count, max, min, 95p, and median` values
 
 ###Service Check
 
