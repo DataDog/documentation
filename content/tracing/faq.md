@@ -6,44 +6,49 @@ hideguides: true
 customnav: tracingnav
 ---
 
-### Naming
+#### What are the naming criteria for services, resources, etc?
 
 * Service names and resource names **must be lowercase, alphanumeric characters**.
-* Service names and metadata keys are limited to **a maximum length of 50 characters**.
-* Metadata and resource names have **a maximum length of 5000 bytes**.
+* Service names and metadata keys **cannot have more than 50 characters**.
+* Metadata and resource names **cannot exceed 5000 bytes**.
+* Service, resource, and metadata names cannot contain spaces (spaces will be replaced with underscores).
+* Resource and service names must adhere to [metric naming rules](http://docs.datadoghq.com/faq/#api-metric-names).
 
-### Data Retention
+#### How long is tracing data stored?
 
-Trace data is currently being stored for about 36 hours.
+Tracing data is stored for about 36 hours.
 
-### Heroku
+#### Is the Trace Agent open source?
 
-Heroku support is currently provided by the Datadog Heroku Buildpack. For more information, please reference [the project on Github](https://github.com/DataDog/heroku-buildpack-datadog)
+Yes, [check it out on GitHub](https://github.com/DataDog/datadog-trace-agent).
 
-### Agent Source
+#### On what platforms can I run the Trace Agent?
 
-Tracing is supported in the Datadog Agent for Linux and Docker. For other architectures, you can use the source install (coming soon). Trace agent source code is available on [the Github repo](https://github.com/DataDog/datadog-trace-agent).
+Trace Agent packages are available for:
 
-### Verifying Functionality
+* Linux — packaged with the Datadog Agent since v5.11.0
+* Mac OS — packaged separately, see the [Trace Agent releases](https://github.com/DataDog/datadog-trace-agent/releases/)
+* Docker — included in the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container
 
-Tracing functionality is an opt-in process. To enable the trace agent add `apm_enabled: true` to your `datadog.conf` file and restart `datadog-agent`.
-Verify this by tailing the logs:
+For other platforms, you must install from source.
+
+#### Can I deploy the Trace Agent to any PaaS providers?
+
+Yes, you can deploy it to Heroku via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).
+
+#### Ok, I installed the Trace Agent. How do I enable it and verify it is working?
+
+The Datadog Agent does not enable tracing by default. To enable it, add `apm_enabled: true` to your `datadog.conf` file and restart `datadog-agent`. Then, tail the Trace Agent log:
 
     tail -f /var/log/datadog/trace-agent.log
 
-
-When tracing is working properly you will see flushed payload messages similar to the following:
+If tracing is working properly, you will see flushed payload messages similar to the following:
 
     2017-02-07 23:12:10 INFO (endpoint.go:140) - flushed payload to the API, time:185.409088ms, size:1437
     2017-02-07 23:12:20 INFO (endpoint.go:140) - flushed payload to the API, time:17.781515ms, size:753
 
-### Connection refused
+#### Why am I getting `[Errno 111] Connection refused` errors in my application logs?
 
-If you're receiving `error: [Errno 111] Connection refused` in your application logs, either the trace functionality is not running or your application is having trouble connecting to the Datadog Agent. This often happens because of a misconfiguration in Docker environments.  Tracing is supported in Docker, but you'll have to make sure:
+Either the Trace Agent is not running, or your application's tracer client isn't configured correctly. By default, the tracer client libraries submit to localhost on port 8126. If this is not where your Trace Agent is listening—perhaps it's listening in some Docker container adjacent to your application container—point your tracer client to where it's running, e.g. `tracer.configure(hostname="172.17.0.1")`.
 
-1.  Your application is able to connect to the Agent (by default it submits to localhost). For Docker, you will likely need to specify the host or ip address. For example:
-    tracer.configure(hostname="172.17.0.1")
-
-2) The agent accepts requests by binding to 0.0.0.0 (or the appropriate IP address). You can set the agent binding via `bind_host` in `/etc/dd-agent/datadog.conf` or the DD_BIND_HOST env variable
-
-For more info see [the docker-dd-agent documentation](https://github.com/DataDog/docker-dd-agent/blob/master/README.md#tracing--apm)
+If you're running the Trace Agent in a Docker container, see the [docker-dd-agent documentation](https://github.com/DataDog/docker-dd-agent/blob/master/README.md#tracing--apm) for more information.
