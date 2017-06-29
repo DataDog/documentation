@@ -26,25 +26,25 @@ To send custom metrics to Datadog, you must print a log line from your Lambda, u
 MONITORING|unix_epoch_timestamp|value|metric_type|metric.name|#tag1:value,tag2
 ~~~
 
-##Notes on each section
+## Notes on each section
 
-###MONITORING
+### MONITORING
 * This is used to find the log statement within Cloudwatch Logs and pull it into Datadog
 
-###unix_epoch_timestamp
+### unix_epoch_timestamp
 * Please ensure the `unix_epoch_timestamp` is in seconds (not milliseconds)
 
-###value
+### value
 * The value of the metric **must** be a number.
 * For metric_type `check` the options are, `'0': OK, '1': WARNING, '2': CRITICAL, '3': UNKNOWN`
 
-###metric_type
+### metric_type
 * Supported metric types are `count, gauge, histogram, and check`
 
-###metric.name
+### metric.name
 * A unique name to identify your metric
 
-###tags
+### tags
 * Optionally add tags to apply to this metric
 * If you do not want to add any tags use the format: `MONITORING|unix_epoch_timestamp|value|metric_type|metric.name`
 * The tag `function_name` will automatically be applied to custom metrics
@@ -52,7 +52,7 @@ MONITORING|unix_epoch_timestamp|value|metric_type|metric.name|#tag1:value,tag2
 
 ## Sample snippets (in Python):
 
-###Count/Gauge
+### Count/Gauge
 
 ~~~
 unix_epoch_timestamp = int(time.time())
@@ -67,7 +67,7 @@ print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
 ))
 ~~~
 
-###Histogram
+### Histogram
 
 ~~~
 unix_epoch_timestamp = int(time.time())
@@ -81,9 +81,9 @@ for i in xrange(0,10):
 ))
 ~~~
 
-Note: Using the histogram metric type provides `avg, count, max, min, 95p, and median` values
+Note: Using the histogram metric type provides `avg, count, max, min, 95p, and median` values. These values are calculated at one second granularity. 
 
-###Service Check
+### Service Check
 
 ~~~
 unix_epoch_timestamp = int(time.time())
@@ -97,7 +97,7 @@ print('MONITORING|{0}|{1}|{2}|{3}'.format(
 ~~~
 
 
-##Required Permssions
+## Required Permssions
 
 ~~~
 logs:DescribeLogGroups
