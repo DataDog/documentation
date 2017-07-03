@@ -85,7 +85,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory.
 
 If you want to use custom check configurations to monitor these services, obviously the default templates won't suit you. But they also may not suit you if:
 
-1. The monitored containers run a different image than that specified in the default template, or
+1. The monitored containers run a different image than that specified in the default template (see the example below), or
 1. The monitored containers expose more than one port (see [Tempalte Variable Indexing](#template-variable-indexes)).
 
 There are two ways to provide template files of your own:
@@ -109,7 +109,9 @@ instances:
 
 It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers: Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
-For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `library/httpd:latest`. This means, for example, that if you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`, Autodiscovery will apply the template to both containers. If you don't want that, [label each container](#container-labels) differently, add the two labels to `docker_images`, and omit `httpd` from `docker_images`.
+For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `yourusername/httpd:latest`. Autodiscovery will not distinguish between identically-named images from different sources or with different tags. 
+
+So suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. If you don't want that—and changing one image name or the other isn't an option—[label each container](#container-labels) differently, add the two labels to `docker_images`, and omit `httpd` from `docker_images`.
 
 ### Template Source: Key-value Store
 
