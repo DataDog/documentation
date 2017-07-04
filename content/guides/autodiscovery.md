@@ -109,17 +109,17 @@ instances:
 
 It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers: Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
-For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `yourusername/httpd:latest`. Autodiscovery will not distinguish between identically-named images from different sources or with different tags. 
+For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `yourusername/httpd:latest`. Autodiscovery will not distinguish between identically-named images from different sources or with different tags.
 
-So suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. If you don't want that—and changing one image name or the other isn't an option—[label each container](#container-labels) differently, add the two labels to `docker_images`, and omit `httpd` from `docker_images`.
+Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. You may not want that—perhaps you want to monitor only one of the two containers, or you want to use a different check configuration for each one. If that's the case use [labels](#container-labels) instead of images as container identifiers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for any kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
-Autodiscovery supports Consul, etcd, and Zookeeper as template sources. To use a key-value store, configure its parameters in `datadog.conf` or in environment variables passed to the docker-dd-agent container.
+Autodiscovery can use Consul, etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.conf` or in environment variables passed to the docker-dd-agent container.
 
 #### Configure in `datadog.conf`
 
-In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the backend type—`etcd`, `consul`, or `zookeeper`—and the IP address and port where your key-value store is listening:
+In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the backend type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
 
 ~~~
 # For now only Docker is supported so you just need to un-comment this line.
@@ -142,7 +142,7 @@ sd_backend_port: 4001
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 ~~~
 
-If you are using Consul and the Consul cluster requires token authentication, set `consul_token`.
+If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
 Restart the Agent to effect the configuration change.
 
@@ -165,9 +165,11 @@ docker service create \
   datadog/docker-dd-agent:latest
 ~~~
 
+Note that the option to enable Autodiscovery is called `service_discovery_backend` in `datadog.conf`, but it's called just `SD_BACKEND` as an environment variable.
+
 ---
 
-With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like the following: 
+With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this: 
 
 ~~~
 /datadog/
@@ -194,16 +196,16 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-Unlike with auto-conf files, **container identifiers may be the short OR long name of the container image**, e.g. `httpd` OR `library/httpd:latest`. To use a long name with etcd: etcdctl set /datadog/check_configs/library/httpd:latest/check_names, etc.
+Unlike with auto-conf files, **container identifiers may be the short OR long name of the container image**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
 #### Example: Apache and HTTP checks
 
 The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template:
 
 ~~~
-etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
-etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
+etcdctl set /datadog/check_configs/library/httpd:latest/init_configs '[{}, {}]'
+etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
 ~~~
 
 Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists (they do—the index is 1).
