@@ -111,15 +111,15 @@ instances:
 
 It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any containers on the same host that run an `httpd` image.
 
-_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When its loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-If this is too limiting—if you need to apply different check configurations to each container—use [labels](#container-labels) to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for _any_ kind of container identifier, not just images).
+If this is too limiting—if you need to apply different check configurations to different containers running the same image—use [labels](#container-labels) to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
 Autodiscovery can use Consul, etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.conf` or in environment variables passed to the docker-dd-agent container.
 
-#### Configure in `datadog.conf`
+#### Configure in datadog.conf
 
 In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the key-value store type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
 
@@ -257,12 +257,12 @@ spec:
 
 #### Deployment Example: Apache and HTTP checks
 
-If you use a Deployment, don't add template annotations to the Deployment metadata; the Agent won't look there. Add them like this:
+If define pods via Deployments, don't add template annotations to the Deployment metadata; the Agent won't look there. Add them like this:
 
 ~~~
 apiVersion: apps/v1beta1
 kind: Deployment
-metadata: # Don't add templates here!
+metadata: # Don't add templates here
   name: apache-deployment
 spec:
   replicas: 2
