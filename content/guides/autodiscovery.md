@@ -56,10 +56,10 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables](https://github.com/DataDog/docker-dd-agent#environment-variables).
 
-Note that **if you want to run any JMX-based checks, you must**: 
+Note that **if you want the Agent to autodiscover JMX-based checks, you MUST**: 
 
-1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which it needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
-1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting the container.
+1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
+1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
 
 ## Setting up Check Templates
 
@@ -83,14 +83,14 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory.
 - Redis
 - Riak
 
-If you want to use custom check configurations to monitor these services, obviously the default templates won't suit you. But they also may not suit you if:
+If you want to use custom check configurations to monitor these services, obviously the default templates won't suit you. They also may not suit you if:
 
-1. The monitored containers run a different image than that specified in the default template (see the example below), or
-1. The monitored containers expose more than one port (see [Tempalte Variable Indexing](#template-variable-indexes)).
+1. Your monitored containers run a different image than that specified in the default template (see the example below), OR
+1. Your monitored containers expose more than one port (the default templates don't use [Tempalte Variable Indexing](#template-variable-indexes)).
 
-There are two ways to provide template files of your own:
+You can provide template files of your own in one of two ways:
 
-1. Add them to each host that runs docker-dd-agent and [mount the directory](https://github.com/DataDog/docker-dd-agent#configuration-files) that contains them into the docker-dd-agent container when you start it
+1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them](https://github.com/DataDog/docker-dd-agent#configuration-files) into the docker-dd-agent container when starting it
 1. Package them into your own release of docker-dd-agent
 
 #### Example: Apache check
@@ -107,11 +107,11 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ~~~
 
-It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers: Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
+It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
 
-For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `yourusername/httpd:latest`. Autodiscovery will not distinguish between identically-named images from different sources or with different tags.
+For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `library/httpd:latest`. Autodiscovery does not distinguish between identically-named images from different sources or with different tags.
 
-Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. You may not want that—perhaps you want to monitor only one of the two containers, or you want to use a different check configuration for each one. If that's the case use [labels](#container-labels) instead of images as container identifiers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for any kind of container identifier, not just images).
+Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. You may not want that—perhaps you want to monitor only one of the two containers, or you want to use a different check configuration for each one. If that's the case, use [labels](#container-labels) instead of image names as container identifiers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
@@ -265,7 +265,7 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 {: #container-labels}
 
-In case you need to match different templates with containers running the same image, it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then use `<SOME_LABEL>` in place it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
 
