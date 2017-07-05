@@ -14,41 +14,39 @@ Enable this integration to begin collecting Cloudwatch & custom metrics from you
 
 # Installation
 
-If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws){:target="_blank"}.
 
 # Configuration
 
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
+The following permissions are also required to fully use the Lambda integration:
+
+* `logs:DescribeLogGroups`:  List available log groups.
+* `logs:DescribeLogStreams`: List available log streams for a group.
+* `logs:FilterLogEvents`:  Fetch specific log events for a stream to generate metrics.
+* `tag:getResources`: Used to get custom tags applied to Lambda functions.
+
 To send custom metrics to Datadog, you must print a log line from your Lambda, using the following format:
 
 ~~~
-MONITORING|unix_epoch_timestamp|value|metric_type|metric.name|#tag1:value,tag2
+MONITORING|<unix_epoch_timestamp>|<value>|<metric_type>|<metric_name>|#<tag_list>
 ~~~
 
-## Notes on each section
+Where: 
 
-### MONITORING
-* This is used to find the log statement within Cloudwatch Logs and pull it into Datadog
+* `MONITORING` signals to the Datadog integration that it should collect this log entry
 
-### unix_epoch_timestamp
-* Please ensure the `unix_epoch_timestamp` is in seconds (not milliseconds)
+* `<unix_epoch_timestamp>` is in seconds, not milliseconds
 
-### value
-* The value of the metric **must** be a number.
-* For metric_type `check` the options are, `'0': OK, '1': WARNING, '2': CRITICAL, '3': UNKNOWN`
 
-### metric_type
-* Supported metric types are `count, gauge, histogram, and check`
+* `<value>` MUST be a number (i.e. integer or float)
 
-### metric.name
-* A unique name to identify your metric
+* `<metric_type>` is `count`, `gauge`, `histogram`, or `check`
 
-### tags
-* Optionally add tags to apply to this metric
-* If you do not want to add any tags use the format: `MONITORING|unix_epoch_timestamp|value|metric_type|metric.name`
-* The tag `function_name` will automatically be applied to custom metrics
+* `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api){:target="_blank"}
 
+* `<tag_list>` is optional, comma separated, and must be preceded by `#`. NOTE, The tag `function_name:<name_of_the_function>` will automatically be applied to custom metrics
 
 ## Sample snippets (in Python):
 
@@ -58,7 +56,6 @@ MONITORING|unix_epoch_timestamp|value|metric_type|metric.name|#tag1:value,tag2
 unix_epoch_timestamp = int(time.time())
 value = 42
 metric_type = 'count'
-#metric_type = 'gauge'
 metric_name = 'my.metric.name'
 tags = ['tag1:value', 'tag2']
 
@@ -81,29 +78,19 @@ for i in xrange(0,10):
 ))
 ~~~
 
-Note: Using the histogram metric type provides `avg, count, max, min, 95p, and median` values. These values are calculated at one second granularity. 
+Note: Using the histogram metric type provides `avg`, `count`, `max`, `min`, `95p`, and `median` values. These values are calculated at one second granularity. 
 
 ### Service Check
 
 ~~~
 unix_epoch_timestamp = int(time.time())
-value = 1
+value = 1 # WARNING
 metric_type = 'check'
 metric_name = 'my.metric.name.check'
 
 print('MONITORING|{0}|{1}|{2}|{3}'.format(
 	timestamp, value, metric_type, metric_name
 ))
-~~~
-
-
-## Required Permssions
-
-~~~
-logs:DescribeLogGroups
-logs:DescribeLogStreams
-logs:FilterLogEvents
-tag:getResources
 ~~~
 
 # Metrics
