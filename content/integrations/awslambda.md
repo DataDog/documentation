@@ -14,18 +14,18 @@ Enable this integration to begin collecting Cloudwatch & custom metrics from you
 
 # Installation
 
-If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws){:target="_blank"}.
+If you haven't already, set up the [Amazon Web Services integration](/integrations/aws){:target="_blank"}.
 
 # Configuration
 
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
-The following permissions are also required to fully use the Lambda integration:
+The following permissions are also required to use the Lambda integration:
 
 * `logs:DescribeLogGroups`:  List available log groups.
 * `logs:DescribeLogStreams`: List available log streams for a group.
 * `logs:FilterLogEvents`:  Fetch specific log events for a stream to generate metrics.
-* `tag:getResources`: Used to get custom tags applied to Lambda functions.
+* `tag:getResources`: Get custom tags applied to Lambda functions.
 
 To send custom metrics to Datadog, you must print a log line from your Lambda, using the following format:
 
