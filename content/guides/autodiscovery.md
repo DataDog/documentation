@@ -20,7 +20,7 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-Since static files are not suitable for checks that collect data from ever-changing network endpoints, Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP or exposed port, Autodiscovery can pick the right one(s) using [template variable indexes](#template-variable-indexes).
+Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#template-variable-indexes).
 
 Because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and Port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
@@ -28,9 +28,9 @@ Finally, Autodiscovery can load check templates from places other than disk. Oth
 
 ### Different Execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all currently running containers.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers currently running on the same host as the Agent.
 
-As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each template with a container identifier that matches the container, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
+As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
 
 The Agent watches for Docker events—container creation, destruction, starts, and stops—and enables, disables, and regenerates static check configurations on such events.
 
