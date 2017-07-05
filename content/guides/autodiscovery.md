@@ -257,7 +257,7 @@ spec:
 
 #### Deployment Example: Apache and HTTP checks
 
-If you use a Deployment, do NOT add annotations to the Deployment metadata; the Agent won't look there. Add them like this:
+If you use a Deployment, don't add template annotations to the Deployment metadata; the Agent won't look there. Add them like this:
 
 ~~~
 apiVersion: apps/v1beta1
@@ -296,10 +296,7 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then use `<SOME_LABEL>` anywhere you'd normally use a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-
-it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
-
-For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
+Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
 
 ### Template Source Precedence
 
@@ -313,3 +310,26 @@ That is, if you configure a `redisdb` template both in Consul and as a file (`co
 
 # Troubleshooting
 
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
+
+~~~
+# docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck
+.
+..
+...
+Check "redisdb":
+  source --> Kubernetes Pod Annotation
+  config --> {'instances': [{u'host': u'10.244.1.32', u'port': u'6379', 'tags': [u'image_name:kubernetes/redis-slave', u'kube_namespace:guestbook', u'app:redis', u'role:slave', u'docker_image:kubernetes/redis-slave:v2', u'image_tag:v2', u'kube_replication_controller:redis-slave']}], 'init_config': {}}
+~~~
+
+To check whether Autodiscovery is loading JMX-based checks:
+
+~~~
+# docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
+timestamp: 1499296559130
+checks:
+  failed_checks: {}
+  initialized_checks:
+    SD-jmx_0:
+    - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
+~~~
