@@ -69,7 +69,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you must restart your Agent containers each time you change, add, or remove templates.
 
-The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory. The docker-dd-agent container comes packaged with templates for:
+The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which by default contains templates for:
 
 - Apache Web Server
 - Consul
@@ -83,15 +83,17 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory.
 - Redis
 - Riak
 
-If you want to use custom check configurations to monitor these services, obviously the default templates won't suit you. They also may not suit you if:
+If you want to monitor Apache containers, for example, the default Apache template may not suit you if:
 
-1. Your monitored containers run a different image than that specified in the default template (see the example below), OR
-1. Your monitored containers expose more than one port (the default templates don't use [Tempalte Variable Indexing](#template-variable-indexes)).
+1. You want to use options not used in the default template,
+1. the Apache containers run a different image than that specified in the default template (see the example below), OR
+1. the Apache containers expose more than one port (the default template doesn't use [template variable indexing](#template-variable-indexes)).
 
-You can provide template files of your own in one of two ways:
+You can provide template files of your own in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them](https://github.com/DataDog/docker-dd-agent#configuration-files) into the docker-dd-agent container when starting it
 1. Package them into your own release of docker-dd-agent
+1. On Kubernetes, add them using ConfigMaps
 
 #### Example: Apache check
 
@@ -107,11 +109,11 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ~~~
 
-It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any `httpd` containers running on the Agent's host.
+It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any containers on the same host that run an `httpd` image.
 
-For auto-conf files, **you must provide the short name of the container image**, e.g. `httpd`, NOT `library/httpd:latest`. Autodiscovery does not distinguish between identically-named images from different sources or with different tags.
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When its loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. You may not want that—perhaps you want to monitor only one of the two containers, or you want to use a different check configuration for each one. If that's the case, use [labels](#container-labels) instead of image names as container identifiers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for _any_ kind of container identifier, not just images).
+If this is too limiting—if you need to apply different check configurations to each container—use [labels](#container-labels) to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is the place for _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
@@ -119,7 +121,7 @@ Autodiscovery can use Consul, etcd, and Zookeeper as template sources. To use a 
 
 #### Configure in `datadog.conf`
 
-In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the backend type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
+In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the key-value store type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
 
 ~~~
 # For now only Docker is supported so you just need to un-comment this line.
@@ -181,7 +183,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
     ...
 ~~~
 
-Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here; for key-value store template sources, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
+Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here; for key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
 
 #### Example: Apache check
 
@@ -196,7 +198,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-Unlike with auto-conf files, **container identifiers may be the short OR long name of the container image**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
 #### Example: Apache and HTTP checks
 
@@ -212,7 +214,7 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 ### Template Source: Kubernetes Pod Annotations
 
-Since version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. Autodiscovery detects if the Agent is running on Kubernetes and searches all Pod annotations for templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+Since version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
 
 Autodiscovery expects annotations to look like this:
 
@@ -228,9 +230,9 @@ The format is similar to that for key-value stores. The differences are:
 - Annotations must begin with `service-discovery.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
 - For Annotations, Autodiscovery indentifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
-If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section. If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata`.
+If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
-#### Example: Apache and HTTP checks
+#### Pod Example: Apache and HTTP checks
 
 The following Pod annotation defines two templates—equivalent to those from the end of the previous section—for `apache` containers:
 
@@ -247,9 +249,36 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache # provide this as the container identifier in your annotations
+    - name: apache # use this as the container identifier in your annotations
       image: httpd # NOT this
       ports:
+        - containerPort: 80
+~~~
+
+#### Deployment Example: Apache and HTTP checks
+
+If you use a Deployment, do NOT add annotations to the Deployment metadata; the Agent won't look there. Add them like this:
+
+~~~
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata: # Don't add templates here!
+  name: apache-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: apache
+      annotations:
+        service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
+        service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
+        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    spec:
+      containers:
+      - name: apache # use this as the container identifier in your annotations
+        image: httpd # NOT this
+        ports:
         - containerPort: 80
 ~~~
 
@@ -265,7 +294,10 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 {: #container-labels}
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then use `<SOME_LABEL>` in place it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then use `<SOME_LABEL>` anywhere you'd normally use a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
+
+
+it is also possible starting with `5.8.3` to define explicitly which path the agent should look for in the configuration store to find a template using the `com.datadoghq.sd.check.id` label.
 
 For example, if a container has this label configured as `com.datadoghq.sd.check.id: foobar`, it will look for a configuration template in the store under the key `datadog/check_configs/foobar/...`.
 
@@ -280,6 +312,4 @@ If you provide a template for the same check type via multiple template sources,
 That is, if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
 # Troubleshooting
-
-
 
