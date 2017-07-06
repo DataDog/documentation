@@ -31,7 +31,7 @@ The process to upgrade from the previous version of the agent is to simply re-ru
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、[Datadog](https://app.datadoghq.com) にloginした状態で、該当OSの [Agent](https://app.datadoghq.com/account/settings#agent) ページに移動し、インストールの手順を確認してください。
 
-以前のバージョンのAgnet から最新版にアップグレードするには、単純にAgent の再インストールを実行してください。
+以前のバージョンのAgent から最新版にアップグレードするには、単純にAgent の再インストールを実行してください。
 
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
 

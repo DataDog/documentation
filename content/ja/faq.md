@@ -102,7 +102,7 @@ agent’s configuration file.-->
 
 #### hostnameはどのように変更すればいいですか。 {#hostname-change}
 
-datadog.confというDatadog Agentの設定ファイル内の“hostname”の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ](/ja/guides/basic_agent_usage/)の左メニューから、Datadog AgnetをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
+datadog.confというDatadog Agentの設定ファイル内の“hostname”の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ](/ja/guides/basic_agent_usage/)の左メニューから、Datadog AgentをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
 
 <!--#### How do I uninstall the agent {#agent-uninstall}
 

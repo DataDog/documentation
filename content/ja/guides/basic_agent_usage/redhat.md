@@ -34,7 +34,7 @@ If you haven't installed the Agent yet, instructions can be found <a href='https
 <!-- The process to upgrade from the previous version of the agent is to simply re-run the installation.
 -->
 
-以前のバージョンのAgnet から最新版にアップグレードするには、単純にAgent の再インストールを実行してください。
+以前のバージョンのAgent から最新版にアップグレードするには、単純にAgent の再インストールを実行してください。
 
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
 
