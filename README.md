@@ -24,7 +24,7 @@ Update the Makefile:
 FETCH_INTEGRATIONS = true
 ```
 
-## Advanced setup
+## Easy Setup (no integrations)
 
 ### Install dependencies
 
@@ -38,8 +38,36 @@ npm install --global --production gulp-cli && npm install
 ```
 
 ### Run the server
+
+`hugo server --renderToDisk`
+
+`gulp watch`
+
+
+## Advanced Setup (integrations)
+
+### Install dependencies
+
+* Install Python3: https://www.python.org/download/releases/3.0/
+
+* Install virtualenv: https://virtualenv.pypa.io/en/stable/installation/
+
+* Install hugo: https://gohugo.io/overview/installing/
+
+* Install nodejs: https://nodejs.org/en/download/package-manager/
+
+* Install gulp:
+
+```
+npm install --global --production gulp-cli && npm install
+```
+
+
+### Run the server
 `make start` will start the hugo server and gulp watch tasks in the background.
 You can also run `gulp && hugo server --renderToDisk --verbose` to run the server in the foreground. 
+
+If you want to re-sync the integrations you can either run `make stop && make start` or `gitlab/bin/integrations_sync_osx`
 
 ### Run tests
 `make tests` will run image and link checkers.

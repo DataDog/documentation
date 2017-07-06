@@ -228,3 +228,159 @@ yarn:
   metric_type: gauge
   per_unit_name: ""
   unit_name: ""
+- description: The configured maximum queue capacity in percentage for root queue
+  interval: ""
+  metric_name: yarn.queue.root.maxCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The used queue capacity in percentage for root queue
+  interval: ""
+  metric_name: yarn.queue.root.usedCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The configured queue capacity in percentage for root queue
+  interval: ""
+  metric_name: yarn.queue.root.capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The number of pending applications in this queue
+  interval: ""
+  metric_name: yarn.queue.numPendingApplications
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The maximum memory resources a user can use for Application Masters
+    (in MB)
+  interval: ""
+  metric_name: yarn.queue.userAMResourceLimit.memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The maximum vCpus a user can use for Application Masters
+  interval: ""
+  metric_name: yarn.queue.userAMResourceLimit.vCores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The absolute capacity percentage this queue can use of entire cluster
+  interval: ""
+  metric_name: yarn.queue.absoluteCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The minimum user limit percent set in the configuration
+  interval: ""
+  metric_name: yarn.queue.userLimitFactor
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The user limit factor set in the configuration
+  interval: ""
+  metric_name: yarn.queue.userLimit
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of applications currently in the queue
+  interval: ""
+  metric_name: yarn.queue.numApplications
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The memory resources used for Application Masters (in MB)
+  interval: ""
+  metric_name: yarn.queue.usedAMResource.memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The vCpus used for Application Masters
+  interval: ""
+  metric_name: yarn.queue.usedAMResource.vCores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The absolute used capacity percentage this queue is using of the entire
+    cluster
+  interval: ""
+  metric_name: yarn.queue.absoluteUsedCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The total memory resources this queue is using (in MB)
+  interval: ""
+  metric_name: yarn.queue.resourcesUsed.memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The total vCpus this queue is using
+  interval: ""
+  metric_name: yarn.queue.resourcesUsed.vCores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The maximum vCpus this queue can use for Application Masters
+  interval: ""
+  metric_name: yarn.queue.AMResourceLimit.vCores
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: core
+- description: The maximum memory resources this queue can use for Application Masters
+    (in MB)
+  interval: ""
+  metric_name: yarn.queue.AMResourceLimit.memory
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: mebibyte
+- description: The configured queue capacity in percentage relative to its parent
+    queue
+  interval: ""
+  metric_name: yarn.queue.capacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The number of active applications in this queue
+  interval: ""
+  metric_name: yarn.queue.numActiveApplications
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The absolute maximum capacity percentage this queue can use of the
+    entire cluster
+  interval: ""
+  metric_name: yarn.queue.absoluteMaxCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The used queue capacity in percentage
+  interval: ""
+  metric_name: yarn.queue.usedCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The number of containers being used
+  interval: ""
+  metric_name: yarn.queue.numContainers
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The configured maximum queue capacity in percentage relative to its
+    parent queue
+  interval: ""
+  metric_name: yarn.queue.maxCapacity
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percentage
+- description: The maximum number of applications this queue can have
+  interval: ""
+  metric_name: yarn.queue.maxApplications
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task
+- description: The maximum number of active applications per user this queue can have
+  interval: ""
+  metric_name: yarn.queue.maxApplicationsPerUser
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: task

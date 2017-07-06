@@ -1,22 +1,4 @@
 kafka:
-- description: Current message offset on broker.
-  interval: ""
-  metric_name: kafka.broker_offset
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: offset
-- description: Lag in messages between consumer and broker.
-  interval: ""
-  metric_name: kafka.consumer_lag
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: offset
-- description: Current message offset on consumer.
-  interval: ""
-  metric_name: kafka.consumer_offset
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: offset
 - description: Outgoing byte rate.
   interval: "10"
   metric_name: kafka.net.bytes_out
@@ -36,7 +18,7 @@ kafka:
   per_unit_name: second
   unit_name: byte
 - description: Incoming message rate.
-  interval: "10"
+  interval: '10 '
   metric_name: kafka.messages_in
   metric_type: gauge
   per_unit_name: ""

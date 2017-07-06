@@ -11,6 +11,63 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: shard
+- description: The estimated size in bytes of the field data circuit breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.fielddata.estimated_size_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The constant multiplier for byte estimations of the field data circuit
+    breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.fielddata.overhead
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of times the field data circuit breaker has tripped.
+  interval: ""
+  metric_name: elasticsearch.breakers.fielddata.tripped
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The estimated size in bytes of the parent circuit breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.parent.estimated_size_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The constant multiplier for byte estimations of the parent circuit
+    breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.parent.overhead
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of times the parent circuit breaker has tripped.
+  interval: ""
+  metric_name: elasticsearch.breakers.parent.tripped
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The estimated size in bytes of the request circuit breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.request.estimated_size_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The constant multiplier for byte estimations of the request circuit
+    breaker.
+  interval: ""
+  metric_name: elasticsearch.breakers.request.overhead
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of times the request circuit breaker has tripped.
+  interval: ""
+  metric_name: elasticsearch.breakers.request.tripped
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
 - description: The total number of evictions from the field data cache.
   interval: ""
   metric_name: elasticsearch.cache.field.evictions
@@ -235,13 +292,97 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: document
+- description: The number of failed indexing operations.
+  interval: ""
+  metric_name: elasticsearch.indices.indexing.index_failed
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total time indexing waited due to throttling.
+  interval: ""
+  metric_name: elasticsearch.indices.indexing.throttle_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of query cache evictions.
+  interval: ""
+  metric_name: elasticsearch.indices.query_cache.evictions
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: eviction
+- description: The number of query cache hits.
+  interval: ""
+  metric_name: elasticsearch.indices.query_cache.hit_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: hit
+- description: The memory used by the query cache.
+  interval: ""
+  metric_name: elasticsearch.indices.query_cache.memory_size_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of query cache misses.
+  interval: ""
+  metric_name: elasticsearch.indices.query_cache.miss_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: miss
+- description: The number of ongoing recoveries for which a shard serves as a source.
+  interval: ""
+  metric_name: elasticsearch.indices.recovery.current_as_source
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The number of ongoing recoveries for which a shard serves as a target.
+  interval: ""
+  metric_name: elasticsearch.indices.recovery.current_as_target
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
+- description: The total time recoveries waited due to throttling.
+  interval: ""
+  metric_name: elasticsearch.indices.recovery.throttle_time
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: millisecond
+- description: The number of request cache evictions.
+  interval: ""
+  metric_name: elasticsearch.indices.request_cache.evictions
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: eviction
+- description: The number of request cache hits.
+  interval: ""
+  metric_name: elasticsearch.indices.request_cache.hit_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: hit
+- description: The memory used by the request cache.
+  interval: ""
+  metric_name: elasticsearch.indices.request_cache.memory_size_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The number of request cache misses.
+  interval: ""
+  metric_name: elasticsearch.indices.request_cache.miss_count
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: miss
 - description: The number of segments in an index shard.
   interval: ""
   metric_name: elasticsearch.indices.segments.count
   metric_type: gauge
   per_unit_name: ""
   unit_name: segment
-- description: The size used by the in memory fixed bit set.
+- description: The memory used by doc values.
+  interval: ""
+  metric_name: elasticsearch.indices.segments.doc_values_memory_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The memory used by fixed bit set.
   interval: ""
   metric_name: elasticsearch.indices.segments.fixed_bit_set_memory_in_bytes
   metric_type: gauge
@@ -262,6 +403,30 @@ elasticsearch:
 - description: The memory used by index segments.
   interval: ""
   metric_name: elasticsearch.indices.segments.memory_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The memory used by norms.
+  interval: ""
+  metric_name: elasticsearch.indices.segments.norms_memory_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The memory used by stored fields.
+  interval: ""
+  metric_name: elasticsearch.indices.segments.stored_fields_memory_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The memory used by term vectors.
+  interval: ""
+  metric_name: elasticsearch.indices.segments.term_vectors_memory_in_bytes
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The memory used by terms.
+  interval: ""
+  metric_name: elasticsearch.indices.segments.terms_memory_in_bytes
   metric_type: gauge
   per_unit_name: ""
   unit_name: byte
@@ -668,6 +833,54 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of active threads in the fetch shard started pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_started.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The total number of threads in the fetch shard started pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_started.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of queued threads in the fetch shard started pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_started.queue
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the fetch shard started pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_started.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of active threads in the fetch shard store pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_store.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The total number of threads in the fetch shard store pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_store.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of queued threads in the fetch shard store pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_store.queue
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the fetch shard store pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.fetch_shard_store.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the flush queue.
   interval: ""
   metric_name: elasticsearch.thread_pool.flush.active
@@ -683,6 +896,36 @@ elasticsearch:
 - description: The total number of threads in the flush pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.flush.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the flush pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.flush.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of active threads for force merge operations.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.force_merge.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The total number of threads for force merge operations.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.force_merge.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of queued threads for force merge operations.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.force_merge.queue
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads for force merge operations.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.force_merge.rejected
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
@@ -704,6 +947,12 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of rejected threads in the generic pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.generic.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the get pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.get.active
@@ -719,6 +968,12 @@ elasticsearch:
 - description: The total number of threads in the get pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.get.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the get pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.get.rejected
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
@@ -740,6 +995,36 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of rejected threads in the index pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.index.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of active threads in the listener pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.listener.active
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of queued threads in the listener pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.listener.queue
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The total number of threads in the listener pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.listener.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the listener pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.listener.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the management pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.management.active
@@ -755,6 +1040,12 @@ elasticsearch:
 - description: The total number of threads in the management pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.management.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the management pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.management.rejected
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
@@ -776,6 +1067,12 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of rejected threads in the merge pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.merge.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the percolate pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.percolate.active
@@ -791,6 +1088,12 @@ elasticsearch:
 - description: The total number of threads in the percolate pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.percolate.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the percolate pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.percolate.rejected
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
@@ -812,6 +1115,12 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of rejected threads in the refresh pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.refresh.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the search pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.search.active
@@ -830,6 +1139,12 @@ elasticsearch:
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread
+- description: The number of rejected threads in the search pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.search.rejected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
 - description: The number of active threads in the snapshot pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.snapshot.active
@@ -845,6 +1160,12 @@ elasticsearch:
 - description: The total number of threads in the snapshot pool.
   interval: ""
   metric_name: elasticsearch.thread_pool.snapshot.threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The number of rejected threads in the snapshot pool.
+  interval: ""
+  metric_name: elasticsearch.thread_pool.snapshot.rejected
   metric_type: gauge
   per_unit_name: ""
   unit_name: thread

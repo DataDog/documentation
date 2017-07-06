@@ -40,13 +40,16 @@ digest:  ## create a digest of all pages built by hugo.
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
+	@if [ ! `which python3` ]; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi
+	@if [ ! `which virtualenv` ]; then printf "\e[93mvirtualenv is required.\033[0m\n" && exit 1; fi
 	@export VIRTUALENVWRAPPER_PYTHON=/usr/bin/env python3
 	@test -d ${VIRENV} || virtualenv ${VIRENV}
 	@$(VIRENV)/bin/pip install -q -r gitlab/etc/requirements3.txt
 
 pre-build: source-helpers  ## gulp tasks; gather external content & data.
 	@gulp build --silent; \
-	if [ ${FETCH_INTEGRATIONS} == true ]; then integrations_sync_osx --token ${github_personal_token} || true; fi; \
+	if [ ! ${github_personal_token} ]; then printf "\e[93mNo github token found. Skipping integrations download.\033[0m\n"; \
+	else if [ ${FETCH_INTEGRATIONS} == true ]; then integrations_sync_osx --token ${github_personal_token} || true; fi; fi;\
 	placehold_translations.py -c "config.yaml" -f "content/";
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
@@ -56,7 +59,8 @@ start: stop pre-build  ## start the gulp/hugo server.
 	@echo "starting up..."
 	@gulp watch --silent &>/dev/null & \
 	hugo server --renderToDisk &>/dev/null &
-	@echo "gulp and hugo started. 'make stop' to kill."
+	@printf "\e[96mDocs site is now running. Visit http://localhost:1313/ \033[0m\n"
+	@printf "run 'make stop' to kill.\n"
 	@make digest
 
 stop:  ## stop the gulp/hugo server.

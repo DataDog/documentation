@@ -53,7 +53,7 @@ mapreduce:
   metric_type: rate
   per_unit_name: second
   unit_name: task
-- description: Number of pending maps
+- description: 'Number of pending maps '
   interval: ""
   metric_name: mapreduce.job.maps_pending
   metric_type: rate

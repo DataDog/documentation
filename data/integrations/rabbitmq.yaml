@@ -157,3 +157,9 @@ rabbitmq:
   metric_type: gauge
   per_unit_name: second
   unit_name: message
+- description: Number of current connections to rabbitmq by vhost
+  interval: ""
+  metric_name: rabbitmq.connections
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: connection

@@ -244,6 +244,12 @@ mysql:
   metric_type: gauge
   per_unit_name: ""
   unit_name: ""
+- description: Number of slaves connected to a replication master.
+  interval: ""
+  metric_name: mysql.replication.slaves_connected
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: ""
 - description: The rate of queries.
   interval: ""
   metric_name: mysql.performance.queries

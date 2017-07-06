@@ -1,23 +1,23 @@
 consul:
-- description: Number of nodes with service status `critical` from those registered
+- description: '# of Nodes with service status `critical` from those registered'
   interval: ""
   metric_name: consul.catalog.nodes_critical
   metric_type: gauge
   per_unit_name: ""
   unit_name: node
-- description: Number of nodes with service status `passing` from those registered
+- description: '# of Nodes with service status `passing` from those registered'
   interval: ""
   metric_name: consul.catalog.nodes_passing
   metric_type: gauge
   per_unit_name: ""
   unit_name: node
-- description: Number of nodes
+- description: '# of Nodes'
   interval: ""
   metric_name: consul.catalog.nodes_up
   metric_type: gauge
   per_unit_name: ""
   unit_name: node
-- description: Number of nodes with service status `warning` from those registered
+- description: '# of Nodes with service status `warning` from those registered'
   interval: ""
   metric_name: consul.catalog.nodes_warning
   metric_type: gauge
@@ -47,246 +47,3 @@ consul:
   metric_type: gauge
   per_unit_name: ""
   unit_name: service
-- description: minimum latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.min
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: p25 latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.p25
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: median latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.median
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: p75 latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.p75
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: p90 latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.p90
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: p95 latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.p95
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: p99 latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.p99
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: maximum latency from this node to all others
-  interval: ""
-  metric_name: consul.net.node.latency.max
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: Number of running goroutines
-  interval: "10"
-  metric_name: consul.runtime.num_goroutines
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: ""
-- description: Current bytes allocated by the Consul process
-  interval: "10"
-  metric_name: consul.runtime.alloc_bytes
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: byte
-- description: Number of objects allocated on the heap
-  interval: "10"
-  metric_name: consul.runtime.heap_objects
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: object
-- description: Total size of the virtual address space reserved by the Go runtime
-  interval: "10"
-  metric_name: consul.runtime.sys_bytes
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: byte
-- description: Cumulative count of heap objects allocated
-  interval: "10"
-  metric_name: consul.runtime.malloc_count
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: object
-- description: Cumulative count of heap objects freed
-  interval: "10"
-  metric_name: consul.runtime.free_count
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: object
-- description: Bytes of allocated heap objects
-  interval: "10"
-  metric_name: consul.runtime.heap_objects
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: byte
-- description: Cumulative nanoseconds in GC stop-the-world pauses since Consul started
-  interval: "10"
-  metric_name: consul.runtime.total_gc_pause_ns
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: nanosecond
-- description: Number of completed GC cycles
-  interval: "10"
-  metric_name: consul.runtime.total_gc_runs
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: ""
-- description: Number of completed leader elections
-  interval: "10"
-  metric_name: consul.raft.state.leader
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: event
-- description: Number of initiated leader elections
-  interval: "10"
-  metric_name: consul.raft.state.candidate
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: event
-- description: Number of raft transactions occurring
-  interval: "10"
-  metric_name: consul.raft.apply
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: transaction
-- description: The average time it takes to commit a new entry to the raft log on
-    the leader
-  interval: "10"
-  metric_name: consul.raft.commitTime.avg
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The number of samples of raft.commitTime
-  interval: "10"
-  metric_name: consul.raft.commitTime.count
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: ""
-- description: The max time it takes to commit a new entry to the raft log on the
-    leader
-  interval: "10"
-  metric_name: consul.raft.commitTime.max
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The median time it takes to commit a new entry to the raft log on the
-    leader
-  interval: "10"
-  metric_name: consul.raft.commitTime.median
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The p95 time it takes to commit a new entry to the raft log on the
-    leader
-  interval: "10"
-  metric_name: consul.raft.commitTime.95percentile
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The average time it takes for the leader to write log entries to disk
-  interval: "10"
-  metric_name: consul.raft.leader.dispatchLog.avg
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The number of samples of raft.leader.dispatchLog
-  interval: "10"
-  metric_name: consul.raft.leader.dispatchLog.count
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: ""
-- description: The max time it takes for the leader to write log entries to disk
-  interval: "10"
-  metric_name: consul.raft.leader.dispatchLog.max
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The median time it takes for the leader to write log entries to disk
-  interval: "10"
-  metric_name: consul.raft.leader.dispatchLog.median
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The p95 time it takes for the leader to write log entries to disk
-  interval: "10"
-  metric_name: consul.raft.leader.dispatchLog.95percentile
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: Average time elapsed since the leader was last able to check its lease
-    with followers
-  interval: "10"
-  metric_name: consul.raft.leader.lastContact.avg
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: The number of samples of raft.leader.lastContact
-  interval: "10"
-  metric_name: consul.raft.leader.lastContact.count
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: ""
-- description: Max time elapsed since the leader was last able to check its lease
-    with followers
-  interval: "10"
-  metric_name: consul.raft.leader.lastContact.max
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: Median time elapsed since the leader was last able to check its lease
-    with followers
-  interval: "10"
-  metric_name: consul.raft.leader.lastContact.median
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: P95 time elapsed since the leader was last able to check its lease
-    with followers
-  interval: "10"
-  metric_name: consul.raft.leader.lastContact.95percentile
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: millisecond
-- description: Number of times an agent suspects another as failed while probing during
-    gossip protocol
-  interval: "10"
-  metric_name: consul.memberlist.msg.suspect
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: ""
-- description: Number of times an agent is marked dead and then quickly recovers
-  interval: "10"
-  metric_name: consul.serf.member.flap
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: ""
-- description: Incremented when an agent processes a serf event
-  interval: "10"
-  metric_name: consul.serf.events
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: event
-- description: Incremented when an agent processes a join event
-  interval: "10"
-  metric_name: consul.serf.member.join
-  metric_type: rate
-  per_unit_name: ""
-  unit_name: event

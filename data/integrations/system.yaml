@@ -5,6 +5,72 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: second
+- description: The number of threads used by this process.
+  interval: ""
+  metric_name: process.stat.cpu.num_threads
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: thread
+- description: The percent of time the CPU spent on this process in the kernel.
+  interval: ""
+  metric_name: process.stat.cpu.system_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The percent of time the CPU spent on this process in the kernel normalized
+    by the number of CPUs.
+  interval: ""
+  metric_name: process.stat.cpu.system_pct.norm
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The total percent of time the CPU spent on this process.
+  interval: ""
+  metric_name: process.stat.cpu.total_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The total percent of time the CPU spent on this process normalized
+    by the number of CPUs.
+  interval: ""
+  metric_name: process.stat.cpu.total_pct.norm
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The percent of time the CPU spent on this process in user space.
+  interval: ""
+  metric_name: process.stat.cpu.user_pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The percent of time the CPU spent on this process in user space normalized
+    by the number of CPUs.
+  interval: ""
+  metric_name: process.stat.cpu.user_pct.norm
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The non-swapped physical memory a process has used. aka "Resident Set
+    Size".
+  interval: ""
+  metric_name: process.stat.memory.rss
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The process memory utilization as a percentage of the total system
+    memory.
+  interval: ""
+  metric_name: process.stat.memory.rss.pct
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: percent
+- description: The total amount of virtual memory used by the process. aka "Virtual
+    Memory Size".
+  interval: ""
+  metric_name: process.stat.memory.vms
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
 - description: The percent of time the CPU spent running the virtual processor. Only
     applies to hypervisors.
   interval: ""
@@ -85,6 +151,12 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: percent
+- description: The amount of used allocated file handles over the system max.
+  interval: ""
+  metric_name: system.fs.file_handles.in_use
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
 - description: The number of free inodes.
   interval: ""
   metric_name: system.fs.inodes.free
@@ -310,6 +382,30 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: byte
+- description: The amount of the page file that's free.
+  interval: ""
+  metric_name: system.mem.pagefile.free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of the page file that's free as a fraction of the total.
+  interval: ""
+  metric_name: system.mem.pagefile.pct_free
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: fraction
+- description: The total size of the page file
+  interval: ""
+  metric_name: system.mem.pagefile.total
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
+- description: The amount of the page file in use.
+  interval: ""
+  metric_name: system.mem.pagefile.used
+  metric_type: gauge
+  per_unit_name: ""
+  unit_name: byte
 - description: The amount of usable physical RAM as a fraction of the total.
   interval: ""
   metric_name: system.mem.pct_usable
@@ -413,12 +509,6 @@ system:
   metric_type: gauge
   per_unit_name: second
   unit_name: segment
-- description: The number of TCP packets transmitted.
-  interval: ""
-  metric_name: system.net.tcp.sent_packs
-  metric_type: gauge
-  per_unit_name: second
-  unit_name: packet
 - description: The TCP round trip time.
   interval: "10"
   metric_name: system.net.tcp.rtt
@@ -437,6 +527,12 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: millisecond
+- description: The number of TCP packets transmitted.
+  interval: ""
+  metric_name: system.net.tcp.sent_packs
+  metric_type: gauge
+  per_unit_name: second
+  unit_name: packet
 - description: The rate of UDP datagrams delivered to UDP users.
   interval: ""
   metric_name: system.net.udp.in_datagrams
@@ -526,9 +622,9 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: write
-- description: The number of minor page faults per second for this process.
+- description: The number of major page faults per second for children of this process.
   interval: ""
-  metric_name: system.processes.mem.page_faults.minor_faults
+  metric_name: system.processes.mem.page_faults.children_major_faults
   metric_type: gauge
   per_unit_name: second
   unit_name: occurrence
@@ -544,9 +640,9 @@ system:
   metric_type: gauge
   per_unit_name: second
   unit_name: occurrence
-- description: The number of major page faults per second for children of this process.
+- description: The number of minor page faults per second for this process.
   interval: ""
-  metric_name: system.processes.mem.page_faults.children_major_faults
+  metric_name: system.processes.mem.page_faults.minor_faults
   metric_type: gauge
   per_unit_name: second
   unit_name: occurrence
@@ -643,69 +739,3 @@ system:
   metric_type: gauge
   per_unit_name: ""
   unit_name: second
-- description: The total percent of time the CPU spent on this process.
-  interval: ""
-  metric_name: process.stat.cpu.total_pct
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The total percent of time the CPU spent on this process normalized
-    by the number of CPUs.
-  interval: ""
-  metric_name: process.stat.cpu.total_pct.norm
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The percent of time the CPU spent on this process in user space.
-  interval: ""
-  metric_name: process.stat.cpu.user_pct
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The percent of time the CPU spent on this process in user space normalized
-    by the number of CPUs.
-  interval: ""
-  metric_name: process.stat.cpu.user_pct.norm
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The percent of time the CPU spent on this process in the kernel.
-  interval: ""
-  metric_name: process.stat.cpu.system_pct
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The percent of time the CPU spent on this process in the kernel normalized
-    by the number of CPUs.
-  interval: ""
-  metric_name: process.stat.cpu.system_pct.norm
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The number of threads used by this process.
-  interval: ""
-  metric_name: process.stat.cpu.num_threads
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: thread
-- description: The non-swapped physical memory a process has used. aka "Resident Set
-    Size".
-  interval: ""
-  metric_name: process.stat.memory.rss
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: byte
-- description: The process memory utilization as a percentage of the total system
-    memory.
-  interval: ""
-  metric_name: process.stat.memory.rss.pct
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: percent
-- description: The total amount of virtual memory used by the process. aka "Virtual
-    Memory Size".
-  interval: ""
-  metric_name: process.stat.memory.vms
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: byte

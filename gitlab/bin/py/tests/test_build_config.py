@@ -16,7 +16,7 @@ class TestBuildConfig(unittest.TestCase):
         self.staging_yaml = "config/staging.yaml"
         self.live_yaml = "config/live.yaml"
         self.build_yaml = "build.yaml"
-        self.branch_name = "tester/branch-name"
+        self.branch_name = "docs-hugo"
         self.remove_build_file()
 
     def test_config_file_is_written(self):
