@@ -97,4 +97,6 @@ print('MONITORING|{0}|{1}|{2}|{3}'.format(
 
 <%= get_metrics_from_git()%> 
 
-Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to function name, security-groups, and more.
+The metrics above get tagged in Datadog with any tags from AWS, including (but not limited to) function name, security-groups, and more.
+
+Custom metrics only get tagged with function name.
