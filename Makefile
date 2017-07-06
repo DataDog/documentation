@@ -41,9 +41,7 @@ hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
 	@if [ ! `which python3` ]; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi
-	@if [ ! `which virtualenv` ]; then printf "\e[93mvirtualenv is required.\033[0m\n" && exit 1; fi
-	@export VIRTUALENVWRAPPER_PYTHON=/usr/bin/env python3
-	@test -d ${VIRENV} || virtualenv ${VIRENV}
+	@test -d ${VIRENV} || python3 -m venv ${VIRENV}
 	@$(VIRENV)/bin/pip install -q -r gitlab/etc/requirements3.txt
 
 pre-build: source-helpers  ## gulp tasks; gather external content & data.

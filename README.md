@@ -50,8 +50,6 @@ npm install --global --production gulp-cli && npm install
 
 * Install Python3: https://www.python.org/download/releases/3.0/
 
-* Install virtualenv: https://virtualenv.pypa.io/en/stable/installation/
-
 * Install hugo: https://gohugo.io/overview/installing/
 
 * Install nodejs: https://nodejs.org/en/download/package-manager/

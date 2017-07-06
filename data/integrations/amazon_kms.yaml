@@ -1,8 +1,0 @@
-amazon_kms:
-- description: This metric tracks the number of seconds remaining until imported key
-    material expires.
-  interval: "60"
-  metric_name: aws.kms.seconds_until_key_material_expiration
-  metric_type: gauge
-  per_unit_name: ""
-  unit_name: second
