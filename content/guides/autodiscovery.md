@@ -92,7 +92,7 @@ If you want to monitor Apache containers, for example, the default Apache templa
 You can provide template files of your own in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them](https://github.com/DataDog/docker-dd-agent#configuration-files) into the docker-dd-agent container when starting it
-1. Package them into your own release of docker-dd-agent
+1. Build a custom docker image based on docker-dd-agent with your custom templates added to `/etc/dd-agent/conf.d/auto_conf`
 1. On Kubernetes, add them using ConfigMaps
 
 #### Example: Apache check
