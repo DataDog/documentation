@@ -1,7 +1,7 @@
 require 'pp'
 
 def generate_ja_pages
-  english_pages = (@items.select { |item| !(item.identifier.match('/ja')) && !(item.identifier.match('tipuesearch')) && !(item.identifier.match('/static')) && !(item.identifier.match('images'))}).collect { |item| item.identifier}
+  english_pages = (@items.select { |item| !(item.identifier.match('/ja')) && !(item.identifier.match('tipuesearch')) && !(item.identifier.match('/static')) && !(item.identifier.match('images')) && !item[:beta]}).collect { |item| item.identifier}
   english_pages = english_pages - @config[:redirects].collect{|redirect| redirect[:from]}
   japanese_pages = (@items.select { |item| (item.identifier.match('/ja')) && !(item.identifier.match('/static')) && !(item.identifier.match('images')) && !(item.identifier.match('/java'))}).collect { |item| item.identifier.sub('/ja', '')}
 

@@ -27,10 +27,10 @@ Connect Cacti to Datadog to:
 
 <!-- From the open-source Agent:
 
-* [Cacti YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/cacti.yaml.example)
+* [Cacti YAML example](https://github.com/DataDog/integrations-core/blob/master/cacti/conf.yaml.example)
 * [Cacti checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/cacti.py) -->
 
 Datadog Agentの設定ファイルサンプルとメトリクス収集プログラム:
 
-* [Cactiインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/cacti.yaml.example)
-* [Cactiインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/cacti.py)
+* [Cactiインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/cacti/conf.yaml.example)
+* [Cactiインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/cacti/check.py)

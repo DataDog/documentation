@@ -24,3 +24,5 @@ Note: AWS Budget metrics can only be collected from the AWS master account.
 # Metrics
 
 <%= get_metrics_from_git() %>
+
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

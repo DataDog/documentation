@@ -18,16 +18,16 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 * **Standard RDS Integration** - The standard integration requires selecting RDS on the left side of the AWS integration tile. You will receive metrics about your instance as often as your Cloudwatch integration allows. All RDS Engine types are supported.
 
-* **Enhanced RDS Integration** - The enhanced integration requires additional configuration and is only available for MySQL, Aurora, and MariaDB engines. Additional metrics are available but an AWS Lambda is required to submit the metrics to Datadog. The higher granularity and additional required services may result in additional AWS charges.
+* **Enhanced RDS Integration** - The enhanced integration requires additional configuration and is only available for MySQL, Aurora, PostgreSQL, and MariaDB engines. Additional metrics are available but an AWS Lambda is required to submit the metrics to Datadog. The higher granularity and additional required services may result in additional AWS charges.
 
-* **RDS + Native Database Integration** - You can also choose to turn on the Native Database Integration. This is available for MySQL, Aurora, MariaDB, SQL Server, and Postgres engine types. To get the metrics from RDS and the ones from the native integration to match up, you will need to use the `dbinstanceidentifier` tag on the native integration based on the identifier you assign to the RDS instance. The RDS instances will automatically have the tag assigned.
+* **RDS + Native Database Integration** - You can also choose to turn on the Native Database Integration. This is available for MySQL, Aurora, MariaDB, SQL Server, and PostgreSQL engine types. To get the metrics from RDS and the ones from the native integration to match up, you will need to use the `dbinstanceidentifier` tag on the native integration based on the identifier you assign to the RDS instance. The RDS instances will automatically have the tag assigned.
 
 
 # Installation
 
 * **Standard RDS Integration**
 
-  No installation is required for the Standard RDS integration.
+  If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
 * **Enhanced RDS Integration**
 
@@ -162,6 +162,9 @@ Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks t
 In addition to the metrics you get from the database engines you will also get the following RDS metrics:
 
 <%= get_metrics_from_git()%>
+
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+
 
    [1]: /static/images/rds-console.png
    [2]: /static/images/aurora-rds-dash.png

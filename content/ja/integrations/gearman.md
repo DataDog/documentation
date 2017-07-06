@@ -28,15 +28,10 @@ Bring Gearman metrics to Datadog to:
 * Gearmanのパフォーマンスを他のアプルケーションと連携し状況を把握する
 
 
-<!-- From the open-source Agent:
-
-* [Gearman YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/gearmand.yaml.example)
-* [Gearman checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/gearmand.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/gearmand.yaml.example)
-* [Gearmanインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/gearmand.py)
+* [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/gearmand/conf.yaml.example)
+* [Gearmanインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/gearmand/checks.py
 
 
 <!-- The following metrics are collected by default with the Gearman integration:

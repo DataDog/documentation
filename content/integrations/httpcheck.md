@@ -43,6 +43,7 @@ Other settings available include:
 | `method` | The HTTP method. This setting defaults to GET, though many other HTTP methods are supported, including POST and PUT. |
 | `data` | The data option is only available when using the POST method. Data should be included as key-value pairs and will be sent in the body of the request. |
 | `content_match` | A string or Python regular expression. The HTTP check will search for this value in the response and will report as DOWN if the string or expression is not found. |
+| `reverse_content_match` | When true, reverses the behavior of the `content_match` option, i.e. the HTTP check will report as DOWN if the string or expression in `content_match` IS found. (default is false)|
 | `username` & `password` | If your service uses basic authentication, you can provide the username and password here. |
 | `http_response_status_code` | A string or Python regular expression for an HTTP status code. This check will report DOWN for any status code that does not match. This defaults to 1xx, 2xx and 3xx HTTP status codes. For example: `401` or `4\d\d`.|
 | `include_content` | When set to `true`, the check will include the first 200 characters of the HTTP response body in notifications. The default value is `false`. |
@@ -52,7 +53,7 @@ Other settings available include:
 | `ca_certs` | This setting will allow you to override the default certificate path as specified in `init_config` |
 | `check_certificate_expiration` | When `check_certificate_expiration` is enabled, the service check will check the expiration date of the SSL certificate. Note that this will cause the SSL certificate to be validated, regardless of the value of the `disable_ssl_validation` setting. |
 | `days_warning` & `days_critical` | When `check_certificate_expiration` is enabled, these settings will raise a warning or critical alert when the SSL certificate is within the specified number of days from expiration. |
-| `headers` | This parameter allows you to send additional headers with the request. Please see the [example YAML file](https://github.com/DataDog/dd-agent/blob/master/conf.d/http_check.yaml.example) for additional information and caveats. |
+| `headers` | This parameter allows you to send additional headers with the request. Please see the [example YAML file](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) for additional information and caveats. |
 | `skip_event` | When enabled, the check will not create an event. This is useful to avoid duplicates with a server side service check. This defaults to `false`. |
 | `no_proxy` | If set, the check will bypass proxy settings and attempt to reach the check url directly. This defaults to `false`. |
 | `allow_redirects` | This setting allows the service check to follow HTTP redirects and defaults to `true`.

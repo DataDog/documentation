@@ -10,15 +10,13 @@ updated_for_agent: 5.8.5
 
 ![Chef Event](/static/images/chefdashboard.png)
 
+Chef is a popular configuration management tool written in Ruby and Erlang. If you manage your compute instances with Chef and want to use it to install the Datadog agent, [check out our guide for that](http://docs.datadoghq.com/guides/chef/). *This* page is about sending Chef metrics to Datadog.
+
 Connect Chef to Datadog in order to:
 
-* Get real-time reports on Chef client runs.
-* Track key Chef performance metrics across all your servers.
+* Get real-time reports on Chef client runs
+* Track key Chef performance metrics across all your servers
 * Quickly identify and discuss failed Chef runs with your team
-
-To install the Datadog Agent via Chef, please see [here][1].
-
-[1]: http://docs.datadoghq.com/guides/chef/
 
 # Installation
 
@@ -60,7 +58,9 @@ To install the Datadog Agent via Chef, please see [here][1].
 
 1.  Wait for the next scheduled chef-client run.
 
-NOTE: We highly recommend that you deploy the Datadog Agent in conjunction to the Chef Handler. Further instructions on deploying the Datadog Agent via Chef can be found here.
+# Validation
+
+From your [events stream](https://app.datadoghq.com/event/stream), enter `sources:chef` in the search bar. Your Chef runs should appear.
 
 # Metrics
 

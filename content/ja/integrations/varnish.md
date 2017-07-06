@@ -30,15 +30,10 @@ Connect Varnish to Datadog in order to:
 - Varnishのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
 
-<!-- From the open-source Agent:
-
-* [Varnish YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
-* [Varnish checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Varnishインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example)
-* [Varnishインテグレーション  checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py)
+* [Varnishインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example)
+* [Varnishインテグレーション  checks.d](https://github.com/DataDog/integrations-core/blob/master/varnish/check.py)
 *
 
 <!-- The following metrics are collected by default with the Varnish integration:

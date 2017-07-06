@@ -24,15 +24,10 @@ Connect SQL Server to Datadog in order to:
 * SQLサーバーのパフォーマンスの可視化をする
 * SQLサーバーのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
-<!-- From the open-source Agent:
-
-* [SQL Server YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/sqlserver.yaml.example)
-* [SQL Server checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/sqlserver.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [SQL Serverインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/sqlserver.yaml.example)
-* [SQL Serverインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/sqlserver.py)
+* [SQL Serverインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/sqlserver/conf.yaml.example)
+* [SQL Serverインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/sqlserver/check.py)
 
 
 <!-- The following metrics are collected by default with the SQL Server integration:
