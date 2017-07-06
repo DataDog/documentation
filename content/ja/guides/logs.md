@@ -1,10 +1,10 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: Datadog Agent によるログの解析方法
 kind: guide
-listorder: 6
+listorder: 5
 sidebar:
   nav:
     - header: ログ解析のガイド
@@ -23,12 +23,21 @@ logs, so the data within can ｂe graphed in real-time, all the time. -->
 残念ながら多くの場合この重要性には気が付かずログファイルは放置されています。
 Datadog　Agent は、ログからメトリクスとイベントを解析することによって、その中のデータをリアルタイムでグラフ化するのに役立ちます。
 
+
+<!-- <h2 id="metrics">Parsing Metrics</h2>
+
+The Datadog Agent can read metrics directly from your log files:
+
+- from the Datadog canonical log format, without any additional programming
+- from any other log format, with a customized log parsing function
+-->
+
 <h2 id="metrics">メトリクスの抽出</h2>
 
-Datadog Agentは、ログファイルから直接メトリクスを、抽出することができます:
+Datadog Agent は、ログファイルから直接メトリクスを、抽出することができます:
 
 - Datadog の公式ログフォーマットの場合は、追加のプログラミングは不要です。
-- Datadog の公式ログフォーマット以外の場合は、Pythonによるログパース関数を準備し、それをimportして抽出します。
+- Datadog の公式ログフォーマット以外の場合は、Python によるログパース関数を準備し、それをimport して抽出します。
 
 
 <!-- ### Datadog Canonical Log Format
@@ -53,16 +62,16 @@ You can also specify multiple log files like this:
 
 ### Datadog の公式ログフォーマットの場合
 
-Datadogのログは次のようにフォーマットされています:
+Datadog のログは次のようにフォーマットされています:
 
     metric unix_timestamp value [attribute1=v1 attributes2=v2 ...]
 
-例えば、`/var/log/web.log`の各レコードが次のような内容で記述されているとします:
+例えば、`/var/log/web.log` の各レコードが次のような内容で記述されているとします:
 
     me.web.requests 1320786966 157 metric_type=counter unit=request
     me.web.latency 1320786966 250 metric_type=gauge unit=ms
 
-Datadog Agent にこのログファイルを解析させるためには、次の行をDatadog Agent の設定ファイル(`/etc/dd-agent/datadog.conf`)に追記します。
+Datadog Agent にこのログファイルを解析させるためには、次の行をDatadog Agent の設定ファイル(`/etc/dd-agent/datadog.conf`) に追記します。
 
     dogstreams: /var/log/web.log
 
@@ -112,23 +121,23 @@ Where attributes should at least contain the key metric_type, specifying whether
 
 ### カスタムフォーマットのログの場合
 
-ベンダ専用のソフトや過去からの残留ソフトなど、Datadogが公式に使用しているフォーマットと異なるログを解析したいとします。このような場合は、Pythonで記述した関数によってその特殊ログの特定のフィールドを抽出することができます。Python で記述した関数を Datadog Agentから呼び出せるようにするためには、設定ファイルに次のフォーマットで、ログファイルと解析用の関数を記述します:
+ベンダ専用のソフトや過去からの残留ソフトなど、Datadog が公式に使用しているフォーマットと異なるログを解析したいとします。このような場合は、Python で記述した関数によってその特殊ログの特定のフィールドを抽出することができます。Python で記述した関数を Datadog Agent から呼び出せるようにするためには、設定ファイルに次のフォーマットで、ログファイルと解析用の関数を記述します:
 
     dogstreams: /var/log/web.log:parsers:parse_web
 
-`parsers:parse_web`の部分の意味は、Datadog Agent の`PYTHONPATH`に`parsers`パッケージが存在し、その中に`parse_web`関数が記述されていることを意味します。
-`PYTHONPATH`は、Datadog Agentの起動スクリプトによって設定されます。Datadog Agent 2.0 以前の場合は,
-`/etc/init.d/datadog-agent`に設定されており、Datadog Agent 2.0 以降の場合は、Datadog Agentのsupervisor の設定ファイルに記述された内容に基づいて設定されています。
+`parsers:parse_web` の部分の意味は、Datadog Agent の`PYTHONPATH` に`parsers` パッケージが存在し、その中に`parse_web` 関数が記述されていることを意味します。
+`PYTHONPATH` は、Datadog Agent の起動スクリプトによって設定されます。Datadog Agent 2.0 以前の場合は,
+`/etc/init.d/datadog-agent` に設定されており、Datadog Agent 2.0 以降の場合は、Datadog Agentのsupervisor の設定ファイルに記述された内容に基づいて設定されています。
 
-もしも、パースのパッケージが`PYTHONPATH`にない場合は、そのパッケージを読み込むために次のようにパスを付記します:
+もしも、パースのパッケージが`PYTHONPATH` にない場合は、そのパッケージを読み込むために次のようにパスを付記します:
 
     dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 
-このフォーマットでは、Datadog Agentは、`custom_parser` 関数を、`/path/to/my/parsers_module.py` ファイルからimportしようとします。
+このフォーマットでは、Datadog Agent は、`custom_parser` 関数を、`/path/to/my/parsers_module.py` ファイルからimport しようとします。
 
-もしも、カスタムログパーサが機能しない場合は、Datadog Agentのcollectorが出力しているログを確認してください。
-Datadog Agentがその関数をimport できていない場合は、`Could not load Dogstream line parser`という行が出力されます。全てが正常に動作している場合は、`dogstream: parsing {filename} with
-{function name} (requested {config option text})`が、出力されます。
+もしも、カスタムログパーサが機能しない場合は、Datadog Agent のcollector が出力しているログを確認してください。
+Datadog Agent がその関数をimport できていない場合は、`Could not load Dogstream line parser` という行が出力されます。全てが正常に動作している場合は、`dogstream: parsing {filename} with
+{function name} (requested {config option text})` が、出力されます。
 
 
 <!-- ### Writing Parsing Functions
@@ -152,7 +161,7 @@ Where attributes should at least contain the key metric_type, specifying whether
 
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
 
-`attributes`には、最低限でもkey文字として`metric_type` を指定する必要があります。`metric_type`の値には、`counter`又は、`gauge`を指定することになります。
+`attributes` には、最低限でもkey文字として`metric_type` を指定する必要があります。`metric_type` の値には、`counter` 又は、`gauge` を指定することになります。
 
 
 <!-- ### Example
@@ -229,7 +238,7 @@ And you can test your parsing logic by calling python /path/to/parsers.py. -->
 
 ### カスタムログパーサの例
 
-`parsers.py`には、次のような内容が記述されます:
+`parsers.py` には、次のような内容が記述されます:
 
 <%= python <<eof
 import time
@@ -384,11 +393,9 @@ that is bundled with the Agent. -->
 
 <h2 id="events">イベントの抽出</h2>
 
-Event parsing is done via the same custom parsing functions as described above, except if you return a
-`dict` (or a `list` of `dict`) from your custom parsing function, Datadog will treat it as an event instead of a metric.
+上記で紹介したカスタムパース関数を使って、ログからイベントを抽出することができます。但し、カスタムパース関数で `dict` （又は、リスト形式の`dict`）を返す仕様になっている場合は除きます。
 
-
-イベントフィールド項目 (**太文字のフィールド**は、必須項目です):
+イベントに関連したフィールド (**太文字のフィールド**は、必須項目です):
 
 <table class="table">
 <thead>
@@ -400,67 +407,55 @@ Event parsing is done via the same custom parsing functions as described above, 
 </thead>
 <tbody>
 <tr>
-<th>msg_title</th>
+<td>msg_title</td>
 <td>string</td>
-<td>Title of the event. Will get indexed by our full-text
-search.</td>
+<td>イベントタイトル。 フルテキスト検索の対象になり、インデックされます。</td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>integer</td>
-<td>Unix epoch timestamp. If omitted, will default to the time that
-the Agent parsed the event.</td>
+<td>Unix のエポック時間。 指定が無い場合は、Agentがパースを実行した時間が設定されます。</td>
 </tr>
 <tr>
 <td>msg_text</td>
 <td>string</td>
-<td>Body of the event. Will get indexed by our full-text
-search.</td>
+<td>メッセージ本文。 フルテキスト検索の対象になり、インデックされます。</td>
 </tr>
 <tr>
 <td>alert_type</td>
 <td>string enum</td>
-<td>Indicates the severity of the event. Must be one of `error`,
-`warning`, `success` or `info`. If omitted, will default to `info`.
-Searchable by `alert_type:value`</td>
+<td>このイベントの深刻度合いを指定します。<code>error</code>,
+<code>warning</code>, <code>success</code>, <code>info</code> のどれかを、<code>alert_type:value</code>形式で指定します。省略された場合は、<code>info</code>になります。</td>
 </tr>
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Describes what kind of event this is. Used as part of the
-aggregation key</td>
+<td>どのようなイベントであるかを説明します。 集約キーの一部として使用されます。</td>
 </tr>
 <tr>
 <td>aggregation_key</td>
 <td>string</td>
-<td>Describes what this event affected, if anything. Used as part
-of the aggregation key</td>
+<td>このイベントの影響を受ける範囲を説明します。 集約キーの一部として使用されます。</td>
 </tr>
 <tr>
 <td>host</td>
 <td>string</td>
-<td>Name of the host this event originated from. The event will
-automatically get tagged with any tags you've given this host using
-the <a href="https://app.datadoghq.com/infrastructure#tags">tagging
-page</a> or the <a href="/ja/api/#tags">tagging
-api</a>. The host value is used as part of the aggregation
-key.</td>
+<td>このイベントが発生したホストの名前。 このイベントには、<a href="https://app.datadoghq.com/infrastructure#tags">UIから設定したタグ</a>や<a href="/ja/api/#tags">tagging API で設定したタグ</a>が自動で付与されます。 集約キーの一部として使用されます。</td>
 </tr>
 <tr>
 <td>priority</td>
 <td>string</td>
-<td>Determines whether the event will be visible or hidden by default
-in the stream; Must be one of <code>low</code> or <code>normal</code></td>
+<td>イベント ストリーム内でこのイベントをデフォルトで表示(<code>normal</code>)するか非(<code>low</code>)かを指定します。</td>
 </tr>
 </tbody>
 </table>
 
-The events with the same aggregation key within a 24 hour time window will get aggregated together on the stream.
-The aggregation key is a combination of the following fields:
+24時間に発生した集約キー(フィールドの組み合わせの値)が同一のイベントは、一つのスレットにまとめられます。
+
+集約の対象になる集約キーは、以下です:
 
 - event_type
 - aggregation_key
 - host
 
-For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py)
-that is bundled with the Agent.
+パーサーの例については、Agent にバンドルされている 「[cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py)」を参照してください。

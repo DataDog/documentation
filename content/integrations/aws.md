@@ -84,6 +84,8 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ecs:List*",
                 "elasticache:Describe*",
                 "elasticache:List*",
+                "elasticfilesystem:DescribeTags",
+                "elasticfilesystem:DescribeFileSystems",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
@@ -105,7 +107,10 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "sns:List*",
                 "sns:Publish",
                 "sqs:ListQueues",
-                "support:*"
+                "support:*",
+                "tag:getResources",
+                "tag:getTagKeys",
+                "tag:getTagValues"
               ],
               "Effect": "Allow",
               "Resource": "*"
@@ -219,6 +224,13 @@ For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
 
+## EFS
+
+* `elasticfilesystem:DescribeTags`: Gets custom tags applied to file systems
+* `elasticfilesystem:DescribeFileSystems`: Provides a list of active file systems
+
+For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html), review the documentation on the AWS website.
+
 ## ELB
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
@@ -249,7 +261,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs
+## CloudWatch Logs and Lambda
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
@@ -302,6 +314,15 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 ## Support
 
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
+
+## Tag
+
+* `tag:getResources`: Used to get custom tags by resource type.
+* `tag:getTagKeys`: Used to get tag keys by region within an AWS account.
+* `tag:getTagValues`: Used to get tag values by region within an AWS account.
+
+The main use of the Resource Group Tagging API is to reduce the number of API calls we need to collect custom tags.
+For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website. 
 
 # Troubleshooting
 {: #troubleshooting}

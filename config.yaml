@@ -86,6 +86,8 @@ redirects:
     to:    /integrations/tcpcheck/
   - from:  /guides/billing/
     to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
+  - from:  /guides/ja/billing/
+    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
   - from:  /guides/monitoring/
     to:    /guides/monitors/
   - from:  /ja/guides/monitoring/
@@ -96,6 +98,8 @@ redirects:
     to:    /guides/autodiscovery/
   - from: /videos/setuprailsapm/
     to:   /videos/apmsetup-rails/
+  - from: /tracing-api/
+    to:   /tracing/api/
 commonfilters:
   - phrase: 'info command'
     link: /guides/basic_agent_usage/ubuntu/

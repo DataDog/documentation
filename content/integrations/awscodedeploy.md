@@ -4,11 +4,8 @@ integration_title: AWS CodeDeploy
 kind: integration
 git_integration_title: amazon_codedeploy
 newhlevel: true
-beta: true
 ---
 # Overview
-
-Please contact support at <support@datdoghq.com> to enable this feature for your account.
 
 ![CodeDeploy default dashboard](/static/images/monitor-aws-codedeploy-dashboard.png)
 

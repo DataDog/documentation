@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/03/31
+last_modified: 2017/02/07
 translation_status: complete
 language: ja
 title: お問い合わせ
@@ -17,8 +17,10 @@ sidebar:
       href: "#status"
 ---
 
-Datadogそのものや、この[ドキュメントサイト](http://docs.datadoghq.com)でカバーしきれなかった使い方など、ご質問がある場合は気兼ねなくお問い合わせください。
+Datadogそのものや、この[ドキュメントサイト][1]でカバーしきれなかった使い方など、ご質問がある場合は気兼ねなくお問い合わせください。
 
 **弊社サポートチームへのコンタクト方法は、以下になります。**
 
 <%= render '_contact_info-ja', :heading_size => 3 %>
+
+[1]: http://docs.datadoghq.com/ja/

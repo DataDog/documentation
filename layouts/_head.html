@@ -3,6 +3,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <% title = @item[:title] || '' %>
     <title><%= title.empty? ? '' : "#{title}" %></title>
+    <%if @item[:beta]%>
+    <meta name="robots" content="noindex">
+    <%end%>
 
     <meta itemprop="description" name="description" property="og:description" content="<%= @item[:description] %>" />
 
