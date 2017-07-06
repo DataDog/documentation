@@ -1,10 +1,10 @@
 ---
-last_modified: 2015/06/25
+last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: Host Map表示の入門
 kind: guide
-listorder: 6
+listorder: 3
 ---
 
 <!--
@@ -12,24 +12,27 @@ listorder: 6
 
 Host Maps let you see all of your hosts together on one screen, grouped however you want, filtered however you want, with metrics made instantly comprehensible via color and shape. This is a new and simple way to spot outliers, detect usage patterns, avoid resource problems, and make decisions about how to best manage your infrastructure. Host Maps work at any scale, whether you have 10, 100 or 10,000 hosts.
 
-When you use Host Maps, we wanted the experience to be like waving a magic wand, and having every host leap to attention, telling you the high-level story instantly, ready to report further details on demand. The video above shows Host Maps in action. -->
+When you use Host Maps, we wanted the experience to be like waving a magic wand, and having every host leap to attention, telling you the high-level story instantly, ready to report further details on demand.
+-->
 
-## 概要 {#overview}
+## 概要
+{: #overview}
 
-Host Mapを使うことで、全ホストを1つのスクリーンで見ることができるようになります。そして、ホストを自由にグループ化したり、フィルタリングすることもできます。Host Map内に表示されている各ホストは、注目しているメトリクスのステータスにより色付けされており、状況が瞬時にわかるようになっています。
+Host Map を使うことで、インフラ内の全てのホストの状態を単一スクリーンで把握できるようになります。そして、自由自在にホストをグループ化したり、フィルタリングすることもできます。Host Map 内の表示は、注目しているメトリック値により色と面積が決定されており、各ホストに状況が瞬時にわかるようになっています。
 
-Host Mapは、異常値の察知、利用パターンの把握、リソースの使い切り問題の回避など、インフラを最善の状態に保つための判断をサポートする、新しくて簡単な方法です。Host Mapは、運用しているインフラのサイズに関わらず活用できます。10でも、100でも、1000でも、インフラのサイズに合わせて有効利用することができます。
+Host Map は、異常値の察知したり、利用パターンの把握したり、リソースの使い切り問題の回避するなど、インフラを維持するために必要な判断をサポートする新しくて簡単な仕組みです。Host Map は、ホスト数10でも、100でも、1000でも、インフラのサイズに関わらず有効活用できるはずです。
 
-Host Mapを使っているときは、ユーザに魔法の杖を振っているような体験をしてもらいたいと考えています。したがって、全てのホストは指示にしたがって速やかに移動し、直ちに全体像を伝えられる位置につき、次の指示を待ちます。
+Host Map を使っているときは、ユーザに魔法の杖を振っているような体験をしてもらいたいと考えています。したがって、全てのホストは指示にしたがって速やかに移動し、直ちに全体像を伝えられる位置につき、次の指示を待つようになっています。
 
 
 <!-- ## Ways to use it
 
 We built Host Maps for ultimate flexibility; with just a few clicks, you can ask innumerable infrastructure-level questions and get instant, visual answers. Below are some common uses, but we would also love to hear on twitter about the ways you use Host Maps at your company (@datadoghq). -->
 
+
 ## Host Mapの操作方法
 
-Host Mapは、究極の柔軟性を持って実装されています。数回クリックするだけで、インフラレベルでの無数のフィルタリングと、そのフィルタリングに対する可視化を即座に実現してくれます。以下に紹介する内容は、一般的な用途の例です。それ以外にもHost Mapによって把握できる内容はたくさんあると思います。是非皆さんの会社で考えたHost Mapの使い方をTiwtter(@datadoghq)でシェアしてもらえると嬉しいです。
+Host Map は、究極の柔軟性を持って実装されています。数回クリックするだけで、インフラレベルでの無数のフィルタリングと、そのフィルタリングに対する可視化を即座に実現してくれます。以下に紹介する内容は、一般的な用途の例です。それ以外にもHost Map によって把握できる内容はたくさんあると思います。是非皆さんの会社で考えたHost Map の使い方をTiwtter(@datadoghq) でシェアしてもらえると嬉しいです。
 
 
 <!-- ### Resource Optimization
@@ -46,16 +49,16 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 
 ### リソースの最適化
 
-あなたがAWSユーザなら、様々なタイプのインスタンスを用途に合わせて使い分けていることでしょう。幾つかのインスタンスはメモリ用に最適化され、又幾つかのインスタンスは計算用に最適化されていることでしょう。そして、それらは大きなサイズから小さなものまでいろいろなサイズのインスタンスがあるでしょう。
+あなたがAWSユーザなら、様々なタイプのインスタンスを用途に合わせて使い分けていることでしょう。幾つかのインスタンスはメモリの目的で最適化され、又幾つかのインスタンスは計算の目的で最適化されていることでしょう。そして、それらは大きなものから小さなものまでいろいろなサイズのインスタンスがあるでしょう。
 
-あなたがAWSへの出費を削減したい場合は、まず最初に高価なインスタンスがどのように使われているかを把握するところから始めることです。Host Mapを使えば、これは簡単にできます。まず、"インスタンスタイプ"でグループ化し、その後ロールと名前で、グループ化します。そして、c3.8xlargeのような高価なインスタンスの状況を把握します。CPUが十分に活用されていないホストやロールが存在しないか調べてみます。そのようなホストを見つけたなら、個々のホストにズームインし、現状の計算力が必要であったかを過去数ヶ月の期間の情報を元に検証してみます。又、これらのグループのホストを、安価なホストに移せないかを検討してみることも必要でしょう。
+あなたがAWSへの出費を削減したい場合は、まず最初に高価なインスタンスがどのように使われているかを把握するところから始めることです。Host Mapを使えば、これは簡単にできます。まず、"インスタンスタイプ"でグループ化し、その後ロールと名前で、グループ化します。そして、c3.8xlarge のような高価なインスタンスの状況を把握します。CPU が十分に活用されていないホストやロールが存在しないか調べてみます。そのようなホストを見つけたなら、個々のホストにズームインし、今使っているインスタンスの計算能力が必要であったかを過去数ヶ月に遡って検証してみます。同時にこれらのグループのホストを、安価なホストに移せないかを検討してみることも必要でしょう。
 
-以下は、Datadogで使用しているインスタンスの一部です。各グループの状態からc3.2xlargeグループには、かなりの負荷がかかっていることが分かります。
+以下は、Datadogで使用しているインスタンスの一部です。各グループの状態からc3.2xlarge グループには、かなりの負荷がかかっていることが分かります。
 
 ![](/static/images/hostmappart1image2.png)
 
-c3.2xlargeグループをクリックし、ロールによってサブグループの状態を表示すると、一部の
-ロールのホストに負荷が集中し、他のロールのホストは使われていないことが分かります。これらの緑色で表示されている7台のホストをc3.xlargeへ変更することで、約$13,000/年を削減することができます。この金額は、調査に値する価値があるのではないでしょうか。( $0.21/hr/host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20/year )
+c3.2xlarge グループをクリックし、ロールによってサブグループの状態を表示すると、一部の
+ロールのホストに負荷が集中し、他のロールのホストは使われていないことが分かります。これらの緑色で表示されている7台のホストをc3.xlarge へ変更することで、約$13,000/年を削減することができます。この金額は、調査に値する価値があるのではないでしょうか。( $0.21/hr/host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20/year )
 
 ![Datadog Host Maps Instance-Role Groups](/static/images/hostmappart1image3.png)
 
@@ -68,7 +71,7 @@ Host maps make it easy to see distributions of machines in each of your availabi
 
 ### アベイラビリティゾーン間でのホストの分布状態の把握
 
-Host Mapを使うことにより、アベイラビリティゾーン（AZ）間でのホストの配置状況を把握することが簡単になります。注目しているホストを抽出し、アベイラビリティゾーン(AZ)間でグループ化します。このようにすることにより、リソースの再配置が必要かどうか一目でわかるようになります。以下の例のように、Datadogでは **role:daniels** ロールのホストが各アベイラビリティゾーン間に不均等に配置されていることがわかります。(danielsは、Datadog内のアプリケーションサーバについているロール名です。)
+Host Map を使うことにより、アベイラビリティゾーン（AZ）間でのホストの配置状況を把握することが簡単になります。注目しているホストを抽出し、アベイラビリティゾーン(AZ)間でグループ化します。このようにすることにより、リソースの再配置が必要かどうか一目で分かるようになります。以下の例のように、Datadog では **role:daniels** ロールのホストが各アベイラビリティゾーン間に不均等に配置されていることがわかります。(daniels は、Datadog 内のアプリケーションサーバについているロール名です。)
 
 
 ![Datadog Host Maps AZ Balance](/static/images/hostmappart1image4.png)
@@ -86,20 +89,18 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 ### 原因の特定の補助
 
-運用しているインフラで障害が発生しているとします。例えば、幾つかのホストのCPU利用量が高負荷の状態のまま改善せず、長い応答時間の原因となっているとします。このような場合、Host Mapを使うことにより高い負荷のかかっているホストとそうでないホストの違いを素早く見分けられるようになります。Datadog ユーザは、違いを見分けるのに必要な切り口に基づいてホストを素早くグループ化し可視化することで、障害対象のホストが特定のグループに属しているかを検証することができます。例えば、アベイラビリティゾーン、リージョン、インスタンスタイプ、仮想マシンイメージ、各ホストに付与したタグなどでグループ化をすることができます。このHost Mapでのホストをグループ化することにより、障害の原因を迅速に発見することができ、この後に説明する、より高度な調査プロセスで、確認の必要ない項目を見つけ出すことができるようになります。
+運用しているインフラで障害が発生しているとします。例えば、幾つかのホストの CPU 利用量が高負荷の状態のまま改善せず、長い応答時間の原因となっているとします。このような場合、Host Map を使うことにより高負荷状態にあるホストとそうでないホストの違いを素早く見分けられるようになります。Datadog のユーザは、違いを見分けるのに必要な切り口に基づいてホストを素早くグループ化し可視化することで、障害対象のホストが特定のグループに属しているかを検証することができます。例えば、アベイラビリティゾーン、リージョン、インスタンスタイプ、仮想マシンイメージなど、各ホストに付与したタグでグループ化をすることができます。更に、Host Map でのホストをグループ化することにより、障害の原因を迅速に発見することができ、この後に説明するより高度な調査プロセスで、確認の必要ない項目を見つけ出すこともできるようになります。
 
-以下は、Datadogで発生した障害のスクリーンショットです。グラフからわかるように、同じクラスタに属しているにも関わらず、幾つかのホストでは他のホストより使用可能なメモリが少ない状態です。なぜこのような状況が発生するのでしょう。そこで、Host Mapを使って仮装マシンのイメージごとにホストを分類してみました。その結果、問題の原因は即座にわかりました。同一クラスタ内で2種類の異なる仮想マシンイメージがあり、その内の片方がオーバーロード状態になっていました。
+以下は、Datadog で発生した障害のスクリーンショットです。グラフからわかるように、同じクラスタに属しているにも関わらず、幾つかのホストは他のホストより使用可能なメモリが少ない状態です。なぜこのような状況が発生するのでしょう。そこで、Host Map を使って仮装マシンのイメージ毎にホストを分類してみました。その結果、同一クラスタ内で2種類の異なる仮想マシンイメージがあり、その内の片方がオーバーロード状態になっていることが即座にわかりました。
 
 ![Datadog Host Maps Two Memory Usage Bands](/static/images/hostmappart1image5.png)
 
 ![Datadog Host Maps Two Image Groups](/static/images/hostmappart1image6.png)
 
 
-<!-- ## More Details -->
+<!-- ## More Details
 
-## Host Mapの操作の解説
-
-<!-- ### Tags
+### Tags
 
 Your hosts probably have a lot of tags. Some tags are applied automatically by Datadog integrations, and some tags were probably applied by members of your team. Regardless of how the tags were created, you can use any of them to slice and dice your Host Maps.
 
@@ -112,18 +113,20 @@ If some of your hosts are running on AWS, the following AWS-specific tags are av
 * security-group
 * and any EC2 tags you might use, such as ‘name’ -->
 
+## Host Mapの操作の解説
+
 ### タグを使ってHost Mapを操作
 
-ホストには、多くのタグが付与されています。幾つかのタグは、Datadogのインテグレーションを適用する際に自動的に付与されます。また幾つかのタグは、Datadog Agentをインストールする際に設定したり、チームメンバーがダッシュボードから設定しているケースもあります。どの段階でタグ付与されたかに関わらず、それらのタグを使いHost Mapを操作することができます。
+ホストには、多くのタグが付与されています。幾つかのタグは、Datadog のインテグレーションを利用する際に自動的に付与されます。また幾つかのタグは、Datadog Agent をインストールする際に設定したり、チームメンバーがダッシュボードから設定しているケースもあります。どの段階でタグ付与されたかに関わらず、それらのタグを使いHost Map を操作することができます。
 
-AWS上でホストを起動している場合、以下の様なAWS固有のタグも利用することができます:
+AWS 上でホストを起動している場合、以下の様な AWS 固有のタグも利用することができます:
 
 * availability-zone
 * region
 * image
 * instance-type
 * security-group
-* ‘name’のような、EC2インスタンスに付与したタグ
+* ‘name’ のような、EC2 インスタンスに付与したタグ
 
 
 <!-- ### Filter by
@@ -141,16 +144,16 @@ Filterable host attributes (automatically provided):
 
 ### タグによるホストの抽出 (Filter by)
 
-'Filter by'は、インフラ全体からサブセットを抽出し、Host Map上に表示する際に利用します。画面の左上隅にあり、操作用の窓でそれぞれのタグ(自動でDatadogが付与しているものも含む)を選択することにより、Host Mapに表示するホストを抽出することができます。'Filter by'の窓に何も入力されていないと、インフラ内でDatadogにメトリクスを送信している全てのホストが表示されます。この状態で特定のサブセットのホストに注目したい場合、'Filter by'の窓にサブセットの条件を入力していきます。例えば、ホストが所属している環境('production', 'staging', etc.)に基づいて各ホストにタグ付けをしていたとします。この様な場合は、 **'production'** を使い表示する必要のない'staging'環境のホストをHost Mapから排除ことができます。更に、その'production'環境で特定のロールにフォーカスしたいなら、そのロール名を'Filter by'に追記します。追記した各フィルターはAND条件で判定され、サブセットが表示されます。
+'Filter by' は、インフラ全体からサブセットを抽出し、Host Map 上に表示する際に利用します。画面の左上隅にあり、操作用の窓でそれぞれのタグ(自動で Datadog が付与しているものも含む)を選択することにより、Host Map に表示するホストを抽出することができます。'Filter by' の窓に何も入力されていないと、インフラ内で Datadog にメトリクスを送信している全てのホストが表示されます。この状態で特定のサブセットのホストに注目したい場合、'Filter by' の窓にサブセットの条件を入力していきます。例えば、ホストが所属している環境('production', 'staging', etc.)に基づいて各ホストにタグ付けをしていたとします。この様な場合は、 **'production'** を使い表示する必要のない'staging' 環境のホストをHost Map から排除ことができます。更に、その'production' 環境で特定のロールにフォーカスしたいなら、そのロール名を'Filter by' に追記します。追記した各フィルターは AND 条件で判定され、サブセットが表示されます。
 
-Datadogが特別に準備している抽出に利用できるホストの状態に関するタグ (自動的にホストに付与されます):
+抽出に利用できるホスト状態タグ (Datadog内で、自動的に付与されます):
 
-* up : ホストが、メトリクス(heartbeat)を報告している状態。
-* down : ホストが、メトリクス(heartbeat)を報告していない状態。
-* muted : Datadogのアラートが、このホストに対してミュートされている状態。
-* agent : ホスト上でDatadog Agentが実行されている状態。
+* up : ホストが、メトリクス(heartbeat) を報告している状態。
+* down : ホストが、メトリクス(heartbeat) を報告していない状態。
+* muted : Datadog のアラートが、このホストに対してミュートされている状態。
+* agent : ホスト上でDatadog Agent が実行されている状態。
 * agent_issue : リソース情報へのアクセスができなくなるなど、インテグレーションに問題が発生した状態。
-* upgrade_required : Datadog Agentのアップグレートが必要な状態。
+* upgrade_required : Datadog Agent のアップグレートが必要な状態。
 
 
 <!-- ### Group hosts by tags
@@ -161,7 +164,7 @@ Datadogが特別に準備している抽出に利用できるホストの状態�
 
 ### タグによるホストのグループ化 (Group by)
 
-'Group by'は、タグを指定することによりホストをクラスタやグループへ立体的に配置し表示します。グループ化されたホストは、共通のタグが付与されています。簡単な例として、AWSのアベイラビリティゾーンによりグループ化してみます。この状態で第二のタグ(インスタンスタイプ)を設定することにより、ホストは、更に細かいグループに分類されていきます。以下の様に、大きなグループとしてアベイラビリティゾーンでグループ化され、その中で細分化されたグループとしてインスタンスタイプでグループ化されます。
+'Group by' は、タグを指定することによりホストをクラスタやグループへ立体的に最配置します。グループ化されたホストは、共通のタグが付与されています。簡単な例として、AWS のアベイラビリティゾーンによりグループ化してみます。この状態で第二のタグ(インスタンスタイプ)を設定することにより、ホストは、更に細かいグループに分類されていきます。以下の例は、大きなグループとしてアベイラビリティゾーンでグループ化され、その中で細分化されたグループとしてインスタンスタイプでグループ化されます。
 
 ![Datadog Host Maps AZ Instance Groups](/static/images/hostmappart2image2.png)
 
@@ -174,7 +177,7 @@ When you’ve identified a host that you want to investigate, click it for detai
 
 ### ズームイン機能
 
-調査対象のホストが特定できたら、そのホストをクリックし詳細を確認していきます。クリックすることで、そのホストにズームインし、メトリクスを送信している6種類のインテグレーションを表示します。(6種類以上のインテグレーションを導入している場合は、ホストの詳細ペインの"Apps"以下にリスト表示されます)　どれかのインテグレーション名をクリックすると、そのインテグレーションの簡易版のダッシュボードを表示することができます。下のスクリーンショットでは、"system"インテグレーションをクリックし、CPUの利用量、メモリーの利用量、ディスクレーテンシーなどの簡易版ダッシュボードを表示しています。
+調査対象のホストが特定できたら、そのホストをクリックし詳細を確認していきます。クリックすることで、そのホストにズームインし、メトリクスを送信している6種類のインテグレーションを表示します。(6種類以上のインテグレーションを導入している場合は、ホストの詳細ペインの"Apps" 以下にリスト表示されます)　どれかのインテグレーション名をクリックすると、そのインテグレーションの簡易版のダッシュボードを表示することができます。下のスクリーンショットでは、"system" インテグレーションをクリックし、CPU の利用量、メモリーの利用量、ディスクレーテンシーなどの簡易版ダッシュボードを表示しています。
 
 ![Datadog Host Maps Zoom In](/static/images/blog-host-maps-01.png)
 
@@ -191,13 +194,13 @@ Note that the “% CPU utilized” metric uses the most reliable and up-to-date 
 
 ### 6角形の型と色  (Size by)
 
-各ホスト(六角形)の色は、デフォルトではCPU使用率を表現するように設定されています。色相は緑から赤の範囲に設定されており、CPU使用率0%から100%に対応しています。CPU利用率以外にも別のメトリクスを'Color by'窓で選択することが可能です。Host Mapでは、第二のスケール軸を表現するために、'Size by'窓で設定できる六角型のサイズを使っています。下のスクリーンショットでは六角形のサイズは、コアの数が異なる場合でも比較できるように正規化した15分間の平均負荷を表しています。
+各ホスト(六角形)の色は、デフォルトではCPU 使用率を表現するように設定されています。色相は緑から赤の範囲に設定されており、CPU使用率 0% から 100% に対応しています。CPU 利用率以外にも別のメトリクスを 'Color by' 窓で選択することが可能です。Host Map では、第二のスケール軸を表現するために、'Size by' 窓で設定できる六角型のサイズを使っています。下のスクリーンショットでは六角形のサイズは、コアの数が異なる場合でも比較できるように正規化した15分間の平均負荷を表しています。
 
 ![Datadog Host Maps Using Color And Size](/static/images/hostmappart2image4.png)
 
-現状では'Color by'セレクターと'Size by'セレクターは、load、idle、waitなどのCPUに関連したメトリクスに限られていますが、この部分で選択できるメトリクスについては近々増強される予定です。
+現状では'Color by' セレクターと'Size by' セレクターは、load、idle、wait などの CPU に関連したメトリクスに限られていますが、この部分で選択できるメトリクスについては近々増強される予定です。
 
-注) "% CPU utilized"のメトリクスは、 Datadog Agentからか、AWS CloudWatchからか、vSphereからかに関わらず、**最も信頼性の高い最新のCPU使用率の測定値** を表示しています。
+**注)** "% CPU utilized" のメトリクスは、 Datadog Agent からか、AWS CloudWatch からか、vSphere からかに関わらず、**最も信頼性の高い最新の CPU 使用率の測定値** を表示しています。
 
 
 <!-- ### Data freshness and meaning
@@ -206,4 +209,4 @@ Data in the Host Maps is refreshed about once a minute—unless you are continuo
 
 ### 表示されているデータの更新のタイミング
 
-Host Mapで表示しているデータは、基本的に1分に1回の頻度で自動的に更新されます。ただし、Host Map上で抽出やグループ化の作業をしている場合は、自動でのデータの更新はされません。この処置は、自動的にデータを更新することにより、調査の最中に、表示している色や形が変化していくことを避けるために実施しています。したがって、画面の右下にデータの最終更新時間を表示するようにしています。
+Host Map で表示しているデータは、基本的に1分に1回の頻度で自動的に更新されます。ただし、Host Map 上で抽出やグループ化の作業をしている場合は、自動でのデータの更新はされません。この処置は、自動的にデータを更新することにより、調査の最中に、表示している色や形が変化していくことを避けるために実施しています。したがって、画面の右下にデータの最終更新時間を表示するようにしています。

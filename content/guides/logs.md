@@ -82,7 +82,7 @@ Custom parsing functions must:
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
 
     Where attributes should at least contain the key metric_type, specifying whether the given metric is a counter or gauge.
-    
+
     If the line doesn't match, instead return `None`.
 
 ### Example
@@ -174,7 +174,7 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<th>msg_title</th>
+<td>msg_title</td>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>
