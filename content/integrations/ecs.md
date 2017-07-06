@@ -28,6 +28,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 1. Download [dd-agent-ecs.json](/static/dd-agent-ecs.json).
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
+
        aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 
 #### Web UI
@@ -154,7 +155,7 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
                ExecStartPre=-/usr/bin/docker kill ecs-agent
                ExecStartPre=-/usr/bin/docker rm ecs-agent
                ExecStartPre=/usr/bin/docker pull amazon/amazon-ecs-agent
-               ExecStart=/usr/bin/docker run --name ecs-agent --env=ECS_CLUSTER=${ECS_CLUSTER} --env=ECS_LOGLEVEL=${ECS_LOGLEVEL} --env=ECS_CHECKPOINT=${ECS_ CHECKPOINT} --publish=127.0.0.1:51678:51678 --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/lib/aws/ecs:/data amazon/amazon-ecs- agent
+               ExecStart=/usr/bin/docker run --name ecs-agent --env=ECS_CLUSTER=${ECS_CLUSTER} --env=ECS_LOGLEVEL=${ECS_LOGLEVEL} --env=ECS_CHECKPOINT=${ECS_CHECKPOINT} --publish=127.0.0.1:51678:51678 --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/lib/aws/ecs:/data amazon/amazon-ecs- agent
                ExecStop=/usr/bin/docker stop ecs-agent
            - name: dd-agent.service
              command: start
@@ -173,7 +174,7 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
                Environment=API_KEY=YOUR_API_KEY
                Environment=TAGS=simple-tag-0
                ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent:latest
-               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/ proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:latest
+               ExecStart=/usr/bin/docker run --name dd-agent --env=API_KEY=${API_KEY} --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/proc/:/host/proc/:ro --volume=/sys/fs/cgroup/:/host/sys/fs/cgroup:ro datadog/docker-dd-agent:latest
                ExecStop=/usr/bin/docker stop dd-agent
 
 ### That's all!
@@ -182,7 +183,8 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 
 
 #### Dynamic detection and monitoring of running services
-Currently work in progress, more to come soon
+
+Datadog's <a href="/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
 ### Metrics
 

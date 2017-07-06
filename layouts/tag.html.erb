@@ -20,12 +20,12 @@ when id.match('/examples/') %>
 
 <% when id.match('/videos/') %>
 
-  <div class="container">
+  <div>
   <% items_with_tag(tag, $video_items).each do |video| %>
       <h2><%= link_to video[:title], video %></h2>
       <p><%= video[:summary] %></p>
-      <% wistiavideo = VideoInfo.new("//fast.wistia.net/embed/medias/" + video[:wistiaid]) %>
-      <%= link_to "<img src='" + wistiavideo.thumbnail_medium + "?image_play_button=true&image_play_button_color=7b796ae0&image_crop_resized=552x311'/>", video %>
+      <script src="https://fast.wistia.com/embed/medias/<%= video[:wistiaid] %>.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_<%= video[:wistiaid] %> popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;width:100%">&nbsp;</span></div></div>
+
       <br>
       This video can be found in these groups:<br>
      <%= tag_links_for(video, [], {:url_format=>"/videos/%%tag%%/"}).join(' | ') %>
@@ -34,6 +34,8 @@ when id.match('/examples/') %>
   <a href="/videos/">Return to All Video Groups.</a>
   </p>
   </div>
+
+
 
 
 <% end %>

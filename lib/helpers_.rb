@@ -179,8 +179,19 @@ end
 
 def insert_example_links(integration: item[:integration_title], conf:  integration.downcase.tr(" ", "_"), check: integration.downcase.tr(" ", "_"), yaml_extension: "example", include_intro: true)
   example_links = include_intro ? "For more details about configuring this integration refer to the following file(s) on GitHub:\n" : ""
-  yaml_example = conf!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/conf.d/" + conf + ".yaml."+yaml_extension+"'> "+ integration + " YAML example</a></li>" : ""
-  checks_file =  check!="none" ? "<li><a href='https://github.com/DataDog/dd-agent/blob/master/checks.d/" + check + ".py'>" + integration + " checks.d</a></li>" : ""
+  integrationwebroot='https://github.com/Datadog/integrations-core/blob/master/'
+
+  yaml_example = ""
+  if conf!="none"
+    url = integrationwebroot + conf + "/conf.yaml.example"
+    yaml_example = "<li><a href='" + url + "'>" + integration + " YAML example</a></li>"
+  end
+
+  checks_file = ""
+  if check != "none"
+    url = integrationwebroot + check + "/check.py"
+    checks_file = "<li><a href='" + url + "'>" + integration + " checks.d</a></li>"
+  end
 
   example_links += "<ul>" + yaml_example + checks_file + "</ul>\n"
   return example_links
@@ -207,14 +218,35 @@ def get_metrics_from_git(itemintegration=@item[:git_integration_title], items_to
   return formatmetrics(selectedmetrics)
 end
 
+def arraytoenglishlist(inputarray)
+  outputstring = ""
+
+  if inputarray.size == 1
+    outputstring = inputarray[0]
+  elsif inputarray.size == 2
+    outputstring = "#{inputarray[0]} and #{inputarray[1]}"
+  elsif inputarray.size > 2
+    outputstring = "#{inputarray[0..-2].join(', ')}, and #{inputarray[-1]}"
+  end
+
+  return outputstring
+end
+
 def formatmetrics(selectedmetrics)
+  platformmetrics = @item.attributes.has_key?(:platformmetrics)?@item[:platformmetrics]:{}
   metrictable = "<table class='table'>"
   if $goodconnection
     selectedmetrics.each do |metric|
-      metrictable += "<tr><td><strong>#{metric[:name]}</strong><br/>(#{metric[:type]}"
+      platformexceptions = ""
+      if platformmetrics.has_key?(:"#{metric[:name]}")
+        platformexceptions = " <i>**#{arraytoenglishlist(platformmetrics[:"#{metric[:name]}"])} only</i>"
+      end
+
+      metrictable += "<tr><td><strong>#{metric[:name]}</strong>#{platformexceptions}<br/>(#{metric[:type]}"
       if metric[:interval]>0
         metrictable += " every #{metric[:interval]} seconds"
       end
+
       metrictable += ")</td><td>#{metric[:description].gsub '^', ' to the '}"
       metrictable += metric[:unit].length>0 ? "<br/><em>shown as #{metric[:unit]}" : "<em>"
       metrictable += metric[:per_unit].length>0 ? "/#{metric[:per_unit]}</em>" : "</em>"
@@ -224,7 +256,74 @@ def formatmetrics(selectedmetrics)
     metrictable += "<tr><td>Metrics would go here if you didn't type rake slow</td></tr>"
   end
   metrictable += "</table>"
-  return metrictable
+
+  return metrictable.force_encoding("utf-8")
+end
+
+def print_classic_library_table
+  require 'yaml'
+
+  table_markdown = "|Language|Library|Official|API|DogStatsD|Notes|\n|---\n"
+  libraries = YAML.load_file('libraries.yml')
+  libraries = libraries['Classic']
+  libraries.each do |lang, libs|
+    libs.each_with_index do |lib, i|
+      first_col = i == 0 ? "**#{lang}**" : ''
+      api = lib.has_key?('api') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      dogstatsd = lib.has_key?('dogstatsd') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      authors = ''
+      if lib.has_key?('authors')
+        if lib['authors'].respond_to?(:join)
+          authors = "Written by #{lib['authors'].join(', ')}"
+        else
+          authors = "Written by #{lib['authors']}"
+        end
+      end
+      notes = lib.has_key?('notes') ? lib['notes'] : ''
+      if notes != '' && !notes.end_with?('.')
+        notes = "#{notes}."
+      end
+      last_col = "#{notes} #{authors}".strip!
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{official}|#{api}|#{dogstatsd}|#{last_col}\n"
+    end
+    table_markdown += "|---\n"
+  end
+
+  table_markdown += "{:.table}"
+  return table_markdown
+end
+
+def print_tracing_library_table
+  require 'yaml'
+
+  table_markdown = "|Language|Library|Official|Notes|\n|---\n"
+  libraries = YAML.load_file('libraries.yml')
+  libraries = libraries['Tracing']
+  libraries.each do |lang, libs|
+    libs.each_with_index do |lib, i|
+      first_col = i == 0 ? "**#{lang}**" : ''
+      official = lib.has_key?('official') ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''
+      authors = ''
+      if lib.has_key?('authors')
+        if lib['authors'].respond_to?(:join)
+          authors = "Written by #{lib['authors'].join(', ')}"
+        else
+          authors = "Written by #{lib['authors']}"
+        end
+      end
+      notes = lib.has_key?('notes') ? lib['notes'] : ''
+      if notes != '' && !notes.end_with?('.')
+        notes = "#{notes}."
+      end
+      last_col = "#{notes} #{authors}".strip!
+      table_markdown += "|#{first_col}|[#{lib['name']}](#{lib['link']})|#{official}|#{last_col}\n"
+    end
+    table_markdown += "|---\n"
+  end
+
+  table_markdown += "{:.table}"
+  return table_markdown
 end
 
 def get_units_from_git

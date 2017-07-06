@@ -44,9 +44,6 @@ If DaemonSets are not an option for your Kubernetes cluster, you will need to in
 Configure the agent by editing the kubernetes.yaml file in conf.d:
 
     init_config:
-      tags:
-        - optional_tag1
-        - optional_tag2
 
     instances:
       # The kubernetes check retrieves metrics from cadvisor running under kubelet.
@@ -77,6 +74,11 @@ Configure the agent by editing the kubernetes.yaml file in conf.d:
       #
       # enabled_gauges:
       #   - filesystem.*
+      #
+      # Custom tags that should be applied to kubernetes metrics
+      # tags:
+      #  - optional_tag1
+      #  - optional_tag2
 {:.language-yaml}
 
 Since the agent is deployed as a docker container, refer to the Agent [container documentation](https://github.com/DataDog/docker-dd-agent).
@@ -142,7 +144,7 @@ The manifest above uses Google's publicly available kube-state-metrics container
 1. Run `make container` to build the container
 1. Run `kubectl apply -f kubernetes`
 
-If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent. For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/kubernetes_state.yaml.example). If you have enabled [Service Discovery](/guides/servicediscovery/), the kube state URL will be configured and managed automatically.
+If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent. For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](/guides/autodiscovery/), the kube state URL will be configured and managed automatically.
 
 # Validation
 

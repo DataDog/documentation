@@ -24,13 +24,7 @@ Connect ZooKeeper to Datadog in order to:
 * ZooKeeperのパフォーマンスと活用状況を可視化する
 * Zookeeperのパフォーマンスとそれ以外のアプリケーションを関連付け、状況を把握する
 
-
-<!-- From the open-source Agent:
-
-* [ZooKeeper YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/zk.yaml.example)
-* [ZooKeeper checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/zk.py) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [ZooKeeper MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/zk.yaml.example)
-* [ZooKeeperインテグレーション checks.d](https://github.com/DataDog/dd-agent/blob/master/checks.d/zk.py)
+* [ZooKeeper MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/zk/conf.yaml.example)
+* [ZooKeeperインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/zk/check.py)

@@ -1,0 +1,33 @@
+FROM nginx:1.11.10-alpine
+
+# Update APK
+RUN apk update && apk upgrade
+
+# Install Ruby (2.3.1-r0 is the closest to 2.3.0)
+RUN apk add ruby=2.3.1-r0
+RUN apk add ruby-bundler
+
+# Update packages and certs to get/build gems
+RUN apk add ruby-dev build-base
+RUN apk add libffi-dev libxml2-dev libxslt-dev nodejs libnotify
+RUN apk add ca-certificates
+
+# Copy Gemfile to working dir
+WORKDIR /dev_setup
+COPY ./Gemfile /dev_setup
+COPY ./Gemfile.lock /dev_setup
+RUN gem install rake -v "=10.4.2" --no-document # gem sassc fails because rake isn't installed
+RUN bundle config build.nokogiri --use-system-libraries # Required for nokogiri < 1.6.8
+RUN bundle install
+
+# Clean APK cache
+RUN rm -rf /var/cache/apk/*
+
+# Setup our mount point
+WORKDIR /docs
+
+# Replace the html dir with a symlink to docs
+RUN rm -rf /usr/share/nginx/html && ln -s /docs/output /usr/share/nginx/html
+
+ENV BUNDLE_GEMFILE "/docs/Gemfile"
+CMD /bin/sh -c "/docs/bin/docker-run.sh"

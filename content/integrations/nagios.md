@@ -17,5 +17,5 @@ Set up information collection for Nagios by editing the given YAML configuration
 
 <%= insert_example_links%>
 
-   [1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/nagios.yaml.example
+   [1]: https://github.com/DataDog/integrations-core/blob/master/nagios/conf.yaml.example
    [2]: https://app.datadoghq.com/report/nagios

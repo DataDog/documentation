@@ -14,12 +14,11 @@ doclevel: basic
 Use Papertrail and Datadog to:
 
   * Turn freeform log data into actionable metrics
-  * Centralize all text output: syslog, text log files, app hosting platforms (Heroku, Cloud Foundry)
   * Avoid silo-ed operational knowledge. See and correlate log-derived metrics alongside app- and system-level metrics.
 
 # Installation
 
-To capture metrics and events from Papertrail:
+To capture metrics from Papertrail:
 
 1.  In Papertrail's [event viewer](https://papertrailapp.com/events), save a search for the log event(s) which should be graphed.
 1.  Enter the name for the search and click the **Save & Setup an Alert** button.
@@ -29,7 +28,7 @@ To capture metrics and events from Papertrail:
     {: style="max-width:500px;"}
 
 1.  Choose your alert frequency and other details.
-1.  Provide your Datadog API key, enter what you want to name your metric, and optionally enter some tags to associate with the metric. 
+1.  Provide your Datadog API key, enter what you want to name your metric, and optionally enter some tags to associate with the metric.
 
     ![Papertrail notifications](/static/images/papertraildetails.png)
     {: style="max-width:500px;"}

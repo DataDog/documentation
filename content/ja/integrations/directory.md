@@ -27,16 +27,10 @@ Capture metrics from the files in given directories:
 - ファイルの修正からの時間
 - ファイルの作成からの時間
 
-
-<!-- From the Agent:
-
-* [Directory check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py)
-* [irectory check configuration example](https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example) -->
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Directoryインテグレーションの設定ファイルサンプル](https://github.com/DataDog/dd-agent/blob/master/conf.d/directory.yaml.example)
-* [Directoryインテグレーション check script](https://github.com/DataDog/dd-agent/blob/master/checks.d/directory.py)
+* [Directoryインテグレーションの設定ファイルサンプル](ttps://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example)
+* [Directoryインテグレーション check script](https://github.com/DataDog//integrations-core/blob/master/directory/check.py)
 
 
 <!-- ### Configuration
@@ -44,7 +38,7 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 
 - The Directory check **is not currently supported on Windows systems**.
 - Ensure the user account running the Agent (typically `dd-agent`) has read access to the monitored directory and files.
-- Configure the Agent to connect to your directories.  
+- Configure the Agent to connect to your directories.
   Edit `/etc/dd-agent/conf.d/directory.yaml`
 
         init_config:

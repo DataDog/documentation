@@ -30,7 +30,7 @@ class HTTPCheckTest(AgentCheckTest)`
 
 #### Datadog Integrations
 
-To test integrations, add your test code to the `test_[integration_name].py` file in your integration directory. See the [Integrations Extras documentation](https://github.com/DataDog/integrations-extras/blob/master/readme/README.md#test_my_integrationpy) for more details.
+To test integrations, add your test code to the `test_[integration_name].py` file in your integration directory. [Creating New Integrations](/guides/integration_sdk/#testing-your-integration) for more details.
 
 #### Datadog Agent Checks
 
@@ -231,4 +231,4 @@ For further examples of testing Datadog integrations, you can view the test file
 
 #### Datadog Agent Checks
 
-For examples of Agent Check tests, you can view the test files for [agent checks](https://github.com/DataDog/dd-agent/tree/master/tests/checks/integration) such as [`test_http_check.py` file](https://github.com/DataDog/dd-agent/blob/master/tests/checks/integration/test_http_check.py).
+For examples of Agent Check tests, you can view the test files for [agent checks](https://github.com/DataDog/dd-agent/tree/master/tests/checks/integration) such as [`test_http_check.py` file](https://github.com/DataDog/integrations-core/blob/master/http_check/test_http_check.py).

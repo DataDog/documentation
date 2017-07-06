@@ -17,6 +17,8 @@ Enable this integration to see in Datadog all your S3 metrics.
 
 # Installation
 
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+
 * **Daily Storage Metrics**
 
 	The only requirement to monitor daily metrics is the permission `s3:GetBucketTagging`.
@@ -25,9 +27,15 @@ Enable this integration to see in Datadog all your S3 metrics.
 
 	[Enable Requests metrics][1] on your Amazon S3 buckets from the AWS console.
 
+# Configuration
+
+In the Amazon Web Services integration tile, ensure that S3 is checked under metric collection.
 
 # Metrics
 
 <%= get_metrics_from_git() %>
+
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+
 
 [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
