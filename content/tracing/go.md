@@ -8,9 +8,11 @@ customnav: tracingnav
 
 ### Installation
 
-To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
+To begin tracing applications written in Go you need to:
 
-Next, install the Go Tracer from the Github repository:
+ - [Install and configure the Datadog Agent](/tracing#installing-the-agent).
+
+ -  Install the Go Tracer from the Github repository:
 
 ~~~
 go get "github.com/DataDog/dd-trace-go/tracer"
@@ -20,9 +22,11 @@ This Package contains Datadog's tracing client. It is used to trace requests as 
 
 Package tracer has two core objects: Tracers and Spans. Spans represent a chunk of computation time. They have names, durations, timestamps and other metadata. Tracers are used to create hierarchies of spans in a request, buffer and submit them to the server.
 
-The tracing client can perform trace sampling. While the trace agent already samples traces to reduce bandwidth usage, client sampling reduces performance overhead. [Find more about this package on our go doc](https://godoc.org/github.com/DataDog/dd-trace-go/tracer)
+The tracing client can perform trace sampling. While the trace agent already samples traces to reduce bandwidth usage, client sampling reduces performance overhead.
 
-Finally, import the tracer and instrument your code!
+  - Import the tracer and instrument your code!
+
+[Learn more about this package on our go doc](https://godoc.org/github.com/DataDog/dd-trace-go/tracer)
 
 To enable APM and/or tracing of supported integrations, follow the instructions for the appropriate package:
 
