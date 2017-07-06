@@ -43,6 +43,7 @@ Other settings available include:
 | `method` | The HTTP method. This setting defaults to GET, though many other HTTP methods are supported, including POST and PUT. |
 | `data` | The data option is only available when using the POST method. Data should be included as key-value pairs and will be sent in the body of the request. |
 | `content_match` | A string or Python regular expression. The HTTP check will search for this value in the response and will report as DOWN if the string or expression is not found. |
+| `reverse_content_match` | Like `content_match`, but the check will report as DOWN if the string or expression IS found. |
 | `username` & `password` | If your service uses basic authentication, you can provide the username and password here. |
 | `http_response_status_code` | A string or Python regular expression for an HTTP status code. This check will report DOWN for any status code that does not match. This defaults to 1xx, 2xx and 3xx HTTP status codes. For example: `401` or `4\d\d`.|
 | `include_content` | When set to `true`, the check will include the first 200 characters of the HTTP response body in notifications. The default value is `false`. |
