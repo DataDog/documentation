@@ -34,7 +34,7 @@ Datadog Agentがホスト名をどのように識別し、そのホスト名がD
   with host names, we recommend updating to the latest version of the Agent.
 </div> -->
 
-## DAgentによる標準ホスト名の決め方
+## Datadog Agentによる標準ホスト名の決め方
 {: #agent}
 
 <div class="alert alert-warn">
@@ -44,7 +44,7 @@ Datadog Agentがホスト名をどのように識別し、そのホスト名がD
 
 <!-- The Datadog Agent collects potential hostnames from a number of different
 sources. To see all the names the Agent is detecting, run the Agent info
-command: 
+command:
 
     $ sudo /etc/init.d/datadog-agent info
 
