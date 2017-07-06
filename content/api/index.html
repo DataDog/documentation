@@ -240,6 +240,7 @@ kind: documentation
                 <code>[[POSIX_timestamp, numeric_value], ...]</code>
               </div>
               Note that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value.
+              Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
             </div>
           </li>
           <%= argument('host', 'The name of the host that produced the metric.', :default => 'None' ) %>
@@ -291,6 +292,61 @@ kind: documentation
       </div>
     </div>
 
+    <div class="int-anchor" id="metrics-metadata-get"></div><a href="#metrics-metadata-get"><h4>View metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to get metadata about a specific metric.
+        </p>
+
+        <h5>Arguments</h5>
+        <%= no_args %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>GET /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-get.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="int-anchor" id="metrics-metadata-update"></div><a href="#metrics-metadata-update"><h4>Edit metric metadata</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <p>
+          The metrics metadata endpoint allows you to edit fields of a metric's metadata.
+        </p>
+
+        <h5>Arguments</h5>
+        <ul class="arguments">
+          <%= argument("type", "metric type such as 'gauge' or 'rate'", {:default => 'None'}) %>
+          <%= argument("description", "string description of the metric", {:default => 'None'}) %>
+          <%= argument("short_name", "short name string of the metric", {:default => 'None'}) %>
+          <%= argument("unit", "primary unit of the metric such as 'byte' or 'operation'", {:default => 'None'}) %>
+          <%= argument("per_unit", "'per' unit of the metric such as 'second' in 'bytes per second'", {:default => 'None'}) %>
+          <%= argument("statsd_interval", "if applicable, statds flush interval in seconds for the metric", {:default => 'None'}) %>
+        </ul>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>PUT /api/v1/metrics/:metric_name</code>
+        <h5>Example Request</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_code_block "api-metric-metadata-update.#{f}" %>
+        <% end %>
+        <h5>Example Response</h5>
+        <% %w{py sh rb}.each do |f| %>
+          <%= snippet_result_code_block "api-metric-metadata-update.#{f}" %>
+        <% end %>
+      </div>
+    </div>
+
     <!--
    =====================================================================
     Events
@@ -313,7 +369,7 @@ kind: documentation
           This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
         </p>
         <h5>Arguments</h5>
-        <% valid_sources = "nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
+        <% valid_sources = "nagios, hudson, jenkins, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"  %>
         <ul class="arguments">
           <% %w(console python).each do |l| %>
             <%= argument "title", 'The event title. Limited to 100 characters.', :lang => l %>
@@ -323,7 +379,7 @@ kind: documentation
           <%= argument "msg_title", 'The event title. Limited to 100 characters.', :lang => 'ruby', :default => "''" %>
           <%= argument("date_happened", "POSIX timestamp of the event.", {:default => 'now'}) %>
           <%= argument("priority", "The priority of the event ('normal' or 'low').", {:default => "'normal'"}) %>
-          <%= argument("host", "Host name to associate with the event.", {:default => 'None'}) %>
+          <%= argument("host", "Host name to associate with the event. Any tags associated with the host will also be applied to this event.", {:default => 'None'}) %>
           <%= argument("tags", "A list of tags to apply to the event.", {:default => 'None'}) %>
           <%= argument("alert_type", '"error", "warning", "info" or "success".', {:default => "'info'"}) %>
           <%= argument("aggregation_key", 'An arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream.', {:default => 'None'}) %>
@@ -492,13 +548,14 @@ kind: documentation
                 <li><code>metric alert</code></li>
                 <li><code>service check</code></li>
                 <li><code>event alert</code></li>
+                <li><code>composite</code></li>
               </ul>
             </div>
           </li>
           <li>
             <strong>query [required]</strong>
-            <div>The monitor query to notify on with syntax varying depending
-            on what type of monitor you are creating.</div>
+            <div>The query defines when the monitor will trigger. Query syntax depends
+            on what type of monitor you are creating:</div>
 
             <h5>Metric Alert Query</h5>
 
@@ -558,6 +615,9 @@ kind: documentation
               <li><code>rollup</code> the stats rollup method. <code>count</code> is the only supported method now.</li>
               <li><code>last</code> the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.</li>
             </ul>
+
+            <h5>Composite Query</h5>
+            <div><code>12345 && 67890</code>, where <code>12345</code> and <code>67890</code> are the IDs of non-composite monitors</div>
 
           </li>
           <%= argument 'name', "The name of the alert.",
@@ -671,6 +731,13 @@ kind: documentation
               also be specified in this option. Warning threshold can only be
               specified using the thresholds option.
               <p>Example: <code>{'critical': 90, 'warning': 80}</code></p>
+              </li>
+              <li><code>evaluation_delay</code> Time (in seconds) to delay
+              evaluation, as a non-negative integer. For example, if the value
+              is set to 300 (5min), the timeframe is set to last_5m and the
+              time is 7:00, the monitor will evaluate data from 6:50 to 6:55.
+              This is useful for AWS CloudWatch and other backfilled metrics to
+              ensure the monitor will always have data during evaluation.
               </li>
             </ul>
 
@@ -810,11 +877,13 @@ kind: documentation
           :default => "None" %>
           <%= argument 'tags', "A comma separated list indicating
           what tags, if any, should be used to filter the list of monitors
-          by scope",
+          by scope, e.g. <code>host:host0</code>. For more information, see the <code>tags</code> parameter for the appropriate <code>query</code> argument in the <a href='#monitor-create'>Create a monitor</a> section above.",
           :default => "None" %>
           <%= argument 'monitor_tags', "A comma separated list indicating
           what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. <code>service:my-app</code>)",
           :default => "None" %>
+          <%= argument 'with_downtimes', "If this argument is set to <code>true</code>, then the returned data will include all current downtimes for each monitor.",
+          :default => "true" %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -949,14 +1018,19 @@ kind: documentation
     <div class="row">
       <%= left_side_div %>
         <h5>Arguments</h5>
-          <%= argument 'scope', "The scope to apply the downtime to, e.g.
-          'host:app2'" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime. In the default case, the downtime will start immediately.", :default=>"None" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime. In the
-          default case, the downtime will go until cancelled.",
+          <%= argument 'scope', "The scope(s) to which the downtime will apply, e.g.
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them." %>
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
+          the downtime will apply to all monitors.", :default=>"None" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime. If not provided, the downtime starts the moment
+          it is created.", :default=>"None" %>
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "None" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "None" %>
+          <%= argument 'monitor_id', "The id of a specific monitor to apply the downtime to.", :required => false, :default => "None" %>
           <li>
             <strong>recurrence [optional, default=None]</strong>
             <div>An object defining the recurrence of the downtime with a variety of parameters:</div>
@@ -982,6 +1056,7 @@ kind: documentation
               </li>
             </ul>
           </li>
+          <%= argument 'timezone', "The timezone for the downtime.", :default => "UTC" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1003,12 +1078,16 @@ kind: documentation
       <%= left_side_div %>
         <h5>Arguments</h5>
           <%= argument 'id', "The integer id of the downtime to be updated" %>
-          <%= argument 'scope', "The scope to apply the downtime to, e.g.
-          'host:app2'",
+          <%= argument 'scope', "The scope to which the downtime will apply, e.g.
+          'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime
+          applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.",
           :default => "original scope" %>
-          <%= argument 'start', "POSIX timestamp to start the downtime",
+          <%= argument 'monitor_id', "A single monitor to which the downtime will apply. If not provided,
+          the downtime will apply to all monitors.", :default=>"original monitor_id" %>
+          <%= argument 'start', "POSIX timestamp to start the downtime.",
           :default => "original start" %>
-          <%= argument 'end', "POSIX timestamp to end the downtime, or None if the downtime should continue until cancelled",
+          <%= argument 'end', "POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely
+          (i.e. until you cancel it).",
           :default => "original end" %>
           <%= argument 'message', "A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events",
           :default => "original message" %>
@@ -1037,6 +1116,7 @@ kind: documentation
               </li>
             </ul>
           </li>
+          <%= argument 'timezone', "The timezone for the downtime.", :default => "original timezone" %>
       </div>
       <%= right_side_div %>
         <h5>Signature</h5>
@@ -1068,6 +1148,23 @@ kind: documentation
         <%= snippet_code_block "api-monitor-cancel-downtime.sh" %>
         <h5>Example Response</h5>
         <%= no_response %>
+      </div>
+    </div>
+
+    <!-- Cancel monitor downtime by scope -->
+    <div class="int-anchor" id="cancel-downtime-by-scope"></div><a href="#cancel-downtime-by-scope"><h4>Cancel monitor downtimes by scope</h4></a>
+    <div class="row">
+      <%= left_side_div %>
+        <h5>Arguments</h5>
+        <%= argument 'scope', "Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'." %>
+      </div>
+      <%= right_side_div %>
+        <h5>Signature</h5>
+        <code>POST /api/v1/downtime/cancel/by_scope</code>
+        <h5>Example Request</h5>
+        <%= snippet_code_block "api-monitor-cancel-downtime-by-scope.sh" %>
+        <h5>Example Response</h5>
+        <code>{"cancelled_ids":[123456789,123456790]}</code>
       </div>
     </div>
 
@@ -1864,6 +1961,7 @@ kind: documentation
         <ul class="arguments">
           <%= argument 'handle', "The user handle, must be a valid email." %>
           <%= argument 'name', "The name of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user). <em>Note: users can be created with admin access role only with application keys belonging to administrators.</em>", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -1940,7 +2038,7 @@ kind: documentation
           <%= argument 'name', "The new name of the user.", :default => 'None' %>
           <%= argument 'email', "The new email of the user.", :default => 'None' %>
           <%= argument 'disabled', "The new disabled status of the user.", :default => 'None' %>
-          <%= argument 'is_admin', "The new admin status of the user.", :default => 'None' %>
+          <%= argument 'access_role', "The new access role of the user. Choose from <code>'st'</code> (standard user), <code>'adm'</code> (admin user), or <code>'ro'</code> (read-only user).", :default => 'st' %>
         </ul>
       </div>
       <%= right_side_div %>
@@ -2010,6 +2108,7 @@ kind: documentation
           <%= argument "end", "The POSIX timestamp of the end of the query." %>
           <%= argument "event_query", "A query that will add event bands to the graph.", {:default => 'None'} %>
           <%= argument "graph_def", "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers. ",  {:default => 'None'} %>
+          <%= argument "title", "A title for the graph. If no title is specified, the graph will not have a title.", {:default => 'None'} %>
         </ul>
 
       </div>

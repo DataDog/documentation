@@ -36,7 +36,7 @@ Once it is done, [get your api key and an application key](https://app.datadoghq
     #!/bin/bash
     API_KEY= your_api_key
     APP_KEY= your_application_key
-    dog --api-key $API_KEY --application-key $APP_KEY event post \
+    /opt/datadog-agent/bin/dog --api-key $API_KEY --application-key $APP_KEY event post \
     "Found $SPLUNK_ARG_1 events in splunk" \
     "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5, from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
     --aggregation_key $SPLUNK_ARG_3 --type splunk
@@ -61,7 +61,7 @@ You can now configure your splunk reports to exectue this script in order to get
         #!/bin/bash
         API_KEY= your_api_key
         APP_KEY= your_application_key
-        dog --api-key $API_KEY --application-key $APP_KEY event post \
+        /opt/datadog-agent/bin/dog --api-key $API_KEY --application-key $APP_KEY event post \
         "Found $SPLUNK_ARG_1 events in splunk" \
         "Matching $SPLUNK_ARG_2 based on $SPLUNK_ARG_5, from report $SPLUNK_ARG_4. More details at $SPLUNK_ARG_6." \
         --aggregation_key $SPLUNK_ARG_3 --type splunk

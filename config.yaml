@@ -70,6 +70,8 @@ base_url: http://docs.datadoghq.com
 
 # make sure each redirect url starts and ends with a slash (/)
 redirects:
+  - from:  /integrations/gcp/
+    to:    /integrations/google_cloud_platform/
   - from:  /integrations/rds/
     to:    /integrations/awsrds/
   - from:  /integrations/beanstalk/
@@ -84,11 +86,20 @@ redirects:
     to:    /integrations/tcpcheck/
   - from:  /guides/billing/
     to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
+  - from:  /guides/ja/billing/
+    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
   - from:  /guides/monitoring/
     to:    /guides/monitors/
   - from:  /ja/guides/monitoring/
     to:    /ja/guides/monitors/
-
+  - from:  /ja/guides/network_checks/
+    to:    /ja/integrations/tcpcheck/
+  - from:  /guides/servicediscovery/
+    to:    /guides/autodiscovery/
+  - from: /videos/setuprailsapm/
+    to:   /videos/apmsetup-rails/
+  - from: /tracing-api/
+    to:   /tracing/api/
 commonfilters:
   - phrase: 'info command'
     link: /guides/basic_agent_usage/ubuntu/

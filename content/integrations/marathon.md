@@ -17,6 +17,8 @@ Connects Marathon to Datadog in order to:
 
 # Configuration
 
+*NOTICE : If you include the acs_url parameter in the marathon.yaml config, the user and password will be used to generate an ACS token, not as basic auth for the marathon api.
+
 1.  Configure the Agent to connect to Marathon. Edit conf.d/marathon.yaml:
 
         init_config:
@@ -24,6 +26,12 @@ Connects Marathon to Datadog in order to:
         instances:
         # url: the API endpoint of your Marathon master
         - url: https://server:port
+        # user: the user for marathon API or ACS token authentication
+        - user: username
+        # password: the password for marathon API or ACS token authentication
+        - password: password
+        # acs_url: the base ACS endpoint url if an ACS token is required to access the marathon API
+        - acs_url: https://server:port
 
 1.  Restart the Agent
 

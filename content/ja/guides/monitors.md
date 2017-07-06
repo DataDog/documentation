@@ -1,31 +1,10 @@
 ---
-last_modified: 2016/08/17
+last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: Monitor(監視)機能の設定ガイド
 kind: guide
 listorder: 9
-sidebar:
-  nav:
-    - header: Monitorの設定ガイド
-    - text: 用語集
-      href: "#glossary"
-    - text: 新しいMonitorの作成
-      href: "#create"
-    - text: 　監視する対象の設定
-      href: "#metric"
-    - text: 　アラート条件の設定
-      href: "#metric-conditions"
-    - text: 　通知の設定
-      href: "#notifications"
-    - text: ダウンタイムを設定する
-      href: "#downtime"
-    - text: 　ダウンタイムの管理
-      href: "#downtime-manage"
-    - text: 　ダウンタイムのスケジュール
-      href: "#downtime-schedule"
-    - text: Monitorに関するFAQs
-      href: "#faqs"
 ---
 
 <!--

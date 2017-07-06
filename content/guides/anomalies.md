@@ -48,7 +48,7 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 
 <img src="/static/images/anomalies/monitor_options.png" style="width:100%; border:1px solid #777777"/>
 
-You should now see something like what's shown above, with a handful of selections that will help determine how sensitive you monitor is to different types of anomalies.
+You should now see something like what's shown above, with a handful of selections that will help determine how sensitive your monitor is to different types of anomalies.
 
 <ol type="a">
   <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.</li>

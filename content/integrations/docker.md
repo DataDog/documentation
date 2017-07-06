@@ -19,15 +19,17 @@ Get metrics from Docker in real time to:
 
 # Installation
 
-There are three ways to setup the Docker integration: install the agent on the host, on a single privileged container, and on each individual container.
+To collect Docker metrics about all your containers, you will run **one** Datadog Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-dd-agent container](https://github.com/DataDog/docker-dd-agent). We recommend the latter.
+
+Whichever you choose, your hosts need to have cgroup memory management enabled for the Docker check to succeed. See the [docker-dd-agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
 
 ## Host Installation
 
 1. Ensure Docker is running on the host.
-2. Install the agent as described in [the agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
+2. Install the Agent as described in [the Agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
 3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
-4. Add the agent user to the docker group: `usermod -a -G docker dd-agent`
-5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/dd-agent/blob/master/conf.d/docker_daemon.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
+4. Add the Agent user to the docker group: `usermod -a -G docker dd-agent`
+5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     ![](/static/images/integrations-docker-dockerps.png)
 
@@ -35,7 +37,7 @@ There are three ways to setup the Docker integration: install the agent on the h
 
 **Note:** docker_daemon has replaced the older docker integration.
 
-## Single Container Installation
+## Container Installation
 
 1. Ensure Docker is running on the host.
 2. As per [the docker container installation instructions](https://app.datadoghq.com/account/settings#agent/docker), run:
@@ -61,7 +63,7 @@ Note that in the command above, you are able to pass your API key to the Datadog
 | EC2_TAGS | Enabling this feature allows the agent to query and capture custom tags set using the EC2 API during startup. To enable, set the value to "yes", for example, `-e EC2_TAGS=yes`. Note that this feature requires an [IAM role](https://github.com/DataDog/dd-agent/wiki/Capturing-EC2-tags-at-startup) associated with the instance. |
 | NON_LOCAL_TRAFFIC | Enabling this feature will allow statsd reporting from any external IP. For example, `-e NON_LOCAL_TRAFFIC=yes`. This can be used to report metrics from other containers or systems. See [network configuration](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration) for more details.
 | PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD | Sets proxy configuration details. For more information, see the [Agent proxy documentation](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy) |
-| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Service Discovery. For more information, please see the [Service Discovery guide](/guides/servicediscovery/). |
+| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Autodiscovery. For more information, please see the [Autodiscovery guide](/guides/autodiscovery/). |
 {:.table}
 
 ### Running the agent container on Amazon Linux
@@ -100,21 +102,9 @@ For example, the first version of the Docker image that will bundle the Datadog 
 
 For more information about building custom Docker containers with the Datadog Agent, the Alpine Linux based image, versioning, and more, please reference [our `docker-dd-agent` project on Github](https://github.com/DataDog/docker-dd-agent).
 
-## Each Container Installation
-
-1. Ensure Docker is running on the host.
-2. Add a RUN command to the Dockerfile as listed in [the agent installation instructions in the app](https://app.datadoghq.com/account/settings#agent) for the OS used in the container. For instance, if the container is based on an Ubuntu image, the `Dockerfile` would look similar to the following:
-
-        FROM ubuntu:16.04
-        RUN DD_API_KEY={YOUR API KEY} \
-          bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/.../install_agent.sh)"
-
-
-    NOTE: Always refer to the instructions in the app for the latest version of the install command.
-
 # Validate Installation
 
-1. Restart the agent.
+1. Restart the Agent.
 2. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
         Checks
@@ -131,6 +121,28 @@ For more information about building custom Docker containers with the Datadog Ag
 # Metrics
 
 <%= get_metrics_from_git()%>
+
+# Deprecated metrics
+
+The following metrics are reported by the [docker](https://github.com/DataDog/integrations-core/tree/5.14.x/docker) check
+that has been deprecated and will be removed in the Agent version 5.15. The metrics will be removed from the catalog as well:
+
+* **docker.mem.active_anon**
+* **docker.mem.inactive_anon**
+* **docker.mem.active_file**
+* **docker.mem.inactive_file**
+* **docker.mem.mapped_file**
+* **docker.mem.pgfault**
+* **docker.mem.pgmajfault**
+* **docker.mem.pgpgin**
+* **docker.mem.pgpgout**
+* **docker.mem.unevictable**
+
+The following metrics are now reported with a different name and will be removed from the catalog when releasing the Agent version 5.15:
+
+* **docker.disk.used** (now reported as **docker.data.used**)
+* **docker.disk.free** (now reported as **docker.data.free**)
+* **docker.disk.total** (now reported as **docker.data.total**)
 
 # Compose and the Datadog Agent
 
@@ -174,7 +186,7 @@ Our `Dockerfile` simply takes the standard [Datadog docker image](https://hub.do
     FROM datadog/docker-dd-agent
     ADD conf.d/redisdb.yaml /etc/dd-agent/conf.d/redisdb.yaml
 
-Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/dd-agent/blob/master/conf.d/redisdb.yaml.example) and tells the Datadog agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
+Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) and tells the Datadog Agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
 
     init_config:
 

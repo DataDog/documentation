@@ -3,6 +3,11 @@ title: Datadog-Disk Integration
 integration_title: Disk Check
 kind: integration
 newhlevel: true
+platformmetrics:
+  system.disk.read_time_pct:
+    - Windows
+  system.disk.write_time_pct:
+    - Windows
 ---
 
 # Overview
@@ -57,7 +62,7 @@ This configuration does not require any explicit configuration to begin monitito
 
 To ensure the integration is installed correctly, run the agent info command.
 
-    sudo datadog-agent info
+    sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
 

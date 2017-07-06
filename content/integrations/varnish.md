@@ -30,7 +30,7 @@ If you're running Varnish 4.1+, you must add the dd-agent user to the varnish gr
 
 To ensure the integration is installed correctly, run the agent info command.
 
-    sudo datadog-agent info
+    sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
 
@@ -572,5 +572,5 @@ A breakdown by Varnish version is available below.
     varnish.vsm_overflowed
     varnish.vsm_used
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/varnish.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/varnish.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/varnish/check.py

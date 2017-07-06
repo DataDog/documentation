@@ -1,15 +1,18 @@
 ---
-last_modified: 2016/08/17
-translation_status: tentative
+last_modified: 2017/02/07
+translation_status: complete
 language: ja
 title: グラフ表示入門
-kind: guide
-listorder: 4
+kind: documentation
+has_snippets: True
 ---
+
 <!--
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1].
 -->
-グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
+
+グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSON を使用したグラフ表示入門][j1]を参照して下さい。
+
 
 <!--
 ## Find the Graph Editor
@@ -31,6 +34,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 グラフエディターには**Share**, **JSON**, **Edit**の3つのタブがあります。 **Share**タブでは、グラフを外部のwebページに挿入するためのコードを取得可能です。　**JSON**タブはより柔軟な設定が可能なエディターである一方、使用するにはグラフを定義する言語を理解しておく必要があります。 **Edit**はデフォルトのタブであり、グラフ表示のオプションをGUIから選択して設定することができます。最新の機能は **JSON**エディターでのみ使用できる場合があります。
 
+
 <!--
 ## Graphing with the graphical editor interface
 
@@ -40,13 +44,15 @@ When you first open the graph editor window, you will be on the **Edit** tab. He
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 -->
+
 ## GUIエディターを使用したグラフ表示
 
-グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgresインテグレーションダッシュボードでのグラフの例です:
+グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgres インテグレーションダッシュボードでのグラフの例です:
 
 ![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
 
 ダッシュボードの中でグラフを操作するにはいくつかのステップがあります。
+
 
 <!--
 ### 1) Choose the Metric to graph
@@ -55,11 +61,13 @@ When you create a graph, you will probably have a metric in mind that you want t
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 -->
+
 ### 1) グラフ表示するメトリクスの選択
 
 グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer](https://app.datadoghq.com/metric/explorer)を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary](https://app.datadoghq.com/metric/summary)を見ることもできます。
 
 メトリクスエクスプローラはさまざまなグラフ表示の設定をアドホックに簡単に試して見てみることができます。メトリクスサマリページでは、各メトリクスの単位やメトリクスのタイプなどをリストから確認することができます。
+
 
 <!--
 ### 2) Select your visualization
@@ -70,6 +78,7 @@ Once you have a metric in mind to display in your graph, select your visualizati
 ### 2) メトリクスを可視化するグラフ形式の選択
 
 グラフ表示するメトリクスが決まったら、次はメトリクスを可視化するグラフ形式を選択します。
+
 
 <!--
 #### Timeseries
@@ -83,7 +92,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 
 #### Timeseries (時系列データのグラフ)
 
-Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可視化するのに最適です。グラフ表示する時間の幅は、タイムボード上の設定あるいはスクリーンボードでの各グラフの設定によって決まります。Timeseriesグラフの表示はlines(折れ線グラフ), areas(面グラフ), bars(棒グラフ)を選択できます。Timeseriesグラフの例を見るには、[ここをクリック](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseriesグラフはタイムボードとスクリーンボードの両方で利用することができます。
+Timeseries グラフは1つまたは複数のメトリクスの時間推移を可視化するのに最適です。グラフ表示する時間の幅は、タイムボード上の設定あるいはスクリーンボードでの各グラフの設定によって決まります。Timeseries グラフの表示はlines(折れ線グラフ), areas(面グラフ), bars(棒グラフ)を選択できます。Timeseries グラフの例を見るには、[ここをクリック](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries グラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
   ![Timeseries](/static/images/references-graphing-timeseries-example.png)
@@ -101,11 +110,12 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 
 #### Heatmap (時系列の分布図グラフ)
 
-Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*hosts* )を可視化するのに最適です。 ホストから得られたメトリクスで値が多く分布しているほど、その値の部分は濃い色を示します。Heatmapグラフの例を見るには、[ここをクリック](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmapグラフはタイムボードとスクリーンボードの両方で利用することができます。
+Heatmap グラフは多くのタグで集計されたメトリクス(例えば,*hosts* )を可視化するのに最適です。 ホストから得られたメトリクスで値が多く分布しているほど、その値の部分は濃い色を示します。Heatmap グラフの例を見るには、[ここをクリック](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap グラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
   ![Heatmap](/static/images/references-graphing-heatmap-example.png)
 </div>
+
 
 <!--
 #### Distribution
@@ -119,11 +129,12 @@ The Distribution visualization is another way of showing metrics aggregated acro
 
 #### Distribution (分布図グラフ)
 
-Distributionグラフは多くのタグで集計されたメトリクスを可視化するもう一つの方法です。Heatmapグラフとは異なり、DistributionグラフのX軸は時間ではなくメトリクスの値になり、Y軸はその分布の度数を示します。Distributionグラフの例は、[ここをクリック](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distributionグラフはタイムボードとスクリーンボードの両方で利用することができます。
+Distribution グラフは多くのタグで集計されたメトリクスを可視化するもう一つの方法です。Heatmap グラフとは異なり、Distribution グラフのX軸は時間ではなくメトリクスの値になり、Y軸はその分布の度数を示します。Distribution グラフの例は、[ここをクリック](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution グラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseDistribution" markdown="1">
   ![Distribution](/static/images/references-graphing-distribution-example.png)
 </div>
+
 
 <!--
 #### Toplist
@@ -137,11 +148,12 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 #### Toplist (メトリクスのランキング)
 
-Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  [ここをクリック](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
+Toplist グラフは、CPU 消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplist のグラフの例を見るには,  [ここをクリック](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist グラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTopList" markdown="1">
   ![TopList](/static/images/references-graphing-toplist-example.png)
 </div>
+
 
 <!--
 #### Change
@@ -155,11 +167,12 @@ The Change graph will show you the change in a value over the time period chosen
 
 #### Change (メトリクスの変化量グラフ)
 
-Changeグラフは指定した時間枠でのメトリクスの変化量を可視化することができます。Changeグラフの例を見るには、[ここをクリック](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
+Change グラフは指定した時間枠でのメトリクスの変化量を可視化することができます。Change グラフの例を見るには、[ここをクリック](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
   ![Changegraph](/static/images/references-graphing-change-example.png)
 </div>
+
 
 #### Hostmap
 <!--
@@ -169,11 +182,13 @@ The Hostmap will graph any metric for any subset of hosts on the same hostmap vi
   ![Hostmap](/static/images/references-graphing-hostmap-example.png)
 </div>
 -->
-Hostmapはメインメニューから利用できるHostmapと同様に、あらゆるメトリクスについて指定したホストのスコープで可視化することができます。Hostmapの例は、[ここをクリック](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
+
+Hostmapはメインメニューから利用できるHostmap と同様に、あらゆるメトリクスについて指定したホストのスコープで可視化することができます。Hostmap の例は、[ここをクリック](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
   ![Hostmap](/static/images/references-graphing-hostmap-example.png)
 </div>
+
 
 <!--
 ### 3) Filter and Aggregate to show what you need
@@ -183,11 +198,12 @@ Hostmapはメインメニューから利用できるHostmapと同様に、あら
 Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
 -->
 
-## 3) 指定したグラフ表示をフィルタと集計方法の設定で最適化する
+### 3) 指定したグラフ表示をフィルタと集計方法の設定で最適化する
 
 #### フィルタ
 
 メトリクスを可視化するグラフ表示の形式が決まったら、今度はフィルタ機能によってグラフ表示させたい特定のホストを抽出します。メトリクスを選択したボックスの右手に、*(everywhere)* とデフォルト表示されているドロップダウンボックスがあるので、そこから抽出したいホストが該当するタグ(複数可)を選択しましょう。なお、タグの詳細に関しては、[Guide to Tagging](/guides/tagging) ページを参照して下さい。
+
 
 <!--
 #### Aggregation Method
@@ -199,6 +215,7 @@ Next to the filter dropdown is the aggregation method. This defaults to **avg by
 
 フィルタの次は、集計の算出方法の設定です。デフォルトでは平均値をとる**avg by** が選択されていますが、ボックスをクリックすることで**max by**, **min by**, **sum by** も選択することができます。一定間隔で取得されているメトリクスの値には、複数のホストやインスタンスから集められた多様な値が存在していることが多く、ここで選択する集計方法によってそうした多様な値をどのように1つの値として集計するかを決定します。つまり、例えば100のホストからのメトリクスについてグラフ表示する場合、**sum by** を選択すると100ホストから取得しているメトリクスの合計値がグラフ表示されることになります。
 
+
 <!--
 #### Aggregation Groups
 
@@ -208,6 +225,7 @@ After the aggregation method you can determine what constitutes a line or groupi
 #### 集計のグループ指定
 
 集計の算出方法を選択したら、今度はグラフの線1本1本の構成要素が何なのかを決めます。`host`を選択した場合は、それぞれのホストに対してグラフ線が表示されます。あるいはタグで定義している何らかのホストの`ロール`を選択した場合は、その各ロールに対してグラフ線が表示されます。`ロール`を選択した場合は複数のホストがロールごとにグループ化されてグラフ表示されるため、先に選択した**集計の算出方法** によってメトリクスの値が集計されグラフ表示されることになります。
+
 
 <!--
 ### 4) Rollup to aggregate over time
@@ -222,18 +240,21 @@ In the example above, each point displayed on the screen represents 48 data poin
 前述の集計方法の設定にかかわらず、グラフ表示画面の物理的な制約によって適用されているデータ集計の仕組みがあります。例えば、毎秒更新されるメトリクスについて4時間の時間幅でグラフ表示したい場合、すべてを表示するには14,400のデータポイントを表示する必要があります(60x60x4=14,400)。 一方で、各グラフはどのような時間幅を選んだ場合でも表示可能なのは約300データポイントまでです。
 
 上記例では、画面上の単一のデータポイントは48のデータポイントを代表することになります(14,400÷300=
-48)。他の例として、Datadog Agentによって20秒間隔で取得されているメトリクスの場合、1日で4,320のデータポイントが取得されます(24x60x60/20=4,320)。このメトリクスにおいて1日の時間幅でグラフ表示する場合は、5分や10分の間隔で値をロールアップされることも考慮しておくとよいでしょう。
+48)。他の例として、Datadog Agent によって20秒間隔で取得されているメトリクスの場合、1日で4,320のデータポイントが取得されます(24x60x60/20=4,320)。このメトリクスにおいて1日の時間幅でグラフ表示する場合は、5分や10分の間隔で値をロールアップされることも考慮しておくとよいでしょう。
+
 
 <!--
 To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 -->
+
 ロールアップ関数を使う場合は、集計方法を設定したボックスの右手のプラスマークをクリックし、`Rollup`を選択します。そして算出方法でロールアップし、どれくらいの時間間隔でロールアップするかを指定します。
 
 例えば、全てのマシンの利用可能なディスク容量の平均値をとり、そのメトリクスは60秒ごとの平均値としてロールアップしたグラフ表示をさせる場合には、以下のような指定します:
 
 ![rollup example](/static/images/references-graphing-rollup-example.png)
+
 
 <!--
 When switching to the JSON view, the query will look like this:
@@ -243,11 +264,12 @@ When switching to the JSON view, the query will look like this:
 For more about using the JSON view, scroll to the bottom and click the Learn about the JSON tab link.
 -->
 
-JSONエディターに切り替えると、以下のようなクエリとして記述されます:
+JSON エディターに切り替えると、以下のようなクエリとして記述されます:
 
     "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 
-JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
+JSON 形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門][j1]を参照して下さい。
+
 
 <!--
 ### 5) Apply more advanced functions
@@ -267,6 +289,7 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 </div>
 
+
 <!--
 ### 6) Overlay events for additional context
 
@@ -275,7 +298,8 @@ You can repeat all the steps above to add additional metrics to your graph to ad
 
 ### 6) メトリクスのグラフ表示にイベントを重ねあわせる
 
-より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。`Overlay Events`ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
+より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、github のコミット、Jenkins のデプロイ、あるいはDocker のcreation イベントなどです。`Overlay Events`ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Github のすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
+
 
 <!--
 ### 7) Create a title
@@ -287,11 +311,15 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 タイトルを指定しない場合、メトリクスやグラフ表示での指定をもとに自動でタイトルが入力されます。しかしより適切に表現されたタイトルは、ダッシュボード上に多数あるグラフの中で目的をユーザーに示すのに役立ちます。ここでビジネスに役立つ意味を表現するのも価値のあることです。
 
+
 <!--
 ### 8) Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 -->
+
 ### 8) 保存
 
 最後に`Save`をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。
+
+[j1]: /ja/graphingjson

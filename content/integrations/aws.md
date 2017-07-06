@@ -12,44 +12,47 @@ Connect to Amazon Web Services (AWS) in order to:
 * See automatic AWS status updates in your stream
 * Get CloudWatch metrics for EC2 hosts without installing the Agent
 * Tag your EC2 hosts with EC2-specific information (e.g. availability zone)
-* Get CloudWatch metrics for other services: ELB, RDS, EBS, AutoScaling, DynamoDB, ElastiCache, CloudFront, CloudSearch, Kinesis, Lambda, OpsWorks, Redshift, Route53, SQS, and SNS
 * See EC2 scheduled maintenances events in your stream
+* Collect CloudWatch metrics and events from many other AWS products
+
 
 Related integrations include:
 
+| [API Gateway](/integrations/awsapigateway) | create, publish, maintain, and secure APIs |
+| [Autoscaling](/integrations/awsautoscaling) | scale EC2 capacity |
 | [Billing](/integrations/awsbilling) | billing and budgets |
+| [CloudFront](/integrations/awscloudfront) | glocal content delivery network |
 | [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
+| [CloudSearch](/integrations/awscloudsearch) | Access to log files and AWS API calls |
 | [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
 | [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
+| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
+| [Elastic Block Store (EBS)](/integrations/awsebs) | persistent block level storage volumes |
+| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
+| [Elastic File System (EFS)](/integrations/awsefs) | shared file storage |
+| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [Elastic Map Reduce (EMR)](/integrations/awsemr) | data processing using Hadoop |
 | [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
+| [Firehose](/integrations/awsfirehose) | capture and load streaming data |
+| [IOT](/integrations/awsiot) | connect IOT devices with cloud services |
 | [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
+| [Key Management Service (KMS)](/integrations/awskms) | create and control encryption keys |
+| [Lambda](/integrations/awslambda) | serverless computing |
+| [Machine Learning (ML)](/integrations/awsml) | create machine learning models |
+| [OpsWorks](/integrations/awsopsworks) | configuration management |
+| [Polly](/integrations/awspolly) | text-speech service |
+| [Redshift](/integrations/awsredshift) | data warehouse solution |
 | [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
 | [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
 | [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
 | [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
+| [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
 | [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-{:.table}
-
-There are a number of other AWS services that are also available in Datadog but they are all configured in the main AWS Integration or in the CloudTrail integration. This includes, but is not limited to:
-
-| AutoScaling |
-| Budgeting |
-| CloudFront |
-| CloudSearch |
-| EBS |
-| Elastic MapReduce |
-| Firehose |
-| Lambda |
-| MachineLearning |
-| OpsWorks |
-| Simple Queing Service |
-| Simple Workflow Service |
-| Trusted Advisor |
-| WorkSpaces |
+| [Simple Workflow Service (SWF)](/integrations/awsswf) | cloud workflow management |
+| [Storage Gateway](/integrations/awsstoragegateway) | hybrid cloud storage |
+| [Web Application Firewall (WAF)](/integrations/awswaf) | protect web applications from common web exploits |
+| [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
 {:.table}
 
 # Installation
@@ -81,6 +84,8 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ecs:List*",
                 "elasticache:Describe*",
                 "elasticache:List*",
+                "elasticfilesystem:DescribeTags",
+                "elasticfilesystem:DescribeFileSystems",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
@@ -101,7 +106,11 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ses:Get*",
                 "sns:List*",
                 "sns:Publish",
-                "support:*"
+                "sqs:ListQueues",
+                "support:*",
+                "tag:getResources",
+                "tag:getTagKeys",
+                "tag:getTagValues"
               ],
               "Effect": "Allow",
               "Resource": "*"
@@ -124,7 +133,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.
-3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
+3.  Enter your AWS Account ID **without dashes**, e.g. 123456789012, not 1234-5678-9012. Your Account ID can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
@@ -146,7 +155,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
-* `cloudwatch:GetMetricStatistic` to fetch data points for a given metric.
+* `cloudwatch:GetMetricStatistics` to fetch data points for a given metric.
 
 Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
 
@@ -187,6 +196,7 @@ For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+* `dynamodb:ListTagsOfResource`: Used to collect all tags on a DynamoDB resource.
 
 For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 
@@ -213,6 +223,13 @@ For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/Us
 * `elasticache:DescribeEvents`: Add events avout snapshots and maintenances.
 
 For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
+
+## EFS
+
+* `elasticfilesystem:DescribeTags`: Gets custom tags applied to file systems
+* `elasticfilesystem:DescribeFileSystems`: Provides a list of active file systems
+
+For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html), review the documentation on the AWS website.
 
 ## ELB
 
@@ -244,7 +261,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs
+## CloudWatch Logs and Lambda
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
@@ -288,9 +305,24 @@ For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
 
+## SQS
+
+* `sqs:ListQueues`: Used to list alive queues.
+
+For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html), review the documentation on the AWS website.
+
 ## Support
 
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
+
+## Tag
+
+* `tag:getResources`: Used to get custom tags by resource type.
+* `tag:getTagKeys`: Used to get tag keys by region within an AWS account.
+* `tag:getTagValues`: Used to get tag values by region within an AWS account.
+
+The main use of the Resource Group Tagging API is to reduce the number of API calls we need to collect custom tags.
+For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website. 
 
 # Troubleshooting
 {: #troubleshooting}

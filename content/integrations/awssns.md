@@ -16,6 +16,8 @@ Connect SNS to Datadog in order to:
 
 # Installation
 
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+
 ## Receiving SNS Messages In the Event Stream
 
 1.  On the Topics section of the SNS Management console, select the desired topic and click Create Subscription
@@ -24,6 +26,8 @@ Connect SNS to Datadog in order to:
         https://app.datadoghq.com/intake/webhook/sns?api_key=<API KEY>
 
 # Configuration
+
+In the Amazon Web Services integration tile, ensure that SNS is checked under metric collection.
 
 ## Sending SNS Notifications from Datadog
 
@@ -36,3 +40,4 @@ Connect SNS to Datadog in order to:
 
 <%= get_metrics_from_git()%> 
 
+Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

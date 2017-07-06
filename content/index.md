@@ -6,6 +6,8 @@ sidebar:
     - header: References
     - text: API
       href: "/api/"
+    - text: Tracing (APM)
+      href: "/tracing/"
     - text: Libraries
       href: "/libraries/"
     - text: Graphing
@@ -41,7 +43,7 @@ capabilities at a high level.
 
 **If you have questions, we're here to help.** You can get in touch with
 our support team by mentioning [@support-datadog][5] in a comment on Datadog itself, or by
-[email][6], on [IRC][7], or on our [customer service site][8].
+[email][6], on [Slack][7], or on our [customer service site][8].
 
 **Find a mistake in this documentation?** [Let us know on GitHub][9]
 and we'll take care of it.
@@ -52,6 +54,6 @@ and we'll take care of it.
 [4]: /overview/
 [5]: http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog
 [6]: /help/#email
-[7]: /help/#irc
+[7]: /help/#slack
 [8]: https://help.datadoghq.com/hc/en-us/requests/new
 [9]: https://github.com/DataDog/documentation/issues
