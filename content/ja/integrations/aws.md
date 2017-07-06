@@ -190,7 +190,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 7. 選択した内容を確認し、**ロールの作成**ボタンをクリックします。
 
 
-# Configuration
+<!-- # Configuration
 
 ![logo](/static/images/integrations-aws-secretentry.png)
 
@@ -198,15 +198,33 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 2.  Select the **Role Delegation** tab.
 3.  Enter your AWS Account ID which can be found in the ARN of the newly created role. Then enter the name of the role you just created. Finally enter the External ID you specified above.
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
-5.  Click **Install Integration**.
+5.  Click **Install Integration**. -->
 
-## Configuration for China and GovCloud
+# 設 定
+
+1. Datadogのサイトで、[AWS Integrationのタイル][2]を開き、`configuration`タブを選択します。
+2. `New Account`と表示されたグレーのエリアで、**Role Delegation**タブを選択します。
+3. AWSのコンソールで新しく作成したロールのARNを、AWS Account IDの欄に入力します。次に、作成したロールの名前を入力します。
+4. ポップアップの左カラムで、メトリックを収集するサービスを選択します。AWSコンソール上でタグを設定することで、AWSインテグレーションが収集するホスト情報やメトリック情報にタグを付与することができます。このタグを使って監視対象に含まれるEC2インスタンスのタグを”To hosts with tag”欄に指定することで、監視対象を制限することができます。
+5. 左カラムの最下の**Install Integration**をクリックします。
+
+
+<!-- ## Configuration for China and GovCloud
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
 3.  Enter your AWS Access Key and AWS Secret Key. Note: only access and secret keys for China and GovCloud are accepted.
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
-5.  Click **Install Integration**.
+5.  Click **Install Integration**. -->
+
+## 中国とGovCloudの設定
+
+1. Datadogのサイトで、[AWS Integrationのタイル][2]を開き、`configuration`タブを選択します。
+2. `New Account`と表示されたグレーのエリアでムで、**Access Keys (GovCloud or China Only)**タブを選択します。
+3. AWSアクセスキーとAWS秘密鍵を入力します。注：中国リージョンとGovCloudでは、アクセスキーと秘密鍵での設定のみのが利用可能です。
+4. ポップアップの左カラムで、メトリックを収集するサービスを選択します。AWSコンソール上でタグを設定することで、AWSインテグレーションが収集するホスト情報やメトリック情報にタグを付与することができます。このタグを使って監視対象に含まれるEC2インスタンスのタグを”To hosts with tag”欄に指定することで、監視対象を制限することができます。す。
+5. 左カラムの最下の**Install Integration**をクリックします。
+
 
 # Metrics
 
