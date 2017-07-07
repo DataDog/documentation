@@ -18,7 +18,7 @@ Overview
 {: #overview}
 
 This guide will outline the basic functionality of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent).
+If you haven't installed the agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent).
 
 The process to upgrade from the previous version of the agent is to simply re-run the installation.
 
