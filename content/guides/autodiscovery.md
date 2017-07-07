@@ -36,11 +36,9 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 # How to set it up
 
-No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster.
-
 ## Running the Agent Container
 
-If you use Kubernetes, see the [Kubernetes integration page](http://docs.datadoghq.com/integrations/kubernetes/#installation) for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page](http://docs.datadoghq.com/integrations/ecs/#installation).
+No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. If you use Kubernetes, see the [Kubernetes integration page](http://docs.datadoghq.com/integrations/kubernetes/#installation) for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page](http://docs.datadoghq.com/integrations/ecs/#installation).
 
 If you use Docker Swarm, run the following command on one of your manager nodes:
 
@@ -82,7 +80,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [kyototycoon](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml)
 - [memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml)
 - [redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
-- [riak](https://github.com/DataDog/integrations-core/blob/master/risk/auto_conf.yaml)
+- [riak](https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml)
 
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
@@ -286,7 +284,6 @@ For containers that have many IP addresses or expose many ports, you can tell Au
 You can also add a network name suffix to the `%%host%%` variable—`%%host_bridge%%`, `%%host_swarm%%`, etc—for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the container's `bridge` network IP address.
 
 ### Alternate Container Identifier: Labels
-
 {: #container-labels}
 
 You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
