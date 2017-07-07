@@ -22,6 +22,7 @@ In the Amazon Web Services integration tile, ensure that Lambda is checked under
 
 The following permissions are also required to use the Lambda integration:
 
+* `lambda:List*`:  List Lambda functions, metadata, and tags.
 * `logs:DescribeLogGroups`:  List available log groups.
 * `logs:DescribeLogStreams`: List available log streams for a group.
 * `logs:FilterLogEvents`:  Fetch specific log events for a stream to generate metrics.
