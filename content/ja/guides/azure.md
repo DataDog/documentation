@@ -1,18 +1,15 @@
 ---
-last_modified: 2015/04/02
+last_modified: 2017/02/011
 translation_status: complete
 language: ja
 title: Azure WindowsへDatadog Agentのインストール
 kind: guide
-listorder: 8
-
+listorder: 9
 ---
 
-<!-- This guide assumes you are deploying an Azure Cloud Service.
-Also, at the moment, the Agent install requires .net framework 2.0 or 3.5. -->
+<!-- This guide assumes you are deploying an Azure Cloud Service. -->
 
 このガイドは、Azure Cloud Serviceにデプロイしてることを仮定しています。
-現時点では、Datadog Agentのインストールには、.NET Framework 2.0か3.5が必要です。
 
 
 <!-- ### Install the Agent on instance startup
@@ -61,7 +58,10 @@ Visual Studioを使用している場合は、このファイルがパッケー�
 また、このファイルの*Copy to Output Directory*プロパティーを*Copy Always*に設定し、*Build Action*を*Content*にしてください。
 
 
-<!-- **Add** the installation task to your `ServiceDefinition.csdef` file by adding the following in the `<Startup>` section: -->
+<!-- **Add** the installation task to your `ServiceDefinition.csdef` file by adding the following in the `<Startup>` section:
+
+    <Task commandLine="installDatadogAgent.cmdi YOUR_API_KEY" executionContext="elevated" />
+-->
 
 `ServiceDefinition.csdef`ファイルの`<Startup>`セクションに、次の部分を追記することによって、インストールタスクを追加します:
 
@@ -77,12 +77,17 @@ The created file will download and install the latest version of the Agent on ap
 ここで作成したファイルにより、アプリケーションデプロイで最新バージョンのDatadog Agentがインストールされます。
 
 
-### アプリケーションのデプロイ
+<!-- ### Deploy your app
 
-<!-- You should now repackage your app's cloud service package file (*.cspkg), making sure to include the `installDatadogAgent.cmd` file in the package.
+You should now repackage your app's cloud service package file (*.cspkg), making sure to include the `installDatadogAgent.cmd` file in the package.
 You can also directly upload from Visual Studio using the `Publish` button.
 
-On deploy you should see your new hosts appear on your infrastructure overview: -->
+On deploy you should see your new hosts appear on your infrastructure overview:
+
+<img src="/static/images/azure_infrastructure_overview.png" alt="infrastructure view"/>
+-->
+
+### アプリケーションのデプロイ
 
 ここで、アプリケーションのcloud service packageファイル(*.cspkg)を再パッケージします。
 その際、`installDatadogAgent.cmd`ファイルが含まれていることを確認しておいてください。
