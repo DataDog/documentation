@@ -69,30 +69,25 @@ Each **Template Source** section below shows a different way to configure check 
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you must restart your Agent containers each time you change, add, or remove templates.
 
-The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which by default contains templates for:
+The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
-- Apache Web Server
-- Consul
-- CouchDB
-- Couchbase
-- Elasticsearch
-- etcd
-- Kube State Metrics
-- Kyoto Tycoon
-- Memcached
-- Redis
-- Riak
+- [apache](https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml)
+- [consul](https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml)
+- [couchdb](https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml)
+- [couchbase](https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml)
+- [elasticsearch](https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml)
+- [etcd](https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml)
+- [kubernetes_state](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml)
+- [kube_dns](https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml)
+- [kyototycoon](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml)
+- [memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml)
+- [redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
+- [riak](https://github.com/DataDog/integrations-core/blob/master/risk/auto_conf.yaml)
 
-If you want to monitor Apache containers, for example, the default Apache template may not suit you if:
-
-1. You want to use options not used in the default template,
-1. the Apache containers run a different image than that specified in the default template (see the example below), OR
-1. the Apache containers expose more than one port (the default template doesn't use [template variable indexing](#template-variable-indexes)).
-
-You can provide template files of your own in a few ways:
+These templates suit basic cases, but if you need to use custom check configurations—using extra check options, different container identifiers, or [template variable indexing](#template-variable-indexes))—you'll have to provide your own auto-conf files. You can do that in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them](https://github.com/DataDog/docker-dd-agent#configuration-files) into the docker-dd-agent container when starting it
-1. Build a custom docker image based on docker-dd-agent with your custom templates added to `/etc/dd-agent/conf.d/auto_conf`
+1. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
 1. On Kubernetes, add them using ConfigMaps
 
 #### Example: Apache check
