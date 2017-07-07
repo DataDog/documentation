@@ -9,7 +9,7 @@ CONFIG = config.yaml
 ARTIFACT_NAME = public
 URL = http://localhost:1313/
 CI_ENVIRONMENT_NAME = local
-FETCH_INTEGRATIONS = true
+FETCH_INTEGRATIONS = false
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -40,9 +40,10 @@ digest:  ## create a digest of all pages built by hugo.
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
-	@if [ ! `which python3` ]; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi
+	@if ! command -v python3 > /dev/null 2>&1; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi;
+	@echo "installing virtualenv..."
 	@test -d ${VIRENV} || python3 -m venv ${VIRENV}
-	@$(VIRENV)/bin/pip install -q -r gitlab/etc/requirements3.txt
+	@$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt
 
 pre-build: source-helpers  ## gulp tasks; gather external content & data.
 	@gulp build --silent; \
@@ -59,7 +60,6 @@ start: stop pre-build  ## start the gulp/hugo server.
 	hugo server --renderToDisk &>/dev/null &
 	@printf "\e[96mDocs site is now running. Visit http://localhost:1313/ \033[0m\n"
 	@printf "run 'make stop' to kill.\n"
-	@make digest
 
 stop:  ## stop the gulp/hugo server.
 	@echo "cleaning up..."
@@ -75,17 +75,20 @@ tests:  ## test a build.
 	make clean-exe
 
 test-images: start  ## test images.
+	make digest
 	@source ${VIRENV}/bin/activate; \
 	check_links.py "images" -p 15 -f "`cat ${ARTIFACT_NAME}/digest.txt`" -d "${URL}" --check_all "True" \
     	--verbose "False" --src_path "`pwd`/${ARTIFACT_NAME}" --external "True" --timeout 5;
 
 test-links: start  ## test all links work.
+	make digest
 	@source ${VIRENV}/bin/activate; \
 	check_links.py "links" -p 15 -f "`cat ${ARTIFACT_NAME}/digest.txt`" -d "${URL}" --check_all "True" \
     	--verbose "False" --src_path "`pwd`/${ARTIFACT_NAME}" --external "True" --timeout 5 \
     	--ignore "`pwd`/${LOCALETC}/links.ignore";
 
 test-static: start  ## test static assets are available.
+	make digest
 	@source ${VIRENV}/bin/activate; \
 	check_links.py "static" -p 15 -f "`cat ${ARTIFACT_NAME}/digest.txt`" -d "${URL}" --check_all "True" \
    		--verbose "False" --src_path "`pwd`/${ARTIFACT_NAME}" --external "True" --timeout 5;
