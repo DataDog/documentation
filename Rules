@@ -97,8 +97,16 @@ preprocess do
 end
 
 
+compile '/layouts/partials/*' do
+  filter :erb
+end
+
 compile '/partials/*' do
   filter :erb
+end
+
+route '/layouts/partials/*' do
+  nil
 end
 
 route '/partials/*' do
@@ -184,6 +192,19 @@ compile '*' do
       end
     end
 
+  end
+end
+
+compile '/videos/*/', :rep => :twcard do
+  if item[:kind] == 'video'
+    filter :erb
+    layout 'twcard'
+  end
+end
+
+route '/videos/*/', :rep => :twcard do
+  if item[:kind] == 'video'
+    item.identifier + 'twcard/index.html'
   end
 end
 

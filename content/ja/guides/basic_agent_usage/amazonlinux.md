@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/27
+last_modified: 2017/02/14
 translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Amazon Linux)
@@ -32,6 +32,8 @@ If you haven't installed the Agent yet, instructions can be found
 
 
 <%= render 'partials/BasicAgentUsage-nix-ja' %>
+
+<br/>
 
 <!-- If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways: -->

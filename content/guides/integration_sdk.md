@@ -44,10 +44,11 @@ Your README file should provide the following sections:
 - **Installation** (required): Provide information about how to install your integration.
 - **Configuration** (required): Detail any steps necessary to configure your integration or the service you are integrating.
 - **Validation** (required): How can users ensure the integration is working as intended?
+- **Troubleshooting**: Help other users by sharing solutions to common problems they might experience.
 - **Compatibility** (required): List the version(s) of the application or service that your integration has been tested and validated against.
 - **Metrics** (required): Include a list of the metrics your integration will provide.
 - **Events**: Include a list of events if your integration provides any.
-- **Troubleshooting**: Help other users by sharing solutions to common problems they might experience.
+- **Service Checks**: Include a list of service checks if your integration provides any.
 
 ##### `check.py`
 

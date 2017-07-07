@@ -39,7 +39,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
 2. Restart the agent
 
-        sudo datadog-agent restart
+        sudo /etc/init.d/datadog-agent restart
 
 <%= insert_example_links %>
 
@@ -47,7 +47,7 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 
 To ensure the integration is installed correctly, run the agent info command.
 
-    sudo datadog-agent info
+    sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
 
@@ -69,6 +69,6 @@ The following metrics are collected by default with the Apache integration:
 <%= get_metrics_from_git()%>
 
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/conf.d/apache.yaml.example
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks.d/apache.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/apache/check.py
 [3]: http://httpd.apache.org/docs/2.0/mod/mod_status.html

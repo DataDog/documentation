@@ -8,8 +8,8 @@ sidebar:
       href: "#support"
     - text: Email
       href: "#email"
-    - text: IRC
-      href: "#irc"
+    - text: Slack
+      href: "#slack"
     - text: Status Page
       href: "#status"
 ---

@@ -18,6 +18,9 @@ end
 
 desc 'Build documentation site'
 task :compile do
+  unless ENV.key?("github_personal_token")
+    ENV['NANOCRUNSLOW'] = "true"
+  end
   sh 'bundle exec nanoc compile'
 end
 
@@ -39,12 +42,14 @@ end
 namespace :deploy do
   desc 'Deploy to prod S3 bucket; Should be used by `rake release:prod`'
   task :prod do
-    sh('cd output && aws s3 sync --delete --size-only . s3://datadog-docs-prod --acl public-read')
+    sh('cp prod-robots.txt output/robots.txt')
+    sh('cd output && aws s3 sync --delete --size-only . s3://datadog-docs-prod --acl public-read --cache-control="max-age=600"')
   end
 
   desc 'Deploy to staging S3 bucket; Should be used by `rake release:staging`'
   task :staging do
-    sh("cd output && aws s3 sync --delete --size-only . s3://datadog-docs-staging --acl public-read")
+    sh('cp staging-robots.txt output/robots.txt')
+    sh('cd output && aws s3 sync --delete --size-only . s3://datadog-docs-staging --acl public-read --cache-control="max-age=600"')
   end
 end
 
@@ -139,6 +144,12 @@ task :slowjp do
   ENV['NANOCRUNSLOW'] = "true"
   ENV['JPASSIST'] = "true"
   Rake::Task[:guard].invoke
+end
+
+desc 'Build documentation site'
+task :compilejp do
+  ENV['JPASSIST'] = "true"
+  Rake::Task[:compile].invoke
 end
 
 desc 'Removing Japanese lang-assitant files'

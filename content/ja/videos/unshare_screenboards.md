@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/06/08
-translation_status: translated
+last_modified: 2017/02/14
+translation_status: complete
 language: ja
 title: Matt's Quick Tips - Screenboardの共有を解除
 kind: video

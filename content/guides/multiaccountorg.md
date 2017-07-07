@@ -32,7 +32,7 @@ The new user will receive an email with a link to login.
 ***NOTE:** You must be an Admin of the team to promote members*
 
 1. Go to the [Team Page][TeamPage].
-2. Hover over the avatar for the user you wish to disable. Choose **Make Admin** from the menu.
+2. Hover over the avatar for the user you wish to promote. Choose **Make Admin** from the menu.
 
 ## Organizations
 

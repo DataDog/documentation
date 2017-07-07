@@ -18,11 +18,11 @@ No installation steps required.
 
 # Configuration
 
-To enable metrics collection locate your API key on Fastly's Account Settings page, and the Service ID on the Configure page and enter them in the [Fastly integration tile](https://app.datadoghq.com/account/settings#integrations/fastly). 
+Create a Read-only access API Token on Fastly's token management page, get your Service ID from the Dashboard and enter them in the [Fastly integration tile](https://app.datadoghq.com/account/settings#integrations/fastly).
 
 Note: The ServiceID is the alphanumerical code, e.g. 5VqE6MOOy1QFJbgmCK41pY (example from https://docs.fastly.com/api/auth).
 
-If using multiple Service IDs from one account, please enter the API key on each line.
+If using multiple Service IDs from one account, please enter an API token on each line.
 
 # Metrics
 

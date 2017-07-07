@@ -50,7 +50,6 @@ GEM
     guard-rake (1.0.0)
       guard
       rake
-    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     json (1.8.2)
     kramdown (1.5.0)
@@ -110,10 +109,6 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    video_info (2.4.2)
-      addressable
-      htmlentities
-      multi_json
     w3c_validators (1.2)
       json
       nokogiri
@@ -143,7 +138,6 @@ DEPENDENCIES
   rouge
   sassc
   therubyracer
-  video_info
   w3c_validators
 
 BUNDLED WITH
