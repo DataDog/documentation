@@ -295,13 +295,13 @@ Autodiscovery can only identify each container by label OR image/name—not both
 
 ### Template Source Precedence
 
-If you provide a template for the same check type via multiple template sources, the Agent will prefer, in decreasing order of preference:
+If you provide a template for the same check type via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
-* Files
-* Key-value stores
 * Kubernetes annotations
+* Key-value stores
+* Files
 
-That is, if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
+So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
 # Troubleshooting
 
