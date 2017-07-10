@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-build clean-docker clean-node help start stop tests
+.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop
 .DEFAULT_GOAL := help
 
 CREATE_I18N_PLACEHOLDERS=true
@@ -7,6 +7,8 @@ FETCH_INTEGRATIONS=true
 GITHUB_TOKEN=${github_personal_token}
 RUN_SERVER=true
 RUN_GULP=true
+#DOGWEB="LOCAL_PATH_TO_DOGWEB"
+#INTEGRATIONS_CORE="LOCAL_PATH_TO_INTEGRATIONS_CORE"
 
 LOCALBIN=gitlab/bin
 LOCALETC=gitlab/etc
@@ -27,7 +29,7 @@ clean-all: stop  ## clean everything.
 	make clean-exe
 	make clean-integrations
 	make clean-node
-	make clean-venv
+	make clean-virt
 
 clean-build:  ## remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
@@ -45,7 +47,7 @@ clean-integrations:  ## remove built integrations files.
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
 
-clean-venv:  ## remove python virtual env.
+clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
 
 docker: stop  ## build docker image.
@@ -72,11 +74,6 @@ docker-tests: stop ## run the tests through the docker container.
 	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
 	@docker exec -ti docs run-tests.sh
 	@make docker-stop
-
-digest:  ## create a digest of all pages built by hugo.
-	@find ${ARTIFACT_NAME} -name '*.html' -type f -exec grep -vl 'http-equiv="refresh"' {} /dev/null \; | \
-        sed -ne "s@${ARTIFACT_NAME}@.$(pwd)/${ARTIFACT_NAME}@p" | \
-        cat > ${ARTIFACT_NAME}/digest.txt
 
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
