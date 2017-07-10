@@ -103,7 +103,7 @@ by appending or uncommenting the line
 
     proxy = http://<user>:<password>@<host>:<port>
    
-For installation in a container, use the PROXY_HOST, PROXY_PORT, PROXY_USER and PROXY_PASSWORD environment variables.  In a container this will also configure the proxy for the standard agent and only has to be set once.
+For installation in a container, use the PROXY_HOST, PROXY_PORT, PROXY_USER and PROXY_PASSWORD environment variables.  In a container, this will also configure the proxy for the standard agent and only has to be set once.
  
 ### Notes/known issues
  
