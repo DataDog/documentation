@@ -7,15 +7,13 @@ FETCH_INTEGRATIONS=true
 GITHUB_TOKEN=${github_personal_token}
 RUN_SERVER=true
 RUN_GULP=true
+
 LOCALBIN=gitlab/bin
 LOCALETC=gitlab/etc
 EXEDIR=/usr/local/bin
 EXE_LIST=`find gitlab/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
 VIRENV=hugpython
-CONFIG=config.yaml
-ARTIFACT_NAME=public
-URL=http://localhost:1313/
-CI_ENVIRONMENT_NAME=local
+
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -59,6 +57,8 @@ docker-start: stop  ## start container and run default commands to start hugo si
 		-e GITHUB_TOKEN \
 		-e RUN_SERVER=${RUN_SERVER} \
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
+		-e DOGWEB=${DOGWEB} \
+		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
 		-p 1313:1313 mstbbs/docker-dd-docs
 
 docker-stop:  ## kill the site and stop the running container.
@@ -96,6 +96,8 @@ start: stop source-helpers ## start the gulp/hugo server.
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
+		DOGWEB=${DOGWEB} \
+		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
 		gitlab/bin/sh/run-site.sh
 
 stop:  ## stop the gulp/hugo server.

@@ -7,3 +7,4 @@ htmlmin>=0.1.10
 pycparser==2.14
 requests[security]==2.12.3
 PyYAML==3.12
+tqdm==4.14.0
