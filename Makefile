@@ -15,6 +15,9 @@ help:
 
 clean: stop  ## clean all make installs.
 	make clean-build
+
+clean-all: stop  ## clean everything.
+	make clean-build
 	make clean-docker
 	make clean-node
 
@@ -23,7 +26,7 @@ clean-build:  ## remove build artifacts.
 
 clean-docker:  ## remove image
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
-	@if [[ `docker images | grep dd-docs` ]]; then printf  "removing:" && docker rmi -f dd-docs; fi
+	@if [[ `docker images | grep mstbbs/docker-dd-docs` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs; fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
@@ -31,22 +34,22 @@ clean-node:  ## remove node_modules.
 docker: stop  ## build and run docker env with gulp watch enabled
 	@docker build -t dd-docs gitlab/
 
-start: stop docker  ## build the docker image and run default commands to start hugo site.
+start: stop  ## build the docker image and run default commands to start hugo site.
 	@docker run -ti --name "docs" -v `pwd`:/src:cached \
 		-e FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
 		-e GITHUB_TOKEN \
 		-e RUN_SERVER=${RUN_SERVER} \
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		-p 1313:1313 dd-docs
+		-p 1313:1313 mstbbs/docker-dd-docs
 
 stop:  ## kill the site and stop the running container
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
 
-tests: stop docker ## run the tests through the docker container
+tests: stop ## run the tests through the docker container
 	@docker run -tid --name "docs" -v `pwd`:/src:cached \
 		-e RUN_SERVER=true \
 		-e RUN_GULP=false \
-		-p 1313:1313 dd-docs
+		-p 1313:1313 mstbbs/docker-dd-docs
 	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
 	@docker exec -ti docs run-tests.sh
 	@make docker-stop
