@@ -2,6 +2,8 @@
 
 RUN_SERVER=${RUN_SERVER:=false}
 FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS:=false}
+DOGWEB=${DOGWEB:=false}
+INTEGRATIONS_CORE=${INTEGRATIONS_CORE:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:=""}
 RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
@@ -20,8 +22,18 @@ if [ ${RUN_SERVER} == true ]; then
 	fi
 	echo "building hugo site..."
 	if [ ${FETCH_INTEGRATIONS} == true ]; then
-		echo "grabbing integrations. this takes forever."
-		integrations_sync.py --token "${GITHUB_TOKEN}" || true
+		echo "grabbing integrations..."
+		args=""
+		if [ ${DOGWEB} != "false" ]; then
+			args="${args} --dogweb ${DOGWEB}"
+		fi
+		if [ ${INTEGRATIONS_CORE} != "false" ]; then
+			args="${args} --integrations ${INTEGRATIONS_CORE}"
+		fi
+		if [ ${GITHUB_TOKEN} != "false" ]; then
+			args="${args} --token ${GITHUB_TOKEN}"
+		fi
+		integrations_sync.py ${args} || true
 	fi
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
 		echo "creating i18n placeholder pages."
