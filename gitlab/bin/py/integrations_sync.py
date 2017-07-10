@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from optparse import OptionParser
-from os.path import splitext, exists, basename, curdir, join, abspath, normpath
+from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from os import sep, makedirs, getenv
 from tqdm import *
 import yaml
@@ -60,7 +60,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
 
 
-def sync_from_dir(from_path=None, to_path=None):
+def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
     Sync csv files to yaml files based on input and output directories
 
@@ -69,8 +69,15 @@ def sync_from_dir(from_path=None, to_path=None):
     """
     print('Syncing integrations...')
     if exists(from_path):
-        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, '*.csv'), recursive=True))):
+        pattern = '**/*.csv'
+        if is_dogweb:
+            pattern = 'integration/**/*.csv'
+        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('.csv', ''))
+            if key_name.endswith('_metadata'):
+                key_name = basename(key_name.replace('_metadata', ''))
+            if key_name == 'metadata':
+                key_name = basename(dirname(normpath(file_name)))
             new_file_name = '{}{}.yaml'.format(to_path, key_name)
             csv_to_yaml(key_name, file_name, new_file_name)
     else:
@@ -112,20 +119,31 @@ def sync(*args):
     integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
     dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
 
+    if options.integrations:
+        options.integrations = abspath(normpath(options.integrations))
+        if not options.integrations.endswith(sep):
+            options.integrations += sep
+
+    if options.dogweb:
+        options.dogweb = abspath(normpath(options.dogweb))
+        if not options.dogweb.endswith(sep):
+            options.dogweb += sep
+
     # create data/integrations and other dirs if non existing
     makedirs(dest_dir, exist_ok=True)
     makedirs(dogweb_extract_path, exist_ok=True)
+    makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
     makedirs(integrations_extract_path, exist_ok=True)
 
     # sync from dogweb, download if we don't have it (token required)
     if not options.dogweb:
         if options.token:
             options.dogweb = dogweb_extract_path
-            download_github_files(options.token, 'DataDog', 'dogweb', 'master', options.dogweb, True)
+            download_github_files(options.token, 'DataDog', 'dogweb', 'master', options.dogweb + 'integration' + sep, True)
         else:
             print('No Github token.. dogweb retrieval failed')
     if options.dogweb:
-        sync_from_dir(options.dogweb, dest_dir)
+        sync_from_dir(options.dogweb, dest_dir, True)
 
     # sync from integrations, download if we don't have it (public repo so no token needed)
     # (this takes precedence so will overwrite yaml files)
