@@ -7,9 +7,9 @@ RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 
 if [ ${RUN_SERVER} == true ]; then
-	echo "checking that node modules are installed"
-	test -d "node_modules" || npm install
 	if [ ${RUN_GULP} == true ]; then
+		echo "checking that node modules are installed and up-to-date"
+		npm install
         echo "starting gulp watch"
         gulp watch --silent &
 	fi

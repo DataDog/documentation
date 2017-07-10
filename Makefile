@@ -31,7 +31,7 @@ clean-node:  ## remove node_modules.
 docker: stop  ## build and run docker env with gulp watch enabled
 	@docker build -t dd-docs gitlab/
 
-start: stop docker
+start: stop docker  ## build the docker image and run default commands to start hugo site.
 	@docker run -ti --name "docs" -v `pwd`:/src:cached \
 		-e FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
 		-e GITHUB_TOKEN \
