@@ -1,88 +1,80 @@
 #!/usr/bin/env python3
-
 from optparse import OptionParser
-from pathlib import Path
+from os.path import splitext, exists, basename, curdir, join, abspath, normpath
+from os import sep, makedirs, getenv
+from tqdm import *
 import yaml
-import os
-import tarfile
 import requests
 import tempfile
 import csv
 import glob
 
 
-def csv_to_yaml(keyname, csv_filename, yml_filename):
+def csv_to_yaml(key_name, csv_filename, yml_filename):
     """
     Given a file path to a single csv file convert it to a yaml file
 
+    :param key_name: integration key name for root object
     :param csv_filename: path to input csv file
     :param yml_filename: path to output yml file
     """
-    yaml_data = {keyname: []}
+    yaml_data = {key_name: []}
     with open(csv_filename) as csv_file:
         reader = csv.DictReader(csv_file, delimiter=',')
-        for line in reader:
-            yaml_data[keyname].append(dict(line))
-    if yaml_data[keyname]:
-        print(yml_filename)
+        yaml_data[key_name] = [dict(line) for line in reader]
+    if yaml_data[key_name]:
         with open(file=yml_filename, mode='w', encoding='utf-8') as f:
             f.write(yaml.dump(yaml_data, default_flow_style=False))
 
 
-def download_github_repo_tar(token, org, repo, branch, path):
+def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     """
-    Downloads a stream tar.gz file from github of a certain organisation/branch/repo
-    and extracts csv files to tmp directory for parsing
+    Using the github api downloads csv files to a temporary location for processing
 
     :param token: string of github token
     :param org: string of organization
     :param repo: string of git repository
     :param branch: string of branchname
-    :param path: where to extract
+    :param to_path: where to extract
+    :param is_dogweb: if dogweb repo we need to get nested data
     """
-    url = 'https://api.github.com/repos/{0}/{1}/tarball/{2}'.format(org, repo, branch)
-    headers = {'Accept': 'application/vnd.github.v3.raw'}
-    if token:
-        headers.update({'Authorization': 'token {}'.format(token)})
-    print('Downloading {} {}..'.format(repo, branch))
-    response = requests.get(url, headers=headers, stream=True)
+    directory = 'integration' if is_dogweb else ''
+    url = 'https://api.github.com/repos/{0}/{1}/contents/{2}'.format(org, repo, directory)
+    headers = {'Authorization': 'token {}'.format(token)} if token else {}
+    excludes = ['LICENSE', 'Rakefile', 'Gemfile']
+    print('Downloading files from {}/{}..'.format(repo, branch))
+    response = requests.get(url, headers=headers)
     if response.status_code == requests.codes.ok:
-        with tarfile.open(mode='r|gz', fileobj=response.raw) as tar:
-            tar.extractall(path=path, members=(i for i in tar if i.name.endswith('metadata.csv')))
+        for obj in tqdm(response.json()):
+            name = obj.get('name', '')
+            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
+                to_csv = '{0}/{1}/{1}_metadata.csv'.format(directory, name) if is_dogweb else '{}/metadata.csv'.format(name)
+                response_csv = requests.get(
+                    'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv),
+                    headers=headers
+                )
+                if response_csv.status_code == requests.codes.ok:
+                    with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
+                        f.write(response_csv.content)
+    else:
+        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
 
 
-def sync_from_dogweb(from_path=None, to_path=None):
+def sync_from_dir(from_path=None, to_path=None):
     """
-    Converts csv files to yaml for dogweb
+    Sync csv files to yaml files based on input and output directories
 
-    :param from_path: path to input csvs
-    :param to_path: path to output ymls
+    :param from_path: the input path to csv files
+    :param to_path: the output path to yaml files
     """
-    print('Syncing integrations from dogweb')
-    from_path = from_path if str(from_path).endswith(os.sep) else "{}{}".format(from_path, os.sep)
-    to_path = to_path if str(to_path).endswith(os.sep) else "{}{}".format(to_path, os.sep)
-    if Path(from_path).is_dir():
-        for file_name in sorted(glob.glob('{}{}'.format(from_path, '**/*.csv'), recursive=True)):
-            keyname = os.path.basename(file_name.replace('_metadata.csv', ''))
-            new_file_name = '{}{}.yaml'.format(to_path, keyname)
-            csv_to_yaml(keyname, file_name, new_file_name)
-
-
-def sync_from_integrations(from_path=None, to_path=None):
-    """
-    Converts csv files to yaml for integrations-core
-
-    :param from_path: path to input csvs
-    :param to_path: path to output ymls
-    """
-    print('Syncing integrations from integrations-core')
-    from_path = from_path if str(from_path).endswith(os.sep) else "{}{}".format(from_path, os.sep)
-    to_path = to_path if str(to_path).endswith(os.sep) else "{}{}".format(to_path, os.sep)
-    if Path(from_path).is_dir():
-        for file_name in sorted(glob.glob('{}{}'.format(from_path, '**/*.csv'), recursive=True)):
-            keyname = os.path.basename(os.path.dirname(os.path.normpath(file_name)))
-            new_file_name = '{}{}.yaml'.format(to_path, keyname)
-            csv_to_yaml(keyname, file_name, new_file_name)
+    print('Syncing integrations...')
+    if exists(from_path):
+        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, '*.csv'), recursive=True))):
+            key_name = basename(file_name.replace('.csv', ''))
+            new_file_name = '{}{}.yaml'.format(to_path, key_name)
+            csv_to_yaml(key_name, file_name, new_file_name)
+    else:
+        print('Path does not exist: {}'.format(from_path))
 
 
 def parse_args(args=None):
@@ -96,7 +88,7 @@ def parse_args(args=None):
     parser.add_option("-t", "--token", help="github access token", default=None)
     parser.add_option("-w", "--dogweb", help="path to dogweb local folder", default=None)
     parser.add_option("-i", "--integrations", help="path to integrations-core local folder", default=None)
-    parser.add_option("-s", "--source", help="location of src files", default=os.path.curdir)
+    parser.add_option("-s", "--source", help="location of src files", default=curdir)
     return parser.parse_args(args)
 
 
@@ -112,34 +104,35 @@ def sync(*args):
     options, args = parse_args(*args)
 
     # attempt to get token from env vars, take explicit arg over envs
-    if not options.token:
-        options.token = os.getenv('GITHUB_TOKEN', options.token)
+    options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
 
     # setup path variables
-    github_extract_path = '{}'.format(''.join([tempfile.gettempdir(), os.sep, "extracted"]))
-    site_root_dir = options.source
-    yml_dest_dir = Path(site_root_dir + '/data/integrations')
+    extract_path = '{}'.format(join(tempfile.gettempdir(), "extracted") + sep)
+    dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
+    integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
+    dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
 
-    # create data/integrations if non existing
-    yml_dest_dir.mkdir(exist_ok=True, parents=True)
+    # create data/integrations and other dirs if non existing
+    makedirs(dest_dir, exist_ok=True)
+    makedirs(dogweb_extract_path, exist_ok=True)
+    makedirs(integrations_extract_path, exist_ok=True)
 
     # sync from dogweb, download if we don't have it (token required)
     if not options.dogweb:
         if options.token:
-            download_github_repo_tar(options.token, 'DataDog', 'dogweb', 'master', github_extract_path)
-            options.dogweb = github_extract_path
-            sync_from_dogweb(options.dogweb, yml_dest_dir)
+            options.dogweb = dogweb_extract_path
+            download_github_files(options.token, 'DataDog', 'dogweb', 'master', options.dogweb, True)
         else:
             print('No Github token.. dogweb retrieval failed')
-    else:
-        sync_from_dogweb(options.dogweb, yml_dest_dir)
+    if options.dogweb:
+        sync_from_dir(options.dogweb, dest_dir)
 
     # sync from integrations, download if we don't have it (public repo so no token needed)
     # (this takes precedence so will overwrite yaml files)
     if not options.integrations:
-        download_github_repo_tar(options.token, 'DataDog', 'integrations-core', 'master', github_extract_path)
-        options.integrations = github_extract_path
-    sync_from_integrations(options.integrations, yml_dest_dir)
+        options.integrations = integrations_extract_path
+        download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
+    sync_from_dir(options.integrations, dest_dir)
 
 
 if __name__ == '__main__':
