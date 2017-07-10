@@ -12,5 +12,6 @@ requests[security]==2.12.3
 datadog==0.16.0
 gspread==0.6.2
 oauth2client==4.1.0
+tqdm==4.14.0
 PyYAML==3.12
 Pygments==2.2.0
