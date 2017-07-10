@@ -15,16 +15,22 @@ RUN pip install --upgrade pip && pip install -r requirements.txt && \
     pip3 install -r requirements3.txt
 
 # gulp
-RUN npm install --global --production gulp-cli && \
-    npm install
+RUN npm install --global --production gulp-cli && npm install
 
 # install hugo
-ENV HUGO_VERSION 0.23
+ENV HUGO_VERSION "0.24.1"
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-64bit
+
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /tmp/
-RUN  tar -xvzf /tmp/${HUGO_BINARY}.tar.gz -C /tmp/ \
-	&& ls /tmp && mv /tmp/hugo /usr/bin/hugo \
+RUN ls /tmp/hugo && mv /tmp/hugo /usr/bin/hugo \
 	&& rm -rf /tmp/hugo* && hugo version
 
 # install testing utils
 COPY bin/* /usr/local/bin/
+
+VOLUME /src
+
+WORKDIR /src
+CMD ["run-docker.sh"]
+
+EXPOSE 1313

@@ -24,6 +24,7 @@ def csv_to_yaml(keyname, csv_filename, yml_filename):
         for line in reader:
             yaml_data[keyname].append(dict(line))
     if yaml_data[keyname]:
+        print(yml_filename)
         with open(file=yml_filename, mode='w', encoding='utf-8') as f:
             f.write(yaml.dump(yaml_data, default_flow_style=False))
 
@@ -95,6 +96,7 @@ def parse_args(args=None):
     parser.add_option("-t", "--token", help="github access token", default=None)
     parser.add_option("-w", "--dogweb", help="path to dogweb local folder", default=None)
     parser.add_option("-i", "--integrations", help="path to integrations-core local folder", default=None)
+    parser.add_option("-s", "--source", help="location of src files", default=os.path.curdir)
     return parser.parse_args(args)
 
 
@@ -115,8 +117,8 @@ def sync(*args):
 
     # setup path variables
     github_extract_path = '{}'.format(''.join([tempfile.gettempdir(), os.sep, "extracted"]))
-    site_root_dir = Path(__file__).joinpath(Path('../../../../')).resolve()
-    yml_dest_dir = site_root_dir.joinpath(Path('data/integrations'))
+    site_root_dir = options.source
+    yml_dest_dir = Path(site_root_dir + '/data/integrations')
 
     # create data/integrations if non existing
     yml_dest_dir.mkdir(exist_ok=True, parents=True)

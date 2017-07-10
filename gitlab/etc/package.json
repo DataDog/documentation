@@ -4,7 +4,9 @@
   "description": "Corpweb built on HUGO",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp",
+    "jshint": "gulp jshint",
+    "jscs": "jscs gulpfile.js src/scripts/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,11 +18,6 @@
     "url": "https://github.com/DataDog/corp-hugo/issues"
   },
   "homepage": "https://github.com/DataDog/corp-hugo#readme",
-  "scripts": {
-    "build": "gulp",
-    "jshint": "gulp jshint",
-    "jscs": "jscs gulpfile.js src/scripts/*.js"
-  },
   "engines": {
     "node": ">= 4.5"
   },

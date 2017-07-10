@@ -1,6 +1,6 @@
-setuptools
+setuptools==36.0.1
 PyGithub==1.29
-markdown
+markdown==2.6.8
 algoliasearch>=1.11.0
 beautifulsoup4==4.5.1
 cffi==1.5.2
