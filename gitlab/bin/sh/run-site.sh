@@ -6,6 +6,11 @@ GITHUB_TOKEN=${GITHUB_TOKEN:=""}
 RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 
+echo $FETCH_INTEGRATIONS
+echo $RUN_SERVER
+echo $RUN_GULP
+echo $CREATE_I18N_PLACEHOLDERS
+
 if [ ${RUN_SERVER} == true ]; then
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"

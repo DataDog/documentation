@@ -31,6 +31,6 @@ COPY bin/* /usr/local/bin/
 VOLUME /src
 
 WORKDIR /src
-CMD ["run-docker.sh"]
+CMD ["run-site.sh"]
 
 EXPOSE 1313
