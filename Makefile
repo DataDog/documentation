@@ -1,10 +1,19 @@
 # make
 .PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop
 .DEFAULT_GOAL := help
+PYV=$(shell if [ `which pyenv` ]; then \
+		if [ `pyenv which python3` ]; then \
+			echo `pyenv which python3`; \
+		fi \
+	elif command -v python3 > /dev/null 2>&1; then \
+		printf "python3"; \
+	else printf "false"; \
+	fi)
 
+# config
 CONFIG_FILE := Makefile.config
 ifeq ($(wildcard $(CONFIG_FILE)),)
-$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+	$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
 include $(CONFIG_FILE)
 
@@ -72,12 +81,13 @@ docker-tests: stop ## run the tests through the docker container.
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
-	@if ! command -v python3 > /dev/null 2>&1; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi;
-	@echo "installing virtualenv..."
-	@test -d ${VIRENV} || python3 -m venv ${VIRENV}
-	@$(VIRENV)/bin/pip install -Ur gitlab/etc/requirements3.txt
+	@if [ ${PYV} == "false" ]; then \
+		printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi
+	@test -d ${VIRENV} || ${PYV} -m venv ${VIRENV}
+	@$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
+	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 
 start: stop source-helpers ## start the gulp/hugo server.
@@ -89,7 +99,7 @@ start: stop source-helpers ## start the gulp/hugo server.
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		DOGWEB=${DOGWEB} \
 		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		gitlab/bin/sh/run-site.sh
+		run-site.sh
 
 stop:  ## stop the gulp/hugo server.
 	@echo "cleaning up..."

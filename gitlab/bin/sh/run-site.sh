@@ -36,7 +36,7 @@ if [ ${RUN_SERVER} == true ]; then
 		echo "creating i18n placeholder pages."
 		placehold_translations.py -c "config.yaml" -f "content/" || true
 	fi
-	if [ ${USE_DOCKER} ]; then
+	if [ ${USE_DOCKER} == "true" ]; then
 		hugo server --renderToDisk --bind="0.0.0.0" || exit 1
 	else
 		hugo server --renderToDisk || exit 1
