@@ -106,7 +106,7 @@ Refer to the standard [daemonset installation](http://docs.datadoghq.com/integra
 
     ```$ kubectl create -f dd-process-agent.yml```
 
-You can confirm the Agent pod is running with 
+You can confirm the agent pod is running with 
 
     kubectl get daemonsets
 
