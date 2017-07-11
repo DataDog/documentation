@@ -3,7 +3,6 @@
 .DEFAULT_GOAL := help
 
 CONFIG_FILE := Makefile.config
-# Explicitly check for the config file, otherwise make -k will proceed anyway.
 ifeq ($(wildcard $(CONFIG_FILE)),)
 $(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
