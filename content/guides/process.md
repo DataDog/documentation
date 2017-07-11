@@ -61,6 +61,7 @@ To check if the Agent is running:
     $ sudo apt-get remove dd-process-agent
     
 ### Docker container
+
 Installing in a container will run the dd-process-agent and the standard dd-agent. The dd-process-agent container inherits from the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container and you should refer to the documentation on that page for custom overrides and options.
 
 **Update to the latest image**
@@ -92,6 +93,22 @@ Installing in a container will run the dd-process-agent and the standard dd-agen
       -e HOST_SYS=/host/sys \
       -e SD_BACKEND=docker \
       datadoghq/dd-process-agent
+      
+### Kubernetes Daemonset
+
+Installing with the daemonset will deploy the dd-process-agent and the standard dd-agent on your Kubernetes cluster. These will run together in a single pod so there's no need to run a dd-agent daemonset separately.
+
+Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+
+1. Create a manifest from the template at [dd-process-agent.yml](https://github.com/DataDog/dd-process-agent-install/blob/master/kubernetes/dd-process-agent.yml) with your API key.
+2. (optional) Modify any other settings in the yml file based on the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110).
+3. Create the daemonset and get the agent running in the cluster:
+
+    ```$ kubectl create -f dd-process-agent.yml```
+
+You can confirm the Agent pod is running with 
+
+    kubectl get daemonsets
 
 ### Proxy Configuration
 
