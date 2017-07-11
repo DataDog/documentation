@@ -104,11 +104,11 @@ Refer to the standard [daemonset installation](http://docs.datadoghq.com/integra
 2. (optional) Modify any other settings in the yml file based on the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110).
 3. Create the daemonset and get the Agent running in the cluster:
 
-    ```$ kubectl create -f dd-process-agent.yml```
+       $ kubectl create -f dd-process-agent.yml
 
 You can confirm the Agent pod is running with 
 
-    kubectl get daemonsets
+    $ kubectl get daemonsets
 
 ### Proxy Configuration
 
