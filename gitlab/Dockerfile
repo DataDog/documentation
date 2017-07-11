@@ -22,7 +22,7 @@ ENV HUGO_VERSION "0.24.1"
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-64bit
 
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /tmp/
-RUN ls /tmp/hugo && mv /tmp/hugo /usr/bin/hugo \
+RUN ls && mv /tmp/hugo /usr/bin/hugo \
 	&& rm -rf /tmp/hugo* && hugo version
 
 # install testing utils
