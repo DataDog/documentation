@@ -102,11 +102,11 @@ Refer to the standard [daemonset installation](http://docs.datadoghq.com/integra
 
 1. Create a manifest from the template at [dd-process-agent.yml](https://github.com/DataDog/dd-process-agent-install/blob/master/kubernetes/dd-process-agent.yml) with your API key.
 2. (optional) Modify any other settings in the yml file based on the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110).
-3. Create the daemonset and get the agent running in the cluster:
+3. Create the daemonset and get the Agent running in the cluster:
 
     ```$ kubectl create -f dd-process-agent.yml```
 
-You can confirm the agent pod is running with 
+You can confirm the Agent pod is running with 
 
     kubectl get daemonsets
 
@@ -120,7 +120,7 @@ by appending or uncommenting the line
 
     proxy = http://<user>:<password>@<host>:<port>
    
-For installation in a container, use the `PROXY_HOST`, `PROXY_PORT`, `PROXY_USER` and `PROXY_PASSWORD` environment variables.  In a container, this will also configure the proxy for the standard agent and only has to be set once.
+For installation in a container, use the `PROXY_HOST`, `PROXY_PORT`, `PROXY_USER` and `PROXY_PASSWORD` environment variables.  In a container, this will also configure the proxy for the standard Agent and only has to be set once.
  
 ### Notes/known issues
  
