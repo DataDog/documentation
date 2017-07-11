@@ -34,22 +34,6 @@ before_script:
   tags:
     - docker
 
-# ================== bootstrap ================== #
-build_docker_image:
-  stage: bootstrap
-  before_script: [] # override the top-level entry
-  when: manual
-  tags:
-    - container-builder
-  script:
-    - docker build -t $BUILD_IMAGE -f gitlab/Dockerfile gitlab
-    - docker push $BUILD_IMAGE
-  except:
-    - tags
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
-
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
 build_preview:
