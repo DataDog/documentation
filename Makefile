@@ -22,6 +22,7 @@ help:
 
 clean: stop  ## clean all make installs.
 	make clean-build
+	make clean-integrations
 
 clean-all: stop  ## clean everything.
 	make clean-build
