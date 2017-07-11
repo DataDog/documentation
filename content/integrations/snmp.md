@@ -102,7 +102,7 @@ It has a dependency on ```smidump```, from the libsmi2ldbl package so make sure 
 
 #### Run
 
-    $ build-pysnmp-mibs -o YOUR-MIB.py YOUR-MIB.mib
+    $ build-pysnmp-mib -o YOUR-MIB.py YOUR-MIB.mib
 
 where YOUR-MIB.mib is the MIB you want to convert.
 

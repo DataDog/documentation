@@ -172,7 +172,7 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<th>msg_title</th>
+<td>msg_title</td>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>

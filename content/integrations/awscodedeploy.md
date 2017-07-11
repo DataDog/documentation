@@ -4,13 +4,10 @@ integration_title: AWS CodeDeploy
 kind: integration
 git_integration_title: amazon_codedeploy
 newhlevel: true
-beta: true
 ---
 ## Overview
 
-Please contact support at <support@datdoghq.com> to enable this feature for your account.
-
-{{< img src="monitor-aws-codedeploy-dashboard.png" >}}
+{{< img src="monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
 
 AWS CodeDeploy is a service that automates code deployment to instances in the cloud and on-premise.
 

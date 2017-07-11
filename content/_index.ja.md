@@ -31,15 +31,12 @@ sidebar:
 
 ### 3. [Graph them!][3]
  -->
-# Datadogでメトリクスの監視を始めよう！
 
-<h3 class="big_number alert alert-warning linked-header" id="get-the-datadog-agent1-running">
-<a class="header-link" href="#get-the-datadog-agent1-running"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>1. Datadog <a href="https://app.datadoghq.com/account/settings#agent">Agent</a> のインストールと起動 !</h3>
-<h3 class="big_number alert alert-success linked-header" id="dive-into-metrics2">
-<a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. メトリクス <a href="/guides/metrics/">の収集と送信!</a>!</h3>
-<h3 class="big_number alert alert-info linked-header" id="graph-them3">
-<a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="/graphing/">メトリクスの可視化、そしてアラート設定!</a>
-</h3>
+### 1. Datadog [Agent][1] のインストールと起動 !
+
+### 2. [メトリクス][102]の収集と送信!
+
+### 3. メトリクスの[可視化][103]、そして[アラート設定][111]!
 
 
 <!-- **Not sure where to look?** Our documentation is split into guides and references. Guides explain how to
@@ -72,6 +69,9 @@ and we'll take care of it. -->
 GitHubの[issues][9]でお知らせください。メッセージ欄の内容を基にドキュメントを修正し、改善に努めます。
 
 
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /guides/metrics/
+[3]: /graphing/
 [4]: /overview/
 [5]: https://app.datadoghq.com/event/stream
 [6]: /help/#email

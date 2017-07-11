@@ -3,6 +3,6 @@ title: Metric Units
 kind: documentation
 ---
 
-The following units may be associated with metrics submitted to datadog.
+The following units may be associated with metrics submitted to Datadog.
 
 <%= get_units_from_git()%>

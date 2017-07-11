@@ -8,7 +8,7 @@ git_integration_title: wmi
 
 ## Overview
 
-{{< img src="wmimetric.png" >}}
+{{< img src="wmimetric.png" alt="WMI Metric" >}}
 
 Get metrics from your Windows applications/servers with Windows Management Instrumentation (WMI) in real time to
 

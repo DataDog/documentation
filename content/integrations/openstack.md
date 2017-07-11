@@ -14,7 +14,7 @@ Connects your OpenStack cluster to Datadog in order to:
 * Track resource usage and I/O on your Nova-managed servers
 * Verify connectivity of your Neutron networks
 
-{{< img src="openstack.png" >}}
+{{< img src="openstack.png" alt="OpenStack default dashboard" >}}
 
 Learn more about how to monitor OpenStack Nova performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/openstack-monitoring-nova/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor OpenStack Nova.
 

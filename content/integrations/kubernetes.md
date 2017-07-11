@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 ## Overview
 
-{{< img src="k8sdashboard.png" >}}
+{{< img src="k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
 Get metrics from your Kubelets in real time to:
 

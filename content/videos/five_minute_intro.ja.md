@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/06/08
-translation_status: translated
+last_modified: 2017/02/14
+translation_status: complete
 language: ja
 title: Datadogのサービス紹介 (5分編)
 kind: video
