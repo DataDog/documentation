@@ -8,7 +8,7 @@ stages:
 
 variables:
   # images used for build, test, deploy
-  BUILD_IMAGE: "mstbbs/docker-dd-docs"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.1"
   # hugo configs, used to direct building the site
   PREVIEW_CONFIG: "config/preview.yaml"
   # s3 deploy destinations

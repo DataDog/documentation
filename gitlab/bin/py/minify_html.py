@@ -17,8 +17,6 @@ def minify_page(page):
 
 def minify_html(file_list):
     print('minifying html...')
-
-    print(file_list)
     with multiprocessing.Pool(4) as pool:
         pool.map(minify_page, file_list)
 
