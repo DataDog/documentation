@@ -62,6 +62,7 @@ docker-start: stop  ## start container and run default commands to start hugo si
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		-e DOGWEB=${DOGWEB} \
 		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
+		-e USE_DOCKER=true \
 		-p 1313:1313 mstbbs/docker-dd-docs
 
 docker-stop:  ## kill the site and stop the running container.
@@ -82,7 +83,7 @@ hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual en
 	@if ! command -v python3 > /dev/null 2>&1; then printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi;
 	@echo "installing virtualenv..."
 	@test -d ${VIRENV} || python3 -m venv ${VIRENV}
-	@$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt
+	@$(VIRENV)/bin/pip install -Ur gitlab/etc/requirements3.txt
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;

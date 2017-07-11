@@ -7,6 +7,7 @@ INTEGRATIONS_CORE=${INTEGRATIONS_CORE:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:=""}
 RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
+USE_DOCKER=${USE_DOCKER:=false}
 
 
 if [ ${RUN_SERVER} == true ]; then
@@ -35,7 +36,11 @@ if [ ${RUN_SERVER} == true ]; then
 		echo "creating i18n placeholder pages."
 		placehold_translations.py -c "config.yaml" -f "content/" || true
 	fi
-	hugo server --watch=true --renderToDisk --bind="0.0.0.0" "$@" || exit 1
+	if [ ${USE_DOCKER} ]; then
+		hugo server --renderToDisk --bind="0.0.0.0" || exit 1
+	else
+		hugo server --renderToDisk || exit 1
+	fi
 else
 	exit 0
 fi
