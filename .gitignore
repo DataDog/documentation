@@ -73,3 +73,5 @@ Temporary Items
 /hugpython/
 /data/integrations/
 /DataDog-dogweb-*/
+
+Makefile.config

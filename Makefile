@@ -2,19 +2,12 @@
 .PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop
 .DEFAULT_GOAL := help
 
-CREATE_I18N_PLACEHOLDERS=true
-FETCH_INTEGRATIONS=true
-GITHUB_TOKEN=${github_personal_token}
-RUN_SERVER=true
-RUN_GULP=true
-#DOGWEB="LOCAL_PATH_TO_DOGWEB"
-#INTEGRATIONS_CORE="LOCAL_PATH_TO_INTEGRATIONS_CORE"
-
-LOCALBIN=gitlab/bin
-LOCALETC=gitlab/etc
-EXEDIR=/usr/local/bin
-EXE_LIST=`find gitlab/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
-VIRENV=hugpython
+CONFIG_FILE := Makefile.config
+# Explicitly check for the config file, otherwise make -k will proceed anyway.
+ifeq ($(wildcard $(CONFIG_FILE)),)
+$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+endif
+include $(CONFIG_FILE)
 
 
 help:
