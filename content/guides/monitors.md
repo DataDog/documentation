@@ -30,7 +30,7 @@ page as well as general monitor management on the
 Here is a quick overview of the different terms used in this guide.
 
 - **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
-- **Check**: Emits one more more statuses.
+- **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: host-, metric-, integration-, process-, network-, event-based, and custom. See side navigation to drill into a specific type.
@@ -49,7 +49,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 ### Choose what to monitor
 
 1. Select the metric and scope you want to monitor.
-  {{< img src="monitor/metric_scope.png" >}}
+  {{< img src="monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
@@ -57,7 +57,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     further information.
 
 2. Select the alert grouping.
-    {{< img src="monitor/alert_grouping.png" >}}
+    {{< img src="monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -75,7 +75,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     running out of space.
 
 3. Select the alert type.
-    {{< img src="monitor/alert_type.png" >}}
+    {{< img src="monitor/alert_type.png" alt="alert type" >}}
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -100,7 +100,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitor/metric_threshold.png" >}}
+      {{< img src="monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -159,18 +159,24 @@ on the left. This guide will walk through the configuration of the Metric type. 
 ### Setup Notifications
 
 
-{{< img src="monitor/notification.png" >}}
+{{< img src="monitor/notification.png" alt="notification" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
-2. Enter a **message** for the monitor. This field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
-   as well as Datadog's @-notification syntax. Note: you can notify any non-Datadog users via email by simply adding `@their-email` to the message.
+2. Enter a **message** for the monitor. This field allows standard
+   [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
+   as well as Datadog's @-notification syntax. Note: you can notify any
+   non-Datadog users via email by simply adding `@their-email` to the
+   message.
 
-   A common use-case for the monitor message is to include a step-by-step way to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
+   A common use-case for the monitor message is to include a step-by-step way
+   to resolve the problem. For example if you are monitoring a database then you
+   might want to include steps for failing over to a standby node. All in all,
+   you should attempt to give as much context to the monitor as possible.
 
-3. Optionally enable **monitor renotification**. This option is useful to remind
+4. Optionally enable **monitor renotification**. This option is useful to remind
    your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent
    anytime the monitor renotifies. The original message will be included as
@@ -189,11 +195,11 @@ You may occasionally need to shut systems down or take them offline to perform m
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
-{{< img src="monitor/downtime-nav.png" >}}
+{{< img src="monitor/downtime-nav.png" alt="downtime-nav" >}}
 
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-{{< img src="monitor/downtime-manage.png" >}}
+{{< img src="monitor/downtime-manage.png" alt="downtime-manage" >}}
 
 ### Schedule Downtime
 
@@ -202,7 +208,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   {{< img src="monitor/downtime-silence.png" >}}
+   {{< img src="monitor/downtime-silence.png" alt="downtime-silence" >}}
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -212,39 +218,105 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
 
-   {{< img src="monitor/downtime-schedule.png" >}}
+   {{< img src="monitor/downtime-schedule.png" alt="downtime-schedule" >}}
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   {{< img src="monitor/downtime-notify.png" >}}
+   {{< img src="monitor/downtime-notify.png" alt="downtime-notify" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
-## Monitor FAQs
+## Managing Monitors
 
+The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
 
-- *Can I manage my monitors programatically?*
+### Find the Monitors
 
-  Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
-  for detailed information on managing monitors through the API using the
-  available libraries or cURL.
+Advanced search lets you query monitors by any combination of monitor attributes:
 
-- *Can you alert on a function?*
+* `title` and `message` — text search
+* `status` — Alert, Warn, No Data, Ok
+* `scope` — e.g. *, role:master-db
+* `type` — metric, integration, apm, etc
+* `muted`
+* `creator`
+* `id`
+* `service` — tags
+* `team` — tags
+* `env` — tags
+* `notification` — the monitor's notification target, e.g. you@example.com, slack-ops-oncall
+* `metric` — the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
 
-  Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
-  alert on custom queries and functions, similar to the JSON editor for graphs.
+To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-- *Can I manually resolve a monitor?*
+#### Check the boxes
 
-  Yes, you can manually resolve monitors but it only makes sense in a couple cases:
+When you don't need to search monitor titles and bodies for specific text, your search is a quick click or two away. Check as many boxes as you need to find your desired monitors, keeping the following in mind:
 
-    - If the monitor is in a "no data" state then resolving it will hide it from the
-      triggered monitors page.
-    - If the monitor is in the triggered state but has stopped reporting data then
-      resolving it will hide it from the triggered monitors page.
+* Checking attributes from different fields will AND the values, e.g. `status:Alert type:Metric` (the lack of an operator between the two search terms implies AND)
+* Checking attributes within the same field will often OR the values, e.g. `status:(Alert OR Warn)`, but there are some exceptions. For example, checking multiple scopes or service tags ANDs them.
+* Some fields do not allow you to select multiple values, e.g. when you tick a metric or service check, the other metrics/checks disappear from the list until you untick your selection.
+* The Triggered checkbox under the Status field means `status:(Alert OR Warn OR "No Data")`, not `status:Triggered`. Triggered is not a valid monitor status.
+* The Muted checkbox appears under the Status field, but Muted is actually its own field; checking it adds `muted:true` to your query, not `status:muted`.
+* The Metric/Check field is always called `metric` in the query, e.g. selecting the check `http.can_connect` adds `metric:http.can_connect` to your query.
 
-  Otherwise the monitor will pick up the current state on the next evaluation. In other
-  words, if the value is still above/below the configured threshold then the monitor may
-  re-trigger upon the next evaluation (in about 60 seconds).
+For fields that have an arbitrary (i.e. large) number of values across all monitors—Service tag, Scope, Metric/Check, Notification—use the field-specific search bars to find the value you're looking for.
+
+When you need to run a more complex search than the checkboxes allow, use the search bar to edit your query or write a new one.
+
+#### Write a query
+
+The most common reason to write a query is to search for specific text across all monitor titles and message bodies. A simple search of `postgresql` will return all monitors with `postgresql` anywhere in the title or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `title:postgresql`.
+
+Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax), so it's easiest to describe how it is *not* like Elasticsearch syntax:
+
+* Regular expressions are not supported
+* Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
+* Proximity searches are not supported, but the [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness) operator is
+* Ranges are not supported
+* Boosting is not supported
+
+Finally, The following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace. To search monitor fields that include any of them, wrap the field string in quotes: `status:Alert AND "chef-client"` is a valid query string; `status:Alert AND chef-client` is not.
+
+There are a few caveats regarding quoted fields:
+
+* You may use `.` with or without surrounding quotes, as it commonly appears in some fields: `metric:system.cpu.idle` is valid.
+* You may NOT use wildcard search inside quoted strings: `"chef-client*"`, while valid syntactically, won't return a monitor titled `"chef-client failing"` because the `*` is treated literally.
+
+### Manage chosen Monitors
+
+When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
+
+{{< img src="monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
+
+To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
+
+{{< img src="monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+
+## FAQs
+
+*Can I manage my monitors programmatically?*
+
+Yes. Refer to the [Datadog API docs](http://docs.datadoghq.com/api/#alerts)
+for detailed information on managing monitors through the API using the
+available libraries or cURL.
+
+*Can I alert on a function?*
+
+Yes, selecting the 'Source' tab of a monitor editor (Step 1) will allow you to
+alert on custom queries and functions, similar to the JSON editor for graphs.
+
+*Can I manually resolve a monitor?*
+
+Yes, you can manually resolve monitors but it only makes sense in a couple cases:
+
+- If the monitor is in a "no data" state then resolving it will hide it from the
+triggered monitors page.
+- If the monitor is in the triggered state but has stopped reporting data then
+resolving it will hide it from the triggered monitors page.
+
+Otherwise the monitor will pick up the current state on the next evaluation. In other
+words, if the value is still above/below the configured threshold then the monitor may
+re-trigger upon the next evaluation (in about 60 seconds).

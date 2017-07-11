@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="rdsdashboard.png" >}}
+{{< img src="rdsdashboard.png" alt="RDS Dashboard" >}}
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
@@ -18,9 +18,9 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 * **Standard RDS Integration** - The standard integration requires selecting RDS on the left side of the AWS integration tile. You will receive metrics about your instance as often as your Cloudwatch integration allows. All RDS Engine types are supported.
 
-* **Enhanced RDS Integration** - The enhanced integration requires additional configuration and is only available for MySQL, Aurora, and MariaDB engines. Additional metrics are available but an AWS Lambda is required to submit the metrics to Datadog. The higher granularity and additional required services may result in additional AWS charges.
+* **Enhanced RDS Integration** - The enhanced integration requires additional configuration and is only available for MySQL, Aurora, PostgreSQL, and MariaDB engines. Additional metrics are available but an AWS Lambda is required to submit the metrics to Datadog. The higher granularity and additional required services may result in additional AWS charges.
 
-* **RDS + Native Database Integration** - You can also choose to turn on the Native Database Integration. This is available for MySQL, Aurora, MariaDB, SQL Server, and Postgres engine types. To get the metrics from RDS and the ones from the native integration to match up, you will need to use the `dbinstanceidentifier` tag on the native integration based on the identifier you assign to the RDS instance. The RDS instances will automatically have the tag assigned.
+* **RDS + Native Database Integration** - You can also choose to turn on the Native Database Integration. This is available for MySQL, Aurora, MariaDB, SQL Server, and PostgreSQL engine types. To get the metrics from RDS and the ones from the native integration to match up, you will need to use the `dbinstanceidentifier` tag on the native integration based on the identifier you assign to the RDS instance. The RDS instances will automatically have the tag assigned.
 
 
 ## Installation
@@ -153,7 +153,7 @@ To validate that the native database integration is working, run `datadog-agent 
 After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag. ![][2]
 
 Here is the default dashboard for MySQL on Amazon RDS:
-{{< img src="rds-mysql.png" >}}
+{{< img src="rds-mysql.png" alt="RDS MySQL default dashboard" >}}
 
 Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
 

@@ -94,7 +94,7 @@ then scroll down to *Events API Emails*. This section will show you all the emai
 available for your applications and who created them. Choose the format for your
 messages from the Format: dropdown, then click *Create API Email*.
 
-{{< img src="event-email-api.png" >}}
+{{< img src="event-email-api.png" alt="JSON Event Email API">}}
 
 
 

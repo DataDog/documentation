@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="newrelicdashboard.png" >}}
+{{< img src="newrelicdashboard.png" alt="New Relic Dashboard" >}}
 
 Connect to New Relic to:
 

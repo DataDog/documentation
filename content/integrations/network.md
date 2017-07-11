@@ -19,7 +19,7 @@ platformmetrics:
 ---
 ## Overview
 
-{{< img src="netdashboard.png" >}}
+{{< img src="netdashboard.png" alt="Network Dashboard" >}}
 
 The network check collects TCP and IP network metrics from the agent's host.
 
@@ -32,7 +32,7 @@ The network check is enabled by default. If you would like to make any changes t
 
     instances:
       # Network check only supports one configured instance
-      - collect_connection_state: false
+      - collect_connection_state: false # set to true to collect TCP connection state metrics, e.g. SYN_SENT, ESTABLISHED
         excluded_interfaces:
           - lo
           - lo0

@@ -8,7 +8,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="elb.png" >}}
+{{< img src="elb.png" alt="ELB default dashboard" >}}
 
 Elastic Load Balancing (ELB) is an AWS service used to dispatch incoming web traffic from your applications across your Amazon EC2 backend instances, which may be in different availability zones. ELB helps ensure a smooth user experience and provide increased fault tolerance, handling traffic peaks and failed EC2 instances without interruption.
 

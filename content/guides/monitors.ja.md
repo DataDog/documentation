@@ -1,5 +1,5 @@
 ---
-last_modified: 2016/08/17
+last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: Monitor(監視)機能の設定ガイド

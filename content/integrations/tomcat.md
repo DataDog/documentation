@@ -40,69 +40,68 @@ Make sure that JMX Remote is enabled on your Tomcat server. For information on J
         init_config:
           conf:
             - include:
-              type: ThreadPool
-              attribute:
-                maxThreads:
-                  alias: tomcat.threads.max
-                  metric_type: gauge
-                currentThreadCount:
-                  alias: tomcat.threads.count
-                  metric_type: gauge
-                currentThreadsBusy:
-                  alias: tomcat.threads.busy
-                  metric_type: gauge
+                type: ThreadPool
+                attribute:
+                  maxThreads:
+                    alias: tomcat.threads.max
+                    metric_type: gauge
+                  currentThreadCount:
+                    alias: tomcat.threads.count
+                    metric_type: gauge
+                  currentThreadsBusy:
+                    alias: tomcat.threads.busy
+                    metric_type: gauge
             - include:
-              type: GlobalRequestProcessor
-              attribute:
-                bytesSent:
-                  alias: tomcat.bytes_sent
-                  metric_type: counter
-                bytesReceived:
-                  alias: tomcat.bytes_rcvd
-                  metric_type: counter
-                errorCount:
-                  alias: tomcat.error_count
-                  metric_type: counter
-                requestCount:
-                  alias: tomcat.request_count
-                  metric_type: counter
-                maxTime:
-                  alias: tomcat.max_time
-                  metric_type: gauge
-                processingTime:
-                  alias: tomcat.processing_time
-                  metric_type: counter
+                type: GlobalRequestProcessor
+                attribute:
+                  bytesSent:
+                    alias: tomcat.bytes_sent
+                    metric_type: counter
+                  bytesReceived:
+                    alias: tomcat.bytes_rcvd
+                    metric_type: counter
+                  errorCount:
+                    alias: tomcat.error_count
+                    metric_type: counter
+                  requestCount:
+                    alias: tomcat.request_count
+                    metric_type: counter
+                  maxTime:
+                    alias: tomcat.max_time
+                    metric_type: gauge
+                  processingTime:
+                    alias: tomcat.processing_time
+                    metric_type: counter
             - include:
-              j2eeType: Servlet
-              attribute:
-                processingTime:
-                  alias: tomcat.servlet.processing_time
-                  metric_type: counter
-                errorCount:
-                  alias: tomcat.servlet.error_count
-                  metric_type: counter
-                requestCount:
-                  alias: tomcat.servlet.request_count
-                  metric_type: counter
+                j2eeType: Servlet
+                attribute:
+                  processingTime:
+                    alias: tomcat.servlet.processing_time
+                    metric_type: counter
+                  errorCount:
+                    alias: tomcat.servlet.error_count
+                    metric_type: counter
+                  requestCount:
+                    alias: tomcat.servlet.request_count
+                    metric_type: counter
             - include:
-              type: Cache
-              attribute:
-                accessCount:
-                  alias: tomcat.cache.access_count
-                  metric_type: counter
-                hitsCounts:
-                  alias: tomcat.cache.hits_count
-                  metric_type: counter
+                type: Cache
+                attribute:
+                  accessCount:
+                    alias: tomcat.cache.access_count
+                    metric_type: counter
+                  hitsCounts:
+                    alias: tomcat.cache.hits_count
+                    metric_type: counter
             - include:
-              type: JspMonitor
-              attribute:
-                jspCount:
-                  alias: tomcat.jsp.count
-                  metric_type: counter
-                jspReloadCount:
-                  alias: tomcat.jsp.reload_count
-                  metric_type: counter
-
+                type: JspMonitor
+                attribute:
+                  jspCount:
+                    alias: tomcat.jsp.count
+                    metric_type: counter
+                  jspReloadCount:
+                    alias: tomcat.jsp.reload_count
+                    metric_type: counter
 
 1.  Restart the Agent
 
@@ -136,17 +135,16 @@ The `attribute` filter can accept two types of values:
 
       conf:
         - include:
-          attribute:
-            maxThreads:
-              alias: tomcat.threads.max
-              metric_type: gauge
-            currentThreadCount:
-              alias: tomcat.threads.count
-              metric_type: gauge
-            bytesReceived:
-              alias: tomcat.bytes_rcvd
-              metric_type: counter
-
+            attribute:
+              maxThreads:
+                alias: tomcat.threads.max
+                metric_type: gauge
+              currentThreadCount:
+                alias: tomcat.threads.count
+                metric_type: gauge
+              bytesReceived:
+                alias: tomcat.bytes_rcvd
+                metric_type: counter
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
@@ -154,18 +152,17 @@ In that case you can specify an alias for the metric that will become the metric
 
       conf:
         - include:
-          domain: org.apache.cassandra.db
-          attribute:
-            - BloomFilterDiskSpaceUsed
-            - BloomFilterFalsePositives
-            - BloomFilterFalseRatio
-            - Capacity
-            - CompressionRatio
-            - CompletedTasks
-            - ExceptionCount
-            - Hits
-            - RecentHitRate
-
+            domain: org.apache.cassandra.db
+            attribute:
+              - BloomFilterDiskSpaceUsed
+              - BloomFilterFalsePositives
+              - BloomFilterFalseRatio
+              - Capacity
+              - CompressionRatio
+              - CompletedTasks
+              - ExceptionCount
+              - Hits
+              - RecentHitRate
 
 In that case:
 
@@ -182,12 +179,12 @@ Here is another filtering example:
     init_config:
       conf:
         - include:
-          bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
-          attribute:
-            - OneMinuteRate
-            - 75thPercentile
-            - 95thPercentile
-            - 99thPercentile
+            bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
+            attribute:
+              - OneMinuteRate
+              - 75thPercentile
+              - 95thPercentile
+              - 99thPercentile
 
 
 ### Note
@@ -197,19 +194,19 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
     # Datadog Agent > 5.3.0
       conf:
         - include:
-          domain: domain_name
-          bean:
-            - first_bean_name
-            - second_bean_name
+            domain: domain_name
+            bean:
+              - first_bean_name
+              - second_bean_name
 
     # Older Datadog Agent versions
       conf:
         - include:
-          domain: domain_name
-          bean: first_bean_name
+            domain: domain_name
+            bean: first_bean_name
         - include:
-          domain: domain_name
-          bean: second_bean_name
+            domain: domain_name
+            bean: second_bean_name
 
 
 

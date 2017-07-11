@@ -8,7 +8,7 @@ git_integration_title: immunio
 ---
 ## Overview
 
-{{< img src="immunio_dash.png" >}}
+{{< img src="immunio_dash.png" alt="Immunio Dashboard" >}}
 
 Connect IMMUNIO's advanced application security monitoring with Datadog to visualize the impact Attacks have on your web application, and monitor IMMUNIO's automatic protection.
 
@@ -23,9 +23,9 @@ IMMUNIO monitors your applications to detect and defend against all of the follo
 
 1.  Login to [your IMMUNIO account](http://www.immun.io/).
 1.  Navigate to the [integrations setup page](https://dashboard.immun.io/#/settings/integrations).
-    {{< img src="immuniosetup1.png" >}}
+    {{< img src="immuniosetup1.png" alt="Integration Setup Page" >}}
 1.  Click "Add an API Key".
-    {{< img src="immuniosetup2.png" >}}
+    {{< img src="immuniosetup2.png" alt="Add API Key" >}}
 1.  Add your API key.
 
 ## Configuration

@@ -9,7 +9,7 @@ updated_for_agent: 5.8.5
 
 ## Overview
 
-{{< img src="redis.png" >}}
+{{< img src="redis.png" alt="Redis default dashboard" >}}
 
 Track and graph your Redis activity and performance metrics with slice-and-dice at all levels
 from individual column families to entire clusters.

@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/05/27
+last_modified: 2017/02/14
 translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Amazon Linux)

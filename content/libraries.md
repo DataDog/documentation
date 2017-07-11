@@ -2,6 +2,7 @@
 title: Libraries
 kind: documentation
 ---
+
 ### API and DogStatsD Client Libraries
 
 The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
@@ -65,7 +66,7 @@ If you've written a Datadog library and would like to add it to this page, write
    [4]: https://github.com/DataDog/dogstatsd-ruby
    [5]: https://github.com/DataDog/php-datadogstatsd
    [6]: https://github.com/DataDog/dogstatsd-csharp-client
-   [7]: https://github.com/DataDog/java-dogstatsd-client
+   [7]: https://github.com/datadog/java-dogstatsd-client
    [8]: http://www.indeed.com/
    [9]: https://github.com/coursera/metrics-datadog
    [10]: https://www.coursera.org/

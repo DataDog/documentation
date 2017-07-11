@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="integration-jenkins-overview.png" >}}
+{{< img src="integration-jenkins-overview.png" alt="Jenkins Plugin" >}}
 A Jenkins plugin used to forward metrics, events, and service checks to an account at Datadog, automatically.
 
 ***Note: The Jenkins Agent Integration is Deprecated***: The integration in the Datadog agent for Jenkins has been deprecated in favor of the open-source Jenkins plugin. This document refers to installing the Jenkins plugin. For more details about the plugin, refer to the [GitHub repo](https://github.com/DataDog/jenkins-datadog-plugin).

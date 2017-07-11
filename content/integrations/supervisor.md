@@ -8,7 +8,7 @@ git_integration_title: supervisord
 
 ## Overview
 
-{{< img src="supervisorevent.png" >}}
+{{< img src="supervisorevent.png" alt="Supervisor Event" >}}
 
 Enable the supervisord check to monitor the states of your processes running under supervisord.
 

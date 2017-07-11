@@ -1,6 +1,6 @@
 ---
-last_modified: 2015/06/08
-translation_status: translated
+last_modified: 2017/02/14
+translation_status: complete
 language: ja
 title: 8分間で5種類のインテグレーションをインストール
 kind: video
