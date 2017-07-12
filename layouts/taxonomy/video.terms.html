@@ -13,7 +13,7 @@
         <ul>
           {{ $data := .Data }}
           {{ range $key, $value := .Data.Terms }}
-            {{ $link := absLangURL (print "/" $data.Plural "/" ($key | urlize) "/") }}
+            {{ $link := absLangURL (print $data.Plural "/" ($key | urlize) "/") }}
             <li><a href="{{ $link }}">{{ $key }}</a> - ({{ len $value }})</li>
           {{ end }}
         </ul>
