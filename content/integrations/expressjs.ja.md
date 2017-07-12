@@ -2,8 +2,8 @@
 last_modified: 2015/07/05
 translation_status: complete
 language: ja
-title: Datadog-ExpressJS Integration
-integration_title: ExpressJS
+title: "Datadog-ExpressJS Integration"
+integration_title: "ExpressJS"
 kind: integration
 doclevel: basic
 ---

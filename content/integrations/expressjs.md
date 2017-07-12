@@ -1,6 +1,6 @@
 ---
-title: Datadog-ExpressJS Integration
-integration_title: ExpressJS
+title: "Datadog-ExpressJS Integration"
+integration_title: "ExpressJS"
 kind: integration
 doclevel: basic
 git_integration_title: express
