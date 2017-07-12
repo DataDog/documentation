@@ -256,7 +256,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 3. アラートのタイプを選択します。
 
-    ![alert type](/monitor/alert_type.png)
+    ![alert type](/images/monitor/alert_type.png)
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは一般的なアラートであり、正常な範囲か値が事前に分かっている場合に使用します。
 
