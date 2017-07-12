@@ -769,7 +769,7 @@ If your issue continues, please reach out to Support with the help page that
 
     sudo -u dd-agent dd-agent check my_check
 
-問題が解決しない場合、[お問い合わせ](../../help)に記載された方法でサポート要請のご連絡をしていただけると幸いです。
+問題が解決しない場合、[お問い合わせ](/ja/help)に記載された方法でサポート要請のご連絡をしていただけると幸いです。
 
 <!-- <h4>Testing Custom Checks on Windows</h4>
 
