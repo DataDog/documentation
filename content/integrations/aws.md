@@ -18,41 +18,43 @@ Connect to Amazon Web Services (AWS) in order to:
 
 Related integrations include:
 
-| [API Gateway](/integrations/awsapigateway) | create, publish, maintain, and secure APIs |
-| [Autoscaling](/integrations/awsautoscaling) | scale EC2 capacity |
-| [Billing](/integrations/awsbilling) | billing and budgets |
-| [CloudFront](/integrations/awscloudfront) | glocal content delivery network |
-| [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [CloudSearch](/integrations/awscloudsearch) | Access to log files and AWS API calls |
-| [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Block Store (EBS)](/integrations/awsebs) | persistent block level storage volumes |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [Elastic File System (EFS)](/integrations/awsefs) | shared file storage |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [Elastic Map Reduce (EMR)](/integrations/awsemr) | data processing using Hadoop |
-| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Firehose](/integrations/awsfirehose) | capture and load streaming data |
-| [IOT](/integrations/awsiot) | connect IOT devices with cloud services |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Key Management Service (KMS)](/integrations/awskms) | create and control encryption keys |
-| [Lambda](/integrations/awslambda) | serverless computing |
-| [Machine Learning (ML)](/integrations/awsml) | create machine learning models |
-| [OpsWorks](/integrations/awsopsworks) | configuration management |
-| [Polly](/integrations/awspolly) | text-speech service |
-| [Redshift](/integrations/awsredshift) | data warehouse solution |
-| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
-| [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
-| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-| [Simple Workflow Service (SWF)](/integrations/awsswf) | cloud workflow management |
-| [Storage Gateway](/integrations/awsstoragegateway) | hybrid cloud storage |
-| [Web Application Firewall (WAF)](/integrations/awswaf) | protect web applications from common web exploits |
-| [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
+|                                                           |                                                                               |
+| :---------------------------------------------------------|:------------------------------------------------------------------------------|
+| [API Gateway](/integrations/awsapigateway)                | create, publish, maintain, and secure APIs                                    |
+| [Autoscaling](/integrations/awsautoscaling)               | scale EC2 capacity                                                            |
+| [Billing](/integrations/awsbilling)                       | billing and budgets                                                           |
+| [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |
+| [CloudTrail](/integrations/awscloudtrail)                 | Access to log files and AWS API calls                                         |
+| [CloudSearch](/integrations/awscloudsearch)               | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/integrations/awsdynamo)                      | NoSQL Database                                                                |
+| [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
+| [Elastic Beanstalk](/integrations/awsbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Block Store (EBS)](/integrations/awsebs)         | persistent block level storage volumes                                        |
+| [ElastiCache](/integrations/awselasticache)               | in-memory cache in the cloud                                                  |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2)       | resizable compute capacity in the cloud                                       |
+| [Elastic File System (EFS)](/integrations/awsefs)         | shared file storage                                                           |
+| [Elastic Load Balancing (ELB)](/integrations/awselb)      | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [Elastic Map Reduce (EMR)](/integrations/awsemr)          | data processing using Hadoop                                                  |
+| [Elasticsearch Service (ES)](/integrations/awses)         |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Firehose](/integrations/awsfirehose)                     | capture and load streaming data                                               |
+| [IOT](/integrations/awsiot)                               | connect IOT devices with cloud services                                       |
+| [Kinesis](/integrations/awskinesis)                       | service for real-time processing of large, distributed data streams           |
+| [Key Management Service (KMS)](/integrations/awskms)      | create and control encryption keys                                            |
+| [Lambda](/integrations/awslambda)                         | serverless computing                                                          |
+| [Machine Learning (ML)](/integrations/awsml)              | create machine learning models                                                |
+| [OpsWorks](/integrations/awsopsworks)                     | configuration management                                                      |
+| [Polly](/integrations/awspolly)                           | text-speech service                                                           |
+| [Redshift](/integrations/awsredshift)                     | data warehouse solution                                                       |
+| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud                                              |
+| [Route 53](/integrations/awsroute53)                      | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/integrations/awsses)        | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/integrations/awssns)  | alert and notifications                                                       |
+| [Simple Queue Service (SQS)](/integrations/awssqs)        | messaging queue service                                                       |
+| [Simple Storage Service (S3)](/integrations/awss3)        | highly available and scalable cloud storage service                           |
+| [Simple Workflow Service (SWF)](/integrations/awsswf)     | cloud workflow management                                                     |
+| [Storage Gateway](/integrations/awsstoragegateway)        | hybrid cloud storage                                                          |
+| [Web Application Firewall (WAF)](/integrations/awswaf)    | protect web applications from common web exploits                             |
+| [Workspaces](/integrations/awsworkspaces)                 | secure desktop computing service                                              |
 
 
 ## Installation
