@@ -1,9 +1,9 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop
+.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop hugpython/bin/activate
 .DEFAULT_GOAL := help
-PYV=$(shell if [ `which pyenv` ]; then \
+PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
-					echo `pyenv which python3`; \
+					printf `pyenv which python3`; \
 				fi \
 			elif command -v python3 > /dev/null 2>&1; then \
 				printf "python3"; \
@@ -81,10 +81,10 @@ docker-tests: stop ## run the tests through the docker container.
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
-	@if [ ${PYV} == "false" ]; then \
-		printf "\e[93mPython 3 is required.\033[0m\n" && exit 1; fi
-	@test -d ${VIRENV} || ${PYV} -m venv ${VIRENV}
-	@$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt
+	@if [ ${PY3} != "false" ]; then \
+		test -d ${VIRENV} || ${PY3} -m venv ${VIRENV}; \
+		$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt; \
+	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
 	@mkdir -p ${EXEDIR}
@@ -92,14 +92,20 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 
 start: stop source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."
-	@source ${VIRENV}/bin/activate; \
+	@if [ ${PY3} != "false" ]; then \
+		source ${VIRENV}/bin/activate;  \
 		FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		DOGWEB=${DOGWEB} \
 		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		run-site.sh
+		run-site.sh; \
+	else \
+		FETCH_INTEGRATIONS="false" \
+		CREATE_I18N_PLACEHOLDERS="false" \
+		RUN_SERVER=${RUN_SERVER} \
+		run-site.sh; fi
 
 stop:  ## stop the gulp/hugo server.
 	@echo "cleaning up..."
