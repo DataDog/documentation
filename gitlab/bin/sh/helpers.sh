@@ -217,7 +217,11 @@ test_site_links() {
 	# update links for the branch
     domain=${2}
     if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
-        domain="${2}${CI_COMMIT_REF_NAME}/"
+        if [[ "${1}" == "links" ]]; then
+            domain="${2}"
+        else
+            domain="${2}${CI_COMMIT_REF_NAME}/"
+        fi
     fi
 
     check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
