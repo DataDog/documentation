@@ -11,7 +11,6 @@ from optparse import OptionParser
 import os
 import re
 import sys
-from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 import cssutils
@@ -97,16 +96,12 @@ class LinkChecker(object):
         :param link: the link to validate (string)
         :return: validated link (string)
         """
-        # get base domain
-        o = urlparse(self.domain)
-        domain = 'https://' + o.hostname + '/'
-
         if link.startswith('//'):
             link = 'https:' + link
         if link.startswith('/'):
-            link = domain + link.lstrip('/')
+            link = self.domain + link.lstrip('/')
         if 'http' not in link:
-            link = domain + link.lstrip('/')
+            link = self.domain + link.lstrip('/')
         return link
 
     def check_link(self, link):
