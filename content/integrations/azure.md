@@ -27,7 +27,7 @@ sidebar:
       href: "#troubleshooting"
     - header: Integrations
     - text: Back to Overview
-      href: "/integrations/"
+      href: "integrations/"
 ---
 
 ## Overview

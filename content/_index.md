@@ -5,23 +5,23 @@ sidebar:
   nav:
     - header: References
     - text: API
-      href: "/api/"
+      href: "api/"
     - text: Tracing (APM)
-      href: "/tracing/"
+      href: "tracing/"
     - text: Libraries
-      href: "/libraries/"
+      href: "libraries/"
     - text: Graphing
-      href: "/graphing/"
+      href: "graphing/"
     - text: Host Names
-      href: "/hostnames/"
+      href: "hostnames/"
     - text: Integrations
-      href: "/integrations/"
+      href: "integrations/"
     - text: DogStatsD
-      href: "/guides/dogstatsd/"
+      href: "guides/dogstatsd/"
     - text: FAQ
-      href: "/faq/"
+      href: "faq/"
     - text: Billing FAQ
-      href: "/guides/billing/"
+      href: "guides/billing/"
 aliases:
   - /basic_agent_usage/
   - /guides/

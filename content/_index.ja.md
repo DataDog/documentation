@@ -8,21 +8,21 @@ sidebar:
   nav:
     - header: レファレンス
     - text: APIレファレンス
-      href: "/ja/api/"
+      href: "api/"
     - text: APIライブラリー
-      href: "/ja/libraries/"
+      href: "libraries/"
     - text: グラフ表示入門
-      href: "/ja/graphing/"
+      href: "graphing/"
     - text: ホスト名について
-      href: "/ja/hostnames/"
+      href: "hostnames/"
     - text: インテグレーション
-      href: "/ja/integrations/"
+      href: "integrations/"
     - text: DogStatsDの解説
-      href: "/ja/guides/dogstatsd/"
+      href: "guides/dogstatsd/"
     - text: FAQ
-      href: "/ja/faq"
+      href: "faq"
     - text: 課金に関するFAQ
-      href: "/ja/guides/billing/"
+      href: "guides/billing/"
 ---
 
 <!-- ### 1. Get the Datadog [Agent][1] running!

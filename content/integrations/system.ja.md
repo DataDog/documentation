@@ -10,9 +10,9 @@ sidebar:
   nav:
     - header: Integrations
     - text: Directory check
-      href: "/ja/integrations/directory/"
+      href: "integrations/directory/"
     - text: Process check
-      href: "/ja/integrations/process/"
+      href: "integrations/process/"
 ---
 
 <!-- Get metrics from your system directories and processes. Check links below to see the configuration instructions:

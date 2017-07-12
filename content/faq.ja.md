@@ -8,27 +8,27 @@ sidebar:
  nav:
   - header: FAQ トピック
   - text: Agentについて
-    href: "/ja/faq/#agent"
+    href: "faq/#agent"
   - text: アラートについて
-    href: "/ja/faq/#alerts"
+    href: "faq/#alerts"
   - text: APIについて
-    href: "/ja/faq/#api"
+    href: "faq/#api"
   - text: アーキテクチャについて
-    href: "/ja/faq/#architecture"
+    href: "faq/#architecture"
   - text: AWSについて
-    href: "/ja/faq/#aws"
+    href: "faq/#aws"
   - text: 請求について
-    href: "/ja/faq/#billing"
+    href: "faq/#billing"
   - text: グラフ表示の設定について
-    href: "/ja/faq/#graph"
+    href: "faq/#graph"
   - text: Integrationについて
-    href: "/ja/faq/#integrations"
+    href: "faq/#integrations"
   - text: メトリクスについて
-    href: "/ja/faq/#metrics"
+    href: "faq/#metrics"
   - text: イベントについて
-    href: "/ja/faq/#events"
+    href: "faq/#events"
   - text: その他
-    href: "/ja/faq/#other"
+    href: "faq/#other"
 ---
 <!-- Old table of contents
 <ol class="outline">

@@ -7,38 +7,38 @@ sidebar:
   nav:
     - header: Guides
     - text: Getting Started with the Agent
-      href: "/ja/guides/basic_agent_usage/"
+      href: "guides/basic_agent_usage/"
     - text: Datadog Overview
-      href: "/ja/overview/"
+      href: "overview/"
     - text: Sending App Metrics
-      href: "/ja/guides/metrics/"
+      href: "guides/metrics/"
     - text: Log Parsing in the Agent
-      href: "/ja/guides/logs/"
+      href: "guides/logs/"
     - text: Writing an Agent Check
-      href: "/ja/guides/agent_checks/"
+      href: "guides/agent_checks/"
     - text: Setting up Service Checks
-      href: "/ja/guides/services_checks/"
+      href: "guides/services_checks/"
     - text: Deploying the Agent with Chef
-      href: "/ja/guides/chef/"
+      href: "guides/chef/"
     - text: Guide to Alerting
-      href: "/ja/guides/alerting/"
+      href: "guides/alerting/"
     - text: Single Sign On With SAML
-      href: "/ja/guides/saml/"
+      href: "guides/saml/"
     - text: Billing FAQ
-      href: "/ja/guides/billing/"
+      href: "guides/billing/"
     - header: References
     - text: API
-      href: "/ja/api/"
+      href: "api/"
     - text: Libraries
-      href: "/ja/libraries/"
+      href: "libraries/"
     - text: Graphing
-      href: "/ja/graphing/"
+      href: "graphing/"
     - text: Host Names
-      href: "/ja/hostnames/"
+      href: "hostnames/"
     - text: Integrations
-      href: "/ja/integrations/"
+      href: "integrations/"
     - text: DogStatsD
-      href: "/ja/guides/dogstatsd/"
+      href: "guides/dogstatsd/"
 ---
 
 Being able to see all of your metrics from across your infrastructure is key within Datadog.
