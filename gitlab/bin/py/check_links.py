@@ -123,20 +123,20 @@ class LinkChecker(object):
                 response = requests.get(link.strip(), allow_redirects=True, headers=headers, timeout=self.timeout)
                 if int(response.status_code) not in [200, 206, 405, 422, 999]:
                     if re.search(self.internal_domain_regex, link) or re.search(LinkChecker.STATIC_REG, link):
-                        print('{0}ERROR: {1} timed out{2}'.format(Colors.ERROR, response.status_code, repr(link), Colors.ENDC))
+                        print('{0}ERROR: {1} {2}'.format(Colors.ERROR, response.status_code, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'error')
                     else:
-                        print('{0}WARN: {1} timed out{2}'.format(Colors.WARNING, response.status_code, repr(link), Colors.ENDC))
+                        print('{0}WARN: {1} {2}'.format(Colors.WARNING, response.status_code, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'warn')
             except requests.RequestException as e:
                 if 'timed out' in e.__str__():
                     print('{0}WARN: {1} timed out{2}'.format(Colors.WARNING, repr(link), Colors.ENDC))
                 else:
                     if re.search(self.internal_domain_regex, link) or re.search(LinkChecker.STATIC_REG, link):
-                        print('{0}ERROR: {1} timed out{2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
+                        print('{0}ERROR: {1} {2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'error')
                     else:
-                        print('{0}WARN: {1} timed out{2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
+                        print('{0}WARN: {1} {2}'.format(Colors.ERROR, 500, repr(link), Colors.ENDC))
                         return self.register_bad_link(link, 'warn')
 
     def register_bad_link(self, bad_link, l_type):
