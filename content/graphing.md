@@ -21,7 +21,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-![Graphing Edit Tab](/static/images/references-graphing-edit-window.png)
+![Graphing Edit Tab](/static/images/references-graphing-edit-window-with-y.png)
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 
@@ -130,16 +130,20 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 </div>
 
-### 6) Overlay events for additional context
+### 6) Set Y-axis scale
+
+By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not. 
+
+### 7) Overlay events for additional context
 
 You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
 
 
-### 7) Create a title
+### 8) Create a title
 
 If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
-### 8) Save
+### 9) Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
