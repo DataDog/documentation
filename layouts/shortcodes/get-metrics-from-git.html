@@ -14,58 +14,62 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ $data := index $.Page.Site.Data.integrations $integration }}
+{{ if $.Page.Site.Data.integrations }}
 
-{{ if and ($integration) ($data) }} {{/* An integration is set and datafile exists */}}
+  {{ $data := index $.Page.Site.Data.integrations $integration }}
 
-  {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
+  {{ if and ($integration) ($data) }} {{/* An integration is set and datafile exists */}}
 
-      {{ $name_space := (index $params 1) }}
+    {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
-      {{ $data_metrics := (index $data $integration) }}
+        {{ $name_space := (index $params 1) }}
 
-      {{ $metric_namespaces := (split $name_space " ") }}
+        {{ $data_metrics := (index $data $integration) }}
 
-      <table class="table">
-        <tbody>
+        {{ $metric_namespaces := (split $name_space " ") }}
 
-          {{ range $i, $m := $metric_namespaces }}
+        <table class="table">
+          <tbody>
 
-            {{ range $v := $data_metrics }}
+            {{ range $i, $m := $metric_namespaces }}
 
-              {{ if (hasPrefix $v.metric_name $m) }}
+              {{ range $v := $data_metrics }}
 
-                <tr>
-                  <td>
-                  <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-                  <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-                  </td>
-                </tr>
+                {{ if (hasPrefix $v.metric_name $m) }}
+
+                  <tr>
+                    <td>
+                    <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+                    <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+                    </td>
+                  </tr>
+
+                {{ end }}
 
               {{ end }}
 
             {{ end }}
+          </tbody>
+        </table>
 
+    {{ else }} {{/* No param set load default integration from front matter */}}
+
+      {{ if $integration }}
+
+        <table class="table">
+          <tbody>
+          {{ range $k, $v := (index $data $integration) }}
+            <tr>
+              <td>
+              <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+              <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+              </td>
+            </tr>
           {{ end }}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      {{ end }}
 
-  {{ else }} {{/* No param set load default integration from front matter */}}
-
-    {{ if $integration }}
-
-      <table class="table">
-        <tbody>
-        {{ range $k, $v := (index $data $integration) }}
-          <tr>
-            <td>
-            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-            <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
-            </td>
-          </tr>
-        {{ end }}
-        </tbody>
-      </table>
     {{ end }}
 
   {{ end }}
