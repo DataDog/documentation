@@ -2,13 +2,13 @@
 .PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop
 .DEFAULT_GOAL := help
 PYV=$(shell if [ `which pyenv` ]; then \
-		if [ `pyenv which python3` ]; then \
-			echo `pyenv which python3`; \
-		fi \
-	elif command -v python3 > /dev/null 2>&1; then \
-		printf "python3"; \
-	else printf "false"; \
-	fi)
+				if [ `pyenv which python3` ]; then \
+					echo `pyenv which python3`; \
+				fi \
+			elif command -v python3 > /dev/null 2>&1; then \
+				printf "python3"; \
+			else printf "false"; \
+			fi)
 
 # config
 CONFIG_FILE := Makefile.config
