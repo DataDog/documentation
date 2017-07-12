@@ -75,52 +75,52 @@ languages:
       basic_agent:
         - identifier: amazonlinux
           name: "Amazon Linux"
-          url: /guides/basic_agent_usage/amazonlinux/
+          url: guides/basic_agent_usage/amazonlinux/
           weight: 10
 
         - identifier: centos
           name: "CentOs"
-          url: /guides/basic_agent_usage/centos/
+          url: guides/basic_agent_usage/centos/
           weight: 20
 
         - identifier: docker
           name: "CoreOS/Docker"
-          url: /guides/basic_agent_usage/docker/
+          url: guides/basic_agent_usage/docker/
           weight: 30
 
         - identifier: deb
           name: "Debian"
-          url: /guides/basic_agent_usage/deb/
+          url: guides/basic_agent_usage/deb/
           weight: 40
 
         - identifier: fedora
           name: "Fedora"
-          url: /guides/basic_agent_usage/fedora/
+          url: guides/basic_agent_usage/fedora/
           weight: 50
 
         - identifier: osx
           name: "Mac OS X"
-          url: /guides/basic_agent_usage/osx/
+          url: guides/basic_agent_usage/osx/
           weight: 60
 
         - identifier: redhat
           name: "Red Hat"
-          url: /guides/basic_agent_usage/redhat/
+          url: guides/basic_agent_usage/redhat/
           weight: 70
 
         - identifier: ubuntu
           name: "Ubuntu"
-          url: /guides/basic_agent_usage/ubuntu/
+          url: guides/basic_agent_usage/ubuntu/
           weight: 80
 
         - identifier: windows
           name: "Windows"
-          url: /guides/basic_agent_usage/windows/
+          url: guides/basic_agent_usage/windows/
           weight: 90
 
         - identifier: source
           name: "From Source"
-          url: /guides/basic_agent_usage/source/
+          url: guides/basic_agent_usage/source/
           weight: 100
       tracingnav:
         - identifier: customnav_tracingnav_tracing
@@ -128,15 +128,15 @@ languages:
           weight: 10
 
         - identifier: customnav_tracingnav_install
-          url: /tracing/
+          url: tracing/
           weight: 20
 
         - identifier: customnav_tracingnav_terminology
-          url: /tracing/terminology/
+          url: tracing/terminology/
           weight: 30
 
         - identifier: customnav_tracingnav_faq
-          url: /tracing/faq/
+          url: tracing/faq/
           weight: 40
 
         - identifier: customnav_tracingnav_langs
@@ -144,19 +144,19 @@ languages:
           weight: 50
 
         - identifier: customnav_tracingnav_go
-          url: /tracing/go/
+          url: tracing/go/
           weight: 60
 
         - identifier: customnav_tracingnav_python
-          url: /tracing/python/
+          url: tracing/python/
           weight: 70
 
         - identifier: customnav_tracingnav_ruby
-          url: /tracing/ruby/
+          url: tracing/ruby/
           weight: 80
 
         - identifier: customnav_tracingnav_api
-          url: /tracing/api/
+          url: tracing/api/
           weight: 90
 
   ja:
