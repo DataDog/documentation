@@ -2,6 +2,7 @@ title: "Docs"
 baseURL: "http://localhost:1313/"
 metadataformat: "yaml"
 
+canonifyURLs: true
 pygmentsuseclasses: true
 
 # taxonomies
