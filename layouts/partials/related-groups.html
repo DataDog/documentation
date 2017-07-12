@@ -2,6 +2,6 @@
 {{ $group := .terms }}
 {{ $plural := .taxonomy.Plural }}
 {{ range $i, $el := $group }}
-  {{ $link := relLangURL (print "/" $plural "/" ($el | urlize) "/") }}
+  {{ $link := absLangURL (print "/" $plural "/" ($el | urlize) "/") }}
   <a href="{{ $link }}">{{ $el | lower }}</a>{{ if lt (add $i 1) ($group | len)}} | {{ end }}
 {{ end }}
