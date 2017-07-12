@@ -15,7 +15,7 @@
           <a href="{{ .Permalink }}"><font size="5">{{ .Title }}</font></a>
           <p>{{ .Params.summary }}</p>
           <br>
-          {{ partial "related-groups" (dict "taxonomy" $data "terms" .Params.examples) }}
+          {{ partial "related-groups" (dict "taxonomy" $data.Plural "terms" .Params.examples) }}
           <br><br>
           {{ end }}
         </div>

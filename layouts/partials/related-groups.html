@@ -1,6 +1,7 @@
-{{ i18n (print .taxonomy.Singular "_categories") }}<br>
+{{ i18n (print (.taxonomy | singularize) "_categories") }}
 {{ $group := .terms }}
-{{ $plural := .taxonomy.Plural }}
+{{ $plural := .taxonomy }}
+
 {{ range $i, $el := $group }}
   {{ $link := absLangURL (print "/" $plural "/" ($el | urlize) "/") }}
   <a href="{{ $link }}">{{ $el | lower }}</a>{{ if lt (add $i 1) ($group | len)}} | {{ end }}

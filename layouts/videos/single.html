@@ -10,11 +10,7 @@
       <h1 id="pagetitle">{{ .Title | humanize }}</h1>
       <section id="main">
         <div>
-          <small>tags:
-            {{ $videos := sort .Params.videos }}
-            {{ range $i, $el := $videos }}
-              <a href="/videos/{{ $el | urlize }}/">{{ $el | lower }}</a>{{ if lt (add $i 1) ($videos | len)}} | {{ end }}
-            {{ end }}</small>
+          <small>tags: {{ partial "related-groups" (dict "taxonomy" .Section "terms" (sort .Params.videos)) }}</small>
           <br><br>
           {{ partial "video" .Params.wistiaid }}
 
@@ -22,7 +18,7 @@
         </div>
         <p>{{ .Content }}</p>
         {{ $link := .Permalink }}
-        <p><a href="">Return to All Video Groups.</a></p>
+        <p><a href="{{ "videos/" | absLangURL }}">Return to All Video Groups.</a></p>
       </section>
 
     </div>

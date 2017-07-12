@@ -16,7 +16,7 @@
               <p>{{ .Params.summary }}</p>
               {{ partial "video" .Params.wistiaid }}
               <br>
-              {{ partial "related-groups" (dict "taxonomy" $data "terms" .Params.videos) }}
+              {{ partial "related-groups" (dict "taxonomy" $data.Plural "terms" .Params.videos) }}
               <br><br>
           {{ end }}
         </div>
