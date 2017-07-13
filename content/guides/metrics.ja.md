@@ -63,7 +63,7 @@ contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
-<%= code_tabs("setup", tab_languages) %>
+{{< code-tabs section="setup" >}}
 
 <div class="tab-content">
 
@@ -187,7 +187,7 @@ Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
-<%= code_tabs("counters-page-views", tab_languages) %>
+{{< code-tabs section="counters-page-views" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-page-views-python">
@@ -225,7 +225,7 @@ of bytes processed by a file uploading service. We'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
-<%= code_tabs("counters-uploaded", tab_languages) %>
+{{< code-tabs section="counters-uploaded" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
@@ -339,7 +339,7 @@ Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
-<%= code_tabs("gauges", tab_languages) %>
+{{< code-tabs section="gauges" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="gauges-python">
@@ -403,7 +403,7 @@ Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
 we can sample each query time with the metric `database.query.time`.
 
-<%= code_tabs("histograms", tab_languages) %>
+{{< code-tabs section="histograms" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
@@ -542,7 +542,7 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitor to your site, sets are a great way to do
 that.
 
-<%= code_tabs("sets", tab_languages) %>
+{{< code-tabs section="sets" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
@@ -603,7 +603,7 @@ aggregated and compared on the front end. Suppose we wanted to measure the
 performance of two algorithms in the real world. We could sample one metric
 `algorithm.run_time` and specify each version with a tag:
 
-<%= code_tabs("tags", tab_languages) %>
+{{< code-tabs section="tags" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">

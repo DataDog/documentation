@@ -14,6 +14,8 @@ Starting and Stopping the Agent
 
 {{ end }}
 
+{{ $sudo := $.Scratch.Get "sudo" }}
+
 <!-- ### Starting and Stopping the Agent -->
 
 ### Datadog Agent の起動と停止
@@ -37,17 +39,17 @@ Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
 <!-- To manually start the Agent: -->
 手動で Datadog Agent を起動する:
 
-    <%= $sudo %><%= @item[:servicename] %> start
+    {{ $sudo }}{{.Page.Params.servicename }} start
 
 <!-- To stop the Agent: -->
 Datadog Agentを停止する:
 
-    <%= $sudo %><%= @item[:servicename] %> stop
+    {{ $sudo }}{{.Page.Params.servicename }} stop
 
 <!-- To restart the Agent and to reload the configuration files: -->
 Datadog Agentを再起動して、設定ファイルを再度読み込ませる:
 
-    <%= $sudo %><%= @item[:servicename] %> restart
+    {{ $sudo }}{{.Page.Params.servicename }} restart
 {{ end }}
 
 <!--
@@ -80,17 +82,17 @@ Datadog Agent のステータスに関する情報を収集する:
 <!-- To check if the Agent is running: *(since 3.8.0)* -->
 Datadog Agent が起動しているかを確認する: *(since 3.8.0)*
 
-    <%= $sudo %><%= @item[:servicename] %> status
+    {{ $sudo }}{{.Page.Params.servicename }} status
 
 <!-- To receive information about the Agent's state: -->
 Datadog Agent のステータスに関する情報を収集する:
 
-    <%= $sudo %><%= @item[:serviceinfoname] %>
+    {{ $sudo }}{{.Page.Params.serviceinfoname }}
 
 <!-- Tracebacks for errors can be retrieved by setting the **-v** flag: *(since 3.8.0)* -->
 エラーをトレースするために`-v`フラグをinfoコマンドに追記し実行する: *(ver. 3.8.0 ~)*
 
-    <%= $sudo %><%= @item[:serviceinfoname] %> -v
+    {{ $sudo }}{{.Page.Params.serviceinfoname }} -v
 
 {{ end }}
 <!--
@@ -107,9 +109,9 @@ Configuration
 
 Configuration files for integrations are located in ````<%= @item[:configdirectory] %>conf.d/```` -->
 
-Datadog Agent の設定ファイルの保存先 ````<%= @item[:configdirectory] %>datadog.conf````
+Datadog Agent の設定ファイルの保存先 ````{{.Page.Params.configdirectory}}datadog.conf````
 
-インストールしたIntegrations の設定ファイルの保存先 ````<%= @item[:configdirectory] %>conf.d/````
+インストールしたIntegrations の設定ファイルの保存先 ````{{.Page.Params.configdirectory}}conf.d/````
 
 <!--
 ======================================================
@@ -140,10 +142,10 @@ Datadog Agentに内包されている機能の個別ログは、以下のファ�
 <!-- Logs for the subsystems are in the following files: -->
 Datadog Agentに内包されている機能の個別ログは、以下のファイルに記録されています:
 
-* ````<%= @item[:supervisorlog] %>```` *(since 3.8.0)*
-* ````<%= @item[:logdirectory] %>collector.log````
-* ````<%= @item[:logdirectory] %>dogstatsd.log````
-* ````<%= @item[:logdirectory] %>forwarder.log````
+* ````{{.Page.Params.supervisorlog}}```` *(since 3.8.0)*
+* ````{{.Page.Params.logdirectory}}collector.log````
+* ````{{.Page.Params.logdirectory}}dogstatsd.log````
+* ````{{.Page.Params.logdirectory}}forwarder.log````
 
 {{ end }}
 <br/>

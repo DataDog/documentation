@@ -142,7 +142,7 @@ EOF
 
 or with a context manager:
 
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import statsd
 
 def render_page():
@@ -169,7 +169,7 @@ Under the hood, DogStatsD actually treats timers as histograms; Whether you send
 
 Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
 
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import statsd
 
 ...
@@ -180,14 +180,13 @@ statsd.histogram('mywebsite.page_render.time', duration)
 
 def render_page():
   # Render the page...
-EOF
-%>
+{{< /highlight >}}
 
 This produces the same five metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
 
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
-<%=python <<EOF
+{{< highlight python >}}
 from datadog import statsd
 
 def handle_file(file, file_size):
@@ -195,8 +194,7 @@ def handle_file(file, file_size):
 
   statsd.histogram('mywebsite.user_uploads.file_size', file_size)
   return
-EOF
-%>
+{{< /highlight >}}
 
 Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
