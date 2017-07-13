@@ -8,7 +8,7 @@ variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
-  LIVE_DOMAIN: "https://docs-staging.datadoghq.com/"
+  LIVE_DOMAIN: "https://docs.datadoghq.com/"
 
 # ================== copy scripts =============== #
 before_script:
