@@ -38,7 +38,7 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 ### Create a Datadog integration in OpsGenie
 
-1. Log in to your OpsGenie account and go to the [OpsGenie Integrations](https://www.opsgenie.com/integration/index) page.
+1. Log in to your OpsGenie account and go to the [OpsGenie Integrations](https://www.opsgenie.com/integrations) page.
 2. As seen below, filter for Datadog and click on the tile.
         {{< img src="opsgenie-int-index.png" >}}
 3. Enter your Datadog API key from the [Integrations > APIs page](https://app.datadoghq.com/account/settings#api) in the dedicated field. The key looks like this:

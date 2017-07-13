@@ -63,7 +63,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 {{< img src="og_closed_dd_updated.png" >}}
 
 
-[1]: https://www.opsgenie.com/integration/index
+[1]: https://www.opsgenie.com/integrations
 [2]: /images/opsgenie-int-index.png
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: /images/where-is-dd-key.png
