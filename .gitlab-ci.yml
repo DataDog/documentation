@@ -92,6 +92,7 @@ build_live:
     CONFIG: ${LIVE_CONFIG}
     BUCKET: ${LIVE_BUCKET}
     URL: ${LIVE_DOMAIN}
+    MESSAGE: ":fiestaparrot: This is only a test :fiestaparrot:\nPost deploy tests running..."
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
