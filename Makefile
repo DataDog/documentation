@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop docker docker-tests help start stop hugpython/bin/activate
+.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -38,7 +38,7 @@ clean-build:  ## remove build artifacts.
 
 clean-docker:  ## remove image.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
-	@if [[ `docker images | grep mstbbs/docker-dd-docs` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs; fi
+	@if [[ `docker images | grep mstbbs/docker-dd-docs:latest` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:latest; fi
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
@@ -51,9 +51,6 @@ clean-node:  ## remove node_modules.
 
 clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
-
-docker: stop  ## build docker image.
-	@docker build -t dd-docs gitlab/
 
 docker-start: stop  ## start container and run default commands to start hugo site.
 	@docker run -ti --name "docs" -v `pwd`:/src:cached \
@@ -80,10 +77,10 @@ docker-tests: stop ## run the tests through the docker container.
 
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
-hugpython/bin/activate: gitlab/etc/requirements3.txt  ## start python virtual environment.
+hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual environment.
 	@if [ ${PY3} != "false" ]; then \
 		test -d ${VIRENV} || ${PY3} -m venv ${VIRENV}; \
-		$(VIRENV)/bin/pip install -r gitlab/etc/requirements3.txt; \
+		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.

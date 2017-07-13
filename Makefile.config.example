@@ -9,8 +9,8 @@ RUN_GULP := true
 #DOGWEB := "LOCAL_PATH_TO_DOGWEB"
 #INTEGRATIONS_CORE := "LOCAL_PATH_TO_INTEGRATIONS_CORE"
 
-LOCALBIN := gitlab/bin
-LOCALETC := gitlab/etc
+LOCALBIN := local/bin
+LOCALETC := local/etc
 EXEDIR := /usr/local/bin
 EXE_LIST := `find gitlab/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
 VIRENV=hugpython

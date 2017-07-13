@@ -6,7 +6,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.2"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.3"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -14,8 +14,6 @@ variables:
 
 # ================== copy scripts =============== #
 before_script:
-  - find gitlab/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
-  - find gitlab/etc/ -type f -exec cp {} /etc \;  # load configs
   - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
 
 # ================== templates ================== #

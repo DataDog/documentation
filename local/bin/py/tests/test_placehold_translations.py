@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from gitlab.bin.py.placehold_translations import get_languages, create_glob, create_placeholder_file, diff_globs
+from local.bin.py.placehold_translations import get_languages, create_glob, create_placeholder_file, diff_globs
 
 
 class TestPlaceholdTranslations(unittest.TestCase):
