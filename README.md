@@ -85,6 +85,7 @@ The top of each integration file should include the following frontmatter:
     title: Datadog-<integration name> Integration
     integration_title: <integration name>
     kind: integration
+    git_integration_title: <integration name>
     doclevel: basic
     ---
 
