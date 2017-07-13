@@ -102,7 +102,6 @@ build_live:
     - minify_html
     - push_site_to_s3
     - notify_slack "${MESSAGE}"
-    - remove_static_from_repo
     - create_artifact
   only:
     - master
