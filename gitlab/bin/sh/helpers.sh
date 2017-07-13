@@ -298,6 +298,7 @@ fail_step() {
 }
 
 
+
 start_timer() {
     export process_start_time=$(date +%s)
 }
@@ -306,6 +307,30 @@ start_timer() {
 stop_timer() {
     export process_stop_time=$(($(date +%s) - ${process_start_time}))
 }
+
+
+post_dd_event() {
+    # $1: title
+    # $2: text
+    # $3: success / failure
+    dd_post_api.py "event" \
+        --title "${1}" \
+        --description ${2} \
+        --result "${3}"
+}
+
+post_dd_metric() {
+    # $1: metric name
+    # $2: points
+    # $3: step_name
+    # $4: success / failure
+    dd_post_api.py "metric" \
+        --metric "${1}" \
+        --points ${2} \
+        --step_name "${3}" \
+        --step_status "${4}"
+}
+
 
 
 notify_slack() {
