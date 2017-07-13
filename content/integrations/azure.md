@@ -266,6 +266,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ## Metrics
 
+{{< get-metrics-from-git >}}
 
 View the specific metrics we collect for each Azure service integration:
 

@@ -238,7 +238,7 @@ JMX Checks have a default configuration that will collect 11 metrics from your J
 
 ## Metrics
 
-
+{{< get-metrics-from-git >}}
 
 
 ## Troubleshooting
@@ -268,24 +268,27 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
   2. If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    init_config:
-      custom_jar_paths:
-        - /path/to/jboss-cli-client.jar
-
+init_config:
+  custom_jar_paths:
+    - /path/to/jboss-cli-client.jar
+```
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    # The jmx_url may be different depending on the version of JBoss/WildFly you're using
-    # and the way you've set up JMX on your server
-    # Please refer to the relevant documentation of JBoss/WildFly for more information
-    instances:
-      - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
-        name: jboss-application  # Mandatory, but can be set to any value,
-                                 # will be used to tag the metrics pulled from that instance
+# The jmx_url may be different depending on the version of JBoss/WildFly you're using
+# and the way you've set up JMX on your server
+# Please refer to the relevant documentation of JBoss/WildFly for more information
+instances:
+  - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
+    name: jboss-application  # Mandatory, but can be set to any value,
+                             # will be used to tag the metrics pulled from that instance
+```
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
@@ -300,22 +303,26 @@ If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomc
   2. If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    init_config:
-      custom_jar_paths:
-        - /path/to/catalina-jmx-remote.jar
+init_config:
+  custom_jar_paths:
+    - /path/to/catalina-jmx-remote.jar
+```
 
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    # The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
-    instances:
-      - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
-        name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
-                                  # will be used to tag the metrics pulled from that instance
+# The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
+instances:
+  - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
+    name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
+                              # will be used to tag the metrics pulled from that instance
+```
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
