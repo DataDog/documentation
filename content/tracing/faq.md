@@ -47,6 +47,8 @@ If tracing is working properly, you should see flushed payload messages similar 
     2017-02-07 23:12:10 INFO (endpoint.go:140) - flushed payload to the API, time:185.409088ms, size:1437
     2017-02-07 23:12:20 INFO (endpoint.go:140) - flushed payload to the API, time:17.781515ms, size:753
 
+To disable APM, set `apm_enabled: false` and restart `datadog-agent`.
+
 #### Why am I getting `[Errno 111] Connection refused` errors in my application logs?
 
 Either the Trace Agent is not running, or your application's tracer client isn't configured correctly. By default, the tracer client libraries submit to localhost on port 8126. If this is not where your Trace Agent is listening—perhaps it's listening in some Docker container adjacent to your application container—point your tracer client to where it's running, e.g. `tracer.configure(hostname="172.17.0.1")`.
