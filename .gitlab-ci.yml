@@ -1,7 +1,5 @@
 stages:
   - build
-  - pre-deploy
-  - deploy
   - post-deploy
   - cleanup
 
@@ -101,22 +99,10 @@ build_live:
     - sync_integration_metrics
     - build_hugo_site
     - minify_html
-    - remove_static_from_repo
-    - create_artifact
-  only:
-    - docs-hugo
-
-deploy_live:
-  <<: *base_template
-  stage: deploy
-  environment: "live"
-  variables:
-    BUCKET: ${LIVE_BUCKET}
-    MESSAGE: ":fiestaparrot: New production build is live! :fiestaparrot:\nPost deploy tests running..."
-  script:
-    - pull_artifact_from_s3
     - push_site_to_s3
     - notify_slack "${MESSAGE}"
+    - remove_static_from_repo
+    - create_artifact
   only:
     - docs-hugo
 
