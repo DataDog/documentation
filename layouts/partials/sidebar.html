@@ -73,12 +73,27 @@
     {{ if eq .Params.Kind "integration" }}
       <li class="nav-header">{{ i18n "integrations_other_integrations" }}</li>
       <li class="integration"><a href="/integrations/">{{ i18n "integrations_back_to_overview" }}</a></li>
-      {{ range $integrations }}
-          <li class="integration"><a href="{{.Permalink}}">
-            {{ if eq $lastUrlElement .File.TranslationBaseName }}&gt;{{ end }}
-            {{ .Params.integration_title }}
-          </a></li>
+
+      {{ $lower := sort $integrations "Params.integration_title" "asc" }}
+      {{ $.Scratch.Set "lower_titles" (slice) }}
+      {{ range $lower }}
+        {{ $.Scratch.Add "lower_titles" (lower .Params.integration_title) }}
       {{ end }}
+
+      {{ range sort ($.Scratch.Get "lower_titles") }}
+        {{ $lower_int := . }}
+        {{ range $int := $integrations }}
+          {{ if eq $lower_int (lower $int.Params.integration_title) }}
+            <li class="integration">
+              <a href="{{.Permalink}}">
+                {{ if eq $lastUrlElement .File.TranslationBaseName }}&gt;{{ end }}
+                {{ .Params.integration_title }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
     {{ else }}
       {{ if $guides }}
         <li class="nav-header">{{ i18n "menu_guides" }}</li>
