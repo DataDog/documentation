@@ -26,51 +26,51 @@ languages:
       main_references:
         - identifier: menu_references_api
           name: "API"
-          url: "/api/"
+          url: "api/"
           weight: 10
         - identifier: menu_references_tracing
           name: "Tracing"
-          url: "/tracing/"
+          url: "tracing/"
           weight: 20
         - identifier: menu_references_libraries
           name: ""
-          url: "/libraries/"
+          url: "libraries/"
           weight: 30
         - identifier: menu_references_monitoring
           name: ""
-          url: "/monitoring/"
+          url: "monitoring/"
           weight: 40
         - identifier: menu_references_graphing
           name: ""
-          url: "/graphing/"
+          url: "graphing/"
           weight: 50
         - identifier: menu_references_host_names
           name: ""
-          url: "/hostnames/"
+          url: "hostnames/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
-          url: "/integrations/"
+          url: "integrations/"
           weight: 70
         - identifier: menu_references_dogstatsd
           name: ""
-          url: "/guides/dogstatsd/"
+          url: "guides/dogstatsd/"
           weight: 80
         - identifier: menu_references_examples
           name: ""
-          url: "/examples/"
+          url: "examples/"
           weight: 90
         - identifier: menu_references_videos
           name: ""
-          url: "/videos/"
+          url: "videos/"
           weight: 100
         - identifier: menu_references_billing
           name: ""
-          url: "/guides/billing/"
+          url: "guides/billing/"
           weight: 110
         - identifier: menu_references_faq
           name: ""
-          url: "/faq/"
+          url: "faq/"
           weight: 120
       basic_agent:
         - identifier: amazonlinux
@@ -124,7 +124,7 @@ languages:
           weight: 100
       tracingnav:
         - identifier: customnav_tracingnav_tracing
-          url: #
+          url: "#"
           weight: 10
 
         - identifier: customnav_tracingnav_install
@@ -167,51 +167,51 @@ languages:
       main_references:
         - identifier: menu_references_api
           name: "API"
-          url: "/api/"
+          url: "api/"
           weight: 10
         - identifier: menu_references_tracing
           name: "Tracing"
-          url: "/tracing/"
+          url: "tracing/"
           weight: 20
         - identifier: menu_references_libraries
           name: ""
-          url: "/libraries/"
+          url: "libraries/"
           weight: 30
         - identifier: menu_references_monitoring
           name: ""
-          url: "/monitoring/"
+          url: "monitoring/"
           weight: 40
         - identifier: menu_references_graphing
           name: ""
-          url: "/graphing/"
+          url: "graphing/"
           weight: 50
         - identifier: menu_references_host_names
           name: ""
-          url: "/hostnames/"
+          url: "hostnames/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
-          url: "/integrations/"
+          url: "integrations/"
           weight: 70
         - identifier: menu_references_dogstatsd
           name: ""
-          url: "/guides/dogstatsd/"
+          url: "guides/dogstatsd/"
           weight: 80
         - identifier: menu_references_examples
           name: ""
-          url: "/examples/"
+          url: "examples/"
           weight: 90
         - identifier: menu_references_videos
           name: ""
-          url: "/videos/"
+          url: "videos/"
           weight: 100
         - identifier: menu_references_billing
           name: ""
-          url: "/guides/billing/"
+          url: "guides/billing/"
           weight: 110
         - identifier: menu_references_faq
           name: ""
-          url: "/faq/"
+          url: "faq/"
           weight: 120
 
 params:
