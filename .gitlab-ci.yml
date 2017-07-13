@@ -143,17 +143,17 @@ test_live_static:
   only:
     - master
 
-rollback_live:
-  <<: *base_template
-  stage: cleanup
-  environment: "live"
-  when: on_failure
-  variables:
-    BUCKET: ${LIVE_BUCKET}
-  script:
-    - rollback_env
-  only:
-    - master
+#rollback_live:
+#  <<: *base_template
+#  stage: cleanup
+#  environment: "live"
+#  when: on_failure
+#  variables:
+#    BUCKET: ${LIVE_BUCKET}
+#  script:
+#    - rollback_env
+#  only:
+#    - master
 
 tag_successful_live_pipeline:
   <<: *base_template
