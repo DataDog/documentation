@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Desk Integration
 integration_title: Desk
 kind: integration
+git_integration_title: desk
 doclevel:
 ---
 

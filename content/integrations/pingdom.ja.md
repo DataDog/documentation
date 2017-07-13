@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Pingdom Integration
 integration_title: Pingdom
+git_integration_title: pingdom
 kind: integration
 doclevel:
 ---

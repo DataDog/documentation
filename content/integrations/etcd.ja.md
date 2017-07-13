@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-etcd Integration
 integration_title: etcd
+git_integration_title: etcd
 kind: integration
 doclevel:
 ---

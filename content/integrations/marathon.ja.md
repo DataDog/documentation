@@ -4,6 +4,7 @@ translation_status: original
 language: ja
 title: Datadog-Marathon Integration
 integration_title: Marathon
+git_integration_title: marathon
 kind: integration
 doclevel: basic
 ---

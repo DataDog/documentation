@@ -4,6 +4,7 @@ translation_status: translated
 language: ja
 title: Datadog-AWS EC2 Integration
 integration_title: AWS EC2
+git_integration_title: amazon_ec2
 kind: integration
 doclevel: basic
 ---

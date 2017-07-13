@@ -4,6 +4,7 @@ integration_title: Hadoop MapReduce
 kind: integration
 newhlevel: true
 placeholder: true
+git_integration_title: mapreduce
 title: Datadog-Hadoop MapReduce Integration
 updated_for_agent: 5.8.0
 ---

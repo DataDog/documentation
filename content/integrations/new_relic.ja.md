@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-New Relic Integration
 integration_title: New Relic
+git_integration_title: new_relic
 kind: integration
 doclevel:
 ---

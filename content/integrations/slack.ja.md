@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Slack Integration
 integration_title: Slack
+git_integration_title: slack
 kind: integration
 doclevel: basic
 ---

@@ -6,6 +6,7 @@ title: Datadog-Cassandra Integration
 integration_title: Cassandras
 kind: integration
 doclevel: complete
+git_integration_title: cassandra
 ---
 
 <!-- For information on Cassandra, please see [here](http://docs.datadoghq.com/integrations/java/).

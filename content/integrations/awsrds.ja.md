@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS RDS Integration
 integration_title: AWS RDS
 kind: integration
+git_integration_title: amazon_rds
 doclevel:
 ---
 

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-IIS Integration
 integration_title: IIS
+git_integration_title: iis
 kind: integration
 doclevel: complete
 ---

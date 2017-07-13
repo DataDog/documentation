@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: "Datadog-ExpressJS Integration"
 integration_title: "ExpressJS"
+git_integration_title: express
 kind: integration
 doclevel: basic
 ---

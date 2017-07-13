@@ -2,6 +2,7 @@
 git_integration_title: google_app_engine
 integration_title: Google App Engine
 kind: integration
+git_integration_title: google_app_engine
 placeholder: true
 title: Datadog-Google App Engine Integration
 ---

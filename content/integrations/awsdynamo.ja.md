@@ -4,6 +4,7 @@ translation_status: translated
 language: ja
 title: Datadog-AWS DynamoDB Integration
 integration_title: AWS DynamoDB
+git_integration_title: amazon_dynamodb
 kind: integration
 doclevel: basic
 ---

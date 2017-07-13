@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Hadoop HDFS Integration
 integration_title: Hadoop HDFS
+git_integration_title: hdfs
 kind: integration
 doclevel: basic
 ---

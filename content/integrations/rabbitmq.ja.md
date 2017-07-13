@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-RabbitMQ Integration
 integration_title: RabbitMQ
+git_integration_title: rabbitmq
 doclevel: basic
 kind: integration
 ---

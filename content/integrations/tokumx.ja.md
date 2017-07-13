@@ -5,6 +5,7 @@ language: ja
 title: Datadog-TokuMX Integration
 integration_title: TokuMX
 kind: integration
+git_integration_title: tokumx
 doclevel: basic
 ---
 

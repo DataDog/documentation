@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: "JMX Checks"
 integration_title: JMX Checks
+git_integration_title: java
 kind: integration
 doclevel:
 ---

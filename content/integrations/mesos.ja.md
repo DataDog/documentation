@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Mesos Integration
 integration_title: Mesos
 kind: integration
+git_integration_title: mesos
 doclevel: basic
 ---
 

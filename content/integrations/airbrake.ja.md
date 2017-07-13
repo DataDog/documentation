@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Airbrake Integration
 integration_title: Airbrake
 kind: integration
+git_integration_title: airbrake
 doclevel: complete
 ---
 <!-- <div id="int-overview">

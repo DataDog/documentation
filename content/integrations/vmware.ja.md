@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-VMware Integration
 integration_title: VMware
+git_integration_title: vsphere
 kind: integration
 doclevel: basic
 ---

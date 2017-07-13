@@ -2,6 +2,7 @@
 title: Datadog-Microsoft Azure Integration
 integration_title: Microsoft Azure
 kind: integration
+git_integration_title: azure
 sidebar:
   nav:
     - header: Azure integration

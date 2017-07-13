@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS Redshift Integration
 integration_title: AWS Redshift
 kind: integration
+git_integration_title: amazon_redshift
 doclevel: basic
 ---
 

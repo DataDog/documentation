@@ -4,6 +4,7 @@ translation_status: original
 language: ja
 title: Datadog-Lighttpd Integration
 integration_title: Lighttpd
+git_integration_title: lighttpd
 kind: integration
 doclevel:
 ---

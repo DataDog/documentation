@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Couchbase Integration
 integration_title: Couchbase
+git_integration_title: couchbase
 kind: integration
 doclevel: basic
 ---

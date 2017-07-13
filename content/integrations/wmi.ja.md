@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-WMI Integration
 integration_title: WMI
+git_integration_title: wmi
 kind: integration
 doclevel: basic
 ---

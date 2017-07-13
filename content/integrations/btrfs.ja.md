@@ -6,6 +6,7 @@ title: Datadog-btrfs Integration
 integration_title: btrfs
 kind: integration
 doclevel: basic
+git_integration_title: btrfs
 ---
 
 <!-- Capture Btrfs metrics into Datadog to:

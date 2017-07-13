@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS SNS Integration
 integration_title: AWS SNS
 kind: integration
+git_integration_title: amazon_sns
 doclevel: basic
 ---
 

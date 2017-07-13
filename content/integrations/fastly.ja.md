@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Fastly Integration
 integration_title: Fastly
+git_integration_title: fastly
 kind: integration
 doclevel: basic
 ---

@@ -5,6 +5,7 @@ language: ja
 title: Datadog-MySQL Integration
 integration_title: MySQL
 kind: integration
+git_integration_title: mysql
 doclevel: basic
 ---
 

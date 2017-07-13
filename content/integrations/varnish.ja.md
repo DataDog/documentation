@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Varnish Integration
 integration_title: Varnish
+git_integration_title: varnish
 kind: integration
 doclevel: basic
 sidebar:

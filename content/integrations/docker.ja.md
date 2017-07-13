@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Docker Integration
 integration_title: Docker
+git_integration_title: docker
 kind: integration
 doclevel:
 ---

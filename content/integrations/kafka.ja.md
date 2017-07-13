@@ -4,6 +4,7 @@ translation_status: progress
 language: ja
 title: Datadog-Apache Kafka Integration
 integration_title: Apache Kafka
+git_integration_title: kafka
 kind: integration
 doclevel:
 ---

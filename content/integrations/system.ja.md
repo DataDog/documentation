@@ -5,6 +5,7 @@ language: ja
 title: System Integrations
 integration_title: System
 kind: integration
+git_integration_title: system
 doclevel: basic
 sidebar:
   nav:

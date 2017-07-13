@@ -6,6 +6,7 @@ title: Datadog-Cacti Integration
 integration_title: Cacti
 kind: integration
 doclevel: complete
+git_integration_title: cacti
 ---
 
 <!-- ## Overview

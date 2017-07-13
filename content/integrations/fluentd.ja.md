@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Fluentd Integration
 integration_title: Fluentd
+git_integration_title: fluentd
 kind: integration
 doclevel: basic
 ---

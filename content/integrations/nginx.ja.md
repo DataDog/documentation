@@ -5,6 +5,7 @@ language: ja
 title: Datadog-NGINX Integration
 integration_title: NGINX
 kind: integration
+git_integration_title: nginx
 doclevel:
 ---
 <!-- <div id="int-overview">

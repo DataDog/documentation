@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-HAProxy Integration
 integration_title: HAProxy
+git_integration_title: haproxy
 kind: integration
 doclevel: complete
 ---

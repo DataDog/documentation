@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS SQS Integration
 integration_title: AWS SQS
 kind: integration
+git_integration_title: amazon_sqs
 doclevel: basic
 ---
 

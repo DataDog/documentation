@@ -4,6 +4,7 @@ translation_status: translated
 language: ja
 title: Datadog-Apache Integration
 integration_title: Apache
+git_integration_title: apache
 kind: integration
 doclevel: complete
 ---

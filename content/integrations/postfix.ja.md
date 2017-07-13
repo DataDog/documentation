@@ -4,6 +4,7 @@ translation_status: original
 language: ja
 title: Datadog-Postfix Integration
 integration_title: Postfix
+git_integration_title: postfix
 kind: integration
 doclevel: basic
 ---

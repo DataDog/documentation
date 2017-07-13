@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-ssh Integration
 integration_title: ssh
+git_integration_title: ssh
 kind: integration
 doclevel: basic
 ---

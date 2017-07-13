@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Dyn Integration
 integration_title: Dyn
+git_integration_title: dyn
 kind: integration
 doclevel: basic
 ---

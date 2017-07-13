@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Splunk Integration
 integration_title: Splunk
+git_integration_title: sql_server
 kind: integration
 doclevel: basic
 ---

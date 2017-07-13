@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-MongoDB Integration
 integration_title: MongoDB
+git_integration_title: mongodb
 kind: integration
 doclevel: basic
 ---

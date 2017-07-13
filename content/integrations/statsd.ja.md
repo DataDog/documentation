@@ -2,6 +2,7 @@
 git_integration_title: statsd
 integration_title: StatsD
 kind: integration
+git_integration_title: statsd
 placeholder: true
 title: Datadog-StatsD
 ---

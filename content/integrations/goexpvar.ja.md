@@ -5,6 +5,7 @@ language: ja
 title: Datadog-Go Expvar Integration
 integration_title: Go Expvar
 kind: integration
+git_integration_title: go_expvar
 doclevel: basic
 ---
 

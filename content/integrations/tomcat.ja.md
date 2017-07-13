@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Tomcat Integration
 integration_title: Tomcat
+git_integration_title: tomcat
 kind: integration
 doclevel: basic
 ---

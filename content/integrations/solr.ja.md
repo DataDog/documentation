@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Solr Integration
 integration_title: Solr
+git_integration_title: solr
 doclevel: basic
 kind: integration
 ---

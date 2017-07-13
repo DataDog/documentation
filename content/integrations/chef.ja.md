@@ -6,6 +6,7 @@ title: Datadog-Chef Integration
 integration_title: Chef
 kind: integration
 doclevel: basic
+git_integration_title: chef
 ---
 
 <!-- ## Overview

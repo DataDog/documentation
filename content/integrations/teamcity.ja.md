@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-TeamCity Integration
 integration_title: TeamCity
+git_integration_title: teamcity
 kind: integration
 doclevel: basic
 ---

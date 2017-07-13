@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Zookeeper Integration
 integration_title: Zookeeper
+git_integration_title: zookeeper
 kind: integration
 doclevel: basic
 ---

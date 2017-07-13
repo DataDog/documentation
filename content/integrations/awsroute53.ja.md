@@ -5,6 +5,7 @@ language: ja
 title: Datadog-AWS Route 53 Integration
 integration_title: AWS Route 53
 kind: integration
+git_integration_title: amazon_route53
 doclevel: basic
 ---
 

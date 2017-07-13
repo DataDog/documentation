@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Jenkins Integration
 integration_title: Jenkins
+git_integration_title: jenkins
 kind: integration
 doclevel:
 ---

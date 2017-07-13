@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Redis Integration
 integration_title: Redis
+git_integration_title: redis
 doclevel: basic
 kind: integration
 ---

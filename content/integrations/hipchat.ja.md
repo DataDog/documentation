@@ -5,6 +5,7 @@ language: ja
 title: Datadog-HipChat Integration
 integration_title: HipChat
 kind: integration
+git_integration_title: hipchat
 doclevel: basic
 ---
 
