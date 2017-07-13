@@ -140,7 +140,13 @@ The troubleshooting section should include anything that answers a question a us
 
 If the metrics are listed in the integration under dogweb, add an attribute to the frontmatter: `git_integration_title: integration_name` replacing the integration name with the name of the folder for the integration in the dogweb repo.
 
-Then add `{{< get-metrics-from-git >}}` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
+Then add `{{< get-metrics-from-git >}}` to the Metrics section. This renders all metrics for an integration. You can also selectively display metrics:
+ 
+```
+{{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
+```
+
+This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
 
 ### Events
 **Optional**
