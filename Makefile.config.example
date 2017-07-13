@@ -2,7 +2,7 @@
 # Create a new file called Makefile.config using this file as a template for your local config
 
 CREATE_I18N_PLACEHOLDERS := true
-FETCH_INTEGRATIONS := true
+FETCH_INTEGRATIONS := false
 GITHUB_TOKEN := ${github_personal_token}
 RUN_SERVER := true
 RUN_GULP := true
