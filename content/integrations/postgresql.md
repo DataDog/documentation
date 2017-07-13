@@ -21,7 +21,7 @@ To get started with the PostgreSQL integration, create at least a read-only data
     create user datadog with password '<PASSWORD>';
     grant SELECT ON pg_stat_database to datadog;
 
-To verify the correct permissions you can run the following command:
+To verify the correct permissions run the following command:
 
     psql -h localhost -U datadog postgres -c \
     "select * from pg_stat_database LIMIT(1);"
@@ -64,12 +64,12 @@ When it prompts for a password, enter the one used in the first command.
 
 ## Custom metrics
 
-PostgreSQL custom metrics can be collected by mapping SQL query results to metrics in Datadog. This mapping is expressed using four components: descriptors, metrics, query, and relation.
+Datadog will generate PostgreSQL metrics from custom query results. For each custom query, four components are required: `descriptors`, `metrics`, `query`, and `relation`.
 
-* **Descriptors** are a sequence of tuples matching a column name or alias from the custom metric query to a tag in Datadog. In the example below, `relname` is mapped to `schema`. Custom metrics in Datadog can then be filtered and aggregated by `schema` tag.
-* **Metrics** are mappings from a query column or column function to a tuple containing the Datadog custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the sum of the `idx_scan` column is mapped to the Datadog custom metric name `postgresql.idx_scan_count_by_schema`.
-* **Query** is where you'll construct the SQL query to obtain your custom metrics. Each column name in your select query should have a corresponding tuple in the Descriptors section. Each column listed in the Metrics section will be substituted for the `%s` in the query.
-* **Relation** indicates whether to include schema relations specified in the [configuration options above](#configuration-options). If set to `true`, the last `%s` in the Query will be set to the list of schema names specified in the Relations configuration option.
+* `descriptors` is used to add tags to your custom metrics. It's a list of lists each containing 2 strings. The first string is for documentation purposes and usually used to make clear what we are getting from the query. The second string will be the tag name. Note that instance tags will automatically be added to that list.
+* `metrics` are key-value pairs where the key is the query column iname or column function and the value is a tuple containing the Datadog custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the results of the sum of the `idx_scan` column will appear in Datadog  with the metric name `postgresql.idx_scan_count_by_schema`.
+* `query` is where you'll construct the SQL query to obtain your custom metrics. Each column name in your SELECT query should have a corresponding item in the `descriptors` section. Each item listed in the Metrics section will be substituted for the first `%s` in the query.
+* `relation` indicates whether to include schema relations specified in the [`relations configuration option`](#configuration-options). If set to `true`, the second `%s` in the Query will be set to the list of schema names specified in the Relations configuration option.
 
 ### Example 1
 
@@ -83,7 +83,12 @@ PostgreSQL custom metrics can be collected by mapping SQL query results to metri
         query: SELECT relname, %s FROM pg_stat_all_indexes GROUP BY relname;
         relation: false
 
-The example above will provide two custom metrics in Datadog: `postgresql.idx_scan_count_by_schema` and `postgresql.idx_read_count_by_schema`. Both metrics will be filterable by the `schema` tag.
+The example above will run two queries in PostgreSQL:
+
+* `SELECT relname, SUM(idx_scan) as idx_scan_count FROM pg_stat_all_indexes GROUP BY relname;` which will generate the metric `postgresql.idx_scan_count_by_schema`.
+* `SELECT relname, SUM(idx_tup_read) as idx_read_count FROM pg_stat_all_indexes GROUP BY relname;` which will generate the metric `postgresql.idx_read_count_by_schema`.
+
+Both metrics will use the tag `schema` with tag values from the results in the `relname` column.
 
 ### Example 2
 
