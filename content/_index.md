@@ -42,7 +42,7 @@ aliases:
 capabilities at a high level.</p>
 <p><strong>Search for it!</strong> If you know roughly what you are looking for, enter it in the search box on the top left of the sidebar.</p>
 <p><strong>If you have questions, we’re here to help.</strong> You can get in touch with
-    our support team by mentioning <a href="http://help.datadoghq.com/customer/portal/questions/913177--notification-in-datadog">@support-datadog</a> in a comment on Datadog itself, or by
+    our support team by mentioning @support-datadog in a comment on Datadog itself, or by
     <a href="/help/#email">email</a>, on <a href="/help/#slack">Slack</a>, or on our <a href="https://help.datadoghq.com/hc/en-us/requests/new">customer service site</a>.</p>
     <p><strong>Find a mistake in this documentation?</strong> <a href="https://github.com/DataDog/documentation/issues">Let us know on GitHub</a>
 and we’ll take care of it.</p>
