@@ -1,5 +1,5 @@
 ---
-last_modified: 2015/07/15
+last_modified: 2017/02/09
 translation_status: complete
 language: ja
 title: Agent Checkの書き方
@@ -56,6 +56,27 @@ they will run every check interval, which defaults to 15 seconds. -->
 `AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を取得する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
+
+
+<!--<h4 id="check_or_integration">Should you write an Agent Check or an Integration?</h4>
+Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
+
+Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
+
+For more information about how to write an Integration, please see the [Creating New Integrations guide](/guides/integration_sdk/) and check out the [Integrations-Extras Github repo](https://github.com/DataDog/integrations-extras) to see other contributed integrations.
+-->
+
+#### 「Agnet Check を書くか、インテグレーションを書くか」の判断はどのようにすればよいですか。
+
+Agnet Check は、カスタムアプリケーションや独自のシステムからメトリックを収集する優れた方法です。 ただし、一般的に利用可能なアプリケーション、パブリックサービス、またはオープンソースプロジェクトからメトリックを収集しようとする場合は、インテグレーションを作成することをお勧めします。
+
+Datadog Agent V5.9から、インテグレーションの開発方法とコントリビューション方法を刷新しました。コントリビューションのプロセスを明確化するために、Github上に[integrations-extras][j1] レポジトリを公開し、ブランチ毎に各インテグレーションのコントリビューションの進捗状況を明確化しました。又、今回の刷新で、インテグレーションのアップデートをDatadog Agent のアップデートから切り離し、個々のインテグレーションが独立してリリース＆アップデートできるようにしました。今回の刷新は、ユーザ自身が開発したインテグレーションを簡単に共有する道を開き、Datadog コミュニティーの他のユーザに広くシェアできることを可能にしました。
+
+新方式でインテグレーションを作成する方法については、[「新しいインテグレーションの作成」ガイド][j2]を参照してください。既にコントリビューションされているインテグレーションの状況は、integrations-extrasの[code branch][j3]のページを参照してください。
+
+[j1]: https://github.com/datadog/integrations-extras
+[j2]: /ja/guides/integration_sdk/
+[j3]: https://github.com/DataDog/integrations-extras/branches/all
 
 
 <!--
@@ -215,6 +236,44 @@ Check 内でイベントを送信するには、`self.event(...)`を呼び出し
 全てのイベントは、`check` 機能の実行の最後に、他のAgent Checkの内容と共にDatadogのサービスに転送されます。
 
 
+<!--#### Sending service checks
+
+Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
+
+The service_check method will accept the following arguments:
+
+- `check_name`: The name of the service check.
+- `status`: An integer describing the service status. You may also use the class status definitions:
+  - `AgentCheck.OK` or `0` for success
+  - `AgentCheck.WARNING` or `1` for warning
+  - `AgentCheck.CRITICAL` or `2` for failure
+  - `AgentCheck.UNKNOWN` or `3` for indeterminate status
+- `tags`: (optional) A list of key:val tags for this check.
+- `timestamp`: (optional) The POSIX timestamp when the check occured.
+- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
+- `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
+- `message`: (optional) Additional information or a description of why this status occured.
+-->
+
+#### サービスチェックの送信
+
+Check では、`self.service_check（...）` メソッドを呼び出してサービスのステータスをDatadogへ送信することもできます。
+
+service_checkメソッドには、次の引数を与えることができます。
+
+* `check_name`: サービスチェックの名前。
+* `status`：サービスの状態を表す整数。 クラスステータス定義を使用することもできます。
+  * `AgentCheck.OK` または`0`、Check が成功した場合
+  * `AgentCheck.WARNING` または`1`、Check にワーニングを出したい場合
+  * `AgentCheck.CRITICAL` または`2`、Check が失敗した場合
+  * `AgentCheck.UNKNOWN` または`3`、Check の結果が分からない場合
+* `tags`: (オプション）このCheck に付与したい *key:val* タグのリスト。
+* `timestamp`: （オプション）Check が実行された時間のPOSIX タイムスタンプ。
+* `hostname`: （オプション）Check を送信したホストの名前。 デフォルト値は、Agnet が検出しているの`host_name` です。
+* `check_run_id`: （オプション）ログおよびトレースの目的で使用される整数のID。このID は、ユニークである必要はありません。ID が提供されない場合、自動的にID が生成されます。
+* `message`: (オプション）追加情報、またはこのステータスが発生した理由の説明。
+
+
 <!-- #### Exceptions
 
 If a check cannot run because of improper configuration,  programming error or
@@ -291,6 +350,7 @@ instances:
       password: 5678
 EOF
 %>
+`min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div> -->
 
@@ -315,6 +375,8 @@ instances:
       password: 5678
 EOF
 %>
+
+`min_collection_interval`を、init_configセクションに追加して、チェックの実行頻度を定義できます。 Datadog Agentのcollector の実行インターバルより大きい場合、このスクリプトによる情報の収集がスキップされたことを示すログ行が出力されます。 `min_collection_interval`のデフォルト値は、`0`で、Agent Checkの情報が他のインテグレーションと同収集インターバルで収集されていることを意味します。この値を`30`に設定することは、メトリックが30秒毎に収集されることではありません。意味としては、限りなく30秒に近い間隔でメトリックが集取されるということです。有効化しているインテグレーションの数により、一回のcollector の実行には15~20秒がかかりましす。もしもAgnetの集取インターバルが20秒の場合、一回目のインバータ周期(20秒)は30秒より短いため、このCheck のメトリックを収集しません。二回目のインターバル周期(40秒)では、設定値の30秒より長くなるため、今回はメトリックが収集されます。結果として、このようなケースでは、40秒間隔でメトリックが収集されます。
 
 <div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
@@ -355,7 +417,61 @@ Before starting your first check it is worth understanding the checks directory
 structure. There are two places that you will need to add files for your check.
 The first is the `checks.d` folder, which lives in your Agent root.
 
-For all Linux systems, this means you will find it at: -->
+For all Linux systems, this means you will find it at: 
+
+    /etc/dd-agent/checks.d/
+
+For Windows Server >= 2008 you'll find it at:
+
+    C:\Program Files (x86)\Datadog\Agent\checks.d\
+
+    OR
+
+    C:\Program Files\Datadog\Agent\checks.d\
+
+For Mac OS X and source installations, you'll find it at:
+
+    ~/.datadog-agent/agent/checks.d/
+
+    OR
+
+    ~/.pup/agent/checks.d/
+
+    OR
+
+    <sandbox_folder>/checks.d/
+
+The other folder that you need to care about is `conf.d` which lives in the
+Agent configuration root.
+
+For Linux, you'll find it at:
+
+    /etc/dd-agent/conf.d/
+
+For Windows, you'll find it at:
+
+    C:\ProgramData\Datadog\conf.d\
+
+    OR
+
+    C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
+
+For Mac OS X and source installations, you'll find it at:
+
+    ~/.datadog-agent/agent/conf.d/
+
+    OR
+
+    ~/.pup/agent/conf.d/
+
+    OR
+
+    <sandbox_folder>/conf.d/
+
+You can also add additional checks to a single directory, and point to it in `datadog.conf`:
+
+    additional_checksd: /path/to/custom/checks.d/
+-->
 
 <h3 id="directory">ディレクトリの構造</h3>
 
@@ -415,6 +531,7 @@ Mac OS Xと、ソースからインストールした場合は、以下のディ
 実行ファイルと設定ファイルは、デフォルトの場所以外に、一つのディレクトリにまとめて設置し、`datadog.conf` 内で設置ディレクトリを指定することも出来ます:
 
     additional_checksd: /path/to/custom/checks.d/
+
 
 <!--
 ======================================================
@@ -577,6 +694,8 @@ instances:
 
 EOF
 %>
+
+
 <!-- #### The Check
 
 Now we can start defining our check method. The main part of the check will make
