@@ -1,8 +1,8 @@
 ---
-baseURL: https://docs-staging.datadoghq.com/
+baseURL: https://docs.datadoghq.com/
 buildfuture: false
 builddrafts: false
 params:
   environment: live
-  img_url: "https://docs-staging.datadoghq.com/"
-  static_url: "https://docs-staging.datadoghq.com/"
+  img_url: "https://docs.datadoghq.com/"
+  static_url: "https://docs.datadoghq.com/"
