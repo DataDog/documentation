@@ -102,6 +102,7 @@ build_live:
     - placehold_translations
     - sync_integration_metrics
     - build_hugo_site
+    - collect_static_assets
     - minify_html
     - remove_static_from_repo
     - create_artifact
