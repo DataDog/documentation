@@ -38,11 +38,11 @@ Yes, you can deploy it to Heroku via the [Datadog Heroku Buildpack](https://gith
 
 #### Ok, I installed the Trace Agent. How do I enable it and verify it is working?
 
-The Datadog Agent does not enable tracing by default. To enable it, add `apm_enabled: true` to your `datadog.conf` file and restart `datadog-agent`. Then, tail the Trace Agent log:
+The Trace (APM) Agent is automatically enabled for Datadog agent versions 5.13+.  To manually enable it, add `apm_enabled: true` to your `datadog.conf` file and restart `datadog-agent`. Then, tail the Trace Agent log:
 
     tail -f /var/log/datadog/trace-agent.log
 
-If tracing is working properly, you will see flushed payload messages similar to the following:
+If tracing is working properly, you should see flushed payload messages similar to the following:
 
     2017-02-07 23:12:10 INFO (endpoint.go:140) - flushed payload to the API, time:185.409088ms, size:1437
     2017-02-07 23:12:20 INFO (endpoint.go:140) - flushed payload to the API, time:17.781515ms, size:753
