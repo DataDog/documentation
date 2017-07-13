@@ -4,16 +4,16 @@ integration_title: Process Check
 newhlevel: true
 kind: integration
 ---
-# Overview
+## Overview
 
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
   * Monitor the status of running processes with [Process Monitors][1] (**Requires Datadog Agent >= 5.1.0**).
 
-# Installation
+## Installation
 
 No installation required.
 
-# Configuration
+## Configuration
 
 Configure the Agent to connect to your processes. Our example configuration will monitor the `ssh`, `sshd`, and `postgres` processes.
 
@@ -42,9 +42,9 @@ Refer to the comments in the [process.yaml.example](https://github.com/DataDog/i
 
 After the Agent has sent data to Datadog you can visit the [New Monitor section of the application](https://app.datadoghq.com/monitors#create/process) to set up a Monitor. If you only see information on how to configure the process check in the Agent, Datadog has not yet received any process information from the Agent. Use the instructions below to validate whether the Agent has been configured correctly.
 
-<%= insert_example_links(conf:"process", check:"process")%>
+{{< insert-example-links conf="process" check="process" >}}
 
-# Validation
+## Validation
 
 1.  Execute the info command
 
@@ -64,11 +64,11 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 
-# Metrics
+## Metrics
 
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
-<%= get_metrics_from_git('system', 'system.processes') %>
+{{< get-metrics-from-git "system" "system.processes" >}}
 
 
    [1]: /guides/monitoring#process

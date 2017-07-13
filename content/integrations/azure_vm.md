@@ -7,7 +7,7 @@ git_integration_title: azure_vm
 newhlevel: true
 ---
 
-# Overview
+## Overview
 Azure Virtual Machine allows you to flexibly run virtualized environments with the ability to scale on-demand.
 
 Get metrics from Azure VM to:
@@ -15,10 +15,10 @@ Get metrics from Azure VM to:
 * Visualize the performance of your VMs
 * Correlate the performance of your VMs with your applications
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-# Metrics
-<%= get_metrics_from_git()%>
+## Metrics
 
+{{< get-metrics-from-git >}}

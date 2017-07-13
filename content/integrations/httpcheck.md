@@ -5,17 +5,17 @@ kind: integration
 newhlevel: true
 update_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 HTTP checks run in the agent and can verify whether or not a website is up or down, responds in a certain time, and/or contains specific text on the page.
 
 Also see the related [TCP Checks](/integrations/tcpcheck)
 
-# Installation
+## Installation
 
 No installation is required
 
-# Configuration
+## Configuration
 
 Edit the `http_check.yaml` file in your agent's `conf.d` directory. The following yaml file will check the Datadog home page for the text "Cloud-Scale Monitoring" within 5 seconds. The response time will be available in the metric `network.http.response_time`.
 
@@ -58,11 +58,11 @@ Other settings available include:
 | `no_proxy` | If set, the check will bypass proxy settings and attempt to reach the check url directly. This defaults to `false`. |
 | `allow_redirects` | This setting allows the service check to follow HTTP redirects and defaults to `true`.
 | `tags` | A list of arbitrary tags that will be associated with the check. For more information about tags, please see our [Guide to tagging](/guides/tagging/) and blog post, [The power of tagged metrics](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) |
-{:.table}
 
-<%= insert_example_links%>
 
-# Validation
+{{< insert-example-links >}}
+
+## Validation
 
 Execute the agent info command and verify that the integration check was successful. The output should contain a section similar to the following:
 

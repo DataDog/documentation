@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: ceph
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Enable the Datadog-Ceph integration to:
 
@@ -14,19 +14,19 @@ Enable the Datadog-Ceph integration to:
   * Monitor I/O performance metrics
 
 
-# Installation
+## Installation
 
 The integration is meant to be enabled on each Ceph monitor host.
 
-# Configuration
+## Configuration
 
 Adjust the configuration file to match your environment. By default the check will use `/usr/bin/ceph` to retrieve metrics; this can be overriden by using the `ceph_cmd` option. If sudo access is required to run it, please enable the use_sudo flag.
 
 Any extra tags specific to the cluster can be specified under `tags`, as usual.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 Execute the info command `/etc/init.d/datadog-agent info` and verify that the integration check was successful. The output should contain a section similar to the following:
 
@@ -41,6 +41,6 @@ Execute the info command `/etc/init.d/datadog-agent info` and verify that the in
               - Collected 19 metrics, 0 events & 2 service checks
 
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

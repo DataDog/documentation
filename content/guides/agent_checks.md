@@ -1,7 +1,7 @@
 ---
 title: Writing an Agent Check
 kind: guide
-listorder: 6
+listorder: 9
 sidebar:
   nav:
     - header: Guide to Agent Checks
@@ -193,7 +193,7 @@ file name should match the name of the check module (e.g.: `haproxy.py` and
 
 The configuration file has the following structure:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     min_collection_interval: 20
     key1: val1
@@ -205,8 +205,7 @@ instances:
 
     - username: jane_smith
       password: 5678
-EOF
-%>
+{{< /highlight >}}
 `min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
 <div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
@@ -308,26 +307,24 @@ To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
 simple, including no real information. This will go into `conf.d/hello.yaml`:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
 
 instances:
     [{}]
 
-EOF
-%>
+{{< /highlight >}}
 
 The check itself will inherit from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This will go in `checks.d/hello.py`:
 
-<%= python <<EOF
+{{< highlight python >}}
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 
-EOF
-%>
+{{< /highlight >}}
 
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
@@ -366,7 +363,7 @@ timeout value is given for a particular URL.
 
 So our final configuration would look something like this:
 
-<%= console <<EOF
+{{< highlight console >}}
 init_config:
     default_timeout: 5
 
@@ -378,8 +375,7 @@ instances:
 
     -   url: http://httpbin.org/status/400
 
-EOF
-%>
+{{< /highlight >}}
 
 #### The Check
 
@@ -390,7 +386,7 @@ In this snippet, we start a timer, make the GET request using the
 [requests library](http://docs.python-requests.org/en/latest/) and handle and
 errors that might arise.
 
-<%= python <<EOF
+{{< highlight python >}}
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -410,17 +406,15 @@ except requests.exceptions.Timeout as e:
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
-EOF
-%>
+{{< /highlight >}}
 
 If the request passes, we want to submit the timing to Datadog as a metric. Let's
 call it `http.response_time` and tag it with the URL.
 
-<%= python <<EOF
+{{< highlight python >}}
 timing = end_time - start_time
 self.gauge('http.response_time', timing, tags=['http_check'])
-EOF
-%>
+{{< /highlight >}}
 
 Finally, we'll want to define what happens in the error cases. We have already
 seen that we call `self.timeout_event` in the case of a URL timeout and
@@ -431,7 +425,7 @@ First, we'll define `timeout_event`. Note that we want to aggregate all of these
 events together based on the URL so we will define the aggregation_key as a hash
 of the URL.
 
-<%= python <<EOF
+{{< highlight python >}}
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -440,14 +434,13 @@ def timeout_event(self, url, timeout, aggregation_key):
         'msg_text': '%s timed out after %s seconds.' % (url, timeout),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
 
 
 Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
-<%= python <<EOF
+{{< highlight python >}}
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -456,8 +449,7 @@ def status_code_event(self, url, r, aggregation_key):
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
-EOF
-%>
+{{< /highlight >}}
 
 #### Putting It All Together
 
@@ -475,8 +467,7 @@ You'll see what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 
-<%= snippet_code_block("guides-agentchecks-ex-all.py", :nocomments => true) %>
-
+{{< snippet-code-block file="guides-agentchecks-ex-all.py" nocomments="true" >}}
 
 <!--
 ======================================================

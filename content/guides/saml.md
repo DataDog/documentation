@@ -1,7 +1,7 @@
 ---
 title: Single Sign On With SAML
 kind: guide
-listorder: 14
+listorder: 19
 
 ---
 This guide assumes that you already have a SAML Identity Provider up and running.
@@ -11,15 +11,15 @@ This guide assumes that you already have a SAML Identity Provider up and running
 Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
-{: #configuresaml}
+
 If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
-![](/static/images/saml_configure.png)
+{{< img src="saml_configure.png" >}}
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
 
 1.  Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button.
 
-    ![](/static/images/saml_choose_file.png)
+    {{< img src="saml_choose_file.png" >}}
 
     After you've chosen the file, click "Upload File".
 
@@ -31,11 +31,11 @@ Once SAML is configured in Datadog and your IdP is set up to accept requests fro
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.
 
    [4]: https://app.datadoghq.com/account/saml/metadata.xml
-   [5]: /static/images/saml_enable.png
-   [6]: /static/images/saml_enabled.png
+   [5]: /images/saml_enable.png
+   [6]: /images/saml_enabled.png
 
 ## Datadog Service Provider Details
-{: #ddspdetails}
+
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
@@ -47,7 +47,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
    [7]: https://app.datadoghq.com/account/saml/metadata.xml
 
 ##  Setting Attributes
-{: #settingattributes}
+
 
 * Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
@@ -77,7 +77,7 @@ For more information about configuring specific IdP's, refer to the following Kn
 
 
 ## Additional Features
-{: #additionalfeatures}
+
 The following features can be enabled through the SAML Configuration dialog.
 
 ### Just in Time Provisioning (JIT Provisioning)

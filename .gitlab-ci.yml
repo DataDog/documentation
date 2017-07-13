@@ -1,0 +1,188 @@
+stages:
+  - build
+  - post-deploy
+  - cleanup
+
+variables:
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:latest"
+  PREVIEW_CONFIG: "config/preview.yaml"
+  LIVE_CONFIG: "config/live.yaml"
+  ARTIFACT_RESOURCE: "public"
+  LIVE_DOMAIN: "https://docs.datadoghq.com/"
+
+# ================== copy scripts =============== #
+before_script:
+  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
+
+# ================== templates ================== #
+.base_template: &base_template
+  image: ${BUILD_IMAGE}
+  tags:
+    - docker
+  only:
+    - branches
+
+# ================== preview ================== #
+# If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
+build_preview:
+  <<: *base_template
+  stage: build
+  environment: "preview"
+  variables:
+    BUCKET: ${PREVIEW_BUCKET}
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+    MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+  script:
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - version_static_assets
+    - placehold_translations
+    - sync_integration_metrics
+    - build_hugo_site
+    - minify_html
+    - push_site_to_s3
+    - notify_slack "${MESSAGE}"
+    - remove_static_from_repo
+    - create_artifact
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_images:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "images" "${URL}" "True" "True" "True"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_static:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "static" "${URL}" "True" "True" "True"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_links:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "links" "${URL}" "True" "True" "True"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+# ================== live ================== #
+build_live:
+  <<: *base_template
+  stage: build
+  environment: "live"
+  variables:
+    CONFIG: ${LIVE_CONFIG}
+    BUCKET: ${LIVE_BUCKET}
+    URL: ${LIVE_DOMAIN}
+    MESSAGE: ":fiestaparrot: production updates are live! :fiestaparrot:\nPost deploy tests running..."
+  script:
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - version_static_assets
+    - placehold_translations
+    - sync_integration_metrics
+    - build_hugo_site
+    - minify_html
+    - push_site_to_s3
+    - notify_slack "${MESSAGE}"
+    - remove_static_from_repo
+    - create_artifact
+  only:
+    - master
+
+test_live_images:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "images" "${URL}" "True" "False" "True"
+  only:
+    - master
+
+test_live_links:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "links" "${URL}" "True" "False" "False"
+  only:
+    - master
+
+test_live_static:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "static" "${URL}" "True" "False" "False"
+  only:
+    - master
+
+#rollback_live:
+#  <<: *base_template
+#  stage: cleanup
+#  environment: "live"
+#  when: on_failure
+#  variables:
+#    BUCKET: ${LIVE_BUCKET}
+#  script:
+#    - rollback_env
+#  only:
+#    - master
+
+tag_successful_live_pipeline:
+  <<: *base_template
+  stage: cleanup
+  environment: "live"
+  when: on_success
+  script:
+    - tag_successful_pipeline
+  only:
+    - master
+
+post_success_event_to_dd_live:
+  <<: *base_template
+  stage: cleanup
+  environment: "live"
+  when: on_success
+  script:
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
+    - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
+  only:
+    - master
+
+post_failure_event_to_dd_live:
+  <<: *base_template
+  stage: cleanup
+  environment: "live"
+  when: on_failure
+  script:
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
+    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
+  only:
+    - master

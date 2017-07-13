@@ -30,7 +30,7 @@ sidebar:
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 
 ## Glossary
-{: #glossary}
+
 
 Here is a quick overview of the different terms used in this guide.
 
@@ -44,7 +44,7 @@ Here is a quick overview of the different terms used in this guide.
 
 
 ## Creating a Monitor
-{: #create}
+
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
@@ -52,11 +52,11 @@ page by highlighting the "Monitors" tab in the main menu and selecting the
 on the left. This document will walk through the configuration of each type.
 
 ### Host Monitors
-{: #host}
+
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-![host monitor](/static/images/monitor/host_monitor.png)
+{{< img src="monitor/host_monitor.png" >}}
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.
@@ -72,10 +72,10 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    walkthrough of the common notification options.
 
 ### Metric Monitors
-{: #metric}
+
 
 1. Select the metric and scope you want to monitor.
-  ![metric scope](/static/images/monitor/metric_scope.png)
+  {{< img src="monitor/metric_scope.png" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
@@ -83,7 +83,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     further information.
 
 2. Select the alert grouping.
-    ![alert grouping](/static/images/monitor/alert_grouping.png)
+    {{< img src="monitor/alert_grouping.png" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -101,7 +101,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     running out of space.
 
 3. Select the alert type.
-    ![alert type](/static/images/monitor/alert_type.png)
+    {{< img src="monitor/alert_type.png" >}}
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -118,14 +118,14 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-4. {:#metric-conditions} Select the alert conditions
+4.  Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      ![metric threshold](/static/images/monitor/metric_threshold.png)
+      {{< img src="monitor/metric_threshold.png" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -187,9 +187,9 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 
 ### Integration Monitors
-{: #integration}
 
-![es status](/static/images/monitor/es_status.png)
+
+{{< img src="monitor/es_status.png" >}}
 
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
@@ -206,9 +206,9 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   options.
 
 ### Process Monitors
-{: #process}
 
-![process monitor](/static/images/monitor/process_monitor.png)
+
+{{< img src="monitor/process_monitor.png" >}}
 
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
@@ -235,9 +235,9 @@ point they should notify.
    walkthrough of the common notification options.
 
 ### Network Monitors
-{: #network}
 
-![network monitor](/static/images/monitor/network_monitor.png)
+
+{{< img src="monitor/network_monitor.png" >}}
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/guides/network_checks) for details on Agent
@@ -276,11 +276,11 @@ configuration.
    walkthrough of the common notification options.
 
 ### Event Monitors
-{: #event}
+
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-![event monitor](/static/images/monitor/event_monitor.png)
+{{< img src="monitor/event_monitor.png" >}}
 
 1. Select the query and parameters (status, priority, sources and tags) you want
     to monitor.
@@ -296,9 +296,9 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 
 ### Custom Monitors
-{: #custom}
 
-![custom monitor](/static/images/monitor/custom_monitor.png)
+
+{{< img src="monitor/custom_monitor.png" >}}
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
@@ -315,7 +315,7 @@ or service checks.
    multiple servers running on a single host, then each one will alert separately
    in the case of failure.
 
-3. {:#check-alerting} Select your **alert options**.
+3.  Select your **alert options**.
 
    While each check run will send a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
@@ -331,12 +331,12 @@ or service checks.
    walkthrough of the common notification options.
 
 ## Monitor Notifications
-{: #notifications}
+
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-![notification](/static/images/monitor/notification.png)
+{{< img src="monitor/notification.png" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -373,21 +373,21 @@ triggering scope into the message of multi alerts.
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    ![conditional variables](/static/images/monitor/conditionalvars.png)
+    {{< img src="monitor/conditionalvars.png" >}}
 
     Here is an example of how you can set it up in the editor:
 
-    ![conditional editor](/static/images/monitor/templateconditionaleditor.png)
+    {{< img src="monitor/templateconditionaleditor.png" >}}
 
 
     The corresponding trigger event notification will look like this:
 
-    ![conditional trigger](/static/images/monitor/templateconditionaltrigger.png)
+    {{< img src="monitor/templateconditionaltrigger.png" >}}
 
 
     and the recovery notification:
 
-    ![conditional recovery](/static/images/monitor/templateconditionalrecover.png)
+    {{< img src="monitor/templateconditionalrecover.png" >}}
 
 
     The conditional variables available are `is_alert`, `is_alert_recovery`,
@@ -402,12 +402,12 @@ triggering scope into the message of multi alerts.
 
     Here is an example of how you can use template variables for a multi alert:
 
-    ![template var editor](/static/images/monitor/templatevareditor.png)
+    {{< img src="monitor/templatevareditor.png" >}}
 
 
     and the corresponding event notification:
 
-    ![template var trigger](/static/images/monitor/templatevar.png)
+    {{< img src="monitor/templatevar.png" >}}
 
 
     The tag template variables available depend on the tag group selected in Step 1
@@ -424,7 +424,7 @@ triggering scope into the message of multi alerts.
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    ![short template var trigger](/static/images/monitor/templatevar_short.png)
+    {{< img src="monitor/templatevar_short.png" >}}
 
     Note that template variable content is escaped by default. If your variable
     contains JSON or code that you would NOT like to be escaped, then use triple braces
@@ -450,29 +450,29 @@ triggering scope into the message of multi alerts.
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   ![scope match editor](/static/images/monitor/scope_match_editor.png)
+   {{< img src="monitor/scope_match_editor.png" >}}
 
 #### Variable availability
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
-| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
-| **Conditionals** |
-| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
-| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
-| `is_warning` | | Y | Y | Y | Y | Y | |
-| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
-| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
-| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
-| `is_match` | Y | Y | Y | Y | Y | Y | Y |
-| **Variables** |
-| `{{value}}` | | Y | Y | | | | |
-| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
-| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
-| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
-| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual<br/>`{{check_message}}` | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-{: .tpl-var-table}
+|                       | [host](#host)     | [metric](#metric)             | [integration](#integration)           | [process](#process)               | [network](#network)                                   | [custom check](#custom)   | [event](#event)   |
+| :---------------------|:------------------|:------------------------------|:--------------------------------------|:----------------------------------|:------------------------------------------------------|:--------------------------|:------------------|
+| **Conditionals**      |
+| `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning`          |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning_recovery` |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| **Variables**         |
+| `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
+| `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `{{warn_threshold}}`  | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
 
 <style>
   .tpl-var-table tr td {
@@ -488,7 +488,7 @@ We provide a number of different types of monitors and not all variables are ava
 Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type "{{" to begin a template variable name.
 
 ## Monitor FAQs
-{: #faq}
+
 
 - *Can I manage my monitors programatically?*
 

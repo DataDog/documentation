@@ -14,7 +14,7 @@ Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log d
 
 1. Login to Sumo Logic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Collection**.
-3. Click the **Add Collector** link at the top left. ![Hosted Collection](/static/images/integrations-sumo-hostedcollector.png)
+3. Click the **Add Collector** link at the top left. {{< img src="integrations-sumo-hostedcollector.png" alt="Hosted Collection" >}}
 4. Choose **Hosted Collector**.
 5. Enter a Name and optionally a description, category, and time zone. Click **Save**.
 6. Click **HTTP** under Cloud APIs. Fill in the form as appropriate for the collector. Click **Save**.
@@ -28,14 +28,14 @@ Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log d
 1. Login to Sumo Logic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Connections**.
 3. Click the **Add** button.
-4. Click the **Datadog** button. ![Click the Datadog Button](/static/images/integrations-sumo-connectiontype.png)
+4. Click the **Datadog** button. {{< img src="integrations-sumo-connectiontype.png" alt="Click the Datadog Button" >}}
 5. Give the connection a Name and optionally a Description. For the URL, enter:
 
         https://app.datadoghq.com/api/v1/events?api_key=YOUR_API_KEY
 
 6. Customize the payload as needed. Click the **Help** link to learn about the available variables.
-7. Click **Test Connection**. You should see a new item in your Event Stream similar to this: ![Test Event](/static/images/integrations-sumo-event.png)
+7. Click **Test Connection**. You should see a new item in your Event Stream similar to this: {{< img src="integrations-sumo-event.png" alt="Test Event" >}}
 8. If everything looks good, click **Save**.
 9. In Sumo Logic, save any search and choose to schedule the search.
-10. Choose Webhook for the **Alert Type**. Choose your new Datadog Connection from the list of webhooks. Optionally customize the Payload. You will probably want to change the **Alert Condition** to send a notification only if the number of results is greater than 0. ![Hosted Collection](/static/images/integrations-sumo-savesearch.png)
+10. Choose Webhook for the **Alert Type**. Choose your new Datadog Connection from the list of webhooks. Optionally customize the Payload. You will probably want to change the **Alert Condition** to send a notification only if the number of results is greater than 0. {{< img src="integrations-sumo-savesearch.png" alt="Hosted Collection" >}}
 

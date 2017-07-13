@@ -6,16 +6,16 @@ kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 Connect Memcached to Datadog in order to:
 
 * Visualize its performance
 * Correlate the performance of Memcached with the rest of your applications
 
-<%= insert_example_links(conf:"mcache", check:"mcache")%>
+{{< insert-example-links conf="mcache" check="mcache" >}}
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to the Memcached server. Edit conf.d/mcache.yaml:
 
@@ -31,11 +31,11 @@ Connect Memcached to Datadog in order to:
             options:
               items: false  # set to true if you wish to collect items memcached stats.
               slabs: false  # set to true if you wish to collect slabs memcached stats.
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -49,9 +49,9 @@ Execute the info command and verify that the integration check has passed. The o
         - instance #0 [OK]
         - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 To learn more details about the different metrics, go to [this blog entry](http://www.pal-blog.de/entwicklung/perl/memcached-statistics-stats-command.html).
 

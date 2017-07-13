@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Capture Git commits directly from your Git server to:
 

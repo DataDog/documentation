@@ -1,81 +1,69 @@
 # Documentation site for Datadog
 
-Built with [nanoc](http://nanoc.stoneship.org/), a static website generation tool.
+Built with [hugo](https://gohugo.io/), a static website generation tool.
 
 # Setup
 
-## Github personal token
+## Most basic
 
-Integrations that have metrics will attempt to read the metrics metadata list from the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
+* Install hugo: https://gohugo.io/overview/installing/
 
-For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
+* Install nodejs: https://nodejs.org/en/download/package-manager/
 
-After you've generated a token, add the following line to the `.bash_profile` in your home directory:
-
+* Install gulp:
 ```
-export github_personal_token=[paste access token here]
-```
-
-You should then run `source ~/.bash_profile` to reload the settings.
-
-## Running the Docker dev environment
-
-The Documentation build process is easily handled using the Docker container. First [install docker](https://store.docker.com/search?type=edition&offering=community) then run the following command from within the documentation folder.
-
-```
-# From within the documentation folder:
-docker run -ti \
-  -v $PWD:/docs \
-  -p 3000:80 \
-  -e github_personal_token=$github_personal_token \
-  jyee/docker-dd-docs
+npm install --global --production gulp-cli && npm install
 ```
 
-The command above assumes you have set up your Github Personal Token as described earlier. If you are not a Datadog employee, simply omit the environment variable line and run:
+### Run the server
+
+`hugo server --renderToDisk`
+
+`gulp watch`
+
+
+## Makefile
+
+To use the Makefile you will need to create a Makefile.config. See the instructions at the top of the Makefile.config.example.
+
+After you have a config file you can run `make help` to see options:
 
 ```
-# From within the documentation folder:
-docker run -ti \
-  -v $PWD:/docs \
-  -p 3000:80 \
-  jyee/docker-dd-docs
+clean-build               remove build artifacts.
+clean-docker              remove image.
+clean-exe                 remove execs.
+clean-integrations        remove built integrations files.
+clean-node                remove node_modules.
+clean-virt                remove python virtual env.
+clean                     clean all make installs.
+docker-start              start container and run default commands to start hugo site.
+docker-stop               kill the site and stop the running container.
+docker-tests              run the tests through the docker container.
+hugpython                 build virtualenv used for tests.
+source-helpers            source the helper functions used in build, test, deploy.
+start                     start the gulp/hugo server.
+stop                      stop the gulp/hugo server.
 ```
 
-The container will run the rake process and create the documentation html files. Once the process completes, you can view the docs in any browser by visiting http://localhost:3000.
+To run the site with Docker (easier setup, slower server), you will need to install: https://docs.docker.com/engine/installation/#supported-platforms
 
-You should edit the documentation files on your host machine and docker container will automatically regenerate files as it sees updates. If the container does not recognize your file changes, you may need to run the rake process manually (see below for more details).
+To run the site without Docker and perform administrative tasks (compile metrics, create i18n placeholders, etc), you will need to:
 
-## Running commands in Docker
+* Install hugo: https://gohugo.io/overview/installing/
 
-Depending on your host environment, the Guard process may not receive file update triggers. If this happens, you can start the Docker container and get a command prompt by running:
+* Install nodejs: https://nodejs.org/en/download/package-manager/
 
-```
-# From within the documentation folder:
-docker run -ti \
-  -v $PWD:/docs \
-  -p 3000:80 \
-  -e github_personal_token=$github_personal_token \
-  jyee/docker-dd-docs \
-  /bin/sh
+* Install Python3: https://www.python.org/downloads/ or https://github.com/pyenv/pyenv
 
-# Once you reach the container command prompt,
-# Start the Nginx web server by running:
-nginx
+Once the dependencies are installed you can run `make start` to start the site.
 
-# Then run rake to clean and compile the documentation:
-rake clean && rake
 
-# Whenever you make add or update a file, recompile using:
-rake
-```
-
-## Advanced setup
-
-If you cannot run the Docker container or you would otherwise like to setup the documentation development environment locally, please see the ADVANCED.md file fore more information.
+### Running tests
+coming soon
 
 # Working on Docs
 
-This site uses Kramdown. To learn about the syntax, [see this site](http://kramdown.gettalong.org/quickref.html).
+This site uses Blackfriday for markdown. To learn about the syntax, [see this site](https://github.com/russross/blackfriday).
 
 If you include ANY Markdown in a file, give it an .md extension.
 
@@ -83,11 +71,7 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 # Releasing
 
-Before push/merging, make sure to restart the Docker container. This will ensure a full clean and rebuild. Next, verify that there are no bad links on [http://localhost:3000](http://localhost:3000).
-
-**If there are errors, please don't merge.**
-
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the Github personal access token information in the setup instructions above.
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token](#github-personal-token).
 
 Within 5 minutes of merging to master, it will deploy automatically. You can see the status in the internal Datadog Slack #documentation channel.
 
@@ -101,6 +85,7 @@ The top of each integration file should include the following frontmatter:
     title: Datadog-<integration name> Integration
     integration_title: <integration name>
     kind: integration
+    git_integration_title: <integration name>
     doclevel: basic
     ---
 
@@ -135,7 +120,7 @@ The installation section should cover anything that needs to be installed on the
 
 The configuration section should cover anything that you can configure in the Datadog interface or the agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
 
-At the end of the configuration section include a link to the example configuration files. This should be done by adding `<%= insert_example_links%>`. This method takes a few optional parameters: `conf` is the name of the example YAML file, minus the extension; `check` is the name of the check file, minus the .py extension; setting either `check` or `conf` to `"none"` will hide that line; `include_intro` set to false will show only the list minus the sentence at the top; normally the integration title in the links will come from the pages frontmatter, but setting `integration` will override that, `yaml_extension` will change the extension from example to something else (like "default").
+At the end of the configuration section include a link to the example configuration files. This should be done by adding `{{< insert_example_links >}}`. This method takes a few optional parameters: `conf` is the name of the example YAML file, minus the extension; `check` is the name of the check file, minus the .py extension; setting either `check` or `conf` to `"none"` will hide that line; `include_intro` set to false will show only the list minus the sentence at the top; normally the integration title in the links will come from the pages frontmatter, but setting `integration` will override that, `yaml_extension` will change the extension from example to something else (like "default").
 
 #### Configuration Options
 
@@ -156,7 +141,13 @@ The troubleshooting section should include anything that answers a question a us
 
 If the metrics are listed in the integration under dogweb, add an attribute to the frontmatter: `git_integration_title: integration_name` replacing the integration name with the name of the folder for the integration in the dogweb repo.
 
-Then add `<%= get_metrics_from_git()%>` to the Metrics section. This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
+Then add `{{< get-metrics-from-git >}}` to the Metrics section. This renders all metrics for an integration. You can also selectively display metrics:
+ 
+```
+{{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
+```
+
+This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
 
 ### Events
 **Optional**
@@ -186,3 +177,22 @@ Create a markdown file under content/guides. Add the following front matter at t
 Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
 
 
+# Github personal token
+
+Integrations that have metrics will attempt to read the metrics metadata list from the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
+
+For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
+
+After you've generated a token, add the following line to the `.bash_profile` in your home directory:
+
+```
+export github_personal_token=[paste access token here]
+```
+
+You should then run `source ~/.bash_profile` to reload the settings.
+
+Update your Makefile.config to:
+
+```
+FETCH_INTEGRATIONS = true
+```

@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Catchpoint is a Digital Performance Analytics platform that gives you the power to deliver amazing user experiences.
 
@@ -16,11 +16,11 @@ Connect Catchpoint and Datadog to:
 * Alert Type tags for easy filtering
 
 
-### Installation
+## Installation
 
 No installation is required.
 
-### Configuration
+## Configuration
 
 To get Catchpoint alerts into your stream, login into the Catchpoint Portal and goto Settings > API.
 
@@ -32,7 +32,7 @@ To get Catchpoint alerts into your stream, login into the Catchpoint Portal and 
 1. Enter the template Name e.g. DataDog and set the Format to JSON.
 1. Use the following JSON Template and Save it.
 
-    {:.language-json}
+
         {
             "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
             "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",
@@ -46,10 +46,10 @@ To get Catchpoint alerts into your stream, login into the Catchpoint Portal and 
 Catchpoint will now send any alerts directly to the Events stream in DataDog.
 
 
-### Metrics
+## Metrics
 
 This integration does not include metrics at this time.
 
-### Events
+## Events
 
 This integration will push Catchpoint events to your Datadog event stream.

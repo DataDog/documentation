@@ -6,11 +6,11 @@ has_snippets: True
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 
 ## Find the Graph Editor
-{: #editor}
+
 
 On each graph you will find a pencil icon that opens the graph editor.
 
-![Graphing Overview](/static/images/references-graphing-overview.png)
+{{< img src="references-graphing-overview.png" alt="Graphing Overview" >}}
 
 The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
@@ -21,7 +21,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-![Graphing Edit Tab](/static/images/references-graphing-edit-window-with-y.png)
+{{< img src="references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" >}}
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 
@@ -38,52 +38,52 @@ Once you have a metric in mind to display in your graph, select your visualizati
 
 #### Timeseries
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, [click here](#collapseTimeseries){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTimeseries" }. Timeseries is available on both timeboards and screenboards.
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, {{< collapse id="collapseTimeseries" >}}click here{{< /collapse >}}. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  ![Timeseries](/static/images/references-graphing-timeseries-example.png)
+  {{< img src="references-graphing-timeseries-example.png" alt="Timeseries" >}}
 </div>
 
 #### Heatmap
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, [click here](#collapseHeatmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHeatmap" }. Heatmap is available on both timeboards and screenboards.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, {{< collapse id="collapseHeatmap" >}}click here{{< /collapse >}}. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-  ![Heatmap](/static/images/references-graphing-heatmap-example.png)
+  {{< img src="references-graphing-heatmap-example.png" alt="Heatmap" >}}
 </div>
 
 #### Distribution
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, [click here](#collapseDistribution){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseDistribution" }. Distribution is available on both timeboards and screenboards.
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, {{< collapse id="collapseDistribution" >}}click here{{< /collapse >}}. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-  ![Distribution](/static/images/references-graphing-distribution-example.png)
+  {{< img src="references-graphing-distribution-example.png" alt="Distribution" >}}
 </div>
 
 
 #### Toplist
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  [click here](#collapseTopList){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTopList" }. Toplist is available on both timeboards and screenboards.
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  {{< collapse id="collapseTopList" >}}click here{{< /collapse >}}. Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
-  ![TopList](/static/images/references-graphing-toplist-example.png)
+  {{< img src="references-graphing-toplist-example.png" alt="TopList" >}}
 </div>
 
 
 #### Change
 
-The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, [click here](#collapseChangegraph){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseChangegraph" }.
+The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, {{< collapse id="collapseChangegraph" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  ![Changegraph](/static/images/references-graphing-change-example.png)
+  {{< img src="references-graphing-change-example.png" alt="Changegraph" >}}
 </div>
 
 #### Hostmap
 
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, [click here](#collapseHostmap){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseHostmap" }.
+The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, {{< collapse id="collapseHostmap" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
-  ![Hostmap](/static/images/references-graphing-hostmap-example.png)
+  {{< img src="references-graphing-hostmap-example.png" alt="Hostmap" >}}
 </div>
 
 
@@ -111,7 +111,7 @@ To use the rollup function, click the plus sign to the right of the aggregation 
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
-![rollup example](/static/images/references-graphing-rollup-example.png)
+{{< img src="references-graphing-rollup-example.png" alt="rollup example" >}}
 
 When switching to the JSON view, the query will look like this:
 
@@ -121,18 +121,19 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### 5) Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, [click here](#collapseGraphicFunctionTable){: role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable" }.
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, {{< collapse id="collapseGraphicFunctionTable" >}}click here{{< /collapse >}}.
+
 
 <div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
 <!-- The graphing functions section is a partial -->
 
-<%= @items['/partials/graphingfunctions/'].compiled_content %>
+{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
 </div>
 
 ### 6) Set Y-axis scale
 
-By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not. 
+By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not.
 
 ### 7) Overlay events for additional context
 

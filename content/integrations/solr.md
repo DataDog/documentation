@@ -6,22 +6,22 @@ kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
-![Solr Graph](/static/images/solrgraph.png)
+{{< img src="solrgraph.png" alt="Solr Graph" >}}
 
 Get metrics from Solr in real time to
 
 * Visualize your search platform performance
 * Correlate the performance of Solr with the rest of your applications
 
-# Installation
+## Installation
 
 Metrics will be captured using a JMX connection. This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the JMX Checks documentation for more detailed instructions. If you need to monitor more metrics, please send us an email at support@datadoghq.com
 
 Make sure that JMX Remote is enabled on your Tomcat server. For information on JMX , please see [the JMX integration documentation](http://docs.datadoghq.com/integrations/java/).
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to Tomcat. Edit conf.d/solr.yaml:
 
@@ -95,11 +95,11 @@ Make sure that JMX Remote is enabled on your Tomcat server. For information on J
                 avgRequestsPerSecond:
                   alias: solr.search_handler.avg_requests_per_sec
                   metric_type: gauge
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `user` and `password` (Optional) - Username and password.
 * `process_name_regex` - (Optional) - Instead of specifying a host and port or jmx_url, the agent can connect using the attach api. This requires the JDK to be installed and the path to tools.jar to be set.
@@ -121,7 +121,7 @@ Your metric will be mydomain (or some variation depending on the attribute insid
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
-## The `attribute` filter
+### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
@@ -139,7 +139,7 @@ The `attribute` filter can accept two types of values:
             bytesReceived:
               alias: tomcat.bytes_rcvd
               metric_type: counter
-  {:.language-yaml}
+
 
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
@@ -158,7 +158,7 @@ In that case you can specify an alias for the metric that will become the metric
             - ExceptionCount
             - Hits
             - RecentHitRate
-  {:.language-yaml}
+
 
 In that case:
 
@@ -181,9 +181,9 @@ Here is another filtering example:
             - 75thPercentile
             - 95thPercentile
             - 99thPercentile
-{:.language-yaml}
 
-## Note
+
+### Note
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 
@@ -203,9 +203,9 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
         - include:
           domain: domain_name
           bean: second_bean_name
-{:.language-yaml}
 
-## Commands to view the metrics that are available:
+
+### Commands to view the metrics that are available:
 
 The `datadog-agent jmx` command was added in version 4.1.0.
 
@@ -224,9 +224,9 @@ The `datadog-agent jmx` command was added in version 4.1.0.
 
 
 
-<%= insert_example_links(check:"none")%>
+{{< insert-example-links check="none" >}}
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -240,9 +240,9 @@ Execute the info command and verify that the integration check has passed. The o
           - instance #0 [OK]
           - Collected 13 metrics & 0 events
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 

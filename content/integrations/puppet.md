@@ -6,7 +6,7 @@ doclevel: basicuppet
 kind: integration
 ---
 
-### Overview
+## Overview
 
 Connect Puppet to Datadog in order to:
 

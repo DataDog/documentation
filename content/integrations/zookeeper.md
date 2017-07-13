@@ -5,7 +5,7 @@ git_integration_title: zookeeper
 kind: integration
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connect ZooKeeper to Datadog in order to:
 
@@ -13,11 +13,11 @@ Connect ZooKeeper to Datadog in order to:
 * Correlate the performance of ZooKeeper with the rest of your applications.
 
 
-<%= insert_example_links(conf:"zk", check:"zk")%>
+{{< insert-example-links conf="zk" check="zk" >}}
 
-![ZooKeeper Graph](/static/images/zookeepergraph.png)
+{{< img src="zookeepergraph.png" alt="ZooKeeper Graph" >}}
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to ZooKeeper. Edit conf.d/zk.yaml
 
@@ -27,10 +27,10 @@ Connect ZooKeeper to Datadog in order to:
           - host: localhost
             port: 2181
             timeout: 3
-    {:.language-yaml}
+
 1.  Restart the Agent
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -46,4 +46,4 @@ Execute the info command and verify that the integration check has passed. The o
 
 # Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

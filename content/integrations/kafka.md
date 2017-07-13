@@ -6,7 +6,7 @@ git_integration_title: kafka
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Connect Kafka to Datadog in order to:
 
@@ -15,12 +15,12 @@ Connect Kafka to Datadog in order to:
 
 This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the [JMX Checks documentation](/integrations/java) for more detailed instructions. If you need to monitor more metrics, please send an email to [support](mailto:support@datadoghq.com).
 
-# Installation
+## Installation
 
 Kafka metrics are captured using a JMX connection. We recommend the use of Oracle's JDK for this integration.
 
 
-# Configuration
+## Configuration
 
 ***Note*** - *The following instructions are for the Datadog agent >= 5.0. For agents before that, refer to the [older documentation](https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent).*
 
@@ -431,9 +431,9 @@ And edit conf.d/kafka_consumer.yaml
       #     my_consumer:
       #       my_topic: [0, 1, 4, 12]
 
-<%= insert_example_links(check: "none")%>
-<%= insert_example_links(integration: "Apache Kafka Consumer", conf: "kafka_consumer", check: "kafka_consumer",  include_intro: false)%>
-# Validation
+{{< insert-example-links check="none" >}}
+{{< insert-example-links integration="Apache Kafka Consumer" conf="kafka_consumer" check="kafka_consumer" include_intro="false" >}}
+## Validation
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  The output should contain a section similar to the following:
 
@@ -450,4 +450,4 @@ To validate that the integration is working, restart the agent and then run the 
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

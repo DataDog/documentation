@@ -6,17 +6,17 @@ newhlevel: true
 git_integration_title: amazon_lambda
 ---
 
-# Overview
+## Overview
 
 Amazon Lambda is a compute service that runs code in response to events and automatically manages the compute resources required by that code.
 
 Enable this integration to begin collecting Cloudwatch & custom metrics from your Lambda functions.
 
-# Installation
+## Installation
 
-If you haven't already, set up the [Amazon Web Services integration](/integrations/aws){:target="_blank"}.
+If you haven't already, set up the <a href="/integrations/aws" target="_blank">Amazon Web Services integration</a>.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
@@ -34,7 +34,7 @@ To send custom metrics to Datadog, you must print a log line from your Lambda, u
 MONITORING|<unix_epoch_timestamp>|<value>|<metric_type>|<metric_name>|#<tag_list>
 ~~~
 
-Where: 
+Where:
 
 * `MONITORING` signals to the Datadog integration that it should collect this log entry
 
@@ -45,7 +45,7 @@ Where:
 
 * `<metric_type>` is `count`, `gauge`, `histogram`, or `check`
 
-* `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api){:target="_blank"}
+* `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api)
 
 * `<tag_list>` is optional, comma separated, and must be preceded by `#`. NOTE, The tag `function_name:<name_of_the_function>` will automatically be applied to custom metrics
 
@@ -79,7 +79,7 @@ for i in xrange(0,10):
 ))
 ~~~
 
-Note: Using the histogram metric type provides `avg`, `count`, `max`, `min`, `95p`, and `median` values. These values are calculated at one second granularity. 
+Note: Using the histogram metric type provides `avg`, `count`, `max`, `min`, `95p`, and `median` values. These values are calculated at one second granularity.
 
 ### Service Check
 
@@ -96,7 +96,7 @@ print('MONITORING|{0}|{1}|{2}|{3}'.format(
 
 # Metrics
 
-<%= get_metrics_from_git()%> 
+{{< get-metrics-from-git >}}
 
 The metrics above get tagged in Datadog with any tags from AWS, including (but not limited to) function name, security-groups, and more.
 

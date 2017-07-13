@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: etcd
 ---
 
-### Overview
+## Overview
 
 Capture etcd metrics in Datadog to:
 
@@ -13,11 +13,10 @@ Capture etcd metrics in Datadog to:
 * Know when host configurations may be out of sync.
 * Correlate the performance of etcd with the rest of your applications.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 ## Metrics
 
-<%= get_metrics_from_git()
-%>
+{{< get-metrics-from-git >}}
 
 Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.

@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: gearman
 ---
 
-### Overview
+## Overview
 
 Bring Gearman metrics to Datadog to:
 
@@ -13,8 +13,8 @@ Bring Gearman metrics to Datadog to:
 * Know how many tasks are queued or running.
 * Correlate the performance of Gearman with the rest of your applications.
 
-<%= insert_example_links(conf: "gearmand", check: "gearmand")%>
+{{< insert-example-links conf="gearmand" check="gearmand" >}}
 
-### Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

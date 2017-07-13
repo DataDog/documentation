@@ -25,10 +25,9 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 
 #### AWS CLI
 
-1. Download [dd-agent-ecs.json](/static/dd-agent-ecs.json).
+1. Download [dd-agent-ecs.json](/json/dd-agent-ecs.json).
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
-
        aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 
 #### Web UI
@@ -86,7 +85,7 @@ If you are modifying the IAM Policy you created for your cluster, you may only n
                }
            ]
        }
-    {:.language-xml}
+
 8. Click **Create Policy**
 
 ### Create a new instance including a startup script
@@ -118,7 +117,7 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
        region=$region
        aws ecs start-task --cluster $cluster --task-definition $task_def \
          --container-instances $instance_arn --region $region" >> /etc/rc.local
-    {:.language-shell}
+
 
     This user script above will:
 
@@ -184,8 +183,9 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 
 #### Dynamic detection and monitoring of running services
 
-Datadog's <a href="/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
+Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
 ### Metrics
 
-<%= get_metrics_from_git()%>
+
+{{< get-metrics-from-git >}}

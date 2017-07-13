@@ -6,8 +6,7 @@ kind: integration
 ---
 
 
-### Overview
-{: int-overview}
+## Overview
 
 Connect your Splunk log monitoring to be able to:
 
@@ -16,7 +15,7 @@ Connect your Splunk log monitoring to be able to:
 * Collaborate with your team on thse events 
 
 
-### Installation
+## Installation
 
 To receive your reports from Splunk into Datadog, you need to have ```datadog``` installed:
 
@@ -41,7 +40,7 @@ Make sure the script is executable and owned by the ```splunk``` user and group.
 
 Once the script is in place, create a new report or navigate to an existing report. Click the **Edit Schedule** and check the checkbox to **Schedule the Report**. When you get to the option to **Run a Script**, enter ```dog-splunk.sh``` in the Filename textbox. Click **Save** and you should see the results start appearing in your Event Stream. 
 
-### Troubleshooting
+## Troubleshooting
 
 If you see an error code on each run of runshellscript in splunkd.log, try adding ``` > dog_splunk_trace.txt 2>&1``` to the end of the last command. This will create a ```$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt``` file. You will get more detail about the problem in this file.
 
@@ -64,21 +63,21 @@ If the trace file include a Traceback that ends with ```pkg_resources.Distributi
 
 
 
-### Customizing
+## Customizing
 
 The script file uses variables made available by Splunk. If you would like to customize the message, refer to the following table of variables:
 
-
-| $SPLUNK_ARG_0 | Script Name |
-| $SPLUNK_ARG_1 | Number of events returned |
-| $SPLUNK_ARG_2 | Search terms |
-| $SPLUNK_ARG_3 | Fully qualified query string |
-| $SPLUNK_ARG_4 | Name of saved search |
-| $SPLUNK_ARG_5 | Trigger reason (for example, "The number of events was greater than 1") |
-| $SPLUNK_ARG_6 | Browser URL to view the saved search |
-| $SPLUNK_ARG_7 | *option removed in version 3.6* |
-| $SPLUNK_ARG_8 | File in which the results for this search are stored (contains raw results) |
-{: .table}
+|               |                                                                               |
+| :------------ |:------------------------------------------------------------------------------|
+| $SPLUNK_ARG_0 | Script Name                                                                   |
+| $SPLUNK_ARG_1 | Number of events returned                                                     |
+| $SPLUNK_ARG_2 | Search terms                                                                  |
+| $SPLUNK_ARG_3 | Fully qualified query string                                                  |
+| $SPLUNK_ARG_4 | Name of saved search                                                          |
+| $SPLUNK_ARG_5 | Trigger reason (for example, "The number of events was greater than 1")       |
+| $SPLUNK_ARG_6 | Browser URL to view the saved search                                          |
+| $SPLUNK_ARG_7 | *option removed in version 3.6*                                               |
+| $SPLUNK_ARG_8 | File in which the results for this search are stored (contains raw results)   |
 
 
 You can modify the text of the events by for example using datadog's @mention to notify people of these reports.

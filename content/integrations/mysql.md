@@ -5,14 +5,14 @@ kind: integration
 git_integration_title: mysql
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connect MySQL to Datadog in order to:
 
   * Visualize your database performance
   * Correlate the performance of MySQL with the rest of your applications
 
-# Installation
+## Installation
 
 1.  Create a ```datadog``` user with replication rights on your MySQL server with the following command, replacing ```<UNIQUEPASSWORD>``` with a unique password:
 
@@ -33,7 +33,7 @@ Connect MySQL to Datadog in order to:
         echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
         echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
-# Configuration
+## Configuration
 
 1. Edit the mysql.yaml file in your agent's conf.d directory, replacing ```<UNIQUEPASSWORD>``` with the password used above.
 
@@ -61,9 +61,9 @@ Connect MySQL to Datadog in order to:
     See the metrics section below to see a list of the new metrics provided by each of the metric options.
 
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
 
@@ -76,9 +76,9 @@ To validate your installation and configuration, restart the agent and execute t
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
 |`extra_status_metrics` adds the following metrics:|
 |----------|--------|
@@ -115,7 +115,7 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.performance.table_locks_immediate.rate | RATE |
 | mysql.performance.threads_cached | GAUGE |
 | mysql.performance.threads_created | MONOTONIC |
-{:.table}
+
 
 |`extra_innodb_metrics` adds the following metrics:|
 |----------|--------|
@@ -204,18 +204,18 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.innodb.x_lock_os_waits | RATE |
 | mysql.innodb.x_lock_spin_rounds | RATE |
 | mysql.innodb.x_lock_spin_waits | RATE |
-{:.table}
+
 
 |`extra_performance_metrics` adds the following metrics:|
 |----------|--------|
 | mysql.performance.query_run_time.avg | GAUGE |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE |
-{:.table}
+
 
 |`schema_size_metrics` adds the following metric:|
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
-{:.table}
+
 
 
 

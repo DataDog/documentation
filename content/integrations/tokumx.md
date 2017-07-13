@@ -6,26 +6,26 @@ git_integration_title: tokumx
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Capture TokuMX metrics in Datadog to:
 
 * Visualize key TokuMX metrics.
 * Correlate TokuMX performance with the rest of your applications.
 
-# Installation
+## Installation
 
 1.  Install the Python MongoDB module on your MongoDB server using the following command:
 
         sudo pip install --upgrade "pymongo<3.0"
-    {:.language-shell}
+
 
 2.  You can verify that the module is installed using this command:
 
         python -c "import pymongo" 2>&1 | grep ImportError && \
         echo -e "\033[0;31mpymongo python module - Missing\033[0m" || \
         echo -e "\033[0;32mpymongo python module - OK\033[0m"
-    {:.language-shell}
+
 
 3.  Start the mongo shell.
 4.  Create a read-only admin user for datadog using the following command. Make sure you replace ```<UNIQUEPASSWORD>``` with a unique password for the user. Datadog needs admin rights to collect complete server statistics.
@@ -43,7 +43,7 @@ Capture TokuMX metrics in Datadog to:
 
 For more details about creating and managing users in MongoDB, refer to [the MongoDB documentation](http://www.mongodb.org/display/DOCS/Security+and+Authentication).
 
-# Configuration
+## Configuration
 
 Configure the Agent to connect to your TokuMX instance using your new Datadog user.
 
@@ -62,13 +62,13 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
                   tags:
                       - mytag1
                       - mytag2
-    {:.language-yaml}
+
 
 2.  Restart the Agent.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 1.  To validate that your integration is working run the Agent's info command. You should see output similar to the following:
 
@@ -84,6 +84,6 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
               - Collected 8 metrics & 0 events
 
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

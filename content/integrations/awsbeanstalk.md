@@ -6,16 +6,16 @@ git_integration_title: amazon_elasticbeanstalk
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.
 
 
-# Installation
+## Installation
 
-If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). 
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
-#Configuration
+## Configuration
 
 ## Monitor Elastic Beanstalk environments with the Datadog agent container
 If you use Docker containers in a Beanstalk environment, and want to monitor your Docker usage in this environment, the containerized Datadog agent is a tool of choice.
@@ -99,8 +99,8 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
 Once the container definition is ready, the last step is to ship it to Beanstalk.
 This step is explained in [the multicontainer Docker tutorial](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html) of the Elastic Beanstalk documentation.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

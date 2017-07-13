@@ -6,9 +6,9 @@ newhlevel: true
 git_integration_title: apache
 ---
 
-# Overview
+## Overview
 
-![Apache Graph](/static/images/apachegraph.png)
+{{< img src="apachegraph.png" >}}
 
 Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 
@@ -16,7 +16,7 @@ Get metrics from Apache in real time; graph them and correlate them with other r
   * Correlate the performance of Apache with the rest of your applications
 
 
-# Installation
+## Installation
 
 Make sure that [`mod_status`][3] is installed on your Apache server with `ExtendedStatus` set to `on`
 
@@ -35,15 +35,15 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
             tags:
               - instance:foo
             disable_ssl_validation: true # if you want to disable SSL cert validation
-    {:.language-yaml}
+
 
 2. Restart the agent
 
         sudo /etc/init.d/datadog-agent restart
 
-<%= insert_example_links %>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -62,12 +62,11 @@ You should see something similar to the following if everything is working corre
           - Collected 8 metrics & 0 events
 
 
-# Metrics
+## Metrics
 
 The following metrics are collected by default with the Apache integration:
 
-<%= get_metrics_from_git()%>
-
+{{< get-metrics-from-git >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/master/apache/check.py

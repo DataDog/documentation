@@ -1,7 +1,9 @@
 ---
 title: Guide to Monitors
 kind: guide
-listorder: 8
+listorder: 13
+aliases:
+  - /guides/monitoring
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
@@ -23,7 +25,7 @@ page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
 ## Glossary
-{: #glossary}
+
 
 Here is a quick overview of the different terms used in this guide.
 
@@ -34,20 +36,20 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor type**: host-, metric-, integration-, process-, network-, event-based, and custom. See side navigation to drill into a specific type.
 - **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
 
-##Creating a Monitor
-{: #create}
+## Creating a Monitor
+
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by highlighting the "Monitors" tab in the main menu and selecting the
 "New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
 on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
 
-![nav](/static/images/monitor/nav.png)
+{{< img src="monitor/nav.png" >}}
 
-###Choose what to monitor
+### Choose what to monitor
 
 1. Select the metric and scope you want to monitor.
-  ![metric scope](/static/images/monitor/metric_scope.png)
+  {{< img src="monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard scoping rules apply here. Please refer to the
@@ -55,7 +57,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     further information.
 
 2. Select the alert grouping.
-    ![alert grouping](/static/images/monitor/alert_grouping.png)
+    {{< img src="monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -73,7 +75,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
     running out of space.
 
 3. Select the alert type.
-    ![alert type](/static/images/monitor/alert_type.png)
+    {{< img src="monitor/alert_type.png" alt="alert type" >}}
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -90,15 +92,15 @@ on the left. This guide will walk through the configuration of the Metric type. 
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-###Define the conditions
-4. {:#metric-conditions :start="4"} Select the alert conditions
+### Define the conditions
+4. Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      ![metric threshold](/static/images/monitor/metric_threshold.png)
+      {{< img src="monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -154,10 +156,10 @@ on the left. This guide will walk through the configuration of the Metric type. 
    reporting. This means the monitor will not resolve because there are not
    anymore values to trigger a resolution.
 
-###Setup Notifications
-{: #notification}
+### Setup Notifications
 
-![notification](/static/images/monitor/notification.png)
+
+{{< img src="monitor/notification.png" alt="notification" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -184,29 +186,29 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 
 ## Scheduling Downtime
-{: #downtime}
+
 
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
 
 ### Manage Downtime
-{: #downtime-manage}
+
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
-![downtime-nav](/static/images/monitor/downtime-nav.png)
+{{< img src="monitor/downtime-nav.png" alt="downtime-nav" >}}
 
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-![downtime-manage](/static/images/monitor/downtime-manage.png)
+{{< img src="monitor/downtime-manage.png" alt="downtime-manage" >}}
 
 ### Schedule Downtime
-{: #downtime-schedule}
+
 
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   ![downtime-silence](/static/images/monitor/downtime-silence.png)
+   {{< img src="monitor/downtime-silence.png" alt="downtime-silence" >}}
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -216,18 +218,17 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
 
-   ![downtime-schedule](/static/images/monitor/downtime-schedule.png)
+   {{< img src="monitor/downtime-schedule.png" alt="downtime-schedule" >}}
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   ![downtime-notify](/static/images/monitor/downtime-notify.png)
+   {{< img src="monitor/downtime-notify.png" alt="downtime-notify" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
 ## Managing Monitors
-{: #manage}
 
 The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
 
@@ -236,7 +237,7 @@ The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you r
 Advanced search lets you query monitors by any combination of monitor attributes:
 
 * `title` and `message` — text search
-* `status` — Alert, Warn, No Data, Ok 
+* `status` — Alert, Warn, No Data, Ok
 * `scope` — e.g. *, role:master-db
 * `type` — metric, integration, apm, etc
 * `muted`
@@ -288,14 +289,13 @@ There are a few caveats regarding quoted fields:
 
 When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-![manage-monitors-mute](/static/images/monitor/manage-monitors-mute.png)
+{{< img src="monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
 
 To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-![manage-monitors-hover-clone](/static/images/monitor/manage-monitors-hover-clone.png)
+{{< img src="monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
 
 ## FAQs
-{: #faq}
 
 *Can I manage my monitors programmatically?*
 

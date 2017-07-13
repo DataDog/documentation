@@ -13,7 +13,7 @@ sidebar:
 <div class="alert alert-info">
   An overview of how we uniquely identify hosts and how they are displayed in
   Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a 
+where we'll be happy to answer any questions you might have. (There's a
 <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
 web chat client, too</a>.)
 </div>
@@ -76,4 +76,4 @@ You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
 
-<img src="/static/images/host_aliases.png" style="width:100%; border:1px solid #777777"/>
+{{< img src="host_aliases.png" >}}

@@ -6,15 +6,15 @@ newhlevel: true
 git_integration_title: supervisord
 ---
 
-# Overview
+## Overview
 
-![Supervisor Event](/static/images/supervisorevent.png)
+{{< img src="supervisorevent.png" alt="Supervisor Event" >}}
 
 Enable the supervisord check to monitor the states of your processes running under supervisord.
 
 For more about using the Supervisor integration, read [the post on our blog](https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor/).
 
-# Installation
+## Installation
 
 
 There are two ways to get started with the supervisord check.
@@ -41,30 +41,30 @@ to monitor per instance.
 
 See [the supervisor configuration docs](http://supervisord.org/configuration.html)for more information on configuring supervisord sockets and inet http servers.
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to the supervisor daemon. Edit conf.d/supervisord.yaml:
 
 
-        
+
 
         init_config:
 
         instances:
-          - name: server0   
-            host: localhost  
+          - name: server0
+            host: localhost
             port: 9001
           - name: server1
             host: localhost
             port: 9002
           - name: server2
             socket: unix:///var/run//supervisor.sock
-            host: http://127.0.0.1 
-    {:.language-yaml}
+            host: http://127.0.0.1
+
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `name` (Required) - An arbitrary name to identify the supervisord server.
 * `host` (Optional) - Defaults to localhost. The host where supervisord server is running.
@@ -75,12 +75,12 @@ See [the supervisor configuration docs](http://supervisord.org/configuration.htm
 * `server_check` (Optional) - Defaults to true. Service check for connection to supervisord server.
 * `socket` (Optional) - If using supervisorctl to communicate with supervisor, a socket is needed.
 
-<%= insert_example_links(conf:"supervisord", check: "supervisord")%>
+{{< insert-example-links conf="supervisord" check="supervisord" >}}
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
-    
+
     Checks
     ======
 
@@ -93,4 +93,4 @@ Execute the info command and verify that the integration check has passed. The o
 
 ## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

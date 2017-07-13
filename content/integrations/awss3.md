@@ -7,15 +7,15 @@ newhlevel: true
 git_integration_title: amazon_s3
 ---
 
-# Overview
+## Overview
 
-![S3 Dashboard](/static/images/s3_db_screenshot.png)
+{{< img src="s3_db_screenshot.png" alt="S3 Dashboard" >}}
 
 Amazon Simple Storage Service (S3) is a highly available and scalable cloud storage service.
 
 Enable this integration to see in Datadog all your S3 metrics.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
@@ -27,13 +27,13 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 	[Enable Requests metrics][1] on your Amazon S3 buckets from the AWS console.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that S3 is checked under metric collection.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
