@@ -6,7 +6,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.3"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:latest"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
