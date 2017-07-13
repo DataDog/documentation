@@ -80,7 +80,8 @@ To validate your installation and configuration, restart the agent and execute t
 
 {{< get-metrics-from-git >}}
 
-|`extra_status_metrics` adds the following metrics:|
+
+|`extra_status_metrics` adds the following metrics:||
 |----------|--------|
 | mysql.binlog.cache_disk_use | GAUGE |
 | mysql.binlog.cache_use | GAUGE |
@@ -117,7 +118,7 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.performance.threads_created | MONOTONIC |
 
 
-|`extra_innodb_metrics` adds the following metrics:|
+|`extra_innodb_metrics` adds the following metrics:||
 |----------|--------|
 | mysql.innodb.active_transactions | GAUGE |
 | mysql.innodb.buffer_pool_data | GAUGE |
@@ -206,13 +207,13 @@ To validate your installation and configuration, restart the agent and execute t
 | mysql.innodb.x_lock_spin_waits | RATE |
 
 
-|`extra_performance_metrics` adds the following metrics:|
+|`extra_performance_metrics` adds the following metrics:||
 |----------|--------|
 | mysql.performance.query_run_time.avg | GAUGE |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE |
 
 
-|`schema_size_metrics` adds the following metric:|
+|`schema_size_metrics` adds the following metric:||
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
 
