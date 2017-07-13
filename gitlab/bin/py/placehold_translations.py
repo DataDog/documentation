@@ -8,6 +8,13 @@ import re
 import yaml
 
 DEFAULT_LANGUAGE = "en"
+TEMPLATE = """\
+---
+{front_matter}
+---
+
+{content}
+"""
 
 
 def get_languages(config_location):
@@ -39,8 +46,13 @@ def create_placeholder_file(template, new_glob):
         content = o_file.read()
         if new_glob["disclaimer"]:
             disclaimer = "<div class='alert alert-info'><strong>NOTICE:</strong>%s</div>\n\n" % new_glob["disclaimer"]
-            fm = re.findall(r'(---\n.*---\n)', content, re.DOTALL)[0]
-            content = content.replace(fm, fm + disclaimer)
+            boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+            _, fm, content = boundary.split(content, 2)
+            new_content = disclaimer + content
+            new_yml = yaml.load(fm)
+            new_yml['placeholder'] = True
+            content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
+                                      content=new_content.strip())
 
     with open(new_dest, 'w') as o_file:
         o_file.write(content)
