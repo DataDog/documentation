@@ -9,8 +9,6 @@ title: Datadog Process Monitoring
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
 
-**Beta - For support or to report any issues, contact [process-support@datadoghq.com](mailto:process-support@datadoghq.com).**
-
 ### Introduction
 
 The new Datadog Process Monitor allows for real time process-level visibility. After installing a small secondary agent, information from a host’s /proc file system will be streamed into Datadog and presented in a table at [https://app.datadoghq.com/process](https://app.datadoghq.com/process).
