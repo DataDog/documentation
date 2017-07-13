@@ -10,7 +10,7 @@ variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
-  LIVE_DOMAIN: "https://docs.datadoghq.com/"
+  LIVE_DOMAIN: "https://dmin7ss6aif3e.cloudfront.net/"
 
 # ================== copy scripts =============== #
 before_script:

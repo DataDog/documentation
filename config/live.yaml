@@ -1,5 +1,5 @@
 ---
-baseURL: https://docs.datadoghq.com/
+baseURL: https://dmin7ss6aif3e.cloudfront.net/
 buildfuture: false
 builddrafts: false
 params:
