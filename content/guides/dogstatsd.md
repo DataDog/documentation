@@ -137,8 +137,7 @@ from datadog import statsd
 @statsd.timed('mywebsite.page_render.time')
 def render_page():
   # Render the page...
-EOF
-%>
+{{< /highlight >}}
 
 or with a context manager:
 
@@ -165,7 +164,6 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see below), you'll be sending the same data to Datadog.
 
 #### Histograms
-{: #histograms}
 
 Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
 
@@ -199,7 +197,6 @@ def handle_file(file, file_size):
 Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
 
 #### Metric option: Sample Rates
-{: #samplerate}
 
 Since the overhead of sending UDP packets can be too great for some performance
 intensive code paths, DogStatsD clients support sampling,
@@ -216,7 +213,6 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 **Sample rates only work with counter, histogram, and timer metrics.**
 
 ### Events
-{: #events}
 
 DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and exceptions in Datadog:
 

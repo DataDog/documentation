@@ -69,7 +69,6 @@ on the left. This document will walk through the configuration of each type.
 -->
 
 ## 新しい Monitor の作成
-{: #create}
 
 [Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このドキュメントでは、これらの各Monitorタイプの設定方法について解説していきます。
 
@@ -163,7 +162,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-4. {:#metric-conditions} Select the alert conditions
+4. Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
@@ -767,7 +766,6 @@ We provide a number of different types of monitors and not all variables are ava
 | `{{ok_threshold}}` | | | Y | Y | Y| Y | |
 | `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
 | Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-{: .tpl-var-table}
 
 <style>
   .tpl-var-table tr td {
@@ -803,7 +801,6 @@ Datadgogでは、さまざまなタイプのMonitor (アラート)を提供し�
 | `{{ok_threshold}}` | | | Y | Y | Y| Y | |
 | `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
 | Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-{: .tpl-var-table}
 
 <style>
   .tpl-var-table tr td {
@@ -820,7 +817,6 @@ Datadgogでは、さまざまなタイプのMonitor (アラート)を提供し�
 
 
 <!-- ## Monitor FAQs
-{: #faq}
 
 - *Can I manage my monitors programatically?*
 
@@ -835,7 +831,6 @@ Datadgogでは、さまざまなタイプのMonitor (アラート)を提供し�
 -->
 
 ## Monitor に関する FAQs
-{: #faq}
 
 - *Monitorは、プログラム的に管理することはできますか？*
 

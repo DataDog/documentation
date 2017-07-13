@@ -45,7 +45,7 @@ Where:
 
 * `<metric_type>` is `count`, `gauge`, `histogram`, or `check`
 
-* `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api){:target="_blank"}
+* `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api)
 
 * `<tag_list>` is optional, comma separated, and must be preceded by `#`. NOTE, The tag `function_name:<name_of_the_function>` will automatically be applied to custom metrics
 
