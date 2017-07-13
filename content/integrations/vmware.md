@@ -6,9 +6,9 @@ kind: integration
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
-![](/static/images/vsphere_graph.png)
+{{< img src="vsphere_graph.png" >}}
 
 Install the Datadog VMware vSphere integration to:
 
@@ -19,14 +19,14 @@ Install the Datadog VMware vSphere integration to:
 We also have an awesome blog post on vSphere which can be seen [here][1].
 
 
-# Installation
+## Installation
 
 1.  Install the Datadog windows agent on your vCenter server.
 1.  Create a Datadog user in the Administration section of vCenter, you can use the default Read-Only access group.
 
-    ![](/static/images/vsphere_create_user.png)
+    {{< img src="vsphere_create_user.png" >}}
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to your vCenter instance. Edit conf.d/vsphere.yaml:
 
@@ -37,11 +37,11 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
             host: vcenter.domain.com
             username: datadog-readonly@vsphere.local
             password: mypassword
-    {:.language-yaml}
+
 
 1.  Restart the Agent
 
-## Configuration Options
+### Configuration Options
 
 * `ssl_verify` (Optional) - Set to false to disable SSL verification, when connecting to vCenter optional
 * `ssl_capath` (Optional) - Set to the absolute file path of a directory containing CA certificates in PEM format
@@ -51,9 +51,9 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
 * `all_metrics` (Optional) - When set to true, this will collect EVERY metric from vCenter, which means a LOT of metrics you probably do not care about. We have selected a set of metrics that are interesting to monitor for you if false.
 * `event_config` (Optional) - Event config is a dictionary. For now the only switch you can flip is collect_vcenter_alarms which will send as events the alarms set in vCenter.
 
-<%= insert_example_links(conf:"vsphere", check:"vsphere")%>
+{{< insert-example-links conf="vsphere" check="vsphere" >}}
 
-# Validation
+## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -67,16 +67,16 @@ Execute the info command and verify that the integration check has passed. The o
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
-# Troubleshooting
+## Troubleshooting
 
 **How should the Datadog Agent be set up with vCenter and ESX?**
 
-![](/static/images/vmware_agent.png)
+{{< img src="vmware_agent.png" >}}
 
 **How will a VMware integration impact my monthly billing?**
 

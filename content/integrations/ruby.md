@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/guides/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
 
@@ -14,7 +14,7 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
 * [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) A client for DogStatsD, an extension of the StatsD metric server for Datadog.
 * [dogapi-rb](https://github.com/DataDog/dogapi-rb) The Ruby client is a library suitable for inclusion in existing Ruby projects or for development of standalone scripts. It provides an abstraction on top of Datadog's raw HTTP interface for reporting events and metrics.
 
-# Installation
+## Installation
 
 1.  To install the Ruby client for the Datadog API:
 
@@ -53,10 +53,10 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
         # Record a gauge 50% of the time.
         statsd.gauge('users.online', 123, :sample_rate=>0.5)
 
-# Configuration
+## Configuration
 
 There is nothing that you need to do in the Datadog application to configure Ruby.
 
-# Validation
+## Validation
 
 Go to the [Metrics explorer page](https://app.datadoghq.com/metric/explorer) and see that it just works!

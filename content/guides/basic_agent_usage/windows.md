@@ -5,10 +5,10 @@ kind: documentation
 
 ### Overview
 
-This guide will outline the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [here][1].
+This guide will outline the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/windows).
 
 ### Starting and Stopping the Agent
-{: #starting_and_stopping_the_agent}
+
 The execution of the Agent is controlled by a Windows service.
 
 
@@ -16,11 +16,11 @@ The execution of the Agent is controlled by a Windows service.
 
 You can use the Datadog Agent Manager that you can find in the Start Menu.
 
-![][2]
+![](/images/windows-start-menu.png)
 
-![][3]
+![](/images/manager-snapshot.png)
 
-You can also use Windows Powershell if you are running on a modern version of Windows: 
+You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
 
@@ -69,8 +69,5 @@ Log is available at:
 
 #### For version < 3.9.1
 
-Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application. <br/> If you're still having trouble, our support team will be glad to provide further assistance. 
+Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application. <br/> If you're still having trouble, our support team will be glad to provide further assistance.
 
-   [1]: https://app.datadoghq.com/account/settings#agent/windows
-   [2]: /static/images/windows-start-menu.png
-   [3]: /static/images/manager-snapshot.png

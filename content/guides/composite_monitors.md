@@ -1,7 +1,7 @@
 ---
 title: Guide to Composite Monitors
 kind: guide
-listorder: 9
+listorder: 14
 ---
 
 ***If you're unfamiliar with the basics of Datadog Monitors, first read the [Guide to Monitors](/guides/monitors)***
@@ -18,7 +18,7 @@ _Note: this guide refers variously to 'individual monitors', 'constituent monito
 
 In the Datadog app, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
 
-![choose-composite-type](/static/images/composite_monitors/select-monitor-type.png)
+{{< img src="composite_monitors/select-monitor-type.png" >}}
 
 ### Choose individual monitors
 
@@ -26,28 +26,28 @@ Choose up to 10 individual monitors to use in the new composite monitor. You can
 
 After you choose your first monitor, the UI will show its alert type and current status:
 
-![create-composite-2](/static/images/composite_monitors/create-composite-2.png)
+{{< img src="composite_monitors/create-composite-2.png" >}}
 
 If you choose a multi-alert monitor, the UI will show its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI will warn you that such a composite monitor may never trigger:
 
-![create-composite-4](/static/images/composite_monitors/create-composite-4.png)
+{{< img src="composite_monitors/create-composite-4.png" >}}
 
 Even if you choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
 
-![create-composite-5](/static/images/composite_monitors/create-composite-5.png)
+{{< img src="composite_monitors/create-composite-5.png" >}}
 
 Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no common reporting sources (also called common groupings). As long as there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it will never trigger. However, you _can_ ignore the warning and create the monitor anyway. To understand why, [read more below](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning in the UI, the UI will populate the **Trigger when** field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
-![create-composite-3](/static/images/composite_monitors/create-composite-3.png)
+{{< img src="composite_monitors/create-composite-3.png" >}}
 
 ### Set a trigger condition
 
-In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions. 
+In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (a, b, c, etc). You can use parentheses to control operator precedence and create more complex conditions.
 
-The following are all valid trigger conditions: 
- 
+The following are all valid trigger conditions:
+
 ~~~
 !(a && b)
 a || b && !c
@@ -56,7 +56,7 @@ a || b && !c
 
 Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
 
-![composite-status](/static/images/composite_monitors/composite-status.png)
+{{< img src="composite_monitors/composite-status.png" >}}
 
 In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
 
@@ -77,7 +77,7 @@ As with a non-composite monitor, you may configure whether or not a composite mo
 
 Write a notification message as you would with any other monitor, using the @-syntax (e.g. @you@example.com) to notify individuals or teams:
 
-![writing-notification](/static/images/composite_monitors/writing-notification.png)
+{{< img src="composite_monitors/writing-notification.png" >}}
 
 In addition to your own message, notifications (e.g. emails) for the composite monitor will show the status of the individual monitors:
 
@@ -127,7 +127,6 @@ Consider a composite monitor that uses three individual monitors—A, B, and C�
 | Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
 | Alert (T)   | Warn (T)   | Unknown (T)| Alert (T)               |<i class="fa fa-check" aria-hidden="true"></i>
 | Skipped (F) | No Data (F)| Unknown (T)| Skipped (F)             |
-{:.table}
 
 Two of the four scenarios will trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (and in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
@@ -149,13 +148,13 @@ The previous table showed the composite monitor status across four points in tim
 | web02 | Ok           | Warn     | Alert     | Ok                             |
 | web03 | Warn         | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
 | web04 | Skipped      | Warn     | Alert     | Skipped                        |
-{:.table}
+
 
 In this cycle, you would receive two alerts.
 
 #### Many multi-alert monitors
 
-Now consider a scenario where monitor B is multi-alert, too, and is also grouped by host. The number of alerts per cycle will be, at most, the number of common reporting sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in an evaluation cycle. 
+Now consider a scenario where monitor B is multi-alert, too, and is also grouped by host. The number of alerts per cycle will be, at most, the number of common reporting sources between monitors A and B. If web01 through web05 are reporting for monitor A, and web04 through web09 are reporting for monitor B, the composite monitor _only_ considers the common sources: web04 and web05. You can only receive up to two alerts in an evaluation cycle.
 
 Here's an example cycle:
 
@@ -163,7 +162,7 @@ Here's an example cycle:
 |-------|-----------|-----------|------------|--------------------------------|----------------|
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
 | web05 | Ok        | Ok        | Alert      | Ok                             |
-{:.table}
+
 
 In this cycle, you would receive one alert.
 

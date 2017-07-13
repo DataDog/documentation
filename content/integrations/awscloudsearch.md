@@ -6,22 +6,22 @@ git_integration_title: amazon_cloudsearch
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Amazon CloudSearch is a managed service in the AWS Cloud that makes it simple and cost-effective to set up, manage, and scale a search solution.
 
 Enable this integration to see in Datadog all your CloudSearch metrics.
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-# Configuration
+## Configuration
 
 In the Amazon Web Services integration tile, ensure that CloudSearch is checked under metric collection.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.

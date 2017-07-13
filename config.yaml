@@ -1,105 +1,235 @@
-# A list of file extensions that nanoc will consider to be textual rather than
-# binary. If an item with an extension not in this list is found,  the file
-# will be considered as binary.
-text_extensions: [ 'css', 'erb', 'haml', 'htm', 'html', 'js', 'less', 'markdown', 'md', 'php', 'rb', 'sass', 'scss', 'txt', 'xhtml', 'xml' ]
+title: "Docs"
+baseURL: "http://localhost:1313/"
+metadataformat: "yaml"
 
-# The path to the directory where all generated files will be written to. This
-# can be an absolute path starting with a slash, but it can also be path
-# relative to the site directory.
-output_dir: output
+canonifyURLs: true
+pygmentsuseclasses: true
 
-# A list of index filenames, i.e. names of files that will be served by a web
-# server when a directory is requested. Usually, index files are named
-# “index.hml”, but depending on the web server, this may be something else,
-# such as “default.htm”. This list is used by nanoc to generate pretty URLs.
-index_filenames: [ 'index.html' ]
+# taxonomies
+taxonomies:
+  tag: "tags"
+  video: "videos"
+  example: "examples"
+preserveTaxonomyNames: true
 
-# Whether or not to generate a diff of the compiled content when compiling a
-# site. The diff will contain the differences between the compiled content
-# before and after the last site compilation.
-enable_output_diff: false
+# language
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
 
-# The data sources where nanoc loads its data from. This is an array of
-# hashes; each array element represents a single data source. By default,
-# there is only a single data source that reads data from the “content/” and
-# “layout/” directories in the site directory.
-data_sources:
-  -
-    # The type is the identifier of the data source. By default, this will be
-    # `filesystem_unified`.
-    type: filesystem_unified
+languages:
+  en:
+    #languageName: "English"
+    #languageCode: "en-US"
+    disclaimer: ""
+    weight: 0
+    menu:
+      main_references:
+        - identifier: menu_references_api
+          name: "API"
+          url: "api/"
+          weight: 10
+        - identifier: menu_references_tracing
+          name: "Tracing"
+          url: "tracing/"
+          weight: 20
+        - identifier: menu_references_libraries
+          name: ""
+          url: "libraries/"
+          weight: 30
+        - identifier: menu_references_monitoring
+          name: ""
+          url: "monitoring/"
+          weight: 40
+        - identifier: menu_references_graphing
+          name: ""
+          url: "graphing/"
+          weight: 50
+        - identifier: menu_references_host_names
+          name: ""
+          url: "hostnames/"
+          weight: 60
+        - identifier: menu_references_integrations
+          name: ""
+          url: "integrations/"
+          weight: 70
+        - identifier: menu_references_dogstatsd
+          name: ""
+          url: "guides/dogstatsd/"
+          weight: 80
+        - identifier: menu_references_examples
+          name: ""
+          url: "examples/"
+          weight: 90
+        - identifier: menu_references_videos
+          name: ""
+          url: "videos/"
+          weight: 100
+        - identifier: menu_references_billing
+          name: ""
+          url: "guides/billing/"
+          weight: 110
+        - identifier: menu_references_faq
+          name: ""
+          url: "faq/"
+          weight: 120
+      basic_agent:
+        - identifier: amazonlinux
+          name: "Amazon Linux"
+          url: guides/basic_agent_usage/amazonlinux/
+          weight: 10
 
-    # The path where items should be mounted (comparable to mount points in
-    # Unix-like systems). This is “/” by default, meaning that items will have
-    # “/” prefixed to their identifiers. If the items root were “/en/”
-    # instead, an item at content/about.html would have an identifier of
-    # “/en/about/” instead of just “/about/”.
-    items_root: /
+        - identifier: centos
+          name: "CentOs"
+          url: guides/basic_agent_usage/centos/
+          weight: 20
 
-    # The path where layouts should be mounted. The layouts root behaves the
-    # same as the items root, but applies to layouts rather than items.
-    layouts_root: /
+        - identifier: docker
+          name: "CoreOS/Docker"
+          url: guides/basic_agent_usage/docker/
+          weight: 30
 
-    # Set the default encoding for all files in as utf-8
-    # See https://github.com/nanoc/nanoc/issues/237 for more
-    encoding: utf-8
+        - identifier: deb
+          name: "Debian"
+          url: guides/basic_agent_usage/deb/
+          weight: 40
 
-# Configuration for the “watch” command, which watches a site for changes and
-# recompiles if necessary.
-# watcher:
-  # A list of directories to watch for changes. When editing this, make sure
-  # that the “output/” and “tmp/” directories are _not_ included in this list,
-  # because recompiling the site will cause these directories to change, which
-  # will cause the site to be recompiled, which will cause these directories
-  # to change, which will cause the site to be recompiled again, and so on.
-  # dirs_to_watch: [ 'content', 'layouts', 'lib', 'code_snippets' ]
+        - identifier: fedora
+          name: "Fedora"
+          url: guides/basic_agent_usage/fedora/
+          weight: 50
 
-  # A list of single files to watch for changes. As mentioned above, don’t put
-  # any files from the “output/” or “tmp/” directories in here.
-  # files_to_watch: [ 'config.yaml', 'Rules' ]
+        - identifier: osx
+          name: "Mac OS X"
+          url: guides/basic_agent_usage/osx/
+          weight: 60
 
-  # When to send notifications (using Growl or notify-send).
-  # notify_on_compilation_success: true
-  # notify_on_compilation_failure: true
+        - identifier: redhat
+          name: "Red Hat"
+          url: guides/basic_agent_usage/redhat/
+          weight: 70
 
-base_url: http://docs.datadoghq.com
+        - identifier: ubuntu
+          name: "Ubuntu"
+          url: guides/basic_agent_usage/ubuntu/
+          weight: 80
 
-# redirects:
-#   - /overview:
-#     - /guides/overview
+        - identifier: windows
+          name: "Windows"
+          url: guides/basic_agent_usage/windows/
+          weight: 90
 
-# make sure each redirect url starts and ends with a slash (/)
-redirects:
-  - from:  /integrations/gcp/
-    to:    /integrations/google_cloud_platform/
-  - from:  /integrations/rds/
-    to:    /integrations/awsrds/
-  - from:  /integrations/beanstalk/
-    to:    /integrations/awsbeanstalk/
-  - from:  /integrations/elasticache/
-    to:    /integrations/awselasticache/
-  - from:  /guides/alerting/
-    to:    /guides/monitors/
-  - from:  /overview/
-    to:    /guides/overview/
-  - from:  /guides/network_checks/
-    to:    /integrations/tcpcheck/
-  - from:  /guides/billing/
-    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
-  - from:  /guides/ja/billing/
-    to:    https://help.datadoghq.com/hc/en-us/sections/200705969-Billing/
-  - from:  /guides/monitoring/
-    to:    /guides/monitors/
-  - from:  /ja/guides/monitoring/
-    to:    /ja/guides/monitors/
-  - from:  /ja/guides/network_checks/
-    to:    /ja/integrations/tcpcheck/
-  - from:  /guides/servicediscovery/
-    to:    /guides/autodiscovery/
-  - from: /videos/setuprailsapm/
-    to:   /videos/apmsetup-rails/
-  - from: /tracing-api/
-    to:   /tracing/api/
-commonfilters:
-  - phrase: 'info command'
-    link: /guides/basic_agent_usage/ubuntu/
+        - identifier: source
+          name: "From Source"
+          url: guides/basic_agent_usage/source/
+          weight: 100
+      tracingnav:
+        - identifier: customnav_tracingnav_tracing
+          url: "#"
+          weight: 10
+
+        - identifier: customnav_tracingnav_install
+          url: tracing/
+          weight: 20
+
+        - identifier: customnav_tracingnav_terminology
+          url: tracing/terminology/
+          weight: 30
+
+        - identifier: customnav_tracingnav_faq
+          url: tracing/faq/
+          weight: 40
+
+        - identifier: customnav_tracingnav_langs
+          url: #
+          weight: 50
+
+        - identifier: customnav_tracingnav_go
+          url: tracing/go/
+          weight: 60
+
+        - identifier: customnav_tracingnav_python
+          url: tracing/python/
+          weight: 70
+
+        - identifier: customnav_tracingnav_ruby
+          url: tracing/ruby/
+          weight: 80
+
+        - identifier: customnav_tracingnav_api
+          url: tracing/api/
+          weight: 90
+
+  ja:
+    #languagename: "日本語"
+    weight: 1
+    disclaimer: "アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。"
+    menu:
+      main_references:
+        - identifier: menu_references_api
+          name: "API"
+          url: "api/"
+          weight: 10
+        - identifier: menu_references_tracing
+          name: "Tracing"
+          url: "tracing/"
+          weight: 20
+        - identifier: menu_references_libraries
+          name: ""
+          url: "libraries/"
+          weight: 30
+        - identifier: menu_references_monitoring
+          name: ""
+          url: "monitoring/"
+          weight: 40
+        - identifier: menu_references_graphing
+          name: ""
+          url: "graphing/"
+          weight: 50
+        - identifier: menu_references_host_names
+          name: ""
+          url: "hostnames/"
+          weight: 60
+        - identifier: menu_references_integrations
+          name: ""
+          url: "integrations/"
+          weight: 70
+        - identifier: menu_references_dogstatsd
+          name: ""
+          url: "guides/dogstatsd/"
+          weight: 80
+        - identifier: menu_references_examples
+          name: ""
+          url: "examples/"
+          weight: 90
+        - identifier: menu_references_videos
+          name: ""
+          url: "videos/"
+          weight: 100
+        - identifier: menu_references_billing
+          name: ""
+          url: "guides/billing/"
+          weight: 110
+        - identifier: menu_references_faq
+          name: ""
+          url: "faq/"
+          weight: 120
+
+params:
+  environment: local
+  img_url: "http://localhost:1313/"
+  imgix:
+    header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
+    header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
+    header_gif: "?ch=Width,Save-Data&fm=gif"
+    jpg: "?fm=jpg&auto=format&lossless=true"
+    png: "?fm=png&auto=format&lossless=1"
+    gif: ""
+  static_url: "http://localhost:1313/"
+  code_languages:
+    - Python
+    - Ruby
+    - Console
+  footer_scripts:
+    - snowplow: false
+    - marketo: false
+    - adroll: false

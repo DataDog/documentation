@@ -1,0 +1,37 @@
+{{/* set img path based on page type and what is passed */}}
+{{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" (.Get "src")) }}
+{{ $img := $.Scratch.Get "_img" }}
+
+{{/* override default imgix request params for popup img */}}
+{{ if .Get "pop_param" | len }}
+  {{ .Get "pop_param" | $.Scratch.Add "pop_param" }}
+{{ else }}
+  {{ $.Scratch.Add "pop_param" "fit=max" }}
+{{ end }}
+{{ $pop_param := $.Scratch.Get "pop_param" }}
+
+{{ $figure_class :=  .Get "figure_class" }}
+<span class="shortcode-wrapper shortcode-img">
+  <figure {{if $figure_class}}class="{{ $figure_class }}" {{end}} style="{{ (.Get "style") | safeCSS }}">
+    {{- if .Get "popup" -}}
+      <a href="{{ print $img "?" $pop_param | relURL }}" class="pop">
+    {{- else if .Get "href" -}}
+      <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
+         {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
+    {{- end -}}
+    <img class="{{- if .Get "responsive" }} img-responsive {{ end }}"
+         src="{{ print $img }}"
+         alt="{{ with .Get "alt"}}{{.}}{{end}}"
+    >
+    {{- if .Get "popup" -}}
+      </a>
+    {{- else if .Get "href" -}}
+      </a>
+    {{- end -}}
+    {{ if .Get "caption" }}
+      {{ with .Get "caption" }}
+          <figcaption>{{.}}</figcaption>
+      {{ end }}
+    {{ end }}
+  </figure>
+</span>

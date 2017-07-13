@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Capture Redmine activity in Datadog to:
 

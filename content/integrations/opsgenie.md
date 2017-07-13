@@ -6,7 +6,7 @@ kind: integration
 ---
 
 ## Overview
-{:#int-overview}
+
 
 Create alerts using @opsgenie:
 
@@ -15,7 +15,7 @@ Create alerts using @opsgenie:
   * When a metric alert is triggered
 
 ## Configuration
-{:#int-configuration}
+
 
 ### Create a Datadog integration in OpsGenie
 
@@ -47,26 +47,26 @@ Create alerts using @opsgenie:
 
 Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the *Say What’s Happening* field, section 5, in the Edit Metric Alert. When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.
 
-![](/static/images/og_metric_alert.png)
+{{< img src="og_metric_alert.png" >}}
 
 Acknowledge or close OpsGenie alerts from Datadog using @opsgenie-acknowledge or @opsgenie-close mentions in the Comments field of an OpsGenie event in Datadog.
-![](/static/images/dd_ack_og_alert.png)
+{{< img src="dd_ack_og_alert.png" >}}
 
 ### Receive, acknowledge and close Datadog alerts created by OpsGenie
 
 Set-up alerts in OpsGenie. When that alert is triggered, an event will be created in Datadog. The tags and description field from the OpsGenie alert will be carried over to Datadog.
 
-![](/static/images/og_create_alert_dd_updated.png)
+{{< img src="og_create_alert_dd_updated.png" >}}
 
 Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the associated event in Datadog will be updated with the username of the person who closed this alert.
 
-![](/static/images/og_closed_dd_updated.png)
+{{< img src="og_closed_dd_updated.png" >}}
 
 
 [1]: https://www.opsgenie.com/integration/index
-[2]: /static/images/opsgenie-int-index.png
+[2]: /images/opsgenie-int-index.png
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: /static/images/where-is-dd-key.png
-[5]: /static/images/opsgenie-add-api-key.png
+[4]: /images/where-is-dd-key.png
+[5]: /images/opsgenie-add-api-key.png
 [6]: https://app.datadoghq.com/account/settings
-[7]: /static/images/datadog-add-opsgenie-key.png
+[7]: /images/datadog-add-opsgenie-key.png

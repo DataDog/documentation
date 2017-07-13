@@ -4,14 +4,14 @@ integration_title: NGINX
 kind: integration
 git_integration_title: nginx
 ---
-### Overview
+## Overview
 
 Connect NGINX to Datadog in order to:
 
 * Visualize your web server performance
 * Correlate the performance of NGINX with the rest of your applications
 
-![NGINX default dashboard](/static/images/nginx.jpg)
+{{< img src="nginx.jpg" alt="NGINX default dashboard" >}}
 
 Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, [how to collect them](https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html), and [how to use Datadog to monitor NGINX](https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html).
 
@@ -38,19 +38,19 @@ If you see some output with `configure arguments:` and lots of options, then you
 
 For more information on configuration, read the [stub status docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html).
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
 **All metrics collected for NGINX and NGINX Plus**
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
-#### NGINX (Open Source)
+### NGINX (Open Source)
 
-<%= get_metrics_from_git('nginx', 'nginx.net.writing,nginx.net.waiting,nginx.net.reading,nginx.net.connections,nginx.net.request_per_s,nginx.net.conn_opened_per_s,nginx.net.conn_dropped_per_s' )%>
+{{< get-metrics-from-git "nginx" "nginx.net.writing nginx.net.waiting nginx.net.reading nginx.net.connections nginx.net.request_per_s nginx.net.conn_opened_per_s nginx.net.conn_dropped_per_s" >}}
 
 The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 
-#### NGINX Plus
+### NGINX Plus
 
 If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python) when the instance target is an http status module URL.
 
@@ -63,7 +63,7 @@ Here are the  metrics name changes from NGINX to NGINX Plus:
 | nginx.net.conn_opened_per_s | nginx.connections.accepted |
 | nginx.net.conn_dropped_per_s | nginx.connections.dropped |
 | nginx.net.request_per_s | nginx.requests.total |
-{:.table}
+
 
 <br/>
 These metrics do not have a directly related metric, but here are close translations:
@@ -71,14 +71,14 @@ These metrics do not have a directly related metric, but here are close translat
 | NGINX Metrics | NGINX Plus Metrics |
 |-------------------|-------------------|
 | nginx.net.waiting | nginx.connections.idle|
-{:.table}
+
 
 <br/>
 Finally, these metrics have no good translation:
 
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
-{:.table}
+
 
 
 The data pulled from the NGINX Plus status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).

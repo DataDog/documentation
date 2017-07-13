@@ -6,16 +6,16 @@ git_integration_title: marathon
 updated_for_agent: 5.8.0
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connects Marathon to Datadog in order to:
 
 * Visualize your Marathon framework's performance
 * Correlate the performance of Marathon with the rest of your Mesos applications
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Configuration
+## Configuration
 
 *NOTICE : If you include the acs_url parameter in the marathon.yaml config, the user and password will be used to generate an ACS token, not as basic auth for the marathon api.
 
@@ -35,7 +35,7 @@ Connects Marathon to Datadog in order to:
 
 1.  Restart the Agent
 
-# Validation
+## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -49,6 +49,6 @@ Connects Marathon to Datadog in order to:
             - instance #0 [OK]
             - Collected 8 metrics & 0 events
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

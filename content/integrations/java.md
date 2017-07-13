@@ -7,7 +7,7 @@ newhlevel: true
 updated_for_agent: 5.8.5
 ---
 
-# Introduction
+## Introduction
 
 The JMX integration collects metrics from applications that expose [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html) metrics.
 
@@ -17,11 +17,11 @@ JMXFetch also sends service checks that report on the status of your monitored i
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's  easy to customize which metrics you want to collect.
 
-# Installation
+## Installation
 
 Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
 
@@ -76,7 +76,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
                     - regex_on_excluded_bean
 
 
-## Configuration Options
+### Configuration Options
 
 * `custom_jar_paths` (Optional) - Allows specifying custom jars that will be added to the classpath of the agent's JVM.
 * `jmx_url` - (Optional) - If the agent needs to connect to a non-default JMX URL, specify it here instead of a host and a port. If you use this you need to specify a 'name' for the instance.
@@ -102,7 +102,7 @@ Your metric will be mydomain (or some variation depending on the attribute insid
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
-## Description of the filters
+### Description of the filters
 
 Each `include` or `exclude` dictionary supports the following keys:
 
@@ -124,7 +124,7 @@ On top of these parameters, the filters support "custom" keys which means that y
         type:
           - Caches
 
-## The `attribute` filter
+### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
@@ -185,7 +185,7 @@ Here is another filtering example:
               - 99thPercentile
 
 
-## Note
+### Note
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 
@@ -209,7 +209,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
             bean: second_bean_name
     ...
 
-## Commands to view the metrics that are available:
+### Commands to view the metrics that are available:
 
 The `datadog-agent jmx` command was added in version 4.1.0.
 
@@ -230,26 +230,26 @@ For more details about configuring this integration refer to the following file(
 
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
-<!-- <%= insert_example_links(conf: "jmx", check: "none")%> -->
+<!-- {{< insert-example-links conf="jmx" check="none" >}} -->
 
-# Validation
+## Validation
 
 JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
 
-# Troubleshooting
+## Troubleshooting
 
-## The 350 metric limit
+### The 350 metric limit
 
 Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog. What we've found in speaking with many customers is that some of these metrics are not needed; thus, we've set the limit at 350 metrics.
 
 To see what you're collecting and get below the limit, begin by using the commands seen above to investigate what metrics are available. We then recommend creating filters to refine what metrics are collected. If you believe you need more than 350 metrics, please reach out to [support@datadoghq.com](mailto:support@datadoghq.com).
 
-## Java Path
+### Java Path
 
 The agent does not come with a bundled JVM, but will use the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the agent.
 
@@ -258,7 +258,7 @@ Alternatively, you can specify the JVM path in the integration's configuration f
     java_bin_path: /path/to/java
 
 
-## Monitoring JBoss/WildFly applications
+### Monitoring JBoss/WildFly applications
 
 The following instructions will work on version 5.6.0 (and higher) of the Agent
 
@@ -268,29 +268,32 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
   2. If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    init_config:
-      custom_jar_paths:
-        - /path/to/jboss-cli-client.jar
-
+init_config:
+  custom_jar_paths:
+    - /path/to/jboss-cli-client.jar
+```
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    # The jmx_url may be different depending on the version of JBoss/WildFly you're using
-    # and the way you've set up JMX on your server
-    # Please refer to the relevant documentation of JBoss/WildFly for more information
-    instances:
-      - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
-        name: jboss-application  # Mandatory, but can be set to any value,
-                                 # will be used to tag the metrics pulled from that instance
+# The jmx_url may be different depending on the version of JBoss/WildFly you're using
+# and the way you've set up JMX on your server
+# Please refer to the relevant documentation of JBoss/WildFly for more information
+instances:
+  - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
+    name: jboss-application  # Mandatory, but can be set to any value,
+                             # will be used to tag the metrics pulled from that instance
+```
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
 
-## Monitoring Tomcat with JMX Remote Lifecycle Listener enabled
+### Monitoring Tomcat with JMX Remote Lifecycle Listener enabled
 
 The following instructions will work on version 5.6.0 (and higher) of the Agent
 
@@ -300,22 +303,26 @@ If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomc
   2. If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    init_config:
-      custom_jar_paths:
-        - /path/to/catalina-jmx-remote.jar
+init_config:
+  custom_jar_paths:
+    - /path/to/catalina-jmx-remote.jar
+```
 
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-    # Datadog Agent >= 5.6.0
+```
+# Datadog Agent >= 5.6.0
 
-    # The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
-    instances:
-      - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
-        name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
-                                  # will be used to tag the metrics pulled from that instance
+# The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
+instances:
+  - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
+    name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
+                              # will be used to tag the metrics pulled from that instance
+```
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`

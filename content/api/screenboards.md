@@ -41,11 +41,11 @@ For `create`/`read`/`update` endpoints, the body is one JSON payload describing 
 
 #### Base Payload:
 
-<%= snippet_code_block "sb-payload-example.js" %>
+{{< snippet-code-block file="sb-payload-example.js" >}}
 
 
 ## General Notes
-{: #notes}
+
 
 ### Sizing and positioning
 
@@ -76,11 +76,11 @@ If you would like to create or update boards that use templated variables, you m
 
 The final "base" payload of a templated board would look like this:
 
-<%= snippet_code_block "sb-payload-tpl-example.js" %>
+{{< snippet-code-block file="sb-payload-tpl-example.js" >}}
 
 
 ## API Usage
-{: #usage}
+
 
 The Screenboard API is supported in the Python and Ruby clients as well as with simple `curl` commands.
 
@@ -92,12 +92,13 @@ CREATE SCREENBOARD
 
 ### Creating Boards
 
-<%= code_tabs("screenboard_create") %>
+{{< code-tabs section="screenboard_create" >}}
 
 <div class="tab-content">
 
-  <div class="tab-pane active fade in" id="screenboard_create-python">
-<%= python <<EOF
+<div class="tab-pane active fade in" id="screenboard_create-python">
+
+{{< highlight python >}}
 from datadog import initialize, api
 
 options = {
@@ -124,12 +125,11 @@ board = {
 }
 
 result = api.Screenboard.create(**board)
-EOF
-%>
+{{< /highlight >}}
 </div>
 
-  <div class="tab-pane fade in" id="screenboard_create-ruby">
-<%= ruby <<EOF
+<div class="tab-pane fade in" id="screenboard_create-ruby">
+{{< highlight ruby >}}
 require 'rubygems'
 require 'dogapi'
 
@@ -155,11 +155,10 @@ board = {
 }
 
 result = dog.create_screenboard(board)
-EOF
-%>
-  </div>
-  <div class="tab-pane fade in" id="screenboard_create-console">
-<%= console <<EOF
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_create-console">
+{{< highlight shell >}}
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4
 app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 
@@ -180,9 +179,8 @@ curl -X POST -H "Content-type: application/json" \
         ]
     }' \
 "https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
-EOF
-%>
-  </div>
+{{< /highlight >}}
+</div>
 </div>
 
 <!--
@@ -193,12 +191,12 @@ UPDATE SCREENBOARD
 
 ### Updating Boards
 
-<%= code_tabs("screenboard_update") %>
+{{< code-tabs section="screenboard_update" >}}
 
 <div class="tab-content">
 
-  <div class="tab-pane active fade in" id="screenboard_update-python">
-<%= python <<EOF
+<div class="tab-pane active fade in" id="screenboard_update-python">
+{{< highlight python >}}
 from datadog import initialize, api
 
 options = {
@@ -227,12 +225,11 @@ updated_board = {
 }
 
 result = api.Screenboard.update(board_id, **updated_board)
-EOF
-%>
+{{< /highlight >}}
 </div>
 
-  <div class="tab-pane fade in" id="screenboard_update-ruby">
-<%= ruby <<EOF
+<div class="tab-pane fade in" id="screenboard_update-ruby">
+{{< highlight ruby >}}
 require 'rubygems'
 require 'dogapi'
 
@@ -259,11 +256,10 @@ updated_board = {
 }
 
 result = dog.update_screenboard(board_id, updated_board)
-EOF
-%>
-  </div>
-  <div class="tab-pane fade in" id="screenboard_update-console">
-<%= console <<EOF
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_update-console">
+{{< highlight shell >}}
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4
 app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
@@ -285,9 +281,8 @@ curl -X PUT -H "Content-type: application/json" \
         ]
     }' \
 "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
-EOF
-%>
-  </div>
+{{< /highlight >}}
+</div>
 </div>
 
 
@@ -299,12 +294,12 @@ GET SCREENBOARD
 
 ### Get Boards
 
-<%= code_tabs("screenboard_get") %>
+{{< code-tabs section="screenboard_get" >}}
 
 <div class="tab-content">
 
   <div class="tab-pane active fade in" id="screenboard_get-python">
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import initialize, api
 
 options = {
@@ -317,12 +312,11 @@ initialize(**options)
 board_id = 1234
 
 result = api.Screenboard.get(board_id)
-EOF
-%>
+{{< /highlight >}}
 </div>
 
-  <div class="tab-pane fade in" id="screenboard_get-ruby">
-<%= ruby <<EOF
+<div class="tab-pane fade in" id="screenboard_get-ruby">
+{{< highlight ruby >}}
 require 'rubygems'
 require 'dogapi'
 
@@ -333,19 +327,17 @@ board_id = 1234
 dog = Dogapi::Client.new(api_key, app_key)
 
 result = dog.get_screenboard(board_id)
-EOF
-%>
-  </div>
-  <div class="tab-pane fade in" id="screenboard_get-console">
-<%= console <<EOF
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_get-console">
+{{< highlight shell >}}
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4
 app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X GET \
 "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -357,12 +349,12 @@ DELETE SCREENBOARD
 
 ### Deleting Boards
 
-<%= code_tabs("screenboard_delete") %>
+{{< code-tabs section="screenboard_delete" >}}
 
 <div class="tab-content">
 
-  <div class="tab-pane active fade in" id="screenboard_delete-python">
-<%= python <<EOF
+<div class="tab-pane active fade in" id="screenboard_delete-python">
+{{< highlight python >}}
 from datadog import initialize, api
 
 options = {
@@ -375,12 +367,10 @@ initialize(**options)
 board_id = 1234
 
 result = api.Screenboard.delete(board_id)
-EOF
-%>
+{{< /highlight >}}
 </div>
-
-  <div class="tab-pane fade in" id="screenboard_delete-ruby">
-<%= ruby <<EOF
+<div class="tab-pane fade in" id="screenboard_delete-ruby">
+{{< highlight ruby >}}
 require 'rubygems'
 require 'dogapi'
 
@@ -391,19 +381,17 @@ board_id = 1234
 dog = Dogapi::Client.new(api_key, app_key)
 
 result = dog.delete_screenboard(board_id)
-EOF
-%>
-  </div>
-  <div class="tab-pane fade in" id="screenboard_delete-console">
-<%= console <<EOF
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_delete-console">
+{{< highlight shell >}}
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4
 app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X DELETE \
 "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -415,12 +403,12 @@ SHARE SCREENBOARD
 
 ### Sharing Boards
 
-<%= code_tabs("screenboard_share") %>
+{{< code-tabs section="screenboard_share" >}}
 
 <div class="tab-content">
 
   <div class="tab-pane active fade in" id="screenboard_share-python">
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import initialize, api
 
 options = {
@@ -433,12 +421,11 @@ initialize(**options)
 board_id = 1234
 
 result = api.Screenboard.share(board_id)
-EOF
-%>
+{{< /highlight >}}
 </div>
 
-  <div class="tab-pane fade in" id="screenboard_share-ruby">
-<%= ruby <<EOF
+<div class="tab-pane fade in" id="screenboard_share-ruby">
+{{< highlight ruby >}}
 require 'rubygems'
 require 'dogapi'
 
@@ -450,20 +437,19 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 result = dog.share_screenboard(board_id)
 # result = {"board_id" => board_id, "public_url" => "https://path/to/sb"}
-EOF
-%>
-  </div>
-  <div class="tab-pane fade in" id="screenboard_share-console">
-<%= console <<EOF
+{{< /highlight >}}
+</div>
+<div class="tab-pane fade in" id="screenboard_share-console">
+{{< highlight shell >}}
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4
 app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X GET \
 "https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
-EOF
-%>
-  </div>
+
+{{< /highlight >}}
+</div>
 </div>
 
 
@@ -471,20 +457,20 @@ EOF
 
 <h3 id="timeseries-widget">Timeseries Widget</h3>
 
-<%= snippet_code_block "sb-timeseries-widget.js" %>
+{{< snippet-code-block file="sb-timeseries-widget.js" >}}
 
 <h3 id="event-stream-widget">Event Stream Widget</h3>
 
-<%= snippet_code_block "sb-event-stream-widget.js" %>
+{{< snippet-code-block file="sb-event-stream-widget.js" >}}
 
 <h3 id="query-value-widget">Query Value Widget</h3>
 
-<%= snippet_code_block "sb-query-value-widget.js" %>
+{{< snippet-code-block file="sb-query-value-widget.js" >}}
 
 <h3 id="image-widget">Image Widget</h3>
 
-<%= snippet_code_block "sb-image-widget.js" %>
+{{< snippet-code-block file="sb-image-widget.js" >}}
 
 <h3 id="note-widget">Note Widget</h3>
 
-<%= snippet_code_block "sb-note-widget.js" %>
+{{< snippet-code-block file="sb-note-widget.js" >}}

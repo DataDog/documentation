@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: google_cloud_vpn
 ---
 
-# Overview
+## Overview
 Google Cloud VPN securely connects your existing network to your Google Cloud Platform network.
 
 Get metrics from Google VPN to:
@@ -15,10 +15,10 @@ Get metrics from Google VPN to:
 * Visualize the performance of your VPNs
 * Correlate the performance of your VPNs with your applications
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

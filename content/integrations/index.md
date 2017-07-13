@@ -20,10 +20,9 @@ Each page is organized as follows:
 
 -----
 
+
 <ul class="intlist list-group row">
-  <% $integration_items.each do |i| %>
-    <li class="list-group-item col-lg-2 col-md-3 col-sm-4 col-xs-6"><%= link_to i[:integration_title], i.path %></li>
-<% end %>
+  {{< integration-items >}}
 </ul>
 
 

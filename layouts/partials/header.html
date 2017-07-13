@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ .Params.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
+    {{ if eq .Params.beta true }} <meta name="robots" content="noindex"> {{ end }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="{{ .Site.Params.img_url }}favicon.ico">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main-dd.css">
+  </head>
+  <body>

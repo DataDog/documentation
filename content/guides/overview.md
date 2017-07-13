@@ -15,6 +15,8 @@ sidebar:
       href: "#dashboards"
     - text: Monitoring
       href: "#monitoring"
+aliases:
+  - /overview
 ---
 
 So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
@@ -23,9 +25,9 @@ This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
 ## Integrations
-{: #integrations}
 
-![](/static/images/integrations.png){: style="width:100%; border:1px solid #777777"}
+
+{{< img src="integrations.png" >}}
 
 * About 100 integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, always adding more.
 * Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>, many documented by our active user community.
@@ -34,9 +36,9 @@ it can help you bring your infrastructure to heel.
 in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
-{: #infrastructure}
 
-![](/static/images/infrastructure.png){: style="width:100%; border:1px solid #777777"}
+
+{{< img src="infrastructure.png" >}}
 
 * All machines show up in the infrastructure overview
 * Here you can see the tags applied to each machine; as they're assigned to
@@ -47,12 +49,12 @@ for you, to create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see <a target="_blank" href="/faq/#tagging">here</a>.
+* For more on tagging, please see <a target="_blank" href="https://docs.datadoghq.com/faq/#tagging">here</a>.
 
 ## Host Map
-{: #hostmap}
 
-![](/static/images/hostmap-overview.png){: style="width:100%; border:1px solid #777777"}
+
+{{< img src="hostmap-overview.png" >}}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -64,18 +66,18 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 
 ## Events
-{: #events}
 
-![](/static/images/event_stream.png){: style="width:100%; border:1px solid #777777"}
+
+{{< img src="event_stream.png" >}}
 
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed <a target="_blank" href="/faq/#team">teams</a> and maintaining the focus of an investigation
+* Great for distributed <a target="_blank" href="https://docs.datadoghq.com/faq/#team">teams</a> and maintaining the focus of an investigation
 * You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident
 
-![](/static/images/event_stream_post_incident_history.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="event_stream_post_incident_history.png" >}}
 
 
 For each incident users can:
@@ -84,17 +86,16 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* <a target="_blank" href="/faq/#notify">@ notify team members</a>, who receive an email
+* <a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email
 * @support-datadog to ask for assistance
 
-![](/static/images/event_stream_claim.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="event_stream_claim.png" >}}
 
 ## Dashboards
-{: dashboards}
 
-![](/static/images/dashboard_events.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="dashboard_events.png" >}}
 
-Dashboards contain <a target="_blank" href="/graphing/">graphs</a> with real-time performance metrics
+Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
 
 * Synchronous mousing across all graphs in a dashboard.
 * Vertical bars are events in the context of the metric.
@@ -110,9 +111,8 @@ without access to your data or any other information (via the pencil in the uppe
 
 
 ## Monitoring
-{: monitoring}
 
-![](/static/images/alert.png){: tyle="width:100%; border:1px solid #777777"}
+{{< img src="alert.png" >}}
 
 [Monitoring](/guides/monitoring/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -123,7 +123,7 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-![](/static/images/alert_setup.png){: style="width:100%; border:1px solid #777777"}
+{{< img src="alert_setup.png" >}}
 
 
 Does the data have to be pushed to Datadog?

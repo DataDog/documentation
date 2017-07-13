@@ -4,9 +4,10 @@ integration_title: Slack
 git_integration_title: slack
 kind: integration
 newhlevel: true
+doclevel: basic
 ---
 
-# Overview
+## Overview
 
 Connect Slack to Datadog in order to help your team collaborate by:
 
@@ -14,11 +15,11 @@ Connect Slack to Datadog in order to help your team collaborate by:
 * Receiving alerts and notifications from Datadog within Slack.
 
 
-# Installation
+## Installation
 
 The Slack integration is installed via its [integration tile](https://app.datadoghq.com/account/settings#integrations/slack) in the Datadog application.
 
-# Configuration
+## Configuration
 1. In your Slack account go to the [Applications page](https://slack.com/apps) and search for Datadog.
 1. Click Install, followed by Add Integration.
 1. Copy the Slack Service Hook and paste in the [service hook field for Slack in Datadog](https://app.datadoghq.com/account/settings#integrations/slack).
@@ -27,6 +28,6 @@ The Slack integration is installed via its [integration tile](https://app.datado
 
 If you wish to integrate with multiple Slack accounts, repeat the above steps and populate the Secondary Slack Account fields.
 
-# Metrics
+## Metrics
 
 The Slack integration does not provide any metrics at this time.

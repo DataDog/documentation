@@ -1,7 +1,7 @@
 ---
 title: Log Parsing in the Agent
 kind: guide
-listorder: 5
+listorder: 8
 sidebar:
   nav:
     - header: Guide to Log Parsing
@@ -89,7 +89,7 @@ Custom parsing functions must:
 
 Here's an example of what `parsers.py` might contain:
 
-<%= python <<eof
+{{< highlight python >}}
 import time
 from datetime import datetime
 
@@ -118,14 +118,13 @@ def parse_web(logger, line):
 
     # Return the output as a tuple
     return (metric_name, date, metric_value, attr_dict)
-eof
-%>
+{{< /highlight >}}
 
 
 You'll want to be able to test your parser outside of the Agent, so for the above example,
 you might add a test function like this:
 
-<%= python <<eof
+{{< highlight python >}}
 def test():
     # Set up the test logger
     import logging
@@ -152,8 +151,7 @@ def test():
 if __name__ == '__main__':
     # For local testing, callable as "python /path/to/parsers.py"
     test()
-eof
-%>
+{{< /highlight >}}
 
 And you can test your parsing logic by calling python /path/to/parsers.py.
 
@@ -216,7 +214,7 @@ of the aggregation key</td>
 <td>Name of the host this event originated from. The event will
 automatically get tagged with any tags you've given this host using
 the <a href="https://app.datadoghq.com/infrastructure#tags">tagging
-page</a> or the <a href="/api/#tags">tagging
+page</a> or the <a href="https://docs.datadoghq.com/api/#tags">tagging
 api</a>. The host value is used as part of the aggregation
 key.</td>
 </tr>

@@ -7,9 +7,9 @@ updated_for_agent: 5.8.5
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
-![HAProxy default dashboard](/static/images/haproxydash.png)
+{{< img src="haproxydash.png" alt="HAProxy default dashboard" >}}
 
 Capture HAProxy activity in Datadog to:
 
@@ -17,11 +17,11 @@ Capture HAProxy activity in Datadog to:
 * Know when a server goes down.
 * Correlate the performance of HAProxy with the rest of your applications.
 
-# Installation
+## Installation
 
 Make sure that stats are enabled on your HAProxy configuration. See [this post for guidance on doing this](https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics/).
 
-# Configuration
+## Configuration
 
 1.  Configure the Agent to connect to HAProxy. Edit conf.d/haproxy.yaml:
 
@@ -34,7 +34,7 @@ Make sure that stats are enabled on your HAProxy configuration. See [this post f
 
 1.  Restart the Agent
 
-# Validation
+## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -50,9 +50,9 @@ Make sure that stats are enabled on your HAProxy configuration. See [this post f
 
 Learn more about how to monitor HAProxy performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor HAProxy.
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-### Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 

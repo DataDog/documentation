@@ -22,7 +22,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.monotonic_count(...)` | monotonic_count | count |
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.histogram(...)` | histogram | gauge, rate |
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.set(...)` | set | gauge |
-{:.table}
+
 
 ## What's a use case for changing a metric's type?
 

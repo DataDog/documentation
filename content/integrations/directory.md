@@ -4,7 +4,7 @@ integration_title: Directory Check
 kind: integration
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Capture metrics from the files in given directories:
 
@@ -15,7 +15,7 @@ Capture metrics from the files in given directories:
 
 
 
-# Configuration
+## Configuration
 
 *To capture Directory metrics you need to install the Datadog Agent.*
 
@@ -40,13 +40,13 @@ Capture metrics from the files in given directories:
                name: "tag_name"
                pattern: "*.log"
                recursive: True
-    {:.language-yaml}
+
 
 4.  Restart the Agent
 
-<%= insert_example_links(conf: "directory", check: "directory")%>
+{{< insert-example-links conf="directory" check="directory" >}}
 
-# Validation
+## Validation
 
 To validate that the check has passed run the agent info command. The output of the command should contain a section similar to the following:
 

@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: honey badger
 ---
 
-# Overview
+## Overview
 
 Connect Honeybadger to Datadog to:
 
@@ -16,9 +16,9 @@ Connect Honeybadger to Datadog to:
 * Discuss errors with your team
 * Be super awesome
 
-![Honeybadger Event](/static/images/honeybadgerevent.png)
+{{< img src="honeybadgerevent.png" alt="Honeybadger Event" >}}
 
-# Installation
+## Installation
 
 To capture errors from Honeybadger:
 
@@ -29,7 +29,7 @@ To capture errors from Honeybadger:
 5.  Add your API key.
 6.  Save the integration.
 
-# Configuration
+## Configuration
 
 Click the **Install Integration** button on the Honeybadger Integration Tile. configuration steps are required for this integration.
 

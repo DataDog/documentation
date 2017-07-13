@@ -8,15 +8,15 @@ git_integration_title: spark
 ---
 
 
-# Overview
+## Overview
 
 Get metrics from your app in real time to
 
   * Visualize performance metrics
 
-![spark graph](/static/images/sparkgraph.png)
+{{< img src="sparkgraph.png" alt="spark graph" >}}
 
-# Configuration
+## Configuration
 
 *Install Datadog Agent on the Master Node where the ResourceManager is running*
 
@@ -47,9 +47,9 @@ Get metrics from your app in real time to
             #   - optional_tag1
             #   - optional_tag2
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 1.  Restart the Agent
 2.  Execute the info command and verify that the integration check passed. The output of the command should contain a section similar to the following:
@@ -65,6 +65,6 @@ Get metrics from your app in real time to
             - instance #0 [OK]
             - Collected 0 metrics, 0 events & 2 service checks
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}

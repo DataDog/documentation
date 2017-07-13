@@ -1,7 +1,7 @@
 ---
 title: Guide to Tagging
 kind: guide
-listorder: 12
+listorder: 17
 ---
 
 ## Overview
@@ -16,61 +16,62 @@ The easiest method for assigning tags is to rely on the integration. Tags assign
 
 The following integration sources create tags automatically in Datadog:
 
-| Amazon CloudFront | Distribution |
-| Amazon EC2 | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| Amazon Elastic File System | Filesystem |
-| Amazon Kinesis | Stream State |
-| Amazon Machine Learning | BatchPrediction, DataSource, Evaluation  , MLModel |
-| Amazon Route 53 | Domains, Healthchecks  , HostedZone |
-| Amazon WorkSpaces| WorkSpaces |
-| AWS CloudTrail | CloudTrail |
-| AWS Elastic Load Balancing| Loadbalancer, TargetGroups |
-| AWS Identity and Access Management | Profile Name |
-| AWS SQS | Queue Name |
-| Apache | Apache Host and Port |
-| Azure | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| BTRFS | Usage & Replication Type |
-| Chef | Chef Roles |
-| Consul | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
-| CouchDB | Database Name,  Instance Name |
-| CouchBase | CouchBase Tags,  Instance Name |
-| Docker | Docker Container and Image Name, Container Command, Container Labels |
-| Dyn | Zone, Record Type |
-| Elasticsearch | Cluster Name,  Host Name, Port Number  |
-| Etcd | State Leader or Follower |
-| Fluentd | Host Name, Port Number |
-| Google App Engine | Project Name, Version ID, Task Queue |
-| Google Cloud Platform | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| Go Expvar | Expvar Path |
-| Gunicorn | State Idle or Working, App Name |
-| HAProxy | Service Name, Availability, Backend Host, Status, Type |
-| HTTP Check | URL, Instance |
-| IIS | Site |
-| Jenkins | Job Name, Build Number, Branch, and Results |
-| JMX | JMX Tags |
-| Kafka | Topic |
-| Kubernetes | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
-| Marathon | URL |
-| Memcached | Host, Port,  Request, Cache Hit or Miss |
-| Mesos | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
-| Mongo | Server Name |
-| OpenStack | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| PHP FPM | Pool Name |
-| Pivotal | Current State, Owner, Labels, Requester, Story Type |
-| Postfix | Queue, Instance |
-| * Puppet | Puppet Tags |
-| RabbitMQ | Node, Queue Name, Vhost, Policy, Host |
-| Redis | Host, Port,  Slave or Master |
-| RiakCS | Aggregation Key |
-| SNMP | Device IP Address |
-| Supervisord | Server Name, Process Name |
-| TeamCity | Tags, Code Deployments, Build Number |
-| TokuMX | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
-| Varnish | Name, Backend |
-| VSphere | Host, Datacenter, Server, Instance |
-| Win32 Events | Event ID |
-| Windows Services | Service Name |
-{: .table}
+|                                       |                                                                               |
+| :-------------------------------------|:------------------------------------------------------------------------------|
+| Amazon CloudFront                     | Distribution |
+| Amazon EC2                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| Amazon Elastic File System            | Filesystem |
+| Amazon Kinesis                        | Stream State |
+| Amazon Machine Learning               | BatchPrediction, DataSource, Evaluation  , MLModel |
+| Amazon Route 53                       | Domains, Healthchecks  , HostedZone |
+| Amazon WorkSpaces                     | WorkSpaces |
+| AWS CloudTrail                        | CloudTrail |
+| AWS Elastic Load Balancing            | Loadbalancer, TargetGroups |
+| AWS Identity and Access Management    | Profile Name |
+| AWS SQS                               | Queue Name |
+| Apache                                | Apache Host and Port |
+| Azure                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| BTRFS                                 | Usage & Replication Type |
+| Chef                                  | Chef Roles |
+| Consul                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
+| CouchDB                               | Database Name,  Instance Name |
+| CouchBase                             | CouchBase Tags,  Instance Name |
+| Docker                                | Docker Container and Image Name, Container Command, Container Labels |
+| Dyn                                   | Zone, Record Type |
+| Elasticsearch                         | Cluster Name,  Host Name, Port Number  |
+| Etcd                                  | State Leader or Follower |
+| Fluentd                               | Host Name, Port Number |
+| Google App Engine                     | Project Name, Version ID, Task Queue |
+| Google Cloud Platform                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| Go Expvar                             | Expvar Path |
+| Gunicorn                              | State Idle or Working, App Name |
+| HAProxy                               | Service Name, Availability, Backend Host, Status, Type |
+| HTTP Check                            | URL, Instance |
+| IIS                                   | Site |
+| Jenkins                               | Job Name, Build Number, Branch, and Results |
+| JMX                                   | JMX Tags |
+| Kafka                                 | Topic |
+| Kubernetes                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
+| Marathon                              | URL |
+| Memcached                             | Host, Port,  Request, Cache Hit or Miss |
+| Mesos                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| Mongo                                 | Server Name |
+| OpenStack                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
+| PHP FPM                               | Pool Name |
+| Pivotal                               | Current State, Owner, Labels, Requester, Story Type |
+| Postfix                               | Queue, Instance |
+| * Puppet                              | Puppet Tags |
+| RabbitMQ                              | Node, Queue Name, Vhost, Policy, Host |
+| Redis                                 | Host, Port,  Slave or Master |
+| RiakCS                                | Aggregation Key |
+| SNMP                                  | Device IP Address |
+| Supervisord                           | Server Name, Process Name |
+| TeamCity                              | Tags, Code Deployments, Build Number |
+| TokuMX                                | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
+| Varnish                               | Name, Backend |
+| VSphere                               | Host, Datacenter, Server, Instance |
+| Win32 Events                          | Event ID |
+| Windows Services                      | Service Name |
 
 
 ### Assigning tags using the configuration files
@@ -118,12 +119,12 @@ After you have assigned tags at the host and integration level, you can start us
 ### Using tags in the Events List
 The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter ```tags:``` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:sobotka. So the search text is ```tags:role:sobotka```.
 
-![Events List and Tags](/static/images/eventtags.png)
+{{< img src="eventtags.png" alt="Events List and Tags" >}}
 
 ### Using tags in Dashboards
 You can use tags to narrow down the metrics to display on a dashboard grapm, or to create groups of metrics to display. To narrow down the metrics to display, enter the tag in the over: textbox. You will now be looking at a chosen metric over all the hosts that have that particular tag assigned. To group using tags, enter the key part of the tag in the group: textbox. For instance, if you have a timeseries graph and you have assigned the tags ```role:database```, ```role:frontend```, and ```role:loadbalancer```, you will get one line in your timeseries graph representing all the machines with the database, another of machines wth the frontend, and third of machines with the loadbalancer.
 
-![Tags in Dashboards](/static/images/dashboardtags.png)
+{{< img src="dashboardtags.png" alt="Tags in Dashboards" >}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
 
@@ -131,13 +132,13 @@ You can also use tags to overlay events on the dashboard. This works in exactly 
 
 To filter the list of hosts in the Infrastructure list, enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you will see each role as a group heading followed by the hosts with that tag.
 
-![Tags in the Infrastructure List](/static/images/infrastructuretags.png)
+{{< img src="infrastructuretags.png" alt="Tags in the Infrastructure List" >}}
 
 ### Using tags in Monitors
 
 When defining a monitor, you can use tags to allow the monitor to apply to any subset of hosts across your environment.
 
-![Tags in Monitors](/static/images/monitortags.png)
+{{< img src="monitortags.png" alt="Tags in Monitors" >}}
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

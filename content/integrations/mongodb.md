@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: mongodb
 newhlevel: true
 ---
-# Overview
+## Overview
 
 Connect MongoDB to Datadog in order to:
 
@@ -13,7 +13,7 @@ Connect MongoDB to Datadog in order to:
 * Correlate MongoDB performance with the rest of your applications.
 
 
-# Installation
+## Installation
 
 1.  To capture MongoDB metrics you need to install the Datadog Agent.
 2.  Create a read-only admin user for Datadog (Admin rights are needed to collect complete server statistics). In the mongo shell, run:
@@ -36,7 +36,7 @@ Connect MongoDB to Datadog in order to:
           ]
         })
 
-# Configuration
+## Configuration
 
 1.  Edit your conf.d/mongo.yaml file as follows:
 
@@ -56,9 +56,9 @@ Connect MongoDB to Datadog in order to:
 
 2.  Restart the agent
 
-<%= insert_example_links(conf:"mongo", check:"mongo")%>
+{{< insert-example-links conf="mongo" check="mongo" >}}
 
-# Validation
+## Validation
 
 To validate that the integration is working, run ```datadog-agent info```. You should see results similar to the following:
 
@@ -72,9 +72,9 @@ To validate that the integration is working, run ```datadog-agent info```. You s
             - Dependencies:
                 - pymongo: 2.8
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
 Note: many of these metrics are described in the [MongoDB Manual 3.0](https://docs.mongodb.org/manual/reference/command/dbStats/)
 

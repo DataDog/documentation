@@ -13,8 +13,8 @@ Capture SSH activity into Datadog to:
 * Visualize your SSH performance in real-time
 * Detect any protocol failure or network outage
 
-<%= insert_example_links(conf:"ssh_check", check:"ssh_check")%>
+{{< insert-example-links conf="ssh_check" check="ssh_check" >}}
 
-## Metrics
+# Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: http://docs.datadoghq.com/sitemap.xml

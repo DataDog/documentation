@@ -10,15 +10,15 @@ platformmetrics:
     - Windows
 ---
 
-# Overview
+## Overview
 
 Get metrics related to disk usage and IO metrics.
 
-# Installation
+## Installation
 
 Included by default with the Datadog agent installation.
 
-# Configuration
+## Configuration
 
 
 This configuration does not require any explicit configuration to begin monititoring your storage devices.  One however can override the default settings to adjust how disks are monitored.
@@ -56,9 +56,9 @@ This configuration does not require any explicit configuration to begin monitito
       # get metrics for all partitions. use_mount should be set to yes (to avoid
       # collecting empty device names) when using this option.
       # all_partitions: no
-{:.language-yaml}
 
-# Validation
+
+## Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -77,7 +77,7 @@ You should see something similar to the following if everything is working corre
           - Collected 8 metrics & 0 events
 
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git('system', 'system.disk, system.fs') %>
+{{< get-metrics-from-git "system" "system.disk system.fs">}}
 

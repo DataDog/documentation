@@ -1,6 +1,6 @@
 ---
-title: Datadog-NodeJS Integration
-integration_title: NodeJS
+title: "Datadog-NodeJS Integration"
+integration_title: "NodeJS"
 kind: integration
 doclevel: basic
 ---

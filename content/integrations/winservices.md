@@ -6,13 +6,13 @@ doclevel: basic
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
 Monitor the state of your Windows Services.
 
-![Windows Service Event](/static/images/windows-service.png)
+{{< img src="windows-service.png" alt="Windows Service Event" >}}
 
-# Configuration
+## Configuration
 
 Configure the Agent using the Agent Manager
 
@@ -41,11 +41,11 @@ Configure the Agent using the Agent Manager
           - host: . # "." means the current host
             services:
               - wmiApSrv # service names are not case-sensitive
-    {:.language-yaml}
+
 
 1.  Restart the agent.
 
-# Validation
+## Validation
 
 After you restart the agent, check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 
@@ -60,4 +60,4 @@ After you restart the agent, check the info page in the Agent Manager and verify
           - instance #0 [OK]
           - Collected 8 metrics & 0 events
 
-<%= insert_example_links(conf:"windows_service", check:"windows_service")%>
+{{< insert-example-links conf="windows_service" check="windows_service" >}}

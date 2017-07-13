@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: activemq
 ---
 
-# Overview
+## Overview
 
 Get metrics from ActiveMQ in real time to
 
@@ -15,8 +15,8 @@ Get metrics from ActiveMQ in real time to
 * Correlate the performance of ActiveMQ with the rest of your applications
 
 
-# Configuration
-{: #int-configuration}
+## Configuration
+
 
 ***This integration requires Linux or Mac OS X.***
 
@@ -87,22 +87,23 @@ Get metrics from ActiveMQ in real time to
                 MemoryPercentUsage:
                   alias: activemq.broker.memory_pct
                   metric_type: gauge
-    {:.language-yaml}
+
 
 3. Restart the agent
 
         sudo /etc/init.d/datadog-agent restart
-    {:.language-shell}
+
 
         if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; \
         then echo -e "\e[0;32mAgent is running\e[0m"; \
         else echo -e "\e[031mAgent is not running\e[0m"; fi
-    {:.language-shell}
 
-<%= insert_example_links(check: "none")%>
 
-# Metrics
+{{< insert-example-links check="none" >}}
 
-<%= get_metrics_from_git()%>
+## Metrics
+
+{{< get-metrics-from-git >}}
+
 
 [1]: http://activemq.apache.org/jmx.html

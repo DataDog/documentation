@@ -14,15 +14,6 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 
 ### API
 
-<%
-  # Some shortcuts for the columns.
-  left_side_div  = '<div class="col-xs-12 col-md-6 api-left tracing-api">'
-  right_side_div = '<div class="col-xs-12 col-md-6 api-right tracing-api">'
-
-  no_args = '<em>This end point takes no JSON arguments.</em>'
-  no_response = '<em>This end point does not return JSON on successful requests.</em>'
-%>
-
 <!--div class="btn-toolbar">
   <div class="btn-group language-links btn-group-sm">
     <div lang="console" class="active lang-btn btn btn-default gradient">Shell</div>
@@ -35,10 +26,10 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 <h4 id="traces" class="tracing-api">Traces</h4>
 
 <div class="row">
-  <%= left_side_div %>
+  <div class="col-xs-12 col-md-6 tracing-api">
     <h5>Arguments</h5>
     <ul class="arguments">
-      <%= argument('traces', 'A list of traces. Traces are a list of spans as JSON objects containing the span information:
+      {{< argument name="traces" description="A list of traces. Traces are a list of spans as JSON objects containing the span information:" >}}
         <ul>
           <li><code>trace_id</code> - <em>Required.</em> The unique integer (64-bit unsigned) ID of the trace containing this span.</li>
           <li><code>span_id</code> - <em>Required.</em> The span integer (64-bit unsigned) ID.</li>
@@ -52,7 +43,6 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
           <li><code>error</code> - <em>Optional.</em> Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the <code>meta</code> property.</li>
           <li><code>meta</code> - <em>Optional.</em> A dictionary of key-value metadata. e.g. tags.</li>
         </ul>
-      ') %>
     </ul>
 
     Note: You may send multiple spans within a trace array and each span within a trace should use the same trace_id. You may also send multiple traces.
@@ -63,35 +53,30 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 
   </div>
 
-  <%= right_side_div %>
+  <div class="col-xs-12 col-md-6 api-right tracing-api">
     <h5>Signature</h5>
     <code>PUT /v0.3/traces</code>
 
-    <h5>Example Request</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_code_block "trace-api-traces.#{f}", :nocomments => true %>
-    <% end %>
-
+<h5>Example Request</h5>
+{{< snippet-code-block file="trace-api-traces." languages="sh" nocomments="true" >}}
     <h5>Example Response</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_result_code_block "trace-api-traces.#{f}" %>
-    <% end %>
+{{< snippet-result-code-block file="trace-api-traces." languages="sh" >}}
+
   </div>
 </div>
 
 <h4 id="services" class="tracing-api">Services</h4>
 
 <div class="row">
-  <%= left_side_div %>
+  <div class="col-xs-12 col-md-6 tracing-api">
     <h5>Arguments</h5>
     <ul class="arguments">
-      <%= argument('service', 'A service as a JSON object containing the service name mapped to application and application type information:
+      {{< argument name="service" description="A service as a JSON object containing the service name mapped to application and application type information:" >}}
         <ul>
           <li><code>service</code> - <em>Required.</em>The service name as a dictionary key.</li>
           <li><code>app</code> - <em>Required.</em> The name of the application.</li>
           <li><code>app_type</code> - <em>Required.</em> The type of application.</li>
         </ul>
-      ') %>
     </ul>
 
     <h5>Response</h5>
@@ -100,25 +85,20 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 
   </div>
 
-  <%= right_side_div %>
+  <div class="col-xs-12 col-md-6 api-right tracing-api">
     <h5>Signature</h5>
     <code>PUT /v0.3/services</code>
 
-    <h5>Example Request</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_code_block "trace-api-services.#{f}", :nocomments => true %>
-    <% end %>
+<h5>Example Request</h5>
+{{< snippet-code-block file="trace-api-services." languages="sh" nocomments="true" >}}
 
-    <h5>Example Response</h5>
-    <% %w{sh}.each do |f| %>
-      <%= snippet_result_code_block "trace-api-services.#{f}" %>
-    <% end %>
+<h5>Example Response</h5>
+{{< snippet-result-code-block file="trace-api-services." languages="sh" >}}
+
   </div>
 </div>
 
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    $(DD_docs.apiPage);
+<script type="text/javascript">
+  //$(DD_docs.apiPage);
+</script>
 
-  </script>
-<% end %>

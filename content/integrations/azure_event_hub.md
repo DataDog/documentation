@@ -7,7 +7,7 @@ git_integration_title: azure_event_hub
 newhlevel: true
 ---
 
-# Overview
+## Overview
 Azure Event Hub is a large scale data stream managed service.
 
 Get metrics from Azure Event Hub to:
@@ -15,10 +15,10 @@ Get metrics from Azure Event Hub to:
 * Visualize the performance of your Event Hubs
 * Correlate the performance of your Event Hubs with your applications
 
-# Installation
+## Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-# Metrics
-<%= get_metrics_from_git()%>
+## Metrics
 
+{{< get-metrics-from-git >}}

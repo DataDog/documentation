@@ -1,13 +1,13 @@
 ---
 title: Sending Metrics with DogStatsD
 kind: guide
-listorder: 4
-
-
+listorder: 7
+js_dd_docs_methods:
+  - metricsGuidePage
+code_languages:
+  - Python
+  - Ruby
 ---
-
-<% tab_languages = %w{Python Ruby} %>
-
 <!--
 ======================================================
 OVERVIEW
@@ -22,7 +22,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -45,45 +45,41 @@ contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
-<%= code_tabs("setup", tab_languages) %>
+{{< code-tabs section="setup" >}}
 
 <div class="tab-content">
 
   <div class="tab-pane active fade in" id="setup-python">
 First, install the module:
 
-<%= console <<EOF
+{{< highlight console >}}
 $ pip install datadog
-EOF
-%>
+{{< /highlight >}}
 And import it, so it's ready to use:
 
-<%= python <<EOF
+{{< highlight python >}}
 from datadog import statsd
-EOF
-%>
+{{< /highlight >}}
   </div>
 
   <div class="tab-pane fade in" id="setup-ruby">
 First, install the module:
-<%= console <<EOF
+{{< highlight console >}}
 $ gem install dogstatsd-ruby
-EOF
-%>
+{{< /highlight >}}
 And add it to your code:
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Import the library
 require 'datadog/statsd'
 
 # Create a statsd client instance.
 statsd = Datadog::Statsd.new
-EOF
-%>
+{{< /highlight >}}
   </div>
   <p>Now we're ready to roll.</p>
   <div class="alert info-block">
     This tutorial has examples for Python and Ruby, but check out the
-    <a href="/libraries/">libraries page</a> if you use another language.
+    <a href="https://docs.datadoghq.com/libraries/">libraries page</a> if you use another language.
   </div>
 
 </div>
@@ -118,34 +114,33 @@ Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
-<%= code_tabs("counters-page-views", tab_languages) %>
+
+{{< code-tabs section="counters-metrics" >}}
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="counters-page-views-python">
-<%= python <<EOF
+  <div class="tab-pane active fade in" id="counters-metrics-python">
+{{< highlight python >}}
 def render_page():
     """ Render a web page. """
     statsd.increment('web.page_views')
     return 'Hello World!'
-EOF
-%>
+{{< /highlight >}}
   </div>
-  <div class="tab-pane fade in" id="counters-page-views-ruby">
-<%= ruby <<EOF
+  <div class="tab-pane fade in" id="counters-metrics-ruby">
+{{< highlight ruby >}}
 def render_page()
   # Render a web page.
   statsd.increment('web.page_views')
   return 'Hello World!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-<img src="/static/images/graph-guides-metrics-page-views.png" style="width:100%"/>
+{{< img src="graph-guides-metrics-page-views.png" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -158,27 +153,25 @@ of bytes processed by a file uploading service. We'll increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
-<%= code_tabs("counters-uploaded", tab_languages) %>
+{{< code-tabs section="counters-uploaded" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="counters-uploaded-python">
-<%= python <<EOF
+{{< highlight python >}}
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
     save_file(file)
     return 'File uploaded!'
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="counters-uploaded-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def upload_file(file)
   statsd.count('file_service.bytes_uploaded', file.size())
   save_file(file)
   return 'File uploaded!'
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -201,28 +194,25 @@ Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
-
-<%= code_tabs("gauges", tab_languages) %>
+{{< code-tabs section="guagesmeasure" >}}
 
 <div class="tab-content">
-  <div class="tab-pane active fade in" id="gauges-python">
-<%= python <<EOF
+  <div class="tab-pane active fade in" id="guagesmeasure-python">
+{{< highlight python >}}
 # Record the amount of free memory every ten seconds.
 while True:
     statsd.gauge('system.mem.free', get_free_memory())
     time.sleep(10)
-EOF
-%>
+{{< /highlight >}}
   </div>
-  <div class="tab-pane fade in" id="gauges-ruby">
-<%= ruby <<EOF
+  <div class="tab-pane fade in" id="guagesmeasure-ruby">
+{{< highlight ruby >}}
 # Record the amount of free memory every ten seconds.
 while true do
     statsd.gauge('system.mem.free', get_free_memory())
     sleep(10)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -238,11 +228,11 @@ Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
 we can sample each query time with the metric `database.query.time`.
 
-<%= code_tabs("histograms", tab_languages) %>
+{{< code-tabs section="histograms" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="histograms-python">
-<%= python <<EOF
+{{< highlight python >}}
 # Track the run time of the database query.
 start_time = time.time()
 results = db.query()
@@ -253,11 +243,10 @@ statsd.histogram('database.query.time', duration)
 @statsd.timed('database.query.time')
 def get_data():
     return db.query()
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="histograms-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 start_time = Time.now
 results = db.query()
 duration = Time.now - start_time
@@ -268,8 +257,7 @@ statsd.histogram('database.query.time', duration)
 statsd.time('database.query.time') do
   return db.query()
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -285,7 +273,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-<img src="/static/images/graph-guides-metrics-query-times.png" style="width:100%"/>
+{{< img src="graph-guides-metrics-query-times.png" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -311,11 +299,11 @@ SERVICE CHECKS
 
 Service checks are used to send information about the status of a service.
 
-<%= code_tabs("service-checks", tab_languages) %>
+{{< code-tabs section="service-checks" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="service-checks-python">
-<%= python <<EOF
+{{< highlight python >}}
 from datadog.api.constants import CheckStatus
 
 # Report the status of an app.
@@ -324,11 +312,10 @@ status = CheckStatus.OK
 message = 'Response: 200 OK'
 
 statsd.service_check(check_name=name, status=status, message=message)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="service-checks-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 # Report the status of an app.
 name = 'web.app1'
 status = Datadog::Statsd::OK
@@ -337,8 +324,7 @@ opts = {
 }
 
 statsd.service_check(name, status, opts)
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -357,25 +343,23 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitors to your site, sets are a great way to do
 that.
 
-<%= code_tabs("sets", tab_languages) %>
+{{< code-tabs section="sets" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sets-python">
-<%= python <<EOF
+{{< highlight python >}}
 def login(self, user_id):
     # Log the user in ...
     statsd.set('users.uniques', user_id)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sets-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def login(self, user_id)
     # Log the user in ...
     statsd.set('users.uniques', user_id)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -393,11 +377,11 @@ aggregated and compared on the front end. Suppose we wanted to measure the
 performance of two algorithms in the real world. We could sample one metric
 `algorithm.run_time` and specify each version with a tag:
 
-<%= code_tabs("tags", tab_languages) %>
+{{< code-tabs section="tags" >}}
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="tags-python">
-<%= python <<EOF
+{{< highlight python >}}
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -405,11 +389,10 @@ def algorithm_one():
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
     # Do fancy things here ...
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="tags-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 def algorithm_one()
   statsd.timed('algorithm.run_time', :tags => ['algorithm:one']) do
     # Do fancy things here ...
@@ -421,8 +404,7 @@ def algorithm_two()
     # Do different fancy things here ...
   end
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -467,27 +449,25 @@ of overhead for performance intensive code paths. To work around this, StatsD
 supports sample rates, which allows sending a metric a fraction of the time
 and scaling up correctly on the server.
 
-<%= code_tabs("sample-rates", tab_languages) %>
+{{< code-tabs section="sample-rates" >}}
 
 The following code will only send points half of the time:
 
 <div class="tab-content">
   <div class="tab-pane active fade in" id="sample-rates-python">
-<%= python <<EOF
+{{< highlight python >}}
 while True:
   do_something_intense()
   statsd.increment('loop.count', sample_rate=0.5)
-EOF
-%>
+{{< /highlight >}}
   </div>
   <div class="tab-pane fade in" id="sample-rates-ruby">
-<%= ruby <<EOF
+{{< highlight ruby >}}
 while true do
   do_something_intense()
   statsd.increment('loop.count', :sample_rate => 0.5)
 end
-EOF
-%>
+{{< /highlight >}}
   </div>
 </div>
 
@@ -501,7 +481,7 @@ Datadog:
 
 <ul>
   <li>
-    Submit metrics directly to Datadog's <a href="/api/">HTTP API</a>
+    Submit metrics directly to Datadog's <a href="https://docs.datadoghq.com/api/">HTTP API</a>
   </li>
   <li>
     Use Dropwizard's Java <a
@@ -532,10 +512,3 @@ Note that the metrics explorer doesn't save any of these graphs. If you've
 created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
 an existing one.
-
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    $(DD_docs.metricsGuidePage);
-  </script>
-<% end %>

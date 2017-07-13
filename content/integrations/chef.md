@@ -6,9 +6,9 @@ git_integration_title: chef
 newhlevel: true
 updated_for_agent: 5.8.5
 ---
-# Overview
+## Overview
 
-![Chef Event](/static/images/chefdashboard.png)
+{{< img src="chefdashboard.png" alt="Chef Event" >}}
 
 Chef is a popular configuration management tool written in Ruby and Erlang. If you manage your compute instances with Chef and want to use it to install the Datadog agent, [check out our guide for that](http://docs.datadoghq.com/guides/chef/). *This* page is about sending Chef metrics to Datadog.
 
@@ -18,7 +18,7 @@ Connect Chef to Datadog in order to:
 * Track key Chef performance metrics across all your servers
 * Quickly identify and discuss failed Chef runs with your team
 
-# Installation
+## Installation
 
 1.  If you are using Berkshelf, add the cookbook to your Berksfile:
 
@@ -58,10 +58,10 @@ Connect Chef to Datadog in order to:
 
 1.  Wait for the next scheduled chef-client run.
 
-# Validation
+## Validation
 
 From your [events stream](https://app.datadoghq.com/event/stream), enter `sources:chef` in the search bar. Your Chef runs should appear.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

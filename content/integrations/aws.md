@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 git_integration_title: amazon_web_services
 ---
-# Overview
+## Overview
 
 Connect to Amazon Web Services (AWS) in order to:
 
@@ -18,44 +18,46 @@ Connect to Amazon Web Services (AWS) in order to:
 
 Related integrations include:
 
-| [API Gateway](/integrations/awsapigateway) | create, publish, maintain, and secure APIs |
-| [Autoscaling](/integrations/awsautoscaling) | scale EC2 capacity |
-| [Billing](/integrations/awsbilling) | billing and budgets |
-| [CloudFront](/integrations/awscloudfront) | glocal content delivery network |
-| [CloudTrail](/integrations/awscloudtrail) | Access to log files and AWS API calls |
-| [CloudSearch](/integrations/awscloudsearch) | Access to log files and AWS API calls |
-| [Dynamo DB](/integrations/awsdynamo) | NoSQL Database|
-| [EC2 Container Service (ECS)](/integrations/ecs) | container management service that supports Docker containers |
-| [Elastic Beanstalk](/integrations/awsbeanstalk) | easy-to-use service for deploying and scaling web applications and services |
-| [Elastic Block Store (EBS)](/integrations/awsebs) | persistent block level storage volumes |
-| [ElastiCache](/integrations/awselasticache) | in-memory cache in the cloud |
-| [Elastic Cloud Compute (EC2)](/integrations/awsec2) | resizable compute capacity in the cloud |
-| [Elastic File System (EFS)](/integrations/awsefs) | shared file storage |
-| [Elastic Load Balancing (ELB)](/integrations/awselb) | distributes incoming application traffic across multiple Amazon EC2 instances |
-| [Elastic Map Reduce (EMR)](/integrations/awsemr) | data processing using Hadoop |
-| [Elasticsearch Service (ES)](/integrations/awses) |  deploy, operate, and scale Elasticsearch clusters |
-| [Firehose](/integrations/awsfirehose) | capture and load streaming data |
-| [IOT](/integrations/awsiot) | connect IOT devices with cloud services |
-| [Kinesis](/integrations/awskinesis) | service for real-time processing of large, distributed data streams |
-| [Key Management Service (KMS)](/integrations/awskms) | create and control encryption keys |
-| [Lambda](/integrations/awslambda) | serverless computing |
-| [Machine Learning (ML)](/integrations/awsml) | create machine learning models |
-| [OpsWorks](/integrations/awsopsworks) | configuration management |
-| [Polly](/integrations/awspolly) | text-speech service |
-| [Redshift](/integrations/awsredshift) | data warehouse solution |
-| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud |
-| [Route 53](/integrations/awsroute53) | DNS and traffic management with availability monitoring |
-| [Simple Email Service (SES)](/integrations/awsses) | cost-effective, outbound-only email-sending service |
-| [Simple Notification System (SNS)](/integrations/awssns) | alert and notifications |
-| [Simple Queue Service (SQS)](/integrations/awssqs) | messaging queue service |
-| [Simple Storage Service (S3)](/integrations/awss3) | highly available and scalable cloud storage service |
-| [Simple Workflow Service (SWF)](/integrations/awsswf) | cloud workflow management |
-| [Storage Gateway](/integrations/awsstoragegateway) | hybrid cloud storage |
-| [Web Application Firewall (WAF)](/integrations/awswaf) | protect web applications from common web exploits |
-| [Workspaces](/integrations/awsworkspaces) | secure desktop computing service |
-{:.table}
+|                                                           |                                                                               |
+| :---------------------------------------------------------|:------------------------------------------------------------------------------|
+| [API Gateway](/integrations/awsapigateway)                | create, publish, maintain, and secure APIs                                    |
+| [Autoscaling](/integrations/awsautoscaling)               | scale EC2 capacity                                                            |
+| [Billing](/integrations/awsbilling)                       | billing and budgets                                                           |
+| [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |
+| [CloudTrail](/integrations/awscloudtrail)                 | Access to log files and AWS API calls                                         |
+| [CloudSearch](/integrations/awscloudsearch)               | Access to log files and AWS API calls                                         |
+| [Dynamo DB](/integrations/awsdynamo)                      | NoSQL Database                                                                |
+| [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
+| [Elastic Beanstalk](/integrations/awsbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
+| [Elastic Block Store (EBS)](/integrations/awsebs)         | persistent block level storage volumes                                        |
+| [ElastiCache](/integrations/awselasticache)               | in-memory cache in the cloud                                                  |
+| [Elastic Cloud Compute (EC2)](/integrations/awsec2)       | resizable compute capacity in the cloud                                       |
+| [Elastic File System (EFS)](/integrations/awsefs)         | shared file storage                                                           |
+| [Elastic Load Balancing (ELB)](/integrations/awselb)      | distributes incoming application traffic across multiple Amazon EC2 instances |
+| [Elastic Map Reduce (EMR)](/integrations/awsemr)          | data processing using Hadoop                                                  |
+| [Elasticsearch Service (ES)](/integrations/awses)         |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Firehose](/integrations/awsfirehose)                     | capture and load streaming data                                               |
+| [IOT](/integrations/awsiot)                               | connect IOT devices with cloud services                                       |
+| [Kinesis](/integrations/awskinesis)                       | service for real-time processing of large, distributed data streams           |
+| [Key Management Service (KMS)](/integrations/awskms)      | create and control encryption keys                                            |
+| [Lambda](/integrations/awslambda)                         | serverless computing                                                          |
+| [Machine Learning (ML)](/integrations/awsml)              | create machine learning models                                                |
+| [OpsWorks](/integrations/awsopsworks)                     | configuration management                                                      |
+| [Polly](/integrations/awspolly)                           | text-speech service                                                           |
+| [Redshift](/integrations/awsredshift)                     | data warehouse solution                                                       |
+| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud                                              |
+| [Route 53](/integrations/awsroute53)                      | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/integrations/awsses)        | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/integrations/awssns)  | alert and notifications                                                       |
+| [Simple Queue Service (SQS)](/integrations/awssqs)        | messaging queue service                                                       |
+| [Simple Storage Service (S3)](/integrations/awss3)        | highly available and scalable cloud storage service                           |
+| [Simple Workflow Service (SWF)](/integrations/awsswf)     | cloud workflow management                                                     |
+| [Storage Gateway](/integrations/awsstoragegateway)        | hybrid cloud storage                                                          |
+| [Web Application Firewall (WAF)](/integrations/awswaf)    | protect web applications from common web exploits                             |
+| [Workspaces](/integrations/awsworkspaces)                 | secure desktop computing service                                              |
 
-# Installation
+
+## Installation
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
@@ -84,8 +86,6 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ecs:List*",
                 "elasticache:Describe*",
                 "elasticache:List*",
-                "elasticfilesystem:DescribeTags",
-                "elasticfilesystem:DescribeFileSystems",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
@@ -127,9 +127,9 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 6.  Select the policy you created above.
 7.  Review what you selected and click the **Create Role** button.
 
-# Configuration
+## Configuration
 
-![logo](/static/images/integrations-aws-secretentry.png)
+{{< img src="integrations-aws-secretentry.png" alt="logo" >}}
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.
@@ -137,7 +137,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-## Configuration for China and GovCloud
+### Configuration for China and GovCloud
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
@@ -146,11 +146,11 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 5.  Click **Install Integration**.
 
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
-# Permissions
+## Permissions
 
 The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, your Policy Document will need to allow the following actions:
 
@@ -161,7 +161,7 @@ Note that these actions and the ones listed below are included in the Policy Doc
 
 By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
 
-## Autoscaling
+### Autoscaling
 
 * `autoscaling:DescribeAutoScalingGroups`: Used to list all autoscaling groups.
 * `autoscaling:DescribePolicies`: List available policies (for autocompletion in events and monitors).
@@ -171,13 +171,13 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 
 For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
 
-## Billing
+### Billing
 
 * `budgets:ViewBudget`: Used to view budget metrics
 
 For more information on [Budget policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html), review the documentation on the AWS website.
 
-## CloudTrail
+### CloudTrail
 
 * `cloudtrail:DescribeTrails`: Used to list trails and find in which s3 bucket they store the trails
 * `cloudtrail:GetTrailStatus`: Used to skip inactive trails
@@ -192,7 +192,7 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
-## DynamoDB
+### DynamoDB
 
 * `dynamodb:ListTables`: Used to list available DynamoDB tables.
 * `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
@@ -200,7 +200,7 @@ For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html), review the documentation on the AWS website.
 
-## EC2
+### EC2
 
 * `ec2:DescribeInstanceStatus`: Used by the ELB integration to assert the health of an instance. Used by the EC2 integration to describe the health of all instances.
 * `ec2:DescribeSecurityGroups`: Adds SecurityGroup names and custom tags to ec2 instances.
@@ -208,7 +208,7 @@ For more information on [DynamoDB policies](https://docs.aws.amazon.com/IAM/late
 
 For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html), review the documentation on the AWS website.
 
-## ECS
+### ECS
 
 * `ecs:ListClusters`: List available clusters.
 * `ecs:ListContainerInstances`: List instances of a cluster.
@@ -216,7 +216,7 @@ For more information on [EC2 policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html), review the documentation on the AWS website.
 
-## Elasticache
+### Elasticache
 
 * `elasticache:DescribeCacheClusters`: List and describe Cache clusters, to add tags and additional metrics.
 * `elasticache:ListTagsForResource`: List custom tags of a cluster, to add custom tags.
@@ -224,28 +224,28 @@ For more information on [ECS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [Elasticache policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html), review the documentation on the AWS website.
 
-## EFS
+### EFS
 
 * `elasticfilesystem:DescribeTags`: Gets custom tags applied to file systems
 * `elasticfilesystem:DescribeFileSystems`: Provides a list of active file systems
 
 For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html), review the documentation on the AWS website.
 
-## ELB
+### ELB
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
-## EMR
+### EMR
 
 * `elasticmapreduce:ListClusters`: List available clusters.
 * `elasticmapreduce:DescribeCluster`: Add tags to CloudWatch EMR metrics.
 
 For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html), review the documentation on the AWS website.
 
-## ES
+### ES
 
 * `es:ListTags`: Add custom ES domain tags to ES metrics
 * `es:ListDomainNames`: Add custom ES domain tags to ES metrics
@@ -253,7 +253,7 @@ For more information on [EMR policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html), review the documentation on the AWS website.
 
-## Kinesis
+### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
 * `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
@@ -261,7 +261,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
 
-## CloudWatch Logs and Lambda
+### CloudWatch Logs and Lambda
 
 * `logs:DescribeLogGroups`: List available groups.
 * `logs:DescribeLogStreams`: List available streams for a group.
@@ -269,7 +269,7 @@ For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/lates
 
 For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_logs.html), review the documentation on the AWS website.
 
-## RDS
+### RDS
 
 * `rds:DescribeDBInstances`: Descrive RDS instances to add tags.
 * `rds:ListTagsForResource`: Add custom tags on RDS instances.
@@ -277,58 +277,58 @@ For more information on [CloudWatch Logs policies](https://docs.aws.amazon.com/I
 
 For more information on [RDS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html), review the documentation on the AWS website.
 
-## Route53
+### Route53
 
 * `route53:listHealthChecks`: List available health checks.
 * `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
 For more information on [Route53 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html), review the documentation on the AWS website.
 
-## S3
+### S3
 
 * `s3:ListAllMyBuckets`: Used to list available buckets
 * `s3:GetBucketTagging`: Used to get custom bucket tags
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
 
-## SES
+### SES
 
 * `ses:GetSendQuota`: Add metrics about send quotas.
 * `ses:GetSendStatistics`: Add metrics about send statistics.
 
 For more information on [SES policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html), review the documentation on the AWS website.
 
-## SNS
+### SNS
 
 * `sns:ListTopics`: Used to list available topics.
 * `sns:Publish`: Used to publish notifications (monitors or event feed).
 
 For more information on [SNS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html), review the documentation on the AWS website.
 
-## SQS
+### SQS
 
 * `sqs:ListQueues`: Used to list alive queues.
 
 For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html), review the documentation on the AWS website.
 
-## Support
+### Support
 
 * `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
-## Tag
+### Tag
 
 * `tag:getResources`: Used to get custom tags by resource type.
 * `tag:getTagKeys`: Used to get tag keys by region within an AWS account.
 * `tag:getTagValues`: Used to get tag values by region within an AWS account.
 
 The main use of the Resource Group Tagging API is to reduce the number of API calls we need to collect custom tags.
-For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website. 
+For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website.
 
 # Troubleshooting
-{: #troubleshooting}
+
 
 **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
-{:#tshoot-discrepancy}
+
 
 There are two important distinctions to be aware of:
 
@@ -336,7 +336,7 @@ There are two important distinctions to be aware of:
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
 **Metrics delayed?**
-{:#tshoot-delay}
+
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
@@ -350,13 +350,13 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 **Missing metrics?**
-{:#tshoot-missing}
+
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
 **Wrong count of aws.elb.healthy_host_count?**
-{:#tshoot-wrongcount}
+
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
 As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
@@ -365,7 +365,7 @@ This metric should have value you would expect.
 
 
 **Duplicated hosts when installing the agent?**
-{:#tshoot-duphosts}
+
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
 

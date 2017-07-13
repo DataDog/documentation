@@ -1,1 +1,1 @@
-<%= xml_sitemap :items => @items.reject{ |i| i[:beta] } %>
+<%= xml_sitemap %>

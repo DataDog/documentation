@@ -6,27 +6,27 @@ kind: integration
 newhlevel: true
 ---
 
-# Overview
+## Overview
 
 Connect Varnish to Datadog in order to:
 
   * Visualize your cache performance in real-time.
   * Correlate the performance of Varnish with the rest of your applications.
 
-![Varnish default dashboard](/static/images/varnish.png)
+{{< img src="varnish.png" alt="Varnish default dashboard" >}}
 
 Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.
 
-# Installation
+## Installation
 
 If you're running Varnish 4.1+, you must add the dd-agent user to the varnish group:
 `$ sudo usermod -G varnish -a dd-agent`
 
-# Configuration
+## Configuration
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-# Validation
+## Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -44,11 +44,11 @@ You should see something similar to the following if everything is working corre
           - instance #0 [OK]
           - Collected 20 metrics & 0 events
 
-# Metrics
+## Metrics
 
 The following metrics are collected by default with the Varnish integration.
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}
 
 
 While the above list contains all possible metrics from our Varnish integration, your environment

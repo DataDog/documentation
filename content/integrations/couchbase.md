@@ -6,15 +6,15 @@ doclevel: basic
 git_integration_title: couchbase
 ---
 
-### Overview
+## Overview
 
 Get metrics from Couchbase in real time to
 
 * Visualize key Couchbase metrics
 * Correlate Couchbase performance with the rest of your applications
 
-<%= insert_example_links%>
+{{< insert-example-links >}}
 
-### Metrics
+## Metrics
 
-<%= get_metrics_from_git() %>
+{{< get-metrics-from-git >}}

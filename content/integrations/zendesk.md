@@ -6,9 +6,9 @@ doclevel: basic
 newhlevel: true
 git_integration_title: zendesk
 ---
-# Overview
+## Overview
 
-![Zendesk Dashboard](/static/images/zendesk_dash.png)
+{{< img src="zendesk_dash.png" alt="Zendesk Dashboard" >}}
 
 Zendesk is a customer service and support ticket platform that allows you to receive, track and respond to inquiries and requests from customers. Enable this integration to see ticket metrics in Datadog and to create and update tickets from Datadog.
 
@@ -18,7 +18,7 @@ Integrate with Zendesk to:
 * Receive a Datadog event each time a new Zendesk ticket is opened
 * Create and update tickets using @zendesk mentions
 
-# Installation
+## Installation
 
 To install this integration, you will first need to generate a Zendesk API Token:
 
@@ -37,14 +37,14 @@ To complete the integration, enter your information in [Datadog](https://app.dat
 1. Paste the Zendesk API Token you received in step 5 above.
 1. Click the Install Integration button.
 
-# Metrics
+## Metrics
 
-<%= get_metrics_from_git()%>
+{{< get-metrics-from-git >}}
 
-# Events
+## Events
 
 This integration will generate an event each time a new Zendesk ticket is opened.
 
-# Zendesk Tickets
+## Zendesk Tickets
 
 You can create new Zendesk tickets and assign them to a a group. First add the group name in the Datadog [Zendesk integration tile](https://app.datadoghq.com/account/settings#integrations/zendesk), then use @zendesk-group-name in your Datadog monitors and annotations. e.g. to create a ticket and assign it to the Zendesk group *Support*, you would add the group and use *@zendesk-support*.

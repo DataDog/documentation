@@ -1,7 +1,7 @@
 ---
 title: Using Autodiscovery with Docker
 kind: guide
-listorder: 10
+listorder: 15
 ---
 
 <div class="alert alert-info">
@@ -12,7 +12,7 @@ Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). O
 
 The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to. The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
-# How it Works
+## How it Works
 
 In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
@@ -34,7 +34,7 @@ As the Agent inspects each running container, it checks if the container matches
 
 The Agent watches for Docker events—container creation, destruction, starts, and stops—and enables, disables, and regenerates static check configurations on such events.
 
-# How to set it up
+## How to set it up
 
 ## Running the Agent Container
 
@@ -54,7 +54,7 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables](https://github.com/DataDog/docker-dd-agent#environment-variables).
 
-Note that **if you want the Agent to autodiscover JMX-based checks, you MUST**: 
+Note that **if you want the Agent to autodiscover JMX-based checks, you MUST**:
 
 1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
 1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
@@ -164,7 +164,7 @@ Note that the option to enable Autodiscovery is called `service_discovery_backen
 
 ---
 
-With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this: 
+With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
 
 ~~~
 /datadog/
@@ -284,7 +284,6 @@ For containers that have many IP addresses or expose many ports, you can tell Au
 You can also add a network name suffix to the `%%host%%` variable—`%%host_bridge%%`, `%%host_swarm%%`, etc—for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the container's `bridge` network IP address.
 
 ### Alternate Container Identifier: Labels
-{: #container-labels}
 
 You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 

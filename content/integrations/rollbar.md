@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-### Overview
+## Overview
 
 Rollbar helps developers like us build better software, faster. With Rollbar developers can view exceptions from all of of their frameworks, platforms and environments in one place.
 
@@ -13,11 +13,11 @@ With this integration Rollbar users can:
 
 - Syndicate exceptions, errors and code deployments as 'Events' in Datadog.
 
-### Installation
+## Installation
 
 No installation is required.
 
-### Configuration
+## Configuration
 
 To integrate Rollbar with Datadog:
 
@@ -27,10 +27,10 @@ To integrate Rollbar with Datadog:
 1. Click Enable Datadog Integration
 1. (optional) Customize your notification settings to taste!
 
-### Metrics
+## Metrics
 
 This integration does not include metrics at this time.
 
-### Events
+## Events
 
 This integration will push exceptions, errors and code deployments into Datadog as events.

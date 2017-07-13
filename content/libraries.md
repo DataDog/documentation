@@ -7,78 +7,55 @@ kind: documentation
 
 The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
 
-<%= print_classic_library_table %>
+{{< classic-libraries-table >}}
 
 ### Tracing (APM) Client Libraries
 
 The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
 
-<%= print_tracing_library_table %>
+{{< tracing-libraries-table >}}
 
 ### Community Integrations
 
 #### Ansible
-{: #community-integration-ansible}
-
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 #### Consul
-{: #community-integration-consul}
-
 Publish consul service counts into Datadog via dogstatsd with [this library][96].
 
 #### Dogscaler
-{: #community-integration-dogscaler}
-
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
-{: #community-integration-freeswitch}
-
 This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
 #### Google Analytics
-{: #community-integration-google-analytics}
-
 You can get data into Datadog from Google Analytics using our API with [this library][50].
 
 #### Logstash Output
-{: #community-integration-logstash}
-
   * [Logstash Output for Datadog][73]
   * [Logstash Output for Dogstatsd][88]
 
 #### NGINX LUA
-{: #community-integration-nginx-lua}
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 #### Phusion Passenger
-{: #community-integration-passenger}
-
 Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
 #### Pid-stats
-{: #community-integration-pid-stats}
-
 This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
 #### Saltstack
-{: #community-integration-saltstack}
-
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
 
 ### Community Agent Ports
 
 #### FreeBSD
-{: #community-agent-ports-freebsd}
-
   * [FreeBSD dd-agent port][99]
 
 #### NixOS
-{: #community-agent-ports-nixos}
-
   * [dd-agent nixpkg][100]
 
 
