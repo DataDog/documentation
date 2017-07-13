@@ -1,19 +1,21 @@
 {{ partial "header.html" . }}
 {{ partial "navbar.html" . }}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
+            {{ partial "sidebar.html" . }}
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-9 main">
+            <h1>Uh oh, Something Went Wrong</h1>
 
-    <div class="container">
+            <img src="{{ .Site.Params.img_url }}images/sad_bits.png" />
 
-        <h1>404 Error</h1>
-        <p>Maybe you want one of these?</p>
-
-        {{ range .Data.Pages }}
-        <ul>
-            <li><a href="{{ .Permalink }}">{{ .Title }}</a><span class="lead">({{ .Date.Format "Mon, Jan 2, 2006" }})</span></li>
-        </ul>
-        {{ end }}
-
-        {{ partial "container-footer.html" . }}
-
+            <p class="alert alert-error pull-left">
+                Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
+            </p>
+        </div>
     </div>
-
+</div>
+{{ partial "container-footer.html" . }}
 {{ partial "footer.html" . }}
+
