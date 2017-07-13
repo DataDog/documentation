@@ -21,7 +21,7 @@ def get_languages(config_location):
 
 
 def create_glob(files_location, lang, disclaimer=""):
-    all_files = [f for f in glob(files_location + '**/*.md') if 'index' not in f]
+    all_files = [f for f in glob(files_location + '**/*.md')]
     if lang == 'en':
         g = [f for f in all_files if len(f.split('.')) == 2]
     else:
