@@ -225,10 +225,10 @@ test_site_links() {
 
     # update trello with broken external links
 	#    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
-	#        echo "updating trello"
-	#        source /etc/trello_config.sh
-	#        trello_add_update_card.py --board_id "${board_id}" --card_name "${card_name}" --card_text "${card_text}" \
-	#        --list_id "${list_id}" --members "${members}"
+    echo "updating trello"
+    source /etc/trello_config.sh
+    trello_add_update_card.py --board_id "${TRELLO_BOARD_ID}" --card_name "${card_name}" --card_text "${card_text}" \
+    --list_id "${TRELLO_LIST_ID}" --members "${members}"
 	#    fi
 
     # update status
