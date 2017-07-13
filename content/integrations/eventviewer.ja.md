@@ -27,4 +27,4 @@ Connect Event Viewer to Datadog in order to:
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Event Viewer インテグレーションの設定ファイルサンプ](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/conf.yaml.example)
-* [Event Viewer インテグレーション　checks.d](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/checks.py)
+* [Event Viewer インテグレーション　checks.d](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/check.py)
