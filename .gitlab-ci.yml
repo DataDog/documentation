@@ -8,7 +8,7 @@ variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
-  LIVE_DOMAIN: "https://dmin7ss6aif3e.cloudfront.net/"
+  LIVE_DOMAIN: "https://docs.datadoghq.com/"
 
 # ================== copy scripts =============== #
 before_script:
@@ -105,7 +105,7 @@ build_live:
     - remove_static_from_repo
     - create_artifact
   only:
-    - docs-hugo
+    - master
 
 test_live_images:
   <<: *base_template
@@ -117,7 +117,7 @@ test_live_images:
     - pull_artifact_from_s3
     - test_site_links "images" "${URL}" "True" "False" "True"
   only:
-    - docs-hugo
+    - master
 
 test_live_links:
   <<: *base_template
@@ -129,7 +129,7 @@ test_live_links:
     - pull_artifact_from_s3
     - test_site_links "links" "${URL}" "True" "False" "False"
   only:
-    - docs-hugo
+    - master
 
 test_live_static:
   <<: *base_template
@@ -141,7 +141,7 @@ test_live_static:
     - pull_artifact_from_s3
     - test_site_links "static" "${URL}" "True" "False" "False"
   only:
-    - docs-hugo
+    - master
 
 rollback_live:
   <<: *base_template
@@ -153,7 +153,7 @@ rollback_live:
   script:
     - rollback_env
   only:
-    - docs-hugo
+    - master
 
 tag_successful_live_pipeline:
   <<: *base_template
@@ -163,7 +163,7 @@ tag_successful_live_pipeline:
   script:
     - tag_successful_pipeline
   only:
-    - docs-hugo
+    - master
 
 post_success_event_to_dd_live:
   <<: *base_template
@@ -174,7 +174,7 @@ post_success_event_to_dd_live:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
     - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
   only:
-    - docs-hugo
+    - master
 
 post_failure_event_to_dd_live:
   <<: *base_template
@@ -185,4 +185,4 @@ post_failure_event_to_dd_live:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
     - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
   only:
-    - docs-hugo
+    - master
