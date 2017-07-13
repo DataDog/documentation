@@ -48,7 +48,7 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 6. Save the configuration.
 7. Copy the red key and the name. You will use this in Datadog.
         {{< img src="opsgenie-add-api-key.png" >}}
-8. Add more DataDog integrations on OpsGenie by going to the [OpsGenie Integration](https://www.opsgenie.com/integration/index) page and repeating the steps above.
+8. Add more DataDog integrations on OpsGenie by going to the [OpsGenie Integration](https://www.opsgenie.com/integration/) page and repeating the steps above.
 
 #### List the integration(s) you made in OpsGenie in Datadog
 
@@ -87,7 +87,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 ### OpsGenie側でDatadogインテグレーションを作成する
 
-1. OpsGenieアカウントにログインし、[OpsGenie Integrations](https://www.opsgenie.com/integration/index) ページに移動します。
+1. OpsGenieアカウントにログインし、[OpsGenie Integrations](https://www.opsgenie.com/integration/) ページに移動します。
 2. 以下の図のようにDatadogのサービスインテグレーションを検索します。
         {{< img src="opsgenie-int-index.png" >}}
 3. Datadogサイトの[Integrations > APIs page](https://app.datadoghq.com/account/settings#api)で生成したAPI keyを入力します。
@@ -97,7 +97,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 6. 設定を保存します。
 7. 以下に赤色で表示されているOpsGenie側のAPI keyとステップ4で決めたインテグレーション名をコピーします。
         {{< img src="opsgenie-add-api-key.png" >}}
-8. 更に別のDatadogインテグレーションを[OpsGenie Integration](https://www.opsgenie.com/integration/index)に追加する場合は、ステップ2からステップ7を繰り返します。
+8. 更に別のDatadogインテグレーションを[OpsGenie Integration](https://www.opsgenie.com/integration/)に追加する場合は、ステップ2からステップ7を繰り返します。
 
 ### OpsGenie側で作成したインテグレーションをDatadog側に追加していきます
 
