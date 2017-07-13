@@ -63,6 +63,20 @@ coming soon
 
 # Working on Docs
 
+## Datadog Staff
+
+* Always branch off of master
+* Create a branch `slack_handle/your_feature` if you would like to create a preview site and run tests
+* Never commit directly to master
+* When you are ready to commit, create a new pull request to master from your branch
+
+## Outside Contributors
+
+* Fork the master branch
+* When you are ready to commit make a pull request back to `DataDog/master`
+
+## A note about markdown
+
 This site uses Blackfriday for markdown. To learn about the syntax, [see this site](https://github.com/russross/blackfriday).
 
 If you include ANY Markdown in a file, give it an .md extension.
