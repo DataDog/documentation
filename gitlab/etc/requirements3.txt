@@ -9,3 +9,4 @@ requests[security]==2.12.3
 PyYAML==3.12
 tqdm==4.14.0
 Pygments==2.2.0
+datadog==0.16.0

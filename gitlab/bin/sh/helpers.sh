@@ -232,10 +232,12 @@ test_site_links() {
 	fi
 
     # update status
-	#    if [[ $? != 0 ]]; then
-	#        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
-	#        exit 1
-	#    fi
+    if [[ $? != 0 ]]; then
+        notify_slack ":sadpanda: ${TYPE} check failed for ${CI_COMMIT_REF_NAME}."
+        exit 1
+    else
+        notify_slack ":tada: ${TYPE} check passed for ${CI_COMMIT_REF_NAME}."
+    fi
     pass_step  "${FUNCNAME}"
 }
 
@@ -283,14 +285,14 @@ start_step() {
 pass_step() {
     stop_timer
     echo -e "\e[38;5;198mprocess finished in ${process_stop_time}s\e[0m"
-    # post_dd_metric "corpsite.deploy_step.duration" ${process_stop_time} "${1}" "success"
+    post_dd_metric "documentation.deploy_step.duration" ${process_stop_time} "${1}" "success"
 }
 
 
 fail_step() {
     # $1: step name
     stop_timer
-    # post_dd_metric "corpsite.deploy_step.duration" ${process_stop_time} "${1}" "failure"
+    post_dd_metric "documentation.deploy_step.duration" ${process_stop_time} "${1}" "failure"
     notify_slack ":weary: \`${1}\` step failed for \`${CI_COMMIT_REF_NAME}\`.\n Details ${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}"
     exit 1
 }

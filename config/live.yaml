@@ -1,0 +1,8 @@
+---
+baseURL: https://docs.datadoghq.com/
+buildfuture: false
+builddrafts: false
+params:
+  environment: live
+  img_url: "https://docs.datadoghq.com/"
+  static_url: "https://docs.datadoghq.com/"

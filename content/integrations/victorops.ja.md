@@ -46,20 +46,6 @@ VictorOpsと連携することで、Datadogで検知したアラートを、非�
 5. Datadogの各Monitorのアラートの通知欄に @victorops を追記して、メッセージを記述しておきます。
 
 
-<!-- # VictorOps Routing Keys
-
-Direct alerts to certain VictorOps users
-Please list all the routing keys to be used on Datadog (if none are set up here, VictorOps will send the alert to the default group).
-
-You will then be able to choose which VictorOps endpoint should receive the alert by using @victorops
-
-Special characters are not allowed in the names. Upper/lower case letters, numbers, `_` and `-` are allowed.
-
-# Choose a custom endpoint
-
-If this field is left empty, the default endpoint will be `https://alert.victorops.com/integrations/datadog/20140523/alert` -->
-
-
 ## VictorOps Routing Keysについて
 
 ### VictorOps上の特定のユーザーに対してのアラート
