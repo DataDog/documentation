@@ -66,9 +66,9 @@ create_artifact() {
     tar -czf "/etc/${short_hash}.tar.gz" "${ARTIFACT_RESOURCE}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
     ls -l /etc | grep "${short_hash}.tar.gz"
     echo "---------"
-    echo "Deploying artifact: ${short_hash}.tar.gz to s3://"${STATIC_BUCKET}"/build_artifacts/${CI_COMMIT_REF_NAME}/"
+    echo "Deploying artifact: ${short_hash}.tar.gz to s3://"${STATIC_BUCKET}"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     s3cmd put --encoding=utf-8 --acl-public --no-guess-mime-type --stop-on-error \
-          "/etc/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
+          "/etc/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
     echo "removing build"
     rm -rf "${ARTIFACT_RESOURCE}"
     echo "Done."
@@ -88,7 +88,7 @@ pull_artifact_from_s3() {
     fi
     echo "artifact name is ${ARTIFACT_NAME}"
     echo "---------"
-    s3cmd get s3://${STATIC_BUCKET}/build_artifacts/${CI_COMMIT_REF_NAME}/${ARTIFACT_NAME} || (echo "artifact missing from s3." && fail_step "${FUNCNAME}")
+    s3cmd get s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/${ARTIFACT_NAME} || (echo "artifact missing from s3." && fail_step "${FUNCNAME}")
     echo "unpacking artifact"
     echo "---------"
     tar -xzf "${ARTIFACT_NAME}"  || (echo "artifact unpack failed. sorry." && fail_step "${FUNCNAME}")
