@@ -4,5 +4,5 @@ buildfuture: false
 builddrafts: false
 params:
   environment: live
-  img_url: "https://don08600y3gfm.cloudfront.net/"
+  img_url: "https://dmin7ss6aif3e.cloudfront.net/"
   static_url: "https://dmin7ss6aif3e.cloudfront.net/"
