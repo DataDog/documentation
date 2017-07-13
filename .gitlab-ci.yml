@@ -102,22 +102,9 @@ build_live:
     - placehold_translations
     - sync_integration_metrics
     - build_hugo_site
-    - collect_static_assets
     - minify_html
     - remove_static_from_repo
     - create_artifact
-  only:
-    - docs-hugo
-
-test_live_images:
-  <<: *base_template
-  stage: pre-deploy
-  environment: "live"
-  variables:
-    URL: ${LIVE_DOMAIN}
-  script:
-    - pull_artifact_from_s3
-    - test_site_links "images" "${URL}" "True" "False" "True"
   only:
     - docs-hugo
 
@@ -132,6 +119,18 @@ deploy_live:
     - pull_artifact_from_s3
     - push_site_to_s3
     - notify_slack "${MESSAGE}"
+  only:
+    - docs-hugo
+
+test_live_images:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "images" "${URL}" "True" "False" "True"
   only:
     - docs-hugo
 
@@ -159,17 +158,17 @@ test_live_static:
   only:
     - docs-hugo
 
-#rollback_live:
-#  <<: *base_template
-#  stage: cleanup
-#  environment: "live"
-#  when: on_failure
-#  variables:
-#    BUCKET: ${LIVE_BUCKET}
-#  script:
-#    - rollback_env
-#  only:
-#    - docs-hugo
+rollback_live:
+  <<: *base_template
+  stage: cleanup
+  environment: "live"
+  when: on_failure
+  variables:
+    BUCKET: ${LIVE_BUCKET}
+  script:
+    - rollback_env
+  only:
+    - docs-hugo
 
 tag_successful_live_pipeline:
   <<: *base_template
