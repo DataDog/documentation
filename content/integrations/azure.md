@@ -62,7 +62,7 @@ You can integrate your Microsoft Azure account with Datadog using the Azure CLI 
 ### Integrating through the Azure CLI
 
 
-To integrate Datadog with Azure using the Azure CLI, make sure you have [Azure CLI installed][7].
+To integrate Datadog with Azure using the Azure CLI, make sure you have [Azure CLI installed][6].
 
 First, login to the Azure account you want to integrate with Datadog
 
@@ -241,7 +241,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
 
 {{< img src="azure/azure_vm_screenboard.png" >}}
-Naviate to the [Azure VM Default Dashboard][6] to see this dashboard populate with your infrastructure's data
+Naviate to the [Azure VM Default Dashboard][5] to see this dashboard populate with your infrastructure's data
 
 Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
 
@@ -295,7 +295,7 @@ Here are some common issues you might be seeing.
 
     {{< img src="azure/Azure_tenant_name.png" >}}
 
-Your tenant name is also available from the URL after navigating to the [classic portal][5]. It is the text in between (**not including**) the @ and # symbol
+Your tenant name is also available from the URL after navigating to the [classic portal][4]. It is the text in between (**not including**) the @ and # symbol
 
 {{< img src="azure/azure_tenant_url.png" >}}
 
@@ -329,7 +329,6 @@ After locating your VM:
    [1]: https://app.datadoghq.com/account/settings#integrations/azure
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
-   [4]: https://management.azure.com
-   [5]: https://manage.windowsazure.com
-   [6]: https://app.datadoghq.com/screen/integration/azure_vm
-   [7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
+   [4]: https://manage.windowsazure.com
+   [5]: https://app.datadoghq.com/screen/integration/azure_vm
+   [6]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
