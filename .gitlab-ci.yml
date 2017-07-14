@@ -33,7 +33,7 @@ build_preview:
     BUCKET: ${PREVIEW_BUCKET}
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
-    MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+    MESSAGE: "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA::6}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -93,7 +93,7 @@ build_live:
     CONFIG: ${LIVE_CONFIG}
     BUCKET: ${LIVE_BUCKET}
     URL: ${LIVE_DOMAIN}
-    MESSAGE: ":fiestaparrot: production updates are live! :fiestaparrot:\nPost deploy tests running..."
+    MESSAGE: ":rocket: <${CI_COMMIT_SHA::6}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
