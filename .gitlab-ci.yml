@@ -42,7 +42,7 @@ build_preview:
     - build_hugo_site
     - minify_html
     - push_site_to_s3
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|`${CI_COMMIT_REF_NAME}`> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     - remove_static_from_repo
     - create_artifact
   only:
@@ -95,7 +95,7 @@ build_live:
     URL: ${LIVE_DOMAIN}
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|\`${CI_COMMIT_SHA:0:8}\`> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - version_static_assets
     - placehold_translations
     - sync_integration_metrics
