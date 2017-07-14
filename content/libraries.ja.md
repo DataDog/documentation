@@ -341,10 +341,6 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 - [dogstatsd.rb](https://gist.github.com/conorbranagan/c001078d148d2cab38a0) - Logstashからデータを取り込むためのライブラリー by Datadogメンバーの[Conor Branagan](https://gist.github.com/conorbranagan/).
 
 
-#### Reverse Color Scheme {#community-colorscheme}
-
-- デフォルトより暗い背景色を設定するためのに、サイトの色味を変更する [CSSライブラリー](http://stylebot.me/styles/4320).
-
 <br />
 
 
