@@ -21,9 +21,9 @@ Get metrics from your Kubelets in real time to:
 
 The Kubernetes integration is deployed as a docker container along side your existing workloads.
 
-### Installation via DaemonSets (Kubernetes >=1.1.0)
+### Installation via DaemonSets
 
-If you are running Kubernetes >= 1.2.0, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes. On clusters running 1.1.x you will need to explicitly [enable the DaemonSets extension](http://kubernetes.io/v1.1/docs/admin/daemons.html#caveats).
+You can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes.
 
 1. Download the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest file.
 1. Launch dd-agent:

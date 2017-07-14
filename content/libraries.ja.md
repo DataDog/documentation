@@ -176,12 +176,6 @@ Datadog. Check them out:
 <h4 id="community-go">Go</h4>
 <ul>
   <li>
-    <a
-      href="https://github.com/xb95/go-datadog-api">go-datadog-api</a> - a
-    Go wrapper for our API by
-    <a href="https://github.com/xb95">Mark Smith</a>.
-  </li>
-  <li>
       <a
       href="https://github.com/ooyala/go-dogstatsd/">go-dogstatsd</a> - a
     dogstatsd client written in Go by
@@ -243,7 +237,7 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 #### Go {#community-go}
 
-- [go-datadog-api](https://github.com/xb95/go-datadog-api) - Go向け APIラッパーwrapper　by [Mark Smith](https://github.com/xb95).
+- [go-datadog-api](https://github.com/xb95/go-datadog-api) - Go向け APIラッパーwrapper　by [Mark Smith](https://github.com/zorkian).
 - [go-dogstatsd](https://github.com/ooyala/go-dogstatsd/) - Goで開発されたdogstatsdクライエント by [Ooyala](https://github.com/ooyala).
 
 
@@ -311,14 +305,6 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
   </li>
 </ul>
 
-<h4 id="community-colorscheme">Reverse Color Scheme</h4>
-<ul>
-  <li>
-    To get a darker background than default, you can use
-    <a href="http://stylebot.me/styles/4320">this CSS library</a> to flip the colors.
-  </li>
-</ul>
-
 <br /> -->
 
 
@@ -354,10 +340,6 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 - [dogstatsd.rb](https://gist.github.com/conorbranagan/c001078d148d2cab38a0) - Logstashからデータを取り込むためのライブラリー by Datadogメンバーの[Conor Branagan](https://gist.github.com/conorbranagan/).
 
-
-#### Reverse Color Scheme {#community-colorscheme}
-
-- デフォルトより暗い背景色を設定するためのに、サイトの色味を変更する [CSSライブラリー](http://stylebot.me/styles/4320).
 
 <br />
 
