@@ -431,7 +431,7 @@ And edit conf.d/kafka_consumer.yaml
       #     my_consumer:
       #       my_topic: [0, 1, 4, 12]
 
-{{< insert-example-links check="none" >}}
+{{< insert-example-links integration="kafka" link_text="Apache Kafka" check="none" >}}
 {{< insert-example-links integration="Apache Kafka Consumer" conf="kafka_consumer" check="kafka_consumer" include_intro="false" >}}
 ## Validation
 
@@ -450,4 +450,3 @@ To validate that the integration is working, restart the agent and then run the 
 
 ## Metrics
 
-{{< get-metrics-from-git >}}
