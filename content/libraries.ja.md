@@ -237,7 +237,7 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 
 #### Go {#community-go}
 
-- [go-datadog-api](https://github.com/xb95/go-datadog-api) - Go向け APIラッパーwrapper　by [Mark Smith](https://github.com/xb95).
+- [go-datadog-api](https://github.com/xb95/go-datadog-api) - Go向け APIラッパーwrapper　by [Mark Smith](https://github.com/zorkian).
 - [go-dogstatsd](https://github.com/ooyala/go-dogstatsd/) - Goで開発されたdogstatsdクライエント by [Ooyala](https://github.com/ooyala).
 
 
