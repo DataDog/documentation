@@ -136,4 +136,4 @@ VMが持っている時間が、正しく設定されているか確認して下
    [1]: https://app.datadoghq.com/account/settings#integrations/azure
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
-   [4]: https://management.azure.com
+   [4]: https://manage.windowsazure.com
