@@ -4,6 +4,7 @@ kind: guide
 listorder: 13
 aliases:
   - /guides/monitoring
+  - /guides/alerting
 ---
 
 ***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
