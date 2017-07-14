@@ -176,12 +176,6 @@ Datadog. Check them out:
 <h4 id="community-go">Go</h4>
 <ul>
   <li>
-    <a
-      href="https://github.com/xb95/go-datadog-api">go-datadog-api</a> - a
-    Go wrapper for our API by
-    <a href="https://github.com/xb95">Mark Smith</a>.
-  </li>
-  <li>
       <a
       href="https://github.com/ooyala/go-dogstatsd/">go-dogstatsd</a> - a
     dogstatsd client written in Go by
