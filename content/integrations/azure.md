@@ -41,6 +41,8 @@ Connect to Microsoft Azure in order to:
 
 Related integrations include:
 
+|                                                           |                                                                               |
+| :---------------------------------------------------------|:------------------------------------------------------------------------------|
 | [App Service](/integrations/azure_app_services) | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
 | [Batch Service](/integrations/azure_batch) | managed task scheduler and processor |
 | [Event Hub](/integrations/azure_event_hub) | large scale data stream managed service |
