@@ -4,7 +4,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.2"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.3"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -42,7 +42,7 @@ build_preview:
     - build_hugo_site
     - minify_html
     - push_site_to_s3
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|\`${CI_COMMIT_REF_NAME}\`> is ready for preview.\n<${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|Running checks>." "#31b834"
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|\`${CI_COMMIT_REF_NAME}\`> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     - remove_static_from_repo
     - create_artifact
   only:
