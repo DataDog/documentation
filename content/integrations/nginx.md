@@ -76,6 +76,8 @@ These metrics do not have a directly related metric, but here are close translat
 <br/>
 Finally, these metrics have no good translation:
 
+|||
+|-------------------|-------------------|
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
 
