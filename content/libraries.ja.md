@@ -311,14 +311,6 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
   </li>
 </ul>
 
-<h4 id="community-colorscheme">Reverse Color Scheme</h4>
-<ul>
-  <li>
-    To get a darker background than default, you can use
-    <a href="http://stylebot.me/styles/4320">this CSS library</a> to flip the colors.
-  </li>
-</ul>
-
 <br /> -->
 
 
