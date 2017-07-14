@@ -4,7 +4,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:latest"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.1"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -33,7 +33,6 @@ build_preview:
     BUCKET: ${PREVIEW_BUCKET}
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
-    MESSAGE: "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA::6}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -42,7 +41,7 @@ build_preview:
     - build_hugo_site
     - minify_html
     - push_site_to_s3
-    - notify_slack "${MESSAGE}"
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|\`${CI_COMMIT_SHA:0:8}\`> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>"
     - remove_static_from_repo
     - create_artifact
   only:
