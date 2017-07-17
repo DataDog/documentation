@@ -94,6 +94,7 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "es:DescribeElasticsearchDomains",
                 "kinesis:List*",
                 "kinesis:Describe*",
+                "lambda:List*",
                 "logs:Get*",
                 "logs:Describe*",
                 "logs:FilterLogEvents",
