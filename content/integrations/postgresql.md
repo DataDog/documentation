@@ -67,8 +67,8 @@ When it prompts for a password, enter the one used in the first command.
 The Agent generates PostgreSQL metrics from custom query results. For each custom query, four components are required: `descriptors`, `metrics`, `query`, and `relation`.
 
 * `query` is where you'll construct the SQL SELECT query to obtain your custom metrics. Each column name in your SELECT query should have a corresponding item in the `descriptors` section. Each item in `metrics` will be substituted for the first `%s` in the query.
-* `metrics` are key-value pairs where the key is the query column name or column function and the value is a tuple containing the custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the results of the sum of the `idx_scan` column will appear in Datadog  with the metric name `postgresql.idx_scan_count_by_schema`.
-* `descriptors` is used to add tags to your custom metrics. It's a list of lists each containing 2 strings. The first string is for documentation purposes and should be used to make clear what you are getting from the query. The second string will be the tag name.
+* `metrics` are key-value pairs where the key is the query column name or column function and the value is a tuple containing the custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the results of the sum of the `idx_scan` column will appear in Datadog  with the metric name `postgresql.idx_scan_count_by_table`.
+* `descriptors` is used to add tags to your custom metrics. It's a list of lists each containing 2 strings. The first string is for documentation purposes and should be used to make clear what you are getting from the query. The second string will be the tag name. For multiple tags, include additional columns in your `query` string and a corresponding item in the `descriptors`. The order of items in `descriptors` must match the columns in `query`.
 * `relation` indicates whether to include schema relations specified in the [`relations` configuration option](#configuration-options). If set to `true`, the second `%s` in `query` will be set to the list of schema names specified in the `relations` configuration option.
 
 ### Example 1
@@ -76,19 +76,20 @@ The Agent generates PostgreSQL metrics from custom query results. For each custo
     custom_metrics:
       # All index scans & reads
       - descriptors:
-          - [relname, schema]
+          - [relname, table]
+          - [schemaname, schema]
         metrics:
-            SUM(idx_scan) as idx_scan_count: [postgresql.idx_scan_count_by_schema, RATE]
-            SUM(idx_tup_read) as idx_read_count: [postgresql.idx_read_count_by_schema, RATE]
-        query: SELECT relname, %s FROM pg_stat_all_indexes GROUP BY relname;
+            SUM(idx_scan) as idx_scan_count: [postgresql.idx_scan_count_by_table, RATE]
+            SUM(idx_tup_read) as idx_read_count: [postgresql.idx_read_count_by_table, RATE]
+        query: SELECT relname, schemaname, %s FROM pg_stat_all_indexes GROUP BY relname;
         relation: false
 
 The example above will run two queries in PostgreSQL:
 
-* `SELECT relname, SUM(idx_scan) as idx_scan_count FROM pg_stat_all_indexes GROUP BY relname;` will generate a rate metric `postgresql.idx_scan_count_by_schema`.
-* `SELECT relname, SUM(idx_tup_read) as idx_read_count FROM pg_stat_all_indexes GROUP BY relname;` will generate a rate metric `postgresql.idx_read_count_by_schema`.
+* `SELECT relname, SUM(idx_scan) as idx_scan_count FROM pg_stat_all_indexes GROUP BY relname;` will generate a rate metric `postgresql.idx_scan_count_by_table`.
+* `SELECT relname, SUM(idx_tup_read) as idx_read_count FROM pg_stat_all_indexes GROUP BY relname;` will generate a rate metric `postgresql.idx_read_count_by_table`.
 
-Both metrics will use the tag `schema` with tag values from the results in the `relname` column. e.g. `schema: <relname>`
+Both metrics will use the tags `table` and `schema` with values from the results in the `relname` and `schemaname` columns respectively. e.g. `table: <relname>`
 
 ### Example 2
 
