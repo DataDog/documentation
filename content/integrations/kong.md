@@ -39,3 +39,6 @@ Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  You should see output that validates that the check passed.
 
+## Metrics
+
+{{< get-metrics-from-git >}}
