@@ -16,7 +16,7 @@ Connect MongoDB to Datadog in order to:
 ## Installation
 
 1.  To capture MongoDB metrics you need to install the Datadog Agent.
-2.  Create a read-only admin user for Datadog (Admin rights are needed to collect complete server statistics). In the mongo shell, run:
+2.  Create a read-only user for Datadog, with the appropriate [MongoDB roles](https://docs.mongodb.com/manual/reference/built-in-roles/) to collect complete server statistics. In the mongo shell, run:
 
         # Authenticate as the admin user.
         use admin
