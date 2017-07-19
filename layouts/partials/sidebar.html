@@ -1,7 +1,7 @@
 {{ $sidebar := .Params.sidebar }}
 {{ $custom_sidebar := .Params.customnav }}
 {{ $guides := ( where .Site.Pages "Params.kind" "==" "guide" ) }}
-{{ $integrations := ( where .Site.Pages "Params.kind" "==" "integration" ) }}
+{{ $integrations := ( where .Site.Pages "Params.kind" "integration" ) }}
 {{ $currentURL := .URL }}
 {{ $lastUrlElement := index (last 1 (split (delimit (split .URL "/") "," "") ",")) 0 }}
 
@@ -72,8 +72,9 @@
     <li id="toc-box"></li>
     {{ if eq .Params.Kind "integration" }}
       <li class="nav-header">{{ i18n "integrations_other_integrations" }}</li>
+
       <li class="integration"><a href="/integrations/">{{ i18n "integrations_back_to_overview" }}</a></li>
-      {{ range $integrations }}
+      {{ range sort $integrations "File.TranslationBaseName" }}
           <li class="integration"><a href="{{.Permalink}}">
             {{ if eq $lastUrlElement .File.TranslationBaseName }}&gt;{{ end }}
             {{ .Params.integration_title }}
