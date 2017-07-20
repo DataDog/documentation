@@ -86,6 +86,8 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
                 "ecs:List*",
                 "elasticache:Describe*",
                 "elasticache:List*",
+                "elasticfilesystem:DescribeFileSystems",
+                "elasticfilesystem:DescribeTags",
                 "elasticloadbalancing:Describe*",
                 "elasticmapreduce:List*",
                 "elasticmapreduce:Describe*",
