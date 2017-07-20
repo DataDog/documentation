@@ -16,7 +16,7 @@ We've added a new query function called `anomalies` to our query language. When 
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
-### 1. Visualize Anomalies in Dashboards
+### Visualize Anomalies in Dashboards
 
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
@@ -39,7 +39,7 @@ The function has two parameters. The first parameter is for selecting which algo
 
 {{< img src="anomalies/final_editor.png" >}}
 
-### 2. Alert on Anomalies
+### Alert on Anomalies
 
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
@@ -57,11 +57,12 @@ You should now see something like what's shown above, with a handful of selectio
   <li>You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.</li>
 </ol>
 
-Continue with steps (3) and (4) as you would for any other monitor.
+Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 
-### 3. Anomaly Detection Algorithms
+### Anomaly Detection Algorithms
 
-We currently offer four different anomaly detection algorithms.
+
+There are four different anomaly detection algorithms:
 
 * _Basic_: Use this algorithm for metrics that have no repeating seasonal pattern. _Basic_ uses a simple lagging rolling quantile computation to determine the range of expected values, but it uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
