@@ -24,10 +24,10 @@ The `outliers` query function, when applied to your query, will return the usual
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
 
-### 1. Show Outliers in Dashboards or Screenboards
+### Show Outliers in Dashboards or Screenboards
 
 
-For example, here is a graph of gunicorn requests by host with outlier detection enabled:
+Here's a graph of gunicorn requests by host with outlier detection enabled.
 
 {{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
 
@@ -39,7 +39,7 @@ First create a new timeseries graph on your dashboard with your chosen metric.
 
 {{< img src="outliers/outliers-dash-choose-metrics-updated.png" >}}
 
-To enable outlier detection, click on the + icon on the right side of the metrics line. Choose "Algorithms" from the function categories, then one of the four outlier algorithms:
+To enable outlier detection, click on the + icon on the right side of the metrics line. Choose **Algorithms** from the function categories, then pick one of the four outlier algorithms.
 
 {{< img src="outliers/outliers-algorithm-selector.png" >}}
 
@@ -50,7 +50,7 @@ This will apply the outliers function to your graph, and you’ll see any outlie
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 
 
-### 2. Alert on Outliers
+### Alert on Outliers
 
 
 You can also define a monitor to alert when an outlier is detected in an important group.
@@ -59,13 +59,11 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/outlier) for the metric.
 
-Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and selecting Outlier. The **Outlier Detection** option in step (1) should already be selected. Define the metric in step (2) just like you would for any other metric alert.
+Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Outlier**. Then fill out the **Define the metric** section just as you would for any other monitor.
 
 {{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
 
-In the alert conditions you will select the grouping and timeframe.
-
-Then select an algorithm and parameter values to use for outlier detection.
+In the alert conditions, select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
 
 {{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
