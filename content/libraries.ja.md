@@ -209,7 +209,7 @@ Datadog APIを操作するために、コミュニティーのメンバーが開
 #### Java {#community-java}
 
 - [java-dogstatsd-client](https://github.com/indeedeng/java-dogstatsd-client) - Jave向けDogStatsDクライエント by [Indeed](http://www.indeed.com/).
-- [metrics-datadog](https://github.com/coursera/metrics-datadog) - codahale'の[metrics](https://github.com/coursera/metrics-datadog)ライブラーリのバックエンド by [Coursera](https://github.com/coursera).
+- [metrics-datadog](https://github.com/coursera/metrics-datadog) - codahale'の[metrics](https://github.com/coursera/metrics-datadog)ライブラリーのバックエンド by [Coursera](https://github.com/coursera).
 - [Lassie](https://github.com/bazaarvoice/lassie) - Jave向け screenboard APIクライエント by [Bazaarvoice](http://www.bazaarvoice.com/).
 
 #### Node.js {#community-node}
