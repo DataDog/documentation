@@ -54,8 +54,8 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
     A **threshold alert** will compare the value in the selected
     timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
+    in the alerting conditions section. This is the standard alert case
+    where you know what sort values are unexpected.
 
     A **change alert** will compare the change or % change of a value between
     now and some time ago against a given threshold.
@@ -157,11 +157,9 @@ on the left. This guide will walk through the configuration of the Metric type. 
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
-    - For details on how to configure Anomaly Detection please visit the
-    [Anomaly Detection Guide](/guides/anomalies)
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
 
-    - For details on how to configure Outlier Detection please visit the
-    [Outlier Detection Guide](/guides/outliers)
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
