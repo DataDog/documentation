@@ -57,11 +57,11 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 {{< img src="outliers/outliers-alert-snapshot.png" >}}
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for the metric:
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/outlier) for the metric.
+
+Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and selecting Outlier. The "Outlier Detection" option in step (1) should already be selected. Define the metric in step (2) just like you would for any other metric alert.
 
 {{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
-
-You will select the metric and scope as with other metric-based monitors.
 
 In the alert conditions you will select the grouping and timeframe.
 
