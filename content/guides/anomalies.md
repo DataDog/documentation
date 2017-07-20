@@ -44,7 +44,7 @@ The function has two parameters. The first parameter is for selecting which algo
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
 
-Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and selecting Anomaly. The "Anomaly Detection" option in step (1) should already be selected. Define the metric in step (2) just like you would for any other metric alert.
+Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and selecting Anomaly. The **Anomaly Detection**? option in step (1) should already be selected. Define the metric in step (2) just like you would for any other metric alert.
 
 {{< img src="anomalies/monitor_options.png" >}}
 

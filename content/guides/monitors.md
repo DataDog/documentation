@@ -49,20 +49,20 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 ### Choose what to monitor
 
-1. Select the alert type.
+1. Choose the detection method
     {{< img src="monitor/alert_type.png" alt="alert type" >}}
 
-    A **threshold alert** will compare the value in the selected
+    A **threshold alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case
     where you know what sort values are unexpected.
 
-    A **change alert** will compare the change or % change of a value between
-    now and some time ago against a given threshold.
+    A **change alert** compares the absolute or percentage change in
+    value between now and some time ago against a given threshold.
     The compared data points will not be single points but are computed using
     the parameters in the *alert conditions* section.
 
-    This type of alert is useful to track fast spikes or drops as well as slow
+    This type of alert is useful to track sudden spikes or drops as well as slow
     changes in a metric when you might not have an exact "unexpected" threshold.
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
@@ -79,15 +79,13 @@ on the left. This guide will walk through the configuration of the Metric type. 
     unusual number of requests, and hence should be a target for replacement. Or,
     you could get an early warning that significantly more 500s are happening in
     one AWS Availability Zone (AZ) than the others, which might indicate an issue
-    brewing in that AZ.
+    arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
   {{< img src="monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
-    Datadog. The standard scoping rules apply here. Please refer to the
-    [scope section](/graphing/#scope) of the graphing primer for
-    further information.
+    Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
     {{< img src="monitor/alert_grouping.png" alt="alert grouping" >}}
