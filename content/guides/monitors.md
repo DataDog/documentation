@@ -7,7 +7,7 @@ aliases:
   - /guides/alerting
 ---
 
-***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
+***For more detail about Monitors, review the [Monitoring Reference](/monitoring) page.***
 
 Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
@@ -41,9 +41,8 @@ Here is a quick overview of the different terms used in this guide.
 
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
-page by highlighting the "Monitors" tab in the main menu and selecting the
-"New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
-on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
+page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types
+on the left. This page shows how to setup a metric Monitor, but see the [Monitoring Reference](/monitoring) to learn more about other Monitor types.
 
 {{< img src="monitor/nav.png" >}}
 
@@ -52,12 +51,12 @@ on the left. This guide will walk through the configuration of the Metric type. 
 1. Choose the detection method
     {{< img src="monitor/alert_type.png" alt="alert type" >}}
 
-    A **threshold alert** compares the value in the selected
+    A **Threshold Alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case
     where you know what sort values are unexpected.
 
-    A **change alert** compares the absolute or percentage change in
+    A **Change Alert** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
     The compared data points will not be single points but are computed using
     the parameters in the *alert conditions* section.
