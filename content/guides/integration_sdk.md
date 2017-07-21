@@ -221,10 +221,20 @@ The [Datadog Agent](https://github.com/DataDog/dd-agent) provides a number of us
 As you build your check and test code, you can use the following to run your tests:
 
 - `rake lint`: Lint your code for potential errors
-- `rake ci:run[my_integration]`: Run the tests that you have created in your `test_my_integration.py` file.
-- `rake ci:run[default]`: Run the tests you have written in addition to some additional generic tests we have written.
+- `rake ci:run[my_integration]`: Run the tests that you have written in your `test_my_integration.py` file and that have an `@attr(requires='my_integration')` annotation.
+- `rake ci:run[default]`: Run the tests you have written written in your `test_my_integration.py` file (without the `@attr(requires='my_integration')` annotation) in addition to some additional generic tests we have written.
 
 Travis CI will automatically run tests when you create a pull request. Please ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
+
+Add the `@attr(requires='my_integration')` annotation on the test classes or methods that require a full docker testing environment (see next section).
+Don't add this annotation to your unit and mock tests ; those run via `rake ci:run[default]` on Travis CI.
+
+To iterate quickly on your unit and mock tests, instead of running all the tests with `rake ci:run[default]`, you can simply run:
+
+~~~
+# run unit and mock tests, in the virtualenv
+$ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
+~~~
 
 #### Docker test environments
 
