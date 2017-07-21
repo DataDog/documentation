@@ -26,7 +26,7 @@ If you view a dashboard, in the top left search bar you can type ```sources:bitb
 
 ## Installation
 
-Setup your webhooks on the bitbucket side. Instructions here.
+Setup your webhooks on the bitbucket side. [Instructions here][3].
 Use as the webhook url.:
 
  ```
@@ -50,3 +50,4 @@ Each entry in the integration tile is validated when you enter it. There is noth
 
 [1]: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
 [2]: https://app.datadoghq.com/account/settings#integrations/bitbucket
+[3]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
