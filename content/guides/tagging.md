@@ -128,10 +128,12 @@ You can use tags to narrow down the metrics to display on a dashboard grapm, or 
 To narrow down the metrics to display, enter the tag in the ```from:```textbox. 
 You will now be looking at a chosen metric over all the hosts that have that particular tag assigned.
 
+{{< img src="dashboardtags_1.png" alt="Tags in Dashboards from textbox" >}}
+
 To group using tags, enter the key part of the tag in the ```avg by:``` textbox. 
 For instance, if you have a timeseries graph and you have assigned the tags `role:database`, `role:frontend`, and `role:loadbalancer`, you will get one line in your timeseries graph representing all the machines with the database, another of machines wth the frontend, and third of machines with the loadbalancer.
 
-{{< img src="dashboardtags.png" alt="Tags in Dashboards" >}}
+{{< img src="dashboardtags.png" alt="Tags in Dashboards avgby textbox" >}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. 
 Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
@@ -144,7 +146,7 @@ To filter the list of hosts in the Infrastructure list, enter a tag in the filte
 
 ### Using tags in Monitors
 
-When defining a monitor, you can use tags to allow the monitor to apply to any subset of hosts across your environment.
+When defining a monitor, you can use tags in the ```from:``` textbox.  to allow the monitor to apply to any subset of hosts across your environment.
 
 {{< img src="monitortags.png" alt="Tags in Monitors" >}}
 
