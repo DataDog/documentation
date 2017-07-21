@@ -33,7 +33,7 @@ Set the webhook URL to: ```https://app.datadoghq.com/intake/webhook/bitbucket?ap
 
 1. Add the [Bitbucket integration][2] in your Datadog application.
 
-2. Enter the full name of each repository you want to monitor. If the url for your repository is ```https://bitbucket.org/groupname/reponame```, then enter ```groupname/reponame``` in the **Repo full name textbox**.
+2. Enter the full name of each repository you want to monitor. If the URL for your repository is ```https://bitbucket.org/groupname/reponame```, then enter ```groupname/reponame``` in the **Repo full name textbox**.
 
 3. Check which type of events you would like to collect:
     * Commits 
