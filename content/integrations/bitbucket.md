@@ -27,7 +27,7 @@ If you view a dashboard, in the top left search bar you can type ```sources:bitb
 ## Installation
 
 See [Bitbucket's documentation][3] and set up webhooks for any Bitbucket behaviors you want to track in Datadog.
-Use as webhook url: ```https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>```
+Set the webhook URL to: ```https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>```
 
 ## Configuration
 
