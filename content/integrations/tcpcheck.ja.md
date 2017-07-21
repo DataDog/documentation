@@ -1,6 +1,5 @@
 ---
 aliases:
-- /guides/network_checks
 - /ja/guides/network_checks
 integration_title: TCP Check
 kind: integration
