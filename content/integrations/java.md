@@ -98,11 +98,12 @@ The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this 
 * `include` (**mandatory**): Dictionary of filters, any attribute that matches these filters will be collected unless it also matches the "exclude" filters (see below)
 * `exclude` (**optional**): Another dictionary of filters. Attributes that match these filters won't be collected
 
-Tags are automatically added to the metrics based on the MBean actual name and you can also explicitly specify supplementary tags. For example, assuming the following MBean is exposed by the application you're monitoring: 
+Tags are automatically added to metrics based on the actual MBean name. 
+You can explicitly specify supplementary tags. For instance, assuming the following MBean is exposed by your monitored application: 
 
     mydomain:attr0=val0,attr1=val1
 
-The example configuration above would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain, simple:val0, raw_value:my_chosen_value, multiple:val0-val1`. 
+It would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) with tags: `attr0:val0, attr1:val1, domain:mydomain, simple:val0, raw_value:my_chosen_value, multiple:val0-val1`. 
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
