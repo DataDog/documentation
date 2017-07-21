@@ -23,7 +23,7 @@ No installation is required.
 
 To integrate Bugsnag with Datadog:
 
-1. Go to **Settings** in [Bugsnag](https://bugsnag.com/)  for the project you would like to configure to send notifications to Datadog.
+1. Go to **Settings** in [Bugsnag](https://bugsnag.com/) for the project you would like to configure to send notifications to Datadog.
 
 2. Select **Team Notifications** and then **Datadog**.
 
