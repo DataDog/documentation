@@ -13,6 +13,7 @@ variables:
 # ================== copy scripts =============== #
 before_script:
   - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
+  - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
   - find local/etc/ -type f -exec cp {} /etc \;  # load configs
 
 # ================== templates ================== #
