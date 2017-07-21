@@ -26,21 +26,21 @@ If you view a dashboard, in the top left search bar you can type ```sources:bitb
 
 ## Installation
 
-Setup your webhooks on the bitbucket side. [Instructions here][3].
-Use as the webhook url.:
-
- ```
- https://app.datadoghq.com/intake/webhook/bitbucket?api_key=YOUR_API_KEY
- ```
+See [Bitbucket's documentation][3] and set up webhooks for any Bitbucket behaviors you want to track in Datadog.
+Use as the webhook url: ```https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>```
 
 ## Configuration
 
-1. Login to the Datadog application and add the [Bitbucket integration here][2].
+1. Add the [Bitbucket integration][2] in your Datadog application.
 
-2. Enter the full name of the repository you want to monitor. If the url for your repository is https://bitbucket.org/groupname/reponame, then enter in the Repo full name textbox
-```groupname/reponame``` .
+2. Enter the full name of each repository you want to monitor. If the url for your repository is ```https://bitbucket.org/groupname/reponame```, then enter ```groupname/reponame``` in the **Repo full name textbox**.
 
-3.  Decide what type of events you would like to collect and click **Update Configuration**.
+3.  Check which type of events you would like to collect:
+    * Commits 
+    * Pull Requests
+    * Issues  
+
+4. Click **Update Configuration**.
 
 ## Validation
 
