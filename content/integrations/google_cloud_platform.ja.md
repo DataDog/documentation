@@ -20,6 +20,8 @@ Connect to Google Cloud Platform to:
 
 Related integrations include:
 
+|||
+|-------------|-------------|
 | [App Engine](/integrations/google_app_engine) | platform as a service to build scalable applications |
 | [Big Query](/integrations/google_cloud_big_query) | enterprise data warehouse |
 | [CloudSQL](/integrations/google_cloudsql) | MySQL database service |
