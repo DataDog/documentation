@@ -103,7 +103,7 @@ You can explicitly specify supplementary tags. For instance, assuming the follow
 
     mydomain:attr0=val0,attr1=val1
 
-It would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) with tags: `attr0:val0, attr1:val1, domain:mydomain, simple:val0, raw_value:my_chosen_value, multiple:val0-val1`. 
+It would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) with tags: `attr0:val0, attr1:val1, domain:mydomain`
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
