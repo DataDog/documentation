@@ -57,13 +57,13 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 If you are modifying the IAM Policy you created for your cluster, you may only need to add one Action: ```ecs:StartTask```.
 
 1. Using the Identity and Access Management (IAM) console, create a new role called ```dd-agent-ecs```.
-1. Select **Amazon EC2 Role for EC2 Container Service**. On the next screen do not check any checkboxes and click **Next Step**.
-1. Click **Create Role**.
-1. Click on the newly created role.
-1. Expand the **Inline Policies** section. Click the link to create a new inline policy.
-1. Choose **Custom Policy** and press the button.
-1. For **Policy Name** enter ```dd-agent-policy```. Copy the following text into the **Policy Document**:
-
+2. Select **Amazon EC2 Role for EC2 Container Service**. On the next screen do not check any checkboxes and click **Next Step**.
+3. Click **Create Role**.
+4. Click on the newly created role.
+5. Expand the **Inline Policies** section. Click the link to create a new inline policy.
+6. Choose **Custom Policy** and press the button.
+7. For **Policy Name** enter ```dd-agent-policy```. Copy the following text into the **Policy Document**:
+{{< highlight json >}}
 
        {
            "Version": "2012-10-17",
@@ -85,6 +85,7 @@ If you are modifying the IAM Policy you created for your cluster, you may only n
                }
            ]
        }
+{{< /highlight >}}
 
 8. Click **Create Policy**
 
@@ -95,41 +96,36 @@ Ideally you want the Datadog agent to load on one container on each EC2 instance
 #### Create a new Amazon Linux instance
 
 1. Log in to the AWS console and navigate to the EC2 section.
-1. Create a new instance by clicking the **Launch Instance** button.
-1. Click on Community AMIs. Visit [this page to see a list of current ECS optimized instances](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html). Choose the appropriate AMI for your region and copy the ID into the search box. Choose the AMI that comes up as a result of the  search.
-1. Follow the prompts as you normally would when setting up an instance.
-1. On the third dialog, select the IAM role you created above.
-1. Expand the Advanced Details section and copy the following script into the User Data section. Change cluster name to your cluster's name and task definition to the name you gave your task definition.
+2. Create a new instance by clicking the **Launch Instance** button.
+3. Click on Community AMIs. Visit [this page to see a list of current ECS optimized instances](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html). Choose the appropriate AMI for your region and copy the ID into the search box. Choose the AMI that comes up as a result of the  search.
+4. Follow the prompts as you normally would when setting up an instance.
+5. On the third dialog, select the IAM role you created above.
+6. Expand the Advanced Details section and copy the following script into the User Data section. Change cluster name to your cluster's name and task definition to the name you gave your task definition.
+{{< highlight bash >}}
+#!/bin/bash
+cluster="cluster_name"
+task_def="dd-agent-task"
+echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
+start ecs
+yum install -y aws-cli jq
+instance_arn=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
+az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+region=${az:0:${#az} - 1}
+echo "cluster=$cluster az=$az region=$region aws ecs start-task --cluster 
+$cluster --task-definition $task_def --container-instances $instance_arn --region $region" >> /etc/rc.local
+{{< /highlight >}}
 
-       #!/bin/bash
-       cluster="cluster_name"
-       task_def="dd-agent-task"
-       echo ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
-       start ecs
-       yum install -y aws-cli jq
-       instance_arn=$(curl -s http://localhost:51678/v1/metadata \
-         | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
-       az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
-       region=${az:0:${#az} - 1}
-       echo "
-       cluster=$cluster
-       az=$az
-       region=$region
-       aws ecs start-task --cluster $cluster --task-definition $task_def \
-         --container-instances $instance_arn --region $region" >> /etc/rc.local
-
-
-    This user script above will:
-
-    * Start the task defined with the right parameters
-    * Add a few lines to `/etc/rc.local` so that the rebooted instance starts the task
+This user script above will:
+  * Start the task defined with the right parameters
+  * Add a few lines to `/etc/rc.local` so that the rebooted instance starts the task
 
 #### Create a new CoreOS instance
 
 1. Log in to the AWS console and navigate to the EC2 section.
-1. Create a new instance  as described in the instructions for a simple CoreOS ECS instance [here](https://coreos.com/os/docs/latest/booting-on-ecs.html)).
-1. When you get to the Configure Instance Details step, select the IAM role you created above.
-1. Paste the following block in User Data under Advanced Details, replace `CLUSTER_NAME` and `YOUR_API_KEY` with the ECS cluster that instance will join and your Datadog API key. This block declares two units with cloud-config, one for the ecs-agent container, used by Amazon ECS to administrate the ECS instance, and one for the dd-agent container, used by Datadog to collect metrics about the system and the tasks running on this ECS instance. Of course it can be modified to include your own tasks as well.
+2.  Create a new instance  as described in the instructions for a simple CoreOS ECS instance [here](https://coreos.com/os/docs/latest/booting-on-ecs.html)).
+3.   When you get to the Configure Instance Details step, select the IAM role you created above.
+4.   Paste the following block in User Data under Advanced Details, replace `CLUSTER_NAME` and `YOUR_API_KEY` with the ECS cluster that instance will join and your Datadog API key. 
+This block declares two units with cloud-config, one for the ecs-agent container, used by Amazon ECS to administrate the ECS instance, and one for the dd-agent container, used by Datadog to collect metrics about the system and the tasks running on this ECS instance. Of course it can be modified to include your own tasks as well.
 
 
        #cloud-config
@@ -186,6 +182,5 @@ The Datadog agent is now running on your new ECS instance. Use this user script 
 Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
 ### Metrics
-
 
 {{< get-metrics-from-git >}}
