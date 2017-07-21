@@ -226,14 +226,14 @@ As you build your check and test code, you can use the following to run your tes
 
 Travis CI will automatically run tests when you create a pull request. Please ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
 
-Please use the `@attr(requires='my_integration')` annotation on the test classes or methods that require a full docker testing environment (i.e. "integration" tests, see section below). Your unit and mock tests should not be annotated with this annotation, and will be run by `rake ci:run[default]`.
+Add the `@attr(requires='my_integration')` annotation on the test classes or methods that require a full docker testing environment (see next section).
+Don't add this annotation to your unit and mock tests ; those run via `rake ci:run[default]` on Travis CI.
 
 To iterate quickly on your unit and mock tests, instead of running all the tests with `rake ci:run[default]`, you can simply run:
 
 ~~~
-# shell
-source venv/bin/activate  # activate the python venv, you only need to run this once per shell
-bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]   # run unit and mock tests
+# run unit and mock tests, in the virtualenv
+$ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
 ~~~
 
 #### Docker test environments
