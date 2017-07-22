@@ -139,7 +139,7 @@ def sync(*args):
     if not options.dogweb:
         if options.token:
             options.dogweb = dogweb_extract_path
-            download_github_files(options.token, 'DataDog', 'dogweb', 'master', options.dogweb + 'integration' + sep, True)
+            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
         else:
             print('No Github token.. dogweb retrieval failed')
     if options.dogweb:
