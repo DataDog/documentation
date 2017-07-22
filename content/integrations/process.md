@@ -68,7 +68,7 @@ Each instance, regardless of the number of search strings used, counts for a sin
 
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
-{{< get-metrics-from-git "system" "system.processes" >}}
+{{< get-metrics-from-git >}}
 
 
    [1]: /guides/monitoring#process
