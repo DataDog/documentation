@@ -14,12 +14,23 @@ Capture GitHub commits in Datadog to:
   * Identify when new code changes lead to system alerts or build failures
   * Discuss code changes with your team in the Datadog Event Stream
 
-
+{{< img src="git_integration_screen.png" alt="Git event" >}}
 
 ## Configuration
 
+1. Add this URL to your Github Webhook, **Settings>Webhooks>Add new Webhook** with this URL:
+```
+https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOD_API_KEY>
+```
 
-Select 'Github' [on the account settings screen][1] and link your account. You can then select which repos you would like to integrate, which branches, and if you'd like to receive commits and/or issues.
+2. Select what you want to send to datadog, we support:
+     * Push (new commits), 
+     * Create and delete (for tags), 
+     * Pull requests,
+     * Issues, 
+     * All comments.
+
+3. Add the branches you wish to monitor for each repository. Wildcards are also supported to add all repositories for a user or Organization.
 
 ## What to Expect
 
