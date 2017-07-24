@@ -58,8 +58,8 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
                 else:
-                    print('There was an error ({}) listing {}/{} contents..'.format(response_csv.status_code, repo,
-                                                                                    branch))
+                    print('There was an error ({}) downloading {}/{}/{}'.format(response_csv.status_code, repo,
+                                                                                    branch, name))
                     exit(1)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
