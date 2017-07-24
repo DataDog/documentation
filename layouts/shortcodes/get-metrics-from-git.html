@@ -14,7 +14,7 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ if $.Page.Site.Data.integrations }}
+{{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.integrations) }}
 
   {{ $data := index $.Page.Site.Data.integrations $integration }}
 
