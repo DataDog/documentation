@@ -23,7 +23,7 @@ Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1
 
 ## Configuration
 
-1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
+Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
 {{< highlight yaml>}}
 init_config:
   custom_jar_paths: # optional
