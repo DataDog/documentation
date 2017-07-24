@@ -39,7 +39,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     :param is_dogweb: if dogweb repo we need to get nested data
     """
     directory = 'integration' if is_dogweb else ''
-    url = 'https://api.github.com/repos/{0}/{1}/contents/{2}'.format(org, repo, directory)
+    url = 'https://api.github.com/repos/{0}/{1}/{2}/contents/{3}'.format(org, repo, branch, directory)
     headers = {'Authorization': 'token {}'.format(token)} if token else {}
     excludes = ['LICENSE', 'Rakefile', 'Gemfile']
     print('Downloading files from {}/{}..'.format(repo, branch))
@@ -57,10 +57,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 if response_csv.status_code == requests.codes.ok:
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
-                else:
-                    print('There was an error ({}) downloading {}/{}/{}'.format(response_csv.status_code, repo,
-                                                                                    branch, name))
-                    exit(1)
+
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
