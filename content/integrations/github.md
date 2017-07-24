@@ -20,7 +20,7 @@ Capture GitHub commits in Datadog to:
 
 1. Add this URL to your Github Webhook, **Settings>Webhooks>Add new Webhook** with this URL:
 ```
-https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOD_API_KEY>
+https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOG_API_KEY>
 ```
 
 2. Select what you want to send to datadog, we support:
