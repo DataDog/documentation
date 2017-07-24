@@ -68,7 +68,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
   12. Choose `RDSOSMetrics` from the **Log Group** dropdown.
   13. Enter anything for the Filter Name and click Next.
   13. Enter a name for your function, such as `lambda-datadog-post-function`.
-  14. In the Lambda function code area, replace `<KMS_ENCRYPTED_KEYS>` with the ciphertext blob part of the CLI command output above.
+  14. Among the Lambda function's environment variables, look for one named kmsEncryptedKeys. Set its value to the ciphertext blob from the output of the command in step 5.
   15. Under Lambda function handler and role, choose the role you created above. Click **Next**.
   16. Choose the **Enable Now** radio button.
   17. Click the **Create Function** button.
