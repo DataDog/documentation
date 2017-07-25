@@ -2,6 +2,7 @@
 title: Datadog-DNS Service Check
 integration_title: DNS Service Check
 kind: integration
+git_integration_title: dns_check 
 doclevel: basic
 newhlevel: true
 ---
@@ -48,8 +49,7 @@ This check tags all metrics it collects with:
   * `nameserver:<nameserver_in_yaml>`
   * `resolved_hostname:<hostname_in_yaml>`
 
-
-{{< get-metrics-from-git git_integration_title: dns_check >}}
+{{< get-metrics-from-git >}}
   
 ## Service Check
 This check tags all service checks it collects with:
