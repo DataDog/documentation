@@ -6,3 +6,7 @@ params:
   environment: live
   img_url: "https://docs.datadoghq.com/"
   static_url: "https://docs.datadoghq.com/"
+  footer_scripts:
+  - snowplow: true
+  - marketo: true
+  - adroll: true
