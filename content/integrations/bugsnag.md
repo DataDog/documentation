@@ -28,10 +28,10 @@ To integrate Bugsnag with Datadog:
 2. Select **Team Notifications** and then **Datadog**.
 
 3. Customize the notifications you'll see in Datadog by selecting error notification triggers.
-{{< img src="bugsnag_1.png" alt="bugsnag_notification_setting" >}}
+{{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_setting" >}}
 
 4. Apply custom filters to your notification triggers to see errors from specific release stages and severities.
-{{< img src="bugsnag_2.png" alt="bugsnag_filters_setting" >}}
+{{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filters_setting" >}}
 
 5. Enter your Datadog API key.
 

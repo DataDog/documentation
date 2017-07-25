@@ -9,7 +9,7 @@ newhlevel: true
 
 AWS CloudTrail provides an audit trail for your AWS account. Datadog reads this audit trail and creates events you can search for in your stream and use for correlation on your dashboards. Here is an example of a CloudTrail event:
 
-{{< img src="cloudtrail_event.png" >}}
+{{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
 
 For information about the rest of the AWS services, see the [AWS tile][1]
 
@@ -17,24 +17,24 @@ For information about the rest of the AWS services, see the [AWS tile][1]
 
 Configure CloudWatch on AWS and ensure that the policy you created has the equivalent of the **AWSCloudTrailReadOnlyAccess** policy assigned. The actions in that policy are **s3:ListBucket**, **s3:GetBucketLocation**, and **s3:GetObject**. Also ensure that the policy gives access to the S3 bucket you selected for the CloudTrail Trail. Here is an example policy to give access to an S3 bucket.
 
-
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-      {
-        "Action": [
-          "s3:ListBucket",
-          "s3:GetBucketLocation",
-          "s3:GetObject"
-        ],
-        "Effect": "Allow",
-        "Resource": [
-          "arn:aws:s3:::your-s3-bucket-name",
-          "arn:aws:s3:::your-s3-bucket-name/*"
-        ]
-      } ]
-    }
-
+{{< highlight json >}}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+  {
+    "Action": [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+      "s3:GetObject"
+    ],
+    "Effect": "Allow",
+    "Resource": [
+      "arn:aws:s3:::your-s3-bucket-name",
+      "arn:aws:s3:::your-s3-bucket-name/*"
+    ]
+  } ]
+}
+{{< /highlight >}}
 
 
 ## Configuration
