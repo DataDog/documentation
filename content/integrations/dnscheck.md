@@ -41,14 +41,17 @@ To validate that the DNS Service Check is working, run `datadog-agent info`. You
         - Collected 1 metric, 0 events & 2 service checks
 {{< /highlight >}}
 
-## Usage
+## Metrics
 
-Data submitted to Datadog is tagged with the tags `nameserver:<nameserver_in_yaml_file>` and `resolved_hostname:<hostname_in_yaml>`. 
+This check tags everything it collects with:
 
-You may use one new metric to monitor the DNS response time of your host:
+  * `nameserver:<nameserver_in_yaml>`
+  * `resolved_hostname:<hostname_in_yaml>`
+
+You may use one metric to monitor the DNS response time of your host:
 
   * `dns.response_time` 
 
-And one new service check to check the DNS availability of your host:
+And one service check to check the DNS availability of your host:
 
   * `dns.can_resolve`
