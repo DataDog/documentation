@@ -225,7 +225,7 @@ metric is above or below a certain threshold:
 <li>Set alert notification message, including @ capabilities</li>
 </ul>
 
-{{< img src="alert_setup.png" >}}
+{{< img src="guides/overview/alert_setup.png" >}}
 
 Does the data have to be pushed to Datadog?
 <ol>
@@ -249,7 +249,7 @@ to pull the data from.</li>
 <li>"@"機能によるグループ毎の通知設定</li>
 </ul>
 
-{{< img src="alert_setup.png" >}}
+{{< img src="guides/overview/alert_setup.png" >}}
 
 アラート機能のためのデータは、Datadogに送信する必要がありますか?
 <ol>

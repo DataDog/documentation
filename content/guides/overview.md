@@ -123,7 +123,7 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-{{< img src="alert_setup.png" >}}
+{{< img src="guides/overview/alert_setup.png" >}}
 
 
 Does the data have to be pushed to Datadog?
