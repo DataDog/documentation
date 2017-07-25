@@ -43,7 +43,7 @@ To validate that the DNS Service Check is working, run `sudo /etc/init.d/datadog
 
 ## Metrics
 
-This check tags everything it collects with:
+This check tags all metrics it collects with:
 
   * `nameserver:<nameserver_in_yaml>`
   * `resolved_hostname:<hostname_in_yaml>`
@@ -51,7 +51,13 @@ This check tags everything it collects with:
 You may use one metric to monitor the DNS response time of your host:
 
   * `dns.response_time` 
+  
+## Service Check
+This check tags all service checks it collects with:
 
-And one service check to check the DNS availability of your host:
+  * `nameserver:<nameserver_in_yaml>`
+  * `resolved_hostname:<hostname_in_yaml>`
+  
+You may use one service check to check the DNS availability of your host:
 
   * `dns.can_resolve`
