@@ -48,9 +48,7 @@ This check tags all metrics it collects with:
   * `nameserver:<nameserver_in_yaml>`
   * `resolved_hostname:<hostname_in_yaml>`
 
-You may use one metric to monitor the DNS response time of your host:
-
-  * `dns.response_time` 
+{{< get-metrics-from-git >}}
   
 ## Service Check
 This check tags all service checks it collects with:
