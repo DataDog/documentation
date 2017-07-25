@@ -35,7 +35,7 @@ Datadog Agentの[インストール](/ja/guides/basic_agent_usage/)は、無事�
 
 <!-- <h2 id="integrations">Integrations</h2>
 
-{{< img src="integrations.png" >}}
+{{< img src="guides/overview/integrations.png" >}}
 
 <ul>
 <li>100+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
@@ -51,7 +51,7 @@ in an online service is treated the same throughout Datadog.</li>
 ## 簡単で便利なIntegrations
 
 
-![](/images/integrations.png)
+![](/guides/overview/integrations.png)
 
 <ul>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>

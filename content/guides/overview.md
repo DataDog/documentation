@@ -27,7 +27,7 @@ it can help you bring your infrastructure to heel.
 ## Integrations
 
 
-{{< img src="integrations.png" >}}
+{{< img src="guides/overview/integrations.png" >}}
 
 * About 100 integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, always adding more.
 * Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>, many documented by our active user community.
