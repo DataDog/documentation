@@ -18,19 +18,19 @@ Capture GitHub commits in Datadog to:
 
 ## Configuration
 
-1. Add this URL to your Github Webhook, **Settings>Webhooks>Add new Webhook** with this URL:
+1. Add this URL to your Github Webhook, (**Settings>Webhooks>Add new Webhook**) with this URL:
 ```
 https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOG_API_KEY>
 ```
 
-2. Select what you want to send to datadog, we support:
+2. Select what you want to send to datadog, This integration supports:
      * Push (new commits), 
      * Create and delete (for tags), 
      * Pull requests,
      * Issues, 
      * All comments.
 
-3. Add the branches you wish to monitor for each repository. Wildcards are also supported to add all repositories for a user or Organization.
+3. For each repository, add the branches you wish to monitor. If you want to add all repositories for a user or organization, use wildcards (e.g antirez/redis or antirez/*)
 
 ## What to Expect
 
@@ -38,17 +38,10 @@ Once the integration is complete, whatever you select (commits and/or issues) wi
 
 ## FAQ
 
-**Why events don't appear to be showing up in my datadog event stream with my github integration?**
+**Why aren't Github events showing up in my Datadog event stream?**
 
-If you have setup your webhook on the relevant Github repos and you can see it's sending data but events don't appear to be showing up in the event stream this might come from your webhook settings:
+If your webhook is configured with `content-type:application/x-www-form-urlencoded`, set it to `content-type:application/json` instead.
 
-Instead of having your webhook configured with `content-type:application/x-www-form-urlencoded`
-
-You should set your webhook with `content-type:application/json`.
-{{< collapse id="collapse_screen_github" >}}click here {{< /collapse >}} to see a screenshoot.
-
-<div class="collapse" id="collapse_screen_github" markdown="1">
   {{< img src="github_webhook.png" alt="github webhook content type" >}}
-</div>
 
    [1]: https://app.datadoghq.com/account/settings
