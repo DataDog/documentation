@@ -12,8 +12,6 @@ newhlevel: true
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
-### How this works
-
 There are 3 options for monitoring RDS instances. You can choose to use standard or enhanced, and then optionally turn on the native database integration as well if you wish.
 
 * **Standard RDS Integration** - The standard integration requires selecting RDS on the left side of the AWS integration tile. You will receive metrics about your instance as often as your Cloudwatch integration allows. All RDS Engine types are supported.
@@ -25,11 +23,11 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 ## Installation
 
-* **Standard RDS Integration**
+### Standard RDS Integration 
 
   If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
-* **Enhanced RDS Integration**
+### Enhanced RDS Integration 
 
   1.  Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
       ![][4]
@@ -78,26 +76,27 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
   17. Click the **Create Function** button.
 
 
-* **Native Database Integration**
+### Native Database Integration
 
   1.  Navigate to the AWS Console and open the RDS section to find the instance you want to monitor.
       ![][1]
   2.  Copy the endpoint URL (e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**); You will need it when you configure the agent. Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**). You will need it to create graphs and dashboards.
 
-# Configuration
+## Configuration
 
-* **Standard RDS Integration**
+### Standard RDS Integration
 
-  1.  Ensure RDS is checked in the AWS Integration tile.
+  Ensure RDS is checked in the AWS Integration tile.
 
-* **Enhanced RDS Integration**
+### Enhanced RDS Integration
 
-  1.  Ensure RDS is checked in the AWS Integration tile.
+  Ensure RDS is checked in the AWS Integration tile.
 
-* **Native Database Integration**
+### Native Database Integration
 Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory and then restart your agent: 
-  * If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
-    {{< highlight yaml >}}
+
+* If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
+{{< highlight yaml >}}
 init_config:
 
 instances:
@@ -108,7 +107,8 @@ instances:
     tags:
       - dbinstanceidentifier:my_own_instance
 {{< /highlight >}}
-  * If you are using PostgreSQL, then edit postgres.yaml:
+
+* If you are using PostgreSQL, then edit postgres.yaml:
   {{< highlight yaml >}}
 init_config:
 
@@ -121,8 +121,9 @@ instances:
     tags:
       - dbinstanceidentifier:my_own_instance
 {{< /highlight >}}
-  * If you are using Microsoft SQL Server, then edit sqlserver.yaml
-    {{< highlight yaml >}}
+
+* If you are using Microsoft SQL Server, then edit sqlserver.yaml
+{{< highlight yaml >}}
 init_config:
 
 instances:
