@@ -40,7 +40,7 @@ Azureの監視を設定するには、[Azure integrations][1] に移動し、イ
 
 Datadog Agentをインストールせずに監視するには、Azureのdiagnostics機能を有効にします。現状、この機能はWindowsベースのVMについてのみ対応しています。有効にするには、[Azureのポータル][2]に移動し、次のインストラクションに従って操作をします。
 
-![](/images/azure_diag_manual.png)
+![](/integrations/azure/azure_diag_manual.png)
 
 
 <!-- After locating your VM:
