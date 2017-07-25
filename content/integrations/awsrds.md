@@ -12,8 +12,6 @@ newhlevel: true
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
-### How this works
-
 There are 3 options for monitoring RDS instances. You can choose to use standard or enhanced, and then optionally turn on the native database integration as well if you wish.
 
 * **Standard RDS Integration** - The standard integration requires selecting RDS on the left side of the AWS integration tile. You will receive metrics about your instance as often as your Cloudwatch integration allows. All RDS Engine types are supported.
@@ -25,11 +23,11 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 ## Installation
 
-* **Standard RDS Integration**
+### Standard RDS Integration 
 
-  If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
-* **Enhanced RDS Integration**
+### Enhanced RDS Integration 
 
   1.  Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
       ![][4]
@@ -38,30 +36,34 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
   4.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
   5.  Encrypt the key you just created by using the [AWS CLI][5]:
 
+          ```
           aws kms encrypt --key-id alias/<KMS key name> --plaintext '{"api_key":"<datadog_api_key>", "app_key":"<datadog_app_key>"}'
+          ```
 
-      The KMS key name should be replaced by the alias of the key you just created. The datadog api and app keys should be replaced by [the api and app keys found here][6].
+          The KMS key name should be replaced by the alias of the key you just created. The datadog api and app keys should be replaced by [the api and app keys found here][6].
 
-      The output of this command will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
+          The output of this command will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
+
   6.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
-  7.  Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
+  7. Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
   8.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
-  9.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing &lt;ENCRYPTION_KEY ARN> with the ARN of the Encryption Key:
-
-          {
-              "Version": "2012-10-17",
-              "Statement": [
-                  {
-                      "Effect": "Allow",
-                      "Action": [
-                          "kms:Decrypt"
-                      ],
-                      "Resource": [
-                          "<ENCRYPTION_KEY ARN>"
-                      ]
-                  }
-              ]
-          }
+  9.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing `<ENCRYPTION_KEY ARN>` with the ARN of the Encryption Key:
+  {{< highlight json >}}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Effect": "Allow",
+          "Action": [
+              "kms:Decrypt"
+          ],
+          "Resource": [
+              "<ENCRYPTION_KEY ARN>"
+          ]
+      }
+  ]
+}
+{{< /highlight >}}
 
   10. From the Lambda Management Console, create a new Lambda Function.
   11. On the Select blueprint screen, select the datadog-process-rds-metrics blueprint.
@@ -74,79 +76,78 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
   17. Click the **Create Function** button.
 
 
-* **Native Database Integration**
+### Native Database Integration
 
   1.  Navigate to the AWS Console and open the RDS section to find the instance you want to monitor.
       ![][1]
   2.  Copy the endpoint URL (e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**); You will need it when you configure the agent. Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**). You will need it to create graphs and dashboards.
 
-# Configuration
+## Configuration
 
-* **Standard RDS Integration**
+### Standard RDS Integration
 
-  1.  Ensure RDS is checked in the AWS Integration tile.
+Ensure RDS is checked in the AWS Integration tile.
 
-* **Enhanced RDS Integration**
+### Enhanced RDS Integration
 
-  1.  Ensure RDS is checked in the AWS Integration tile.
+Ensure RDS is checked in the AWS Integration tile.
 
-* **Native Database Integration**
+### Native Database Integration
+Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory and then restart your agent: 
 
-  1.  Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory.
-      a.  If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
+If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
+{{< highlight yaml >}}
+init_config:
 
-          init_config:
+instances:
+  - server: mysqlrds.blah.us-east1-rds.amazonaws.com # The endpoint URL from the AWS console
+    user: my_username
+    pass: my_password
+    port: 3306
+    tags:
+      - dbinstanceidentifier:my_own_instance
+{{< /highlight >}}
 
-          instances:
-            - server: mysqlrds.blah.us-east1-rds.amazonaws.com # The endpoint URL from the AWS console
-              user: my_username
-              pass: my_password
-              port: 3306
-              tags:
-                - dbinstanceidentifier:my_own_instance
+If you are using PostgreSQL, then edit postgres.yaml:
+  {{< highlight yaml >}}
+init_config:
 
+instances:
+  - host: mysqlrds.blah.us-east1-rds.amazonaws.com
+    port: 5432
+    username: my_username
+    password: my_password
+    dbname: db_name
+    tags:
+      - dbinstanceidentifier:my_own_instance
+{{< /highlight >}}
 
-      b.  If you are using PostgreSQL, then edit postgres.yaml:
+If you are using Microsoft SQL Server, then edit sqlserver.yaml
+{{< highlight yaml >}}
+init_config:
 
-          init_config:
-
-          instances:
-            - host: mysqlrds.blah.us-east1-rds.amazonaws.com
-              port: 5432
-              username: my_username
-              password: my_password
-              dbname: db_name
-              tags:
-                - dbinstanceidentifier:my_own_instance
-
-
-      c.  If you are using Microsoft SQL Server, then edit sqlserver.yaml
-
-          init_config:
-
-          instances:
-            - host: mysqlrds.blah.us-east1-rds.amazonaws.com,1433
-              username: my_username
-              password: my_password
-              tags:
-                - dbinstanceidentifier:my_own_instance
-
-
-  2.  Restart the agent.
+instances:
+  - host: mysqlrds.blah.us-east1-rds.amazonaws.com,1433
+    username: my_username
+    password: my_password
+    tags:
+      - dbinstanceidentifier:my_own_instance
+{{< /highlight >}}
 
 ## Validation
 
-To validate that the native database integration is working, run `datadog-agent info`. You should see something like the following:
+To validate that the native database integration is working, run `sudo /etc/init.d/datadog-agent info`. You should see something like the following:
+{{< highlight shell >}}
+Checks
+======
 
-    Checks
-    ======
+[...]
 
-      [...]
-
-      mysql
-      -----
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+  mysql
+  -----
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Usage
 
