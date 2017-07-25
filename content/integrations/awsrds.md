@@ -136,7 +136,7 @@ instances:
 
 ## Validation
 
-To validate that the native database integration is working, run `datadog-agent info`. You should see something like the following:
+To validate that the native database integration is working, run `sudo /etc/init.d/datadog-agent info`. You should see something like the following:
 {{< highlight shell >}}
 Checks
 ======
