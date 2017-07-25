@@ -25,7 +25,7 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 ### Standard RDS Integration 
 
-  If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
 ### Enhanced RDS Integration 
 
@@ -86,16 +86,16 @@ There are 3 options for monitoring RDS instances. You can choose to use standard
 
 ### Standard RDS Integration
 
-  Ensure RDS is checked in the AWS Integration tile.
+Ensure RDS is checked in the AWS Integration tile.
 
 ### Enhanced RDS Integration
 
-  Ensure RDS is checked in the AWS Integration tile.
+Ensure RDS is checked in the AWS Integration tile.
 
 ### Native Database Integration
 Configure an agent and connect to your RDS instance by editing the appropriate yaml file in your conf.d directory and then restart your agent: 
 
-* If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
+If you are using MySQL, MariaDB, or Aurora, then edit mysql.yaml:
 {{< highlight yaml >}}
 init_config:
 
@@ -108,7 +108,7 @@ instances:
       - dbinstanceidentifier:my_own_instance
 {{< /highlight >}}
 
-* If you are using PostgreSQL, then edit postgres.yaml:
+If you are using PostgreSQL, then edit postgres.yaml:
   {{< highlight yaml >}}
 init_config:
 
@@ -122,7 +122,7 @@ instances:
       - dbinstanceidentifier:my_own_instance
 {{< /highlight >}}
 
-* If you are using Microsoft SQL Server, then edit sqlserver.yaml
+If you are using Microsoft SQL Server, then edit sqlserver.yaml
 {{< highlight yaml >}}
 init_config:
 
