@@ -117,11 +117,11 @@ Since runtime configuration applies globally, BOSH will redeploy every node in y
 
 The easiest way to check that Agent installs were successful is to filter for them in the [Host map page](https://app.datadoghq.com/infrastructure/map) in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag, so filter by that, and optionally group hosts by any tag you wish (e.g. `bosh_job`), as in the following screenshot:
 
-![cloud-foundry-host-map](/images/cloud-foundry-host-map.png)
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
-![cloud-foundry-host-map-detail](/images/cloud-foundry-host-map-detail.png)
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" >}}
 
 # Deploy the Datadog Firehose Nozzle
 
@@ -223,7 +223,7 @@ bosh -n -d cf-manifest deploy cf-manifest.yml
 
 On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
-![cloud-foundry-nozzle-metrics](/images/cloud-foundry-nozzle-metrics.png)
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" >}}
 
 # Configure the Datadog plugin for BOSH Health Monitor
 
@@ -266,7 +266,7 @@ bosh create-env --state=your-state-file.json bosh.yml
 
 On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning `bosh.healthmonitor`:
 
-![cloud-foundry-bosh-hm-metrics](/images/cloud-foundry-bosh-hm-metrics.png)
+{{< img src="integrations/cloud_foundry/cloud-foundry-bosh-hm-metrics.png" alt="cloud-foundry-bosh-hm-metrics" >}}
 
 # Events
 
