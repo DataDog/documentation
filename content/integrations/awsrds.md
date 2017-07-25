@@ -34,16 +34,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
   2.  From the IAM Management Console, click on **Encryption Keys**. Click the **Create Key** button.
   3.  Enter an Alias for the key, such as `lambda-datadog-key`.
   4.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
-  5.  Encrypt the key you just created by using the [AWS CLI][5]:
-
-          ```
-          aws kms encrypt --key-id alias/<KMS key name> --plaintext '{"api_key":"<datadog_api_key>", "app_key":"<datadog_app_key>"}'
-          ```
-
-          The KMS key name should be replaced by the alias of the key you just created. The datadog api and app keys should be replaced by [the api and app keys found here][6].
-
-          The output of this command will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
-
+  5.  Encrypt the key you just created by using the [AWS CLI][5], replacing \<KMS_KEY_NAME\> with the alias of the key you just created: `aws kms encrypt --key-id alias/<KMS_KEY_NAME> --plaintext '{"api_key":"<DATADOG_API_KEY>", "app_key":"<DATADOG_APP_KEY>"}'}`. The command output will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
   6.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
   7. Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
   8.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
