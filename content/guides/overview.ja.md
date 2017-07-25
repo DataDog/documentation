@@ -210,7 +210,7 @@ without access to your data or any other information (via the pencil in the uppe
 <!-- <h2 id="alerting">Alerting</h2>
 {{< img src="guides/overview/alert.png" >}}
 
-[Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific
+[Alerting](guides/monitors/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
 <ul>
 <li>Across your entire infrastructure</li>

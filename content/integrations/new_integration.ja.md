@@ -21,7 +21,7 @@ sidebar:
     - text: Deploying the Agent with Chef
       href: "guides/chef/"
     - text: Guide to Alerting
-      href: "guides/alerting/"
+      href: "guides/monitors/"
     - text: Single Sign On With SAML
       href: "guides/saml/"
     - text: Billing FAQ
