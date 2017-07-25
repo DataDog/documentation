@@ -213,7 +213,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 
 <!-- <h2 id="alerting">Alerting</h2>
-{{< img src="alert.png" >}}
+{{< img src="guides/overview/alert.png" >}}
 
 [Alerting](/guides/alerting/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -238,7 +238,7 @@ to pull the data from.</li>
 
 ## 監視とアラート
 
-![](/images/alert.png)
+![](guides/overview/alert.png)
 
 [Monitor機能](/ja/guides/monitoring/)によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>
