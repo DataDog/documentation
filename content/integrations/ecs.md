@@ -169,6 +169,8 @@ This block declares two units with cloud-config, one for the ecs-agent container
          ExecStop=/usr/bin/docker stop dd-agent
 {{< /highlight >}}
 
+The Datadog Agent is now running on your new ECS instance. Use this user script with every new ECS instance deployment to monitor your cluster's health with Datadog.
+
 #### Dynamic detection and monitoring of running services
 
 Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
