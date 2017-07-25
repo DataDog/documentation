@@ -65,63 +65,63 @@ understanding of role delegation, refer to the [AWS IAM Best Practices guide](ht
 Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
-
-        {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Action": [
-                "autoscaling:Describe*",
-                "budgets:ViewBudget",
-                "cloudtrail:DescribeTrails",
-                "cloudtrail:GetTrailStatus",
-                "cloudwatch:Describe*",
-                "cloudwatch:Get*",
-                "cloudwatch:List*",
-                "dynamodb:list*",
-                "dynamodb:describe*",
-                "ec2:Describe*",
-                "ec2:Get*",
-                "ecs:Describe*",
-                "ecs:List*",
-                "elasticache:Describe*",
-                "elasticache:List*",
-                "elasticfilesystem:DescribeFileSystems",
-                "elasticfilesystem:DescribeTags",
-                "elasticloadbalancing:Describe*",
-                "elasticmapreduce:List*",
-                "elasticmapreduce:Describe*",
-                "es:ListTags",
-                "es:ListDomainNames",
-                "es:DescribeElasticsearchDomains",
-                "kinesis:List*",
-                "kinesis:Describe*",
-                "lambda:List*",
-                "logs:Get*",
-                "logs:Describe*",
-                "logs:FilterLogEvents",
-                "logs:TestMetricFilter",
-                "rds:Describe*",
-                "rds:List*",
-                "route53:List*",
-                "s3:GetBucketTagging",
-                "s3:ListAllMyBuckets",
-                "ses:Get*",
-                "sns:List*",
-                "sns:Publish",
-                "sqs:ListQueues",
-                "support:*",
-                "tag:getResources",
-                "tag:getTagKeys",
-                "tag:getTagValues"
-              ],
-              "Effect": "Allow",
-              "Resource": "*"
-            }
-          ]
-        }
-
-    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
+{{< highlight json>}}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "autoscaling:Describe*",
+        "budgets:ViewBudget",
+        "cloudtrail:DescribeTrails",
+        "cloudtrail:GetTrailStatus",
+        "cloudwatch:Describe*",
+        "cloudwatch:Get*",
+        "cloudwatch:List*",
+        "dynamodb:list*",
+        "dynamodb:describe*",
+        "ec2:Describe*",
+        "ec2:Get*",
+        "ecs:Describe*",
+        "ecs:List*",
+        "elasticache:Describe*",
+        "elasticache:List*",
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeTags",
+        "elasticloadbalancing:Describe*",
+        "elasticmapreduce:List*",
+        "elasticmapreduce:Describe*",
+        "es:ListTags",
+        "es:ListDomainNames",
+        "es:DescribeElasticsearchDomains",
+        "kinesis:List*",
+        "kinesis:Describe*",
+        "lambda:List*",
+        "logs:Get*",
+        "logs:Describe*",
+        "logs:FilterLogEvents",
+        "logs:TestMetricFilter",
+        "rds:Describe*",
+        "rds:List*",
+        "route53:List*",
+        "s3:GetBucketTagging",
+        "s3:ListAllMyBuckets",
+        "ses:Get*",
+        "sns:List*",
+        "sns:Publish",
+        "sqs:ListQueues",
+        "support:*",
+        "tag:getResources",
+        "tag:getTagKeys",
+        "tag:getTagValues"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+{{< /highlight >}}
+If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
 
 2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
 3.  From the selection, choose Role for Cross-Account Access.
