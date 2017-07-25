@@ -48,7 +48,7 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
 
 1.  Execute the info command
 
-        datadog-agent info
+        sudo /etc/init.d/datadog-agent info
 
 2.  Verify that the check has passed. The output of the command should contain a section similar to the following:
 
