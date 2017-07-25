@@ -48,7 +48,8 @@ This check tags all metrics it collects with:
   * `nameserver:<nameserver_in_yaml>`
   * `resolved_hostname:<hostname_in_yaml>`
 
-{{< get-metrics-from-git >}}
+
+{{< get-metrics-from-git git_integration_title: dns_check >}}
   
 ## Service Check
 This check tags all service checks it collects with:
