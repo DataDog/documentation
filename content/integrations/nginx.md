@@ -11,7 +11,7 @@ Connect NGINX to Datadog in order to:
 * Visualize your web server performance
 * Correlate the performance of NGINX with the rest of your applications
 
-{{< img src="nginx.jpg" alt="NGINX default dashboard" >}}
+{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" >}}
 
 Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, [how to collect them](https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html), and [how to use Datadog to monitor NGINX](https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html).
 
