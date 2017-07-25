@@ -78,7 +78,7 @@ MySQL/PostgreSQLインテグレーションは、個々のデータベースイ�
 
 {{< snippet-code-block file="rds-conf.yaml" >}}
 
-設定ファイルの変更が終わったら、Datadog Agentを再起動します。`sudo service datadog-agent info` (on linux)を実行し、MySQLのCheckが正しく動作しているかを確認します。
+設定ファイルの変更が終わったら、Datadog Agentを再起動します。`sudo s/etc/init.d/datadog-agent info` (on linux)を実行し、MySQLのCheckが正しく動作しているかを確認します。
 
 
 <!-- ### 3. Visualize RDS and MySQL/PostgreSQL metrics together -->
