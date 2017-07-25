@@ -17,42 +17,44 @@ Connect MongoDB to Datadog in order to:
 
 1.  To capture MongoDB metrics you need to install the Datadog Agent.
 2.  Create a read-only user for Datadog, with the appropriate [MongoDB roles](https://docs.mongodb.com/manual/reference/built-in-roles/) to collect complete server statistics. In the mongo shell, run:
+{{< highlight shell>}}
+# Authenticate as the admin user.
+use admin
+db.auth("admin", "admin-password")
 
-        # Authenticate as the admin user.
-        use admin
-        db.auth("admin", "admin-password")
+# On MongoDB 2.x, use the addUser command.
+db.addUser("datadog", "<UNIQUEPASSWORD>", true)
 
-        # On MongoDB 2.x, use the addUser command.
-        db.addUser("datadog", "<UNIQUEPASSWORD>", true)
-
-        # On MongoDB 3.x or higher, use the createUser command.
-        db.createUser({
-          "user":"datadog",
-          "pwd": "<UNIQUEPASSWORD>",
-          "roles" : [
-            {role: 'read', db: 'admin' },
-            {role: 'clusterMonitor', db: 'admin'},
-            {role: 'read', db: 'local' }
-          ]
-        })
+# On MongoDB 3.x or higher, use the createUser command.
+db.createUser({
+"user":"datadog",
+  "pwd": "<UNIQUEPASSWORD>",
+  "roles" : [
+    {role: 'read', db: 'admin' },
+    {role: 'clusterMonitor', db: 'admin'},
+    {role: 'read', db: 'local' }
+  ]
+})
+{{< /highlight >}}
 
 ## Configuration
 
-1.  Edit your conf.d/mongo.yaml file as follows:
+1.  Edit your `conf.d/mongo.yaml` file as follows:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
-
-        instances:
-          # The format for the server entry below is:
-          # server: mongodb://username:password@host:port/database where database will default to admin
-          - server: mongodb://admin:datadog@localhost:27017/admin
-            tags:
-              - mytag1
-              - mytag2
-            additional_metrics:
-              - durability
-              - locks
-              - top
+instances:
+  # The format for the server entry below is:
+  # server: mongodb://username:password@host:port/database where database will default to admin
+  - server: mongodb://admin:datadog@localhost:27017/admin
+    tags:
+      - mytag1
+      - mytag2
+    additional_metrics:
+      - durability
+      - locks
+      - top
+{{< /highlight >}}
 
 2.  Restart the agent
 
@@ -60,17 +62,19 @@ Connect MongoDB to Datadog in order to:
 
 ## Validation
 
-To validate that the integration is working, run ```datadog-agent info```. You should see results similar to the following:
+To validate that the integration is working, run ```/etc/init.d/datadog-agent info```. You should see results similar to the following:
 
-        Checks
-        ======
+{{< highlight shell >}}
+Checks
+======
 
-          mongo
-          -----
-            - instance #0 [OK]
-            - Collected 89 metrics, 0 events & 2 service checks
-            - Dependencies:
-                - pymongo: 2.8
+  mongo
+  -----
+    - instance #0 [OK]
+    - Collected 89 metrics, 0 events & 2 service checks
+    - Dependencies:
+        - pymongo: 2.8
+{{< /highlight>}}
 
 ## Metrics
 
