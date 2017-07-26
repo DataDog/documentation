@@ -11,14 +11,14 @@ Event Correlation refers to overlaying events on top of a dashboard graph and is
 ## Event Correlation at Design Time
 
 
-{{< img src="guides-eventcorrelation-screenboard.png" >}}
+{{< img src="guides/eventcorrelation/guides-eventcorrelation-screenboard.png" >}}
 Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer](/graphing/). You can find details about adding events [using the UI](/graphing/#overlay-events-for-additional-context) or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
 
 
 
-{{< img src="guides-eventcorrelation-searchbox.png" >}}
+{{< img src="guides/eventcorrelation/guides-eventcorrelation-searchbox.png" >}}
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
 
 ## Event Query Language
