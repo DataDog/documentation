@@ -8,7 +8,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="postfixgraph.png" alt="Postfix Graph" >}}
+{{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" >}}
 
 Get metrics from Postfix in real time to monitor the messages pending in your Postfix mail queues.
 
