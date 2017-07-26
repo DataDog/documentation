@@ -41,7 +41,7 @@ When it prompts for a password, enter the one used in the first command.
 init_config:
 
 instances:
-    host: localhost
+  - host: localhost
     port: 5432
 {{< /highlight >}}
 
