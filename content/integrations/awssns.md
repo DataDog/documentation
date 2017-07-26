@@ -7,7 +7,7 @@ git_integration_title: amazon_sns
 ---
 ## Overview
 
-{{< img src="snsdashboard.png" alt="SNS Dashboard" >}}
+{{< img src="integrations/awssns/snsdashboard.png" alt="SNS Dashboard" >}}
 
 Connect SNS to Datadog in order to:
 
