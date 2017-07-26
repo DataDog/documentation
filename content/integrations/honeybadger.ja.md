@@ -21,7 +21,7 @@ Connect Honeybadger to Datadog to:
 * Discuss errors with your team
 * Be super awesome
 
-{{< img src="honeybadgerevent.png" alt="Honeybadger Event" >}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" >}}
 
 ## Installation
 
