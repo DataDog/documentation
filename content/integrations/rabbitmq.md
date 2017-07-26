@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 ---
 ## Overview
 
-{{< img src="rabbitmqdashboard.png" alt="RabbitMQ Dashboard" >}}
+{{< img src="integrations/rabbitmq/rabbitmqdashboard.png" alt="RabbitMQ Dashboard" >}}
 
 Connect RabbitMQ to Datadog in order to:
 
