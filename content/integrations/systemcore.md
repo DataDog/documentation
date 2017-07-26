@@ -7,7 +7,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="syscoredash.png" alt="System Core" >}}
+{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" >}}
 
 The System Core integration collects information about the host's CPU Cores.
 
