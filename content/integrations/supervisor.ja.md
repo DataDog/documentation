@@ -13,7 +13,7 @@ title: Datadog-Supervisor Integration
 
 ## Overview
 
-{{< img src="supervisorevent.png" alt="Supervisor Event" >}}
+{{< img src="integrations/supervisor/supervisorevent.png" alt="Supervisor Event" >}}
 
 Enable the supervisord check to monitor the states of your processes running under supervisord.
 

@@ -7,7 +7,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
+{{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
 
 AWS CodeDeploy is a service that automates code deployment to instances in the cloud and on-premise.
 

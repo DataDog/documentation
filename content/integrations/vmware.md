@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="vsphere_graph.png" >}}
+{{< img src="integrations/vmware/vsphere_graph.png" >}}
 
 Install the Datadog VMware vSphere integration to:
 
@@ -24,7 +24,7 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
 1.  Install the Datadog windows agent on your vCenter server.
 1.  Create a Datadog user in the Administration section of vCenter, you can use the default Read-Only access group.
 
-    {{< img src="vsphere_create_user.png" >}}
+    {{< img src="integrations/vmware/vsphere_create_user.png" >}}
 
 ## Configuration
 
@@ -76,7 +76,7 @@ Execute the info command and verify that the integration check has passed. The o
 
 **How should the Datadog Agent be set up with vCenter and ESX?**
 
-{{< img src="vmware_agent.png" >}}
+{{< img src="integrations/vmware/vmware_agent.png" >}}
 
 **How will a VMware integration impact my monthly billing?**
 

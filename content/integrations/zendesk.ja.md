@@ -13,7 +13,7 @@ title: Datadog-Zendesk Integration
 
 ## Overview
 
-{{< img src="zendesk_dash.png" alt="Zendesk Dashboard" >}}
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}
 
 Zendesk is a customer service and support ticket platform that allows you to receive, track and respond to inquiries and requests from customers. Enable this integration to see ticket metrics in Datadog and to create and update tickets from Datadog.
 

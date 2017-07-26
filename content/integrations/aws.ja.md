@@ -198,7 +198,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 ## Configuration
 
-![logo](/images/integrations-aws-secretentry.png)
+{{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" >}}
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.

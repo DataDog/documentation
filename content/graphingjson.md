@@ -12,8 +12,6 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ### Grammar
 
-
-
 The graph definition language is well-formed JSON and is structured in four parts:
 
 1. Requests
@@ -22,23 +20,24 @@ The graph definition language is well-formed JSON and is structured in four part
 4. Y Axis
 
 Here is how they fit together in a JSON dictionary:
-
+{{< highlight json >}}
+{
+  "requests": [
     {
-      "requests": [
-        {
-          "q": "metric{scope}"
-        }
-      ],
-      "events": [
-        {
-          "q": "search query"
-        }
-      ],
-      "viz": "visualization type",
-      "yaxis": {
-        "yaxisoptionkey": "yaxisoptionvalue"
-      }
+      "q": "metric{scope}"
     }
+  ],
+  "events": [
+    {
+      "q": "search query"
+    }
+  ],
+  "viz": "visualization type",
+  "yaxis": {
+    "yaxisoptionkey": "yaxisoptionvalue"
+  }
+}
+{{< /highlight >}}
 
 In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
 
@@ -135,32 +134,33 @@ For any given metric, data may come from a number of hosts. The data will normal
 
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
+      "q": "system.load.5{intake} * 2"
+    },
+    {
+      "q": "system.load.5{intake}"
     }
+  ]
+}
+{{< /highlight >}}
 
 You can also add, substract, multiply and divide a Series. Beware that
 Datadog does not enforce consistency at this point so you *can* divide
 apples by oranges.
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    }
-
+{{< highlight json >}}
+{
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "metric{apples} / metric{oranges}"
+      }
+    ]
+}
+{{< /highlight >}}
 
 ### Events
 
@@ -211,7 +211,7 @@ The Time Series can be further broken down to:
 #### Line Charts
 
 
-{{< img src="multi-lines.png" >}}
+{{< img src="graphingjson/multi-lines.png" >}}
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -230,7 +230,7 @@ The representation is automatically derived from having multiple `requests` valu
 #### Stacked Series
 
 
-{{< img src="slice-n-stack.png" >}}
+{{< img src="graphingjson/slice-n-stack.png" >}}
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
@@ -296,7 +296,6 @@ There are four configuration settings:
 
 Examples:
 
-
     "yaxis": {
         "min": "auto",
         "max": 200,
@@ -359,7 +358,6 @@ not in the bottom 10% nor in the top 30%.
         }
     }
 
-
 The following will show all data except those with values higher than 15:
 
     "yaxis": {
@@ -377,79 +375,82 @@ The following will hide data points below 2:
     }
 
 
-
 Here is a full JSON example:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.cpu.idle{host:hostname}",
-          "stacked": false
-        }
-      ],
-      "events": [],
-      "yaxis": {
-        "scale": "log"
-        "filter": {
-             "top": "5%",
-             "below": 15
-         }
-      },
+      "q": "system.cpu.idle{host:hostname}",
+      "stacked": false
     }
-
+  ],
+  "events": [],
+  "yaxis": {
+    "scale": "log"
+    "filter": {
+         "top": "5%",
+         "below": 15
+     }
+  },
+}
+{{< /highlight >}}
 
 
 #### Examples
 
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-          "stacked": false
-        }
-      ]
+      "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 Here is an example using the <code>top()</code> function:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-          "stacked": false
-        }
-      ]
+      "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
 
 
 
 To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-          "stacked": false
-        }
-      ]
+      "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 Here is an example using the <code>week_before()</code> function:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-        }
-      ]
+      "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
     }
+  ]
+}
+{{< /highlight >}}

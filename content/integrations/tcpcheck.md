@@ -9,7 +9,7 @@ aliases:
 ---
 ## Overview
 
-{{< img src="netgraphs.png" alt="Network Graphs" >}}
+{{< img src="integrations/tcpcheck/netgraphs.png" alt="Network Graphs" >}}
 
 TCP checks run in the agent and can verify whether or not a TCP service is up or down and responds in a certain time.
 

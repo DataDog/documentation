@@ -7,7 +7,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="phpgraph.png" alt="PHP Graph" >}}
+{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" >}}
 
 Connect your PHP applications to Datadog to:
 

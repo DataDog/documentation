@@ -10,7 +10,7 @@ git_integration_title: amazon_route53
 
 AWS Route 53 provides DNS and traffic management along with availability and performance monitoring via health checks. You can view the health check information in Datadog to provide context around other metrics and events in your environments. Here's an example dashboard of Route 53's health check status graph:
 
-{{< img src="route53_graph.png" >}}
+{{< img src="integrations/awsroute53/route53_graph.png" >}}
 
 For information about the rest of the AWS services, see the [AWS tile][1]
 
@@ -19,21 +19,21 @@ For information about the rest of the AWS services, see the [AWS tile][1]
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
 Configure Route 53 on AWS and ensure that the policy you created has the **route53:List*** action allowed. Here is an example policy to give access to Route 53 health checks.
-
+{{< highlight json >}}
+{
+  "Statement": [
     {
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "route53:List*"
-          ],
-          "Resource": [
-            "*"
-          ]
-        }
+      "Effect": "Allow",
+      "Action": [
+        "route53:List*"
+      ],
+      "Resource": [
+        "*"
       ]
     }
-
+  ]
+}
+{{< /highlight >}}
 
 
 ## Configuration

@@ -7,7 +7,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="yarndashboard.png" alt="Hadoop Yarn" >}}
+{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" >}}
 
 Capture Yarn metrics to:
 

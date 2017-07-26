@@ -129,7 +129,7 @@ You can use tags to narrow down the metrics to display on a dashboard graph, or 
 To narrow down the metrics to display, enter the tag in the ```from:``` textbox. 
 You will now be looking at a chosen metric over all the hosts that have that particular tag assigned.
 
-{{< img src="dashboardtags_1.png" alt="Tags in Dashboards from textbox" >}}
+{{< img src="guides/tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" >}}
 
 To group using tags, enter the key part of the tag in the ```avg by:``` textbox. 
 

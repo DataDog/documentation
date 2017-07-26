@@ -133,7 +133,7 @@ to see and what you want to see it over.  In the ‘Over:’ section you
 can select multiple environments and then select “Save these tiles to:
 a new dashboard.”
 
-{{< img src="metric-explorer-redis.png" >}} -->
+{{< img src="integrations/redis/metric-explorer-redis.png" >}} -->
 
 
 ## FAQs

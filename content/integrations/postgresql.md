@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="pggraph.png" alt="PostgreSQL Graph" >}}
+{{< img src="integrations/postgresql/pggraph.png" alt="PostgreSQL Graph" >}}
 Connect PostgreSQL to Datadog in order to:
 
 * Visualize your database performance.

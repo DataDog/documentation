@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="rdsdashboard.png" alt="RDS Dashboard" >}}
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" >}}
 
 Amazon Relational Database Service (RDS) is a web service that makes it easy to setup, operate, and scale a relational database in the cloud. Enable this integration to see all your RDS metrics in Datadog
 
@@ -30,7 +30,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 ### Enhanced RDS Integration 
 
   1.  Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
-      ![][4]
+  {{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" >}}
   2.  From the IAM Management Console, click on **Encryption Keys**. Click the **Create Key** button.
   3.  Enter an Alias for the key, such as `lambda-datadog-key`.
   4.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
@@ -70,7 +70,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 ### Native Database Integration
 
   1.  Navigate to the AWS Console and open the RDS section to find the instance you want to monitor.
-      ![][1]
+  {{< img src="integrations/awsrds/rds-console.png" alt="RDS console" >}}
   2.  Copy the endpoint URL (e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**); You will need it when you configure the agent. Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**). You will need it to create graphs and dashboards.
 
 ## Configuration
@@ -142,10 +142,11 @@ Checks
 
 ## Usage
 
-After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag. ![][2]
+After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag.
+{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash" >}}
 
 Here is the default dashboard for MySQL on Amazon RDS:
-{{< img src="rds-mysql.png" alt="RDS MySQL default dashboard" >}}
+{{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL default dashboard" >}}
 
 Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
 
@@ -157,10 +158,6 @@ In addition to the metrics you get from the database engines you will also get t
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-
-   [1]: /images/rds-console.png
-   [2]: /images/aurora-rds-dash.png
    [3]: mailto:support@datadoghq.com
-   [4]: /images/rds-enhanced-install.png
    [5]: http://aws.amazon.com/documentation/cli/
    [6]: https://app.datadoghq.com/account/settings#api

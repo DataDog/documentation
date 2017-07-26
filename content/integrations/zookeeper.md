@@ -15,7 +15,7 @@ Connect ZooKeeper to Datadog in order to:
 
 {{< insert-example-links conf="zk" check="zk" >}}
 
-{{< img src="zookeepergraph.png" alt="ZooKeeper Graph" >}}
+{{< img src="integrations/zookeeper/zookeepergraph.png" alt="ZooKeeper Graph" >}}
 
 ## Configuration
 

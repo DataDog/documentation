@@ -7,7 +7,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="lighttpddashboard.png" alt="Lighttpd Dashboard" >}}
+{{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" >}}
 
 Bring Lighttpd metrics to Datadog to:
 

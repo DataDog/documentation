@@ -89,7 +89,7 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 ### vCenterとESXを監視するためのDatadog Agentの配置
 
 
-{{< img src="vmware_agent.png" >}}
+{{< img src="integrations/vmware/vmware_agent.png" >}}
 
 1. vSphereが起動しているホストに、Datadog Agentをインストールします。
 2. EXSのVM内にも、Datadog Agentをインストールします。(各VMのシステムメトリクスを収取します)

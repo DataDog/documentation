@@ -8,7 +8,7 @@ newhlevel: true
 ---
 ## Overview
 
-{{< img src="fastlygraph.png" alt="Fastly Graph" >}}
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" >}}
 
 Connect to Fastly to see key Fastly metrics (like cache coverage and header size) in context with the rest of your Datadog metrics.
 

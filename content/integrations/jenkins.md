@@ -8,7 +8,7 @@ newhlevel: true
 
 ## Overview
 
-{{< img src="integration-jenkins-overview.png" alt="Jenkins Plugin" >}}
+{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" >}}
 A Jenkins plugin used to forward metrics, events, and service checks to an account at Datadog, automatically.
 
 ***Note: The Jenkins Agent Integration is Deprecated***: The integration in the Datadog agent for Jenkins has been deprecated in favor of the open-source Jenkins plugin. This document refers to installing the Jenkins plugin. For more details about the plugin, refer to the [GitHub repo](https://github.com/DataDog/jenkins-datadog-plugin).
@@ -41,13 +41,9 @@ No configuration steps are required for this integration.
 
 You will start to see Jenkins events in the Event Stream when the plugin is up and running.
 
-## Usage
-
 ## Metrics
 
-| **jenkins.job.duration**<br/>(gauge)| Build duration <br/>*shown as seconds*|
-| **jenkins.job.completed**<br/>(count)| Jobs completed|
-
+{{< get-metrics-from-git >}}
 
 ## Events
 

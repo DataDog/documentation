@@ -15,10 +15,10 @@ Connect PagerDuty to Datadog in order to:
 
 You can also check out [this documentation][1] from Pagerduty.
 
-Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends][2]. ![][3]
+Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends][2].
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
 
    [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide/
    [2]: https://app.datadoghq.com/report/pagerduty
-   [3]: /images/pagerduty_incident_trends.png
 
 
