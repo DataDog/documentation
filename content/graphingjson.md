@@ -8,7 +8,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 ## Graphing with the JSON editor
 
 
-{{< img src="references-graphing-jsoneditor.png" >}}
+{{< img src="graphing/references-graphing-jsoneditor.png" >}}
 
 ### Grammar
 

@@ -16,7 +16,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 ## JSONエディターを使用したグラフ表示
 
 
-![JSON Editor](/images/references-graphing-jsoneditor.png)
+{{< img src="graphing/references-graphing-jsoneditor.png" >}}
 
 <!--### Grammar-->
 

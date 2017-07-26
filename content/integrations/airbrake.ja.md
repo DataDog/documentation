@@ -39,7 +39,7 @@ If "All projects" box is ticked and a project name is specified, all projects wi
 
 Airbrakeの”account_name”ページから、アカウント名とトークンを取得し、インテグレーションタイル内のフォームにコピーします。
 
-![](/images/ja-specific/snapshot_airbrake_small.png)
+{{< img src="integrations/airbrake/snapshot_airbrake_small.png" alt="airbrake snapshot" >}}
 
 特定のプロジェクトのみを連携することも出来ます。特定のプロジェクトだけをフォローする場合は、プロジェクト名を指定します。
 全てのプロジェクトをフォローする場合、`All projects`にチェックマークを設定します。

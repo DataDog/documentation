@@ -8,7 +8,7 @@ doclevel: basic
 ---
 ## Overview
 
-{{< img src="papertrailexample.png" style="max-width:600px;" alt="Papertrail example" >}}
+{{< img src="integrations/papertrail/papertrailexample.png" style="max-width:600px;" alt="Papertrail example" >}}
 
 Use Papertrail and Datadog to:
 
@@ -23,12 +23,12 @@ To capture metrics from Papertrail:
 1.  Enter the name for the search and click the **Save & Setup an Alert** button.
 1.  Choose Datadog under Graphing & Metrics.
 
-    {{< img src="papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications" >}}
+    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications" >}}
 
 1.  Choose your alert frequency and other details.
 1.  Provide your Datadog API key, enter what you want to name your metric, and optionally enter some tags to associate with the metric.
 
-    {{< img src="papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications" >}}
+    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications" >}}
 
 1.  Click the **Create Alert** button.
 
