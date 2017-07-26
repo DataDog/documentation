@@ -58,7 +58,7 @@ Optionally, you can limit the GCE instances that are pulled into Datadog by ente
 e.x. datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ~~~
 
-{{< img src="GCPSetup.png" alt="settings" >}}
+{{< img src="integrations/google_cloud_platform/GCPSetup.png" alt="settings" >}}
 
 **NOTE: `gcp.loadbalancing.*` metrics are available as part of a Google specifc Beta. To see these metrics in Datadog, please contact your Google representative/support and ask to join the Stackdriver Loadbalancing metrics Beta.**
 
