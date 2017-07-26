@@ -132,7 +132,7 @@ If you are not comfortable with granting all of these permissions, at the very l
 
 ## Configuration
 
-{{< img src="integrations-aws-secretentry.png" alt="logo" >}}
+{{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" >}}
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.
