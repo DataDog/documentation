@@ -38,4 +38,4 @@ Pagerdutyが公開している [次のドキュメント](http://www.pagerduty.c
 
 インテグレーションの設定が完了すると、以下のような[Pagerduty Incident Trends](https://app.datadoghq.com/report/pagerduty)リポートを毎週emailで受信することが出来ます。
 
-{{< img src="pagerduty_incident_trends.png" >}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
