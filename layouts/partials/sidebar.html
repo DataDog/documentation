@@ -46,7 +46,7 @@
           <!-- this is an anchor link, absLangURL wipes it out so build manually -->
           <li><a href="{{ $dot.RelPermalink | absLangURL }}{{ $v.href }}">{{ $v.text }}</a></li>
         {{ else }}
-          <!-- this is not an anchor link --->
+          <!-- this is not an anchor link -->
           <li><a href="{{ $v.href | absLangURL }}">{{ $v.text }}</a></li>
         {{ end }}
 
