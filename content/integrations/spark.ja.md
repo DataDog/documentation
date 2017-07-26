@@ -19,7 +19,7 @@ Get metrics from your app in real time to
 
   * Visualize performance metrics
 
-{{< img src="sparkgraph.png" alt="spark graph" >}}
+{{< img src="integrations/spark/sparkgraph.png" alt="spark graph" >}}
 
 ## Configuration
 
