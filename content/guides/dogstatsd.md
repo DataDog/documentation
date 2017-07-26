@@ -7,21 +7,25 @@ sidebar:
     - text: How It Works
       href: "#how-it-works"
     - text: Set Up
-      href: "#set-up"
+      href: "#setup"
+    - text: Data Types
+      href: "#data-types"
     - text: Metrics
       href: "#metrics"
     - text: Sample Rates
-      href: "#sample-rates"
-    - text: Tags
-      href: "#tags"
+      href: "#metric-option-sample-rates"
     - text: Events
       href: "#events"
-    - text: Configuration
-      href: "#configuration"
+    - text: Service Checks
+      href: "#service-checks"
+    - text: Tagging
+      href: "#tagging"
     - text: Datagram Format
       href: "#datagram-format"
-    - text: Source
-      href: "#source"
+    - text: Service Checks
+      href: "#service-checks-1"
+    - text: Related Reading
+      href: "#related-reading"
 ---
 
 <p class="aside">
