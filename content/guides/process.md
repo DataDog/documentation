@@ -45,7 +45,7 @@ For docker installation, follow the instructions for [docker-dd-agent](https://g
 
 ### Kubernetes Daemonset
 
-In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volumeMounts, and volumes:
+In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
     env:
       - name: DD_PROCESS_AGENT_ENABLED
