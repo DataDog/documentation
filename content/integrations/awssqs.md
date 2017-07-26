@@ -8,7 +8,7 @@ git_integration_title: amazon_sqs
 
 ## Overview
 
-{{< img src="sqsdashboard.png" alt="SQS Dashboard" >}}
+{{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" >}}
 
 Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
 
