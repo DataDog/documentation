@@ -20,27 +20,28 @@ Here is an example of system.load.1 with the hour_before value shown as a dotted
 For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 
-    #!json
-    { "viz": "timeseries",
-      "requests": [
-        {
-          "q": "avg:system.load.1{host:MyMachine.local}",
-          "style": {
-            "width": "thin",
-            "palette": "cool",
-            "type": "solid"
-          },
-          "type": "area"
-        },
-        {
-          "q": "hour_before(avg:system.load.1{host:MyMachine.local})",
-          "style": {
-            "width": "thin",
-            "palette": "warm",
-            "type": "dashed"
-          },
-          "type": "line"
-        }
-      ],
-      "events": []
+{{< highlight json >}}
+{ "viz": "timeseries",
+  "requests": [
+    {
+      "q": "avg:system.load.1{host:MyMachine.local}",
+      "style": {
+        "width": "thin",
+        "palette": "cool",
+        "type": "solid"
+      },
+      "type": "area"
+    },
+    {
+      "q": "hour_before(avg:system.load.1{host:MyMachine.local})",
+      "style": {
+        "width": "thin",
+        "palette": "warm",
+        "type": "dashed"
+      },
+      "type": "line"
     }
+  ],
+  "events": []
+}
+{{< /highlight >}}
