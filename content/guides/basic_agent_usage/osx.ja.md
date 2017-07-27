@@ -29,7 +29,7 @@ If you haven't installed the Agent yet, instructions can be found
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
-<a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページに移動し、インストールの手順を確認してください。
+<a href='https://app.datadoghq.com/account/settings#agent/mac'>Agent</a> ページに移動し、インストールの手順を確認してください。
 
 Datadog Agentは、仮の設置パスとして `~/.datadog-agent`以下のディレクトリにインストールされます。このディレクトリは自由に変更することができます。 このガイドでは、Datadog Agent は、この仮の設置パスに存在していることを前提としています。 ディレクトリを変更した場合は、そのパスに合わせて手順を変更してください。
 
