@@ -77,8 +77,6 @@ The Event Stream is based on the same conventions as a blog:
 * You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
 by: user, source, tag, host, status, priority, incident
 
-{{< img src="guides/overview/event_stream_post_incident_history.png" >}}
-
 
 For each incident users can:
 
@@ -89,11 +87,11 @@ For each incident users can:
 * <a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email
 * @support-datadog to ask for assistance
 
-{{< img src="guides/overview/event_stream_claim.png" >}}
+{{< img src="guides/overview/event_stream_event.png" >}}
 
 ## Dashboards
 
-{{< img src="guides/overview/dashboard_events.png" >}}
+{{< img src="guides/overview/dashboard.png" >}}
 
 Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
 
@@ -112,7 +110,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## Monitoring
 
-{{< img src="guides/overview/alert.png" >}}
+{{< img src="guides/overview/monitor.png" >}}
 
 [Monitoring](/guides/monitoring/) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -125,8 +123,7 @@ metric is above or below a certain threshold:
 
 {{< img src="guides/overview/alert_setup.png" >}}
 
-
-Does the data have to be pushed to Datadog?
+## Does the data have to be pushed to Datadog?
 
 Currently, yes:
 

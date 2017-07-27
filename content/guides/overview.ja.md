@@ -156,8 +156,6 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>by: user, source, tag, host, status, priority, incident 等の項目で、<a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">フィルタリング</a>することができます。</li>
 </ul>
 
-{{< img src="guides/overview/event_stream_post_incident_history.png" >}}
-
 ユーザは、インシデント(出来事)に対して次の操作ができます:
 <ul>
 <li>問題の提案</li>
@@ -168,8 +166,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>@support-datadog でのサポートの要請</li>
 </ul>
 
-{{< img src="guides/overview/event_stream_claim.png" >}}
-
+{{< img src="guides/overview/event_stream_event.png" >}}
 
 <!-- <h2 id="dashboards">dashboards</h2>
 
@@ -192,7 +189,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## 原因追跡用ダッシュボード
 
-{{< img src="guides/overview/dashboard_events.png" >}}
+{{< img src="guides/overview/dashboard.png" >}}
 
 ダッシュボードには、<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
@@ -233,7 +230,7 @@ to pull the data from.</li>
 
 ## 監視とアラート
 
-{{< img src="guides/overview/alert.png" >}}
+{{< img src="guides/overview/monitor.png" >}}
 
 [Monitor機能](/ja/guides/monitoring/)によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>
@@ -246,7 +243,7 @@ to pull the data from.</li>
 
 {{< img src="guides/overview/alert_setup.png" >}}
 
-アラート機能のためのデータは、Datadogに送信する必要がありますか?
+## アラート機能のためのデータは、Datadogに送信する必要がありますか?
 <ol>
 はい、必要です。:
 <li>Datadogで公開しているIntegrationsは、Datadog Agent を起動することによって、自動的にデータを送信するように成っています。(初回のデータ送信に関しては、数分の時間を要します。但し、10分以上になることはありません。)</li>
