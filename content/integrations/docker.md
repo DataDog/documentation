@@ -114,8 +114,8 @@ Checks
   [...]
   docker_daemon
   -------------
-    * instance #0 [OK]
-    * Collected 50 metrics, 0 events & 2 service checks
+    - instance #0 [OK]
+    - Collected 50 metrics, 0 events & 2 service checks
 {{< /highlight >}}
 
 3. In the application on the Infrastructure List, you should see the host with the blue docker pill next to it indicating that the app is receiving the data correctly.

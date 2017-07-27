@@ -70,8 +70,8 @@ Checks
 
   fluentd
   -------
-      * instance #0 [OK]
-      * Collected 8 metrics & 0 events
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.

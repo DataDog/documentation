@@ -32,7 +32,7 @@ instances:
     - password: password
     # acs_url: the base ACS endpoint url if an ACS token is required to access the marathon API
     - acs_url: https://server:port
-    {{< /highlight >}}
+{{< /highlight >}}
 
 2. Restart the Agent
 
