@@ -7,8 +7,7 @@ kind: integration
 ## Overview
 
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
-  * Monitor the status of running processes with [Process Monitors][1] 
-  (**Requires Datadog Agent >= 5.1.0**).
+  * Monitor the status of running processes with [Process Monitors](/guides/monitors) **Requires Datadog Agent >= 5.1.0**.
 
 ## Installation
 
@@ -71,9 +70,6 @@ Each instance, regardless of the number of search strings used, counts for a sin
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
 {{< get-metrics-from-git "system" "system.processes" >}}
-
-
-[1]: /guides/monitors
 
 
 
