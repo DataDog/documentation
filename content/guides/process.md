@@ -29,7 +29,7 @@ and appending the line
 
     process_agent_enabled: true
     
-After confifugration is complete, restart the Agent.
+After configuration is complete, restart the Agent.
 
 ### Docker container
 
