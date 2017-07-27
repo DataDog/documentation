@@ -9,19 +9,19 @@ sidebar:
     - text: Installation
       href: "#installation"
     - text: Integrating through the Azure CLI
-      href: "#installation_cli"
+      href: "#integrating-through-the-azure-cli"
     - text: Integrating through the Azure Portals
-      href: "#installation_portal"
+      href: "#integrating-through-the-azure-portals"
     - text: Getting your Tenant Name
-      href: "#installation1"
+      href: "#getting-your-tenant-name"
     - text: Creating the Web Application
-      href: "#installation2"
+      href: "#creating-the-web-application"
     - text: Giving Read Permissions to the Application
-      href: "#installation3"
+      href: "#giving-read-permissions-to-the-application"
     - text: Configuration
       href: "#configuration"
     - text: Deploy agents
-      href: "#agents"
+      href: "#deploy-agents"
     - text: Metrics
       href: "#metrics"
     - text: Troubleshooting

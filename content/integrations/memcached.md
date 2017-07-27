@@ -17,23 +17,23 @@ Connect Memcached to Datadog in order to:
 
 ## Configuration
 
-1.  Configure the Agent to connect to the Memcached server. Edit conf.d/mcache.yaml:
+1.  Configure the Agent to connect to the Memcached server. Edit `conf.d/mcache.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  - url: localhost  # url used to connect to the memcached instance
+  #   socket: /socket/path # if url missing; 'dd-agent' user must have read/write permission
+  #   port: 11211 # If this line is not present, port will default to 11211
+    tags:
+      - optional_tag
 
-        instances:
-          - url: localhost  # url used to connect to the memcached instance
-          #   socket: /socket/path # if url missing; 'dd-agent' user must have read/write permission
-          #   port: 11211 # If this line is not present, port will default to 11211
-            tags:
-              - optional_tag
+    options:
+      items: false  # set to true if you wish to collect items memcached stats.
+      slabs: false  # set to true if you wish to collect slabs memcached stats.
+{{< /highlight >}}
 
-            options:
-              items: false  # set to true if you wish to collect items memcached stats.
-              slabs: false  # set to true if you wish to collect slabs memcached stats.
-
-
-1.  Restart the Agent
+2.  Restart the Agent
 
 ## Validation
 

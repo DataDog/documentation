@@ -23,19 +23,19 @@ Integrate with Zendesk to:
 To install this integration, you will first need to generate a Zendesk API Token:
 
 1. Navigate to the API settings page by clicking the *Admin* gear icon from the left menu, then selecting *API* from the *Channels* section of the menu item list.
-1. Enable Token Access if it is not already enabled.
-1. Click the plus symbol to create a new token.
-1. Set the API Token description to something informative, e.g. "Datadog-Zendesk Integration"
-1. Copy the API Token. ***Important***: You will need to temporarily save this token, as it will be hidden once you click Save.
-1. Click Save.
+2. Enable Token Access if it is not already enabled.
+3. Click the plus symbol to create a new token.
+4. Set the API Token description to something informative, e.g. "Datadog-Zendesk Integration"
+5. Copy the API Token. ***Important***: You will need to temporarily save this token, as it will be hidden once you click Save.
+6. Click Save.
 
 To complete the integration, enter your information in [Datadog](https://app.datadoghq.com):
 
-1. Visit the [Zendesk integration tile](https://app.datadoghq.com/account/settings#integrations/zendesk) or navigate to it by clicking Integrations in the left side menu, then clicking the Zendesk integration tile. Then click on the *Configuration* tab.
-1. Enter your Zendesk domain. This is the text that appears before zendesk.com. e.g. If your Zendesk is located at https://*my-company*.zendesk.com, your domain will be *my-company*.
-1. Enter your Zendesk username.
-1. Paste the Zendesk API Token you received in step 5 above.
-1. Click the Install Integration button.
+7. Visit the [Zendesk integration tile](https://app.datadoghq.com/account/settings#integrations/zendesk) or navigate to it by clicking Integrations in the left side menu, then clicking the Zendesk integration tile. Then click on the *Configuration* tab.
+8. Enter your Zendesk domain. This is the text that appears before zendesk.com. e.g. If your Zendesk is located at https://*my-company*.zendesk.com, your domain will be *my-company*.
+9. Enter your Zendesk username.
+10. Paste the Zendesk API Token you received in step 5 above.
+11. Click the Install Integration button.
 
 ## Metrics
 

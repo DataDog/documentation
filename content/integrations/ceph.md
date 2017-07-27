@@ -29,17 +29,17 @@ Any extra tags specific to the cluster can be specified under `tags`, as usual.
 ## Validation
 
 Execute the info command `/etc/init.d/datadog-agent info` and verify that the integration check was successful. The output should contain a section similar to the following:
+{{< highlight shell >}}
+Checks
+======
 
-        Checks
-        ======
+  [...]
 
-          [...]
-
-          ceph
-          ----
-              - instance #0 [OK]
-              - Collected 19 metrics, 0 events & 2 service checks
-
+  ceph
+  ----
+      - instance #0 [OK]
+      - Collected 19 metrics, 0 events & 2 service checks
+{{< /highlight >}}
 
 ## Metrics
 

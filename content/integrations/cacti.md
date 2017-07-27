@@ -14,9 +14,6 @@ Connect Cacti to Datadog to:
 
 {{< insert-example-links >}}
 
-
-
-
 ## Metrics
 
 {{< get-metrics-from-git >}}

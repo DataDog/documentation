@@ -24,29 +24,30 @@ Make sure that stats are enabled on your HAProxy configuration. See [this post f
 ## Configuration
 
 1.  Configure the Agent to connect to HAProxy. Edit conf.d/haproxy.yaml:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
-
-        instances:
-            -   username: username
-                password: password
-                url: https://localhost/admin?stats
-
-1.  Restart the Agent
+instances:
+    -   username: username
+        password: password
+        url: https://localhost/admin?stats
+{{< /highlight >}}
+2.  Restart the Agent
 
 ## Validation
 
 1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+[...]
 
-        [...]
-
-        haproxy
-        -------
-            - instance #0 [OK]
-            - Collected 8 metrics & 0 events
+haproxy
+-------
+    - instance #0 [OK]
+    - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 Learn more about how to monitor HAProxy performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor HAProxy.
 

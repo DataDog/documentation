@@ -17,37 +17,39 @@ Connects Marathon to Datadog in order to:
 
 ## Configuration
 
-*NOTICE : If you include the acs_url parameter in the marathon.yaml config, the user and password will be used to generate an ACS token, not as basic auth for the marathon api.
+**NOTICE** : If you include the acs_url parameter in the marathon.yaml config, the user and password will be used to generate an ACS token, not as basic auth for the marathon api.
 
 1.  Configure the Agent to connect to Marathon. Edit conf.d/marathon.yaml:
+{{< highlight yaml>}}
+init_config:
+default_timeout: 5
+instances:
+    # url: the API endpoint of your Marathon master
+    - url: https://server:port
+    # user: the user for marathon API or ACS token authentication
+    - user: username
+    # password: the password for marathon API or ACS token authentication
+    - password: password
+    # acs_url: the base ACS endpoint url if an ACS token is required to access the marathon API
+    - acs_url: https://server:port
+    {{< /highlight >}}
 
-        init_config:
-        default_timeout: 5
-        instances:
-        # url: the API endpoint of your Marathon master
-        - url: https://server:port
-        # user: the user for marathon API or ACS token authentication
-        - user: username
-        # password: the password for marathon API or ACS token authentication
-        - password: password
-        # acs_url: the base ACS endpoint url if an ACS token is required to access the marathon API
-        - acs_url: https://server:port
-
-1.  Restart the Agent
+2. Restart the Agent
 
 ## Validation
 
-1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+[...]
 
-        [...]
-
-        marathon
-        --------
-            - instance #0 [OK]
-            - Collected 8 metrics & 0 events
+marathon
+--------
+    + instance #0 [OK]
+    + Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

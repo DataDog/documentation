@@ -69,27 +69,28 @@ Note that in the command above, you are able to pass your API key to the Datadog
 #### Running the agent container on Amazon Linux
 
 To run the Datadog Agent container on Amazon Linux, you'll need to make one small change to the `cgroup` volume mount location:
-
-    docker run -d --name dd-agent \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /cgroup/:/host/sys/fs/cgroup:ro \
-      -e API_KEY={YOUR API KEY} \
-      datadog/docker-dd-agent:latest
-
+{{< highlight shell >}}
+docker run -d --name dd-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /cgroup/:/host/sys/fs/cgroup:ro \
+  -e API_KEY={YOUR API KEY} \
+  datadog/docker-dd-agent:latest
+{{< /highlight >}}
 
 #### Alpine Linux based container
 
 Our standard Docker image is based on Debian Linux, but as of version 5.7 of the Datadog Agent, we also offer an [Alpine Linux](https://alpinelinux.org/) based image. The Alpine Linux image is considerably smaller in size than the traditional Debian-based image. It also inherits Alpine's security-oriented design.
 
 To use the Alpine Linux image, simply append `-alpine` to the version tag. For example:
-
-    docker run -d --name dd-agent \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-      -e API_KEY={YOUR API KEY} \
-      datadog/docker-dd-agent:latest-alpine
+{{< highlight shell >}}
+docker run -d --name dd-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e API_KEY={YOUR API KEY} \
+  datadog/docker-dd-agent:latest-alpine
+{{< /highlight >}}
 
 #### Image versioning
 Starting with version 5.5.0 of the Datadog Agent, the docker image follows a new versioning pattern. This allows us to release changes to the Docker image of the Datadog Agent but with the same version of the Agent.
@@ -106,15 +107,16 @@ For more information about building custom Docker containers with the Datadog Ag
 
 1. Restart the Agent.
 2. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell >}}
+Checks
+======
 
-        Checks
-        ======
-
-          [...]
-          docker_daemon
-          -------------
-            - instance #0 [OK]
-            - Collected 50 metrics, 0 events & 2 service checks
+  [...]
+  docker_daemon
+  -------------
+    * instance #0 [OK]
+    * Collected 50 metrics, 0 events & 2 service checks
+{{< /highlight >}}
 
 3. In the application on the Infrastructure List, you should see the host with the blue docker pill next to it indicating that the app is receiving the data correctly.
 
@@ -161,23 +163,24 @@ Let's look at how you would monitor a Redis container using Compose. Our example
            |-redisdb.yaml
 
 First we'll take a look at the `docker-compose.yml` that describes how our containers work together and sets some of the configuration details for the containers.
-
-    version: "2"
-    services:
-      # Redis container
-      redis:
-        image: redis
-      # Agent container
-      datadog:
-        build: datadog
-        links:
-         - redis # Ensures datadog container can connect to redis container
-        environment:
-         - API_KEY=__your_datadog_api_key_here__
-        volumes:
-         - /var/run/docker.sock:/var/run/docker.sock
-         - /proc/mounts:/host/proc/mounts:ro
-         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+{{< highlight yaml>}}
+version: "2"
+services:
+  # Redis container
+  redis:
+    image: redis
+  # Agent container
+  datadog:
+    build: datadog
+    links:
+     - redis # Ensures datadog container can connect to redis container
+    environment:
+     - API_KEY=__your_datadog_api_key_here__
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/mounts:/host/proc/mounts:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+{{< /highlight >}}
 
 In this file, we can see that Compose will run the Docker image `redis` and it will also build and run a `datadog` container. By default it will look for a matching directory called `datadog` and run the `Dockerfile` in that directory.
 
@@ -209,24 +212,25 @@ After your code is configured you can run your custom application container usin
 To start monitoring our application, we first need to run the Datadog container using the [Single Container Installation](#single-container-installation) instructions above. Note that the `docker run` command sets the name of the container to `dd-agent`.
 
 Next, we'll need to instrument our code. Here's a basic Flask-based web application:
+{{< highlight python>}}
+from flask import Flask
+from datadog import initialize, statsd
 
-    from flask import Flask
-    from datadog import initialize, statsd
+# Initialize DogStatsD and set the host.
+initialize(statsd_host = 'dd-agent')
 
-    # Initialize DogStatsD and set the host.
-    initialize(statsd_host = 'dd-agent')
+app = Flask(__name__)
 
-    app = Flask(__name__)
+@app.route('/')
+def hello():
+    # Increment a Datadog counter.
+    statsd.increment('my_webapp.page.views')
 
-    @app.route('/')
-    def hello():
-        # Increment a Datadog counter.
-        statsd.increment('my_webapp.page.views')
+    return "Hello World!"
 
-        return "Hello World!"
-
-    if __name__ == "__main__"
-        app.run()
+if __name__ == "__main__"
+    app.run()
+{{< /highlight >}}
 
 In our example code above, we set the DogStatsD host to match the Datadog Agent container name, `dd-agent`.
 

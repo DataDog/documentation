@@ -73,18 +73,18 @@ replacing `To` with your phone number and `From` with the one twilio attributed 
 Use as URL:
 `https://{Your-Jira-Username}:{Your-Jira-Password}@{Your-Domain}.atlassian.net/rest/api/2/issue`
 and as payload
-
-    {
-        "fields": {
-            "project": {
-                "key": "YOUR-PROJECT-KEY"
-                },
-            "issuetype": {
-                "name": "Task"
+{{< highlight json>}}
+{
+    "fields": {
+        "project": {
+            "key": "YOUR-PROJECT-KEY"
             },
-            "description": "There's an issue. See the graph: $SNAPSHOT and event: $LINK",
-            "summary": "$EVENT_TITLE"
-        }
+        "issuetype": {
+            "name": "Task"
+        },
+        "description": "There's an issue. See the graph: $SNAPSHOT and event: $LINK",
+        "summary": "$EVENT_TITLE"
     }
-
+}
+{{< /highlight >}}
 Don't check the "Encode as form" checkbox.

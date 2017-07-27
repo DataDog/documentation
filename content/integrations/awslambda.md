@@ -53,7 +53,7 @@ Where:
 
 ### Count/Gauge
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 value = 42
 metric_type = 'count'
@@ -63,11 +63,11 @@ tags = ['tag1:value', 'tag2']
 print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
     unix_epoch_timestamp, value, metric_type, metric_name, ','.join(tags)
 ))
-~~~
+{{< /highlight >}}
 
 ### Histogram
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 metric_type = 'histogram'
 metric_name = 'my.metric.name.hist'
@@ -77,13 +77,13 @@ for i in xrange(0,10):
 	print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
     	unix_epoch_timestamp, i, metric_type, metric_name, ','.join(tags)
 ))
-~~~
+{{< /highlight >}}
 
 Note: Using the histogram metric type provides `avg`, `count`, `max`, `min`, `95p`, and `median` values. These values are calculated at one second granularity.
 
 ### Service Check
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 value = 1 # WARNING
 metric_type = 'check'
@@ -92,7 +92,7 @@ metric_name = 'my.metric.name.check'
 print('MONITORING|{0}|{1}|{2}|{3}'.format(
 	timestamp, value, metric_type, metric_name
 ))
-~~~
+{{< /highlight >}}
 
 # Metrics
 

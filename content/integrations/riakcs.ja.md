@@ -20,17 +20,18 @@ Capture Riak CS (Cloud Storage) metrics in Datadog to:
 
 ## Configuration
 
-To configure the RiakCS integration, copy riakcs.yaml.example if the conf.d directory to riakcs.yaml and make the appropriate changes.
+To configure the RiakCS integration, copy `riakcs.yaml.example` if the conf.d directory to `riakcs.yaml` and make the appropriate changes.
+{{< highlight yaml>}}
+init_config:
 
-    init_config:
-
-    instances:
-      - access_id: access-key
-        access_secret: access-secret
-        #is_secure: True # Uncomment and change to false if you are not using ssl
-        #host: localhost # Hostname/IP of your riakcs node
-        #port: 8080 # port used by your riakcs node
-        #s3_root: s3.amazonaws.com #
+instances:
+  - access_id: access-key
+    access_secret: access-secret
+    #is_secure: True # Uncomment and change to false if you are not using ssl
+    #host: localhost # Hostname/IP of your riakcs node
+    #port: 8080 # port used by your riakcs node
+    #s3_root: s3.amazonaws.com #
+{{< /highlight >}}
 
 {{< insert-example-links >}}
 

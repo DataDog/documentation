@@ -51,16 +51,17 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
         sudo /etc/init.d/datadog-agent info
 
 2.  Verify that the check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+[...]
 
-        [...]
-
-        process
-        ---------
-            - instance #0 [OK]
-            - Collected 18 metrics & 0 events & 2 service checks
+process
+---------
+    - instance #0 [OK]
+    - Collected 18 metrics & 0 events & 2 service checks
+{{< highlight shell>}}
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 

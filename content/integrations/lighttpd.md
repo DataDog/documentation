@@ -18,39 +18,39 @@ Bring Lighttpd metrics to Datadog to:
 
 ## Installation
 
-1.  Make sure that `mod_status` is installed on your Lighttpd server
+Make sure that `mod_status` is installed on your Lighttpd server
 
 ## Configuration
 
 1.  Configure the Agent to connect to Lighttpd. Edit conf.d/lighttpd.yaml
+{{< highlight yaml>}}
 
+init_config:
 
-        init_config:
+instances:
+    # For every instance, you have an `lighttpd_status_url` and (optionally)
+    # a list of tags.
 
-        instances:
-            # For every instance, you have an `lighttpd_status_url` and (optionally)
-            # a list of tags.
-
-            -   lighttpd_status_url: http://example.com/server-status?auto
-                tags:
-                    -   instance:foo
-
+    -   lighttpd_status_url: http://example.com/server-status?auto
+        tags:
+            -   instance:foo
+{{< /highlight >}}
 2.  Restart the Agent
 
 ## Validation
 
-1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+  [...]
 
-          [...]
-
-          lighttpd
-          --------
-              - instance #0 [OK]
-              - Collected 8 metrics & 0 events
-
+  lighttpd
+  --------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 ## Metrics
 
 The following metrics are collected for either Lighttpd1 and Lighttpd2:

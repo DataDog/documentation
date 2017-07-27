@@ -63,27 +63,27 @@ If you are modifying the IAM Policy you created for your cluster, you may only n
 5. Expand the **Inline Policies** section. Click the link to create a new inline policy.
 6. Choose **Custom Policy** and press the button.
 7. For **Policy Name** enter ```dd-agent-policy```. Copy the following text into the **Policy Document**:
-  {{< highlight json >}}
+{{< highlight json >}}
+ {
+   "Version": "2012-10-17",
+   "Statement": [
        {
-           "Version": "2012-10-17",
-           "Statement": [
-               {
-                   "Effect": "Allow",
-                   "Action": [
-                       "ecs:RegisterContainerInstance",
-                       "ecs:DeregisterContainerInstance",
-                       "ecs:DiscoverPollEndpoint",
-                       "ecs:Submit*",
-                       "ecs:Poll",
-                       "ecs:StartTask",
-                       "ecs:StartTelemetrySession"
-                   ],
-                   "Resource": [
-                       "*"
-                   ]
-               }
+           "Effect": "Allow",
+           "Action": [
+               "ecs:RegisterContainerInstance",
+               "ecs:DeregisterContainerInstance",
+               "ecs:DiscoverPollEndpoint",
+               "ecs:Submit*",
+               "ecs:Poll",
+               "ecs:StartTask",
+               "ecs:StartTelemetrySession"
+           ],
+           "Resource": [
+               "*"
            ]
        }
+   ]
+ }
 {{< /highlight >}}
 8. Click **Create Policy**
 

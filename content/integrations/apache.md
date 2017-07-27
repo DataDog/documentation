@@ -25,21 +25,22 @@ Make sure that [`mod_status`][3] is installed on your Apache server with `Extend
 *To capture Apache metrics you need to install the Datadog agent.*
 
 1.  Configure the agent to connect to Apache. Edit `/etc/dd-agent/conf.d/apache.yaml`
+{{< highlight yaml >}}
+init_config:
 
-        init_config:
-
-        instances:
-          - apache_status_url: http://example.com/server-status?auto
-            # apache_user: example_user
-            # apache_password: example_password
-            tags:
-              - instance:foo
-            disable_ssl_validation: true # if you want to disable SSL cert validation
-
+instances:
+  - apache_status_url: http://example.com/server-status?auto
+    # apache_user: example_user
+    # apache_password: example_password
+    tags:
+      - instance:foo
+    disable_ssl_validation: true # if you want to disable SSL cert validation
+{{< /highlight >}}
 
 2. Restart the agent
-
-        sudo /etc/init.d/datadog-agent restart
+{{< highlight shell >}}
+sudo /etc/init.d/datadog-agent restart
+{{< /highlight >}}
 
 {{< insert-example-links >}}
 
@@ -50,17 +51,17 @@ To ensure the integration is installed correctly, run the agent info command.
     sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
+{{< highlight shell >}}
+Checks
+======
 
-    Checks
-    ======
+  [...]
 
-      [...]
-
-      apache
-      ------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
-
+  apache
+  ------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

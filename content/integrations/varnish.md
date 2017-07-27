@@ -33,16 +33,17 @@ To ensure the integration is installed correctly, run the agent info command.
     sudo /etc/init.d/datadog-agent info
 
 You should see something similar to the following if everything is working correctly:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
+  [...]
 
-      [...]
-
-      varnish
-      ------
-          - instance #0 [OK]
-          - Collected 20 metrics & 0 events
+  varnish
+  ------
+      - instance #0 [OK]
+      - Collected 20 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 
