@@ -7,9 +7,9 @@ beta: true
 
 ### Introduction
 
-The new Datadog Process Monitor allows for real time process-level visibility.  After configuring the Agent, information from a host’s /proc file system will be streamed into Datadog and presented in a table at [https://app.datadoghq.com/process](https://app.datadoghq.com/process).
+The new Datadog Process Monitor allows for real-time process-level visibility.  After configuring the Agent, information from a host’s /proc file system will be streamed into Datadog and presented in a table at [https://app.datadoghq.com/process](https://app.datadoghq.com/process).
 
-The table can be searched and filtered and processes can be aggregated on tags associated with the hosts that they are running on.
+The table can be searched and filtered, and processes can be aggregated on tags associated with the hosts that they are running on.
 
 Each row in the table can be expanded for more contextual information about an individual process.
 
@@ -66,7 +66,7 @@ Refer to the standard [daemonset installation](http://docs.datadoghq.com/integra
 
 ### Proxy Configuration
 
-Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
+Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
 
 ### Notes/known issues
 
