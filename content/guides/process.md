@@ -19,15 +19,17 @@ Checking “show summary graphs” at the top of the page will graph metrics for
 
 ### Configure the Datadog Agent to collect Live Process data
 
-Live Processes has been introduced in Datadog Agent version 5.16.0.
+Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
 
-To enable collection, edit the config file at 
+Once the Datadog Agent is installed, enable Live Processes collection by editing the config file at 
 
     /etc/dd-agent/datadog.conf
     
-and append the line
+and appending the line
 
     process_agent_enabled: true
+    
+After confifugration is complete, restart the Agent.
 
 ### Docker container
 
