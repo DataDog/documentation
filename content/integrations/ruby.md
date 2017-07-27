@@ -25,33 +25,35 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
         gem install dogstatsd-ruby
 
 2.  Start instrumenting your code using the Datadog API:
+{{< highlight ruby>}}
+# Load the Datadog API module.
+require 'rubygems'
+require 'dogapi'
 
-        # Load the Datadog API module.
-        require 'rubygems'
-        require 'dogapi'
+api_key = "abcdef123456"
+application_key = "fedcba654321"
 
-        api_key = "abcdef123456"
-        application_key = "fedcba654321"
+# Note that submitting events does not require the application key.
+dog = Dogapi::Client.new(api_key, application_key)
 
-        # Note that submitting events does not require the application key.
-        dog = Dogapi::Client.new(api_key, application_key)
-
-        # Send a new event.
-        dog.emit_event(Dogapi::Event.new('Testing done, FTW'), :host => "my_host")
+# Send a new event.
+dog.emit_event(Dogapi::Event.new('Testing done, FTW'), :host => "my_host")
+{{< /highlight >}}
 
     Start instrumenting your code using the DogStatsD client:
+{{< highlight ruby>}}
+# Load the dogstats module.
+require 'datadog/statsd'
 
-        # Load the dogstats module.
-        require 'datadog/statsd'
+# Create a stats instance.
+statsd = Datadog::Statsd.new('localhost', 8125)
 
-        # Create a stats instance.
-        statsd = Datadog::Statsd.new('localhost', 8125)
+# Increment a counter.
+statsd.increment('page.views')
 
-        # Increment a counter.
-        statsd.increment('page.views')
-
-        # Record a gauge 50% of the time.
-        statsd.gauge('users.online', 123, :sample_rate=>0.5)
+# Record a gauge 50% of the time.
+statsd.gauge('users.online', 123, :sample_rate=>0.5)
+{{< /highlight >}}
 
 ## Configuration
 

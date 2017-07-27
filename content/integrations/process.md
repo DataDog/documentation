@@ -7,7 +7,7 @@ kind: integration
 ## Overview
 
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
-  * Monitor the status of running processes with [Process Monitors][1] (**Requires Datadog Agent >= 5.1.0**).
+  * Monitor the status of running processes with [Process Monitors](/guides/monitors) **Requires Datadog Agent >= 5.1.0**.
 
 ## Installation
 
@@ -51,16 +51,17 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
         sudo /etc/init.d/datadog-agent info
 
 2.  Verify that the check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+[...]
 
-        [...]
-
-        process
-        ---------
-            - instance #0 [OK]
-            - Collected 18 metrics & 0 events & 2 service checks
+process
+---------
+    - instance #0 [OK]
+    - Collected 18 metrics & 0 events & 2 service checks
+{{< highlight shell>}}
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 
@@ -69,9 +70,6 @@ Each instance, regardless of the number of search strings used, counts for a sin
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
 {{< get-metrics-from-git "system" "system.processes" >}}
-
-
-   [1]: /guides/monitoring#process
 
 
 

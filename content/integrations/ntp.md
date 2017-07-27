@@ -43,15 +43,15 @@ No installation steps are required for this integration.
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
 
-
-
-    Checks
-    ======
-      [...]
-      ntp
-      -----
-          - instance #0 [OK]
-          - Collected 1 metric & 0 events
+{{< highlight shell>}}
+Checks
+======
+  [...]
+  ntp
+  -----
+      - instance #0 [OK]
+      - Collected 1 metric & 0 events
+{{< /highlight >}}
 
 ## Usage
 

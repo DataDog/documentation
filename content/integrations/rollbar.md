@@ -22,10 +22,10 @@ No installation is required.
 To integrate Rollbar with Datadog:
 
 1. Retrieve an API key from Datadog's [API settings page](https://app.datadoghq.com/account/settings#api)
-1. Login to [Rollbar](http://www.rollbar.com), and go to the Notification settings page for a project: Dashboard → Settings → Notifications
-1. Enter your Datadog API key.
-1. Click Enable Datadog Integration
-1. (optional) Customize your notification settings to taste!
+2. Login to [Rollbar](http://www.rollbar.com), and go to the Notification settings page for a project: Dashboard → Settings → Notifications
+3. Enter your Datadog API key.
+4. Click Enable Datadog Integration
+5. (optional) Customize your notification settings to taste!
 
 ## Metrics
 

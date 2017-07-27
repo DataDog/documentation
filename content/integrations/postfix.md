@@ -17,8 +17,8 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
 ## Configuration
 
 1.  Make sure that the user that dd-agent runs has sudo access for the 'find' command.
-1.  Configure the Agent to connect to Postfix. Edit conf.d/postfix.yaml:
-
+2.  Configure the Agent to connect to Postfix. Edit `conf.d/postfix.yaml`:
+{{< highlight yaml>}}
         # The user running dd-agent must have passwordless sudo access for the find
         # command to run the postfix check.  Here's an example:
         #
@@ -53,23 +53,24 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
             tags:
               - optional_tag3
               - optional_tag4
+{{< /highlight >}}
 
-1.  Restart the Agent
+3.  Restart the Agent
 
 ## Validation
 
-1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+  [...]
 
-          [...]
-
-          postfix
-          -------
-              - instance #0 [OK]
-              - Collected 8 metrics & 0 events
-
+  postfix
+  -------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 ## Metrics
 
 {{< get-metrics-from-git >}}

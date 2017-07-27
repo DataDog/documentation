@@ -47,22 +47,22 @@ For more details about creating and managing users in MongoDB, refer to [the Mon
 
 Configure the Agent to connect to your TokuMX instance using your new Datadog user.
 
-1.  Edit the tokumx.yaml file in your Agent's conf.d directory:
+1.  Edit the `tokumx.yaml` file in your Agent's conf.d directory:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
-
-        # Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
-        # E.g. mongodb://datadog:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27017/my-db
-        instances:
-              -   server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017
-                  tags:
-                      - mytag1
-                      - mytag2
-              -   server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017
-                  tags:
-                      - mytag1
-                      - mytag2
-
+# Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
+# E.g. mongodb://datadog:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27017/my-db
+instances:
+      -   server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017
+          tags:
+              - mytag1
+              - mytag2
+      -   server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017
+          tags:
+              - mytag1
+              - mytag2
+{{< /highlight >}}
 
 2.  Restart the Agent.
 
@@ -70,19 +70,18 @@ Configure the Agent to connect to your TokuMX instance using your new Datadog us
 
 ## Validation
 
-1.  To validate that your integration is working run the Agent's info command. You should see output similar to the following:
+To validate that your integration is working run the Agent's info command. You should see output similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
+  [...]
 
-        Checks
-        ======
-
-          [...]
-
-          tokumx
-          ------
-              - instance #0 [OK]
-              - Collected 8 metrics & 0 events
-
+  tokumx
+  ------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

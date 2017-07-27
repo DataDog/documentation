@@ -18,22 +18,22 @@ No installation is required
 ## Configuration
 
 Edit the `http_check.yaml` file in your agent's `conf.d` directory. The following yaml file will check the Datadog home page for the text "Cloud-Scale Monitoring" within 5 seconds. The response time will be available in the metric `network.http.response_time`.
+{{< highlight yaml>}}
+init_config:
 
-    init_config:
+instances:
+  - name: My first service
+    url: https://datadoghq.com
+    timeout: 5
 
-    instances:
-      - name: My first service
-        url: https://datadoghq.com
-        timeout: 5
+    content_match: 'Cloud-Scale Monitoring'
+    collect_response_time: true
+    skip_event: true
 
-        content_match: 'Cloud-Scale Monitoring'
-        collect_response_time: true
-        skip_event: true
-
-        tags:
-          - url:datadoghq.com
-          - env:production
-
+    tags:
+      - url:datadoghq.com
+      - env:production
+{{< /highlight >}}
 Other settings available include:
 
 | Setting | Description |

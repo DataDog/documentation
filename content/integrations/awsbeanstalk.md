@@ -33,8 +33,7 @@ A `Dockerrun.aws.json` file is an Elastic Beanstalk–specific JSON file that de
 A `Dockerrun.aws.json` file can be used on its own or zipped up with additional source code in a single archive. Source code that is archived with a `Dockerrun.aws.json` is deployed to container instances and accessible in the `/var/app/current/` directory. Use the `volumes` section of the config to provide mount points for the containers running on the instance, and the `mountPoints` section of the embedded container definitions to mount them from the containers.
 
 The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog agent. Update it with the definition of your containers to define your own `Dockerrun.aws.json`. This file can be zipped with additional content to send to the instances which run the described containers, and shipped to Beanstalk. For more info about the syntax of this file you can refer to [the Beanstalk documentation](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html).
-
-~~~~~~~~
+{{< highlight json >}}
 {
   "AWSEBDockerrunVersion": 2,
   "volumes": [
@@ -92,7 +91,7 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
     }
   ]
 }
-~~~~~~~~
+{{< /highlight >}}
 
 ### Creating the environment
 

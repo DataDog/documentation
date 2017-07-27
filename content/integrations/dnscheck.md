@@ -31,15 +31,15 @@ To configure the DNS Service Check, edit the dns_check.yaml file in your conf.d 
 
 To validate that the DNS Service Check is working, run `sudo /etc/init.d/datadog-agent info`. You should see something like the following:
 
-{{< highlight bash>}}
-    Checks
-    ======
+{{< highlight shell>}}
+Checks
+======
 
-      [...]
-      dns_check
-      ---------
-        - instance #0 [OK]
-        - Collected 1 metric, 0 events & 2 service checks
+  [...]
+  dns_check
+  ---------
+    - instance #0 [OK]
+    - Collected 1 metric, 0 events & 2 service checks
 {{< /highlight >}}
 
 ## Metrics

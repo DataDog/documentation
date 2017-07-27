@@ -26,7 +26,7 @@ The Gunicorn check requires your Gunicorn app's Python environment to have the [
 
 Create a `gunicorn.yaml` in the Datadog Agent's `conf.d` directory:
 
-~~~
+{{< highlight yaml>}}
 init_config:
 
 instances:
@@ -34,7 +34,7 @@ instances:
   # 1) in your app's config.py (proc_name = <YOUR_APP_NAME>), OR
   # 2) via CLI (gunicorn --name <YOUR_APP_NAME> your:app)
   - proc_name: <YOUR_APP_NAME>
-~~~
+{{< /highlight >}}
 
 Restart the Agent to begin sending Gunicorn metrics to Datadog.
 
@@ -46,62 +46,62 @@ Since version 19.1, Gunicorn [provides an option](http://docs.gunicorn.org/en/st
 
 Run the Agent's info command and look for `gunicorn` under the Checks section:
 
-~~~
-  Checks
-  ======
-    [...]
+{{< highlight shell>}}
+Checks
+======
+  [...]
 
-    gunicorn (5.12.1)
-    -----------------
-      - instance #0 [OK]
-      - Collected 2 metrics, 0 events & 1 service check
+  gunicorn (5.12.1)
+  -----------------
+    - instance #0 [OK]
+    - Collected 2 metrics, 0 events & 1 service check
 
-    [...]
-~~~
+  [...]
+{{< /highlight >}}
 
 If the status is not OK, see the Troubleshooting section.
 
 Use `netstat` to verify that Gunicorn is sending _its_ metrics, too:
 
-~~~
+{{< highlight shell>}}
 $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 15500/gunicorn: mas
-~~~
+{{< /highlight >}}
 
 ## Troubleshooting
 
 ### Agent cannot find Gunicorn process
-~~~
-  Checks
-  ======
+{{< highlight shell>}}
+Checks
+======
 
-    gunicorn (5.12.1)
-    -----------------
-      - instance #0 [ERROR]: 'Found no master process with name: gunicorn: master [my_web_app]'
-      - Collected 0 metrics, 0 events & 1 service check
-      - Dependencies:
-          - psutil: 4.4.1
-~~~
+  gunicorn (5.12.1)
+  -----------------
+    - instance #0 [ERROR]: 'Found no master process with name: gunicorn: master [my_web_app]'
+    - Collected 0 metrics, 0 events & 1 service check
+    - Dependencies:
+        - psutil: 4.4.1
+{{< /highlight >}}
 
 Either Gunicorn really isn't running, or your app's Python environment doesn't have the `setproctitle` package installed.
 
 If `setproctitle` is not installed, Gunicorn appears in the process table like so:
 
-~~~
+{{< highlight shell>}}
 $ ps -ef | grep gunicorn
 ubuntu   18013 16695  2 20:23 pts/0    00:00:00 /usr/bin/python /usr/bin/gunicorn --config test-app-config.py gunicorn-test:app
 ubuntu   18018 18013  0 20:23 pts/0    00:00:00 /usr/bin/python /usr/bin/gunicorn --config test-app-config.py gunicorn-test:app
 ubuntu   18019 18013  0 20:23 pts/0    00:00:00 /usr/bin/python /usr/bin/gunicorn --config test-app-config.py gunicorn-test:app
-~~~
+{{< /highlight >}}
 
 If it _is_ installed, `gunicorn` processes appear in the format the Datadog Agent expects:
 
-~~~
+{{< highlight shell>}}
 $ ps -ef | grep gunicorn
 ubuntu   18457 16695  5 20:26 pts/0    00:00:00 gunicorn: master [my_app]
 ubuntu   18462 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
-~~~
+{{< /highlight >}}
 
 ## Compatibility
 

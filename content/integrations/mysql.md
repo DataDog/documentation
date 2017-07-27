@@ -15,50 +15,54 @@ Connect MySQL to Datadog in order to:
 ## Installation
 
 1.  Create a ```datadog``` user with replication rights on your MySQL server with the following command, replacing ```<UNIQUEPASSWORD>``` with a unique password:
-
-        sudo mysql -e "CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<UNIQUEPASSWORD>';"
-        sudo mysql -e "GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;"
+{{< highlight mysql>}}
+sudo mysql -e "CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<UNIQUEPASSWORD>';"
+sudo mysql -e "GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;"
+{{< /highlight >}}
 
     If you'd like to get the full metrics catalog please also grant the following privileges:
-
-        sudo mysql -e "GRANT PROCESS ON *.* TO 'datadog'@'localhost';"
-        sudo mysql -e "GRANT SELECT ON performance_schema.* TO 'datadog'@'localhost';"
+{{< highlight mysql>}}
+sudo mysql -e "GRANT PROCESS ON *.* TO 'datadog'@'localhost';"
+sudo mysql -e "GRANT SELECT ON performance_schema.* TO 'datadog'@'localhost';"
+{{< /highlight >}}
 
 2.  Verify that the user was created successfully using the following command, replacing ```<UNIQUEPASSWORD>``` with the password above:
-
-        mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
-        grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
-        echo -e "\033[0;31mCannot connect to MySQL\033[0m"
-        mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
-        echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
-        echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
+{{< highlight mysql>}}
+mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
+grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
+echo -e "\033[0;31mCannot connect to MySQL\033[0m"
+mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
+echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
+echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
+{{< /highlight >}}
 
 ## Configuration
 
-1. Edit the mysql.yaml file in your agent's conf.d directory, replacing ```<UNIQUEPASSWORD>``` with the password used above.
+Edit the mysql.yaml file in your agent's conf.d directory, replacing ```<UNIQUEPASSWORD>``` with the password used above.
+{{< highlight yaml>}}
+ init_config:
 
-       init_config:
+ instances:
+   - server: localhost
+     user: datadog
+     pass: <UNIQUEPASSWORD>
 
-       instances:
-         - server: localhost
-           user: datadog
-           pass: <UNIQUEPASSWORD>
+     tags:
+         - optional_tag1
+         - optional_tag2
+     options:
+         replication: 0
+         galera_cluster: 1
+         extra_status_metrics: true
+         extra_innodb_metrics: true
+         extra_performance_metrics: true
+         schema_size_metrics: false
+         disable_innodb_metrics: false
+{{< /highlight >}}
 
-           tags:
-               - optional_tag1
-               - optional_tag2
-           options:
-               replication: 0
-               galera_cluster: 1
-               extra_status_metrics: true
-               extra_innodb_metrics: true
-               extra_performance_metrics: true
-               schema_size_metrics: false
-               disable_innodb_metrics: false
+Agent 5.7 added a new option: `disable_innodb_metrics`. This should only be used with older versions of MySQL without innodb engine support.
 
-    Agent 5.7 added a new option: `disable_innodb_metrics`. This should only be used with older versions of MySQL without innodb engine support.
-
-    See the metrics section below to see a list of the new metrics provided by each of the metric options.
+See the metrics section below to see a list of the new metrics provided by each of the metric options.
 
 
 {{< insert-example-links >}}
@@ -66,15 +70,15 @@ Connect MySQL to Datadog in order to:
 ## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
-
-
-    Checks
-    ======
-      [...]
-      mysql
-      -----
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+{{< highlight shell>}}
+Checks
+======
+  [...]
+  mysql
+  -----
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

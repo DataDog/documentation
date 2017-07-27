@@ -20,21 +20,21 @@ We detail the key performance metrics, how to collect them, and how to use Datad
 
 ## Configuration
 
-1.  Configure the Agent to connect to the Redis server. Edit conf.d/redisdb.yaml:
+1.  Configure the Agent to connect to the Redis server. Edit `conf.d/redisdb.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  - host: localhost
+    port: 6379
+    tags:
+      - optional_tag1
+      - optional_tag2
+    keys:
+      - key1
+{{< /highlight >}}
 
-        instances:
-          - host: localhost
-            port: 6379
-            tags:
-              - optional_tag1
-              - optional_tag2
-            keys:
-              - key1
-
-
-1.  Restart the Agent
+2.  Restart the Agent
 
 ### Configuration Options
 
@@ -51,17 +51,18 @@ We detail the key performance metrics, how to collect them, and how to use Datad
 
 ## Validation
 
-1.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+  [...]
 
-          [...]
-
-          redisdb
-          -------
-            - instance #0 [OK]
-            - Collected 8 metrics & 0 events
+  redisdb
+  -------
+    - instance #0 [OK]
+    - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Troubleshooting and Questions
 

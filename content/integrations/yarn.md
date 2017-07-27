@@ -18,14 +18,14 @@ Capture Yarn metrics to:
 
 *Install Datadog Agent on the ResourceManager*
 
-1.  Configure the agent to connect to the ResourceManager: Edit conf.d/yarn.yaml
+1.  Configure the agent to connect to the ResourceManager: `Edit conf.d/yarn.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
-
-        instances:
-            -   resourcemanager_address: localhost
-                resourcemanager_port: 8088
-
+instances:
+    -   resourcemanager_address: localhost
+        resourcemanager_port: 8088
+{{< /highlight >}}
 
 2.  Restart the Agent
 
@@ -35,17 +35,17 @@ Capture Yarn metrics to:
 ## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
+  [...]
 
-      [...]
-
-      yarn
-      ----
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
-
+  yarn
+  ----
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

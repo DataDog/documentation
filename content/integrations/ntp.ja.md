@@ -29,13 +29,14 @@ No installation steps are required for this integration.
 ## Configuration
 
 1.  The ntp check is enabled by default. If you would like to make any changes to the configuration, move `ntp.yaml.default` to `ntp.yaml` and edit:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  - offset_threshold: 60
+{{< /highlight >}}
 
-        instances:
-          - offset_threshold: 60
-
-1.  Restart the agent
+2. Restart the agent
 
 ### Configuration Options
 
@@ -47,17 +48,15 @@ No installation steps are required for this integration.
 ## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
-
-
-
-    Checks
-    ======
-      [...]
-      ntp
-      -----
-          - instance #0 [OK]
-          - Collected 1 metric & 0 events
-
+{{< highlight shell>}}
+Checks
+======
+  [...]
+  ntp
+  -----
+      - instance #0 [OK]
+      - Collected 1 metric & 0 events
+{{< /highlight >}}
 ## Usage
 
 ## Metrics

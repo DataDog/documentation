@@ -25,23 +25,22 @@ No installation is required.
 To get Catchpoint alerts into your stream, login into the Catchpoint Portal and goto Settings > API.
 
 1. In the Alerts API select Enable
-1. Enter the DataDog Endpoint URL. You will also need the DataDog API Key which can be created in the DataDog portal.
-1. Set Status to Active
-1. Select Template for Format
-1. Add a new template
-1. Enter the template Name e.g. DataDog and set the Format to JSON.
-1. Use the following JSON Template and Save it.
-
-
-        {
-            "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
-            "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",
-            "priority": "normal",
-            "tags": ["alertType:${Switch(${AlertTypeId},'0', 'Unknown','2', 'Byte Length','3','Content Match','4', 'Host Failure','7', 'Timing','9', 'Test Failure', '10',Insight', '11','Javascript Failure', '12', 'Ping',13, 'Requests')}"],
-            "alert_type": "${switch(${notificationLevelId},'0','warning','1','error','3','success')}",
-            "source_type_name": "catchpoint"
-        }
-
+2. . Enter the DataDog Endpoint URL. You will also need the DataDog API Key which can be created in the DataDog portal.
+3. Set Status to Active
+4. Select Template for Format
+5. Add a new template
+6. Enter the template Name e.g. DataDog and set the Format to JSON.
+7. Use the following JSON Template and Save it.
+{{< highlight json >}}
+{
+    "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
+    "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",
+    "priority": "normal",
+    "tags": ["alertType:${Switch(${AlertTypeId},'0', 'Unknown','2', 'Byte Length','3','Content Match','4', 'Host Failure','7', 'Timing','9', 'Test Failure', '10',Insight', '11','Javascript Failure', '12', 'Ping',13, 'Requests')}"],
+    "alert_type": "${switch(${notificationLevelId},'0','warning','1','error','3','success')}",
+    "source_type_name": "catchpoint"
+}
+{{< /highlight >}}
 
 Catchpoint will now send any alerts directly to the Events stream in DataDog.
 
