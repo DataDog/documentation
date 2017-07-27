@@ -73,7 +73,7 @@ Visit the Metrics Explorer to see the new metrics available. You will find all t
 {{< get-metrics-from-git "system" "system.processes" >}}
 
 
-   [1]: /guides/monitoring#process
+[1]: /guides/monitors
 
 
 
