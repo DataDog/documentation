@@ -21,7 +21,7 @@ If you haven't installed the Agent yet, instructions can be found
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
-<a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページのインストール手順も合わせてご参照ください。
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>Agent</a> ページのインストール手順も合わせてご参照ください。
 
 
 <!--
