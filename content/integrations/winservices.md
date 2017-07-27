@@ -43,21 +43,21 @@ Configure the Agent using the Agent Manager
               - wmiApSrv # service names are not case-sensitive
 
 
-1.  Restart the agent.
+2.  Restart the agent.
 
 ## Validation
 
 After you restart the agent, check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
+  [...]
 
-    Checks
-    ======
-
-      [...]
-
-      windows_service
-      ---------------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+  windows_service
+  ---------------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 {{< insert-example-links conf="windows_service" check="windows_service" >}}

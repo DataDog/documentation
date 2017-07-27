@@ -75,16 +75,17 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
 
 4. Restart the Agent
 5. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-        Checks
-        ======
+  [...]
 
-          [...]
-
-          openstack
-          ---------
-              - instance #0 [OK]
-              - Collected 8 metrics & 0 events
+  openstack
+  ---------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 {{< insert-example-links >}}
 

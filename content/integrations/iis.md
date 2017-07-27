@@ -31,15 +31,15 @@ Connect IIS to Datadog in order to:
 ## Configuration
 
 1.  Configure the Agent to connect to IIS. Edit conf.d/iis.yaml and add this server to instances with (optional) tags:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
-
-        instances:
-          - host: . # "." means the current host
-            tags:
-              - mytag1
-              - mytag2
-
+instances:
+  - host: . # "." means the current host
+    tags:
+      - mytag1
+      - mytag2
+{{< /highlight >}}
 
 1.  Restart the Agent using the Agent Manager (or restart the service)
 
@@ -63,17 +63,17 @@ define any sites, the check will pull the aggregate values across all sites.
 
 Here's an example of configuration that would check the current machine and a remote machine
 called MYREMOTESERVER. For the remote host we are only pulling metrics from the default site.
-
-    - host: .
-      tags:
-        - myapp1
-      sites:
-        - Default Web Site
-    - host: MYREMOTESERVER
-      username: MYREMOTESERVER\fred
-      password: mysecretpassword
-      is_2008: false
-
+{{< highlight yaml>}}
+- host: .
+  tags:
+    - myapp1
+  sites:
+    - Default Web Site
+- host: MYREMOTESERVER
+  username: MYREMOTESERVER\fred
+  password: mysecretpassword
+  is_2008: false
+{{< /highlight >}}
 
 * `is_2008` (Optional) - NOTE: because of a typo in IIS6/7 (typically on W2K8) where perfmon reports TotalBytesTransferred as TotalBytesTransfered, you may have to enable this to grab the IIS metrics in that environment.
 
@@ -82,7 +82,7 @@ called MYREMOTESERVER. For the remote host we are only pulling metrics from the 
 ## Validation
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
-
+{{< highlight shell>}}
     Checks
     ======
 
@@ -92,7 +92,7 @@ Check the info page in the Agent Manager and verify that the integration check h
       ---
           - instance #0 [OK]
           - Collected 20 metrics & 0 events
-
+{{< /highlight >}}
 ## Metrics
 
 {{< get-metrics-from-git >}}

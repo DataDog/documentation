@@ -23,20 +23,21 @@ Connect Kong to Datadog to:
 ## Configuration
 
 Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
+{{< highlight yaml>}}
+init_config:
 
-    init_config:
+instances:
+# For every instance, you have an `kong_status_url` and (optionally)
+# a list of tags.
 
-    instances:
-    # For every instance, you have an `kong_status_url` and (optionally)
-    # a list of tags.
+-   kong_status_url: http://example.com:8001/status/
+    tags:
+        -   instance:foo
 
-    -   kong_status_url: http://example.com:8001/status/
-        tags:
-            -   instance:foo
-
-    -   kong_status_url: http://example2.com:8001/status/
-        tags:
-            -   instance:bar
+-   kong_status_url: http://example2.com:8001/status/
+    tags:
+        -   instance:bar
+{{< /highlight >}}
 
 {{< insert-example-links >}}
 

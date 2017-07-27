@@ -46,15 +46,15 @@ Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**)
 ### Configure the Agent
 
 The Redis/Memcached integrations support the tagging of individual cache instances. Originally designed to allow the monitoring of multiple instances on the same machine, you can use these tags to your advantage. Here is an example of a configuration for ElastiCache with Redis using `redisdb.yaml`, usually found in `/etc/dd-agent/conf.d`
+{{< highlight yaml >}}
+init_config:
 
-    init_config:
-
-    instances:
-      - host: replica-001.xxxx.use1.cache.amazonaws.com # Endpoint URL from AWS console
-        port: 6379
-        tags:
-          - cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
-
+instances:
+  - host: replica-001.xxxx.use1.cache.amazonaws.com # Endpoint URL from AWS console
+    port: 6379
+    tags:
+      - cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
+{{< /highlight >}}
 
 
 Then restart the agent: `sudo /etc/init.d/datadog-agent restart` (on linux).

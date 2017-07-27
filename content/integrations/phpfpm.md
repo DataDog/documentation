@@ -18,18 +18,19 @@ No installation steps are required for this integration.
 
 ## Configuration
 
-1.  Configure the Agent to connect to your FPM status endpoint (look at your pools definition). Edit conf.d/php_fpm.yaml:
+1.  Configure the Agent to connect to your FPM status endpoint (look at your pools definition). Edit `conf.d/php_fpm.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  - status_url: http://localhost/status
+    ping_url: http://localhost/ping
+    ping_reply: pong
+    tags:
+      - instance:foo
+{{< /highlight >}}
 
-        instances:
-          - status_url: http://localhost/status
-            ping_url: http://localhost/ping
-            ping_reply: pong
-            tags:
-              - instance:foo
-
-1.  Restart the Agent
+2.  Restart the Agent
 
 ### Configuration Options
 
@@ -43,17 +44,17 @@ No installation steps are required for this integration.
 ## Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
+  [...]
 
-      [...]
-
-      php_fpm
-      -------
-          - instance #0 [OK]
-          - Collected 7 metrics & 0 events & 2 service checks
-
+  php_fpm
+  -------
+      - instance #0 [OK]
+      - Collected 7 metrics & 0 events & 2 service checks
+{{< /highlight >}}
 ## Metrics
 
 

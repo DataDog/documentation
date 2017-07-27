@@ -27,28 +27,28 @@ No installation is required
 ## Configuration
 
 Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following yaml file will check both ports 22 and 443 on 192.168.22.1 with timeouts of 10 seconds. The response time will be available in the metric `network.tcp.response_time`.
+{{< highlight yaml>}}
+init_config:
 
-    init_config:
+instances:
+  - name: SSH on Server
+    host: 192.168.22.1
+    port: 22
+    timeout: 10
+    collect_response_time: true
+    skip_event: true
+    tags:
+      - demo:matt
 
-    instances:
-      - name: SSH on Server
-        host: 192.168.22.1
-        port: 22
-        timeout: 10
-        collect_response_time: true
-        skip_event: true
-        tags:
-          - demo:matt
-
-      - name: 443 on Server
-        host: 192.168.22.1
-        port: 443
-        timeout: 10
-        skip_event: true
-        collect_response_time: true
-        tags:
-          - demo:matt
-
+  - name: 443 on Server
+    host: 192.168.22.1
+    port: 443
+    timeout: 10
+    skip_event: true
+    collect_response_time: true
+    tags:
+      - demo:matt
+{{< /highlight >}}
 
 ### Configuration Options
 
@@ -65,12 +65,13 @@ Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following
 ## Validation
 
 Execute the agent info command and verify that the integration check was successful. The output should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
-
-      tcp_check
-      ---------
-        - instance #0 [OK]
-        - instance #1 [OK]
-        - Collected 2 metrics, 0 events & 3 service checks
+  tcp_check
+  ---------
+    - instance #0 [OK]
+    - instance #1 [OK]
+    - Collected 2 metrics, 0 events & 3 service checks
+{{< /highlight >}}

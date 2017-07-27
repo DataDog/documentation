@@ -15,38 +15,39 @@ The Python integration enables you to monitor any custom metric by instrumenting
         pip install datadog
 
 2.  Start instrumenting your code:
+{{< highlight python>}}
+# Configure the module according to your needs
+from datadog import initialize
 
-        # Configure the module according to your needs
-        from datadog import initialize
+options = {
+    'api_key':'api_key',
+    'app_key':'app_key'
+}
 
-        options = {
-            'api_key':'api_key',
-            'app_key':'app_key'
-        }
+initialize(**options)
 
-        initialize(**options)
+# Use Datadog REST API client
+from datadog import api
 
-        # Use Datadog REST API client
-        from datadog import api
+title = "Something big happened!"
+text = 'And let me tell you all about it here!'
+tags = ['version:1', 'application:web']
 
-        title = "Something big happened!"
-        text = 'And let me tell you all about it here!'
-        tags = ['version:1', 'application:web']
-
-        api.Event.create(title=title, text=text, tags=tags)
+api.Event.create(title=title, text=text, tags=tags)
 
 
-        # Use Statsd, a Python client for DogStatsd
-        from datadog import statsd
+# Use Statsd, a Python client for DogStatsd
+from datadog import statsd
 
-        statsd.increment('whatever')
-        statsd.gauge('foo', 42)
+statsd.increment('whatever')
+statsd.gauge('foo', 42)
 
-        # Or ThreadStats, an alternative tool to collect and flush metrics,using Datadog REST API
-        from datadog import ThreadStats
-        stats = ThreadStats()
-        stats.start()
-        stats.increment('home.page.hits')
+# Or ThreadStats, an alternative tool to collect and flush metrics,using Datadog REST API
+from datadog import ThreadStats
+stats = ThreadStats()
+stats.start()
+stats.increment('home.page.hits')
+{{< /highlight >}}
 
 ## Configuration
 

@@ -17,32 +17,32 @@ Use the SNMP Agent Check to:
 ## Configuration
 
 To use the SNMP checks, edit the **snmp.yaml** file in your **conf.d** directory as follows:
+{{< highlight yaml>}}
+init_config:
+  #You can specify an additional folder for your custom mib files (python format)
+  mibs_folder: /path/to/your/mibs/folder
 
-    init_config:
-      #You can specify an additional folder for your custom mib files (python format)
-      mibs_folder: /path/to/your/mibs/folder
+instances:
 
-    instances:
-
-      # SNMP v1-v2 configuration
-      - ip_address: localhost
-        port: 161
-        community_string: public
-        snmp_version: 2 # Only required for snmp v1, will default to 2
-        timeout: 1 # second, by default
-        retries: 5
-        enforce_mib_constraints: true  # if set to false we will not check the values
-                                       # returned meet the MIB constraints. Defaults to True.
-        tags:
-          - location:front
-        metrics:
-          - MIB: UDP-MIB
-            symbol: udpInDatagrams
-          - MIB: TCP-MIB
-            symbol: tcpActiveOpens
-          - OID: 1.3.6.1.2.1.6.5
-            name: tcpPassiveOpens
-
+  # SNMP v1-v2 configuration
+  - ip_address: localhost
+    port: 161
+    community_string: public
+    snmp_version: 2 # Only required for snmp v1, will default to 2
+    timeout: 1 # second, by default
+    retries: 5
+    enforce_mib_constraints: true  # if set to false we will not check the values
+    # returned meet the MIB constraints. Defaults to True.
+    tags:
+      - location:front
+    metrics:
+      - MIB: UDP-MIB
+        symbol: udpInDatagrams
+      - MIB: TCP-MIB
+        symbol: tcpActiveOpens
+      - OID: 1.3.6.1.2.1.6.5
+        name: tcpPassiveOpens
+{{< /highlight >}}
 
 For each device that you want to monitor, you need to specify at least an ip_address and an authentication method. If not specified, a default port of 161 will be assumed.
 

@@ -16,35 +16,37 @@ Capture NameNode and DataNode HDFS metrics in Datadog to:
 
 *These steps only apply to the Datadog Agent >= 5.7.0, please refer to the conf.d/hdfs.yaml file for older versions of the Agent.*
 
-1.  Configure the NameNode agent to connect to the JMX URI: Edit conf.d/hdfs_namenode.yaml
+1.  Configure the NameNode agent to connect to the JMX URI: Edit `conf.d/hdfs_namenode.yaml`
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  #
+  # The HDFS NameNode check retrieves metrics from the HDFS NameNode's JMX
+  # interface. This check must be installed on the NameNode. The HDFS
+  # NameNode JMX URI is composed of the NameNode's hostname and port.
+  #
+  # The hostname and port can be found in the hdfs-site.xml conf file under
+  # the property dfs.http.address or dfs.namenode.http-address
+  #
+  -  hdfs_namenode_jmx_uri: http://localhost:50070
+{{< /highlight >}}
 
-        instances:
-          #
-          # The HDFS NameNode check retrieves metrics from the HDFS NameNode's JMX
-          # interface. This check must be installed on the NameNode. The HDFS
-          # NameNode JMX URI is composed of the NameNode's hostname and port.
-          #
-          # The hostname and port can be found in the hdfs-site.xml conf file under
-          # the property dfs.http.address or dfs.namenode.http-address
-          #
-          -  hdfs_namenode_jmx_uri: http://localhost:50070
+2.  Configure the DataNode agent to connect to the JMX URI: Edit `conf.d/hdfs_datanode.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-2.  Configure the DataNode agent to connect to the JMX URI: Edit conf.d/hdfs_datanode.yaml
-
-        init_config:
-
-        instances:
-          #
-          # The HDFS DataNode check retrieves metrics from the HDFS DataNode's JMX
-          # interface. This check must be installed on a HDFS DataNode. The HDFS
-          # DataNode JMX URI is composed of the DataNode's hostname and port.
-          #
-          # The hostname and port can be found in the hdfs-site.xml conf file under
-          # the property dfs.datanode.http.address
-          #
-          - hdfs_datanode_jmx_uri: http://localhost:50075
+instances:
+  #
+  # The HDFS DataNode check retrieves metrics from the HDFS DataNode's JMX
+  # interface. This check must be installed on a HDFS DataNode. The HDFS
+  # DataNode JMX URI is composed of the DataNode's hostname and port.
+  #
+  # The hostname and port can be found in the hdfs-site.xml conf file under
+  # the property dfs.datanode.http.address
+  #
+  - hdfs_datanode_jmx_uri: http://localhost:50075
+{{< /highlight >}}
 
 3.  Restart the Agent
 
@@ -54,22 +56,20 @@ Capture NameNode and DataNode HDFS metrics in Datadog to:
 ## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
-
-      [...]
-      hdfs_datanode
-      -------------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
-      hdfs_namenode
-      -------------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
-
-
-
+  [...]
+  hdfs_datanode
+  -------------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+  hdfs_namenode
+  -------------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 

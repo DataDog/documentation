@@ -28,18 +28,18 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
 
 ## Configuration
 
-1.  Configure the Agent to connect to your vCenter instance. Edit conf.d/vsphere.yaml:
+1.  Configure the Agent to connect to your vCenter instance. Edit `conf.d/vsphere.yaml`:
+{{< highlight yaml>}}
+init_config:
 
-        init_config:
+instances:
+  - name: main-vcenter
+    host: vcenter.domain.com
+    username: datadog-readonly@vsphere.local
+    password: mypassword
+{{< /highlight >}}
 
-        instances:
-          - name: main-vcenter
-            host: vcenter.domain.com
-            username: datadog-readonly@vsphere.local
-            password: mypassword
-
-
-1.  Restart the Agent
+2.  Restart the Agent
 
 ### Configuration Options
 
@@ -56,16 +56,17 @@ We also have an awesome blog post on vSphere which can be seen [here][1].
 ## Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
+{{< highlight shell>}}
+Checks
+======
 
-    Checks
-    ======
+  [...]
 
-      [...]
-
-      vsphere
-      -------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+  vsphere
+  -------
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+{{< /highlight >}}
 
 ## Metrics
 
