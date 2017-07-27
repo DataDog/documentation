@@ -78,6 +78,8 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
         "cloudwatch:Describe*",
         "cloudwatch:Get*",
         "cloudwatch:List*",
+        "codedeploy:List*",
+        "codedeploy:BatchGet*",
         "dynamodb:list*",
         "dynamodb:describe*",
         "ec2:Describe*",
