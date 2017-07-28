@@ -6,9 +6,9 @@ kind: integration
 doclevel: basic
 ---
 
-## Overview
-
 {{< img src="integrations/pivotal/pivotal_event.png" alt="pivotal event" >}}
+
+## Overview
 
 Connect Pivotal Tracker to Datadog to:
 
