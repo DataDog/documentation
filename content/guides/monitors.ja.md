@@ -233,7 +233,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
     アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    ![metric threshold](/images/monitor/metric_threshold.png)
+    ![metric threshold](/images/guides/monitor/metric_threshold.png)
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
