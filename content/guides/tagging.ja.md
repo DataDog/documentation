@@ -23,60 +23,60 @@ The following integration sources create tags automatically in Datadog:
 
 |                                       |                                                                               |
 | :-------------------------------------|:------------------------------------------------------------------------------|
-| [Amazon CloudFront](../..//integrations/awscloudfront)                     | Distribution |
-| [Amazon EC2](../..//integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| [Amazon Elastic File System](../../integrations/awsefs)            | Filesystem |
-| [Amazon Kinesis](../../integrations/awskinesis)                        | Stream State |
-| [Amazon Machine Learning](../../integrations/awsml)               | BatchPrediction, DataSource, Evaluation  , MLModel |
-| [Amazon Route 53](../../integrations/awsroute53)                       | Domains, Healthchecks  , HostedZone |
-| [Amazon WorkSpaces](../../integrations/awsworkspaces)                     | WorkSpaces |
-| [AWS CloudTrail](../../integrations/awscloudtrail)                        | CloudTrail |
-| [AWS Elastic Load Balancing](../../integrations/awselb)            | Loadbalancer, TargetGroups |
-| [AWS Identity and Access Management](../../integrations/awsworkspaces)    | Profile Name |
-| [AWS SQS](../../integrations/awssqs)                               | Queue Name |
-| [Apache](../../integrations/apache)                                | Apache Host and Port |
-| [Azure](../../integrations/azure)                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| [BTRFS](../../integrations/btrfs)                                 | Usage & Replication Type |
-| [Chef](../../integrations/chef)                                  | Chef Roles |
-| [Consul](../../integrations/consul)                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
-| [CouchDB](../../integrations/couchdb)                               | Database Name,  Instance Name |
-| [CouchBase](../../integrations/couchbase)                             | CouchBase Tags,  Instance Name |
-| [Docker](../../integrations/docker)                                | Docker Container and Image Name, Container Command, Container Labels |
-| [Dyn](../../integrations/dyn)                                   | Zone, Record Type |
-| [Elasticsearch](../../integrations/elasticsearch)                         | Cluster Name,  Host Name, Port Number  |
-| [Etcd](../../integrations/etcd)                                  | State Leader or Follower |
-| [Fluentd](../../integrations/fluentd)                           | Host Name, Port Number |
-| [Google App Engine](../../integrations/google_app_engine)                     | Project Name, Version ID, Task Queue |
-| [Google Cloud Platform](../../integrations/google_cloud_platform)                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| [Go Expvar](../../integrations/goexpvar)                             | Expvar Path |
-| [Gunicorn](../../integrations/gunicorn)                              | State Idle or Working, App Name |
-| [HAProxy](../../integrations/haproxy)                               | Service Name, Availability, Backend Host, Status, Type |
-| [HTTP Check](../../integrations/httpcheck)                            | URL, Instance |
-| [IIS](../../integrations/iis)                                   | Site |
-| [Jenkins](../../integrations/jenkins)                               | Job Name, Build Number, Branch, and Results |
-| [JMX](../../integrations/java)                                   | JMX Tags |
-| [Kafka](../../integrations/kafka)                                 | Topic |
-| [Kubernetes](../../integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
-| [Marathon](../../integrations/marathon)                              | URL |
-| [Memcached](../../integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
-| [Mesos](../../integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
-| [Mongo](../../integrations/mongodb)                                 | Server Name |
-| [OpenStack](../../integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| [PHP FPM](../../integrations/phpfpm)                               | Pool Name |
-| [Pivotal](../../integrations/pivotal)                               | Current State, Owner, Labels, Requester, Story Type |
-| [Postfix ](../../integrations/postfix)                              | Queue, Instance |
-| [Puppet](../../integrations/puppet)                              | Puppet Tags |
-| [RabbitMQ](../../integrations/rabbitmq)                              | Node, Queue Name, Vhost, Policy, Host |
-| [Redis](../../integrations/redis)                                 | Host, Port,  Slave or Master |
-| [RiakCS](../../integrations/riakcs)                                | Aggregation Key |
-| [SNMP](../../integrations/snmp)                                  | Device IP Address |
-| [Supervisord](../../integrations/supervisor)                          | Server Name, Process Name |
-| [TeamCity](../../integrations/teamcity)                              | Tags, Code Deployments, Build Number |
-| [TokuMX](../../integrations/tokumx)                               | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
-| [Varnish](../../integrations/varnish)                               | Name, Backend |
-| [VSphere](../../integrations/vmware)                               | Host, Datacenter, Server, Instance |
-| [Win32 Events](../../integrations/wmi)                          | Event ID |
-| [Windows Services](../../integrations/winservices)                      | Service Name |
+| [Amazon CloudFront](http://docs.datadoghq.com//integrations/awscloudfront)                     | Distribution |
+| [Amazon EC2](http://docs.datadoghq.com//integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| [Amazon Elastic File System](http://docs.datadoghq.com/integrations/awsefs)            | Filesystem |
+| [Amazon Kinesis](http://docs.datadoghq.com/integrations/awskinesis)                        | Stream State |
+| [Amazon Machine Learning](http://docs.datadoghq.com/integrations/awsml)               | BatchPrediction, DataSource, Evaluation  , MLModel |
+| [Amazon Route 53](http://docs.datadoghq.com/integrations/awsroute53)                       | Domains, Healthchecks  , HostedZone |
+| [Amazon WorkSpaces](http://docs.datadoghq.com/integrations/awsworkspaces)                     | WorkSpaces |
+| [AWS CloudTrail](http://docs.datadoghq.com/integrations/awscloudtrail)                        | CloudTrail |
+| [AWS Elastic Load Balancing](http://docs.datadoghq.com/integrations/awselb)            | Loadbalancer, TargetGroups |
+| [AWS Identity and Access Management](http://docs.datadoghq.com/integrations/awsworkspaces)    | Profile Name |
+| [AWS SQS](http://docs.datadoghq.com/integrations/awssqs)                               | Queue Name |
+| [Apache](http://docs.datadoghq.com/integrations/apache)                                | Apache Host and Port |
+| [Azure](http://docs.datadoghq.com/integrations/azure)                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| [BTRFS](http://docs.datadoghq.com/integrations/btrfs)                                 | Usage & Replication Type |
+| [Chef](http://docs.datadoghq.com/integrations/chef)                                  | Chef Roles |
+| [Consul](http://docs.datadoghq.com/integrations/consul)                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
+| [CouchDB](http://docs.datadoghq.com/integrations/couchdb)                               | Database Name,  Instance Name |
+| [CouchBase](http://docs.datadoghq.com/integrations/couchbase)                             | CouchBase Tags,  Instance Name |
+| [Docker](http://docs.datadoghq.com/integrations/docker)                                | Docker Container and Image Name, Container Command, Container Labels |
+| [Dyn](http://docs.datadoghq.com/integrations/dyn)                                   | Zone, Record Type |
+| [Elasticsearch](http://docs.datadoghq.com/integrations/elasticsearch)                         | Cluster Name,  Host Name, Port Number  |
+| [Etcd](http://docs.datadoghq.com/integrations/etcd)                                  | State Leader or Follower |
+| [Fluentd](http://docs.datadoghq.com/integrations/fluentd)                           | Host Name, Port Number |
+| [Google App Engine](http://docs.datadoghq.com/integrations/google_app_engine)                     | Project Name, Version ID, Task Queue |
+| [Google Cloud Platform](http://docs.datadoghq.com/integrations/google_cloud_platform)                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| [Go Expvar](http://docs.datadoghq.com/integrations/goexpvar)                             | Expvar Path |
+| [Gunicorn](http://docs.datadoghq.com/integrations/gunicorn)                              | State Idle or Working, App Name |
+| [HAProxy](http://docs.datadoghq.com/integrations/haproxy)                               | Service Name, Availability, Backend Host, Status, Type |
+| [HTTP Check](http://docs.datadoghq.com/integrations/httpcheck)                            | URL, Instance |
+| [IIS](http://docs.datadoghq.com/integrations/iis)                                   | Site |
+| [Jenkins](http://docs.datadoghq.com/integrations/jenkins)                               | Job Name, Build Number, Branch, and Results |
+| [JMX](http://docs.datadoghq.com/integrations/java)                                   | JMX Tags |
+| [Kafka](http://docs.datadoghq.com/integrations/kafka)                                 | Topic |
+| [Kubernetes](http://docs.datadoghq.com/integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
+| [Marathon](http://docs.datadoghq.com/integrations/marathon)                              | URL |
+| [Memcached](http://docs.datadoghq.com/integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
+| [Mesos](http://docs.datadoghq.com/integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| [Mongo](http://docs.datadoghq.com/integrations/mongodb)                                 | Server Name |
+| [OpenStack](http://docs.datadoghq.com/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
+| [PHP FPM](http://docs.datadoghq.com/integrations/phpfpm)                               | Pool Name |
+| [Pivotal](http://docs.datadoghq.com/integrations/pivotal)                               | Current State, Owner, Labels, Requester, Story Type |
+| [Postfix ](http://docs.datadoghq.com/integrations/postfix)                              | Queue, Instance |
+| [Puppet](http://docs.datadoghq.com/integrations/puppet)                              | Puppet Tags |
+| [RabbitMQ](http://docs.datadoghq.com/integrations/rabbitmq)                              | Node, Queue Name, Vhost, Policy, Host |
+| [Redis](http://docs.datadoghq.com/integrations/redis)                                 | Host, Port,  Slave or Master |
+| [RiakCS](http://docs.datadoghq.com/integrations/riakcs)                                | Aggregation Key |
+| [SNMP](http://docs.datadoghq.com/integrations/snmp)                                  | Device IP Address |
+| [Supervisord](http://docs.datadoghq.com/integrations/supervisor)                          | Server Name, Process Name |
+| [TeamCity](http://docs.datadoghq.com/integrations/teamcity)                              | Tags, Code Deployments, Build Number |
+| [TokuMX](http://docs.datadoghq.com/integrations/tokumx)                               | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
+| [Varnish](http://docs.datadoghq.com/integrations/varnish)                               | Name, Backend |
+| [VSphere](http://docs.datadoghq.com/integrations/vmware)                               | Host, Datacenter, Server, Instance |
+| [Win32 Events](http://docs.datadoghq.com/integrations/wmi)                          | Event ID |
+| [Windows Services](http://docs.datadoghq.com/integrations/winservices)                      | Service Name |
 
 
 ### Assigning tags using the configuration files
