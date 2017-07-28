@@ -72,8 +72,5 @@ In the Datadog app, search for mesos.cluster in the Metrics Explorer.
 In the Datadog app, search for mesos.slave in the Metrics Explorer.
 
 ## Metrics
-Metric collected from Mesos Master:
-{{< get-metrics-from-git integration="Mesos Master" >}}
 
-Metric collected from Mesos Slave:
-{{< get-metrics-from-git integration="Mesos Slave" >}}
+{{< get-metrics-from-git >}}
