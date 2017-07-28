@@ -23,8 +23,8 @@ The following integration sources create tags automatically in Datadog:
 
 |                                       |                                                                               |
 | :-------------------------------------|:------------------------------------------------------------------------------|
-| [Amazon CloudFront](http://docs.datadoghq.com//integrations/awscloudfront)                     | Distribution |
-| [Amazon EC2](http://docs.datadoghq.com//integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| [Amazon CloudFront](http://docs.datadoghq.com/integrations/awscloudfront)                     | Distribution |
+| [Amazon EC2](http://docs.datadoghq.com/integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
 | [Amazon Elastic File System](http://docs.datadoghq.com/integrations/awsefs)            | Filesystem |
 | [Amazon Kinesis](http://docs.datadoghq.com/integrations/awskinesis)                        | Stream State |
 | [Amazon Machine Learning](http://docs.datadoghq.com/integrations/awsml)               | BatchPrediction, DataSource, Evaluation  , MLModel |
