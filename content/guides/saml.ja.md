@@ -88,6 +88,7 @@ Normally users must be invited to Datadog, even for organizations with SAML enab
 Some organizations might not want to have to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact support.
 
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+
 Admins in accounts using SAML can also set the default role for new Just-in-Time users. 
 The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 
 
