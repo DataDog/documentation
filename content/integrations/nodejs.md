@@ -26,7 +26,7 @@ npm install node-dogstatsd
 ```
 
 2. Start instrumenting your code:
-{{< highlight node>}}
+{{< highlight javascript>}}
 var StatsD = require('node-dogstatsd').StatsD;
 var dogstatsd = new StatsD();
 
