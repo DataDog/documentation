@@ -31,5 +31,3 @@ Integrate with ChatWork to:
 {{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile" >}}
 
 8. [Save your configuration](https://app.datadoghq.com/account/settings#integrations/chatwork)
-
-
