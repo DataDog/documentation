@@ -151,13 +151,13 @@ To filter the list of hosts in the Infrastructure list, enter a tag in the filte
 
 When creating a monitor:
 
-* You can use tags in the ```from:``` textbox to limit the monitor scope to only metrics that have those tags.
+* Use tags in the ```from:``` textbox to limit the monitor scope to only metrics that have those tags.
 {{< img src="guides/tagging/monitortags.png" alt="from textbox tags in Monitors" >}}
 
-* You can use tags in the ```excluding:``` textbox to remove the corresponding metrics of the monitor scope.
+* Use tags in the ```excluding:``` textbox to remove the corresponding metrics of the monitor scope.
 {{< img src="guides/tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" >}}
 
-* You can use tags in the ```avg by``` textbox transform your monitor into a multi-alert monitor on each value of this tags.
+* Use tags in the ```avg by``` textbox transform your monitor into a multi-alert monitor on each value of this tags.
 {{< img src="guides/tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" >}}
 
 
