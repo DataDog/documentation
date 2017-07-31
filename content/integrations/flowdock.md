@@ -5,6 +5,8 @@ kind: integration
 doclevel: basic
 ---
 
+## Overview 
+
 Integrate with FlowDock to:
 
 * be notified when someone posts on your stream
@@ -17,3 +19,5 @@ Datadog takes advantage on Flowdock's Threads to avoid polluting your flows with
 Integrating flowdock is really straightforward. You just have to log into Flowdock on the Configuration tab. It will fetch all your opened flows. If you don't want to post to all of them, you can delete the ones you don't want to appear in the autocomplete list. You can then use @flowdock handles in any user message or monitor to post messages to your flows.
 
 User messages and snapshots will go in the main thread of your flow while each alert will be posted in its own Flowdock thread. It prevents the main thread from being overpolluted with alerts and keeps your team chat clean and organized. On the other hand, you always have an immediate glance at the statuses of the monitors which reported recently on the Inbox view.
+
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" >}}
