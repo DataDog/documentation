@@ -23,60 +23,60 @@ The following integration sources create tags automatically in Datadog:
 
 |                                       |                                                                               |
 | :-------------------------------------|:------------------------------------------------------------------------------|
-| Amazon CloudFront                     | Distribution |
-| Amazon EC2                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| Amazon Elastic File System            | Filesystem |
-| Amazon Kinesis                        | Stream State |
-| Amazon Machine Learning               | BatchPrediction, DataSource, Evaluation  , MLModel |
-| Amazon Route 53                       | Domains, Healthchecks  , HostedZone |
-| Amazon WorkSpaces                     | WorkSpaces |
-| AWS CloudTrail                        | CloudTrail |
-| AWS Elastic Load Balancing            | Loadbalancer, TargetGroups |
-| AWS Identity and Access Management    | Profile Name |
-| AWS SQS                               | Queue Name |
-| Apache                                | Apache Host and Port |
-| Azure                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| BTRFS                                 | Usage & Replication Type |
-| Chef                                  | Chef Roles |
-| Consul                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
-| CouchDB                               | Database Name,  Instance Name |
-| CouchBase                             | CouchBase Tags,  Instance Name |
-| Docker                                | Docker Container and Image Name, Container Command, Container Labels |
-| Dyn                                   | Zone, Record Type |
-| Elasticsearch                         | Cluster Name,  Host Name, Port Number  |
-| Etcd                                  | State Leader or Follower |
-| Fluentd                               | Host Name, Port Number |
-| Google App Engine                     | Project Name, Version ID, Task Queue |
-| Google Cloud Platform                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
-| Go Expvar                             | Expvar Path |
-| Gunicorn                              | State Idle or Working, App Name |
-| HAProxy                               | Service Name, Availability, Backend Host, Status, Type |
-| HTTP Check                            | URL, Instance |
-| IIS                                   | Site |
-| Jenkins                               | Job Name, Build Number, Branch, and Results |
-| JMX                                   | JMX Tags |
-| Kafka                                 | Topic |
-| Kubernetes                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
-| Marathon                              | URL |
-| Memcached                             | Host, Port,  Request, Cache Hit or Miss |
-| Mesos                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
-| Mongo                                 | Server Name |
-| OpenStack                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| PHP FPM                               | Pool Name |
-| Pivotal                               | Current State, Owner, Labels, Requester, Story Type |
-| Postfix                               | Queue, Instance |
-| * Puppet                              | Puppet Tags |
-| RabbitMQ                              | Node, Queue Name, Vhost, Policy, Host |
-| Redis                                 | Host, Port,  Slave or Master |
-| RiakCS                                | Aggregation Key |
-| SNMP                                  | Device IP Address |
-| Supervisord                           | Server Name, Process Name |
-| TeamCity                              | Tags, Code Deployments, Build Number |
-| TokuMX                                | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
-| Varnish                               | Name, Backend |
-| VSphere                               | Host, Datacenter, Server, Instance |
-| Win32 Events                          | Event ID |
-| Windows Services                      | Service Name |
+| [Amazon CloudFront](http://docs.datadoghq.com/integrations/awscloudfront)                     | Distribution |
+| [Amazon EC2](http://docs.datadoghq.com/integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| [Amazon Elastic File System](http://docs.datadoghq.com/integrations/awsefs)            | Filesystem |
+| [Amazon Kinesis](http://docs.datadoghq.com/integrations/awskinesis)                        | Stream State |
+| [Amazon Machine Learning](http://docs.datadoghq.com/integrations/awsml)               | BatchPrediction, DataSource, Evaluation  , MLModel |
+| [Amazon Route 53](http://docs.datadoghq.com/integrations/awsroute53)                       | Domains, Healthchecks  , HostedZone |
+| [Amazon WorkSpaces](http://docs.datadoghq.com/integrations/awsworkspaces)                     | WorkSpaces |
+| [AWS CloudTrail](http://docs.datadoghq.com/integrations/awscloudtrail)                        | CloudTrail |
+| [AWS Elastic Load Balancing](http://docs.datadoghq.com/integrations/awselb)            | Loadbalancer, TargetGroups |
+| [AWS Identity and Access Management](http://docs.datadoghq.com/integrations/awsworkspaces)    | Profile Name |
+| [AWS SQS](http://docs.datadoghq.com/integrations/awssqs)                               | Queue Name |
+| [Apache](http://docs.datadoghq.com/integrations/apache)                                | Apache Host and Port |
+| [Azure](http://docs.datadoghq.com/integrations/azure)                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| [BTRFS](http://docs.datadoghq.com/integrations/btrfs)                                 | Usage & Replication Type |
+| [Chef](http://docs.datadoghq.com/integrations/chef)                                  | Chef Roles |
+| [Consul](http://docs.datadoghq.com/integrations/consul)                                | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID |
+| [CouchDB](http://docs.datadoghq.com/integrations/couchdb)                               | Database Name,  Instance Name |
+| [CouchBase](http://docs.datadoghq.com/integrations/couchbase)                             | CouchBase Tags,  Instance Name |
+| [Docker](http://docs.datadoghq.com/integrations/docker)                                | Docker Container and Image Name, Container Command, Container Labels |
+| [Dyn](http://docs.datadoghq.com/integrations/dyn)                                   | Zone, Record Type |
+| [Elasticsearch](http://docs.datadoghq.com/integrations/elasticsearch)                         | Cluster Name,  Host Name, Port Number  |
+| [Etcd](http://docs.datadoghq.com/integrations/etcd)                                  | State Leader or Follower |
+| [Fluentd](http://docs.datadoghq.com/integrations/fluentd)                           | Host Name, Port Number |
+| [Google App Engine](http://docs.datadoghq.com/integrations/google_app_engine)                     | Project Name, Version ID, Task Queue |
+| [Google Cloud Platform](http://docs.datadoghq.com/integrations/google_cloud_platform)                 | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support |
+| [Go Expvar](http://docs.datadoghq.com/integrations/goexpvar)                             | Expvar Path |
+| [Gunicorn](http://docs.datadoghq.com/integrations/gunicorn)                              | State Idle or Working, App Name |
+| [HAProxy](http://docs.datadoghq.com/integrations/haproxy)                               | Service Name, Availability, Backend Host, Status, Type |
+| [HTTP Check](http://docs.datadoghq.com/integrations/httpcheck)                            | URL, Instance |
+| [IIS](http://docs.datadoghq.com/integrations/iis)                                   | Site |
+| [Jenkins](http://docs.datadoghq.com/integrations/jenkins)                               | Job Name, Build Number, Branch, and Results |
+| [JMX](http://docs.datadoghq.com/integrations/java)                                   | JMX Tags |
+| [Kafka](http://docs.datadoghq.com/integrations/kafka)                                 | Topic |
+| [Kubernetes](http://docs.datadoghq.com/integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
+| [Marathon](http://docs.datadoghq.com/integrations/marathon)                              | URL |
+| [Memcached](http://docs.datadoghq.com/integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
+| [Mesos](http://docs.datadoghq.com/integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| [Mongo](http://docs.datadoghq.com/integrations/mongodb)                                 | Server Name |
+| [OpenStack](http://docs.datadoghq.com/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
+| [PHP FPM](http://docs.datadoghq.com/integrations/phpfpm)                               | Pool Name |
+| [Pivotal](http://docs.datadoghq.com/integrations/pivotal)                               | Current State, Owner, Labels, Requester, Story Type |
+| [Postfix ](http://docs.datadoghq.com/integrations/postfix)                              | Queue, Instance |
+| [Puppet](http://docs.datadoghq.com/integrations/puppet)                              | Puppet Tags |
+| [RabbitMQ](http://docs.datadoghq.com/integrations/rabbitmq)                              | Node, Queue Name, Vhost, Policy, Host |
+| [Redis](http://docs.datadoghq.com/integrations/redis)                                 | Host, Port,  Slave or Master |
+| [RiakCS](http://docs.datadoghq.com/integrations/riakcs)                                | Aggregation Key |
+| [SNMP](http://docs.datadoghq.com/integrations/snmp)                                  | Device IP Address |
+| [Supervisord](http://docs.datadoghq.com/integrations/supervisor)                          | Server Name, Process Name |
+| [TeamCity](http://docs.datadoghq.com/integrations/teamcity)                              | Tags, Code Deployments, Build Number |
+| [TokuMX](http://docs.datadoghq.com/integrations/tokumx)                               | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard |
+| [Varnish](http://docs.datadoghq.com/integrations/varnish)                               | Name, Backend |
+| [VSphere](http://docs.datadoghq.com/integrations/vmware)                               | Host, Datacenter, Server, Instance |
+| [Win32 Events](http://docs.datadoghq.com/integrations/wmi)                          | Event ID |
+| [Windows Services](http://docs.datadoghq.com/integrations/winservices)                      | Service Name |
 
 
 ### Assigning tags using the configuration files
@@ -122,16 +122,29 @@ After you have assigned tags at the host and integration level, you can start us
 - Monitors
 
 ### Using tags in the Events List
+
 The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter ```tags:``` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:sobotka. So the search text is ```tags:role:sobotka```.
 
 {{< img src="guides/tagging/eventtags.png" alt="Events List and Tags" >}}
 
 ### Using tags in Dashboards
-You can use tags to narrow down the metrics to display on a dashboard grapm, or to create groups of metrics to display. To narrow down the metrics to display, enter the tag in the over: textbox. You will now be looking at a chosen metric over all the hosts that have that particular tag assigned. To group using tags, enter the key part of the tag in the group: textbox. For instance, if you have a timeseries graph and you have assigned the tags ```role:database```, ```role:frontend```, and ```role:loadbalancer```, you will get one line in your timeseries graph representing all the machines with the database, another of machines wth the frontend, and third of machines with the loadbalancer.
 
-{{< img src="guides/tagging/dashboardtags.png" alt="Tags in Dashboards" >}}
 
-You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
+You can use tags to narrow down the metrics to display on a dashboard graph, or to create groups of metrics to display. 
+To narrow down the metrics to display, enter the tag in the ```from:``` textbox. 
+You will now be looking at a chosen metric over all the hosts that have that particular tag assigned.
+
+{{< img src="guides/tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" >}}
+
+To group using tags, enter the key part of the tag in the ```avg by:``` textbox. 
+
+For instance, if you have a time series graph showing a metric tagged by the reporting hosts' roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox. This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
+
+{{< img src="guides/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" >}}
+
+
+You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. 
+Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
 
 ### Using tags in the Infrastructure List and the Host Map
 
@@ -141,9 +154,16 @@ To filter the list of hosts in the Infrastructure list, enter a tag in the filte
 
 ### Using tags in Monitors
 
-When defining a monitor, you can use tags to allow the monitor to apply to any subset of hosts across your environment.
+When creating a monitor:
 
-{{< img src="guides/tagging/monitortags.png" alt="Tags in Monitors" >}}
+* You can use tags in the ```from:``` textbox to limit the monitor scope to only metrics that have those tags.
+{{< img src="guides/tagging/monitortags.png" alt="from textbox tags in Monitors" >}}
+
+* You can use tags in the ```excluding:``` textbox to remove the corresponding metrics of the monitor scope.
+{{< img src="guides/tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" >}}
+
+* You can use tags in the ```avg by``` textbox transform your monitor into a multi-alert monitor on each value of this tags.
+{{< img src="guides/tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" >}}
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent
