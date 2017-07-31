@@ -89,6 +89,11 @@ Some organizations might not want to have to invite all of their users to Datado
 
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
+Admins in accounts using SAML can also set the default role for new Just-in-Time users. 
+The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 
+
+{{< img src="guides/saml/saml_jit_default.png" >}}
+
 ### IdP Initiated Login
 
 The normal workflow is that when the Datadog url is loaded, the browser is redirected to the customer IdP, user types in credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
