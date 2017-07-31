@@ -79,11 +79,17 @@ For more information about configuring specific IdP's, refer to the following Kn
 The following features can be enabled through the SAML Configuration dialog.
 
 ### Just in Time Provisioning (JIT Provisioning)
-Normally users must be invited to Datadog, even for organizations with SAML enabled. If a user that has not been invited to Datadog logs in via an Org's IdP, the SAML assertion will be validated, but they will be redirected to a SAML Error page.
+Normally users must be invited to Datadog, even for organizations with SAML enabled. 
+If a user that has not been invited to Datadog logs in via an Org's IdP, the SAML assertion will be validated, but they will be redirected to a SAML Error page.
 
 Some organizations might not want to have to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact support.
-
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+
+Admins in accounts using SAML can also set the default role for new Just-in-Time users. 
+The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 
+
+{{< img src="guides/saml/saml_jit_default.png" >}}
+
 
 ### IdP Initiated Login
 

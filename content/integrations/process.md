@@ -61,7 +61,7 @@ process
 ---------
     - instance #0 [OK]
     - Collected 18 metrics & 0 events & 2 service checks
-{{< highlight shell>}}
+{{< /highlight >}}
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 
@@ -70,6 +70,3 @@ Each instance, regardless of the number of search strings used, counts for a sin
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
 {{< get-metrics-from-git "system" "system.processes" >}}
-
-
-
