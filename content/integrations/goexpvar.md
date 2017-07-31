@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: go_expvar
 ---
 
-{{< img src="integrations/go/go_graph.png" alt="Go Graph" >}}
+{{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" >}}
 
 ## Overview
 
