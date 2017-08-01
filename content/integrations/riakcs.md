@@ -7,11 +7,14 @@ kind: integration
 
 ## Overview
 
-
 Capture Riak CS (Cloud Storage) metrics in Datadog to:
 
 * Visualize key RiakCS metrics.
 * Correlate RiakCS performance with the rest of your applications.
+
+## Installation
+
+The RiakCS check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your RiakCS nodes. If you need the newest version of the check, install the `dd-check-riakcs` package.
 
 ## Configuration
 
@@ -53,3 +56,8 @@ Checks
 
 {{< get-metrics-from-git >}}
 
+## Service Checks
+
+**riakcs.can_connect**:
+
+Returns CRITICAL if the Agent cannot connect to the RiakCS endpoint to collect metrics, otherwise OK.
