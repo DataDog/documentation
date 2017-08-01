@@ -5,6 +5,10 @@ kind: integration
 git_integration_title: ceph
 newhlevel: true
 ---
+
+
+{{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" >}}
+
 ## Overview
 
 Enable the Datadog-Ceph integration to:
@@ -16,13 +20,23 @@ Enable the Datadog-Ceph integration to:
 
 ## Installation
 
-The integration is meant to be enabled on each Ceph monitor host.
+The Ceph check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Ceph servers.
 
 ## Configuration
 
-Adjust the configuration file to match your environment. By default the check will use `/usr/bin/ceph` to retrieve metrics; this can be overriden by using the `ceph_cmd` option. If sudo access is required to run it, please enable the use_sudo flag.
+Create a file `ceph.yaml` in the Agent's conf.d directory:
+{{< highlight yaml>}}
+init_config:
 
-Any extra tags specific to the cluster can be specified under `tags`, as usual.
+instances:
+  - ceph_cmd: /path/to/your/ceph # default is /usr/bin/ceph
+    use_sudo: true               # only if the ceph binary needs sudo on your nodes
+{{< /highlight >}}
+If you enabled use_sudo, add a line like the following to your sudoers file:
+
+```
+dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
+```
 
 {{< insert-example-links >}}
 
@@ -44,3 +58,7 @@ Checks
 ## Metrics
 
 {{< get-metrics-from-git >}}
+
+## Further Reading
+
+To get a better idea of how (or why) to integrate your Ceph cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-ceph-datadog/) about it.
