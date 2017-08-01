@@ -114,7 +114,7 @@ See [Consul's Telemetry doc](https://www.consul.io/docs/agent/telemetry.html) fo
 
 See [Consul's Network Coordinates doc](https://www.consul.io/docs/internals/coordinates.html) if you're curious about how the network latency metrics are calculated.
 
-# Service Checks
+## Service Checks
 
 `consul.check`:
 The Datadog Agent submits a service check for each of Consul's health checks, tagging each with:
@@ -122,13 +122,13 @@ The Datadog Agent submits a service check for each of Consul's health checks, ta
 * `service:<name>`, if Consul reports a `ServiceName`
 * `consul_service_id:<id>`, if Consul reports a `ServiceID`
 
-# Events
+## Events
 
 `consul.new_leader`:
 
 The Datadog Agent emits an event when the Consul cluster elects a new leader, tagging it with `prev_consul_leader`, `curr_consul_leader`, and `consul_datacenter`. 
 
-# Further Reading
+## Further Reading
 
 To get a better idea of how (or why) to integrate your Consul cluster with Datadog, check out our blog posts:
 
