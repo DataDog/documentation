@@ -1,357 +1,182 @@
 ---
-last_modified: 2015/03/31
-translation_status: complete
+last_modified: 2017/08/01
+translation_status: wip
 language: ja
 title: APIライブラリー
 kind: documentation
-sidebar:
-  nav:
-    - header: 公式ライブラリー
-    - text: Python
-      href: "#python"
-    - text: Ruby
-      href: "#ruby"
-    - text: PHP
-      href: "#php"
-    - text: C#
-      href: "#c#"
-    - header: コミュニティーライブラリー
-    - text: Java
-      href: "#community-java"
-    - text: Node.js
-      href: "#community-node"
-    - text: Perl
-      href: "#community-perl"
-    - text: Ruby
-      href: "#community-ruby"
-    - text: PHP
-      href: "#community-php"
-    - text: Go
-      href: "#community-go"
-    - text: Python
-      href: "#community-python"
 ---
-
-<!-- There are many libraries available to help you interact with the Datadog API.
-
-<h4 id="python">Python</h4>
-<ul>
-  <li><a href="https://github.com/DataDog/dogapi">DogApi</a> - A Python Datadog API wrapper.</a></li>
-  <li><a href="https://github.com/DataDog/dogstatsd-python">dogstatsd-python</a> - A Python DogStatsD client.</li>
-</ul>
-
-<h4 id="ruby">Ruby</h4>
-<ul>
-  <li><a href="https://github.com/DataDog/dogapi-rb">DogApi</a> - A Ruby Datadog API wrapper.</a></li>
-  <li><a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby</a> - A Ruby DogStatsD client.</li>
-</ul>
-
-<h4 id="php">PHP</h4>
-<ul>
-  <li><a href="https://github.com/DataDog/php-datadogstatsd">php-datadogstatsd</a> - A
-  PHP DogStatsD client.</li>
-</ul>
-
-<h4 id="c#">C#</h4>
-<ul>
-  <li><a href="https://github.com/DataDog/dogstatsd-csharp-client">dogstatsd-csharp-client</a> - A
-  C# DogStatsD client.</li>
-</ul>
-
-<br/>　-->
-
-<h3 class="official">公式ライブラリー</h3>
-
-Datadog APIを操作するために、Datadogが公式に公開しているライブラリーです。
-
-
-#### Python {#python}
-
-- [DogApi](https://github.com/DataDog/dogapi) - Python Datadog API ラッパー.
-- [dogstatsd-python](https://github.com/DataDog/dogstatsd-python) - Python DogStatsD クライアント.
-
-
-#### Ruby {#ruby}
-
-- [DogApi](https://github.com/DataDog/dogapi-rb) - Ruby Datadog API ラッパー.
-- [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) - Ruby DogStatsD クライアント.
-
-
-#### PHP {#php}
-
-- [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd) - PHP DogStatsD クライアント.
-
-
-<h4 id="c#">C#</h4>
-
-- [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client) C# DogStatsD クライアント.
-
-<br />
-
-
-<!-- <h3 class="community">Community Libraries</h3>
-
-Some great folks have written their own libraries to help interact with
-Datadog. Check them out:
-
-<h4 id="community-java">Java</h4>
-<ul>
-  <li>
-    <a
-    href="https://github.com/indeedeng/java-dogstatsd-client">java-dogstatsd-client</a>
-     - a DogStatsD Client for Java written by <a
-    href="http://www.indeed.com/">Indeed</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/coursera/metrics-datadog">metrics-datadog</a> -
-    a backend to yammers's <a
-    href="https://github.com/coursera/metrics-datadog">metrics</a> library written by
-    <a href="https://www.coursera.org/">Coursera</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/bazaarvoice/metrics-datadog">metrics-datadog</a> -
-    a backend to codahale's <a
-    href="https://github.com/bazaarvoice/metrics-datadog">metrics</a> library extended by
-    <a href="http://www.bazaarvoice.com/">Bazaarvoice</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/bazaarvoice/lassie">Lassie</a>
-     - a Java screenboard API client by <a href="http://www.bazaarvoice.com/">Bazaarvoice</a>.
-  </li>
-</ul>
-<h4 id="community-node">Node.js</h4>
-<ul>
-  <li>
-    <a href="https://github.com/HashGo/node-datadog">node-datadog</a> -
-    a Node.js API client, contributed by <a href="https://github.com/HashGo">HashGo</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/joybro/node-dogstatsd">node-dogstatsd</a>
-    - a Node.js DogStatsD client, contributed by <a
-    href="https://github.com/joybro">Young Han Lee</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/brettlangdon/node-dogapi">node-dogapi</a>
-    - a Node.js API client, contributed by
-    <a href="https://github.com/brettlangdon">Brett Langdon</a>.
-  </li>
-</ul>
-<h4 id="community-perl">Perl</h4>
-<ul>
-  <li>
-    <a href="https://github.com/jpinkham/webservice-datadog">webservice-datadog</a> -
-    a Perl API client, contributed by <a href="https://github.com/jpinkham">Jennifer Pinkham</a>.
-  </li>
-
-  <li>
-    <a href="https://github.com/zipkid/dogstatsd-perl">dogstatsd-perl</a>  -
-    a Perl DogStatsD client, contributed by <a
-      href="https://github.com/zipkid">Stefan Goethals</a>.
-  </li>
-</ul>
-<h4 id="community-ruby">Ruby</h4>
-<ul>
-  <li>
-    <a
-    href="https://github.com/mavenlink/metriks-dogstatsd">metricks-dogstatsd</a> -
-    a backend for the popular <a href="https://github.com/eric/metriks">Metriks</a> gem, written by
-    <a href="https://www.mavenlink.com/">Mavenlink</a>.
-  </li>
-</ul>
-<h4 id="community-php">PHP</h4>
-<ul>
-  <li>
-    <a
-    href="https://github.com/isra00/plesk_datadog_metrics">plesk_metrics_datadog</a> -
-    a PHP script to collect metrics from <a
-    href="http://www.parallels.com/products/plesk/">Plesk</a> by
-    <a href="https://github.com/isra00">Israel Viana</a>.
-  </li>
-</ul>
-<h4 id="community-go">Go</h4>
-<ul>
-  <li>
-      <a
-      href="https://github.com/ooyala/go-dogstatsd/">go-dogstatsd</a> - a
-    dogstatsd client written in Go by
-    <a href="https://github.com/ooyala">Ooyala</a>.
-  </li>
-</ul>
-<h4 id="community-python">Python</h4>
-<ul>
-  <li>
-    <a
-      href="https://github.com/tbarbugli/scales_datadog">scales_datadog</a> - a
-    Datadog backend for the <a href="https://github.com/Cue/scales">Scales</a>
-    library, written by <a href="https://github.com/tbarbugli">Tommaso Barbugli</a>.
-  </li>
-</ul>
-<h4 id="community-scala">Scala</h4>
-<ul>
-  <li>
-    <a href="https://github.com/gphat/datadog-scala">datadgog-scala</a> - a
-      Scala API client, written by <a href="https://github.com/gphat">Cory Watson</a>.
-  </li>
-</ul>
-
-<br /> -->
-
-
-<h3 class="community">コミュニティーライブラリー</h3>
-
-Datadog APIを操作するために、コミュニティーのメンバーが開発/公開しているライブラリーです。
-
-#### Java {#community-java}
-
-- [java-dogstatsd-client](https://github.com/indeedeng/java-dogstatsd-client) - Jave向けDogStatsDクライエント by [Indeed](http://www.indeed.com/).
-- [metrics-datadog](https://github.com/coursera/metrics-datadog) - codahale'の[metrics](https://github.com/coursera/metrics-datadog)ライブラリーのバックエンド by [Coursera](https://github.com/coursera).
-- [Lassie](https://github.com/bazaarvoice/lassie) - Jave向け screenboard APIクライエント by [Bazaarvoice](http://www.bazaarvoice.com/).
-
-#### Node.js {#community-node}
-
-- [node-datadog](https://github.com/HashGo/node-datadog) - Node.js向け APIクライエント by [HashGo](https://github.com/HashGo).
-- [node-dogstatsd](https://github.com/joybro/node-dogstatsd) - Node.js向け DogStatsDクライエント by [Young Han Lee](https://github.com/joybro).
-- [node-dogapi](https://github.com/brettlangdon/node-dogapi) - Node.js向け APIクライエント by [Brett Langdon](https://github.com/brettlangdon).
-
-
-#### Perl {#community-perl}
-- [webservice-datadog](https://github.com/jpinkham/webservice-datadog) -　Perl向け APIクライエント by [Jennifer Pinkham](https://github.com/jpinkham).
-
-- [dogstatsd-perl](https://github.com/zipkid/dogstatsd-perl) - a Perl DogStatsD client, contributed by [Stefan Goethals](https://github.com/zipkid).
-- [dogstatsd-perl](https://github.com/zipkid/dogstatsd-perl) - Perl向け DogStatsDクライエント by [Stefan Goethals](https://github.com/zipkid).
-
-#### Ruby {#community-ruby}
-
-- [metricks-dogstatsd](https://github.com/mavenlink/metriks-dogstatsd) - 有名な[Metriks](https://github.com/eric/metriks)　gemのバックエンド by [Mavenlink](https://www.mavenlink.com/).
-
-
-#### PHP {#community-php}
-
-- [plesk_metrics_datadog](https://github.com/isra00/plesk_datadog_metrics) - [Plesk](http://www.parallels.com/products/plesk/)からメトリクスを収集するためのPHPのスクリプト by [Israel Viana](https://github.com/isra00).
-
-
-#### Go {#community-go}
-
-- [go-datadog-api](https://github.com/xb95/go-datadog-api) - Go向け APIラッパーwrapper　by [Mark Smith](https://github.com/zorkian).
-- [go-dogstatsd](https://github.com/ooyala/go-dogstatsd/) - Goで開発されたdogstatsdクライエント by [Ooyala](https://github.com/ooyala).
-
-
-#### Python {#community-python}
-
-- [scales_datadog](https://github.com/tbarbugli/scales_datadog) - [Scales](https://github.com/Cue/scales)ライブラリーのDatadogバックエンド by [Tommaso Barbugli](https://github.com/tbarbugli).
-
-<br />
-
-
-<!-- <h3 class="community">Integration Libraries</h3>
-<h4 id="community-saltstack">Saltstack</h4>
-<ul>
-  <li>
-    <a
-      href="https://github.com/DataDog/datadog-formula">Datadog Salstack Formula</a>
-  </li>
-  <li>
-      <a
-      href="https://gist.github.com/mastrolinux/6175280">Datadog Saltstack</a> written by
-    <a href="https://gist.github.com/mastrolinux">Luca Cipriani</a>.
-  </li>
-</ul>
-<h4 id="ansible">Ansible</h4>
-<ul>
-  <li>
-    This <a
-      href="https://gist.github.com/alekstorm/6350729">Ansible script </a> is a
-    callback plugin that posts events to your Datadog event stream as you deploy
-    and is written by <a href="https://gist.github.com/alekstorm">Alek Storm</a>.
-  </li>
-</ul>
-<h4 id="community-freeswitch">FreeSwitch</h4>
-<ul>
-  <li>
-    This is for a <a
-      href="https://github.com/wimactel/FreeSwitch-DataDog-Metrics">FreeSwitch ESL </a>
-      application to export statistics to DataDog using the dogstatsd API
-    and is written by <a href="https://github.com/wimactel">WiMacTel</a>.
-  </li>
-</ul>
-
-<h4 id="community-google">Google Analytics</h4>
-<ul>
-  <li>
-    You can get data into Datadog from Google Analytics using our API with <a
-      href="https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape">this library</a>.
-  </li>
-</ul>
-
-<h4 id="community-pidstats">Pid-stats</h4>
-<ul>
-  <li>
-    This <a
-      href="https://github.com/gitterHQ/pid-stats">library</a> will allow you to generate process information from StatsD, given pid files. It was created by <a
-      href="https://github.com/gitterHQ">GitterHQ</a>.
-  </li>
-</ul>
-
-<h4 id="community-logstash">Logstash</h4>
-<ul>
-  <li>
-    <a
-      href="https://gist.github.com/conorbranagan/c001078d148d2cab38a0">This script </a> will allow you to get data in from Logstash and was written by Datadog's very own <a href="https://gist.github.com/conorbranagan/">Conor Branagan</a>.
-  </li>
-</ul>
-
-<br /> -->
-
-
-
-<h3 class="community">インテグレーションライブラリー</h3>
-
-#### Saltstack {#community-saltstack}
-
-- [Datadog Salstack Formula](https://github.com/DataDog/datadog-formula)
-- [Datadog Saltstack](https://gist.github.com/mastrolinux/6175280) by [Luca Cipriani](https://gist.github.com/mastrolinux)
-
-
-#### Ansible {#ansible}
-
-- [Ansible script](https://gist.github.com/alekstorm/6350729) - Datadogのイベントストリームにイベントを投稿するためのコールバックプラグイン by [Alek Storm](https://gist.github.com/alekstorm).
-
-
-#### FreeSwitch {#community-freeswitch}
-
-- [FreeSwitch-DataDog-Metrics](https://github.com/wimactel/FreeSwitch-DataDog-Metrics) - FreeSwitch ESLアプリケーションの統計情報をDogStatsD APIを使ってDatadogに書きすための仕組みです。 by [WiMacTel](https://github.com/wimactel).
-
-#### Google Analytics {#community-google}
-
-- [casperjs-google-analytics-realtime-scrape](https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape) - Datadog APIを使って、Google Analyticsからデータを取り込むためのライブラリー.
-
-
-#### Pid-stats {#community-pidstats}
-
-- [pid-stats](https://github.com/gitterHQ/pid-stats) - StatsDからプロセス情報を生成するライブラリー by [GitterHQ](https://github.com/gitterHQ).
-
-
-#### Logstash {#community-logstash}
-
-- [dogstatsd.rb](https://gist.github.com/conorbranagan/c001078d148d2cab38a0) - Logstashからデータを取り込むためのライブラリー by Datadogメンバーの[Conor Branagan](https://gist.github.com/conorbranagan/).
-
-
-<br />
-
-
-<!-- <p class="alert alert-warning">
-If you've written a Datadog library, write us at <a
-href="mailto:code@datadoghq.com">code@datadoghq.com</a> and we'll be happy
-to add it to the list.
-</p> -->
-
-<p class="alert alert-warning">
-Datadogのライブラリーを開発した場合は、<a
-href="mailto:code@datadoghq.com">code@datadoghq.com</a>へ是非ご連絡ください。
-上記リストへ追加していきたいと思います。
-</p>
+<!--
+### API and DogStatsD Client Libraries
+
+The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
+-->
+### API と DogStatsD のクライアントライブラリー
+
+下記テーブルは、Datadog公式とコミュニティメンバーが開発した API と DogStatsD のクライアントライブラリーのリストです。いくつかのライブラリーは API と DogStatsD の両方をサポートしていますが、多くはいずれかをフォーカスしています。
+
+{{< classic-libraries-table >}}
+
+<!--
+### Tracing (APM) Client Libraries
+
+The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
+-->
+### トレース (APM) クライアントライブラリー
+
+下記テーブルは、Datadog公式とコミュニティメンバーが開発した [トレース (APM)](/tracing/) クライアントライブラリーのリストです。
+
+{{< tracing-libraries-table >}}
+
+<!--
+### Community Integrations
+-->
+### コミュニティメンバーによる Datadog Integrations
+
+<!--
+#### Ansible
+In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
+-->
+#### Ansible
+公式の Ansible インテグレーションに加えて、[Ansible公式のモニタリングセクション][46]で紹介されている、 [ansible-modules-extras][47]レポジトリがあります。Datadogにイベントをpostするものと、DatadogのMonitor設定をするものがあります。
+
+#### Consul
+Publish consul service counts into Datadog via dogstatsd with [this library][96].
+
+#### Dogscaler
+Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
+
+#### FreeSwitch
+This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
+
+#### Google Analytics
+You can get data into Datadog from Google Analytics using our API with [this library][50].
+
+#### Logstash Output
+  * [Logstash Output for Datadog][73]
+  * [Logstash Output for Dogstatsd][88]
+
+#### NGINX LUA
+  * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
+  * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
+
+#### Phusion Passenger
+Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
+
+#### Pid-stats
+This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
+
+#### Saltstack
+  * [Datadog Saltstack Formula][43]
+  * [Datadog Saltstack][44] written by [Luca Cipriani][45].
+
+### Community Agent Ports
+
+#### FreeBSD
+  * [FreeBSD dd-agent port][99]
+
+#### NixOS
+  * [dd-agent nixpkg][100]
+
+<!--
+If you've written a Datadog library and would like to add it to this page, write us at [code@datadoghq.com][9].
+-->
+Datadogのライブラリーを開発した場合は、是非 [code@datadoghq.com][9] にご連絡下さい。上記リストへ追加していきたいと思います。
+
+   [1]: https://github.com/DataDog/datadogpy
+   [3]: https://github.com/DataDog/dogapi-rb
+   [4]: https://github.com/DataDog/dogstatsd-ruby
+   [5]: https://github.com/DataDog/php-datadogstatsd
+   [6]: https://github.com/DataDog/dogstatsd-csharp-client
+   [7]: https://github.com/datadog/java-dogstatsd-client
+   [8]: http://www.indeed.com/
+   [9]: https://github.com/coursera/metrics-datadog
+   [10]: https://www.coursera.org/
+   [11]: https://github.com/bazaarvoice/metrics-datadog
+   [12]: http://www.bazaarvoice.com/
+   [13]: https://github.com/bazaarvoice/lassie
+   [14]: https://github.com/HashGo/node-datadog
+   [15]: https://github.com/HashGo
+   [16]: https://github.com/joybro/node-dogstatsd
+   [17]: https://github.com/joybro
+   [18]: https://github.com/brettlangdon/node-dogapi
+   [19]: https://github.com/brettlangdon
+   [20]: https://github.com/jpinkham/webservice-datadog
+   [21]: https://github.com/jpinkham
+   [22]: https://github.com/binary-com/dogstatsd-perl
+   [23]: https://github.com/zipkid
+   [24]: https://github.com/mavenlink/metriks-dogstatsd
+   [25]: https://github.com/eric/metriks
+   [26]: https://www.mavenlink.com/
+   [27]: https://github.com/isra00/plesk_datadog_metrics
+   [28]: http://www.parallels.com/products/plesk/
+   [29]: https://github.com/isra00
+   [30]: https://github.com/zorkian/go-datadog-api
+   [31]: https://github.com/zorkian
+   [32]: https://github.com/ooyala/go-dogstatsd/
+   [33]: https://github.com/ooyala
+   [34]: https://github.com/tbarbugli/scales_datadog
+   [35]: https://github.com/Cue/scales
+   [36]: https://github.com/tbarbugli
+   [37]: https://github.com/gphat/datadog-scala
+   [38]: https://github.com/gphat
+   [39]: https://github.com/CargoSense/ex_statsd
+   [40]: https://github.com/CargoSense
+   [41]: https://github.com/adamkittelson/dogstatsd-elixir
+   [42]: https://github.com/adamkittelson
+   [43]: https://github.com/DataDog/datadog-formula
+   [44]: https://gist.github.com/mastrolinux/6175280
+   [45]: https://gist.github.com/mastrolinux
+   [46]: https://docs.ansible.com/ansible/list_of_monitoring_modules.html
+   [47]: https://github.com/ansible/ansible-modules-extras
+   [48]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
+   [49]: https://github.com/wimactel
+   [50]: https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape
+   [51]: https://github.com/gitterHQ/pid-stats
+   [52]: https://github.com/gitterHQ
+   [53]: https://gist.github.com/conorbranagan/c001078d148d2cab38a0
+   [54]: https://gist.github.com/conorbranagan/
+   [56]: mailto:code@datadoghq.com
+   [57]: https://www.npmjs.com/package/datadog-metrics
+   [58]: https://twitter.com/dbader_org
+   [59]: https://github.com/arnabk/java-dogstatsd-client
+   [60]: https://github.com/arnabk
+   [61]: https://github.com/yyuu/hotdog
+   [62]: https://github.com/yyuu
+   [63]: https://github.com/PagerDuty/godspeed
+   [64]: http://www.pagerduty.com/
+   [65]: https://github.com/synrc/mtx
+   [66]: https://synrc.com/
+   [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
+   [68]: https://github.com/alq666/rdog
+   [69]: https://github.com/rs/xstats
+   [70]: https://github.com/rs
+   [71]: https://github.com/DataDog/datadog-go
+   [72]: https://github.com/simplifi/ngx_lua_datadog/
+   [73]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
+   [74]: https://github.com/remind101/ecsdog
+   [75]: http://ejholmes.io/
+   [76]: https://github.com/brightcove/hot-shots
+   [77]: https://github.com/Sjeanpierre/passenger-datadog-monitor
+   [78]: https://github.com/Sjeanpierre
+   [79]: https://github.com/mediba-system/lua-resty-dogstatsd
+   [80]: http://www.mediba.jp/
+   [81]: https://www.dropbox.com/
+   [82]: https://github.com/graze/dog-statsd
+   [83]: https://github.com/thephpleague/statsd
+   [84]: http://tech.graze.com/
+   [85]: https://github.com/rfrezino/datadog-delphi
+   [86]: https://github.com/miketheman/statsd.cr
+   [87]: https://github.com/miketheman
+   [88]: https://github.com/brigade/logstash-output-dogstatsd
+   [89]: https://github.com/neuecc/DatadogSharp
+   [90]: https://github.com/albert-io/spandex
+   [91]: https://github.com/chonton/apm-client
+   [92]: https://github.com/rochdev/datadog-tracer-js
+   [93]: https://github.com/gchaincl/dd-go-opentracing
+   [94]: https://github.com/jcchavezs/dd-trace-php/tree/master/src/DdTrace
+   [95]: https://github.com/flachnetz/dd-zipkin-proxy
+   [96]: https://github.com/zendesk/consul2dogstats
+   [97]: https://github.com/cvent/dogscaler
+   [98]: https://cran.r-project.org/package=datadogr
+   [99]: https://github.com/urosgruber/dd-agent-FreeBSD
+   [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nixs
