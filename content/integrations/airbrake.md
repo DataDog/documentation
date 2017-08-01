@@ -19,9 +19,20 @@ Connect Airbrake to Datadog to:
 
 ## Configuration
 
-Go to your Airbrake account page and copy your Account Name and Token into the form below.
-You can either choose to follow all projects or specify a project name to follow.
-If "All projects" box is ticked and a project name is specified, all projects will be followed.
+Setting up Airbrake integration using webhooks:
+
+1. Go to your Airbrake account Settings page
+
+2. For every project you want to enable, click "Integrations"
+
+3. Click on "WebHooks" and enter this URL in the "URL" field:
+```
+https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
+```
+
+4. Click "Save"
+
+Every time a new error occurs, it will appear in your stream.
 
 
 ## Metrics
