@@ -12,7 +12,6 @@
   {{ range $e := $.Site.Data.libraries.Classic }}
   <tbody>
     {{ range $libName, $info := . }}
-      {{ $libName }}
         {{ range $i, $el := $info }}
           <tr>
             <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>

@@ -5,6 +5,8 @@ kind: integration
 doclevel: basic
 ---
 
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" >}}
+
 ## Overview
 
 Catchpoint is a Digital Performance Analytics platform that gives you the power to deliver amazing user experiences.
@@ -25,7 +27,11 @@ No installation is required.
 To get Catchpoint alerts into your stream, login into the Catchpoint Portal and goto Settings > API.
 
 1. In the Alerts API select Enable
-2. . Enter the DataDog Endpoint URL. You will also need the DataDog API Key which can be created in the DataDog portal.
+2. . Enter the DataDog Endpoint URL. 
+```
+https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
+```
+You will also need the DataDog API Key which can be created in the DataDog portal.
 3. Set Status to Active
 4. Select Template for Format
 5. Add a new template
@@ -41,9 +47,8 @@ To get Catchpoint alerts into your stream, login into the Catchpoint Portal and 
     "source_type_name": "catchpoint"
 }
 {{< /highlight >}}
-
 Catchpoint will now send any alerts directly to the Events stream in DataDog.
-
+{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration" >}}
 
 ## Metrics
 
