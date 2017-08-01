@@ -15,6 +15,11 @@ Connect Riak to Datadog in order to:
   * Visualize Riak performance and utilization.
   * Correlate the performance of Riak with the rest of your applications.
 
+## Installation
+
+The Riak check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Riak servers. If you need the newest version of the check, install the `dd-check-riak` package.
+
+
 ## Configuration
 
 **The Riak integration requires the Datadog Agent >= 3.5.0**
@@ -50,4 +55,8 @@ Checks
 
 {{< get-metrics-from-git >}}
 
+## Service Checks
 
+**riak.can_connect**:
+
+Returns CRITICAL if the Agent cannot connect to the Riak stats endpoint to collect metrics, otherwise OK.
