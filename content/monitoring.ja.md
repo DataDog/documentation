@@ -387,7 +387,7 @@ point they should notify.
 ![network monitor](/images/monitor/network_monitor.png)
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
-the [guide to network checks](/guides/network_checks) for details on Agent
+the [guide to network checks](/integrations/tcpcheck) for details on Agent
 configuration.
 -->
 
@@ -395,7 +395,7 @@ configuration.
 
 ![network monitor](/images/guides/monitor/network_monitor.png)
 
-ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/guides/network_checks) を参照してください。
+ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/integrations/tcpcheck) を参照してください。
 
 <!--
 **Network Status**
