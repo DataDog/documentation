@@ -1,4 +1,8 @@
-{{ $.Scratch.Add "meta_image" (print "/" .Site.Params.home.meta_image) }}
+{{ if $.Params.image }}
+    {{ $.Scratch.Add "meta_image" (print "/" $.Params.image) }}
+{{ else }}
+    {{ $.Scratch.Add "meta_image" (print "/" .Site.Params.home.meta_image) }}
+{{ end }}
 {{ $meta_image := $.Scratch.Get "meta_image" }}
 
 {{ if $.Title }}
