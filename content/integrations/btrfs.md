@@ -14,6 +14,9 @@ Capture Btrfs metrics into Datadog to:
 * Visualize your file system performance.
 * Correlate the performance of Btrfs file system with the rest of your applications.
 
+## Installation 
+The Btrfs check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on every server that uses at least one Btrfs filesystem.
+
 ## Configuration 
 To capture Btrfs metrics you need to install the Datadog Agent:
 
