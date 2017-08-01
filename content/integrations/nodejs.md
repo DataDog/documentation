@@ -30,7 +30,7 @@ npm install node-dogstatsd
 var StatsD = require('node-dogstatsd').StatsD;
 var dogstatsd = new StatsD();
 
-# Increment a counter.
+// Increment a counter.
 dogstatsd.increment('page.views')
 {{< /highlight >}}
 
