@@ -10,10 +10,19 @@ git_integration_title: couchbase
 
 ## Overview
 
-Get metrics from Couchbase in real time to
+Identify busy buckets, track cache miss ratios, and more. This Agent check collects metrics like:
 
-* Visualize key Couchbase metrics
-* Correlate Couchbase performance with the rest of your applications
+* Hard disk and memory used by data
+* Current connections
+* Total objects
+* Operations per second
+* Disk write queue size
+
+And many more.
+
+# Installation
+
+The Couchbase check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Couchbase nodes.
 
 ## Configuration 
 
@@ -51,3 +60,13 @@ Checks
 ## Metrics
 
 {{< get-metrics-from-git >}}
+
+# Service Checks
+
+`couchbase.can_connect`:
+
+Returns `Critical` if the Agent cannot connect to Couchbase to collect metrics.
+
+# Further Reading
+
+To get a better idea of how (or why) to integrate your Couchbase cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog/) about it.
