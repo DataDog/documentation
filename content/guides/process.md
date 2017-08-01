@@ -35,7 +35,7 @@ After configuration is complete, restart the Agent.
 
 **Update to the Datadog Agent image version 5.16.0 or above**
 
-    $ docker pull datadoghq/dd-process-agent
+    $ docker pull datadog/docker-dd-agent
     
 **Installation**
 
