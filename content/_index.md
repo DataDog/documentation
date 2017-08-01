@@ -6,7 +6,7 @@ sidebar:
     - header: References
     - text: API
       href: "api/"
-    - text: Tracing (APM)
+    - text: APM (Tracing)
       href: "tracing/"
     - text: Libraries
       href: "libraries/"

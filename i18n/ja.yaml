@@ -11,7 +11,7 @@
   translation: "APIレファレンス"
 
 - id: menu_references_tracing
-  translation: "Tracing (APM)"
+  translation: "APM (Tracing)"
 
 - id: menu_references_libraries
   translation: "APIライブラリー"
@@ -101,7 +101,7 @@
   translation: "Agent インストールガイド"
 
 - id: customnav_tracingnav_tracing
-  translation: "Tracing (APM)"
+  translation: "APM (Tracing)"
 
 - id: customnav_tracingnav_install
   translation: "Installation & Configuration"

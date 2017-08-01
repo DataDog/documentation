@@ -20,7 +20,7 @@
   translation: "API"
 
 - id: menu_references_tracing
-  translation: "Tracing (APM)"
+  translation: "APM (Tracing)"
 
 - id: menu_references_libraries
   translation: "Libraries"
@@ -110,7 +110,7 @@
   translation: "From Source"
 
 - id: customnav_tracingnav_tracing
-  translation: "Tracing (APM)"
+  translation: "APM (Tracing)"
 
 - id: customnav_tracingnav_install
   translation: "Installation & Configuration"
@@ -183,7 +183,7 @@
 
 # Tracing menu
 - id: customnav_tracingnav_tracing
-  translation:  "Tracing (APM)"
+  translation:  "APM (Tracing)"
 
 - id: customnav_tracingnav_install
   translation:  "Installation & Configuation"

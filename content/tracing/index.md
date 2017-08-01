@@ -1,5 +1,5 @@
 ---
-title: Tracing (APM)
+title: APM (Tracing)
 kind: Documentation
 autotocdepth: 2
 hideguides: true

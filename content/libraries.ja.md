@@ -17,7 +17,7 @@ The following table lists Datadog-official and community contributed API and Dog
 {{< classic-libraries-table >}}
 
 <!--
-### Tracing (APM) Client Libraries
+### APM (Tracing) Client Libraries
 
 The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
 -->
