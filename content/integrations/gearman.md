@@ -52,3 +52,10 @@ Checks
 ## Metrics
 
 {{< get-metrics-from-git >}}
+
+
+## Service Checks
+
+`gearman.can_connect`:
+
+Returns `Critical` if the Agent cannot connect to Gearman to collect metrics.
