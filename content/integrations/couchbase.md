@@ -20,7 +20,7 @@ Identify busy buckets, track cache miss ratios, and more. This Agent check colle
 
 And many more.
 
-# Installation
+## Installation
 
 The Couchbase check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Couchbase nodes.
 
@@ -61,12 +61,12 @@ Checks
 
 {{< get-metrics-from-git >}}
 
-# Service Checks
+## Service Checks
 
 `couchbase.can_connect`:
 
 Returns `Critical` if the Agent cannot connect to Couchbase to collect metrics.
 
-# Further Reading
+## Further Reading
 
 To get a better idea of how (or why) to integrate your Couchbase cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog/) about it.
