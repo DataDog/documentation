@@ -44,6 +44,7 @@ For docker installation, follow the instructions for [docker-dd-agent](https://g
     -v /etc/passwd:/etc/passwd
     -e DD_PROCESS_AGENT_ENABLED=true
     -e HOST_PROC=/host/proc
+    -e HOST_SYS=/host/sys
 
 ### Kubernetes Daemonset
 
@@ -54,6 +55,8 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
         value: "true"
       - name: HOST_PROC
         value: /host/proc
+      - name: HOST_SYS
+        value: /host/sys
     volumeMount:
       - name: passwd
         mountPath: /etc/passwd
