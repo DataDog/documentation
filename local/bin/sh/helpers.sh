@@ -32,7 +32,7 @@ collect_static_assets() {
     s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
           --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
-          "${ARTIFACT_RESOURCE}/" s3://${STATIC_BUCKET}/documentation/ || (echo "failed to collect static to s3://${STATIC_BUCKET}/documentation/" && fail_step "${FUNCNAME}")
+          "${ARTIFACT_RESOURCE}/images/azure-image-4.gif" s3://${STATIC_BUCKET}/documentation/ || (echo "failed to collect static to s3://${STATIC_BUCKET}/documentation/" && fail_step "${FUNCNAME}")
     echo "Done collecting static."
     pass_step  "${FUNCNAME}"
 }
@@ -105,7 +105,6 @@ build_hugo_site() {
     # URL
     # ============ generate hugo config file ============ #
     start_step
-    echo "This is local"
     echo "building config for: ${CI_ENVIRONMENT_NAME}"
     if [[ "${CI_ENVIRONMENT_NAME}" == "preview" ]]; then
       printf "User-agent: *\nDisallow: /" >> "static/robots.txt"  # add a robots.txt to the preview site
