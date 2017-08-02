@@ -11,7 +11,7 @@ Connect to Google Cloud Platform to:
 
 * See your Google Compute Engine hosts in the infrastructure overview
 * Import your Google Compute Engine host tags
-* Tag your Google Compute Engine hosts with additional compute-specific metadata (e.g. zone)
+* Tag your Google Compute Engine hosts with additional GCP labels (only `key:value` label pattern are collected and defined as tag)
 
 Related integrations include:
 
