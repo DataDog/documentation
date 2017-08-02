@@ -2,6 +2,20 @@
 {{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" (.Get "src")) }}
 {{ $img := $.Scratch.Get "_img" }}
 
+{{ $image_type_arr := split (.Get "src") "." }}
+
+{{ $image_ext := index $image_type_arr 1 }}
+{{ if eq $image_ext "gif" }}
+  {{ $.Scratch.Add "img_param" "fit=max&w=850" }}
+{{ else if .Get "img_param" | len }}
+  {{ .Get "img_param" | $.Scratch.Add "img_param" }}
+{{ else }}
+  {{ $.Scratch.Add "img_param" "fit=max&w=850" }}
+{{ end }}
+
+{{ $img_param_q := "fm=jpg&q=10" }}
+{{ $img_param := $.Scratch.Get "img_param" }}
+
 {{/* override default imgix request params for popup img */}}
 {{ if .Get "pop_param" | len }}
   {{ .Get "pop_param" | $.Scratch.Add "pop_param" }}
@@ -19,9 +33,17 @@
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
-    <img class="{{- if .Get "responsive" }} img-responsive {{ end }}"
-         src="{{ print $img }}"
+    <img class="lazyload {{- if .Get "responsive" }} img-responsive {{ end }}"
+         src="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
          alt="{{ with .Get "alt"}}{{.}}{{end}}"
+         data-src="{{ print $img "?" $pop_param | relURL }}"
+         data-srcset="{{ print $img "?" $pop_param | relURL }}"
+         {{ if eq .Page.Type "blog" }}
+           srcset="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
+         {{ end }}
+         {{ if .Get "style" }}
+            style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
+         {{ end }}
     >
     {{- if .Get "popup" -}}
       </a>
