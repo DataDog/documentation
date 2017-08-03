@@ -34,7 +34,7 @@ import (
 // you'll have to have a http server running for expvar to use, for example
 // by adding the following to your init function
 func init() {
-    go http.ServeAndListen(":8080", nil)
+    go http.ListenAndServe(":8080", nil)
 }
 
 ...
