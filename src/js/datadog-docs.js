@@ -176,7 +176,6 @@ $(document).ready(function() {
     });
 
     if(toc) {
-        console.log(toc);
         headings.init();
     }
 
