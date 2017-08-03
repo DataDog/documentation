@@ -41,31 +41,31 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
 
     **Nova**
 
-        - "compute_extension:aggregates",
-        - "compute_extension:hypervisors",
-        - "compute_extension:server_diagnostics",
-        - "compute_extension:v3:os-hypervisors",
-        - "compute_extension:v3:os-server-diagnostics",
-        - "compute_extension:availability_zone:detail",
-        - "compute_extension:v3:availability_zone:detail",
-        - "compute_extension:used_limits_for_admin",
-        - "os_compute_api:os-aggregates:index",
-        - "os_compute_api:os-aggregates:show",
-        - "os_compute_api:os-hypervisors",
-        - "os_compute_api:os-hypervisors:discoverable",
-        - "os_compute_api:os-server-diagnostics",
-        - "os_compute_api:os-used-limits"
+        - "compute_extension": "aggregates",
+        - "compute_extension": "hypervisors",
+        - "compute_extension": "server_diagnostics",
+        - "compute_extension": "v3:os-hypervisors",
+        - "compute_extension": "v3:os-server-diagnostics",
+        - "compute_extension": "availability_zone:detail",
+        - "compute_extension": "v3:availability_zone:detail",
+        - "compute_extension": "used_limits_for_admin",
+        - "os_compute_api": "os-aggregates:index",
+        - "os_compute_api": "os-aggregates:show",
+        - "os_compute_api": "os-hypervisors",
+        - "os_compute_api": "os-hypervisors:discoverable",
+        - "os_compute_api": "os-server-diagnostics",
+        - "os_compute_api": "os-used-limits"
 
 
     **Neutron**
 
-        - "get_network"
+        - "get_network": ""
 
 
     **Keystone**
 
-        - "identity:get_project"
-        - "identity:list_projects"
+        - "identity": "get_project"
+        - "identity": "list_projects"
 
 
     You may need to restart your Keystone, Neutron and Nova API services to ensure that the policy changes take.
