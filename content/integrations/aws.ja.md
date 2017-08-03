@@ -1,5 +1,5 @@
 ---
-last_modified: 2017/01/25
+last_modified: 2017/08/03
 translation_status: progress
 language: ja
 title: Datadog-AWS Integration
