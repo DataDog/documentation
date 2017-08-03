@@ -28,7 +28,11 @@ Tick the checkbox if you want to be notified for every comment, in all configure
 
 You can now share graphs or send alerts to HipChat rooms using the syntax @hipchat-chat_name
 
-**NOTICE** : If your chat name contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names.
+**NOTICE** : 
+If you are using a V1 token, if your chat name contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names.
+
+If you want to use a V2 token, then your chat should only have lower case alphanumerical characters and the special characters '-' and '_'.
+
 
 #### Hipchat Server
 
