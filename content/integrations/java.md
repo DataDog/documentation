@@ -19,7 +19,7 @@ JMX Checks have a limit of 350 metrics per instance which should be enough to sa
 
 ## Installation
 
-Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
+Enable your local [JMX agent](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
 ## Configuration
 
