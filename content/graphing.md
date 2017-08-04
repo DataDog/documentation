@@ -131,20 +131,53 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 </div>
 
-### 6) Set Y-axis scale
+### 6) Perform metric arithemtic
+
+The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: +, -, /, * to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
+
+#### Metric Arithmetic Using an Integer
+
+You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric. 
+For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
+
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+
+This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2. 
+
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+
+#### Arithmetic between two Metrics
+
+If you would like to visualize the percentage of `jvm.heap_memory` used, you can perform the following arithmetic across two metrics already being reported to your Datadog application: 
+
+`jvm.heap_memory / jvm.heap_memory_max`
+
+This can be done in the same manner as above, utilizing the "advanced..." option in the Graph Editor. From there, you can select `add a metric to this expression`. 
+
+Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter: the first metric is represented by a, the second metric is represented b, and so on. 
+Then in the `Graph these queries as` box, you can enter the arithmetic you would like, in this case: `( a / b )`
+
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+
+<div class="alert alert-warning">
+If you are performing arithmetic on two or more metrics and see a blank graph,
+<a href="https://help.datadoghq.com/hc/en-us/articles/212009846-Why-does-graphing-a-grouped-arithmetical-metric-query-sometimes-yield-a-blank-graph">this help article discusses possible reasons</a>
+</div>
+
+### 7) Set Y-axis scale
 
 By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not.
 
-### 7) Overlay events for additional context
+### 8) Overlay events for additional context
 
 You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
 
 
-### 8) Create a title
+### 9) Create a title
 
 If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
-### 9) Save
+### 10) Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
