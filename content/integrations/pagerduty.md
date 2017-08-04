@@ -18,7 +18,18 @@ You can also check out [this documentation][1] from Pagerduty.
 Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends][2].
 {{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
 
+## Frequently Asked Questions
+### How to automatically resolve a PagerDuty service when a monitor recovers?
+
+In order to automatically resolve a PagerDuty service when a monitor recovers
+you have to include the pagerduty notification in the `{{is_resolve}}` context of your **Say what's happening** section of your monitor as follows:
+```
+{{#is_resolve}} 
+
+    This notification will only occur if the monitor resolves. 
+    If  @pagerduty-trigger was triggered for the alert, it'll be resolved as well 
+
+{{/is_resolve}}
+```
    [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide/
    [2]: https://app.datadoghq.com/report/pagerduty
-
-
