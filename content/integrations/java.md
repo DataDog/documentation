@@ -21,7 +21,7 @@ JMX Checks have a limit of 350 metrics per instance which should be enough to sa
 
 Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
-A remote connection is required for the Datadog Agent to connect to the JVM, even on the same host.
+A remote connection is required for the Datadog Agent to connect to the JVM, even when the two are on the same host.
 
 ## Configuration
 
