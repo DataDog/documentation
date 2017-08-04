@@ -40,33 +40,37 @@ To capture OpenStack metrics you need to install the Datadog Agent on your hosts
 ```role:datadog_monitoring``` requires access to the following operations:
 
     **Nova**
-
-        - "compute_extension": "aggregates",
-        - "compute_extension": "hypervisors",
-        - "compute_extension": "server_diagnostics",
-        - "compute_extension": "v3:os-hypervisors",
-        - "compute_extension": "v3:os-server-diagnostics",
-        - "compute_extension": "availability_zone:detail",
-        - "compute_extension": "v3:availability_zone:detail",
-        - "compute_extension": "used_limits_for_admin",
-        - "os_compute_api": "os-aggregates:index",
-        - "os_compute_api": "os-aggregates:show",
-        - "os_compute_api": "os-hypervisors",
-        - "os_compute_api": "os-hypervisors:discoverable",
-        - "os_compute_api": "os-server-diagnostics",
-        - "os_compute_api": "os-used-limits"
-
-
+{{< highlight json >}}
+{
+    "compute_extension": "aggregates",
+    "compute_extension": "hypervisors",
+    "compute_extension": "server_diagnostics",
+    "compute_extension": "v3:os-hypervisors",
+    "compute_extension": "v3:os-server-diagnostics",
+    "compute_extension": "availability_zone:detail",
+    "compute_extension": "v3:availability_zone:detail",
+    "compute_extension": "used_limits_for_admin",
+    "os_compute_api:os-aggregates:index": "rule:admin_api or role:datadog_monitoring",
+    "os_compute_api:os-aggregates:show": "rule:admin_api or role:datadog_monitoring",
+    "os_compute_api:os-hypervisors": "rule:admin_api or role:datadog_monitoring",
+    "os_compute_api:os-server-diagnostics": "rule:admin_api or role:datadog_monitoring",
+    "os_compute_api:os-used-limits": "rule:admin_api or role:datadog_monitoring"
+}
+{{< /highlight >}}
     **Neutron**
-
-        - "get_network": ""
-
+{{< highlight json >}}
+{
+    "get_network": "rule:admin_or_owner or rule:shared or rule:external or rule:context_is_advsvc or role:datadog_monitoring"
+}
+{{< /highlight >}}
 
     **Keystone**
-
-        - "identity": "get_project"
-        - "identity": "list_projects"
-
+{{< highlight json >}}
+{
+    "identity:get_project": "rule:admin_required or project_id:%(target.project.id)s or role:datadog_monitoring",
+    "identity:list_projects": "rule:admin_required or role:datadog_monitoring"
+}
+{{< /highlight >}}
 
     You may need to restart your Keystone, Neutron and Nova API services to ensure that the policy changes take.
 
