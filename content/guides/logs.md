@@ -67,10 +67,16 @@ In this format, the agent will attempt to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
-Agent collector logs. If the Agent is unable to import your function, there will
-be a line with `Could not load Dogstream line parser`. (On the other hand, if
-all goes well you should see `dogstream: parsing {filename} with
-{function name} (requested {config option text})`.)
+Agent collector logs: 
+
+* If the Agent is unable to import your function, there will be a line with `Could not load Dogstream line parser`. 
+
+* If all goes well you should see `dogstream: parsing {filename} with
+{function name} (requested {config option text})`.
+
+<div class="alert alert-warning">
+The Datadog agent is tailing your log files for log parsing, updating a single line in your log file won't trigger your Dogstreams, instead you should add your log to your file.
+</div>
 
 ### Writing Parsing Functions
 
