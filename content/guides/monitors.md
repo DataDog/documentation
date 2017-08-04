@@ -325,7 +325,7 @@ You can mute or resolve triggered monitors in bulk using the [Triggered Monitors
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page will show 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
 "high latency"`). This lets you easily mute or resolve a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
 
-In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes on what the Triggered Monitors page does differently:
+In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes on field differences on the Triggered Monitors page:
 
 * It uses the `group_status` field instead of `status`.
 * It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
