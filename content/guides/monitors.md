@@ -318,6 +318,19 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 {{< img src="guides/monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
 
+## Manage Triggered Monitors with group-level granularity
+
+You can mute or resolve triggered monitors in bulk using the [Triggered Monitors page](https://app.datadoghq.com/monitors/triggered). It's similar to the [Manage Monitors page](#managing-monitors)—you can find monitors by field using the same easy tickboxes or the powerful query syntax—but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page lists a row for _each group_ (i.e. each reporting source) of each monitor.
+
+Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page will show 14 rows if you search for the monitor by name in query search bar (e.g. `high latency` or `title:
+"high latency"`). This lets you easily mute or resolve a monitor for some reporting sources, but not for all.
+
+In writing your search queries, you can use all of the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes:
+
+* The `status` field is called `group_status` on the Triggered Monitors page.
+* The Triggered Monitors page adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
+* The page also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web02,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
+
 ## FAQs
 
 *Can I manage my monitors programmatically?*
