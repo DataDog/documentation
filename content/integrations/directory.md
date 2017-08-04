@@ -36,7 +36,7 @@ instances:
     # "countonly" - boolean, when true the stats will only count the number of files matching the pattern. Useful for very large directories.
 
 
-    -  directory: "/path/to/directory"
+    -  directory: "/absolute/path/to/directory"
        name: "tag_name"
        pattern: "*.log"
        recursive: True
