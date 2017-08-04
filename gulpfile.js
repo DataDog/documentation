@@ -39,7 +39,6 @@ for (var fileName in manifest.dependencies) {
     project["css"] = project["css"].concat(manifest.dependencies[fileName]["files"]);
   }
   var fileNameArray = fileName.split(".");
-  console.log();
   project.globs.push(
     {
       "type": fileNameArray[fileNameArray.length - 1],

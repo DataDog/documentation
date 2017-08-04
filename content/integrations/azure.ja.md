@@ -104,7 +104,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 <!-- ### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].
 After logging in, locate the settings page on the left side of the screen.
-![](integrations/azure/azure_tenent.png)
+{{< img src="integrations/azure/azure_tenent.png" >}}
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses. -->
 

@@ -4,7 +4,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.4"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.5"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -12,9 +12,9 @@ variables:
 
 # ================== copy scripts =============== #
 before_script:
-  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
   - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
   - find local/etc/ -type f -exec cp {} /etc \;  # load configs
+  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -42,6 +42,7 @@ build_preview:
     - sync_integration_metrics
     - build_hugo_site
     - minify_html
+    - collect_static_assets
     - push_site_to_s3
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     - remove_static_from_repo
@@ -102,6 +103,7 @@ build_live:
     - sync_integration_metrics
     - build_hugo_site
     - minify_html
+    - collect_static_assets
     - push_site_to_s3
     - create_artifact
   only:
