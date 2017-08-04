@@ -325,11 +325,11 @@ You can mute or resolve triggered monitors in bulk using the [Triggered Monitors
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page will show 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
 "high latency"`). This lets you easily mute or resolve a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
 
-In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes:
+In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes on what the Triggered Monitors page does differently:
 
-* The Triggered Monitors page uses `group_status` instead of `status`.
-* The Triggered Monitors page adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
-* The page also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
+* It uses the `group_status` field instead of `status`.
+* It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
+* It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
 ## FAQs
 
