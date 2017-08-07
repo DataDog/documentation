@@ -13,7 +13,7 @@ git_integration_title: hipchat
 Connect HipChat to Datadog in order to:
 
 * Receive notifications when someone posts on your stream.
-* Receive metric alerts and see graphs within Hipchat.
+* Receive metric alerts and see graphs within HipChat.
 
 ## Configuration
 
@@ -28,12 +28,15 @@ Tick the checkbox if you want to be notified for every comment, in all configure
 
 You can now share graphs or send alerts to HipChat rooms using the syntax @hipchat-chat_name
 
-**NOTICE** : If your chat name contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names.
+<div class="alert alert-warning">
+If you are using a HipChat API V1 token, if your HipChat handle contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names. <br><br>
+If you want to use a HipChat API V2 token, then your HipChat handle may ONLY have lowercase alphanumeric characters and the special characters '-' and '_'.
+</div>
 
-#### Hipchat Server
+#### HipChat Server
 
-If you use an on-premise Hipchat server, enter your server's hostname [here](https://app.datadoghq.com/account/settings#integrations/hipchat). 
-The server needs to be accessible from the outside world. Tick the checkbox ONLY if your Hipchat server's certificate is self-signed.
+If you use an on-premise HipChat server, enter your server's hostname [here](https://app.datadoghq.com/account/settings#integrations/hipchat). 
+The server needs to be accessible from the outside world. Tick the checkbox ONLY if your HipChat server's certificate is self-signed.
 
 {{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" >}}
 
