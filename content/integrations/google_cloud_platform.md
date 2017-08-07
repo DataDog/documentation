@@ -11,7 +11,7 @@ Connect to Google Cloud Platform to:
 
 * See your Google Compute Engine hosts in the infrastructure overview
 * Import your Google Compute Engine host tags
-* Tag your Google Compute Engine hosts with additional GCP labels (only `key:value` label pattern are collected and defined as a tag)
+* Tag your Google Compute Engine hosts with additional GCP labels
 
 Related integrations include:
 
@@ -76,5 +76,8 @@ Tags are automatically assigned based on a variety of configuration options with
 * Name
 
 To learn more about tags in the Datadog platform, refer to the [Guide to Tagging](/guides/tagging)
+
+**Notice**: Host Labels with a `key:value` pattern are collected and defined as a tag for your host in your Datadog Application
+
 
 [1]: https://support.google.com/cloud/answer/6293499?hl=en
