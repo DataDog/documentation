@@ -41,7 +41,11 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 1. After the feature has been enabled, visit the [New Account Page](https://app.datadoghq.com/account/new_org).
 2. Enter the name of the organization you wish to create and click the **Create** button.
 
-    {{< img src="guides/multiaccountorg/guides-multacct-createorg.png" alt="Create Org" >}}
+<div class="alert alert-warning">
+Please be aware that your org name should be <b> less than 32 characters</b>.
+</div>
+
+{{< img src="guides/multiaccountorg/guides-multacct-createorg.png" alt="Create Org" >}}
 
 A new trial account will be created. If you wish to add this account to your existing billing settings, please contact your sales representative.
 
@@ -50,7 +54,7 @@ A new trial account will be created. If you wish to add this account to your exi
 1. Go to your [Account Profile page](https://app.datadoghq.com/account/profile).
 2. Scroll down to Organizations and click **Leave** next to the org you want to leave.
 
-    {{< img src="guides/multiaccountorg/guides-multacct-leaveorg.png" alt="Leave Org" >}}
+{{< img src="guides/multiaccountorg/guides-multacct-leaveorg.png" alt="Leave Org" >}}
 
 
 To add, disable, and promote members, see the instructions above for Teams.
