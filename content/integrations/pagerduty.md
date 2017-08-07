@@ -33,3 +33,9 @@ you must include the PagerDuty notification in the `{{is_resolve}}` context of y
 ```
    [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide/
    [2]: https://app.datadoghq.com/report/pagerduty
+
+### How do I send a message/notification to a specific Pager Duty service when multiple are integrated ?
+
+Use "@pagerduty-[serviceName]" in your monitor message. If you start typing it in your monitor **Say what's happening** section, you should see it autocomplete. 
+
+{{< img src="integrations/pagerduty/pagerduty_faq_1.png" >}}
