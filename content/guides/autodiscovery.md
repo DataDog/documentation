@@ -275,6 +275,52 @@ spec:
         - containerPort: 80
 ~~~
 
+
+
+
+
+### Template Source: Docker Label Annotations
+
+Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+
+Autodiscovery expects labels to look like these examples, depending on the file type:
+
+**Dockerfile**
+~~~
+LABEL "com.datadoghq.sd.check_names"='[<CHECK_NAME>]'
+LABEL "com.datadoghq.sd.init_configs"='[<INIT_CONFIG>]'
+LABEL "com.datadoghq.sd.instances"='[<INSTANCE_CONFIG>]'
+~~~
+
+**docker-compose.yaml**
+~~~
+labels:
+  com.datadoghq.sd.check_names: '[<CHECK_NAME>]'
+  com.datadoghq.sd.init_configs: '[<INIT_CONFIG>]'
+  com.datadoghq.sd.instances: '[<INSTANCE_CONFIG>]'
+~~~
+
+**docker run command**
+~~~
+-l com.datadoghq.sd.check_names='[<CHECK_NAME>]' -l com.datadoghq.sd.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.sd.instances='[<INSTANCE_CONFIG>]'
+~~~
+
+
+#### Docker Example: NGINX Dockerfile
+
+The following Dockerfile will launch an NGINX container with autodiscovery enabled:
+
+~~~
+FROM nginx
+
+EXPOSE 8080
+COPY nginx.conf /etc/nginx/nginx.conf
+LABEL "com.datadoghq.sd.check_names"='["nginx"]'
+LABEL "com.datadoghq.sd.init_configs"='[{}]'
+LABEL "com.datadoghq.sd.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
+~~~
+
+
 # Reference
 
 ### Template Variable Indexes
