@@ -632,7 +632,7 @@
               </li>
               {{ partial "argument.html" (dict "context" $dot "name" "name" "description" "The name of the alert." "default" "dynamic, based on query") }}
               {{ partial "argument.html" (dict "context" $dot "name" "message" "description" "A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events." "default" "dynamic, based on query") }}
-              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags. will only be available via the API and will not be visible or editable in the Datadog UI." "default" "empty list") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "tags" "description" "A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the <code>monitor_tags</code> argument to filter results by these tags. It will only be available via the API and will not be visible or editable in the Datadog UI." "default" "empty list") }}
               <li>
                 <strong>options [optional]</strong>
                 <div>A dictionary of options for the monitor. There are options that
