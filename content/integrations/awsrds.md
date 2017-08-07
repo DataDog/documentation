@@ -66,6 +66,24 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
   16. Choose the **Enable Now** radio button.
   17. Click the **Create Function** button.
 
+<div class="alert alert-warning">
+When clicking on test button for your lambda function you might get this error:
+
+{{< highlight json >}}
+{ 
+  "stackTrace": [ [ "/var/task/lambda_function.py", 
+    109, 
+    "lambda_handler", 
+    "event = json.loads(gzip.GzipFile(fileobj=StringIO(event['awslogs']['data'].decode('base64'))).read())" 
+    ] 
+  ], 
+  "errorType": "KeyError", 
+  "errorMessage": "'awslogs'" 
+}
+{{< /highlight >}}
+
+Please ignore it, the Test button doesn't work with this setup.
+</div>
 
 ### Native Database Integration
 
