@@ -4,6 +4,7 @@ integration_title: TCP Check
 kind: integration
 newhlevel: true
 update_for_agent: 5.8.5
+git_integration_title: tcp_check
 aliases:
   - /guides/network_checks
 ---
@@ -70,3 +71,7 @@ Checks
     - instance #1 [OK]
     - Collected 2 metrics, 0 events & 3 service checks
 {{< /highlight >}}
+
+## Metrics
+
+{{< get-metrics-from-git >}}
