@@ -42,7 +42,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 2. Enter the name of the organization you wish to create and click the **Create** button.
 
 <div class="alert alert-warning">
-Please be aware that your org name should be <b> less than 32 characters</b>.
+Please be aware that your organization name should be <b>less than 32 characters</b>.
 </div>
 
 {{< img src="guides/multiaccountorg/guides-multacct-createorg.png" alt="Create Org" >}}
