@@ -16,7 +16,7 @@ With Datadog and CloudHealth, you can:
 * Visualize your assets across clouds aligned to line of business
 
 <div class="alert alert-warning">
-No data is collected from cloudhealth for your Datadog application, Cloudhealth actually polls your infrastructure metrics to be used as part of their Rightsizing analysis.
+No data is collected from Cloudhealth for your Datadog application, Cloudhealth actually polls your infrastructure metrics to be used as part of their Rightsizing analysis.
 </div>
 
 ## Configuration
