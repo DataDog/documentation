@@ -34,4 +34,4 @@ If you have the following error while trying to save your pingdom integration:
 
 `“There was an issue while testing your Pingdom configuration: Not permitted for account type”`.
 
-Add the email address of your pingdom account owner in the "(Optional) Account to query" field, then save your integration.
+Add the email address of your pingdom account owner in the **(Optional) Account to query** field, then save your integration.
