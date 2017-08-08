@@ -91,7 +91,7 @@ In the screenshot below the size of the hexagons is the 15 minute average load, 
 
 {{< img src="guides/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size">}}
 
-**Note**: that the “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
+**Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
 
 ### Data freshness and meaning
 
