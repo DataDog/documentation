@@ -197,8 +197,6 @@ Note that the “% CPU utilized” metric uses the most reliable and up-to-date 
 
 {{< img src="guides/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size">}}
 
-現状では'Color by'セレクターと'Size by'セレクターは、load、idle、waitなどのCPUに関連したメトリクスに限られていますが、この部分で選択できるメトリクスについては近々増強される予定です。
-
 注) "% CPU utilized"のメトリクスは、 Datadog Agentからか、AWS CloudWatchからか、vSphereからかに関わらず、**最も信頼性の高い最新のCPU使用率の測定値** を表示しています。
 
 

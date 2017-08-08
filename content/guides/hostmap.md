@@ -83,13 +83,15 @@ When you’ve identified a host that you want to investigate, click it for detai
 
 ### Shapes and colors
 
-By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
+By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the `Color by` selector. 
+
+The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the `Size by` selector. 
+
+In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
 {{< img src="guides/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size">}}
 
-Today the ‘Color by’ selector and ‘Size by’ selector contain only CPU-based metrics: load, idle, wait, etc. We will be adding additional metrics in the very near future.
-
-Note that the “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
+**Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
 
 ### Data freshness and meaning
 
