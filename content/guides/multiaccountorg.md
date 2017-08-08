@@ -39,6 +39,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 ### Create a New Organization
 
 1. After the feature has been enabled, visit the [New Account Page](https://app.datadoghq.com/account/new_org).
+
 2. Enter the name of the organization you wish to create and click the **Create** button. **The organization name cannot exceed 32 characters.**
 
 {{< img src="guides/multiaccountorg/guides-multacct-createorg.png" alt="Create Org" >}}
