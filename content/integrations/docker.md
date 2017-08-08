@@ -29,7 +29,7 @@ Whichever you choose, your hosts need to have cgroup memory management enabled f
 2. Install the Agent as described in [the Agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
 3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
 4. Add the Agent user to the docker group: `usermod -a -G docker dd-agent`
-5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
+5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/conf.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     {{< img src="integrations/docker/integrations-docker-dockerps.png" >}}
 
