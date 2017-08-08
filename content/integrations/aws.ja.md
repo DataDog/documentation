@@ -1,5 +1,5 @@
 ---
-last_modified: 2017/01/25
+last_modified: 2017/08/03
 translation_status: progress
 language: ja
 title: Datadog-AWS Integration
@@ -130,49 +130,58 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 1. まず、[IAMコンソール][1]に移動し、新しいポリシーを作成します。 その新しく作ったポリシーを`DatadogAWSIntegrationPolicy`として登録します。ここで設定する名前は自由です選択することができます。Datadogが提供するすべてのAWS系インテグレーションを活用するには、次に紹介するJSONの内容を使ってください。尚、AWS系インテグレーションに新コンポーネントを追加する際に、アクセス許可の項目が変更されることがあります。
 
         {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Action": [
-                "autoscaling:Describe*",
-                "budgets:ViewBudget",
-                "cloudtrail:DescribeTrails",
-                "cloudtrail:GetTrailStatus",
-                "cloudwatch:Describe*",
-                "cloudwatch:Get*",
-                "cloudwatch:List*",
-                "dynamodb:list*",
-                "dynamodb:describe*",
-                "ec2:Describe*",
-                "ec2:Get*",
-                "ecs:Describe*",
-                "ecs:List*",
-                "elasticache:Describe*",
-                "elasticache:List*",
-                "elasticloadbalancing:Describe*",
-                "elasticmapreduce:List*",
-                "elasticmapreduce:Describe*",
-                "es:ListTags",
-                "es:ListDomainNames",
-                "es:DescribeElasticsearchDomains",
-                "kinesis:List*",
-                "kinesis:Describe*",
-                "logs:Get*",
-                "logs:Describe*",
-                "logs:FilterLogEvents",
-                "logs:TestMetricFilter",
-                "rds:Describe*",
-                "rds:List*",
-                "route53:List*",
-                "s3:GetBucketTagging",
-                "s3:ListAllMyBuckets",
-                "ses:Get*",
-                "sns:List*",
-                "sns:Publish",
-                "support:*"
-              ],
-              "Effect": "Allow",
-              "Resource": "*"
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "autoscaling:Describe*",
+              "budgets:ViewBudget",
+              "cloudtrail:DescribeTrails",
+              "cloudtrail:GetTrailStatus",
+              "cloudwatch:Describe*",
+              "cloudwatch:Get*",
+              "cloudwatch:List*",
+              "codedeploy:List*",
+              "codedeploy:BatchGet*",
+              "dynamodb:list*",
+              "dynamodb:describe*",
+              "ec2:Describe*",
+              "ec2:Get*",
+              "ecs:Describe*",
+              "ecs:List*",
+              "elasticache:Describe*",
+              "elasticache:List*",
+              "elasticfilesystem:DescribeFileSystems",
+              "elasticfilesystem:DescribeTags",
+              "elasticloadbalancing:Describe*",
+              "elasticmapreduce:List*",
+              "elasticmapreduce:Describe*",
+              "es:ListTags",
+              "es:ListDomainNames",
+              "es:DescribeElasticsearchDomains",
+              "kinesis:List*",
+              "kinesis:Describe*",
+              "lambda:List*",
+              "logs:Get*",
+              "logs:Describe*",
+              "logs:FilterLogEvents",
+              "logs:TestMetricFilter",
+              "rds:Describe*",
+              "rds:List*",
+              "route53:List*",
+              "s3:GetBucketTagging",
+              "s3:ListAllMyBuckets",
+              "ses:Get*",
+              "sns:List*",
+              "sns:Publish",
+              "sqs:ListQueues",
+              "support:*",
+              "tag:getResources",
+              "tag:getTagKeys",
+              "tag:getTagValues"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
             }
           ]
         }
