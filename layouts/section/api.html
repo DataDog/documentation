@@ -15,6 +15,7 @@
               <a class="btn btn-default gradient" href="#authentication">Auth</a>
               <a class="btn btn-default gradient" href="#errors">Errors</a>
               <a class="btn btn-default gradient" href="#ratelimiting">Rate Limiting</a>
+              <a class="btn btn-default gradient" href="#usage_metering">Usage Metering</a>
               <a class="btn btn-default gradient" href="#metrics">Metrics</a>
               <a class="btn btn-default gradient" href="#events">Events</a>
               <a class="btn btn-default gradient" href="#service_checks">Checks</a>
@@ -165,6 +166,105 @@
           </div>
         </div>
 
+        <!--
+       =====================================================================
+        Usage Metering
+       ====================================================================
+        -->
+
+        <div class="int-anchor" id="usage_metering"></div><a href="#usage_metering"><h3>Usage Billing Metrics</h3></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <p>
+              The usage metering end-point allows you to:
+            </p>
+            <ul>
+              <li>Get Usage For Hosts and Containers</li>
+              <li>Get Top Custom Metrics By Hourly Average</li>
+              <li>Get Usage For Custom Metrics</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lang-specific lang-specific-console">
+        <div class="int-anchor" id="get-billing-usage-hosts"></div><a href="#get-billing-usage-hosts"><h4>Get Usage For Hosts and Containers</h4></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <p>
+              Get Usage For Hosts and Containers. This endpoint is not available in the Python and Ruby libraries.
+            </p>
+
+            <h5>Arguments</h5>
+            <ul class="arguments">
+              {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+              {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+              {{ partial "argument.html" (dict "context" $dot "name" "fill_gaps" "description" "If \"true\", gaps in the specified range where no usage was recorded will be filled in with rows containing zeroes. Gaps will not be filled past the last available hour" "lang" "console" "default" "false")}}
+            </ul>
+          </div>
+          <div class="col-xs-12 col-md-6 api-right">
+            <h5>Signature</h5>
+            <code>GET https://app.datadoghq.com/api/v1/usage/hosts</code>
+            <h5>Example Request</h5>
+              {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-billing-usage-hosts.sh" ) }}
+            <h5>Example Response</h5>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-hosts.sh" ) }}
+          </div>
+        </div>
+        </div>
+
+        <div class="int-anchor" id="billing-usage-top-avg-metrics"></div><a href="#billing-usage-top-avg-metrics"><h4>Get Top Custom Metrics By Hourly Average</h4></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <p>
+              Get Top Custom Metrics By Hourly Average. This endpoint is not available in the Python and Ruby libraries.
+            </p>
+            <h5>Arguments</h5>
+            <ul class="arguments">
+            {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "category" "description" "category of the metrics [custom/standard]" "lang" "console" "default" "custom")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "names" "description" "comma-separated list of metric names" "lang" "console" "default" "None")}}
+            </ul>
+          </div>
+          <div class="col-xs-12 col-md-6 api-right">
+            <h5>Signature</h5>
+            <code>GET https://app.datadoghq.com/api/v1/usage/top_avg_metrics</code>
+            <h5>Example Request</h5>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-top-avg-metrics.sh" )}}
+            <h5>Example Response</h5>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-top-avg-metrics.sh" ) }}
+          </div>
+        </div>
+
+        <div class="int-anchor" id="billing-usage-timeseries"></div><a href="#billing-usage-timeseries"><h4>Get Usage For Custom Metrics.</h4></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <p>
+              Get Usage For Custom Metrics. This endpoint is not available in the Python and Ruby libraries.
+            </p>
+
+            <h5>Arguments</h5>
+            <ul class="arguments">
+            {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "fill_gaps" "description" "If \"true\", gaps in the specified range where no usage was recorded will be filled in with rows containing zeroes. Gaps will not be filled past the last available hour" "lang" "console" "default" "false")}}
+            </ul>
+          </div>
+          <div class="col-xs-12 col-md-6 api-right">
+            <h5>Signature</h5>
+            <code>GET https://app.datadoghq.com/api/v1/usage/timeseries</code>
+            <h5>Example Request</h5>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" )}}
+            <h5>Example Response</h5>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" ) }}
+          </div>
+        </div>
+
+        <!--
+        =====================================================================
+        === Usage Metering Ends ===
+        ====================================================================
+        -->
 
         <!--
        =====================================================================
