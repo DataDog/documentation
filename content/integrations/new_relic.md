@@ -15,6 +15,8 @@ Connect to New Relic to:
 * See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
 * See New Relic alerts in your event stream
 
+**Notice**: Metrics can only be imported for New Relic customers at the Pro level or above.
+
 ## Installation
 
 ### New Relic Alerts in Event Stream
@@ -26,17 +28,15 @@ Connect to New Relic to:
 
 ### New Relic APM Metric Collection
 
-1.  Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
-  *  *Metrics can only be imported for New Relic customers at the Pro level or above.*
-  * *Make sure you're using the the REST API Key, the User API Keys won't work*
+1.  Locate your REST API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
 
-2.  If you wish to tag metrics at an account level, please add an account tag.
+2.  To tag all metrics with your New Relic account number, add an account tag.
 
 3.  Choose whether you want to collect your metrics per hosts or app-wide.
     *Note: Enabling this options will import New Relic hosts to Datadog.*
 
 <div class="alert alert-warning">
-Please be aware that new-relic custom metrics may take 5-10 minutes to show up in your Datadog application at first
+New Relic custom metrics may take 5-10 minutes to show up in Datadog.
 </div>
 
 ## Metrics
