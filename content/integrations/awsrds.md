@@ -66,7 +66,8 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
   16. Choose the **Enable Now** radio button.
   17. Click the **Create Function** button.
 
-<div class="alert alert-warning">
+---- 
+
 When clicking on test button for your lambda function you might get this error:
 
 {{< highlight json >}}
@@ -83,7 +84,6 @@ When clicking on test button for your lambda function you might get this error:
 {{< /highlight >}}
 
 Please ignore it, the Test button doesn't work with this setup.
-</div>
 
 ### Native Database Integration
 
