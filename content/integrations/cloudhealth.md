@@ -8,16 +8,9 @@ newhlevel: true
 
 ## Overview
 
-With Datadog and CloudHealth, you can:
+If you use both Cloudhealth and Datadog, you can configure your Cloudhealth account to collect per-instance resource usage metrics from Datadog. This helps CloudHealth gives you more accurate recommendations for adjusting your cloud resources.
 
-* Reduce cost by right sizing and optimizing your AWS environment using granular data from Datadog
-* Automate policies and governance to reduce risk
-* Tackle Reserved Instances with confidence using CloudHealth's analysis and automation
-* Visualize your assets across clouds aligned to line of business
-
-<div class="alert alert-warning">
-No data is collected from Cloudhealth for your Datadog application, Cloudhealth actually polls your infrastructure metrics to be used as part of their Rightsizing analysis.
-</div>
+This integration does **NOT** pull anything from Cloudhealth into Datadog. It just helps Cloudhealth poll your Datadog account for metrics.
 
 ## Configuration
 
