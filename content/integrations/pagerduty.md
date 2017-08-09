@@ -18,11 +18,10 @@ You can also check out [this documentation][1] from Pagerduty.
 Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends][2].
 {{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
 
-## FAQ
+## Troubleshooting
 ### How do I automatically resolve a PagerDuty service when a monitor recovers?
 
-To automatically resolve a PagerDuty service when a monitor recovers
-you must include the PagerDuty notification in the `{{is_resolve}}` context of your **Say what's happening** section of your monitor as follows:
+You must include the PagerDuty notification in the `{{is_resolve}}` context of your **Say what's happening** section of your monitor as follows:
 ```
 {{#is_resolve}} 
 
