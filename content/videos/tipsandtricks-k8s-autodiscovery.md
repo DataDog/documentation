@@ -24,5 +24,3 @@ Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make runni
 * [Set Up Annotations](?wtime=210)
 * [Setting Up Multiple Configurations](?wtime=306)
 
-
-Sign up for a trial account here: [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)
