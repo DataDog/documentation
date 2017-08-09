@@ -66,7 +66,7 @@ to take advantage of that to help identify the sending application.
 
 In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
-alert type,  date happened,  host, aggregation key, and source type name.<br>**Notice: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
+alert type,  date happened,  host, aggregation key, and source type name.<br>**Note: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
 
 {{< img src="guides/eventsemail/json-email.png" >}}
 
