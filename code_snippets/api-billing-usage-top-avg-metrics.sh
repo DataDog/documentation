@@ -10,5 +10,4 @@ curl -G \
     -d "application_key=${app_key}" \
     -d "start_hr=${start_hr}" \
     -d "end_hr=${end_hr}" \
-    -d "category=standard" \
     -d "names=aws.ec2.spot_history,system.processes.number"

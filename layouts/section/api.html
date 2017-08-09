@@ -172,16 +172,16 @@
        ====================================================================
         -->
 
-        <div class="int-anchor" id="usage_metering"></div><a href="#usage_metering"><h3>Usage Billing Metrics</h3></a>
+        <div class="int-anchor" id="usage_metering"></div><a href="#usage_metering"><h3>Usage Metering</h3></a>
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <p>
               The usage metering end-point allows you to:
             </p>
             <ul>
-              <li>Get Usage For Hosts and Containers</li>
-              <li>Get Top Custom Metrics By Hourly Average</li>
-              <li>Get Usage For Custom Metrics</li>
+              <li><a href="#get-billing-usage-hosts">Get Usage For Hosts and Containers </a></li>
+              <li><a href="#billing-usage-top-avg-metrics">Get Top Custom Metrics By Hourly Average </a></li>
+              <li><a href="#billing-usage-timeseries">Get Usage For Custom Metrics </a></li>
             </ul>
           </div>
         </div>
@@ -192,6 +192,7 @@
           <div class="col-xs-12 col-md-6 api-left">
             <p>
               Get Usage For Hosts and Containers. This endpoint is not available in the Python and Ruby libraries.
+              <div class="c">The most recent usage data is 3 days old</div>
             </p>
 
             <h5>Arguments</h5>
@@ -218,6 +219,7 @@
             <p>
               Get Top Custom Metrics By Hourly Average. This endpoint is not available in the Python and Ruby libraries.
             </p>
+            <div class="c">The most recent usage data is 3 days old</div>
             <h5>Arguments</h5>
             <ul class="arguments">
             {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
@@ -242,7 +244,7 @@
             <p>
               Get Usage For Custom Metrics. This endpoint is not available in the Python and Ruby libraries.
             </p>
-
+            <div class="c">The most recent usage data is 3 days old</div>
             <h5>Arguments</h5>
             <ul class="arguments">
             {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
