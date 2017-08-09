@@ -44,7 +44,7 @@ stream. Here are examples of each:
 #### Source Email
 
 In the source plain text email, you only have three fields you can control: sender
-email address (mandatory), subject (mandatory), and body (optional).
+email address (required), subject (required), and body (optional).
 
 
 {{< img src="guides/eventsemail/plain-email.png" >}}
