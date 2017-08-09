@@ -28,3 +28,10 @@ Pingdom events can be added by configuring the relevant [Integration Status Moni
 {{< get-metrics-from-git >}}
 
 
+## Troubleshooting
+### Why am I getting an error when updating user/password?
+You may have seen the following when saving your pingdom credentials:
+
+`“There was an issue while testing your Pingdom configuration: Not permitted for account type”`.
+
+Add the email address of your pingdom account owner in the **(Optional) Account to query** field, then save.
