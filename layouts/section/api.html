@@ -872,6 +872,24 @@
           </div>
         </div>
 
+
+        <!-- Resolve monitor -->
+        <div class="int-anchor" id="monitor-resolve"></div><a href="#monitor-resolve"><h4>Resolve monitor</h4></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <h5>Arguments</h5>
+              {{ partial "argument.html" (dict "context" $dot "name" "resolve" "description" "Array of group(s) to resolve for a given monitor_id e.g. <code>monitor_id:group_to_resolve </code> <br><b>Note:</b> It supports multiple groups per monitor as well eg:<br> <code> resolve: [monitor_id: group_1, monitor_id: group_2] </code>") }}
+          </div>
+          <div class="col-xs-12 col-md-6 api-right">
+            <h5>Signature</h5>
+            <code>POST /monitor/bulk_resolve</code>
+            <h5>Example Request</h5>
+            {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-monitor-bulk-resolve.sh" ) }}
+            <h5>Example Response</h5>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-monitor-bulk-resolve.sh" ) }}
+          </div>
+        </div>
+
         <!-- Mute all monitors -->
         <div class="int-anchor" id="monitor-mute-all"></div><a href="#monitor-mute-all"><h4>Mute all monitors</h4></a>
         <div class="row">
