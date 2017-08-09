@@ -61,10 +61,9 @@ end
 {{< /highlight >}}
 
 ## Troubleshooting
-### Why errors in my Sentry account don't show up in my Datadog application?
+### Why aren't my Sentry errors showing up in Datadog?
 
-It's most likely your Webhook on the Sentry side that isn't triggering. 
-This have two main reasons:
+Your Sentry Webhook probably isn't triggering. This could be caused by:
 
 * **Alerts are only sent when a rule is triggered**:<br>
 For example, if the rule condition is when "an event is first seen", an alert will not be dispatched until a new issue is created. (Depending on how many unique issues your project is receiving, this can take some time.) 
