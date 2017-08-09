@@ -10,10 +10,5 @@
       "num_standard_timeseries": 421266,
       "hour": "2017-05-01T15"
     }
-  ],
-  parameters: {
-    start_hr: "2017-07-24T00",
-    fill_gaps: false,
-    end_hr: "2017-07-25T00"
-  }
+  ]
 }

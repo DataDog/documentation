@@ -9,5 +9,4 @@ curl -G \
     -d "api_key=${api_key}" \
     -d "application_key=${app_key}" \
     -d "start_hr=${start_hr}" \
-    -d "end_hr=${end_hr}" \
-    -d "fill_gaps=false"
+    -d "end_hr=${end_hr}"
