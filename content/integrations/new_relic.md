@@ -6,13 +6,13 @@ git_integration_title: new_relic
 newhlevel: true
 ---
 
-## Overview
-
 {{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" >}}
+
+## Overview
 
 Connect to New Relic to:
 
-* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
+* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics<br> **(only works with New Relic Pro accounts and above)**
 * See New Relic alerts in your event stream
 
 ## Installation
@@ -20,21 +20,22 @@ Connect to New Relic to:
 ### New Relic Alerts in Event Stream
 
 1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
+`https://app.datadoghq.com/intake/webhooknewrelic?api_key={YOUR_DATADOG_API_KEY}`
 
-        https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}
-
-1.  For 'Custom Payload'(s), select JSON 'Payload Type'.
+2.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 
 ### New Relic APM Metric Collection
 
-1.  Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
+1.  Locate your REST API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
 
-    *Note: Metrics can only be imported for New Relic customers at the Pro level or above.*
+2.  To tag all metrics with your New Relic account number, add an account tag.
 
-1.  If you wish to tag metrics at an account level, please add an account tag.
-1.  Choose whether you want to collect your metrics per hosts or app-wide.
-
+3.  Choose whether you want to collect your metrics per hosts or app-wide.
     *Note: Enabling this options will import New Relic hosts to Datadog.*
+
+<div class="alert alert-warning">
+New Relic custom metrics may take 5-10 minutes to show up in Datadog.
+</div>
 
 ## Metrics
 
