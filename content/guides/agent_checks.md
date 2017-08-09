@@ -489,7 +489,7 @@ If your issue continues, please reach out to Support with the help page that
 #### Testing custom checks on Windows
 
 * **For agent version < 5.12**:<br>
-Testing custom checks on Windows is easy. The Agent install includes a file called shell.exe
+The Agent install includes a file called shell.exe
 in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
 Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files
 in their correct places, you can run the following in shell.exe:
