@@ -59,3 +59,14 @@ Raven.configure do |config|
   config.tags = { hostname: "host01" }
 end
 {{< /highlight >}}
+
+## Troubleshooting
+### Why aren't my Sentry errors showing up in Datadog?
+
+Your Sentry Webhook probably isn't triggering. This could be caused by:
+
+* **Alerts are only sent when a rule is triggered**:<br>
+For example, if the rule condition is when "an event is first seen", an alert will not be dispatched until a new issue is created. (Depending on how many unique issues your project is receiving, this can take some time.) 
+
+* **The notification integration is disabled**:<br>
+Ensure that the notification integration is enabled under the rule actions, either as the specific service, or covered under "all enabled services".
