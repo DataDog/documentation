@@ -1,5 +1,5 @@
 ---
-title: Datadog 101 - Overview
+title: Datadog Tips & Tricks - Datadog Autodiscovery on Kubernetes
 kind: video
 language: en
 wistiaid: ypvryxgc2c
