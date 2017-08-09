@@ -12,10 +12,8 @@ newhlevel: true
 
 Connect to New Relic to:
 
-* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
+* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics<br> **(only works with New Relic Pro accounts and above)**
 * See New Relic alerts in your event stream
-
-**Notice**: Metrics can only be imported for New Relic customers at the Pro level or above.
 
 ## Installation
 
