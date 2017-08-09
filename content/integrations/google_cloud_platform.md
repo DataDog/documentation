@@ -33,7 +33,7 @@ Related integrations include:
 
 From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
 
-To configure GCP integration, you need these permissions:
+To configure the GCP integration, you need these permissions:
 
 ~~~
 https://www.googleapis.com/auth/compute.readonly
