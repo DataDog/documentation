@@ -44,7 +44,7 @@ stream. Here are examples of each:
 #### Source Email
 
 In the source plain text email, you only have three fields you can control: sender
-email address, subject, and body.
+email address, subject, and body. Note that that the subject line is mandatory.
 
 
 {{< img src="guides/eventsemail/plain-email.png" >}}
@@ -66,7 +66,7 @@ to take advantage of that to help identify the sending application.
 
 In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
-alert type,  date happened,  host, aggregation key, and source type name.
+alert type,  date happened,  host, aggregation key, and source type name. If your JSON is not properly formatted the event will not appear on your Event Stream (proper formatting includes using double rather than single quotations.) Additionally, JSON emails sent *with* a subject will not go through.
 
 {{< img src="guides/eventsemail/json-email.png" >}}
 
