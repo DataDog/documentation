@@ -476,26 +476,33 @@ Troubleshooting
 ======================================================
 -->
 
-<h3 id="troubleshooting">Troubleshooting</h3>
+### Troubleshooting
 
 Custom Agent checks can't be directly called from python and instead
  need to be called by the agent. To test this, run:
 
-    sudo -u dd-agent dd-agent check my_check
+    sudo -u dd-agent dd-agent check <CHECK_NAME>
 
 If your issue continues, please reach out to Support with the help page that
  lists the paths it installs.
 
-<h4>Testing Custom Checks on Windows</h4>
+#### Testing custom checks on Windows
 
-Testing custom checks on Windows is easy. The Agent install includes a file called shell.exe
+* **For agent version < 5.12**:<br>
+The Agent install includes a file called shell.exe
 in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
-
-Once your check (called "my_check") is written and you have the .py and .yaml files
+Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files
 in their correct places, you can run the following in shell.exe:
-
-    >>> from checks import run_check
-    >>> run_check('my_check')
-
+```
+from checks import run_check
+run_check('<CHECK_NAME>')
+```
 This will output any metrics or events that the check will return.
 
+* **For agent version >= 5.12**:<br>
+Run the following script, with the proper `<CHECK_NAME>`:<br>
+`<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`<br>
+For example, to run the disk check:
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
+```
