@@ -179,16 +179,16 @@
               The usage metering end-point allows you to:
             </p>
             <ul>
-              <li><a href="#get-billing-usage-hosts">Get Usage For Hosts and Containers </a></li>
+              <li><a href="#get-billing-usage-hosts">Get Hourly Usage For Hosts and Containers </a></li>
+              <li><a href="#billing-usage-timeseries">Get Hourly Usage For Custom Metrics </a></li>
               <li><a href="#billing-usage-top-avg-metrics">Get Top Custom Metrics By Hourly Average </a></li>
-              <li><a href="#billing-usage-timeseries">Get Usage For Custom Metrics </a></li>
             </ul>
           </div>
         </div>
 
         <div class="lang-specific lang-specific-console">
-        <div class="int-anchor" id="get-billing-usage-hosts"></div><a href="#get-billing-usage-hosts"><h4>Get Hourly Usage For Hosts and Containers</h4></a>
-        <div class="row">
+          <div class="int-anchor" id="get-billing-usage-hosts"></div><a href="#get-billing-usage-hosts"><h4>Get Hourly Usage For Hosts and Containers</h4></a>
+          <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <p>
               Get Hourly Usage For Hosts and Containers. This endpoint is not available in the Python and Ruby libraries.
@@ -212,6 +212,28 @@
         </div>
         </div>
 
+        <div class="int-anchor" id="billing-usage-timeseries"></div><a href="#billing-usage-timeseries"><h4>Get Hourly Usage For Custom Metrics.</h4></a>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 api-left">
+            <p>
+              Get Hourly Usage For Custom Metrics. This endpoint is not available in the Python and Ruby libraries.
+            </p>
+            <div class="c">The most recent hourly usage data is 3 days old</div>
+            <h5>Arguments</h5>
+            <ul class="arguments">
+            {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+            </ul>
+          </div>
+          <div class="col-xs-12 col-md-6 api-right">
+            <h5>Signature</h5>
+            <code>GET https://app.datadoghq.com/api/v1/usage/timeseries</code>
+            <h5>Example Request</h5>
+            {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" )}}
+            <h5>Example Response</h5>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" ) }}
+          </div>
+        </div>
         <div class="int-anchor" id="billing-usage-top-avg-metrics"></div><a href="#billing-usage-top-avg-metrics"><h4>Get Top Custom Metrics By Hourly Average</h4></a>
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
@@ -233,29 +255,6 @@
             {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-top-avg-metrics.sh" )}}
             <h5>Example Response</h5>
             {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-top-avg-metrics.sh" ) }}
-          </div>
-        </div>
-
-        <div class="int-anchor" id="billing-usage-timeseries"></div><a href="#billing-usage-timeseries"><h4>Get Hourly Usage For Custom Metrics.</h4></a>
-        <div class="row">
-          <div class="col-xs-12 col-md-6 api-left">
-            <p>
-              Get Hourly Usage For Custom Metrics. This endpoint is not available in the Python and Ruby libraries.
-            </p>
-            <div class="c">The most recent hourly usage data is 3 days old</div>
-            <h5>Arguments</h5>
-            <ul class="arguments">
-            {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
-            {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
-            </ul>
-          </div>
-          <div class="col-xs-12 col-md-6 api-right">
-            <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/usage/timeseries</code>
-            <h5>Example Request</h5>
-            {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" )}}
-            <h5>Example Response</h5>
-            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" ) }}
           </div>
         </div>
 
