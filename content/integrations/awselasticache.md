@@ -11,7 +11,6 @@ git_integration_title: amazon_elasticache
 
 Learn more about how to monitor ElastiCache performance metrics, whether you use Redis or Memcached, thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/). We detail the key performance metrics, how to collect them, and how [Coursera](https://www.coursera.org/) monitors ElastiCache using Datadog.
 
-
 ## Setup
 ### Installation
 To collect all available ElastiCache metrics, you need to do two things:

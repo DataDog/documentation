@@ -5,9 +5,10 @@ kind: integration
 git_integration_title: amazon_codedeploy
 newhlevel: true
 ---
-## Overview
 
 {{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
+
+## Overview
 
 AWS CodeDeploy is a service that automates code deployment to instances in the cloud and on-premise.
 

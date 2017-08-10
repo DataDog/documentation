@@ -7,9 +7,9 @@ doclevel: basic
 git_integration_title: ansible
 ---
 
-## Overview
-
 {{< img src="integrations/ansible/ansibledashboard.png" >}}
+
+## Overview
 
 Install the Datadog Ansible callback integration to:
 

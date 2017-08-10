@@ -6,11 +6,11 @@ newhlevel: true
 git_integration_title: amazon_route53
 ---
 
+{{< img src="integrations/awsroute53/route53_graph.png" >}}
+
 ## Overview
 
 AWS Route 53 provides DNS and traffic management along with availability and performance monitoring via health checks. You can view the health check information in Datadog to provide context around other metrics and events in your environments. Here's an example dashboard of Route 53's health check status graph:
-
-{{< img src="integrations/awsroute53/route53_graph.png" >}}
 
 For information about the rest of the AWS services, see the [AWS tile][1]
 

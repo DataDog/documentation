@@ -5,11 +5,11 @@ kind: integration
 newhlevel: true
 ---
 
+{{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
+
 ## Overview
 
 AWS CloudTrail provides an audit trail for your AWS account. Datadog reads this audit trail and creates events you can search for in your stream and use for correlation on your dashboards. Here is an example of a CloudTrail event:
-
-{{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
 
 For information about the rest of the AWS services, see the [AWS tile][1]
 
