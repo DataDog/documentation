@@ -14,7 +14,7 @@ Connect mParticle to Datadog and see the following information in real-time in y
 * Device CPU, Memory, and Battery Utilization
 
 ## Setup
-## Installation 
+### Installation 
 
 1. Log in to your [mParticle account](https://app.mparticle.com/login?return=/).
 2. Navigate to the Services Page by clicking on the paper-airplane icon on the left-hand navigation bar.

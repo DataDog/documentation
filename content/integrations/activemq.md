@@ -102,7 +102,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 {{< insert-example-links check="none" >}}
 
 ## Data Collected
-## Metrics
+### Metrics
 
 {{< get-metrics-from-git >}}
 

@@ -15,7 +15,7 @@ Get metrics from your base system about the CPU, IO, load, memory, processes, sw
 * [Process check](/integrations/process/) - Capture metrics from specific running processes on a system.
 
 ## Setup
-## Configuration
+### Configuration
 
 No configuration is necessary for the system.
 

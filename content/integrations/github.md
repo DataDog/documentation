@@ -36,7 +36,7 @@ https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOG_API_KEY>
 Once the integration is complete, whatever you select (commits and/or issues) will populate into your Datadog Event Stream. If you view a dashboard, in the top left search bar you can type `sources:github` to see github events overlayed over your the graphs on that dashboard.
 
 ## Troubleshooting
-### **Why aren't Github events showing up in my Datadog event stream?**
+### Why aren't Github events showing up in my Datadog event stream?
 
 If your webhook is configured with `content-type:application/x-www-form-urlencoded`, set it to `content-type:application/json` instead.
 

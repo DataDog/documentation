@@ -18,7 +18,7 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 
 
 ## Setup
-## Installation
+### Installation
 
 If you are only collecting standard metrics from Microsoft Windows and other packaged applications, there are no installation steps. If you need to define new metrics to collect from your application, then you have a few options:
 

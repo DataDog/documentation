@@ -44,7 +44,7 @@ New Relic custom metrics may take 5-10 minutes to show up in Datadog.
 
 ## Troubleshooting
 
-### **What does the 'Collect metrics by host' option do?**
+### What does the 'Collect metrics by host' option do?
 
 When set, Datadog collects application metrics for every associated hosts,
 instead of the overall host throughput based average.
@@ -55,7 +55,7 @@ across many hosts has an acceptable error rate in aggregate".
 
 This also import New Relic hosts to Datadog Infrastructure section.
 
-### **I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?**
+### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
 
 When New Relic computes the aggregate application-level value for
 metrics that are measured at the host level (e.g. response time), they
@@ -91,7 +91,7 @@ Whereas we would simply compute the arithmetic mean:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
 
-### **Beta Alerts: How can I include custom tags?**
+### Beta Alerts: How can I include custom tags?
 
 You can include custom tags by utilizing the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, you'll navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. From here, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it will expand to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
 {{< highlight json>}}

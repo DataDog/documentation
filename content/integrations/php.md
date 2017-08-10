@@ -17,7 +17,7 @@ Connect your PHP applications to Datadog to:
 * Monitor any relevant metric
 
 ## Setup
-## Installation
+### Installation
 
 The PHP integration enables you to monitor any custom metric by instrumenting a few lines of code.
 For instance, you can have a metric that returns the number of page views or the time of any function call.

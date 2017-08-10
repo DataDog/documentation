@@ -50,7 +50,7 @@ Execute the info command and verify that the integration check has passed. The o
         - Collected 8 metrics & 0 events
 
 ## Data Collected
-## Metrics
+### Metrics
 
 {{< get-metrics-from-git >}}
 
