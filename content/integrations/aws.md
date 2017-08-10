@@ -56,8 +56,8 @@ Related integrations include:
 | [Web Application Firewall (WAF)](/integrations/awswaf)    | protect web applications from common web exploits                             |
 | [Workspaces](/integrations/awsworkspaces)                 | secure desktop computing service                                              |
 
-
-## Installation
+## Setup
+### Installation
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
@@ -132,7 +132,7 @@ If you are not comfortable with granting all of these permissions, at the very l
 6.  Select the policy you created above.
 7.  Review what you selected and click the **Create Role** button.
 
-## Configuration
+### Configuration
 
 {{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" >}}
 
@@ -142,7 +142,7 @@ If you are not comfortable with granting all of these permissions, at the very l
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-### Configuration for China and GovCloud
+#### Configuration for China and GovCloud
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
@@ -150,8 +150,8 @@ If you are not comfortable with granting all of these permissions, at the very l
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
@@ -329,10 +329,10 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 The main use of the Resource Group Tagging API is to reduce the number of API calls we need to collect custom tags.
 For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website.
 
-# Troubleshooting
+## Troubleshooting
 
 
-**Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
+### **Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
 
 
 There are two important distinctions to be aware of:
@@ -340,7 +340,7 @@ There are two important distinctions to be aware of:
   1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
-**Metrics delayed?**
+### **Metrics delayed?**
 
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
@@ -354,13 +354,13 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 
-**Missing metrics?**
+### **Missing metrics?**
 
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
-**Wrong count of aws.elb.healthy_host_count?**
+### **Wrong count of aws.elb.healthy_host_count?**
 
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
@@ -369,7 +369,7 @@ This metric should have value you would expect.
 
 
 
-**Duplicated hosts when installing the agent?**
+### **Duplicated hosts when installing the agent?**
 
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.

@@ -14,12 +14,13 @@ Amazon DynamoDB is a fully managed NoSQL database cloud service, part of the AWS
 
 Learn more about how to monitor DynamoDB performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-dynamodb-performance-metrics/). We detail the key performance metrics, how to collect them, and how [Medium](https://medium.com/) monitors DynamoDB using Datadog.
 
-
-## Installation
+## Setup
+### Installation
 
 This integration requires the permissions `dynamodb:list*` and `dynamodb:describe*` to be fully enabled.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

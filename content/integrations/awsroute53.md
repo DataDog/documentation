@@ -14,7 +14,8 @@ AWS Route 53 provides DNS and traffic management along with availability and per
 
 For information about the rest of the AWS services, see the [AWS tile][1]
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
@@ -36,11 +37,12 @@ Configure Route 53 on AWS and ensure that the policy you created has the **route
 {{< /highlight >}}
 
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Route53 is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

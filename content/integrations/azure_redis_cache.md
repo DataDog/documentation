@@ -15,10 +15,12 @@ Get metrics from Azure Redis Cache to:
 * Visualize the performance of your Redis Caches
 * Correlate the performance of your Redis Caches with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

@@ -14,8 +14,8 @@ Connect Kong to Datadog to:
 * Visualize Kong performance data
 * Correlate the performance of Kong with the rest of your applications
 
-
-## Configuration
+## Setup
+### Configuration
 
 Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
 {{< highlight yaml>}}
@@ -35,10 +35,11 @@ instances:
 {{< /highlight >}}
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  You should see output that validates that the check passed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

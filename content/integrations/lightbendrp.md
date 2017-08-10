@@ -20,8 +20,8 @@ Get metrics from your [Lightbend Reactive Platform application](https://www.ligh
 
 * Drill down into dispatcher metrics to tune the application performance
 
-
-## Installation 
+## Setup
+### Installation 
 
 This integration uses Lightbend Monitoring which requires a [subscription](https://www.lightbend.com/platform/subscription).
 
@@ -58,7 +58,8 @@ The configuration values explained:
 
 Please see the [Lightbend Monitoring documentation](https://developer.lightbend.com/docs/monitoring/2.3.x/home.html) for more details on configuration.
 
-## Metrics
+## Data Collected
+### Metrics
 
 The following metrics are collected for Lightbend Reactive Platform:
 

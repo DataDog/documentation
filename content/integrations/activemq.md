@@ -14,8 +14,8 @@ Get metrics from ActiveMQ in real time to
 * Visualize your web ActiveMQ server performance
 * Correlate the performance of ActiveMQ with the rest of your applications
 
-
-## Configuration
+## Setup
+### Configuration
 
 
 ***This integration requires Linux or Mac OS X.***
@@ -101,6 +101,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 
 {{< insert-example-links check="none" >}}
 
+## Data Collected
 ## Metrics
 
 {{< get-metrics-from-git >}}

@@ -13,9 +13,8 @@ Connect TeamCity to Datadog to create events for each build in order to:
 * Monitor the status of your builds and deployments
 * Collect stats and bind tags to every step of your builds.
 
-## Installation
-
-## Configuration
+## Setup
+### Configuration
 
 1. Configure the Agent to connect to TeamCity
 {{< highlight yaml>}}
@@ -61,7 +60,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the `datadog info` command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -76,7 +75,8 @@ Checks
       - Collected 0 metrics & 1 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

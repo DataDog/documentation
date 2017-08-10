@@ -9,11 +9,12 @@ kind: integration
   * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
   * Monitor the status of running processes with [Process Monitors](/guides/monitors) **Requires Datadog Agent >= 5.1.0**.
 
-## Installation
+## Setup
+### Installation
 
 No installation required.
 
-## Configuration
+### Configuration
 
 Configure the Agent to connect to your processes. Our example configuration will monitor the `ssh`, `sshd`, and `postgres` processes.
 
@@ -44,7 +45,7 @@ After the Agent has sent data to Datadog you can visit the [New Monitor section 
 
 {{< insert-example-links conf="process" check="process" >}}
 
-## Validation
+### Validation
 
 1.  Execute the info command
 
@@ -65,7 +66,8 @@ process
 
 Each instance, regardless of the number of search strings used, counts for a single instance in the info command output.
 
-## Metrics
+## Data Collected
+### Metrics
 
 Visit the Metrics Explorer to see the new metrics available. You will find all the metrics under `system.processes`.
 
