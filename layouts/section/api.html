@@ -189,26 +189,76 @@
         <div class="lang-specific lang-specific-console">
           <div class="int-anchor" id="get-billing-usage-hosts"></div><a href="#get-billing-usage-hosts"><h4>Get Hourly Usage For Hosts and Containers</h4></a>
           <div class="row">
-          <div class="col-xs-12 col-md-6 api-left">
-            <p>
-              Get Hourly Usage For Hosts and Containers. This endpoint is not available in the Python and Ruby libraries.
-              <div class="c">The most recent hourly usage data is 3 days old</div>
-            </p>
+            <div class="col-xs-12 col-md-6 api-left">
+              <p>
+                Get Hourly Usage For Hosts and Containers. This endpoint is not available in the Python and Ruby libraries.
+                <div class="c">The most recent hourly usage data is 3 days old</div>
+              </p>
 
-            <h5>Arguments</h5>
-            <ul class="arguments">
-              {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
-              {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
-            </ul>
-          </div>
-          <div class="col-xs-12 col-md-6 api-right">
-            <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/usage/hosts</code>
-            <h5>Example Request</h5>
-              {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-billing-usage-hosts.sh" ) }}
-            <h5>Example Response</h5>
-            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-hosts.sh" ) }}
-          </div>
+              <h5>Arguments</h5>
+              <ul class="arguments">
+                {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+                {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+              </ul>
+                <div>
+                  <br />
+                  <h5>Response</h5>
+                <ul>
+                  <li>
+                    <span class="gu">container_count</span> <div>
+                      shows the total number of containers reporting via the Docker integration during the hour.
+                    </div>
+                    <br />
+                  </li>
+                  <li>
+                    <span class="gu">host_count </span> <div>
+                    contains the total number of billable infrastructure hosts reporting during a given hour.
+                    This is the sum of <span class="s">agent_host_count</span>, <span class="s">aws_host_count</span>, and <span class="s">gcp_host_count</span>.
+                    </div>
+                    <br />
+                  </li>
+                  <li>
+                    <span class="gu">hour </span> <div>the hour for the usage.</div>
+                    <br />
+                  </li>
+                  <li>
+                    <span class="gu">apm_host_count: </span> <div>
+                    shows the total number of hosts using APM during the hour. For Pro plans, these will be counted as billable (except during trial periods). For Enterprise plans, APM hosts are included in the price of infrastructure hosts (see host_count) and not billed separately.
+                    </div>
+                    <br />
+                  </li>
+                  <li>
+                  <span class="gu">agent_host_count</span> <div>
+                  contains the total number of infrastructure hosts reporting during a given hour that were running the Datadog Agent.
+                  </div>
+                  <br />
+                  </li>
+                  <li>
+                    <span class="gu">gcp_host_count</span> <div>
+                    contains the total number of hosts that reported via the Google Cloud integration (and were NOT running the Datadog Agent).
+                    </div>
+                    <br />
+                  </li>
+                  <li>
+                    <span class="gu">aws_host_count</span> <div>
+                    contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent).
+                    </div>
+                    <br />
+                  </li>
+                  <li class="list-unstyled ">
+                    <div class="c">When AWS or GCP hosts are also running the Datadog Agent, they will be counted as Agent hosts, NOT as AWS or GCP.</div>
+                  </li>
+                </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 api-right">
+              <h5>Signature</h5>
+              <code>GET https://app.datadoghq.com/api/v1/usage/hosts</code>
+              <h5>Example Request</h5>
+                {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-billing-usage-hosts.sh" ) }}
+              <h5>Example Response</h5>
+              {{ partial "snippet-result-code-block" (dict "context" . "file" "api-billing-usage-hosts.sh" ) }}
+            </div>
         </div>
         </div>
 
