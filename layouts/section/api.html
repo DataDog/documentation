@@ -182,6 +182,7 @@
               <li><a href="#get-billing-usage-hosts">Get Hourly Usage For Hosts and Containers </a></li>
               <li><a href="#billing-usage-timeseries">Get Hourly Usage For Custom Metrics </a></li>
               <li><a href="#billing-usage-top-avg-metrics">Get Top Custom Metrics By Hourly Average </a></li>
+              <li class="list-unstyled "><div class="c">Data is only available for 15 months</div></li>
             </ul>
           </div>
         </div>
@@ -197,7 +198,7 @@
 
               <h5>Arguments</h5>
               <ul class="arguments">
-                {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
+                {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC). It cannot be more than 15months in the past" "lang" "console")}}
                 {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
               </ul>
                 <div>
