@@ -147,4 +147,4 @@ postgres
   - Collected 0 metrics, 0 events & 0 service checks
 {{< /highlight >}}
 
-You should also check the `/var/log/datadog/collector.log` file fore more information.
+You should also check the `/var/log/datadog/collector.log` file for more information.
