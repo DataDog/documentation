@@ -3,7 +3,7 @@ title: Datadog-Redis Integration
 integration_title: Redis
 newhlevel: true
 kind: integration
-git_integration_title: redis
+git_integration_title: redisdb
 updated_for_agent: 5.8.5
 ---
 
