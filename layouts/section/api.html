@@ -878,7 +878,7 @@
         <div class="row">
           <div class="col-xs-12 col-md-6 api-left">
             <h5>Arguments</h5>
-              {{ partial "argument.html" (dict "context" $dot "name" "resolve" "description" "Array of group(s) to resolve for a given monitor_id e.g. <code>monitor_id:group_to_resolve </code> <br><b>Note:</b> It supports multiple groups per monitor as well eg:<br> <code> resolve: [monitor_id: group_1, monitor_id: group_2] </code>") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "resolve" "description" "Array of group(s) to resolve for a given monitor_id e.g. <code>{"monitor_id":"group_to_resolve" </code> <br><b>Note:</b> It supports multiple groups per monitor as well eg:<br> <code> resolve: [{"monitor_id": "group_1"}, {"monitor_id": "group_2"}] </code>") }}
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
@@ -886,7 +886,7 @@
             <h5>Example Request</h5>
             {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-monitor-bulk-resolve.sh" ) }}
             <h5>Example Response</h5>
-            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-monitor-bulk-resolve.sh" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "result.api-monitor-bulk-resolve.sh" ) }}
           </div>
         </div>
 
