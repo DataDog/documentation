@@ -42,4 +42,4 @@ instances:
 {{< /highlight >}}
 ## Metrics
 
-{{< get-metrics-from-git "system" "system.net" >}}
+{{< get-metrics-from-git "network" >}}
