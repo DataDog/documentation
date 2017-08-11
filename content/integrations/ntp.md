@@ -56,7 +56,7 @@ Checks
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git "system" "ntp" >}}
+{{< get-metrics-from-git "ntp" >}}
 
 ### Events
 
