@@ -15,7 +15,8 @@ Add the connect-datadog middleware to your application to:
 * Alert on your response times
 * Monitor your response code
 
-## Configuration
+## Setup
+### Configuration
 
 The Express integration requires the Datadog Agent.
 
@@ -41,6 +42,7 @@ app.use(connect_datadog);
 app.use(router);
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

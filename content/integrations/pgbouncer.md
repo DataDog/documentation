@@ -13,8 +13,8 @@ Connect your PGBouncer to Datadog in order to:
 * Monitor the traffic between PostgreSQL and your applications.
 * Be notified about pgbouncer failovers and events.
 
-
-## Configuration
+## Setup
+### Configuration
 
 To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgbouncer.yaml` and make the appropriate changes.
 
@@ -35,7 +35,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 When you run `/etc/init.d/datadog-agent info` you should see something like the following:
 {{< highlight shell >}}
@@ -48,11 +48,12 @@ Checks
       - Collected 39 metrics, 0 events & 1 service check
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-## Service Checks
+### Service Checks
 
 **pgbouncer.can_connect**
 : Agent is able to connect to the pgbouncer instance

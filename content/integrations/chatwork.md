@@ -13,7 +13,8 @@ Integrate with ChatWork to:
 * Be notified when someone posts on your stream
 * Be notified when a metric alert is triggered
 
-## Configuration
+## Setup
+### Installation
 
 1. First, you might want to create a Datadog user in your ChatWork organization account which will post Datadog updates.
 

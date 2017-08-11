@@ -6,16 +6,18 @@ newhlevel: true
 git_integration_title: iis
 updated_for_agent: 5.8.5
 ---
-## Overview
 
 {{< img src="integrations/iis/iisgraph.png" alt="IIS Graph" >}}
+
+## Overview
 
 Connect IIS to Datadog in order to:
 
 * Visualize your web server performance.
 * Correlate the performance of IIS with the rest of your applications.
 
-## Installation
+## Setup
+### Installation
 
 1.  In order to be sure that IIS performance counters will be sent to WMI, resync the WMI counters.
 
@@ -28,7 +30,7 @@ Connect IIS to Datadog in order to:
 
         winmgmt /resyncperf
 
-## Configuration
+### Configuration
 
 1.  Configure the Agent to connect to IIS. Edit conf.d/iis.yaml and add this server to instances with (optional) tags:
 {{< highlight yaml>}}
@@ -41,9 +43,9 @@ instances:
       - mytag2
 {{< /highlight >}}
 
-1.  Restart the Agent using the Agent Manager (or restart the service)
+2.  Restart the Agent using the Agent Manager (or restart the service)
 
-### Configuration Options
+#### Configuration Options
 
 By default, this check will run against a single instance - the current machine that
 the Agent is running on. It will check the WMI performance counters for IIS on that machine.
@@ -79,7 +81,7 @@ called MYREMOTESERVER. For the remote host we are only pulling metrics from the 
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 {{< highlight shell>}}
@@ -93,7 +95,9 @@ Check the info page in the Agent Manager and verify that the integration check h
           - instance #0 [OK]
           - Collected 20 metrics & 0 events
 {{< /highlight >}}
-## Metrics
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

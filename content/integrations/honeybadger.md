@@ -18,7 +18,8 @@ Connect Honeybadger to Datadog to:
 * Discuss errors with your team
 * Be super awesome
 
-## Configuration
+## Setup
+### Installation
 
 To capture errors from Honeybadger:
 

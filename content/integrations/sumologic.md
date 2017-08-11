@@ -8,9 +8,9 @@ kind: integration
 
 Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log data to your Datadog event stream, and you can use Sumo Logic as a notification channel from Datadog alerts and events. In other words, each service can inform the other.
 
-## Installation
-
-### Datadog to Sumo Logic
+## Setup
+### Installation
+#### Datadog to Sumo Logic
 
 1. Login to Sumo Logic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Collection**.
@@ -23,7 +23,7 @@ Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log d
 9. Enter the name you want to assign to the collector and the URL from above.
 10. Next time you want to send a message from Datadog to Sumo Logic, use **@sumologic-{YOUR COLLECTOR NAME}**.
 
-### Sumo Logic to Datadog
+#### Sumo Logic to Datadog
 
 1. Login to Sumo Logic as a user with Administrator rights.
 2. From the main menu, choose **Manage** -> **Connections**.

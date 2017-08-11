@@ -13,7 +13,8 @@ Capture SSH activity into Datadog to:
 * Visualize your SSH performance in real-time
 * Detect any protocol failure or network outage
 
-## Installation
+## Setup
+### Installation
 
 1. To capture SSH metrics you need to install the Datadog Agent.
 
@@ -37,7 +38,7 @@ instances:
 
 {{< insert-example-links conf="ssh_check" check="ssh_check" >}}
 
-## Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `ssh_check` under the Checks section:
 {{< highlight shell >}}
@@ -53,11 +54,12 @@ ssh_check
 [...]
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-## Service checks
+### Service checks
 
 `ssh.can_connect`:
 

@@ -16,7 +16,8 @@ Use the Datadog Expvar Agent check to:
 * Instrument your own metrics
 * An example configration file for GO Expvar can be found [here](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example)
 
-## Configuration 
+## Setup
+### Configuration 
 The Go Expvar integration requires the Datadog Agent.
 
 1. Use Go's expvar package to expose your memory information
@@ -76,7 +77,7 @@ instances:
 
 {{< insert-example-links conf="go_expvar" check="go_expvar" >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell >}}
@@ -91,6 +92,7 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

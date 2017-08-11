@@ -12,15 +12,17 @@ Amazon SWF helps developers build, run, and scale background jobs that have para
 
 Enable this integration to see in Datadog all your SWF metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that SWF is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

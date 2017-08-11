@@ -13,7 +13,8 @@ Amazon Billing allows you to track your AWS infrastructure billing forecasts and
 
 Enable this integration to see in Datadog all your Billing metrics.
 
-## Installation
+## Setup
+### Installation
 
 In order to see AWS Budget metrics, the requirement for this integration is the permission `budgets:ViewBudget`.
 
@@ -21,7 +22,8 @@ You must also enable billing metrics within the [AWS Console](http://docs.aws.am
 
 Note: AWS Budget metrics can only be collected from the AWS master account.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

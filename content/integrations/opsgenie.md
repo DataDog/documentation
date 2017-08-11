@@ -7,17 +7,15 @@ kind: integration
 
 ## Overview
 
-
 Create alerts using @opsgenie:
 
   * From your event stream
   * By taking a snapshot
   * When a metric alert is triggered
 
-## Configuration
-
-
-### Create a Datadog integration in OpsGenie
+## Setup
+### Configuration
+#### Create a Datadog integration in OpsGenie
 
   1. Log in to your OpsGenie account and go to the [OpsGenie Integrations][1] page.
   2. As seen below, filter for Datadog and click on the tile.
@@ -40,11 +38,10 @@ Create alerts using @opsgenie:
   {{< img src="integrations/opsgenie/datadog-add-opsgenie-key.png" >}}
 
 
-
-
-## How to Use Datadog and OpsGenie Together
-
-### Create, acknowledge and close OpsGenie alerts from Datadog
+## Further Reading
+### Knowledge Base
+#### How to Use Datadog and OpsGenie Together
+##### Create, acknowledge and close OpsGenie alerts from Datadog
 
 Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the *Say What’s Happening* field, section 5, in the Edit Metric Alert. When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.
 
@@ -53,7 +50,7 @@ Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the *
 Acknowledge or close OpsGenie alerts from Datadog using @opsgenie-acknowledge or @opsgenie-close mentions in the Comments field of an OpsGenie event in Datadog.
 {{< img src="integrations/opsgenie/dd_ack_og_alert.png" >}}
 
-### Receive, acknowledge and close Datadog alerts created by OpsGenie
+##### Receive, acknowledge and close Datadog alerts created by OpsGenie
 
 Set-up alerts in OpsGenie. When that alert is triggered, an event will be created in Datadog. The tags and description field from the OpsGenie alert will be carried over to Datadog.
 

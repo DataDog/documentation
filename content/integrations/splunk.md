@@ -14,8 +14,8 @@ Connect your Splunk log monitoring to be able to:
 * Correlate these reports with your other metrics
 * Collaborate with your team on thse events 
 
-
-## Installation
+## Setup
+### Installation
 
 To receive your reports from Splunk into Datadog, you need to have ```datadog``` installed:
 
@@ -41,6 +41,7 @@ Make sure the script is executable and owned by the ```splunk``` user and group.
 
 Once the script is in place, create a new report or navigate to an existing report. Click the **Edit Schedule** and check the checkbox to **Schedule the Report**. When you get to the option to **Run a Script**, enter ```dog-splunk.sh``` in the Filename textbox. Click **Save** and you should see the results start appearing in your Event Stream. 
 
+
 ## Troubleshooting
 
 If you see an error code on each run of runshellscript in splunkd.log, try adding ``` > dog_splunk_trace.txt 2>&1``` to the end of the last command. This will create a ```$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt``` file. You will get more detail about the problem in this file.
@@ -65,8 +66,8 @@ export APP_KEY=YOURAPPKEYHERE
 {{< /highlight >}}
 
 
-## Customizing
-
+## Further Reading
+### Knowledge Base
 The script file uses variables made available by Splunk. If you would like to customize the message, refer to the following table of variables:
 
 |               |                                                                               |
