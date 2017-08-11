@@ -80,5 +80,5 @@ Checks
 
 ## Metrics
 
-{{< get-metrics-from-git "system" "system.disk system.fs">}}
+{{< get-metrics-from-git "disk">}}
 
