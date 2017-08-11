@@ -1,7 +1,7 @@
 ---
 title: Datadog-SQL Server Integration
 integration_title: SQL Server
-git_integration_title: sql_server
+git_integration_title: sqlserver
 kind: integration
 doclevel: basic
 ---
