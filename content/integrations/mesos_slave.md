@@ -1,6 +1,6 @@
 ---
 title: Datadog-Mesos & DC/OS Slave Integration
-integration_title: Mesos & DC/OS Agent
+integration_title: Mesos & DC/OS Slave
 kind: integration
 doclevel: basic
 git_integration_title: mesos_slave
