@@ -5,6 +5,8 @@ kind: integration
 doclevel: basic
 ---
 
+{{< img src="integrations/nodejs/nodejs_graph.png" alt="Node JS graph" >}}
+
 ## Overview
 
 Connect your Node.js applications to Datadog to:
@@ -13,7 +15,8 @@ Connect your Node.js applications to Datadog to:
 * Correlate their performance with the rest of your applications
 * Monitor any relevant metric
 
-## Configuration
+## Setup
+### Configuration
 
 The Node.js integration enables you to monitor any custom metric by instrumenting a few lines of code. 
 For instance, you can have a metric that returns the number of page views or the time of any function call. 
@@ -34,5 +37,5 @@ var dogstatsd = new StatsD();
 dogstatsd.increment('page.views')
 {{< /highlight >}}
 
-3. Go to the Metrics explorer page and see that it just works! 
-{{< img src="integrations/nodejs/nodejs_graph.png" alt="Node JS graph" >}}
+### Validation
+Go to the Metrics explorer page and see that it just works! 

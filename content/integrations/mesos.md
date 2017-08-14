@@ -33,8 +33,9 @@ This Agent check collects metrics from Mesos slaves for:
 
 This check also creates a service check for every executor task.
 
-## Installation
-### Mesos master
+## Setup
+### Installation
+#### Mesos master
 Run the docker-dd-agent container on each of your Mesos master nodes:
 {{< highlight shell >}}
 docker run -d --name dd-agent \
@@ -55,22 +56,23 @@ Unless your masters' API uses a self-signed certificate. In that case, set disab
 
 {{< insert-example-links integration="Mesos Master" include_intro="false" >}}
 
-### Mesos slave
+#### Mesos slave
 Follow the instructions in our [blog post](https://www.datadoghq.com/blog/deploy-datadog-dcos/) to install the Datadog Agent on each Mesos agent node via the DC/OS web UI.
 
 Unless you want to configure a custom mesos_slave.yaml—perhaps you need to set disable_ssl_validation: true—you don't need to do anything after installing the Agent.
 
 {{< insert-example-links integration="Mesos Slave" include_intro="false" >}}
 
-## Validation
-### Mesos master
+### Validation
+#### Mesos master
 
 In the Datadog app, search for mesos.cluster in the Metrics Explorer.
 
-### Mesos slave
+#### Mesos slave
 
 In the Datadog app, search for mesos.slave in the Metrics Explorer.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

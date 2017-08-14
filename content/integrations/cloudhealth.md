@@ -12,7 +12,8 @@ If you use both Cloudhealth and Datadog, you can configure your Cloudhealth acco
 
 This integration does **NOT** pull anything from Cloudhealth into Datadog. It just helps Cloudhealth poll your Datadog account for metrics.
 
-## Configuration
+## Setup
+### Configuration
 
 If you have not yet started optimizing your cloud with CloudHealth, first sign up for a [risk-free 14 day trial](https://www.cloudhealthtech.com/). For existing CloudHealth customers, all you need to do is take these four simple steps to setup your Datadog integration in CloudHealth and to improve visibility across every dimension of their cloud environment.
 

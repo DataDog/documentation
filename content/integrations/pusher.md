@@ -18,7 +18,8 @@ Monitor your realtime messages and connection analytics across your Pusher apps:
 
 * Monitor usage within billing timetables
 
-## Installation
+## Setup
+### Installation
 
 In order to monitor your metrics from Pusher:
 
@@ -32,6 +33,7 @@ In order to monitor your metrics from Pusher:
 
 **NOTE**: metrics are populated in realtime, therefore your historical data will begin to populate once your integration is successfully completed
 
-## Metrics 
+## Data Collected
+### Metrics 
 
 {{< get-metrics-from-git >}}

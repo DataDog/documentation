@@ -6,7 +6,6 @@ git_integration_title: ceph
 newhlevel: true
 ---
 
-
 {{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" >}}
 
 ## Overview
@@ -17,12 +16,12 @@ Enable the Datadog-Ceph integration to:
   * Receive service checks in case of issues
   * Monitor I/O performance metrics
 
-
-## Installation
+## Setup
+### Installation
 
 The Ceph check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Ceph servers.
 
-## Configuration
+### Configuration
 
 Create a file `ceph.yaml` in the Agent's conf.d directory:
 {{< highlight yaml>}}
@@ -40,7 +39,7 @@ dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the info command `/etc/init.d/datadog-agent info` and verify that the integration check was successful. The output should contain a section similar to the following:
 {{< highlight shell >}}
@@ -55,10 +54,11 @@ Checks
       - Collected 19 metrics, 0 events & 2 service checks
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
 ## Further Reading
-
+### Blog Article
 To get a better idea of how (or why) to integrate your Ceph cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-ceph-datadog/) about it.

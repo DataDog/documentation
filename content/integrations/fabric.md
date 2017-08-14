@@ -14,8 +14,8 @@ Connect Fabric to Datadog in order to:
 * Capture and search for deploy events in the event stream.
 * Correlate deploy events with metric changes on dashboards.
 
-
-## Configuration
+## Setup
+### Configuration
 
 1. Install the dogapi package:
 ```

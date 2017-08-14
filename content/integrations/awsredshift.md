@@ -12,15 +12,17 @@ Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service 
 
 Enable this integration to see all your Redshift metrics in Datadog.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Redshift is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

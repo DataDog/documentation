@@ -6,15 +6,17 @@ doclevel: basic
 git_integration_title: postfix
 newhlevel: true
 ---
-## Overview
 
 {{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" >}}
+
+## Overview
 
 Get metrics from Postfix in real time to monitor the messages pending in your Postfix mail queues.
 
 {{< insert-example-links >}}
 
-## Configuration
+## Setup
+### Configuration
 
 1.  Make sure that the user that dd-agent runs has sudo access for the 'find' command.
 2.  Configure the Agent to connect to Postfix. Edit `conf.d/postfix.yaml`:
@@ -57,7 +59,7 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
 
 3.  Restart the Agent
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -71,6 +73,8 @@ Checks
       - instance #0 [OK]
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
-## Metrics
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

@@ -6,18 +6,19 @@ newhlevel: true
 git_integration_title: wmi
 ---
 
-## Overview
-
 {{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" >}}
+
+## Overview
 
 Get metrics from your Windows applications/servers with Windows Management Instrumentation (WMI) in real time to
 
 * Visualize their performance.
 * Correlate their activity with the rest of your applications.
 
-{{< insert-example-links conf="wmi_check" check="wmi_check" >}}
 
-## Installation
+
+## Setup
+### Installation
 
 If you are only collecting standard metrics from Microsoft Windows and other packaged applications, there are no installation steps. If you need to define new metrics to collect from your application, then you have a few options:
 
@@ -66,7 +67,9 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
 
 4.  Restart the agent.
 
-### Configuration Options
+{{< insert-example-links conf="wmi_check" check="wmi_check" >}}
+
+#### Configuration Options
 
 Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` and `tag_queries`.
 
@@ -115,15 +118,8 @@ Note: setting this will cause any instance number to be removed from tag_by valu
 
 This feature is available starting with version 5.3 of the agent
 
-
-
-
-## Validation
+### Validation
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
 {{< img src="integrations/wmi/wmivalidate.png" style="width:400px;" >}}
-
-
-
-

@@ -23,7 +23,9 @@ Connect Datadog to xMatters to:
 
 * Add additional reporting and analytics to your operational processes
 
-## Installation
+## Setup
+
+### Installation
 
 To set up the xMatters-Datadog integration:
 

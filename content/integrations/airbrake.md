@@ -17,7 +17,8 @@ Connect Airbrake to Datadog to:
   * Search for exceptions in your graphs
   * Discuss exceptions with your team
 
-## Configuration
+## Setup
+### Configuration
 
 Setting up Airbrake integration using webhooks:
 
@@ -34,7 +35,7 @@ https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
 
 Every time a new error occurs, it will appear in your stream.
 
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

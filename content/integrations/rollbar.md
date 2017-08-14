@@ -4,6 +4,7 @@ integration_title: Rollbar
 kind: integration
 doclevel: basic
 ---
+
 {{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" >}}
 
 ## Overview
@@ -18,11 +19,12 @@ Connect Rollbar to Datadog to:
 * Discuss exceptions with your team
 * Spend less time debugging issues
 
-## Installation
+## Setup
+### Installation
 
 No installation is required.
 
-## Configuration
+### Configuration
 
 Configuration is per-project in Rollbar.
 
@@ -36,10 +38,11 @@ Configuration is per-project in Rollbar.
 
 Done. Every time an exception occurs, it will appear in your event stream.
 
-## Metrics
+## Data Collected
+### Metrics
 
 This integration does not include metrics at this time.
 
-## Events
+### Events
 
 This integration will push exceptions, errors and code deployments into Datadog as events.

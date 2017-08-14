@@ -11,9 +11,8 @@ Connect Event Viewer to Datadog in order to:
 * Track system and application events in Datadog.
 * Correlate system and application events with the rest of your application.
 
-
-## Configuration
-
+## Setup
+### Configuration
 
 Use the Windows Event Viewer GUI to list all the event logs you can capture with this integration.
 
@@ -72,7 +71,7 @@ instances:
 2. Restart the Agent using the Agent Manager (or restart the service)
 {{< insert-example-links conf="win32_event_log" check="win32_event_log" >}}
 
-## Validation
+### Validation
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 

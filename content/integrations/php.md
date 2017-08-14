@@ -5,9 +5,10 @@ kind: integration
 doclevel: basic
 newhlevel: true
 ---
-## Overview
 
 {{< img src="integrations/php/phpgraph.png" alt="PHP Graph" >}}
+
+## Overview
 
 Connect your PHP applications to Datadog to:
 
@@ -15,7 +16,8 @@ Connect your PHP applications to Datadog to:
 * Correlate their performance with the rest of your applications
 * Monitor any relevant metric
 
-## Installation
+## Setup
+### Installation
 
 The PHP integration enables you to monitor any custom metric by instrumenting a few lines of code.
 For instance, you can have a metric that returns the number of page views or the time of any function call.

@@ -13,9 +13,8 @@ Capture metrics from the files in given directories:
   * age of the last modification
   * age of the creation
 
-
-
-## Configuration
+## Setup
+### Configuration
 
 *To capture Directory metrics you need to install the Datadog Agent.*
 
@@ -46,7 +45,7 @@ instances:
 
 {{< insert-example-links conf="directory" check="directory" >}}
 
-## Validation
+### Validation
 
 To validate that the check has passed run the agent info command. The output of the command should contain a section similar to the following:
 {{< highlight shell >}}

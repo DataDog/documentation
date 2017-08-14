@@ -6,9 +6,10 @@ doclevel: basic
 newhlevel: true
 git_integration_title: immunio
 ---
-## Overview
 
 {{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" >}}
+
+## Overview
 
 Connect IMMUNIO's advanced application security monitoring with Datadog to visualize the impact Attacks have on your web application, and monitor IMMUNIO's automatic protection.
 
@@ -19,7 +20,8 @@ IMMUNIO monitors your applications to detect and defend against all of the follo
 * Custom business-level attacks like credit card fraud and other abuse,
 * General bad behaviour like scanning and scraping.
 
-## Installation
+## Setup
+### Installation
 
 1.  Login to [your IMMUNIO account](http://www.immun.io/).
 1.  Navigate to the [integrations setup page](https://dashboard.immun.io/#/settings/integrations).
@@ -28,11 +30,11 @@ IMMUNIO monitors your applications to detect and defend against all of the follo
     {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" >}}
 1.  Add your API key.
 
-## Configuration
+### Configuration
 
 No configuration steps are required for this integration.
 
-## Validation
+### Validation
 
 To validate your installation and configuration, restart the agent and execute the info command. The output should contain a section similar to the following:
 
@@ -45,11 +47,13 @@ Checks
       - instance #0 [OK]
       - Collected 4 metrics & 0 events
 {{< /highlight >}}
-## Metrics
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-## Events
+### Events
 
 No events are included with this integration.
 

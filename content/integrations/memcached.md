@@ -13,9 +13,9 @@ Connect Memcached to Datadog in order to:
 * Visualize its performance
 * Correlate the performance of Memcached with the rest of your applications
 
-{{< insert-example-links conf="mcache" check="mcache" >}}
 
-## Configuration
+## Setup
+### Configuration
 
 1.  Configure the Agent to connect to the Memcached server. Edit `conf.d/mcache.yaml`:
 {{< highlight yaml>}}
@@ -35,7 +35,7 @@ instances:
 
 2.  Restart the Agent
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -49,7 +49,8 @@ Execute the info command and verify that the integration check has passed. The o
         - instance #0 [OK]
         - Collected 8 metrics & 0 events
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

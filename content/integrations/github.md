@@ -4,9 +4,9 @@ integration_title: Github
 kind: integration
 ---
 
+{{< img src="integrations/github/git_integration_screen.png" alt="Git event" >}}
 
 ## Overview
-
 
 Capture GitHub commits in Datadog to:
 
@@ -14,9 +14,8 @@ Capture GitHub commits in Datadog to:
   * Identify when new code changes lead to system alerts or build failures
   * Discuss code changes with your team in the Datadog Event Stream
 
-{{< img src="integrations/github/git_integration_screen.png" alt="Git event" >}}
-
-## Configuration
+## Setup
+### Installation
 
 1. Add this URL to your Github Webhook, (**Settings>Webhooks>Add new Webhook**) with this URL:
 ```
@@ -32,13 +31,12 @@ https://app.datadoghq.com/intake/webhook/github?api_key=<YOUR_DATADOG_API_KEY>
 
 3. For each repository, add the branches you wish to monitor. If you want to add all repositories for a user or organization, use wildcards (e.g antirez/redis or antirez/*)
 
-## What to Expect
+## Data Collected
 
 Once the integration is complete, whatever you select (commits and/or issues) will populate into your Datadog Event Stream. If you view a dashboard, in the top left search bar you can type `sources:github` to see github events overlayed over your the graphs on that dashboard.
 
-## FAQ
-
-**Why aren't Github events showing up in my Datadog event stream?**
+## Troubleshooting
+### Why aren't Github events showing up in my Datadog event stream?
 
 If your webhook is configured with `content-type:application/x-www-form-urlencoded`, set it to `content-type:application/json` instead.
 

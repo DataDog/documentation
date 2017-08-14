@@ -3,22 +3,19 @@ title: Datadog-Redis Integration
 integration_title: Redis
 newhlevel: true
 kind: integration
-git_integration_title: redis
+git_integration_title: redisdb
 updated_for_agent: 5.8.5
 ---
 
-## Overview
-
 {{< img src="integrations/redis/redis.png" alt="Redis default dashboard" >}}
+
+## Overview
 
 Track and graph your Redis activity and performance metrics with slice-and-dice at all levels
 from individual column families to entire clusters.
 
-Learn more about how to monitor Redis performance metrics thanks to
-[our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/).
-We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
-
-## Configuration
+## Setup
+### Configuration
 
 1.  Configure the Agent to connect to the Redis server. Edit `conf.d/redisdb.yaml`:
 {{< highlight yaml>}}
@@ -36,7 +33,7 @@ instances:
 
 2.  Restart the Agent
 
-### Configuration Options
+#### Configuration Options
 
 * `unix_socket_path` - (Optional) - Can be used instead of `host` and `port`.
 * `db`, `password`, and `socket_timeout` - (Optional) - Additional connection options.
@@ -49,7 +46,7 @@ instances:
 
 {{< insert-example-links conf="redisdb" check="redisdb" >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -64,11 +61,18 @@ Checks
     - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Troubleshooting and Questions
+## Data Collected
+### Metrics
 
-**Q:** How do I filter to look at the stats for a particular DB in a particular environment?
+{{< get-metrics-from-git >}}
 
-**A:** Prebuilt dashboards only allow you to filter on a single tag
+[2]: https://app.datadoghq.com/account/overview
+[3]: https://app.datadoghq.com/metric/explorer
+
+## Troubleshooting
+### How do I filter to look at the stats for a particular DB in a particular environment?
+
+Prebuilt dashboards only allow you to filter on a single tag
 (these are the dashboards you see when
 clicking [Overview][2]). If you go to the [Metrics Explorer][3], you can select which
 metrics you want to see and what you want to see it over.  In the ‘Over:’ section
@@ -76,10 +80,8 @@ you can select multiple environments and then select “Save these tiles to: a n
 
 {{< img src="integrations/redis/metric-explorer-redis.png" >}}
 
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-[2]: https://app.datadoghq.com/account/overview
-[3]: https://app.datadoghq.com/metric/explorer
-
+## Further Reading
+### Blog Article
+Learn more about how to monitor Redis performance metrics thanks to
+[our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/).
+We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
