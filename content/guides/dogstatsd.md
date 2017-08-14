@@ -32,11 +32,16 @@ sidebar:
 This page explains what DogStatsD is, how it works, and what data it accepts.
 </p>
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements most of the [StatsD](https://github.com/etsy/statsd) protocol and adds a few Datadog-specific extensions:
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD](https://github.com/etsy/statsd) protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
 * Service checks and Events
 * Tagging
+
+**Note**: dogstatsD doesn't exactly follow the statsd implementation:
+
+* It does not support Gauge delta ([Learn more about this](https://github.com/DataDog/dd-agent/pull/2104))
+* It does not support the timing type on custom metrics. ([Learn more about this](#timers))
 
 ## How It Works
 
