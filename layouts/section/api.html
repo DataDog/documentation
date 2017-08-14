@@ -297,8 +297,7 @@
             <div class="c">The most recent hourly usage data is 3 days old</div>
             <h5>Arguments</h5>
             <ul class="arguments">
-            {{ partial "argument.html" (dict "context" $dot "name" "start_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour (UTC)" "lang" "console")}}
-            {{ partial "argument.html" (dict "context" $dot "name" "end_hr" "description" "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour (UTC)" "lang" "console" "default" "1d+start_hr")}}
+            {{ partial "argument.html" (dict "context" $dot "name" "month" "description" "datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour (UTC)" "lang" "console")}}
             {{ partial "argument.html" (dict "context" $dot "name" "names" "description" "comma-separated list of metric names" "lang" "console" "default" "None")}}
             </ul>
           </div>
