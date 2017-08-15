@@ -57,7 +57,7 @@ ssh_check
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "ssh_check" >}}
 
 ### Service checks
 

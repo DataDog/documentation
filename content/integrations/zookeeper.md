@@ -48,4 +48,4 @@ Checks
 {{< /highlight >}}
 # Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "zk" >}}
