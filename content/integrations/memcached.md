@@ -52,7 +52,7 @@ Execute the info command and verify that the integration check has passed. The o
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "mcache" >}}
 
 To learn more details about the different metrics, go to [this blog entry](http://www.pal-blog.de/entwicklung/perl/memcached-statistics-stats-command.html).
 

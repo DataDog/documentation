@@ -61,5 +61,5 @@ Checks
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "elastic" >}}
 

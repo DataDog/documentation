@@ -79,7 +79,7 @@ Checks
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "mongo" >}}
 
 Note: many of these metrics are described in the [MongoDB Manual 3.0](https://docs.mongodb.org/manual/reference/command/dbStats/)
 

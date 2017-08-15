@@ -76,8 +76,5 @@ Checks
 {{< /highlight >}}
 
 ## Data Collected
-### Metrics
-
-{{< get-metrics-from-git >}}
 
 This integration only create events. It will not return any metrics.

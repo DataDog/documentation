@@ -77,6 +77,8 @@ Checks
 
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "hdfs_datanode" >}}
+
+{{< get-metrics-from-git "hdfs_namenode" >}}
 
 You may experience reduced functionality if using hadoop before v2.2.0. For earlier versions, we need to use Snakebite v1.3.9. If using HA Mode, you may want to upgrade.
