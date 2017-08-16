@@ -30,20 +30,28 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 #### Enhanced RDS Integration 
 
-  1.  Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
-  {{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" >}}
-  2. Open the Encryption keys section of the AWS Identity and Access Management (IAM) console at https://console.aws.amazon.com/iam/home#encryptionKeys.
-  3. For Region, choose the appropriate AWS Region. Do not use the region selector in the navigation bar (top right corner).
-  4.  Choose **Create Key**.
-  5.  Enter an Alias for the key, such as `lambda-datadog-key`. *Note: An alias cannot begin with aws. Aliases that begin with aws are reserved by Amazon Web Services to represent AWS-managed CMKs in your account.*
-  6.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
-  7.  Encrypt the key you just created by using the [AWS CLI][5], replacing \<KMS_KEY_NAME\> with the alias of the key you just created: `aws kms encrypt --key-id alias/<KMS_KEY_NAME> --plaintext '{"api_key":"<DATADOG_API_KEY>", "app_key":"<DATADOG_APP_KEY>"}'}`. The command output will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
-  8.  Copy the base-64 encoded, encrypted key (CiphertextBlob) to the `<KMS_ENCRYPTED_KEYS>` variable.
-  9.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
-  10. Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
-  11.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
-  12.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing `<ENCRYPTION_KEY ARN>` with the ARN of the Encryption Key:
-  {{< highlight json >}}
+Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
+{{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" >}}
+
+##### Create your KMS Key
+1. Open the Encryption keys section of the AWS Identity and Access Management (IAM) console at https://console.aws.amazon.com/iam/home#encryptionKeys.
+*For Region, choose the appropriate AWS Region. Do not use the region selector in the navigation bar (top right corner).*
+2.  Choose **Create Key**.
+3.  Enter an Alias for the key, such as `lambda-datadog-key`. *Note: An alias cannot begin with aws. Aliases that begin with aws are reserved by Amazon Web Services to represent AWS-managed CMKs in your account.*
+4. Save your KMS key
+5.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
+6.  Encrypt the key you just created by using the [AWS CLI][5], replacing \<KMS_KEY_NAME\> with the alias of the key you just created: </b>
+`aws kms encrypt --key-id alias/<KMS_KEY_NAME> --plaintext '{"api_key":"<DATADOG_API_KEY>", "app_key":"<DATADOG_APP_KEY>"}'}`. </b>
+The command output will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
+
+7. Keep your base-64 encoded, encrypted key (CiphertextBlob) you will need it to set the `<KMS_ENCRYPTED_KEYS>` variable for your [lambda](#create-your-lambda-function).
+
+##### Create your Role
+8.  From the IAM Management Console, create a new role. Enter a name for the role, such as `lambda-datadog-post-execution`.
+9. Select **AWS Lambda** from the AWS Service Roles list. You do not need to attach any policies at this time. Press the appropriate buttons to complete the role creation.
+10.  Click on the role you just created. Expand the Inline Policies section and click the link to create a policy. Choose **Custom Policy** and press the button to continue.
+11.  Enter a policy name, such as `lambda-datadog-policy`. For Policy Document, enter the following, replacing `<ENCRYPTION_KEY ARN>` with the ARN of the Encryption Key you created previously:
+{{< highlight json >}}
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -60,20 +68,21 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 }
 {{< /highlight >}}
 
-  13. From the Lambda Management Console, create a new Lambda Function.
-  14. On the Select blueprint screen, select the datadog-process-rds-metrics blueprint.
-  15. Choose `RDSOSMetrics` from the **Log Group** dropdown.
-  16. Enter anything for the Filter Name and click Next.
-  17. Enter a name for your function, such as `lambda-datadog-post-function`.
-  18. Among the Lambda function's environment variables, look for one named kmsEncryptedKeys. Set its value to the ciphertext blob from the output of the command in step 5.
-  19. Under Lambda function handler and role, choose the role you created above. Click **Next**.
-  20. Choose **Enable Now**
-  21. Choose **Create Function**.
+##### Create your Lambda function
+
+12. From the Lambda Management Console, create a new Lambda Function.
+13. On the Select blueprint screen, select the **datadog-process-rds-metrics blueprint.**
+14. Choose `RDSOSMetrics` from the **Log Group** dropdown.
+15. Enter anything for the Filter Name and click Next.
+16. Enter a name for your function, such as `lambda-datadog-post-function`.
+17. Among the Lambda function's environment variables, look for one named `<KMS_ENCRYPTED_KEYS>` . Set its value to the ciphertext blob from the output of the command in step 7 of previous section.
+18. Under Lambda function handler and role, choose the role you created previously. Click **Next**.
+19. Choose **Enable Now**
+20. Choose **Create Function**.
 
 ---- 
 
 When clicking on test button for your lambda function you might get this error:
-
 {{< highlight json >}}
 { 
   "stackTrace": [ [ "/var/task/lambda_function.py", 
