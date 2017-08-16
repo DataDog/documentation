@@ -40,8 +40,8 @@ Enable Enhanced Monitoring for your RDS instance. This can either be done during
 3.  Enter an Alias for the key, such as `lambda-datadog-key`. *Note: An alias cannot begin with aws. Aliases that begin with aws are reserved by Amazon Web Services to represent AWS-managed CMKs in your account.*
 4. Save your KMS key
 5.  Add the appropriate administrators and then users for the key. Ensure that you select yourself at least as a user.
-6.  Encrypt the key you just created by using the [AWS CLI][5], replacing \<KMS_KEY_NAME\> with the alias of the key you just created: </b>
-`aws kms encrypt --key-id alias/<KMS_KEY_NAME> --plaintext '{"api_key":"<DATADOG_API_KEY>", "app_key":"<DATADOG_APP_KEY>"}'`. </b>
+6.  Encrypt the key you just created by using the [AWS CLI][5], replacing \<KMS_KEY_NAME\> with the alias of the key you just created: <br>
+`aws kms encrypt --key-id alias/<KMS_KEY_NAME> --plaintext '{"api_key":"<DATADOG_API_KEY>", "app_key":"<DATADOG_APP_KEY>"}'`. <br>
 The command output will include two parts: a ciphertext blob followed by the key ID that starts with something similar to **arn:aws:kms**.
 
 7. Keep your base-64 encoded, encrypted key (CiphertextBlob) you will need it to set the `<KMS_ENCRYPTED_KEYS>` variable for your [lambda](#create-your-lambda-function).
