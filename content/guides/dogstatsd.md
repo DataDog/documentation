@@ -339,7 +339,7 @@ Here's an example datagram:
     # Send a CRITICAL status for a remote connection
     _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
-## Related Reading
+## Further Reading
 
 [Libraries page](/libraries/) — find a DogStatsD client library to suit your needs.
 

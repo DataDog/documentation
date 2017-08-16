@@ -5,7 +5,7 @@ listorder: 16
 beta: true
 ---
 
-### Introduction
+## Introduction
 
 The new Datadog Process Monitor allows for real-time process-level visibility.  After configuring the Agent, information from a host’s /proc file system will be streamed into Datadog and presented in a table at [https://app.datadoghq.com/process](https://app.datadoghq.com/process).
 
@@ -17,7 +17,7 @@ Checking “show summary graphs” at the top of the page will graph metrics for
 
 {{< img src="process/live_process_preview.png" >}}
 
-### Configure the Datadog Agent to collect Live Process data
+## Configure the Datadog Agent to collect Live Process data
 
 Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
 
@@ -31,7 +31,7 @@ and adding the following line to the `[Main]` section
     
 After configuration is complete, restart the Agent.
 
-### Docker container
+## Docker container
 
 **Update to the Datadog Agent image version 5.16.0 or above**
 
@@ -46,7 +46,7 @@ For docker installation, follow the instructions for [docker-dd-agent](https://g
     -e HOST_PROC=/host/proc
     -e HOST_SYS=/host/sys
 
-### Kubernetes Daemonset
+## Kubernetes Daemonset
 
 In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
@@ -69,11 +69,11 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
 Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 
-### Proxy Configuration
+## Proxy Configuration
 
 Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
 
-### Notes/known issues
+## Notes/known issues
 
 - Requires Linux.
 

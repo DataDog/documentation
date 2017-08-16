@@ -278,7 +278,7 @@ spec:
         - containerPort: 80
 ~~~
 
-# Reference
+## Reference
 
 ### Template Variable Indexes
 
@@ -302,7 +302,7 @@ If you provide a template for the same check type via multiple template sources,
 
 So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
-# Troubleshooting
+## Troubleshooting
 
 When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 
