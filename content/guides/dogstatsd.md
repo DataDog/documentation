@@ -38,10 +38,10 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service checks and Events
 * Tagging
 
-**Note**: dogstatsD doesn't exactly follow the statsd implementation:
+**Note**: DogStatsD does NOT implement the following from StatsD:
 
-* It does not support Gauge delta ([Learn more about this](https://github.com/DataDog/dd-agent/pull/2104))
-* It does not support the timing type on custom metrics. ([Learn more about this](#timers))
+* Gauge deltas (see [this issue](https://github.com/DataDog/dd-agent/pull/2104))
+* Timers as a native metric type (though it [does support them via histograms](#timers))
 
 ## How It Works
 
