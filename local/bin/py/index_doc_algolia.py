@@ -11,15 +11,9 @@ from bs4 import BeautifulSoup
 from markdown import markdown
 
 
-
 def content_location():
-    """
-    This function is used by index_algolia when no content_path is used. It assumes a relative pathway
-    that matches the current site structure. Obvs, subject to change.
-    :return: string path to content
-    """
+
     this_dir = os.getcwd()
-    #path_to_content = os.path.join(this_dir, 'content/blog')
 
     path_to_content = 'public'
 
@@ -38,7 +32,7 @@ def index_algolia(app_id, api_key, content_path=None):
 
     remove_articles = []
 
-    dirs_exclude = ('js','images','fonts','en','css')
+    dirs_exclude = ('js','images','fonts','en','css', 'search')
     files_to_exclude = ('404.html')
 
     docs_host = 'https://docs.datadoghq.com'
@@ -55,21 +49,16 @@ def index_algolia(app_id, api_key, content_path=None):
             for (dirpath, dirnames, filenames) in os.walk(content_path):
                 dirnames[:] = [d for d in dirnames if d not in dirs_exclude]
 
-                #import pdb;pdb.set_trace()
-
                 filenames[:] = [f for f in filenames if f.endswith('.html') and f not in files_to_exclude]
 
                 for filename in filenames:
 
                     lang = ''
 
-                    #file_parts = filename.split(".")
-
                     if dirpath.startswith("public/ja"):
 
                         lang = 'ja'
 
-                    #import pdb;pdb.set_trace()
                     article = {}
 
                     url = ''
@@ -79,25 +68,16 @@ def index_algolia(app_id, api_key, content_path=None):
                         html = BeautifulSoup(myfile, "lxml")
                         main = html.find("div", {"main"})
 
-                        #if main:
-                        #import pdb;pdb.set_trace()
                         main_text = ''
                         if main:
                             main_text = main.text
-                            desc_text = main_text.split()[:10]
-                            #import pdb;pdb.set_trace()
+                            desc_text = main_text.split()[:100]
 
-                        #full_text = myfile.read()
-                        #re_match = re.match('(?:-{3})(.*?)(?:-{3})(.*)', full_text, re.DOTALL)
-                        #yaml_front_matter = yaml.load(re_match.group(1))
-                        #html = markdown(re_match.group(2))
-                        #pat = re.compile('({:)(.*)(yaml})|(<%=|<%)(.*)(%>)')
-                        #html_clean = re.sub(pat,'',html)
-                        #text = ''.join(BeautifulSoup(html_clean, "html.parser").findAll(text=True))
-
-                        #file_folder_path = (dirpath.split("content/"))
 
                         title = html.title.string
+
+                        if not title:
+                            title = html.select('h1')[0].text.strip()
 
                         fm_description = desc = html.findAll(attrs={"name":"description"})
                         description = ''
@@ -109,36 +89,26 @@ def index_algolia(app_id, api_key, content_path=None):
                             desc_text = " ".join(desc_text)
                             description = desc_text
 
-                            #else:
-                                #desc_text = 'test'
+                        url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if "data-relpermalink" in item.attrs]
 
-                            #text = " ".join(split_text)
+                        if url_relpermalink:
+                            url_path = str(url_relpermalink[0])
 
-                        # if(len(file_folder_path) > 1):
-                        #     if(file_name == "index"):
-                        #         url = docs_host + '/' + file_folder_path[1] + '/'
-                        #     else:
-                        #         url = docs_host + '/' + file_folder_path[1] + '/'+file_name
+                        url = docs_host+url_path
 
-                        # if(file_name in ["libraries", "graphing", "help", "hostnames", "metrictypes", "install_debian_5", "monitoring", "units"]):
-                        #     url = docs_host + '/' +file_name
-
-                        article['objectID'] = time.time()
-                        #article['URL'] = url
+                        article['objectID'] = dirpath+'/'+filename
+                        article['URL'] = url
                         article['title'] = title
                         article['body'] = description
                         article['file'] = dirpath+'/'+filename
-                        #import pdb;pdb.set_trace()
 
                         if lang == 'ja':
-                            #import pdb;pdb.set_trace()
                             index_japanese_articles.append(article)
                         else:
                             index_english_articles.append(article)
 
             # save public articles to algolia index
             try:
-                #import pdb;pdb.set_trace()
                 index_english.save_objects(index_english_articles)
                 index_japanese.save_objects(index_japanese_articles)
                 print('Algolia Docs objects have been successfully updated.')
