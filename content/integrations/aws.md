@@ -62,7 +62,9 @@ Related integrations include:
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
+<div class="alert alert-warning">
+The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the <a href="#configuration-for-china-and-govcloud">configuration section</a> below.
+</div>
 
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 {{< highlight json>}}
@@ -146,7 +148,7 @@ If you are not comfortable with granting all of these permissions, at the very l
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
-3.  Enter your AWS Access Key and AWS Secret Key. Note: only access and secret keys for China and GovCloud are accepted.
+3.  Enter your AWS Access Key and AWS Secret Key. **Only access and secret keys for China and GovCloud are accepted.**
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
@@ -162,7 +164,9 @@ The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, y
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
 * `cloudwatch:GetMetricStatistics` to fetch data points for a given metric.
 
-Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+<div class="alert alert-info">
+These actions and the ones listed below are included in the Policy Document using wild cards such as <code>List*</code> and <code>Get*</code>. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+</div>
 
 By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
 
@@ -172,7 +176,7 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 * `autoscaling:DescribePolicies`: List available policies (for autocompletion in events and monitors).
 * `autoscaling:DescribeTags`: Used to list tags for a given autoscaling group. This will add ASG custom tags on ASG CloudWatch metrics.
 * `autoscaling:DescribeScalingActivities`: Used to generate events when an ASG scales up or down.
-* `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
+* `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). <br>This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
 
 For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
 
@@ -318,7 +322,7 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 ### Support
 
-* `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
+* `support:*`: Used to add metrics about service limits.<br>It requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 ### Tag
 

@@ -14,7 +14,9 @@ This Jenkins plugin sends your build and deployment events to Datadog. From ther
 
 The plugin also tracks build times (as a metric) and statuses (as a service check), so you'll know when your builds aren't healthy.
 
-**Note: The Jenkins check for the Datadog Agent is deprecated.** Use the [Jenkins plugin](https://github.com/DataDog/jenkins-datadog-plugin).
+<div class="alert alert-info">
+The Jenkins check for the Datadog Agent is deprecated. Use the <a href="https://github.com/DataDog/jenkins-datadog-plugin">Jenkins plugin</a>
+</div>
 
 ## Installation
 
