@@ -3,7 +3,7 @@ title: Installing the Agent on Debian 5
 kind: documentation
 ---
 
-### One-Step
+## One-Step
 
 The Agent can be installed on Debian Lenny (5.0) using our one-step install command: <br/>
 
@@ -11,7 +11,7 @@ The Agent can be installed on Debian Lenny (5.0) using our one-step install comm
 
 Be sure to substitute your API key into the command. Your key can be found <a href="https://app.datadoghq.com/account/settings#api">here</a>.
 
-### Step-by-Step
+## Step-by-Step
 
 If you prefer, the Agent can also be installed by following our step-by-step instructions:
 
