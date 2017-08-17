@@ -3,6 +3,7 @@ title: HTTP check
 integration_title: HTTP Check
 kind: integration
 newhlevel: true
+git_integration_title: http_check
 update_for_agent: 5.8.5
 ---
 ## Overview
@@ -71,3 +72,8 @@ Execute the agent info command and verify that the integration check was success
     ----------
       - instance #0 [OK]
       - Collected 0 metrics, 0 events & 1 service check
+
+## Data Collected
+### Metrics
+
+{{< get-metrics-from-git >}}
