@@ -10,14 +10,6 @@ sidebar:
       href: "#aliases"
 ---
 
-<div class="alert alert-info">
-  An overview of how we uniquely identify hosts and how they are displayed in
-  Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
-</div>
-
 <h2 id="agent">Agent Host Names</h2>
 
 <div class="alert alert-warn">
