@@ -32,7 +32,7 @@ def index_algolia(app_id, api_key, content_path=None):
 
     remove_articles = []
 
-    dirs_exclude = ('js','images','fonts','en','css', 'search')
+    dirs_exclude = ('js','images','fonts','en','css', 'search', 'matts quick tips')
     files_to_exclude = ('404.html')
 
     docs_host = 'https://docs.datadoghq.com'
@@ -71,7 +71,7 @@ def index_algolia(app_id, api_key, content_path=None):
                         main_text = ''
                         if main:
                             main_text = main.text
-                            desc_text = main_text.split()[:100]
+                            desc_text = main_text.split()[:25]
 
 
                         title = html.title.string
