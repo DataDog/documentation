@@ -9,14 +9,36 @@ beta: true
 
 Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-
 {{< img src="process/live_process_preview.png" >}}
+
+## Usage
+
+**String Search**
+
+Processes and Containers are by their nature extremely high cardinality objects.  Our fuzzy string search will match any facet of a Process or Container, giving you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the current working directory, and that `postgres` matches the command itself.
+
+-screenshot-
+
+**Tagging**
+
+Processes and Containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual Processes and Containers. 
+
+*Processes* are tagged by `#user`
+
+*Containers* are tagged with `#container_image`
+
+Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further Container-level tags.
+
+ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
+
+Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, and `#deployment`.
+
+**Filtering and Pivoting**
+
 
 ## Deep Inspection
 
-## Searching, Filtering, and Pivoting
-
-
+## Real-time monitoring
 
 ## Installation
 
