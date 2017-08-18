@@ -262,7 +262,8 @@ def sync(*args):
         options.integrations = integrations_extract_path
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     sync_from_dir(options.integrations, dest_dir)
-    update_integration_pre_build(options.integrations, dest_dir)
+    if not options.dogweb:
+        update_integration_pre_build(options.integrations, dest_dir)
 
 if __name__ == '__main__':
     sync()
