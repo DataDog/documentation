@@ -158,7 +158,7 @@ def sync(*args):
     dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
     integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
     #dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
-
+    dest_dir = '/mnt/gitlab/builds/datadog/documentation/content/integrations'
     if options.integrations:
         options.integrations = abspath(normpath(options.integrations))
         if not options.integrations.endswith(sep):
@@ -183,7 +183,7 @@ def sync(*args):
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
     print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, '/mnt/gitlab/builds/datadog/documentation/content/integrations')
+    update_integration_pre_build(options.integrations, dest_dir)
 
 if __name__ == '__main__':
     sync()
