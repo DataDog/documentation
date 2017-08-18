@@ -23,7 +23,7 @@ Functions
 
 def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     """
-    Using the github api downloads csv files to a temporary location for processing
+    Using the github api downloads manifest files to a temporary location for processing
 
     :param token: string of github token
     :param org: string of organization
@@ -47,7 +47,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 name = obj.get('name', '')
                 if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
                     to_manifest = '{}/manifest.json'.format(name)
-                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv), headers=headers)
+                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
                     if response_manifest.status_code == requests.codes.ok:
                         with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
                             print('Creating manifest for {} in {}'.format(name,to_path))
