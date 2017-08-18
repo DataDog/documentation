@@ -67,17 +67,23 @@ def replace_token(to_path, key_name, content_token, data):
     """
     print("Replacing manifest for {}{}".format(to_path,key_name))
     # Read in the file
-    with open('{}{}.md'.format(to_path,key_name), 'r') as file :
-        print('opening {}.md'.format(key_name))
-        filedata = file.read()
+    try:
+        with open('{}{}.md'.format(to_path,key_name), 'r') as file :
+            print('opening {}.md'.format(key_name))
+            filedata = file.read()
+        # Replace the target string
+        filedata = filedata.replace(content_token, data)
 
-    # Replace the target string
-    filedata = filedata.replace(content_token, data)
+        # Write the file out again
+        with open('{}{}.md'.format(to_path,key_name), 'w') as file:
+            print('writing {}.md'.format(key_name))
+            file.write(filedata)
 
-    # Write the file out again
-    with open('{}{}.md'.format(to_path,key_name), 'w') as file:
-        print('writing {}.md'.format(key_name))
-        file.write(filedata)
+    except Exception as error: 
+        print ("file {}{}.md does not exists".format(to_path,key_name))
+        print(error)
+        pass
+
 
 def file_update_content(to_path, key_name, data_array):
     """
@@ -127,6 +133,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
         pattern = '**/*_manifest.json'
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
+            
             """
             Gathering the manifest short description and inlining it to the description param for a given integration
             """
@@ -183,7 +190,7 @@ def sync(*args):
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
     print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, "../../../content/integrations/")
+    update_integration_pre_build(options.integrations, "content/integrations/")
 
 if __name__ == '__main__':
     sync()
