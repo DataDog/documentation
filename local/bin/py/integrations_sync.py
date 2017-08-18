@@ -9,7 +9,6 @@ import tempfile
 import csv
 import glob
 
-
 def csv_to_yaml(key_name, csv_filename, yml_filename):
     """
     Given a file path to a single csv file convert it to a yaml file
@@ -44,6 +43,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     excludes = ['LICENSE', 'Rakefile', 'Gemfile']
     print('Downloading files from {}/{}..'.format(repo, branch))
     response = requests.get(url, headers=headers)
+
     if response.status_code == requests.codes.ok:
         for obj in tqdm(response.json()):
             name = obj.get('name', '')
@@ -57,11 +57,11 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 if response_csv.status_code == requests.codes.ok:
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
+    
 
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
-
 
 def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
@@ -86,6 +86,7 @@ def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     else:
         print('Path does not exist: {}'.format(from_path))
         exit(1)
+
 
 
 def parse_args(args=None):
@@ -156,7 +157,6 @@ def sync(*args):
         options.integrations = integrations_extract_path
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     sync_from_dir(options.integrations, dest_dir)
-
 
 if __name__ == '__main__':
     sync()
