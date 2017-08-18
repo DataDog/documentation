@@ -52,7 +52,6 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                     response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
                     if response_manifest.status_code == requests.codes.ok:
                         with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                            print('Creating manifest for {} in {}'.format(name,to_path))
                             f.write(response_manifest.content)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
@@ -105,7 +104,6 @@ def manifest_get_data(to_path,key_name,attribute):
     :param attribute:   attribute to get data from
     """ 
     with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
-        print("getting data from manifest{}".format(to_path))
         manifest_json = json.load(manifest)
         return manifest_json[attribute]
 
