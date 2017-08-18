@@ -11,7 +11,7 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 {{< img src="process/live_process_preview.png" >}}
 
-## Usage
+## Searching, Filtering, and Pivoting
 
 **String Search**
 
