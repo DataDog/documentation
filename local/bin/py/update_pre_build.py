@@ -183,7 +183,7 @@ def sync(*args):
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
     print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, options.integrations)
+    update_integration_pre_build(options.integrations, "content/integrations/")
 
 if __name__ == '__main__':
     sync()
