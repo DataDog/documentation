@@ -43,10 +43,21 @@ In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and
 
 -screenshot-
 
-Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.   
+Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
 
+-screenshot-
+
+It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
+
+Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
+
+-screenshot-
 
 ## Broad Inspection, Deep Inspection
+
+Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
+
+From there, you can dig down into finer grains, or inspect each group to see individual Processes or Containers.  In the below screenshot, you can see an investigation that started by indexing by deployment and host, dug into a hot
 
 ## Real-time monitoring
 
