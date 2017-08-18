@@ -8,88 +8,6 @@ import requests
 import tempfile
 import csv
 import glob
-import fileinput
-import json
-
-"""
-Variables
-"""
-DESC_TOKEN = "{{< get-desc-from-git >}}"
-DESC_ATTRIBUTE = "short_description"
-
-"""
-Functions
-"""
-
-def replace_token(to_path, key_name, content_token, data):
-    """
-    Inline the content of data instead of the content_token in an integration content file
-
-    :param to_path:                 the output path to yaml files
-    :param key_name:        integration key name for root object
-    :param content_token:   token to find and replace inside the file
-    :param data:            data to inline in the file
-    """
-
-    # Read in the file
-    with open('{}{}.md'.format(to_path,key_name), 'r') as file :
-        print('opening {}.md'.format(key_name))
-        filedata = file.read()
-
-    # Replace the target string
-    filedata = filedata.replace(content_token, data)
-
-    # Write the file out again
-    with open('{}{}.md'.format(to_path,key_name), 'w') as file:
-        print('writing {}.md'.format(key_name))
-        file.write(filedata)
-
-def file_update_content(to_path, key_name, data_array):
-    """
-    Take an integration file and inline all token inside
-    
-    :param to_path:         the output path to yaml files
-    :param key_name:        integration key name for root object
-    :param data_array:  Array of data to inline, array of tuple {"content_token":"data"}
-    """ 
-    for obj in data_array:
-        replace_token(to_path, key_name,obj[0],obj[1])
-
-
-def manifest_get_data(to_path,key_name,attribute):
-    """
-    Extract an attribute value from the manifest of an integration
-    
-    :param to_path:     the output path to yaml files
-    :param key_name:    integration key name for root object
-    :param attribute:   attribute to get data from
-    """ 
-    with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
-        manifest_json = json.load(manifest)
-        return manifest_json[attribute]
-
-def update_integration_pre_build(from_path=None, to_path=None):
-    """
-  All modifications that may happen to a integration content are here
-    
-    
-    """
-    
-    if exists(from_path):
-        pattern = '**/*_manifest.json'
-        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
-            key_name = basename(file_name.replace('_manifest.json', ''))
-            """
-            Gathering the manifest short description and inlining it to the description param for a given integration
-            """
-            data_array=[]
-            data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
-
-            print('Updating integrations description...')
-            file_update_content(to_path, key_name, data_array)
-    else:
-        print('Path does not exist: {}'.format(from_path))
-        exit(1)
 
 def csv_to_yaml(key_name, csv_filename, yml_filename):
     """
@@ -126,9 +44,6 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     print('Downloading files from {}/{}..'.format(repo, branch))
     response = requests.get(url, headers=headers)
 
-    """
-    Donwloading metadata.csv
-    """
     if response.status_code == requests.codes.ok:
         for obj in tqdm(response.json()):
             name = obj.get('name', '')
@@ -147,26 +62,6 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
-
-    """
-    Donwloading manifest.json for integrations core repo only
-    """
-    if response.status_code == requests.codes.ok:
-        if not is_dogweb:
-            for obj in tqdm(response.json()):
-                name = obj.get('name', '')
-                if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                    to_manifest = '{}/manifest.json'.format(name)
-                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv), headers=headers)
-                    if response_manifest.status_code == requests.codes.ok:
-                        with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                            print('Creating manifest for {} in {}'.format(name,to_path))
-                            f.write(response_manifest.content)
-    else:
-        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
-        exit(1)
-
-
 
 def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
@@ -262,9 +157,6 @@ def sync(*args):
         options.integrations = integrations_extract_path
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     sync_from_dir(options.integrations, dest_dir)
-
-    if not options.dogweb:
-        update_integration_pre_build(options.integrations, dest_dir)
 
 if __name__ == '__main__':
     sync()

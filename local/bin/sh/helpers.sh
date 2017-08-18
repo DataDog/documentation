@@ -155,6 +155,9 @@ sync_integration_metrics() {
 	integrations_sync.py --token ${GITHUB_TOKEN}
 }
 
+update_pre_build() {
+    update_pre_build.py --token ${GITHUB_TOKEN}
+}
 
 push_site_to_s3() {
     # $1: BUCKET

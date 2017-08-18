@@ -39,6 +39,7 @@ build_preview:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
     - placehold_translations
+    - update_pre_build
     - sync_integration_metrics
     - build_hugo_site
     - minify_html
