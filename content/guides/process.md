@@ -63,6 +63,13 @@ From there, you can dig down into finer grains, or inspect each group to see ind
 
 ## Real-time monitoring
 
+While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.
+
+In the background, for historical context, metrics are collected at 10s resolution.  To disable realtime mode, edit your `datadog.conf` file as described in the installation section below and append:
+
+    [process.config]
+    realtime_interval: 10
+
 ## Installation
 
 **Standard Agent Configuration**
