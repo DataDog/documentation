@@ -16,6 +16,7 @@ Variables
 """
 DESC_TOKEN = "{{< get-desc-from-git >}}"
 DESC_ATTRIBUTE = "short_description"
+INTEGRATION_FOLDER = "content/integrations/"
 
 """
 Functions
@@ -38,6 +39,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     excludes = ['LICENSE', 'Rakefile', 'Gemfile']
     print('Downloading files from {}/{}..'.format(repo, branch))
     response = requests.get(url, headers=headers)
+    
     """
     Donwloading manifest.json for integrations core repo only
     """
@@ -50,7 +52,6 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                     response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
                     if response_manifest.status_code == requests.codes.ok:
                         with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                            print('Creating manifest for {} in {}'.format(name,to_path))
                             f.write(response_manifest.content)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
@@ -58,40 +59,37 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
 
 def replace_token(to_path, key_name, content_token, data):
     """
-    Inline the content of data instead of the content_token in an integration content file
+    Inline the content of data instead of the content_token in an integration file
 
-    :param to_path:                 the output path to yaml files
+    :param to_path:         the output path to integration md files
     :param key_name:        integration key name for root object
     :param content_token:   token to find and replace inside the file
     :param data:            data to inline in the file
     """
-    print("Replacing manifest for {}{}".format(to_path,key_name))
-    # Read in the file
     try:
+        # Read in the file
         with open('{}{}.md'.format(to_path,key_name), 'r') as file :
-            print('opening {}.md'.format(key_name))
             filedata = file.read()
+        
         # Replace the target string
         filedata = filedata.replace(content_token, data)
 
         # Write the file out again
         with open('{}{}.md'.format(to_path,key_name), 'w') as file:
-            print('writing {}.md'.format(key_name))
             file.write(filedata)
 
     except Exception as error: 
-        print ("file {}{}.md does not exists".format(to_path,key_name))
         print(error)
         pass
 
 
 def file_update_content(to_path, key_name, data_array):
     """
-    Take an integration file and inline all token inside
+    Take an integration file and inline all token found inside
     
-    :param to_path:         the output path to yaml files
+    :param to_path:         the output path to integration md files
     :param key_name:        integration key name for root object
-    :param data_array:  Array of data to inline, array of tuple {"content_token":"data"}
+    :param data_array:      Array of data to inline, array of array [content_token,data]
     """ 
     for obj in data_array:
         replace_token(to_path, key_name,obj[0],obj[1])
@@ -101,12 +99,11 @@ def manifest_get_data(to_path,key_name,attribute):
     """
     Extract an attribute value from the manifest of an integration
     
-    :param to_path:     the output path to yaml files
+    :param to_path:     the output path to integration md files
     :param key_name:    integration key name for root object
     :param attribute:   attribute to get data from
     """ 
     with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
-        print("getting data from manifest{}".format(to_path))
         manifest_json = json.load(manifest)
         return manifest_json[attribute]
 
@@ -127,6 +124,9 @@ def parse_args(args=None):
 def update_integration_pre_build(from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
+    
+    :param from_path:   the input path where we scrap data from
+    :param to_path:     the output path to integration md files
     """
     
     if exists(from_path):
@@ -135,12 +135,14 @@ def update_integration_pre_build(from_path=None, to_path=None):
             key_name = basename(file_name.replace('_manifest.json', ''))
             
             """
-            Gathering the manifest short description and inlining it to the description param for a given integration
+            Gathering the manifest short description and adding the right token
             """
             data_array=[]
             data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
 
-            print('Updating integrations description...')
+            """
+            Inlining the data in the description param for a given integration
+            """
             file_update_content(to_path, key_name, data_array)
     else:
         print('Path does not exist: {}'.format(from_path))
@@ -189,8 +191,8 @@ def sync(*args):
         options.integrations = integrations_extract_path
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
-    print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, "content/integrations/")
+    print('Updating integrations description...')
+    update_integration_pre_build(options.integrations, INTEGRATION_FOLDER)
 
 if __name__ == '__main__':
     sync()
