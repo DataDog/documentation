@@ -118,19 +118,40 @@ def parse_args(args=None):
     parser.add_option("-s", "--source", help="location of src files", default=curdir)
     return parser.parse_args(args)
 
-def update_integration_pre_build(*args):
+def update_integration_pre_build(from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
-    
-    
     """
-    print("updating pre build")
+    
+    if exists(from_path):
+        pattern = '**/*_manifest.json'
+        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
+            key_name = basename(file_name.replace('_manifest.json', ''))
+            """
+            Gathering the manifest short description and inlining it to the description param for a given integration
+            """
+            data_array=[]
+            data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
+
+            print('Updating integrations description...')
+            file_update_content(to_path, key_name, data_array)
+    else:
+        print('Path does not exist: {}'.format(from_path))
+        exit(1)
+
+def sync(*args):
+    """
+    Given optional arguments generate yaml integration data from dogweb / integrations-core
+    using either local or remote data
+
+    :param args: list of arguments
+    """
+
     # collect arguments
     options, args = parse_args(*args)
 
     # attempt to get token from env vars, take explicit arg over envs
     options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
-
 
     # setup path variables
     extract_path = '{}'.format(join(tempfile.gettempdir(), "extracted") + sep)
@@ -148,23 +169,31 @@ def update_integration_pre_build(*args):
         if not options.dogweb.endswith(sep):
             options.dogweb += sep
 
-    if exists(options.integrations):
-        if not options.dogweb:
-            pattern = '**/*_manifest.json'
-            for file_name in tqdm(sorted(glob.glob('{}{}'.format(options.integrations, pattern), recursive=True))):
-                key_name = basename(file_name.replace('_manifest.json', ''))
-                """
-                Gathering the manifest short description and inlining it to the description param for a given integration
-                """
-                data_array=[]
-                data_array.append([DESC_TOKEN,manifest_get_data(options.integrations,key_name,DESC_ATTRIBUTE)])
+    # create data/integrations and other dirs if non existing
+    makedirs(dest_dir, exist_ok=True)
+    makedirs(dogweb_extract_path, exist_ok=True)
+    makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
+    makedirs(integrations_extract_path, exist_ok=True)
 
-                print('Updating integrations description...')
-                file_update_content(dest_dir, key_name, data_array)
-    else:
-        print('Path does not exist: {}'.format(from_path))
-        exit(1)
+    # sync from dogweb, download if we don't have it (token required)
+    if not options.dogweb:
+        if options.token:
+            options.dogweb = dogweb_extract_path
+            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
+        else:
+            print('No Github token.. dogweb retrieval failed')
+            exit(1)
+    if options.dogweb:
+        sync_from_dir(options.dogweb, dest_dir, True)
 
+    # sync from integrations, download if we don't have it (public repo so no token needed)
+    # (this takes precedence so will overwrite yaml files)
+    if not options.integrations:
+        options.integrations = integrations_extract_path
+        download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
+    
+    print("trying to update integration pre-build")
+    update_integration_pre_build(options.integrations, dest_dir)
 
 if __name__ == '__main__':
-    update_integration_pre_build()
+    sync()
