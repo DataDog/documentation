@@ -67,18 +67,23 @@ def replace_token(to_path, key_name, content_token, data):
     """
     print("Replacing manifest for {}{}".format(to_path,key_name))
     # Read in the file
-    with open('{}{}.md'.format(to_path,key_name), 'r') as file :
-        print('opening {}.md'.format(key_name))
-        filedata = file.read()
+    try:
+        with open('{}{}.md'.format(to_path,key_name), 'r') as file :
+            print('opening {}.md'.format(key_name))
+            filedata = file.read()
 
-    # Replace the target string
-    filedata = filedata.replace(content_token, data)
+        # Replace the target string
+        filedata = filedata.replace(content_token, data)
 
-    # Write the file out again
-    with open('{}{}.md'.format(to_path,key_name), 'w') as file:
-        print('writing {}.md'.format(key_name))
-        file.write(filedata)
+        # Write the file out again
+        with open('{}{}.md'.format(to_path,key_name), 'w') as file:
+            print('writing {}.md'.format(key_name))
+            file.write(filedata)
 
+    except ValueError as ve:
+        print(ve)
+        pass
+        
 def file_update_content(to_path, key_name, data_array):
     """
     Take an integration file and inline all token inside
@@ -183,7 +188,7 @@ def sync(*args):
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
     print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, "../../../content/integrations/")
+    update_integration_pre_build(options.integrations, "content/integrations/")
 
 if __name__ == '__main__':
     sync()
