@@ -65,7 +65,7 @@ def replace_token(to_path, key_name, content_token, data):
     :param content_token:   token to find and replace inside the file
     :param data:            data to inline in the file
     """
-    print("Replacing manifest for {}".format(to_path))
+    print("Replacing manifest for {}{}".format(to_path,key_name))
     # Read in the file
     with open('{}{}.md'.format(to_path,key_name), 'r') as file :
         print('opening {}.md'.format(key_name))
@@ -183,7 +183,7 @@ def sync(*args):
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
     print("trying to update integration pre-build")
-    update_integration_pre_build(options.integrations, "content/integrations/")
+    update_integration_pre_build(options.integrations, "../../../content/integrations")
 
 if __name__ == '__main__':
     sync()
