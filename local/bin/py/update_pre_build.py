@@ -148,10 +148,10 @@ def update_integration_pre_build(*args):
         if not options.dogweb.endswith(sep):
             options.dogweb += sep
 
-    if exists(from_path):
+    if exists(options.integrations):
         if not options.dogweb:
             pattern = '**/*_manifest.json'
-            for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
+            for file_name in tqdm(sorted(glob.glob('{}{}'.format(options.integrations, pattern), recursive=True))):
                 key_name = basename(file_name.replace('_manifest.json', ''))
                 """
                 Gathering the manifest short description and inlining it to the description param for a given integration
@@ -168,8 +168,3 @@ def update_integration_pre_build(*args):
 
 if __name__ == '__main__':
     update_integration_pre_build()
-
-
-
-if not options.dogweb:
-        update_integration_pre_build(options.integrations, dest_dir)
