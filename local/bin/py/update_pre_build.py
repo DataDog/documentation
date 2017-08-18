@@ -71,7 +71,6 @@ def replace_token(to_path, key_name, content_token, data):
         with open('{}{}.md'.format(to_path,key_name), 'r') as file :
             print('opening {}.md'.format(key_name))
             filedata = file.read()
-
         # Replace the target string
         filedata = filedata.replace(content_token, data)
 
@@ -80,10 +79,12 @@ def replace_token(to_path, key_name, content_token, data):
             print('writing {}.md'.format(key_name))
             file.write(filedata)
 
-    except ValueError as ve:
-        print(ve)
+    except Exception as error: 
+        print ("file {}{}.md does not exists".format(to_path,key_name))
+        print(error)
         pass
-        
+
+
 def file_update_content(to_path, key_name, data_array):
     """
     Take an integration file and inline all token inside
@@ -132,6 +133,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
         pattern = '**/*_manifest.json'
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
+            
             """
             Gathering the manifest short description and inlining it to the description param for a given integration
             """
