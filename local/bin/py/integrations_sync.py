@@ -146,8 +146,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     """
     Donwloading manifest.json for integrations core repo only
     """
-
-    if response.status_code == requests.codes.ok and not is_dogweb:
+    if ((response.status_code == requests.codes.ok) and (not is_dogweb)):
         for obj in tqdm(response.json()):
             name = obj.get('name', '')
             if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
@@ -264,7 +263,7 @@ def sync(*args):
     sync_from_dir(options.integrations, dest_dir)
     print(options.integrations)
     print (dest_dir)
-    print (options.dogweb)
+
     #if not options.dogweb:
     #    update_integration_pre_build(options.integrations, dest_dir)
 
