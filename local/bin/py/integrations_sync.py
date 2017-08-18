@@ -143,24 +143,25 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
     
+
+    else:
+        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
+        exit(1)
+
     """
     Donwloading manifest.json for integrations core repo only
     """
-    if ((response.status_code == requests.codes.ok) and (not is_dogweb)):
-        for obj in tqdm(response.json()):
-            name = obj.get('name', '')
-            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                to_manifest = '{}/manifest.json'.format(name)
-                response_manifest = requests.get(
-                    'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv),
-                    headers=headers
-                )
-                if response_manifest.status_code == requests.codes.ok:
-                    with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                        print('Creating manifest for {} in {}'.format(name,to_path))
-                        f.write(response_manifest.content)
-
-
+    if response.status_code == requests.codes.ok:
+        if not is_dogweb:
+            for obj in tqdm(response.json()):
+                name = obj.get('name', '')
+                if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
+                    to_manifest = '{}/manifest.json'.format(name)
+                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv), headers=headers)
+                    if response_manifest.status_code == requests.codes.ok:
+                        with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
+                            print('Creating manifest for {} in {}'.format(name,to_path))
+                            f.write(response_manifest.content)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
