@@ -49,11 +49,6 @@ def index_algolia(app_id, api_key, content_path=None):
             for (dirpath, dirnames, filenames) in os.walk(content_path):
                 dirnames[:] = [d for d in dirnames if d not in dirs_exclude]
 
-                #print(dirnames)
-                #import pdb;pdb.set_trace()
-                if "matts quick tips" in dirnames:
-                    import pdb;pdb.set_trace()
-
                 filenames[:] = [f for f in filenames if f.endswith('.html') and f not in files_to_exclude]
 
                 for filename in filenames:
