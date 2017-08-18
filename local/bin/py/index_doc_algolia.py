@@ -71,7 +71,7 @@ def index_algolia(app_id, api_key, content_path=None):
                         main_text = ''
                         if main:
                             main_text = main.text
-                            desc_text = main_text.split()[:100]
+                            desc_text = main_text.split()[:25]
 
 
                         title = html.title.string
