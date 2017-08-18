@@ -175,16 +175,6 @@ def sync(*args):
     makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
     makedirs(integrations_extract_path, exist_ok=True)
 
-    # sync from dogweb, download if we don't have it (token required)
-    if not options.dogweb:
-        if options.token:
-            options.dogweb = dogweb_extract_path
-            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
-        else:
-            print('No Github token.. dogweb retrieval failed')
-            exit(1)
-    if options.dogweb:
-        sync_from_dir(options.dogweb, dest_dir, True)
 
     # sync from integrations, download if we don't have it (public repo so no token needed)
     # (this takes precedence so will overwrite yaml files)
