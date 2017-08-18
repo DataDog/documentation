@@ -26,6 +26,7 @@ before_script:
 
 # ================== Local Test ================== #
 build_local:
+  <<: *base_template
   stage: build
   environment: "local"
   variables:
