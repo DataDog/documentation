@@ -19,6 +19,8 @@ Processes and Containers are by their nature extremely high cardinality objects.
 
 -screenshot-
 
+
+
 **Tagging**
 
 Processes and Containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual Processes and Containers. 
@@ -27,7 +29,7 @@ Processes and Containers are tagged with all existing host-level tags.  Addition
 
 *Containers* are tagged with `#container_image`
 
-Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further Container-level tags.
+Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further Container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
 ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
 
@@ -35,8 +37,16 @@ Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`,
 
 **Filtering and Pivoting**
 
+Making sense of hundreds of thousands or millions of Processes and Containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-## Deep Inspection
+In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the hard limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
+
+-screenshot-
+
+Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.   
+
+
+## Broad Inspection, Deep Inspection
 
 ## Real-time monitoring
 
