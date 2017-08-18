@@ -57,7 +57,9 @@ Below, we have searched for ssh processes and pivoted by `#user` to understand w
 
 Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
 
-From there, you can dig down into finer grains, or inspect each group to see individual Processes or Containers.  In the below screenshot, you can see an investigation that started by indexing by deployment and host, dug into a hot
+From there, you can dig down into finer grains, or inspect each group to see individual Processes or Containers.  In the below screenshot, you can see an investigation that started by indexing by deployment and host, dug into one row to see the containers in that pod, and then expanded the pod to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
+
+-screenshot-
 
 ## Real-time monitoring
 
