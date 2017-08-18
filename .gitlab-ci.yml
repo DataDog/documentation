@@ -24,6 +24,29 @@ before_script:
   only:
     - branches
 
+# ================== Local Test ================== #
+build_local:
+  stage: build
+  environment: "local"
+  variables:
+    BUCKET: ${PREVIEW_BUCKET}
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+    MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+  script:
+    - version_static_assets
+    - placehold_translations
+    - update_pre_build
+    - sync_integration_metrics
+    - build_hugo_site
+    - minify_html
+    - collect_static_assets
+    - push_site_to_s3
+    - remove_static_from_repo
+    - create_artifact
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
 build_preview:
@@ -39,6 +62,7 @@ build_preview:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
     - placehold_translations
+    - update_pre_build
     - sync_integration_metrics
     - build_hugo_site
     - minify_html
