@@ -18,7 +18,9 @@ Connects your OpenStack cluster to Datadog in order to:
 ## Setup
 ### Installation
 
-Note: Installing the OpenStack Integration could increase the number of VMs that Datadog monitors. For more information on how this may affect your billing, please visit our Billing FAQ.
+<div class="alert alert-info">
+Installing the OpenStack Integration could increase the number of VMs that Datadog monitors. For more information on how this may affect your billing, please visit our Billing FAQ.
+</div>
 
 To capture OpenStack metrics you need to install the Datadog Agent on your hosts running hypervisors.
 

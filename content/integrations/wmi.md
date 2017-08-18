@@ -61,15 +61,18 @@ If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to forc
             tag_queries:
               - [IDProcess, Win32_Process, Handle, CommandLine]
 
-    Note that the default configuration uses the filter clause to limit the metrics pulled. Either set the filters to valid values or remove them as shown above to collect the metrics.
+<div class="alert alert-info">
+The default configuration uses the filter clause to limit the metrics pulled. Either set the filters to valid values or remove them as shown above to collect the metrics.
+</div>
 
-    The metrics definitions include three components: class property in WMI, metric name as it appears in Datadog, and the metric type.
+The metrics definitions include three components: 
 
-4.  Restart the agent.
-
-{{< insert-example-links conf="wmi_check" check="wmi_check" >}}
+* Class property in WMI
+* Metric name as it appears in Datadog
+* The metric type.
 
 #### Configuration Options
+*This feature is available starting with version 5.3 of the agent*
 
 Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` and `tag_queries`.
 
@@ -113,13 +116,15 @@ It translates to a WMI query:
 
     SELECT 'target property' FROM 'target class' WHERE 'link target class property' = 'link source property'
 
-Note: setting this will cause any instance number to be removed from tag_by values
- i.e. name:process#1 => name:process
-
-This feature is available starting with version 5.3 of the agent
+<div class="alert alert-info">
+Setting this will cause any instance number to be removed from tag_by values i.e. name:process#1 => name:process
+</div>
 
 ### Validation
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
 {{< img src="integrations/wmi/wmivalidate.png" style="width:400px;" >}}
+
+## Further Reading
+{{< insert-example-links conf="wmi_check" check="wmi_check" >}}
