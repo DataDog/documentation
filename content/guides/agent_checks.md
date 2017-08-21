@@ -62,11 +62,7 @@ SETUP
 
 First off, ensure you've properly
 <a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, pop by
-our chatroom, <a href="irc://irc.freenode.net/datadog">#datadog on FreeNode</a>,
-and we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
+Agent</a> on your machine. If you run into any issues during the setup, <a href="https://docs.datadoghq.com/help/">Get in touch with us! </a>, we'll be happy to answer any questions you might have.
 
 <!--
 ======================================================
