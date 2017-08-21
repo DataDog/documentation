@@ -10,6 +10,7 @@ import csv
 import glob
 import fileinput
 import json
+import re
 
 """
 Variables
@@ -18,6 +19,21 @@ DESC_TOKEN = "{{< get-desc-from-git >}}"
 DESC_ATTRIBUTE = "short_description"
 INTEGRATION_FOLDER = "content/integrations/"
 
+OVERVIEW_TOKEN = "{{< get-overview-from-git >}}"
+OVERVIEW_PATTERN = r'## Overview((?s).*)## Setup'
+
+SETUP_TOKEN = "{{< get-setup-from-git >}}"
+SETUP_PATTERN = r'## Setup((?s).*)## Data Collected'
+
+DATA_COLLECTED_TOKEN= "{{< get-data-collected-from-git >}}"
+DATA_COLLECTED_PATTERN= r'## Data Collected((?s).*)## Troubleshooting'
+
+
+TROUBLESHOOTING_TOKEN ="{{< get-troubleshooting-from-git >}}"
+TROUBLESHOOTING_PATTERN= r'## Troubleshooting((?s).*)## Further Reading'
+
+FURTHER_READING_TOKEN = "{{< get-further-reading-from-git >}}"
+FURTHER_READING_PATTERN= r'## Overview((?s).*)'
 """
 Functions
 """
@@ -56,6 +72,24 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
+
+    """
+    Donwloading manifest.json for integrations core repo only
+    """
+    if response.status_code == requests.codes.ok:
+        if not is_dogweb:
+            for obj in tqdm(response.json()):
+                name = obj.get('name', '')
+                if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
+                    to_manifest = '{}/README.md'.format(name)
+                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
+                    if response_manifest.status_code == requests.codes.ok:
+                        with open('{}{}_readme.md'.format(to_path, name), mode='wb+') as f:
+                            f.write(response_manifest.content)
+    else:
+        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
+        exit(1)
+
 
 def replace_token(to_path, key_name, content_token, data):
     """
@@ -121,6 +155,44 @@ def parse_args(args=None):
     parser.add_option("-s", "--source", help="location of src files", default=curdir)
     return parser.parse_args(args)
 
+
+def readme_get_section(from_path,key_name):
+    data_array=[]
+    with open('{}{}_readme.md'.format(from_path, key_name)) as readme:
+        filedata = readme.read()
+
+        result = re.search(OVERVIEW_PATTERN, filedata)
+        if result:
+            data_array.append([OVERVIEW_TOKEN,result.group(1)])
+        else:
+            print("unable to find the pattern {} in file {}{}".format(OVERVIEW_PATTERN,from_path, key_name))
+
+        result = re.search(SETUP_PATTERN, filedata)
+        if result:
+            data_array.append([SETUP_TOKEN,result.group(1)])
+        else:
+            print("unable to find the pattern {} in file {}{}".format(SETUP_PATTERN,from_path, key_name))
+
+        result = re.search(DATA_COLLECTED_PATTERN, filedata)
+        if result:
+            data_array.append([DATA_COLLECTED_TOKEN,result.group(1)])
+        else:
+            print("unable to find the pattern {} in file {}{}".format(DATA_COLLECTED_PATTERN,from_path, key_name))
+
+        result = re.search(TROUBLESHOOTING_PATTERN, filedata)
+        if result:
+            data_array.append([TROUBLESHOOTING_TOKEN,result.group(1)])
+        else:
+            print("unable to find the pattern {} in file {}{}".format(TROUBLESHOOTING_PATTERN,from_path, key_name))
+
+        result = re.search(FURTHER_READING_PATTERN, filedata)
+        if result:
+            data_array.append([FURTHER_READING_TOKEN,result.group(1)])
+        else:
+            print("unable to find the pattern {} in file {}{}".format(FURTHER_READING_PATTERN,from_path, key_name))
+
+    return data_array
+
 def update_integration_pre_build(from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
@@ -134,10 +206,13 @@ def update_integration_pre_build(from_path=None, to_path=None):
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
             
+            ## Scraping all sections that we can found
+            data_array = readme_get_section(to_path, key_name)
+
             """
             Gathering the manifest short description and adding the right token
             """
-            data_array=[]
+
             data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
 
             """
