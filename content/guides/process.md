@@ -31,7 +31,7 @@ Additionally, we include integrations with popular orchestrators, such as ECS an
 
 ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
 
-Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, and `#deployment`.
+Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `job`, and `#deployment`.
 
 **Filtering and Pivoting**
 
