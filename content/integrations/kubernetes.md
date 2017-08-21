@@ -170,4 +170,4 @@ If the agent is deployed you will see similar output to the text below, where de
 ### Knowledge Base
 #### Limitations
 
-Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker_daemon/) and that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).
+Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker_daemon) and that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).
