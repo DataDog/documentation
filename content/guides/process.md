@@ -15,7 +15,7 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 **String Search**
 
-Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search will match any facet of a process or container, giving you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the current working directory, and that `postgres` matches the command itself.
+Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
 
 {{< img src="process/postgres.png" >}}
 
