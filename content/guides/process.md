@@ -17,9 +17,7 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search will match any facet of a process or container, giving you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the current working directory, and that `postgres` matches the command itself.
 
--screenshot-
-
-
+{{< img src="process/postgres.png" >}}
 
 **Tagging**
 
@@ -41,17 +39,19 @@ Making sense of hundreds of thousands or millions of processes and containers ca
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the hard limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
 
--screenshot-
+{{< img src="process/overprovisioned.png" >}}
 
 Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
 
--screenshot-
+{{< img src="process/hostxservice.png" >}}
 
 It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
 
+{{< img src="process/tasksxversion.png" >}}
+
 Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
 
--screenshot-
+{{< img src="process/sshusers.png" >}}
 
 Ok, so I guess that last one is less exciting after redaction!
 
@@ -61,7 +61,7 @@ Everyone's workflow differs.  Initially the table is displayed at the finest gra
 
 From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
 
--screenshot-
+{{< img src="process/containerinspect.png" >}}
 
 ## Real-time monitoring
 
