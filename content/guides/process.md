@@ -23,7 +23,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers. 
 
-*Processes* are tagged by `#user`
+*Processes* are tagged with `#user`
 
 *Containers* are tagged with `#container_image`
 
