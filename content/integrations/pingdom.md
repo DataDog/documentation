@@ -14,7 +14,9 @@ At this time we track the response_time metric for any sites you configure on th
 
 Pingdom events can be added by configuring the relevant [Integration Status Monitor](https://app.datadoghq.com/monitors#create/integration)
 
-*Note: Metrics can only be imported for Pingdom customers at the Starter level or above.*
+<div class="alert alert-info">
+Metrics can only be imported for Pingdom customers at the Starter level or above.
+</div>
 
 ## Setup
 ### Installation

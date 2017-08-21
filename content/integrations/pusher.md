@@ -31,7 +31,9 @@ In order to monitor your metrics from Pusher:
 
 4. Return to your Datadog dashboard to see metrics begin to populate the default Pusher dashboard view 
 
-**NOTE**: metrics are populated in realtime, therefore your historical data will begin to populate once your integration is successfully completed
+<div class="alert alert-info">
+Metrics are populated in realtime, therefore your historical data will begin to populate once your integration is successfully completed
+</div>
 
 ## Data Collected
 ### Metrics 

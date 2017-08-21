@@ -7,6 +7,7 @@ aliases:
   - /guides/alerting
 ---
 
+## Overview
 ***For more detail about Monitors, review the [Monitoring Reference](/monitoring) page.***
 
 Monitoring all of your infrastructure in one place wouldn't be complete without
@@ -25,8 +26,7 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-## Glossary
-
+### Glossary
 
 Here is a quick overview of the different terms used in this guide.
 

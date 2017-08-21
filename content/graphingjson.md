@@ -46,7 +46,7 @@ In other words at the highest level the JSON structure is a dictionary with two,
 3. "viz" *
 4. "yaxis"
 
-\* *only requests and viz are required.*
+*only requests and viz are required.*
 
 ## Requests
 

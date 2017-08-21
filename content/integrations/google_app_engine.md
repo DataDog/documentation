@@ -73,7 +73,7 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
     # Import the Flask Framework
     from flask import Flask
     app = Flask(__name__)
-    # Note: We don't need to call run() since our application is embedded within
+    # We don't need to call run() since our application is embedded within
     # the App Engine WSGI application server.
 
     from dogapi import dog_stats_api as dog

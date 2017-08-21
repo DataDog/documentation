@@ -82,8 +82,8 @@ az account show
 + Create an application as a service principal using the format below.
 + Grant the Service Principal the "reader" role for the subscription(s) you would like to monitor.
 + The `appID` generated from this command must be pasted into the "Client ID" text box in the Azure installation form in Datadog.
-+ NOTE, you may add  `--name {some-name}` to use a hand-picked name. Otherwise Azure will generate a unique one. The `Name` will not be used in any way in the setup process.
-+ NOTE, you may add  `--password {some-password}` to use a hand-picked password. Otherwise Azure will generate a unique one. This password must be copied and pasted into the "Client Secret" text box in the Azure installation form in Datadog.
++ Add  `--name {some-name}` to use a hand-picked name. Otherwise Azure will generate a unique one. The `Name` will not be used in any way in the setup process.
++ Add  `--password {some-password}` to use a hand-picked password. Otherwise Azure will generate a unique one. This password must be copied and pasted into the "Client Secret" text box in the Azure installation form in Datadog.
 
 ~~~
 az ad sp create-for-rbac --role reader --scopes /subscriptions/{subscription_id}
@@ -237,7 +237,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 7. Click Select
 8. Click OK
 9. Repeat this process for any other subscriptions you would like to monitor
-10. **Please note that Diagnostics must be enabled for ARM deployed VMs to collect metrics. <a href="#diagnostics">See the instructions below</a>**
+10. **Diagnostics must be enabled for ARM deployed VMs to collect metrics. <a href="#diagnostics">See the instructions below</a>**
 
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
 
@@ -322,7 +322,7 @@ After locating your VM:
 
 1. Click on Diagnostics settings under the Monitoring section
 2. Shift the status to On
-3. Select the metrics you would like to collect (note: we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
+3. Select the metrics you would like to collect (we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
 4. Click Save to save your changes
 
     {{< img src="integrations/azure/azure_enable_diagnostics.png" >}}

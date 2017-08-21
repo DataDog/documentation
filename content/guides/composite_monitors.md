@@ -4,11 +4,12 @@ kind: guide
 listorder: 14
 ---
 
-***If you're unfamiliar with the basics of Datadog Monitors, first read the [Guide to Monitors](/guides/monitors)***
+<div class="alert alert-info">
+If you're unfamiliar with the basics of Datadog Monitors, first read the <a href="https://docs.datadoghq.com/guides/monitors/">Guide to Monitors</a>
+</div>
 
----
-
-Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. You can choose up to 10 existing monitors—monitor A and monitor B, say—and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
+Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 
+You can choose up to 10 existing monitors—monitor A and monitor B, say—and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
 With regard to configuration, a composite monitor is independent of its constituent monitors. You can modify the notification policy of a composite monitor without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor will not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 

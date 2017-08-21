@@ -21,8 +21,9 @@ This check has a limit of 350 metrics per instance. The number of returned metri
 Kafka metrics are captured using a JMX connection. We recommend the use of Oracle's JDK for this integration.
 
 ### Configuration
-
-***Note*** - *The following instructions are for the Datadog agent >= 5.0. For agents before that, refer to the [older documentation](https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent).*
+<div class="alert alert-info">
+The following instructions are for the Datadog agent >= 5.0. For agents before that, refer to the <a href="https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent">older documentation</a>
+</div>
 
 There are two configuration files to edit for this integration, both of which are in the standard `conf.d` directory under the agent installation directory:
 

@@ -5,12 +5,20 @@ sidebar:
   nav:
     - header: Host Naming
     - text: Agent Host Names
-      href: "#agent"
+      href: "#agent-host-name"
     - text: Host Aliases
-      href: "#aliases"
+      href: "#host-aliases"
 ---
 
-<h2 id="agent">Agent Host Names</h2>
+<div class="alert alert-info">
+  An overview of how we uniquely identify hosts and how they are displayed in
+  Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
+where we'll be happy to answer any questions you might have. (There's a
+<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
+web chat client, too</a>.)
+</div>
+
+## Agent Host Names
 
 <div class="alert alert-warn">
   This applies to version 3.6 of the Agent and later. If you're having issues
@@ -52,7 +60,7 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next.
 
-<h2 id="aliases">Host Aliases</h2>
+## Host Aliases
 
 A single host running in EC2 might have an
 instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the

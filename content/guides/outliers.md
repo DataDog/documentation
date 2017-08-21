@@ -73,8 +73,6 @@ To ensure that your alert is properly calibrated, you can set the time window at
 
 ## Reference: Outlier Algorithms and Parameters
 
-
-
 There are two different types of outlier detection algorithms you can use on your data: DBSCAN/ScaledDBSCAN and MAD/ScaledMAD. We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If you have metrics on a larger scale that look to be closely clustered but the DBSCAN/MAD algorithms are identifying some as outliers, try the scaled algorithms. Explanation of each algorithm and its parameters follows.
 
 ### DBSCAN/ScaledDBSCAN
