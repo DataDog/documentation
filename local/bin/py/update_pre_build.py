@@ -74,7 +74,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
         exit(1)
 
     """
-    Donwloading manifest.json for integrations core repo only
+    Donwloading readme.md for integrations core repo only
     """
     if response.status_code == requests.codes.ok:
         if not is_dogweb:
@@ -113,7 +113,7 @@ def replace_token(to_path, key_name, content_token, data):
             file.write(filedata)
 
     except Exception as error: 
-        print(error)
+        #print(error)
         pass
 
 
@@ -136,6 +136,7 @@ def manifest_get_data(to_path,key_name,attribute):
     :param to_path:     the output path to integration md files
     :param key_name:    integration key name for root object
     :param attribute:   attribute to get data from
+    :return: manifest.json attribute
     """ 
     with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
         manifest_json = json.load(manifest)
@@ -157,6 +158,19 @@ def parse_args(args=None):
 
 
 def readme_get_section(from_path,key_name):
+    """
+    Takes an integration readme file, extract all sections following this pattern:
+        ## Overview
+        ## Setup
+        ## Data Collected
+        ## Troubleshooting
+        ## Further Reading
+
+    :param: from_path: folder where the integration readme is
+    :param key_name:    integration key name for root object
+    :return: an array of [TOKEN, section_scraped ] 
+    """
+
     data_array=[]
     with open('{}{}_readme.md'.format(from_path, key_name)) as readme:
         filedata = readme.read()
@@ -206,7 +220,9 @@ def update_integration_pre_build(from_path=None, to_path=None):
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
             
-            ## Scraping all sections that we can found
+            """
+            Scraping all sections that we can found
+            """
             data_array = readme_get_section(from_path, key_name)
 
             """
@@ -216,7 +232,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
             data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
 
             """
-            Inlining the data in the description param for a given integration
+            Inlining the data in the doc file
             """
             file_update_content(to_path, key_name, data_array)
     else:
