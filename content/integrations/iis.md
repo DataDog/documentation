@@ -51,8 +51,7 @@ By default, this check will run against a single instance - the current machine 
 the Agent is running on. It will check the WMI performance counters for IIS on that machine.
 
 If you want to check other remote machines as well, you can add one instance per host.
-Note: If you also want to check the counters on the current machine, you will have
-to create an instance with empty params.
+Note: If you also want to check the counters on the current machine, you will haveto create an instance with empty params.
 
 The optional `provider` parameter allows to specify a WMI provider (default to `32`
 on Datadog Agent 32-bit or `64`). It is used to request WMI data from the non-default

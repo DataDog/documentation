@@ -3,7 +3,7 @@ title: Host Map Overview
 kind: guide
 listorder: 3
 ---
-## Overview {#overview}
+## Overview
 
 Host Maps let you see all of your hosts together on one screen, grouped however you want, filtered however you want, with metrics made instantly comprehensible via color and shape. This is a new and simple way to spot outliers, detect usage patterns, avoid resource problems, and make decisions about how to best manage your infrastructure. Host Maps work at any scale, whether you have 10, 100 or 10,000 hosts.
 

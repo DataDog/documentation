@@ -14,7 +14,9 @@ This Jenkins plugin sends your build and deployment events to Datadog. From ther
 
 The plugin also tracks build times (as a metric) and statuses (as a service check), so you'll know when your builds aren't healthy.
 
-**Note: The Jenkins check for the Datadog Agent is deprecated.** Use the [Jenkins plugin](https://github.com/DataDog/jenkins-datadog-plugin).
+<div class="alert alert-info">
+The Jenkins check for the Datadog Agent is deprecated. Use the <a href="https://github.com/DataDog/jenkins-datadog-plugin">Jenkins plugin</a>
+</div>
 
 ## Installation
 
@@ -30,11 +32,13 @@ _This plugin requires [Jenkins 1.580.1](http://updates.jenkins-ci.org/download/w
 
 4. To configure the plugin, navigate to the **Manage Jenkins** -> **Configure System** page, and find the *Datadog Plugin* section.
 
-5. Copy/Paste your API Key from the [API Keys](https://app.datadoghq.com/account/settings#api) page on your Datadog account, into the `API Key` textbox on the configuration screen.
+5. Restart Jenkins to get the plugin enabled.
 
-6. Before saving your configuration, test your API connection using the *Test Key* button, directly below the `API Key` textbox.
+6. Copy/Paste your API Key from the [API Keys](https://app.datadoghq.com/account/settings#api) page on your Datadog account, into the `API Key` textbox on the configuration screen.
 
-7. Optional: Set a custom Hostname
+7. Before saving your configuration, test your API connection using the *Test Key* button, directly below the `API Key` textbox.
+
+8. Optional: Set a custom Hostname
 You can set a custom hostname for your Jenkins host via the Hostname textbox on the same configuration screen. Note: Hostname must follow the [RFC 1123](https://tools.ietf.org/html/rfc1123#section-2) format.
 
 ## Configuration

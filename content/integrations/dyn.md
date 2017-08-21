@@ -37,7 +37,9 @@ Once you have created a Datadog Read only user:
 5. Select your zones you want to monitor:
 {{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:50%;" >}}
 
-**Note**: IP ACLs must be disabled for the Dyn integration.
+<div class="alert alert-info">
+IP ACLs must be disabled for the Dyn integration.
+</div>
 
 ## Data Collected
 ### Metrics

@@ -155,6 +155,11 @@ sync_integration_metrics() {
 	integrations_sync.py --token ${GITHUB_TOKEN}
 }
 
+sync_integration_descriptions() {
+    start_step
+    update_pre_build.py --token ${GITHUB_TOKEN} || fail_step "${FUNCNAME}";
+    pass_step  "${FUNCNAME}"
+}
 
 push_site_to_s3() {
     # $1: BUCKET

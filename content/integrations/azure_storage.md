@@ -12,7 +12,7 @@ newhlevel: true
 
 Azure Storage is the cloud storage solution for modern applications that rely on durability, availability, and scalability to meet the needs of their customers. It provides the following four services: Blob storage, Table storage, Queue storage, and File storage
 
-Enable this integration to see capacity and transaction metrics from Azure Storage in Datadog. Note that capacity metrics are only available for Blob storage.
+Enable this integration to see capacity and transaction metrics from Azure Storage in Datadog (Capacity metrics are only available for Blob storage).
 
 ## Setup
 ### Installation
@@ -25,7 +25,9 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 
 4.  Once you have done this for each Storage Account you wish to monitor, click Update Configuration.
 
-**NOTE: It may take up to an hour for Azure to generate and populate the minute-metric table for a Storage Account. This delay will occur when first adding a Storage Account to monitor in Datadog**
+<div class="alert alert-info">
+It may take up to an hour for Azure to generate and populate the minute-metric table for a Storage Account. This delay will occur when first adding a Storage Account to monitor in Datadog
+</div>
 
 ## Data Collected
 ### Metrics

@@ -3,59 +3,59 @@ title: Libraries
 kind: documentation
 ---
 
-### API and DogStatsD Client Libraries
+## API and DogStatsD Client Libraries
 
 The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
 
 {{< classic-libraries-table >}}
 
-### APM (Tracing) Client Libraries
+## APM (Tracing) Client Libraries
 
 The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
 
 {{< tracing-libraries-table >}}
 
-### Community Integrations
+## Community Integrations
 
-#### Ansible
+### Ansible
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
-#### Consul
+### Consul
 Publish consul service counts into Datadog via dogstatsd with [this library][96].
 
-#### Dogscaler
+### Dogscaler
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
-#### FreeSwitch
+### FreeSwitch
 This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
-#### Google Analytics
+### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][50].
 
-#### Logstash Output
+### Logstash Output
   * [Logstash Output for Datadog][73]
   * [Logstash Output for Dogstatsd][88]
 
-#### NGINX LUA
+### NGINX LUA
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
-#### Phusion Passenger
+### Phusion Passenger
 Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
-#### Pid-stats
+### Pid-stats
 This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
-#### Saltstack
+### Saltstack
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
 
-### Community Agent Ports
+## Community Agent Ports
 
-#### FreeBSD
+### FreeBSD
   * [FreeBSD dd-agent port][99]
 
-#### NixOS
+### NixOS
   * [dd-agent nixpkg][100]
 
 

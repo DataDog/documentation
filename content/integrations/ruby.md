@@ -34,7 +34,7 @@ require 'dogapi'
 api_key = "abcdef123456"
 application_key = "fedcba654321"
 
-# Note that submitting events does not require the application key.
+# Submitting events does not require the application key.
 dog = Dogapi::Client.new(api_key, application_key)
 
 # Send a new event.

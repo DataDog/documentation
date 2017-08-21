@@ -81,7 +81,9 @@ Checks
 
 {{< get-metrics-from-git "mongo" >}}
 
-Note: many of these metrics are described in the [MongoDB Manual 3.0](https://docs.mongodb.org/manual/reference/command/dbStats/)
+<div class="alert alert-info">
+Many of these metrics are described in the <a href="https://docs.mongodb.org/manual/reference/command/dbStats/">MongoDB Manual 3.0</a>
+</div>
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mongo/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/check.py
