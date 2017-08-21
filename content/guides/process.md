@@ -53,6 +53,8 @@ Below, we have searched for ssh processes and pivoted by `#user` to understand w
 
 -screenshot-
 
+Ok, so I guess that last one is less exciting after redaction!
+
 ## Broad Inspection, Deep Inspection
 
 Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
