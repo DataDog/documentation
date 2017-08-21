@@ -2,7 +2,10 @@
 title: Datadog-CouchDB Integration
 integration_title: CouchDB
 kind: integration
-git_integration_title: couchdb
+git_integration_title: couch
+alias:
+    - integrations/couchdb
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph"  style="width:60%;" >}}

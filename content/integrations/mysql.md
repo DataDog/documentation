@@ -4,6 +4,7 @@ integration_title: MySQL
 kind: integration
 git_integration_title: mysql
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

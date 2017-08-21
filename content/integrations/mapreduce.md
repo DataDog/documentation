@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: mapreduce
 newhlevel: true
 updated_for_agent: 5.8.0
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

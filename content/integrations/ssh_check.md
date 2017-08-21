@@ -3,7 +3,10 @@ title: Datadog-ssh Integration
 integration_title: ssh
 kind: integration
 doclevel: basic
-git_integration_title: ssh
+git_integration_title: ssh_check
+alias:
+    - integrations/ssh
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview 

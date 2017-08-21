@@ -3,7 +3,10 @@ title: Datadog-WMI Integration
 integration_title: WMI
 kind: integration
 newhlevel: true
-git_integration_title: wmi
+git_integration_title: wmi_check
+aliases:
+  - integrations/wmi
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" >}}

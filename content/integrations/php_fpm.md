@@ -4,6 +4,10 @@ integration_title: PHP-FPM
 kind: integration
 doclevel: basic
 newhlevel: true
+git_integration_title: php_fpm
+alias:
+  - integrations/phpfpm
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/phpfpm/phpfpmoverview.png" style="max-width: 600px;" alt="PHP overview" >}}

@@ -3,7 +3,7 @@ title: Datadog-PGBouncer Integration
 integration_title: PGBouncer
 git_integration_title: pgbouncer
 kind: integration
-
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

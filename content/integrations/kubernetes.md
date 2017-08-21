@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 5.8.5
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
@@ -164,8 +165,6 @@ If the agent is deployed you will see similar output to the text below, where de
 ## Metrics
 
 {{< get-metrics-from-git >}}
-
-{{< get-metrics-from-git "kubernetes_state" >}}
 
 ## Further Reading
 ### Knowledge Base

@@ -4,6 +4,7 @@ integration_title: btrfs
 kind: integration
 doclevel: basic
 git_integration_title: btrfs
+description: "{{< get-desc-from-git >}}"
 ---
 {{< img src="integrations/btrfs/btrfs_metric.png" >}}
 

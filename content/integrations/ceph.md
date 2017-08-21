@@ -4,6 +4,7 @@ integration_title: Ceph
 kind: integration
 git_integration_title: ceph
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" >}}

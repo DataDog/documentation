@@ -4,6 +4,7 @@ integration_title: Cacti
 kind: integration
 doclevel: basic
 git_integration_title: cacti
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

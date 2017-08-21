@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: spark
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/spark/sparkgraph.png" alt="spark graph" >}}

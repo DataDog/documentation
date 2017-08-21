@@ -4,6 +4,7 @@ integration_title: TokuMX
 kind: integration
 git_integration_title: tokumx
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

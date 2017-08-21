@@ -4,6 +4,7 @@ integration_title: Lighttpd
 kind: integration
 git_integration_title: lighttpd
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" >}}

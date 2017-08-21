@@ -4,6 +4,7 @@ integration_title: Consul
 kind: integration
 git_integration_title: consul
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

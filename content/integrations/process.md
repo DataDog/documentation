@@ -3,6 +3,8 @@ title: Process check
 integration_title: Process Check
 newhlevel: true
 kind: integration
+git_integration_title: process
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

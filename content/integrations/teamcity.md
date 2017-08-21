@@ -4,6 +4,7 @@ integration_title: TeamCity
 kind: integration
 newhlevel: true
 git_integration_title: teamcity
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

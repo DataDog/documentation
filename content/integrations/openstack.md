@@ -3,6 +3,7 @@ title: Datadog-OpenStack Integration
 integration_title: OpenStack
 kind: integration
 git_integration_title: openstack
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/openstack/openstack.png" alt="OpenStack default dashboard" >}}

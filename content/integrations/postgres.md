@@ -4,6 +4,9 @@ integration_title: PostgreSQL
 kind: integration
 git_integration_title: postgres
 newhlevel: true
+alias:
+  - integrations/postgresql
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/postgresql/pggraph.png" alt="PostgreSQL Graph" >}}

@@ -16,6 +16,7 @@ platformmetrics:
     - Solaris
   system.net.tcp.out_segs:
     - Solaris
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" >}}

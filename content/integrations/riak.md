@@ -4,6 +4,7 @@ integration_title: Riak
 git_integration_title: riak
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" >}}

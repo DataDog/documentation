@@ -5,6 +5,8 @@ kind: integration
 adroll_pixel: true
 newhlevel: true
 git_integration_title: docker
+slug: /integrations/docker
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/docker/docker.png" alt="Docker default dashboard" >}}

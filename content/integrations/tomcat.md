@@ -5,7 +5,9 @@ git_integration_title: tomcat
 kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
+description: "{{< get-desc-from-git >}}"
 ---
+
 ## Overview
 
 Get metrics from Tomcat in real time to:

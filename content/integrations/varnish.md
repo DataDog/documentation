@@ -4,6 +4,7 @@ integration_title: Varnish
 git_integration_title: varnish
 kind: integration
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" >}}

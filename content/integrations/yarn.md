@@ -4,6 +4,7 @@ integration_title: Hadoop YARN
 kind: integration
 git_integration_title: yarn
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 {{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" >}}
 

@@ -5,6 +5,9 @@ kind: integration
 newhlevel: true
 git_integration_title: http_check
 update_for_agent: 5.8.5
+alias:
+  - integrations/httpcheck
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 
