@@ -7,7 +7,7 @@ update_for_agent: 5.8.5
 git_integration_title: tcp_check
 aliases:
   - /guides/network_checks
-  - integrations/tcpcheck
+  - /integrations/tcpcheck
 description: "{{< get-desc-from-git >}}"
 ---
 

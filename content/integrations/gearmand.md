@@ -3,8 +3,8 @@ title: Datadog-Gearman Integration
 integration_title: Gearman
 kind: integration
 git_integration_title: gearmand
-alias:
-  - integrations/gearman
+aliases:
+  - /integrations/gearman
 description: "{{< get-desc-from-git >}}"
 ---
 

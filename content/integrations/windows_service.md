@@ -7,7 +7,7 @@ newhlevel: true
 updated_for_agent: 5.8.5
 git_integration_title: windows_service
 aliases:
-  - integrations/winservices
+  - /integrations/winservices
 description: "{{< get-desc-from-git >}}"
 ---
 

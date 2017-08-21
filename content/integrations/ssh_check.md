@@ -4,8 +4,8 @@ integration_title: ssh
 kind: integration
 doclevel: basic
 git_integration_title: ssh_check
-alias:
-    - integrations/ssh
+aliases:
+    - /integrations/ssh
 description: "{{< get-desc-from-git >}}"
 ---
 

@@ -4,8 +4,8 @@ integration_title: MongoDB
 kind: integration
 git_integration_title: mongo
 newhlevel: true
-alias:
-  - integrations/mongodb
+aliases:
+  - /integrations/mongodb
 description: "{{< get-desc-from-git >}}"
 ---
 ## Overview

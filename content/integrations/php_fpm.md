@@ -5,8 +5,8 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: php_fpm
-alias:
-  - integrations/phpfpm
+aliases:
+  - /integrations/phpfpm
 description: "{{< get-desc-from-git >}}"
 ---
 

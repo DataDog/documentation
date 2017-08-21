@@ -3,8 +3,8 @@ title: Datadog-CouchDB Integration
 integration_title: CouchDB
 kind: integration
 git_integration_title: couch
-alias:
-    - integrations/couchdb
+aliases:
+    - /integrations/couchdb
 description: "{{< get-desc-from-git >}}"
 ---
 

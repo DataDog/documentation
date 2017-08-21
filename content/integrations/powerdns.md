@@ -5,8 +5,8 @@ kind: integration
 git_integration_title: powerdns_recursor
 newhlevel: true
 doclevel: basic
-alias:
-    - integrations/powerdns
+aliases:
+    - /integrations/powerdns
 description: "{{< get-desc-from-git >}}"
 ---
 

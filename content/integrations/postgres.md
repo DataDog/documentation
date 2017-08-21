@@ -4,8 +4,8 @@ integration_title: PostgreSQL
 kind: integration
 git_integration_title: postgres
 newhlevel: true
-alias:
-  - integrations/postgresql
+aliases:
+  - /integrations/postgresql
 description: "{{< get-desc-from-git >}}"
 ---
 

@@ -4,8 +4,8 @@ integration_title: System Core
 kind: integration
 newhlevel: true
 git_integration_title: system_core
-alias:
-    - integrations/systemcore
+aliases:
+    - /integrations/systemcore
 description: "{{< get-desc-from-git >}}"
 ---
 

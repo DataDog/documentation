@@ -4,8 +4,8 @@ integration_title: Supervisor
 kind: integration
 newhlevel: true
 git_integration_title: supervisord
-alias:
-  - integrations/supervisor
+aliases:
+  - /integrations/supervisor
 description: "{{< get-desc-from-git >}}"
 ---
 

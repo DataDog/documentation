@@ -4,8 +4,8 @@ integration_title: Go Expvar
 kind: integration
 doclevel: basic
 git_integration_title: go_expvar
-alias:
-  - integrations/goexpvar
+aliases:
+  - /integrations/goexpvar
 description: "{{< get-desc-from-git >}}"
 ---
 

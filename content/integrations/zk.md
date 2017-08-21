@@ -5,7 +5,7 @@ git_integration_title: zookeeper
 kind: integration
 newhlevel: true
 aliases:
-    - integrations/zookeeper
+    - /integrations/zookeeper
 description: "{{< get-desc-from-git >}}"
 ---
 

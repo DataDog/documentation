@@ -5,8 +5,8 @@ newhlevel: true
 kind: integration
 git_integration_title: redisdb
 updated_for_agent: 5.8.5
-alias:
-  - integrations/redis
+aliases:
+  - /integrations/redis
 description: "{{< get-desc-from-git >}}"
 ---
 

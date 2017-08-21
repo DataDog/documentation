@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 git_integration_title: wmi_check
 aliases:
-  - integrations/wmi
+  - /integrations/wmi
 description: "{{< get-desc-from-git >}}"
 ---
 

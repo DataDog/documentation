@@ -5,8 +5,8 @@ git_integration_title: mcache
 kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
-alias:
-  - integrations/memcached
+aliases:
+  - /integrations/memcached
 description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
