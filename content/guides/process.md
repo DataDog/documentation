@@ -13,13 +13,13 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 ## Searching, Filtering, and Pivoting
 
-**String Search**
+### String Search
 
 Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
 
 {{< img src="process/postgres.png" >}}
 
-**Tagging**
+### Tagging
 
 Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers. 
 
@@ -31,9 +31,9 @@ Additionally, we include integrations with popular orchestrators, such as ECS an
 
 ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
 
-Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `job`, and `#deployment`.
+Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `#job`, and `#deployment`.
 
-**Filtering and Pivoting**
+### Filtering and Pivoting
 
 Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
@@ -69,7 +69,7 @@ While actively working with the Process and Containers page, metrics are collect
 
 ## Installation
 
-**Standard Agent Configuration**
+### Standard Agent Configuration
 
 Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
 
@@ -83,7 +83,7 @@ and adding the following line to the `[Main]` section
     
 After configuration is complete, restart the Agent.
 
-**Docker container**
+### Docker container
 
 Update to the Datadog Agent image version 5.16.0 or above:
 
@@ -96,7 +96,7 @@ Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-
     -e HOST_PROC=/host/proc
     -e HOST_SYS=/host/sys
 
-**Kubernetes Daemonset**
+### Kubernetes Daemonset
 
 In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
@@ -119,7 +119,7 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
 Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 
-**Proxy Configuration**
+### Proxy Configuration
 
 Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
 
