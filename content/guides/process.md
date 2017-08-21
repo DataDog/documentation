@@ -23,9 +23,9 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers. 
 
-*Processes* are tagged with `#user`
+*Processes* are tagged by `#user`
 
-*Containers* are tagged with `#container_image`
+*Containers* are tagged by `#container_image`
 
 Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
