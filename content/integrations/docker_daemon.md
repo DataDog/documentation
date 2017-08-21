@@ -4,8 +4,9 @@ integration_title: Docker
 kind: integration
 adroll_pixel: true
 newhlevel: true
-git_integration_title: docker
-slug: /integrations/docker
+git_integration_title: docker_daemon
+aliases:
+  - /integrations/docker
 description: "{{< get-desc-from-git >}}"
 ---
 
