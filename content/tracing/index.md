@@ -16,6 +16,10 @@ The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro p
 
 Currently, tracing is only supported by version 5.11.0 (or above) of the Datadog Agent running on Linux and Docker.
 
+<div class="alert alert-info">
+Enabled by default after Datadog agent 5.13, tracing can be disabled by adding the parameter <br>`apm_enabled: no`<br> in your Datadog agent configuration file.
+</div>
+
 #### Installing the agent
 
 With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To enable tracing:
