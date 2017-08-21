@@ -207,7 +207,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
             key_name = basename(file_name.replace('_manifest.json', ''))
             
             ## Scraping all sections that we can found
-            data_array = readme_get_section(to_path, key_name)
+            data_array = readme_get_section(from_path, key_name)
 
             """
             Gathering the manifest short description and adding the right token
