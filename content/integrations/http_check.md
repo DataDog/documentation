@@ -13,7 +13,7 @@ description: "{{< get-desc-from-git >}}"
 
 HTTP checks run in the agent and can verify whether or not a website is up or down, responds in a certain time, and/or contains specific text on the page.
 
-Also see the related [TCP Checks](/integrations/tcpcheck)
+Also see the related [TCP Checks](/integrations/tcp_check)
 
 ## Setup
 ### Installation

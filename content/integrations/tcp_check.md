@@ -17,7 +17,7 @@ description: "{{< get-desc-from-git >}}"
 
 TCP checks run in the agent and can verify whether or not a TCP service is up or down and responds in a certain time.
 
-Also see the related [HTTP Checks](/integrations/httpcheck).
+Also see the related [HTTP Checks](/integrations/http_check).
 
 ## Setup
 ### Installation
