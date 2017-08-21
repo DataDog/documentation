@@ -59,7 +59,7 @@ Ok, so I guess that last one is less exciting after redaction!
 
 Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
 
-From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by deployment, dug into one row to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
+From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
 
 -screenshot-
 
