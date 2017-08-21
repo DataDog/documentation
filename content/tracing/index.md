@@ -20,16 +20,7 @@ Currently, tracing is only supported by version 5.11.0 (or above) of the Datadog
 
 With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To enable tracing:
 
-1.  Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
-1.  Enable the APM in the Datadog Agent configuration file
-
-    ~~~
-    [Main]
-    # Enable the trace agent.
-    apm_enabled: true
-    ~~~
-
-1.  [Restart the Agent](/guides/basic_agent_usage/)
+Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
 
 #### Running the agent in Docker
 
