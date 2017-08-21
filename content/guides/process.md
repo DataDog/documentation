@@ -135,3 +135,5 @@ Live Processes supports a web proxy as [configured on the Agent](https://github.
 - Collection of open files and current working directory is limited based on the level of privilege of the user running dd-process-agent. In the event that dd-process-agent is able to access these fields, they will be collected automatically.
 
 - Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
+
+- Tx/Rx metrics in containers were introduced in 5.17 and will always report as 0 in 5.16.
