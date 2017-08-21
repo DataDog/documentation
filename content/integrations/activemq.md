@@ -4,7 +4,7 @@ integration_title: ActiveMQ
 kind: integration
 doclevel: complete
 newhlevel: true
-git_integration_title: activemq
+git_integration_title: activemq_xml
 description: "{{< get-desc-from-git >}}"
 ---
 

@@ -59,10 +59,6 @@ Run the Agent's `info` subcommand and look for `kyototycoon` under the Checks se
 The kyototycoon check is compatible with all major platforms.
 
 ## Data Collected
-### Metrics
-
-{{< get-metrics-from-git >}}
-
 ### Events
 The Kyototycoon check does not include any event at this time.
 
