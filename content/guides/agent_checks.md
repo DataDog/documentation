@@ -60,7 +60,7 @@ SETUP
 
 First off, ensure you've properly
 <a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, feel free to send a mail to our <a href="mailto:support@datadoghq.com">Support Team </a>, we'll be happy to answer any questions you might have.
+Agent</a> on your machine. If you run into any issues during the setup, <a href="https://docs.datadoghq.com/help/">Get in touch with us! </a>, we'll be happy to answer any questions you might have.
 
 <!--
 ======================================================
