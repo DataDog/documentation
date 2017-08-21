@@ -33,7 +33,7 @@ TROUBLESHOOTING_TOKEN ="{{< get-troubleshooting-from-git >}}"
 TROUBLESHOOTING_PATTERN= r'## Troubleshooting((?s).*)## Further Reading'
 
 FURTHER_READING_TOKEN = "{{< get-further-reading-from-git >}}"
-FURTHER_READING_PATTERN= r'## Overview((?s).*)'
+FURTHER_READING_PATTERN= r'## Further Reading((?s).*)'
 """
 Functions
 """
