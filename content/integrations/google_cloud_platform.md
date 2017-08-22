@@ -54,10 +54,6 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ## Data Collected
 ### Metrics
 
-Google provides Stackdriver Loadbalancing metrics, but not by default. Contact your Google representative/support and ask to join the Stackdriver Loadbalancing metrics Beta. Once you've joined, you'll automatically start seeing `gcp.loadbalancing.*` metrics in Datadog.
-
-Otherwise, here's a list of all metrics collected by this integration:
-
 {{< get-metrics-from-git >}}
 
 ## Further Reading
