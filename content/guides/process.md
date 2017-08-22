@@ -5,6 +5,8 @@ listorder: 16
 beta: true
 ---
 
+As this feature is in private beta, please do not discuss in public forums.
+
 ## Introduction
 
 Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
