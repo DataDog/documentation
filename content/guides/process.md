@@ -5,7 +5,7 @@ listorder: 16
 beta: true
 ---
 
-As this feature is in private beta, please do not discuss in public forums.
+As this feature is in private beta, please do not discuss in public forums.  For details, email <process-support@datadoghq.com> 
 
 ## Introduction
 
