@@ -93,7 +93,7 @@ Update to the Datadog Agent image version 5.16.0 or above:
 
 Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), passing in the following attributes, in additon to any other custom settings as appropriate:
 
-    -v /etc/passwd:/etc/passwd
+    -v /etc/passwd:/etc/passwd:ro
     -e DD_PROCESS_AGENT_ENABLED=true
     -e HOST_PROC=/host/proc
     -e HOST_SYS=/host/sys
