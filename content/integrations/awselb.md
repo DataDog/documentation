@@ -1,5 +1,5 @@
 ---
-title: Datadog-AWS ELB Integration
+title: Datadog-AWS ELB & ApplicationELB Integration
 integration_title: AWS ELB
 kind: integration
 git_integration_title: amazon_elb
@@ -19,7 +19,7 @@ To start collecting ELB metrics, the only thing you need to do is to set up our 
 ### Configuration
 
 1.  Enable the [Amazon Web Services integration](/integrations/aws).
-2.  Open the [AWS integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) and ensure the **ELB checkbox** on the left is checked.
+2.  Open the [AWS integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services) and ensure the **ELB checkbox** on the left is checked for Classic ELB metrics and the **ApplicationELB** checkbox for Application ELB metrics
 
 ## Data Collected
 ### Metrics
