@@ -8,9 +8,9 @@ doclevel: basic
 
 ## Overview
 
-AWS Direct Connect makes it easy to establish a dedicated network connection from your premises to AWS.
+This integration collects metrics from AWS Direct Connect (e.g. `aws.dx.connection_state`, `aws.dx.connection_bps_egress`)
 
-Enable this integration to see in Datadog all your Direct Connect metrics
+Enable this integration to see in Datadog all your Direct Connect metrics.
 
 ## Setup
 ### Installation
@@ -19,7 +19,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 ### Configuration
 
-In the Amazon Web Services integration tile, ensure that Direct Connect is checked under metric collection.
+In the Amazon Web Services integration tile, ensure that **Direct Connect** is checked under **metric collection**.
 
 ## Data Collected
 ### Metrics
