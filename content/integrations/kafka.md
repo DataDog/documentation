@@ -15,14 +15,15 @@ Connect Kafka to Datadog in order to:
 
 This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the [JMX Checks documentation](/integrations/java) for more detailed instructions. If you need to monitor more metrics, please send an email to [support](mailto:support@datadoghq.com).
 
-## Installation
+## Setup
+### Installation
 
 Kafka metrics are captured using a JMX connection. We recommend the use of Oracle's JDK for this integration.
 
-
-## Configuration
-
-***Note*** - *The following instructions are for the Datadog agent >= 5.0. For agents before that, refer to the [older documentation](https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent).*
+### Configuration
+<div class="alert alert-info">
+The following instructions are for the Datadog agent >= 5.0. For agents before that, refer to the <a href="https://github.com/DataDog/dd-agent/wiki/Deprecated-instructions-to-install-python-dependencies-for-the-Datadog-Agent">older documentation</a>
+</div>
 
 There are two configuration files to edit for this integration, both of which are in the standard `conf.d` directory under the agent installation directory:
 
@@ -434,7 +435,8 @@ And edit conf.d/kafka_consumer.yaml
 
 {{< insert-example-links integration="kafka" link_text="Apache Kafka" check="none" >}}
 {{< insert-example-links integration="Apache Kafka Consumer" conf="kafka_consumer" check="kafka_consumer" include_intro="false" >}}
-## Validation
+
+### Validation
 
 To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  The output should contain a section similar to the following:
 
@@ -449,6 +451,8 @@ Checks
       - instance #0 [OK]
       - Collected 8 metrics & 0 events
 {{< /highlight>}}
-## Metrics
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

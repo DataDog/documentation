@@ -8,7 +8,8 @@ git_integration_title: amazon_ecs
 ## Overview
 Amazon EC2 Container Service (ECS) is a highly scalable, high performance container management service for Docker containers running on EC2 instances.
 
-## Installation
+## Setup
+### Installation
 To monitor your ECS containers and tasks with Datadog, run the Agent as a container on every EC2 instance in your ECS cluster. As detailed below, there are a few setup steps:
 
 1. **Add an ECS Task**
@@ -17,20 +18,20 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 
 This documentation assume you already have a working EC2 Container Service cluster configured. If not, review the [Getting Started section in the ECS documentation](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html).
 
-### Create an ECS Task
+#### Create an ECS Task
 
 This task will launch the Datadog container. When you need to modify the configuration, you will update this Task Definition as described further down in this guide.
 
 You may either configure the task using the [AWS CLI tools](https://aws.amazon.com/cli/) or using the Amazon Web Console.
 
-#### AWS CLI
+##### AWS CLI
 
 1. Download [dd-agent-ecs.json](/json/dd-agent-ecs.json).
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
        aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 
-#### Web UI
+##### Web UI
 
 1. Log in to your AWS Console and navigate to the EC2 Container Service section.
 1. Click on the cluster you wish to add Datadog to.
@@ -52,7 +53,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 1. Add another mount point for **proc** and enter ```/host/proc/``` in the Container path. Check the **Read only** checkbox.
 1. Add a third mount point for **cgroup** and enter ```/host/sys/fs/cgroup``` in the Container path. Check the **Read only** checkbox.
 
-### Create or Modify your IAM Policy
+#### Create or Modify your IAM Policy
 
 If you are modifying the IAM Policy you created for your cluster, you may only need to add one Action: ```ecs:StartTask```.
 
@@ -87,11 +88,11 @@ If you are modifying the IAM Policy you created for your cluster, you may only n
 {{< /highlight >}}
 8. Click **Create Policy**
 
-### Create a new instance including a startup script
+#### Create a new instance including a startup script
 
 Ideally you want the Datadog agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
 
-#### Create a new Amazon Linux instance
+##### Create a new Amazon Linux instance
 
 1. Log in to the AWS console and navigate to the EC2 section.
 2. Create a new instance by clicking the **Launch Instance** button.
@@ -109,14 +110,14 @@ yum install -y aws-cli jq
 instance_arn=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
 az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 region=${az:0:${#az} - 1}
-echo "cluster=$cluster az=$az region=$region aws ecs start-task --cluster 
+echo "cluster=$cluster az=$az region=$region aws ecs start-task --cluster \
 $cluster --task-definition $task_def --container-instances $instance_arn --region $region" >> /etc/rc.local
 {{< /highlight >}}
 This user script above will:
   * Start the task defined with the right parameters
   * Add a few lines to `/etc/rc.local` so that the rebooted instance starts the task
 
-#### Create a new CoreOS instance
+##### Create a new CoreOS instance
 
 1. Log in to the AWS console and navigate to the EC2 section.
 2. Create a new instance  as described in the instructions for a simple CoreOS ECS instance [here](https://coreos.com/os/docs/latest/booting-on-ecs.html)).
@@ -171,10 +172,11 @@ This block declares two units with cloud-config, one for the ecs-agent container
 
 The Datadog Agent is now running on your new ECS instance. Use this user script with every new ECS instance deployment to monitor your cluster's health with Datadog.
 
-#### Dynamic detection and monitoring of running services
+##### Dynamic detection and monitoring of running services
 
 Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
+## Data Collected
 ### Metrics
 
 {{< get-metrics-from-git >}}

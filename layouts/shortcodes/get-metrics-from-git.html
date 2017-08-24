@@ -18,7 +18,6 @@
 
   {{ $data := index $.Page.Site.Data.integrations $integration }}
 
-  {{ if and ($integration) ($data) }} {{/* An integration is set and datafile exists */}}
 
     {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
@@ -72,6 +71,5 @@
 
     {{ end }}
 
-  {{ end }}
 
 {{ end }}

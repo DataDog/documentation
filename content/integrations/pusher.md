@@ -18,7 +18,8 @@ Monitor your realtime messages and connection analytics across your Pusher apps:
 
 * Monitor usage within billing timetables
 
-## Installation
+## Setup
+### Installation
 
 In order to monitor your metrics from Pusher:
 
@@ -30,8 +31,11 @@ In order to monitor your metrics from Pusher:
 
 4. Return to your Datadog dashboard to see metrics begin to populate the default Pusher dashboard view 
 
-**NOTE**: metrics are populated in realtime, therefore your historical data will begin to populate once your integration is successfully completed
+<div class="alert alert-info">
+Metrics are populated in realtime, therefore your historical data will begin to populate once your integration is successfully completed
+</div>
 
-## Metrics 
+## Data Collected
+### Metrics 
 
 {{< get-metrics-from-git >}}

@@ -12,8 +12,8 @@ Connect MongoDB to Datadog in order to:
 * Visualize key MongoDB metrics.
 * Correlate MongoDB performance with the rest of your applications.
 
-
-## Installation
+## Setup
+### Installation
 
 1.  To capture MongoDB metrics you need to install the Datadog Agent.
 2.  Create a read-only user for Datadog, with the appropriate [MongoDB roles](https://docs.mongodb.com/manual/reference/built-in-roles/) to collect complete server statistics. In the mongo shell, run:
@@ -37,7 +37,7 @@ db.createUser({
 })
 {{< /highlight >}}
 
-## Configuration
+### Configuration
 
 1.  Edit your `conf.d/mongo.yaml` file as follows:
 {{< highlight yaml>}}
@@ -60,7 +60,7 @@ instances:
 
 {{< insert-example-links conf="mongo" check="mongo" >}}
 
-## Validation
+### Validation
 
 To validate that the integration is working, run ```/etc/init.d/datadog-agent info```. You should see results similar to the following:
 
@@ -76,11 +76,14 @@ Checks
         - pymongo: 2.8
 {{< /highlight>}}
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "mongo" >}}
 
-Note: many of these metrics are described in the [MongoDB Manual 3.0](https://docs.mongodb.org/manual/reference/command/dbStats/)
+<div class="alert alert-info">
+Many of these metrics are described in the <a href="https://docs.mongodb.org/manual/reference/command/dbStats/">MongoDB Manual 3.0</a>
+</div>
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mongo/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/check.py

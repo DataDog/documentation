@@ -15,12 +15,12 @@ Capture etcd metrics in Datadog to:
 * Know when host configurations may be out of sync.
 * Correlate the performance of etcd with the rest of your applications.
 
-
-## Installation
+## Setup
+### Installation
 
 The etcd check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your etcd instance(s).
 
-## Configuration
+### Configuration
 
 1. Configure the Agent to connect to etcd, edit `conf.d/etcd.yaml`
 {{< highlight yaml >}}
@@ -37,7 +37,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -53,18 +53,18 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
 Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
 
-
-## Service Checks
+### Service Checks
 
 `etcd.can_connect`:
 Returns 'Critical' if the Agent cannot collect metrics from your etcd API endpoint.
 
 ## Further Reading
-
+### Blog Article
 To get a better idea of how (or why) to integrate etcd with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-etcd-performance/) about it.

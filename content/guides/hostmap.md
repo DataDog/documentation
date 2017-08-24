@@ -3,7 +3,7 @@ title: Host Map Overview
 kind: guide
 listorder: 3
 ---
-## Overview {#overview}
+## Overview
 
 Host Maps let you see all of your hosts together on one screen, grouped however you want, filtered however you want, with metrics made instantly comprehensible via color and shape. This is a new and simple way to spot outliers, detect usage patterns, avoid resource problems, and make decisions about how to best manage your infrastructure. Host Maps work at any scale, whether you have 10, 100 or 10,000 hosts.
 
@@ -83,13 +83,15 @@ When you’ve identified a host that you want to investigate, click it for detai
 
 ### Shapes and colors
 
-By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
+By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the `Color by` selector. 
+
+The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the `Size by` selector. 
+
+In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
 {{< img src="guides/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size">}}
 
-Today the ‘Color by’ selector and ‘Size by’ selector contain only CPU-based metrics: load, idle, wait, etc. We will be adding additional metrics in the very near future.
-
-Note that the “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
+**Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
 
 ### Data freshness and meaning
 

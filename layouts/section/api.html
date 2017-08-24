@@ -1109,9 +1109,13 @@
             <h5>Signature</h5>
             <code>POST /api/v1/downtime/cancel/by_scope</code>
             <h5>Example Request</h5>
+            {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-monitor-cancel-downtime-by-scope.py" ) }}
+            {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-monitor-cancel-downtime-by-scope.rb" ) }}
             {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-monitor-cancel-downtime-by-scope.sh" ) }}
             <h5>Example Response</h5>
-            <code>{"cancelled_ids":[123456789,123456790]}</code>
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-monitor-cancel-downtime-by-scope.py" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-monitor-cancel-downtime-by-scope.rb" ) }}
+            {{ partial "snippet-result-code-block" (dict "context" . "file" "api-monitor-cancel-downtime-by-scope.sh" ) }}
           </div>
         </div>
 

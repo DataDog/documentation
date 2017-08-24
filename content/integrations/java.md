@@ -7,7 +7,7 @@ newhlevel: true
 updated_for_agent: 5.8.5
 ---
 
-## Introduction
+## Overview
 
 The JMX integration collects metrics from applications that expose [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html) metrics.
 
@@ -17,13 +17,14 @@ JMXFetch also sends service checks that report on the status of your monitored i
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's  easy to customize which metrics you want to collect.
 
-## Installation
+## Setup
+### Installation
 
 Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
 A remote connection is required for the Datadog Agent to connect to the JVM, even when the two are on the same host.
 
-## Configuration
+### Configuration
 
 1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample `jmx.yaml` file:
 {{< highlight yaml>}}
@@ -82,7 +83,7 @@ instances:
             - regex_on_excluded_bean
 {{< /highlight >}}
 
-### Configuration Options
+#### Configuration Options
 
 * `custom_jar_paths` (Optional) - Allows specifying custom jars that will be added to the classpath of the agent's JVM.
 * `jmx_url` - (Optional) - If the agent needs to connect to a non-default JMX URL, specify it here instead of a host and a port. If you use this you need to specify a 'name' for the instance.
@@ -109,7 +110,7 @@ It would create a metric called `mydomain` (or some variation depending on the a
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
-### Description of the filters
+#### Description of the filters
 
 Each `include` or `exclude` dictionary supports the following keys:
 
@@ -193,7 +194,7 @@ init_config:
           - 99thPercentile
 {{< /highlight >}}
 
-### Note
+#### Note
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 {{< highlight yaml>}}
@@ -217,6 +218,19 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
             bean: second_bean_name
     ...
 {{< /highlight >}}
+
+### Validation
+
+JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
+
+## Data Collected
+### Metrics
+
+{{< get-metrics-from-git >}}
+
+
+## Troubleshooting
+
 ### Commands to view the metrics that are available:
 
 The `datadog-agent jmx` command was added in version 4.1.0.
@@ -239,17 +253,6 @@ For more details about configuring this integration refer to the following file(
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
 <!-- {{< insert-example-links conf="jmx" check="none" >}} -->
-
-## Validation
-
-JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
-
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-
-## Troubleshooting
 
 ### The 350 metric limit
 

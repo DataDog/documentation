@@ -11,7 +11,8 @@ newhlevel: true
 
 The DNS Service Check allows you to monitor the resolution of host names against a specified DNS server. This will allow you to monitor the availability and response times of your DNS infrastructure, as well as validate that key host names are resolvable.
 
-## Configuration
+## Setup
+### Configuration
 
 To configure the DNS Service Check, edit the dns_check.yaml file in your conf.d directory.
 
@@ -27,7 +28,7 @@ To configure the DNS Service Check, edit the dns_check.yaml file in your conf.d 
 
 {{< insert-example-links conf="dns_check" check="dns_check" >}}
 
-## Validation
+### Validation
 
 To validate that the DNS Service Check is working, run `sudo /etc/init.d/datadog-agent info`. You should see something like the following:
 
@@ -42,7 +43,8 @@ Checks
     - Collected 1 metric, 0 events & 2 service checks
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 This check tags all metrics it collects with:
 
@@ -51,7 +53,7 @@ This check tags all metrics it collects with:
 
 {{< get-metrics-from-git >}}
   
-## Service Check
+### Service Check
 This check tags all service checks it collects with:
 
   * `nameserver:<nameserver_in_yaml>`

@@ -17,12 +17,12 @@ Connect Catchpoint and Datadog to:
 * Direct links to Analysis Charts in the Catchpoint Portal
 * Alert Type tags for easy filtering
 
-
-## Installation
+## Setup
+### Installation
 
 No installation is required.
 
-## Configuration
+### Configuration
 
 To get Catchpoint alerts into your stream, login into the Catchpoint Portal and goto Settings > API.
 
@@ -50,10 +50,11 @@ You will also need the DataDog API Key which can be created in the DataDog porta
 Catchpoint will now send any alerts directly to the Events stream in DataDog.
 {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration" >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 This integration does not include metrics at this time.
 
-## Events
+### Events
 
 This integration will push Catchpoint events to your Datadog event stream.

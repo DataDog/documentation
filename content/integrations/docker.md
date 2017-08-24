@@ -7,6 +7,8 @@ newhlevel: true
 git_integration_title: docker
 ---
 
+{{< img src="integrations/docker/docker.png" alt="Docker default dashboard" >}}
+
 ## Overview
 
 Get metrics from Docker in real time to:
@@ -14,22 +16,20 @@ Get metrics from Docker in real time to:
 * Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside them.
 
-{{< img src="integrations/docker/docker.png" alt="Docker default dashboard" >}}
-
-
-## Installation
+## Setup
+### Installation
 
 To collect Docker metrics about all your containers, you will run **one** Datadog Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-dd-agent container](https://github.com/DataDog/docker-dd-agent). We recommend the latter.
 
 Whichever you choose, your hosts need to have cgroup memory management enabled for the Docker check to succeed. See the [docker-dd-agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
 
-### Host Installation
+#### Host Installation
 
 1. Ensure Docker is running on the host.
 2. Install the Agent as described in [the Agent installation instructions](https://app.datadoghq.com/account/settings#agent) for your host OS.
 3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
 4. Add the Agent user to the docker group: `usermod -a -G docker dd-agent`
-5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/check.py). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
+5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/conf.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
 6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
     {{< img src="integrations/docker/integrations-docker-dockerps.png" >}}
 
@@ -37,7 +37,7 @@ Whichever you choose, your hosts need to have cgroup memory management enabled f
 
 **Note:** docker_daemon has replaced the older docker integration.
 
-### Container Installation
+#### Container Installation
 
 1. Ensure Docker is running on the host.
 2. As per [the docker container installation instructions](https://app.datadoghq.com/account/settings#agent/docker), run:
@@ -49,7 +49,7 @@ Whichever you choose, your hosts need to have cgroup memory management enabled f
           -e API_KEY={YOUR API KEY} \
           datadog/docker-dd-agent:latest
 
-#### Environment variables
+##### Environment variables
 
 Note that in the command above, you are able to pass your API key to the Datadog Agent using Docker's `-e` environment variable flag. Some other variables you can pass include:
 
@@ -103,7 +103,7 @@ For example, the first version of the Docker image that will bundle the Datadog 
 
 For more information about building custom Docker containers with the Datadog Agent, the Alpine Linux based image, versioning, and more, please reference [our `docker-dd-agent` project on Github](https://github.com/DataDog/docker-dd-agent).
 
-## Validate Installation
+### Validation
 
 1. Restart the Agent.
 2. Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
@@ -120,11 +120,12 @@ Checks
 
 3. In the application on the Infrastructure List, you should see the host with the blue docker pill next to it indicating that the app is receiving the data correctly.
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "docker_daemon" >}}
 
-# Deprecated metrics
+### Deprecated metrics
 
 The following metrics are reported by the [docker](https://github.com/DataDog/integrations-core/tree/5.14.x/docker) check
 that has been deprecated and will be removed in the Agent version 5.15. The metrics will be removed from the catalog as well:
@@ -146,13 +147,15 @@ The following metrics are now reported with a different name and will be removed
 * **docker.disk.free** (now reported as **docker.data.free**)
 * **docker.disk.total** (now reported as **docker.data.total**)
 
-## Compose and the Datadog Agent
+## Further Reading
+### Knowledge Base
+#### Compose and the Datadog Agent
 
 [Compose](https://docs.docker.com/compose/overview/) is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.
 
 While the [Single Container Installation](#single-container-installation) instructions above will get the stock Datadog Agent container running, you will most likely want to enable integrations for other containerized services that are part of your Compose application. To do this, you'll need to combine integration YAML files with the base Datadog Agent image to create your Datadog Agent container. Then you'll need to add your container to the Compose YAML.
 
-### Example: Monitoring Redis
+##### Example: Monitoring Redis
 
 Let's look at how you would monitor a Redis container using Compose. Our example file structure is:
 
@@ -199,7 +202,7 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file](ht
 
 For a more complete example, please see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
 
-## DogStatsD and Docker
+#### DogStatsD and Docker
 
 Datadog has a huge number of [integrations with common applications](/integrations/), but it can also be used to instrument your custom applications. This is typically using one of the many [Datadog libraries](/libraries/).
 
@@ -207,7 +210,7 @@ Libraries that communicate over HTTP using the [Datadog API](/api/) don't requir
 
 After your code is configured you can run your custom application container using [the `--link` option](https://docs.docker.com/engine/reference/run/#/expose-incoming-ports) to create a network connection between your application container and the Datadog Agent container.
 
-### Example: Monitoring a basic Python application
+##### Example: Monitoring a basic Python application
 
 To start monitoring our application, we first need to run the Datadog container using the [Single Container Installation](#single-container-installation) instructions above. Note that the `docker run` command sets the name of the container to `dd-agent`.
 
@@ -242,7 +245,7 @@ After we build our web application container, we can run it and use the `--link`
 
 For another example using DogStatsD, see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
 
-## Additional resources
+### Blog Article
 
 Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
 

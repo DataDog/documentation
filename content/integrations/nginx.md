@@ -4,6 +4,9 @@ integration_title: NGINX
 kind: integration
 git_integration_title: nginx
 ---
+
+{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" >}}
+
 ## Overview
 
 Connect NGINX to Datadog in order to:
@@ -11,10 +14,8 @@ Connect NGINX to Datadog in order to:
 * Visualize your web server performance
 * Correlate the performance of NGINX with the rest of your applications
 
-{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" >}}
-
-Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, [how to collect them](https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html), and [how to use Datadog to monitor NGINX](https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html).
-
+## Setup
+### Configuration
 The default agent checks require the [NGINX stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html), which is not compiled by default.  In debian/ubuntu, this module is enabled in the `nginx-extras` package.  To check if your version of nginx has the stub status module support compiled in, you can run:
 
 ```
@@ -40,17 +41,17 @@ For more information on configuration, read the [stub status docs](http://nginx.
 
 {{< insert-example-links >}}
 
-**All metrics collected for NGINX and NGINX Plus**
-
+## Data Collected
+### Metrics
 {{< get-metrics-from-git >}}
 
-### NGINX (Open Source)
+#### NGINX (Open Source)
 
 {{< get-metrics-from-git "nginx" "nginx.net.writing nginx.net.waiting nginx.net.reading nginx.net.connections nginx.net.request_per_s nginx.net.conn_opened_per_s nginx.net.conn_dropped_per_s" >}}
 
 The data pulled from the nginx stub status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
 
-### NGINX Plus
+#### NGINX Plus
 
 If you are using NGINX Plus, you have access to the extended [http_status_module](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).  The agent supports this module too, and will collect a much [longer list of metrics](https://github.com/DataDog/integrations-core/blob/master/nginx/ci/fixtures/nginx_plus_out.python) when the instance target is an http status module URL.
 
@@ -82,5 +83,9 @@ Finally, these metrics have no good translation:
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
 
 
-
+## Further Reading
+### Knowledge Base
 The data pulled from the NGINX Plus status page are described in the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_status_module.html#data).
+
+### Blog Article
+Learn more about how to monitor NGINX performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/). We detail the key performance metrics, [how to collect them](https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html), and [how to use Datadog to monitor NGINX](https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html).

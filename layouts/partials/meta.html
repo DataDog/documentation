@@ -21,14 +21,14 @@
 
 
 <!-- Schema.org markup for Google+ -->
-<meta itemprop="name" content="{{ $meta_title }}">
-<meta itemprop="description" content="{{ $meta_desc }}">
+<meta itemprop="name" content="{{ $meta_title | safeHTML }}">
+<meta itemprop="description" content="{{ $meta_desc | safeHTML }}">
 
 <!-- Twitter Card data -->
 {{ if $meta_image}}<meta name="twitter:card" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
 <meta name="twitter:site" content="@datadoghq">
-<meta name="twitter:title" content="{{ $meta_title }}">
-<meta name="twitter:description" content="{{ $meta_desc }}">
+<meta name="twitter:title" content="{{ $meta_title | safeHTML }}">
+<meta name="twitter:description" content="{{ $meta_desc | safeHTML }}">
 <meta name="twitter:creator" content="@datadoghq">
 <!-- Twitter summary card with large image must be at least 280x150px -->
 {{ if $meta_image}}<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}

@@ -10,10 +10,10 @@ git_integration_title: hipchat
 
 ## Overview
 
-Connect HipChat to Datadog in order to:
+The Hipchat integration lets Datadog send notifications to your HipChat room or individual handle. It can send:
 
-* Receive notifications when someone posts on your stream.
-* Receive metric alerts and see graphs within HipChat.
+* messages and graphs when your Datadog monitors trigger
+* messages about event stream activity (i.e. comments from teammates)
 
 ## Configuration
 
@@ -21,26 +21,27 @@ Connect HipChat to Datadog in order to:
 
 2. Copy your key and enter it in the [HipChat integration tile](https://app.datadoghq.com/account/settings#integrations/hipchat).
 
-3. Enter the room names you wish to allow access to from Datadog.
-Tick the checkbox if you want to be notified for every comment, in all configured rooms. If the checkbox is left unchecked, you will need to use the @hipchat-chat_name syntax.
+3. Enter the room names you want Datadog to be able to send messages to.
+Tick the checkbox if you want to be notified for every comment, in all configured rooms. If you don't check it, commenters must include `@hipchat-<chat_name>` in each message they want to send to HipChat.
 
-4. Save your configuration
+4. Save your configuration.
 
-You can now share graphs or send alerts to HipChat rooms using the syntax @hipchat-chat_name
+You also share graphs or send Monitor alerts to HipChat rooms using `@hipchat-<chat_name>`.
 
 <div class="alert alert-warning">
-If you are using a HipChat API V1 token, if your HipChat handle contains special characters such as commas or brackets, they'll be escaped when sending notifications with the @ handle. You shouldn't have to worry about that, the autocomplete box automatically takes care of escaping chat names. <br><br>
-If you want to use a HipChat API V2 token, then your HipChat handle may ONLY have lowercase alphanumeric characters and the special characters '-' and '_'.
+"If you are using a HipChat API V1 token and your chat handle contains special characters like commas or brackets, you don't need to escape them when you enter the handle; the autocomplete box does that for you.<br><br>
+If you are using a HipChat API V2 token, your chat handle may ONLY include lowercase alphanumeric characters and the special characters '-' and '_'.
 </div>
 
 #### HipChat Server
 
-If you use an on-premise HipChat server, enter your server's hostname [here](https://app.datadoghq.com/account/settings#integrations/hipchat). 
-The server needs to be accessible from the outside world. Tick the checkbox ONLY if your HipChat server's certificate is self-signed.
+If you host your own HipChat server, enter the server's hostname [here](https://app.datadoghq.com/account/settings#integrations/hipchat). The server needs to be accessible from the Internet.
+
+Tick the **Ignore SSL** checkbox ONLY if your HipChat server's certificate is self-signed.
 
 {{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" >}}
 
 ## Metrics
 
-This integration does not provide metrics.
+This integration does not submit any metrics.
 

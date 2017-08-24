@@ -15,8 +15,8 @@ Connect Sentry to Datadog to:
 * Search for exceptions in your graphs
 * Discuss exceptions with your team
 
-
-## Installation
+## Setup
+### Installation
 
 Setting up Sentry integration
 
@@ -29,11 +29,11 @@ https://app.datadoghq.com/intake/webhook/sentry?api_key=<YOUR_DATADOG_API_KEY>
 
 Every time a new exception occurs (or a closed exception re-occurs), it will appear in your stream.
 
-## Adding a host name to Sentry errors (Optional)
+### Adding a host name to Sentry errors (Optional)
 
 Occasionally, the server name which Sentry reports may not match the host name recognized by Datadog. To overcome this, you can manually add the proper host name to use when initializing the Raven client. Datadog looks for a hostname tag first, then falls back to server_name.
 
-### Python
+#### Python
 
 By default, Sentry gets the server_name tag by making a call to socket.gethostname(). To change server_name, add a name keyword when you initialize the Sentry client:
 {{< highlight python >}}
@@ -45,7 +45,7 @@ tags = {'hostname': 'host01'}
 client = raven.Client(dsn=dsn, tags=tags)
 {{< /highlight >}}
 
-### Ruby
+#### Ruby
 
 To configure an alternate server_name tag for every event, add the tags property like so:
 {{< highlight ruby >}}
@@ -59,3 +59,14 @@ Raven.configure do |config|
   config.tags = { hostname: "host01" }
 end
 {{< /highlight >}}
+
+## Troubleshooting
+### Why aren't my Sentry errors showing up in Datadog?
+
+Your Sentry Webhook probably isn't triggering. This could be caused by:
+
+* **Alerts are only sent when a rule is triggered**:<br>
+For example, if the rule condition is when "an event is first seen", an alert will not be dispatched until a new issue is created. (Depending on how many unique issues your project is receiving, this can take some time.) 
+
+* **The notification integration is disabled**:<br>
+Ensure that the notification integration is enabled under the rule actions, either as the specific service, or covered under "all enabled services".

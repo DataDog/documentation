@@ -15,10 +15,12 @@ Get metrics from Google Stackdriver Logging to:
 * Visualize the performance of your Stackdriver logs
 * Correlate the performance of your Stackdriver logs with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

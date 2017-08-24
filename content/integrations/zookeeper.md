@@ -5,6 +5,9 @@ git_integration_title: zookeeper
 kind: integration
 newhlevel: true
 ---
+
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}
+
 ## Overview
 
 Connect ZooKeeper to Datadog in order to:
@@ -12,12 +15,8 @@ Connect ZooKeeper to Datadog in order to:
 * Visualize ZooKeeper performance and utilization.
 * Correlate the performance of ZooKeeper with the rest of your applications.
 
-
-{{< insert-example-links conf="zk" check="zk" >}}
-
-{{< img src="integrations/zookeeper/zookeepergraph.png" alt="ZooKeeper Graph" >}}
-
-## Configuration
+## Setup
+### Configuration
 
 1.  Configure the Agent to connect to ZooKeeper. Edit `conf.d/zk.yaml`
 {{< highlight yaml>}}
@@ -31,7 +30,9 @@ instances:
 
 2.  Restart the Agent
 
-## Validation
+{{< insert-example-links conf="zk" check="zk" >}}
+
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -47,4 +48,4 @@ Checks
 {{< /highlight >}}
 # Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "zk" >}}

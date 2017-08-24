@@ -8,19 +8,21 @@ git_integration_title: tcp_check
 aliases:
   - /guides/network_checks
 ---
-## Overview
 
 {{< img src="integrations/tcpcheck/netgraphs.png" alt="Network Graphs" >}}
+
+## Overview
 
 TCP checks run in the agent and can verify whether or not a TCP service is up or down and responds in a certain time.
 
 Also see the related [HTTP Checks](/integrations/httpcheck).
 
-## Installation
+## Setup
+### Installation
 
 No installation is required
 
-## Configuration
+### Configuration
 
 Edit the `tcp_check.yaml` file in your agent's `conf.d` directory. The following yaml file will check both ports 22 and 443 on 192.168.22.1 with timeouts of 10 seconds. The response time will be available in the metric `network.tcp.response_time`.
 {{< highlight yaml>}}
@@ -46,7 +48,7 @@ instances:
       - demo:matt
 {{< /highlight >}}
 
-### Configuration Options
+#### Configuration Options
 
 * `name` (Required) - Name of the service. This will be included as a tag: `instance:<name>`.
 * `host` (Required) - Host to be checked. This will be included as a tag: `url:<host>:<port>`.
@@ -58,7 +60,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the agent info command and verify that the integration check was successful. The output should contain a section similar to the following:
 {{< highlight shell>}}
@@ -72,6 +74,7 @@ Checks
     - Collected 2 metrics, 0 events & 3 service checks
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

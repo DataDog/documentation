@@ -6,15 +6,16 @@ kind: integration
 doclevel: basic
 ---
 
-## Overview
 {{< img src="integrations/rss/rss.png" alt="RSS event" >}}
 
+## Overview
 Capture RSS feed activity in Datadog to:
 
   * Add events from custom sources to your stream.
   * Discuss feed events with your team.
 
-## Installation 
+## Setup
+### Installation 
 
 Configuration requires:
 

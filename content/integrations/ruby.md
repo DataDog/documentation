@@ -14,7 +14,8 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
 * [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) A client for DogStatsD, an extension of the StatsD metric server for Datadog.
 * [dogapi-rb](https://github.com/DataDog/dogapi-rb) The Ruby client is a library suitable for inclusion in existing Ruby projects or for development of standalone scripts. It provides an abstraction on top of Datadog's raw HTTP interface for reporting events and metrics.
 
-## Installation
+## Setup
+### Installation
 
 1.  To install the Ruby client for the Datadog API:
 
@@ -33,7 +34,7 @@ require 'dogapi'
 api_key = "abcdef123456"
 application_key = "fedcba654321"
 
-# Note that submitting events does not require the application key.
+# Submitting events does not require the application key.
 dog = Dogapi::Client.new(api_key, application_key)
 
 # Send a new event.
@@ -55,10 +56,10 @@ statsd.increment('page.views')
 statsd.gauge('users.online', 123, :sample_rate=>0.5)
 {{< /highlight >}}
 
-## Configuration
+### Configuration
 
 There is nothing that you need to do in the Datadog application to configure Ruby.
 
-## Validation
+### Validation
 
 Go to the [Metrics explorer page](https://app.datadoghq.com/metric/explorer) and see that it just works!

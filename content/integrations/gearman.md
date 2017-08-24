@@ -13,7 +13,8 @@ Bring Gearman metrics to Datadog to:
 * Know how many tasks are queued or running.
 * Correlate the performance of Gearman with the rest of your applications.
 
-## Configuration
+## Setup
+### Configuration
 To capture Gearman metrics you need to install the Datadog Agent.
 
 1. Install the python gearman module
@@ -34,7 +35,7 @@ instances:
 
 {{< insert-example-links conf="gearmand" check="gearmand" >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell >}}
@@ -49,12 +50,12 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "gearmand" >}}
 
-
-## Service Checks
+### Service Checks
 
 `gearman.can_connect`:
 

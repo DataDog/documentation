@@ -12,7 +12,8 @@ Capture NameNode and DataNode HDFS metrics in Datadog to:
 * Visualize cluster health, performance and utilization.
 * Analyze and inspect individual node utilization
 
-## Configuration
+## Setup
+### Configuration
 
 *These steps only apply to the Datadog Agent >= 5.7.0, please refer to the conf.d/hdfs.yaml file for older versions of the Agent.*
 
@@ -53,7 +54,7 @@ instances:
 {{< insert-example-links integration="HDFS NameNode" >}}
 {{< insert-example-links integration="HDFS DataNode" include_intro="false" >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -71,10 +72,13 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 The metrics available are collected using df from Spotify's Snakebite. hdfs.in_use is calculated by dividing used by capacity.
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "hdfs_datanode" >}}
+
+{{< get-metrics-from-git "hdfs_namenode" >}}
 
 You may experience reduced functionality if using hadoop before v2.2.0. For earlier versions, we need to use Snakebite v1.3.9. If using HA Mode, you may want to upgrade.

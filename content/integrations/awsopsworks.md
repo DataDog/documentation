@@ -12,15 +12,17 @@ AWS OpsWorks is an application management service that makes it easy to deploy a
 
 Enable this integration to see in Datadog all your OpsWorks metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that OpsWorks is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

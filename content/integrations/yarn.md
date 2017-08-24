@@ -5,16 +5,17 @@ kind: integration
 git_integration_title: yarn
 newhlevel: true
 ---
-## Overview
-
 {{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" >}}
+
+## Overview
 
 Capture Yarn metrics to:
 
 * Visualize cluster health, performance, and utilization.
 * Analyze and inspect individual application performance.
 
-## Configuration
+## Setup
+### Configuration
 
 *Install Datadog Agent on the ResourceManager*
 
@@ -31,8 +32,7 @@ instances:
 
 {{< insert-example-links conf="yarn" check="yarn" >}}
 
-
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -47,7 +47,8 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

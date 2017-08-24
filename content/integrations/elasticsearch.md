@@ -7,20 +7,21 @@ git_integration_title: elasticsearch
 updated_for_agent: 5.8.5
 ---
 
-## Overview
-
 {{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" >}}
+
+## Overview
 
 Connect Elasticsearch to Datadog in order to:
 
 * Visualize Elasticsearch performance.
 * Correlate Elasticsearch performance with the rest of your applications.
 
-## Installation
+## Setup
+### Installation
 
 No installation steps are required for this integration
 
-## Configuration
+### Configuration
 
 1.  Edit your `conf.d/elastic.yaml` file as follows:
 {{< highlight yaml >}}
@@ -34,7 +35,7 @@ instances:
 
 {{< insert-example-links conf="elastic" check="elastic" >}}
 
-## Validation
+### Validation
 
 To validate that the integration is working, run ```/etc/init.d/datadog-agent info```. You should see results similar to the following:
 {{< highlight shell >}}
@@ -57,7 +58,8 @@ Checks
       - Collected 97 metrics, 0 events & 3 service checks
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "elastic" >}}
 
