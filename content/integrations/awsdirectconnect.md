@@ -8,9 +8,7 @@ doclevel: basic
 
 ## Overview
 
-This integration collects metrics from AWS Direct Connect (e.g. `aws.dx.connection_state`, `aws.dx.connection_bps_egress`)
-
-Enable this integration to see in Datadog all your Direct Connect metrics.
+This integration collects metrics from AWS Direct Connect (e.g. Connection state, bit rate ingress and egress, packet rate ingress and egress, and more)
 
 ## Setup
 ### Installation
