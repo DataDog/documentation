@@ -8,7 +8,7 @@ doclevel: basic
 
 ## Overview
 
-This integration collects metrics from AWS Direct Connect (e.g. Connection state, bit rate ingress and egress, packet rate ingress and egress, and more)
+This integration collects metrics from AWS Direct Connect (e.g. Connection state, bit rate ingress and egress, packet rate ingress and egress, and more).
 
 ## Setup
 ### Installation
