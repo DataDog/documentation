@@ -24,8 +24,9 @@ Related integrations include:
 | [Autoscaling](/integrations/awsautoscaling)               | scale EC2 capacity                                                            |
 | [Billing](/integrations/awsbilling)                       | billing and budgets                                                           |
 | [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |
-| [CloudTrail](/integrations/awscloudtrail)                 | Access to log files and AWS API calls                                         |
-| [CloudSearch](/integrations/awscloudsearch)               | Access to log files and AWS API calls                                         |
+| [CloudTrail](/integrations/awscloudtrail)                 | access to log files and AWS API calls                                         |
+| [CloudSearch](/integrations/awscloudsearch)               | access to log files and AWS API calls                                         |
+| [Direct Connect](/integrations/awsdirectconnect)          | dedicated network connection to AWS
 | [Dynamo DB](/integrations/awsdynamo)                      | NoSQL Database                                                                |
 | [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
 | [Elastic Beanstalk](/integrations/awsbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
