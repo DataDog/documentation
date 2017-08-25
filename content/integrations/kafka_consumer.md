@@ -7,8 +7,6 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-# Agent Check: Kafka Consumer
-
 ## Overview
 
 This Agent check only collects metrics for message offsets. If you want to collect metrics about the Kafka brokers themselves, see the kafka check.
