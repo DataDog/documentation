@@ -56,7 +56,8 @@ def index_algolia(app_id, api_key, content_path=None):
 
                     with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as myfile:
 
-                        html = BeautifulSoup(myfile, "lxml")
+                        html = BeautifulSoup(myfile, "html.parser")
+
                         main = html.find("div", {"main"})
 
                         # title
