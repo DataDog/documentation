@@ -87,6 +87,16 @@ test_preview_links:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - pull_artifact_from_s3
+    - index_algolia
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template

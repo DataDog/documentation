@@ -1,38 +1,33 @@
 #!/usr/bin/env python3
 import argparse
 import os
-import re
-import yaml
-import glob
-import time
 
 from algoliasearch import algoliasearch
 from bs4 import BeautifulSoup
-from markdown import markdown
+
+# indexes
+DOCS_BUILD_ENGLISH = 'docs_build_english'
+DOCS_LIVE_ENGLISH = 'docs_english'
+DOCS_BUILD_JAPANESE = 'docs_build_japanese'
+DOCS_LIVE_JAPANESE = 'docs_japanese'
 
 
 def content_location():
-
-    this_dir = os.getcwd()
-
     path_to_content = 'public'
 
     return path_to_content
 
 
 def index_algolia(app_id, api_key, content_path=None):
-
     client = algoliasearch.Client(app_id, api_key)
 
-    index_english = client.init_index('docs_english')
-    index_japanese = client.init_index('docs_japanese')
+    index_english_build = client.init_index(DOCS_BUILD_ENGLISH)
+    index_japanese_build = client.init_index(DOCS_BUILD_JAPANESE)
 
     index_english_articles = []
     index_japanese_articles = []
 
-    remove_articles = []
-
-    dirs_exclude = ('js','images','fonts','en','css', 'search', 'matts quick tips')
+    dirs_exclude = ('js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips')
     files_to_exclude = ('404.html')
 
     docs_host = 'https://docs.datadoghq.com'
@@ -48,7 +43,6 @@ def index_algolia(app_id, api_key, content_path=None):
 
             for (dirpath, dirnames, filenames) in os.walk(content_path):
                 dirnames[:] = [d for d in dirnames if d not in dirs_exclude]
-
                 filenames[:] = [f for f in filenames if f.endswith('.html') and f not in files_to_exclude]
 
                 for filename in filenames:
@@ -56,67 +50,77 @@ def index_algolia(app_id, api_key, content_path=None):
                     lang = ''
 
                     if dirpath.startswith("public/ja"):
-
                         lang = 'ja'
 
                     article = {}
 
-                    url = ''
-                    algolia_object = ''
                     with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as myfile:
 
                         html = BeautifulSoup(myfile, "lxml")
                         main = html.find("div", {"main"})
 
-                        main_text = ''
-                        if main:
-                            main_text = main.text
-                            desc_text = main_text.split()[:25]
-
-
+                        # title
                         title = html.title.string
-
                         if not title:
                             title = html.select('h1')[0].text.strip()
 
-                        fm_description = desc = html.findAll(attrs={"name":"description"})
-                        description = ''
+                        # description
+                        desc_text = ""
+
+                        if main:
+                            main_text = main.text
+                            desc_text = main_text.split()[:25]
+                        fm_description = desc = html.findAll(attrs={"name": "description"})
 
                         if fm_description:
                             description = desc[0]['content'].encode('utf-8')
                         else:
-
                             desc_text = " ".join(desc_text)
                             description = desc_text
 
-                        url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if "data-relpermalink" in item.attrs]
+                        # create url
+                        url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
+                                            "data-relpermalink" in item.attrs]
+                        url = docs_host + str(url_relpermalink[0]) if url_relpermalink else docs_host
 
-                        if url_relpermalink:
-                            url_path = str(url_relpermalink[0])
-
-                        url = docs_host+url_path
-
-                        article['objectID'] = dirpath+'/'+filename
+                        # create article object
+                        article['objectID'] = dirpath + '/' + filename
                         article['URL'] = url
                         article['title'] = title
                         article['body'] = description
-                        article['file'] = dirpath+'/'+filename
+                        article['file'] = dirpath + '/' + filename
 
+                        # i18n
                         if lang == 'ja':
                             index_japanese_articles.append(article)
                         else:
                             index_english_articles.append(article)
 
-            # save public articles to algolia index
-            try:
-                index_english.save_objects(index_english_articles)
-                index_japanese.save_objects(index_japanese_articles)
-                print('Algolia Docs objects have been successfully updated.')
-            except algoliasearch.AlgoliaException as e:
-                print(e)
-                exit(1)
+            # save object TODO: update and delete
+            if index_english_articles:
+                # empty the build
+                index_english_build.clear_index()
+                try:
+                    index_english_build.save_objects(index_english_articles)
+                    client.copy_index(DOCS_BUILD_ENGLISH, DOCS_LIVE_ENGLISH)
+                    print('Algolia Docs Build objects have been successfully updated.')
+                except algoliasearch.AlgoliaException as e:
+                    print(e)
+                    exit(1)
+
+            if index_japanese_articles:
+                index_japanese_build.clear_index()
+                try:
+                    index_japanese_build.save_objects(index_japanese_articles)
+                    client.copy_index(DOCS_BUILD_JAPANESE, DOCS_LIVE_JAPANESE)
+                    print('Algolia JA Docs Build objects have been successfully updated.')
+                except algoliasearch.AlgoliaException as e:
+                    print(e)
+                    exit(1)
+
     except ValueError as e:
         exit(str(e))
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
