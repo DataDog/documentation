@@ -36,11 +36,11 @@ Note that if you are using environments, you will still get a default `env:none`
 
 There are several ways to specify an environment when reporting data:
 
-1) Host tag
+1. Host tag
 
 If you use a host tag that looks like `env:XXXX`, all the traces reported from that agent will be tagged accordingly.
 
-2) Agent config
+2. Agent config
 
 You can override the default tag used by the trace agent in the configuration. This will tag all the traces coming through the agent. It overrides the value above.
 
@@ -49,7 +49,7 @@ You can override the default tag used by the trace agent in the configuration. T
 env = pre-prod
 ~~~
 
-3) Per trace
+3. Per trace
 
 When submitting a single trace, you can specify an environment by tagging one of its span with the metadata key `env` and the value you would like. It overrides the value above.
 
