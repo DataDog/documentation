@@ -96,9 +96,8 @@ def index_algolia(app_id, api_key, content_path=None):
                         else:
                             index_english_articles.append(article)
 
-            # save object TODO: update and delete
+            # save object
             if index_english_articles:
-                # empty the build
                 index_english_build.clear_index()
                 try:
                     index_english_build.save_objects(index_english_articles)
