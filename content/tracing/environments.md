@@ -13,17 +13,19 @@ Some display settings can be shared across environments, but all the measurable 
 
 Use cases can be:
 
-stage environments such as production, staging, and pre-production
-datacenters and availability zones in isolation
+- stage environments such as production, staging, and pre-production
+- datacenters and availability zones in isolation
+
 Environments are tags, therefore they must follow the following rules:
 
-they must start with a letter;
-other characters must be alphanumeric lower case unicode characters, underscores, minuses, colons, periods or slashes;
-they must not be more than 100 characters long.
+- they must start with a letter;
+- other characters must be alphanumeric lower case unicode characters, underscores, minuses, colons, periods or slashes;
+- they must not be more than 100 characters long.
+
 Environments in traces and configuration files will be normalized:
 
-unsupported characters will be replaced by underscores;
-upper case characters will be converted to lower case.
+- unsupported characters will be replaced by underscores;
+- upper case characters will be converted to lower case.
 
 
 #### Default environment
