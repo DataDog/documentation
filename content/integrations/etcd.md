@@ -3,6 +3,7 @@ title: Datadog-etcd Integration
 integration_title: etcd
 kind: integration
 git_integration_title: etcd
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/etcd/etcd_graph.png" alt="Etcd Graph" >}}

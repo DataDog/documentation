@@ -5,12 +5,15 @@ kind: integration
 newhlevel: true
 git_integration_title: http_check
 update_for_agent: 5.8.5
+aliases:
+  - /integrations/httpcheck
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 
 HTTP checks run in the agent and can verify whether or not a website is up or down, responds in a certain time, and/or contains specific text on the page.
 
-Also see the related [TCP Checks](/integrations/tcpcheck)
+Also see the related [TCP Checks](/integrations/tcp_check)
 
 ## Setup
 ### Installation

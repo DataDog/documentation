@@ -4,6 +4,9 @@ integration_title: Go Expvar
 kind: integration
 doclevel: basic
 git_integration_title: go_expvar
+aliases:
+  - /integrations/goexpvar
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" >}}

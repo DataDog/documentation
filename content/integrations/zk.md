@@ -4,6 +4,9 @@ integration_title: Zookeeper
 git_integration_title: zookeeper
 kind: integration
 newhlevel: true
+aliases:
+    - /integrations/zookeeper
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}

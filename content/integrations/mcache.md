@@ -1,10 +1,13 @@
 ---
 title: Datadog-Memcached Integration
 integration_title: Memcached
-git_integration_title: memcached
+git_integration_title: mcache
 kind: integration
 newhlevel: true
 updated_for_agent: 5.8.5
+aliases:
+  - /integrations/memcached
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

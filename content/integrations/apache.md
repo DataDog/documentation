@@ -4,6 +4,7 @@ integration_title: Apache
 kind: integration
 newhlevel: true
 git_integration_title: apache
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/apache/apachegraph.png" >}}

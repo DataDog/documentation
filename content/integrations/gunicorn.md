@@ -3,6 +3,7 @@ title: Datadog-Gunicorn Integration
 integration_title: gunicorn
 kind: integration
 git_integration_title: gunicorn
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

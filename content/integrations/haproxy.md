@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: haproxy
 updated_for_agent: 5.8.5
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/haproxy/haproxydash.png" alt="HAProxy default dashboard" >}}

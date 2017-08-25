@@ -1,9 +1,10 @@
 ---
 title: Datadog-SNMP Integration
 integration_title: SNMP
-
 kind: integration
 newhlevel: true
+git_integration_title: snmp
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

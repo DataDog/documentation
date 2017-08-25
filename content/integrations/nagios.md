@@ -3,6 +3,7 @@ title: Datadog-Nagios Integration
 integration_title: Nagios
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

@@ -2,8 +2,11 @@
 title: Datadog-MongoDB Integration
 integration_title: MongoDB
 kind: integration
-git_integration_title: mongodb
+git_integration_title: mongo
 newhlevel: true
+aliases:
+  - /integrations/mongodb
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

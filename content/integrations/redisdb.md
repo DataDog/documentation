@@ -5,6 +5,9 @@ newhlevel: true
 kind: integration
 git_integration_title: redisdb
 updated_for_agent: 5.8.5
+aliases:
+  - /integrations/redis
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/redis/redis.png" alt="Redis default dashboard" >}}

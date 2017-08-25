@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: kong
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

@@ -3,8 +3,10 @@ title: Datadog-Elasticsearch Integration
 integration_title: Elasticsearch
 kind: integration
 newhlevel: true
-git_integration_title: elasticsearch
+git_integration_title: elastic
 updated_for_agent: 5.8.5
+slug: /integrations/elasticsearch
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" >}}

@@ -3,6 +3,7 @@ title: Datadog-StatsD
 integration_title: StatsD
 kind: integration
 git_integration_title: statsd
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

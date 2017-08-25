@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 5.8.5
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
@@ -165,10 +166,8 @@ If the agent is deployed you will see similar output to the text below, where de
 
 {{< get-metrics-from-git >}}
 
-{{< get-metrics-from-git "kubernetes_state" >}}
-
 ## Further Reading
 ### Knowledge Base
 #### Limitations
 
-Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker/) and that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).
+Please be aware that Kubernetes relies on Heapster to report metrics, rather than the cgroup file directly. The collection interval for Heapster is unknown which can lead to innacurate time-related data, such as CPU usage. If you require more precise metrics, we recommend using the [Datadog-Docker Integration](/integrations/docker_daemon) and that Heapster must be running in [standalone mode](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/standalone).

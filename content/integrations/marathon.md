@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: marathon
 updated_for_agent: 5.8.0
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 

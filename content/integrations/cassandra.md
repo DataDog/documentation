@@ -3,6 +3,7 @@ title: Datadog-Cassandra Integration
 integration_title: Cassandra
 kind: integration
 git_integration_title: cassandra
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" >}}

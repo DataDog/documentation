@@ -4,6 +4,7 @@ integration_title: SQL Server
 git_integration_title: sqlserver
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" >}}

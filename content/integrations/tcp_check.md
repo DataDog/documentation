@@ -7,6 +7,8 @@ update_for_agent: 5.8.5
 git_integration_title: tcp_check
 aliases:
   - /guides/network_checks
+  - /integrations/tcpcheck
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/tcpcheck/netgraphs.png" alt="Network Graphs" >}}
@@ -15,7 +17,7 @@ aliases:
 
 TCP checks run in the agent and can verify whether or not a TCP service is up or down and responds in a certain time.
 
-Also see the related [HTTP Checks](/integrations/httpcheck).
+Also see the related [HTTP Checks](/integrations/http_check).
 
 ## Setup
 ### Installation

@@ -3,6 +3,7 @@ title: Datadog-RiakCS Integration
 integration_title: RiakCS
 git_integration_title: riakcs
 kind: integration
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

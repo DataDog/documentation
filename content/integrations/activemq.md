@@ -4,7 +4,7 @@ integration_title: ActiveMQ
 kind: integration
 doclevel: complete
 newhlevel: true
-git_integration_title: activemq
+git_integration_title: activemq_xml
 description: "{{< get-desc-from-git >}}"
 ---
 
@@ -105,7 +105,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git "activemq_xml" >}}
+{{< get-metrics-from-git >}}
 
 
 [1]: http://activemq.apache.org/jmx.html

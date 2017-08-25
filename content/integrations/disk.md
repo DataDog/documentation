@@ -8,6 +8,8 @@ platformmetrics:
     - Windows
   system.disk.write_time_pct:
     - Windows
+git_integration_title: disk
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

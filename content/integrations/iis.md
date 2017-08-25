@@ -5,6 +5,7 @@ kind: integration
 newhlevel: true
 git_integration_title: iis
 updated_for_agent: 5.8.5
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/iis/iisgraph.png" alt="IIS Graph" >}}

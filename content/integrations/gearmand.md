@@ -2,7 +2,10 @@
 title: Datadog-Gearman Integration
 integration_title: Gearman
 kind: integration
-git_integration_title: gearman
+git_integration_title: gearmand
+aliases:
+  - /integrations/gearman
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: postfix
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" >}}

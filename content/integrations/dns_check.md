@@ -5,6 +5,9 @@ kind: integration
 git_integration_title: dns_check 
 doclevel: basic
 newhlevel: true
+aliases:
+  - /integrations/dnscheck
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

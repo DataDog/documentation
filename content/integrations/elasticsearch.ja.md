@@ -4,7 +4,7 @@ translation_status: complete
 language: ja
 title: Datadog-Elasticsearch Integration
 integration_title: Elasticsearch
-git_integration_title: elasticsearch
+git_integration_title: elastic
 kind: integration
 doclevel: complete
 ---
