@@ -359,3 +359,14 @@ set_site_destination() {
         printf "${2}/"
     fi
 }
+
+
+index_algolia() {
+    start_step
+    echo "---------"
+    echo "Updating Algolia Docs Index"
+    echo "---------"
+    index_algolia.py --app_id ${ALGOLIA_APPLICATION_ID} --api_key ${ALGOLIA_API_KEY} || fail_step "${FUNCNAME}"
+    echo "Done."
+    pass_step  "${FUNCNAME}"
+}

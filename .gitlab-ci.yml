@@ -4,7 +4,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.5"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.6"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -144,6 +144,16 @@ test_live_static:
   script:
     - pull_artifact_from_s3
     - test_site_links "static" "${URL}" "True" "False" "True"
+  only:
+    - master
+
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - pull_artifact_from_s3
+    - index_algolia
   only:
     - master
 
