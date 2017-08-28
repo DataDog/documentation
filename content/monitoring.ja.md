@@ -1,42 +1,16 @@
 ---
-last_modified: 2017/03/08
+last_modified: 2017/08/24
 translation_status: complete
 language: ja
 title: Monitoring レファレンス
 kind: documentation
 listorder: 5
-sidebar:
-  nav:
-    - header: Monitoringレファレンス
-    - text: 用語集
-      href: "#glossary"
-    - text: ホストを対象にしたMonitor
-      href: "#host"
-    - text: メトリクスを対象にしたMonitor
-      href: "#metric"
-    - text: インテグレーションを対象にしたMonitor
-      href: "#integration"
-    - text: プロセスを対象にしたMonitor
-      href: "#process"
-    - text: ネットワークを対象にしたMonitor
-      href: "#network"
-    - text: イベントを対象にしたMonitor
-      href: "#event"
-    - text: カスタムチェックを対象にしたMonitor
-      href: "#custom"
-    - text: 通知の設定
-      href: "#notifications"
-    - text: Monitorに関するFAQs
-      href: "#faqs"
 ---
 <!--
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 -->
 
 このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
-
-## 用語集
-
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -56,7 +30,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadogに送信します。
 - **Check**: Agent Checkのことで、複数のステータスを送信します。
 - **Monitor**: Agent Checkのステータスやメトリクスの閾値の確認手順、その他のアラート条件を元に通知を送信します。
-- **Monitorタイプ**: [ホスト](#host)-, [メトリクス](#metric)-, [インテグレーション](#integration)-, [プロセス](#process)-, [ネットワーク](#network)-, [イベント](#event)-, [カスタムチェック](#custom)があります。特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
+- **Monitorタイプ**: [ホスト](#ホストを対象にしたmonitor)-, [メトリクス](#メトリクスを対象にしたmonitor)-, [インテグレーション](#インテグレーションを対象にしたmonitor)-, [プロセス](#プロセスを対象にしたmonitor)-, [ネットワーク](#ネットワークを対象にしたmonitor)-, [イベント](#イベントを対象にしたmonitor)-, [カスタムチェック](#カスタムチェックを対象にしたmonitor), APM-, [コンポジット](#コンポジット-複合-monitor)-, があります。特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
 - **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
 
 
@@ -77,17 +51,17 @@ on the left. This document will walk through the configuration of each type.
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-![host monitor](/static/images/monitor/host_monitor.png)
+{{< img src="guides/monitor/host_monitor.png" >}}
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.
 -->
 
-### ホストを対象にした Monitor
+### ホストを対象にしたMonitor
 
 *Datadog Agent バージョン 5.0.0 以上が必要です。*
 
-![host monitor](/images/guides/monitor/host_monitor.png)
+{{< img src="guides/monitor/host_monitor.png" >}}
 
 Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハートビート信号を
 `UP`というステータスで定期的に送信します。
@@ -110,23 +84,52 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 2. `Check Alert`または`Cluster Alert`を選択します。その後、**no-data timeframe**の項目で、分単位で時間を設定します。ここで設定した時間を超えてハートビート信号が受信できなかった場合に、通知が送信されます。
 
-3. 通知の設定をします。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+3. 通知先の設定をします。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 
-<!-- ### Metric Monitors
+<!--
+### Metric Monitors
 
-1. Select the metric and scope you want to monitor.
+1. Choose the detection method
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
 
-    ![metric scope](/images/monitor/metric_scope.png)
+    A **threshold alert** compares the value in the selected
+    timeframe against a given threshold. There are additional options available
+    in the alerting conditions section. This is the standard alert case
+    where you know what sort values are unexpected.
+
+    A **change alert** compares the absolute or percentage change in
+    value between now and some time ago against a given threshold.
+    The compared data points will not be single points but are computed using
+    the parameters in the *alert conditions* section.
+
+    This type of alert is useful to track sudden spikes or drops as well as slow
+    changes in a metric when you might not have an exact "unexpected" threshold.
+    *Note:* the calculated value is not the absolute value - meaning it will be
+    negative for a downward change.
+
+    **Anomaly Detection** is an algorithmic feature that allows you to identify
+    when a metric is behaving differently than it has in the past, taking into
+    account trends, seasonal day-of-week and time-of-day patterns. It is well-
+    suited for metrics with strong trends and recurring patterns that are hard
+    or impossible to monitor with threshold-based alerting.
+
+    **Outlier Detection** is an algorithmic feature that allows you to detect
+    when some members of a group are behaving strangely compared to the others.
+    For example, you could detect that one web server in a pool is processing an
+    unusual number of requests, and hence should be a target for replacement. Or,
+    you could get an early warning that significantly more 500s are happening in
+    one AWS Availability Zone (AZ) than the others, which might indicate an issue
+    arising in that AZ.
+
+2. Select the metric and scope you want to monitor.
+  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
-    Datadog. The standard scoping rules apply here. Please refer to the
-    [scope section](/graphing/#scope) of the graphing primer for
-    further information.
+    Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
-2. Select the alert grouping.
-
-    ![alert grouping](/images/monitor/alert_grouping.png)
+3. Select the alert grouping.
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -143,33 +146,14 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     This will trigger a separate alert for each device on each host that is
     running out of space.
 
-3. Select the alert type.
-
-    ![alert type](/images/monitor/alert_type.png)
-
-    A **threshold alert** will compare the value in the selected
-    timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
-
-    A **change alert** will compare the change or % change of a value between
-    now and some time ago against a given threshold.
-    The compared data points will not be single points but are computed using
-    the parameters in the *alert conditions* section.
-
-    This type of alert is useful to track fast spikes or drops as well as slow
-    changes in a metric when you might not have an exact "unexpected" threshold.
-    *Note:* the calculated value is not the absolute value - meaning it will be
-    negative for a downward change.
-
-4. Select the alert conditions
+4.  Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
       have chosen. For either case, you input a threshold and comparison type
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      ![metric threshold](/images/monitor/metric_threshold.png)
+      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -199,7 +183,6 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       across all aggregated series. In other words, we recommend using *at least
       once* or *in total* for metrics with > 1 minute interval.
 
-
     - When you select the **change alert** option, you will have additional
     parameters you can adjust.
       - *change* is an absolute change of the value whereas *% change* is the
@@ -211,6 +194,10 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       - Like the **threshold alert**, you will need to select the
         *time aggregation* and a *time window* on which the change will be
         calculated.
+
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
+
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
@@ -231,19 +218,35 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
    walkthrough of the common notification options.
 -->
 
-### メトリクスを対象にした Monitor
+### メトリクスを対象にしたMonitor
 
-1. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
+1. アラートのタイプを選択します。
 
-    ![metric scope](/images/guides/monitor/metric_scope.png)
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+
+    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較する、最も一般的なアラート検知の方法です。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは正常な範囲か値が事前に分かっている場合に使用します。
+
+    **change alert**は、直近のデータポイントの値に対するいくらか前の時間の値との変化量または変化率について、指定した閾値と比較します。
+    比較しているデータポイントの値は単一点の値ではなく、*Set alert conditions* のセクションで指定されたパラメータで計算されたものになります。
+
+    このアラートタイプは、メトリクスのゆっくりとした変化はもちろん、急速なスパイクやドロップを追跡するのに有効であり、そのメトリクスの正常な範囲や値が事前に分かっていない場合に特に有効です。
+    *注:* このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
+
+    **Anomaly Detection** は、アルゴリズムベースの異常検出機能です。過去の挙動、つまり1日のうちの特定の時間帯、あるいは1週間のうちの特定の1日の変動パターンを考慮した際に、普段とは異なる挙動がみられた際に検出することができます。これは、閾値ベースのアラートモニタリングで監視することが困難であったり不可能な、強い傾向のある繰り返しパターンを持ったメトリクスに適しています。
+
+    **Outlier Detection** はアルゴリズムベースの異常検出機能であり、グループ内の特定の個体に他とは異なる挙動がみられた際に外れ値データ(Outlier)として検出することができます。例えば、Webサーバー群の特定の1サーバーが異常なリクエスト数を処理しているような場合に検出し、これをリプレースすべきか判断することができます。あるいは、特定のAWSアベイラビリティゾーン(AZ)において、他のAZより多めの500(5XX)エラーを生じていることを早めに検出することで、そのAZに迫りつつある問題を察知することができるかもしれません。
+
+2. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
+
+    {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
-    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphing/#scope)を参照してください。
+    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
 
-2. アラートグループを選択します。
+3. アラートグループを選択します。
 
-    ![alert grouping](/images/guides/monitor/alert_grouping.png)
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -253,24 +256,11 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     このように設定することにより、各ホストの各デバイス毎にディスクスペースが無くなった際のアラートを通知することができるようになります。
 
-3. アラートのタイプを選択します。
-
-    ![alert type](/images/guides/monitor/alert_type.png)
-
-    **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較します。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは一般的なアラートであり、正常な範囲か値が事前に分かっている場合に使用します。
-
-    **change alert**は、最近のデータポイントの値に対する数分前の値の変化量または変化率と指定した閾値を比較します。
-    比較しているデータポイントの値は単一点の値ではなく、"Set alert conditions"のセクションで指定されたパラメータで計算されたものになります。
-    このアラートタイプは、メトリクスのゆっくりとした変化はもちろん、急速なスパイクやドロップを追跡するのに有効であり、そのメトリクスの正常な範囲や値が事前に分かっていない場合に特に有効です。
-    注: このアラートの為の計算値は絶対値ではありません。従って下に向かう変化は、マイナス値になります。
-
-
-
 4. アラート条件を設定します。
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    ![metric threshold](/images/guides/monitor/metric_threshold.png)
+    {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -278,10 +268,13 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     それぞれのオプションの詳細は以下のようになります:
 
-      - *on average*(平均): 時系列データには、平均化の処理を行い単一の値を導きだします。その後、閾値と比較してチェックします。
-      - *at least once*(最低1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
+      - *on average*(平均値で比較): 時系列データは、平均値を算出され単一の値となります。その平均値が閾値と比較されます。
+
+      - *at least once*(少なくとも1回): 生成された時系列データ内のどれかの値が閾値を超えている場合、アラートが発報されます。
+
       - *at all times*(常時): 生成された時系列データの全てのポイントが閾値を超えている場合に、アラートが発報されます。
-      - *in total*(合計)： 時系列データの全てのポイントの合計が閾値を超えている場合に、アラートが発報されます。
+
+      - *in total*(合計値)： 時系列データの全てのポイントの合計が閾値を超えている場合に、アラートが発報されます。
 
     注意: *on average*と*at all times*の集計は、最終的に受信したデータが揃っていることを*必要条件*としています。このことは、全ての時系列データが完全に揃っていることを要求しているわけではなく、集計に使うデータのギャップが１分以上空いていないことを要求しています。言い換えれば、1分以上間隔の空くメトリクスに関しては、*at least once*または*in total*を使用することをお勧めします。
 
@@ -290,18 +283,24 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
 
+    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/guides/anomalies) ガイドを参照して下さい。
+
+    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/guides/outliers) ガイドを参照して下さい。
+
 5. 必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
 
 6. **automatically resolve the monitor from a triggered state**(アラートが発報している状態を自動的に解除する)オプションを選択することができます。問題が解決したときのみアラートが解除されるのが望ましいため、一般的にこのオプションはOFFにしておくことをお勧めします。
 
     このオプションの最も一般的なユースケースは、非常に時間の離れたエラーのカウンターです。エラーが発生しなくなると、Datadogへのメトリクスのレポーティングも止まります。一度発報状態になったアラートを解除するためのデータが届いていないので、そのアラートを解除するために、自動での解除が必要になります。
 
-7. 通知の設定をします。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+7. 通知先の設定をします。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 
-<!-- ### Integration Monitors
+<!--
+### Integration Monitors
 
-![es status](/images/monitor/es_status.png)
+
+{{< img src="guides/monitor/es_status.png" >}}
 
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
@@ -317,23 +316,21 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   [alert conditions](#metric-conditions) section for details on the available
   options.
 -->
-
 ### インテグレーションを対象にしたMonitor
 
-![es status](/images/guides/monitor/es_status.png)
+{{< img src="guides/monitor/es_status.png" >}}
 
 インテグレーションタブをクリックすると、既にインストールされているインテグレーションのタイルがタブの下に表示されます。そのタイルを選択すると`Status`または`Metric`というMonitorの設定を選択できるようになります。
 
-- **Integration Status** を選択すると、そのインテグレーション用のサービスチェックを１つ以上提示します。設定で利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)のセクションを参照してください。
+- **Integration Status** を選択すると、そのインテグレーション用のサービスチェックを１つ以上提示します。設定で利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#カスタムチェックを対象にしたmonitor)のセクションを参照してください。
 
-- **Integration Metric**を選択すると、メトリクスを対象にしたMonitorと同等の設定インターフェイスが表示されます。この設定画面の`Select a metrics`の項目では、インテグレーションが収集している全てのメトリクスから選択することができます。項目②の"Set alert conditions"のオプションに関しては、先の"メトリクスを対象にしたMonitor"のセクションの[3.アラート条件の設定](#metric-conditions)を参照してください。
+- **Integration Metric**を選択すると、メトリクスを対象にしたMonitorと同等の設定インターフェイスが表示されます。この設定画面の`Select a metrics`の項目では、インテグレーションが収集している全てのメトリクスから選択することができます。項目②の"Set alert conditions"のオプションに関しては、先の"メトリクスを対象にしたMonitor"のセクションの "アラート条件の設定" を参照してください。
+
+<!--
+### Process Monitors
 
 
-### プロセスを対象にした Monitor
-
-![process monitor](/images/guides/monitor/process_monitor.png)
-
-<!-- ### Process Monitors
+{{< img src="guides/monitor/process_monitor.png" >}}
 
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
@@ -346,10 +343,9 @@ For each process, a single service check status will be produced. Through this
 creation interface, you can choose which of those checks to monitor and at what
 point they should notify.
 -->
+### プロセスを対象にしたMonitor
 
-### プロセスを対象にした Monitor
-
-![process monitor](/images/guides/monitor/process_monitor.png)
+{{< img src="guides/monitor/process_monitor.png" >}}
 
 プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 
@@ -377,23 +373,24 @@ point they should notify.
 
 2. **モニタするスコープ**を選択します。先に選択したプロセスのステータス情報に基づいてホスト名とタグが表示されます。
 
-3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
+3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#カスタムチェックを対象にしたmonitor)の同セクションを参照してください。
 
-4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 
-<!-- ### Network Monitors
+<!--
+### Network Monitors
 
-![network monitor](/images/monitor/network_monitor.png)
+
+{{< img src="guides/monitor/network_monitor.png" >}}
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/integrations/tcpcheck) for details on Agent
 configuration.
 -->
-
 ### ネットワークを対象にしたMonitor
 
-![network monitor](/images/guides/monitor/network_monitor.png)
+{{< img src="guides/monitor/network_monitor.png" >}}
 
 ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/integrations/tcpcheck) を参照してください。
 
@@ -421,9 +418,9 @@ configuration.
 
 2. **モニタするスコープ**を選択します。先に選択したネットワークチェックのステータス情報に基づいてホスト名とタグが表示されます。
 
-3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
+3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#カスタムチェックを対象にしたmonitor)の同セクションを参照してください。
 
-4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 <!--
 **Network Metric**
@@ -449,16 +446,18 @@ configuration.
 
 2. **モニタするスコープ**を選択します。先に選択したネットワークメトリクスのステータス情報に基づいてホスト名とタグが表示されます。
 
-3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#check-alerting)の同セクションを参照してください。
+3. **アラートのオプション**を指定します。利用可能なオプションの詳細については、[カスタムチェックを対象にしたMonitor](#カスタムチェックを対象にしたmonitor)の同セクションを参照してください。
 
-4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 
-<!-- ### Event Monitors
+<!--
+### Event Monitors
+
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-![event monitor](/images/monitor/event_monitor.png)
+{{< img src="guides/monitor/event_monitor.png" >}}
 
 1. Select the query and parameters (status, priority, sources and tags) you want
     to monitor.
@@ -472,12 +471,11 @@ Event monitors allows you to alert when an event matching your query occurs.
 4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
     section of this guide for informations.
 -->
-
-### イベントを対象にした Monitor
+### イベントを対象にしたMonitor
 
 イベントを対象にしたMonitorでは、指定した条件に合致する場合にアラートで通知することができます。
 
-![event monitor](/images/guides/monitor/event_monitor.png)
+{{< img src="guides/monitor/event_monitor.png" >}}
 
 1. 監視する文字列とパラメータ(ステータス, 優先度, ソース, タグ)を設定します。
 
@@ -485,12 +483,14 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 3. **アラート条件** を設定します。**閾値** と**時間枠**の設定によって、アラートが発報されるために必要な時間枠あたりのイベント発生回数を指定することができます。
 
-5. 4. **通知のオプション**を設定します。通知の設定に関しては、このドキュメントの[”通知の設定”](#notifications)の項目を参照してください。
+5. 4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
 
-![custom monitor](/images/guides/monitor/custom_monitor.png)
+<!--
+### Custom Monitors
 
-<!-- ### Custom Monitors
+
+{{< img src="guides/monitor/custom_monitor.png" >}}
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
@@ -499,8 +499,9 @@ Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 -->
+### カスタムチェックを対象にしたMonitor
 
-### カスタムチェックを対象にした Monitor
+{{< img src="guides/monitor/custom_monitor.png" >}}
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
@@ -543,22 +544,36 @@ or service checks.
 
    必要に応じて、一定時間以上データが届かない場合のnotify on no data(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。
 
-4. **通知のオプション**を設定します。通知の設定に関しては、このガイドの[”通知の設定”](#notifications)の項目を参照してください。
+4. **通知のオプション**を設定します。通知先の設定に関しては、このガイドの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
+<!--
+No Article at this time.
+-->
+### コンポジット-複合-Monitor
 
-<!-- ## Monitor Notifications
+{{< img src="guides/composite_monitors/select-monitor-type.png" >}}
+
+コンポジットMonitorを使用すると、多数の個々のMonitorを1つの複合条件Monitorとしてまとめることができ、より具体的なアラート条件を定義することができます。
+
+設定の詳細については、[Composite Monitor](/ja/guides/composite_monitors/) ガイドのページをお読みください。
+
+コンポジットMonitorは、複合したトリガ条件が真となる値を個々のMonitorのステータスが同時に持つ場合にトリガされます。
+
+<!--
+## Monitor Notifications
+
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-![notification](/images/monitor/notification.png)
+{{< img src="guides/monitor/notification.png" >}}
 -->
 
-## 通知の設定
+## 通知先の設定
 
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
-![notification](/images/guides/monitor/notification.png)
+{{< img src="guides/monitor/notification.png" >}}
 
 
 <!--
@@ -621,24 +636,25 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    ![conditional variables](/images/monitor/conditionalvars.png)
+    {{< img src="guides/monitor/conditionalvars.png" >}}
 
     Here is an example of how you can set it up in the editor:
 
-    ![conditional editor](/images/monitor/templateconditionaleditor.png)
+    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
 
 
     The corresponding trigger event notification will look like this:
 
-    ![conditional trigger](/images/monitor/templateconditionaltrigger.png)
+    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
 
 
     and the recovery notification:
 
-    ![conditional recovery](/images/monitor/templateconditionalrecover.png)
+    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
 
 
-    The conditional variables available are `is_alert`, `is_warning`, `is_recovery`, and `is_no_data`.
+    The conditional variables available are `is_alert`, `is_alert_recovery`,
+    `is_warning`, `is_warning_recovery`, `is_recovery`, and `is_no_data`.
     These can also be seen in the "Use message template variables" help box in
     Step 3 of the monitor editor.
 
@@ -649,11 +665,12 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     Here is an example of how you can use template variables for a multi alert:
 
-    ![template var editor](/images/monitor/templatevareditor.png)
+    {{< img src="guides/monitor/templatevareditor.png" >}}
+
 
     and the corresponding event notification:
 
-    ![template var trigger](/images/monitor/templatevar.png)
+    {{< img src="guides/monitor/templatevar.png" >}}
 
     The tag template variables available depend on the tag group selected in Step 1
     of the monitor editor. The possible options will automatically populate at the
@@ -669,7 +686,11 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    ![short template var trigger](/images/monitor/templatevar_short.png)
+    {{< img src="guides/monitor/templatevar_short.png" >}}
+
+    Note that template variable content is escaped by default. If your variable
+    contains JSON or code that you would NOT like to be escaped, then use triple braces
+    instead of double braces (e.g. `{{{event.text}}}`).
 
     3. **Conditional variables for different triggering scopes**: You can have a
    monitor event display a different message depending on the group that's
@@ -691,43 +712,51 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   ![scope match editor](/images/monitor/scope_match_editor.png)
+   {{< img src="guides/monitor/scope_match_editor.png" >}}
 -->
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
-   ![conditional variables](/images/guides/monitor/conditionalvars.png)
+    {{< img src="guides/monitor/conditionalvars.png" >}}
 
-   次が、通知本文の記述の例です:
+    次が、通知本文の記述の例です:
 
-   ![conditional editor](/images/guides/monitor/templateconditionaleditor.png)
+    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
 
-   実際に送信されたアラート通知文は、次のようになります:
 
-   ![conditional trigger](/images/guides/monitor/templateconditionaltrigger.png)
+    実際に送信されたアラート通知文は、次のようになります:
 
-   リカバーした際の通知文は、次のようになります:
+    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
 
-   ![conditional recovery](/images/guides/monitor/templateconditionalrecover.png)
 
-   使用可能な条件変数は`is_alert`、`is_warning`、`is_recovery`、`is_no_data`です。
-   これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることで見ることができます。
+    リカバーした際の通知文は、次のようになります:
+
+    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
+
+
+    使用可能な条件変数は `is_alert`, `is_alert_recovery`,
+    `is_warning`, `is_warning_recovery`, `is_recovery`, そして `is_no_data` です。
+    これら条件変数の解説は、第3ステップ"Say what's happening"の"Use message template variables"をクリックすることで見ることができます。
 
 2. **Multi Alertのためのタグ変数**: 設定しているMonitorが`Multi Alert`の場合(タグによってグループが指定されている場合)は、通知のタイトルや本文にタグ変数を適用し、アラート発報の範囲(スコープ)を明示することができます。
 
     次が、`Multi Alert`でtemplate variables(タグ変数)を使った例です:
 
-    ![template var editor](/images/guides/monitor/templatevareditor.png)
+    {{< img src="guides/monitor/templatevareditor.png" >}}
+
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    ![template var trigger](/images/guides/monitor/templatevar.png)
+    {{< img src="guides/monitor/templatevar.png" >}}
+
 
     利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
     一方で、アラートを通知する範囲(スコープ)を指定しているタグには自動的にタイトルに挿入されるものがあります。このため、範囲指定のために多くのタグを使用している場合にはアラートのタイトルが不必要に長くなる可能性があります。もしタグ変数をアラート本文に使用しているのであれば、スペースを節約するために**Include triggering tags in notification title** のチェックを外すことも有効です。この設定によってアラートのタイトルは以下のようになります。
 
-    ![short template var trigger](/images/guides/monitor/templatevar_short.png)
+    {{< img src="guides/monitor/templatevar_short.png" >}}
+
+    テンプレート変数はデフォルトでエスケープされます。もし使用したい変数がJSONやコードを含んでおり、それらをエスケープさせたくない場合は、2重カッコのかわりに3重カッコを使用して下さい。(例 `{{{event.text}}}`)
 
 3. **アラート発報の範囲(スコープ)の違いに基づいた条件変数**: Monitorによってアラート発報されたグループによって異なった通知本文を表示することができます。
 
@@ -743,64 +772,34 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
    次が、アラート発報の範囲情報に基づいて異なる本文を表示する例です:
 
-   ![scope match editor](/images/guides/monitor/scope_match_editor.png)
+   {{< img src="guides/monitor/scope_match_editor.png" >}}
 
-
-## Monitorに関するFAQs
+<!--
+#### Variable availability
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
-
-| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
-| **Conditionals** |
-| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
-| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
-| `is_warning` | | Y | Y | Y | Y | Y | |
-| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
-| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
-| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
-| `is_match` | Y | Y | Y | Y | Y | Y | Y |
-| **Variables** |
-| `{{value}}` | | Y | Y | | | | |
-| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
-| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
-| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
-| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
-
-<style>
-  .tpl-var-table tr td {
-    text-align: center;
-    border: 1px #9d6ebf solid;
-    padding: 5px;
-  }
-  .tpl-var-table tr td:first-child {
-    text-align: right;
-  }
-</style>
-
-Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "
 -->
-
-#### メッセージ欄で利用できるテンプレート変数
+#### 通知本文で利用可能なテンプレート変数
 
 Datadgogでは、さまざまなタイプのMonitor (アラート)を提供していますが、各Monitor ごとにメッセージ欄で使えるテンプレート変数が異なります。 インテグレーションMonitor に関連したテンプレート変数は、特定のインテグレーションやそのMonitorの設定内容に大きく依存します。
 
-| | [host](#host) | [metric](#metric) | [integration](#integration) | [process](#process) | [network](#network) | [custom check](#custom) | [event](#event) |
-| **Conditionals** |
-| `is_alert` | Y | Y | Y | Y | Y | Y | Y |
-| `is_alert_recovery` | | Y | Y | Y | Y | Y | |
-| `is_warning` | | Y | Y | Y | Y | Y | |
-| `is_warning_recovery` | | Y | Y | Y | Y | Y | |
-| `is_recovery` | Y | Y | Y | Y | Y | Y | Y |
-| `is_no_data` | Y | Y | Y | Y | Y | Y | Y |
-| `is_match` | Y | Y | Y | Y | Y | Y | Y |
-| **Variables** |
-| `{{value}}` | | Y | Y | | | | |
-| `{{threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | Y |
-| `{{warn_threshold}}` | Y (cluster) | Y | Y | Y | Y | Y | |
-| `{{ok_threshold}}` | | | Y | Y | Y| Y | |
-| `{{comparator}}` | Y | Y | Y | Y | Y | Y | Y |
-| Additional variables | Contextual | | Contextual | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}` | |
+|                       | [host](#ホストを対象にしたmonitor)     | [metric](#メトリクスを対象にしたmonitor)             | [integration](#インテグレーションを対象にしたmonitor)           | [process](#プロセスを対象にしたmonitor)               | [network](#ネットワークを対象にしたmonitor)                                   | [custom check](#カスタムチェックを対象にしたmonitor)   | [event](#イベントを対象にしたmonitor)   |
+| :---------------------|:------------------|:------------------------------|:--------------------------------------|:----------------------------------|:------------------------------------------------------|:--------------------------|:------------------|
+| **Conditionals**      |
+| `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning`          |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_warning_recovery` |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| **Variables**         |
+| `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
+| `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `{{warn_threshold}}`  | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
+| `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
 
 <style>
   .tpl-var-table tr td {
