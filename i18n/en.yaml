@@ -192,7 +192,13 @@
   translation:  "Terminology"
 
 - id: customnav_tracingnav_faq
-  translation:  "Frequently Asked Qestions"
+  translation:  "Frequently Asked Questions"
+
+- id: customnav_tracingnav_environments
+  translation:  "Environments"
+
+- id: customnav_tracingnav_help
+  translation:  "APM Support"
 
 - id: customnav_tracingnav_langs
   translation:  "Supported Languages"
