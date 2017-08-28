@@ -551,8 +551,6 @@ No Article at this time.
 -->
 ### コンポジット-複合-Monitor
 
-{{< img src="guides/composite_monitors/select-monitor-type.png" >}}
-
 コンポジットMonitorを使用すると、多数の個々のMonitorを1つの複合条件Monitorとしてまとめることができ、より具体的なアラート条件を定義することができます。
 
 設定の詳細については、[Composite Monitor](/ja/guides/composite_monitors/) ガイドのページをお読みください。
