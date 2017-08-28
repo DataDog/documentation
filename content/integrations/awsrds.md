@@ -70,7 +70,7 @@ The command output will include two parts: a ciphertext blob followed by the key
 
 ##### Create your Lambda function
 
-12. From the Lambda Management Console, create a new Lambda Function. **Your Lambda function MUST be in the same region as the KMS key you created.**
+12. From the Lambda Management Console, create a new Lambda Function. **Your Lambda function must be in the same region as the KMS key you created.**
 13. On the Select blueprint screen, select the **datadog-process-rds-metrics blueprint.**
 14. Choose `RDSOSMetrics` from the **Log Group** dropdown.
 15. Enter anything for the Filter Name and click Next.
