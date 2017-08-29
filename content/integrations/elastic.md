@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 git_integration_title: elastic
 updated_for_agent: 5.8.5
-slug: /integrations/elasticsearch
+slug: elasticsearch
 description: "{{< get-desc-from-git >}}"
 ---
 
