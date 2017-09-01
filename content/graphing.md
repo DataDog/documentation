@@ -127,7 +127,7 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 </div>
 
-### Perform metric arithemtic
+### Perform metric arithmetic
 
 The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: +, -, /, * to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
 
