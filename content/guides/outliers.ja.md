@@ -1,10 +1,10 @@
 ---
-last_modified: 2017/02/14
-translation_status: completed
+last_modified: 2017/08/25
+translation_status: tentative
 language: ja
-title: Outlier Detection
+title: Outlier Detection (外れ値検知)
 kind: guide
-autotocdepth: 2
+listorder: 23
 ---
 <!--
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
@@ -20,28 +20,28 @@ Outlier Detectionはアルゴリズムベースの異常検出機能であり、
 <!--
 ## How to Use Outlier Detection on Your Data
 
-We’ve added a new query function called `outliers` to our query language. This function will return the usual results but outlier series will be marked.
+The `outliers` query function, when applied to your query, will return the usual results but with outlier series marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 -->
 
 ## Outlier Detectionの利用法
 
-Datadogは`outliers`と呼ぶ新しいクエリ関数を追加しています。メトリクスの時系列データ群にこの関数を適用すると、グループ内の他とは異なる挙動の時系列データを外れ値データ(Outlier)とマークして返します。
+`outliers` クエリ関数をアラートやグラフのクエリとして追加適用すると、グループ内の他とは異なる挙動の時系列データを外れ値データ(Outlier)とマークして返します。
 
 Outlier Detectionはダッシュボード上の時系列データのグラフとして可視化することも、アラートとして設定することもできます。これを適用するためには、ホスト(あるいはアベイラビリティゾーン、パーティションなど)のグループから取得され、そのグループのメンバーがある程度均一な挙動をしているメトリクスを選ぶ必要があります。そして、この関数が機能するためには少なくとも3つ以上のメンバーを含むグループであることが必要です。次から、そのグループでOutlier Detectionを利用する2つの方法について説明します。
 
 
 <!--
-### 1. Show Outliers in Dashboards or Screenboards
+### Show Outliers in Dashboards or Screenboards
 
 
-For example, here is a graph of gunicorn requests by host with outlier detection enabled:
+Here's a graph of gunicorn requests by host with outlier detection enabled:
 
 {{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
 -->
 
-### 1. Outlier Detectionをダッシュボードで可視化する
+### Outlier Detectionをダッシュボードで可視化する
 
 
 下記はOutlier Detectionを適用したメトリクス、gunicornのホストごとのリクエスト数のグラフ表示例です:
@@ -54,9 +54,9 @@ You can see that one of the series is an outlier: it is handling significantly l
 
 To set up an outlier detection graph for your data you add a metric to the graph showing all series in the groups. You apply the outlier detection algorithm by adding `outliers` function on your data. After applying the function, outlier series will be colored with a bold, warm palette, while all other series will be colored with a lightweight, greyscale color palette.
 
-To do so, create a new timeseries graph on your dashboard with your chosen metric. Your screen should look like:
+First create a new timeseries graph on your dashboard with your chosen metric.
 
-{{< img src="outliers/outliers-dash-choose-metrics-newer.png" >}}
+{{< img src="outliers/outliers-dash-choose-metrics-updated.png" >}}
 -->
 
 時系列データの1つが外れ値データ(Outlier)としてマークされています: 当該の時間幅において、グループ内の他とは明らかに異なる低いトラフィックをさばいていることがわかります。
@@ -65,22 +65,22 @@ Outlier Detectionをグラフ表示に適用するには、対象とするグル
 
 まず、選択したメトリクスでダッシュボード上に時系列データのグラフを作成する際には、グラフエディターは以下のようになっているでしょう:
 
-{{< img src="outliers/outliers-dash-choose-metrics-newer.png" >}}
+{{< img src="outliers/outliers-dash-choose-metrics-updated.png" >}}
 
 
 <!--
-Now, click on the + icon (Add functions and modifiers) on the right side of the second metrics line. In the "Modify your query" box, choose the "outliers" function:
+To enable outlier detection, click on the + icon on the right side of the metrics line. Choose **Algorithms** from the function categories, then pick one of the four outlier algorithms.
 
-{{< img src="outliers/outliers-function-selector-newer.png" >}}
+{{< img src="outliers/outliers-algorithm-selector.png" >}}
 
 This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
 
 {{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 -->
 
-そしてここで、メトリクスの選択ボックスの右手にあるプラスマークをクリックします。“Modify your query”ボックスで "outliers" 関数を選択します:
+そしてここでOutlier Detectionを有効化するために、メトリクスの選択ボックスの右手にあるプラスマークをクリックします。関数のカテゴリの中から **Algorithms** を選び、4つある outlier アルゴリズムのうち1つを選択します。
 
-{{< img src="outliers/outliers-function-selector-newer.png" >}}
+{{< img src="outliers/outliers-algorithm-selector.png" >}}
 
 これで"outliers" 関数がグラフ表示に追加され、外れ値(Outlier)の時系列データが太字に暖色でマークされることになります。
 
@@ -95,17 +95,21 @@ Outlier Detectionのアルゴリズムは選択することができます。そ
 
 
 <!--
-### 2. Alert on Outliers
+### Alert on Outliers
 
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
 {{< img src="outliers/outliers-alert-snapshot.png" >}}
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, we’d [add a new outlier monitor](https://app.datadoghq.com/monitors#create/algorithm) for our metric:
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/outlier) for the metric.
+
+Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Outlier**. Then fill out the **Define the metric** section just as you would for any other monitor.
+
+{{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
 -->
 
-### 2. 外れ値データ(Outlier)をアラートする
+### 外れ値データ(Outlier)をアラートする
 
 
 監視すべき重要なグループにおいて外れ値データ(Outlier)を検出したときにアラートするMonitorを設定します。
@@ -113,35 +117,26 @@ For example, to alert when a Cassandra host is abnormally loaded compared to the
 {{< img src="outliers/outliers-alert-snapshot.png" >}}
 
 例えば、Cassandraのホストについてグループ内の他とくらべて異常に負荷が掛かっている場合にアラートをしたい場合、
-[新規outlier monitor の作成](https://app.datadoghq.com/monitors#create/algorithm) ページに進みます:
+[新規outlier monitor の作成](https://app.datadoghq.com/monitors#create/outlier) ページに進みます。
+
+[New Monitor](https://app.datadoghq.com/monitors#/create) ページに進んだら、**Outlier** をクリックし、他のメトリクスを対象にしたMonitor同様、**Define the metric** セクションにてメトリクスとそのメトリクスを監視する範囲(スコープ)を選択します。
 
 {{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
 
 
 <!--
-You will select the metric and scope as with other metric-based monitors.
-
-In the alert conditions you will select the grouping and timeframe.
-
-You can also optionally select an algorithm to use for outlier detection. By default we have chosen DBSCAN with a tolerance value of 3 because this works for many cases. More information about the outlier functions and their parameters is available below.
-
-{{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
--->
-
-他のメトリクスを対象にしたMonitor同様、メトリクスとそのメトリクスを監視する範囲(スコープ)を選択します。
-
-"alert conditions"では、グルーピングと外れ値を検出すべき(Outlier)時間幅を指定します。
-
-Outlier Detectionに使用するアルゴリズムをオプションで選択します。デフォルトではすでにDBSCANアルゴリズムがtolerance 値3で選択されていますが、多くのケースではこれが最適です。より詳しいoutlier 関数とそのパラメータの情報については後述します。
+In the alert conditions, select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
 
 {{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
-
-<!--
 To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
 
 {{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 -->
+
+"alert conditions" では、グルーピングと外れ値を検出すべき(Outlier)時間幅を指定します。そして、Outlier Detectionに使用するアルゴリズムを1つ選択します。
+
+{{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
 設定したアラートが適切に調整されているか確かめるために、過去をさかのぼってどのように外れ値(Outlier)が検出されアラートされ得るか確認しましょう。画面右上のリバースボタン(<<)で表示されている時間幅を操作します。これは、選択しているOutlier Detectionのアルゴリズムのパラメーターを調整するためにも有効な方法です。
 
@@ -162,7 +157,7 @@ Outlier Detection では、DBSCAN と Median Absolute Deviation (MAD)の2つの�
 
 
 <!--
-### DBSCAN
+### DBSCAN/ScaledDBSCAN
 
 A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN), a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
 
@@ -171,7 +166,7 @@ Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance thres
 {{< img src="outliers/outliers-dbscan-2d.png" >}}
 -->
 
-### DBSCAN - 密度ベースのクラスタリング手法
+### DBSCAN/ScaledDBSCAN - 密度ベースのクラスタリング手法
 
 同じような挙動をとるホストをグルーピングする自然な方法は、クラスタリングアルゴリズムを使用することです。
 Datadogでは幅広く使われている[DBSCAN](https://en.wikipedia.org/wiki/DBSCAN)と呼ばれる、密度に基づいたクラスタリングアルゴリズムを使用します。DBSCAN はお互いの距離が近い密集したデータポイント群を同一クラスタとして判定します。そして、いくつかの要素を満たすクラスタについて外れ値(Outlier)とみなします。
@@ -211,6 +206,26 @@ DatadogのDBSCANで使用するパラメータは`tolerance`のみであり、DB
 
 対象とするホストのグループがどれくらい似たような挙動を持つか次第で、この`tolerance`パラメータを調整して下さい。大きな値を設定するほど、特定のホストがグループ内の他と比べてより大きく外れた挙動をとることを許容(tolerance)することになります。つまり、大きな値を設定するほど、太字に暖色でマークされる外れ値(Outlier)の時系列データは少なくなり、検出モレが生じる可能性が出てきます。
 
+<!--
+#### ScaledDBSCAN
+
+The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series will be a constant series at 1002. DBSCAN with a tolerance of 3.0 will identify the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
+
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+
+Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
+
+{{< img src="outliers/outliers-scaled-dbscan-es.png" >}}
+-->
+#### ScaledDBSCAN
+
+The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series will be a constant series at 1002. DBSCAN with a tolerance of 3.0 will identify the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
+
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+
+Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
+
+{{< img src="outliers/outliers-scaled-dbscan-es.png" >}}
 
 <!--
 ### Median Absolute Deviation (MAD)
@@ -220,7 +235,7 @@ The  [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_d
 For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations are the difference between each d<sub>i</sub> and median(D). The MAD is then the median of the absolute values of all the deviations. For example if D = {1, 2, 3, 4, 5, 6, 100}, then the median is 4, the deviations are {-3, -2, -1, 0, 1, 2, 96}, and the MAD is 2. (Note that the standard deviation by contrast is 33.8.)
 -->
 
-### Median Absolute Deviation (MAD) - 中央絶対偏差によるロバスト統計
+### Median Absolute Deviation (MAD) / ScaledMAD - 中央絶対偏差によるロバスト統計
 
 [Median Absolute Deviation, 中央絶対偏差](https://en.wikipedia.org/wiki/Median_absolute_deviation) は、ばらつきを含むデータのロバストな測定方法の1つであり、標準偏差のロバストな類似統計値として見なされることもあります。ロバスト統計では、このような手法によってデータを記述することで、外れ値(Outlier)による過度な影響を排除します。
 
@@ -253,6 +268,27 @@ The tolerance parameter should be tuned depending on the expected variability of
 `tolerance` は想定されているデータセットのばらつき加減に依って調整されるべきパラメータです。例えば、もしデータセットが普段は比較的小さな値の範囲に収まるのであれば、このパラメータは小さい値にすべきです。一方で、データポイントが大きく変化し得るものであれば、より大きな値を設定してばらつき大きさによる誤った検出を引き起こさないようにする必要があるでしょう。
 
 <!--
+#### ScaledMAD
+
+Like for DBSCAN, the MAD algorithm is designed to be independent of the overall magnitude of the metrics. If D = {1000, 1001, 1002, 1005, 1010}, the median is 1002, and the MAD is 2. Even though the point at 1010 seems close to the median in terms of their relative scales, it is still an outlier point for a tolerance of 3.
+
+The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the MAD and the median. In most cases, it will behave the same as the MAD algorithm does. However, when the MAD of the data set becomes small compared to the median, the measure of deviation becomes proportional to the median. Therefore, determining whether a point is an outlier depends on the overall scale of the metrics.
+
+Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
+
+{{< img src="outliers/outliers-scaled-mad-cassandra.png" >}}
+-->
+#### ScaledMAD
+
+Like for DBSCAN, the MAD algorithm is designed to be independent of the overall magnitude of the metrics. If D = {1000, 1001, 1002, 1005, 1010}, the median is 1002, and the MAD is 2. Even though the point at 1010 seems close to the median in terms of their relative scales, it is still an outlier point for a tolerance of 3.
+
+The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the MAD and the median. In most cases, it will behave the same as the MAD algorithm does. However, when the MAD of the data set becomes small compared to the median, the measure of deviation becomes proportional to the median. Therefore, determining whether a point is an outlier depends on the overall scale of the metrics.
+
+Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
+
+{{< img src="outliers/outliers-scaled-mad-cassandra.png" >}}
+
+<!--
 ### DBSCAN vs. MAD
 
 So which algorithm should you use? For most outliers, both algorithms will perform well at the default settings. However, there are subtle cases where one algorithm is more appropriate than the other.
@@ -269,6 +305,15 @@ In the following image, we see a group of hosts flushing their buffers together 
 下記のイメージのグラフはあるホストのグループがバッファをフラッシュしていることがメトリクスから見られますが、多くのホストがフラッシュしてから若干の遅れをもってフラッシュしている特定のホストがあります。DBSCANはこのホストを外れ値(Outlier)として検出する一方で、MADは検出しません。バッファがいつフラッシュされるかは注目すべきことではないので、このようなケースではMADの使用が適切です。グループ内での同時刻の発生は、ホストを同時に再起動したことによる人為的なものなどがあり得ます。その一方で、もし下記のイメージがバッファのフラッシュでなくスケジュールされたジョブによるものであれば、グループ内のホストで同時刻に発生しているべきです。そうした場合には、DBSCANの使用が最適な選択といえます。(訳者注：この違いは、DBSCANが時系列データ全体を対象にクラスタリングを実施してOutlierとしてマークするかどうかを判定するのに対し、MADは各時刻ごとに一旦外れ値かどうかの判定を実施したうえで時系列データの外れ値含有率からOutlierとしてマークするためにおこります。端的に言えば、DBSCANは見た目どおりの大まかなグラフの形状の類似性を見ているがMADはそうではなく、同時刻における点(値)のばらつきだけを見ている、となります。)
 
 {{< img src="outliers/outliers-flushing.png" >}}
+
+<!--
+#### Scaled vs. Regular Algorithms
+
+In most situations, the scaled algorithms will behave the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
+-->
+#### Scaled アルゴリズム vs. 通常のアルゴリズム
+
+ほとんどの場合、Scaled アルゴリズムは、通常のアルゴリズムと同じように振る舞います。 ただし、DBSCAN / MAD アルゴリズムが密接にクラスタ化されたメトリクスのグループ内において外れ値を検出している場合、そしてOutlier Detection アルゴリズムをメトリクスの推移するスケール全体の規模に合わせて拡張したい場合は、Scaled アルゴリズムを試してください。
 
 <!--
 ### Setting up alerts

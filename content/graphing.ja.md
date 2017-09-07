@@ -1,14 +1,15 @@
 ---
-last_modified: 2016/08/17
-translation_status: tentative
+last_modified: 2017/08/24
+translation_status: Completed
 language: ja
 title: グラフ表示入門
-kind: guide
+kind: documentation
+has_snippets: True
 ---
 <!--
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 -->
-グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
+グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門][1]を参照して下さい。
 
 <!--
 ## Find the Graph Editor
@@ -48,26 +49,26 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 ダッシュボードの中でグラフを操作するにはいくつかのステップがあります。
 
 <!--
-### 1) Choose the Metric to graph
+### Choose the Metric to graph
 
 When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary).
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 -->
 
-### 1) グラフ表示するメトリクスの選択
+### グラフ表示するメトリクスの選択
 
 グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer](https://app.datadoghq.com/metric/explorer)を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary](https://app.datadoghq.com/metric/summary)を見ることもできます。
 
 メトリクスエクスプローラはさまざまなグラフ表示の設定をアドホックに簡単に試して見てみることができます。メトリクスサマリページでは、各メトリクスの単位やメトリクスのタイプなどをリストから確認することができます。
 
 <!--
-### 2) Select your visualization
+### Select your visualization
 
 Once you have a metric in mind to display in your graph, select your visualization.
 -->
 
-### 2) メトリクスを可視化するグラフ形式の選択
+### メトリクスを可視化するグラフ形式の選択
 
 グラフ表示するメトリクスが決まったら、次はメトリクスを可視化するグラフ形式を選択します。
 
@@ -183,7 +184,7 @@ Hostmapはメインメニューから利用できるHostmapと同様に、あら
 Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
 -->
 
-## 3) 指定したグラフ表示をフィルタと集計方法の設定で最適化する
+### 指定したグラフ表示をフィルタと集計方法の設定で最適化する
 
 #### フィルタ
 
@@ -210,14 +211,14 @@ After the aggregation method you can determine what constitutes a line or groupi
 集計の算出方法を選択したら、今度はグラフの線1本1本の構成要素が何なのかを決めます。`host`を選択した場合は、それぞれのホストに対してグラフ線が表示されます。あるいはタグで定義している何らかのホストの`ロール`を選択した場合は、その各ロールに対してグラフ線が表示されます。`ロール`を選択した場合は複数のホストがロールごとにグループ化されてグラフ表示されるため、先に選択した**集計の算出方法** によってメトリクスの値が集計されグラフ表示されることになります。
 
 <!--
-### 4) Rollup to aggregate over time
+### Rollup to aggregate over time
 
 Regardless of the options chosen above, there will always be some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you will need 14,400 points to display everything. Each graph we display will have about 300 points shown at any given time.
 
 In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
 -->
 
-### 4) メトリクスの値のロールアップ(値を丸める)
+### メトリクスの値のロールアップ(値を丸める)
 
 前述の集計方法の設定にかかわらず、グラフ表示画面の物理的な制約によって適用されているデータ集計の仕組みがあります。例えば、毎秒更新されるメトリクスについて4時間の時間幅でグラフ表示したい場合、すべてを表示するには14,400のデータポイントを表示する必要があります(60x60x4=14,400)。 一方で、各グラフはどのような時間幅を選んだ場合でも表示可能なのは約300データポイントまでです。
 
@@ -247,15 +248,15 @@ JSONエディターに切り替えると、以下のようなクエリとして�
 
     "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 
-JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](/ja/graphingjson)を参照して下さい。
+JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門][1]を参照して下さい。
 
 <!--
-### 5) Apply more advanced functions
+### Apply more advanced functions
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, {{< collapse id="collapseGraphicFunctionTable" >}}click here{{< /collapse >}}.
 -->
 
-### 5) 上級者向けの関数の適用
+### より高度な演算関数の適用
 
 分析のニーズによっては、他の数値演算関数が必要なこともあるでしょう。変化量や微分、平滑化や回帰計算などがあります。利用可能な関数は、<a href="#collapseGraphicFunctionTable" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable">ここをクリック</a>..
 
@@ -268,31 +269,114 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 </div>
 
 <!--
-### 6) Overlay events for additional context
+### Perform metric arithemtic
+
+The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: +, -, /, * to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
+-->
+
+### メトリクスの値に対して演算を行う
+
+DatadogのUIでは、さまざまな演算オプションを利用してメトリクスをグラフ化する機能をサポートしています。 +, -, /, * のいずれかを利用して、グラフに表示される値を変更することができます。この構文では、複数のメトリクスの演算だけでなく整数値を用いた演算も利用できます。
+
+<!--
+#### Metric Arithmetic Using an Integer
+
+You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric.
+For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
+
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+
+This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2.
+
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+-->
+
+#### メトリクスの値に整数演算を行う
+
+メトリクスに対して算術演算を行うことによって、メトリクスの値のグラフへの表示方法を変更することができます。例えば、あるメトリクス値を倍精度で可視化したい場合を考えます。`system.load.5`を例にとると、:
+
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+
+グラフエディターをクリックし、そこで "advanced..." を選択すると、グラフエディター内で設定することができます。ここで、`Graph these queries as` ボックスに算術演算を入力します。この例では、倍精度で可視化したいため、a * 2 と入力します。
+
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+
+<!--
+#### Arithmetic between two Metrics
+
+If you would like to visualize the percentage of `jvm.heap_memory` used, you can perform the following arithmetic across two metrics already being reported to your Datadog application:
+
+`jvm.heap_memory / jvm.heap_memory_max`
+
+This can be done in the same manner as above, utilizing the "advanced..." option in the Graph Editor. From there, you can select `add a metric to this expression`.
+
+Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter: the first metric is represented by a, the second metric is represented b, and so on.
+Then in the `Graph these queries as` box, you can enter the arithmetic you would like, in this case: `( a / b )`
+
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+
+<div class="alert alert-warning">
+If you are performing arithmetic on two or more metrics and see a blank graph,
+<a href="https://help.datadoghq.com/hc/en-us/articles/212009846-Why-does-graphing-a-grouped-arithmetical-metric-query-sometimes-yield-a-blank-graph">this help article discusses possible reasons</a>
+</div>
+-->
+
+#### メトリクスの値同士の演算を行う
+
+また、`jvm.heap_memory`の使用状況をパーセンテージで表示したいような場合は、すでにDatadogにデータ収集されている2つのメトリクスに対して以下のような演算を行うことができます:
+
+`jvm.heap_memory / jvm.heap_memory_max`
+
+この演算は先の例と同様に、 "advanced..." を選択してグラフエディター内で設定することができます。ここでは、メトリクスの値同士の演算を行うため、`Add a metric to this expression`を選択します。
+
+可視化したいすべてのメトリクスを追加すると、それぞれに文字が割り当てられていることがわかります。最初のメトリクスは a 、2番目のメトリクスは b というようにです。
+ここで、`Graph these queries as`ボックスに実施したい演算を入力します。この例では、`( a / b )`と入力します。
+
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+
+<div class="alert alert-warning">
+2つ以上のメトリクスの値の演算を行った際にグラフが表示されない場合は、
+<a href="https://help.datadoghq.com/hc/en-us/articles/212009846-Why-does-graphing-a-grouped-arithmetical-metric-query-sometimes-yield-a-blank-graph">このhelpドキュメント(英語)で説明が見つかるかもしれません。</a>
+</div>
+
+<!--
+### Set Y-axis scale
+
+By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not.
+-->
+
+### Y軸のスケールと値の幅を設定する
+
+デフォルト設定では、Y軸は線形で設定され、グラフ化されるメトリクスの値にもとづき0を含むかたちで自動的に最大値と最小値が設定されます。Y軸の設定を変更したい場合は**Show Y-Axis Controls**ボタンをクリックします。これにより、Y軸のスケールをliner(線形)からlog(対数)、pow(指数)または sqrt(平方根)に変更できます。そしてY軸の最大値と最小値をそれぞれ指定し、常にゼロを含むかどうかを選択できます。
+
+<!--
+### Overlay events for additional context
 
 You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
 -->
 
-### 6) メトリクスのグラフ表示にイベントを重ねあわせる
+### メトリクスのグラフ表示にイベントを重ねあわせる
 
-より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。`Overlay Events`ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
+より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。これには、 **Add Events** ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
 
 <!--
-### 7) Create a title
+### Create a title
 
 If you don't enter a title, we will automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 -->
 
-### 7) タイトルの入力
+### タイトルの入力
 
 タイトルを指定しない場合、メトリクスやグラフ表示での指定をもとに自動でタイトルが入力されます。しかしより適切に表現されたタイトルは、ダッシュボード上に多数あるグラフの中で目的をユーザーに示すのに役立ちます。ここでビジネスに役立つ意味を表現するのも価値のあることです。
 
 <!--
-### 8) Save
+### Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 -->
 
-### 8) 保存
+### 保存
 
-最後に`Save`をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。
+最後に Done をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。
+
+[1]: /ja/graphingjson
