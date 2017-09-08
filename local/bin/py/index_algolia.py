@@ -85,6 +85,13 @@ def index_algolia(app_id, api_key, content_path=None):
                                 article['body'] = description
                                 article['file'] = dirpath + '/' + filename
 
+                                if dirpath.startswith('public/ja'):
+                                    language = 'japanese'
+                                else:
+                                    language = 'english'
+
+                                article['language'] = language
+
                                 articles.append(article)
 
                         except AttributeError:
