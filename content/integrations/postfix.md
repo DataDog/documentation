@@ -26,13 +26,9 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
         # command to run the postfix check.  Here's an example:
         #
         # example /etc/sudoers entry:
-        #          dd-agent ALL=(ALL) NOPASSWD:/usr/bin/find
-
-        # The user running dd-agent must have passwordless sudo access for the find
-        # command to run the postfix check.  Here's an example:
-        #
-        # example /etc/sudoers entry:
-        #          dd-agent ALL=(ALL) NOPASSWD:/usr/bin/find
+        #  dd-agent ALL=(postfix) NOPASSWD:/usr/bin/find /var/spool/postfix/incoming -type f
+        #  dd-agent ALL=(postfix) NOPASSWD:/usr/bin/find /var/spool/postfix/active -type f
+        #  dd-agent ALL=(postfix) NOPASSWD:/usr/bin/find /var/spool/postfix/deferred -type f
         #
         # Redhat/CentOS/Amazon Linux flavours will need to add:
         #          Defaults:dd-agent !requiretty
