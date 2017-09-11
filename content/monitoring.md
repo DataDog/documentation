@@ -8,23 +8,23 @@ sidebar:
     - text: Glossary
       href: "#glossary"
     - text: Host Monitors
-      href: "#host"
+      href: "#host-monitors"
     - text: Metric Monitors
-      href: "#metric"
+      href: "#metric-monitors"
     - text: Integration Monitors
-      href: "#integration"
+      href: "#integration-monitors"
     - text: Process Monitors
-      href: "#process"
+      href: "#process-monitors"
     - text: Network Monitors
-      href: "#network"
+      href: "#network-monitors"
     - text: Event Monitors
-      href: "#event"
+      href: "#event-monitors"
     - text: Custom Monitors
-      href: "#custom"
+      href: "#custom-monitors"
     - text: Monitor Notifications
-      href: "#notifications"
+      href: "#monitor-notifications"
     - text: Monitor FAQs
-      href: "#faqs"
+      href: "#monitor-faqs"
 ---
 
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
@@ -38,7 +38,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
+- **Monitor type**: [host](#host-monitors)-, [metric](#metric-monitors)-, [integration](#integration-monitors)-, [process](#process-monitors)-, [network](#network-monitors)-, [event](#event-monitors)-based, and [custom](#custom-monitors). See side navigation to drill into a specific type.
 - **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
 
 
@@ -68,7 +68,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    than the number of minutes you have selected, then you will get notified.
 
 3. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Metric Monitors
@@ -197,7 +197,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    anymore values to trigger a resolution.
 
 7. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 
@@ -211,13 +211,13 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 
 - Choosing **Integration Status** will present you with one or more service
   checks for each integration. Please refer to the
-  [custom monitors](#check-alerting) section for details on the
+  [custom monitors](#custom-monitors) section for details on the
   available options.
 
 - Choosing **Integration Metric** will provide a familiar interface used for a
   interface used for a Metric Monitor. You will be able to choose from any of
   the metrics provided by this integration. Please refer to the
-  [alert conditions](#metric-conditions) section for details on the available
+  [alert conditions](#metrics-monitors) section for details on the available
   options.
 
 ### Process Monitors
@@ -243,10 +243,10 @@ point they should notify.
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](#check-alerting) section for details on the available options.
+   [custom monitors](#custom-monitors) section for details on the available options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Network Monitors
@@ -267,11 +267,11 @@ configuration.
    the check you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](#check-alerting) section for details on the available
+   [custom monitors](#custom-monitors) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 **Network Metric**
@@ -283,11 +283,11 @@ configuration.
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [alert-conditions](#metric-conditions) section for details on the available
+   [alert-conditions](#metrics-monitors) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Event Monitors
@@ -306,7 +306,7 @@ Event monitors allows you to alert when an event matching your query occurs.
     options allows you to set the number of occurence of an event required during
     a timeframe before triggering the monitor.
 
-4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
+4. Configure your **notifcation options**. Refer to the [Notifications](#monitor-notifications)
     section of this guide for informations.
 
 
@@ -342,7 +342,7 @@ or service checks.
    must choose at least 2 minutes for your timeframe.
 
 4. Configure your **notification options**. Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ## Monitor Notifications
