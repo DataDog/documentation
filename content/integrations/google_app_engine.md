@@ -26,7 +26,7 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
         git clone https://github.com/DataDog/gae_datadog
 
-3. Edit your project's app.yaml file
+3. Edit your project's `app.yaml` file
 
     a. Add the Datadog handler to your app.yaml file:
 
@@ -64,41 +64,7 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
 At this point you will get a number of metrics for your environment. You can also choose to further instrument your app using the library for whatever language your app is written in.
 
-For Python apps, you might use the dogapi library. Here is the Getting Started Flask-based Python app, modified to increment a counter each time the main page has been hit:
-
-
-    """`main` is the top level module for your Flask application."""
-    import os
-
-    # Import the Flask Framework
-    from flask import Flask
-    app = Flask(__name__)
-    # We don't need to call run() since our application is embedded within
-    # the App Engine WSGI application server.
-
-    from dogapi import dog_stats_api as dog
-    dog.start(
-        api_key=os.environ['DATADOG_API_KEY'],
-        flush_in_thread=False
-    )
-
-    @app.route('/')
-    def hello():
-        """Return a friendly HTTP greeting."""
-        dog.increment('testapp.metric', 1)
-        dog.flush()
-        return 'Hello World dd!'
-
-    @app.errorhandler(404)
-    def page_not_found(e):
-        """Return a custom 404 error."""
-        return 'Sorry, Nothing at this URL.', 404
-
-
-    @app.errorhandler(500)
-    def application_error(e):
-        """Return a custom 500 error."""
-        return 'Sorry, unexpected error: {}'.format(e), 500
+[Here is a complete list of all Datadog-official and community contributed API and DogStatsD client libraries](https://docs.datadoghq.com/libraries/).
 
 ## Data Collected
 ### Metrics
