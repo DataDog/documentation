@@ -19,20 +19,20 @@ DESC_TOKEN = "{{< get-desc-from-git >}}"
 DESC_ATTRIBUTE = "short_description"
 INTEGRATION_FOLDER = "content/integrations/"
 
-OVERVIEW_TOKEN = "{{< get-overview-from-git >}}"
+OVERVIEW_TOKEN = "//get-overview-from-git//"
 OVERVIEW_PATTERN = r'## Overview((?s).*)## Setup'
 
-SETUP_TOKEN = "{{< get-setup-from-git >}}"
+SETUP_TOKEN = "//get-setup-from-git//"
 SETUP_PATTERN = r'## Setup((?s).*)## Data Collected'
 
-DATA_COLLECTED_TOKEN= "{{< get-data-collected-from-git >}}"
+DATA_COLLECTED_TOKEN= "//get-data-collected-from-git//"
 DATA_COLLECTED_PATTERN= r'## Data Collected((?s).*)## Troubleshooting'
 
 
-TROUBLESHOOTING_TOKEN ="{{< get-troubleshooting-from-git >}}"
+TROUBLESHOOTING_TOKEN ="//get-troubleshooting-from-git//"
 TROUBLESHOOTING_PATTERN= r'## Troubleshooting((?s).*)## Further Reading'
 
-FURTHER_READING_TOKEN = "{{< get-further-reading-from-git >}}"
+FURTHER_READING_TOKEN = "//get-further-reading-from-git//"
 FURTHER_READING_PATTERN= r'## Further Reading((?s).*)'
 """
 Functions

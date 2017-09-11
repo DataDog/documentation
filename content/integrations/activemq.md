@@ -9,10 +9,10 @@ description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview
-{{< get-overview-from-git >}}
+//get-overview-from-git//
 
 ## Setup
-{{< get-setup-from-git >}}
+//get-setup-from-git//
 
 ## Data Collected
 ### Metrics
@@ -28,4 +28,4 @@ The Activemq check does not include any event at this time.
 The Activemq check does not include any service check at this time.
 
 ## Further Reading
-{{< get-further-reading-from-git >}}
+//get-further-reading-from-git//
