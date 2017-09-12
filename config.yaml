@@ -178,7 +178,7 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_lognav_collection
-          url: log/collection/
+          url: log/
           weight: 20
         - identifier: customnav_lognav_pipeline
           url: log/pipeline/
