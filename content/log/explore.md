@@ -8,7 +8,6 @@ customnav: lognav
 
 The Log explorer is an optimized view which makes it easy to do any kind of troubleshooting and data exploration.
 
-
 {{< img src="log/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
 
 On this view you have:
@@ -20,8 +19,15 @@ On this view you have:
 * [Facets](#facets)
 
 ## Time Range
+{{< img src="log/explore/timerange.png" alt="Timerange" >}}
 ## Log list
+{{< img src="log/explore/log_list.png" alt="Log List" >}}
+
 ## Columns
+{{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
+
+{{< img src="log/explore/columns_selection.png" alt="Columns Selection" >}}
+
 ## Search bar
 
 The search query language is based on the Lucene query string:
@@ -44,16 +50,18 @@ Multiple terms can be combined together with Boolean operators to form a more co
 Here are the available boolean operators:
 
 ||||
-|Operator | Description | Example |
+|:----|:----|:----|
+| **Operator** | **Description ** | **Example **|
 | `AND` | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure |
 | `OR` | **Union**: either terms is contained in the selected events| authentication OR password|
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 
-//////////////////////////////////////////
-////////////////////////////////////////// To do add link attributes
-//////////////////////////////////////////
+### Facet search 
+To search on specific [facet](#facets) you need to [add them as facet first] 
 
-Search on specific [attributes]() (need to add them as facet first) => appname:nginx
+Once done, if your facet name is appname and you want to filter on the nginx value just enter: 
+
+`appname:nginx`
 
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:
@@ -68,6 +76,7 @@ Your logs inherit tags from their [host](https://docs.datadoghq.com/hostnames/) 
 They can be used in the search and in facets as well. However for the search bar, there are specific rules for the tags:
 
 All search parts relating to tags will be prefixed with tags: 
+
 * `tags:test` is searching for the tag #test.
 * `tags:("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
 * `tags:("service:srvA" OR "service:srvB")` or `tags:(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
@@ -83,15 +92,19 @@ A Facet helps you to break down your datasets over user(s), appname(s), etc ...
 ### Create a Facet
 
 To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
- 
+{{< img src="log/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
+
 Once this is done, the value of this attribute for all new logs is  stored and can be used for search either in the search bar or in the Facet Panel
 
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url will automatically reflect your selections.
+{{< img src="log/explore/facet_panel.png" alt="Facet panel" style="width:75%;" >}}
 
 ### Expanded view
 
 You can expand a facet and access advanced search options.
 Include or exclude pattern within a facet.
-For example: You want to have all host starting by “i-06”. 
+
+For example: You want to have all host starting by “i-06”: 
+{{< img src="log/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
