@@ -50,7 +50,7 @@ This is the list of all the available matchers available for your parsers:
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
-|`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp More info|
+|`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp [More info](#timestamp)|
 |`regex("pattern")` |matches a regex|
 | `data` |matches a string until the next newline |
 |`boolean("truePattern", "falsePattern")`|matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case)|
@@ -84,7 +84,7 @@ This is the list of all the available filters available for your parsers:
 |`number`| parses a match as double precision number.|
 |`integer`| parses a match as an integer number|
 |`boolean`| parses 'true' and 'false' strings as booleans ignoring case.|
-| `date("pattern"[, "timezoneId"[, "localeId"]])`| parses a date with the specified pattern to produce a unix timestamp. More info|
+| `date("pattern"[, "timezoneId"[, "localeId"]])`| parses a date with the specified pattern to produce a unix timestamp. [More info](#timestamp)|
 |`nullIf("value")`| returns null if the match is equal to the provided value.|
 |`json`| parses properly formatted JSON format|
 |`rubyhash`| parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})|
@@ -94,7 +94,7 @@ This is the list of all the available filters available for your parsers:
 |`decodeuricomponent`| this core filter decodes uri components.|
 |`lowercase`| returns the lower cased string.|
 |`uppercase` |returns the upper cased string.|
-|`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. More info |
+|`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. [More info](#key-value) |
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array. More info|
 |`url`|parses an url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. More info|
@@ -104,21 +104,28 @@ Let’s see some examples to understand better how this works.
 
 ### Key value
 
+This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])`` where:
+
+* `separatorStr` : defines the separator. Default `=`
+* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
+* `quotingStr` : defines quotes. Default behavior which detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For e.g. `<>` matches *test=<toto sda> test2=test* .
+
+You can use filters such as **keyvalue()** to more-easily map strings to attribute: 
+
 log: 
 ```
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
-you can use filters such as `keyvalue()` to more-easily map strings to attribute: 
+Rule
 ```
-keyvalue(separatorStr,characterWhiteList , quotingStr))
+rule keyvalue(separatorStr,characterWhiteList , quotingStr))
 ```
 
 {{< img src="log/parsing/parsing_example_2.png" alt="Parsing example 2" >}}
 
-So here we can see that we didn’t need to specify the name of our parameters as they were already contained in the log.
-If we had added a extract parameter in the pattern it would have look as follows:
-
+You don't need to specify the name of your parameters as they were already contained in the log.
+If you add an **extract** parameter in your rule pattern you would have:
 
 {{< img src="log/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" >}}
 
@@ -141,30 +148,43 @@ The date matcher will transform your timestamp in the EPOCH format.
 
 ### Conditional pattern
 
-You might have logs with two possibles formats which differ for only one attribute. These cases can be handled with a single rule, using conditionals with “|”.
+You might have logs with two possibles formats which differ for only one attribute. These cases can be handled with a single rule, using conditionals with `|`.
 
+**Log**:
+```
 user:john name:snow connected on 11/08/2017 
 user:john id:123 connected on 11/08/2017 
+```
 
+**Rule**:
+Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
+
+```
 Rule user:%{word:user.firstname} (name:%{word:user.name}|id:%{integer:user.id}) connected on %{date("MM/dd/yyyy"):connect_date}
+```
 
-Results:
+**Results**:
 
 {{< img src="log/parsing/parsing_example_4.png" alt="Parsing example 4" >}}
 
 {{< img src="log/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" >}}
-Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
 
 ### Optional attribute 
+
+Let’s say that in your logs you sometimes have the user id but not all the time. 
+You can make attributes optional with `()?` so as to extract the value only when it is present :
+
+**Log**:
 ```
 user:john id:123 connected on 11/08/2017 
 ```
-Let’s say that in your logs you sometimes have the user id but not all the time. You can make attributes optional with “()?” so as to extract the value only when it is present:
+
+**Rule**:
 ```
 Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Hint**: you will usually  need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
+**Note**: you will usually  need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
 {{< img src="log/parsing/parsing_example_5.png" alt="Parsing example 5" >}}
 
