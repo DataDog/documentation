@@ -9,8 +9,9 @@ customnav: lognav
 The Log explorer is an optimized view which makes it easy to do any kind of troubleshooting and data exploration.
 
 
-On this view you have:
+{{< img src="log/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
 
+On this view you have:
 
 * [Time range](#time-range)
 * [Log list](#log-list)
