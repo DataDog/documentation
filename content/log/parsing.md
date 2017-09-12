@@ -13,7 +13,7 @@ The implemented standard to parse log entries is named grok.
 With grok, you can turn unstructured log and event data into structured data.
 Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
 
-Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}`` syntax:
+Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
 * **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace,...)
 
@@ -154,10 +154,6 @@ Results:
 
 {{< img src="log/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" >}}
 Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
-
-
-
-
 
 ### Optional attribute 
 ```

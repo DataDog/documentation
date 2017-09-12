@@ -15,6 +15,7 @@ Collecting logs is enabled by default in the Datadog-Agent.
 ## Overview 
 
 Log analysis can be decomposed into 4 steps:
+
 1. [Collection](/log/collection)
 2. [Pipeline](/log/pipeline)
 3. [Parsing](/log/parsing)

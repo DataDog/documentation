@@ -1,5 +1,5 @@
 ---
-title: Exploration
+title: Explore
 kind: Documentation
 autotocdepth: 2
 hideguides: true
@@ -19,14 +19,15 @@ On this view you have:
 * [Facets](#facets)
 
 ## Time Range
-{{< img src="log/explore/timerange.png" alt="Timerange" >}}
+{{< img src="log/explore/timerange.png" alt="Timerange" style="width:75%;">}}
+
 ## Log list
 {{< img src="log/explore/log_list.png" alt="Log List" >}}
 
 ## Columns
 {{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
 
-{{< img src="log/explore/columns_selection.png" alt="Columns Selection" >}}
+{{< img src="log/explore/columns_selection.png" alt="Columns Selection" style="width:50%;">}}
 
 ## Search bar
 
