@@ -82,5 +82,5 @@ Returns `Critical` if the Agent cannot connect to the NameNode's JMX interface f
 ## Troubleshooting
 
 ## Further Reading
-### Blog Article
+### Datadog Blog
 To get a better idea of how (or why) to integrate your HDFS NameNodes with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/hadoop-architecture-overview/) about monitoring Hadoop. In particular, [Part 2](https://www.datadoghq.com/blog/monitor-hadoop-metrics/) provides a useful walkthrough of key metrics.

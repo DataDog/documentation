@@ -84,7 +84,6 @@ you can select multiple environments and then select “Save these tiles to: a n
 {{< img src="integrations/redis/metric-explorer-redis.png" >}}
 
 ## Further Reading
-### Blog Article
 Learn more about how to monitor Redis performance metrics thanks to
 [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/).
 We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
