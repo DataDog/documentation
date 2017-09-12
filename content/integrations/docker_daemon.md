@@ -248,7 +248,7 @@ After we build our web application container, we can run it and use the `--link`
 
 For another example using DogStatsD, see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
 
-### Blog Article
+### Datadog Blog
 
 Learn more about how to monitor Docker performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/the-docker-monitoring-problem/). We detail the challenges when monitoring Docker, its key performance metrics, how to collect them, and lastly how the largest TV and radio outlet in the U.S. monitors Docker using Datadog.
 

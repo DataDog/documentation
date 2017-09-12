@@ -83,7 +83,6 @@ The base pricing is $15 per virtual machine per month. For general info on Datad
 
 
 ## Further Reading
-### Blog Article
 We also have an awesome blog post on vSphere which can be seen [here][1].
 
 [1]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/

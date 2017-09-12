@@ -74,5 +74,4 @@ The Cassandra_nodetool check does not include any event at this time.
 The agent sends this service check for each node of the monitored cluster. Returns CRITICAL if the node is down, otherwise OK.
 
 ## Further Reading
-### Blog Article
 To get a better idea of how (or why) to integrate your Cassandra cluster with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics) about it.

@@ -64,5 +64,4 @@ Checks
 No events are included with this integration.
 
 ## Further Reading
-### Blog Article
 For more information on syncing your system clock with NTP, [see this article in the Datadog Knowledge Base](https://help.datadoghq.com/hc/en-us/articles/204282095-Network-Time-Protocol-NTP-Offset-Issues)

@@ -131,7 +131,6 @@ The Datadog Agent submits a service check for each of Consul's health checks, ta
 The Datadog Agent emits an event when the Consul cluster elects a new leader, tagging it with `prev_consul_leader`, `curr_consul_leader`, and `consul_datacenter`. 
 
 ## Further Reading
-### Blog Article
 To get a better idea of how (or why) to integrate your Consul cluster with Datadog, check out our blog posts:
 
 * [Monitor Consul health and performance with Datadog](https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog) - a more in-depth explanation of Datadog-Consul integration

@@ -578,6 +578,4 @@ A breakdown by Varnish version is available below.
 [2]: https://github.com/DataDog/integrations-core/blob/master/varnish/check.py
 
 ## Further Reading
-### Blog Article
-
 Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.

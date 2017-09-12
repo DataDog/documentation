@@ -100,5 +100,4 @@ Checks
 {{< get-metrics-from-git >}}
 
 ## Further Reading
-### Blog Article
 Learn more about how to monitor OpenStack Nova performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/openstack-monitoring-nova/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor OpenStack Nova.

@@ -67,5 +67,5 @@ Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:fol
 Returns 'Critical' if the Agent cannot collect metrics from your etcd API endpoint.
 
 ## Further Reading
-### Blog Article
+### Datadog Blog
 To get a better idea of how (or why) to integrate etcd with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-etcd-performance/) about it.
