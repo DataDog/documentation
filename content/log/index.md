@@ -9,6 +9,10 @@ customnav: lognav
 Datadog's log management solution is actualy in private beta. If you'd like to apply to participate in the private beta, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
+## Overview
+
+{{< img src="log/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
+
 ## Getting started with the Agent
 
 Collecting logs is disabled by default in the Datadog-Agent.
@@ -90,11 +94,14 @@ logs:
 
 To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit the desired parameters as seen in the previous section.
 
-
-//////////////<br>
-///////////// Need to add an example of custom log file<br>
-////////////<br>
-
+{{< highlight yaml >}}
+logs:
+  - type: file
+    path: /path/to/your/file.log
+    appname: name_of_your_app
+    tags: my_tag_name:my_tag_value
+    source: source_name
+{{< /highlight >}}
 
 ## Reserved attributes 
 

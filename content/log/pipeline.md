@@ -18,16 +18,55 @@ Your pipeline view should look like this:
 {{< img src="log/pipeline/pipelines_view.png" alt="Pipelines view" >}}
 
 ## Pipelines 
-
+## Pipelines Description
 **A pipeline is a chain of processors that is applied on every log matching the pipeline filter**. 
 
 Please note that When installing an integration, we automatically install the corresponding pipeline.
 
+A log will go through all [processors](#processors) inside a pipline before being stored on your Datadog application For example:
+You can transform this log:
+{{< highlight json >}}
+{
+"message":"john clicked on a link : www.datadoghq.com for app dd_app",
+"hostname":"host_1",
+"level":"info"
+}
+{{</ highlight >}}
+
+into this log: 
+
+{{< highlight json >}}
+{
+"user":"john",
+"url":"www.datadoghq.com",
+"appname":"dd_app",
+"message":"clicked on a link",
+"hostname":"host_1",
+"severity":"info"
+}
+{{< /highlight >}}
+
+With one pipeline as follow:
+
+{{< img src="log/pipeline/pipeline_processors_sketch.png" alt="Pipelines processor sketch" style="width:90%;">}}
+
+
+### Pipelines Goal 
+
+With pipelines you have the opportunity to manipulate your logs through a sequential chains of [processors](/log/pipeline/#processors) in order to extract meaningful information or to extract attributes from semi-structured text to re-use them as [facet](/log/explore/#facets).
+
+You can also take all your logs whatever they source and be able to handle a unifed and structured format on your Datadog application, 
+In the following example we have at the begining 3 differents raw logs:
+
+{{< img src="log/pipeline/multi_source_sketch.png" alt="Multi source sketch" >}}
+
+and at the end we have the same information, but with more coherence that allow a better usability 
+
 ## Processors
-A Processor describe an action done on a raw event attribute.
+
+**A Processor describe an action done on a raw event attribute.**
 
 Processors available currently are: 
-
 ### Grok Parser
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event:
