@@ -44,15 +44,21 @@ def create_placeholder_file(template, new_glob):
     new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
     with open(template) as o_file:
         content = o_file.read()
+        boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+        _, fm, content = boundary.split(content, 2)
+        new_yml = yaml.load(fm)
+        new_content = content
+        if new_yml.get('aliases', None):
+            new_aliases = []
+            for alias in new_yml.get('aliases'):
+                new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
+            new_yml['aliases'] = new_aliases
         if new_glob["disclaimer"]:
             disclaimer = "<div class='alert alert-info'><strong>NOTICE:</strong>%s</div>\n\n" % new_glob["disclaimer"]
-            boundary = re.compile(r'^-{3,}$', re.MULTILINE)
-            _, fm, content = boundary.split(content, 2)
             new_content = disclaimer + content
-            new_yml = yaml.load(fm)
             new_yml['placeholder'] = True
-            content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
-                                      content=new_content.strip())
+        content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
+                                  content=new_content.strip())
 
     with open(new_dest, 'w') as o_file:
         o_file.write(content)
