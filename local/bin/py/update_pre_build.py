@@ -57,7 +57,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     response = requests.get(url, headers=headers)
     
     """
-    Donwloading manifest.json for integrations core repo only
+    Downloading manifest.json for integrations core repo only
     """
     if response.status_code == requests.codes.ok:
         if not is_dogweb:
@@ -74,7 +74,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
         exit(1)
 
     """
-    Donwloading readme.md for integrations core repo only
+    Downloading readme.md for integrations core repo only
     """
     if response.status_code == requests.codes.ok:
         if not is_dogweb:
@@ -159,7 +159,7 @@ def parse_args(args=None):
 
 def readme_get_section(from_path,key_name):
     """
-    Takes an integration readme file, extract all sections following this pattern:
+    Take an integration readme file, extract all sections following this pattern:
         ## Overview
         ## Setup
         ## Data Collected

@@ -21,11 +21,11 @@ description: "{{< get-desc-from-git >}}"
 
 ### Events
 
-The Activemq check does not include any event at this time.
+The ActiveMQ check does not emit any events.
 
 ### Service Checks
 
-The Activemq check does not include any service check at this time.
+The ActiveMQ check does not submit any service checks.
 
 ## Further Reading
 //get-further-reading-from-git//
