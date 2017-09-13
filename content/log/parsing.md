@@ -197,3 +197,6 @@ Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("M
 In a PHP logs, we want to make sure we match “PHP” to store it as the application name.
 
 {{< img src="log/parsing/parsing_example_6.png" alt="Parsing example 6" >}}
+
+## What's next 
+* Learn how to explore your logs [here](/log/explore)

@@ -11,69 +11,121 @@ Datadog's log management solution is actualy in private beta. If you'd like to a
 
 ## Getting started with the Agent
 
-Collecting logs is enabled by default in the Datadog-Agent.
-[Install the latest Datadog Agent](https://app.datadoghq.com/account/settings#agent) and that will collect logs for you.
+Collecting logs is disabled by default in the Datadog-Agent.
+In order to start to gather your logs you need to:
 
-## Overview 
+1. [Install the latest Datadog Agent](https://app.datadoghq.com/account/settings#agent).
+2. Uncomment those lines in your `datadog.conf` file:
 
-Log analysis can be decomposed into 4 steps:
+{{< highlight yaml >}}
+# ====================================================================== #
+#   Logs                                                                 #
+# ====================================================================== #
+# The host of the Datadog intake server to send log data to
+log_dd_url: intake.sheepdog.datadoghq.com
+# The port to use when submitting the log lines
+log_dd_port: 10515
+{{< /highlight >}}
 
-### Integrations
+## Collect logs with an Integrations
+To start collecting logs for an integration, you need to add a log sections in your integration yaml file, this log section need to contain:
 
-If you enable an integration there is nothing more to do to start collecting logs for that integration. 
+* `type`
+* `port` / `path`
+* `appname`
+* `source`
 
-Your Datadog agent will automatically look for the default log location of the corresponding technology and start collecting them.
+You have 3 `type` of log collection available:
 
-However if you changed the log location or if you want to override some of our default parameters, you can uncomment all the Log section in your configuration yaml file (i.e cannot override only one parameter). 
+* tcp : listening on a tcp port
+* udp : listening on a udp port 
+* file : tailing a log file
 
-#### Nginx log collection configuration example
+For `tcp`/`udp` type you have to specify the `port`
+For `file` type you have to specify a `path`
 
-```
+`appname`  is the name of the application owning the log
+`source` is \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+### Examples
+#### Java Log collection configuration
+For java log collection, you can forward your logs into the local 10514 port in TCP and edit your `java.yaml` file as such:
+
+
+{{< highlight yaml >}}
 init_config:
 instances:
-
-#Log section
-logs:
-  - type: file:
-    path: /var/log/access.log
-    appname: nginx
-    sourcetype: http_access, nginx
-    tags:
-      - env:prod
-      - version:12.1
-
-
-  - type: file
-    file: /var/log/error.log
-    appname: nginx
-    sourcetype: http_error, nginx
-    logset: devteam
-    log_processing_rules:
-      - type: include_at_match
-        name: include_only_datadoghq_users
-        pattern: 'User=\w+@datadoghq.com'
-```
-
-
-#### Java Log collection configuration example
-
-```
-init_config:
-instances:
-….
+(...)
 #Log section
 logs:
     - type: tcp
       port: 10514
       appname: java
-      sourcetype: java
-```
+      source: java
 
-### Custom Log file
+{{< /highlight >}}
 
-You might also need to send custom logs that would not be part of an existing integration.
+#### Nginx Log collection configuration
+If you want to gather you nginx logs stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `nginx.yaml` file as follow
 
-You need to edit a yaml file and to specify the file path, sourcetype tag, appname and optionally other parameters as described in the previous section.
+{{< highlight yaml >}}
+init_config:
+instances:
+(...)
+#Log section
+logs:
+  - type: file:
+    path: /var/log/access.log
+    appname: nginx
+    source: http_access, nginx
+    tags: env:prod 
 
-Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit the desired parameters.
+  - type: file
+    file: /var/log/error.log
+    appname: nginx
+    source: http_error, nginx
+{{< /highlight >}}
 
+## Collect log from a custom log file
+
+To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit the desired parameters as seen in the previous section.
+
+
+//////////////<br>
+///////////// Need to add an example of custom log file<br>
+////////////<br>
+
+
+## Reserved attributes 
+
+This section is relevant only if you log are JSON formated.
+If so, you need to be aware that some JSON attributes have a specific interaction with your datadog application:
+
+### The `date` attribute
+By default your datadog application generates a timestamp for your lag that corresponds to the reception date. This field is used to display your data over the timeline.
+
+But if your log contain a date reserved attribute, then its value is considered as the official log timestamp, date reserved attributes are:
+
+* `timestamp`
+* `date`
+* `_timestamp`
+* `Timestamp`
+* `eventTime`
+* `published_date`
+
+You can also define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/pipeline/#log-date-remapper)
+<div class="alert alert-info">
+The recognized date formats are: `ISO8601`, `UNIX` (the milliseconds EPOCH format) and `RFC3164`.
+</div>
+
+### The `message` attribute
+
+By default, your datadog application considers the `message` attribute as the content to display in priority in your [log list](/log/explore/#log-list).
+
+The `message` attribute is indexed as text for the [search bar](/log/explore/#search-bar) so you can search over any tokenized word without mentioning the path to the attribute.
+
+## What's next
+
+* Learn how to parse your logs [here](/log/pipeline)
+* Learn how to explore your logs [here](/log/explore)
+* Learn more about parsing [here](/log/parsing)

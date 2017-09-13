@@ -24,15 +24,43 @@ On this view you have:
 * [Facets](#facets)
 
 ## Time Range
+The time range allow you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
+
+{{< img src="log/explore/timeline.png" alt="Timeline" >}}
+
+You can change the time periode displayed with quick ranges that are directly available:
+
 {{< img src="log/explore/timerange.png" alt="Timerange" style="width:75%;">}}
 
 ## Log list
+The log list is the list of events that match the selected context, a context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 {{< img src="log/explore/log_list.png" alt="Log List" >}}
 
-## Columns
-{{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
+### Sorting the log list
 
-{{< img src="log/explore/columns_selection.png" alt="Columns Selection" style="width:50%;">}}
+You can click on the **date** columns to get your logs in an ascending or descending order in the Log list.
+
+### Filtering the log list
+If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criterias:
+
+Searching for all the logs containing the word "deleted" from host:i-0223afcd9cb2fa6a2 : 
+{{< img src="log/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
+
+### Displaying a full log
+To display detail of a log line, just click on it:
+
+{{< img src="log/explore/log_in_log_list.png" alt="Log in log list" >}}
+
+
+### View a log line in context
+When displaying the detail of a log line, you can ask to « view in context ». 
+It will remove any filters from your search bar and display log lines preceding this line and the few log lines following it.
+
+If you send the log lines in syslog format, the hostname and app name corresponding to the log line will automatically be selected.
+
+## Columns
+In order to get more details about the objects you are looking at, you can select a few facets to display with the **Columns** button:
+{{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
 
 ## Search bar
 
@@ -105,7 +133,7 @@ Once this is done, the value of this attribute for all new logs is  stored and c
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url will automatically reflect your selections.
-{{< img src="log/explore/facet_panel.png" alt="Facet panel" style="width:75%;" >}}
+{{< img src="log/explore/facet_panel.png" alt="Facet panel" >}}
 
 ### Expanded view
 
