@@ -5,6 +5,11 @@ autotocdepth: 2
 hideguides: true
 customnav: lognav
 ---
+<div class="alert alert-info">
+Datadog's log management solution is actualy in private beta. If you'd like to apply to participate in the private beta, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
+## Overview 
 
 The Log explorer is an optimized view which makes it easy to do any kind of troubleshooting and data exploration.
 
