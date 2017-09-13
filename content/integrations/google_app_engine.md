@@ -64,7 +64,7 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
 
 At this point you will get a number of metrics for your environment. You can also choose to further instrument your app using the library for whatever language your app is written in.
 
-[Here is a complete list of all Datadog-official and community contributed API and DogStatsD client libraries](https://docs.datadoghq.com/libraries/).
+See the [Libraries page](https://docs.datadoghq.com/libraries/) for a list of all official and community-contributed API and DogStatsD client libraries.
 
 ## Data Collected
 ### Metrics
