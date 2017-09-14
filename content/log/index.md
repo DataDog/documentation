@@ -40,25 +40,8 @@ To start collecting logs for an integration, you need to add a log sections in y
 * `source` : \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 ### Examples
-#### Java Log collection configuration
-For java log collection, you can forward your logs into the local 10514 port in TCP and edit your `java.yaml` file as such:
-
-
-{{< highlight yaml >}}
-init_config:
-instances:
-(...)
-#Log section
-logs:
-    - type: tcp
-      port: 10514
-      appname: java
-      source: java
-
-{{< /highlight >}}
-
-#### Nginx Log collection configuration
-If you want to gather you nginx logs stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `nginx.yaml` file as follow
+#### File log collection configuration
+If you want to gather you nginx logs for instance stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `nginx.yaml` file as follow
 
 {{< highlight yaml >}}
 init_config:
@@ -76,6 +59,22 @@ logs:
     file: /var/log/error.log
     appname: nginx
     source: http_error, nginx
+{{< /highlight >}}
+
+#### TCP/UDP Log collection configuration
+For java log collection for instance, you can forward your logs into the local 10514 port in TCP and edit your `jmx.yaml` file as such:
+
+{{< highlight yaml >}}
+init_config:
+instances:
+(...)
+#Log section
+logs:
+    - type: tcp
+      port: 10514
+      appname: java
+      source: java
+
 {{< /highlight >}}
 
 ## Collect log from a custom log file
@@ -127,6 +126,6 @@ If you have the log severity information in another attribute you can always rem
 
 ## What's next
 
-* Learn how to parse your logs [here](/log/pipeline)
 * Learn how to explore your logs [here](/log/explore)
+* Learn how to parse your logs [here](/log/pipeline)
 * Learn more about parsing [here](/log/parsing)

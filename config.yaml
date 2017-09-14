@@ -180,15 +180,16 @@ languages:
         - identifier: customnav_lognav_collection
           url: log/
           weight: 20
-        - identifier: customnav_lognav_pipeline
-          url: log/pipeline/
-          weight: 30
-        - identifier: customnav_lognav_parsing
-          url: log/parsing/
-          weight: 40
         - identifier: customnav_lognav_explore
           url: log/explore/
+          weight: 30
+        - identifier: customnav_lognav_pipeline
+          url: log/pipeline/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: log/parsing/
           weight: 50
+
 
   ja:
     #languagename: "日本語"

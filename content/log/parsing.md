@@ -194,9 +194,19 @@ Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("M
 {{< img src="log/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" >}}
 
 ### Regex 
-In a PHP logs, we want to make sure we match “PHP” to store it as the application name.
+You can use regex to match any substring of your log message.
+**Log**:
+```
+this is a test message id: 12ab3cd4 for appname foo_1
+```
 
-{{< img src="log/parsing/parsing_example_6.png" alt="Parsing example 6" >}}
+**Rule**:
+Here we just look for the id to extract
+```
+parsing_rule .*%{regex("id: [0-9a-z]*"):value_to_extract}.*
+```
+{{< img src="log/parsing/regex_parsing.png" alt="Parsing example 6" >}}
 
 ## What's next 
+
 * Learn how to explore your logs [here](/log/explore)
