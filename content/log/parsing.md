@@ -91,16 +91,16 @@ This is the list of all the available filters available for your parsers:
 |`nullIf("value")`| returns null if the match is equal to the provided value.|
 |`json`| parses properly formatted JSON format|
 |`rubyhash`| parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})|
-|`geoip` |parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address. More info |
-|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the agent. More info|
+|`geoip` |parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.|
+|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the agent. [More info](#useragent-parser)|
 |`querystring`| extracts all the key-value pairs in a matching URL query string (eg. "productId=superproduct&promotionCode=superpromo")|
 |`decodeuricomponent`| this core filter decodes uri components.|
 |`lowercase`| returns the lower cased string.|
 |`uppercase` |returns the upper cased string.|
 |`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. [More info](#key-value) |
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
-|`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array. More info|
-|`url`|parses an url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. More info|
+|`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
+|`url`|parses an url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](#url-processor)|
 
 ## Examples
 Let’s see some examples to understand better how this works.
