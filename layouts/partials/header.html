@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}">
   <head>
     <meta charset="utf-8">
     {{ partial "prefetch.html" . }}
-    <title>{{ .Params.title }}</title>
+    <title>{{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
     {{ if eq .Params.beta true }} <meta name="robots" content="noindex"> {{ end }}

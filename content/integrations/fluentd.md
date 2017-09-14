@@ -5,8 +5,10 @@ kind: integration
 doclevel: basic
 git_integration_title: fluentd
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" >}}
 
 ## Overview
 Get metrics from Fluentd in real time to
@@ -14,9 +16,8 @@ Get metrics from Fluentd in real time to
 * Visualize Fluentd performance.
 * Correlate the performance of Fluentd with the rest of your applications.
 
-{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" >}}
-
-## Installation
+## Setup
+### Installation
 
 Configure your fluentd to use a monitor agent and plugin id (see doc), for instance:
 
@@ -41,7 +42,7 @@ Configure your fluentd to use a monitor agent and plugin id (see doc), for insta
       </server>
     </match>
 
-## Configuration
+### Configuration
 
 Configure the Agent to connect to fluentd, and set the plugins id you want to monitor
 Edit `conf.d/fluentd.yaml`
@@ -58,7 +59,7 @@ instances:
 {{< /highlight >}}
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 1.  Restart the Agent
 2.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
@@ -76,6 +77,7 @@ Checks
 
 Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

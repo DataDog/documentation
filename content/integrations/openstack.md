@@ -3,8 +3,10 @@ title: Datadog-OpenStack Integration
 integration_title: OpenStack
 kind: integration
 git_integration_title: openstack
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/openstack/openstack.png" alt="OpenStack default dashboard" >}}
 
 ## Overview
 
@@ -14,13 +16,12 @@ Connects your OpenStack cluster to Datadog in order to:
 * Track resource usage and I/O on your Nova-managed servers
 * Verify connectivity of your Neutron networks
 
-{{< img src="integrations/openstack/openstack.png" alt="OpenStack default dashboard" >}}
+## Setup
+### Installation
 
-Learn more about how to monitor OpenStack Nova performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/openstack-monitoring-nova/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor OpenStack Nova.
-
-## Installation
-
-Note: Installing the OpenStack Integration could increase the number of VMs that Datadog monitors. For more information on how this may affect your billing, please visit our Billing FAQ.
+<div class="alert alert-info">
+Installing the OpenStack Integration could increase the number of VMs that Datadog monitors. For more information on how this may affect your billing, please visit our Billing FAQ.
+</div>
 
 To capture OpenStack metrics you need to install the Datadog Agent on your hosts running hypervisors.
 
@@ -93,6 +94,10 @@ Checks
 
 {{< insert-example-links >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
+
+## Further Reading
+Learn more about how to monitor OpenStack Nova performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/openstack-monitoring-nova/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor OpenStack Nova.

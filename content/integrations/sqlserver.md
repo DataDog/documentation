@@ -1,9 +1,10 @@
 ---
 title: Datadog-SQL Server Integration
 integration_title: SQL Server
-git_integration_title: sql_server
+git_integration_title: sqlserver
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" >}}
@@ -15,10 +16,15 @@ Connect SQL Server to Datadog in order to:
   * Visualize your database performance.
   * Correlate the performance of SQL Server with the rest of your applications.
 
-## Configuration
+<div class="alert alert-warning">
+SQL Server check can only be run from a Windows environment
+</div>
+
+## Setup
+### Configuration
 This integration requires a Datadog Agent version >= 3.2.3
 
-### Prepare SQL Server
+#### Prepare SQL Server
 1. Make sure that your SQL Server instance supports SQL Server authentication by enabling "SQL Server and Windows Authentication mode" in the server properties. 
 **Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode**
 {{< img src="integrations/sql_server/setup_auth.png" alt="setup auth" >}}
@@ -31,7 +37,7 @@ GRANT SELECT on sys.dm_os_performance_counters to datadog;
 GRANT VIEW SERVER STATE to datadog;
 ```
 
-### Connect the Agent
+#### Connect the Agent
 3. Configure the Agent to connect to SQL Server
 Edit the "sqlserver" configuration in the Agent Manager and add this server to instances:
 {{< highlight yaml >}}
@@ -44,7 +50,7 @@ Make sure to change the MY_HOST and MY_PORT to your host and port. The default h
 
 4. Restart the Agent using the Agent Manager (or restart the service)
 
-## Validation
+### Validation
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 {{< highlight yaml >}}
@@ -59,13 +65,8 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Compatibility 
-
-<div class="alert alert-warning">
-SQL Server check can only be run from a Windows environment
-</div>
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

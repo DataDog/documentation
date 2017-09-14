@@ -4,7 +4,10 @@ integration_title: Varnish
 git_integration_title: varnish
 kind: integration
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
+
+{{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" >}}
 
 ## Overview
 
@@ -13,20 +16,17 @@ Connect Varnish to Datadog in order to:
   * Visualize your cache performance in real-time.
   * Correlate the performance of Varnish with the rest of your applications.
 
-{{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" >}}
-
-Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.
-
-## Installation
+## Setup
+### Installation
 
 If you're running Varnish 4.1+, you must add the dd-agent user to the varnish group:
 `$ sudo usermod -G varnish -a dd-agent`
 
-## Configuration
+### Configuration
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -45,7 +45,8 @@ Checks
       - Collected 20 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 The following metrics are collected by default with the Varnish integration.
 
@@ -57,7 +58,7 @@ may show only a subset of these metrics depending on which version of Varnish yo
 
 A breakdown by Varnish version is available below.
 
-### Varnish 3.x
+#### Varnish 3.x
 
     varnish.accept_fail
     varnish.backend_busy
@@ -278,7 +279,7 @@ A breakdown by Varnish version is available below.
     varnish.sms_nreq
     varnish.uptime
 
-### Varnish 4.x
+#### Varnish 4.x
 
     varnish.backend_busy
     varnish.backend_conn
@@ -575,3 +576,6 @@ A breakdown by Varnish version is available below.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/master/varnish/check.py
+
+## Further Reading
+Learn more about how to monitor Varnish performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-varnish-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Varnish.

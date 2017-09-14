@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: marathon
 updated_for_agent: 5.8.0
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 
@@ -15,7 +16,8 @@ Connects Marathon to Datadog in order to:
 
 {{< insert-example-links >}}
 
-## Configuration
+## Setup
+### Configuration
 
 **NOTICE** : If you include the acs_url parameter in the marathon.yaml config, the user and password will be used to generate an ACS token, not as basic auth for the marathon api.
 
@@ -36,7 +38,7 @@ instances:
 
 2. Restart the Agent
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -51,6 +53,7 @@ marathon
     + Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

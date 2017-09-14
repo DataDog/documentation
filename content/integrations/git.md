@@ -15,8 +15,8 @@ Capture Git commits directly from your Git server to:
 * Add code change markers on all your dashboards.
 * Discuss code changes with your team.
 
-
-## Configuration
+## Setup
+### Installation
 
 1. Create a new application key for Git: [Generate Application Key](https://app.datadoghq.com/account/settings#api)
 

@@ -196,9 +196,9 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
-#### Example: Apache and HTTP checks
+#### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template:
+The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template to monitor whether the website created by the Apache container is available:
 
 ~~~
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -228,7 +228,7 @@ The format is similar to that for key-value stores. The differences are:
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
-#### Pod Example: Apache and HTTP checks
+#### Pod Example: Apache check with website availability monitoring
 
 The following Pod annotation defines two templates—equivalent to those from the end of the previous section—for `apache` containers:
 
@@ -278,7 +278,7 @@ spec:
         - containerPort: 80
 ~~~
 
-# Reference
+## Reference
 
 ### Template Variable Indexes
 
@@ -302,7 +302,7 @@ If you provide a template for the same check type via multiple template sources,
 
 So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
-# Troubleshooting
+## Troubleshooting
 
 When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 

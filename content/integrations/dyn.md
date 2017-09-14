@@ -15,7 +15,8 @@ Monitor your zones with advanced graphs and events.
 * Keep track of the changes made when a zone is updated
 * Analyze the QPS made by zone or record type thanks to advanced graphing tools
 
-## Configuration 
+## Setup
+### Configuration 
 
 If you have not created a 'datadog' read-only user on Dyn yet, please go [HERE](https://manage.dynect.net/login/) and follow these instructions:
 
@@ -36,7 +37,11 @@ Once you have created a Datadog Read only user:
 5. Select your zones you want to monitor:
 {{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:50%;" >}}
 
-**Note**: IP ACLs must be disabled for the Dyn integration.
-## Metrics
+<div class="alert alert-info">
+IP ACLs must be disabled for the Dyn integration.
+</div>
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

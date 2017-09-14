@@ -3,6 +3,7 @@ title: Datadog-Cassandra Integration
 integration_title: Cassandra
 kind: integration
 git_integration_title: cassandra
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" >}}
@@ -18,7 +19,8 @@ Learn more about how to monitor Cassandra performance metrics thanks to [our ser
 
 For information on JMX Checks, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
 
-## Installation
+## Setup
+### Installation
 
 To capture Cassandra metrics you need to install the Datadog Agent. Metrics will be captured using a JMX connection. 
 We recommend the use of Oracle's JDK for this integration. 
@@ -130,7 +132,7 @@ init_config:
 
 {{< insert-example-links check="none" >}}
 
-## Validation 
+### Validation 
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell >}}
@@ -145,7 +147,7 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

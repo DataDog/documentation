@@ -15,10 +15,12 @@ Get metrics from Azure Logc App to:
 * Visualize the performance of your Logic App workflows
 * Correlate the performance of your Logic App workflows with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

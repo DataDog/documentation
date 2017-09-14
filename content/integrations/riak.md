@@ -4,6 +4,7 @@ integration_title: Riak
 git_integration_title: riak
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" >}}
@@ -15,12 +16,12 @@ Connect Riak to Datadog in order to:
   * Visualize Riak performance and utilization.
   * Correlate the performance of Riak with the rest of your applications.
 
-## Installation
+## Setup
+### Installation
 
 The Riak check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Riak servers. If you need the newest version of the check, install the `dd-check-riak` package.
 
-
-## Configuration
+### Configuration
 
 **The Riak integration requires the Datadog Agent >= 3.5.0**
 
@@ -36,7 +37,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -51,11 +52,12 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-## Service Checks
+### Service Checks
 
 **riak.can_connect**:
 

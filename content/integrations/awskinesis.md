@@ -12,15 +12,17 @@ Amazon Kinesis is a fully managed, cloud-based service for real-time processing 
 
 Enable this integration to see in Datadog all your Kinesis metrics, and collect custom Kinesis tags.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Kinesis is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

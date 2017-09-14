@@ -16,7 +16,8 @@ Integrate Moxtra to:
 * Be notified when a metric alert is triggered
 * Share your graphs with your team
 
-## Configuration
+## Setup
+### Installation
 
 To enable this integration...
 

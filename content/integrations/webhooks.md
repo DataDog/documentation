@@ -12,12 +12,14 @@ With Webhooks you'll be able to:
 * Connect to your services.
 * Alert your services when a metric alert is triggered.
 
-
-## Configuration
+## Setup
+### Configuration
 
 Go to the [webhook integration tile](https://app.datadoghq.com/account/settings#integrations/webhooks) and enter the URL and name of the webhook you want to use
 
-## Usage
+## Further Reading
+### Knowledge Base
+#### Usage
 
 To use your webhook, add **@webhook-*name_of_the_webhook*** in the text of the metric alert you want to trigger the webhook. It will trigger a POST request to the URL you set with the following content in JSON format.
 
@@ -50,9 +52,9 @@ You can also specify your own payload in order to add your own custom fields to 
 
 If you want to post your webhooks to a service requiring authentication, you can Basic HTTP authentication my modifing your URL from `https://my.service.com` to `https://username:password@my.service.com`.
 
-### Examples
+#### Examples
 
-#### Sending SMS through Twilio
+##### Sending SMS through Twilio
 
 Use as URL:
 `https://{Your-Account-id}:{Your-Auth-Token}@api.twilio.com/2010-04-01/Accounts/{Your-Account-id}/Messages.json`
@@ -68,7 +70,7 @@ and as payload
 
 replacing `To` with your phone number and `From` with the one twilio attributed to you. Check the **Encode as form** checkbox.
 
-#### Creating an issue in Jira
+##### Creating an issue in Jira
 
 Use as URL:
 `https://{Your-Jira-Username}:{Your-Jira-Password}@{Your-Domain}.atlassian.net/rest/api/2/issue`

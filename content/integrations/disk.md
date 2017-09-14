@@ -8,17 +8,20 @@ platformmetrics:
     - Windows
   system.disk.write_time_pct:
     - Windows
+git_integration_title: disk
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview
 
 Get metrics related to disk usage and IO metrics.
 
-## Installation
+## Setup
+### Installation
 
 Included by default with the Datadog agent installation.
 
-## Configuration
+### Configuration
 
 
 This configuration does not require any explicit configuration to begin monititoring your storage devices.  One however can override the default settings to adjust how disks are monitored.
@@ -58,7 +61,7 @@ instances:
   # all_partitions: no
 {{< /highlight >}}
 
-## Validation
+### Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 {{< highlight shell >}}
@@ -78,7 +81,8 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git "system" "system.disk system.fs">}}
+{{< get-metrics-from-git "disk">}}
 

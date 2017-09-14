@@ -4,6 +4,7 @@ integration_title: TokuMX
 kind: integration
 git_integration_title: tokumx
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview
@@ -13,7 +14,8 @@ Capture TokuMX metrics in Datadog to:
 * Visualize key TokuMX metrics.
 * Correlate TokuMX performance with the rest of your applications.
 
-## Installation
+## Setup
+### Installation
 
 1.  Install the Python MongoDB module on your MongoDB server using the following command:
 
@@ -43,7 +45,7 @@ Capture TokuMX metrics in Datadog to:
 
 For more details about creating and managing users in MongoDB, refer to [the MongoDB documentation](http://www.mongodb.org/display/DOCS/Security+and+Authentication).
 
-## Configuration
+### Configuration
 
 Configure the Agent to connect to your TokuMX instance using your new Datadog user.
 
@@ -68,7 +70,7 @@ instances:
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 To validate that your integration is working run the Agent's info command. You should see output similar to the following:
 {{< highlight shell>}}
@@ -83,6 +85,7 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

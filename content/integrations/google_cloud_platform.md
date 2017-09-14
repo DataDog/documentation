@@ -28,8 +28,8 @@ Related integrations include:
 | [Storage](/integrations/google_cloud_storage) | unified object storage |
 | [VPN](/integrations/google_cloud_vpn) | managed network functionality |
 
-
-## Installation
+## Setup
+### Installation
 
 From the Integrations page in the Datadog app, select the Google Cloud Platform tile. Switch to the **Configuration** tab and click the **Sign in with Google** button. After you allow access enter the email associated with the account and the Project you wish to monitor. Enter the Project ID for each project. The Project ID is the multi-word id and not the Project Number.
 
@@ -51,17 +51,14 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 {{< img src="integrations/google_cloud_platform/GCPSetup.png" alt="settings" >}}
 
-
-## Metrics
-
-Google provides Stackdriver Loadbalancing metrics, but not by default. Contact your Google representative/support and ask to join the Stackdriver Loadbalancing metrics Beta. Once you've joined, you'll automatically start seeing `gcp.loadbalancing.*` metrics in Datadog.
-
-Otherwise, here's a list of all metrics collected by this integration:
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-
-## Tags Assigned
+## Further Reading
+### Knowledge Base
+#### Tags Assigned
 
 Tags are automatically assigned based on a variety of configuration options with regards to Google Cloud Platform and the Google Compute Engine. The following tags will be automatically assigned:
 

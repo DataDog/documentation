@@ -4,6 +4,7 @@ integration_title: Cacti
 kind: integration
 doclevel: basic
 git_integration_title: cacti
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
 
@@ -12,11 +13,12 @@ Connect Cacti to Datadog to:
 * Visualize Cacti metrics in Datadog.
 * Correlate metrics captured by Cacti with the rest of your applications.
 
-## Installation
+## Setup
+### Installation
 
 The Cacti check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Cacti servers.
 
-## Configuration
+### Configuration
 
 To capture Cacti metrics you need to install the Datadog Agent.
 
@@ -65,7 +67,7 @@ Find more information about this integration [here](https://app.datadoghq.com/ac
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 
@@ -81,6 +83,7 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

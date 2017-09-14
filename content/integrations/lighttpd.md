@@ -4,23 +4,25 @@ integration_title: Lighttpd
 kind: integration
 git_integration_title: lighttpd
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
-## Overview
 
 {{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" >}}
+
+## Overview
 
 Bring Lighttpd metrics to Datadog to:
 
 * Visualize your web server performance.
 * Correlate the performance of Ligttpd with the rest of your applications.
 
-{{< insert-example-links >}}
 
-## Installation
+## Setup
+### Installation
 
 Make sure that `mod_status` is installed on your Lighttpd server
 
-## Configuration
+### Configuration
 
 1.  Configure the Agent to connect to Lighttpd. Edit conf.d/lighttpd.yaml
 {{< highlight yaml>}}
@@ -37,7 +39,7 @@ instances:
 {{< /highlight >}}
 2.  Restart the Agent
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -51,7 +53,9 @@ Checks
       - instance #0 [OK]
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
-## Metrics
+
+## Data Collected
+### Metrics
 
 The following metrics are collected for either Lighttpd1 and Lighttpd2:
 

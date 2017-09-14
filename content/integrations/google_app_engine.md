@@ -16,8 +16,8 @@ Install the Google App Engine integration in your Python project to:
 
 You can also send custom metrics to Datadog.
 
-
-## Installation
+## Setup
+### Installation
 
 Ensure that Billing is enabled on your Google App Engine project to collect all metrics
 
@@ -73,7 +73,7 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
     # Import the Flask Framework
     from flask import Flask
     app = Flask(__name__)
-    # Note: We don't need to call run() since our application is embedded within
+    # We don't need to call run() since our application is embedded within
     # the App Engine WSGI application server.
 
     from dogapi import dog_stats_api as dog
@@ -100,12 +100,10 @@ For Python apps, you might use the dogapi library. Here is the Getting Started F
         """Return a custom 500 error."""
         return 'Sorry, unexpected error: {}'.format(e), 500
 
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
-
-
 
 -------------------------
 

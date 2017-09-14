@@ -15,11 +15,12 @@ With this integration:
 - Get notified when a project has a spike in error rates
 - Filter notifications by severity and release stage
 
-## Installation
+## Setup
+### Installation
 
 No installation is required.
 
-## Configuration
+### Configuration
 
 To integrate Bugsnag with Datadog:
 
@@ -41,10 +42,11 @@ To integrate Bugsnag with Datadog:
 
 8. Add more streams from the same project to see error events based on a different set of notification criteria.
 
-## Metrics
+## Data Collected
+### Metrics
 
 This integration does not include metrics at this time.
 
-## Events
+### Events
 
 This integration will push configured Bugsnag errors and alerts to your Datadog event stream.

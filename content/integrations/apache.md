@@ -4,23 +4,24 @@ integration_title: Apache
 kind: integration
 newhlevel: true
 git_integration_title: apache
+description: "{{< get-desc-from-git >}}"
 ---
 
-## Overview
-
 {{< img src="integrations/apache/apachegraph.png" >}}
+
+## Overview
 
 Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
 
   * Visualize your web server performance
   * Correlate the performance of Apache with the rest of your applications
 
-
-## Installation
+## Setup
+### Installation
 
 Make sure that [`mod_status`][3] is installed on your Apache server with `ExtendedStatus` set to `on`
 
-# Configuration
+### Configuration
 
 *To capture Apache metrics you need to install the Datadog agent.*
 
@@ -44,7 +45,7 @@ sudo /etc/init.d/datadog-agent restart
 
 {{< insert-example-links >}}
 
-## Validation
+### Validation
 
 To ensure the integration is installed correctly, run the agent info command.
 
@@ -63,7 +64,8 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 The following metrics are collected by default with the Apache integration:
 

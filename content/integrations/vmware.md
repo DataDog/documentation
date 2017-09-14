@@ -6,9 +6,9 @@ kind: integration
 newhlevel: true
 ---
 
-## Overview
-
 {{< img src="integrations/vmware/vsphere_graph.png" >}}
+
+## Overview
 
 Install the Datadog VMware vSphere integration to:
 
@@ -16,17 +16,15 @@ Install the Datadog VMware vSphere integration to:
 * Get vSphere events in Datadog and overlay them on top of your metrics (vMotion, configuration changes, on/off...).
 * Interact with your teams on dashboards and the event stream, showing all vSphere data at one glance.
 
-We also have an awesome blog post on vSphere which can be seen [here][1].
-
-
-## Installation
+## Setup
+### Installation
 
 1.  Install the Datadog windows agent on your vCenter server.
 1.  Create a Datadog user in the Administration section of vCenter, you can use the default Read-Only access group.
 
     {{< img src="integrations/vmware/vsphere_create_user.png" >}}
 
-## Configuration
+### Configuration
 
 1.  Configure the Agent to connect to your vCenter instance. Edit `conf.d/vsphere.yaml`:
 {{< highlight yaml>}}
@@ -41,7 +39,7 @@ instances:
 
 2.  Restart the Agent
 
-### Configuration Options
+#### Configuration Options
 
 * `ssl_verify` (Optional) - Set to false to disable SSL verification, when connecting to vCenter optional
 * `ssl_capath` (Optional) - Set to the absolute file path of a directory containing CA certificates in PEM format
@@ -53,7 +51,7 @@ instances:
 
 {{< insert-example-links conf="vsphere" check="vsphere" >}}
 
-## Validation
+### Validation
 
 Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
 {{< highlight shell>}}
@@ -68,25 +66,24 @@ Checks
       - Collected 8 metrics & 0 events
 {{< /highlight >}}
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
 
 ## Troubleshooting
-
-**How should the Datadog Agent be set up with vCenter and ESX?**
+### How should the Datadog Agent be set up with vCenter and ESX?
 
 {{< img src="integrations/vmware/vmware_agent.png" >}}
 
-**How will a VMware integration impact my monthly billing?**
+### How will a VMware integration impact my monthly billing?
 
 The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ][4] page.
 
 
-
-
-
+## Further Reading
+We also have an awesome blog post on vSphere which can be seen [here][1].
 
 [1]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/
 [4]: http://docs.datadoghq.com/guides/billing/

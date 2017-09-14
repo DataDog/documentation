@@ -8,9 +8,9 @@ sidebar:
     - text: Overview
       href: "#overview"
     - text: Deploying the Agent
-      href: "#deployagent"
+      href: "#deploying-the-agent"
     - text: Deploying the Handler
-      href: "#deployhandler"
+      href: "#deploying-the-handler"
     - text: Customizations
       href: "#customizations"
 ---
@@ -21,7 +21,7 @@ OVERVIEW
 ======================================================
 -->
 
-<h3 id="overview">Overview</h3>
+## Overview
 
 In this guide, we will explore how to leverage [Chef](https://www.chef.io/chef/)
 to automate installation of the Datadog Agent
@@ -36,7 +36,7 @@ DEPLOYING THE AGENT
 ======================================================
 -->
 
-<h3 id="deployagent">Deploying the Agent</h3>
+## Deploying the Agent
 
 We created a cookbook to assist with Agent deployment.
 
@@ -79,7 +79,7 @@ DEPLOYING THE HANDLER
 ======================================================
 -->
 
-<h3 id="deployhandler">Deploying the Handler</h3>
+## Deploying the Handler
 
 In order to further raise the visibility of your Chef runs, you may use the Datadog Chef Handler to monitor your Chef execution.
 
@@ -101,7 +101,7 @@ CUSTOMIZATIONS
 ======================================================
 -->
 
-<h3 id="customizations">Customizations</h3>
+## Customizations
 
 The Datadog Chef Cookbook provides more integration-specific recipes.
 

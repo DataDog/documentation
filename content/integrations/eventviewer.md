@@ -11,9 +11,8 @@ Connect Event Viewer to Datadog in order to:
 * Track system and application events in Datadog.
 * Correlate system and application events with the rest of your application.
 
-
-## Configuration
-
+## Setup
+### Configuration
 
 Use the Windows Event Viewer GUI to list all the event logs you can capture with this integration.
 
@@ -28,13 +27,14 @@ For instance, to see the latest event logged in the `Security` LogFile, use:
 
 The values listed in the output of the command are the ones you can set in `win32_event_log.yaml` to capture the same kind of events.
 
-**Note**: the information given by the `Get-EventLog` PowerShell command or the Windows Event Viewer
-GUI may slightly differ from `Get-WmiObject`, so we recommend you to double-check your filters' values
-with `Get-WmiObject` if the integration does not capture the events you set up.
+<div class="alert alert-info">
+The information given by the  <code> Get-EventLog</code> PowerShell command or the Windows Event ViewerGUI may slightly differ from <code>Get-WmiObject</code>.<br>
+Please double-check your filters' values with <code>Get-WmiObject</code> if the integration doesn't capture the events you set up.
+</div>
 
 **This integration requires a Datadog Agent version >= 3.2.4**
 
-1. Configure one or more filters for the event log. A filter allows you to choose what log events you want to get into Datadog.
+1 - Configure one or more filters for the event log. A filter allows you to choose what log events you want to get into Datadog.
 
 You can filters on the following properties:
 
@@ -69,10 +69,10 @@ instances:
             - System
 {{< /highlight >}}
 
-2. Restart the Agent using the Agent Manager (or restart the service)
+2 - Restart the Agent using the Agent Manager (or restart the service)
 {{< insert-example-links conf="win32_event_log" check="win32_event_log" >}}
 
-## Validation
+### Validation
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 

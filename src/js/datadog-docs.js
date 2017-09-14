@@ -165,11 +165,14 @@ $(document).ready(function() {
     });
 
     $('h2, h3, h4, h5').each(function() {
-        var id = $(this).attr('id') || '';
+        var id = $(this).attr('id') || $(this).parent().attr('href') || '';
+        if (id.indexOf('#') == -1) {
+            id = '#' + id;
+        }
         var iconfa = '<i class="fa fa-link" aria-hidden="true"></i>';
         var iconglyph = '<span class="glyphicon glyphicon-link" aria-hidden="true"></span>';
-        var markup = '<a class="header-link" href="#'+id+'">'+iconglyph+'</a>';
-        if(!$(this).hasClass('linked-header')) {
+        var markup = '<a class="header-link" href="'+id+'">'+iconglyph+'</a>';
+        if(!$(this).hasClass('linked-header') && id.length > 1) {
             $(this).addClass('linked-header');
             $(this).prepend(markup);
         }

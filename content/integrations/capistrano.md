@@ -16,20 +16,21 @@ Install the Capistrano Datadog integration to:
 
 Once you enable this integration for a given `Capfile`, each Capistrano task that completes will be submitted as an event to Datadog. Role information and logging output are submitted, too.
 
-## Installation
+## Setup
+### Installation
 
 Install the `dogapi` Ruby gem:
 
         sudo gem install dogapi --version ">=1.10.0"
 
-## Configuration
+### Configuration
 
 Add the following to the beginning of any `Capfile` whose tasks you want to send to Datadog:
 
         require "capistrano/datadog"
         set :datadog_api_key, "${your_api_key}"
 
-## Validation
+### Validation
 
 After you've configured your `Capfile` and have run at least one Capistrano task:
 

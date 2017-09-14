@@ -5,6 +5,9 @@ integration_title: PagerDuty
 kind: integration
 doclevel: basic
 ---
+
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
+
 ## Overview
 
 Connect PagerDuty to Datadog in order to:
@@ -16,7 +19,6 @@ Connect PagerDuty to Datadog in order to:
 You can also check out [this documentation][1] from Pagerduty.
 
 Once you have Pagerduty integrated, you can check out our custom [Pagerduty Incident Trends][2].
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
 
 ## Troubleshooting
 ### How do I automatically resolve a PagerDuty service when a monitor recovers?

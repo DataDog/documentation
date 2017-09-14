@@ -135,29 +135,37 @@ languages:
           url: tracing/terminology/
           weight: 30
 
+        - identifier: customnav_tracingnav_environments
+          url: tracing/environments/
+          weight: 40
+
         - identifier: customnav_tracingnav_faq
           url: tracing/faq/
-          weight: 40
+          weight: 50
+
+        - identifier: customnav_tracingnav_help
+          url: tracing/help/
+          weight: 60
 
         - identifier: customnav_tracingnav_langs
           url: #
-          weight: 50
+          weight: 70
 
         - identifier: customnav_tracingnav_go
           url: tracing/go/
-          weight: 60
+          weight: 80
 
         - identifier: customnav_tracingnav_python
           url: tracing/python/
-          weight: 70
+          weight: 90
 
         - identifier: customnav_tracingnav_ruby
           url: tracing/ruby/
-          weight: 80
+          weight: 100
 
         - identifier: customnav_tracingnav_api
           url: tracing/api/
-          weight: 90
+          weight: 110
 
   ja:
     #languagename: "日本語"
