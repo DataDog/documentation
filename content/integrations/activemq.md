@@ -27,5 +27,8 @@ The ActiveMQ check does not emit any events.
 
 The ActiveMQ check does not submit any service checks.
 
+## Troubleshooting
+//get-troubleshooting-from-git//
+
 ## Further Reading
 //get-further-reading-from-git//
