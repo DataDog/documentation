@@ -183,8 +183,8 @@ languages:
         - identifier: customnav_lognav_explore
           url: log/explore/
           weight: 30
-        - identifier: customnav_lognav_pipeline
-          url: log/pipeline/
+        - identifier: customnav_lognav_processing
+          url: log/processing/
           weight: 40
         - identifier: customnav_lognav_parsing
           url: log/parsing/

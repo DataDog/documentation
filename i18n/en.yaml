@@ -144,8 +144,8 @@
 - id: customnav_lognav_collection
   translation: Collection
 
-- id: customnav_lognav_pipeline
-  translation: Pipeline
+- id: customnav_lognav_processing
+  translation: Processing
 
 - id: customnav_lognav_parsing
   translation: Parsing

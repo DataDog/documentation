@@ -1,5 +1,5 @@
 ---
-title: Log
+title: Collection
 kind: Documentation
 autotocdepth: 2
 hideguides: true
@@ -26,7 +26,7 @@ In order to start to gather your logs you need to:
 #   Logs                                                                 #
 # ====================================================================== #
 # The host of the Datadog intake server to send log data to
-log_dd_url: intake.sheepdog.datadoghq.com
+log_dd_url: intake.logs.datadoghq.com
 # The port to use when submitting the log lines
 log_dd_port: 10515
 {{< /highlight >}}
@@ -35,9 +35,10 @@ log_dd_port: 10515
 To start collecting logs for an integration, you need to add a log sections in your integration yaml file, this log section need to contain:
 
 * `type` : type of log input source (**tcp** / **udp** / **file**)
-* `port` / `path` : mandatory option to specify depending on `type`. For **tcp**/**udp** type you have to specify the `port`, for **file** you need to specify a `path`
-* `appname` : name of the application owning the log
+* `port` / `path` : mandatory option to specify depending on `type`. For **tcp**/**udp** `type` you have to specify the `port`, for **file** you need to specify its `path`
+* `service` : name of the service owning the log
 * `source` : \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+* `sourcecategory` : \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 ### Examples
 #### File log collection configuration
@@ -49,20 +50,23 @@ instances:
 (...)
 #Log section
 logs:
-  - type: file:
+  - type: file
     path: /var/log/access.log
     appname: nginx
-    source: http_access, nginx
+    source: nginx
+    sourcecategory: http_access
     tags: env:prod 
 
   - type: file
-    file: /var/log/error.log
+    path: /var/log/error.log
     appname: nginx
-    source: http_error, nginx
+    source: nginx
+    sourcecategory: http_error
 {{< /highlight >}}
 
 #### TCP/UDP Log collection configuration
-For java log collection for instance, you can forward your logs into the local 10514 port in TCP and edit your `jmx.yaml` file as such:
+
+If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP you can edit your `jmx.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
 init_config:
@@ -107,9 +111,9 @@ But if your log contain a date reserved attribute, then its value is considered 
 * `eventTime`
 * `published_date`
 
-You can also define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/pipeline/#log-date-remapper)
+You can also define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/processing/#log-date-remapper)
 <div class="alert alert-info">
-The recognized date formats are: `ISO8601`, `UNIX` (the milliseconds EPOCH format) and `RFC3164`.
+The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 ### `message` attribute
@@ -122,10 +126,10 @@ The `message` attribute is indexed as text for the [search bar](/log/explore/#se
 
 Each log has its own severity, and your datadog application levrage a lot this information. Hence the `severity` attribute is unique.
 
-If you have the log severity information in another attribute you can always remap it to the `severity` attribute with the [log severity remapper](/log/pipeline/#log-severity-remapper)
+If you have the log severity information in another attribute you can always remap it to the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
 
 ## What's next
 
 * Learn how to explore your logs [here](/log/explore)
-* Learn how to parse your logs [here](/log/pipeline)
+* Learn how to process your logs [here](/log/processing)
 * Learn more about parsing [here](/log/parsing)

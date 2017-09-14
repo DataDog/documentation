@@ -20,8 +20,8 @@ On this view you have:
 * [Time range](#time-range)
 * [Log list](#log-list)
 * [Columns](#columns)
-* [Search Bar](#search-bar)
 * [Facets](#facets)
+* [Search Bar](#search-bar)
 
 ## Time Range
 The time range allow you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
@@ -51,7 +51,6 @@ To display detail of a log line, just click on it:
 
 {{< img src="log/explore/log_in_log_list.png" alt="Log in log list" >}}
 
-
 ### View a log line in context
 When displaying the detail of a log line, you can ask to « view in context ». 
 It will remove any filters from your search bar and display log lines preceding this line and the few log lines following it.
@@ -61,6 +60,32 @@ If you send the log lines in syslog format, the hostname and app name correspond
 ## Columns
 In order to get more details about the objects you are looking at, you can select a few facets to display with the **Columns** button:
 {{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
+
+## Facets 
+
+A facet displays all the values expressed by an attribute or a tag. This is also a handle to easily filter over your data.
+
+A Facet helps you to break down your datasets over user(s), appname(s), etc ...
+
+### Create a Facet
+
+To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
+{{< img src="log/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
+
+Once this is done, the value of this attribute for all new logs is  stored and can be used for search either in the search bar or in the Facet Panel
+
+### Facet Panel
+
+Use facets to easily filters on your logs. The search bar and url will automatically reflect your selections.
+{{< img src="log/explore/facet_panel.png" alt="Facet panel" >}}
+
+### Expanded view
+
+You can expand a facet and access advanced search options.
+Include or exclude pattern within a facet.
+
+For example: You want to have all host starting by “i-06”: 
+{{< img src="log/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
 
 ## Search bar
 
@@ -93,14 +118,14 @@ Here are the available boolean operators:
 ### Facet search 
 To search on specific [facet](#facets) you need to [add them as facet first] 
 
-Once done, if your facet name is appname and you want to filter on the nginx value just enter: 
+Once done, if your facet name is service and you want to filter on the nginx value just enter: 
 
-`appname:nginx`
+`service:nginx`
 
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-* `appname:web*`  matches every log message that have an appname starting by “web”.
+* `service:web*`  matches every log message that have an service starting by “web”.
 * `hello*` matches all log message starting with hello
 * `*hello` matches all log message that ends with hello
 
@@ -111,34 +136,13 @@ They can be used in the search and in facets as well. However for the search bar
 
 All search parts relating to tags will be prefixed with tags: 
 
-* `tags:test` is searching for the tag #test.
-* `tags:("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
-* `tags:("service:srvA" OR "service:srvB")` or `tags:(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
-* `tags:("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
+* `test` is searching for the tag #test.
+* `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
+* `("service:srvA" OR "service:srvB")` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
+* `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
 
+## What's next
 
-## Facets 
-
-A facet displays all the values expressed by an attribute or a tag. This is also a handle to easily filter over your data.
-
-A Facet helps you to break down your datasets over user(s), appname(s), etc ...
-
-### Create a Facet
-
-To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
-{{< img src="log/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
-
-Once this is done, the value of this attribute for all new logs is  stored and can be used for search either in the search bar or in the Facet Panel
-
-### Facet Panel
-
-Use facets to easily filters on your logs. The search bar and url will automatically reflect your selections.
-{{< img src="log/explore/facet_panel.png" alt="Facet panel" >}}
-
-### Expanded view
-
-You can expand a facet and access advanced search options.
-Include or exclude pattern within a facet.
-
-For example: You want to have all host starting by “i-06”: 
-{{< img src="log/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
+* Learn how to explore your logs [here](/log/explore)
+* Learn how to process your logs [here](/log/processing)
+* Learn more about parsing [here](/log/parsing)
