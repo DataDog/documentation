@@ -49,6 +49,10 @@ into this log:
 With one single pipeline as follow:
 
 {{< img src="log/processing/pipeline_processors_sketch.png" alt="Pipelines processor sketch" style="width:90%;">}}
+### Pipeline filters
+
+{{< img src="log/processing/pipeline_filters.png" alt="Pipelines processor sketch" style="width:90%;">}}
+
 
 ### Pipelines Goal 
 
@@ -70,7 +74,6 @@ Those pipeline are read-only but can be cloned for further customisation:
 
 
 {{< img src="log/processing/cloning_pipeline.png" alt="Cloning pipeline" >}}
-
 
 ## Processors
 
