@@ -24,11 +24,11 @@ On this view you have:
 * [Search Bar](#search-bar)
 
 ## Time Range
-The time range allow you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
+Time range allows you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
 {{< img src="log/explore/timeline.png" alt="Timeline" >}}
 
-You can change the time periode displayed with quick ranges that are directly available:
+Change the time periode displayed with quick ranges that are directly available:
 
 {{< img src="log/explore/timerange.png" alt="Timerange" style="width:75%;">}}
 
@@ -38,7 +38,7 @@ The log list is the list of events that match the selected context, a context is
 
 ### Sorting the log list
 
-You can click on the **date** columns to get your logs in an ascending or descending order in the Log list.
+Click on the **date** columns to get your logs in an ascending or descending order in the Log list.
 
 ### Filtering the log list
 If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criterias:
@@ -52,13 +52,13 @@ To display detail of a log line, just click on it:
 {{< img src="log/explore/log_in_log_list.png" alt="Log in log list" >}}
 
 ### View a log line in context
-When displaying the detail of a log line, you can ask to « view in context ». 
-It will remove any filters from your search bar and display log lines preceding this line and the few log lines following it.
+When displaying the detail of a log line, ask to « view in context ». 
+It removes any filters from your search bar and display log lines preceding this line and the few log lines following it.
 
-If you send the log lines in syslog format, the hostname and app name corresponding to the log line will automatically be selected.
+If you send the log lines in syslog format, the hostname and app name corresponding to the log line are automatically be selected.
 
 ## Columns
-In order to get more details about the objects you are looking at, you can select a few facets to display with the **Columns** button:
+In order to get more details about the objects you are looking at, select a few facets to display with the **Columns** button:
 {{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
 
 ## Facets 
@@ -76,13 +76,13 @@ Once this is done, the value of this attribute for all new logs is  stored and c
 
 ### Facet Panel
 
-Use facets to easily filters on your logs. The search bar and url will automatically reflect your selections.
+Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
 {{< img src="log/explore/facet_panel.png" alt="Facet panel" >}}
 
 ### Expanded view
 
-You can expand a facet and access advanced search options.
-Include or exclude pattern within a facet.
+Expand a facet to access advanced search options like 
+Including or excluding a pattern within a facet.
 
 For example: You want to have all host starting by “i-06”: 
 {{< img src="log/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
@@ -132,9 +132,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 ### Tags
 
 Your logs inherit tags from their [host](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/). 
-They can be used in the search and in facets as well. However for the search bar, there are specific rules for the tags:
-
-All search parts relating to tags will be prefixed with tags: 
+They can be used in the search and in facets as well:
 
 * `test` is searching for the tag #test.
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 

@@ -13,7 +13,8 @@ Datadog's log management solution is actualy in private beta. If you'd like to a
 
 The implemented standard to parse log entries is named grok.
 
-With grok, you can turn unstructured log and event data into structured data.
+It allows you to turn unstructured log and event data into structured data.
+
 Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
 
 Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
@@ -43,8 +44,6 @@ You would have at the end this structued log:
 ```
 
 {{< img src="log/parsing/parsing_example_1.png" alt="Parsing example 1" >}}
-
-As you can see there are specific rules for timestamps. We will come back to this.
 
 ## Matcher
 
@@ -113,7 +112,7 @@ This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList
 * `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
 * `quotingStr` : defines quotes. Default behavior which detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For e.g. `<>` matches *test=<toto sda> test2=test* .
 
-You can use filters such as **keyvalue()** to more-easily map strings to attribute: 
+Use filters such as **keyvalue()** to more-easily map strings to attribute: 
 
 log: 
 ```
@@ -134,7 +133,7 @@ If you add an **extract** parameter in your rule pattern you would have:
 
 ### Timestamp
 
-The date matcher will transform your timestamp in the EPOCH format.
+The date matcher transforms your timestamp in the EPOCH format.
 
 
 ||||
@@ -174,8 +173,8 @@ Rule user:%{word:user.firstname} (name:%{word:user.name}|id:%{integer:user.id}) 
 
 ### Optional attribute 
 
-Let’s say that in your logs you sometimes have the user id but not all the time. 
-You can make attributes optional with `()?` so as to extract the value only when it is present :
+In your logs you sometimes have the user id but not all the time. 
+Make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
 
 **Log**:
 ```
@@ -187,14 +186,14 @@ user:john id:123 connected on 11/08/2017
 Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Note**: you will usually  need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
+**Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
 {{< img src="log/parsing/parsing_example_5.png" alt="Parsing example 5" >}}
 
 {{< img src="log/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" >}}
 
 ### Regex 
-You can use regex to match any substring of your log message.
+Use the regex matcher to match any substring of your log message.
 **Log**:
 ```
 this is a test message id: 12ab3cd4 for appname foo_1

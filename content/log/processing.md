@@ -24,7 +24,7 @@ Your pipeline view should look like this:
 
 Please note that When installing an integration, we automatically install the corresponding pipeline.
 
-A log goes through all [processors](#processors) inside a pipline before being stored in your Datadog application, for instance you can transform this log:
+A log goes through all [processors](#processors) within a pipline before being stored in your Datadog application, for instance processors can transform this log:
 {{< highlight json >}}
 {
 "message":"john clicked on a link : www.datadoghq.com for app dd_app",
@@ -51,14 +51,21 @@ With one single pipeline as follow:
 {{< img src="log/processing/pipeline_processors_sketch.png" alt="Pipelines processor sketch" style="width:90%;">}}
 ### Pipeline filters
 
-{{< img src="log/processing/pipeline_filters.png" alt="Pipelines processor sketch" style="width:90%;">}}
+Attach a filter to your pipeline in order to apply it only to a subset of your logs. 
 
+The filter syntax is the same as the [search bar](/log/explore/#search-bar).
+
+** Be aware that the pipeline filtering is applied before any pipeline processing, hence you can not filter on an attribute that does not exists** 
+
+Check to wich subset of logs your pipeline is applied to in the log list displayed: 
+
+{{< img src="log/processing/pipeline_filters.png" alt="Pipelines processor sketch" style="width:90%;">}}
 
 ### Pipelines Goal 
 
 With pipelines you have the opportunity to manipulate your logs through a sequential chains of [processors](/log/processing/#processors) in order to extract meaningful information or to extract attributes from semi-structured text to re-use them as [facet](/log/explore/#facets).
 
-You can also take all your logs whatever they source and are able to handle a unifed and structured format on your Datadog application.
+Pipelines allows you to take all your logs whatever they source and transform them to handle a unifed and structured format on your Datadog application.
 
 In the following example we have at the begining 3 differents raw logs:
 
@@ -89,10 +96,10 @@ Find more about this in our dedicated [parsing section](/log/parsing)
 
 ### Useragent parser
 
-UserAgent processor will take a useragent and extract its meaningful informations.
+UserAgent processor takes a useragent and extract its meaningful informations.
 It is also able to recognize the main bots like the Google Bot, Yahoo Slurp, Bing and others.
 
-Some servers or systems (such as IIS) encode useragents, that's why you can ask this processor to **Apply a URL decode first** before parsing it.
+Some servers or systems (such as IIS) encode useragents, if so ask this processor to **Apply a URL decode first** before parsing it.
 
 This settings: 
 {{< img src="log/processing/useragent_processor_tile.png" alt="Useragent processor tile" >}}
@@ -104,10 +111,10 @@ Give the following results:
 
 By default and as explained [here](/log/#the-date-attribute) your Datadog application has a couple of reserved attributes that are, by default, considered as the date reference for the main timeline.
 
-However, if you have your own date attribute that does not belong to this list, you can define it as the offical log timestamp with the log date remapper processor:
+However, if you have your own date attribute that does not belong to this list, define it as the offical log timestamp with the log date remapper processor:
 {{< img src="log/processing/log_date_remapper.png" alt="Log date remapper" >}}
 
-Otherwise the default will be the reception time of the log
+Otherwise the default timestamp is the reception time of the log by the Datadog intake API.
 
 ### Log Severity Remapper
 
@@ -115,7 +122,7 @@ This processor allow you to define any attribute(s) of your log as the offical s
 
 {{< img src="log/processing/severity_remapper_processor_tile.png" alt="Severity remapper processor tile" >}}
 
-It will transform this log:
+It transforms this log:
 {{< highlight json >}}
 {
 "message":"john clicked on a link : www.datadoghq.com for app dd_app",
@@ -135,11 +142,11 @@ Into this log:
 ### Attribute Remapper
 
 This processor remaps any attribute(s) to another one, 
-for instance you can remap “user_id” to “user.id”
+for instance here it remaps “user_id” to “user.id”
 
 {{< img src="log/processing/attribute_remapper_processor_tile.png" alt="Attribute remapper processor tile" >}}
 
-It will transform this log:
+It transforms this log:
 {{< highlight json >}}
 {
 "message":"john clicked on a link : www.datadoghq.com for app dd_app",

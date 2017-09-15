@@ -66,7 +66,7 @@ logs:
 
 #### TCP/UDP Log collection configuration
 
-If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP you can edit your `jmx.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
+If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP edit your `jmx.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
 init_config:
@@ -111,7 +111,7 @@ But if your log contain a date reserved attribute, then its value is considered 
 * `eventTime`
 * `published_date`
 
-You can also define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/processing/#log-date-remapper)
+Define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/processing/#log-date-remapper)
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
@@ -120,13 +120,13 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 By default, your datadog application considers the `message` attribute as the content to display in priority in your [log list](/log/explore/#log-list).
 
-The `message` attribute is indexed as text for the [search bar](/log/explore/#search-bar) so you can search over any tokenized word without mentioning the path to the attribute.
+The `message` attribute is indexed as text for the [search bar](/log/explore/#search-bar) allowing you to search over any tokenized word without mentioning the path to the attribute.
 
 ### `severity` attribute
 
 Each log has its own severity, and your datadog application levrage a lot this information. Hence the `severity` attribute is unique.
 
-If you have the log severity information in another attribute you can always remap it to the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
+If you have the log severity information in another attribute remap it to the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
 
 ## What's next
 
