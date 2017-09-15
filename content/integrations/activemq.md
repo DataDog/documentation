@@ -15,17 +15,7 @@ description: "{{< get-desc-from-git >}}"
 //get-setup-from-git//
 
 ## Data Collected
-### Metrics
-
-{{< get-metrics-from-git >}}
-
-### Events
-
-The ActiveMQ check does not emit any events.
-
-### Service Checks
-
-The ActiveMQ check does not submit any service checks.
+//get-data-collected-from-git//
 
 ## Troubleshooting
 //get-troubleshooting-from-git//
