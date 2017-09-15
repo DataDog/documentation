@@ -34,6 +34,10 @@ TROUBLESHOOTING_PATTERN= r'## Troubleshooting((?s).*)## Further Reading'
 
 FURTHER_READING_TOKEN = "//get-further-reading-from-git//"
 FURTHER_READING_PATTERN= r'## Further Reading((?s).*)'
+
+METRIC_TOKEN = "{{< get-metrics-from-git >}}"
+METRIC_PATERN= r'See \[metadata\.csv\].*provided by this integration.'
+
 """
 Functions
 """
@@ -189,7 +193,13 @@ def readme_get_section(from_path,key_name):
 
         result = re.search(DATA_COLLECTED_PATTERN, filedata)
         if result:
-            data_array.append([DATA_COLLECTED_TOKEN,result.group(1)])
+            try:
+                #Inlining metric token to display metric array
+                result = re.sub(METRIC_PATERN,METRIC_TOKEN, result.group(1))
+            except Exception as error:
+                print(error)
+                pass
+            data_array.append([DATA_COLLECTED_TOKEN,result])
         else:
             print("unable to find the pattern {} in file {}{}".format(DATA_COLLECTED_PATTERN,from_path, key_name))
 
