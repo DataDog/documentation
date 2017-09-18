@@ -78,7 +78,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                                     "data-relpermalink" in item.attrs]
                                 url = docs_host + str(url_relpermalink[0]) if url_relpermalink else docs_host
 
-                                # create articgit object
+                                # create article object
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
