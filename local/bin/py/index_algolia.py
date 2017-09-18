@@ -63,7 +63,8 @@ def index_algolia(app_id, api_key, content_path=None):
                                 desc_text = ""
                                 main = html.find("div", {"main"})
                                 if main:
-                                    desc_text = main.text[:7000]
+                                    main_text = main.text
+                                    desc_text = main_text.split()[:7000]
 
                                 fm_description = desc = html.findAll(attrs={"name": "description"})
 
