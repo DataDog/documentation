@@ -17,5 +17,8 @@ description: "{{< get-desc-from-git >}}"
 ## Data Collected
 //get-data-collected-from-git//
 
+## Troubleshooting
+//get-troubleshooting-from-git//
+
 ## Further Reading
 //get-further-reading-from-git//
