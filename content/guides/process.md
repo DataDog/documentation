@@ -83,7 +83,7 @@ and adding the following line to the `[Main]` section
 
     process_agent_enabled: true
     
-After configuration is complete, restart the Agent.
+After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
 
 ### Docker container
 
@@ -132,3 +132,5 @@ Live Processes supports a web proxy as [configured on the Agent](https://github.
 - Collection of open files and current working directory is limited based on the level of privilege of the user running dd-process-agent. In the event that dd-process-agent is able to access these fields, they will be collected automatically.
 
 - Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
+
+- The Process Agent is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
