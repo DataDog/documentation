@@ -6,7 +6,7 @@ hideguides: true
 customnav: lognav
 ---
 <div class="alert alert-info">
-Datadog's log management solution is actualy in private beta. If you'd like to apply to participate in the private beta, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview 

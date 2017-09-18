@@ -6,22 +6,20 @@ hideguides: true
 customnav: lognav
 ---
 <div class="alert alert-info">
-Datadog's log management solution is actualy in private beta. If you'd like to apply to participate in the private beta, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
-
 ## Overview 
 
 The Log explorer is an optimized view which makes it easy to do any kind of troubleshooting and data exploration.
 
 {{< img src="log/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
 
-On this view you have:
+In this view you can:
 
-* [Time range](#time-range)
-* [Log list](#log-list)
-* [Columns](#columns)
-* [Facets](#facets)
-* [Search Bar](#search-bar)
+* [Interact with the Time range](#time-range)
+* [Display logs into lists](#log-list)
+* [Use facets to help you in various investigations](#facets)
+* [Enter search queries](#search-bar)
 
 ## Time Range
 Time range allows you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
@@ -57,16 +55,21 @@ It removes any filters from your search bar and display log lines preceding this
 
 If you send the log lines in syslog format, the hostname and app name corresponding to the log line are automatically be selected.
 
-## Columns
+### Columns
 In order to get more details about the objects you are looking at, select a few facets to display with the **Columns** button:
 {{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
 
 ## Facets 
 
-A facet displays all the values expressed by an attribute or a tag. This is also a handle to easily filter over your data.
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a handle to easily filter over your data.
 
 A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
+/////\\\\\\<br>
+/////\\\\\\<br>
+/////\\\\\\Add gif of how facet works<br>
+/////\\\\\\<br>
+/////\\\\\\<br>
 ### Create a Facet
 
 To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
@@ -116,11 +119,12 @@ Here are the available boolean operators:
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 
 ### Facet search 
-To search on specific [facet](#facets) you need to [add them as facet first] 
+To search on specific [facet](#facets) you need to [add them as facet first]()
+then add `@` to specify you are searcing on a facet.
 
-Once done, if your facet name is service and you want to filter on the nginx value just enter: 
+For instance, if your facet name is service and you want to filter on the nginx value just enter: 
 
-`service:nginx`
+`@service:nginx`
 
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:

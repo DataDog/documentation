@@ -7,7 +7,7 @@ customnav: lognav
 ---
 
 <div class="alert alert-info">
-Datadog's log management solution is actualy in private beta. If you'd like to apply to participate in the private beta, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
@@ -19,35 +19,36 @@ Collecting logs is **disabled** by default in the Datadog-Agent.
 In order to start to gather your logs you need to:
 
 1. [Install the latest Datadog Agent](https://app.datadoghq.com/account/settings#agent).
-2. Uncomment those lines in your `datadog.conf` file:
+
+/////\\\\\\<br>
+/////\\\\\\<br>
+/////\\\\\\Add specific steps once we have the definitive process<br>
+/////\\\\\\<br>
+/////\\\\\\<br>
+
+## Enabling log collection from integrations
+
+To start collecting logs for an integration, you need to uncomment the log sections in your integration yaml file, and then set its parameters values according to your infrastructure.
+
+If you don't find a log section in your file you need to use the custom file configuration below instead. 
+
+## Custom log collection
+
+To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit those parameter:
+* `type` : (manatory) type of log input source (**tcp** / **udp** / **file**)
+* `port` / `path` : (mandatory) option depending on `type`.
+* `service` : (mandatory) name of the service owning the log
+* `source` : (mandatory) attribute that defines which integration is sending the logs. It can be a custom one if the integration does not exist
+* `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
+* `tags`: (optional) add tags to each logs collected.
+
+### Tail existing files
+Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
+
+Example: 
+If you want to gather you nginx logs for instance stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `custom-logs.yaml` file as follow
 
 {{< highlight yaml >}}
-# ====================================================================== #
-#   Logs                                                                 #
-# ====================================================================== #
-# The host of the Datadog intake server to send log data to
-log_dd_url: intake.logs.datadoghq.com
-# The port to use when submitting the log lines
-log_dd_port: 10515
-{{< /highlight >}}
-
-## Collect logs with an Integrations
-To start collecting logs for an integration, you need to add a log sections in your integration yaml file, this log section need to contain:
-
-* `type` : type of log input source (**tcp** / **udp** / **file**)
-* `port` / `path` : mandatory option to specify depending on `type`. For **tcp**/**udp** `type` you have to specify the `port`, for **file** you need to specify its `path`
-* `service` : name of the service owning the log
-* `source` : mandatory attribute that defines which integration is sending the logs. It can be a custom one if the integration does not exist
-* `sourcecategory` : Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
-
-### Examples
-#### File log collection configuration
-If you want to gather you nginx logs for instance stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `nginx.yaml` file as follow
-
-{{< highlight yaml >}}
-init_config:
-instances:
-(...)
 #Log section
 logs:
   - type: file
@@ -64,15 +65,13 @@ logs:
     sourcecategory: http_error
 {{< /highlight >}}
 
-#### TCP/UDP Log collection configuration
+### Stream logs through TCP/UDP
+Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
-If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP edit your `jmx.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
+Example: 
+If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
-init_config:
-instances:
-  - whatever: anything
-(...)
 #Log section
 logs:
     - type: tcp
@@ -82,28 +81,15 @@ logs:
 
 {{< /highlight >}}
 
-## Collect log from a custom log file
-
-To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit the desired parameters as seen in the previous section.
-
-{{< highlight yaml >}}
-logs:
-  - type: file
-    path: /path/to/your/file.log
-    service: name_of_your_app
-    tags: my_tag_name:my_tag_value
-    source: source_name
-{{< /highlight >}}
-
 ## Reserved attributes 
 
 This section is relevant only if you log are JSON formated.
-If so, you need to be aware that some JSON attributes have a specific interaction with your datadog application:
+If so, you need to be aware that some JSON attributes have some special meaning for Datadog.
 
 ### `date` attribute
-By default your datadog application generates a timestamp for your lag that corresponds to the reception date. This field is used to display your data over the timeline.
+By default Datadog generates a timestamp on any log that come through.
 
-But if your log contain a date reserved attribute, then its value is considered as the official log timestamp, date reserved attributes are:
+However, if your logs defines one of the following attributes Datadog considers it at the official date:
 
 * `timestamp`
 * `date`
@@ -112,22 +98,22 @@ But if your log contain a date reserved attribute, then its value is considered 
 * `eventTime`
 * `published_date`
 
-Define any attribute as the official timestamp of your logs with the [log date remapper processor](/log/processing/#log-date-remapper)
+You can also ask Datadog to consider any attribute as the official date reference thanks to the [log date remapper processor](/log/processing/#log-date-remapper)
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 ### `message` attribute
 
-By default, your datadog application considers the `message` attribute as the content to display in priority in your [log list](/log/explore/#log-list).
+By default, Datadog considers the `message` as the main content of the log. It has then a special display in the [log list](/log/explore/#log-list) and you can run full text search on it.
 
 The `message` attribute is indexed as text for the [search bar](/log/explore/#search-bar) allowing you to search over any tokenized word without mentioning the path to the attribute.
 
 ### `severity` attribute
 
-Each log has its own severity, and your datadog application levrage a lot this information. Hence the `severity` attribute is unique.
+Each log has its own severity, and your datadog application levrage a lot this information.
 
-If you have the log severity information in another attribute remap it to the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
+If you would like to remap some severities existing in the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
 
 ## What's next
 
