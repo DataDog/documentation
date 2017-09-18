@@ -68,11 +68,8 @@ def index_algolia(app_id, api_key, content_path=None):
 
                                 fm_description = desc = html.findAll(attrs={"name": "description"})
 
-                                if fm_description:
-                                    description = desc[0]['content'].encode('utf-8')
-                                else:
-                                    desc_text = " ".join(desc_text)
-                                    description = desc_text
+                                desc_text = " ".join(desc_text)
+                                description = desc_text
 
                                 # create url
                                 url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
