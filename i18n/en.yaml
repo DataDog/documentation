@@ -136,6 +136,23 @@
 - id: customnav_tracingnav_api
   translation: "Tracing API"
 
+# Logs
+
+- id: customnav_lognav
+  translation: Logs
+
+- id: customnav_lognav_collection
+  translation: Collection
+
+- id: customnav_lognav_processing
+  translation: Processing
+
+- id: customnav_lognav_parsing
+  translation: Parsing
+
+- id: customnav_lognav_explore
+  translation: Explore
+
 # taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."

@@ -32,46 +32,51 @@ languages:
           name: "Tracing"
           url: "tracing/"
           weight: 20
+        - identifier: menu_references_log
+          name: "Log"
+          url: "log/"
+          weight: 30
         - identifier: menu_references_libraries
           name: ""
           url: "libraries/"
-          weight: 30
+          weight: 40
         - identifier: menu_references_monitoring
           name: ""
           url: "monitoring/"
-          weight: 40
+          weight: 50
         - identifier: menu_references_graphing
           name: ""
           url: "graphing/"
-          weight: 50
+          weight: 60
         - identifier: menu_references_host_names
           name: ""
           url: "hostnames/"
-          weight: 60
+          weight: 70
         - identifier: menu_references_integrations
           name: ""
           url: "integrations/"
-          weight: 70
+          weight: 80
         - identifier: menu_references_dogstatsd
           name: ""
           url: "guides/dogstatsd/"
-          weight: 80
+          weight: 90
         - identifier: menu_references_examples
           name: ""
           url: "examples/"
-          weight: 90
+          weight: 100
         - identifier: menu_references_videos
           name: ""
           url: "videos/"
-          weight: 100
+          weight: 110
         - identifier: menu_references_billing
           name: ""
           url: "guides/billing/"
-          weight: 110
+          weight: 120
         - identifier: menu_references_faq
           name: ""
           url: "faq/"
-          weight: 120
+          weight: 130
+          
       basic_agent:
         - identifier: amazonlinux
           name: "Amazon Linux"
@@ -122,6 +127,7 @@ languages:
           name: "From Source"
           url: guides/basic_agent_usage/source/
           weight: 100
+
       tracingnav:
         - identifier: customnav_tracingnav_tracing
           url: "#"
@@ -166,6 +172,24 @@ languages:
         - identifier: customnav_tracingnav_api
           url: tracing/api/
           weight: 110
+
+      lognav:
+        - identifier: customnav_lognav
+          url: "#"
+          weight: 10
+        - identifier: customnav_lognav_collection
+          url: log/
+          weight: 20
+        - identifier: customnav_lognav_explore
+          url: log/explore/
+          weight: 30
+        - identifier: customnav_lognav_processing
+          url: log/processing/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: log/parsing/
+          weight: 50
+
 
   ja:
     #languagename: "日本語"
