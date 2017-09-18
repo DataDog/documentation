@@ -65,7 +65,7 @@ In order to get more details about the objects you are looking at, select a few 
 
 A facet displays all the values expressed by an attribute or a tag. This is also a handle to easily filter over your data.
 
-A Facet helps you to break down your datasets over user(s), appname(s), etc ...
+A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
 ### Create a Facet
 

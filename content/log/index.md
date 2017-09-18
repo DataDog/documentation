@@ -37,8 +37,8 @@ To start collecting logs for an integration, you need to add a log sections in y
 * `type` : type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : mandatory option to specify depending on `type`. For **tcp**/**udp** `type` you have to specify the `port`, for **file** you need to specify its `path`
 * `service` : name of the service owning the log
-* `source` : \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-* `sourcecategory` : \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+* `source` : mandatory attribute that defines which integration is sending the logs. It can be a custom one if the integration does not exist
+* `sourcecategory` : Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 
 ### Examples
 #### File log collection configuration
@@ -52,14 +52,14 @@ instances:
 logs:
   - type: file
     path: /var/log/access.log
-    appname: nginx
+    service: nginx
     source: nginx
     sourcecategory: http_access
     tags: env:prod 
 
   - type: file
     path: /var/log/error.log
-    appname: nginx
+    service: nginx
     source: nginx
     sourcecategory: http_error
 {{< /highlight >}}
@@ -71,12 +71,13 @@ If your java application doesn't log into a file but forwards its logs on the lo
 {{< highlight yaml >}}
 init_config:
 instances:
+  - whatever: anything
 (...)
 #Log section
 logs:
     - type: tcp
       port: 10514
-      appname: java
+      service: java
       source: java
 
 {{< /highlight >}}
@@ -89,7 +90,7 @@ To send custom log file that would not be part of an existing integration. Renam
 logs:
   - type: file
     path: /path/to/your/file.log
-    appname: name_of_your_app
+    service: name_of_your_app
     tags: my_tag_name:my_tag_value
     source: source_name
 {{< /highlight >}}
