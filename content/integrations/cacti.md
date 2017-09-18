@@ -7,7 +7,6 @@ git_integration_title: cacti
 description: "{{< get-desc-from-git >}}"
 ---
 
-
 ## Overview
 //get-overview-from-git//
 
