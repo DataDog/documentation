@@ -63,8 +63,8 @@ def index_algolia(app_id, api_key, content_path=None):
                                 desc_text = ""
                                 main = html.find("div", {"main"})
                                 if main:
-                                    main_text = main.text
-                                    desc_text = main_text.split()[:25]
+                                    desc_text = main.text
+
                                 fm_description = desc = html.findAll(attrs={"name": "description"})
 
                                 if fm_description:
@@ -78,7 +78,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                                     "data-relpermalink" in item.attrs]
                                 url = docs_host + str(url_relpermalink[0]) if url_relpermalink else docs_host
 
-                                # create article object
+                                # create articgit stasfasdfle object
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
