@@ -19,17 +19,7 @@ description: "{{< get-desc-from-git >}}"
 //get-setup-from-git//
 
 ## Data Collected
-### Metrics
-
-{{< get-metrics-from-git "disk">}}
-
-### Events
-
-The disk check does not include any event at this time.
-
-### Service Checks
-
-The disk check does not include any service check at this time.
+//get-data-collected-from-git//
 
 ## Troubleshooting
 //get-troubleshooting-from-git//
