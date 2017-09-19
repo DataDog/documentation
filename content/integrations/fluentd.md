@@ -11,73 +11,16 @@ description: "{{< get-desc-from-git >}}"
 {{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" >}}
 
 ## Overview
-Get metrics from Fluentd in real time to
-
-* Visualize Fluentd performance.
-* Correlate the performance of Fluentd with the rest of your applications.
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-Configure your fluentd to use a monitor agent and plugin id (see doc), for instance:
-
-    <source>
-      type monitor_agent
-      bind 0.0.0.0
-      port 24220
-    </source>
-    <match test>
-      id   plg1
-      type forward
-      <server>
-        host localhost
-      </server>
-    </match>
-
-    <match **>
-      id   plg2
-      type forward
-      <server>
-        host localhost
-      </server>
-    </match>
-
-### Configuration
-
-Configure the Agent to connect to fluentd, and set the plugins id you want to monitor
-Edit `conf.d/fluentd.yaml`
-{{< highlight yaml>}}
-init_config:
-
-instances:
-    # For every instance, you have an `monitor_agent_url`
-    # and (optionally) a list of tags.
-    -  monitor_agent_url: http://example.com:24220/api/plugins.json
-       plugin_ids:
-         - plg1
-         - plg2
-{{< /highlight >}}
-{{< insert-example-links >}}
-
-### Validation
-
-1.  Restart the Agent
-2.  Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
-{{< highlight shell>}}
-Checks
-======
-
-  [...]
-
-  fluentd
-  -------
-      - instance #0 [OK]
-      - Collected 8 metrics & 0 events
-{{< /highlight >}}
-
-Not sure how to execute the last two steps? Visit the Agent Usage Guide for more detailed instructions.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//
