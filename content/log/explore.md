@@ -105,7 +105,7 @@ There are two types of terms:
 
 * A **Single Term** is a single word such as "test" or "hello".
 
-* A **Phrase** is a group of words surrounded by double quotes such as "hello dolly".
+* A **Sequence** is a group of words surrounded by double quotes such as "hello dolly" or "hello dolly"~2.
 
 Multiple terms can be combined together with Boolean operators to form a more complex query.
 

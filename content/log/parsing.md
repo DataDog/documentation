@@ -11,9 +11,8 @@ Datadog's log management solution is is currently in private beta. If you would 
 
 ## Overview 
 
-The implemented standard to parse log entries is named grok.
-
-It allows you to turn unstructured log and event data into structured data.
+The Grok syntax provides an easier way to parse logs than pure regular expressions. 
+The main usage of the Grok Parser is to extract attributes from semi-structured text messages.
 
 Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
 
@@ -47,12 +46,12 @@ You would have at the end this structued log:
 
 ## Matcher
 
-This is the list of all the available matchers available for your parsers:
+Here is the list of all the matchers natively implemented by Datadog:
 
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
-|`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp [More info](#timestamp)|
+|`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp [More info](#parsing-dates)|
 |`regex("pattern")` |matches a regex|
 | `data` |matches a string until the next newline |
 |`boolean("truePattern", "falsePattern")`|matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case)|
@@ -78,7 +77,7 @@ This is the list of all the available matchers available for your parsers:
 |`port` |matches a port number |
 
 ## Filter
-This is the list of all the available filters available for your parsers:
+Here is the list of all the filter natively implemented by Datadog:
 
 |||
 |:---|:---|
@@ -86,7 +85,7 @@ This is the list of all the available filters available for your parsers:
 |`number`| parses a match as double precision number.|
 |`integer`| parses a match as an integer number|
 |`boolean`| parses 'true' and 'false' strings as booleans ignoring case.|
-| `date("pattern"[, "timezoneId"[, "localeId"]])`| parses a date with the specified pattern to produce a unix timestamp. [More info](#timestamp)|
+| `date("pattern"[, "timezoneId"[, "localeId"]])`| parses a date with the specified pattern to produce a unix timestamp. [More info](#parsing-dates)|
 |`nullIf("value")`| returns null if the match is equal to the provided value.|
 |`json`| parses properly formatted JSON format|
 |`rubyhash`| parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})|
@@ -115,13 +114,15 @@ This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList
 Use filters such as **keyvalue()** to more-easily map strings to attribute: 
 
 log: 
+
 ```
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
 Rule
+
 ```
-rule keyvalue(separatorStr,characterWhiteList , quotingStr))
+rule keyvalue("="," "))
 ```
 
 {{< img src="log/parsing/parsing_example_2.png" alt="Parsing example 2" >}}
@@ -131,7 +132,7 @@ If you add an **extract** parameter in your rule pattern you would have:
 
 {{< img src="log/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" >}}
 
-### Timestamp
+### Parsing dates
 
 The date matcher transforms your timestamp in the EPOCH format.
 
@@ -146,7 +147,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 
-
+Parsing a date **doesn't** set its value as the log official date, for this you need to use the [Log Date Remapper](/log/processing/#log-date-remapper) .
 
 ### Conditional pattern
 
