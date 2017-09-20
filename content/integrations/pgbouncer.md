@@ -12,16 +12,7 @@ description: "{{< get-desc-from-git >}}"
 //get-setup-from-git//
 
 ## Data Collected
-### Metrics
-
-{{< get-metrics-from-git >}}
-
-### Events
-The PGbouncer check does not emit any events.
-
-### Service Checks
-**pgbouncer.can_connect**: 
-Agent is able to connect to the pgbouncer instance
+//get-data-collected-from-git//
 
 ## Troubleshooting
 //get-troubleshooting-from-git//

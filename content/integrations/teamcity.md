@@ -9,73 +9,92 @@ description: "{{< get-desc-from-git >}}"
 
 ## Overview
 
-Connect TeamCity to Datadog to create events for each build in order to:
+This check watches for build-related events and sends them to Datadog.
 
-* Monitor the status of your builds and deployments
-* Collect stats and bind tags to every step of your builds.
+Unlike most Agent checks, this one doesn't collect any metrics—just events.
 
 ## Setup
-### Configuration
+### Installation
 
-1. Configure the Agent to connect to TeamCity
-{{< highlight yaml>}}
+The Teamcity check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Teamcity servers. If you need the newest version of the check, install the `dd-check-teamcity` package.
+
+### Configuration
+#### Prepare Teamcity
+
+Follow [Teamcity's documentation](https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login) to enable Guest Login. 
+
+Create a file `teamcity.yaml` in the Agent's `conf.d` directory:
+
+```
 init_config:
 
-# Add your different projects in here to monitor their build
-# success with Datadog events
 instances:
-    # A custom unique name per build configuration that will show
-    # in the events
   - name: My Website
-
-    # Specify the server name of your teamcity instance here
-    # Guest authentication must be on if you want the check to be able to get data
-    # When using the optional basic_http_authentication use
-    # server: user:password@teamcity.mycompany.com
     server: teamcity.mycompany.com
+#   server: user:password@teamcity.mycompany.com # if you set basic_http_authentication to true
+#   basic_http_authentication: true # default is false
+    build_configuration: MyWebsite_Deploy # the internal build ID of the build configuration you wish to track
+#   host_affected: msicalweb6 # defaults to hostname of the Agent's host
+#   is_deployment: true       # causes events to use the word 'deployment' in their messaging
+#   ssl_validation: false     # default is true
+#   tags:                     # add custom tags to events
+#   - test
+```
 
-    # This is the internal build ID of the build configuration you wish to track.
-    # You can find it labelled as "Build configuration ID" when editing the configuration in question.
-    build_configuration: MyWebsite_Deploy
+Add an item like the above to `instances` for each build configuration you want to track.
 
-    # Optional, this turns on basic http authentication. Defaults to False.
-    # basic_http_authentication: true
-
-    # Optional, if you wish to override the host that is affected by this build configuration.
-    # Defaults to the host that the agent is running on.
-    # host_affected: msicalweb6
-
-    # Optional, this changes the event message slightly to specify that TeamCity was used to deploy something
-    # rather than just that a successful build happened
-    # is_deployment: true
-
-    # Optional, this turns off ssl certificate validation. Defaults to True.
-    # ssl_validation: false
-
-    # Optional, any additional tags you'd like to add to the event
-    # tags:
-    #   - test
-{{< /highlight >}}
-
-2. Restart the Agent
-
-{{< insert-example-links >}}
+Restart the Agent to start collecting and sending Teamcity events to Datadog.
 
 ### Validation
 
-Execute the `datadog info` command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
-{{< highlight shell>}}
-Checks
-======
+Run the Agent's `info` subcommand and look for `teamcity` under the Checks section:
 
-  [...]
+```
+  Checks
+  ======
+    [...]
 
-  teamcity
-  --------
+    teamcity
+    -------
       - instance #0 [OK]
-      - Collected 0 metrics & 1 events
-{{< /highlight >}}
+      - Collected 0 metrics, 3 events & 0 service checks
+
+    [...]
+```
+
+## Compatibility
+
+The teamcity check is compatible with all major platforms.
 
 ## Data Collected
+### Metrics
+See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/teamcity/metadata.csv) for a list of metrics provided by this integration.
 
-This integration only create events. It will not return any metrics.
+### Events
+All Teamcity events are forwared to your Datadog application.
+
+### Service Checks
+The Teamcity check does not include any service check at this time.
+
+## Troubleshooting
+
+If you have any questions about Datadog or a use case our [Docs](https://docs.datadoghq.com/) didn’t mention, we’d love to help! Here’s how you can reach out to us:
+
+### Visit the Knowledge Base
+
+Learn more about what you can do in Datadog on the [Support Knowledge Base](https://datadog.zendesk.com/agent/).
+
+### Web Support
+
+Messages in the [event stream](https://app.datadoghq.com/event/stream) containing **@support-datadog** will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app.
+
+### By Email
+
+You can also contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
+
+### Over Slack
+
+Reach out to our team and other Datadog users on [Slack](http://chat.datadoghq.com/).
+
+## Further Reading
+To get a better idea of how (or why) to track performance impact of code changes with TeamCity and Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog/) about it.
