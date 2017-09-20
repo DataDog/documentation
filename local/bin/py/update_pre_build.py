@@ -36,7 +36,7 @@ FURTHER_READING_TOKEN = "//get-further-reading-from-git//"
 FURTHER_READING_PATTERN= r'## Further Reading((?s).*)'
 
 METRIC_TOKEN = "{{< get-metrics-from-git >}}"
-METRIC_PATERN= r'See \[metadata\.csv\].*provided by this integration.'
+METRIC_PATERN= r'See \[metadata\.csv\].*provided by this (integration|check).'
 
 """
 Functions
