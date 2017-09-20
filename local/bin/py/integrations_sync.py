@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 from optparse import OptionParser
-from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
+from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname, getmtime
 from os import sep, makedirs, getenv
 from tqdm import *
+import datetime
+import time
 import yaml
 import requests
 import tempfile
@@ -57,11 +59,32 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 if response_csv.status_code == requests.codes.ok:
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
-    
+
 
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
+
+
+def is_stale_sync_dir(dir):
+    """
+    Check if sync dir git pull is older than 2 weeks
+
+    :param dir: the path to directory
+    """
+    file = "{}{}".format(dir, '.git/FETCH_HEAD')
+    if not exists(file):
+        file = "{}{}".format(dir, '.git/index')
+    if exists(file):
+        threshold = datetime.datetime.fromtimestamp(time.time()) - datetime.timedelta(days=14)
+        modified = datetime.datetime.fromtimestamp(getmtime(file))
+        if modified < threshold:
+            return True
+        else:
+            return False
+    else:
+        return False
+
 
 def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
@@ -72,6 +95,8 @@ def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
     print('Syncing integrations...')
     if exists(from_path):
+        if is_stale_sync_dir(from_path):
+            print("WARNING: This directory hasn't been updated in a while. Try a `git fetch && git pull` on %s" % from_path)
         pattern = '**/*.csv'
         if is_dogweb:
             pattern = 'integration/**/*.csv'
