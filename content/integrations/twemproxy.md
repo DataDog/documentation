@@ -8,59 +8,16 @@ description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview
-
-Track overall and per-pool stats on each of your twemproxy servers. This Agent check collects metrics for client and server connections and errors, request and response rates, bytes in and out of the proxy, and more.
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-The Agent's twemproxy check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on each of your Twemproxy servers.
-
-### Configuration
-
-Create a file `twemproxy.yaml` in the Agent's `conf.d` directory:
-
-```
-init_config:
-
-instances:
-    - host: localhost
-      port: 2222 # change if your twemproxy doesn't use the default stats monitoring port
-```
-
-Restart the Agent to begin sending twemproxy metrics to Datadog.
-
-### Validation
-
-Run the Agent's `info` subcommand and look for `twemproxy` under the Checks section:
-
-```
-  Checks
-  ======
-    [...]
-
-    twemproxy
-    -------
-      - instance #0 [OK]
-      - Collected 20 metrics, 0 events & 1 service check
-
-    [...]
-```
-
-## Compatibility
-
-The twemproxy check is compatible with all major platforms.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-### Events
-The Twemproxy check does not include any event at this time.
-
-### Service Checks
-
-`twemproxy.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to the Twemproxy stats endpoint to collect metrics, otherwise OK.
+## Further Reading
+//get-further-reading-from-git//
