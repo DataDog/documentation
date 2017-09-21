@@ -13,17 +13,17 @@ Datadog's log management solution is is currently in private beta. If you would 
 ## Overview
 
 To access the processing panel please use the upper left menu:
-{{< img src="log/processing/pipelines_panel.png" alt="Pipelines pannel" >}}
+{{< img src="log/processing/processing_panel.png" alt="Pipelines pannel" >}}
 
 Your processing view should look like this:
-{{< img src="log/processing/pipelines_view.png" alt="Pipelines view" >}}
+{{< img src="log/processing/processing_view.png" alt="Pipelines view" >}}
 
 ## Processing Pipelines 
 ### Pipelines Goal 
 
 **A processing pipeline applies over a filtered subset of incoming logs a list of sequential processors.**
 
-With pipelines you have the opportunity to parse & enrich your logs through a sequential chains of [processors](/log/processing/#processors) in order to extract meaningful information or to extract attributes from semi-structured text to re-use them as [facet](/log/explore/#facets).
+With pipelines you have the opportunity to parse & enrich your logs through a sequential chains of [processors](#processors) in order to extract meaningful information or to extract attributes from semi-structured text to re-use them as [facet](/log/explore/#facets).
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 

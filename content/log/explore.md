@@ -41,7 +41,7 @@ Click on the **date** columns to get your logs in an ascending or descending ord
 ### Filtering the log list
 If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criterias:
 
-Searching for all the logs containing the word "deleted" from host:i-0223afcd9cb2fa6a2 : 
+Searching for all the logs containing the words "closed connection" from host:i-07a49480a9713bfe6 : 
 {{< img src="log/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
 
 ### Displaying a full log
@@ -65,11 +65,7 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
-/////\\\\\\<br>
-/////\\\\\\<br>
-/////\\\\\\Add gif of how facet works<br>
-/////\\\\\\<br>
-/////\\\\\\<br>
+{{< img src="log/explore/facets_demo.gif" alt="Facets demo" >}}
 
 ### Create a Facet
 
