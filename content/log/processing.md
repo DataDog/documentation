@@ -131,14 +131,14 @@ Into this log:
 However, beware that each incoming severity value is mapped as follows:
 
 * If this is an integer from 0 to 7 we map it to the [syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
-* If it starts with **emerg** or fatal (case unsensitive) we map it to emerg (0)
-* If it starts with **alert** (case unsensitive) we map it to **alert (1)**
-* If it starts with **crit** (case unsensitive) we map it to **crit (2)**
-* If it starts with **err** (case unsensitive) we map it to **err (3)**
-* If it starts with **warn** (case unsensitive) we map it to **warning (4)**
-* If it starts with **notice** (case unsensitive) we map it to **notice (5)**
-* If it starts with **info** (case unsensitive) we map it to **info (6)**
-* If it starts with **debug**, trace or verbose (case unsensitive) we map it to **debug (7)**
+* If it starts with **emerg** or **f** (case unsensitive) we map it to **emerg (0)**
+* If it starts with **a** (case unsensitive) we map it to **alert (1)**
+* If it starts with **c** (case unsensitive) we map it to **critical (2)**
+* If it starts with **err** (case unsensitive) we map it to **error (3)**
+* If it starts with **w** (case unsensitive) we map it to **warning (4)**
+* If it starts with **n** (case unsensitive) we map it to **notice (5)**
+* If it starts with **i** (case unsensitive) we map it to **info (6)**
+* If it starts with **d**, trace or verbose (case unsensitive) we map it to **debug (7)**
 * Any other condition, we map it to **info (6)**
 
 ### Attribute Remapper

@@ -36,12 +36,12 @@ If you don't find a log section in your file you need to use the custom file con
 You might not find any log section in your yaml files during the private beta, however please find below the list of integration and their yaml file that are supported:
 </div>
 
-* Apache: apache.yaml.example
-* Haproxy: haproxy.yaml.example
-* IIS: iis.yaml.example
+* Apache: [apache.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
+* Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
+* IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
 * Java: jmx.yaml.example
-* Mongodb: mongodb.yaml.example
-* Nginx: nginx.yaml.example
+* Mongodb: [mongodb.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
+* Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
 
 ## Custom log collection
 
