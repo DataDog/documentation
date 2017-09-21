@@ -32,9 +32,22 @@ To start collecting logs for an integration, you need to uncomment the log secti
 
 If you don't find a log section in your file you need to use the custom file configuration below instead. 
 
+<div class="alert alert-warning">
+You might not find any log section in your yaml files during the private beta, however please find below the list of integration and their yaml file that are supported:
+</div>
+
+* Apache: apache.yaml.example
+* Haproxy: haproxy.yaml.example
+* IIS: iis.yaml.example
+* Java: jmx.yaml.example
+* Mongodb: mongodb.yaml.example
+* Nginx: nginx.yaml.example
+
 ## Custom log collection
 
 To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit those parameter:
+
+
 * `type` : (manatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) option depending on `type`.
 * `service` : (mandatory) name of the service owning the log
@@ -46,38 +59,44 @@ To send custom log file that would not be part of an existing integration. Renam
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example: 
-If you want to gather you nginx logs for instance stored in **/var/log/access.log** and **/var/log/error.log** you would edit your `custom-logs.yaml` file as follow
+If you want to gather you python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would edit your `custom-logs.yaml` file as follow
 
 {{< highlight yaml >}}
+init_config:
+instances:
+  whatever: anything
 #Log section
 logs:
-  - type: file
-    path: /var/log/access.log
-    service: nginx
-    source: nginx
-    sourcecategory: http_access
-    tags: env:prod 
 
-  - type: file
-    path: /var/log/error.log
-    service: nginx
-    source: nginx
-    sourcecategory: http_error
+  type: file
+  path: /var/log/myapp1.log
+  service: myapp1
+  source: python
+  sourcecategory: sourcecode
+  tags: env:prod
+
+  type: file
+  path: /var/log/python.log
+  service: myapplication
+  source: python
+  sourcecategory: sourcecode
 {{< /highlight >}}
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your java application doesn't log into a file but forwards its logs on the local 10514 port in TCP edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
+If your php application doesn't log into a file but forwards its logs on the local 10518 port in TCP edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
+
 #Log section
 logs:
-    - type: tcp
-      port: 10514
-      service: java
-      source: java
+  type: tcp
+  path: 10518
+  service: webapp
+  source: php
+  sourcecategory: front
 
 {{< /highlight >}}
 

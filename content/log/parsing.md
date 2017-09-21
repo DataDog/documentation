@@ -146,6 +146,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:hh:mm:ss Z"):date}` | {"date": 1362501390000}|
 |2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
+|Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}`` |{"date": 1466058543000}|
 
 Parsing a date **doesn't** set its value as the log official date, for this you need to use the [Log Date Remapper](/log/processing/#log-date-remapper) .
 
@@ -203,7 +204,7 @@ this is a test message id: 12ab3cd4 for appname foo_1
 **Rule**:
 Here we just look for the id to extract
 ```
-parsing_rule .*%{regex("id: [0-9a-z]*"):value_to_extract}.*
+parsing_rule .*id: %{regex("[0-9a-z]*"):id} .*
 ```
 {{< img src="log/parsing/regex_parsing.png" alt="Parsing example 6" >}}
 

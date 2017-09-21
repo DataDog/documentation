@@ -67,7 +67,7 @@ Attach a filter to your pipeline in order to apply it only to a subset of your l
 
 The filter syntax is the same as the [search bar](/log/explore/#search-bar).
 
-** Be aware that the pipeline filtering is applied before any pipeline processing, hence you can not filter on an attribute that does not exists** 
+**Be aware that the pipeline filtering is applied before any pipeline processing, hence you can not filter on an attribute that does not exists** 
 
 Check to wich subset of logs your pipeline is applied to in the log list displayed: 
 
@@ -131,15 +131,15 @@ Into this log:
 However, beware that each incoming severity value is mapped as follows:
 
 * If this is an integer from 0 to 7 we map it to the [syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
-* If it starts with emerg or fatal (case unsensitive) we map it to emerg (0)
-* If it starts with alert (case unsensitive) we map it to alert (1)
-* If it starts with crit (case unsensitive) we map it to crit (2)
-* If it starts with err (case unsensitive) we map it to err (3)
-* If it starts with warn (case unsensitive) we map it to warning (4)
-* If it starts with notice (case unsensitive) we map it to notice (5)
-* If it starts with info (case unsensitive) we map it to info (6)
-* If it starts with debug, trace or verbose (case unsensitive) we map it to debug (7)
-* Any other condition, we map it to info (6)
+* If it starts with **emerg** or fatal (case unsensitive) we map it to emerg (0)
+* If it starts with **alert** (case unsensitive) we map it to **alert (1)**
+* If it starts with **crit** (case unsensitive) we map it to **crit (2)**
+* If it starts with **err** (case unsensitive) we map it to **err (3)**
+* If it starts with **warn** (case unsensitive) we map it to **warning (4)**
+* If it starts with **notice** (case unsensitive) we map it to **notice (5)**
+* If it starts with **info** (case unsensitive) we map it to **info (6)**
+* If it starts with **debug**, trace or verbose (case unsensitive) we map it to **debug (7)**
+* Any other condition, we map it to **info (6)**
 
 ### Attribute Remapper
 

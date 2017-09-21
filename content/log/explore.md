@@ -70,6 +70,7 @@ A Facet helps you to break down your datasets over user(s), service(s), etc ...
 /////\\\\\\Add gif of how facet works<br>
 /////\\\\\\<br>
 /////\\\\\\<br>
+
 ### Create a Facet
 
 To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
@@ -142,6 +143,11 @@ They can be used in the search and in facets as well:
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
 * `("service:srvA" OR "service:srvB")` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
 * `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
+
+### Autocomplete
+Typing a complex query can sometime be a bit cumbersome, use the search bar autocomplete feature to complete your query with existing data values:
+
+{{< img src="log/explore/search_bar_autocomplete.gif" alt="search bar autocomplete " >}}
 
 ## What's next
 
