@@ -12,7 +12,7 @@
   {{ if ne .Site.Language.Lang "ja"}}
     <li class="nav-header">Documentation Search</li>
     <li>
-      <form action="{{ $.Site.Params.corp_url }}search/">
+      <form action="{{ $.Site.BaseURL }}search/">
         <input type="text" name="s" id="tipue_search_input" autocomplete="off" required>
       </form>
     </li>

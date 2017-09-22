@@ -51,6 +51,8 @@ def index_algolia(app_id, api_key, content_path=None):
 
                     with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as myfile:
                         try:
+                            default_description = "See metrics from all of your apps, tools & services in one place with Datadog's cloud monitoring as a service solution. Try it for free."
+
                             html = BeautifulSoup(myfile, "html.parser")
 
                             # title
@@ -69,7 +71,11 @@ def index_algolia(app_id, api_key, content_path=None):
                                 fm_description = desc = html.findAll(attrs={"name": "description"})
 
                                 desc_text = " ".join(desc_text)
-                                description = desc_text
+
+                                if fm_description != default_description and '{{' not in fm_description:
+                                    description = fm_description
+                                else:
+                                    description = desc_text
 
                                 # create url
                                 url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
@@ -80,8 +86,9 @@ def index_algolia(app_id, api_key, content_path=None):
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
-                                article['body'] = description
+                                article['body'] = desc_text
                                 article['file'] = dirpath + '/' + filename
+                                article['page_description'] = description
 
                                 if dirpath.startswith('public/ja'):
                                     language = 'japanese'
