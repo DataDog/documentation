@@ -180,29 +180,31 @@ $(document).ready(function () {
   //   hitsPerPage: 3
   // })
   var client = algoliasearch("EOIG7V0A2O", 'bf60de88836cb62a73509ef075542065');
+  var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
+    var query = results[1] || "*";
   client.search([{
     indexName: 'docs_english',
-    query: "docker",
+    query: decodeURIComponent(query),
     params: {
-      hitsPerPage: 1000
+      hitsPerPage: 1000,
+      attributesToRetrieve: "*"
     }
   }], function (err, results) {
     if (!err) {
+      $('#tipue_search_input').val(decodeURIComponent(query));
       var hits = results['results'][0]['hits'];
       var formatted_results = "";
       if (hits.length) {
         formatted_results += '<div id="tipue_search_results_count">'+hits.length+' results</div>';
         for (var i in hits) {
           var hit = hits[i];
+          console.log(hit);
           formatted_results += '<div class="tipue_search_content_title">' +
             '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
           formatted_results += '<div class="tipue_search_content_url">' +
-            '<a href="' + hit["URL"] + '">' + hit["URL"] + '</a></div>';
-          // limit results to two sentences
-          var text = hit['_highlightResult']['body']['value'].replace(hit['title'], '');
-          var text_limit = text.split('.', 2).join('.').length + 1;
+            '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
           formatted_results += '<div class="tipue_search_content_text">' +
-            text.slice(0, text_limit) + '</div>';
+            hit['page_description'] + '</div>';
         }
       } else {
         formatted_results += '<div id="tipue_search_results_count">'+hits.length+' results</div>';
