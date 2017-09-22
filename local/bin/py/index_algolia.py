@@ -18,7 +18,7 @@ def content_location():
     return path_to_content
 
 
-def index_algolia(app_id, api_key, content_path=None):
+def index_algolia(app_id="", api_key="", content_path="/Users/michaelwhetten/Datadog/web/hugo/documentation/public"):
     dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips']
     languages = ['ja']
 
@@ -27,9 +27,9 @@ def index_algolia(app_id, api_key, content_path=None):
     docs_host = 'https://docs.datadoghq.com'
 
     # instantiate the algolia api
-    client = algoliasearch.Client(app_id, api_key)
-    index_english_build = client.init_index(DOCS_BUILD_ENGLISH)
-    index_japanese_build = client.init_index(DOCS_BUILD_JAPANESE)
+    # client = algoliasearch.Client(app_id, api_key)
+    # index_english_build = client.init_index(DOCS_BUILD_ENGLISH)
+    # index_japanese_build = client.init_index(DOCS_BUILD_JAPANESE)
 
     # set the root path (default)
     content_path = content_path or content_location()
@@ -68,7 +68,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                     main_text = main.text
                                     desc_text = main_text.split()[:7000]
 
-                                fm_description = desc = html.findAll(attrs={"name": "description"})
+                                fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
 
                                 desc_text = " ".join(desc_text)
 
@@ -136,17 +136,17 @@ def index_algolia(app_id, api_key, content_path=None):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--app_id", help="Application ID")
-    parser.add_argument("--api_key", help="Private Algolia API key")
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("--app_id", help="Application ID")
+    # parser.add_argument("--api_key", help="Private Algolia API key")
+    #
+    # a_id = parser.parse_args().app_id
+    # a_key = parser.parse_args().api_key
+    #
+    # if not a_key:
+    #     try:
+    #         key = os.environ['ALGOLIA_API_KEY']
+    #     except KeyError:
+    #         key = input("Algolia API key: ")
 
-    a_id = parser.parse_args().app_id
-    a_key = parser.parse_args().api_key
-
-    if not a_key:
-        try:
-            key = os.environ['ALGOLIA_API_KEY']
-        except KeyError:
-            key = input("Algolia API key: ")
-
-    index_algolia(app_id=a_id, api_key=a_key)
+    index_algolia(app_id="", api_key="")
