@@ -186,7 +186,7 @@ $(document).ready(function () {
     indexName: 'docs_english',
     query: decodeURIComponent(query),
     params: {
-      hitsPerPage: 1000,
+      hitsPerPage: 12,
       attributesToRetrieve: "*"
     }
   }], function (err, results) {
@@ -203,8 +203,13 @@ $(document).ready(function () {
             '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
           formatted_results += '<div class="tipue_search_content_url">' +
             '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+          if (hit['page_description'].length) {
+            var text = hit['page_description']
+          } else {
+            var text = "NOPE"
+          }
           formatted_results += '<div class="tipue_search_content_text">' +
-            hit['page_description'] + '</div>';
+            text + '</div>';
         }
       } else {
         formatted_results += '<div id="tipue_search_results_count">'+hits.length+' results</div>';
