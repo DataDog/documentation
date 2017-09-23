@@ -9,7 +9,7 @@
         "src/js/vendor/bootstrap.min.js",
         "src/js/vendor/jquery.tocible.js",
         "src/js/vendor/algoliasearch.min.js",
-        "sec/js/vendor/instantsearch.min.js"
+        "src/js/vendor/jquery.pajinate.min.js"
       ],
       "main": true
     },

@@ -169,52 +169,54 @@ $(document).ready(function () {
     headings.init();
   }
 
-  // algolia search
-  // search.addWidget(
-  // instantsearch.widgets.infiniteHits({
-  //   container: '#tipue_search_content',
-  //   templates: {
-  //     empty: 'No results',
-  //     item: '<strong>Hit {{objectID}}</strong>: {{{_highlightResult.name.value}}}'
-  //   },
-  //   hitsPerPage: 3
-  // })
   var client = algoliasearch("EOIG7V0A2O", 'bf60de88836cb62a73509ef075542065');
   var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
-    var query = results[1] || "*";
+  var $pagination = $('#tipue_search_content');
+  var query = results[1] || "*";
+
+  // get results from algolia
   client.search([{
     indexName: 'docs_english',
     query: decodeURIComponent(query),
     params: {
-      hitsPerPage: 12,
+      hitsPerPage: 200,
       attributesToRetrieve: "*"
     }
   }], function (err, results) {
     if (!err) {
+      // format and populate results
       $('#tipue_search_input').val(decodeURIComponent(query));
       var hits = results['results'][0]['hits'];
       var formatted_results = "";
       if (hits.length) {
-        formatted_results += '<div id="tipue_search_results_count">'+hits.length+' results</div>';
+        $('#tipue_search_content').prepend('<div id="tipue_search_results_count">' + hits.length + ' results</div>');
         for (var i in hits) {
+
           var hit = hits[i];
-          console.log(hit);
+                console.log(hit);
+          formatted_results += '<div class="hit">';
           formatted_results += '<div class="tipue_search_content_title">' +
             '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
           formatted_results += '<div class="tipue_search_content_url">' +
             '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-          if (hit['page_description'].length) {
-            var text = hit['page_description']
-          } else {
-            var text = "NOPE"
-          }
+          var text = hit._snippetResult.body.value
+
           formatted_results += '<div class="tipue_search_content_text">' +
             text + '</div>';
+          formatted_results += '</div>';
         }
       } else {
-        formatted_results += '<div id="tipue_search_results_count">'+hits.length+' results</div>';
+        $('#tipue_search_content').prepend('<div id="tipue_search_results_count">' + hits.length + ' results</div>');
       }
-      $('#tipue_search_content').html(formatted_results);
+      $('#tipue_search_content .content').html(formatted_results);
+
+      // load pagination
+      $('#tipue_search_content').pajinate({
+        num_page_links_to_display : 3,
+        items_per_page : 13,
+        wrap_around: false,
+        show_first_last: false
+      });
 
     }
   });
