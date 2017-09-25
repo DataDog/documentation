@@ -5,8 +5,9 @@ autotocdepth: 2
 hideguides: true
 customnav: lognav
 ---
+
 <div class="alert alert-info">
-Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview 
@@ -210,4 +211,5 @@ parsing_rule .*id: %{regex("[0-9a-z]*"):id} .*
 
 ## What's next 
 
-* Learn how to explore your logs [here](/log/explore)
+* Learn how to [explore your logs](/log/explore)
+* Learn how to [process your logs](/log/processing)

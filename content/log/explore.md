@@ -5,58 +5,58 @@ autotocdepth: 2
 hideguides: true
 customnav: lognav
 ---
+
 <div class="alert alert-info">
-Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 ## Overview 
 
-The Log explorer is an optimized view which makes it easy to do any kind of troubleshooting and data exploration.
+The Log explorer is your home base for troubleshooting and exploration:
 
 {{< img src="log/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
 
 In this view you can:
 
 * [Interact with the Time range](#time-range)
-* [Display logs into lists](#log-list)
-* [Use facets to help you in various investigations](#facets)
+* [Display lists of logs](#log-list)
+* [Use facets to filter your log list](#facets)
 * [Enter search queries](#search-bar)
 
 ## Time Range
-Time range allows you to display logs on a given time period. It is symbolised by the timeline directly under the search bar. The timeline can be displayed or wrapped up with the **Show Graph** check box:
+Time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
 {{< img src="log/explore/timeline.png" alt="Timeline" >}}
 
-Change the time periode displayed with quick ranges that are directly available:
+Quickly change the time range by selecting a preset range from the dropdown:
 
 {{< img src="log/explore/timerange.png" alt="Timerange" style="width:75%;">}}
 
 ## Log list
-The log list is the list of events that match the selected context, a context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The log list is the list of logs that match the selected context, a context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+You can sort the list by clicking the **date** column header.
+
 {{< img src="log/explore/log_list.png" alt="Log List" >}}
 
-### Sorting the log list
-
-Click on the **date** columns to get your logs in an ascending or descending order in the Log list.
-
 ### Filtering the log list
-If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criterias:
+If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criteria:
 
-Searching for all the logs containing the words "closed connection" from host:i-07a49480a9713bfe6 : 
 {{< img src="log/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
 
 ### Displaying a full log
-To display detail of a log line, just click on it:
+You can click on any log line to see more detail about it:
 
 {{< img src="log/explore/log_in_log_list.png" alt="Log in log list" >}}
 
 ### View a log line in context
-When displaying the detail of a log line, ask to « view in context ». 
-It removes any filters from your search bar and display log lines preceding this line and the few log lines following it.
+When clicking a log line for more detail, click on « view in context »: 
 
-If you send the log lines in syslog format, the hostname and app name corresponding to the log line are automatically be selected.
+This lets you see log lines dated just before and after your selected log — even if they don't match your filters.
+
+For syslog-formatted logs, hostname and service name corresponding to the log line are automatically ticked in the facets checkboxes as filters.
 
 ### Columns
-In order to get more details about the objects you are looking at, select a few facets to display with the **Columns** button:
+To add more log details to the list, click the **Columns** button and select any facets you want to see:
+
 {{< img src="log/explore/log_list_with_columns.png" alt="Log List with columns" >}}
 
 ## Facets 
@@ -96,7 +96,7 @@ The search query language is based on the Lucene query string:
 All search parameters are contained in the url, so it is very simple to share your view.
 
 ### Search syntax
-A query is broken up into terms and operators.
+A query is composed of terms and operators.
 
 There are two types of terms:
 
@@ -104,9 +104,7 @@ There are two types of terms:
 
 * A **Sequence** is a group of words surrounded by double quotes such as "hello dolly" or "hello dolly"~2.
 
-Multiple terms can be combined together with Boolean operators to form a more complex query.
-
-Here are the available boolean operators:
+To combine multiple terms into a complex query, you can use any of the following boolean operators:
 
 ||||
 |:----|:----|:----|
@@ -141,12 +139,11 @@ They can be used in the search and in facets as well:
 * `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
 
 ### Autocomplete
-Typing a complex query can sometime be a bit cumbersome, use the search bar autocomplete feature to complete your query with existing data values:
+Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="log/explore/search_bar_autocomplete.gif" alt="search bar autocomplete " >}}
 
 ## What's next
 
-* Learn how to explore your logs [here](/log/explore)
-* Learn how to process your logs [here](/log/processing)
-* Learn more about parsing [here](/log/parsing)
+* Learn how to [process your logs](/log/processing)
+* Learn more about [parsing](/log/parsing)

@@ -7,12 +7,12 @@ customnav: lognav
 ---
 
 <div class="alert alert-info">
-Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
 
-To access the processing panel please use the upper left menu:
+To access the processing panel use the upper left menu:
 {{< img src="log/processing/processing_panel.png" alt="Pipelines pannel" >}}
 
 Your processing view should look like this:
@@ -23,7 +23,7 @@ Your processing view should look like this:
 
 **A processing pipeline applies over a filtered subset of incoming logs a list of sequential processors.**
 
-With pipelines you have the opportunity to parse & enrich your logs through a sequential chains of [processors](#processors) in order to extract meaningful information or to extract attributes from semi-structured text to re-use them as [facet](/log/explore/#facets).
+With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/log/explore/#facets).
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
@@ -49,41 +49,41 @@ into this log:
 }
 {{< /highlight >}}
 
-With one single pipeline as follow:
+With one single pipeline:
 
 {{< img src="log/processing/pipeline_processors_sketch.png" alt="Pipelines processor sketch" style="width:90%;">}}
 
-Pipelines are also able to take all your logs whatever they source and transform them to handle a unifed and structured format on Datadog.
+Pipelines can take logs from a wide variety of formats and translate them all into a common format in Datadog.
 
-For instance, in the following example we have at the begining 3 differents raw logs:
+In the following example, we start with three different logs:
 
 {{< img src="log/processing/multi_source_sketch.png" alt="Multi source sketch" >}}
 
-and at the end we have the same information, but with more coherence that allow a better usability.
+After the logs have been processed, they appear in an easy-to-read, common format.
 
 ### Pipeline filters
 
-Attach a filter to your pipeline in order to apply it only to a subset of your logs. 
+Filters let you limit what kinds of logs a pipeline will apply to.
 
 The filter syntax is the same as the [search bar](/log/explore/#search-bar).
 
-**Be aware that the pipeline filtering is applied before any pipeline processing, hence you can not filter on an attribute that does not exists** 
+**Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist** 
 
-Check to wich subset of logs your pipeline is applied to in the log list displayed: 
+The log list shows which logs your pipeline applies to:
 
 {{< img src="log/processing/pipeline_filters.png" alt="Pipelines processor sketch" style="width:90%;">}}
 
 ### Integrations Pipelines
 
-Integration pipelines are automatically installed when you activate an [integration](https://app.datadoghq.com/account/settings)
+Integration pipelines are automatically installed when you activate an [integration](https://app.datadoghq.com/account/settings).
 
-Those pipeline are read-only but can be cloned for further customisation:
+These pipelines are read-only, but you can clone them and then edit the clone:
 
 {{< img src="log/processing/cloning_pipeline.png" alt="Cloning pipeline" >}}
 
 ## Processors
 
-**A processor executes a well identified action on a log most often related to parsing & enrichment.**
+A processor executes within a [pipeline](#processing-pipelines) a well identified action ([Remapping an attribute](#attribute-remapper), [Grok parsing](#grok-parser)...) on a log.
 
 The different kind of processors are explained below.
 
@@ -93,16 +93,24 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 {{< img src="log/processing/parser.png" alt="Parser" >}}
 
-Find more about this in our dedicated [parsing section](/log/parsing)
+Read more about this in the [parsing section](/log/parsing)
 
 ### Log Date Remapper 
 
-By default (as explained [here](/log/#the-date-attribute)) Datadog has a couple of reserved attributes that are, by default, considered as the date reference for the main timeline.
+As Datadog receives logs, it timestamps them using the value(s) from any of these default attributes:
 
-However, if you have your own date attribute that does not belong to this list, define it as the official log timestamp with the log date remapper processor:
+* `timestamp`
+* `date`
+* `_timestamp`
+* `Timestamp`
+* `eventTime`
+* `published_date`
+
+If your logs put their dates in an attribute not in this list, use the log date remapper processor to define their date attribute as the official log timestamp:
+
 {{< img src="log/processing/log_date_remapper.png" alt="Log date remapper" >}}
 
-Otherwise the default timestamp is the reception time of the log by the Datadog intake API.
+If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 
 ### Log Severity Remapper
 
@@ -130,16 +138,16 @@ Into this log:
 
 However, beware that each incoming severity value is mapped as follows:
 
-* If this is an integer from 0 to 7 we map it to the [syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
-* If it starts with **emerg** or **f** (case unsensitive) we map it to **emerg (0)**
-* If it starts with **a** (case unsensitive) we map it to **alert (1)**
-* If it starts with **c** (case unsensitive) we map it to **critical (2)**
-* If it starts with **err** (case unsensitive) we map it to **error (3)**
-* If it starts with **w** (case unsensitive) we map it to **warning (4)**
-* If it starts with **n** (case unsensitive) we map it to **notice (5)**
-* If it starts with **i** (case unsensitive) we map it to **info (6)**
-* If it starts with **d**, trace or verbose (case unsensitive) we map it to **debug (7)**
-* Any other condition, we map it to **info (6)**
+* Integers from 0 to 7 map to the [syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
+* Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
+* Strings beginning with **a** (case unsensitive) map to **alert (1)**
+* Strings beginning with **c** (case unsensitive) map to **critical (2)**
+* Strings beginning with **err** (case unsensitive) map to **error (3)**
+* Strings beginning with **w** (case unsensitive) map to **warning (4)**
+* Strings beginning with **n** (case unsensitive) map to **notice (5)**
+* Strings beginning with **i** (case unsensitive) map to **info (6)**
+* Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
+* All others map to **info (6)**
 
 ### Attribute Remapper
 
@@ -177,17 +185,17 @@ Into this log:
 
 ### URL processor 
 
-This processor extracts query params and other important parameter from an url, just enter the source attribute of your url:
+This processor extracts query params and other important parameter from a URL, just enter the source attribute of your url:
 {{< img src="log/processing/url_processor.png" alt="Url Processor" >}}
 
 ### Useragent parser
 
-UserAgent processor takes a useragent attribute and does its best to extract all the meaningful information the OS, the browser and the device.
-It is also able to recognize the main bots like the Google Bot, Yahoo Slurp, Bing and others.
+UserAgent processor takes a useragent attribute and does its best to extract the OS, browser, device, etc...
+It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 
-Some servers or systems (such as IIS) encode useragents, if so ask this processor to **Apply a URL decode first** before parsing it.
+If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.
 
-This settings: 
+These settings: 
 {{< img src="log/processing/useragent_processor_tile.png" alt="Useragent processor tile" >}}
 
 Give the following results:
@@ -195,5 +203,5 @@ Give the following results:
 
 ## What's next
 
-* Learn how to explore your logs [here](/log/explore)
-* Learn more about parsing [here](/log/parsing)
+* Learn how to [explore your logs](/log/explore)
+* Learn more about [parsing](/log/parsing)

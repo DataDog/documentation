@@ -7,7 +7,7 @@ customnav: lognav
 ---
 
 <div class="alert alert-info">
-Datadog's log management solution is is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
@@ -15,8 +15,8 @@ Datadog's log management solution is is currently in private beta. If you would 
 
 ## Getting started with the Agent
 
-Collecting logs is **disabled** by default in the Datadog-Agent.
-In order to start to gather your logs you need to:
+Collecting logs is **disabled** by default in the Datadog Agent.
+To start gathering logs:
 
 1. [Install the latest Datadog Agent](https://app.datadoghq.com/account/settings#agent).
 
@@ -45,13 +45,13 @@ You might not find any log section in your yaml files during the private beta, h
 
 ## Custom log collection
 
-To send custom log file that would not be part of an existing integration. Rename `custom-logs.yaml.example` in `custom-logs.yaml` and edit those parameter:
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, rename the `custom-logs.yaml.example` file to `custom-logs.yaml` and set these options:
 
 
-* `type` : (manatory) type of log input source (**tcp** / **udp** / **file**)
-* `port` / `path` : (mandatory) option depending on `type`.
+* `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
+* `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
 * `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. It can be a custom one if the integration does not exist
+* `source` : (mandatory) attribute that defines which integration is sending the logs. If the logs don't come from any integration, set this to anything you like.
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each logs collected.
 
@@ -61,10 +61,13 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 If you want to gather you python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would edit your `custom-logs.yaml` file as follow
 
+Please note that for the yaml file to be considered as correct by the agent, you need to add the “init_config” section and have at least one “instance" defined as we show below."
+
 {{< highlight yaml >}}
 init_config:
+
 instances:
-  whatever: anything
+    [{}]
 #Log section
 logs:
 
@@ -86,10 +89,13 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your php application doesn't log into a file but forwards its logs on the local 10518 port in TCP edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
+If your PHP application doesn't log into a file but forwards its logs locally to TCP port 10518, edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
+init_config:
 
+instances:
+    [{}]
 #Log section
 logs:
   type: tcp
@@ -136,6 +142,6 @@ If you would like to remap some severities existing in the `severity` attribute 
 
 ## What's next
 
-* Learn how to explore your logs [here](/log/explore)
-* Learn how to process your logs [here](/log/processing)
-* Learn more about parsing [here](/log/parsing)
+* Learn how to [explore your logs](/log/explore)
+* Learn how to [process your logs](/log/processing)
+* Learn more about [parsing](/log/parsing)
