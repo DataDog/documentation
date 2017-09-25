@@ -11,7 +11,7 @@ Datadog's log management is currently in private beta. If you would like to appl
 </div>
 ## Overview 
 
-The Log explorer is your home base for troubleshooting and exploration:
+The Logs explorer is your home base for troubleshooting and exploration:
 
 {{< img src="log/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
 

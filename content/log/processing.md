@@ -15,9 +15,6 @@ Datadog's log management is currently in private beta. If you would like to appl
 To access the processing panel use the upper left menu:
 {{< img src="log/processing/processing_panel.png" alt="Pipelines pannel" >}}
 
-Your processing view should look like this:
-{{< img src="log/processing/processing_view.png" alt="Pipelines view" >}}
-
 ## Processing Pipelines 
 ### Pipelines Goal 
 
