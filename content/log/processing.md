@@ -47,7 +47,7 @@ The filter syntax is the same as the [search bar](/log/explore/#search-bar).
 
 The log list shows which logs your pipeline applies to:
 
-{{< img src="log/processing/pipeline_filters.png" alt="Pipelines processor sketch" style="width:90%;">}}
+{{< img src="log/processing/pipeline_filters.png" alt="Pipelines filters" style="width:90%;">}}
 
 ### Integrations Pipelines
 
