@@ -33,7 +33,7 @@ languages:
           url: "tracing/"
           weight: 20
         - identifier: menu_references_log
-          name: "Log (beta)"
+          name: "Logs (beta)"
           url: "log/"
           weight: 30
         - identifier: menu_references_libraries

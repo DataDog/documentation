@@ -139,7 +139,7 @@
 # Logs
 
 - id: customnav_lognav
-  translation: Logs
+  translation: Logs (Beta)
 
 - id: customnav_lognav_collection
   translation: Collection
