@@ -245,6 +245,7 @@ For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
+* `elasticloadbalancing:DescribeInstanceHealth`: Add state of your instances.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
