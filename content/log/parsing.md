@@ -157,15 +157,15 @@ You might have logs with two possibles formats which differ for only one attribu
 
 **Log**:
 ```
-user:john name:snow connected on 11/08/2017 
-user:john id:123 connected on 11/08/2017 
+user:john connected on 11/08/2017
+id:12345 connected on 11/08/2017
 ```
 
 **Rule**:
 Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
 
 ```
-Rule user:%{word:user.firstname} (name:%{word:user.name}|id:%{integer:user.id}) connected on %{date("MM/dd/yyyy"):connect_date}
+Rule (user:%{word:user.firstname}|id:%{integer:user.id}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 **Results**:

@@ -59,7 +59,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example: 
-If you want to gather you python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would edit your `custom-logs.yaml` file as follow
+If you want to gather you python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follow
 
 Please note that for the yaml file to be considered as correct by the agent, you need to add the “init_config” section and have at least one “instance" defined as we show below."
 
@@ -71,25 +71,25 @@ instances:
 #Log section
 logs:
 
-  type: file
-  path: /var/log/myapp1.log
-  service: myapp1
-  source: python
-  sourcecategory: sourcecode
-  tags: env:prod
+  - type: file
+    path: /var/log/myapp1.log
+    service: myapp1
+    source: python
+    sourcecategory: sourcecode
+    tags: env:prod
 
-  type: file
-  path: /var/log/python.log
-  service: myapplication
-  source: python
-  sourcecategory: sourcecode
+  - type: file
+    path: /var/log/python.log
+    service: myapplication
+    source: python
+    sourcecategory: sourcecode
 {{< /highlight >}}
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your PHP application doesn't log into a file but forwards its logs locally to TCP port 10518, edit your `custom-logs.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
+If your PHP application doesn't log into a file but forwards its logs locally to TCP port 10518, create a `php.yaml` file as such in order to listen to this port and forward those logs to your datadog application.:
 
 {{< highlight yaml >}}
 init_config:
@@ -98,11 +98,11 @@ instances:
     [{}]
 #Log section
 logs:
-  type: tcp
-  path: 10518
-  service: webapp
-  source: php
-  sourcecategory: front
+  - type: tcp
+    path: 10518
+    service: webapp
+    source: php
+    sourcecategory: front
 
 {{< /highlight >}}
 

@@ -69,7 +69,7 @@ A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
 ### Create a Facet
 
-To start using an attribute or a tag in a Facet or in the search, you simply need to click on it and add it as a Facet:
+To start using an attribute in a Facet or in the search, you simply need to click on it and add it as a Facet:
 {{< img src="log/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
 
 Once this is done, the value of this attribute for all new logs is  stored and can be used for search either in the search bar or in the Facet Panel
@@ -117,9 +117,9 @@ To combine multiple terms into a complex query, you can use any of the following
 To search on specific [facet](#facets) you need to [add them as facet first]()
 then add `@` to specify you are searcing on a facet.
 
-For instance, if your facet name is service and you want to filter on the nginx value just enter: 
+For instance, if your facet name is **url** and you want to filter on the **url** value just enter: 
 
-`@service:nginx`
+`@url:www.datadoghq.com`
 
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:

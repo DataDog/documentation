@@ -30,7 +30,7 @@ Each log that comes through the pipelines is tested against every pipeline filte
 So for instance a processing pipeline can transform this log:
 {{< highlight json >}}
 {
-"message":"john clicked on a link : www.datadoghq.com for app dd_app",
+"message":"user:john connected on 11/08/2017",
 "hostname":"host_1",
 "level":"info"
 }
@@ -41,9 +41,8 @@ into this log:
 {{< highlight json >}}
 {
 "user":"john",
-"url":"www.datadoghq.com",
-"appname":"dd_app",
-"message":"clicked on a link",
+"connect_date":1510099200000
+"message":"user:john connected on 11/08/2017",
 "hostname":"host_1",
 "severity":"info"
 }
