@@ -8,7 +8,7 @@ sidebar:
       href: "api/"
     - text: APM (Tracing)
       href: "tracing/"
-    - text: Logs
+    - text: Logs (Beta)
       href: "log/"
     - text: Libraries
       href: "libraries/"
