@@ -199,13 +199,13 @@ Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("M
 Use the regex matcher to match any substring of your log message.
 **Log**:
 ```
-this is a test message id: 12ab3cd4 for appname foo_1
+id:john1234 connected on 11/08/2017
 ```
 
 **Rule**:
 Here we just look for the id to extract
 ```
-parsing_rule .*id: %{regex("[0-9a-z]*"):id} .*
+Rule id:%{regex("[0-9a-z]*"):id} .*
 ```
 {{< img src="log/parsing/regex_parsing.png" alt="Parsing example 6" >}}
 
