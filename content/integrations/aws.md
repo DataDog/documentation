@@ -245,6 +245,7 @@ For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
+* `elasticloadbalancing:DescribeInstanceHealth`: Add state of your instances.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
@@ -266,7 +267,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 ### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
-* `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
+* `kinesis:DescribeStream`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
