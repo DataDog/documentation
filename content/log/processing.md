@@ -28,37 +28,17 @@ With pipelines, you can parse and enrich your logs by chaining them sequentially
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
 So for instance a processing pipeline can transform this log:
-{{< highlight json >}}
-{
-"message":"user:john connected on 11/08/2017",
-"hostname":"host_1",
-"level":"info"
-}
-{{</ highlight >}}
+{{< img src="log/processing/original_log.png" alt="original log" style="width:60%;" >}}
 
 into this log: 
 
-{{< highlight json >}}
-{
-"user":"john",
-"connect_date":1510099200000
-"message":"user:john connected on 11/08/2017",
-"hostname":"host_1",
-"severity":"info"
-}
-{{< /highlight >}}
+{{< img src="log/processing/log_post_severity.png" alt=" Log post severity " style="width:60%;">}}
 
 With one single pipeline:
 
-{{< img src="log/processing/pipeline_processors_sketch.png" alt="Pipelines processor sketch" style="width:90%;">}}
+{{< img src="log/processing/pipeline_example.png" alt="Pipelines example" style="width:90%;">}}
 
 Pipelines can take logs from a wide variety of formats and translate them all into a common format in Datadog.
-
-In the following example, we start with three different logs:
-
-{{< img src="log/processing/multi_source_sketch.png" alt="Multi source sketch" >}}
-
-After the logs have been processed, they appear in an easy-to-read, common format.
 
 ### Pipeline filters
 
@@ -118,22 +98,12 @@ Use this processor if you want to assign some attributes as the official severit
 {{< img src="log/processing/severity_remapper_processor_tile.png" alt="Severity remapper processor tile" >}}
 
 It transforms this log:
-{{< highlight json >}}
-{
-"message":"john clicked on a link : www.datadoghq.com for app dd_app",
-"hostname":"host_1",
-"level":"info"
-}
-{{< /highlight >}}
+
+{{< img src="log/processing/log_pre_severity.png" alt=" Log pre severity " style="width:60%;">}}
 
 Into this log:
-{{< highlight json >}}
-{
-"message":"john clicked on a link : www.datadoghq.com for app dd_app",
-"hostname":"host_1",
-"severity":"info"
-}
-{{< /highlight >}}
+
+{{< img src="log/processing/log_post_severity_bis.png" alt=" Log post severity bis" style="width:60%;">}}
 
 However, beware that each incoming severity value is mapped as follows:
 
@@ -150,37 +120,16 @@ However, beware that each incoming severity value is mapped as follows:
 
 ### Attribute Remapper
 
-This processor remaps any attribute(s) to another one, 
-for instance here it remaps “user_id” to “user.id”
+This processor remaps any attribute(s) to another one, for instance here it remaps “user” to “user.firstname”
 
-{{< img src="log/processing/attribute_remapper_processor_tile.png" alt="Attribute remapper processor tile" >}}
+{{< img src="log/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" >}}
 
 It transforms this log:
-{{< highlight json >}}
-{
-"message":"john clicked on a link : www.datadoghq.com for app dd_app",
-"hostname":"host_1",
-"severity":"info",
-"my":{
-    "source":{
-        "attribute":"this is some good attribute value"
-            }
-    }
-}
-{{< /highlight >}}
+
+{{< img src="log/processing/attribute_pre_remapping.png" alt="attribute pre remapping " style="width:60%;">}}
+
 Into this log:
-{{< highlight json >}}
-{
-"message":"john clicked on a link : www.datadoghq.com for app dd_app",
-"hostname":"host_1",
-"severity":"info",
-"my":{
-    "target":{
-        "attribute":"this is some good attribute value"
-        }
-    }
-}
-{{< /highlight >}}
+{{< img src="log/processing/attribute_post_remapping.png" alt="attribute post remapping " style="width:60%;">}}
 
 ### URL processor 
 
