@@ -27,21 +27,15 @@ Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
 Example for this classic unstructured log:  
 ```
-user:john connected on 11/08/2017
+john connected on 11/08/2017
 ```
 
 With the following parsing rule:
 ```
-MyParsingRule user:%{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 You would have at the end this structued log:
-```
-{
- “user” : “john”,
- “connect_date”: 1510099200000
-}
-```
 
 {{< img src="log/parsing/parsing_example_1.png" alt="Parsing example 1" >}}
 
@@ -157,15 +151,15 @@ You might have logs with two possibles formats which differ for only one attribu
 
 **Log**:
 ```
-user:john connected on 11/08/2017
-id:12345 connected on 11/08/2017
+john connected on 11/08/2017
+12345 connected on 11/08/2017
 ```
 
 **Rule**:
 Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
 
 ```
-Rule (user:%{word:user.firstname}|id:%{integer:user.id}) connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 **Results**:
@@ -181,12 +175,12 @@ Make attribute extraction optional with `()?` extracting it only when the attrib
 
 **Log**:
 ```
-user:john id:123 connected on 11/08/2017 
+john 12345 connected on 11/08/2017 
 ```
 
 **Rule**:
 ```
-Rule user:%{word:user.firstname} (id:%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 **Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.

@@ -39,8 +39,6 @@ hostname: MYHOSTNAME  # optional, should match whatever is in datadog.conf
 
 ```
 
-3. [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
-
 ## Enabling log collection from integrations
 
 To start collecting logs for an integration, you need to uncomment the log sections in your integration yaml file, and then set its parameters values according to your infrastructure.
