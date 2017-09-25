@@ -33,10 +33,10 @@ Once you have created a Datadog Read only user:
 4. Configure your [Dyn integration](https://app.datadoghq.com/account/settings#integrations/dyn) inside your Datadog application.
 {{< img src="integrations/dyn/dyn_integration.png" alt="Dyn Integration" style="width:75%;" >}}
 
-5. Select your zones you want to monitor:<br>
+5. Select your zones you wish to monitor:<br>
 {{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:75%;" >}}
 The “Zone limitation” applies only to “Zone notes”.
-**Dyn “QPS” metrics are by default collected for all zones**. It's Events and Dyn changes metrics that aren’t.
+**Dyn “QPS” metrics are by default collected for all zones**, Events and `dyn.changes` metric are not.
 <div class="alert alert-info">
 IP ACLs must be disabled for the Dyn integration.
 </div>
