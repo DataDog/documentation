@@ -1,7 +1,7 @@
 ---
 title: Datadog-Zookeeper Integration
 integration_title: Zookeeper
-git_integration_title: zookeeper
+git_integration_title: zk
 kind: integration
 newhlevel: true
 aliases:

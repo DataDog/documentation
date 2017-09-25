@@ -3,6 +3,7 @@ title: Datadog-NTP Check Integration
 integration_title: NTP Check
 kind: integration
 newhlevel: true
+git_integration_title: ntp
 description: "{{< get-desc-from-git >}}"
 ---
 
