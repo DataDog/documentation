@@ -22,4 +22,4 @@ No configuration is necessary for the system.
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git "system" "system.cpu system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}

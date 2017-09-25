@@ -21,7 +21,7 @@ The Teamcity check is packaged with the Agent, so simply [install the Agent](htt
 ### Configuration
 #### Prepare Teamcity
 
-Follow [Teamcity's documentation](https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login) to enable Guest Login. 
+Follow [Teamcity's documentation](https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login) to enable Guest Login.
 
 Create a file `teamcity.yaml` in the Agent's `conf.d` directory:
 

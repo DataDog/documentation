@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}
+{{< img src="integrations/zookeeper/zookeepergraph.png" alt="Zendesk Dashboard" >}}
 
 ## Overview
 //get-overview-from-git//

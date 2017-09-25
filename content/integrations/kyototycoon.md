@@ -23,7 +23,7 @@ Create a file `kyototycoon.yaml` in the Agent's `conf.d` directory:
 init_config:
 
 instances:
-#  Each instance needs a report URL. 
+#  Each instance needs a report URL.
 #  name, and optionally tags keys. The report URL should
 #  be a URL to the Kyoto Tycoon "report" RPC endpoint.
 #

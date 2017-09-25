@@ -54,7 +54,7 @@ The following integration sources create tags automatically in Datadog:
 | [Kubernetes](http://docs.datadoghq.com/integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
 | [Marathon](http://docs.datadoghq.com/integrations/marathon)                              | URL |
 | [Memcached](http://docs.datadoghq.com/integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
-| [Mesos](http://docs.datadoghq.com/integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| [Mesos](http://docs.datadoghq.com/integrations/mesos_master)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
 | [Mongo](http://docs.datadoghq.com/integrations/mongodb)                                 | Server Name |
 | [OpenStack](http://docs.datadoghq.com/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
 | [PHP FPM](http://docs.datadoghq.com/integrations/phpfpm)                               | Pool Name |
@@ -118,7 +118,7 @@ After you have assigned tags at the host and integration level, you can start us
 
 ### Using tags in the Events List
 
-The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter ```tags:``` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:sobotka. So the search text is ```tags:role:sobotka```.
+The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter ```tags:``` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is ```tags:role:cassandra```.
 
 {{< img src="guides/tagging/eventtags.png" alt="Events List and Tags" >}}
 
