@@ -193,13 +193,13 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 Use the regex matcher to match any substring of your log message.
 **Log**:
 ```
-id:john1234 connected on 11/08/2017
+john_1a2b3c4 connected on 11/08/2017
 ```
 
 **Rule**:
 Here we just look for the id to extract
 ```
-Rule id:%{regex("[0-9a-z]*"):id} .*
+MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
 {{< img src="log/parsing/regex_parsing.png" alt="Parsing example 6" >}}
 
