@@ -39,7 +39,7 @@ When you run `datadog-agent info` you should see something like the following:
         neo4j
         -----------
           - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+          - Collected 39 metrics, 0 events & 0 service checks
 
 ## Compatibility
 
@@ -91,7 +91,7 @@ The neo4j check is compatible with all major platforms
 The neo4j check does not include any event at this time.
 
 ### Service Checks
-
+The neo4j check does not include any service checks at this time.
 
 ## Troubleshooting
 
