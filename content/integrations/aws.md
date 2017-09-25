@@ -267,7 +267,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 ### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
-* `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
+* `kinesis:DescribeStream`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
