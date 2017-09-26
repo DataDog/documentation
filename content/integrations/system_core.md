@@ -1,6 +1,6 @@
 ---
-title: Datadog-System Core Integration
-integration_title: System Core
+title: Datadog-System CPU Core Integration
+integration_title: System CPU Core
 kind: integration
 newhlevel: true
 git_integration_title: system_core
