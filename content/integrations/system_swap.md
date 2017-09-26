@@ -1,12 +1,9 @@
 ---
-title: Datadog-PowerDNS Integration
-integration_title: PowerDNS Recursor
+title: Datadog-System swap Integration
+integration_title: System swap
 kind: integration
-git_integration_title: powerdns_recursor
 newhlevel: true
-doclevel: basic
-aliases:
-    - /integrations/powerdns
+git_integration_title: system_swap
 description: "{{< get-desc-from-git >}}"
 ---
 

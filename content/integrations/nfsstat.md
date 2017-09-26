@@ -1,13 +1,9 @@
 ---
-title: Datadog-PowerDNS Integration
-integration_title: PowerDNS Recursor
+title: Datadog-Nfsstat
+integration_title: Nfsstat
 kind: integration
-git_integration_title: powerdns_recursor
+git_integration_title: nfsstat
 newhlevel: true
-doclevel: basic
-aliases:
-    - /integrations/powerdns
-description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

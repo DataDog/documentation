@@ -6,9 +6,10 @@ newhlevel: true
 git_integration_title: directory
 description: "{{< get-desc-from-git >}}"
 ---
+
 ## Overview
 
-Capture metrics from the files in given directories:
+Capture metrics from directories and files of your choosing. The Agent will collect:
 
   * number of files
   * file size
@@ -16,48 +17,80 @@ Capture metrics from the files in given directories:
   * age of the creation
 
 ## Setup
+### Installation
+
+The directory check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) anywhere you wish to use it.
+
 ### Configuration
 
-*To capture Directory metrics you need to install the Datadog Agent.*
+Create a file `directory.yaml` in the Agent's `conf.d` directory:
 
-2.  Ensure the user account running the Agent (typically `dd-agent`) has read access to the monitored directory and files.
-3.  Configure the Agent to connect to your directories. Edit `directory.yaml` in your `conf.d` directory.
-{{< highlight yaml >}}
+```
 init_config:
 
 instances:
-    # For each instance, the 'directory' parameter is required, all others are optional.
-    #
-    # Instances take the following parameters:
-    # "directory" - string, the directory to monitor. Required.
-    # "name" - string, tag metrics with specified name. defaults to the "directory"
-    # "pattern" - string, the `fnmatch` pattern to use when reading the "directory"'s files.
-    #                     default "*"
-    # "recursive" - boolean, when true the stats will recurse into directories. default False
-    # "countonly" - boolean, when true the stats will only count the number of files matching the pattern. Useful for very large directories.
+  - directory: "/path/to/directory" # the only required option
+    name: "my_monitored_dir"        # What the Agent will tag this directory's metrics with. Defaults to "directory"
+    pattern: "*.log"                # defaults to "*" (all files)
+    recursive: True                 # default False
+    countonly: False                # set to True to only collect the number of files matching 'pattern'. Useful for very large directories.
+```
 
+Ensure that the user running the Agent process (usually `dd-agent`) has read access to the directories, subdirectories, and files you configure.
 
-    -  directory: "/absolute/path/to/directory"
-       name: "tag_name"
-       pattern: "*.log"
-       recursive: True
-{{< /highlight >}}
-
-4.  Restart the Agent
-
-{{< insert-example-links conf="directory" check="directory" >}}
+Restart the Agent to begin sending metrics on your chosen directories to Datadog.
 
 ### Validation
 
-To validate that the check has passed run the agent info command. The output of the command should contain a section similar to the following:
-{{< highlight shell >}}
-Checks
-======
+Run the Agent's `info` subcommand and look for `directory` under the Checks section:
 
-[...]
+```
+  Checks
+  ======
+    [...]
 
-directory
----------
-    - instance #0 [OK]
-    - Collected 8 metrics & 0 events
-{{< /highlight >}}
+    directory
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The directory check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+
+See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv) for a list of metrics provided by this integration.
+
+### Events
+The Directory check does not include any event at this time.
+
+### Service Checks
+The Directory check does not include any service check at this time.
+
+## Troubleshooting
+
+If you have any questions about Datadog or a use case our [Docs](https://docs.datadoghq.com/) didn’t mention, we’d love to help! Here’s how you can reach out to us:
+
+### Visit the Knowledge Base
+
+Learn more about what you can do in Datadog on the [Support Knowledge Base](https://datadog.zendesk.com/agent/).
+
+### Web Support
+
+Messages in the [event stream](https://app.datadoghq.com/event/stream) containing **@support-datadog** will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app.
+
+### By Email
+
+You can also contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
+
+### Over Slack
+
+Reach out to our team and other Datadog users on [Slack](http://chat.datadoghq.com/).
+
+## Further Reading
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

@@ -1,12 +1,8 @@
 ---
-title: Datadog-PowerDNS Integration
-integration_title: PowerDNS Recursor
+title: Datadog-Oracle
+integration_title: Oracle
 kind: integration
-git_integration_title: powerdns_recursor
-newhlevel: true
-doclevel: basic
-aliases:
-    - /integrations/powerdns
+git_integration_title: oracle
 description: "{{< get-desc-from-git >}}"
 ---
 
