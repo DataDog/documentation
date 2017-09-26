@@ -1,6 +1,8 @@
 # Hugo
 public/
 static/css/
+static/js/
+static/images/
 
 # Logs
 logs

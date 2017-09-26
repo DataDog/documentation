@@ -1,5 +1,5 @@
 {{/* set img path based on page type and what is passed */}}
-{{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" (.Get "src")) }}
+{{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" (index $.Site.Data.manifests.images (.Get "src"))) }}
 {{ $img := $.Scratch.Get "_img" }}
 
 {{ $image_type_arr := split (.Get "src") "." }}

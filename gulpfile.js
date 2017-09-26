@@ -15,6 +15,8 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var manifest = require('./src/manifest.json');
+var hash = require('gulp-hash');
+var del = require('del');
 
 // asset manifest is a json object containing paths to dependencies
 var path = manifest.paths;
@@ -60,7 +62,9 @@ var enabled = {
   // Fail due to JSHint warnings only when `--production`
   failJSHint: true,
   // Strip debug statments from javascript when `--production`
-  stripJSDebug: false
+  stripJSDebug: false,
+  // hash static?
+  hashStatic: true
 };
 
 // Path to the compiled assets manifest in the dist directory
@@ -184,6 +188,18 @@ gulp.task('jshint', function () {
     .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
 });
 
+
+// IMAGES
+gulp.task("images", function () {
+  del(["static/images/**/*"])
+  gulp.src("src/images/**/*")
+    .pipe(gulpif(enabled.hashStatic, hash()))
+    .pipe(gulp.dest("static/images"))
+    .pipe(hash.manifest("images.json"))
+    .pipe(gulp.dest("data/manifests"))
+});
+
+
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
 gulp.task('clean', require('del').bind(null, [path.dist]));
@@ -205,14 +221,17 @@ gulp.task('watch', function () {
   // });
   gulp.watch([path.source + 'scss/**/*'], ['styles']);
   gulp.watch([path.source + 'js/**/*'], ['scripts']);
+  gulp.watch([path.source + 'images/**/*'], ['images']);
 });
 
 // ### Build
 // `gulp build` - Run all the build tasks but don't clean up beforehand.
 // Generally you should be running `gulp` instead of `gulp build`.
 gulp.task('build', function (callback) {
-  runSequence('styles',
+  runSequence(
+    'styles',
     'scripts',
+    'images',
     callback);
 });
 
