@@ -7,8 +7,6 @@ git_integration_title: directory
 description: "{{< get-desc-from-git >}}"
 ---
 
-# Directory Check
-
 ## Overview
 
 Capture metrics from directories and files of your choosing. The Agent will collect:
