@@ -128,7 +128,7 @@ It transforms this log:
 Into this log:
 {{< img src="log/processing/attribute_post_remapping.png" alt="attribute post remapping " style="width:60%;">}}
 
-### URL processor 
+### URL Parser 
 
 This processor extracts query params and other important parameter from a URL, just enter the source attribute of your url:
 {{< img src="log/processing/url_processor.png" alt="Url Processor" >}}

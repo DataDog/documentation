@@ -18,26 +18,37 @@ Datadog's log management is currently in private beta. If you would like to appl
 Collecting logs is **disabled** by default in the Datadog Agent.
 To start gathering logs:
 
-1. [Install the Specific Datadog Agent](https://app.datadoghq.com/account/settings#agent).
-
-2. In the `conf.d` folder, create the `logs-agent.yaml` file with the following content: 
+* Install the Specific Datadog Agent:
 
 ```
+sudo sh -c "echo 'deb http://apt.datad0g.com/ beta main' > /etc/apt/sources.list.d/datadog.list"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
+sudo apt-get update
+apt-cache policy datadog-agent | grep logs
+sudo apt-get install datadog-agent
+```
+
+* In the `conf.d` folder, create the `logs-agent.yaml` file with the following content: 
+
+{{< highlight yaml >}}
 init_config:
 
 instances:
     [{}]
 
+#The host of the Datadog intake server to send log data to
 log_dd_url: "intake.logs.datadoghq.com"
-
 #Port used to send the logs
 log_dd_port: 10514
-logset: demo
 skip_ssl_validation: true
+#(mandatory)Same api_key than in datadog.conf
 api_key: <YOUR_DATADOG_API_KEY>
-hostname: MYHOSTNAME  # optional, should match whatever is in datadog.conf
+#(optional): same hostname than in Datadog.conf - used for host tags and links with metrics
+#hostname:  
 
-```
+{{< /highlight >}}
+
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ## Enabling log collection from integrations
 
