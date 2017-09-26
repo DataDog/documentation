@@ -65,7 +65,7 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
-{{< img src="log/explore/facets_demo.gif" alt="Facets demo" >}}
+{{< img src="log/explore/facets_demo.png" alt="Facets demo" >}}
 
 ### Create a Facet
 
@@ -84,7 +84,7 @@ Use facets to easily filters on your logs. The search bar and url automatically 
 Expand a facet to access advanced search options like 
 Including or excluding a pattern within a facet.
 
-For example: You want to have all host starting by “i-06”: 
+For example: You want to have all url starting with “/test_5”: 
 {{< img src="log/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
 
 ## Search bar
@@ -141,7 +141,7 @@ They can be used in the search and in facets as well:
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="log/explore/search_bar_autocomplete.gif" alt="search bar autocomplete " >}}
+{{< img src="log/explore/search_bar_autocomplete.png" alt="search bar autocomplete " >}}
 
 ## What's next
 
