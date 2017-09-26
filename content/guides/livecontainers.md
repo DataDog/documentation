@@ -9,7 +9,7 @@ beta: false
 
 Datadog Live Containers allows for real-time visibility of all of the containers across your environment.  Taking inspiration from bedrock tools like `htop` and `ctop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="process/live_process_preview.png" >}} //TODO CHANGE ME
+{{< img src="process/live-container-table-flow.gif" >}} 
 
 ## Searching, Filtering, and Pivoting
 
@@ -62,6 +62,6 @@ Live Containers supports a web proxy as [configured on the Agent](https://github
 
 - Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- The Process Agent is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
+- Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
 - RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent]( https://gist.github.com/hkaj/404385619e5908f16ea3134218648237).
