@@ -338,8 +338,8 @@ instances:
 
 ## Further Reading
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect !](https://help.datadoghq.com/hc/en-us/articles/218277463-I-Have-a-Matching-Bean-for-my-JMX-integration-but-nothing-on-Collect-)
-* [View jmx data in jConsole and set up your jmx.yaml to collect them](https://help.datadoghq.com/hc/en-us/articles/207525586-View-jmx-data-in-jConsole-and-set-up-your-jmx-yaml-to-collect-them)
+* [I Have a Matching Bean for my JMX integration but nothing on Collect!](https://help.datadoghq.com/hc/en-us/articles/218277463-I-Have-a-Matching-Bean-for-my-JMX-integration-but-nothing-on-Collect-)
+* [View JMX data in jConsole and set up your jmx.yaml to collect them](https://help.datadoghq.com/hc/en-us/articles/207525586-View-jmx-data-in-jConsole-and-set-up-your-jmx-yaml-to-collect-them)
 * [jmx.yaml error: Include Section](https://help.datadoghq.com/hc/en-us/articles/204538219-jmx-yaml-error-Include-Section)
 * [Collecting Composite type JMX attributes](https://help.datadoghq.com/hc/en-us/articles/207874586-Collecting-Composite-type-JMX-attributes)
 * [How to run JMX commands in Windows?](https://help.datadoghq.com/hc/en-us/articles/205122649-How-to-run-JMX-commands-in-Windows-)
