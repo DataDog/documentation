@@ -15,13 +15,11 @@ Datadog Live Containers allows for real-time visibility of all of the containers
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string //TODO ADD HERE
-
-{{< img src="process/postgres.png" >}} //TODO CHANGE ME
+Containers are by their nature extremely high cardinality objects.  Our flexible string search will match substrings in the container name, ID, or image fields.
 
 ### Tagging
 
-Containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual containers. 
+Containers are tagged with all existing host-level tags.  We also tag with metadata associated with individual containers. 
 
 All containers are tagged by `#container_image`, and additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
@@ -33,7 +31,7 @@ Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`,
 
 Making sense of thousands or tens of thousands of containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
+In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
 
 {{< img src="process/overprovisioned.png" >}}
 
@@ -52,11 +50,11 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 ## Installation
 
-Live Containers has been introduced in Datadog Agent version 5.17.2.  Besides updating to a recent version of the Agent, no other configuration is necessary.
+Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
 
 ### Proxy Configuration
 
-Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
+Live Containers supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
 
 ## Notes/known issues
 
