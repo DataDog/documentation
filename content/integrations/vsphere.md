@@ -20,7 +20,13 @@ aliases:
 //get-data-collected-from-git//
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+### How should the Datadog Agent be set up with vCenter and ESX?
+
+{{< img src="integrations/vmware/vmware_agent.png" >}}
+
+### How will a VMware integration impact my monthly billing?
+
+The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](https://docs.datadoghq.com/guides/billing/) page.
 
 ## Further Reading
 //get-further-reading-from-git//
