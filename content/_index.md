@@ -8,8 +8,6 @@ sidebar:
       href: "api/"
     - text: APM (Tracing)
       href: "tracing/"
-    - text: Logs (Beta)
-      href: "log/"
     - text: Libraries
       href: "libraries/"
     - text: Graphing
