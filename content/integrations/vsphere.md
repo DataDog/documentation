@@ -5,7 +5,7 @@ git_integration_title: vsphere
 kind: integration
 newhlevel: true
 aliases:
-    -/integrations/vmware/
+    - /integrations/vmware/
 ---
 
 {{< img src="integrations/vmware/vsphere_graph.png" >}}
