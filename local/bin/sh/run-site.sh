@@ -14,6 +14,7 @@ if [ ${RUN_SERVER} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
 		npm install
         echo "starting gulp watch"
+        gulp build
         gulp watch --silent &
 	fi
 	echo "building hugo site..."

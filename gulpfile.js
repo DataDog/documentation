@@ -81,6 +81,7 @@ var revManifest = path.dist + 'assets.json';
 //   .pipe(gulp.dest(path.dist + 'styles'))
 // ```
 var cssTasks = function (filename) {
+  del(["static/css/**/*"]);
   return lazypipe()
     .pipe(function () {
       return gulpif(!enabled.failStyleTask, plumber());
@@ -106,6 +107,9 @@ var cssTasks = function (filename) {
       return gulpif(argv.production, cssNano({
         safe: true
       }));
+    })
+    .pipe(function () {
+      return gulpif(enabled.hashStatic, hash())
     })();
 };
 
@@ -117,10 +121,14 @@ var cssTasks = function (filename) {
 //   .pipe(gulp.dest(path.dist + 'scripts'))
 // ```
 var jsTasks = function (filename) {
+  del(["static/js/**/*"]);
   return lazypipe()
     .pipe(concat, filename)
     .pipe(function () {
       return gulpif(argv.production, uglify({compress: {'drop_debugger': true}}));
+    })
+    .pipe(function () {
+      return gulpif(enabled.hashStatic, hash())
     })();
 };
 
@@ -157,7 +165,9 @@ gulp.task('styles', function () {
     }
   }
   return merged
-    .pipe(writeToManifest('css'));
+    .pipe(writeToManifest('css'))
+    .pipe(hash.manifest("css.json"))
+    .pipe(gulp.dest("data/manifests"));
 });
 
 // ### Scripts
@@ -174,7 +184,9 @@ gulp.task('scripts', function () {
     }
   }
   return merged
-    .pipe(writeToManifest('js'));
+    .pipe(writeToManifest('js'))
+    .pipe(hash.manifest("js.json"))
+    .pipe(gulp.dest("data/manifests"));
 });
 
 // ### JSHint
@@ -191,7 +203,7 @@ gulp.task('jshint', function () {
 
 // IMAGES
 gulp.task("images", function () {
-  del(["static/images/**/*"])
+  del(["static/images/**/*"]);
   gulp.src("src/images/**/*")
     .pipe(gulpif(enabled.hashStatic, hash()))
     .pipe(gulp.dest("static/images"))

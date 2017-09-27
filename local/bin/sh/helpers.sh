@@ -13,10 +13,6 @@ version_static_assets() {
         else
             gulp build --production || fail_step "${FUNCNAME}"
         fi
-        # ============ version created assets ============ #
-        echo "--------"
-        echo "Fingerprinting static assets... "
-        version_static.py || fail_step "${FUNCNAME}"
     fi
     pass_step  "${FUNCNAME}"
 }
