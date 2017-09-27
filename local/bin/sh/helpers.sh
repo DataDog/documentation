@@ -6,7 +6,7 @@ version_static_assets() {
     start_step
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
-        test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+        test -d "node_modules" || (echo "cp missing node_modules from ~/etc/node_modules"; cp -r ~/etc/node_modules .)
         npm install  # make sure everything is uptodate
         if [[ "${BUCKET}" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
@@ -27,7 +27,7 @@ collect_static_assets() {
     echo "Collecting static assets to s3://${STATIC_BUCKET}/documentation/ from ${ARTIFACT_RESOURCE}/"
     s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --add-header="Cache-Control:public, max-age=31536000, immutable" \
-          --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
+          --exclude-from '~/etc/long_cache.excludes'  --include-from '~/etc/long_cache.includes' \
           "${ARTIFACT_RESOURCE}/" s3://${STATIC_BUCKET}/documentation/ || (echo "failed to collect static to s3://${STATIC_BUCKET}/documentation/" && fail_step "${FUNCNAME}")
     echo "Done collecting static."
     pass_step  "${FUNCNAME}"
@@ -59,12 +59,12 @@ create_artifact() {
         short_hash="$(git rev-parse --short HEAD)"
     fi
     echo "artifact name is ${short_hash}"
-    tar -czf "/tmp/${short_hash}.tar.gz" "${ARTIFACT_RESOURCE}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
-    ls -l /tmp | grep "${short_hash}.tar.gz"
+    tar -czf "~/tmp/${short_hash}.tar.gz" "${ARTIFACT_RESOURCE}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
+    ls -l ~/tmp | grep "${short_hash}.tar.gz"
     echo "---------"
     echo "Deploying artifact: ${short_hash}.tar.gz to s3://"${STATIC_BUCKET}"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     s3cmd put --encoding=utf-8 --acl-public --no-guess-mime-type --stop-on-error \
-          "/tmp/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
+          "~/tmp/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
     echo "removing build"
     rm -rf "${ARTIFACT_RESOURCE}"
     echo "Done."
@@ -113,11 +113,11 @@ build_hugo_site() {
     echo "Building hugo with build.yaml based on ${CONFIG}; referencing ${URL}"
     # fail hugo build on WARN or ERROR
     hugo version
-    if hugo --config="build.yaml" --verbose 2>&1 | grep -E  "WARN|ERROR" | grep -v "No theme set" > /tmp/hugo.log; then
+    if hugo --config="build.yaml" --verbose 2>&1 | grep -E  "WARN|ERROR" | grep -v "No theme set" > ~/tmp/hugo.log; then
         echo "done."
     fi
-    if [[ -s /tmp/hugo.log ]]; then
-      cat /tmp/hugo.log
+    if [[ -s ~/tmp/hugo.log ]]; then
+      cat ~/tmp/hugo.log
       echo "Please fix all warnings and errors and try again."
       fail_step "${FUNCNAME}"
     fi
@@ -192,12 +192,12 @@ push_site_to_s3() {
     # long cache - includes assets that need to be loaded first
     s3cmd sync --encoding=utf-8 --acl-public --guess-mime-type --no-mime-magic --recursive --verbose \
           --quiet --add-header="Cache-Control:public, max-age=31536000, immutable" \
-          --exclude-from '/etc/long_cache.excludes'  --include-from '/etc/long_cache.includes' \
+          --exclude-from '~/etc/long_cache.excludes'  --include-from '~/etc/long_cache.includes' \
           "${ARTIFACT_RESOURCE}/" s3://${BUCKET}/$(set_site_destination "${BUCKET}" "${CI_COMMIT_REF_NAME}")
     # short cache
     s3cmd sync --encoding=utf-8 --delete-removed --acl-public --guess-mime-type --no-mime-magic --recursive \
           --quiet --add-header="Cache-Control:public, must-revalidate, proxy-revalidate, max-age=0" \
-          --exclude-from '/etc/short_cache.excludes' --include-from '/etc/short_cache.includes' \
+          --exclude-from '~/etc/short_cache.excludes' --include-from '~/etc/short_cache.includes' \
           "${ARTIFACT_RESOURCE}/" s3://${BUCKET}/$(set_site_destination "${BUCKET}" "${CI_COMMIT_REF_NAME}")
     echo "OK. site pushed to s3://${BUCKET}/$(set_site_destination ${CI_COMMIT_REF_NAME})"
     pass_step  "${FUNCNAME}"
@@ -222,12 +222,12 @@ test_site_links() {
     fi
 
     check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
-    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 5 --ignore "/etc/links.ignore" || fail_step "${1} check failed."
+    --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 5 --ignore "~/etc/links.ignore" || fail_step "${1} check failed."
 
     # update trello with broken external links
 	if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
 	    echo "updating trello"
-	    source /etc/trello_config.sh
+	    source ~/etc/trello_config.sh
 	    trello_add_update_card.py --board_id "${TRELLO_BOARD_ID}" --card_name "${card_name}" --card_text "${card_text}" \
 	    --list_id "${TRELLO_LIST_ID}" --members "${members}"
 	fi

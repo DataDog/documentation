@@ -73,7 +73,7 @@ docker-start: clean docker-stop  ## start container and run default commands to 
 docker-stop:  ## kill the site and stop the running container.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || echo "nothing to clean."
 
-docker-tests: stop ## run the tests through the docker container.
+docker-tests: stop  ## run the tests through the docker container.
 	@docker run -tid --name "docs" -v `pwd`:/home/docs:cached \
 		-e RUN_SERVER=true \
 		-e RUN_GULP=false \
