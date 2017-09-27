@@ -32,50 +32,46 @@ languages:
           name: "Tracing"
           url: "tracing/"
           weight: 20
-        - identifier: menu_references_log
-          name: "Logs (beta)"
-          url: "log/"
-          weight: 30
         - identifier: menu_references_libraries
           name: ""
           url: "libraries/"
-          weight: 40
+          weight: 30
         - identifier: menu_references_monitoring
           name: ""
           url: "monitoring/"
-          weight: 50
+          weight: 40
         - identifier: menu_references_graphing
           name: ""
           url: "graphing/"
-          weight: 60
+          weight: 50
         - identifier: menu_references_host_names
           name: ""
           url: "hostnames/"
-          weight: 70
+          weight: 60
         - identifier: menu_references_integrations
           name: ""
           url: "integrations/"
-          weight: 80
+          weight: 70
         - identifier: menu_references_dogstatsd
           name: ""
           url: "guides/dogstatsd/"
-          weight: 90
+          weight: 80
         - identifier: menu_references_examples
           name: ""
           url: "examples/"
-          weight: 100
+          weight: 90
         - identifier: menu_references_videos
           name: ""
           url: "videos/"
-          weight: 110
+          weight: 100
         - identifier: menu_references_billing
           name: ""
           url: "guides/billing/"
-          weight: 120
+          weight: 110
         - identifier: menu_references_faq
           name: ""
           url: "faq/"
-          weight: 130
+          weight: 120
           
       basic_agent:
         - identifier: amazonlinux
