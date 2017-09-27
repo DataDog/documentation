@@ -2,7 +2,7 @@
 title: Datadog Process and Container Monitoring
 kind: guide
 listorder: 16
-beta: false
+beta: true
 ---
 
 ## Introduction
