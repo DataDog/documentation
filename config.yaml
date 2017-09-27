@@ -178,16 +178,16 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_lognav_collection
-          url: log/
+          url: logs/
           weight: 20
         - identifier: customnav_lognav_explore
-          url: log/explore/
+          url: logs/explore/
           weight: 30
         - identifier: customnav_lognav_processing
-          url: log/processing/
+          url: logs/processing/
           weight: 40
         - identifier: customnav_lognav_parsing
-          url: log/parsing/
+          url: logs/parsing/
           weight: 50
 
 
