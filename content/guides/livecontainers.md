@@ -31,15 +31,15 @@ Kubernetes Containers are tagged by `kube_pod`, `kube_pod_ip`, `kube_service`, `
 
 Making sense of thousands or tens of thousands of containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
+In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
 {{< img src="process/overprovisioned.png" >}}
 
-Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
+Container environments are dynamic and can be hard to follow.  Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
 
 {{< img src="process/hostxservice.png" >}}
 
-It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
+It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and understand changes to resource utilization between updates.
 
 {{< img src="process/tasksxversion.png" >}}
 
