@@ -145,5 +145,5 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 
 ## What's next
 
-* Learn how to [process your logs](/log/processing)
-* Learn more about [parsing](/log/parsing)
+* Learn how to [process your logs](/logs/processing)
+* Learn more about [parsing](/logs/parsing)

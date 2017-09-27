@@ -93,7 +93,7 @@ Here is the list of all the filter natively implemented by Datadog:
 |`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. [More info](#key-value) |
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
-|`url`|parses an url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/log/processing/#url-parser)|
+|`url`|parses an url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/logs/processing/#url-parser)|
 
 ## Examples
 Let’s see some examples to understand better how this works.
@@ -143,7 +143,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
 
-Parsing a date **doesn't** set its value as the log official date, for this you need to use the [Log Date Remapper](/log/processing/#log-date-remapper) .
+Parsing a date **doesn't** set its value as the log official date, for this you need to use the [Log Date Remapper](/logs/processing/#log-date-remapper) .
 
 ### Conditional pattern
 
@@ -205,5 +205,5 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 
 ## What's next 
 
-* Learn how to [explore your logs](/log/explore)
-* Learn how to [process your logs](/log/processing)
+* Learn how to [explore your logs](/logs/explore)
+* Learn how to [process your logs](/logs/processing)

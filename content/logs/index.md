@@ -147,25 +147,25 @@ However, if your logs defines one of the following attributes Datadog considers 
 * `eventTime`
 * `published_date`
 
-You can also ask Datadog to consider any attribute as the official date reference thanks to the [log date remapper processor](/log/processing/#log-date-remapper)
+You can also ask Datadog to consider any attribute as the official date reference thanks to the [log date remapper processor](/logs/processing/#log-date-remapper)
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 ### `message` attribute
 
-By default, Datadog considers the `message` as the main content of the log. It has then a special display in the [log list](/log/explore/#log-list) and you can run full text search on it.
+By default, Datadog considers the `message` as the main content of the log. It has then a special display in the [log list](/logs/explore/#log-list) and you can run full text search on it.
 
-The `message` attribute is indexed as text for the [search bar](/log/explore/#search-bar) allowing you to search over any tokenized word without mentioning the path to the attribute.
+The `message` attribute is indexed as text for the [search bar](/logs/explore/#search-bar) allowing you to search over any tokenized word without mentioning the path to the attribute.
 
 ### `severity` attribute
 
 Each log has its own severity, and your datadog application levrage a lot this information.
 
-If you would like to remap some severities existing in the `severity` attribute with the [log severity remapper](/log/processing/#log-severity-remapper)
+If you would like to remap some severities existing in the `severity` attribute with the [log severity remapper](/logs/processing/#log-severity-remapper)
 
 ## What's next
 
-* Learn how to [explore your logs](/log/explore)
-* Learn how to [process your logs](/log/processing)
-* Learn more about [parsing](/log/parsing)
+* Learn how to [explore your logs](/logs/explore)
+* Learn how to [process your logs](/logs/processing)
+* Learn more about [parsing](/logs/parsing)

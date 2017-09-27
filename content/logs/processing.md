@@ -20,7 +20,7 @@ To access the processing panel use the upper left menu:
 
 **A processing pipeline applies over a filtered subset of incoming logs a list of sequential processors.**
 
-With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/log/explore/#facets).
+With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
@@ -41,7 +41,7 @@ Pipelines can take logs from a wide variety of formats and translate them all in
 
 Filters let you limit what kinds of logs a pipeline will apply to.
 
-The filter syntax is the same as the [search bar](/log/explore/#search-bar).
+The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
 **Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist** 
 
@@ -69,7 +69,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 {{< img src="logs/processing/parser.png" alt="Parser" >}}
 
-Read more about this in the [parsing section](/log/parsing)
+Read more about this in the [parsing section](/logs/parsing)
 
 ### Log Date Remapper 
 
@@ -148,5 +148,5 @@ Give the following results:
 
 ## What's next
 
-* Learn how to [explore your logs](/log/explore)
-* Learn more about [parsing](/log/parsing)
+* Learn how to [explore your logs](/logs/explore)
+* Learn more about [parsing](/logs/parsing)
