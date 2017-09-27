@@ -65,5 +65,4 @@ Checks
 Returns `Critical` if the Agent cannot connect to CouchDB to collect metrics.
 
 ## Further Reading
-### Blog Article
 To get a better idea of how (or why) to integrate your CouchDB cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog/) about it.

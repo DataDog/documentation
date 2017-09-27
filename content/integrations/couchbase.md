@@ -70,5 +70,4 @@ Checks
 Returns `Critical` if the Agent cannot connect to Couchbase to collect metrics.
 
 ## Further Reading
-### Blog Article
 To get a better idea of how (or why) to integrate your Couchbase cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog/) about it.

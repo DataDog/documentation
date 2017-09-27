@@ -8,8 +8,7 @@
         <div class="col-xs-12 col-sm-9 col-md-9 main">
             <h1>Uh oh, Something Went Wrong</h1>
 
-            <img src="{{ .Site.Params.img_url }}images/sad_bits.png" />
-
+            <img src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
             <p class="alert alert-error pull-left">
                 Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
             </p>

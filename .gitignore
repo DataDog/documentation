@@ -1,6 +1,10 @@
 # Hugo
 public/
 static/css/
+static/js/
+static/images/
+data/integrations/
+data/manifests/
 
 # Logs
 logs
@@ -72,6 +76,6 @@ Temporary Items
 
 # virtual env
 /hugpython/
-/data/integrations/
+
 /DataDog-dogweb-*/
 Makefile.config

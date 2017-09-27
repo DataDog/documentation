@@ -30,5 +30,4 @@ In the Amazon Web Services integration tile, ensure the **ELB checkbox** is chec
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
 ## Further Reading
-### Blog Article
 Learn more about how to monitor ELB performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor ELB.

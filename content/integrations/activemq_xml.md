@@ -50,5 +50,4 @@ The Activemq_xml check does not include any event at this time.
 The Activemq_xml check does not include any service check at this time.
 
 ## Further Reading
-### Blog Article
 See our blog post [Monitor ActiveMQ metrics and performance](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance/)

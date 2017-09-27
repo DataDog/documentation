@@ -61,5 +61,4 @@ Checks
 {{< get-metrics-from-git >}}
 
 ## Further Reading
-### Blog Article
 To get a better idea of how (or why) to integrate your Ceph cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-ceph-datadog/) about it.
