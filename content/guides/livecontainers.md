@@ -21,11 +21,11 @@ Containers are by their nature extremely high cardinality objects.  Our flexible
 
 Containers are tagged with all existing host-level tags.  We also tag with metadata associated with individual containers. 
 
-All containers are tagged by `#container_image`, and additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
+All containers are tagged by `container_image`, and additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
-ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
+ECS Containers are tagged by `ecs_task_name`, `ecs_task_version`, and `ecs_cluster`
 
-Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `#job`, and `#deployment`.
+Kubernetes Containers are tagged by `kube_pod`, `kube_pod_ip`, `kube_service`, `kube_namespace`, `kube_replica_set`, `kube_daemon_set`, `kube_job`, `kube_deployment`, and `kube_cluster`.
 
 ### Filtering and Pivoting
 
