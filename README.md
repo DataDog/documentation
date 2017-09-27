@@ -19,7 +19,7 @@ npm install --global --production gulp-cli && npm install
 
 `hugo server --renderToDisk`
 
-`gulp build && gulp watch`
+`gulp watch`
 
 
 ## Makefile
