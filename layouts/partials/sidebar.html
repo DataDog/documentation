@@ -13,7 +13,9 @@
     <li class="nav-header">Documentation Search</li>
     <li>
       <form action="{{ $.Site.BaseURL }}search/">
-      <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+      <input type="text" name="q" id="tipue_search_input" autocomplete="off"
+             style="background-image: url({{ partial "img.html" (dict "root" . "src" "search.png") }});"
+             required>
       </form>
     </li>
   {{ end }}

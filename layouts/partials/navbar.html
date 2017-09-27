@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-header">
           <a href="{{ absLangURL "" }}" class="navbar-brand">
-            <img width="275" src="{{ .Site.Params.img_url }}images/(index $.Site.Data.manifests.images "dd_docs_logo.png")">
+            <img width="275" src="{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png") }}">
           </a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topmenu">
             <span class="icon-bar"></span>
