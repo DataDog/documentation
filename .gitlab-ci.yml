@@ -4,7 +4,7 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.7"
+  BUILD_IMAGE: "mstbbs/docker-dd-docs:0.9"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
@@ -12,9 +12,9 @@ variables:
 
 # ================== copy scripts =============== #
 before_script:
-  - find local/bin/ -type f -exec cp -rf {} ~/bin \;  # load scripts
-  - find local/etc/ -type f -exec cp -rf {} ~/etc \;  # load configs
-  - source ~/bin/helpers.sh  # source helpers so they are available in the container
+  - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
+  - find local/etc/ -type f -exec cp {} /etc \;  # load configs
+  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
 
 # ================== templates ================== #
 .base_template: &base_template
