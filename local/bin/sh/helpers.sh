@@ -7,6 +7,7 @@ version_static_assets() {
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
         test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+        npm install  # make sure everything is uptodate
         if [[ "${BUCKET}" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
