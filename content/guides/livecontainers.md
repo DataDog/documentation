@@ -9,7 +9,7 @@ beta: true
 
 Datadog Live Containers allows for real-time visibility of all of the containers across your environment.  Taking inspiration from bedrock tools like `htop` and `ctop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="process/live-container-table-flow.gif" >}} 
+{{< img src="process/LiveContainersWithSummaries.png" >}} 
 
 ## Searching, Filtering, and Pivoting
 
