@@ -39,7 +39,7 @@ clean-build:  ## remove build artifacts.
 
 clean-docker:  ## remove image.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
-	@if [[ `docker images | grep mstbbs/docker-dd-docs:0.9` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:0.9; fi
+	@if [[ `docker images | grep mstbbs/docker-dd-docs:latest` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:latest; fi
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
@@ -68,7 +68,7 @@ docker-start: clean docker-stop  ## start container and run default commands to 
 		-e DOGWEB=${DOGWEB} \
 		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
 		-e USE_DOCKER=true \
-		-p 1313:1313 mstbbs/docker-dd-docs:0.9
+		-p 1313:1313 mstbbs/docker-dd-docs:latest
 
 docker-stop:  ## kill the site and stop the running container.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || echo "nothing to clean."
@@ -77,7 +77,7 @@ docker-tests: stop  ## run the tests through the docker container.
 	@docker run -tid --name "docs" -v `pwd`:/src:cached \
 		-e RUN_SERVER=true \
 		-e RUN_GULP=false \
-		-p 1313:1313 mstbbs/docker-dd-docs:0.9
+		-p 1313:1313 mstbbs/docker-dd-docs:latest
 	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
 	@docker exec -ti docs run-tests.sh
 	@make docker-stop
