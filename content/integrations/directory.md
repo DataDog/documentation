@@ -64,7 +64,7 @@ The directory check is compatible with all major platforms.
 ## Data Collected
 ### Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv) for a list of metrics provided by this integration.
+{{< get-metrics-from-git >}}
 
 ### Events
 The Directory check does not include any event at this time.

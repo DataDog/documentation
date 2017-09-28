@@ -42,6 +42,7 @@
     "merge-stream": "^1.0",
     "minimist": "^1.1",
     "traverse": "^0.6",
-    "run-sequence": "^1.1.4"
+    "run-sequence": "^1.1.4",
+    "gulp-hash": "4.1.1"
   }
 }

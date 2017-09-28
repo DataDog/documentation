@@ -13,25 +13,45 @@
     <li class="nav-header">Documentation Search</li>
     <li>
       <form action="{{ $.Site.BaseURL }}search/">
-      <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+      <input type="text" name="q" id="tipue_search_input" autocomplete="off"
+             style="background-image: url({{ partial "img.html" (dict "root" . "src" "search.png") }});"
+             required>
       </form>
     </li>
   {{ end }}
 
 {{ if $custom_sidebar }}
-{{ $nav_headers := (slice "customnav_tracingnav_tracing" "customnav_tracingnav_langs")}}
-  <li id="toc-box"></li>
-  {{ range .Site.Menus.tracingnav -}}
+  {{ if eq $custom_sidebar "tracingnav" }}
+    {{ $nav_headers := (slice "customnav_tracingnav_tracing" "customnav_tracingnav_langs")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.tracingnav -}}
 
-    {{ if in $nav_headers .Identifier }}
-    <li class="nav-header">{{ i18n .Identifier }}</li>
-    {{ else }}
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
 
-    <li class="">
-      <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
-    </li>
-    {{ end }}
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
 
+      {{ end }}
+
+  {{ else if eq $custom_sidebar "lognav"}}
+    {{ $nav_headers := (slice "customnav_lognav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.lognav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+
+      {{ end }}
   {{ end }}
 
 {{ else }}
