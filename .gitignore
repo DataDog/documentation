@@ -1,6 +1,10 @@
 # Hugo
 public/
 static/css/
+static/js/
+static/images/
+data/integrations/
+data/manifests/
 
 # Logs
 logs
@@ -28,9 +32,13 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+package-lock.json
 
 # Optional npm cache directory
 .npm
+.config
+/.node-gyp/
+/.v8flags*
 
 # Optional REPL history
 .node_repl_history
@@ -72,6 +80,6 @@ Temporary Items
 
 # virtual env
 /hugpython/
-/data/integrations/
+
 /DataDog-dogweb-*/
 Makefile.config
