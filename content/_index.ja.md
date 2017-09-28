@@ -25,6 +25,9 @@ sidebar:
       href: "faq/"
     - text: 課金に関するFAQ
       href: "guides/billing/"
+aliases:
+    - /ja/guides/
+
 ---
 <!--
  <h1 id="pagetitle">Get Started with Datadog </h1>

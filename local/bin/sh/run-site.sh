@@ -12,8 +12,9 @@ CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 if [ ${RUN_SERVER} == true ]; then
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
-		npm install
+		npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
         echo "starting gulp watch"
+        gulp build
         gulp watch --silent &
 	fi
 	echo "building hugo site..."
