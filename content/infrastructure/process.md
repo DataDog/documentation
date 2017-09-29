@@ -7,13 +7,62 @@ aliases:
   - /guides/process
 ---
 
-As this feature is in private beta, please do not discuss in public forums.  For details, email <process-support@datadoghq.com> 
-
 ## Introduction
 
 Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
 {{< img src="process/live_process_preview.png" >}}
+
+## Installation
+
+### Standard Agent Configuration
+
+Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
+
+Once the Datadog Agent is installed, enable Live Processes collection by editing the config file at 
+
+    /etc/dd-agent/datadog.conf
+    
+and adding the following line to the `[Main]` section
+
+    process_agent_enabled: true
+    
+After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+
+### Docker container
+
+Update to the Datadog Agent image version 5.16.0 or above:
+
+    $ docker pull datadog/docker-dd-agent
+
+Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), passing in the following attributes, in additon to any other custom settings as appropriate:
+
+    -v /etc/passwd:/etc/passwd:ro
+    -e DD_PROCESS_AGENT_ENABLED=true
+    -e HOST_PROC=/host/proc
+    -e HOST_SYS=/host/sys
+
+### Kubernetes Daemonset
+
+In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
+
+    env:
+      - name: DD_PROCESS_AGENT_ENABLED
+        value: "true"
+      - name: HOST_PROC
+        value: /host/proc
+      - name: HOST_SYS
+        value: /host/sys
+    volumeMount:
+      - name: passwd
+        mountPath: /etc/passwd
+        readOnly: true
+    volume:
+      - hostPath:
+          path: /etc/passwd
+        name: passwd    
+    
+Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
@@ -70,62 +119,6 @@ From there, you can dig down into finer grains, or inspect each group to see ind
 ## Real-time monitoring
 
 While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
-
-## Installation
-
-### Standard Agent Configuration
-
-Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
-
-Once the Datadog Agent is installed, enable Live Processes collection by editing the config file at 
-
-    /etc/dd-agent/datadog.conf
-    
-and adding the following line to the `[Main]` section
-
-    process_agent_enabled: true
-    
-After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
-
-### Docker container
-
-Update to the Datadog Agent image version 5.16.0 or above:
-
-    $ docker pull datadog/docker-dd-agent
-
-Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), passing in the following attributes, in additon to any other custom settings as appropriate:
-
-    -v /etc/passwd:/etc/passwd:ro
-    -e DD_PROCESS_AGENT_ENABLED=true
-    -e HOST_PROC=/host/proc
-    -e HOST_SYS=/host/sys
-
-### Kubernetes Daemonset
-
-In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
-
-    env:
-      - name: DD_PROCESS_AGENT_ENABLED
-        value: "true"
-      - name: HOST_PROC
-        value: /host/proc
-      - name: HOST_SYS
-        value: /host/sys
-    volumeMount:
-      - name: passwd
-        mountPath: /etc/passwd
-        readOnly: true
-    volume:
-      - hostPath:
-          path: /etc/passwd
-        name: passwd    
-    
-Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
-
-
-### Proxy Configuration
-
-Live Processes supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
 
 ## Notes/known issues
 

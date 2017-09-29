@@ -11,7 +11,13 @@ aliases:
 
 Datadog Live Containers allows for real-time visibility of all of the containers across your environment.  Taking inspiration from bedrock tools like `htop` and `ctop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="process/LiveContainersWithSummaries.png" >}} 
+{{< img src="livecontainers/LiveContainersWithSummaries.png" >}} 
+
+## Installation
+
+Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
+
+Note that for collecting Container information in the standard install rather than with the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), the dd-agent user will need to have permissions to access docker.sock.
 
 ## Searching, Filtering, and Pivoting
 
@@ -35,30 +41,20 @@ Making sense of thousands or tens of thousands of containers can seem overwhelmi
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="process/overprovisioned.png" >}}
+{{< img src="livecontainers/overprovisioned.png" >}}
 
 Container environments are dynamic and can be hard to follow.  Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
 
-{{< img src="process/hostxservice.png" >}}
+{{< img src="livecontainers/hostxservice.png" >}}
 
 It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and understand changes to resource utilization between updates.
 
-{{< img src="process/tasksxversion.png" >}}
+{{< img src="livecontainers/tasksxversion.png" >}}
 
 
 ## Real-time monitoring
 
-While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
-
-## Installation
-
-Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
-
-Note that for collecting Container information in the standard install rather than with the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), the dd-agent user will need to have permissions to access docker.sock.
-
-### Proxy Configuration
-
-Live Containers supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
+While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
 
 ## Notes/known issues
 
