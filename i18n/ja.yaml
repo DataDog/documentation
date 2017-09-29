@@ -25,7 +25,7 @@
 - id: menu_references_graphingjson
   translation: "JSONを使ったグラフの設定"
 
-- id: menu_references_host_names
+- id: menu_references_infrastructure
   translation: "ホスト名について"
 
 - id: menu_references_integrations

@@ -44,9 +44,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -169,6 +169,23 @@ languages:
           url: tracing/api/
           weight: 110
 
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_hostnames
+          url: "infrastructure/hostnames"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/liveconatiners"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
       lognav:
         - identifier: customnav_lognav
           url: "#"
@@ -185,7 +202,6 @@ languages:
         - identifier: customnav_lognav_parsing
           url: logs/parsing/
           weight: 50
-
 
   ja:
     #languagename: "日本語"
@@ -213,9 +229,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""

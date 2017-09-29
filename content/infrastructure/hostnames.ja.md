@@ -11,6 +11,8 @@ sidebar:
       href: "#agent"
     - text: ホスト名のエリアス
       href: "#aliases"
+aliases:
+  - /ja/hostnames
 ---
 
 <!-- <div class="alert alert-info">

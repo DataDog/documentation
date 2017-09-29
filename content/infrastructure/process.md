@@ -3,6 +3,8 @@ title: Datadog Process and Container Monitoring
 kind: guide
 listorder: 16
 beta: true
+aliases:
+  - /guides/process
 ---
 
 As this feature is in private beta, please do not discuss in public forums.  For details, email <process-support@datadoghq.com> 
