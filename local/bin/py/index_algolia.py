@@ -62,14 +62,9 @@ def index_algolia(app_id, api_key, content_path=None):
 
                             if title and '://' not in title:
                                 # description
-                                desc_text = ""
-                                main = html.find("div", {"main"})
-                                if main:
-                                    main_text = main.text
-                                    desc_text = main_text.getText()[:7000]
+                                main = html.find("div", {'main'}).getText()[:7000]
 
                                 fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
-
                                 if fm_description != default_description and '{{' not in fm_description:
                                     description = fm_description
                                 else:
@@ -84,7 +79,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
-                                article['body'] = desc_text
+                                article['body'] = main
                                 article['file'] = dirpath + '/' + filename
                                 article['page_description'] = description
 
@@ -141,10 +136,10 @@ if __name__ == '__main__':
     a_id = parser.parse_args().app_id
     a_key = parser.parse_args().api_key
 
-    if not a_key:
-        try:
-            key = os.environ['ALGOLIA_API_KEY']
-        except KeyError:
-            key = input("Algolia API key: ")
+    # if not a_key:
+    #     try:
+    #         key = os.environ['ALGOLIA_API_KEY']
+    #     except KeyError:
+    #         key = input("Algolia API key: ")
 
-    index_algolia(app_id=a_id, api_key=a_key)
+    index_algolia(app_id="", api_key="", content_path="/Users/michaelwhetten/Datadog/web/hugo/documentation/public" )

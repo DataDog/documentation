@@ -7,6 +7,7 @@ INTEGRATIONS_CORE=${INTEGRATIONS_CORE:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:="false"}
 RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
+RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 
 
 if [ ${RUN_SERVER} == true ]; then
@@ -42,7 +43,11 @@ if [ ${RUN_SERVER} == true ]; then
 	fi
 
 	# hugo
-	hugo server &
+	args=""
+	if [ ${RENDER_SITE_TO_DISK} != "false" ]; then
+		args="${args} --renderToDisk"
+	fi
+	hugo server ${args} &
 	sleep 5
 
 	if [ ${RUN_GULP} == true ]; then
