@@ -211,6 +211,11 @@ gulp.task("images", function () {
     .pipe(gulp.dest("data/manifests"))
 });
 
+gulp.task("partials", function() {
+    //gulp.src("layouts/partials/**/*").pipe()
+    console.log('hi');
+});
+
 
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
@@ -234,6 +239,7 @@ gulp.task('watch', function () {
   gulp.watch([path.source + 'scss/**/*'], ['styles']);
   gulp.watch([path.source + 'js/**/*'], ['scripts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
+  gulp.watch([path.source + 'layouts/partials/**/*'], ['partials']);
 });
 
 // ### Build

@@ -1,5 +1,4 @@
-{{ partial "header.html" . }}
-{{ partial "navbar.html" . }}
+{{ define "main" }}
 
 {{ $relp := .RelPermalink }}
 {{ $relarr := split $relp "/" }}
@@ -31,5 +30,4 @@
   </div>
 </div>
 
-{{ partial "container-footer.html" . }}
-{{ partial "footer.html" . }}
+{{ end }}
