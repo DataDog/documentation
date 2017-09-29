@@ -23,6 +23,7 @@ help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
 clean: stop  ## clean all make installs.
+	@echo "cleaning up..."
 	make clean-build
 	make clean-integrations
 	make clean-static
@@ -95,7 +96,7 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 
-start: stop clean source-helpers ## start the gulp/hugo server.
+start: clean source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -113,6 +114,6 @@ start: stop clean source-helpers ## start the gulp/hugo server.
 		run-site.sh; fi
 
 stop:  ## stop the gulp/hugo server.
-	@echo "cleaning up..."
+	@echo "stopping previous..."
 	@pkill -x gulp || true
 	@pkill -x hugo server --renderToDisk || true
