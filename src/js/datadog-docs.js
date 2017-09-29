@@ -201,7 +201,10 @@ $(document).ready(function () {
             '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
           formatted_results += '<div class="tipue_search_content_url">' +
             '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-          var text = hit._snippetResult.body.value
+          var text = hit.page_description;
+          if (text.length < 20) {
+            var text = hit._snippetResult.body.value
+          }
 
           formatted_results += '<div class="tipue_search_content_text">' +
             text + '</div>';
