@@ -2,6 +2,8 @@
 title: Host Map Overview
 kind: guide
 listorder: 3
+aliases:
+  - /guides/hostmap
 ---
 ## Overview
 

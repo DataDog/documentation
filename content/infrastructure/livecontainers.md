@@ -3,6 +3,8 @@ title: Live Containers
 kind: guide
 listorder: 16
 beta: false
+aliases:
+  - /guides/livecontainers
 ---
 
 ## Introduction

@@ -8,6 +8,8 @@ sidebar:
       href: "#agent-host-name"
     - text: Host Aliases
       href: "#host-aliases"
+aliases:
+  - /hostnames
 ---
 
 <div class="alert alert-info">

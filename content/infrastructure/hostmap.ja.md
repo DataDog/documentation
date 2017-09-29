@@ -5,6 +5,8 @@ language: ja
 title: Host Map表示の入門
 kind: guide
 listorder: 5
+aliases:
+  - /ja/guides/hostmap
 ---
 
 <!--
