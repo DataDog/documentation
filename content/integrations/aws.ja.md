@@ -89,7 +89,7 @@ The GovCloud and China regions do not currently support IAM role delegation. If 
 ### IAMポリシーとIAMロールの作成
 
 Amazon Web Services用のインテグレーションを導入するには、AWS IAMを使用してロール委任を設定する必要があります。
-ロール委任の機能をよりよく理解するには、AWSが公開している[IAMのベストプラクティス](http://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#delegate-using-roles)を参照してください。
+ロール委任の機能をよりよく理解するには、AWSが公開している[IAMのベストプラクティス](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles)を参照してください。
 
 注：現状、GovCloudと中国リージョンでは、AWS IAMのロール委任機能がサポートされていません。 これらのリージョンに対してインテグレーションを設定しようとしている場合は、[GovCloudと中国リージョンでの設定](#ChinaリージョンまたはGovCloudリージョンで利用する場合は)のセクションへ進んでください。
 
