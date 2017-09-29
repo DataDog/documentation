@@ -66,11 +66,9 @@ def index_algolia(app_id, api_key, content_path=None):
                                 main = html.find("div", {"main"})
                                 if main:
                                     main_text = main.text
-                                    desc_text = main_text.split()[:7000]
+                                    desc_text = main_text.getText()[:7000]
 
                                 fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
-
-                                desc_text = " ".join(desc_text)
 
                                 if fm_description != default_description and '{{' not in fm_description:
                                     description = fm_description
@@ -86,7 +84,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
-                                article['body'] = description
+                                article['body'] = desc_text
                                 article['file'] = dirpath + '/' + filename
                                 article['page_description'] = description
 
