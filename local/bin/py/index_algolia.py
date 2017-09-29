@@ -19,7 +19,7 @@ def content_location():
 
 
 def index_algolia(app_id, api_key, content_path=None):
-    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips']
+    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips', 'videos']
     languages = ['ja']
 
     files_to_exclude = ['404.html']
