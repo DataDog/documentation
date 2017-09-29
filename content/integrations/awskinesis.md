@@ -2,8 +2,8 @@
 title: Datadog-AWS Kinesis Integration
 integration_title: AWS Kinesis
 kind: integration
-newhlevel: true
 git_integration_title: amazon_kinesis
+newhlevel: true
 description: "Track key Amazon Kinesis metrics."
 ---
 
