@@ -4,6 +4,7 @@ integration_title: Nfsstat
 kind: integration
 git_integration_title: nfsstat
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

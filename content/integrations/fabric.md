@@ -3,6 +3,7 @@ title: Datadog-Fabric Integration
 integration_title: Fabric
 kind: integration
 doclevel: basic
+description: "See and search on Fabric tasks in your Datadog event stream."
 ---
 **Warning**: This integration has been deprecated and is not being actively developed anymore.
 

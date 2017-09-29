@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: moxtra
+description: "Send Datadog alerts and graphs to Moxtra."
 ---
 
 ## Overview

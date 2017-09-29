@@ -4,6 +4,7 @@ integration_title: AWS Key Management Service
 kind: integration
 git_integration_title: amazon_kms
 newhlevel: true
+description:"Track Amazon KMS key expiration."
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ integration_title: Cloud Foundry
 kind: integration
 git_integration_title: cloud_foundry
 newhlevel: true
+description: "Track the health of your Cloud Foundry VMs and the jobs they run."
 ---
 ## Overview
 

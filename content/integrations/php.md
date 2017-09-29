@@ -4,6 +4,7 @@ integration_title: PHP
 kind: integration
 doclevel: basic
 newhlevel: true
+description: "Send custom metrics from your PHP applications using the DogStatsD PHP client."
 ---
 
 {{< img src="integrations/php/phpgraph.png" alt="PHP Graph" >}}

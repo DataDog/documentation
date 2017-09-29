@@ -4,6 +4,7 @@ integration_title: AWS Kinesis
 kind: integration
 newhlevel: true
 git_integration_title: amazon_kinesis
+description: "Track key Amazon Kinesis metrics."
 ---
 
 ## Overview

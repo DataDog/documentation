@@ -4,6 +4,7 @@ integration_title: AWS Web Application Firewall
 kind: integration
 git_integration_title: amazon_waf
 newhlevel: true
+description: "Track allowed versus blocked requests."
 ---
 
 ## Overview

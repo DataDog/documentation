@@ -4,6 +4,7 @@ integration_title: AWS CodeDeploy
 kind: integration
 git_integration_title: amazon_codedeploy
 newhlevel: true
+descritpion: "See deployments as they happen and track how long they take."
 ---
 
 {{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}

@@ -1,9 +1,9 @@
 ---
 title: Datadog-Puppet Integration
 integration_title: Puppet
-
 doclevel: basicuppet
 kind: integration
+description: "Track Puppet runs: know when they fail, succeed, or make big changes."
 ---
 
 ## Overview

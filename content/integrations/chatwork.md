@@ -3,6 +3,7 @@ title: Datadog-Chatwork Integration
 integration_title: Chatwork
 kind: integration
 doclevel: basic
+description: "Send Datadog alerts and graphs to your team's Chatworks room."
 ---
 {{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" >}}
 

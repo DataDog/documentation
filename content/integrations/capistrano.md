@@ -4,6 +4,7 @@ integration_title: Capistrano
 kind: integration
 doclevel: basic
 newhlevel: true
+description: "Capture and search for deploys, overlay them onto key metrics graphs."
 ---
 ## Overview
 
