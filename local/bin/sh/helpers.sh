@@ -7,15 +7,12 @@ version_static_assets() {
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
         test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+        npm install  # make sure everything is uptodate
         if [[ "${BUCKET}" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
             gulp build --production || fail_step "${FUNCNAME}"
         fi
-        # ============ version created assets ============ #
-        echo "--------"
-        echo "Fingerprinting static assets... "
-        version_static.py || fail_step "${FUNCNAME}"
     fi
     pass_step  "${FUNCNAME}"
 }
@@ -62,12 +59,12 @@ create_artifact() {
         short_hash="$(git rev-parse --short HEAD)"
     fi
     echo "artifact name is ${short_hash}"
-    tar -czf "/etc/${short_hash}.tar.gz" "${ARTIFACT_RESOURCE}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
-    ls -l /etc | grep "${short_hash}.tar.gz"
+    tar -czf "/tmp/${short_hash}.tar.gz" "${ARTIFACT_RESOURCE}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
+    ls -l /tmp | grep "${short_hash}.tar.gz"
     echo "---------"
     echo "Deploying artifact: ${short_hash}.tar.gz to s3://"${STATIC_BUCKET}"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     s3cmd put --encoding=utf-8 --acl-public --no-guess-mime-type --stop-on-error \
-          "/etc/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
+          "/tmp/${short_hash}.tar.gz" "s3://${STATIC_BUCKET}/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
     echo "removing build"
     rm -rf "${ARTIFACT_RESOURCE}"
     echo "Done."

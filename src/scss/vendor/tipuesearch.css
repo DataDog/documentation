@@ -20,7 +20,9 @@ http://www.tipue.com/search
      box-shadow: none;
   outline: 0;
   margin: 0;
-  background: #fff url('../images/search.png') no-repeat 15px 15px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: 15px 15px;
 }
 
 #tipue_search_content

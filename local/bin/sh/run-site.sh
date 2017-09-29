@@ -12,9 +12,10 @@ CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 if [ ${RUN_SERVER} == true ]; then
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
-		npm install
+		npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
         echo "starting gulp watch"
-        gulp watch --silent &
+        gulp build
+        sleep 5
 	fi
 	echo "building hugo site..."
 	if [ ${FETCH_INTEGRATIONS} == true ]; then
@@ -36,6 +37,10 @@ if [ ${RUN_SERVER} == true ]; then
 		placehold_translations.py -c "config.yaml" -f "content/" || true
 	fi
 	hugo server --renderToDisk || exit 1
+	sleep 5
+	if [ ${RUN_GULP} == true ]; then
+		gulp watch --silent &
+	fi
 else
 	exit 0
 fi

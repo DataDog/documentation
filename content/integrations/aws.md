@@ -245,6 +245,7 @@ For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
+* `elasticloadbalancing:DescribeInstanceHealth`: Add state of your instances.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
@@ -266,7 +267,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 ### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
-* `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
+* `kinesis:DescribeStream`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
@@ -368,11 +369,8 @@ CloudWatch's api returns only metrics with datapoints, so if for instance an ELB
 ### Wrong count of aws.elb.healthy_host_count?
 
 
-When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
-As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
-This metric should have value you would expect.
-
-
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
+As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
 ### Duplicated hosts when installing the agent?
 

@@ -68,12 +68,14 @@ $(document).ready(function () {
 
     'init': function () {
 
-      this.h1s = $('.main h1');
-      this.h2s = $('.main h2');
-      this.h3s = $('.main h3');
-      this.h4s = $('.main h4');
-      this.listHeadings();
-      this.setHeadings();
+
+
+            this.h1s = $('.main h1');
+            this.h2s = $('.main h2');
+            this.h3s = $('.main h3');
+            this.h4s = $('.main h4');
+            this.listHeadings();
+            this.setHeadings();
 
     },
     'listHeadings': function () {
@@ -223,10 +225,11 @@ $(document).ready(function () {
 
 });
 
-// Allow language selection via URL GET parameter.
+// Allow language selection via URL GET parameter
 $(window).load(function () {
   if (s = window.location.search.match(/lang=[^&]+/gi)) {
     lang = s[0].replace(/lang=/gi, '');
     $('div[lang="' + lang + '"]').click();
   }
 });
+

@@ -72,6 +72,7 @@ languages:
           name: ""
           url: "faq/"
           weight: 120
+          
       basic_agent:
         - identifier: amazonlinux
           name: "Amazon Linux"
@@ -122,6 +123,7 @@ languages:
           name: "From Source"
           url: guides/basic_agent_usage/source/
           weight: 100
+
       tracingnav:
         - identifier: customnav_tracingnav_tracing
           url: "#"
@@ -166,6 +168,24 @@ languages:
         - identifier: customnav_tracingnav_api
           url: tracing/api/
           weight: 110
+
+      lognav:
+        - identifier: customnav_lognav
+          url: "#"
+          weight: 10
+        - identifier: customnav_lognav_collection
+          url: logs/
+          weight: 20
+        - identifier: customnav_lognav_explore
+          url: logs/explore/
+          weight: 30
+        - identifier: customnav_lognav_processing
+          url: logs/processing/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: logs/parsing/
+          weight: 50
+
 
   ja:
     #languagename: "日本語"

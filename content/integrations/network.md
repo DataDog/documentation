@@ -22,28 +22,23 @@ description: "{{< get-desc-from-git >}}"
 {{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" >}}
 
 ## Overview
-
-The network check collects TCP and IP network metrics from the agent's host.
+//get-overview-from-git//
 
 ## Setup
-### Configuration
-
-The network check is enabled by default. If you would like to make any changes to the check, rename `network.yaml.default` to `network.yaml` and edit:
-{{< highlight yaml>}}
-init_config:
-
-instances:
-  # Network check only supports one configured instance
-  - collect_connection_state: false # set to true to collect TCP connection state metrics, e.g. SYN_SENT, ESTABLISHED
-    excluded_interfaces:
-      - lo
-      - lo0
-    # Optionally completely ignore any network interface
-    # matching the given regex:
-    # excluded_interface_re: my-network-interface.*
-{{< /highlight >}}
+//get-setup-from-git//
 
 ## Data Collected
 ### Metrics
+See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv) for a list of metrics provided by this integration.
 
-{{< get-metrics-from-git "network" >}}
+### Events
+The Network check does not include any event at this time.
+
+### Service Checks
+The Network check does not include any service check at this time.
+
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

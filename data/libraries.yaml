@@ -73,6 +73,10 @@ Classic:
       dogstatsd: true
       notes: A reporting bridge between Dropwizard metrics and Datadog
       authors: Coursera
+    - name: dogstatd-client
+      link: https://github.com/chonton/dogstatd-client
+      dogstatsd: true
+      authors: chonton
   - Node.js:
     - name: hot-shots
       link: https://github.com/brightcove/hot-shots
