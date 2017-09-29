@@ -3,7 +3,7 @@ title: Datadog-Python Integration
 integration_title: Python
 kind: integration
 newhlevel: true
-python: "Instrument custom metrics from your Python applications with Datadogpy."
+description: "Instrument custom metrics from your Python applications with Datadogpy."
 ---
 
 ## Overview

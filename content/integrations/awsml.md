@@ -4,7 +4,7 @@ integration_title: AWS Machine Learning
 kind: integration
 git_integration_title: amazon_machine_learning
 newhlevel: true
-descritpion: "Track prediction counts and failures."
+description: "Track prediction counts and failures."
 ---
 
 ## Overview
