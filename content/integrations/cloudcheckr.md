@@ -1,6 +1,6 @@
 ---
 title: Datadog-CloudCheckr Integration
-integration_title: cloudcheckr
+integration_title: CloudCheckr
 kind: integration
 newhlevel: true
 ---
