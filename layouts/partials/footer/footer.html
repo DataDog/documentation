@@ -1,0 +1,113 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 footer-side">
+                <button type="button" class="btn btn-outline-semi-trans">Free Trial</button>
+                <span class="copyright">&copy; Datadog 2017</span>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <p>Product</p>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <ul class="list-unstyled">
+                            <li><a href="">Features</a></li>
+                            <li><a href="">APM</a></li>
+                            <li><a href="">Integrations</a></li>
+                            <li><a href="">Alerts</a></li>
+                            <li><a href="">API</a></li>
+                            <li><a href="">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <ul class="list-unstyled">
+                            <li><a href="">Documentation</a></li>
+                            <li><a href="">Support</a></li>
+                            <li><a href="">Resources</a></li>
+                            <li><a href="">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <p>About</p>
+                        <ul class="list-unstyled">
+                            <li><a href="">Contact Us</a></li>
+                            <li><a href="">Partners</a></li>
+                            <li><a href="">Press</a></li>
+                            <li><a href="">Our Team</a></li>
+                            <li><a href="">Careers</a></li>
+                            <li><a href="">Legal</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p>Social</p>
+                        <ul class="list-unstyled">
+                            <li><a href="">Blog</a></li>
+                            <li><a href="">Español</a></li>
+                            <li><a href="">日本語</a></li>
+                            <li><a href="">Instagram</a></li>
+                            <li><a href="">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 footer-legal">
+                <a href="#">Terms</a> |
+                <a href="#">Privacy</a> |
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--{{ if $.Params.sidebar.nav }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+</script>
+
+{{ else }}
+
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = true;
+</script>
+
+{{ end }}
+
+{{ if $.Params.autotocdepth }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.tocdepth = true;
+</script>
+{{ end }}
+
+
+{{ if in .File.Path "basic_agent_usage" }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+</script>
+{{ end }}
+
+<script src="{{ .Site.BaseURL }}js/bundle.js"></script>
+
+{{ if eq .RelPermalink "/api/" }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+
+    jQuery(document).ready(function($){
+        $(DD_docs.apiPage);
+    });
+
+</script>
+{{ end }}
+
+{{ partial "footer-scripts.html" . }}
+{{ partial "footer-js-dd-docs-methods" . }}
+-->

@@ -1,2 +1,26 @@
-@import "_custom.scss";
+@import "custom";
+@import "webfonts";
 
+body {
+  font-family: $font-family-sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1;
+
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1, ss03=1, ss06=1";
+  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  /** "ss01" 1 is for the alternate 'a' character */
+  /** "ss05" 1 is for alternate 'y' character */
+  font-weight: 200;
+  word-wrap: break-word;
+}

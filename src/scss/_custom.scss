@@ -1,0 +1,23 @@
+//@import "~bootstrap/scss/_functions.scss";
+//@import "~bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+/* Bootstrap custom overrides here */
+$ddpurple:    #774DA2;
+
+$theme-colors: (
+        primary: $ddpurple,
+        semi-trans: rgba(255,255,255,.5)
+);
+
+$font-family-sans-serif: "NationalWeb", Helvetica, Arial, sans-serif;
+$font-family-monospace:  "RobotoMono-Regular", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:       $font-family-sans-serif;
+
+// Links
+$link-hover-decoration: none;
+
+
+// Buttons
+$btn-font-weight: 600;

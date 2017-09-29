@@ -17,6 +17,8 @@ var jshint = require('gulp-jshint');
 var manifest = require('./src/manifest.json');
 var hash = require('gulp-hash');
 var del = require('del');
+var fs = require('fs');
+var pathlib = require('path');
 
 // asset manifest is a json object containing paths to dependencies
 var path = manifest.paths;
@@ -40,16 +42,42 @@ for (var fileName in manifest.dependencies) {
   if (fileName.indexOf('.css') > -1) {
     project["css"] = project["css"].concat(manifest.dependencies[fileName]["files"]);
   }
+  var partial_dirs = fs.readdirSync("./layouts/partials/").filter(function(file) {
+      return fs.statSync(pathlib.join("./layouts/partials/", file)).isDirectory();
+  });
+  // add partials
+  var partials = {"main-dd.css":[], "main-dd.js":[]};
+  for(var i=0; i < partial_dirs.length; i++) {
+
+      if (fileName.indexOf('.css') > -1) {
+          var pathToScss = pathlib.join("./layouts/partials/", partial_dirs[i], partial_dirs[i] + ".scss");
+          if (fs.existsSync(pathlib.resolve(pathToScss))) {
+              if (project["css"].indexOf(pathToScss) === -1) {
+                  project["css"].push(pathToScss);
+                  partials[fileName].push(pathToScss);
+              }
+          }
+      }
+
+      if (fileName.indexOf('.js') > -1) {
+          var pathToJs = pathlib.join("./layouts/partials/", partial_dirs[i], partial_dirs[i] + ".js");
+          if (fs.existsSync(pathlib.resolve(pathToJs))) {
+              if (project["js"].indexOf(pathToJs) === -1) {
+                  project["js"].push(pathToJs);
+                  partials[fileName].push(pathToJs);
+              }
+          }
+      }
+  }
   var fileNameArray = fileName.split(".");
   project.globs.push(
     {
       "type": fileNameArray[fileNameArray.length - 1],
       "name": fileName,
-      "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"])
+      "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"], partials[fileName])
     }
   );
 }
-
 
 // CLI options
 var enabled = {
@@ -211,11 +239,6 @@ gulp.task("images", function () {
     .pipe(gulp.dest("data/manifests"))
 });
 
-gulp.task("partials", function() {
-    //gulp.src("layouts/partials/**/*").pipe()
-    console.log('hi');
-});
-
 
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
@@ -239,7 +262,8 @@ gulp.task('watch', function () {
   gulp.watch([path.source + 'scss/**/*'], ['styles']);
   gulp.watch([path.source + 'js/**/*'], ['scripts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
-  gulp.watch([path.source + 'layouts/partials/**/*'], ['partials']);
+  gulp.watch([path.html + '**/*.js'], ['scripts']);
+  gulp.watch([path.html + '**/*.scss'], ['styles']);
 });
 
 // ### Build

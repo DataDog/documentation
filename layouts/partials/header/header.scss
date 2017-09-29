@@ -1,0 +1,50 @@
+$ddpurple:    #774DA2;
+
+body > header {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+
+  height:129px;
+  box-shadow: 0 8px 10px 0 rgba(0,0,0,.07);
+  display: flex;
+  background: #fff;
+  align-items: center;
+  text-transform: uppercase;
+  //position:relative;
+  z-index:9;
+  .container {
+    position:relative;
+  }
+  #logo {
+    position:absolute;
+    width:100%;
+    display:block;
+    text-align:center;
+  }
+  .navbar-left {
+    float:left;
+  }
+  .navbar-right {
+    float:right;
+  }
+  .nav-item {
+    a.nav-link {
+      color: #777;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .4px;
+      border-radius: 5px;
+      border:1px solid transparent;
+      &:hover {
+        transition: all .2s;
+        color: $ddpurple;
+        background-color: #fff;
+        //border-color: #c8c8c8;
+      }
+    }
+  }
+}
