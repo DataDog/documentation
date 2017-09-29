@@ -16,5 +16,6 @@ To bind your Datadog application to your CloudCheckr account:
 * Click into your CloudCheckr Extensions 
 * Add your [Datadog API and application keys](https://app.datadoghq.com/account/settings#api).
 
-## Further Reading.
+## Further Reading
+
 Learn more about [Better rightsizing your cloud resources with the Datadog CloudCheckr](https://www.datadoghq.com/blog/rightsizing-cloudcheckr/) on our blog. 
