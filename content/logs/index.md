@@ -4,6 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
+beta: true
 ---
 
 <div class="alert alert-info">
