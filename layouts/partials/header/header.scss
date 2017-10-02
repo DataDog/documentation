@@ -30,6 +30,16 @@ body > header {
   .navbar-right {
     float:right;
   }
+  .navbar-left {
+    a.nav-link:first-child {
+      padding-left:0;
+    }
+  }
+  .navbar-right {
+    a.nav-link:last-child {
+      padding-right:0;
+    }
+  }
   .nav-item {
     a.nav-link {
       color: #777;

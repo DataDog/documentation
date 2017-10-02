@@ -77,6 +77,11 @@ for (var fileName in manifest.dependencies) {
       "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"], partials[fileName])
     }
   );
+
+  /*console.log(project);
+  for(var i=0; i < project.globs.length; i++) {
+      console.log(project.globs[i].globs);
+  }*/
 }
 
 // CLI options

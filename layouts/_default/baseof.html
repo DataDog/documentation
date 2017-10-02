@@ -19,8 +19,15 @@
 
     {{ partial "header/header.html" . }}
 
-    <div>
-        {{ block "main" . }}{{ end }}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                {{ partial "sidenav/sidenav.html" . }}
+            </div>
+            <div class="col-sm-9 main">
+                {{ block "main" . }}{{ end }}
+            </div>
+        </div>
     </div>
 
     {{ partial "footer/footer.html" . }}

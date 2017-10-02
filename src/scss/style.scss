@@ -24,3 +24,15 @@ body {
   font-weight: 200;
   word-wrap: break-word;
 }
+
+p {
+  // todo: can i set this with a bootstrap variable?
+  font-size:18px;
+  color:#4A4A4A;
+  line-height:22px;
+}
+
+.main {
+  padding-top:30px;
+  padding-bottom:100px;
+}

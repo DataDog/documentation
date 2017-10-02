@@ -16,7 +16,6 @@
         "src/scss/style.scss"
       ],
       "vendor": [
-        "node_modules/bootstrap/scss/bootstrap.scss",
         "src/scss/vendor/pygments.css"
       ],
       "main": true
