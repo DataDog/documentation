@@ -19,26 +19,37 @@ body > header {
     position:relative;
   }
   #logo {
-    position:absolute;
-    width:100%;
-    display:block;
-    text-align:center;
+    display: block;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    margin-top: -27px;
+    z-index:1;
+  }
+  .logo-text {
+    position: absolute;
+    bottom: -17px;
+    height: 14px;
+    width: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   .navbar-left {
     float:left;
+    position:relative;
+    z-index:2;
   }
   .navbar-right {
     float:right;
+    position:relative;
+    z-index:2;
   }
-  .navbar-left {
-    a.nav-link:first-child {
-      padding-left:0;
-    }
+  .navbar-left li:first-child a.nav-link {
+    padding-left:0;
   }
-  .navbar-right {
-    a.nav-link:last-child {
-      padding-right:0;
-    }
+  .navbar-right li:last-child a.nav-link {
+    padding-right:0;
   }
   .nav-item {
     a.nav-link {
@@ -49,12 +60,26 @@ body > header {
       letter-spacing: .4px;
       border-radius: 5px;
       border:1px solid transparent;
+      padding-left:10px;
+      padding-right:10px;
       &:hover {
         transition: all .2s;
         color: $ddpurple;
         background-color: #fff;
         //border-color: #c8c8c8;
       }
+    }
+  }
+  .nav-button {
+    margin-top:-3px;
+    a.nav-link {
+      padding:0;
+      margin:0;
+    }
+    a.btn {
+      padding:13px 20px;
+      font-size:18px;
+      letter-spacing:1px;
     }
   }
 }
