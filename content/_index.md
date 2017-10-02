@@ -61,5 +61,4 @@ Once your graphs have exposed problem areas, set some alerting conditions on you
 
 When you're well aware of an ongoing problem, [silence its alerts]. When you're about to bring a service down for maintenance, [schedule a downtime] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, create a [composite monitor].
 
-## Questions
 {{< partial name="questions/questions.html" >}}

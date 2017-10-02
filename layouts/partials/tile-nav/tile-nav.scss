@@ -1,15 +1,47 @@
 $ddpurple:    #774DA2;
 
+$tilecolors: (
+    agent: $ddpurple,
+    integrations: #2BE2D5,
+    graphing: #DEE144,
+    alerting: #FFCA07,
+    tracing: #FE6638,
+    developers: #D6032A
+);
+
 .tile-nav {
   .tile {
+    display:block;
     height: 194px;
     text-align:center;
     border:1px solid #D6D6D6;
+    border-radius:4px;
     margin-bottom:30px;
+    &:hover {
+      border-color:#774DA2;
+      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .2);
+    }
+    img {
+      margin:26px auto 0 auto;
+      display:block;
+    }
     .title {
       color:$ddpurple;
       font-weight:600;
       margin-bottom:0;
+      margin-top:7px;
+    }
+  }
+
+  /* assign each tile its color from map above */
+  @each $tile, $color in $tilecolors {
+    .tile-#{$tile} {
+      &:hover {
+        border-color: $color;
+      }
+      .title {
+        color: $color;
+      }
     }
   }
 }

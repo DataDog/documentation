@@ -21,10 +21,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="d-none d-lg-block col-12 col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-sm-9 main">
+            <div class="col-12 col-lg-8 col-xl-9 main">
                 {{ block "main" . }}{{ end }}
             </div>
         </div>
