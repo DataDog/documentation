@@ -1,11 +1,11 @@
 ---
 last_modified: 2017/09/29
 translation_status: completed
+autotocdepth: 2
 language: ja
 title: ライブコンテナ モニタリング
-kind: guide
-listorder: 16
-beta: false
+kind: documentation
+customnav: infrastructurenav
 ---
 
 <!--
@@ -21,7 +21,7 @@ Datadog Live Containers allows for real-time visibility of all of the containers
 
 Datadog ライブコンテナ モニタリング を使用すると、システムにおけるすべてのコンテナをリアルタイムで視覚化することができます。`htop`や`ctop`のような基盤ツールからインスピレーションを得たこの集中ビューは、Datadogで活用されてきたタグの能力と組み合わせることでシステムのあらゆるレベルで何が起こっているのかを理解し、最も深い詳細に至るまで掘り下げることができます。
 
-{{< img src="process/LiveContainersWithSummaries.png" >}}
+{{< img src="infrastructure/livecontainers/LiveContainersWithSummaries.png" >}}
 
 ## 検索, フィルタリング, そしてピボット
 
@@ -79,15 +79,15 @@ It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and unde
 
 以下の例では、9ノードのKubernetesクラスタをフィルタリングしました。コンテナのRSSとCPU使用率は、コンテナに割当てられてた上限値と比較したものがレポートされます。ここでは、このクラスタ内のコンテナが過剰にプロビジョニングされていることがわかります。そこからリソースの有効活用を進めるために、より厳密な上限値とビンパッキング(キャパシティの最適化)を検討することができます。
 
-{{< img src="process/overprovisioned.png" >}}
+{{< img src="infrastructure/livecontainers/overprovisioned.png" >}}
 
 コンテナ環境は動的なため、追跡が難しくなりがちです。ここでは、`kube_service` と `host` でピボットし、システムノイズを減らすために `kube_namespace:default` でフィルタしています。これにより実行中のサービスについて、どこで、どのように、キーメトリクスが飽和しているかを知ることができます。
 
-{{< img src="process/hostxservice.png" >}}
+{{< img src="infrastructure/livecontainers/hostxservice.png" >}}
 
 ECSの `ecs_task_name` と `ecs_task_version` で簡単にピボットできることで、アップデート間のリソース使用率の変化を理解することができます。
 
-{{< img src="process/tasksxversion.png" >}}
+{{< img src="infrastructure/livecontainers/tasksxversion.png" >}}
 
 <!--
 ## Real-time monitoring

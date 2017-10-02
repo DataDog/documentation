@@ -1,6 +1,7 @@
 ---
 last_modified: 2015/03/31
 translation_status: complete
+autotocdepth: 2
 language: ja
 title: ホスト名について
 kind: documentation

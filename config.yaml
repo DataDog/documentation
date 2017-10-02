@@ -173,18 +173,21 @@ languages:
         - identifier: customnav_infrastructurenav
           url: "#"
           weight: 10
+        - identifier: customnav_infrastructurenav_infrastructure_list
+          url: "infrastructure/"
+          weight: 20
         - identifier: customnav_infrastructurenav_hostnames
           url: "infrastructure/hostnames"
-          weight: 20
+          weight: 30
         - identifier: customnav_infrastructurenav_hostmap
           url: "infrastructure/hostmap"
-          weight: 30
-        - identifier: customnav_infrastructurenav_livecontainers
-          url: "infrastructure/liveconatiners"
           weight: 40
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 50
         - identifier: customnav_infrastructurenav_process
           url: "infrastructure/process"
-          weight: 50
+          weight: 60
           
       lognav:
         - identifier: customnav_lognav
@@ -257,6 +260,40 @@ languages:
           name: ""
           url: "faq/"
           weight: 120
+
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_hostnames
+          url: "infrastructure/hostnames"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
+      lognav:
+        - identifier: customnav_lognav
+          url: "#"
+          weight: 10
+        - identifier: customnav_lognav_collection
+          url: logs/
+          weight: 20
+        - identifier: customnav_lognav_explore
+          url: logs/explore/
+          weight: 30
+        - identifier: customnav_lognav_processing
+          url: logs/processing/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: logs/parsing/
+          weight: 50
 
 params:
   environment: local

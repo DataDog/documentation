@@ -1,9 +1,10 @@
 ---
 title: Host Map Overview
-kind: guide
-listorder: 3
+kind: documentation
+autotocdepth: 2
 aliases:
   - /guides/hostmap
+customnav: infrastructurenav
 ---
 ## Overview
 
