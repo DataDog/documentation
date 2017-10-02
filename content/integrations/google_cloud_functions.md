@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_functions
-description: "Track min, max, and average function execution times."
 ---
 
 ## Overview

@@ -4,7 +4,6 @@ integration_title: AWS Lambda
 kind: integration
 newhlevel: true
 git_integration_title: amazon_lambda
-description: "Track lambda run times, errors, invocation counts, and more."
 ---
 
 ## Overview

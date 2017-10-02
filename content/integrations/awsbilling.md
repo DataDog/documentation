@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: amazon_billing
-description: "Monitor actual and estimated spend on your AWS account."
 ---
 
 ## Overview

@@ -4,7 +4,6 @@ integration_title: AWS Elastic File System
 kind: integration
 git_integration_title: amazon_efs
 newhlevel: true
-description: "Track key Amazon Elastic Filesystem metrics."
 ---
 
 ## Overview

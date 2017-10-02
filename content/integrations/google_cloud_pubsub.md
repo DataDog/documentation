@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_pubsub
-description: "Track key Google Cloud PubSub metrics."
 ---
 
 ## Overview

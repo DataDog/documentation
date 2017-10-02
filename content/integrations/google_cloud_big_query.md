@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_big_query
-description: "Track query count, execution times, uploaded bytes and rows, and more."
 ---
 
 ## Overview

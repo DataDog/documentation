@@ -4,7 +4,6 @@ integration_title: "ExpressJS"
 kind: integration
 doclevel: basic
 git_integration_title: express
-description: "Monitor response times overall and request rates by response code."
 ---
 
 {{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph" >}}

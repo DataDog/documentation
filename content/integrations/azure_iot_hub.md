@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_iot_hub
 newhlevel: true
-description: "Track key Azure IOT Hub metrics."
 ---
 
 ## Overview

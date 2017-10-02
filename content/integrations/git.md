@@ -3,7 +3,6 @@ title: Datadog-Git Integration
 integration_title: Git
 kind: integration
 doclevel: basic
-description: "Send commits and pull requests from your self-hosted Git server to Datadog."
 ---
 
 {{< img src="integrations/git/git_event.png" alt="Git event" >}}

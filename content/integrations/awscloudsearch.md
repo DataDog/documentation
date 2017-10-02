@@ -4,7 +4,6 @@ integration_title: AWS CloudSearch
 kind: integration
 git_integration_title: amazon_cloudsearch
 newhlevel: true
-description: "Track index utilization, successful request count, and more."
 ---
 
 ## Overview

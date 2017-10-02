@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_logic_app
 newhlevel: true
-description: "Track trigger workflows, action latency, failed actions, and more."
 ---
 
 ## Overview

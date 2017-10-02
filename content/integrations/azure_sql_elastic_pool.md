@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_sql_elastic_pool
 newhlevel: true
-description: "Track key Azure SQL Elastic Pool metrics."
 ---
 
 ## Overview

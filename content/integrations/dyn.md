@@ -4,7 +4,6 @@ integration_title: Dyn
 kind: integration
 doclevel: basic
 git_integration_title: dyn
-description: "Monitor zone changes and track queries per second by zone or record."
 ---
 
 {{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview" >}}

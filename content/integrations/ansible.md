@@ -5,7 +5,6 @@ kind: integration
 newhlevel: true
 doclevel: basic
 git_integration_title: ansible
-description: "Track failed tasks and see playbook runs in your event stream."
 ---
 
 {{< img src="integrations/ansible/ansibledashboard.png" >}}

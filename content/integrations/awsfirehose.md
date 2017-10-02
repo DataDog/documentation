@@ -4,7 +4,6 @@ integration_title: AWS Firehose
 kind: integration
 git_integration_title: amazon_firehose
 newhlevel: true
-description: "Track key Amazon Firehose metrics."
 ---
 
 ## Overview

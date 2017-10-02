@@ -3,7 +3,6 @@ title: Datadog-Bugsnag Integration
 integration_title: Bugsnag
 kind: integration
 doclevel: basic
-description: "Centrally track error rates across your applications as they rise and fall."
 ---
 
 ## Overview

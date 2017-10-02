@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_stackdriver_logging
-description: "Track the size of logs ingested into Google Stackdriver."
 ---
 
 ## Overview

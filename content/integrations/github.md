@@ -2,7 +2,6 @@
 title: Datadog-Github Integration
 integration_title: Github
 kind: integration
-description: "Identify commits and pull requests that affect your services' performance."
 ---
 
 {{< img src="integrations/github/git_integration_screen.png" alt="Git event" >}}

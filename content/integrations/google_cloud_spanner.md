@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_spanner
-description: "Track the resource usage of your Spanner instances."
 ---
 
 ## Overview

@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: zendesk
-description: "Track new versus solved tickets; auto-generate tickets from Datadog monitors."
 ---
 
 {{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}

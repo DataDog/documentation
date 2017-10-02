@@ -4,7 +4,6 @@ integration_title: AWS ES
 kind: integration
 newhlevel: true
 git_integration_title: amazon_es
-description: "Track key Amazon Elasticsearch metrics."
 ---
 ## Overview
 

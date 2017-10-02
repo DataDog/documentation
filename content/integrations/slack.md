@@ -5,7 +5,6 @@ git_integration_title: slack
 kind: integration
 newhlevel: true
 doclevel: basic
-description: "Send Datadog alerts and graphs to your team's Slack channel."
 ---
 
 ## Overview

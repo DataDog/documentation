@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_storage
-description: "Track key Azure Storage metrics."
 ---
 
 ## Overview

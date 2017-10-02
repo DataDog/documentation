@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloudsql
-description: "Track database metrics for performance, health, and replication."
 ---
 
 ## Overview

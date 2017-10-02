@@ -3,7 +3,6 @@ title: Datadog-Rollbar Integration
 integration_title: Rollbar
 kind: integration
 doclevel: basic
-description: "Send exceptions, errors, and code deployments to your Datadog event stream."
 ---
 
 {{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" >}}

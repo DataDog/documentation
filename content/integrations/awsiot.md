@@ -4,7 +4,6 @@ integration_title: AWS Internet of Things
 kind: integration
 git_integration_title: amazon_iot
 newhlevel: true
-description: "Track key Amazon Internet of Things metrics."
 ---
 
 ## Overview
