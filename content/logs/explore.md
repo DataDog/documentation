@@ -134,7 +134,7 @@ They can be used in the search and in facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
-* `("service:srvA" OR "service:srvB")` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
 * `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
 
 ### Autocomplete
