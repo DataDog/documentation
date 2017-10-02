@@ -18,8 +18,6 @@ sidebar:
       href: "guides/agent_checks/"
     - text: Setting up Service Checks
       href: "guides/services_checks/"
-    - text: Deploying the Agent with Chef
-      href: "guides/chef/"
     - text: Guide to Alerting
       href: "guides/monitors/"
     - text: Single Sign On With SAML

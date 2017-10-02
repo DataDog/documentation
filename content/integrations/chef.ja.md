@@ -22,7 +22,7 @@ git_integration_title: chef
 - Track key Chef performance metrics across all your servers.
 - Quickly identify and discuss failed Chef runs with your team.
 
-To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
+To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/ja/integrations/chef/). -->
 
 次の目的の為に、ChefのメトリクスをDatadogに送信します:
 
@@ -30,6 +30,6 @@ To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.c
 - 管理しているサーバー上のChefのパフォーマンスメトリクスを取得する
 - 期待通りに完了しなかったChefの実行を検知し、チームと検討する
 
-<!-- To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
+<!-- To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/ja/integrations/chef/). -->
 
 Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/integrations/chef/)を参照して下さい。
