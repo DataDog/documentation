@@ -267,7 +267,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 2. Install based on operating system or CICD tool <a href="https://app.datadoghq.com/account/settings#agent"> using these instructions</a>
 3. Manually deploy Agents by following the following instructions:
 
-## Install the Agent on instance startup
+#### Install the Agent on instance startup
 
 **Create** a file called `installDatadogAgent.cmd` with the following contents:
 
@@ -308,7 +308,7 @@ Be sure to replace `YOUR_API_KEY` with your API key found at [here](https://app.
 
 The created file will download and install the latest version of the Agent on application deploy.
 
-## Deploy your app
+#### Deploy your app
 
 You should now repackage your app's cloud service package file (*.cspkg), making sure to include the `installDatadogAgent.cmd` file in the package.
 You can also directly upload from Visual Studio using the `Publish` button.

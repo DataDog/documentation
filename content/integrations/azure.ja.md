@@ -95,7 +95,7 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 
 **Create** a file called `installDatadogAgent.cmd` with the following contents: -->
 
-### インスタンスの起動時にDatadog Agentをインストールする
+#### インスタンスの起動時にDatadog Agentをインストールする
 
 以下の内容でinstallDatadogAgent.cmdという名前のファイルを作成します:
 
@@ -165,7 +165,7 @@ On deploy you should see your new hosts appear on your infrastructure overview:
 
 -->
 
-### アプリケーションのデプロイ
+#### アプリケーションのデプロイ
 
 ここで、アプリケーションのcloud service packageファイル(*.cspkg)を再パッケージします。
 その際、`installDatadogAgent.cmd`ファイルが含まれていることを確認しておいてください。
