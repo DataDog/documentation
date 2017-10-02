@@ -7,7 +7,7 @@ customnav: lognav
 ---
 
 <div class="alert alert-info">
-Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's log management is currently in private beta. If you would like to apply for it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 ## Overview 
 
@@ -23,7 +23,7 @@ In this view you can:
 * [Enter search queries](#search-bar)
 
 ## Time Range
-Time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
+The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
 {{< img src="logs/explore/timeline.png" alt="Timeline" >}}
 
@@ -32,18 +32,18 @@ Quickly change the time range by selecting a preset range from the dropdown:
 {{< img src="logs/explore/timerange.png" alt="Timerange" style="width:75%;">}}
 
 ## Log list
-The log list is the list of logs that match the selected context, a context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The log list is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
 {{< img src="logs/explore/log_list.png" alt="Log List" >}}
 
 ### Filtering the log list
-If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted and log displayed match your facet criteria:
+If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted, and the logs displayed match your facet criteria:
 
 {{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
 
 ### Displaying a full log
-You can click on any log line to see more detail about it:
+You can click on any log line to see more details about it:
 
 {{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" >}}
 
@@ -52,7 +52,7 @@ When clicking a log line for more detail, click on « view in context »:
 
 This lets you see log lines dated just before and after your selected log — even if they don't match your filters.
 
-For syslog-formatted logs, hostname and service name corresponding to the log line are automatically ticked in the facets checkboxes as filters.
+For syslog-formatted logs, the hostname and service name values corresponding to the log line are automatically selected in the facet checkboxes as filters.
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
@@ -61,7 +61,7 @@ To add more log details to the list, click the **Columns** button and select any
 
 ## Facets 
 
-A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a handle to easily filter over your data.
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter over your data.
 
 A Facet helps you to break down your datasets over user(s), service(s), etc ...
 
@@ -72,7 +72,7 @@ A Facet helps you to break down your datasets over user(s), service(s), etc ...
 To start using an attribute in a Facet or in the search, you simply need to click on it and add it as a Facet:
 {{< img src="logs/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
 
-Once this is done, the value of this attribute for all new logs is  stored and can be used for search either in the search bar or in the Facet Panel
+Once this is done, the value of this attribute **for all new logs** is  stored and can be used for search either in the search bar or in the Facet Panel
 
 ### Facet Panel
 
@@ -84,12 +84,12 @@ Use facets to easily filters on your logs. The search bar and url automatically 
 Expand a facet to access advanced search options like 
 Including or excluding a pattern within a facet.
 
-For example: You want to have all url starting with “/test_5”: 
+For example: You want to select all the url values that start with “/test_5”: 
 {{< img src="logs/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
 
 ## Search bar
 
-The search query language is based on the Lucene query string:
+The search query language is based on the Lucene query syntax:
 
 [Apache Lucene - Query Parser Syntax](http://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
 
@@ -102,7 +102,7 @@ There are two types of terms:
 
 * A **Single Term** is a single word such as "test" or "hello".
 
-* A **Sequence** is a group of words surrounded by double quotes such as "hello dolly" or "hello dolly"~2.
+* A **Sequence** is a group of words surrounded by double quotes such as "hello dolly".
 
 To combine multiple terms into a complex query, you can use any of the following boolean operators:
 
@@ -114,8 +114,7 @@ To combine multiple terms into a complex query, you can use any of the following
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 
 ### Facet search 
-To search on specific [facet](#facets) you need to [add them as facet first]()
-then add `@` to specify you are searcing on a facet.
+To search on specific [facet](#facets) you need to [add them as facet first](#create-a-facet) then add `@` to specify you are searcing on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value just enter: 
 
@@ -133,9 +132,9 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 Your logs inherit tags from their [host](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/). 
 They can be used in the search and in facets as well:
 
-* `test` is searching for the tag #test.
+* `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
-* `("service:srvA" OR "service:srvB")` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
 * `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
 
 ### Autocomplete
