@@ -133,6 +133,51 @@ logs:
 
 {{< /highlight >}}
 
+### Filter logs
+
+All logs are not equals and you might want to send only a specific subset of logs to Datadog.
+To achieve this use the `log_processing_rules` parameter in the agent with the **exclude_at_match** `type`
+
+If the pattern is contained in the message the log is ignored, and not sent to Datadog.
+
+Example: Filter logs with datadog users
+
+```
+logs:
+ - type: file
+   path: /my/test/file.log
+   service: cardpayment
+   source: java
+   log_processing_rules:
+    - type: exclude_at_match
+      name: exclude_datadoghq_users
+      # Regexp can be anything
+      pattern: User=\w+@datadoghq.com
+```
+
+### Search and replace content in your logs
+
+Logs can contain sensitive information that shouldn't leave your infrastructure without being redacted.
+To achieve this use the `log_processing_rules` parameter in the agent with the **mask_sequences** `type`
+
+It replace all matched groups by a provided placeholder
+
+Example: Redact credit cards information
+
+```
+logs:
+ - type: file
+   path: /my/test/file.log
+   service: cardpayment
+   source: java
+   log_processing_rules:
+      - type: mask_sequences
+        name: mask_credit_cards
+        replace_placeholder: "[masked_credit_card]"
+        #One pattern that contains capture groups
+        pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
+```
+
 ## Reserved attributes 
 
 This section is relevant only if your logs are JSON formatted.
