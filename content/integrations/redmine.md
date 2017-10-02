@@ -1,9 +1,9 @@
 ---
 title: Datadog-Redmine Integration
 integration_title: Redmine
-
 kind: integration
 doclevel: basic
+description: "View, search on, and discuss Redmine updates in your Datadog event stream."
 ---
 
 ## Overview

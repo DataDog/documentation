@@ -2,6 +2,7 @@
 title: Datadog-Sumo Logic Integration
 integration_title: Sumo Logic
 kind: integration
+description: "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
 ---
 
 ## Overview

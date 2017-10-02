@@ -3,6 +3,7 @@ title: Datadog-Flowdock Integration
 integration_title: Flowdock
 kind: integration
 doclevel: basic
+description: "Send Datadog alerts and graphs to your team's flows."
 ---
 
 {{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" >}}

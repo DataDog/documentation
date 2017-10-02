@@ -4,6 +4,7 @@ integration_title: AWS Workspaces
 kind: integration
 git_integration_title: amazon_workspaces
 newhlevel: true
+description: "Track failed connections, session latency, unhealthy workspaces, and more."
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ integration_title: StatusPageIO
 kind: integration
 doclevel: basic
 newhlevel: true
+description: "Keep tabs on the status of any service that uses StatusPage.io."
 ---
 
 ## Overview

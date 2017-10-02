@@ -3,6 +3,7 @@ title: Datadog-Google Cloud Platform Integration
 integration_title: Google Cloud Platform
 kind: integration
 git_integration_title: google_cloud_platform
+description: "Collect a wealth of GCP metrics and visualize your instances in a host map."
 ---
 
 ## Overview

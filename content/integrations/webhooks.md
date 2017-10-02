@@ -3,6 +3,7 @@ title: Datadog-Webhooks Integration
 integration_title: Webhooks
 kind: integration
 newhlevel: true
+description: "Use any Webhook as a notification channel in Datadog alerts and events."
 ---
 
 ## Overview

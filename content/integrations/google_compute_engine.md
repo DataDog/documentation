@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_compute_engine
+description: "Track busy instances and compare account usage metrics to quota limits."
 ---
 
 ## Overview

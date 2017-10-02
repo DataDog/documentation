@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: chef
 newhlevel: true
 updated_for_agent: 5.8.5
+description: "Track Chef client runs: know when they fail, succeed, or make big changes."
 ---
 
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}

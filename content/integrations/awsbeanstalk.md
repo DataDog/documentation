@@ -4,6 +4,7 @@ integration_title: AWS Elastic Beanstalk
 kind: integration
 git_integration_title: amazon_elasticbeanstalk
 newhlevel: true
+description: "Track key Amazon ElasticBeanstalk metrics."
 ---
 
 ## Overview
