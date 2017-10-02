@@ -4,7 +4,6 @@ integration_title: New Relic
 kind: integration
 git_integration_title: new_relic
 newhlevel: true
-description: "See New Relic metrics and events in Datadog."
 ---
 
 {{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" >}}

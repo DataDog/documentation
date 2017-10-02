@@ -6,6 +6,7 @@ title: Datadog-Docker Integration
 integration_title: Docker
 git_integration_title: docker
 kind: integration
+doclevel:
 ---
 
 <!-- <div id="int-overview">

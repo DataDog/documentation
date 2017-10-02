@@ -3,7 +3,6 @@ title: Datadog-Ruby Integration
 integration_title: Ruby
 kind: integration
 newhlevel: true
-description: "Send custom metrics from your Ruby applications with Datadog client libraries."
 ---
 
 ## Overview

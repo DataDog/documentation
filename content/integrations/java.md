@@ -5,7 +5,6 @@ kind: integration
 git_integration_title: java
 newhlevel: true
 updated_for_agent: 5.8.5
-description: "Collect custom metrics from your applications using the Yammer Metrics library."
 ---
 
 ## Overview

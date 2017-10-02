@@ -4,7 +4,6 @@ integration_title: AWS OpsWorks
 kind: integration
 git_integration_title: amazon_ops_works
 newhlevel: true
-description: "Track AWS OpsWorks resource usage."
 ---
 
 ## Overview

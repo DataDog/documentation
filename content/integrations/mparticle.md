@@ -3,7 +3,6 @@ title: Datadog-mParticle Integration
 integration_title: mParticle
 kind: integration
 doclevel: basic
-description: "Monitor app crashes and collect detailed runtime performance metrics."
 ---
 
 ## Overview

@@ -4,7 +4,6 @@ integration_title: AWS Storage Gateway
 kind: integration
 git_integration_title: amazon_storage_gateway
 newhlevel: true
-description: "Track key AWS Storage Gateway metrics."
 ---
 
 ## Overview

@@ -4,7 +4,6 @@ integration_title: Pingdom
 kind: integration
 git_integration_title: pingdom
 newhlevel: true
-description: "See Pingdom-collected uptimes, response times, and alerts in Datadog."
 ---
 
 ## Overview

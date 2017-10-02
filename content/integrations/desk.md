@@ -3,7 +3,6 @@ title: Datadog-Desk Integration
 integration_title: Desk
 kind: integration
 git_integration_title: desk
-description: "See and discuss new, open, pending, and resolved cases in your event stream."
 ---
 ## Overview
 

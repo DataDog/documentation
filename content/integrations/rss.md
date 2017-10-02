@@ -1,9 +1,9 @@
 ---
 title: Datadog-RSS Integration
 integration_title: RSS
+
 kind: integration
 doclevel: basic
-description: "See RSS feeds in your Datadog event stream."
 ---
 
 {{< img src="integrations/rss/rss.png" alt="RSS event" >}}

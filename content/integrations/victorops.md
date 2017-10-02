@@ -3,7 +3,6 @@ title: Datadog-VictorOps Integration
 integration_title: VictorOps
 kind: integration
 doclevel: basic
-description: "Use VictorOps as a notification channel in Datadog alerts and events."
 ---
 
 ## Overview

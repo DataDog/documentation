@@ -4,7 +4,6 @@ integration_title: AWS Route 53
 kind: integration
 newhlevel: true
 git_integration_title: amazon_route53
-description: "Track Route53 metrics, and monitor health checks."
 ---
 
 {{< img src="integrations/awsroute53/route53_graph.png" >}}

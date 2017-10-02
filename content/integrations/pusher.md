@@ -4,7 +4,6 @@ integration_title: Pusher
 kind: integration
 git_integration_title: pusher
 newhlevel: true
-description: "Get metrics from Pusher into Datadog to see and monitor app engagement."
 ---
 
 ## Overview

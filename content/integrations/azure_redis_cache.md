@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_redis_cache
 newhlevel: true
-description: "Track cache hits, misses, evictions, connected clients, and more."
 ---
 
 ## Overview

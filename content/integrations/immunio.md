@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: immunio
-description: "Collect data from Immunio to visualize and monitor attack patterns."
 ---
 
 {{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" >}}

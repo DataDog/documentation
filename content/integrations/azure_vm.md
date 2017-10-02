@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_vm
 newhlevel: true
-description: "Track Azure VM resource usage, network statistics, and more."
 ---
 
 ## Overview

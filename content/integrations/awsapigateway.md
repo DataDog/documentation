@@ -4,7 +4,6 @@ integration_title: AWS API Gateway
 kind: integration
 git_integration_title: amazon_api_gateway
 newhlevel: true
-description: "Track gateway errors, cache hits and misses, and request latency."
 ---
 
 ## Overview

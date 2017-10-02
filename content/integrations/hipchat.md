@@ -4,7 +4,6 @@ integration_title: HipChat
 kind: integration
 newhlevel: true
 git_integration_title: hipchat
-description: "Send Datadog alerts and graphs to your team's Hipchat room."
 ---
 
 {{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" >}}

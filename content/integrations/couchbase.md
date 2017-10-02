@@ -4,7 +4,6 @@ integration_title: Couchbase
 kind: integration
 doclevel: basic
 git_integration_title: couchbase
-description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" >}}

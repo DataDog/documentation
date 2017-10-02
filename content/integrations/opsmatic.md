@@ -5,7 +5,6 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: opsmatic
-description: "See Opsmatic alerts and acknowledge them from your Datadog event stream."
 ---
 
 ## Overview

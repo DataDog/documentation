@@ -4,7 +4,6 @@ integration_title: AWS Polly
 kind: integration
 git_integration_title: amazon_polly
 newhlevel: true
-description: "Track key AWS Polly metrics."
 ---
 
 ## Overview

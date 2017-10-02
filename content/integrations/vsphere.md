@@ -6,7 +6,6 @@ kind: integration
 newhlevel: true
 aliases:
     - /integrations/vmware/
-description: "{{< get-desc-from-git >}}"
 ---
 
 {{< img src="integrations/vmware/vsphere_graph.png" >}}
