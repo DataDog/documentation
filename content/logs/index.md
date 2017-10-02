@@ -136,7 +136,7 @@ logs:
 ### Filter logs
 
 All logs are not equals and you might want to send only a specific subset of logs to Datadog.
-To achieve this use the `log_processing_rules` parameter in the agent with the **exclude_at_match** `type`
+To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** `type`
 
 If the pattern is contained in the message the log is filtered, and not sent to Datadog.
 
@@ -158,10 +158,9 @@ logs:
 ### Search and replace content in your logs
 
 Logs can contain sensitive information that shouldn't leave your infrastructure without being redacted.
-To achieve this use the `log_processing_rules` parameter in the agent with the **mask_sequences** `type`
+To achieve this use the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`
 
-It replace all matched groups by a provided placeholder
-
+It replace all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit cards information
 
 ```
