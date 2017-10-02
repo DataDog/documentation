@@ -6,15 +6,65 @@
         </div>
     </form>
     <ul class="list-unstyled">
-        <li><a href="{{ .Site.BaseURL }}">Getting Started</a></li>
-        <li><a href="{{ .Site.BaseURL }}guides/basic_agent_usage/">Agent</a></li>
-        <li><a href="{{ .Site.BaseURL }}integrations/">Integrations</a></li>
-        <li><a href="{{ .Site.BaseURL }}graphing/">Graphing/Visualization</a></li>
-        <li><a href="{{ .Site.BaseURL }}monitoring/">Alerting</a></li>
-        <li><a href="{{ .Site.BaseURL }}tracing/">Tracing/APM</a></li>
-        <li><a href="{{ .Site.BaseURL }}api/">Developers</a></li>
-        <li><a href="{{ .Site.BaseURL }}guides/multiaccountorg/">Account Management</a></li>
-        <li><a href="{{ .Site.BaseURL }}glossary/">Glossary</a></li>
-        <li><a href="{{ .Site.BaseURL }}faq/">FAQ</a></li>
+        <li>
+            <a href="{{ .Site.BaseURL }}">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_start.png") }}" />
+                Getting Started
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}guides/basic_agent_usage/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_agent.png") }}" />
+                Agent
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}integrations/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_integrations.png") }}" />
+                Integrations
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}graphing/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_graphing.png") }}" />
+                Graphing/Visualization
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}monitoring/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_alerting.png") }}" />
+                Alerting
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}tracing/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_tracing.png") }}" />
+                Tracing/APM
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}api/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_developers.png") }}" />
+                Developers
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}guides/multiaccountorg/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_account.png") }}" />
+                Account Management
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}glossary/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_glossary.png") }}" />
+                Glossary
+            </a>
+        </li>
+        <li>
+            <a href="{{ .Site.BaseURL }}faq/">
+                <img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_faq.png") }}" />
+                FAQ
+            </a>
+        </li>
     </ul>
 </aside>

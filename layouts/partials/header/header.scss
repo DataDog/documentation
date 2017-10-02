@@ -21,19 +21,22 @@ body > header {
   #logo {
     display: block;
     text-align: center;
-    position: absolute;
-    width: 100%;
-    margin-top: -27px;
+    position:relative;
     z-index:1;
+  }
+  .logo-img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: -27px auto 0 auto;
   }
   .logo-text {
     position: absolute;
-    bottom: -17px;
     height: 14px;
     width: auto;
     left: 0;
     right: 0;
-    margin: auto;
+    margin: 57px auto 0 auto;
   }
   .navbar-left {
     float:left;
