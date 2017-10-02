@@ -202,14 +202,7 @@ $(document).ready(function () {
           formatted_results += '<div class="tipue_search_content_url">' +
             '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
           // var text = hit.page_description;
-          // if (text.length < 20) {
           var text = hit._snippetResult.body.value
-          var slice_index = text.indexOf('Overview');
-          if (slice_index > -1) {
-            text = text.slice(slice_index + 8, text.length)
-          }
-          //}
-
           formatted_results += '<div class="tipue_search_content_text">' +
             text + '</div>';
           formatted_results += '</div>';
@@ -222,7 +215,7 @@ $(document).ready(function () {
       // load pagination
       $('#tipue_search_content').pajinate({
         num_page_links_to_display : 9,
-        items_per_page : 15,
+        items_per_page : 7,
         wrap_around: false,
         show_first_last: false
       });
