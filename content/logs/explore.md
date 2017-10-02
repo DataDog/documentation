@@ -9,8 +9,9 @@ beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's log management is currently in private beta. If you would like to apply for it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
+
 ## Overview 
 
 The Logs explorer is your home base for troubleshooting and exploration:
@@ -40,7 +41,7 @@ You can sort the list by clicking the **date** column header.
 {{< img src="logs/explore/log_list.png" alt="Log List" >}}
 
 ### Filtering the log list
-If you enter a valid query into the [search bar](#search-bar),  words that match your query are highlighted, and the logs displayed match your facet criteria:
+If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
 {{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
 
@@ -63,18 +64,18 @@ To add more log details to the list, click the **Columns** button and select any
 
 ## Facets 
 
-A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter over your data.
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
 
-A Facet helps you to break down your datasets over user(s), service(s), etc ...
+Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
 {{< img src="logs/explore/facets_demo.png" alt="Facets demo" >}}
 
 ### Create a Facet
 
-To start using an attribute in a Facet or in the search, you simply need to click on it and add it as a Facet:
+To start using an attribute as a Facet or in the search, you simply need to click on it and add it as a Facet:
 {{< img src="logs/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
 
-Once this is done, the value of this attribute **for all new logs** is  stored and can be used for search either in the search bar or in the Facet Panel
+Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).
 
 ### Facet Panel
 
@@ -116,9 +117,9 @@ To combine multiple terms into a complex query, you can use any of the following
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 
 ### Facet search 
-To search on specific [facet](#facets) you need to [add them as facet first](#create-a-facet) then add `@` to specify you are searcing on a facet.
+To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searcing on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value just enter: 
+For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter: 
 
 `@url:www.datadoghq.com`
 
@@ -131,8 +132,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 ### Tags
 
-Your logs inherit tags from their [host](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/). 
-They can be used in the search and in facets as well:
+Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/) that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
