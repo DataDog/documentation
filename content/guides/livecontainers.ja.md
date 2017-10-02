@@ -140,4 +140,4 @@ Live Containers supports a web proxy as [configured on the Agent](https://github
 
 - ライブコンテナ モニタリングは、デフォルトのDebian docker-dd-agentイメージでのみ利用できます。アルパインイメージには含まれていません。
 
-- RBACの設定によって、Kubernetesのメタデータ取得を制限できます。詳しくは、[RBAC entites for the Datadog Agent]（https://gist.github.com/hkaj/404385619e5908f16ea3134218648237）を参照してください。
+- RBACの設定によって、Kubernetesのメタデータ取得を制限できます。詳しくは、[RBAC entites for the Datadog Agent](https://gist.github.com/hkaj/404385619e5908f16ea3134218648237) を参照してください。
