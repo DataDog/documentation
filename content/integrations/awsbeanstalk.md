@@ -16,6 +16,10 @@ AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web ap
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
 
+Receiving Elastic Beanstalk metrics requires also to [enable the Enhanced Health Reporting](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html) feature for your environment, and to configure your environment to [publish enhanced health metrics to CloudWatch](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console)
+
+**Note**: This will increase your CloudWatch custom metric charges.
+
 ### Configuration
 
 #### Monitor Elastic Beanstalk environments with the Datadog agent container
