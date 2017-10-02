@@ -46,10 +46,6 @@ instances:
 api_key: <YOUR_DATADOG_API_KEY>
 #(optional): same hostname than in Datadog.conf - used for host tags and links with metrics
 #hostname:  
-#If you need to change the port used to send the log - default is secured
-#log_dd_port: 10516
-#If you do not want to use ssl to send your logs
-#skip_ssl_validation: false
 
 {{< /highlight >}}
 
