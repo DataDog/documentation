@@ -32,4 +32,4 @@ To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.c
 
 <!-- To install the Datadog Agent via Chef, please see [here](http://docs.datadoghq.com/guides/chef/). -->
 
-Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/guides/chef/)を参照して下さい。
+Chefを使ってDatadog Agentをインストールする方法に関しては、[Deploying the Agent with Chef](http://docs.datadoghq.com/ja/integrations/chef/)を参照して下さい。
