@@ -138,7 +138,7 @@ logs:
 All logs are not equals and you might want to send only a specific subset of logs to Datadog.
 To achieve this use the `log_processing_rules` parameter in the agent with the **exclude_at_match** `type`
 
-If the pattern is contained in the message the log is ignored, and not sent to Datadog.
+If the pattern is contained in the message the log is filtered, and not sent to Datadog.
 
 Example: Filter logs with datadog users
 
