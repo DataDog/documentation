@@ -4,6 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
+description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
 beta: true
 ---
 
