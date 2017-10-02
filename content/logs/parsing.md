@@ -4,7 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
-description: "Parse your logs using Grok with a Datadog Grok Processor"
+description: "Parse your logs using the Grok Processor"
 ---
 
 <div class="alert alert-info">

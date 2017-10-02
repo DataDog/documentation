@@ -4,7 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
-description: "Configure your Datadog agent to gather logs from your host"
+description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
 
 <div class="alert alert-info">
