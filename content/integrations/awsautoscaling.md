@@ -4,7 +4,7 @@ integration_title: AWS Auto Scaling
 kind: integration
 git_integration_title: amazon_auto_scaling
 newhlevel: true
-description: "Track the status and counts of instances in your Auto Scaling groups."
+description: "Track the status and counts of instances in your Auto Scaling Groups."
 ---
 
 ## Overview
