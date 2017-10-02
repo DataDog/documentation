@@ -4,7 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
-description: "The Logs explorer view is Datadog home base for log troubleshooting and exploration. If something unexpected or wrong happens, you can find it here"
+description: "The Logs explorer view is *your* Datadog home base for log troubleshooting and exploration. If you want to investigate something in your logs, this is where you go"
 ---
 
 <div class="alert alert-info">

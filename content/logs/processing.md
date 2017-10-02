@@ -4,7 +4,7 @@ kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
-description: "Extract meaningful values from your logs to enhance your logs troubleshooting and exploration in the Logs Explorer view"
+description: "Extract meaningful values from your logs to enhance your log troubleshooting and exploration in the Logs Explorer view"
 ---
 
 <div class="alert alert-info">
