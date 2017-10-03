@@ -17,43 +17,51 @@
 </head>
 <body>
 
-{{ partial "header/header.html" . }}
+    {{ partial "header/header.html" . }}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm">
-            {{ partial "sidenav/sidenav.html" . }}
-        </div>
-        <div class="col-sm" style="height:500px;">
-
-        </div>
-        <div class="col-sm" style="height:500px;background:#1D1D1D;">
-            One of three columns
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <!--{{ partial "sidenav/sidenav.html" . }} {{.TableOfContents}} -->
+            </div>
+            <div class="col-sm-4 main">
+                {{ block "main" . }}{{ end }}
+            </div>
+            <div class="col-sm-5 api-code">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Curl</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ruby</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Python</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">PHP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Java</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Node</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Go</a>
+                    </li>
+                </ul>
+                {{ block "code" . }}{{ end }}
+            </div>
         </div>
     </div>
-</div>
 
-{{ partial "footer/footer.html" . }}
+    {{ partial "footer/footer.html" . }}
 
-<script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
+    <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
 
-{{ partial "footer-scripts.html" . }}
-{{ partial "footer-js-dd-docs-methods" . }}
-{{ if eq .Site.Params.environment "preview" }}
-<div class="preview-banner" style="position: fixed;
-bottom: 0;
-background-color: rgba(255, 207, 0, .85);
-z-index: 999;
-line-height: inherit;
-color: #333;
-margin: 0;
-font-size: 16px;
-padding: 3px;
-font-family: monospace;
-width: 100%;
-text-align: center;">
-PREVIEWING: <a class="no-check" href="https://github.com/DataDog/documentation/tree/{{ .Site.Params.branch }}"> {{ .Site.Params.branch }} </a>
-</div>
-{{ end }}
+    {{ partial "footer-scripts.html" . }}
+    {{ partial "footer-js-dd-docs-methods" . }}
+    {{ partial "preview_banner/preview_banner" . }}
 </body>
 </html>

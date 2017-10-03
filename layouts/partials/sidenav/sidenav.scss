@@ -30,6 +30,13 @@ aside.sidenav {
     font-weight:200;
   }
   .sidenav-search {
+    .input-group-addon {
+      background:none;
+      border:none;
+      border-bottom:1px solid #D3D3D3;
+      padding:10px 0 0 7px;
+      border-radius:0;
+    }
     .form-control:focus {
       border-color:$ddpurple;
     }
@@ -41,6 +48,7 @@ aside.sidenav {
       border-radius:0;
       font-size:18px;
       padding-bottom:3px;
+      padding-left: 5px;
     }
   }
   ul {

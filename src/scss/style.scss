@@ -36,3 +36,24 @@ p {
   padding-top:30px;
   padding-bottom:100px;
 }
+
+
+// sections
+// API
+.api-code {
+  background:#1D1D1D;
+  padding-left:0;
+  padding-right:0;
+  color:#FFFFFF;
+  .nav {
+    background:#000;
+    .nav-link {
+      color:#fff;
+      &:hover {
+        border-bottom:1px solid $ddpurple;
+        color:$ddpurple;
+      }
+    }
+  }
+  // header 787878
+}
