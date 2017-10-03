@@ -43,6 +43,7 @@
     "lazypipe": "^1.0",
     "merge-stream": "^1.0",
     "minimist": "^1.1",
+    "mixitup": "^3.2.1",
     "node-sass": "^4.1",
     "popper.js": "^1.12.5",
     "run-sequence": "^1.1.4",

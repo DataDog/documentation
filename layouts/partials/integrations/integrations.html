@@ -51,17 +51,16 @@
 </script>
 
 <div class="filters">
-    <a href="#all" type="button" class="active mb-1 btn btn-sm btn-outline-primary sort-reset">ALL</a>
+    <a data-filter="all" href="#all" type="button" class="active mb-1 btn btn-sm btn-outline-primary sort-reset">ALL</a>
     {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
-    <a href="#cat-{{ replace $e "/" "" | urlize }}"
-    class="mb-1 btn btn-sm btn-outline-primary sort-time sort-{{ replace $e "/" "" | urlize }}"
-    data-tag="cat-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+    <a data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}"
+    class="mb-1 btn btn-sm btn-outline-primary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
     {{ end }}
 </div>
 
 <div class="integration-tiles">
     {{ range $i, $v := $integration_list }}
-        <div class="card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+        <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
             <div class="card-body">
                 <a class="card-button" href="{{$v.docs_link}}">

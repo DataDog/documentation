@@ -45,7 +45,11 @@ def create_placeholder_file(template, new_glob):
     with open(template) as o_file:
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
-        _, fm, content = boundary.split(content, 2)
+        split = boundary.split(content, 2)
+        if len(split) == 3:
+            _, fm, content = split
+        elif len(split) == 1:
+            content = split
         new_yml = yaml.load(fm)
         new_content = content
         if new_yml.get('aliases', None):

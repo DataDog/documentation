@@ -5,6 +5,11 @@ $ddpurple:    #774DA2;
 }
 .integration-tiles {
   margin-top:30px;
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
     .card {
       justify-content: center;
       width:146px;
