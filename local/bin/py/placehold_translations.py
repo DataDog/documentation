@@ -48,9 +48,10 @@ def create_placeholder_file(template, new_glob):
         split = boundary.split(content, 2)
         if len(split) == 3:
             _, fm, content = split
+            new_yml = yaml.load(fm)
         elif len(split) == 1:
-            content = split
-        new_yml = yaml.load(fm)
+            content = split[0]
+            new_yml = {}
         new_content = content
         if new_yml.get('aliases', None):
             new_aliases = []
