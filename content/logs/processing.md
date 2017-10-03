@@ -9,8 +9,9 @@ beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's log management is currently in private beta. If you would like to apply for it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
+
 
 ## Overview
 
