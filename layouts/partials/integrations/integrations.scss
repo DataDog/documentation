@@ -1,0 +1,59 @@
+$ddpurple:    #774DA2;
+
+.filters {
+  margin-top:40px;
+}
+.integration-tiles {
+  margin-top:30px;
+    .card {
+      justify-content: center;
+      width:146px;
+      height:142px;
+      float:left;
+      margin:0 19px 19px 0;
+      overflow:hidden;
+      &:hover {
+        border:1px solid $ddpurple;
+        & > .card-img {
+          display:none;
+        }
+        & > .card-body {
+          display:block;
+        }
+      }
+      .card-body {
+        padding:0;
+        display:none;
+      }
+      .card-title {
+        margin:14px 0 0 0;
+        padding:0 1.25rem;
+      }
+      .card-title,
+      .card-text {
+        color:#000;
+        font-size:12px;
+        line-height:16px;
+      }
+      .card-text {
+        padding:0 4px;
+      }
+      .card-button {
+        position:relative;
+        display:block;
+        height:100%;
+        width:100%;
+        .btn-container {
+          padding:0 1.25rem;
+          position:absolute;
+          bottom:26px;
+          height:26px;
+          width:100%;
+        }
+        .btn {
+          font-size:12px;
+          height:26px;
+        }
+      }
+    }
+}

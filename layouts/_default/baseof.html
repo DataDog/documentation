@@ -25,7 +25,8 @@
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
             <div class="col-12 col-lg-8 col-xl-9 main">
-                <!--{{ printf "%#v" . }}-->
+                <!--{{ .Type }}
+                {{ printf "%#v" . }}-->
                 {{ block "main" . }}{{ end }}
             </div>
         </div>

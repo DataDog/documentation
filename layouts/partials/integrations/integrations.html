@@ -1,0 +1,75 @@
+<!-- from docs way
+{{ $integrations := where (where .Site.Pages "Params.kind" "=" "integration") ".Params.beta" "!=" "true" }}
+{{ $lower := sort $integrations "Params.integration_title" }}
+{{ $.Scratch.Set "lower_titles" (slice) }}
+
+{{ range $lower }}
+    {{ $.Scratch.Add "lower_titles" (lower .Params.integration_title) }}
+{{ end }}
+
+{{ range sort ($.Scratch.Get "lower_titles") }}
+    {{ $lower_int := . }}
+    {{ range $int := $integrations }}
+        {{ if eq $lower_int (lower $int.Params.integration_title) }}
+            <li class="list-group-item col-lg-2 col-md-3 col-sm-4 col-xs-6"><a href="{{.Permalink}}">{{ .Params.integration_title}}</a></li>
+        {{ end }}
+    {{ end }}
+{{ end }}-->
+
+{{ $dot := . }}
+
+<!-- From data file -->
+{{ $integration_list := (where $.Site.Data.product.integrations.integrations "public" true) }}
+
+<!-- build filters -->
+{{ $.Scratch.Set "filters" (slice)}}
+{{ range $index, $element := $integration_list }}
+    {{ range $e := $element.categories }}
+        {{ if not (in ($.Scratch.Get "filters") $e) }}
+            {{ $.Scratch.Add "filters" $e }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+<!-- build tiles -->
+{{ $.Scratch.Add "row-count" 0 }}
+{{ $.Scratch.Set "ints" (slice)}}
+{{ range $k, $v := $integration_list }}
+    {{ $.Scratch.Set "curr_categories" (slice)}}
+    {{ range $i, $e := $v.categories }}
+        {{ $.Scratch.Add "curr_categories" (print "cat-" (replace $e "/" "" | urlize)) }}
+    {{ end }}
+    {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.name "image" $v.image "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $v.docs_link "blurb" $v.short_description "public_title" $v.public_title) }}
+{{ end }}
+
+{{ $json := $.Scratch.Get "ints" | jsonify }}
+{{ $test := printf "%s" $json }}
+
+<script type="text/javascript">
+    var integrations = {{ $test }};
+    window.integrations = JSON.parse(integrations);
+</script>
+
+<div class="filters">
+    <a href="#all" type="button" class="active mb-1 btn btn-sm btn-outline-primary sort-reset">ALL</a>
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
+    <a href="#cat-{{ replace $e "/" "" | urlize }}"
+    class="mb-1 btn btn-sm btn-outline-primary sort-time sort-{{ replace $e "/" "" | urlize }}"
+    data-tag="cat-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+    {{ end }}
+</div>
+
+<div class="integration-tiles">
+    {{ range $i, $v := $integration_list }}
+        <div class="card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+            <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
+            <div class="card-body">
+                <a class="card-button" href="{{$v.docs_link}}">
+                    <h4 class="card-title">{{ $v.public_title }}</h4>
+                    <p class="card-text">{{ $v.short_description }}</p>
+                    <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
+                </a>
+            </div>
+        </div>
+    {{ end }}
+</div>
