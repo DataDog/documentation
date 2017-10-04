@@ -68,7 +68,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, rename the `custom-logs.yaml.example` file to `custom-logs.yaml` and set these options:
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a `custom-logs.yaml` file in your **conf.d** folder and set these options:
 
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
