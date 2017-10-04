@@ -23,7 +23,7 @@ To start gathering logs, install the Log-Specific Datadog Agent:
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
     sudo apt-get update
 
-To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.1-1 500*
+To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.2-1 500*
 
     apt-cache policy datadog-agent | grep logs
 
