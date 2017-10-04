@@ -1,12 +1,13 @@
 ---
 last_modified: 2015/06/25
 translation_status: complete
+autotocdepth: 2
 language: ja
 title: Host Map表示の入門
-kind: guide
-listorder: 5
+kind: documentation
 aliases:
   - /ja/guides/hostmap
+customnav: infrastructurenav
 ---
 
 <!--

@@ -1,15 +1,10 @@
 ---
 title: Host Naming
 kind: documentation
-sidebar:
-  nav:
-    - header: Host Naming
-    - text: Agent Host Names
-      href: "#agent-host-name"
-    - text: Host Aliases
-      href: "#host-aliases"
+autotocdepth: 2
 aliases:
   - /hostnames
+customnav: infrastructurenav
 ---
 
 <div class="alert alert-info">

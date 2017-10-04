@@ -139,6 +139,42 @@
 - id: example_categories
   translation: "このサンプルコードは次のグループにも属します:"
 
+# Infrastructure
+- id: customnav_infrastructurenav
+  translation: "Infrastructure"
+
+- id: customnav_infrastructurenav_hostnames
+  translation: "Hostnames"
+
+- id: customnav_infrastructurenav_hostmap
+  translation: "Hostmap"
+
+- id: customnav_infrastructurenav_livecontainers
+  translation: "Containters" 
+
+- id: customnav_infrastructurenav_process
+  translation: "Processes"
+
+- id: customnav_infrastructurenav_infrastructure_list
+  translation: "Infrastructure List"
+
+# Logs
+
+- id: customnav_lognav
+  translation: Logs (Beta)
+
+- id: customnav_lognav_collection
+  translation: Collection
+
+- id: customnav_lognav_processing
+  translation: Processing
+
+- id: customnav_lognav_parsing
+  translation: Parsing
+
+- id: customnav_lognav_explore
+  translation: Explore
+  
 # Basic agent menu
 
 - id: amazonlinux

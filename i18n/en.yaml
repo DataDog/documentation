@@ -137,7 +137,6 @@
   translation: "Tracing API"
 
 # Infrastructure
-
 - id: customnav_infrastructurenav
   translation: "Infrastructure"
 
@@ -152,6 +151,9 @@
 
 - id: customnav_infrastructurenav_process
   translation: "Processes"
+
+- id: customnav_infrastructurenav_infrastructure_list
+  translation: "Infrastructure List"
 
 # Logs
 

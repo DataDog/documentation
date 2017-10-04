@@ -1,6 +1,6 @@
 ---
 title: Infrastructure List
-kind: Documentation
+kind: documentation
 autotocdepth: 2
 hideguides: true
 customnav: infrastructurenav
