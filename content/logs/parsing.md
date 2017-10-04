@@ -141,10 +141,11 @@ The date matcher transforms your timestamp in the EPOCH format.
 |14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
 |11/10/2014| `%{date("dd/mm/yyyy"):date}`| {"date": 1412978400000}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
-|06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:hh:mm:ss Z"):date}` | {"date": 1362501390000}|
+|06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}` | {"date": 1362501390000}|
 |2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
+|2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
 
 Parsing a date **doesn't** set its value as the log official date, for this you need to use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
 
