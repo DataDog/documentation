@@ -9,7 +9,7 @@ beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's log management is currently in private beta. If you would like to apply for it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
@@ -17,16 +17,13 @@ Datadog's log management is currently in private beta. If you would like to appl
 
 ## Getting started with the Agent
 
-Collecting logs is **disabled** by default in the Datadog Agent.
-To start gathering logs:
-
-Install the Log-Specific Datadog Agent:
+To start gathering logs, install the Log-Specific Datadog Agent:
 
     sudo sh -c "echo 'deb http://apt.datad0g.com/ beta main' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
     sudo apt-get update
 
-To validate apt is properly configured,  you can check if the following command returns results like 1:5.17.3~logsbeta.1-1 500
+To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.2-1 500*
 
     apt-cache policy datadog-agent | grep logs
 
@@ -34,6 +31,7 @@ Then to install the agent:
 
     sudo apt-get install datadog-agent=1:5.17.3~logsbeta.2-1 -y
 
+Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it:
 
 * In the `conf.d` folder, create the `logs-agent.yaml` file with the following content: 
 
@@ -53,12 +51,12 @@ api_key: <YOUR_DATADOG_API_KEY>
 
 ## Enabling log collection from integrations
 
-To start collecting logs for an integration, you need to uncomment the log sections in your integration yaml file, and then set its parameters' values according to your infrastructure.
+To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
-If you don't find a log section in your file you need to use the custom file configuration below instead. 
+If an integration does not support logs by default, you may need to use use the custom file configuration below.
 
 <div class="alert alert-warning">
-You might not find any log section in your yaml files during the private beta, however please find below the list of integrations and their yaml files that are supported:
+During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations and example configuration files is available below:
 </div>
 
 * Apache: [apache.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
@@ -70,13 +68,13 @@ You might not find any log section in your yaml files during the private beta, h
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, rename the `custom-logs.yaml.example` file to `custom-logs.yaml` (or to some other unused `*.yaml` name) and set these options:
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a `custom-logs.yaml` file in your **conf.d** folder and set these options:
 
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
 * `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. If the logs don't come from any integration, set this to anything you like (but we recommend matching this value to the namespace of any related custom metrics you are collecting, e.g, `myapp` from `myapp.request.count`)
+* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related custom metrics you are collecting, e.g, `myapp` from `myapp.request.count`)"
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
 
@@ -86,7 +84,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
-Please note that for the yaml file to be considered as correct by the agent, you need to add the “init_config” section and have at least one “instance" defined as we show below."
+Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
 {{< highlight yaml >}}
 init_config:
@@ -114,7 +112,7 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your PHP application doesn't log into a file but forwards its logs locally to TCP port 10518, create a `php.yaml` file like so in order to listen to this port and forward those logs to your datadog application:
+If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
 {{< highlight yaml >}}
 init_config:
@@ -124,7 +122,7 @@ instances:
 #Log section
 logs:
   - type: tcp
-    path: 10518
+    port: 10518
     service: webapp
     source: php
     sourcecategory: front
@@ -133,14 +131,19 @@ logs:
 
 ### Filter logs
 
-All logs are not equals and you might want to send only a specific subset of logs to Datadog.
+All logs are not equal and you may want to send only a specific subset of logs to Datadog.
 To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** `type`
 
-If the pattern is contained in the message the log is filtered, and not sent to Datadog.
+If the pattern is contained in the message the log is excluded, and not sent to Datadog.
 
-Example: Filter logs with datadog users
+Example: Filter out logs where the user field matches the datadoghq.com domain
 
 ```
+init_config:
+
+instances:
+    [{}]
+
 logs:
  - type: file
    path: /my/test/file.log
@@ -155,13 +158,17 @@ logs:
 
 ### Search and replace content in your logs
 
-Logs can contain sensitive information that shouldn't leave your infrastructure without being redacted.
-To achieve this use the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`
+If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`
 
-It replace all matched groups with `replace_placeholder` parameter value.
-Example: Redact credit cards information
+This replaces all matched groups with `replace_placeholder` parameter value.
+Example: Redact credit card numbers
 
 ```
+init_config:
+
+instances:
+    [{}]
+
 logs:
  - type: file
    path: /my/test/file.log
@@ -177,13 +184,12 @@ logs:
 
 ## Reserved attributes 
 
-This section is relevant only if your logs are JSON formatted.
-If so, you need to be aware that some JSON attributes have some special meanings for Datadog.
+If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
 
 ### `date` attribute
-By default Datadog generates a timestamp on any logs that come through.
 
-However, if a JSON log includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
+By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
+However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
 
 * `timestamp`
 * `date`
@@ -192,20 +198,19 @@ However, if a JSON log includes one of the following attributes, Datadog will in
 * `eventTime`
 * `published_date`
 
-You can also ask Datadog to interpret the value of any other attribute as the log’s official date if you set a [log date remapper processor](/logs/processing/#log-date-remapper)
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor](/logs/processing/#log-date-remapper)
+
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 ### `message` attribute
 
-By default, Datadog considers the `message` value as the main content of the log. That value will then have a special display in the [log list](/logs/explore/#log-list) and you can run full text search on it.
-
-The `message` attribute is indexed as text for the [search bar](/logs/explore/#search-bar), allowing you to search over any tokenized word without mentioning the path to the attribute.
+By default, Datadog will ingest the value of message as the body of the log entry. That value will then be highlighted and display in the [log list](/logs/explore/#log-list), where it will be indexed for [full text search](/logs/explore/#search-bar).
 
 ### `severity` attribute
 
-Each log has its own severity, and your datadog application will levrage a lot with this information.
+Each log entry may specify a severity level which will be made available for faceted search within Datadog.
 
 If you would like to remap some severities existing in the `severity` attribute, you can do so with the [log severity remapper](/logs/processing/#log-severity-remapper)
 
