@@ -4,9 +4,7 @@ kind: guide
 listorder: 1
 ---
 
-<div class="alert alert-info">
-To get started using the Agent, please select your platform on the sidebar to the left.
-</div>
+{{< partial name="platforms/platforms.html" >}}
 
 <!--
 ======================================================

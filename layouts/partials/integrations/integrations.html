@@ -63,7 +63,7 @@
         <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
             <div class="card-body">
-                <a class="card-button" href="{{$v.docs_link}}">
+                <a class="card-button" href="{{ .Site.BaseURL }}{{$v.docs_link}}">
                     <h4 class="card-title">{{ $v.public_title }}</h4>
                     <p class="card-text">{{ $v.short_description }}</p>
                     <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>

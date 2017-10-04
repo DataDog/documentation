@@ -61,6 +61,15 @@ aside.sidenav {
         display:block;
         &:hover {
           color:$ddpurple;
+          &> .hover {
+            display:inline;
+          }
+          &> .static {
+            display:none;
+          }
+        }
+        .hover {
+          display:none;
         }
       }
     }

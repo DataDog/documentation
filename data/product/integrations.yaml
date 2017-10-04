@@ -5,7 +5,7 @@ integrations:
     and more.
   public_title: ActiveMQ
   image: Integrations-ActiveMQ-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/activemq/
+  docs_link: /integrations/activemq/
   public: true
 - name: airbrake
   categories: ['monitoring', 'exceptions']
@@ -13,21 +13,21 @@ integrations:
     stream.
   public_title: Airbrake
   image: Integrations-Airbrake-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/airbrake/
+  docs_link: /integrations/airbrake/
   public: true
 - short_description: Collect and monitor Application Load Balancing metrics.
   image: ''
   categories: ['cloud', 'web', 'aws']
   name: amazon_alb
   public_title: Amazon ALB
-  docs_link: http://docs.datadoghq.com/integrations/awselb/
+  docs_link: /integrations/awselb/
   public: true
 - short_description: Track gateway errors, cache hits and misses, and request latency.
   image: ''
   categories: ['cloud', 'api', 'aws']
   name: amazon_api_gateway
   public_title: Amazon API Gateway
-  docs_link: http://docs.datadoghq.com/integrations/awsapigateway/
+  docs_link: /integrations/awsapigateway/
   public: true
 - short_description: Track the status and counts of instances in your Auto Scaling
     groups.
@@ -35,44 +35,44 @@ integrations:
   categories: ['cloud', 'provisioning', 'configuration & deployment', 'aws']
   name: amazon_auto_scaling
   public_title: Amazon Auto Scaling
-  docs_link: http://docs.datadoghq.com/integrations/awsautoscaling/
+  docs_link: /integrations/awsautoscaling/
   public: true
 - short_description: Monitor actual and estimated spend on your AWS account.
   image: ''
   categories: ['cloud', 'cost management', 'aws']
   name: amazon_billing
   public_title: Amazon Billing
-  docs_link: http://docs.datadoghq.com/integrations/awsbilling/
+  docs_link: /integrations/awsbilling/
   public: true
 - short_description: Track error rates, request counts, and bytes downloaded and uploaded.
   image: ''
   categories: ['cloud', 'caching', 'web', 'aws']
   name: amazon_cloudfront
   public_title: Amazon Cloudfront
-  docs_link: http://docs.datadoghq.com/integrations/awscloudfront/
+  docs_link: /integrations/awscloudfront/
   public: true
 - short_description: Track index utilization, successful request count, and more.
   image: ''
   categories: ['cloud', 'processing', 'search', 'aws']
   name: amazon_cloudsearch
   public_title: Amazon Cloudsearch
-  docs_link: http://docs.datadoghq.com/integrations/awscloudsearch/
+  docs_link: /integrations/awscloudsearch/
   public: true
 - name: amazon_cloudtrail
   categories: ['cloud', 'monitoring', 'aws']
   short_description: Alert on suspicious AWS account activity.
   public_title: Amazon CloudTrail
   image: Integrations-AWSCloudtrail-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/awscloudtrail/
+  docs_link: /integrations/awscloudtrail/
   public: true
 - short_description: See deployments as they happen and track how long they take.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_codedeploy
   public_title: Amazon Codedeploy
-  docs_link: http://docs.datadoghq.com/integrations/awscodedeploy/
+  docs_link: /integrations/awscodedeploy/
   public: false
-- docs_link: http://docs.datadoghq.com/integrations/awsdata storegateway/
+- docs_link: /integrations/awsdata storegateway/
   short_description: Track key AWS data store Gateway metrics.
   name: amazon_data store_gateway
   categories: ['cloud', 'data store', 'aws']
@@ -82,154 +82,154 @@ integrations:
   categories: ['cloud', 'data store', 'aws']
   name: amazon_dynamodb
   public_title: Amazon Dynamodb
-  docs_link: http://docs.datadoghq.com/integrations/awsdynamo/
+  docs_link: /integrations/awsdynamo/
   public: true
 - short_description: Track snapshot age, IOPS, read/write times, and more.
   image: ''
   categories: ['cloud', 'data store', 'aws']
   name: amazon_ebs
   public_title: Amazon EBS
-  docs_link: http://docs.datadoghq.com/integrations/awsebs/
+  docs_link: /integrations/awsebs/
   public: true
 - short_description: Track instance resource usage, monitor status checks, and more.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_ec2
   public_title: Amazon EC2
-  docs_link: http://docs.datadoghq.com/integrations/awsec2/
+  docs_link: /integrations/awsec2/
   public: true
 - short_description: Monitor container statuses, track resource usage, and more.
   image: ''
   categories: ['cloud', 'containers', 'aws']
   name: amazon_ecs
   public_title: Amazon ECS
-  docs_link: http://docs.datadoghq.com/integrations/ecs/
+  docs_link: /integrations/ecs/
   public: true
 - short_description: Track key Amazon Elastic Filesystem metrics.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_efs
   public_title: Amazon EFS
-  docs_link: http://docs.datadoghq.com/integrations/awsefs/
+  docs_link: /integrations/awsefs/
   public: true
 - short_description: Track key Amazon ElasicCache metrics.
   image: ''
   categories: ['cloud', 'caching', 'aws']
   name: amazon_elasticache
   public_title: Amazon Elasticache
-  docs_link: http://docs.datadoghq.com/integrations/awselasticache/
+  docs_link: /integrations/awselasticache/
   public: true
 - short_description: Track key Amazon ElasticBeanstalk metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_elasticbeanstalk
   public_title: Amazon Elasticbeanstalk
-  docs_link: http://docs.datadoghq.com/integrations/awsbeanstalk/
+  docs_link: /integrations/awsbeanstalk/
   public: true
 - name: amazon_elb
   categories: ['cloud', 'web', 'aws']
   short_description: Track key Amazon Elastic Loadbalancer metrics.
   public_title: Amazon ELB
   image: amazon_elb_logo.png
-  docs_link: http://docs.datadoghq.com/integrations/awselb/
+  docs_link: /integrations/awselb/
   public: true
 - short_description: "Track key Amazon Elastic Map Reduce metrics.\n"
   image: ''
   categories: ['cloud', 'processing', 'aws']
   name: amazon_emr
   public_title: Amazon EMR
-  docs_link: http://docs.datadoghq.com/integrations/awsemr/
+  docs_link: /integrations/awsemr/
   public: true
 - short_description: Track key Amazon Elasticsearch metrics.
   image: ''
   categories: ['cloud', 'search', 'aws']
   name: amazon_es
   public_title: Amazon ES
-  docs_link: http://docs.datadoghq.com/integrations/awses/
+  docs_link: /integrations/awses/
   public: true
 - short_description: Track key Amazon Firehose metrics.
   image: ''
   categories: ['cloud', 'processing', 'aws']
   name: amazon_firehose
   public_title: Amazon Firehose
-  docs_link: http://docs.datadoghq.com/integrations/awsfirehose/
+  docs_link: /integrations/awsfirehose/
   public: true
 - short_description: Track key Amazon Internet of Things metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_iot
   public_title: Amazon IOT
-  docs_link: http://docs.datadoghq.com/integrations/awsiot/
+  docs_link: /integrations/awsiot/
   public: true
 - short_description: Track key Amazon Kinesis metrics.
   image: ''
   categories: ['cloud', 'processing', 'messaging', 'aws']
   name: amazon_kinesis
   public_title: Amazon Kinesis
-  docs_link: http://docs.datadoghq.com/integrations/awskinesis/
+  docs_link: /integrations/awskinesis/
   public: true
 - short_description: Track Amazon KMS key expiration.
   image: ''
   categories: ['cloud', 'security', 'aws']
   name: amazon_kms
   public_title: Amazon Kms
-  docs_link: http://docs.datadoghq.com/integrations/awskms/
+  docs_link: /integrations/awskms/
   public: true
 - short_description: Track lambda run times, errors, invocation counts, and more.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_lambda
   public_title: Amazon Lambda
-  docs_link: http://docs.datadoghq.com/integrations/awslambda/
+  docs_link: /integrations/awslambda/
   public: true
 - short_description: Install the Datadog Agent on any Amazon Linux host.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_linux
   public_title: Amazon Linux
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/amazonlinux/
+  docs_link: /guides/basic_agent_usage/amazonlinux/
   public: true
 - short_description: Track prediction counts and failures.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_machine_learning
   public_title: Amazon Machine Learning
-  docs_link: http://docs.datadoghq.com/integrations/awsml/
+  docs_link: /integrations/awsml/
   public: true
 - short_description: Track AWS OpsWorks resource usage.
   image: ''
   categories: ['cloud', 'provisioning', 'aws']
   name: amazon_opsworks
   public_title: Amazon Opsworks
-  docs_link: http://docs.datadoghq.com/integrations/awsopsworks/
+  docs_link: /integrations/awsopsworks/
   public: true
 - short_description: Track key AWS Polly metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_polly
   public_title: Amazon Polly
-  docs_link: http://docs.datadoghq.com/integrations/awspolly/
+  docs_link: /integrations/awspolly/
   public: true
 - short_description: Track a wealth of metrics related to Amazon RDS.
   image: ''
   categories: ['cloud', 'data store', 'aws']
   name: amazon_rds
   public_title: Amazon Rds
-  docs_link: http://docs.datadoghq.com/integrations/awsrds/
+  docs_link: /integrations/awsrds/
   public: true
 - short_description: Track key Amazon Redshift metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_redshift
   public_title: Amazon Redshift
-  docs_link: http://docs.datadoghq.com/integrations/awsredshift/
+  docs_link: /integrations/awsredshift/
   public: true
 - short_description: Track Route53 metrics, and monitor health checks.
   image: ''
   categories: ['cloud', 'network', 'web', 'aws']
   name: amazon_route53
   public_title: Amazon Route53
-  docs_link: http://docs.datadoghq.com/integrations/awsroute53/
+  docs_link: /integrations/awsroute53/
   public: true
 - short_description: Track request latency, number of requests by type, bucket sizes,
     and more.
@@ -237,7 +237,7 @@ integrations:
   categories: ['cloud', 'data store', 'aws', 'os & system']
   name: amazon_s3
   public_title: Amazon S3
-  docs_link: http://docs.datadoghq.com/integrations/awss3/
+  docs_link: /integrations/awss3/
   public: true
 - short_description: Track email bounces, delivery attempts, rejected messages, and
     more.
@@ -245,7 +245,7 @@ integrations:
   categories: ['cloud', 'collaboration', 'aws']
   name: amazon_ses
   public_title: Amazon SES
-  docs_link: http://docs.datadoghq.com/integrations/awsses/
+  docs_link: /integrations/awsses/
   public: true
 - short_description: Send Amazon SNS messages to Datadog, or send Datadog alerts to
     SNS.
@@ -253,7 +253,7 @@ integrations:
   categories: ['cloud', 'notification', 'aws']
   name: amazon_sns
   public_title: Amazon SNS
-  docs_link: http://docs.datadoghq.com/integrations/awssns/
+  docs_link: /integrations/awssns/
   public: true
 - short_description: Track queue size, average message size, number of messages, and
     more.
@@ -261,28 +261,28 @@ integrations:
   categories: ['cloud', 'processing', 'aws']
   name: amazon_sqs
   public_title: Amazon SQS
-  docs_link: http://docs.datadoghq.com/integrations/awssqs/
+  docs_link: /integrations/awssqs/
   public: true
 - short_description: Track key AWS Storage Gateway metrics.
   image: ''
   categories: ['cloud']
   name: amazon_storage_gateway
   public_title: Amazon Storage Gateway
-  docs_link: http://docs.datadoghq.com/integrations/awsstoragegateway/
+  docs_link: /integrations/awsstoragegateway/
   public: true
 - short_description: Track key Amazon Simple Workflow Service metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_swf
   public_title: Amazon SWF
-  docs_link: http://docs.datadoghq.com/integrations/awsswf/
+  docs_link: /integrations/awsswf/
   public: true
 - short_description: Track allowed versus blocked requests.
   image: ''
   categories: ['cloud', 'security', 'aws']
   name: amazon_waf
   public_title: Amazon WAF
-  docs_link: http://docs.datadoghq.com/integrations/awswaf/
+  docs_link: /integrations/awswaf/
   public: true
 - name: amazon_web_services
   categories: ['cloud', 'aws']
@@ -290,7 +290,7 @@ integrations:
     \ more."
   public_title: Amazon Web Services (AWS)
   image: Integrations-AWS-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/aws/
+  docs_link: /integrations/aws/
   public: true
 - short_description: Collect a wealth of AWS metrics and visualize your instances
     in a host map.
@@ -298,14 +298,14 @@ integrations:
   categories: ['cloud', 'aws']
   name: amazon_workspaces
   public_title: Amazon Workspaces
-  docs_link: http://docs.datadoghq.com/integrations/awsworkspaces/
+  docs_link: /integrations/awsworkspaces/
   public: true
 - name: ansible
   categories: ['provisioning', 'orchestration', 'configuration & deployment']
   short_description: Track failed tasks and see playbook runs in your event stream.
   public_title: Ansible
   image: Integrations-Ansible-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/ansible/
+  docs_link: /integrations/ansible/
   public: true
 - name: apache
   categories: ['web']
@@ -313,7 +313,7 @@ integrations:
     and more.
   public_title: Apache HTTP Server
   image: apache.png
-  docs_link: http://docs.datadoghq.com/integrations/apache/
+  docs_link: /integrations/apache/
   public: true
 - name: tomcat
   categories: ['web']
@@ -321,30 +321,30 @@ integrations:
     metrics, and more.
   public_title: Apache Tomcat
   image: Integrations-ApacheTomcat-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/tomcat/
+  docs_link: /integrations/tomcat/
   public: true
 - name: microsoft_azure
   categories: ['cloud', 'azure']
   short_description: "Collect metrics from instances and many, many Azure services."
   public_title: Azure
   image: Integrations-Azure-v2.png
-  docs_link: http://docs.datadoghq.com/integrations/azure/
+  docs_link: /integrations/azure/
   public: true
 - short_description: Track key Azure App Services metrics.
   image: ''
   categories: ['cloud', 'azure']
   name: azure_app_services
   public_title: Azure App Services
-  docs_link: http://docs.datadoghq.com/integrations/azure_app_services/
+  docs_link: /integrations/azure_app_services/
   public: true
 - short_description: Track key Azure Batch Service metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'azure']
   name: azure_batch
   public_title: Azure Batch
-  docs_link: http://docs.datadoghq.com/integrations/azure_batch/
+  docs_link: /integrations/azure_batch/
   public: true
-- docs_link: http://docs.datadoghq.com/integrations/azure_data store/
+- docs_link: /integrations/azure_data store/
   short_description: Track key Azure data store metrics.
   name: azure_data store
   categories: ['cloud', 'azure']
@@ -354,14 +354,14 @@ integrations:
   categories: ['cloud', 'processing', 'notification', 'azure']
   name: azure_event_hub
   public_title: Azure Event Hub
-  docs_link: http://docs.datadoghq.com/integrations/azure_event_hub/
+  docs_link: /integrations/azure_event_hub/
   public: true
 - short_description: Track key Azure IOT Hub metrics.
   image: ''
   categories: ['cloud', 'azure']
   name: azure_iot_hub
   public_title: Azure Iot Hub
-  docs_link: http://docs.datadoghq.com/integrations/azure_iot_hub/
+  docs_link: /integrations/azure_iot_hub/
   public: true
 - short_description: Track trigger workflows, action latency, failed actions, and
     more.
@@ -369,42 +369,42 @@ integrations:
   categories: ['cloud', 'configuration & deployment', 'network', 'azure']
   name: azure_logic_app
   public_title: Azure Logic App
-  docs_link: http://docs.datadoghq.com/integrations/azure_logic_app/
+  docs_link: /integrations/azure_logic_app/
   public: true
 - short_description: Track cache hits, misses, evictions, connected clients, and more.
   image: ''
   categories: ['cloud', 'data store', caching, 'azure']
   name: azure_redis_cache
   public_title: Azure Redis Cache
-  docs_link: http://docs.datadoghq.com/integrations/azure_redis_cache/
+  docs_link: /integrations/azure_redis_cache/
   public: true
 - short_description: Track key Azure SQL Database metrics.
   image: ''
   categories: ['cloud', 'data store', 'azure']
   name: azure_sql_database
   public_title: Azure Sql Database
-  docs_link: http://docs.datadoghq.com/integrations/azure_sql_database/
+  docs_link: /integrations/azure_sql_database/
   public: true
 - short_description: Track key Azure SQL Elastic Pool metrics.
   image: ''
   categories: ['cloud', 'azure', 'data store', 'provisioning', 'configuration & deployment']
   name: azure_sql_elastic_pool
   public_title: Azure Sql Elastic Pool
-  docs_link: http://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
+  docs_link: /integrations/azure_sql_elastic_pool/
   public: true
 - short_description: Track key Azure Storage metrics.
   image: ''
   categories: ['cloud']
   name: azure_storage
   public_title: Azure Storage
-  docs_link: http://docs.datadoghq.com/integrations/azure_storage/
+  docs_link: /integrations/azure_storage/
   public: true
 - short_description: Track Azure VM resource usage, network statistics, and more.
   image: ''
   categories: ['cloud', 'os & system', 'azure']
   name: azure_vm
   public_title: Azure VM
-  docs_link: http://docs.datadoghq.com/integrations/azure_vm/
+  docs_link: /integrations/azure_vm/
   public: true
 - short_description: 'Track by-set metrics: bytes in and out, disk operations, CPU
     usage, and more.'
@@ -412,7 +412,7 @@ integrations:
   categories: ['cloud', 'azure']
   name: azure_vm_scale_set
   public_title: Azure VM Scale Set
-  docs_link: http://docs.datadoghq.com/integrations/azure_vm_scale_set/
+  docs_link: /integrations/azure_vm_scale_set/
   public: true
 - name: bitbucket
   categories: ['source control', 'collaboration', 'issue tracking']
@@ -420,7 +420,7 @@ integrations:
     your services.
   public_title: Bitbucket
   image: Integrations-Bitbucket-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/bitbucket/
+  docs_link: /integrations/bitbucket/
   public: true
 - name: btrfs
   categories: ['os & system']
@@ -428,7 +428,7 @@ integrations:
     fill up.
   public_title: Btrfs
   image: Integrations-Btrfs-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/btrfs/
+  docs_link: /integrations/btrfs/
   public: true
 - name: bugsnag
   categories: ['exceptions', 'notification']
@@ -436,7 +436,7 @@ integrations:
     rise and fall.
   public_title: Bugsnag
   image: Integrations-bugsnag-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/bugsnag/
+  docs_link: /integrations/bugsnag/
   public: true
 - name: net
   categories: ["languages"]
@@ -452,7 +452,7 @@ integrations:
     graphing.
   public_title: Cacti
   image: Integrations-Cacti-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/cacti/
+  docs_link: /integrations/cacti/
   public: true
 - name: campfire
   categories: ['collaboration']
@@ -460,7 +460,7 @@ integrations:
     channel.
   public_title: Campfire
   image: Integrations-Campfire-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/campfire/
+  docs_link: /integrations/campfire/
   public: true
 - name: capistrano
   categories: ['orchestration']
@@ -468,7 +468,7 @@ integrations:
     graphs.
   public_title: Capistrano
   image: Integrations-Capistrano-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/capistrano/
+  docs_link: /integrations/capistrano/
   public: true
 - name: cassandra
   categories: ['data store']
@@ -476,21 +476,21 @@ integrations:
     more.
   public_title: Cassandra
   image: Integrations-Cassandra-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/cassandra/
+  docs_link: /integrations/cassandra/
   public: true
 - name: catchpoint
   categories: ['monitoring']
   short_description: Send your Catchpoint alerts to your Datadog event stream.
   public_title: Catchpoint
   image: Integrations-catchpoint-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: centos
   categories: ['os & system']
   short_description: Install the Datadog Agent on any CentOS host.
   public_title: CentOS
   image: Integrations-CentOS-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/centos/
+  docs_link: /guides/basic_agent_usage/centos/
   public: true
 - name: ceph
   categories: ['data store', 'os & system']
@@ -498,14 +498,14 @@ integrations:
     cluster status.
   public_title: Ceph
   image: Integrations-ceph-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/ceph/
+  docs_link: /integrations/ceph/
   public: true
 - name: chatwork
   categories: ['collaboration']
   short_description: Send Datadog alerts and graphs to your team's Chatworks room.
   public_title: Chatwork
   image: Integrations-Chatwork-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/chatwork/
+  docs_link: /integrations/chatwork/
   public: true
 - name: chef
   categories: ['configuration & deployment', 'provisioning']
@@ -513,11 +513,11 @@ integrations:
     big changes.'
   public_title: Chef
   image: Integrations-Chef-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/chef/
+  docs_link: /integrations/chef/
   public: true
 - short_description: Track the health of your Cloud Foundry VMs and the jobs they
     run.
-  docs_link: http://docs.datadoghq.com/integrations/cloud_foundry/
+  docs_link: /integrations/cloud_foundry/
   categories: ['cloud', 'provisioning']
   name: cloudfoundry
   public_title: Cloud Foundry
@@ -544,7 +544,7 @@ integrations:
     and more.
   public_title: Consul
   image: Integrations-Consul-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/consul/
+  docs_link: /integrations/consul/
   public: true
 - short_description: Easily bootstrap Datadog Agent containers into your ECS cluster.
   image: ''
@@ -566,7 +566,7 @@ integrations:
   short_description: Identify busy buckets, track cache miss ratios, and more.
   public_title: Couchbase
   image: Integrations-Couchbase-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/couchbase/
+  docs_link: /integrations/couchbase/
   public: true
 - name: couchdb
   categories: ['data store']
@@ -574,14 +574,14 @@ integrations:
     and more.
   public_title: CouchDB
   image: Integrations-CouchDB-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/couchdb/
+  docs_link: /integrations/couchdb/
   public: true
 - name: debian
   categories: ['os & system']
   short_description: Install the Datadog Agent on any Debian host.
   public_title: Debian
   image: Integrations-Debian-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/deb/
+  docs_link: /guides/basic_agent_usage/deb/
   public: true
 - name: desk_salesforce
   categories: ['collaboration', 'issue tracking']
@@ -589,7 +589,7 @@ integrations:
     event stream.
   public_title: Desk
   image: Integrations-SalesforceDesk-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/desk/
+  docs_link: /integrations/desk/
   public: true
 - short_description: Track recently modified and/or quickly growing directories on
     any host.
@@ -597,20 +597,20 @@ integrations:
   categories: ['os & system']
   name: directory
   public_title: Directory
-  docs_link: http://docs.datadoghq.com/integrations/directory/
+  docs_link: /integrations/directory/
   public: true
 - short_description: Collect metrics related to disk usage and I/O on all your hosts.
   image: ''
   categories: ['os & system']
   name: disk
   public_title: Disk
-  docs_link: http://docs.datadoghq.com/integrations/disk/
+  docs_link: /integrations/disk/
   public: true
 - name: dns
   categories: ['network', 'web']
   short_description: Monitor the resolvablity of and lookup times for any DNS record.
   public_title: DNS
-  docs_link: http://docs.datadoghq.com/integrations/dnscheck/
+  docs_link: /integrations/dnscheck/
   public: true
 - name: docker
   categories: ['containers']
@@ -618,7 +618,7 @@ integrations:
     and more.
   public_title: Docker
   image: Integrations-Docker-340x2161.png
-  docs_link: http://docs.datadoghq.com/integrations/docker/
+  docs_link: /integrations/docker/
   public: true
 - name: dyn
   categories: ['network', 'web']
@@ -626,7 +626,7 @@ integrations:
     record.
   public_title: Dyn
   image: Integrations-Dyn-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/dyn/
+  docs_link: /integrations/dyn/
   public: true
 - name: elasticsearch
   categories: ['data store']
@@ -634,7 +634,7 @@ integrations:
     in between.
   public_title: Elasticsearch
   image: Integrations-Elasticsearch-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/elasticsearch/
+  docs_link: /integrations/elasticsearch/
   public: true
 - name: etcd
   categories: ['orchestration', 'containers', 'configuration & deployment', 'orchestration']
@@ -642,7 +642,7 @@ integrations:
     etcd metrics.
   public_title: etcd
   image: Integrations-etcD-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/etcd/
+  docs_link: /integrations/etcd/
   public: true
 - name: expressjs
   categories: ['web']
@@ -650,14 +650,14 @@ integrations:
     code.
   public_title: Expressjs
   image: Integrations-Expressjs-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/expressjs/
+  docs_link: /integrations/expressjs/
   public: true
 - name: fabric
   categories: ['orchestration']
   short_description: See and search on Fabric tasks in your Datadog event stream.
   public_title: Fabric
   image: Integrations-Fabric-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/fabric/
+  docs_link: /integrations/fabric/
   public: true
 - name: fastly
   categories: ['web']
@@ -665,28 +665,28 @@ integrations:
     and more.
   public_title: Fastly
   image: Integrations-Fastly-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/fastly/
+  docs_link: /integrations/fastly/
   public: true
 - short_description: Install the Datadog Agent on any Fedora host.
   image: ''
   categories: ['os & system']
   name: fedora
   public_title: Fedora
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/fedora/
+  docs_link: /guides/basic_agent_usage/fedora/
   public: true
 - name: flowdock
   categories: ['collaboration']
   short_description: Send Datadog alerts and graphs to your team's flows.
   public_title: Flowdock
   image: Integrations-Flowdock-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/flowdock/
+  docs_link: /integrations/flowdock/
   public: true
 - name: fluentd
   categories: ['logging']
   short_description: Monitor buffer queues and retry counts for any Fluentd plugin.
   public_title: Fluentd
   image: Integrations-FluentD-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/fluentd/
+  docs_link: /integrations/fluentd/
   public: true
 - name: gearman
   categories: ['processing']
@@ -694,7 +694,7 @@ integrations:
     task.
   public_title: Gearman
   image: Integrations-Gearman-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/gearman/
+  docs_link: /integrations/gearman/
   public: true
 - name: git
   categories: ['source control']
@@ -702,7 +702,7 @@ integrations:
     to Datadog.
   public_title: Git
   image: Integrations-Git-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/git/
+  docs_link: /integrations/git/
   public: true
 - name: github
   categories: ['source control', 'collaboration', 'issue tracking']
@@ -710,7 +710,7 @@ integrations:
     performance.
   public_title: Github
   image: Integrations-Github-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/github/
+  docs_link: /integrations/github/
   public: true
 - name: go_expvar
   categories: ['languages']
@@ -718,7 +718,7 @@ integrations:
     Go services.
   public_title: Go
   image: Integrations-GoLang-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/goexpvar/
+  docs_link: /integrations/goexpvar/
   public: true
 - name: google_app_engine
   categories: ['cloud', 'google']
@@ -726,7 +726,7 @@ integrations:
     versions.
   public_title: Google App Engine
   image: Integrations-GoogleAppEngine2-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/gae/
+  docs_link: /integrations/gae/
   public: true
 - short_description: Track query count, execution times, uploaded bytes and rows,
     and more.
@@ -734,9 +734,9 @@ integrations:
   categories: ['cloud', 'data store', 'google']
   name: google_cloud_big_query
   public_title: Google Cloud Big Query
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_big_query/
+  docs_link: /integrations/google_cloud_big_query/
   public: true
-- docs_link: http://docs.datadoghq.com/integrations/google_cloud_data store/
+- docs_link: /integrations/google_cloud_data store/
   short_description: Monitor request count and bytes sent/received.
   name: google_cloud_data store
   categories: ['cloud', 'google', 'data store']
@@ -746,7 +746,7 @@ integrations:
   categories: ['cloud', 'data store', 'google']
   name: google_cloud_datastore
   public_title: Google Cloud Datastore
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_datastore/
+  docs_link: /integrations/google_cloud_datastore/
   public: true
 - short_description: Track network and data store usage attributable to your Firebase
     services.
@@ -754,21 +754,21 @@ integrations:
   categories: ['cloud', 'web', 'google']
   name: google_cloud_firebase
   public_title: Google Cloud Firebase
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_firebase/
+  docs_link: /integrations/google_cloud_firebase/
   public: true
 - short_description: Track min, max, and average function execution times.
   image: ''
   categories: ['cloud', 'google']
   name: google_cloud_functions
   public_title: Google Cloud Functions
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_functions/
+  docs_link: /integrations/google_cloud_functions/
   public: true
 - short_description: Track key Google Cloud Machine Learning metrics.
   image: ''
   categories: ['cloud', 'google']
   name: google_cloud_ml
   public_title: Google Cloud Ml
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_ml/
+  docs_link: /integrations/google_cloud_ml/
   public: true
 - name: google_cloud_platform
   categories: ['cloud', 'google']
@@ -776,42 +776,42 @@ integrations:
     in a host map.
   public_title: Google Cloud Platform
   image: Integrations-GoogleCloudPlatform-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_platform/
+  docs_link: /integrations/google_cloud_platform/
   public: true
 - short_description: Track key Google Cloud PubSub metrics.
   image: ''
   categories: ['cloud', 'processing', 'messaging', 'google']
   name: google_cloud_pubsub
   public_title: Google Cloud Pubsub
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_pubsub/
+  docs_link: /integrations/google_cloud_pubsub/
   public: true
 - short_description: Track the resource usage of your Spanner instances.
   image: ''
   categories: ['cloud', 'data store', 'google']
   name: google_cloud_spanner
   public_title: Google Cloud Spanner
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_spanner/
+  docs_link: /integrations/google_cloud_spanner/
   public: true
 - short_description: Monitor request count and bytes sent/received.
   image: ''
   categories: ['cloud']
   name: google_cloud_storage
   public_title: Google Cloud Storage
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_storage/
+  docs_link: /integrations/google_cloud_storage/
   public: true
 - short_description: Monitor VPN tunnel status, throughput, session counts, and more.
   image: ''
   categories: ['cloud', 'network', 'google']
   name: google_cloud_vpn
   public_title: Google Cloud Vpn
-  docs_link: http://docs.datadoghq.com/integrations/google_cloud_vpn/
+  docs_link: /integrations/google_cloud_vpn/
   public: true
 - short_description: Track database metrics for performance, health, and replication.
   image: ''
   categories: ['cloud', 'data store', 'google']
   name: google_cloudsql
   public_title: Google Cloudsql
-  docs_link: http://docs.datadoghq.com/integrations/google_cloudsql/
+  docs_link: /integrations/google_cloudsql/
   public: true
 - short_description: Track busy instances and compare account usage metrics to quota
     limits.
@@ -819,21 +819,21 @@ integrations:
   categories: ['cloud', 'os & system', 'google']
   name: google_compute_engine
   public_title: Google Compute Engine
-  docs_link: http://docs.datadoghq.com/integrations/google_compute_engine/
+  docs_link: /integrations/google_compute_engine/
   public: true
 - short_description: Monitor your GCE containers' resource usage.
   image: ''
   categories: ['cloud', 'containers', 'google']
   name: google_container_engine
   public_title: Google Container Engine
-  docs_link: http://docs.datadoghq.com/integrations/google_container_engine/
+  docs_link: /integrations/google_container_engine/
   public: true
 - short_description: Track the size of logs ingested into Google Stackdriver.
   image: ''
   categories: ['cloud', 'monitoring', 'google']
   name: google_stackdriver_logging
   public_title: Google Stackdriver Logging
-  docs_link: http://docs.datadoghq.com/integrations/google_stackdriver_logging/
+  docs_link: /integrations/google_stackdriver_logging/
   public: true
 - name: gunicorn
   categories: ['web']
@@ -841,7 +841,7 @@ integrations:
     processes.
   public_title: Gunicorn
   image: Integrations-Gunicorn-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/gunicorn/
+  docs_link: /integrations/gunicorn/
   public: true
 - name: hadoop
   categories: ['processing', 'os & system']
@@ -849,7 +849,7 @@ integrations:
     \ more."
   public_title: Hadoop
   image: Integrations-Hadoop-340x216.png
-  docs_link: http://docs.datadoghq.com/
+  docs_link: /
   public: true
 - name: hdfs
   categories: ['processing', 'os & system']
@@ -857,21 +857,21 @@ integrations:
     more.
   public_title: Hadoop HDFS
   image: Integrations-hadoophdfs-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/hdfs/
+  docs_link: /integrations/hdfs/
   public: true
 - name: mapreduce
   categories: ['processing']
   short_description: Monitor the status and duration of map and reduce tasks.
   public_title: Hadoop MapReduce
   image: Integrations-hadoopmapreduce-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: yarn
   categories: ['processing']
   short_description: Collect cluster-wide health metrics and track application progress.
   public_title: Hadoop Yarn
   image: Integrations-hadoopyarn-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: haproxy
   categories: ['web']
@@ -879,14 +879,14 @@ integrations:
     and more.
   public_title: HAproxy
   image: Integrations-Haproxy-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/haproxy/
+  docs_link: /integrations/haproxy/
   public: true
 - name: hipchat
   categories: ['collaboration']
   short_description: Send Datadog alerts and graphs to your team's Hipchat room.
   public_title: Hipchat
   image: Integrations-Hipchat-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/hipchat/
+  docs_link: /integrations/hipchat/
   public: true
 - name: honeybadger
   categories: ['exceptions']
@@ -894,7 +894,7 @@ integrations:
     event stream.
   public_title: Honeybadger
   image: Integrations-honeybadger-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - short_description: Monitor any HTTP service for bad responses, soon-to-expire SSL
     certs, and more.
@@ -902,14 +902,14 @@ integrations:
   categories: ['network', 'web']
   name: http_check
   public_title: HTTP Check
-  docs_link: http://docs.datadoghq.com/integrations/httpcheck/
+  docs_link: /integrations/httpcheck/
   public: true
 - name: immunio
   categories: ['security']
   short_description: Collect data from Immunio to visualize and monitor attack patterns.
   public_title: Immunio
   image: immunio-1.png
-  docs_link: http://docs.datadoghq.com/integrations/immunio/
+  docs_link: /integrations/immunio/
   public: true
 - name: java
   categories: ['languages']
@@ -917,7 +917,7 @@ integrations:
     Metrics library.
   public_title: Java
   image: Integrations-Java-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/java/
+  docs_link: /integrations/java/
   public: true
 - name: jenkins
   categories: ['configuration & deployment']
@@ -925,7 +925,7 @@ integrations:
     stream.
   public_title: Jenkins
   image: Integrations-Jenkins-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/jenkins/
+  docs_link: /integrations/jenkins/
   public: true
 - name: jira
   categories: ['collaboration', 'issue tracking']
@@ -933,7 +933,7 @@ integrations:
     tickets.
   public_title: JIRA
   image: int-icon-jira.png
-  docs_link: http://docs.datadoghq.com/integrations/jira/
+  docs_link: /integrations/jira/
   public: true
 - name: kafka
   categories: ['processing', 'messaging']
@@ -941,7 +941,7 @@ integrations:
     lag, and more.
   public_title: Kafka
   image: Integrations-Kafka-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/kafka/
+  docs_link: /integrations/kafka/
   public: true
 - name: kong
   categories: ['api', 'web']
@@ -949,7 +949,7 @@ integrations:
     more.
   public_title: Kong
   image: Integrations-Kong-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/kong/
+  docs_link: /integrations/kong/
   public: true
 - name: kubernetes
   categories: ['orchestration', 'containers']
@@ -957,14 +957,14 @@ integrations:
     and more.
   public_title: Kubernetes
   image: Integrations-Kubernetes-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/kubernetes/
+  docs_link: /integrations/kubernetes/
   public: true
 - name: kyoto_tycoon
   categories: ['data store']
   short_description: Track get, set, and delete operations; monitor replication lag.
   public_title: Kyoto Tycoon
   image: Integrations-KyotoTycoon-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/kyototycoon/
+  docs_link: /integrations/kyototycoon/
   public: true
 - short_description: Track actors and dispatcher events for Akka-based applications
   image: ''
@@ -979,14 +979,14 @@ integrations:
     and more.
   public_title: Lighttpd
   image: Integrations-LightTPD-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/lighttpd/
+  docs_link: /integrations/lighttpd/
   public: true
 - name: os_x
   categories: ['os & system']
   short_description: Install the Datadog Agent on any OS X host.
   public_title: Mac OS X
   image: Integrations-MacOSX-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/osx/
+  docs_link: /guides/basic_agent_usage/osx/
   public: true
 - name: marathon
   categories: ['configuration & deployment', 'containers']
@@ -994,7 +994,7 @@ integrations:
     count, and more.'
   public_title: Marathon
   image: Integrations-Marathon-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/marathon/
+  docs_link: /integrations/marathon/
   public: true
 - name: memcached
   categories: ['web', 'caching']
@@ -1002,7 +1002,7 @@ integrations:
     more.
   public_title: Memcached
   image: Integrations-Memcached-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/memcached/
+  docs_link: /integrations/memcached/
   public: true
 - name: mesos
   categories: ['configuration & deployment', 'containers', 'orchestration']
@@ -1010,14 +1010,14 @@ integrations:
     statuses, and more.
   public_title: Mesos
   image: Integrations-Mesos-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/mesos/
+  docs_link: /integrations/mesos/
   public: true
 - name: win32_event_log
   categories: ['monitoring', 'notification']
   short_description: Send Windows events to your Datadog event stream.
   public_title: Microsoft Event Viewer
   image: Integrations-MSEventViewer-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/eventviewer/
+  docs_link: /integrations/eventviewer/
   public: true
 - name: iis
   categories: ['web']
@@ -1025,7 +1025,7 @@ integrations:
     status.
   public_title: Microsoft IIS
   image: Integrations-MicrosoftIIS-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/iis/
+  docs_link: /integrations/iis/
   public: true
 - name: mongodb
   categories: ['data store']
@@ -1033,14 +1033,14 @@ integrations:
     metrics, and more.
   public_title: MongoDB
   image: mongoDB_logo.png
-  docs_link: http://docs.datadoghq.com/integrations/mongodb/
+  docs_link: /integrations/mongodb/
   public: true
 - name: moxtra
   categories: ['collaboration']
   short_description: Send Datadog alerts and graphs to Moxtra.
   public_title: Moxtra
   image: Integrations-moxtra-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: mparticle
   categories: ['api']
@@ -1048,7 +1048,7 @@ integrations:
     metrics.
   public_title: mParticle
   image: Integrations-mParticle-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/mparticle/
+  docs_link: /integrations/mparticle/
   public: true
 - name: mysql
   categories: ['data store']
@@ -1056,7 +1056,7 @@ integrations:
     metrics, and more.
   public_title: MySQL
   image: Integrations-MySQL-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/mysql/
+  docs_link: /integrations/mysql/
   public: true
 - name: nagios
   categories: ['monitoring', 'notification']
@@ -1064,7 +1064,7 @@ integrations:
     event stream.
   public_title: Nagios
   image: Integrations-Nagios-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/nagios/
+  docs_link: /integrations/nagios/
   public: true
 - short_description: Track bytes and packets in/out, connection states, round trip
     times, and more.
@@ -1072,14 +1072,14 @@ integrations:
   categories: ['web', 'network']
   name: network
   public_title: Network
-  docs_link: http://docs.datadoghq.com/integrations/network/
+  docs_link: /integrations/network/
   public: true
 - name: new_relic
   categories: ['monitoring', 'notification']
   short_description: See New Relic metrics and events in Datadog.
   public_title: New Relic
   image: Integrations-NewRelic-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/new_relic/
+  docs_link: /integrations/new_relic/
   public: true
 - name: nginx
   categories: ['web']
@@ -1087,7 +1087,7 @@ integrations:
     NGINX Plus.
   public_title: NGINX
   image: Integrations-Nginx-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/nginx/
+  docs_link: /integrations/nginx/
   public: true
 - name: nodejs
   categories: ['languages']
@@ -1095,7 +1095,7 @@ integrations:
     or our API.
   public_title: Nodejs
   image: Integrations-Nodejs-340x216.png
-  docs_link: http://docs.datadoghq.com/libraries/#community-node
+  docs_link: /libraries/#community-node
   public: true
 - short_description: Get alerts when your hosts drift out of sync with your chosen
     NTP server.
@@ -1103,7 +1103,7 @@ integrations:
   categories: ['web', 'network']
   name: ntp
   public_title: Ntp
-  docs_link: http://docs.datadoghq.com/integrations/ntp/
+  docs_link: /integrations/ntp/
   public: true
 - name: openshift
   categories: ['cloud']
@@ -1117,7 +1117,7 @@ integrations:
   short_description: Track hypervisor and VM-level resource usage, plus Neutron metrics.
   public_title: OpenStack
   image: Integrations-OpenStack-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/openstack/
+  docs_link: /integrations/openstack/
   public: true
 - name: opsgenie
   categories: ['monitoring', 'notification']
@@ -1125,7 +1125,7 @@ integrations:
     events.
   public_title: OpsGenie
   image: Integrations-OpsGenie-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/opsgenie/
+  docs_link: /integrations/opsgenie/
   public: true
 - name: opsmatic
   categories: ['monitoring', 'notification']
@@ -1133,14 +1133,14 @@ integrations:
     stream.
   public_title: Opsmatic
   image: Integrations-opsmatic-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: pagerduty
   categories: ['monitoring', 'notification']
   short_description: Generate PagerDuty alerts from Datadog metrics and events.
   public_title: PagerDuty
   image: Integrations-Pagerduty-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/pagerduty/
+  docs_link: /integrations/pagerduty/
   public: true
 - name: papertrail
   categories: ['logging']
@@ -1148,7 +1148,7 @@ integrations:
     event stream.
   public_title: papertrail
   image: papertrail-2.png
-  docs_link: http://docs.datadoghq.com/integrations/papertrail/
+  docs_link: /integrations/papertrail/
   public: true
 - name: pgbouncer
   categories: ['data store']
@@ -1156,7 +1156,7 @@ integrations:
     your application.
   public_title: PGBouncer
   image: Integrations-PGBouncer-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/
+  docs_link: /integrations/
   public: true
 - name: php
   categories: ['languages']
@@ -1164,7 +1164,7 @@ integrations:
     PHP client.
   public_title: PHP
   image: Integrations-PHP-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/php/
+  docs_link: /integrations/php/
   public: true
 - name: php_fpm
   categories: ['web']
@@ -1179,35 +1179,35 @@ integrations:
     Datadog.
   public_title: Pingdom
   image: Integrations-Pingdom-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/pingdom/
+  docs_link: /integrations/pingdom/
   public: true
 - name: pivotal
   categories: ['collaboration', 'issue tracking']
   short_description: See and comment on stories in your Datadog event stream.
   public_title: Pivotal Tracker
   image: Integrations-PivotalTracker-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/pivotal/
+  docs_link: /integrations/pivotal/
   public: true
 - name: postfix
   categories: ['collaboration']
   short_description: Monitor the size of all your Postfix queues.
   public_title: Postfix
   image: Integrations-Postfix-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/postfix/
+  docs_link: /integrations/postfix/
   public: true
 - name: postgresql
   categories: ['data store']
   short_description: Collect a wealth of database performance and health metrics.
   public_title: PostgreSQL
   image: Integrations-PostgreSQL-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/postgresql/
+  docs_link: /integrations/postgresql/
   public: true
 - short_description: Keep an eye on strange traffic to and from your PowerDNS recursors.
   image: ''
   categories: ['network', 'web']
   name: powerdns_recursor
   public_title: PowerDNS Recursor
-  docs_link: http://docs.datadoghq.com/integrations/powerdns/
+  docs_link: /integrations/powerdns/
   public: true
 - short_description: Monitor per-service process counts and per-process resource usage
     on any host.
@@ -1215,7 +1215,7 @@ integrations:
   categories: ['os & system']
   name: process
   public_title: Process
-  docs_link: http://docs.datadoghq.com/integrations/process/
+  docs_link: /integrations/process/
   public: true
 - name: puppet
   categories: ['provisioning', 'configuration & deployment']
@@ -1223,7 +1223,7 @@ integrations:
     changes.'
   public_title: Puppet
   image: Integrations-Puppet-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/puppet/
+  docs_link: /integrations/puppet/
   public: true
 - name: pusher
   categories: ['processing', 'messaging']
@@ -1238,7 +1238,7 @@ integrations:
     Datadogpy.
   public_title: Python
   image: Integrations-Python-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/python/
+  docs_link: /integrations/python/
   public: true
 - name: rabbitmq
   categories: ['processing']
@@ -1246,14 +1246,14 @@ integrations:
     more.
   public_title: RabbitMQ
   image: Integrations-RabbitMQ-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/rabbitmq/
+  docs_link: /integrations/rabbitmq/
   public: true
 - name: redhat
   categories: ['os & system']
   short_description: Install the Datadog Agent on any RedHat host.
   public_title: Red Hat
   image: Integrations-Redhat-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/redhat/
+  docs_link: /guides/basic_agent_usage/redhat/
   public: true
 - name: redis
   categories: ['data store', 'caching']
@@ -1261,7 +1261,7 @@ integrations:
     keys, and more.
   public_title: Redis
   image: Integrations-Redis-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/redis/
+  docs_link: /integrations/redis/
   public: true
 - name: redmine
   categories: ['collaboration', 'issue tracking']
@@ -1269,7 +1269,7 @@ integrations:
     event stream.
   public_title: Redmine
   image: Integrations-Redmine-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/redmine/
+  docs_link: /integrations/redmine/
   public: true
 - name: riak
   categories: ['data store']
@@ -1277,14 +1277,14 @@ integrations:
     RiakTS.
   public_title: Riak
   image: Integrations-Riak-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/riak/
+  docs_link: /integrations/riak/
   public: true
 - name: riakcs
   categories: ['data store']
   short_description: Track the rate and mean latency of operations.
   public_title: Riak CS
   image: Integrations-RiakS2-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/riakcs/
+  docs_link: /integrations/riakcs/
   public: true
 - name: rollbar
   categories: ['notification', 'issue tracking', 'exceptions']
@@ -1292,14 +1292,14 @@ integrations:
     event stream.
   public_title: Rollbar
   image: Integrations-rollbar-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/rollbar/
+  docs_link: /integrations/rollbar/
   public: true
 - name: rss
   categories: ['web']
   short_description: See RSS feeds in your Datadog event stream.
   public_title: RSS
   image: Integrations-RSS-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/rss/
+  docs_link: /integrations/rss/
   public: true
 - name: ruby
   categories: ['languages']
@@ -1307,7 +1307,7 @@ integrations:
     client libraries.
   public_title: Ruby
   image: Integrations-Ruby-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/ruby/
+  docs_link: /integrations/ruby/
   public: true
 - name: sentry
   categories: ['monitoring', 'notification', 'issue tracking']
@@ -1315,28 +1315,28 @@ integrations:
     stream.
   public_title: Sentry
   image: Integrations-Sentry-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/sentry/
+  docs_link: /integrations/sentry/
   public: true
 - name: servicenow
   categories: ['issue tracking']
   short_description: Have your Datadog alerts automatically generate and update tickets.
   public_title: ServiceNow
   image: Integrations-ServiceNow-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/servicenow/
+  docs_link: /integrations/servicenow/
   public: true
 - name: slack
   categories: ['collaboration']
   short_description: Send Datadog alerts and graphs to your team's Slack channel.
   public_title: Slack
   image: Integrations-Slack-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/slack/
+  docs_link: /integrations/slack/
   public: true
 - name: snmp
   categories: ['monitoring', 'notification', 'network']
   short_description: Collect SNMP metrics from your network devices.
   public_title: SNMP
   image: Integrations-SNMP-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/snmp/
+  docs_link: /integrations/snmp/
   public: true
 - name: solr
   categories: ['data store', 'search']
@@ -1344,14 +1344,14 @@ integrations:
     and more.
   public_title: Solr
   image: Integrations-Solr-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/solr/
+  docs_link: /integrations/solr/
   public: true
 - name: spark
   categories: ['processing']
   short_description: Track failed task rates, shuffled bytes, and much more.
   public_title: Spark
   image: Integrations-Spark-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/spark/
+  docs_link: /integrations/spark/
   public: true
 - name: splunk
   categories: ['monitoring', 'logging', 'notification']
@@ -1359,35 +1359,35 @@ integrations:
     graphs.
   public_title: Splunk
   image: Integrations-Splunk-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/splunk/
+  docs_link: /integrations/splunk/
   public: true
 - name: sqlserver
   categories: ['data store']
   short_description: Collect important SQL Server performance and health metrics.
   public_title: SQL Server
   image: Integrations-SQLserver-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/sqlserver/
+  docs_link: /integrations/sqlserver/
   public: true
 - name: ssh
   categories: ['network']
   short_description: Monitor SSH connectivity and SFTP latency.
   public_title: SSH
   image: Integrations-SSH-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/ssh/
+  docs_link: /integrations/ssh/
   public: true
 - name: statsd
   categories: ['monitoring']
   short_description: Monitor the availability of StatsD servers and track metric counts.
   public_title: StatsD
   image: Integrations-StatsD-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/dogstatsd/
+  docs_link: /guides/dogstatsd/
   public: true
 - name: statuspage
   categories: ['notification', 'collaboration', 'issue tracking']
   short_description: Keep tabs on the status of any service that uses StatusPage.io.
   public_title: StatusPage.io
   image: Integrations-statuspageio-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/statuspage/
+  docs_link: /integrations/statuspage/
   public: true
 - name: sumologic
   categories: ['monitoring', 'logging', 'notification']
@@ -1395,7 +1395,7 @@ integrations:
     to Sumo Logic.
   public_title: Sumo Logic
   image: Integrations-Sumologic-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/sumologic/
+  docs_link: /integrations/sumologic/
   public: true
 - name: supervisor
   categories: ['os & system']
@@ -1403,7 +1403,7 @@ integrations:
     processes.
   public_title: Supervisor
   image: Integrations-Supervisor-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/supervisor/
+  docs_link: /integrations/supervisor/
   public: true
 - short_description: Install the Datadog Agent on any SUSE host.
   image: ''
@@ -1418,9 +1418,9 @@ integrations:
   categories: ['os & system']
   name: system
   public_title: System
-  docs_link: http://docs.datadoghq.com/integrations/system/
+  docs_link: /integrations/system/
   public: true
-- docs_link: http://docs.datadoghq.com/integrations/tcpcheck/
+- docs_link: /integrations/tcpcheck/
   short_description: Monitor TCP connectivity to remote hosts.
   name: tcp
   categories: ['network', 'web']
@@ -1431,7 +1431,7 @@ integrations:
   short_description: Track builds and understand the performance impact of every deploy.
   public_title: Teamcity
   image: Integrations-Teamcity-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/teamcity/
+  docs_link: /integrations/teamcity/
   public: true
 - name: tokumx
   categories: ['data store']
@@ -1439,7 +1439,7 @@ integrations:
     and more.
   public_title: TokuMX
   image: Integrations-TokuMX-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/tokumx/
+  docs_link: /integrations/tokumx/
   public: true
 - short_description: Track overall or per-pool connection counts and errors, request
     rates, and more.
@@ -1454,7 +1454,7 @@ integrations:
   short_description: Install the Datadog Agent on any Ubuntu host.
   public_title: Ubuntu
   image: Integrations-Ubuntu-340x216.png
-  docs_link: http://docs.datadoghq.com/guides/basic_agent_usage/ubuntu/
+  docs_link: /guides/basic_agent_usage/ubuntu/
   public: true
 - name: varnish
   categories: ['web', 'caching']
@@ -1462,7 +1462,7 @@ integrations:
     and more.
   public_title: Varnish
   image: Integrations-VarnishCache-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/varnish/
+  docs_link: /integrations/varnish/
   public: true
 - short_description: 'Help Verisign identify attacks against you: send it your HAProxy
     metrics.'
@@ -1478,14 +1478,14 @@ integrations:
     events.
   public_title: VictorOps
   image: Integrations-VictorOps-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/victorops/
+  docs_link: /integrations/victorops/
   public: true
 - name: vmware_vsphere
   categories: ['cloud']
   short_description: Understand how vSphere resource usage affects your application.
   public_title: VMware vSphere
   image: Integrations-VMWare-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/vmware/
+  docs_link: /integrations/vmware/
   public: true
 - name: webhooks
   categories: ['notification']
@@ -1493,21 +1493,21 @@ integrations:
     events.
   public_title: Webhooks
   image: Integrations-Webhooks-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/webhooks/
+  docs_link: /integrations/webhooks/
   public: true
 - name: wmi
   categories: ['monitoring']
   short_description: Collect and graph any WMI metrics.
   public_title: Windows Management Instrumentation
   image: Integrations-WMI-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/wmi/
+  docs_link: /integrations/wmi/
   public: true
 - short_description: Monitor the state of your Windows services.
   image: ''
   categories: ['os & system']
   name: windows_service
   public_title: Windows Service
-  docs_link: http://docs.datadoghq.com/integrations/winservices/
+  docs_link: /integrations/winservices/
   public: true
 - short_description: Use xMatters as a notification channel in Datadog alerts and
     events.
@@ -1523,7 +1523,7 @@ integrations:
     monitors.
   public_title: Zendesk
   image: int-icon-zendesk.png
-  docs_link: http://docs.datadoghq.com/integrations/zendesk/
+  docs_link: /integrations/zendesk/
   public: true
 - name: zookeeper
   categories: ['orchestration', 'notification']
@@ -1531,5 +1531,5 @@ integrations:
     are backing up.
   public_title: Zookeeper
   image: Integrations-ApacheZookeeper-340x216.png
-  docs_link: http://docs.datadoghq.com/integrations/zookeeper/
+  docs_link: /integrations/zookeeper/
   public: true

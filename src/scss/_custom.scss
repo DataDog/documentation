@@ -1,5 +1,7 @@
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
 
 /* Bootstrap custom overrides here */
 $ddpurple:    #774DA2;
@@ -33,3 +35,15 @@ $h6-font-size: 1rem;
 $headings-font-weight:600;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Custom grids
+// 5 column
+// 2.4 width columns, 5 of them makes the 12 grid
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .col#{$infix}-2-4 {
+      @include make-col(2.4, $grid-columns);
+    }
+  }
+}
