@@ -13,7 +13,7 @@ if [ ${RUN_SERVER} == true ]; then
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
 		npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
-        echo "starting gulp watch"
+        echo "starting gulp build"
         gulp build
         sleep 5
 	fi
@@ -36,10 +36,10 @@ if [ ${RUN_SERVER} == true ]; then
 		echo "creating i18n placeholder pages."
 		placehold_translations.py -c "config.yaml" -f "content/" || true
 	fi
-	hugo server --renderToDisk || exit 1
+	hugo server &
 	sleep 5
 	if [ ${RUN_GULP} == true ]; then
-		gulp watch --silent &
+		gulp watch
 	fi
 else
 	exit 0
