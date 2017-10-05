@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_batch
 newhlevel: true
+description: "Track key Azure Batch Service metrics."
 ---
 
 ## Overview

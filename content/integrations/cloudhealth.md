@@ -4,6 +4,7 @@ integration_title: Cloudhealth
 kind: integration
 git_integration_title: cloudhealth
 newhlevel: true
+description: "Help CloudHealth help you: give it per-instance metrics from Datadog."
 ---
 
 ## Overview

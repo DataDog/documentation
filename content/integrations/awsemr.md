@@ -4,6 +4,8 @@ integration_title: AWS Elastic Map Reduce
 kind: integration
 git_integration_title: amazon_emr
 newhlevel: true
+description: "Track key Amazon Elastic Map Reduce metrics.
+"
 ---
 
 ## Overview

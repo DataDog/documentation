@@ -4,6 +4,7 @@ integration_title: AWS Redshift
 kind: integration
 git_integration_title: amazon_redshift
 newhlevel: true
+description: "Track key Amazon Redshift metrics."
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ integration_title: AWS CloudFront
 kind: integration
 git_integration_title: amazon_cloudfront
 newhlevel: true
+description: "Track error rates, request counts, and bytes downloaded and uploaded."
 ---
 
 ## Overview

@@ -1,8 +1,8 @@
 ---
 title: Datadog-OpsGenie Integration
 integration_title: OpsGenie
-
 kind: integration
+description: "Use OpsGenie as a notification channel in Datadog alerts and events."
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ integration_title: Lightbend Reactive Platform
 kind: integration
 git_integration_title: lightbendrp
 newhlevel: true
+description: "Track actors and dispatcher events for Akka-based applications"
 ---
 
 {{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" >}}

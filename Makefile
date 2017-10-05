@@ -30,18 +30,18 @@ clean: stop  ## clean all make installs.
 
 clean-all: stop  ## clean everything.
 	make clean-build
-	make clean-docker
 	make clean-exe
 	make clean-integrations
 	make clean-node
 	make clean-virt
+	make clean-docker
 
 clean-build:  ## remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
 
 clean-docker:  ## remove image.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
-	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi
+	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true
+	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi || true
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}

@@ -23,8 +23,7 @@ Finally, import the tracer and instrument your code!
 ~~~
 from ddtrace import tracer
 
-with tracer.trace("web.request") as span:
-  span.set_service_info("my_service", "web")
+with tracer.trace("web.request", service="my_service") as span:
   span.set_tag("my_tag", "my_value")
 ~~~
 

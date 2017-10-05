@@ -4,6 +4,7 @@ integration_title: AWS Elastic Beanstalk
 kind: integration
 git_integration_title: amazon_elasticbeanstalk
 newhlevel: true
+description: "Track key Amazon ElasticBeanstalk metrics."
 ---
 
 ## Overview
@@ -14,6 +15,10 @@ AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web ap
 ### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws).
+
+To receive Elastic Beanstalk metrics, you must [enable the Enhanced Health Reporting](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html) feature for your environment, and configure your environment to [publish enhanced health metrics to CloudWatch](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console).
+
+**Note**: This will increase your CloudWatch custom metric charges.
 
 ### Configuration
 
