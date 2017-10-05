@@ -31,3 +31,17 @@ AWS Budget metrics can only be collected from the AWS master account.
 {{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+
+## Troubleshooting
+
+### No metric are reporting from my AWS billing integration
+Here is a check list that you can apply to troubleshoot your integration:
+
+1. Check that your IAM policy has `budgets:ViewBudget`
+2. Check if billing metrics is enabled in your payer account
+3. AWS Billing metrics are collected every 4 or 8 hours by Datadog, maybe you need to wait a little bit more.
+
+### `aws.billing.actual_spend` `aws.billing.forecasted_spend` `aws.billing.budget_limit` don't appear on Datadog 
+
+[Create an AWS buget](https://console.aws.amazon.com/billing/home?#/createbudget) in order to start seeing those metrics on your Datadog application. 
+Be aware that AWS Billing metrics are collected every 4 or 8 hours by Datadog.
