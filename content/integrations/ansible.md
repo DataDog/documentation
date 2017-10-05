@@ -42,3 +42,6 @@ To install the Datadog Agent using Ansible, refer to the [installation documenta
 ### Metrics
 
 {{< get-metrics-from-git >}}
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).

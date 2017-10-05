@@ -28,14 +28,7 @@ description: "{{< get-desc-from-git >}}"
 //get-setup-from-git//
 
 ## Data Collected
-### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv) for a list of metrics provided by this integration.
-
-### Events
-The Network check does not include any event at this time.
-
-### Service Checks
-The Network check does not include any service check at this time.
+//get-data-collected-from-git//
 
 ## Troubleshooting
 //get-troubleshooting-from-git//
