@@ -7,14 +7,6 @@ aliases:
 customnav: infrastructurenav
 ---
 
-<div class="alert alert-info">
-  An overview of how we uniquely identify hosts and how they are displayed in
-  Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
-</div>
-
 ## Agent Host Names
 
 <div class="alert alert-warn">
@@ -44,7 +36,7 @@ command:
 
 From these names, a canonical name is picked for the host. This is the name the
 Agent will primarily use to identify itself to Datadog. The other names are
-submitted as well, but only as candidates for <a href="#aliases">aliasing</a>.
+submitted as well, but only as candidates for [aliases](#host-aliases).
 
 The canonical host name is picked according to the following rules. The first
 match is selected.
@@ -66,7 +58,7 @@ internal DNS server or a config-managed hosts file (`myhost.mydomain`). Datadog
 creates aliases for host names when there are multiple uniquely identifiable
 names for a single host.
 
-The names collected by the Agent (detailed <a href="#agent">above</a>) are
+The names collected by the Agent (detailed [above](#agent-host-names)) are
 added as aliases for the chosen canonical name.
 
 You can see a list of all the hosts in your account from the Infrastructure tab

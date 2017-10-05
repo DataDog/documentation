@@ -8,15 +8,20 @@ customnav: infrastructurenav
 
 ## Overview
 
-This view shows:
+The Infrastructure list page shows all hosts monitored by your datadog application:
 
-* All hosts monitored by your datadog applications
-* You can see the tags applied to each machine; as they're assigned to
-perform certain roles, tagging allows you to indicate machines have
-a certain purpose
-* We do as much as possible to automatically categorize your servers
-for you, to create structure in your infrastructure with as little
-work as possible (unlike explicitly creating all your clusters).
-Thus if a new machine is tagged, you can immediately see the stats
-for that machine based on what was previously set up for that tag.
-* For more on tagging, please see <a target="_blank" href="https://docs.datadoghq.com/faq/#tagging">here</a>.
+{{< img src="infrastructure/index/infrastructure_list.png" alt="Infrastructure list" >}}
+
+
+## Host details
+
+If you click on one host, You can see the tags applied to it:
+
+{{< img src="infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" >}}
+
+## What's next
+
+* [See all of your hosts together on one screen with the hostmap](/infrastructure/hostmap)
+* [Learn more about hostnames and host aliases](/infrastructure/hostname)
+* [Get real-time visibility of all of the containers across your environment](/infrastructure/livecontainers)
+* [Understand what is going on at any level of your system](/infrastructure/process)
