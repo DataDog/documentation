@@ -176,18 +176,15 @@ languages:
         - identifier: customnav_infrastructurenav_infrastructure_list
           url: "infrastructure/"
           weight: 20
-        - identifier: customnav_infrastructurenav_hostnames
-          url: "infrastructure/hostnames"
-          weight: 30
         - identifier: customnav_infrastructurenav_hostmap
           url: "infrastructure/hostmap"
-          weight: 40
+          weight: 30
         - identifier: customnav_infrastructurenav_livecontainers
           url: "infrastructure/livecontainers"
-          weight: 50
+          weight: 40
         - identifier: customnav_infrastructurenav_process
           url: "infrastructure/process"
-          weight: 60
+          weight: 50
           
       lognav:
         - identifier: customnav_lognav
@@ -266,7 +263,7 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_infrastructurenav_hostnames
-          url: "infrastructure/hostnames"
+          url: "infrastructure/"
           weight: 20
         - identifier: customnav_infrastructurenav_hostmap
           url: "infrastructure/hostmap"

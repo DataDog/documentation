@@ -140,9 +140,6 @@
 - id: customnav_infrastructurenav
   translation: "Infrastructure"
 
-- id: customnav_infrastructurenav_hostnames
-  translation: "Hostnames"
-
 - id: customnav_infrastructurenav_hostmap
   translation: "Hostmap"
 
