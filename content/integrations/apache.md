@@ -10,67 +10,16 @@ description: "{{< get-desc-from-git >}}"
 {{< img src="integrations/apache/apachegraph.png" >}}
 
 ## Overview
-
-Get metrics from Apache in real time; graph them and correlate them with other relevant system metrics and events.
-
-  * Visualize your web server performance
-  * Correlate the performance of Apache with the rest of your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-Make sure that [`mod_status`][3] is installed on your Apache server with `ExtendedStatus` set to `on`
-
-### Configuration
-
-*To capture Apache metrics you need to install the Datadog agent.*
-
-1.  Configure the agent to connect to Apache. Edit `/etc/dd-agent/conf.d/apache.yaml`
-{{< highlight yaml >}}
-init_config:
-
-instances:
-  - apache_status_url: http://example.com/server-status?auto
-    # apache_user: example_user
-    # apache_password: example_password
-    tags:
-      - instance:foo
-    disable_ssl_validation: true # if you want to disable SSL cert validation
-{{< /highlight >}}
-
-2. Restart the agent
-{{< highlight shell >}}
-sudo /etc/init.d/datadog-agent restart
-{{< /highlight >}}
-
-{{< insert-example-links >}}
-
-### Validation
-
-To ensure the integration is installed correctly, run the agent info command.
-
-    sudo /etc/init.d/datadog-agent info
-
-You should see something similar to the following if everything is working correctly:
-{{< highlight shell >}}
-Checks
-======
-
-  [...]
-
-  apache
-  ------
-      - instance #0 [OK]
-      - Collected 8 metrics & 0 events
-{{< /highlight >}}
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-The following metrics are collected by default with the Apache integration:
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-{{< get-metrics-from-git >}}
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example
-[2]: https://github.com/DataDog/integrations-core/blob/master/apache/check.py
-[3]: http://httpd.apache.org/docs/2.0/mod/mod_status.html
+## Further Reading
+//get-further-reading-from-git//
