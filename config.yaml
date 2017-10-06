@@ -161,9 +161,13 @@ languages:
           url: tracing/ruby/
           weight: 90
 
+        - identifier: customnav_tracingnav_docker
+          url: tracing/docker/
+          weight: 100
+
         - identifier: customnav_tracingnav_api
           url: tracing/api/
-          weight: 100
+          weight: 110
 
       lognav:
         - identifier: customnav_lognav
