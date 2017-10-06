@@ -33,7 +33,7 @@ Once you have created a Datadog Read only user:
 4. Configure your [Dyn integration](https://app.datadoghq.com/account/settings#integrations/dyn) inside your Datadog application.
 {{< img src="integrations/dyn/dyn_integration.png" alt="Dyn Integration" style="width:75%;" >}}
 
-5. Select the zones (*Zone notes*) you wish to monitor events and `dyn.changes` metric from:<br>
+5. Select the zones (*Zone notes*) that you wish to collect events and the `dyn.changes` metric from:<br>
 
 {{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:75%;" >}}
 
