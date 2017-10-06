@@ -26,7 +26,7 @@ JIRA is an issue and project tracking system for software teams. This integratio
 
 	{{< img src="integrations/jira/JiraInstallation3.png" style="width:75%;" alt="settings" >}}
 
-4. Enter app.datadoghq.com as the URL to link –> press "Create new link"
+4. Enter `https://app.datadoghq.com/` as the URL to link –> press "Create new link"
 
 	{{< img src="integrations/jira/JiraInstallation4.png" style="width:75%;" alt="settings" >}}
 
