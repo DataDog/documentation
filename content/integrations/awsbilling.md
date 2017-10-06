@@ -34,12 +34,12 @@ Each of the metrics retrieved from AWS will be assigned the same tags that appea
 
 ## Troubleshooting
 
-### No metric are reporting from my AWS billing integration
+### No metrics are reporting from my AWS billing integration
 Here is a check list that you can apply to troubleshoot your integration:
 
-1. Check that your IAM policy has `budgets:ViewBudget`
-2. Check if billing metrics is enabled in your payer account
-3. AWS Billing metrics are collected every 4 or 8 hours by Datadog, maybe you need to wait a little bit more.
+1. Ensure your IAM policy has `budgets:ViewBudget`
+2. Ensure billing metrics are enabled in your payer account
+3. Note that AWS Billing metrics are collected every 4 or 8 hours by Datadog.
 
 ### `aws.billing.actual_spend` `aws.billing.forecasted_spend` `aws.billing.budget_limit` don't appear on Datadog 
 
