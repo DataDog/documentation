@@ -214,9 +214,6 @@
 - id: customnav_tracingnav_environments
   translation:  "Environments"
 
-- id: customnav_tracingnav_help
-  translation:  "APM Support"
-
 - id: customnav_tracingnav_langs
   translation:  "Supported Languages"
 
