@@ -26,7 +26,7 @@ Related integrations include:
 | [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |
 | [CloudTrail](/integrations/awscloudtrail)                 | access to log files and AWS API calls                                         |
 | [CloudSearch](/integrations/awscloudsearch)               | access to log files and AWS API calls                                         |
-| [Direct Connect](/integrations/awsdirectconnect)          | dedicated network connection to AWS
+| [Direct Connect](/integrations/awsdirectconnect)          | dedicated network connection to AWS                                           |
 | [Dynamo DB](/integrations/awsdynamo)                      | NoSQL Database                                                                |
 | [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
 | [Elastic Beanstalk](/integrations/awsbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
@@ -67,7 +67,14 @@ understanding of role delegation, refer to the [AWS IAM Best Practices guide](ht
 The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the <a href="#configuration-for-china-and-govcloud">configuration section</a> below.
 </div>
 
-1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
+1.  Create a new role in the AWS [IAM Console](https://console.aws.amazon.com/iam/home#/roles). 
+2.  Select `Another AWS account` for the Role Type.
+3.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog read only access to your AWS data. 
+4.  Check off `Require external ID` and enter the one generated [in the Datadog app](https://app.datadoghq.com/account/settings#integrations/amazon_web_services). Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+5.  Click `Next: Permissions`.
+6.  Click `Create Policy`. Note, if you've already created the policy, search for it on this page and use select it. Otherwise complete the following to create a new one.
+7.  Choose `Create Your Own Policy`.
+8.  Name the policy `DatadogAWSIntegrationPolicy`, or one of your choosing and provide an apt description. To take advantage of every AWS integration offered by Datadog, use the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
 {{< highlight json>}}
 {
   "Version": "2012-10-17",
@@ -127,13 +134,9 @@ The GovCloud and China regions do not currently support IAM role delegation. If 
 }
 {{< /highlight >}}
 If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
+9.  Click `Next: Review`.
+10.  Give the role a name such as `DatadogAWSIntegrationRole` and an apt description and hit `Create Role`.
 
-2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
-3.  From the selection, choose Role for Cross-Account Access.
-4.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-5.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
-6.  Select the policy you created above.
-7.  Review what you selected and click the **Create Role** button.
 
 ### Configuration
 
