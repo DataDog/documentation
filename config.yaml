@@ -263,7 +263,7 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_infrastructurenav_hostnames
-          url: "infrastructure/hostnames"
+          url: "infrastructure/"
           weight: 20
         - identifier: customnav_infrastructurenav_hostmap
           url: "infrastructure/hostmap"
