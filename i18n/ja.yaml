@@ -25,7 +25,7 @@
 - id: menu_references_graphingjson
   translation: "JSONを使ったグラフの設定"
 
-- id: menu_references_host_names
+- id: menu_references_infrastructure
   translation: "ホスト名について"
 
 - id: menu_references_integrations
@@ -139,6 +139,39 @@
 - id: example_categories
   translation: "このサンプルコードは次のグループにも属します:"
 
+# Infrastructure
+- id: customnav_infrastructurenav
+  translation: "Infrastructure"
+
+- id: customnav_infrastructurenav_hostmap
+  translation: "Hostmap"
+
+- id: customnav_infrastructurenav_livecontainers
+  translation: "Containters" 
+
+- id: customnav_infrastructurenav_process
+  translation: "Processes"
+
+- id: customnav_infrastructurenav_infrastructure_list
+  translation: "Infrastructure List"
+
+# Logs
+
+- id: customnav_lognav
+  translation: Logs (Beta)
+
+- id: customnav_lognav_collection
+  translation: Collection
+
+- id: customnav_lognav_processing
+  translation: Processing
+
+- id: customnav_lognav_parsing
+  translation: Parsing
+
+- id: customnav_lognav_explore
+  translation: Explore
+  
 # Basic agent menu
 
 - id: amazonlinux
