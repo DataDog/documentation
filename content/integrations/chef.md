@@ -8,7 +8,6 @@ updated_for_agent: 5.8.5
 description: "Track Chef client runs: know when they fail, succeed, or make big changes."
 aliases:
   - /guides/chef/
->>>>>>> gus/chef-guide-deletion
 ---
 
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}

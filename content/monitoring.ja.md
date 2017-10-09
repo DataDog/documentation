@@ -61,7 +61,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 *Datadog Agent バージョン 5.0.0 以上が必要です。*
 
-{{< img src="guides/monitor/host_monitor.png" >}}
+{{< img src="monitors/monitor_types/host/host_monitor.png" >}}
 
 Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハートビート信号を
 `UP`というステータスで定期的に送信します。
@@ -222,7 +222,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 1. アラートのタイプを選択します。
 
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" >}}
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較する、最も一般的なアラート検知の方法です。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは正常な範囲か値が事前に分かっている場合に使用します。
 
@@ -238,7 +238,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 2. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
 
-    {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
+    {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" >}}
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
@@ -246,7 +246,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 3. アラートグループを選択します。
 
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" >}}
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -260,7 +260,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
+    {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" >}}
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -318,7 +318,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 -->
 ### インテグレーションを対象にしたMonitor
 
-{{< img src="guides/monitor/es_status.png" >}}
+{{< img src="monitors/monitor_types/integration/es_status.png" >}}
 
 インテグレーションタブをクリックすると、既にインストールされているインテグレーションのタイルがタブの下に表示されます。そのタイルを選択すると`Status`または`Metric`というMonitorの設定を選択できるようになります。
 
@@ -345,7 +345,7 @@ point they should notify.
 -->
 ### プロセスを対象にしたMonitor
 
-{{< img src="guides/monitor/process_monitor.png" >}}
+{{< img src="monitors/monitor_types/process/process_monitor.png" >}}
 
 プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 
@@ -390,7 +390,7 @@ configuration.
 -->
 ### ネットワークを対象にしたMonitor
 
-{{< img src="guides/monitor/network_monitor.png" >}}
+{{< img src="monitors/monitor_types/network/network_monitor.png" >}}
 
 ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/integrations/tcp_check) を参照してください。
 
@@ -475,7 +475,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 イベントを対象にしたMonitorでは、指定した条件に合致する場合にアラートで通知することができます。
 
-{{< img src="guides/monitor/event_monitor.png" >}}
+{{< img src="monitors/monitor_types/event/event_monitor.png" >}}
 
 1. 監視する文字列とパラメータ(ステータス, 優先度, ソース, タグ)を設定します。
 
@@ -501,7 +501,7 @@ or service checks.
 -->
 ### カスタムチェックを対象にしたMonitor
 
-{{< img src="guides/monitor/custom_monitor.png" >}}
+{{< img src=monitors/monitor_types/custom_check/custom_monitor.png" >}}
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
@@ -571,7 +571,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
-{{< img src="guides/monitor/notification.png" >}}
+{{< img src="monitors/notifications/notification.png" >}}
 
 
 <!--
@@ -715,21 +715,21 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
-    {{< img src="guides/monitor/conditionalvars.png" >}}
+    {{< img src="monitors/notifications/conditionalvars.png" >}}
 
     次が、通知本文の記述の例です:
 
-    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
+    {{< img src="monitors/notifications/templateconditionaleditor.png" >}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
+    {{< img src="monitors/notifications/templateconditionaltrigger.png" >}}
 
 
     リカバーした際の通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
+    {{< img src="monitors/notifications/templateconditionalrecover.png" >}}
 
 
     使用可能な条件変数は `is_alert`, `is_alert_recovery`,
@@ -740,19 +740,19 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     次が、`Multi Alert`でtemplate variables(タグ変数)を使った例です:
 
-    {{< img src="guides/monitor/templatevareditor.png" >}}
+    {{< img src="monitors/notifications/templatevareditor.png" >}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templatevar.png" >}}
+    {{< img src="monitors/notifications/templatevar.png" >}}
 
 
     利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
     一方で、アラートを通知する範囲(スコープ)を指定しているタグには自動的にタイトルに挿入されるものがあります。このため、範囲指定のために多くのタグを使用している場合にはアラートのタイトルが不必要に長くなる可能性があります。もしタグ変数をアラート本文に使用しているのであれば、スペースを節約するために**Include triggering tags in notification title** のチェックを外すことも有効です。この設定によってアラートのタイトルは以下のようになります。
 
-    {{< img src="guides/monitor/templatevar_short.png" >}}
+    {{< img src="monitors/notifications/templatevar_short.png" >}}
 
     テンプレート変数はデフォルトでエスケープされます。もし使用したい変数がJSONやコードを含んでおり、それらをエスケープさせたくない場合は、2重カッコのかわりに3重カッコを使用して下さい。(例 `{{{event.text}}}`)
 
@@ -770,7 +770,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
    次が、アラート発報の範囲情報に基づいて異なる本文を表示する例です:
 
-   {{< img src="guides/monitor/scope_match_editor.png" >}}
+   {{< img src="monitors/notifications/scope_match_editor.png" >}}
 
 <!--
 #### Variable availability

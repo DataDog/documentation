@@ -16,6 +16,8 @@ sidebar:
       href: "infrastructure/"
     - text: Integrations
       href: "integrations/"
+    - text: Monitor
+      href: "monitors/"
     - text: DogStatsD
       href: "guides/dogstatsd/"
     - text: FAQ

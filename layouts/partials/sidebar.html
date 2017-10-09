@@ -52,6 +52,36 @@
         {{ end }}
     {{ end }}
 
+  {{ else if eq $custom_sidebar "monitornav"}}
+    {{ $nav_headers := (slice "customnav_monitornav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.monitornav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "monitortypenav"}}
+    {{ $nav_headers := (slice "customnav_monitortypenav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.monitortypenav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
   {{ else if eq $custom_sidebar "infrastructurenav"}}
     {{ $nav_headers := (slice "customnav_infrastructurenav")}}
       <li id="toc-box"></li>
