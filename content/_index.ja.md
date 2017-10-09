@@ -46,7 +46,7 @@ aliases:
 <h3 class="big_number alert alert-success linked-header" id="dive-into-metrics2">
 <a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. メトリクスを <a href="guides/metrics/">使いこなそう </a>!</h3>
 <h3 class="big_number alert alert-info linked-header" id="graph-them3">
-<a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="graphing/">メトリクスの可視化</a>、そして<a href="guides/monitors/">アラート設定 !</a>
+<a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="graphing/">メトリクスの可視化</a>、そして<a href="https://docs.datadoghq.com/ja/guides/monitors/">アラート設定 !</a>
 </h3>
 
 <!--

@@ -9,11 +9,11 @@ listorder: 14
 
 <!--
 <div class="alert alert-info">
-If you're unfamiliar with the basics of Datadog Monitors, first read the <a href="https://docs.datadoghq.com/guides/monitors/">Guide to Monitors</a>
+If you're unfamiliar with the basics of Datadog Monitors, first read the <a href="https://docs.datadoghq.com/ja/guides/monitors/">Guide to Monitors</a>
 </div>
 -->
 <div class="alert alert-info">
-もし、まだDatadogのMonitor(監視)機能について不安がある場合は、<a href="https://docs.datadoghq.com/guides/monitors/">Monitor(監視)機能の設定ガイド</a>を先に参照して下さい。
+もし、まだDatadogのMonitor(監視)機能について不安がある場合は、<a href="https://docs.datadoghq.com/ja/guides/monitors/">Monitor(監視)機能の設定ガイド</a>を先に参照して下さい。
 </div>
 
 <!--
