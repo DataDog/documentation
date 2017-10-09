@@ -12,7 +12,7 @@ kind: integration
 
 
 - Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
-- Monitor the status of running processes with [Process Monitors](/guides/monitoring#process) (**Requires Datadog Agent >= 5.1.0**). -->
+- Monitor the status of running processes with (**Requires Datadog Agent >= 5.1.0**). -->
 
 ## 概要
 

@@ -7,7 +7,7 @@ kind: documentation
 listorder: 5
 ---
 <!--
-Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
+Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/monitors) for an introduction.
 -->
 
 このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
@@ -20,7 +20,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/ja/guides/tagging) page for more details.
 -->
 
 ## 用語集
@@ -195,9 +195,9 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
-    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/ja/guides/anomalies)
 
-    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/ja/guides/outliers)
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
@@ -495,13 +495,13 @@ Event monitors allows you to alert when an event matching your query occurs.
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
+Refer to the [Guide to Agent Checks](/ja/guides/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 -->
 ### カスタムチェックを対象にしたMonitor
 
-{{< img src=monitors/monitor_types/custom_check/custom_monitor.png" >}}
+{{< img src="monitors/monitor_types/custom_check/custom_monitor.png" >}}
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
@@ -563,8 +563,6 @@ No Article at this time.
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
-
-{{< img src="guides/monitor/notification.png" >}}
 -->
 
 ## 通知先の設定

@@ -4,10 +4,8 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#host-monitors
+description: "Check if one or more hosts are reporting to Datadog"
 ---
-
 
 *Requires Datadog Agent version >= 5.0.0.*
 

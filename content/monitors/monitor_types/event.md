@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#event-monitors
+description: "Monitor events gathered by Datadog"
 ---
 
 Event monitors allows you to alert when an event matching your query occurs.

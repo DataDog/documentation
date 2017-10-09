@@ -8,7 +8,7 @@ customnav: monitornav
 
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
 
-### Manage Downtime
+## Manage Downtime
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
@@ -18,8 +18,7 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 
 {{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" >}}
 
-### Schedule Downtime
-
+## Schedule Downtime
 
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
@@ -44,3 +43,11 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
    {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
+
+## What's next ? 
+
+* [Learn how to create a monitor](/monitors/monitor_types)
+* [Configure your monitor notifications](/monitors/notifications)
+* [Manage your monitors](/monitors/manage_monitor)
+* [See all your checks into one place](/monitors/check_summary)
+* [Consult our FAQ](/monitors/faq)

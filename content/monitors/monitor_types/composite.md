@@ -6,6 +6,7 @@ hideguides: true
 customnav: monitortypenav
 aliases:
     - /guides/composite_monitors
+description: "Alert on an expression combining multiple monitors"
 ---
 
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 

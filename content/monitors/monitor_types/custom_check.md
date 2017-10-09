@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#custom-monitors
+description: "Monitor status of arbitrary custom checks"
 ---
 
 {{< img src="monitors/monitor_types/custom_check/custom_monitor.png" >}}
