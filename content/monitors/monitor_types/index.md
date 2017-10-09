@@ -8,8 +8,6 @@ aliases:
     - /monitoring
 ---
 
-Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
-
 ## Glossary
 
 Here is a quick overview of the different terms used in this guide.
