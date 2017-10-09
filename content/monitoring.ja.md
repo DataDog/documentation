@@ -501,7 +501,7 @@ or service checks.
 -->
 ### カスタムチェックを対象にしたMonitor
 
-{{< img src=monitors/monitor_types/custom_check/custom_monitor.png" >}}
+{{< img src="monitors/monitor_types/custom_check/custom_monitor.png" >}}
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
