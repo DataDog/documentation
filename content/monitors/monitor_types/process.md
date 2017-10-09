@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#process-monitors
+description: "Check if a process is running on a host"
 ---
 
 {{< img src="monitors/monitor_types/process/process_monitor.png" >}}

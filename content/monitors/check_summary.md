@@ -14,3 +14,11 @@ This page let you see the list of all your checks reporting to Datadog:
 You can click on a check in order to have more details:
 
 {{< img src="monitors/check_summary/check_details.png" alt="Check details" >}}
+
+## What's next ? 
+
+* [Learn how to create a monitor](/monitors/monitor_types)
+* [Configure your monitor notifications](/monitors/notifications)
+* [Manage your monitors](/monitors/manage_monitor)
+* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
+* [Consult our FAQ](/monitors/faq)

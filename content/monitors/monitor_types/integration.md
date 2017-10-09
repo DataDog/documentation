@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#integration-monitors
+description: "Monitor metric values or health status from a specific integration"
 ---
 
 {{< img src="monitors/monitor_types/integration/es_status.png" >}}

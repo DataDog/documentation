@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#network-monitors
+description: "Check the status of TCP/HTTP endpoints"
 ---
 
 {{< img src="monitors/monitor_types/network/network_monitor.png" >}}

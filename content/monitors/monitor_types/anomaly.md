@@ -6,6 +6,7 @@ hideguides: true
 customnav: monitortypenav
 aliases:
     - /guides/anomalies
+description: "Detects anomalous behaviour for a metric based on historical data"
 ---
 
 Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
@@ -42,7 +43,6 @@ The function has two parameters. The first parameter is for selecting which algo
 {{< img src="monitors/monitor_types/anomaly/final_editor.png" >}}
 
 ### Alert on Anomalies
-
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
 

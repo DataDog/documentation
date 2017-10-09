@@ -19,21 +19,12 @@ right people get notified so the problem can be resolved as soon as possible.
    [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
    as well as Datadog's @-notification syntax. Note: you can notify any
    non-Datadog users via email by simply adding `@their-email` to the
-   message.
+   message. A common use-case for the monitor message is to include a step-by-step way to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
-   A common use-case for the monitor message is to include a step-by-step way
-   to resolve the problem. For example if you are monitoring a database then you
-   might want to include steps for failing over to a standby node. All in all,
-   you should attempt to give as much context to the monitor as possible.
-
-4. Optionally enable **monitor renotification**. This option is useful to remind
-   your team that a problem is not solved until the monitor is marked as
-   resolved. If enabled, you can configure an escalation message to be sent
-   anytime the monitor renotifies. The original message will be included as
-   well.
+3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message will be included as well.
 
 
-### Message template variables
+## Message template variables
 
 Message template variables can be used to customize your monitor notifications.
 This feature is supported in all monitor types. There are two primary use cases
@@ -41,87 +32,83 @@ for template variables: 1) displaying a different message depending on the
 notification type (e.g. triggered, recovered, no data) and 2) incorporating the
 triggering scope into the message of multi alerts.
 
-1. **Conditional variables for different notification types**: You can have a
-    monitor event display a different message depending on whether the event is a
-    trigger, warning, recovery, or no data notification. These variables use simple if-else
-    logic with the following syntax:
+### Conditional variables for different notification types
+You can have a monitor event display a different message depending on whether the event is a trigger, warning, recovery, or no data notification. These variables use simple if-else logic with the following syntax:
 
-    {{< img src="monitors/notifications/conditionalvars.png" >}}
+{{< img src="monitors/notifications/conditionalvars.png" >}}
 
-    Here is an example of how you can set it up in the editor:
+Here is an example of how you can set it up in the editor:
 
-    {{< img src="monitors/notifications/templateconditionaleditor.png" >}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" >}}
 
+The corresponding trigger event notification will look like this:
 
-    The corresponding trigger event notification will look like this:
+{{< img src="monitors/notifications/templateconditionaltrigger.png" >}}
 
-    {{< img src="monitors/notifications/templateconditionaltrigger.png" >}}
+and the recovery notification:
 
-
-    and the recovery notification:
-
-    {{< img src="monitors/notifications/templateconditionalrecover.png" >}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" >}}
 
 
-    The conditional variables available are:
+The conditional variables available are:
 
-    * `is_alert`, 
-    * `is_alert_recovery`,
-    * `is_warning`, 
-    * `is_warning_recovery`, 
-    * `is_recovery`, 
-    * `is_no_data`.
-    
-    These can also be seen in the "Use message template variables" help box in
-    Step 3 of the monitor editor.
+* `is_alert`, 
+* `is_alert_recovery`,
+* `is_warning`, 
+* `is_warning_recovery`, 
+* `is_recovery`, 
+* `is_no_data`.
 
-2. **Tag variables for multi alerts**: When your monitor is a multi alert, instead
-    of having a generic message (and finding the triggering tag scope in the alert query definition), a variable can be used in the message for explicitly identifying the triggering scope.
+These can also be seen in the "Use message template variables" help box in
+Step 3 of the monitor editor.
 
-    Here is an example of how you can use template variables for a multi alert:
+### Tag variables for multi alerts
+When your monitor is a multi alert, instead of having a generic message (and finding the triggering tag scope in the alert query definition), a variable can be used in the message for explicitly identifying the triggering scope.
 
-    {{< img src="monitors/notifications/templatevareditor.png" >}}
+Here is an example of how you can use template variables for a multi alert:
 
-    and the corresponding event notification:
+{{< img src="monitors/notifications/templatevareditor.png" >}}
 
-    {{< img src="monitors/notifications/templatevar.png" >}}
+and the corresponding event notification:
+
+{{< img src="monitors/notifications/templatevar.png" >}}
 
 
-    The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options will automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
-    These variables can also be used in the monitor titles (names), but note that the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).
+The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options will automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
+These variables can also be used in the monitor titles (names), but note that the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).
 
-    Some tags identifying your triggering scope will automatically be inserted into the title of your multi alert. If your scope is defined by a lot of tags, your alert title may end up being undesirably long. If you've used template tag variables to include this information in the body of your alert, you can uncheck
+Some tags identifying your triggering scope will automatically be inserted into the title of your multi alert. If your scope is defined by a lot of tags, your alert title may end up being undesirably long. If you've used template tag variables to include this information in the body of your alert, you can uncheck
 
-    **Include triggering tags in notification title** to save some space. This will make your notification title look like this:
+### Include triggering tags in notification title
 
-    {{< img src="monitors/notifications/templatevar_short.png" >}}
+In order to save some space, you can Include triggering tags in notification title. This will make your notification title look like this:
 
-    Note that template variable content is escaped by default. If your variable
-    contains JSON or code that you would NOT like to be escaped, then use triple braces instead of double braces (e.g. `{{{event.text}}}`).
+{{< img src="monitors/notifications/templatevar_short.png" >}}
 
-3. **Conditional variables for different triggering scopes**: You can have a
-   monitor event display a different message depending on the group that's
-   causing a notification.
+Note that template variable content is escaped by default. If your variable
+contains JSON or code that you would NOT like to be escaped, then use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
-   The `{{is_match}}` conditional lets you match the triggering context to some
-   string. For example, you might want to notify your db team if a triggering
-   host has `role:db` but notify your app team if the host has `role:app`.
+### Conditional variables for different triggering scopes
+You can have a monitor event display a different message depending on the group that's causing a notification.
 
-   You can use any of the available tag variables in your condition. A match
-   will be made if the comparison string is anywhere in the resolved variable.
+The `{{is_match}}` conditional lets you match the triggering context to some
+string. For example, you might want to notify your db team if a triggering
+host has `role:db` but notify your app team if the host has `role:app`.
 
-   The variable uses the following format:
+You can use any of the available tag variables in your condition. A match
+will be made if the comparison string is anywhere in the resolved variable.
 
-       {{#is_match "tag_variable" "comparison_string"}}
-       This will show if comparison_string is in tag_variable.
-       {{/is_match}}
+The variable uses the following format:
 
-   Here is an example of how you can give a different message depending on the
-   triggering context:
+  {{#is_match "tag_variable" "comparison_string"}}
+  This will show if comparison_string is in tag_variable.
+  {{/is_match}}
 
-   {{< img src="monitors/notifications/scope_match_editor.png" >}}
+Here is an example of how you can give a different message depending on the triggering context:
 
-#### Variable availability
+{{< img src="monitors/notifications/scope_match_editor.png" >}}
+
+## Variable availability
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
@@ -154,4 +141,12 @@ We provide a number of different types of monitors and not all variables are ava
   }
 </style>
 
-Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type "{{" to begin a template variable name.
+Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type `{{` to begin a template variable name.
+
+## What's next ? 
+
+* [Learn how to create a monitor](/monitors/monitor_types)
+* [Manage your monitors](/monitors/manage_monitor)
+* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
+* [See all your checks into one place](/monitors/check_summary)
+* [Consult our FAQ](/monitors/faq)

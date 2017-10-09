@@ -4,8 +4,7 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
-aliases:
-    - /monitoring/#metric-monitors
+description: "Compare values of a metric with a user defined threshold"
 ---
 
 1. Choose the detection method
