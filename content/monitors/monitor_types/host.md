@@ -8,7 +8,6 @@ aliases:
     - /monitoring/#host-monitors
 ---
 
-
 *Requires Datadog Agent version >= 5.0.0.*
 
 {{< img src="monitors/monitor_types/host/host_monitor.png" >}}
