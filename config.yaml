@@ -44,9 +44,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -169,6 +169,23 @@ languages:
           url: tracing/api/
           weight: 110
 
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_infrastructure_list
+          url: "infrastructure/"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
       lognav:
         - identifier: customnav_lognav
           url: "#"
@@ -185,6 +202,77 @@ languages:
         - identifier: customnav_lognav_parsing
           url: logs/parsing/
           weight: 50
+
+      monitornav:
+        - identifier: customnav_monitornav
+          url: "#"
+          weight: 10
+        - identifier: customnav_monitornav_index
+          url: "monitors"
+          weight: 20
+        - identifier: customnav_monitornav_monitor_types
+          url: "monitors/monitor_types"
+          weight: 30
+        - identifier: customnav_monitornav_manage_monitor
+          url: "monitors/manage_monitor"
+          weight: 40
+        - identifier: customnav_monitornav_check_summary
+          url: "monitors/check_summary"
+          weight: 50
+        - identifier: customnav_monitornav_notifications
+          url: "monitors/notifications"
+          weight: 60
+        - identifier: customnav_monitornav_downtimes
+          url: "monitors/downtimes"
+          weight: 70
+        - identifier: customnav_monitornav_faq
+          url: "monitors/faq"
+          weight: 80
+
+      monitortypenav:
+        - identifier: customnav_monitortypenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_monitortypenav_index
+          url: "monitors/monitor_types"
+          weight: 10
+        - identifier: customnav_monitortypenav_anomaly
+          url: "monitors/monitor_types/anomaly"
+          weight: 20
+        - identifier: customnav_monitortypenav_apm
+          url: "monitors/monitor_types/apm"
+          weight: 30
+        - identifier: customnav_monitortypenav_composite
+          url: "monitors/monitor_types/composite"
+          weight: 40
+        - identifier: customnav_monitortypenav_custom_check
+          url: "monitors/monitor_types/custom_check"
+          weight: 50
+        - identifier: customnav_monitortypenav_event
+          url: "monitors/monitor_types/event"
+          weight: 60
+        - identifier: customnav_monitortypenav_host
+          url: "monitors/monitor_types/host"
+          weight: 70
+        - identifier: customnav_monitortypenav_integration
+          url: "monitors/monitor_types/integration"
+          weight: 80
+        - identifier: customnav_monitortypenav_metric
+          url: "monitors/monitor_types/metric"
+          weight: 90
+        - identifier: customnav_monitortypenav_network
+          url: "monitors/monitor_types/network"
+          weight: 100
+        - identifier: customnav_monitortypenav_outlier
+          url: "monitors/monitor_types/outlier"
+          weight: 110
+        - identifier: customnav_monitortypenav_process
+          url: "monitors/monitor_types/process"
+          weight: 120
+
+
+
+
 
 
   ja:
@@ -213,9 +301,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -241,6 +329,40 @@ languages:
           name: ""
           url: "faq/"
           weight: 120
+
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_hostnames
+          url: "infrastructure/"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
+      lognav:
+        - identifier: customnav_lognav
+          url: "#"
+          weight: 10
+        - identifier: customnav_lognav_collection
+          url: logs/
+          weight: 20
+        - identifier: customnav_lognav_explore
+          url: logs/explore/
+          weight: 30
+        - identifier: customnav_lognav_processing
+          url: logs/processing/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: logs/parsing/
+          weight: 50
 
 params:
   environment: local
