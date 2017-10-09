@@ -29,4 +29,4 @@ To install the Datadog Agent via Puppet, please see [here](https://github.com/da
 - 管理しているサーバー上のPuppetのパフォーマンスメトリクスを取得する
 - 期待通りに完了しなかったPuppetの実行を検知し、チームと検討する
 
-Puppetを使ってDatadog Agentをインストールする方法に関しては、[Githubの"DataDog/puppet-datadog-agent"](http://docs.datadoghq.com/ja/guides/chef/)を参照してください。
+Puppetを使ってDatadog Agentをインストールする方法に関しては、[Githubの"DataDog/puppet-datadog-agent"](https://github.com/DataDog/puppet-datadog-agent)を参照してください。
