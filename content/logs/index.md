@@ -23,13 +23,13 @@ To start gathering logs, install the Log-Specific Datadog Agent:
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
     sudo apt-get update
 
-To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.2-1 500*
+To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.3-1 500*
 
     apt-cache policy datadog-agent | grep logs
 
 Then to install the agent:
 
-    sudo apt-get install datadog-agent=1:5.17.3~logsbeta.2-1 -y
+    sudo apt-get install datadog-agent=1:5.17.3~logsbeta.3-1 -y
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it:
 
