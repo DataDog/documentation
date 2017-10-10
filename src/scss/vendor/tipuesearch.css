@@ -81,11 +81,11 @@ http://www.tipue.com/search
 .tipue_search_content_url
 {
      font: 300 12px/1.5 'Open Sans', sans-serif;
-     word-break: break-all;
-     word-break: break-word;
-     -webkit-hyphens: auto;
-     -moz-hyphens: auto;
-     hyphens: auto;
+     /*word-break: break-all;*/
+     /*word-break: break-word;*/
+     /*-webkit-hyphens: auto;*/
+     /*-moz-hyphens: auto;*/
+     /*hyphens: auto;*/
 }
 .tipue_search_content_url a
 {
