@@ -5,7 +5,7 @@ autotocdepth: 2
 customnav: accountmanagementnav
 ---
 
-{{< img src="account_management/settings/settings_preference.png" alt="Settings Preference" >}}
+{{< img src="account_management/settings/settings_preferences.png" alt="Settings Preference" >}}
 
 This panel allow you: 
 
