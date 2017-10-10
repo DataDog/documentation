@@ -1,6 +1,6 @@
 ---
-title: Collection
-kind: documentation
+title: Log Collection
+kind: Documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
@@ -40,9 +40,9 @@ init_config:
 instances:
     [{}]
 
-#(mandatory)Same api_key than in datadog.conf
+#(mandatory) Same api_key as specified in datadog.conf
 api_key: <YOUR_DATADOG_API_KEY>
-#(optional): same hostname than in Datadog.conf - used for host tags and links with metrics
+#(optional): same hostname as specified in Datadog.conf - used for host tags and links with metrics
 #hostname:  
 
 {{< /highlight >}}
