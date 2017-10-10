@@ -24,7 +24,10 @@
         <div class="col-sm-3">
             <!--{{ partial "sidenav/sidenav.html" . }} {{.TableOfContents}} -->
         </div>
-        <div class="col-sm-4 main">
+        <div class="col-sm-9">
+            {{ block "main" . }}{{ end }}
+        </div>
+        <!--<div class="col-sm-4 main">
             {{ block "main" . }}{{ end }}
         </div>
         <div class="col-sm-5 api-code">
@@ -51,8 +54,7 @@
                     <a class="nav-link" href="#">Go</a>
                 </li>
             </ul>
-            {{ block "code" . }}{{ end }}
-        </div>
+        </div>-->
     </div>
 </div>
 

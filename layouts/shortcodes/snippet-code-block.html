@@ -1,13 +1,19 @@
 {{- $dot := . -}}
 {{- $file := .Get ("file") -}}
+{{- if .Get ("highlight") -}}
+  {{ $.Scratch.Add "highlight" (.Get ("highlight")) }}
+{{- else -}}
+  {{ $.Scratch.Add "highlight" "false" }}
+{{- end -}}
+{{ $highlight := $.Scratch.Get "highlight" }}
 {{- $nocomments := .Get "nocomments" -}}
 {{- $languages_str := .Get "languages" -}}
 {{- $languages := (slice $languages_str ) -}}
 {{- if $languages -}}
   {{- range $languages -}}
     {{- $file_ext := (printf "%s%s" $file .) -}}
-    {{- partial "snippet-code-block.html" (dict "context" $dot "file" $file_ext "nocomments" $nocomments ) -}}
+    {{- partial "snippet-code-block.html" (dict "context" $dot "file" $file_ext "highlight" $highlight "nocomments" $nocomments ) -}}
   {{- end -}}
 {{- else -}}
-  {{- partial "snippet-code-block.html" (dict "context" $dot "file" $file "nocomments" $nocomments ) -}}
+  {{- partial "snippet-code-block.html" (dict "context" $dot "file" $file "highlight" $highlight "nocomments" $nocomments ) -}}
 {{- end -}}

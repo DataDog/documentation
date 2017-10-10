@@ -1,6 +1,22 @@
 {{ define "main" }}
-    {{ .Content }}
-{{ end }}
-{{ define "code" }}
-    <p>Coming soon</p>
+    {{ $dot := . }}
+    {{ $contentList := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+    {{ $contentListCount := (len $contentList)}}
+    {{ $codeList := sort (where .Site.Pages "Type" "=" "apicode") "Params.order" }}
+    {{ $codeListCount := (len $codeList)}}
+
+    {{ range $index, $element := $contentList }}
+        {{ $myindex := (add $index 1) }}
+        <div class="row">
+            <div class="col-sm-6 api-content">
+                {{ $element.Content }}
+            </div>
+            <div class="col-sm-6 api-code">
+                <div>
+                    {{ (index $codeList $index).Content }}
+                </div>
+            </div>
+        </div>
+    {{ end }}
+
 {{ end }}

@@ -1,0 +1,30 @@
+<div class="col-sm-6 api-code">
+    {{ if .Get "shownav"}}
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Curl</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Ruby</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Python</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">PHP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Java</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Node</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Go</a>
+            </li>
+        </ul>
+    {{ end }}
+    <div>
+        {{ .Inner }}
+    </div>
+</div>
