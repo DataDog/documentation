@@ -69,10 +69,10 @@ def index_algolia(app_id, api_key, content_path=None):
                                     description = fm_description
                                 else:
                                     p_tags = html.find('p')
-                                    description = p_tags.getText()
+                                    description = str(p_tags)
                                     next_sibling = p_tags.find_next_sibling()
                                     if next_sibling and next_sibling.name == 'ul':
-                                        description += next_sibling.getText()
+                                        description += str(next_sibling)
 
                                 # create url
                                 url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
