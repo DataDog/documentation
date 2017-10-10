@@ -68,7 +68,10 @@ def index_algolia(app_id, api_key, content_path=None):
                                 if fm_description != default_description and '{{' not in fm_description:
                                     description = fm_description
                                 else:
-                                    description = html.find('p').getText()
+                                    p_tags = html.find_all('p', limit=2)
+                                    description = p_tags[0].getText()
+                                    if len(description) < 200:
+                                        description = p_tags[1].getText()
 
                                 # create url
                                 url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
