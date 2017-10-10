@@ -214,8 +214,6 @@
   translation: SAML
 - id: customnav_accountmanagementnav_multi_account
   translation: Multi Accounts
-- id: customnav_accountmanagementnav_billing
-  translation: Billing
 - id: customnav_accountmanagementnav_faq
   translation: FAQ
 

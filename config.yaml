@@ -289,12 +289,9 @@ languages:
         - identifier: customnav_accountmanagementnav_multi_account
           url: "account_management/multi_account"
           weight: 60
-        - identifier: customnav_accountmanagementnav_billing
-          url: "account_management/billing"
-          weight: 70
         - identifier: customnav_accountmanagementnav_faq
           url: "account_management/faq"
-          weight: 80
+          weight: 70
 
   ja:
     #languagename: "日本語"
