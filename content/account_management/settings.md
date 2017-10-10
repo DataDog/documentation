@@ -5,4 +5,10 @@ autotocdepth: 2
 customnav: accountmanagementnav
 ---
 
-WIP
+{{< img src="account_management/settings/settings_preference.png" alt="Settings Preference" >}}
+
+This panel allow you: 
+
+* To chose your timezone
+* Enable Desktop notifications
+* Custom your Email subscription parameters.
