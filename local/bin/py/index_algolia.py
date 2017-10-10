@@ -71,7 +71,7 @@ def index_algolia(app_id, api_key, content_path=None):
                                     p_tags = html.find_all('p', limit=2)
                                     description = p_tags[0].getText()
                                     if len(description) < 200 and len(p_tags) > 1 and \
-                                                    len(p_tags[1].getText()) > description:
+                                                    len(p_tags[1].getText()) > len(description):
                                         description = p_tags[1].getText()
 
                                 # create url
@@ -147,5 +147,3 @@ if __name__ == '__main__':
             key = input("Algolia API key: ")
 
     index_algolia(app_id=a_id, api_key=a_key)
-
-    # index_algolia(app_id="", api_key="", content_path="/Users/michaelwhetten/Datadog/web/hugo/documentation/public")
