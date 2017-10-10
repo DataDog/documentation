@@ -27,7 +27,7 @@ description: "{{< get-desc-from-git >}}"
 
 ### How will a VMware integration impact my monthly billing?
 
-The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](https://docs.datadoghq.com/guides/billing/) page.
+The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](https://docs.datadoghq.com/account_management/) page.
 
 ## Further Reading
 //get-further-reading-from-git//

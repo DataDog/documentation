@@ -64,9 +64,9 @@ languages:
           name: ""
           url: "videos/"
           weight: 100
-        - identifier: menu_references_billing
+        - identifier: menu_references_account_management
           name: ""
-          url: "guides/billing/"
+          url: "account_management"
           weight: 110
         - identifier: menu_references_faq
           name: ""

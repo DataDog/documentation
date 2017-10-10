@@ -49,8 +49,8 @@
 - id: menu_references_videos
   translation: "Videos"
 
-- id: menu_references_billing
-  translation: "Billing"
+- id: menu_references_account_management
+  translation: "Account Management"
 
 - id: menu_references_faq
   translation: "FAQ"
