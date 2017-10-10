@@ -20,10 +20,10 @@ sidebar:
       href: "monitors/"
     - text: DogStatsD
       href: "guides/dogstatsd/"
+    - text: Account Management
+      href: "account_management/"
     - text: FAQ
       href: "faq/"
-    - text: Billing FAQ
-      href: "guides/billing/"
 aliases:
   - /basic_agent_usage/
   - /guides/

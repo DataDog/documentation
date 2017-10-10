@@ -170,6 +170,7 @@
   translation: "Monitor Dowtimes"
 - id: customnav_monitornav_faq
   translation: "Monitor FAQ"
+
 # Monitor Type
 
 - id: customnav_monitortypenav
@@ -199,6 +200,24 @@
 - id: customnav_monitortypenav_process
   translation: "Process Monitor"
 
+# Account Management
+
+- id: customnav_accountmanagementnav
+  translation: Account Management 
+- id: customnav_accountmanagementnav_index
+  translation: Overview
+- id: customnav_accountmanagementnav_team
+  translation: Team
+- id: customnav_accountmanagementnav_settings
+  translation: Settings
+- id: customnav_accountmanagementnav_saml
+  translation: SAML
+- id: customnav_accountmanagementnav_multi_account
+  translation: Multi Accounts
+- id: customnav_accountmanagementnav_billing
+  translation: Billing
+- id: customnav_accountmanagementnav_faq
+  translation: FAQ
 
 # Logs
 

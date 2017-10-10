@@ -82,6 +82,21 @@
         {{ end }}
     {{ end }}
 
+  {{ else if eq $custom_sidebar "accountmanagementnav"}}
+    {{ $nav_headers := (slice "customnav_accountmanagementnav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.accountmanagementnav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
   {{ else if eq $custom_sidebar "infrastructurenav"}}
     {{ $nav_headers := (slice "customnav_infrastructurenav")}}
       <li id="toc-box"></li>

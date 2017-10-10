@@ -1,12 +1,13 @@
 ---
 title: Single Sign On With SAML
-kind: guide
-listorder: 19
-
+kind: documentation
+autotocdepth: 2
+aliases:
+  - /guides/saml
+customnav: accountmanagementnav
 ---
-This guide assumes that you already have a SAML Identity Provider up and running.
 
-## SAML
+**This documentation assumes that you already have a SAML Identity Provider up and running.**
 
 Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
@@ -98,5 +99,3 @@ The normal workflow is that when the Datadog url is loaded, the browser is redir
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
-
-
