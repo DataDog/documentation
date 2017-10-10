@@ -70,7 +70,8 @@ def index_algolia(app_id, api_key, content_path=None):
                                 else:
                                     p_tags = html.find_all('p', limit=2)
                                     description = p_tags[0].getText()
-                                    if len(description) < 200:
+                                    if len(description) < 200 and len(p_tags) > 1 and \
+                                                    len(p_tags[1].getText()) > description:
                                         description = p_tags[1].getText()
 
                                 # create url
