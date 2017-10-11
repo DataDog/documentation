@@ -1,9 +1,13 @@
 ---
-title: Graphing Primer
+title: Infrastructure List
 kind: documentation
-has_snippets: True
+autotocdepth: 2
+hideguides: true
+customnav: graphingnav
+alias:
+        - /guides/graphing
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/graphingjson)
 
 ## Find the Graph Editor
 
@@ -32,55 +36,7 @@ The Metrics Explorer will allow you to play around with different graph settings
 
 Once you have a metric in mind to display in your graph, select your visualization.
 
-#### Timeseries
-
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, {{< collapse id="collapseTimeseries" >}}click here{{< /collapse >}}. Timeseries is available on both timeboards and screenboards.
-
-<div class="collapse" id="collapseTimeseries" markdown="1">
-  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" >}}
-</div>
-
-#### Heatmap
-
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, {{< collapse id="collapseHeatmap" >}}click here{{< /collapse >}}. Heatmap is available on both timeboards and screenboards.
-
-<div class="collapse" id="collapseHeatmap" markdown="1">
-  {{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" >}}
-</div>
-
-#### Distribution
-
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, {{< collapse id="collapseDistribution" >}}click here{{< /collapse >}}. Distribution is available on both timeboards and screenboards.
-
-<div class="collapse" id="collapseDistribution" markdown="1">
-  {{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" >}}
-</div>
-
-
-#### Toplist
-
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  {{< collapse id="collapseTopList" >}}click here{{< /collapse >}}. Toplist is available on both timeboards and screenboards.
-
-<div class="collapse" id="collapseTopList" markdown="1">
-  {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" >}}
-</div>
-
-
-#### Change
-
-The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, {{< collapse id="collapseChangegraph" >}}click here{{< /collapse >}}.
-
-<div class="collapse" id="collapseChangegraph" markdown="1">
-  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" >}}
-</div>
-
-#### Hostmap
-
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, {{< collapse id="collapseHostmap" >}}click here{{< /collapse >}}.
-
-<div class="collapse" id="collapseHostmap" markdown="1">
-  {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" >}}
-</div>
+Find the list of all visualisation [here](/graphing/visualisation)
 
 
 ### Filter and Aggregate to show what you need
@@ -117,15 +73,7 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions, {{< collapse id="collapseGraphicFunctionTable" >}}click here{{< /collapse >}}.
-
-
-<div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
-<!-- The graphing functions section is a partial -->
-
-{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
-
-</div>
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here](/graphing/functions)
 
 ### Perform metric arithmetic
 
@@ -171,5 +119,3 @@ If you don't enter a title, we will automatically generate a title based on the 
 ### Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
-
-[1]: /graphingjson

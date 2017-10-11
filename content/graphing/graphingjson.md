@@ -1,12 +1,12 @@
 ---
 title: Graphing Primer using JSON
 kind: documentation
+customnav: graphingnav
 ---
 
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page](/graphing)
 
 ## Graphing with the JSON editor
-
 
 {{< img src="graphing/references-graphing-jsoneditor.png" >}}
 
@@ -67,39 +67,11 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 #### Functions
 
-
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/examples/graphing-functions/">Examples</a>
-
-{{< include-markdown "layouts/partials/graphingfunctions.md" >}}
-
-
-There are also a few functions you can append to a query which we recommend for expert users only.
-<p>
-One of these is <code>.rollup()</code>. Appending this function allows you to control the
-number of points rolled up into a single point. This function takes two parameters, method and time, like so:
-<code>.rollup(method,time)</code>.
-
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually,
-or both combined like <code>.rollup(sum,120)</code>. There are some checks on this,
-though, because for a given time range we do not return more than 350 points. Thus if
-you're requesting <code>.rollup(20)</code> where 20 is in seconds, and ask for a
-month of data, we will be returning the points at a rollup of far greater than 20 seconds.
-</p>
-
-<code>.as_count()</code> and <code>.as_rate()</code> are two other expert-only functions,
-which are only intended for metrics submitted in a certain way (for metadata types where
-that is acceptable).  At present, for metrics submitted as rates or counters via statsd,
-appending <code>.as_count()</code> or <code>.as_rate()</code> will function correctly.
-For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
-<code>.as_rate()</code> will have no effect.
-
-For more on <code>.as_count()</code> please see our blog post
-<a target="_blank" href="https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/">here</a>.
+A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/graphing/functions/">Examples</a>
 
 #### Aggregation Method
-
 
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
 

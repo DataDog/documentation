@@ -234,6 +234,28 @@
 - id: customnav_lognav_explore
   translation: Explore
 
+# Graphing
+- id: customnav_graphingnav
+  translation: Graphing
+- id: customnav_graphingnav_graphing
+  translation: Graphing Overview
+- id: customnav_graphingnav_events
+  translation: Events
+- id: customnav_graphingnav_dashboards
+  translation: Dashboards
+- id: customnav_graphingnav_metrics
+  translation: Metrics 
+- id: customnav_graphingnav_notebooks
+  translation: Notebooks
+- id: customnav_graphingnav_graphingjson
+  translation: Graphing JSON
+- id: customnav_graphingnav_visualisation
+  translation: Visualisation
+- id: customnav_graphingnav_functions
+  translation: Functions
+- id: customnav_graphingnav_faq
+  translation: FAQ
+
 # taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."

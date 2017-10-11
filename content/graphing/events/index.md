@@ -1,21 +1,12 @@
 ---
-title: Events via Email
-kind: guide
-listorder: 20
-sidebar:
-  nav:
-    - header: Events via Email guide
-    - text: Overview
-      href: "#overview"
-    - text: Plain Text Email
-      href: "#plain-text-email"
-    - text: JSON Email
-      href: "#json-email"
-    - text: Setting up the Email Address
-      href: "#setting-up-the-email-address"
-
+title: Events
+kind: documentation
+autotocdepth: 3
+hideguides: true
+customnav: graphingnav
 ---
-## Overview
+
+## Events Email
 
 When you need to integrate an application or system with Datadog, you have a
 few choices. The first is using one of our many existing [integrations][integrations].
@@ -91,9 +82,32 @@ messages from the Format: dropdown, then click *Create API Email*.
 
 {{< img src="guides/eventsemail/event-email-api.png" alt="JSON Event Email API">}}
 
-
-
 [integrations]: /integrations
 [agentcheck]: /guides/agent_checks
 [eventsapi]: /api/#events
 [dd-app]: https://app.datadoghq.com
+
+## Markdown events
+Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
+
+The detailed markdown syntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.
+Please note that embedding HTML in markdown is not supported with in Datadog.
+
+To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`
+
+An example below:
+<pre>
+{
+      "title": "Did you hear the news today?",
+      "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
+      "priority": "normal",
+      "tags": ["environment:test"],
+      "alert_type": "info"
+}
+</pre>
+
+Note: if you are embedding a link in a Markdown block, make sure the URL is encoded properly.
+
+For example, the following url: "http://catchpoint.com/session_id:123456"
+
+Should be encoded to: "http://catchpoint.com/session_id%3A123456"
