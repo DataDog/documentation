@@ -3,25 +3,3 @@ title: Hosts
 type: apicode
 order: 11
 ---
-
-##### Signature
-`POST /api/v1/host/:hostname/mute`
-##### Example Request
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-mute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-mute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-mute.rb" highlight="true" >}}
-##### Example Response
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-mute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-mute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-mute.rb" highlight="true" >}}
-
-##### Signature
-`POST /api/v1/host/:hostname/unmute`
-##### Example Request
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.rb" highlight="true" >}}
-##### Example Response
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.rb" highlight="true" >}}

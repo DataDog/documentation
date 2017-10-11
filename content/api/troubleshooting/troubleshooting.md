@@ -4,6 +4,8 @@ type: apicontent
 order: 19
 ---
 
+## Troubleshooting
+
 We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing (the goal being to always, always accept your data in production situations and decouple our systems from yours).
 
 Thus it is possible you could receive a 202 'success' response but not see your data in Datadog. The cause of this is most likely:

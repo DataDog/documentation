@@ -25,6 +25,30 @@ body {
   word-wrap: break-word;
 }
 
+// todo: do we want all code blocks like this or just ones on api, move this
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #333;
+  background-color: #0F0F0F;
+  border-radius: 4px;
+
+  code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+
 p {
   // todo: can i set this with a bootstrap variable?
   font-size:18px;
