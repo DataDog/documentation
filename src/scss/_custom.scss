@@ -3,12 +3,19 @@
 @import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 @import "../../node_modules/bootstrap/scss/mixins/grid";
 
-/* Bootstrap custom overrides here */
+/* Bootstrap variable customization here */
 $ddpurple:    #774DA2;
 
 $theme-colors: (
         primary: $ddpurple,
-        semi-trans: rgba(255,255,255,.5)
+        secondary: #000,
+        success: $green,
+        info: $cyan,
+        warning: $yellow,
+        danger: $red,
+        semi-trans: rgba(255, 255, 255, .5),
+        light: $gray-100,
+        dark: $gray-800
 );
 
 $font-family-sans-serif: "NationalWeb", Helvetica, Arial, sans-serif;
@@ -36,6 +43,8 @@ $headings-font-weight:600;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+/* beyond custom variables here and actual implementations that need to overwrite bootstrap */
+
 // Custom grids
 // 5 column
 // 2.4 width columns, 5 of them makes the 12 grid
@@ -46,4 +55,24 @@ $headings-font-weight:600;
       @include make-col(2.4, $grid-columns);
     }
   }
+}
+
+// this button is generated from theme colors
+// but we want to tweak it slightly
+.btn-outline-secondary {
+  border-color: #D6D6D6;
+  &:hover {
+    border-color: $ddpurple;
+    background-color: $ddpurple;
+  }
+  &:active,
+  &.active,
+  .show > &.dropdown-toggle {
+    background-color: $ddpurple;
+    border-color: $ddpurple;
+  }
+}
+
+.btn-sm-tag {
+  @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }
