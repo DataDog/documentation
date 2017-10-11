@@ -71,6 +71,13 @@ aside.sidenav {
         .hover {
           display:none;
         }
+        span,
+        img {
+          vertical-align:top;
+        }
+        img {
+          margin-top:4px;
+        }
       }
     }
   }

@@ -17,53 +17,25 @@
 </head>
 <body>
 
-{{ partial "header/header.html" . }}
+    {{ partial "header/header.html" . }}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3">
-            <!--{{ partial "sidenav/sidenav.html" . }} {{.TableOfContents}} -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                {{ partial "sidenav/sidenav.html" . }}
+            </div>
+            <div class="col-sm-9">
+                {{ block "main" . }}{{ end }}
+            </div>
         </div>
-        <div class="col-sm-9">
-            {{ block "main" . }}{{ end }}
-        </div>
-        <!--<div class="col-sm-4 main">
-            {{ block "main" . }}{{ end }}
-        </div>
-        <div class="col-sm-5 api-code">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Curl</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Ruby</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Python</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">PHP</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Java</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Node</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Go</a>
-                </li>
-            </ul>
-        </div>-->
     </div>
-</div>
 
-{{ partial "footer/footer.html" . }}
+    {{ partial "footer/footer.html" . }}
 
-<script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
+    <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
 
-{{ partial "footer-scripts.html" . }}
-{{ partial "footer-js-dd-docs-methods" . }}
-{{ partial "preview_banner/preview_banner" . }}
+    {{ partial "footer-scripts.html" . }}
+    {{ partial "footer-js-dd-docs-methods" . }}
+    {{ partial "preview_banner/preview_banner" . }}
 </body>
 </html>
