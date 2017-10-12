@@ -7,7 +7,7 @@ customnav: graphingnav
 alias:
         - /guides/graphing
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/miscellaneous/graphingjson)
 
 ## Find the Graph Editor
 
@@ -36,7 +36,7 @@ The Metrics Explorer will allow you to play around with different graph settings
 
 Once you have a metric in mind to display in your graph, select your visualization.
 
-Find the list of all visualisation [here](/graphing/visualisation)
+Find the list of all visualisation [here](/graphing/miscellaneous/visualisation)
 
 
 ### Filter and Aggregate to show what you need
@@ -73,7 +73,7 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here](/graphing/functions)
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here](/graphing/miscellaneous/functions)
 
 ### Perform metric arithmetic
 

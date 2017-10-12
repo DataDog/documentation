@@ -378,10 +378,10 @@
             <ul class="arguments">
               {{ range (slice "console" "python") }}
                 {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "The event title. Limited to 100 characters." "lang" .) }}
-                {{ partial "argument.html" (dict "context" $dot "name" "text" "description" "The body of the event. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" . "default" "''") }}
+                {{ partial "argument.html" (dict "context" $dot "name" "text" "description" "The body of the event. Limited to 4000 characters. The text supports <a href=\"/graphing/events/#markdown-events\">markdown</a>." "lang" . "default" "''") }}
               {{ end }}
               {{ partial "argument.html" (dict "context" $dot "name" "msg_title" "description" "The event title. Limited to 100 characters." "lang" "ruby") }}
-              {{ partial "argument.html" (dict "context" $dot "name" "msg_text" "description" "The text for the message. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" "ruby" "default" "''") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "msg_text" "description" "The text for the message. Limited to 4000 characters. The text supports <a href=\"/graphing/events/#markdown-events\">markdown</a>." "lang" "ruby" "default" "''") }}
               {{ partial "argument.html" (dict "context" $dot "name" "date_happened" "description" "POSIX timestamp of the event." "default" "now") }}
               {{ partial "argument.html" (dict "context" $dot "name" "priority" "description" "The priority of the event ('normal' or 'low')." "default" "'normal'") }}
               {{ partial "argument.html" (dict "context" $dot "name" "host" "description" "Host name to associate with the event. Any tags associated with the host will also be applied to this event." "default" "None") }}
@@ -2084,7 +2084,7 @@
               {{ partial "argument.html" (dict "context" $dot "name" "start" "description" "The POSIX timestamp of the start of the query.") }}
               {{ partial "argument.html" (dict "context" $dot "name" "end" "description" "The POSIX timestamp of the end of the query.") }}
               {{ partial "argument.html" (dict "context" $dot "name" "event_query" "description" "A query that will add event bands to the graph." "default" "None") }}
-              {{ partial "argument.html" (dict "context" $dot "name" "graph_def" "description" "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers." "default" "None") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "graph_def" "description" "A JSON document defining the graph. <code>graph_def</code> can be used instead of <code>metric_query</code>. The JSON document uses the <a href='/graphing/miscellaneous/graphingjson/#grammar'>grammar defined here</a> and should be formatted to a single line then URLEncoded. The <code>graph_def</code> argument is only available in the REST API and not using the Ruby or Python wrappers." "default" "None") }}
               {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "A title for the graph. If no title is specified, the graph will not have a title." "default" "None") }}
             </ul>
 

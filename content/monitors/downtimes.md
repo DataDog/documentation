@@ -26,7 +26,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
    {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" >}}
 
-   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
+   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphing/miscellaneous/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
    If you choose to silence all monitors constrained by a scope, clicking the "Preview affected monitors" will show which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule will also be silenced.
 

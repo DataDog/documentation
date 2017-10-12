@@ -69,7 +69,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/graphing/functions/">Examples</a>
+A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/graphing/miscellaneous/functions/">Examples</a>
 
 #### Aggregation Method
 
