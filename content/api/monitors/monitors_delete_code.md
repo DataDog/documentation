@@ -11,6 +11,6 @@ order: 8.4
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-delete.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-delete.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.py" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.sh" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-delete.rb" >}}

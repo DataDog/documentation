@@ -11,6 +11,6 @@ order: 11.1
 {{< snippet-code-block file="content/api/screenboards/code_snippets/api-screenboard-create.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/screenboards/code_snippets/api-screenboard-create.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.py" >}}
+{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.sh" >}}
+{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-create.rb" >}}

@@ -11,6 +11,6 @@ order: 18.5
 {{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-revoke.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-revoke.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.py" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.sh" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-revoke.rb" >}}

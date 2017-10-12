@@ -11,6 +11,6 @@ order: 9.1
 {{< snippet-code-block file="content/api/downtimes/code_snippets/api-monitor-schedule-downtime.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/downtimes/code_snippets/api-monitor-schedule-downtime.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.py" >}}
+{{< snippet-result-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.sh" >}}
+{{< snippet-result-code-block file="content/api/downtimes/code_snippets/result.api-monitor-schedule-downtime.rb" >}}

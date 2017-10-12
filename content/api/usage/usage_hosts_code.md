@@ -9,4 +9,4 @@ order: 18.1
 ##### Example Request
 {{< snippet-code-block file="content/api/usage/code_snippets/api-billing-usage-hosts.sh" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/usage/code_snippets/result.api-billing-usage-hosts.sh" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/usage/code_snippets/result.api-billing-usage-hosts.sh" >}}

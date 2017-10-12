@@ -11,6 +11,6 @@ order: 8.6
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-bulk-resolve.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-bulk-resolve.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.py" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.sh" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-bulk-resolve.rb" >}}

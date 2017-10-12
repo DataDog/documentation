@@ -9,7 +9,8 @@
 {{ end }}
 {{ $file := $.context.Scratch.Get "snipfile" }}
 
-{{ $file_ext := (index (split $file ".") 1) }}
+{{ $ext_index := (sub (len (split $file ".")) 1) }}
+{{ $file_ext := (index (split $file ".") $ext_index) }}
 
 {{ $highlight := $.highlight }}
 {{ $static := $.static }}
@@ -44,7 +45,7 @@
 
       {{ end }}
 
-      {{ if eq $static true }}
+      {{ if (or (eq $static true) (eq $static "true")) }}
 <pre lang="{{$v}}">
 <code>
 {{- $.context.Scratch.Get "file" -}}

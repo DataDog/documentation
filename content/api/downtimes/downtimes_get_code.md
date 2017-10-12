@@ -9,5 +9,5 @@ order: 9.5
 {{< snippet-code-block file="content/api/downtimes/code_snippets/api-monitor-get-downtime.py" highlight="true" >}}
 {{< snippet-code-block file="content/api/downtimes/code_snippets/api-monitor-get-downtime.sh" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/downtimes/code_snippets/result.api-monitor-get-downtime.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/downtimes/code_snippets/result.api-monitor-get-downtime.sh" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/downtimes/code_snippets/result.api-monitor-get-downtime.py" >}}
+{{< snippet-result-code-block file="content/api/downtimes/code_snippets/result.api-monitor-get-downtime.sh" >}}

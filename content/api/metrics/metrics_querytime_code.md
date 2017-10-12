@@ -11,6 +11,6 @@ GET https://app.datadoghq.com/api/v1/query
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metrics-query.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metrics-query.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.py" >}}
+{{< snippet-result-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.sh" >}}
+{{< snippet-result-code-block file="content/api/metrics/code_snippets/result.api-metrics-query.rb" >}}

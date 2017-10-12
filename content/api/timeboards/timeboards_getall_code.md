@@ -11,6 +11,6 @@ order: 10.4
 {{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-get-all.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-get-all.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.py" >}}
+{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.sh" >}}
+{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.rb" >}}

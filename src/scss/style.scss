@@ -48,6 +48,15 @@ pre {
   }
 }
 
+// hide the code blocks by default
+.code-block {
+  display:none;
+}
+// show python by default
+.code-block.code-block-python {
+  display:block;
+  visibility: visible;
+}
 
 p {
   // todo: can i set this with a bootstrap variable?

@@ -11,6 +11,6 @@ order: 13.3
 {{< snippet-code-block file="content/api/tags/code_snippets/api-tags-add.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/tags/code_snippets/api-tags-add.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/tags/code_snippets/result.api-tags-add.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/tags/code_snippets/result.api-tags-add.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/tags/code_snippets/result.api-tags-add.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/tags/code_snippets/result.api-tags-add.py" >}}
+{{< snippet-result-code-block file="content/api/tags/code_snippets/result.api-tags-add.sh" >}}
+{{< snippet-result-code-block file="content/api/tags/code_snippets/result.api-tags-add.rb" >}}

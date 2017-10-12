@@ -11,6 +11,6 @@ order: 18.2
 {{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-create.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-create.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.py" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.sh" >}}
+{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-create.rb" >}}

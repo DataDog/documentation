@@ -11,6 +11,6 @@ order: 8.91
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-unmute.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-unmute.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.py" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.sh" >}}
+{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-unmute.rb" >}}

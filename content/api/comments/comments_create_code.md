@@ -11,6 +11,6 @@ order: 15.1
 {{< snippet-code-block file="content/api/comments/code_snippets/api-comment-create.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/comments/code_snippets/api-comment-create.rb" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/comments/code_snippets/result.api-comment-create.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/comments/code_snippets/result.api-comment-create.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/comments/code_snippets/result.api-comment-create.rb" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-create.py" >}}
+{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-create.sh" >}}
+{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-create.rb" >}}

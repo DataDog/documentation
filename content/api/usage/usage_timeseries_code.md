@@ -9,4 +9,4 @@ order: 18.2
 ##### Example Request
 {{< snippet-code-block file="content/api/usage/code_snippets/api-billing-usage-timeseries.sh" highlight="true" >}}
 ##### Example Response
-{{< snippet-code-block file="content/api/usage/code_snippets/result.api-billing-usage-timeseries.sh" highlight="true" >}}
+{{< snippet-result-code-block file="content/api/usage/code_snippets/result.api-billing-usage-timeseries.sh" >}}
