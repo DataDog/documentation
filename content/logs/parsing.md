@@ -1,6 +1,6 @@
 ---
 title: Parsing
-kind: Documentation
+kind: documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
