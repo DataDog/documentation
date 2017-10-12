@@ -4,7 +4,7 @@ integration_title: AWS DynamoDB
 kind: integration
 git_integration_title: amazon_dynamodb
 newhlevel: true
-description: "Track table size, read/write capacity, request latency, and more."
+description: "Track DynamoDB table size, read/write capacity, request latency, and more."
 ---
 
 {{< img src="integrations/awsdynamo/dynamodb.png" alt="DynamoDB default dashboard" >}}

@@ -21,7 +21,7 @@ Connect to New Relic to:
 #### New Relic Alerts in Event Stream
 
 1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
-`https://app.datadoghq.com/intake/webhooknewrelic?api_key={YOUR_DATADOG_API_KEY}`
+`https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}`
 
 2.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 
