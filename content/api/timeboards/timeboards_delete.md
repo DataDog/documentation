@@ -1,5 +1,5 @@
 ---
-title: Timeboards
+title: Delete a Timeboard
 type: apicontent
 order: 10.3
 ---

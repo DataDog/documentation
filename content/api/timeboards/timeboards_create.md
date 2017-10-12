@@ -1,5 +1,5 @@
 ---
-title: Timeboards
+title: Create a Timeboard
 type: apicontent
 order: 10.1
 ---

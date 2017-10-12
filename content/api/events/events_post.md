@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Post An Event
 type: apicontent
 order: 6.1
 ---

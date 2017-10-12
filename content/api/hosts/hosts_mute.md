@@ -1,7 +1,7 @@
 ---
-title: Hosts
+title: Mute A Host
 type: apicontent
-order: 11.1
+order: 12.1
 ---
 
 ## Mute A Host

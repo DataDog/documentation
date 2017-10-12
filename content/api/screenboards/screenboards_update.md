@@ -1,5 +1,5 @@
 ---
-title: Screenboards
+title: Update A Screenboard
 type: apicontent
 order: 11.2
 ---

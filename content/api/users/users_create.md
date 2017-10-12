@@ -1,7 +1,7 @@
 ---
-title: Users
+title: Create User
 type: apicontent
-order: 15.1
+order: 16.1
 ---
 
 ## Create User

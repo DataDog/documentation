@@ -1,7 +1,7 @@
 ---
-title: Embeddable Graphs
+title: Revoke Embed
 type: apicontent
-order: 17.5
+order: 18.5
 ---
 
 ## Revoke Embed

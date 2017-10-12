@@ -1,7 +1,7 @@
 ---
-title: Embeddable Graphs
+title: Get Specific Embed
 type: apicontent
-order: 17.3
+order: 18.3
 ---
 
 ## Get Specific Embed

@@ -1,5 +1,5 @@
 ---
-title: Timeboards
+title: Get a Timeboard
 type: apicontent
 order: 10.5
 ---

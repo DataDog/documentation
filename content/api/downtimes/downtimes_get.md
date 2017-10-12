@@ -1,5 +1,5 @@
 ---
-title: Downtimes
+title: Get A Monitor Downtime
 type: apicontent
 order: 9.5
 ---

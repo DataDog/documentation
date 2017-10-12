@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Delete A Monitor
 type: apicontent
 order: 8.4
 ---

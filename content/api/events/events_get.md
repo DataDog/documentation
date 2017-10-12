@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Get An Event
 type: apicontent
 order: 6.2
 ---

@@ -1,7 +1,7 @@
 ---
-title: Users
+title: Get User
 type: apicontent
-order: 15.2
+order: 16.2
 ---
 
 ## Get User

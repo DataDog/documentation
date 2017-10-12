@@ -1,5 +1,5 @@
 ---
-title: Screenboards
+title: Create A Screenboard
 type: apicontent
 order: 11.1
 ---

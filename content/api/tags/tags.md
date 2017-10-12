@@ -1,7 +1,7 @@
 ---
 title: Tags
 type: apicontent
-order: 12
+order: 13
 ---
 ## Tags
 The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).

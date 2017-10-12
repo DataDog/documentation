@@ -1,5 +1,5 @@
 ---
-title: Downtimes
+title: Get All Monitor Downtimes
 type: apicontent
 order: 9.6
 ---

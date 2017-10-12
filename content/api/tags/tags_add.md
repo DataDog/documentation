@@ -1,7 +1,7 @@
 ---
-title: Tags
+title: Add Tags To A Host
 type: apicontent
-order: 12.3
+order: 13.3
 ---
 
 ## Add Tags To A Host

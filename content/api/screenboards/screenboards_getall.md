@@ -1,5 +1,5 @@
 ---
-title: Screenboards
+title: Get All Screenboards
 type: apicontent
 order: 11.5
 ---

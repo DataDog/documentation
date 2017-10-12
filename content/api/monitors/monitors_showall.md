@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Get All Monitor Details
 type: apicontent
 order: 8.5
 ---

@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Edit A Monitor
 type: apicontent
 order: 8.3
 ---

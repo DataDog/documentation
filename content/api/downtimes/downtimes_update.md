@@ -1,5 +1,5 @@
 ---
-title: Downtimes
+title: Update Monitor Downtime
 type: apicontent
 order: 9.2
 ---

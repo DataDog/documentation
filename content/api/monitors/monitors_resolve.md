@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Resolve Monitor
 type: apicontent
 order: 8.6
 ---

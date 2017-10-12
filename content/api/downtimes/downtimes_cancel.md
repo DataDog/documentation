@@ -1,5 +1,5 @@
 ---
-title: Downtimes
+title: Cancel Monitor Downtime
 type: apicontent
 order: 9.3
 ---

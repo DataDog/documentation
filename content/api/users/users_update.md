@@ -1,7 +1,7 @@
 ---
-title: Users
+title: Update User
 type: apicontent
-order: 15.4
+order: 16.4
 ---
 
 ## Update User

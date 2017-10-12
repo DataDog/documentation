@@ -1,7 +1,7 @@
 ---
-title: Users
+title: Disable User
 type: apicontent
-order: 15.5
+order: 16.5
 ---
 ## Disable User
 Can only be used with application keys belonging to administrators.

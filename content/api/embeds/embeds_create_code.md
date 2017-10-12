@@ -1,7 +1,7 @@
 ---
 title: Embeddable Graphs
 type: apicode
-order: 17.2
+order: 18.2
 ---
 
 ##### Signature

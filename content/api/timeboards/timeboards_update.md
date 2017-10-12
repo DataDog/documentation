@@ -1,5 +1,5 @@
 ---
-title: Timeboards
+title: Update a Timeboard
 type: apicontent
 order: 10.2
 ---

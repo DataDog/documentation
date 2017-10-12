@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Create A Monitor
 type: apicontent
 order: 8.1
 ---

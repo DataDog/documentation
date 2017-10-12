@@ -1,5 +1,5 @@
 ---
-title: Metrics
+title: View Metric Metadata
 type: apicontent
 order: 5.4
 ---

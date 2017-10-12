@@ -1,7 +1,7 @@
 ---
-title: Embeddable Graphs
+title: Enable Embed
 type: apicontent
-order: 17.4
+order: 18.4
 ---
 
 ## Enable Embed

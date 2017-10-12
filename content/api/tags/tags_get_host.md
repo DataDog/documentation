@@ -1,7 +1,7 @@
 ---
-title: Tags
+title: Get Host Tags
 type: apicontent
-order: 12.2
+order: 13.2
 ---
 
 ## Get Host Tags

@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Unmute All Monitors
 type: apicontent
 order: 8.8
 ---

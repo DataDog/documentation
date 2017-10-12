@@ -1,6 +1,6 @@
 ---
 title: Hosts
 type: apicontent
-order: 11
+order: 12
 ---
 ## Hosts

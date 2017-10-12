@@ -1,7 +1,7 @@
 ---
-title: Tags
+title: Get Tags
 type: apicontent
-order: 12.1
+order: 13.1
 ---
 
 ## Get Tags

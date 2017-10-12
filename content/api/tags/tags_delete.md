@@ -1,7 +1,7 @@
 ---
-title: Tags
+title: Remove Host Tags
 type: apicontent
-order: 12.5
+order: 13.5
 ---
 
 ## Remove Host Tags

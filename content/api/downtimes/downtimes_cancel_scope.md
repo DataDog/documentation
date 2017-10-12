@@ -1,5 +1,5 @@
 ---
-title: Downtimes
+title: Cancel Monitor Downtimes By Scope
 type: apicontent
 order: 9.4
 ---

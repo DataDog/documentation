@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Query The Event Stream
 type: apicontent
 order: 6.4
 ---

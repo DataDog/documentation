@@ -57,8 +57,7 @@ $headings-font-weight:600;
   }
 }
 
-// this button is generated from theme colors
-// but we want to tweak it slightly
+// this button is generated from theme colors but we want to have slight variant colors
 .btn-outline-secondary {
   border-color: #D6D6D6;
   &:hover {
@@ -73,6 +72,8 @@ $headings-font-weight:600;
   }
 }
 
+// a button size the same as btn-sm but with a set font size,
+// this is for tags on the integrations page and elsewhere as needed
 .btn-sm-tag {
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }

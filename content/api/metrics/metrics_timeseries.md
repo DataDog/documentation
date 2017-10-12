@@ -1,5 +1,5 @@
 ---
-title: Metrics
+title: Post Time Series Points
 type: apicontent
 order: 5.2
 ---

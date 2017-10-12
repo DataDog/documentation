@@ -1,0 +1,22 @@
+<aside class="sidenav">
+    <h4>Datadog API</h4>
+    <form class="sidenav-search">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png") }}" /></span>
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search"/>
+        </div>
+    </form>
+    <ul class="list-unstyled">
+        {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+            {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
+
+            {{ else }}
+                <li>
+                    <a href="#{{ lower (replace $element.Title " " "-") }}">
+                        <span>{{ $element.Title }}</span>
+                    </a>
+                </li>
+            {{ end }}
+        {{ end }}
+    </ul>
+</aside>

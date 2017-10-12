@@ -1,5 +1,5 @@
 ---
-title: Metrics
+title: Get List Of Active Metrics
 type: apicontent
 order: 5.1
 ---

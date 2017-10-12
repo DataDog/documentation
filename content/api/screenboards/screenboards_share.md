@@ -1,5 +1,5 @@
 ---
-title: Screenboards
+title: Share A Screenboard
 type: apicontent
 order: 11.6
 ---

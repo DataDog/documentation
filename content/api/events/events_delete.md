@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Delete An Event
 type: apicontent
 order: 6.3
 ---

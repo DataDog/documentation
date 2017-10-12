@@ -1,5 +1,5 @@
 ---
-title: Metrics
+title: Query Time Series Points
 type: apicontent
 order: 5.3
 ---

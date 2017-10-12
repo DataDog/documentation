@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: Mute A Monitor
 type: apicontent
 order: 8.9
 ---

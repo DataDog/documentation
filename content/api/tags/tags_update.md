@@ -1,7 +1,7 @@
 ---
-title: Tags
+title: Update Host Tags
 type: apicontent
-order: 12.4
+order: 13.4
 ---
 
 ## Update Host Tags
