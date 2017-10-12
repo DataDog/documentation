@@ -3,7 +3,6 @@ title: Datadog-AWS ECS Integration
 integration_title: AWS ECS
 kind: integration
 git_integration_title: amazon_ecs
-description: "Monitor container statuses, track resource usage, and more."
 ---
 
 ## Overview

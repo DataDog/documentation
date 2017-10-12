@@ -203,6 +203,7 @@ languages:
           url: logs/parsing/
           weight: 50
 
+
       monitornav:
         - identifier: customnav_monitornav
           url: "#"
