@@ -3,7 +3,7 @@ title: Datadog-Sentry Integration
 integration_title: Sentry
 kind: integration
 doclevel: basic
-description: "See, search on, and discuss exceptions from Sentry in your event stream."
+description: "See, search, and discuss exceptions from Sentry in your event stream."
 ---
 
 {{< img src="integrations/sentry/sentry.png" alt="sentry event" >}}
