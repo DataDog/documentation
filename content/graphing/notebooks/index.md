@@ -83,3 +83,7 @@ To save a notebook, press⌘+Sor click the “Save” button in the notebook hea
 To rename a notebook, click the name field in the notebook header.
 
 To delete a notebook that you’ve created, click the icon in the notebook header and select "Delete Notebook." You also may delete your own notebooks from the Notebook List page.
+
+## FAQ
+
+* [Consult our dedicated section for notebooks FAQ](/graphing/events/faq)

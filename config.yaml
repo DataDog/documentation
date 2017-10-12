@@ -306,24 +306,18 @@ languages:
         - identifier: customnav_graphingnav_dashboards
           url: "graphing/dashboards"
           weight: 40
+        - identifier: customnav_graphingnav_infrastructure
+          url: "graphing/infrastructure"
+          weight: 50
         - identifier: customnav_graphingnav_metrics
           url: "graphing/metrics"
-          weight: 50
+          weight: 60
         - identifier: customnav_graphingnav_notebooks
           url: "graphing/notebooks"
-          weight: 60
-        - identifier: customnav_graphingnav_graphingjson
-          url: "graphing/graphingjson"
           weight: 70
-        - identifier: customnav_graphingnav_visualisation
-          url: "graphing/visualisation"
+        - identifier: customnav_graphingnav_miscellaneous
+          url: "graphing/miscellaneous"
           weight: 80
-        - identifier: customnav_graphingnav_functions
-          url: "graphing/functions"
-          weight: 90
-        - identifier: customnav_graphingnav_faq
-          url: "graphing/faq"
-          weight: 100
 
   ja:
     #languagename: "日本語"

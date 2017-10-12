@@ -1,7 +1,7 @@
 ---
 title: Live Containers
 kind: documentation
-autotocdepth: 2
+autotocdepth: 3
 aliases:
   - /guides/livecontainers
 customnav: infrastructurenav
@@ -11,7 +11,7 @@ customnav: infrastructurenav
 
 Datadog Live Containers allows for real-time visibility of all of the containers across your environment.  Taking inspiration from bedrock tools like `htop` and `ctop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="infrastructure/livecontainers/LiveContainersWithSummaries.png" >}} 
+{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" >}} 
 
 ## Installation
 
@@ -41,15 +41,15 @@ Making sense of thousands or tens of thousands of containers can seem overwhelmi
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="infrastructure/livecontainers/overprovisioned.png" >}}
+{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" >}}
 
 Container environments are dynamic and can be hard to follow.  Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
 
-{{< img src="infrastructure/livecontainers/hostxservice.png" >}}
+{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" >}}
 
 It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and understand changes to resource utilization between updates.
 
-{{< img src="infrastructure/livecontainers/tasksxversion.png" >}}
+{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" >}}
 
 
 ## Real-time monitoring

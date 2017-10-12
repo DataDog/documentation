@@ -12,8 +12,6 @@ sidebar:
       href: "libraries/"
     - text: Graphing
       href: "graphing/"
-    - text: Infrastructure
-      href: "infrastructure/"
     - text: Integrations
       href: "integrations/"
     - text: Monitor

@@ -111,3 +111,7 @@ Note: if you are embedding a link in a Markdown block, make sure the URL is enco
 For example, the following url: "http://catchpoint.com/session_id:123456"
 
 Should be encoded to: "http://catchpoint.com/session_id%3A123456"
+
+## FAQ
+
+* [Consult our dedicated section for events FAQ](/graphing/events/faq)
