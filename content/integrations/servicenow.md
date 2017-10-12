@@ -2,7 +2,7 @@
 title: Datadog-ServiceNow Integration
 integration_title: ServiceNow
 kind: integration
-description: "Have your Datadog alerts automatically generate and update tickets."
+description: "Have your Datadog alerts automatically generate and update tickets in ServiceNow."
 ---
 
 ## Overview

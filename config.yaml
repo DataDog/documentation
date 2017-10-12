@@ -270,11 +270,6 @@ languages:
           url: "monitors/monitor_types/process"
           weight: 120
 
-
-
-
-
-
   ja:
     #languagename: "日本語"
     weight: 1

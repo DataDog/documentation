@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: airbrake
-description: "View, search on, and discuss Airbrake exceptions in your event stream."
+description: "View, search, and discuss Airbrake exceptions in your event stream."
 ---
 
 ## Overview
