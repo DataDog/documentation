@@ -378,10 +378,10 @@
             <ul class="arguments">
               {{ range (slice "console" "python") }}
                 {{ partial "argument.html" (dict "context" $dot "name" "title" "description" "The event title. Limited to 100 characters." "lang" .) }}
-                {{ partial "argument.html" (dict "context" $dot "name" "text" "description" "The body of the event. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" . "default" "''") }}
+                {{ partial "argument.html" (dict "context" $dot "name" "text" "description" "The body of the event. Limited to 4000 characters. The text supports <a href=\"/graphing/events/#markdown-events\">markdown</a>." "lang" . "default" "''") }}
               {{ end }}
               {{ partial "argument.html" (dict "context" $dot "name" "msg_title" "description" "The event title. Limited to 100 characters." "lang" "ruby") }}
-              {{ partial "argument.html" (dict "context" $dot "name" "msg_text" "description" "The text for the message. Limited to 4000 characters. The text supports <a href=\"/guides/markdown/\">markdown</a>." "lang" "ruby" "default" "''") }}
+              {{ partial "argument.html" (dict "context" $dot "name" "msg_text" "description" "The text for the message. Limited to 4000 characters. The text supports <a href=\"/graphing/events/#markdown-events\">markdown</a>." "lang" "ruby" "default" "''") }}
               {{ partial "argument.html" (dict "context" $dot "name" "date_happened" "description" "POSIX timestamp of the event." "default" "now") }}
               {{ partial "argument.html" (dict "context" $dot "name" "priority" "description" "The priority of the event ('normal' or 'low')." "default" "'normal'") }}
               {{ partial "argument.html" (dict "context" $dot "name" "host" "description" "Host name to associate with the event. Any tags associated with the host will also be applied to this event." "default" "None") }}

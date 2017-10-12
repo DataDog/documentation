@@ -174,16 +174,16 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_infrastructurenav_infrastructure_list
-          url: "infrastructure/"
+          url: "graphing/infrastructure/"
           weight: 20
         - identifier: customnav_infrastructurenav_hostmap
-          url: "infrastructure/hostmap"
+          url: "graphing/infrastructure/hostmap"
           weight: 30
         - identifier: customnav_infrastructurenav_livecontainers
-          url: "infrastructure/livecontainers"
+          url: "graphing/infrastructure/livecontainers"
           weight: 40
         - identifier: customnav_infrastructurenav_process
-          url: "infrastructure/process"
+          url: "graphing/infrastructure/process"
           weight: 50
           
       lognav:

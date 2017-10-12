@@ -36,11 +36,11 @@ In the source plain text email, you only have three fields you can control: send
 email address (required), subject (required), and body (optional).
 
 
-{{< img src="guides/eventsemail/plain-email.png" >}}
+{{< img src="graphing/events/plain-email.png" >}}
 
 #### Datadog Event
 
-{{< img src="guides/eventsemail/plain-event.png" >}}
+{{< img src="graphing/events/plain-event.png" >}}
 
 Note that the subject of the email becomes the title of the event and the body
 of the email becomes the body of the event. Although it looks like a tag appears
@@ -55,11 +55,11 @@ In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
 alert type,  date happened,  host, aggregation key, and source type name.<br>**Note: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
 
-{{< img src="guides/eventsemail/json-email.png" >}}
+{{< img src="graphing/events/json-email.png" >}}
 
 #### Datadog Event
 
-{{< img src="guides/eventsemail/json-event.png" >}}
+{{< img src="graphing/events/json-event.png" >}}
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
 will be replaced by the title in the JSON in the body of the email. All data that
@@ -80,7 +80,7 @@ then scroll down to *Events API Emails*. This section will show you all the emai
 available for your applications and who created them. Choose the format for your
 messages from the Format: dropdown, then click *Create API Email*.
 
-{{< img src="guides/eventsemail/event-email-api.png" alt="JSON Event Email API">}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API">}}
 
 [integrations]: /integrations
 [agentcheck]: /guides/agent_checks
