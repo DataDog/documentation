@@ -37,14 +37,14 @@ pre {
   color: #333;
   background-color: #0F0F0F;
   border-radius: 4px;
-
+  font-family: $font-family-monospace;
   code {
     padding: 0;
-    font-size: inherit;
-    color: inherit;
+    font-size: 12px;
     white-space: pre-wrap;
     background-color: transparent;
     border-radius: 0;
+    font-family: $font-family-monospace;
   }
 }
 
@@ -69,6 +69,16 @@ p {
   padding-top:30px;
   padding-bottom:100px;
 }
+
+
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+
 
 
 // sections

@@ -5,6 +5,35 @@
     {{ $codeList := sort (where .Site.Pages "Type" "=" "apicode") "Params.order" }}
     {{ $codeListCount := (len $codeList)}}
 
+    <div class="row sticky" style="z-index:9;">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 api-code">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="lang-btn nav-link active" href="#" data-lang="curl">Curl</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link" href="#" data-lang="ruby">Ruby</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link" href="#" data-lang="python">Python</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link disabled" href="#" data-lang="php">PHP</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link" href="#" data-lang="java">Java</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link" href="#" data-lang="node">Node</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lang-btn nav-link" href="#" data-lang="go">Go</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     {{ range $index, $element := $contentList }}
         {{ $myindex := (add $index 1) }}
         <div class="row">
