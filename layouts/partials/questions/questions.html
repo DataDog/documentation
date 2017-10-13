@@ -2,7 +2,7 @@
 <h2>Questions?</h2>
 <div class="row questions">
     <div class="col-6 col-md-4 mb-4">
-        <a class="card" href="">
+        <a class="card" href="https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1">
             <div class="card-body text-center">
                 <img width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/support.png") }}" />
                 <h4 class="card-title">Support</h4>
@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4 mb-4">
-        <a class="card" href="">
+        <a class="card" href="#">
             <div class="card-body text-center">
                 <img width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/sales.png") }}" />
                 <h4 class="card-title">Sales</h4>
@@ -20,7 +20,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card" href="">
+        <a class="card" href="{{ .Site.BaseURL }}faq/">
             <div class="card-body text-center">
                 <img width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/faq.png") }}" />
                 <h4 class="card-title">FAQ</h4>
