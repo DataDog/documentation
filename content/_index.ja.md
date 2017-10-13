@@ -15,8 +15,6 @@ sidebar:
       href: "libraries/"
     - text: グラフの描き方
       href: "graphing/"
-    - text: ホスト名について
-      href: "graphing/infrastructure/"
     - text: インテグレーション
       href: "integrations/"
     - text: DogStatsDの解説
