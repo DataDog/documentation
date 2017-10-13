@@ -345,9 +345,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_infrastructure
+        - identifier: menu_references_graphing
           name: ""
-          url: "infrastructure/"
+          url: "graphing/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -379,16 +379,16 @@ languages:
           url: "#"
           weight: 10
         - identifier: customnav_infrastructurenav_hostnames
-          url: "infrastructure/"
+          url: "graphing/infrastructure/"
           weight: 20
         - identifier: customnav_infrastructurenav_hostmap
-          url: "infrastructure/hostmap"
+          url: "graphing/infrastructure/hostmap"
           weight: 30
         - identifier: customnav_infrastructurenav_livecontainers
-          url: "infrastructure/livecontainers"
+          url: "graphing/infrastructure/livecontainers"
           weight: 40
         - identifier: customnav_infrastructurenav_process
-          url: "infrastructure/process"
+          url: "graphing/infrastructure/process"
           weight: 50
           
       lognav:

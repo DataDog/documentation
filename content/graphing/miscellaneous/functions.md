@@ -261,4 +261,4 @@ Approximate the metric with a piecewise function composed of constant-valued seg
 ### anomalies()
 Overlay a gray band showing the expected behavior of a series based on past behavior; see our [anomaly Monitor](/monitors/monitor_types/anomaly) page for more info.
 ### outliers()
-Highlight outlier series; see our [outlier Monitor](/monitor/monitor_types/outlier) page for more info.
+Highlight outlier series; see our [outlier Monitor](/monitors/monitor_types/outlier) page for more info.

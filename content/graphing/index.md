@@ -7,7 +7,7 @@ customnav: graphingnav
 alias:
         - /guides/graphing
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/miscellaneous/graphingjson)
 
 ## Find the Graph Editor
 
