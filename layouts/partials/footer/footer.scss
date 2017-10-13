@@ -1,3 +1,6 @@
+$footer_height: 333px;
+$footer_height_sm: 650px;
+
 html {
   position: relative;
   min-height: 100%;
@@ -5,7 +8,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 333px;
+  margin-bottom: $footer_height;
 }
 
 $footer-font-color: rgba(255,255,255,.5);
@@ -16,7 +19,7 @@ body > footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height:333px;
+  height:$footer_height;
   background: linear-gradient(180deg,#443e48 0,#110617);
   color:$footer-font-color;
   .container {
@@ -63,3 +66,15 @@ body > footer {
     }
   }
 }
+
+
+@media (max-width: 767px) {
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: $footer_height_sm;
+  }
+  body > footer {
+    height:$footer_height_sm;
+  }
+}
+

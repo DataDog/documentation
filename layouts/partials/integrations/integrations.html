@@ -58,7 +58,25 @@
     {{ end }}
 </div>
 
-<div class="integration-tiles">
+<!-- using 5 col -->
+<!--<div class="row no-gutters integration-tiles mt-4">
+    {{ range $i, $v := $integration_list }}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mb-4">
+            <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+                <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
+                <div class="card-body">
+                    <a class="card-button" href="{{ .Site.BaseURL }}{{$v.docs_link}}">
+                        <h4 class="card-title">{{ $v.public_title }}</h4>
+                        <p class="card-text">{{ $v.short_description }}</p>
+                        <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {{ end }}
+</div>-->
+
+<div class="integration-tiles mt-4">
     {{ range $i, $v := $integration_list }}
         <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">

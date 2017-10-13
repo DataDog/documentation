@@ -18,6 +18,17 @@ $theme-colors: (
         dark: $gray-800
 );
 
+$spacers: (
+        0: 0,
+        1: ($spacer * .25),
+        2: ($spacer * .5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 3),
+        // my pixel sized spacing
+        40: ($spacer * 2.5)
+);
+
 $font-family-sans-serif: "NationalWeb", Helvetica, Arial, sans-serif;
 $font-family-monospace:  "RobotoMono-Regular", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:       $font-family-sans-serif;

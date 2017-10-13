@@ -10,6 +10,9 @@ $tilecolors: (
 );
 
 .tile-nav {
+  div:nth-child(n+4) .tile {
+    margin-bottom:0px;
+  }
   .tile {
     display:block;
     height: 194px;
@@ -42,6 +45,16 @@ $tilecolors: (
       .title {
         color: $color;
       }
+    }
+  }
+}
+
+
+//@include media-breakpoint-up(xs) {
+@media (max-width: 575px) {
+  .tile-nav {
+    .tile {
+      height: 154px;
     }
   }
 }
