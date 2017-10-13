@@ -90,6 +90,7 @@ The GovCloud and China regions do not currently support IAM role delegation. If 
         "cloudwatch:List*",
         "codedeploy:List*",
         "codedeploy:BatchGet*",
+        "directconnect:Describe*",
         "dynamodb:List*",
         "dynamodb:Describe*",
         "ec2:Describe*",
@@ -204,6 +205,13 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `s3:GetObject`: Fetch available trails
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
+
+### Direct Connect
+
+* `directconnect:DescribeConnections`: Used to list available Direct Connect connections.
+* `directconnect:DescribeTags`: Used to gather custom tags applied to Direct Connect connections.
+
+For more information on [Direct Connect policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_directconnect.html), review the documentation on the AWS website.
 
 ### DynamoDB
 
