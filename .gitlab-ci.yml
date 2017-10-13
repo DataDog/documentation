@@ -156,7 +156,6 @@ index_algolia:
     - index_algolia
   only:
     - master
-    - /.+?\/[a-zA-Z0-9_-]+/
 
 rollback_live:
   <<: *base_template
