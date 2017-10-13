@@ -104,3 +104,30 @@ How can we work around this problem? One approach is to add a `rollup()` to forc
 Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" >}}
+
+### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?
+
+
+For the AWS No Data errors, the issue here has to do with how frequently we
+receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
+APIs, data is often delayed by 10 or more minutes, so we generally recommend
+that an alert for an AWS metric be set to have a threshold window of at least
+30 minutes or an hour (you can see this in step 3 of alert creation, “during
+the last…”). Switching the time frame on this alert will resolve this issue, or
+you can install the agent on some AWS hosts to get more up-to-date data to
+alert on. Overall, we’re always working towards getting data more efficiently
+from AWS.
+
+### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used?
+
+
+* Yes, this can be done! Here is an example for creating a disk space in use
+alert when at 80% or above:
+  1. Select a metric like "system.disk.in_use".
+  2. Select the "threshold alert" type.
+  3. For set alert grouping, select "simple alert".
+  4. Set alert conditions: Select Above and for the value put 0.8.
+  5. Add a custom message for alert if you'd like.
+* You can read more about setting up monitors [here][alerts-1].
+
+[alerts-1]: /monitors

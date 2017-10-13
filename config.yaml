@@ -307,6 +307,38 @@ languages:
           url: "graphing/miscellaneous"
           weight: 80
 
+      developersnav:
+        - identifier: customnav_developersnav
+          url: "#"
+          weight: 10
+
+        - identifier: customnav_developersnav_index
+          url: "developers/"
+          weight: 10
+
+        - identifier: customnav_developersnav_api
+          url: "api/"
+          weight: 10
+
+        - identifier: customnav_developersnav_dogstatsd
+          url: "developers/dogstatsd"
+          weight: 10        
+
+        - identifier: customnav_developersnav_api
+          url: "api/"
+          weight: 10
+          
+      agentnav:
+        - identifier: customnav_agentnav
+          url: "#"
+          weight: 10
+
+      getting_started:
+        - identifier: customnav_gettingstartednav
+          url: "#"
+          weight: 10
+
+
   ja:
     #languagename: "日本語"
     weight: 1

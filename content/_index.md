@@ -38,7 +38,7 @@ aliases:
 </h3>
 <p><strong>Not sure where to look?</strong> Our documentation is split into guides and references. Guides explain how to
     accomplish a particular task with Datadog, while the references are more general (as you might expect).
-    It might be a good idea to start with the <a href="/overview/">Datadog Overview</a>, which explains Datadog’s
+    It might be a good idea to start with the <a href="/getting_started/overview/">Datadog Overview</a>, which explains Datadog’s
 capabilities at a high level.</p>
 <p><strong>Search for it!</strong> If you know roughly what you are looking for, enter it in the search box on the top left of the sidebar.</p>
 <p><strong>If you have questions, we’re here to help.</strong> You can get in touch with

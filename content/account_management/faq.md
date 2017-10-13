@@ -24,3 +24,7 @@ The admin of the account should enter the email addresses of team members
 * The full license agreement can be found [here][other-2].
 * The agent is entirely open source and can be found [here][other-3].
 * Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
+
+### What is the difference between an Admin and a User in Datadog?
+
+Admins have just a few extra capabilities that standard users do not have. This includes access to billing info, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
