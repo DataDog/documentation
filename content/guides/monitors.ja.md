@@ -78,7 +78,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 [Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitoring)ページを参照して下さい。
 
-{{< img src="guides/monitor/nav.png" >}}
+{{< img src="monitors/index/nav.png" >}}
 
 <!--
 ### Choose what to monitor
@@ -121,7 +121,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 1. アラートの検知手法の設定
 
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+    {{< img src="monitors/index/alert_type.png" alt="alert type" >}}
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較する、最も一般的なアラート検知の方法です。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは正常な範囲か値が事前に分かっている場合に使用します。
 
@@ -144,7 +144,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 -->
 
 2. メトリクスとその対象範囲(スコープ)の設定
-  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
+  {{< img src="monitors/index/metric_scope.png" alt="metric scope" >}}
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
@@ -171,7 +171,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 -->
 
 3. アラートのグループ化についての設定
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" >}}
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -241,7 +241,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="monitors/index/metric_threshold.png" alt="metric threshold" >}}
 
       メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -321,7 +321,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 ### 通知先の設定
 
 
-{{< img src="guides/monitor/notification.png" alt="notification" >}}
+{{< img src="monitors/index/notification.png" alt="notification" >}}
 
 1. Monitorの通知に**タイトル**　を付けましょう。多くの場合、簡潔な説明を使用することが重要です。なぜならばチームメンバーが、何が起こっているかを直ぐに理解することができるからです。
 
@@ -350,7 +350,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 設定画面の右手 **Export Monitor** をクリックすることで、Monitor 設定のJSONをエクスポートすることができます。
 Monitor 設定をプログラマティックに管理しデプロイする場合は、まずDatadogのUIで雛形となるMonitorを設定してJSONでエクスポートして利用するのが簡単です:
 
-{{< img src="guides/monitor/export_monitor_json.jpg" alt="export monitor" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" >}}
 
 <!--
 ## Scheduling Downtime
@@ -384,7 +384,7 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 
 Manage Downtime のページでは、アクティブなものとスケジュールされたもの、両方のダウンタイムのリストが表示されます。各ダウンタイムを選択することで、対象となるホストとMonitor設定の詳細を確認することができます。
 
-{{< img src="guides/monitor/downtime-manage.png" alt="downtime-manage" >}}
+{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" >}}
 
 <!--
 ### Schedule Downtime
@@ -396,7 +396,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
    {{< img src="guides/monitor/downtime-silence.png" alt="downtime-silence" >}}
 
-   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
+   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section]() of the Graphing Primer using JSON for further information about scope.
 
    If you choose to silence all monitors constrained by a scope, clicking the "Preview affected monitors" will show which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule will also be silenced.
 
@@ -421,7 +421,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. 停止するMonitorを選択する
 
-   {{< img src="guides/monitor/downtime-silence.png" alt="downtime-silence" >}}
+   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" >}}
 
    停止したい特定のMonitorを指定するか、ここでは特定のMonitorは指定せずすべてのMonitorを停止の対象とします。続いて、ダウンタイムの対象を限定するために、特定のホスト、デバイス、あるいは任意のタグによって範囲(スコープ)の設定をします。範囲(スコープ)の設定については、グラフ表示入門のページのJSONの使用方法、[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)も併せて参照してください。
 
@@ -431,13 +431,13 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. スケジュールをセットする
 
-   {{< img src="guides/monitor/downtime-schedule.png" alt="downtime-schedule" >}}
+   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" >}}
 
    ダウンタイムをスケジュールする日時をここで設定します。あるいは、空欄のままにしてダウンタイムを即刻開始することもできます。また、定期的な計画停止のために繰り返しのスケジュールを設定することも可能です。
 
 3. チームに通知するためのメッセージ本文を追加で設定する
 
-   {{< img src="guides/monitor/downtime-notify.png" alt="downtime-notify" >}}
+   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" >}}
 
    ダウンタイム設定についてチームに通知するメッセージを入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)でも記述することができます。"Notify your team"フィールドでは、メッセージを送りたいチームメンバー個人あるいは特定のサービス [integtration](https://app.datadoghq.com/account/settings#integrations) (インストール済みのインテグレーション)を選択することができます。
 
@@ -573,11 +573,11 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 探していたMonitorが得られたあとは、検索結果の各Monitor横にあるチェックボックスを使用して編集したいMonitorを1つ以上選択します。STATUS列 見出しの横にある一番上のチェックボックスを選択すると、すべての検索結果を選択できます。検索結果の右上にあるボタン（Mute, Resolve, Delete そして Edit Tags）を使用して、一括してMonitorを変更します。
 
-{{< img src="guides/monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
 
 個々のMonitorを編集するには、編集したいMonitorにマウスオーバーし、その行の右端にあるボタン (Edit, Clone, Mute, Delete)　を使用します。Monitorの詳細を表示するには、そのタイトルをクリックしてステータスページにアクセスします。
 
-{{< img src="guides/monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+{{< img src="monitors/manage_monitors/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
 
 <!--
 ## Manage Triggered Monitors with group-level granularity

@@ -12,16 +12,16 @@ sidebar:
       href: "libraries/"
     - text: Graphing
       href: "graphing/"
-    - text: Infrastructure
-      href: "infrastructure/"
     - text: Integrations
       href: "integrations/"
+    - text: Monitor
+      href: "monitors/"
     - text: DogStatsD
       href: "guides/dogstatsd/"
+    - text: Account Management
+      href: "account_management/"
     - text: FAQ
       href: "faq/"
-    - text: Billing FAQ
-      href: "guides/billing/"
 aliases:
   - /basic_agent_usage/
   - /guides/
