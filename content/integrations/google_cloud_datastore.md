@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_datastore
+description: "Track Datastore read/write performance, request counts, and more."
 ---
 
 ## Overview

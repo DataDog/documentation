@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_event_hub
 newhlevel: true
+description: "Track key Azure Event Hub metrics."
 ---
 
 ## Overview

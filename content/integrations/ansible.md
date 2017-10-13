@@ -5,6 +5,7 @@ kind: integration
 newhlevel: true
 doclevel: basic
 git_integration_title: ansible
+description: "Track failed tasks and see playbook runs in your event stream."
 ---
 
 {{< img src="integrations/ansible/ansibledashboard.png" >}}
@@ -41,3 +42,6 @@ To install the Datadog Agent using Ansible, refer to the [installation documenta
 ### Metrics
 
 {{< get-metrics-from-git >}}
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).

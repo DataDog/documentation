@@ -4,6 +4,7 @@ integration_title: AWS API Gateway
 kind: integration
 git_integration_title: amazon_api_gateway
 newhlevel: true
+description: "Track Amazon API gateway errors."
 ---
 
 ## Overview

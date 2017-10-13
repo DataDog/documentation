@@ -3,6 +3,7 @@ title: Datadog-Microsoft Azure Integration
 integration_title: Microsoft Azure
 kind: integration
 git_integration_title: azure
+description: "Collect metrics from instances and many, many Azure services."
 sidebar:
   nav:
     - header: Azure integration

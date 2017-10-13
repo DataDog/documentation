@@ -4,6 +4,7 @@ integration_title: HipChat
 kind: integration
 newhlevel: true
 git_integration_title: hipchat
+description: "Send Datadog alerts and graphs to your team's Hipchat room."
 ---
 
 {{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" >}}
@@ -29,8 +30,7 @@ Tick the checkbox if you want to be notified for every comment, in all configure
 You also share graphs or send Monitor alerts to HipChat rooms using `@hipchat-<chat_name>`.
 
 <div class="alert alert-warning">
-"If you are using a HipChat API V1 token and your chat handle contains special characters like commas or brackets, you don't need to escape them when you enter the handle; the autocomplete box does that for you.<br><br>
-If you are using a HipChat API V2 token, your chat handle may ONLY include lowercase alphanumeric characters and the special characters '-' and '_'.
+If you are using a HipChat API V1 token and your chat handle contains special characters like commas or brackets, you don't need to escape them when you enter the handle; the autocomplete box does that for you.
 </div>
 
 #### HipChat Server

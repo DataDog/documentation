@@ -16,7 +16,7 @@ if [ ${RUN_SERVER} == true ]; then
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
 		npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
-        echo "building gulp"
+        echo "starting gulp build"
         gulp build
         sleep 5
 	fi
