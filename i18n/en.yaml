@@ -31,9 +31,6 @@
 - id: menu_references_graphing
   translation: "Graphing"
 
-- id: menu_references_graphingjson
-  translation: "Graphing using JSON"
-
 - id: menu_references_infrastructure
   translation: "Infrastructure"
 

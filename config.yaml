@@ -38,40 +38,28 @@ languages:
           weight: 30
         - identifier: menu_references_monitoring
           name: ""
-          url: "monitoring/"
+          url: "monitors/"
           weight: 40
         - identifier: menu_references_graphing
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_infrastructure
-          name: ""
-          url: "infrastructure/"
-          weight: 60
         - identifier: menu_references_integrations
           name: ""
           url: "integrations/"
-          weight: 70
-        - identifier: menu_references_dogstatsd
-          name: ""
-          url: "guides/dogstatsd/"
-          weight: 80
-        - identifier: menu_references_examples
-          name: ""
-          url: "examples/"
-          weight: 90
+          weight: 60
         - identifier: menu_references_videos
           name: ""
           url: "videos/"
-          weight: 100
+          weight: 90
         - identifier: menu_references_account_management
           name: ""
           url: "account_management"
-          weight: 110
+          weight: 100
         - identifier: menu_references_faq
           name: ""
           url: "faq/"
-          weight: 120
+          weight: 110
           
       basic_agent:
         - identifier: amazonlinux
