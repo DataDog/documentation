@@ -6,7 +6,7 @@ aside.sidenav {
   height:100%;
   position:relative;
   z-index:2;
-  padding-right:30px;
+  padding-right:15px;
   &:before,
   &:after {
     content:"";
@@ -23,6 +23,25 @@ aside.sidenav {
     background:#F2F2F2;
     height:50px;
   }
+  &> .row {
+    &:before,
+    &:after {
+      content:"";
+      position:absolute;
+      margin-left:-2000px;
+      left:0;
+      top:0;
+      right:0;
+      bottom:0;
+      background:#F8F8F8;
+      z-index:-1;
+    }
+    &:after {
+      background:#F2F2F2;
+      height:50px;
+    }
+  }
+
   h4 {
     padding:10px 0 10px 10px;
     color:$ddpurple;
@@ -30,6 +49,7 @@ aside.sidenav {
     font-weight:200;
   }
   .sidenav-search {
+    margin-right: 30px;
     .input-group-addon {
       background:none;
       border:none;

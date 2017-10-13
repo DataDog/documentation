@@ -5,9 +5,9 @@
     {{ $codeList := sort (where .Site.Pages "Type" "=" "apicode") "Params.order" }}
     {{ $codeListCount := (len $codeList)}}
 
-    <div class="row sticky" style="z-index:9;">
+    <div class="row sticky api-nav no-gutters" style="">
         <div class="col-sm-6"></div>
-        <div class="col-sm-6 api-code">
+        <div class="col-sm-6">
             <ul class="nav">
                 <li class="nav-item">
                     <a class="lang-btn nav-link active" href="#" data-lang="curl">Curl</a>
