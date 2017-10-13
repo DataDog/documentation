@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: zendesk
 ---
 
-{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" responsive="true" >}}
 
 ## Overview
 

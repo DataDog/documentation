@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" >}}
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" responsive="true" >}}
 
 ## Overview
 
@@ -48,7 +48,7 @@ You will also need the DataDog API Key which can be created in the DataDog porta
 }
 {{< /highlight >}}
 Catchpoint will now send any alerts directly to the Events stream in DataDog.
-{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration" >}}
+{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration" responsive="true" >}}
 
 ## Data Collected
 ### Metrics

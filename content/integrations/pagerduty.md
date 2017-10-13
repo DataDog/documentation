@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" >}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" responsive="true" >}}
 
 ## Overview
 
@@ -39,4 +39,4 @@ You must include the PagerDuty notification in the `{{is_resolve}}` context of y
 
 Use "@pagerduty-[serviceName]" in your monitor message. If you start typing it in your monitor **Say what's happening** section, you should see it autocomplete. 
 
-{{< img src="integrations/pagerduty/pagerduty_faq_1.png" >}}
+{{< img src="integrations/pagerduty/pagerduty_faq_1.png" responsive="true" >}}

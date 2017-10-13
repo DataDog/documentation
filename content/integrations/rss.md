@@ -6,7 +6,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/rss/rss.png" alt="RSS event" >}}
+{{< img src="integrations/rss/rss.png" alt="RSS event" responsive="true" >}}
 
 ## Overview
 Capture RSS feed activity in Datadog to:
@@ -24,4 +24,4 @@ Configuration requires:
 
 **Optional**: You can enter a username and a password to access the RSS feed
 
-{{< img src="integrations/rss/rss_setup.png" alt="RSS setup" >}}
+{{< img src="integrations/rss/rss_setup.png" alt="RSS setup" responsive="true" >}}

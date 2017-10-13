@@ -7,7 +7,7 @@ updated_for_agent: 5.8.5
 newhlevel: true
 ---
 
-{{< img src="integrations/awselb/elb.png" alt="ELB default dashboard" >}}
+{{< img src="integrations/awselb/elb.png" alt="ELB default dashboard" responsive="true" responsive="true" >}}
 
 ## Overview
 

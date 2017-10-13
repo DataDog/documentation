@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: amazon_route53
 ---
 
-{{< img src="integrations/awsroute53/route53_graph.png" >}}
+{{< img src="integrations/awsroute53/route53_graph.png" responsive="true" >}}
 
 ## Overview
 

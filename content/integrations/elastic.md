@@ -9,7 +9,7 @@ slug: elasticsearch
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" >}}
+{{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

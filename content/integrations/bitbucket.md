@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 ---
 
-{{< img src="integrations/bitbucket/integrations-bitbucket.gif" >}}
+{{< img src="integrations/bitbucket/integrations-bitbucket.gif" responsive="true" >}}
 
 ## Overview
 

@@ -7,7 +7,7 @@ newhlevel: true
 git_integration_title: honey badger
 ---
 
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" >}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" responsive="true" >}}
 
 ## Overview
 

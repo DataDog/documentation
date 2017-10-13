@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/solr/solrgraph.png" alt="Solr Graph" >}}
+{{< img src="integrations/solr/solrgraph.png" alt="Solr Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

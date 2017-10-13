@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/iis/iisgraph.png" alt="IIS Graph" >}}
+{{< img src="integrations/iis/iisgraph.png" alt="IIS Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

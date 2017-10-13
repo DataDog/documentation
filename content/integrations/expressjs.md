@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: express
 ---
 
-{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph" >}}
+{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph" responsive="true" >}}
 
 ## Overview
 

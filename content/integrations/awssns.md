@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: amazon_sns
 ---
 
-{{< img src="integrations/awssns/snsdashboard.png" alt="SNS Dashboard" >}}
+{{< img src="integrations/awssns/snsdashboard.png" alt="SNS Dashboard" responsive="true" >}}
 
 ## Overview
 

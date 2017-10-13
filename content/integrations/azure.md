@@ -176,11 +176,11 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 2. In the leftmost blade, select "Azure Active Directory"
 3. Under properties, copy the Directory ID Value
 
-    {{< img src="integrations/azure/Azure_tenant_name.png" >}}
+    {{< img src="integrations/azure/Azure_tenant_name.png" responsive="true" >}}
 
 4. Paste the ID under "Tenant Name/ID" in the form on the Azure setup tile
 
-    {{< img src="integrations/azure/tenant_name_form.png" >}}
+    {{< img src="integrations/azure/tenant_name_form.png" responsive="true" >}}
 
 ##### Creating the Web Application
 
@@ -192,14 +192,14 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
   * Leave Application "Type as Web app/ API"
 4. Press "Create"
 
-    {{< img src="integrations/azure/Azure_create_ad.png" >}}
+    {{< img src="integrations/azure/Azure_create_ad.png" responsive="true" >}}
 
 5. Once it is created, select the App from the list of App Registrations
 6. Copy the "Application ID" and paste the value into "Client ID" in the form on the Azure setup tile
 
-    {{< img src="integrations/azure/Azure_client_id.png" >}}
+    {{< img src="integrations/azure/Azure_client_id.png" responsive="true" >}}
 
-    {{< img src="integrations/azure/client_id_form.png" >}}
+    {{< img src="integrations/azure/client_id_form.png" responsive="true" >}}
 
 7. For the same app, go to "All settings"
 8. Go to "Keys"
@@ -207,9 +207,9 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
   * Make sure to note when the key will expire!
 10. When the Secret Key is shown, copy and paste it in "Client Secret" in the form on the Azure setup tile
 
-    {{< img src="integrations/azure/Azure_client_secret.png" >}}
+    {{< img src="integrations/azure/Azure_client_secret.png" responsive="true" >}}
 
-    {{< img src="integrations/azure/client_secret_form.png" >}}
+    {{< img src="integrations/azure/client_secret_form.png" responsive="true" >}}
 
 11. Click "Install Integration" to complete the application creation process
 
@@ -241,7 +241,7 @@ azure role assignment create --objectId {object-Id} --roleName Reader --subscrip
 
 **In a few minutes, metrics from applications under that subscription will begin to appear!**
 
-{{< img src="integrations/azure/azure_vm_screenboard.png" >}}
+{{< img src="integrations/azure/azure_vm_screenboard.png" responsive="true" >}}
 Naviate to the [Azure VM Default Dashboard][5] to see this dashboard populate with your infrastructure's data
 
 Learn more about how to monitor Azure VM performance metrics with [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Azure VMs.
@@ -257,7 +257,7 @@ VMs matching a given tag can also be excluded by adding '!' before the tag. For 
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ~~~
 
-{{< img src="integrations/azure/filter_form.png" >}}
+{{< img src="integrations/azure/filter_form.png" responsive="true" >}}
 
 ### Deploy Agents
 
@@ -295,11 +295,11 @@ Here are some common issues you might be seeing.
 2. In the leftmost blade, select "Azure Active Directory"
 3. Under properties, it is the Directory ID
 
-    {{< img src="integrations/azure/Azure_tenant_name.png" >}}
+    {{< img src="integrations/azure/Azure_tenant_name.png" responsive="true" >}}
 
 Your tenant name is also available from the URL after navigating to the [classic portal][4]. It is the text in between (**not including**) the @ and # symbol
 
-{{< img src="integrations/azure/azure_tenant_url.png" >}}
+{{< img src="integrations/azure/azure_tenant_url.png" responsive="true" >}}
 
 ### Unable to login
 If you have experienced an error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attach a screenshot.
@@ -325,7 +325,7 @@ After locating your VM:
 3. Select the metrics you would like to collect (we recommend "Basic metrics", "Network and web metrics", and ".Net metrics". Un-checking logs collection could save you some storage space. Linux Virtual Machines only collect "Basic" and "Boot" diagnostics)
 4. Click Save to save your changes
 
-    {{< img src="integrations/azure/azure_enable_diagnostics.png" >}}
+    {{< img src="integrations/azure/azure_enable_diagnostics.png" responsive="true" >}}
 
 
    [1]: https://app.datadoghq.com/account/settings#integrations/azure

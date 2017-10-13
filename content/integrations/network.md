@@ -19,7 +19,7 @@ platformmetrics:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" >}}
+{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

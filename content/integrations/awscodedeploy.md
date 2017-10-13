@@ -6,7 +6,7 @@ git_integration_title: amazon_codedeploy
 newhlevel: true
 ---
 
-{{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
+{{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" responsive="true" >}}
 
 ## Overview
 

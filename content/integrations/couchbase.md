@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: couchbase
 ---
 
-{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" >}}
+{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

@@ -7,7 +7,7 @@ git_integration_title: azure_vm_scale_set
 newhlevel: true
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" >}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" responsive="true" >}}
 
 ## Overview
 Virtual machine scale sets are an Azure Compute resource you can use to deploy, manage, and autoscale a set of identical VMs.

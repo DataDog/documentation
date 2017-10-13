@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: amazon_elasticache
 ---
 
-{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard" >}}
+{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard" responsive="true" >}}
 
 ## Overview
 
@@ -23,7 +23,7 @@ To collect all available ElastiCache metrics, you need to do two things:
 
 The following diagram shows how Datadog collects metrics directly from CloudWatch via the native ElastiCache integration, and how it can additionally collect native metrics directly from the backend technology: Redis or Memcached. By collecting from the backend directly, you will have access to a greater number of important metrics, and at a higher resolution.
 
-{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache, Redis and Memcached integrations" >}}
+{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache, Redis and Memcached integrations" responsive="true" >}}
 
 #### How this works
 
@@ -37,11 +37,11 @@ Since the Agent is not running on an actual ElastiCache instance, but on a remot
 
 First navigate to the AWS Console, open the ElastiCache section and then the Cache Clusters tab to find the cluster you want to monitor. It should look like:
 
-{{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" >}}
+{{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" responsive="true" >}}
 
 Then click on the “node” link to access its endpoint URL:
 
-{{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" >}}
+{{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" responsive="true" >}}
 
 Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (e.g. **replica-001**). You will need these values to configure the agent and to create graphs and dashboards.
 
@@ -69,7 +69,7 @@ After a few minutes, ElastiCache metrics and Redis/Memcached metrics will be acc
 
 Here's an example of setting up a graph to combine cache hit metrics from ElastiCache with native latency metrics from Redis using the same `cacheclusterid` tag **replicaa-001**.
 
-{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" >}}
+{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" responsive="true" >}}
 
 ## Data Collected
 ### Metrics

@@ -35,7 +35,7 @@ From your Desk account, add an API application on the Settings -> API -> My Appl
 
 Fill out the form as shown, leaving the latter two URL fields blank. Desk should then generate a consumer key, consumer secret, access token, and access secret for your application.
 
-{{< img src="desk_config.png" >}}
+{{< img src="desk_config.png" responsive="true" >}}
 
 Then from your Datadog account, enter the corresponding information on the [Desk tile](https://app.datadoghq.com/account/settings#integrations/desk). You will also need to enter your company's unique Desk domain name.
 
@@ -48,7 +48,7 @@ Deskのアカウントにログインし、`Setting` -> `API` -> `My Application
 
 以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成します。
 
-{{< img src="integrations/desk/desk_config.png" alt="desk config" >}}
+{{< img src="integrations/desk/desk_config.png" alt="desk config" responsive="true" >}}
 
 次に、Datadogインテグレーションページから[Deskのタイル](https://app.datadoghq.com/account/settings#integrations/desk)を選択し、先ほどDeskで生成した認証情報を入力します。
 又このタイルでは、あなたの会社に割り当てられたDeskドメイン名を入力する必要があります。

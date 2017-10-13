@@ -16,9 +16,9 @@ The execution of the Agent is controlled by a Windows service.
 
 You can use the Datadog Agent Manager that you can find in the Start Menu.
 
-{{< img src="guides/basic_agent_usage/windows/windows-start-menu.png" >}}
+{{< img src="guides/basic_agent_usage/windows/windows-start-menu.png" responsive="true" >}}
 
-{{< img src="guides/basic_agent_usage/windows/manager-snapshot.png" >}}
+{{< img src="guides/basic_agent_usage/windows/manager-snapshot.png" responsive="true" >}}
 
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`

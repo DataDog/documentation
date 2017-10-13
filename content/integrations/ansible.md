@@ -7,7 +7,7 @@ doclevel: basic
 git_integration_title: ansible
 ---
 
-{{< img src="integrations/ansible/ansibledashboard.png" >}}
+{{< img src="integrations/ansible/ansibledashboard.png" responsive="true" >}}
 
 ## Overview
 

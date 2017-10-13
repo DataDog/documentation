@@ -7,7 +7,7 @@ newhlevel: true
 updated_for_agent: 5.8.5
 ---
 
-{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}
+{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" responsive="true" >}}
 
 ## Overview
 

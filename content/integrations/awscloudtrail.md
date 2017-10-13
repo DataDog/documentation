@@ -5,7 +5,7 @@ kind: integration
 newhlevel: true
 ---
 
-{{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
+{{< img src="integrations/awscloudtrail/cloudtrail_event.png" responsive="true" >}}
 
 ## Overview
 

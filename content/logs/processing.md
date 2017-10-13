@@ -13,7 +13,7 @@ Datadog's log management is currently in private beta. If you would like to appl
 ## Overview
 
 To access the processing panel use the upper left menu:
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines pannel" >}}
+{{< img src="logs/processing/processing_panel.png" alt="Pipelines pannel" responsive="true" >}}
 
 ## Processing Pipelines 
 ### Pipelines Goal 
@@ -55,7 +55,7 @@ Integration pipelines are automatically installed when you activate an [integrat
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" >}}
+{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" >}}
 
 ## Processors
 
@@ -67,7 +67,7 @@ The different kind of processors are explained below.
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event:
 
-{{< img src="logs/processing/parser.png" alt="Parser" >}}
+{{< img src="logs/processing/parser.png" alt="Parser" responsive="true" >}}
 
 Read more about this in the [parsing section](/logs/parsing)
 
@@ -84,7 +84,7 @@ As Datadog receives logs, it timestamps them using the value(s) from any of thes
 
 If your logs put their dates in an attribute not in this list, use the log date remapper processor to define their date attribute as the official log timestamp:
 
-{{< img src="logs/processing/log_date_remapper.png" alt="Log date remapper" >}}
+{{< img src="logs/processing/log_date_remapper.png" alt="Log date remapper" responsive="true" >}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 
@@ -92,7 +92,7 @@ If your logs don't contain any of the default attributes and you haven't defined
 
 Use this processor if you want to assign some attributes as the official severity, just enter the attribute path in the processor tile as follow:
 
-{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity remapper processor tile" >}}
+{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity remapper processor tile" responsive="true" >}}
 
 It transforms this log:
 
@@ -119,7 +119,7 @@ However, beware that each incoming severity value is mapped as follows:
 
 This processor remaps any attribute(s) to another one, for instance here it remaps “user” to “user.firstname”
 
-{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" >}}
+{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" >}}
 
 It transforms this log:
 
@@ -131,7 +131,7 @@ Into this log:
 ### URL Parser 
 
 This processor extracts query params and other important parameter from a URL, just enter the source attribute of your url:
-{{< img src="logs/processing/url_processor.png" alt="Url Processor" >}}
+{{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" >}}
 
 ### Useragent parser
 
@@ -141,10 +141,10 @@ It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.
 
 These settings: 
-{{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" >}}
+{{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" responsive="true" >}}
 
 Give the following results:
-{{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" >}}
+{{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" >}}
 
 ## What's next
 

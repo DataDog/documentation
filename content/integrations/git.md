@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/git/git_event.png" alt="Git event" >}}
+{{< img src="integrations/git/git_event.png" alt="Git event" responsive="true" >}}
 
 ## Overview
 

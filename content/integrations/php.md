@@ -6,7 +6,7 @@ doclevel: basic
 newhlevel: true
 ---
 
-{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" >}}
+{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" responsive="true" >}}
 
 ## Overview
 

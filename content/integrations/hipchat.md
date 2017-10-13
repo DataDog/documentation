@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: hipchat
 ---
 
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" >}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" responsive="true" >}}
 
 ## Overview
 
@@ -39,7 +39,7 @@ If you host your own HipChat server, enter the server's hostname [here](https://
 
 Tick the **Ignore SSL** checkbox ONLY if your HipChat server's certificate is self-signed.
 
-{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" >}}
+{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" responsive="true" >}}
 
 ## Metrics
 

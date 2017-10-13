@@ -11,7 +11,7 @@ Datadog's log management is currently in private beta. If you would like to appl
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
 
 ## Getting started with the Agent
 

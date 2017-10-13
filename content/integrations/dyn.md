@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: dyn
 ---
 
-{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview" >}}
+{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview" responsive="true" >}}
 
 ## Overview
 

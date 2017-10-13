@@ -6,7 +6,7 @@ doclevel: basic
 git_integration_title: btrfs
 description: "{{< get-desc-from-git >}}"
 ---
-{{< img src="integrations/btrfs/btrfs_metric.png" >}}
+{{< img src="integrations/btrfs/btrfs_metric.png" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

@@ -9,7 +9,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 On each graph you will find a pencil icon that opens the graph editor.
 
-{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" >}}
+{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" responsive="true" >}}
 
 The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
@@ -17,7 +17,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" >}}
+{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" >}}
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 
@@ -37,7 +37,7 @@ Once you have a metric in mind to display in your graph, select your visualizati
 The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, {{< collapse id="collapseTimeseries" >}}click here{{< /collapse >}}. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" >}}
+  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" >}}
 </div>
 
 #### Heatmap
@@ -45,7 +45,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, {{< collapse id="collapseHeatmap" >}}click here{{< /collapse >}}. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-  {{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" >}}
+  {{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" >}}
 </div>
 
 #### Distribution
@@ -53,7 +53,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, {{< collapse id="collapseDistribution" >}}click here{{< /collapse >}}. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-  {{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" >}}
+  {{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" responsive="true" >}}
 </div>
 
 
@@ -62,7 +62,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  {{< collapse id="collapseTopList" >}}click here{{< /collapse >}}. Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
-  {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" >}}
+  {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" responsive="true" >}}
 </div>
 
 
@@ -71,7 +71,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, {{< collapse id="collapseChangegraph" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" >}}
+  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" responsive="true" >}}
 </div>
 
 #### Hostmap
@@ -79,7 +79,7 @@ The Change graph will show you the change in a value over the time period chosen
 The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, {{< collapse id="collapseHostmap" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
-  {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" >}}
+  {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 </div>
 
 
@@ -107,7 +107,7 @@ To use the rollup function, click the plus sign to the right of the aggregation 
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
-{{< img src="graphing/references-graphing-rollup-example.png" alt="rollup example" >}}
+{{< img src="graphing/references-graphing-rollup-example.png" alt="rollup example" responsive="true" >}}
 
 When switching to the JSON view, the query will look like this:
 
@@ -136,11 +136,11 @@ The Datadog UI supports the ability to graph your metrics with various arithmeti
 You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric. 
 For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
 
-{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" responsive="true" >}}
 
 This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2. 
 
-{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" responsive="true" >}}
 
 #### Arithmetic between two Metrics
 
@@ -153,7 +153,7 @@ This can be done in the same manner as above, utilizing the "advanced..." option
 Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter: the first metric is represented by a, the second metric is represented b, and so on. 
 Then in the `Graph these queries as` box, you can enter the arithmetic you would like, in this case: `( a / b )`
 
-{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" responsive="true" >}}
 
 ### Set Y-axis scale
 

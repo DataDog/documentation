@@ -8,7 +8,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/haproxy/haproxydash.png" alt="HAProxy default dashboard" >}}
+{{< img src="integrations/haproxy/haproxydash.png" alt="HAProxy default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

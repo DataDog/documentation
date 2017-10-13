@@ -17,7 +17,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 On each graph you will find a pencil icon that opens the graph editor.
 
-{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" >}}
+{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" responsive="true" >}}
 
 The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
  -->
@@ -26,7 +26,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 グラフを開くと右上隅に鉛筆マークがあります。このマークをクリックするとグラフエディターがポップアップします。
 
-{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" >}}
+{{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" responsive="true" >}}
 
 グラフエディターには**Share**, **JSON**, **Edit**の3つのタブがあります。 **Share**タブでは、グラフを外部のwebページに挿入するためのコードを取得可能です。　**JSON**タブはより柔軟な設定が可能なエディターである一方、使用するにはグラフを定義する言語を理解しておく必要があります。 **Edit**はデフォルトのタブであり、グラフ表示のオプションをGUIから選択して設定することができます。最新の機能は **JSON**エディターでのみ使用できる場合があります。
 
@@ -35,7 +35,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" >}}
+{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" >}}
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 -->
@@ -44,7 +44,7 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 
 グラフエディターウィンドウを開くと、最初は**Edit**タブがセットされています。このインターフェイスでグラフをあれこれ操作するほとんどの設定が選択できます。以下は、一般的なPostgresインテグレーションダッシュボードでのグラフの例です:
 
-{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" >}}
+{{< img src="graphing/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" >}}
 
 ダッシュボードの中でグラフを操作するにはいくつかのステップがあります。
 
@@ -78,7 +78,7 @@ Once you have a metric in mind to display in your graph, select your visualizati
 The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. To see an example of a timeseries graph, {{< collapse id="collapseTimeseries" >}}click here{{< /collapse >}}. Timeseries is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" >}}
+  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" >}}
 </div>
 -->
 
@@ -87,7 +87,7 @@ The Timeseries visualization is great for showing one or more metrics over time.
 Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可視化するのに最適です。グラフ表示する時間の幅は、タイムボード上の設定あるいはスクリーンボードでの各グラフの設定によって決まります。Timeseriesグラフの表示はlines(折れ線グラフ), areas(面グラフ), bars(棒グラフ)を選択できます。Timeseriesグラフの例を見るには、{{< collapse id="collapseTimeseries" >}}ここをクリック{{< /collapse >}}. Timeseriesグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTimeseries" markdown="1">
-  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" >}}
+  {{< img src="graphing/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" >}}
 </div>
 
 <!--
@@ -96,7 +96,7 @@ Timeseriesグラフは1つまたは複数のメトリクスの時間推移を可
 The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be. To see an example of a heatmap, {{< collapse id="collapseHeatmap" >}}click here{{< /collapse >}}. Heatmap is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-{{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" >}}
+{{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" >}}
 </div>
 -->
 
@@ -105,7 +105,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*hosts* )を可視化するのに最適です。 ホストから得られたメトリクスで値が多く分布しているほど、その値の部分は濃い色を示します。Heatmapグラフの例を見るには、{{< collapse id="collapseHeatmap" >}}ここをクリック{{< /collapse >}}. Heatmapグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseHeatmap" markdown="1">
-{{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" >}}
+{{< img src="graphing/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" >}}
 </div>
 
 <!--
@@ -114,7 +114,7 @@ Heatmapグラフは多くのタグで集計されたメトリクス(例えば,*h
 The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. To see an example of a distribution graph, {{< collapse id="collapseDistribution" >}}click here{{< /collapse >}}. Distribution is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-{{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" >}}
+{{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" responsive="true" >}}
 </div>
 -->
 
@@ -123,7 +123,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 Distributionグラフは多くのタグで集計されたメトリクスを可視化するもう一つの方法です。Heatmapグラフとは異なり、DistributionグラフのX軸は時間ではなくメトリクスの値になり、Y軸はその分布の度数を示します。Distributionグラフの例は、{{< collapse id="collapseDistribution" >}}ここをクリック{{< /collapse >}}. Distributionグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseDistribution" markdown="1">
-{{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" >}}
+{{< img src="graphing/references-graphing-distribution-example.png" alt="Distribution" responsive="true" >}}
 </div>
 
 <!--
@@ -132,7 +132,7 @@ Distributionグラフは多くのタグで集計されたメトリクスを可�
 The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. To see an example of a Toplist,  {{< collapse id="collapseTopList" >}}click here{{< /collapse >}} Toplist is available on both timeboards and screenboards.
 
 <div class="collapse" id="collapseTopList" markdown="1">
- {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" >}}
+ {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" responsive="true" >}}
 </div>
 -->
 
@@ -141,7 +141,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない順、などホスト毎のメトリクスの値を大きいものあるいは小さいものから順に並べてリストしたい場合に最適です。Toplistのグラフの例を見るには,  (#collapseTopList){{< collapse id="collapseTopList" >}}ここをクリック{{< /collapse >}}. Toplistグラフはタイムボードとスクリーンボードの両方で利用することができます。
 
 <div class="collapse" id="collapseTopList" markdown="1">
- {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" >}}
+ {{< img src="graphing/references-graphing-toplist-example.png" alt="TopList" responsive="true" >}}
 </div>
 
 <!--
@@ -150,7 +150,7 @@ Toplistグラフは、CPU消費の高い順、残ディスク容量の少ない�
 The Change graph will show you the change in a value over the time period chosen. To see an example of a Change graph, {{< collapse id="collapseChangegraph" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" >}}
+  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" responsive="true" >}}
 </div>
 -->
 
@@ -159,7 +159,7 @@ The Change graph will show you the change in a value over the time period chosen
 Changeグラフは指定した時間枠でのメトリクスの変化量を可視化することができます。Changeグラフの例を見るには、{{< collapse id="collapseChangegraph" >}}ここをクリック{{< /collapse >}}.
 
 <div class="collapse" id="collapseChangegraph" markdown="1">
-  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" >}}
+  {{< img src="graphing/references-graphing-change-example.png" alt="Changegraph" responsive="true" >}}
 </div>
 
 #### Hostmap
@@ -167,13 +167,13 @@ Changeグラフは指定した時間枠でのメトリクスの変化量を可�
 The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. To see an example of a Hostmap, {{< collapse id="collapseHostmap" >}}click here{{< /collapse >}}.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
- {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" >}}
+ {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 </div>
 -->
 Hostmapはメインメニューから利用できるHostmapと同様に、あらゆるメトリクスについて指定したホストのスコープで可視化することができます。Hostmapの例は、{{< collapse id="collapseHostmap" >}}ここをクリック{{< /collapse >}}.
 
 <div class="collapse" id="collapseHostmap" markdown="1">
- {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" >}}
+ {{< img src="graphing/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 </div>
 
 <!--
@@ -234,7 +234,7 @@ To create a single line that represents the total available disk space on averag
 
 例えば、全てのマシンの利用可能なディスク容量の平均値をとり、そのメトリクスは60秒ごとの平均値としてロールアップしたグラフ表示をさせる場合には、以下のような指定します:
 
-{{< img src="graphing/references-graphing-rollup-example.png" alt="rollup example" >}}
+{{< img src="graphing/references-graphing-rollup-example.png" alt="rollup example" responsive="true" >}}
 
 <!--
 When switching to the JSON view, the query will look like this:
@@ -284,22 +284,22 @@ DatadogのUIでは、さまざまな演算オプションを利用してメト�
 You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric.
 For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
 
-{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" responsive="true" >}}
 
 This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2.
 
-{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" responsive="true" >}}
 -->
 
 #### メトリクスの値に整数演算を行う
 
 メトリクスに対して算術演算を行うことによって、メトリクスの値のグラフへの表示方法を変更することができます。例えば、あるメトリクス値を倍精度で可視化したい場合を考えます。`system.load.5`を例にとると、:
 
-{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" >}}
+{{< img src="graphing/arithmetic_1.png" alt="Arithmetic 1" responsive="true" >}}
 
 グラフエディターをクリックし、そこで "advanced..." を選択すると、グラフエディター内で設定することができます。ここで、`Graph these queries as` ボックスに算術演算を入力します。この例では、倍精度で可視化したいため、a * 2 と入力します。
 
-{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" >}}
+{{< img src="graphing/arithmetic_2.png" alt="Arithmetic 2" responsive="true" >}}
 
 <!--
 #### Arithmetic between two Metrics
@@ -313,7 +313,7 @@ This can be done in the same manner as above, utilizing the "advanced..." option
 Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter: the first metric is represented by a, the second metric is represented b, and so on.
 Then in the `Graph these queries as` box, you can enter the arithmetic you would like, in this case: `( a / b )`
 
-{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" responsive="true" >}}
 
 <div class="alert alert-warning">
 If you are performing arithmetic on two or more metrics and see a blank graph,
@@ -332,7 +332,7 @@ If you are performing arithmetic on two or more metrics and see a blank graph,
 可視化したいすべてのメトリクスを追加すると、それぞれに文字が割り当てられていることがわかります。最初のメトリクスは a 、2番目のメトリクスは b というようにです。
 ここで、`Graph these queries as`ボックスに実施したい演算を入力します。この例では、`( a / b )`と入力します。
 
-{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" >}}
+{{< img src="graphing/arithmetic_3.png" alt="Arithmetic 3" responsive="true" >}}
 
 <div class="alert alert-warning">
 2つ以上のメトリクスの値の演算を行った際にグラフが表示されない場合は、

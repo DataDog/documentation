@@ -6,7 +6,7 @@ git_integration_title: amazon_dynamodb
 newhlevel: true
 ---
 
-{{< img src="integrations/awsdynamo/dynamodb.png" alt="DynamoDB default dashboard" >}}
+{{< img src="integrations/awsdynamo/dynamodb.png" alt="DynamoDB default dashboard" responsive="true" >}}
 
 ## Overview
 

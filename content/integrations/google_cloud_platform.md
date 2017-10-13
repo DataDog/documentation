@@ -49,7 +49,7 @@ Optionally, you can limit the GCE instances that are pulled into Datadog by ente
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ~~~
 
-{{< img src="integrations/google_cloud_platform/GCPSetup.png" alt="settings" >}}
+{{< img src="integrations/google_cloud_platform/GCPSetup.png" alt="settings" responsive="true" >}}
 
 ## Data Collected
 ### Metrics

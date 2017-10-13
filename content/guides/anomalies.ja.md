@@ -46,7 +46,7 @@ The chart below shows a dashboard chart that uses anomaly detection. The grey ba
 
 下記では、Anomaly Detectionを適用したメトリクスのグラフを表示しています。グレーのバンドは過去の挙動から期待されるメトリクスの正常な変動幅を示しています。青と赤の折れ線は、実際に取得されたメトリクスの値です。また、青い線は正常な変動幅に収まっており、赤い線は変動幅を逸脱していることを示しています。
 
-{{< img src="anomalies/dashboard_graph.png" >}}
+{{< img src="anomalies/dashboard_graph.png" responsive="true" >}}
 
 <!--
 To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type and select "lines" from the Display menu. Other visualization types do not yet support anomaly detection. In the chart editor window, you should see something like this:
@@ -54,7 +54,7 @@ To create an anomaly detection graph, start by adding a timeseries graph to your
 
 Anomaly Detectionの利用を開始するには、メトリクスの時系列グラフをダッシュボードに追加することから始めます。下記に示したように、グラフの可視化は "Timeseries" を、グラフ形式を"lines" (折れ線グラフ)として選択します。他の可視化タイプはAnomaly Detectionでは現時点でサポートされておりません。エディター画面は以下のようになります:
 
-{{< img src="anomalies/initial_editor.png" >}}
+{{< img src="anomalies/initial_editor.png" responsive="true" >}}
 
 <!--
 Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the “Modify your query” box, choose the “anomalies” function:
@@ -62,7 +62,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 次に、メトリクスの各設定ボックスの右手、プラスマークをクリックします。“Modify your query”ボックスで "anomalies" 関数を選択します:
 
-{{< img src="anomalies/function_menu.png" >}}
+{{< img src="anomalies/function_menu.png" responsive="true" >}}
 
 <!--
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the grey band. The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. After successfully adding `anomalies`, your editor should show something like this:
@@ -70,7 +70,7 @@ This will add anomaly detection to your expression, and you should immediately s
 
 これによりAnomaly Detectionが適用され、即時グラフのプレビュー画面にグレーのバンドが表示されます。この関数は2つのパラメーターを持っています。1つは、どのアルゴリズムを使用するか。もう1つは`bounds` とラベルされており、グレーのバンドの幅を調整するために使用します。正しく設定されると、エディター画面の表示は以下のようになります:
 
-{{< img src="anomalies/final_editor.png" >}}
+{{< img src="anomalies/final_editor.png" responsive="true" >}}
 
 <!--
 ### Alert on Anomalies
@@ -87,7 +87,7 @@ Start by navigating to the [New Monitor](https://app.datadoghq.com/monitors#/cre
 ダッシュボード上でAnomaly Detectionを可視化するのに加えて、Anomaly Detectionで判定されたメトリクスの異常値を元にアラートMonitorを作成することができます。
 [New Monitor](https://app.datadoghq.com/monitors#/create) ページから新規アラートMonitorの作成を選択し、"Metric"(メトリクスを対象にしたアラート)を選択します。step(1)では他のメトリクスアラートと同様に設定をし、step(2)で"Anomaly Alert"を選択します。
 
-{{< img src="anomalies/monitor_options.png" >}}
+{{< img src="anomalies/monitor_options.png" responsive="true" >}}
 
 <!--
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive you monitor is to different types of anomalies.
@@ -130,23 +130,23 @@ All of the seasonal algorithms may use up to a couple of months of historical da
 
 The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
-{{< img src="anomalies/alg_comparison_1.png" >}}
+{{< img src="anomalies/alg_comparison_1.png" responsive="true" >}}
 
 In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="anomalies/alg_comparison_2.png" >}}
+{{< img src="anomalies/alg_comparison_2.png" responsive="true" >}}
 
 The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
 
-{{< img src="anomalies/alg_comparison_3.png" >}}
+{{< img src="anomalies/alg_comparison_3.png" responsive="true" >}}
 
 The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-insensitive, while _Agile_ and _Adaptive_ are not. In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
 
-{{< img src="anomalies/alg_comparison_scale.png" >}}
+{{< img src="anomalies/alg_comparison_scale.png" responsive="true" >}}
 
 Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-{{< img src="anomalies/alg_comparison_new_metric.png" >}}
+{{< img src="anomalies/alg_comparison_new_metric.png" responsive="true" >}}
 -->
 
 ### Anomaly Detectionのアルゴリズム
@@ -166,23 +166,23 @@ Anomaly Detectionには、4つの異なるAnomaly Detectionのアルゴリズム
 
 In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
-{{< img src="anomalies/alg_comparison_1.png" >}}
+{{< img src="anomalies/alg_comparison_1.png" responsive="true" >}}
 
 次の図では、メトリクスの推移が急に変化した場合を示しています。 _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="anomalies/alg_comparison_2.png" >}}
+{{< img src="anomalies/alg_comparison_2.png" responsive="true" >}}
 
 さらに次の図では、メトリクスが1時間ほど異常な値に推移していた場合に各アルゴリズムがどのように反応するかを示しています。 _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
 
-{{< img src="anomalies/alg_comparison_3.png" >}}
+{{< img src="anomalies/alg_comparison_3.png" responsive="true" >}}
 
 また、各アルゴリズムでは(Y軸)スケールの違いでも振る舞いが異なります。 _Basic_ と _Robust_ は スケールの違いで差が生じにくい一方で、 _Agile_ と _Adaptive_ は スケールの違いで振る舞いが変わります。 In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
 
-{{< img src="anomalies/alg_comparison_scale.png" >}}
+{{< img src="anomalies/alg_comparison_scale.png" responsive="true" >}}
 
 最後に、それぞれのアルゴリズムが新しいメトリクスの値をどのように扱うかを見てみましょう。 _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-{{< img src="anomalies/alg_comparison_new_metric.png" >}}
+{{< img src="anomalies/alg_comparison_new_metric.png" responsive="true" >}}
 
 <!--
 ## Frequently Asked Questions
@@ -213,42 +213,42 @@ Multi Alert を設定しているときには注意が必要です。`service.re
 
 Looking at many separate timeseries in a single graph can lead to [spaghettification](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/), and the problem gets only worse once the anomaly detection visualization is added in.
 
-{{< img src="anomalies/spaghetti.png" >}}
+{{< img src="anomalies/spaghetti.png" responsive="true" >}}
 
 You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
 
-{{< img src="anomalies/anomaly_multilines.png" >}}
+{{< img src="anomalies/anomaly_multilines.png" responsive="true" >}}
 -->
 ### なぜメトリクスのグループに対してAnomaly Detectionを利用できないのですか？
 
 1つのグラフ表示上で多数の独立した時系列データを可視化しようとすると、 [spaghettification](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/) 問題が生じ得ます。そしてこの問題は、Anomaly Detection をグラフに追加しようとするとさらに悪化してしまいます。
 
-{{< img src="anomalies/spaghetti.png" >}}
+{{< img src="anomalies/spaghetti.png" responsive="true" >}}
 
 1つのグラフ表示上に多数の時系列データを表示させることはもちろん可能ですが、Anomaly Detectionのグレーのバンドの予測値はマウスオーバーした際のみに見えるようになっています。
 
-{{< img src="anomalies/anomaly_multilines.png" >}}
+{{< img src="anomalies/anomaly_multilines.png" responsive="true" >}}
 
 <!--
 ### Will past anomalies affect the current predictions?
 
 All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
 
-{{< img src="anomalies/anomalous_history.png" >}}
+{{< img src="anomalies/anomalous_history.png" responsive="true" >}}
 
 The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
 
-{{< img src="anomalies/no_effect.png" >}}
+{{< img src="anomalies/no_effect.png" responsive="true" >}}
 -->
 ### 異常値が検出された場合、これから予測される異常値は影響を受けますか？
 
 _Basic_ を除く全てのアルゴリズムは膨大な過去の時系列データを使用しているため、ほとんどの異常値に対して堅牢です。最初のグラフでは、メトリックの値が0に下がった後でもグレーのバンドは400K付近に留まっていることがわかります。そして、その後その日中も同様にグレーのバンドが推移していることに注目して下さい。
 
-{{< img src="anomalies/anomalous_history.png" >}}
+{{< img src="anomalies/anomalous_history.png" responsive="true" >}}
 
 2つ目も同じメトリックのグラフですがさらに1日後のものです。グレーのバンドを計算するうえで前日のデータも処理されているものの、当時発生した異常値に対して影響を受けていないことが分かります。
 
-{{< img src="anomalies/no_effect.png" >}}
+{{< img src="anomalies/no_effect.png" responsive="true" >}}
 
 <!--
 ### How should I set the window size and alert threshold?
@@ -290,12 +290,12 @@ Anomaly Detectionアルゴリズムによって描画されるグレーのバン
 
 ここで具体的な例を見てみましょう。`app.requests` メトリクスは非常にノイジーですが、平均値としては8で一定です。ある日、9:00頃に始まった10分間の異常な時間帯があり、その10分間の平均値は10でした。下記のグラフはこの時系列データを1日の時間幅で表したものです。それぞれのデータポイントは5分間を集計したものになっています。
 
-{{< img src="anomalies/disappearing_day.png" >}}
+{{< img src="anomalies/disappearing_day.png" responsive="true" >}}
 
 <!--
 The grey band here makes sense; it is wide enough to capture the noise in the time series. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
 
-{{< img src="anomalies/disappearing_half_hour.png" >}}
+{{< img src="anomalies/disappearing_half_hour.png" responsive="true" >}}
 
 Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
 
@@ -304,7 +304,7 @@ In general, if an anomaly disappears when you zoom in, this doesn't mean that it
 
 この例ではグレーのバンドは適切といえます。この時系列データのノイズを捉えるのに十分な広さの幅です。しかし、9:00頃に始まったノイズを明確に捉えるにはやや狭い幅ともいえます。では、次のグラフはどうでしょうか。ズームインしたグラフは異常な10分間を含む30分の時間幅で表されています。それぞれのデータポイントは10秒間を集計したものになっています。
 
-{{< img src="anomalies/disappearing_half_hour.png" >}}
+{{< img src="anomalies/disappearing_half_hour.png" responsive="true" >}}
 
 繰り返しになりますが、この例でもグレーのバンドは適切のように見えます。なぜなら、異常ではない8:50から9:00と9:10から9:20のデータはバンドの内側に収まっているからです。バンドは狭くさえすれば、いかなる正常なデータも異常値として切り出せます。このバンドが前のグラフよりも8倍近く広くなっていることにお気づきでしょうか？ この9:00から9:10の異常な10分間では、他の部分の時系列データとは少し違うように見えますが、バンドの外側に飛び抜けるほどのものではありません。
 
@@ -319,15 +319,15 @@ For example, many important metrics (e.g., `successful.logins`, `checkouts.compl
 
 It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
 
-{{< img src="anomalies/raw_profile_updates.png" >}}
+{{< img src="anomalies/raw_profile_updates.png" responsive="true" >}}
 
 How can we work around this problem? One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
 
-{{< img src="anomalies/rollup_profile_updates.png" >}}
+{{< img src="anomalies/rollup_profile_updates.png" responsive="true" >}}
 
 Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
-{{< img src="anomalies/ewma_profile_updates.png" >}}
+{{< img src="anomalies/ewma_profile_updates.png" responsive="true" >}}
 -->
 ### Is it possible to capture anomalies that occur within the bounds?
 
@@ -337,12 +337,12 @@ For example, many important metrics (e.g., `successful.logins`, `checkouts.compl
 
 It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
 
-{{< img src="anomalies/raw_profile_updates.png" >}}
+{{< img src="anomalies/raw_profile_updates.png" responsive="true" >}}
 
 How can we work around this problem? One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
 
-{{< img src="anomalies/rollup_profile_updates.png" >}}
+{{< img src="anomalies/rollup_profile_updates.png" responsive="true" >}}
 
 Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
-{{< img src="anomalies/ewma_profile_updates.png" >}}
+{{< img src="anomalies/ewma_profile_updates.png" responsive="true" >}}

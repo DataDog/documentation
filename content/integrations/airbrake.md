@@ -9,7 +9,7 @@ git_integration_title: airbrake
 
 ## Overview
 
-{{< img src="integrations/airbrake/airbrakeevent.png" style="width: 500px;" >}}
+{{< img src="integrations/airbrake/airbrakeevent.png" style="width: 500px;" responsive="true" >}}
 
 Connect Airbrake to Datadog to:
 

@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" >}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" responsive="true" >}}
 
 ## Overview 
 

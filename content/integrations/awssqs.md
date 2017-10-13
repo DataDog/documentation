@@ -6,7 +6,7 @@ newhlevel: true
 git_integration_title: amazon_sqs
 ---
 
-{{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" >}}
+{{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" responsive="true" >}}
 
 ## Overview
 

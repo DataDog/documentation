@@ -6,7 +6,7 @@ git_integration_title: amazon_rds
 newhlevel: true
 ---
 
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" >}}
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" responsive="true" >}}
 
 ## Overview
 
@@ -31,7 +31,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 #### Enhanced RDS Integration 
 
 Enable Enhanced Monitoring for your RDS instance. This can either be done during instance creation or afterwards by choosing **Modify** under **Instance Actions**. We recommend choosing 15 for Monitoring Granularity.
-{{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" >}}
+{{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" responsive="true" >}}
 
 ##### Create your KMS Key
 1. Open the Encryption keys section of the AWS Identity and Access Management (IAM) console at https://console.aws.amazon.com/iam/home#encryptionKeys.
@@ -101,7 +101,7 @@ Please ignore it, the Test button doesn't work with this setup.
 #### Native Database Integration
 
   1.  Navigate to the AWS Console and open the RDS section to find the instance you want to monitor.
-  {{< img src="integrations/awsrds/rds-console.png" alt="RDS console" >}}
+  {{< img src="integrations/awsrds/rds-console.png" alt="RDS console" responsive="true" >}}
   2.  Copy the endpoint URL (e.g. **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**); You will need it when you configure the agent. Also make a note of the `DB Instance identifier` (e.g. **mysqlrds**). You will need it to create graphs and dashboards.
 
 ### Configuration
@@ -174,10 +174,10 @@ Checks
 ### Usage
 
 After a few minutes, RDS metrics and metrics from MySQL, Aurora, MariaDB, SQL Server, or PostgreSQL will be accessible in Datadog in the Metrics Explorer, in Graphs and in Alerts. Here's an example of an Aurora dashboard displaying a number of metrics from both RDS and the MySQL integration. Metrics from both integrations on the instance `quicktestrds` are unified using the `dbinstanceidentifier` tag.
-{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash" >}}
+{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash" responsive="true" >}}
 
 Here is the default dashboard for MySQL on Amazon RDS:
-{{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL default dashboard" >}}
+{{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL default dashboard" responsive="true" >}}
 
 Learn more about how to monitor MySQL on Amazon RDS performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor MySQL on Amazon RDS.
 

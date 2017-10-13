@@ -6,7 +6,7 @@ git_integration_title: lightbendrp
 newhlevel: true
 ---
 
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" >}}
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" responsive="true" >}}
 
 ## Overview 
 

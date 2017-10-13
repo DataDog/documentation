@@ -10,7 +10,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/docker/docker.png" alt="Docker default dashboard" >}}
+{{< img src="integrations/docker/docker.png" alt="Docker default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

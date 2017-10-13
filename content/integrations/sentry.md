@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/sentry/sentry.png" alt="sentry event" >}}
+{{< img src="integrations/sentry/sentry.png" alt="sentry event" responsive="true" >}}
 
 ## Overview
 

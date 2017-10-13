@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 ---
 
-{{< img src="integrations/nodejs/nodejs_graph.png" alt="Node JS graph" >}}
+{{< img src="integrations/nodejs/nodejs_graph.png" alt="Node JS graph" responsive="true" >}}
 
 ## Overview
 

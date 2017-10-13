@@ -6,7 +6,7 @@ git_integration_title: new_relic
 newhlevel: true
 ---
 
-{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" >}}
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" responsive="true" >}}
 
 ## Overview
 

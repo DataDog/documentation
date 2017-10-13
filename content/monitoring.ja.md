@@ -51,7 +51,7 @@ on the left. This document will walk through the configuration of each type.
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-{{< img src="guides/monitor/host_monitor.png" >}}
+{{< img src="guides/monitor/host_monitor.png" responsive="true" >}}
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.
@@ -61,7 +61,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 *Datadog Agent バージョン 5.0.0 以上が必要です。*
 
-{{< img src="guides/monitor/host_monitor.png" >}}
+{{< img src="guides/monitor/host_monitor.png" responsive="true" >}}
 
 Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハートビート信号を
 `UP`というステータスで定期的に送信します。
@@ -91,7 +91,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 ### Metric Monitors
 
 1. Choose the detection method
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" responsive="true" >}}
 
     A **threshold alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -123,13 +123,13 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
     arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
+  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" responsive="true" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -153,7 +153,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" responsive="true" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -222,7 +222,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 1. アラートのタイプを選択します。
 
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" responsive="true" >}}
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較する、最も一般的なアラート検知の方法です。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは正常な範囲か値が事前に分かっている場合に使用します。
 
@@ -238,7 +238,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 2. メトリクスとそのメトリクスを監視する範囲(スコープ)を設定します。
 
-    {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
+    {{< img src="guides/monitor/metric_scope.png" alt="metric scope" responsive="true" >}}
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
@@ -246,7 +246,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 3. アラートグループを選択します。
 
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -260,7 +260,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-    {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
+    {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" responsive="true" >}}
 
     メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -300,7 +300,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 ### Integration Monitors
 
 
-{{< img src="guides/monitor/es_status.png" >}}
+{{< img src="guides/monitor/es_status.png" responsive="true" >}}
 
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
@@ -318,7 +318,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 -->
 ### インテグレーションを対象にしたMonitor
 
-{{< img src="guides/monitor/es_status.png" >}}
+{{< img src="guides/monitor/es_status.png" responsive="true" >}}
 
 インテグレーションタブをクリックすると、既にインストールされているインテグレーションのタイルがタブの下に表示されます。そのタイルを選択すると`Status`または`Metric`というMonitorの設定を選択できるようになります。
 
@@ -330,7 +330,7 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 ### Process Monitors
 
 
-{{< img src="guides/monitor/process_monitor.png" >}}
+{{< img src="guides/monitor/process_monitor.png" responsive="true" >}}
 
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
@@ -345,7 +345,7 @@ point they should notify.
 -->
 ### プロセスを対象にしたMonitor
 
-{{< img src="guides/monitor/process_monitor.png" >}}
+{{< img src="guides/monitor/process_monitor.png" responsive="true" >}}
 
 プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 
@@ -382,7 +382,7 @@ point they should notify.
 ### Network Monitors
 
 
-{{< img src="guides/monitor/network_monitor.png" >}}
+{{< img src="guides/monitor/network_monitor.png" responsive="true" >}}
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/integrations/tcp_check) for details on Agent
@@ -390,7 +390,7 @@ configuration.
 -->
 ### ネットワークを対象にしたMonitor
 
-{{< img src="guides/monitor/network_monitor.png" >}}
+{{< img src="guides/monitor/network_monitor.png" responsive="true" >}}
 
 ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/integrations/tcp_check) を参照してください。
 
@@ -457,7 +457,7 @@ configuration.
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-{{< img src="guides/monitor/event_monitor.png" >}}
+{{< img src="guides/monitor/event_monitor.png" responsive="true" >}}
 
 1. Select the query and parameters (status, priority, sources and tags) you want
     to monitor.
@@ -475,7 +475,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 イベントを対象にしたMonitorでは、指定した条件に合致する場合にアラートで通知することができます。
 
-{{< img src="guides/monitor/event_monitor.png" >}}
+{{< img src="guides/monitor/event_monitor.png" responsive="true" >}}
 
 1. 監視する文字列とパラメータ(ステータス, 優先度, ソース, タグ)を設定します。
 
@@ -490,7 +490,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 ### Custom Monitors
 
 
-{{< img src="guides/monitor/custom_monitor.png" >}}
+{{< img src="guides/monitor/custom_monitor.png" responsive="true" >}}
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
@@ -501,7 +501,7 @@ or service checks.
 -->
 ### カスタムチェックを対象にしたMonitor
 
-{{< img src="guides/monitor/custom_monitor.png" >}}
+{{< img src="guides/monitor/custom_monitor.png" responsive="true" >}}
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
@@ -564,14 +564,14 @@ No Article at this time.
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="guides/monitor/notification.png" >}}
+{{< img src="guides/monitor/notification.png" responsive="true" >}}
 -->
 
 ## 通知先の設定
 
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
-{{< img src="guides/monitor/notification.png" >}}
+{{< img src="guides/monitor/notification.png" responsive="true" >}}
 
 
 <!--
@@ -634,21 +634,21 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    {{< img src="guides/monitor/conditionalvars.png" >}}
+    {{< img src="guides/monitor/conditionalvars.png" responsive="true" >}}
 
     Here is an example of how you can set it up in the editor:
 
-    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
+    {{< img src="guides/monitor/templateconditionaleditor.png" responsive="true" >}}
 
 
     The corresponding trigger event notification will look like this:
 
-    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
+    {{< img src="guides/monitor/templateconditionaltrigger.png" responsive="true" >}}
 
 
     and the recovery notification:
 
-    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
+    {{< img src="guides/monitor/templateconditionalrecover.png" responsive="true" >}}
 
 
     The conditional variables available are `is_alert`, `is_alert_recovery`,
@@ -663,12 +663,12 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     Here is an example of how you can use template variables for a multi alert:
 
-    {{< img src="guides/monitor/templatevareditor.png" >}}
+    {{< img src="guides/monitor/templatevareditor.png" responsive="true" >}}
 
 
     and the corresponding event notification:
 
-    {{< img src="guides/monitor/templatevar.png" >}}
+    {{< img src="guides/monitor/templatevar.png" responsive="true" >}}
 
     The tag template variables available depend on the tag group selected in Step 1
     of the monitor editor. The possible options will automatically populate at the
@@ -684,7 +684,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    {{< img src="guides/monitor/templatevar_short.png" >}}
+    {{< img src="guides/monitor/templatevar_short.png" responsive="true" >}}
 
     Note that template variable content is escaped by default. If your variable
     contains JSON or code that you would NOT like to be escaped, then use triple braces
@@ -710,26 +710,26 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   {{< img src="guides/monitor/scope_match_editor.png" >}}
+   {{< img src="guides/monitor/scope_match_editor.png" responsive="true" >}}
 -->
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
-    {{< img src="guides/monitor/conditionalvars.png" >}}
+    {{< img src="guides/monitor/conditionalvars.png" responsive="true" >}}
 
     次が、通知本文の記述の例です:
 
-    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
+    {{< img src="guides/monitor/templateconditionaleditor.png" responsive="true" >}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
+    {{< img src="guides/monitor/templateconditionaltrigger.png" responsive="true" >}}
 
 
     リカバーした際の通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
+    {{< img src="guides/monitor/templateconditionalrecover.png" responsive="true" >}}
 
 
     使用可能な条件変数は `is_alert`, `is_alert_recovery`,
@@ -740,19 +740,19 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     次が、`Multi Alert`でtemplate variables(タグ変数)を使った例です:
 
-    {{< img src="guides/monitor/templatevareditor.png" >}}
+    {{< img src="guides/monitor/templatevareditor.png" responsive="true" >}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="guides/monitor/templatevar.png" >}}
+    {{< img src="guides/monitor/templatevar.png" responsive="true" >}}
 
 
     利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
     一方で、アラートを通知する範囲(スコープ)を指定しているタグには自動的にタイトルに挿入されるものがあります。このため、範囲指定のために多くのタグを使用している場合にはアラートのタイトルが不必要に長くなる可能性があります。もしタグ変数をアラート本文に使用しているのであれば、スペースを節約するために**Include triggering tags in notification title** のチェックを外すことも有効です。この設定によってアラートのタイトルは以下のようになります。
 
-    {{< img src="guides/monitor/templatevar_short.png" >}}
+    {{< img src="guides/monitor/templatevar_short.png" responsive="true" >}}
 
     テンプレート変数はデフォルトでエスケープされます。もし使用したい変数がJSONやコードを含んでおり、それらをエスケープさせたくない場合は、2重カッコのかわりに3重カッコを使用して下さい。(例 `{{{event.text}}}`)
 
@@ -770,7 +770,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
    次が、アラート発報の範囲情報に基づいて異なる本文を表示する例です:
 
-   {{< img src="guides/monitor/scope_match_editor.png" >}}
+   {{< img src="guides/monitor/scope_match_editor.png" responsive="true" >}}
 
 <!--
 #### Variable availability

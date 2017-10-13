@@ -11,7 +11,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/tcpcheck/netgraphs.png" alt="Network Graphs" >}}
+{{< img src="integrations/tcpcheck/netgraphs.png" alt="Network Graphs" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
