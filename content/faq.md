@@ -108,7 +108,7 @@ alert when at 80% or above:
   5. Add a custom message for alert if you'd like.
 * You can read more about setting up monitors [here][alerts-1].
 
-[alerts-1]: /guides/monitoring/
+[alerts-1]: /monitors
 
 <!--
 ===============================================================================
@@ -323,33 +323,6 @@ Yes you can! Follow the steps below to set this up:
 3. Add tags in postgres.yaml: `dbinstanceidentifier:(rds-instance-id), enginename:postgres`
 4. Restart the agent
 
-
-
-<!--
-===============================================================================
-    Billing
-===============================================================================
--->
-
-## Billing
-
-### How can I change the Billing contact?
-
-
-You can set a specific email address to receive invoices, even if that address
-is not a team member within Datadog (invoices@yourcompany.com) [here][billing-1].
-
-### Where can I get a copy of the invoice?
-
-
-As an admin you can check out past invoices [here][billing-2].
-
-***You can read more about billing [here][billing-3].***
-
-[billing-1]: https://app.datadoghq.com/account/billing
-[billing-2]: https://app.datadoghq.com/account/billing_history
-[billing-3]: /guides/billing/
-
 <!--
 ===============================================================================
     Events
@@ -429,94 +402,6 @@ about Markdown, visit the [Markdown docs][events-4].
 [events-3]: /api#events
 [events-4]: http://daringfireball.net/projects/markdown/syntax
 
-<!--
-===============================================================================
-    Graphing
-===============================================================================
--->
-
-## Graphing
-
-
-### How do I do arithmetic with grouped metrics?
-
-
-To graph the sum of `app.foo.bar{env:staging}` and `app.foo.baz{env:staging}`
-grouped `by {host}`, write a graph query that looks like:
-
-~~~
-metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
-~~~
-
-### What's the syntax to sum multiple datapoints into a single line?
-
-
-You can switch commas separating the queries into plus signs, from:
-
-~~~
-"q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
-*1024, sum:system.io.rkb_s{device: sdc}*1024"
-~~~
-
-to:
-
-~~~
-"q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
-*1024 + sum:system.io.rkb_s{device: sdc}*1024"
-~~~
-
-### How do I do graph smoothing?
-
-You can apply smoothing averages to your series by droping to the JSON editor and
-adding ‘ewma’, for example:
-add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
-`ewma_20(exception.invalid{*})`.
-ewma stands for exponentially-moving average and the full list of functions
-you can apply is [here][graphing-1].
-
-### Can I stack CPU metrics on the same graph?
-
-
-Check out our documentation on [stacked series][graphing-2].
-The metric explorer just does one metric per graph, but you can see a stacked CPU graph
-on the overview page by clicking any host [here][graphing-3].
-
-### Is there a way to share graphs?
-
-
-There are two ways to share a graph or screenboard
-
-* In a time board, pick a graph on a dashboard and click on the pencil to edit it.
-Under step 2, "Choose metrics and events," you’ll find the “share” tab that will
-generate an IFRAME of just that graph.
-* In a custom screenboard, click the settings cog in the upper right of the screen,
-then click the "Generate public URL" option. This will create a URL which gives
-live and read-only access to just the contents of that screenboard.
-
-### How do I track cron jobs?
-
-Often, you set cron jobs that trigger some meaningful script that you want to monitor and
-correlate with other metrics. For example, you might have a cron'd script to vacuum a Postgres table every day:
-
-    0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
-
-Vacuum is particularly resource-intensive though, so you might want Datadog events for
-each time they run so you can correlate metrics and other events with vacuums.
-You can do this with the dogwrap command line tool provided by the [datadog python client library][graphing-4]:
-
-    0 0 * * * /path/to/dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
-
-
-This will call the command at the end of the script and
-send Datadog events if it exits with a non-zero exit code (i.e. an error). `--submit_mode all`
-will send events on every run.
-
-(To get the python client lib you can install it with `pip install datadog`).
-
-[graphing-1]: /graphing/#functions
-[graphing-2]: /graphing
-[graphing-3]: http://app.datadoghq.com/infrastructure
-[graphing-4]: https://github.com/DataDog/datadogpy
 
 <!--
 ===============================================================================
@@ -653,28 +538,6 @@ by default you'll get the average across all hosts.
 -->
 
 ## Other
-
-### How do I setup my team in Datadog?
-
-
-The admin of the account should enter the email addresses of team members
-[here][other-1]. Some team best practices are as follows:
-
-* When the team member receives the confirmation email, they will be provided with a link to log in directly. The user should not click ‘sign up’ during this process.
-* If multiple users from the same organization sign up separately, this will register as different organizations in Datadog. Please reach out to support to have these merged, but please note that all information contained in the account getting merged will not be transferred over.
-* The only access controls we have right now are around admin activities (adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.) all users have access to everything; more robust access controls are in our pipeline, but not something we’ve focused a lot of attention on yet.
-* To remove a team member use the “disable” button on the same ‘team’ page (only available for admins). You cannot permanently remove users, just disable; disabled users will only be visible to admins on the team page and can’t log in and any session they have open is invalidated. We don’t fully delete them because they might own events, dashboards, etc. which are not supposed to be removed.
-
-
-### Are my data and credentials safe?
-
-
-* Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
-* All traffic is sent over SSL.
-* All communication to Datadog is via HTTPS.
-* The full license agreement can be found [here][other-2].
-* The agent is entirely open source and can be found [here][other-3].
-* Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
 
 ### I have a feature request. How can I submit it?
 

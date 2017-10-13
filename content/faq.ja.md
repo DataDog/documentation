@@ -399,7 +399,7 @@ documented [here][hostnames]. You can see all names being detected by the Agent 
 
 #### ホスト名はどのように判定され、設定されますか。 {#arch-hostnames}
 
-ホスト名は、Datadog Agentのインストール時に、スクリプトが検出したホスト名になります。詳細に関しては、[Host Name](/ja/hostnames/)のページを参照してください。尚、Datadog Agentによって検出されたホスト名は、次のinfoコマンドを実行することで確認できます: `/etc/init.d/datadog-agent info`
+ホスト名は、Datadog Agentのインストール時に、スクリプトが検出したホスト名になります。詳細に関しては、[Host Name](/ja/graphing/infrastructure)のページを参照してください。尚、Datadog Agentによって検出されたホスト名は、次のinfoコマンドを実行することで確認できます: `/etc/init.d/datadog-agent info`
 
 <!--#### Tell me about tagging! {#tagging}
 
@@ -498,7 +498,7 @@ hostnames [here][hostnames].
 
 #### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
-EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。 従って、実態インスタンスは1つのままです。 尚、このエリアスの作成には、通常約10〜20分かかります。 詳細に関しては、[Host Naming](/ja/hostnames/)のページを参照してください。
+EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。 従って、実態インスタンスは1つのままです。 尚、このエリアスの作成には、通常約10〜20分かかります。 詳細に関しては、[Host Naming](/ja/graphing/infrastructure)のページを参照してください。
 
 <!--#### What metrics will I get from the AWS integration? {#aws-metrics}
 
