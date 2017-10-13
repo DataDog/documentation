@@ -52,17 +52,6 @@
   // Export to global scope.
   window.DD_docs = DD_docs;
 
-  // var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage)
-  // var noOverride = window.location.href.indexOf("overridelang") == -1;
-  // if (noOverride) {
-  //     if (language.indexOf('ja') > -1 && window.location.pathname.indexOf('/ja/') != 0) {
-  //         document.location.href = '/ja' + window.location.pathname;
-  //     } else if (language.indexOf('ja') == -1 && window.location.pathname.indexOf('/ja/') == 0) {
-  //         document.location.href = window.location.pathname.substring(3);
-  //     }
-  // }
-
-
 })();
 
 
@@ -79,14 +68,14 @@ $(document).ready(function () {
 
     'init': function () {
 
-      $('#tipue_search_input').tipuesearch();
 
-      this.h1s = $('.main h1');
-      this.h2s = $('.main h2');
-      this.h3s = $('.main h3');
-      this.h4s = $('.main h4');
-      this.listHeadings();
-      this.setHeadings();
+
+            this.h1s = $('.main h1');
+            this.h2s = $('.main h2');
+            this.h3s = $('.main h3');
+            this.h4s = $('.main h4');
+            this.listHeadings();
+            this.setHeadings();
 
     },
     'listHeadings': function () {
@@ -156,7 +145,7 @@ $(document).ready(function () {
         });
       }
     }
-  }
+  };
 
   $('table').each(function () {
     if (!$(this).hasClass('table')) {
@@ -181,6 +170,57 @@ $(document).ready(function () {
   if (toc) {
     headings.init();
   }
+
+  var client = algoliasearch("EOIG7V0A2O", 'bf60de88836cb62a73509ef075542065');
+  var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
+  var $pagination = $('#tipue_search_content');
+  var query = results[1] || "*";
+
+  // get results from algolia
+  client.search([{
+    indexName: 'docs_english',
+    query: decodeURIComponent(query),
+    params: {
+      hitsPerPage: 200,
+      attributesToRetrieve: "*"
+    }
+  }], function (err, results) {
+    if (!err) {
+      // format and populate results
+      $('#tipue_search_input').val(decodeURIComponent(query));
+      var hits = results['results'][0]['hits'];
+      var formatted_results = "";
+      if (hits.length) {
+        $('#tipue_search_content').prepend('<div id="tipue_search_results_count">' + hits.length + ' results</div>');
+        for (var i in hits) {
+
+          var hit = hits[i];
+                console.log(hit);
+          formatted_results += '<div class="hit">';
+          formatted_results += '<div class="tipue_search_content_title">' +
+            '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
+          formatted_results += '<div class="tipue_search_content_url">' +
+            '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+          var text = hit.page_description;
+          formatted_results += '<div class="tipue_search_content_text">' +
+            text + '</div>';
+          formatted_results += '</div>';
+        }
+      } else {
+        $('#tipue_search_content').prepend('<div id="tipue_search_results_count">' + hits.length + ' results</div>');
+      }
+      $('#tipue_search_content .content').html(formatted_results);
+
+      // load pagination
+      $('#tipue_search_content').pajinate({
+        num_page_links_to_display : 9,
+        items_per_page : 7,
+        wrap_around: false,
+        show_first_last: false
+      });
+
+    }
+  });
 
 });
 

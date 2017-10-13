@@ -19,7 +19,7 @@ def content_location():
 
 
 def index_algolia(app_id, api_key, content_path=None):
-    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips']
+    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips', 'videos']
     languages = ['ja']
 
     files_to_exclude = ['404.html']
@@ -51,6 +51,8 @@ def index_algolia(app_id, api_key, content_path=None):
 
                     with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as myfile:
                         try:
+                            default_description = "See metrics from all of your apps, tools & services in one place with Datadog's cloud monitoring as a service solution. Try it for free."
+
                             html = BeautifulSoup(myfile, "html.parser")
 
                             # title
@@ -60,16 +62,17 @@ def index_algolia(app_id, api_key, content_path=None):
 
                             if title and '://' not in title:
                                 # description
-                                desc_text = ""
-                                main = html.find("div", {"main"})
-                                if main:
-                                    main_text = main.text
-                                    desc_text = main_text.split()[:7000]
+                                main = html.find("div", {'main'}).prettify()[:7000]
 
-                                fm_description = desc = html.findAll(attrs={"name": "description"})
-
-                                desc_text = " ".join(desc_text)
-                                description = desc_text
+                                fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
+                                if fm_description != default_description and '{{' not in fm_description:
+                                    description = fm_description
+                                else:
+                                    p_tags = html.find('p')
+                                    description = str(p_tags)
+                                    next_sibling = p_tags.find_next_sibling()
+                                    if next_sibling and next_sibling.name == 'ul':
+                                        description += str(next_sibling)
 
                                 # create url
                                 url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
@@ -80,8 +83,9 @@ def index_algolia(app_id, api_key, content_path=None):
                                 article['objectID'] = dirpath + '/' + filename
                                 article['URL'] = url
                                 article['title'] = title
-                                article['body'] = description
+                                article['body'] = main
                                 article['file'] = dirpath + '/' + filename
+                                article['page_description'] = description
 
                                 if dirpath.startswith('public/ja'):
                                     language = 'japanese'
