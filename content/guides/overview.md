@@ -112,7 +112,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 {{< img src="guides/overview/monitor.png" >}}
 
-[Monitoring](/guides/monitoring/) gives you the ability to be notified if the aggregate of a specific
+[Monitoring](/monitors) gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
 
 * Across your entire infrastructure

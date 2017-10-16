@@ -49,8 +49,8 @@
 - id: menu_references_videos
   translation: "Videos"
 
-- id: menu_references_billing
-  translation: "Billing"
+- id: menu_references_account_management
+  translation: "Account Management"
 
 - id: menu_references_faq
   translation: "FAQ"
@@ -151,6 +151,72 @@
 
 - id: customnav_infrastructurenav_infrastructure_list
   translation: "Infrastructure List"
+
+
+# Monitor
+
+- id: customnav_monitornav
+  translation: "Alerting (Monitor)"
+- id: customnav_monitornav_index
+  translation: "Monitor index"
+- id: customnav_monitornav_monitor_types
+  translation: "Monitor Types"
+- id: customnav_monitornav_manage_monitor
+  translation: "Manage Monitors"
+- id: customnav_monitornav_check_summary
+  translation: "Check Summary"
+- id: customnav_monitornav_notifications
+  translation: "Monitor Notifications"
+- id: customnav_monitornav_downtimes
+  translation: "Monitor Dowtimes"
+- id: customnav_monitornav_faq
+  translation: "Monitor FAQ"
+
+# Monitor Type
+
+- id: customnav_monitortypenav
+  translation: "Monitor Types"
+- id: customnav_monitortypenav_index
+  translation: "Create a Monitor"
+- id: customnav_monitortypenav_anomaly
+  translation: "Anomaly Monitor"
+- id: customnav_monitortypenav_apm
+  translation: "APM Monitor"
+- id: customnav_monitortypenav_composite
+  translation: "Composite Monitor"
+- id: customnav_monitortypenav_custom_check
+  translation: "Custom Check Monitor"
+- id: customnav_monitortypenav_event
+  translation: "Event Monitor"
+- id: customnav_monitortypenav_host
+  translation: "Host Monitor"
+- id: customnav_monitortypenav_integration
+  translation: "Integration Monitor"
+- id: customnav_monitortypenav_metric
+  translation: "Metric Monitor"
+- id: customnav_monitortypenav_network
+  translation: "Network Monitor"
+- id: customnav_monitortypenav_outlier
+  translation: "Outlier Monitor"
+- id: customnav_monitortypenav_process
+  translation: "Process Monitor"
+
+# Account Management
+
+- id: customnav_accountmanagementnav
+  translation: Account Management 
+- id: customnav_accountmanagementnav_index
+  translation: Overview
+- id: customnav_accountmanagementnav_team
+  translation: Team
+- id: customnav_accountmanagementnav_settings
+  translation: Settings
+- id: customnav_accountmanagementnav_saml
+  translation: SAML
+- id: customnav_accountmanagementnav_multi_account
+  translation: Multi Accounts
+- id: customnav_accountmanagementnav_faq
+  translation: FAQ
 
 # Logs
 

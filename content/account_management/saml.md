@@ -1,33 +1,34 @@
 ---
 title: Single Sign On With SAML
-kind: guide
-listorder: 19
-
+kind: documentation
+autotocdepth: 2
+aliases:
+  - /guides/saml
+customnav: accountmanagementnav
 ---
-This guide assumes that you already have a SAML Identity Provider up and running.
 
-## SAML
+**This documentation assumes that you already have a SAML Identity Provider up and running.**
 
 Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
 
 If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
-{{< img src="guides/saml/saml_configure.png" >}}
+{{< img src="account_management/saml/saml_configure.png" >}}
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
 
 1.  Upload the IdP Metadata from your SAML Identity provider by clicking the "Choose File" button.
 
-    {{< img src="guides/saml/saml_choose_file.png" >}}
+    {{< img src="account_management/saml/saml_choose_file.png" >}}
 
     After you've chosen the file, click "Upload File".
 
 2. Datadog’s [Service Provider metadata can be found here](https://app.datadoghq.com/account/saml/metadata.xml). You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable button.
-{{< img src="guides/saml/saml_enable.png" >}}
+{{< img src="account_management/saml/saml_enable.png" >}}
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the SAML Configuration page.
-{{< img src="guides/saml/saml_enabled.png" >}}
+{{< img src="account_management/saml/saml_enabled.png" >}}
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.
 
    [4]: https://app.datadoghq.com/account/saml/metadata.xml
@@ -88,7 +89,7 @@ It is up to the organization to configure their IdP to not send assertions to Da
 Admins in accounts using SAML can also set the default role for new Just-in-Time users. 
 The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 
 
-{{< img src="guides/saml/saml_jit_default.png" >}}
+{{< img src="account_management/saml/saml_jit_default.png" >}}
 
 
 ### IdP Initiated Login
@@ -98,5 +99,3 @@ The normal workflow is that when the Datadog url is loaded, the browser is redir
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
-
-
