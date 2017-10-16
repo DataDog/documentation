@@ -28,7 +28,7 @@ If you haven't installed the Agent yet, instructions can be found
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
-<a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページに移動し、インストールの手順を確認してください。
+<a href='https://app.datadoghq.com/account/settings#agent/fedora'>Agent</a> ページに移動し、インストールの手順を確認してください。
 
 
 {{< partial name="BasicAgentUsage-nix-ja" markdown="true" >}}

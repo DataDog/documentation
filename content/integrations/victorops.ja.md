@@ -35,11 +35,11 @@ VictorOpsと連携することで、Datadogで検知したアラートを、非�
 
 2. 右側にあるメニューより"Datadog"を選択し、"Enable Integration"をクリックします。
 
-    ![](/images/VO_settings.jpg)
+    {{< img src="integrations/victorops/VO_settings.jpg" alt="vo_settings" >}}
 
 3. VictorOps APIキーをコピーします。
 
-    ![](/images/VO_settings_2.jpg)
+    {{< img src="integrations/victorops/VO_settings_2.jpg" alt="vo_settings_2" >}}
 
 4. DatadogのVictorOpsインテグレーションのポップアップ画面で、先にコピーしたAPIキーを記述します。
 

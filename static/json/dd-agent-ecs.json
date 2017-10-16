@@ -4,7 +4,7 @@
       "name": "dd-agent",
       "image": "datadog/docker-dd-agent:latest",
       "cpu": 10,
-      "memory": 128,
+      "memory": 256,
       "essential": true,
       "mountPoints": [
         {
@@ -25,7 +25,7 @@
       "environment": [
         {
           "name": "API_KEY",
-          "value": "YOUR_API_KEY_GOES_HERE"
+          "value": "INSERT_API_KEY"
         }
       ]
     }

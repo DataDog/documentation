@@ -7,10 +7,9 @@
       "vendor": [
         "src/js/vendor/jquery.js",
         "src/js/vendor/bootstrap.min.js",
-        "src/js/vendor/tipuesearch/tipuesearch-set.js",
-        "src/js/vendor/tipuesearch/tipuesearch_content.js",
-        "src/js/vendor/tipuesearch/tipuesearch.js",
-        "src/js/vendor/jquery.tocible.js"
+        "src/js/vendor/jquery.tocible.js",
+        "src/js/vendor/algoliasearch.min.js",
+        "src/js/vendor/jquery.pajinate.min.js"
       ],
       "main": true
     },

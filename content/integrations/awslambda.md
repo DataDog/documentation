@@ -4,6 +4,7 @@ integration_title: AWS Lambda
 kind: integration
 newhlevel: true
 git_integration_title: amazon_lambda
+description: "Track lambda run times, errors, invocation counts, and more."
 ---
 
 ## Overview
@@ -12,11 +13,12 @@ Amazon Lambda is a compute service that runs code in response to events and auto
 
 Enable this integration to begin collecting Cloudwatch & custom metrics from your Lambda functions.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the <a href="/integrations/aws" target="_blank">Amazon Web Services integration</a>.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Lambda is checked under metric collection.
 
@@ -47,13 +49,13 @@ Where:
 
 * `<metric_name>` uniquely identifies your metric and adheres to the [metric naming policy](http://docs.datadoghq.com/faq/#api)
 
-* `<tag_list>` is optional, comma separated, and must be preceded by `#`. NOTE, The tag `function_name:<name_of_the_function>` will automatically be applied to custom metrics
+* `<tag_list>` is optional, comma separated, and must be preceded by `#`.<br>The tag `function_name:<name_of_the_function>` will automatically be applied to custom metrics
 
-## Sample snippets (in Python):
+#### Sample snippets (in Python):
 
-### Count/Gauge
+##### Count/Gauge
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 value = 42
 metric_type = 'count'
@@ -63,11 +65,11 @@ tags = ['tag1:value', 'tag2']
 print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
     unix_epoch_timestamp, value, metric_type, metric_name, ','.join(tags)
 ))
-~~~
+{{< /highlight >}}
 
-### Histogram
+##### Histogram
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 metric_type = 'histogram'
 metric_name = 'my.metric.name.hist'
@@ -77,13 +79,15 @@ for i in xrange(0,10):
 	print('MONITORING|{0}|{1}|{2}|{3}|#{4}'.format(
     	unix_epoch_timestamp, i, metric_type, metric_name, ','.join(tags)
 ))
-~~~
+{{< /highlight >}}
 
-Note: Using the histogram metric type provides `avg`, `count`, `max`, `min`, `95p`, and `median` values. These values are calculated at one second granularity.
+<div class="alert alert-info">
+Using the histogram metric type provides <code>avg</code>, <code>count</code>, <code>max</code>, <code>min</code>, <code>95p</code>, and <code>median</code> values. These values are calculated at one second granularity.
+</div>
 
-### Service Check
+##### Service Check
 
-~~~
+{{< highlight python >}}
 unix_epoch_timestamp = int(time.time())
 value = 1 # WARNING
 metric_type = 'check'
@@ -92,9 +96,10 @@ metric_name = 'my.metric.name.check'
 print('MONITORING|{0}|{1}|{2}|{3}'.format(
 	timestamp, value, metric_type, metric_name
 ))
-~~~
+{{< /highlight >}}
 
-# Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

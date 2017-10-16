@@ -2,6 +2,9 @@
 title: Using Autodiscovery with Docker
 kind: guide
 listorder: 15
+aliases:
+  - /guides/servicediscovery/
+
 ---
 
 <div class="alert alert-info">
@@ -106,7 +109,7 @@ It looks like a minimal [Apache check configuration](https://github.com/Datadog/
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-If this is too limiting—if you need to apply different check configurations to different containers running the same image—use [labels](#container-labels) to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
+If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
@@ -193,9 +196,9 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
-#### Example: Apache and HTTP checks
+#### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template:
+The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template to monitor whether the website created by the Apache container is available:
 
 ~~~
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -225,7 +228,7 @@ The format is similar to that for key-value stores. The differences are:
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
-#### Pod Example: Apache and HTTP checks
+#### Pod Example: Apache check with website availability monitoring
 
 The following Pod annotation defines two templates—equivalent to those from the end of the previous section—for `apache` containers:
 
@@ -276,9 +279,6 @@ spec:
 ~~~
 
 
-
-
-
 ### Template Source: Docker Label Annotations
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
@@ -321,7 +321,8 @@ LABEL "com.datadoghq.sd.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 ~~~
 
 
-# Reference
+## Reference
+
 
 ### Template Variable Indexes
 
@@ -345,7 +346,7 @@ If you provide a template for the same check type via multiple template sources,
 
 So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
 
-# Troubleshooting
+## Troubleshooting
 
 When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 

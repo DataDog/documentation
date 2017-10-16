@@ -3,20 +3,22 @@ title: Datadog-etcd Integration
 integration_title: etcd
 kind: integration
 git_integration_title: etcd
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/etcd/etcd_graph.png" alt="Etcd Graph" >}}
+
 ## Overview
+//get-overview-from-git//
 
-Capture etcd metrics in Datadog to:
+## Setup
+//get-setup-from-git//
 
-* Monitor the health of your etcd cluster.
-* Know when host configurations may be out of sync.
-* Correlate the performance of etcd with the rest of your applications.
+## Data Collected
+//get-data-collected-from-git//
 
-{{< insert-example-links >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-Furthermore, etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
+## Further Reading
+//get-further-reading-from-git//

@@ -4,6 +4,7 @@ integration_title: AWS Key Management Service
 kind: integration
 git_integration_title: amazon_kms
 newhlevel: true
+description: "Track Amazon KMS key expiration."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ AWS Key Management Service (KMS) is a managed service that makes it easy for you
 
 Enable this integration to see in Datadog all your KMS metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that KMS is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

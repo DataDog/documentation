@@ -5,11 +5,12 @@ kind: integration
 newhlevel: true
 doclevel: basic
 git_integration_title: ansible
+description: "Track failed tasks and see playbook runs in your event stream."
 ---
 
-## Overview
+{{< img src="integrations/ansible/ansibledashboard.png" >}}
 
-{{< img src="ansibledashboard.png" >}}
+## Overview
 
 Install the Datadog Ansible callback integration to:
 
@@ -19,7 +20,8 @@ Install the Datadog Ansible callback integration to:
 
 For more information about using our integration with Ansible, read [this post on our blog](https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/).
 
-## Installation
+## Setup
+### Installation
 
 1.  Ensure the prerequisite python libraries are installed on the server:
 
@@ -36,6 +38,10 @@ For more information about using our integration with Ansible, read [this post o
 
 To install the Datadog Agent using Ansible, refer to the [installation documentation here](https://app.datadoghq.com/account/settings#agent/ansible).
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).

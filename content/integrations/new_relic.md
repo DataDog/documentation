@@ -4,45 +4,48 @@ integration_title: New Relic
 kind: integration
 git_integration_title: new_relic
 newhlevel: true
+description: "See New Relic metrics and events in Datadog."
 ---
+
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" >}}
 
 ## Overview
 
-{{< img src="newrelicdashboard.png" alt="New Relic Dashboard" >}}
-
 Connect to New Relic to:
 
-* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics
+* See key New Relic metrics (like response time and Apdex score) in context with the rest of your Datadog metrics<br> **(only works with New Relic Pro accounts and above)**
 * See New Relic alerts in your event stream
 
-## Installation
-
-### New Relic Alerts in Event Stream
+## Setup
+### Installation
+#### New Relic Alerts in Event Stream
 
 1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
+`https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}`
 
-        https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}
+2.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 
-1.  For 'Custom Payload'(s), select JSON 'Payload Type'.
+#### New Relic APM Metric Collection
 
-### New Relic APM Metric Collection
+1.  Locate your REST API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
 
-1.  Locate your API key on New Relic's API Keys page (**Account Settings** -> **Integrations** -> **API Keys**) and enter it in the form on the [Datadog New Relic Integration](https://app.datadoghq.com/account/settings#integrations/new_relic) page.
+2.  To tag all metrics with your New Relic account number, add an account tag.
 
-    *Note: Metrics can only be imported for New Relic customers at the Pro level or above.*
-
-1.  If you wish to tag metrics at an account level, please add an account tag.
-1.  Choose whether you want to collect your metrics per hosts or app-wide.
-
+3.  Choose whether you want to collect your metrics per hosts or app-wide.
     *Note: Enabling this options will import New Relic hosts to Datadog.*
 
-## Metrics
+<div class="alert alert-warning">
+New Relic custom metrics may take 5-10 minutes to show up in Datadog.
+</div>
+
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
 ## Troubleshooting
 
-**What does the 'Collect metrics by host' option do?**
+### What does the 'Collect metrics by host' option do?
 
 When set, Datadog collects application metrics for every associated hosts,
 instead of the overall host throughput based average.
@@ -53,7 +56,7 @@ across many hosts has an acceptable error rate in aggregate".
 
 This also import New Relic hosts to Datadog Infrastructure section.
 
-**I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?**
+### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
 
 When New Relic computes the aggregate application-level value for
 metrics that are measured at the host level (e.g. response time), they
@@ -89,29 +92,29 @@ Whereas we would simply compute the arithmetic mean:
 
     average response time = (240 + 250 + 50) / 3 = 180.0 ms
 
-**Beta Alerts: How can I include custom tags?**
+### Beta Alerts: How can I include custom tags?
 
 You can include custom tags by utilizing the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, you'll navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. From here, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it will expand to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
-
-    {
-      "account_id": "$ACCOUNT_ID",
-      "account_name": "$ACCOUNT_NAME",
-      "condition_id": "$CONDITION_ID",
-      "condition_name": "$CONDITION_NAME",
-      "current_state": "$EVENT_STATE",
-      "details": "$EVENT_DETAILS",
-      "event_type": "$EVENT_TYPE",
-      "incident_acknowledge_url": "$INCIDENT_ACKNOWLEDGE_URL",
-      "incident_id": "$INCIDENT_ID",
-      "incident_url": "$INCIDENT_URL",
-      "owner": "$EVENT_OWNER",
-      "policy_name": "$POLICY_NAME",
-      "policy_url": "$POLICY_URL",
-      "runbook_url": "$RUNBOOK_URL",
-      "severity": "$SEVERITY",
-      "targets": "$TARGETS",
-      "timestamp": "$TIMESTAMP",
-      "tags": ["application:yourapplication", "host:yourhostname", "sometag"]
-    }
-
+{{< highlight json>}}
+{
+  "account_id": "$ACCOUNT_ID",
+  "account_name": "$ACCOUNT_NAME",
+  "condition_id": "$CONDITION_ID",
+  "condition_name": "$CONDITION_NAME",
+  "current_state": "$EVENT_STATE",
+  "details": "$EVENT_DETAILS",
+  "event_type": "$EVENT_TYPE",
+  "incident_acknowledge_url": "$INCIDENT_ACKNOWLEDGE_URL",
+  "incident_id": "$INCIDENT_ID",
+  "incident_url": "$INCIDENT_URL",
+  "owner": "$EVENT_OWNER",
+  "policy_name": "$POLICY_NAME",
+  "policy_url": "$POLICY_URL",
+  "runbook_url": "$RUNBOOK_URL",
+  "severity": "$SEVERITY",
+  "targets": "$TARGETS",
+  "timestamp": "$TIMESTAMP",
+  "tags": ["application:yourapplication", "host:yourhostname", "sometag"]
+}
+{{< /highlight >}}
 After your modifications are complete, make sure you select 'Update Chanel', for your changes to be saved.

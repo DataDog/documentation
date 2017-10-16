@@ -1,6 +1,6 @@
 ---
-last_modified: 2016/08/17
-translation_status: complete
+last_modified: 2017/08/24
+translation_status: completed
 language: ja
 title: JSONを使用したグラフ表示入門
 kind: documentation
@@ -16,7 +16,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 ## JSONエディターを使用したグラフ表示
 
 
-![JSON Editor](/images/references-graphing-jsoneditor.png)
+{{< img src="graphing/references-graphing-jsoneditor.png" >}}
 
 <!--### Grammar-->
 
@@ -43,22 +43,24 @@ Here is how they fit together in a JSON dictionary:
 
 以下はこれらの要素が、1つのJSON書式で表現された例です:
 
+{{< highlight json >}}
+{
+  "requests": [
     {
-      "requests": [
-        {
-          "q": "metric{scope}"
-        }
-      ],
-      "events": [
-        {
-          "q": "search query"
-        }
-      ],
-      "viz": "visualization type",
-      "yaxis": {
-        "yaxisoptionkey": "yaxisoptionvalue"
-      }
+      "q": "metric{scope}"
     }
+  ],
+  "events": [
+    {
+      "q": "search query"
+    }
+  ],
+  "viz": "visualization type",
+  "yaxis": {
+    "yaxisoptionkey": "yaxisoptionvalue"
+  }
+}
+{{< /highlight >}}
 
 <!--
 In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
@@ -68,7 +70,7 @@ In other words at the highest level the JSON structure is a dictionary with two,
 3. "viz" *
 4. "yaxis"
 
-\* *only requests and viz are required.*
+*only requests and viz are required.*
 -->
 
 JSON書式の一番外側のカッコ内に、先の要素が下記のエントリーとして記述されています:
@@ -78,7 +80,7 @@ JSON書式の一番外側のカッコ内に、先の要素が下記のエント�
 3. "viz" *
 4. "yaxis"
 
-\* *"requests"と"viz"は必ず指定する必要があります。*
+*"requests"と"viz"は必ず指定する必要があります。*
 
 <!--## Requests-->
 
@@ -152,9 +154,7 @@ appending <code>.as_count()</code> or <code>.as_rate()</code> will function corr
 For other metrics, including gauges submitted by statsd, <code>.as_count()</code> and
 <code>.as_rate()</code> will have no effect.
 
-We strongly recommend not using <code>.rollup()</code> and <code>.as_count()</code> within the same query.
-We will also be building these functions fully into the graph editor in the near
-future. For more on <code>.as_count()</code> please see our blog post
+For more on <code>.as_count()</code> please see our blog post
 <a target="_blank" href="https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/">here</a>.
 -->
 
@@ -170,8 +170,6 @@ future. For more on <code>.as_count()</code> please see our blog post
 特定の方法で提出されたメトリクスためのもう一つの上級者向け関数が、``.as_count（）``と``.as_rate（）`` です。
 現状、DogStatsDの"rate", "counter"を使って送信したメトリクスには、``.as_count（）``と``.as_rate（）``を使うことができますが、"gauges"などのそれ以外のメトリクスでは機能しません。
 
-``.rollup()``と``.as_count（）``を同じクエリで使用しないでください。
-また、将来的にはこれらの関数は、グラフエディターで簡単に操作できるようになる予定です(``.rollup()``は利用可能です)。
 ``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
 
 <!-- #### Aggregation Method -->
@@ -243,59 +241,63 @@ For any given metric, data may come from a number of hosts. The data will normal
 <!--
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
+      "q": "system.load.5{intake} * 2"
+    },
+    {
+      "q": "system.load.5{intake}"
     }
+  ]
+}
+{{< /highlight >}}
 
 You can also add, substract, multiply and divide a Series. Beware that
 Datadog does not enforce consistency at this point so you *can* divide
 apples by oranges.
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    }
+{{< highlight json >}}
+{
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "metric{apples} / metric{oranges}"
+      }
+    ]
+}
+{{< /highlight >}}
 -->
 
 時系列データには、簡単な演算( +, -, *, / )を適用することができます。
 次の例では、5分間のload averageの値とその倍の数値をグラフ表示することにします:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.load.5{intake} * 2"
-        },
-        {
-          "q": "system.load.5{intake}"
-        }
-      ]
+      "q": "system.load.5{intake} * 2"
+    },
+    {
+      "q": "system.load.5{intake}"
     }
+  ]
+}
+{{< /highlight >}}
 
 時系列データ同士を、加算 減算 乗算 除算することもできます。
 Datadogでは、ここでは一貫性を強制していないので、*異なるものの除算をすることもできます*。
-
-    {
-        "viz": "timeseries",
-        "requests": [
-          {
-            "q": "metric{apples} / metric{oranges}"
-          }
-        ]
-    }
+{{< highlight json >}}
+{
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "metric{apples} / metric{oranges}"
+      }
+    ]
+}
+{{< /highlight >}}
 
 <!-- ### Events -->
 
@@ -394,7 +396,7 @@ The Time Series can be further broken down to:
 #### 折れ線グラフ
 
 
-{{< img src="multi-lines.png" >}}
+{{< img src="graphingjson/multi-lines.png" >}}
 
 <!-- The representation is automatically derived from having multiple `requests` values. -->
 このグラフ表現は、`requests`部に複数の検索クエリを有する場合に自動的に設定されます。
@@ -417,7 +419,7 @@ The Time Series can be further broken down to:
 
 #### 積み上げグラフ
 
-{{< img src="slice-n-stack.png" >}}
+{{< img src="graphingjson/slice-n-stack.png" >}}
 
 <!-- In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
 関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます:
@@ -493,7 +495,7 @@ There are three configuration settings:
 </ul>
 -->
 
-グラフエディターからJSONを編集することで次のようなY軸の制御ができます(現時点ではJSONエディターのみの機能):
+グラフエディターからJSONを編集することで次のようなY軸の制御ができます:
 <ul>
  <li>Y軸の表示範囲の指定</li>
  <li>パーセンテージか絶対値のいずれかを指定することより時系列データをフィルタ</li>
@@ -530,6 +532,10 @@ Examples:
 
     "yaxis": {
         "scale": "pow3"
+    }
+
+    "yaxis": {
+        "units": "true"
     }
 
 <!-- #### Filtering -->
@@ -604,24 +610,25 @@ not in the bottom 10% nor in the top 30%.
 
 <!-- Here is a full JSON example: -->
 すべての要素を含んだJSON表記の例です:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "system.cpu.idle{host:hostname}",
-          "stacked": false
-        }
-      ],
-      "events": [],
-      "yaxis": {
-        "scale": "log"
-        "filter": {
-             "top": "5%",
-             "below": 15
-         }
-      },
+      "q": "system.cpu.idle{host:hostname}",
+      "stacked": false
     }
+  ],
+  "events": [],
+  "yaxis": {
+    "scale": "log"
+    "filter": {
+         "top": "5%",
+         "below": 15
+     }
+  },
+}
+{{< /highlight >}}
 
 <!-- #### Examples -->
 
@@ -632,29 +639,31 @@ not in the bottom 10% nor in the top 30%.
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 -->
 パラメーターに１つのメトリクスを指定した<code>rate()</code>関数を使った例です。<code>top()</code>と<code>top_offset()</code>以外の関数では、この<code>rate()</code>と同様のシンタックス表記を利用することできます。
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-          "stacked": false
-        }
-      ]
+      "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 <!-- Here is an example using the <code>top()</code> function: -->
 <code>top()</code> 関数を使用した例:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-          "stacked": false
-        }
-      ]
+      "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 <!--
 This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
@@ -665,25 +674,27 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 この例では、<code>system.cpu.iowait</code>のピーク値の上位5位をグラフに表示します。
 
 <code>system.cpu.iowait</code>のピーク値ランキングの第6位から10位のホストを表示するためには、<code>top_offset</code>を使います:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-          "stacked": false
-        }
-      ]
+      "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
+      "stacked": false
     }
+  ]
+}
+{{< /highlight >}}
 
 <!-- Here is an example using the <code>week_before()</code> function: -->
 <code>week_before()</code>関数を使用した例:
-
+{{< highlight json >}}
+{
+  "viz": "timeseries",
+  "requests": [
     {
-      "viz": "timeseries",
-      "requests": [
-        {
-          "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-        }
-      ]
+      "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
     }
+  ]
+}
+{{< /highlight >}}

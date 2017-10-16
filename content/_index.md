@@ -6,14 +6,14 @@ sidebar:
     - header: References
     - text: API
       href: "api/"
-    - text: Tracing (APM)
+    - text: APM (Tracing)
       href: "tracing/"
     - text: Libraries
       href: "libraries/"
     - text: Graphing
       href: "graphing/"
-    - text: Host Names
-      href: "hostnames/"
+    - text: Infrastructure
+      href: "infrastructure/"
     - text: Integrations
       href: "integrations/"
     - text: DogStatsD

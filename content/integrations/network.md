@@ -16,30 +16,23 @@ platformmetrics:
     - Solaris
   system.net.tcp.out_segs:
     - Solaris
+description: "{{< get-desc-from-git >}}"
+git_integration_title: network
 ---
+
+{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" >}}
+
 ## Overview
+//get-overview-from-git//
 
-{{< img src="netdashboard.png" alt="Network Dashboard" >}}
+## Setup
+//get-setup-from-git//
 
-The network check collects TCP and IP network metrics from the agent's host.
+## Data Collected
+//get-data-collected-from-git//
 
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Configuration
-
-The network check is enabled by default. If you would like to make any changes to the check, rename `network.yaml.default` to `network.yaml` and edit:
-
-    init_config:
-
-    instances:
-      # Network check only supports one configured instance
-      - collect_connection_state: false # set to true to collect TCP connection state metrics, e.g. SYN_SENT, ESTABLISHED
-        excluded_interfaces:
-          - lo
-          - lo0
-        # Optionally completely ignore any network interface
-        # matching the given regex:
-        # excluded_interface_re: my-network-interface.*
-
-## Metrics
-
-{{< get-metrics-from-git "system" "system.net" >}}
+## Further Reading
+//get-further-reading-from-git//

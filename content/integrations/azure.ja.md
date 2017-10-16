@@ -40,8 +40,7 @@ Azureの監視を設定するには、[Azure integrations][1] に移動し、イ
 
 Datadog Agentをインストールせずに監視するには、Azureのdiagnostics機能を有効にします。現状、この機能はWindowsベースのVMについてのみ対応しています。有効にするには、[Azureのポータル][2]に移動し、次のインストラクションに従って操作をします。
 
-![](/images/azure_diag_manual.png)
-
+{{< img src="integrations/azure/azure_diag_manual.png" alt="azure diag manual" >}}
 
 <!-- After locating your VM:
 
@@ -72,7 +71,8 @@ Datadogの監視が正しく動作するためには、"Basic metrics", "network
 Datadogは、Azure Extension Managerに対応しています。これにより、AzureのポータルからDatadog Agentをインストールすることが出来ます。Azure上で起動しているVMがWindowsかLinuxに関わらず、ワンクリックでDatadog Agentをインストールすることが出来ます。ワンクリックでのインストールを実行するには、[
 Azureのポータル](http://portal.azure.com)から、運用中のVMを選択するか、新しいVMを起動しDatadog Agentの追加をクリックします。
 
-![Azure performance monitoring with One-Click Deployment through Datadog](/images/azure-image-4.gif)
+{{< img src="azure-image-4.gif" alt="Azure performance monitoring with One-Click Deployment through Datadog" >}}
+
 
 インストール手順:
 
@@ -105,14 +105,14 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 <!-- ### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal][4].
 After logging in, locate the settings page on the left side of the screen.
-![](/images/azure_tenent.png)
+{{< img src="integrations/azure/azure_tenent.png" >}}
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses. -->
 
 ### Tenent name(テナント名)がわかりません。
 Tenent nameを知るためには、まず[Azureのポータル][4]へログインします。その後、スクリーンの左側にあるメニューからSETTINGS(設定)を探し、クリックします。赤枠で囲った部分がTenent name(テナント名)になります。
-![](/images/azure_tenent.png)
 
+{{< img src="integrations/azure/azure_tenent.png" alt="azure tenent" >}}
 
 <!-- ### Unable to login
 If you have experienced error logging in while trying to install the integration, please reach out to [support@datadoghq.com][3]. When possible, please attache screen shot. -->
@@ -136,4 +136,4 @@ VMが持っている時間が、正しく設定されているか確認して下
    [1]: https://app.datadoghq.com/account/settings#integrations/azure
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
-   [4]: https://management.azure.com
+   [4]: https://manage.windowsazure.com

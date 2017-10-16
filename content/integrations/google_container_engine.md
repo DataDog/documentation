@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_container_engine
+description: "Monitor your Google Container Engine resource usage."
 ---
 
 ## Overview
@@ -15,10 +16,12 @@ Get metrics from Google Container Engine to:
 * Visualize the performance of your Container Engine containers
 * Correlate the performance of your Container Engine containers with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

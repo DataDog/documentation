@@ -24,8 +24,9 @@ Related integrations include:
 | [Autoscaling](/integrations/awsautoscaling)               | scale EC2 capacity                                                            |
 | [Billing](/integrations/awsbilling)                       | billing and budgets                                                           |
 | [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |
-| [CloudTrail](/integrations/awscloudtrail)                 | Access to log files and AWS API calls                                         |
-| [CloudSearch](/integrations/awscloudsearch)               | Access to log files and AWS API calls                                         |
+| [CloudTrail](/integrations/awscloudtrail)                 | access to log files and AWS API calls                                         |
+| [CloudSearch](/integrations/awscloudsearch)               | access to log files and AWS API calls                                         |
+| [Direct Connect](/integrations/awsdirectconnect)          | dedicated network connection to AWS                                           |
 | [Dynamo DB](/integrations/awsdynamo)                      | NoSQL Database                                                                |
 | [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
 | [Elastic Beanstalk](/integrations/awsbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
@@ -56,80 +57,91 @@ Related integrations include:
 | [Web Application Firewall (WAF)](/integrations/awswaf)    | protect web applications from common web exploits                             |
 | [Workspaces](/integrations/awsworkspaces)                 | secure desktop computing service                                              |
 
-
-## Installation
+## Setup
+### Installation
 
 Setting up the Datadog integration with Amazon Web Services requires configuring role delegation using AWS IAM. To get a better
 understanding of role delegation, refer to the [AWS IAM Best Practices guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles).
 
-Note: The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the [configuration section](#configuration-for-china-and-govcloud) below.
+<div class="alert alert-warning">
+The GovCloud and China regions do not currently support IAM role delegation. If you are deploying in these regions please skip to the <a href="#configuration-for-china-and-govcloud">configuration section</a> below.
+</div>
 
-1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
+1.  Create a new role in the AWS [IAM Console](https://console.aws.amazon.com/iam/home#/roles). 
+2.  Select `Another AWS account` for the Role Type.
+3.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog read only access to your AWS data. 
+4.  Check off `Require external ID` and enter the one generated [in the Datadog app](https://app.datadoghq.com/account/settings#integrations/amazon_web_services). Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
+5.  Click `Next: Permissions`.
+6.  Click `Create Policy`. Note, if you've already created the policy, search for it on this page and use select it. Otherwise complete the following to create a new one.
+7.  Choose `Create Your Own Policy`.
+8.  Name the policy `DatadogAWSIntegrationPolicy`, or one of your choosing and provide an apt description. To take advantage of every AWS integration offered by Datadog, use the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
+{{< highlight json>}}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "autoscaling:Describe*",
+        "budgets:ViewBudget",
+        "cloudtrail:DescribeTrails",
+        "cloudtrail:GetTrailStatus",
+        "cloudwatch:Describe*",
+        "cloudwatch:Get*",
+        "cloudwatch:List*",
+        "codedeploy:List*",
+        "codedeploy:BatchGet*",
+        "directconnect:Describe*",
+        "dynamodb:List*",
+        "dynamodb:Describe*",
+        "ec2:Describe*",
+        "ec2:Get*",
+        "ecs:Describe*",
+        "ecs:List*",
+        "elasticache:Describe*",
+        "elasticache:List*",
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeTags",
+        "elasticloadbalancing:Describe*",
+        "elasticmapreduce:List*",
+        "elasticmapreduce:Describe*",
+        "es:ListTags",
+        "es:ListDomainNames",
+        "es:DescribeElasticsearchDomains",
+        "kinesis:List*",
+        "kinesis:Describe*",
+        "lambda:List*",
+        "logs:Get*",
+        "logs:Describe*",
+        "logs:FilterLogEvents",
+        "logs:TestMetricFilter",
+        "rds:Describe*",
+        "rds:List*",
+        "route53:List*",
+        "s3:GetBucketTagging",
+        "s3:ListAllMyBuckets",
+        "ses:Get*",
+        "sns:List*",
+        "sns:Publish",
+        "sqs:ListQueues",
+        "support:*",
+        "tag:getResources",
+        "tag:getTagKeys",
+        "tag:getTagValues"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+{{< /highlight >}}
+If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
+9.  Click `Next: Review`.
+10.  Give the role a name such as `DatadogAWSIntegrationRole` and an apt description and hit `Create Role`.
 
-        {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Action": [
-                "autoscaling:Describe*",
-                "budgets:ViewBudget",
-                "cloudtrail:DescribeTrails",
-                "cloudtrail:GetTrailStatus",
-                "cloudwatch:Describe*",
-                "cloudwatch:Get*",
-                "cloudwatch:List*",
-                "dynamodb:list*",
-                "dynamodb:describe*",
-                "ec2:Describe*",
-                "ec2:Get*",
-                "ecs:Describe*",
-                "ecs:List*",
-                "elasticache:Describe*",
-                "elasticache:List*",
-                "elasticloadbalancing:Describe*",
-                "elasticmapreduce:List*",
-                "elasticmapreduce:Describe*",
-                "es:ListTags",
-                "es:ListDomainNames",
-                "es:DescribeElasticsearchDomains",
-                "kinesis:List*",
-                "kinesis:Describe*",
-                "logs:Get*",
-                "logs:Describe*",
-                "logs:FilterLogEvents",
-                "logs:TestMetricFilter",
-                "rds:Describe*",
-                "rds:List*",
-                "route53:List*",
-                "s3:GetBucketTagging",
-                "s3:ListAllMyBuckets",
-                "ses:Get*",
-                "sns:List*",
-                "sns:Publish",
-                "sqs:ListQueues",
-                "support:*",
-                "tag:getResources",
-                "tag:getTagKeys",
-                "tag:getTagValues"
-              ],
-              "Effect": "Allow",
-              "Resource": "*"
-            }
-          ]
-        }
 
-    If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.
+### Configuration
 
-2.  Create a new role in the IAM Console. Name it anything you like, such as `DatadogAWSIntegrationRole`.
-3.  From the selection, choose Role for Cross-Account Access.
-4.  Click the Select button for **Allows IAM users from a 3rd party AWS account to access this account**.
-5.  For Account ID, enter `464622532012` (Datadog's account ID). This means that you will grant Datadog and Datadog only read access to your AWS data. For External ID, enter the one generated on our website. Make sure you leave **Require MFA** disabled. *For more information about the External ID, refer to [this document in the IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)*.
-6.  Select the policy you created above.
-7.  Review what you selected and click the **Create Role** button.
-
-## Configuration
-
-{{< img src="integrations-aws-secretentry.png" alt="logo" >}}
+{{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" >}}
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Role Delegation** tab.
@@ -137,16 +149,16 @@ Note: The GovCloud and China regions do not currently support IAM role delegatio
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-### Configuration for China and GovCloud
+#### Configuration for China and GovCloud
 
 1.  Open the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 2.  Select the **Access Keys (GovCloud or China Only)** tab.
-3.  Enter your AWS Access Key and AWS Secret Key. Note: only access and secret keys for China and GovCloud are accepted.
+3.  Enter your AWS Access Key and AWS Secret Key. **Only access and secret keys for China and GovCloud are accepted.**
 4.  Choose the services you want to collect metrics for on the left side of the dialog. You can optionally add tags to all hosts and metrics. Also if you want to only monitor a subset of EC2 instances on AWS, tag them and specify the tag in the limit textbox here.
 5.  Click **Install Integration**.
 
-
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 
@@ -157,7 +169,9 @@ The core Datadog-AWS integration pulls data from AWS CloudWatch. At a minimum, y
 * `cloudwatch:ListMetrics` to list the available CloudWatch metrics.
 * `cloudwatch:GetMetricStatistics` to fetch data points for a given metric.
 
-Note that these actions and the ones listed below are included in the Policy Document using wild cards such as `List*` and `Get*`. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+<div class="alert alert-info">
+These actions and the ones listed below are included in the Policy Document using wild cards such as <code>List*</code> and <code>Get*</code>. If you require strict policies, please use the complete action names as listed and reference the Amazon API documentation for the services you require.
+</div>
 
 By allowing Datadog to read the following additional endpoints, the AWS integration will be able to add tags to CloudWatch metrics and generate additional metrics.
 
@@ -167,7 +181,7 @@ By allowing Datadog to read the following additional endpoints, the AWS integrat
 * `autoscaling:DescribePolicies`: List available policies (for autocompletion in events and monitors).
 * `autoscaling:DescribeTags`: Used to list tags for a given autoscaling group. This will add ASG custom tags on ASG CloudWatch metrics.
 * `autoscaling:DescribeScalingActivities`: Used to generate events when an ASG scales up or down.
-* `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). Note: This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
+* `autoscaling:ExecutePolicy`: Execute one policy (scale up or down from a monitor or the events feed). <br>This is not included in the [installation Policy Document](#installation) and should only be included if you are using monitors or events to execute an autoscaling policy.
 
 For more information on [Autoscaling policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html), review the documentation on the AWS website.
 
@@ -191,6 +205,13 @@ CloudTrail also requires some s3 permissions to access the trails. **These are r
 * `s3:GetObject`: Fetch available trails
 
 For more information on [S3 policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html), review the documentation on the AWS website.
+
+### Direct Connect
+
+* `directconnect:DescribeConnections`: Used to list available Direct Connect connections.
+* `directconnect:DescribeTags`: Used to gather custom tags applied to Direct Connect connections.
+
+For more information on [Direct Connect policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_directconnect.html), review the documentation on the AWS website.
 
 ### DynamoDB
 
@@ -235,6 +256,7 @@ For more information on [EFS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List ELBs, add additional tags and metrics.
 * `elasticloadbalancing:DescribeTags`: Add custom ELB tags to ELB metrics.
+* `elasticloadbalancing:DescribeInstanceHealth`: Add state of your instances.
 
 For more information on [ELB policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html), review the documentation on the AWS website.
 
@@ -256,7 +278,7 @@ For more information on [ES policies](https://docs.aws.amazon.com/IAM/latest/Use
 ### Kinesis
 
 * `kinesis:ListStreams`: List available streams.
-* `kinesis:DescribeStreams`: Add tags and new metrics for kinesis streams.
+* `kinesis:DescribeStream`: Add tags and new metrics for kinesis streams.
 * `kinesis:ListTagsForStream`: Add custom tags.
 
 For more information on [Kinesis policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html), review the documentation on the AWS website.
@@ -313,7 +335,7 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 
 ### Support
 
-* `support:*`: Used to add metrics about service limits. Note: it requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
+* `support:*`: Used to add metrics about service limits.<br>It requires full access because of [AWS limitations](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html)
 
 ### Tag
 
@@ -324,10 +346,10 @@ For more information on [SQS policies](https://docs.aws.amazon.com/IAM/latest/Us
 The main use of the Resource Group Tagging API is to reduce the number of API calls we need to collect custom tags.
 For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html), review the documentation on the AWS website.
 
-# Troubleshooting
+## Troubleshooting
 
 
-**Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?**
+### Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?
 
 
 There are two important distinctions to be aware of:
@@ -335,7 +357,7 @@ There are two important distinctions to be aware of:
   1. In AWS for counters, a graph that is set to 'sum' '1minute' shows the total number of occurrences in one minute leading up to that point, i.e. the rate per 1 minute. Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS, which is why you will probably see our value as lower.
   2. Overall, min/max/avg have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, we only get the average latency as a single time series per ELB. Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series will be combined. For example, requesting `system.cpu.idle` without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested `system.cpu.idle` from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
-**Metrics delayed?**
+### Metrics delayed?
 
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
@@ -349,22 +371,19 @@ written a bit about this [here][7],  especially in relation to CloudWatch.
 
 
 
-**Missing metrics?**
+### Missing metrics?
 
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
 
 
-**Wrong count of aws.elb.healthy_host_count?**
+### Wrong count of aws.elb.healthy_host_count?
 
 
-When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per A-Z.
-As this can be counter-intuitive, we’ve added a new metric, aws.elb.host_count, that displays the count of healthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not.
-This metric should have value you would expect.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
+As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
-
-
-**Duplicated hosts when installing the agent?**
+### Duplicated hosts when installing the agent?
 
 
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.

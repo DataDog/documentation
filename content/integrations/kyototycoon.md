@@ -3,13 +3,21 @@ title: Datadog-Kyoto Tycoon Integration
 integration_title: Kyoto Tycoon
 kind: integration
 doclevel: basic
+git_integration_title: kyototycoon
+description: "{{< get-desc-from-git >}}"
 ---
 
+## Overview
+//get-overview-from-git//
 
+## Setup
+//get-setup-from-git//
 
-Capture Kyoto Tycoon metrics in Datadog to:
+## Data Collected
+//get-data-collected-from-git//
 
-* Visualize your database server performance
-* Correlate the performance of Kyoto Tycoon with the rest of your applications
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-{{< insert-example-links conf="kyototycoon" check="kyototycoon" >}}
+## Further Reading
+//get-further-reading-from-git//

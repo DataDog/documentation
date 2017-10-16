@@ -3,54 +3,19 @@ title: Datadog-PGBouncer Integration
 integration_title: PGBouncer
 git_integration_title: pgbouncer
 kind: integration
-
+description: "{{< get-desc-from-git >}}"
 ---
 ## Overview
+//get-overview-from-git//
 
-Connect your PGBouncer to Datadog in order to:
+## Setup
+//get-setup-from-git//
 
-* Visualize your pools of connections.
-* Monitor the traffic between PostgreSQL and your applications.
-* Be notified about pgbouncer failovers and events.
+## Data Collected
+//get-data-collected-from-git//
 
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Configuration
-
-To configure the PGBouncer integration, copy `pgbouncer.yaml.example` to `pgbouncer.yaml` and make the appropriate changes.
-
-
-    init_config:
-
-    instances:
-      - host: localhost
-        port: 15433
-        username: my_username
-        password: my_password
-        tags:
-          - env:prod
-      - database_url: postgresql://user:pass@host:5432/dbname?sslmode=require
-        tags:
-          - role:main
-
-
-{{< insert-example-links >}}
-
-## Validation
-
-When you run datadog-agent info you should see something like the following:
-
-    Checks
-    ======
-
-        pgbouncer
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 1 service check
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-## Service Checks
-
-**pgbouncer.can_connect**
-: Agent is able to connect to the pgbouncer instance
+## Further Reading
+//get-further-reading-from-git//

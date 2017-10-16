@@ -1,22 +1,29 @@
 ---
 title: Datadog-SQL Server Integration
 integration_title: SQL Server
-git_integration_title: sql_server
+git_integration_title: sqlserver
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" >}}
+
 ## Overview
+//get-overview-from-git//
 
-Connect SQL Server to Datadog in order to:
+<div class="alert alert-warning">
+SQL Server check can only be run from a Windows environment
+</div>
 
-  * Visualize your database performance.
-  * Correlate the performance of SQL Server with the rest of your applications.
+## Setup
+//get-setup-from-git//
 
-{{< insert-example-links conf="sqlserver" check="sqlserver" >}}
+## Data Collected
+//get-data-collected-from-git//
 
-## Metrics
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-{{< get-metrics-from-git >}}
-
-
+## Further Reading
+//get-further-reading-from-git//

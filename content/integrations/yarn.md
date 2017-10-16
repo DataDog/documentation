@@ -4,51 +4,21 @@ integration_title: Hadoop YARN
 kind: integration
 git_integration_title: yarn
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
+{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" >}}
+
 ## Overview
+//get-overview-from-git//
 
-{{< img src="yarndashboard.png" alt="Hadoop Yarn" >}}
+## Setup
+//get-setup-from-git//
 
-Capture Yarn metrics to:
+## Data Collected
+//get-data-collected-from-git//
 
-* Visualize cluster health, performance, and utilization.
-* Analyze and inspect individual application performance.
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Configuration
-
-*Install Datadog Agent on the ResourceManager*
-
-1.  Configure the agent to connect to the ResourceManager: Edit conf.d/yarn.yaml
-
-        init_config:
-
-        instances:
-            -   resourcemanager_address: localhost
-                resourcemanager_port: 8088
-
-
-2.  Restart the Agent
-
-{{< insert-example-links conf="yarn" check="yarn" >}}
-
-
-## Validation
-
-Execute the info command and verify that the integration check has passed. The output of the command should contain a section similar to the following:
-
-    Checks
-    ======
-
-      [...]
-
-      yarn
-      ----
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
-
-
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-
+## Further Reading
+//get-further-reading-from-git//

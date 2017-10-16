@@ -6,7 +6,7 @@ listorder: 12
 
 This guide assumes you are deploying an Azure Cloud Service.
 
-### Install the Agent on instance startup
+## Install the Agent on instance startup
 
 **Create** a file called `installDatadogAgent.cmd` with the following contents:
 
@@ -47,12 +47,12 @@ Be sure to replace `YOUR_API_KEY` with your API key found at [here](https://app.
 
 The created file will download and install the latest version of the Agent on application deploy.
 
-### Deploy your app
+## Deploy your app
 
 You should now repackage your app's cloud service package file (*.cspkg), making sure to include the `installDatadogAgent.cmd` file in the package.
 You can also directly upload from Visual Studio using the `Publish` button.
 
 On deploy you should see your new hosts appear on your infrastructure overview:
 
-{{< img src="azure_infrastructure_overview.png" alt="infrastructure view" >}}
+{{< img src="guides/azure/azure_infrastructure_overview.png" alt="infrastructure view" >}}
 

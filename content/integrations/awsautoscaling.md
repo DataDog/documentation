@@ -4,6 +4,7 @@ integration_title: AWS Auto Scaling
 kind: integration
 git_integration_title: amazon_auto_scaling
 newhlevel: true
+description: "Track the status and counts of instances in your Auto Scaling Groups."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ Amazon Auto Scaling is a service to launch or terminate EC2 instances automatica
 
 Enable this integration to see in Datadog all your Auto Scaling metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Auto Scaling is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

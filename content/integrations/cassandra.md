@@ -3,17 +3,22 @@ title: Datadog-Cassandra Integration
 integration_title: Cassandra
 kind: integration
 git_integration_title: cassandra
+description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="cassandra.png" alt="Cassandra default dashboard" >}}
+{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" >}}
 
-Learn more about how to monitor Cassandra performance metrics thanks to [our series of posts](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics/). We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Cassandra.
+## Overview
+//get-overview-from-git//
 
+## Setup
+//get-setup-from-git//
 
-For information on JMX Checks, please see <a href="http://docs.datadoghq.com/integrations/java/">here</a>.
+## Data Collected
+//get-data-collected-from-git//
 
-{{< insert-example-links check="none" >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Metrics
-
-{{< get-metrics-from-git >}}
+## Further Reading
+//get-further-reading-from-git//

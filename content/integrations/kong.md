@@ -5,37 +5,20 @@ kind: integration
 doclevel: basic
 git_integration_title: kong
 newhlevel: true
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview
+//get-overview-from-git//
 
-Connect Kong to Datadog to:
+## Setup
+//get-setup-from-git//
 
-* Visualize Kong performance data
-* Correlate the performance of Kong with the rest of your applications
+## Data Collected
+//get-data-collected-from-git//
 
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Configuration
-
-Configure the Agent to connect to Kong. Edit conf.d/kong.yaml
-
-    init_config:
-
-    instances:
-    # For every instance, you have an `kong_status_url` and (optionally)
-    # a list of tags.
-
-    -   kong_status_url: http://example.com:8001/status/
-        tags:
-            -   instance:foo
-
-    -   kong_status_url: http://example2.com:8001/status/
-        tags:
-            -   instance:bar
-
-{{< insert-example-links >}}
-
-## Validation
-
-To validate that the integration is working, restart the agent and then run the info command (For help on these steps, see [Getting Started with the Agent](/guides/basic_agent_usage/).  You should see output that validates that the check passed.
-
+## Further Reading
+//get-further-reading-from-git//

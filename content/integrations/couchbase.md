@@ -4,17 +4,22 @@ integration_title: Couchbase
 kind: integration
 doclevel: basic
 git_integration_title: couchbase
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" >}}
+
 ## Overview
+//get-overview-from-git//
 
-Get metrics from Couchbase in real time to
+## Setup
+//get-setup-from-git//
 
-* Visualize key Couchbase metrics
-* Correlate Couchbase performance with the rest of your applications
+## Data Collected
+//get-data-collected-from-git//
 
-{{< insert-example-links >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Metrics
-
-{{< get-metrics-from-git >}}
+## Further Reading
+//get-further-reading-from-git//

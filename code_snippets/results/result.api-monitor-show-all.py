@@ -7,7 +7,6 @@
   'name': '**system.net.bytes_rcvd** over **host:host0** was **> 100** on average during the **last 1h**.',
   'options': {'notify_audit': False, 'notify_no_data': False, 'silenced': {}},
   'org_id': 2,
-  'overall_state': 'No Data',
   'query': 'avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100',
   'type': 'metric alert',
   'multi': False,

@@ -7,7 +7,8 @@ aliases:
   - /guides/alerting
 ---
 
-***For more detail about monitors, review the [Monitoring Reference](/monitoring) page.***
+## Overview
+***For more detail about Monitors, review the [Monitoring Reference](/monitoring) page.***
 
 Monitoring all of your infrastructure in one place wouldn't be complete without
 the ability to know when critical changes are occurring. Datadog gives you the
@@ -25,8 +26,7 @@ high-level view of open issues on the
 page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-## Glossary
-
+### Glossary
 
 Here is a quick overview of the different terms used in this guide.
 
@@ -41,24 +41,53 @@ Here is a quick overview of the different terms used in this guide.
 
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
-page by highlighting the "Monitors" tab in the main menu and selecting the
-"New Monitor" sub-tab (depending on your chosen theme, the main menu may be at the top or on the left).  You will be presented with a list of monitor types
-on the left. This guide will walk through the configuration of the Metric type. To learn more about setting up the other types of monitors, go to the [Monitoring Reference](/monitoring) page.
+page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types
+on the left. This page shows how to setup a metric Monitor, but see the [Monitoring Reference](/monitoring) to learn more about other Monitor types.
 
-{{< img src="monitor/nav.png" >}}
+{{< img src="guides/monitor/nav.png" >}}
 
 ### Choose what to monitor
 
-1. Select the metric and scope you want to monitor.
-  {{< img src="monitor/metric_scope.png" alt="metric scope" >}}
+1. Choose the detection method
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
+
+    A **Threshold Alert** compares the value in the selected
+    timeframe against a given threshold. There are additional options available
+    in the alerting conditions section. This is the standard alert case
+    where you know what sort values are unexpected.
+
+    A **Change Alert** compares the absolute or percentage change in
+    value between now and some time ago against a given threshold.
+    The compared data points will not be single points but are computed using
+    the parameters in the *alert conditions* section.
+
+    This type of alert is useful to track sudden spikes or drops as well as slow
+    changes in a metric when you might not have an exact "unexpected" threshold.
+    *Note:* the calculated value is not the absolute value - meaning it will be
+    negative for a downward change.
+
+    **Anomaly Detection** is an algorithmic feature that allows you to identify
+    when a metric is behaving differently than it has in the past, taking into
+    account trends, seasonal day-of-week and time-of-day patterns. It is well-
+    suited for metrics with strong trends and recurring patterns that are hard
+    or impossible to monitor with threshold-based alerting.
+
+    **Outlier Detection** is an algorithmic feature that allows you to detect
+    when some members of a group are behaving strangely compared to the others.
+    For example, you could detect that one web server in a pool is processing an
+    unusual number of requests, and hence should be a target for replacement. Or,
+    you could get an early warning that significantly more 500s are happening in
+    one AWS Availability Zone (AZ) than the others, which might indicate an issue
+    arising in that AZ.
+
+2. Select the metric and scope you want to monitor.
+  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
-    Datadog. The standard scoping rules apply here. Please refer to the
-    [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for
-    further information.
+    Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
-2. Select the alert grouping.
-    {{< img src="monitor/alert_grouping.png" alt="alert grouping" >}}
+3. Select the alert grouping.
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -75,24 +104,6 @@ on the left. This guide will walk through the configuration of the Metric type. 
     This will trigger a separate alert for each device on each host that is
     running out of space.
 
-3. Select the alert type.
-    {{< img src="monitor/alert_type.png" alt="alert type" >}}
-
-    A **threshold alert** will compare the value in the selected
-    timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
-
-    A **change alert** will compare the change or % change of a value between
-    now and some time ago against a given threshold.
-    The compared data points will not be single points but are computed using
-    the parameters in the *alert conditions* section.
-
-    This type of alert is useful to track fast spikes or drops as well as slow
-    changes in a metric when you might not have an exact "unexpected" threshold.
-    *Note:* the calculated value is not the absolute value - meaning it will be
-    negative for a downward change.
-
 ### Define the conditions
 4. Select the alert conditions
 
@@ -101,7 +112,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitor/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -143,6 +154,10 @@ on the left. This guide will walk through the configuration of the Metric type. 
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
+
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
+
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
    window. For example, if you are alerting over the last 5 minutes then you
@@ -160,7 +175,7 @@ on the left. This guide will walk through the configuration of the Metric type. 
 ### Setup Notifications
 
 
-{{< img src="monitor/notification.png" alt="notification" >}}
+{{< img src="guides/monitor/notification.png" alt="notification" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -185,6 +200,13 @@ on the left. This guide will walk through the configuration of the Metric type. 
 
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket will be sent as normal. All other notifications within that 20 seconds will be sent as a single message listing all of them after the first two.*
 
+## Export your monitor
+
+You can export the configuration JSON for a monitor right from the create screen. 
+If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
+
+{{< img src="guides/monitor/export_monitor_json.jpg" alt="export monitor" >}}
+
 
 ## Scheduling Downtime
 
@@ -196,11 +218,11 @@ You may occasionally need to shut systems down or take them offline to perform m
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
-{{< img src="monitor/downtime-nav.png" alt="downtime-nav" >}}
+{{< img src="guides/monitor/downtime-nav.png" alt="downtime-nav" >}}
 
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-{{< img src="monitor/downtime-manage.png" alt="downtime-manage" >}}
+{{< img src="guides/monitor/downtime-manage.png" alt="downtime-manage" >}}
 
 ### Schedule Downtime
 
@@ -209,7 +231,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   {{< img src="monitor/downtime-silence.png" alt="downtime-silence" >}}
+   {{< img src="guides/monitor/downtime-silence.png" alt="downtime-silence" >}}
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -219,13 +241,13 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
 
-   {{< img src="monitor/downtime-schedule.png" alt="downtime-schedule" >}}
+   {{< img src="guides/monitor/downtime-schedule.png" alt="downtime-schedule" >}}
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   {{< img src="monitor/downtime-notify.png" alt="downtime-notify" >}}
+   {{< img src="guides/monitor/downtime-notify.png" alt="downtime-notify" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
@@ -290,11 +312,24 @@ There are a few caveats regarding quoted fields:
 
 When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-{{< img src="monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
+{{< img src="guides/monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
 
 To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-{{< img src="monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+{{< img src="guides/monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+
+## Manage Triggered Monitors with group-level granularity
+
+You can mute or resolve triggered monitors in bulk using the [Triggered Monitors page](https://app.datadoghq.com/monitors/triggered). It's similar to the [Manage Monitors page](#managing-monitors)—you can find monitors by their attributes using the same easy tickboxes or query syntax—but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
+
+Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page will show 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
+"high latency"`). This lets you easily mute or resolve a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
+
+In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes on field differences on the Triggered Monitors page:
+
+* It uses the `group_status` field instead of `status`.
+* It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
+* It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
 ## FAQs
 

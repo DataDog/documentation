@@ -4,6 +4,7 @@ integration_title: AWS Workspaces
 kind: integration
 git_integration_title: amazon_workspaces
 newhlevel: true
+description: "Track failed connections, session latency, unhealthy workspaces, and more."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ Amazon WorkSpaces is a fully managed, secure desktop computing service which run
 
 Enable this integration to see in Datadog all your Workspaces metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Workspaces is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

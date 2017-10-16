@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_sql_database
 newhlevel: true
+description: "Track key Azure SQL Database metrics."
 ---
 
 ## Overview
@@ -15,10 +16,12 @@ Get metrics from Azure SQL Database to:
 * Visualize the performance of your SQL Database
 * Correlate the performance of your SQL Database with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

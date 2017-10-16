@@ -5,25 +5,31 @@ kind: integration
 doclevel: basic
 git_integration_title: fastly
 newhlevel: true
+description: "Track cache-related metrics, origin requests, response codes, and more."
 ---
-## Overview
 
-{{< img src="fastlygraph.png" alt="Fastly Graph" >}}
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" >}}
+
+## Overview
 
 Connect to Fastly to see key Fastly metrics (like cache coverage and header size) in context with the rest of your Datadog metrics.
 
-## Installation
+## Setup
+### Installation
 
 No installation steps required.
 
-## Configuration
+### Configuration
 
 Create a Read-only access API Token on Fastly's token management page, get your Service ID from the Dashboard and enter them in the [Fastly integration tile](https://app.datadoghq.com/account/settings#integrations/fastly).
 
-Note: The ServiceID is the alphanumerical code, e.g. 5VqE6MOOy1QFJbgmCK41pY (example from https://docs.fastly.com/api/auth).
+<div class="alert alert-info">
+The ServiceID is the alphanumerical code, e.g. 5VqE6MOOy1QFJbgmCK41pY (example from <a href="https://docs.fastly.com/api/auth">here</a>).
+</div>
 
 If using multiple Service IDs from one account, please enter an API token on each line.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

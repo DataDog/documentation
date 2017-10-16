@@ -4,19 +4,20 @@ integration_title: Cacti
 kind: integration
 doclevel: basic
 git_integration_title: cacti
+description: "{{< get-desc-from-git >}}"
 ---
+
 ## Overview
+//get-overview-from-git//
 
-Connect Cacti to Datadog to:
+## Setup
+//get-setup-from-git//
 
-* Visualize Cacti metrics in Datadog.
-* Correlate metrics captured by Cacti with the rest of your applications.
+## Data Collected
+//get-data-collected-from-git//
 
-{{< insert-example-links >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-
-
-
-## Metrics
-
-{{< get-metrics-from-git >}}
+## Further Reading
+//get-further-reading-from-git//

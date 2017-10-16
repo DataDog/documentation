@@ -10,18 +10,20 @@ sidebar:
     - text: Setup
       href: "#setup"
     - text: Agent Check Interface
-      href: "#interface"
+      href: "#agent-check-Interface"
     - text: Configuration
-      href: "#config"
+      href: "#configuration"
     - text: Directory Structure
-      href: "#directory"
+      href: "#directory-structure"
     - text: Your First Check
-      href: "#first"
+      href: "#your-first-check"
     - text: An HTTP Check
-      href: "#http"
+      href: "#an-http-check"
+    - text: Troubleshooting
+      href: "#troubleshooting"
 ---
 
-<div class="alert alert-block">
+<div class="alert alert-warning">
 This guide requires an Agent version >= 3.2.0. Older versions of the Agent do
 not include the `AgentCheck` interface that we'll be using.
 </div>
@@ -33,7 +35,8 @@ OVERVIEW
 ======================================================
 -->
 
-<h3 id="overview">Overview</h3>
+## Overview
+
 This guide details how to collect metrics and events from a new data source
 by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
 look at the `AgentCheck` interface, and then write a simple Agent Check
@@ -42,7 +45,7 @@ that collects timing metrics and status events from HTTP services.
 Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds.
 
-<h4 id="check_or_integration">Should you write an Agent Check or an Integration?</h4>
+### Should you write an Agent Check or an Integration?
 Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
@@ -55,15 +58,11 @@ SETUP
 ======================================================
 -->
 
-<h3 id="setup">Setup</h3>
+## Setup
 
 First off, ensure you've properly
 <a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, pop by
-our chatroom, <a href="irc://irc.freenode.net/datadog">#datadog on FreeNode</a>,
-and we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
+Agent</a> on your machine. If you run into any issues during the setup, <a href="https://docs.datadoghq.com/help/">Get in touch with us! </a>, we'll be happy to answer any questions you might have.
 
 <!--
 ======================================================
@@ -71,14 +70,14 @@ INTERFACE
 ======================================================
 -->
 
-<h3 id="interface">Agent Check Interface</h3>
+## Agent Check Interface
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
 and require a `check()` method that takes one argument, `instance` which is a
 `dict` having the configuration of a particular instance. The `check` method is
 run once per instance defined in the check configuration (discussed later).
 
-#### Sending metrics
+### Sending metrics
 
 Sending metrics in a check is easy. If you're already familiar with the
 methods available in DogStatsD, then the transition will be very simple. If
@@ -113,7 +112,7 @@ These methods may be called from anywhere within your check logic. At the end of
 your `check` function, all metrics that were submitted will be collected and
 flushed out with the other Agent metrics.
 
-#### Sending events
+### Sending events
 
 At any time during your check, you can make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
 
@@ -135,7 +134,7 @@ At any time during your check, you can make a call to `self.event(...)` with one
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload.
 
-#### Sending service checks
+### Sending service checks
 
 Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
 
@@ -153,7 +152,7 @@ The service_check method will accept the following arguments:
 - `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
 - `message`: (optional) Additional information or a description of why this status occured.
 
-#### Exceptions
+### Exceptions
 
 If a check cannot run because of improper configuration,  programming error or
 because it could not collect any metrics, it should raise a meaningful exception.
@@ -171,7 +170,7 @@ easy debugging. For example:
           - Collected 0 metrics & 0 events
 
 
-#### Logging
+### Logging
 
 As part of the parent class, you're given a logger at `self.log`, so you can do
 things like `self.log.info('hello')`. The log handler will be `checks.{name}`
@@ -184,7 +183,7 @@ CONFIGURATION
 ======================================================
 -->
 
-<h3 id="config">Configuration</h3>
+## Configuration
 
 Each check will have a configuration file that will be placed in the `conf.d`
 directory. Configuration is written using [YAML](http://www.yaml.org/). The
@@ -208,15 +207,16 @@ instances:
 {{< /highlight >}}
 `min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
-<div class="alert alert-block">Note: YAML files must use spaces instead of tabs.</div>
+<div class="alert alert-info">
+YAML files must use spaces instead of tabs.</div>
 
-#### init_config
+### init_config
 
 The *init_config* section allows you to have an arbitrary number of global
 configuration options that will be available on every run of the check in
 `self.init_config`.
 
-#### instances
+### instances
 
 The *instances* section is a list of instances that this check will be run
 against. Your actual `check()` method is run once per instance. This means that
@@ -228,7 +228,7 @@ DIRECTORY STRUCTURE
 ======================================================
 -->
 
-<h3 id="directory">Directory Structure</h3>
+## Directory Structure
 
 Before starting your first check it is worth understanding the checks directory
 structure. There are two places that you will need to add files for your check.
@@ -295,9 +295,9 @@ FIRST CHECK
 ======================================================
 -->
 
-<h3 id="first">Your First Check</h3>
+## Your First Check
 
-<div class="alert alert-block">
+<div class="alert alert-warning">
 The names of the configuration and check files must match. If your check
 is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
@@ -337,7 +337,7 @@ HTTP CHECK
 ======================================================
 -->
 
-<h3 id="http">An HTTP Check</h3>
+## An HTTP Check
 
 Now we will guide you through the process of writing a basic check that will
 check the status of an HTTP endpoint. On each run of the check, a GET
@@ -351,7 +351,7 @@ following will happen:
   - If the response code != 200, an event will be submitted with the URL and
   the response code.
 
-#### Configuration
+### Configuration
 
 First we will want to define how our configuration should look, so that we know
 how to handle the structure of the `instance` payload that is passed into the
@@ -377,7 +377,7 @@ instances:
 
 {{< /highlight >}}
 
-#### The Check
+### The Check
 
 Now we can start defining our check method. The main part of the check will make
 a request to the URL and time the response time, handling error cases as it goes.
@@ -451,7 +451,7 @@ def status_code_event(self, url, r, aggregation_key):
     })
 {{< /highlight >}}
 
-#### Putting It All Together
+### Putting It All Together
 
 For the last part of this guide, we'll show the entire check. This module would
 be placed into the `checks.d` folder as `http.py`. The corresponding
@@ -475,26 +475,33 @@ Troubleshooting
 ======================================================
 -->
 
-<h3 id="troubleshooting">Troubleshooting</h3>
+## Troubleshooting
 
 Custom Agent checks can't be directly called from python and instead
  need to be called by the agent. To test this, run:
 
-    sudo -u dd-agent dd-agent check my_check
+    sudo -u dd-agent dd-agent check <CHECK_NAME>
 
 If your issue continues, please reach out to Support with the help page that
  lists the paths it installs.
 
-<h4>Testing Custom Checks on Windows</h4>
+### Testing custom checks on Windows
 
-Testing custom checks on Windows is easy. The Agent install includes a file called shell.exe
+* **For agent version < 5.12**:<br>
+The Agent install includes a file called shell.exe
 in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
-
-Once your check (called "my_check") is written and you have the .py and .yaml files
+Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files
 in their correct places, you can run the following in shell.exe:
-
-    >>> from checks import run_check
-    >>> run_check('my_check')
-
+```
+from checks import run_check
+run_check('<CHECK_NAME>')
+```
 This will output any metrics or events that the check will return.
 
+* **For agent version >= 5.12**:<br>
+Run the following script, with the proper `<CHECK_NAME>`:<br>
+`<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`<br>
+For example, to run the disk check:
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
+```

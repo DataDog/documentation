@@ -4,6 +4,7 @@ integration_title: AWS Web Application Firewall
 kind: integration
 git_integration_title: amazon_waf
 newhlevel: true
+description: "Track allowed versus blocked requests."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ AWS WAF is a web application firewall that helps protect your web applications f
 
 Enable this integration to see in Datadog all your WAF metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that WAF is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

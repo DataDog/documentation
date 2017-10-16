@@ -23,19 +23,16 @@ body {
 h1,
 h2,
 h3,
-h4 {
-  font-family: 'Open Sans', sans-serif;
-  a {
-    color: black
-  }
-}
+h4,
+h5
 
 h1#pagetitle {
-  height: 40px;
+  color: $purple;
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 0;
   font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 ol.outline {
@@ -292,13 +289,44 @@ ol.outline {
 }
 
 .main {
-  h2 {
-    font-size: 28px;
-    margin: 30px 0 10px;
-  }
-  h3 {
-    font-size: 24px;
-  }
+  h2{
+      color: $purple;
+      font-size: 28px;
+      font-weight: 300;
+      text-transform: none;
+      margin: 30px 0 10px;
+      padding-left: 0;
+      margin-bottom: 21px;
+      border-bottom: 1px solid #EEEEEE;
+      padding-bottom: 5px;
+      font-family: 'Open Sans', sans-serif;
+      font-style: normal;
+    }
+    h3{
+      font-style: normal;
+      color: #332046;
+      font-size: 22px;
+      text-transform: none;
+      font-family: 'Open Sans', sans-serif;
+      font-style: normal;
+      }
+
+    h4{
+      color: #404040;
+      font-style: normal;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 17px;
+      text-transform: none;
+      margin-bottom: 10px;
+    }
+
+    h5{
+      color: #666666;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-family: 'Open Sans', sans-serif;
+      text-transform: none;
+    }
   ol > li,
   ul > li {
     margin-bottom: 6px;

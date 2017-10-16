@@ -5,9 +5,10 @@ kind: integration
 git_integration_title: java
 newhlevel: true
 updated_for_agent: 5.8.5
+description: "Collect custom metrics from your applications using the Yammer Metrics library."
 ---
 
-## Introduction
+## Overview
 
 The JMX integration collects metrics from applications that expose [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html) metrics.
 
@@ -17,66 +18,73 @@ JMXFetch also sends service checks that report on the status of your monitored i
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's  easy to customize which metrics you want to collect.
 
-## Installation
+## Setup
+### Installation
 
 Make sure you can open a [JMX remote connection](http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html).
 
-## Configuration
+A remote connection is required for the Datadog Agent to connect to the JVM, even when the two are on the same host.
 
-1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample jmx.yaml file:
+### Configuration
 
-        init_config:
-          custom_jar_paths: # optional
-            - /path/to/custom/jarfile.jar
-          #is_jmx: true
+1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample `jmx.yaml` file:
+{{< highlight yaml>}}
+init_config:
+  custom_jar_paths: # optional
+    - /path/to/custom/jarfile.jar
+  #is_jmx: true
 
-        instances:
-          - host: localhost
-            port: 7199
-            user: username
-            password: password
+instances:
+  - host: localhost
+    port: 7199
+    user: username
+    password: password
 
-            jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # optional
+    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # optional
 
-            name: jmx_instance  # optional
-            java_bin_path: /path/to/java
-            java_options: "-Xmx200m -Xms50m"
-            trust_store_path: /path/to/trustStore.jks
-            trust_store_password: password
+    name: jmx_instance  # optional
+    java_bin_path: /path/to/java
+    java_options: "-Xmx200m -Xms50m"
+    trust_store_path: /path/to/trustStore.jks
+    trust_store_password: password
 
-            process_name_regex: .*process_name.*
-            tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
-            refresh_beans: 600 # optional (in seconds)
-            tags:
-              env: stage
-              newTag: test
+    process_name_regex: .*process_name.*
+    tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+    refresh_beans: 600 # optional (in seconds)
+    tags:
+      env: stage
+      newTag: test
 
-            conf:
-              - include:
-                  domain: my_domain
-                  bean:
-                    - my_bean
-                    - my_second_bean
-                  attribute:
-                    attribute1:
-                      metric_type: counter
-                      alias: jmx.my_metric_name
-                    attribute2:
-                      metric_type: gauge
-                      alias: jmx.my2ndattribute
-              - include:
-                  domain: 2nd_domain
-                exclude:
-                  bean:
-                    - excluded_bean
-              - include:
-                  domain_regex: regex_on_domain
-                exclude:
-                  bean_regex:
-                    - regex_on_excluded_bean
+    conf:
+      - include:
+          domain: my_domain
+          tags:
+              simple: $attr0
+              raw_value: my_chosen_value
+              multiple: $attr0-$attr1
+          bean:
+            - my_bean
+            - my_second_bean
+          attribute:
+            attribute1:
+              metric_type: counter
+              alias: jmx.my_metric_name
+            attribute2:
+              metric_type: gauge
+              alias: jmx.my2ndattribute
+      - include:
+          domain: 2nd_domain
+        exclude:
+          bean:
+            - excluded_bean
+      - include:
+          domain_regex: regex_on_domain
+        exclude:
+          bean_regex:
+            - regex_on_excluded_bean
+{{< /highlight >}}
 
-
-### Configuration Options
+#### Configuration Options
 
 * `custom_jar_paths` (Optional) - Allows specifying custom jars that will be added to the classpath of the agent's JVM.
 * `jmx_url` - (Optional) - If the agent needs to connect to a non-default JMX URL, specify it here instead of a host and a port. If you use this you need to specify a 'name' for the instance.
@@ -94,15 +102,16 @@ The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this 
 * `include` (**mandatory**): Dictionary of filters, any attribute that matches these filters will be collected unless it also matches the "exclude" filters (see below)
 * `exclude` (**optional**): Another dictionary of filters. Attributes that match these filters won't be collected
 
-For a given bean, metrics get tagged in the following manner:
+Tags are automatically added to metrics based on the actual MBean name. 
+You can explicitly specify supplementary tags. For instance, assuming the following MBean is exposed by your monitored application: 
 
     mydomain:attr0=val0,attr1=val1
 
-Your metric will be mydomain (or some variation depending on the attribute inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
+It would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) with tags: `attr0:val0, attr1:val1, domain:mydomain, simple:val0, raw_value:my_chosen_value, multiple:val0-val1`.
 
 If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
 
-### Description of the filters
+#### Description of the filters
 
 Each `include` or `exclude` dictionary supports the following keys:
 
@@ -117,50 +126,51 @@ The regexes defined in `domain_regex` and `bean_regex` must conform to [Java's r
 The `domain_regex` and `bean_regex` filters were added in version 5.5.0.
 
 On top of these parameters, the filters support "custom" keys which means that you can filter by bean parameters. For example, if you want to collect metrics regarding the Cassandra cache, you could use the `type: - Caches` filter:
-
-    conf:
-    - include:
-        domain: org.apache.cassandra.db
-        type:
-          - Caches
+{{< highlight yaml>}}
+conf:
+- include:
+    domain: org.apache.cassandra.db
+    type:
+      - Caches
+{{< /highlight >}}
 
 ### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
 *   A dictionary whose keys are attributes names:
-
-        conf:
-          - include:
-              attribute:
-                maxThreads:
-                  alias: tomcat.threads.max
-                  metric_type: gauge
-                currentThreadCount:
-                  alias: tomcat.threads.count
-                  metric_type: gauge
-                bytesReceived:
-                  alias: tomcat.bytes_rcvd
-                  metric_type: counter
-
+{{< highlight yaml>}}
+conf:
+  - include:
+      attribute:
+        maxThreads:
+          alias: tomcat.threads.max
+          metric_type: gauge
+        currentThreadCount:
+          alias: tomcat.threads.count
+          metric_type: gauge
+        bytesReceived:
+          alias: tomcat.bytes_rcvd
+          metric_type: counter
+{{< /highlight >}}
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
 *   A list of attributes names:
-
-        conf:
-          - include:
-              domain: org.apache.cassandra.db
-              attribute:
-                - BloomFilterDiskSpaceUsed
-                - BloomFilterFalsePositives
-                - BloomFilterFalseRatio
-                - Capacity
-                - CompressionRatio
-                - CompletedTasks
-                - ExceptionCount
-                - Hits
-                - RecentHitRate
-
+{{< highlight yaml>}}
+conf:
+  - include:
+      domain: org.apache.cassandra.db
+      attribute:
+        - BloomFilterDiskSpaceUsed
+        - BloomFilterFalsePositives
+        - BloomFilterFalseRatio
+        - Capacity
+        - CompressionRatio
+        - CompletedTasks
+        - ExceptionCount
+        - Hits
+        - RecentHitRate
+{{< /highlight >}}
 
 In that case:
 
@@ -168,27 +178,27 @@ In that case:
   * The metric name will be jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]
 
 Here is another filtering example:
+{{< highlight yaml>}}
+instances:
+  - host: 127.0.0.1
+    name: jmx_instance
+    port: 9999
 
-    instances:
-      - host: 127.0.0.1
-        name: jmx_instance
-        port: 9999
+init_config:
+  conf:
+    - include:
+        bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
+        attribute:
+          - OneMinuteRate
+          - 75thPercentile
+          - 95thPercentile
+          - 99thPercentile
+{{< /highlight >}}
 
-    init_config:
-      conf:
-        - include:
-            bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
-            attribute:
-              - OneMinuteRate
-              - 75thPercentile
-              - 95thPercentile
-              - 99thPercentile
-
-
-### Note
+#### Note
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
-
+{{< highlight yaml>}}
     # Datadog Agent > 5.3.0
       conf:
         - include:
@@ -208,6 +218,19 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
             domain: domain_name
             bean: second_bean_name
     ...
+{{< /highlight >}}
+
+### Validation
+
+JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
+
+## Data Collected
+### Metrics
+
+{{< get-metrics-from-git >}}
+
+
+## Troubleshooting
 
 ### Commands to view the metrics that are available:
 
@@ -231,17 +254,6 @@ For more details about configuring this integration refer to the following file(
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
 <!-- {{< insert-example-links conf="jmx" check="none" >}} -->
-
-## Validation
-
-JMX Checks have a default configuration that will collect 11 metrics from your JMX application. A few of these metrics are: `jvm.heap_memory`, `jvm.non_heap_memory`, `jvm.gc.cms.count`... So seeing these metrics is a sign that JMXFetch is properly running.
-
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-
-## Troubleshooting
 
 ### The 350 metric limit
 
@@ -267,29 +279,26 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
   1. Locate the `jboss-cli-client.jar` file on your JBoss/WildFly server (by default, its path should be `$JBOSS_HOME/bin/client/jboss-cli-client.jar`).
   2. If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
+  {{< highlight yaml>}}
+  # Datadog Agent >= 5.6.0
 
-```
-# Datadog Agent >= 5.6.0
-
-init_config:
-  custom_jar_paths:
-    - /path/to/jboss-cli-client.jar
-```
+  init_config:
+    custom_jar_paths:
+      - /path/to/jboss-cli-client.jar
+  {{< /highlight >}}
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
+  {{< highlight yaml>}}
+  # Datadog Agent >= 5.6.0
 
-```
-# Datadog Agent >= 5.6.0
-
-# The jmx_url may be different depending on the version of JBoss/WildFly you're using
-# and the way you've set up JMX on your server
-# Please refer to the relevant documentation of JBoss/WildFly for more information
-instances:
-  - jmx_url: "service:jmx:remoting-jmx://localhost:9999"
-    name: jboss-application  # Mandatory, but can be set to any value,
-                             # will be used to tag the metrics pulled from that instance
-```
-
+  # The jmx_url may be different depending on the version of JBoss/WildFly you're using
+  # and the way you've set up JMX on your server
+  # Please refer to the relevant documentation of JBoss/WildFly for more information
+  instances:
+    + jmx_url: "service:jmx:remoting-jmx://localhost:9999"
+      name: jboss-application  # Mandatory, but can be set to any value,
+                               # will be used to tag the metrics pulled from 
+  {{< /highlight >}}
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
 
@@ -303,18 +312,18 @@ If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomc
   2. If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-```
+{{< highlight yaml>}}
 # Datadog Agent >= 5.6.0
 
 init_config:
   custom_jar_paths:
     - /path/to/catalina-jmx-remote.jar
-```
+{{< /highlight >}}
 
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-```
+{{< highlight yaml>}}
 # Datadog Agent >= 5.6.0
 
 # The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
@@ -322,14 +331,16 @@ instances:
   - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
     name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
                               # will be used to tag the metrics pulled from that instance
-```
+{{< /highlight >}}
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
 
 
+## Further Reading
 
-
-
-
-
+* [I Have a Matching Bean for my JMX integration but nothing on Collect!](https://help.datadoghq.com/hc/en-us/articles/218277463-I-Have-a-Matching-Bean-for-my-JMX-integration-but-nothing-on-Collect-)
+* [View JMX data in jConsole and set up your jmx.yaml to collect them](https://help.datadoghq.com/hc/en-us/articles/207525586-View-jmx-data-in-jConsole-and-set-up-your-jmx-yaml-to-collect-them)
+* [jmx.yaml error: Include Section](https://help.datadoghq.com/hc/en-us/articles/204538219-jmx-yaml-error-Include-Section)
+* [Collecting Composite type JMX attributes](https://help.datadoghq.com/hc/en-us/articles/207874586-Collecting-Composite-type-JMX-attributes)
+* [How to run JMX commands in Windows?](https://help.datadoghq.com/hc/en-us/articles/205122649-How-to-run-JMX-commands-in-Windows-)

@@ -7,21 +7,25 @@ sidebar:
     - text: How It Works
       href: "#how-it-works"
     - text: Set Up
-      href: "#set-up"
+      href: "#setup"
+    - text: Data Types
+      href: "#data-types"
     - text: Metrics
       href: "#metrics"
     - text: Sample Rates
-      href: "#sample-rates"
-    - text: Tags
-      href: "#tags"
+      href: "#metric-option-sample-rates"
     - text: Events
       href: "#events"
-    - text: Configuration
-      href: "#configuration"
+    - text: Service Checks
+      href: "#service-checks"
+    - text: Tagging
+      href: "#tagging"
     - text: Datagram Format
       href: "#datagram-format"
-    - text: Source
-      href: "#source"
+    - text: Service Checks
+      href: "#service-checks-1"
+    - text: Related Reading
+      href: "#related-reading"
 ---
 
 <p class="aside">
@@ -34,12 +38,17 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service checks and Events
 * Tagging
 
+**Note**: DogStatsD does NOT implement the following from StatsD:
+
+* Gauge deltas (see [this issue](https://github.com/DataDog/dd-agent/pull/2104))
+* Timers as a native metric type (though it [does support them via histograms](#timers))
+
 ## How It Works
 
 DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 <p>
-{{< img src="dogstatsd.png" >}}
+{{< img src="guides/dogstatsd/dogstatsd.png" >}}
 </p>
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single
@@ -108,7 +117,7 @@ def render_page():
 
 With this one line of code we can start graphing the data:
 
-{{< img src="graph-guides-metrics-page-views.png"  >}}
+{{< img src="guides/dogstatsd/graph-guides-metrics-page-views.png"  >}}
 
 DogStatsD normalizes counters over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -335,7 +344,7 @@ Here's an example datagram:
     # Send a CRITICAL status for a remote connection
     _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
-## Related Reading
+## Further Reading
 
 [Libraries page](/libraries/) — find a DogStatsD client library to suit your needs.
 

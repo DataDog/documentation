@@ -5,7 +5,7 @@ language: ja
 title: Datadog-Gearman Integration
 integration_title: Gearman
 kind: integration
-git_integration_title: gearman
+git_integration_title: gearmand
 doclevel: complete
 ---
 

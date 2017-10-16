@@ -1,9 +1,9 @@
 ---
 title: Datadog-Puppet Integration
 integration_title: Puppet
-
 doclevel: basicuppet
 kind: integration
+description: "Track Puppet runs: know when they fail, succeed, or make big changes."
 ---
 
 ## Overview
@@ -14,6 +14,8 @@ Connect Puppet to Datadog in order to:
   * Track key Puppet performance metrics across all your servers.
   * Quickly identify and discuss failed Puppet runs with your team
 
+## Setup
+### Installation
 To install the Datadog Agent via Puppet, please see [here][1].
 
    [1]: https://github.com/datadog/puppet-datadog-agent

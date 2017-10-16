@@ -21,7 +21,7 @@ If you haven't installed the Agent yet, instructions can be found
 
 このガイドでは、Datadog Agentの基本的な機能を説明します。
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
-<a href='https://app.datadoghq.com/account/settings#agent'>Agent</a> ページのインストール手順も合わせてご参照ください。
+<a href='https://app.datadoghq.com/account/settings#agent/windows'>Agent</a> ページのインストール手順も合わせてご参照ください。
 
 
 <!--
@@ -59,8 +59,9 @@ Datadog Agentの実行は、Windows serviceによって管理されています�
 
 #### Datadog Agent バージョン >= 3.9.1:
 スタートメニューに表示されるDatadog Agent Managerを使います。
-<p>{{< img src="windows-start-menu.png" >}}</p>
-<p>{{< img src="manager-snapshot.png" >}}</p>
+{{< img src="guides/basic_agent_usage/windows/windows-start-menu.png" >}}
+
+{{< img src="guides/basic_agent_usage/windows/manager-snapshot.png" >}}
 
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
 

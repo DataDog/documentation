@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_batch
 newhlevel: true
+description: "Track key Azure Batch Service metrics."
 ---
 
 ## Overview
@@ -15,10 +16,12 @@ Get metrics from Azure Batch Service to:
 * Visualize the performance of your Batch Accounts
 * Correlate the performance of your Batch Accounts with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}

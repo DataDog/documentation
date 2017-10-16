@@ -5,6 +5,7 @@ newhlevel: true
 kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
+description: "Track system resource usage: CPU, memory, disk, filesystem, and more."
 ---
 ## Overview
 
@@ -14,10 +15,12 @@ Get metrics from your base system about the CPU, IO, load, memory, processes, sw
 * [Disk Check](/integrations/disk) - Capture metrics about the disk
 * [Process check](/integrations/process/) - Capture metrics from specific running processes on a system.
 
-## Configuration
+## Setup
+### Configuration
 
 No configuration is necessary for the system.
 
-## Metrics
+## Data Collected
+### Metrics
 
-{{< get-metrics-from-git "system" "system.cpu system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}

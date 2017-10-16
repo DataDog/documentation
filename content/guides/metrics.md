@@ -14,7 +14,7 @@ OVERVIEW
 ======================================================
 -->
 
-<h3 id="overview">Overview</h3>
+## Overview
 
 This guide explains how to send your application's custom metrics to Datadog.
 Sending your application's custom metrics to Datadog will let you correlate
@@ -37,7 +37,7 @@ SETUP
 ======================================================
 -->
 
-<h3 id="setup">Setup</h3>
+## Setup
 
 First off, <a href="https://app.datadoghq.com/account/settings#agent">install</a>
 the Datadog Agent (version 3 or greater), which
@@ -84,7 +84,7 @@ statsd = Datadog::Statsd.new
 
 </div>
 
-<h4>Metric names</h4>
+### Metric names
 There are a few rules to stick to when naming metrics:
 <ul>
 <li>Metric names must start with a letter</li>
@@ -108,7 +108,7 @@ COUNTERS
 -->
 
 
-<h3 id="counters">Counters</h3>
+## Counters
 
 Counters are used to (ahem) count things. Let's walk through a common example -
 counting web page views. To achieve this, we'll increment a metric called
@@ -140,7 +140,7 @@ end
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-{{< img src="graph-guides-metrics-page-views.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-page-views.png" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -188,7 +188,7 @@ GAUGES
 ======================================================
 -->
 
-<h3 id="gauges">Gauges</h3>
+## Gauges
 
 Gauges measure the value of a particular thing over time. Suppose a developer
 wanted to track the amount of free memory on a machine, we can periodically
@@ -222,7 +222,7 @@ HISTOGRAMS
 ======================================================
 -->
 
-<h3 id="histograms">Histograms</h3>
+## Histograms
 
 Histograms measure the statistical distribution of a set of values.
 Suppose we wanted to measure the duration of a database query,
@@ -273,7 +273,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-{{< img src="graph-guides-metrics-query-times.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-query-times.png" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -295,7 +295,7 @@ SERVICE CHECKS
 ======================================================
 -->
 
-<h3 id="service-checks">Service Checks</h3>
+## Service Checks
 
 Service checks are used to send information about the status of a service.
 
@@ -337,7 +337,7 @@ SETS
 -->
 
 
-<h3 id="sets">Sets</h3>
+## Sets
 
 Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitors to your site, sets are a great way to do
@@ -370,7 +370,7 @@ TAGS
 ======================================================
 -->
 
-<h3 id="tags">Tags</h3>
+## Tags
 
 Tags are a way of adding dimensions to metrics, so they can be sliced, diced,
 aggregated and compared on the front end. Suppose we wanted to measure the
@@ -442,7 +442,7 @@ in the standard way. Check out some of our other docs for how to use these:
 - <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
 - <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
 
-<h3 id="sample-rates">Sample Rates</h3>
+## Sample Rates
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot
 of overhead for performance intensive code paths. To work around this, StatsD
@@ -472,7 +472,7 @@ end
 </div>
 
 
-<h3 id="methods">Other Submission Methods</h3>
+## Other Submission Methods
 
 Using the StatsD server bundled with the Datadog Agent is the simplest
 way of submitting metrics to Datadog, but it's not
@@ -495,7 +495,7 @@ Datadog:
   </li>
 </ul>
 
-<h3 id="custom">Seeing Your Custom Metrics</h3>
+## Seeing Your Custom Metrics
 
 The quickest way to see your custom metric is to use the metrics explorer. You
 can navigate to it by clicking the "Metrics" link in the top navigation bar.

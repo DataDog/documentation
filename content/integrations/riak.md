@@ -4,19 +4,22 @@ integration_title: Riak
 git_integration_title: riak
 kind: integration
 doclevel: basic
+description: "{{< get-desc-from-git >}}"
 ---
 
+{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" >}}
+
 ## Overview
+//get-overview-from-git//
 
-Connect Riak to Datadog in order to:
+## Setup
+//get-setup-from-git//
 
-  * Visualize Riak performance and utilization.
-  * Correlate the performance of Riak with the rest of your applications.
+## Data Collected
+//get-data-collected-from-git//
 
-{{< insert-example-links >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-## Metrics
-
-{{< get-metrics-from-git >}}
-
-
+## Further Reading
+//get-further-reading-from-git//

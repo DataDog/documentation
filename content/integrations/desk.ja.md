@@ -48,7 +48,7 @@ Deskのアカウントにログインし、`Setting` -> `API` -> `My Application
 
 以下の画像のように、**Name** と **Website URL** に入力を済ませ、それ以外のURL項目はブランクにしておきます。Addをクリックすると、Deskが自動でconsumer key、 consumer secret、 access token、access secretを生成します。
 
-{{< img src="desk_config.png" >}}
+{{< img src="integrations/desk/desk_config.png" alt="desk config" >}}
 
 次に、Datadogインテグレーションページから[Deskのタイル](https://app.datadoghq.com/account/settings#integrations/desk)を選択し、先ほどDeskで生成した認証情報を入力します。
 又このタイルでは、あなたの会社に割り当てられたDeskドメイン名を入力する必要があります。

@@ -4,6 +4,7 @@ integration_title: AWS EC2
 kind: integration
 git_integration_title: amazon_ec2
 newhlevel: true
+description: "Track instance resource usage, monitor status checks, and more."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizab
 
 Enable this integration to see in Datadog all your EC2 metrics, and additional events like scheduled maintenances.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that EC2 is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

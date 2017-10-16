@@ -4,16 +4,21 @@ integration_title: btrfs
 kind: integration
 doclevel: basic
 git_integration_title: btrfs
+description: "{{< get-desc-from-git >}}"
 ---
+{{< img src="integrations/btrfs/btrfs_metric.png" >}}
 
-Capture Btrfs metrics into Datadog to:
+## Overview
+//get-overview-from-git//
 
-* Visualize your file system performance.
-* Correlate the performance of Btrfs file system with the rest of your applications.
+## Setup
+//get-setup-from-git//
 
-{{< insert-example-links >}}
+## Data Collected
+//get-data-collected-from-git//
 
-## Metrics
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-{{< get-metrics-from-git >}}
-
+## Further Reading
+//get-further-reading-from-git//

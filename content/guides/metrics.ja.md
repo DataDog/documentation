@@ -212,7 +212,7 @@ end
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-{{< img src="graph-guides-metrics-page-views.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-page-views.png" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -287,7 +287,7 @@ end
 
 次のグラフは、先の方法で収集したメトリクスをグラフ表示した例です:
 
-{{< img src="graph-guides-metrics-page-views.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-page-views.png" >}}
 
 - 注) DogStatsDのデフォルト設定では10秒間隔でメトリクスをDatadogへ送信しています。カウンタは、この送信間隔の間の総カウント値を1秒間の数値に換算し、情報を送信しています。
 従って、上のグラフのマーカでは、15:34分に35.33 view/秒という実際には考えられない数値を表示しています。
@@ -448,7 +448,7 @@ These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
-{{< img src="graph-guides-metrics-query-times.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-query-times.png" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100
@@ -515,7 +515,7 @@ end
 `median`をグラフ化することにより、クエリが処理されるまでの一般的な時間(中央値)を把握することができます。
 又、`95percentile`をグラフ化することにより、異常値を取り除いた最大クエリ処理時間を把握することができます。
 
-{{< img src="graph-guides-metrics-query-times.png" >}}
+{{< img src="guides/metrics/graph-guides-metrics-query-times.png" >}}
 
 この例では、「クエリ処理時間の容認範囲は、１秒以内」と仮定し話を進めます。クエリ処理時間の中央値(紫色線)は、概ね100ミリ秒以下を示し、容認範囲を推移しています。
 しかし残念ながら、95パーセンタイル値(青色線)では、放置することのできない長時間クエリがスパイク状に発生しているのが確認でき、長い時には3秒という値になっています。

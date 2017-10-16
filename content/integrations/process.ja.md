@@ -18,7 +18,7 @@ kind: integration
 
 
 - システム上の特定のプロセスのCPU%、メモリー、I/Oのメトリクスを取得します。
-- [Process Monitors](/guides/monitoring#process)の設定に基づいて動作しているプロセスのステータスを監視し、アラートを出力します。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
+- [Process Monitors](/guides/monitors#process)の設定に基づいて動作しているプロセスのステータスを監視し、アラートを出力します。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
 
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:

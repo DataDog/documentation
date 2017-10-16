@@ -6,9 +6,9 @@ sidebar:
   nav:
     - header: Guide to Log Parsing
     - text: Parsing Metrics
-      href: "#metrics"
+      href: "#parsing-metrics"
     - text: Parsing Events
-      href: "#events"
+      href: "#parsing-events"
 ---
 
 Log files contain tons of valuable application and business data.
@@ -16,7 +16,7 @@ Unfortunately, this value is oftentimes never realized because log files go
 ignored. The Datadog Agent can help remedy this by parsing metrics and events from
 logs, so the data within can be graphed in real-time, all the time.
 
-<h2 id="metrics">Parsing Metrics</h2>
+## Parsing Metrics
 
 The Datadog Agent can read metrics directly from your log files:
 
@@ -67,10 +67,16 @@ In this format, the agent will attempt to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
-Agent collector logs. If the Agent is unable to import your function, there will
-be a line with `Could not load Dogstream line parser`. (On the other hand, if
-all goes well you should see `dogstream: parsing {filename} with
-{function name} (requested {config option text})`.)
+Agent collector logs: 
+
+* If the Agent is unable to import your function, there will be a line with `Could not load Dogstream line parser`. 
+
+* If all goes well you should see `dogstream: parsing {filename} with
+{function name} (requested {config option text})`.
+
+<div class="alert alert-warning">
+To test that dogstreams are working, append a line—don't edit an existing one—to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it won't notice any changes you make elsewhere in the file.
+</div>
 
 ### Writing Parsing Functions
 
@@ -155,7 +161,7 @@ if __name__ == '__main__':
 
 And you can test your parsing logic by calling python /path/to/parsers.py.
 
-<h2 id="events">Parsing Events</h2>
+## Parsing Events
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
 `dict` (or a `list` of `dict`) from your custom parsing function, Datadog will treat it as an event instead of a metric.

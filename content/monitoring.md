@@ -8,23 +8,23 @@ sidebar:
     - text: Glossary
       href: "#glossary"
     - text: Host Monitors
-      href: "#host"
+      href: "#host-monitors"
     - text: Metric Monitors
-      href: "#metric"
+      href: "#metric-monitors"
     - text: Integration Monitors
-      href: "#integration"
+      href: "#integration-monitors"
     - text: Process Monitors
-      href: "#process"
+      href: "#process-monitors"
     - text: Network Monitors
-      href: "#network"
+      href: "#network-monitors"
     - text: Event Monitors
-      href: "#event"
+      href: "#event-monitors"
     - text: Custom Monitors
-      href: "#custom"
+      href: "#custom-monitors"
     - text: Monitor Notifications
-      href: "#notifications"
+      href: "#monitor-notifications"
     - text: Monitor FAQs
-      href: "#faqs"
+      href: "#monitor-faqs"
 ---
 
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
@@ -38,7 +38,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
+- **Monitor type**: [host](#host-monitors)-, [metric](#metric-monitors)-, [integration](#integration-monitors)-, [process](#process-monitors)-, [network](#network-monitors)-, [event](#event-monitors)-based, and [custom](#custom-monitors). See side navigation to drill into a specific type.
 - **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
 
 
@@ -56,7 +56,7 @@ on the left. This document will walk through the configuration of each type.
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-{{< img src="monitor/host_monitor.png" >}}
+{{< img src="guides/monitor/host_monitor.png" >}}
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.
@@ -68,22 +68,51 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    than the number of minutes you have selected, then you will get notified.
 
 3. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Metric Monitors
 
+1. Choose the detection method
+    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
 
-1. Select the metric and scope you want to monitor.
-  {{< img src="monitor/metric_scope.png" >}}
+    A **threshold alert** compares the value in the selected
+    timeframe against a given threshold. There are additional options available
+    in the alerting conditions section. This is the standard alert case
+    where you know what sort values are unexpected.
+
+    A **change alert** compares the absolute or percentage change in
+    value between now and some time ago against a given threshold.
+    The compared data points will not be single points but are computed using
+    the parameters in the *alert conditions* section.
+
+    This type of alert is useful to track sudden spikes or drops as well as slow
+    changes in a metric when you might not have an exact "unexpected" threshold.
+    *Note:* the calculated value is not the absolute value - meaning it will be
+    negative for a downward change.
+
+    **Anomaly Detection** is an algorithmic feature that allows you to identify
+    when a metric is behaving differently than it has in the past, taking into
+    account trends, seasonal day-of-week and time-of-day patterns. It is well-
+    suited for metrics with strong trends and recurring patterns that are hard
+    or impossible to monitor with threshold-based alerting.
+
+    **Outlier Detection** is an algorithmic feature that allows you to detect
+    when some members of a group are behaving strangely compared to the others.
+    For example, you could detect that one web server in a pool is processing an
+    unusual number of requests, and hence should be a target for replacement. Or,
+    you could get an early warning that significantly more 500s are happening in
+    one AWS Availability Zone (AZ) than the others, which might indicate an issue
+    arising in that AZ.
+
+2. Select the metric and scope you want to monitor.
+  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
-    Datadog. The standard scoping rules apply here. Please refer to the
-    [scope section](/graphing/#scope) of the graphing primer for
-    further information.
+    Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
-2. Select the alert grouping.
-    {{< img src="monitor/alert_grouping.png" >}}
+3. Select the alert grouping.
+    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -100,24 +129,6 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     This will trigger a separate alert for each device on each host that is
     running out of space.
 
-3. Select the alert type.
-    {{< img src="monitor/alert_type.png" >}}
-
-    A **threshold alert** will compare the value in the selected
-    timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case where
-    you know what sort values are unexpected.
-
-    A **change alert** will compare the change or % change of a value between
-    now and some time ago against a given threshold.
-    The compared data points will not be single points but are computed using
-    the parameters in the *alert conditions* section.
-
-    This type of alert is useful to track fast spikes or drops as well as slow
-    changes in a metric when you might not have an exact "unexpected" threshold.
-    *Note:* the calculated value is not the absolute value - meaning it will be
-    negative for a downward change.
-
 4.  Select the alert conditions
 
     - The **threshold** options vary slightly depending on what alert type you
@@ -125,7 +136,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitor/metric_threshold.png" >}}
+      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -167,6 +178,10 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
+
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
+
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
    window. For example, if you are alerting over the last 5 minutes then you
@@ -182,33 +197,33 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
    anymore values to trigger a resolution.
 
 7. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 
 ### Integration Monitors
 
 
-{{< img src="monitor/es_status.png" >}}
+{{< img src="guides/monitor/es_status.png" >}}
 
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
 
 - Choosing **Integration Status** will present you with one or more service
   checks for each integration. Please refer to the
-  [custom monitors](#check-alerting) section for details on the
+  [custom monitors](#custom-monitors) section for details on the
   available options.
 
 - Choosing **Integration Metric** will provide a familiar interface used for a
   interface used for a Metric Monitor. You will be able to choose from any of
   the metrics provided by this integration. Please refer to the
-  [alert conditions](#metric-conditions) section for details on the available
+  [alert conditions](#metrics-monitors) section for details on the available
   options.
 
 ### Process Monitors
 
 
-{{< img src="monitor/process_monitor.png" >}}
+{{< img src="guides/monitor/process_monitor.png" >}}
 
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
@@ -228,19 +243,19 @@ point they should notify.
    are reporting a status for the selected process.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](#check-alerting) section for details on the available options.
+   [custom monitors](#custom-monitors) section for details on the available options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Network Monitors
 
 
-{{< img src="monitor/network_monitor.png" >}}
+{{< img src="guides/monitor/network_monitor.png" >}}
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
-the [guide to network checks](/guides/network_checks) for details on Agent
+the [guide to network checks](/integrations/tcp_check) for details on Agent
 configuration.
 
 **Network Status**
@@ -252,11 +267,11 @@ configuration.
    the check you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [custom monitors](#check-alerting) section for details on the available
+   [custom monitors](#custom-monitors) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 **Network Metric**
@@ -268,11 +283,11 @@ configuration.
    the metric you have chosen.
 
 3. Select **alerting options**. Please refer to the
-   [alert-conditions](#metric-conditions) section for details on the available
+   [alert-conditions](#metrics-monitors) section for details on the available
    options.
 
 4. Configure your **notification options** Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ### Event Monitors
@@ -280,7 +295,7 @@ configuration.
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-{{< img src="monitor/event_monitor.png" >}}
+{{< img src="guides/monitor/event_monitor.png" >}}
 
 1. Select the query and parameters (status, priority, sources and tags) you want
     to monitor.
@@ -291,14 +306,14 @@ Event monitors allows you to alert when an event matching your query occurs.
     options allows you to set the number of occurence of an event required during
     a timeframe before triggering the monitor.
 
-4. Configure your **notifcation options**. Refer to the [Notifications](#notifications)
+4. Configure your **notifcation options**. Refer to the [Notifications](#monitor-notifications)
     section of this guide for informations.
 
 
 ### Custom Monitors
 
 
-{{< img src="monitor/custom_monitor.png" >}}
+{{< img src="guides/monitor/custom_monitor.png" >}}
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
@@ -327,7 +342,7 @@ or service checks.
    must choose at least 2 minutes for your timeframe.
 
 4. Configure your **notification options**. Refer to the
-   [Notifications](#notifications) section of this guide for a detailed
+   [Notifications](#monitor-notifications) section of this guide for a detailed
    walkthrough of the common notification options.
 
 ## Monitor Notifications
@@ -336,7 +351,7 @@ or service checks.
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="monitor/notification.png" >}}
+{{< img src="guides/monitor/notification.png" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -373,21 +388,21 @@ triggering scope into the message of multi alerts.
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    {{< img src="monitor/conditionalvars.png" >}}
+    {{< img src="guides/monitor/conditionalvars.png" >}}
 
     Here is an example of how you can set it up in the editor:
 
-    {{< img src="monitor/templateconditionaleditor.png" >}}
+    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
 
 
     The corresponding trigger event notification will look like this:
 
-    {{< img src="monitor/templateconditionaltrigger.png" >}}
+    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
 
 
     and the recovery notification:
 
-    {{< img src="monitor/templateconditionalrecover.png" >}}
+    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
 
 
     The conditional variables available are `is_alert`, `is_alert_recovery`,
@@ -402,12 +417,12 @@ triggering scope into the message of multi alerts.
 
     Here is an example of how you can use template variables for a multi alert:
 
-    {{< img src="monitor/templatevareditor.png" >}}
+    {{< img src="guides/monitor/templatevareditor.png" >}}
 
 
     and the corresponding event notification:
 
-    {{< img src="monitor/templatevar.png" >}}
+    {{< img src="guides/monitor/templatevar.png" >}}
 
 
     The tag template variables available depend on the tag group selected in Step 1
@@ -424,7 +439,7 @@ triggering scope into the message of multi alerts.
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    {{< img src="monitor/templatevar_short.png" >}}
+    {{< img src="guides/monitor/templatevar_short.png" >}}
 
     Note that template variable content is escaped by default. If your variable
     contains JSON or code that you would NOT like to be escaped, then use triple braces
@@ -450,7 +465,7 @@ triggering scope into the message of multi alerts.
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   {{< img src="monitor/scope_match_editor.png" >}}
+   {{< img src="guides/monitor/scope_match_editor.png" >}}
 
 #### Variable availability
 

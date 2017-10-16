@@ -4,6 +4,7 @@ integration_title: AWS Machine Learning
 kind: integration
 git_integration_title: amazon_machine_learning
 newhlevel: true
+description: "Track prediction counts and failures."
 ---
 
 ## Overview
@@ -12,15 +13,17 @@ Amazon Machine Learning is a service that makes it easy for developers of all sk
 
 Enable this integration to see in Datadog all your Machine Learning metrics.
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Amazon Web Services integration first](/integrations/aws). There are no other installation steps that need to be performed.
 
-## Configuration
+### Configuration
 
 In the Amazon Web Services integration tile, ensure that Machine Learning is checked under metric collection.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

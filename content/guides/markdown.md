@@ -5,7 +5,7 @@ listorder: 16
 ---
 
 
-### Overview
+## Overview
 Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
 
 The detailed markdown syntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.

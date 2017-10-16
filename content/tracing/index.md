@@ -1,5 +1,5 @@
 ---
-title: Tracing (APM)
+title: APM (Tracing)
 kind: Documentation
 autotocdepth: 2
 hideguides: true
@@ -8,32 +8,27 @@ customnav: tracingnav
 
 ### Overview
 
-Datadog's integrated APM tool eliminates the traditional separation between infrastructure and application performance monitoring. This not only provides greater visibility, but allows you to see the relationship between application code and the underlying infrastructure.
+Datadog's integrated APM tool eliminates the traditional separation between infrastructure and application performance monitoring. This not only provides greater visibility, but also allows you to see the relationship between application code and the underlying infrastructure.
 
 ### Getting started
 
-The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. Pro plan members can visit the [APM page of the Datadog app](https://app.datadoghq.com/trace/home) to begin a free 14-day trial.
+The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog app](https://app.datadoghq.com/trace/home) to get started.
 
-Currently, tracing is only supported by version 5.11.0 (or above) of the Datadog Agent running on Linux and Docker.
+APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process. The Agent can be enabled by including the following in your Datadog agent configuration file: `apm_enabled: yes`
+
+<div class="alert alert-info">
+APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: `apm_enabled: no` in your Datadog agent configuration file.
+</div>
 
 #### Installing the agent
 
 With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To enable tracing:
 
-1.  Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
-1.  Enable the APM in the Datadog Agent configuration file
-
-    ~~~
-    [Main]
-    # Enable the trace agent.
-    apm_enabled: true
-    ~~~
-
-1.  [Restart the Agent](/guides/basic_agent_usage/)
+Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
 
 #### Running the agent in Docker
 
-To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher)and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
+To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
 For additional information, please reference [the project README on Github](https://github.com/DataDog/docker-dd-agent/blob/master/README.md#tracing--apm)
 
@@ -61,6 +56,8 @@ The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastruc
 | **trace.receiver** |
 | `receiver_port` | `DD_RECEIVER_PORT` | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`. |
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
+| **trace.ignore** |
+| `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their Resource name. |
 
 
 For more information about the Datadog Agent, see the [Getting Started guide](/guides/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).

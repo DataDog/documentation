@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_firebase
+description: "Track network and data store usage attributable to your Firebase services."
 ---
 
 ## Overview
@@ -15,11 +16,13 @@ Get metrics from Google Firebase to:
 * Visualize the performance of your Firebase databases and hosting services
 * Correlate the performance of your Firebase tools with your applications
 
-## Installation
+## Setup
+### Installation
 
 If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
 
-## Metrics
+## Data Collected
+### Metrics
 
 {{< get-metrics-from-git >}}
 

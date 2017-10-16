@@ -16,7 +16,7 @@ What is the Agent?
 
 <h2 id="what_is_the_agent">What is the Agent?</h2>
 
-The Datadog Agent is piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
+The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
 your behalf so that you can do something useful with your monitoring and performance data.
 
 The source code for the Datadog Agent can be found <a href='https://github.com/DataDog/dd-agent'>here</a>.

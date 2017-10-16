@@ -9,7 +9,6 @@ import tempfile
 import csv
 import glob
 
-
 def csv_to_yaml(key_name, csv_filename, yml_filename):
     """
     Given a file path to a single csv file convert it to a yaml file
@@ -39,16 +38,18 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     :param is_dogweb: if dogweb repo we need to get nested data
     """
     directory = 'integration' if is_dogweb else ''
-    url = 'https://api.github.com/repos/{0}/{1}/contents/{2}'.format(org, repo, directory)
+    url = 'https://api.github.com/repos/{0}/{1}/contents/{3}?ref={2}'.format(org, repo, branch, directory)
     headers = {'Authorization': 'token {}'.format(token)} if token else {}
     excludes = ['LICENSE', 'Rakefile', 'Gemfile']
     print('Downloading files from {}/{}..'.format(repo, branch))
     response = requests.get(url, headers=headers)
+
     if response.status_code == requests.codes.ok:
         for obj in tqdm(response.json()):
             name = obj.get('name', '')
             if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                to_csv = '{0}/{1}/{1}_metadata.csv'.format(directory, name) if is_dogweb else '{}/metadata.csv'.format(name)
+                to_csv = '{0}/{1}/{1}_metadata.csv'.format(directory, name) if is_dogweb else '{}/metadata.csv'.format(
+                    name)
                 response_csv = requests.get(
                     'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_csv),
                     headers=headers
@@ -56,9 +57,11 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 if response_csv.status_code == requests.codes.ok:
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
+    
+
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
-
+        exit(1)
 
 def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
     """
@@ -82,6 +85,8 @@ def sync_from_dir(from_path=None, to_path=None, is_dogweb=False):
             csv_to_yaml(key_name, file_name, new_file_name)
     else:
         print('Path does not exist: {}'.format(from_path))
+        exit(1)
+
 
 
 def parse_args(args=None):
@@ -139,9 +144,10 @@ def sync(*args):
     if not options.dogweb:
         if options.token:
             options.dogweb = dogweb_extract_path
-            download_github_files(options.token, 'DataDog', 'dogweb', 'master', options.dogweb + 'integration' + sep, True)
+            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
         else:
             print('No Github token.. dogweb retrieval failed')
+            exit(1)
     if options.dogweb:
         sync_from_dir(options.dogweb, dest_dir, True)
 
@@ -151,7 +157,6 @@ def sync(*args):
         options.integrations = integrations_extract_path
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     sync_from_dir(options.integrations, dest_dir)
-
 
 if __name__ == '__main__':
     sync()
