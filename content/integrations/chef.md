@@ -50,7 +50,7 @@ Then upload your role file to Chef Server like so:
 
     knife role from file roles/base.rb
 
-The next time Chef runs, it should install the Agent and set the configuration file with the API and application keys.
+The next time Chef runs, it will install the Agent and set the configuration file with the API and application keys.
 
 **NOTE:** If you are using another cookbook to define these attributes, use a higher attribute precedence level than `default`.
 
@@ -60,7 +60,7 @@ Datadog offers a Chef Report Handler which reports metrics and events from your 
 
 This has the added value of bringing the output of a Chef run back to Datadog's Event stream, so failures can be highlighted quickly, discussed amongst the team, and resolved.
 
-Successes typically will be found in the "Low" priority, whereas failures are of "Normal" priority, and when the same node passes the Chef run, then it is put pack into "Low" priority.
+Success will be found in the "Low" priority, whereas failures are of "Normal" priority, and when the same node passes the Chef run, then it is put pack into "Low" priority.
 
 Adding the handler is very simple, as you can see in this role snippet:
 
