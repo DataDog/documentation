@@ -4,6 +4,7 @@ integration_title: AWS EC2
 kind: integration
 git_integration_title: amazon_ec2
 newhlevel: true
+description: "Track instance resource usage, monitor status checks, and more."
 ---
 
 ## Overview

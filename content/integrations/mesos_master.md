@@ -6,6 +6,7 @@ doclevel: basic
 git_integration_title: mesos_master
 aliases:
     - /integrations/mesos/
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

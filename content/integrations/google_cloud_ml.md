@@ -4,6 +4,7 @@ integration_title: Google Machine Learning
 kind: integration
 doclevel: basic
 newhlevel: true
+description: "Track key Google Cloud Machine Learning metrics."
 ---
 
 ## Overview

@@ -7,6 +7,7 @@ newhlevel: true
 updated_for_agent: 5.8.5
 aliases:
   - /guides/chef/
+description: "Track Chef client runs including metrics on completion times, analytics on resource changes, and success rates."
 ---
 
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}

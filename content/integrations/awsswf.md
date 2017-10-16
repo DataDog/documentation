@@ -4,6 +4,7 @@ integration_title: AWS Simple Workflow Service
 kind: integration
 git_integration_title: amazon_swf
 newhlevel: true
+description: "Track key Amazon Simple Workflow Service metrics."
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ integration_title: Nagios
 kind: integration
 doclevel: basic
 description: "{{< get-desc-from-git >}}"
+git_integration_title: nagios
 ---
 ## Overview
 //get-overview-from-git//

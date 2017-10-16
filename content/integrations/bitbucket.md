@@ -3,6 +3,7 @@ title: Datadog-Bitbucket Integration
 integration_title: Bitbucket
 kind: integration
 newhlevel: true
+description: "See which commits and pull requests affect performance across your services."
 ---
 
 {{< img src="integrations/bitbucket/integrations-bitbucket.gif" >}}

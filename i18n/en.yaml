@@ -34,8 +34,8 @@
 - id: menu_references_graphingjson
   translation: "Graphing using JSON"
 
-- id: menu_references_host_names
-  translation: "Host Names"
+- id: menu_references_infrastructure
+  translation: "Infrastructure"
 
 - id: menu_references_integrations
   translation: "Integrations"
@@ -135,6 +135,22 @@
 
 - id: customnav_tracingnav_api
   translation: "Tracing API"
+
+# Infrastructure
+- id: customnav_infrastructurenav
+  translation: "Infrastructure"
+
+- id: customnav_infrastructurenav_hostmap
+  translation: "Hostmap"
+
+- id: customnav_infrastructurenav_livecontainers
+  translation: "Containters" 
+
+- id: customnav_infrastructurenav_process
+  translation: "Processes"
+
+- id: customnav_infrastructurenav_infrastructure_list
+  translation: "Infrastructure List"
 
 # Logs
 
