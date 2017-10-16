@@ -4,6 +4,7 @@ integration_title: Cloudhealth
 kind: integration
 git_integration_title: cloudhealth
 newhlevel: true
+description: "Enrich and improve CloudHealth's right sizing and reservation recommendations with Datadog metrics."
 ---
 
 ## Overview

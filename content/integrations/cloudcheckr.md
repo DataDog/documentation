@@ -5,6 +5,8 @@ kind: integration
 newhlevel: true
 ---
 
+{{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}
+
 ## Overview
 
 Quickly make data-driven decisions based on current and past resource consumption to maintain an agile, cost-effective infrastructure with the Datadog-CloudCheckr Integration

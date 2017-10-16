@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_vm_scale_set
 newhlevel: true
+description: "Track by-set metrics: bytes in and out, disk operations, CPU usage, and more."
 ---
 
 {{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" >}}

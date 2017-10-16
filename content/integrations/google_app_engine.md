@@ -3,6 +3,7 @@ title: Datadog-Google App Engine Integration
 integration_title: Google App Engine
 kind: integration
 git_integration_title: google_app_engine
+description: "Collect metrics for your project and compare them across project versions."
 ---
 
 

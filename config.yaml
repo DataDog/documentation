@@ -44,9 +44,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -169,6 +169,23 @@ languages:
           url: tracing/api/
           weight: 110
 
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_infrastructure_list
+          url: "infrastructure/"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
       lognav:
         - identifier: customnav_lognav
           url: "#"
@@ -185,7 +202,6 @@ languages:
         - identifier: customnav_lognav_parsing
           url: logs/parsing/
           weight: 50
-
 
   ja:
     #languagename: "日本語"
@@ -213,9 +229,9 @@ languages:
           name: ""
           url: "graphing/"
           weight: 50
-        - identifier: menu_references_host_names
+        - identifier: menu_references_infrastructure
           name: ""
-          url: "hostnames/"
+          url: "infrastructure/"
           weight: 60
         - identifier: menu_references_integrations
           name: ""
@@ -242,9 +258,44 @@ languages:
           url: "faq/"
           weight: 120
 
+      infrastructurenav:
+        - identifier: customnav_infrastructurenav
+          url: "#"
+          weight: 10
+        - identifier: customnav_infrastructurenav_hostnames
+          url: "infrastructure/"
+          weight: 20
+        - identifier: customnav_infrastructurenav_hostmap
+          url: "infrastructure/hostmap"
+          weight: 30
+        - identifier: customnav_infrastructurenav_livecontainers
+          url: "infrastructure/livecontainers"
+          weight: 40
+        - identifier: customnav_infrastructurenav_process
+          url: "infrastructure/process"
+          weight: 50
+          
+      lognav:
+        - identifier: customnav_lognav
+          url: "#"
+          weight: 10
+        - identifier: customnav_lognav_collection
+          url: logs/
+          weight: 20
+        - identifier: customnav_lognav_explore
+          url: logs/explore/
+          weight: 30
+        - identifier: customnav_lognav_processing
+          url: logs/processing/
+          weight: 40
+        - identifier: customnav_lognav_parsing
+          url: logs/parsing/
+          weight: 50
+
 params:
   environment: local
   img_url: "http://localhost:1313/"
+  corp_url: "https://www.datadoghq.com/"
   imgix:
     header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
     header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"

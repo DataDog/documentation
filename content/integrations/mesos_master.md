@@ -4,6 +4,7 @@ integration_title: Mesos & DC/OS Master
 kind: integration
 doclevel: basic
 git_integration_title: mesos_master
+description: "{{< get-desc-from-git >}}"
 ---
 
 ## Overview

@@ -3,6 +3,7 @@ title: Datadog-Campfire Integration
 integration_title: Campfire
 kind: integration
 doclevel: basic
+description: "Send selected Datadog alerts and graphs to your team's Campfire channel."
 ---
 
 

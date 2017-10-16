@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_cloud_vpn
+description: "Monitor VPN tunnel status, throughput, session counts, and more."
 ---
 
 ## Overview

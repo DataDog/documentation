@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 newhlevel: true
 git_integration_title: google_container_engine
+description: "Monitor your Google Container Engine resource usage."
 ---
 
 ## Overview

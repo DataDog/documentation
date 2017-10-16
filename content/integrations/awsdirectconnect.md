@@ -4,6 +4,7 @@ integration_title: AWS Direct Connect
 kind: integration
 git_integration_title: amazon_directconnect
 doclevel: basic
+description: "Track key Amazon Direct Connect metrics."
 ---
 
 ## Overview

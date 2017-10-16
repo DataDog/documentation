@@ -1,8 +1,8 @@
 ---
 title: Datadog-Splunk Integration
 integration_title: Splunk
-
 kind: integration
+description: "Capture events from Splunk and overlay them onto key metrics graphs."
 ---
 
 
