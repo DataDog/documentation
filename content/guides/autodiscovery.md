@@ -210,7 +210,7 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 ### Template Source: Kubernetes Pod Annotations
 
-Since version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+As of version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
 
 Autodiscovery expects annotations to look like this:
 
