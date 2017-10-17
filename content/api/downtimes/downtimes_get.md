@@ -5,6 +5,6 @@ order: 9.5
 ---
 
 ## Get A Monitor Downtime
-ARGUMENTS
+##### ARGUMENTS
 
 This end point takes no JSON arguments.'

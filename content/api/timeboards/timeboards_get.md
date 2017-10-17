@@ -7,5 +7,5 @@ order: 10.5
 #### Get a Timeboard
 Fetch an existing dashboard's definition.
 
-#####Arguments
+##### Arguments
 *This end point takes no JSON arguments.*

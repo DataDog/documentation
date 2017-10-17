@@ -7,10 +7,11 @@ order: 5.3
 ## Query Time Series Points
 This end point allows you to query for metrics from any time period.
 
-ARGUMENTS
-
-query [required]
-The query strong
-QUERY LANGUAGE
-
-Any query used for a graph can be used here. See here for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity.
+##### ARGUMENTS
+<ul class="arguments">
+    {{< argument name="from" description="seconds since the unix epoch" default="None" >}}
+    {{< argument name="to" description="seconds since the unix epoch" default="None" >}}
+    {{< argument name="start" description="seconds since the unix epoch" default="None" >}}
+    {{< argument name="end" description="seconds since the unix epoch" default="None" >}}
+    {{< argument name="query" description="The query strong" default="None" >}}
+</ul>

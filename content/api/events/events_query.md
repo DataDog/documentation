@@ -7,15 +7,11 @@ order: 6.4
 ## Query The Event Stream
 The event stream can be queried and filtered by time, priority, sources and tags.
 
-ARGUMENTS
-
-start [required]
-POSIX timestamp
-end [required]
-POSIX timestamp
-priority [optional, default=None]
-'low' or 'normal'
-sources [optional, default=None]
-A comma separated string of sources
-tags [optional, default=None]
-A comma separated string of tags
+##### ARGUMENTS
+<ul class="arguments">
+    {{< argument name="start" description="POSIX timestamp" >}}
+    {{< argument name="end" description="POSIX timestamp" >}}
+    {{< argument name="priority" description="'low' or 'normal'" default="None" >}}
+    {{< argument name="sources" description="A comma separated string of sources" default="None" >}}
+    {{< argument name="tags" description="A comma separated string of tags" default="None" >}}
+</ul>

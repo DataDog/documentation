@@ -5,7 +5,7 @@ order: 9.6
 ---
 
 ## Get All Monitor Downtimes
-ARGUMENTS
-
-current_only [optional, default=false]
-Only return downtimes that are activewhen the request is made.
+##### ARGUMENTS
+<ul class="arguments">
+    {{< argument name="current_only" description="Only return downtimes that are activewhen the request is made." default="false" >}}
+</ul>

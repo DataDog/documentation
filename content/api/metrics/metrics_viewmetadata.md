@@ -7,6 +7,6 @@ order: 5.4
 
 The metrics metadata endpoint allows you to get metadata about a specific metric.
 
-ARGUMENTS
+##### ARGUMENTS
 
 This end point takes no JSON arguments.'

@@ -73,6 +73,9 @@ aside.sidenav {
   }
   ul {
     li {
+      .toc_scrolled {
+        color:$ddpurple;
+      }
       a {
         color:#000;
         font-size:18px;

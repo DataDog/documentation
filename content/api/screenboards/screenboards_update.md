@@ -5,19 +5,15 @@ order: 11.2
 ---
 
 ## Update A Screenboard
-ARGUMENTS
+##### ARGUMENTS
 
-board_title [required]
-The name of the dashboard.
-description [optional, default=None]
-A description of the dashboard's content.
-widgets [required]
-A list of widget definitions. See here for more examples.
-template_variables [optional, default=None]
-A list of template variables for using Dashboard templating.
-width [optional, default=None]
-Screenboard width in pixels
-height [optional, default=None]
-Height in pixels.
-read_only [optional, default=False]
-The read-only status of the screenboard.
+<ul class="arguments">
+    {{< argument name="board_title" description="The name of the dashboard.">}}
+    {{< argument name="description" description="A description of the dashboard's content." default="None" >}}
+    {{< argument name="widgets" description="A list of widget definitions. See <a href='/api/screenboards/'>here</a> for more examples.">}}
+    {{< argument name="template_variables" description="A list of template variables for using Dashboard templating." default="None" >}}
+    {{< argument name="width" description="Screenboard width in pixels" default="None" >}}
+    {{< argument name="height" description="Height in pixels." default="None" >}}
+    {{< argument name="read_only" description="The read-only status of the screenboard." default="False">}}
+</ul>
+

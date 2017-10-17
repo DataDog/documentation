@@ -5,7 +5,7 @@ order: 9.4
 ---
 
 ## Cancel Monitor Downtimes By Scope
-ARGUMENTS
-
-scope [required]
-Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'.
+##### ARGUMENTS
+<ul class="arguments">
+    {{< argument name="scope" description="Cancel all downtimes with the given scope(s), e.g. 'env:prod', 'role:db,role:db-slave'." >}}
+</ul>

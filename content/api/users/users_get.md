@@ -5,7 +5,8 @@ order: 16.2
 ---
 
 ## Get User
-ARGUMENTS
+##### ARGUMENTS
 
-[required]
-The handle of the user.
+<ul class="arguments">
+    {{< argument name="handle" description="The handle of the user." >}}
+</ul>
