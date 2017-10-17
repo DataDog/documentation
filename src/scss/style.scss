@@ -58,6 +58,12 @@ pre {
   visibility: visible;
 }
 
+
+.api-code code {
+  background-color:#0F0F0F;
+  color:#fff;
+}
+
 p {
   // todo: can i set this with a bootstrap variable?
   font-size:18px;
