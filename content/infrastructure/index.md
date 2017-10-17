@@ -1,29 +1,27 @@
 ---
-title: Host Naming
+title: Infrastructure List
 kind: documentation
-sidebar:
-  nav:
-    - header: Host Naming
-    - text: Agent Host Names
-      href: "#agent-host-name"
-    - text: Host Aliases
-      href: "#host-aliases"
+autotocdepth: 2
+hideguides: true
+customnav: infrastructurenav
+aliases:
+  - /hostnames
 ---
 
-<div class="alert alert-info">
-  An overview of how we uniquely identify hosts and how they are displayed in
-  Datadog. If you have more questions, stop by <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-where we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.)
-</div>
+## Overview
 
-## Agent Host Names
+The Infrastructure list page shows all hosts monitored by your datadog application:
 
-<div class="alert alert-warn">
-  This applies to version 3.6 of the Agent and later. If you're having issues
-  with host names, we recommend updating to the latest version of the Agent.
-</div>
+{{< img src="infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" >}}
+
+
+## Host details
+
+If you click on one host, You can see the tags applied to it:
+
+{{< img src="infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" >}}
+
+### Agent Host Names
 
 The Datadog Agent collects potential hostnames from a number of different
 sources. To see all the names the Agent is detecting, run the Agent info
@@ -47,7 +45,7 @@ command:
 
 From these names, a canonical name is picked for the host. This is the name the
 Agent will primarily use to identify itself to Datadog. The other names are
-submitted as well, but only as candidates for <a href="#aliases">aliasing</a>.
+submitted as well, but only as candidates for [aliases](#host-aliases).
 
 The canonical host name is picked according to the following rules. The first
 match is selected.
@@ -60,7 +58,7 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next.
 
-## Host Aliases
+### Host Aliases
 
 A single host running in EC2 might have an
 instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the
@@ -69,11 +67,17 @@ internal DNS server or a config-managed hosts file (`myhost.mydomain`). Datadog
 creates aliases for host names when there are multiple uniquely identifiable
 names for a single host.
 
-The names collected by the Agent (detailed <a href="#agent">above</a>) are
+The names collected by the Agent (detailed [above](#agent-host-names)) are
 added as aliases for the chosen canonical name.
 
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
 
-{{< img src="hostnames/host_aliases.png" responsive="true" >}}
+{{< img src="infrastructure/index/host_aliases.png" responsive="true" >}}
+
+## What's next
+
+* [See all of your hosts together on one screen with the hostmap](/infrastructure/hostmap)
+* [Get real-time visibility of all of the containers across your environment](/infrastructure/livecontainers)
+* [Understand what is going on at any level of your system](/infrastructure/process)

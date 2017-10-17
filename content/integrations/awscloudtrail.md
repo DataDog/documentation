@@ -3,6 +3,7 @@ title: Datadog-AWS CloudTrail Integration
 integration_title: AWS CloudTrail
 kind: integration
 newhlevel: true
+description: "Alert on suspicious AWS account activity."
 ---
 
 {{< img src="integrations/awscloudtrail/cloudtrail_event.png" responsive="true" >}}

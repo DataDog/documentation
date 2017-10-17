@@ -23,24 +23,25 @@ help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
 clean: stop  ## clean all make installs.
+	@echo "cleaning up..."
 	make clean-build
 	make clean-integrations
 	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
-	make clean-docker
 	make clean-exe
 	make clean-integrations
 	make clean-node
 	make clean-virt
+	make clean-docker
 
 clean-build:  ## remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
 
 clean-docker:  ## remove image.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi
-	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi
+	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true
+	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi || true
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
@@ -95,7 +96,7 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 
-start: stop clean source-helpers ## start the gulp/hugo server.
+start: clean source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -113,6 +114,6 @@ start: stop clean source-helpers ## start the gulp/hugo server.
 		run-site.sh; fi
 
 stop:  ## stop the gulp/hugo server.
-	@echo "cleaning up..."
+	@echo "stopping previous..."
 	@pkill -x gulp || true
 	@pkill -x hugo server --renderToDisk || true

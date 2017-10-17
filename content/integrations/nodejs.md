@@ -3,6 +3,7 @@ title: "Datadog-NodeJS Integration"
 integration_title: "NodeJS"
 kind: integration
 doclevel: basic
+description: "Send custom metrics from your Node.js services via DogStatsD or our API."
 ---
 
 {{< img src="integrations/nodejs/nodejs_graph.png" alt="Node JS graph" responsive="true" >}}

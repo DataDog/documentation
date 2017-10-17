@@ -4,6 +4,7 @@ integration_title: New Relic
 kind: integration
 git_integration_title: new_relic
 newhlevel: true
+description: "See New Relic metrics and events in Datadog."
 ---
 
 {{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" responsive="true" >}}
@@ -20,7 +21,7 @@ Connect to New Relic to:
 #### New Relic Alerts in Event Stream
 
 1.  On the Webhook tab of New Relic's alerting notification settings page, enter the following webhook URL:
-`https://app.datadoghq.com/intake/webhooknewrelic?api_key={YOUR_DATADOG_API_KEY}`
+`https://app.datadoghq.com/intake/webhook/newrelic?api_key={YOUR_DATADOG_API_KEY}`
 
 2.  For 'Custom Payload'(s), select JSON 'Payload Type'.
 

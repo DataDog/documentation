@@ -3,6 +3,7 @@ title: Datadog-Catchpoint Integration
 integration_title: Catchpoint
 kind: integration
 doclevel: basic
+description: "Send your Catchpoint alerts to your Datadog event stream."
 ---
 
 {{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" responsive="true" >}}

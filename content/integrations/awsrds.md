@@ -4,6 +4,7 @@ integration_title: AWS RDS
 kind: integration
 git_integration_title: amazon_rds
 newhlevel: true
+description: "Track a wealth of metrics related to Amazon RDS."
 ---
 
 {{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" responsive="true" >}}

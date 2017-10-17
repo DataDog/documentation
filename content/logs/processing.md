@@ -1,14 +1,17 @@
 ---
 title: Processing
-kind: Documentation
+kind: documentation
 autotocdepth: 2
 hideguides: true
 customnav: lognav
+description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
+beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's log management is currently in private beta. If you would like to apply to it, please fill out <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
+
 
 ## Overview
 
@@ -18,7 +21,7 @@ To access the processing panel use the upper left menu:
 ## Processing Pipelines 
 ### Pipelines Goal 
 
-**A processing pipeline applies over a filtered subset of incoming logs a list of sequential processors.**
+**A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**
 
 With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
 
@@ -49,7 +52,7 @@ The log list shows which logs your pipeline applies to:
 
 {{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" style="width:90%;">}}
 
-### Integrations Pipelines
+### Integration Pipelines
 
 Integration pipelines are automatically installed when you activate an [integration](https://app.datadoghq.com/account/settings).
 
@@ -59,9 +62,9 @@ These pipelines are read-only, but you can clone them and then edit the clone:
 
 ## Processors
 
-A processor executes within a [pipeline](#processing-pipelines) a well identified action ([Remapping an attribute](#attribute-remapper), [Grok parsing](#grok-parser)...) on a log.
+A processor executes within a [pipeline](#processing-pipelines) a data-structuring action ([Remapping an attribute](#attribute-remapper), [Grok parsing](#grok-parser)...) on a log.
 
-The different kind of processors are explained below.
+The different kinds of processors are explained below.
 
 ### Grok Parser
 
@@ -130,12 +133,12 @@ Into this log:
 
 ### URL Parser 
 
-This processor extracts query params and other important parameter from a URL, just enter the source attribute of your url:
+This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
 {{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" >}}
 
 ### Useragent parser
 
-UserAgent processor takes a useragent attribute and does its best to extract the OS, browser, device, etc...
+UserAgent parser takes a useragent attribute and does its best to extract the OS, browser, device, etc...
 It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 
 If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.

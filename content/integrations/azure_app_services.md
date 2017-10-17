@@ -5,6 +5,7 @@ kind: integration
 doclevel: basic
 git_integration_title: azure_app_services
 newhlevel: true
+description: "Track key Azure App Services metrics."
 ---
 
 ## Overview

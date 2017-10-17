@@ -9,7 +9,9 @@
         "node_modules/popper.js/dist/umd/popper.js",
         "node_modules/bootstrap/dist/bootstrap.js",
         "node_modules/mixitup/dist/mixitup.js",
-        "node_modules/stickyfilljs/dist/stickyfill.js"
+        "node_modules/stickyfilljs/dist/stickyfill.js",
+        "src/js/vendor/algoliasearch.min.js",
+        "src/js/vendor/jquery.pajinate.min.js"
       ],
       "main": true
     },

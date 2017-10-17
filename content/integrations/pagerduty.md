@@ -1,9 +1,9 @@
 ---
 title: Datadog-PagerDuty Integration
 integration_title: PagerDuty
-
 kind: integration
 doclevel: basic
+description: "Generate PagerDuty alerts from Datadog metrics and events."
 ---
 
 {{< img src="integrations/pagerduty/pagerduty_incident_trends.png" responsive="true" >}}

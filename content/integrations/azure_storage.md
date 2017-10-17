@@ -4,6 +4,7 @@ integration_title: Microsoft Azure Storage
 kind: integration
 git_integration_title: azure_storage
 newhlevel: true
+description: "Track key Azure Storage metrics."
 ---
 
 {{< img src="integrations/azure/storage_dash.png" responsive="true" >}}

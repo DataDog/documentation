@@ -13,7 +13,7 @@
     <li class="nav-header">Documentation Search</li>
     <li>
       <form action="{{ $.Site.BaseURL }}search/">
-      <input type="text" name="q" id="tipue_search_input" autocomplete="off"
+      <input type="text" name="s" id="tipue_search_input" autocomplete="off"
              style="background-image: url({{ partial "img.html" (dict "root" . "src" "search.png") }});"
              required>
       </form>
@@ -41,6 +41,21 @@
     {{ $nav_headers := (slice "customnav_lognav")}}
       <li id="toc-box"></li>
       {{ range .Site.Menus.lognav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "infrastructurenav"}}
+    {{ $nav_headers := (slice "customnav_infrastructurenav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.infrastructurenav -}}
 
         {{ if in $nav_headers .Identifier }}
         <li class="nav-header">{{ i18n .Identifier }}</li>

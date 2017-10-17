@@ -4,6 +4,7 @@ integration_title: AWS Elastic Block Store
 kind: integration
 git_integration_title: amazon_ebs
 newhlevel: true
+description: "Track snapshot age, IOPS, read/write times, and more."
 ---
 
 ## Overview

@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: amazon_elb
 updated_for_agent: 5.8.5
 newhlevel: true
+description: "Track key Amazon ElasticBeanstalk metrics."
 ---
 
 {{< img src="integrations/awselb/elb.png" alt="ELB default dashboard" responsive="true" responsive="true" >}}
