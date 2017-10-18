@@ -1,7 +1,6 @@
 ---
 title: Log Parsing in the Agent
-kind: guide
-listorder: 8
+kind: documentation
 sidebar:
   nav:
     - header: Guide to Log Parsing

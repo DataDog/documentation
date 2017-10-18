@@ -1,8 +1,7 @@
 ---
 title: Creating New Integrations
-kind: guide
+kind: documentation
 autotocdepth: 2
-listorder: 5
 ---
 <!-- Additional styling to help file name headers stand out -->
 <style>h5 code{font-size:16px;display:inline-block;margin-top:20px;}</style>

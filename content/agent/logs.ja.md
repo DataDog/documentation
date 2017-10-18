@@ -3,8 +3,7 @@ last_modified: 2017/02/13
 translation_status: complete
 language: ja
 title: Datadog Agent によるログの解析方法
-kind: guide
-listorder: 6
+kind: documentation
 sidebar:
   nav:
     - header: ログ解析のガイド

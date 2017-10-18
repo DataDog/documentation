@@ -1,10 +1,8 @@
 ---
 title: Using Autodiscovery with Docker
-kind: guide
-listorder: 15
+kind: documentation
 aliases:
   - /guides/servicediscovery/
-
 ---
 
 <div class="alert alert-info">

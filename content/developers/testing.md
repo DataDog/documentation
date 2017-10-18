@@ -1,7 +1,6 @@
 ---
 title: Testing Integrations
-kind: guide
-listorder: 10
+kind: documentation
 autotocdepth: 2
 ---
 <style>

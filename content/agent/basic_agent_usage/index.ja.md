@@ -3,8 +3,7 @@ last_modified: 2015/07/15
 translation_status: complete
 language: ja
 title: Datadog Agent 入門
-kind: guide
-listorder: 2
+kind: documentation
 ---
 
 <!-- <div class="alert alert-info">

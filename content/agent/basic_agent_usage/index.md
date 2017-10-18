@@ -1,7 +1,6 @@
 ---
 title: Getting Started with the Agent
-kind: guide
-listorder: 1
+kind: documentation
 ---
 
 <div class="alert alert-info">

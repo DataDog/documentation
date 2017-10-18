@@ -1,7 +1,6 @@
 ---
 title: Guide to Tagging
-kind: guide
-listorder: 17
+kind: documentation
 ---
 
 ## Overview

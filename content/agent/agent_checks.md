@@ -1,7 +1,6 @@
 ---
 title: Writing an Agent Check
-kind: guide
-listorder: 9
+kind: documentation
 sidebar:
   nav:
     - header: Guide to Agent Checks

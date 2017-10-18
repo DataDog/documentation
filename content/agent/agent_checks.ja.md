@@ -3,8 +3,7 @@ last_modified: 2015/07/15
 translation_status: complete
 language: ja
 title: Agent Checkの書き方
-kind: guide
-listorder: 4
+kind: documentation
 sidebar:
   nav:
     - header: Agent Checkのガイド

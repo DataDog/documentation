@@ -3,7 +3,7 @@ last_modified: 2016/08/17
 translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
-kind: guide
+kind: documentation
 sidebar:
   nav:
     - header: Datadogのサービスについて

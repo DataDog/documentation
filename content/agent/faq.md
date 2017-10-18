@@ -1,3 +1,8 @@
+---
+title: Agent FAQ
+kind: documentation
+---
+
 ## Agent
 ### Is the agent necessary to use Datadog?
 
