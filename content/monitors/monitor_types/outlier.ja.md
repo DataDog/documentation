@@ -1,11 +1,14 @@
 ---
-last_modified: 2017/08/25
-translation_status: tentative
-language: ja
 title: Outlier Detection (外れ値検知)
-kind: guide
-listorder: 23
+kind: documentation
+autotocdepth: 3
+hideguides: true
+customnav: monitortypenav
+aliases:
+    - /ja/guides/outliers
+description: "Alert on members of a group behaving differently than the others"
 ---
+
 <!--
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
 

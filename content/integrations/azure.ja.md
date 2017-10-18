@@ -73,7 +73,7 @@ Datadogの監視が正しく動作するためには、"Basic metrics", "network
 Datadogは、Azure Extension Managerに対応しています。これにより、AzureのポータルからDatadog Agentをインストールすることが出来ます。Azure上で起動しているVMがWindowsかLinuxに関わらず、ワンクリックでDatadog Agentをインストールすることが出来ます。ワンクリックでのインストールを実行するには、[
 Azureのポータル](http://portal.azure.com)から、運用中のVMを選択するか、新しいVMを起動しDatadog Agentの追加をクリックします。
 
-{{< img src="azure-image-4.gif" alt="Azure performance monitoring with One-Click Deployment through Datadog" >}}
+{{< img src="integrations/azure/azure-image-4.gif" alt="Azure performance monitoring with One-Click Deployment through Datadog" >}}
 
 
 インストール手順:

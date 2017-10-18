@@ -1,20 +1,9 @@
 ---
-last_modified: 2015/04/02
-translation_status: complete
-language: ja
-title: ダッシュボードのテンプレートの作成方法
-kind: guide
-listorder: 10
-sidebar:
-  nav:
-    - header: ダッシュボードの設定ガイド
-    - text: テンプレート機能を有効にする
-      href: "#new"
-    - text: テンプレート変数の定義
-      href: "#def"
-    - text: グラフエディターでテンプレート変数を使う方法
-      href: "#graph"
-
+title: Dashboards
+kind: documentation
+autotocdepth: 3
+hideguides: true
+customnav: graphingnav
 ---
 
 <!-- <p> Dashboard templating allows you to create dashboards that use variables like <code>$scope</code>
