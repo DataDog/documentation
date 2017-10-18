@@ -4,6 +4,8 @@ kind: documentation
 autotocdepth: 3
 hideguides: true
 customnav: graphingnav
+aliases:
+    - /guides/eventsemail
 ---
 
 ## Events Email

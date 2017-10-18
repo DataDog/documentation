@@ -44,11 +44,11 @@ The 'Default Tag' option determines the initial value for the variable on dashbo
 
 テンプレート変数を設定、編集、削除するには、ダッシュボード右上隅の歯車のアイコンをクリックし、アクションメニューから'Edit Template Variables'を選択します。
 
-{{< img src="guides/templating/edit-template-variables.png" >}}
+{{< img src="graphing/dashboards/edit-template-variables.png" >}}
 
 この選択により、テンプレート変数エディターを表示します。
 
-{{< img src="guides/templating/redis-template-var.png" >}}
+{{< img src="graphing/dashboards/redis-template-var.png" >}}
 
 テンプレート変数は、名前と'Tag Group'と'Default Tag'のオプションパラメーターで定義されています。
 タググループは、複数のタグに渡り設定されているプレフィックスで、`redis_port:6379`タグや`redis_port:6380`タグの場合の`redis_port`にあたります。
@@ -64,12 +64,12 @@ The 'Default Tag' option determines the initial value for the variable on dashbo
 
 ### グラフエディターでテンプレート変数を使う方法
 
-{{< img src="guides/templating/redis-tpl-graph-editor.png" >}}
+{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" >}}
 
 <!-- Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>. -->
 
 テンプレート変数を設定すると、そのテンプレート変数は一般的なタグ、ホスト名、デバイス名などと共にグラフエディターに表示されるようになります。
 
-{{< img src="guides/templating/redis-tpl-selected.png" >}}
+{{< img src="graphing/dashboards/redis-tpl-selected.png" >}}
 
 `$redis`の値として`6379`を設定すると、`redis`を指定したすべてのグラフは、`redis_port:6379` を基にしたグラフに書き換えられます。

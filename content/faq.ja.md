@@ -686,18 +686,18 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 ewmaは、指数関数の移動平均の略語で、ewma_x(…)のxの部分には、平滑度によって5、10、20の値を設定することができます。
 
-グラフ表示時に適用可能な関数は、[Graphing Primer](/ja/graphing/#functions)を参照してください。
+グラフ表示時に適用可能な関数は、[Graphing Primer](https://docs.datadoghq.com/graphing/miscellaneous/functions)を参照してください。
 
 <!--<h4>Can I stack CPU metrics on the same graph?</h4>
 <p>
-Check out our documentation on <a href="http://docs.datadoghq.com/graphing/">stacked series</a>.
+Check out our documentation on <a href="http://docs.datadoghq.com/gs</a>.
 The metric explorer just does one metric per graph, but you can see a stacked CPU graph
 on the overview page by clicking any host <a href="https://app.datadoghq.com/infrastructure">here</a>.
 </p>-->
 
 #### CPU負荷の情報を同じグラフに積み上げるのにはどうすればよいですか。
 
-各グラフの右上隅の歯車のマークをクリックし、ポップアップ表示の"Choose metrics and events"のセクションのJSONを編集します。詳細に関しては、グラフ表示の設定ページの[stacked series](/ja/graphing)を参照してください。
+各グラフの右上隅の歯車のマークをクリックし、ポップアップ表示の"Choose metrics and events"のセクションのJSONを編集します。詳細に関しては、グラフ表示の設定ページの[stacked series](https://docs.datadoghq.com/ja/graphing/)を参照してください。
 
 <!--<h4>Is there a way to share graphs?</h4>
 <p>
