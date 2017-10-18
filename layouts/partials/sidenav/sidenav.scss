@@ -106,6 +106,32 @@ aside.sidenav {
           margin-top:4px;
         }
       }
+      #TableOfContents {
+        padding:0 0 0 24px;
+        margin:0;
+        ul {
+          list-style-type:none;
+          margin:0 0 0 10px;
+          padding:0;
+          &:first-child {
+            margin:0;
+          }
+          li {
+            a {
+              font-weight:200;
+              font-size:18px;
+              line-height:24px;
+              color:#323232;
+              &:hover {
+                color: $ddpurple;
+              }
+            }
+          }
+          ul ul {
+            display:none;
+          }
+        }
+      }
     }
   }
 }

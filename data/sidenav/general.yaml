@@ -4,6 +4,7 @@ nav:
   image: nav_start.png
   image_hover: nav_start_p.png
   link: /
+  toc_disable: true
 - name: agent
   display_name: Agent
   image: nav_agent.png
