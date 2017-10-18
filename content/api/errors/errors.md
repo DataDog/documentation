@@ -1,5 +1,5 @@
 ---
-title: Errors
+title: Success and Errors
 type: apicontent
 order: 3
 ---

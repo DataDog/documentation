@@ -4,7 +4,7 @@ type: apicontent
 order: 18
 ---
 
-### Usage Metering
+## Usage Metering
 
 This API is currently in private beta. Python and Ruby clients are not yet supported.
 

@@ -5,7 +5,7 @@ order: 6.1
 ---
 
 ##### Signature
-POST /api/v1/events
+`POST /api/v1/events`
 ##### Example Request
 {{< snippet-code-block file="content/api/events/code_snippets/api-events-post.py" highlight="true" >}}
 {{< snippet-code-block file="content/api/events/code_snippets/api-events-post.sh" highlight="true" >}}

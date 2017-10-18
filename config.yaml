@@ -305,9 +305,12 @@ params:
     gif: ""
   static_url: "http://localhost:1313/"
   code_languages:
-    - Python
-    - Ruby
-    - Console
+    - display_name: Python
+      key: python
+    - display_name: Ruby
+      key: ruby
+    - display_name: Curl
+      key: console
   footer_scripts:
     - snowplow: false
     - marketo: false

@@ -5,7 +5,7 @@ $(document).ready(function () {
         var s = window.location.search.match(/lang=[^&]+/gi);
         if (s) {
             var lang = s[0].replace(/lang=/gi, '');
-            $('a[data-lang="' + lang + '"]').click();
+            //$('a[data-lang="' + lang + '"]').click();
         }
     });
 
@@ -45,6 +45,8 @@ $(document).ready(function () {
             var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
             history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
         }
+
+        return false;
     });
 
     // algolia

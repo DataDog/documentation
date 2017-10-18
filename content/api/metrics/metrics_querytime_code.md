@@ -5,7 +5,7 @@ order: 5.3
 ---
 
 ##### Signature
-GET https://app.datadoghq.com/api/v1/query
+`GET https://app.datadoghq.com/api/v1/query`
 ##### Example Request
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metrics-query.py" highlight="true" >}}
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metrics-query.sh" highlight="true" >}}
