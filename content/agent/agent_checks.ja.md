@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Agent Checkの書き方
 kind: documentation
+customnav: agentnav
 sidebar:
   nav:
     - header: Agent Checkのガイド

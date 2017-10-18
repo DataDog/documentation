@@ -1,6 +1,7 @@
 ---
 title: Log Parsing in the Agent
 kind: documentation
+customnav: agentnav
 sidebar:
   nav:
     - header: Guide to Log Parsing

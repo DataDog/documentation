@@ -1,6 +1,7 @@
 ---
 title: Developers FAQ
 kind: documentation
+customnav: developersnav
 ---
 ### What are valid metric names?
 

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Datadogが提供するサービスの概要
 kind: documentation
+customnav: gettingstartednav
 sidebar:
   nav:
     - header: Datadogのサービスについて

@@ -12,6 +12,7 @@ sidebar:
       href: "#slack"
     - text: Status Page
       href: "#status"
+customnav: main_references
 ---
 
 If you have any questions about Datadog or a use case our [Docs][1] didn't mention, we'd love to help! Here's how

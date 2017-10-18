@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Installing the Agent on Debian 5
 kind: documentation
+customnav: agentnav
 ---
 
 ###One-Step

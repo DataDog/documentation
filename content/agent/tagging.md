@@ -1,6 +1,7 @@
 ---
 title: Guide to Tagging
 kind: documentation
+customnav: agentnav
 ---
 
 ## Overview

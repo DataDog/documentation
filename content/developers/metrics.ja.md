@@ -2,6 +2,7 @@
 last_modified: 2015/04/02
 translation_status: complete
 language: ja
+customnav: developersnav
 title: DogStatsD を使った、メトリクスの送信
 kind: documentation
 js_dd_docs_methods:

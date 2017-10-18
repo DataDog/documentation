@@ -1,6 +1,7 @@
 ---
 title: Libraries
 kind: documentation
+customnav: developersnav
 ---
 
 ## API and DogStatsD Client Libraries

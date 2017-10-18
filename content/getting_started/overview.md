@@ -1,6 +1,7 @@
 ---
 title: Datadog Overview
 kind: documentation
+customnav: gettingstartednav
 sidebar:
   nav:
     - header: All About Datadog

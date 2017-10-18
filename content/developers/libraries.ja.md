@@ -4,6 +4,7 @@ translation_status: wip
 language: ja
 title: APIライブラリー
 kind: documentation
+customnav: developersnav
 ---
 <!--
 ### API and DogStatsD Client Libraries

@@ -3,6 +3,7 @@ title: Using Autodiscovery with Docker
 kind: documentation
 aliases:
   - /guides/servicediscovery/
+customnav: agentnav
 ---
 
 <div class="alert alert-info">

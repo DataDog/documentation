@@ -1,30 +1,14 @@
 ---
 title: Get Started with Datadog
 kind: documentation
-sidebar:
-  nav:
-    - header: References
-    - text: API
-      href: "api/"
-    - text: APM (Tracing)
-      href: "tracing/"
-    - text: Libraries
-      href: "libraries/"
-    - text: Graphing
-      href: "graphing/"
-    - text: Integrations
-      href: "integrations/"
-    - text: Monitor
-      href: "monitors/"
-    - text: DogStatsD
-      href: "guides/dogstatsd/"
-    - text: Account Management
-      href: "account_management/"
-    - text: FAQ
-      href: "faq/"
+customnav: main_references
+hideguides: true
 aliases:
   - /basic_agent_usage/
   - /guides/
+sidebar:
+  nav:
+    - header: Menu
 ---
 
 <!-- PAGE TITLE -->

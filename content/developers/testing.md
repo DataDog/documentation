@@ -2,6 +2,7 @@
 title: Testing Integrations
 kind: documentation
 autotocdepth: 2
+customnav: developersnav
 ---
 <style>
 .func-p{margin-left:20px;}

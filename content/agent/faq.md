@@ -1,6 +1,7 @@
 ---
 title: Agent FAQ
 kind: documentation
+customnav: agentnav
 ---
 
 ## Agent

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: よくあるご質問(FAQ)
 kind: documentation
+customnav: main_references
 sidebar:
  nav:
   - header: FAQ トピック

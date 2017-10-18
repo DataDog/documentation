@@ -1,6 +1,7 @@
 ---
 title: Writing an Agent Check
 kind: documentation
+customnav: agentnav
 sidebar:
   nav:
     - header: Guide to Agent Checks

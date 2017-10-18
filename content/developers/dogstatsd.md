@@ -1,6 +1,7 @@
 ---
 title: DogStatsD
 kind: documentation
+customnav: developersnav
 sidebar:
   nav:
     - header: Official Libraries

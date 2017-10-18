@@ -2,6 +2,7 @@
 last_modified: 2015/04/02
 translation_status: complete
 language: ja
+customnav: agentnav
 title: サービスチェック機能の設定方法 (イベントの送信)
 sidebar:
   nav:

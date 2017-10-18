@@ -4,28 +4,12 @@ translation_status: complete
 language: ja
 title: Datadogでメトリクスの監視を始めよう！
 kind: documentation
-sidebar:
-  nav:
-    - header: レファレンス
-    - text: APIレファレンス
-      href: "api/"
-    - text: トレース (APM)
-      href: "tracing/"
-    - text: 各種ライブラリー
-      href: "libraries/"
-    - text: グラフの描き方
-      href: "graphing/"
-    - text: インテグレーション
-      href: "integrations/"
-    - text: DogStatsDの解説
-      href: "guides/dogstatsd/"
-    - text: FAQ よくあるご質問
-      href: "faq/"
-    - text: 課金に関するFAQ
-      href: "guides/billing/"
+customnav: main_references
+hideguides: true
 aliases:
     - /ja/guides/
-
+sidebar:
+  nav:
 ---
 <!--
  <h1 id="pagetitle">Get Started with Datadog </h1>
