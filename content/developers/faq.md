@@ -1,3 +1,7 @@
+---
+title: Developers FAQ
+kind: documentation
+---
 ### What are valid metric names?
 
 
