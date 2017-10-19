@@ -206,7 +206,7 @@ Take care when creating multi-alerts. A metric such as `service.requests_served{
 
 また、Anomaly Detectionは効果的な予測値のために過去の時系列データを必要としますので、もしメトリクスの収集を始めてから数時間あるいは数日である場合、Anomaly Detectionは恐らく有効には機能しないでしょう。
 
-Multi Alert を設定しているときには注意が必要です。`service.requests_served{*}` のようなメトリックはAnomaly Detection を適用する良い候補に思われますが、一方で、そのメトリックをホストごとにスライスした `service.requests_served{*} by {host}` は良い候補とはならないでしょう。もしそれらのホストがロードバランサー配下にあるのであれば、むしろ[Outlier Detection](/ja/monitors/monitor_types/outliers/) が異常なホストの検知に適していると思われます。
+Multi Alert を設定しているときには注意が必要です。`service.requests_served{*}` のようなメトリックはAnomaly Detection を適用する良い候補に思われますが、一方で、そのメトリックをホストごとにスライスした `service.requests_served{*} by {host}` は良い候補とはならないでしょう。もしそれらのホストがロードバランサー配下にあるのであれば、むしろ[Outlier Detection](/ja/monitors/monitor_types/outlier/) が異常なホストの検知に適していると思われます。
 サービスがスケールしていく場合では、追加されていく新しいホストは Anomaly Detection に必要な過去の時系列データが蓄積するまで全く監視されず、それどころか、それらのホストによるリクエストの数が不安定になることでアラートが不必要にトリガされる可能性もあります。
 
 <!--

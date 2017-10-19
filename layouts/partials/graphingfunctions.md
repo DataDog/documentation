@@ -34,7 +34,7 @@ Function               | Category      | Description
 `trend_line()`         | Regression    | fit an ordinary least squares regression line through the metric values
 `piecewise_constant()` | Regression    | approximate the metric with a piecewise function composed of constant-valued segments
 `anomalies()`          | Algorithms    | overlay a gray band showing the expected behavior of a series based on past behavior; see our [guide to anomaly detection](/monitors/monitor_types/anomaly)
-`outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/monitors/monitor_types/outliers)
+`outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/monitors/monitor_types/outlier)
 
 **`.as_count()` & `.as_rate()`**
 
@@ -55,7 +55,7 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 
 The ```top()``` method also has convenience functions of the following form, all of which take a single series list as input:
 
-```[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()```
+`[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()`
 
 For example, ```bottom10_min()``` retrieves lowest-valued 10 series using the ‘min’ metric.
 

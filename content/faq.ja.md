@@ -1174,7 +1174,7 @@ You can send the request to support@datadoghq.com and we will add it to our feat
 [11]: https://app.datadoghq.com/account/billing
 [12]: https://app.datadoghq.com/account/billing_history
 [13]: /ja/account_management/
-[14]: /ja/graphing/miscellaneous/functions
+[14]: /graphing/miscellaneous/functions
 [15]: /ja/graphing/
 [16]: /ja/agent/basic_agent_usage/
 [17]: https://app.datadoghq.com/policy/license

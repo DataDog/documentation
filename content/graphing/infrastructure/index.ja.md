@@ -5,7 +5,7 @@ autotocdepth: 3
 hideguides: true
 customnav: infrastructurenav
 aliases:
-  - /hostnames
+  - /ja/hostnames
 ---
 
 ## Overview

@@ -5,7 +5,7 @@ autotocdepth: 3
 hideguides: true
 customnav: monitortypenav
 aliases:
-    - /monitoring
+    - /ja/monitoring
 ---
 
 ## Glossary
