@@ -7,7 +7,7 @@ git_integration_title: amazon_sqs
 description: "Track queue size, average message size, number of messages, and more."
 ---
 
-{{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" >}}
+{{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" responsive="true" >}}
 
 ## Overview
 

@@ -10,7 +10,7 @@ aliases:
 description: "Track Chef client runs including metrics on completion times, analytics on resource changes, and success rates."
 ---
 
-{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}
+{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" responsive="true" >}}
 
 ## Overview
 

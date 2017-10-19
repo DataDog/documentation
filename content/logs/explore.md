@@ -16,7 +16,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
+{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
 In this view you can:
 
@@ -28,7 +28,7 @@ In this view you can:
 ## Time Range
 The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
-{{< img src="logs/explore/timeline.png" alt="Timeline" >}}
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" >}}
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -38,17 +38,17 @@ Quickly change the time range by selecting a preset range from the dropdown:
 The log list is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
-{{< img src="logs/explore/log_list.png" alt="Log List" >}}
+{{< img src="logs/explore/log_list.png" alt="Log List" responsive="true" >}}
 
 ### Filtering the log list
 If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
-{{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
+{{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" responsive="true" >}}
 
 ### Displaying a full log
 You can click on any log line to see more details about it:
 
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" >}}
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" responsive="true" >}}
 
 ### View a log line in context
 When clicking a log line for more detail, click on « view in context »: 
@@ -60,7 +60,7 @@ For syslog-formatted logs, the hostname and service name values corresponding to
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
-{{< img src="logs/explore/log_list_with_columns.png" alt="Log List with columns" >}}
+{{< img src="logs/explore/log_list_with_columns.png" alt="Log List with columns" responsive="true" >}}
 
 ## Facets 
 
@@ -68,7 +68,7 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
-{{< img src="logs/explore/facets_demo.png" alt="Facets demo" >}}
+{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" >}}
 
 ### Create a Facet
 
@@ -80,7 +80,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
-{{< img src="logs/explore/facet_panel.png" alt="Facet panel" >}}
+{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" >}}
 
 ### Expanded view
 
@@ -142,7 +142,7 @@ Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " >}}
+{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" >}}
 
 ## What's next
 

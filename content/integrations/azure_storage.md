@@ -7,7 +7,7 @@ newhlevel: true
 description: "Track key Azure Storage metrics."
 ---
 
-{{< img src="integrations/azure/storage_dash.png" >}}
+{{< img src="integrations/azure/storage_dash.png" responsive="true" >}}
 
 ## Overview
 
@@ -22,7 +22,7 @@ Enable this integration to see capacity and transaction metrics from Azure Stora
 2.  For each storage account that you want to monitor, create the required monitoring tables and generate the SAS token with the Azure Storage integration setup CLI. **Instructions and a script for completing this step can be found [here](https://github.com/DataDog/azure-storage-dd)**
 3.  Paste the storage account name and SAS token generated from the CLI tool into the form in the [Azure Storage Tile][1]
 
-	{{< img src="integrations/azure/storage_tile.png" >}}
+	{{< img src="integrations/azure/storage_tile.png" responsive="true" >}}
 
 4.  Once you have done this for each Storage Account you wish to monitor, click Update Configuration.
 

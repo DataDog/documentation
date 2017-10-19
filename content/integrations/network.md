@@ -20,7 +20,7 @@ description: "{{< get-desc-from-git >}}"
 git_integration_title: network
 ---
 
-{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" >}}
+{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

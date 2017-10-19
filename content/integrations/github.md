@@ -5,7 +5,7 @@ kind: integration
 description: "Identify commits and pull requests that affect your services' performance."
 ---
 
-{{< img src="integrations/github/git_integration_screen.png" alt="Git event" >}}
+{{< img src="integrations/github/git_integration_screen.png" alt="Git event" responsive="true" >}}
 
 ## Overview
 
@@ -41,6 +41,6 @@ Once the integration is complete, whatever you select (commits and/or issues) wi
 
 If your webhook is configured with `content-type:application/x-www-form-urlencoded`, set it to `content-type:application/json` instead.
 
-  {{< img src="integrations/github/github_webhook.png" alt="github webhook content type" >}}
+  {{< img src="integrations/github/github_webhook.png" alt="github webhook content type" responsive="true" >}}
 
    [1]: https://app.datadoghq.com/account/settings

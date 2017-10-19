@@ -8,7 +8,7 @@ git_integration_title: zendesk
 description: "Track new versus solved Zendesk tickets; auto-generate Zendesk tickets from Datadog monitors."
 ---
 
-{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" >}}
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" responsive="true" >}}
 
 ## Overview
 

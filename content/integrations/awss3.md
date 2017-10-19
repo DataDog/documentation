@@ -8,7 +8,7 @@ git_integration_title: amazon_s3
 description: "Track request latency, number of requests by type, bucket sizes, and more."
 ---
 
-{{< img src="integrations/awss3/s3_db_screenshot.png" alt="S3 Dashboard" >}}
+{{< img src="integrations/awss3/s3_db_screenshot.png" alt="S3 Dashboard" responsive="true" >}}
 
 ## Overview
 

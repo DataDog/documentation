@@ -1,0 +1,14 @@
+.preview-banner {
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(255, 207, 0, .85);
+  z-index: 999;
+  line-height: inherit;
+  color: #333;
+  margin: 0;
+  font-size: 16px;
+  padding: 3px;
+  font-family: monospace;
+  width: 100%;
+  text-align: center;
+}

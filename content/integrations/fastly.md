@@ -8,7 +8,7 @@ newhlevel: true
 description: "Track cache-related metrics, origin requests, response codes, and more."
 ---
 
-{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" >}}
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" responsive="true" >}}
 
 ## Overview
 

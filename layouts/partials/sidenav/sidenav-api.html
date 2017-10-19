@@ -1,0 +1,20 @@
+<aside class="sidenav">
+    <div class="row sticky">
+        <div class="col">
+            <h4>Datadog API</h4>
+            <ul class="list-unstyled">
+                {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+                {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
+
+                {{ else }}
+                <li>
+                    <a href="#{{ lower (replace $element.Title " " "-") }}">
+                    <span>{{ $element.Title }}</span>
+                    </a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</aside>

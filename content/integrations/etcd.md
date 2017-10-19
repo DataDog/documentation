@@ -6,7 +6,7 @@ git_integration_title: etcd
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/etcd/etcd_graph.png" alt="Etcd Graph" >}}
+{{< img src="integrations/etcd/etcd_graph.png" alt="Etcd Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

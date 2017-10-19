@@ -8,7 +8,7 @@ git_integration_title: honey badger
 description: "View, search, and discuss exceptions from Honeybadger in your event stream."
 ---
 
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" >}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" responsive="true" >}}
 
 ## Overview
 

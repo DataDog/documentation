@@ -10,7 +10,7 @@ description: "View, search, and discuss Airbrake exceptions in your event stream
 
 ## Overview
 
-{{< img src="integrations/airbrake/airbrakeevent.png" style="width: 500px;" >}}
+{{< img src="integrations/airbrake/airbrakeevent.png" style="width: 500px;" responsive="true" >}}
 
 Connect Airbrake to Datadog to:
 

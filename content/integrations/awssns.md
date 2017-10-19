@@ -7,7 +7,7 @@ git_integration_title: amazon_sns
 description: "Send Amazon SNS messages to Datadog, or send Datadog alerts to SNS."
 ---
 
-{{< img src="integrations/awssns/snsdashboard.png" alt="SNS Dashboard" >}}
+{{< img src="integrations/awssns/snsdashboard.png" alt="SNS Dashboard" responsive="true" >}}
 
 ## Overview
 

@@ -8,7 +8,7 @@ doclevel: basic
 description: "View, search on, and discuss Papertrail logs in your Datadog event stream."
 ---
 
-{{< img src="integrations/papertrail/papertrailexample.png" style="max-width:600px;" alt="Papertrail example" >}}
+{{< img src="integrations/papertrail/papertrailexample.png" style="max-width:600px;" alt="Papertrail example" responsive="true" >}}
 
 ## Overview
 
@@ -26,12 +26,12 @@ To capture metrics from Papertrail:
 1.  Enter the name for the search and click the **Save & Setup an Alert** button.
 1.  Choose Datadog under Graphing & Metrics.
 
-    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications" >}}
+    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications" responsive="true" >}}
 
 1.  Choose your alert frequency and other details.
 1.  Provide your Datadog API key, enter what you want to name your metric, and optionally enter some tags to associate with the metric.
 
-    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications" >}}
+    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications" responsive="true" >}}
 
 1.  Click the **Create Alert** button.
 

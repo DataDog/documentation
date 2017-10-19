@@ -14,8 +14,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## JSONエディターを使用したグラフ表示
 
-
-{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" >}}
+{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" responsive="true" >}}
 
 <!--### Grammar-->
 
@@ -395,7 +394,7 @@ The Time Series can be further broken down to:
 #### 折れ線グラフ
 
 
-{{< img src="graphingjson/multi-lines.png" >}}
+{{< img src="graphingjson/multi-lines.png" responsive="true" >}}
 
 <!-- The representation is automatically derived from having multiple `requests` values. -->
 このグラフ表現は、`requests`部に複数の検索クエリを有する場合に自動的に設定されます。
@@ -418,7 +417,7 @@ The Time Series can be further broken down to:
 
 #### 積み上げグラフ
 
-{{< img src="graphingjson/slice-n-stack.png" >}}
+{{< img src="graphingjson/slice-n-stack.png" responsive="true" >}}
 
 <!-- In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax: -->
 関連している時系列データの場合は、次の構文を記述し積み上げグラフを表示することができます:

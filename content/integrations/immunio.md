@@ -8,7 +8,7 @@ git_integration_title: immunio
 description: "Collect data from Immunio to visualize and monitor attack patterns."
 ---
 
-{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" >}}
+{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" responsive="true" >}}
 
 ## Overview
 
@@ -26,9 +26,9 @@ IMMUNIO monitors your applications to detect and defend against all of the follo
 
 1.  Login to [your IMMUNIO account](http://www.immun.io/).
 1.  Navigate to the [integrations setup page](https://dashboard.immun.io/#/settings/integrations).
-    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" >}}
+    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" responsive="true" >}}
 1.  Click "Add an API Key".
-    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" >}}
+    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" responsive="true" >}}
 1.  Add your API key.
 
 ### Configuration

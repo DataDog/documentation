@@ -10,7 +10,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/redis/redis.png" alt="Redis default dashboard" >}}
+{{< img src="integrations/redis/redis.png" alt="Redis default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
@@ -30,7 +30,7 @@ clicking [Overview](https://app.datadoghq.com/account/overview)). If you go to t
 metrics you want to see and what you want to see it over.  In the ‘Over:’ section
 you can select multiple environments and then select “Save these tiles to: a new dashboard.”
 
-{{< img src="integrations/redis/metric-explorer-redis.png" >}}
+{{< img src="integrations/redis/metric-explorer-redis.png" responsive="true" >}}
 
 //get-troubleshooting-from-git//
 

@@ -7,7 +7,7 @@ doclevel: basic
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" >}}
+{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

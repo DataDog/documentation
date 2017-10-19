@@ -6,7 +6,7 @@ newhlevel: true
 description: "Alert on suspicious AWS account activity."
 ---
 
-{{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
+{{< img src="integrations/awscloudtrail/cloudtrail_event.png" responsive="true" >}}
 
 ## Overview
 

@@ -11,7 +11,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/winservices/windows-service.png" alt="Windows Service Event" >}}
+{{< img src="integrations/winservices/windows-service.png" alt="Windows Service Event" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

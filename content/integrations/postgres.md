@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/postgresql/pggraph.png" alt="PostgreSQL Graph" >}}
+{{< img src="integrations/postgresql/pggraph.png" alt="PostgreSQL Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

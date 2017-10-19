@@ -95,11 +95,12 @@ to take advantage of that to help identify the sending application. -->
 - 件名
 - 本文
 
-{{< img src="graphing/events/plain-email.png" >}}
+
+{{< img src="graphing/events/plain-email.png" responsive="true" >}}
 
 #### イベントストリームでのイベント表示
 
-{{< img src="graphing/events/plain-event.png" >}}
+{{< img src="graphing/events/plain-event.png" responsive="true" >}}
 
 **注)** メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本体になることに注意してください。
 イベントのタイトルと本文の最後にタグが表示されるように見えますが、どちらの部分もDatadogではタグとしては扱われてはいません。
@@ -118,7 +119,7 @@ alert type,  date happened,  host, aggregation key, and source type name.
 
 #### Datadog Event
 
-{{< img src="guides/eventsemail/json-event.png" >}}
+{{< img src="guides/eventsemail/json-event.png" responsive="true" >}}
 
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
@@ -149,11 +150,12 @@ JSON形式でのイベント情報メールの送信では、10個のフィー�
 - "agrregation key" :
 - "source type name" :
 
-{{< img src="graphing/events/json-email.png" >}}
+
+{{< img src="graphing/events/json-email.png" responsive="true" >}}
 
 #### イベントストリームでのイベント表示
 
-{{< img src="graphing/events/json-event.png" >}}
+{{< img src="graphing/events/json-event.png" responsive="true" >}}
 
 JSON形式のメールでは、メールのタイトルは無視され、本文内のtitleで設定した内容に置き換えられます。
 イベントに表示されるすべてのデータは、メールの本文にJSONで定義されている必要があります。
@@ -182,11 +184,11 @@ messages from the Format: dropdown, then click *Create API Email*.
 
 このセクションでは、Datadogがイベント情報を受信するために用意したメールアドレスと、そのメールアドレスの作成者が表示されています。
 
-{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API">}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
 
 新しくメールアドレスを追加する場合は、**New API Email**のセクションで、送信するメールの形式をドロップダウンメニューで選択し、`Create API Email`をクリックします。
 
-{{< img src="graphing/events/event_email_set.png" alt="JSON Event Email API">}}
+{{< img src="graphing/events/event_email_set.png" alt="JSON Event Email API" responsive="true" >}}
 
 
 [integrations]: /ja/integrations

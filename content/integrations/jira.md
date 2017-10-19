@@ -7,7 +7,7 @@ newhlevel: true
 description: "This integration allows you to create tickets from triggered alerts in Datadog, and update existing tickets with new information as it arises. Additionally, you can see JIRA ticket creations as events within Datadog to overlay with all of your metrics."
 ---
 
-{{< img src="integrations/jira/JiraInstallation9.png" alt="settings" >}}
+{{< img src="integrations/jira/JiraInstallation9.png" alt="settings" responsive="true" >}}
 
 ## Overview
 
@@ -112,4 +112,4 @@ The @jira-update command can be used to update existing tickets. This command wi
 
 TIP – It might be useful to use the @jira command within an #is_alert or #is_warning variable!
 
-{{< img src="integrations/jira/JiraInstallation8.png" alt="settings" >}}
+{{< img src="integrations/jira/JiraInstallation8.png" alt="settings" responsive="true" >}}

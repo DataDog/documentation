@@ -13,7 +13,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
 
 ## Getting started with the Agent
 

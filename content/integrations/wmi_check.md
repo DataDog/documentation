@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" >}}
+{{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" responsive="true" >}}
 
 ## Overview
 

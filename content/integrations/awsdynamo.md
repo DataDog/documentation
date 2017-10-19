@@ -7,7 +7,7 @@ newhlevel: true
 description: "Track DynamoDB table size, read/write capacity, request latency, and more."
 ---
 
-{{< img src="integrations/awsdynamo/dynamodb.png" alt="DynamoDB default dashboard" >}}
+{{< img src="integrations/awsdynamo/dynamodb.png" alt="DynamoDB default dashboard" responsive="true" >}}
 
 ## Overview
 

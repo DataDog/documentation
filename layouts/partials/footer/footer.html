@@ -1,0 +1,120 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-4 footer-side">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <button type="button" class="btn btn-block btn-outline-semi-trans">Free Trial</button>
+                    </div>
+                </div>
+                <span class="copyright d-none d-md-block">&copy; Datadog 2017</span>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4 mt-4 mt-md-0">
+                <p>Product</p>
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.datadoghq.com/product/">Features</a></li>
+                            <li><a href="https://www.datadoghq.com/apm/">APM</a></li>
+                            <li><a href="{{ .Site.BaseURL }}integrations/">Integrations</a></li>
+                            <li><a href="https://www.datadoghq.com/alerts/">Alerts</a></li>
+                            <li><a href="{{ .Site.BaseURL }}api/">API</a></li>
+                            <li><a href="https://www.datadoghq.com/pricing/">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><a href="http://docs.datadoghq.com/">Documentation</a></li>
+                            <li><a href="https://www.datadoghq.com/support/">Support</a></li>
+                            <li><a href="https://www.datadoghq.com/resources/">Resources</a></li>
+                            <li><a href="https://www.datadoghq.com/security/">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mt-4 mt-md-0">
+                <div class="row">
+                    <div class="col-6">
+                        <p>About</p>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.datadoghq.com/about/contact/">Contact Us</a></li>
+                            <li><a href="https://www.datadoghq.com/partner-with-datadog/">Partners</a></li>
+                            <li><a href="https://www.datadoghq.com/about/press/">Press</a></li>
+                            <li><a href="https://www.datadoghq.com/about/team/">Our Team</a></li>
+                            <li><a href="https://www.datadoghq.com/careers/">Careers</a></li>
+                            <li><a href="https://www.datadoghq.com/legal/">Legal</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <p>Social</p>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.datadoghq.com/blog/">Blog</a></li>
+                            <li><a href="https://www.datadoghq.com/es/blog/">Español</a></li>
+                            <li><a href="https://www.datadoghq.com/ja/blog/">日本語</a></li>
+                            <li><a href="https://www.instagram.com/datadoghq/">Instagram</a></li>
+                            <li><a href="https://twitter.com/datadoghq">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row d-inline-block d-md-none mt-4 mt-md-0">
+                    <div class="col-12"><span class="copyright">&copy; Datadog 2017</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 footer-legal">
+                <a href="https://www.datadoghq.com/legal/terms/">Terms</a> |
+                <a href="https://www.datadoghq.com/legal/privacy/">Privacy</a> |
+                <a href="https://www.datadoghq.com/legal/cookies/">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--{{ if $.Params.sidebar.nav }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+</script>
+
+{{ else }}
+
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = true;
+</script>
+
+{{ end }}
+
+{{ if $.Params.autotocdepth }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.tocdepth = true;
+</script>
+{{ end }}
+
+
+{{ if in .File.Path "basic_agent_usage" }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+</script>
+{{ end }}
+
+<script src="{{ .Site.BaseURL }}js/bundle.js"></script>
+
+{{ if eq .RelPermalink "/api/" }}
+<script type="text/javascript">
+    window.Datadog = window.Datadog || {};
+    window.Datadog.toc = false;
+
+    jQuery(document).ready(function($){
+        $(DD_docs.apiPage);
+    });
+
+</script>
+{{ end }}
+
+{{ partial "footer-scripts.html" . }}
+{{ partial "footer-js-dd-docs-methods" . }}
+-->

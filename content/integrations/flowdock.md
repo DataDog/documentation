@@ -6,7 +6,7 @@ doclevel: basic
 description: "Send Datadog alerts and graphs to your team's flows."
 ---
 
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" >}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" responsive="true" >}}
 
 ## Overview 
 

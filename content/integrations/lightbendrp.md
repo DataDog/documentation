@@ -7,7 +7,7 @@ newhlevel: true
 description: "Track actors and dispatcher events for Akka-based applications"
 ---
 
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" >}}
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" responsive="true" >}}
 
 ## Overview 
 

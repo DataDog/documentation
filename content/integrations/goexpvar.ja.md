@@ -11,7 +11,7 @@ title: Datadog-Go Expvar Integration
 
 
 
-{{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" >}}
+{{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" responsive="true" >}}
 
 ## Overview
 

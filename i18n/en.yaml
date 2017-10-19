@@ -2,6 +2,9 @@
 ####### Home Page ########
 ##########################
 
+- id: menu_references
+  translation: References
+  
 - id: menu_references_api
   translation: "API"
 

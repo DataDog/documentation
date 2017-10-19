@@ -7,7 +7,7 @@ newhlevel: true
 description: "See New Relic metrics and events in Datadog."
 ---
 
-{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" >}}
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" responsive="true" >}}
 
 ## Overview
 

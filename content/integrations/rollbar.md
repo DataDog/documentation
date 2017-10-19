@@ -6,7 +6,7 @@ doclevel: basic
 description: "Send exceptions, errors, and code deployments from Rollbar to your Datadog event stream."
 ---
 
-{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" >}}
+{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" responsive="true" >}}
 
 ## Overview
 

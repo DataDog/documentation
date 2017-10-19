@@ -35,7 +35,7 @@
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
-    <img class="lazyload {{- if .Get "responsive" }} img-responsive {{ end }}"
+    <img class="lazyload {{- if .Get "responsive" }} img-fluid {{ end }}"
          src="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
          alt="{{ with .Get "alt"}}{{.}}{{end}}"
          data-src="{{ print $img "?" $pop_param | relURL }}"

@@ -7,7 +7,7 @@ newhlevel: true
 description: "See AWS CodeDeploy deployments in your event stream as they happen, as well as track completion times and success rates."
 ---
 
-{{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" >}}
+{{< img src="integrations/awscodedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" responsive="true" >}}
 
 ## Overview
 

@@ -13,7 +13,7 @@ Dashboard templating allows you to create dashboards that use variables like `$s
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 
-{{< img src="graphing/dashboards/edit-template-variables.png" style="width:70%;" >}}
+{{< img src="graphing/dashboards/edit-template-variables.png" style="width:70%;"  responsive="true" >}}
 
 This will open the template variable editing panel.
 
@@ -23,12 +23,11 @@ A template variable is defined by a name and optional parameters for 'Tag Group'
 
 ## Using template variables in graph editors
 
-
-{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" style="width:80%;" >}}
+{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" style="width:80%;"  responsive="true"  >}}
 
 Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` will be scoped to `redis_port:6379`.
 
-{{< img src="graphing/dashboards/redis-tpl-selected.png" style="width:85%;" >}}
+{{< img src="graphing/dashboards/redis-tpl-selected.png" style="width:85%;"  responsive="true"  >}}
 
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
@@ -38,7 +37,8 @@ Setup event correlation at design time by editing any graph on both Time Boards 
 
 ## Event Correlation at View Time
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" >}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png"  responsive="true" >}}
+
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
 
 ## Event Query Language

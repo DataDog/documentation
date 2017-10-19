@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" >}}
+{{< img src="integrations/goexpvar/go_graph.png" alt="Go Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

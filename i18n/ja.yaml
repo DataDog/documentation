@@ -2,8 +2,8 @@
 ####### Home Page ########
 ##########################
 
-#id: menu_references
-#translation: "レファレンス"
+- id: menu_references
+  translation: "レファレンス"
 
 - id: menu_references_api
   translation: "APIレファレンス"

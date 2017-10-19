@@ -7,7 +7,7 @@ newhlevel: true
 description: "Send custom metrics from your PHP applications using the DogStatsD PHP client."
 ---
 
-{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" >}}
+{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" responsive="true" >}}
 
 ## Overview
 

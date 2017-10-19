@@ -8,7 +8,7 @@ newhlevel: true
 description: "Track by-set metrics: bytes in and out, disk operations, CPU usage, and more."
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" >}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" responsive="true" >}}
 
 ## Overview
 Virtual machine scale sets are an Azure Compute resource you can use to deploy, manage, and autoscale a set of identical VMs.

@@ -5,7 +5,7 @@ kind: integration
 doclevel: basic
 description: "Send Datadog alerts and graphs to your team's Chatworks room."
 ---
-{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" >}}
+{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" responsive="true" >}}
 
 ## Overview 
 
@@ -30,6 +30,6 @@ Integrate with ChatWork to:
 6. Enter the chat names and ids you want to access. (ids can be found in the URL of chatrooms)
 
 7. Tick the checkbox if you want to be notified for every comment, otherwise you will need to use the @chatwork-chat_namesyntax.
-{{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile" >}}
+{{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile" responsive="true" >}}
 
 8. [Save your configuration](https://app.datadoghq.com/account/settings#integrations/chatwork)
