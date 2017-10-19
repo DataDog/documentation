@@ -14,7 +14,7 @@ aliases:
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/monitors) for an introduction.
 -->
 
-このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
+このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/monitors) ページを参照して下さい。
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -24,7 +24,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: [host](#host)-, [metric](#metric)-, [integration](#integration)-, [process](#process)-, [network](#network)-, [event](#event)-based, and [custom](#custom). See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/ja/guides/tagging) page for more details.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/ja/agent/tagging) page for more details.
 -->
 
 ## 用語集
@@ -35,7 +35,7 @@ Here is a quick overview of the different terms used in this guide.
 - **Check**: Agent Checkのことで、複数のステータスを送信します。
 - **Monitor**: Agent Checkのステータスやメトリクスの閾値の確認手順、その他のアラート条件を元に通知を送信します。
 - **Monitorタイプ**: [ホスト](#ホストを対象にしたmonitor)-, [メトリクス](#メトリクスを対象にしたmonitor)-, [インテグレーション](#インテグレーションを対象にしたmonitor)-, [プロセス](#プロセスを対象にしたmonitor)-, [ネットワーク](#ネットワークを対象にしたmonitor)-, [イベント](#イベントを対象にしたmonitor)-, [カスタムチェック](#カスタムチェックを対象にしたmonitor), APM-, [コンポジット](#コンポジット-複合-monitor)-, があります。特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
-- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
+- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/agent/tagging) ページを参照して下さい。
 
 <!-- ## Creating a Monitor
 
@@ -64,7 +64,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 <!--
 1. Choose the detection method
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
 
     A **Threshold Alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -114,7 +113,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 <!--
 2. Select the metric and scope you want to monitor.
-  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
@@ -129,7 +127,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 <!--
 3. Select the alert grouping.
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -167,7 +164,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -208,10 +204,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
             - Like the **threshold alert**, you will need to select the
               *time aggregation* and a *time window* on which the change will be
               calculated.
-
-          - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
-
-          - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
 -->
 ### 監視条件の設定
 4. アラート検知条件の設定
@@ -241,9 +233,9 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と *集計期間内に含まれるデータの集計方法* を設定します。
 
-    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/guides/anomalies) ガイドを参照して下さい。
+    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/monitors/monitor_types/anomaly) ガイドを参照して下さい。
 
-    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/guides/outliers) ガイドを参照して下さい。
+    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/monitors/monitor_types/outlier) ガイドを参照して下さい。
 
 <!--
 5. You can optionally **notify on no data** after a configurable timeframe. At
@@ -273,7 +265,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 You can export the configuration JSON for a monitor right from the create screen.
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
-{{< img src="guides/monitor/export_monitor_json.jpg" alt="export monitor" >}}
 -->
 ## 監視設定をエクスポートする
 

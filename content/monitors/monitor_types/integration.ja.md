@@ -11,8 +11,6 @@ description: "Monitor metric values or health status from a specific integration
 ### Integration Monitors
 
 
-{{< img src="guides/monitor/es_status.png" >}}
-
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
 

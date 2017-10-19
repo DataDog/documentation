@@ -10,8 +10,6 @@ description: "Check if a process is running on a host"
 ### Process Monitors
 
 
-{{< img src="guides/monitor/process_monitor.png" >}}
-
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
 thresholds based on the number of matching processes.

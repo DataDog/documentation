@@ -187,7 +187,7 @@ integrations:
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_linux
   public_title: Amazon Linux
-  docs_link: /guides/basic_agent_usage/amazonlinux/
+  docs_link: /agent/basic_agent_usage/amazonlinux/
   public: true
 - short_description: Track prediction counts and failures.
   image: ''
@@ -490,7 +490,7 @@ integrations:
   short_description: Install the Datadog Agent on any CentOS host.
   public_title: CentOS
   image: Integrations-CentOS-340x216.png
-  docs_link: /guides/basic_agent_usage/centos/
+  docs_link: /agent/basic_agent_usage/centos/
   public: true
 - name: ceph
   categories: ['data store', 'os & system']
@@ -581,7 +581,7 @@ integrations:
   short_description: Install the Datadog Agent on any Debian host.
   public_title: Debian
   image: Integrations-Debian-340x216.png
-  docs_link: /guides/basic_agent_usage/deb/
+  docs_link: /agent/basic_agent_usage/deb/
   public: true
 - name: desk_salesforce
   categories: ['collaboration', 'issue tracking']
@@ -672,7 +672,7 @@ integrations:
   categories: ['os & system']
   name: fedora
   public_title: Fedora
-  docs_link: /guides/basic_agent_usage/fedora/
+  docs_link: /agent/basic_agent_usage/fedora/
   public: true
 - name: flowdock
   categories: ['collaboration']
@@ -986,7 +986,7 @@ integrations:
   short_description: Install the Datadog Agent on any OS X host.
   public_title: Mac OS X
   image: Integrations-MacOSX-340x216.png
-  docs_link: /guides/basic_agent_usage/osx/
+  docs_link: /agent/basic_agent_usage/osx/
   public: true
 - name: marathon
   categories: ['configuration & deployment', 'containers']
@@ -1253,7 +1253,7 @@ integrations:
   short_description: Install the Datadog Agent on any RedHat host.
   public_title: Red Hat
   image: Integrations-Redhat-340x216.png
-  docs_link: /guides/basic_agent_usage/redhat/
+  docs_link: /agent/basic_agent_usage/redhat/
   public: true
 - name: redis
   categories: ['data store', 'caching']
@@ -1380,7 +1380,7 @@ integrations:
   short_description: Monitor the availability of StatsD servers and track metric counts.
   public_title: StatsD
   image: Integrations-StatsD-340x216.png
-  docs_link: /guides/dogstatsd/
+  docs_link: /agent/dogstatsd/
   public: true
 - name: statuspage
   categories: ['notification', 'collaboration', 'issue tracking']
@@ -1454,7 +1454,7 @@ integrations:
   short_description: Install the Datadog Agent on any Ubuntu host.
   public_title: Ubuntu
   image: Integrations-Ubuntu-340x216.png
-  docs_link: /guides/basic_agent_usage/ubuntu/
+  docs_link: /agent/basic_agent_usage/ubuntu/
   public: true
 - name: varnish
   categories: ['web', 'caching']

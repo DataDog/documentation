@@ -11,7 +11,6 @@ description: "Compare values of a metric with a user defined threshold"
 ### Metric Monitors
 
 1. Choose the detection method
-    {{< img src="guides/monitor/alert_type.png" alt="alert type" >}}
 
     A **threshold alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -43,13 +42,11 @@ description: "Compare values of a metric with a user defined threshold"
     arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="guides/monitor/metric_scope.png" alt="metric scope" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="guides/monitor/alert_grouping.png" alt="alert grouping" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -73,7 +70,7 @@ description: "Compare values of a metric with a user defined threshold"
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="guides/monitor/metric_threshold.png" alt="metric threshold" >}}
+    
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -115,9 +112,7 @@ description: "Compare values of a metric with a user defined threshold"
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
-    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/ja/guides/anomalies)
-
-    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/ja/guides/outliers)
+ 
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
@@ -201,9 +196,9 @@ description: "Compare values of a metric with a user defined threshold"
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
 
-    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/guides/anomalies) ガイドを参照して下さい。
+    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/monitors/monitor_types/anomaly) ガイドを参照して下さい。
 
-    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/guides/outliers) ガイドを参照して下さい。
+    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/monitors/monitor_types/outlier) ガイドを参照して下さい。
 
 5. 必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
 

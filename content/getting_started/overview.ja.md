@@ -37,7 +37,6 @@ Datadog Agentの[インストール][1]は、無事終了しましたか。も�
 <!-- <h2 id="integrations">Integrations</h2>
 
 
-{{< img src="guides/overview/integrations.png" responsive="true" >}}
 
 <ul>
 <li>100+ integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>,
@@ -64,7 +63,6 @@ in an online service is treated the same throughout Datadog.</li>
 
 <!-- <h2 id="infrastructure">Infrastructures</h2>
 
-{{< img src="guides/overview/infrastructure.png" responsive="true" >}}
 
 <ul>
 <li>All machines show up in the infrastructure overview</li>
@@ -140,7 +138,6 @@ For each incident users can:
 <li><a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email</li>
 <li>@support-datadog to ask for assistance</li>
 </ul>
-{{< img src="guides/overview/event_stream_claim.png" responsive="true" >}}
  -->
 
 ## イベントの時系列表示
@@ -171,7 +168,6 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 
 <!-- <h2 id="dashboards">dashboards</h2>
 
-{{< img src="guides/overview/dashboard_events.png" responsive="true" >}}
 
 Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
 <ul>
@@ -207,7 +203,6 @@ without access to your data or any other information (via the pencil in the uppe
 
 <!-- <h2 id="alerting">Alerting</h2>
 
-{{< img src="guides/overview/alert.png" responsive="true" >}}
 
 
  gives you the ability to be notified if the aggregate of a specific
@@ -221,7 +216,6 @@ metric is above or below a certain threshold:
 </ul>
 
 
-{{< img src="guides/overview/alert_setup.png" responsive="true" >}}
 
 
 Does the data have to be pushed to Datadog?
