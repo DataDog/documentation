@@ -1,36 +1,57 @@
 <header class="sticky">
     <div class="container">
-        <a href="/" id="logo">
-            <img class="logo-img" height="75" src="{{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png") }}">
-            <img class="logo-text" src="{{ partial "img.html" (dict "root" . "src" "dd-logo-200.png") }}">
-        </a>
-        <ul class="nav navbar-left">
-            <li class="nav-item">
-                <a class="nav-link active" href="https://www.datadoghq.com/product/">Product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://docs.datadoghq.com/">Docs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.datadoghq.com/pricing/">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="https://www.datadoghq.com/customers/">Customers</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="https://www.datadoghq.com/about/">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.datadoghq.com/blog/">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://app.datadoghq.com/">Login</a>
-            </li>
-            <li class="nav-item nav-button">
-                <a class="btn btn-outline-primary" href="#">GET STARTED FREE</a>
-            </li>
-        </ul>
+        <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
+            <div class="col">
+                <ul class="nav navbar-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.datadoghq.com/product/">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="https://docs.datadoghq.com/">Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.datadoghq.com/pricing/">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="https://www.datadoghq.com/customers/">Customers</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-1 text-center">
+                <a href="/" id="logo">
+                    <img class="logo-img" height="85" src="{{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png") }}">
+                    <img class="logo-text" src="{{ partial "img.html" (dict "root" . "src" "dd-logo-200.png") }}">
+                </a>
+            </div>
+            <div class="col">
+                <ul class="nav navbar-right float-right">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="https://www.datadoghq.com/about/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.datadoghq.com/blog/">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://app.datadoghq.com/">Login</a>
+                    </li>
+                    <li class="nav-item nav-button">
+                        <a class="btn btn-outline-primary" href="#">GET STARTED FREE</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
+    <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img height="43" src="{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png") }}" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-sidenav">
+            <div class="container">
+            {{ partial "sidenav/sidenav.html" . }}
+            </div>
+        </div>
+    </nav>
 </header>

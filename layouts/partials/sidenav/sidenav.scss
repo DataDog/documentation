@@ -4,6 +4,10 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   top:66px;
 }
 
+.mobilequicknav {
+  display:none;
+}
+
 aside.sidenav {
   background:#F8F8F8;
   width:100%;

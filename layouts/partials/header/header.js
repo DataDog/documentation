@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     function compress_nav_on_scroll() {
+        var width = $(window).width();
         var scrollTop = $(window).scrollTop();
-        var logoFs = 75;
+        var logoFs = 85;
         var newLogoFs = 0;
         var newH = 0;
         var el_height = 129;
@@ -14,7 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             newH = el_height / 2;
         }
-        $('body > header').css({'height': newH + 'px'});
+
+        if(width > 991) {
+            $('body > header').css({'height': newH + 'px'});
+            $('body > header .mainnav').css({'height': newH + 'px'});
+        } else {
+            $('body > header').css({'height': ''});
+            $('body > header .mainnav').css({'height': ''});
+        }
 
         // Resize logo font on scroll
         if (scrollTop < logoFs / 2) {
