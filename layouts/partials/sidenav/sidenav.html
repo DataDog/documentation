@@ -20,7 +20,7 @@
                                 <span>{{ $element.display_name }}</span>
                             </a>
                             {{ if (and $active_page (not $element.toc_disable)) }}
-                                {{ if $dot.Params.integration_title }}<span class="toctitle truncate">{{ $dot.Params.integration_title | upper }}</span>{{ end }}
+                                {{ if $dot.Params.integration_title }}<span class="toctitle">{{ $dot.Params.integration_title | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
                         </li>
