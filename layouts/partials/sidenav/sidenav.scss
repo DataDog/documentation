@@ -1,5 +1,9 @@
 $ddpurple:    #774DA2;
 
+body > header.scrolled ~ .container aside.sidenav .sticky {
+  top:66px;
+}
+
 aside.sidenav {
   background:#F8F8F8;
   width:100%;
@@ -54,7 +58,7 @@ aside.sidenav {
       background:none;
       border:none;
       border-bottom:1px solid #D3D3D3;
-      padding:10px 0 0 7px;
+      padding:10px 0 0 3px;
       border-radius:0;
     }
     .form-control:focus {
@@ -83,7 +87,7 @@ aside.sidenav {
         color:#000;
         font-size:18px;
         font-weight: 600;
-        padding:5px 0 0px 7px;
+        padding:6px 0 0 2px;
         display:block;
         &:hover,
         &.active {
@@ -106,8 +110,24 @@ aside.sidenav {
           margin-top:4px;
         }
       }
+
+
+      /* Table of contents */
+      .toctitle {
+        color: $ddpurple;
+        font-size:18px;
+        line-height:18px;
+        padding-left:27px;
+        padding-top:5px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;     /** IE6+, Firefox 7+, Opera 11+, Chrome, Safari **/
+        -o-text-overflow: ellipsis;  /** Opera 9 & 10 **/
+        width: 250px;
+      }
       #TableOfContents {
-        padding:0 0 0 24px;
+        padding:0 0 20px 40px;
         margin:0;
         ul {
           list-style-type:none;
@@ -122,6 +142,8 @@ aside.sidenav {
               font-size:18px;
               line-height:24px;
               color:#323232;
+              padding:0;
+              margin:0;
               &:hover {
                 color: $ddpurple;
               }
@@ -132,6 +154,7 @@ aside.sidenav {
           }
         }
       }
+
     }
   }
 }

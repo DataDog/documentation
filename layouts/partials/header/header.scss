@@ -1,5 +1,13 @@
 $ddpurple:    #774DA2;
 
+/*body > header.scrolled ~ .container {
+  top:129px;
+  border:1px solid red;
+  position:relative;
+  z-index:999999;
+  background:Red;
+}*/
+
 body > header {
   position: -webkit-sticky;
   position: -moz-sticky;
@@ -15,6 +23,13 @@ body > header {
   text-transform: uppercase;
   //position:relative;
   z-index:9;
+
+  &.scrolled {
+    .logo-text {
+      display:none;
+    }
+  }
+
   .container {
     position:relative;
   }

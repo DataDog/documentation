@@ -51,7 +51,37 @@
     window.integrations = JSON.parse(integrations);
 </script>
 
-<div class="filters controls" data-ref="controls">
+<div class="d-block d-sm-none">
+    <div class="dropdown show">
+        <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ALL
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
+                <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+<!--
+<div class="dropdown">
+    <a id="dLabel" class="text-center"  data-target="#dlabel" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ALL</a>
+    <ul class="dropdown-menu" aria-labelledby="dLabel">
+        <li role="presentation"><a href="#" class="filter sort-reset" data-filter="all">ALL</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time sort-category-ebook" data-filter="category-ebook">EBOOKS</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-guide">GUIDES</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-video">VIDEOS</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-cheatsheet">CHEATSHEETS</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-webinar">WEBINARS</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-dashboard">DASHBOARDS</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-research">RESEARCH</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-case-study">CASE STUDIES</a></li>
+        <li role="presentation"><a href="#" class="filter sort-time" data-filter="category-inthewild">IN THE WILD</a></li>
+    </ul>
+</div>-->
+
+
+<div class="filters controls d-none d-sm-block" data-ref="controls">
     <a data-ref="filter" data-filter="all" href="#all" type="button" class="mb-1 btn btn-sm-tag btn-outline-secondary sort-reset">ALL</a>
     {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
         <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>

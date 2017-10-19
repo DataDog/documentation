@@ -1,5 +1,4 @@
 ---
-title: Getting Started with the Agent
 kind: guide
 listorder: 1
 ---

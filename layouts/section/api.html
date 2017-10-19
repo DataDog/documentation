@@ -6,8 +6,8 @@
     {{ $codeListCount := (len $codeList)}}
 
     <div class="row sticky api-nav no-gutters" style="">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
+        <div class="d-none d-lg-flex col-lg-6"></div>
+        <div class="col-12 col-lg-6">
             {{ partial "codenav/codenav.html" . }}
         </div>
     </div>
@@ -15,10 +15,10 @@
     {{ range $index, $element := $contentList }}
         {{ $myindex := (add $index 1) }}
         <div class="row">
-            <div class="col-sm-6 api-content">
+            <div class="col-12 col-lg-6 api-content">
                 {{ $element.Content }}
             </div>
-            <div class="col-sm-6 api-code">
+            <div class="col-12 col-lg-6 api-code">
                 <div>
                     {{ (index $codeList $index).Content }}
                 </div>

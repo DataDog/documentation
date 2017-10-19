@@ -11,7 +11,7 @@
             <ul class="list-unstyled">
                 {{ $dot := . }}
                 {{ range $index, $element := $.Site.Data.sidenav.general.nav }}
-                    {{ $active_page := (in $dot.RelPermalink $element.link) }}
+                    {{ $active_page := (or (and (in $dot.RelPermalink $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
                     {{ if not $element.hide }}
                         <li>
                             <a href="{{ $element.link }}" {{if $active_page }}class="active"{{ end }}>
@@ -20,6 +20,7 @@
                                 <span>{{ $element.display_name }}</span>
                             </a>
                             {{ if (and $active_page (not $element.toc_disable)) }}
+                                {{ if $dot.Params.integration_title }}<span class="toctitle truncate">{{ $dot.Params.integration_title | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
                         </li>

@@ -2,6 +2,9 @@ $ddpurple:    #774DA2;
 
 .filters {
   margin-top:40px;
+  a {
+    text-decoration: none;
+  }
 }
 .integration-tiles {
   &:after {
@@ -52,6 +55,7 @@ $ddpurple:    #774DA2;
         display:block;
         height:100%;
         width:100%;
+        text-decoration: none;
         .btn-container {
           padding:0 1.25rem;
           position:absolute;
@@ -66,4 +70,14 @@ $ddpurple:    #774DA2;
         }
       }
     }
+}
+
+
+.dropdown-menu {
+  right:0;
+  .dropdown-item {
+    font-size:18px;
+    line-height:22px;
+    padding-bottom:10px;
+  }
 }
