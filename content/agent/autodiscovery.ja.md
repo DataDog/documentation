@@ -3,6 +3,7 @@ title: Using Autodiscovery with Docker
 kind: documentation
 aliases:
   - /ja/guides/servicediscovery/
+  - /ja/guides/autodiscovery/
 customnav: agentnav
 ---
 
