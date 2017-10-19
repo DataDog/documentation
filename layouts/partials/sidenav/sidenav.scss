@@ -8,6 +8,12 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   display:none;
 }
 
+.sidenav-api {
+  .sticky {
+    top:65px;
+  }
+}
+
 aside.sidenav {
   background:#F8F8F8;
   width:100%;

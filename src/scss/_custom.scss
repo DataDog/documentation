@@ -15,7 +15,8 @@ $theme-colors: (
         danger: $red,
         semi-trans: rgba(255, 255, 255, .5),
         light: $gray-100,
-        dark: $gray-800
+        dark: $gray-800,
+        gradient: $ddpurple
 );
 
 $spacers: (
@@ -82,6 +83,21 @@ $headings-font-weight:600;
     color: #fff;
     background-color: $ddpurple;
     border-color: $ddpurple;
+  }
+}
+
+// this button is generated from theme colors but we want to have a gradient
+.btn-gradient {
+  background-image: linear-gradient(90deg,#c024b6,#3023ae);
+  border-color: transparent;
+  &:hover,
+  &:active,
+  &.active,
+  .show > &.dropdown-toggle {
+    background-color: #fff;
+    background-image: none;
+    border-color: $ddpurple;
+    color: $ddpurple;
   }
 }
 

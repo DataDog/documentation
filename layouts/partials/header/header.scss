@@ -4,7 +4,9 @@ body > header {
   box-shadow: 0 8px 10px 0 rgba(0,0,0,.07);
   background: #fff;
   z-index:99;
-  position:sticky;
+  position:fixed;
+  width:100%;
+  top:0;
 
   &.scrolled {
     .mainnav {
@@ -118,6 +120,19 @@ body > header {
     &> .col {
       border-right:1px solid #D6D6D6;
       height:70px;
+    }
+  }
+}
+
+
+
+//@include media-breakpoint-down(lg)
+@media (max-width: 1199px) {
+  body > header {
+    .mainnav {
+      .logo-text {
+        left: 0px;
+      }
     }
   }
 }

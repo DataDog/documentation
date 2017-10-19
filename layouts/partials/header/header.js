@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(width > 991) {
             $('body > header').css({'height': newH + 'px'});
             $('body > header .mainnav').css({'height': newH + 'px'});
+
         } else {
             $('body > header').css({'height': ''});
             $('body > header .mainnav').css({'height': ''});
