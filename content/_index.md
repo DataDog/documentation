@@ -20,7 +20,7 @@ Your application stack is teeming with unused metadata that's trying to tell a s
 
 ## Collect Everything
 
-Collect a wealth of already-available data without writing any code. [Install the Datadog Agent](Agent#Install) everywhere—every server, instance, VM, node, [container-running host](docker-dd-agent repo)—and then enable and configure any of our 200+ out-of-the-box [integrations](Integrations#Core) to start the metrics flowing to Datadog's backend.
+Collect a wealth of already-available data without writing any code. [Install the Datadog Agent](/agent) everywhere—every server, instance, VM, node, [container-running host](https://github.com/DataDog/docker-dd-agent)—and then enable and configure any of our 200+ out-of-the-box [integrations](/integrations) to start the metrics flowing to Datadog's backend.
 
 Submit custom application metrics by writing a little code. Instrument your own gauges, counters, timers, and histograms with [DogStatsD](/developers/dogstatsd), or use [APM](/tracing) to trace the execution time of any code path to see how it impacts overall request-response times. The [client libraries](/developers/libraries) for these send your custom metrics and trace data to the Datadog Agent, which ships them off to Datadog.
 

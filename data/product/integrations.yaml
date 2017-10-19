@@ -726,7 +726,7 @@ integrations:
     versions.
   public_title: Google App Engine
   image: Integrations-GoogleAppEngine2-340x216.png
-  docs_link: /integrations/gae/
+  docs_link: /integrations/google_app_engine/
   public: true
 - short_description: Track query count, execution times, uploaded bytes and rows,
     and more.
@@ -1380,7 +1380,7 @@ integrations:
   short_description: Monitor the availability of StatsD servers and track metric counts.
   public_title: StatsD
   image: Integrations-StatsD-340x216.png
-  docs_link: /agent/dogstatsd/
+  docs_link: /developers/dogstatsd/
   public: true
 - name: statuspage
   categories: ['notification', 'collaboration', 'issue tracking']
