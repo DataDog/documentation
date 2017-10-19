@@ -62,7 +62,7 @@ sidebar:
 <!-- this is not currently true
 <h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
 <p>
-Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
+Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file:
 </p>
 -->
 
@@ -773,7 +773,7 @@ cronに上記のように実行コマンドを記述すると、Vacuumスクリ�
 
 #### I set up my integration. Why am I not seeing metrics? {#ntegration-metrics}
 
-There are several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>-->
+There are several problems that could cause this.  Send a message to support (support@datadoghq.com) describing the issue and include the agent info, the logs, and the configuration file as attachments to that message.  You can find the location of these in the following link and selecting your OS: <</a>-->
 
 ### Integrationについて {#integrations}
 
@@ -814,7 +814,7 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
 
 <h4 id="custom-metrics">How do I submit custom metrics?</h4>
 <p>
-You can submit your custom metrics with the DogStatsD client.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/">here</a>.
+You can submit your custom metrics with the DogStatsD client.
 </p>-->
 
 ### メトリクスについて {#metrics}
@@ -825,7 +825,7 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 
 <!--<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
 <p>
-StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this <a href="http://docs.datadoghq.com/guides/metrics/#counters">here</a>.
+StatsD counters are normalized over the flush interval to report per-second units.  You can read more about this 
 </p>-->
 
 #### イベントの発生回数をカウントしているメトリクスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
@@ -833,8 +833,7 @@ StatsD counters are normalized over the flush interval to report per-second unit
 DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信][19]のページの[カウンタ][19]を参照してください。
 
 <!--<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
-<p>
-Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/logs/">here</a>.
+
 </p>
 -->
 
@@ -855,8 +854,7 @@ Unfortunately, we do not allow adding past data at this time.
 <p>
 This depends on the medium you use to send metrics.
 <ul>
-<li>For an Agent Check, see this <a href="http://docs.datadoghq.com/guides/agent_checks/#sending-metrics">link</a>.</li>
-<li>For DogStatsD, see this <a href="http://docs.datadoghq.com/guides/dogstatsd/#metrics">link</a>.</li>
+
 <li>For the API, see this <a href="http://docs.datadoghq.com/api/#metrics-post">link</a>.</li>
 </ul>
 </p>-->

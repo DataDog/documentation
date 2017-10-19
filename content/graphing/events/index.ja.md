@@ -118,7 +118,7 @@ alert type,  date happened,  host, aggregation key, and source type name.
 
 #### Datadog Event
 
-{{< img src="guides/eventsemail/json-event.png" >}}
+
 
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
@@ -190,6 +190,6 @@ messages from the Format: dropdown, then click *Create API Email*.
 
 
 [integrations]: /ja/integrations
-[agentcheck]: /ja/guides/agent_checks
+[agentcheck]: /ja/agent/agent_checks
 [eventsapi]: /ja/api/#events
 [dd-app]: https://app.datadoghq.com

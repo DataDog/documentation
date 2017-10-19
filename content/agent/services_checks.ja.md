@@ -84,7 +84,7 @@ web chat client, too</a>.) -->
 
 <h3 id="setup">セットアップ</h3>
 
-未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)又は、ダッシュボード内タブの[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)をクリックし、インストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
+未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](/ja/agent/basic_agent_usage/)又は、ダッシュボード内タブの[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)をクリックし、インストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
@@ -102,7 +102,7 @@ There are currently two types of service checks:
 - HTTP(S) checks
 - TCP checks
 
-As service checks are also Agent checks, they are configured <a href="http://docs.datadoghq.com/guides/agent_checks/#config">the same way</a>.
+As service checks are also Agent checks, they are configured 
 
 Each check will have a configuration file that will be placed in the `conf.d`
 directory. Configuration is written using [YAML](http://www.yaml.org/).
@@ -119,7 +119,7 @@ TCP Check configuration file must be named tcp_check.yaml. -->
 - HTTP(S) のチェック
 - TCP のチェック
 
-サービスチェックは、Agent Check機能の一部分です。従って、設定方法も[Agent Check機能](/ja/guides/agent_checks/#config)で解説した内容と同じになります。
+サービスチェックは、Agent Check機能の一部分です。従って、設定方法も[Agent Check機能](/ja/agent/agent_checks/)で解説した内容と同じになります。
 
 それぞれのサービスチェックの設定ファイルは、`conf.d` ディレクトリ以下に設置します。設置する設定ファルは、[YAML](http://www.yaml.org/)形式で記述していきことになります。
 

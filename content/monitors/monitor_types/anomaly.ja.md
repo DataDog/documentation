@@ -195,7 +195,7 @@ No. Anomaly detection is designed to assist with visualizing and monitoring metr
 
 Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
 
-Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an [outlier monitor](https://docs.datadoghq.com/guides/outliers/) will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won’t be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
+Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an outlier monitor will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won’t be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
 -->
 
 ## よくあるご質問(FAQs)
@@ -206,7 +206,7 @@ Take care when creating multi-alerts. A metric such as `service.requests_served{
 
 また、Anomaly Detectionは効果的な予測値のために過去の時系列データを必要としますので、もしメトリクスの収集を始めてから数時間あるいは数日である場合、Anomaly Detectionは恐らく有効には機能しないでしょう。
 
-Multi Alert を設定しているときには注意が必要です。`service.requests_served{*}` のようなメトリックはAnomaly Detection を適用する良い候補に思われますが、一方で、そのメトリックをホストごとにスライスした `service.requests_served{*} by {host}` は良い候補とはならないでしょう。もしそれらのホストがロードバランサー配下にあるのであれば、むしろ[Outlier Detection](https://docs.datadoghq.com/ja/guides/outliers/) が異常なホストの検知に適していると思われます。
+Multi Alert を設定しているときには注意が必要です。`service.requests_served{*}` のようなメトリックはAnomaly Detection を適用する良い候補に思われますが、一方で、そのメトリックをホストごとにスライスした `service.requests_served{*} by {host}` は良い候補とはならないでしょう。もしそれらのホストがロードバランサー配下にあるのであれば、むしろ[Outlier Detection](/ja/monitors/monitor_types/outliers/) が異常なホストの検知に適していると思われます。
 サービスがスケールしていく場合では、追加されていく新しいホストは Anomaly Detection に必要な過去の時系列データが蓄積するまで全く監視されず、それどころか、それらのホストによるリクエストの数が不安定になることでアラートが不必要にトリガされる可能性もあります。
 
 <!--

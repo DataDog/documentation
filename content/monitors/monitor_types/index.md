@@ -17,7 +17,7 @@ Here is a quick overview of the different terms used:
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: [host](#host-monitors)-, [metric](#metric-monitors)-, [integration](#integration-monitors)-, [process](#process-monitors)-, [network](#network-monitors)-, [event](#event-monitors)-based, and [custom](#custom-monitors). See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/guides/tagging) page for more details.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/agent/tagging) page for more details.
 
 ## Create a monitor
 ### Choose what to monitor

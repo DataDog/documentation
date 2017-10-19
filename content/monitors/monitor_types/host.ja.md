@@ -11,7 +11,6 @@ description: "Check if one or more hosts are reporting to Datadog"
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-{{< img src="guides/monitor/host_monitor.png" >}}
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
 with a status `UP`. You can monitor this heartbeat across one or more hosts.

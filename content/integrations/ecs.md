@@ -176,7 +176,7 @@ The Datadog Agent is now running on your new ECS instance. Use this user script 
 
 ##### Dynamic detection and monitoring of running services
 
-Datadog's <a href="https://docs.datadoghq.com/guides/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
+Datadog's [Autodiscovery](agent/autodiscovery/) can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
 
 ## Data Collected
 ### Metrics

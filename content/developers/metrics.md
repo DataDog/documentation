@@ -23,8 +23,7 @@ Sending your application's custom metrics to Datadog will let you correlate
 what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
-server that is bundled with the Datadog Agent. You can read about how it works <a
-href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -439,10 +438,10 @@ syntax. Examples of commonly used metric tag keys are `env`, `instance`, `name`,
 Note that `device`, `host`, and `source` are treated specially and cannot be specified
 in the standard way. Check out some of our other docs for how to use these:
 
-- <a href="http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
-- <a href="http://docs.datadoghq.com/api/#tags">tags in the API</a>
-- <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
-- <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a>
+- [metrics in the API](api/#metrics)
+- [tags in the API](/api/#tags)
+- [Agent Checks](/agent/agent_checks/)
+- [log parsing](/agent/logs/)
 
 ## Sample Rates
 

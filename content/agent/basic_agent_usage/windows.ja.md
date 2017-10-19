@@ -59,9 +59,9 @@ Datadog Agentの実行は、Windows serviceによって管理されています�
 
 #### Datadog Agent バージョン >= 3.9.1:
 スタートメニューに表示されるDatadog Agent Managerを使います。
-{{< img src="guides/basic_agent_usage/windows/windows-start-menu.png" >}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" >}}
 
-{{< img src="guides/basic_agent_usage/windows/manager-snapshot.png" >}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" >}}
 
 <!--　<h4>Datadog Agent バージョン < 3.9.1の場合:</h4>　-->
 

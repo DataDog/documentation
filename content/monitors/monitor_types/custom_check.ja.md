@@ -10,13 +10,10 @@ description: "Monitor status of arbitrary custom checks"
 <!--
 ### Custom Monitors
 
-
-{{< img src="guides/monitor/custom_monitor.png" >}}
-
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks](/ja/guides/agent_checks/) for detailed
+Refer to the [Guide to Agent Checks]for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 -->
@@ -25,7 +22,7 @@ or service checks.
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
-メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/ja/guides/agent_checks/)を参照してください。
+メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/ja/agent/agent_checks/)を参照してください。
 
 
 <!--

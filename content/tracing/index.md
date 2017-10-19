@@ -60,7 +60,7 @@ The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastruc
 | `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their Resource name. |
 
 
-For more information about the Datadog Agent, see the [Getting Started guide](/guides/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
+For more information about the Datadog Agent, see the [Getting Started guide](/agent/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
 ### Additional resources
 

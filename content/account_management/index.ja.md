@@ -3,7 +3,7 @@ title:  課金に関するFAQ
 kind: documentation
 autotocdepth: 2
 customnav: accountmanagementnav
-alias: 
+aliases: 
     - /ja/guides/billing
 ---
 

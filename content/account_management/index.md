@@ -3,7 +3,7 @@ title: Account Management
 kind: documentation
 autotocdepth: 2
 customnav: accountmanagementnav
-alias: 
+aliases: 
     - /guides/billing
 ---
 

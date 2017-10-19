@@ -33,8 +33,8 @@ Function               | Category      | Description
 `robust_trend()`       | Regression    | fit a robust regression trend line using Huber loss; see the "Robust regression" section below for more details
 `trend_line()`         | Regression    | fit an ordinary least squares regression line through the metric values
 `piecewise_constant()` | Regression    | approximate the metric with a piecewise function composed of constant-valued segments
-`anomalies()`          | Algorithms    | overlay a gray band showing the expected behavior of a series based on past behavior; see our [guide to anomaly detection](/guides/anomalies)
-`outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
+`anomalies()`          | Algorithms    | overlay a gray band showing the expected behavior of a series based on past behavior; see our [guide to anomaly detection](/monitors/monitor_types/anomaly)
+`outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/monitors/monitor_types/outliers)
 
 **`.as_count()` & `.as_rate()`**
 

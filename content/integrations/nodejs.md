@@ -21,7 +21,7 @@ Connect your Node.js applications to Datadog to:
 
 The Node.js integration enables you to monitor any custom metric by instrumenting a few lines of code. 
 For instance, you can have a metric that returns the number of page views or the time of any function call. 
-For additional information about the Node.js integration, please refer to this [guide on submitting metrics](https://docs.datadoghq.com/guides/metrics/)
+For additional information about the Node.js integration, please refer to this [guide on submitting metrics](/developers/metrics/)
 For advanced usage, please refer to the [documentation in the repository](https://github.com/joybro/node-dogstatsd)
 
 1. Install the library with npm:
