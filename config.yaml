@@ -93,21 +93,18 @@ languages:
         - identifier: customnav_agentnav_faq
           url: "agent/faq/"
           weight: 50
-        - identifier: customnav_agentnav_install_debian_5
-          url: "agent/install_debian_5/"
-          weight: 60
         - identifier: customnav_agentnav_installcoreextra
           url: "agent/installcoreextra/"
-          weight: 70
+          weight: 60
         - identifier: customnav_agentnav_logs
           url: "agent/logs/"
-          weight: 80
+          weight: 70
         - identifier: customnav_agentnav_services_checks
           url: "agent/services_checks/"
-          weight: 90
+          weight: 80
         - identifier: customnav_agentnav_tagging
           url: "agent/tagging/"
-          weight: 100
+          weight: 90
 
       basic_agent:
         - identifier: amazonlinux
@@ -129,7 +126,11 @@ languages:
           name: "Debian"
           url: agent/basic_agent_usage/deb/
           weight: 40
-
+        
+        - identifier: customnav_agentnav_install_debian_5
+          url: "agent/basic_agent_usage/install_debian_5/"
+          weight: 60
+        
         - identifier: fedora
           name: "Fedora"
           url: agent/basic_agent_usage/fedora/

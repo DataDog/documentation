@@ -7,6 +7,8 @@ js_dd_docs_methods:
 code_languages:
   - Python
   - Ruby
+aliases:
+   - /metrics/
 ---
 <!--
 ======================================================

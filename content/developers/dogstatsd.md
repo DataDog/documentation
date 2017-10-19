@@ -2,6 +2,8 @@
 title: DogStatsD
 kind: documentation
 customnav: developersnav
+aliases:
+  - /guides/dogstatsd/
 sidebar:
   nav:
     - header: Official Libraries

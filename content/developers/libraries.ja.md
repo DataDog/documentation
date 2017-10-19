@@ -5,6 +5,8 @@ language: ja
 title: APIライブラリー
 kind: documentation
 customnav: developersnav
+aliases:
+   - /ja/libraries/
 ---
 <!--
 ### API and DogStatsD Client Libraries

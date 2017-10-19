@@ -4,6 +4,8 @@ translation_status: complete
 language: ja
 title: Agent Checkの書き方
 kind: documentation
+aliases:
+  - /ja/guides/agent_checks/
 customnav: agentnav
 sidebar:
   nav:

@@ -23,6 +23,8 @@ sidebar:
       href: "#datagram-format"
     - text: ソースコード
       href: "#source"
+aliases:
+  - /ja/guides/dogstatsd/
 ---
 
 <!-- <p class="aside">

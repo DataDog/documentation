@@ -1,20 +1,18 @@
 ---
-last_modified: 2015/03/31
-translation_status: complete
-language: ja
 title: Installing the Agent on Debian 5
 kind: documentation
-customnav: agentnav
 ---
 
-###One-Step
+## One-Step
+
 The Agent can be installed on Debian Lenny (5.0) using our one-step install command: <br/>
 
     DD_API_KEY=your_api_key bash -c "$(wget -qO- http://dtdg.co/agent-install-debian)"
 
 Be sure to substitute your API key into the command. Your key can be found <a href="https://app.datadoghq.com/account/settings#api">here</a>.
 
-###Step-by-Step
+## Step-by-Step
+
 If you prefer, the Agent can also be installed by following our step-by-step instructions:
 
 Set up the Datadog deb repo on your system and import Datadog's apt key:
