@@ -191,12 +191,14 @@ If your logs are formatted as JSON, please note that some attributes are reserve
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
 However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
 
+* `@timestamp`
 * `timestamp`
-* `date`
 * `_timestamp`
 * `Timestamp`
 * `eventTime`
+* `date`
 * `published_date`
+* `syslog.timestamp`
 
 You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor](/logs/processing/#log-date-remapper)
 
@@ -210,9 +212,23 @@ By default, Datadog will ingest the value of message as the body of the log entr
 
 ### `severity` attribute
 
-Each log entry may specify a severity level which will be made available for faceted search within Datadog.
+Each log entry may specify a severity level which will be made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official severity:
+
+* `syslog.severity`
 
 If you would like to remap some severities existing in the `severity` attribute, you can do so with the [log severity remapper](/logs/processing/#log-severity-remapper)
+
+### `host` attribute
+
+Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s host:
+
+* `syslog.hostname`
+
+### `service` attribute
+
+Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s service:
+
+* `syslog.appname`
 
 ## What's next
 
