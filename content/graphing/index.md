@@ -120,9 +120,9 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
-[1]: /graphing/miscellaneous/graphingjson
-[2]: https://app.datadoghq.com/metric/explorer
-[3]: https://app.datadoghq.com/metric/summary
-[4]: /graphing/miscellaneous/visualisation
+[1]: /graphing/miscellaneous/graphingjson/
+[2]: https://app.datadoghq.com/metric/explorer/
+[3]: https://app.datadoghq.com/metric/summary/
+[4]: /graphing/miscellaneous/visualisation/
 [5]: /agent/tagging/
-[6]: /graphing/miscellaneous/functions
+[6]: /graphing/miscellaneous/functions/

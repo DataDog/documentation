@@ -74,4 +74,4 @@ Please note that some of the advanced query language features (e.g. boolean logi
 
 [1]: /graphing/
 [2]: /graphing/events/
-[3]: /graphing/dashboards/fa
+[3]: /graphing/dashboards/faq

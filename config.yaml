@@ -99,12 +99,9 @@ languages:
         - identifier: customnav_agentnav_logs
           url: "agent/logs/"
           weight: 70
-        - identifier: customnav_agentnav_services_checks
-          url: "agent/services_checks/"
-          weight: 80
         - identifier: customnav_agentnav_tagging
           url: "agent/tagging/"
-          weight: 90
+          weight: 80
 
       basic_agent:
         - identifier: amazonlinux
@@ -488,12 +485,9 @@ languages:
         - identifier: customnav_agentnav_logs
           url: "agent/logs/"
           weight: 70
-        - identifier: customnav_agentnav_services_checks
-          url: "agent/services_checks/"
-          weight: 80
         - identifier: customnav_agentnav_tagging
           url: "agent/tagging/"
-          weight: 90
+          weight: 80
 
       basic_agent:
         - identifier: amazonlinux

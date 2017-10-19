@@ -142,6 +142,6 @@ to pull the data from.
 [9]: /faq/#notify
 [10]: /graphing/infrastructure/hostmap/
 [11]: /graphing/
-[12]: /graphing/miscellaneous/functions
+[12]: /graphing/miscellaneous/functions/
 [13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
 [14]: /monitors/
