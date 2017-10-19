@@ -19,7 +19,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 
 To start gathering logs, install the Log-Specific Datadog Agent:
 
-    sudo sh -c "echo 'deb http://apt.datad0g.com/ beta main' > /etc/apt/sources.list.d/datadog.list"
+    sudo sh -c "echo 'deb http://apt.datadoghq.com/ beta main' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
     sudo apt-get update
 
@@ -29,7 +29,7 @@ To validate apt is properly configured,  you can check if the following command 
 
 Then to install the agent:
 
-    sudo apt-get install datadog-agent=1:5.17.3~logsbeta.3-1 -y
+    sudo apt-get install datadog-agent=1:5.18.2~logsbeta.0-1 -y
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it:
 
