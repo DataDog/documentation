@@ -5,9 +5,9 @@ autotocdepth: 2
 hideguides: true
 customnav: graphingnav
 alias:
-        - /guides/graphing
+    - /guides/graphing
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](/graphing/miscellaneous/graphingjson)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 
 ## Find the Graph Editor
 
@@ -29,7 +29,7 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 
 ### Choose the Metric to graph
 
-When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary).
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer][2]. You can also look in the [Metrics Summary][4].
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 
@@ -38,6 +38,7 @@ The Metrics Explorer will allow you to play around with different graph settings
 
 Once you have a metric in mind to display in your graph, select your visualization.
 
+Find the list of all visualisation [here][5]
 
 #### Timeseries
 
@@ -93,7 +94,7 @@ The Hostmap will graph any metric for any subset of hosts on the same hostmap vi
 
 #### Filter
 
-Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
+Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging][6].
 
 #### Aggregation Method
 
@@ -124,7 +125,7 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 ### Apply more advanced functions
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here](/graphing/miscellaneous/functions)
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here][7]
 
 ### Perform metric arithmetic
 
@@ -171,3 +172,10 @@ If you don't enter a title, we will automatically generate a title based on the 
 ### Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
+
+[1]: /graphing/miscellaneous/graphingjson/
+[2]: https://app.datadoghq.com/metric/explorer/
+[3]: https://app.datadoghq.com/metric/summary/
+[4]: /graphing/miscellaneous/visualisation/
+[5]: /agent/tagging/
+[6]: /graphing/miscellaneous/functions/

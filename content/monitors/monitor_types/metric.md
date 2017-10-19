@@ -112,9 +112,9 @@ description: "Compare values of a metric with a user defined threshold"
         *time aggregation* and a *time window* on which the change will be
         calculated.
 
-    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/guides/anomalies)
+    - For details on how to configure Anomaly Detection, see the [Anomaly Detection Guide](/monitors/monitor_types/anomaly)
 
-    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/guides/outliers)
+    - For details on how to configure Outlier Detection, see the [Outlier Detection Guide](/monitors/monitor_types/outlier)
 
 5. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting

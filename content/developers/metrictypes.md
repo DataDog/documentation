@@ -2,6 +2,8 @@
 title: Metric Types
 kind: documentation
 customnav: developersnav
+aliases:
+   - /metricstypes/
 ---
 
 A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the app. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
@@ -11,18 +13,18 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
-| [API](http://docs.datadoghq.com/api/#metrics) | `api.Metric.send(...)` | gauge | gauge |
-| [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) | `dog.gauge(...)` | gauge | gauge |
-| [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) | `dog.increment(...)` | counter | rate |
-| [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) | `dog.histogram(...)` | histogram | gauge, rate |
-| [dogstatsd](http://docs.datadoghq.com/guides/dogstatsd/) | `dog.set(...)` | set | gauge |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.gauge(...)` | gauge | gauge |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.increment(...)` | counter | rate |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.rate(...)` | rate | gauge |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.count(...)` | count | count |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.monotonic_count(...)` | monotonic_count | count |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.histogram(...)` | histogram | gauge, rate |
-| [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.set(...)` | set | gauge |
+| [API][3] | `api.Metric.send(...)` | gauge | gauge |
+| [dogstatsd][1] | `dog.gauge(...)` | gauge | gauge |
+| [dogstatsd][1] | `dog.increment(...)` | counter | rate |
+| [dogstatsd][1] | `dog.histogram(...)` | histogram | gauge, rate |
+| [dogstatsd][1] | `dog.set(...)` | set | gauge |
+| [agent check][2] | `self.gauge(...)` | gauge | gauge |
+| [agent check][2] | `self.increment(...)` | counter | rate |
+| [agent check][2] | `self.rate(...)` | rate | gauge |
+| [agent check][2] | `self.count(...)` | count | count |
+| [agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
+| [agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
+| [agent check][2] | `self.set(...)` | set | gauge |
 
 
 ## What's a use case for changing a metric's type?
@@ -41,3 +43,7 @@ This will cause data submitted before the type change for `app.requests.served` 
 was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
 will be interpreted properly. If she was not willing to lose the historical data submitted as a `gauge` she would
 have created a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
+
+[1]: /developers/dogstatsd
+[2]: /agent/agent_checks
+[3]: /api/#metrics

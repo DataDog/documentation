@@ -3,6 +3,8 @@ title: Testing Integrations
 kind: documentation
 autotocdepth: 2
 customnav: developersnav
+aliases:
+   - /guides/testing/
 ---
 <style>
 .func-p{margin-left:20px;}
@@ -30,15 +32,15 @@ class HTTPCheckTest(AgentCheckTest)`
 
 ### Datadog Integrations
 
-To test integrations, add your test code to the `test_[integration_name].py` file in your integration directory. [Creating New Integrations](/guides/integration_sdk/#testing-your-integration) for more details.
+To test integrations, add your test code to the `test_[integration_name].py` file in your integration directory. [Creating New Integrations][1] for more details.
 
 ### Datadog Agent Checks
 
-If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, please reference the [`README.md` in the dd-agent repository](https://github.com/DataDog/dd-agent/blob/master/tests/README.md).
+If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, please reference the [`README.md` in the dd-agent repository][2].
 
 ## The AgentCheckTest Class
 
-The following test methods are provided by the `AgentCheckTest` class. For more details about the class, please reference the [source code](https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py).
+The following test methods are provided by the `AgentCheckTest` class. For more details about the class, please reference the [source code][3].
 
 ### Test and Check Status Methods
 
@@ -119,7 +121,7 @@ Parameters:
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
 * **hostname** (*string*) – The name of the host associated with the metric.
 * **device_name** (*string*) – The name of the device associated with the metric.
-* **metric_type** (*string*) – The type of metric to test for. If set, it must be one of `gauge`, `counter`, `rate`, or `count` as defined by the [checks metric types](https://github.com/DataDog/dd-agent/blob/master/checks/metric_types.py).
+* **metric_type** (*string*) – The type of metric to test for. If set, it must be one of `gauge`, `counter`, `rate`, or `count` as defined by the [checks metric types][6].
 
 #### `assertMetricTagPrefix(metric_name, tag_prefix, count=None, at_least=1)`
 
@@ -225,8 +227,16 @@ Parameters:
 
 ### Datadog Integrations
 
-For further examples of testing Datadog integrations, you can view the test files for [core integrations](https://github.com/DataDog/integrations-core) such as the [`test_mysql.py` file](https://github.com/DataDog/integrations-core/blob/master/mysql/test_mysql.py) for the MySQL integration.
+For further examples of testing Datadog integrations, you can view the test files for [core integrations][4] such as the [`test_mysql.py` file][5] for the MySQL integration.
 
 ### Datadog Agent Checks
 
-For examples of Agent Check tests, you can view the test files for agent checks such as [`test_http_check.py` file](https://github.com/DataDog/integrations-core/blob/master/http_check/test_http_check.py).
+For examples of Agent Check tests, you can view the test files for agent checks such as [`test_http_check.py` file][7].
+
+[1]: /developers/integration_sdk/#testing-your-integration
+[2]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md
+[3]: https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py
+[4]: https://github.com/DataDog/integrations-core
+[5]: https://github.com/DataDog/integrations-core/blob/master/mysql/test_mysql.py
+[6]: https://github.com/DataDog/dd-agent/blob/master/checks/metric_types.py
+[7]: https://github.com/DataDog/integrations-core/blob/master/http_check/test_http_check.py

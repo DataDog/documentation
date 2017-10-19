@@ -238,7 +238,7 @@ And you can test your parsing logic by calling python /path/to/parsers.py. -->
 
 `parsers.py` には、次のような内容が記述されます:
 
-{{< highlight python >}}
+```python
 import time
 from datetime import datetime
 
@@ -267,11 +267,11 @@ def parse_web(logger, line):
 
     # Return the output as a tuple
     return (metric_name, date, metric_value, attr_dict)
-{{< /highlight >}}
+```
 
 Datadog Agent 以外からもパーサをテストすることをお勧めしますので、先のスクリプトにテスト関数を追記します:
 
-{{< highlight python >}}
+```python
 def test():
     # Set up the test logger
     import logging
@@ -298,7 +298,7 @@ def test():
 if __name__ == '__main__':
     # For local testing, callable as "python /path/to/parsers.py"
     test()
-{{< /highlight >}}
+```
 
 次のようにパーサを実行し、関数のテストをします。
 
@@ -467,5 +467,6 @@ The aggregation key is a combination of the following fields:
 - aggregation_key
 - host
 
-For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py)
-that is bundled with the Agent.
+For an example of an event parser, see our [cassandra compaction event parser][1] that is bundled with the Agent.
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py

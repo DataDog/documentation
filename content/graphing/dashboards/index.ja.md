@@ -18,11 +18,11 @@ value will apply across the dashboard.</p> -->
 
 <!-- <h3 id="def">Editing template variables</h3>
 <p>To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.</p>
-{{< img src="guides/templating/edit-template-variables.png" >}}
+
 
 <p>This will open the template variable editing panel.</p>
 
-{{< img src="guides/templating/redis-template-var.png" >}}
+
 <p>A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.'
 A tag group is a prefix shared among several tags, like <code>redis_port</code> for the tags <code>redis_port:6379</code> and <code>redis_port:6380</code>.
 Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see
@@ -46,10 +46,10 @@ The 'Default Tag' option determines the initial value for the variable on dashbo
 
 
 <!-- <h3 id="graph">Using template variables in graph editors</h3>
-{{< img src="guides/templating/redis-tpl-graph-editor.png" >}}
+
 <p>Once defined, template variables appear alongside normal tag and host options in graph editors.  If you set <code>6379</code> as the value of <code>$redis</code>, all graphs defined with <code>$redis</code> will be scoped to <code>redis_port:6379</code>.
 </p>
-{{< img src="guides/templating/redis-tpl-selected.png" >}} -->
+ -->
 
 ### グラフエディターでテンプレート変数を使う方法
 

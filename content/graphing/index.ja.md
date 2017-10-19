@@ -6,12 +6,12 @@ hideguides: true
 customnav: graphingnav
 language: ja
 alias:
-        - /guides/graphing
+    - /guides/graphing
 ---
 <!--
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page](https://docs.datadoghq.com/ja/graphingjson/)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 -->
-グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門](https://docs.datadoghq.com/ja/graphingjson/)を参照して下さい。
+グラフエディターの設定には、GUI(デフォルトの手法)とJSON形式(より完全な手法)の2種類があります。このページではGUIエディターでの設定について説明します。JSON形式を使用したより詳しい設定に関しては、[JSONを使用したグラフ表示入門][1]を参照して下さい。
 
 <!--
 ## Find the Graph Editor
@@ -56,14 +56,14 @@ Configuring a graph in a dashboard is a multi-step process. The first two steps 
 <!--
 ### Choose the Metric to graph
 
-When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer](https://app.datadoghq.com/metric/explorer). You can also look in the [Metrics Summary](https://app.datadoghq.com/metric/summary).
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer][2]. You can also look in the [Metrics Summary][3]s.
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 -->
 
 ### グラフ表示するメトリクスの選択
 
-グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer](https://app.datadoghq.com/metric/explorer)を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary](https://app.datadoghq.com/metric/summary)を見ることもできます。
+グラフを作成するにあたり、グラフ表示したいメトリクスが既に決まっているかもしれません。それならば、さっそくそのメトリクスを**Choose metrics and events** セクションの最初のドロップダウンボックスから選択します。もしそうではなく、どのメトリクスをグラフ表示すべきか分からないのであれば、メトリクスエクスプローラ[Metrics Explorer][2]を利用してみると良いでしょう。あるいは、メトリクスサマリ[Metrics Summary][3]を見ることもできます。
 
 メトリクスエクスプローラはさまざまなグラフ表示の設定をアドホックに簡単に試して見てみることができます。メトリクスサマリページでは、各メトリクスの単位やメトリクスのタイプなどをリストから確認することができます。
 
@@ -192,14 +192,14 @@ Hostmapはメインメニューから利用できるHostmapと同様に、あら
 
 #### Filter
 
-Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging](/guides/tagging/).
+Now that you have the metric and a visualization in place, you can filter down the hosts to be graphed. To the right of the metric is a dropdown which by default says *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Guide to Tagging][4].
 -->
 
 ### 指定したグラフ表示をフィルタと集計方法の設定で最適化する
 
 #### フィルタ
 
-メトリクスを可視化するグラフ表示の形式が決まったら、今度はフィルタ機能によってグラフ表示させたい特定のホストを抽出します。メトリクスを選択したボックスの右手に、*(everywhere)* とデフォルト表示されているドロップダウンボックスがあるので、そこから抽出したいホストが該当するタグ(複数可)を選択しましょう。なお、タグの詳細に関しては、[Guide to Tagging](/guides/tagging) ページを参照して下さい。
+メトリクスを可視化するグラフ表示の形式が決まったら、今度はフィルタ機能によってグラフ表示させたい特定のホストを抽出します。メトリクスを選択したボックスの右手に、*(everywhere)* とデフォルト表示されているドロップダウンボックスがあるので、そこから抽出したいホストが該当するタグ(複数可)を選択しましょう。なお、タグの詳細に関しては、[Guide to Tagging][4] ページを参照して下さい。
 
 <!--
 #### Aggregation Method
@@ -392,3 +392,8 @@ The final step is to click Save. You can always come back in to the editor and t
 ### 保存
 
 最後に Done をクリックし設定を保存します。保存後も、必要に応じていつでもグラフエディターから各設定を操作することができます。
+
+[1]: /ja/graphing/miscellaneous/graphingjson/
+[2]: https://app.datadoghq.com/metric/explorer
+[3]: https://app.datadoghq.com/metric/summary
+[4]: /agent/tagging/

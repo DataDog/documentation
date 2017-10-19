@@ -33,7 +33,7 @@ Once defined, template variables appear alongside normal tag and host options in
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" >}}
-Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer](/graphing/). You can find details about adding events [using the UI](/graphing/#overlay-events-for-additional-context) or via the JSON interface further down the page.
+Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
 
@@ -70,4 +70,8 @@ Please note that some of the advanced query language features (e.g. boolean logi
 
 ## FAQ
 
-* [Consult our dedicated section for dashboards FAQ](/graphing/dashboards/faq)
+* [Consult our dedicated section for dashboards FAQ][3]
+
+[1]: /graphing/
+[2]: /graphing/events/
+[3]: /graphing/dashboards/faq

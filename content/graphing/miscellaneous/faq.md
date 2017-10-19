@@ -81,7 +81,7 @@ will send events on every run.
 
 (To get the python client lib you can install it with `pip install datadog`).
 
-[graphing-1]: /graphing/#functions
-[graphing-2]: /graphing
-[graphing-3]: http://app.datadoghq.com/infrastructure
-[graphing-4]: https://github.com/DataDog/datadogpy
+[graphing-1]: /graphing/miscellaneous/functions/
+[graphing-2]: /graphing/
+[graphing-3]: http://app.datadoghq.com/infrastructure/
+[graphing-4]: https://github.com/DataDog/datadogpy/

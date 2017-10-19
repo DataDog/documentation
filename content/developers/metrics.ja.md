@@ -10,6 +10,8 @@ js_dd_docs_methods:
 code_languages:
   - Python
   - Ruby
+aliases:
+   - /ja/metrics/
 ---
 
 <!--
@@ -25,8 +27,7 @@ Sending your application's custom metrics to Datadog will let you correlate
 what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
-server that is bundled with the Datadog Agent. You can read about how it works <a
-href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+server that is bundled with the Datadog Agent. You can read about how it works 
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -41,7 +42,7 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 Datadogにアプリケーションのメトリクスを送信することで、アプリケーションの状態、ユーザの行動、システムの状態などを関連付けて把握できるようになります。
 
-メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"](/ja/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
+メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"][1]で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
 
 以下のチュートリアルでは、次のようなユースケースを取り上げます:
 
@@ -668,10 +669,7 @@ syntax. Examples of commonly used metric tag keys are `env`, `instance`, `name`,
 Note that `device`, `host`, and `source` are treated specially and cannot be specified
 in the standard way. Check out some of our other docs for how to use these:
 
-- <a href="http://docs.datadoghq.com/api/#metrics">metrics in the API</a>
-- <a href="http://docs.datadoghq.com/api/#tags">tags in the API</a>
-- <a href="http://docs.datadoghq.com/guides/agent_checks/">Agent Checks</a>
-- <a href="http://docs.datadoghq.com/guides/logs/">log parsing</a> -->
+ -->
 
 <h3 id="tags">タグ (Tags)</h3>
 
@@ -743,16 +741,13 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
 
 
-- <a href="https://docs.datadoghq.com/ja/api/#metrics">API レファレンスのmetrics</a>
-- <a href="https://docs.datadoghq.com/ja/api/#tags">API レファレンスのtag</a>
-- <a href="https://docs.datadoghq.com/ja/guides/agent_checks/">Datadog Agent チェックの書き方</a>
-- <a href="https://docs.datadoghq.com/ja/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+- [API レファレンスのmetrics](/ja/api/#metrics)
+- [API レファレンスのtag](/ja/api/#tags)
+- [Datadog Agent チェックの書き方](/ja/agent/agent_checks/)
+- [Datadog Agent を使ったログのパース方法](/ja/agent/logs/)
 
 <!--
-- <a href="http://docs.datadoghq.com/api/#metrics">API レファレンスのmetrics</a>
-- <a href="http://docs.datadoghq.com/api/#tags">API レファレンスのtag</a>
-- <a href="http://docs.datadoghq.com/guides/agent_checks/">Datadog Agent チェックの書き方</a>
-- <a href="http://docs.datadoghq.com/guides/logs/">Datadog Agent を使ったログのパース方法</a>
+を使ったログのパース方法</a>
 -->
 
 <!--  <h3 id="sample-rates">Sample Rates</h3>
@@ -886,3 +881,5 @@ Datadogにloginした後、上部のナビゲーションバーにある``Metric
 
 メトリクスエクスプローラの項目に入力し表示されたグラフは、自動的に保存されません。
 メトリクスエクスプローラの操作によって表示されたグラフを保存する必要がある場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存してください。
+
+[1]: /developers/dogstatsd

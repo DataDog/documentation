@@ -24,12 +24,12 @@ aliases:
   - /ja/overview
 ---
 <!--監視とアラートの項目だけ、若干の修正をしました。まだ英語版と完全に一致していません8/17-->
-<!-- So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
-Agent, or maybe you're just curious about [what (else) Datadog can do for you](http://www.datadoghq.com/product/).
+<!-- So, you've just finished [installing][1] the Datadog
+Agent, or maybe you're just curious about [what (else) Datadog can do for you][2].
 This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel. -->
 
-Datadog Agentの[インストール](/ja/guides/basic_agent_usage/)は、無事終了しましたか。もしかしたら、[Datadogが提供するサービス](http://www.datadoghq.com/product/)に興味を持っていただいたばかりかもしれませんね。
+Datadog Agentの[インストール][1]は、無事終了しましたか。もしかしたら、[Datadogが提供するサービス][2]に興味を持っていただいたばかりかもしれませんね。
 
 このドキュメントでは、**Datadogの各機能**と**それらの有要性**を解説します。
 
@@ -91,7 +91,7 @@ for that machine based on what was previously set up for that tag.</li>
 * 全てのホストは、`Infrastructure`のページに表示されます。
 * 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
 * Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタを作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。
-* タグ設定の詳細は、<a target="_blank" href="https://docs.datadoghq.com/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。
+* タグ設定の詳細は、<a target="_blank" href="https://docs.datadoghq.com/ja/faq/">"FAQ:タグの詳細"</a>をご参照ください。
 
 
 <!-- ## Host Map
@@ -104,7 +104,7 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 * Detect usage patterns
 * Optimize resources
 
-To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap). -->
+To learn more about the Host Map, visit the [Host Map Guide]. -->
 
 ## Host Mapの表示
 
@@ -117,7 +117,7 @@ Host Mapは、`Infrastructure`メニューのドロップダウンメニュー�
 * 利用パターンの検出
 * リソース利用の最適化
 
-Host Map表示について詳しく知りたい場合は、[Host Map ガイド](/ja/guides/hostmap)ページを参照してください。
+Host Map表示について詳しく知りたい場合は、[Host Map ガイド][3] ページを参照してください。
 
 
 <!-- <h2 id="events">Events</h2>
@@ -202,7 +202,7 @@ without access to your data or any other information (via the pencil in the uppe
 <li>グラフ上で"Click & drag"することによって、時間軸を変更することができます。</li>
 <li>グラフ上でカーソルを移動することによって、Eventストリームの表示も該当箇所へ自動的に移動していきます。</li>
 <li>zone, host, total usageで、表示することができます。</li>
-<li>グラフ内に表示するメトリクスの<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/#functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
+<li>グラフ内に表示するメトリクスの<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/miscellaneous/functions">計算</a>や<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">統計</a>を可能にするために、JSON editorを画面上に設置しています。</li>
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
@@ -240,7 +240,7 @@ to pull the data from.</li>
 
 {{< img src="getting_started/overview/monitor.png" responsive="true" >}}
 
-[Monitor機能](/ja/guides/monitoring/)によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
+[Monitor機能][4] によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>
 <li>インフラ全体のメトリクスのaverage, max, min, or sumを基に</li>
 <li>ホスト毎のメトリクスのaverage, max, min, or sumを基に</li>
@@ -257,3 +257,8 @@ to pull the data from.</li>
 <li>Datadogで公開しているIntegrationsは、Datadog Agent を起動することによって、自動的にデータを送信するように成っています。(初回のデータ送信に関しては、数分の時間を要します。但し、10分以上になることはありません。)</li>
 <li>カスタムメトリクスがある場合は、データの収集先情報を特別に指定することができます。</li>
 </ol>
+
+[1]: /agent/basic_agent_usage/
+[2]: http://www.datadoghq.com/product/
+[3]: /graphing/infrastructure/hostmap
+[4]: /monitors/

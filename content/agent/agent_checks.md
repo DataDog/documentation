@@ -2,6 +2,8 @@
 title: Writing an Agent Check
 kind: documentation
 customnav: agentnav
+aliases:
+  - /guides/agent_checks/
 sidebar:
   nav:
     - header: Guide to Agent Checks
@@ -24,20 +26,12 @@ sidebar:
 ---
 
 <div class="alert alert-warning">
-This guide requires an Agent version >= 3.2.0. Older versions of the Agent do
-not include the `AgentCheck` interface that we'll be using.
+AgentCheck requires an Agent version >= 3.2.0.
 </div>
-
-
-<!--
-======================================================
-OVERVIEW
-======================================================
--->
 
 ## Overview
 
-This guide details how to collect metrics and events from a new data source
+This documentation details how to collect metrics and events from a new data source
 by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
 look at the `AgentCheck` interface, and then write a simple Agent Check
 that collects timing metrics and status events from HTTP services.
@@ -50,19 +44,11 @@ Agent Checks are a great way to collect metrics from custom applications or uniq
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
 
-For more information about how to write an Integration, please see the [Creating New Integrations guide](/guides/integration_sdk/) and check out the [Integrations-Extras Github repo](https://github.com/DataDog/integrations-extras) to see other contributed integrations.
-
-<!--
-======================================================
-SETUP
-======================================================
--->
+For more information about how to write an Integration, please see the [Creating New Integrations][1] and check out the [Integrations-Extras Github repo][2] to see other contributed integrations.
 
 ## Setup
 
-First off, ensure you've properly
-<a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, <a href="https://docs.datadoghq.com/help/">Get in touch with us! </a>, we'll be happy to answer any questions you might have.
+First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [Get in touch with us!][4], we'll be happy to answer any questions you might have.
 
 <!--
 ======================================================
@@ -192,7 +178,7 @@ file name should match the name of the check module (e.g.: `haproxy.py` and
 
 The configuration file has the following structure:
 
-{{< highlight console >}}
+```yaml
 init_config:
     min_collection_interval: 20
     key1: val1
@@ -204,11 +190,11 @@ instances:
 
     - username: jane_smith
       password: 5678
-{{< /highlight >}}
+```
+
 `min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
-<div class="alert alert-info">
-YAML files must use spaces instead of tabs.</div>
+<div class="alert alert-info"> YAML files must use spaces instead of tabs. </div>
 
 ### init_config
 
@@ -222,11 +208,6 @@ The *instances* section is a list of instances that this check will be run
 against. Your actual `check()` method is run once per instance. This means that
 every check will support multiple instances out of the box.
 
-<!--
-======================================================
-DIRECTORY STRUCTURE
-======================================================
--->
 
 ## Directory Structure
 
@@ -307,24 +288,23 @@ To start off simple, we'll write a check that does nothing more than send a
 value of 1 for the metric `hello.world`. The configuration file will be very
 simple, including no real information. This will go into `conf.d/hello.yaml`:
 
-{{< highlight console >}}
+```yaml
 init_config:
 
 instances:
     [{}]
 
-{{< /highlight >}}
+```
 
 The check itself will inherit from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This will go in `checks.d/hello.py`:
 
-{{< highlight python >}}
+```python
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
-
-{{< /highlight >}}
+```
 
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
@@ -363,7 +343,7 @@ timeout value is given for a particular URL.
 
 So our final configuration would look something like this:
 
-{{< highlight console >}}
+```yaml
 init_config:
     default_timeout: 5
 
@@ -375,7 +355,7 @@ instances:
 
     -   url: http://httpbin.org/status/400
 
-{{< /highlight >}}
+```
 
 ### The Check
 
@@ -386,7 +366,7 @@ In this snippet, we start a timer, make the GET request using the
 [requests library](http://docs.python-requests.org/en/latest/) and handle and
 errors that might arise.
 
-{{< highlight python >}}
+```python
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -406,15 +386,15 @@ except requests.exceptions.Timeout as e:
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
-{{< /highlight >}}
+```
 
 If the request passes, we want to submit the timing to Datadog as a metric. Let's
 call it `http.response_time` and tag it with the URL.
 
-{{< highlight python >}}
+```python
 timing = end_time - start_time
 self.gauge('http.response_time', timing, tags=['http_check'])
-{{< /highlight >}}
+```
 
 Finally, we'll want to define what happens in the error cases. We have already
 seen that we call `self.timeout_event` in the case of a URL timeout and
@@ -425,7 +405,7 @@ First, we'll define `timeout_event`. Note that we want to aggregate all of these
 events together based on the URL so we will define the aggregation_key as a hash
 of the URL.
 
-{{< highlight python >}}
+```python
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -434,13 +414,12 @@ def timeout_event(self, url, timeout, aggregation_key):
         'msg_text': '%s timed out after %s seconds.' % (url, timeout),
         'aggregation_key': aggregation_key
     })
-{{< /highlight >}}
-
+```
 
 Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
-{{< highlight python >}}
+```python
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -449,7 +428,7 @@ def status_code_event(self, url, r, aggregation_key):
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
-{{< /highlight >}}
+```
 
 ### Putting It All Together
 
@@ -505,3 +484,8 @@ For example, to run the disk check:
 ```
 C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
 ```
+
+[1]: /developers/integration_sdk/
+[2]: https://github.com/DataDog/integrations-extras
+[3]: http://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/help/

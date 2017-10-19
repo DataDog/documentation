@@ -81,21 +81,21 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     trigger, warning, recovery, or no data notification. These variables use simple if-else
     logic with the following syntax:
 
-    {{< img src="guides/monitor/conditionalvars.png" >}}
+
 
     Here is an example of how you can set it up in the editor:
 
-    {{< img src="guides/monitor/templateconditionaleditor.png" >}}
+    
 
 
     The corresponding trigger event notification will look like this:
 
-    {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
+    
 
 
     and the recovery notification:
 
-    {{< img src="guides/monitor/templateconditionalrecover.png" >}}
+    
 
 
     The conditional variables available are `is_alert`, `is_alert_recovery`,
@@ -110,12 +110,12 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     Here is an example of how you can use template variables for a multi alert:
 
-    {{< img src="guides/monitor/templatevareditor.png" >}}
+   
 
 
     and the corresponding event notification:
 
-    {{< img src="guides/monitor/templatevar.png" >}}
+   
 
     The tag template variables available depend on the tag group selected in Step 1
     of the monitor editor. The possible options will automatically populate at the
@@ -131,7 +131,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     **Include triggering tags in notification title** to save some space. This will make
     your notification title look like this:
 
-    {{< img src="guides/monitor/templatevar_short.png" >}}
+
 
     Note that template variable content is escaped by default. If your variable
     contains JSON or code that you would NOT like to be escaped, then use triple braces
@@ -157,7 +157,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
    Here is an example of how you can give a different message depending on the
    triggering context:
 
-   {{< img src="guides/monitor/scope_match_editor.png" >}}
+
 -->
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:

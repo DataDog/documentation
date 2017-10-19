@@ -103,23 +103,23 @@ Containers モニタリングのページでアクティブに調査している
 
 Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), the dd-agent user will need to have permissions to access docker.sock.
+Note that for collecting Container information in the standard install rather than with the [docker-dd-agent][1], the dd-agent user will need to have permissions to access docker.sock.
 
 -->
 ## インストール
 
 ライブコンテナ モニタリングは Datadogエージェントのバージョン5.17.2 以上で使用できます。最新のエージェントへ更新した後は、他の設定は必要ありません。
 
-[docker-dd-agent](https://github.com/DataDog/docker-dd-agent) ではなく、スタンダードなDatadog Agentを使用してコンテナの情報を収集する場合は、"dd-agent"ユーザーが docker.sock にアクセス可能である必要があります。
+[docker-dd-agent][1] ではなく、スタンダードなDatadog Agentを使用してコンテナの情報を収集する場合は、"dd-agent"ユーザーが docker.sock にアクセス可能である必要があります。
 
 <!--
 ### Proxy Configuration
 
-Live Containers supports a web proxy as [configured on the Agent](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration).  For configuring a web proxy in a container, refer to the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) documentation.
+Live Containers supports a web proxy as [configured on the Agent][2].  For configuring a web proxy in a container, refer to the [docker-dd-agent][3] documentation.
 -->
 ### プロキシ設定
 
-ライブコンテナ モニタリングは [Datadogエージェントで設定されたWebプロキシ](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration) をサポートしています。コンテナでのWebプロキシを設定する場合は、[docker-dd-agent](https://github.com/DataDog/docker-dd-agent) ドキュメントを参照して下さい。
+ライブコンテナ モニタリングは [Datadogエージェントで設定されたWebプロキシ][2] をサポートしています。コンテナでのWebプロキシを設定する場合は、[docker-dd-agent][3] ドキュメントを参照して下さい。
 
 <!--
 ## Notes/known issues
@@ -130,7 +130,7 @@ Live Containers supports a web proxy as [configured on the Agent](https://github
 
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
-- RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent]( https://gist.github.com/hkaj/404385619e5908f16ea3134218648237).
+- RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent][4].
 -->
 ## 注釈と既知の問題
 
@@ -140,4 +140,9 @@ Live Containers supports a web proxy as [configured on the Agent](https://github
 
 - ライブコンテナ モニタリングは、デフォルトのDebian docker-dd-agentイメージでのみ利用できます。アルパインイメージには含まれていません。
 
-- RBACの設定によって、Kubernetesのメタデータ取得を制限できます。詳しくは、[RBAC entites for the Datadog Agent](https://gist.github.com/hkaj/404385619e5908f16ea3134218648237) を参照してください。
+- RBACの設定によって、Kubernetesのメタデータ取得を制限できます。詳しくは、[RBAC entites for the Datadog Agent][4] を参照してください。
+
+[1]: https://github.com/DataDog/docker-dd-agent
+[2]: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration
+[3]: https://github.com/DataDog/docker-dd-agent)
+[4]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

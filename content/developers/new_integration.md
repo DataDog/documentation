@@ -2,6 +2,8 @@
 title: Officially Integrating with Datadog
 kind: documentation
 customnav: developersnav
+aliases:
+   - /guides/new_integration/
 ---
 Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 
@@ -18,8 +20,8 @@ If you manage or work with a service and would like to see Datadog integrate it,
 
 We will also need a short blurb describing the integration as well as the correct image to use across our site.
 
-   [1]: http://docs.datadoghq.com/guides/metrics/
-   [2]: http://docs.datadoghq.com/api/
-   [3]: http://docs.datadoghq.com/libraries/
+   [1]: /developers/metrics/
+   [2]: /api/
+   [3]: /developers/libraries/
 
 

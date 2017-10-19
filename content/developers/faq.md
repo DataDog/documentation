@@ -77,7 +77,7 @@ Further tagging info can be found [here][architecture-2].
 For information on AWS tagging, please see [here][architecture-3].
 
 [architecture-3]: /integrations/aws/
-[architecture-2]: /guides/metrics/#tags
+[architecture-2]: /developers/metrics/
 
 ## Metrics
 
@@ -160,9 +160,9 @@ For example, let's say you break down used memory by host, you'll get one
 time series for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 
-[metrics-1]: /guides/metrics/
-[metrics-2]: /guides/metrics/#counters
-[metrics-3]: /guides/logs/
-[metrics-4]: /guides/agent_checks/#sending-metrics
-[metrics-5]: /guides/dogstatsd/#metrics
+[metrics-1]: /developers/metrics/
+[metrics-2]: /developers/metrics/
+[metrics-3]: /agent/logs/
+[metrics-4]: /agent/agent_checks/#sending-metrics
+[metrics-5]: /developers/dogstatsd/#metrics
 [metrics-6]: /api/#metrics-post

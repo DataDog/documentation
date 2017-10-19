@@ -12,7 +12,7 @@ description: "Monitor status of arbitrary custom checks"
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks](/guides/agent_checks/) for detailed
+Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
 

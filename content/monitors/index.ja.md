@@ -53,7 +53,7 @@ page by hovering over **Monitors** in the main menu and clicking **New Monitor**
 on the left. This page shows how to setup a metric Monitor, but see the [Monitoring Reference](/monitoring) to learn more about other Monitor types.
  -->
 
-[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitoring)ページを参照して下さい。
+[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitors)ページを参照して下さい。
 
 {{< img src="monitors/index/nav.png" >}}
 
@@ -125,7 +125,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
-    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
+    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphing/miscellaneous/graphingjson)を参照してください。
 
 <!--
 3. Select the alert grouping.

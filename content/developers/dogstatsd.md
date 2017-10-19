@@ -2,6 +2,8 @@
 title: DogStatsD
 kind: documentation
 customnav: developersnav
+aliases:
+  - /guides/dogstatsd/
 sidebar:
   nav:
     - header: Official Libraries
@@ -41,7 +43,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
-* Gauge deltas (see [this issue](https://github.com/DataDog/dd-agent/pull/2104))
+* Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
 ## How It Works
@@ -58,11 +60,11 @@ example to see how this works.
 
 Suppose you want to know how many times your Python application is calling a particular database query. Your application can tell DogStatsD to increment a counter each time the query is called:
 
-{{< highlight python >}}
+```python
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
-{{< /highlight >}}
+```
 
 If this function executes one hundred times during a flush interval (ten
 seconds, by default), it will send DogStatsD one hundred UDP packets that say
@@ -73,11 +75,11 @@ where it will be stored and available for graphing alongside the rest of your me
 ## Setup
 
 Once you have the Datadog Agent installed on your application servers/containers—or anywhere
-your application can reliably reach—grab the [DogStatsD client library](/libraries/) for your
+your application can reliably reach—grab the [DogStatsD client library][2] for your
 application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the
-`dogstatsd_port` option in the main [Agent configuration file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example):
+`dogstatsd_port` option in the main [Agent configuration file][3]:
 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 18125
@@ -88,7 +90,7 @@ Restart DogStatsD to effect the change.
 
 While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section shows typical use cases for each type.
 
-Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in [other DogStatsD client libraries](/libraries/).
+Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in [other DogStatsD client libraries][2].
 
 ### Metrics
 
@@ -98,23 +100,23 @@ The first four metrics types—gauges, counters, timers, and sets—will be fami
 
 Gauges track the ebb and flow of a particular metric value over time, like the number of active users on a website:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 statsd.gauge('mywebsite.users.active', get_active_users())
-{{< /highlight >}}
+```
 
 #### Counters
 
 Counters track how many times something happens _per second_, like page views:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 def render_page():
   statsd.increment('mywebsite.page_views') # add 1
   # Render the page...
-{{< /highlight >}}
+```
 
 With this one line of code we can start graphing the data:
 
@@ -131,27 +133,27 @@ To increment or measure values over time rather than per second, use a gauge.
 
 Sets count the number of unique elements in a group. To track the number of unique visitors to your site, use a set:
 
-{{< highlight python >}}
+```python
 def login(self, user_id):
     statsd.set('users.uniques', user_id)
     # Now log the user in ...
-{{< /highlight >}}
+```
 
 #### Timers
 
 Timers measure the amount of time a section of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 @statsd.timed('mywebsite.page_render.time')
 def render_page():
   # Render the page...
-{{< /highlight >}}
+```
 
 or with a context manager:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 def render_page():
@@ -161,7 +163,7 @@ def render_page():
   # Now start the timer
   with statsd.timed('mywebsite.page_render.time'):
     # Render the page...
-{{< /highlight >}}
+```
 
 In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
@@ -177,7 +179,7 @@ Under the hood, DogStatsD actually treats timers as histograms; Whether you send
 
 Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 ...
@@ -188,13 +190,13 @@ statsd.histogram('mywebsite.page_render.time', duration)
 
 def render_page():
   # Render the page...
-{{< /highlight >}}
+```
 
 This produces the same five metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
 
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 def handle_file(file, file_size):
@@ -202,9 +204,9 @@ def handle_file(file, file_size):
 
   statsd.histogram('mywebsite.user_uploads.file_size', file_size)
   return
-{{< /highlight >}}
+```
 
-Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
+Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
 
 #### Metric option: Sample Rates
 
@@ -213,9 +215,9 @@ intensive code paths, DogStatsD clients support sampling,
 i.e. only sending metrics a percentage of the time. The following code sends
 a histogram metric only about half of the time:
 
-{{< highlight python >}}
+```python
 dog.histogram('my.histogram', 1, sample_rate=0.5)
-{{< /highlight >}}
+```
 
 Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to
 correct the metric value, i.e. to estimate what it would have been without sampling.
@@ -226,7 +228,7 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and exceptions in Datadog:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 def render_page():
@@ -235,13 +237,13 @@ def render_page():
     # ..
   except RenderError as err:
     statsd.event('Page render error!', err.message, alert_type='error')
-{{< /highlight >}}
+```
 
 ### Service Checks
 
 Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
-{{< highlight python >}}
+```python
 from datadog import statsd
 
 conn = get_redis_conn()
@@ -250,13 +252,13 @@ if not conn:
 else:
   statsd.service_check('mywebsite.can_connect_redis', statsd.OK)
   # Do your redis thing...
-{{< /highlight >}}
+```
 
 ## Tagging
 
 You can add tags to any metric, event, or service check you send to DogStatsD. For example, you could compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
-{{< highlight python >}}
+```python
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -264,9 +266,9 @@ def algorithm_one():
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
     # Do fancy things (maybe faster?) here ...
-{{< /highlight >}}
+```
 
-Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library](/libraries).
+Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
 
 ## Datagram Format
 
@@ -278,7 +280,7 @@ or you're writing your own library, here's how to format the data.
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-- `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy](http://docs.datadoghq.com/faq/#api).
+- `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy][4].
 - `value` — an integer or float.
 - `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
 - `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
@@ -347,7 +349,12 @@ Here's an example datagram:
 
 ## Further Reading
 
-[Libraries page](/libraries/) — find a DogStatsD client library to suit your needs.
+[Libraries page][2] — find a DogStatsD client library to suit your needs.
 
-[DogStatsD source code](https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py) — DogStatsD is open-sourced under the BSD License.
+[DogStatsD source code][5] — DogStatsD is open-sourced under the BSD License.
 
+[1]: https://github.com/DataDog/dd-agent/pull/2104
+[2]: /developers/libraries/
+[3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[4]: http://docs.datadoghq.com/faq/#api
+[5]: https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py

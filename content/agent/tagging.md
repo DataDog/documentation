@@ -1,7 +1,9 @@
 ---
-title: Guide to Tagging
+title: Tagging
 kind: documentation
 customnav: agentnav
+aliases:
+  - /guides/tagging/
 ---
 
 ## Overview

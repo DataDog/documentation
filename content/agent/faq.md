@@ -71,5 +71,5 @@ actually receiving data.
 Please refer to the [Basic Agent Usage Guide][agent-3].
 
 [agent-1]: /api/
-[agent-2]: /guides/dogstatsd/
-[agent-3]: /guides/basic_agent_usage/
+[agent-2]: /developers/dogstatsd/
+[agent-3]: /agent/basic_agent_usage/

@@ -8,7 +8,7 @@ customnav: accountmanagementnav
 ### How do I setup my team in Datadog?
 
 The admin of the account should enter the email addresses of team members
-[here][other-1]. Some team best practices are as follows:
+[here][1]. Some team best practices are as follows:
 
 * When the team member receives the confirmation email, they will be provided with a link to log in directly. The user should not click ‘sign up’ during this process.
 * If multiple users from the same organization sign up separately, this will register as different organizations in Datadog. Please reach out to support to have these merged, but please note that all information contained in the account getting merged will not be transferred over.
@@ -21,10 +21,14 @@ The admin of the account should enter the email addresses of team members
 * Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent.
 * All traffic is sent over SSL.
 * All communication to Datadog is via HTTPS.
-* The full license agreement can be found [here][other-2].
-* The agent is entirely open source and can be found [here][other-3].
+* The full license agreement can be found [here][2].
+* The agent is entirely open source and can be found [here][3].
 * Some installations (for example, installing the agent on CentOS 5), will request your password. The password is needed because it's installing packages - Datadog does not retain it in anyway. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
 
 ### What is the difference between an Admin and a User in Datadog?
 
 Admins have just a few extra capabilities that standard users do not have. This includes access to billing info, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
+
+[1]: https://app.datadoghq.com/account/team
+[2]: https://github.com/DataDog/datadog-agent/blob/master/LICENSE
+[3]: https://github.com/DataDog/datadog-agent

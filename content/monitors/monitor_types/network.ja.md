@@ -11,8 +11,6 @@ description: "Check the status of TCP/HTTP endpoints"
 ### Network Monitors
 
 
-{{< img src="guides/monitor/network_monitor.png" >}}
-
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/integrations/tcp_check) for details on Agent
 configuration.

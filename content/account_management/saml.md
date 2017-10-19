@@ -9,7 +9,7 @@ customnav: accountmanagementnav
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
-Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+Configuring [SAML (Security Assertion Markup Language)[1] for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
 
@@ -26,15 +26,13 @@ That brings you to the "SAML Single Sign On Configuration" page where you can:
 
     After you've chosen the file, click "Upload File".
 
-2. Datadog’s [Service Provider metadata can be found here](https://app.datadoghq.com/account/saml/metadata.xml). You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
+2. Datadog’s [Service Provider metadata can be found here][2]. You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable button.
 {{< img src="account_management/saml/saml_enable.png" responsive="true" >}}
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the SAML Configuration page.
 {{< img src="account_management/saml/saml_enabled.png" responsive="true" >}}
 
 The Single Sign On URL will also be displayed on the Team page. Loading this URL will initiate a SAML authentication against your IdP. Please note that the URL will not be displayed until SAML is enabled for your account.
-
-   [4]: https://app.datadoghq.com/account/saml/metadata.xml
 
 ## Datadog Service Provider Details
 
@@ -44,9 +42,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 * Datadog will specify `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions will be accepted.
-* Datadog’s SP Metadata can be found at [https://app.datadoghq.com/account/saml/metadata.xml][7].
-
-   [7]: https://app.datadoghq.com/account/saml/metadata.xml
+* Datadog’s SP Metadata can be found [here][3].
 
 ##  Setting Attributes
 
@@ -72,10 +68,10 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 
 For more information about configuring specific IdP's, refer to the following Knowledge Base articles:
 
-* [Google](https://help.datadoghq.com/hc/en-us/articles/208139913-How-do-I-configure-Google-as-a-SAML-IdP-)
-* [Microsoft Active Directory Federation Services](https://help.datadoghq.com/hc/en-us/articles/207425226-How-do-I-setup-Microsoft-Active-Directory-Federation-Services-as-a-SAML-IdP-)
-* [NoPassword](https://help.datadoghq.com/hc/en-us/articles/211023623-How-do-I-configure-NoPassword-as-a-SAML-IdP-)
-* [Okta](https://help.datadoghq.com/hc/en-us/articles/210132743-How-do-I-configure-Okta-as-a-SAML-IdP-)
+* [Google][4]
+* [Microsoft Active Directory Federation Services][5]
+* [NoPassword][6]
+* [Okta][7]
 
 
 ## Additional Features
@@ -101,3 +97,11 @@ The normal workflow is that when the Datadog url is loaded, the browser is redir
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
+
+[1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
+[2]: https://app.datadoghq.com/account/saml/metadata.xml
+[3]: https://app.datadoghq.com/account/saml/metadata.xml
+[4]: https://help.datadoghq.com/hc/en-us/articles/208139913-How-do-I-configure-Google-as-a-SAML-IdP-
+[5]: https://help.datadoghq.com/hc/en-us/articles/207425226-How-do-I-setup-Microsoft-Active-Directory-Federation-Services-as-a-SAML-IdP-
+[6]: https://help.datadoghq.com/hc/en-us/articles/211023623-How-do-I-configure-NoPassword-as-a-SAML-IdP-
+[7]: https://help.datadoghq.com/hc/en-us/articles/210132743-How-do-I-configure-Okta-as-a-SAML-IdP-
