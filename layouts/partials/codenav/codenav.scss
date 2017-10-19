@@ -1,0 +1,16 @@
+$ddpurple:    #774DA2;
+
+.codenav {
+  height:50px;
+  background:#000;
+  margin-bottom:20px;
+  padding-left:30px;
+  .nav-link {
+    color:#fff;
+    padding: 0.8rem 1rem;
+    &:hover {
+      border-bottom:1px solid $ddpurple;
+      color:$ddpurple;
+    }
+  }
+}

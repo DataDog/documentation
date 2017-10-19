@@ -5,7 +5,7 @@ order: 5.4
 ---
 
 ##### Signature
-GET /api/v1/metrics/:metric_name
+`GET /api/v1/metrics/:metric_name`
 ##### Example Request
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metric-metadata-get.py" highlight="true" >}}
 {{< snippet-code-block file="content/api/metrics/code_snippets/api-metric-metadata-get.sh" highlight="true" >}}

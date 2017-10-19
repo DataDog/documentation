@@ -61,7 +61,14 @@ pre {
 
 .api-code code {
   background-color:#0F0F0F;
-  color:#fff;
+  color:#D0021B;
+}
+.api-code ul {
+  list-style-type:none;
+  padding:0;
+  li {
+    margin:0 0 4px 0;
+  }
 }
 
 p {
@@ -100,20 +107,6 @@ p {
 .api-nav {
   margin-right: -15px;
   margin-left: -15px;
-  .nav {
-    height:50px;
-    background:#000;
-    margin-bottom:20px;
-    padding-left:30px;
-    .nav-link {
-      color:#fff;
-      padding: 0.8rem 1rem;
-      &:hover {
-        border-bottom:1px solid $ddpurple;
-        color:$ddpurple;
-      }
-    }
-  }
   height:50px;
   z-index:9;
 }

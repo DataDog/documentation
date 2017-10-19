@@ -36,9 +36,7 @@ Datadog Agentの[インストール][1]は、無事終了しましたか。も�
 
 <!-- <h2 id="integrations">Integrations</h2>
 
-<<<<<<< HEAD:content/getting_started/overview.ja.md
-{{< img src="getting_started/overview/integrations.png" >}}
-=======
+
 {{< img src="guides/overview/integrations.png" responsive="true" >}}
 
 <ul>
@@ -169,7 +167,6 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>@support-datadog でのサポートの要請</li>
 </ul>
 
-<<<<<<< HEAD:content/getting_started/overview.ja.md
 {{< img src="getting_started/overview/event_stream_event.png" >}}
 
 <!-- <h2 id="dashboards">dashboards</h2>

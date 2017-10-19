@@ -12,14 +12,14 @@ aliases:
 
 The Infrastructure list page shows all hosts monitored by your datadog application:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true">}}
 
 
 ## Host details
 
 If you click on one host, You can see the tags applied to it:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" >}}
 
 ### Agent Host Names
 
@@ -69,7 +69,8 @@ You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of
 aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" >}}
+
+{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true">}}
 
 ## What's next
 

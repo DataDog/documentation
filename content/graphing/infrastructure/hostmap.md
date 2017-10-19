@@ -32,7 +32,6 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 
 Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, at Datadog we have an uneven distribution of hosts with role:daniels across availability zones. (Daniels is the name of one of our internal applications.)
 
-
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" responsive="true">}}
 
 ### Problem Investigation
@@ -40,6 +39,7 @@ Host maps make it easy to see distributions of machines in each of your availabi
 Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by any dimension you would like to investigate, and visually determine whether the problem servers belong to a certain group. For example, you can group by availability zone, region, instance type, image, or any tag that you use at your company. You will either find a problem very quickly, or rule out these explanations before spending time on deeper investigations.
 
 Below is a screenshot from a recent issue we had a Datadog. As you can see, some hosts had much less usable memory than others, despite being part of the same cluster. Why? We grouped by machine image in Host Maps, and the problem was immediately clear: there were in fact two different images in use, and one of them had become overloaded.
+
 
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" responsive="true">}}
@@ -78,13 +78,11 @@ Filterable host attributes (automatically provided):
 
 ‘Group hosts by tags’ spatially arranges your hosts into clusters, or groups. Any host in a group shares the tag or tags you group by. A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts will be further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-
 {{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" responsive="true">}}
 
 ### Zoom in
 
 When you’ve identified a host that you want to investigate, click it for details. You will zoom in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they will be listed under the “Apps” header in the host’s detail pane, as in the screenshot below.) Click the name of an integration, and you will get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
-
 
 {{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true">}}
 

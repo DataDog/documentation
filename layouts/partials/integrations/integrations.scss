@@ -16,6 +16,11 @@ $ddpurple:    #774DA2;
       float:left;
       margin:0 19px 19px 0;
       overflow:hidden;
+      &.grayscale {
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+        opacity: 0.3;
+      }
       &:hover {
         border:1px solid $ddpurple;
         & > .card-img {

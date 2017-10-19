@@ -23,20 +23,16 @@ We also provide a Chef [Execution and Report Handler](https://docs.chef.io/handl
 ## Setup
 ### Deploying the Agent
 
-We created a cookbook to assist with Agent deployment.
+The [Datadog Chef cookbook](https://supermarket.chef.io/cookbooks/datadog) is available to automate your Datadog Agent installation and configuration.
 
-Install the latest released version of the Datadog Chef cookbook from the [Community Site](https://supermarket.chef.io/cookbooks/datadog) via knife, and upload to your Chef Server:
+Install the latest released version of the Datadog Chef cookbook from the [Supermarket](https://supermarket.chef.io/cookbooks/datadog) via knife, and upload to your Chef Server:
 
     knife cookbook site install datadog
     knife cookbook upload datadog
 
-You may also be using another tool to manage your cookbook workflow, such as [Berkshelf](http://berkshelf.com/) or [Librarian Chef](https://github.com/applicationsonline/librarian-chef), in which case you will need to add a line like this to your Berksfile/Cheffile:
-
-    cookbook 'datadog'
-
 And follow the instructions for your tool to upload the cookbook to your Chef Server.
 
-Before adding the cookbook's recipe to your node's `run_list`, you need to add account-specific details to be provided to the Agent configuration file.
+Before adding the cookbook's recipe to your node's `run_list`, you must add your Datadog account credentials such as API keys via Chef attributes.
 
 This is commonly done via `role` or `environment` files, or another cookbook declaring the attributes.
 
@@ -54,17 +50,17 @@ Then upload your role file to Chef Server like so:
 
     knife role from file roles/base.rb
 
-The next time Chef runs, it should install the Agent and set the configuration file with the API and application keys.
+The next time Chef runs, it will install the Agent and set the configuration file with the API and application keys.
 
 **NOTE:** If you are using another cookbook to define these attributes, use a higher attribute precedence level than `default`.
 
-### Deploying the Handler
+### Report Handler
 
-In order to further raise the visibility of your Chef runs, you may use the Datadog Chef Handler to monitor your Chef execution.
+Datadog offers a Chef Report Handler which reports metrics and events from your Chef runs to Datadog. Once installed the report handler will submit metrics on Chef run timing and resource changes. Events are also created to allow tracking of Chef run success and failure rates.
 
 This has the added value of bringing the output of a Chef run back to Datadog's Event stream, so failures can be highlighted quickly, discussed amongst the team, and resolved.
 
-Successes typically will be found in the "Low" priority, whereas failures are of "Normal" priority, and when the same node passes the Chef run, then it is put pack into "Low" priority.
+Success will be found in the "Low" priority, whereas failures are of "Normal" priority, and when the same node passes the Chef run, then it is put pack into "Low" priority.
 
 Adding the handler is very simple, as you can see in this role snippet:
 

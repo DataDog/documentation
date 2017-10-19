@@ -46,15 +46,15 @@
 {{ $test := printf "%s" $json }}
 
 <script type="text/javascript">
+    var data_resources = [];
     var integrations = {{ $test }};
     window.integrations = JSON.parse(integrations);
 </script>
 
-<div class="filters">
-    <a data-filter="all" href="#all" type="button" class="active mb-1 btn btn-sm-tag btn-outline-secondary sort-reset">ALL</a>
+<div class="filters controls" data-ref="controls">
+    <a data-ref="filter" data-filter="all" href="#all" type="button" class="mb-1 btn btn-sm-tag btn-outline-secondary sort-reset">ALL</a>
     {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
-    <a data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}"
-    class="mb-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+        <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
     {{ end }}
 </div>
 
@@ -76,7 +76,7 @@
     {{ end }}
 </div>-->
 
-<div class="integration-tiles mt-4">
+<div class="integration-tiles mt-4" data-ref="container">
     {{ range $i, $v := $integration_list }}
         <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">

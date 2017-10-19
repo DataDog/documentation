@@ -74,7 +74,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 ### Tagging
 
-Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers. 
+Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers.
 
 *Processes* are tagged by `#user`
 
@@ -90,11 +90,12 @@ Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`,
 
 Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to acheive better utilization of resources.
+In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
 {{< img src="graphing/infrastructure/process/overprovisioned.png" responsive="true" >}}
 
-Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
+Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.
+
 
 {{< img src="graphing/infrastructure/process/hostxservice.png" responsive="true" >}}
 
@@ -118,7 +119,7 @@ From there, you can dig down into finer grains, or inspect each group to see ind
 
 ## Real-time monitoring
 
-While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
+While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
 
 ## Notes/known issues
 
