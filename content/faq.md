@@ -108,7 +108,7 @@ alert when at 80% or above:
   5. Add a custom message for alert if you'd like.
 * You can read more about setting up monitors [here][alerts-1].
 
-[alerts-1]: /guides/monitoring/
+[alerts-1]: /monitors
 
 <!--
 ===============================================================================
