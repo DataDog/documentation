@@ -17,7 +17,7 @@ Datadog Live Containers allows for real-time visibility of all of the containers
 
 Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), the dd-agent user will need to have permissions to access docker.sock.
+Note that for collecting Container information in the standard install rather than with the [docker-dd-agent][1], the dd-agent user will need to have permissions to access docker.sock.
 
 ## Searching, Filtering, and Pivoting
 
@@ -64,4 +64,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
-- RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent]( https://gist.github.com/hkaj/404385619e5908f16ea3134218648237).
+- RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent][2].
+
+[1]: https://github.com/DataDog/docker-dd-agent
+[2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

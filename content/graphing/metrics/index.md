@@ -8,4 +8,6 @@ customnav: graphingnav
 
 ## FAQ
 
-* [Consult our dedicated section for metrics FAQ](/graphing/events/faq)
+* [Consult our dedicated section for metrics FAQ][1].
+
+[1]: /graphing/metrics/faq

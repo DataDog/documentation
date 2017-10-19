@@ -43,7 +43,7 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 Datadogにアプリケーションのメトリクスを送信することで、アプリケーションの状態、ユーザの行動、システムの状態などを関連付けて把握できるようになります。
 
-メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"](/ja/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
+メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"][1]で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
 
 以下のチュートリアルでは、次のようなユースケースを取り上げます:
 
@@ -883,3 +883,5 @@ Datadogにloginした後、上部のナビゲーションバーにある``Metric
 
 メトリクスエクスプローラの項目に入力し表示されたグラフは、自動的に保存されません。
 メトリクスエクスプローラの操作によって表示されたグラフを保存する必要がある場合は、メニュー左下の"A new dashboard"か"An existing dashboard"をクリックし手動で保存してください。
+
+[1]: /developers/dogstatsd

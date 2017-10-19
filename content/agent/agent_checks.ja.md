@@ -59,30 +59,6 @@ they will run every check interval, which defaults to 15 seconds. -->
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
 
-
-<!--
-======================================================
-SETUP
-======================================================
--->
-
-<!-- <h3 id="setup">Setup</h3>
-
-First off, ensure you've properly
-<a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, pop by
-our chatroom, <a href="irc://irc.freenode.net/datadog">#datadog on FreeNode</a>,
-and we'll be happy to answer any questions you might have. (There's a
-<a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-web chat client, too</a>.) -->
-
-<h3 id="setup">セットアップ</h3>
-
-まだDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)又は、ダッシュボード内タブを[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)とクリックしてインストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
-
-セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
-
-
 <!--
 ======================================================
 INTERFACE
@@ -303,7 +279,7 @@ Agent Checkには設定ファイルがあり、その設定ファイルは`conf.
 
 設定ファイルは、以下のようになります:
 
-{{< highlight console >}}
+```yaml
 init_config:
     key1: val1
     key2: val2
@@ -314,7 +290,7 @@ instances:
 
     - username: jane_smith
       password: 5678
-{{< /highlight >}}
+```
 
 <div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
@@ -466,23 +442,23 @@ Check 実行ファイルおよび設定ファイルの名前(拡張子を除く)
 
 まず簡単な例として、メトリクス名`hello.world`で、値1を送信するAegent Checkを書いてみます。設定ファイルは、`conf.d / hello.yaml` に配置し、以下の3行で非常にシンプルな内容になります:
 
-{{< highlight console >}}
+```yaml
 init_config:
 
 instances:
     [{}]
 
-{{< /highlight >}}
+```
 
 HelloCheckは、AgentCheckクラスを継承し、`hello.world`というメトリクス名で毎回`1`を送信します。このCheckを記述した`hello.py` ファイルは、`checks.d` ディレクトリ以下に配置します:
 
-{{< highlight python >}}
+```python
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 
-{{< /highlight >}}
+```
 ごのようにCheckのインターフェースは、シンプルで、簡単に使い始めることが出来ます。
 
 次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を計測してDatadogに送信するCheckを書いてみることにします。
@@ -558,7 +534,7 @@ instances:
 上記をふまえると、設定ファイルは次のようになります:
 
 
-{{< highlight console >}}
+```yaml
 init_config:
     default_timeout: 5
 
@@ -570,7 +546,7 @@ instances:
 
     -   url: http://httpbin.org/status/400
 
-{{< /highlight >}}
+```
 <!-- #### The Check
 
 Now we can start defining our check method. The main part of the check will make
@@ -651,7 +627,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 以下のセクションでは、タイマをスタートし、[requests library](http://docs.python-requests.org/en/latest/)を使いHTTPリクエストを実行し、発生する可能性のあるエラーの処理を行います。
 
-{{< highlight console >}}
+```python
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -671,7 +647,7 @@ except requests.exceptions.Timeout as e:
 
 if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
-{{< /highlight >}}
+```
 
 リクエストが成功した場合、レスポンス時間をDatadogへ送信します。その際、メトリクス名は、`http.response_time`。URLをタグとして付記します。
 
@@ -687,7 +663,7 @@ self.gauge('http.reponse_time', timing, tags=['http_check'])
 
 まず、`timeout_event` を定義します。`self.event()` で注目してほしいのは、`'aggregation_key':` に、先のコードに出ているURLのハッシュである`aggregation_key = md5(url).hexdigest()`を設定している部分です。このaggregation_key を使って、特定のURLに関連したイベントを集約します。
 
-{{< highlight python >}}
+```python
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -696,11 +672,11 @@ def timeout_event(self, url, timeout, aggregation_key):
         'msg_text': '%s timed out after %s seconds.' % (url, timeout),
         'aggregation_key': aggregation_key
     })
-{{< /highlight >}}
+```
 
 次に、`status_code_event` を定義します。先に定義した`timeout_event` とほぼ同じ内容になります。
 
-{{< highlight python >}}
+```python
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -709,8 +685,7 @@ def status_code_event(self, url, r, aggregation_key):
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
-{{< /highlight >}}
-
+```
 
 <!-- #### Putting It All Together
 

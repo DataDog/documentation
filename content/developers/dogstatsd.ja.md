@@ -27,14 +27,7 @@ aliases:
   - /ja/guides/dogstatsd/
 ---
 
-<!-- <p class="aside">
-  This tutorial will walk you through instrumenting your application to send
-  custom metrics to Datadog. If you need some help as you go, pop by
-  <a href="irc://irc.freenode.net/datadog">#datadog on freenode</a>,
-  where we'll be happy to answer any questions you might have. (There's a
-  <a href="http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1">
-  web chat client, too</a>.)
-</p>
+<!-- 
 
 The easiest way to get your custom metrics into Datadog is to send them to DogStatsD,
 a metrics aggregation server bundled with the Datadog Agent (in versions 3.0
@@ -44,7 +37,7 @@ DogStatsD implements the
 protocol, along with a few extensions for special Datadog features. -->
 
 <p class="aside">
-  このチュートリアルでは、開発しているアプリケーションからDatadogへカスタムメトリクスを送信する方法を順を追って説明していきます。チュートリアルを読み進めていく上でサポートが必要な場合は、<a href="/ja/help/">お問い合わせ</a>ページで紹介している方法でご連絡ください。
+  このチュートリアルでは、開発しているアプリケーションからDatadogへカスタムメトリクスを送信する方法を順を追って説明していきます。チュートリアルを読み進めていく上でサポートが必要な場合は、[お問い合わせ][1]ページで紹介している方法でご連絡ください。
 </p>
 
 Datadogにカスタムメトリクスを取り込ませる最も簡単な方法はDogStatsDを使うことです。DogStatsDは、Datadog Agent 3.0以上に同胞されているメトリクス集約サーバです。DogStatsDは、<a href="https://github.com/etsy/statsd">StatsD</a>プロトコルをサポートすると共に、datadog専用の機能にも対応するよう拡張されています。
@@ -106,11 +99,11 @@ DogSt​​atsDの主な機能は、所定の時間間隔（デフォルトで�
 
 次のようになります:
 
-{{< highlight python >}}
+```python
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
-{{< /highlight >}}
+```
 
 この関数が、次のメトリクス送信タイミング(デフォルトでは10秒間隔)までに100回実行されたとします。この関数は、100個の、"'database.query.count'を、カウント"というUDPパケットを送信します。
 DogStatsDは、これらのUDPパケットが送られたデータポイントを集計し、メトリクス値に置き換えます。
@@ -148,11 +141,11 @@ just fine, but using a Datadog StatsD client will give you a few extra features
 
 <!-- ### DogStatsD Clients
 
-You can see the list of StatsD clients on our [libraries page](/libraries/).　-->
+You can see the list of StatsD clients on our [libraries page]　-->
 
 ### DogStatsDクライアントについて
 
-プログラミング言語ごとのDogStatsDクライアントに関しては、[ライブラリー](/ja/libraries/)ページを参照してください。
+プログラミング言語ごとのDogStatsDクライアントに関しては、[ライブラリー][2]ページを参照してください。
 
 
 <!-- ## Metrics
@@ -433,7 +426,7 @@ statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=
 <!-- ## Configuration
 
 DogStatsD supports the following options, all of which can be tweaked in the
-Agent <a href="https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example">
+Agent [3]
 configuration file</a>:
 
     # The port DogStatsD runs on. If you change this, make your the apps sending to
@@ -447,7 +440,7 @@ configuration file</a>:
 
 ## 設定
 
-DogStatsDでは、UDPパケットの受信ポートとメトリクスの送信間隔を[Datadog Agentの設定ファイル](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example)内で設定することができます。
+DogStatsDでは、UDPパケットの受信ポートとメトリクスの送信間隔を[Datadog Agentの設定ファイル][3]内で設定することができます。
 
     # The port DogStatsD runs on. If you change this, make your the apps sending to
     # it change as well.
@@ -589,4 +582,9 @@ DogStatsD is open-sourced under the BSD License. Check out the source
 
 ## ソースコード
 
-DogStatsDは、BSDライセンスでオープンソースとして公開しています。ソースコードは、githubのDatadogアカウント以下の[dd-agent](https://github.com/DataDog/dd-agent)のリポジトリを参照してください。
+DogStatsDは、BSDライセンスでオープンソースとして公開しています。ソースコードは、githubのDatadogアカウント以下の[dd-agent][4]のリポジトリを参照してください。
+
+[1]: /ja/help/
+[2]: /ja/developers/libraries/
+[3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[4]: https://github.com/DataDog/dd-agent

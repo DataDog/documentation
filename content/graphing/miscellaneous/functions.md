@@ -211,7 +211,7 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 
 ### .as_count() or as_rate()
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post][1].
 
 ## Rank
 ### top()
@@ -259,6 +259,10 @@ Approximate the metric with a piecewise function composed of constant-valued seg
 
 ## Algorithms
 ### anomalies()
-Overlay a gray band showing the expected behavior of a series based on past behavior; see our [anomaly Monitor](/monitors/monitor_types/anomaly) page for more info.
+Overlay a gray band showing the expected behavior of a series based on past behavior; see our [anomaly Monitor][2] page for more info.
 ### outliers()
-Highlight outlier series; see our [outlier Monitor](/monitors/monitor_types/outlier) page for more info.
+Highlight outlier series; see our [outlier Monitor][3] page for more info.
+
+[1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
+[2]: /monitors/monitor_types/anomaly
+[3]: /monitors/monitor_types/outlier

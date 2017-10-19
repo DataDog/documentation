@@ -71,7 +71,7 @@ JMX / WMI / Nagios / Cacti).
 is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
 sales@datadoghq.com</a>. -->
 
-Pro プランとEnterprise プランのデータ保管期間はフル解像度(1ポイント/秒）で、1年です。一般的なプランとして提供しているデータ保管期間の仕様より大きなデータの保管をご希望の場合は、サポートチームまでご連絡ください。[sales@datadoghq.com](mailto:sales@datadoghq.com)
+Pro プランとEnterprise プランのデータ保管期間はフル解像度(1ポイント/秒）で、1年です。一般的なプランとして提供しているデータ保管期間の仕様より大きなデータの保管をご希望の場合は、サポートチームまでご連絡ください。[sales@datadoghq.com][1]
 
 
 <!-- ##### Each invoice is determined by the high watermark of concurrently running hosts for that month.
@@ -166,7 +166,7 @@ AWS IntegrationによってピックアップされたEC2インスタンスでDa
 その他のAWSリソース (例: ELB, EBS, RDS, Dynamo) は、現時点では請求の対象外です。
 無償での提供は、将来変更される可能性があります。
 
-もし、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
+もし、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル][2]を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
 
 
 <!-- ##### How will a VMware integration impact my monthly billing?
@@ -196,7 +196,7 @@ admin you can check out past invoices
 
 #### 今月の請求額を知る方法はありますか?
 
-ユーザの皆様が、今月末の請求書の金額を知る方法は準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
+ユーザの皆様が、今月末の請求書の金額を知る方法は準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況][3]を見ることができます。
 
 
 <!-- ##### Can I set a specific email address to receive invoices at?
@@ -210,4 +210,9 @@ is not a team member within Datadog (invoices@yourcompany.com)
 
 請求書の受信用に別のメールアドレスを設定することは可能です。更にそのメールアドレスが、チームメンバーとしてDatadogに登録されてなくても大丈夫です。(例: invoices@yourcompany.com)
 
-ダッシュボードの[`ユーザ名` タブ -> `billing`](https://app.datadoghq.com/account/billing)から設定ができます。
+ダッシュボードの[`ユーザ名` タブ -> `billing`][4]から設定ができます。
+
+[1]: mailto:sales@datadoghq.com]
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/billing_history
+[4]: https://app.datadoghq.com/account/billing

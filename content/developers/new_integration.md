@@ -20,8 +20,8 @@ If you manage or work with a service and would like to see Datadog integrate it,
 
 We will also need a short blurb describing the integration as well as the correct image to use across our site.
 
-   [1]: http://docs.datadoghq.com/guides/metrics/
-   [2]: http://docs.datadoghq.com/api/
-   [3]: http://docs.datadoghq.com/libraries/
+   [1]: /developers/metrics/
+   [2]: /api/
+   [3]: /developers/libraries/
 
 

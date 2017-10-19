@@ -182,7 +182,7 @@ reset -- for example, the number of queries from MySQL over time -- we track the
 rate between flushed values. While there currently isn't an elegant solution to
 get raw counts within Datadog, you may want to apply a function to
 your series like cumulative sum or integral. There is more information on those
-<a href="http://docs.datadoghq.com/graphing/#functions">here</a>.
+[here][1].
 
 <!--
 ======================================================
@@ -514,3 +514,5 @@ Note that the metrics explorer doesn't save any of these graphs. If you've
 created some graphs that you'd like to save, you need to click one of the
 save buttons at the bottom left, either saving to a new dashboard or to
 an existing one.
+
+[1]: /graphing/miscellaneous/functions

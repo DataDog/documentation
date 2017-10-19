@@ -11,24 +11,14 @@ aliases:
 sidebar:
   nav:
 ---
-<!--
- <h1 id="pagetitle">Get Started with Datadog </h1>
- <h3 class="big_number alert alert-warning linked-header" id="get-the-datadog-agent1-running">
- <a class="header-link" href="#get-the-datadog-agent1-running"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>1. Get the Datadog <a href="https://app.datadoghq.com/account/settings#agent">Agent</a> running!</h3>
- <h3 class="big_number alert alert-success linked-header" id="dive-into-metrics2">
- <a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. Dive into <a href="/guides/metrics/">Metrics</a>!</h3>
- <h3 class="big_number alert alert-info linked-header" id="graph-them3">
- <a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="/graphing/">Graph them!</a>
- </h3>
--->
 
 <h1 id="pagetitle">Datadogでメトリクスの監視を始めよう！ </h1>
 <h3 class="big_number alert alert-warning linked-header" id="get-the-datadog-agent1-running">
 <a class="header-link" href="#get-the-datadog-agent1-running"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>1. Datadog <a href="https://app.datadoghq.com/account/settings#agent">Agent</a> のインストールと起動 !</h3>
 <h3 class="big_number alert alert-success linked-header" id="dive-into-metrics2">
-<a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. メトリクスを <a href="guides/metrics/">使いこなそう </a>!</h3>
+<a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. メトリクスを <a href="developers/metrics/">使いこなそう </a>!</h3>
 <h3 class="big_number alert alert-info linked-header" id="graph-them3">
-<a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="graphing/">メトリクスの可視化</a>、そして<a href="https://docs.datadoghq.com/ja/guides/monitors/">アラート設定 !</a>
+<a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="graphing/">メトリクスの可視化</a>、そして [アラート設定](/ja/developers/) !
 </h3>
 
 <!--
@@ -39,7 +29,7 @@ capabilities at a high level.</p>
 -->
 
 <p><strong>どこから始めればよいか迷っている場合は?</strong>
-<br> Datadogのドキュメントは大きな分類としてガイドとリファレンスの二つに分かれています。<strong>ガイド</strong>では、Agentのインストールやアラートの設定など、Datadogにおける特定のタスクについて解説しています。<strong>レファレンス</strong>では、より一般的な情報を提供しています。まずは、<a href="guides/overview/">Datadog の概要</a> を一読されることをお勧めします。ここでは、Datadogに何ができるのかを俯瞰できるように説明しています。</p>
+<br> Datadogのドキュメントは大きな分類としてガイドとリファレンスの二つに分かれています。<strong>ガイド</strong>では、Agentのインストールやアラートの設定など、Datadogにおける特定のタスクについて解説しています。<strong>レファレンス</strong>では、より一般的な情報を提供しています。まずは、<a href="getting_started/overview/">Datadog の概要</a> を一読されることをお勧めします。ここでは、Datadogに何ができるのかを俯瞰できるように説明しています。</p>
 
 <!--
 <p><strong>If you have questions, we’re here to help.</strong> You can get in touch with
@@ -62,18 +52,18 @@ and we’ll take care of it.</p>
 
 <!--
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /guides/metrics/
+[2]: /developers/metrics/
 [3]: /graphing/
-[4]: /overview/
+[4]: /getting_started/overview/
 [5]: https://app.datadoghq.com/event/stream
 [6]: /help/#email
 [7]: /help/#irc
 [8]: https://help.datadoghq.com/hc/en-us/requests/new
 [9]: https://github.com/DataDog/documentation/issues
-[102]: /ja/guides/metrics/
+[102]: /ja/developers/metrics/
 [103]: /ja/graphing/
-[104]: /ja/guides/overview/
+[104]: /ja/getting_started/overview/
 [106]: /ja/help/#email
 [107]: /ja/help/#irc
-[111]: /ja/guides/monitoring/
+[111]: /ja/monitors/
 -->

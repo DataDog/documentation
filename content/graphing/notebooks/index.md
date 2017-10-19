@@ -86,4 +86,6 @@ To delete a notebook that you’ve created, click the icon in the notebook heade
 
 ## FAQ
 
-* [Consult our dedicated section for notebooks FAQ](/graphing/events/faq)
+* [Consult our dedicated section for notebooks FAQ][1].
+
+[1]: /graphing/notebooks/faq

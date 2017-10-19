@@ -16,7 +16,7 @@ sidebar:
 <h3 class="big_number alert alert-warning linked-header" id="get-the-datadog-agent1-running">
 <a class="header-link" href="#get-the-datadog-agent1-running"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>1. Get the Datadog <a href="https://app.datadoghq.com/account/settings#agent">Agent</a> running!</h3>
 <h3 class="big_number alert alert-success linked-header" id="dive-into-metrics2">
-<a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. Dive into <a href="/guides/metrics/">Metrics</a>!</h3>
+<a class="header-link" href="#dive-into-metrics2"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>2. Dive into <a href="/developers/metrics/">Metrics</a>!</h3>
 <h3 class="big_number alert alert-info linked-header" id="graph-them3">
 <a class="header-link" href="#graph-them3"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>3. <a href="/graphing/">Graph them!</a>
 </h3>

@@ -242,5 +242,6 @@ The aggregation key is a combination of the following fields:
 - aggregation_key
 - host
 
-For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py)
-that is bundled with the Agent.
+For an example of an event parser, see our [cassandra compaction event parser][1] that is bundled with the Agent.
+
+[1]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py

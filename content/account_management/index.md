@@ -9,11 +9,11 @@ alias:
 
 Welcome to the Account Management section where you can learn
 
-* [How to configure SAML](/account_management/saml)
-* [How to have multiple Datadog account](/account_management/multi_account)
-* [How to add/disable team members on your Datadog application](/account_management/team)
-* [How to configure your timezone](/account_management/settings)
-* [How to edit your email notifications parameter](/account_management/settings)
+* [How to configure SAML][1]
+* [How to have multiple Datadog account][2]
+* [How to add/disable team members on your Datadog application][3]
+* [How to configure your timezone][4]
+* [How to edit your email notifications parameter][5]
 
 We occasionally receive questions regarding the specifics of our pricing; the basic plans and the most frequently seen questions can be found below.
 
@@ -36,11 +36,11 @@ and 100 custom metrics)
     1. Payment terms (month to month or annual prepaid)
 
 
-Custom metrics are supported in every plan. A custom metric is any metric that is not automatically collected by any of [Datadog’s integrations](https://www.datadoghq.com/product/integrations/)—for example custom checks or API-level metrics from your application. Each host may submit up to 100 custom metrics at no additional cost.
+Custom metrics are supported in every plan. A custom metric is any metric that is not automatically collected by any of [Datadog’s integrations][6] —for example custom checks or API-level metrics from your application. Each host may submit up to 100 custom metrics at no additional cost.
 
 Docker Containers are also supported in every plan. Each host may submit metrics from 10 containers an hour at no additional cost. Additional containers will be billed at $0.002 per container per hour. In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
 
-Pro and Enterprise data retention is for 13 months at full resolution (maximum is one point per second). For greater data retention needs, please reach out to [sales@datadoghq.com](mailto:sales@datadoghq.com).
+Pro and Enterprise data retention is for 13 months at full resolution (maximum is one point per second). For greater data retention needs, please reach out to [sales@datadoghq.com][7].
 
 **Each invoice is determined by the high watermark of concurrently running hosts for that month.**
 
@@ -81,3 +81,12 @@ This is per active host in Datadog, whether or not it's running the agent.
 * [I don't see anything in my billing history](https://help.datadoghq.com/hc/en-us/articles/203844125-I-don-t-see-anything-in-my-billing-history)
 
 * [Where can I get a copy of the invoice?](https://help.datadoghq.com/hc/en-us/articles/203764795-Where-can-I-get-a-copy-of-the-invoice-)
+
+
+[1]: /account_management/saml 
+[2]: /account_management/multi_account
+[3]: /account_management/team
+[4]: /account_management/settings
+[5]: /account_management/settings
+[6]: https://www.datadoghq.com/product/integrations/
+[7]: mailto:sales@datadoghq.com

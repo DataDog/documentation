@@ -17,7 +17,7 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 ### Standard Agent Configuration
 
-Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
+Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the config file at 
 
@@ -35,7 +35,7 @@ Update to the Datadog Agent image version 5.16.0 or above:
 
     $ docker pull datadog/docker-dd-agent
 
-Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), passing in the following attributes, in additon to any other custom settings as appropriate:
+Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in additon to any other custom settings as appropriate:
 
     -v /etc/passwd:/etc/passwd:ro
     -e DD_PROCESS_AGENT_ENABLED=true
@@ -44,7 +44,7 @@ Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-
 
 ### Kubernetes Daemonset
 
-In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernetes) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
+In the [dd-agent.yaml][3] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
     env:
       - name: DD_PROCESS_AGENT_ENABLED
@@ -62,7 +62,7 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
           path: /etc/passwd
         name: passwd    
     
-Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation][4] and the [docker-dd-agent][5] information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
@@ -129,3 +129,9 @@ While actively working with the Process and Containers page, metrics are collect
 - Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
 
 - The Process Agent is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/docker-dd-agent
+[3]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[4]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[5]: https://github.com/DataDog/docker-dd-agent

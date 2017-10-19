@@ -22,11 +22,11 @@ The following table lists Datadog-official and community contributed API and Dog
 <!--
 ### APM (Tracing) Client Libraries
 
-The following table lists Datadog-official and community contributed [Trace](/tracing/) client libraries.
+The following table lists Datadog-official and community contributed [Trace] client libraries.
 -->
 ### トレース (APM) クライアントライブラリー
 
-下記テーブルは、Datadog公式とコミュニティメンバーが開発した [トレース (APM)](/tracing/) クライアントライブラリーのリストです。
+下記テーブルは、Datadog公式とコミュニティメンバーが開発した [トレース (APM)](/tracing)クライアントライブラリーのリストです。
 
 {{< tracing-libraries-table >}}
 

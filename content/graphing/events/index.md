@@ -85,7 +85,7 @@ messages from the Format: dropdown, then click *Create API Email*.
 {{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API">}}
 
 [integrations]: /integrations
-[agentcheck]: /guides/agent_checks
+[agentcheck]: /agent/agent_checks
 [eventsapi]: /api/#events
 [dd-app]: https://app.datadoghq.com
 
@@ -116,4 +116,6 @@ Should be encoded to: "http://catchpoint.com/session_id%3A123456"
 
 ## FAQ
 
-* [Consult our dedicated section for events FAQ](/graphing/events/faq)
+* [Consult our dedicated section for events FAQ][1]
+
+[1]: /graphing/events/faq

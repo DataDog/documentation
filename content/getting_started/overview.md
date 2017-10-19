@@ -19,8 +19,8 @@ aliases:
   - /overview
 ---
 
-So, you've just finished [installing](/guides/basic_agent_usage/) the Datadog
-Agent, or maybe you're just curious about [what (else) Datadog can do for you](http://www.datadoghq.com/product/).
+So, you've just finished [installing][1] the Datadog
+Agent, or maybe you're just curious about [what (else) Datadog can do for you][2].
 This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
@@ -29,9 +29,9 @@ it can help you bring your infrastructure to heel.
 
 {{< img src="getting_started/overview/integrations.png" >}}
 
-* About 100 integrations <a target="_blank" href="http://www.datadoghq.com/integrations/">officially listed</a>, always adding more.
-* Custom integrations are available <a target="_blank" href="http://docs.datadoghq.com/api/">via our API</a>, many documented by our active user community.
-* The Agent is <a target="_blank" href="https://github.com/DataDog/dd-agent/">open source</a> and you can instrument your own if you'd like.
+* About 100 integrations [officially listed][3], always adding more.
+* Custom integrations are available [via our API][4], many documented by our active user community.
+* The Agent is [open source][5] and you can instrument your own if you'd like.
 * Once integrations have been configured, data living in a datacenter or
 in an online service is treated the same throughout Datadog.
 
@@ -49,7 +49,7 @@ for you, to create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see <a target="_blank" href="https://docs.datadoghq.com/faq/#tagging">here</a>.
+* For more on tagging, please see [here][6].
 
 ## Host Map
 
@@ -63,7 +63,7 @@ The Host Map can be found under the Infrastructure menu and offers the ability t
 * Detect usage patterns
 * Optimize resources
 
-To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
+To learn more about the Host Map, visit the [Host Map Guide][10].
 
 ## Events
 
@@ -73,9 +73,8 @@ To learn more about the Host Map, visit the [Host Map Guide](/guides/hostmap).
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed <a target="_blank" href="https://docs.datadoghq.com/faq/#team">teams</a> and maintaining the focus of an investigation
-* You can <a target="_blank" href="https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/">filter</a>
-by: user, source, tag, host, status, priority, incident
+* Great for distributed [teams][7] and maintaining the focus of an investigation
+* You can [filter][8] by: user, source, tag, host, status, priority, incident
 
 
 For each incident users can:
@@ -84,7 +83,7 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* <a target="_blank" href="https://docs.datadoghq.com/faq/#notify">@ notify team members</a>, who receive an email
+* [@ notify team members][9], who receive an email
 * @support-datadog to ask for assistance
 
 {{< img src="getting_started/overview/event_stream_event.png" >}}
@@ -93,15 +92,15 @@ For each incident users can:
 
 {{< img src="getting_started/overview/dashboard.png" >}}
 
-Dashboards contain <a target="_blank" href="https://docs.datadoghq.com/graphing/">graphs</a> with real-time performance metrics
+Dashboards contain [graphs][11] with real-time performance metrics
 
 * Synchronous mousing across all graphs in a dashboard.
 * Vertical bars are events in the context of the metric.
 * Click & drag on a graph to zoom-in on a particular time-frame.
 * As you hover over the graph the event stream moves with you.
 * Display by zone, host, or total usage.
-* We expose the JSON editor of the graph allowing for <a target="_blank" href="http://docs.datadoghq.com/graphing/#functions">arithmetic</a> and
-<a target="_blank" href="https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/">functions</a> to be applied to metrics.
+* We expose the JSON editor of the graph allowing for [arithmetic][12] and
+[functions][13] to be applied to metrics.
 * Share a graph snapshot that will appear in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
 * Graphs can be embedded in an iframe, giving a 3rd party a live graph
@@ -112,7 +111,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 {{< img src="getting_started/overview/monitor.png" >}}
 
-[Monitoring](/monitors) gives you the ability to be notified if the aggregate of a specific
+[Monitoring][14] gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
 
 * Across your entire infrastructure
@@ -131,3 +130,18 @@ Currently, yes:
 launching the Agent (intial reporting may take a few minutes, but not longer than 10).
 2. If you have custom metrics, you can indicate specifically where
 to pull the data from.
+
+[1]: /agent/basic_agent_usage/
+[2]: http://www.datadoghq.com/product/
+[3]: http://www.datadoghq.com/integrations/
+[4]: /api/
+[5]: https://github.com/DataDog/dd-agent/
+[6]: /faq/#tagging
+[7]: /faq/#team
+[8]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/
+[9]: /faq/#notify
+[10]: /graphing/infrastructure/hostmap/
+[11]: /graphing/
+[12]: /graphing/miscellaneous/functions
+[13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
+[14]: /monitors/

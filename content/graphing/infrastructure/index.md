@@ -73,6 +73,10 @@ aliases associated with each host.
 
 ## What's next
 
-* [See all of your hosts together on one screen with the hostmap](/graphing/infrastructure/hostmap)
-* [Get real-time visibility of all of the containers across your environment](/graphing/infrastructure/livecontainers)
-* [Understand what is going on at any level of your system](/graphing/infrastructure/process)
+* [See all of your hosts together on one screen with the hostmap][1]
+* [Get real-time visibility of all of the containers across your environment][2]
+* [Understand what is going on at any level of your system][3]
+
+[1]: /graphing/infrastructure/hostmap
+[2]: /graphing/infrastructure/livecontainers
+[3]: /graphing/infrastructure/process

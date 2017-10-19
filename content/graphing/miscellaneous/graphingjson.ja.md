@@ -5,12 +5,12 @@ customnav: graphingnav
 ---
 
 <!--
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page](/graphing)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
 ## Graphing with the JSON editor
 
 -->
 
-グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門](/ja/graphing)を参照して下さい。
+グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門][1]を参照して下さい。
 
 ## JSONエディターを使用したグラフ表示
 
@@ -128,7 +128,7 @@ A few of these functions have been further explained in a series of examples. Vi
 それぞれのクエリの結果に対して関数を適用することができます。
 
 これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="https://docs.datadoghq.com/miscellaneous/functions/">Examples for Graphing Functions</a>
-本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
+本ドキュメントの最後にもいくつかの具体的な”設定例”があります。
 
 {{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 
@@ -169,7 +169,7 @@ For more on <code>.as_count()</code> please see our blog post
 特定の方法で提出されたメトリクスためのもう一つの上級者向け関数が、``.as_count（）``と``.as_rate（）`` です。
 現状、DogStatsDの"rate", "counter"を使って送信したメトリクスには、``.as_count（）``と``.as_rate（）``を使うことができますが、"gauges"などのそれ以外のメトリクスでは機能しません。
 
-``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/)のブログを参照してください。
+``as_count()``に関する詳しい情報は、["Visualize StatsD metrics with Counts Graphing"][2]のブログを参照してください。
 
 <!-- #### Aggregation Method -->
 
@@ -187,9 +187,9 @@ In most cases, the number of data points available outnumbers the maximum number
 
 
 <!--
-The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
+The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][3]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 -->
-メトリクスはグラフ表示の要です。現在利用可能なメトリクスは [Metrics Summary](https://app.datadoghq.com/metric/summary) にてリスト表示することができます。各メトリクスをクリックしてそのメトリクスがどのようなデータを取得しているか、あるいはタグやホストなどの関連する詳しい情報を確認します。
+メトリクスはグラフ表示の要です。現在利用可能なメトリクスは [Metrics Summary][3] にてリスト表示することができます。各メトリクスをクリックしてそのメトリクスがどのようなデータを取得しているか、あるいはタグやホストなどの関連する詳しい情報を確認します。
 
 <!-- #### Scope -->
 
@@ -673,7 +673,7 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 この例では、<code>system.cpu.iowait</code>のピーク値の上位5位をグラフに表示します。
 
 <code>system.cpu.iowait</code>のピーク値ランキングの第6位から10位のホストを表示するためには、<code>top_offset</code>を使います:
-{{< highlight json >}}
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -683,11 +683,11 @@ To look at the hosts with the 6th through 10th highest values (for example), use
     }
   ]
 }
-{{< /highlight >}}
+```
 
 <!-- Here is an example using the <code>week_before()</code> function: -->
 <code>week_before()</code>関数を使用した例:
-{{< highlight json >}}
+```python
 {
   "viz": "timeseries",
   "requests": [
@@ -696,4 +696,8 @@ To look at the hosts with the 6th through 10th highest values (for example), use
     }
   ]
 }
-{{< /highlight >}}
+```
+
+[1]: /ja/graphing/
+[2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
+[3]: https://app.datadoghq.com/metric/summary

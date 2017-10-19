@@ -82,7 +82,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands">}}
 
-![Datadog Host Maps Two Image Groups](guides/hostmap/hostmappart1image6.png) 
+![Datadog Host Maps Two Image Groups]
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups">}}
 
 -->
@@ -188,7 +188,7 @@ When you’ve identified a host that you want to investigate, click it for detai
 
 By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
-![Datadog Host Maps Using Color And Size](guides/hostmap/hostmappart2image4.png)
+![Datadog Host Maps Using Color And Size]
 
 Today the ‘Color by’ selector and ‘Size by’ selector contain only CPU-based metrics: load, idle, wait, etc. We will be adding additional metrics in the very near future.
 

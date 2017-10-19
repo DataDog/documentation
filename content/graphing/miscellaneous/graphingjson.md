@@ -4,7 +4,7 @@ kind: documentation
 customnav: graphingnav
 ---
 
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page](/graphing)
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
 
 ## Graphing with the JSON editor
 
@@ -69,7 +69,7 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: <a href="https://docs.datadoghq.com/graphing/miscellaneous/functions/">Examples</a>
+A few of these functions have been further explained in a series of examples. Visit this page for more detail: [Examples][2]
 
 #### Aggregation Method
 
@@ -78,7 +78,7 @@ In most cases, the number of data points available outnumbers the maximum number
 #### Metrics
 
 
-The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
+The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][3]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
 #### Scope
 
@@ -403,7 +403,8 @@ This will show the graphs for the five series with the highest peak <code>system
 
 
 To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
-{{< highlight json >}}
+
+```python
 {
   "viz": "timeseries",
   "requests": [
@@ -413,10 +414,11 @@ To look at the hosts with the 6th through 10th highest values (for example), use
     }
   ]
 }
-{{< /highlight >}}
+```
 
 Here is an example using the <code>week_before()</code> function:
-{{< highlight json >}}
+
+```python
 {
   "viz": "timeseries",
   "requests": [
@@ -425,4 +427,8 @@ Here is an example using the <code>week_before()</code> function:
     }
   ]
 }
-{{< /highlight >}}
+```
+
+[1]: /graphing/
+[2]: /graphing/miscellaneous/functions/
+[3]: https://app.datadoghq.com/metric/summary

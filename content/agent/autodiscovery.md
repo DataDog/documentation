@@ -10,7 +10,7 @@ customnav: agentnav
 Autodiscovery was previously called Service Discovery. It's still called Service Discovery throughout the Agent's code and in some configuration options.
 </div>
 
-Docker is being [adopted rapidly](https://www.datadoghq.com/docker-adoption/). Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
+Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
 The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to. The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
@@ -22,7 +22,7 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example) would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#template-variable-indexes).
+Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#template-variable-indexes).
 
 Because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and Port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
@@ -40,7 +40,7 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 ## Running the Agent Container
 
-No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. If you use Kubernetes, see the [Kubernetes integration page](http://docs.datadoghq.com/integrations/kubernetes/#installation) for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page](http://docs.datadoghq.com/integrations/ecs/#installation).
+No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. If you use Kubernetes, see the [Kubernetes integration page][3] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][4].
 
 If you use Docker Swarm, run the following command on one of your manager nodes:
 
@@ -54,7 +54,7 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
       -e SD_BACKEND=docker \
       datadog/docker-dd-agent:latest
 
-Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables](https://github.com/DataDog/docker-dd-agent#environment-variables).
+Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][5].
 
 Note that **if you want the Agent to autodiscover JMX-based checks, you MUST**:
 
@@ -86,7 +86,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
-1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them](https://github.com/DataDog/docker-dd-agent#configuration-files) into the docker-dd-agent container when starting it
+1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
 1. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
 1. On Kubernetes, add them using ConfigMaps
 
@@ -104,7 +104,7 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ~~~
 
-It looks like a minimal [Apache check configuration](https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example), but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any containers on the same host that run an `httpd` image.
+It looks like a minimal [Apache check configuration][7], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any containers on the same host that run an `httpd` image.
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
@@ -197,7 +197,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 #### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check](https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example) template to monitor whether the website created by the Apache container is available:
+The following etcd commands create the same Apache template and add an [HTTP check][8] template to monitor whether the website created by the Apache container is available:
 
 ~~~
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -326,3 +326,12 @@ checks:
     SD-jmx_0:
     - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
 ~~~
+
+[1]: https://www.datadoghq.com/docker-adoption/
+[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
+[3]: http://docs.datadoghq.com/integrations/kubernetes/#installation
+[4]: http://docs.datadoghq.com/integrations/ecs/#installation
+[5]: https://github.com/DataDog/docker-dd-agent#environment-variables
+[6]: https://github.com/DataDog/docker-dd-agent#configuration-files
+[7]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
+[8]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example

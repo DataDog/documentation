@@ -44,13 +44,11 @@ Agent Checks are a great way to collect metrics from custom applications or uniq
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
 
-For more information about how to write an Integration, please see the [Creating New Integrations guide](/developers/integration_sdk/) and check out the [Integrations-Extras Github repo](https://github.com/DataDog/integrations-extras) to see other contributed integrations.
+For more information about how to write an Integration, please see the [Creating New Integrations][1] and check out the [Integrations-Extras Github repo][2] to see other contributed integrations.
 
 ## Setup
 
-First off, ensure you've properly
-<a href="http://app.datadoghq.com/account/settings#agent">installed the
-Agent</a> on your machine. If you run into any issues during the setup, <a href="https://docs.datadoghq.com/help/">Get in touch with us! </a>, we'll be happy to answer any questions you might have.
+First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [Get in touch with us!][4], we'll be happy to answer any questions you might have.
 
 <!--
 ======================================================
@@ -486,3 +484,8 @@ For example, to run the disk check:
 ```
 C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
 ```
+
+[1]: /developers/integration_sdk/
+[2]: https://github.com/DataDog/integrations-extras
+[3]: http://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/help/
