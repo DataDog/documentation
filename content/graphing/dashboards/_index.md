@@ -23,7 +23,7 @@ Graphs will always appear in a grid-like fashion. This makes them generally bett
 
 ### ScreenBoards 
 
-These are flexible, far more customizable and are great for getting a high-level look into a system. They are created with drag-and-drop widgets, which can each have a different time frame. [ScreenBoards can be shared as a whole live](/graphing/dashbaords/screenboard/)(whereas TimeBoards cannot) and as a [read-only entity](/graphing/dashboards/screenboards/#read-only), 
+These are flexible, far more customizable and are great for getting a high-level look into a system. They are created with drag-and-drop widgets, which can each have a different time frame. [ScreenBoards can be shared as a whole live](/graphing/dashboards/screenboard/)(whereas TimeBoards cannot) and as a [read-only entity](/graphing/dashboards/screenboard/#read-only), 
 
 ## Editing template variables
 
