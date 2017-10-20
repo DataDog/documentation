@@ -29,7 +29,7 @@ capabilities at a high level.</p>
 -->
 
 <p><strong>どこから始めればよいか迷っている場合は?</strong>
-<br> Datadogのドキュメントは大きな分類としてガイドとリファレンスの二つに分かれています。<strong>ガイド</strong>では、Agentのインストールやアラートの設定など、Datadogにおける特定のタスクについて解説しています。<strong>レファレンス</strong>では、より一般的な情報を提供しています。まずは、<a href="getting_started/overview/">Datadog の概要</a> を一読されることをお勧めします。ここでは、Datadogに何ができるのかを俯瞰できるように説明しています。</p>
+<br> Datadogのドキュメントは大きな分類としてガイドとリファレンスの二つに分かれています。<strong>ガイド</strong>では、Agentのインストールやアラートの設定など、Datadogにおける特定のタスクについて解説しています。<strong>レファレンス</strong>では、より一般的な情報を提供しています。まずは、<a href="getting_started/">Datadog の概要</a> を一読されることをお勧めします。ここでは、Datadogに何ができるのかを俯瞰できるように説明しています。</p>
 
 <!--
 <p><strong>If you have questions, we’re here to help.</strong> You can get in touch with
@@ -54,7 +54,7 @@ and we’ll take care of it.</p>
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /developers/metrics/
 [3]: /graphing/
-[4]: /getting_started/overview/
+[4]: /getting_started/
 [5]: https://app.datadoghq.com/event/stream
 [6]: /help/#email
 [7]: /help/#irc
@@ -62,7 +62,7 @@ and we’ll take care of it.</p>
 [9]: https://github.com/DataDog/documentation/issues
 [102]: /ja/developers/metrics/
 [103]: /ja/graphing/
-[104]: /ja/getting_started/overview/
+[104]: /ja/getting_started/
 [106]: /ja/help/#email
 [107]: /ja/help/#irc
 [111]: /ja/monitors/

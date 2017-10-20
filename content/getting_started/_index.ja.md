@@ -51,7 +51,7 @@ in an online service is treated the same throughout Datadog.</li>
 
 ## 簡単で便利なIntegrations
 
-{{< img src="getting_started/overview/integrations.png" responsive="true" >}}
+{{< img src="getting_started/integrations.png" responsive="true" >}}
 
 <ul>
 <li>100以上のIntegrations を公式に<a target="_blank" href="http://www.datadoghq.com/integrations/">公開中</a>です。Integrationsは随時追加される予定です。</li>
@@ -82,7 +82,7 @@ for that machine based on what was previously set up for that tag.</li>
 
 ## インフラを構成しているホストのリスト表示
 
-{{< img src="getting_started/overview/infrastructure.png" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" responsive="true" >}}
 
 * 全てのホストは、`Infrastructure`のページに表示されます。
 * 上の図では、各種の役割を与えられたホストに適用されたタグを見ることができます。タグを付与することによって各ホストがどのような目的で利用されているか識別することができます。
@@ -92,7 +92,7 @@ for that machine based on what was previously set up for that tag.</li>
 
 <!-- ## Host Map
 
-{{< img src="getting_started/overview/infrastructure.png" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" responsive="true" >}}
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
 * Quickly visualize your entire environment regardless of whether it 5, 500, or 50,000 hosts.
@@ -104,7 +104,7 @@ To learn more about the Host Map, visit the [Host Map Guide]. -->
 
 ## Host Mapの表示
 
-{{< img src="getting_started/overview/hostmap-overview.png" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" responsive="true" >}}
 
 Host Mapは、`Infrastructure`メニューのドロップダウンメニュー内にあります。この表示を使うことにより、次のようなことが可能になります:
 
@@ -117,7 +117,7 @@ Host Map表示について詳しく知りたい場合は、[Host Map ガイド][
 
 
 <!-- <h2 id="events">Events</h2>
-{{< img src="getting_started/overview/hostmap-overview.png" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" responsive="true" >}}
 
 The Event Stream is based on the same conventions as a blog:
 <ul>
@@ -144,7 +144,7 @@ For each incident users can:
 
 
 
-{{< img src="getting_started/overview/event_stream.png" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" responsive="true" >}}
 
 Eventの掲載は、ブログと同じ規則に基づいています:
 
@@ -164,7 +164,7 @@ Eventの掲載は、ブログと同じ規則に基づいています:
 <li>@support-datadog でのサポートの要請</li>
 </ul>
 
-{{< img src="getting_started/overview/event_stream_event.png" >}}
+{{< img src="getting_started/event_stream_event.png" >}}
 
 <!-- <h2 id="dashboards">dashboards</h2>
 
@@ -186,7 +186,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## 原因追跡用ダッシュボード
 
-{{< img src="getting_started/overview/dashboard.png" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" responsive="true" >}}
 
 ダッシュボードには、<a target="_blank" href="https://docs.datadoghq.com/ja/graphing/">グラフ化</a>されたパフォーマンスメトリクスがリアルタイムに表示されます。
 <ul>
@@ -229,7 +229,7 @@ to pull the data from.</li>
 
 ## 監視とアラート
 
-{{< img src="getting_started/overview/monitor.png" responsive="true" >}}
+{{< img src="getting_started/monitor.png" responsive="true" >}}
 
 [Monitor機能][4] によって、特定のメトリクスの集計が閾値を超えた場合にアラートを発報する機能を実現することができます:
 <ul>
@@ -240,7 +240,7 @@ to pull the data from.</li>
 <li>"@"機能によるグループ毎の通知設定</li>
 </ul>
 
-{{< img src="getting_started/overview/alert_setup.png" responsive="true" >}}
+{{< img src="getting_started/alert_setup.png" responsive="true" >}}
 
 ## アラート機能のためのデータは、Datadogに送信する必要がありますか?
 <ol>

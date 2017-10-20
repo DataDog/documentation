@@ -26,7 +26,7 @@ it can help you bring your infrastructure to heel.
 
 ## Integrations
 
-{{< img src="getting_started/overview/integrations.png" responsive="true" >}}
+{{< img src="getting_started/integrations.png" responsive="true" >}}
 
 * About 100 integrations [officially listed][3], always adding more.
 * Custom integrations are available [via our API][4], many documented by our active user community.
@@ -36,7 +36,7 @@ in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
 
-{{< img src="getting_started/overview/infrastructure.png" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" responsive="true" >}}
 
 * All machines show up in the infrastructure overview
 * Here you can see the tags applied to each machine; as they're assigned to
@@ -51,7 +51,7 @@ for that machine based on what was previously set up for that tag.
 
 ## Host Map
 
-{{< img src="getting_started/overview/hostmap-overview.png" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" responsive="true" >}}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -64,7 +64,7 @@ To learn more about the Host Map, visit the [Host Map Guide][10].
 
 ## Events
 
-{{< img src="getting_started/overview/event_stream.png" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" responsive="true" >}}
 
 The Event Stream is based on the same conventions as a blog:
 
@@ -82,11 +82,11 @@ For each incident users can:
 * [@ notify team members][9], who receive an email
 * @support-datadog to ask for assistance
 
-{{< img src="getting_started/overview/event_stream_event.png" responsive="true" >}}
+{{< img src="getting_started/event_stream_event.png" responsive="true" >}}
 
 ## Dashboards
 
-{{< img src="getting_started/overview/dashboard.png" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" responsive="true" >}}
 
 Dashboards contain [graphs][11] with real-time performance metrics
 
@@ -105,7 +105,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## Monitoring
 
-{{< img src="getting_started/overview/monitor.png" responsive="true" >}}
+{{< img src="getting_started/monitor.png" responsive="true" >}}
 
 [Monitoring][14] gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -116,7 +116,7 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-{{< img src="getting_started/overview/alert_setup.png" responsive="true" >}}
+{{< img src="getting_started/alert_setup.png" responsive="true" >}}
 
 ## Does the data have to be pushed to Datadog?
 

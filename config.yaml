@@ -71,9 +71,6 @@ languages:
         - identifier: customnav_gettingstartednav_index
           url: "getting_started/"
           weight: 20
-        - identifier: customnav_gettingstartednav_overview
-          url: "getting_started/overview/"
-          weight: 20
 
 # AGENT
 
@@ -456,9 +453,6 @@ languages:
           weight: 10
         - identifier: customnav_gettingstartednav_index
           url: "getting_started/"
-          weight: 20
-        - identifier: customnav_gettingstartednav_overview
-          url: "getting_started/overview/"
           weight: 20
 
 # AGENT
