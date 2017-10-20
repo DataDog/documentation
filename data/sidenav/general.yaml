@@ -9,7 +9,7 @@ nav:
   display_name: Agent
   image: nav_agent.png
   image_hover: nav_agent_p.png
-  link: /guides/basic_agent_usage/
+  link: /agent/
 - name: integrations
   display_name: Integrations
   image: nav_integrations.png
@@ -39,7 +39,7 @@ nav:
   display_name: Account Management
   image: nav_account.png
   image_hover: nav_account_p.png
-  link: /guides/multiaccountorg/
+  link: /account_management
 - name: glossary
   display_name: Glossary
   image: nav_glossary.png

@@ -17,7 +17,7 @@ To create, edit, and delete template variables click the gear icon at the upper 
 
 This will open the template variable editing panel.
 
-{{< img src="graphing/dashboards/redis-template-var.png" style="width:80%;" >}}
+{{< img src="graphing/dashboards/redis-template-var.png" style="width:80%;" responsive="true" >}}
 
 A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
 

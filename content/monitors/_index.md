@@ -35,7 +35,7 @@ Here is a quick overview of the different terms used:
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types on the left. See the [Monitoring Reference](/monitors/monitor_types) to learn more about all monitor types.
 
-{{< img src="monitors/index/nav.png" >}}
+{{< img src="monitors/index/nav.png" alt="nav" responsive="true" >}}
 
 ## Export your monitor
 
@@ -43,7 +43,7 @@ You can export the configuration JSON for a monitor right from the create screen
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true">}}
 
 ## What's next ? 
 

@@ -138,11 +138,11 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 探していたMonitorが得られたあとは、検索結果の各Monitor横にあるチェックボックスを使用して編集したいMonitorを1つ以上選択します。STATUS列 見出しの横にある一番上のチェックボックスを選択すると、すべての検索結果を選択できます。検索結果の右上にあるボタン（Mute, Resolve, Delete そして Edit Tags）を使用して、一括してMonitorを変更します。
 
-{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true">}}
 
 個々のMonitorを編集するには、編集したいMonitorにマウスオーバーし、その行の右端にあるボタン (Edit, Clone, Mute, Delete)　を使用します。Monitorの詳細を表示するには、そのタイトルをクリックしてステータスページにアクセスします。
 
-{{< img src="monitors/manage_monitors/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+{{< img src="monitors/manage_monitors/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true" >}}
 
 <!--
 ## Manage Triggered Monitors with group-level granularity

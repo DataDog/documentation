@@ -141,7 +141,7 @@ end
 That's it. With this one line of code we can start graphing the data.
 Here's an example:
 
-{{< img src="developers/metrics/graph-guides-metrics-page-views.png" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
 
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -275,7 +275,7 @@ how long the query usually takes by graphing the `median`. We can see how long
 most queries take by graphing the `95percentile`.
 
 
-{{< img src="developers/metrics/graph-guides-metrics-query-times.png" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable.
 Our median query time (graphed in purple) is usually less than 100

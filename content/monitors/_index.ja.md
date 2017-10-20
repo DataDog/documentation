@@ -55,7 +55,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 [Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitors)ページを参照して下さい。
 
-{{< img src="monitors/index/nav.png" >}}
+{{< img src="monitors/index/nav.png" responsive="true" >}}
 
 <!--
 ### Choose what to monitor
@@ -97,7 +97,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
 1. アラートの検知手法の設定
 
-    {{< img src="monitors/index/alert_type.png" alt="alert type" >}}
+    {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" >}}
 
     **threshold alert**は、時間枠内のメトリクス値と指定した閾値を比較する、最も一般的なアラート検知の方法です。更に、アラート条件セクションには、追加で設定可能なオプションもあります。このアラートタイプは正常な範囲か値が事前に分かっている場合に使用します。
 
@@ -119,7 +119,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 -->
 
 2. メトリクスとその対象範囲(スコープ)の設定
-  {{< img src="monitors/index/metric_scope.png" alt="metric scope" >}}
+  {{< img src="monitors/index/metric_scope.png" alt="metric scope" responsive="true" >}}
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
@@ -145,7 +145,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 -->
 
 3. アラートのグループ化についての設定
-    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     **Simple Alert**は、全てのレポートソースをまとめて監視します。"Set alert conditions"のセクションで設定した条件に合致した場合、アラートを1回送信します。この設定は、単一ホストから送信されてくるメトリクスを監視するようなケースに最適です。例えば、"`avg` of `system.cpu.iowait` over `host:bits`"のような設定をしてる場合です。更に、"`sum` of `nginx.bytes.net` over `region:us-east`"のように複数のホストの値を集計して単一メトリクスとして監視したい場合にも有効です。
 
@@ -210,7 +210,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
     - アラートタイプによって、選択できる**threshold**オプションは若干異なります。どちらのタイプでも、閾値と比較タイプを設定します。閾値を変更する毎に、グラフ上のカットオフポイントを示すマーカーの位置が更新されて表示されます。
 
-      {{< img src="monitors/index/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="monitors/index/metric_threshold.png" alt="metric threshold" responsive="true">}}
 
       メトリクスの閾値を設定する際、その値に単位をつけて入力することができます。例えば、`system.disk.used`を監視する場合、`20GB`を閾値として設定することができます。
 
@@ -271,4 +271,4 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 設定画面の右手 **Export Monitor** をクリックすることで、Monitor 設定のJSONをエクスポートすることができます。
 Monitor 設定をプログラマティックに管理しデプロイする場合は、まずDatadogのUIで雛形となるMonitorを設定してJSONでエクスポートして利用するのが簡単です:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" >}}
