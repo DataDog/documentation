@@ -8,6 +8,34 @@ aliases:
     - /guides/eventsemail
 ---
 
+## Event Query Language
+
+You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
+
+
+| Filter | Description |
+|--------|-------------|
+|user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
+|sources:github,chef|Show events from Github OR Chef.|
+|tags:env-prod OR db|Show events tagged with #env-prod OR #db.|
+|tags:security-group:sg-123 AND role:common-node|Show events tagged with #security-group:sg-123 AND #role:common-node.|
+|hosts:i-0ade23e6,db.myapp.com|Show events from i-0ade23e6 OR db.myapp.com.|
+|status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
+|priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
+|incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
+
+
+Full text search works on all keywords provided in the search query after applying any filters. Full text search will look inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
+
+You can use full text search to find all events with the same key tags. For example, to show all events with the #service key you would search #service.
+
+In the example below, a full text search is performed to find all open chef or nagios errors that mention one or more redis instances that are currently down.
+
+`sources:nagios,chef status:error redis_* AND down`
+
+Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
+
+
 ## Events Email
 
 When you need to integrate an application or system with Datadog, you have a
