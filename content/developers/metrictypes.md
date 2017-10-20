@@ -32,7 +32,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 Here is some information about metric submission in an agent check:
 
-[Writing Agent Checks](/agent/agent_check) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
+[Writing Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
 
 #### self.gauge( ... )
 

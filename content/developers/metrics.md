@@ -255,7 +255,7 @@ end
 
 ## Tags
 
-[Tags](agent/tagging.) are a way of adding dimensions to metrics, so they can be sliced, diced,
+[Tags](agent/tagging) are a way of adding dimensions to metrics, so they can be sliced, diced,
 aggregated and compared on the front end. Suppose we wanted to measure the performance of two algorithms in the real world. We could sample one metric
 `algorithm.run_time` and specify each version with a tag:
 
