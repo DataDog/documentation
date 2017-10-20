@@ -15,7 +15,7 @@ OVERVIEW
 ======================================================
 -->
 
-### Overview
+## Overview
 
 
 This guide will outline the basic functionality of the Datadog Agent.

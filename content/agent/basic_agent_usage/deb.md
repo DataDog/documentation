@@ -9,13 +9,7 @@ logdirectory: /var/log/datadog/
 supervisorlog: /var/log/datadog/supervisord.log
 ---
 
-<!--
-======================================================
-Overview
-======================================================
--->
-
-### Overview
+## Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/debian).

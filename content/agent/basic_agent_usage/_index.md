@@ -4,13 +4,7 @@ kind: documentation
 
 {{< partial name="platforms/platform-select-desktop.html" >}}
 
-<!--
-======================================================
-What is the Agent?
-======================================================
--->
-
-<h2 id="what_is_the_agent">What is the Agent?</h2>
+## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
 your behalf so that you can do something useful with your monitoring and performance data.
@@ -20,48 +14,30 @@ The source code for the Datadog Agent can be found <a href='https://github.com/D
 For information on running the Agent through a proxy please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">here</a>;
 for which ranges to allow, please see <a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">here</a>.
 
-
 The Agent has three main parts: the collector, dogstatsd, and the forwarder.
-<ul>
-<li>The collector runs checks on the current machine for whatever integrations you have
-and it will capture system metrics like memory and CPU.
-</li>
-<li>Dogstatsd is a statsd backend server you can send custom metrics to from an application.
-</li>
-<li>The forwarder retrieves data from both dogstatsd and the collector and then queues
-it up to be sent to Datadog.
-</li>
-</ul>
-This is all controlled by one supervisor process. We keep this separate so you don't have to have the
-overhead of each application if you don't want to run all parts (though we generally recommend you do).
 
+* The collector runs checks on the current machine for whatever integrations you have and it will capture system metrics like memory and CPU.
+* Dogstatsd is a statsd backend server you can send custom metrics to from an application.
+* The forwarder retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
 
+This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts (though we generally recommend you do).
 
-<!--
-======================================================
-Agent Troubleshooting
-======================================================
--->
+### Agent Troubleshooting
 
-<h3 id="troubleshooting">Agent Troubleshooting</h3>
-<p>
 If you ended up at this page and have not yet installed the Datadog Agent, please go <a href="https://app.datadoghq.com/account/settings#agent" target="_blank">here</a> for installation instructions.
 If you just installed the Agent, it might take a few moments before you start seeing metrics appear.
 The first place you can check for metrics is the <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a>.
-</p>
-<p>
+
 If you think you might be experiencing issues, the first thing to do is run the info command and check the Agent logs.
 The info command and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
-</p>
 
-<h4 id="issue_installing">Issues getting the Agent installed</h4>
+#### Issues getting the Agent installed
 
 If you encountered an issue during the Agent installation that prevented any installation whatsoever from occurring, please reach out to <a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>.
 Please let us know your OS and version, as well as how you are installing the Agent (and which agent version).
 Also, please include the errors you encountered along the way.
 
-
-<h4 id="issue_reporting">Issues getting the Agent reporting</h4>
+#### Issues getting the Agent reporting
 
 If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
 First, run the info command. Select your OS in the nav column on the left of this page to see how to run this.
@@ -71,20 +47,16 @@ If not, you should also check the logs (location of the logs again depends on OS
 
 If not, please send both the full output of the info command and the logs as attachments to <a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>.
 
-
-
-<h4 id="machine_time">Check your machine's time</h4>
+#### Check your machine's time
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
 <code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date</code>
-<p>
+
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
-</p>
 
-
-<h4 id="integrations">Issues getting integrations working</h4>
+#### Issues getting integrations working
 
 Datadog has quite a few <a href="http://docs.datadoghq.com/integrations/" target="_blank">integrations</a> which are set
 up through <a href="https://github.com/DataDog/dd-agent/tree/master/conf.d" target="_blank">YAML files in the Agent</a>.

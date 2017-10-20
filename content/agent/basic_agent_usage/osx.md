@@ -17,7 +17,7 @@ Overview
 ======================================================
 -->
 
-### Overview
+## Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found

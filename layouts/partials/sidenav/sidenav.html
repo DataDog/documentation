@@ -42,6 +42,7 @@
                             </a>
                             {{ if (and $active_page (not $element.toc_disable)) }}
                                 {{ if $dot.Params.integration_title }}<span class="toctitle">{{ $dot.Params.integration_title | upper }}</span>{{ end }}
+                                {{ if $dot.Params.platform }}<span class="toctitle">{{ $dot.Params.platform | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
                         </li>

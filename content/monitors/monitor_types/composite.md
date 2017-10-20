@@ -21,7 +21,7 @@ _Note: this guide refers variously to 'individual monitors', 'constituent monito
 In the Datadog app, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
 
 
-{{< img src="monitors/monitor_types/composite/select-monitor-type.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/select-monitor-type.png" responsive="true" responsive="true" >}}
 
 ### Choose individual monitors
 
@@ -29,22 +29,22 @@ Choose up to 10 individual monitors to use in the new composite monitor. You can
 
 After you choose your first monitor, the UI will show its alert type and current status:
 
-{{< img src="monitors/monitor_types/composite/create-composite-2.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/create-composite-2.png" responsive="true" responsive="true" >}}
 
 If you choose a multi-alert monitor, the UI will show its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI will warn you that such a composite monitor may never trigger:
 
-{{< img src="monitors/monitor_types/composite/create-composite-4.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/create-composite-4.png" responsive="true" responsive="true" >}}
 
 Even if you choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
 
-{{< img src="monitors/monitor_types/composite/create-composite-5.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/create-composite-5.png" responsive="true" responsive="true" >}}
 
 Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no common reporting sources (also called common groupings). As long as there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it will never trigger. However, you _can_ ignore the warning and create the monitor anyway. To understand why, [read more below](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning in the UI, the UI will populate the **Trigger when** field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
 
-{{< img src="monitors/monitor_types/composite/create-composite-3.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/create-composite-3.png" responsive="true" responsive="true" >}}
 
 ### Set a trigger condition
 

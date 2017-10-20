@@ -140,12 +140,12 @@ aside.sidenav {
         width: 250px;
       }
       #TableOfContents {
-        padding:0 0 0px 40px;
+        padding:0 0 20px 40px;
         margin:0;
         // get the last li and add some space to bottom
         // we do it like this so if its hidden there is no blank space
         ul li ul li ul li:last-child {
-          margin-bottom:20px;
+          //margin-bottom:20px;
         }
         ul {
           list-style-type:none;
@@ -168,11 +168,13 @@ aside.sidenav {
             }
           }
           ul ul {
+            //display:none;
+          }
+          ul ul ul {
             display:none;
           }
         }
       }
-
     }
   }
 }

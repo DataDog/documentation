@@ -23,7 +23,7 @@ Here is a quick overview of the different terms used:
 ### Choose what to monitor
 
 1. Choose the detection method
-    {{< img src="monitors/index/alert_type.png" alt="alert type" >}}
+    {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" >}}
 
     A **Threshold Alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -55,13 +55,13 @@ Here is a quick overview of the different terms used:
     arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="monitors/index/metric_scope.png" alt="metric scope" >}}
+  {{< img src="monitors/index/metric_scope.png" alt="metric scope" responsive="true" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -86,7 +86,7 @@ Here is a quick overview of the different terms used:
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitors/index/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="monitors/index/metric_threshold.png" alt="metric threshold" responsive="true" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -149,7 +149,7 @@ Here is a quick overview of the different terms used:
 ### Setup Notifications
 
 
-{{< img src="monitors/index/notification.png" alt="notification" >}}
+{{< img src="monitors/index/notification.png" alt="notification" responsive="true" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand

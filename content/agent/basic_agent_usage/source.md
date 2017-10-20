@@ -10,7 +10,7 @@ OVERVIEW
 ======================================================
 -->
 
-<h3 id="overview">Overview</h3>
+## Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
@@ -28,7 +28,7 @@ Starting and Stopping the Agent
 ======================================================
 -->
 
-<h3 id="starting_and_stopping_the_agent">Starting and Stopping the Agent</h3>
+## Starting and Stopping the Agent
 
 To manually start the Agent:
 
@@ -48,7 +48,7 @@ Status and Information
 ======================================================
 -->
 
-<h3 id="status_and_information">Status and Information</h3>
+## Status and Information
 
 To check if the Agent is running:
 
@@ -68,7 +68,7 @@ Configuration
 ======================================================
 -->
 
-<h3 id="configuration">Configuration</h3>
+## Configuration
 
 The configuration file for the Agent is located at <code>~/.datadog-agent/agent/datadog.conf</code>
 
@@ -80,7 +80,7 @@ Troubleshooting
 ======================================================
 -->
 
-<h3 id="troubleshooting">Troubleshooting</h3>
+## Troubleshooting
 
 First, make sure you are using the correct version of Python. The Agent requires version 2.7. You can check your version by executing:
 
