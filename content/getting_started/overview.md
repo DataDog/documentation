@@ -127,7 +127,7 @@ launching the Agent (intial reporting may take a few minutes, but not longer tha
 2. If you have custom metrics, you can indicate specifically where
 to pull the data from.
 
-[1]: /agent/basic_agent_usage/
+[1]: /agent/
 [2]: http://www.datadoghq.com/product/
 [3]: http://www.datadoghq.com/integrations/
 [4]: /api/

@@ -249,7 +249,7 @@ to pull the data from.</li>
 <li>カスタムメトリクスがある場合は、データの収集先情報を特別に指定することができます。</li>
 </ol>
 
-[1]: /agent/basic_agent_usage/
+[1]: /agent/
 [2]: http://www.datadoghq.com/product/
 [3]: /graphing/infrastructure/hostmap
 [4]: /monitors/

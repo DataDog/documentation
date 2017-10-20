@@ -97,7 +97,7 @@ instances:
 
 
 **Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**
-*詳細は、[Datadog Agent 入門](/ja/agent/basic_agent_usage/)を参照して下さい。*
+*詳細は、[Datadog Agent 入門](/ja/agent/)を参照して下さい。*
 
 1.**Apacheサーバに、[`mod_status`](http://httpd.apache.org/docs/2.0/mod/mod_status.html) がインストールされ**、そのモジュールが`ExtendedStatus`付きで有効化されていることを確認して下さい。
 

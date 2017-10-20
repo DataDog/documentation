@@ -72,4 +72,4 @@ Please refer to the [Basic Agent Usage Guide][agent-3].
 
 [agent-1]: /api/
 [agent-2]: /developers/dogstatsd/
-[agent-3]: /agent/basic_agent_usage/
+[agent-3]: /agent/

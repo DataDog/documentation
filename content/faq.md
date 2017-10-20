@@ -107,6 +107,6 @@ these in the following link and selecting your OS on our [agent usage guide][int
 
 Yes! The agent is entirely open source and can be found on our [Github project page][integrations-3].
 
-[integrations-1]: /agent/basic_agent_usage/
+[integrations-1]: /agent/
 [integrations-2]: https://app.datadoghq.com/policy/license
 [integrations-3]: https://github.com/DataDog/dd-agent
