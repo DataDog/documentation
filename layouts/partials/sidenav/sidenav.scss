@@ -165,13 +165,23 @@ aside.sidenav {
               &:hover {
                 color: $ddpurple;
               }
+              &.toc_scrolled {
+                color:$ddpurple;
+              }
             }
           }
+
+          // h2s
           ul ul {
-            //display:none;
+            display:none;
           }
+          // h3s
           ul ul ul {
             display:none;
+          }
+
+          .toc_open ~ ul {
+            display:block !important;
           }
         }
       }

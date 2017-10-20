@@ -6,7 +6,7 @@ hideguides: true
 customnav: tracingnav
 ---
 
-### Installation
+## Installation
 
 To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
 
@@ -18,7 +18,7 @@ pip install ddtrace
 
 Finally, import the tracer and instrument your code!
 
-### Example
+## Example
 
 ~~~
 from ddtrace import tracer
@@ -30,7 +30,7 @@ with tracer.trace("web.request", service="my_service") as span:
 For more examples, see the [Getting Started section of library documentation](http://pypi.datadoghq.com/trace/docs/#get-started).
 
 
-### Compatibility
+## Compatibility
 
 The ddtrace library includes support for a number of web frameworks, including:
 
@@ -58,7 +58,7 @@ It also includes support for the following data stores and libraries:
 
 To instrument these libraries, please see [the library documentation](http://pypi.datadoghq.com/trace/docs/#other-libraries)
 
-### Additional Information
+## Additional Information
 
 The Python library [source code can be found on Github](https://github.com/DataDog/dd-trace-py).
 
