@@ -29,6 +29,14 @@ The admin of the account should enter the email addresses of team members
 
 Admins have just a few extra capabilities that standard users do not have. This includes access to billing info, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
 
+### How do I add new users to sub-organizations?
+
+Datadog offers 3 ways to quickly provision users to their respective organizations:
+
+* Batches of users can be added via UI within the [Team tab](/account_management/team)
+* [API user creation](/api/#user)
+* Use an authentication service like [SAML](/account_management/saml). [Just-In-Time (JIT) provisioning](/account_management/saml/#just-in-time-provisioning-jit-provisioning) can be enabled allowing users with valid single sign-on credentials to have their Datadog organization automatically created when they attempt to log in.
+
 [1]: https://app.datadoghq.com/account/team
 [2]: https://github.com/DataDog/datadog-agent/blob/master/LICENSE
 [3]: https://github.com/DataDog/datadog-agent

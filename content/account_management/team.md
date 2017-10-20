@@ -13,8 +13,18 @@ customnav: accountmanagementnav
 
 The new user will receive an email with a link to login.
 
+## Datadog User roles
+Datadog provides 3 user roles: 
+
+* **Admins** have access to billing information, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
+
+* A **standard user** has access to view and modify all monitoring features that Datadog offers such as dashboards, monitors, events & notebooks.
+
+* **Read only users** are created by admins and do not have access to edit within Datadog. This comes in handy when it is required to share specific read-only views with a client (or where a member of one business unit needs to share with another).
+
 ## Disable Existing Members
-***NOTE:** You must be an Admin of the team to disable members*
+
+**NOTE:** You must be an Admin of the team to disable members*
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
