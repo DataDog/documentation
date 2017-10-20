@@ -170,6 +170,13 @@ p {
 }
 
 
+#dropdownMenuLink {
+  text-decoration: none !important;
+}
+.dropdown-item {
+  text-decoration: none !important;
+}
+
 
 // mobile size
 //@include media-breakpoint-down(md)

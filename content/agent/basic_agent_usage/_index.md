@@ -2,7 +2,7 @@
 kind: documentation
 ---
 
-{{< partial name="platforms/platform-select-desktop.html" >}}
+{{< partial name="platforms/platforms.html" >}}
 
 ## What is the Agent?
 

@@ -1,0 +1,8 @@
+{{ define "main" }}
+{{ partial "platforms/platform-select-mobile.html" . }}
+<h1 id="pagetitle">{{ .Title }}</h1>
+{{ if .Params.beta }}
+<p><strong>Beta - For support or to report any issues, contact <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</strong></p>
+{{ end }}
+{{.Content}}
+{{ end }}
