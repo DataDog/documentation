@@ -32,11 +32,11 @@ If you ended up at this page and have not yet installed the Datadog Agent, pleas
 If you think you might be experiencing issues, the first thing to do is run the info command and check the Agent logs. The info command and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
 
 
-## Issues getting the Agent installed
+### Issues getting the Agent installed
 
 If you encountered an issue during the Agent installation that prevented any installation whatsoever from occurring, please reach out to [datadog support team](/help). Please let us know your OS and version, as well as how you are installing the Agent (and which agent version). Also, please include the errors you encountered along the way.
 
-## Issues getting the Agent reporting
+### Issues getting the Agent reporting
 
 If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
 First, run the info command. Select your OS in the nav column on the left of this page to see how to run this. Does running the info command show any errors?
@@ -46,7 +46,7 @@ If not, you should also check the logs (location of the logs again depends on OS
 If not, please send both the full output of the info command and the logs with a flare as attachments to the [datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
 
 
-### Check your machine's time
+#### Check your machine's time
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
@@ -56,7 +56,7 @@ date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
-## Issues getting integrations working
+### Issues getting integrations working
 
 Datadog has quite a few [integrations](http://docs.datadoghq.com/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
 
