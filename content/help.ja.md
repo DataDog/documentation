@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: お問い合わせ
 kind: documentation
+customnav: main_references
 sidebar:
   nav:
     - header: お問い合わせ

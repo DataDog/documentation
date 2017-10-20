@@ -135,7 +135,7 @@ Like every other Agent Check, JMX Checks have 2 main sections:
 - `init_config`: Settings that will be applied to every instances
 - `instances`: Settings used to configure instances
 
-See [this page for more information](http://docs.datadoghq.com/guides/agent_checks/#config).
+
 
 JMX checks require a `conf` section that has to be placed within either the `init_config` section or the `instances` section.
 
@@ -166,7 +166,7 @@ inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`. --
 - `init_config`: 全てのインスタンスに適応される設定
 - `instances`: 当該インスタンスに適応される設定
 
-詳しくは、[「Agent Checkの書き方」](http://docs.datadoghq.com/ja/guides/agent_checks/#config)のページを参照してください。
+詳しくは、[「Agent Checkの書き方」](/agent/agent_checks/)のページを参照してください。
 
 JMX checks require a `conf` section that has to be placed within either the `init_config` section or the `instances` section.
 

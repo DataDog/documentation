@@ -81,7 +81,7 @@ VMwareインテグレーションが取得しているメトリクスです:
 ### How will a VMware integration impact my monthly billing?
 
 
-The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](http://docs.datadoghq.com/guides/billing/) page. -->
+The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our Billing FAQ page. -->
 
 ## FAQ
 

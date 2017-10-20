@@ -1,0 +1,77 @@
+---
+title: Dashboards
+kind: documentation
+autotocdepth: 3
+hideguides: true
+customnav: graphingnav
+---
+
+Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Simply select a new variable value in the dropdown menu, and that value will apply across the dashboard.
+
+## Editing template variables
+
+
+To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
+
+{{< img src="graphing/dashboards/edit-template-variables.png" style="width:70%;"  responsive="true" >}}
+
+This will open the template variable editing panel.
+
+{{< img src="graphing/dashboards/redis-template-var.png" style="width:80%;" >}}
+
+A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
+
+## Using template variables in graph editors
+
+{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" style="width:80%;"  responsive="true"  >}}
+
+Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` will be scoped to `redis_port:6379`.
+
+{{< img src="graphing/dashboards/redis-tpl-selected.png" style="width:85%;"  responsive="true"  >}}
+
+## Event Correlation at Design Time
+Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
+
+{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" >}}
+Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
+
+## Event Correlation at View Time
+
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png"  responsive="true" >}}
+
+Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
+
+## Event Query Language
+
+You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
+
+
+| Filter | Description |
+|--------|-------------|
+|user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
+|sources:github,chef|Show events from Github OR Chef.|
+|tags:env-prod OR db|Show events tagged with #env-prod OR #db.|
+|tags:security-group:sg-123 AND role:common-node|Show events tagged with #security-group:sg-123 AND #role:common-node.|
+|hosts:i-0ade23e6,db.myapp.com|Show events from i-0ade23e6 OR db.myapp.com.|
+|status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
+|priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
+|incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
+
+
+Full text search works on all keywords provided in the search query after applying any filters. Full text search will look inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
+
+You can use full text search to find all events with the same key tags. For example, to show all events with the #service key you would search #service.
+
+In the example below, a full text search is performed to find all open chef or nagios errors that mention one or more redis instances that are currently down.
+
+`sources:nagios,chef status:error redis_* AND down`
+
+Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
+
+## FAQ
+
+* [Consult our dedicated section for dashboards FAQ][3]
+
+[1]: /graphing/
+[2]: /graphing/events/
+[3]: /graphing/dashboards/faq
