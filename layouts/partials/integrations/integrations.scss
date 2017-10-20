@@ -12,11 +12,18 @@ $ddpurple:    #774DA2;
     display: inline-block;
     width: 100%;
   }
+
+  .grayscale {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    opacity: 0.3;
+  }
+
     .card {
       justify-content: center;
       width:146px;
       height:142px;
-      float:left;
+      //float:left;
       margin:0 19px 19px 0;
       overflow:hidden;
       &.grayscale {
@@ -74,10 +81,35 @@ $ddpurple:    #774DA2;
 
 
 .dropdown-menu {
+  border:1px solid $ddpurple;
+  color:$ddpurple;
   right:0;
   .dropdown-item {
+    padding-left:30px;
     font-size:18px;
     line-height:22px;
     padding-bottom:10px;
+  }
+}
+
+//@include media-breakpoint-down(xs) { ... }
+@media (max-width: 575px) {
+  .integration-tiles {
+    .card {
+      width:auto;
+      height:102px;
+      .btn-container {
+        display:none;
+      }
+    }
+  }
+}
+
+//@include media-breakpoint-only(lg) { ... }
+@media (min-width: 992px) and (max-width: 1199px) {
+  .integration-tiles {
+    .card {
+      margin:0 0 5px 0;
+    }
   }
 }

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Debian)
 kind: documentation
+platform: Debian
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

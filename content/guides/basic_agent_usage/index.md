@@ -3,7 +3,7 @@ kind: guide
 listorder: 1
 ---
 
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platform-select-desktop.html" >}}
 
 <!--
 ======================================================

@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.requestAnimationFrame(compress_nav_on_scroll);
     });
 
+    window.addEventListener('resize', function() {
+        window.requestAnimationFrame(compress_nav_on_scroll);
+    });
+
     // run as soon as dom is ready
     compress_nav_on_scroll();
 });

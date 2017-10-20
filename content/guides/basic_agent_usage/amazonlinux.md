@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Amazon Linux
 kind: documentation
+platform: Amazon Linux
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (OS X）
 kind: documentation
+platform: OS X
 servicename: ~/.datadog-agent/bin/agent
 serviceinfoname: ~/.datadog-agent/bin/info
 configdirectory: ~/.datadog-agent/agent/

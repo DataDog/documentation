@@ -4,6 +4,7 @@ translation_status: original
 language: ja
 title: Agentの基本的な使用方法 (Ubuntu)
 kind: documentation
+platform: Ubuntu
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

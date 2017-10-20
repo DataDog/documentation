@@ -43,14 +43,14 @@
     </div>
     <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
         <div class="container">
-            <a class="navbar-brand" href="#"><img height="43" src="{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png") }}" /></a>
+            <a class="navbar-brand" href="/"><img height="43" src="{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png") }}" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-sidenav">
             <div class="container">
-            {{ partial "sidenav/sidenav.html" . }}
+                {{ partial "sidenav/sidenav.html" . }}
             </div>
         </div>
     </nav>

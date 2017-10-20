@@ -1,12 +1,22 @@
+{{ $dot := . }}
+
 <div class="mobilequicknav row align-items-center no-gutters">
     <div class="col text-center">
-        <a href="#">Home</a>
+        <a href="https://www.datadoghq.com">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
+        </a>
     </div>
     <div class="col text-center">
-        <a href="#">Docs</a>
+        <a href="/">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
+            Docs
+        </a>
     </div>
     <div class="col text-center">
-        <a href="#">API</a>
+        <a href="/api/">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
+            API
+        </a>
     </div>
 </div>
 
@@ -21,7 +31,6 @@
                 </div>
             </form>
             <ul class="list-unstyled">
-                {{ $dot := . }}
                 {{ range $index, $element := $.Site.Data.sidenav.general.nav }}
                     {{ $active_page := (or (and (in $dot.RelPermalink $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
                     {{ if not $element.hide }}

@@ -4,6 +4,7 @@ translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Amazon Linux)
 kind: documentation
+platform: Amazon Linux
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

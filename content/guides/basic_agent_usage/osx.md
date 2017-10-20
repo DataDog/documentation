@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for OS X
 kind: documentation
+platform: OS X
 servicename: /usr/local/bin/datadog-agent
 serviceinfoname: /usr/local/bin/datadog-agent info
 configdirectory: ~/.datadog-agent/

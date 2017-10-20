@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Windows
 kind: documentation
+platform: Windows
 ---
 
 ### Overview

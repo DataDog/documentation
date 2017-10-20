@@ -27,6 +27,10 @@ body {
 
 body {
   padding-top:129px;
+  //@include media-breakpoint-down(md)
+  @media (max-width: 991px) {
+    padding-top:65px;
+  }
 }
 
 // todo: do we want all code blocks like this or just ones on api, move this
@@ -89,6 +93,9 @@ p {
   &> p a {
     color:#0076FF;
     text-decoration:underline;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -147,6 +154,19 @@ p {
 }
 
 
+// search
+.tipue_search_content_title,
+.tipue_search_content_title a {
+  margin-top: 23px;
+  font-size: 27px;
+  color:#000;
+  font-weight: 600;
+}
+.tipue_search_content_url,
+.tipue_search_content_url a {
+  color:#06c;
+}
+
 
 
 // mobile size
@@ -154,5 +174,20 @@ p {
 @media (max-width: 767px) {
   h1 {
     font-size:42px;
+  }
+}
+
+@media (max-width: 991px) {
+  .api-content {
+    padding-top: 24px;
+    padding-bottom:24px;
+  }
+  .api-code {
+    &> div {
+      padding:24px 15px;
+    }
+  }
+  .codenav {
+    padding-left:0;
   }
 }

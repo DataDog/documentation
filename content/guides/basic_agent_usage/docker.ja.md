@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for CoreOS and Docker
 kind: documentation
+platform: CoreOS
 ---
 
 If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/docker).

@@ -3,6 +3,7 @@ last_modified: 2015/05/20
 translation_status: complete
 language: ja
 title: Agentの基本的な使用方法 (Windows)
+platform: Windows
 ---
 
 <!--

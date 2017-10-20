@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Source Installation
 kind: documentation
+platform: Source
 ---
 
 <!--

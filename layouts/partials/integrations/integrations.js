@@ -1,8 +1,11 @@
 $(document).ready(function () { });
 
 document.addEventListener('DOMContentLoaded', function () {
+    var mobileBtn = document.querySelector('#dropdownMenuLink');
     var controls = document.querySelector('[data-ref="controls"]');
-    var filters = document.querySelectorAll('[data-ref="filter"]');
+    var filters = controls.querySelectorAll('[data-ref="filter"]');
+    var mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
+    var mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
@@ -23,7 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     controls.addEventListener('click', function(e) {
-        handleButtonClick(e.target);
+        e.preventDefault();
+        handleButtonClick(e.target, filters);
+        // trigger same active on mobile
+        var mobileBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
+        activateButton(mobileBtn, mobilefilters);
+        return false;
+    });
+
+    mobilecontrols.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleButtonClick(e.target, mobilefilters);
+        // trigger same active on desktop
+        var desktopBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
+        activateButton(desktopBtn, filters);
+        return false;
     });
 
     function activateButton(activeButton, siblings) {
@@ -34,16 +51,21 @@ document.addEventListener('DOMContentLoaded', function () {
             button = siblings[i];
             button.classList[button === activeButton ? 'add' : 'remove']('active');
         }
+        mobileBtn.textContent = activeButton.textContent;
     }
 
     function grayOut(filter) {
         var collection = Array.from(container.querySelectorAll('.mix'));
-        for(var i = 0; i < collection.length; i++) {
-            if(collection[i].classList.contains(filter.substr(1))) {
-                collection[i].classList.remove('grayscale');
-            } else {
-                collection[i].classList.add('grayscale');
+        if(filter) {
+            for(var i = 0; i < collection.length; i++) {
+                if(collection[i].classList.contains(filter.substr(1))) {
+                    collection[i].classList.remove('grayscale');
+                } else {
+                    collection[i].classList.add('grayscale');
+                }
             }
+        } else {
+
         }
     }
 
@@ -54,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function handleButtonClick(button) {
+    function handleButtonClick(button, filters) {
         // If button is already active, or an operation is in progress, ignore the click
         if (button.classList.contains('active') || mixer.isMixing()) return;
 
@@ -81,4 +103,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
+    activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
 });

@@ -86,8 +86,13 @@ body > header {
 
   #navbar-sidenav {
     background:#F8F8F8;
+    .container {
+      padding:0;
+    }
   }
   aside.sidenav {
+    padding-left:15px;
+    padding-right:15px;
     background:transparent;
     &:before,
     &:after {
@@ -116,10 +121,15 @@ body > header {
   .mobilequicknav {
     display:flex;
     border-bottom:1px solid #D6D6D6;
-    height:70px;
     &> .col {
+      &:first-child {
+        border-left:1px solid #D6D6D6;
+      }
       border-right:1px solid #D6D6D6;
-      height:70px;
+      padding:20px;
+    }
+    a {
+      color:#969696;
     }
   }
 }

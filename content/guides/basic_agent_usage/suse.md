@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for SUSE
 kind: documentation
+platform: SUSE
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

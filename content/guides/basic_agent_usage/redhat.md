@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Red Hat
 kind: documentation
+platform: Red Hat
 servicename: /etc/init.d/datadog-agent
 serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/

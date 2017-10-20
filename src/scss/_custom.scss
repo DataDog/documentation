@@ -40,6 +40,11 @@ $link-decoration:       none;
 $link-hover-color:      darken($link-color, 15%);
 $link-hover-decoration: none;
 
+//dropdowns
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg: $ddpurple;
+$dropdown-link-active-color: $white;
+$dropdown-link-active-bg: $ddpurple;
 
 // Buttons
 $btn-font-weight: 600;
@@ -83,6 +88,9 @@ $headings-font-weight:600;
     color: #fff;
     background-color: $ddpurple;
     border-color: $ddpurple;
+  }
+  &:focus, &.focus {
+    box-shadow: none;
   }
 }
 
