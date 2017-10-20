@@ -29,7 +29,6 @@ Choose up to 10 individual monitors to use in the new composite monitor. You can
 
 After you choose your first monitor, the UI will show its alert type and current status:
 
-
 {{< img src="monitors/monitor_types/composite/create-composite-2.png" responsive="true" >}}
 
 If you choose a multi-alert monitor, the UI will show its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI will warn you that such a composite monitor may never trigger:

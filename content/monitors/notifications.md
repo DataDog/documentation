@@ -9,7 +9,7 @@ customnav: monitornav
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="monitors/notifications/notification.png" >}}
+{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true">}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -35,19 +35,19 @@ triggering scope into the message of multi alerts.
 ### Conditional variables for different notification types
 You can have a monitor event display a different message depending on whether the event is a trigger, warning, recovery, or no data notification. These variables use simple if-else logic with the following syntax:
 
-{{< img src="monitors/notifications/conditionalvars.png" >}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true">}}
 
 Here is an example of how you can set it up in the editor:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" >}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true">}}
 
 The corresponding trigger event notification will look like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" >}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template condiional trigger" responsive="true" >}}
 
 and the recovery notification:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" >}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true">}}
 
 
 The conditional variables available are:
@@ -67,11 +67,11 @@ When your monitor is a multi alert, instead of having a generic message (and fin
 
 Here is an example of how you can use template variables for a multi alert:
 
-{{< img src="monitors/notifications/templatevareditor.png" >}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true">}}
 
 and the corresponding event notification:
 
-{{< img src="monitors/notifications/templatevar.png" >}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true">}}
 
 
 The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options will automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
@@ -83,7 +83,7 @@ Some tags identifying your triggering scope will automatically be inserted into 
 
 In order to save some space, you can Include triggering tags in notification title. This will make your notification title look like this:
 
-{{< img src="monitors/notifications/templatevar_short.png" >}}
+{{< img src="monitors/notifications/templatevar_short.png" alt="template var short" responsive="true">}}
 
 Note that template variable content is escaped by default. If your variable
 contains JSON or code that you would NOT like to be escaped, then use triple braces instead of double braces (e.g. `{{{event.text}}}`).
@@ -106,7 +106,7 @@ The variable uses the following format:
 
 Here is an example of how you can give a different message depending on the triggering context:
 
-{{< img src="monitors/notifications/scope_match_editor.png" >}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" >}}
 
 ## Variable availability
 

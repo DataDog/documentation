@@ -18,7 +18,7 @@ right people get notified so the problem can be resolved as soon as possible.
 
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
-{{< img src="monitors/notifications/notification.png" >}}
+{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true">}}
 
 
 <!--
@@ -162,21 +162,21 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
 1. **通知タイプの違いに基づいた条件変数**: Monitorによって検知されたイベント(triggered, warn, recovered, no dataなど)によって異なった通知本文を表示することができます。これらの条件変数では、次のような基本的なif-else構文を使っています:
 
-    {{< img src="monitors/notifications/conditionalvars.png" >}}
+    {{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true">}}
 
     次が、通知本文の記述の例です:
 
-    {{< img src="monitors/notifications/templateconditionaleditor.png" >}}
+    {{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true">}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="monitors/notifications/templateconditionaltrigger.png" >}}
+    {{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true">}}
 
 
     リカバーした際の通知文は、次のようになります:
 
-    {{< img src="monitors/notifications/templateconditionalrecover.png" >}}
+    {{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true">}}
 
 
     使用可能な条件変数は `is_alert`, `is_alert_recovery`,
@@ -187,19 +187,19 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     次が、`Multi Alert`でtemplate variables(タグ変数)を使った例です:
 
-    {{< img src="monitors/notifications/templatevareditor.png" >}}
+    {{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" >}}
 
 
     実際に送信されたアラート通知文は、次のようになります:
 
-    {{< img src="monitors/notifications/templatevar.png" >}}
+    {{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true">}}
 
 
     利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
     一方で、アラートを通知する範囲(スコープ)を指定しているタグには自動的にタイトルに挿入されるものがあります。このため、範囲指定のために多くのタグを使用している場合にはアラートのタイトルが不必要に長くなる可能性があります。もしタグ変数をアラート本文に使用しているのであれば、スペースを節約するために**Include triggering tags in notification title** のチェックを外すことも有効です。この設定によってアラートのタイトルは以下のようになります。
 
-    {{< img src="monitors/notifications/templatevar_short.png" >}}
+    {{< img src="monitors/notifications/templatevar_short.png" alt="template var short" responsive="true">}}
 
     テンプレート変数はデフォルトでエスケープされます。もし使用したい変数がJSONやコードを含んでおり、それらをエスケープさせたくない場合は、2重カッコのかわりに3重カッコを使用して下さい。(例 `{{{event.text}}}`)
 
@@ -217,7 +217,7 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
    次が、アラート発報の範囲情報に基づいて異なる本文を表示する例です:
 
-   {{< img src="monitors/notifications/scope_match_editor.png" >}}
+   {{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true">}}
 
 <!--
 #### Variable availability

@@ -33,11 +33,11 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 
 [Manage Downtime](https://app.datadog.com/monitors#/downtime) のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **Manage Downtime** を選択します。 他のMonitor設定ページの上部にある **Manage Downtime** リンクを選択し移動することも可能です。
 
-{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" >}}
+{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true">}}
 
 Manage Downtime のページでは、アクティブなものとスケジュールされたもの、両方のダウンタイムのリストが表示されます。各ダウンタイムを選択することで、対象となるホストとMonitor設定の詳細を確認することができます。
 
-{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" >}}
+{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" responsive="true">}}
 
 <!--
 ### Schedule Downtime
@@ -74,7 +74,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. 停止するMonitorを選択する
 
-   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" >}}
+   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true">}}
 
    停止したい特定のMonitorを指定するか、ここでは特定のMonitorは指定せずすべてのMonitorを停止の対象とします。続いて、ダウンタイムの対象を限定するために、特定のホスト、デバイス、あるいは任意のタグによって範囲(スコープ)の設定をします。範囲(スコープ)の設定については、グラフ表示入門のページのJSONの使用方法、[対象範囲の指定(scope)](/ja/graphing/miscellaneous/graphingjson/)も併せて参照してください。
 
@@ -84,12 +84,12 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. スケジュールをセットする
 
-   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" >}}
+   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true">}}
 
    ダウンタイムをスケジュールする日時をここで設定します。あるいは、空欄のままにしてダウンタイムを即刻開始することもできます。また、定期的な計画停止のために繰り返しのスケジュールを設定することも可能です。
 
 3. チームに通知するためのメッセージ本文を追加で設定する
 
-   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" >}}
+   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true">}}
 
    ダウンタイム設定についてチームに通知するメッセージを入力します。このフィールドには、Datadogの@-notification構文の他に標準的な[markdownフォーマット](http://daringfireball.net/projects/markdown/syntax)でも記述することができます。"Notify your team"フィールドでは、メッセージを送りたいチームメンバー個人あるいは特定のサービス [integtration](https://app.datadoghq.com/account/settings#integrations) (インストール済みのインテグレーション)を選択することができます。

@@ -8,6 +8,51 @@ aliases:
     - /guides/eventsemail
 ---
 
+## Event Query Language
+
+You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
+
+| Filter | Description |
+|--------|-------------|
+|user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
+|sources:github,chef|Show events from Github OR Chef.|
+|tags:env-prod OR db|Show events tagged with #env-prod OR #db.|
+|tags:security-group:sg-123 AND role:common-node|Show events tagged with #security-group:sg-123 AND #role:common-node.|
+|hosts:i-0ade23e6,db.myapp.com|Show events from i-0ade23e6 OR db.myapp.com.|
+|status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
+|priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
+|incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
+
+
+Full text search works on all keywords provided in the search query after applying any filters. Full text search will look inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
+
+You can use full text search to find all events with the same key tags. For example, to show all events with the #service key you would search #service.
+
+In the example below, a full text search is performed to find all open chef or nagios errors that mention one or more redis instances that are currently down.
+
+`sources:nagios,chef status:error redis_* AND down`
+
+Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
+
+## Acknowledge an event
+Datadog refers to events that are generated from triggered monitors as Incidents. They're also known as a Monitor Alerts.
+
+The best way to identify these in the Events page is to select the corresponding filter in the filter list:
+
+{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" >}}
+
+Incidents are unique to regular events and annotations in that they can be claimed/acknowledged by clicking the claim button (shown below) on the parent event or putting a #claim in the comments. 
+
+{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" >}}
+
+By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog will pin the user's name and portrait to the record.
+
+{{< img src="graphing/events/claimed_incident.png" alt="Claimed incident" responsive="true" >}}
+
+Once claimed, an incident can be resolved by clicking the resolve button indicating to the team that the underlying issue has been addressed:
+
+{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" >}}
+
 ## Events Email
 
 When you need to integrate an application or system with Datadog, you have a
@@ -38,12 +83,11 @@ In the source plain text email, you only have three fields you can control: send
 email address (required), subject (required), and body (optional).
 
 
-
-{{< img src="graphing/events/plain-email.png" responsive="true" >}}
+{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
 
 #### Datadog Event
 
-{{< img src="graphing/events/plain-event.png" responsive="true" >}}
+{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" >}}
 
 Note that the subject of the email becomes the title of the event and the body
 of the email becomes the body of the event. Although it looks like a tag appears

@@ -8,7 +8,7 @@ customnav: monitornav
 
 The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
 
-{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" >}}
+{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true">}}
 
 ## Find the Monitors
 
@@ -67,11 +67,11 @@ There are a few caveats regarding quoted fields:
 
 When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true">}}
 
 To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true">}}
 
 ## Manage Triggered Monitors with group-level granularity
 
