@@ -83,7 +83,6 @@ In the source plain text email, you only have three fields you can control: send
 email address (required), subject (required), and body (optional).
 
 
-
 {{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
 
 #### Datadog Event
