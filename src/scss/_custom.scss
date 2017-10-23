@@ -122,3 +122,7 @@ $headings-font-weight:600;
 .btn-sm-tag {
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }
+
+button:focus {
+  outline: 0;
+}

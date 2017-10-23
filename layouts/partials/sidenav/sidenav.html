@@ -45,7 +45,7 @@
                                 {{ if $dot.Params.platform }}<span class="toctitle">{{ $dot.Params.platform | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
-                            <!--{{ if (and (in ($element.display_name | lower) "integrations") (in $dot.RelPermalink "integrations") ) }}
+                            {{/* comments here {{ if (and (in ($element.display_name | lower) "integrations") (in $dot.RelPermalink "integrations") ) }}
                             <nav id="TableOfContents">
                                 <ul>
                                     <li>
@@ -58,7 +58,7 @@
                                     </li>
                                 </ul>
                             </nav>
-                            {{ end }}-->
+                            {{ end }}*/}}
                         </li>
                     {{ end }}
                 {{ end }}
