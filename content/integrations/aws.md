@@ -20,7 +20,7 @@ Related integrations include:
 
 |                                                           |                                                                               |
 | :---------------------------------------------------------|:------------------------------------------------------------------------------|
-| [API Gateway](/integrations/awsapigateway)                | create, publish, maintain, and secure APIs                                    |
+| [API Gateway](/integrations/amazon_api_gateway)                | create, publish, maintain, and secure APIs                                    |
 | [Autoscaling](/integrations/awsautoscaling)               | scale EC2 capacity                                                            |
 | [Billing](/integrations/awsbilling)                       | billing and budgets                                                           |
 | [CloudFront](/integrations/awscloudfront)                 | glocal content delivery network                                               |

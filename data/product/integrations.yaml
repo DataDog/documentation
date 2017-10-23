@@ -27,7 +27,7 @@ integrations:
   categories: ['cloud', 'api', 'aws']
   name: amazon_api_gateway
   public_title: Amazon API Gateway
-  docs_link: /integrations/awsapigateway/
+  docs_link: /integrations/amazon_api_gateway/
   public: true
 - short_description: Track the status and counts of instances in your Auto Scaling
     groups.
