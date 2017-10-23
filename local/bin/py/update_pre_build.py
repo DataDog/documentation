@@ -231,7 +231,8 @@ def update_integration_pre_build(from_path=None, to_path=None):
             """
             Scraping all sections that we can found
             """
-            data_array = readme_get_section(from_path, key_name)
+            if os.path.exists('{}{}_readme.md'.format(from_path,key_name)):
+                data_array = readme_get_section(from_path, key_name)
 
             """
             Gathering the manifest short description and adding the right token
