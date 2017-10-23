@@ -22,7 +22,7 @@
     "node": ">= 4.5"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "^4.0.0-beta.2",
     "browser-sync": "^2.8",
     "del": "^2.2",
     "gulp": "^3.9",
