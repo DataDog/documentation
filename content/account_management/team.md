@@ -8,7 +8,7 @@ customnav: accountmanagementnav
 ## Add New Members
 
 1. To add members to a team, start by visiting the [Team Page][1].
-2. Enter the email address of the person you want to add to your team. Click **Invite Users**
+2. Enter the email address of the user you wish to invite to your Datadog account. Click **Invite Users**
   {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" >}}
 
 The new user will receive an email with a link to login.

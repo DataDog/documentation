@@ -7,6 +7,8 @@ aliases:
     - /guides/billing
 ---
 
+## Overview
+
 Welcome to the Account Management section where you can learn
 
 * [How to configure SAML][1]
@@ -17,34 +19,6 @@ Welcome to the Account Management section where you can learn
 
 We occasionally receive questions regarding the specifics of our pricing; the basic plans and the most frequently seen questions can be found below.
 
-## Plan Overview
-
-There are three plans within Datadog:
-
-
-1. **Free** is only for 5 hosts or less. Free has a single day of data retention. The
-    good news is that switching from the Free plan to Pro will not affect your
-    setup, so anything you've begun monitoring would not be affected by that status
-    change.
-1. **Pro** is for 6-999 hosts and comes with 13 months of data retention.
-    Pro includes metric alerts and email support.
-1. **Enterprise** is for 1,000+ hosts or any number of hosts but needing custom adjustments to what is
-    offered in the Pro plan. Enterprise includes phone support and pricing is based on three factors:
-    1. Data retention requirements and number of custom metrics (base plan includes 13 months retention,
-and 100 custom metrics)
-    1. Size of your environment in servers
-    1. Payment terms (month to month or annual prepaid)
-
-
-Custom metrics are supported in every plan. A custom metric is any metric that is not automatically collected by any of [Datadog’s integrations][6] —for example custom checks or API-level metrics from your application. Each host may submit up to 100 custom metrics at no additional cost.
-
-Docker Containers are also supported in every plan. Each host may submit metrics from 10 containers an hour at no additional cost. Additional containers will be billed at $0.002 per container per hour. In addition, Enterprise customers can purchase prepaid containers at $1 per container per month.
-
-Pro and Enterprise data retention is for 13 months at full resolution (maximum is one point per second). For greater data retention needs, please reach out to [sales@datadoghq.com][7].
-
-**Each invoice is determined by the high watermark of concurrently running hosts for that month.**
-
-This is per active host in Datadog, whether or not it's running the agent.
 
 ## Billing FAQ
 
