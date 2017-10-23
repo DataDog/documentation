@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS CloudSearch Integration
+integration_title: AWS CloudSearch
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_cloudsearch
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track index utilization, successful request count, and more."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awscloudsearch/
 ---
 
 ## Overview

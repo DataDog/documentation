@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-Elastic Beanstalk Integration
+integration_title: AWS Elastic Beanstalk
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_elasticbeanstalk
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track key AWS Elastic Beanstalk metrics."
 aliases:
-    - /integrations/awsapigateway/
+  - /integrations/awsbeanstalk/
 ---
 
 ## Overview

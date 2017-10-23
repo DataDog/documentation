@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS Direct Connect Integration
+integration_title: AWS Direct Connect
 kind: integration
-git_integration_title: amazon_api_gateway
-newhlevel: true
-description: "Track Amazon API gateway errors."
+git_integration_title: amazon_directconnect
+doclevel: basic
+description: "Track key Amazon Direct Connect metrics."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awsdirectconnect/
 ---
 
 ## Overview

@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS Elastic File System Integration
+integration_title: AWS Elastic File System
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_efs
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track key Amazon Elastic Filesystem metrics."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awsefs/
 ---
 
 ## Overview

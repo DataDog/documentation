@@ -1,12 +1,13 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS Elastic Map Reduce Integration
+integration_title: AWS Elastic Map Reduce
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_emr
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track key Amazon Elastic Map Reduce metrics.
+"
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awsemr/
 ---
 
 ## Overview

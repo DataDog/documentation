@@ -1,12 +1,13 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS Billing Integration
+integration_title: AWS Billing
 kind: integration
-git_integration_title: amazon_api_gateway
+doclevel: basic
 newhlevel: true
-description: "Track Amazon API gateway errors."
+git_integration_title: amazon_billing
+description: "Monitor actual and estimated spend on your AWS account."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awsbilling/
 ---
 
 ## Overview

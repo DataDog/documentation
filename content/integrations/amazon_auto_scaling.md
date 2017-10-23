@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS Auto Scaling Integration
+integration_title: AWS Auto Scaling
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_auto_scaling
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track the status and counts of instances in your Auto Scaling Groups."
 aliases:
-    - /integrations/awsapigateway/
+    - integrations/awsautoscaling/
 ---
 
 ## Overview

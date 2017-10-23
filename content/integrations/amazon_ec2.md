@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS EC2 Integration
+integration_title: AWS EC2
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_ec2
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track instance resource usage, monitor status checks, and more."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awsec2/
 ---
 
 ## Overview

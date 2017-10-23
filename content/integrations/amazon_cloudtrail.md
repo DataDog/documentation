@@ -1,13 +1,14 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS CloudTrail Integration
+integration_title: AWS CloudTrail
 kind: integration
-git_integration_title: amazon_api_gateway
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Alert on suspicious AWS account activity."
 aliases:
-    - /integrations/awsapigateway/
+  - integrations/awscloudtrail/
 ---
+
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

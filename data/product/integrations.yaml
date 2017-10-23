@@ -20,7 +20,7 @@ integrations:
   categories: ['cloud', 'web', 'aws']
   name: amazon_alb
   public_title: Amazon ALB
-  docs_link: /integrations/awselb/
+  docs_link: /integrations/amazon_elb/
   public: true
 - short_description: Track gateway errors, cache hits and misses, and request latency.
   image: ''
@@ -35,42 +35,42 @@ integrations:
   categories: ['cloud', 'provisioning', 'configuration & deployment', 'aws']
   name: amazon_auto_scaling
   public_title: Amazon Auto Scaling
-  docs_link: /integrations/awsautoscaling/
+  docs_link: /integrations/amazon_auto_scaling/
   public: true
 - short_description: Monitor actual and estimated spend on your AWS account.
   image: ''
   categories: ['cloud', 'cost management', 'aws']
   name: amazon_billing
   public_title: Amazon Billing
-  docs_link: /integrations/awsbilling/
+  docs_link: /integrations/amazon_billing/
   public: true
 - short_description: Track error rates, request counts, and bytes downloaded and uploaded.
   image: ''
   categories: ['cloud', 'caching', 'web', 'aws']
   name: amazon_cloudfront
   public_title: Amazon Cloudfront
-  docs_link: /integrations/awscloudfront/
+  docs_link: /integrations/amazon_cloudfront/
   public: true
 - short_description: Track index utilization, successful request count, and more.
   image: ''
   categories: ['cloud', 'processing', 'search', 'aws']
   name: amazon_cloudsearch
   public_title: Amazon Cloudsearch
-  docs_link: /integrations/awscloudsearch/
+  docs_link: /integrations/amazon_cloudsearch/
   public: true
 - name: amazon_cloudtrail
   categories: ['cloud', 'monitoring', 'aws']
   short_description: Alert on suspicious AWS account activity.
   public_title: Amazon CloudTrail
   image: Integrations-AWSCloudtrail-340x216.png
-  docs_link: /integrations/awscloudtrail/
+  docs_link: /integrations/amazon_cloudtrail/
   public: true
 - short_description: See deployments as they happen and track how long they take.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_codedeploy
   public_title: Amazon Codedeploy
-  docs_link: /integrations/awscodedeploy/
+  docs_link: /integrations/amazon_codedeploy/
   public: false
 - docs_link: /integrations/awsdata storegateway/
   short_description: Track key AWS data store Gateway metrics.
@@ -82,21 +82,21 @@ integrations:
   categories: ['cloud', 'data store', 'aws']
   name: amazon_dynamodb
   public_title: Amazon Dynamodb
-  docs_link: /integrations/awsdynamo/
+  docs_link: /integrations/amazon_dynamodb/
   public: true
 - short_description: Track snapshot age, IOPS, read/write times, and more.
   image: ''
   categories: ['cloud', 'data store', 'aws']
   name: amazon_ebs
   public_title: Amazon EBS
-  docs_link: /integrations/awsebs/
+  docs_link: /integrations/amazon_ebs/
   public: true
 - short_description: Track instance resource usage, monitor status checks, and more.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_ec2
   public_title: Amazon EC2
-  docs_link: /integrations/awsec2/
+  docs_link: /integrations/amazon_ec2/
   public: true
 - short_description: Monitor container statuses, track resource usage, and more.
   image: ''
@@ -110,35 +110,35 @@ integrations:
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_efs
   public_title: Amazon EFS
-  docs_link: /integrations/awsefs/
+  docs_link: /integrations/amazon_efs/
   public: true
 - short_description: Track key Amazon ElasicCache metrics.
   image: ''
   categories: ['cloud', 'caching', 'aws']
   name: amazon_elasticache
   public_title: Amazon Elasticache
-  docs_link: /integrations/awselasticache/
+  docs_link: /integrations/amazon_elasticache/
   public: true
 - short_description: Track key Amazon ElasticBeanstalk metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_elasticbeanstalk
   public_title: Amazon Elasticbeanstalk
-  docs_link: /integrations/awsbeanstalk/
+  docs_link: /integrations/amazon_elasticbeanstalk/
   public: true
 - name: amazon_elb
   categories: ['cloud', 'web', 'aws']
   short_description: Track key Amazon Elastic Loadbalancer metrics.
   public_title: Amazon ELB
   image: amazon_elb_logo.png
-  docs_link: /integrations/awselb/
+  docs_link: /integrations/amazon_elb/
   public: true
 - short_description: "Track key Amazon Elastic Map Reduce metrics.\n"
   image: ''
   categories: ['cloud', 'processing', 'aws']
   name: amazon_emr
   public_title: Amazon EMR
-  docs_link: /integrations/awsemr/
+  docs_link: /integrations/amazon_emr/
   public: true
 - short_description: Track key Amazon Elasticsearch metrics.
   image: ''
@@ -237,7 +237,7 @@ integrations:
   categories: ['cloud', 'data store', 'aws', 'os & system']
   name: amazon_s3
   public_title: Amazon S3
-  docs_link: /integrations/awss3/
+  docs_link: /integrations/amazon_s3/
   public: true
 - short_description: Track email bounces, delivery attempts, rejected messages, and
     more.

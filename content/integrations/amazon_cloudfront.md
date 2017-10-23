@@ -1,12 +1,12 @@
 ---
-title: Datadog-AWS API Gateway Integration
-integration_title: AWS API Gateway
+title: Datadog-AWS CloudFront Integration
+integration_title: AWS CloudFront
 kind: integration
-git_integration_title: amazon_api_gateway
+git_integration_title: amazon_cloudfront
 newhlevel: true
-description: "Track Amazon API gateway errors."
+description: "Track error rates, request counts, and bytes downloaded and uploaded."
 aliases:
-    - /integrations/awsapigateway/
+    - /integrations/awscloudfront/
 ---
 
 ## Overview
