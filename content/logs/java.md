@@ -24,7 +24,7 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-To send your logs to Datadog, we recommend to log into a file and then to monitor this file your your Datadog agent.
+To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.
 
 ## Setup - Log to file
 ### Configure your logger
@@ -80,8 +80,30 @@ Edit your `logback.xml` file:
 
 ### Configure the Datadog agent.
 
-[Follow thoses steps](https://docs.datadoghq.com/logs/#tail-existing-files) to tail your java log files
+Create a `java.yaml` file in your `conf.d/` folder with the folowing content:
 
+```yaml
+init_config:
+
+instances:
+    [{}]
+    
+#Log section
+logs:
+
+    # - type : file (mandatory) type of log input source (tcp / udp / file)
+    #   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    #   service : (mandatory) name of the service owning the log
+    #   source : (mandatory) attribute that defines which integration is sending the logs
+    #   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    #   tags: (optional) add tags to each logs collected
+
+  - type: file
+    path: /path/to/your/java/log.log
+    service: java
+    source: java
+    sourcecategory: sourcecode
+```
 
 ## Getting further
 Enrich your log events with valuable attributes!
