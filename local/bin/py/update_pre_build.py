@@ -2,6 +2,7 @@
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from tqdm import *
+from os import sep, makedirs, getenv
 import yaml
 import requests
 import tempfile
