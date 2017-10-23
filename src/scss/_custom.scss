@@ -94,6 +94,14 @@ $headings-font-weight:600;
   }
 }
 
+.btn-outline-semi-trans {
+  &:hover {
+    border-color: #fff;
+    background-color: #fff;
+    color: $ddpurple;
+  }
+}
+
 // this button is generated from theme colors but we want to have a gradient
 .btn-gradient {
   background-image: linear-gradient(90deg,#c024b6,#3023ae);

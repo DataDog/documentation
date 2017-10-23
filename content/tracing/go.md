@@ -6,7 +6,7 @@ hideguides: true
 customnav: tracingnav
 ---
 
-### Installation
+## Installation
 
 To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
 
@@ -18,7 +18,7 @@ go get "github.com/DataDog/dd-trace-go/tracer"
 
 Finally, import the tracer and instrument your code!
 
-### Example
+## Example
 
 ~~~
 package main
@@ -37,7 +37,7 @@ func main {
 For another example, see the [`example_test.go`](https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go) file in the Go Tracer package
 
 
-### Compatibility
+## Compatibility
 
 Currently, only Go 1.7 is supported. The following Go libraries are supported:
 
@@ -45,7 +45,7 @@ Currently, only Go 1.7 is supported. The following Go libraries are supported:
 - [Gorilla Mux](https://github.com/gorilla/mux)
 - [gRPC](https://github.com/grpc/grpc-go)
 
-### Additional Information
+## Additional Information
 
 The Go integration [source code can be found on Github](https://github.com/DataDog/dd-trace-go).
 

@@ -33,6 +33,10 @@ body {
   }
 }
 
+a {
+  color:#0076FF;
+}
+
 // todo: do we want all code blocks like this or just ones on api, move this
 pre {
   display: block;
@@ -89,9 +93,7 @@ p {
 .main {
   padding-top:30px;
   padding-bottom:100px;
-  &> a,
-  &> p a {
-    color:#0076FF;
+  a {
     text-decoration:underline;
     &:hover {
       text-decoration: none;
@@ -167,6 +169,13 @@ p {
   color:#06c;
 }
 
+
+#dropdownMenuLink {
+  text-decoration: none !important;
+}
+.dropdown-item {
+  text-decoration: none !important;
+}
 
 
 // mobile size

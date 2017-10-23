@@ -5,7 +5,7 @@ autotocdepth: 2
 hideguides: true
 customnav: tracingnav
 ---
-### Definition
+## Definition
 
 An environment is a first class dimension that you can use to scope a whole Datadog APM application.
 
@@ -28,13 +28,13 @@ Environments in traces and configuration files will be normalized:
 - upper case characters will be converted to lower case.
 
 
-#### Default environment
+### Default environment
 
 If you are not using this feature, you will get your data put in `env:none` which is the default behavior.
 
 Note that if you are using environments, you will still get a default `env:none` environment where all the non-tagged data will go.
 
-#### Setup
+### Setup
 
 There are several ways to specify an environment when reporting data:
 

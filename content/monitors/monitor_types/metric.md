@@ -8,7 +8,7 @@ description: "Compare values of a metric with a user defined threshold"
 ---
 
 1. Choose the detection method
-    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" >}}
+    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" >}}
 
     A **threshold alert** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -40,13 +40,13 @@ description: "Compare values of a metric with a user defined threshold"
     arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" >}}
+  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" >}}
+    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -70,7 +70,7 @@ description: "Compare values of a metric with a user defined threshold"
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" >}}
+      {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you

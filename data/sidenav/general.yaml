@@ -9,7 +9,7 @@ nav:
   display_name: Agent
   image: nav_agent.png
   image_hover: nav_agent_p.png
-  link: /agent/
+  link: /agent/basic_agent_usage/
 - name: integrations
   display_name: Integrations
   image: nav_integrations.png
@@ -24,7 +24,7 @@ nav:
   display_name: Alerting
   image: nav_alerting.png
   image_hover: nav_alerting_p.png
-  link: /monitoring/
+  link: /monitors/monitor_types/
 - name: tracing
   display_name: Tracing/APM
   image: nav_tracing.png
@@ -39,7 +39,7 @@ nav:
   display_name: Account Management
   image: nav_account.png
   image_hover: nav_account_p.png
-  link: /account_management
+  link: /account_management/
 - name: glossary
   display_name: Glossary
   image: nav_glossary.png

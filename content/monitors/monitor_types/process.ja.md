@@ -22,7 +22,7 @@ creation interface, you can choose which of those checks to monitor and at what
 point they should notify.
 -->
 
-{{< img src="monitors/monitor_types/process/process_monitor.png" >}}
+{{< img src="monitors/monitor_types/process/process_monitor.png" responsive="true" >}}
 
 プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 

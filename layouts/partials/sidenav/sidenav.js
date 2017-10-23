@@ -5,15 +5,24 @@ $(document).ready(function () {
 
     function buildMap() {
         mapping = [];
-        $('.sidenav ul li a').each(function() {
+        var link = null;
+        $('.sidenav ul a').each(function() {
             var href = $(this).attr('href');
             var id = href.replace('#', '').replace(' ','-');
-            var header = $('h2[id="'+id+'"]');
+            var header = $('[id="'+id+'"]');
             if(header.length) {
-                mapping.push({'navLink': $(this), 'id': id, 'headerTop': header.offset().top});
+                mapping.push({
+                    'navLink': $(this),
+                    'navLinkPrev': link,
+                    'id': id,
+                    'headerTop': header.offset().top,
+                    'isH2': header.is('h2'),
+                    'isH3': header.is('h3')
+                });
             } else {
-                console.log('could not find h2[id="'+id+'"]');
+                //console.log('could not find h2[id="'+id+'"]');
             }
+            link = $(this);
         });
     }
 
@@ -25,12 +34,13 @@ $(document).ready(function () {
             var j = i+1;
             if(j > mapping.length) { j = 0; }
             var nextobj = mapping[j];
-            console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
+            //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
             obj.navLink.removeClass('toc_scrolled');
 
             if( (winTop >= obj.headerTop - localOffset) && (winTop < nextobj.headerTop - localOffset) ) {
                 //console.log(obj.navLink);
                 obj.navLink.addClass('toc_scrolled');
+                obj.navLinkPrev.addClass('toc_open');
             }
         }
 
