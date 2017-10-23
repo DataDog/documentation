@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
-from os import sep, makedirs, getenv
 from tqdm import *
 import yaml
 import requests
@@ -11,7 +10,7 @@ import glob
 import fileinput
 import json
 import re
-
+import os 
 """
 Variables
 """
@@ -231,7 +230,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
             """
             Scraping all sections that we can found
             """
-            if os.path.exists('{}{}_readme.md'.format(from_path,key_name)):
+            if os.path.isfile('{}{}_readme.md'.format(from_path,key_name)):
                 data_array = readme_get_section(from_path, key_name)
 
             """
