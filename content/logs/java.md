@@ -7,7 +7,7 @@ customnav: lognav
 beta: true
 ---
 
-Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event: :
+Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
 
 ```java
 //4 events generated when only one is expected!
@@ -24,13 +24,13 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-To send your logs to datadog, we recommend to log into a file and then to monitor this file your your Datadog agent.
+To send your logs to Datadog, we recommend to log into a file and then to monitor this file your your Datadog agent.
 
-## Setup - Log into file
+## Setup - Log to file
 ### Configure your logger
 #### Log4j
 
-Edit your `log4j.xml` with a new file appender:
+Add a new file appender to `log4j.xml`:
 
 ```xml
 <appender name="fileAppender" class="org.apache.log4j.FileAppender">
