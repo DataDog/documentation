@@ -24,8 +24,11 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-##Setup - Log into file
-### Log4j
+You have two ways to send your logs to datadog, either by logging to a fileand monitoring it with your Datadog agent, or by logging directly to Datadog.
+
+## Setup - Log into file
+### Configure your logger
+#### Log4j
 
 Edit your `log4j.xml` with a new file appender:
 
@@ -40,7 +43,7 @@ Edit your `log4j.xml` with a new file appender:
 ```
 
 
-### Log4j2
+#### Log4j2
 Edit your `log4j2.xml` file:
 ```xml
  <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
@@ -53,7 +56,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-### Slf4j
+#### Slf4j
 Edit your `logback.xml` file:
 
 ```xml
@@ -74,6 +77,10 @@ Edit your `logback.xml` file:
     </root>
 </configuration>
 ```
+
+### Configure the Datadog agent.
+
+[Follow thoses steps](https://docs.datadoghq.com/logs/#tail-existing-files) to tail your java log files
 
 ##Setup - Agent-less 
 
@@ -112,7 +119,7 @@ Edit your `pom.xml`:
 As a result of this migration, log4j configuration files will no longer be picked up. So you need to migrate your log4j.properties file to logback.xml [the log4j translator](http://logback.qos.ch/translator/) might be of help
 
 #### Step2 
-Once that done, just edit your *logback.xml* such as seen HERE
+Once that done, just edit your *logback.xml* such as seen [here](#create-the-appender)
 
 ### Log4j2
 
@@ -140,10 +147,10 @@ Once the library is in your classpath, you can attach the following layout to an
 Now you can also send it directly through the TCP layer:
 
 ```xml
-<Socket name="TCP" host="api.logmatic.io" port="10514" reconnectionDelay="5000">
+<Socket name="TCP" host="XXXX_REMOTE_HOST" port="10514" reconnectionDelay="5000">
    <LogStashJSONLayout>
     <PatternLayout pattern="%msg%throwable{none}"/>
-    <KeyValuePair key="logmaticKey" value="<your_api_key>"/>
+    <KeyValuePair key="DatadogKey" value="<your_api_key>"/>
   </LogStashJSONLayout>  
 </Socket>
 <Loggers>
@@ -154,7 +161,7 @@ Now you can also send it directly through the TCP layer:
 ```
 
 ### Slf4j
-#### Step - 1 : Add the JSON library
+#### Add the JSON library
 The JSON library we selected for Logback is [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder). One advantage is: it's inside the main Maven repository.
 
 To add it into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml`:
@@ -172,7 +179,7 @@ To add it into your classpath, simply add the following dependency (version 4.5.
 </dependency>
 ```
 
-#### Step - 2 : Create the appender
+#### Create the appender
 Now that you have the library setup, you can log the JSON in your console or straight in the TCP to **Datadog**, as shown in the example below for `Logback.xml`:
 
 ```xml
@@ -181,11 +188,11 @@ Now that you have the library setup, you can log the JSON in your console or str
 </appender>
 
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>api.logmatic.io</remoteHost>
+    <remoteHost>XXXX_REMOTE_HOST</remoteHost>
   <port>10514</port>
   <keepAliveDuration>1 minute</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-        <customFields>{"logmaticKey":"<your_api_key>", "@marker": ["java","sourcecode"]}</customFields>
+        <customFields>{"DatadogKey":"<your_api_key>", "@marker": ["java","sourcecode"]}</customFields>
     </encoder>
 </appender>
  
