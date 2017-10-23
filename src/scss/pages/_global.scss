@@ -1,0 +1,122 @@
+body {
+  font-family: $font-family-sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1;
+
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1, ss03=1, ss06=1";
+  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  /** "ss01" 1 is for the alternate 'a' character */
+  /** "ss05" 1 is for alternate 'y' character */
+  font-weight: 200;
+  word-wrap: break-word;
+}
+
+body {
+  padding-top:129px;
+  //@include media-breakpoint-down(md)
+  @media (max-width: 991px) {
+    padding-top:65px;
+  }
+}
+
+a {
+  color:#0076FF;
+}
+
+// todo: do we want all code blocks like this or just ones on api, move this
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #FFF;
+  background-color: #0F0F0F;
+  border-radius: 4px;
+  font-family: $font-family-monospace;
+  code {
+    padding: 0;
+    font-size: 12px;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+    font-family: $font-family-monospace;
+  }
+}
+
+// hide the code blocks by default
+.code-block {
+  display:none;
+}
+// show python by default
+.code-block.code-block-python {
+  display:block;
+  visibility: visible;
+}
+
+
+.api-code code {
+  background-color:#0F0F0F;
+  color:#D0021B;
+}
+.api-code ul {
+  list-style-type:none;
+  padding:0;
+  li {
+    margin:0 0 4px 0;
+  }
+}
+
+p {
+  // todo: can i set this with a bootstrap variable?
+  font-size:18px;
+  color:#4A4A4A;
+  line-height:22px;
+}
+
+.main {
+  padding-top:30px;
+  padding-bottom:100px;
+  a {
+    text-decoration:underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+#dropdownMenuLink {
+  text-decoration: none !important;
+}
+.dropdown-item {
+  text-decoration: none !important;
+}
+
+
+// Breakpoint styles go here...
+
+//@include media-breakpoint-down(md)
+@media (max-width: 767px) {
+  h1 {
+    font-size:42px;
+  }
+}
