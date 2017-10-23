@@ -17,35 +17,11 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 
 ## Getting started with the Agent
 
-To start gathering logs, install the Log-Specific Datadog Agent:
+Log collection is possible with the Datadog-Agent 6. If you are not using it already, please follow the installation (or update) instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
 
-    sudo sh -c "echo 'deb http://apt.datadoghq.com/ beta main' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
-    sudo apt-get update
+Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
-To validate apt is properly configured,  you can check if the following command returns results like *1:5.17.3~logsbeta.3-1 500*
-
-    apt-cache policy datadog-agent | grep logs
-
-Then to install the agent:
-
-    sudo apt-get install datadog-agent=1:5.18.2~logsbeta.0-1 -y
-
-Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it:
-
-* In the `conf.d` folder, create the `logs-agent.yaml` file with the following content: 
-
-{{< highlight yaml >}}
-init_config:
-instances:
-    [{}]
-
-#(mandatory) Same api_key as specified in datadog.conf
-api_key: <YOUR_DATADOG_API_KEY>
-#(optional): same hostname as specified in Datadog.conf - used for host tags and links with metrics
-#hostname:  
-
-{{< /highlight >}}
+    log_enabled: true
 
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
