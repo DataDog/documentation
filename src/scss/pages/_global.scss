@@ -90,10 +90,15 @@ p {
 .main {
   padding-top:30px;
   padding-bottom:100px;
-  a {
-    text-decoration:underline;
+  & > a,
+  & > p > a,
+  & > ol li a,
+  & > ul li a {
+    //text-decoration:underline;
+    border-bottom: 1px solid #0076FF;
     &:hover {
-      text-decoration: none;
+      //text-decoration: none;
+      border-bottom: none;
     }
   }
 }

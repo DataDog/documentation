@@ -45,6 +45,20 @@
                                 {{ if $dot.Params.platform }}<span class="toctitle">{{ $dot.Params.platform | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
+                            <!--{{ if (and (in ($element.display_name | lower) "integrations") (in $dot.RelPermalink "integrations") ) }}
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li><a data-ref="filter" data-filter="all" href="#all" class="">ALL</a></li>
+                                            {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
+                                            <li><a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="">{{ $e }}</a></li>
+                                            {{ end }}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            {{ end }}-->
                         </li>
                     {{ end }}
                 {{ end }}
@@ -52,3 +66,5 @@
         </div>
     </div>
 </aside>
+
+
