@@ -17,7 +17,7 @@ The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro p
 APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process. The Agent can be enabled by including the following in your Datadog agent configuration file: `apm_enabled: yes`
 
 <div class="alert alert-info">
-APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: `apm_enabled: no` in your Datadog agent configuration file.
+APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
 </div>
 
 ### Installing the agent
@@ -30,7 +30,7 @@ Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#ag
 
 To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-For additional information, please reference [the project README on Github](https://github.com/DataDog/docker-dd-agent/blob/master/README.md#tracing--apm)
+For additional information, please reference [the Docker page](/tracing/docker)
 
 ### Instrument your application
 

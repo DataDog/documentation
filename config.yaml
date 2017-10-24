@@ -178,24 +178,24 @@ languages:
           url: tracing/faq/
           weight: 50
 
-        - identifier: customnav_tracingnav_help
-          url: tracing/help/
-          weight: 60
-
         - identifier: customnav_tracingnav_langs
           url: #
-          weight: 70
+          weight: 60
 
         - identifier: customnav_tracingnav_go
           url: tracing/go/
-          weight: 80
+          weight: 70
 
         - identifier: customnav_tracingnav_python
           url: tracing/python/
-          weight: 90
+          weight: 80
 
         - identifier: customnav_tracingnav_ruby
           url: tracing/ruby/
+          weight: 90
+
+        - identifier: customnav_tracingnav_docker
+          url: tracing/docker/
           weight: 100
 
         - identifier: customnav_tracingnav_api
@@ -262,6 +262,9 @@ languages:
         - identifier: customnav_lognav_parsing
           url: logs/parsing/
           weight: 50
+        - identifier: customnav_lognav_java
+          url: logs/java/
+          weight: 60
 
 # Monitors
 
