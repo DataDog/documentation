@@ -32,7 +32,7 @@ $ddpurple:    #774DA2;
         opacity: 0.3;
       }
       &:hover {
-        border:1px solid $ddpurple;
+        border-color: $ddpurple;
         & > .card-img {
           display:none;
         }
@@ -97,10 +97,27 @@ $ddpurple:    #774DA2;
 @media (max-width: 575px) {
   .integration-tiles {
     .card {
+      /*width:auto;
+      height:auto;
+      &:hover {
+        & > .card-img {
+          display:block;
+        }
+      }
+      .card-body {
+        position: absolute;
+        background: #fff;
+      }*/
       width:auto;
-      height:102px;
-      .btn-container {
-        display:none;
+      height:auto;
+      &:hover {
+        border-color:rgba(0,0,0,.125);
+        & > .card-img {
+          display: block;
+        }
+        & > .card-body {
+          display: none;
+        }
       }
     }
   }

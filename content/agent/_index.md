@@ -4,7 +4,7 @@ kind: documentation
 customnav: agentnav
 ---
 
-{{< partial name="platforms/platform-select-desktop.html" >}}
+{{< partial name="platforms/platforms.html" >}}
 
 ## What is the Agent?
 

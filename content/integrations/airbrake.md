@@ -8,7 +8,7 @@ git_integration_title: airbrake
 description: "View, search, and discuss Airbrake exceptions in your event stream."
 ---
 
-{{< img src="integrations/airbrake/airbrakeevent.png" style="width: 500px;" responsive="true" >}}
+{{< img src="integrations/airbrake/airbrakeevent.png" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

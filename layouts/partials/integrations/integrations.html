@@ -74,7 +74,7 @@
     {{ range $i, $v := $integration_list }}
         <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <div class="card">
-                <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
+                <a class="card-img" href="{{ .Site.BaseURL }}{{$v.docs_link}}"><img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}"></a>
                 <div class="card-body">
                     <a class="card-button" href="{{ .Site.BaseURL }}{{$v.docs_link}}">
                         <h4 class="card-title">{{ $v.public_title }}</h4>

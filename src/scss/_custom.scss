@@ -76,7 +76,7 @@ $headings-font-weight:600;
 
 // this button is generated from theme colors but we want to have slight variant colors
 .btn-outline-secondary {
-  border-color: #D6D6D6;
+  /*border-color: #D6D6D6;
   &:hover {
     border-color: $ddpurple;
     background-color: $ddpurple;
@@ -91,7 +91,33 @@ $headings-font-weight:600;
   }
   &:focus, &.focus {
     box-shadow: none;
+  }*/
+
+  border-color: #D6D6D6;
+
+  &:hover {
+    border-color: $ddpurple;
+    background-color: $ddpurple;
   }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    background-color: $ddpurple;
+    border-color: $ddpurple;
+    box-shadow: none;
+  }
+
 }
 
 .btn-outline-semi-trans {

@@ -29,7 +29,7 @@ Datadog provides 3 user roles:
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
 
-    {{< img src="account_management/team/guides-multacct-disable.png" style="width:200px;" alt="Disable Member" responsive="true" >}}
+    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" >}}
 
 ## Promote Existing Members to Admin
 

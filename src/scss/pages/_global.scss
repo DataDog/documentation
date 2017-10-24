@@ -57,6 +57,11 @@ pre {
   }
 }
 
+code {
+  padding-top:0;
+  padding-bottom:0;
+}
+
 // hide the code blocks by default
 .code-block {
   display:none;
@@ -94,11 +99,9 @@ p {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    //text-decoration:underline;
     border-bottom: 1px solid #0076FF;
     &:hover {
-      //text-decoration: none;
-      border-bottom: none;
+      border-bottom-color: transparent;
     }
   }
 }
@@ -123,7 +126,7 @@ p {
   .card {
     text-decoration: none;
     img {
-      margin-top: 10px;
+
     }
     &:hover {
       border-color: $ddpurple;

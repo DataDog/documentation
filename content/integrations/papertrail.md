@@ -8,7 +8,7 @@ doclevel: basic
 description: "View, search on, and discuss Papertrail logs in your Datadog event stream."
 ---
 
-{{< img src="integrations/papertrail/papertrailexample.png" style="max-width:600px;" alt="Papertrail example" responsive="true" >}}
+{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail example" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

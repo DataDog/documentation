@@ -6,7 +6,7 @@ kind: integration
 newhlevel: true
 description: "Use xMatters as a notification channel in Datadog alerts and events."
 ---
-{{< img src="integrations/xmatters/xmatters.png" alt="Xmatters overview" style="width:25%;" >}}
+{{< img src="integrations/xmatters/xmatters.png" alt="Xmatters overview" >}}
 
 ## Overview
 //get-overview-from-git//
