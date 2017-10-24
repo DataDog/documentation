@@ -9,34 +9,16 @@ description: "Send commits and pull requests from your self-hosted Git server to
 {{< img src="integrations/git/git_event.png" alt="Git event" responsive="true" >}}
 
 ## Overview
-
-Capture Git commits directly from your Git server to:
-
-* Keep track of code changes in real time.
-* Add code change markers on all your dashboards.
-* Discuss code changes with your team.
+//get-overview-from-git//
 
 ## Setup
-### Installation
+//get-setup-from-git//
 
-1. Create a new application key for Git: [Generate Application Key](https://app.datadoghq.com/account/settings#api)
+## Data Collected
+//get-data-collected-from-git//
 
-2. Download the Datadog Git webhook:
-```
-sudo easy_install dogapi
-curl -L https://raw.github.com/DataDog/dogapi/master/examples/git-post-receive-hook > post-receive
-```
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-3. Set up Git with your [Datadog keys](https://app.datadoghq.com/account/settings#api):
-```
-git config datadog.api <YOUR_DATADOG_API_KEY>
-git config datadog.application <YOUR_DATADOG_APP_KEY>
-```   
-
-4. Activate the hook in your repository
-```
-install post-receive git_repository/.git/hooks/post-receive
-```
-Assuming your repository is called ```git_repository```
-
-4. Install Integration
+## Further Reading
+//get-further-reading-from-git//

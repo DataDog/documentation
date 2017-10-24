@@ -9,20 +9,17 @@ description: "Track network and data store usage attributable to your Firebase s
 ---
 
 ## Overview
-Firebase is a mobile platform that helps you quickly develop high-quality apps, grow your user base, and earn more money.
-
-Get metrics from Google Firebase to:
-
-* Visualize the performance of your Firebase databases and hosting services
-* Correlate the performance of your Firebase tools with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//
 
