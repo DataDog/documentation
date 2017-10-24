@@ -37,26 +37,26 @@ Related integrations include:
 | [Elastic File System (EFS)](/integrations/amazon_efs)         | shared file storage                                                           |
 | [Elastic Load Balancing (ELB)](/integrations/amazon_elb)      | distributes incoming application traffic across multiple Amazon EC2 instances |
 | [Elastic Map Reduce (EMR)](/integrations/amazon_emr)          | data processing using Hadoop                                                  |
-| [Elasticsearch Service (ES)](/integrations/awses)         |  deploy, operate, and scale Elasticsearch clusters                            |
-| [Firehose](/integrations/awsfirehose)                     | capture and load streaming data                                               |
-| [IOT](/integrations/awsiot)                               | connect IOT devices with cloud services                                       |
-| [Kinesis](/integrations/awskinesis)                       | service for real-time processing of large, distributed data streams           |
-| [Key Management Service (KMS)](/integrations/awskms)      | create and control encryption keys                                            |
-| [Lambda](/integrations/awslambda)                         | serverless computing                                                          |
-| [Machine Learning (ML)](/integrations/awsml)              | create machine learning models                                                |
-| [OpsWorks](/integrations/awsopsworks)                     | configuration management                                                      |
-| [Polly](/integrations/awspolly)                           | text-speech service                                                           |
-| [Redshift](/integrations/awsredshift)                     | data warehouse solution                                                       |
-| [Relational Database Service (RDS)](/integrations/awsrds) | relational database in the cloud                                              |
-| [Route 53](/integrations/awsroute53)                      | DNS and traffic management with availability monitoring                       |
-| [Simple Email Service (SES)](/integrations/awsses)        | cost-effective, outbound-only email-sending service                           |
-| [Simple Notification System (SNS)](/integrations/awssns)  | alert and notifications                                                       |
-| [Simple Queue Service (SQS)](/integrations/awssqs)        | messaging queue service                                                       |
+| [Elasticsearch Service (ES)](/integrations/amazon_es)         |  deploy, operate, and scale Elasticsearch clusters                            |
+| [Firehose](/integrations/amazon_firehose)                     | capture and load streaming data                                               |
+| [IOT](/integrations/amazon_iot)                               | connect IOT devices with cloud services                                       |
+| [Kinesis](/integrations/amazon_kinesis)                       | service for real-time processing of large, distributed data streams           |
+| [Key Management Service (KMS)](/integrations/amazon_kms)      | create and control encryption keys                                            |
+| [Lambda](/integrations/amazon_lambda)                         | serverless computing                                                          |
+| [Machine Learning (ML)](/integrations/amazon_machine_learning)              | create machine learning models                                                |
+| [OpsWorks](/integrations/amazon_ops_works)                     | configuration management                                                      |
+| [Polly](/integrations/amazon_polly)                           | text-speech service                                                           |
+| [Redshift](/integrations/amazon_redshift)                     | data warehouse solution                                                       |
+| [Relational Database Service (RDS)](/integrations/amazon_rds) | relational database in the cloud                                              |
+| [Route 53](/integrations/amazon_route53)                      | DNS and traffic management with availability monitoring                       |
+| [Simple Email Service (SES)](/integrations/amazon_ses)        | cost-effective, outbound-only email-sending service                           |
+| [Simple Notification System (SNS)](/integrations/amazon_sns)  | alert and notifications                                                       |
+| [Simple Queue Service (SQS)](/integrations/amazon_sqs)        | messaging queue service                                                       |
 | [Simple Storage Service (S3)](/integrations/amazon_s3)        | highly available and scalable cloud storage service                           |
-| [Simple Workflow Service (SWF)](/integrations/awsswf)     | cloud workflow management                                                     |
-| [Storage Gateway](/integrations/awsstoragegateway)        | hybrid cloud storage                                                          |
-| [Web Application Firewall (WAF)](/integrations/awswaf)    | protect web applications from common web exploits                             |
-| [Workspaces](/integrations/awsworkspaces)                 | secure desktop computing service                                              |
+| [Simple Workflow Service (SWF)](/integrations/amazon_swf)     | cloud workflow management                                                     |
+| [Storage Gateway](/integrations/amazon_storage_gateway)        | hybrid cloud storage                                                          |
+| [Web Application Firewall (WAF)](/integrations/amazon_waf)    | protect web applications from common web exploits                             |
+| [Workspaces](/integrations/amazon_workspaces)                 | secure desktop computing service                                              |
 
 ## Setup
 ### Installation
