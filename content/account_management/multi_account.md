@@ -11,30 +11,6 @@ There are two ways to have multiple accounts have access to the same data. First
 
 {{< img src="account_management/multi_account/guides-multacct-switchaccts.png" style="width:200px;" alt="Switch Accounts" responsive="true" >}}
 
-## Teams
-
-### Add New Members
-
-1. To add members to a team, start by visiting the [Team Page][Teampage].
-2. Enter the email address of the person you want to add to your team. Click **Invite Users**
-  {{< img src="account_management/multi_account/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" >}}
-
-The new user will receive an email with a link to login.
-
-### Disable Existing Members
-***NOTE:** You must be an Admin of the team to disable members*
-
-1. Go to the [Team Page][TeamPage].
-2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
-
-    {{< img src="account_management/multi_account/guides-multacct-disable.png" style="width:200px;" alt="Disable Member" >}}
-
-### Promote Existing Members to Admin
-***NOTE:** You must be an Admin of the team to promote members*
-
-1. Go to the [Team Page][TeamPage].
-2. Hover over the avatar for the user you wish to promote. Choose **Make Admin** from the menu.
-
 ## Organizations
 
 The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, please contact support at [support@datadoghq.com][2].
@@ -57,7 +33,18 @@ A new trial account will be created. If you wish to add this account to your exi
 
 {{< img src="account_management/multi_account/guides-multacct-leaveorg.png" alt="Leave Org" responsive="true" >}}
 
-To add, disable, and promote members, see the instructions above for Teams.
+To add, disable, and promote members, see the instructions for [Teams](/account_management/team).
+
+
+## Custom domains for each sub-organizations
+
+
+Please email [the Datadog support team](/help) to enable custom subdomains.
+
+Custom sub-domains allows for easy differentiation of the source of notifications and easy switching between organizations when logged in as a member of multiple Datadog organizations.
+
+Custom sub-domains can be especially helpful as when an alert link is generated, (https://account-a.datadoghq.com/event/event?id=<id>) it will always point to a particular Datadog account, whereas the regular alert link (https://app.datadoghq.com/event/event?id=<id>) will only look for the event in the account the user is currently logged into and can cause an unexpected 404 error.
+
 
 [1]: https://app.datadoghq.com/account/team
 [2]: mailto:support@datadoghq.com

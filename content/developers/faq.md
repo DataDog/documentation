@@ -76,7 +76,7 @@ Further tagging info can be found [here][architecture-2].
 
 For information on AWS tagging, please see [here][architecture-3].
 
-[architecture-3]: /integrations/aws/
+[architecture-3]: /integrations/amazon_web_services/
 [architecture-2]: /developers/metrics/
 
 ## Metrics

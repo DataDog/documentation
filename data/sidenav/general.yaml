@@ -9,7 +9,7 @@ nav:
   display_name: Agent
   image: nav_agent.png
   image_hover: nav_agent_p.png
-  link: /agent/basic_agent_usage/
+  link: /agent/
 - name: integrations
   display_name: Integrations
   image: nav_integrations.png

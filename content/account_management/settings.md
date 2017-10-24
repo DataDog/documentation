@@ -9,6 +9,6 @@ customnav: accountmanagementnav
 
 This panel allow you: 
 
-* To chose your timezone
-* Enable Desktop notifications
-* Custom your Email subscription parameters.
+* To choose your timezone.
+* Enable Desktop notifications.
+* Customize your email subscription settings

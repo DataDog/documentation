@@ -19,6 +19,15 @@ Hipchat) or other custom endpoints via webhooks.
 
 Triggered monitors will appear in the event stream, allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
+In this section you can:
+
+* [Learn how to create a monitor](/monitors/monitor_types)
+* [Configure your monitor notifications](/monitors/notifications)
+* [Manage your monitors](/monitors/manage_monitor)
+* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
+* [See all your checks into one place](/monitors/check_summary)
+* [Consult our FAQ](/monitors/faq)
+
 ### Glossary
 
 Here is a quick overview of the different terms used:
@@ -44,12 +53,3 @@ You can export the configuration JSON for a monitor right from the create screen
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
 {{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true">}}
-
-## What's next ? 
-
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)

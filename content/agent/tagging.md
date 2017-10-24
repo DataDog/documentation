@@ -20,17 +20,17 @@ The following integration sources create tags automatically in Datadog:
 
 |                                       |                                                                               |
 | :-------------------------------------|:------------------------------------------------------------------------------|
-| [Amazon CloudFront](http://docs.datadoghq.com/integrations/awscloudfront)                     | Distribution |
-| [Amazon EC2](http://docs.datadoghq.com/integrations/awsec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| [Amazon Elastic File System](http://docs.datadoghq.com/integrations/awsefs)            | Filesystem |
-| [Amazon Kinesis](http://docs.datadoghq.com/integrations/awskinesis)                        | Stream State |
-| [Amazon Machine Learning](http://docs.datadoghq.com/integrations/awsml)               | BatchPrediction, DataSource, Evaluation  , MLModel |
-| [Amazon Route 53](http://docs.datadoghq.com/integrations/awsroute53)                       | Domains, Healthchecks  , HostedZone |
-| [Amazon WorkSpaces](http://docs.datadoghq.com/integrations/awsworkspaces)                     | WorkSpaces |
-| [AWS CloudTrail](http://docs.datadoghq.com/integrations/awscloudtrail)                        | CloudTrail |
-| [AWS Elastic Load Balancing](http://docs.datadoghq.com/integrations/awselb)            | Loadbalancer, TargetGroups |
-| [AWS Identity and Access Management](http://docs.datadoghq.com/integrations/awsworkspaces)    | Profile Name |
-| [AWS SQS](http://docs.datadoghq.com/integrations/awssqs)                               | Queue Name |
+| [Amazon CloudFront](http://docs.datadoghq.com/integrations/amazon_cloudfront)                     | Distribution |
+| [Amazon EC2](http://docs.datadoghq.com/integrations/amazon_ec2)                            | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
+| [Amazon Elastic File System](http://docs.datadoghq.com/integrations/amazon_efs)            | Filesystem |
+| [Amazon Kinesis](http://docs.datadoghq.com/integrations/amazon_kinesis)                        | Stream State |
+| [Amazon Machine Learning](http://docs.datadoghq.com/integrations/amazon_machine_learning)               | BatchPrediction, DataSource, Evaluation  , MLModel |
+| [Amazon Route 53](http://docs.datadoghq.com/integrations/amazon_route53)                       | Domains, Healthchecks  , HostedZone |
+| [Amazon WorkSpaces](http://docs.datadoghq.com/integrations/amazon_workspaces)                     | WorkSpaces |
+| [AWS CloudTrail](http://docs.datadoghq.com/integrations/amazon_cloudtrail)                        | CloudTrail |
+| [AWS Elastic Load Balancing](http://docs.datadoghq.com/integrations/amazon_elb)            | Loadbalancer, TargetGroups |
+| [AWS Identity and Access Management](http://docs.datadoghq.com/integrations/amazon_workspaces)    | Profile Name |
+| [AWS SQS](http://docs.datadoghq.com/integrations/amazon_sqs)                               | Queue Name |
 | [Apache](http://docs.datadoghq.com/integrations/apache)                                | Apache Host and Port |
 | [Azure](http://docs.datadoghq.com/integrations/azure)                                 | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support |
 | [BTRFS](http://docs.datadoghq.com/integrations/btrfs)                                 | Usage & Replication Type |

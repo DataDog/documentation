@@ -82,7 +82,7 @@ By default, DogStatsD listens on UDP port 8125. If you need to change this, conf
 `dogstatsd_port` option in the main [Agent configuration file][3]:
 
     # Make sure your client is sending to the same port.
-    dogstatsd_port: 18125
+    dogstatsd_port: 8125
 
 Restart DogStatsD to effect the change.
 

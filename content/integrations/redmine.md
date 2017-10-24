@@ -7,12 +7,16 @@ description: "View, search, and discuss Redmine updates in your Datadog event st
 ---
 
 ## Overview
+//get-overview-from-git//
 
-Capture Redmine activity in Datadog to:
+## Setup
+//get-setup-from-git//
 
-  * Track your development cycle.
-  * View open issues in the Datadog event stream.
-  * Discuss projects with your team.
+## Data Collected
+//get-data-collected-from-git//
 
-The Redmine configuration just requires a full URL to the desired activity feed (you can add multiple URLs).
+## Troubleshooting
+//get-troubleshooting-from-git//
 
+## Further Reading
+//get-further-reading-from-git//

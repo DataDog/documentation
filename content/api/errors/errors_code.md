@@ -15,6 +15,7 @@ order: 3
 * `403 Forbidden 404`
 * `404 Not Found`
 * `409 409`
+* `413 Request payload too large`
 * `422 Unprocessable`
 * `500 Server Error`
 * `Accepted 204`

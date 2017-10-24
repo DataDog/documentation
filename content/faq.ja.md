@@ -1163,20 +1163,20 @@ You can send the request to support@datadoghq.com and we will add it to our feat
 
 [1]: /ja/api/
 [2]: /ja/developers/dogstatsd/
-[3]: /ja/agent/basic_agent_usage/
+[3]: /ja/agent/
 [4]: /ja/monitors/
 [5]: /ja/graphing/infrastructure/hostmap
 [6]: /ja/developers/metrics/#tags
-[7]: /ja/integrations/aws/
+[7]: /ja/integrations/amazon_web_services/
 [8]: /ja/graphing/infrastructure/hostmap
-[9]: /ja/integrations/aws/
+[9]: /ja/integrations/amazon_web_services/
 [10]: https://app.datadoghq.com/account/settings#integrations/postgres
 [11]: https://app.datadoghq.com/account/billing
 [12]: https://app.datadoghq.com/account/billing_history
 [13]: /ja/account_management/
 [14]: /graphing/miscellaneous/functions
 [15]: /ja/graphing/
-[16]: /ja/agent/basic_agent_usage/
+[16]: /ja/agent/
 [17]: https://app.datadoghq.com/policy/license
 [18]: https://github.com/DataDog/dd-agent/
 [19]: /ja/developers/metrics/
