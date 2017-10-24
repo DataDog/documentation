@@ -1395,7 +1395,7 @@ integrations:
     to Sumo Logic.
   public_title: Sumo Logic
   image: Integrations-Sumologic-340x216.png
-  docs_link: /integrations/sumologic/
+  docs_link: /integrations/sumo_logic/
   public: true
 - name: supervisor
   categories: ['os & system']

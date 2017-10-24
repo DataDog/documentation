@@ -1,9 +1,10 @@
 ---
-title: Datadog-Redmine Integration
-integration_title: Redmine
+title: Datadog-Sumo Logic Integration
+integration_title: Sumo Logic
 kind: integration
-doclevel: basic
-description: "View, search, and discuss Redmine updates in your Datadog event stream."
+description: "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
+aliases:
+    - /integrations/sumologic/
 ---
 
 ## Overview
