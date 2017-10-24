@@ -1,3 +1,14 @@
+$(document).ready(function() {
+    $('header #navbar-sidenav').on('show.bs.collapse', function () {
+        console.log('showing');
+        $('body').css('overflow', 'hidden');
+        $(this).css('overflow', 'scroll');
+    }).on('hide.bs.collapse', function () {
+        $('body').css('overflow', '');
+        $(this).css('overflow', '');
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     function compress_nav_on_scroll() {
         var width = $(window).width();
