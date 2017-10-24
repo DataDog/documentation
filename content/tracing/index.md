@@ -30,7 +30,7 @@ Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#ag
 
 To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-For additional information, please reference [the dedicated page](/tracing/docker)
+For additional information, please reference [the Docker page](/tracing/docker)
 
 #### Instrument your application
 
