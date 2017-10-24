@@ -650,7 +650,7 @@ integrations:
     code.
   public_title: Expressjs
   image: Integrations-Expressjs-340x216.png
-  docs_link: /integrations/expressjs/
+  docs_link: /integrations/express/
   public: true
 - name: fabric
   categories: ['orchestration']
