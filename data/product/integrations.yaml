@@ -20,14 +20,14 @@ integrations:
   categories: ['cloud', 'web', 'aws']
   name: amazon_alb
   public_title: Amazon ALB
-  docs_link: /integrations/awselb/
+  docs_link: /integrations/amazon_elb/
   public: true
 - short_description: Track gateway errors, cache hits and misses, and request latency.
   image: ''
   categories: ['cloud', 'api', 'aws']
   name: amazon_api_gateway
   public_title: Amazon API Gateway
-  docs_link: /integrations/awsapigateway/
+  docs_link: /integrations/amazon_api_gateway/
   public: true
 - short_description: Track the status and counts of instances in your Auto Scaling
     groups.
@@ -35,42 +35,42 @@ integrations:
   categories: ['cloud', 'provisioning', 'configuration & deployment', 'aws']
   name: amazon_auto_scaling
   public_title: Amazon Auto Scaling
-  docs_link: /integrations/awsautoscaling/
+  docs_link: /integrations/amazon_auto_scaling/
   public: true
 - short_description: Monitor actual and estimated spend on your AWS account.
   image: ''
   categories: ['cloud', 'cost management', 'aws']
   name: amazon_billing
   public_title: Amazon Billing
-  docs_link: /integrations/awsbilling/
+  docs_link: /integrations/amazon_billing/
   public: true
 - short_description: Track error rates, request counts, and bytes downloaded and uploaded.
   image: ''
   categories: ['cloud', 'caching', 'web', 'aws']
   name: amazon_cloudfront
   public_title: Amazon Cloudfront
-  docs_link: /integrations/awscloudfront/
+  docs_link: /integrations/amazon_cloudfront/
   public: true
 - short_description: Track index utilization, successful request count, and more.
   image: ''
   categories: ['cloud', 'processing', 'search', 'aws']
   name: amazon_cloudsearch
   public_title: Amazon Cloudsearch
-  docs_link: /integrations/awscloudsearch/
+  docs_link: /integrations/amazon_cloudsearch/
   public: true
 - name: amazon_cloudtrail
   categories: ['cloud', 'monitoring', 'aws']
   short_description: Alert on suspicious AWS account activity.
   public_title: Amazon CloudTrail
   image: Integrations-AWSCloudtrail-340x216.png
-  docs_link: /integrations/awscloudtrail/
+  docs_link: /integrations/amazon_cloudtrail/
   public: true
 - short_description: See deployments as they happen and track how long they take.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_codedeploy
   public_title: Amazon Codedeploy
-  docs_link: /integrations/awscodedeploy/
+  docs_link: /integrations/amazon_codedeploy/
   public: false
 - docs_link: /integrations/awsdata storegateway/
   short_description: Track key AWS data store Gateway metrics.
@@ -82,105 +82,105 @@ integrations:
   categories: ['cloud', 'data store', 'aws']
   name: amazon_dynamodb
   public_title: Amazon Dynamodb
-  docs_link: /integrations/awsdynamo/
+  docs_link: /integrations/amazon_dynamodb/
   public: true
 - short_description: Track snapshot age, IOPS, read/write times, and more.
   image: ''
   categories: ['cloud', 'data store', 'aws']
   name: amazon_ebs
   public_title: Amazon EBS
-  docs_link: /integrations/awsebs/
+  docs_link: /integrations/amazon_ebs/
   public: true
 - short_description: Track instance resource usage, monitor status checks, and more.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_ec2
   public_title: Amazon EC2
-  docs_link: /integrations/awsec2/
+  docs_link: /integrations/amazon_ec2/
   public: true
 - short_description: Monitor container statuses, track resource usage, and more.
   image: ''
   categories: ['cloud', 'containers', 'aws']
   name: amazon_ecs
   public_title: Amazon ECS
-  docs_link: /integrations/ecs/
+  docs_link: /integrations/amazon_ecs/
   public: true
 - short_description: Track key Amazon Elastic Filesystem metrics.
   image: ''
   categories: ['cloud', 'os & system', 'aws']
   name: amazon_efs
   public_title: Amazon EFS
-  docs_link: /integrations/awsefs/
+  docs_link: /integrations/amazon_efs/
   public: true
 - short_description: Track key Amazon ElasicCache metrics.
   image: ''
   categories: ['cloud', 'caching', 'aws']
   name: amazon_elasticache
   public_title: Amazon Elasticache
-  docs_link: /integrations/awselasticache/
+  docs_link: /integrations/amazon_elasticache/
   public: true
 - short_description: Track key Amazon ElasticBeanstalk metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_elasticbeanstalk
   public_title: Amazon Elasticbeanstalk
-  docs_link: /integrations/awsbeanstalk/
+  docs_link: /integrations/amazon_elasticbeanstalk/
   public: true
 - name: amazon_elb
   categories: ['cloud', 'web', 'aws']
   short_description: Track key Amazon Elastic Loadbalancer metrics.
   public_title: Amazon ELB
   image: amazon_elb_logo.png
-  docs_link: /integrations/awselb/
+  docs_link: /integrations/amazon_elb/
   public: true
 - short_description: "Track key Amazon Elastic Map Reduce metrics.\n"
   image: ''
   categories: ['cloud', 'processing', 'aws']
   name: amazon_emr
   public_title: Amazon EMR
-  docs_link: /integrations/awsemr/
+  docs_link: /integrations/amazon_emr/
   public: true
 - short_description: Track key Amazon Elasticsearch metrics.
   image: ''
   categories: ['cloud', 'search', 'aws']
   name: amazon_es
   public_title: Amazon ES
-  docs_link: /integrations/awses/
+  docs_link: /integrations/amazon_es/
   public: true
 - short_description: Track key Amazon Firehose metrics.
   image: ''
   categories: ['cloud', 'processing', 'aws']
   name: amazon_firehose
   public_title: Amazon Firehose
-  docs_link: /integrations/awsfirehose/
+  docs_link: /integrations/amazon_firehose/
   public: true
 - short_description: Track key Amazon Internet of Things metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_iot
   public_title: Amazon IOT
-  docs_link: /integrations/awsiot/
+  docs_link: /integrations/amazon_iot/
   public: true
 - short_description: Track key Amazon Kinesis metrics.
   image: ''
   categories: ['cloud', 'processing', 'messaging', 'aws']
   name: amazon_kinesis
   public_title: Amazon Kinesis
-  docs_link: /integrations/awskinesis/
+  docs_link: /integrations/amazon_kinesis/
   public: true
 - short_description: Track Amazon KMS key expiration.
   image: ''
   categories: ['cloud', 'security', 'aws']
   name: amazon_kms
   public_title: Amazon Kms
-  docs_link: /integrations/awskms/
+  docs_link: /integrations/amazon_kms/
   public: true
 - short_description: Track lambda run times, errors, invocation counts, and more.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_lambda
   public_title: Amazon Lambda
-  docs_link: /integrations/awslambda/
+  docs_link: /integrations/amazon_lambda/
   public: true
 - short_description: Install the Datadog Agent on any Amazon Linux host.
   image: ''
@@ -194,42 +194,42 @@ integrations:
   categories: ['cloud', 'aws']
   name: amazon_machine_learning
   public_title: Amazon Machine Learning
-  docs_link: /integrations/awsml/
+  docs_link: /integrations/amazon_machine_learning/
   public: true
 - short_description: Track AWS OpsWorks resource usage.
   image: ''
   categories: ['cloud', 'provisioning', 'aws']
   name: amazon_opsworks
   public_title: Amazon Opsworks
-  docs_link: /integrations/awsopsworks/
+  docs_link: /integrations/amazon_ops_works/
   public: true
 - short_description: Track key AWS Polly metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_polly
   public_title: Amazon Polly
-  docs_link: /integrations/awspolly/
+  docs_link: /integrations/amazon_polly/
   public: true
 - short_description: Track a wealth of metrics related to Amazon RDS.
   image: ''
   categories: ['cloud', 'data store', 'aws']
   name: amazon_rds
   public_title: Amazon Rds
-  docs_link: /integrations/awsrds/
+  docs_link: /integrations/amazon_rds/
   public: true
 - short_description: Track key Amazon Redshift metrics.
   image: ''
   categories: ['cloud', 'aws']
   name: amazon_redshift
   public_title: Amazon Redshift
-  docs_link: /integrations/awsredshift/
+  docs_link: /integrations/amazon_redshift/
   public: true
 - short_description: Track Route53 metrics, and monitor health checks.
   image: ''
   categories: ['cloud', 'network', 'web', 'aws']
   name: amazon_route53
   public_title: Amazon Route53
-  docs_link: /integrations/awsroute53/
+  docs_link: /integrations/amazon_route53/
   public: true
 - short_description: Track request latency, number of requests by type, bucket sizes,
     and more.
@@ -237,7 +237,7 @@ integrations:
   categories: ['cloud', 'data store', 'aws', 'os & system']
   name: amazon_s3
   public_title: Amazon S3
-  docs_link: /integrations/awss3/
+  docs_link: /integrations/amazon_s3/
   public: true
 - short_description: Track email bounces, delivery attempts, rejected messages, and
     more.
@@ -245,7 +245,7 @@ integrations:
   categories: ['cloud', 'collaboration', 'aws']
   name: amazon_ses
   public_title: Amazon SES
-  docs_link: /integrations/awsses/
+  docs_link: /integrations/amazon_ses/
   public: true
 - short_description: Send Amazon SNS messages to Datadog, or send Datadog alerts to
     SNS.
@@ -253,7 +253,7 @@ integrations:
   categories: ['cloud', 'notification', 'aws']
   name: amazon_sns
   public_title: Amazon SNS
-  docs_link: /integrations/awssns/
+  docs_link: /integrations/amazon_sns/
   public: true
 - short_description: Track queue size, average message size, number of messages, and
     more.
@@ -261,28 +261,28 @@ integrations:
   categories: ['cloud', 'processing', 'aws']
   name: amazon_sqs
   public_title: Amazon SQS
-  docs_link: /integrations/awssqs/
+  docs_link: /integrations/amazon_sqs/
   public: true
 - short_description: Track key AWS Storage Gateway metrics.
   image: ''
   categories: ['cloud']
   name: amazon_storage_gateway
   public_title: Amazon Storage Gateway
-  docs_link: /integrations/awsstoragegateway/
+  docs_link: /integrations/amazon_storage_gateway/
   public: true
 - short_description: Track key Amazon Simple Workflow Service metrics.
   image: ''
   categories: ['cloud', 'configuration & deployment', 'aws']
   name: amazon_swf
   public_title: Amazon SWF
-  docs_link: /integrations/awsswf/
+  docs_link: /integrations/amazon_swf/
   public: true
 - short_description: Track allowed versus blocked requests.
   image: ''
   categories: ['cloud', 'security', 'aws']
   name: amazon_waf
   public_title: Amazon WAF
-  docs_link: /integrations/awswaf/
+  docs_link: /integrations/amazon_waf/
   public: true
 - name: amazon_web_services
   categories: ['cloud', 'aws']
@@ -290,7 +290,7 @@ integrations:
     \ more."
   public_title: Amazon Web Services (AWS)
   image: Integrations-AWS-340x216.png
-  docs_link: /integrations/aws/
+  docs_link: /integrations/amazon_web_services/
   public: true
 - short_description: Collect a wealth of AWS metrics and visualize your instances
     in a host map.
@@ -298,7 +298,7 @@ integrations:
   categories: ['cloud', 'aws']
   name: amazon_workspaces
   public_title: Amazon Workspaces
-  docs_link: /integrations/awsworkspaces/
+  docs_link: /integrations/amazon_workspaces/
   public: true
 - name: ansible
   categories: ['provisioning', 'orchestration', 'configuration & deployment']
@@ -650,7 +650,7 @@ integrations:
     code.
   public_title: Expressjs
   image: Integrations-Expressjs-340x216.png
-  docs_link: /integrations/expressjs/
+  docs_link: /integrations/express/
   public: true
 - name: fabric
   categories: ['orchestration']
@@ -1395,7 +1395,7 @@ integrations:
     to Sumo Logic.
   public_title: Sumo Logic
   image: Integrations-Sumologic-340x216.png
-  docs_link: /integrations/sumologic/
+  docs_link: /integrations/sumo_logic/
   public: true
 - name: supervisor
   categories: ['os & system']

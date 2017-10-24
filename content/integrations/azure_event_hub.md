@@ -9,19 +9,16 @@ description: "Track key Azure Event Hub metrics."
 ---
 
 ## Overview
-Azure Event Hub is a large scale data stream managed service.
-
-Get metrics from Azure Event Hub to:
-
-* Visualize the performance of your Event Hubs
-* Correlate the performance of your Event Hubs with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

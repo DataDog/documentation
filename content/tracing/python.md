@@ -18,7 +18,12 @@ pip install ddtrace
 
 Finally, import the tracer and instrument your code!
 
+
 ## Example
+
+<div class="alert alert-info">
+For Python applciations, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
+</div>
 
 ~~~
 from ddtrace import tracer
@@ -28,7 +33,6 @@ with tracer.trace("web.request", service="my_service") as span:
 ~~~
 
 For more examples, see the [Getting Started section of library documentation](http://pypi.datadoghq.com/trace/docs/#get-started).
-
 
 ## Compatibility
 

@@ -331,7 +331,7 @@ checks:
 [1]: https://www.datadoghq.com/docker-adoption/
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
 [3]: http://docs.datadoghq.com/integrations/kubernetes/#installation
-[4]: http://docs.datadoghq.com/integrations/ecs/#installation
+[4]: http://docs.datadoghq.com/integrations/amazon_ecs/#installation
 [5]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [6]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [7]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example

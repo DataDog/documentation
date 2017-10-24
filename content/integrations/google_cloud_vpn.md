@@ -9,19 +9,16 @@ description: "Monitor VPN tunnel status, throughput, session counts, and more."
 ---
 
 ## Overview
-Google Cloud VPN securely connects your existing network to your Google Cloud Platform network.
-
-Get metrics from Google VPN to:
-
-* Visualize the performance of your VPNs
-* Correlate the performance of your VPNs with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

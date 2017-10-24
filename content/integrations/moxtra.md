@@ -9,23 +9,16 @@ description: "Send Datadog alerts and graphs to Moxtra."
 ---
 
 ## Overview
-
-Moxtra delivers an embeddable, multilayered cloud collaboration service that lets people work on the go or at their desks.
-
-Integrate Moxtra to:
-
-* Be notified when a metric alert is triggered
-* Share your graphs with your team
+//get-overview-from-git//
 
 ## Setup
-### Installation
+//get-setup-from-git//
 
-To enable this integration...
+## Data Collected
+//get-data-collected-from-git//
 
-1.  In your Moxtra account, navigate to the Integrations tab.
+## Troubleshooting
+//get-troubleshooting-from-git//
 
-2.  Search for Datadog and Add the integration.
-
-3.  Add your Webhook URL to Datadog's webhooks-enabled services [here](https://app.datadoghq.com/account/settings#integrations/webhooks).
-
-4.  Click the **Install Integration** button on the [Moxtra Integration Tile](https://app.datadoghq.com/account/settings#integrations/moxtra).
+## Further Reading
+//get-further-reading-from-git//

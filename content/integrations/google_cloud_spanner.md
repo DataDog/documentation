@@ -9,19 +9,16 @@ description: "Track the resource usage of your Spanner instances."
 ---
 
 ## Overview
-Google Cloud Spanner is the first and only relational database service that is both strongly consistent and horizontally scalable.
-
-Get metrics from Google Spanner to:
-
-* Visualize the performance of your Spanner databases
-* Correlate the performance of your Spanner databases with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

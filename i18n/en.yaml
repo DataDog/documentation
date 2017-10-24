@@ -152,6 +152,9 @@
 - id: customnav_tracingnav_ruby
   translation:  "Ruby"
 
+- id: customnav_tracingnav_docker
+  translation: "Docker"
+
 - id: customnav_tracingnav_api
   translation:  "Tracing API"
 
@@ -217,6 +220,9 @@
 
 - id: customnav_lognav_explore
   translation: Explore
+
+- id: customnav_lognav_java
+  translation: "Java Collection"
 
 ##########################
 ######## Monitors ########

@@ -9,19 +9,16 @@ description: "Track cache hits, misses, evictions, connected clients, and more."
 ---
 
 ## Overview
-Azure Redis Cache is a managed data cache for your Azure applications.
-
-Get metrics from Azure Redis Cache to:
-
-* Visualize the performance of your Redis Caches
-* Correlate the performance of your Redis Caches with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//
