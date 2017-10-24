@@ -287,22 +287,22 @@ Autodiscovery expects labels to look like these examples, depending on the file 
 
 **Dockerfile**
 ~~~
-LABEL "com.datadoghq.sd.check_names"='[<CHECK_NAME>]'
-LABEL "com.datadoghq.sd.init_configs"='[<INIT_CONFIG>]'
-LABEL "com.datadoghq.sd.instances"='[<INSTANCE_CONFIG>]'
+LABEL "com.datadoghq.ad.check_names"='[<CHECK_NAME>]'
+LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
+LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
 ~~~
 
 **docker-compose.yaml**
 ~~~
 labels:
-  com.datadoghq.sd.check_names: '[<CHECK_NAME>]'
-  com.datadoghq.sd.init_configs: '[<INIT_CONFIG>]'
-  com.datadoghq.sd.instances: '[<INSTANCE_CONFIG>]'
+  com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
+  com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
+  com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ~~~
 
 **docker run command**
 ~~~
--l com.datadoghq.sd.check_names='[<CHECK_NAME>]' -l com.datadoghq.sd.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.sd.instances='[<INSTANCE_CONFIG>]'
+-l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ~~~
 
 
@@ -315,9 +315,9 @@ FROM nginx
 
 EXPOSE 8080
 COPY nginx.conf /etc/nginx/nginx.conf
-LABEL "com.datadoghq.sd.check_names"='["nginx"]'
-LABEL "com.datadoghq.sd.init_configs"='[{}]'
-LABEL "com.datadoghq.sd.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
+LABEL "com.datadoghq.ad.check_names"='["nginx"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
 ~~~
 
 
@@ -332,9 +332,9 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 ### Alternate Container Identifier: Labels
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.ad.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.ad.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
+Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.ad.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
 
 ### Template Source Precedence
 
