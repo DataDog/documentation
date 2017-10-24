@@ -103,7 +103,7 @@ integrations:
   categories: ['cloud', 'containers', 'aws']
   name: amazon_ecs
   public_title: Amazon ECS
-  docs_link: /integrations/ecs/
+  docs_link: /integrations/amazon_ecs/
   public: true
 - short_description: Track key Amazon Elastic Filesystem metrics.
   image: ''
@@ -290,7 +290,7 @@ integrations:
     \ more."
   public_title: Amazon Web Services (AWS)
   image: Integrations-AWS-340x216.png
-  docs_link: /integrations/aws/
+  docs_link: /integrations/amazon_web_services/
   public: true
 - short_description: Collect a wealth of AWS metrics and visualize your instances
     in a host map.

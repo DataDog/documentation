@@ -1,11 +1,10 @@
 ---
-title: Datadog-Microsoft Azure SQL Database Integration
-integration_title: Microsoft Azure SQL Database
+title: Datadog-AWS ECS Integration
+integration_title: AWS ECS
 kind: integration
-doclevel: basic
-git_integration_title: azure_sql_database
-newhlevel: true
-description: "Track key Azure SQL Database metrics."
+git_integration_title: amazon_ecs
+aliases:
+  - /integrations/ecs/
 ---
 
 ## Overview

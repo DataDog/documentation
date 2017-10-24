@@ -1,11 +1,11 @@
 ---
-title: Datadog-Microsoft Azure Redis Cache Integration
-integration_title: Microsoft Azure Redis Cache
+title: Datadog-AWS Integration
+integration_title: Amazon Web Services
 kind: integration
-doclevel: basic
-git_integration_title: azure_redis_cache
 newhlevel: true
-description: "Track cache hits, misses, evictions, connected clients, and more."
+git_integration_title: amazon_web_services
+aliases:
+    - /integrations/aws/
 ---
 
 ## Overview

@@ -9,19 +9,16 @@ description: "Track key Azure IOT Hub metrics."
 ---
 
 ## Overview
- Azure IOT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices.
-
-Get metrics from Azure IOT Hub to:
-
-* Visualize the performance of your IOT Hubs
-* Correlate the performance of your IOT Hubs with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

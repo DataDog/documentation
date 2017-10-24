@@ -7,6 +7,8 @@ integration_title: Amazon Web Services
 kind: integration
 newhlevel: true
 git_integration_title: amazon_web_services
+aliases:
+    - /ja/integrations/aws/
 ---
 <!--
 ## Overview
@@ -44,7 +46,7 @@ AWSインテグレーションには、関連する下記AWSサービス群の�
 | [CloudSearch](/integrations/amazon_cloudsearch)               | access to log files and AWS API calls                                         |
 | [Direct Connect](/integrations/amazon_directconnect)          | dedicated network connection to AWS
 | [Dynamo DB](/integrations/amazon_dynamodb)                      | NoSQL Database                                                                |
-| [EC2 Container Service (ECS)](/integrations/ecs)          | container management service that supports Docker containers                  |
+| [EC2 Container Service (ECS)](/integrations/amazon_ecs)          | container management service that supports Docker containers                  |
 | [Elastic Beanstalk](/integrations/amazon_elasticbeanstalk)           | easy-to-use service for deploying and scaling web applications and services   |
 | [Elastic Block Store (EBS)](/integrations/amazon_ebs)         | persistent block level storage volumes                                        |
 | [ElastiCache](/integrations/amazon_elasticache)               | in-memory cache in the cloud                                                  |

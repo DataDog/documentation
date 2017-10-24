@@ -1167,9 +1167,9 @@ You can send the request to support@datadoghq.com and we will add it to our feat
 [4]: /ja/monitors/
 [5]: /ja/graphing/infrastructure/hostmap
 [6]: /ja/developers/metrics/#tags
-[7]: /ja/integrations/aws/
+[7]: /ja/integrations/amazon_web_services/
 [8]: /ja/graphing/infrastructure/hostmap
-[9]: /ja/integrations/aws/
+[9]: /ja/integrations/amazon_web_services/
 [10]: https://app.datadoghq.com/account/settings#integrations/postgres
 [11]: https://app.datadoghq.com/account/billing
 [12]: https://app.datadoghq.com/account/billing_history
