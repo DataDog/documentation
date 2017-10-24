@@ -133,6 +133,9 @@
 - id: customnav_tracingnav_rb
   translation: "Ruby"
 
+- id: customnav_tracingnav_docker
+  translation: "Docker"
+
 - id: customnav_tracingnav_api
   translation: "Tracing API"
 
@@ -232,9 +235,6 @@
 
 - id: customnav_tracingnav_environments
   translation:  "Environments"
-
-- id: customnav_tracingnav_help
-  translation:  "APM Support"
 
 - id: customnav_tracingnav_langs
   translation:  "Supported Languages"
