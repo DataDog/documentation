@@ -8,6 +8,8 @@ $ddpurple:    #774DA2;
   .nav-link {
     color:#fff;
     padding: 0.8rem 1rem;
+    -webkit-font-smoothing:subpixel-antialiased;
+    -moz-osx-font-smoothing:auto;
     &.active,
     &:hover {
       border-bottom:1px solid $ddpurple;
