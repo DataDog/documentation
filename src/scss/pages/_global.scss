@@ -34,6 +34,7 @@ a {
   color:#0076FF;
 }
 
+// standard code highlighting
 // todo: do we want all code blocks like this or just ones on api, move this
 pre {
   display: block;
@@ -43,13 +44,14 @@ pre {
   line-height: 1.428571429;
   word-break: break-all;
   word-wrap: break-word;
-  color: #FFF;
-  background-color: #0F0F0F;
+  color: #000000;
+  background-color: #F8F8F8;
   border-radius: 4px;
   font-family: $font-family-monospace;
   code {
     padding: 0;
     font-size: 12px;
+    color:#000000;
     white-space: pre-wrap;
     background-color: transparent;
     border-radius: 0;
@@ -58,32 +60,13 @@ pre {
 }
 
 code {
+  color:#9B00FF;
   padding-top:0;
   padding-bottom:0;
+  font-size:12px;
+  line-height:24px;
 }
 
-// hide the code blocks by default
-.code-block {
-  display:none;
-}
-// show python by default
-.code-block.code-block-python {
-  display:block;
-  visibility: visible;
-}
-
-
-.api-code code {
-  background-color:#0F0F0F;
-  color:#D0021B;
-}
-.api-code ul {
-  list-style-type:none;
-  padding:0;
-  li {
-    margin:0 0 4px 0;
-  }
-}
 
 p {
   // todo: can i set this with a bootstrap variable?
