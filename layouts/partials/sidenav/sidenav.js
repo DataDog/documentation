@@ -15,7 +15,7 @@ $(document).ready(function () {
                     'navLink': $(this),
                     'navLinkPrev': link,
                     'id': id,
-                    'headerTop': header.offset().top,
+                    'header': header,
                     'isH2': header.is('h2'),
                     'isH3': header.is('h3')
                 });
@@ -37,7 +37,7 @@ $(document).ready(function () {
             //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
             obj.navLink.removeClass('toc_scrolled');
 
-            if( (winTop >= obj.headerTop - localOffset) && (winTop < nextobj.headerTop - localOffset) ) {
+            if( (winTop >= obj.header.offset().top - localOffset) && (winTop < nextobj.header.offset().top - localOffset) ) {
                 //console.log(obj.navLink);
                 obj.navLink.addClass('toc_scrolled');
                 obj.navLinkPrev.addClass('toc_open');

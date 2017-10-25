@@ -105,4 +105,20 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#TableOfContents a, .sidenav-api a').on('click', function(e) {
+        var href = $(this).attr('href');
+        if(href.substr(0, 1) === '#') {
+            var htag = $(''+href);
+            var customPadding = 10; // how much till it looks good with eye
+            var offset = 64 + customPadding;
+            var url = window.location.href.replace(window.location.hash, '');
+            if(htag.length) {
+                $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
+                //$("html, body").scrollTop(htag.offset().top - offset);
+                window.history.pushState(null, null, url + href);
+                return false;
+            }
+        }
+    });
 });
