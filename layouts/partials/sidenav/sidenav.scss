@@ -17,13 +17,7 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   }
 }
 
-aside.sidenav {
-  background:#F8F8F8;
-  width:100%;
-  height:100%;
-  position:relative;
-  z-index:2;
-  padding-right:15px;
+.side {
   &:before,
   &:after {
     content:"";
@@ -35,11 +29,21 @@ aside.sidenav {
     bottom:0;
     background:#F8F8F8;
     z-index:-1;
+    height:100%;
   }
   &:after {
     background:#F2F2F2;
     height:50px;
   }
+}
+
+aside.sidenav {
+  background:#F8F8F8;
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+  padding-right:15px;
   &> .row {
     &:before,
     &:after {
@@ -73,6 +77,7 @@ aside.sidenav {
       padding:10px 0 0 3px;
       border-radius:0;
       position:absolute;
+      left:0;
     }
     .form-control:focus {
       border-color:$ddpurple;
