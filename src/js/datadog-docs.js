@@ -1,12 +1,7 @@
 $(document).ready(function () {
 
-    // Allow language selection via URL GET parameter
-    $(window).on('load', function () {
-        var s = window.location.search.match(/lang=[^&]+/gi);
-        if (s) {
-            var lang = s[0].replace(/lang=/gi, '');
-            //$('a[data-lang="' + lang + '"]').click();
-        }
+    $('table').each(function() {
+        $(this).addClass('table-responsive-sm');
     });
 
     // API page
