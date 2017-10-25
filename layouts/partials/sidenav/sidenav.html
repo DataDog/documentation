@@ -26,7 +26,9 @@
             </form>
             <ul class="list-unstyled">
                 {{ range $index, $element := $.Site.Data.sidenav.general.nav }}
-                    {{ $active_page := (or (and (in $dot.RelPermalink $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
+                    {{ $split_urls := split $dot.RelPermalink "/" }}
+                    {{ $url_first := print "/" (index $split_urls 1) "/" }}
+                    {{ $active_page := (or (and (eq $url_first $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
                     {{ if not $element.hide }}
                         <li>
                             <a href="{{ $element.link }}" {{if $active_page }}class="active"{{ end }}>
