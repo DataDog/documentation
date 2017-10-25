@@ -230,6 +230,16 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 * `syslog.appname`
 
+### Modify reserved attributes mapping
+
+You can now control the global hostname, service, timestamp and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
+
+Image 1
+
+To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
+
+Image 2
+
 ## What's next
 
 * Learn how to [explore your logs](/logs/explore)
