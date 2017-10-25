@@ -113,16 +113,6 @@ aside.sidenav {
         font-weight: 600;
         padding:6px 0 0 2px;
         display:block;
-        &:hover,
-        &.active {
-          color:$ddpurple;
-          &> .hover {
-            display:inline;
-          }
-          &> .static {
-            display:none;
-          }
-        }
         .hover {
           display:none;
         }
@@ -198,4 +188,32 @@ aside.sidenav {
       }
     }
   }
+}
+
+
+//@include media-breakpoint-up(xs) { ... }
+@media (min-width: 576px) {
+
+  aside.sidenav {
+    ul {
+      li {
+        a {
+          &:hover,
+          &.active {
+            color:$ddpurple;
+            &> .hover {
+              display:inline;
+            }
+            &> .static {
+              display:none;
+            }
+          }
+          .hover {
+            display:none;
+          }
+        }
+      }
+    }
+  }
+
 }

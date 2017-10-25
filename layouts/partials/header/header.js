@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('header #navbar-sidenav').on('show.bs.collapse', function () {
-        console.log('showing');
         $('body').css('overflow', 'hidden');
         $(this).css('overflow', 'scroll');
     }).on('hide.bs.collapse', function () {

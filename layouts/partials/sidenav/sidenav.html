@@ -1,23 +1,17 @@
 {{ $dot := . }}
 
 <div class="mobilequicknav row align-items-center no-gutters">
-    <div class="col text-center">
-        <a href="https://www.datadoghq.com">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
-        </a>
-    </div>
-    <div class="col text-center">
-        <a href="/">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
-            Docs
-        </a>
-    </div>
-    <div class="col text-center">
-        <a href="/api/">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
-            API
-        </a>
-    </div>
+    <a href="https://www.datadoghq.com" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
+    </a>
+    <a href="/" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
+        Docs
+    </a>
+    <a href="/api/" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
+        API
+    </a>
 </div>
 
 <aside class="sidenav">

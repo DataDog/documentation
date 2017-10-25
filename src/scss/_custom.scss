@@ -76,23 +76,6 @@ $headings-font-weight:600;
 
 // this button is generated from theme colors but we want to have slight variant colors
 .btn-outline-secondary {
-  /*border-color: #D6D6D6;
-  &:hover {
-    border-color: $ddpurple;
-    background-color: $ddpurple;
-  }
-  &:active,
-  &.active,
-  &.mixitup-control-active,
-  .show > &.dropdown-toggle {
-    color: #fff;
-    background-color: $ddpurple;
-    border-color: $ddpurple;
-  }
-  &:focus, &.focus {
-    box-shadow: none;
-  }*/
-
   border-color: #D6D6D6;
 
   &:hover {
@@ -117,7 +100,14 @@ $headings-font-weight:600;
     border-color: $ddpurple;
     box-shadow: none;
   }
+}
 
+// btn outline primary remove that dropshadow
+.btn-outline-primary:focus, .btn-outline-primary.focus,
+.btn-outline-primary:active:not([disabled]):not(.disabled),
+.btn-outline-primary.active:not([disabled]):not(.disabled),
+.show > .btn-outline-primary.dropdown-toggle {
+  box-shadow:none;
 }
 
 .btn-outline-semi-trans {
@@ -149,14 +139,14 @@ $headings-font-weight:600;
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }
 
+
+// remove outlines
 button:focus {
   outline: none;
 }
-
 .form-control:focus {
   box-shadow: none;
 }
-
 
 
 // Tables
