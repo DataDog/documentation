@@ -73,6 +73,7 @@ body > header {
     }
   }
 
+  // mobile
   .navbar {
     padding-left:0;
     padding-right:0;
@@ -81,6 +82,11 @@ body > header {
       padding-left:15px;
       padding-right:15px;
       padding-bottom:7px;
+    }
+    .navbar-brand {
+      img {
+        height:39px;
+      }
     }
   }
 
