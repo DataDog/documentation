@@ -6,14 +6,17 @@ $(document).ready(function () {
     function buildMap() {
         mapping = [];
         var link = null;
-        $('.sidenav ul a').each(function() {
+        $('.side .sidenav ul a').each(function() {
             var href = $(this).attr('href');
             var id = href.replace('#', '').replace(' ','-');
             var header = $('[id="'+id+'"]');
+            var navParentLinks = $(this).parents('#TableOfContents').find('ul > li').has($(this)).find('> a');
+
             if(header.length) {
                 mapping.push({
                     'navLink': $(this),
                     'navLinkPrev': link,
+                    'navParentLinks': navParentLinks,
                     'id': id,
                     'header': header,
                     'isH2': header.is('h2'),
@@ -29,6 +32,8 @@ $(document).ready(function () {
     function onScroll() {
         var winTop = $(window).scrollTop();
         var localOffset = 120;
+
+        $('.toc_open').removeClass('toc_open');
         for(var i = 0; i < mapping.length; i++) {
             var obj = mapping[i];
             var j = i+1;
@@ -40,7 +45,11 @@ $(document).ready(function () {
             if( (winTop >= obj.header.offset().top - localOffset) && (winTop < nextobj.header.offset().top - localOffset) ) {
                 //console.log(obj.navLink);
                 obj.navLink.addClass('toc_scrolled');
-                obj.navLinkPrev.addClass('toc_open');
+                // add toc open to parents of this toc_scrolled
+                //console.log(obj.navLink.parents('ul'));
+                obj.navParentLinks.each(function() {
+                    $(this).addClass('toc_open');
+                });
             }
         }
 
