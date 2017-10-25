@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    // bring back size() for jquery pajinate
+    // The number of elements contained in the matched element set
+    jQuery.fn.size = function() {
+        return this.length;
+    };
+
     $('table').each(function() {
         $(this).addClass('table-responsive-sm');
     });
@@ -89,6 +95,7 @@ $(document).ready(function () {
 
                 // load pagination
                 $('#tipue_search_content').pajinate({
+                    item_container_id: '.content',
                     num_page_links_to_display: 9,
                     items_per_page: 7,
                     wrap_around: false,
