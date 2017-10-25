@@ -6,6 +6,13 @@ $(document).ready(function() {
         $('body').css('overflow', '');
         $(this).css('overflow', '');
     });
+
+    $('header #navbar-sidenav a').on('click', function() {
+        var href = $(this).attr('href');
+        if(href.substr(0, 1) === '#') {
+            $('header .navbar-toggler').click();
+        }
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
