@@ -110,6 +110,7 @@ $headings-font-weight:600;
   box-shadow:none;
 }
 // we want the dropdowns to be outline like button
+.btn-outline-primary,
 .show > .btn-outline-primary.dropdown-toggle {
   background-color:#fff;
   color:$ddpurple;
