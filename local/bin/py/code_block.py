@@ -35,6 +35,7 @@ def inline_code(doc_page,pattern_array):
         pass
 
 def content_parkour(path,pattern_array):
+    print("Starting to inline highlights for code blocks")
     for doc_page in glob.iglob(path + "**/*.md", recursive=True):
         inline_code(doc_page, pattern_array)
 
