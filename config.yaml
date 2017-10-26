@@ -319,7 +319,7 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_langs
           name: "languages"
-          url: "/#"
+          url: "/tracing/"
           weight: 60
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_go

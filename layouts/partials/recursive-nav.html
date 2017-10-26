@@ -4,9 +4,10 @@
     {{ range $index, $element := .data }}
         {{ $split_urls := split $ctx.RelPermalink "/" }}
         {{ $url_first := print "/" (index $split_urls 1) "/" }}
-        {{ $active_page := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $ctx.RelPermalink $element.URL)) }}
+        {{ $url_first_second := print $url_first (index $split_urls 2) "/" }}
+        {{ $active_page := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $url_first_second $element.URL) (eq $ctx.RelPermalink $element.URL)) }}
         <li {{if $active_page }}class="active"{{ end }}>
-            <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}">
+            <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}" {{if $active_page }}class="active"{{ end }}>
                 <span>{{ $element.Name }}</span>
             </a>
             {{ if $element.Children }}
