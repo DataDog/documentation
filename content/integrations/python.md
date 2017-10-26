@@ -17,7 +17,7 @@ The Python integration enables you to monitor any custom metric by instrumenting
         pip install datadog
 
 2.  Start instrumenting your code:
-{{< highlight python>}}
+```python
 # Configure the module according to your needs
 from datadog import initialize
 
@@ -49,7 +49,7 @@ from datadog import ThreadStats
 stats = ThreadStats()
 stats.start()
 stats.increment('home.page.hits')
-{{< /highlight >}}
+```
 
 ### Configuration
 
