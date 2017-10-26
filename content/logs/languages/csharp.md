@@ -218,7 +218,7 @@ If you have followed the instructions you should be see in your file (for exampl
 ```
 
 
-### Configure the Datadog agent
+### Configure your Datadog agent
 
 Create a `csharp.yaml` file in your `conf.d/` folder with the following content:
 
@@ -246,5 +246,3 @@ logs:
 ```
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
-
-

@@ -101,7 +101,7 @@ Logging.appenders.file(
 
 If you want to tweak the log layout, all items available can be found directly from the [source repository](https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100)
 
-### Configure the Datadog agent.
+### Configure your Datadog agent.
 
 Create a `ruby.yaml` file in your `conf.d/` folder with the following content:
 
