@@ -9,7 +9,7 @@ customnav: accountmanagementnav
 
 There are two ways to have multiple accounts have access to the same data. First, you can simply add multiple users to the same team from the [Team Page][1]. The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between orgs from the avatar menu in the main menu.
 
-{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" style="width:200px;" alt="Switch Accounts" responsive="true" >}}
+{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" >}}
 
 ## Organizations
 

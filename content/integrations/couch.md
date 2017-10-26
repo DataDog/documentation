@@ -8,7 +8,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph"  style="width:60%;" >}}
+{{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph" >}}
 
 ## Overview
 //get-overview-from-git//

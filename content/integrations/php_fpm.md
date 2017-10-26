@@ -10,7 +10,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/phpfpm/phpfpmoverview.png" style="max-width: 600px;" alt="PHP overview" responsive="true" >}}
+{{< img src="integrations/phpfpm/phpfpmoverview.png" alt="PHP overview" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

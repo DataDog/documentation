@@ -31,21 +31,21 @@ Dashboard templating allows you to create dashboards that use variables like `$s
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 
-{{< img src="graphing/dashboards/edit-template-variables.png" style="width:70%;" alt="edit template variable" responsive="true" >}}
+{{< img src="graphing/dashboards/edit-template-variables.png" alt="edit template variable" responsive="true" >}}
 
 This will open the template variable editing panel.
 
-{{< img src="graphing/dashboards/redis-template-var.png" alt="redis template var" style="width:80%;" responsive="true" >}}
+{{< img src="graphing/dashboards/redis-template-var.png" alt="redis template var" responsive="true" >}}
 
 A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
 
 ## Using template variables in graph editors
 
-{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" style="width:80%;"  alt="redis-tpl graph editor" responsive="true"  >}}
+{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="redis-tpl graph editor" responsive="true"  >}}
 
 Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` will be scoped to `redis_port:6379`.
 
-{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="redis tpl selected" style="width:85%;"  responsive="true" >}}
+{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="redis tpl selected" responsive="true" >}}
 
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.

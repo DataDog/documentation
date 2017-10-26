@@ -15,13 +15,14 @@
     {{- partial "meta.html" . -}}
     {{- end -}}
 </head>
-<body>
+{{- $bodyClass := $.Scratch.Get "bodyClass" -}}
+<body class="{{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
     {{ partial "header/header.html" . }}
 
     <div class="container">
         <div class="row">
-            <div class="d-none d-lg-block col-12 col-sm-4 col-md-4 col-lg-4 col-xl-3">
+            <div class="d-none d-lg-flex col-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
             <div class="col-12 col-lg-8 col-xl-9 main">

@@ -32,7 +32,7 @@ The time range allows you to display logs within a given time period. It appears
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="logs/explore/timerange.png" alt="Timerange" style="width:75%;">}}
+{{< img src="logs/explore/timerange.png" alt="Timerange" responsive="true" >}}
 
 ## Log list
 The log list is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
@@ -73,7 +73,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, you simply need to click on it and add it as a Facet:
-{{< img src="logs/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
+{{< img src="logs/explore/create_facet.png" alt="Create Facet" responsive="true" >}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).
 
@@ -88,7 +88,7 @@ Expand a facet to access advanced search options like
 Including or excluding a pattern within a facet.
 
 For example: You want to select all the url values that start with “/test_5”: 
-{{< img src="logs/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
+{{< img src="logs/explore/expanded_view.png" alt="Expanded view" responsive="true" >}}
 
 ## Search bar
 

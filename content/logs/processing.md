@@ -28,15 +28,15 @@ With pipelines, you can parse and enrich your logs by chaining them sequentially
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
 So for instance a processing pipeline can transform this log:
-{{< img src="logs/processing/original_log.png" alt="original log" style="width:60%;" >}}
+{{< img src="logs/processing/original_log.png" alt="original log" responsive="true" >}}
 
 into this log: 
 
-{{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " style="width:60%;">}}
+{{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " responsive="true" >}}
 
 With one single pipeline:
 
-{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" style="width:90%;">}}
+{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" >}}
 
 Pipelines can take logs from a wide variety of formats and translate them all into a common format in Datadog.
 
@@ -50,7 +50,7 @@ The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
 The log list shows which logs your pipeline applies to:
 
-{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" style="width:90%;">}}
+{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" >}}
 
 ### Integration Pipelines
 
@@ -99,11 +99,11 @@ Use this processor if you want to assign some attributes as the official severit
 
 It transforms this log:
 
-{{< img src="logs/processing/log_pre_severity.png" alt=" Log pre severity " style="width:60%;">}}
+{{< img src="logs/processing/log_pre_severity.png" alt=" Log pre severity " responsive="true" >}}
 
 Into this log:
 
-{{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" style="width:60%;">}}
+{{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" >}}
 
 However, beware that each incoming severity value is mapped as follows:
 
@@ -126,10 +126,10 @@ This processor remaps any attribute(s) to another one, for instance here it rema
 
 It transforms this log:
 
-{{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " style="width:60%;">}}
+{{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" >}}
 
 Into this log:
-{{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " style="width:60%;">}}
+{{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" >}}
 
 ### URL Parser 
 

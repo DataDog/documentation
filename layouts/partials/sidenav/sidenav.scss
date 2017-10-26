@@ -8,22 +8,7 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   display:none;
 }
 
-.sidenav-api {
-  .sticky {
-    top:65px;
-  }
-  ul:first-of-type {
-    margin-left:10px;
-  }
-}
-
-aside.sidenav {
-  background:#F8F8F8;
-  width:100%;
-  height:100%;
-  position:relative;
-  z-index:2;
-  padding-right:15px;
+.side {
   &:before,
   &:after {
     content:"";
@@ -35,11 +20,22 @@ aside.sidenav {
     bottom:0;
     background:#F8F8F8;
     z-index:-1;
+    height:100%;
   }
   &:after {
     background:#F2F2F2;
     height:50px;
   }
+}
+
+aside.sidenav {
+  background:#F8F8F8;
+  width:100%;
+  //height:100%;
+  min-height:1000px;
+  position:relative;
+  z-index:2;
+  padding-right:15px;
   &> .row {
     &:before,
     &:after {
@@ -48,7 +44,7 @@ aside.sidenav {
       margin-left:-2000px;
       left:0;
       top:0;
-      right:0;
+      right: -15px;
       bottom:0;
       background:#F8F8F8;
       z-index:-1;
@@ -60,7 +56,7 @@ aside.sidenav {
   }
 
   h4 {
-    padding:10px 0 10px 10px;
+    padding:10px 0 10px 6px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
@@ -70,12 +66,17 @@ aside.sidenav {
     .input-group-addon {
       background:none;
       border:none;
-      border-bottom:1px solid #D3D3D3;
       padding:10px 0 0 3px;
       border-radius:0;
+      position:absolute;
+      left:0;
     }
     .form-control:focus {
       border-color:$ddpurple;
+      padding-left:5px;
+      & ~ .input-group-addon {
+        display:none;
+      }
     }
     input {
       border-top:none;
@@ -85,7 +86,8 @@ aside.sidenav {
       border-radius:0;
       font-size:18px;
       padding-bottom:3px;
-      padding-left: 5px;
+      padding-left: 30px;
+      transition: all .1s ease-in;
     }
   }
   ul {
@@ -102,16 +104,6 @@ aside.sidenav {
         font-weight: 600;
         padding:6px 0 0 2px;
         display:block;
-        &:hover,
-        &.active {
-          color:$ddpurple;
-          &> .hover {
-            display:inline;
-          }
-          &> .static {
-            display:none;
-          }
-        }
         .hover {
           display:none;
         }
@@ -138,6 +130,8 @@ aside.sidenav {
         text-overflow: ellipsis;     /** IE6+, Firefox 7+, Opera 11+, Chrome, Safari **/
         -o-text-overflow: ellipsis;  /** Opera 9 & 10 **/
         width: 250px;
+        -webkit-font-smoothing:subpixel-antialiased;
+        -moz-osx-font-smoothing:auto;
       }
       #TableOfContents {
         padding:0 0 20px 40px;
@@ -187,4 +181,43 @@ aside.sidenav {
       }
     }
   }
+}
+
+aside.sidenav-api {
+  .sticky {
+    top:65px;
+  }
+  ul:first-of-type {
+    margin-left:10px;
+  }
+  h4 {
+    padding-left: 10px;
+  }
+}
+
+//@include media-breakpoint-up(xs) { ... }
+@media (min-width: 576px) {
+
+  aside.sidenav {
+    ul {
+      li {
+        a {
+          &:hover,
+          &.active {
+            color:$ddpurple;
+            &> .hover {
+              display:inline;
+            }
+            &> .static {
+              display:none;
+            }
+          }
+          .hover {
+            display:none;
+          }
+        }
+      }
+    }
+  }
+
 }

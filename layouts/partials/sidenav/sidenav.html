@@ -1,38 +1,34 @@
 {{ $dot := . }}
 
 <div class="mobilequicknav row align-items-center no-gutters">
-    <div class="col text-center">
-        <a href="https://www.datadoghq.com">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
-        </a>
-    </div>
-    <div class="col text-center">
-        <a href="/">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
-            Docs
-        </a>
-    </div>
-    <div class="col text-center">
-        <a href="/api/">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
-            API
-        </a>
-    </div>
+    <a href="https://www.datadoghq.com" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
+    </a>
+    <a href="/" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
+        Docs
+    </a>
+    <a href="/api/" class="col text-center">
+        <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
+        API
+    </a>
 </div>
 
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            <h4>Datadog Docs</h4>
-            <form class="sidenav-search" action="/search/">
+            <a href="{{.Site.BaseURL}}"><h4>Datadog Docs</h4></a>
+            <form class="sidenav-search" action="{{.Site.BaseURL}}search/">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png") }}" /></span>
                     <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search"/>
+                    <span class="input-group-addon" id="search-icon"><img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png") }}" /></span>
                 </div>
             </form>
             <ul class="list-unstyled">
                 {{ range $index, $element := $.Site.Data.sidenav.general.nav }}
-                    {{ $active_page := (or (and (in $dot.RelPermalink $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
+                    {{ $split_urls := split $dot.RelPermalink "/" }}
+                    {{ $url_first := print "/" (index $split_urls 1) "/" }}
+                    {{ $active_page := (or (and (eq $url_first $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
                     {{ if not $element.hide }}
                         <li>
                             <a href="{{ $element.link }}" {{if $active_page }}class="active"{{ end }}>
@@ -45,6 +41,20 @@
                                 {{ if $dot.Params.platform }}<span class="toctitle">{{ $dot.Params.platform | upper }}</span>{{ end }}
                                 {{ $dot.TableOfContents }}
                             {{ end }}
+                            {{/* comments here {{ if (and (in ($element.display_name | lower) "integrations") (in $dot.RelPermalink "integrations") ) }}
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li><a data-ref="filter" data-filter="all" href="#all" class="">ALL</a></li>
+                                            {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
+                                            <li><a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="">{{ $e }}</a></li>
+                                            {{ end }}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            {{ end }}*/}}
                         </li>
                     {{ end }}
                 {{ end }}
@@ -52,3 +62,5 @@
         </div>
     </div>
 </aside>
+
+

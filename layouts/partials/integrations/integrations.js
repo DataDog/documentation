@@ -1,14 +1,47 @@
-$(document).ready(function () { });
+$(document).ready(function () {
+    var finder_state = 0;  // closed
+    var titles = document.getElementsByClassName('title');
+
+    $(window).on('focus', function () {
+        if (finder_state) {
+            $.each(titles, function (e, v) {
+                v.style.display = 'none';
+            });
+            $('.integration-row').removeClass('find');
+            finder_state = 0;
+        }
+    });
+
+    Mousetrap.bind(['command+f', 'control+f'], function (e) {
+        if (!finder_state) {
+            $.each(titles, function (e, v) {
+                v.style.display = 'block';
+            });
+            $('.integration-row').addClass('find');
+            finder_state = 1;
+        }
+    });
+
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     var mobileBtn = document.querySelector('#dropdownMenuLink');
     var controls = document.querySelector('[data-ref="controls"]');
-    var filters = controls.querySelectorAll('[data-ref="filter"]');
+    var filters = null;
     var mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
-    var mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
+    var mobilefilters = null;
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
+
+    if(controls) {
+        filters = controls.querySelectorAll('[data-ref="filter"]');
+    }
+    if(mobilecontrols) {
+        mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
+    }
+
+    if(!container) return;
 
     var mixer = mixitup(container, {
         animation: {

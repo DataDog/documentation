@@ -77,21 +77,42 @@ $headings-font-weight:600;
 // this button is generated from theme colors but we want to have slight variant colors
 .btn-outline-secondary {
   border-color: #D6D6D6;
+
   &:hover {
     border-color: $ddpurple;
     background-color: $ddpurple;
   }
-  &:active,
-  &.active,
-  &.mixitup-control-active,
-  .show > &.dropdown-toggle {
-    color: #fff;
-    background-color: $ddpurple;
-    border-color: $ddpurple;
-  }
-  &:focus, &.focus {
+
+  &:focus,
+  &.focus {
     box-shadow: none;
   }
+
+  &.disabled,
+  &:disabled {
+
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    background-color: $ddpurple;
+    border-color: $ddpurple;
+    box-shadow: none;
+  }
+}
+
+// btn outline primary remove that dropshadow
+.btn-outline-primary:focus, .btn-outline-primary.focus,
+.btn-outline-primary:active:not([disabled]):not(.disabled),
+.btn-outline-primary.active:not([disabled]):not(.disabled),
+.show > .btn-outline-primary.dropdown-toggle {
+  box-shadow:none;
+}
+// we want the dropdowns to be outline like button
+.show > .btn-outline-primary.dropdown-toggle {
+  background-color:#fff;
+  color:$ddpurple;
 }
 
 .btn-outline-semi-trans {
@@ -121,4 +142,57 @@ $headings-font-weight:600;
 // this is for tags on the integrations page and elsewhere as needed
 .btn-sm-tag {
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
+}
+
+
+// remove outlines
+button:focus {
+  outline: none;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+
+// Tables
+$table-border-color: #D6D6D6;
+// set default table to look like .table
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $spacer;
+  background-color: $table-bg; // Reset for nesting within parents with `background-color`.
+
+  th,
+  td {
+    padding: $table-cell-padding;
+    vertical-align: top;
+    border-top: $table-border-width solid $table-border-color;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: (2 * $table-border-width) solid $table-border-color;
+  }
+
+  tbody + tbody {
+    border-top: (2 * $table-border-width) solid $table-border-color;
+  }
+
+  table,
+  .table {
+    background-color: $body-bg;
+  }
+}
+
+// set table headers to match design
+table,
+.table {
+  thead th {
+    color: #969696;
+    text-transform: Uppercase;
+  }
+  td {
+    color:#000000;
+  }
 }

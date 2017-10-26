@@ -1,12 +1,13 @@
 $(document).ready(function () {
 
-    // Allow language selection via URL GET parameter
-    $(window).on('load', function () {
-        var s = window.location.search.match(/lang=[^&]+/gi);
-        if (s) {
-            var lang = s[0].replace(/lang=/gi, '');
-            //$('a[data-lang="' + lang + '"]').click();
-        }
+    // bring back size() for jquery pajinate
+    // The number of elements contained in the matched element set
+    jQuery.fn.size = function() {
+        return this.length;
+    };
+
+    $('table').each(function() {
+        $(this).addClass('table-responsive-sm');
     });
 
     // API page
@@ -94,6 +95,7 @@ $(document).ready(function () {
 
                 // load pagination
                 $('#tipue_search_content').pajinate({
+                    item_container_id: '.content',
                     num_page_links_to_display: 9,
                     items_per_page: 7,
                     wrap_around: false,
@@ -103,4 +105,20 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#TableOfContents a, .sidenav-api a').on('click', function(e) {
+        var href = $(this).attr('href');
+        if(href.substr(0, 1) === '#') {
+            var htag = $(''+href);
+            var customPadding = 10; // how much till it looks good with eye
+            var offset = 64 + customPadding;
+            var url = window.location.href.replace(window.location.hash, '');
+            if(htag.length) {
+                $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
+                //$("html, body").scrollTop(htag.offset().top - offset);
+                window.history.pushState(null, null, url + href);
+                return false;
+            }
+        }
+    });
 });

@@ -73,6 +73,7 @@ body > header {
     }
   }
 
+  // mobile
   .navbar {
     padding-left:0;
     padding-right:0;
@@ -82,10 +83,30 @@ body > header {
       padding-right:15px;
       padding-bottom:7px;
     }
+    .navbar-brand {
+      img {
+        height:39px;
+      }
+    }
   }
 
   #navbar-sidenav {
     background:#F8F8F8;
+    position:relative;
+    &:before {
+      content:"";
+      top:0px;
+      left:0px;
+      right:0px;
+      height:50px;
+      position:absolute;
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#efefef+0,ffffff+100 */
+      background: #efefef; /* Old browsers */
+      background: -moz-linear-gradient(top, #efefef 0%, #F8F8F8 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, #efefef 0%,#F8F8F8 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, #efefef 0%,#F8F8F8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
+    }
     .container {
       padding:0;
     }
@@ -114,6 +135,7 @@ body > header {
       display:none;
     }
     .sidenav-search {
+      margin-top:10px;
       margin-right:0;
     }
   }

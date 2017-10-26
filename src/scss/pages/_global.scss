@@ -1,0 +1,149 @@
+body {
+  font-family: $font-family-sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1;
+
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1, ss03=1, ss06=1";
+  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  /** "ss01" 1 is for the alternate 'a' character */
+  /** "ss05" 1 is for alternate 'y' character */
+  font-weight: 200;
+  word-wrap: break-word;
+}
+
+body {
+  padding-top:129px;
+  //@include media-breakpoint-down(md)
+  @media (max-width: 991px) {
+    padding-top:65px;
+  }
+}
+
+a {
+  color:#0076FF;
+}
+
+// standard code highlighting
+// todo: do we want all code blocks like this or just ones on api, move this
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #000000;
+  background-color: #F8F8F8;
+  border-radius: 4px;
+  font-family: $font-family-monospace;
+  code {
+    padding: 0;
+    font-size: 12px;
+    color:#000000;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+    font-family: $font-family-monospace;
+  }
+}
+
+code {
+  color:#9B00FF;
+  padding-top:0;
+  padding-bottom:0;
+  font-size:12px;
+  line-height:24px;
+}
+
+
+p {
+  // todo: can i set this with a bootstrap variable?
+  font-size:18px;
+  color:#4A4A4A;
+  line-height:22px;
+}
+
+.main {
+  padding-top:30px;
+  padding-bottom:100px;
+  & > a,
+  & > p > a,
+  & > ol li a,
+  & > ul li a {
+    border-bottom: 1px solid #0076FF;
+    &:hover {
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+#dropdownMenuLink {
+  text-decoration: none !important;
+}
+.dropdown-item {
+  text-decoration: none !important;
+}
+
+
+// datadog cards
+.cards-dd {
+  margin-top:14px;
+  .card {
+    text-decoration: none;
+    img {
+
+    }
+    &:hover {
+      border-color: $ddpurple;
+      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .2);
+      .hover {
+        display: inline;
+      }
+      .static {
+        display: none;
+      }
+      .card-title {
+        color: $ddpurple;
+      }
+    }
+    .hover {
+      display: none;
+    }
+    .card-title {
+      color: #000;
+      padding-top: 6px;
+    }
+    .card-text {
+      display: block;
+      padding: 0 20px;
+    }
+  }
+}
+
+
+// Breakpoint styles go here...
+
+//@include media-breakpoint-down(md)
+@media (max-width: 767px) {
+  h1 {
+    font-size:42px;
+  }
+}
