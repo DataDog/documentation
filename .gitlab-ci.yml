@@ -103,8 +103,8 @@ build_live:
     - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
-    - placehold_translations
     - code_block_udpate
+    - placehold_translations
     - build_hugo_site
     - minify_html
     - collect_static_assets
