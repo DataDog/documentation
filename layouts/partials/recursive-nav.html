@@ -1,0 +1,13 @@
+{{ $dot := . }}
+<ul>
+    {{ range $index, $element := .data }}
+    <li>
+        <a href="{{ $dot.Site.BaseURL }}/{{ $element.URL }}">
+            <span>{{ $element.Name }}</span>
+        </a>
+        {{ if $element.Children }}
+            {{ partial "recursive-nav.html" (dict "context" . "data" $element.Children) }}
+        {{ end }}
+    </li>
+    {{ end }}
+</ul>
