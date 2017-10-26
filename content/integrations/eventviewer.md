@@ -47,7 +47,8 @@ You can filters on the following properties:
 For each filter, you will add an instance in the configuration file at `conf.d/win32_event_log.yaml`.
 
 Here are some example filters you could use:
-{{< highlight yaml>}}
+
+```yaml
 instances:
     # The following will capture errors and warnings from SQL Server which
     # puts all events under the MSSQLSERVER source and tag them with #sqlserver.
@@ -68,7 +69,7 @@ instances:
             - Error
         log_file:
             - System
-{{< /highlight >}}
+```
 
 2 - Restart the Agent using the Agent Manager (or restart the service)
 {{< insert-example-links conf="win32_event_log" check="win32_event_log" >}}
@@ -77,7 +78,7 @@ instances:
 
 Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
 
-{{< highlight shell>}}
+```shell
 Checks
 ======
 
@@ -87,4 +88,4 @@ Checks
   ---------------
       - instance #0 [OK]
       - Collected 0 metrics, 2 events & 1 service check
-{{< /highlight >}}
+```

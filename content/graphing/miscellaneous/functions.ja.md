@@ -36,7 +36,7 @@ Here is an example of system.load.1 with the hour_before value shown as a dotted
 For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 
-{{< highlight json >}}
+```json
 { "viz": "timeseries",
   "requests": [
     {
@@ -60,7 +60,8 @@ For now, using functions like hour_before is out of scope for the graphical edit
   ],
   "events": []
 }
-{{< /highlight >}}
+```
+
 ### day_before()
 
 Here is an example of nginx.net.connections with the day_before value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
@@ -70,7 +71,7 @@ Here is an example of nginx.net.connections with the day_before value shown as a
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 
-{{< highlight json >}}
+```json
 {
   "requests": [
     {
@@ -90,16 +91,17 @@ For now, using functions like day_before is out of scope for the graphical edito
   ],
   "viz": "timeseries"
 }
-{{< /highlight >}}
+```
+
 ### week_before()
+
 Here is an example of cassandra.db.read_count with the week_before value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
 {{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" >}}
 
 For now, using functions like week_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
-{{< highlight json >}}
+```json
 {
   "requests": [
     {
@@ -121,7 +123,8 @@ For now, using functions like week_before is out of scope for the graphical edit
   ],
   "viz": "timeseries"
 }
-{{< /highlight >}}
+```
+
 ### month_before()
 Here is an example of aws.ec2.cpuutilization with the month_before value shown as a thin, solid line.
 
@@ -130,7 +133,7 @@ Here is an example of aws.ec2.cpuutilization with the month_before value shown a
 For now, using functions like month_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 
-{{< highlight json >}}
+```json
 {
   "requests": [
     {
@@ -152,7 +155,8 @@ For now, using functions like month_before is out of scope for the graphical edi
   ],
   "viz": "timeseries"
 }
-{{< /highlight >}}
+```
+
 ## Rate
 ### per_second()
 The rate at which the metric changes per second for a given metric.

@@ -20,7 +20,8 @@ The graph definition language is well-formed JSON and is structured in four part
 4. Y Axis
 
 Here is how they fit together in a JSON dictionary:
-{{< highlight json >}}
+
+```json
 {
   "requests": [
     {
@@ -37,7 +38,7 @@ Here is how they fit together in a JSON dictionary:
     "yaxisoptionkey": "yaxisoptionvalue"
   }
 }
-{{< /highlight >}}
+```
 
 In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
 
@@ -106,7 +107,8 @@ For any given metric, data may come from a number of hosts. The data will normal
 
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -118,12 +120,13 @@ example we graph 5-minute load and its double:
     }
   ]
 }
-{{< /highlight >}}
+```
 
 You can also add, substract, multiply and divide a Series. Beware that
 Datadog does not enforce consistency at this point so you *can* divide
 apples by oranges.
-{{< highlight json >}}
+
+```json
 {
     "viz": "timeseries",
     "requests": [
@@ -132,7 +135,7 @@ apples by oranges.
       }
     ]
 }
-{{< /highlight >}}
+```
 
 ### Events
 
@@ -346,7 +349,8 @@ The following will hide data points below 2:
 
 
 Here is a full JSON example:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -364,14 +368,15 @@ Here is a full JSON example:
      }
   },
 }
-{{< /highlight >}}
+```
 
 
 #### Examples
 
 
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -381,10 +386,11 @@ Here is an example using the <code>rate()</code> function, which takes only a si
     }
   ]
 }
-{{< /highlight >}}
+```
 
 Here is an example using the <code>top()</code> function:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -394,7 +400,7 @@ Here is an example using the <code>top()</code> function:
     }
   ]
 }
-{{< /highlight >}}
+```
 
 This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
 

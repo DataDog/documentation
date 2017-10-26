@@ -102,7 +102,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 1. まず、[IAMコンソール](https://console.aws.amazon.com/iam/home#s=Home) に移動し、新しいポリシーを作成します。 その新しく作ったポリシーを`DatadogAWSIntegrationPolicy`として登録します。ここで設定する名前は自由に選択することができます。Datadogが提供するすべてのAWSインテグレーションを活用するには、下記の **ポリシードキュメント** JSONの内容を使ってください。尚、AWSインテグレーションに新しいコンポーネントを追加する際に、ポリシードキュメントの項目が変更されることがあります。
 
-{{< highlight json>}}
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -159,7 +159,7 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
     }
   ]
 }
-{{< /highlight >}}
+```
 
 <!--
 If you are not comfortable with granting all of these permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**. For more detailed information regarding permissions, please see the [Permissions](#permissions) section below.

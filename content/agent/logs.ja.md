@@ -168,7 +168,7 @@ Where attributes should at least contain the key metric_type, specifying whether
 
 Here's an example of what `parsers.py` might contain:
 
-{{< highlight python >}}
+```python
 import time
 from datetime import datetime
 
@@ -197,13 +197,13 @@ def parse_web(logger, line):
 
     # Return the output as a tuple
     return (metric_name, date, metric_value, attr_dict)
-{{< /highlight >}}
+```
 
 
 You'll want to be able to test your parser outside of the Agent, so for the above example,
 you might add a test function like this:
 
-{{< highlight python >}}
+```python
 def test():
     # Set up the test logger
     import logging
@@ -230,7 +230,7 @@ def test():
 if __name__ == '__main__':
     # For local testing, callable as "python /path/to/parsers.py"
     test()
-{{< /highlight >}}
+```
 
 And you can test your parsing logic by calling python /path/to/parsers.py. -->
 

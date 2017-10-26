@@ -27,7 +27,8 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
         gem install dogstatsd-ruby
 
 2.  Start instrumenting your code using the Datadog API:
-{{< highlight ruby>}}
+
+```ruby
 # Load the Datadog API module.
 require 'rubygems'
 require 'dogapi'
@@ -40,10 +41,11 @@ dog = Dogapi::Client.new(api_key, application_key)
 
 # Send a new event.
 dog.emit_event(Dogapi::Event.new('Testing done, FTW'), :host => "my_host")
-{{< /highlight >}}
+```
 
     Start instrumenting your code using the DogStatsD client:
-{{< highlight ruby>}}
+
+```ruby
 # Load the dogstats module.
 require 'datadog/statsd'
 
@@ -55,7 +57,7 @@ statsd.increment('page.views')
 
 # Record a gauge 50% of the time.
 statsd.gauge('users.online', 123, :sample_rate=>0.5)
-{{< /highlight >}}
+```
 
 ### Configuration
 
