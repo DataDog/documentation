@@ -37,7 +37,7 @@ $font-family-base:       $font-family-sans-serif;
 // Links
 $link-color:            theme-color("primary");
 $link-decoration:       none;
-$link-hover-color:      darken($link-color, 15%);
+$link-hover-color:      $ddpurple;
 $link-hover-decoration: none;
 
 //dropdowns

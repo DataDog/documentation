@@ -94,13 +94,15 @@ $(document).ready(function () {
                 $('#tipue_search_content .content').html(formatted_results);
 
                 // load pagination
-                $('#tipue_search_content').pajinate({
-                    item_container_id: '.content',
-                    num_page_links_to_display: 9,
-                    items_per_page: 7,
-                    wrap_around: false,
-                    show_first_last: false
-                });
+                if (hits.length) {
+                    $('#tipue_search_content').pajinate({
+                        item_container_id: '.content',
+                        num_page_links_to_display: 9,
+                        items_per_page: 7,
+                        wrap_around: false,
+                        show_first_last: false
+                    });
+                }
 
             }
         });
