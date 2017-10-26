@@ -202,9 +202,24 @@ languages:
         - identifier: customnav_lognav_parsing
           url: logs/parsing/
           weight: 50
-        - identifier: customnav_lognav_java
-          url: logs/java/
+        - identifier: customnav_lognav_aws
+          url: logs/aws/
           weight: 60
+        - identifier: customnav_lognav_java
+          url: logs/languages/java/
+          weight: 70
+        - identifier: customnav_lognav_csharp
+          url: logs/languages/csharp/
+          weight: 80
+        - identifier: customnav_lognav_go
+          url: logs/languages/go/
+          weight: 90
+        - identifier: customnav_lognav_nodejs
+          url: logs/languages/nodejs/
+          weight: 100
+        - identifier: customnav_lognav_ruby
+          url: logs/languages/ruby/
+          weight: 110
 
   ja:
     #languagename: "日本語"
