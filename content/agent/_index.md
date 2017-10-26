@@ -50,7 +50,7 @@ If not, please send both the full output of the info command and the logs with a
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
-```
+```shell
 date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date
 ```
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.

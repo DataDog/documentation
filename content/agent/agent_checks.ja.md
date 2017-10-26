@@ -557,7 +557,7 @@ In this snippet, we start a timer, make the GET request using the
 [requests library](http://docs.python-requests.org/en/latest/) and handle and
 errors that might arise.
 
-```shel
+```shell
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
