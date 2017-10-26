@@ -1,13 +1,17 @@
 {{ $dot := . }}
+{{ $ctx := .context }}
 <ul>
     {{ range $index, $element := .data }}
-    <li>
-        <a href="{{ $dot.Site.BaseURL }}/{{ $element.URL }}">
-            <span>{{ $element.Name }}</span>
-        </a>
-        {{ if $element.Children }}
-            {{ partial "recursive-nav.html" (dict "context" . "data" $element.Children) }}
-        {{ end }}
-    </li>
+        {{ $split_urls := split $ctx.RelPermalink "/" }}
+        {{ $url_first := print "/" (index $split_urls 1) "/" }}
+        {{ $active_page := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $ctx.RelPermalink $element.URL)) }}
+        <li {{if $active_page }}class="active"{{ end }}>
+            <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}">
+                <span>{{ $element.Name }}</span>
+            </a>
+            {{ if $element.Children }}
+                {{ partial "recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
+            {{ end }}
+        </li>
     {{ end }}
 </ul>

@@ -25,8 +25,22 @@
                 </div>
             </form>
 
-            {{ partial "recursive-nav.html" (dict "context" . "data" .Site.Menus.main) }}
-
+            <style>
+                aside.sidenav #newnav ul li > ul {
+                    display:none;
+                }
+                aside.sidenav #newnav ul li.active > ul {
+                    display:block;
+                }
+                #TableOfContents > ul {
+                    padding:0;
+                    margin:0;
+                    list-style-type:none;
+                }
+            </style>
+            <div id="newnav">
+                {{ partial "recursive-nav.html" (dict "context" $dot "data" .Site.Menus.main) }}
+            </div>
         </div>
     </div>
 </aside>
