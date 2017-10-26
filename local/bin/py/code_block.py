@@ -1,6 +1,10 @@
-import glob
+#!/usr/bin/env python3
 import re
+import glob
 
+"""
+Variables
+"""
 PATH = "content/"
 PATTERN_ARRAY=[ [r"(```python)(\n.*?\n)(```)",r"{{< highlight python >}}\g<2>{{< /highlight>}}"], \
                 [r"(```json)(\n.*?\n)(```)","{{< highlight json >}}\g<2>{{< /highlight>}}"], \
@@ -14,8 +18,16 @@ PATTERN_ARRAY=[ [r"(```python)(\n.*?\n)(```)",r"{{< highlight python >}}\g<2>{{<
                 [r"(```yaml)(\n.*?\n)(```)","{{< highlight yaml >}}\g<2>{{< /highlight>}}"], \
                 [r"(```bash)(\n.*?\n)(```)","{{< highlight bash >}}\g<2>{{< /highlight>}}"]]
 
-
+"""
+Functions
+"""
 def inline_code(doc_page,pattern_array):
+    """
+    Using the pattern_array to extract all markdown codeblocks and transform them into Hugo code blocks
+
+    :param doc_page: path of a documentation content file
+    :param pattern_array: array of markdown/hugo code block patterns
+    """
     try:
         # Read in the file
         with open(doc_page, "r") as file :
@@ -34,10 +46,10 @@ def inline_code(doc_page,pattern_array):
         print(error)
         pass
 
-def content_parkour(path,pattern_array):
-    print("Starting to inline highlights for code blocks")
-    for doc_page in glob.iglob(path + "**/*.md", recursive=True):
-        inline_code(doc_page, pattern_array)
+def content_parkour():
+    print("Starting to inline highlights for code blocks in {}".format(PATH))
+    for doc_page in glob.iglob(PATH + '**/*.md', recursive=True):
+        inline_code(doc_page, PATTERN_ARRAY)
 
 if __name__ == "__main__":
-    content_parkour(PATH,PATTERN_ARRAY)
+    content_parkour()
