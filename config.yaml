@@ -205,6 +205,9 @@ languages:
         - identifier: customnav_lognav_java
           url: logs/java/
           weight: 60
+        - identifier: customnav_lognav_aws
+          url: logs/aws/
+          weight: 70
 
   ja:
     #languagename: "日本語"

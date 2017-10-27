@@ -175,6 +175,9 @@
 - id: customnav_lognav_java
   translation: "Java Collection"
 
+-id: customnav_lognav_aws
+  translation: "AWS log collection"
+
 # taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."
