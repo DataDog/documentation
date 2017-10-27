@@ -6,17 +6,17 @@ import glob
 Variables
 """
 PATH = "content/"
-PATTERN_ARRAY=[ [r"(```python)(\n.*?\n)(```)",r"{{< highlight python >}}\g<2>{{< /highlight>}}"], \
-                [r"(```json)(\n.*?\n)(```)","{{< highlight json >}}\g<2>{{< /highlight>}}"], \
-                [r"(```ruby)(\n.*?\n)(```)","{{< highlight ruby >}}\g<2>{{< /highlight>}}"], \
-                [r"(```shell)(\n.*?\n)(```)","{{< highlight shell >}}\g<2>{{< /highlight>}}"], \
-                [r"(```xml)(\n.*?\n)(```)","{{< highlight xml >}}\g<2>{{< /highlight>}}"], \
-                [r"(```go)(\n.*?\n)(```)","{{< highlight go >}}\g<2>{{< /highlight>}}"], \
-                [r"(```java)(\n.*?\n)(```)","{{< highlight java >}}\g<2>{{< /highlight>}}"], \
-                [r"(```js)(\n.*?\n)(```)","{{< highlight js >}}\g<2>{{< /highlight>}}"], \
-                [r"(```c#)(\n.*?\n)(```)","{{< highlight c# >}}\g<2>{{< /highlight>}}"], \
-                [r"(```yaml)(\n.*?\n)(```)","{{< highlight yaml >}}\g<2>{{< /highlight>}}"], \
-                [r"(```bash)(\n.*?\n)(```)","{{< highlight bash >}}\g<2>{{< /highlight>}}"]]
+PATTERN_ARRAY=[ [r"(```python)\n([\w\W\n]*?)\n(```)",r"{{< highlight python >}}\g<2>{{< /highlight>}}"], \
+                [r"(```json)\n([\w\W\n]*?)\n(```)","{{< highlight json >}}\g<2>{{< /highlight>}}"], \
+                [r"(```ruby)\n([\w\W\n]*?)\n(```)","{{< highlight ruby >}}\g<2>{{< /highlight>}}"], \
+                [r"(```shell)\n([\w\W\n]*?)\n(```)","{{< highlight shell >}}\g<2>{{< /highlight>}}"], \
+                [r"(```xml)\n([\w\W\n]*?)\n(```)","{{< highlight xml >}}\g<2>{{< /highlight>}}"], \
+                [r"(```go)\n([\w\W\n]*?)\n(```)","{{< highlight go >}}\g<2>{{< /highlight>}}"], \
+                [r"(```java)\n([\w\W\n]*?)\n(```)","{{< highlight java >}}\g<2>{{< /highlight>}}"], \
+                [r"(```js)\n([\w\W\n]*?)\n(```)","{{< highlight js >}}\g<2>{{< /highlight>}}"], \
+                [r"(```c#)\n([\w\W\n]*?)\n(```)","{{< highlight c# >}}\g<2>{{< /highlight>}}"], \
+                [r"(```yaml)\n([\w\W\n]*?)\n(```)","{{< highlight yaml >}}\g<2>{{< /highlight>}}"], \
+                [r"(```bash)\n([\w\W\n]*?)\n(```)","{{< highlight bash >}}\g<2>{{< /highlight>}}"]]
 
 """
 Functions
