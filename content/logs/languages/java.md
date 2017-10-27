@@ -143,7 +143,7 @@ With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** will 
 
 So you can exploit *scope* as a field, and *durationInMs* & *quantity* as metrics.
 
-###MDC (Mapped Diagnostic Context)
+### MDC (Mapped Diagnostic Context)
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html).
 
