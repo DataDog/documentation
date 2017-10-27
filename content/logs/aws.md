@@ -9,17 +9,8 @@ beta: true
 
 ## Overview
 
-This documentation explains how to create a Lambda function in AWS to forward S3 logs to Datadog.
-
-S3 logging is used by well known services such as: ELB, S3, CloudTrail, VPC, CloudFront and CloudWatch. There are then all eligible to this method.
-Using a Lambda function is elegant as it avoids the hassle of creating processes that would pull periodically the incoming S3 logs. The Lambda function is called whenever a new S3 log file is made available.
-Features:
-
-* Use AWS Lambda to re-route triggered S3 events to Datadog
-* ELB, S3, CloudTrail, VPC and CloudFont logs can be forwarded
-* SSL Security
-* JSON events providing details about S3 documents forwarded
-* Structured meta-information can be attached to the event
+Push your logs from ELB, S3, CloudTrail, VPC, CloudFront and CloudWatch into an S3 bucket bind to a lambda function. 
+Using a Lambda function, called whenever a new S3 log file is made available, avoids the hassle of creating processes that would pull periodically incoming S3 logs.
 
 ## Setup
 ### Installation
@@ -37,7 +28,7 @@ Features:
 
 #### Provide the code and configure the lambda
 
-6. Copy and paste the code from [This repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area. (Can you do this for python still??)
+6. Copy and paste the code from [This repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
 7. Change the Runtime to **Python 2.7**
     {{< img src="logs/aws/select_python.png" alt="Select Python" >}}
 8. At the top of the script you'll find a section called `#Parameters`, that's where you want to edit your code.
@@ -48,7 +39,7 @@ Two options for this, either:
     * Use an environment variable called `DD_API_KEY`.
 
 9. Set the memory to the highest possible value.
-10. Set the timeout limit. We recommends **120 seconds**
+10. Set the timeout limit. We recommend **120 seconds**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" >}}
 11. Scroll back to the top of the page and hit **Save and test**
 
@@ -96,23 +87,18 @@ Then go back to the Lambda function and define a trigger on the corresponding s3
 
 #### CloudTrail
 
-AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made by using the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
+AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made with the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
 
-You can identify which users and accounts called AWS for services that support CloudTrail, the source IP address from the calls, and when the calls occurred.
-You can integrate CloudTrail into applications using the API, automate trail creation for your Organization, check the status of your trails, and control how administrators turn CloudTrail logging on and off.
-
-When you define your Trails, you can select a s3 bucket to write the log in:
+When you define your Trails, select a s3 bucket to write the logs in:
 {{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" >}}
 
-You can send link the lambda function to this s3 bucket to send your logs.
-
+Link the lambda function to this s3 bucket to send your logs to Datadog.
 
 #### ECS
 
-ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in the Docker Container). 
+ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in you Docker Containers). 
 
-Collect ECS logs directly from the containers thanks to our [Docker integration](/integrations/docker_daemon) (recommended).
-You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the lambda to ship them to your Datadog platform.
+Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the lambda to ship them to your Datadog platform.
 
 #### CloudFront
 
@@ -128,6 +114,9 @@ Store the log files for multiple distributions in the same bucket. When enabling
 
 You can then collect the log from the s3 bucket thanks to the lambda function.
 
+## What's next
 
-
+* Learn how to [explore your logs](/logs/explore)
+* Learn how to [process your logs](/logs/processing)
+* Learn more about [parsing](/logs/parsing)
 
