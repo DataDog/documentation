@@ -1,20 +1,14 @@
+{{ $dot := . }}
 <header>
     <div class="container">
         <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
             <div class="col">
                 <ul class="nav navbar-left">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.datadoghq.com/product/">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="https://docs.datadoghq.com/">Docs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.datadoghq.com/pricing/">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="https://www.datadoghq.com/customers/">Customers</a>
-                    </li>
+                    {{ range $dot.Page.Site.Data.partials.header.left }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .link }}">{{ .title }}</a>
+                        </li>
+                    {{ end }}
                 </ul>
             </div>
             <div class="col-1 text-center">
@@ -25,15 +19,11 @@
             </div>
             <div class="col">
                 <ul class="nav navbar-right float-right">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.datadoghq.com/about/">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.datadoghq.com/blog/">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://app.datadoghq.com/">Login</a>
-                    </li>
+                    {{ range $dot.Page.Site.Data.partials.header.right }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .link }}">{{ .title }}</a>
+                        </li>
+                    {{ end }}
                     <li class="nav-item nav-button">
                         <a class="btn btn-outline-primary sign-up-trigger" href="#" data-toggle="modal" data-target="#signupModal">GET STARTED FREE</a>
                     </li>
