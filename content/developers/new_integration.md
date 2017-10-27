@@ -62,13 +62,13 @@ Get metrics from Docker in real time to:
 
 There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
 
-
-### Installation
+### Setup
+#### Installation
 **Required with some exceptions**
 
 The installation section should cover anything that needs to be installed on the agent host. For instance, in the Docker installation section you learn about installing the agent into a container. If there is nothing to install on the agent host, this section can be left out. To be a complete integration, either an installation section or a configuration section must be included.
 
-### Configuration
+#### Configuration
 **Required with some exceptions**
 
 The configuration section should cover anything that you can configure in the Datadog interface or the agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
@@ -79,7 +79,7 @@ At the end of the configuration section include a link to the example configurat
 
 Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for.
 
-### Validation
+#### Validation
 **Required**
 
 The validation section should include instructions on how to validate that the integration is successfully working.
@@ -89,18 +89,11 @@ The validation section should include instructions on how to validate that the i
 
 The troubleshooting section should include anything that answers a question a user might have about the integration. If there is a question that comes up in support about the integration, it should be added here.
 
+###Data Collected
 ### Metrics
 **Required for integrations that have metrics**
 
-If the metrics are listed in the integration under dogweb, add an attribute to the frontmatter: `git_integration_title: integration_name` replacing the integration name with the name of the folder for the integration in the dogweb repo.
-
-Then add `{{< get-metrics-from-git >}}` to the Metrics section. This renders all metrics for an integration. You can also selectively display metrics:
- 
-```
-{{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
-```
-
-This will use your Github Personal Token to grab the metrics from the repo. For more information about setting up your Github Personal Token, see the [Setup section](#setup) above.
+Include a list of metrics if the integration provides any.
 
 ### Events
 **Optional**
