@@ -14,7 +14,7 @@ PATTERN_ARRAY=[ [r"(```python)\n([\w\W\n]*?)\n(```)",r"{{< highlight python >}}\
                 [r"(```go)\n([\w\W\n]*?)\n(```)","{{< highlight go >}}\g<2>{{< /highlight>}}"], \
                 [r"(```java)\n([\w\W\n]*?)\n(```)","{{< highlight java >}}\g<2>{{< /highlight>}}"], \
                 [r"(```js)\n([\w\W\n]*?)\n(```)","{{< highlight js >}}\g<2>{{< /highlight>}}"], \
-                [r"(```csharp)\n([\w\W\n]*?)\n(```)","{{< highlight c# >}}\g<2>{{< /highlight>}}"], \
+                [r"(```csharp)\n([\w\W\n]*?)\n(```)","{{< highlight csharp >}}\g<2>{{< /highlight>}}"], \
                 [r"(```yaml)\n([\w\W\n]*?)\n(```)","{{< highlight yaml >}}\g<2>{{< /highlight>}}"], \
                 [r"(```bash)\n([\w\W\n]*?)\n(```)","{{< highlight bash >}}\g<2>{{< /highlight>}}"]]
 
