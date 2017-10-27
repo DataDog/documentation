@@ -32,7 +32,7 @@ The following Dos and Donts, when applied, serve the main purpose: **to clearly 
 * **Be imperative, not beckoning**:  When leading into a discussion of a feature, phrases like ‘you can’ are ok, but when you finally get to the step-by-step instructions, command the reader:
     
     * **NO**: You must configure the following; You may want to configure the following
-    *  YES**: Configure the following; Optionally, configure the following
+    * **YES**: Configure the following; Optionally, configure the following
 Avoid ‘Please’ in almost all cases; no need to say “Please configure the following”
 
 ## Donts
