@@ -175,7 +175,7 @@
 - id: customnav_lognav_java
   translation: "Java Collection"
 
--id: customnav_lognav_aws
+- id: customnav_lognav_aws
   translation: "AWS log collection"
 
 # taxonomies
