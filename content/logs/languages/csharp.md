@@ -24,7 +24,7 @@ PM> Install-Package Serilog.Sinks.File
 
 Then, initialize the logger directly to your application:
 
-```c#
+```csharp
 // Instantiate the logger
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(), "log.json")
