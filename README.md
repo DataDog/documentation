@@ -11,15 +11,9 @@ Built with [hugo](https://gohugo.io/), a static website generation tool.
 
 * Install Python3: https://www.python.org/downloads/ or https://github.com/pyenv/pyenv
 
-* Install gulp:
-```
-npm install --global --production gulp-cli && npm install
-```
+* Install gulp: ```npm install --global --production gulp-cli && npm install```
 
-* Download the documentation repo
-```
-git clone https://github.com/DataDog/documentation.git
-```
+* Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
 
 ### Run the server
 
@@ -33,8 +27,7 @@ To run the site without Docker and perform administrative tasks (compile metrics
 
 Documentation is available at `https://localhost:1313`
 
-To run the site with Docker (easier setup, slower server), you will need to install: https://docs.docker.com/engine/installation/#supported-platforms
-then execute: 
+To run the site with Docker (easier setup, slower server), you will need to install [Docker](https://docs.docker.com/engine/installation/#supported-platforms) then execute: 
 
 `make docker-start`
 
