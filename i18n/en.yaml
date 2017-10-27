@@ -194,7 +194,7 @@
   translation: "Hostmap"
 
 - id: customnav_infrastructurenav_livecontainers
-  translation: "Containters" 
+  translation: "Containers" 
 
 - id: customnav_infrastructurenav_process
   translation: "Processes"
