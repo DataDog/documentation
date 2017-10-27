@@ -22,7 +22,7 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
 "https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
 # Share it
-curl -X GET \
+curl -X POST \
 "https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
 
 # Revoke the sharing
