@@ -1,3 +1,4 @@
+{{ $dot := . }}
 <div class="d-block d-sm-none" style="margin-bottom:24px;">
     <div class="dropdown show">
         <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -6,76 +7,15 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding:15px 30px">
             <h3 class="text-center">Choose A Platform</h3>
             <div class="row cards-dd platform-nav mt-4">
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/amazonlinux/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_amazonlinux.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/centos/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_centos.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/docker/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_centos_docker.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/deb/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_debian.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/fedora/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_fedora.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/osx/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_macosx.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/redhat/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_redhat.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/ubuntu/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_ubuntu.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/windows/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_windows.png") }}" />
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                    <a class="card" href="{{ .Site.BaseURL }}agent/basic_agent_usage/source/">
-                        <div class="card-body text-center">
-                            <img class="img-fluid" src="{{ partial "img.html" (dict "root" . "src" "icons/platform_fromsource.png") }}" />
-                        </div>
-                    </a>
-                </div>
+                {{ range $dot.Page.Site.Data.partials.platforms.platforms }}
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
+                        <a class="card" href="{{ .Site.BaseURL }}{{ .link }}">
+                            <div class="card-body text-center">
+                                <img class="img-fluid" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image)) }}" />
+                            </div>
+                        </a>
+                    </div>
+                {{ end }}
             </div>
         </div>
     </div>
