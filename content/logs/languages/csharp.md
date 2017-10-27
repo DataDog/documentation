@@ -24,7 +24,7 @@ PM> Install-Package Serilog.Sinks.File
 
 Then, initialize the logger directly to your application:
 
-```c#
+```csharp
 // Instantiate the logger
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(), "log.json")
@@ -104,7 +104,7 @@ Once the library is in your classpath, attach the following layout to any target
 
 To fire and log your first events, add this to your code:
 
-```c#
+```csharp
 
 using NLog;
 
@@ -180,7 +180,7 @@ Once the library is in your classpath, attach the following layout to any target
 
 Instantiate your logger and start to fire your event:
 
-```c#
+```csharp
 using log4net;
 
 namespace Datadog

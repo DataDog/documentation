@@ -258,12 +258,12 @@ By default, the Y-axis for your graph is set to linear with the minimum and maxi
 <!--
 ### Overlay events for additional context
 
-You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use ```sources:github```. For all the events with the tag role:web, use ```tag:role:web```.
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
 -->
 
 ### メトリクスのグラフ表示にイベントを重ねあわせる
 
-より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。これには、 **Add Events** ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら```sources:github```と入力します。タグ role:web を持つイベントについて重ねあわせるなら ```tag:role:web```と入力します。
+より意味のあるグラフ表示のために、ここまでのステップを繰り返して他のメトリクスをグラフ表示に追加することができます。あるいはグラフ表示が意味する文脈をより豊かにするために、関連するシステムで生じたイベントについても表示を追加できます。たとえば、githubのコミット、Jenkinsのデプロイ、あるいはDockerのcreationイベントなどです。これには、 **Add Events** ボタンをクリックし、イベントをクエリする文字列を入力するだけです。例えば、Githubのすべてのイベントを重ねあわせるなら`sources:github`と入力します。タグ role:web を持つイベントについて重ねあわせるなら `tag:role:web`と入力します。
 
 <!--
 ### Create a title
