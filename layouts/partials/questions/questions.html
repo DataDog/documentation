@@ -6,8 +6,8 @@
     <div class="col-6 col-md-4 mb-4">
         <a class="card" href="{{ .link }}">
             <div class="card-body text-center">
-                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" "icons/support.png") }}" />
-                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" "icons/support_p.png") }}" />
+                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) ) }}" />
+                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image_hover) ) }}" />
                 <h4 class="card-title">{{ .title }}</h4>
                 <p class="d-none d-sm-block card-text">{{ .text }}</p>
             </div>
