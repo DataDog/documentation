@@ -232,7 +232,7 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 ### Edit reserved attributes
 
-You can now control the global hostname, service, timestamp and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
+You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
 {{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" >}}
 
