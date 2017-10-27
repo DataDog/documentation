@@ -16,14 +16,14 @@
                     <div class="col-6">
                         <ul class="list-unstyled">
                             {{ range $dot.Page.Site.Data.partials.footer.col1 }}
-                                <li><a href="{{ .link }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
                     <div class="col-6">
                         <ul class="list-unstyled">
                             {{ range $dot.Page.Site.Data.partials.footer.col2 }}
-                                <li><a href="{{ .link }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                         <p>About</p>
                         <ul class="list-unstyled">
                             {{ range $dot.Page.Site.Data.partials.footer.col3 }}
-                                <li><a href="{{ .link }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                         <p>Social</p>
                         <ul class="list-unstyled">
                             {{ range $dot.Page.Site.Data.partials.footer.col4 }}
-                                <li><a href="{{ .link }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>

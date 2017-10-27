@@ -4,7 +4,7 @@
     <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
         {{ range $dot.Page.Site.Data.partials.platforms.platforms }}
             <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                <a class="card" href="{{ .Site.BaseURL }}{{ .link }}">
+                <a class="card" href="{{ .Site.BaseURL }}/{{ .link }}">
                     <div class="card-body text-center">
                         <img class="img-fluid" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image)) }}" />
                     </div>

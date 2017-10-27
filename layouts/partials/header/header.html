@@ -6,7 +6,7 @@
                 <ul class="nav navbar-left">
                     {{ range $dot.Page.Site.Data.partials.header.left }}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ .link }}">{{ .title }}</a>
+                            <a class="nav-link" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
                         </li>
                     {{ end }}
                 </ul>
@@ -21,7 +21,7 @@
                 <ul class="nav navbar-right float-right">
                     {{ range $dot.Page.Site.Data.partials.header.right }}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ .link }}">{{ .title }}</a>
+                            <a class="nav-link" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
                         </li>
                     {{ end }}
                     <li class="nav-item nav-button">
