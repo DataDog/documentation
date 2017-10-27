@@ -9,13 +9,15 @@ customnav: infrastructurenav
 
 ## Introduction
 
-Datadog Live Containers allows for real-time visibility of all of the containers across your environment.  Taking inspiration from bedrock tools like `htop` and `ctop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+[Datadog Live Containers](https://app.datadoghq.com/containers) enable real-time visibility into all containers across your environment.
+
+Taking inspiration from bedrock tools like htop and ctop, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search. Coupled with Datadog’s integrations with Docker, Kubernetes, ECS, and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time.
 
 {{< img src="infrastructure/livecontainers/LiveContainersWithSummaries.png" >}} 
 
 ## Installation
 
-Live Containers has been introduced in Datadog Agent version 5.17.2.  After updating to a recent version of the Agent, no other configuration is necessary.
+[Live Containers](https://app.datadoghq.com/containers) has been introduced in Datadog Agent version 5.17.2.  After updating to this version of the Agent or later, no other configuration is necessary.
 
 Note that for collecting Container information in the standard install rather than with the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), the dd-agent user will need to have permissions to access docker.sock.
 
