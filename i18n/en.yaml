@@ -230,6 +230,10 @@
 - id: customnav_lognav_csharp
   translation: "C# Log collection"
 
+# taxonomies
+- id: groups_return_to_videos
+  translation: "Return to All Video Groups."
+
 - id: customnav_lognav_go
   translation: "Go Log Collection"
 
