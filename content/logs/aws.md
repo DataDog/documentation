@@ -9,8 +9,7 @@ beta: true
 
 ## Overview
 
-Push your logs from ELB, S3, CloudTrail, VPC, CloudFront and CloudWatch into an S3 bucket bind to a lambda function. 
-Using a Lambda function, called whenever a new S3 log file is made available, avoids the hassle of creating processes that would pull periodically incoming S3 logs.
+Push your AWS log information to Datadog using a Lambda function bound to an S3 bucket. First, configure your AWS services to push logs to S3. A Lambda function is then triggered and processes the log file, eliminating the need for additional services to poll for that information.
 
 ## Setup
 ### Installation
@@ -28,30 +27,30 @@ Using a Lambda function, called whenever a new S3 log file is made available, av
 
 #### Provide the code and configure the lambda
 
-6. Copy and paste the code from [This repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
-7. Change the Runtime to **Python 2.7**
+1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
+2. Change the Runtime to **Python 2.7**
     {{< img src="logs/aws/select_python.png" alt="Select Python" >}}
-8. At the top of the script you'll find a section called `#Parameters`, that's where you want to edit your code.
+3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
+    
+    * Setup an environment variable (Preferred)
+    * Edit the code directly with your Datadog API Key
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" >}}
-Two options for this, either:
 
-    * Directly in the code 
-    * Use an environment variable called `DD_API_KEY`.
-
-9. Set the memory to the highest possible value.
-10. Set the timeout limit. We recommend **120 seconds**
+4. Set the memory to the highest possible value.
+5. Set the timeout limit. We recommend **120 seconds**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" >}}
-11. Scroll back to the top of the page and hit **Save and test**
+6. Scroll back to the top of the page and hit **Save and test**
 
 #### Test your Lambda
 
-12. Configure the test event. Select **Cloudwatch Logs** as the sample event.
+1. Configure the test event. Select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" >}}
-13. Save and test.
+2. Save and test.
 
 ## Collection
 
-Your lambda function is now ready to send logs to your Datadog platform. All you need is to setup the relevant triggers for each AWS service you want to monitor.
+Your lambda function is now ready to send logs to your Datadog platform.
+Setup the relevant triggers for each AWS service you want to monitor.
 
 #### S3, Cloudwatch, API Gateway, Kinesis and SNS
 In your lambda, go in the triggers tab and select `Add Trigger`:
@@ -60,7 +59,7 @@ In your lambda, go in the triggers tab and select `Add Trigger`:
 Select the log source and then follow the AWS instructions: 
 {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" >}}
 
-For instance for S3 Buckets, do not forget to set the correct event type:
+For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" >}}
 
 #### ELB
@@ -74,7 +73,6 @@ Add ELB logs to Datadog to:
 * Be notified when specific IPs have a anormal behavior (malicious attempts, too many failure, etc...)
 * Determine how many connection peaks you have? and when did they occurred?
 * See how bots are going through your webpages (for SEO purposes for instance)
-
 
 ELB logs are written in a s3 bucket and consumed by a lambda function.
 Enable the logging on your ELB first to collect your logs:
