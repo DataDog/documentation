@@ -29,16 +29,14 @@ languages:
         - identifier: menu_references_getting_started
           name: "Getting Started"
           url: "/getting_started/"
-          image: nav_start.png
-          image_hover: nav_start_p.png
+          pre: "nav_start.png"
           weight: 30
 
         # AGENT
         - identifier: menu_references_agent
           name: "Agent"
           url: "/agent/"
-          image: nav_agent.png
-          image_hover: nav_agent_p.png
+          pre: "nav_agent.png"
           weight: 40
         # AGENT - Subnav start
         - identifier: customnav_agentnav_basic_usage
@@ -133,8 +131,7 @@ languages:
         - identifier: menu_references_integrations
           name: "Integrations"
           url: "/integrations/"
-          image: nav_integrations.png
-          image_hover: nav_integrations_p.png
+          pre: "nav_integrations.png"
           weight: 50
         # INTEGRATIONS - Subnav start
         # INTEGRATIONS - Subnav end
@@ -144,8 +141,7 @@ languages:
         - identifier: menu_references_graphing
           name: "Graphing/Visualization"
           url: "/graphing/"
-          image: nav_graphing.png
-          image_hover: nav_graphing_p.png
+          pre: "nav_graphing.png"
           weight: 60
         # GRAPHING - Subnav start
         - identifier: customnav_graphingnav_events
@@ -201,8 +197,7 @@ languages:
         - identifier: menu_references_monitoring
           name: "Alerting"
           url: "/monitors/"
-          image: nav_alerting.png
-          image_hover: nav_alerting_p.png
+          pre: "nav_alerting.png"
           weight: 70
         # ALERTING - Subnav start
         - identifier: customnav_monitornav_monitor_types
@@ -297,8 +292,7 @@ languages:
         - identifier: menu_references_tracing
           name: "Tracing/APM"
           url: "/tracing/"
-          image: nav_tracing.png
-          image_hover: nav_tracing_p.png
+          pre: "nav_tracing.png"
           weight: 80
         # TRACING/APM - Subnav start
         - identifier: customnav_tracingnav_terminology
@@ -353,8 +347,7 @@ languages:
         - identifier: menu_references_developers
           name: "Developers"
           url: "/developers/"
-          image: nav_developers.png
-          image_hover: nav_developers_p.png
+          pre: "nav_developers.png"
           weight: 100
         # DEVELOPERS - Subnav start
         - identifier: customnav_developersnav_api
@@ -409,8 +402,7 @@ languages:
         - identifier: menu_references_account_management
           name: "Account Management"
           url: "/account_management/"
-          image: nav_account.png
-          image_hover: nav_account_p.png
+          pre: "nav_account.png"
           weight: 90
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
@@ -445,34 +437,31 @@ languages:
         - identifier: menu_references_videos
           name: "Videos"
           url: "/videos/"
-          image: nav_videos.png
-          image_hover: nav_videos_p.png
+          pre: "nav_start.png"
           weight: 110
           hide: true
-        - identifier: menu_references_videos
+        - identifier: menu_references_glossary
           name: "Glossary"
           url: "/glossary/"
-          image: nav_glossary.png
-          image_hover: nav_glossary_p.png
+          pre: "nav_glossary.png"
           weight: 110
           hide: true
         - identifier: menu_references_faq
           name: "FAQ"
           url: "/faq/"
-          image: nav_faq.png
-          image_hover: nav_faq_p.png
+          pre: "nav_faq.png"
           weight: 120
         - identifier: menu_references_help
           name: "Help"
           url: "/help/"
-          image: nav_help.png
-          image_hover: nav_help_p.png
+          pre: "nav_start.png"
           weight: 130
 
         # LOGS
         - identifier: menu_references_logs
           name: "Logs"
           url: "/logs/"
+          pre: "nav_start.png"
           weight: 140
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore

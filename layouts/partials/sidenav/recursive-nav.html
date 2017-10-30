@@ -1,6 +1,6 @@
 {{ $dot := . }}
 {{ $ctx := .context }}
-<ul>
+<ul class="list-unstyled">
     {{ range $index, $element := .data }}
         {{ $split_urls := split $ctx.RelPermalink "/" }}
         {{ $url_first := print "/" (index $split_urls 1) "/" }}
@@ -8,10 +8,14 @@
         {{ $active_page := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $url_first_second $element.URL) (eq $ctx.RelPermalink $element.URL)) }}
         <li {{if $active_page }}class="active"{{ end }}>
             <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}" {{if $active_page }}class="active"{{ end }}>
+                {{ if $element.Pre }}
+                    <img class="static" width="21" src="{{ partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre))) }}" />
+                    <img class="hover" width="21" src="{{ partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre)) ) }}" />
+                {{ end }}
                 <span>{{ $element.Name }}</span>
             </a>
             {{ if $element.Children }}
-                {{ partial "recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
+                {{ partial "sidenav/recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
             {{ end }}
         </li>
     {{ end }}

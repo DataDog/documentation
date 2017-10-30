@@ -90,6 +90,23 @@ aside.sidenav {
       transition: all .1s ease-in;
     }
   }
+
+  .sidenav-nav {
+    ul li > ul {
+      display: none;
+    }
+    ul li.active > ul {
+      display:block;
+      li {
+        padding-left:27px;
+        a {
+          font-size:16px;
+          padding:0;
+        }
+      }
+    }
+  }
+
   ul {
     li {
       .toc_scrolled {
