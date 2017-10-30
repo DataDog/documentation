@@ -55,46 +55,51 @@ def index_algolia(app_id, api_key, content_path=None):
 
                             html = BeautifulSoup(myfile, "html.parser")
 
-                            # title
-                            title = html.title.string
-                            if not title:
-                                title = html.select('h1')[0].text.strip()
+                            # no crawl?
+                            private = html.find_all('meta', {'name': 'robots', 'content': 'noindex'})
+                            if private:
+                                print('skipping beta or alias: %s' % dirpath)
+                            else:
+                                # title
+                                title = html.title.string
+                                if not title:
+                                    title = html.select('h1')[0].text.strip()
 
-                            if title and '://' not in title:
-                                # description
-                                main = html.find("div", {'main'}).prettify()[:7000]
+                                if title and '://' not in title:
+                                    # description
+                                    main = html.find("div", {'main'}).prettify()[:7000]
 
-                                fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
-                                if fm_description != default_description and '{{' not in fm_description:
-                                    description = fm_description
-                                else:
-                                    p_tags = html.find('p')
-                                    description = str(p_tags)
-                                    next_sibling = p_tags.find_next_sibling()
-                                    if next_sibling and next_sibling.name == 'ul':
-                                        description += str(next_sibling)
+                                    fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
+                                    if fm_description != default_description and '{{' not in fm_description:
+                                        description = fm_description
+                                    else:
+                                        p_tags = html.find('p')
+                                        description = str(p_tags)
+                                        next_sibling = p_tags.find_next_sibling()
+                                        if next_sibling and next_sibling.name == 'ul':
+                                            description += str(next_sibling)
 
-                                # create url
-                                url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
-                                                    "data-relpermalink" in item.attrs]
-                                url = docs_host + str(url_relpermalink[0]) if url_relpermalink else docs_host
+                                    # create url
+                                    url_relpermalink = [item["data-relpermalink"] for item in html.find_all() if
+                                                        "data-relpermalink" in item.attrs]
+                                    url = docs_host + str(url_relpermalink[0]) if url_relpermalink else docs_host
 
-                                # create article object
-                                article['objectID'] = dirpath + '/' + filename
-                                article['URL'] = url
-                                article['title'] = title
-                                article['body'] = main
-                                article['file'] = dirpath + '/' + filename
-                                article['page_description'] = description
+                                    # create article object
+                                    article['objectID'] = dirpath + '/' + filename
+                                    article['URL'] = url
+                                    article['title'] = title
+                                    article['body'] = main
+                                    article['file'] = dirpath + '/' + filename
+                                    article['page_description'] = description
 
-                                if dirpath.startswith('public/ja'):
-                                    language = 'japanese'
-                                else:
-                                    language = 'english'
+                                    if dirpath.startswith('public/ja'):
+                                        language = 'japanese'
+                                    else:
+                                        language = 'english'
 
-                                article['language'] = language
+                                    article['language'] = language
 
-                                articles.append(article)
+                                    articles.append(article)
 
                         except AttributeError:
                             print('skipping %s, invalid html' % os.path.join(dirpath, filename))
