@@ -17,7 +17,7 @@ AWS Health provides ongoing visibility into the state of your AWS resources, ser
 
 Enable this integration to see AWS Health service events in Datadog.
 
-__Note, this integration only works AWS customers with a Business or Enterprise support plan.__
+__Note, this integration only works for AWS customers with a Business or Enterprise support plan.__
 
 ## Setup
 ### Installation
