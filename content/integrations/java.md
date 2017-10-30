@@ -28,7 +28,8 @@ A remote connection is required for the Datadog Agent to connect to the JVM, eve
 ### Configuration
 
 1.  Configure the Agent to connect using JMX and edit it according to your needs. Here is a sample `jmx.yaml` file:
-{{< highlight yaml>}}
+
+```yaml
 init_config:
   custom_jar_paths: # optional
     - /path/to/custom/jarfile.jar
@@ -82,7 +83,7 @@ instances:
         exclude:
           bean_regex:
             - regex_on_excluded_bean
-{{< /highlight >}}
+```
 
 #### Configuration Options
 
@@ -126,20 +127,22 @@ The regexes defined in `domain_regex` and `bean_regex` must conform to [Java's r
 The `domain_regex` and `bean_regex` filters were added in version 5.5.0.
 
 On top of these parameters, the filters support "custom" keys which means that you can filter by bean parameters. For example, if you want to collect metrics regarding the Cassandra cache, you could use the `type: - Caches` filter:
-{{< highlight yaml>}}
+
+```yaml
 conf:
 - include:
     domain: org.apache.cassandra.db
     type:
       - Caches
-{{< /highlight >}}
+```
 
 ### The `attribute` filter
 
 The `attribute` filter can accept two types of values:
 
 *   A dictionary whose keys are attributes names:
-{{< highlight yaml>}}
+
+```yaml
 conf:
   - include:
       attribute:
@@ -152,11 +155,12 @@ conf:
         bytesReceived:
           alias: tomcat.bytes_rcvd
           metric_type: counter
-{{< /highlight >}}
+```
+
 In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
 *   A list of attributes names:
-{{< highlight yaml>}}
+```yaml
 conf:
   - include:
       domain: org.apache.cassandra.db
@@ -170,7 +174,7 @@ conf:
         - ExceptionCount
         - Hits
         - RecentHitRate
-{{< /highlight >}}
+```
 
 In that case:
 
@@ -178,7 +182,8 @@ In that case:
   * The metric name will be jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]
 
 Here is another filtering example:
-{{< highlight yaml>}}
+
+```yaml
 instances:
   - host: 127.0.0.1
     name: jmx_instance
@@ -193,12 +198,13 @@ init_config:
           - 75thPercentile
           - 95thPercentile
           - 99thPercentile
-{{< /highlight >}}
+```
 
 #### Note
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
-{{< highlight yaml>}}
+
+```yaml
     # Datadog Agent > 5.3.0
       conf:
         - include:
@@ -218,7 +224,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
             domain: domain_name
             bean: second_bean_name
     ...
-{{< /highlight >}}
+```
 
 ### Validation
 
@@ -279,16 +285,16 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
   1. Locate the `jboss-cli-client.jar` file on your JBoss/WildFly server (by default, its path should be `$JBOSS_HOME/bin/client/jboss-cli-client.jar`).
   2. If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
-  {{< highlight yaml>}}
+```yaml
   # Datadog Agent >= 5.6.0
 
   init_config:
     custom_jar_paths:
       - /path/to/jboss-cli-client.jar
-  {{< /highlight >}}
+```
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
-  {{< highlight yaml>}}
+  ```yaml
   # Datadog Agent >= 5.6.0
 
   # The jmx_url may be different depending on the version of JBoss/WildFly you're using
@@ -298,7 +304,7 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
     + jmx_url: "service:jmx:remoting-jmx://localhost:9999"
       name: jboss-application  # Mandatory, but can be set to any value,
                                # will be used to tag the metrics pulled from 
-  {{< /highlight >}}
+  ```
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
 
@@ -312,18 +318,18 @@ If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomc
   2. If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 
-{{< highlight yaml>}}
+```yaml
 # Datadog Agent >= 5.6.0
 
 init_config:
   custom_jar_paths:
     - /path/to/catalina-jmx-remote.jar
-{{< /highlight >}}
+```
 
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
-{{< highlight yaml>}}
+```yaml
 # Datadog Agent >= 5.6.0
 
 # The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
@@ -331,7 +337,7 @@ instances:
   - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
     name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
                               # will be used to tag the metrics pulled from that instance
-{{< /highlight >}}
+```
 
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`

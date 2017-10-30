@@ -41,7 +41,7 @@ Here is how they fit together in a JSON dictionary:
 
 以下はこれらの要素が、1つのJSON書式で表現された例です:
 
-{{< highlight json >}}
+```json
 {
   "requests": [
     {
@@ -58,7 +58,7 @@ Here is how they fit together in a JSON dictionary:
     "yaxisoptionkey": "yaxisoptionvalue"
   }
 }
-{{< /highlight >}}
+```
 
 <!--
 In other words at the highest level the JSON structure is a dictionary with two, three, or four entries:
@@ -239,7 +239,7 @@ For any given metric, data may come from a number of hosts. The data will normal
 <!--
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
-{{< highlight json >}}
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -251,12 +251,12 @@ example we graph 5-minute load and its double:
     }
   ]
 }
-{{< /highlight >}}
+```
 
 You can also add, substract, multiply and divide a Series. Beware that
 Datadog does not enforce consistency at this point so you *can* divide
 apples by oranges.
-{{< highlight json >}}
+```json
 {
     "viz": "timeseries",
     "requests": [
@@ -265,12 +265,13 @@ apples by oranges.
       }
     ]
 }
-{{< /highlight >}}
+```
 -->
 
 時系列データには、簡単な演算( +, -, *, / )を適用することができます。
 次の例では、5分間のload averageの値とその倍の数値をグラフ表示することにします:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -282,11 +283,12 @@ apples by oranges.
     }
   ]
 }
-{{< /highlight >}}
+```
 
 時系列データ同士を、加算 減算 乗算 除算することもできます。
 Datadogでは、ここでは一貫性を強制していないので、*異なるものの除算をすることもできます*。
-{{< highlight json >}}
+
+```json
 {
     "viz": "timeseries",
     "requests": [
@@ -295,7 +297,7 @@ Datadogでは、ここでは一貫性を強制していないので、*異なる
       }
     ]
 }
-{{< /highlight >}}
+```
 
 <!-- ### Events -->
 
@@ -608,7 +610,8 @@ not in the bottom 10% nor in the top 30%.
 
 <!-- Here is a full JSON example: -->
 すべての要素を含んだJSON表記の例です:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -626,7 +629,7 @@ not in the bottom 10% nor in the top 30%.
      }
   },
 }
-{{< /highlight >}}
+```
 
 <!-- #### Examples -->
 
@@ -637,7 +640,8 @@ not in the bottom 10% nor in the top 30%.
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
 -->
 パラメーターに１つのメトリクスを指定した<code>rate()</code>関数を使った例です。<code>top()</code>と<code>top_offset()</code>以外の関数では、この<code>rate()</code>と同様のシンタックス表記を利用することできます。
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -647,11 +651,12 @@ Here is an example using the <code>rate()</code> function, which takes only a si
     }
   ]
 }
-{{< /highlight >}}
+```
 
 <!-- Here is an example using the <code>top()</code> function: -->
 <code>top()</code> 関数を使用した例:
-{{< highlight json >}}
+
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -661,7 +666,7 @@ Here is an example using the <code>rate()</code> function, which takes only a si
     }
   ]
 }
-{{< /highlight >}}
+```
 
 <!--
 This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.

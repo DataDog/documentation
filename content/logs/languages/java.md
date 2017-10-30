@@ -24,7 +24,7 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.
+**To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
 
 ## Setup - Log to file
 ### Configure your logger
@@ -78,9 +78,9 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-### Configure the Datadog agent.
+### Configure the Datadog agent
 
-Create a `java.yaml` file in your `conf.d/` folder with the folowing content:
+Create a `java.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:
@@ -143,7 +143,7 @@ With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** will 
 
 So you can exploit *scope* as a field, and *durationInMs* & *quantity* as metrics.
 
-###MDC (Mapped Diagnostic Context)
+### MDC (Mapped Diagnostic Context)
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html).
 

@@ -22,6 +22,22 @@ $(document).ready(function () {
         }
     });
 
+    $(window).on('hashchange', function(){
+        var current_cat = "#all";
+        if (window.location.href.indexOf("#") > -1) {
+            current_cat = window.location.href.substring(window.location.href.indexOf("#"));
+        }
+        var current_selected = $('.controls .active').attr('href');
+        if (current_cat && current_selected && current_cat !== current_selected) {
+            $('a[href="' + current_cat + '"]:visible').get(0).click();
+        } else if(current_cat) {
+            $('a[href="' + current_cat + '"]:visible').get(0).click();
+        } else {
+            $('a[href="#all"]:visible').get(0).click();
+        }
+    });
+    $(window).trigger('hashchange');
+
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -59,21 +75,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     controls.addEventListener('click', function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         handleButtonClick(e.target, filters);
         // trigger same active on mobile
         var mobileBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
         activateButton(mobileBtn, mobilefilters);
-        return false;
+        //return false;
     });
 
     mobilecontrols.addEventListener('click', function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         handleButtonClick(e.target, mobilefilters);
         // trigger same active on desktop
         var desktopBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
         activateButton(desktopBtn, filters);
-        return false;
+        //return false;
     });
 
     function activateButton(activeButton, siblings) {

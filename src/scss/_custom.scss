@@ -37,7 +37,7 @@ $font-family-base:       $font-family-sans-serif;
 // Links
 $link-color:            theme-color("primary");
 $link-decoration:       none;
-$link-hover-color:      darken($link-color, 15%);
+$link-hover-color:      $ddpurple;
 $link-hover-decoration: none;
 
 //dropdowns
@@ -110,6 +110,7 @@ $headings-font-weight:600;
   box-shadow:none;
 }
 // we want the dropdowns to be outline like button
+.btn-outline-primary,
 .show > .btn-outline-primary.dropdown-toggle {
   background-color:#fff;
   color:$ddpurple;

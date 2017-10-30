@@ -194,7 +194,7 @@
   translation: "Hostmap"
 
 - id: customnav_infrastructurenav_livecontainers
-  translation: "Containters" 
+  translation: "Containers" 
 
 - id: customnav_infrastructurenav_process
   translation: "Processes"
@@ -221,8 +221,24 @@
 - id: customnav_lognav_explore
   translation: Explore
 
+- id: customnav_lognav_aws
+  translation: "AWS Log Collection"
+
 - id: customnav_lognav_java
-  translation: "Java Collection"
+  translation: "Java Log collection"
+
+- id: customnav_lognav_csharp
+  translation: "C# Log collection"
+
+- id: customnav_lognav_go
+  translation: "Go Log Collection"
+
+- id: customnav_lognav_nodejs
+  translation: "NodeJS Log collection"
+
+- id: customnav_lognav_ruby
+  translation: "Ruby Log collection"
+
 
 ##########################
 ######## Monitors ########

@@ -158,6 +158,12 @@ sync_integration_descriptions() {
     pass_step  "${FUNCNAME}"
 }
 
+code_block_udpate() {
+    start_step
+    code_block.py || fail_step "${FUNCNAME}";
+    pass_step  "${FUNCNAME}"
+}
+
 push_site_to_s3() {
     # $1: BUCKET
     # $2: BRANCH
