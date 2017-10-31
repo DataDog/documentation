@@ -1,34 +1,17 @@
+{{ $dot := . }}
 <hr class="mt-40"/>
 <h2>Questions?</h2>
 <div class="row questions">
+    {{ range $dot.Page.Site.Data.partials.questions.questions }}
     <div class="col-6 col-md-4 mb-4">
-        <a class="card" href="https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1">
+        <a class="card" href="{{ .link }}">
             <div class="card-body text-center">
-                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/support.png") }}" />
-                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/support_p.png") }}" />
-                <h4 class="card-title">Support</h4>
-                <p class="d-none d-sm-block card-text">Install it, Configure it, Learn how it works</p>
+                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) ) }}" />
+                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image_hover) ) }}" />
+                <h4 class="card-title">{{ .title }}</h4>
+                <p class="d-none d-sm-block card-text">{{ .text }}</p>
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-4 mb-4">
-        <a class="card" href="https://www.datadoghq.com/about/contact/">
-            <div class="card-body text-center">
-                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/sales.png") }}" />
-                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/sales_p.png") }}" />
-                <h4 class="card-title">Sales</h4>
-                <p class="d-none d-sm-block card-text">Install it, Configure it, Learn how it works</p>
-            </div>
-        </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card" href="{{ .Site.BaseURL }}faq/">
-            <div class="card-body text-center">
-                <img class="static" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/faq.png") }}" />
-                <img class="hover" width="70" height="70" src="{{ partial "img.html" (dict "root" . "src" "icons/faq_p.png") }}" />
-                <h4 class="card-title">FAQ</h4>
-                <p class="d-none d-sm-block card-text">Install it, Configure it, Learn how it works</p>
-            </div>
-        </a>
-    </div>
+    {{ end }}
 </div>

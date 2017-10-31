@@ -22,11 +22,17 @@
 
     <div class="container">
         <div class="row">
-            <div class="d-none d-lg-flex col-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 side">
+            <div class="d-none d-lg-flex col-12 col-sm-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-12 col-lg-8 col-xl-9 main">
+            <div class="col-12 col-lg-7 col-xl-7 main">
                 {{ block "main" . }}{{ end }}
+            </div>
+            <div class="col-2" style="padding-top: 65px;">
+                <div class="sticky" style="top:100px;">
+                    <h5>TABLE OF CONTENTS</h5>
+                    {{ .TableOfContents }}
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,23 @@
+left:
+  - name: product
+    link: "https://www.datadoghq.com/product/"
+    title: "Product"
+  - name: docs
+    link: "https://docs.datadoghq.com/"
+    title: "Docs"
+  - name: pricing
+    link: "https://www.datadoghq.com/pricing/"
+    title: "Pricing"
+  - name: customers
+    link: "https://www.datadoghq.com/customers/"
+    title: "Customers"
+right:
+  - name: about
+    link: "https://www.datadoghq.com/about/"
+    title: "About"
+  - name: blog
+    link: "https://www.datadoghq.com/blog/"
+    title: "Blog"
+  - name: login
+    link: "https://app.datadoghq.com/"
+    title: "Login"

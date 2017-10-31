@@ -1,0 +1,11 @@
+#TableOfContents > ul {
+  padding:0;
+  margin:0;
+  list-style-type:none;
+}
+#TableOfContents ul {
+  list-style-type: none;
+}
+#TableOfContents ul > li > ul {
+  padding-left:10px;
+}
