@@ -36,12 +36,12 @@
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
     <img class="lazyload {{- if .Get "responsive" }} img-fluid {{ end }}"
-         src="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
+         src="{{ print $img "?" $img_param "&" $img_param_q | relURL }}"
          alt="{{ with .Get "alt"}}{{.}}{{end}}"
          data-src="{{ print $img "?" $pop_param | relURL }}"
          data-srcset="{{ print $img "?" $pop_param | relURL }}"
          {{ if eq .Page.Type "blog" }}
-           srcset="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
+           srcset="{{ print $img "?" $img_param "&" $img_param_q | relURL }}"
          {{ end }}
          {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
