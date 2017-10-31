@@ -225,7 +225,7 @@
   translation: "AWS Log Collection"
 
 - id: customnav_lognav_java
-  translation: "Java Log collection"
+  translation: "Java Log Collection"
 
 - id: customnav_lognav_csharp
   translation: "C# Log collection"
