@@ -29,10 +29,7 @@
                 {{ block "main" . }}{{ end }}
             </div>
             <div class="col-2" style="padding-top: 65px;">
-                <div class="sticky" style="top:100px;">
-                    <h5>TABLE OF CONTENTS</h5>
-                    {{ .TableOfContents }}
-                </div>
+                {{ partial "table-of-contents/table-of-contents.html" . }}
             </div>
         </div>
     </div>

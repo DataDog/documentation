@@ -1,3 +1,5 @@
+$ddpurple:    #774DA2;
+
 #TableOfContents > ul {
   padding:0;
   margin:0;
@@ -8,4 +10,29 @@
 }
 #TableOfContents ul > li > ul {
   padding-left:10px;
+}
+
+#TableOfContents ul ul ul {
+  display: none;
+}
+
+#TableOfContents {
+  ul {
+    li {
+      .toc_scrolled {
+        color: $ddpurple;
+      }
+      a {
+        &:hover {
+          color: $ddpurple;
+        }
+        &.toc_scrolled {
+          color:$ddpurple;
+        }
+      }
+    }
+    .toc_open ~ ul {
+      display:block !important;
+    }
+  }
 }

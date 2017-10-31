@@ -6,7 +6,7 @@ $(document).ready(function () {
     function buildMap() {
         mapping = [];
         var link = null;
-        $('.side .sidenav ul a').each(function() {
+        $('#TableOfContents ul a').each(function() {
             var href = $(this).attr('href');
             var id = href.replace('#', '').replace(' ','-');
             var header = $('[id="'+id+'"]');

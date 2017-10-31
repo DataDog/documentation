@@ -28,12 +28,14 @@ $(document).ready(function () {
             current_cat = window.location.href.substring(window.location.href.indexOf("#"));
         }
         var current_selected = $('.controls .active').attr('href');
-        if (current_cat && current_selected && current_cat !== current_selected) {
-            $('a[href="' + current_cat + '"]:visible').get(0).click();
-        } else if(current_cat) {
-            $('a[href="' + current_cat + '"]:visible').get(0).click();
-        } else {
-            $('a[href="#all"]:visible').get(0).click();
+        if(current_selected) {
+            if (current_cat && current_selected && current_cat !== current_selected) {
+                $('a[href="' + current_cat + '"]:visible').get(0).click();
+            } else if(current_cat) {
+                $('a[href="' + current_cat + '"]:visible').get(0).click();
+            } else {
+                $('a[href="#all"]:visible').get(0).click();
+            }
         }
     });
     $(window).trigger('hashchange');
