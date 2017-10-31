@@ -9,6 +9,7 @@ aliases:
 sidebar:
   nav:
     - header: Menu
+disable_toc: true
 ---
 # Welcome to Datadog Docs!
 

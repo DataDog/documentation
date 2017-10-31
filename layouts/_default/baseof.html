@@ -25,12 +25,14 @@
             <div class="d-none d-lg-flex col-12 col-sm-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-12 col-lg-7 col-xl-7 main">
+            <div class="col-12 {{ if not .Params.disable_toc }}col-lg-7 col-xl-7{{ else }}col-lg-9 col-xl-9{{ end }} main">
                 {{ block "main" . }}{{ end }}
             </div>
+            {{ if not .Params.disable_toc}}
             <div class="col-2" style="padding-top: 65px;">
                 {{ partial "table-of-contents/table-of-contents.html" . }}
             </div>
+            {{ end }}
         </div>
     </div>
 
