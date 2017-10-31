@@ -29,7 +29,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
 2. Change the Runtime to **Python 2.7** and set the handler to **lambda_function.lambda_handler**
-    {{< img src="logs/aws/select_python.png" alt="Select Python" >}}
+    {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" >}}
 3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
     
     * Setup an environment variable (Preferred)

@@ -224,15 +224,11 @@
 - id: customnav_lognav_aws
   translation: "AWS Log Collection"
 
-- id: customnav_lognav_java
-  translation: "Java Log Collection"
+- id: customnav_lognav_languages
+  translation: "Languages"
 
 - id: customnav_lognav_csharp
   translation: "C# Log collection"
-
-# taxonomies
-- id: groups_return_to_videos
-  translation: "Return to All Video Groups."
 
 - id: customnav_lognav_go
   translation: "Go Log Collection"
@@ -243,6 +239,8 @@
 - id: customnav_lognav_ruby
   translation: "Ruby Log collection"
 
+- id: customnav_lognav_java
+  translation: "Java Log collection"
 
 ##########################
 ######## Monitors ########

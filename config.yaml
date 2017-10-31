@@ -479,10 +479,15 @@ languages:
           url: "/logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_java
-          name: "Java"
-          url: "/logs/java/"
+        - identifier: customnav_lognav_languages
+          name: "Languages"
+          url: "/logs/languages/"
           weight: 60
+          parent: menu_references_logs
+        - identifier: customnav_lognav_aws
+          name: "AWS"
+          url: "/logs/aws/"
+          weight: 70
           parent: menu_references_logs
         # LOGS - Subnav end
 
