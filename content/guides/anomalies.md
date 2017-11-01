@@ -74,6 +74,8 @@ There are four different anomaly detection algorithms:
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
+Please note that while viewing or editing an Anomaly Monitor the "Historical Context" field is just for the viewer and not meant to be saveable. Each individual algorithm uses its own amount of historical data.
+
 The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
 {{< img src="anomalies/alg_comparison_1.png" >}}
