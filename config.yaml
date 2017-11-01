@@ -41,7 +41,7 @@ languages:
         # AGENT - Subnav start
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
-          url: "/agent/"
+          url: "/agent/basic_agent_usage/"
           weight: 10
           parent: menu_references_agent
         - identifier: amazonlinux
