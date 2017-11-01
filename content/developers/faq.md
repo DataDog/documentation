@@ -45,32 +45,32 @@ and makes scaling your infrastructure a breeze.
 For a quick example to demonstrate the power of tagging, perhaps you're
 looking for a sum of two metrics, which you might normally define as follows:
 
-~~~
+```
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
-~~~
+```
 
 What we recommend doing is leaving off the hostname; it will then default to the host
 that is sending that point, since they’re different hosts it will be treated as different points:
 
-~~~
+```
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
-~~~
+```
 
 With these tags you can then do:
 
-~~~
+```
 sum:page.views{domain:example.com}
-~~~
+```
 
 which should give the desired result.
 
 To get a breakdown by host, you can do:
 
-~~~
+```
 sum:page.views{domain:example.com} by {host}
-~~~
+```
 
 Further tagging info can be found [here][architecture-2].
 

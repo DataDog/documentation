@@ -46,18 +46,18 @@ There are several ways to specify an environment when reporting data:
 
     You can override the default tag used by the trace agent in the configuration. This will tag all the traces coming through the agent. It overrides the value above.
 
-    ~~~
+    ```
     [trace.config]
     env = pre-prod
-    ~~~
+    ```
 
 3. Per trace
 
     When submitting a single trace, you can specify an environment by tagging one of its span with the metadata key `env` and the value you would like. It overrides the value above.
 
-    ~~~
+    ```
     # in code this looks like
     span.set_tag('env', 'prod')
-    ~~~
+    ```
 
 

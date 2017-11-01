@@ -31,13 +31,13 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You c
 
 ##### Upload Datadog's release to your BOSH Director
 
-~~~
+```
 # BOSH CLI v1
 bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 
 # BOSH CLI v2
 bosh upload-release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
-~~~
+```
 
 If you'd like to create your own release, see the [Datadog Agent BOSH Release repository](https://github.com/DataDog/datadog-agent-boshrelease).
 
@@ -45,7 +45,7 @@ If you'd like to create your own release, see the [Datadog Agent BOSH Release re
 
 Add the following to your BOSH Director's runtime configuration file (e.g. `runtime.yml`):
 
-~~~
+```
 ---
 releases:
   - name: datadog-agent
@@ -63,7 +63,7 @@ addons:
       api_key: <YOUR_DATADOG_API_KEY>
       tags: ["cloudfoundry_deployment_1"] # any tags you wish
       generate_processes: true            # to enable the process check
-~~~
+```
 
 To see which `datadog-agent` release version you uploaded earlier, run `bosh releases`.
 
@@ -73,7 +73,7 @@ If you don't have a local copy of the runtime configuration, create a `runtime.y
 
 For each extra Agent check you want to enable across your deployment, add its configuration under the `properties.dd.integrations` key, e.g.:
 
-~~~
+```
   properties:
     dd:
       integrations:
@@ -84,7 +84,7 @@ For each extra Agent check you want to enable across your deployment, add its co
         #process:
         #  init_config: {}
         #...
-~~~
+```
 
 The configuration under each check name should look the same as if you were configuring the check in its own file in the Agent's conf.d directory.
 
@@ -94,24 +94,24 @@ To customize configuration for the default checks—system, network, disk, and n
 
 ##### Sync the runtime configuration to the Director
 
-~~~
+```
 # BOSH CLI v1
 bosh update runtime-config runtime.yml
 
 # BOSH CLI v2
 bosh update-runtime-config runtime.yml
-~~~
+```
 
 ##### Redeploy your Cloud Foundry deployment
 
-~~~
+```
 # BOSH CLI v1
 bosh deployment yourDeploymentManifest.yml
 bosh -n deploy
 
 # BOSH CLI v2
 bosh -n -d yourDeployment deploy yourDeploymentManifest.yml
-~~~
+```
 
 Since runtime configuration applies globally, BOSH will redeploy every node in your deployment. If you have more than one deployment, redeploy those, too, to install the Datadog Agent everywhere.
 
@@ -131,13 +131,13 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 
 ##### Upload Datadog's release to your BOSH Director
 
-~~~
+```
 # BOSH CLI v1
 bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 
 # BOSH CLI v2
 bosh upload-release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
-~~~
+```
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository](https://github.com/DataDog/datadog-firehose-nozzle-release).
 
@@ -145,7 +145,7 @@ If you'd like to create your own release, see the [Datadog Firehose Nozzle relea
 
 In the manifest that contains your UAA configuration, add a new client for the Datadog Nozzle so the job(s) can access the Firehose:
 
-~~~
+```
 uaa:
   clients:
     datadog-firehose-nozzle:
@@ -155,7 +155,7 @@ uaa:
       override: true
       scope: doppler.firehose
       secret: <MAKE_IT_A_GOOD_ONE>
-~~~
+```
 
 And redeploy the deployment to add the user.
 
@@ -163,7 +163,7 @@ And redeploy the deployment to add the user.
 
 Configure one or more Nozzle jobs in your main Cloud Foundry deployment manifest (e.g. cf-manifest.yml):
 
-~~~
+```
 jobs:
 #- instances: 4
 #  name: some_other_job
@@ -193,33 +193,33 @@ jobs:
       client: datadog-firehose-nozzle # client name you just configured
       client_secret: <SECRET_YOU_JUST_CONFIGURED>
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
-~~~
+```
 
 To see all available configuration options, check the [Datadog Firehose Nozzle repository](https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec).
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
-~~~
+```
 releases:
 # - name: some-other-release
 #   version: x.y.z
 # ...
   - name: datadog-firehose-nozzle
     version: $VERSION_YOU_UPLOADED # specify the real version, i.e. x.y.z, not 'latest'
-~~~
+```
 
 To see which `datadog-firehose-nozzle` release version you uploaded earlier, run `bosh releases`.
 
 ##### Redeploy the deployment
 
-~~~
+```
 # BOSH CLI v1
 bosh deployment cf-manifest.yml
 bosh -n deploy
 
 # BOSH CLI v2
 bosh -n -d cf-manifest deploy cf-manifest.yml
-~~~
+```
 
 ##### Verify the Nozzle is collecting
 
@@ -235,7 +235,7 @@ The plugin is packaged with the BOSH Health Monitor, so if the Health Monitor is
 
 In the manifest originally used to deploy the Director (e.g. bosh.yml), configure the Datadog plugin:
 
-~~~
+```
 instance_groups:
 - instances: 1
   properties:
@@ -248,7 +248,7 @@ instance_groups:
         api_key: <YOUR_DATADOG_API_KEY>
         application_key: <YOUR_DATADOG_APP_KEY>
         pagerduty_service_name: "your_service_name" # optional
-~~~
+```
 
 ##### Redeploy the Director
 
@@ -256,13 +256,13 @@ BOSH cannot simply configure the plugin and restart the Health Monitor; it must 
 
 You may use [bosh-init](https://bosh.io/docs/install-bosh-init.html) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
 
-~~~
+```
 # bosh-init (legacy)
 bosh-init deploy bosh.yml
 
 # BOSH CLI v2 - if your state file is not named bosh-state.yml, provide its name via --state
 bosh create-env --state=your-state-file.json bosh.yml
-~~~
+```
 
 ##### Verify the plugin is working
 

@@ -104,11 +104,11 @@ In the **Trigger when** field, write your desired trigger condition using boolea
 
 The following are all valid trigger conditions:
 
-~~~
+```
 !(a && b)
 a || b && !c
 (a || b) && (c || d)
-~~~
+```
 
 Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
 
@@ -119,10 +119,10 @@ In the API, a composite monitor's trigger condition is called its query. While a
 
 For two non-composite monitors with the following queries:
 
-~~~
+```
 "avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # monitor ID: 1234
 "avg(last_1m):avg:system.cpu.system{role:database} > 50" # monitor ID: 5678
-~~~
+```
 
 a composite monitor's query is simply `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 -->
@@ -132,11 +132,11 @@ In the **Trigger when** field, write your desired trigger condition using boolea
 
 The following are all valid trigger conditions:
 
-~~~
+```
 !(a && b)
 a || b && !c
 (a || b) && (c || d)
-~~~
+```
 
 Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
 
@@ -147,10 +147,10 @@ In the API, a composite monitor's trigger condition is called its query. While a
 
 For two non-composite monitors with the following queries:
 
-~~~
+```
 "avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # monitor ID: 1234
 "avg(last_1m):avg:system.cpu.system{role:database} > 50" # monitor ID: 5678
-~~~
+```
 
 a composite monitor's query is simply `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 
@@ -173,7 +173,7 @@ Write a notification message as you would with any other monitor, using the @-sy
 
 In addition to your own message, notifications (e.g. emails) for the composite monitor will show the status of the individual monitors:
 
-~~~
+```
 [Triggered] CPU + Memory composite monitor
 
 Database servers are high on CPU usage AND low on memory. @kent@datadoghq.com
@@ -193,7 +193,7 @@ Query: 1896131 && 1896130
   1 Alert | 4 OK
 
 The monitor was last triggered at Mon Apr 17 2017 11:31:47 EDT (28 secs ago)
-~~~
+```
 -->
 ### 通知先と通知本文の設定
 
@@ -204,7 +204,7 @@ Write a notification message as you would with any other monitor, using the @-sy
 
 In addition to your own message, notifications (e.g. emails) for the composite monitor will show the status of the individual monitors:
 
-~~~
+```
 [Triggered] CPU + Memory composite monitor
 
 Database servers are high on CPU usage AND low on memory. @kent@datadoghq.com
@@ -224,7 +224,7 @@ Query: 1896131 && 1896130
   1 Alert | 4 OK
 
 The monitor was last triggered at Mon Apr 17 2017 11:31:47 EDT (28 secs ago)
-~~~
+```
 
 <!--
 ### Save the monitor

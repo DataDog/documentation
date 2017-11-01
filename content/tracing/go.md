@@ -12,15 +12,15 @@ To begin tracing applications written in Go, first [install and configure the Da
 
 Next, install the Go Tracer from the Github repository:
 
-~~~
+```go
 go get "github.com/DataDog/dd-trace-go/tracer"
-~~~
+```
 
 Finally, import the tracer and instrument your code!
 
 ## Example
 
-~~~
+```go
 package main
 
 import (
@@ -32,7 +32,7 @@ func main {
   defer span.Finish()
   span.SetMeta("my_tag", "my_value")
 }
-~~~
+```
 
 For another example, see the [`example_test.go`](https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go) file in the Go Tracer package
 

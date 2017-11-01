@@ -21,14 +21,14 @@ Though we don't require tests for each metric collected, we strongly encourage y
 
 Tests can be easily added by extending the `AgentCheckTest` class. Additionally, you may import Attributes from Nose to manage requirements.
 
-~~~
+```python
 from nose.plugins.attrib import attr
 from tests.checks.common import AgentCheckTest
 
 @attr(requires='network')
 class HTTPCheckTest(AgentCheckTest)`
   ...
-~~~
+```
 
 ### Datadog Integrations
 
@@ -63,7 +63,7 @@ Parameters:
 
 * **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
 
-~~~
+```
 {
     'instances': [
         {
@@ -72,18 +72,18 @@ Parameters:
         }
     ]
 }
-~~~
+```
 
 
 * **agent_config** (*dictionary*) – A customized Datadog agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
 
-~~~
+```
 {
     'get_services_in_cluster': self.mock_get_services_in_cluster,
     'get_nodes_with_service': self.mock_get_nodes_with_service,
 }
-~~~
+```
 
 
 * **force_reload** (*boolean*) – Reload the check before running it.

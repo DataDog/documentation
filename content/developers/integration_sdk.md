@@ -58,7 +58,7 @@ The file where your check logic should reside. The skeleton function will boiler
 
 For example:
 
-~~~
+```python
 # Example check.py
 import time
 from checks import AgentCheck
@@ -79,7 +79,7 @@ class MyIntegrationCheck(AgentCheck):
           'action:my_integration_custom_event',
       ]
     })
-~~~
+```
 
 For more information about writing checks and how to send metrics to the Datadog agent, reference our [Writing an Agent Check guide][2]
 
@@ -91,7 +91,7 @@ If your tests require a testing environment, you can use the `install` and `clea
 
 For example:
 
-~~~
+```ruby
 # Example my_integration.rake
 namespace :ci do
   namespace :my_integration do |flavor|
@@ -106,7 +106,7 @@ namespace :ci do
 
       # Setup a docker testing container.
       $(docker run -p 80:80 --name my_int_container -d my_docker)
-~~~
+```
 
 For more information about writing integration tests, please see [the documentation in the Datadog agent repository][3]. You can also reference the [ci common library][4] for helper functions such as `install_requirements` and `sleep_for`.
 
@@ -195,7 +195,7 @@ Though we don't require test for each of the metrics collected by your integrati
 
 Here's an example `test_my_integration.py`:
 
-~~~
+```python
 # Example test_my_integraion.py
 from nose.plugins.attrib import attr
 from checks import AgentCheck
@@ -210,7 +210,7 @@ Class TestMyIntegration(AgentCheckTest):
                             status=AgentCheck.OK,
                             tags=[host:localhost', 'port:80'])
     self.coverage_report()
-~~~
+```
 
 For more information about tests and available test methods, please reference the [AgentCheckTest class in the Datadog Agent repository][7]
 
@@ -233,10 +233,10 @@ Don't add this annotation to your unit and mock tests ; those run via `rake ci:r
 
 To iterate quickly on your unit and mock tests, instead of running all the tests with `rake ci:run[default]`, you can simply run:
 
-~~~
+```
 # run unit and mock tests, in the virtualenv
 $ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
-~~~
+```
 
 ### Docker test environments
 

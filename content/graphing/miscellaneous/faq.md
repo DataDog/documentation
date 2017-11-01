@@ -12,26 +12,26 @@ customnav: graphingnav
 To graph the sum of `app.foo.bar{env:staging}` and `app.foo.baz{env:staging}`
 grouped `by {host}`, write a graph query that looks like:
 
-~~~
+```
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
-~~~
+```
 
 ### What's the syntax to sum multiple datapoints into a single line?
 
 
 You can switch commas separating the queries into plus signs, from:
 
-~~~
+```
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
-~~~
+```
 
 to:
 
-~~~
+```
 "q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
-~~~
+```
 
 ### How do I do graph smoothing?
 

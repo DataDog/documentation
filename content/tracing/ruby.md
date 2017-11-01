@@ -12,15 +12,15 @@ To begin tracing applications written in Ruby, first [install and configure the 
 
 Next, install the ddtrace gem:
 
-~~~
+```ruby
 gem install ddtrace
-~~~
+```
 
 Finally, import the tracer and instrument your code!
 
 ## Example
 
-~~~
+```ruby
 require 'ddtrace'
 
 tracer.trace("web.request") do |span|
@@ -28,7 +28,7 @@ tracer.trace("web.request") do |span|
   span.app_type = "web"
   span.set_tag("my_tag", "my_value")
 end
-~~~
+```
 
 For more examples, see the [RubyDoc Gem documentation](http://www.rubydoc.info/gems/ddtrace/#Advanced_usage).
 

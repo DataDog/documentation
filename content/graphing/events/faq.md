@@ -59,7 +59,7 @@ For more details about our events API, visit our [API documentation][events-3].
 
 Here is an example:
 
-~~~
+```
 {
   "title": “Host CPU above 75% for 5 minutes",
   "text": "Host CPU has been above 75% for the last 5 minutes …etc",
@@ -67,7 +67,7 @@ Here is an example:
   "tags": ["vsphere", "env:prod", "host:i-a4f761f0", "role:admin"],
   "alert_type": "error"
 }
-~~~
+```
 
 ### What formatting is available for event text?
 
