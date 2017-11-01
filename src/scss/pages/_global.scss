@@ -78,6 +78,16 @@ p {
 .main {
   padding-top:30px;
   padding-bottom:100px;
+  h2 > a,
+  h3 > a,
+  h4 > a,
+  h5 > a {
+    color:#000;
+    border-bottom: 1px solid transparent;
+    &:hover {
+      border-bottom: 1px solid #000;
+    }
+  }
   & > a,
   & > p > a,
   & > ol li a,

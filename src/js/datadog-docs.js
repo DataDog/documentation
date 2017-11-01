@@ -306,19 +306,36 @@ $(document).ready(function () {
         });
     }
 
+
+    // slide to anchors
+    function moveToAnchor(id) {
+        var href = '#'+id;
+        var htag = $(href);
+        var customPadding = 10; // how much till it looks good with eye
+        var offset = 64 + customPadding;
+        var url = window.location.href.replace(window.location.hash, '');
+        if(htag.length) {
+            $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
+            //$("html, body").scrollTop(htag.offset().top - offset);
+            window.history.pushState(null, null, url + href);
+        }
+    }
+
+    //
     $('#TableOfContents a, .sidenav-api a').on('click', function(e) {
         var href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
-            var htag = $(''+href);
-            var customPadding = 10; // how much till it looks good with eye
-            var offset = 64 + customPadding;
-            var url = window.location.href.replace(window.location.hash, '');
-            if(htag.length) {
-                $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
-                //$("html, body").scrollTop(htag.offset().top - offset);
-                window.history.pushState(null, null, url + href);
-                return false;
-            }
+            moveToAnchor(href.substr(1));
+            return false;
         }
+    });
+
+    // make header tags with ids and make clickable as anchors
+    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
+        var id = $(this).attr('id');
+        $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
+            moveToAnchor(id);
+            return false;
+        });
     });
 });
