@@ -14,8 +14,16 @@
                 {{ end }}
                 <span>{{ $element.Name }}</span>
             </a>
-            {{ if $element.Children }}
-                {{ partial "sidenav/recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
+
+            {{ if eq $element.Name "Integrations" }}
+                {{/* partial "sidenav/integrations-nav.html" (dict "context" $ctx) */}}
+                {{ if $element.Children }}
+                    {{ partial "sidenav/recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
+                {{ end }}
+            {{ else }}
+                {{ if $element.Children }}
+                    {{ partial "sidenav/recursive-nav.html" (dict "context" $ctx "data" $element.Children) }}
+                {{ end }}
             {{ end }}
         </li>
     {{ end }}
