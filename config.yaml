@@ -322,22 +322,22 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_langs
           name: "languages"
-          url: "/tracing/"
+          url: "/tracing/languages/"
           weight: 50
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_go
           name: "Go"
-          url: "/tracing/go/"
+          url: "/tracing/languages/go/"
           weight: 10
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_python
           name: "Python"
-          url: "/tracing/python/"
+          url: "/tracing/languages/python/"
           weight: 20
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
-          url: "/tracing/ruby/"
+          url: "/tracing/languages/ruby/"
           weight: 30
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_docker
