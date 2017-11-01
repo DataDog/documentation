@@ -43,7 +43,7 @@ $(document).ready(function () {
                 //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
                 obj.navLink.removeClass('toc_scrolled');
 
-                if( (winTop >= obj.header.offset().top - localOffset) && (winTop < nextobj.header.offset().top - localOffset) ) {
+                if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
                     //console.log(obj.navLink);
                     obj.navLink.addClass('toc_scrolled');
                     // add toc open to parents of this toc_scrolled
