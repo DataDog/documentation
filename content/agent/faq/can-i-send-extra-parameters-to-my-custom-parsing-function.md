@@ -1,5 +1,5 @@
 ---
-title: Custom log parsing: Can I send extra parameters to my custom parsing function?
+title: Can I send extra parameters to my custom parsing function?
 kind: faq
 customnav: agentnav
 ---
