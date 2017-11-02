@@ -2,7 +2,6 @@
 title: 通知先の設定
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 

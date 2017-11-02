@@ -2,7 +2,6 @@
 title: Manage Monitor
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 

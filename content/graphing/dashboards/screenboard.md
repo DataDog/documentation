@@ -2,7 +2,6 @@
 title: Screenboard
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: graphingnav
 ---
 

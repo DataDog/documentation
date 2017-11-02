@@ -2,7 +2,6 @@
 title: Visualisation
 kind: documentation
 autotocdepth: 2
-hideguides: true
 language: ja
 customnav: graphingnav
 ---

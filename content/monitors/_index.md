@@ -2,7 +2,6 @@
 title: Create Monitor
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 
@@ -53,3 +52,18 @@ You can export the configuration JSON for a monitor right from the create screen
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
 {{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true">}}
+
+## Auditing Monitors
+
+Any changes to monitors will create an event in the stream that explains the change and shows the user that made the actual change.
+
+Assuming you've made changes to your Monitors, you can see examples with the following event search:
+```
+https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
+```
+
+We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
+
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
+
+Setting the above to "Notify" will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.

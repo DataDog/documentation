@@ -4,7 +4,6 @@ translation_status: tentative
 language: ja
 title: Composite Monitor (複合条件監視)
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 aliases:
     - /ja/guides/composite_monitors

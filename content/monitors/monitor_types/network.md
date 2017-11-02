@@ -2,7 +2,6 @@
 title: Network monitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Check the status of TCP/HTTP endpoints"
 ---

@@ -2,7 +2,6 @@
 title: Anomaly monitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 aliases:
     - /guides/anomalies

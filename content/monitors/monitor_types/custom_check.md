@@ -2,7 +2,6 @@
 title: Custom check monitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Monitor status of arbitrary custom checks"
 ---

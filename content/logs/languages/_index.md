@@ -2,7 +2,6 @@
 title: Log Collection Languages
 kind: Documentation
 autotocdepth: 3
-hideguides: true
 customnav: lognav
 description: "Configure your Datadog agent to gather logs from your favorite languages."
 beta: true

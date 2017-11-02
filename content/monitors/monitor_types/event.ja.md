@@ -2,7 +2,6 @@
 title: イベントを対象にしたMonitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Monitor events gathered by Datadog"
 ---

@@ -2,7 +2,6 @@
 title: Monitors Type
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 aliases:
     - /ja/monitoring

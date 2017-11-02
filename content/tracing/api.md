@@ -2,7 +2,6 @@
 title: Tracing API
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: tracingnav
 ---
 

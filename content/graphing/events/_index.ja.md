@@ -2,7 +2,6 @@
 title: メールによるイベント情報の送信
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: graphingnav
 sidebar:
   nav:

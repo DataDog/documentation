@@ -2,7 +2,6 @@
 title: グラフ表示入門
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: graphingnav
 language: ja
 alias:

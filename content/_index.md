@@ -2,7 +2,6 @@
 title: Get Started with Datadog
 kind: documentation
 customnav: main_references
-hideguides: true
 aliases:
   - /basic_agent_usage/
   - /guides/
