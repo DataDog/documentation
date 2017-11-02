@@ -136,7 +136,7 @@ Two of the four scenarios will trigger an alert, even though not all of the indi
 Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor. For example, if you have a composite monitor defined as `A && B`, and the component results look like this:
 
 |   | T0    | T1    | T2    |
-|---------------------------|
+|---|-------|-------|-------|
 | A | Alert | OK    | OK    |
 | B | OK    | Alert | Alert |
 
