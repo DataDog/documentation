@@ -21,5 +21,3 @@ customnav: tracingnav
 * [If I instrument a database with Datadog APM, will there be sensitive database data sent to Datadog?](/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog)
 * [Can I choose which hosts I will enable APM on?](/tracing/faq/can-i-choose-which-hosts-i-will-enable-apm-on)
 * [Are there possibilities of customizing the traces we collect?](/tracing/faq/are-there-possibilities-of-customizing-the-traces-we-collect)
-* [](/tracing/faq/)
-* [](/tracing/faq/)
