@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function compress_nav_on_scroll() {
         var width = $(window).width();
         var scrollTop = $(window).scrollTop();
-        var logoFs = 85;
+        var logoFs = 75;
         var newLogoFs = 0;
         var newH = 0;
         var el_height = 129;
@@ -43,13 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Resize logo font on scroll
-        if (scrollTop < logoFs / 2) {
-            newLogoFs = logoFs - scrollTop;
+        var logofinalsize = logoFs / 1.5;
+        if (scrollTop < logofinalsize) {
+            newLogoFs = logoFs - scrollTop / 2;
             if (scrollTop <= 0) {
                 newLogoFs = logoFs;
             }
         } else {
-            newLogoFs = logoFs / 2;
+            newLogoFs = logofinalsize;
         }
 
         if(scrollTop === 0) {

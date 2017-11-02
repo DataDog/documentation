@@ -14,6 +14,10 @@ $ddpurple:    #774DA2;
 
 #TableOfContents ul ul ul {
   display: none;
+  li a {
+    font-weight:200;
+    font-size:15px;
+  }
 }
 
 #TableOfContents {
@@ -24,6 +28,8 @@ $ddpurple:    #774DA2;
       }
       a {
         color:#000;
+        font-size:15px;
+        font-weight:600;
         &:hover {
           color: $ddpurple;
         }

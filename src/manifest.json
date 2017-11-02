@@ -10,8 +10,8 @@
         "node_modules/bootstrap/dist/js/bootstrap.js",
         "node_modules/mixitup/dist/mixitup.js",
         "node_modules/stickyfilljs/dist/stickyfill.js",
-        "src/js/vendor/algoliasearch.min.js",
-        "src/js/vendor/mousetrap.min.js"
+        "node_modules/algoliasearch/dist/algoliasearch.js",
+        "node_modules/mousetrap/mousetrap.js"
       ],
       "main": true
     },

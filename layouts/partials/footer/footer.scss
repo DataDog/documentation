@@ -1,5 +1,6 @@
 $footer_height: 333px;
 $footer_height_sm: 650px;
+$ddpurple:    #774DA2;
 
 html {
   position: relative;
@@ -59,6 +60,17 @@ body > footer {
     }
   }
   .footer-side {
+    .btn {
+      padding:11px 20px 12px;
+      text-transform: uppercase;
+      width:163px;
+      cursor:pointer;
+      font-size:18px;
+      color:#fff;
+      &:hover {
+        color:$ddpurple;
+      }
+    }
     .copyright {
       position:absolute;
       bottom:0;

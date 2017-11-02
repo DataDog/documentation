@@ -22,6 +22,7 @@
     "node": ">= 4.5"
   },
   "dependencies": {
+    "algoliasearch": "^3.24.5",
     "bootstrap": "^4.0.0-beta.2",
     "browser-sync": "^2.8",
     "del": "^2.2",
@@ -44,6 +45,7 @@
     "merge-stream": "^1.0",
     "minimist": "^1.1",
     "mixitup": "^3.2.1",
+    "mousetrap": "^1.6.1",
     "node-sass": "^4.1",
     "popper.js": "^1.12.5",
     "run-sequence": "^1.1.4",

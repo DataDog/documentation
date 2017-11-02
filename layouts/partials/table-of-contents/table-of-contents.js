@@ -14,15 +14,17 @@ $(document).ready(function () {
                 var navParentLinks = $(this).parents('#TableOfContents').find('ul > li').has($(this)).find('> a');
 
                 if(header.length) {
-                    mapping.push({
-                        'navLink': $(this),
-                        'navLinkPrev': link,
-                        'navParentLinks': navParentLinks,
-                        'id': id,
-                        'header': header,
-                        'isH2': header.is('h2'),
-                        'isH3': header.is('h3')
-                    });
+                    if(header.is('h2') || header.is('h3')) {
+                        mapping.push({
+                            'navLink': $(this),
+                            'navLinkPrev': link,
+                            'navParentLinks': navParentLinks,
+                            'id': id,
+                            'header': header,
+                            'isH2': header.is('h2'),
+                            'isH3': header.is('h3')
+                        });
+                    }
                 } else {
                     //console.log('could not find h2[id="'+id+'"]');
                 }
@@ -49,7 +51,12 @@ $(document).ready(function () {
                     // add toc open to parents of this toc_scrolled
                     //console.log(obj.navLink.parents('ul'));
                     obj.navParentLinks.each(function() {
-                        $(this).addClass('toc_open');
+                        var href = $(this).attr('href');
+                        var id = href.replace('#', '').replace(' ','-');
+                        var header = $('[id="'+id+'"]');
+                        if(header.is('h2')) {
+                            $(this).addClass('toc_open');
+                        }
                     });
                 }
             }
