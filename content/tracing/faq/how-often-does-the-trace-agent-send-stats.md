@@ -2,7 +2,6 @@
 title: How often does the trace agent send stats?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

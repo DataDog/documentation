@@ -2,7 +2,6 @@
 title: Dashboards
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: graphingnav
 ---
 

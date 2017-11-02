@@ -2,7 +2,6 @@
 title: How long is tracing data stored?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

@@ -2,7 +2,6 @@
 title: Integration monitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Monitor metric values or health status from a specific integration"
 ---

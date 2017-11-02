@@ -2,7 +2,6 @@
 title: How is the namespace for the trace metrics defined?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

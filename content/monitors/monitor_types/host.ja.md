@@ -2,7 +2,6 @@
 title: ホストを対象にしたMonitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Check if one or more hosts are reporting to Datadog"
 ---

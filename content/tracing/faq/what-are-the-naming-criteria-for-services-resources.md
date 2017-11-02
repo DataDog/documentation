@@ -2,7 +2,6 @@
 title: What are the naming criteria for services, resources, etc?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

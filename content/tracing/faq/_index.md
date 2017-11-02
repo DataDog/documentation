@@ -2,7 +2,6 @@
 title: Tracing FAQ
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

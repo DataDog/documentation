@@ -2,7 +2,6 @@
 title: On what platforms can I run the Trace Agent?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

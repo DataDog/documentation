@@ -2,7 +2,6 @@
 title: Is the Trace Agent open source?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

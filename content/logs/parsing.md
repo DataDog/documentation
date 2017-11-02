@@ -2,7 +2,6 @@
 title: Parsing
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
 beta: true

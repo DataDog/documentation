@@ -2,7 +2,6 @@
 title: メトリクスを対象にしたMonitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Compare values of a metric with a user defined threshold"
 ---

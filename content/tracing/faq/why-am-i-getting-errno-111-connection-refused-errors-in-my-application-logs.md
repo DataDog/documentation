@@ -2,7 +2,6 @@
 title: Why am I getting `[Errno 111] Connection refused` errors in my application logs?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

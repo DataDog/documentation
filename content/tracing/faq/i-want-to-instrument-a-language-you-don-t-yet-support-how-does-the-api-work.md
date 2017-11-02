@@ -2,7 +2,6 @@
 title: I want to instrument a language you don’t yet support, how does the API work?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

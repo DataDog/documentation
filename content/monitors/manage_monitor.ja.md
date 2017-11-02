@@ -2,7 +2,6 @@
 title: 設定済みのMonitorの管理
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 

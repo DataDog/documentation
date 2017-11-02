@@ -2,11 +2,26 @@
 title: ダウンタイムをスケジュールする
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
+
+## What happens to a monitor when it is muted (or has a downtime)?
+
+You can schedule downtimes and/or mute your Datadog monitors so that they will not alert at specific times when you do not want them to. You can read how to schedule downtimes here and here. 
+
+Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state will not trigger an event (nor the notification channels that that event would have set off).
+
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true">}}
+
+If a monitor has a transition from the RESOLVED state to either ALERT or WARNING while it has been silenced, and if it then remains in that ALERT or WARNING state once the silence-time expires, then the monitor will trigger an ALERT or WARNING event at the time that the silencing expires.
+
+{{< img src="monitors/downtimes/downtime_stop.png" alt="downtime stop" responsive="true">}}
+
+By default, this is not true of NO DATA alerts: if a monitor has transitioned from the RESOLVED state to NO DATA while it has been silenced, and if it remains in a NO DATA state once the silence-time expires, then there will be no NO DATA alert. But once data returns for that monitor scope, the monitor will trigger a recovery event. 
+
+This may seem unintuitive, but is the expected behavior today, and it has been made this way to protect from potentially spammy no-data alerts when using the "Autoresolve" feature. If in these circumstances you would prefer that the monitor trigger a NO DATA event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. To have that enabled, you can reach out to the support team (add email link) to request it.
 
 ## Manage Downtime
 

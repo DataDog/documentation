@@ -2,7 +2,6 @@
 title: If I instrument a database with Datadog APM, will there be sensitive database data sent to Datadog?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

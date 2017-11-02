@@ -2,7 +2,6 @@
 title: What is the Difference Between "Type", "Service", "Resource", and "Name"?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

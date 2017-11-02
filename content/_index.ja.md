@@ -5,7 +5,6 @@ language: ja
 title: Datadogでメトリクスの監視を始めよう！
 kind: documentation
 customnav: main_references
-hideguides: true
 aliases:
     - /ja/guides/
 sidebar:

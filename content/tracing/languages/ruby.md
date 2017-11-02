@@ -2,7 +2,6 @@
 title: Tracing Ruby Applications
 kind: Documentation
 autotocdepth: 2
-hideguides: true
 customnav: tracingnav
 aliases:
 - /tracing/ruby/

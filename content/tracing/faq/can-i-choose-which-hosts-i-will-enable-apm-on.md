@@ -2,7 +2,6 @@
 title: Can I choose which hosts I will enable APM on?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

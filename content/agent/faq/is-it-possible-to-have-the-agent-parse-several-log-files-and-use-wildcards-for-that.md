@@ -18,6 +18,6 @@ dogstreams: /path/to/logfolder/*.log:/path/to/parsers_module.py:parser_function_
 
 For further questions about setting up log parsing with the agent, you can refer to:
 
-* [Our official documentation](/agent/log)
+* [Our official documentation](/agent/logs)
 * [This step by step very detailed guide](https://help.datadoghq.com/hc/en-us/articles/209064386-How-to-collect-metrics-or-events-with-a-Custom-Log-Parser)
  

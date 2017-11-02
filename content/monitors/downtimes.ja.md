@@ -2,7 +2,6 @@
 title: Downtimes
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 

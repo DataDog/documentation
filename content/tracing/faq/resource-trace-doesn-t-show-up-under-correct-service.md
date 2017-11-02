@@ -2,7 +2,6 @@
 title: Resource/Trace doesn't show up under correct Service
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

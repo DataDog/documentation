@@ -2,7 +2,6 @@
 title: How to configure an Apdex for your traces with Datadog APM ?
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

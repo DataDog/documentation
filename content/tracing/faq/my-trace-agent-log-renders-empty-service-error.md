@@ -2,7 +2,6 @@
 title: My trace-agent.log renders "empty `Service`" error
 kind: faq
 autotocdepth: 3
-hideguides: true
 customnav: tracingnav
 ---
 

@@ -2,7 +2,6 @@
 title: AWS Log Collection
 kind: Documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 beta: true
 ---
