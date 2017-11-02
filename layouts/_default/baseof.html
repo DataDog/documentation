@@ -29,7 +29,7 @@
                 {{ block "main" . }}{{ end }}
             </div>
             {{ if not .Params.disable_toc}}
-            <div class="d-none d-lg-flex col-lg-2 col-xl-2 toc-container" style="padding-top: 65px;">
+            <div class="d-none d-lg-block col-lg-2 col-xl-2 toc-container" style="padding-top: 65px;">
                 {{ partial "table-of-contents/table-of-contents.html" . }}
             </div>
             {{ end }}
