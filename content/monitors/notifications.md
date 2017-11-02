@@ -2,9 +2,10 @@
 title: Notifications
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
+
+## Overview
 
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
@@ -142,6 +143,99 @@ We provide a number of different types of monitors and not all variables are ava
 </style>
 
 Note that some monitors offer addtional contextual variables based on what you are monitoring. For example, host monitors may provide variables for `host.availability-zone` and `host.cloud_provider`. You can see a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type `{{` to begin a template variable name.
+## Monitor Template Variable Explained 
+### {{comparator}}
+
+The {{comparator}} template variable's value is always a relational operator. It will correlate to the relational value selected in the monitor's "Set alert conditions" section:
+{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true">}}
+
+For example, when an alert set to trigger when a value rises "above" 50, this syntax:
+```
+  {{value}} {{comparator}} {{threshold}}
+```
+would yield a notification message like the following:
+```
+    51.47 > 50
+```
+
+### {{is_match}}
+
+This template variable allows you to trigger an alert based on the tags defined in your scope.
+
+ The variable uses the following format:
+```
+{{#is_match "tag_variable" "comparison_string"}}
+This will show if comparison_string is in tag_variable.
+{{/is_match}}
+```
+
+### {{is_recovery}} or {{is_alert_recovery}} 
+
+* {{is_recovery}} will trigger and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state. 
+* {{is_alert_recovery}} will trigger when a monitor recovers directly from an **ALERT** state to **OK** state. 
+* {{is_warning_recovery}} will trigger when a monitor recovers from a **WARNING** state to **OK** state
+
+This means that if the monitor switches from ALERT to WARNING then OK state:
+
+* the {{is_recovery}} would trigger
+* the {{is_alert_recovery}} wouldn't trigger 
+* the {{is_warning_recovery}} would trigger. 
+
+The @ notification inside the template variables will follow the same rules. 
+
+## Include links to appropriate dashboards in your Monitor Notifications
+
+Many organizations today would like to include additional context to their Alerts.  Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution. 
+
+Datadog makes message template variables available to each defined monitor.  Using these variables, you can dynamically build a URL that will link Datadog Users to an appropriate dashboard using the scope of the monitor.
+
+The are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages. 
+
+First example to review is the most common.  Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold.  The message template variable that can be leveraged in this instance would be {{host.name}}.  Include the following URL as a part of your Monitor “Say What’s Happening” section: 
+
+```
+https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
+```
+
+As you can see, `{{host.name}}` will be replaced with the offending host of the monitor in question. 
+
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true">}}
+
+Below you will find additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
+
+* **Hostmaps** - If you would like to include a HostMap to compare metrics with other similar hosts, you can use a link like below to be included in your Monitor: 
+```
+https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra 
+```
+The above link has more customizable options than your standard System Dashboard.  Here you have additional variables to define.  Most common variables passed into this URL are the following: 
+
+**Fillby, sizeby, filter**: Fill by can be defined by adding fillby:avg:<MetricName>.  Size by can be defined by adding sizeby:avg:<SecondMetricName>.  Filter can be used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding filter=<integration_name>
+{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true">}}
+
+The above will color fill the hexagons by system.cpu.system, it will size the hexagons by system.cpu.stolen and add a filter to only include Cassandra hosts. 
+
+**Integration Dashboards**- If you are building Application or Integration specific Monitors, you can link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.  In the example below all that is necessary to populate is the <integration_name> section for something like Cassandra, apache, snmp, etc as well as providing the scope for the offending host:
+
+```
+https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
+```
+{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true">}}
+
+**Manage Monitors Page** – If you would like to link to a Manage monitors page that displays all of the monitors for the host in question, you can define a link like below:  
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
+```
+
+The above will link to all monitors for this host.  You have other options available to further refine the link.  For example, if you would only like monitors that are in an Alert State, you can add the following status:Alert (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED).  Below is an example link:
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
+```
+{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true">}}
+
+If you would like all monitors for a specific application or integration, you can add the following query to the URL q=<integration_name> : 
+```
+https://app.datadoghq.com/monitors/manage?q=cassandra
+```
 
 ## What's next ? 
 

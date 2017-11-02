@@ -2,7 +2,6 @@
 title: Process monitor
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 description: "Check if a process is running on a host"
 ---

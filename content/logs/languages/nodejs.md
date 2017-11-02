@@ -2,7 +2,6 @@
 title: NodeJS log Collection
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 beta: true
 ---

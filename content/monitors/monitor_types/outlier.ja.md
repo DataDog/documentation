@@ -2,7 +2,6 @@
 title: Outlier Detection (外れ値検知)
 kind: documentation
 autotocdepth: 3
-hideguides: true
 customnav: monitortypenav
 aliases:
     - /ja/guides/outliers

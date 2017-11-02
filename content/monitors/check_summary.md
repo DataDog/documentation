@@ -2,7 +2,6 @@
 title: Check summary
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: monitornav
 ---
 
