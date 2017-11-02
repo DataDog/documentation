@@ -9,7 +9,7 @@ beta: true
 description: "See AWS service changes in Datadog as context rich events."
 ---
 
-{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event">}}
+{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
