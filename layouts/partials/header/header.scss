@@ -18,10 +18,15 @@ body > header {
       }
       .nav-button {
         .btn {
+          border:1px solid $ddpurple;
           background: #c024b6;
           background: linear-gradient(45deg,#c024b6,#3023ae);
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7749a3",endColorstr="#c900d2",GradientType=1);
           color: #fff;
+          &:hover {
+            background:#fff;
+            color:$ddpurple;
+          }
         }
       }
     }
@@ -84,6 +89,13 @@ body > header {
         font-size:18px;
         letter-spacing: .4px;
         line-height:31px;
+        &:hover {
+          border:1px solid $ddpurple;
+          background: #c024b6;
+          background: linear-gradient(45deg,#c024b6,#3023ae);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7749a3",endColorstr="#c900d2",GradientType=1);
+          color: #fff;
+        }
       }
     }
 

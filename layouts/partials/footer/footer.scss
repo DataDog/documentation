@@ -87,6 +87,11 @@ body > footer {
   }
   body > footer {
     height:$footer_height_sm;
+    .footer-side {
+      .btn {
+        width:100%;
+      }
+    }
   }
 }
 
