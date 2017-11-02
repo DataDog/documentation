@@ -50,12 +50,6 @@ You can click on any log line to see more details about it:
 
 {{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" >}}
 
-### View a log line in context
-When clicking a log line for more detail, click on « view in context »: 
-
-This lets you see log lines dated just before and after your selected log — even if they don't match your filters.
-
-For syslog-formatted logs, the hostname and service name values corresponding to the log line are automatically selected in the facet checkboxes as filters.
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
