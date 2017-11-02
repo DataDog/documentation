@@ -8,7 +8,7 @@ listorder: 14
 If you're unfamiliar with the basics of Datadog Monitors, first read the <a href="https://docs.datadoghq.com/guides/monitors/">Guide to Monitors</a>
 </div>
 
-Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 
+Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions.
 You can choose up to 10 existing monitors—monitor A and monitor B, say—and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
 With regard to configuration, a composite monitor is independent of its constituent monitors. You can modify the notification policy of a composite monitor without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor will not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
@@ -130,6 +130,21 @@ Consider a composite monitor that uses three individual monitors—A, B, and C�
 | Skipped (F) | No Data (F)| Unknown (T)| Skipped (F)             |
 
 Two of the four scenarios will trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (and in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
+
+### How a component monitor's status is determined
+
+Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor. For example, if you have a composite monitor defined as `A && B`, and the component results look like this:
+
+|   | T0    | T1    | T2    |
+|---------------------------|
+| A | Alert | OK    | OK    |
+| B | OK    | Alert | Alert |
+
+The composite monitor would trigger at T1 even though `A` is technically in an `OK` state.
+
+The justification for this behavior is that defining simultaneity is a surprisingly difficult problem for alerting systems. Monitors are evaluated according to different schedules and metric latencies can cause two events, which were likely simultaneous, to occur at different times when monitors are finally evaluated. Merely sampling the current state would likely lead to missed alerts in the composite monitor.
+
+As a consequence of this behavior, composite monitors may take several minutes to resolve after their component monitors have resolved.
 
 ### How many alerts you will receive
 
