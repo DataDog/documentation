@@ -16,7 +16,7 @@ customnav: main_references
 
 * [Is Datadog a cloud service or server application?](/faq/is-datadog-a-cloud-service-or-server-application)
 * [How do I delete a host or metric?](/faq/how-do-i-delete-a-host-or-metric)
-* [What's the difference between Graphite's query language and Datadog's?](/faq/what's-the-difference-between-graphite-s-query-language-and-datadog-s)
+* [What's the difference between Graphite's query language and Datadog's?](/faq/what-s-the-difference-between-graphite-s-query-language-and-datadog-s)
 * [How are hostnames determined?](/faq/how-are-hostnames-determined)
 
 ## Integrations
