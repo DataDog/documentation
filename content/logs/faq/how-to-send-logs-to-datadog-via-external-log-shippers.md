@@ -13,7 +13,7 @@ That said, you can also send logs to Datadog using many common non-Datadog log s
 
 [FluentD](#fluentd)
 
-[NXLog (Windows)]()
+[NXLog (Windows)](#nxlog)
 
 ## Forwarding logs from other shippers to the Datadog Log Agent
 

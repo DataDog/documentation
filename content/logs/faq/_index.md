@@ -9,7 +9,7 @@ beta: true
 
 * [Log Management - Surveys and Beta Application](/logs/faq/log-management-surveys-and-beta-application)
 * [Testing the Log Management Beta - Suggested Questions for Feedback](/logs/faq/testing-the-log-management-beta-suggested-questions-for-feedback)
-* [](/logs/faq/log-collection-troubleshooting-guide)
+* [Log Collection Troubleshooting Guide](/logs/faq/log-collection-troubleshooting-guide)
 
 
 ## Sending logs to Datadog

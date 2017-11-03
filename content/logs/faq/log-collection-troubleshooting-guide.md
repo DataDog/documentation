@@ -1,5 +1,5 @@
 ---
-title: Log FAQ
+title: Log Collection Troubleshooting Guide
 kind: faq
 customnav: lognav
 beta: true
