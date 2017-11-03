@@ -166,6 +166,23 @@ languages:
           url: "/graphing/dashboards/"
           weight: 40
           parent: menu_references_graphing
+        # Graphing dashboard subnav
+        - identifier: customnav_graphingnav_screenboard
+          name: "Screenboard"
+          url: "/graphing/dashboards/screenboard/"
+          weight: 100
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_timeboard
+          name: "Timeboard"
+          url: "/graphing/dashboards/timeboard/"
+          weight: 110
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_widgets
+          name: "Widgets"
+          url: "/graphing/dashboards/widgets/"
+          weight: 120
+          parent: customnav_graphingnav_dashboards
+
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "/graphing/infrastructure/"
@@ -201,6 +218,21 @@ languages:
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
+        - identifier: customnav_graphingnav_functions
+          name: "Functions"
+          url: "/graphing/miscellaneous/functions/"
+          weight: 810
+          parent: customnav_graphingnav_miscellaneous
+        - identifier: customnav_graphingnav_graphingjson
+          name: "Graphing JSON"
+          url: "/graphing/miscellaneous/graphingjson/"
+          weight: 820
+          parent: customnav_graphingnav_miscellaneous
+        - identifier: customnav_graphingnav_visualisation
+          name: "Visualisation"
+          url: "/graphing/miscellaneous/visualisation/"
+          weight: 810
+          parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_faq
           name: "FAQ"
           url: "/graphing/faq/"
@@ -525,15 +557,6 @@ languages:
           parent: customnav_lognav_languages
         # LOGS - Subnav end
 
-
-
-
-#        - identifier: menu_references_glossary
-#          name: "Videos"
-#          url: "/videos/"
-#          pre: "nav_start"
-#          weight: 120
-#          hide: true
         - identifier: menu_references_glossary
           name: "Glossary"
           url: "/glossary/"

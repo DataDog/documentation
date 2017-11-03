@@ -9,7 +9,7 @@ By default the datadog agent sends one service check status for each check enabl
 If your custom check code explicitly sends a service check status (like our [ssh_check](/integrations/ssh_check) or the [nginx check](/integrations/nginx)) you will be able to find it in the 'Custom check' section of the monitors.
 
 To submit a status within your custom agent check you can use the following syntax:
-```python
+```pyhon
 from checks import AgentCheck
 
 [...]

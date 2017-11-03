@@ -44,7 +44,7 @@ Taking a (very simple) test log file that included logs in the following format:
 
 These two custom log parser modules were applied to collect metrics from the logs, the first without the dogstatsd:
 
-```python
+```pyhon
 from datadog import statsd
 from time import time
 
@@ -61,7 +61,7 @@ def logstatsd_parser(logger, line):
 
 and second with the dogstatsd:
 
-```python
+```pyhon
 from datadog import statsd
 
 def logstatsd_parser(logger, line):

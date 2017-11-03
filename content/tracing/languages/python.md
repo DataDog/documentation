@@ -13,7 +13,7 @@ To begin tracing applications written in Python, first [install and configure th
 
 Next, install the Datadog Tracing library using pip:
 
-```python
+```pyhon
 pip install ddtrace
 ```
 
@@ -26,7 +26,7 @@ Finally, import the tracer and instrument your code!
 For Python applciations, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
 </div>
 
-```python
+```pyhon
 from ddtrace import tracer
 
 with tracer.trace("web.request", service="my_service") as span:

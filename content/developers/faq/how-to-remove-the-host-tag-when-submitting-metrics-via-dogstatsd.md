@@ -8,7 +8,7 @@ In some cases you may want to take advantage of the features available with dogs
 
 To remove the host tag from being applied when submitting metrics via dogstatsD you can set the host tag to nothing as seen here:
 
-```python
+```pyhon
 from datadog import statsd
 from random import randint
 

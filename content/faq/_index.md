@@ -11,9 +11,6 @@ customnav: main_references
 * [I’d like to add historical data to my account. Is there a way to do that?](/faq/i-d-like-to-add-historical-data-to-my-account)
 * [Is there a way I can get metric reports?](/faq/is-there-a-way-i-can-get-metric-reports)
 * [How do I stay logged in to Datadog after restarting my browser?](/faq/how-do-i-stay-logged-in-to-datadog-after-restarting-my-browser)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
 
 ## Architecture
 
@@ -23,15 +20,6 @@ customnav: main_references
 * [How are hostnames determined?](/faq/how-are-hostnames-determined)
 
 ## Integrations
-
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
-* [](/faq/)
 
 
 ## API

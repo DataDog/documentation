@@ -25,7 +25,7 @@ For example, it is easier to parse logs that have a unique delimiting character 
 
 You'll need to create a .py file for your parser, named however you like. This module will not need to import any other specific libraries, but can optionally import and use libraries that either came with or were installed on the agent's embedded Python (if you want to install libraries into the agent's embedded Python, for Windows follow this KB, and for Unix pip install from these directories). This module must include a function that will be your log-parsing function (named however you like), and it must take 2 parameters: "logger", and "line", like so:
 
-```python
+```pyhon
 def my_log_parser(logger, line):
 ```
 
@@ -105,7 +105,7 @@ user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 
 We could set up a log-parser like the following to collect a metric from this logged data in our datadog account:
 
-```python
+```pyhon
 import time
 from datetime import datetime
 ...
@@ -143,7 +143,7 @@ Let's imagine that you want to collect events from logging where you have enough
 
 We could set up a log parser like the following to create an event from this logged data in our datadog event stream:
 
-```python
+```pyhon
 import time
 from datetime import datetime
 ...

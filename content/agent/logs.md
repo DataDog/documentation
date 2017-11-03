@@ -97,7 +97,7 @@ Custom parsing functions must:
 
 Here's an example of what `parsers.py` might contain:
 
-```python
+```pyhon
 import time
 from datetime import datetime
 
@@ -132,7 +132,7 @@ def parse_web(logger, line):
 You'll want to be able to test your parser outside of the Agent, so for the above example,
 you might add a test function like this:
 
-```python
+```pyhon
 def test():
     # Set up the test logger
     import logging
