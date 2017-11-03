@@ -224,6 +224,9 @@
 - id: customnav_lognav_aws
   translation: "AWS Log Collection"
 
+- id: customnav_lognav_faq
+  translation: "Log FAQ"
+
 - id: customnav_lognav_languages
   translation: "Languages"
 
