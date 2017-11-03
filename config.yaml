@@ -528,11 +528,6 @@ languages:
           pre: "nav_start"
           weight: 140
 
-  ja:
-    #languagename: "日本語"
-    weight: 1
-    disclaimer: "アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。"
-
 params:
   environment: local
   img_url: "http://localhost:1313/"
