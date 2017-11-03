@@ -182,12 +182,6 @@ For example, the following url: "http://catchpoint.com/session_id:123456"
 
 Should be encoded to: "http://catchpoint.com/session_id%3A123456"
 
-## FAQ
-
-* [Consult our dedicated section for events FAQ][1]
-
-[1]: /graphing/events/faq
-
 ## @ notifications
 
 
