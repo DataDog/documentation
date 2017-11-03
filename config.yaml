@@ -194,6 +194,11 @@ languages:
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
+        - identifier: customnav_graphingnav_faq
+          name: "FAQ"
+          url: "/graphing/faq/"
+          weight: 90
+          parent: menu_references_graphing
         # GRAPHING - Subnav end
 
 

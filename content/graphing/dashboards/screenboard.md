@@ -35,5 +35,23 @@ If a user decides to track changes for a screenboard, the following Screenboard 
 
 In order to prevent the above listed changes, an admin (account admins + Screenboard creator) can activate read-only view disabling all non-admin user edits to any tiles or text in the Screenboard, as well as Screenboard deletion. Even in read-only mode, non-admin users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in fullscreen. Any tile rearrangement by a non-admin user will not persist if the Screenboard is set to read-only.
 
-### Tracking Changes
+## Tracking Changes
 A user can find all events related to Screenboard changes to the Screenboard they are following by searching "tags:audit, Screenboard_name" in the main event stream, as each notification event is tagged with those two tags.
+
+## Auditing Dashboards
+
+In dashboards, notifications provide the ability to track changes for audit purposes. Any changes made will create an event in the event stream that explains the change and displays the user that made the actual change.
+
+If any changes are made to your dashboards, you can see them with the following event search:
+
+https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
+
+This feature can be enabled by following these simple steps:
+
+At the top right corner of a dashboard, click on the gear icon
+
+{{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" >}}
+
+    2. Select 'Notifications' option and enable the notifications
+
+{{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" >}}
