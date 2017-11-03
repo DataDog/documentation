@@ -50,6 +50,9 @@ You can click on any log line to see more details about it:
 
 {{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" >}}
 
+### Focus on Host and Service
+
+To see log lines dated just before and after a selected log - even if they don't match your filter - click on its `host` or `service` and select `Focus on Host & Service`. 
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
