@@ -68,7 +68,7 @@ Save the new claim rules by clicking OK.
 
 Finally, download and import the ADFS identity provider metadata from the ADFS server into the SAML configuration in your Datadog Org here - https://app.datadoghq.com/saml/saml_setup
 
-This file can be downloaded from the following URL (replace hostname with the public dns hostname of your server) - https://hostname/FederationMetadata/2007-06/FederationMetadata.xml
+This file can be downloaded from the following URL (replace hostname with the public dns hostname of your server) - `https://hostname/FederationMetadata/2007-06/FederationMetadata.xml`
 
 Import into your Datadog Org from the SAML config page as shown below:
 {{< img src="account_management/faq/KJxaVYe.png" alt="KJxaVYe" responsive="true" >}}
