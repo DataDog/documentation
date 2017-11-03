@@ -82,7 +82,8 @@ counting web page views. To achieve this, we'll increment a metric called
 
 
 For python: 
-```pyhon
+```python
+
 def render_page():
     """ Render a web page. """
     statsd.increment('web.page_views')
@@ -114,7 +115,8 @@ called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 
 For python:
-```pyhon
+```python
+
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
     save_file(file)
@@ -132,7 +134,8 @@ wanted to track the amount of free memory on a machine, we can periodically
 sample that value as the metric `system.mem.free`:
 
 For python:
-```pyhon
+```python
+
 # Record the amount of free memory every ten seconds.
 while True:
     statsd.gauge('system.mem.free', get_free_memory())
@@ -153,7 +156,8 @@ end
 Histograms measure the statistical distribution of a set of values. Suppose we wanted to measure the duration of a database query, we can sample each query time with the metric `database.query.time`.
 
 For python:
-```pyhon
+```python
+
 # Track the run time of the database query.
 start_time = time.time()
 results = db.query()
@@ -207,7 +211,8 @@ test scores.
 Service checks are used to send information about the status of a service.
 
 For python:
-```pyhon
+```python
+
 from datadog.api.constants import CheckStatus
 
 # Report the status of an app.
@@ -239,7 +244,8 @@ Sets are used to count the number of unique elements in a group. If you want to
 track the number of unique visitors to your site, sets are a great way to do that.
 
 For python:
-```pyhon
+```python
+
 def login(self, user_id):
     # Log the user in ...
     statsd.set('users.uniques', user_id)
@@ -260,7 +266,8 @@ aggregated and compared on the front end. Suppose we wanted to measure the perfo
 `algorithm.run_time` and specify each version with a tag:
 
 For python:
-```pyhon
+```python
+
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -320,7 +327,8 @@ supports sample rates, which allows sending a metric a fraction of the time and 
 
 The following code will only send points half of the time:
 For python:
-```pyhon
+```python
+
 while True:
   do_something_intense()
   statsd.increment('loop.count', sample_rate=0.5)

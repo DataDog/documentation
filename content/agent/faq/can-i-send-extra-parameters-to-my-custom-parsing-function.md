@@ -14,7 +14,8 @@ Once you have done this, you should have something like this in your `datadog.co
 ```
 
 And in your parsers_module.py a function defined as:  
-```pyhon
+```python
+
 def custom_parser(logger, line)
 ```
 
@@ -29,7 +30,8 @@ dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1
 ```
 And your parsing function as:
 
-```pyhon
+```python
+
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 

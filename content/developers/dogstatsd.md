@@ -35,7 +35,8 @@ example to see how this works.
 
 Suppose you want to know how many times your Python application is calling a particular database query. Your application can tell DogStatsD to increment a counter each time the query is called:
 
-```pyhon
+```python
+
 def query_my_database():
     dog.increment('database.query.count')
     # Run the query ...
@@ -75,7 +76,8 @@ The first four metrics types—gauges, counters, timers, and sets—will be fami
 
 Gauges track the ebb and flow of a particular metric value over time, like the number of active users on a website:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 statsd.gauge('mywebsite.users.active', get_active_users())
@@ -85,7 +87,8 @@ statsd.gauge('mywebsite.users.active', get_active_users())
 
 Counters track how many times something happens _per second_, like page views:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 def render_page():
@@ -108,7 +111,8 @@ To increment or measure values over time rather than per second, use a gauge.
 
 Sets count the number of unique elements in a group. To track the number of unique visitors to your site, use a set:
 
-```pyhon
+```python
+
 def login(self, user_id):
     statsd.set('users.uniques', user_id)
     # Now log the user in ...
@@ -118,7 +122,8 @@ def login(self, user_id):
 
 Timers measure the amount of time a section of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 @statsd.timed('mywebsite.page_render.time')
@@ -128,7 +133,8 @@ def render_page():
 
 or with a context manager:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 def render_page():
@@ -154,7 +160,8 @@ Under the hood, DogStatsD actually treats timers as histograms; Whether you send
 
 Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 ...
@@ -171,7 +178,8 @@ This produces the same five metrics shown in the Timers section above: count, av
 
 But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 def handle_file(file, file_size):
@@ -190,7 +198,8 @@ intensive code paths, DogStatsD clients support sampling,
 i.e. only sending metrics a percentage of the time. The following code sends
 a histogram metric only about half of the time:
 
-```pyhon
+```python
+
 dog.histogram('my.histogram', 1, sample_rate=0.5)
 ```
 
@@ -203,7 +212,8 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and exceptions in Datadog:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 def render_page():
@@ -218,7 +228,8 @@ def render_page():
 
 Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
-```pyhon
+```python
+
 from datadog import statsd
 
 conn = get_redis_conn()
@@ -233,7 +244,8 @@ else:
 
 You can add tags to any metric, event, or service check you send to DogStatsD. For example, you could compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
-```pyhon
+```python
+
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...

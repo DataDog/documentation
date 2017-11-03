@@ -58,7 +58,8 @@ The file where your check logic should reside. The skeleton function will boiler
 
 For example:
 
-```pyhon
+```python
+
 # Example check.py
 import time
 from checks import AgentCheck
@@ -195,7 +196,8 @@ Though we don't require test for each of the metrics collected by your integrati
 
 Here's an example `test_my_integration.py`:
 
-```pyhon
+```python
+
 # Example test_my_integraion.py
 from nose.plugins.attrib import attr
 from checks import AgentCheck
