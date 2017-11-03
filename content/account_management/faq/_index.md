@@ -39,4 +39,4 @@ customnav: accountmanagementnav
 * [How can I change the Billing contact?](https://help.datadoghq.com/hc/en-us/articles/203764785-How-can-I-change-the-Billing-contact-)
 * [I don't see anything in my billing history](https://help.datadoghq.com/hc/en-us/articles/203844125-I-don-t-see-anything-in-my-billing-history)
 * [Where can I get a copy of the invoice?](https://help.datadoghq.com/hc/en-us/articles/203764795-Where-can-I-get-a-copy-of-the-invoice-)
-* [Can I see monthly usage reports for each of my sub-organizations?](/account_management/faq/can-I-see-monthly-usage-reports-for-each-of-my-sub-organizations)
+* [Can I see monthly usage reports for each of my sub-organizations?](/account_management/faq/can-i-see-monthly-usage-reports-for-each-of-my-sub-organizations)

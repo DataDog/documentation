@@ -4,6 +4,8 @@ kind: faq
 customnav: graphingnav
 ---
 
+## Events
+
 ## Dashboards
 
 * [How to Transform a Timeboard to a Screenboard or vice versa ?](/graphing/faq/how-to-transform-a-timeboard-to-a-screenboard-or-vice-versa)
