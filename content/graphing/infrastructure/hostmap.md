@@ -98,6 +98,14 @@ In the screenshot below the size of the hexagons is the 15 minute average load, 
 
 **Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
 
+### Display hosts on the Host Map that don't have an agent installed
+
+By default, the Host Map will only show hosts that are reporting certain metrics, which can then be used to set a color or size for the individual hexagon within the grid.
+
+Some hosts, like those coming in from Google App Engine, do not pull in these metrics without an agent running. These hosts can still appear within the Host Map selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
+
+{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No agent" responsive="true" >}}
+
 ### Data freshness and meaning
 
 Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it will not refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen will tell you when data was last updated.

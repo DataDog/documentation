@@ -20,6 +20,7 @@ customnav: graphingnav
 * [How do I change the name of a Dashboard?](/graphing/faq/how-do-i-change-the-name-of-a-dashboard)
 * [Treemap graph/visualization - can I use this elsewhere?](/graphing/faq/treemap-graph-visualization-can-i-use-this-elsewhere)
 * [Is there a way to share (or revoke previously shared) graphs?](/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs)
+* [How to Merge Screenboards ?](/graphing/faq/how-to-merge-screenboards)
 
 ## Graphing
 
@@ -45,3 +46,4 @@ customnav: graphingnav
 * [Is there a way for me to set the maximum and minimum values on the y-axis of a graph?](/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph)
 * [Is it possible to adjust the y-axis for my graphs?](/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs)
 * [How do I overlay events onto my dashboards?](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards)
+* [How to graph percentiles in Datadog ?](/graphing/faq/how-to-graph-percentiles-in-datadog)

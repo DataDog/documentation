@@ -4,31 +4,6 @@ kind: documentation
 customnav: developersnav
 aliases:
   - /guides/dogstatsd/
-sidebar:
-  nav:
-    - header: Official Libraries
-    - text: How It Works
-      href: "#how-it-works"
-    - text: Set Up
-      href: "#setup"
-    - text: Data Types
-      href: "#data-types"
-    - text: Metrics
-      href: "#metrics"
-    - text: Sample Rates
-      href: "#metric-option-sample-rates"
-    - text: Events
-      href: "#events"
-    - text: Service Checks
-      href: "#service-checks"
-    - text: Tagging
-      href: "#tagging"
-    - text: Datagram Format
-      href: "#datagram-format"
-    - text: Service Checks
-      href: "#service-checks-1"
-    - text: Related Reading
-      href: "#related-reading"
 ---
 
 <p class="aside">

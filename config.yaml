@@ -26,12 +26,19 @@ languages:
 
 # Home Page
       main:
+        # GETTING STARTED
         - identifier: menu_references_getting_started
           name: "Getting Started"
           url: "/getting_started/"
           pre: "nav_start"
           weight: 30
-
+        # Getting Started - Subnav start
+        - identifier: customnav_getting_started_tags
+          name: "Getting started with Tags"
+          url: "/getting_started/getting_started_with_tags/"
+          weight: 10
+          parent: menu_references_getting_started
+      
         # AGENT
         - identifier: menu_references_agent
           name: "Agent"
@@ -409,6 +416,11 @@ languages:
           name: "Units"
           url: "/developers/units/"
           weight: 110
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_faq
+          name: "FAQ"
+          url: "/developers/faq/"
+          weight: 120
           parent: menu_references_developers
         # DEVELOPERS - Subnav end
 

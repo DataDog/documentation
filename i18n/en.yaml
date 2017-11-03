@@ -54,6 +54,9 @@
 - id: customnav_gettingstartednav_overview
   translation: "Overview"
 
+- id: customnav_getting_started_tags
+  translation: "Getting started with Tags"
+
 ##########################
 ########## Agent #########
 ##########################
@@ -373,6 +376,9 @@
 
 - id: customnav_developersnav_units
   translation: "Units"
+
+- id: customnav_developersnav_faq
+  translation: "FAQ"
 
 ##########################
 ###### Miscellaneous #####
