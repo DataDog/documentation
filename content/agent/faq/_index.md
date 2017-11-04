@@ -53,7 +53,7 @@ customnav: agentnav
 * [Is it possible to have the agent parse several log files and use wildcards for that?](/agent/faq/is-it-possible-to-have-the-agent-parse-several-log-files-and-use-wildcards-for-that)
 * [How do I reset my Datadog API keys?](/agent/faq/how-do-i-reset-my-datadog-api-keys)
 * [How to collect metrics or events with a Custom Log Parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser)
-* [How to collect metrics with the Agent's built-in Log Parser?](How-to-collect-metrics-or-events-with-a-Custom)
+* [How to collect metrics with the Agent's built-in Log Parser?](how-to-collect-metrics-with-the-agent-s-built-in-log-parser)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)
 * [Send status in agent custom checks](/agent/faq/send-status-in-agent-custom-checks)

@@ -103,7 +103,7 @@ Most of the functions apply at the last step. From the ~300 points obtained afte
 In this example the function abs makes sure that your results are positive numbers.
  
 Parameter involved: function
-See a list of functions offered by Datadog [here](/grpahing/miscellaneous/).
+See a list of functions offered by Datadog [here](/graphing/miscellaneous/).
 
 #### Grouped queries, arithmetic, as_count/rate
  

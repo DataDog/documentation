@@ -8,7 +8,7 @@ In general, custom metrics are defined as any single, unique combination of a me
 
 Standard integrations that are limited to 350 metrics by default and emit custom metrics: 
 
-* [ActiveMQ_XML](/integrations/activemq_wml)
+* [ActiveMQ_XML](/integrations/activemq_xml)
 * [Go_expvar](/integrations/go_expvar)
 
 If you'd like to increase this limit, please email [us](/help)
