@@ -128,7 +128,7 @@ languages:
           weight: 40
           parent: menu_references_agent
         - identifier: customnav_agentnav_faq
-          name: "Faq"
+          name: "FAQ"
           url: "/agent/faq/"
           weight: 50
           parent: menu_references_agent
@@ -341,7 +341,7 @@ languages:
           weight: 70
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_faq
-          name: "Faq"
+          name: "FAQ"
           url: "/monitors/faq/"
           weight: 80
           parent: menu_references_monitoring
@@ -366,7 +366,7 @@ languages:
           weight: 20
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_faq
-          name: "Faq"
+          name: "FAQ"
           url: "/tracing/faq/"
           weight: 30
           parent: menu_references_tracing
@@ -496,7 +496,7 @@ languages:
           weight: 60
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_faq
-          name: "Faq"
+          name: "FAQ"
           url: "/account_management/faq/"
           weight: 70
           parent: menu_references_account_management

@@ -31,7 +31,7 @@ In this example we will consider host:bubs as having 5 devices. Thus Datadog is 
  
 Let’s now go over the successive steps followed by our backend for the query presented above.
 
-### Step 1: Find which timeseries are needed for the query 
+## Find which timeseries are needed for the query 
 
 In this query we only asked for data associated to host:bubs. So the first step for our backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query. 
  
@@ -48,7 +48,7 @@ More information about timeseries and tag cardinality may be found [here](/getti
 Parameter involved: scope
 You can use more than one tag, e.g. {host:bubs, device:udev} if you want to data responding to both tags.
 
-### Step 2: Proceed to time-aggregation
+## Proceed to time-aggregation
 
 Our backend selects all data corresponding to the time-period of your graph.
  
@@ -79,7 +79,7 @@ In our example rollup(avg,60) will define an aggregate period of 60 seconds. So 
 
 Please note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you will not get the one-minute granularity requested.
 
-### Step 3: Proceed to space-aggregation  
+## Proceed to space-aggregation  
 
 Now we can mix data from different source into a single line.
  
@@ -96,7 +96,7 @@ Parameter involved: space-aggregator
 
 Datadog offers 4 space-aggregators: max/min/avg/sum 
 
-### Step 4: Apply functions (optional)
+## Apply functions (optional)
 
 Most of the functions apply at the last step. From the ~300 points obtained after time (step 2) and space (step 3) aggregations, the function computes new values which you will see on your graph.
  
@@ -105,9 +105,9 @@ In this example the function abs makes sure that your results are positive numbe
 Parameter involved: function
 See a list of functions offered by Datadog [here](/graphing/miscellaneous/).
 
-#### Grouped queries, arithmetic, as_count/rate
+### Grouped queries, arithmetic, as_count/rate
  
-##### Grouped queries 
+#### Grouped queries 
 
 {{< img src="getting_started/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" >}}
 
@@ -123,13 +123,13 @@ Note: rollup or as_count modifiers have to be placed after the by {device} ment
 
 Note2: you can use more than one group, for instance system.disk.in_use{*} by {host,device}
 
-##### Arithmetic
+#### Arithmetic
 
 Arithmetic is applied after time and space aggregation as well (step 4).
 
 {{< img src="getting_started/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" >}}
 
-##### as_count and as_rate
+#### as_count and as_rate
 
 They are time aggregators specific to rates and counters submitted via statsd/dogstatsd, that make it possible to view metrics as a rate per second or to see them as raw counts.
 Syntax: instead of adding a rollup, you can use .as_count() or .as_rate().
