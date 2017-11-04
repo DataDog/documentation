@@ -36,9 +36,20 @@ languages:
         - identifier: customnav_getting_started_tags
           name: "Getting started with Tags"
           url: "/getting_started/getting_started_with_tags/"
-          weight: 10
+          weight: 310
           parent: menu_references_getting_started
-      
+        - identifier: customnav_getting_started_from_the_query_to_the_graph
+          name: "From the query to the Graph"
+          url: "/getting_started/from_the_query_to_the_graph/"
+          weight: 320
+          parent: menu_references_getting_started
+        - identifier: customnav_getting_started_custom_metrics
+          name: "Custom metrics"
+          url: "/getting_started/custom_metrics/"
+          weight: 330
+          parent: menu_references_getting_started         
+
+
         # AGENT
         - identifier: menu_references_agent
           name: "Agent"

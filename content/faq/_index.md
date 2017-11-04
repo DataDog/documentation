@@ -3,7 +3,6 @@ title: FAQ
 kind: faq
 customnav: main_references
 ---
-{{< img src="faq/my_activities.png" alt="my_activities" responsive="true" >}}
 
 ## General
 
@@ -11,6 +10,12 @@ customnav: main_references
 * [I’d like to add historical data to my account. Is there a way to do that?](/faq/i-d-like-to-add-historical-data-to-my-account)
 * [Is there a way I can get metric reports?](/faq/is-there-a-way-i-can-get-metric-reports)
 * [How do I stay logged in to Datadog after restarting my browser?](/faq/how-do-i-stay-logged-in-to-datadog-after-restarting-my-browser)
+* [I'm testing Datadog and don't want to go above 5 hosts. How do I remove one so I can test on another?](/faq/i-m-testing-datadog-and-don-t-want-to-go-above-5-hosts-how-do-i-remove-one-so-i-can-test-on-another)
+* [Do you have, or have you any plans for a smartphone app?](/faq/do-you-have-or-have-you-any-plans-for-a-smartphone-app)
+* [Troubleshooting - Browser Issues](/faq/troubleshooting-browser-issues)
+
+* [Network Time Protocol (NTP) Offset Issues](/faq/network-time-protocol-ntp-offset-issues)
+
 
 ## Architecture
 
