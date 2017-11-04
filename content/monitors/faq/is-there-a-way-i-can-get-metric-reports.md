@@ -1,5 +1,5 @@
 ---
-title: Monitor FAQ
+title: Is there a way i can get metric reports
 kind: faq
 customnav: monitornav
 ---

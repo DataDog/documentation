@@ -30,4 +30,4 @@ customnav: monitornav
 * [What is the "Do (not) require a full window of data for evaluation" monitor parameter?](/monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter)
 * [How do I add custom template variables to my monitor message?](/monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message)
 * [Can I send SMS notifications in Datadog?](/monitors/faq/can-i-send-sms-notifications-in-datadog)
-* [](/monitors/faq/is-there-a-way-i-can-get-metric-reports)
+* [Is there a way i can get metric reports](/monitors/faq/is-there-a-way-i-can-get-metric-reports)
