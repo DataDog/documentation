@@ -4,7 +4,7 @@ kind: faq
 customnav: graphingnav
 ---
 
-Dashboard template variables allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags. The event overlay search can be helpful to correlate metrics to events and you can use dashboard template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search can be [applied through an individual graph](https://help.datadoghq.com/hc/en-us/articles/203038719-How-do-I-overlay-events-onto-my-dashboards-), but you can also use it across an entire dashboard.
+Dashboard template variables allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags. The event overlay search can be helpful to correlate metrics to events and you can use dashboard template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search can be [applied through an individual graph](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards), but you can also use it across an entire dashboard.
 
 Values from dashboard template variables can be directly captured by using the $variable.value syntax in the event search field. For example, if you have set up an "env" template variable, $env will resolve to be the key:value pair from the tag and $env.value allows you to directly access that tag's value.
 

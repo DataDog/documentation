@@ -8,8 +8,7 @@ Most of the time what you see on graphs are not the real value you submitted but
 
 ## Why?
 
-We store data at a 1 second granularity we cannot display all real data on graphs.
-See here: http://help.datadoghq.com/hc/en-us/articles/203765565-How-is-data-aggregated-in-graphs
+We store data at a 1 second granularity we cannot display all real data on graphs. See [here](/graphing/faq/how-is-data-aggregated-in-graphs)
  
 For a graph on a 1-week time window, it would require sending hundreds of thousands values to your browser, and besides not all these points could be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to proceed to data aggregation and to send a limited number of points to your browser to render a graph.
 Which granularity?
@@ -17,8 +16,9 @@ Which granularity?
 For instance, on a one-day view with the 'lines' display you'll have one datapoint every 5 min. So our backend slices the 1-day interval into 288 buckets of 5 minutes. For each bucket our backend rolls up all data into a single value. For instance the datapoint rendered on your graph with timestamp 07:00 will be actually an aggregate of all real datapoints submitted between 07:00:00 and 07:05:00 that day.
 How?
 
-By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. You may see more information here: http://help.datadoghq.com/hc/en-us/articles/203571289-Why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs-
-What can you do?
+By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. You may see more information [here](/graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs).
+
+## What can you do?
 
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
  

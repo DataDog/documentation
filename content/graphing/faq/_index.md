@@ -21,6 +21,7 @@ customnav: graphingnav
 * [Treemap graph/visualization - can I use this elsewhere?](/graphing/faq/treemap-graph-visualization-can-i-use-this-elsewhere)
 * [Is there a way to share (or revoke previously shared) graphs?](/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs)
 * [How to Merge Screenboards ?](/graphing/faq/how-to-merge-screenboards)
+* [How is data aggregated in graphs?](/graphing/faq/how-is-data-aggregated-in-graphs)
 
 ## Graphing
 
@@ -33,7 +34,6 @@ customnav: graphingnav
 * [Interpolation & the fill modifier explained](/graphing/faq/interpolation-the-fill-modifier-explained)
 * [ How can I graph the percentage change between an earlier value and a current value?](/graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value)
 * [False spikes sometimes appear on my `sum:` graph](/graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph)
-* [Graphing with Datadog: from the query to the graph](/graphing/faq/graphing-with-datadog-from-the-query-to-the-graph)
 * [There are too many lines on my graph, can I only display the most important ones?](/graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones)
 * [How does Datadog render graphs? My graph doesn't show the values I'm expecting.](/graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting)
 * [What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?](/graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph)
@@ -47,3 +47,4 @@ customnav: graphingnav
 * [Is it possible to adjust the y-axis for my graphs?](/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs)
 * [How do I overlay events onto my dashboards?](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards)
 * [How to graph percentiles in Datadog ?](/graphing/faq/how-to-graph-percentiles-in-datadog)
+* [I'm switching between the sum/min/max/avg aggregators but the values look the same?](/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same)

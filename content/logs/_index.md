@@ -23,7 +23,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your agent](/agent/faq/start-stop-restart-the-datadog-agent)
 
 ## Enabling log collection from integrations
 

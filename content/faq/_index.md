@@ -13,9 +13,7 @@ customnav: main_references
 * [I'm testing Datadog and don't want to go above 5 hosts. How do I remove one so I can test on another?](/faq/i-m-testing-datadog-and-don-t-want-to-go-above-5-hosts-how-do-i-remove-one-so-i-can-test-on-another)
 * [Do you have, or have you any plans for a smartphone app?](/faq/do-you-have-or-have-you-any-plans-for-a-smartphone-app)
 * [Troubleshooting - Browser Issues](/faq/troubleshooting-browser-issues)
-
 * [Network Time Protocol (NTP) Offset Issues](/faq/network-time-protocol-ntp-offset-issues)
-
 
 ## Architecture
 
@@ -26,5 +24,11 @@ customnav: main_references
 
 ## Integrations
 
+* [What standard integrations emit custom metrics?](/faq/what-standard-integrations-emit-custom-metrics)
 
 ## API
+
+* [Can I backup Dashboards or Monitors?](/faq/can-i-backup-dashboards-or-monitors)
+* [Can I programmatically maintain or manipulate my Datadog Monitors/Alerts?](/faq/can-i-programmatically-maintain-or-manipulate-my-datadog-monitors-alerts)
+* [How do I submit custom metrics? What's their overhead?](/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
+* [API rate limit](/faq/api-rate-limit)

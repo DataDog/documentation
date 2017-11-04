@@ -30,5 +30,5 @@ We often discuss alerting with our clients and a frequent issue or pain point is
 
 If the issue is alert routing, template variables and the separation of ‘warning’ or ‘alert’ states will be of interest!
 
-* https://help.datadoghq.com/hc/en-us/articles/207489323-How-do-I-setup-conditional-contacts-and-messages-in-a-single-monitor-
-* https://help.datadoghq.com/hc/en-us/articles/214940883-How-do-I-add-custom-template-variables-to-my-monitor-message-
+* [How do I setup conditional contacts and messages in a single monitor?](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
+* [How do I add custom template variables to my monitor message?](/monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message)

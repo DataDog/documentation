@@ -17,7 +17,7 @@ This article will explain:
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags.
 
-Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integraitons/) can potentially emit an unlimited number of metrics that can also count as custom, further details can be found [here](https://help.datadoghq.com/hc/en-us/articles/115004632503-What-standard-integrations-emit-custom-metrics-).
+Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, further details can be found [here](/faq/what-standard-integrations-emit-custom-metrics).
 
 In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric will actually lead to **multiple unique tag combinations**- counting towards your custom metrics count.
 
@@ -57,7 +57,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 To sum it up, your global custom metric count is aggregated across your monitored cluster :
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" >}}
 
-That said, we do not enforce [any fixed rate limit](https://help.datadoghq.com/hc/en-us/articles/205060139-API-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
+That said, we do not enforce [any fixed rate limit](/faq/api-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
 
 ## How do I check my custom metrics count?
 

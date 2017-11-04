@@ -104,8 +104,6 @@ Then in the `Graph these queries as` box, you can enter the arithmetic you would
 
 {{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" >}}
 
-Learn more [here](https://help.datadoghq.com/hc/en-us/articles/203765055-How-can-I-stack-metrics-on-the-same-graph-)
-
 ### Set Y-axis scale
 
 By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. To make changes to the Y-axis, click the button **Show Y-Axis Controls**. Now you can change the scale from linear to log, pow, or sqrt. Next you can choose the minimum or maximum, and select whether zero should always be shown or not.

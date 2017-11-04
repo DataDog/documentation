@@ -17,9 +17,7 @@ With a large number of unique tag combinations, it will take a longer time to qu
 
 ### More information
 
-You may find information and examples about unique tag combinations in this article:
-
-http://help.datadoghq.com/hc/en-us/articles/204271775-What-is-a-custom-metric-and-what-is-the-limit-on-the-number-of-custom-metrics-I-can-have-
+You may find information and examples about unique tag combinations in [this article](/getting_started/custom_metrics)
 
 ## Recommendation
 

@@ -20,10 +20,10 @@ This will result in metric.test being reported without a host tag and only box:v
 
 The following articles have more information about custom metrics:
 
-https://help.datadoghq.com/hc/en-us/articles/204271775-What-is-a-custom-metric-and-what-is-the-limit-on-the-number-of-custom-metrics-I-can-have-
+* [Getting Started on custom metrics](/getting_started/custom_metrics)
 
-https://help.datadoghq.com/hc/en-us/articles/203765485-How-do-I-submit-custom-metrics-What-s-their-overhead-
+* [How do I submit custom metrics, what's their overhead ?](/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
 
-And as always, please feel free to reach out to support@datadoghq.com if you are looking for help with your custom metrics.
+And as always, please feel free to reach out to [us](/help) if you are looking for help with your custom metrics.
 
 **DISCLAIMER**: When removing the host tag you are removing a unique identifier for the submission of custom metrics. When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers the last received/processed value will overwrite the value stored. To avoid this edge case, please ensure that no host is submitting the same exact metric/tag combination at any given timestamp

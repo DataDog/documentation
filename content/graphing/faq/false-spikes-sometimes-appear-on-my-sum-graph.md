@@ -39,7 +39,7 @@ So what our system actually does is:
 1. Slice the time-frame into ~300 time buckets. Reduce each source to a serie of ~300 X-min local aggregates (each local aggregate accounts for all values of 1 time-bucket).
 2. Merge all these aggregate series together by sum
 
-More explanation about our graphing system in this excellent article: http://help.datadoghq.com/hc/en-us/articles/204820019-Graphing-with-Datadog-from-the-query-to-the-graph
+More explanation about our graphing system in this [excellent article](/getting_started/from_the_query_to_the_graph):
  
 Back to our example, if you look at a few minutes of data, the graph you’ll see will be as expected. But when zooming out, the local aggregates for each source will inevitably account for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn’t occur at the same time will fall nonetheless in the same time-bucket, therefore, when `sum`ming sources together, these datapoints that didn't occur simultaneously will be summed up together: the result may be twice the value as expected.
 
