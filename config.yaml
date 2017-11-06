@@ -506,7 +506,7 @@ languages:
 
 
 
-#        - identifier: menu_references_glossary
+#        - identifier: menu_references_videos
 #          name: "Videos"
 #          url: "/videos/"
 #          pre: "nav_start"

@@ -36,33 +36,37 @@ $(document).ready(function () {
             var winTop = $(window).scrollTop();
             var localOffset = 120;
 
-            $('.toc_open').removeClass('toc_open');
-            for(var i = 0; i < mapping.length; i++) {
-                var obj = mapping[i];
-                var j = i+1;
-                if(j > mapping.length) { j = 0; }
-                var nextobj = mapping[j];
-                //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
-                obj.navLink.removeClass('toc_scrolled');
+            if($(window).scrollTop() + $(window).height() === $(document).height()) {
+                // we are at the bottom of the screen  just highlight the last item
+            } else {
+                $('.toc_open').removeClass('toc_open');
+                for(var i = 0; i < mapping.length; i++) {
+                    var obj = mapping[i];
+                    var j = i+1;
+                    if(j > mapping.length) { j = 0; }
+                    var nextobj = mapping[j];
+                    //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
+                    obj.navLink.removeClass('toc_scrolled');
 
-                if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
-                    //console.log(obj.navLink);
-                    obj.navLink.addClass('toc_scrolled');
-                    // add toc open to parents of this toc_scrolled
-                    //console.log(obj.navLink.parents('ul'));
-                    obj.navParentLinks.each(function() {
-                        var href = $(this).attr('href');
-                        var id = href.replace('#', '').replace(' ','-');
-                        var header = $('[id="'+id+'"]');
-                        if(header.is('h2')) {
-                            $(this).addClass('toc_open');
-                        }
-                    });
+                    if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
+                        //console.log(obj.navLink);
+                        obj.navLink.addClass('toc_scrolled');
+                        // add toc open to parents of this toc_scrolled
+                        //console.log(obj.navLink.parents('ul'));
+                        obj.navParentLinks.each(function() {
+                            var href = $(this).attr('href');
+                            var id = href.replace('#', '').replace(' ','-');
+                            var header = $('[id="'+id+'"]');
+                            if(header.is('h2')) {
+                                $(this).addClass('toc_open');
+                            }
+                        });
+                    }
                 }
             }
         }
 
-        $(window).on('resize scroll',function(e) {
+        $(window).on('resize scroll', function(e) {
             onScroll();
         }).trigger('scroll');
 

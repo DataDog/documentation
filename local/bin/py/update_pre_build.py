@@ -3,6 +3,7 @@ from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from tqdm import *
 from os import sep, makedirs, getenv
+import platform
 import yaml
 import requests
 import tempfile
@@ -19,6 +20,7 @@ Variables
 DESC_TOKEN = "{{< get-desc-from-git >}}"
 DESC_ATTRIBUTE = "short_description"
 INTEGRATION_FOLDER = "content/integrations/"
+INTEGRATION_DATAFILE = "integrations.json"
 
 OVERVIEW_TOKEN = "//get-overview-from-git//"
 OVERVIEW_PATTERN = r'## Overview((?s).*)## Setup'
@@ -216,6 +218,39 @@ def readme_get_section(from_path,key_name):
 
     return data_array
 
+
+def build_integrations_datafile(file_name):
+    existing_json = []
+
+    # create the integrations datafile if for some reason its not there
+    if not exists(INTEGRATION_DATAFILE):
+        print('create {}...'.format(INTEGRATION_DATAFILE))
+        with open(INTEGRATION_DATAFILE, 'w') as outfile:
+            json.dump(existing_json, outfile, sort_keys=True, indent=4)
+    else:
+        with open(INTEGRATION_DATAFILE) as f:
+            existing_json = json.load(f)
+
+    # get list of names in existing json
+    names = [d['name'] for d in existing_json if 'name' in d]
+
+    # this file json data
+    with open(file_name) as data_file:
+        data = json.load(data_file)
+        name = data.get('name', '')
+        if name in names:
+            # update
+            for obj in existing_json:
+                if obj.get('name', '') == name:
+                    obj.update(data)
+        else:
+            # add
+            existing_json.append(data)
+        # write back out changes
+        with open(INTEGRATION_DATAFILE, 'w') as outfile:
+            json.dump(existing_json, outfile, sort_keys=True, indent=4)
+
+
 def update_integration_pre_build(from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
@@ -228,6 +263,11 @@ def update_integration_pre_build(from_path=None, to_path=None):
         pattern = '**/*_manifest.json'
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
+
+            """
+            Build integrations datafile for integrations page tiles
+            """
+            build_integrations_datafile(file_name)
             
             """
             Scraping all sections that we can found
@@ -239,7 +279,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
             Gathering the manifest short description and adding the right token
             """
 
-            data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
+            data_array.append([DESC_TOKEN, manifest_get_data(from_path, key_name, DESC_ATTRIBUTE)])
 
             """
             Inlining the data in the doc file
@@ -248,6 +288,8 @@ def update_integration_pre_build(from_path=None, to_path=None):
     else:
         print('Path does not exist: {}'.format(from_path))
         exit(1)
+
+
 def sync(*args):
     """
     Given optional arguments generate yaml integration data from dogweb / integrations-core
@@ -263,7 +305,8 @@ def sync(*args):
     options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
 
     # setup path variables
-    extract_path = '{}'.format(join(tempfile.gettempdir(), "extracted") + sep)
+    tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+    extract_path = '{}'.format(join(tempdir, "extracted") + sep)
     dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
     integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
     dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
@@ -284,7 +327,7 @@ def sync(*args):
     makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
     makedirs(integrations_extract_path, exist_ok=True)
 
-     # sync from dogweb, download if we don't have it (token required)
+    # sync from dogweb, download if we don't have it (token required)
     if not options.dogweb:
         if options.token:
             options.dogweb = dogweb_extract_path
