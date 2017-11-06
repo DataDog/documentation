@@ -294,6 +294,9 @@ $(document).ready(function () {
                             var page = parseInt(pagebtns[i].getAttribute('data-pagenum'));
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
+
+                        // scroll to top
+                        $("html, body").scrollTop(0);
                     }
 
                     // init page nums
