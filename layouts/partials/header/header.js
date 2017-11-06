@@ -1,5 +1,15 @@
 $(document).ready(function() {
-    $('header #navbar-sidenav').on('shown.bs.collapse', function () {
+    $('header #navbar-sidenav').on('show.bs.collapse', function () {
+        $('body').css({
+            'overflow': 'hidden',
+            'position': 'fixed'
+        });
+        $(this).css({
+            'overflow-x': 'hidden',
+            'overflow-y': 'scroll',
+            'height': $(window).height()+'px'
+        });
+    }).on('shown.bs.collapse', function () {
         $('body').css({
             'overflow': 'hidden',
             'position': 'fixed'
