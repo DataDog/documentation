@@ -12,4 +12,4 @@ Today, there are multiple community projects for maintaining or managing Monitor
 * https://github.com/rapid7/dogwatch
 * https://www.terraform.io/docs/providers/datadog/r/monitor.html
 
-There is also an example from Brightcove and Shopify that demonstrates backing up both Monitors and Dashboards [here](/faq/can-i-backup-dashboards-or-monitors).
+There is also an example from Brightcove and Shopify that demonstrates backing up both Monitors and Dashboards [here](/developers/faq/can-i-backup-dashboards-or-monitors).
