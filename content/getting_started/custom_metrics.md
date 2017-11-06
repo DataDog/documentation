@@ -57,7 +57,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 To sum it up, your global custom metric count is aggregated across your monitored cluster :
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" >}}
 
-That said, we do not enforce [any fixed rate limit](/faq/api-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
+That said, we do not enforce [any fixed rate limit](/developers/faq/api-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
 
 ## How do I check my custom metrics count?
 

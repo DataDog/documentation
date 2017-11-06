@@ -13,5 +13,5 @@ See the following projects as examples of how these backups can be accompli
 
 Special thanks to [Brightcove](https://www.brightcove.com/) and [Shopify](https://www.shopify.com/) for sharing these projects!
 
-There are Monitor specific examples [here](/faq/can-i-programmatically-maintain-or-manipulate-my-datadog-monitors-alerts) as well. 
+There are Monitor specific examples [here](/developers/faq/can-i-programmatically-maintain-or-manipulate-my-datadog-monitors-alerts) as well. 
 

@@ -35,7 +35,7 @@ customnav: developersnav
 * [Can I programmatically maintain or manipulate my Datadog Monitors/Alerts?](/developers/faq/can-i-programmatically-maintain-or-manipulate-my-datadog-monitors-alerts)
 * [How do I submit custom metrics? What's their overhead?](/developers/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
 * [API rate limit](/developers/faq/api-rate-limit)
-* [Query the Infrastructure List via the API](/developers/faq/query-the-infrastructure-list-via-the-api.md)
+* [Query the Infrastructure List via the API](/developers/faq/query-the-infrastructure-list-via-the-api)
 * [Use our Webhook Integration to create a trello card](/developers/faq/use-our-webhook-integration-to-create-a-trello-card)
 * [Using Postman With Datadog APIs](/developers/faq/using-postman-with-datadog-apis)
 * [Calling on Datadog's API with the Webhooks Integration](/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration)
@@ -50,7 +50,7 @@ customnav: developersnav
 * [Data aggregation with dogstatsd/Threadstats](/developers/faq/data-aggregation-with-dogstatsd-threadstats)
 * [Is there an alternative to dogstatsd and the api to submit metrics? Threadstats](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats)
 * [How to change the colors of my dashboards? Reverse Color Scheme](/developers/faq/how-to-change-the-colors-of-my-dashboards-reverse-color-scheme)
-* [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD](/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticBeanstalk-to-talk-to-dogStatsd)
+* [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD](/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd)
 * [Can I call scripts and generate events from their results?](/developers/faq/can-i-call-scripts-and-generate-events-from-their-results)
 
 ### APIs, Libraries and Community Contributions
