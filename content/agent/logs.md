@@ -98,6 +98,7 @@ Custom parsing functions must:
 Here's an example of what `parsers.py` might contain:
 
 ```python
+
 import time
 from datetime import datetime
 
@@ -133,6 +134,7 @@ You'll want to be able to test your parser outside of the Agent, so for the abov
 you might add a test function like this:
 
 ```python
+
 def test():
     # Set up the test logger
     import logging

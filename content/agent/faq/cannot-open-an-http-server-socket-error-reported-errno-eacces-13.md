@@ -10,7 +10,7 @@ There are a number of issues that can cause the following error when you try sta
 Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)
 ```
 
-At first glance, that might appear to indicate that the agent is unable to connect to the appropriate sockets because they're already occupied. But if you've already double-checked that there are [no lingering agent processes remaining](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port), and if you can ensure that the [appropriate ports](https://help.datadoghq.com/hc/en-us/articles/203037979-What-are-the-required-IP-s-and-ports-I-need-open-to-connect-to-the-Datadog-service-) are available to the agent, sometimes this above error persists.
+At first glance, that might appear to indicate that the agent is unable to connect to the appropriate sockets because they're already occupied. But if you've already double-checked that there are [no lingering agent processes remaining](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port), and if you can ensure that the [appropriate ports](/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service) are available to the agent, sometimes this above error persists.
 
 For linux hosts, the following directory must be owned by the dd-agent user in order for it to start correctly: /opt/datadog-agent/run
 

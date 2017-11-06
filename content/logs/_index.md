@@ -23,7 +23,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your agent](/agent/faq/start-stop-restart-the-datadog-agent)
 
 ## Enabling log collection from integrations
 
@@ -63,7 +63,8 @@ If you want to gather your python app logs for instance stored in **/var/log/mya
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
-{{< highlight yaml >}}
+```yaml
+
 init_config:
 
 instances:
@@ -83,7 +84,8 @@ logs:
     service: myapplication
     source: python
     sourcecategory: sourcecode
-{{< /highlight >}}
+
+```
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
@@ -91,7 +93,8 @@ Set `type` to **tcp** or **udp** depending of your protocol then specify the `po
 Example: 
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
-{{< highlight yaml >}}
+```yaml
+
 init_config:
 
 instances:
@@ -104,7 +107,8 @@ logs:
     source: php
     sourcecategory: front
 
-{{< /highlight >}}
+
+```
 
 ### Filter logs
 

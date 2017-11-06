@@ -2,19 +2,6 @@
 title: Getting started
 kind: documentation
 customnav: gettingstartednav
-sidebar:
-  nav:
-    - header: All About Datadog
-    - text: Integrations
-      href: "#integrations"
-    - text: Infrastructure
-      href: "#infrastructure"
-    - text: Events
-      href: "#events"
-    - text: Dashboards
-      href: "#dashboards"
-    - text: Monitoring
-      href: "#monitoring"
 aliases:
   - /overview
 ---

@@ -10,6 +10,7 @@ If your custom check code explicitly sends a service check status (like our [ssh
 
 To submit a status within your custom agent check you can use the following syntax:
 ```python
+
 from checks import AgentCheck
 
 [...]

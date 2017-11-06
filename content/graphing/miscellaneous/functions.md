@@ -25,6 +25,13 @@ Cumulative sum of (\[time delta] x \[value delta]) over all consecutive pairs of
 ## Interpolation
 ### .fill()
 Choose how to interpolate missing values for a given metric.
+It allows you to tweak the interpolation settings. It takes as parameters a function to use for interpolation and a time in seconds that represents the maximum size of a gap you want to interpolate. You can use 4 different functions for interpolation:
+
+* **linear**: gives you a linear interpolation between the beginning and the end of the gap
+* **last**: fills the gap with the value of the beginning of the gap
+* **zero**: fills the gap with a zero value
+* **null**: deactivates the interpolation
+
 
 ## Timeshift
 Here is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions will display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.

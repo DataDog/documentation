@@ -83,6 +83,7 @@ counting web page views. To achieve this, we'll increment a metric called
 
 For python: 
 ```python
+
 def render_page():
     """ Render a web page. """
     statsd.increment('web.page_views')
@@ -115,6 +116,7 @@ called `file_service.bytes_uploaded` by the size of the file each time our
 
 For python:
 ```python
+
 def upload_file(file):
     statsd.increment('file_service.bytes_uploaded', file.size())
     save_file(file)
@@ -133,6 +135,7 @@ sample that value as the metric `system.mem.free`:
 
 For python:
 ```python
+
 # Record the amount of free memory every ten seconds.
 while True:
     statsd.gauge('system.mem.free', get_free_memory())
@@ -154,6 +157,7 @@ Histograms measure the statistical distribution of a set of values. Suppose we w
 
 For python:
 ```python
+
 # Track the run time of the database query.
 start_time = time.time()
 results = db.query()
@@ -208,6 +212,7 @@ Service checks are used to send information about the status of a service.
 
 For python:
 ```python
+
 from datadog.api.constants import CheckStatus
 
 # Report the status of an app.
@@ -240,6 +245,7 @@ track the number of unique visitors to your site, sets are a great way to do tha
 
 For python:
 ```python
+
 def login(self, user_id):
     # Log the user in ...
     statsd.set('users.uniques', user_id)
@@ -261,6 +267,7 @@ aggregated and compared on the front end. Suppose we wanted to measure the perfo
 
 For python:
 ```python
+
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
     # Do fancy things here ...
@@ -321,6 +328,7 @@ supports sample rates, which allows sending a metric a fraction of the time and 
 The following code will only send points half of the time:
 For python:
 ```python
+
 while True:
   do_something_intense()
   statsd.increment('loop.count', sample_rate=0.5)

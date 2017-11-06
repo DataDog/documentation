@@ -22,6 +22,7 @@ Though we don't require tests for each metric collected, we strongly encourage y
 Tests can be easily added by extending the `AgentCheckTest` class. Additionally, you may import Attributes from Nose to manage requirements.
 
 ```python
+
 from nose.plugins.attrib import attr
 from tests.checks.common import AgentCheckTest
 

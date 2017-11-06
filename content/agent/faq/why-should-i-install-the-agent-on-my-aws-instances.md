@@ -15,6 +15,6 @@ If you use AWS CloudWatch or another cloud-based metrics provider, you may alrea
 * **Custom metrics with Dogstatsd** - With the Datadog agent on board, you can use the built-in statsd client to send custom metrics from your application, making it easier to correlate what’s happening with your application, your users and your system.
 {{< img src="agent/faq/Agent_VS_AWSA.jpg" alt="Agent vs AWSA" responsive="true" >}}
 
-The Datadog agent [is lightweight](https://help.datadoghq.com/hc/en-us/articles/203034929-What-is-the-Datadog-Agent-What-resources-does-it-consume-) and [fully open source](https://github.com/DataDog/dd-agent), so you can review the code and even contribute by making a pull request.
+The Datadog agent [is lightweight](/agent) and [fully open source](https://github.com/DataDog/dd-agent), so you can review the code and even contribute by making a pull request.
 
 Also reference this article if you suspect you're seeing [latency reporting AWS metrics](https://help.datadoghq.com/hc/en-us/articles/203826415-Are-my-CloudWatch-metrics-delayed-).

@@ -409,6 +409,7 @@ This will show the graphs for the five series with the highest peak <code>system
 To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
 
 ```python
+
 {
   "viz": "timeseries",
   "requests": [
@@ -423,6 +424,7 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 Here is an example using the <code>week_before()</code> function:
 
 ```python
+
 {
   "viz": "timeseries",
   "requests": [

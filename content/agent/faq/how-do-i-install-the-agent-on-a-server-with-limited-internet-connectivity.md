@@ -6,7 +6,7 @@ customnav: agentnav
 
 The setup script provided in the in app agent install instructions requires outbound https access to a number of different endpoints in order to function properly and might not work well with servers that have limited internet access.
 
-For servers with no direct internet access, the agent can be configured to route through a proxy. Refer to the help article on this topic available [here](https://help.datadoghq.com/hc/en-us/articles/203765295)
+For servers with no direct internet access, the agent can be configured to route through a proxy. Refer to the help article on this topic available [here](/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog)
 
 For servers with limited outbound internet connectivity, the agent can be installed using the relevant package for the server's OS. The in app install instructions contain instructions for this approach which can be viewed by clicking the link shown on the instructions page.
 

@@ -300,6 +300,7 @@ The check itself will inherit from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This will go in `checks.d/hello.py`:
 
 ```python
+
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
@@ -367,6 +368,7 @@ In this snippet, we start a timer, make the GET request using the
 errors that might arise.
 
 ```python
+
 # Load values from the instance config
 url = instance['url']
 default_timeout = self.init_config.get('default_timeout', 5)
@@ -392,6 +394,7 @@ If the request passes, we want to submit the timing to Datadog as a metric. Let'
 call it `http.response_time` and tag it with the URL.
 
 ```python
+
 timing = end_time - start_time
 self.gauge('http.response_time', timing, tags=['http_check'])
 ```
@@ -406,6 +409,7 @@ events together based on the URL so we will define the aggregation_key as a hash
 of the URL.
 
 ```python
+
 def timeout_event(self, url, timeout, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
@@ -420,6 +424,7 @@ Next, we'll define `status_code_event` which looks very similar to the timeout
 event method.
 
 ```python
+
 def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),

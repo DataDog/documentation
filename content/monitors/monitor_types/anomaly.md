@@ -60,6 +60,8 @@ You should now see something like what's shown above, with a handful of selectio
 
 Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 
+Both the Monitor Edit page and the Monitor Status pages provide "Historical Context" so that you can see how the metric behaved in the past. This should provide some insight into what the anomalies algorithm takes into account when calculating the bounds.
+
 ### Anomaly Detection Algorithms
 
 

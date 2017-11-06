@@ -14,6 +14,7 @@ To begin tracing applications written in Python, first [install and configure th
 Next, install the Datadog Tracing library using pip:
 
 ```python
+
 pip install ddtrace
 ```
 
@@ -27,6 +28,7 @@ For Python applciations, please note that tracing is disabled when your applicat
 </div>
 
 ```python
+
 from ddtrace import tracer
 
 with tracer.trace("web.request", service="my_service") as span:

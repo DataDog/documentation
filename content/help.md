@@ -22,7 +22,7 @@ you can reach out to us:
 
 [1]: http://docs.datadoghq.com
 
-### I have a feature request. How can I submit it?
+## I have a feature request. How can I submit it?
 
 
 You can send the request to support@datadoghq.com and we will add it to our feature request log.

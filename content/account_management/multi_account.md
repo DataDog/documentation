@@ -35,6 +35,12 @@ A new trial account will be created. If you wish to add this account to your exi
 
 To add, disable, and promote members, see the instructions for [Teams](/account_management/team).
 
+## Switch between Organization
+
+For users that belong to more than one Datadog organization, it's possible to switch to another organization from any page by hovering over your avatar in the lower left hand corner.
+
+Once the menu appears, you can transition to the other Datadog accounts you're associated to:
+{{< img src="account_management/multi_account/Switch_Accounts.jpg" alt="Switch Accounts" responsive="true" >}}
 
 ## Custom domains for each sub-organizations
 

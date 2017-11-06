@@ -18,6 +18,7 @@ The Python integration enables you to monitor any custom metric by instrumenting
 
 2.  Start instrumenting your code:
 ```python
+
 # Configure the module according to your needs
 from datadog import initialize
 
