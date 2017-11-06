@@ -1,10 +1,24 @@
 $(document).ready(function() {
     $('header #navbar-sidenav').on('show.bs.collapse', function () {
-        $('body').css('overflow', 'hidden');
-        $(this).css('overflow', 'scroll');
+        $('body').css({
+            'overflow': 'hidden',
+            'position': 'fixed'
+        });
+        $(this).css({
+            'overflow-x': 'hidden',
+            'overflow-y': 'scroll',
+            'height': $(window).height()
+        });
     }).on('hide.bs.collapse', function () {
-        $('body').css('overflow', '');
-        $(this).css('overflow', '');
+        $('body').css({
+            'overflow': '',
+            'position': ''
+        });
+        $(this).css({
+            'overflow-x': '',
+            'overflow-y': '',
+            'height': ''
+        });
     });
 
     $('header #navbar-sidenav a').on('click', function() {
