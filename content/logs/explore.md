@@ -54,6 +54,8 @@ You can click on any log line to see more details about it:
 
 To see log lines dated just before and after a selected log - even if they don't match your filter - click on its `host` or `service` and select `Focus on Host & Service`. 
 
+{{< img src="logs/explore/focus_host_service.png.png" alt="focus on host and service.png" >}}
+
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
