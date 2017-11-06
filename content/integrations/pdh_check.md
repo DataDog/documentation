@@ -1,14 +1,11 @@
 ---
-title: Datadog-Elasticsearch Integration
-integration_title: Elasticsearch
+title: Datadog-Wmi_check Integration
+integration_title: Wmi_check Integration
+git_integration_title: pdh_check
 kind: integration
 newhlevel: true
-git_integration_title: elastic
-updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
-
-{{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

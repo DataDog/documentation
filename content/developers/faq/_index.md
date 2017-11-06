@@ -4,6 +4,7 @@ kind: faq
 customnav: developersnav
 ---
 
+
 ## General
 
 * [How to remove the `host` tag when submitting metrics via dogstatsD](/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd)
@@ -53,3 +54,12 @@ customnav: developersnav
 * [Can I call scripts and generate events from their results?](/developers/faq/can-i-call-scripts-and-generate-events-from-their-results)
 
 ### APIs, Libraries and Community Contributions
+
+* [OmniOS (and possibly SmartOS/OpenIndiana/Nexenta): install from source by tweaking the agent install script ](/developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script)
+* [Is it possible to integrate with ThousandEyes?](/developers/faq/is-it-possible-to-integrate-with-thousandeyes)
+* [Deploying the Agent on RaspberryPI](/developers/faq/deploying-the-agent-on-raspberrypi)
+* [How to Monitor Logs with Loggly Live Tail and Datadog](/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog)
+* [Monitoring Twemproxy](/developers/faq/monitoring-twemproxy)
+* [Monitoring Akka](/developers/faq/monitoring-akka)
+* [Hubot Script - Request snapshots in chat using the Datadog API](/developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api)
+* [How do I collect metrics from Heroku with Datadog?](/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog)

@@ -1,14 +1,11 @@
 ---
-title: Datadog-Elasticsearch Integration
-integration_title: Elasticsearch
+title: Datadog-Linux_proc_extras Integration
+integration_title: Linux_proc_extras Integration
+git_integration_title: Linux_proc_extras
 kind: integration
 newhlevel: true
-git_integration_title: elastic
-updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
-
-{{< img src="integrations/elasticsearch/elasticsearchgraph.png" alt="Elasticsearch" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
