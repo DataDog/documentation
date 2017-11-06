@@ -315,7 +315,7 @@ $(document).ready(function () {
         var offset = 64 + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
         if(htag.length) {
-            $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
+            $("html, body").animate({scrollTop: htag.offset().top - offset}, 300);
             //$("html, body").scrollTop(htag.offset().top - offset);
             window.history.pushState(null, null, url + href);
         }
