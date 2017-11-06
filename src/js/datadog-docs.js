@@ -18,7 +18,7 @@ $(document).ready(function () {
 
         // Find the element currently in the view port
         var scrollElement;
-        $('div.int-anchor').each(function () {
+        $('h2[id]').each(function () {
             if ($(this).offset().top >= window.scrollY) {
                 scrollElement = $(this);
                 return false;
@@ -38,7 +38,8 @@ $(document).ready(function () {
 
         // Scroll to the element that was in the viewport (ie retain location).
         if(scrollElement) {
-            $('html, body').scrollTop(scrollElement.offset().top);
+            var id = scrollElement.attr('id');
+            moveToAnchor(id, false);
         }
 
         // Add the language selection to the current URL.
@@ -311,16 +312,26 @@ $(document).ready(function () {
 
 
     // slide to anchors
-    function moveToAnchor(id) {
+    function moveToAnchor(id, animate) {
+        if (animate === undefined) {
+            animate = true;
+        }
         var href = '#'+id;
         var htag = $(href);
         var customPadding = 10; // how much till it looks good with eye
         var offset = 64 + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
+        var newSt = htag.offset().top - offset;
         if(htag.length) {
-            $("html, body").animate({scrollTop: htag.offset().top - offset}, 300);
-            //$("html, body").scrollTop(htag.offset().top - offset);
-            window.history.pushState(null, null, url + href);
+            if($("html, body").scrollTop() !== newSt)
+            {
+                if(animate) {
+                    $("html, body").animate({scrollTop: newSt}, 300);
+                } else {
+                    $("html, body").scrollTop(newSt);
+                }
+                window.history.pushState(null, null, url + href);
+            }
         }
     }
 
