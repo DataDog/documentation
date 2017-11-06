@@ -3,6 +3,7 @@ from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from os import sep, makedirs, getenv
 from tqdm import *
+import platform
 import yaml
 import requests
 import tempfile
@@ -119,7 +120,8 @@ def sync(*args):
     options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
 
     # setup path variables
-    extract_path = '{}'.format(join(tempfile.gettempdir(), "extracted") + sep)
+    tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+    extract_path = '{}'.format(join(tempdir, "extracted") + sep)
     dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
     integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
     dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
