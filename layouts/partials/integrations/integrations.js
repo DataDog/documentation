@@ -98,11 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var button;
         var i;
 
-        for (i = 0; i < siblings.length; i++) {
-            button = siblings[i];
-            button.classList[button === activeButton ? 'add' : 'remove']('active');
+        if(activeButton && siblings) {
+            for (i = 0; i < siblings.length; i++) {
+                button = siblings[i];
+                button.classList[button === activeButton ? 'add' : 'remove']('active');
+            }
+            mobileBtn.textContent = activeButton.textContent;
         }
-        mobileBtn.textContent = activeButton.textContent;
     }
 
     function grayOut(filter) {
