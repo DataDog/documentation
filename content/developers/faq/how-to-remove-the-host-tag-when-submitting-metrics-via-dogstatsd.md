@@ -22,7 +22,7 @@ The following articles have more information about custom metrics:
 
 * [Getting Started on custom metrics](/getting_started/custom_metrics)
 
-* [How do I submit custom metrics, what's their overhead ?](/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
+* [How do I submit custom metrics, what's their overhead ?](/developers/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
 
 And as always, please feel free to reach out to [us](/help) if you are looking for help with your custom metrics.
 

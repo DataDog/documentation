@@ -50,7 +50,7 @@ customnav: developersnav
 * [Data aggregation with dogstatsd/Threadstats](/developers/faq/data-aggregation-with-dogstatsd-threadstats)
 * [Is there an alternative to dogstatsd and the api to submit metrics? Threadstats](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats)
 * [How to change the colors of my dashboards? Reverse Color Scheme](/developers/faq/how-to-change-the-colors-of-my-dashboards-reverse-color-scheme)
-* [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD](/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticBeanstalk-to-talk-to-dogstatsd)
+* [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD](/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd)
 * [Can I call scripts and generate events from their results?](/developers/faq/can-i-call-scripts-and-generate-events-from-their-results)
 
 ### APIs, Libraries and Community Contributions
