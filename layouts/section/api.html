@@ -7,28 +7,24 @@
 
 
     <div class="row sticky api-nav no-gutters" style="">
-        <div class="col-lg-6">
+        <div class="col-12 col-lg-6">
+            <div class="d-lg-none" style="background:#fff;padding:10px;">
+                <div class="dropdown show">
+                    <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        API
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding:15px 30px">
+                        {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+                        {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
 
-            <div class="row d-lg-none" style="padding:10px;background:#fff;">
-                <div class="col-12">
-                    <div class="dropdown show">
-                        <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            API
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding:15px 30px">
-                            {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
-                            {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
+                        {{ else }}
 
-                            {{ else }}
-
-                            <a class="dropdown-item" href="#{{ lower (replace $element.Title " " "-") }}">{{ $element.Title }}</a>
-                            {{ end }}
-                            {{ end }}
-                        </div>
+                        <a class="dropdown-item" href="#{{ lower (replace $element.Title " " "-") }}">{{ $element.Title }}</a>
+                        {{ end }}
+                        {{ end }}
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-12 col-lg-6">
             {{ partial "codenav/codenav.html" . }}
