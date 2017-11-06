@@ -16,7 +16,7 @@
     {{- end -}}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
-<body class="{{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+<body class="{{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
     {{ partial "header/header.html" . }}
 

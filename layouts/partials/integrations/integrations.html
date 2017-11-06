@@ -19,14 +19,14 @@
 {{ $dot := . }}
 
 <!-- From data file -->
-{{ $integration_list := (where $.Site.Data.product.integrations.integrations "public" true) }}
+{{ $integration_list := (where (getJSON "integrations.json") "is_public" true) }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
 {{ range $index, $element := $integration_list }}
     {{ range $e := $element.categories }}
-        {{ if not (in ($.Scratch.Get "filters") $e) }}
-            {{ $.Scratch.Add "filters" $e }}
+        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
+            {{ $.Scratch.Add "filters" ($e | lower) }}
         {{ end }}
     {{ end }}
 {{ end }}
@@ -56,7 +56,7 @@
         <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL</a>
         <div class="dropdown-menu" data-ref="mobilecontrols" aria-labelledby="dropdownMenuLink">
             <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">ALL</a>
-            {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
+            {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
                 <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
             {{ end }}
         </div>
@@ -72,13 +72,18 @@
 <!-- using 5 col -->
 <div class="row no-gutters integration-tiles mt-4" data-ref="container">
     {{ range $i, $v := $integration_list }}
+        {{ $.Scratch.Set "formatSlice" (slice)}}
+        {{ range $i, $word := (split $v.name "_") }}
+            {{ $.Scratch.Add "formatSlice" (print (substr $word 0 1 | upper) (substr $word 1 (len $word))) }}
+        {{ end }}
+        {{ $formatname := delimit ($.Scratch.Get "formatSlice") " " }}
         <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <div class="card">
-                <a class="card-img" href="{{ .Site.BaseURL }}{{$v.docs_link}}"><img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}"></a>
-                <div class="text-center title" style="display: none;">{{ $v.public_title }}</div>
+                <a class="card-img" href="{{ .Site.BaseURL }}{{$v.name | lower}}"><img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}"></a>
+                <div class="text-center title" style="display: none;">{{ $formatname }}</div>
                 <div class="card-body">
-                    <a class="card-button" href="{{ .Site.BaseURL }}{{$v.docs_link}}">
-                        <h4 class="card-title">{{ $v.public_title }}</h4>
+                    <a class="card-button" href="{{ .Site.BaseURL }}{{$v.name | lower}}">
+                        <h4 class="card-title">{{ $formatname }}</h4>
                         <p class="card-text">{{ $v.short_description }}</p>
                         <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
                     </a>

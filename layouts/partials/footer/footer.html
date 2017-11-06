@@ -8,7 +8,7 @@
                         <button type="button" class="btn btn-block btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">Free Trial</button>
                     </div>
                 </div>
-                <span class="copyright d-none d-md-block">&copy; Datadog 2017</span>
+                <span class="copyright d-none d-md-block">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
             </div>
             <div class="col-12 col-md-5 col-lg-4 mt-4 mt-md-0">
                 <p>Product</p>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="row d-inline-block d-md-none mt-4 mt-md-0">
-                    <div class="col-12"><span class="copyright">&copy; Datadog 2017</span></div>
+                    <div class="col-12"><span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span></div>
                 </div>
             </div>
         </div>

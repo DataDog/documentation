@@ -568,6 +568,12 @@ languages:
           parent: customnav_lognav_languages
         # LOGS - Subnav end
 
+#        - identifier: menu_references_videos
+#          name: "Videos"
+#          url: "/videos/"
+#          pre: "nav_start"
+#          weight: 120
+#          hide: true
         - identifier: menu_references_glossary
           name: "Glossary"
           url: "/glossary/"
