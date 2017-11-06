@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
-            if(window.integrations[i].tags.indexOf(filter.substr(1)) !== -1) {
+            if(filter && window.integrations[i].tags.indexOf(filter.substr(1)) !== -1) {
                 show.push(window.integrations[i]);
             } else {
                 hide.push(window.integrations[i]);
