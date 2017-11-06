@@ -127,25 +127,25 @@ languages:
           url: "/agent/autodiscovery/"
           weight: 40
           parent: menu_references_agent
-        - identifier: customnav_agentnav_faq
-          name: "FAQ"
-          url: "/agent/faq/"
-          weight: 50
-          parent: menu_references_agent
         - identifier: customnav_agentnav_installcoreextra
           name: "Install Core Extra"
           url: "/agent/installcoreextra/"
-          weight: 60
+          weight: 50
           parent: menu_references_agent
         - identifier: customnav_agentnav_logs
           name: "Logs"
           url: "/agent/logs/"
-          weight: 70
+          weight: 60
           parent: menu_references_agent
         - identifier: customnav_agentnav_tagging
           name: "Tagging"
           url: "/agent/tagging/"
           weight: 80
+          parent: menu_references_agent
+        - identifier: customnav_agentnav_faq
+          name: "FAQ"
+          url: "/agent/faq/"
+          weight: 90
           parent: menu_references_agent
         # AGENT - Subnav end
 
@@ -323,27 +323,27 @@ languages:
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "/monitors/manage_monitor/"
-          weight: 40
+          weight: 130
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "/monitors/check_summary/"
-          weight: 50
+          weight: 140
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_notifications
           name: "Notifications"
           url: "/monitors/notifications/"
-          weight: 60
+          weight: 150
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_downtimes
           name: "Downtimes"
           url: "/monitors/downtimes/"
-          weight: 70
+          weight: 160
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_faq
           name: "FAQ"
           url: "/monitors/faq/"
-          weight: 80
+          weight: 170
           parent: menu_references_monitoring
         # ALERTING - Subnav end
 
@@ -365,45 +365,45 @@ languages:
           url: "/tracing/environments/"
           weight: 20
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_faq
-          name: "FAQ"
-          url: "/tracing/faq/"
-          weight: 30
-          parent: menu_references_tracing
         - identifier: customnav_tracingnav_help
           name: "Help"
           url: "/tracing/help/"
-          weight: 40
+          weight: 30
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_langs
           name: "languages"
           url: "/tracing/languages/"
-          weight: 50
+          weight: 40
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_go
           name: "Go"
           url: "/tracing/languages/go/"
-          weight: 10
+          weight: 50
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "/tracing/languages/python/"
-          weight: 20
+          weight: 60
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
           url: "/tracing/languages/ruby/"
-          weight: 30
+          weight: 70
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_docker
           name: "Docker"
           url: "/tracing/docker/"
-          weight: 60
+          weight: 80
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
           name: "Api"
           url: "/tracing/api/"
-          weight: 70
+          weight: 90
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_faq
+          name: "FAQ"
+          url: "/tracing/faq/"
+          weight: 100
           parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
@@ -531,11 +531,6 @@ languages:
           url: "/logs/aws/"
           weight: 60
           parent: menu_references_logs
-        - identifier: customnav_lognav_faq
-          name: "FAQ"
-          url: "/logs/faq/"
-          weight: 70
-          parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Languages"
           url: "/logs/languages/"
@@ -566,6 +561,11 @@ languages:
           url: "/logs/languages/ruby/"
           weight: 130
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_faq
+          name: "FAQ"
+          url: "/logs/faq/"
+          weight: 99
+          parent: menu_references_logs
         # LOGS - Subnav end
 
         - identifier: menu_references_glossary

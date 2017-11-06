@@ -26,9 +26,4 @@ customnav: main_references
 
 * [What standard integrations emit custom metrics?](/faq/what-standard-integrations-emit-custom-metrics)
 
-## API
 
-* [Can I backup Dashboards or Monitors?](/faq/can-i-backup-dashboards-or-monitors)
-* [Can I programmatically maintain or manipulate my Datadog Monitors/Alerts?](/faq/can-i-programmatically-maintain-or-manipulate-my-datadog-monitors-alerts)
-* [How do I submit custom metrics? What's their overhead?](/faq/how-do-i-submit-custom-metrics-what-s-their-overhead)
-* [API rate limit](/faq/api-rate-limit)

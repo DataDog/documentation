@@ -1,0 +1,1288 @@
+{
+	"variables": [],
+	"info": {
+		"name": "DataDog",
+		"_postman_id": "37963f90-488f-e6c9-ef12-09b16a489ea9",
+		"description": "Top Level Folder For DataDog API calls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"description": "All requests to Datadog's API must be authenticated. Requests that write data require reporting access and require an API key. Requests that read data require full access and also require an application key.",
+			"item": [
+				{
+					"name": "Authentication Check",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/validate?api_key=INSERT_API_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "This GET call just checks to see if an API call key is valid."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checks",
+			"description": "The service check endpoint allows you to post check statuses for use with monitors.",
+			"item": [
+				{
+					"name": "Enter Check Status",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/check_run?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"check\": \"app.is_ok\",\n      \"host_name\": \"my_hostname\",\n      \"status\": 0\n  }"
+						},
+						"description": "This POST call allows for you to POST check statuses for use with monitors"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"description": "Comments are essentially special forms of events that appear in the stream. They can start a new discussion thread or optionally, reply in another thread.\n\nARGUMENTS\n\n* message [required]\n     **The comment text.\n* handle [optional, default=application key owner]\n     **The handle of the user making the comment.\n* related_event_id [optional, default=None]\n     **The id of another comment or event to reply to",
+			"item": [
+				{
+					"name": "POST A Comment",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"message\" : \"There is a problem with the database2.\",\n      \"handle\":\"bmroche@gmail.com\"\n  }"
+						},
+						"description": "This POST call allows for you to POST status messages, or reply to another thread (if related_event_id is passed)"
+					},
+					"response": []
+				},
+				{
+					"name": "Reply To Comment",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"message\" : \"Try embedded comment to previous post\",\n      \"handle\":\"bmroche@gmail.com\",\n      \"related_event_id\":\"3843081237765820421\"\n  }"
+						},
+						"description": "This POST call allows for you to POST status messages to a previous post via ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Change Previous Comment",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"message\" : \"Try Changing the Wording\"\n  }"
+						},
+						"description": "This POST call allows for you to change a previously posted comment by commentId"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "This POST call allows for you to DELETE a previously posted comment by commentId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Downtimes",
+			"description": "Downtiming gives you greater control over monitor notifications by allowing you to globally exclude scopes from alerting. Downtime settings, which can be scheduled with start and end times, prevent all alerting related to specified Datadog tags.",
+			"item": [
+				{
+					"name": "Schedule Downtime",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Schedule a single Downtime.\n\nARGUMENTS\n\n* scope [required]\nThe scope(s) to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.\n\n*monitor_id [optional, default=None]\nA single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors.\n\n*start [optional, default=None]\nPOSIX timestamp to start the downtime. If not provided, the downtime starts the moment it is created.\n\n*end [optional, default=None]\nPOSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it).\n\n*message [optional, default=None]\nA message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events\n\n*monitor_id [optional, default=None]\nThe id of a specific monitor to apply the downtime to.\n\n*recurrence [optional, default=None]\nAn object defining the recurrence of the downtime with a variety of parameters:\n\n*type the type of recurrence. Choose from: days, weeks, months, years.\n\n*period how often to repeat as an integer. For example to repeat every 3 days, select a type of days and a period of 3.\n\n*week_days (optional) a list of week days to repeat on. Choose from: Mon, Tue, Wed, Thu, Fri, Sat or Sun. Only applicable when type is weeks. First letter must be capitalized.\n\n*until_occurrences (optional) how many times the downtime will be rescheduled. until_occurences and \n\n*until_date are mutually exclusive\nuntil_date (optional) the date at which the recurrence should end as a POSIX timestmap. until_occurences and until_date are mutually exclusive\n\n*timezone [optional, default=UTC]\nThe timezone for the downtime."
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Downtime",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Update a single Downtime by downtime_id.\n\nARGUMENTS\n\n* scope [required]\nThe scope(s) to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.\n\n*monitor_id [optional, default=None]\nA single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors.\n\n*start [optional, default=None]\nPOSIX timestamp to start the downtime. If not provided, the downtime starts the moment it is created.\n\n*end [optional, default=None]\nPOSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it).\n\n*message [optional, default=None]\nA message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events\n\n*monitor_id [optional, default=None]\nThe id of a specific monitor to apply the downtime to.\n\n*recurrence [optional, default=None]\nAn object defining the recurrence of the downtime with a variety of parameters:\n\n*type the type of recurrence. Choose from: days, weeks, months, years.\n\n*period how often to repeat as an integer. For example to repeat every 3 days, select a type of days and a period of 3.\n\n*week_days (optional) a list of week days to repeat on. Choose from: Mon, Tue, Wed, Thu, Fri, Sat or Sun. Only applicable when type is weeks. First letter must be capitalized.\n\n*until_occurrences (optional) how many times the downtime will be rescheduled. until_occurences and \n\n*until_date are mutually exclusive\nuntil_date (optional) the date at which the recurrence should end as a POSIX timestmap. until_occurences and until_date are mutually exclusive\n\n*timezone [optional, default=UTC]\nThe timezone for the downtime."
+					},
+					"response": []
+				},
+				{
+					"name": "GET A Downtime",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get Downtime Detail by downtime_id"
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL Downtimes",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get All Scheduled Downtimes"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All Downtimes By Scope",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"scope\":\"region:midwest\"}"
+						},
+						"description": "DELETE all Downtimes that match the scope of X"
+					},
+					"response": []
+				},
+				{
+					"name": "DELTE A Downtime",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "DELETE a Downtime Detail by downtime_id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Embeddable Graphs",
+			"description": "You can interact with embeddable graphs through the API.",
+			"item": [
+				{
+					"name": "GET ALL Embeddable Graphs",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "GET ALL Embeddable Graphs"
+					},
+					"response": []
+				},
+				{
+					"name": "GET A Specific Embeddable Graphs",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "GET A Specific Embeddable Graphs"
+					},
+					"response": []
+				},
+				{
+					"name": "Create An Embeddable Graph",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "graph_json",
+									"value": "{\"requests\":[{\"q\":\"avg:system.load.1{*}\"}],\"viz\":\"timeseries\",\"events\":[]}",
+									"type": "text"
+								},
+								{
+									"key": "timeframe",
+									"value": "1_hour",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "medium",
+									"type": "text"
+								},
+								{
+									"key": "legend",
+									"value": "yes",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Creates a new embeddable graph.\n\nReturns: A JSON consisting of the same elements returned by GET api/v1/graph/embed/:embed_id. On failure, the return value will be a JSON containing an error message {errors: [messages]}.\n\nNote: If an embed already exists for the exact same query in a given organization, the older embed will be returned instead of creating a new embed.\n\nARGUMENTS\n\n*graph_json [required]\nThe graph definition in JSON. Same format that is available on the JSON tab of the graph editor\n\n*timeframe [optional, default=1_hour]\nThe timegrame for the graph. Must be one of 1_hour, 4_hours, 1_day, 2_days, and 1_week.\n\n*size [optional, default=medium]\nThe size of the graph. Must be one of small, medium, large, and xlarge.\n\n*legend [optional, default=no]\nThe flag determining if the graph includes a legend. Must be one of yes or no.\n\n*title [optional, default=Embed created through API]\nDetermines graph title. Must be at least 1 character."
+					},
+					"response": []
+				},
+				{
+					"name": "Enable A Specific Embed",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Enable A Specific Embed by embed_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke A Specific Embed",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Revoke A Specific Embed by embed_id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"description": "The events service allows you to programatically post events to the stream and fetch events from the stream.",
+			"item": [
+				{
+					"name": "Post an Event",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
+						},
+						"description": "This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.\n\nARGUMENTS\n\n*title [required]\nThe event title. Limited to 100 characters.\n\n*text [required]\nThe body of the event. Limited to 4000 characters. The text supports markdown.\n\n*date_happened [optional, default=now]\nPOSIX timestamp of the event.\n\n*priority [optional, default='normal']\nThe priority of the event ('normal' or 'low').\n\n*host [optional, default=None]\nHost name to associate with the event.\n\n*tags [optional, default=None]\nA list of tags to apply to the event.\n\n*alert_type [optional, default='info']\n\"error\", \"warning\", \"info\" or \"success\".\n\n*aggregation_key [optional, default=None]\nAn arbitrary string to use for aggregation, max length of 100 characters. If you specify a key, all events using that key will be grouped together in the Event Stream.\n\n*source_type_name [optional, default=None]\nThe type of event being posted.\n\n*Options: nagios, hudson, jenkins, user, my apps, feed, chef, puppet, git, bitbucket, fabric, capistrano"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Details",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
+						},
+						"description": "Get event details by event_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE An Event",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
+						},
+						"description": "DELETE event details by event_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Query Event Stream",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493127756&end=1493386969",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
+						},
+						"description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\nARGUMENTS\n\n*start [required]\nPOSIX timestamp\n\n*end [required]\nPOSIX timestamp\n\n*priority [optional, default=None]\n'low' or 'normal'\n\n*sources [optional, default=None]\nA comma separated string of sources\n\n*tags [optional, default=None]\nA comma separated string of tags"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Graphs",
+			"description": "You can take graph snapshots using the API.",
+			"item": [
+				{
+					"name": "Graph a Snapshot",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "ARGUMENTS\n\n*metric_query [required]\nThe metric query.\n\n*start [required]\nThe POSIX timestamp of the start of the query.\n\n*end [required]\nThe POSIX timestamp of the end of the query.\n\n*event_query [optional, default=None]\nA query that will add event bands to the graph.\n\n*graph_def [optional, default=None]\nA JSON document defining the graph. graph_def can be used instead of metric_query. The JSON document uses the grammar defined here and should be formatted to a single line then URLEncoded. The graph_def argument is only available in the REST API and not using the Ruby or Python wrappers.\n\n*title [optional, default=None]\nA title for the graph. If no title is specified, the graph will not have a title."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hosts",
+			"description": "",
+			"item": [
+				{
+					"name": "Mute a Host",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/host/my_hostname/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"message\": \"Muting this host for a test!\"\n  }"
+						},
+						"description": "ARGUMENTS\n\n*end [optional, default=None]\nPOSIX timestamp when the host will be unmuted. If omitted, the host will remain muted until explicitly unmuted.\n\n*message [optional, default=None]\nMessage to associate with the muting of this host\n\n*override [optional, default=False]\nIf true and the host is already muted, will replace existing host mute settings."
+					},
+					"response": []
+				},
+				{
+					"name": "Unmute a Host",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/host/my_hostname/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"message\": \"Un-Muting this host for a test!\"\n  }"
+						},
+						"description": "ARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metrics",
+			"description": "The metrics end-point allows you to:\n\n*Post metrics data so it can be graphed on Datadog's dashboards\n\n*Query metrics from any time period\n\nAs occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.\n\nThus, if you are querying for larger timeframes of data, the points returned will be more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, our algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. We do this time aggregation via averages.",
+			"item": [
+				{
+					"name": "Get All Active Metrics",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/metrics?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1488386651",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "ARGUMENTS\n\n* from [required]\nseconds since the unix epoch"
+					},
+					"response": []
+				},
+				{
+					"name": "View Metric Data",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "ARGUMENTS\n\nThis endpoint takes no JSON arguments"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Metric Data",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"The percent of time the CPU spent running the kernel 2.\",\n    \"short_name\": \"cpu system\",\n    \"integration\": \"system\",\n    \"statsd_interval\": null,\n    \"per_unit\": null,\n    \"type\": \"gauge\",\n    \"unit\": \"percent\"\n}"
+						},
+						"description": "ARGUMENTS\n\nThe metrics metadata endpoint allows you to edit fields of a metric's metadata.\n\nARGUMENTS\n\n*type [optional, default=None]\nmetric type such as 'gauge' or 'rate'\n\n*description [optional, default=None]\nstring description of the metric\n\n*short_name [optional, default=None]\nshort name string of the metric\n\n*unit [optional, default=None]\nprimary unit of the metric such as 'byte' or 'operation'\n\n*per_unit [optional, default=None]\n'per' unit of the metric such as 'second' in 'bytes per second'\n\n*statsd_interval [optional, default=None]\nif applicable, statds flush interval in seconds for the metric"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Time Series Point",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/series?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[[1493127756,20]],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"environment:test\"]}\n        ]\n    }"
+						},
+						"description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.\n\nARGUMENTS\n\n*series [required]\nA JSON array of metrics where each item in the array contains the following arguments:\n\n*metric [required]\nThe name of the time series\n\n*points [required]\nA JSON array of points. Each point is of the form:\n[[POSIX_timestamp, numeric_value], ...]\nNote that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value. Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.\n\n*host [optional, default=None]\nThe name of the host that produced the metric.\n\n*tags [optional, default=None]\nA list of tags associated with the metric."
+					},
+					"response": []
+				},
+				{
+					"name": "Query Time Series Points",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/query?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[1493127756,20],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"environment:test\"]}\n        ]\n    }"
+						},
+						"description": "This end point allows you to query for metrics from any time period.\n\nARGUMENTS\n\n*from [required]\nseconds since the unix epoch\n\n*to [required]\nseconds since the unix epoch\n\n*query [required]\nThe query string\n\n\nQUERY LANGUAGE\n\nAny query used for a graph can be used here. See here for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Monitors",
+			"description": "Monitors allow you to watch a metric or check that you care about, notifying your team when some defined threshold is exceeded. Please refer to the Guide to Monitors for more information on creating monitors.",
+			"item": [
+				{
+					"name": "Create a Monitor ",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+						},
+						"description": "http://docs.datadoghq.com/api/?lang=console#monitors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Monitor's Details",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+						},
+						"description": "ARGUMENTS\n\n*group_states [optional, default=None]\n\nIf this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Monitor's Details",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"deleted\": null,\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n    \"message\": \"We may need to add web hosts NOW if this is consistently high.\",\n    \"id\": 1959920,\n    \"multi\": false,\n    \"name\": \"Bytes received on host0\",\n    \"created\": \"2017-04-28T14:09:23.046108+00:00\",\n    \"created_at\": 1493388563000,\n    \"creator\": {\n        \"id\": 508262,\n        \"handle\": \"bmroche@gmail.com\",\n        \"name\": \"Brendan Roche\",\n        \"email\": \"bmroche@gmail.com\"\n    },\n    \"org_id\": 104001,\n    \"modified\": \"2017-04-28T14:09:23.046108+00:00\",\n    \"overall_state_modified\": null,\n    \"overall_state\": \"No Data\",\n    \"type\": \"metric alert\",\n    \"options\": {\n        \"notify_audit\": false,\n        \"locked\": false,\n        \"silenced\": {},\n        \"no_data_timeframe\": 20,\n        \"new_host_delay\": 300,\n        \"require_full_window\": true,\n        \"notify_no_data\": true\n    }\n}"
+						},
+						"description": "ARGUMENTS\n\n*query [required]\nThe metric query to alert on.\n\n*name [optional, default=dynamic, based on query]\nThe name of the monitor.\n\n*message [optional, default=dynamic, based on query]\nA message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.\n\n*options [optional, default=None]\nRefer to the create monitor documentation for details on the available options.\n\n*tags [optional, default=empty list]\nA list of tags to associate with your monitor. This can help you categorize and filter monitors."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a Monitor",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "ARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Monitor Details",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "ARGUMENTS\n\n*group_states [optional, default=None]\nIf this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'\n\n*name [optional, default=None]\nA string to filter monitors by name\n\n*tags [optional, default=None]\nA comma separated list indicating what tags, if any, should be used to filter the list of monitors by scope, e.g. host:host0. For more information, see the tags parameter for the appropriate query argument in the Create a monitor section above.\n\n*monitor_tags [optional, default=None]\nA comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. service:my-app)"
+					},
+					"response": []
+				},
+				{
+					"name": "Mute All Monitors",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/mute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Muting will prevent all monitors from notifying through email and posts to the event stream. State changes will only be visible by checking the alert page.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Unmute All Monitors",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/unmute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Disables muting all monitors. Throws an error if mute all was not enabled previously.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Mute A Specific Monitor",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+						},
+						"description": "ARGUMENTS\n\n*scope [optional, default=None]\nThe scope to apply the mute to, e.g. role:db\n\n*end [optional, default=None]\nA POSIX timestamp for when the mute should end"
+					},
+					"response": []
+				},
+				{
+					"name": "Unmute A Specific Monitor",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/monitor/1959920/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+						},
+						"description": "ARGUMENTS\n\n*scope [optional, default=None]\nThe scope to apply the mute to. For example, if your alert is grouped by {host}, you might mute 'host:app1'\n\n*all_scopes [optional, default=False]\nClear muting across all scopes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Org",
+			"description": "Manage parent / child orgs here",
+			"item": [
+				{
+					"name": "Get all Orgs",
+					"request": {
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"org"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "INSERT_API_KEY_HERE",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "application_key",
+									"value": "INSERT_APP_KEY_HERE",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"series\" :\n         [{\"metric\":\"symantec.job.duration\",\n          \"points\":[[1500326997,20]],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"jobId:12345,datacenter:dc1,app:app1\"]}\n        ]\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Child Org",
+					"request": {
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"org"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "INSERT_API_KEY_HERE",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "application_key",
+									"value": "INSERT_APP_KEY_HERE",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Brendan Test via API\",\n    \"subscription\" : {\n        \"type\" : \"trial\"\n    },\n    \"billing\" : {\n        \"type\" : \"parent_billing\"\n    }\n}"
+						},
+						"description": "create child org, based off api_key and app_key"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Screenboards",
+			"description": "You can view more detailed documentation on the Screenboard API at http://docs.datadoghq.com/api/screenboards/.",
+			"item": [
+				{
+					"name": "Setup New ScreenBoard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "ARGUMENTS\n\n*board_title [required]\nThe name of the dashboard.\n\n*description [optional, default=None]\nA description of the dashboard's content.\n\n*widgets [required]\nA list of widget definitions. See here for more examples.\n\n*template_variables [optional, default=None]\nA list of template variables for using Dashboard templating.\n\n*width [optional, default=None]\nScreenboard width in pixels\n\n*height [optional, default=None]\nHeight in pixels.\n\n*read_only [optional, default=False]\nThe read-only status of the screenboard."
+					},
+					"response": []
+				},
+				{
+					"name": "Update ScreenBoard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"board_title\": \"Number of Agents or EC2 reporting\",\n    \"read_only\": false,\n    \"created\": \"2017-04-25T22:12:54.909853+00:00\",\n    \"modified\": \"2017-04-25T22:15:01.403148+00:00\",\n    \"height\": 768,\n    \"width\": 1024,\n    \"widgets\": [\n        {\n            \"x\": 24,\n            \"title\": \"New Agents reporting, past week\",\n            \"height\": 57,\n            \"width\": 59,\n            \"timeframe\": \"1w\",\n            \"y\": 30,\n            \"query\": \"Datadog agent started\",\n            \"type\": \"event_stream\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 1,\n            \"type\": \"timeseries\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 50,\n            \"type\": \"timeseries\"\n        }\n    ],\n    \"id\": 177964\n}"
+						},
+						"description": "Will update Screenboard definition"
+					},
+					"response": []
+				},
+				{
+					"name": "GET ScreenBoard Definition",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "Will get screenboard definition by screenboard id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ScreenBoard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"board_title\": \"Number of Agents or EC2 reporting\",\n    \"read_only\": false,\n    \"created\": \"2017-04-25T22:12:54.909853+00:00\",\n    \"modified\": \"2017-04-25T22:15:01.403148+00:00\",\n    \"height\": 768,\n    \"width\": 1024,\n    \"widgets\": [\n        {\n            \"x\": 24,\n            \"title\": \"New Agents reporting, past week\",\n            \"height\": 57,\n            \"width\": 59,\n            \"timeframe\": \"1w\",\n            \"y\": 30,\n            \"query\": \"Datadog agent started\",\n            \"type\": \"event_stream\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 1,\n            \"type\": \"timeseries\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 50,\n            \"type\": \"timeseries\"\n        }\n    ],\n    \"id\": 177964\n}"
+						},
+						"description": "Will DELETE Screenboard definition"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Screenboards",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "Fetch all of your screenboards' definitions.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Share A Screenboard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "Share an existing screenboard's with a public URL.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke Share of Screenboard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "Revoke a currently shared screenboard's.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"description": "This end point allows you to search for entities from the last 24 hours in Datadog. The currently searchable entities are:\n\n* hosts\n* metrics\n\nARGUMENTS\n\n* q [required]\nThe query string\n\n\nQUERY LANGUAGE\n\nSearch queries allow for limited faceting. Available facets are:\n\n* hosts\n* metrics\n\n\nFaceting your search limits your results to only matches of the specified type. Un-faceted queries return results for all possible types.\n\nUn-faceted queries are of the form:\n* query_string\nFaceted queries are of the form:\n* facet:query_string",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/search?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&q=cpu",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
+						},
+						"description": "This end point allows you to search for entities from the last 24 hours in Datadog. The currently searchable entities are:\n\nhosts\n*metrics\n*ARGUMENTS\n\n*q [required]\nThe query string\nQUERY LANGUAGE\n\nSearch queries allow for limited faceting. Available facets are:\n\n*hosts\n*metrics\nFaceting your search limits your results to only matches of the specified type. Un-faceted queries return results for all possible types.\n\nUn-faceted queries are of the form:\n\n*query_string\nFaceted queries are of the form:\n\n*facet:query_string"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"description": "The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).\n\nThe component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano.",
+			"item": [
+				{
+					"name": "Get All Host Tags",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tags\": [\n    \"aws:cloudformation:stack-name:myfirstinstance\",\n    \"name:myfirstinstance\",\n    \"demo\",\n    \"image:ami-80861296\",\n    \"region:us-east-1\",\n    \"instance-type:t2.micro\",\n    \"aws:cloudformation:logical-id:webserverinstance\",\n    \"security-group:sg-658ba51a\",\n    \"availability-zone:us-east-1c\",\n    \"kernel:none\",\n    \"aws:cloudformation:stack-id:arn:aws:cloudformation:us-east-1:989648780687:stack/myfirstinstance/7f4b9880-250e-11e7-94ec-500c20fefad2\",\n  ]\n}"
+						},
+						"description": "Get all host tags by hostname"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Tags By Hostname",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tags\": [\n    \"blank:test2\"\n  ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update All Tags By Hostname",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tags\": [\n    \"aws:cloudformation:stack-name:myfirstinstance\",\n    \"name:myfirstinstance\",\n    \"demo\",\n    \"image:ami-80861296\",\n    \"region:us-east-1\",\n    \"instance-type:t2.micro\",\n    \"aws:cloudformation:logical-id:webserverinstance\",\n    \"security-group:sg-658ba51a\",\n    \"availability-zone:us-east-1c\",\n    \"kernel:none\",\n    \"aws:cloudformation:stack-id:arn:aws:cloudformation:us-east-1:989648780687:stack/myfirstinstance/7f4b9880-250e-11e7-94ec-500c20fefad2\"\n  ]\n}"
+						},
+						"description": "The POST will update all tags, not just the one new tag."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Timeboards",
+			"description": "This endpoint allows you to programmatically create, update delete and query timeboards.",
+			"item": [
+				{
+					"name": "Create a Timeboard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
+						},
+						"description": "ARGUMENTS\n\n*title [required]\nThe name of the dashboard.\n\n*description [required]\nA description of the dashboard's content.\n\n*graphs [required]\nA list of graph definitions. Graph definitions follow this form:\n\n**title [required]\nThe name of the graph.\n\n**definition [required]\nThe graph definition. \n\n***Example:\n{\"requests\": [{\"q\": \"system.cpu.idle{*} by {host}\"}\n\n\n**template_variables [optional, default=None]\nA list of template variables for using Dashboard templating. Template variable definitions follow this \n\n**form:\n\n***name [required]\nThe name of the variable.\n\n***prefix [optional, default=None]\nThe tag prefix associated with the variable. Only tags with this prefix will appear in the variable dropdown.\n\n***default [optional, default=None]\nThe default value for the template variable on dashboard load"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Timeboard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/dash/281866?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell 2\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
+						},
+						"description": "ARGUMENTS\n\n*title [required]\nThe name of the dashboard.\n\n*description [required]\nA description of the dashboard's contents.\n\n*graphs [required]\nA list of graph definitions. Graph definitions follow this form:\n\n*title [required]\nThe name of the graph.\n\n*definition [required]\nThe graph definition. Read the Graph Guide for more on graphs. Example:\n{\"requests\": [{\"q\": \"system.cpu.idle{*} by {host}\"}\n\n*template_variables [optional, default=None]\nA list of template variables for using Dashboard templating. Template variable definitions follow this form:\n\n*name [required]\nThe name of the variable.\n\n*prefix [optional, default=None]\nThe tag prefix associated with the variable. Only tags with this prefix will appear in the variable dropdown.\n\n*default [optional, default=None]\nThe default value for the template variable on dashboard load"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All TimeBoards",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell 2\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
+						},
+						"description": "Fetch all of your timeboards' definitions.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Get A TimeBoard",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/dash/281799?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell 2\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
+						},
+						"description": "Fetch an existing dashboard's definition.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "You can create, edit, and disable users.",
+			"item": [
+				{
+					"name": "Get All Users of An Org",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get's all user details for an org"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User of An Org by handle",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get user info from handle"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Info by Handle",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user\": {\n    \"disabled\": false,\n    \"handle\": \"bmroche@gmail.com\",\n    \"name\": \"Brendan Michael Roche 2\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"bmroche@gmail.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n}"
+						},
+						"description": "Update User Profile by handle"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User for an Org",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"disabled\": false,\n    \"handle\": \"test@gmail.com\",\n    \"name\": \"Testy McTestingson\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"test@gmail.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n"
+						},
+						"description": "Create new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Disable A Users by Handle",
+					"request": {
+						"url": "https://app.datadoghq.com/api/v1/user/test@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "DELETE a user by handle"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
