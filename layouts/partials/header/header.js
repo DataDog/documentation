@@ -39,6 +39,12 @@ $(document).ready(function() {
     });
 });
 
+$(window).resize(function() {
+    if($('header #navbar-sidenav').hasClass('show')) {
+        $('header #navbar-sidenav').trigger('show.bs.collapse');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     function compress_nav_on_scroll() {
         var width = $(window).width();
