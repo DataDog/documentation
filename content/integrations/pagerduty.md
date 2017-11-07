@@ -6,7 +6,7 @@ doclevel: basic
 description: "Generate PagerDuty alerts from Datadog metrics and events."
 ---
 
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" responsive="true" >}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="pagerduty incident trends" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

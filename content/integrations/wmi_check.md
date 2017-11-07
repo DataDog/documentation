@@ -127,7 +127,7 @@ Setting this will cause any instance number to be removed from tag_by values i.e
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
-{{< img src="integrations/wmi/wmivalidate.png" >}}
+{{< img src="integrations/wmi/wmivalidate.png" alt="wmi validate" responsive="true" >}}
 
 ## Further Reading
 {{< insert-example-links conf="wmi_check" check="wmi_check" >}}

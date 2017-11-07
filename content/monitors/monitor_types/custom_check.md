@@ -6,7 +6,7 @@ customnav: monitortypenav
 description: "Monitor status of arbitrary custom checks"
 ---
 
-{{< img src="monitors/monitor_types/custom_check/custom_monitor.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/custom_check/custom_monitor.png" alt="custom monitor" responsive="true" >}}
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.

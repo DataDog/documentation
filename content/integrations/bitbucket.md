@@ -6,7 +6,7 @@ newhlevel: true
 description: "See which commits and pull requests affect performance across your services."
 ---
 
-{{< img src="integrations/bitbucket/integrations-bitbucket.gif" responsive="true" >}}
+{{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="integrations bitbucket" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
