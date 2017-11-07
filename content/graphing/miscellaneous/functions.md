@@ -73,7 +73,7 @@ For now, using functions like hour_before is out of scope for the graphical edit
 
 Here is an example of nginx.net.connections with the day_before value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
-{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" resposnive="true" >}}
+{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" >}}
 
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
