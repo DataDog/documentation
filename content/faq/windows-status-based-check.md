@@ -35,4 +35,4 @@ You should now have a monitor based on your Windows Service Integration.
 
 If you are looking at configuring the Windows Event Log Integration, please follow this article:
 
-http://help.datadoghq.com/hc/en-us/articles/204609289-How-to-monitor-events-from-the-Windows-Event-Logs
+[How to monitor events from the Windows Event Logs](/faq/how-to-monitor-events-from-the-windows-event-logs)

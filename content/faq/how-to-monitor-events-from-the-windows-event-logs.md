@@ -91,6 +91,6 @@ Save the configuration, enable the integration and restart the Agent. Now discon
 
 You should see an Event appear on your Event Stream on the Datadog website. 
 
-*Note that the -Get-WmiObject command outlined will not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you will have to add it to the registry. For more on how to add it to the registry, [check out this article](https://help.datadoghq.com/hc/en-us/articles/115004991286).
+*Note that the -Get-WmiObject command outlined will not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you will have to add it to the registry. For more on how to add it to the registry, [check out this article](/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class).
 
 ** For convenience, reference [the YAML example](https://github.com/DataDog/dd-agent/tree/master/conf.d) file to use as a template. 

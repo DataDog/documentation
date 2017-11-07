@@ -22,8 +22,8 @@ Please note, enabling this feature will increase the number of API requests and 
 
 More information on this behavior and AWS billing can be found here:
 
-https://help.datadoghq.com/hc/en-us/articles/203826195-Do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-CloudWatch-and-Datadog-
+* [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?](/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog)
 
-https://help.datadoghq.com/hc/en-us/articles/207121426-How-do-I-monitor-my-AWS-estimated-billing-balance-
+* [How do I monitor my AWS billing details?](/faq/how-do-i-monitor-my-aws-billing-details)
 
-https://help.datadoghq.com/hc/en-us/articles/203764805-How-will-an-AWS-Integration-impact-my-monthly-billing-Can-I-setup-exclusions-using-tags-
+* [How will an AWS integration impact my monthly billing?](/account_management/faq/how-will-an-aws-integration-impact-my-monthly-billing)

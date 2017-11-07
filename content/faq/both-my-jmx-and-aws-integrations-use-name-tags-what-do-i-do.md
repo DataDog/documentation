@@ -4,7 +4,7 @@ kind: faq
 customnav: main_references
 ---
 
-The "name" tag is one of many host-level tags that are applied by default from the [AWS integration](/integrations/amazon_web_services). But it is also a tag that's often applied by default at the metric-level by our [JMX-based integrations](https://help.datadoghq.com/hc/en-us/articles/204501525-Custom-JMX-Integration-s-) (based on the "bean names" matched in JMX). Both tags are useful, but using both at the same time can cause tag-conflicts that result in inappropriately aggregated values. So what to do about this?
+The "name" tag is one of many host-level tags that are applied by default from the [AWS integration](/integrations/amazon_web_services). But it is also a tag that's often applied by default at the metric-level by our [JMX-based integrations](/agent/faq/custom-jmx-integration-s) (based on the "bean names" matched in JMX). Both tags are useful, but using both at the same time can cause tag-conflicts that result in inappropriately aggregated values. So what to do about this?
 
 The best approach is to rename your JMX integration's "name" tag to be something else (e.g, "bean_name"). With our JMX-based integrations, there are two configuration features that make this possible: 1, the ability to exclude default tags via configuration, and 2, the ability to add specified bean attributes as customized metric tags.
 
