@@ -166,6 +166,7 @@ body > header {
   #navbar-sidenav {
     background:#F8F8F8;
     position:relative;
+    -webkit-overflow-scrolling: touch;
     &:before {
       content:"";
       top:0px;
@@ -188,6 +189,7 @@ body > header {
     padding-left:15px;
     padding-right:15px;
     background:transparent;
+    min-height:0;
     &:before,
     &:after {
       background:transparent;

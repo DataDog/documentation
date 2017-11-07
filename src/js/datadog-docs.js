@@ -11,44 +11,50 @@ $(document).ready(function () {
     });
 
     // API page
-    // When language buttons are clicked, show all the code snippets
-    // from that language.
-    $('.lang-btn').on('click', function (e) {
-        var el = $(this);
+    if($('.api').length) {
+        // When language buttons are clicked, show all the code snippets
+        // from that language.
+        var code_blocks = $('.code-block');
+        var lang_blocks = $('.lang-specific');
+        var hs = $('h2[id]');
+        $('.lang-btn').on('click', function (e) {
+            var el = $(this);
 
-        // Find the element currently in the view port
-        var scrollElement;
-        $('div.int-anchor').each(function () {
-            if ($(this).offset().top >= window.scrollY) {
-                scrollElement = $(this);
-                return false;
+            // Find the element currently in the view port
+            var scrollElement;
+            hs.each(function () {
+                if ($(this).offset().top >= window.scrollY) {
+                    scrollElement = $(this);
+                    return false;
+                }
+            });
+
+            // Highlight the active button.
+            $('.lang-btn').removeClass('active');
+            el.addClass('active');
+
+            // Show this language's code blocks and language-specific elements
+            var lang = el.data('lang');
+            code_blocks.hide();
+            $('.code-block-' + lang).fadeIn();
+            lang_blocks.hide();
+            $('.lang-specific-' + lang).fadeIn();
+
+            // Scroll to the element that was in the viewport (ie retain location).
+            if(scrollElement) {
+                var id = scrollElement.attr('id');
+                moveToAnchor(id, false);
             }
+
+            // Add the language selection to the current URL.
+            if (history.pushState) {
+                var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+                history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
+            }
+
+            return false;
         });
-
-        // Highlight the active button.
-        $('.lang-btn').removeClass('active');
-        el.addClass('active');
-
-        // Show this language's code blocks and language-specific elements
-        var lang = el.data('lang');
-        $('.code-block').hide();
-        $('.code-block-' + lang).fadeIn();
-        $('.lang-specific').hide();
-        $('.lang-specific-' + lang).fadeIn();
-
-        // Scroll to the element that was in the viewport (ie retain location).
-        if(scrollElement) {
-            $('html, body').scrollTop(scrollElement.offset().top);
-        }
-
-        // Add the language selection to the current URL.
-        if (history.pushState) {
-            var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-            history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
-        }
-
-        return false;
-    });
+    }
 
     // algolia
     if (window.location.href.indexOf('/search/') > -1) {
@@ -294,6 +300,9 @@ $(document).ready(function () {
                             var page = parseInt(pagebtns[i].getAttribute('data-pagenum'));
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
+
+                        // scroll to top
+                        $("html, body").scrollTop(0);
                     }
 
                     // init page nums
@@ -308,16 +317,26 @@ $(document).ready(function () {
 
 
     // slide to anchors
-    function moveToAnchor(id) {
+    function moveToAnchor(id, animate) {
+        if (animate === undefined) {
+            animate = true;
+        }
         var href = '#'+id;
         var htag = $(href);
         var customPadding = 10; // how much till it looks good with eye
         var offset = 64 + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
+        var newSt = htag.offset().top - offset;
         if(htag.length) {
-            $("html, body").animate({scrollTop: htag.offset().top - offset}, "slow");
-            //$("html, body").scrollTop(htag.offset().top - offset);
-            window.history.pushState(null, null, url + href);
+            if($("html, body").scrollTop() !== newSt)
+            {
+                if(animate) {
+                    $("html, body").animate({scrollTop: newSt}, 300);
+                } else {
+                    $("html, body").scrollTop(newSt);
+                }
+                window.history.pushState(null, null, url + href);
+            }
         }
     }
 

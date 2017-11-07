@@ -98,11 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var button;
         var i;
 
-        for (i = 0; i < siblings.length; i++) {
-            button = siblings[i];
-            button.classList[button === activeButton ? 'add' : 'remove']('active');
+        if(activeButton && siblings) {
+            for (i = 0; i < siblings.length; i++) {
+                button = siblings[i];
+                button.classList[button === activeButton ? 'add' : 'remove']('active');
+            }
+            mobileBtn.textContent = activeButton.textContent;
         }
-        mobileBtn.textContent = activeButton.textContent;
     }
 
     function grayOut(filter) {
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
-            if(window.integrations[i].tags.indexOf(filter.substr(1)) !== -1) {
+            if(filter && window.integrations[i].tags.indexOf(filter.substr(1)) !== -1) {
                 show.push(window.integrations[i]);
             } else {
                 hide.push(window.integrations[i]);

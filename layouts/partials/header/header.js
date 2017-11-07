@@ -1,10 +1,55 @@
 $(document).ready(function() {
     $('header #navbar-sidenav').on('show.bs.collapse', function () {
-        $('body').css('overflow', 'hidden');
-        $(this).css('overflow', 'scroll');
+        /*$('body').css({
+            'overflow': 'hidden',
+            'position': 'fixed'
+        });
+        $(this).css({
+            'overflow-x': 'hidden',
+            'overflow-y': 'scroll',
+            'height': $(window).height()+'px'
+        });*/
+        $('body > .container, body > .container-fluid').hide();
+        $('body > footer').hide();
+        $('body').css('overflow-x', 'hidden');
+        $('body').css('paddingTop', '0px');
+        $('body').css('marginBottom', '0px');
+        $('body').css('background', '#F8F8F8');
+        $('body > header').css('position','relative');
+    }).on('shown.bs.collapse', function () {
+        /*$('body').css({
+            'overflow': 'hidden',
+            'position': 'fixed'
+        });
+        $(this).css({
+            'overflow-x': 'hidden',
+            'overflow-y': 'scroll',
+            'height': $(window).height()+'px'
+        });*/
+        $('body > .container, body > .container-fluid').hide();
+        $('body > footer').hide();
+        $('body').css('overflow-x', 'hidden');
+        $('body').css('paddingTop', '0px');
+        $('body').css('marginBottom', '0px');
+        $('body').css('background', '#F8F8F8');
+        $('body > header').css('position','relative');
     }).on('hide.bs.collapse', function () {
-        $('body').css('overflow', '');
-        $(this).css('overflow', '');
+        /*$('body').css({
+            'overflow': '',
+            'position': ''
+        });
+        $(this).css({
+            'overflow-x': '',
+            'overflow-y': '',
+            'height': ''
+        });*/
+        $('body > .container, body > .container-fluid').show();
+        $('body > footer').show();
+        $('body').css('overflow-x', '');
+        $('body').css('paddingTop', '');
+        $('body').css('marginBottom', '');
+        $('body').css('background', '');
+        $('body > header').css('position','');
     });
 
     $('header #navbar-sidenav a').on('click', function() {
@@ -13,6 +58,17 @@ $(document).ready(function() {
             $('header .navbar-toggler').click();
         }
     });
+});
+
+$(window).resize(function() {
+    if($('header #navbar-sidenav').hasClass('show')) {
+        $('header #navbar-sidenav').trigger('show.bs.collapse');
+    }
+    if($(window).width() > 991) {
+        if($('body > footer').is(":hidden")) {
+            $('header #navbar-sidenav').trigger('hide.bs.collapse');
+        }
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function () {
