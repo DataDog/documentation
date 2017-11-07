@@ -6,6 +6,8 @@ customnav: lognav
 beta: true
 ---
 
+To send your go logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus](https://github.com/sirupsen/logrus)
+
 ## Setup - Log to file
 ### Configure your logger
 For a classic Go configuration, open a `main.go` file and paste the following code:
@@ -20,7 +22,7 @@ import (
 func main() {
 
     // use JSONFormatter
-    log.SetFormatter(&logmatic.JSONFormatter{})
+    log.SetFormatter(&log.JSONFormatter{})
 
     // log an event as usual with logrus
     log.WithFields(log.Fields{"string": "foo", "int": 1, "float": 1.1 }).Info("My first event from golang to stdout")
@@ -41,7 +43,7 @@ import (
 func main() {
 
     // use JSONFormatter
-    log.SetFormatter(&logmatic.JSONFormatter{})
+    log.SetFormatter(&log.JSONFormatter{})
 
     // log an event as usual with logrus
     log.WithFields(log.Fields{"string": "foo", "int": 1, "float": 1.1 }).Info("My first event from golang to stdout")
