@@ -97,6 +97,15 @@ p {
       border-bottom-color: transparent;
     }
   }
+
+  ul {
+    list-style-type: none;
+  }
+  ul li:before {
+    content: "–";
+    margin-right: 7px;
+    margin-left: -16px;
+  }
 }
 
 .sticky {
