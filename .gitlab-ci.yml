@@ -20,7 +20,7 @@ before_script:
 # ================== templates ================== #
 .base_template: &base_template
   tags:
-    - docker
+    - [ "runner:main", "size:large" ]
   only:
     - branches
 
