@@ -109,20 +109,25 @@ languages:
           url: guides/basic_agent_usage/redhat/
           weight: 70
 
+        - identifier: suse
+          name: "SUSE"
+          url: guides/basic_agent_usage/suse/
+          weight: 80
+
         - identifier: ubuntu
           name: "Ubuntu"
           url: guides/basic_agent_usage/ubuntu/
-          weight: 80
+          weight: 90
 
         - identifier: windows
           name: "Windows"
           url: guides/basic_agent_usage/windows/
-          weight: 90
+          weight: 100
 
         - identifier: source
           name: "From Source"
           url: guides/basic_agent_usage/source/
-          weight: 100
+          weight: 110
 
       tracingnav:
         - identifier: customnav_tracingnav_tracing
