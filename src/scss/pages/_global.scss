@@ -92,7 +92,7 @@ p {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    border-bottom: 1px solid #0076FF;
+    border-bottom: 1px solid rgba(0, 118, 255, 0.5);
     &:hover {
       border-bottom-color: transparent;
     }
