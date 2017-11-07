@@ -9,9 +9,11 @@ $(document).ready(function() {
             'overflow-y': 'scroll',
             'height': $(window).height()+'px'
         });*/
-        $('body > container').hide();
+        $('body > .container').hide();
         $('body > footer').hide();
+        $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
+        $('body').css('marginBottom', '0px');
         $('body > header').css('position','relative');
     }).on('shown.bs.collapse', function () {
         /*$('body').css({
@@ -23,9 +25,11 @@ $(document).ready(function() {
             'overflow-y': 'scroll',
             'height': $(window).height()+'px'
         });*/
-        $('body > container').hide();
+        $('body > .container').hide();
         $('body > footer').hide();
+        $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
+        $('body').css('marginBottom', '0px');
         $('body > header').css('position','relative');
     }).on('hide.bs.collapse', function () {
         /*$('body').css({
@@ -37,9 +41,12 @@ $(document).ready(function() {
             'overflow-y': '',
             'height': ''
         });*/
-        $('body > container').show();
+        $('body > .container').show();
         $('body > footer').show();
+        $('body').css('overflow-x', '');
         $('body').css('paddingTop', '');
+        $('body').css('marginBottom', '');
+        $('body > header').css('position','');
     });
 
     $('header #navbar-sidenav a').on('click', function() {
