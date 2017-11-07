@@ -21,6 +21,7 @@ customnav: agentnav
 
 ## Troubleshooting
 
+* [Agent Troubleshooting and/or Agent Metric Reporting](/agent/faq/agent-troubleshooting-and-or-agent-metric-reporting)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)
 * [Agent Check reports "OK" but Monitor shows Critical](/agent/faq/agent-check-reports-ok-but-monitor-shows-critical)
