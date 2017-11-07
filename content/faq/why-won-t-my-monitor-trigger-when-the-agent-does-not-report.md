@@ -4,7 +4,7 @@ kind: faq
 customnav: main_references
 ---
 
-In some cases, [Host Monitor](/monitors/monitor_types/hsot) will get muted if the Host is manually stopped. 
+In some cases, [Host Monitor](/monitors/monitor_types/host) will get muted if the Host is manually stopped. 
 
 ## How can I see that ?
 

@@ -81,7 +81,7 @@ customnav: main_references
 * [Why won't my monitor trigger when the Agent does not report ? ](/faq/why-won-t-my-monitor-trigger-when-the-agent-does-not-report)
 * [Get your AutoScaling Group events and metrics](/faq/get-your-autoscaling-group-events-and-metrics)
 * [How do I pull my EC2 tags without using the AWS integration ?](/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration)
-* [Additional AWS Metrics - Min/Max/Sum](/faq/additional-aws-metrics-min-max-sums)
+* [Additional AWS Metrics - Min/Max/Sum](/faq/additional-aws-metrics-min-max-sum)
 * [How do I monitor my AWS billing details?](/faq/how-do-i-monitor-my-aws-billing-details)
 * [Extra hosts with name "N/A" reporting data](/faq/extra-hosts-with-name-n-a-reporting-data)
 * [Wrong count of aws.elb.healthy_host_count?](/faq/wrong-count-of-aws-elb-healthy-host-count)
