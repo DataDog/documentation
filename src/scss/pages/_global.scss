@@ -31,7 +31,7 @@ body {
 }
 
 a {
-  color:#0076FF;
+  color:#4A4A4A;
 }
 
 // standard code highlighting
@@ -92,7 +92,7 @@ p {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    border-bottom: 1px solid rgba(0, 118, 255, 0.5);
+    border-bottom: 1px solid rgba(74, 74, 74, 05);
     &:hover {
       border-bottom-color: transparent;
     }
