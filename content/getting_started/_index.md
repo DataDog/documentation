@@ -7,7 +7,7 @@ aliases:
 ---
 
 So, you've just finished [installing][1] the Datadog
-Agent, or maybe you're just curious about [what (else) Datadog can do for you][2].
+Agent, or maybe you're just curious about [what Datadog can do for you][2].
 This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
@@ -15,7 +15,7 @@ it can help you bring your infrastructure to heel.
 
 {{< img src="getting_started/integrations.png" responsive="true" >}}
 
-* About 100 integrations [officially listed][3], always adding more.
+* Over 200 integrations [officially listed][3], and we're always adding more.
 * Custom integrations are available [via our API][4], many documented by our active user community.
 * The Agent is [open source][5] and you can instrument your own if you'd like.
 * Once integrations have been configured, data living in a datacenter or
@@ -25,12 +25,12 @@ in an online service is treated the same throughout Datadog.
 
 {{< img src="getting_started/infrastructure.png" responsive="true" >}}
 
-* All machines show up in the infrastructure overview
+* All machines show up in the infrastructure overview.
 * Here you can see the tags applied to each machine; as they're assigned to
 perform certain roles, tagging allows you to indicate machines have
-a certain purpose
+a certain purpose.
 * We do as much as possible to automatically categorize your servers
-for you, to create structure in your infrastructure with as little
+for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
@@ -56,7 +56,7 @@ To learn more about the Host Map, visit the [Host Map Guide][10].
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed [teams][7] and maintaining the focus of an investigation
+* Great for distributed [teams][7] and maintaining the focus of an investigation.
 * You can [filter][8] by: user, source, tag, host, status, priority, incident
 
 
