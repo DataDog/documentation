@@ -214,6 +214,9 @@
 - id: redhat
   translation: "Red Hat"
 
+- id: suse
+  translation: "SUSE"
+
 - id: ubuntu
   translation: "Ubuntu"
 
