@@ -47,7 +47,7 @@
     "mixitup": "^3.2.1",
     "mousetrap": "^1.6.1",
     "node-sass": "^4.1",
-    "popper.js": "^1.12.5",
+    "popper.js": "^1.12.6",
     "run-sequence": "^1.1.4",
     "stickyfilljs": "^2.0.2",
     "traverse": "^0.6"
