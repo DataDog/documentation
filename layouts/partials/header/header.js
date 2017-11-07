@@ -14,6 +14,7 @@ $(document).ready(function() {
         $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
         $('body').css('marginBottom', '0px');
+        $('body').css('background', '#F8F8F8');
         $('body > header').css('position','relative');
     }).on('shown.bs.collapse', function () {
         /*$('body').css({
@@ -30,6 +31,7 @@ $(document).ready(function() {
         $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
         $('body').css('marginBottom', '0px');
+        $('body').css('background', '#F8F8F8');
         $('body > header').css('position','relative');
     }).on('hide.bs.collapse', function () {
         /*$('body').css({
@@ -46,6 +48,7 @@ $(document).ready(function() {
         $('body').css('overflow-x', '');
         $('body').css('paddingTop', '');
         $('body').css('marginBottom', '');
+        $('body').css('background', '');
         $('body > header').css('position','');
     });
 
@@ -60,6 +63,11 @@ $(document).ready(function() {
 $(window).resize(function() {
     if($('header #navbar-sidenav').hasClass('show')) {
         $('header #navbar-sidenav').trigger('show.bs.collapse');
+    }
+    if($(window).width() > 991) {
+        if($('body > footer').is(":hidden")) {
+            $('header #navbar-sidenav').trigger('hide.bs.collapse');
+        }
     }
 });
 
