@@ -158,7 +158,7 @@ For instance to search logs that contains `user=12345` the following search must
 
 `user\=12345`
 
-The same logic must be applied to spaces withing log attributes. It is not recommended to have spaces in log attributes but if it was to be the case, spaces require escaping.
+The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but if it was to be the case, spaces require escaping.
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
