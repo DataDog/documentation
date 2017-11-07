@@ -9,7 +9,7 @@ $(document).ready(function() {
             'overflow-y': 'scroll',
             'height': $(window).height()+'px'
         });*/
-        $('body > .container').hide();
+        $('body > .container, body > .container-fluid').hide();
         $('body > footer').hide();
         $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
@@ -25,7 +25,7 @@ $(document).ready(function() {
             'overflow-y': 'scroll',
             'height': $(window).height()+'px'
         });*/
-        $('body > .container').hide();
+        $('body > .container, body > .container-fluid').hide();
         $('body > footer').hide();
         $('body').css('overflow-x', 'hidden');
         $('body').css('paddingTop', '0px');
@@ -41,7 +41,7 @@ $(document).ready(function() {
             'overflow-y': '',
             'height': ''
         });*/
-        $('body > .container').show();
+        $('body > .container, body > .container-fluid').show();
         $('body > footer').show();
         $('body').css('overflow-x', '');
         $('body').css('paddingTop', '');
