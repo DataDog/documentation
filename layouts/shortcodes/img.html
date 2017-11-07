@@ -15,7 +15,7 @@
   {{ $.Scratch.Add "img_param" "fit=max&w=850" }}
 {{ end }}
 
-{{ $img_param_q := "fm=jpg&q=10" }}
+{{ $img_param_q := "fm=jpg&q=100" }}
 {{ $img_param := $.Scratch.Get "img_param" }}
 
 {{/* override default imgix request params for popup img */}}
