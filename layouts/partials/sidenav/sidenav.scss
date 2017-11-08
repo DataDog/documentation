@@ -122,6 +122,9 @@ aside.sidenav {
         font-weight: 600;
         padding:6px 0 0 2px;
         display:block;
+        &.active {
+          color: $ddpurple;
+        }
         .hover {
           display:none;
         }
