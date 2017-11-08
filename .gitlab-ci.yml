@@ -40,7 +40,6 @@ build_preview:
     - sync_integration_descriptions
     - sync_integration_metrics
     - code_block_udpate
-    - placehold_translations
     - build_hugo_site
     - minify_html
     - collect_static_assets
@@ -102,7 +101,6 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - code_block_udpate
-    - placehold_translations
     - build_hugo_site
     - minify_html
     - collect_static_assets
