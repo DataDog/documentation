@@ -21,7 +21,7 @@ The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** wi
 
 When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" >}}
+{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" popup="true" >}}
 
 Configuring a graph in a dashboard is a multi-step process. The first two steps depend
 
@@ -63,7 +63,7 @@ To use the rollup function, click the plus sign to the right of the aggregation 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
 
-{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" >}}
+{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" >}}
 
 When switching to the JSON view, the query will look like this:
 
@@ -85,11 +85,11 @@ You can modify how a metric value is displayed on a graph by performing an arith
 For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
 
 
-{{< img src="graphing/index/arithmetic_1.png" alt="Arithmetic 1" responsive="true" >}}
+{{< img src="graphing/index/arithmetic_1.png" alt="Arithmetic 1" responsive="true" popup="true" >}}
 
 This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2. 
 
-{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" >}}
+{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" popup="true" >}}
 
 #### Arithmetic between two Metrics
 
@@ -102,7 +102,7 @@ This can be done in the same manner as above, utilizing the "advanced..." option
 Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter: the first metric is represented by a, the second metric is represented b, and so on. 
 Then in the `Graph these queries as` box, you can enter the arithmetic you would like, in this case: `( a / b )`
 
-{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" >}}
+{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" popup="true" >}}
 
 ### Set Y-axis scale
 
