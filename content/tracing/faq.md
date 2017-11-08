@@ -17,7 +17,7 @@ customnav: tracingnav
 
 ### How long is tracing data stored?
 
-Traces will be probabilistically available for up to 6 months, unless viewed. If you view a Trace, it is guaranteed to be stored for 6 months. 
+Traces are stored for up to 6 months. The storage time for each trace is determined probabilistically. If you view a trace, it is guaranteed to be stored for 6 months.
 
 ### How often does the trace agent send stats?
 
