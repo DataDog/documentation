@@ -224,9 +224,9 @@ languages:
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
-        - identifier: customnav_graphingnav_metrics
-          name: "Metrics Explorer"
-          url: "/graphing/miscellaneous/metrics/"
+        - identifier: customnav_graphingnav_metricsmath
+          name: "Metrics Arithmetic"
+          url: "/graphing/miscellaneous/metrics_arithmetic/"
           weight: 809
           parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_functions

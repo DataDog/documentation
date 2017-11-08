@@ -13,16 +13,14 @@ To create a [TimeBoard](/graphing/dashboards/timeboard/) or a [ScreenBoard](/gra
 
 At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards](/graphing/dashboards/screenboard) and [TimeBoards](/graphing/dashboards/timeboard). To more clearly understand the differences between the two, please consider the following:
 
-### TimeBoards
+|  | Timeboards | Screenboards|
+|---|------------|-------------|
+|Time Scope | All graphs share same time scope | All graphs can have individual time scope|
+| Layout  | Graphs appear in a fixed grid  | Graphs are placed anywhere you like on the canvas |
+| Can Share Graphs Individually | Yes | No |
+| Can Share the Entire Dashboard | No | Yes |
+| Sharing can be Read-Only | Yes | Yes |
 
-All graphs are always scoped to the same time:
-{{< img src="graphing/dashboards/time_control.jpg" alt="time control" responsive="true" >}}
-
-Graphs will always appear in a grid-like fashion. This makes them generally better for troubleshooting and correlation. Graphs from a TimeBoard can be [shared individually](graphing/dashboards/timeboard/) and as a [read-only entity](/graphing/dashboards/timeboard/#read-only), 
-
-### ScreenBoards 
-
-These are flexible, far more customizable and are great for getting a high-level look into a system. They are created with drag-and-drop widgets, which can each have a different time frame. [ScreenBoards can be shared as a whole live](/graphing/dashboards/screenboard/)(whereas TimeBoards cannot) and as a [read-only entity](/graphing/dashboards/screenboard/#read-only), 
 
 ## Editing template variables
 
@@ -49,12 +47,12 @@ Once defined, template variables appear alongside normal tag and host options in
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" >}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" responsive="true" >}}
 Setup event correlation at design time by editing any graph on both Time Boards and Screen Boards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" >}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true">}}
 
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
 

@@ -15,7 +15,7 @@ On each graph you will find a pencil icon that opens the graph editor.
 
 {{< img src="graphing/index/references-graphing-overview.png" alt="Finding the Graphing Editor" responsive="true" >}}
 
-The graphing editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
+The graphing editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page (Note: The share tab is only available on Timeboards.). **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
 ## Editing graphs
 
@@ -134,7 +134,7 @@ Now that you know how to build graphs, look into using them in [Dashboards][8], 
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
-[4]: /graphing/miscellaneous/visualization/
+[4]: /graphing/dashboards/widgets/
 [5]: /agent/tagging/
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
