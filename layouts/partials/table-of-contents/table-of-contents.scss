@@ -102,6 +102,11 @@ $highlightcolor: rgba(50,152,204,.2);
                   font-weight: 200;
                   font-size: 15px;
                 }
+
+                // level 4 list
+                &> ul {
+                  display:none !important;
+                }
               }
             }
 
