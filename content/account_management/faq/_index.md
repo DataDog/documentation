@@ -1,5 +1,5 @@
 ---
-title: Account management FAQ
+title: Account Management FAQ
 kind: faq
 customnav: accountmanagementnav
 ---
