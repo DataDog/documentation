@@ -70,25 +70,9 @@ $(document).ready(function () {
             var icon = $(this).find('i');
             var open = icon.hasClass('icon-small-x');
             if(open) {
-                $('.toc-container').css({
-                    'position': '',
-                    'max-width': '',
-                    'background': '',
-                    'height': '',
-                    'right': '',
-                    'padding-top': '',
-                    'z-index': ''
-                }).toggleClass('d-none');
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
             } else {
-                $('.toc-container').css({
-                    'position': 'fixed',
-                    'max-width': '266px',
-                    'background': '#fff',
-                    'height': '100%',
-                    'right': '0px',
-                    'padding-top': '30px',
-                    'z-index': '9'
-                }).toggleClass('d-none');
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
             }
             $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
         });

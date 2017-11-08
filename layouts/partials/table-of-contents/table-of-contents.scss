@@ -18,6 +18,19 @@ $highlightcolor: rgba(50,152,204,.2);
   }
 }
 
+.toc-container {
+  padding-top:65px;
+  &.mobile-open {
+    position:fixed;
+    max-width: 266px;
+    background: #fff;
+    height: 100%;
+    right: 0px;
+    padding-top: 30px;
+    z-index: 9;
+  }
+}
+
 
 .toc {
   top:100px;
