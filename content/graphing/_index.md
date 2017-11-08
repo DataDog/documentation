@@ -1,12 +1,12 @@
 ---
 title: Graphing
 kind: documentation
-autotocdepth: 2
+autotocdepth: 3
 customnav: graphingnav
 alias:
     - /guides/graphing
 ---
-Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you will look at dashboards made up of graphs. Other times you will see email notifications that include a graph of some fluctuation in the system. And yet other times you will see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
+Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you will look at [dashboards][8] made up of graphs. Other times you will see email notifications that include a graph of some fluctuation in the system. And yet other times you will see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
 
 ## The Graphing Editor
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
@@ -17,7 +17,7 @@ On each graph you will find a pencil icon that opens the graph editor.
 
 The graphing editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
-## Graphs with the Graphing Editor
+## Editing graphs
 
 When you first open the graphing editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
@@ -128,6 +128,9 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
+## Next Steps
+Now that you know how to build graphs, look into using them in [Dashboards][8], discovering new metrics in the []
+
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
@@ -135,3 +138,4 @@ The final step is to click Save. You can always come back in to the editor and t
 [5]: /agent/tagging/
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
+[8]: /graphing/dashboards

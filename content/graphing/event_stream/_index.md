@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Event Stream
 kind: documentation
 autotocdepth: 3
 customnav: graphingnav
