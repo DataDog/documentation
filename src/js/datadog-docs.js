@@ -343,6 +343,7 @@ $(document).ready(function () {
                 } else {
                     $("html, body").scrollTop(newSt);
                 }
+                $(document).trigger( "moveToAnchor" );
                 window.history.pushState(null, null, url + href);
             }
         }

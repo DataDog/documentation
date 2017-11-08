@@ -77,9 +77,17 @@ $(document).ready(function () {
             $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
         });
 
+        $(document).on( "moveToAnchor", function() {
+            var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
+            if(open) {
+                $('.mobile-toc-toggle').click();
+            }
+        });
+
         $(window).on('resize scroll', function(e) {
             onScroll();
-            if($('.mobile-toc-toggle i.icon-small-x').length && $(window).width() > 991) {
+            var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
+            if(open && $(window).width() > 991) {
                 $('.mobile-toc-toggle').click();
             }
         }).trigger('scroll');
