@@ -34,6 +34,11 @@ a {
   color:#4A4A4A;
 }
 
+button:focus,
+a:focus {
+  outline: none !important;
+}
+
 // standard code highlighting
 // todo: do we want all code blocks like this or just ones on api, move this
 pre {
