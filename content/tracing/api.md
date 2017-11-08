@@ -5,13 +5,13 @@ autotocdepth: 2
 customnav: tracingnav
 ---
 
-### Overview
+## Overview
 
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
-### API
+## API
 
 <!--div class="btn-toolbar">
   <div class="btn-group language-links btn-group-sm">
