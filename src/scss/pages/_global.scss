@@ -158,6 +158,22 @@ p {
 }
 
 
+// popup images
+.pop {
+  cursor: zoom-in;
+}
+#popupImageModal {
+  .modal-dialog {
+    max-width:none;
+    -webkit-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    top: 50%;
+    margin: 0 auto;
+  }
+}
+
+
 // Breakpoint styles go here...
 
 //@include media-breakpoint-down(md)

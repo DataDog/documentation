@@ -13,7 +13,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 On each graph you will find a pencil icon that opens the graph editor.
 
 
-{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" >}}
+{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" popup="true" >}}
 
 The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
