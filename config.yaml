@@ -574,11 +574,11 @@ languages:
 #          pre: "nav_start"
 #          weight: 120
 #          hide: true
-        - identifier: menu_references_glossary
-          name: "Glossary"
-          url: "/glossary/"
-          pre: "nav_glossary"
-          weight: 120
+#        - identifier: menu_references_glossary
+#          name: "Glossary"
+#          url: "/glossary/"
+#          pre: "nav_glossary"
+#          weight: 120
         - identifier: menu_references_faq
           name: "FAQ"
           url: "/faq/"
