@@ -57,6 +57,10 @@ $(document).ready(function () {
     var naturalWidth = 0;
     var naturalHeight = 0;
     $('#popupImageModal').on('show.bs.modal', function (e) {
+
+    }).on('shown.bs.modal', function (e) {
+        var modal = $(this);
+        modal.hide();
         var url = e.relatedTarget.href;
         var img = new Image();
         var imgEl = $('<img src="'+url+'" alt="" class="img-fluid" />');
@@ -66,6 +70,7 @@ $(document).ready(function () {
             naturalHeight = img.height;
             $('#popupImageModal .modal-body').html(imgEl);
             resize(naturalWidth, naturalHeight);
+            modal.fadeIn();
         };
         img.src = url;
     }).on('hide.bs.modal', function(e) {
