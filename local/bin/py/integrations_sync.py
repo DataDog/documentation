@@ -58,7 +58,7 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
                 if response_csv.status_code == requests.codes.ok:
                     with open('{}{}.csv'.format(to_path, name), mode='wb+') as f:
                         f.write(response_csv.content)
-    
+
 
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
@@ -146,11 +146,11 @@ def sync(*args):
     if not options.dogweb:
         if options.token:
             options.dogweb = dogweb_extract_path
-            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
+            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep,
+                                  True)
         else:
             print('No Github token.. dogweb retrieval failed')
             exit(1)
-            
     if options.dogweb:
         sync_from_dir(options.dogweb, dest_dir, True)
 

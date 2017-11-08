@@ -4,11 +4,11 @@ stages:
   - cleanup
 
 variables:
-  BUILD_IMAGE: "mstbbs/docker-dd-docs:latest"
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
+  PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
 
 # ================== copy scripts =============== #
 before_script:
@@ -18,9 +18,9 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: ${BUILD_IMAGE}
   tags:
-    - docker
+    - "runner:main"
+    - "size:large"
   only:
     - branches
 
@@ -31,7 +31,6 @@ build_preview:
   stage: build
   environment: "preview"
   variables:
-    BUCKET: ${PREVIEW_BUCKET}
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
@@ -95,7 +94,6 @@ build_live:
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}
-    BUCKET: ${LIVE_BUCKET}
     URL: ${LIVE_DOMAIN}
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
@@ -164,8 +162,6 @@ rollback_live:
   stage: cleanup
   environment: "live"
   when: on_failure
-  variables:
-    BUCKET: ${LIVE_BUCKET}
   script:
     - rollback_env
   only:

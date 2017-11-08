@@ -145,10 +145,4 @@ if __name__ == '__main__':
     a_id = parser.parse_args().app_id
     a_key = parser.parse_args().api_key
 
-    if not a_key:
-        try:
-            key = os.environ['ALGOLIA_API_KEY']
-        except KeyError:
-            key = input("Algolia API key: ")
-
     index_algolia(app_id=a_id, api_key=a_key)
