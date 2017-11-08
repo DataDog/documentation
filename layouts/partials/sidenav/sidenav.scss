@@ -96,8 +96,17 @@ aside.sidenav {
     ul li > ul {
       display: none;
     }
-    ul li.active > ul {
+    ul li.open > ul {
       display:block;
+      li {
+        padding-left:27px;
+        a {
+          font-size:16px;
+          padding:0;
+        }
+      }
+    }
+    ul li.active > ul {
       li {
         padding-left:27px;
         a {
