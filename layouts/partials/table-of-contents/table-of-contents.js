@@ -66,8 +66,38 @@ $(document).ready(function () {
             }
         }
 
+        $('.mobile-toc-toggle').on('click touch', function () {
+            var icon = $(this).find('i');
+            var open = icon.hasClass('icon-small-x');
+            if(open) {
+                $('.toc-container').css({
+                    'position': '',
+                    'max-width': '',
+                    'background': '',
+                    'height': '',
+                    'right': '',
+                    'padding-top': '',
+                    'z-index': ''
+                }).toggleClass('d-none');
+            } else {
+                $('.toc-container').css({
+                    'position': 'fixed',
+                    'max-width': '266px',
+                    'background': '#fff',
+                    'height': '100%',
+                    'right': '0px',
+                    'padding-top': '30px',
+                    'z-index': '9'
+                }).toggleClass('d-none');
+            }
+            $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+        });
+
         $(window).on('resize scroll', function(e) {
             onScroll();
+            if($('.mobile-toc-toggle i.icon-small-x').length && $(window).width() > 991) {
+                $('.mobile-toc-toggle').click();
+            }
         }).trigger('scroll');
 
 

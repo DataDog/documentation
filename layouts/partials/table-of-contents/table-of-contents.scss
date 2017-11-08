@@ -1,6 +1,24 @@
 $ddpurple:    #774DA2;
 $highlightcolor: rgba(50,152,204,.2);
 
+.mobile-toc-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 43px;
+  height: 43px;
+  z-index: 99999;
+  cursor: pointer;
+  i {
+    border: 1px solid $ddpurple;
+    border-radius: 30px;
+    padding: 8px;
+    font-size: 25px;
+    color: $ddpurple;
+  }
+}
+
+
 .toc {
   top:100px;
   padding-bottom:50px;
