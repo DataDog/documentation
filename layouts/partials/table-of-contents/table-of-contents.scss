@@ -1,55 +1,85 @@
 $ddpurple:    #774DA2;
+$highlightcolor: rgba(50,152,204,.2);
 
 .toc {
   top:100px;
   padding-bottom:50px;
-  #TableOfContents > ul {
-    padding:0;
-    margin:0;
-    list-style-type:none;
+  h5 {
+    font-size:18px;
+    font-weight:200;
   }
-  #TableOfContents ul {
-    list-style-type: none;
-  }
-  #TableOfContents ul > li > ul {
-    padding-left:10px;
-  }
+  #TableOfContents {
 
-  #TableOfContents ul ul ul {
-    display: none;
-    li {
-      border-bottom:1px solid #e9e9e9;
-      a {
-        font-weight: 200;
-        font-size: 15px;
-        &.toc_scrolled {
-          //font-weight:600;
+    // all ul's
+    ul {
+      padding:0;
+      margin:0;
+      list-style-type:none;
+      li {
+        a {
+          display: block;
         }
       }
     }
-  }
 
-  #TableOfContents {
-    ul {
-      li {
-        .toc_scrolled {
-          color: $ddpurple;
-        }
-        a {
-          color:#000;
-          font-size:15px;
-          font-weight:600;
-          &:hover {
-            color: $ddpurple;
+    // open adjacent ul to open link
+    .toc_open ~ ul {
+      display:block !important;
+    }
+
+    // all scrolled link styles
+    .toc_scrolled {
+      color: #555;
+      background:$highlightcolor;
+    }
+
+    // level 1 list
+    &> ul {
+      &> li {
+
+        // level 2 list
+        &> ul {
+          &> li {
+            margin-top: 10px;
+            &.toc_scrolled {
+              background:none;
+              &> a {
+                position: relative;
+                &:before {
+                  content: "";
+                  position: absolute;
+                  background: $highlightcolor;
+                  top: 0;
+                  bottom: 0;
+                  right: 0;
+                  left: 0;
+                }
+              }
+            }
+            a {
+              color: #555;
+              font-size: 16px;
+              line-height: 21px;
+              font-weight:600;
+            }
+
+            // level 3 list
+            &> ul {
+              display: none;
+              & > li {
+                a {
+                  font-weight: 200;
+                  font-size: 15px;
+                }
+              }
+            }
+
           }
-          &.toc_scrolled {
-            color:$ddpurple;
-          }
+
         }
+
       }
-      .toc_open ~ ul {
-        display:block !important;
-      }
+
     }
   }
 }

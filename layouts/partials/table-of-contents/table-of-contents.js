@@ -46,11 +46,11 @@ $(document).ready(function () {
                     if(j > mapping.length) { j = 0; }
                     var nextobj = mapping[j];
                     //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
-                    obj.navLink.removeClass('toc_scrolled');
+                    obj.navLink.parent().removeClass('toc_scrolled');
 
                     if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
                         //console.log(obj.navLink);
-                        obj.navLink.addClass('toc_scrolled');
+                        obj.navLink.parent().addClass('toc_scrolled');
                         // add toc open to parents of this toc_scrolled
                         //console.log(obj.navLink.parents('ul'));
                         obj.navParentLinks.each(function() {
