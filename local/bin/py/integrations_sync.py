@@ -151,7 +151,6 @@ def sync(*args):
         else:
             print('No Github token.. dogweb retrieval failed')
             exit(1)
-            
     if options.dogweb:
         sync_from_dir(options.dogweb, dest_dir, True)
 

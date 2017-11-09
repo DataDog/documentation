@@ -134,6 +134,7 @@ body > header {
           border-radius: 0;
           &:last-child {
             border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
           }
           &:first-child {
             border-top-right-radius: 5px;

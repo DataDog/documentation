@@ -63,7 +63,7 @@ aside.sidenav {
     font-weight:200;
   }
   .sidenav-search {
-    margin-right: 30px;
+    //margin-right: 30px;
     .input-group-addon {
       background:none;
       border:none;
@@ -96,8 +96,17 @@ aside.sidenav {
     ul li > ul {
       display: none;
     }
-    ul li.active > ul {
+    ul li.open > ul {
       display:block;
+      li {
+        padding-left:27px;
+        a {
+          font-size:16px;
+          padding:0;
+        }
+      }
+    }
+    ul li.active > ul {
       li {
         padding-left:27px;
         a {
@@ -122,6 +131,9 @@ aside.sidenav {
         font-weight: 600;
         padding:6px 0 0 2px;
         display:block;
+        &.active {
+          color: $ddpurple;
+        }
         .hover {
           display:none;
         }
@@ -244,4 +256,16 @@ aside.sidenav-api {
     }
   }
 
+}
+
+@media (max-width: 1199px) {
+  aside.sidenav {
+    ul {
+      li {
+        a {
+          font-size: 17px;
+        }
+      }
+    }
+  }
 }

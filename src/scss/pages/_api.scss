@@ -2,7 +2,6 @@
 .api {
 
   .api-code {
-    // todo: do we want all code blocks like this or just ones on api, move this
     pre {
       display: block;
       padding: 9.5px;
@@ -105,6 +104,10 @@
       padding-bottom:24px;
     }
     .api-code {
+      &.empty {
+        background:none;
+        border:none;
+      }
       &> div {
         padding:24px 15px;
       }

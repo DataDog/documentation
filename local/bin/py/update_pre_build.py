@@ -45,6 +45,7 @@ METRIC_PATERN= r'See \[metadata\.csv\].*provided by this (integration|check).'
 Functions
 """
 
+
 def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     """
     Using the github api downloads manifest files to a temporary location for processing
@@ -147,6 +148,7 @@ def manifest_get_data(to_path,key_name,attribute):
         manifest_json = json.load(manifest)
         return manifest_json[attribute]
 
+
 def parse_args(args=None):
     """
     Given a list of arguments parse them using ArgumentParser
@@ -219,7 +221,7 @@ def readme_get_section(from_path,key_name):
     return data_array
 
 
-def build_integrations_datafile(file_name):
+def build_integrations_datafile(file_name, is_dogweb, is_integrations):
     existing_json = []
 
     # create the integrations datafile if for some reason its not there
@@ -242,23 +244,31 @@ def build_integrations_datafile(file_name):
             # update
             for obj in existing_json:
                 if obj.get('name', '') == name:
+                    data['is_crawler'] = is_dogweb
+                    data['is_check'] = is_integrations
+                    data['is_statsd'] = False
                     obj.update(data)
         else:
-            # add
+            # add custom data
+            data['is_crawler'] = is_dogweb
+            data['is_check'] = is_integrations
+            data['is_statsd'] = False
+            # add to file
             existing_json.append(data)
         # write back out changes
         with open(INTEGRATION_DATAFILE, 'w') as outfile:
             json.dump(existing_json, outfile, sort_keys=True, indent=4)
 
 
-def update_integration_pre_build(from_path=None, to_path=None):
+def update_integration_pre_build(type=None, from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
     
     :param from_path:   the input path where we scrap data from
     :param to_path:     the output path to integration md files
     """
-    
+    is_dogweb = True if type == 'dogweb' else False
+    is_integrations = True if type == 'integrations' else False
     if exists(from_path):
         pattern = '**/*_manifest.json'
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
@@ -267,7 +277,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
             """
             Build integrations datafile for integrations page tiles
             """
-            build_integrations_datafile(file_name)
+            build_integrations_datafile(file_name, is_dogweb, is_integrations)
             
             """
             Scraping all sections that we can found
@@ -346,11 +356,11 @@ def sync(*args):
     
     if options.integrations:
         print('Updating integrations description for {}...'.format(options.integrations))
-        update_integration_pre_build(options.integrations, INTEGRATION_FOLDER)
+        update_integration_pre_build("integrations", options.integrations, INTEGRATION_FOLDER)
 
     if options.dogweb:
         print('Updating integrations description for {}...'.format(options.dogweb))
-        update_integration_pre_build(options.dogweb + 'integration' + sep, INTEGRATION_FOLDER)
+        update_integration_pre_build("dogweb", options.dogweb + 'integration' + sep, INTEGRATION_FOLDER)
 
 if __name__ == '__main__':
     sync()

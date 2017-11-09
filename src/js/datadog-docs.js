@@ -317,14 +317,22 @@ $(document).ready(function () {
 
 
     // slide to anchors
-    function moveToAnchor(id, animate) {
+    function moveToAnchor(id, animate, amount) {
         if (animate === undefined) {
             animate = true;
+        }
+        if (amount === undefined) {
+            // calc from objects instead
+            if($(window).width() <= 991) {
+                amount = 183; //at mobile
+            } else {
+                amount = 64; //at desktop
+            }
         }
         var href = '#'+id;
         var htag = $(href);
         var customPadding = 10; // how much till it looks good with eye
-        var offset = 64 + customPadding;
+        var offset = amount + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
         var newSt = htag.offset().top - offset;
         if(htag.length) {
@@ -335,10 +343,20 @@ $(document).ready(function () {
                 } else {
                     $("html, body").scrollTop(newSt);
                 }
+                $(document).trigger( "moveToAnchor" );
                 window.history.pushState(null, null, url + href);
             }
         }
     }
+
+    // docs on mobile dropdown trigger move to anchor
+    $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
+        var href = $(this).attr('href');
+        if(href.substr(0, 1) === '#') {
+            moveToAnchor(href.substr(1));
+            return false;
+        }
+    });
 
     //
     $('#TableOfContents a, .sidenav-api a').on('click', function(e) {
