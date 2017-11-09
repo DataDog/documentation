@@ -7,7 +7,7 @@ cffi==1.5.2
 cssutils>=1.0.0
 htmlmin>=0.1.10
 pycparser==2.14
-awscli==1.11.36
+awscli==1.11.182
 requests[security]==2.12.3
 PyYAML==3.12
 tqdm==4.14.0

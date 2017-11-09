@@ -248,9 +248,14 @@
 - id: customnav_lognav_java
   translation: "Java Log collection"
 
+<<<<<<< HEAD
 ##########################
 ######## Monitors ########
 ##########################
+=======
+- id: customnav_lognav_aws
+  translation: "AWS Log Collection"
+>>>>>>> master
 
 - id: customnav_monitornav
   translation: "Alerting (Monitor)"
@@ -288,8 +293,16 @@
 - id: customnav_monitortypenav_apm
   translation: "APM Monitor"
 
+<<<<<<< HEAD
 - id: customnav_monitortypenav_composite
   translation: "Composite Monitor"
+=======
+- id: suse
+  translation: "SUSE"
+
+- id: ubuntu
+  translation: "Ubuntu"
+>>>>>>> master
 
 - id: customnav_monitortypenav_custom_check
   translation: "Custom Check Monitor"

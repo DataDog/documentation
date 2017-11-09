@@ -112,10 +112,15 @@ languages:
           url: "/agent/basic_agent_usage/windows/"
           weight: 100
           parent: customnav_agentnav_basic_usage
+        - identifier: suse
+          name: "SUSE"
+          url: /agent/basic_agent_usage/suse/
+          weight: 110
+          parent: customnav_agentnav_basic_usage
         - identifier: source
           name: "From Source"
           url: "/agent/basic_agent_usage/source/"
-          weight: 110
+          weight: 120
           parent: customnav_agentnav_basic_usage
         - identifier: customnav_agentnav_agent_checks
           name: "Agent Checks"
