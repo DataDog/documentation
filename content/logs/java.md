@@ -80,7 +80,7 @@ Edit your `logback.xml` file:
 
 ### Configure the Datadog agent.
 
-Create a `java.yaml` file in your `conf.d/` folder with the folowing content:
+Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
 ```yaml
 init_config:

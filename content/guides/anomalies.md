@@ -57,10 +57,12 @@ You should now see something like what's shown above, with a handful of selectio
   <li>You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.</li>
 </ol>
 
-Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
+Complete all steps in the New Monitor form (**Say what's happening**, etc.) and click **Save** to create the Anomaly monitor.
+
+Both the Monitor Edit page and the Monitor Status pages provide "Historical Context" so that you can see how the metric behaved in the past. This should provide some insight into what the anomalies algorithm takes into account when calculating the bounds.
+
 
 ### Anomaly Detection Algorithms
-
 
 There are four different anomaly detection algorithms:
 
