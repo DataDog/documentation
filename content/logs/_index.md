@@ -2,6 +2,7 @@
 title: Log Collection
 kind: Documentation
 autotocdepth: 2
+hideguides: true
 customnav: lognav
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 beta: true
@@ -12,7 +13,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
 
 ## Getting started with the Agent
 
@@ -23,7 +24,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
-* [Restart your agent](/agent/faq/start-stop-restart-the-datadog-agent)
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ## Enabling log collection from integrations
 
@@ -39,13 +40,13 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * AWS: [See our dedicated page](/logs/aws)
 * Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
 * IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
-* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/languages/java)
+* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/java)
 * Mongo: [mongo.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a `custom-logs.yaml` file in your **conf.d** folder and set these options:
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new yaml file named after your log source ( `python.yaml` for python logs, ...)in the Agent's **conf.d** directory and set these options:
 
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
@@ -63,8 +64,7 @@ If you want to gather your python app logs for instance stored in **/var/log/mya
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
-```yaml
-
+{{< highlight yaml >}}
 init_config:
 
 instances:
@@ -84,8 +84,7 @@ logs:
     service: myapplication
     source: python
     sourcecategory: sourcecode
-
-```
+{{< /highlight >}}
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
@@ -93,8 +92,7 @@ Set `type` to **tcp** or **udp** depending of your protocol then specify the `po
 Example: 
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
-```yaml
-
+{{< highlight yaml >}}
 init_config:
 
 instances:
@@ -107,8 +105,7 @@ logs:
     source: php
     sourcecategory: front
 
-
-```
+{{< /highlight >}}
 
 ### Filter logs
 
@@ -215,11 +212,11 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" >}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" >}}
 
 ## What's next
 
