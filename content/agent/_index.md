@@ -69,7 +69,7 @@ Here is a quick guide for troubleshooting getting integrations installed:
     + **No, it's not.**
         * Check the configuration file, make sure it is in the right location and named correctly.
         * Check it in a YAML parser to make sure it has the correct syntax. Example files can be found [here](https://github.com/DataDog/dd-agent/tree/master/conf.d).
-        * If you moved or changed the file, restart the Agent and then rerun the info command to see if it is now showing up.
+        * If you moved or changed the file, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) and then rerun the info command to see if it is now showing up.
     + **Yes, it's there.**
         * Check the [Metrics Explorer](https://app.datadoghq.com/metric/explorer) to see if system metrics are showing up from the host. For example, look for system.cpu.user from the host that is running the Agent and has that integration setup.
         * If there are still no metrics, check the logs for errors and send them along with the info command output, to [the datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).

@@ -71,7 +71,7 @@ instances:
             - System
 ```
 
-2 - Restart the Agent using the Agent Manager (or restart the service)
+2 - [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) using the Agent Manager (or restart the service)
 {{< insert-example-links conf="win32_event_log" check="win32_event_log" >}}
 
 ### Validation

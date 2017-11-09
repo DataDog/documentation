@@ -87,7 +87,7 @@ instances:
 ######################
 ```
 
-Save the configuration, enable the integration and restart the Agent. Now disconnect from the Windows machine and reconnect.
+Save the configuration, enable the integration and [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent). Now disconnect from the Windows machine and reconnect.
 
 You should see an Event appear on your Event Stream on the Datadog website. 
 

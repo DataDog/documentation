@@ -38,6 +38,6 @@ If those files are not owned by the dd-agent user, change the ownership with:
 If those files are not owned by the dd-agent user, change the ownership with:
 ```
 
-Then [restart the agent](/agent). 
+Then [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent). 
 
 More information on the agent logs locations can be found [here](/agent/faq/log-locations).

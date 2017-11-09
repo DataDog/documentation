@@ -27,7 +27,7 @@ and adding the following line to the `[Main]` section
 
     process_agent_enabled: true
     
-After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
 
 ### Docker container
 
