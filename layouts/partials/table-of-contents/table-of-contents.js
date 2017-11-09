@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+
+    function hideToc()
+    {
+        // hide toc
+        $('.toc-container > div').hide();
+        // hide mobile toc button
+        $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
+    }
+
     if($('#TableOfContents ul').length) {
         // when page ready collect mapping of link to headers so we aren't checking the dom all the time
         var mapping = [];
@@ -113,6 +122,6 @@ $(document).ready(function () {
         buildMap();
         onScroll();
     } else {
-        $('.toc-container > div').hide();
+        hideToc();
     }
 });
