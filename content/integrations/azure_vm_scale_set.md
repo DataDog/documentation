@@ -8,7 +8,7 @@ newhlevel: true
 description: "Track by-set metrics: bytes in and out, disk operations, CPU usage, and more."
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" responsive="true" >}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

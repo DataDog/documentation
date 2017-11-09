@@ -124,11 +124,11 @@ In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags,
 alert type,  date happened,  host, aggregation key, and source type name.<br>**Note: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
 
-{{< img src="graphing/events/json-email.png" responsive="true" >}}
+{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" >}}
 
 #### Datadog Event
 
-{{< img src="graphing/events/json-event.png" responsive="true" >}}
+{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" >}}
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
 will be replaced by the title in the JSON in the body of the email. All data that

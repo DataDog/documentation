@@ -7,7 +7,7 @@ newhlevel: true
 description: "Track key Azure Storage metrics."
 ---
 
-{{< img src="integrations/azure/storage_dash.png" responsive="true" >}}
+{{< img src="integrations/azure/storage_dash.png" alt="storage dash" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

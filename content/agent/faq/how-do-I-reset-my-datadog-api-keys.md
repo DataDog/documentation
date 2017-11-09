@@ -23,11 +23,11 @@ Once you've revoked your keys you'll need to update the datadog.conf file on eac
 3. In your conf file, replace the API key. It should look like this (leave a single space after the ":" character. Do NOT surround your key with quotations):
     * https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L22
 
-4. Once done, restart the agent:
+4. Once done, [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent):
     * Linux: sudo /etc/init.d/datadog-agent restart
     * Windows: Restart the Datadog Service
     * Other OS's [reference this link](/agent/faq/start-stop-restart-the-datadog-agent)
 If you're using a configuration management tool such as Chef, Puppet or Ansible we suggest following the instructions [found here](https://app.datadoghq.com/account/settings#agent) for setting the API keys.
  
-If you need additional assistance please reach out to support@datadoghq.com.
+If you need additional assistance please reach out to [us](/help).
  

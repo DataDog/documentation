@@ -22,7 +22,7 @@ If you are an AWS user, you probably use a variety of instance types. Some insta
 
 Below is a subset of Datadog’s infrastructure. As you can see, c3.2xlarge instances are pretty heavily loaded.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" >}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 

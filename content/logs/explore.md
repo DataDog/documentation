@@ -49,6 +49,11 @@ You can click on any log line to see more details about it:
 
 {{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" responsive="true" >}}
 
+### Focus on Host and Service
+
+Click on its `host` or `service` and select `Focus on Host & Service` to see log lines dated just before and after a selected log - even if they don't match your filter -
+
+{{< img src="logs/explore/focus_host_service.png" alt="focus on host and service.png" >}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
@@ -123,6 +128,15 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `hello*` matches all log message starting with hello
 * `*hello` matches all log message that ends with hello
 
+### Numerical values
+Use `<`,`>`, `<=` or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
+
+`@http.response_time:>100`
+
+It is also possible to search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
+
+`@http.status_code:[400 TO 499]`
+
 ### Tags
 
 Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/) that generate them. They can be used in the search and as facets as well:
@@ -136,6 +150,17 @@ Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" >}}
+
+### Escaping of special characters
+The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
+For instance to search logs that contains `user=12345` the following search must be entered:
+
+`user\=12345`
+
+The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but if it was to be the case, spaces require escaping.
+If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
+
+`@user.first\ name:myvalue`
 
 ## What's next
 
