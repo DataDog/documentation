@@ -1,0 +1,15 @@
+{{ define "main" }}
+<h1 id="pagetitle">{{ .Title | humanize }}</h1>
+<section id="main">
+    <div>
+        <small>tags: {{ partial "related-groups" (dict "taxonomy" .Section "terms" .Params.videos) }}</small>
+        <br><br>
+        {{ partial "video" .Params.wistiaid }}
+
+        <p>&nbsp;</p>
+    </div>
+    <p>{{ .Content }}</p>
+    {{ $link := .Permalink }}
+    <p><a href="{{ "videos/" | absLangURL }}">Return to All Video Groups.</a></p>
+</section>
+{{ end }}
