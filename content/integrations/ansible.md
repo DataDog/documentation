@@ -8,7 +8,7 @@ git_integration_title: ansible
 description: "Track failed tasks and see playbook runs in your event stream."
 ---
 
-{{< img src="integrations/ansible/ansibledashboard.png" responsive="true" >}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="ansible dashbaord" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

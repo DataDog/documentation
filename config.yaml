@@ -112,10 +112,15 @@ languages:
           url: "/agent/basic_agent_usage/windows/"
           weight: 100
           parent: customnav_agentnav_basic_usage
+        - identifier: suse
+          name: "SUSE"
+          url: /agent/basic_agent_usage/suse/
+          weight: 110
+          parent: customnav_agentnav_basic_usage
         - identifier: source
           name: "From Source"
           url: "/agent/basic_agent_usage/source/"
-          weight: 110
+          weight: 120
           parent: customnav_agentnav_basic_usage
         - identifier: customnav_agentnav_agent_checks
           name: "Agent Checks"
@@ -568,17 +573,17 @@ languages:
           parent: menu_references_logs
         # LOGS - Subnav end
 
-#        - identifier: menu_references_videos
-#          name: "Videos"
-#          url: "/videos/"
-#          pre: "nav_start"
-#          weight: 120
-#          hide: true
+        - identifier: menu_references_videos
+          name: "Videos"
+          url: "/videos/"
+          pre: "nav_start"
+          weight: 120
 #        - identifier: menu_references_glossary
 #          name: "Glossary"
 #          url: "/glossary/"
 #          pre: "nav_glossary"
 #          weight: 120
+
         - identifier: menu_references_faq
           name: "FAQ"
           url: "/faq/"

@@ -7,7 +7,7 @@ git_integration_title: apache
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/apache/apachegraph.png" responsive="true" >}}
+{{< img src="integrations/apache/apachegraph.png" alt="apache graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

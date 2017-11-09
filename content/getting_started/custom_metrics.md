@@ -48,16 +48,14 @@ Note that the ordering of tags does not matter, so the following two metrics wou
 
 ## How many custom metrics am I allowed?  
 
-Datadog offers 2 plans - Pro & Enterprise. Pro customers are allotted 100 custom metrics per host & Enterprise customers are allotted 200 custom metrics per host across their entire infrastructure rather than on a per-host basis. For example, if you were on the Pro plan and are licensed for 3 hosts, you would have 300 custom metrics by default - these 300 metrics may be divided equally amongst each individual host, or all 300 metrics could be sent from a single host.
+Datadog offers 2 plans - Pro & Enterprise. Pro customers are allotted 100 custom metrics per host & Enterprise customers are allotted 200 custom metrics per host. These are counted across your entire infrastructure rather than on a per-host basis. For example, if you were on the Pro plan and are licensed for 3 hosts, you would have 300 custom metrics by default - these 300 metrics may be divided equally amongst each individual host, or all 300 metrics could be sent from a single host.
 
 Using the aforementioned example, below shows three scenarios which would all be acceptable without exceeding the default metric count for three hosts:
 {{< img src="getting_started/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" >}}
 
-
-To sum it up, your global custom metric count is aggregated across your monitored cluster :
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" >}}
 
-That said, we do not enforce [any fixed rate limit](/developers/faq/api-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
+We do not enforce [any fixed rate limit](/developers/faq/api-rate-limit) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
 
 ## How do I check my custom metrics count?
 

@@ -10,6 +10,7 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
 
+
 # ================== copy scripts =============== #
 before_script:
   - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
@@ -39,7 +40,7 @@ build_preview:
     - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
-    - code_block_udpate
+    - placehold_translations
     - build_hugo_site
     - minify_html
     - collect_static_assets
@@ -100,7 +101,7 @@ build_live:
     - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
-    - code_block_udpate
+    - placehold_translations
     - build_hugo_site
     - minify_html
     - collect_static_assets

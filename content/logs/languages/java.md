@@ -25,6 +25,8 @@ By asking your logging library to log into JSON, you will:
 
 **To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
 
+Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging library:
+
 ## Setup - Log to file
 ### Configure your logger
 #### Log4j

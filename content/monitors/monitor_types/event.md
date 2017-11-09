@@ -10,7 +10,7 @@ description: "Monitor events gathered by Datadog"
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-{{< img src="monitors/monitor_types/event/event_monitor.png" responsive="true" >}}
+{{< img src="monitors/monitor_types/event/event_monitor.png" alt="event monitor" responsive="true" >}}
 
 1. Select the query and parameters (status, priority, sources and tags) you want
     to monitor.

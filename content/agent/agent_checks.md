@@ -4,25 +4,6 @@ kind: documentation
 customnav: agentnav
 aliases:
   - /guides/agent_checks/
-sidebar:
-  nav:
-    - header: Guide to Agent Checks
-    - text: Overview
-      href: "#overview"
-    - text: Setup
-      href: "#setup"
-    - text: Agent Check Interface
-      href: "#agent-check-Interface"
-    - text: Configuration
-      href: "#configuration"
-    - text: Directory Structure
-      href: "#directory-structure"
-    - text: Your First Check
-      href: "#your-first-check"
-    - text: An HTTP Check
-      href: "#an-http-check"
-    - text: Troubleshooting
-      href: "#troubleshooting"
 ---
 
 <div class="alert alert-warning">
@@ -142,7 +123,7 @@ The service_check method will accept the following arguments:
 
 If a check cannot run because of improper configuration,  programming error or
 because it could not collect any metrics, it should raise a meaningful exception.
-This exception will be logged, as well as be shown in the Agent info command for
+This exception will be logged, as well as be shown in the Agent [info command](/agent/faq/agent-status-and-information) for
 easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
@@ -442,7 +423,7 @@ be placed into the `checks.d` folder as `http.py`. The corresponding
 configuration would be placed into the `conf.d` folder as `http.yaml`.
 
 Once the check is in `checks.d`, you can test it by running it as a python
-script. Restart the Agent for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your
+script. [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your
 Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py

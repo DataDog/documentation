@@ -13,7 +13,7 @@ There are two ways to have multiple accounts have access to the same data. First
 
 ## Organizations
 
-The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, please contact support at [support@datadoghq.com][2].
+The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, please contact [us](/help).
 
 ### Create a New Organization
 
@@ -53,6 +53,5 @@ Custom sub-domains can be especially helpful as when an alert link is generated,
 
 
 [1]: https://app.datadoghq.com/account/team
-[2]: mailto:support@datadoghq.com
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/profile

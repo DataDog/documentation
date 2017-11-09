@@ -22,7 +22,7 @@ sudo /etc/init.d/datadog-agent start
 ```
 4. Check the version of the Agent on the infrastructure page after 5 minutes
 
-5. If it is still wrong, send support@datadoghq.com the output of:
+5. If it is still wrong, send [us](/help) the output of:
 ```
 sudo /etc/init.d/datadog-agent info
 ```

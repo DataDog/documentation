@@ -9,7 +9,7 @@ aliases:
   - /integrations/awsroute53/
 ---
 
-{{< img src="integrations/amazon_route53/route53_graph.png" responsive="true" >}}
+{{< img src="integrations/amazon_route53/route53_graph.png" alt="route53 graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

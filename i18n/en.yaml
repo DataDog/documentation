@@ -118,6 +118,9 @@
 - id: windows
   translation: "Windows"
 
+- id: suse
+  translation: "SUSE"
+
 - id: source
   translation: "From Source"
 

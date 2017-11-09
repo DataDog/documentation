@@ -6,7 +6,7 @@ customnav: lognav
 beta: true
 ---
 
-To send your C# logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.
+To send your C# logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent. Here are setup examples for the `log4net`, `serilog` and `Nlog` logging library
 
 ## Setup - Log to file
 ### Configure your logger

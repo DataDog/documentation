@@ -11,7 +11,7 @@ customnav: infrastructurenav
 
 Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="graphing/infrastructure/process/live_process_preview.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
 
 ## Installation
 
@@ -27,7 +27,7 @@ and adding the following line to the `[Main]` section
 
     process_agent_enabled: true
     
-After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
 
 ### Docker container
 
@@ -70,7 +70,7 @@ Refer to the standard [daemonset installation][4] and the [docker-dd-agent][5] i
 
 Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
 
-{{< img src="graphing/infrastructure/process/postgres.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" >}}
 
 ### Tagging
 
@@ -92,20 +92,20 @@ Making sense of hundreds of thousands or millions of processes and containers ca
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="graphing/infrastructure/process/overprovisioned.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/overprovisioned.png" alt="overprovisioned" responsive="true" >}}
 
 Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.
 
 
-{{< img src="graphing/infrastructure/process/hostxservice.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/hostxservice.png" alt="host x service" responsive="true" >}}
 
 It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
 
-{{< img src="graphing/infrastructure/process/tasksxversion.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/tasksxversion.png" alt="task x version" responsive="true" >}}
 
 Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
 
-{{< img src="graphing/infrastructure/process/sshusers.png" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="sshusers" responsive="true" >}}
 
 Ok, so I guess that last one is less exciting after redaction!
 
@@ -115,7 +115,7 @@ Everyone's workflow differs.  Initially the table is displayed at the finest gra
 
 From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
 
-{{< img src="graphing/infrastructure/process/containerinspect.png"responsive="true" >}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" >}}
 
 ## Real-time monitoring
 

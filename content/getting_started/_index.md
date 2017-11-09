@@ -7,15 +7,15 @@ aliases:
 ---
 
 So, you've just finished [installing][1] the Datadog
-Agent, or maybe you're just curious about [what (else) Datadog can do for you][2].
+Agent, or maybe you're just curious about [what Datadog can do for you][2].
 This document gives a high level overview of Datadog's capabilities and how
 it can help you bring your infrastructure to heel.
 
 ## Integrations
 
-{{< img src="getting_started/integrations.png" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
 
-* About 100 integrations [officially listed][3], always adding more.
+* Over 200 integrations [officially listed][3], and we're always adding more.
 * Custom integrations are available [via our API][4], many documented by our active user community.
 * The Agent is [open source][5] and you can instrument your own if you'd like.
 * Once integrations have been configured, data living in a datacenter or
@@ -23,14 +23,14 @@ in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
 
-* All machines show up in the infrastructure overview
+* All machines show up in the infrastructure overview.
 * Here you can see the tags applied to each machine; as they're assigned to
 perform certain roles, tagging allows you to indicate machines have
-a certain purpose
+a certain purpose.
 * We do as much as possible to automatically categorize your servers
-for you, to create structure in your infrastructure with as little
+for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
@@ -38,7 +38,7 @@ for that machine based on what was previously set up for that tag.
 
 ## Host Map
 
-{{< img src="getting_started/hostmap-overview.png" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -51,12 +51,12 @@ To learn more about the Host Map, visit the [Host Map Guide][10].
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
 
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed [teams][7] and maintaining the focus of an investigation
+* Great for distributed [teams][7] and maintaining the focus of an investigation.
 * You can [filter][8] by: user, source, tag, host, status, priority, incident
 
 
@@ -69,11 +69,11 @@ For each incident users can:
 * [@ notify team members][9], who receive an email
 * @support-datadog to ask for assistance
 
-{{< img src="getting_started/event_stream_event.png" responsive="true" >}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" >}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
 
 Dashboards contain [graphs][11] with real-time performance metrics
 
@@ -92,7 +92,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## Monitoring
 
-{{< img src="getting_started/monitor.png" responsive="true" >}}
+{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
 [Monitoring][14] gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -103,7 +103,7 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-{{< img src="getting_started/alert_setup.png" responsive="true" >}}
+{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
 
 ## Does the data have to be pushed to Datadog?
 

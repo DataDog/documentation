@@ -33,7 +33,7 @@ Scale up auto-scale groups based on the results of a datadog query with [Dogscal
 This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
 ### Google Analytics
-You can get data into Datadog from Google Analytics using our API with [this library][50].
+You can get data into Datadog from Google Analytics using our API with [this library][101] from [Bithaus][102] or [this library][50].
 
 ### Logstash Output
   * [Logstash Output for Datadog][73]
@@ -162,3 +162,5 @@ If you've written a Datadog library and would like to add it to this page, write
    [98]: https://cran.r-project.org/package=datadogr
    [99]: https://github.com/urosgruber/dd-agent-FreeBSD
    [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
+   [101]: https://github.com/bithauschile/datadog-ga
+   [102]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog/

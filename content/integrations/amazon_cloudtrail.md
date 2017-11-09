@@ -8,7 +8,7 @@ aliases:
   - integrations/awscloudtrail/
 ---
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" responsive="true" >}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="cloudtrail event" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
