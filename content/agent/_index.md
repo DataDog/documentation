@@ -29,7 +29,7 @@ This is all controlled by one supervisor process. We keep this separate so you d
 
 If you ended up at this page and have not yet installed the Datadog Agent, please go [here](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-If you think you might be experiencing issues, the first thing to do is run the info command and check the Agent logs. The info command and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
+If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/faq/log-locations). The [info command](/agent/faq/agent-status-and-information) and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
 
 
 ### Issues getting the Agent installed
@@ -39,11 +39,11 @@ If you encountered an issue during the Agent installation process that prevented
 ### Issues getting the Agent reporting
 
 If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
-First, run the info command. Select your OS in the nav column on the left of this page to see how to run this. Does running the info command show any errors?
+First, [run the info command](/agent/faq/agent-status-and-information). Select your OS in the nav column on the left of this page to see how to run this. Does running the [info command](/agent/faq/agent-status-and-information) show any errors?
 
 If not, you should also check the logs (location of the logs again depends on OS). Errors in the logs may also reveal the cause of any issues.
 
-If not, please send both the full output of the info command and the logs with a flare as attachments to the [datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
+If not, please send both the full output of the [info command](/agent/faq/agent-status-and-information) and the logs with a flare as attachments to the [datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
 
 
 #### Check your machine's time
@@ -62,14 +62,14 @@ Datadog has quite a few [integrations](http://docs.datadoghq.com/integrations/) 
 
 Here is a quick guide for troubleshooting getting integrations installed:
 
-1. Run the info command (find this based on your OS in the left column above).
+1. [Run the info command](/agent/faq/agent-status-and-information).
 
-2. Is the integration showing up in the info command?
+2. Is the integration showing up in the [info command](/agent/faq/agent-status-and-information)?
 
     + **No, it's not.**
         * Check the configuration file, make sure it is in the right location and named correctly.
         * Check it in a YAML parser to make sure it has the correct syntax. Example files can be found [here](https://github.com/DataDog/dd-agent/tree/master/conf.d).
-        * If you moved or changed the file, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) and then rerun the info command to see if it is now showing up.
+        * If you moved or changed the file, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) and then rerun the [info command](/agent/faq/agent-status-and-information) to see if it is now showing up.
     + **Yes, it's there.**
         * Check the [Metrics Explorer](https://app.datadoghq.com/metric/explorer) to see if system metrics are showing up from the host. For example, look for system.cpu.user from the host that is running the Agent and has that integration setup.
-        * If there are still no metrics, check the logs for errors and send them along with the info command output, to [the datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
+        * If there are still no metrics, check the logs for errors and send them along with the [info command](/agent/faq/agent-status-and-information) output, to [the datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).

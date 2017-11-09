@@ -14,4 +14,4 @@ You should set your webhook with content-type:application/json:
 
 {{< img src="faq/github_webhook_config.png" alt="github_webhook_config" responsive="true" >}}
 
-Once updated you should see events flowing normaly in your Datadog application. If not, feel free to reach out directly to support@datadoghq.com
+Once updated you should see events flowing normaly in your Datadog application. If not, feel free to reach out directly to [us](/help).

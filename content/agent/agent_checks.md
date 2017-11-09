@@ -123,7 +123,7 @@ The service_check method will accept the following arguments:
 
 If a check cannot run because of improper configuration,  programming error or
 because it could not collect any metrics, it should raise a meaningful exception.
-This exception will be logged, as well as be shown in the Agent info command for
+This exception will be logged, as well as be shown in the Agent [info command](/agent/faq/agent-status-and-information) for
 easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info

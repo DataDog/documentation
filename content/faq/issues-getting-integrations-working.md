@@ -9,7 +9,7 @@ Datadog has quite a [few integrations](/integrations) which are set up through Y
 Here is a quick guide for troubleshooting getting integrations installed:
 
 1. Run the [info command](/agent/faq/agent-status-and-information)
-2. Is the integration showing up in the info command?
+2. Is the integration showing up in the [info command](/agent/faq/agent-status-and-information)?
     * No, it’s not.
         1. Check the configuration file, make sure it is in the right location and named correctly.
         2. Check it in a YAML parser to make sure it has the correct syntax. Example files can be found here.

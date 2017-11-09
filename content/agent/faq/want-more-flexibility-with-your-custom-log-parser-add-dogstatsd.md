@@ -10,7 +10,7 @@ That being said, sometimes parsing logs just makes sense. And in those cases, th
 
 ## Limitations of stand-alone log parsers
 
-There are currently a number of limitations to collecting metrics with agent log parsers, whether built-in or custom. Among these are:
+There are currently a number of limitations to collecting metrics with [agent log] parsers, whether built-in or custom. Among these are:
 
 * The log parser can only collect metrics as "gauge" or "counter" type metrics and events--it cannot collect "histogram" type metrics nor service checks.
 * The log parser can only collect metrics of the same name at roughly 15 second intervals before it starts to over-write the metrics it collects, and this is true even when the metrics have different tags.

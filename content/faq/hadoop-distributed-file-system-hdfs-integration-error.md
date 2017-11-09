@@ -10,4 +10,4 @@ If you are getting an error when integrating with HDFS first try upgrading pip 
 2. Run: /opt/datadog-agent/embedded/bin/pip install --upgrade snakebite
 3. [Restart the agent](/agent/faq/start-stop-restart-the-datadog-agent)
 
-If these steps do not resolve your error please contact support@datadoghq.com.
+If these steps do not resolve your error please contact [us](/help).

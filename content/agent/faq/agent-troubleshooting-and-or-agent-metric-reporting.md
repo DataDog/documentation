@@ -12,7 +12,7 @@ If you think you might be experiencing issues, the first thing to do is run the 
 
 ## Issues getting the Agent installed
 
-If you encountered an issue during the Agent installation that prevented any installation whatsoever from occurring, please reach out to support@datadoghq.com. Please send us:
+If you encountered an issue during the Agent installation that prevented any installation whatsoever from occurring, please reach out to [us](/help). Please send us:
 
 * OS and version
 * Method of installation

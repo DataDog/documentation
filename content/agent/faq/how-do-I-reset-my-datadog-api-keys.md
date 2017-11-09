@@ -29,5 +29,5 @@ Once you've revoked your keys you'll need to update the datadog.conf file on eac
     * Other OS's [reference this link](/agent/faq/start-stop-restart-the-datadog-agent)
 If you're using a configuration management tool such as Chef, Puppet or Ansible we suggest following the instructions [found here](https://app.datadoghq.com/account/settings#agent) for setting the API keys.
  
-If you need additional assistance please reach out to support@datadoghq.com.
+If you need additional assistance please reach out to [us](/help).
  

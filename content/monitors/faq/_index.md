@@ -31,3 +31,4 @@ customnav: monitornav
 * [How do I add custom template variables to my monitor message?](/monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message)
 * [Can I send SMS notifications in Datadog?](/monitors/faq/can-i-send-sms-notifications-in-datadog)
 * [Is there a way i can get metric reports](/monitors/faq/is-there-a-way-i-can-get-metric-reports)
+* [How to @user in Slack from monitor alert](/monitors/faq/how-to-@user-in-slack-from-monitor-alert)
