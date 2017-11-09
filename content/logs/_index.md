@@ -40,7 +40,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * AWS: [See our dedicated page](/logs/aws)
 * Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
 * IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
-* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/java)
+* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/languages/java)
 * Mongo: [mongo.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
 
@@ -64,7 +64,7 @@ If you want to gather your python app logs for instance stored in **/var/log/mya
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
-{{< highlight yaml >}}
+```yaml
 init_config:
 
 instances:
@@ -84,7 +84,7 @@ logs:
     service: myapplication
     source: python
     sourcecategory: sourcecode
-{{< /highlight >}}
+```
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
@@ -92,7 +92,7 @@ Set `type` to **tcp** or **udp** depending of your protocol then specify the `po
 Example: 
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
-{{< highlight yaml >}}
+```yaml
 init_config:
 
 instances:
@@ -105,7 +105,7 @@ logs:
     source: php
     sourcecategory: front
 
-{{< /highlight >}}
+``
 
 ### Filter logs
 
@@ -116,7 +116,7 @@ If the pattern is contained in the message the log is excluded, and not sent to 
 
 Example: Filter out logs where the user field matches the datadoghq.com domain
 
-```
+```yaml
 init_config:
 
 instances:
@@ -141,7 +141,7 @@ If your logs contain sensitive information that you wish you redact, you can con
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
 
-```
+```yaml
 init_config:
 
 instances:
