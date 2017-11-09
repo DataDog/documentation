@@ -5,4 +5,4 @@ autotocdepth: 3
 customnav: tracingnav
 ---
 
-Tracing data is stored for about 36 hours.
+Traces are stored for up to 6 months. The storage time for each trace is determined probabilistically. If you view a trace, it is guaranteed to be stored for 6 months.
