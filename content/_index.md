@@ -34,7 +34,7 @@ Across your whole stack—even the sturdiest parts—leave no data uncollected. 
 
 ## Visualize It
 
-As soon as you're capturing all this data, you can see it immediately in the Datadog web application. Use the [Metrics Explorer](/graphing/metrics) to search for a given metric and watch it ebb and flow. View and comment on events (say, an application deploy) as they pour into your [Event Stream](/graphing/events). Filter for some group of hosts in the [Infrastructure Map](/graphing/infrastructure). Get an overall picture of how some service (say, MySQL) is running via its default dashboard.
+As soon as you're capturing all this data, you can see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events (say, an application deploy) as they pour into your [Event Stream](/graphing/events). Filter for some group of hosts in the [Infrastructure Map](/graphing/infrastructure). Get an overall picture of how some service (say, MySQL) is running via its default dashboard.
 
 Before long, you'll create custom [Screenboards], where you'll combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you suss out problems—skewing their metric values using other metrics, applying [anomaly](/monitors/monitor_types/anomaly) and [outlier](/monitors/monitor_types/outlier) detection, overlaying events onto them, and more.
 
