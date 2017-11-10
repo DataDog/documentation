@@ -108,6 +108,7 @@ p {
   }
   ul li:before {
     content: "–";
+    position:absolute;
     margin-right: 7px;
     margin-left: -16px;
   }
