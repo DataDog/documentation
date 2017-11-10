@@ -403,7 +403,7 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
           name: "Api"
-          url: "/tracing/api/"
+          url: "/api/?lang=console#traces"
           weight: 90
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_faq

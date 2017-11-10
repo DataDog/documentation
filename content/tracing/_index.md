@@ -39,7 +39,7 @@ To instrument your application, please select one of the following supported lan
 - [Python](/tracing/python)
 - [Ruby](/tracing/ruby)
 
-To instrument an application written in a language that does not yet have official library support, please reference the [Tracing API](/tracing/api).
+To instrument an application written in a language that does not yet have official library support, please reference the [Tracing API](/api/?lang=console#traces).
 
 ## Configuration
 
