@@ -179,6 +179,7 @@ build_hugo_site_ja() {
     echo "Build ja site..."
     cd ja
     version_static_assets
+    cp -r ../data/integrations ./data/integrations
     build_hugo_site
     mv public ../public/ja/
     cd ../
