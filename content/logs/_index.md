@@ -13,7 +13,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
 
 ## Getting started with the Agent
 
@@ -164,7 +164,7 @@ logs:
 
 If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
 
-### `date` attribute
+### *date* attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
 However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
@@ -184,11 +184,11 @@ You can also specify alternate attributes to use as the source of a log's date b
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-### `message` attribute
+### *message* attribute
 
 By default, Datadog will ingest the value of message as the body of the log entry. That value will then be highlighted and display in the [log list](/logs/explore/#log-list), where it will be indexed for [full text search](/logs/explore/#search-bar).
 
-### `severity` attribute
+### *severity* attribute
 
 Each log entry may specify a severity level which will be made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official severity:
 
@@ -196,13 +196,13 @@ Each log entry may specify a severity level which will be made available for fac
 
 If you would like to remap some severities existing in the `severity` attribute, you can do so with the [log severity remapper](/logs/processing/#log-severity-remapper)
 
-### `host` attribute
+### *host* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s host:
 
 * `syslog.hostname`
 
-### `service` attribute
+### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s service:
 
@@ -212,11 +212,11 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
 
 ## What's next
 
