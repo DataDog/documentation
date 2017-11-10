@@ -10,3 +10,6 @@
 // partial css lives with partial
 @import "pages/api";
 @import "pages/search";
+
+// for now just include ie fixes
+@import "ie";
