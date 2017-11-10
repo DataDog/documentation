@@ -7,7 +7,10 @@ order: 15.2
 ## Edit A Comment
 
 ##### ARGUMENTS
-<ul class="arguments">
-    {{< argument name="message" description="The comment text." default="original message" >}}
-    {{< argument name="handle" description="The handle of the user making the comment." default="application key owner" >}}
-</ul>
+* `message` *[optional]*:  
+    Default: `original message`  
+    The comment text.
+
+* **`handle`** *[optional]*:  
+    Default: `application key owner`  
+    The handle of the user making the comment.
