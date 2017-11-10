@@ -9,7 +9,7 @@ The Agent can be installed on Debian Lenny (5.0) using our one-step install comm
 
     DD_API_KEY=your_api_key bash -c "$(wget -qO- http://dtdg.co/agent-install-debian)"
 
-Be sure to substitute your API key into the command. Your key can be found <a href="https://app.datadoghq.com/account/settings#api">here</a>.
+Be sure to substitute your API key into the command. Your key can be found [here](https://app.datadoghq.com/account/settings#api).
 
 ## Step-by-Step
 
@@ -25,7 +25,7 @@ Update your local apt repo and install the Agent:
     sudo apt-get update
     sudo apt-get install datadog-agent-base
 
-Copy the example config into place. Be sure to plug in your <a href="https://app.datadoghq.com/account/settings#api">API key</a> into the command:
+Copy the example config into place. Be sure to plug in your [API key](https://app.datadoghq.com/account/settings#api) into the command:
 
     sudo sh -c "sed 's/api_key:.*/api_key: your_api_key' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
 

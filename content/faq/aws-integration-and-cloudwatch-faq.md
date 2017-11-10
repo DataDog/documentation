@@ -35,6 +35,6 @@ The easiest way for customers to monitor their CloudWatch API usage is to use o
 
 ## How can I reduce the lag on my CloudWatch metrics to appear in Datadog/Why are my CloudWatch metrics delayed?
 
-By default, we collect AWS metrics every 10 minutes. See [this article](/faq/are-my-aws-cloudwatch-metrics-delayed) for more information. If you need to reduce the latency, reach out to our support team at support@datadoghq.com for assistance.
+By default, we collect AWS metrics every 10 minutes. See [this article](/faq/are-my-aws-cloudwatch-metrics-delayed) for more information. If you need to reduce the latency, [reach out to our support team](/help) for assistance.
 
   

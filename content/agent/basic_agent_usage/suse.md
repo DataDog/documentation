@@ -27,7 +27,7 @@ The process to upgrade from the previous version of the agent is to simply re-ru
 
 <br/>
 
-If you're still having trouble, our support team will be glad to provide further assistance.
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
 {{< partial name="_contact_info" markdown="true" >}}

@@ -21,7 +21,7 @@ Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-<a href='https://app.datadoghq.com/account/settings#agent/mac'>here</a>.<br/>
+[here](https://app.datadoghq.com/account/settings#agent/mac).<br/>
 
 By default, your Agent will be installed in its own sandbox located at <code> '/opt/datadog-agent'</code>.
 You’re free to move this folder wherever you like.
@@ -33,7 +33,7 @@ instructions accordingly if you decide to move it to another location.
 
 <br/>
 
-If you're still having trouble, our support team will be glad to provide further assistance.
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
 {{< partial name="_contact_info" markdown="true" >}}

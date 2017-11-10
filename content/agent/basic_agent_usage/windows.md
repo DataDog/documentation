@@ -31,7 +31,7 @@ The Agent can be started, stopped, and restarted from the Services panel. To vie
 
 ## Status and Information
 
-To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to  **http://localhost:17125/status** in Agent version 3.9.1 to 5.1.
+To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
 ## Configuration
 
@@ -70,5 +70,5 @@ Log is available at:
 
 ### For version < 3.9.1
 
-Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application. <br/> If you're still having trouble, our support team will be glad to provide further assistance.
+Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application. <br/> If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 

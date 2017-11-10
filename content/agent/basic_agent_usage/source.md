@@ -14,9 +14,9 @@ OVERVIEW
 
 This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-<a href='https://app.datadoghq.com/account/settings#agent/source'>here</a>.<br/>
+[here](https://app.datadoghq.com/account/settings#agent/source).<br/>
 
-By default, your Agent will be installed in its own sandbox at <code> '~/.datadog-agent'</code>.
+By default, your Agent will be installed in its own sandbox at `'~/.datadog-agent'`.
 You're free to move this folder wherever you like.
 However, this guide will assume that the Agent is installed in its default location, so be sure to modify the
 instructions accordingly if you decide to move them.
@@ -100,20 +100,18 @@ First, make sure you are using the correct version of Python. The Agent requires
 python -c 'import sys; print sys.version'
 ```
 
-Next, try running the <a href='#status_and_information'>info</a> command to see the state of the Agent.
+Next, try running the [info](#status_and_information) command to see the state of the Agent.
 
 Logs for the subsystems are in the following files:
 
-<ul>
-  <li><code>~/.datadog-agent/supervisord/logs/supervisord.log</code></li>
-  <li><code>~/.datadog-agent/supervisord/logs/collector.log</code></li>
-  <li><code>~/.datadog-agent/supervisord/logs/dogstatsd.log</code></li>
-  <li><code>~/.datadog-agent/supervisord/logs/forwarder.log</code></li>
-</ul>
+*   `~/.datadog-agent/supervisord/logs/supervisord.log`
+*   `~/.datadog-agent/supervisord/logs/collector.log`
+*   `~/.datadog-agent/supervisord/logs/dogstatsd.log`
+*   `~/.datadog-agent/supervisord/logs/forwarder.log`
 
 <br/>
 
-If you're still having trouble, our support team will be glad to provide further assistance.
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 You can contact them in one of the following ways:
 
 {{< partial name="_contact_info" markdown="true" >}}
