@@ -17,14 +17,14 @@ Simple to setup and easily activated/unactivated, Deluminate is a good fit for D
 
 Stylish offers more possibilities to customize the css of any web page.
 
-You can use the library created by adamjt for Datadog Screenboards: http://stylebot.me/styles/4320
+You can use the library created by adamjt for Datadog Screenboards: `http://stylebot.me/styles/4320`
 
 {{< img src="developers/faq/style_bot.jpg" alt="style_bot" responsive="true" >}}
 
 Here is how to proceed to enjoy this css style on Chrome using Stylebot:
 
-1. Install the Stylebot extension for Chrome: https://chrome.google.com/webstore/detail/stylebot/oiaejidbmkiecgbjeifoejpgmdaleoha?hl=en
-2. On the css page, http://stylebot.me/styles/4320, click the scissors "CSS" icon and copy all the css
+1. Install the Stylebot extension for Chrome: `https://chrome.google.com/webstore/detail/stylebot/oiaejidbmkiecgbjeifoejpgmdaleoha?hl=en`
+2. On the css page, `http://stylebot.me/styles/4320`, click the scissors "CSS" icon and copy all the css
 3. Click the Stylebot icon to open the menu, choose "Options"
 4. In the left colunm choose 'Styles', then click "Add a new Style"
 5. URL: p.datadoghq.com
