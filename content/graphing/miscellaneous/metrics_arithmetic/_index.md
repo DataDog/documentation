@@ -1,5 +1,5 @@
 ---
-title: Metrics Explorer
+title: Metrics Arithmetic
 kind: documentation
 autotocdepth: 3
 customnav: graphingnav
