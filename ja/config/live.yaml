@@ -1,11 +1,11 @@
 ---
-baseURL: https://docs.datadoghq.com/
+baseURL: https://docs.datadoghq.com/ja/
 buildfuture: false
 builddrafts: false
 params:
   environment: live
   img_url: "https://datadog-docs.imgix.net/"
-  static_url: "https://docs.datadoghq.com/"
+  static_url: "https://docs.datadoghq.com/ja/"
   footer_scripts:
   - snowplow: true
   - marketo: true

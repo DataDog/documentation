@@ -176,7 +176,13 @@ build_hugo_site() {
 
 build_hugo_site_ja() {
     start_step
-    echo "Build ja site here..."
+    echo "Build ja site..."
+    cd ja
+    version_static_assets
+    sync_integration_descriptions
+    sync_integration_metrics
+    build_hugo_site
+    mv public ../public/ja/
     pass_step  "${FUNCNAME}"
 }
 
