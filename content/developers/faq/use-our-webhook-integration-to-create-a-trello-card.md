@@ -45,7 +45,7 @@ In the configuration:
 
 * name is the alias for how you will reference this hook. (@webhook-NAME)
 
-* URL will be https://api.trello.com/1/cards 
+* URL will be `https://api.trello.com/1/cards`
 
 You must enable Custom Payload and fill in a json object that will look like:
 
