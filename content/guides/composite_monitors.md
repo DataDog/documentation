@@ -133,7 +133,7 @@ Two of the four scenarios will trigger an alert, even though not all of the indi
 
 ### How a component monitor's status is determined
 
-Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor. For example, if you have a composite monitor defined as `A && B`, and the component results look like this:
+Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor (specifically, they use the most severe status from the past five minutes for each component monitor). For example, if you have a composite monitor defined as `A && B`, and the component results look like this (where the timestamps are one minute apart):
 
 |   | T0    | T1    | T2    |
 |---|-------|-------|-------|
