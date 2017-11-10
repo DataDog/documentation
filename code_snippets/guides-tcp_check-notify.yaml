@@ -1,8 +1,0 @@
-init_config:
-
-instances:
-    -   name: My service
-        host: datadog.com
-        port: 8080
-        window: 5
-        threshold:  3

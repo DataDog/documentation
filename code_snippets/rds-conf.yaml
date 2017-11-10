@@ -1,9 +1,0 @@
-init_config:
-
-instances:
-  - server: mysqlrds.blah.us-east1-rds.amazonaws.com # The endpoint URL from the AWS console
-    user: my_username
-    pass: my_password
-    port: 3306
-    tags: 
-      - dbinstanceidentifier:my_own_instance
