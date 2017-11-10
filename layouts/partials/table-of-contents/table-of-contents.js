@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+
+    function hideToc()
+    {
+        // hide toc
+        $('.toc-container > div').hide();
+        // hide mobile toc button
+        $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
+    }
+
     if($('#TableOfContents ul').length) {
         // when page ready collect mapping of link to headers so we aren't checking the dom all the time
         var mapping = [];
@@ -37,7 +46,24 @@ $(document).ready(function () {
             var localOffset = 120;
 
             if($(window).scrollTop() + $(window).height() === $(document).height()) {
-                // we are at the bottom of the screen  just highlight the last item
+                // we are at the bottom of the screen  just highlight the last item we can
+                $('.toc_open').removeClass('toc_open');
+                $('.toc_scrolled').removeClass('toc_scrolled');
+                var obj = mapping[mapping.length-1];
+                if(obj.isH3) {
+                    obj.navParentLinks.each(function() {
+                        var href = $(this).attr('href');
+                        var id = href.replace('#', '').replace(' ','-');
+                        var header = $('[id="'+id+'"]');
+                        if(header.is('h2')) {
+                            $(this).addClass('toc_open');
+                        }
+                    });
+                    obj.navLink.parent().addClass('toc_scrolled');
+                }
+                if(obj.isH2) {
+                    obj.navLink.parent().addClass('toc_scrolled');
+                }
             } else {
                 $('.toc_open').removeClass('toc_open');
                 for(var i = 0; i < mapping.length; i++) {
@@ -96,6 +122,6 @@ $(document).ready(function () {
         buildMap();
         onScroll();
     } else {
-        $('.toc-container > div').hide();
+        hideToc();
     }
 });
