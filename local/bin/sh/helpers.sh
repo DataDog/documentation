@@ -179,10 +179,9 @@ build_hugo_site_ja() {
     echo "Build ja site..."
     cd ja
     version_static_assets
-    sync_integration_descriptions
-    sync_integration_metrics
     build_hugo_site
     mv public ../public/ja/
+    cd ../
     pass_step  "${FUNCNAME}"
 }
 
