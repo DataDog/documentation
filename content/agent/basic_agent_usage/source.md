@@ -3,13 +3,6 @@ title: Basic Agent Usage for Source Installation
 kind: documentation
 platform: Source
 ---
-
-<!--
-======================================================
-OVERVIEW
-======================================================
--->
-
 ## Overview
 
 This guide will outline the basic functionality of the Datadog Agent.
@@ -20,13 +13,6 @@ By default, your Agent will be installed in its own sandbox at `'~/.datadog-agen
 You're free to move this folder wherever you like.
 However, this guide will assume that the Agent is installed in its default location, so be sure to modify the
 instructions accordingly if you decide to move them.
-
-
-<!--
-======================================================
-Starting and Stopping the Agent
-======================================================
--->
 
 ## Starting and Stopping the Agent
 
@@ -48,12 +34,6 @@ To restart the Agent: <br/>
 sudo ~/.datadog-agent/bin/agent restart
 ```
 
-<!--
-======================================================
-Status and Information
-======================================================
--->
-
 ## Status and Information
 
 To check if the Agent is running:
@@ -68,29 +48,17 @@ To receive more information about the Agent's state:
 sudo ~/.datadog-agent/bin/info
 ```
 
-Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
+Tracebacks for errors can be retrieved by setting the `-v` flag: <em>(since 3.8.0)</em>
 
 ```shell
 sudo ~/.datadog-agent/bin/info -v
 ```
 
-<!--
-======================================================
-Configuration
-======================================================
--->
-
 ## Configuration
 
-The configuration file for the Agent is located at <code>~/.datadog-agent/agent/datadog.conf</code>
+The configuration file for the Agent is located at `~/.datadog-agent/agent/datadog.conf`
 
-Configuration files for integrations are located in <code>~/.datadog-agent/agent/conf.d/</code>
-
-<!--
-======================================================
-Troubleshooting
-======================================================
--->
+Configuration files for integrations are located in `~/.datadog-agent/agent/conf.d/`
 
 ## Troubleshooting
 

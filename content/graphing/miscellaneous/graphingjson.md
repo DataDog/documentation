@@ -249,23 +249,17 @@ to get traffic for all the tagged hosts, split by host and network device.
 
 
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
-<ul>
- <li>Clip y-axis to specific ranges</li>
- <li>Filter series either by specifying a percentage or an absolute value</li>
- <li>Change y-axis scale from linear to log, sqrt or power scale</li>
-</ul>
+
+*   Clip y-axis to specific ranges
+*   Filter series either by specifying a percentage or an absolute value
+*   Change y-axis scale from linear to log, sqrt or power scale
 
 There are four configuration settings:
-<ul>
-<li><code>min</code> (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for
-    default behvior. Default value is "auto"</li>
-<li><code>max</code> (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto"
-    for default behavior. Default value is "auto"</li>
-<li><code>scale</code> (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##"
-    (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".</li>
-<li><code>units</code> (optional): Specifies whether to show the metric unit along the y-axis. Possible values: "true"
-    or "false". Default is "false".</li>
-</ul>
+
+*   `min` (optional): Specifies minimum value to show on y-axis. It takes a number, or "auto" for default behvior. Default value is "auto"
+*   `max` (optional): Specifies the maximum value to show on y-axis. It takes a number, or "auto" for default behavior. Default value is "auto"
+*   `scale` (optional): Specifies the scale type. Possible values: "linear", "log", "sqrt", "pow##" (eg. pow2, pow0.5, 2 is used if only "pow" was provided"), Default scale is "linear".
+*   `units` (optional): Specifies whether to show the metric unit along the y-axis. Possible values: "true" or "false". Default is "false".
 
 Examples:
 
@@ -374,7 +368,7 @@ Here is a full JSON example:
 #### Examples
 
 
-Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.
+Here is an example using the ```rate()``` function, which takes only a single metric as a parameter.  Other functions, with the exception of ```top()``` and ```top_offset()```, have identical syntax.
 
 ```json
 {
@@ -388,7 +382,7 @@ Here is an example using the <code>rate()</code> function, which takes only a si
 }
 ```
 
-Here is an example using the <code>top()</code> function:
+Here is an example using the ```top()``` function:
 
 ```json
 {
@@ -402,11 +396,11 @@ Here is an example using the <code>top()</code> function:
 }
 ```
 
-This will show the graphs for the five series with the highest peak <code>system.cpu.iowait</code> values in the query window.
+This will show the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
 
 
 
-To look at the hosts with the 6th through 10th highest values (for example), use <code>top_offset</code> instead:
+To look at the hosts with the 6th through 10th highest values (for example), use ```top_offset``` instead:
 
 ```python
 
@@ -421,7 +415,7 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 }
 ```
 
-Here is an example using the <code>week_before()</code> function:
+Here is an example using the ```week_before()``` function:
 
 ```python
 

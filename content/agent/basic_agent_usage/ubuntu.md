@@ -9,12 +9,6 @@ logdirectory: /var/log/datadog/
 supervisorlog: /var/log/datadog/supervisord.log
 ---
 
-<!--
-======================================================
-Overview
-======================================================
--->
-
 ## Overview
 
 This guide will outline the basic functionality of the Datadog Agent.

@@ -31,12 +31,6 @@ For more information about how to write an Integration, please see the [Creating
 
 First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [Get in touch with us!][4], we'll be happy to answer any questions you might have.
 
-<!--
-======================================================
-INTERFACE
-======================================================
--->
-
 ## Agent Check Interface
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
@@ -144,12 +138,6 @@ things like `self.log.info('hello')`. The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
 module).
 
-<!--
-======================================================
-CONFIGURATION
-======================================================
--->
-
 ## Configuration
 
 Each check will have a configuration file that will be placed in the `conf.d`
@@ -251,12 +239,6 @@ You can also add additional checks to a single directory, and point to it in `da
 
     additional_checksd: /path/to/custom/checks.d/
 
-<!--
-======================================================
-FIRST CHECK
-======================================================
--->
-
 ## Your First Check
 
 <div class="alert alert-warning">
@@ -291,13 +273,6 @@ class HelloCheck(AgentCheck):
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
 services and return interesting data.
-
-
-<!--
-======================================================
-HTTP CHECK
-======================================================
--->
 
 ## An HTTP Check
 
@@ -496,13 +471,6 @@ if __name__ == '__main__':
             print 'Events: %s' % (check.get_events())
         print 'Metrics: %s' % (check.get_metrics())
 ```
-
-
-<!--
-======================================================
-Troubleshooting
-======================================================
--->
 
 ## Troubleshooting
 

@@ -9,12 +9,6 @@ logdirectory: /var/log/datadog/
 supervisorlog: /var/log/supervisor/datadog-supervisord.log
 ---
 
-<!--
-======================================================
-OVERVIEW
-======================================================
--->
-
 ## Overview
 
 

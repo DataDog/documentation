@@ -259,8 +259,6 @@ For more details about configuring this integration refer to the following file(
 
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
-<!-- {{< insert-example-links conf="jmx" check="none" >}} -->
-
 ### The 350 metric limit
 
 Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog. What we've found in speaking with many customers is that some of these metrics are not needed; thus, we've set the limit at 350 metrics.
