@@ -4,6 +4,7 @@ metadataformat: "yaml"
 
 canonifyURLs: true
 pygmentsuseclasses: true
+pygmentsCodeFences: true
 
 # taxonomies
 taxonomies:
