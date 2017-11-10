@@ -77,10 +77,5 @@ Logs for the subsystems are in the following files:
 *   `~/.datadog-agent/supervisord/logs/dogstatsd.log`
 *   `~/.datadog-agent/supervisord/logs/forwarder.log`
 
-<br/>
-
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
-You can contact them in one of the following ways:
-
-{{< partial name="_contact_info" markdown="true" >}}
 
