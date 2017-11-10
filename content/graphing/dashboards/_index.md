@@ -60,4 +60,4 @@ Setup event correlation at view time by adding a query in the Search box at the 
 
 
 [1]: /graphing/
-[2]: /graphing/events/
+[2]: /graphing/events_stream/
