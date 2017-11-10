@@ -1,4 +1,4 @@
-f---
+---
 title: Tagging
 kind: documentation
 customnav: agentnav
@@ -40,7 +40,7 @@ The following integration sources create tags automatically in Datadog:
 | [CouchBase](/integrations/couchbase)                             | CouchBase Tags,  Instance Name |
 | [Docker](/integrations/docker)                                | Docker Container and Image Name, Container Command, Container Labels |
 | [Dyn](/integrations/dyn)                                   | Zone, Record Type |
-| [Elasticsearch](/integrations/elasticsearch)                         | Cluster Name,  Host Name, Port Number  |
+| [Elasticsearch](/integrations/elastic)                         | Cluster Name,  Host Name, Port Number  |
 | [Etcd](/integrations/etcd)                                  | State Leader or Follower |
 | [Fluentd](/integrations/fluentd)                           | Host Name, Port Number |
 | [Google App Engine](/integrations/google_app_engine)                     | Project Name, Version ID, Task Queue |
