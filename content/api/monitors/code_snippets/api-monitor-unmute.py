@@ -5,7 +5,11 @@ options = {
     'app_key': '87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
 }
 
+
 initialize(**options)
+
+
 
 # Unmute all alerts
 api.Monitor.unmute(2088)
+

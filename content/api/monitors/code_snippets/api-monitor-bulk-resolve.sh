@@ -16,5 +16,4 @@ curl -X POST -H "Content-type: application/json" \
           {"${monitor_id}": "${group_2}"}
       ]
     }' \
-    "https://app.datadoghq.com/monitor/bulk_resolve?api_key=${api_key}&application_key=${app_key}"
-    
+    "https://app.datadoghq.com/monitor/bulk_resolve?api_key=${api_key}&application_key=${app_key}"   
