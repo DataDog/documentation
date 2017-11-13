@@ -177,12 +177,23 @@ build_hugo_site() {
 build_hugo_site_ja() {
     start_step
     echo "Build ja site..."
+    # store the current config temporarily
+    # then set the config variable to our ja/config
+    tmpconfig="${CONFIG}"
+    basename=`basename ${CONFIG}`
+    dirname=`dirname ${CONFIG}`
+    JACONFIG="${dirname}/ja/${basename}"
+    CONFIG="${JACONFIG}"
+    echo "new config ${CONFIG}"
     cd ja
     version_static_assets
     cp -r ../data/integrations ./data/integrations
     build_hugo_site
     mv public ../public/ja/
     cd ../
+    # restore config path
+    CONFIG="${tmpconfig}"
+    echo "restored config ${CONFIG}"
     pass_step  "${FUNCNAME}"
 }
 
