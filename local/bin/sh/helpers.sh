@@ -177,12 +177,21 @@ build_hugo_site() {
 build_hugo_site_ja() {
     start_step
     echo "Build ja site..."
+
+    tmpref="${CI_COMMIT_REF_NAME}"
+    CI_COMMIT_REF_NAME="${CI_COMMIT_REF_NAME}/ja"
+    echo "new ref ${CI_COMMIT_REF_NAME}"
+
     cd ja
     version_static_assets
     cp -r ../data/integrations ./data/integrations
     build_hugo_site
     mv public ../public/ja/
     cd ../
+
+    # restore ref name
+    CI_COMMIT_REF_NAME="${tmpref}"
+    echo "restored ${CI_COMMIT_REF_NAME}"
     pass_step  "${FUNCNAME}"
 }
 
