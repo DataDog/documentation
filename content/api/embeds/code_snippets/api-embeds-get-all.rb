@@ -9,4 +9,3 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 # Get all with API Call
 dog.get_all_embeds()
-
