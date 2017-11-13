@@ -41,6 +41,7 @@ build_preview:
     - sync_integration_descriptions
     - sync_integration_metrics
     - build_hugo_site
+    - build_hugo_site_ja
     - minify_html
     - collect_static_assets
     - push_site_to_s3
