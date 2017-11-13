@@ -32,7 +32,7 @@ class HTTPCheck(AgentCheck):
             self.status_code_event(url, r, aggregation_key)
 
         timing = end_time - start_time
-        self.gauge('http.reponse_time', timing, tags=['http_check'])
+        self.gauge('http.response_time', timing, tags=['http_check'])
 
     def timeout_event(self, url, timeout, aggregation_key):
         self.event({
@@ -47,7 +47,7 @@ class HTTPCheck(AgentCheck):
         self.event({
             'timestamp': int(time.time()),
             'event_type': 'http_check',
-            'msg_title': 'Invalid reponse code for %s' % url,
+            'msg_title': 'Invalid response code for %s' % url,
             'msg_text': '%s returned a status of %s' % (url, r.status_code),
             'aggregation_key': aggregation_key
         })
