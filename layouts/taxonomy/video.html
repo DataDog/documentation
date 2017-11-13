@@ -12,7 +12,7 @@
   {{ range (sort .Data.Pages "BaseFileName") }}
       <h2><a href="{{ .URL }}">{{ .Title }}</a></h2>
       <p>{{ .Params.summary }}</p>
-      {{ partial "video" .Params.wistiaid }}
+      {{ if isset .Params "wistiaid"}}{{ partial "video" .Params.wistiaid }}{{ end }}
       <br>
       {{ partial "related-groups" (dict "taxonomy" $data.Plural "terms" .Params.videos) }}
       <br><br>
