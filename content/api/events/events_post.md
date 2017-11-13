@@ -15,18 +15,15 @@ This end point allows you to post events to the stream. You can tag them, set pr
     The body of the event. *Limited to 4000 characters.*  
     The text supports [markdown](/graphing/event_stream/#markdown-events\).
     Use `msg_text` with ruby librairy
-* `date_happened` [*optional*]:  
-    Default= `now`
+* `date_happened` [*optional*, *default* = **now**]:  
     POSIX timestamp of the event.
-* `priority` [*optional*]:  
-    Default = `normal`
+* `priority` [*optional*, *default* = **normal**]:  
     The priority of the event: **normal** or **low**.
 * `host` [*optional*]:  
     Host name to associate with the event. Any tags associated with the host will also be applied to this event.
 * `tags` [*optional*]:  
     A list of tags to apply to the event.
-* `alert_type` [*optional*]:  
-    Default = `info`
+* `alert_type` [*optional*, *default* = **info**]:  
     If its an alert event, set its type between: **error**, **warning**, **info**, and **success**.
 * `aggregation_key` [*optional*]:  
     An arbitrary string to use for aggregation. *Limited to 100 characters.*  

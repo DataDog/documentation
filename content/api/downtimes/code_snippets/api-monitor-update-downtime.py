@@ -17,7 +17,5 @@ for item in downtimes:
   if item['scope'] == ['env:staging']:
     stagingDowntimes.append(item)
 
-
-
 # Update that downtime
 api.Downtime.update(stagingDowntimes[0]['id'], scope='env:staging', end=int(time.time()) + 60000, message="Doing some testing on staging.")

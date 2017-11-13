@@ -7,5 +7,8 @@ options = {
 
 initialize(**options)
 
+
+
 # Cancel downtime
 api.Downtime.delete(1654)
+

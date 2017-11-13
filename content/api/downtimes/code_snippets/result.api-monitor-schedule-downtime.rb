@@ -1,5 +1,9 @@
-["200",
- {"disabled"=>false,
+
+
+[
+  "200",
+ {
+  "disabled"=>false,
   "canceled"=>nil,
   "active"=>true,
   "message"=>nil,
@@ -12,8 +16,13 @@
     "until_occurrences"=>nil,
     "week_days"=>["Mon", "Tue", "Wed", "Thu", "Fri"],
     "type"=>"weeks",
-    "period"=>1},
+    "period"=>1
+    },
   "start"=>1445968019,
   "creator_id"=>3658,
   "scope"=>["env:testing"],
-  "updater_id"=>nil}]
+  "updater_id"=>nil
+  }
+]
+
+

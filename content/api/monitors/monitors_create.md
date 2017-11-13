@@ -63,44 +63,41 @@ order: 8.1
 
     `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors
 
-* `name` [*required*]: 
-    Default = `dynamic, based on query`
+* `name` [*required*, *default* = **dynamic, based on query**]: 
     The name of the alert.
-* `message` [*required*]:  
-    Default = `dynamic, based on query`
+* `message` [*required*, *default* = **dynamic, based on query**]:  
     A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.
-* `tags` [*optional*]: 
-    Default = `empty list` 
+* `tags` [*optional*, *default* = **empty list**]: 
     A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the `monitor_tags` argument to filter results by these tags. It will only be available via the API and will not be visible or editable in the Datadog UI.
 
 * `options` [*optional*]:  
     A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.  
     ##### Common Options
 
-    *   `silenced` dictionary of scopes to timestamps or `None`. Each scope will be muted until the given POSIX timestamp or forever if the value is `None`. Default: `None`  
+    *   `silenced` dictionary of scopes to timestamps or `None`. Each scope will be muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**  
         Examples:
         *   To mute the alert completely: `{'*': None}`
         *   To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-    *   `notify_no_data` a boolean indicating whether this monitor will notify when data stops reporting. Default: `false`
+    *   `notify_no_data` a boolean indicating whether this monitor will notify when data stops reporting. Default: **false**
 
-    *   `new_host_delay` Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: `300`
+    *   `new_host_delay` Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
 
-    *   `no_data_timeframe` the number of minutes before a monitor will notify when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: `2x timeframe for metric alerts, 2 minutes for service checks`
+    *   `no_data_timeframe` the number of minutes before a monitor will notify when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
 
-    *   `timeout_h` the number of hours of the monitor not reporting data before it will automatically resolve from a triggered state. Default: `None`
+    *   `timeout_h` the number of hours of the monitor not reporting data before it will automatically resolve from a triggered state. Default: **None**.
 
-    *   `require_full_window` a boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations will be skipped. Default: `True` for "on average", "at all times" and "in total" aggregation. `False` otherwise.
+    *   `require_full_window` a boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations will be skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
 
-    *   `renotify_interval` the number of minutes after the last notification before a monitor will re-notify on the current status. It will only re-notify if it's not resolved. Default: `None`
+    *   `renotify_interval` the number of minutes after the last notification before a monitor will re-notify on the current status. It will only re-notify if it's not resolved. Default: **None**.
 
-    *   `escalation_message` a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: `None`
+    *   `escalation_message` a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 
-    *   `notify_audit` a boolean indicating whether tagged users will be notified on changes to this monitor. Default: `False`
+    *   `notify_audit` a boolean indicating whether tagged users will be notified on changes to this monitor. Default: **False**
 
-    *   `locked` a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: `False`
+    *   `locked` a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 
-    *   `include_tags` a boolean indicating whether notifications from this monitor will automatically insert its triggering tags into the title. Default: `True` Examples:  
+    *   `include_tags` a boolean indicating whether notifications from this monitor will automatically insert its triggering tags into the title. Default: **True** Examples:  
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 
@@ -118,4 +115,4 @@ order: 8.1
 
     -   `thresholds` a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
 
-            Default: `{'ok': 1, 'critical': 1, 'warning': 1}`
+            Example: `{'ok': 1, 'critical': 1, 'warning': 1}`

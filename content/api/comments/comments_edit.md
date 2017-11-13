@@ -7,10 +7,8 @@ order: 15.2
 ## Edit A Comment
 
 ##### ARGUMENTS
-* `message` *[optional]*:  
-    Default: `original message`  
+* `message` [*optional*, *default* = **original message**]:  
     The comment text.
 
-* **`handle`** *[optional]*:  
-    Default: `application key owner`  
+* `handle` [*optional*, *default* = **Application key owner**]:  
     The handle of the user making the comment.

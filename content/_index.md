@@ -5,9 +5,6 @@ customnav: main_references
 aliases:
   - /basic_agent_usage/
   - /guides/
-sidebar:
-  nav:
-    - header: Menu
 disable_toc: true
 ---
 # Welcome to Datadog Docs!

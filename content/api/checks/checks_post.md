@@ -15,7 +15,6 @@ order: 7.1
     The name of the host submitting the check
 
 * `status` *[optional]*:   
-    Default: `None`  
     An integer for the status of the check:
     * 0 : OK
     * 1 : Warning
@@ -24,11 +23,9 @@ order: 7.1
   
 
 * `timestamp` *[optional]*:  
-    Default: `None`  
     POSIX timestamp of the event.
 
 * `message`*[optional]*:  
-    Default: `None`  
     A description of why this status occurred  
 
 * `tags` *[optional]*:  
