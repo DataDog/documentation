@@ -1,1 +1,7 @@
-["201", {"host"=>"test.metric.host", "tags"=>["role:web", "environment:test"]}]
+["201", {
+	"host"=>"test.metric.host", 
+	"tags"=>[
+		"role:web", 
+		"environment:test"
+		]
+}]

@@ -1,1 +1,7 @@
-{'host': 'hostname', 'tags': ['role:webserver','env:production']}
+{
+'host': 'hostname', 
+'tags': [
+	'role:webserver',
+	'env:production'
+	]
+}

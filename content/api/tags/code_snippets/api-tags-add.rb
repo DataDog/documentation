@@ -8,3 +8,8 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 host_name = 'test.host'
 dog.add_tags(host_name, ["role:database", "environment:production"])
+
+
+
+
+
