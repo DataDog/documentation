@@ -48,7 +48,7 @@ languages:
           name: "Custom metrics"
           url: "/getting_started/custom_metrics/"
           weight: 330
-          parent: menu_references_getting_started         
+          parent: menu_references_getting_started
 
 
         # AGENT
@@ -487,7 +487,7 @@ languages:
           weight: 40
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_saml
-          name: "Saml"
+          name: "SAML"
           url: "/account_management/saml/"
           weight: 50
           parent: menu_references_account_management

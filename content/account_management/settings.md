@@ -7,10 +7,10 @@ customnav: accountmanagementnav
 
 {{< img src="account_management/settings/settings_preferences.png" alt="Settings Preference" responsive="true" >}}
 
-This panel allow you: 
+This panel allows you to:
 
-* To choose your timezone.
-* Enable Desktop notifications.
+* Choose your timezone
+* Enable Desktop notifications
 * Customize your email subscription settings
 
 ## Rename your organization
