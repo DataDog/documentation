@@ -170,12 +170,12 @@ The rate at which the metric changes per second for a given metric.
 
 ### per_minute()
 
-Same as <code>per_second() * 60 </code> 
+Same as ```per_second() * 60```
 The rate at which the metric changes per minute for a given metric.
 
 
 ### per_hour()
-Same as <code>per_second() * 3600 </code> 
+Same as ```per_second() * 3600```
 The rate at which the metric changes per hour for a given metric.
 
 
@@ -187,7 +187,7 @@ Delta value between points for a given metric
 
 ### derivative()
 
-1st order derivative, same as  <code>diff() / dt()</code>
+1st order derivative, same as  ```diff() / dt()```
 
 ## Smoothing
 ### ewma_3()

@@ -25,4 +25,3 @@ board = {
 }
 
 result = dog.update_screenboard(board_id,  board)
-

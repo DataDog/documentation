@@ -1,2 +1,6 @@
-{'tags': ['role:database','env:test']}
-
+{
+	'tags': [
+		'role:database',
+		'env:test'
+		]
+}

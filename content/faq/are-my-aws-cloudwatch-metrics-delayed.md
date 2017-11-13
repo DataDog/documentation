@@ -12,6 +12,6 @@ In addition, queuing and CloudWatch API limitations can add up to another 5 minu
 
 Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for “detailed metrics” within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
 
-On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact support@datadoghq.com for more info on this.
+On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [us](/help) for more info on this.
 
 To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve written a bit about this [here](/agent/faq/why-should-i-install-the-agent-on-my-aws-instances), especially in relation to CloudWatch.

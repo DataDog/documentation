@@ -6,7 +6,7 @@ customnav: main_references
 
 There are several options for monitoring the health of your RDS databases.
 
-At a high level, there is an AWS status check for RDS per region, though it doesn't show status at the DB level ([screenshot](https://cl.ly/0s0A0r0L3X3Ns)).
+At a high level, there is an AWS status check for RDS per region, though it doesn't show status at the DB level.
 
 Another option is to set up a monitor on an RDS metric such as aws.rds.cpuutilization and configure it to send a notification if no data is received. By default, Cloudwatch metrics, including RDS metrics, are submitted with a delay, which you'll need to take into account when setting up the no data notifications, but [you can use a lambda function](/integrations/amazon_rds/#how-this-works) to submit RDS metrics more frequently for the Postgres, MySQL, Aurora, and MariaDB engines. Note that this enhanced monitoring may result in additional AWS charges. For standard RDS metrics, we recommend notifying if data is missing for 30 minutes ([example monitor](https://cl.ly/2W1r3V2Z3y0p)). If you're using enhanced RDS monitoring, metrics will be reported much more frequently and with lower latency, so a missing data timeframe of 5 minutes would be fine ([example monitor](https://cl.ly/1u3f0J1d1I3c)). Make sure to set up your monitor on an enhanced metric (e.g. aws.rds.cpuutilization.total) if enhanced monitoring is enabled.
 

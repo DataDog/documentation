@@ -1,7 +1,10 @@
-[ {'creator': {'email': 'matt@example.com',
-   'handle': 'matt@example.com',
-   'id': 1896,
-   'name': u'Matt'},
+[ 
+  {'creator': {
+    'email': 'matt@example.com',
+    'handle': 'matt@example.com',
+    'id': 1896,
+    'name': u'Matt'
+    },
   'id': 2085,
   'message': u'',
   'name': '**system.net.bytes_rcvd** over **host:host0** was **> 100** on average during the **last 1h**.',
@@ -29,4 +32,6 @@
   'type': 'metric alert',
   'multi': False,
   'created': '2015-12-18T16:34:14.014039+00:00',
-  'modified': '2015-12-18T18:39:24.391207+00:00'}]
+  'modified': '2015-12-18T18:39:24.391207+00:00'
+  }
+]

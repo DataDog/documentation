@@ -31,12 +31,6 @@ For more information about how to write an Integration, please see the [Creating
 
 First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [Get in touch with us!][4], we'll be happy to answer any questions you might have.
 
-<!--
-======================================================
-INTERFACE
-======================================================
--->
-
 ## Agent Check Interface
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
@@ -144,12 +138,6 @@ things like `self.log.info('hello')`. The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
 module).
 
-<!--
-======================================================
-CONFIGURATION
-======================================================
--->
-
 ## Configuration
 
 Each check will have a configuration file that will be placed in the `conf.d`
@@ -251,12 +239,6 @@ You can also add additional checks to a single directory, and point to it in `da
 
     additional_checksd: /path/to/custom/checks.d/
 
-<!--
-======================================================
-FIRST CHECK
-======================================================
--->
-
 ## Your First Check
 
 <div class="alert alert-warning">
@@ -291,13 +273,6 @@ class HelloCheck(AgentCheck):
 As you can see, the check interface is really simple and easy to get started
 with. In the next section we'll write a more useful check that will ping HTTP
 services and return interesting data.
-
-
-<!--
-======================================================
-HTTP CHECK
-======================================================
--->
 
 ## An HTTP Check
 
@@ -432,44 +407,100 @@ You'll see what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 
-{{< snippet-code-block file="guides-agentchecks-ex-all.py" nocomments="true" >}}
+```python
+import time
+import requests
 
-<!--
-======================================================
-Troubleshooting
-======================================================
--->
+from checks import AgentCheck
+from hashlib import md5
+
+class HTTPCheck(AgentCheck):
+    def check(self, instance):
+        if 'url' not in instance:
+            self.log.info("Skipping instance, no url found.")
+            return
+
+        # Load values from the instance config
+        url = instance['url']
+        default_timeout = self.init_config.get('default_timeout', 5)
+        timeout = float(instance.get('timeout', default_timeout))
+
+        # Use a hash of the URL as an aggregation key
+        aggregation_key = md5(url).hexdigest()
+
+        # Check the URL
+        start_time = time.time()
+        try:
+            r = requests.get(url, timeout=timeout)
+            end_time = time.time()
+        except requests.exceptions.Timeout as e:
+            # If there's a timeout
+            self.timeout_event(url, timeout, aggregation_key)
+            return
+
+        if r.status_code != 200:
+            self.status_code_event(url, r, aggregation_key)
+
+        timing = end_time - start_time
+        self.gauge('http.reponse_time', timing, tags=['http_check'])
+
+    def timeout_event(self, url, timeout, aggregation_key):
+        self.event({
+            'timestamp': int(time.time()),
+            'event_type': 'http_check',
+            'msg_title': 'URL timeout',
+            'msg_text': '%s timed out after %s seconds.' % (url, timeout),
+            'aggregation_key': aggregation_key
+        })
+
+    def status_code_event(self, url, r, aggregation_key):
+        self.event({
+            'timestamp': int(time.time()),
+            'event_type': 'http_check',
+            'msg_title': 'Invalid reponse code for %s' % url,
+            'msg_text': '%s returned a status of %s' % (url, r.status_code),
+            'aggregation_key': aggregation_key
+        })
+
+if __name__ == '__main__':
+    check, instances = HTTPCheck.from_yaml('/path/to/conf.d/http.yaml')
+    for instance in instances:
+        print "\nRunning the check against url: %s" % (instance['url'])
+        check.check(instance)
+        if check.has_events():
+            print 'Events: %s' % (check.get_events())
+        print 'Metrics: %s' % (check.get_metrics())
+```
 
 ## Troubleshooting
 
-Custom Agent checks can't be directly called from python and instead
- need to be called by the agent. To test this, run:
+Custom Agent checks can't be directly called from python and instead need to be called by the agent.  
+
+To test this, run:
 
     sudo -u dd-agent dd-agent check <CHECK_NAME>
 
-If your issue continues, please reach out to Support with the help page that
- lists the paths it installs.
+If your issue continues, please reach out to Support with the help page that lists the paths it installs.
 
 ### Testing custom checks on Windows
 
-* **For agent version < 5.12**:<br>
-The Agent install includes a file called shell.exe
-in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment.
-Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files
-in their correct places, you can run the following in shell.exe:
-```
-from checks import run_check
-run_check('<CHECK_NAME>')
-```
-This will output any metrics or events that the check will return.
+* **For agent version < 5.12**:  
+    
+    The Agent install includes a file called shell.exe in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files in their correct places, you can run the following in shell.exe:
+    ```
+    from checks import run_check
+    run_check('<CHECK_NAME>')
+    ```
+    This will output any metrics or events that the check will return.
 
-* **For agent version >= 5.12**:<br>
-Run the following script, with the proper `<CHECK_NAME>`:<br>
-`<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`<br>
-For example, to run the disk check:
-```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
-```
+* **For agent version >= 5.12**:
+    Run the following script, with the proper `<CHECK_NAME>`:
+    `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`  
+    
+    For example, to run the disk check:
+    ```
+    C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
+    ```
 
 [1]: /developers/integration_sdk/
 [2]: https://github.com/DataDog/integrations-extras

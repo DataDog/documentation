@@ -8,9 +8,5 @@ If you haven't installed the Agent yet, instructions can be found [here](https:/
 
 For details on how to work with the agent on Docker and on CoreOS, see the [Docker integration docs](https://docs.datadoghq.com/integrations/docker_daemon).
 
-
-If you're still having trouble, our support team will be glad to provide further assistance.
-You can contact them in one of the following ways:
-
-{{< partial name="_contact_info" markdown="true" >}}
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 

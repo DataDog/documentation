@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 from datadog import initialize, api
 
 options = {
@@ -27,3 +34,14 @@ template_variables = [{
 read_only = True
 
 api.Timeboard.update(4952, title=title, description=description, graphs=graphs, template_variables=template_variables, read_only=read_only)
+
+
+
+
+
+
+
+
+
+
+

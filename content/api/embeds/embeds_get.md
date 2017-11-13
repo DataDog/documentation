@@ -20,9 +20,13 @@ Returns: A JSON object with 8 elements:
 On failure, the return value will be a JSON containing an error message {errors: [messages]}.
 
 ##### ARGUMENTS
-<ul class="arguments">
-    {{< argument name="size" description="The size of the graph. Must be one of small, medium, large, and xlarge." default="medium" >}}
-    {{< argument name="legend" description="The flag determining if the graph includes a legend. Must be one of yes or no." default="no" >}}
-    {{< argument name="template_variables" description="Replace template variables in queries with form $var. To replace $var with val, use var=val as a parameter for each template variable you wish to replace. If any template variables are missing values in the iframe source url, then (*) will be used as the value." default="None" >}}
-</ul>
-
+* `size` [*optional*, *default*=**medium**]:  
+    The size of the graph. Must be one:
+    * **small**, 
+    * **medium**, 
+    * **large**, 
+    * **xlarge**.
+* `legend` [*optional*, *default*=**no**]:  
+    The flag determining if the graph includes a legend. Must be one of **yes** or **no**.
+* `template_variables` [*optional*, *default*=**None**]:  
+    Replace template variables in queries with form $var. To replace $var with val, use var=val as a parameter for each template variable you wish to replace. If any template variables are missing values in the iframe source url, then (*) will be used as the value.

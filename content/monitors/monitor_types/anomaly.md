@@ -51,12 +51,10 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive your monitor is to different types of anomalies.
 
-<ol type="a">
-  <li>This number is equivalent to the <code>bounds</code> parameter used in the <code>anomalies</code> function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.</li>
-  <li>If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.</li>
-  <li>We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.) </li>
-  <li>You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.</li>
-</ol>
+1.  This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.
+2.  If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.
+3.  We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.)
+4.  You can change the anomaly detection algorithm used here. See the next section of this guide for tips on how to choose the best algorithm for your use case.
 
 Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 

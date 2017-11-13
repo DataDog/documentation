@@ -1,5 +1,8 @@
-["200",
- [{"name"=>"Bytes received on host0",
+[
+  "200",
+ [
+  {
+    "name"=>"Bytes received on host0",
    "org_id"=>1499,
    "options"=>{"notify_no_data"=>false, "notify_audit"=>false, "silenced"=>{}},
    "query"=>"avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
@@ -8,12 +11,15 @@
    "multi"=>false,
    "id"=>91879,
    "created"=>"2015-12-18T16:34:14.014039+00:00",
-   "modified"=>"2015-12-18T16:34:14.014039+00:00"},
-  {"name"=>
+   "modified"=>"2015-12-18T16:34:14.014039+00:00"
+   },
+  {
+    "name"=>
     "**system.net.bytes_rcvd** over **host:host0** was **> 100** on average during the **last 1h**.",
    "org_id"=>1499,
    "options"=>
-    {"notify_audit"=>true,
+    {
+      "notify_audit"=>true,
      "timeout_h"=>nil,
      "silenced"=>{},
      "no_data_timeframe"=>false,
@@ -26,4 +32,7 @@
    "multi"=>false,
    "id"=>91875,
    "created"=>"2015-12-18T16:34:14.014039+00:00",
-   "modified"=>"2015-12-18T16:34:14.014039+00:00"}]]
+   "modified"=>"2015-12-18T16:34:14.014039+00:00"
+   }
+ ]
+]

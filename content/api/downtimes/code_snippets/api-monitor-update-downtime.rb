@@ -18,6 +18,3 @@ downtimes[1].each do |item|
 end
 
 dog.update_downtime(stagingDowntimes[0]['id'], :scope => 'env:testing', :end => Time.now.to_i + 60000, :message => "Doing some testing on staging.")
-
-
-

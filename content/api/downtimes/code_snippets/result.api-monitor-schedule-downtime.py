@@ -1,4 +1,6 @@
-{'active': True,
+
+{
+'active': True,
  'canceled': None,
  'creator_id': 3658,
  'disabled': False,
@@ -7,11 +9,20 @@
  'message': None,
  'monitor_id': None,
  'parent_id': None,
- 'recurrence': {'period': 1,
-                'type': 'weeks',
-                'until_date': 1448387217,
-                'until_occurrences': None,
-                'week_days': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']},
+ 'recurrence': {
+ 	'period': 1,
+	'type': 'weeks',
+	'until_date': 1448387217,
+	'until_occurrences': None,
+	'week_days': [
+		'Mon', 
+		'Tue', 
+		'Wed', 
+		'Thu', 
+		'Fri'
+		]
+	},
  'scope': ['env:staging'],
  'start': 1445968017,
- 'updater_id': None}
+ 'updater_id': None
+}

@@ -10,11 +10,10 @@ This end point allows you to search for entities from the last 24 hours in Datad
 * `metrics`
 
 ##### ARGUMENTS
-<ul class="arguments">
-    {{< argument name="q" description="The query string" >}}
-</ul>
+* `q` [*required*]:  
+    The query string
 
-QUERY LANGUAGE
+##### QUERY LANGUAGE
 
 Search queries allow for limited faceting. Available facets are:
 

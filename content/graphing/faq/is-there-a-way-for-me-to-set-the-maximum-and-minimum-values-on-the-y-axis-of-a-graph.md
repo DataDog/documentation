@@ -13,4 +13,4 @@ Is there a way for me to set the maximum and minimum values on the y-axis of a g
 You can use the filter option that allows you to automatically change y-axis bounds [based on a threshold](/graphing).
 
 
-Another solution to help identify outliers is to use the heatmap visualization (learn more about it from our [blog post](https://www.datadoghq.com/2013/10/detecting-outliers-cloud-infrastructure-datadog-heatmaps/)), or our outlier detection algorithms ([blog post](https://www.datadoghq.com/blog/introducing-outlier-detection-in-datadog/) and [documentation](/monitors/monitor_types/outlier)).
+Another solution to help identify outliers is to use the heatmap visualization (learn more about it from our [blog post](https://www.datadoghq.com/blog/detecting-outliers-cloud-infrastructure-datadog-heatmaps/)), or our outlier detection algorithms ([blog post](https://www.datadoghq.com/blog/introducing-outlier-detection-in-datadog/) and [documentation](/monitors/monitor_types/outlier)).

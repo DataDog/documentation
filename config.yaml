@@ -173,15 +173,10 @@ languages:
           pre: "nav_graphing"
           weight: 60
         # GRAPHING - Subnav start
-        - identifier: customnav_graphingnav_events
-          name: "Events"
-          url: "/graphing/events/"
-          weight: 30
-          parent: menu_references_graphing
         - identifier: customnav_graphingnav_dashboards
           name: "Dashboards"
           url: "/graphing/dashboards/"
-          weight: 40
+          weight: 30
           parent: menu_references_graphing
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
@@ -199,11 +194,21 @@ languages:
           url: "/graphing/dashboards/widgets/"
           weight: 120
           parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_notebooks
+          name: "Notebooks"
+          url: "/graphing/notebooks/"
+          weight: 40
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_events
+          name: "Event Stream"
+          url: "/graphing/event_stream/"
+          weight: 50
+          parent: menu_references_graphing
 
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "/graphing/infrastructure/"
-          weight: 50
+          weight: 60
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
           name: "Hostmap"
@@ -220,21 +225,16 @@ languages:
           url: "/graphing/infrastructure/process/"
           weight: 50
           parent: customnav_graphingnav_infrastructure
-        - identifier: customnav_graphingnav_metrics
-          name: "Metrics"
-          url: "/graphing/metrics/"
-          weight: 60
-          parent: menu_references_graphing
-        - identifier: customnav_graphingnav_notebooks
-          name: "Notebooks"
-          url: "/graphing/notebooks/"
-          weight: 70
-          parent: menu_references_graphing
         - identifier: customnav_graphingnav_miscellaneous
           name: "Miscellaneous"
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
+        - identifier: customnav_graphingnav_metricsmath
+          name: "Metrics Arithmetic"
+          url: "/graphing/miscellaneous/metrics_arithmetic/"
+          weight: 809
+          parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_functions
           name: "Functions"
           url: "/graphing/miscellaneous/functions/"
@@ -244,11 +244,6 @@ languages:
           name: "Graphing JSON"
           url: "/graphing/miscellaneous/graphingjson/"
           weight: 820
-          parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_visualisation
-          name: "Visualisation"
-          url: "/graphing/miscellaneous/visualisation/"
-          weight: 810
           parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_faq
           name: "FAQ"
@@ -403,7 +398,7 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
           name: "Api"
-          url: "/tracing/api/"
+          url: "/api/#traces"
           weight: 90
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_faq

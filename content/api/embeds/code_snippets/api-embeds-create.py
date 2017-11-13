@@ -20,3 +20,12 @@ graph_json = {
 graph_json = json.dumps(graph_json)
 
 api.Embed.create(graph_json=graph_json, timeframe="1_hour", size="medium", legend="no")
+
+
+
+
+
+
+
+
+

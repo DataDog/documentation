@@ -5,6 +5,6 @@ order: 8.4
 ---
 
 ## Delete A Monitor
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

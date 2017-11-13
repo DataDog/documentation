@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 type: apicontent
-order: 19
+order: 21
 ---
 
 ## Troubleshooting
@@ -10,11 +10,9 @@ We do very minimal error checking on the API front-end, as we queue all data for
 
 Thus it is possible you could receive a 202 'success' response but not see your data in Datadog. The cause of this is most likely:
 
-<ul>
-  <li>Problems with the timestamp (either not in seconds or in the past, etc.)</li>
-  <li>Using the application key instead of API key</li>
-  <li>Events are succeeding, but because success events are low priority, they don't show up in the event stream until it is switched to priority 'all'</li>
-</ul>
+*   Problems with the timestamp (either not in seconds or in the past, etc.)
+*   Using the application key instead of API key
+*   Events are succeeding, but because success events are low priority, they don't show up in the event stream until it is switched to priority 'all'
 
 To check your timestamp is correct run:
 
@@ -22,4 +20,4 @@ To check your timestamp is correct run:
 
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.</p>
 
-There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the <code>priority</code> field must be one of the four given options. Any other text will result in a 202 'success' but no event showing up. Having an invalid <code>source_type_name</code> will not prevent the event from showing up, but that field will be dropped upon submission.
+There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the `priority` field must be one of the four given options. Any other text will result in a 202 'success' but no event showing up. Having an invalid `source_type_name` will not prevent the event from showing up, but that field will be dropped upon submission.

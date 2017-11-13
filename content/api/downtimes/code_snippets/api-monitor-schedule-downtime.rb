@@ -20,3 +20,4 @@ recurrence = {
 
 # Schedule downtime
 dog.schedule_downtime('env:testing', :start => start_ts, :end => end_ts, :recurrence => recurrence)
+

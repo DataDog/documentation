@@ -1,1 +1,7 @@
-{'host': 'hostname', 'tags': ['role:database','environment:test']}
+{
+	'host': 'hostname', 
+	'tags': [
+		'role:database',
+		'environment:test'
+		]
+}

@@ -8,3 +8,6 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 hostname = "test.host"
 dog.unmute_host(hostname)
+
+
+

@@ -1,7 +1,7 @@
 ---
 title: Usage Metering
 type: apicode
-order: 18.3
+order: 20.3
 ---
 
 ##### Signature

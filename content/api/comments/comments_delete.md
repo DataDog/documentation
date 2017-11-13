@@ -5,6 +5,4 @@ order: 15.3
 ---
 
 ## Delete A Comment
-ARGUMENTS
-
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

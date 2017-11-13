@@ -4,7 +4,7 @@ kind: faq
 customnav: main_references
 ---
 
-To verify you have access to JMX please test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article](https://blogs.oracle.com/jmxetc/entry/troubleshooting_connection_problems_in_jconsole) may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
+To verify you have access to JMX please test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article](https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html) may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
 
 If you're able to connect using JConsole please run the following:
 

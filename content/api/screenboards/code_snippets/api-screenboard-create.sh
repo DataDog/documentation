@@ -18,3 +18,10 @@ curl -X POST -H "Content-type: application/json" \
         ]
     }' \
 "https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+
+
+
+
+
+
+

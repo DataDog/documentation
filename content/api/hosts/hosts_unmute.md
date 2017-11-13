@@ -5,6 +5,6 @@ order: 12.2
 ---
 
 ## UnMute A Host
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

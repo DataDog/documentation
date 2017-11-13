@@ -1,1 +1,3 @@
-{'deleted_monitor_id': 2081}
+{
+	'deleted_monitor_id': 2081
+}

@@ -1,1 +1,4 @@
-{'status': 'ok'}
+
+{
+	'status': 'ok'
+}

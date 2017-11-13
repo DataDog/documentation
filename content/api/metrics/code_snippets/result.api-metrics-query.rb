@@ -32,3 +32,5 @@
   'query'=>'system.cpu.idle{*}by{host}',
   'message'=>''
 }
+
+

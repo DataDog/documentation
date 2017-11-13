@@ -1,33 +1,41 @@
 ---
 title: Graphing
 kind: documentation
-autotocdepth: 2
+autotocdepth: 3
 customnav: graphingnav
 alias:
     - /guides/graphing
 ---
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
+Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you will look at [dashboards][8] made up of graphs. Other times you will see email notifications that include a graph of some fluctuation in the system. And yet other times you will see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
 
-## Find the Graph Editor
+## The Graphing Editor
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, visit the [JSON Graphing Primer Page][1]
 
 On each graph you will find a pencil icon that opens the graph editor.
 
 
 {{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" popup="true" >}}
 
-The graph editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page. **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
+The graphing editor has three tabs, **Share**, **JSON**, and **Edit**. **Share** will allow you to embed the graph on any external web page (Note: The share tab is only available on Timeboards.). **JSON** is the more flexible editor, but it requires knowledge of the graph definition language to make use of it. **Edit** is the default tab and will allow you to use a GUI to select the graphing options. The newest features are sometimes only available on the **JSON** tab.
 
-## Graphing with the graphical editor interface
+## Editing graphs
 
-When you first open the graph editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
+When you first open the graphing editor window, you will be on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
 {{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" popup="true" >}}
 
-Configuring a graph in a dashboard is a multi-step process. The first two steps depend
+Configuring a graph is a multi-step process. 
+
+1. Choose the metric
+1. Select the visualization
+1. Filter 
+1. Aggregate and Rollup
+1. Apply additional functions
+1. Title the graph
 
 ### Choose the Metric to graph
 
-When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer][2]. You can also look in the [Metrics Summary][3].
+When you create a graph, you will probably have a metric in mind that you want to show. You can select that in the first dropdown in the **Choose metrics and events** section. If you aren't sure exactly which metric to use, you might want to start with the [Metrics Explorer][2] or a [Notebook][7]. You can also look in the [Metrics Summary][3].
 
 The Metrics Explorer will allow you to play around with different graph settings in a more ad-hoc way. The Metrics Summary will allow to learn more about the type of metric as well as setting the default unit for a metric.
 
@@ -36,7 +44,7 @@ The Metrics Explorer will allow you to play around with different graph settings
 
 Once you have a metric in mind to display in your graph, select your visualization.
 
-Find the list of all visualisation [here][4]
+Find the list of all visualizations [here][4]
 
 ### Filter and Aggregate to show what you need
 
@@ -121,9 +129,14 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
+## Next Steps
+Now that you know how to build graphs, look into using them in [Dashboards][8], discovering new metrics in the []
+
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
-[4]: /graphing/miscellaneous/visualisation/
+[4]: /graphing/dashboards/widgets/
 [5]: /agent/tagging/
 [6]: /graphing/miscellaneous/functions/
+[7]: https://app.datadoghq.com/notebook/list
+[8]: /graphing/dashboards

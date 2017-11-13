@@ -7,6 +7,6 @@ order: 8.8
 ## Unmute All Monitors
 Disables muting all monitors. Throws an error if mute all was not enabled previously.
 
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

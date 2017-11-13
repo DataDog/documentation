@@ -9,5 +9,6 @@ options = {
 initialize(**options)
 
 now = int(time.time())
+
 query = 'system.cpu.idle{*}by{host}'
 print api.Metric.query(start=now - 3600, end=now, query=query)

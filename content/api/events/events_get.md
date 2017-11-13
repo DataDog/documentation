@@ -8,6 +8,6 @@ order: 6.2
 This end point allows you to query for event details.
 Note: if the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 
-ARGUMENTS
+#### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

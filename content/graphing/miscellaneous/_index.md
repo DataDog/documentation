@@ -5,4 +5,4 @@ autotocdepth: 3
 customnav: graphingnav
 ---
 
-wip
+Enclosed in this section are other articles that may be of interest.
