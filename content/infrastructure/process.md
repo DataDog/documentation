@@ -52,11 +52,11 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
         value: /host/proc
       - name: HOST_SYS
         value: /host/sys
-    volumeMount:
+    volumeMounts:
       - name: passwd
         mountPath: /etc/passwd
         readOnly: true
-    volume:
+    volumes:
       - hostPath:
           path: /etc/passwd
         name: passwd    
