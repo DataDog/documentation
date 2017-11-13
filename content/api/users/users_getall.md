@@ -5,6 +5,6 @@ order: 16.3
 ---
 
 ## Get All Users
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

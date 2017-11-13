@@ -7,6 +7,5 @@ order: 16.5
 Can only be used with application keys belonging to administrators.
 
 ##### ARGUMENTS
-<ul class="arguments">
-    {{< argument name="handle" description="The handle of the user." >}}
-</ul>
+* `handle` [*required*]:  
+    The handle of the user.
