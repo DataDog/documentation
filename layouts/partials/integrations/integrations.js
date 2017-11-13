@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
+
+    if(!container) return;
+
     var collection = Array.prototype.slice.call(container.querySelectorAll('.mix'));
 
     if(controls) {
@@ -59,8 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if(mobilecontrols) {
         mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
     }
-
-    if(!container) return;
 
     var mixer = mixitup(container, {
         animation: {
