@@ -8,3 +8,23 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 dash_id = '2534'
 dog.delete_dashboard(dash_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

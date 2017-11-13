@@ -11,4 +11,4 @@ order: 10.3
 {{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-delete.sh" highlight="true" >}}
 {{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-delete.rb" highlight="true" >}}
 ##### Example Response
-<em>This end point does not return JSON on successful requests.</em>
+*This end point does not return JSON on successful requests.*

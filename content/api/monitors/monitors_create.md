@@ -70,7 +70,7 @@ order: 8.1
 * `tags` [*optional*, *default* = **empty list**]: 
     A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the `monitor_tags` argument to filter results by these tags. It will only be available via the API and will not be visible or editable in the Datadog UI.
 
-* `options` [*optional*]:  
+* `options` [*optional*, *default*=**None**]:  
     A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.  
     ##### Common Options
 

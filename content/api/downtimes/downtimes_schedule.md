@@ -11,17 +11,17 @@ order: 9.1
 
 * `scope` [*required*]:  
     The scope(s) to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.
-* `monitor_id` [*optional*]:  
+* `monitor_id` [*optional*, *default*=**None**]:  
     A single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors.
-* `start` [*optional*]:  
+* `start` [*optional*, *default*=**None**]:  
     POSIX timestamp to start the downtime. If not provided, the downtime starts the moment it is created.
-* `end` [*optional*]:  
+* `end` [*optional*, *default*=**None**]:  
     POSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it).
-* `message` [*optional*]:  
+* `message` [*optional*, *default*=**None**]:  
     A message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events
 * `timezone` [*optional*, *default* = **UTC**]:  
     The timezone for the downtime.
-* `recurrence` [*optional*]:  
+* `recurrence` [*optional*, *default*=**None**]:  
     An object defining the recurrence of the downtime with a variety of parameters:
     +   `type` the type of recurrence. Choose from: `days`, `weeks`, `months`, `years`.
     +   `period` how often to repeat as an integer. For example to repeat every 3 days, select a type of `days` and a period of `3`.

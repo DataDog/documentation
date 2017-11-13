@@ -11,7 +11,7 @@ order: 9.2
     The integer id of the downtime to be updated
 * `scope` [*required*]:  
     The scope to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.
-* `monitor_id` [*optional*]:  
+* `monitor_id` [*optional*, *default*=**None**]:  
     A single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors.
 * `start` [*optional*, *default* = **original start**]:  
     POSIX timestamp to start the downtime.

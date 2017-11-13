@@ -1,3 +1,8 @@
+
+
+
+
+
 require 'rubygems'
 require 'dogapi'
 
@@ -26,3 +31,17 @@ template_variables = [{
 }]
 
 dog.update_dashboard(dash_id, title, description, graphs, template_variables)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

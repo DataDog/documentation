@@ -29,4 +29,3 @@ template_variables = [{
 newboard=api.Timeboard.create(title=title, description=description, graphs=graphs, template_variables=template_variables)
 
 api.Timeboard.delete(newboard['dash']['id'])
-

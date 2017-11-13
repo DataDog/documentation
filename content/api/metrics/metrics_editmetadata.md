@@ -10,13 +10,13 @@ Find more about supported types [here](/developers/metrictypes)
 ##### ARGUMENTS
 * `type` [*required*]:  
     [Metric type](/developers/metrictypes) such as **gauge** or **rate**
-* `description` [*optional*]:  
+* `description` [*optional*, *default*=**None**]:  
     String description of the metric" default
 * `short_name` [*required*]:  
     Short name string of the metric
-* `unit` [*optional*]:  
+* `unit` [*optional*, *default*=**None**]:  
     Primary unit of the metric such as **byte** or **operation**
-* `per_unit` [*optional*]:  
+* `per_unit` [*optional*, *default*=**None**]:  
     Per unit of the metric such as **second** in **bytes per second**
-* `statsd_interval` [*optional*]:  
+* `statsd_interval` [*optional*, *default*=**None**]:  
     If applicable, statds flush interval in seconds for the metric

@@ -13,9 +13,9 @@ Note: if the event you’re querying contains markdown formatting of any kind, y
     POSIX timestamp.
 * `end` [*required*]:  
     POSIX timestamp.
-* `priority` [*optional*]:  
+* `priority` [*optional*, *default*=**None**]:  
     Priority of your events: **low** or **normal**.
-* `sources` [*optional*]:  
+* `sources` [*optional*, *default*=**None**]:  
     A comma separated string of sources.
-* `tags` [*optional*]:  
+* `tags` [*optional*, *default*=**None**]:  
     A comma separated string of tags.

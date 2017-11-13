@@ -8,7 +8,7 @@ order: 5.2
 The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.
 
 #### ARGUMENTS
-* `series` [*optional*]:  
+* `series` [*optional*, *default*=**None**]:  
     To submit multiple metrics, you may pass a JSON array where each item in the array contains the following arguments. To submit a single metric, you may pass the following arguments as separate arguments.
     
 * `metric` [*required*]:  
@@ -20,5 +20,5 @@ The metrics end-point allows you to post time-series data that can be graphed on
     Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
 * `host` [*required*]:  
     The name of the host that produced the metric.
-* `tags` [*optional*]:  
+* `tags` [*optional*, *default*=**None**]:  
     A list of tags associated with the metric.

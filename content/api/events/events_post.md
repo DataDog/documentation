@@ -19,15 +19,15 @@ This end point allows you to post events to the stream. You can tag them, set pr
     POSIX timestamp of the event.
 * `priority` [*optional*, *default* = **normal**]:  
     The priority of the event: **normal** or **low**.
-* `host` [*optional*]:  
+* `host` [*optional*, *default*=**None**]:  
     Host name to associate with the event. Any tags associated with the host will also be applied to this event.
-* `tags` [*optional*]:  
+* `tags` [*optional*, *default*=**None**]:  
     A list of tags to apply to the event.
 * `alert_type` [*optional*, *default* = **info**]:  
     If its an alert event, set its type between: **error**, **warning**, **info**, and **success**.
-* `aggregation_key` [*optional*]:  
+* `aggregation_key` [*optional*, *default*=**None**]:  
     An arbitrary string to use for aggregation. *Limited to 100 characters.*  
     If you specify a key, all events using that key will be grouped together in the Event Stream.
-* `source_type_name` [*optional*]:  
+* `source_type_name` [*optional*, *default*=**None**]:  
     The type of event being posted.  
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...
