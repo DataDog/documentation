@@ -53,11 +53,11 @@ In the [dd-agent.yaml][3] manifest used to create the daemonset, add the followi
         value: /host/proc
       - name: HOST_SYS
         value: /host/sys
-    volumeMount:
+    volumeMounts:
       - name: passwd
         mountPath: /etc/passwd
         readOnly: true
-    volume:
+    volumes:
       - hostPath:
           path: /etc/passwd
         name: passwd    
