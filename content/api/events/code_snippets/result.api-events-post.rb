@@ -1,4 +1,5 @@
-["202",
+[
+  "202",
  {"status"=>"ok",
   "event"=>
    {"priority"=>"normal",
@@ -9,4 +10,7 @@
     "text"=>"msg_text",
     "tags"=>[],
     "related_event_id"=>nil,
-    "id"=>1378911893708573827}}]
+    "id"=>1378911893708573827
+    }
+  }
+]

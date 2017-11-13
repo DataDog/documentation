@@ -8,6 +8,6 @@ order: 5.1
 Get the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.
 
 ##### ARGUMENTS
-<ul class="arguments">
-    {{< argument name="from" description="seconds since the unix epoch" lang="console" >}}
-</ul>
+* `from` [*required*]:  
+    Seconds since the unix epoch
+

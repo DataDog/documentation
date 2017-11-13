@@ -24,8 +24,7 @@
     'expression': 'system.cpu.idle{host:vagrant-ubuntu-trusty-64}',
     'scope': 'host:vagrant-ubuntu-trusty-64',
     'unit': None,
-    'display_name':
-    'system.cpu.idle'
+    'display_name': 'system.cpu.idle'
   }],
   'from_date': 1430309983000,
   'group_by': ['host'],
@@ -33,3 +32,5 @@
   'query': 'system.cpu.idle{*}by{host}',
   'message': u''
 }
+
+

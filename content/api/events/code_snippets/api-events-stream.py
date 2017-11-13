@@ -8,7 +8,6 @@ options = {
 
 initialize(**options)
 
-
 end_time = time.time()
 start_time = end_time - 100
 
