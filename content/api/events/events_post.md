@@ -13,7 +13,7 @@ This end point allows you to post events to the stream. You can tag them, set pr
     Use `msg_title` with ruby librairy.
 * `text` [*required*]:  
     The body of the event. *Limited to 4000 characters.*  
-    The text supports [markdown](/graphing/events_stream/#markdown-events\).
+    The text supports [markdown](/graphing/event_stream/#markdown-events\).
     Use `msg_text` with ruby librairy
 * `date_happened` [*optional*]:  
     Default= `now`
