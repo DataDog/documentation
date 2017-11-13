@@ -605,7 +605,7 @@ call it `http.response_time` and tag it with the URL.
 
 {{< highlight python >}}
 timing = end_time - start_time
-self.gauge('http.reponse_time', timing, tags=['http_check'])
+self.gauge('http.response_time', timing, tags=['http_check'])
 {{< /highlight >}}
 
 Finally, we'll want to define what happens in the error cases. We have already
@@ -635,7 +635,7 @@ def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
         'event_type': 'http_check',
-        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_title': 'Invalid response code for %s' % url,
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
@@ -675,7 +675,7 @@ if r.status_code != 200:
 
 {{< highlight python >}}
 timing = end_time - start_time
-self.gauge('http.reponse_time', timing, tags=['http_check'])
+self.gauge('http.response_time', timing, tags=['http_check'])
 {{< /highlight >}}
 
 最後に、エラー発生時の処理内容を定義します。
@@ -703,7 +703,7 @@ def status_code_event(self, url, r, aggregation_key):
     self.event({
         'timestamp': int(time.time()),
         'event_type': 'http_check',
-        'msg_title': 'Invalid reponse code for %s' % url,
+        'msg_title': 'Invalid response code for %s' % url,
         'msg_text': '%s returned a status of %s' % (url, r.status_code),
         'aggregation_key': aggregation_key
     })
