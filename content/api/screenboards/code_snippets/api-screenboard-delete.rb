@@ -8,3 +8,19 @@ dog = Dogapi::Client.new(api_key, app_key)
 
 board_id = '2534'
 result = dog.delete_screenboard(board_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

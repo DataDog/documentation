@@ -7,6 +7,6 @@ order: 11.5
 ## Get All Screenboards
 Fetch all of your screenboards' definitions.
 
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.

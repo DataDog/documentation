@@ -7,6 +7,6 @@ order: 11.4
 ## Get A Screenboard
 Fetch an existing screenboard's definition.
 
-ARGUMENTS
+##### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.
