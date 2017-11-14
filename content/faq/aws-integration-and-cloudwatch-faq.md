@@ -4,10 +4,6 @@ kind: faq
 customnav: main_references
 ---
 
-## Will I be billed for hosts monitored by the AWS integration?
-
-Yes, if they are not already monitored by the agent. You will not be billed twice. See [this article](/account_management/faq/how-will-an-aws-integration-impact-my-monthly-billing) for more information.
-
 ## Can I collect AWS Custom metrics through the Integration?
 
 Yes. You need to check the 'custom metrics' checkbox on the AWS tile.

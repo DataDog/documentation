@@ -25,5 +25,3 @@ More information on this behavior and AWS billing can be found here:
 * [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?](/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog)
 
 * [How do I monitor my AWS billing details?](/faq/how-do-i-monitor-my-aws-billing-details)
-
-* [How will an AWS integration impact my monthly billing?](/account_management/faq/how-will-an-aws-integration-impact-my-monthly-billing)

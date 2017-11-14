@@ -15,7 +15,7 @@ Without explicitly muting a monitor, stopping the Agent / a Host will look some
 
 * The servers are hosted in AWS
 * They have the Agent installed on them 
-* The AWS integration is set up, even if that specific host is part of the excluded hosts from the Optionally Limit Metrics Collection scope (see the [article on the Exclusion Tags and AWS billing](/account_management/faq/how-will-an-aws-integration-impact-my-monthly-billing) for more detail on this.)
+* The AWS integration is set up, even if that specific host is part of the excluded hosts from the Optionally Limit Metrics Collection scope
 * The EC2 automuting box is checked 
 {{< img src="faq/aws_ec2_automuting.png" alt="aws_ec2_automuting" responsive="true" >}}
 
