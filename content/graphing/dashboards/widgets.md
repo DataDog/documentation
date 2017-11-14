@@ -78,6 +78,8 @@ The event timeline is a widget version of the timeline that appears at the top o
 The event stream is a widget version of the stream of events on the [Event Stream view](https://app.datadoghq.com/event/stream).
 {{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" >}}
 
+**This widgets displays only the 100 most recent events**
+
 ## Image
 *Supported on Screenboards only*
 
