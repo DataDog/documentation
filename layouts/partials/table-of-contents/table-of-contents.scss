@@ -35,6 +35,8 @@ $highlightcolor: rgba(50,152,204,.2);
 .toc {
   top:100px;
   padding-bottom:50px;
+  overflow-x:hidden;
+  overflow-y:auto;
   h5 {
     font-size:18px;
     font-weight:200;

@@ -124,4 +124,12 @@ $(document).ready(function () {
     } else {
         hideToc();
     }
+
+
+    $(window).on('resize scroll', function(e) {
+        var header_h = $('body > header').height();
+        var footer_h = $('body > footer').height();
+        //console.log(document.documentElement.clientHeight, );
+        $('.toc').css('maxHeight', document.documentElement.clientHeight - header_h);
+    });
 });
