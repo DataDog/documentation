@@ -31,7 +31,7 @@ order: 8.1
     If you are using the `_change_` or `_pct_change_` time aggregator, you can instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
     *   `change_aggr` change, pct_change
-    *   `time_aggr` avg, sum, max, min
+    *   `time_aggr` avg, sum, max, min [Learn more](/monitors/monitor_types/#define-the-conditions)
     *   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)
     *   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 

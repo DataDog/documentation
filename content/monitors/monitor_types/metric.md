@@ -81,23 +81,22 @@ description: "Compare values of a metric with a user defined threshold"
 
       Let's look at the details of each option:
 
-        - *on average*: The series will be averaged to produce a single
-          value that will be checked against the threshold.
+      * **on average**: The series will be averaged to produce a single
+        value that will be checked against the threshold. It adds the `avg()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query. 
 
-        - *at least once*: If any single value in the generated series crosses
-          the threshold then an alert will be triggered.
+      * **at least once**: If any single value in the generated series crosses
+        the threshold then an alert will be triggered. It adds the `max()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
 
-        - *at all times*: If every point in the generated series is outside the
-          threshold then an alert will be triggered.
+      * **at all times**: If every point in the generated series is outside the
+        threshold then an alert will be triggered. It adds the `min()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
 
-        - *in total*: If the summation of every point in the series is outside
-          the threshold then an alert will be triggered.
+      * **in total**: If the summation of every point in the series is outside
+        the threshold then an alert will be triggered. It adds the `sum()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
 
-      Note the *on average* and *at all times* aggregations *require* a full
+      Note the **on average** and **at all times** aggregations *require* a full
       window of data in the final series. This does *not* mean that each series
       must be full but that there shouldn't be a gap of more than 1 minute
-      across all aggregated series. In other words, we recommend using *at least
-      once* or *in total* for metrics with > 1 minute interval.
+      across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
 
     - When you select the **change alert** option, you will have additional
     parameters you can adjust.
