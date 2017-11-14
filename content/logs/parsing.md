@@ -140,6 +140,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
 |11/10/2014| `%{date("dd/mm/yyyy"):date}`| {"date": 1412978400000}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
+|Thu Nov 1 08:29:03 2016 | `%{date("EEE MMM d HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
 |06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}` | {"date": 1362501390000}|
 |2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
