@@ -5,6 +5,7 @@ autotocdepth: 3
 customnav: infrastructurenav
 aliases:
   - /hostnames
+  - /infrastructure/
 ---
 
 ## Overview

@@ -3,7 +3,7 @@ title: Host Map Overview
 kind: documentation
 autotocdepth: 3
 aliases:
-  - /graphing/infrastructure/hostmap
+  - /infrastructure/hostmap/
 customnav: infrastructurenav
 ---
 ## Overview

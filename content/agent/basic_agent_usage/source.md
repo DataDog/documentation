@@ -2,6 +2,8 @@
 title: Basic Agent Usage for Source Installation
 kind: documentation
 platform: Source
+aliases:
+    - /guides/basic_agent_usage/source/
 ---
 ## Overview
 

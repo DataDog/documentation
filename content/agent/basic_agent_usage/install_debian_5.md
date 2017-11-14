@@ -1,6 +1,8 @@
 ---
 title: Installing the Agent on Debian 5
 kind: documentation
+aliases:
+    - /install_debian_5/
 ---
 
 ## One-Step

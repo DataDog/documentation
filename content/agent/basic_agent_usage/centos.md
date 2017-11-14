@@ -7,6 +7,8 @@ serviceinfoname: /etc/init.d/datadog-agent info
 configdirectory: /etc/dd-agent/
 logdirectory: /var/log/datadog/
 supervisorlog: /var/log/supervisor/datadog-supervisord.log
+aliases:
+    - /guides/basic_agent_usage/centos/
 ---
 
 ## Overview

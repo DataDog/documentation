@@ -9,6 +9,7 @@ code_languages:
   - Ruby
 aliases:
    - /metrics/
+   - /guides/metrics/
 ---
 ## Overview
 
