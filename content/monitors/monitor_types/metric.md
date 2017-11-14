@@ -9,12 +9,12 @@ description: "Compare values of a metric with a user defined threshold"
 1. Choose the detection method
     {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" >}}
 
-    A **[Threshold alert](/monitors/monitor_types/metrics)** compares the value in the selected
+    A **[Threshold alert](/monitors/monitor_types/metric)** compares the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case
     where you know what sort values are unexpected.
 
-    A **[Change alert](/monitors/monitor_types/metrics)** compares the absolute or percentage change in
+    A **[Change alert](/monitors/monitor_types/metric)** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
     The compared data points will not be single points but are computed using
     the parameters in the *alert conditions* section.
