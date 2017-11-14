@@ -41,3 +41,16 @@ You can then use event.tags and event.tags.tagname to retrieve the values of you
 You should then see that your alert triggers when any matching events are found in Datadog and the tags appear in the message.
 
 {{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" >}}
+
+## Using event template variables in notrifications
+
+Include Event specific information in your event monitor notifications, template variables available are: 
+
+* `{{event.id}}` : Id of your event
+* `{{event.title}}`: Title of the event
+* `{{event.text}}`: Text of the event
+* `{{event.host.name}}`: Hostname that generated the event
+* `{{event.tags.tagname}}`: Tags attached to the event, replace `tagname` with the name of your tag. 
+
+{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" >}}
+
