@@ -509,7 +509,7 @@ languages:
         - identifier: menu_references_logs
           name: "Logs"
           url: "/logs/"
-          pre: "nav_start"
+          pre: "nav_logs"
           weight: 110
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
@@ -572,7 +572,7 @@ languages:
         - identifier: menu_references_videos
           name: "Videos"
           url: "/videos/"
-          pre: "nav_start"
+          pre: "nav_videos"
           weight: 120
 #        - identifier: menu_references_glossary
 #          name: "Glossary"
@@ -588,7 +588,7 @@ languages:
         - identifier: menu_references_help
           name: "Help"
           url: "/help/"
-          pre: "nav_start"
+          pre: "nav_help"
           weight: 140
 
 params:

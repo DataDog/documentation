@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
+    var collection = Array.prototype.slice.call(container.querySelectorAll('.mix'));
 
     if(controls) {
         filters = controls.querySelectorAll('[data-ref="filter"]');
@@ -108,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function grayOut(filter) {
-        var collection = Array.from(container.querySelectorAll('.mix'));
         if(filter) {
             for(var i = 0; i < collection.length; i++) {
                 if(collection[i].classList.contains(filter.substr(1))) {
@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function resetGray() {
-        var collection = Array.from(container.querySelectorAll('.mix'));
         for(var i = 0; i < collection.length; i++) {
             collection[i].classList.remove('grayscale');
         }

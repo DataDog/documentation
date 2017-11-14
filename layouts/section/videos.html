@@ -4,7 +4,7 @@
     <div>
         <small>tags: {{ partial "related-groups" (dict "taxonomy" .Section "terms" .Params.videos) }}</small>
         <br><br>
-        {{ partial "video" .Params.wistiaid }}
+        {{ if isset .Params "wistiaid"}}{{ partial "video" .Params.wistiaid }}{{ end }}
 
         <p>&nbsp;</p>
     </div>

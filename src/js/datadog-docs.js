@@ -375,4 +375,8 @@ $(document).ready(function () {
             return false;
         });
     });
+
+    // sticky polyfill trigger
+    var elements = document.querySelectorAll('.sticky');
+    Stickyfill.add(elements);
 });

@@ -30,6 +30,10 @@ body {
   }
 }
 
+strong {
+  font-weight:600;
+}
+
 a {
   color:#4A4A4A;
 }
@@ -108,6 +112,7 @@ p {
   }
   ul li:before {
     content: "–";
+    position:absolute;
     margin-right: 7px;
     margin-left: -16px;
   }

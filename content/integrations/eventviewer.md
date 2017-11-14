@@ -3,6 +3,8 @@ title: Datadog-Event Viewer Integration
 integration_title: Event Viewer
 kind: integration
 description: "Send Windows events to your Datadog event stream."
+aliases:
+    - /integrations/event_viewer
 ---
 
 ## Overview
