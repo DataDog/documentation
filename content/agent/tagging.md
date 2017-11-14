@@ -9,6 +9,10 @@ aliases:
 ## Overview
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
+<div class="alert alert-info">
+We recommend to use the format <code>key:value</code> when using tags. Like <code>env:prod</code> or <code>role:database</code>
+</div>
+
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the integration, in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the integration or via the configuration files.
 
@@ -81,14 +85,14 @@ The Datadog integrations are all configured via the yaml configuration files loc
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
-    tags: firsttag, secondtag, thirdtag
+    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
 
 or
 
     tags:
-      - firsttag
-      - secondtag
-      - thirdtag
+      - key_first_tag:value_1
+      - key_second_tag:value_2
+      - key_third_tag:value_3
 
 You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid.
 
