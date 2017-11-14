@@ -145,7 +145,8 @@ Here is a quick overview of the different terms used:
    reporting. This means the monitor will not resolve because there are not
    anymore values to trigger a resolution.  
     You can also choose a Recovery thresholds, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.  
-    When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.
+    When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.  
+    **Note**: Your metric value needs to be strictly below/above the recovery threshold for the monitor to recover.
 
 ### Setup Notifications
 
