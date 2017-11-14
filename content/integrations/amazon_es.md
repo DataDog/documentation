@@ -7,6 +7,7 @@ git_integration_title: amazon_es
 description: "Track key Amazon Elasticsearch metrics."
 aliases:
     - /integrations/awses/
+    - /integrations/elasticsearch/
 ---
 
 ## Overview

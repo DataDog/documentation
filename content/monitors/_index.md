@@ -3,6 +3,8 @@ title: Create Monitor
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
+aliases:
+    - /guides/monitors/
 ---
 
 ## Overview
