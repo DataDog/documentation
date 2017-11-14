@@ -148,10 +148,15 @@ languages:
           url: "/agent/tagging/"
           weight: 80
           parent: menu_references_agent
+        - identifier: customnav_agentnav_proxy
+          name: "Proxy Configuration"
+          url: "/agent/proxy/"
+          weight: 90
+          parent: menu_references_agent
         - identifier: customnav_agentnav_faq
           name: "FAQ"
           url: "/agent/faq/"
-          weight: 90
+          weight: 100
           parent: menu_references_agent
         # AGENT - Subnav end
 
