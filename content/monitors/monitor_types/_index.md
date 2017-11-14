@@ -24,12 +24,12 @@ Here is a quick overview of the different terms used:
 1. Choose the detection method
     {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" >}}
 
-    A **Threshold Alert** compares the value in the selected
+    A **[Threshold Alert](/monitors/monitor_types/metrics)** compares the value in the selected
     timeframe against a given threshold. There are additional options available
     in the alerting conditions section. This is the standard alert case
     where you know what sort values are unexpected.
 
-    A **Change Alert** compares the absolute or percentage change in
+    A **[Change Alert](/monitors/monitor_types/metrics)** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
     The compared data points will not be single points but are computed using
     the parameters in the *alert conditions* section.
@@ -39,13 +39,13 @@ Here is a quick overview of the different terms used:
     *Note:* the calculated value is not the absolute value - meaning it will be
     negative for a downward change.
 
-    **Anomaly Detection** is an algorithmic feature that allows you to identify
+    **[Anomaly Detection](/monitors/monitor_types/anomaly)** is an algorithmic feature that allows you to identify
     when a metric is behaving differently than it has in the past, taking into
     account trends, seasonal day-of-week and time-of-day patterns. It is well-
     suited for metrics with strong trends and recurring patterns that are hard
     or impossible to monitor with threshold-based alerting.
 
-    **Outlier Detection** is an algorithmic feature that allows you to detect
+    **[Outlier Detection](/monitors/monitor_types/outlier)** is an algorithmic feature that allows you to detect
     when some members of a group are behaving strangely compared to the others.
     For example, you could detect that one web server in a pool is processing an
     unusual number of requests, and hence should be a target for replacement. Or,
@@ -131,22 +131,22 @@ Here is a quick overview of the different terms used:
 
     - For details on how to configure Outlier Detection, see the [Outlier Monitor](/monitors/monitor_types/outlier)
 
-5. You can optionally **notify on no data** after a configurable timeframe. At
+5. Select your **evaluation_delay** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor will evaluate data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor will always have data during evaluation.
+
+6. You can optionally **notify on no data** after a configurable timeframe. At
    the minimum, your chosen timeframe must be greater than 2x the alerting
    window. For example, if you are alerting over the last 5 minutes then you
    would need to wait at least 10 minutes before notifying on missing data.
 
-6. You can opt to **automatically resolve the monitor from a triggered
+7. You can opt to **automatically resolve the monitor from a triggered
    state**. In general you'll want to leave this option off as you only want
-   an alert to be resolved when it's fixed.
-
+   an alert to be resolved when it's fixed.  
    This most common use-case for this option is when you have very sparse
    counters, e.g. for errors. When errors stop occuring the metric will stop
    reporting. This means the monitor will not resolve because there are not
-   anymore values to trigger a resolution.
-
-   You can also choose a Recovery thresholds, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.
-   When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.
+   anymore values to trigger a resolution.  
+    You can also choose a Recovery thresholds, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.  
+    When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.
 
 ### Setup Notifications
 
