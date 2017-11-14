@@ -10,17 +10,17 @@
 
 {{ if $data }}
 <div class="row integration-labels mb-40">
-    {{ if $data.is_check }}
+    {{ if eq $data.type "check" }}
         <div class="agent col-12">
             <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_agent.png") }}" /><span>Agent Check</span>
         </div>
     {{ end }}
-    {{ if $data.is_statsd }}
+    {{ if eq $data.type "statsd" }}
         <div class="statsd col-12 ">
             <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png") }}" /><span>StatsD Check</span>
         </div>
     {{ end }}
-    {{ if $data.is_crawler }}
+    {{ if eq $data.type "crawler" }}
         <div class="crawler col-12">
             <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png") }}" /><span>Crawler</span>
         </div>
