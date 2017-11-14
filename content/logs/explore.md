@@ -151,6 +151,14 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 
 {{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" >}}
 
+### Saved Searches
+
+Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching wether the search name or query.
+
+{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" >}}
+
+
+
 ### Escaping of special characters
 The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
 For instance to search logs that contains `user=12345` the following search must be entered:
