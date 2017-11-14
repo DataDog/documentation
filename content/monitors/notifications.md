@@ -237,6 +237,18 @@ If you would like all monitors for a specific application or integration, you ca
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
 
+## Using message template variables to dynamically create @-mentions 
+
+Use message template variables within a monitor message to dynamically build **@-mentions**.  
+
+For example, if the rendered variable is setup as a channel in the Slack integration: 
+
+* `@slack-{{owner.name}}` post a slack DM message directly the owner of this monitor.
+
+* `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
+
+Learn more about this [here](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
+
 ## What's next ? 
 
 * [Learn how to create a monitor](/monitors/monitor_types)
