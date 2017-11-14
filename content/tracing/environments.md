@@ -2,10 +2,9 @@
 title: Environments
 kind: Documentation
 autotocdepth: 2
-hideguides: true
 customnav: tracingnav
 ---
-### Definition
+## Definition
 
 An environment is a first class dimension that you can use to scope a whole Datadog APM application.
 
@@ -28,13 +27,13 @@ Environments in traces and configuration files will be normalized:
 - upper case characters will be converted to lower case.
 
 
-#### Default environment
+### Default environment
 
 If you are not using this feature, you will get your data put in `env:none` which is the default behavior.
 
 Note that if you are using environments, you will still get a default `env:none` environment where all the non-tagged data will go.
 
-#### Setup
+### Setup
 
 There are several ways to specify an environment when reporting data:
 
@@ -46,18 +45,18 @@ There are several ways to specify an environment when reporting data:
 
     You can override the default tag used by the trace agent in the configuration. This will tag all the traces coming through the agent. It overrides the value above.
 
-    ~~~
+    ```
     [trace.config]
     env = pre-prod
-    ~~~
+    ```
 
 3. Per trace
 
     When submitting a single trace, you can specify an environment by tagging one of its span with the metadata key `env` and the value you would like. It overrides the value above.
 
-    ~~~
+    ```
     # in code this looks like
     span.set_tag('env', 'prod')
-    ~~~
+    ```
 
 

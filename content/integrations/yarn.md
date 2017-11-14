@@ -6,7 +6,7 @@ git_integration_title: yarn
 newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
-{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" >}}
+{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

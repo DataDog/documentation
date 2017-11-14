@@ -6,15 +6,17 @@ doclevel: basic
 description: "Send selected Datadog alerts and graphs to your team's Campfire channel."
 ---
 
-
-## Overview 
-
-Integrate with Campfire to:
-
-* be notified when someone posts on your stream
-* be notified when a metric alert is triggered
+## Overview
+//get-overview-from-git//
 
 ## Setup
-### Installation 
+//get-setup-from-git//
 
-Sign in with your [Basecamp account](https://launchpad.37signals.com/signin)
+## Data Collected
+//get-data-collected-from-git//
+
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

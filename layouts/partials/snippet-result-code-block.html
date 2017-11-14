@@ -1,8 +1,14 @@
 {{ $dot := $.context }}
 
-{{ $file := $.file }}
+{{ if (in $.file "/") }}
+    {{ $.context.Scratch.Set "snipfile" .file}}
+{{ else }}
+    {{ $.context.Scratch.Set "snipfile" (printf "code_snippets/results/result.%s" .file)}}
+{{ end }}
+{{ $file := $.context.Scratch.Get "snipfile" }}
 
-{{ $file_ext := (index (split $file ".") 1) }}
+{{ $ext_index := (sub (len (split $file ".")) 1) }}
+{{ $file_ext := (index (split $file ".") $ext_index) }}
 
 {{ $disable_highlight := $.disable_highlight }}
 {{ $static := $.static }}
@@ -12,7 +18,7 @@
 
 {{- range $k, $v := $ext_to_lang -}}
 
-  {{- $file_content := readFile (printf "code_snippets/results/result.%s" $file) -}}
+  {{- $file_content := readFile ($file) -}}
 
   {{- if eq $k $file_ext -}}
 

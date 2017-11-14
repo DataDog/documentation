@@ -2,7 +2,6 @@
 title: Parsing
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
 beta: true
@@ -40,7 +39,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 You would have at the end this structued log:
 
-{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" >}}
+{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" >}}
 
 ## Matcher
 
@@ -123,12 +122,12 @@ Rule
 rule keyvalue("="," "))
 ```
 
-{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" >}}
+{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" >}}
 
 You don't need to specify the name of your parameters as they were already contained in the log.
 If you add an **extract** parameter in your rule pattern you would have:
 
-{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" >}}
+{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" >}}
 
 ### Parsing dates
 
@@ -168,9 +167,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" >}}
+{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" >}}
 
-{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" >}}
+{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" >}}
 
 ### Optional attribute 
 
@@ -188,9 +187,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
-{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" >}}
+{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" >}}
 
-{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" >}}
+{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" >}}
 
 ### Regex 
 Use the regex matcher to match any substring of your log message based on literal regex rules.
@@ -206,7 +205,7 @@ Here we just look for the id to extract
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
-{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" >}}
+{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" >}}
 
 ## What's next 
 

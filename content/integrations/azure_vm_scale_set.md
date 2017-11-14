@@ -8,22 +8,19 @@ newhlevel: true
 description: "Track by-set metrics: bytes in and out, disk operations, CPU usage, and more."
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" >}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" responsive="true" >}}
 
 ## Overview
-Virtual machine scale sets are an Azure Compute resource you can use to deploy, manage, and autoscale a set of identical VMs.
-
-Get metrics from Azure Virtaul Machine Scale Set to:
-
-* Visualize the performance of your Virtual Machine Scale Sets
-* Correlate the performance of your Virtual Machine Scale Sets with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

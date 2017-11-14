@@ -8,20 +8,17 @@ description: "Track key Google Cloud Machine Learning metrics."
 ---
 
 ## Overview
-Google Cloud Machine Learning is a managed service that enables you to easily build machine learning models, that work on any type of data, of any size.
-
-Get metrics from Google Machine Learning to:
-
-* Visualize the performance of your ML Services
-* Correlate the performance of your ML Services with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-Look for `gcp.ml.*` metrics within the Datadog App
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//
 

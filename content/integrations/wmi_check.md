@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" >}}
+{{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" responsive="true" >}}
 
 ## Overview
 
@@ -28,7 +28,7 @@ If you are only collecting standard metrics from Microsoft Windows and other pac
 1.  Submit perfomance counters using System.Diagnostics in .NET, then access them via WMI.
 2.  Implement a COM-based WMI provider for your application. You would typically only do this if you are using a non-.NET language.
 
-To learn more about using System.Diagnostics, refer to [the MSDN documentation here](https://msdn.microsoft.com/en-us/library/system.diagnostics.performancecounter(v=vs.110).aspx). After adding your metric you should be able to find it in WMI. To browse the WMI namespaces you may find this tool useful: [WMI Explorer](https://wmie.codeplex.com/). You can find the same information with Powershell [here](https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/getting-wmi-objects--get-wmiobject-). Also review the information in the [Datadog Knowledge Base article](https://help.datadoghq.com/hc/en-us/articles/205016075-How-to-retrieve-WMI-metrics).
+To learn more about using System.Diagnostics, refer to [the MSDN documentation here](https://msdn.microsoft.com/en-us/library/system.diagnostics.performancecounter(v=vs.110).aspx). After adding your metric you should be able to find it in WMI. To browse the WMI namespaces you may find this tool useful: [WMI Explorer](https://wmie.codeplex.com/). You can find the same information with Powershell [here](https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/getting-wmi-objects--get-wmiobject-). Also review the information in the [Datadog Knowledge Base article](/faq/how-to-retrieve-wmi-metrics).
 
 If you assign the new metric a category of My_New_Metric, the WMI path will be
 `\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric`
@@ -127,7 +127,7 @@ Setting this will cause any instance number to be removed from tag_by values i.e
 
 To validate your installation and configuration, click the Agent Status menu from the Logs and Status button. The output should contain a section similar to the following:
 
-{{< img src="integrations/wmi/wmivalidate.png" style="width:400px;" >}}
+{{< img src="integrations/wmi/wmivalidate.png" alt="wmi validate" responsive="true" >}}
 
 ## Further Reading
 {{< insert-example-links conf="wmi_check" check="wmi_check" >}}

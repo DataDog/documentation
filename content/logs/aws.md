@@ -2,7 +2,6 @@
 title: AWS Log Collection
 kind: Documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 beta: true
 ---
@@ -16,35 +15,35 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 #### Create a new lambda function
 
 1. Navigate to the [Lambda Console](https://console.aws.amazon.com/lambda/home?region=us-east-1) and create a new function:
-    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" >}}
+    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
 
 2. Select **Author from scratch** and give the function a unique name.
-    {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" >}}
+    {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" responsive="true" >}}
 3. For `Role`, select **Create new role from template(s)** and give the role a unique name
 4. Under Policy templates, search for and select **s3 object read-only permissions**
-    {{< img src="logs/aws/basic_information.png" alt="Basic Information" >}}
+    {{< img src="logs/aws/basic_information.png" alt="Basic Information" responsive="true" >}}
 5. Select **Create Function**
 
 #### Provide the code and configure the lambda
 
 1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
 2. Change the Runtime to **Python 2.7** and set the handler to **lambda_function.lambda_handler**
-    {{< img src="logs/aws/select_python.png" alt="Select Python" >}}
+    {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" >}}
 3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
     
     * Setup an environment variable (Preferred)
     * Edit the code directly with your Datadog API Key
-    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" >}}
+    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
 4. Set the memory to the highest possible value.
 5. Set the timeout limit. We recommend **120 seconds**
-    {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" >}}
+    {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
 6. Scroll back to the top of the page and hit **Save and test**
 
 #### Test your Lambda
 
 1. Configure the test event. Select **Cloudwatch Logs** as the sample event.
-    {{< img src="logs/aws/test_event.png" alt="Test Event" >}}
+    {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
 2. Save and test.
 
 ## Collection
@@ -54,13 +53,13 @@ Setup the relevant triggers for each AWS service you want to monitor.
 
 #### S3, Cloudwatch, API Gateway, Kinesis and SNS
 In your lambda, go in the triggers tab and select `Add Trigger`:
-{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" >}}
+{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
 Select the log source and then follow the AWS instructions: 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" >}}
+{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" >}}
 
 For instance, do not forget to set the correct event type on S3 Buckets:
-{{< img src="logs/aws/object_created.png" alt="Object Created" >}}
+{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
 
 #### ELB
 
@@ -76,10 +75,10 @@ Add ELB logs to Datadog to:
 
 ELB logs are written in a s3 bucket and consumed by a lambda function.
 Enable the logging on your ELB first to collect your logs:
-{{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" >}}
+{{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" responsive="true" >}}
 
 Set interval to **5 minutes** and define your s3 buckets:
-{{< img src="logs/aws/s3_location.png" alt="S3 Location" >}}
+{{< img src="logs/aws/s3_location.png" alt="S3 Location" responsive="true" >}}
 
 Then go back to the Lambda function and define a trigger on the corresponding s3 bucket.
 
@@ -88,7 +87,7 @@ Then go back to the Lambda function and define a trigger on the corresponding s3
 AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made with the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
 
 When you define your Trails, select a s3 bucket to write the logs in:
-{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" >}}
+{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" >}}
 
 Link the lambda function to this s3 bucket to send your logs to Datadog.
 

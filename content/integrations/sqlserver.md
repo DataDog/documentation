@@ -7,7 +7,7 @@ doclevel: basic
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" >}}
+{{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

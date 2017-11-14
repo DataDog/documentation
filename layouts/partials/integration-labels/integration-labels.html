@@ -1,0 +1,29 @@
+{{ $name := .File.TranslationBaseName }}
+{{ $integration_list := (where (getJSON "integrations.json") "is_public" true) }}
+{{ $.Scratch.Add "data" (slice) }}
+{{ range $index, $element := $integration_list }}
+    {{ if eq ($element.name | lower) ($name | lower) }}
+        {{ $.Scratch.Set "data" $element }}
+    {{ end }}
+{{ end }}
+{{ $data := $.Scratch.Get "data" }}
+
+{{ if $data }}
+<div class="row integration-labels mb-40">
+    {{ if $data.is_check }}
+        <div class="agent col-12">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_agent.png") }}" /><span>Agent Check</span>
+        </div>
+    {{ end }}
+    {{ if $data.is_statsd }}
+        <div class="statsd col-12 ">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png") }}" /><span>StatsD Check</span>
+        </div>
+    {{ end }}
+    {{ if $data.is_crawler }}
+        <div class="crawler col-12">
+            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png") }}" /><span>Crawler</span>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

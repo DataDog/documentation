@@ -1,0 +1,5 @@
+{{ if eq .Site.Params.environment "preview" }}
+<div class="preview-banner">
+    PREVIEWING: <a class="no-check" href="https://github.com/DataDog/documentation/tree/{{ .Site.Params.branch }}"> {{ .Site.Params.branch }} </a>
+</div>
+{{ end }}

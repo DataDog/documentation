@@ -7,7 +7,7 @@ git_integration_title: couchbase
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" >}}
+{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

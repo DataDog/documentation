@@ -10,7 +10,7 @@ aliases:
 description: "Track Chef client runs including metrics on completion times, analytics on resource changes, and success rates."
 ---
 
-{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" >}}
+{{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" responsive="true" >}}
 
 ## Overview
 
@@ -38,7 +38,21 @@ This is commonly done via `role` or `environment` files, or another cookbook dec
 
 Here is an example of a `base.rb` role file, typically applied to every host in an organization.
 
-{{< snippet-code-block file="guides-chef-base-role-agent.rb" >}}
+```ruby
+name 'base'
+description 'base role, runs on every node'
+run_list(
+  'ntp',
+  'datadog::dd-agent',
+  'some_other_base_cookbook::recipe'
+)
+default_attributes(
+  'datadog' => {
+    'api_key' => "PUT_YOUR_API_KEY_HERE",
+    'application_key' => "PUT_YOUR_APPLICATION_KEY_HERE"
+  }
+)
+```
 
 Note that there are two keys needed. Your API Key can be found in Datadog, under the Integrations => API menu item, or click [this link](https://app.datadoghq.com/account/settings#api) to log in and go there directly.
 
@@ -64,7 +78,22 @@ Success will be found in the "Low" priority, whereas failures are of "Normal" pr
 
 Adding the handler is very simple, as you can see in this role snippet:
 
-{{< snippet-code-block file="guides-chef-base-role-handler.rb" >}}
+```ruby
+name 'base'
+description 'base role, runs on every node'
+run_list(
+  'datadog::dd-handler',
+  'ntp',
+  'datadog::dd-agent',
+  'some_other_base_cookbook::recipe'
+)
+default_attributes(
+  'datadog' => {
+    'api_key' => "PUT_YOUR_API_KEY_HERE",
+    'application_key' => "PUT_YOUR_APPLICATION_KEY_HERE"
+  }
+)
+```
 
 All we've done is add the `datadog::dd-handler` recipe to the beginning of the node's run list. Adding it to the beginning allows the handler to capture details about everything in it observes after being invoked, so if you added it to the end of the `run_list` and something failed prior to it being executed, you may not receive the full output.
 
@@ -129,7 +158,27 @@ Including one of these recipes in your run list will install any monitoring depe
 
 Here's an example of how we've extended a `webserver.rb` role file to automatically monitor Apache via Datadog:
 
-{{< snippet-code-block file="guides-chef-integration-apache.rb" nocomments="true" >}}
+```ruby
+name 'webserver'
+description 'Webserver role, runs apache'
+run_list(
+  'apache2',
+  'datadog::apache',
+)
+default_attributes(
+  'apache' => {
+    'ext_status' => true,
+  }
+  'datadog' => {
+    'apache' => {
+      'instances' => [
+        { 'status_url' => 'http://localhost:8080/server-status/',
+          'tags' => ['extra_tag', 'env:example'] }
+      ]
+    }
+  }
+)
+```
 
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
 

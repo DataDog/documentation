@@ -8,7 +8,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" >}}
+{{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

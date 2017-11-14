@@ -8,7 +8,7 @@ git_integration_title: spark
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/spark/sparkgraph.png" alt="spark graph" >}}
+{{< img src="integrations/spark/sparkgraph.png" alt="spark graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

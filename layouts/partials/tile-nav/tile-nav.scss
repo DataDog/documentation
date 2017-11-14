@@ -1,0 +1,65 @@
+$ddpurple:    #774DA2;
+
+$tilecolors: (
+    agent: $ddpurple,
+    integrations: #2BE2D5,
+    graphing: #DEE144,
+    alerting: #FFCA07,
+    tracing: #FE6638,
+    developers: #D6032A
+);
+
+.tile-nav {
+  div:nth-child(n+4) .card {
+    margin-bottom:0px;
+  }
+  .card {
+    height: 194px;
+    margin-bottom: 30px;
+    .card-body {
+      padding:0;
+      img {
+        margin: 26px auto 0 auto;
+        width: 80px;
+        display:block;
+      }
+      .title {
+        font-weight: 600;
+        margin-bottom: 0;
+        margin-top: 7px;
+      }
+    }
+  }
+  /* assign each tile its color from map above */
+  @each $tile, $color in $tilecolors {
+    .#{$tile} {
+      &:hover {
+        border-color: $color;
+      }
+      .title {
+        color: $color;
+      }
+    }
+  }
+}
+
+
+//@include media-breakpoint-down(xs) {
+@media (max-width: 575px) {
+  .tile-nav {
+    .card {
+      height: 90px;
+      margin-bottom:15px;
+      .card-body {
+        img {
+          margin: 13px auto 0 auto;
+          width: 47px;
+        }
+        .title {
+          font-size: 16px;
+          margin-top: 3px;
+        }
+      }
+    }
+  }
+}

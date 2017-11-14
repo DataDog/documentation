@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
-from os import sep, makedirs, getenv
 from tqdm import *
+from os import sep, makedirs, getenv
+import platform
 import yaml
 import requests
 import tempfile
@@ -11,6 +12,7 @@ import glob
 import fileinput
 import json
 import re
+import os 
 
 """
 Variables
@@ -18,6 +20,7 @@ Variables
 DESC_TOKEN = "{{< get-desc-from-git >}}"
 DESC_ATTRIBUTE = "short_description"
 INTEGRATION_FOLDER = "content/integrations/"
+INTEGRATION_DATAFILE = "integrations.json"
 
 OVERVIEW_TOKEN = "//get-overview-from-git//"
 OVERVIEW_PATTERN = r'## Overview((?s).*)## Setup'
@@ -42,6 +45,7 @@ METRIC_PATERN= r'See \[metadata\.csv\].*provided by this (integration|check).'
 Functions
 """
 
+
 def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     """
     Using the github api downloads manifest files to a temporary location for processing
@@ -61,35 +65,33 @@ def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
     response = requests.get(url, headers=headers)
     
     """
-    Downloading manifest.json for integrations core repo only
+    Downloading manifest.json
     """
     if response.status_code == requests.codes.ok:
-        if not is_dogweb:
-            for obj in tqdm(response.json()):
-                name = obj.get('name', '')
-                if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                    to_manifest = '{}/manifest.json'.format(name)
-                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
-                    if response_manifest.status_code == requests.codes.ok:
-                        with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                            f.write(response_manifest.content)
+        for obj in tqdm(response.json()):
+            name = obj.get('name', '')
+            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
+                to_manifest = '{0}/{1}/manifest.json'.format(directory, name) if is_dogweb else '{}/manifest.json'.format(name)
+                response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
+                if response_manifest.status_code == requests.codes.ok:
+                    with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
+                        f.write(response_manifest.content)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
 
     """
-    Downloading readme.md for integrations core repo only
+    Downloading readme.md
     """
     if response.status_code == requests.codes.ok:
-        if not is_dogweb:
-            for obj in tqdm(response.json()):
-                name = obj.get('name', '')
-                if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                    to_manifest = '{}/README.md'.format(name)
-                    response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
-                    if response_manifest.status_code == requests.codes.ok:
-                        with open('{}{}_readme.md'.format(to_path, name), mode='wb+') as f:
-                            f.write(response_manifest.content)
+        for obj in tqdm(response.json()):
+            name = obj.get('name', '')
+            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
+                to_readme = '{0}/{1}/README.md'.format(directory, name) if is_dogweb else '{}/README.md'.format(name)
+                response_readme = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_readme), headers=headers)
+                if response_readme.status_code == requests.codes.ok:
+                    with open('{}{}_readme.md'.format(to_path, name), mode='wb+') as f:
+                        f.write(response_readme.content)
     else:
         print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
         exit(1)
@@ -145,6 +147,7 @@ def manifest_get_data(to_path,key_name,attribute):
     with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
         manifest_json = json.load(manifest)
         return manifest_json[attribute]
+
 
 def parse_args(args=None):
     """
@@ -217,29 +220,76 @@ def readme_get_section(from_path,key_name):
 
     return data_array
 
-def update_integration_pre_build(from_path=None, to_path=None):
+
+def build_integrations_datafile(file_name, is_dogweb, is_integrations):
+    existing_json = []
+
+    # create the integrations datafile if for some reason its not there
+    if not exists(INTEGRATION_DATAFILE):
+        print('create {}...'.format(INTEGRATION_DATAFILE))
+        with open(INTEGRATION_DATAFILE, 'w') as outfile:
+            json.dump(existing_json, outfile, sort_keys=True, indent=4)
+    else:
+        with open(INTEGRATION_DATAFILE) as f:
+            existing_json = json.load(f)
+
+    # get list of names in existing json
+    names = [d['name'] for d in existing_json if 'name' in d]
+
+    # this file json data
+    with open(file_name) as data_file:
+        data = json.load(data_file)
+        name = data.get('name', '')
+        if name in names:
+            # update
+            for obj in existing_json:
+                if obj.get('name', '') == name:
+                    data['is_crawler'] = is_dogweb
+                    data['is_check'] = is_integrations
+                    data['is_statsd'] = False
+                    obj.update(data)
+        else:
+            # add custom data
+            data['is_crawler'] = is_dogweb
+            data['is_check'] = is_integrations
+            data['is_statsd'] = False
+            # add to file
+            existing_json.append(data)
+        # write back out changes
+        with open(INTEGRATION_DATAFILE, 'w') as outfile:
+            json.dump(existing_json, outfile, sort_keys=True, indent=4)
+
+
+def update_integration_pre_build(type=None, from_path=None, to_path=None):
     """
     All modifications that may happen to a integration content are here
     
     :param from_path:   the input path where we scrap data from
     :param to_path:     the output path to integration md files
     """
-    
+    is_dogweb = True if type == 'dogweb' else False
+    is_integrations = True if type == 'integrations' else False
     if exists(from_path):
         pattern = '**/*_manifest.json'
         for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
             key_name = basename(file_name.replace('_manifest.json', ''))
+
+            """
+            Build integrations datafile for integrations page tiles
+            """
+            build_integrations_datafile(file_name, is_dogweb, is_integrations)
             
             """
             Scraping all sections that we can found
             """
-            data_array = readme_get_section(from_path, key_name)
+            if os.path.isfile('{}{}_readme.md'.format(from_path,key_name)):
+                data_array = readme_get_section(from_path, key_name)
 
             """
             Gathering the manifest short description and adding the right token
             """
 
-            data_array.append([DESC_TOKEN,manifest_get_data(from_path,key_name,DESC_ATTRIBUTE)])
+            data_array.append([DESC_TOKEN, manifest_get_data(from_path, key_name, DESC_ATTRIBUTE)])
 
             """
             Inlining the data in the doc file
@@ -248,6 +298,7 @@ def update_integration_pre_build(from_path=None, to_path=None):
     else:
         print('Path does not exist: {}'.format(from_path))
         exit(1)
+
 
 def sync(*args):
     """
@@ -264,7 +315,8 @@ def sync(*args):
     options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
 
     # setup path variables
-    extract_path = '{}'.format(join(tempfile.gettempdir(), "extracted") + sep)
+    tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+    extract_path = '{}'.format(join(tempdir, "extracted") + sep)
     dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
     integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
     dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
@@ -285,15 +337,30 @@ def sync(*args):
     makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
     makedirs(integrations_extract_path, exist_ok=True)
 
+    # sync from dogweb, download if we don't have it (token required)
+    if not options.dogweb:
+        if options.token:
+            options.dogweb = dogweb_extract_path
+            print("DOWNLOADING DOGWEB REPO")
+            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
+        else:
+            print('No Github token.. dogweb retrieval failed')
+            exit(1)
 
     # sync from integrations, download if we don't have it (public repo so no token needed)
     # (this takes precedence so will overwrite yaml files)
     if not options.integrations:
         options.integrations = integrations_extract_path
+        print("DOWNLOADING INTEGRATIONS CORE REPO")
         download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
     
-    print('Updating integrations description...')
-    update_integration_pre_build(options.integrations, INTEGRATION_FOLDER)
+    if options.integrations:
+        print('Updating integrations description for {}...'.format(options.integrations))
+        update_integration_pre_build("integrations", options.integrations, INTEGRATION_FOLDER)
+
+    if options.dogweb:
+        print('Updating integrations description for {}...'.format(options.dogweb))
+        update_integration_pre_build("dogweb", options.dogweb + 'integration' + sep, INTEGRATION_FOLDER)
 
 if __name__ == '__main__':
     sync()

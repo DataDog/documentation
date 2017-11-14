@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/rabbitmq/rabbitmqdashboard.png" alt="RabbitMQ Dashboard" >}}
+{{< img src="integrations/rabbitmq/rabbitmqdashboard.png" alt="RabbitMQ Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//
