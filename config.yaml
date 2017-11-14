@@ -402,7 +402,7 @@ languages:
           weight: 80
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
-          name: "Api"
+          name: "Trace API"
           url: "/api/#traces"
           weight: 90
           parent: menu_references_tracing
@@ -422,7 +422,7 @@ languages:
           weight: 100
         # DEVELOPERS - Subnav start
         - identifier: customnav_developersnav_api
-          name: "Api"
+          name: "API"
           url: "/api/"
           weight: 30
           parent: menu_references_developers
