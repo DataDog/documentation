@@ -3,6 +3,18 @@ title: Graphing Functions
 kind: documentation
 autotocdepth: 2
 customnav: graphingnav
+aliases: 
+  - /examples/aws-metrics/
+  - /examples/month_before/
+  - /examples/graphing-functions/
+  - /examples/day_before/
+  - /examples/json-editing/
+  - /examples/nginx-metrics/
+  - /examples/dashboards/
+  - /examples/hour_before/
+  - /examples/os-metrics/
+  - /examples/week_before/
+  - /examples/cassandra-metrics/
 ---
 
 ## Arithmetic
