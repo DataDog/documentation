@@ -21,7 +21,6 @@ customnav: integrationsnavv
 * [Where are my ELB latency metrics?](/integrations/faq/where-are-my-elb-latency-metrics)
 * [I removed my AWS EC2 integration. Why do my hosts still have AWS tags?s](/integrations/faq/i-removed-my-aws-ec2-integration-why-do-my-hosts-still-have-aws-tags)
 * [Does Datadog support AWS ALB (Application Load Balancer)?](/integrations/faq/does-datadog-support-aws-alb-application-load-balancer)
-* [Why won't my monitor trigger when the Agent does not report ? ](/integrations/faq/why-won-t-my-monitor-trigger-when-the-agent-does-not-report)
 * [Get your AutoScaling Group events and metrics](/integrations/faq/get-your-autoscaling-group-events-and-metrics)
 * [How do I pull my EC2 tags without using the AWS integration ?](/integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration)
 * [Additional AWS Metrics - Min/Max/Sum](/integrations/faq/additional-aws-metrics-min-max-sum)
