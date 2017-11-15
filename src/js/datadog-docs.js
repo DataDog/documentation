@@ -324,9 +324,12 @@ $(document).ready(function () {
         if (amount === undefined) {
             // calc from objects instead
             if($(window).width() <= 991) {
-                amount = 183; //at mobile
+                // at mobile
+                amount = $('body > header').height();
+                $('.api-nav > div').each(function() { amount += $(this).height(); });
             } else {
-                amount = 64; //at desktop
+                // at desktop
+                amount = $('body > header').height();
             }
         }
         var href = '#'+id;
