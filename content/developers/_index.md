@@ -18,7 +18,7 @@ While you can directly submit metrics through [our API](/api), we also provide d
 * The Datadog agent bundles [DogstatsD](/developers/dogstatsd), a powerful _statsd_ daemon with additional capacities, that will allow you to submit metrics through UDP, and benefit of a better control on your metric metadata and aggregation.
 [Multiple libraries](/developers/libraries) are available to ease the use of your local or distant _DogstatsD_.
 
-* If you would like regular metric submissions from a particular setup (similar to what is done by the agent for the systems we directly support), you can also directly [add your own integration](/developers/new_integration). We are providing detailed steps and resources so that you can plug a new integration inside you agent and let you monitor any of your services.
+* If you would like regular metric submissions from a particular setup (similar to what is done by the agent for the systems we directly support), you can also directly [add your own integration](/integrations/new_integration). We are providing detailed steps and resources for [developing](/integrations/integration_sdk) and [testing](/developers/testing/) new integrations so that you can plug a new integration inside you agent and let you monitor any of your services.
 
 ## Additional libraries
 Other than libraries to reach our API endpoints and submit custom metrics through _DogstatsD_, you can also find here our [APM tracing utilities](/developers/libraries/#apm-tracing-client-libraries), and a selection of [community integrations](/developers/libraries/#community-integrations).
