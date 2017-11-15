@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 ## Common SQL Server Connection Troubles
 
-You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile](https://app.datadoghq.com/account/settings#integrations/sql_server) in your account. This integration offers a number of basic [SQL Server metrics](/integrations/sqlserver/#metrics), which you can expand to [your own liking](/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration). 
+You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile](https://app.datadoghq.com/account/settings#integrations/sql_server) in your account. This integration offers a number of basic [SQL Server metrics](/integrations/sqlserver/#metrics), which you can expand to [your own liking](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration). 
 
 But there is a common connection error that users run into while they're setting up this integration, one that can be especially frustrating to troubleshoot since there are many variables that can cause it. In full, the error looks like this:
 ```
