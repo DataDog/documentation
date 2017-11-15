@@ -8,7 +8,8 @@ configdirectory: ~/.datadog-agent/
 logdirectory: /var/log/datadog/
 supervisorlog: /var/log/datadog/supervisord.log
 os: osx
-
+aliases:
+    - /guides/basic_agent_usage/osx/
 ---
 
 ## Overview

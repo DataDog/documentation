@@ -3,6 +3,8 @@ title: Dashboards
 kind: documentation
 autotocdepth: 3
 customnav: graphingnav
+aliases:
+    - /guides/templating/
 ---
 
 To create a [TimeBoard](/graphing/dashboards/timeboard/) or a [ScreenBoard](/graphing/dashboards/screenboard/) Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.

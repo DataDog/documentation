@@ -4,6 +4,7 @@ kind: documentation
 autotocdepth: 3
 aliases:
   - /guides/livecontainers
+  - /infrastructure/livecontainers/
 customnav: infrastructurenav
 ---
 

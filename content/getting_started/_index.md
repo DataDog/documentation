@@ -4,6 +4,7 @@ kind: documentation
 customnav: gettingstartednav
 aliases:
   - /overview
+  - /guides/overview/
 ---
 
 So, you've just finished [installing][1] the Datadog

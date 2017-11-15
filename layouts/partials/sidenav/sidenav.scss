@@ -32,12 +32,14 @@ aside.sidenav {
   background:#F8F8F8;
   width:100%;
   //height:100%;
-  min-height:1000px;
+  //min-height:1000px;
   position:relative;
   z-index:2;
   padding-right:15px;
   padding-bottom: 50px;
   &> .row {
+    overflow-x: hidden;
+    overflow-y: auto;
     &:before,
     &:after {
       content:"";

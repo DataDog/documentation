@@ -2,6 +2,8 @@
 title: Basic Agent Usage for Windows
 kind: documentation
 platform: Windows
+aliases:
+    - /guides/basic_agent_usage/windows/
 ---
 
 ## Overview

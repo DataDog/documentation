@@ -5,6 +5,8 @@ autotocdepth: 3
 customnav: graphingnav
 aliases:
     - /guides/eventsemail
+    - /guides/eventcorrelation/
+    - /guides/markdown/
 ---
 
 ## Event Query Language

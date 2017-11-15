@@ -244,15 +244,8 @@ def build_integrations_datafile(file_name, is_dogweb, is_integrations):
             # update
             for obj in existing_json:
                 if obj.get('name', '') == name:
-                    data['is_crawler'] = is_dogweb
-                    data['is_check'] = is_integrations
-                    data['is_statsd'] = False
                     obj.update(data)
         else:
-            # add custom data
-            data['is_crawler'] = is_dogweb
-            data['is_check'] = is_integrations
-            data['is_statsd'] = False
             # add to file
             existing_json.append(data)
         # write back out changes
