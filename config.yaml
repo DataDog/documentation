@@ -168,6 +168,21 @@ languages:
           pre: "nav_integrations"
           weight: 50
         # INTEGRATIONS - Subnav start
+        - identifier: customnav_integrationsnav_integration_sdk
+          name: "Integration SDK"
+          url: "/integrations/integration_sdk/"
+          weight: 60
+          parent: menu_references_integrations
+        - identifier: customnav_integrationsnav_new_integration
+          name: "New Integration"
+          url: "/integrations/new_integration/"
+          weight: 70
+          parent: menu_references_integrations
+        - identifier: customnav_integrationsnav_faq
+          name: "FAQ"
+          url: "/integrations/faq/"
+          weight: 80
+          parent: menu_references_integrations
         # INTEGRATIONS - Subnav end
 
 
@@ -436,11 +451,6 @@ languages:
           url: "/developers/libraries/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_developersnav_integration_sdk
-          name: "Integration SDK"
-          url: "/developers/integration_sdk/"
-          weight: 60
-          parent: menu_references_developers
         - identifier: customnav_developersnav_metrics
           name: "Metrics"
           url: "/developers/metrics/"
@@ -450,11 +460,6 @@ languages:
           name: "Metric Types"
           url: "/developers/metrictypes/"
           weight: 80
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_new_integration
-          name: "New Integration"
-          url: "/developers/new_integration/"
-          weight: 90
           parent: menu_references_developers
         - identifier: customnav_developersnav_testing
           name: "Testing"
