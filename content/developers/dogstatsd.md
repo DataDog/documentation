@@ -351,5 +351,5 @@ Here's an example datagram:
 [1]: https://github.com/DataDog/dd-agent/pull/2104
 [2]: /developers/libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[4]: http://docs.datadoghq.com/faq/#api
+[4]: /developers/metrics/
 [5]: https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py

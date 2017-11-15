@@ -58,7 +58,7 @@ If these are more than a few minutes apart, you may want to look at the time set
 
 ### Issues getting integrations working
 
-Datadog has quite a few [integrations](http://docs.datadoghq.com/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
+Datadog has quite a few [integrations](/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
 
 Here is a quick guide for troubleshooting getting integrations installed:
 

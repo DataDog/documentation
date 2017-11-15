@@ -347,7 +347,7 @@ end
 Using the StatsD server bundled with the Datadog Agent is the simplest
 way of submitting metrics to Datadog, but it's not the only one. Here are some other ways of getting your metrics data into Datadog:
 
-* Submit metrics directly to Datadog's [HTTP API](https://docs.datadoghq.com/api/)
+* Submit metrics directly to Datadog's [HTTP API](/api/)
 * Use Dropwizard's Java [metrics](https://github.com/dropwizard/metrics) library, with the [metrics-datadog](https://github.com/coursera/metrics-datadog) backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera](https://www.coursera.org), and [Bazaarvoice](http://www.bazaarvoice.com) for the great contributions).
 
 ## Seeing Your Custom Metrics

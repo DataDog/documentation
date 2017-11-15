@@ -8,8 +8,7 @@ The Datadog SAML integration for SSO provides an easy pathway for linking an Org
 
 This article is meant to be used as an add-on to the main guide on this integration which is available by clicking the link below and focuses on some extra steps that may be required when connecting Datadog to ADFS.
 
-Single Sign On With SAML (main doc):
-http://docs.datadoghq.com/guides/saml
+[Single Sign On With SAML (main doc)](/account_management/saml)
 
 **The following steps should be followed when configure this with ADFS.**
 
@@ -23,8 +22,7 @@ Click the button on the right for Add a Relying Party Trust.
 This will open a wizard for the trust with a welcome screen describing the feature. Review the description and click Start to begin.
 {{< img src="account_management/faq/KWe4h6W.png" alt="KWe4h6W" responsive="true" >}}
 
-Import the Datadog SAML Metadata file available here:
-https://app.datadoghq.com/account/saml/metadata.xml
+Import the Datadog SAML Metadata file available [here](https://app.datadoghq.com/account/saml/metadata.xml).
 
 The file requires a login to access it, making it easiest to download then import by file instead of directly via the URL as shown in the import options below. (As a warning: when downloading the file, if you open and/or rename the file, that may end up changing the filetype which can cause xml parsing issues at the next step.)
 {{< img src="account_management/faq/UAjeUVL.png" alt="UAjeUVL" responsive="true" >}}

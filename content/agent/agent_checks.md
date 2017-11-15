@@ -505,4 +505,4 @@ If your issue continues, please reach out to Support with the help page that lis
 [1]: /integrations/integration_sdk/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/help/
+[4]: /help/

@@ -6,7 +6,7 @@ customnav: monitornav
 
 ## Overview 
 
-If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](http://docs.datadoghq.com/api/#monitor-create) if you add the "anomalies" function to the monitor query. The query will then follow this formula:
+If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the "anomalies" function to the monitor query. The query will then follow this formula:
 ```
 time_aggr(time_window):anomalies(space_aggr:metric{tags}, 'algorithm_used', deviation_number, direction='both/above/below') >= threshold_value
 Acceptable algorithm values are basic, agile, robust, or adaptive.

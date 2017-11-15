@@ -82,7 +82,7 @@ The following features can be enabled through the SAML Configuration dialog.
 
 With Just-in-Time provisioning, a user will be created within Datadog on the fly the first time they try to log in. This eliminates the need for admins to manually create user accounts one at a time.
 
-Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, please [contact](https://docs.datadoghq.com/help) support. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, please [contact](/help) support. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Admins in accounts using SAML can also set the default role for new Just-in-Time users. 
 The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 

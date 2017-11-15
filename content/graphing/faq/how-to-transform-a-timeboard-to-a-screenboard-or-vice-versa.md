@@ -8,7 +8,7 @@ To transform a TimeBoard to a ScreenBoard you can use the [script here](https://
 
 The usage is very simple, you provide the ID of the dashboard you want to convert, and the output will be the URL of the converted dashboard.
 
-This relies on the API get and post methods for [TimeBoards](https://docs.datadoghq.com/api/#timeboards) and [ScreenBoards](https://docs.datadoghq.com/api/#screenboards). 
+This relies on the API get and post methods for [TimeBoards](/api/#timeboards) and [ScreenBoards](/api/#screenboards). 
 
 First, retrieve the ID of the dashboard, you can find it in the URL of the dashboard
 

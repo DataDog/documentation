@@ -5,7 +5,7 @@ customnav: lognav
 beta: true
 ---
 
-Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in our documentation: https://docs.datadoghq.com/logs/parsing/.
+Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation](/logs/parsing/).
 
  At first sight, it can seem complicated to write a parsing rule. But once you have mastered a few tips, it becomes much easier.
 In this article, we will walk through parsing a log from the Datadog agent’s collector log :
@@ -39,7 +39,7 @@ In this article, we will walk through parsing a log from the Datadog agent’s c
 
 4. KeyValue 
     Never forget that there is a keyvalue filter than can automatically extract all your attributes.
-    Learn more about this with [our examples](https://docs.datadoghq.com/logs/parsing/#key-value)
+    Learn more about this with [our examples](/logs/parsing/#key-value)
 
 5. How to skip some part of your log message that should not be extracted as attribute
     Let’s use our example again:

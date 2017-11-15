@@ -5,7 +5,7 @@ customnav: lognav
 beta: true
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog](https://docs.datadoghq.com/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, please email [us](/help) for further assistance. 
+There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, please email [us](/help) for further assistance. 
 
 ### The agent needs to be restarted
 
