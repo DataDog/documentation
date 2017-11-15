@@ -18,7 +18,6 @@ The `{{comparator}}` template variable's value is always a relational operator. 
 
 {{< img src="monitors/faq/monitor_template_variable.png" alt="monitor_template_variable" responsive="true">}}
 
-
 For example, when an alert set to trigger when a value rises "above" 50, this syntax:
 
 ```
