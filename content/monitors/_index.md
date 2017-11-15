@@ -1,5 +1,5 @@
 ---
-title: Create Monitor
+title: Alerting
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
@@ -47,7 +47,7 @@ page by hovering over **Monitors** in the main menu and clicking **New Monitor**
 
 ## Export your monitor
 
-You can export the configuration JSON for a monitor right from the create screen. 
+You can export the configuration JSON for a monitor right from the create screen.
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
