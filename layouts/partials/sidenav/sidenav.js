@@ -93,8 +93,8 @@ $(document).ready(function () {
     $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
         var footer_h = $('body > footer').height();
-        //console.log(document.documentElement.clientHeight, );
-        $('.sidenav .sticky').css('maxHeight', document.documentElement.clientHeight - header_h);
+        var padding = 105;
+        $('.sidenav-nav').css('maxHeight', document.documentElement.clientHeight - header_h - padding);
     });
 
 
