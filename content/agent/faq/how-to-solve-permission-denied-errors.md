@@ -35,7 +35,7 @@ total 52300
 If those files are not owned by the dd-agent user, change the ownership with:
 
 ```
-If those files are not owned by the dd-agent user, change the ownership with:
+sudo chown -R dd-agent:dd-agent /var/log/datadog/
 ```
 
 Then [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent). 
