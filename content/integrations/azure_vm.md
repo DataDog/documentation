@@ -9,19 +9,16 @@ description: "Track Azure VM resource usage, network statistics, and more."
 ---
 
 ## Overview
-Azure Virtual Machine allows you to flexibly run virtualized environments with the ability to scale on-demand.
-
-Get metrics from Azure VM to:
-
-* Visualize the performance of your VMs
-* Correlate the performance of your VMs with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

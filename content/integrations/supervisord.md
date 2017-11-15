@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/supervisor/supervisorevent.png" alt="Supervisor Event" >}}
+{{< img src="integrations/supervisor/supervisorevent.png" alt="Supervisor Event" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

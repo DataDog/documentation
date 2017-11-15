@@ -7,7 +7,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" >}}
+{{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

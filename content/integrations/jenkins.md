@@ -7,7 +7,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" >}}
+{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" >}}
 
 ## Overview
 

@@ -15,7 +15,7 @@
   {{ $.Scratch.Add "img_param" "fit=max&w=850" }}
 {{ end }}
 
-{{ $img_param_q := "fm=jpg&q=10" }}
+{{ $img_param_q := "fm=jpg&q=100" }}
 {{ $img_param := $.Scratch.Get "img_param" }}
 
 {{/* override default imgix request params for popup img */}}
@@ -30,19 +30,17 @@
 <span class="shortcode-wrapper shortcode-img">
   <figure {{if $figure_class}}class="{{ $figure_class }}" {{end}} style="{{ (.Get "style") | safeCSS }}">
     {{- if .Get "popup" -}}
-      <a href="{{ print $img "?" $pop_param | relURL }}" class="pop">
+      <a href="{{ print $img "?" $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
     {{- else if .Get "href" -}}
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
-    <img class="lazyload {{- if .Get "responsive" }} img-responsive {{ end }}"
-         src="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
+    <img class="lazyload {{- if .Get "responsive" }} img-fluid {{ end }}"
+         src="{{ print $img "?" $img_param "&" $img_param_q | relURL }}"
          alt="{{ with .Get "alt"}}{{.}}{{end}}"
          data-src="{{ print $img "?" $pop_param | relURL }}"
          data-srcset="{{ print $img "?" $pop_param | relURL }}"
-         {{ if eq .Page.Type "blog" }}
-           srcset="{{ print $img "?" $img_param "?" $img_param_q | relURL }}"
-         {{ end }}
+           srcset="{{ print $img "?" $img_param "&" $img_param_q | relURL }}"
          {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
          {{ end }}

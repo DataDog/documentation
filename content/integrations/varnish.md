@@ -7,7 +7,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" >}}
+{{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

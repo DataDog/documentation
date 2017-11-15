@@ -8,7 +8,7 @@ updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

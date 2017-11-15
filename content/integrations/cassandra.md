@@ -6,7 +6,7 @@ git_integration_title: cassandra
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" >}}
+{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

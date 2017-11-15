@@ -1,0 +1,109 @@
+<!-- from docs way
+{{ $integrations := where (where .Site.Pages "Params.kind" "=" "integration") ".Params.beta" "!=" "true" }}
+{{ $lower := sort $integrations "Params.integration_title" }}
+{{ $.Scratch.Set "lower_titles" (slice) }}
+
+{{ range $lower }}
+    {{ $.Scratch.Add "lower_titles" (lower .Params.integration_title) }}
+{{ end }}
+
+{{ range sort ($.Scratch.Get "lower_titles") }}
+    {{ $lower_int := . }}
+    {{ range $int := $integrations }}
+        {{ if eq $lower_int (lower $int.Params.integration_title) }}
+            <li class="list-group-item col-lg-2 col-md-3 col-sm-4 col-xs-6"><a href="{{.Permalink}}">{{ .Params.integration_title}}</a></li>
+        {{ end }}
+    {{ end }}
+{{ end }}-->
+
+{{ $dot := . }}
+
+<!-- From data file -->
+{{ $integration_list := (where (getJSON "integrations.json") "is_public" true) }}
+
+<!-- build filters -->
+{{ $.Scratch.Set "filters" (slice)}}
+{{ range $index, $element := $integration_list }}
+    {{ range $e := $element.categories }}
+        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
+            {{ $.Scratch.Add "filters" ($e | lower) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+<!-- build tiles -->
+{{ $.Scratch.Add "row-count" 0 }}
+{{ $.Scratch.Set "ints" (slice)}}
+{{ range $k, $v := $integration_list }}
+    {{ $.Scratch.Set "curr_categories" (slice)}}
+    {{ range $i, $e := $v.categories }}
+        {{ $.Scratch.Add "curr_categories" (print "cat-" (replace $e "/" "" | urlize)) }}
+    {{ end }}
+    {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.name "image" $v.image "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $v.docs_link "blurb" $v.short_description "public_title" $v.public_title) }}
+{{ end }}
+
+{{ $json := $.Scratch.Get "ints" | jsonify }}
+{{ $test := printf "%s" $json }}
+
+<script type="text/javascript">
+    var data_resources = [];
+    var integrations = {{ $test }};
+    window.integrations = JSON.parse(integrations);
+</script>
+
+<div class="d-block d-sm-none mt-40 mb-40">
+    <div class="dropdown show">
+        <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL</a>
+        <div class="dropdown-menu" data-ref="mobilecontrols" aria-labelledby="dropdownMenuLink">
+            <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">ALL</a>
+            {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
+                <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+
+<div class="filters controls d-none d-sm-block" data-ref="controls">
+    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">ALL</a>
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+</div>
+
+<!-- using 5 col -->
+<div class="row no-gutters integration-tiles mt-4" data-ref="container">
+    {{ range $i, $v := $integration_list }}
+        {{ $.Scratch.Set "formatSlice" (slice)}}
+        {{ range $i, $word := (split $v.name "_") }}
+            {{ $.Scratch.Add "formatSlice" (print (substr $word 0 1 | upper) (substr $word 1 (len $word))) }}
+        {{ end }}
+        {{ $formatname := delimit ($.Scratch.Get "formatSlice") " " }}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+            <div class="card">
+                <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$v.name | lower}}/"><img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($v.name | lower) ".png")) }}"></a>
+                <div class="text-center title" style="display: none;">{{ $formatname }}</div>
+                <div class="card-body">
+                    <a class="card-button" href="{{ $dot.Site.BaseURL }}integrations/{{$v.name | lower}}/">
+                        <h4 class="card-title">{{ $formatname }}</h4>
+                        <p class="card-text">{{ $v.short_description }}</p>
+                        <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {{ end }}
+</div>
+
+<!--<div class="integration-tiles mt-4" data-ref="container">
+    {{ range $i, $v := $integration_list }}
+        <div class="mix card text-center {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+            <img class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations/" $v.name ".png")) }}">
+            <div class="card-body">
+                <a class="card-button" href="{{ .Site.BaseURL }}{{$v.docs_link}}">
+                    <h4 class="card-title">{{ $v.public_title }}</h4>
+                    <p class="card-text">{{ $v.short_description }}</p>
+                    <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
+                </a>
+            </div>
+        </div>
+    {{ end }}
+</div>-->

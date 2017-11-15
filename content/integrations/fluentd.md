@@ -8,7 +8,7 @@ newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" >}}
+{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

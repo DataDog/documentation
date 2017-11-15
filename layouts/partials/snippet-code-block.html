@@ -2,7 +2,15 @@
 
 {{ $file := $.file }}
 
-{{ $file_ext := (index (split $file ".") 1) }}
+{{ if (in $.file "/") }}
+  {{ $.context.Scratch.Set "snipfile" .file}}
+{{ else }}
+  {{ $.context.Scratch.Set "snipfile" (printf "code_snippets/%s" .file)}}
+{{ end }}
+{{ $file := $.context.Scratch.Get "snipfile" }}
+
+{{ $ext_index := (sub (len (split $file ".")) 1) }}
+{{ $file_ext := (index (split $file ".") $ext_index) }}
 
 {{ $highlight := $.highlight }}
 {{ $static := $.static }}
@@ -17,7 +25,7 @@
 
     {{- $apicomment := "# Make sure you replace the API and/or APP key below\n# with the ones for your account\n\n" -}}
 
-    {{- $file_content := readFile (printf "code_snippets/%s" $file) -}}
+    {{- $file_content := readFile ($file) -}}
 
     {{- if eq $k $file_ext -}}
 
@@ -37,7 +45,7 @@
 
       {{ end }}
 
-      {{ if eq $static true }}
+      {{ if (or (eq $static true) (eq $static "true")) }}
 <pre lang="{{$v}}">
 <code>
 {{- $.context.Scratch.Get "file" -}}

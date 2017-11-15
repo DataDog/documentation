@@ -1,62 +1,391 @@
-- id: footer_hiring
-  translation: "Want to write articles like this one? Our team is hiring!"
-
-- id: retention
-  translation: "15 months"
-
-- id: integration_count
-  translation: "150"
-
-- id: security
-  translation: "Security"
-
-- id: menu_guides
-  translation: "Guides"
+##########################
+####### Home Page ########
+##########################
 
 - id: menu_references
-  translation: "References"
-
+  translation: References
+  
 - id: menu_references_api
   translation: "API"
 
-- id: menu_references_tracing
-  translation: "APM (Tracing)"
+- id: menu_references_getting_started
+  translation: "Getting Started"
 
-- id: menu_references_libraries
-  translation: "Libraries"
-
-- id: menu_references_monitoring
-  translation: "Monitoring"
-
-- id: menu_references_graphing
-  translation: "Graphing"
-
-- id: menu_references_graphingjson
-  translation: "Graphing using JSON"
-
-- id: menu_references_infrastructure
-  translation: "Infrastructure"
+- id: menu_references_agent
+  translation: "Datadog Agent"
 
 - id: menu_references_integrations
   translation: "Integrations"
 
-- id: menu_references_dogstatsd
-  translation: "DogStatsD"
+- id: menu_references_graphing
+  translation: "Graphing"
 
-- id: menu_references_examples
-  translation: "Examples"
+- id: menu_references_monitoring
+  translation: "Monitors"
+
+- id: menu_references_tracing
+  translation: "Tracing (APM)"
+
+- id: menu_references_account_management
+  translation: "Account Management"
+
+- id: menu_references_developers
+  translation: "Developers"
 
 - id: menu_references_videos
   translation: "Videos"
 
-- id: menu_references_billing
-  translation: "Billing"
-
 - id: menu_references_faq
   translation: "FAQ"
 
-- id: menu_help
+- id: menu_references_help
   translation: "Help"
+
+##########################
+#### Getting Started #####
+##########################
+
+- id: customnav_gettingstartednav
+  translation: "Getting Started"
+
+- id: customnav_gettingstartednav_index
+  translation: "Getting Started"
+
+- id: customnav_gettingstartednav_overview
+  translation: "Overview"
+
+- id: customnav_getting_started_tags
+  translation: "Getting started with Tags"
+
+##########################
+########## Agent #########
+##########################
+
+- id: customnav_agentnav
+  translation: "Datadog Agent"
+
+- id: customnav_agentnav_index
+  translation: "Datadog Agent"
+
+- id: customnav_agentnav_agent_checks
+  translation: "Agent Checks"
+
+- id: customnav_agentnav_autodiscovery
+  translation: "Autodiscovery"
+
+- id: customnav_agentnav_faq
+  translation: "FAQ"
+
+- id: customnav_agentnav_install_debian_5
+  translation: "Install debian 5"
+
+- id: customnav_agentnav_installcoreextra
+  translation: "Install core Extra"
+
+- id: customnav_agentnav_logs
+  translation: "Logs"
+
+- id: customnav_agentnav_services_checks
+  translation: "Services Checks"
+
+- id: customnav_agentnav_tagging
+  translation: "Tagging"
+
+- id: amazonlinux
+  translation: "Amazon Linux"
+
+- id: centos
+  translation: "CentOs"
+
+- id: docker
+  translation: "CoreOS/Docker"
+
+- id: deb
+  translation: "Debian"
+
+- id: fedora
+  translation: "Fedora"
+
+- id: osx
+  translation: "Mac OS X"
+
+- id: redhat
+  translation: "Red Hat"
+
+- id: ubuntu
+  translation: "Ubuntu"
+
+- id: windows
+  translation: "Windows"
+
+- id: suse
+  translation: "SUSE"
+
+- id: source
+  translation: "From Source"
+
+##########################
+######## Tracing #########
+##########################
+
+- id: customnav_tracingnav_tracing
+  translation:  "APM (Tracing)"
+
+- id: customnav_tracingnav_install
+  translation:  "Installation & Configuation"
+
+- id: customnav_tracingnav_terminology
+  translation:  "Terminology"
+
+- id: customnav_tracingnav_faq
+  translation:  "Frequently Asked Questions"
+
+- id: customnav_tracingnav_environments
+  translation:  "Environments"
+
+- id: customnav_tracingnav_help
+  translation:  "APM Support"
+
+- id: customnav_tracingnav_langs
+  translation:  "Supported Languages"
+
+- id: customnav_tracingnav_go
+  translation:  "Go"
+
+- id: customnav_tracingnav_python
+  translation:  "Python"
+
+- id: customnav_tracingnav_ruby
+  translation:  "Ruby"
+
+- id: customnav_tracingnav_docker
+  translation: "Docker"
+
+- id: customnav_tracingnav_api
+  translation:  "Tracing API"
+
+##########################
+######## Graphing ########
+##########################
+
+- id: customnav_graphingnav
+  translation: "Graphing"
+
+- id: customnav_graphingnav_index
+  translation: "Graphing Overview"
+
+- id: customnav_graphingnav_events
+  translation: Events
+
+- id: customnav_graphingnav_dashboards
+  translation: Dashboards
+
+- id: customnav_graphingnav_infrastructure
+  translation: Infrastructure
+
+- id: customnav_graphingnav_metrics
+  translation: Metrics 
+
+- id: customnav_graphingnav_notebooks
+  translation: Notebooks
+
+- id: customnav_graphingnav_miscellaneous
+  translation: Miscellaneous
+
+
+- id: customnav_infrastructurenav
+  translation: "Infrastructure"
+
+- id: customnav_infrastructurenav_hostmap
+  translation: "Hostmap"
+
+- id: customnav_infrastructurenav_livecontainers
+  translation: "Containers" 
+
+- id: customnav_infrastructurenav_process
+  translation: "Processes"
+
+- id: customnav_infrastructurenav_infrastructure_list
+  translation: "Infrastructure List"
+
+##########################
+########## Logs ##########
+##########################        
+
+- id: customnav_lognav
+  translation: Logs (Beta)
+
+- id: customnav_lognav_collection
+  translation: Collection
+
+- id: customnav_lognav_processing
+  translation: Processing
+
+- id: customnav_lognav_parsing
+  translation: Parsing
+
+- id: customnav_lognav_explore
+  translation: Explore
+
+- id: customnav_lognav_aws
+  translation: "AWS Log Collection"
+
+- id: customnav_lognav_faq
+  translation: "Log FAQ"
+
+- id: customnav_lognav_languages
+  translation: "Languages"
+
+- id: customnav_lognav_csharp
+  translation: "C# Log collection"
+
+- id: customnav_lognav_go
+  translation: "Go Log Collection"
+
+- id: customnav_lognav_nodejs
+  translation: "NodeJS Log collection"
+
+- id: customnav_lognav_ruby
+  translation: "Ruby Log collection"
+
+- id: customnav_lognav_java
+  translation: "Java Log collection"
+
+##########################
+######## Monitors ########
+##########################
+
+- id: customnav_monitornav
+  translation: "Alerting (Monitor)"
+
+- id: customnav_monitornav_index
+  translation: "Monitors"
+
+- id: customnav_monitornav_monitor_types
+  translation: "Monitor Types"
+
+- id: customnav_monitornav_manage_monitor
+  translation: "Manage Monitors"
+
+- id: customnav_monitornav_check_summary
+  translation: "Check Summary"
+
+- id: customnav_monitornav_notifications
+  translation: "Monitor Notifications"
+
+- id: customnav_monitornav_downtimes
+  translation: "Monitor Dowtimes"
+
+- id: customnav_monitornav_faq
+  translation: "Monitor FAQ"
+
+- id: customnav_monitortypenav
+  translation: "Monitor Types"
+
+- id: customnav_monitortypenav_index
+  translation: "Create a Monitor"
+
+- id: customnav_monitortypenav_anomaly
+  translation: "Anomaly Monitor"
+
+- id: customnav_monitortypenav_apm
+  translation: "APM Monitor"
+
+- id: customnav_monitortypenav_composite
+  translation: "Composite Monitor"
+
+- id: customnav_monitortypenav_custom_check
+  translation: "Custom Check Monitor"
+
+- id: customnav_monitortypenav_event
+  translation: "Event Monitor"
+
+- id: customnav_monitortypenav_host
+  translation: "Host Monitor"
+
+- id: customnav_monitortypenav_integration
+  translation: "Integration Monitor"
+
+- id: customnav_monitortypenav_metric
+  translation: "Metric Monitor"
+
+- id: customnav_monitortypenav_network
+  translation: "Network Monitor"
+
+- id: customnav_monitortypenav_outlier
+  translation: "Outlier Monitor"
+
+- id: customnav_monitortypenav_process
+  translation: "Process Monitor"
+
+##########################
+### Account Management ###
+##########################
+
+- id: customnav_accountmanagementnav
+  translation: Account Management 
+
+- id: customnav_accountmanagementnav_index
+  translation: Overview
+
+- id: customnav_accountmanagementnav_team
+  translation: Team
+
+- id: customnav_accountmanagementnav_settings
+  translation: Settings
+
+- id: customnav_accountmanagementnav_saml
+  translation: SAML
+
+- id: customnav_accountmanagementnav_multi_account
+  translation: Multi Accounts
+
+- id: customnav_accountmanagementnav_faq
+  translation: FAQ
+
+##########################
+####### Developer ########
+##########################
+
+- id: customnav_developersnav
+  translation: "Developers"
+
+- id: customnav_developersnav_index
+  translation: "Developers"
+
+- id: customnav_developersnav_api
+  translation: "API"
+
+- id: customnav_developersnav_dogstatsd
+  translation: "Dogstasd"
+
+- id: customnav_developersnav_libraries
+  translation: "Libraries"
+
+- id: customnav_developersnav_integration_sdk
+  translation: "Integration SDK"
+
+- id: customnav_developersnav_metrics
+  translation: "Metrics"
+
+- id: customnav_developersnav_metrictypes
+  translation: "Metrics Types"
+
+- id: customnav_developersnav_new_integration
+  translation: "New Integration"
+
+- id: customnav_developersnav_testing
+  translation: "Testing"
+
+- id: customnav_developersnav_units
+  translation: "Units"
+
+- id: customnav_developersnav_faq
+  translation: "FAQ"
+
+##########################
+###### Miscellaneous #####
+##########################
 
 - id: btn_signup
   translation: "Sign Up"
@@ -69,21 +398,6 @@
 
 - id: btn_free_trial
   translation: "Free Trial"
-
-- id: footer_switch_language
-  translation: "日本語ドキュメントへのリンク。"
-
-- id: footer_need_some_help
-  translation: "Need some help? "
-
-- id: footer_mistake_in_the_docs
-  translation: "Mistake in the docs?"
-
-- id: footer_get_in_touch
-  translation: "Get in touch."
-
-- id: footer_let_us_know
-  translation: "Let us know."
 
 - id: integrations_other_integrations
   translation: "Other Integrations"
@@ -109,76 +423,29 @@
 - id: agentusage_from_source
   translation: "From Source"
 
-- id: customnav_tracingnav_tracing
-  translation: "APM (Tracing)"
+##########################
+######### Footer #########
+##########################
 
-- id: customnav_tracingnav_install
-  translation: "Installation & Configuration"
+- id: footer_switch_language
+  translation: "日本語ドキュメントへのリンク。"
 
-- id: customnav_tracingnav_terminology
-  translation: "Terminology"
+- id: footer_need_some_help
+  translation: "Need some help? "
 
-- id: customnav_tracingnav_faq
-  translation: "Frequently Asked Questions"
+- id: footer_mistake_in_the_docs
+  translation: "Mistake in the docs?"
 
-- id: customnav_tracingnav_langs
-  translation: "Supported Languages"
+- id: footer_get_in_touch
+  translation: "Get in touch."
 
-- id: customnav_tracingnav_go
-  translation: "Go"
+- id: footer_let_us_know
+  translation: "Let us know."
 
-- id: customnav_tracingnav_py
-  translation: "Python"
+##########################
+####### Taxonomies #######
+##########################
 
-- id: customnav_tracingnav_rb
-  translation: "Ruby"
-
-- id: customnav_tracingnav_docker
-  translation: "Docker"
-
-- id: customnav_tracingnav_api
-  translation: "Tracing API"
-
-# Infrastructure
-- id: customnav_infrastructurenav
-  translation: "Infrastructure"
-
-- id: customnav_infrastructurenav_hostmap
-  translation: "Hostmap"
-
-- id: customnav_infrastructurenav_livecontainers
-  translation: "Containers" 
-
-- id: customnav_infrastructurenav_process
-  translation: "Processes"
-
-- id: customnav_infrastructurenav_infrastructure_list
-  translation: "Infrastructure List"
-
-# Logs
-
-- id: customnav_lognav
-  translation: Logs (Beta)
-
-- id: customnav_lognav_collection
-  translation: Collection
-
-- id: customnav_lognav_processing
-  translation: Processing
-
-- id: customnav_lognav_parsing
-  translation: Parsing
-
-- id: customnav_lognav_explore
-  translation: Explore
-
-- id: customnav_lognav_java
-  translation: "Java Log Collection"
-
-- id: customnav_lognav_aws
-  translation: "AWS Log Collection"
-
-# taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."
 
@@ -191,68 +458,14 @@
 - id: example_categories
   translation: "This example can be found in these groups:"
 
-# Basic agent menu
+- id: footer_hiring
+  translation: "Want to write articles like this one? Our team is hiring!"
 
-- id: amazonlinux
-  translation: "Amazon Linux"
+- id: retention
+  translation: "15 months"
 
-- id: centos
-  translation: "CentOS"
+- id: integration_count
+  translation: "150"
 
-- id: docker
-  translation: "CoreOS/Docker"
-
-- id: deb
-  translation: "Debian"
-
-- id: fedora
-  translation: "Fedora"
-
-- id: osx
-  translation: "Mac OS X"
-
-- id: redhat
-  translation: "Red Hat"
-
-- id: suse
-  translation: "SUSE"
-
-- id: ubuntu
-  translation: "Ubuntu"
-
-- id: windows
-  translation: "Windows"
-
-- id: source
-  translation: "From Source"
-
-# Tracing menu
-- id: customnav_tracingnav_tracing
-  translation:  "APM (Tracing)"
-
-- id: customnav_tracingnav_install
-  translation:  "Installation & Configuation"
-
-- id: customnav_tracingnav_terminology
-  translation:  "Terminology"
-
-- id: customnav_tracingnav_faq
-  translation:  "Frequently Asked Questions"
-
-- id: customnav_tracingnav_environments
-  translation:  "Environments"
-
-- id: customnav_tracingnav_langs
-  translation:  "Supported Languages"
-
-- id: customnav_tracingnav_go
-  translation:  "Go"
-
-- id: customnav_tracingnav_python
-  translation:  "Python"
-
-- id: customnav_tracingnav_ruby
-  translation:  "Ruby"
-
-- id: customnav_tracingnav_api
-  translation:  "Tracing API"
+- id: security
+  translation: "Security"

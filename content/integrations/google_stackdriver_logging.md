@@ -9,19 +9,16 @@ description: "Track the size of logs ingested into Google Stackdriver."
 ---
 
 ## Overview
-Stackdriver Logging allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform.
-
-Get metrics from Google Stackdriver Logging to:
-
-* Visualize the performance of your Stackdriver logs
-* Correlate the performance of your Stackdriver logs with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

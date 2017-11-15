@@ -9,19 +9,16 @@ description: "Track key Azure SQL Elastic Pool metrics."
 ---
 
 ## Overview
-Elastic pools provide a simple and cost effective solution for managing the performance of multiple databases.
-
-Get metrics from Azure SQL Elastic Pool to:
-
-* Visualize the performance of your SQL Elastic Pools
-* Correlate the performance of your SQL Elastic Pools with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Microsoft Azure integration first](/integrations/azure). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

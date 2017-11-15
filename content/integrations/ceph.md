@@ -6,7 +6,7 @@ git_integration_title: ceph
 newhlevel: true
 description: "{{< get-desc-from-git >}}"
 ---
-{{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" >}}
+{{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

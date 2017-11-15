@@ -7,7 +7,7 @@ git_integration_title: ntp
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/ntp/ntpgraph.png" alt="NTP Graph" >}}
+{{< img src="integrations/ntp/ntpgraph.png" alt="NTP Graph" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

@@ -6,7 +6,7 @@ git_integration_title: nginx
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" >}}
+{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

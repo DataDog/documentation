@@ -9,19 +9,16 @@ description: "Monitor your Google Container Engine resource usage."
 ---
 
 ## Overview
-Google Container Engine is a powerful cluster manager and orchestration system for running your Docker containers.
-
-Get metrics from Google Container Engine to:
-
-* Visualize the performance of your Container Engine containers
-* Correlate the performance of your Container Engine containers with your applications
+//get-overview-from-git//
 
 ## Setup
-### Installation
-
-If you haven't already, set up the [Google Cloud Platform integration first](/integrations/google_cloud_platform). There are no other installation steps that need to be performed.
+//get-setup-from-git//
 
 ## Data Collected
-### Metrics
+//get-data-collected-from-git//
 
-{{< get-metrics-from-git >}}
+## Troubleshooting
+//get-troubleshooting-from-git//
+
+## Further Reading
+//get-further-reading-from-git//

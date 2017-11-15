@@ -32,8 +32,13 @@ if [ ${RUN_SERVER} == true ]; then
 		fi
 		if [ ${GITHUB_TOKEN} != "false" ]; then
 			args="${args} --token ${GITHUB_TOKEN}"
+		else
+			echo "No GITHUB TOKEN was found. skipping any integration sync that relies on pulling from web."
 		fi
-		integrations_sync.py ${args}
+		if [[ ${args} != "" ]]; then
+			#update_pre_build.py ${args}
+			integrations_sync.py ${args}
+		fi
 	fi
 
 	# placeholders

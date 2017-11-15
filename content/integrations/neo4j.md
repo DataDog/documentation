@@ -94,7 +94,7 @@ The neo4j check does not include any events at this time.
 The neo4j check does not include any service checks at this time.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+Need help? Contact [Datadog Support](/help/).
 
 ## Further Reading
 Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

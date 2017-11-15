@@ -9,7 +9,7 @@ aliases:
 description: "{{< get-desc-from-git >}}"
 ---
 
-{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" >}}
+{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" responsive="true" >}}
 
 ## Overview
 //get-overview-from-git//

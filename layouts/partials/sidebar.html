@@ -52,6 +52,126 @@
         {{ end }}
     {{ end }}
 
+  {{ else if eq $custom_sidebar "gettingstartednav"}}
+    {{ $nav_headers := (slice "customnav_gettingstartednav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.gettingstartednav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "developersnav"}}
+      {{ $nav_headers := (slice "customnav_developersnav")}}
+        <li id="toc-box"></li>
+        {{ range .Site.Menus.developersnav -}}
+
+          {{ if in $nav_headers .Identifier }}
+          <li class="nav-header">{{ i18n .Identifier }}</li>
+          {{ else }}
+
+          <li class="">
+            <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+          </li>
+          {{ end }}
+      {{ end }}
+    
+  {{ else if eq $custom_sidebar "agentnav"}}
+    {{ $nav_headers := (slice "customnav_agentnav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.agentnav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "monitornav"}}
+    {{ $nav_headers := (slice "customnav_monitornav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.monitornav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "monitortypenav"}}
+    {{ $nav_headers := (slice "customnav_monitortypenav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.monitortypenav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "graphingnav"}}
+    {{ $nav_headers := (slice "customnav_graphingnav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.graphingnav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "accountmanagementnav"}}
+    {{ $nav_headers := (slice "customnav_accountmanagementnav")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.accountmanagementnav -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
+  {{ else if eq $custom_sidebar "main_references"}}
+    {{ $nav_headers := (slice "customnav_main_references")}}
+      <li id="toc-box"></li>
+      {{ range .Site.Menus.main_references -}}
+
+        {{ if in $nav_headers .Identifier }}
+        <li class="nav-header">{{ i18n .Identifier }}</li>
+        {{ else }}
+
+        <li class="">
+          <a href="{{ .URL | absLangURL }}">{{ i18n .Identifier }}</a>
+        </li>
+        {{ end }}
+    {{ end }}
+
   {{ else if eq $custom_sidebar "infrastructurenav"}}
     {{ $nav_headers := (slice "customnav_infrastructurenav")}}
       <li id="toc-box"></li>

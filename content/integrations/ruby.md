@@ -8,7 +8,7 @@ description: "Send custom metrics from your Ruby applications with Datadog clien
 
 ## Overview
 
-The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/guides/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
+The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/developers/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
 
 Datadog offers two libraries to assist you with the implementation of Ruby application metrics:
 
@@ -27,7 +27,8 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
         gem install dogstatsd-ruby
 
 2.  Start instrumenting your code using the Datadog API:
-{{< highlight ruby>}}
+
+```ruby
 # Load the Datadog API module.
 require 'rubygems'
 require 'dogapi'
@@ -40,10 +41,11 @@ dog = Dogapi::Client.new(api_key, application_key)
 
 # Send a new event.
 dog.emit_event(Dogapi::Event.new('Testing done, FTW'), :host => "my_host")
-{{< /highlight >}}
+```
 
     Start instrumenting your code using the DogStatsD client:
-{{< highlight ruby>}}
+
+```ruby
 # Load the dogstats module.
 require 'datadog/statsd'
 
@@ -55,7 +57,7 @@ statsd.increment('page.views')
 
 # Record a gauge 50% of the time.
 statsd.gauge('users.online', 123, :sample_rate=>0.5)
-{{< /highlight >}}
+```
 
 ### Configuration
 
