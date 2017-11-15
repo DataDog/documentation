@@ -7,10 +7,10 @@ customnav: integrationsnav
 
 Trouble setting up your JMX integration ? Here are a few great articles to get you started : 
 
-* [View jmx data in jConsole and set up your jmx.yaml to collect them](/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
-* [jmx.yaml error: Include Section](/faq/jmx-yaml-error-include-section)
-* [Collecting Composite type JMX attributes](/faq/collecting-composite-type-jmx-attributes)
-* [How to run JMX commands in Windows?](/faq/how-to-run-jmx-commands-in-windows)
+* [View jmx data in jConsole and set up your jmx.yaml to collect them](/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
+* [jmx.yaml error: Include Section](/integrations/faq/jmx-yaml-error-include-section)
+* [Collecting Composite type JMX attributes](/integrations/faq/collecting-composite-type-jmx-attributes)
+* [How to run JMX commands in Windows?](/integrations/faq/how-to-run-jmx-commands-in-windows)
 
 Now, if everything is set up properly as described in the above articles, and your metric appears in the list_matching_attributes.log but not in the output of  sudo /etc/init.d/datadog-agent jmx collect command, there is probably an issue with the metric_type your using. 
 

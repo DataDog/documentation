@@ -8,7 +8,7 @@ customnav: main_references
 
 Here are some ways of getting your metrics data into Datadog:
 
-* We [provide an SDK](/developers/integration_sdk) for people interested in writing new integrations.
+* We [provide an SDK](/integrations/integration_sdk) for people interested in writing new integrations.
 * A common method is via DogStatsD, the StatsD server bundled with the Datadog Agent. To learn more read [our guide](/developers/dogstatsd) along with this [great article](/developers/metrics).
 * Submit metrics directly to Datadog's [HTTP API](/api)
 * Another method to consider is using [dogstatsd and the shell](/developers/faq/send-metrics-and-events-using-dogstatsd-and-the-shell)

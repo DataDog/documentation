@@ -30,6 +30,6 @@ All core integrations will continue to be installed with the agent install. You 
 1.  Copy the Python script for your chosen integration to the `checks.d` directory where you installed the Agent.
 1.  Copy the corresponding yaml configuration file to the `conf.d` directory where you installed the Agent.
 
-[1]: /developers/integration_sdk
+[1]: /integrations/integration_sdk
 [2]: https://github.com/DataDog/integrations-core
 [3]: https://github.com/DataDog/integrations-extras

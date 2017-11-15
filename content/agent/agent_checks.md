@@ -502,7 +502,7 @@ If your issue continues, please reach out to Support with the help page that lis
     C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
     ```
 
-[1]: /developers/integration_sdk/
+[1]: /integrations/integration_sdk/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/help/

@@ -25,6 +25,6 @@ Either of these cloud be useful for making an alert. Let's use aws.billing.estim
 
 After creating this monitor, Datadog will alert you when your CloudWatch spend becomes unexpectedly high. 
 
-You can read more about our [AWS billing integration here](/faq/how-do-i-monitor-my-aws-billing-details).
+You can read more about our [AWS billing integration here](/integrations/faq/how-do-i-monitor-my-aws-billing-details).
 
  
