@@ -1,5 +1,5 @@
 ---
-title: Create Monitor
+title: Alerting
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
@@ -49,7 +49,7 @@ page by hovering over **Monitors** in the main menu and clicking **New Monitor**
 
 ## Export your monitor
 
-You can export the configuration JSON for a monitor right from the create screen. 
+You can export the configuration JSON for a monitor right from the create screen.
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
@@ -64,7 +64,7 @@ Assuming you've made changes to your Monitors, you can see examples with the fol
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 
-We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
+We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
 
 {{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
 
