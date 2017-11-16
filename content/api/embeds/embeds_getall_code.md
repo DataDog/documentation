@@ -7,10 +7,6 @@ order: 18.1
 ##### Signature
 `GET api/v1/graph/embed`
 ##### Example Request
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-get-all.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-get-all.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-get-all.rb" highlight="true" >}}
+{{< code-snippets basename="api-embeds-get-all" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-get-all.py" >}}
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-get-all.sh" >}}
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-get-all.rb" >}}
+{{< code-snippets basename="result.api-embeds-get-all" >}}

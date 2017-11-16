@@ -20,7 +20,7 @@
         "src/scss/style.scss"
       ],
       "vendor": [
-        "src/scss/vendor/pygments.css"
+        "src/scss/vendor/pygments.scss"
       ],
       "main": true
     }

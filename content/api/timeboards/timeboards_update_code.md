@@ -7,10 +7,6 @@ order: 10.2
 ##### Signature
 `PUT /api/v1/dash/:dash_id`
 ##### Example Request
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-update.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-update.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-update.rb" highlight="true" >}}
+{{< code-snippets basename="api-dashboard-update" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-update.py" >}}
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-update.sh" >}}
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-update.rb" >}}
+{{< code-snippets basename="result.api-dashboard-update" >}}

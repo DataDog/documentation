@@ -7,10 +7,6 @@ order: 12.2
 ##### Signature
 `POST /api/v1/host/:hostname/unmute`
 ##### Example Request
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/hosts/code_snippets/api-host-unmute.rb" highlight="true" >}}
+{{< code-snippets basename="api-host-unmute" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.py" >}}
-{{< snippet-result-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.sh" >}}
-{{< snippet-result-code-block file="content/api/hosts/code_snippets/result.api-host-unmute.rb" >}}
+{{< code-snippets basename="result.api-host-unmute" >}}

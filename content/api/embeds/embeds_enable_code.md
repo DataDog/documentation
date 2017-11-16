@@ -7,10 +7,6 @@ order: 18.4
 ##### Signature
 `GET api/v1/graph/embed/:embed_id/enable`
 ##### Example Request
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-enable.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-enable.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/embeds/code_snippets/api-embeds-enable.rb" highlight="true" >}}
+{{< code-snippets basename="api-embeds-enable" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-enable.py" >}}
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-enable.sh" >}}
-{{< snippet-result-code-block file="content/api/embeds/code_snippets/result.api-embeds-enable.rb" >}}
+{{< code-snippets basename="result.api-embeds-enable" >}}

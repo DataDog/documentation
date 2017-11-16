@@ -7,10 +7,6 @@ order: 15.2
 ##### Signature
 `PUT api/v1/comments/:comment_id`
 ##### Example Request
-{{< snippet-code-block file="content/api/comments/code_snippets/api-comment-edit.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/comments/code_snippets/api-comment-edit.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/comments/code_snippets/api-comment-edit.rb" highlight="true" >}}
+{{< code-snippets basename="api-comment-edit" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-edit.py" >}}
-{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-edit.sh" >}}
-{{< snippet-result-code-block file="content/api/comments/code_snippets/result.api-comment-edit.rb" >}}
+{{< code-snippets basename="result.api-comment-edit" >}}
