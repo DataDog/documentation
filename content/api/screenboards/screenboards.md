@@ -4,4 +4,5 @@ type: apicontent
 order: 11
 ---
 ## Screenboards
-You can view more detailed documentation on the Screenboard API [here](/api/screenboards/).
+
+This endpoint allows you to programmatically create, update delete and query Screenboard. Find more about Screenboard [here](/graphing/dashboards/screenboard).

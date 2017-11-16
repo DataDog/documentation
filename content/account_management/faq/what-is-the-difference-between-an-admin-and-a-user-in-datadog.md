@@ -4,4 +4,10 @@ kind: faq
 customnav: accountmanagementnav
 ---
 
-Admins have just a few extra capabilities that standard users do not have. This includes access to billing info, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
+[Admins](/account_management/team) have just a few extra capabilities that standard users do not have. This includes:
+
+* Access to billing info
+* The ability to revoke API keys
+* The ability to removing users
+* Configuring read-only dashboards. 
+* Promote standard users to Admins.

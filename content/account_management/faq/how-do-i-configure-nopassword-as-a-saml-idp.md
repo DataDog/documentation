@@ -4,6 +4,4 @@ kind: faq
 customnav: accountmanagementnav
 ---
 
-The NoPassword team has written up instructions for configuring this here:
-
-https://help.nopassword.com/portfolio-items/datadog/
+The NoPassword team has written up instructions for configuring this [here](https://help.nopassword.com/portfolio-items/datadog/)

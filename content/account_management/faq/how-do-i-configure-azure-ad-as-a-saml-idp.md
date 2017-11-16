@@ -4,9 +4,8 @@ kind: faq
 customnav: accountmanagementnav
 ---
 
-Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
-
-Note, an Azure AD Premium Subscription is required to set this up
+Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog:  
+**Note**: an Azure AD Premium Subscription is required to set this up
 
 1. Navigate to `manage.windowsazure.com`
 

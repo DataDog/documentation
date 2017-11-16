@@ -5,7 +5,7 @@ order: 15.1
 ---
 
 ## Create A Comment
-Comments are essentially special forms of events that appear in the stream. They can start a new discussion thread or optionally, reply in another thread.
+Comments are essentially special forms of events that appear in the [event stream](/graphing/event_stream). They can start a new discussion thread or optionally, reply in another thread.
 
 ##### ARGUMENTS
 * `message` [*required*]:  

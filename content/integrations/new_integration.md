@@ -106,4 +106,4 @@ Include a list of service checks if the integration provides any.
 ### Further Reading
 **Optional**
 
-Include any links to Docs guides or Datadog blog articles that highlight the integration.
+Include any links to Docs pages or Datadog blog articles that highlight the integration.
