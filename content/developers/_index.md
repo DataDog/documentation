@@ -4,24 +4,23 @@ kind: documentation
 customnav: developersnav
 ---
 
-As a monitoring tool should be as flexible as possible, we provide multiple ways to interact with the application. This section is meant to give an quick overview of the different possibilities that we designed in that end.
+Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section will give you a quick overview of the various methods available
 
 ## API
-We provide a powerful API with which you can have a wide interaction with our services. It allows you for instance to submit custom metrics, manage your dashboards and monitors, schedule your downtimes, and also provides a variety of administration tools.
-All the available endpoints can be found on [our dedicated API documentation page](/api).
+Datadog features a powerful API to programmatically access the service. You can submit custom metrics; manage dashboards and monitors; schedule downtimes; and perform administrative actions.
+Available endpoints can be found on [our dedicated API documentation page](/api).
 
-In addition, a [variety of libraries](/developers/libraries/#api-and-dogstatsd-client-libraries) are available to directly interact with this API.
+In addition, [many libraries](/developers/libraries/#api-and-dogstatsd-client-libraries) are available to directly interact with the API.
 
 ## Submitting custom metrics
-While you can directly submit metrics through [our API](/api), we also provide different other options that can be more appropriate according to the context:
+While you can submit metrics directly through [our API](/api), you can also submit metrics via the Datadog Agent using DogStatsD and custom checks.
 
-* The Datadog agent bundles [DogStatsD](/developers/dogstatsd), a powerful _statsd_ daemon with additional capacities, that will allow you to submit metrics through UDP, and benefit of a better control on your metric metadata and aggregation.
-[Multiple libraries](/developers/libraries) are available to ease the use of your local or distant _DogStatsD_.
+* The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional features, that provides better control over your metric metadata and aggregation.
+[Multiple libraries](/developers/libraries) are available to easily send metrics from your application to Datadog using DogStatsD.
 
-* If you would like regular metric submissions from a particular setup (similar to what is done by the agent for the systems we directly support), you can also directly [add your own integration](/integrations/new_integration). We are providing detailed steps and resources for [developing](/integrations/integration_sdk) and [testing](/developers/testing/) new integrations so that you can plug a new integration inside you agent and let you monitor any of your services.
-
-## Additional libraries
-Other than libraries to reach our API endpoints and submit custom metrics through _DogStatsD_, you can also find here our [APM tracing utilities](/developers/libraries/#apm-tracing-client-libraries), and a selection of [community integrations](/developers/libraries/#community-integrations).
+* The API and the DogStatsD are handy to _push_ metrics towards Datadog from one of your application.
+If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the agent for the systems we directly support, you can also directly [add your own integration](/integrations/new_integration). We are providing detailed steps and resources for [developing](/integrations/integration_sdk) and [testing](/developers/testing/) new integrations so that you can plug a new integration inside you agent and let you monitor any of your services.
+These integrations can then be easily shared with the Datadog community, for instance through our [Datadog/integrations-extras repository](https://github.com/DataDog/integrations-extras)
 
 ## Developer technical documentation
 Would you like to get a deeper understanding of our internal concepts, you can find here some technical resources regarding some of our internal objects:
@@ -29,3 +28,10 @@ Would you like to get a deeper understanding of our internal concepts, you can f
 * [Learn more about metric behavior](/developers/metrics)
 
 * [Learn more about metric types](/developers/metrictypes)
+
+## APM
+You can also find our [APM tracing utilities](/developers/libraries/#apm-tracing-client-libraries), which you can use and contribute to. Support on new languages can be proposed by the community, along with community APM integrations.
+
+## Community Integrations
+Many users from our community have already [shared integrations](/developers/libraries/#community-integrations) with a large number of commonly used applications, which you can take advantage of in the absence of an official support.
+These resources are also handy when starting the work on a new agent integration.
