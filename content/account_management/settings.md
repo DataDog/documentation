@@ -17,9 +17,7 @@ customnav: accountmanagementnav
 
 Note, this option is only available to [Datadog Administrators](/account_management/team/#datadog-user-roles).
 
-Access [this link](https://app.datadoghq.com/account/org_settings) to rename your organization:
-
-Or navigate to it:
+Access [this link](https://app.datadoghq.com/account/org_settings) to rename your organization or navigate to it:
 
 1. In the bottom-left corner hover over your user name and click on **Settings**
 
