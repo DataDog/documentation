@@ -11,3 +11,5 @@ All the algorithms outside of _Basic_ use extensive amounts of historical data s
 The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
 
 {{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true">}}
+
+Learn more about anomaly detection [here](/monitors/monitor_types/anomaly)

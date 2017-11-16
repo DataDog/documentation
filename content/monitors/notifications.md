@@ -7,7 +7,7 @@ customnav: monitornav
 
 ## Overview
 
-Notifications are a key component of any monitor. You want to make sure the
+Notifications are a key component of any [monitor](/monitors). You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
 {{< img src="monitors/notifications/notification.png" alt="notification" responsive="true">}}

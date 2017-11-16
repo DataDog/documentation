@@ -169,4 +169,5 @@ Here is a quick overview of the different terms used:
 4. Remind your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message will be included as well.
 
+Learn more about notifications settings [here](/monitors/notifications).
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket will be sent as normal. All other notifications within that 20 seconds will be sent as a single message listing all of them after the first two.*

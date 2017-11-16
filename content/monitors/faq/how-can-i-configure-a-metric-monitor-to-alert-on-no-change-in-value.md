@@ -4,7 +4,7 @@ kind: faq
 customnav: monitornav
 ---
 
-A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the diff() function on your query. This will produce the delta values from consecutive data points.
+A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` [function](/graphing/miscellaneous/functions) on your query. This will produce the delta values from consecutive data points.
 
 * `diff(avg:system.mem.free{*})`
 
@@ -21,7 +21,7 @@ Alternatively, your complex query can be manually entered in the 'edit monitor' 
 For [alert conditions](/monitors/monitor_types/#define-the-conditions) in the metric monitor itself, configure as follows:
 
 * Select threshold alert
-* Set the "Trigger when the metric is..." dropdown selector to below or equal to
+* Set the "Trigger when the metric is..." dropdown selector to **below** or **equal to**
 * Set the "Alert Threshold" field to 0 (zero)
 
 This configuration will trigger an alert event when no change in value has been registered over the selected timeframe.

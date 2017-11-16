@@ -4,7 +4,7 @@ kind: faq
 customnav: monitornav
 ---
 
-In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a monitor for such an alert scheme within Datadog:
+In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor](/monitors/) for such an alert scheme within Datadog:
 
 * First, setup a classic [metric monitor](/monitors/monitor_types/metric), and specify the metric and tag that you want to be alerted on
 * Then, select some simple alert condition which should never be triggered, such as an alert over a very large value or under an impossible negative value
