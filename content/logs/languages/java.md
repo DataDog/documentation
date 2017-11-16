@@ -29,9 +29,8 @@ We also strongly encourage you to setup your logging library to produce your log
 
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging library:
 
-## Setup - Log to file
-### Configure your logger
-#### Log4j
+## Configure your logger
+### Log4j
 
 Add a new file appender to `log4j.xml`:
 
@@ -46,7 +45,7 @@ Add a new file appender to `log4j.xml`:
 ```
 
 
-#### Log4j2
+### Log4j2
 Edit your `log4j2.xml` file:
 ```xml
  <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
@@ -59,7 +58,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-#### Slf4j
+### Slf4j
 Edit your `logback.xml` file:
 
 ```xml
@@ -81,7 +80,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-### Configure the Datadog agent
+## Configure the Datadog agent
 
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 

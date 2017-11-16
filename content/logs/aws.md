@@ -11,8 +11,7 @@ beta: true
 Push your AWS log information to Datadog using a Lambda function bound to an S3 bucket. First, configure your AWS services to push logs to S3. A Lambda function is then triggered and processes the log file, eliminating the need for additional services to poll for that information.
 
 ## Setup
-### Installation
-#### Create a new lambda function
+### Create a new lambda function
 
 1. Navigate to the [Lambda Console](https://console.aws.amazon.com/lambda/home?region=us-east-1) and create a new function:
     {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
@@ -24,7 +23,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     {{< img src="logs/aws/basic_information.png" alt="Basic Information" responsive="true" >}}
 5. Select **Create Function**
 
-#### Provide the code and configure the lambda
+### Provide the code and configure the lambda
 
 1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
 2. Change the Runtime to **Python 2.7** and set the handler to **lambda_function.lambda_handler**
@@ -40,7 +39,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
 6. Scroll back to the top of the page and hit **Save and test**
 
-#### Test your Lambda
+### Test your Lambda
 
 1. Configure the test event. Select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
@@ -51,7 +50,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 Your lambda function is now ready to send logs to your Datadog platform.
 Setup the relevant triggers for each AWS service you want to monitor.
 
-#### S3, Cloudwatch, API Gateway, Kinesis and SNS
+### S3, Cloudwatch, API Gateway, Kinesis and SNS
 In your lambda, go in the triggers tab and select `Add Trigger`:
 {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
@@ -61,7 +60,7 @@ Select the log source and then follow the AWS instructions:
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
 
-#### ELB
+### ELB
 
 Elastic Load Balancing provides access logs that capture detailed information about requests or connections sent to your load balancer. Each log contains information such as the time it was received, the client's IP address, latencies, request paths, and server responses. Use these access logs to analyze traffic patterns and troubleshoot issues.
 Elastic Load Balancing publishes a log file for each load balancer node every 5 minutes. The load balancer can deliver multiple logs for the same period.
@@ -82,7 +81,7 @@ Set interval to **5 minutes** and define your s3 buckets:
 
 Then go back to the Lambda function and define a trigger on the corresponding s3 bucket.
 
-#### CloudTrail
+### CloudTrail
 
 AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made with the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
 
@@ -91,13 +90,13 @@ When you define your Trails, select a s3 bucket to write the logs in:
 
 Link the lambda function to this s3 bucket to send your logs to Datadog.
 
-#### ECS
+### ECS
 
 ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in you Docker Containers). 
 
 Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the lambda to ship them to your Datadog platform.
 
-#### CloudFront
+### CloudFront
 
 CloudFront is a CDN service which speeds up distribution of your static and dynamic web content, for example, .html, .css, .php and image files to end users.
 

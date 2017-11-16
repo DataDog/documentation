@@ -10,8 +10,7 @@ To send your go logs to Datadog, we recommend to log into a file and then to mon
 
 We strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
-## Setup - Log to file
-### Configure your logger
+## Configure your logger
 For a classic Go configuration, open a `main.go` file and paste the following code:
 
 ```go
@@ -61,7 +60,7 @@ func main() {
 }
 ```
 
-### Configure your Datadog agent
+## Configure your Datadog agent
 
 Create a `go.yaml` file in your `conf.d/` folder with the following content:
 

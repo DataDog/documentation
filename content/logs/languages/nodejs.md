@@ -20,7 +20,7 @@ npm install --save winston
 
 `package.js` will be updated with the corresponding dependencies:
 
-```json
+```
 {
   "name": "...",
 
@@ -62,7 +62,7 @@ Check the content of the `your-appname-info.log` file to see that Winston alread
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
-### Configure your Datadog agent
+## Configure your Datadog agent
 
 Create a `nodejs.yaml` file in your `conf.d/` folder with the following content:
 

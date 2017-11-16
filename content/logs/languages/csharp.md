@@ -10,9 +10,8 @@ To send your C# logs to Datadog, we recommend to log into a file and then to mon
 
 We strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
-## Setup - Log to file
-### Configure your logger
-#### SeriLog
+## Configure your logger
+### SeriLog
 Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
@@ -63,7 +62,7 @@ Then check the `log.json` file; You will see the following event:
 
 [Monitor now your log file with your agent]() to send your logs to your datadog application
 
-#### NLog
+### NLog
 
 NLog is a logging platform for .NET with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
@@ -133,7 +132,7 @@ namespace Datadog
 
 [Monitor now your log file with your agent]() to send your logs to your datadog application
 
-#### Log4net
+### Log4net
 
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
@@ -219,7 +218,7 @@ If you have followed the instructions you should be see in your file (for exampl
 ```
 
 
-### Configure your Datadog agent
+## Configure your Datadog agent
 
 Create a `csharp.yaml` file in your `conf.d/` folder with the following content:
 
