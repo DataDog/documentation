@@ -18,7 +18,7 @@ These functions can be applied to your query in the UI, via the "+" button.
 
 Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API](/api)). See image below.
 
-For alert conditions in the metric monitor itself, configure as follows:
+For [alert conditions](/monitors/monitor_types/#define-the-conditions) in the metric monitor itself, configure as follows:
 
 * Select threshold alert
 * Set the "Trigger when the metric is..." dropdown selector to below or equal to
@@ -26,6 +26,6 @@ For alert conditions in the metric monitor itself, configure as follows:
 
 This configuration will trigger an alert event when no change in value has been registered over the selected timeframe.
 
-Other alert conditions/options can be set to preference. Your monitor's UI configuration should end up looking something like this:
+Other [alert conditions/options](/monitors/monitor_types/#define-the-conditions) can be set to preference. Your monitor's UI configuration should end up looking something like this:
 
 {{< img src="monitors/faq/zero_alert.png" alt="zero_alert" responsive="true">}}

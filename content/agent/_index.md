@@ -19,7 +19,7 @@ The Agent has three main parts: the collector, dogstatsd, and the forwarder:
 
 * The collector runs checks on the current machine for whatever integrations you have and it will capture system metrics such as memory and CPU.
 
-* Dogstatsd is a statsd backend server you can send custom metrics to from an application.
+* Dogstatsd is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
 * The forwarder retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
 

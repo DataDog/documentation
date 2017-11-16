@@ -10,7 +10,8 @@ customnav: infrastructurenav
 
 ## Introduction
 
-Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  
+Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
 {{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
 
@@ -18,17 +19,22 @@ Datadog Process and Container Monitoring allows for real-time visibility of the 
 
 ### Standard Agent Configuration
 
-Live Processes has been introduced in Datadog Agent version 5.16.0.  Please refer to the instructions for standard [Agent installation][1] for platform-specific details.
+**Live Processes has been introduced in Datadog Agent version 5.16.0.**  
+Please refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the config file at 
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [config file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
 
-    /etc/dd-agent/datadog.conf
-    
-and adding the following line to the `[Main]` section
+```
+/etc/dd-agent/datadog.conf
+```
 
+and adding the following line to the `[Main]` section:
+```
     process_agent_enabled: true
-    
-After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+```
+
+After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  
+**Note**: Collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
 
 ### Docker container
 
@@ -69,7 +75,8 @@ Refer to the standard [daemonset installation][4] and the [docker-dd-agent][5] i
 
 ### String Search
 
-Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
+Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  
+**Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" >}}
 
@@ -77,15 +84,29 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers.
 
-*Processes* are tagged by `#user`
+* **Processes** are tagged by `#user`
 
-*Containers* are tagged by `#container_image`
+* **Containers** are tagged by `#container_image`
 
 Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
-ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
+ECS Containers are tagged by:
 
-Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `#job`, and `#deployment`.
+* `#task_name`
+* `#task_version`
+* `#ecs_cluster`
+
+Kubernetes Containers are tagged by:
+
+* `#pod`
+* `#pod_ip`
+* `#service`
+* `#namespace`
+* `#cluster-name`
+* `#replica_set`
+* `#daemon_set`
+* `#job`
+* `#deployment`.
 
 ### Filtering and Pivoting
 
@@ -114,7 +135,9 @@ Ok, so I guess that last one is less exciting after redaction!
 
 Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
 
-From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
+From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  
+In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  
+In the container inspect tray, we also have some recent context for these metrics.
 
 {{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" >}}
 

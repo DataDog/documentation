@@ -4,7 +4,7 @@ kind: faq
 customnav: integrationsnav
 ---
 
-With the Windows version of the Datadog Agent, it is possible to post Events to your Event Stream based on logs from the Windows Event Log.
+With the Windows version of the Datadog Agent, it is possible to post Events to your [Event Stream](/graphing/event_stream/) based on logs from the Windows Event Log.
 
 To do so, open the Datadog Agent Manager and on the left pane navigate to the Windows Event Log section.
 
@@ -89,7 +89,7 @@ instances:
 
 Save the configuration, enable the integration and [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent). Now disconnect from the Windows machine and reconnect.
 
-You should see an Event appear on your Event Stream on the Datadog website. 
+You should see an Event appear on your [Event Stream](/graphing/event_stream/) on the Datadog website. 
 
 *Note that the -Get-WmiObject command outlined will not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you will have to add it to the registry. For more on how to add it to the registry, [check out this article](/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class).
 

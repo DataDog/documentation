@@ -13,9 +13,8 @@ aliases:
 ---
 ## Overview
 
-This guide explains how to send your application's custom metrics to Datadog.
-Sending your application's custom metrics to Datadog will let you correlate
-what's happening with your application, your users and your system.
+This guide explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
+Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog will let you correlate what's happening with your application, your users and your system.  
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,

@@ -23,15 +23,12 @@ The easiest way to get your custom application metrics into Datadog is to send t
 
 ## How It Works
 
-DogStatsD accepts custom metrics, events, and service checks over UDP and periodically aggregates and forwards them to Datadog. Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
+DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.  
+Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-<p>
 {{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
-</p>
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single
-data point over a period of time called the flush interval. Let's walk through an
-example to see how this works.
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.  
 
 Suppose you want to know how many times your Python application is calling a particular database query. Your application can tell DogStatsD to increment a counter each time the query is called:
 
@@ -62,13 +59,12 @@ Then [restart your agent](/agent/faq/start-stop-restart-the-datadog-agent).
 
 Once done, your application can reliably reach—grab the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
-By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the
-`dogstatsd_port` option in the main [Agent configuration file][3]:
+By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][3]:
 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 8125
 
-Restart DogStatsD to effect the change.
+[Restart DogStatsD](/agent/faq/start-stop-restart-the-datadog-agent) to effect the change.
 
 ## Data Types
 

@@ -6,7 +6,7 @@ order: 20.3
 
 ## Get Top 500 Custom Metrics By Hourly Average
 
-Get Top Custom Metrics By Hourly Average.
+Get Top [Custom Metrics](/getting_started/custom_metrics/) By Hourly Average.
 
 ##### Arguments
 * `month` [*required*]:  

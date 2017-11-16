@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 ## Can I collect AWS Custom metrics through the Integration?
 
-Yes. You need to check the 'custom metrics' checkbox on the AWS tile.
+Yes. You need to check the **custom metrics** checkbox on the AWS tile.
 
 
 ## How does the Datadog AWS integration use CloudWatch?

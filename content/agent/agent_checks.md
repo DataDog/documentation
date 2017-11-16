@@ -12,8 +12,7 @@ AgentCheck requires an Agent version >= 3.2.0.
 
 ## Overview
 
-This documentation details how to collect metrics and events from a new data source
-by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
+This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
 look at the `AgentCheck` interface, and then write a simple Agent Check
 that collects timing metrics and status events from HTTP services.
 
@@ -21,6 +20,7 @@ Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds.
 
 ### Should you write an Agent Check or an Integration?
+
 Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.

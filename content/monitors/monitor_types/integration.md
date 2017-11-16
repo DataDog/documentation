@@ -19,5 +19,4 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 - Choosing **Integration Metric** will provide a familiar interface used for a
   interface used for a Metric Monitor. You will be able to choose from any of
   the metrics provided by this integration. Please refer to the
-  [alert conditions](#metrics-monitors) section for details on the available
-  options.
+  [alert conditions](/monitors/monitor_types/#define-the-conditions) section for details on the available options.

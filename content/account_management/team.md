@@ -14,11 +14,12 @@ customnav: accountmanagementnav
 The new user will receive an email with a link to login.
 
 ## Datadog User roles
+
 Datadog provides 3 user roles:
 
-* **Admins** have access to billing information, the ability to revoke API keys, removing users, and can configure read-only dashboards. They can also promote standard users to Admins.
+* **Admins** have access to billing information, the ability to revoke API keys, removing users, and can configure [read-only dashboards](/graphing/dashboards/). They can also promote standard users to Admins.
 
-* A **standard user** has access to view and modify all monitoring features that Datadog offers such as dashboards, monitors, events, and notebooks.
+* **Standard users** have access to view and modify all monitoring features that Datadog offers such as [dashboards](/graphing/dashboards/), [monitors](/monitors/), [events](/graphing/event_stream), and [notebooks](/graphing/notebooks).
 
 * **Read only users** are created by admins and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a dashboard with someone outside their unit.
 
