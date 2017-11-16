@@ -1,5 +1,5 @@
 ---
-title: NodeJS log Collection
+title: NodeJS Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
@@ -10,7 +10,7 @@ beta: true
 
 To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 
 
-We also strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
 Winston is available through [NPM](https://www.npmjs.com). So, in order to get started, you want to add the dependency to your code.
 

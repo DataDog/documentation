@@ -1,5 +1,5 @@
 ---
-title: Java log Collection
+title: Java Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
@@ -23,11 +23,11 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-**To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
 
-We also strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
-Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging library:
+Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
 ## Configure your logger
 ### Log4j

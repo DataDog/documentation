@@ -1,5 +1,5 @@
 ---
-title: Ruby on Rails log Collection
+title: Ruby on Rails Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
@@ -27,7 +27,7 @@ You get a single log line with all the important information, like this:
 method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
 ```
 
-**To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
 
 ## Adding the GEMs
 Add the 2 following GEMs in your project:
