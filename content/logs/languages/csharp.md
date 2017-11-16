@@ -8,6 +8,8 @@ beta: true
 
 To send your C# logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent. Here are setup examples for the `log4net`, `serilog` and `Nlog` logging library
 
+We strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+
 ## Setup - Log to file
 ### Configure your logger
 #### SeriLog

@@ -33,16 +33,27 @@ To start collecting logs for a given integration, you need to uncomment the logs
 If an integration does not support logs by default, you may need to use use the custom file configuration below.
 
 <div class="alert alert-warning">
-During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations and example configuration files is available below:
+During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-* Apache: [apache.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
-* AWS: [See our dedicated page](/logs/aws)
-* Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
-* IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
-* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/languages/java)
-* Mongo: [mongo.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
-* Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+### Crawlers
+* [AWS](/logs/aws)
+
+### Frameworks
+
+* [Java](/logs/languages/java) 
+* [C#](/logs/languages/csharp)
+* [Go](/logs/languages/go)
+* [NodeJs](/logs/languages/nodejs)
+* [Ruby](/logs/languages/rubby)
+
+### Agent checks
+
+* [Apache](/integrations/apache) 
+* [Haproxy](/integrations/haproxy)
+* [IIS](/integrations/iis)
+* [Mongo](/integrations/mongo)
+* [Nginx](/integrations/nginx)
 
 ## Custom log collection
 

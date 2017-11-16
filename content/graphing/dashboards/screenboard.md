@@ -15,12 +15,12 @@ customnav: graphingnav
 
 ## Read Only
 
-[An Administrator](/acount_management/team/#datadog-user-roles) or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
+[An Administrator](/account_management/team/#datadog-user-roles) or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
 {{< img src="graphing/dashboards/screenbaord/read_only.png" alt="Read Only" responsive="true" >}}
 
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 
-Only [account Administrators](/acount_management/team/#datadog-user-roles) and the Screenboard creator can activate read-only mode for a Screenboard.  
+Only [account Administrators](/account_management/team/#datadog-user-roles) and the Screenboard creator can activate read-only mode for a Screenboard.  
 Any user in the organization, regardless of admin privileges, can sign up to receive change notifications for a particular Screenboard.
 
 If a user decides to track changes for a screenboard, the following Screenboard changes will be reported to the user through an event in the [event stream](/graphing/event_stream/):

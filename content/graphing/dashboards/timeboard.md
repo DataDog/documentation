@@ -13,13 +13,13 @@ customnav: graphingnav
 
 ## Read Only
 
-[An Administrator](/acount_management/team/#datadog-user-roles) or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
+[An Administrator](/account_management/team/#datadog-user-roles) or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
 
 {{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" >}}
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
-Only account [administrator](/acount_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of admin privileges, can sign up to receive change notifications for a particular Timeboard.
+Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of admin privileges, can sign up to receive change notifications for a particular Timeboard.
 
 If a user decides to track changes for a Timeboard, the following Timeboard changes will be reported to the user through an event in the event stream:
 

@@ -8,6 +8,8 @@ beta: true
 
 To send your go logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus](https://github.com/sirupsen/logrus)
 
+We strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+
 ## Setup - Log to file
 ### Configure your logger
 For a classic Go configuration, open a `main.go` file and paste the following code:
