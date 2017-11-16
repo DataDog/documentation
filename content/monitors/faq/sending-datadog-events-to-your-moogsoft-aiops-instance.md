@@ -27,7 +27,7 @@ Moogsoft supports the ingesting of Datadog Events via Webhooks.  Below you will
 
 Definitions of all fields available for mapping between Moogsoft and Datadog can be found at the following links: 
     * https://docs.moogsoft.com/display/060102/Event+Details 
-    * https://docs.datadoghq.com/integrations/webhooks/#usage
+    * [Datadog Webhooks usage](/integrations/webhooks/#usage)
 
 4. To generate the basic authentication string that will be used in the Headers section of the above Webhook Integration, take a username and password for a Moogsoft user in the following format 'username:password' and base64 encode it. 
 5. Add the following JSON to the Headers field in Datadog.  Replace xxx with the output from step 4:

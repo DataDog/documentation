@@ -5,7 +5,7 @@ order: 6.4
 ---
 
 ## Query The Event Stream
-The event stream can be queried and filtered by time, priority, sources and tags.
+The [event stream](/graphing/event_stream/) can be queried and filtered by time, priority, sources and tags.
 Note: if the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 
 ##### ARGUMENTS

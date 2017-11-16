@@ -48,7 +48,7 @@ languages:
           name: "Custom metrics"
           url: "/getting_started/custom_metrics/"
           weight: 330
-          parent: menu_references_getting_started         
+          parent: menu_references_getting_started
 
 
         # AGENT
@@ -148,10 +148,15 @@ languages:
           url: "/agent/tagging/"
           weight: 80
           parent: menu_references_agent
+        - identifier: customnav_agentnav_proxy
+          name: "Proxy Configuration"
+          url: "/agent/proxy/"
+          weight: 90
+          parent: menu_references_agent
         - identifier: customnav_agentnav_faq
           name: "FAQ"
           url: "/agent/faq/"
-          weight: 90
+          weight: 100
           parent: menu_references_agent
         # AGENT - Subnav end
 
@@ -163,6 +168,21 @@ languages:
           pre: "nav_integrations"
           weight: 50
         # INTEGRATIONS - Subnav start
+        - identifier: customnav_integrationsnav_integration_sdk
+          name: "Integration SDK"
+          url: "/integrations/integration_sdk/"
+          weight: 60
+          parent: menu_references_integrations
+        - identifier: customnav_integrationsnav_new_integration
+          name: "New Integration"
+          url: "/integrations/new_integration/"
+          weight: 70
+          parent: menu_references_integrations
+        - identifier: customnav_integrationsnav_faq
+          name: "FAQ"
+          url: "/integrations/faq/"
+          weight: 80
+          parent: menu_references_integrations
         # INTEGRATIONS - Subnav end
 
 
@@ -397,7 +417,7 @@ languages:
           weight: 80
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
-          name: "Api"
+          name: "Trace API"
           url: "/api/#traces"
           weight: 90
           parent: menu_references_tracing
@@ -417,7 +437,7 @@ languages:
           weight: 100
         # DEVELOPERS - Subnav start
         - identifier: customnav_developersnav_api
-          name: "Api"
+          name: "API"
           url: "/api/"
           weight: 30
           parent: menu_references_developers
@@ -431,11 +451,6 @@ languages:
           url: "/developers/libraries/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_developersnav_integration_sdk
-          name: "Integration SDK"
-          url: "/developers/integration_sdk/"
-          weight: 60
-          parent: menu_references_developers
         - identifier: customnav_developersnav_metrics
           name: "Metrics"
           url: "/developers/metrics/"
@@ -445,11 +460,6 @@ languages:
           name: "Metric Types"
           url: "/developers/metrictypes/"
           weight: 80
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_new_integration
-          name: "New Integration"
-          url: "/developers/new_integration/"
-          weight: 90
           parent: menu_references_developers
         - identifier: customnav_developersnav_testing
           name: "Testing"
@@ -487,7 +497,7 @@ languages:
           weight: 40
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_saml
-          name: "Saml"
+          name: "SAML"
           url: "/account_management/saml/"
           weight: 50
           parent: menu_references_account_management

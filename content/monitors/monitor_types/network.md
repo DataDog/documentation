@@ -44,7 +44,7 @@ configuration.
 
 ##  Built a network monitor on an http check.
 
-[Once you have created an HTTP check](https://docs.datadoghq.com/integrations/http_check/) with your Datadog Agent, you might want to monitor it on your Datadog application
+[Once you have created an HTTP check](/integrations/http_check/) with your Datadog Agent, you might want to monitor it on your Datadog application
 
 To build a Network monitor on an http check you need to:
 1 - Create a network monitor: Monitor > New monitor

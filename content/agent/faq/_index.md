@@ -64,5 +64,4 @@ customnav: agentnav
 * [Datadog security in Docker production environments](/agent/faq/datadog-security-in-docker-production-environments)
 * [How do I change the frequency of an agent check?](/agent/faq/how-do-i-change-the-frequency-of-an-agent-check)
 * [Is it possible to manage the Datadog agent and integrations using configuration management tools?](/agent/faq/is-it-possible-to-manage-the-datadog-agent-and-integrations-using-configuration-management-tools)
-* [How can I change the hostname?](/agent/faq/how-can-i-change-the-hostname)
 * [How does Datadog determine the agent hostname](/agent/faq/how-does-datadog-determine-the-agent-hostname)

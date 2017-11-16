@@ -85,7 +85,7 @@ Within 5 minutes of merging to master, it will deploy automatically. You can see
 
 ## How to add a new integration
 
-[See the dedicated doc page](https://docs.datadoghq.com/developers/new_integration)
+[See the dedicated doc page](/integrations/new_integration)
 
 ## Github personal token
 

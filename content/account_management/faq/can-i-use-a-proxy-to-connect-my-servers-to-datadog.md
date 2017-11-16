@@ -5,15 +5,13 @@ customnav: accountmanagementnav
 ---
 
 ## Why Use a Proxy
-If your network configuration restricts outbound traffic, you can proxy all agent traffic through one or several hosts that have more permissive outbound policies.
+If your network configuration restricts outbound traffic, you can [proxy all agent traffic](/agent/proxy) through one or several hosts that have more permissive outbound policies.
 
-You have a few options to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the internet.
+You have a few options to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the internet: 
 
-Using the agent as a proxy (for up to 16 agents per proxy)
-Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
-Using HAProxy (High volume solution. A single HAProxy instance can accomodate traffic from ~1000 Datadog agents)
-For specifics reference: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration
-
+* [Using the agent as a proxy](/agent/proxy/#using-the-agent-as-a-proxy) (for up to 16 agents per proxy)
+* [Using a web proxy](/agent/proxy/#using-a-web-proxy-as-proxy) (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
+* [Using HAProxy](/agent/proxy/#using-haproxy-as-a-proxy) (High volume solution. A single HAProxy instance can accomodate traffic from ~1000 Datadog agents)
  
 Here is a common scenario with an Amazon VPC:
 {{< img src="account_management/faq/Datadog_Amazon_VPC.jpg" alt="Datadog Amazon VPC" responsive="true" >}}

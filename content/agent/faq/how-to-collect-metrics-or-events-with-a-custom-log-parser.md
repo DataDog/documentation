@@ -143,7 +143,7 @@ Let's imagine that you want to collect events from logging where you have enough
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-We could set up a log parser like the following to create an event from this logged data in our datadog event stream:
+We could set up a log parser like the following to create an event from this logged data in our datadog [event stream](/graphing/event_stream/):
 
 ```python
 

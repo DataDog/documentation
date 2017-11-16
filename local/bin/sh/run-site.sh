@@ -37,7 +37,6 @@ if [ ${RUN_SERVER} == true ]; then
 		fi
 		if [[ ${args} != "" ]]; then
 			#update_pre_build.py ${args}
-			#code_block.py ${args}
 			integrations_sync.py ${args}
 		fi
 	fi

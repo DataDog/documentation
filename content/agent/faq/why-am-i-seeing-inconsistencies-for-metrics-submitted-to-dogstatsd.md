@@ -6,7 +6,7 @@ customnav: agentnav
 
 ## Scenario
 
-The DogStatsD server can support a rate of ~2K packets per flush (10 seconds), if the packet number exceeds this it is possible that the DogStatsD Server won't be able to submit the metrics, resulting in gaps in your data.
+[The DogStatsD server](/developers/dogstatsd) can support a rate of ~2K packets per flush (10 seconds), if the packet number exceeds this it is possible that the DogStatsD Server won't be able to submit the metrics, resulting in gaps in your data.
 
 ## How do I identify this?
 

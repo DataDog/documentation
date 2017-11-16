@@ -10,6 +10,8 @@ beta: true
 
 To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 
 
+We also strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+
 Winston is available through [NPM](https://www.npmjs.com). So, in order to get started, you want to add the dependency to your code.
 
 ```
@@ -18,7 +20,7 @@ npm install --save winston
 
 `package.js` will be updated with the corresponding dependencies:
 
-```json
+```
 {
   "name": "...",
 
@@ -60,7 +62,7 @@ Check the content of the `your-appname-info.log` file to see that Winston alread
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
-### Configure your Datadog agent
+## Configure your Datadog agent
 
 Create a `nodejs.yaml` file in your `conf.d/` folder with the following content:
 

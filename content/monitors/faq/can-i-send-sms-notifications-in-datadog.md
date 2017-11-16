@@ -4,4 +4,5 @@ kind: faq
 customnav: monitornav
 ---
 
-Many of our customers will use the [webhooks integration](/integrations/webhooks) to send alerts to an SMS service like Twilio.  We have [a blog post](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio) which should help you achieve this.
+Many of our customers will use the [webhooks integration](/integrations/webhooks) to send alerts to an SMS service like Twilio.  
+We have [a blog post](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio) which should help you achieve this.

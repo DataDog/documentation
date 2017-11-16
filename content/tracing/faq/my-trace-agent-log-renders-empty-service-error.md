@@ -4,10 +4,15 @@ kind: faq
 autotocdepth: 3
 customnav: tracingnav
 ---
+ 
+
 
 If your Agent is not rendering your traces on the UI, the first place to look for errors will be the trace-agent.log. 
 
+
 You may see the following errors : 
+
+
 
 ```
 2017-03-31 08:36:44 ERROR (receiver_logger.go:21) - dropping trace reason: 
@@ -16,11 +21,17 @@ res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 ```
 
 
-## Check that the Service was properly defined 
+
+### Check that the Service was properly defined
+
 
 Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Please refer to our documentations for further details: [this page](/tracing/languages) will lead you to the specific languages libraries we use.
 
-## My Service is defined properly 
+
+
+### My Service is defined properly 
+
+
 
 The issue will probably linked to the actual location of your code instrumentation.
 
@@ -36,7 +47,10 @@ User hit web application >> Handler function called >> lower level span created 
 
 If the Child Span isn't associated directly to the Root Span, you could end up with the error described above, especially if the Child Service Span definition is based on the Parent Span definition. 
 
-## Nope, my code is properly instrumented 
+
+
+### Nope, my code is properly instrumented 
+
 
 It's time to contact [us](/help)! 
 

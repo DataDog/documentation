@@ -16,7 +16,7 @@ Yes! We offer the following "official" solutions today:
 
 ### Ansible
 * https://github.com/DataDog/ansible-datadog
-* http://docs.datadoghq.com/integrations/ansible/
+* [Ansible documentation](/integrations/ansible/)
 
 Chef, Puppet and Ansible integrations were written using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
 

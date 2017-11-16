@@ -8,22 +8,31 @@ customnav: graphingnav
 ## Timeseries
 *Supported on Screenboards and Timeboards*
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the timeboard or in the graph on a screenboard. Timeseries' can be displayed as lines, areas, and bars. Timeseries is available on both timeboards and screenboards.
-
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the [Timeboard](/graphing/dashboards/timeboard/) or in the graph on a [Screenboard](/graphing/dashboards/screenboard/).  
+Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" >}}
 
 ## Query Value
 *Supported on Screenboards and Timeboards*
 
-Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range. The value displayed by a query value need not represent an instantaneous measurement. The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
-{{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Timeseries" responsive="true" >}}
+Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.  
+The value displayed by a query value need not represent an instantaneous measurement.  
+The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
+{{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" >}}
 
+### What does "Take the X value from the displayed timeframe" ?
+
+{{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" >}}
+
+The Query Value Widget only displays one Value, unlike a timeseries for example, that will display several points. 
+
+Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above. 
 
 ## Heatmap
 *Supported on Screenboards and Timeboards*
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be.  Heatmap is available on both timeboards and screenboards.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" >}}
 
@@ -31,8 +40,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. Distribution is available on both timeboards and screenboards.
-
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-distribution-example.png" alt="Distribution" responsive="true" >}}
 
 
@@ -40,7 +48,7 @@ The Distribution visualization is another way of showing metrics aggregated acro
 ## Toplist
 *Supported on Screenboards and Timeboards*
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc. Toplist is available on both timeboards and screenboards.
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" >}}
 
@@ -56,15 +64,14 @@ The Change graph will show you the change in a value over the time period chosen
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main Infrastructure Hostmap menu. 
+The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 
 ## Free Text
-
 *Supported on Screenboards only*
 
-Free text is simply a widget that allows you to add headings to your Screenboard. This is commonly used to state the overall purpose of the dashboard.
+Free text is simply a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard). This is commonly used to state the overall purpose of the dashboard.
 
 ## Event Timeline
 *Supported on Screenboards only*
@@ -75,17 +82,21 @@ The event timeline is a widget version of the timeline that appears at the top o
 ## Event Stream
 *Supported on Screenboards only*
 
-The event stream is a widget version of the stream of events on the [Event Stream view](https://app.datadoghq.com/event/stream).
+The event stream is a widget version of the stream of events on the [Event Stream view](/graphing/event_stream/).
 {{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" >}}
+
+**This widgets displays only the 100 most recent events**
 
 ## Image
 *Supported on Screenboards only*
 
 Image allows you to embed an image on your dashboard. Images can be PNG, JPG, or even animated GIF files.
+
 ## Note
 *Supported on Screenboards only*
 
 Note is similar to Free Text, but allows for more formatting options. Also, an arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.
+
 ## Alert Graph
 *Supported on Screenboards only*
 

@@ -1,5 +1,5 @@
 ---
-title: ダウンタイムをスケジュールする
+title: Downtimes
 kind: documentation
 autotocdepth: 2
 customnav: monitornav

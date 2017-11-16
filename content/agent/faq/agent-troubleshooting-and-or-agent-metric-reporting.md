@@ -26,11 +26,13 @@ If you get the Agent installed but are not seeing any data in Datadog, you can t
 
 If not, you should also [check the logs](/agent/faq/log-locations). Errors in the logs may also reveal the cause of any issues.
 
-If not, please send both the full output of [the info command and the logs as attachments](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) to support@datadoghq.com.
+If not, please send both the full output of [the info command and the logs as attachments](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) to [us](/help)
 
 ## Check your machine's time
 
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission. To check for this, run:
-
+```
 date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
+```
+
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.

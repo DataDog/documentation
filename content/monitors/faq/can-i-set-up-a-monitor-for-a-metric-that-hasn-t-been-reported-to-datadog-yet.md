@@ -4,8 +4,6 @@ kind: faq
 customnav: monitornav
 ---
 
-Yes, this can be done in a couple ways.
-
 **But why create a monitor for a metric that doesn't even exist?**
 
 This is useful in situations where you want to be alerted on a system-critical metric that won't become available until a later time. A common use case is you're getting ready to launch a new app and want to set up some monitors in advance. However, since your app is still in staging and your Agents only monitor your prod environment, the metrics that you want to monitor don't exist in the UI:
@@ -24,4 +22,4 @@ Though the metric may not yet be recognized by Datadog, the monitor should still
 
 **Using the API**
 
-Refer to our [Monitors API](/api) on creating a metric monitor.
+Refer to our [Monitors API](/api/#monitors) on creating a metric monitor.

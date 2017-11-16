@@ -53,7 +53,7 @@ You can click on any log line to see more details about it:
 
 Click on its `host` or `service` and select `Focus on Host & Service` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
-{{< img src="logs/explore/focus_host_service.png" alt="focus on host and service.png" >}}
+{{< img src="logs/explore/focus_host_service.png" alt="focus on host and service.png" responsive="true" >}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
@@ -139,7 +139,7 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ### Tags
 
-Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/) that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
@@ -150,6 +150,14 @@ Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" >}}
+
+### Saved Searches
+
+Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching wether the search name or query.
+
+{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" >}}
+
+
 
 ### Escaping of special characters
 The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.

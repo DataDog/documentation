@@ -18,4 +18,4 @@ We ask to mount into the Agent a few directories:
 
 If you use some integrations, you may need to link containers with the Agent so that it can contact it (example: get the status page from Apache). There is no restriction around that (you can namespace, restrict it, etc.) as long as the Agent can get the HTTP page.
 
-You may also want to use DogStatsD, in which case other containers will send UDP datagrams to the Agent. 
+You may also want to use [DogStatsD](/developers/dogstatsd), in which case other containers will send UDP datagrams to the [Agent](/agent/). 

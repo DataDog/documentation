@@ -9,6 +9,10 @@ aliases:
 ## Overview
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
+<div class="alert alert-info">
+We recommend to use the format <code>key:value</code> when using tags. Like <code>env:prod</code> or <code>role:database</code>
+</div>
+
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the integration, in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the integration or via the configuration files.
 
@@ -81,14 +85,14 @@ The Datadog integrations are all configured via the yaml configuration files loc
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
-    tags: firsttag, secondtag, thirdtag
+    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
 
 or
 
     tags:
-      - firsttag
-      - secondtag
-      - thirdtag
+      - key_first_tag:value_1
+      - key_second_tag:value_2
+      - key_third_tag:value_3
 
 You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid.
 
@@ -112,20 +116,19 @@ You can also assign tags to hosts, but not to integrations using the API. The en
 ## How to use tags
 After you have assigned tags at the host and integration level, you can start using them to filter and group in interesting ways. There are several places you can use tags:
 
-- Events List
-- Dashboards
-- Infrastructure List
-- Host Map
-- Monitors
+- [Events List](/graphing/event_stream/)
+- [Dashboards](/graphing/dashboards/)
+- [Infrastructure List](/graphing/infrastructure/)
+- [Host Map](/graphing/infrastructure/hostmap)
+- [Monitors](/monitors/)
 
 ### Using tags in the Events List
 
-The Events List will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is `tags:role:cassandra`.
+The [Events List](/graphing/event_stream/) will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is `tags:role:cassandra`.
 
 {{< img src="agent/tagging/eventtags.png" alt="Events List and Tags" responsive="true" >}}
 
 ### Using tags in Dashboards
-
 
 You can use tags to narrow down the metrics to display on a dashboard graph, or to create groups of metrics to display. 
 To narrow down the metrics to display, enter the tag in the `from:` textbox. 
@@ -135,23 +138,23 @@ You will now be looking at a chosen metric over all the hosts that have that par
 
 To group using tags, enter the key part of the tag in the `avg by:` textbox. 
 
-For instance, if you have a time series graph showing a metric tagged by the reporting hosts' roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox. This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
-
+For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.  
+This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" >}}
 
-You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. 
+You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/). 
 Simply enter `tags:` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
 
 ### Using tags in the Infrastructure List and the Host Map
 
-To filter the list of hosts in the Infrastructure list, enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you will see each role as a group heading followed by the hosts with that tag.
+To filter the list of hosts in the [Infrastructure list](/graphing/infrastructure/), enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you will see each role as a group heading followed by the hosts with that tag.
 
 {{< img src="agent/tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" >}}
 
 ### Using tags in Monitors
 
-When creating a monitor:
+When creating a [monitor](/monitors/monitor_types/):
 
 * Use tags in the `from:` textbox to limit the monitor scope to only metrics that have those tags.
 {{< img src="agent/tagging/monitortags.png" alt="from textbox tags in Monitors" responsive="true" >}}
@@ -165,7 +168,6 @@ Tags on these events are related to the `avg by:` value. In order to have host-r
 
 ### Tell me about tagging!
 
-
 Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
 
@@ -177,8 +179,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.c
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
 ```
 
-What we recommend doing is leaving off the hostname; it will then default to the host
-that is sending that point, since they’re different hosts it will be treated as different points:
+What we recommend doing is leaving off the hostname; it will then default to the host that is sending that point, since they’re different hosts it will be treated as different points:
 
 ```
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])

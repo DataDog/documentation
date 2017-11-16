@@ -17,4 +17,4 @@ To revoke the keys used to share your graphs [navigate](https://app.datadoghq.c
 
 To revoke a shared ScreenBoard navigate to 'Dashboard / Dashboard List', select a ScreenBoard, click on the cog to edit it and click 'Revoke public URL'.
 
-It's also possible to embed TimeBoards via [the API](http://docs.datadoghq.com/api/#embeds). 
+It's also possible to embed TimeBoards via [the API](/api/#embeds). 

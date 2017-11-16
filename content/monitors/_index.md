@@ -18,7 +18,7 @@ Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
 Hipchat) or other custom endpoints via webhooks.
 
-Triggered monitors will appear in the event stream, allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
+Triggered monitors will appear in the [event stream](/graphing/event_stream/), allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
 In this section you can:
 
@@ -57,7 +57,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
 ## Auditing Monitors
 
-Any changes to monitors will create an event in the stream that explains the change and shows the user that made the actual change.
+Any changes to monitors will create an event in the [event stream](/graphing/event_stream) that explains the change and shows the user that made the actual change.
 
 Assuming you've made changes to your Monitors, you can see examples with the following event search:
 ```
@@ -68,4 +68,4 @@ We also provide you with the ability to be notified on changes to a monitor you 
 
 {{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
 
-Setting the above to "Notify" will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.
+Setting the above to **Notify** will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.

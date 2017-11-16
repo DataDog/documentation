@@ -10,12 +10,12 @@ Some Datadog users have combined webhook notifications with downtime scoping via
 
 At a high level, the setup for this is as follows:
 
-* Alert A triggers and has an @webhook-notification.
-* Notification reaches out to the [Datadog downtime API](http://docs.datadoghq.com/api/#downtimes) by `$scope` to mute any other alerts.
+* Alert A triggers and has an `@webhook-notification`.
+* Notification reaches out to the [Datadog downtime API](/api/#downtimes) by `$scope` to mute any other alerts.
 * When Alert A resolves, use a different @webhook-notification to remove the downtimes from the same $scope.
-It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope](http://docs.datadoghq.com/api/#cancel-downtime-by-scope).
+It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope](/api/#cancel-downtime-by-scope).
 
-First, create the webhooks (link to in-app integration [tile here](https://app.datadoghq.com/account/settings#integrations/webhooks)):
+First, create the webhooks (link to in-app integration tile [here](https://app.datadoghq.com/account/settings#integrations/webhooks)):
 {{< img src="monitors/faq/mute_demo_webhook.png" alt="mute_demo_webhook" responsive="true">}}
 
 Full text for API endpoints (2nd input box for each in the left column):

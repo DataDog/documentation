@@ -6,9 +6,10 @@ customnav: monitornav
 
 ## Conditional Contacts
 
-Datadog monitors allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered.
+[Datadog monitors](/monitors/) allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered.
 
-Message template variables provide this kind of conditional processing and are described within the help text in section 3 of the monitor edit page shown below:
+[Message template variables](/monitors/notifications) provide this kind of conditional processing and are described within the help text in section 3 of the monitor edit page shown below:
+
 {{< img src="monitors/faq/conditional_notification.png" alt="conditional_notification" responsive="true">}}
 
 These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
