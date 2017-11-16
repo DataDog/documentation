@@ -45,7 +45,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * [C#](/logs/languages/csharp)
 * [Go](/logs/languages/go)
 * [NodeJs](/logs/languages/nodejs)
-* [Ruby](/logs/languages/rubby)
+* [Ruby](/logs/languages/ruby)
 
 ### Agent checks
 
