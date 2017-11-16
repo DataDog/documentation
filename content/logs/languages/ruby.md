@@ -29,8 +29,7 @@ method=GET path=/jobs/833552.json format=json controller=jobs action=show status
 
 **To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
 
-## Setup - Log to file
-### Adding the GEMs
+## Adding the GEMs
 Add the 2 following GEMs in your project:
 
 ```ruby
@@ -38,7 +37,7 @@ gem 'logging-rails', :require => 'logging/rails'
 gem 'lograge'
 ```
 
-###Configure Lograge
+##Configure Lograge
 In your configuration file, set the following:
 
 ```ruby
@@ -58,7 +57,7 @@ end
 
 **Note**:You can also ask Lograge to add contextual information to your logs. Please refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
 
-### Disable log coloration
+## Disable log coloration
 As it would be weirdly displayed in your Datadog application please disable your log coloration:
 
 ```ruby
@@ -68,7 +67,7 @@ config.colorize_logging = false
 
 Now let's configure `logging-rails` that is going to convert everything in JSON format.
 
-### Configuring the logging-rail gem
+## Configuring the logging-rail gem
 If this is not already done, type the following command:
 
 ```shell
@@ -100,7 +99,7 @@ Logging.appenders.file(
 
 If you want to tweak the log layout, all items available can be found directly from the [source repository](https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100)
 
-### Configure your Datadog agent.
+## Configure your Datadog agent.
 
 Create a `ruby.yaml` file in your `conf.d/` folder with the following content:
 

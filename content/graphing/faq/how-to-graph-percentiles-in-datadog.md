@@ -14,7 +14,7 @@ Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, ma
 
 * A quick [introduction to dogstatsd](/agent/faq/can-i-use-my-own-statsd-client)
 
-* [Dogstatsd clients available for each programming language](http://docs.datadoghq.com/libraries/).
+* [Dogstatsd clients available for each programming language](/libraries/).
 
 ### Additional percentiles
 

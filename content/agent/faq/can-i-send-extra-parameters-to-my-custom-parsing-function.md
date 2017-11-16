@@ -19,15 +19,14 @@ And in your parsers_module.py a function defined as:  
 def custom_parser(logger, line)
 ```
 
-You can now change the arity of your function to take extra parameter as shown here: 
-
-https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
+You can now change the arity of your function to take extra parameter as shown [here](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
 
 So if you change your configuration file to:
 
 ```
 dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1:customvar2
 ```
+
 And your parsing function as:
 
 ```python
@@ -41,10 +40,8 @@ You will then have a tuple parameter in **parser_args** as (customvar1, customva
 
 As an example, if we have the same parser as in the documentation but this time we do not want to extract the metric name from the log but to set it thanks to this parameter:
 
-In my configuration file I have: 
+In my configuration file I would have: 
 
 ```
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
-
-See attachment for the python function.`

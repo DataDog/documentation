@@ -112,7 +112,7 @@ Currently, yes:
 
 1. All integrations we have get data flowing almost automatically after
 launching the Agent (intial reporting may take a few minutes, but not longer than 10).
-2. If you have custom metrics, you can indicate specifically where
+2. If you have [custom metrics](/getting_started/custom_metrics/), you can indicate specifically where
 to pull the data from.
 
 [1]: /agent/

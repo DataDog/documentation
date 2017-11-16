@@ -7,7 +7,7 @@ customnav: monitornav
 
 ## Overview
 
-Notifications are a key component of any monitor. You want to make sure the
+Notifications are a key component of any [monitor](/monitors). You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
 {{< img src="monitors/notifications/notification.png" alt="notification" responsive="true">}}
@@ -114,7 +114,7 @@ Here is an example of how you can give a different message depending on the trig
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
 ||[host](/monitors/monitor_types/host)| [metric](/monitors/monitor_types/metric)| [integration](/monitors/monitor_types/integration)| [process](/monitors/monitor_types/process)| [network](/monitors/monitor_types/network)| [custom check](/monitors/monitor_types/custom_check)| [event](/monitors/monitor_types/event)|
-| :---------------------|:------------------|:------------------------------|:--------------------------------------|:----------------------------------|:------------------------------------------------------|:--------------------------|:------------------|
+| :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
 | **Conditionals**      |
 | `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
 | `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
@@ -236,6 +236,18 @@ If you would like all monitors for a specific application or integration, you ca
 ```
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
+
+## Using message template variables to dynamically create @-mentions 
+
+Use message template variables within a monitor message to dynamically build **@-mentions**.  
+
+For example, if the rendered variable is setup as a channel in the Slack integration: 
+
+* `@slack-{{owner.name}}` post a slack DM message directly the owner of this monitor.
+
+* `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
+
+Learn more about this [here](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
 
 ## What's next ? 
 

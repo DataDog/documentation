@@ -3,6 +3,18 @@ title: Graphing Functions
 kind: documentation
 autotocdepth: 2
 customnav: graphingnav
+aliases: 
+  - /examples/aws-metrics/
+  - /examples/month_before/
+  - /examples/graphing-functions/
+  - /examples/day_before/
+  - /examples/json-editing/
+  - /examples/nginx-metrics/
+  - /examples/dashboards/
+  - /examples/hour_before/
+  - /examples/os-metrics/
+  - /examples/week_before/
+  - /examples/cassandra-metrics/
 ---
 
 ## Arithmetic
@@ -223,6 +235,8 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 ### .as_count() or as_rate()
 
 These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post][1].
+
+Note: The only available query with `as_count()` is `sum()` (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 
 ## Rank
 ### top()

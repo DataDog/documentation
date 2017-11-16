@@ -343,8 +343,8 @@ instances:
 
 ## Further Reading
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect!](/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect)
-* [View JMX data in jConsole and set up your jmx.yaml to collect them](/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
-* [jmx.yaml error: Include Section](/faq/jmx-yaml-error-include-section)
-* [Collecting Composite type JMX attributes](/faq/collecting-composite-type-jmx-attributes)
-* [How to run JMX commands in Windows?](/faq/how-to-run-jmx-commands-in-windows)
+* [I Have a Matching Bean for my JMX integration but nothing on Collect!](/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect)
+* [View JMX data in jConsole and set up your jmx.yaml to collect them](/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
+* [jmx.yaml error: Include Section](/integrations/faq/jmx-yaml-error-include-section)
+* [Collecting Composite type JMX attributes](/integrations/faq/collecting-composite-type-jmx-attributes)
+* [How to run JMX commands in Windows?](/integrations/faq/how-to-run-jmx-commands-in-windows)

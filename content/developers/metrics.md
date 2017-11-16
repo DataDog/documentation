@@ -13,9 +13,8 @@ aliases:
 ---
 ## Overview
 
-This guide explains how to send your application's custom metrics to Datadog.
-Sending your application's custom metrics to Datadog will let you correlate
-what's happening with your application, your users and your system.
+This guide explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
+Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog will let you correlate what's happening with your application, your users and your system.  
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,
@@ -348,7 +347,7 @@ end
 Using the StatsD server bundled with the Datadog Agent is the simplest
 way of submitting metrics to Datadog, but it's not the only one. Here are some other ways of getting your metrics data into Datadog:
 
-* Submit metrics directly to Datadog's [HTTP API](https://docs.datadoghq.com/api/)
+* Submit metrics directly to Datadog's [HTTP API](/api/)
 * Use Dropwizard's Java [metrics](https://github.com/dropwizard/metrics) library, with the [metrics-datadog](https://github.com/coursera/metrics-datadog) backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera](https://www.coursera.org), and [Bazaarvoice](http://www.bazaarvoice.com) for the great contributions).
 
 ## Seeing Your Custom Metrics

@@ -19,7 +19,7 @@ The Agent has three main parts: the collector, dogstatsd, and the forwarder:
 
 * The collector runs checks on the current machine for whatever integrations you have and it will capture system metrics such as memory and CPU.
 
-* Dogstatsd is a statsd backend server you can send custom metrics to from an application.
+* Dogstatsd is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
 * The forwarder retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
 
@@ -58,7 +58,7 @@ If these are more than a few minutes apart, you may want to look at the time set
 
 ### Issues getting integrations working
 
-Datadog has quite a few [integrations](http://docs.datadoghq.com/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
+Datadog has quite a few [integrations](/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
 
 Here is a quick guide for troubleshooting getting integrations installed:
 

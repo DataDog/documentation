@@ -12,8 +12,7 @@ AgentCheck requires an Agent version >= 3.2.0.
 
 ## Overview
 
-This documentation details how to collect metrics and events from a new data source
-by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
+This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
 look at the `AgentCheck` interface, and then write a simple Agent Check
 that collects timing metrics and status events from HTTP services.
 
@@ -21,6 +20,7 @@ Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds.
 
 ### Should you write an Agent Check or an Integration?
+
 Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
@@ -442,7 +442,7 @@ class HTTPCheck(AgentCheck):
             self.status_code_event(url, r, aggregation_key)
 
         timing = end_time - start_time
-        self.gauge('http.reponse_time', timing, tags=['http_check'])
+        self.gauge('http.response_time', timing, tags=['http_check'])
 
     def timeout_event(self, url, timeout, aggregation_key):
         self.event({
@@ -457,7 +457,7 @@ class HTTPCheck(AgentCheck):
         self.event({
             'timestamp': int(time.time()),
             'event_type': 'http_check',
-            'msg_title': 'Invalid reponse code for %s' % url,
+            'msg_title': 'Invalid response code for %s' % url,
             'msg_text': '%s returned a status of %s' % (url, r.status_code),
             'aggregation_key': aggregation_key
         })
@@ -502,7 +502,7 @@ If your issue continues, please reach out to Support with the help page that lis
     C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
     ```
 
-[1]: /developers/integration_sdk/
+[1]: /integrations/integration_sdk/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/help/
+[4]: /help/

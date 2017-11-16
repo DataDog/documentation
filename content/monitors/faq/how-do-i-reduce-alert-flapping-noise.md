@@ -4,7 +4,9 @@ kind: faq
 customnav: monitornav
 ---
 
-We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts ‘flap’ (rapidly switching from an ‘ok’ to an ‘alert’ status). Your individual Datadog alerts with groups will [have notification](https://www.datadoghq.com/blog/alert-rollup/) rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts ‘flap’ (rapidly switching from an ‘ok’ to an ‘alert’ status).  
+
+Your individual Datadog alerts with groups will [have notification](https://www.datadoghq.com/blog/alert-rollup/) rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
@@ -28,7 +30,7 @@ We often discuss alerting with our clients and a frequent issue or pain point is
     * If you would like a visual introduction to anomaly and outlier detection, this gist is a screenboard post to the Datadog API with examples and documentation links for both.
  
 
-If the issue is alert routing, template variables and the separation of ‘warning’ or ‘alert’ states will be of interest!
+If the issue is alert routing, template variables and the separation of **warning** or **alert** states will be of interest!
 
 * [How do I setup conditional contacts and messages in a single monitor?](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
 * [How do I add custom template variables to my monitor message?](/monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message)

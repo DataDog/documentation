@@ -10,4 +10,4 @@ All data coming from Datadog Webhooks and integrations, such as those with ticke
 * 34.192.254.186
 * 34.204.102.208
 
-More information on network traffic and security can be found [here](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration).
+More information on network traffic and security can be found [here](/agent/proxy).

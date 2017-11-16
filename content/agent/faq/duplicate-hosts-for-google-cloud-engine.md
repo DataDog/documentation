@@ -14,10 +14,11 @@ Instead, a more reliable behavior is to use the instance hostname as the hostna
 
 ## Release process
 
-Datadog's GCE integration relies on the hostname to link agent's data with API's data retrieved by our crawler. For this reason, it's important to update the hostname on the agent and in Datadog at the same time.
+[Datadog's GCE integration](/integrations/google_app_engine) relies on the hostname to link agent's data with API's data retrieved by our crawler. For this reason, it's important to update the hostname on the agent and in Datadog at the same time.
 
 See the [PR](https://github.com/DataDog/dd-agent/pull/1737) and [issue](https://github.com/DataDog/dd-agent/issues/1736) for more details
 
 ## Known issues
 
-If you've updated your GCE host(s) to Agent 5.5 without contacting us, you'll see a duplicate host in your Infrastructure List - this will not impact your billing, it's only a visual nuisance. Please email support@datadoghq.com and we'll enable a feature to disable the duplicate host.
+If you've updated your GCE host(s) to Agent 5.5 without contacting us, you'll see a duplicate host in your Infrastructure List - this will not impact your billing, it's only a visual nuisance.  
+Please [contact us](/help) and we'll enable a feature to disable the duplicate host.

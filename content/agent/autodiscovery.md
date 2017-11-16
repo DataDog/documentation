@@ -13,11 +13,13 @@ Autodiscovery was previously called Service Discovery. It's still called Service
 
 Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to. The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.  
+The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 ## How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check. The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.  
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.  
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -39,7 +41,7 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 ## How to set it up
 
-## Running the Agent Container
+### Running the Agent Container
 
 No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. If you use Kubernetes, see the [Kubernetes integration page][3] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][4].
 
@@ -88,10 +90,10 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
-1. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
-1. On Kubernetes, add them using ConfigMaps
+2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
+3. On Kubernetes, add them using ConfigMaps
 
-#### Example: Apache check
+### Example: Apache check
 
 Here's the `apache.yaml` template packaged with docker-dd-agent:
 
@@ -323,7 +325,6 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 
 ## Reference
 
-
 ### Template Variable Indexes
 
 For containers that have many IP addresses or expose many ports, you can tell Autodiscovery which ones to choose by appending an underscore to the template variable, followed by an integer, e.g. `%%host_0%%`, `%%port_4%%`. After inspecting the container, Autodiscovery sorts the IPs and ports **numerically and in ascending order**, so for a container that exposes ports 80, 443, and 8443, `%%port_0%%` refers to port 80. Non-indexed template variables refer to the last item in the sorted list, so in this case, `%%port%%` means port 8443.
@@ -374,7 +375,7 @@ checks:
 
 [1]: https://www.datadoghq.com/docker-adoption/
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
-[3]: http://docs.datadoghq.com/integrations/kubernetes/#installation
+[3]: /integrations/kubernetes/#installation
 [4]: /integrations/amazon_ecs/#installation
 [5]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [6]: https://github.com/DataDog/docker-dd-agent#configuration-files

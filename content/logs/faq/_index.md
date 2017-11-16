@@ -16,6 +16,8 @@ beta: true
 
 * [How to Send Logs to Datadog via External Log Shippers](/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers)
 
+* [I have a custom log file with heightened read-permissions; how do I send it to Datadog?](/logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions)
+
 ## Processing your logs in Datadog
 
 * [Log Parsing - Best Practice](/logs/faq/log-parsing-best-practice)

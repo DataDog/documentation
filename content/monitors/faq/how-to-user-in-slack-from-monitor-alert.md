@@ -6,11 +6,11 @@ customnav: monitornav
 
 ## Scenario
 
-You want to notify users within slack notifications using `@username`.
+You want to [notify](/monitors/notifications) users within slack notifications using `@username`.
 
 ## Solution
 
-Within the message template wrap the @username in < > as seen below.  Slack then correctly parses this and will then @ notify the defined user.
+Within the message template wrap the `@username` in `< >` as seen below.  Slack then correctly parses this and will then **@ notify** the defined user.
 
 {{< img src="monitors/faq/notification_template.png" alt="notification_template" responsive="true">}}
 

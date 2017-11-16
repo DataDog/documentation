@@ -16,7 +16,8 @@ You can confirm this from the team page as shown here:
 
 You will need to enter your email address in the password reset link:
 
-https://app.datadoghq.com/account/forgot_password 
+`https://app.datadoghq.com/account/forgot_password`
 
-If you have confirmed your email address is correct and you still have not received your password reset email please check your spam and filtered emails. 
+If you have confirmed your email address is correct and you still have not received your password reset email please check your spam and filtered emails.  
+
 Once you have confirmed that you have not received your email please contact [us](/help)

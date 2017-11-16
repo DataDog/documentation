@@ -73,7 +73,7 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 
 {{< img src="monitors/monitor_types/outliers/outliers-new-monitor-define-metric.png" alt="outliers new monitor define metric" responsive="true" >}}
 
-In the alert conditions, select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
+In the [alert conditions](/monitors/monitor_types/#define-the-conditions), select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
 
 {{< img src="monitors/monitor_types/outliers/outliers-newer-monitor-set-conditions.png" alt="outliers newer monitor set condition" responsive="true" >}}
 

@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 ---
 
-You can monitor Windows processes via the [process integration](http://docs.datadoghq.com/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your config file would include:
 
