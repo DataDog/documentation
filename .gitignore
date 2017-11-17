@@ -5,6 +5,10 @@ static/js/
 static/images/
 data/integrations/
 data/manifests/
+content/integrations/*.md
+!content/integrations/_index.md
+!content/integrations/new_integration.md
+!content/integrations/integration_sdk.md
 
 # Logs
 logs

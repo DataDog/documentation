@@ -206,6 +206,7 @@ class PreBuild:
         makedirs(self.content_integrations_dir, exist_ok=True)
         if exists(self.options.dogweb):
             for file_name in tqdm(sorted(glob.glob('{}{}'.format(self.options.dogweb, 'integration/**/README.md'), recursive=True))):
+                dir_name = basename(dirname(file_name))
                 manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
                 manifest_json = json.load(open(manifest)) if exists(manifest) else {}
                 h1reg = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
@@ -217,7 +218,7 @@ class PreBuild:
                     # update the metrics
                     result = re.sub(metricsreg, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
                     # add required front-matter yaml for hugo
-                    result = self.add_integration_frontmatter(result, manifest_json)
+                    result = self.add_integration_frontmatter(result, manifest_json, dir_name)
                     # rename the file to be the correct integration name and write out file
                     new_file_name = '{}.md'.format(basename(dirname(file_name)))
                     with open(self.content_integrations_dir + new_file_name, 'w') as outfile:
@@ -247,7 +248,7 @@ class PreBuild:
         template = "---\n{front_matter}\n---\n\n{content}\n"
         yml = {
             'title': data.get('public_title', ''),
-            'integration_title': dir_name,
+            'integration_title': dir_name.lower(),
             'kind': 'integration',
             'git_integration_title': data.get('name', ''),
             'newhlevel': True,
