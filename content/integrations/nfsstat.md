@@ -1,23 +1,60 @@
 ---
-title: Datadog-Nfsstat
-integration_title: Nfsstat
-kind: integration
+aliases: []
+description: nfsstat gets nfsiostat-sysstat metrics.
 git_integration_title: nfsstat
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+title: Datadog-Nfsstat Integration
 ---
 
+ Integration
+
 ## Overview
-//get-overview-from-git//
+
+nfsiostat is a tool that gets metrics from NFS mounts. This check grabs these metrics.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+Install the `dd-check-nfsstat` package manually or with your favorite configuration manager
+
+### Configuration
+
+Edit the `nfsstat.yaml` file to point to your nfsiostat binary script, or use the one included with the binary installer. See the [sample nfsstat.yaml](https://github.com/DataDog/integrations-core/blob/master/nfsstat/conf.yaml.example) for all available configuration options.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `nfsstat` under the Checks section:
+
+    Checks
+    ======
+
+        nfsstat
+        -----------
+          - instance #0 [OK]
+          - Collected 39 metrics, 0 events & 7 service checks
+
+## Compatibility
+
+The nfsstat check is compatible with linux
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The nfststat check does not include any event at this time.
+
+### Service Checks
+The nfsstat check does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+### Datadog Blog
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+
+### Knowledge Base
+* [Built a network monitor on an http check](https://help.datadoghq.com/hc/en-us/articles/115003314726-Built-a-network-monitor-on-an-http-check-)

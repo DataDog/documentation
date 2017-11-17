@@ -1,13 +1,12 @@
 ---
-title: Datadog-Chef Integration
-integration_title: Chef
-kind: integration
-git_integration_title: chef
-newhlevel: true
-updated_for_agent: 5.8.5
 aliases:
-  - /guides/chef/
-description: "Track Chef client runs including metrics on completion times, analytics on resource changes, and success rates."
+- /guides/chef/
+description: 'Track Chef client runs: know when they fail, succeed, or make big changes.'
+git_integration_title: chef
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-Chef Integration
 ---
 
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef Event" responsive="true" >}}
@@ -111,19 +110,17 @@ Once set, upload the role to your Chef Server, and wait. After Chef has run on a
         knife cookbook site install datadog
 
 1.  Set the Datadog-specific attributes in either a role, environment or another recipe:
-
-        # Make sure you replace the API and application key below
-        # with the ones for your account
+ sure you replace the API and application key below
+ the ones for your account
 
         node.default['datadog']['api_key'] = "9775a026f1ca7d1c6c5af9d94d9595a4"
-
-        # Use an existing application key or create a new one for Chef
+ an existing application key or create a new one for Chef
         node.default['datadog']['application_key'] ="87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 
 1.  Upload the updated cookbook to your Chef server
 
         berks upload
-        # or
+
         knife cookbook upload datadog
 
         knife cookbook list | grep datadog && \
@@ -146,7 +143,6 @@ From your [events stream](https://app.datadoghq.com/event/stream), enter `source
 
 ## Data Collected
 ### Metrics
-
 {{< get-metrics-from-git >}}
 
 ## Furter Reading

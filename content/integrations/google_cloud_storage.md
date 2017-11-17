@@ -1,24 +1,39 @@
 ---
-title: Datadog-Google Storage Integration
-integration_title: Google Storage
-kind: integration
-doclevel: basic
-newhlevel: true
+aliases: []
+description: Track key Google Cloud Storage metrics.
 git_integration_title: google_cloud_storage
-description: "Track key Azure Storage metrics."
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-Google Storage Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+
+Google Cloud Storage is unified object storage for developers and enterprises, from live data serving to data analytics/ML to data archiving.
+
+Get metrics from Google Storage to:
+
+* Visualize the performance of your Storage services
+* Correlate the performance of your Storage services with your applications
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+If you haven't already, set up the [Google Cloud Platform integration first](https://docs.datadoghq.com/integrations/google_cloud_platform/). There are no other installation steps that need to be performed.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Google Cloud Storage integration does not include any event at this time.
+
+### Service Checks
+The Google Cloud Storage integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

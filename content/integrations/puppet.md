@@ -1,9 +1,11 @@
 ---
-title: Datadog-Puppet Integration
-integration_title: Puppet
-doclevel: basicuppet
+aliases: []
+description: 'Track Puppet runs: know when they fail, succeed, or make big changes.'
+git_integration_title: puppet
+integration_title: ''
 kind: integration
-description: "Track Puppet runs: know when they fail, succeed, or make big changes."
+newhlevel: true
+title: Datadog-Puppet Integration
 ---
 
 ## Overview
@@ -16,8 +18,22 @@ Connect Puppet to Datadog in order to:
 
 ## Setup
 ### Installation
-To install the Datadog Agent via Puppet, please see [here][1].
+To install the Datadog Agent via Puppet, please see [here](https://github.com/datadog/puppet-datadog-agent)
 
-   [1]: https://github.com/datadog/puppet-datadog-agent
+## Data Collected
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Puppet integration does not include any event at this time.
+
+### Service Checks
+The Puppet integration does not include any service check at this time.
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
 
 

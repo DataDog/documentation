@@ -1,24 +1,79 @@
 ---
-title: Datadog-Gearman Integration
-integration_title: Gearman
-kind: integration
-git_integration_title: gearmand
 aliases:
-  - /integrations/gearman
-description: "{{< get-desc-from-git >}}"
+- /integrations/gearman
+description: Track the number of jobs queued and running - in total or by task.
+git_integration_title: gearmand
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-Gearmand Integration
 ---
 
+ Integration
+
 ## Overview
-//get-overview-from-git//
+
+Collect Gearman metrics to:
+
+* Visualize Gearman performance.
+* Know how many tasks are queued or running.
+* Correlate Gearman performance with the rest of your applications.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Gearman check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Gearman job servers.
+
+### Configuration
+
+Create a file `gearmand.yaml` in the Agent's `conf.d` directory. See the [sample gearmand.yaml](https://github.com/DataDog/integrations-core/blob/master/gearmand/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - server: localhost
+    port: 4730
+```
+
+Restart the Agent to begin sending Gearman metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `gearmand` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    gearmand
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The gearmand check is compatible with all major platforms.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Gearmand check does not include any event at this time.
+
+### Service Checks
+
+`gearman.can_connect`:
+
+Returns `Critical` if the Agent cannot connect to Gearman to collect metrics.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

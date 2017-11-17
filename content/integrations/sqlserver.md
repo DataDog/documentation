@@ -1,29 +1,94 @@
 ---
-title: Datadog-SQL Server Integration
-integration_title: SQL Server
+aliases: []
+description: Collect important SQL Server performance and health metrics.
 git_integration_title: sqlserver
+integration_title: ''
 kind: integration
-doclevel: basic
-description: "{{< get-desc-from-git >}}"
+newhlevel: true
+title: Datadog-SQL Server Integration
 ---
 
-{{< img src="integrations/sql_server/sql_server_graph.png" alt="sql server graph" responsive="true" >}}
+ SQL Server Check
 
 ## Overview
-//get-overview-from-git//
 
-<div class="alert alert-warning">
-SQL Server check can only be run from a Windows environment
-</div>
+This check lets you track the performance of your SQL Server instances. It collects metrics for number of user connections, rate of SQL compilations, and more.
+
+You can also create your own metrics by having the check run custom queries.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The SQL Server check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your SQL Server instances. If you need the newest version of the check, install the `dd-check-sqlserver` package.
+
+Make sure that your SQL Server instance supports SQL Server authentication by enabling "SQL Server and Windows Authentication mode" in the server properties. 
+**Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode**
+
+### Configuration
+
+1. Create a read-only user to connect to your server:
+
+```
+CREATE LOGIN datadog WITH PASSWORD = 'YOUR_PASSWORD';
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT on sys.dm_os_performance_counters to datadog;
+GRANT VIEW SERVER STATE to datadog;
+```
+
+2. Create a file `sqlserver.yaml` in the Agent's `conf.d` directory. See the [sample sqlserver.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - host: <SQL_HOST>,<SQL_PORT>
+    username: <SQL_ADMIN_USER>
+    password: <SQL_ADMIN_PASSWORD>
+    connector: odbc # alternative is 'adodbapi'
+    driver: SQL Server
+```
+
+See the [example check configuration](https://github.com/DataDog/integrations-core/blob/master/sqlserver/conf.yaml.example) for a comprehensive description of all options, including how to use custom queries to create your own metrics.
+
+3. [Restart the Agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent) to start sending SQL Server metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `sqlserver` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    sqlserver
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The sqlserver check is compatible with all Windows and Linux platforms.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The SQL server check does not include any event at this time.
+
+### Service Checks
+
+**sqlserver.can_connect**:
+
+Returns CRITICAL if the Agent cannot connect to SQL Server to collect metrics, otherwise OK.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+
+* [Monitor your Azure SQL Databases with Datadog](https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog/)

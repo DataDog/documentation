@@ -1,26 +1,92 @@
 ---
-title: Datadog-Fluentd Integration
-integration_title: Fluentd
-kind: integration
-doclevel: basic
+aliases: []
+description: Monitor buffer queues and retry counts for each Fluentd plugin you've
+  enabled.
 git_integration_title: fluentd
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+title: Datadog-FluentD Integration
 ---
 
-{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" responsive="true" >}}
+ Integration
 
 ## Overview
-//get-overview-from-git//
+
+Get metrics from Fluentd to:
+
+* Visualize Fluentd performance.
+* Correlate the performance of Fluentd with the rest of your applications.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Fluentd check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Fluentd servers.
+
+### Configuration
+#### Prepare Fluentd
+
+In your fluentd configuration, add a `monitor_agent` source:
+
+```
+<source>
+  @type monitor_agent
+  bind 0.0.0.0
+  port 24220
+</source>
+```
+
+#### Connect the Datadog Agent
+
+Create a file `fluentd.yaml` in the Agent's `conf.d` directory. See the [sample fluentd.yaml](https://github.com/DataDog/integrations-core/blob/master/fluentd/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - monitor_agent_url: http://localhost:24220/api/plugins.json
+: "type" # defaults to 'plugin_id'
+:    # collect metrics only on your chosen plugin_ids (optional)
+    #  - plg1
+    #  - plg2
+```
+
+Restart the Agent to begin sending Fluentd metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `fluentd` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    fluentd
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The FluentD check does not include any event at this time.
+
+### Service Checks
+
+`fluentd.is_ok`:
+
+Returns 'Critical' if the Agent cannot connect to Fluentd to collect metrics. This is the check which most other integrations would call `can_connect`.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+
+* [How to monitor Fluentd with Datadog](https://www.datadoghq.com/blog/monitor-fluentd-datadog/)

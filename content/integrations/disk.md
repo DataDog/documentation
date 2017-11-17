@@ -1,28 +1,57 @@
 ---
-title: Datadog-Disk Integration
-integration_title: Disk Check
+aliases: []
+description: The disk check gathers metrics on mounted disks.
+git_integration_title: disk
+integration_title: ''
 kind: integration
 newhlevel: true
-platformmetrics:
-  system.disk.read_time_pct:
-    - Windows
-  system.disk.write_time_pct:
-    - Windows
-git_integration_title: disk
-description: "{{< get-desc-from-git >}}"
+title: Datadog-Disk Integration
 ---
 
+ Check
+
 ## Overview
-//get-overview-from-git//
+
+Collect metrics related to disk usage and IO.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The disk check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) anywhere you wish to use it.
+
+### Configuration
+
+The disk check is enabled by default, and the Agent will collect metrics on all local partitions. If you want to configure the check with custom options, create a file `disk.yaml` in the Agent's `conf.d` directory. See the [sample disk.yaml](https://github.com/DataDog/integrations-core/blob/master/disk/conf.yaml.default) for all available configuration options.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `disk` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    disk
+    -------
+      - instance #0 [OK]
+      - Collected 40 metrics, 0 events & 0 service checks
+
+    [...]
+```
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Disk check does not include any event at this time.
+
+### Service Checks
+The Disk check does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

@@ -1,23 +1,52 @@
 ---
-title: Datadog-Wmi_check Integration
-integration_title: Wmi_check Integration
+aliases: []
+description: Collect and graph any Windows PDH metrics.
 git_integration_title: pdh_check
+integration_title: ''
 kind: integration
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+title: Datadog-Pdh Check Integration
 ---
 
+ Integration
+
 ## Overview
-//get-overview-from-git//
+
+Get metrics from Windows performance counters in real time to:
+
+* Visualize and monitor windows performance counters
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+Install the `dd-check-pdh_check` package manually or with your favorite configuration manager
+
+### Configuration
+
+Edit the `pdh_check.yaml` file to collect Windows performance data. See the [sample pdh_check.yaml](https://github.com/DataDog/integrations-core/blob/master/pdh_check/conf.yaml.example) for all available configuration options.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `pdh_check` under the Checks section:
+
+    Checks
+    ======
+
+        pdh_check
+        -----------
+          - instance #0 [OK]
+          - Collected 39 metrics, 0 events & 7 service checks
+
+## Compatibility
+
+The pdh_check check is compatible with Windows.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
 
-## Troubleshooting
-//get-troubleshooting-from-git//
+### Events
+The PDH check does not include any event at this time.
 
-## Further Reading
-//get-further-reading-from-git//
+### Service Checks
+The PDH check does not include any service check at this time.

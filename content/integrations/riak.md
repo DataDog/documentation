@@ -1,25 +1,73 @@
 ---
-title: Datadog-Riak Integration
-integration_title: Riak
+aliases: []
+description: Track node, vnode and ring performance metrics for RiakKV or RiakTS.
 git_integration_title: riak
+integration_title: ''
 kind: integration
-doclevel: basic
-description: "{{< get-desc-from-git >}}"
+newhlevel: true
+title: Datadog-Riak Integration
 ---
 
-{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" responsive="true" >}}
+ Check
 
 ## Overview
-//get-overview-from-git//
+
+This check lets you track node, vnode and ring performance metrics from RiakKV or RiakTS.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Riak check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Riak servers. If you need the newest version of the check, install the `dd-check-riak` package.
+
+### Configuration
+
+Create a file `riak.yaml` in the Agent's `conf.d` directory. See the [sample riak.yaml](https://github.com/DataDog/integrations-core/blob/master/riak/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - url: http://127.0.0.1:8098/stats # or whatever your stats endpoint is
+```
+
+[Restart the Agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent) to start sending Riak metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `riak` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    riak
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The riak check is compatible with all major platforms.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Riak check does not include any event at this time.
+
+### Service Checks
+
+**riak.can_connect**:
+
+Returns CRITICAL if the Agent cannot connect to the Riak stats endpoint to collect metrics, otherwise OK.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

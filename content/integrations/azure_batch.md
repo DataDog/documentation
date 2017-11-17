@@ -1,24 +1,38 @@
 ---
-title: Datadog-Microsoft Azure Batch Integration
-integration_title: Microsoft Azure Batch Service
-kind: integration
-doclevel: basic
+aliases: []
+description: Track key Azure Batch Service metrics.
 git_integration_title: azure_batch
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "Track key Azure Batch Service metrics."
+title: Datadog-Microsoft Azure Batch Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+Azure Batch Service is a managed task scheduler and processor for your Azure applications.
+
+Get metrics from Azure Batch Service to:
+
+* Visualize the performance of your Batch Accounts
+* Correlate the performance of your Batch Accounts with your applications
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+If you haven't already, set up the [Microsoft Azure integration first](https://docs.datadoghq.com/integrations/azure/). There are no other installation steps that need to be performed.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Azure Batch Service integration does not include any event at this time.
+
+### Service Checks
+The Azure Batch Service integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

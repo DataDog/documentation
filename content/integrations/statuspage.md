@@ -1,25 +1,34 @@
 ---
-title: Datadog-StatusPage.io Integration
-integration_title: StatusPageIO
+aliases: []
+description: Datadog-StatusPage.io Integration.
+git_integration_title: statuspage
+integration_title: ''
 kind: integration
-doclevel: basic
 newhlevel: true
-description: "Keep tabs on the status of any service that uses StatusPage.io."
+title: Datadog-StatusPage.io Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+
+Capture incidents from the StatusPage of your third-party services to correlate incidents with your own metrics and events. This integration does not require having your own StatusPage.io account.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+After you activate the integration tile, enter the StatusPage.io page for whichever service you want to monitor. For instance, the PagerDuty status page can be found at https://status.pagerduty.com. Enter any custom tags you wish to associate with the page and click on **Update Configuration**.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The StatusPage integration does not include any event at this time.
+
+### Service Checks
+The StatusPage integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
-
-
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/).

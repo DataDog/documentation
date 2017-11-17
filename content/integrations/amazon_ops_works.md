@@ -1,25 +1,41 @@
 ---
-title: Datadog-AWS OpsWorks Integration
-integration_title: AWS OpsWorks
-kind: integration
-git_integration_title: amazon_ops_works
-newhlevel: true
-description: "Track AWS OpsWorks resource usage."
 aliases:
-    - /integrations/awsopsworks/
+- /integrations/awsopsworks/
+description: Track AWS OpsWorks resource usage.
+git_integration_title: amazon_ops_works
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-AWS OpsWorks Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+
+AWS OpsWorks is an application management service that makes it easy to deploy and operate applications of all shapes and sizes.
+
+Enable this integration to see in Datadog all your OpsWorks metrics.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+If you haven't already, set up the [Amazon Web Services integration first](https://docs.datadoghq.com/integrations/aws/). There are no other installation steps that need to be performed.
+
+### Configuration
+
+In the Amazon Web Services integration tile, ensure that OpsWorks is checked under metric collection.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The AWS Ops Works integration does not include any event at this time.
+
+### Service Checks
+The AWS Ops Works integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

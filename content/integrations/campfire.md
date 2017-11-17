@@ -1,22 +1,38 @@
 ---
-title: Datadog-Campfire Integration
-integration_title: Campfire
+aliases: []
+description: Send selected Datadog alerts and graphs to your team's Campfire channel.
+git_integration_title: campfire
+integration_title: ''
 kind: integration
-doclevel: basic
-description: "Send selected Datadog alerts and graphs to your team's Campfire channel."
+newhlevel: true
+title: Datadog-Campfire Integration
 ---
 
-## Overview
-//get-overview-from-git//
+## Overview 
+
+Integrate with Campfire to:
+
+* be notified when someone posts on your stream
+* be notified when a metric alert is triggered
 
 ## Setup
-//get-setup-from-git//
+### Installation 
+
+Sign in with your [Basecamp account](https://launchpad.37signals.com/signin)
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+
+The Campfire integration does not include any event at this time.
+
+### Service Checks
+The Campfire integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

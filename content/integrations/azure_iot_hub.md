@@ -1,24 +1,38 @@
 ---
-title: Datadog-Microsoft Azure IOT Hub Integration
-integration_title: Microsoft Azure IOT Hub
-kind: integration
-doclevel: basic
+aliases: []
+description: Track key Azure IOT Hub metrics.
 git_integration_title: azure_iot_hub
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "Track key Azure IOT Hub metrics."
+title: Datadog-Microsoft Azure IOT Hub Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+ Azure IOT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices.
+
+Get metrics from Azure IOT Hub to:
+
+* Visualize the performance of your IOT Hubs
+* Correlate the performance of your IOT Hubs with your applications
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+If you haven't already, set up the [Microsoft Azure integration first](https://docs.datadoghq.com/integrations/azure/). There are no other installation steps that need to be performed.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Azure IoT Hub integration does not include any event at this time.
+
+### Service Checks
+The Azure IoT Hub integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

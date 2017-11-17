@@ -1,24 +1,54 @@
 ---
-title: Datadog-xMatters Integration
-integration_title: xMatters
+aliases: []
+description: Use xMatters as a notification channel in Datadog alerts and events.
 git_integration_title: xmatters
+integration_title: ''
 kind: integration
 newhlevel: true
-description: "Use xMatters as a notification channel in Datadog alerts and events."
+title: Datadog-xMatters Integration
 ---
+
 {{< img src="integrations/xmatters/xmatters.png" alt="Xmatters overview" responsive="true" >}}
 
 ## Overview
-//get-overview-from-git//
+
+xMatters IT Alerting integrates people into your toolchains spanning across teams and silos. xMatters automates communications so you can proactively prevent outages, rapidly engage resolvers, manage major incidents, and keep stakeholders informed.
+
+Connect Datadog to xMatters to:
+
+* Trigger xMatters notifications with responses integrated into all your IT tools
+
+* Notify resolvers based on escalation rules, on-call schedules, skills, and location
+
+* Look up the current xMatters on-call schedule from within Datadog
+
+* Configure response options that trigger other xMatters integrations and drive workflow for tasks such as creating tickets, updating consoles, sending additional notifications, and initiating chat & conference-call collaboration
+
+* Add additional reporting and analytics to your operational processes
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+To set up the xMatters-Datadog integration:
+
+* Generate a [new application key](https://app.datadoghq.com/account/settings#api) for use by xMatters.
+
+* [Configure xMatters](https://support.xmatters.com/hc/en-us/articles/214369486) communication plans.
+
+* Configure each of the xMatters webhooks via the [Datadog webhooks integration](https://app.datadoghq.com/account/settings#integrations/webhooks).
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The xMatters integration does not include any event at this time.
+
+### Service Checks
+The xMatters integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

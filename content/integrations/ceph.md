@@ -1,24 +1,76 @@
 ---
-title: Datadog-Ceph Integration
-integration_title: Ceph
-kind: integration
+aliases: []
+description: Collect per-pool performance metrics and monitor overall cluster status.
 git_integration_title: ceph
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+title: Datadog-Ceph Integration
 ---
-{{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" responsive="true" >}}
+
+ Integration
 
 ## Overview
-//get-overview-from-git//
+
+Enable the Datadog-Ceph integration to:
+
+  * Track disk usage across storage pools
+  * Receive service checks in case of issues
+  * Monitor I/O performance metrics
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Ceph check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Ceph servers.
+
+### Configuration
+
+Create a file `ceph.yaml` in the Agent's `conf.d` directory. See the [sample ceph.yaml](https://github.com/DataDog/integrations-core/blob/master/ceph/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - ceph_cmd: /path/to/your/ceph # default is /usr/bin/ceph
+    use_sudo: true               # only if the ceph binary needs sudo on your nodes
+```
+
+If you enabled `use_sudo`, add a line like the following to your `sudoers` file:
+
+```
+dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
+```
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `ceph` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    ceph
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Ceph check does not include any event at this time.
+
+### Service Checks
+The Ceph check does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+
+* [Monitor Ceph: From node status to cluster-wide performance](https://www.datadoghq.com/blog/monitor-ceph-datadog/)

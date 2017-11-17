@@ -1,24 +1,39 @@
 ---
-title: Datadog-Microsoft Azure App Service Integration
-integration_title: Microsoft Azure App Service
-kind: integration
-doclevel: basic
+aliases: []
+description: Track key Azure App Services metrics.
 git_integration_title: azure_app_services
+integration_title: ''
+kind: integration
 newhlevel: true
-description: "Track key Azure App Services metrics."
+title: Datadog-Microsoft Azure App Service Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+
+Azure App Service is a platform-as-a-service that runs web, mobile, API and business logic applications and automatically manages the resources required by those apps.
+
+Get metrics from Azure App Service to:
+
+* Visualize your app performance
+* Correlate the performance of your Azure Apps with the rest of your apps
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+If you haven't already, set up the [Microsoft Azure integration first](https://docs.datadoghq.com/integrations/azure/). There are no other installation steps that need to be performed.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Azure App Service integration does not include any event at this time.
+
+### Service Checks
+The Azure App Service integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

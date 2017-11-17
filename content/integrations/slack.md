@@ -1,24 +1,47 @@
 ---
-title: Datadog-Slack Integration
-integration_title: Slack
+aliases: []
+description: Send Datadog alerts and graphs to your team's Slack channel.
 git_integration_title: slack
+integration_title: ''
 kind: integration
 newhlevel: true
-doclevel: basic
-description: "Send Datadog alerts and graphs to your team's Slack channels."
+title: Datadog-Slack Integration
 ---
 
 ## Overview
-//get-overview-from-git//
+
+Connect Slack to Datadog in order to help your team collaborate by:
+
+* Sharing graphs with your colleagues in your team's channels.
+* Receiving alerts and notifications from Datadog within Slack.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Slack integration is installed via its [integration tile](https://app.datadoghq.com/account/settings#integrations/slack) in the Datadog application.
+
+### Configuration
+1. In your Slack account go to the [Applications page](https://slack.com/apps) and search for Datadog.
+2. Click Install, followed by Add Integration.
+3. Copy the Slack Service Hook and paste in the [service hook field for Slack in Datadog](https://app.datadoghq.com/account/settings#integrations/slack).
+4.  Add the channels you want to be able to post to.
+5. If you would like to be notified for every comment on a graph, tick the check box "Transfer all user comments" by each channel. If left unchecked (default) you will need to use the @slack-channel_name syntax for comments to be posted to slack.
+
+If you wish to integrate with multiple Slack accounts, repeat the above steps and populate the Secondary Slack Account fields.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+
+The Slack integration does not include any event at this time.
+
+### Service Checks
+The Slack integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

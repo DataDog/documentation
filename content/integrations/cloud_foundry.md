@@ -1,10 +1,13 @@
 ---
-title: Datadog-Cloud Foundry Integration
-integration_title: Cloud Foundry
-kind: integration
+aliases: []
+description: Track the health of your Cloud Foundry VMs and the jobs they run.
 git_integration_title: cloud_foundry
+integration_title: ''
+kind: integration
 newhlevel: true
+title: Datadog-Cloud Foundry Integration
 ---
+
 ## Overview
 
 Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
@@ -32,10 +35,9 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. You c
 ##### Upload Datadog's release to your BOSH Director
 
 ```
-# BOSH CLI v1
+ CLI v1
 bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
-
-# BOSH CLI v2
+ CLI v2
 bosh upload-release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
@@ -81,8 +83,8 @@ For each extra Agent check you want to enable across your deployment, add its co
           init_config: {}
           instances:
             directory: "."
-        #process:
-        #  init_config: {}
+:
+: {}
         #...
 ```
 
@@ -95,21 +97,19 @@ To customize configuration for the default checks—system, network, disk, and n
 ##### Sync the runtime configuration to the Director
 
 ```
-# BOSH CLI v1
+ CLI v1
 bosh update runtime-config runtime.yml
-
-# BOSH CLI v2
+ CLI v2
 bosh update-runtime-config runtime.yml
 ```
 
 ##### Redeploy your Cloud Foundry deployment
 
 ```
-# BOSH CLI v1
+ CLI v1
 bosh deployment yourDeploymentManifest.yml
 bosh -n deploy
-
-# BOSH CLI v2
+ CLI v2
 bosh -n -d yourDeployment deploy yourDeploymentManifest.yml
 ```
 
@@ -132,10 +132,9 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 ##### Upload Datadog's release to your BOSH Director
 
 ```
-# BOSH CLI v1
+ CLI v1
 bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
-
-# BOSH CLI v2
+ CLI v2
 bosh upload-release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
@@ -166,7 +165,7 @@ Configure one or more Nozzle jobs in your main Cloud Foundry deployment manifest
 ```
 jobs:
 #- instances: 4
-#  name: some_other_job
+: some_other_job
 #  ...
 - instances: 1            # add more instances if one job cannot keep up with the Firehose
   name: datadog_nozzle_z1
@@ -182,13 +181,13 @@ jobs:
       api_url: https://app.datadoghq.com/api/v1/series
       flush_duration_seconds: 15 # seconds between flushes to Datadog. Default is 15.
     loggregator:
-      # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' will do
+ NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' will do
       traffic_controller_url: <LOGGREGATOR_URL> # e.g. ws://traffic-controller.your-cf-domain.com:8081
     nozzle:
       deployment: <DEPLOYMENT_NAME>    # tags each firehose metric with 'deployment:<DEPLOYMENT_NAME>'
       subscription_id: datadog-nozzle  # can be anything (firehose streams data evenly to all jobs using the same subscription_id)
-      # disable_access_control: true   # for development only
-      # insecure_ssl_skip_verify: true # for development only; enable if your UAA does not use a verifiable cert
+: true   # for development only
+: true # for development only; enable if your UAA does not use a verifiable cert
     uaa:
       client: datadog-firehose-nozzle # client name you just configured
       client_secret: <SECRET_YOU_JUST_CONFIGURED>
@@ -202,7 +201,7 @@ In the same manifest, add the Datadog Nozzle release name and version:
 ```
 releases:
 # - name: some-other-release
-#   version: x.y.z
+: x.y.z
 # ...
   - name: datadog-firehose-nozzle
     version: $VERSION_YOU_UPLOADED # specify the real version, i.e. x.y.z, not 'latest'
@@ -213,11 +212,10 @@ To see which `datadog-firehose-nozzle` release version you uploaded earlier, run
 ##### Redeploy the deployment
 
 ```
-# BOSH CLI v1
+ CLI v1
 bosh deployment cf-manifest.yml
 bosh -n deploy
-
-# BOSH CLI v2
+ CLI v2
 bosh -n -d cf-manifest deploy cf-manifest.yml
 ```
 
@@ -240,8 +238,8 @@ instance_groups:
 - instances: 1
   properties:
     hm:
-    # loglevel: info
-    # resurrector: enabled
+: info
+: enabled
     #...other stuff
       datadog_enabled: true
       datadog:
@@ -257,10 +255,9 @@ BOSH cannot simply configure the plugin and restart the Health Monitor; it must 
 You may use [bosh-init](https://bosh.io/docs/install-bosh-init.html) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
 
 ```
-# bosh-init (legacy)
+-init (legacy)
 bosh-init deploy bosh.yml
-
-# BOSH CLI v2 - if your state file is not named bosh-state.yml, provide its name via --state
+ CLI v2 - if your state file is not named bosh-state.yml, provide its name via --state
 bosh create-env --state=your-state-file.json bosh.yml
 ```
 
@@ -279,8 +276,7 @@ The BOSH Health Monitor Datadog plugin emits an event to Datadog for any alert i
 The BOSH Agent sets a severity for each alert it generates, and the Datadog Health Monitor plugin uses that severity to prioritize the event it emits. Alerts with an Error, Critical, or Alert severity become Normal priority events in Datadog. Alerts with any other severity become Low priority events.
 
 ### Metrics
-
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`) and the BOSH Health Monitor Datadog plugin (`bosh.healthmonitor`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system](/integrations/system/#metrics), [network](/integrations/network/#metrics), [disk](/integrations/disk/#metrics), and [ntp](/integrations/ntp/#metrics) metrics).
+{{< get-metrics-from-git >}}#metrics), [network](/integrations/network/#metrics), [disk](/integrations/disk/#metrics), and [ntp](/integrations/ntp/#metrics) metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events) and ValueMetrics; it ignores LogMessages, Errors, and ContainerMetrics.
 

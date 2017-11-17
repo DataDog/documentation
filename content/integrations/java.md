@@ -1,11 +1,12 @@
 ---
-title: Datadog-Java/JMX Integration
-integration_title: Java/JMX
-kind: integration
+aliases: []
+description: Collect custom metrics from your applications using the Yammer Metrics
+  library.
 git_integration_title: java
+integration_title: ''
+kind: integration
 newhlevel: true
-updated_for_agent: 5.8.5
-description: "Collect custom metrics from your applications using the Yammer Metrics library."
+title: Datadog-Java Integration
 ---
 
 ## Overview
@@ -33,7 +34,7 @@ A remote connection is required for the Datadog Agent to connect to the JVM, eve
 init_config:
   custom_jar_paths: # optional
     - /path/to/custom/jarfile.jar
-  #is_jmx: true
+: true
 
 instances:
   - host: localhost
@@ -205,7 +206,7 @@ init_config:
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 
 ```yaml
-    # Datadog Agent > 5.3.0
+ Agent > 5.3.0
       conf:
         - include:
             domain: domain_name
@@ -213,9 +214,7 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
               - first_bean_name
               - second_bean_name
     ...
-
-
-    # Older Datadog Agent versions
+ Datadog Agent versions
       conf:
         - include:
             domain: domain_name
@@ -232,7 +231,6 @@ JMX Checks have a default configuration that will collect 11 metrics from your J
 
 ## Data Collected
 ### Metrics
-
 {{< get-metrics-from-git >}}
 
 
@@ -259,6 +257,8 @@ For more details about configuring this integration refer to the following file(
 
 * [Java/JMX YAML example](https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example)
 
+<!-- {{< insert-example-links conf="jmx" check="none" >}} -->
+
 ### The 350 metric limit
 
 Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog. What we've found in speaking with many customers is that some of these metrics are not needed; thus, we've set the limit at 350 metrics.
@@ -284,7 +284,7 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
   2. If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
   3. Add the path of the jar to the `init_config` section of your configuration:
 ```yaml
-  # Datadog Agent >= 5.6.0
+ Agent >= 5.6.0
 
   init_config:
     custom_jar_paths:
@@ -293,15 +293,14 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
 
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
   ```yaml
-  # Datadog Agent >= 5.6.0
-
-  # The jmx_url may be different depending on the version of JBoss/WildFly you're using
-  # and the way you've set up JMX on your server
-  # Please refer to the relevant documentation of JBoss/WildFly for more information
+ Agent >= 5.6.0
+ jmx_url may be different depending on the version of JBoss/WildFly you're using
+ the way you've set up JMX on your server
+ refer to the relevant documentation of JBoss/WildFly for more information
   instances:
     + jmx_url: "service:jmx:remoting-jmx://localhost:9999"
       name: jboss-application  # Mandatory, but can be set to any value,
-                               # will be used to tag the metrics pulled from 
+ be used to tag the metrics pulled from 
   ```
 
   5. Restart the agent: `sudo /etc/init.d/datadog-agent`
@@ -317,7 +316,7 @@ If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomc
   3. Add the path of the jar to the `init_config` section of your configuration:
 
 ```yaml
-# Datadog Agent >= 5.6.0
+ Agent >= 5.6.0
 
 init_config:
   custom_jar_paths:
@@ -328,13 +327,12 @@ init_config:
   4. Specify a custom URL that JMXFetch will connect to, in the `instances` section of your configuration:
 
 ```yaml
-# Datadog Agent >= 5.6.0
-
-# The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
+ Agent >= 5.6.0
+ jmx_url may be different depending on the way you've set up JMX on your Tomcat server
 instances:
   - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
     name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
-                              # will be used to tag the metrics pulled from that instance
+ be used to tag the metrics pulled from that instance
 ```
 
 
@@ -343,8 +341,8 @@ instances:
 
 ## Further Reading
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect!](/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect)
-* [View JMX data in jConsole and set up your jmx.yaml to collect them](/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
-* [jmx.yaml error: Include Section](/integrations/faq/jmx-yaml-error-include-section)
-* [Collecting Composite type JMX attributes](/integrations/faq/collecting-composite-type-jmx-attributes)
-* [How to run JMX commands in Windows?](/integrations/faq/how-to-run-jmx-commands-in-windows)
+* [I Have a Matching Bean for my JMX integration but nothing on Collect!](/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect)
+* [View JMX data in jConsole and set up your jmx.yaml to collect them](/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them)
+* [jmx.yaml error: Include Section](/faq/jmx-yaml-error-include-section)
+* [Collecting Composite type JMX attributes](/faq/collecting-composite-type-jmx-attributes)
+* [How to run JMX commands in Windows?](/faq/how-to-run-jmx-commands-in-windows)

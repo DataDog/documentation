@@ -1,14 +1,16 @@
 ---
-title: Datadog-Ruby Integration
-integration_title: Ruby
+aliases: []
+description: Send custom metrics from your Ruby applications with Datadog client libraries.
+git_integration_title: ruby
+integration_title: ''
 kind: integration
 newhlevel: true
-description: "Send custom metrics from your Ruby applications with Datadog client libraries."
+title: Datadog-Ruby Integration
 ---
 
 ## Overview
 
-The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/developers/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
+The Ruby integration allows you to monitor custom metrics by simply adding a few lines of code to your Ruby application. For example, you can have a metric that returns the number of page views or the time of any function call. For additional information about the Ruby integration, please refer to [the guide on submitting metrics](/guides/metrics). For advanced usage, please refer to the documentation in the repositories listed below. You can also review [the API docs](/api) for details on how to use the API with Ruby.
 
 Datadog offers two libraries to assist you with the implementation of Ruby application metrics:
 
@@ -27,35 +29,28 @@ Datadog offers two libraries to assist you with the implementation of Ruby appli
         gem install dogstatsd-ruby
 
 2.  Start instrumenting your code using the Datadog API:
-
 ```ruby
-# Load the Datadog API module.
+ the Datadog API module.
 require 'rubygems'
 require 'dogapi'
 
 api_key = "abcdef123456"
 application_key = "fedcba654321"
-
-# Submitting events does not require the application key.
+ events does not require the application key.
 dog = Dogapi::Client.new(api_key, application_key)
-
-# Send a new event.
+ a new event.
 dog.emit_event(Dogapi::Event.new('Testing done, FTW'), :host => "my_host")
 ```
 
-    Start instrumenting your code using the DogStatsD client:
-
+Start instrumenting your code using the DogStatsD client:
 ```ruby
-# Load the dogstats module.
+ the dogstats module.
 require 'datadog/statsd'
-
-# Create a stats instance.
+ a stats instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
-
-# Increment a counter.
+ a counter.
 statsd.increment('page.views')
-
-# Record a gauge 50% of the time.
+ a gauge 50% of the time.
 statsd.gauge('users.online', 123, :sample_rate=>0.5)
 ```
 
@@ -66,3 +61,9 @@ There is nothing that you need to do in the Datadog application to configure Rub
 ### Validation
 
 Go to the [Metrics explorer page](https://app.datadoghq.com/metric/explorer) and see that it just works!
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

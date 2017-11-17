@@ -1,24 +1,41 @@
 ---
-title: Datadog-Pivotal Tracker Integration
-integration_title: Pivotal Tracker
+aliases: []
+description: See and comment on stories in your Datadog event stream.
+git_integration_title: pivotal
+integration_title: ''
 kind: integration
-doclevel: basic
-description: "See and comment on stories in your Datadog event stream."
+newhlevel: true
+title: Datadog-Pivotal Tracker Integration
 ---
 
 {{< img src="integrations/pivotal/pivotal_event.png" alt="pivotal event" responsive="true" >}}
 
 ## Overview
-//get-overview-from-git//
+
+Connect Pivotal Tracker to Datadog to:
+
+* See and discuss the progress of your stories in your event stream.
+* Correlate story completion with other events and metrics in your system.
 
 ## Setup
-//get-setup-from-git//
+### Installation 
+
+To get Pivotal events in your stream, enter the API token generated from your Pivotal [profile page](https://www.pivotaltracker.com/signin).
+
+{{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token" responsive="true" >}}
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Pivotal Tracker integration does not include any event at this time.
+
+### Service Checks
+The Pivotal Tracker integration does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

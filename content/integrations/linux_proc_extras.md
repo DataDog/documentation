@@ -1,23 +1,75 @@
 ---
-title: Datadog-Linux_proc_extras Integration
-integration_title: Linux_proc_extras Integration
-git_integration_title: Linux_proc_extras
+aliases: []
+description: linux_proc_extras description.
+git_integration_title: linux_proc_extras
+integration_title: ''
 kind: integration
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+title: Datadog-Linux Proc Extras Integration
 ---
 
+ Integration
+
 ## Overview
-//get-overview-from-git//
+Get metrics from linux_proc_extras service in real time to:
+
+* Visualize and monitor linux_proc_extras states
+* Be notified about linux_proc_extras failovers and events.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+Install the `dd-check-linux_proc_extras` package manually or with your favorite configuration manager
+
+### Configuration
+
+Edit the `linux_proc_extras.yaml` file to point to your server and port, set the masters to monitor. See the [sample linux_proc_extras.yaml](https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/conf.yaml.example) for all available configuration options.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `linux_proc_extras` under the Checks section:
+
+    Checks
+    ======
+
+        linux_proc_extras
+        -----------
+          - instance #0 [OK]
+          - Collected 39 metrics, 0 events & 7 service checks
+
+## Compatibility
+
+The linux_proc_extras check is compatible with all major platforms
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Linux proc extras check does not include any event at this time.
+
+### Service Checks
+The Linux proc extras check does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+
+If you have any questions about Datadog or a use case our [Docs](https://docs.datadoghq.com/) didn’t mention, we’d love to help! Here’s how you can reach out to us:
+
+### Visit the Knowledge Base
+
+Learn more about what you can do in Datadog on the [Support Knowledge Base](https://datadog.zendesk.com/agent/).
+
+### Web Support
+
+Messages in the [event stream](https://app.datadoghq.com/event/stream) containing **@support-datadog** will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app.
+
+### By Email
+
+You can also contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
+
+### Over Slack
+
+Reach out to our team and other Datadog users on [Slack](http://chat.datadoghq.com/).
 
 ## Further Reading
-//get-further-reading-from-git//
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)

@@ -1,38 +1,81 @@
 ---
-title: Network check
-integration_title: Network Check
+aliases: []
+description: Track bytes and packets in/out, connection states, round trip times,
+  and more.
+git_integration_title: network
+integration_title: ''
 kind: integration
 newhlevel: true
-platformmetrics:
-  system.net.tcp.retrans_packs:
-    - BSD
-  system.net.tcp.sent_packs:
-    - BSD
-  system.net.tcp.rcv_packs:
-    - BSD
-  system.net.tcp.retrans_segs:
-    - Solaris
-  system.net.tcp.in_segs:
-    - Solaris
-  system.net.tcp.out_segs:
-    - Solaris
-description: "{{< get-desc-from-git >}}"
-git_integration_title: network
+title: Datadog-Network Integration
 ---
 
-{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" responsive="true" >}}
+ check
 
 ## Overview
-//get-overview-from-git//
+
+The network check collects TCP/IP stats from the host operating system.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The network check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host. If you need the newest version of the check, install the `dd-check-network` package.
+
+### Configuration
+
+The Agent enables the network check by default, but if you want to configure the check yourself, create a file `network.yaml` in the Agent's `conf.d` directory. See the [sample network.yaml](https://github.com/DataDog/integrations-core/blob/master/network/conf.yaml.default) for all available configuration options:
+
+```
+init_config:
+
+instances:
+ check only supports one configured instance
+  - collect_connection_state: false # set to true to collect TCP connection state metrics, e.g. SYN_SENT, ESTABLISHED
+    excluded_interfaces: # the check will collect metrics on all other interfaces
+      - lo
+      - lo0
+ any network interface matching the given regex:
+: eth1.*
+```
+
+Restart the Agent to effect any configuration changes.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `network` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    network
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 0 service checks
+
+    [...]
+```
+
+## Compatibility
+
+The network check is compatible with all major platforms.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Network check does not include any event at this time.
+
+### Service Checks
+The Network check does not include any service check at this time.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+### Datadog Blog
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+
+### Knowledge Base
+* [Built a network monitor on an http check](https://help.datadoghq.com/hc/en-us/articles/115003314726-Built-a-network-monitor-on-an-http-check-)

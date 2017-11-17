@@ -1,25 +1,84 @@
 ---
-title: Datadog-Couchbase Integration
-integration_title: Couchbase
-kind: integration
-doclevel: basic
+aliases: []
+description: Track and graph your Couchbase activity and performance metrics.
 git_integration_title: couchbase
-description: "{{< get-desc-from-git >}}"
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-CouchBase Integration
 ---
 
-{{< img src="integrations/couchbase/couchbase_graph.png" alt="couchbase graph" responsive="true" >}}
+ Integration
 
 ## Overview
-//get-overview-from-git//
+
+Identify busy buckets, track cache miss ratios, and more. This Agent check collects metrics like:
+
+* Hard disk and memory used by data
+* Current connections
+* Total objects
+* Operations per second
+* Disk write queue size
+
+And many more.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The Couchbase check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Couchbase nodes.
+
+### Configuration
+
+Create a file `couchbase.yaml` in the Agent's `conf.d` directory. See the [sample couchbase.yaml](https://github.com/DataDog/integrations-core/blob/master/couchbase/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - server: http://localhost:8091 # or wherever your Couchbase is listening
+: <your_username>
+: <your_password>
+```
+
+Restart the Agent to begin sending Couchbase metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `couchbase` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    couchbase
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The couchbase check is compatible with all major platforms.
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+The Couchbase check does not include any event at this time.
+
+### Service Checks
+
+`couchbase.can_connect`:
+
+Returns `Critical` if the Agent cannot connect to Couchbase to collect metrics.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+
+* [Monitor key Couchbase metrics](https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog/).

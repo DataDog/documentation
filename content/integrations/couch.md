@@ -1,26 +1,82 @@
 ---
-title: Datadog-CouchDB Integration
-integration_title: CouchDB
-kind: integration
-git_integration_title: couch
 aliases:
-    - /integrations/couchdb
-description: "{{< get-desc-from-git >}}"
+- /integrations/couchdb
+description: Track and graph your CouchDB activity and performance metrics.
+git_integration_title: couch
+integration_title: ''
+kind: integration
+newhlevel: true
+title: Datadog-CouchDB Integration
 ---
 
-{{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph" responsive="true" >}}
+ Integration
 
 ## Overview
-//get-overview-from-git//
+
+Capture CouchDB data in Datadog to:
+
+* Visualize key CouchDB metrics.
+* Correlate CouchDB performance with the rest of your applications.
+
+For performance reasons, the CouchDB version you're using is cached, so you cannot monitor CouchDB instances with different versions with the same agent instance.
 
 ## Setup
-//get-setup-from-git//
+### Installation
+
+The CouchDB check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your CouchDB servers.
+
+### Configuration
+
+Create a file `couch.yaml` in the Agent's `conf.d` directory. See the [sample  couch.yaml](https://github.com/DataDog/integrations-core/blob/master/couch/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - server: http://localhost:5984 # or wherever your CouchDB is listening
+: <your_username>
+: <your_password>
+: <A node's Erlang name> # Only for CouchDB 2.x
+: If no name is specified, the agent will scan all nodes up. As that may be very long, you can limit how many to collect per check. Default: 20
+. Maximum number of databases to report on. Default: 50
+```
+
+Optionally, provide a `db_whitelist` and `db_blacklist` to control which databases the Agent should and should not collect metrics from.
+
+Restart the Agent to begin sending CouchDB metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `couch` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    couch
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
 
 ## Data Collected
-//get-data-collected-from-git//
+### Metrics
+{{< get-metrics-from-git >}}
+
+### Events
+
+The Couch check does not include any event at this time.
+
+### Service Checks
+
+`couchdb.can_connect`: Returns `Critical` if the Agent cannot connect to CouchDB to collect metrics.
 
 ## Troubleshooting
-//get-troubleshooting-from-git//
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
 
 ## Further Reading
-//get-further-reading-from-git//
+
+* [Monitoring CouchDB performance with Datadog](https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog/)
