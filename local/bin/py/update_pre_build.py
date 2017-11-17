@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import linecache
+from functools import partial
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from tqdm import *
@@ -14,6 +15,7 @@ import json
 import re
 import fnmatch
 from itertools import chain
+from multiprocessing.pool import ThreadPool as Pool
 
 
 class GitHub:
@@ -117,16 +119,22 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
         integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
+        def download_raw(item, dest, org, repo, branch):
+            path_to_file = item.get('path', '')
+            if path_to_file:
+                file_out = '{}{}'.format(dest, path_to_file)
+                makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
+                gh.raw(org, repo, branch, path_to_file, file_out)
+            return None
+
         # sync from dogweb, download if we don't have it (token required)
         if not self.options.dogweb:
             if self.options.token:
                 listing = gh.list('DataDog', 'dogweb', 'prod', dogweb_globs)
                 dest = self.extract_dir + 'dogweb' + sep
-                for item in tqdm(listing):
-                    path_to_file = item.get('path')
-                    file_out = '{}{}'.format(dest, path_to_file)
-                    makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
-                    gh.raw('DataDog', 'dogweb', 'prod', path_to_file, file_out)
+                with Pool(processes=self.pool_size) as pool:
+                    for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='dogweb', branch='prod'), listing)):
+                        pass
                 # set dogweb dir to our extracted
                 self.options.dogweb = dest
 
@@ -134,11 +142,9 @@ class PreBuild:
         if not options.integrations:
             listing = gh.list('DataDog', 'integrations-core', 'master', integrations_globs)
             dest = self.extract_dir + 'integrations-core' + sep
-            for item in tqdm(listing):
-                path_to_file = item.get('path')
-                file_out = '{}{}'.format(dest, path_to_file)
-                makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
-                gh.raw('DataDog', 'integrations-core', 'master', path_to_file, file_out)
+            with Pool(processes=self.pool_size) as pool:
+                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='integrations-core', branch='master'), listing)):
+                    pass
             # set integrations-core dir to our extracted
             self.options.integrations = dest
 
