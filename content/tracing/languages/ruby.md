@@ -33,7 +33,6 @@ end
 
 For more examples, see the [RubyDoc Gem documentation](http://www.rubydoc.info/gems/ddtrace/).
 
-
 ## Compatibility
 
 The ddtrace library includes support for the following web frameworks:

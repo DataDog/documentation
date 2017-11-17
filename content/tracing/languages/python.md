@@ -19,7 +19,6 @@ pip install ddtrace
 
 Finally, import the tracer and instrument your code!
 
-
 ## Example
 
 <div class="alert alert-info">

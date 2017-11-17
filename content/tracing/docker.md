@@ -5,7 +5,7 @@ autotocdepth: 2
 customnav: tracingnav
 ---
 
-Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable
+Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 **Note: APM is NOT available on Alpine Images**
 

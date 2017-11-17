@@ -390,11 +390,6 @@ languages:
           url: "/tracing/environments/"
           weight: 20
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_help
-          name: "Help"
-          url: "/tracing/help/"
-          weight: 30
-          parent: menu_references_tracing
         - identifier: customnav_tracingnav_langs
           name: "languages"
           url: "/tracing/languages/"
