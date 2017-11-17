@@ -9,6 +9,12 @@ content/integrations/*.md
 !content/integrations/_index.md
 !content/integrations/new_integration.md
 !content/integrations/integration_sdk.md
+!content/integrations/cloudcheckr.md
+!content/integrations/jenkins.md
+!content/integrations/neo4j.md
+!content/integrations/rss.md
+!content/integrations/system.md
+!content/integrations/tcprtt.md
 
 # Logs
 logs
