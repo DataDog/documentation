@@ -41,7 +41,6 @@ docker run -d --name dd-agent \
 
 By default the agent container will use the `Name` field found in the `docker info` command from the host as a hostname. To change this behavior you can update the `hostname` field in `/etc/dd-agent/datadog.conf`. The easiest way for this is to use the `DD_HOSTNAME` environment variable (see below).
 
-
 ### CGroups
 
 For the Docker check to succeed, memory management by cgroup must be enabled on the host as explained in the [debian wiki](https://wiki.debian.org/LXC#Preparing_the_host_system_for_running_LXC).

@@ -377,7 +377,7 @@ checks:
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
 [3]: /integrations/kubernetes/#installation
 [4]: /integrations/amazon_ecs/#installation
-[5]: https://github.com/DataDog/docker-dd-agent#environment-variables
-[6]: https://github.com/DataDog/docker-dd-agent#configuration-files
+[5]: /getting_started/docker/#environment-variables
+[6]: /getting_started/docker/#configuration-files
 [7]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
 [8]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example

@@ -9,9 +9,7 @@ Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent)
 
 **Note: APM is NOT available on Alpine Images**
 
-<div class="alert alert-info">
-For additional information, please see <a href="https://github.com/DataDog/docker-dd-agent/blob/master/README.md">the project README on Github</a>
-</div>
+For additional information, please see the getting started about [Datadog docker](/getting_started/docker)
 
 ## Tracing from the host
 
