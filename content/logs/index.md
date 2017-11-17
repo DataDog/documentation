@@ -114,8 +114,7 @@ Agent 6 is able to collect logs from containers. It can be installed [on the hos
 To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom yaml file.
 Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
 
-```
-
+{{< highlight yaml >}}
 init_config:
 
 instances:
@@ -130,7 +129,7 @@ logs:
      source: nginx
      sourcecategory: http_web_access
 
-```
+{{< /highlight >}}
 
 If the agent is containerized, please see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
 
