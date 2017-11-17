@@ -54,7 +54,7 @@
     {{ else }} {{/* No param set load default integration from front matter */}}
 
       {{ if $integration }}
-        {{ if (index $data $integration) }}
+
         <table class="table">
           <tbody>
           {{ range $k, $v := (index $data $integration) }}
@@ -67,7 +67,6 @@
           {{ end }}
           </tbody>
         </table>
-        {{ end }}
       {{ end }}
 
     {{ end }}

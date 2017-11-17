@@ -48,7 +48,7 @@ clean-exe:  ## remove execs.
 
 clean-integrations:  ## remove built integrations files.
 	@rm -rf data/integrations
-	@find ./content/integrations -maxdepth 1 -type f \! -name '_index.md' -exec rm -rf {} \;
+	@find ./content/integrations -maxdepth 1 -type f \! -name '_index.md' \! -name 'integration_sdk.md' \! -name 'new_integration.md' -exec rm -rf {} \;
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

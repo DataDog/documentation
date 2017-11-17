@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import linecache
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 
@@ -207,6 +208,8 @@ class PreBuild:
         if exists(self.options.dogweb):
             for file_name in tqdm(sorted(glob.glob('{}{}'.format(self.options.dogweb, 'integration/**/README.md'), recursive=True))):
                 dir_name = basename(dirname(file_name))
+                metrics = '{0}{1}{2}_metadata.csv'.format(dirname(file_name), sep, dir_name)
+                metrics_exist = exists(metrics) and linecache.getline(metrics, 2)
                 manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
                 manifest_json = json.load(open(manifest)) if exists(manifest) else {}
                 h1reg = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
@@ -215,8 +218,9 @@ class PreBuild:
                     result = data_file.read()
                     # remove h1
                     result = re.sub(h1reg, '', result, 0)
-                    # update the metrics
-                    result = re.sub(metricsreg, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
+                    # update the metrics, if metrics exist
+                    if metrics_exist:
+                        result = re.sub(metricsreg, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
                     # add required front-matter yaml for hugo
                     result = self.add_integration_frontmatter(result, manifest_json, dir_name)
                     # rename the file to be the correct integration name and write out file
@@ -227,6 +231,8 @@ class PreBuild:
         if exists(self.options.integrations):
             for file_name in tqdm(sorted(glob.glob('{}{}'.format(self.options.integrations, '**/README.md'), recursive=True))):
                 dir_name = basename(dirname(file_name))
+                metrics = '{0}{1}{2}'.format(dirname(file_name), sep, 'metadata.csv')
+                metrics_exist = exists(metrics) and linecache.getline(metrics, 2)
                 manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
                 manifest_json = json.load(open(manifest)) if exists(manifest) else {}
                 h1reg = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
@@ -235,8 +241,9 @@ class PreBuild:
                     result = data_file.read()
                     # remove h1
                     result = re.sub(h1reg, '', result, 0)
-                    # update the metrics
-                    result = re.sub(metricsreg, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
+                    # update the metrics, if metrics exist
+                    if metrics_exist:
+                        result = re.sub(metricsreg, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
                     # add required front-matter yaml for hugo
                     result = self.add_integration_frontmatter(result, manifest_json, dir_name)
                     # rename the file to be the correct integration name and write out file
@@ -248,9 +255,9 @@ class PreBuild:
         template = "---\n{front_matter}\n---\n\n{content}\n"
         yml = {
             'title': data.get('public_title', ''),
-            'integration_title': dir_name.lower(),
+            'integration_title': dir_name,
             'kind': 'integration',
-            'git_integration_title': data.get('name', ''),
+            'git_integration_title': data.get('name', '').lower(),
             'newhlevel': True,
             'description': data.get('short_description', ''),
             'aliases': data.get('aliases', [])
