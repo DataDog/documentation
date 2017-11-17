@@ -48,7 +48,17 @@ clean-exe:  ## remove execs.
 
 clean-integrations:  ## remove built integrations files.
 	@rm -rf data/integrations
-	@find ./content/integrations -maxdepth 1 -type f \! -name '_index.md' \! -name 'integration_sdk.md' \! -name 'new_integration.md' -exec rm -rf {} \;
+	@find ./content/integrations -type f -maxdepth 1 \
+	    -a -not -name '_index.md' \
+	    -a -not -name 'cloudcheckr.md' \
+	    -a -not -name 'integration_sdk.md' \
+	    -a -not -name 'jenkins.md' \
+	    -a -not -name 'neo4j.md' \
+	    -a -not -name 'new_integration.md' \
+	    -a -not -name 'rss.md' \
+	    -a -not -name 'system.md' \
+	    -a -not -name 'tcprtt.md' \
+	    -exec rm -rf {} \;
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
