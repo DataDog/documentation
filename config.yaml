@@ -49,7 +49,11 @@ languages:
           url: "/getting_started/custom_metrics/"
           weight: 330
           parent: menu_references_getting_started
-
+        - identifier: customnav_getting_started_docker
+          name: "Datadog docker"
+          url: "/getting_started/docker/"
+          weight: 340
+          parent: menu_references_getting_started
 
         # AGENT
         - identifier: menu_references_agent
