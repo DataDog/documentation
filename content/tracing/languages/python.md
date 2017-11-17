@@ -14,7 +14,6 @@ To begin tracing applications written in Python, first [install and configure th
 Next, install the Datadog Tracing library using pip:
 
 ```python
-
 pip install ddtrace
 ```
 
@@ -65,7 +64,7 @@ It also includes support for the following data stores and libraries:
 
 To instrument these libraries, please see [the library documentation](http://pypi.datadoghq.com/trace/docs/#other-libraries)
 
-## Additional Information
+## Further Reading
 
 The Python library [source code can be found on Github](https://github.com/DataDog/dd-trace-py).
 

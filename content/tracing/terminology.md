@@ -19,7 +19,15 @@ Represents a logical unit of work in the system. Each trace consists of one or m
 {{< img src="tracing/terminology/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" >}}
 
 ### Service
-The name of a set of processes that do the same job. For instance, a simple web application may consist of two services: a single `webapp` service and a single `database` service, while a more complex environment may break it out into 6 services: 3 separate `webapp`, `admin`, and `query` services, along with a `master-db`, a `replica-db`, and a `yelp-api` external service.
+The name of a set of processes that do the same job.  
+For instance, a simple web application may consist of two services: 
+
+* A single `webapp` service and a single `database` service
+
+While a more complex environment may break it out into 6 services: 
+
+* 3 separate services: `webapp`, `admin`, and `query`.
+* 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
 
 ### Resource
 
