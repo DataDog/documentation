@@ -1,11 +1,11 @@
 ---
-title: Datadog-AWS ELB & ApplicationELB Integration
+title: Datadog-AWS Load Balancer Integration
 integration_title: AWS ELB
 kind: integration
 git_integration_title: amazon_elb
 updated_for_agent: 5.8.5
 newhlevel: true
-description: "Track key Amazon ElasticBeanstalk metrics."
+description: "Track key Amazon Load Balancer metrics."
 ---
 
 {{< img src="integrations/awselb/elb.png" alt="ELB default dashboard" >}}
@@ -14,6 +14,8 @@ description: "Track key Amazon ElasticBeanstalk metrics."
 
 Elastic Load Balancing (ELB) is an AWS service used to dispatch incoming web traffic from your applications across your Amazon EC2 backend instances, which may be in different availability zones. ELB helps ensure a smooth user experience and provide increased fault tolerance, handling traffic peaks and failed EC2 instances without interruption.
 
+Datadog collects metrics and metadata from all three flavors of Elastic Load Balancers that AWS offers: **Application, Classic, and Network Load Balancers.**
+
 ## Setup
 ### Installation
 
@@ -21,7 +23,7 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 
 ### Configuration
 
-In the Amazon Web Services integration tile, ensure the **ELB checkbox** is checked for Classic ELB metrics and the **ApplicationELB** checkbox for Application ELB metrics.
+In the Amazon Web Services integration tile, ensure the **ELB checkbox** is checked for Classic ELB metrics, the **ApplicationELB checkbox** is checked for Application ELB metrics, and the **NetworkELB checkbox** is checked for Network ELB metrics.
 
 ## Data Collected
 ### Metrics
