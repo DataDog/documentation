@@ -428,98 +428,12 @@ languages:
         # TRACING/APM - Subnav end
 
 
-        # DEVELOPERS
-        - identifier: menu_references_developers
-          name: "Developers"
-          url: "/developers/"
-          pre: "nav_developers"
-          weight: 100
-        # DEVELOPERS - Subnav start
-        - identifier: customnav_developersnav_api
-          name: "API"
-          url: "/api/"
-          weight: 30
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_dogstatsd
-          name: "Dogstatsd"
-          url: "/developers/dogstatsd/"
-          weight: 40
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_libraries
-          name: "Libraries"
-          url: "/developers/libraries/"
-          weight: 50
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_metrics
-          name: "Metrics"
-          url: "/developers/metrics/"
-          weight: 70
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_metrictypes
-          name: "Metric Types"
-          url: "/developers/metrictypes/"
-          weight: 80
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_testing
-          name: "Testing"
-          url: "/developers/testing/"
-          weight: 100
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_units
-          name: "Units"
-          url: "/developers/units/"
-          weight: 110
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_faq
-          name: "FAQ"
-          url: "/developers/faq/"
-          weight: 120
-          parent: menu_references_developers
-        # DEVELOPERS - Subnav end
-
-
-        # ACCOUNT MANAGEMENT
-        - identifier: menu_references_account_management
-          name: "Account Management"
-          url: "/account_management/"
-          pre: "nav_account"
-          weight: 90
-        # ACCOUNT MANAGEMENT - Subnav start
-        - identifier: customnav_accountmanagementnav_team
-          name: "Team"
-          url: "/account_management/team/"
-          weight: 30
-          parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_settings
-          name: "Settings"
-          url: "/account_management/settings/"
-          weight: 40
-          parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_saml
-          name: "SAML"
-          url: "/account_management/saml/"
-          weight: 50
-          parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_multi_account
-          name: "Multi Account"
-          url: "/account_management/multi_account/"
-          weight: 60
-          parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_faq
-          name: "FAQ"
-          url: "/account_management/faq/"
-          weight: 70
-          parent: menu_references_account_management
-        # ACCOUNT MANAGEMENT - Subnav end
-
-
-
         # LOGS
         - identifier: menu_references_logs
           name: "Logs"
           url: "/logs/"
           pre: "nav_logs"
-          weight: 110
+          weight: 90
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Explore"
@@ -578,6 +492,89 @@ languages:
           parent: menu_references_logs
         # LOGS - Subnav end
 
+        # DEVELOPERS
+        - identifier: menu_references_developers
+          name: "Developers"
+          url: "/developers/"
+          pre: "nav_developers"
+          weight: 100
+        # DEVELOPERS - Subnav start
+        - identifier: customnav_developersnav_api
+          name: "API"
+          url: "/api/"
+          weight: 30
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_dogstatsd
+          name: "Dogstatsd"
+          url: "/developers/dogstatsd/"
+          weight: 40
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_libraries
+          name: "Libraries"
+          url: "/developers/libraries/"
+          weight: 50
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_metrics
+          name: "Metrics"
+          url: "/developers/metrics/"
+          weight: 70
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_metrictypes
+          name: "Metric Types"
+          url: "/developers/metrictypes/"
+          weight: 80
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_testing
+          name: "Testing"
+          url: "/developers/testing/"
+          weight: 100
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_units
+          name: "Units"
+          url: "/developers/units/"
+          weight: 110
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_faq
+          name: "FAQ"
+          url: "/developers/faq/"
+          weight: 120
+          parent: menu_references_developers
+        # DEVELOPERS - Subnav end
+
+        # ACCOUNT MANAGEMENT
+        - identifier: menu_references_account_management
+          name: "Account Management"
+          url: "/account_management/"
+          pre: "nav_account"
+          weight: 110
+        # ACCOUNT MANAGEMENT - Subnav start
+        - identifier: customnav_accountmanagementnav_team
+          name: "Team"
+          url: "/account_management/team/"
+          weight: 30
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_settings
+          name: "Settings"
+          url: "/account_management/settings/"
+          weight: 40
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_saml
+          name: "SAML"
+          url: "/account_management/saml/"
+          weight: 50
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_multi_account
+          name: "Multi Account"
+          url: "/account_management/multi_account/"
+          weight: 60
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_faq
+          name: "FAQ"
+          url: "/account_management/faq/"
+          weight: 70
+          parent: menu_references_account_management
+        # ACCOUNT MANAGEMENT - Subnav end
+
         - identifier: menu_references_videos
           name: "Videos"
           url: "/videos/"
@@ -589,11 +586,6 @@ languages:
 #          pre: "nav_glossary"
 #          weight: 120
 
-        - identifier: menu_references_faq
-          name: "FAQ"
-          url: "/faq/"
-          pre: "nav_faq"
-          weight: 130
         - identifier: menu_references_help
           name: "Help"
           url: "/help/"
