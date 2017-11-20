@@ -85,3 +85,12 @@ Here is how to proceed to enjoy this css style on Chrome using Stylebot:
 8. Next time you will visit a shared dashboard, this new css style will be enabled.
 
 If you have any custom css style sheet that you would like to share, please [reach out to us](/help)
+
+## Backup my Screenboard
+
+Using our [APIs](/api) it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+
+* https://github.com/brightcove/dog-watcher
+* https://github.com/Shopify/doggy
+
+Special thanks to [Brightcove](https://www.brightcove.com/) and [Shopify](https://www.shopify.com/) for sharing these projects!
