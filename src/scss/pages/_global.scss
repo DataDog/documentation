@@ -35,7 +35,7 @@ strong {
 }
 
 a {
-  color:#4A4A4A;
+  color:#555555;
 }
 
 button:focus,
@@ -80,12 +80,27 @@ code {
 p {
   // todo: can i set this with a bootstrap variable?
   font-size:18px;
-  color:#4A4A4A;
+  color:#000;
   line-height:22px;
 }
 
+h1 {
+  line-height:42px;
+  padding-bottom:12px;
+  &~ p {
+    padding-top:10px;
+  }
+}
+
+.col-lg-7 {
+  #pagetitle {
+    margin-right: -30%;
+  }
+}
+
 .main {
-  padding-top:30px;
+  padding-left:29px;
+  padding-top:29px;
   padding-bottom:100px;
   h2 > a,
   h3 > a,
@@ -101,9 +116,8 @@ p {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    border-bottom: 1px solid rgba(74, 74, 74, 05);
+    text-decoration:underline;
     &:hover {
-      border-bottom-color: transparent;
     }
   }
 
@@ -186,16 +200,18 @@ p {
 
 // Breakpoint styles go here...
 
-//@include media-breakpoint-down(md)
-@media (max-width: 767px) {
-  h1 {
-    font-size:42px;
-  }
-}
-
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
   html {
     overflow-x: hidden;
+  }
+}
+
+//@include media-breakpoint-up(md) { ... }
+@media (max-width: 991px) {
+  .col-lg-7 {
+    #pagetitle {
+      margin-right: 0 !important;
+    }
   }
 }
