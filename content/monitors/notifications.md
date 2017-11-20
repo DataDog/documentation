@@ -237,7 +237,17 @@ If you would like all monitors for a specific application or integration, you ca
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
 
-## Using message template variables to dynamically create @-mentions 
+## Slack integration
+
+### @-mentions in Slack from monitor alert
+
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
+
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true">}}
+
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true">}}
+
+### Using message template variables to dynamically create @-mentions 
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.  
 

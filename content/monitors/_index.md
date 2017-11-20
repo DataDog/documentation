@@ -20,6 +20,8 @@ Hipchat) or other custom endpoints via webhooks.
 
 Triggered monitors will appear in the [event stream](/graphing/event_stream/), allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
+Monitors can be managed programatically, refer to the [Datadog API docs](/api/#monitors) for detailed information on managing monitors through the API using the available [libraries](/developers/libraries) or cURL.
+
 In this section you can:
 
 * [Learn how to create a monitor](/monitors/monitor_types)
@@ -69,3 +71,15 @@ We also provide you with the ability to be notified on changes to a monitor you 
 {{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
 
 Setting the above to **Notify** will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.
+
+## Manualy resolve your monitor
+
+It only makes sense in a couple cases to resolve manually your monitor:
+
+* If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
+* If the monitor is in the triggered state but has stopped reporting data then
+resolving it hides it from the triggered monitors page.
+
+Otherwise the monitor picks up the current state on the next evaluation. 
+
+In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).

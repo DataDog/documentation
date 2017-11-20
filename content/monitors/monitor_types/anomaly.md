@@ -18,8 +18,13 @@ We've added a new query function called `anomalies` to our query language. When 
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
-### Visualize Anomalies in Dashboards
+When selecting your alert time range, smaller window sizes leads to faster alerts, however, with very small windows (<= 10 minutes), metrics often appear noisy, making it difficult to visualize the difference between anomalies and noise.
 
+**Note**: Setting the window size to X minutes doesn't require an anomaly to last X minutes before an alert is triggered. Tune the threshold to control how long an anomaly must last to trigger an alert.  
+
+For example, with the window size sets to 30 minutes, you can get alerted when an anomaly lasts for just five minutes by setting the threshold to 5/30 = 17%. That said, we have found that anomaly alerts are most reliable when the window size is between 15 minutes and an hour and the threshold is on the higher side (> 40%).
+
+### Visualize Anomalies in Dashboards
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 
@@ -95,12 +100,101 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="alg comparison new metric" responsive="true" >}}
 
+## Anomaly Monitors via the API
+
+If you are an enterprise-level customer, create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the `anomalies` function to the monitor query. The query will then follow this formula:
+```
+time_aggr(time_window):anomalies(space_aggr:metric{tags}, 'algorithm_used', deviation_number, direction='both/above/below') >= threshold_value
+```
+
+Acceptable algorithm values are basic, agile, robust, or adaptive.
+
+**Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team](mailto:billing@datadoghq.com) to discuss that further. 
+
+### Example
+
+If you wanted to create an anomaly detection monitor to notify you when your average cassandra node's cpu was three standard deviations above the ordinary value for 80% of the time over the last 5 minutes, you could use the following query in your API call:
+
+```
+avg(last_5m):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above') >= 0.8
+```
+
+
 ## FAQ
 
-* Should I use anomaly detection for everything?
-* Why can't I use anomaly detection over groups in the dashboard?
-* Will past anomalies affect the current predictions?
-* How should I set the window size and alert threshold?
-* Why does `anomalies` not add a gray prediction band in the dashboard? / Why am I getting "No Data" for an Anomaly Alert? / How much history do the algorithms require?
-* Why does an anomaly "disappear" when I zoom in?
-(### Is it possible to capture anomalies that occur within the bounds?
+###  Should I use anomaly detection for everything?
+
+No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` might be driven by user traffic and thus vary predictably by time of day and day of week. If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
+
+Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
+
+
+### Why can't I use anomaly detection over groups in the dashboard?
+
+Looking at many separate timeseries in a single graph can lead to [spaghettification](https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/), and the problem gets only worse once the anomaly detection visualization is added in.
+
+{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true">}}
+
+You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
+
+{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multilines" responsive="true">}}
+
+### Will past anomalies affect the current predictions?
+
+All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
+
+{{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history" responsive="true">}}
+
+The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
+
+{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true">}}
+
+
+### Will past anomalies affect the current predictions?
+
+All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
+
+{{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history" responsive="true">}}
+
+The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
+
+{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true">}}
+
+### Why does an anomaly "disappear" when I zoom in?
+
+At different zoom levels, the same query can result in time series with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
+
+The width of the gray band that is drawn by our [anomaly detection algorithm](/monitors/monitor_types/anomaly) is, in part, based on the noisiness of the time series in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
+
+Here's a concrete example to illustrate. The `app.requests` metric is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The chart below shows this series in a graph with a one-day time window; each point in the graph summarizes 5 minutes.
+
+{{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="disappearing day" responsive="true">}}
+
+The gray band here makes sense; it is wide enough to capture the noise in the time series. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
+
+{{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="disappearing half hour" responsive="true">}}
+
+Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous.  
+Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks a little different from the rest of the series, but it is not extreme enough to fall outside of the band.
+
+In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It means that, while the individual points in the zoomed-in view are not anomalous in isolation, the fact that many slightly unusual points occur together is anomalous.
+
+### Is it possible to capture anomalies that occur within the bounds?
+
+If the reason [anomalies](/monitors/monitor_types/anomaly) are occurring within the bounds is that the volatility of a metric leads to wide bounds that mask true anomalies (as described in the FAQ above), you may be able apply functions to the series to reduce its volatility, leading to narrower bounds and better anomaly detection.
+
+For example, many important metrics (e.g., `successful.logins`, `checkouts.completed`, etc.) represent the success of some user-driven action. It can be useful to monitor for anomalous drops in one of those metrics, as this may be an indication that something is preventing successful completion of these events and that the user experience is suffering.
+
+It's common that these metrics have points that are at or near zero, especially when viewing the metric over a short window of time. Unfortunately, this results in the bounds of the anomaly detection forecast include zero, making it impossible to detect anomalous drops in the metric. An example is shown below.
+
+{{< img src="monitors/monitor_types/anomaly/raw_profile_updates.png" alt="raw profile updates" responsive="true">}}
+
+#### How can we work around this problem?
+
+One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
+
+{{< img src="monitors/monitor_types/anomaly/rollup_profile_updates.png" alt="rollup profile updates" responsive="true" >}}
+
+Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
+
+{{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true">}}

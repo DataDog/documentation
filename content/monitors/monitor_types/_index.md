@@ -92,8 +92,7 @@ Here is a quick overview of the different terms used:
       can give a threshold of `20GB`.
 
       For a **threshold alert** you will be able to chose a *time aggregation*
-      of the data. The alerting engine will generate a single series and perform
-      selected aggregation.
+      of the data. The alerting engine will generate a single series and perform selected aggregation.
 
       Let's look at the details of each option:
 
@@ -109,10 +108,8 @@ Here is a quick overview of the different terms used:
       * **in total**: If the summation of every point in the series is outside
         the threshold then an alert will be triggered. It adds the `sum()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
 
-      Note the **on average** and **at all times** aggregations *require* a full
-      window of data in the final series. This does *not* mean that each series
-      must be full but that there shouldn't be a gap of more than 1 minute
-      across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
+      Note the **on average** and **at all times** aggregations *require* a full window of data in the final series. This does *not* mean that each series must be full but that there shouldn't be a gap of more than 1 minute across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
+
 
     - When you select the **change alert** option, you will have additional
     parameters you can adjust.
