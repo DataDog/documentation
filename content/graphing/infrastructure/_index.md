@@ -88,6 +88,19 @@ Once you determine which hosts you would like to update you can either manually 
 
 Or you can make use of one our automation integrations like [Chef](/integrations/chef), [Puppet](/integrations/puppet), or [Ansible](/integrations/ansible).
 
+### List of ec2 instances without the datadog-agent installed
+
+The host list and all its host information of the [Infrastructure List page](https://app.datadoghq.com/infrastructure) of Datadog is made available via the "JSON API permalink" at the bottom of the page.
+
+You can programmatically access host information and get the insights you need, one example is this python script that prints the list of hosts:
+
+* for which Datadog receives aws ec2 information from Cloudwatch, through our AWS integration.
+* but that don't have the agent installed.
+
+{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" >}}
+
+See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+
 ## What's next
 
 * [See all of your hosts together on one screen with the hostmap][1]

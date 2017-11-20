@@ -35,7 +35,7 @@ for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see [here][6].
+* For more on tagging, please see [here](/agent/tagging).
 
 ## Host Map
 
@@ -57,7 +57,7 @@ To learn more about the Host Map, visit the [Host Map Guide][10].
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed [teams][7] and maintaining the focus of an investigation.
+* Great for distributed [teams](/account_management/team) and maintaining the focus of an investigation.
 * You can [filter][8] by: user, source, tag, host, status, priority, incident
 
 
@@ -67,7 +67,7 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* [@ notify team members][9], who receive an email
+* [@ notify team members](/graphing/event_stream), who receive an email
 * @support-datadog to ask for assistance
 
 {{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" >}}
@@ -120,10 +120,7 @@ to pull the data from.
 [3]: http://www.datadoghq.com/integrations/
 [4]: /api/
 [5]: https://github.com/DataDog/dd-agent/
-[6]: /faq/#tagging
-[7]: /faq/#team
 [8]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/
-[9]: /faq/#notify
 [10]: /graphing/infrastructure/hostmap/
 [11]: /graphing/
 [12]: /graphing/miscellaneous/functions/

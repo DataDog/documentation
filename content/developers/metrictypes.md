@@ -76,19 +76,23 @@ Throws away any value that is less than a previously submitted value. IE the cou
 * Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).
 
 #### self.histogram( ... )
-Used to track the statistical distribution of a set of values.
 
-* Should be called multiple times during an agent check (otherwise you have no distribution).
-* Actually submits as multiple metrics:
+Our histogram and timing metrics are essentially the same thing and are extensions on the StatsD timing metric:
 
-|||
-|Name | Web App type|
-|:-----|:------------|
-|metric.max | GAUGE |
-|metric.avg | GAUGE |
-|metric.median | GAUGE|
-|metric.95percentile | GAUGE |
-|metric.count | RATE|
+https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
+
+It aggregates the values that are sent during the flush interval (usually defaults to 10 seconds). So if you send 20 values for a metric during the flush interval, it'll give you the aggregation of those values for the flush interval, i.e.:
+
+* my_metric.avg will give you the avg of those 20 values during the flush interval
+* my_metric.count will give you the count of the values (20 in this case) sent during the flush interval
+* my_metric.median will give you the median of those values in the flush interval
+* my_metric.95percentile will give you the 95th percentile value in the flush interval
+* my_metric.max will give you the max value sent during the flush interval
+* my_metric.min will give you the min value sent during the flush interval
+
+Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
+
+In a word, histogram type is used to track the statistical distribution of a set of values.
 
 #### self.set( ... )
 Used count the number of unique elements in a group.

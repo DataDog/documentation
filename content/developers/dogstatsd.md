@@ -340,6 +340,66 @@ Here's an example datagram:
     # Send a CRITICAL status for a remote connection
     _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
+
+## Send metrics and events using dogstatsd and the shell
+
+For Linux and other Unix-like OS, we will used Bash.  
+For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that will take care of the network bits for us.
+
+The idea behind Dogstatsd is simple: create a message that will contain information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
+
+### Sending metrics
+
+The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. We'll use a locally installed agent as a collector, so the destination IP address is 127.0.0.1.
+
+On Linux:
+
+```
+vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
+```
+
+or
+
+```
+vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
+```
+
+On Windows:
+```
+PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
+PS C:\vagrant>
+```
+
+On any platform with Python (on Windows, the agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`):
+
+```python
+import socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
+```
+
+### Sending events
+
+The format for sending events is:
+```
+_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2. 
+```
+Here we need to calculate the size of the event's title and body.
+
+On Linux:
+```
+vagrant@vagrant-ubuntu-14-04:~$ title="Event from the shell"
+vagrant@vagrant-ubuntu-14-04:~$ text="This was sent from Bash!"
+vagrant@vagrant-ubuntu-14-04:~$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
+```
+On Windows:
+
+```
+PS C:\vagrant> $title = "Event from the shell"
+PS C:\vagrant> $text = "This was sent from Powershell!"
+PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,powershell"
+```
+
 ## Further Reading
 
 [Libraries page][2] — find a DogStatsD client library to suit your needs.

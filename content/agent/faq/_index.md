@@ -13,14 +13,13 @@ customnav: agentnav
 * [How do I monitor a Windows Service?](/agent/faq/how-do-i-monitor-a-windows-service)
 * [How do I monitor Windows Processes?](/agent/faq/how-do-i-monitor-windows-processes)
 * [How do I uninstall the agent ?](/agent/faq/how-do-i-uninstall-the-agent)
-* [How to export your infrastructure list and Agent versions ?](/agent/faq/how-to-export-your-infrastructure-list-and-agent-versions)
 * [How to monitor SNMP devices?](/agent/faq/how-to-monitor-snmp-devices)
 * [I stopped my agent but I’m still seeing the host in my Datadog account.](/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host)
 * [Is the agent necessary to use Datadog ? ](/agent/faq/is-the-agent-necessary-to-use-datadog)
 
 ## Troubleshooting
 
-* [Network Time Protocol (NTP) Offset Issues](/faq/network-time-protocol-ntp-offset-issues)
+* [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
 * [Agent Troubleshooting and/or Agent Metric Reporting](/agent/faq/agent-troubleshooting-and-or-agent-metric-reporting)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)

@@ -13,6 +13,13 @@ Tagging is used throughout the Datadog product to make it easier to subset and q
 We recommend to use the format <code>key:value</code> when using tags. Like <code>env:prod</code> or <code>role:database</code>
 </div>
 
+Tags must start with a letter, and after that may contain alphanumerics,
+underscores, minuses, colons, periods and slashes. Other characters will get
+converted to underscores. Tags can be up to 200 characters long and support
+unicode. Tags will be converted to lowercase as well.
+
+Note: An exception to this is with trailing underscores, which will be trimmed off of tags (e.g. path:thing_ becomes path:thing).
+
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the integration, in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the integration or via the configuration files.
 

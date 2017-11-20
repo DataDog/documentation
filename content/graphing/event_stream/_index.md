@@ -74,6 +74,11 @@ Once claimed, an incident can be resolved by clicking the **resolve** button ind
 
 {{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" >}}
 
+## Show events unaggregated
+
+Change the “aggregate_up” parameter in the url to `false`.  
+To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link](https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000)
+
 ## Events Email
 
 When you need to integrate an application or system with Datadog, you have a
