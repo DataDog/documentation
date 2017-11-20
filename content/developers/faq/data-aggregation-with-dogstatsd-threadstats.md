@@ -27,7 +27,7 @@ Among all values received during the same flush interval, the aggregated value i
 
 * Gauge: the most recent datapoint received
 * Count/Counter: the sum of the received values
-* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [here](/developers/faq/what-is-the-histogram-metric-type) for more details.
+* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [here](/developers/metrictypes) for more details.
 * Set: the number of different values seen
 * Rate: the value difference divided by the time difference of the last 2 datapoints received
 You may find more information about each metric type [here](/developers/metrics).
