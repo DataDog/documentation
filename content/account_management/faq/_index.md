@@ -6,11 +6,8 @@ customnav: accountmanagementnav
 
 ## Account Management
 
-* [How do I setup my team in Datadog?](/account_management/faq/how-do-i-setup-my-team-in-datadog)
 * [Are my data and credentials safe?](/account_management/faq/are-my-data-and-credentials-safe)
-* [What is the difference between an Admin and a User in Datadog?](/account_management/faq/what-is-the-difference-between-an-admin-and-a-user-in-datadog)
 * [Help! My Password email never came through!](/account_management/faq/help-my-password-email-never-came-through)
-* [How do I setup (or remove) a team member in Datadog?](/account_management/faq/how-do-i-setup-or-remove-a-team-member-in-datadog)
 
 ## Service Providers
 
