@@ -84,7 +84,6 @@ customnav: integrationsnavv
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?](/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250)
-* [Why is there a container in each Kubernetes pod with 0% CPU and minimal disk/ram?](/integrations/faq/why-is-there-a-container-in-each-kubernetes-pod-with-0-cpu-and-minimal-disk-ram)
 * [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
 
 ## MySQL & SQL 

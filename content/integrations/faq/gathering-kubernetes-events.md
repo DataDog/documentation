@@ -1,5 +1,5 @@
 ---
-title: Gathering kubernetes events
+title: Gathering Kubernetes events
 kind: faq
 customnav: integrationsnav
 ---
