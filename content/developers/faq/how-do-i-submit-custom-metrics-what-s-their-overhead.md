@@ -11,7 +11,7 @@ Here are some ways of getting your metrics data into Datadog:
 * We [provide an SDK](/integrations/integration_sdk) for people interested in  writing new integrations.
 * A common method is via DogStatsD, the StatsD server bundled with the Datadog Agent. To learn more read [our guide](/developers/dogstatsd) along with this [great article](/developers/metrics).
 * Submit metrics directly to Datadog's [HTTP API](/api)
-* Another method to consider is using [dogstatsd and the shell](/developers/dogstastsd/#send-metrics-and-events-using-dogstatsd-and-the-shell)
+* Another method to consider is using [dogstatsd and the shell](/developers/dogstatsd/)
 * Multiple community libraries are [listed here](/libraries/) (Go, Python, PHP, Yammer, Node.js, etc.)
 
 Another option is to extend or fork any of our integrations that run on your localhost, you may learn more [about this here](/integrations/new_integration)
