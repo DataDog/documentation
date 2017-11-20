@@ -9,7 +9,7 @@ Trace Agent packages are available for:
 
 * Linux — packaged with the Datadog Agent since v5.11.0
 * Mac OS — packaged separately, see the [Trace Agent releases](https://github.com/DataDog/datadog-trace-agent/releases/)
-* Docker — included in the [docker-dd-agent](/getting_started/docker) container
+* Docker — included in the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container
 
 For other platforms, you must install from source.
 

@@ -489,7 +489,7 @@ languages:
 
         # DEVELOPERS
         - identifier: menu_references_developers
-          name: "Developers"
+          name: "Developers tools"
           url: "/developers/"
           pre: "nav_developers"
           weight: 100
