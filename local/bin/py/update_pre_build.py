@@ -237,9 +237,10 @@ class PreBuild:
         :return:
         """
         template = "---\n{front_matter}\n---\n\n{content}\n"
+        public_title = data.get('public_title', '')
         yml = {
-            'title': data.get('public_title', ''),
-            'integration_title': dir_name,
+            'title': public_title,
+            'integration_title': public_title.replace('Datadog-', '').replace('Integration', '').strip(),
             'kind': 'integration',
             'git_integration_title': data.get('name', '').lower(),
             'newhlevel': True,
