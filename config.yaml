@@ -192,7 +192,7 @@ languages:
 
         # GRAPHING
         - identifier: menu_references_graphing
-          name: "Graphing/Visualization"
+          name: "Graphing"
           url: "/graphing/"
           pre: "nav_graphing"
           weight: 60
@@ -375,7 +375,7 @@ languages:
 
         # TRACING/APM
         - identifier: menu_references_tracing
-          name: "Tracing/APM"
+          name: "APM (Tracing)"
           url: "/tracing/"
           pre: "nav_tracing"
           weight: 80
