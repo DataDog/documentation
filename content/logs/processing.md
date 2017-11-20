@@ -21,7 +21,7 @@ To access the processing panel use the upper left menu:
 ## Processing Pipelines 
 ### Pipelines Goal 
 
-**A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**
+**A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors. It runs on Datadog servers.**
 
 With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
 
