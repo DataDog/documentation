@@ -6,7 +6,6 @@ customnav: agentnav
 
 ## Installation
 
-* [Can I use my own StatsD client?](/agent/faq/can-i-use-my-own-statsd-client)
 * [Chef, encrypting api_keys without data_bags](/agent/faq/chef-encrypting-api-keys-without-data-bags)
 * [Common Windows Agent Installation Error 1721](/agent/faq/common-windows-agent-installation-error-1721)
 * [How do I change the hostname ?](/agent/faq/how-do-i-change-the-hostname)
@@ -21,6 +20,7 @@ customnav: agentnav
 
 ## Troubleshooting
 
+* [Network Time Protocol (NTP) Offset Issues](/faq/network-time-protocol-ntp-offset-issues)
 * [Agent Troubleshooting and/or Agent Metric Reporting](/agent/faq/agent-troubleshooting-and-or-agent-metric-reporting)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)

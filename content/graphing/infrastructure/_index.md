@@ -14,6 +14,7 @@ The Infrastructure list page shows all hosts monitored by your datadog applicati
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true">}}
 
+Note: All hosts that have not sent data in 24 hours will disappear from the infrastructure list; you can still query against them, but they will not appear in drop downs.
 
 ## Host details
 

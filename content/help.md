@@ -19,6 +19,20 @@ Messages in the [event stream](http://app.datadoghq.com/graphing/event_stream) c
 
 You can also contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
 
+### Access you support ticket
+
+If you already have opened at least one ticket to support@datadoghq.com follow this process to acccess all your Datadog support tickets:
+
+* Get a password from us by clicking this link on the sign in page of this website : `https://help.datadoghq.com`
+    {{< img src="faq/sing_in.png" alt="sing in" responsive="true" >}}
+
+Once you received the password, when you log in, you should be then directed to this location: `https://help.datadoghq.com/hc/en-us/requests`
+
+From here, you should be able to see your requests:
+    {{< img src="faq/my_activities.png" alt="my activities" responsive="true" >}}
+
+However, if you don't see this after logging in, you can click on your name in the upper righthand corner, and then select "My Activities" from there. 
+
 ## Over Slack
 
 Reach out to our team and other Datadog users on [Slack](http://chat.datadoghq.com).
@@ -30,18 +44,3 @@ Our [Status Page](http://status.datadoghq.com/) and [Ops twitter account](http:/
 ## Feature request
 
 If you have a feature request. Submit it to support@datadoghq.com ! 
-
-## FAQ
-
-* [How can I access my Datadog support tickets ?](/faq/how-can-i-access-my-datadog-support-tickets)
-* [I’d like to add historical data to my account. Is there a way to do that?](/faq/i-d-like-to-add-historical-data-to-my-account)
-* [Is there a way I can get metric reports?](/faq/is-there-a-way-i-can-get-metric-reports)
-* [How do I stay logged in to Datadog after restarting my browser?](/faq/how-do-i-stay-logged-in-to-datadog-after-restarting-my-browser)
-* [I'm testing Datadog and don't want to go above 5 hosts. How do I remove one so I can test on another?](/faq/i-m-testing-datadog-and-don-t-want-to-go-above-5-hosts-how-do-i-remove-one-so-i-can-test-on-another)
-* [Do you have, or have you any plans for a smartphone app?](/faq/do-you-have-or-have-you-any-plans-for-a-smartphone-app)
-* [Troubleshooting - Browser Issues](/faq/troubleshooting-browser-issues)
-* [Network Time Protocol (NTP) Offset Issues](/faq/network-time-protocol-ntp-offset-issues)
-* [Is Datadog a cloud service or server application?](/faq/is-datadog-a-cloud-service-or-server-application)
-* [How do I delete a host or metric?](/faq/how-do-i-delete-a-host-or-metric)
-* [What's the difference between Graphite's query language and Datadog's?](/faq/what-s-the-difference-between-graphite-s-query-language-and-datadog-s)
-* [How are hostnames determined?](/faq/how-are-hostnames-determined)

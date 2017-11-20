@@ -25,6 +25,7 @@ customnav: graphingnav
 
 ## Graphing
 
+* [Troubleshooting - Browser Issues](/faq/troubleshooting-browser-issues)
 * [Is there a way to share graphs?](/graphing/faq/is-there-a-way-to-share-graphs)
 * [How do I do arithmetic with grouped metrics?](/graphing/faq/how-do-i-do-arithmetic-with-grouped-metrics)
 * [What's the syntax to sum multiple datapoints into a single line?](/graphing/faq/what-s-the-syntax-to-sum-multiple-datapoints-into-a-single-line)

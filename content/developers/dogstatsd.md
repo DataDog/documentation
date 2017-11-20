@@ -21,6 +21,8 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
+**Note**: Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. 
+
 ## How It Works
 
 DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.  
