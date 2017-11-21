@@ -186,9 +186,6 @@
   translation: "NodeJS Log Collection"
 - id: customnav_lognav_ruby
   translation: "Ruby Log Collection"
-- id: customnav_lognav_faq
-  translation: "FAQ"
-
 # taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."

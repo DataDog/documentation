@@ -139,7 +139,7 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ### Tags
 
-Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from hosts and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
