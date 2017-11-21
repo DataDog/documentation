@@ -1,8 +1,7 @@
 ---
-title: Java log Collection
+title: Java Log Collection
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 beta: true
 ---
@@ -24,11 +23,14 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
 
-## Setup - Log to file
-### Configure your logger
-#### Log4j
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+
+Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
+
+## Configure your logger
+### Log4j
 
 Add a new file appender to `log4j.xml`:
 
@@ -43,7 +45,7 @@ Add a new file appender to `log4j.xml`:
 ```
 
 
-#### Log4j2
+### Log4j2
 Edit your `log4j2.xml` file:
 ```xml
  <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
@@ -56,7 +58,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-#### Slf4j
+### Slf4j
 Edit your `logback.xml` file:
 
 ```xml
@@ -78,7 +80,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-### Configure the Datadog agent.
+## Configure the Datadog agent
 
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
@@ -143,7 +145,7 @@ With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** will 
 
 So you can exploit *scope* as a field, and *durationInMs* & *quantity* as metrics.
 
-###MDC (Mapped Diagnostic Context)
+### MDC (Mapped Diagnostic Context)
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html).
 

@@ -2,7 +2,6 @@
 title: Explore
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 beta: true
@@ -16,7 +15,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" >}}
+{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
 In this view you can:
 
@@ -28,38 +27,38 @@ In this view you can:
 ## Time Range
 The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
-{{< img src="logs/explore/timeline.png" alt="Timeline" >}}
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" >}}
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="logs/explore/timerange.png" alt="Timerange" style="width:75%;">}}
+{{< img src="logs/explore/timerange.png" alt="Timerange" responsive="true" >}}
 
 ## Log list
 The log list is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
-{{< img src="logs/explore/log_list.png" alt="Log List" >}}
+{{< img src="logs/explore/log_list.png" alt="Log List" responsive="true" >}}
 
 ### Filtering the log list
 If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
-{{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" >}}
+{{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" responsive="true" >}}
 
 ### Displaying a full log
 You can click on any log line to see more details about it:
 
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" >}}
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" responsive="true" >}}
 
 ### Focus on Host and Service
 
 Click on its `host` or `service` and select `Focus on Host & Service` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
-{{< img src="logs/explore/focus_host_service.png" alt="focus on host and service.png" >}}
+{{< img src="logs/explore/focus_host_service.png" alt="focus on host and service.png" responsive="true" >}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
-{{< img src="logs/explore/log_list_with_columns.png" alt="Log List with columns" >}}
+{{< img src="logs/explore/log_list_with_columns.png" alt="Log List with columns" responsive="true" >}}
 
 ## Facets 
 
@@ -67,19 +66,19 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
-{{< img src="logs/explore/facets_demo.png" alt="Facets demo" >}}
+{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" >}}
 
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, you simply need to click on it and add it as a Facet:
-{{< img src="logs/explore/create_facet.png" alt="Create Facet" style="width:75%;">}}
+{{< img src="logs/explore/create_facet.png" alt="Create Facet" responsive="true" >}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).
 
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
-{{< img src="logs/explore/facet_panel.png" alt="Facet panel" >}}
+{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" >}}
 
 ### Expanded view
 
@@ -87,7 +86,7 @@ Expand a facet to access advanced search options like
 Including or excluding a pattern within a facet.
 
 For example: You want to select all the url values that start with “/test_5”: 
-{{< img src="logs/explore/expanded_view.png" alt="Expanded view" style="width:75%;" >}}
+{{< img src="logs/explore/expanded_view.png" alt="Expanded view" responsive="true" >}}
 
 ## Search bar
 
@@ -140,7 +139,7 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ### Tags
 
-Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [integrations](https://docs.datadoghq.com/integrations/) that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
@@ -150,7 +149,15 @@ Your logs inherit tags from [hosts](https://docs.datadoghq.com/hostnames/) and [
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " >}}
+{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" >}}
+
+### Saved Searches
+
+Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching wether the search name or query.
+
+{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" >}}
+
+
 
 ### Escaping of special characters
 The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
