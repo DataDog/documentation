@@ -19,7 +19,7 @@ The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional f
 [Multiple libraries](/developers/libraries) are available to easily send metrics from your application to Datadog using DogStatsD.
 
 The API and DogStatsD are handy to _push_ metrics to Datadog from one of your application.
-If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the agent for the systems we directly support, you can [add your own integration](/developers/integrations/). We have provided detailed steps and resources for [developing](/integrations/integration_sdk) and [testing](/developers/integrations/testing/) new integrations.
+If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the agent for the systems we directly support, you can [add your own integration](/developers/integrations/). We have provided detailed steps and resources for [developing](/developers/integrations/integration_sdk) and [testing](/developers/integrations/testing/) new integrations.
 These integrations can then be easily shared with the Datadog community, for instance through our [Datadog/integrations-extras repository](https://github.com/DataDog/integrations-extras)
 
 When sending metrics via DogStatsD or a custom integration, it is helpful to have a deeper understanding of metrics. Here are some technical resources regarding metric internals:

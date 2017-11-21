@@ -4,9 +4,7 @@ kind: faq
 customnav: developersnav
 ---
 
-## Installation
-
-(This guide assumes you are using raspbian)
+**Using raspbian**
 
 1. Begin with the update of your local cache
 ```

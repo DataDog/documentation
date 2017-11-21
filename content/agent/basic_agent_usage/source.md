@@ -7,14 +7,12 @@ aliases:
 ---
 ## Overview
 
-This guide will outline the basic functionality of the Datadog Agent.
+This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
 [here](https://app.datadoghq.com/account/settings#agent/source).<br/>
 
 By default, your Agent will be installed in its own sandbox at `'~/.datadog-agent'`.
-You're free to move this folder wherever you like.
-However, this guide will assume that the Agent is installed in its default location, so be sure to modify the
-instructions accordingly if you decide to move them.
+You're free to move this folder wherever you like. However, this article will assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
 ## Starting and Stopping the Agent
 

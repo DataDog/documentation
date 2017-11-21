@@ -15,7 +15,7 @@ aliases:
 ---
 ## Overview
 
-This guide explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
+This page explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
 Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog will let you correlate what's happening with your application, your users and your system.  
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
@@ -296,7 +296,7 @@ Each one of these becomes a value in their respective metric time series that ar
 |:---|:---|
 |dog.histogram(...)|Used to track the statistical distribution of a set of values over a statsd flush period.|
 
-#### Example
+### Example
 
 Suppose we wanted to measure the duration of a database query, we can sample each query time with the metric `database.query.time`.
 

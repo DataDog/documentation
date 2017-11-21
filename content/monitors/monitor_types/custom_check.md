@@ -34,6 +34,4 @@ or service checks.
    You can optionally **notify on no data** after a configurable timeframe. You
    must choose at least 2 minutes for your timeframe.
 
-4. Configure your **notification options**. Refer to the
-   [Notifications](/monitors/notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+4. Configure your **notification options**. Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.

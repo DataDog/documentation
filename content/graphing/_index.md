@@ -130,9 +130,6 @@ If you don't enter a title, we will automatically generate a title based on the 
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
-## Next Steps
-Now that you know how to build graphs, look into using them in [Dashboards][8], discovering new metrics in the []
-
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/

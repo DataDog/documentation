@@ -24,7 +24,7 @@ Checks
 
 4. Install the integration by clicking "Install" [here](https://app.datadoghq.com/account/settings#integrations/windows_service):
 
-5. Follow this guide to create an [Integration Monitor](/monitors/monitor_types/integration):
+5. Follow [those steps](/monitors/monitor_types/integration) to create an Integration Monitor.
 
 You should now have a monitor based on your Windows Service Integration.
 

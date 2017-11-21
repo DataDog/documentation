@@ -19,15 +19,10 @@ For each process, a single service check status will be produced. Through this
 creation interface, you can choose which of those checks to monitor and at what
 point they should notify.
 
-1. Pick the **process** to monitor. You will see the names configured in any
-   Agent with an active process check.
+1. Pick the **process** to monitor. You will see the names configured in any Agent with an active process check.
 
-2. Pick the **monitor scope**. You will only see hosts or tags that
-   are reporting a status for the selected process.
+2. Pick the **monitor scope**. You will only see hosts or tags that are reporting a status for the selected process.
 
-3. Select **alerting options**. Please refer to the
-   [custom monitors](#custom-monitors) section for details on the available options.
+3. Select **alerting options**. Please refer to the [custom monitors](#custom-monitors) section for details on the available options.
 
-4. Configure your **notification options** Refer to the
-   [Notifications](#monitor-notifications) section of this guide for a detailed
-   walkthrough of the common notification options.
+4. Configure your **notification options** Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.

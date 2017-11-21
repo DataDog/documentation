@@ -151,9 +151,7 @@ To set up the email, first log in to your Datadog account at
 [dd-app]: https://app.datadoghq.com
 
 ## Markdown events
-Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
-
-The detailed markdown syntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.
+Datadog event text supports markdown (The detailed markdown syntax can be found [here](http://daringfireball.net/projects/markdown/syntax#lin)).
 Please note that embedding HTML in markdown is not supported with in Datadog.
 
 To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`
