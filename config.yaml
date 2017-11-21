@@ -371,7 +371,7 @@ languages:
           weight: 20
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_langs
-          name: "languages"
+          name: "Languages"
           url: "/tracing/languages/"
           weight: 40
           parent: menu_references_tracing
