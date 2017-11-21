@@ -78,7 +78,7 @@ class PreBuild:
     def __init__(self, options):
         super().__init__()
         self.options = options
-        self.tempdir = self.get_temp_dir()
+        self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
         self.data_integrations_dir = join(self.data_dir, 'integrations') + sep
@@ -106,10 +106,7 @@ class PreBuild:
             'mesos_slave': {'action': 'merge', 'target': 'mesos'},
             'kafka_consumer': {'action': 'merge', 'target': 'kafka'},
         })
-        # note "system" doesn't exist in integrations.json thats why...
-
-    def get_temp_dir(self):
-        return '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+        self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
 
     def csv_to_yaml(self, key_name, csv_filename, yml_filename):
         """
@@ -187,10 +184,30 @@ class PreBuild:
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
 
-        with open(self.integration_datafile, 'w') as out:
-            json.dump(self.datafile_json, out, sort_keys=True, indent=4)
+        for int_file_name in tqdm(glob.iglob('{}*.md'.format(self.content_integrations_dir))):
+            if int_file_name not in self.initial_integration_files:
+                item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(int_file_name).replace('.md', '')]
+                with open(int_file_name, 'r+') as f:
+                    content = f.read()
+                    template = "---\n{front_matter}\n---\n\n{content}\n"
+                    if item and len(item) > 0:
+                        item[0]['kind'] = 'integration'
+                        item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace('Integration', '').strip()
+                        item[0]['git_integration_title'] = item[0].get('name', '').lower()
+                        if item[0].get('type', None):
+                            item[0]['ddtype'] = item[0].get('type')
+                            del item[0]['type']
+                        fm = yaml.dump(item[0], default_flow_style=False).rstrip()
+                    else:
+                        fm = {'kind': 'integration'}
+                    out = template.format(front_matter=fm, content=content)
+                    f.truncate()
+                    f.seek(0)
+                    f.write(out)
 
-        self.merge_integrations()
+        #self.merge_integrations()
+        # with open(self.integration_datafile, 'w') as out:
+        #     json.dump(self.datafile_json, out, sort_keys=True, indent=4)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -273,7 +290,7 @@ class PreBuild:
                 if metrics_exist:
                     title = manifest_json.get('name', '').lower()
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, re.DOTALL)
-                result = self.add_integration_frontmatter(result, manifest_json)
+                #result = self.add_integration_frontmatter(result, manifest_json)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
