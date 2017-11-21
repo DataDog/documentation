@@ -156,6 +156,10 @@ aside.sidenav {
 }
 
 aside.sidenav-api {
+  .sidenav-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .sticky {
     top:65px;
   }
