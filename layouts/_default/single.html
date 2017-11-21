@@ -1,4 +1,44 @@
 {{ define "main" }}
   <h1 id="pagetitle">{{ .Title }}</h1>
   {{ .Content }}
+  {{ if .Params.further_reading }}
+    <h2>Further Reading</h2>
+    <p>Additional helpful documentation, links, and articles.</p>
+    <div class="list-group">
+      {{ range .Params.further_reading }}
+        <a class="list-group-item"
+           href="{{ .link }}">{{ .text }}{{ if .tag }}<span class="badge">{{ .tag | upper }}</span>{{ end }}
+        </a>
+      {{ end }}
+
+    </div>
+          <style>
+            .list-group-item {
+              font-size: 18px;
+              color: black;
+              position: relative;
+            }
+
+            .list-group-item:hover {
+              background-color: #EBE4F2;
+              color: #7847A6;
+              border: 1px solid #7847A6;
+            }
+
+            .list-group-item .badge {
+              background-color: white;
+              border: 1px solid black;
+              color: black;
+              font-weight: 200;
+              border-radius: 2px;
+              margin-left: 9px;
+            }
+
+            .list-group-item:hover .badge {
+              background-color: #7847A6;
+              border: 1px solid #7847A6;
+              color: white;
+            }
+</style>
+  {{ end }}
 {{ end }}
