@@ -121,6 +121,9 @@ customnav: integrationsnavv
 ## VMWare
 * [Can I limit the number of VMs that are pulled in via the VMWare integration?](/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration)
 
+## Webhooks
+* [How to make a Trello Card using Webhooks](/integrations/faq/how-to-make-trello-card-using-webhooks)
+
 ## Windows
 
 * [How to add event log files to the `Win32_NTLogEvent` WMI class](/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class)
