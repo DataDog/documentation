@@ -70,12 +70,12 @@ The following integration sources create tags automatically in Datadog:
 | [Mesos](/integrations/mesos_master)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
 | [Mongo](/integrations/mongodb)                                 | Server Name |
 | [OpenStack](/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| [PHP FPM](/integrations/phpfpm)                               | Pool Name |
+| [PHP FPM](/integrations/php_fpm)                               | Pool Name |
 | [Pivotal](/integrations/pivotal)                               | Current State, Owner, Labels, Requester, Story Type |
 | [Postfix ](/integrations/postfix)                              | Queue, Instance |
 | [Puppet](/integrations/puppet)                              | Puppet Tags |
 | [RabbitMQ](/integrations/rabbitmq)                              | Node, Queue Name, Vhost, Policy, Host |
-| [Redis](/integrations/redis)                                 | Host, Port,  Slave or Master |
+| [Redis](/integrations/redisdb)                                 | Host, Port,  Slave or Master |
 | [RiakCS](/integrations/riakcs)                                | Aggregation Key |
 | [SNMP](/integrations/snmp)                                  | Device IP Address |
 | [Supervisord](/integrations/supervisor)                          | Server Name, Process Name |
