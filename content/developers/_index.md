@@ -1,5 +1,5 @@
 ---
-title: Developers tools
+title: Developer tools
 kind: documentation
 customnav: developersnav
 ---

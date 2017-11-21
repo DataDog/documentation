@@ -474,7 +474,7 @@ languages:
 
         # DEVELOPERS
         - identifier: menu_references_developers
-          name: "Developers tools"
+          name: "Developer tools"
           url: "/developers/"
           pre: "nav_developers"
           weight: 100
