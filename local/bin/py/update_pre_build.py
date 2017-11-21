@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
-import linecache
-from collections import OrderedDict
-from functools import partial
-from optparse import OptionParser
-from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
-from tqdm import *
-from os import sep, makedirs, getenv, remove
-import platform
-import yaml
-import requests
-import tempfile
 import csv
+import fnmatch
 import glob
 import json
+import linecache
+import platform
 import re
-import fnmatch
+import tempfile
+from collections import OrderedDict
+from functools import partial
 from itertools import chain
 from multiprocessing.pool import ThreadPool as Pool
+from optparse import OptionParser
+from os import sep, makedirs, getenv, remove
+from os.path import exists, basename, curdir, join, abspath, normpath, dirname
+import requests
+import yaml
+from tqdm import *
 
 
 class GitHub:
     def __init__(self, token=None):
         self.token = token
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
 
     def headers(self):
         return {'Authorization': 'token {}'.format(self.token)} if self.token else {}
@@ -85,28 +91,26 @@ class PreBuild:
         self.content_integrations_dir = join(self.content_dir, 'integrations') + sep
         self.extract_dir = '{0}'.format(join(self.tempdir, "extracted") + sep)
         self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
-        self.regex_h1 = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
+        self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
+        self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
-            'hdfs': {'action': 'truncate', 'target': 'hdfs'},
-            'mesos': {'action': 'truncate', 'target': 'mesos'},
-            'system': {'action': 'truncate', 'target': 'system'},
-            'activemq_xml': {'action': 'merge', 'target': 'activemq'},
-            'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra'},
-            'kubernetes_state': {'action': 'merge', 'target': 'kubernetes'},
-            'kube_dns': {'action': 'merge', 'target': 'kubernetes'},
-            'hdfs_datanode': {'action': 'merge', 'target': 'hdfs'},
-            'hdfs_namenode': {'action': 'merge', 'target': 'hdfs'},
-            'system_core': {'action': 'merge', 'target': 'system'},
-            'system_swap': {'action': 'merge', 'target': 'system'},
-            'mesos_master': {'action': 'merge', 'target': 'mesos'},
-            'mesos_slave': {'action': 'merge', 'target': 'mesos'},
-            'kafka_consumer': {'action': 'merge', 'target': 'kafka'},
+            'hdfs': {'action': 'truncate', 'target': 'hdfs', 'remove_header': False},
+            'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
+            'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
+            'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
+            'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': True},
+            'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
+            'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},
+            'mesos_slave': {'action': 'merge', 'target': 'mesos', 'remove_header': False},
+            'kafka_consumer': {'action': 'merge', 'target': 'kafka', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
+        makedirs(self.data_integrations_dir, exist_ok=True)
+        makedirs(self.content_integrations_dir, exist_ok=True)
 
     def csv_to_yaml(self, key_name, csv_filename, yml_filename):
         """
@@ -124,18 +128,7 @@ class PreBuild:
             with open(file=yml_filename, mode='w', encoding='utf-8') as f:
                 f.write(yaml.dump(yaml_data, default_flow_style=False))
 
-    def process(self):
-        """
-        1. If we did not specify local dogweb directory and there is a token download dogweb repo files we need
-        2. If we did not specify local integrations-core directory download with or without token as its public repo
-        3. Process all files we have dogweb first integrations-core second with the latter taking precedence
-        """
-        print('Processing')
-        gh = GitHub(self.options.token)
-
-        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
-
+    def download_from_repo(self, org, repo, branch, globs):
         def download_raw(item, dest, org, repo, branch):
             path_to_file = item.get('path', '')
             if path_to_file:
@@ -143,38 +136,34 @@ class PreBuild:
                 makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
                 gh.raw(org, repo, branch, path_to_file, file_out)
             return None
+        with GitHub(self.options.token) as gh:
+            listing = gh.list(org, repo, branch, globs)
+            dest = '{0}{1}{2}'.format(self.extract_dir, repo, sep)
+            with Pool(processes=self.pool_size) as pool:
+                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org=org, repo=repo, branch=branch), listing)):
+                    pass
+
+    def process(self):
+        """
+        1. If we did not specify local dogweb directory and there is a token download dogweb repo files we need
+        2. If we did not specify local integrations-core directory download with or without token as its public repo
+        3. Process all files we have dogweb first integrations-core second with the latter taking precedence
+        """
+        print('Processing')
+
+        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
         if not self.options.dogweb:
             if self.options.token:
-                listing = gh.list('DataDog', 'dogweb', 'prod', dogweb_globs)
-                dest = self.extract_dir + 'dogweb' + sep
-                with Pool(processes=self.pool_size) as pool:
-                    for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='dogweb', branch='prod'), listing)):
-                        pass
-                # set dogweb dir to our extracted
-                self.options.dogweb = dest
+                self.download_from_repo('DataDog', 'dogweb', 'prod', dogweb_globs)
+                self.options.dogweb = '{0}{1}{2}'.format(self.extract_dir, 'dogweb', sep)
 
         # sync from integrations-core, download if we don't have it (public repo so no token needed)
         if not options.integrations:
-            listing = gh.list('DataDog', 'integrations-core', 'master', integrations_globs)
-            dest = self.extract_dir + 'integrations-core' + sep
-            with Pool(processes=self.pool_size) as pool:
-                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='integrations-core', branch='master'), listing)):
-                    pass
-            # set integrations-core dir to our extracted
-            self.options.integrations = dest
-
-        # prep before loop
-        makedirs(self.data_integrations_dir, exist_ok=True)
-        makedirs(self.content_integrations_dir, exist_ok=True)
-        if not exists(self.integration_datafile):
-            with open(self.integration_datafile, 'w') as outfile:
-                json.dump([], outfile, sort_keys=True, indent=4)
-
-        # add any additional processing of downloaded files here
-        # if you need additional files for processing add to globs above
-        print('starting file processing')
+            self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
+            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
         globs = ['{}{}'.format(self.options.dogweb, x) for x in dogweb_globs]
         globs.extend(['{}{}'.format(self.options.integrations, x) for x in integrations_globs])
@@ -205,33 +194,36 @@ class PreBuild:
                     f.seek(0)
                     f.write(out)
 
-        #self.merge_integrations()
-        # with open(self.integration_datafile, 'w') as out:
-        #     json.dump(self.datafile_json, out, sort_keys=True, indent=4)
+        self.merge_integrations()
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
         for name, action_obj in self.integration_mutations.items():
-            action = action_obj.get('action')
-            target = action_obj.get('target')
-            input_file = '{}{}.md'.format(self.content_integrations_dir, name)
-            output_file = '{}{}.md'.format(self.content_integrations_dir, target)
-            if action == 'merge':
-                with open(input_file, 'r') as content_file, open(output_file, 'a') as target_file:
-                    content = content_file.read()
-                    content = re.sub(self.regex_fm, r'\2', content, count=0)
-                    target_file.write(content)
-                remove(input_file)
-            elif action == 'truncate':
-                if exists(output_file):
-                    with open(output_file, 'r+') as target_file:
-                        content = target_file.read()
-                        content = re.sub(self.regex_fm, r'---\n\1\n---\n', content, count=0)
-                        target_file.truncate(0)
-                        target_file.seek(0)
+            if name not in self.initial_integration_files:
+                action = action_obj.get('action')
+                target = action_obj.get('target')
+                input_file = '{}{}.md'.format(self.content_integrations_dir, name)
+                output_file = '{}{}.md'.format(self.content_integrations_dir, target)
+                if action == 'merge':
+                    with open(input_file, 'r') as content_file, open(output_file, 'a') as target_file:
+                        content = content_file.read()
+                        content = re.sub(self.regex_fm, r'\2', content, count=0)
+                        if action_obj.get('remove_header', False):
+                            content = re.sub(self.regex_h1, '', content, count=0)
+                        else:
+                            content = re.sub(self.regex_h1_replace, r'##\2', content, count=0)
                         target_file.write(content)
-                else:
-                    open(output_file, 'w').close()
+                    remove(input_file)
+                elif action == 'truncate':
+                    if exists(output_file):
+                        with open(output_file, 'r+') as target_file:
+                            content = target_file.read()
+                            content = re.sub(self.regex_fm, r'---\n\1\n---\n', content, count=0)
+                            target_file.truncate(0)
+                            target_file.seek(0)
+                            target_file.write(content)
+                    else:
+                        open(output_file, 'w').close()
 
     def process_integration_metric(self, file_name):
         """
@@ -269,7 +261,7 @@ class PreBuild:
     def process_integration_readme(self, file_name):
         """
         Take a single README.md file and
-        1. extract the first h1
+        1. extract the first h1, if this isn't a merge item
         2. inject metrics after ### Metrics header if metrics exists for file
         3. inject hugo front matter params at top of file
         4. write out file to content/integrations with filename changed to integrationname.md
@@ -286,36 +278,14 @@ class PreBuild:
             exist_already = exists(self.content_integrations_dir + new_file_name)
             with open(file_name, 'r') as f:
                 result = f.read()
-                result = re.sub(self.regex_h1, '', result, 0)
+                title = manifest_json.get('name', '').lower()
+                if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
+                    result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
-                    title = manifest_json.get('name', '').lower()
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, re.DOTALL)
-                #result = self.add_integration_frontmatter(result, manifest_json)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
-
-    def add_integration_frontmatter(self, content, data):
-        """
-        Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
-        :param content: string of markdown content
-        :param data: json dict of manifest
-        :param dir_name: the integration name
-        :return:
-        """
-        template = "---\n{front_matter}\n---\n\n{content}\n"
-        public_title = data.get('public_title', '')
-        yml = {
-            'title': public_title,
-            'integration_title': public_title.replace('Datadog-', '').replace('Integration', '').strip(),
-            'kind': 'integration',
-            'git_integration_title': data.get('name', '').lower(),
-            'newhlevel': True,
-            'description': data.get('short_description', ''),
-            'aliases': data.get('aliases', [])
-        }
-        fm = yaml.dump(yml, default_flow_style=False).rstrip()
-        return template.format(front_matter=fm, content=content)
 
 if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")
