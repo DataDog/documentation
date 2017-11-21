@@ -4,6 +4,7 @@ integration_title: Neo4j
 kind: integration
 doclevel: basic
 description: "Integration with Neo4j Enterprise to monitor server performance."
+is_public: true
 ---
 
 ## Overview

@@ -3,6 +3,7 @@ title: TCP RTT check
 integration_title: TCP RTT Check
 kind: integration
 newhlevel: true
+is_public: true
 ---
 ## Overview
 

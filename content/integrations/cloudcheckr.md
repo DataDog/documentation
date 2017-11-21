@@ -3,6 +3,7 @@ title: Datadog-CloudCheckr Integration
 integration_title: CloudCheckr
 kind: integration
 newhlevel: true
+is_public: true
 ---
 
 {{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}

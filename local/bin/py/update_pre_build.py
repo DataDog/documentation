@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import linecache
+from collections import OrderedDict
 from functools import partial
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from tqdm import *
-from os import sep, makedirs, getenv
+from os import sep, makedirs, getenv, remove
 import platform
 import yaml
 import requests
@@ -33,7 +34,8 @@ class GitHub:
                 out.append(self.extract(item.get('tree')))
         return out
 
-    def list(self, org, repo, branch, globs=[]):
+    def list(self, org, repo, branch, globs=None):
+        globs = [] if globs is None else globs
         listing = []
         # get the latest sha
         url = 'https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}'.format(org, repo, branch)
@@ -76,7 +78,7 @@ class PreBuild:
     def __init__(self, options):
         super().__init__()
         self.options = options
-        self.tempdir = self.get_temp_dir()
+        self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
         self.data_integrations_dir = join(self.data_dir, 'integrations') + sep
@@ -85,11 +87,26 @@ class PreBuild:
         self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
         self.regex_h1 = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)', re.DOTALL)
+        self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.datafile_json = []
         self.pool_size = 5
-
-    def get_temp_dir(self):
-        return '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+        self.integration_mutations = OrderedDict({
+            'hdfs': {'action': 'truncate', 'target': 'hdfs'},
+            'mesos': {'action': 'truncate', 'target': 'mesos'},
+            'system': {'action': 'truncate', 'target': 'system'},
+            'activemq_xml': {'action': 'merge', 'target': 'activemq'},
+            'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra'},
+            'kubernetes_state': {'action': 'merge', 'target': 'kubernetes'},
+            'kube_dns': {'action': 'merge', 'target': 'kubernetes'},
+            'hdfs_datanode': {'action': 'merge', 'target': 'hdfs'},
+            'hdfs_namenode': {'action': 'merge', 'target': 'hdfs'},
+            'system_core': {'action': 'merge', 'target': 'system'},
+            'system_swap': {'action': 'merge', 'target': 'system'},
+            'mesos_master': {'action': 'merge', 'target': 'mesos'},
+            'mesos_slave': {'action': 'merge', 'target': 'mesos'},
+            'kafka_consumer': {'action': 'merge', 'target': 'kafka'},
+        })
+        self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
 
     def csv_to_yaml(self, key_name, csv_filename, yml_filename):
         """
@@ -163,14 +180,60 @@ class PreBuild:
         globs.extend(['{}{}'.format(self.options.integrations, x) for x in integrations_globs])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
-            self.process_metrics(file_name)
-            self.process_integrations_datafile(file_name)
-            self.process_readmes(file_name)
+            self.process_integration_metric(file_name)
+            self.process_integration_manifest(file_name)
+            self.process_integration_readme(file_name)
 
-        with open(self.integration_datafile, 'w') as out:
-            json.dump(self.datafile_json, out, sort_keys=True, indent=4)
+        for int_file_name in tqdm(glob.iglob('{}*.md'.format(self.content_integrations_dir))):
+            if int_file_name not in self.initial_integration_files:
+                item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(int_file_name).replace('.md', '')]
+                with open(int_file_name, 'r+') as f:
+                    content = f.read()
+                    template = "---\n{front_matter}\n---\n\n{content}\n"
+                    if item and len(item) > 0:
+                        item[0]['kind'] = 'integration'
+                        item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace('Integration', '').strip()
+                        item[0]['git_integration_title'] = item[0].get('name', '').lower()
+                        if item[0].get('type', None):
+                            item[0]['ddtype'] = item[0].get('type')
+                            del item[0]['type']
+                        fm = yaml.dump(item[0], default_flow_style=False).rstrip()
+                    else:
+                        fm = {'kind': 'integration'}
+                    out = template.format(front_matter=fm, content=content)
+                    f.truncate()
+                    f.seek(0)
+                    f.write(out)
 
-    def process_metrics(self, file_name):
+        #self.merge_integrations()
+        # with open(self.integration_datafile, 'w') as out:
+        #     json.dump(self.datafile_json, out, sort_keys=True, indent=4)
+
+    def merge_integrations(self):
+        """ Merges integrations that come under one """
+        for name, action_obj in self.integration_mutations.items():
+            action = action_obj.get('action')
+            target = action_obj.get('target')
+            input_file = '{}{}.md'.format(self.content_integrations_dir, name)
+            output_file = '{}{}.md'.format(self.content_integrations_dir, target)
+            if action == 'merge':
+                with open(input_file, 'r') as content_file, open(output_file, 'a') as target_file:
+                    content = content_file.read()
+                    content = re.sub(self.regex_fm, r'\2', content, count=0)
+                    target_file.write(content)
+                remove(input_file)
+            elif action == 'truncate':
+                if exists(output_file):
+                    with open(output_file, 'r+') as target_file:
+                        content = target_file.read()
+                        content = re.sub(self.regex_fm, r'---\n\1\n---\n', content, count=0)
+                        target_file.truncate(0)
+                        target_file.seek(0)
+                        target_file.write(content)
+                else:
+                    open(output_file, 'w').close()
+
+    def process_integration_metric(self, file_name):
         """
         Take a single metadata csv file and convert it to yaml
         :param file_name: path to a metadata csv file
@@ -183,9 +246,10 @@ class PreBuild:
             new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
             self.csv_to_yaml(key_name, file_name, new_file_name)
 
-    def process_integrations_datafile(self, file_name):
+    def process_integration_manifest(self, file_name):
         """
         Take a single manifest json file and upsert to integrations.json data
+        set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
         if file_name.endswith('.json'):
@@ -193,6 +257,8 @@ class PreBuild:
             with open(file_name) as f:
                 data = json.load(f)
                 data_name = data.get('name', '').lower()
+                if data_name in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
+                    data['is_public'] = False
                 if data_name in names:
                     item = [d for d in self.datafile_json if d.get('name', '').lower() == data_name]
                     if len(item) > 0:
@@ -200,12 +266,12 @@ class PreBuild:
                 else:
                     self.datafile_json.append(data)
 
-    def process_readmes(self, file_name):
+    def process_integration_readme(self, file_name):
         """
         Take a single README.md file and
         1. extract the first h1
         2. inject metrics after ### Metrics header if metrics exists for file
-        3. inject hugo front matter params
+        3. inject hugo front matter params at top of file
         4. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
@@ -222,13 +288,14 @@ class PreBuild:
                 result = f.read()
                 result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
-                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
-                result = self.add_integration_frontmatter(result, manifest_json, dir_name)
+                    title = manifest_json.get('name', '').lower()
+                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, re.DOTALL)
+                #result = self.add_integration_frontmatter(result, manifest_json)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
 
-    def add_integration_frontmatter(self, content, data, dir_name):
+    def add_integration_frontmatter(self, content, data):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
         :param content: string of markdown content
@@ -237,9 +304,10 @@ class PreBuild:
         :return:
         """
         template = "---\n{front_matter}\n---\n\n{content}\n"
+        public_title = data.get('public_title', '')
         yml = {
-            'title': data.get('public_title', ''),
-            'integration_title': dir_name,
+            'title': public_title,
+            'integration_title': public_title.replace('Datadog-', '').replace('Integration', '').strip(),
             'kind': 'integration',
             'git_integration_title': data.get('name', '').lower(),
             'newhlevel': True,
