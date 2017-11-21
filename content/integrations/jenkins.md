@@ -5,6 +5,7 @@ kind: integration
 git_integration_title: jenkins
 newhlevel: true
 description: "{{< get-desc-from-git >}}"
+is_public: true
 ---
 
 {{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" >}}

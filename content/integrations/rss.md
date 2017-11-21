@@ -4,6 +4,7 @@ integration_title: RSS
 kind: integration
 doclevel: basic
 description: "See RSS feeds in your Datadog event stream."
+is_public: true
 ---
 
 {{< img src="integrations/rss/rss.png" alt="RSS event" responsive="true" >}}
