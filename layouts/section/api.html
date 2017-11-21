@@ -33,14 +33,14 @@
 
     {{ range $index, $element := $contentList }}
         {{ $myindex := (add $index 1) }}
-        <div class="row">
+        <div class="row api-row">
             <div class="col-12 col-lg-6 api-content">
                 {{ $element.Content }}
             </div>
             {{ $codelen := (len (index $codeList $index).Content)}}
             <div class="col-12 col-lg-6 api-code {{ if eq $codelen 0 }}empty{{ end }}">
                 {{ if gt $codelen 0 }}
-                    <div>
+                    <div class="code-container">
                         {{ (index $codeList $index).Content }}
                     </div>
                 {{ end }}

@@ -7,10 +7,6 @@ order: 11.2
 ##### Signature
 `PUT /api/v1/screen/:board_id`
 ##### Example Request
-{{< snippet-code-block file="content/api/screenboards/code_snippets/api-screenboard-update.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/screenboards/code_snippets/api-screenboard-update.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/screenboards/code_snippets/api-screenboard-update.rb" highlight="true" >}}
+{{< code-snippets basename="api-screenboard-update" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-update.py" >}}
-{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-update.sh" >}}
-{{< snippet-result-code-block file="content/api/screenboards/code_snippets/result.api-screenboard-update.rb" >}}
+{{< code-snippets basename="result.api-screenboard-update" >}}

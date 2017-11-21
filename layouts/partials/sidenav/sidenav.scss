@@ -38,8 +38,6 @@ aside.sidenav {
   padding-right:15px;
   padding-bottom: 50px;
   &> .row {
-    overflow-x: hidden;
-    overflow-y: auto;
     &:before,
     &:after {
       content:"";
@@ -95,6 +93,8 @@ aside.sidenav {
   }
 
   .sidenav-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
     ul li > ul {
       display: none;
     }

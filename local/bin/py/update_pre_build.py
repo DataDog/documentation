@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import linecache
+from functools import partial
 from optparse import OptionParser
 from os.path import splitext, exists, basename, curdir, join, abspath, normpath, dirname
 from tqdm import *
@@ -9,351 +11,253 @@ import requests
 import tempfile
 import csv
 import glob
-import fileinput
 import json
 import re
-import os 
-
-"""
-Variables
-"""
-DESC_TOKEN = "{{< get-desc-from-git >}}"
-DESC_ATTRIBUTE = "short_description"
-INTEGRATION_FOLDER = "content/integrations/"
-INTEGRATION_DATAFILE = "integrations.json"
-
-OVERVIEW_TOKEN = "//get-overview-from-git//"
-OVERVIEW_PATTERN = r'## Overview((?s).*)## Setup'
-
-SETUP_TOKEN = "//get-setup-from-git//"
-SETUP_PATTERN = r'## Setup((?s).*)## Data Collected'
-
-DATA_COLLECTED_TOKEN= "//get-data-collected-from-git//"
-DATA_COLLECTED_PATTERN= r'## Data Collected((?s).*)## Troubleshooting'
+import fnmatch
+from itertools import chain
+from multiprocessing.pool import ThreadPool as Pool
 
 
-TROUBLESHOOTING_TOKEN ="//get-troubleshooting-from-git//"
-TROUBLESHOOTING_PATTERN= r'## Troubleshooting((?s).*)## Further Reading'
+class GitHub:
+    def __init__(self, token=None):
+        self.token = token
 
-FURTHER_READING_TOKEN = "//get-further-reading-from-git//"
-FURTHER_READING_PATTERN= r'## Further Reading((?s).*)'
+    def headers(self):
+        return {'Authorization': 'token {}'.format(self.token)} if self.token else {}
 
-METRIC_TOKEN = "{{< get-metrics-from-git >}}"
-METRIC_PATERN= r'See \[metadata\.csv\].*provided by this (integration|check).'
+    def extract(self, data):
+        out = []
+        for item in data.get('tree', []):
+            out.append({'path': item.get('path', ''), 'url': item.get('url', ''), 'type': item.get('type', ''), 'sha': item.get('sha', '')})
+            if item.get('tree', None):
+                out.append(self.extract(item.get('tree')))
+        return out
 
-"""
-Functions
-"""
+    def list(self, org, repo, branch, globs=[]):
+        listing = []
+        # get the latest sha
+        url = 'https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}'.format(org, repo, branch)
+        headers = self.headers()
+        print('Getting latest sha from {}/{}..'.format(repo, branch))
+        sha_response = requests.get(url, headers=headers)
+        if sha_response.status_code == requests.codes.ok:
+            sha = sha_response.json().get('object', {}).get('sha', None)
+            if sha:
+                print('Getting tree from {}/{} @ {}'.format(repo, branch, sha))
+                tree_response = requests.get(
+                    'https://api.github.com/repos/{0}/{1}/git/trees/{2}?recursive=1'.format(org, repo, sha),
+                    headers=headers)
+                if tree_response.status_code == 200:
+                    listing = self.extract(tree_response.json())
 
+        if globs:
+            filtered_listing = []
+            for item in listing:
+                path = item.get('path', '')
+                for glob in globs:
+                    if fnmatch.fnmatch(path, glob):
+                        filtered_listing.append(item)
+            return filtered_listing
+        else:
+            return listing
 
-def download_github_files(token, org, repo, branch, to_path, is_dogweb=False):
-    """
-    Using the github api downloads manifest files to a temporary location for processing
-
-    :param token: string of github token
-    :param org: string of organization
-    :param repo: string of git repository
-    :param branch: string of branchname
-    :param to_path: where to extract
-    :param is_dogweb: if dogweb repo we need to get nested data
-    """
-    directory = 'integration' if is_dogweb else ''
-    url = 'https://api.github.com/repos/{0}/{1}/contents/{3}?ref={2}'.format(org, repo, branch, directory)
-    headers = {'Authorization': 'token {}'.format(token)} if token else {}
-    excludes = ['LICENSE', 'Rakefile', 'Gemfile']
-    print('Downloading files from {}/{}..'.format(repo, branch))
-    response = requests.get(url, headers=headers)
-    
-    """
-    Downloading manifest.json
-    """
-    if response.status_code == requests.codes.ok:
-        for obj in tqdm(response.json()):
-            name = obj.get('name', '')
-            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                to_manifest = '{0}/{1}/manifest.json'.format(directory, name) if is_dogweb else '{}/manifest.json'.format(name)
-                response_manifest = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_manifest), headers=headers)
-                if response_manifest.status_code == requests.codes.ok:
-                    with open('{}{}_manifest.json'.format(to_path, name), mode='wb+') as f:
-                        f.write(response_manifest.content)
-    else:
-        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
-        exit(1)
-
-    """
-    Downloading readme.md
-    """
-    if response.status_code == requests.codes.ok:
-        for obj in tqdm(response.json()):
-            name = obj.get('name', '')
-            if not name.startswith('.') and not splitext(name)[1] and name not in excludes:
-                to_readme = '{0}/{1}/README.md'.format(directory, name) if is_dogweb else '{}/README.md'.format(name)
-                response_readme = requests.get('https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, to_readme), headers=headers)
-                if response_readme.status_code == requests.codes.ok:
-                    with open('{}{}_readme.md'.format(to_path, name), mode='wb+') as f:
-                        f.write(response_readme.content)
-    else:
-        print('There was an error ({}) listing {}/{} contents..'.format(response.status_code, repo, branch))
-        exit(1)
+    def raw(self, org, repo, branch, path_to_file, file_out):
+        headers = self.headers()
+        raw_response = requests.get(
+            'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, path_to_file),
+            headers=headers
+        )
+        if raw_response.status_code == requests.codes.ok:
+            with open(file_out, mode='wb+') as f:
+                f.write(raw_response.content)
 
 
-def replace_token(to_path, key_name, content_token, data):
-    """
-    Inline the content of data instead of the content_token in an integration file
+class PreBuild:
+    def __init__(self, options):
+        super().__init__()
+        self.options = options
+        self.tempdir = self.get_temp_dir()
+        self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
+        self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
+        self.data_integrations_dir = join(self.data_dir, 'integrations') + sep
+        self.content_integrations_dir = join(self.content_dir, 'integrations') + sep
+        self.extract_dir = '{0}'.format(join(self.tempdir, "extracted") + sep)
+        self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
+        self.regex_h1 = re.compile(r'^\s*#\s*(\w+)', re.MULTILINE)
+        self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)', re.DOTALL)
+        self.datafile_json = []
+        self.pool_size = 5
 
-    :param to_path:         the output path to integration md files
-    :param key_name:        integration key name for root object
-    :param content_token:   token to find and replace inside the file
-    :param data:            data to inline in the file
-    """
-    try:
-        # Read in the file
-        with open('{}{}.md'.format(to_path,key_name), 'r') as file :
-            filedata = file.read()
-        
-        # Replace the target string
-        filedata = filedata.replace(content_token, data)
+    def get_temp_dir(self):
+        return '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
-        # Write the file out again
-        with open('{}{}.md'.format(to_path,key_name), 'w') as file:
-            file.write(filedata)
+    def csv_to_yaml(self, key_name, csv_filename, yml_filename):
+        """
+        Given a file path to a single csv file convert it to a yaml file
 
-    except Exception as error: 
-        #print(error)
-        pass
+        :param key_name: integration key name for root object
+        :param csv_filename: path to input csv file
+        :param yml_filename: path to output yml file
+        """
+        yaml_data = {key_name: []}
+        with open(csv_filename) as csv_file:
+            reader = csv.DictReader(csv_file, delimiter=',')
+            yaml_data[key_name] = [dict(line) for line in reader]
+        if yaml_data[key_name]:
+            with open(file=yml_filename, mode='w', encoding='utf-8') as f:
+                f.write(yaml.dump(yaml_data, default_flow_style=False))
 
+    def process(self):
+        """
+        1. If we did not specify local dogweb directory and there is a token download dogweb repo files we need
+        2. If we did not specify local integrations-core directory download with or without token as its public repo
+        3. Process all files we have dogweb first integrations-core second with the latter taking precedence
+        """
+        print('Processing')
+        gh = GitHub(self.options.token)
 
-def file_update_content(to_path, key_name, data_array):
-    """
-    Take an integration file and inline all token found inside
-    
-    :param to_path:         the output path to integration md files
-    :param key_name:        integration key name for root object
-    :param data_array:      Array of data to inline, array of array [content_token,data]
-    """ 
-    for obj in data_array:
-        replace_token(to_path, key_name,obj[0],obj[1])
+        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
+        def download_raw(item, dest, org, repo, branch):
+            path_to_file = item.get('path', '')
+            if path_to_file:
+                file_out = '{}{}'.format(dest, path_to_file)
+                makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
+                gh.raw(org, repo, branch, path_to_file, file_out)
+            return None
 
-def manifest_get_data(to_path,key_name,attribute):
-    """
-    Extract an attribute value from the manifest of an integration
-    
-    :param to_path:     the output path to integration md files
-    :param key_name:    integration key name for root object
-    :param attribute:   attribute to get data from
-    :return: manifest.json attribute
-    """ 
-    with open('{}{}_manifest.json'.format(to_path, key_name)) as manifest:
-        manifest_json = json.load(manifest)
-        return manifest_json[attribute]
+        # sync from dogweb, download if we don't have it (token required)
+        if not self.options.dogweb:
+            if self.options.token:
+                listing = gh.list('DataDog', 'dogweb', 'prod', dogweb_globs)
+                dest = self.extract_dir + 'dogweb' + sep
+                with Pool(processes=self.pool_size) as pool:
+                    for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='dogweb', branch='prod'), listing)):
+                        pass
+                # set dogweb dir to our extracted
+                self.options.dogweb = dest
 
+        # sync from integrations-core, download if we don't have it (public repo so no token needed)
+        if not options.integrations:
+            listing = gh.list('DataDog', 'integrations-core', 'master', integrations_globs)
+            dest = self.extract_dir + 'integrations-core' + sep
+            with Pool(processes=self.pool_size) as pool:
+                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org='DataDog', repo='integrations-core', branch='master'), listing)):
+                    pass
+            # set integrations-core dir to our extracted
+            self.options.integrations = dest
 
-def parse_args(args=None):
-    """
-    Given a list of arguments parse them using ArgumentParser
+        # prep before loop
+        makedirs(self.data_integrations_dir, exist_ok=True)
+        makedirs(self.content_integrations_dir, exist_ok=True)
+        if not exists(self.integration_datafile):
+            with open(self.integration_datafile, 'w') as outfile:
+                json.dump([], outfile, sort_keys=True, indent=4)
 
-    :param args: list of arguments
-    :return: instance of tuple of values and arguments
-    """
+        # add any additional processing of downloaded files here
+        # if you need additional files for processing add to globs above
+        print('starting file processing')
+
+        globs = ['{}{}'.format(self.options.dogweb, x) for x in dogweb_globs]
+        globs.extend(['{}{}'.format(self.options.integrations, x) for x in integrations_globs])
+
+        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+            self.process_metrics(file_name)
+            self.process_integrations_datafile(file_name)
+            self.process_readmes(file_name)
+
+        with open(self.integration_datafile, 'w') as out:
+            json.dump(self.datafile_json, out, sort_keys=True, indent=4)
+
+    def process_metrics(self, file_name):
+        """
+        Take a single metadata csv file and convert it to yaml
+        :param file_name: path to a metadata csv file
+        """
+        if file_name.endswith('.csv'):
+            if file_name.endswith('/metadata.csv'):
+                key_name = basename(dirname(normpath(file_name)))
+            else:
+                key_name = basename(file_name.replace('_metadata.csv', ''))
+            new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
+            self.csv_to_yaml(key_name, file_name, new_file_name)
+
+    def process_integrations_datafile(self, file_name):
+        """
+        Take a single manifest json file and upsert to integrations.json data
+        :param file_name: path to a manifest json file
+        """
+        if file_name.endswith('.json'):
+            names = [d.get('name', '').lower() for d in self.datafile_json if 'name' in d]
+            with open(file_name) as f:
+                data = json.load(f)
+                data_name = data.get('name', '').lower()
+                if data_name in names:
+                    item = [d for d in self.datafile_json if d.get('name', '').lower() == data_name]
+                    if len(item) > 0:
+                        item[0].update(data)
+                else:
+                    self.datafile_json.append(data)
+
+    def process_readmes(self, file_name):
+        """
+        Take a single README.md file and
+        1. extract the first h1
+        2. inject metrics after ### Metrics header if metrics exists for file
+        3. inject hugo front matter params
+        4. write out file to content/integrations with filename changed to integrationname.md
+        :param file_name: path to a readme md file
+        """
+        if file_name.endswith('.md'):
+            dir_name = basename(dirname(file_name))
+            metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
+            metrics = metrics[0] if len(metrics) > 0 else None
+            metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
+            manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
+            manifest_json = json.load(open(manifest)) if exists(manifest) else {}
+            new_file_name = '{}.md'.format(basename(dirname(file_name)))
+            exist_already = exists(self.content_integrations_dir + new_file_name)
+            with open(file_name, 'r') as f:
+                result = f.read()
+                result = re.sub(self.regex_h1, '', result, 0)
+                if metrics_exist:
+                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git >}}\3\4', result, re.DOTALL)
+                result = self.add_integration_frontmatter(result, manifest_json, dir_name)
+                if not exist_already:
+                    with open(self.content_integrations_dir + new_file_name, 'w') as out:
+                        out.write(result)
+
+    def add_integration_frontmatter(self, content, data, dir_name):
+        """
+        Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
+        :param content: string of markdown content
+        :param data: json dict of manifest
+        :param dir_name: the integration name
+        :return:
+        """
+        template = "---\n{front_matter}\n---\n\n{content}\n"
+        yml = {
+            'title': data.get('public_title', ''),
+            'integration_title': dir_name,
+            'kind': 'integration',
+            'git_integration_title': data.get('name', '').lower(),
+            'newhlevel': True,
+            'description': data.get('short_description', ''),
+            'aliases': data.get('aliases', [])
+        }
+        fm = yaml.dump(yml, default_flow_style=False).rstrip()
+        return template.format(front_matter=fm, content=content)
+
+if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")
     parser.add_option("-t", "--token", help="github access token", default=None)
     parser.add_option("-w", "--dogweb", help="path to dogweb local folder", default=None)
     parser.add_option("-i", "--integrations", help="path to integrations-core local folder", default=None)
     parser.add_option("-s", "--source", help="location of src files", default=curdir)
-    return parser.parse_args(args)
 
-
-def readme_get_section(from_path,key_name):
-    """
-    Take an integration readme file, extract all sections following this pattern:
-        ## Overview
-        ## Setup
-        ## Data Collected
-        ## Troubleshooting
-        ## Further Reading
-
-    :param: from_path: folder where the integration readme is
-    :param key_name:    integration key name for root object
-    :return: an array of [TOKEN, section_scraped ] 
-    """
-
-    data_array=[]
-    with open('{}{}_readme.md'.format(from_path, key_name)) as readme:
-        filedata = readme.read()
-
-        result = re.search(OVERVIEW_PATTERN, filedata)
-        if result:
-            data_array.append([OVERVIEW_TOKEN,result.group(1)])
-        else:
-            print("unable to find the pattern {} in file {}{}".format(OVERVIEW_PATTERN,from_path, key_name))
-
-        result = re.search(SETUP_PATTERN, filedata)
-        if result:
-            data_array.append([SETUP_TOKEN,result.group(1)])
-        else:
-            print("unable to find the pattern {} in file {}{}".format(SETUP_PATTERN,from_path, key_name))
-
-        result = re.search(DATA_COLLECTED_PATTERN, filedata)
-        if result:
-            try:
-                #Inlining metric token to display metric array
-                result = re.sub(METRIC_PATERN,METRIC_TOKEN, result.group(1))
-            except Exception as error:
-                print(error)
-                pass
-            data_array.append([DATA_COLLECTED_TOKEN,result])
-        else:
-            print("unable to find the pattern {} in file {}{}".format(DATA_COLLECTED_PATTERN,from_path, key_name))
-
-        result = re.search(TROUBLESHOOTING_PATTERN, filedata)
-        if result:
-            data_array.append([TROUBLESHOOTING_TOKEN,result.group(1)])
-        else:
-            print("unable to find the pattern {} in file {}{}".format(TROUBLESHOOTING_PATTERN,from_path, key_name))
-
-        result = re.search(FURTHER_READING_PATTERN, filedata)
-        if result:
-            data_array.append([FURTHER_READING_TOKEN,result.group(1)])
-        else:
-            print("unable to find the pattern {} in file {}{}".format(FURTHER_READING_PATTERN,from_path, key_name))
-
-    return data_array
-
-
-def build_integrations_datafile(file_name, is_dogweb, is_integrations):
-    existing_json = []
-
-    # create the integrations datafile if for some reason its not there
-    if not exists(INTEGRATION_DATAFILE):
-        print('create {}...'.format(INTEGRATION_DATAFILE))
-        with open(INTEGRATION_DATAFILE, 'w') as outfile:
-            json.dump(existing_json, outfile, sort_keys=True, indent=4)
-    else:
-        with open(INTEGRATION_DATAFILE) as f:
-            existing_json = json.load(f)
-
-    # get list of names in existing json
-    names = [d['name'] for d in existing_json if 'name' in d]
-
-    # this file json data
-    with open(file_name) as data_file:
-        data = json.load(data_file)
-        name = data.get('name', '')
-        if name in names:
-            # update
-            for obj in existing_json:
-                if obj.get('name', '') == name:
-                    obj.update(data)
-        else:
-            # add to file
-            existing_json.append(data)
-        # write back out changes
-        with open(INTEGRATION_DATAFILE, 'w') as outfile:
-            json.dump(existing_json, outfile, sort_keys=True, indent=4)
-
-
-def update_integration_pre_build(type=None, from_path=None, to_path=None):
-    """
-    All modifications that may happen to a integration content are here
-    
-    :param from_path:   the input path where we scrap data from
-    :param to_path:     the output path to integration md files
-    """
-    is_dogweb = True if type == 'dogweb' else False
-    is_integrations = True if type == 'integrations' else False
-    if exists(from_path):
-        pattern = '**/*_manifest.json'
-        for file_name in tqdm(sorted(glob.glob('{}{}'.format(from_path, pattern), recursive=True))):
-            key_name = basename(file_name.replace('_manifest.json', ''))
-
-            """
-            Build integrations datafile for integrations page tiles
-            """
-            build_integrations_datafile(file_name, is_dogweb, is_integrations)
-            
-            """
-            Scraping all sections that we can found
-            """
-            if os.path.isfile('{}{}_readme.md'.format(from_path,key_name)):
-                data_array = readme_get_section(from_path, key_name)
-
-            """
-            Gathering the manifest short description and adding the right token
-            """
-
-            data_array.append([DESC_TOKEN, manifest_get_data(from_path, key_name, DESC_ATTRIBUTE)])
-
-            """
-            Inlining the data in the doc file
-            """
-            file_update_content(to_path, key_name, data_array)
-    else:
-        print('Path does not exist: {}'.format(from_path))
-        exit(1)
-
-
-def sync(*args):
-    """
-    Given optional arguments generate yaml integration data from dogweb / integrations-core
-    using either local or remote data
-
-    :param args: list of arguments
-    """
-
-    # collect arguments
-    options, args = parse_args(*args)
-
-    # attempt to get token from env vars, take explicit arg over envs
+    options, args = parser.parse_args()
     options.token = getenv('GITHUB_TOKEN', options.token) if not options.token else options.token
 
-    # setup path variables
-    tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
-    extract_path = '{}'.format(join(tempdir, "extracted") + sep)
-    dogweb_extract_path = '{}'.format(extract_path + 'dogweb' + sep)
-    integrations_extract_path = '{}'.format(extract_path + 'integrations-core' + sep)
-    dest_dir = '{}{}{}'.format(abspath(normpath(options.source)), sep, join('data', 'integrations') + sep)
-    
-    if options.integrations:
-        options.integrations = abspath(normpath(options.integrations))
-        if not options.integrations.endswith(sep):
-            options.integrations += sep
-
-    if options.dogweb:
-        options.dogweb = abspath(normpath(options.dogweb))
-        if not options.dogweb.endswith(sep):
-            options.dogweb += sep
-
-    # create data/integrations and other dirs if non existing
-    makedirs(dest_dir, exist_ok=True)
-    makedirs(dogweb_extract_path, exist_ok=True)
-    makedirs(dogweb_extract_path + 'integration' + sep, exist_ok=True)
-    makedirs(integrations_extract_path, exist_ok=True)
-
-    # sync from dogweb, download if we don't have it (token required)
-    if not options.dogweb:
-        if options.token:
-            options.dogweb = dogweb_extract_path
-            print("DOWNLOADING DOGWEB REPO")
-            download_github_files(options.token, 'DataDog', 'dogweb', 'prod', options.dogweb + 'integration' + sep, True)
-        else:
-            print('No Github token.. dogweb retrieval failed')
-            exit(1)
-
-    # sync from integrations, download if we don't have it (public repo so no token needed)
-    # (this takes precedence so will overwrite yaml files)
-    if not options.integrations:
-        options.integrations = integrations_extract_path
-        print("DOWNLOADING INTEGRATIONS CORE REPO")
-        download_github_files(options.token, 'DataDog', 'integrations-core', 'master', options.integrations)
-    
-    if options.integrations:
-        print('Updating integrations description for {}...'.format(options.integrations))
-        update_integration_pre_build("integrations", options.integrations, INTEGRATION_FOLDER)
-
-    if options.dogweb:
-        print('Updating integrations description for {}...'.format(options.dogweb))
-        update_integration_pre_build("dogweb", options.dogweb + 'integration' + sep, INTEGRATION_FOLDER)
-
-if __name__ == '__main__':
-    sync()
+    pre = PreBuild(options)
+    pre.process()

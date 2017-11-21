@@ -2,6 +2,11 @@
 .api {
 
   .api-code {
+
+    code {
+      color:#8DB8E9;
+    }
+
     pre {
       display: block;
       padding: 9.5px;
@@ -21,6 +26,7 @@
         background-color: transparent;
         border-radius: 0;
         font-family: $font-family-monospace;
+        color:#efefef;
       }
     }
     code {
@@ -74,18 +80,18 @@
 
   // hide the code blocks by default
   .code-block {
-    display:none;
+    //display:none;
   }
   // show python by default
   .code-block.code-block-python {
-    display:block;
-    visibility: visible;
+    //display:block;
+    //visibility: visible;
   }
 
 
   .api-code code {
     background-color:#0F0F0F;
-    color:#D0021B;
+    //color: rgba(50, 152, 204, 1);
   }
   .api-code ul {
     list-style-type:none;

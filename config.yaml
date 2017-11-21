@@ -590,7 +590,7 @@ params:
     - display_name: Ruby
       key: ruby
     - display_name: Curl
-      key: console
+      key: bash
   footer_scripts:
     - snowplow: false
     - marketo: false

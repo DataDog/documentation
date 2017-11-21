@@ -15,11 +15,11 @@ Capture RSS feed activity in Datadog to:
   * Discuss feed events with your team.
 
 ## Setup
-### Installation 
+### Installation
 
 Configuration requires:
 
-* A full URL to an RSS or ATOM feed 
+* A full URL to an RSS or ATOM feed
 * At least one custom tag per feed.
 
 **Optional**: You can enter a username and a password to access the RSS feed

@@ -7,10 +7,6 @@ order: 10.4
 ##### Signature
 `GET /api/v1/dash`
 ##### Example Request
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-get-all.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-get-all.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/timeboards/code_snippets/api-dashboard-get-all.rb" highlight="true" >}}
+{{< code-snippets basename="api-dashboard-get-all" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.py" >}}
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.sh" >}}
-{{< snippet-result-code-block file="content/api/timeboards/code_snippets/result.api-dashboard-get-all.rb" >}}
+{{< code-snippets basename="result.api-dashboard-get-all" >}}
