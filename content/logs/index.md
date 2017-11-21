@@ -36,7 +36,7 @@ If an integration does not support logs by default, you may need to use use the 
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-### Crawlers
+### Cloud
 * [AWS](/logs/aws)
 
 ### Frameworks
