@@ -25,6 +25,18 @@
   }
 }
 
+#popupImageModal {
+  .modal-header {
+    border:none;
+  }
+  .modal-body {
+    padding:0;
+  }
+  .close {
+    display:none;
+  }
+}
+
 
 @media (max-width: 575px) {
   #signupModal {
