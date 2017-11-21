@@ -63,7 +63,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
 * `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics](/getting_started/custom_metrics/) you are collecting, e.g, `myapp` from `myapp.request.count`)"
+* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related custom metrics you are collecting, e.g, `myapp` from `myapp.request.count`)"
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
 
