@@ -167,21 +167,6 @@ languages:
           pre: "nav_integrations"
           weight: 50
         # INTEGRATIONS - Subnav start
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "Integration SDK"
-          url: "/integrations/integration_sdk/"
-          weight: 60
-          parent: menu_references_integrations
-        - identifier: customnav_integrationsnav_new_integration
-          name: "New Integration"
-          url: "/integrations/new_integration/"
-          weight: 70
-          parent: menu_references_integrations
-        - identifier: customnav_integrationsnav_faq
-          name: "FAQ"
-          url: "/integrations/faq/"
-          weight: 80
-          parent: menu_references_integrations
         # INTEGRATIONS - Subnav end
 
 
@@ -514,25 +499,25 @@ languages:
           url: "/developers/metrics/"
           weight: 70
           parent: menu_references_developers
-        - identifier: customnav_developersnav_metrictypes
-          name: "Metric Types"
-          url: "/developers/metrictypes/"
-          weight: 80
+        - identifier: customnav_integrationsnav_new_integration
+          name: "Create a new integration"
+          url: "/developers/integrations/"
+          weight: 90
           parent: menu_references_developers
+        - identifier: customnav_integrationsnav_integration_sdk
+          name: "Integration SDK"
+          url: "/developers/integrations/integration_sdk/"
+          weight: 900
+          parent: customnav_integrationsnav_new_integration
         - identifier: customnav_developersnav_testing
           name: "Testing"
-          url: "/developers/testing/"
-          weight: 100
-          parent: menu_references_developers
-        - identifier: customnav_developersnav_units
-          name: "Units"
-          url: "/developers/units/"
-          weight: 110
-          parent: menu_references_developers
+          url: "/developers/integrations/testing/"
+          weight: 910
+          parent: customnav_integrationsnav_new_integration
         - identifier: customnav_developersnav_faq
           name: "FAQ"
           url: "/developers/faq/"
-          weight: 120
+          weight: 140
           parent: menu_references_developers
         # DEVELOPERS - Subnav end
 

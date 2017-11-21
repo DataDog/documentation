@@ -10,7 +10,7 @@ aliases:
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
 <div class="alert alert-info">
-We recommend to use the format <code>key:value</code> when using tags. Like <code>env:prod</code> or <code>role:database</code>
+We recommend to use the format <code>key:value</code> when using tags, like <code>env:prod</code>.
 </div>
 
 Tags must start with a letter, and after that may contain alphanumerics,

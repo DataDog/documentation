@@ -1,12 +1,12 @@
 ---
-title: Officially Integrating with Datadog
+title: Create a new integration
 kind: documentation
 customnav: developersnav
 aliases:
    - /guides/new_integration/
 ---
 
-## Create a new integration
+## Overview
 
 Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 
@@ -48,6 +48,7 @@ Most integrations start with a heading level of 3. Going forward you should star
 
 Every integration should have the following format:
 
+```
 ### Overview
 **Absolutely Required.**
 
@@ -107,3 +108,4 @@ Include a list of service checks if the integration provides any.
 **Optional**
 
 Include any links to Docs pages or Datadog blog articles that highlight the integration.
+```

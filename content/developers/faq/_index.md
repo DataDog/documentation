@@ -22,6 +22,8 @@ customnav: developersnav
 * [How Can I Submit A Custom Status Check?](/developers/faq/how-can-i-submit-a-custom-status-check)
 * [(dog)statsd sample_rate parameter explained](/developers/faq/dog-statsd-sample-rate-parameter-explained)
 
+* [Reduce submission rate](/developers/faq/reduce-submission-rate)
+
 ## APIs, Libraries and Community Contributions
 
 ### API
