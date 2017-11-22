@@ -111,7 +111,7 @@ logs:
 
 Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
 
-To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom yaml file.
+To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
 Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
 
 {{< highlight yaml >}}
@@ -131,7 +131,7 @@ logs:
 
 {{< /highlight >}}
 
-If the agent is containerized, please see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
+If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
 
 ### Filter logs
 
