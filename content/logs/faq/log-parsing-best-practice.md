@@ -3,6 +3,7 @@ title: Log Parsing - Best Practice
 kind: faq
 customnav: lognav
 beta: true
+further_reading:
 - link: "/logs/explore"
   tag: "Logs"
   text: Learn how to explore your logs

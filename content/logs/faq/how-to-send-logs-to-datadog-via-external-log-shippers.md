@@ -3,6 +3,7 @@ title: How to Send Logs to Datadog via External Log Shippers
 kind: faq
 customnav: lognav
 beta: true
+further_reading:
 - link: "/logs/explore"
   tag: "Logs"
   text: Learn how to explore your logs
