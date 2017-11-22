@@ -130,7 +130,7 @@ h1 {
   }
   ul li:before {
     content: "–";
-    position:absolute;
+    position: relative;
     margin-right: 7px;
     margin-left: -16px;
   }
