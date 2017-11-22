@@ -107,6 +107,8 @@ class PreBuild:
             'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},
             'mesos_slave': {'action': 'merge', 'target': 'mesos', 'remove_header': False},
             'kafka_consumer': {'action': 'merge', 'target': 'kafka', 'remove_header': False},
+            'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
@@ -224,6 +226,8 @@ class PreBuild:
                             target_file.write(content)
                     else:
                         open(output_file, 'w').close()
+                elif action == 'discard':
+                    remove(input_file)
 
     def process_integration_metric(self, file_name):
         """
