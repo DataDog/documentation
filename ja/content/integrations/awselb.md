@@ -1,11 +1,9 @@
 ---
-
 title: Datadog-AWS Load Balancer Integration
-integration_title: AWS ELB
+integration_title: amazon_elb
 kind: integration
 newhlevel: true
 placeholder: true
-title: Datadog-AWS ELB & ApplicationELB Integration
 updated_for_agent: 5.8.5
 description: "Track key Amazon Load Balancer metrics."
 ---
