@@ -56,4 +56,4 @@ If you were to add a custom query to your mysql.yaml with the following configur
 Then your agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
 
 
-{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" >}}
+{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" popup="true">}}

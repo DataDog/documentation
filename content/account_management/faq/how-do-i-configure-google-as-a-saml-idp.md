@@ -25,6 +25,6 @@ You can also add:
 * "urn:oid:2.5.4.4" "Basic Information" "Last Name"
 * "urn:oid:2.5.4.42" "Basic Information" "First Name"
 
-{{< img src="account_management/faq/ySPDetails.png" alt="ySPDetails" responsive="true" >}}
+{{< img src="account_management/faq/ySPDetails.png" alt="ySPDetails" responsive="true" popup="true">}}
 
-{{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" >}}
+{{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true">}}

@@ -12,7 +12,7 @@ When attempting to reset your password please check if you previously changed yo
 
 You can confirm this from the team page as shown here:
 
-{{< img src="account_management/faq/handle_image.png" alt="handle image" responsive="true" >}}
+{{< img src="account_management/faq/handle_image.png" alt="handle image" responsive="true" popup="true">}}
 
 You will need to enter your email address in the password reset link:
 

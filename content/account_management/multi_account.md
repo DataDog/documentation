@@ -9,7 +9,7 @@ customnav: accountmanagementnav
 
 There are two ways to allow multiple accounts to have access to the same data. First, you can simply add multiple users to the same team from the [Team Page][1]. The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between them from the avatar menu in the main menu.
 
-{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" >}}
+{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true">}}
 
 ## Organizations
 
@@ -21,7 +21,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 
 2. Enter the name of the organization you wish to create and click the **Create** button. **The organization name cannot exceed 32 characters.**
 
-{{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" >}}
+{{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true">}}
 
 A new trial account will be created. If you wish to add this account to your existing billing settings, please contact your sales representative.
 
@@ -31,14 +31,14 @@ A new trial account will be created. If you wish to add this account to your exi
 2. Scroll down to Organizations and click **Leave** next to the org you want to leave.
 
 
-{{< img src="account_management/multi_account/guides-multacct-leaveorg.png" alt="Leave Org" responsive="true" >}}
+{{< img src="account_management/multi_account/guides-multacct-leaveorg.png" alt="Leave Org" responsive="true" popup="true">}}
 
 ## Switch between Organization
 
 For users that belong to more than one Datadog organization, it's possible to switch to another organization from any page by hovering over your avatar in the lower left hand corner.
 
 Once the menu appears, you can transition to the other Datadog accounts you're associated with:
-{{< img src="account_management/multi_account/Switch_Accounts.jpg" alt="Switch Accounts" responsive="true" >}}
+{{< img src="account_management/multi_account/Switch_Accounts.jpg" alt="Switch Accounts" responsive="true" popup="true">}}
 
 ## Custom domains for each sub-organizations
 

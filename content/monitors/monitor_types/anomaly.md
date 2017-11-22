@@ -30,21 +30,21 @@ The chart below shows a dashboard chart that uses anomaly detection. The gray ba
 
 **Please Note:** The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
 
-{{< img src="monitors/monitor_types/anomaly/dashboard_graph.png" alt="dashboard graph" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/dashboard_graph.png" alt="dashboard graph" responsive="true" popup="true">}}
 
 To create an anomaly detection graph, start by adding a timeseries graph to your dashboard. As shown below, be sure to select "Timeseries" as the visualization type.
 
-{{< img src="monitors/monitor_types/anomaly/initial_editor.png" alt="initial editor" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/initial_editor.png" alt="initial editor" responsive="true" popup="true">}}
 
 Now, click on the + icon (Add functions and modifiers) on the right side of your expression. Choose the “Anomalies” function in the "Algorithms" submenu:
 
-{{< img src="monitors/monitor_types/anomaly/function_menu.png" alt="function menu" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/function_menu.png" alt="function menu" responsive="true" popup="true">}}
 
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
 
 The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
 
-{{< img src="monitors/monitor_types/anomaly/final_editor.png" alt="final editor" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/final_editor.png" alt="final editor" responsive="true" popup="true">}}
 
 ### Alert on Anomalies
 
@@ -52,7 +52,7 @@ In addition to viewing anomalies in dashboards, you may create monitors that tri
 
 Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Anomaly**. Then fill out the **Define the metric** section just as you would for any other monitor.
 
-{{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" popup="true">}}
 
 You should now see something like what's shown above, with a handful of selections that will help determine how sensitive your monitor is to different types of anomalies.
 
@@ -82,23 +82,23 @@ All of the seasonal algorithms may use up to a couple of months of historical da
 
 The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparision 1" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparision 1" responsive="true" popup="true">}}
 
 In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="alg comparision 2" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="alg comparision 2" responsive="true" popup="true">}}
 
 The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="alg comparision 3" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="alg comparision 3" responsive="true" popup="true">}}
 
 The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-insensitive, while _Agile_ and _Adaptive_ are not. In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="alg comparision scale" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="alg comparision scale" responsive="true" popup="true">}}
 
 Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="alg comparison new metric" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="alg comparison new metric" responsive="true" popup="true">}}
 
 ## Anomaly Monitors via the API
 
@@ -193,7 +193,7 @@ It's common that these metrics have points that are at or near zero, especially 
 
 One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
 
-{{< img src="monitors/monitor_types/anomaly/rollup_profile_updates.png" alt="rollup profile updates" responsive="true" >}}
+{{< img src="monitors/monitor_types/anomaly/rollup_profile_updates.png" alt="rollup profile updates" responsive="true" popup="true">}}
 
 Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 

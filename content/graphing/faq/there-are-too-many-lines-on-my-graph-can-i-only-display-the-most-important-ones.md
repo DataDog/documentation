@@ -8,7 +8,7 @@ customnav: graphingnav
 
 When using a grouped query there are sometimes too many lines displayed on the graph, and you might end up with something not easy to read e.g.:
 
-{{< img src="graphing/faq/too_many_metrics_1.png" alt="too_many_metrics_1" responsive="true" >}}
+{{< img src="graphing/faq/too_many_metrics_1.png" alt="too_many_metrics_1" responsive="true" popup="true">}}
 
 ... where you only need to focus on the hosts with high load values here.
 
@@ -16,6 +16,6 @@ When using a grouped query there are sometimes too many lines displayed on the 
 
 The top function is a good fit to display only the few relevant lines on the graph:
 
-{{< img src="graphing/faq/too_many_metrics_2.png" alt="too_many_metrics_2" responsive="true" >}}
+{{< img src="graphing/faq/too_many_metrics_2.png" alt="too_many_metrics_2" responsive="true" popup="true">}}
 
 You may find more documentation about the top function, its parameters and its aliases [here](/graphing/miscellaneous/functions)

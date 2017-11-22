@@ -16,7 +16,7 @@ To workaround this, you can make use of the monitor's Source tab or create event
 
 Open up the monitor's Source tab, where you'll be prompted to enter the JSON metric query definition:
 
-{{< img src="monitors/faq/raw_edit_monitor.png" alt="raw_edit_monitor" responsive="true" >}}
+{{< img src="monitors/faq/raw_edit_monitor.png" alt="raw_edit_monitor" responsive="true" popup="true">}}
 
 Though the metric may not yet be recognized by Datadog, the monitor should still save and will update the graph as soon as datapoints are submitted for this metric.  
 

@@ -6,7 +6,7 @@ customnav: monitortypenav
 description: "Check the status of TCP/HTTP endpoints"
 ---
 
-{{< img src="monitors/monitor_types/network/network_monitor.png" alt="network monitor" responsive="true" >}}
+{{< img src="monitors/monitor_types/network/network_monitor.png" alt="network monitor" responsive="true" popup="true">}}
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
 the [guide to network checks](/integrations/tcp_check) for details on Agent
@@ -41,7 +41,7 @@ To build a Network monitor on an http check you need to:
 
 1. Create a network monitor: Monitor > New monitor
 2. Enter your network monitor setting:
-    {{< img src="monitors/monitor_types/network/network_monitor_settings.png" alt="alert type"  responsive="true" >}}
+    {{< img src="monitors/monitor_types/network/network_monitor_settings.png" alt="alert type"  responsive="true" popup="true">}}
 
     Don't forget to select the threshold values for your monitor
 

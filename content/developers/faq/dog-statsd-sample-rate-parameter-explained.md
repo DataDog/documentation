@@ -6,7 +6,7 @@ customnav: developersnav
 
 Here are the components involved when submitting data via (dog)statsd:
 
-{{< img src="developers/faq/dogstatsd_schema.png" alt="dogstatsd_schema" responsive="true" >}}
+{{< img src="developers/faq/dogstatsd_schema.png" alt="dogstatsd_schema" responsive="true" popup="true">}}
 
 1. your code. Where you sample metric values using a dogstatsd client, in charge of sampling metric values and sending them to 2.
 2. the dogstatsd server (embedded with the datadog-agent), in charge of receiving the value sampled. Every 10 seconds, it aggregates data received into final metric values that are sent to 3.

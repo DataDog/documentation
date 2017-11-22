@@ -91,7 +91,7 @@ sudo ~/.datadog-agent/bin/info -v
 
 For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
 
-{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" >}}
+{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true">}}
 
 It's also possible to run the info command using Powershell:
 

@@ -89,11 +89,11 @@ sudo ~/.datadog-agent/bin/agent reload
 
 To manually start the Agent, you can use the Datadog Agent Manager, once open you'll find service controls here:
 
-{{< img src="agent/faq/manager-snapshot.png" alt="Manager snapshot" responsive="true" >}}
+{{< img src="agent/faq/manager-snapshot.png" alt="Manager snapshot" responsive="true" popup="true">}}
 
 Alternatively, you can also access the Windows Service Manager for identical controls:
 
-{{< img src="agent/faq/windows-service.png" alt="Windows Service" responsive="true" >}}
+{{< img src="agent/faq/windows-service.png" alt="Windows Service" responsive="true" popup="true">}}
 
 It's also possible to start and stop the agent using Powershell or cmd.exe:
 

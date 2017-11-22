@@ -47,7 +47,7 @@ Here is a quick overview of the different terms used:
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types on the left. See the [Monitoring Reference](/monitors/monitor_types) to learn more about all monitor types.
 
-{{< img src="monitors/index/nav.png" alt="nav" responsive="true" >}}
+{{< img src="monitors/index/nav.png" alt="nav" responsive="true" popup="true">}}
 
 ## Export your monitor
 
@@ -68,7 +68,7 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 
 We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" popup="true">}}
 
 Setting the above to **Notify** will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.
 

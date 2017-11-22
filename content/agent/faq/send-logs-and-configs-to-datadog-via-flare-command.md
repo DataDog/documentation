@@ -61,7 +61,7 @@ To send Datadog support a copy of your Windows logs and configs, do the followin
 
 That's it! Support will be in touch with you shortly.
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" >}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true">}}
 
 It's also possible to run the flare command using Powershell:
 
@@ -93,7 +93,7 @@ print tempfile.gettempdir()
 
 Example : 
 
-{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" >}}
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true">}}
 
 
 ## What about my sensitive information? 

@@ -6,7 +6,7 @@ customnav: monitortypenav
 description: "Check if a process is running on a host"
 ---
 
-{{< img src="monitors/monitor_types/process/process_monitor.png" alt="process monitor" responsive="true" >}}
+{{< img src="monitors/monitor_types/process/process_monitor.png" alt="process monitor" responsive="true" popup="true">}}
 
 A process monitor will watch the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure

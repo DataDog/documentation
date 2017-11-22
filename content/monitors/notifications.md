@@ -60,7 +60,7 @@ Here is an example of how you can set it up in the editor:
 
 The corresponding trigger event notification will look like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template condiional trigger" responsive="true" >}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template condiional trigger" responsive="true" popup="true">}}
 
 and the recovery notification:
 
@@ -123,7 +123,7 @@ The variable uses the following format:
 
 Here is an example of how you can give a different message depending on the triggering context:
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" >}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true">}}
 
 ## Variable availability
 

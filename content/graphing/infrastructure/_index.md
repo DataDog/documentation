@@ -30,7 +30,7 @@ Note: All hosts that have not sent data in 24 hours will disappear from the infr
 
 If you click on one host, You can see the tags applied to it:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" popup="true">}}
 
 ### Agent Host Names
 
@@ -107,7 +107,7 @@ You can programmatically access host information and get the insights you need, 
 * for which Datadog receives aws ec2 information from Cloudwatch, through our AWS integration.
 * but that don't have the agent installed.
 
-{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" >}}
+{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true">}}
 
 See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
 

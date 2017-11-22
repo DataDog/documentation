@@ -23,7 +23,7 @@ Datadog's Logs is currently available via private beta. You can apply for inclus
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
 
 ## Getting started with the Agent
 
@@ -233,11 +233,11 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true">}}
 
 ## What's next
 

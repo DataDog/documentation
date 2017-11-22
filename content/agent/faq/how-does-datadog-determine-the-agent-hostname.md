@@ -44,6 +44,6 @@ The names collected by the Agent (detailed above) are added as aliases for the c
 
 You can see a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you can get to by clicking the "Inspect" button while hovering over a host row, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
+{{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
 
 To learn how to rename your host, [reference this article](/agent/faq/how-can-i-change-the-hostname).

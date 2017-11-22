@@ -24,7 +24,7 @@ If you want to reduce your AWS spend, a great place to start is by figuring out 
 
 Below is a subset of Datadog’s infrastructure. As you can see, **c3.2xlarge** instances are pretty heavily loaded.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" popup="true">}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
@@ -45,7 +45,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" responsive="true">}}
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" responsive="true" popup="true">}}
 
 ## More Details
 
@@ -99,7 +99,7 @@ The Host Maps can also communicate an additional, optional metric with the size 
 
 In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" popup="true">}}
 
 **Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog agent, or directly by AWS, or vSphere.
 
@@ -109,7 +109,7 @@ By default, the Host Map will only show hosts that are reporting certain metrics
 
 Some hosts, like those coming in from Google App Engine, do not pull in these metrics without an agent running. These hosts can still appear within the Host Map selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
-{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No agent" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No agent" responsive="true" popup="true">}}
 
 ### Data freshness and meaning
 

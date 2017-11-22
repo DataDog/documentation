@@ -81,7 +81,7 @@ def logstatsd_parser(logger, line):
 
 And you can see the resulting metric collection below. Because these log lines were all written at virtually the same time, the standalone log parser was only able to collect one metric value, whereas the "logstatsd" version was able to collect the metric for each unique tag value.
 
-{{< img src="agent/faq/collect_metrics.png" alt="Collect Metrics" responsive="true" >}}
+{{< img src="agent/faq/collect_metrics.png" alt="Collect Metrics" responsive="true" popup="true">}}
 
 Of course, gauge type metrics always have their limitations in terms of how frequently you can submit them--if you still run into issues with metric granularity stemming from high-frequency logs, your metric may be better suited for a "counter" type metric, which can also be submitted via the dogstatsd using the statsd.increment() method. 
 

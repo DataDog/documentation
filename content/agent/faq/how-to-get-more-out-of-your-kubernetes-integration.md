@@ -57,13 +57,13 @@ And the network tcp6 information:
 
 Then, you can update your `kubernetes.yaml` on [these following lines](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L108-L109) with :
 
-{{< img src="agent/faq/additional_lines.png" alt="Additional Lines" responsive="true" >}}
+{{< img src="agent/faq/additional_lines.png" alt="Additional Lines" responsive="true" popup="true">}}
 
 Quick tip, as per the original Kubernetes article, you can use the configmaps to configure your integration on the go, thus, you can use the following configmap and daemonset description.
 
 And as you spin up the daemonset and the configmap, you can see the metrics starting to populate UI :
 
-{{< img src="agent/faq/metric_in_ui.gif" alt="Metric UI" responsive="true" >}}
+{{< img src="agent/faq/metric_in_ui.gif" alt="Metric UI" responsive="true" popup="true">}}
 
 ## Events
 
@@ -88,4 +88,4 @@ kubectl apply -f ddmaster-ds-kubernetes-events.yaml
 
 You will only deploy on the agent on one node and this agent will collect kubernetes events.
 
-{{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" >}}
+{{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" popup="true">}}

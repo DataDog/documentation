@@ -28,7 +28,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.  
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.  
 
@@ -104,7 +104,7 @@ def render_page():
 
 With this one line of code we can start graphing the data:
 
-{{< img src="developers/dogstatsd/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
+{{< img src="developers/dogstatsd/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" popup="true">}}
 
 DogStatsD normalizes counters over the flush interval to report
 per-second units. In the graph above, the marker is reporting

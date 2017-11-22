@@ -6,7 +6,7 @@ customnav: monitortypenav
 description: "Monitor metric values or health status from a specific integration"
 ---
 
-{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" >}}
+{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" popup="true">}}
 
 On the integration tab you will see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".

@@ -162,4 +162,4 @@ Collector (v 5.4.2)
 
 In the Metrics Explorer or a dashboard, we can plot snmp.ifInOctets, filter by device and break it down by port, cf screenshot.
 
-{{< img src="agent/faq/metric_explorer_plot.png" alt="Metric Explorer Plot" responsive="true" >}}
+{{< img src="agent/faq/metric_explorer_plot.png" alt="Metric Explorer Plot" responsive="true" popup="true">}}
