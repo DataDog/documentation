@@ -97,7 +97,7 @@ Once you determine which hosts you would like to update you can either manually 
 
 Or you can make use of one our automation integrations like [Chef](/integrations/chef), [Puppet](/integrations/puppet), or [Ansible](/integrations/ansible).
 
-## What's next
+## What's Next
 
 {{< partial name="whats-next/whats-next.html" >}}
 

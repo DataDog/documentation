@@ -239,7 +239,7 @@ To change the default values for each of the reserved attributes, go to the pipe
 
 {{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
 
-## What's next
+## What's Next
 
 {{< partial name="whats-next/whats-next.html" >}}
 

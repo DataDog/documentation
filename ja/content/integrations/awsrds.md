@@ -97,7 +97,7 @@ Here's an example of a graph displaying I/O for the instance `mysqlrds` using th
 
 {{< img src="integrations/awsrds/rds-example.png" >}}
 
-<!-- ## What's next? -->
+<!-- ## What's Next? -->
 
 ## 最後に
 

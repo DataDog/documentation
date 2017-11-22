@@ -265,6 +265,6 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 Learn more about this [here](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
 
-## What's next ? 
+## What's Next 
 
 {{< partial name="whats-next/whats-next.html" >}}
