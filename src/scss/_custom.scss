@@ -16,7 +16,8 @@ $theme-colors: (
         semi-trans: rgba(255, 255, 255, .5),
         light: $gray-100,
         dark: $gray-800,
-        gradient: $ddpurple
+        gradient: $ddpurple,
+        white: #FFF
 );
 
 $spacers: (
@@ -145,6 +146,26 @@ $headings-font-weight:600;
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }
 
+//white badge should have black border
+.badge-white {
+  border: 1px solid #000;
+}
+a.list-group-item-white {
+  color:#000;
+}
+a.list-group-item-white:focus,
+a.list-group-item-white:hover,
+button.list-group-item-white:focus,
+button.list-group-item-white:hover  {
+  color: $ddpurple;
+  background-color: #EBE4F2;
+  border-color: $ddpurple;
+  .badge {
+    background-color: $ddpurple;
+    border: 1px solid $ddpurple;
+    color: white;
+  }
+}
 
 // remove outlines
 button:focus {

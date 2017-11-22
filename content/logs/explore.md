@@ -1,4 +1,11 @@
 ---
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 title: Explore
 kind: documentation
 autotocdepth: 2
@@ -172,5 +179,4 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ## What's next
 
-* Learn how to [process your logs](/logs/processing)
-* Learn more about [parsing](/logs/parsing)
+{{< partial name="whats-next/whats-next.html" >}}

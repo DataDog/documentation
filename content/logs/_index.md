@@ -1,4 +1,14 @@
 ---
+further_reading:
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 title: Log Collection
 kind: Documentation
 autotocdepth: 2
@@ -231,6 +241,5 @@ To change the default values for each of the reserved attributes, go to the pipe
 
 ## What's next
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
-* Learn more about [parsing](/logs/parsing)
+{{< partial name="whats-next/whats-next.html" >}}
+
