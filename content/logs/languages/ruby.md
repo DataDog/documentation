@@ -216,6 +216,6 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
 end
 ```
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

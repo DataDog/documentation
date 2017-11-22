@@ -36,5 +36,5 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 3. Configure your **notification options** Refer to the [Notifications](monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

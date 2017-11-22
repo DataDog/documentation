@@ -120,6 +120,6 @@ Store the log files for multiple distributions in the same bucket. When enabling
 
 You can then collect the log from the s3 bucket thanks to the lambda function.
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

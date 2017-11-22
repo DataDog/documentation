@@ -210,5 +210,5 @@ Furthermore, as with an individual multi-alert monitor, the number of common rep
 
 Use your best judgement to choose multi-alert monitors that makes sense together.
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

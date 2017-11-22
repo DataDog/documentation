@@ -23,6 +23,6 @@ There are three potential solutions to get around this:
 2. Change the file permission to let the Agent access it.
 3. Configure an open source log shipper (such as Rsyslog, NXLog, …) that has root access to send those logs either directly to your Datadog platform or locally to a running Datadog agent. All configuration are explained in [this article](/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers).
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

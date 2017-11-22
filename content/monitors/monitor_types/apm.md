@@ -21,5 +21,5 @@ further_reading:
 
 These work just like regular [metric monitors](/monitors/monitor_types/metric) — but with controls tailored specifically to APM metrics. They allow you to alert at the service level on hits, errors, and a variety of latency measures.
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

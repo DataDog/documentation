@@ -48,6 +48,6 @@ To do so, use our [Check Summary page](https://app.datadoghq.com/check/summary)
 
 Also note that outgoing UDP traffic over the port 123 should be allowed so the agent can confirm that the local server time is reasonably accurate according the datadog NTP servers.
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

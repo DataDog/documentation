@@ -174,5 +174,5 @@ Both algorithms are set up to identify outliers that differ from the majority of
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" popup="true">}}
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

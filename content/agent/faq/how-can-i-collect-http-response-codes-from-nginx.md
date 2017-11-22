@@ -88,6 +88,6 @@ As you can see from the code, the parser will generate a nginx.net.avg_response 
 We can now plot the metric in Metric Explorer:
 {{< img src="agent/faq/plot_nginx_metric.png" alt="Plot Nginx metric" responsive="true" popup="true">}}
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

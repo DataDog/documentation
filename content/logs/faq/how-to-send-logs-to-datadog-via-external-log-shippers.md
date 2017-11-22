@@ -223,6 +223,6 @@ In order to get the best use out of your logs in Datadog, it is important to hav
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
 
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

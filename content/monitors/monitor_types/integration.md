@@ -36,6 +36,6 @@ selection, you can choose to monitor either a "Status" or a "Metric".
   the metrics provided by this integration. Please refer to the
   [alert conditions](/monitors/monitor_types/#define-the-conditions) section for details on the available options.
 
-## what's next? 
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -97,6 +97,6 @@ You will only deploy on the agent on one node and this agent will collect kubern
 
 {{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" popup="true">}}
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

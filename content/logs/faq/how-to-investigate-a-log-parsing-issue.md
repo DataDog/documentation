@@ -87,6 +87,6 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 5. Ask for help
     We are always here to help you if you did not manage to find the cause of the parsing error. So please [contact us](/help).
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

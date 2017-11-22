@@ -168,6 +168,6 @@ While actively working with the Process and Containers page, metrics are collect
 [4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

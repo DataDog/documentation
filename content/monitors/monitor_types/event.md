@@ -63,5 +63,5 @@ Include Event specific information in your event monitor notifications, template
 
 {{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" popup="true">}}
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

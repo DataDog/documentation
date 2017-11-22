@@ -111,6 +111,6 @@ net stop datadogagent
 ```
 To restart the Agent, run the stop and start commands in succession.
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

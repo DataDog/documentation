@@ -258,6 +258,6 @@ logs:
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

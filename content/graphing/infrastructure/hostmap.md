@@ -122,6 +122,6 @@ Some hosts, like those coming in from Google App Engine, do not pull in these me
 
 Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it will not refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen will tell you when data was last updated.
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

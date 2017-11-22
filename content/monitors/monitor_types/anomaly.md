@@ -212,5 +212,5 @@ Another option is to apply the `ewma()` [function](/graphing/miscellaneous/funct
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true" popup="true" >}}
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

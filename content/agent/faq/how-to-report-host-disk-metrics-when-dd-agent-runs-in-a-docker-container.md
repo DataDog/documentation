@@ -58,6 +58,6 @@ The collect_disk_stats feature of docker_daemon only support devicemapper-backed
 This option enables container size computation through the docker ps system. It virtually runs df in every container and will not scale to large container count.
 We run the size computation once every 5 runs to reduce system impact though
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

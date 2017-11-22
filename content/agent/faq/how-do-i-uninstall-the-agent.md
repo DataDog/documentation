@@ -53,6 +53,6 @@ You can uninstall the agent using Add/Remove Programs, alternatively, it's possi
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
 ```
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -52,6 +52,6 @@ You can see a list of all the hosts in your account from the Infrastructure tab 
 
 To learn how to rename your host, [reference this article](/agent/faq/how-can-i-change-the-hostname).
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

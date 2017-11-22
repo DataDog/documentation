@@ -70,5 +70,5 @@ The `by {host}` section of the monitor query creates a multi alert by host. You 
 
 For more information about using our API to manage monitors, see [our API docs](/api/#monitors)
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -111,6 +111,6 @@ You can programmatically access host information and get the insights you need, 
 
 See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
 
-## what's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

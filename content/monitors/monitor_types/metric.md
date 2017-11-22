@@ -140,6 +140,6 @@ further_reading:
 
 8. Configure your **notification options** Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed options.
 
-## what's next? 
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}

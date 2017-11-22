@@ -87,6 +87,6 @@ If you've done everything above and continue to have issues please send support@
 3. Where is this instances hosted physically? We've seen network issues with service providers upstream from our customers that have resulted in 599's
 4. Please also include the information listed in the "Diagnosis" section above.
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

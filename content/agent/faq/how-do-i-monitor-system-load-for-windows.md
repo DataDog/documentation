@@ -28,6 +28,6 @@ The system.load.* metric is Unix specific, it conveys the average amount of re
 
 While Windows does not offer this exact metric, there is an equivalent option that's available by default in the system metrics: system.proc.queue.length. The system.proc.queue.length metric allows you to see the number of threads that are observed as delayed in the processor ready queue and are waiting to be executed. 
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

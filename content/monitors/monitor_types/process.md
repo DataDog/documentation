@@ -44,5 +44,5 @@ point they should notify.
 
 4. Configure your **notification options** Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
-## what's next? 
+## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

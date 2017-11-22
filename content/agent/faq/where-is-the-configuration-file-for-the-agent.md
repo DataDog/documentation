@@ -50,6 +50,6 @@ Agent configuration:
 \\ProgramData\Datadog\datadog.conf
 ```
 
-## What's next?
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
