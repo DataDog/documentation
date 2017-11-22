@@ -67,7 +67,7 @@ The following integration sources create tags automatically in Datadog:
 | [Kubernetes](/integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
 | [Marathon](/integrations/marathon)                              | URL |
 | [Memcached](/integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
-| [Mesos](/integrations/mesos_master)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| [Mesos](/integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
 | [Mongo](/integrations/mongodb)                                 | Server Name |
 | [OpenStack](/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
 | [PHP FPM](/integrations/php_fpm)                               | Pool Name |

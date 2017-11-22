@@ -158,5 +158,5 @@ While actively working with the Process and Containers page, metrics are collect
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[4]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent

@@ -66,7 +66,7 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
           path: /etc/passwd
         name: passwd    
     
-Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation](/integrations/kubernetes/) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
