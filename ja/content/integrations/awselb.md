@@ -1,6 +1,6 @@
 ---
 title: Datadog-AWS Load Balancer Integration
-integration_title: amazon_elb
+git_integration_title: amazon_elb
 kind: integration
 newhlevel: true
 placeholder: true
@@ -32,7 +32,7 @@ In the Amazon Web Services integration tile, ensure the **ELB checkbox** is chec
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git >}}
+{{< get-metrics-from-git "amazon_elb" >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
