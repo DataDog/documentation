@@ -128,7 +128,7 @@ logs:
     source: php
     sourcecategory: front
 
-``
+```
 
 ### Filter logs
 
