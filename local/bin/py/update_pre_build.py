@@ -69,13 +69,16 @@ class GitHub:
         else:
             return listing
 
-    def raw(self, org, repo, branch, path_to_file, file_out):
+    def raw(self, list_item, org, repo, branch, dest_dir):
         headers = self.headers()
+        path_to_file = list_item.get('path', '')
+        file_out = '{}{}'.format(dest_dir, path_to_file)
         raw_response = requests.get(
             'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, path_to_file),
             headers=headers
         )
         if raw_response.status_code == requests.codes.ok:
+            makedirs(dirname(file_out), exist_ok=True)
             with open(file_out, mode='wb+') as f:
                 f.write(raw_response.content)
 
@@ -131,19 +134,20 @@ class PreBuild:
                 f.write(yaml.dump(yaml_data, default_flow_style=False))
 
     def download_from_repo(self, org, repo, branch, globs):
-        def download_raw(item, dest, org, repo, branch):
-            path_to_file = item.get('path', '')
-            if path_to_file:
-                file_out = '{}{}'.format(dest, path_to_file)
-                makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
-                gh.raw(org, repo, branch, path_to_file, file_out)
-            return None
+        """
+        Takes github info and file globs and downloads files from github using multiple processes
+        :param org: github organization or person
+        :param repo: github repo name
+        :param branch: the branch name
+        :param globs: list of strings in glob format of what to extract
+        :return:
+        """
         with GitHub(self.options.token) as gh:
             listing = gh.list(org, repo, branch, globs)
             dest = '{0}{1}{2}'.format(self.extract_dir, repo, sep)
             with Pool(processes=self.pool_size) as pool:
-                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org=org, repo=repo, branch=branch), listing)):
-                    pass
+                results = [x for x in tqdm(
+                    pool.imap_unordered(partial(gh.raw, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
 
     def process(self):
         """
