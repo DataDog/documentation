@@ -1,4 +1,10 @@
 ---
+title: Processing
+kind: documentation
+autotocdepth: 2
+customnav: lognav
+description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
+beta: true
 further_reading:
 - link: "/logs/explore"
   tag: "Logs"
@@ -6,12 +12,6 @@ further_reading:
 - link: "/logs/parsing"
   tag: "Logs"
   text: Learn more about parsing
-title: Processing
-kind: documentation
-autotocdepth: 2
-customnav: lognav
-description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
-beta: true
 ---
 
 <div class="alert alert-info">

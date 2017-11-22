@@ -4,6 +4,16 @@ kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
 ---
 
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
@@ -205,3 +215,7 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
     grape_logger.info payload
 end
 ```
+
+## What's next
+
+{{< partial name="whats-next/whats-next.html" >}}

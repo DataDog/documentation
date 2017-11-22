@@ -3,6 +3,15 @@ title: Log Collection Troubleshooting Guide
 kind: faq
 customnav: lognav
 beta: true
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 ---
 
 There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, please email [us](/help) for further assistance. 
@@ -45,3 +54,7 @@ These are a few of the common configuration issues that are work triple-checking
 2. You do not have any .yaml file in your conf.d/ directory that includes a logs section and the appropriate values, or you have added these values only to the `logs-agent.yaml` (N.B. you will want to keep the logs-agent.yaml configurations separate from the configuration files that determine where the dd-agent should look/listen for logs).
 
 3. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing. 
+
+## What's next
+
+{{< partial name="whats-next/whats-next.html" >}}

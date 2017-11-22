@@ -3,6 +3,15 @@ title: How to investigate a log parsing issue
 kind: faq
 customnav: lognav
 beta: true
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 ---
 
 Integration pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
@@ -76,3 +85,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
 5. Ask for help
     We are always here to help you if you did not manage to find the cause of the parsing error. So please [contact us](/help).
+
+## What's next
+
+{{< partial name="whats-next/whats-next.html" >}}

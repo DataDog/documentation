@@ -4,6 +4,16 @@ kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
 ---
 
 ## Overview 
@@ -110,3 +120,7 @@ Here are some little advices:
 - Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.
 - Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
 - Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
+
+## What's next
+
+{{< partial name="whats-next/whats-next.html" >}}

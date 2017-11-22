@@ -1,4 +1,8 @@
 ---
+title: Notifications
+kind: documentation
+autotocdepth: 2
+customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Monitors"
@@ -15,10 +19,6 @@ further_reading:
 - link: "/monitors/faq"
   tag: "Monitors"
   text: Consult our FAQ
-title: Notifications
-kind: documentation
-autotocdepth: 2
-customnav: monitornav
 ---
 
 ## Overview

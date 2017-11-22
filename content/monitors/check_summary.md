@@ -1,4 +1,8 @@
 ---
+title: Check summary
+kind: documentation
+autotocdepth: 2
+customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Monitors"
@@ -15,10 +19,6 @@ further_reading:
 - link: "/monitors/faq"
   tag: "Monitors"
   text: Consult our FAQ
-title: Check summary
-kind: documentation
-autotocdepth: 2
-customnav: monitornav
 ---
 
 This page let you see the list of all your checks reporting to Datadog:

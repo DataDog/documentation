@@ -1,4 +1,11 @@
 ---
+title: Log Collection
+kind: Documentation
+autotocdepth: 2
+hideguides: true
+customnav: lognav
+description: "Configure your Datadog agent to gather logs from your host, containers & services."
+beta: true
 further_reading:
 - link: "/logs/explore"
   tag: "Logs"
@@ -9,13 +16,6 @@ further_reading:
 - link: "/logs/parsing"
   tag: "Logs"
   text: Learn more about parsing
-title: Log Collection
-kind: Documentation
-autotocdepth: 2
-hideguides: true
-customnav: lognav
-description: "Configure your Datadog agent to gather logs from your host, containers & services."
-beta: true
 ---
 
 <div class="alert alert-info">

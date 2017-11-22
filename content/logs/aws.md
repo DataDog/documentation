@@ -1,4 +1,9 @@
 ---
+title: AWS Log Collection
+kind: Documentation
+autotocdepth: 2
+customnav: lognav
+beta: true
 further_reading:
 - link: "/logs/explore"
   tag: "Logs"
@@ -9,11 +14,6 @@ further_reading:
 - link: "/logs/parsing"
   tag: "Logs"
   text: Learn more about parsing
-title: AWS Log Collection
-kind: Documentation
-autotocdepth: 2
-customnav: lognav
-beta: true
 ---
 
 ## Overview

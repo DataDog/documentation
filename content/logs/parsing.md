@@ -1,4 +1,10 @@
 ---
+title: Parsing
+kind: documentation
+autotocdepth: 2
+customnav: lognav
+description: "Parse your logs using the Grok Processor"
+beta: true
 further_reading:
 - link: "/logs/explore"
   tag: "Logs"
@@ -6,12 +12,6 @@ further_reading:
 - link: "/logs/processing"
   tag: "Logs"
   text: Learn how to process your logs
-title: Parsing
-kind: documentation
-autotocdepth: 2
-customnav: lognav
-description: "Parse your logs using the Grok Processor"
-beta: true
 ---
 
 <div class="alert alert-info">

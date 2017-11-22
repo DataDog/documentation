@@ -3,6 +3,15 @@ title: Log Parsing - Best Practice
 kind: faq
 customnav: lognav
 beta: true
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 ---
 
 Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation](/logs/parsing/).
@@ -49,3 +58,7 @@ In this article, we will walk through parsing a log from the Datadog agent’s c
     Let’s say that the information dd.collector is not of any value for me and I do not want to extract it as an attribute.
     To do  that we simply need to remove the extract section of the rule:
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" >}}
+
+## What's next
+
+{{< partial name="whats-next/whats-next.html" >}}

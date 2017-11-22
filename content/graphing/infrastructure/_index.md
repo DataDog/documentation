@@ -1,4 +1,11 @@
 ---
+title: Infrastructure List
+kind: documentation
+autotocdepth: 3
+customnav: infrastructurenav
+aliases:
+  - /hostnames
+  - /infrastructure/
 further_reading:
 - link: "/graphing/infrastructure/hostmap"
   tag: ""
@@ -9,13 +16,6 @@ further_reading:
 - link: "/graphing/infrastructure/process"
   tag: ""
   text: Understand what is going on at any level of your system
-title: Infrastructure List
-kind: documentation
-autotocdepth: 3
-customnav: infrastructurenav
-aliases:
-  - /hostnames
-  - /infrastructure/
 ---
 
 ## Overview

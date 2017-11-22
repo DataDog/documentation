@@ -1,4 +1,10 @@
 ---
+title: Explore
+kind: documentation
+autotocdepth: 2
+customnav: lognav
+description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
+beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Logs"
@@ -6,12 +12,6 @@ further_reading:
 - link: "/logs/parsing"
   tag: "Logs"
   text: Learn more about parsing
-title: Explore
-kind: documentation
-autotocdepth: 2
-customnav: lognav
-description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
-beta: true
 ---
 
 <div class="alert alert-info">
