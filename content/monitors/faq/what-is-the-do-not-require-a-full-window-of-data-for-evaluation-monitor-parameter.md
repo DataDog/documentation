@@ -2,6 +2,10 @@
 title: What is the "Do (not) require a full window of data for evaluation" monitor parameter?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
 ---
 
 {{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true" popup="true" >}}
@@ -35,3 +39,5 @@ There are 2 main scenarios for which you'll need to **disable** the full window
 * It doesn't really make sense to ask for a full window of data, and using this parameter may cause the monitor to skip all evaluations and not alert you at all.
 
 For other scenarios, this **full window of data** doesn't have much influence on your monitor.
+
+{{< partial name="whats-next/whats-next.html" >}}

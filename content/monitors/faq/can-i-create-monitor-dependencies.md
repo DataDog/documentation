@@ -2,6 +2,16 @@
 title: Can I create monitor dependencies?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a downtime to mute a monitor
 ---
 
 While Datadog does fully support [composite monitors](/monitors/monitor_types/composite), there is not currently an official way to create alerting trees.
@@ -50,3 +60,5 @@ That's alot of missing data - check first to see if there is an AWS outage?
 @webhook-unmute-ALL-monitor-scope 
 {{/is_alert_recovery}}
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}

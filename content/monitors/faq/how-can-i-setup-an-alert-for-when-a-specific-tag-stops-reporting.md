@@ -2,6 +2,13 @@
 title: How can I setup an alert for when a specific tag stops reporting?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
 ---
 
 In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor](/monitors/) for such an alert scheme within Datadog:
@@ -13,3 +20,5 @@ In some cases, you would like to know when one of your tag disappears from some 
 {{< img src="monitors/faq/tag_stop_reporting.png" alt="Tag stop reporting" responsive="true" popup="true" >}}
 
 You should then be notified when the tag stops to be sent along with the chosen metric!
+
+{{< partial name="whats-next/whats-next.html" >}}

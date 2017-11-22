@@ -2,6 +2,16 @@
 title: Sending Datadog Events to your Moogsoft AIOps instance.
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a downtime to mute a monitor
 ---
 
 Moogsoft supports the ingesting of Datadog Events via Webhooks.  Below you will find some quick instructions on how to enable this capability.  
@@ -46,3 +56,5 @@ Definitions of all fields available for mapping between Moogsoft and Datadog can
 {{< img src="monitors/faq/notification.png" alt="notification" responsive="true" popup="true" >}}
 
 Thank you to the Moogsoft team for writing the original article: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,6 +2,13 @@
 title: Can I set up a monitor for a metric that hasn't been reported to Datadog yet?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
 ---
 
 **But why create a monitor for a metric that doesn't even exist?**
@@ -23,3 +30,5 @@ Though the metric may not yet be recognized by Datadog, the monitor should still
 **Using the API**
 
 Refer to our [Monitors API](/api/#monitors) on creating a metric monitor.
+
+{{< partial name="whats-next/whats-next.html" >}}

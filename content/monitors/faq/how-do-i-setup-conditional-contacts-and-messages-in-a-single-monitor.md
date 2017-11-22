@@ -2,6 +2,13 @@
 title: How do I setup conditional contacts and messages in a single monitor?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
 ---
 
 ## Conditional Contacts
@@ -37,3 +44,5 @@ alert for {{host.customer}} on {{host.name}} @slack-{{host.customer}}
 ```
 
 In this case, @slack-{{host.customer}} could render to @slack-customer1 or @slack-customer2, which would then alert either the #customer1 or #customer2 channel in Slack.
+
+{{< partial name="whats-next/whats-next.html" >}}

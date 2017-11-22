@@ -2,6 +2,13 @@
 title: How do I add custom template variables to my monitor message?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
 ---
 
 ## Overview 
@@ -62,3 +69,6 @@ curl -X POST -H "Content-type: application/json" \
 The `by {host}` section of the monitor query creates a multi alert by host. You can also group by multiple tag keys, e.g. `by {host,env}`.
 
 For more information about using our API to manage monitors, see [our API docs](/api/#monitors)
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

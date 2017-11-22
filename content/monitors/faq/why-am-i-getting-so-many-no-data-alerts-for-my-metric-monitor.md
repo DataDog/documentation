@@ -2,6 +2,13 @@
 title: Why am I getting so many "No Data" Alerts for my Metric Monitor
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a downtime to mute a monitor
 ---
 
 *No Data* Alerts are a great way to be notified when an Integration/application is no longer submitting metrics to Datadog.  
@@ -20,3 +27,5 @@ This option is typically recommended for metrics being reported by the Datadog A
 Since Monitors perform an evaluation every minute, it is looking back on the past X minutes of data. For backfilled metrics, like those coming from AWS, the monitor may be looking at a period of time when the data is simply not in Datadog. This will cause false No Data alerts. Setting this field allows you to have the monitor wait, 900 seconds, so that the AWS metrics have 900 seconds to be available within Datadog before the monitor begins evaluation. 
 
 Please contact [us](/help) should you experience any issues. 
+
+{{< partial name="whats-next/whats-next.html" >}}
