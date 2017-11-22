@@ -25,9 +25,9 @@ When the dashboard is no longer in “live” mode, the vertical pink line and t
 
 {{< img src="forecasts/dashboard_past.png" >}}
 
-To create a forecast graph, start by adding a timeseries graph to your dashboard. Be sure to select “Timeseries” as the visualization type. Now, click on the **+** icon on the right side of your expression. Choose the **"Forecast”** function in the **“Algorithms”** submenu. You should immediately see the preview update to include the forecast visualization. A number of the graphing options will disappear, as forecasts have a unique visualization.
+To create a forecast graph, start by adding a timeseries graph to your dashboard. Be sure to select **Timeseries** as the visualization type. Now, click on the **+** icon on the right side of your expression. Choose the **Forecast** function in the **Algorithms** submenu. You should immediately see the preview update to include the forecast visualization. A number of the graphing options will disappear, as forecasts have a unique visualization.
 
-The function has two parameters. The first parameter is for selecting which algorithm (see [Forecast Algorithms](guides/forecasts/#forecast-algorithms)) will be used. The second parameter is deviations, and you can tune this to change the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most “normal” points. After successfully adding forecast, your editor should show something like this:
+The function has two parameters. The first parameter is for selecting which algorithm (see [Forecast Algorithms](#forecast-algorithms)) will be used. The second parameter is deviations, and you can tune this to change the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most “normal” points. After successfully adding **Forecast**, your editor should show something like this:
 
 {{< img src="forecasts/query_editor.png" >}}
 
@@ -40,8 +40,8 @@ Navigate to the [New Monitor page](https://app.datadoghq.com/monitors#create/for
 There are three required options for setting up a forecast alert:
 
 <ol type="a">
-  <li> This is the threshold at which an alert is triggered. For a metric like `system.disk.in_use` this should be set to 1.0, whereas for a metric like `system.mem.pct_usable` this should be set to 0.0. A recovery threshold is also required.
-  <li> This is the the condition on which an alert is triggered. For a metric like `system.disk.in_use` this should be set to “above or equal to”, whereas for a metric like `system.mem.pct_usable` this should be set to “below or equal to”.
+  <li> The threshold at which an alert is triggered. For a metric like `system.disk.in_use` this should be set to 1.0, whereas for a metric like `system.mem.pct_usable` this should be set to 0.0. A recovery threshold is also required.
+  <li> The condition on which an alert is triggered. For a metric like `system.disk.in_use` this should be set to “above or equal to”, whereas for a metric like `system.mem.pct_usable` this should be set to “below or equal to”.
   <li> Control how far in advance you would like to be alerted before your metric hits its critical threshold.
 </ol>
 
@@ -87,6 +87,8 @@ The “default” model is what Goldilocks would choose, and will adjust to the 
 ### Accessing Advanced Options
 The advanced options are exposed under the **Advanced** tab in the **New Monitor** page. To specify them in the dashboards (using the JSON tab) or in the API, the format is as follows.
 
-For Linear: `forecast(metric_name, ‘linear’, 1, interval='60m', history='1w', model='default')`, where the options for `model` are: `default`, `simple`, and `reactive`
+For Linear: `forecast(metric_name, ‘linear’, 1, interval='60m', history='1w', model='default')`, where the options for `model` are: `default`, `simple`, and `reactive`.
 
-For Seasonal: `forecast(metric_name, ‘seasonal’, 1, interval='60m', seasonality=’weekly’)`, where the options for `seasonality` are: `hourly`, `daily`, `weekly`
+For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality='weekly')`, where the options for `seasonality` are: `hourly`, `daily`, and `weekly`.
+
+The start and end time to specify when using the API are the start and end times of the forecast itself. So if you want the forecast for the next day you would specify the start to be `now` and the end to be `1 day ahead`.
