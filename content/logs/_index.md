@@ -19,10 +19,11 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
+
 {{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
 
 ## Getting started with the Agent
@@ -46,7 +47,8 @@ If an integration does not support logs by default, you may need to use use the 
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-### Crawlers
+
+### Cloud
 * [AWS](/logs/aws)
 
 ### Frameworks

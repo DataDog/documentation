@@ -255,6 +255,7 @@ logs:
     sourcecategory: sourcecode
 ```
 
+
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
 ## what's next?

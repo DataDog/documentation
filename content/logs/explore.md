@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview 
@@ -163,8 +163,6 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching wether the search name or query.
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true">}}
-
-
 
 ### Escaping of special characters
 The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.

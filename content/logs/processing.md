@@ -15,13 +15,14 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 
 ## Overview
 
 To access the processing panel use the upper left menu:
+
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines pannel" responsive="true" popup="true">}}
 
 ## Processing Pipelines 
@@ -34,6 +35,7 @@ With pipelines, you can parse and enrich your logs by chaining them sequentially
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
 So for instance a processing pipeline can transform this log:
+
 {{< img src="logs/processing/original_log.png" alt="original log" responsive="true" popup="true">}}
 
 into this log: 
@@ -140,6 +142,7 @@ Into this log:
 ### URL Parser 
 
 This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
+
 {{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" popup="true">}}
 
 ### Useragent parser

@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 
@@ -213,6 +213,7 @@ Here we just look for the id to extract
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
+
 {{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" popup="true">}}
 
 ## what's next?
