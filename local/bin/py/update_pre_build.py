@@ -171,34 +171,14 @@ class PreBuild:
             self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
             self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
-        globs = ['{}{}'.format(self.options.dogweb, x) for x in dogweb_globs]
-        globs.extend(['{}{}'.format(self.options.integrations, x) for x in integrations_globs])
+        globs = []
+        for d_glob, i_glob in zip(dogweb_globs, integrations_globs):
+            globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob)])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
-
-        for int_file_name in tqdm(glob.iglob('{}*.md'.format(self.content_integrations_dir))):
-            if int_file_name not in self.initial_integration_files:
-                item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(int_file_name).replace('.md', '')]
-                with open(int_file_name, 'r+') as f:
-                    content = f.read()
-                    template = "---\n{front_matter}\n---\n\n{content}\n"
-                    if item and len(item) > 0:
-                        item[0]['kind'] = 'integration'
-                        item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace('Integration', '').strip()
-                        item[0]['git_integration_title'] = item[0].get('name', '').lower()
-                        if item[0].get('type', None):
-                            item[0]['ddtype'] = item[0].get('type')
-                            del item[0]['type']
-                        fm = yaml.dump(item[0], default_flow_style=False).rstrip()
-                    else:
-                        fm = {'kind': 'integration'}
-                    out = template.format(front_matter=fm, content=content)
-                    f.truncate()
-                    f.seek(0)
-                    f.write(out)
 
         self.merge_integrations()
 
@@ -291,9 +271,34 @@ class PreBuild:
                     result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, re.DOTALL)
+                result = self.add_integration_frontmatter(new_file_name, result)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
+
+    def add_integration_frontmatter(self, file_name, content):
+        """
+        Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
+        :param file_name: new integration markdown filename e.g airbrake.md
+        :param content: string of markdown content
+        :return: formatted string
+        """
+        fm = {}
+        template = "---\n{front_matter}\n---\n\n{content}\n"
+        if file_name not in self.initial_integration_files:
+            item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(file_name).replace('.md', '')]
+            if item and len(item) > 0:
+                item[0]['kind'] = 'integration'
+                item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace(
+                    'Integration', '').strip()
+                item[0]['git_integration_title'] = item[0].get('name', '').lower()
+                if item[0].get('type', None):
+                    item[0]['ddtype'] = item[0].get('type')
+                    del item[0]['type']
+                fm = yaml.dump(item[0], default_flow_style=False).rstrip()
+            else:
+                fm = {'kind': 'integration'}
+        return template.format(front_matter=fm, content=content)
 
 if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")
