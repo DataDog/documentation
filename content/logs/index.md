@@ -9,11 +9,11 @@ beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" >}}
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
 
 ## Getting started with the Agent
 
@@ -33,16 +33,28 @@ To start collecting logs for a given integration, you need to uncomment the logs
 If an integration does not support logs by default, you may need to use use the custom file configuration below.
 
 <div class="alert alert-warning">
-During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations and example configuration files is available below:
+During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
+### Cloud
+* [AWS](/logs/aws)
+
+### Frameworks
+
+* [Java](/logs/languages/java) 
+* [C#](/logs/languages/csharp)
+* [Go](/logs/languages/go)
+* [NodeJs](/logs/languages/nodejs)
+* [Ruby](/logs/languages/ruby)
+
+### Agent checks
+
 * Apache: [apache.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
-* AWS: [See our dedicated page](/logs/aws)
 * Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
 * IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
-* Java: [See our dedicated page for log4j, Log4j2 and Slf4j](/logs/java)
 * Mongo: [mongo.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+
 
 ## Custom log collection
 
@@ -64,7 +76,7 @@ If you want to gather your python app logs for instance stored in **/var/log/mya
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
-{{< highlight yaml >}}
+```yaml
 init_config:
 
 instances:
@@ -84,7 +96,7 @@ logs:
     service: myapplication
     source: python
     sourcecategory: sourcecode
-{{< /highlight >}}
+```
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
@@ -92,7 +104,7 @@ Set `type` to **tcp** or **udp** depending of your protocol then specify the `po
 Example: 
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
-{{< highlight yaml >}}
+```yaml
 init_config:
 
 instances:
@@ -105,7 +117,7 @@ logs:
     source: php
     sourcecategory: front
 
-{{< /highlight >}}
+``
 
 ### Filter logs
 
@@ -116,7 +128,7 @@ If the pattern is contained in the message the log is excluded, and not sent to 
 
 Example: Filter out logs where the user field matches the datadoghq.com domain
 
-```
+```yaml
 init_config:
 
 instances:
@@ -141,7 +153,7 @@ If your logs contain sensitive information that you wish you redact, you can con
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
 
-```
+```yaml
 init_config:
 
 instances:
@@ -164,7 +176,7 @@ logs:
 
 If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
 
-### `date` attribute
+### *date* attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
 However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
@@ -184,11 +196,11 @@ You can also specify alternate attributes to use as the source of a log's date b
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-### `message` attribute
+### *message* attribute
 
 By default, Datadog will ingest the value of message as the body of the log entry. That value will then be highlighted and display in the [log list](/logs/explore/#log-list), where it will be indexed for [full text search](/logs/explore/#search-bar).
 
-### `severity` attribute
+### *severity* attribute
 
 Each log entry may specify a severity level which will be made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official severity:
 
@@ -196,13 +208,13 @@ Each log entry may specify a severity level which will be made available for fac
 
 If you would like to remap some severities existing in the `severity` attribute, you can do so with the [log severity remapper](/logs/processing/#log-severity-remapper)
 
-### `host` attribute
+### *host* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s host:
 
 * `syslog.hostname`
 
-### `service` attribute
+### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s service:
 
@@ -212,11 +224,11 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
 
 ## What's next
 

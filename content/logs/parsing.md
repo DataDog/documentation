@@ -2,14 +2,13 @@
 title: Parsing
 kind: documentation
 autotocdepth: 2
-hideguides: true
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
 beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 
@@ -40,7 +39,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 You would have at the end this structued log:
 
-{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" >}}
+{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" >}}
 
 ## Matcher
 
@@ -123,12 +122,12 @@ Rule
 rule keyvalue("="," "))
 ```
 
-{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" >}}
+{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" >}}
 
 You don't need to specify the name of your parameters as they were already contained in the log.
 If you add an **extract** parameter in your rule pattern you would have:
 
-{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" >}}
+{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" >}}
 
 ### Parsing dates
 
@@ -141,6 +140,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
 |11/10/2014| `%{date("dd/mm/yyyy"):date}`| {"date": 1412978400000}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
+|Thu Nov 1 08:29:03 2016 | `%{date("EEE MMM d HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
 |06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}` | {"date": 1362501390000}|
 |2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
@@ -168,9 +168,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" >}}
+{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" >}}
 
-{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" >}}
+{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" >}}
 
 ### Optional attribute 
 
@@ -188,9 +188,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
-{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" >}}
+{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" >}}
 
-{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" >}}
+{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" >}}
 
 ### Regex 
 Use the regex matcher to match any substring of your log message based on literal regex rules.
@@ -206,7 +206,7 @@ Here we just look for the id to extract
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
-{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" >}}
+{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" >}}
 
 ## What's next 
 

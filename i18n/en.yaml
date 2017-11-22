@@ -178,6 +178,14 @@
 - id: customnav_lognav_aws
   translation: "AWS Log Collection"
 
+- id: customnav_lognav_go
+  translation: "Go Log Collection"
+- id: customnav_lognav_csharp
+  translation: "C# Log Collection"
+- id: customnav_lognav_nodejs
+  translation: "NodeJS Log Collection"
+- id: customnav_lognav_ruby
+  translation: "Ruby Log Collection"
 # taxonomies
 - id: groups_return_to_videos
   translation: "Return to All Video Groups."

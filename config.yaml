@@ -190,7 +190,7 @@ languages:
         - identifier: customnav_infrastructurenav_process
           url: "infrastructure/process"
           weight: 50
-          
+
       lognav:
         - identifier: customnav_lognav
           url: "#"
@@ -208,11 +208,23 @@ languages:
           url: logs/parsing/
           weight: 50
         - identifier: customnav_lognav_java
-          url: logs/java/
-          weight: 60
+          url: /logs/languages/java/
+          weight: 70
+        - identifier: customnav_lognav_go
+          url: /logs/languages/go/
+          weight: 80
+        - identifier: customnav_lognav_csharp
+          url: /logs/languages/csharp/
+          weight: 90
+        - identifier: customnav_lognav_nodejs
+          url: /logs/languages/nodejs/
+          weight: 100
+        - identifier: customnav_lognav_ruby
+          url: /logs/languages/ruby/
+          weight: 110
         - identifier: customnav_lognav_aws
           url: logs/aws/
-          weight: 70
+          weight: 120
 
   ja:
     #languagename: "日本語"
