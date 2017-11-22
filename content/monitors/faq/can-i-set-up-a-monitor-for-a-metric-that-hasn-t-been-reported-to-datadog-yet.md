@@ -8,7 +8,7 @@ customnav: monitornav
 
 This is useful in situations where you want to be alerted on a system-critical metric that won't become available until a later time. A common use case is you're getting ready to launch a new app and want to set up some monitors in advance. However, since your app is still in staging and your Agents only monitor your prod environment, the metrics that you want to monitor don't exist in the UI:
 
-{{< img src="monitors/faq/my_custom_metric.png" alt="my_custom_metric" responsive="true">}}
+{{< img src="monitors/faq/my_custom_metric.png" alt="my_custom_metric" responsive="true" popup="true" >}}
 
 To workaround this, you can make use of the monitor's Source tab or create events via the [API](/api).
 

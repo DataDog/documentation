@@ -4,7 +4,7 @@ kind: faq
 customnav: monitornav
 ---
 
-{{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true">}}
+{{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true" popup="true" >}}
 
 There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
 

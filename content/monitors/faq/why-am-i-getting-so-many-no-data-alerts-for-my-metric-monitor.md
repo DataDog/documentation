@@ -8,7 +8,7 @@ customnav: monitornav
 When utilizing a [Metric Monitor](/monitors/monitor_types/metric) for a metric that isn't always reported at the same frequency or is reported with a timestamp slightly in the past, such as a metric from the [AWS Integration](/integrations/amazon_web_services), you may receive No Data alerts despite seeing these values in Datadog.  
 There are a couple Monitor configuration options that can be edited to properly evaluate over these types of metrics: 
 
-{{< img src="monitors/faq/AWS_Monitor_Config.png" alt="AWS monitor config" responsive="true">}}
+{{< img src="monitors/faq/AWS_Monitor_Config.png" alt="AWS monitor config" responsive="true" popup="true" >}}
 
 1. The first section of this image displays that this metric: `aws.ec2.cpuutilization` is coming in with a slight delay.  
 This is due to the limitations on how soon this metric is available from Cloudwatch.

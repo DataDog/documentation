@@ -56,7 +56,7 @@ Setup event correlation at design time by editing any graph on both Time Boards 
 
 ## Event Correlation at View Time
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true">}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" popup="true" >}}
 
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
 

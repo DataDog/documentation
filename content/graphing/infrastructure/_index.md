@@ -22,7 +22,7 @@ further_reading:
 
 The Infrastructure list page shows all hosts monitored by your datadog application:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
 
 Note: All hosts that have not sent data in 24 hours will disappear from the infrastructure list; you can still query against them, but they will not appear in drop downs.
 
@@ -76,13 +76,13 @@ The names collected by the Agent (detailed [above](#agent-host-names)) are added
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true">}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true" popup="true" >}}
 
 ### Export your infrastructure list and Agent versions
 
 If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List. 
 
-{{< img src="graphing/infrastructure/index/inf_list.png" alt="inf list" responsive="true">}}
+{{< img src="graphing/infrastructure/index/inf_list.png" alt="inf list" responsive="true" popup="true" >}}
 
 Clicking this link will provide you with a JSON formatted list of all your hosts.  
 

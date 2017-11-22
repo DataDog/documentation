@@ -10,4 +10,4 @@ If you want to schedule a downtime over a subset of hosts, a good way to do so 
 
 One easy way you can take advantage of to create new host-tags directly in the Datadog UI from your [Infrastructure List](/graphing/infrastructure) and [Host Map](/graphing/infrastructure/hostmap) by selecting a host and hitting the **Edit Tags** button (shown below), or via [our API](/api/#tags-add). 
 
-{{< img src="monitors/faq/edit_tag.png" alt="edit tag" responsive="true">}}
+{{< img src="monitors/faq/edit_tag.png" alt="edit tag" responsive="true" popup="true" >}}

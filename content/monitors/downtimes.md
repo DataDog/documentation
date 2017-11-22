@@ -29,11 +29,11 @@ You can schedule downtimes and/or mute your Datadog monitors so that they will 
 
 Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state will not trigger an event (nor the notification channels that that event would have set off).
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" popup="true" >}}
 
 If a monitor has a transition from the RESOLVED state to either ALERT or WARNING while it has been silenced, and if it then remains in that ALERT or WARNING state once the silence-time expires, then the monitor will trigger an ALERT or WARNING event at the time that the silencing expires.
 
-{{< img src="monitors/downtimes/downtime_stop.png" alt="downtime stop" responsive="true">}}
+{{< img src="monitors/downtimes/downtime_stop.png" alt="downtime stop" responsive="true" popup="true" >}}
 
 By default, this is not true of NO DATA alerts: if a monitor has transitioned from the RESOLVED state to NO DATA while it has been silenced, and if it remains in a NO DATA state once the silence-time expires, then there will be no NO DATA alert. But once data returns for that monitor scope, the monitor will trigger a recovery event. 
 
@@ -43,11 +43,11 @@ This may seem unintuitive, but is the expected behavior today, and it has been 
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
-{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true">}}
+{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" popup="true" >}}
 
 The Manage Downtime page will display a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" responsive="true">}}
+{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" responsive="true" popup="true" >}}
 
 ## Schedule Downtime
 
@@ -55,7 +55,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
 
-   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true">}}
+   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" popup="true" >}}
 
    You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.  Please refer to the [scope section](/graphing/miscellaneous/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
 
@@ -65,13 +65,13 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
 
-   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true">}}
+   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true" popup="true" >}}
 
    You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accomimodate regularly scheduled downtimes.
 
 3. Add an optional message to notify your team
 
-   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true">}}
+   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" popup="true" >}}
 
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 

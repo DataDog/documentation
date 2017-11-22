@@ -55,7 +55,7 @@ You can export the configuration JSON for a monitor right from the create screen
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true">}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
 
 ## Auditing Monitors
 
