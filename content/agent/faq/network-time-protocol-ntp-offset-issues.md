@@ -2,6 +2,13 @@
 title: Network Time Protocol (NTP) Offset Issues
 kind: faq
 customnav: main_references
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
+- link: "/integrations/ntp/"
+  tag: Integration
+  text: Learn more about the Datadog-NTP integration
 ---
 
 If you have noticed any of the following issues, they may be related to the NTP offset on the hosts that are reporting metrics through the Agent:
@@ -33,10 +40,14 @@ Instructions for syncing the system clock with NTP vary based on the operating s
 ## Prevent and check NTP issues 
 
 To prevent NTP issues, you can leverage our monitor for NTP offset to alert you when there is drift on a host.
-{{< img src="faq/monitor_ntp.png" alt="monitor ntp" responsive="true" >}}
+{{< img src="agent/faq/monitor_ntp.png" alt="monitor ntp" responsive="true" popup="true">}}
 
 Also, you can check over all the reporting hosts, the one that have offset issues.
 
 To do so, use our [Check Summary page](https://app.datadoghq.com/check/summary), Inspect the check ntp.in_sync and you'll see a list of the hosts that have NTP issues.
 
 Also note that outgoing UDP traffic over the port 123 should be allowed so the agent can confirm that the local server time is reasonably accurate according the datadog NTP servers.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-This guide will outline the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/windows).
+This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/windows).
 
 ### Starting and Stopping the Agent
 
@@ -19,9 +19,9 @@ The execution of the Agent is controlled by a Windows service.
 
 You can use the Datadog Agent Manager that you can find in the Start Menu.
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" >}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" popup="true">}}
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" >}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" popup="true">}}
 
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`

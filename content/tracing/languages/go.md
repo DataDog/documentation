@@ -46,7 +46,7 @@ Currently, only Go 1.7 is supported. The following Go libraries are supported:
 - [Gorilla Mux](https://github.com/gorilla/mux)
 - [gRPC](https://github.com/grpc/grpc-go)
 
-## Additional Information
+## Further Reading
 
 The Go integration [source code can be found on Github](https://github.com/DataDog/dd-trace-go).
 

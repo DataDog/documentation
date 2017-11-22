@@ -1,14 +1,24 @@
 ---
-title: C# log Collection
+title: C# Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
 ---
 
-To send your C# logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent. Here are setup examples for the `log4net`, `serilog` and `Nlog` logging library
+To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
-We strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
 
 ## Configure your logger
 ### SeriLog
@@ -37,7 +47,7 @@ var elapsedMs = 34;
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-Then check the `log.json` file; You will see the following event:
+Then check the `log.json` file; you will see the following event:
 
 ```json
 {
@@ -60,7 +70,7 @@ Then check the `log.json` file; You will see the following event:
 }
 ```
 
-[Monitor now your log file with your agent]() to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your datadog application
 
 ### NLog
 
@@ -130,9 +140,9 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your agent]() to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your datadog application
 
-### Log4net
+### Log4Net
 
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
@@ -178,7 +188,7 @@ Once the library is in your classpath, attach the following layout to any target
   <!-- The rest of your configuration starts here ... -->
 ```
 
-Instantiate your logger and start to fire your event:
+Instantiate your logger and start to fire your events:
 
 ```csharp
 using log4net;
@@ -207,7 +217,7 @@ namespace Datadog
 }
 ```
 
-If you have followed the instructions you should be see in your file (for example `C:\Projects\Datadog\Logs\log.json`) the following event:
+If you have followed the instructions you should see in your file (for example `C:\Projects\Datadog\Logs\log.json`) the following event:
 
 ```json
 {
@@ -245,4 +255,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
+
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

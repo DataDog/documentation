@@ -2,6 +2,10 @@
 title: Starting Datadog Agent (using supervisord) Error Cannot open an HTTP server socket.error reported errno.EACCES (13)
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 There are a number of issues that can cause the following error when you try starting your datadog agent:
@@ -25,4 +29,6 @@ chown dd-agent -R /opt/datadog-agent/run
 ```
 After making this change, the `/etc/init.d/datadog-agent start` command should successfully be able to start the agent.
 
-If you continue to see this issue despite having taken these steps, drop an email to support@datadoghq.com for some additional direction. 
+If you continue to see this issue despite having taken these steps, contact [us](/help) for some additional direction. 
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -60,19 +60,24 @@ Datadog refers to events that are generated from triggered monitors as Incidents
 
 The best way to identify these in the [Events stream](/graphing/event_stream) is to select the corresponding filter in the filter list:
 
-{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" >}}
+{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true">}}
 
 Incidents are unique to regular events and annotations in that they can be claimed/acknowledged by clicking the **claim** button (shown below) on the parent event or putting a `#claim` in the comments:  
 
-{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" >}}
+{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" popup="true">}}
 
 By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog will pin the user's name and portrait to the record:  
 
-{{< img src="graphing/events/claimed_incident.png" alt="Claimed incident" responsive="true" >}}
+{{< img src="graphing/events/claimed_incident.png" alt="Claimed incident" responsive="true" popup="true">}}
 
 Once claimed, an incident can be resolved by clicking the **resolve** button indicating to the team that the underlying issue has been addressed:
 
-{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" >}}
+{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" popup="true">}}
+
+## Show events unaggregated
+
+Change the “aggregate_up” parameter in the url to `false`.  
+To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link](https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000)
 
 ## Events Email
 
@@ -102,11 +107,11 @@ In the source plain text email, you only have three fields you can control: send
 email address (required), subject (required), and body (optional).
 
 
-{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
+{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" popup="true">}}
 
 #### Datadog Event
 
-{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" >}}
+{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" popup="true">}}
 
 Note that the subject of the email becomes the title of the event and the body
 of the email becomes the body of the event. Although it looks like a tag appears
@@ -121,11 +126,11 @@ In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags, alert type,  date happened,  host, aggregation key, and source type name.  
 **Note: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
 
-{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" >}}
+{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" popup="true">}}
 
 #### Datadog Event
 
-{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" >}}
+{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" popup="true">}}
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
 will be replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message will be ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.  
@@ -138,7 +143,7 @@ The allowable JSON keys can be found in the [events API documentation][eventsapi
 To set up the email, first log in to your Datadog account at
 [https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section will show you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
 
-{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
 
 [integrations]: /integrations
 [agentcheck]: /agent/agent_checks
@@ -146,9 +151,7 @@ To set up the email, first log in to your Datadog account at
 [dd-app]: https://app.datadoghq.com
 
 ## Markdown events
-Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
-
-The detailed markdown syntax can be found <a href="http://daringfireball.net/projects/markdown/syntax#lin">here</a>.
+Datadog event text supports markdown (The detailed markdown syntax can be found [here](http://daringfireball.net/projects/markdown/syntax#lin)).
 Please note that embedding HTML in markdown is not supported with in Datadog.
 
 To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`

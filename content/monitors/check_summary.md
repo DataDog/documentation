@@ -1,4 +1,8 @@
 ---
+title: Check summary
+kind: documentation
+autotocdepth: 2
+customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Monitors"
@@ -15,20 +19,19 @@ further_reading:
 - link: "/monitors/faq"
   tag: "Monitors"
   text: Consult our FAQ
-title: Check summary
-kind: documentation
-autotocdepth: 2
-customnav: monitornav
 ---
+
+## Overview
 
 This page let you see the list of all your checks reporting to Datadog:
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" >}}
+ {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true">}}
 
 
 You can click on a check in order to have more details:
 
-{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true">}}
+{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" popup="true" >}}
 
-## What's Next 
+## Further Reading 
+
 {{< partial name="whats-next/whats-next.html" >}}

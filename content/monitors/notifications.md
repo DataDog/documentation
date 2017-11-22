@@ -1,4 +1,8 @@
 ---
+title: Notifications
+kind: documentation
+autotocdepth: 2
+customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Monitors"
@@ -15,10 +19,6 @@ further_reading:
 - link: "/monitors/faq"
   tag: "Monitors"
   text: Consult our FAQ
-title: Notifications
-kind: documentation
-autotocdepth: 2
-customnav: monitornav
 ---
 
 ## Overview
@@ -26,7 +26,7 @@ customnav: monitornav
 Notifications are a key component of any [monitor](/monitors). You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true">}}
+{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -52,19 +52,19 @@ triggering scope into the message of multi alerts.
 ### Conditional variables for different notification types
 You can have a monitor event display a different message depending on whether the event is a trigger, warning, recovery, or no data notification. These variables use simple if-else logic with the following syntax:
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true">}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" >}}
 
 Here is an example of how you can set it up in the editor:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true">}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" popup="true" >}}
 
 The corresponding trigger event notification will look like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template condiional trigger" responsive="true" >}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template condiional trigger" responsive="true" popup="true">}}
 
 and the recovery notification:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true">}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" >}}
 
 
 The conditional variables available are:
@@ -84,11 +84,11 @@ When your monitor is a multi alert, instead of having a generic message (and fin
 
 Here is an example of how you can use template variables for a multi alert:
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true">}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" popup="true" >}}
 
 and the corresponding event notification:
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true">}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" >}}
 
 
 The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options will automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
@@ -100,7 +100,7 @@ Some tags identifying your triggering scope will automatically be inserted into 
 
 In order to save some space, you can Include triggering tags in notification title. This will make your notification title look like this:
 
-{{< img src="monitors/notifications/templatevar_short.png" alt="template var short" responsive="true">}}
+{{< img src="monitors/notifications/templatevar_short.png" alt="template var short" responsive="true" popup="true" >}}
 
 Note that template variable content is escaped by default. If your variable
 contains JSON or code that you would NOT like to be escaped, then use triple braces instead of double braces (e.g. `{{{event.text}}}`).
@@ -123,7 +123,7 @@ The variable uses the following format:
 
 Here is an example of how you can give a different message depending on the triggering context:
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" >}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true">}}
 
 ## Variable availability
 
@@ -163,7 +163,7 @@ Note that some monitors offer addtional contextual variables based on what you a
 ### {{comparator}}
 
 The {{comparator}} template variable's value is always a relational operator. It will correlate to the relational value selected in the monitor's "Set alert conditions" section:
-{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true">}}
+{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" >}}
 
 For example, when an alert set to trigger when a value rises "above" 50, this syntax:
 ```
@@ -215,7 +215,7 @@ https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{
 
 As you can see, `{{host.name}}` will be replaced with the offending host of the monitor in question. 
 
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true">}}
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" popup="true" >}}
 
 Below you will find additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
 
@@ -226,7 +226,7 @@ https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=
 The above link has more customizable options than your standard System Dashboard.  Here you have additional variables to define.  Most common variables passed into this URL are the following: 
 
 **Fillby, sizeby, filter**: Fill by can be defined by adding fillby:avg:<MetricName>.  Size by can be defined by adding sizeby:avg:<SecondMetricName>.  Filter can be used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding filter=<integration_name>
-{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true">}}
+{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" >}}
 
 The above will color fill the hexagons by system.cpu.system, it will size the hexagons by system.cpu.stolen and add a filter to only include Cassandra hosts. 
 
@@ -235,7 +235,7 @@ The above will color fill the hexagons by system.cpu.system, it will size the he
 ```
 https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
 ```
-{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true">}}
+{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" popup="true" >}}
 
 **Manage Monitors Page** – If you would like to link to a Manage monitors page that displays all of the monitors for the host in question, you can define a link like below:  
 ```
@@ -246,14 +246,24 @@ The above will link to all monitors for this host.  You have other options avai
 ```
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
 ```
-{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true">}}
+{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" popup="true" >}}
 
 If you would like all monitors for a specific application or integration, you can add the following query to the URL q=<integration_name> : 
 ```
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
 
-## Using message template variables to dynamically create @-mentions 
+## Slack integration
+
+### @-mentions in Slack from monitor alert
+
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
+
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" popup="true" >}}
+
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" popup="true" >}}
+
+### Using message template variables to dynamically create @-mentions 
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.  
 
@@ -265,6 +275,6 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 Learn more about this [here](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
 
-## What's Next 
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}

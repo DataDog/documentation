@@ -14,7 +14,7 @@ We will use the metric **system.disk.total** as an example. We want to graph da
  
 When setting up a new graph in a [Timeboard](/graphing/dashboards/timeboard)/[Screenboard](/graphing/dashboards/screenboard) you can use the Editor but you can also switch to the JSON tab to set up advanced queries:
 
-{{< img src="getting_started/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" popup="true">}}
 
 We will now follow each step executed by our backend to perform the query and render a graph line on your dashboard.
  
@@ -37,7 +37,7 @@ In this query we only asked for data associated to host:bubs. So the first step 
  
 As you may have guessed, our backend will find 5 matching sources (see previous paragraph).
 
-{{< img src="getting_started/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" popup="true">}}
 
 The idea is then to aggregate data from these sources together to give you a metric representing the system.disk.total for your host. This will be done at step 3.
  
@@ -66,7 +66,7 @@ How?
 By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. You may see more information [here](/graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs).
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
 
-{{< img src="getting_started/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" popup="true">}}
 
 Our backend will compute a series of local aggregates for each source corresponding to the query.
 
@@ -86,7 +86,7 @@ Now we can mix data from different source into a single line.
 We have ~300 points for each source. Each of them represent a minute.
 In this example, for each minute, Datadog will compute the sum across all sources, resulting in the following graph:
 
-{{< img src="getting_started/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" popup="true">}}
 
 The value obtained (20.61GB) is the sum of the values reported by all sources (see previous image).
  
@@ -109,7 +109,7 @@ See a list of functions offered by Datadog [here](/graphing/miscellaneous/).
  
 #### Grouped queries 
 
-{{< img src="getting_started/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" popup="true">}}
 
 The logic is the same:
  
@@ -117,7 +117,7 @@ The logic is the same:
 2. For each device, our backend performs the query system.disk.total{host:example, device:<device>} as explained in this article.
 3. All final results are graphed on the same graph.
 
-{{< img src="getting_started/from_query_to_graph/metric_graph_7.png" alt="metric_graph_7" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metric_graph_7.png" alt="metric_graph_7" responsive="true" popup="true">}}
 
 Note: rollup or as_count modifiers have to be placed after the by {device} mention.
 
@@ -127,7 +127,7 @@ Note2: you can use more than one group, for instance system.disk.in_use{*} by {h
 
 Arithmetic is applied after time and space aggregation as well (step 4).
 
-{{< img src="getting_started/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" >}}
+{{< img src="getting_started/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" popup="true">}}
 
 #### as_count and as_rate
 

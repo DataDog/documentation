@@ -13,7 +13,7 @@ aliases:
 
 ## Overview
 
-This guide will outline the basic functionality of the Datadog Agent.
+This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/ubuntu).
 
 The process to upgrade from the previous version of the agent is to simply re-run the installation.

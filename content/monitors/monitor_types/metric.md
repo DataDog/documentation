@@ -4,10 +4,25 @@ kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
 description: "Compare values of a metric with a user defined threshold"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
+## Configuration
+
 1. Choose the detection method
-    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" >}}
+    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" popup="true">}}
 
     A **[Threshold alert](/monitors/monitor_types/metric)** compares the value in the selected
     timeframe against a given threshold. There are additional options available
@@ -39,13 +54,13 @@ description: "Compare values of a metric with a user defined threshold"
     arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
+  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" popup="true">}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" >}}
+    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" popup="true">}}
 
     A **simple alert** aggregates over all reporting sources. You will get one
     alert when the aggregated value meets the conditions set below. This works
@@ -69,7 +84,7 @@ description: "Compare values of a metric with a user defined threshold"
       based on your metric. As you change your threshold, you will see the graph
       update with a marker showing the cutoff point.
 
-      {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
+      {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" popup="true">}}
 
       Note that you can use formatted values in this input based on the
       metric itself. For example, if you are monitoring `system.disk.used`, you
@@ -116,21 +131,15 @@ description: "Compare values of a metric with a user defined threshold"
 
 5. Select your **evaluation_delay** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor will evaluate data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor will always have data during evaluation.
 
-6. You can optionally **notify on no data** after a configurable timeframe. At
-   the minimum, your chosen timeframe must be greater than 2x the alerting
-   window. For example, if you are alerting over the last 5 minutes then you
-   would need to wait at least 10 minutes before notifying on missing data.
+6. You can optionally **notify on no data** after a configurable timeframe. At the minimum, your chosen timeframe must be greater than 2x the alerting window. For example, if you are alerting over the last 5 minutes then you would need to wait at least 10 minutes before notifying on missing data.
 
-7. You can opt to **automatically resolve the monitor from a triggered
-   state**. In general you'll want to leave this option off as you only want
-   an alert to be resolved when it's fixed.  
-   This most common use-case for this option is when you have very sparse
-   counters, e.g. for errors. When errors stop occuring the metric will stop
-   reporting. This means the monitor will not resolve because there are not
-   anymore values to trigger a resolution.  
-    You can also choose a **Recovery thresholds**, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.  
-    When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.  
-    **Note**: Your metric value needs to be strictly below/above the recovery threshold for the monitor to recover
+7. You can opt to **automatically resolve the monitor from a triggered state**.  
+  In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.   This most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occuring the metric will stop reporting. This means the monitor will not resolve because there are not anymore values to trigger a resolution. You can also choose a **Recovery thresholds**, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.  
+  When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.  
+  **Note**: Your metric value needs to be strictly below/above the recovery threshold for the monitor to recover
 
-8. Configure your **notification options** Refer to the
-   [Notifications](/monitors/notifications) section of this guide for a detailed options.
+8. Configure your **notification options** Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed options.
+
+## Further Reading 
+
+{{< partial name="whats-next/whats-next.html" >}}

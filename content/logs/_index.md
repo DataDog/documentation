@@ -1,4 +1,11 @@
 ---
+title: Log Collection
+kind: Documentation
+autotocdepth: 2
+hideguides: true
+customnav: lognav
+description: "Configure your Datadog agent to gather logs from your host, containers & services."
+beta: true
 further_reading:
 - link: "/logs/explore"
   tag: "Logs"
@@ -9,26 +16,20 @@ further_reading:
 - link: "/logs/parsing"
   tag: "Logs"
   text: Learn more about parsing
-title: Log Collection
-kind: Documentation
-autotocdepth: 2
-hideguides: true
-customnav: lognav
-description: "Configure your Datadog agent to gather logs from your host, containers & services."
-beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
+
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
 
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation (or update) instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
+If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -46,7 +47,8 @@ If an integration does not support logs by default, you may need to use use the 
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-### Crawlers
+
+### Cloud
 * [AWS](/logs/aws)
 
 ### Frameworks
@@ -126,7 +128,7 @@ logs:
     source: php
     sourcecategory: front
 
-``
+```
 
 ### Filter logs
 
@@ -233,13 +235,12 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true">}}
 
-## What's Next
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-

@@ -6,6 +6,13 @@ aliases:
   - /guides/livecontainers
   - /infrastructure/livecontainers/
 customnav: infrastructurenav
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: "Graphing"
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/process"
+  tag: "Graphing"
+  text: Understand what is going on at any level of your system
 ---
 
 ## Introduction
@@ -15,7 +22,7 @@ customnav: infrastructurenav
 Taking inspiration from bedrock tools like htop and ctop, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.  
 Coupled with Datadog’s integrations with [Docker](/integrations/docker_daemon), [Kubernetes](/integrations/kubernetes), [ECS](/integrations/amazon_ecs), and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time:
 
-{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" >}} 
+{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}} 
 
 ## Installation
 
@@ -62,16 +69,16 @@ In the below, we have filtered down to a Kubernetes cluster of 9 nodes.
 RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
 Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" popup="true">}}
 
 Container environments are dynamic and can be hard to follow.  
 Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are:  
 
-{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" popup="true">}}
 
 It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and understand changes to resource utilization between updates.
 
-{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" popup="true">}}
 
 
 ## Real-time monitoring
@@ -90,3 +97,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

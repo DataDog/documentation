@@ -54,7 +54,8 @@ Now that you have the metric and a visualization in place, you can filter down t
 
 #### Aggregation Method
 
-Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum.
+Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric will have many values for each time interval, coming from many hosts or instances.  
+The aggregation method chosen determines how the metrics will be aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** will add up all of those values and display the sum.
 
 #### Aggregation Groups
 
@@ -69,7 +70,6 @@ In the example above, each point displayed on the screen represents 48 data poin
 To use the rollup function, click the plus sign to the right of the aggregation group and choose rollup from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
-
 
 {{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" >}}
 
@@ -118,7 +118,8 @@ By default, the Y-axis for your graph is set to linear with the minimum and maxi
 
 ### Overlay events for additional context
 
-You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
+You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events.  
+Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
 
 
 ### Create a title
@@ -128,9 +129,6 @@ If you don't enter a title, we will automatically generate a title based on the 
 ### Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
-
-## Next Steps
-Now that you know how to build graphs, look into using them in [Dashboards][8], discovering new metrics in the []
 
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/

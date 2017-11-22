@@ -2,9 +2,16 @@
 title: Want more flexibility with your custom log parser? Add dogstatsd
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
+- link: "/developers/dogstatsd"
+  tag: Developer Tools
+  text: Learn more about DogstatsD
 ---
 
-There are many ways to collect [custom metrics](/getting_started/custom_metrics/) from your datadog agent, as outlined [elsewhere in our knowledge base](/developers/faq/how-do-i-submit-custom-metrics-what-s-their-overhead). One additional method of collecting custom metrics from a datadog agent is by parsing log files: the agent comes with its own [built-in log parser](/agent/faq/how-to-collect-metrics-with-the-agent-s-built-in-log-parser), and you can also write [your own custom log parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser) to collect events or metrics from logs that don't fit the agent's built-in log parser. This method of custom metric collection has certain limitations, and can be fairly difficult to set up, which often makes it not the most appropriate approach to collecting custom metrics. 
+There are many ways to collect [custom metrics](/getting_started/custom_metrics/) from your datadog agent. One additional method of collecting custom metrics from a datadog agent is by parsing log files: the agent comes with its own [built-in log parser](/agent/faq/how-to-collect-metrics-with-the-agent-s-built-in-log-parser), and you can also write [your own custom log parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser) to collect events or metrics from logs that don't fit the agent's built-in log parser. This method of custom metric collection has certain limitations, and can be fairly difficult to set up, which often makes it not the most appropriate approach to collecting custom metrics. 
 
 That being said, sometimes parsing logs just makes sense. And in those cases, the [dogstatsd](/developers/dogstatsd) can be used along with a custom log parser to make for more effective log-parsing.
 
@@ -81,7 +88,7 @@ def logstatsd_parser(logger, line):
 
 And you can see the resulting metric collection below. Because these log lines were all written at virtually the same time, the standalone log parser was only able to collect one metric value, whereas the "logstatsd" version was able to collect the metric for each unique tag value.
 
-{{< img src="agent/faq/collect_metrics.png" alt="Collect Metrics" responsive="true" >}}
+{{< img src="agent/faq/collect_metrics.png" alt="Collect Metrics" responsive="true" popup="true">}}
 
 Of course, gauge type metrics always have their limitations in terms of how frequently you can submit them--if you still run into issues with metric granularity stemming from high-frequency logs, your metric may be better suited for a "counter" type metric, which can also be submitted via the dogstatsd using the statsd.increment() method. 
 

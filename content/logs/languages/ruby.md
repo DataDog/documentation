@@ -1,9 +1,19 @@
 ---
-title: Ruby on Rails log Collection
+title: Ruby on Rails Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
 ---
 
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
@@ -27,7 +37,7 @@ You get a single log line with all the important information, like this:
 method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
 ```
 
-**To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
 
 ## Adding the GEMs
 Add the 2 following GEMs in your project:
@@ -205,3 +215,7 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
     grape_logger.info payload
 end
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

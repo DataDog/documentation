@@ -14,7 +14,7 @@ it can help you bring your infrastructure to heel.
 
 ## Integrations
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" popup="true">}}
 
 * Over 200 integrations [officially listed][3], and we're always adding more.
 * Custom integrations are available [via our API][4], many documented by our active user community.
@@ -24,7 +24,7 @@ in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" popup="true">}}
 
 * All machines show up in the infrastructure overview.
 * Here you can see the tags applied to each machine; as they're assigned to
@@ -35,11 +35,11 @@ for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see [here][6].
+* For more on tagging, please see [here](/agent/tagging).
 
 ## Host Map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" popup="true">}}
 
 The Host Map can be found under the Infrastructure menu and offers the ability to:
 
@@ -52,12 +52,12 @@ To learn more about the Host Map, visit the [Host Map Guide][10].
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" popup="true">}}
 
 The Event Stream is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
-* Great for distributed [teams][7] and maintaining the focus of an investigation.
+* Great for distributed [teams](/account_management/team) and maintaining the focus of an investigation.
 * You can [filter][8] by: user, source, tag, host, status, priority, incident
 
 
@@ -67,14 +67,14 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* [@ notify team members][9], who receive an email
+* [@ notify team members](/graphing/event_stream), who receive an email
 * @support-datadog to ask for assistance
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" >}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" popup="true">}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" popup="true">}}
 
 Dashboards contain [graphs][11] with real-time performance metrics
 
@@ -93,7 +93,7 @@ without access to your data or any other information (via the pencil in the uppe
 
 ## Monitoring
 
-{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
+{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" popup="true">}}
 
 [Monitoring][14] gives you the ability to be notified if the aggregate of a specific
 metric is above or below a certain threshold:
@@ -104,26 +104,15 @@ metric is above or below a certain threshold:
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
-{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" popup="true">}}
 
-## Does the data have to be pushed to Datadog?
-
-Currently, yes:
-
-1. All integrations we have get data flowing almost automatically after
-launching the Agent (intial reporting may take a few minutes, but not longer than 10).
-2. If you have [custom metrics](/getting_started/custom_metrics/), you can indicate specifically where
-to pull the data from.
 
 [1]: /agent/
 [2]: http://www.datadoghq.com/product/
 [3]: http://www.datadoghq.com/integrations/
 [4]: /api/
 [5]: https://github.com/DataDog/dd-agent/
-[6]: /faq/#tagging
-[7]: /faq/#team
 [8]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/
-[9]: /faq/#notify
 [10]: /graphing/infrastructure/hostmap/
 [11]: /graphing/
 [12]: /graphing/miscellaneous/functions/

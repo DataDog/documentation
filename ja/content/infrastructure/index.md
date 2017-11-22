@@ -81,7 +81,7 @@ aliases associated with each host.
 
 {{< img src="infrastructure/index/host_aliases.png" >}}
 
-## What's Next
+## what's next?
 
 * [See all of your hosts together on one screen with the hostmap](/infrastructure/hostmap)
 * [Get real-time visibility of all of the containers across your environment](/infrastructure/livecontainers)

@@ -1,9 +1,19 @@
 ---
-title: Java log Collection
+title: Java Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
@@ -23,11 +33,11 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
 
-**To send your logs to Datadog, we recommend to log into a file and then to monitor this file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
 
-We also strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
-Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging library:
+Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
 ## Configure your logger
 ### Log4j
@@ -159,3 +169,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ```
 
 **MDC are great but for some reason only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

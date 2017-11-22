@@ -2,6 +2,10 @@
 title: Send status in agent custom checks
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 By default the datadog agent sends one service check status for each check enabled. For instance, the nginx check collects 4 status: 1 for each instance of the check (3) + 1 for the check itself. At the moment this 'check status' cannot be used in Datadog, but this is something that we could do in the future.
@@ -25,3 +29,5 @@ else:
 ```
 
 You'll find more information about the service_check function [here](https://gist.github.com/MartinDatadog/f72343f0e4d636c56398) and more information about status check [there](/monitors/).
+
+{{< partial name="whats-next/whats-next.html" >}}

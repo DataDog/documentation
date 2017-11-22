@@ -12,6 +12,6 @@ Instead of having your webhook configured with content-type:application/x-www-f
 
 You should set your webhook with content-type:application/json:
 
-{{< img src="integrations/faq/github_webhook_config.png" alt="github_webhook_config" responsive="true" >}}
+{{< img src="integrations/faq/github_webhook_config.png" alt="github_webhook_config" responsive="true" popup="true">}}
 
 Once updated you should see events flowing normaly in your Datadog application. If not, feel free to reach out directly to [us](/help).

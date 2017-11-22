@@ -87,4 +87,4 @@ Find more details on sending metrics from dogshell by running:
 dog metric post -h
 ```
 
-{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" responsive="true" >}}
+{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" responsive="true" popup="true">}}

@@ -2,6 +2,13 @@
 title: How to collect metrics with the Agent's built-in Log Parser ?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/logs/"
+  tag: Logs
+  text: Learn more about Logs
+- link: "/developers/metrics"
+  tag: Developer Tools
+  text: Learn more about Metrics
 ---
 
 ## Before Setup:
@@ -66,3 +73,7 @@ dogstreams: /Users/Documents/User\ Logs/myapp_run.log
 Then once you restart your agent and subsequently add that line to your log file, in your account you would find a metric point at Sat, 28 May 2016 19:03:07 GMT with the name "applications.function.runtime_seconds" with a value of 24, and tagged by "application:myapp" and "code_author:gus".
 
 A word of warning: For gauge type metrics, only the last value submitted for each unique combination of metric name and tags will be kept for each agent check interval, which is around 15 seconds (this is the same behavior that gauge type metrics have in custom agent checks or dogstatsd). This over-writing is not an issue for count type metrics, where the sum of all submitted values is taken for each check interval.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

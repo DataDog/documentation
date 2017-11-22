@@ -2,6 +2,13 @@
 title: How can I configure a metric monitor to alert on NO change in value?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
 ---
 
 A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` [function](/graphing/miscellaneous/functions) on your query. This will produce the delta values from consecutive data points.
@@ -14,7 +21,7 @@ Next, apply the abs() function to take the absolute value of these deltas. 
 
 These functions can be applied to your query in the UI, via the "+" button.
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors" responsive="true">}}
+{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors" responsive="true" popup="true" >}}
 
 Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API](/api)). See image below.
 
@@ -28,4 +35,6 @@ This configuration will trigger an alert event when no change in value has been 
 
 Other [alert conditions/options](/monitors/monitor_types/#define-the-conditions) can be set to preference. Your monitor's UI configuration should end up looking something like this:
 
-{{< img src="monitors/faq/zero_alert.png" alt="zero_alert" responsive="true">}}
+{{< img src="monitors/faq/zero_alert.png" alt="zero_alert" responsive="true" popup="true" >}}
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -3,6 +3,16 @@ title: How to Send Logs to Datadog via External Log Shippers
 kind: faq
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 ---
 
 The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here](/logs/). 
@@ -212,3 +222,7 @@ In order to get the best use out of your logs in Datadog, it is important to hav
     Open the service administrative tool:
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

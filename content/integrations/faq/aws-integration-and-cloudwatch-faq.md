@@ -25,7 +25,7 @@ We also use other APIs to enrich our metrics data and make our product more use
 
 Datadog will gather the available metrics every 10 minutes for each sub-integration you have installed from a tile or the checklist on the main tile. If you have a large number of AWS resources for a particular sub-integration (e.g. SQS, ELB, DynamoDB,  AWS Custom metrics), this can impact your AWS CloudWatch bill. 
 
-The easiest way for customers to monitor their CloudWatch API usage is to use our AWS Billing integration. See [this guide](/integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage) for how to turn on the Billing integration and create alerts on your CloudWatch API spend.
+The easiest way for customers to monitor their CloudWatch API usage is to use our AWS Billing integration. See [this FAQ](/integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage) for how to turn on the Billing integration and create alerts on your CloudWatch API spend.
 
  
 
