@@ -25,13 +25,9 @@ When the dashboard is no longer in “live” mode, the vertical pink line and t
 
 {{< img src="forecasts/dashboard_past.png" >}}
 
-To create a forecast graph, start by adding a timeseries graph to your dashboard. Be sure to select “Timeseries” as the visualization type. Now, click on the + icon (Add functions and modifiers) on the right side of your expression. Choose the “Forecast” function in the “Algorithms” submenu:
+To create a forecast graph, start by adding a timeseries graph to your dashboard. Be sure to select “Timeseries” as the visualization type. Now, click on the **+** icon on the right side of your expression. Choose the **"Forecast”** function in the **“Algorithms”** submenu. You should immediately see the preview update to include the forecast visualization. A number of the graphing options will disappear, as forecasts have a unique visualization.
 
-{{< img src="forecasts/screenshot2.png" >}}
-
-You should immediately see the preview update to include the forecast visualization. A number of the graphing options will disappear, as forecasts have a unique visualization.
-
-The function has two parameters. The first parameter is for selecting which algorithm (see Forecast Algorithms) will be used. The second parameter is deviations, and you can tune this to change the width of the range of forecasted values. A value of 2 or 3 should be large enough to accurately forecast most “normal” points. After successfully adding forecast, your editor should show something like this:
+The function has two parameters. The first parameter is for selecting which algorithm (see [Forecast Algorithms](guides/forecasts/#forecast-algorithms)) will be used. The second parameter is deviations, and you can tune this to change the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most “normal” points. After successfully adding forecast, your editor should show something like this:
 
 {{< img src="forecasts/query_editor.png" >}}
 
