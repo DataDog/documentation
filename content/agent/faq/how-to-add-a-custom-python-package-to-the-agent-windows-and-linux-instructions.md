@@ -1,5 +1,5 @@
 ---
-title: How to add a custom python package to the agent, Windows and Linux instructions
+title: How to add a custom python package to the agent?
 kind: faq
 customnav: agentnav
 ---

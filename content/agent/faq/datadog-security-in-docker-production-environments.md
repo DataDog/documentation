@@ -2,6 +2,10 @@
 title: Datadog security in Docker production environments
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/basic_agent_usage/docker"
+  tag: Agent
+  text: Learn more about Datadog Docker agent
 ---
 
 The official Docker repository doesn't provide any real signature system. You can [build the container by yourself](https://github.com/DataDog/docker-dd-agent) (a simple clone then docker build . will be enough). The build will install the Agent from our signed APT repo.
@@ -19,3 +23,5 @@ We ask to mount into the Agent a few directories:
 If you use some integrations, you may need to link containers with the Agent so that it can contact it (example: get the status page from Apache). There is no restriction around that (you can namespace, restrict it, etc.) as long as the Agent can get the HTTP page.
 
 You may also want to use [DogStatsD](/developers/dogstatsd), in which case other containers will send UDP datagrams to the [Agent](/agent/). 
+
+{{< partial name="whats-next/whats-next.html" >}}

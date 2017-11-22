@@ -2,6 +2,10 @@
 title: Error Restarting Agent, Already Listening on a Configured Port
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 When attempting to restart the agent, you may encounter this error if the agent didn't shut down correctly:  
@@ -30,3 +34,5 @@ sudo /etc/init.d/datadog-agent start
 ```
 
 If this doesn't solve your issue, please reach out to [us](/help).
+
+{{< partial name="whats-next/whats-next.html" >}}

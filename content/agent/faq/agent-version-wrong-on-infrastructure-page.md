@@ -2,6 +2,13 @@
 title: Agent Version Wrong on Infrastructure Page?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
+- link: "/graphing/infrastructure"
+  tag: Graphing
+  text: Learn more about Infrastructure page
 ---
 
 You may still have an older version of the agent running in the background. You can do the following to resolve this issue.  (Note that these steps are for linux)
@@ -26,3 +33,5 @@ sudo /etc/init.d/datadog-agent start
 ```
 sudo /etc/init.d/datadog-agent info
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}

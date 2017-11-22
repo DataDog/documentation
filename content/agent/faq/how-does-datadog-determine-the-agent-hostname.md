@@ -1,7 +1,11 @@
 ---
-title: How does Datadog determine the agent hostname
+title: How does Datadog determine the agent hostname?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 ## Overview 
@@ -47,3 +51,7 @@ You can see a list of all the hosts in your account from the Infrastructure tab 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
 
 To learn how to rename your host, [reference this article](/agent/faq/how-can-i-change-the-hostname).
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

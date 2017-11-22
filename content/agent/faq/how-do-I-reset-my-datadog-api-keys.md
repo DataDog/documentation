@@ -2,6 +2,10 @@
 title: How do I reset my Datadog API keys?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/account_management/settings"
+  tag: Account Management
+  text: Learn more about your Datadog application settings
 ---
 
 To reset your Datadog API keys do the following:
@@ -31,3 +35,4 @@ If you're using a configuration management tool such as Chef, Puppet or Ansible 
  
 If you need additional assistance please reach out to [us](/help).
  
+{{< partial name="whats-next/whats-next.html" >}}

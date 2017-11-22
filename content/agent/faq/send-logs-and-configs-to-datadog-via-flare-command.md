@@ -2,6 +2,10 @@
 title: Send logs and configs to Datadog via flare command
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 ## Linux and Mac OS X
@@ -101,3 +105,7 @@ Example : 
 The flare will search for any fields like passwords, passwords in a URI, API keys, and Proxy credentials and prevent this info from being sent. 
 
 Since the Datadog Agent is completely open source, you can check out the code for this at any time. See here: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

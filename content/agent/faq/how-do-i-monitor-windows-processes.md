@@ -2,6 +2,10 @@
 title: How do I monitor Windows Processes?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
@@ -25,3 +29,4 @@ To verify that your Process check is working, click on "Logs and Status", then "
 
 Again, due to the sensitivity of yaml, if you've tried the above and cannot get it to work, use the attached file to get yourself started and confirm your syntax.
 
+{{< partial name="whats-next/whats-next.html" >}}

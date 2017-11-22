@@ -2,6 +2,13 @@
 title: Want more flexibility with your custom log parser? Add dogstatsd
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
+- link: "/developers/dogstatsd"
+  tag: Developer Tools
+  text: Learn more about DogstatsD
 ---
 
 There are many ways to collect [custom metrics](/getting_started/custom_metrics/) from your datadog agent. One additional method of collecting custom metrics from a datadog agent is by parsing log files: the agent comes with its own [built-in log parser](/agent/faq/how-to-collect-metrics-with-the-agent-s-built-in-log-parser), and you can also write [your own custom log parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser) to collect events or metrics from logs that don't fit the agent's built-in log parser. This method of custom metric collection has certain limitations, and can be fairly difficult to set up, which often makes it not the most appropriate approach to collecting custom metrics. 

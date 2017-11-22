@@ -2,6 +2,10 @@
 title: Where is the configuration file for the Agent?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 ## Mac OS X
@@ -45,3 +49,7 @@ Agent configuration:
 ```
 \\ProgramData\Datadog\datadog.conf
 ```
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

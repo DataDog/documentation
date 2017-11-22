@@ -2,6 +2,10 @@
 title: Start/Stop/Restart the Datadog Agent
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 ## Mac OS X
@@ -106,3 +110,7 @@ To stop the Agent:
 net stop datadogagent
 ```
 To restart the Agent, run the stop and start commands in succession.
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

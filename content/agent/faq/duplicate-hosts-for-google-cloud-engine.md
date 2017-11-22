@@ -2,6 +2,10 @@
 title: Duplicate Hosts for Google Cloud Engine
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/integrations/google_app_engine"
+  tag: Integration
+  text: Learn more about Datadog Google Cloud Platform integration
 ---
 
 ## Update of the hostname on agents running on Google Cloud Engine instances
@@ -22,3 +26,5 @@ See the [PR](https://github.com/DataDog/dd-agent/pull/1737) and [issue](https://
 
 If you've updated your GCE host(s) to Agent 5.5 without contacting us, you'll see a duplicate host in your Infrastructure List - this will not impact your billing, it's only a visual nuisance.  
 Please [contact us](/help) and we'll enable a feature to disable the duplicate host.
+
+{{< partial name="whats-next/whats-next.html" >}}

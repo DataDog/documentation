@@ -1,7 +1,11 @@
 ---
-title: How do I uninstall the agent ?
+title: How do I uninstall the agent?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 ## Mac OS:
@@ -48,3 +52,7 @@ You can uninstall the agent using Add/Remove Programs, alternatively, it's possi
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
 ```
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

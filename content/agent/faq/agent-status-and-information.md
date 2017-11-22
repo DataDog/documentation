@@ -2,6 +2,10 @@
 title: Agent Status and Information
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 ## Mac OS X
@@ -107,3 +111,5 @@ If you're running on a version older than 5.2 visit the status page in your web 
 
 http://localhost:17125/status
 The status page is supported in Agent version 3.9.1-5.1.1
+
+{{< partial name="whats-next/whats-next.html" >}}

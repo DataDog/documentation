@@ -2,6 +2,10 @@
 title: How to get more logging from the agent?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 When hitting an issue you / Datadog support might need more logging from the Datadog agent to investigate on the possible causes.
@@ -17,3 +21,5 @@ To enable the full debug mode:
 - wait a few minutes to generate some logs
 
 [Look here](/agent/faq/log-locations) to find the location of the logs.
+
+{{< partial name="whats-next/whats-next.html" >}}

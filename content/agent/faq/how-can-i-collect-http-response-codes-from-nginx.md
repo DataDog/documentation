@@ -2,6 +2,13 @@
 title: How can I collect HTTP response codes from Nginx?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
+- link: "/integrations/nginx"
+  tag: Integration
+  text: Learn more about Datadog-Nginx integration
 ---
 The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus you'll need to parse the access logs.
 
@@ -80,3 +87,7 @@ As you can see from the code, the parser will generate a nginx.net.avg_response 
 
 We can now plot the metric in Metric Explorer:
 {{< img src="agent/faq/plot_nginx_metric.png" alt="Plot Nginx metric" responsive="true" popup="true">}}
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

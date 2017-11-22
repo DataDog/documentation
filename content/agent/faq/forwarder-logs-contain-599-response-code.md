@@ -2,6 +2,10 @@
 title: Forwarder logs contain 599 response code
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 ## Symptoms
@@ -82,3 +86,7 @@ If you've done everything above and continue to have issues please send support@
 2. Let us know if you're seeing this across all instances or only a subset - if unique please help us understand what's different
 3. Where is this instances hosted physically? We've seen network issues with service providers upstream from our customers that have resulted in 599's
 4. Please also include the information listed in the "Diagnosis" section above.
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

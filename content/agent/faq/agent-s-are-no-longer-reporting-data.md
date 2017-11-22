@@ -2,6 +2,10 @@
 title: Agent(s) are no longer reporting data
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 If your Datadog account was disabled and then re-enabled your API key was likely reset, to confirm/reset this please do the following:
@@ -21,3 +25,5 @@ If your Datadog account was disabled and then re-enabled your API key was likel
     * Other OS's reference [this link](/agent/faq/start-stop-restart-the-datadog-agent)
 
 If this doesn't help or appear to be applicable, please reach out to [us](/help)
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,6 +2,13 @@
 title: How to get more out of your Kubernetes integration ?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
+- link: "/integrations/kubernetes"
+  tag: Integration
+  text: Learn more about the Datadog-Kubernetes integration
 ---
 
 ## Metrics
@@ -89,3 +96,7 @@ kubectl apply -f ddmaster-ds-kubernetes-events.yaml
 You will only deploy on the agent on one node and this agent will collect kubernetes events.
 
 {{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" popup="true">}}
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

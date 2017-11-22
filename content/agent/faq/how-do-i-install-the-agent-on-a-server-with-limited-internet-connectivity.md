@@ -2,6 +2,13 @@
 title: How do I install the agent on a server with limited internet connectivity?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
+- link: "/agent/proxy"
+  tag: Agent
+  text: Learn more about Proxy
 ---
 
 The setup script provided in the in app agent install instructions requires outbound https access to a number of different endpoints in order to function properly and might not work well with servers that have limited internet access.
@@ -42,3 +49,5 @@ sudo service datadog-agent start 
 ```
 
 ... and you should be good to go!
+
+{{< partial name="whats-next/whats-next.html" >}}

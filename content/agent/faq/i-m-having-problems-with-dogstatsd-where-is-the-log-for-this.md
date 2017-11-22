@@ -2,6 +2,13 @@
 title: I'm having problems with DogStatsD - where is the log for this?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
+- link: "/developers/dogstatsd"
+  tag: Developer Tools
+  text: Learn more about the DogStatsD
 ---
 
 Because DogStatsD can potentially receive a huge amount of data and logging the incoming UDP packets will likely put heavy load onto your resources we don't provide a logging mechanism.
@@ -31,3 +38,5 @@ and then restart your agent:
 ```
 sudo service datadog-agent restart
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}

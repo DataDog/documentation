@@ -2,6 +2,10 @@
 title: How to solve Permission denied errors?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Logs
+  text: Learn more about the Datadog Agent
 ---
 
 When running the Datadog agent on a given host, you may encounter some permissions related issues that would prevent the agent from running properly, such as:
@@ -41,3 +45,5 @@ sudo chown -R dd-agent:dd-agent /var/log/datadog/
 Then [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent). 
 
 More information on the agent logs locations can be found [here](/agent/faq/log-locations).
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,6 +2,13 @@
 title: How to collect metrics or events with a Custom Log Parser
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/logs/"
+  tag: Logs
+  text: Learn more about Logs
+- link: "/developers/metrics"
+  tag: Developer Tools
+  text: Learn more about Metrics
 ---
 
 ## Before Setup:
@@ -181,3 +188,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 This specific log-line parsed with this parser created the following event in datadog:
 {{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true">}}
+
+## What's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,6 +2,16 @@
 title: Can I send extra parameters to my custom parsing function?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
+- link: "/agent/tagging"
+  tag: Agent
+  text: Learn more about Tagging
+- link: "/logs"
+  tag: Logs
+  text: Learn more about Loggin with Datadog
 ---
 
 Yes you can send extra parameters to your parsing function.
@@ -45,3 +55,5 @@ In my configuration file I would have: 
 ```
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}

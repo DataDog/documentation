@@ -2,6 +2,10 @@
 title: How do I monitor a Windows Service?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: Agent
+  text: Learn more about the Datadog Agent
 ---
 
 On your target host, first launch the Datadog Agent Manager and select the "Windows Service" integration from the list (see below)
@@ -19,3 +23,5 @@ When adding your own services, be sure to follow the formatting exactly as shown
 Also, any time you modify an Integration you’ll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
 For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/agent/faq/how-do-i-monitor-windows-processes/) or [WMI Integration](/integrations/wmi)). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
+
+{{< partial name="whats-next/whats-next.html" >}}
