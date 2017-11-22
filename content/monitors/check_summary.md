@@ -21,6 +21,8 @@ further_reading:
   text: Consult our FAQ
 ---
 
+## Overview
+
 This page let you see the list of all your checks reporting to Datadog:
 
  {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true">}}
