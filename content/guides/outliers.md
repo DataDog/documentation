@@ -150,4 +150,3 @@ When setting up an outlier alert, an important parameter is the size of the time
 Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
 {{< img src="outliers/outliers-banding.png" >}}
-
