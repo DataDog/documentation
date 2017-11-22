@@ -117,7 +117,7 @@ logs:
     source: php
     sourcecategory: front
 
-``
+```
 
 ### Docker log collection
 
