@@ -1,4 +1,14 @@
 ---
+further_reading:
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 title: AWS Log Collection
 kind: Documentation
 autotocdepth: 2
@@ -112,7 +122,5 @@ You can then collect the log from the s3 bucket thanks to the lambda function.
 
 ## What's next
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
-* Learn more about [parsing](/logs/parsing)
+{{< partial name="whats-next/whats-next.html" >}}
 

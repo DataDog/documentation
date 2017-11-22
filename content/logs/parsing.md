@@ -1,4 +1,11 @@
 ---
+further_reading:
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Logs"
+  text: Learn how to process your logs
 title: Parsing
 kind: documentation
 autotocdepth: 2
@@ -210,5 +217,4 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 
 ## What's next 
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
+{{< partial name="whats-next/whats-next.html" >}}

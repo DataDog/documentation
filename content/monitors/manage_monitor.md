@@ -1,4 +1,20 @@
 ---
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a downtime to mute a monitor
+- link: "/monitors/check_summary"
+  tag: "Monitors"
+  text: See all your checks into one place
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 title: Manage Monitor
 kind: documentation
 autotocdepth: 2
@@ -87,8 +103,4 @@ In writing your search queries, you can use all the same fields available on the
 
 ## What's next ? 
 
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)
+{{< partial name="whats-next/whats-next.html" >}}

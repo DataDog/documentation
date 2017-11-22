@@ -1,4 +1,14 @@
 ---
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: ""
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/livecontainers"
+  tag: ""
+  text: Get real-time visibility of all of the containers across your environment
+- link: "/graphing/infrastructure/process"
+  tag: ""
+  text: Understand what is going on at any level of your system
 title: Infrastructure List
 kind: documentation
 autotocdepth: 3
@@ -103,10 +113,6 @@ See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a5
 
 ## What's next
 
-* [See all of your hosts together on one screen with the hostmap][1]
-* [Get real-time visibility of all of the containers across your environment][2]
-* [Understand what is going on at any level of your system][3]
+{{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/infrastructure/hostmap
-[2]: /graphing/infrastructure/livecontainers
-[3]: /graphing/infrastructure/process
+

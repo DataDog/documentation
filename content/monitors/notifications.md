@@ -1,4 +1,20 @@
 ---
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a downtime to mute a monitor
+- link: "/monitors/check_summary"
+  tag: "Monitors"
+  text: See all your checks into one place
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 title: Notifications
 kind: documentation
 autotocdepth: 2
@@ -261,8 +277,4 @@ Learn more about this [here](/monitors/faq/how-do-i-setup-conditional-contacts-a
 
 ## What's next ? 
 
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)
+{{< partial name="whats-next/whats-next.html" >}}

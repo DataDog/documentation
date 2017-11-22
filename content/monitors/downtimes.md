@@ -1,4 +1,20 @@
 ---
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Monitors"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/check_summary"
+  tag: "Monitors"
+  text: See all your checks into one place
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 title: Downtimes
 kind: documentation
 autotocdepth: 2
@@ -60,9 +76,4 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
 ## What's next ? 
-
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Manage your monitors](/monitors/manage_monitor)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)
+{{< partial name="whats-next/whats-next.html" >}}

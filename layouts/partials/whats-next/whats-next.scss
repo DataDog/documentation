@@ -1,0 +1,34 @@
+$ddpurple:    #774DA2;
+
+.whatsnext {
+  .list-group-item {
+    margin-bottom: 0;
+    border-bottom:1px solid transparent;
+    &:last-child {
+      border-bottom:1px solid rgba(0, 0, 0, 0.125);
+      &:hover {
+        border-bottom:1px solid $ddpurple;
+      }
+    }
+    img {
+      max-width:24px;
+    }
+    &:hover,
+    &.active {
+      &> .hover {
+        display:inline;
+      }
+      &> .static {
+        display:none;
+      }
+    }
+    .hover {
+      display:none;
+    }
+    .badge {
+      font-weight: 200;
+      border-radius: 2px;
+      margin-left: 9px;
+    }
+  }
+}

@@ -1,4 +1,11 @@
 ---
+further_reading:
+- link: "/logs/explore"
+  tag: "Logs"
+  text: Learn how to explore your logs
+- link: "/logs/parsing"
+  tag: "Logs"
+  text: Learn more about parsing
 title: Processing
 kind: documentation
 autotocdepth: 2
@@ -150,5 +157,4 @@ Give the following results:
 
 ## What's next
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn more about [parsing](/logs/parsing)
+{{< partial name="whats-next/whats-next.html" >}}

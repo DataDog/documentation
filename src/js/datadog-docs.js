@@ -7,7 +7,7 @@ $(document).ready(function () {
     };
 
     $('table').each(function() {
-        $(this).addClass('table-responsive-sm');
+        $(this).addClass('table-responsive');
     });
 
     // API page

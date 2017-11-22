@@ -59,6 +59,8 @@ $(document).ready(function () {
     $('#popupImageModal').on('show.bs.modal', function (e) {
 
     }).on('shown.bs.modal', function (e) {
+        $('body').removeClass('modal-open');
+        $(window).on('scroll', detectScrollWhileOpen);
         var modal = $(this);
         modal.hide();
         var url = e.relatedTarget.href;
@@ -76,6 +78,11 @@ $(document).ready(function () {
     }).on('hide.bs.modal', function(e) {
         $('#popupImageModal .modal-body').empty();
     });
+
+    function detectScrollWhileOpen() {
+        $('#popupImageModal').modal('hide');
+        $(window).off('scroll', detectScrollWhileOpen);
+    }
 
     function resize(w, h) {
         var el = $('#popupImageModal .modal-body img');
