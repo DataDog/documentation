@@ -6,6 +6,9 @@ left:
           - name: product_features
             link: "https://www.datadoghq.com/product/"
             title: "Features"
+          - name: product_integrations
+            link: "https://docs.datadoghq.com/integrations/"
+            title: "Integrations"
           - name: product_apm
             link: "https://www.datadoghq.com/apm/"
             title: "APM"
