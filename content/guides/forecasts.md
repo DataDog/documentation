@@ -91,4 +91,4 @@ For Linear: `forecast(metric_name, ‘linear’, 1, interval='60m', history='1w'
 
 For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality='weekly')`, where the options for `seasonality` are: `hourly`, `daily`, and `weekly`.
 
-The start and end time to specify when using the API are the start and end times of the forecast itself. So if you want the forecast for the next day you would specify the start to be `now` and the end to be `1 day ahead`.
+The start and end times to specify when using the API are the start and end times of the forecast itself. If you want the forecast for the next day you would specify the start to be `now` and the end to be `1 day ahead`.
