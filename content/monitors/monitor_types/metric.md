@@ -4,7 +4,22 @@ kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
 description: "Compare values of a metric with a user defined threshold"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
+
+## Configuration
 
 1. Choose the detection method
     {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" popup="true">}}
@@ -124,3 +139,7 @@ description: "Compare values of a metric with a user defined threshold"
   **Note**: Your metric value needs to be strictly below/above the recovery threshold for the monitor to recover
 
 8. Configure your **notification options** Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed options.
+
+## what's next? 
+
+{{< partial name="whats-next/whats-next.html" >}}

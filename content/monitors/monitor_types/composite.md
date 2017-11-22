@@ -6,6 +6,19 @@ customnav: monitortypenav
 aliases:
     - /guides/composite_monitors
 description: "Alert on an expression combining multiple monitors"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 
@@ -196,3 +209,6 @@ Often, two monitors grouped by different tags tend to have reporting sources who
 Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors that group by the same tag, but which initially have no reporting sources in common; they _might_ in the future.
 
 Use your best judgement to choose multi-alert monitors that makes sense together.
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

@@ -4,6 +4,19 @@ kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
 description: "Check the status of TCP/HTTP endpoints"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 {{< img src="monitors/monitor_types/network/network_monitor.png" alt="network monitor" responsive="true" popup="true">}}
@@ -48,3 +61,6 @@ To build a Network monitor on an http check you need to:
 3. Configure the 4 - "Say what's happening" section to receive the correct notification. Find more about this [here](/monitors/notifications)
 
 **Note**: Contrary to metric monitor it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the agent config, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

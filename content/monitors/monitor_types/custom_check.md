@@ -4,9 +4,24 @@ kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
 description: "Monitor status of arbitrary custom checks"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 {{< img src="monitors/monitor_types/custom_check/custom_monitor.png" alt="custom monitor" responsive="true" popup="true">}}
+
+## Overview
 
 Custom monitors encompass any service checks that are not reported by one of the
 out-of-the-box integrations included with the Agent.
@@ -14,6 +29,8 @@ out-of-the-box integrations included with the Agent.
 Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed
 information on writing your own checks that send metrics, events,
 or service checks.
+
+## Configuration
 
 1. Select your **custom check**.
 
@@ -35,3 +52,6 @@ or service checks.
    must choose at least 2 minutes for your timeframe.
 
 4. Configure your **notification options**. Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

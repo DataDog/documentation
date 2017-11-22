@@ -155,6 +155,6 @@ These settings:
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}

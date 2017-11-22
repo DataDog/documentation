@@ -170,6 +170,6 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **MDC are great but for some reason only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}

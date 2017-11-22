@@ -4,6 +4,19 @@ kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
 description: "Monitor events gathered by Datadog"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 ## Overview
@@ -50,3 +63,5 @@ Include Event specific information in your event monitor notifications, template
 
 {{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" popup="true">}}
 
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

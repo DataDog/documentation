@@ -6,6 +6,19 @@ customnav: monitortypenav
 aliases:
     - /guides/anomalies
 description: "Detects anomalous behaviour for a metric based on historical data"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
@@ -198,3 +211,6 @@ One approach is to add a `rollup()` to force the use of a larger interval. `roll
 Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true">}}
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

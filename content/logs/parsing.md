@@ -215,6 +215,6 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
 {{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" popup="true">}}
 
-## What's next 
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}

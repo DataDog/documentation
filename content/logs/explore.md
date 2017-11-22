@@ -177,6 +177,6 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 `@user.first\ name:myvalue`
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}

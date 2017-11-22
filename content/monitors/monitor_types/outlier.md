@@ -5,17 +5,20 @@ autotocdepth: 3
 customnav: monitortypenav
 aliases:
     - /guides/outliers
-sidebar:
-  nav:
-    - header: Outlier Detection
-    - text: Show Outliers in Dashboards
-      href: "#dashboard
-      s"
-    - text: Alert on Outliers
-      href: "#alerts"
-    - text: Algorithms & Parameters
-      href: "#algorithms"
 description: "Alert on members of a group behaving differently than the others"
+further_reading:
+- link: "/monitors/notifications"
+  tag: "Monitors"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Monitors"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Monitors"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "Monitors"
+  text: Consult our FAQ
 ---
 
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
@@ -170,3 +173,6 @@ When setting up an outlier alert, an important parameter is the size of the time
 Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" popup="true">}}
+
+## what's next? 
+{{< partial name="whats-next/whats-next.html" >}}

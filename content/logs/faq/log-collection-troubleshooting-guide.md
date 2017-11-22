@@ -56,6 +56,6 @@ These are a few of the common configuration issues that are work triple-checking
 
 3. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing. 
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}

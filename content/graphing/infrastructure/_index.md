@@ -8,13 +8,13 @@ aliases:
   - /infrastructure/
 further_reading:
 - link: "/graphing/infrastructure/hostmap"
-  tag: ""
+  tag: "Graphing"
   text: See all of your hosts together on one screen with the hostmap
 - link: "/graphing/infrastructure/livecontainers"
-  tag: ""
+  tag: "Graphing"
   text: Get real-time visibility of all of the containers across your environment
 - link: "/graphing/infrastructure/process"
-  tag: ""
+  tag: "Graphing"
   text: Understand what is going on at any level of your system
 ---
 
@@ -111,8 +111,6 @@ You can programmatically access host information and get the insights you need, 
 
 See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-

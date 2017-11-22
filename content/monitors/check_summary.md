@@ -30,5 +30,5 @@ You can click on a check in order to have more details:
 
 {{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true">}}
 
-## What's next ? 
+## what's next? 
 {{< partial name="whats-next/whats-next.html" >}}

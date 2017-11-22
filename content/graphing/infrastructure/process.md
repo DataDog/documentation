@@ -6,6 +6,13 @@ aliases:
   - /guides/process
   - /infrastructure/process/
 customnav: infrastructurenav
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: "Graphing"
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/livecontainers"
+  tag: "Graphing"
+  text: Get real-time visibility of all of the containers across your environment
 ---
 
 ## Introduction
@@ -160,3 +167,7 @@ While actively working with the Process and Containers page, metrics are collect
 [3]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent
+
+## what's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

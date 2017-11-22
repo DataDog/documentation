@@ -5,6 +5,13 @@ autotocdepth: 3
 aliases:
   - /infrastructure/hostmap/
 customnav: infrastructurenav
+further_reading:
+- link: "/graphing/infrastructure/livecontainers"
+  tag: "Graphing"
+  text: Get real-time visibility of all of the containers across your environment
+- link: "/graphing/infrastructure/process"
+  tag: "Graphing"
+  text: Understand what is going on at any level of your system
 ---
 ## Overview
 
@@ -114,3 +121,7 @@ Some hosts, like those coming in from Google App Engine, do not pull in these me
 ### Data freshness and meaning
 
 Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it will not refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen will tell you when data was last updated.
+
+## what's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

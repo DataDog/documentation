@@ -6,6 +6,13 @@ aliases:
   - /guides/livecontainers
   - /infrastructure/livecontainers/
 customnav: infrastructurenav
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: "Graphing"
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/process"
+  tag: "Graphing"
+  text: Understand what is going on at any level of your system
 ---
 
 ## Introduction
@@ -90,3 +97,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+
+## what's next?
+
+{{< partial name="whats-next/whats-next.html" >}}

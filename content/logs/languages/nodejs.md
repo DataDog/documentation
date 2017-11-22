@@ -121,6 +121,6 @@ Here are some little advices:
 - Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
 - Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
 
-## What's next
+## what's next?
 
 {{< partial name="whats-next/whats-next.html" >}}
