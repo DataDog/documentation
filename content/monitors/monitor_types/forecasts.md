@@ -95,7 +95,7 @@ The chart below shows a dashboard tile of a forecast in “live” mode. The das
 
 When the dashboard is no longer in “live” mode, the vertical pink line and the gray line indicating “Now” will start to diverge. In the chart below, the dashed pink line is still splitting the history from the forecast, but we can see actual data (solid green) to the right of the pink line. The lighter green is still showing the range of predicted values and the dotted green line is still showing the predicted future values. The forecast is based only on the actual data observed before the dashed pink line. This view is useful for checking how accurate the forecast is against known data.
 
-{{< img src="monitors/monitor_types/forecasts/dashboard_past.png" alt="dashboard past" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_types/forecasts/dashboard_past.png" alt="Forecast Dashboard Past" responsive="true" popup="true" >}}
 
 To create a forecast graph, start by adding a timeseries graph to your dashboard. Be sure to select **Timeseries** as the visualization type. Now, click on the **+** icon on the right side of your expression. Choose the **Forecast** function in the **Algorithms** submenu. You should immediately see the preview update to include the forecast visualization. A number of the graphing options will disappear, as forecasts have a unique visualization.
 
