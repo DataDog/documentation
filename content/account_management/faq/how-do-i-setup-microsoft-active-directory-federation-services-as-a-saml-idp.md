@@ -2,6 +2,13 @@
 title: How do I setup Microsoft Active Directory Federation Services as a SAML IdP?
 kind: faq
 customnav: accountmanagementnav
+further_reading:
+- link: "/account_management/saml"
+  tag: "Documentation"
+  text: Configure SAML for your Datadog account
+- link: "/account_management/multi_account"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
 The Datadog SAML integration for SSO provides an easy pathway for linking an Org to an external user management system so that credentials can be kept and managed in a central system.
@@ -81,3 +88,4 @@ While in most setups this will be the user's user@domain login Microsoft does no
 
 For any questions or help with this integration please reach out to us using any one of our [many help options](/help)
 
+{{< partial name="whats-next/whats-next.html" >}}

@@ -3,6 +3,13 @@ title: Team
 kind: documentation
 autotocdepth: 2
 customnav: accountmanagementnav
+further_reading:
+- link: "/account_management/saml"
+  tag: "Documentation"
+  text: Configure SAML for your Datadog account
+- link: "/account_management/multi_account"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
 ## Add New Members
@@ -40,3 +47,7 @@ Datadog provides 3 user roles:
 2. Hover over the avatar for the user you wish to promote. Choose **Make Admin** from the menu.
 
 [1]: https://app.datadoghq.com/account/team
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

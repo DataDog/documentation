@@ -2,6 +2,13 @@
 title: How do I configure Okta as a SAML IdP?
 kind: faq
 customnav: accountmanagementnav
+further_reading:
+- link: "/account_management/saml"
+  tag: "Documentation"
+  text: Configure SAML for your Datadog account
+- link: "/account_management/multi_account"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
 It's recommended that you set up Datadog as an Okta app manually, as opposed to using a 'preconfigured' configuration.
@@ -43,3 +50,7 @@ It's recommended that you set up Datadog as an Okta app manually, as opposed to 
 Additional Information on configuring SAML for your Datadog account can be found [here](/account_management/saml):
 
 In the event that you need to upload an IDP.XML file to Datadog before being able to fully configure the app in Okta, see [HERE](https://support.okta.com/help/Documentation/Knowledge_Article/23445146-Acquiring-the-IDPXML-metadata-file-for-a-SAML-Template-App) for field placeholder instructions.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

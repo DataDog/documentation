@@ -5,6 +5,10 @@ autotocdepth: 2
 aliases:
   - /guides/saml
 customnav: accountmanagementnav
+further_reading:
+- link: "/account_management/multi_account"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
@@ -97,3 +101,7 @@ When the Datadog url is loaded, the browser is redirected to the customer IdP, u
 In the normal setup, we won't know which org the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
 After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, org-specific AssertionConsumerService endpoint to send assertions to.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

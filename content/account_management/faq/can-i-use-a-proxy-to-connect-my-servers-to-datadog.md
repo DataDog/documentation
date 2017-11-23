@@ -4,7 +4,6 @@ kind: faq
 customnav: accountmanagementnav
 ---
 
-## Why Use a Proxy
 If your network configuration restricts outbound traffic, you can [proxy all agent traffic](/agent/proxy) through one or several hosts that have more permissive outbound policies.
 
 You have a few options to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the internet: 

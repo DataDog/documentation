@@ -2,6 +2,13 @@
 title: How do I configure Google as a SAML IdP?
 kind: faq
 customnav: accountmanagementnav
+further_reading:
+- link: "/account_management/saml"
+  tag: "Documentation"
+  text: Configure SAML for your Datadog account
+- link: "/account_management/multi_account"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
 ## Setting up Google as a SAML IdP
@@ -28,3 +35,7 @@ You can also add:
 {{< img src="account_management/faq/ySPDetails.png" alt="ySPDetails" responsive="true" popup="true">}}
 
 {{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
