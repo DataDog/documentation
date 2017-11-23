@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
 

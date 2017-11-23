@@ -4,10 +4,10 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Logs
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/developers/dogstatsd"
-  tag: Developer Tools
+  tag: "Documentation"
   text: Learn more about DogstatsD
 ---
 

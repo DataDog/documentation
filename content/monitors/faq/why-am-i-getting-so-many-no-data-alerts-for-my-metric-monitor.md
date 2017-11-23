@@ -4,10 +4,10 @@ kind: faq
 customnav: monitornav
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
 ---
 

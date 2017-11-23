@@ -4,6 +4,13 @@ kind: documentation
 customnav: developersnav
 aliases:
   - /guides/dogstatsd/
+further_reading:
+- link: "/developers/metrics"
+  tag: "Documentation"
+  text: Learn more about Metrics
+- link: "/developers/libraries"
+  tag: "Docuementation"
+  text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
 
 <p class="aside">

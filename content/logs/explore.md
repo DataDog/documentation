@@ -7,10 +7,10 @@ description: "The Logs Explorer is your Datadog home base for troubleshooting an
 beta: true
 further_reading:
 - link: "/logs/processing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to process your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 ---
 

@@ -5,6 +5,10 @@ autotocdepth: 2
 aliases:
   - /guides/multiaccountorg
 customnav: accountmanagementnav
+further_reading:
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
 ---
 
 There are two ways to allow multiple accounts to have access to the same data. First, you can simply add multiple users to the same team from the [Team Page][1]. The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between them from the avatar menu in the main menu.

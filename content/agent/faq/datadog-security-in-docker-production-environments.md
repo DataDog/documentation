@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/basic_agent_usage/docker"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about Datadog Docker agent
 ---
 

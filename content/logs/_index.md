@@ -8,13 +8,13 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 beta: true
 further_reading:
 - link: "/logs/explore"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to explore your logs
-- link: "/logs/processing"
-  tag: "Logs"
-  text: Learn how to process your logs
+- link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
+  tag: "FAQ"
+  text: How to Send Logs to Datadog via External Log Shippers
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 ---
 

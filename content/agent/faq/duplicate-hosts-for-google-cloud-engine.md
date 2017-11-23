@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/integrations/google_app_engine"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about Datadog Google Cloud Platform integration
 ---
 

@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/developers/metrics"
-  tag: Developer Tools
+  tag: "Documentation"
   text: Learn more about Metrics
 ---
 

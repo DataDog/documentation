@@ -4,13 +4,13 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Logs
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/integrations/docker_daemon"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about the Datadog-SNMP integration
 - link: "/integrations/disk"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about the Datadog-Disk integration
 ---
 

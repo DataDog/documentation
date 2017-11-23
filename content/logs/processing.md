@@ -6,12 +6,15 @@ customnav: lognav
 description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
 beta: true
 further_reading:
-- link: "/logs/explore"
-  tag: "Logs"
-  text: Learn how to explore your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+  tag: "FAQ"
+  text: How to investigate a log parsing issue?
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
 ---
 
 <div class="alert alert-info">

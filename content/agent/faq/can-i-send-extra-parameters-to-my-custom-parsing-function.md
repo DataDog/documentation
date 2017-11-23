@@ -4,13 +4,13 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/agent/tagging"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about Tagging
 - link: "/logs"
-  tag: Logs
+  tag: "Documentation"
   text: Learn more about Loggin with Datadog
 ---
 

@@ -4,10 +4,10 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/integrations/nginx"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about Datadog-Nginx integration
 ---
 The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus you'll need to parse the access logs.
