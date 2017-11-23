@@ -8,17 +8,14 @@ aliases:
 description: "Alert on an expression combining multiple monitors"
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/manage_monitor"
-  tag: "Monitors"
-  text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 

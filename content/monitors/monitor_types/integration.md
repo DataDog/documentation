@@ -6,17 +6,14 @@ customnav: monitortypenav
 description: "Monitor metric values or health status from a specific integration"
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/manage_monitor"
-  tag: "Monitors"
-  text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 {{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" popup="true">}}

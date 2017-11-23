@@ -5,20 +5,17 @@ autotocdepth: 2
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/manage_monitor"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
-- link: "/monitors/check_summary"
-  tag: "Monitors"
-  text: See all your checks into one place
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 ## Overview

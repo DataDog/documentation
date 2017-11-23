@@ -1,6 +1,6 @@
 ---
 kind: guide
-listorder: 24
+listorder: 25
 placeholder: true
 title: Configuring Teams & Organizations with Multiple Accounts
 ---

@@ -5,20 +5,17 @@ autotocdepth: 2
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 - link: "/monitors/manage_monitor"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Manage your monitors
-- link: "/monitors/check_summary"
-  tag: "Monitors"
-  text: See all your checks into one place
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
