@@ -73,4 +73,5 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 
 ## Further Reading 
+
 {{< partial name="whats-next/whats-next.html" >}}

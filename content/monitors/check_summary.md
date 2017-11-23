@@ -27,10 +27,10 @@ This page let you see the list of all your checks reporting to Datadog:
 
  {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true">}}
 
-
 You can click on a check in order to have more details:
 
 {{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" popup="true" >}}
 
 ## Further Reading 
+
 {{< partial name="whats-next/whats-next.html" >}}
