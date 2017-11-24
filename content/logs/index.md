@@ -24,8 +24,6 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
-
 ## Enabling log collection from integrations
 
 To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
@@ -49,16 +47,17 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 
 ### Agent checks
 
-* Apache: [apache.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
-* Haproxy: [haproxy.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
-* IIS: [iis.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
-* Mongo: [mongo.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
-* Nginx: [nginx.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+* Apache: [apache.d/conf.
+.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
+* Haproxy: [haproxy.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
+* IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
+* Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
+* Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
 
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new yaml file named after your log source ( `python.yaml` for python logs, ...)in the Agent's **conf.d** directory and set these options:
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source ( `/etc/datadog-agent/conf.d/python.d/conf.yaml` for python logs, ...)in the Agent's **conf.d** directory and set these options:
 
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
@@ -72,7 +71,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example: 
-If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
+If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.d/conf.yaml` file as follows:
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
@@ -97,6 +96,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
@@ -118,6 +118,7 @@ logs:
     sourcecategory: front
 
 ```
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Docker log collection
 
@@ -149,6 +150,8 @@ logs:
 {{< /highlight >}}
 
 If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
+
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Filter logs
 
