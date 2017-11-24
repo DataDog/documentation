@@ -6,20 +6,15 @@ customnav: agentnav
 
 ## Installation
 
-* [Chef, encrypting api_keys without data_bags](/agent/faq/chef-encrypting-api-keys-without-data-bags)
 * [Common Windows Agent Installation Error 1721](/agent/faq/common-windows-agent-installation-error-1721)
 * [How do I install the agent on a server with limited internet connectivity?](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity)
-* [How do I monitor a Windows Service?](/agent/faq/how-do-i-monitor-a-windows-service)
-* [How do I monitor Windows Processes?](/agent/faq/how-do-i-monitor-windows-processes)
 * [How do I uninstall the agent ?](/agent/faq/how-do-i-uninstall-the-agent)
 * [How to monitor SNMP devices?](/agent/faq/how-to-monitor-snmp-devices)
 * [I stopped my agent but I’m still seeing the host in my Datadog account.](/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host)
-* [Is the agent necessary to use Datadog ? ](/agent/faq/is-the-agent-necessary-to-use-datadog)
 
 ## Troubleshooting
 
 * [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
-* [Agent Troubleshooting and/or Agent Metric Reporting](/agent/faq/agent-troubleshooting-and-or-agent-metric-reporting)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)
 * [Agent Check reports "OK" but Monitor shows Critical](/agent/faq/agent-check-reports-ok-but-monitor-shows-critical)
@@ -42,23 +37,15 @@ customnav: agentnav
 ## General
 
 * [Upgrade to Agent 6.x](/agent/faq/upgrade-to-agent-6-x)
-* [Can I send extra parameters to my custom parsing function?](/agent/faq/can-i-send-extra-parameters-to-my-custom-parsing-function)
 * [Does the docker dd-agent have JMX in it?](/agent/faq/does-the-docker-dd-agent-have-jmx-in-it)
 * [How to get more out of your Kubernetes integration ?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
-* [How do I monitor system load for Windows](/agent/faq/how-do-i-monitor-system-load-for-windows)
 * [Want more flexibility with your custom log parser? Add dogstatsd](/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd)
-* [Is it possible to have the agent parse several log files and use wildcards for that?](/agent/faq/is-it-possible-to-have-the-agent-parse-several-log-files-and-use-wildcards-for-that)
 * [How do I reset my Datadog API keys?](/agent/faq/how-do-i-reset-my-datadog-api-keys)
-* [How to collect metrics or events with a Custom Log Parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser)
-* [How to collect metrics with the Agent's built-in Log Parser?](/agent/faq/how-to-collect-metrics-with-the-agent-s-built-in-log-parser)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)
-* [Send status in agent custom checks](/agent/faq/send-status-in-agent-custom-checks)
-* [How to add a custom python package to the agent: Windows and Linux instructions](/agent/faq/how-to-add-a-custom-python-package-to-the-agent-windows-and-linux-instructions)
 * [Custom JMX Integration(s)](/agent/faq/custom-jmx-integration-s)
 * [Why should I install the agent on my AWS instances?](/agent/faq/why-should-i-install-the-agent-on-my-aws-instances)
 * [Datadog security in Docker production environments](/agent/faq/datadog-security-in-docker-production-environments)
 * [How do I change the frequency of an agent check?](/agent/faq/how-do-i-change-the-frequency-of-an-agent-check)
-* [Is it possible to manage the Datadog agent and integrations using configuration management tools?](/agent/faq/is-it-possible-to-manage-the-datadog-agent-and-integrations-using-configuration-management-tools)
 * [How does Datadog determine the agent hostname](/agent/faq/how-does-datadog-determine-the-agent-hostname)

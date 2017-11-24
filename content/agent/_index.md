@@ -17,14 +17,39 @@ For information on running the Agent through a proxy please see [here](https://g
 
 The Agent has three main parts: the collector, dogstatsd, and the forwarder:
 
-* The collector runs checks on the current machine for whatever integrations you have and it will capture system metrics such as memory and CPU.
+* **The collector**: runs checks on the current machine for whatever integrations you have and it will capture system metrics such as memory and CPU.
 
-* Dogstatsd is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
+* **Dogstatsd**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
-* The forwarder retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
+* **The forwarder**: retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
 
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
 
+## Configuration management tools
+
+Manage the Datadog agent and integrations using configuration management tools:
+
+### Chef
+* [Chef github project](https://github.com/DataDog/chef-datadog)
+* [Chef installation](https://app.datadoghq.com/account/settings#integrations/chef)
+* [Chef documentation](/integrations/chef)
+
+### Puppet
+* [Puppet github project](https://github.com/DataDog/puppet-datadog-agent)
+* [Puppet installation](https://app.datadoghq.com/account/settings#integrations/puppet)
+* [Puppet documentation](/integrations/puppet)
+
+### Ansible
+* [Ansible github project](https://github.com/DataDog/ansible-datadog)
+* [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
+* [Ansible documentation](/integrations/ansible/)
+
+Chef, Puppet and Ansible integrations were written using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
+
+There is also community support for Saltstack:
+
+* Saltstack Formula - https://github.com/DataDog/datadog-formula
+* 
 ## Agent Troubleshooting
 
 If you ended up at this page and have not yet installed the Datadog Agent, please go [here](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).

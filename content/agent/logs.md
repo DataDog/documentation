@@ -4,6 +4,10 @@ kind: documentation
 customnav: agentnav
 aliases:
     - /guides/logs/
+further_reading:
+- link: "/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd"
+  tag: "FAQ"
+  text: Want more flexibility with your custom log parser? Add dogstatsd  
 ---
 
 Log files contain tons of valuable application and business data.
@@ -86,77 +90,44 @@ Custom parsing functions must:
 
     If the line doesn't match, instead return `None`.
 
-### Example
+### Example for Metrics Collecting
 
-Here's an example of what `parsers.py` might contain:
+Let's imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
+
+```
+user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
+```
+
+We could set up a log-parser like the following to collect a metric from this logged data in our datadog account:
 
 ```python
 
 import time
 from datetime import datetime
-
-def parse_web(logger, line):
-    # Split the line into fields
-    date, metric_name, metric_value, attrs = line.split('|')
-
+...
+def my_log_parser(logger, test):
+    metric_name, date, metric_value, extras = line.split('|')
     # Convert the iso8601 date into a unix timestamp, assuming the timestamp
     # string is in the same timezone as the machine that's parsing it.
-    date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+    date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f")
+    tags = extras.split(',')
     date = time.mktime(date.timetuple())
-
-    # Remove surrounding whitespace from the metric name
-    metric_name = metric_name.strip()
-
-    # Convert the metric value into a float
-    metric_value = float(metric_value.strip())
-
-    # Convert the attribute string field into a dictionary
-    attr_dict = {}
-    for attr_pair in attrs.split(','):
-        attr_name, attr_val = attr_pair.split('=')
-        attr_name = attr_name.strip()
-        attr_val = attr_val.strip()
-        attr_dict[attr_name] = attr_val
-
-    # Return the output as a tuple
-    return (metric_name, date, metric_value, attr_dict)
+    metric_attributes = {
+        'tags': tags,
+        'metric_type': 'gauge',
+    }
+    return (metric_name, date, metric_value, metric_attributes)
 ```
 
-
-You'll want to be able to test your parser outside of the Agent, so for the above example,
-you might add a test function like this:
-
-```python
-
-def test():
-    # Set up the test logger
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-
-    # Set up the test input and expected output
-    test_input = "2011-11-08T21:16:06|me.web.requests|157|metric_type=counter,unit=request"
-    expected = (
-        "me.web.requests",
-        1320786966,
-        157,
-        {"metric_type": "counter",
-         "unit":        "request" }
-    )
-
-    # Call the parse function
-    actual = parse_web(logging, test_input)
-
-    # Validate the results
-    assert expected == actual, "%s != %s" % (expected, actual)
-    print 'test passes'
-
-
-if __name__ == '__main__':
-    # For local testing, callable as "python /path/to/parsers.py"
-    test()
+And then we would configure our datadog.conf to include the dogstream option as follows:
+```
+dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
+# (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
 
-And you can test your parsing logic by calling python /path/to/parsers.py.
+This example would collect a gauge-type metric called "user.crashes" with a value of 24, and tagged with the 3 applications named at the end.
+
+A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the agent will start to over-write logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different time-stamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This over-writing is not an issue for metrics collected with differing names.
 
 ## Parsing Events
 
@@ -183,6 +154,104 @@ The aggregation key is a combination of the following fields:
 - aggregation_key
 - host
 
-For an example of an event parser, see our [cassandra compaction event parser][1] that is bundled with the Agent.
+For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py) that is bundled with the Agent.
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
+### Example for Events Collecting
+
+Let's imagine that you want to collect events from logging where you have enough control to add all sorts of relevant information, intelligently delimited by a unique character, logged as the following:
+
+```
+2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
+```
+
+We could set up a log parser like the following to create an event from this logged data in our datadog [event stream](/graphing/event_stream/):
+
+```python
+
+import time
+from datetime import datetime
+...
+def my_log_parser(logger, line):
+
+    # Split the line into fields
+    date, report_type, system, title, message, extras = line.split('|')
+    # Further split the extras into tags
+    tags = extras.split(',')
+    # Convert the iso8601 date into a unix timestamp, assuming the timestamp
+    # string is in the same timezone as the machine that's parsing it.
+    date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f")
+    date = time.mktime(date.timetuple()) 
+    logged_event = {
+        'msg_title': title,
+        'timestamp': date,
+        'msg_text': message,
+        'priority': 'normal',
+        'event_type': report_type,
+        'aggregation_key': system,
+        'tags': tags,
+        'alert_type': 'error'
+    }
+    return logged_event
+```
+
+And then we would configure our datadog.conf to include the dogstream option as follows:
+```
+dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
+# (N.B., Windows users should replace each "/" with the escaped "\\") 
+```
+
+This specific log-line parsed with this parser created the following event in datadog:
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true">}}
+
+## Send extra parameters to your custom parsing function
+
+Once you have setup your custom parser to send metric or events to your platform, you should have something like this in your `datadog.conf`:
+
+```
+ dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
+```
+
+And in your parsers_module.py a function defined as:  
+```python
+
+def custom_parser(logger, line)
+```
+
+You can now change the arity of your function to take extra parameter as shown [here](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
+
+So if you change your configuration file to:
+
+```
+dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1:customvar2
+```
+
+And your parsing function as:
+
+```python
+
+def custom_parser(logger, line, parser_state, *parser_args):
+```
+
+You will then have a tuple parameter in **parser_args** as (customvar1, customvar2) which is ready to use in your code by using parser_args[0] and parser_args[1].
+
+**Note**: the parameter parser_state does not have to be used but it has to be in the signature of the function. And if you have only one parameter, you will have to use parser_args[1] to get it.
+
+As an example, if we have the same parser as in the documentation but this time we do not want to extract the metric name from the log but to set it thanks to this parameter:
+
+In my configuration file I would have: 
+
+```
+dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
+```
+
+## Troubleshooting Your Custom Log-Parser
+
+Bugs happen, so being able to see the traceback from your log-parsers will be very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the datadog.conf by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then restarting the agent. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the collector.log ([read here for where to find your agent logs](/agent/faq/log-locations)), and it will generally include the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+
+Do note that whenever you make a change to your custom log-parser, you must restart the agent before that change will be put into effect.
+
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to reach out to support, but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then run the flare command from your agent. That will give support the information needed to effectively troubleshoot the issue.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

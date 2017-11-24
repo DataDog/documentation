@@ -11,7 +11,7 @@ further_reading:
   text: Learn more about DogstatsD
 ---
 
-There are many ways to collect [custom metrics](/getting_started/custom_metrics/) from your datadog agent. One additional method of collecting custom metrics from a datadog agent is by parsing log files: the agent comes with its own [built-in log parser](/agent/faq/how-to-collect-metrics-with-the-agent-s-built-in-log-parser), and you can also write [your own custom log parser](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser) to collect events or metrics from logs that don't fit the agent's built-in log parser. This method of custom metric collection has certain limitations, and can be fairly difficult to set up, which often makes it not the most appropriate approach to collecting custom metrics. 
+There are many ways to collect [custom metrics](/getting_started/custom_metrics/) from your datadog agent. One additional method of collecting custom metrics from a datadog agent is by parsing log files: the agent comes with its own [built-in log parser](/agent/logs), and you can also write [your own custom log parser](/agent/logs/) to collect events or metrics from logs that don't fit the agent's built-in log parser. This method of custom metric collection has certain limitations, and can be fairly difficult to set up, which often makes it not the most appropriate approach to collecting custom metrics. 
 
 That being said, sometimes parsing logs just makes sense. And in those cases, the [dogstatsd](/developers/dogstatsd) can be used along with a custom log parser to make for more effective log-parsing.
 
@@ -27,11 +27,11 @@ In some circumstances, these limitations end up being significant indeed. Fortun
 ## Pre-requisites for this type of custom metric collection
 
 * A datadog agent. More info on how to install that from your [datadog account here](https://app.datadoghq.com/account/settings#agent). 
-* The datadogpy library, which can be installed by following [these instructions](/agent/faq/how-to-add-a-custom-python-package-to-the-agent-windows-and-linux-instructions), the datadogpy library itself can be found [here](https://github.com/DataDog/datadogpy#installation). 
+* The datadogpy library, which can be installed by following [these instructions](/agent/basic_agent_usage/amazonlinux/#adding-a-custom-python-package-to-the-agent), the datadogpy library itself can be found [here](https://github.com/DataDog/datadogpy#installation). 
 
 ## The big idea
 
-f you're interested in this method of metric collection, you can build a custom log parser as you normally would ([following these instructions](/agent/faq/how-to-collect-metrics-or-events-with-a-custom-log-parser), if you'd like some direction), but then instead of using the parser to actually submit the metrics or events in the return line of the parsing module, just use a dogstatsd method instead. Of course, in order to use a dogstatsd method in a python log-parsing module, you'll want to start the module off by importing statsd from the dogstatsd library just as you normally would when using the dogstatsd.
+f you're interested in this method of metric collection, you can build a custom log parser as you normally would ([following these instructions](/agent/logs), if you'd like some direction), but then instead of using the parser to actually submit the metrics or events in the return line of the parsing module, just use a dogstatsd method instead. Of course, in order to use a dogstatsd method in a python log-parsing module, you'll want to start the module off by importing statsd from the dogstatsd library just as you normally would when using the dogstatsd.
 
 ## An example
 
