@@ -202,7 +202,7 @@ def handle_file(file, file_size):
   return
 ```
 
-Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since histograms are an extension to StatsD, use a [DogStatsD client library][2].
 
 #### Metric option: Sample Rates
 
@@ -268,7 +268,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since tagging is an extension to StatsD, use a [DogStatsD client library][2].
 
 ## Datagram Format
 

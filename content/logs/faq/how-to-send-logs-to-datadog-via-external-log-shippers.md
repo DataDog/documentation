@@ -39,7 +39,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 ## Rsyslog
 
 1. (Optional)Activate Rsyslog file monitoring module
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your rsyslog.conf:
+    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
 
     * **Rsyslog Version <8**
         ```
@@ -128,9 +128,8 @@ This approach can be especially useful for sending to Datadog logs that have hei
 6. Restart Rsyslog and your new logs will get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
-    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your rsyslog.conf so that its value matches the hostname of your Datadog metrics.
-
-    Please note that if you did not specify any hostname in your configuration file for the metrics via the datadog.conf or datadog.yaml, then you do not need to change anything.
+    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
+    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.
     If you did specify a custom Hostname for your metric, make sure to replace the %HOSTNAME% value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
@@ -138,7 +137,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
 
-    To set the source, use the following format (if you have several sources, please change the name of the format in each file):
+    To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"

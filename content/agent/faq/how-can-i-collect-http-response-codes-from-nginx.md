@@ -10,7 +10,7 @@ further_reading:
   tag: "Integration"
   text: Learn more about Datadog-Nginx integration
 ---
-The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus you'll need to parse the access logs.
+The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus parse the access logs.
 
 The following script was provided by a Datadog customer (Credit: Ganesh Swami), it shows how it's possible to collect 5XX codes: https://gist.github.com/gane5h/78cd17c742e618e2c606
 

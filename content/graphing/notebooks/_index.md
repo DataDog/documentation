@@ -52,7 +52,7 @@ When an existing notebook is opened, its cells are in a closed state. To open a 
 
 {{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
 
-To insert, clone or delete cells, click theicon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking thebutton in the notebook header or pressing?.
+To insert, clone or delete cells, click **theicon** that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking **thebutton** in the notebook header or pressing?.
 Cells also may be re-ordered by using keyboard shortcuts.
 
 ### Changing time frames
@@ -63,7 +63,7 @@ To unlock a cell from global time, click this time indicator.
 {{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true">}}
 
 
-Please note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
+Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
 
 ### Splitting by tag and other graph options
 

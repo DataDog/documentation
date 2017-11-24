@@ -11,7 +11,8 @@ aliases:
 
 ## Event Query Language
 
-You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. Please note that filters perform an exact match search and will not work with partial strings.
+You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. 
+Note that filters perform an exact match search and will not work with partial strings.
 
 | Filter | Description |
 |--------|-------------|
@@ -28,11 +29,11 @@ Full text search works on all keywords provided in the search query after applyi
 
 You can use full text search to find all events with the same key tags. For example, to show all events with the #service key you would search #service.  
 
-In the example below, a full text search is performed to find all open chef or nagios errors that mention one or more redis instances that are currently down.
+In the example below, a full text search is performed to find all open chef or Nagios errors that mention one or more Redis instances that are currently down.
 
 `sources:nagios,chef status:error redis_* AND down`
 
-Please note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
+Note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
 
 ### Searching Events Help
 
@@ -97,7 +98,7 @@ the application or system sending an email instead. There are two different ways
 <b>JSON-Formatted vs Plain Text:</b> <br>
 If you have complete control over the email sent by the application to Datadog, then you will probably want to configure a JSON-formatted message to be sent.
 This will allow you to set everything in the event that appears in the event
-stream. See below fo examples of each.
+stream. See below for examples of each.
 </div>
 
 ### Plain Text Email
@@ -152,7 +153,7 @@ To set up the email, first log in to your Datadog account at
 
 ## Markdown events
 Datadog event text supports markdown (The detailed markdown syntax can be found [here](http://daringfireball.net/projects/markdown/syntax#lin)).
-Please note that embedding HTML in markdown is not supported with in Datadog.
+Note that embedding HTML in markdown is not supported with in Datadog.
 
 To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`
 

@@ -15,7 +15,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, please email [us](/help) for further assistance. 
+There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, email [us](/help) for further assistance. 
 
 ## The agent needs to be restarted
 
@@ -23,7 +23,7 @@ After you've made any configuration changes to the dd-agent, the changes will on
 
 ## No new logs have been written
 
-The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them. In order to confirm whether log collection has been successfully set up, please make sure that new logs have been written.
+The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them. In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
 ## Permission Issues While Tailing Log Files
 

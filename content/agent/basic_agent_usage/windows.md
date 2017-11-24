@@ -84,9 +84,9 @@ The current way to do so is to add the package in the library zipped folder that
 
 On your target host, first launch the Datadog Agent Manager and select the "Windows Service" integration from the list (see below)
 
-For the Windows Service Integration, there is an out-of-the-box example, however, in this example we'll use dhcp.
+For the Windows Service Integration, there is an out-of-the-box example, however, in this example we'll use DHCP.
 
-First, to get the name of the service, open services.msc and locate your target service. Using dhcp as our target, you can see the service name at the top of the service properties window:
+First, to get the name of the service, open services.msc and locate your target service. Using DHCP as our target, you can see the service name at the top of the service properties window:
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" popup="true">}}
 
@@ -116,13 +116,13 @@ The system.load.* metric is Unix specific, it conveys the average amount of re
 
 #### Where is System Load for Windows? 
 
-While Windows does not offer this exact metric, there is an equivalent option that's available by default in the system metrics: system.proc.queue.length. The system.proc.queue.length metric allows you to see the number of threads that are observed as delayed in the processor ready queue and are waiting to be executed. 
+While Windows does not offer this exact metric, there is an equivalent option that's available by default in the system metrics: `system.proc.queue.length`. The `system.proc.queue.length` metric allows you to see the number of threads that are observed as delayed in the processor ready queue and are waiting to be executed. 
 
 ### Monitoring Windows Processes
 
 You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
-For example, to monitor Notepad, your config file would include:
+For example, to monitor Notepad, your configuration file would include:
 
 ```yaml
 init_config:
@@ -137,6 +137,6 @@ When you're done editing the file, press "Save" to save it, then "Enable" to ena
 
 Any time you modify a Datadog integration you’ll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
 
-To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your config file.
+To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
 
 Again, due to the sensitivity of yaml, if you've tried the above and cannot get it to work, use the attached file to get yourself started and confirm your syntax.

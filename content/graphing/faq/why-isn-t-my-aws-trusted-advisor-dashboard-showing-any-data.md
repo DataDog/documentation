@@ -6,7 +6,7 @@ customnav: graphingnav
 
 {{< img src="graphing/faq/aws_service_dashboard.png" alt="aws service dashboard" responsive="true" popup="true">}}
 
-For your AWS Trusted Advisor integration dashboard to populate with data, you'll need to:
+For your AWS Trusted Advisor integration dashboard to populate with data: 
 
 * Configure support permissions
 * Have an upgraded AWS support plan. 

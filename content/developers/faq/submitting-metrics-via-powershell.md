@@ -51,7 +51,7 @@ postMetric($metric)($tags) # pass our metric as a param to postMetric()
 
 ## Submitting metrics with PowerShell via DogStatsD
 
-Having the agent enables you to make use of its [DogStatsD](/developers/dogstatsd) listener. The following example shows how we could send the same metric via DogStatsD. Notice that we no longer need to specify the API or application keys, this is information that's already in our local datadog.conf.
+Having the agent enables you to make use of its [DogStatsD](/developers/dogstatsd) listener. The following example shows how we could send the same metric via DogStatsD. Notice that we no longer need to specify the API or application keys, this is information that's already in our local `datadog.conf`.
 
 ```
 

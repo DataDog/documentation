@@ -21,7 +21,7 @@ sudo /etc/init.d/datadog-agent stop
 ```
 ps aux | grep datadog-agent
 ```
-If there any processes, please kill them.
+If there any processes, kill them.
 
 3. Start the agent:
 ```

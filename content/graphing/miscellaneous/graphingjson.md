@@ -102,7 +102,7 @@ Examples of scope (meaning in parentheses):
 #### Groups
 
 
-For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
+For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
 
 #### Arithmetic
 

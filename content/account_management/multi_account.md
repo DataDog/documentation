@@ -11,13 +11,14 @@ further_reading:
   text: Configure SAML for your Datadog account
 ---
 
-There are two ways to allow multiple accounts to have access to the same data. First, you can simply add multiple users to the same team from the [Team Page][1]. The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between them from the avatar menu in the main menu.
+There are two ways to allow multiple accounts to have access to the same data. First, simply add multiple users to the same team from the [Team Page][1].  
+The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between them from the avatar menu in the main menu.
 
 {{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true">}}
 
 ## Organizations
 
-The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, please contact [us](/help).
+The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, contact [us](/help)!
 
 ### Create a New Organization
 
@@ -27,7 +28,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 
 {{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true">}}
 
-A new trial account will be created. If you wish to add this account to your existing billing settings, please contact your sales representative.
+A new trial account will be created. If you wish to add this account to your existing billing settings, contact your sales representative.
 
 ### Leave an Organization
 
@@ -41,13 +42,13 @@ A new trial account will be created. If you wish to add this account to your exi
 
 For users that belong to more than one Datadog organization, it's possible to switch to another organization from any page by hovering over your avatar in the lower left hand corner.
 
-Once the menu appears, you can transition to the other Datadog accounts you're associated with:
+Once the menu appears, transition to the other Datadog accounts you're associated with:
 {{< img src="account_management/multi_account/Switch_Accounts.jpg" alt="Switch Accounts" responsive="true" popup="true">}}
 
 ## Custom domains for each sub-organizations
 
 
-Please email [the Datadog support team](/help) to enable custom subdomains.
+**Email [the Datadog support team](/help) to enable custom sub-domains.**
 
 Custom sub-domains allow for easy differentiation of the source of notifications and easy switching between organizations when logged in as a member of multiple Datadog organizations.
 
@@ -126,7 +127,7 @@ Response:
         }
     },
     "user" : {
-        "name" : "Org admin",
+        "name" : "Organization admin",
         "handle" : "test@datadoghq.com",
         ...
     },
@@ -136,7 +137,7 @@ Response:
         ...
     },
     "application_key": {
-        "owner": "Org admin",
+        "owner": "Organization admin",
         "hash": "88e5ae6a71f51d1d5a0071a24f",
         ...
     }
@@ -145,13 +146,13 @@ Response:
 
 **Notes**:
 
-* This call requires a feature to be turned on for the parent org. Please contact support@datadoghq.com for more information.
-* The new organization is completely independent from the parent (except for billing purposes if 'parent_billing' was specified) hence parent orgs have no edit/view/disable rights in the orgs they create.
-* Commands such as getting org info or adding users can be issued directly as the child org by using org.public_id, api_key.key and application_key.hash provided in this response.
+* This call requires a feature to be turned on for the parent organization. Contact support@datadoghq.com for more information.
+* The new organization is completely independent from the parent (except for billing purposes if 'parent_billing' was specified) hence parent organizations have no edit/view/disable rights in the organizations they create.
+* Commands such as getting organization info or adding users can be issued directly as the child organization by using `org.public_id`, `api_key.key` and `application_key.hash` provided in this response.
 
 ### Get all managed organizations
 
-As specified in the [Create a new organization section](/#create-a-new-organization), this command is only useful to retrieve information about the current org until further changes.
+As specified in the [Create a new organization section](/#create-a-new-organization), this command is only useful to retrieve information about the current organization until further changes.
 
 Request:
 
@@ -175,9 +176,9 @@ Response:
 }
 ```
 
-### Update managed org 
+### Update managed organization 
 
-As specified in the Create a new organization section, this command is only useful to retrieve information about the current org until further changes.
+As specified in the Create a new organization section, this command is only useful to retrieve information about the current organization until further changes.
 Available arguments:
 
 * settings
@@ -228,7 +229,7 @@ Response:
        "name": "DataDog HQ",
        "billing": {},
        "created": "2016-10-06 21:41:12",
-       "description": "Datadog helps dev and ops visualize and grok their IT Data",
+       "description": "Datadog helps developers and ops visualize and grok their IT Data",
        "settings": {
            "saml_can_be_enabled": true,
            "saml_idp_initiated_login": {
@@ -260,7 +261,7 @@ Response:
 
 ### Upload SAML IdP metadata
 
-As specified in the Create a new organization section, this command is only useful to retrieve information about the current org until further changes.
+As specified in the Create a new organization section, this command is only useful to retrieve information about the current organization until further changes.
 Arguments:
 
 * idp_file (required): path to XML metadata file you wish to upload

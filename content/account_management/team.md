@@ -24,27 +24,27 @@ The new user will receive an email with a link to login.
 
 Datadog provides 3 user roles:
 
-* **Admins** have access to billing information, the ability to revoke API keys, removing users, and can configure [read-only dashboards](/graphing/dashboards/). They can also promote standard users to Admins.
+* **Administrators** have access to billing information, the ability to revoke API keys, removing users, and can configure [read-only dashboards](/graphing/dashboards/). They can also promote standard users to Administrators.
 
 * **Standard users** have access to view and modify all monitoring features that Datadog offers such as [dashboards](/graphing/dashboards/), [monitors](/monitors/), [events](/graphing/event_stream), and [notebooks](/graphing/notebooks).
 
-* **Read only users** are created by admins and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a dashboard with someone outside their unit.
+* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a dashboard with someone outside their unit.
 
 ## Disable Existing Members
 
-**NOTE:** You must be an Admin of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members will disappear from the admin’s team page UI automatically after one month.
+**NOTE:** You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members will disappear from the administrator’s team page UI automatically after one month.
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
 
     {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" popup="true">}}
 
-## Promote Existing Members to Admin
+## Promote Existing Members to Administrator
 
-**NOTE:** You must be an Admin of the team to promote members
+**NOTE:** You must be an Administrator of the team to promote members
 
 1. Go to the [Team Page][1].
-2. Hover over the avatar for the user you wish to promote. Choose **Make Admin** from the menu.
+2. Hover over the avatar for the user you wish to promote. Choose **Make Administrator** from the menu.
 
 [1]: https://app.datadoghq.com/account/team
 

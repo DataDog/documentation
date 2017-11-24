@@ -47,7 +47,7 @@ With the following parsing rule:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-You would have at the end this structued log:
+You would have at the end this structured log:
 
 {{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" popup="true">}}
 

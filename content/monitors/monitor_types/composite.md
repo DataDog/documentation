@@ -28,7 +28,7 @@ _Note: we refers variously to 'individual monitors', 'constituent monitors', and
 
 ## Creating composite monitors
 
-In the Datadog app, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
+In the Datadog application, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
 
 
 {{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" popup="true">}}
@@ -129,9 +129,20 @@ This section uses examples to show how trigger conditions are computed, and how 
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+Recall the seven statuses a monitor may have (in order of increasing severity):
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
+* `Ok`, 
+* `Warn`,
+* `Alert`,
+* `Skipped`, 
+* `Ignored`,
+* `No Data`, 
+* `Unknown`.  
+
+Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.  
+The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
 
 Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
@@ -205,7 +216,7 @@ Often, two monitors grouped by different tags tend to have reporting sources who
 
 Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors that group by the same tag, but which initially have no reporting sources in common; they _might_ in the future.
 
-Use your best judgement to choose multi-alert monitors that makes sense together.
+Use your best judgment to choose multi-alert monitors that makes sense together.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

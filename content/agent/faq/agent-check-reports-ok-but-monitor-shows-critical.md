@@ -29,6 +29,6 @@ For example, an [http_check](/integrations/http_check) could be reporting OK in 
 
 To view the current status of a service check use the [Check Status page](https://app.datadoghq.com/check/summary) which will show you the latest report of any given check.
 
-If you believe you are seeing a discrepancy after please reach out to [us](/help) and submit your logs using the [flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
+If you believe you are seeing a discrepancy after, reach out to [us](/help) and submit your logs using the [flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
 
 {{< partial name="whats-next/whats-next.html" >}}

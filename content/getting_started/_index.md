@@ -35,7 +35,7 @@ for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, please see [here](/agent/tagging).
+* For more on tagging, see [here](/agent/tagging).
 
 ## Host Map
 

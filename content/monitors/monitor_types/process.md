@@ -37,7 +37,7 @@ point they should notify.
 
 2. Pick the **monitor scope**. You will only see hosts or tags that are reporting a status for the selected process.
 
-3. Select **alerting options**. Please refer to the [custom monitors](#custom-monitors) section for details on the available options.
+3. Select **alerting options**. Refer to the [custom monitors](#custom-monitors) section for details on the available options.
 
 4. Configure your **notification options** Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 

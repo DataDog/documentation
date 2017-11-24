@@ -29,7 +29,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
+If you are not using it already, follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -85,7 +85,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
-Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
+Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
 ```yaml
 init_config:
@@ -113,7 +113,8 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
+
+If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
 init_config:
@@ -217,7 +218,7 @@ logs:
 
 ## Reserved attributes 
 
-If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
+If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
 ### *date* attribute
 

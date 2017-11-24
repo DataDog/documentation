@@ -42,7 +42,8 @@ Tags may be added using any (or all) of the following methods:
 
 ## Limitations
 
-We store one time series per host + metric + tag combination on our backend, thus we cannot support infinitely bounded tags. Please don't include endlessly growing tags in your metrics, like timestamps or user ids. Please limit each metric to 1000 tags.
+We store one time series per host + metric + tag combination on our backend, thus we cannot support infinitely bounded tags.  
+Don't include endlessly growing tags in your metrics, like timestamps or user ids. **Limit each metric to 1000 tags**.
 
 Read more about this [here](/getting_started/custom_metrics)
 

@@ -5,23 +5,19 @@ customnav: main_references
 ---
 
 If you have any questions about Datadog or a use case our [Docs](http://docs.datadoghq.com) didn't mention, we'd love to help! Here's how
-you can reach out to us:
-
-## Visit the Knowledge Base
-
-Learn more about what you can do in Datadog on the [Support Knowledge Base](http://datadog.zendesk.com).
+to reach out to us:
 
 ## Web Support
 
-Messages in the [event stream](http://app.datadoghq.com/graphing/event_stream) containing **@support-datadog** will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the app.
+Messages in the [event stream](http://app.datadoghq.com/graphing/event_stream) containing **@support-datadog** will reach our Support Team. This is a convenient channel for referencing graph snapshots or a particular event. In addition, we have a livechat service available during the day (EST) from any page within the application.
 
 ## By Email
 
-You can also contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
+Contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
 
 ### Access you support ticket
 
-If you already have opened at least one ticket to support@datadoghq.com follow this process to acccess all your Datadog support tickets:
+If you already have opened at least one ticket to support@datadoghq.com follow this process to access all your Datadog support tickets:
 
 * Get a password from us by clicking this link on the sign in page of this website : `https://help.datadoghq.com`
     {{< img src="faq/sing_in.png" alt="sing in" responsive="true" popup="true">}}
@@ -31,7 +27,7 @@ Once you received the password, when you log in, you should be then directed to 
 From here, you should be able to see your requests:
     {{< img src="faq/my_activities.png" alt="my activities" responsive="true" popup="true">}}
 
-However, if you don't see this after logging in, you can click on your name in the upper righthand corner, and then select "My Activities" from there. 
+However, if you don't see this after logging in, click on your name in the upper right hand corner, and then select "My Activities" from there. 
 
 ## Over Slack
 

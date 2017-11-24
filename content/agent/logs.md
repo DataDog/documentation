@@ -119,7 +119,7 @@ def my_log_parser(logger, test):
     return (metric_name, date, metric_value, metric_attributes)
 ```
 
-And then we would configure our datadog.conf to include the dogstream option as follows:
+And then we would configure our `datadog.conf` to include the dogstream option as follows:
 ```
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")
@@ -154,7 +154,7 @@ The aggregation key is a combination of the following fields:
 - aggregation_key
 - host
 
-For an example of an event parser, see our [cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py) that is bundled with the Agent.
+For an example of an event parser, see our [Cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py) that is bundled with the Agent.
 
 ### Example for Events Collecting
 
@@ -194,7 +194,7 @@ def my_log_parser(logger, line):
     return logged_event
 ```
 
-And then we would configure our datadog.conf to include the dogstream option as follows:
+And then we would configure our `datadog.conf` to include the dogstream option as follows:
 ```
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\") 
@@ -246,7 +246,7 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers will be very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the datadog.conf by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then restarting the agent. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the collector.log ([read here for where to find your agent logs](/agent/faq/log-locations)), and it will generally include the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers will be very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then restarting the agent. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the collector.log ([read here for where to find your agent logs](/agent/faq/log-locations)), and it will generally include the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
 Do note that whenever you make a change to your custom log-parser, you must restart the agent before that change will be put into effect.
 

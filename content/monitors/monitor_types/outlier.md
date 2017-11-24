@@ -24,7 +24,7 @@ Outlier Detection is an algorithmic feature that allows you to detect when some 
 
 ## How to Use Outlier Detection on Your Data
 
-The `outliers` query function, when applied to your query, will return the usual results but with outlier series marked.
+The `outliers` query function, when applied to your query, will return the usual results but with outliers series marked.
 
 You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 
@@ -32,10 +32,10 @@ You can use this function to display and alert on outliers in your data. To try 
 ### Show Outliers in Dashboards or Screenboards
 
 
-Here's a graph of gunicorn requests by host with outlier detection enabled.
+Here's a graph of Gunicorn requests by host with outlier detection enabled.
 
 
-{{< img src="monitors/monitor_types/outliers/outliers-graph-dbscan-gunicorn.png" alt="outliers graph dbscan gunicorn" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/outliers/outliers-graph-dbscan-gunicorn.png" alt="outliers graph dbscan Gunicorn" responsive="true" popup="true">}}
 
 
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
@@ -147,13 +147,15 @@ The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the
 Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
 
 
-{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad cassandra" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad Cassandra" responsive="true" popup="true">}}
 
 ### DBSCAN vs. MAD
 
 So which algorithm should you use? For most outliers, any algorithm will perform well at the default settings. However, there are subtle cases where one algorithm is more appropriate than the other.
 
-In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
+In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed.  
+
+The synchronization of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
 
 
 {{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing" responsive="true" popup="true">}}

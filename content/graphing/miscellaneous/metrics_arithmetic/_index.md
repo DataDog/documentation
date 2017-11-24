@@ -21,7 +21,7 @@ This can be done inside a graph editor by clicking on the Graph Editor and selec
 
 ### Arithmetic between two Metrics
 
-For example, if you would like to visualize the percentage of jvm.heap_memory used, you can perform the following arithmetic across two metrics already being reported to Datadog: jvm.heap_memory / jvm.heap_memory_max. This can be done in the same manner as above, utilizing the "advanced..." option in the Graph Editor. From there, you can select "add a metric to this expression. Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter, the first metric represented by a, the second b, and so on. Then in the "Graph these queries as" box, you can enter the arithmetic you would like, in this case: ( a / b )
+For example, if you would like to visualize the percentage of `jvm.heap_memory` used, you can perform the following arithmetic across two metrics already being reported to Datadog: `jvm.heap_memory` / `jvm.heap_memory_max`. This can be done in the same manner as above, utilizing the "advanced..." option in the Graph Editor. From there, you can select "add a metric to this expression. Once you have added all of the metrics you would like to visualize, you will notice they are each assigned a letter, the first metric represented by a, the second b, and so on. Then in the "Graph these queries as" box, you can enter the arithmetic you would like, in this case: ( a / b )
 
 {{< img src="graphing/metrics/Metric_arithmetic 2.png" alt="Metric arithmetic 2" responsive="true" popup="true">}}
 

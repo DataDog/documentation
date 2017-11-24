@@ -160,7 +160,7 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 
 ### Saved Searches
 
-Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching wether the search name or query.
+Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true">}}
 

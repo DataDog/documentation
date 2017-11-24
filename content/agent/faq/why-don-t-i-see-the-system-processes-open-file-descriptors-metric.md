@@ -16,7 +16,7 @@ That said, if you're okay elevating the Datadog agent privileges you could do th
     * https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
 * [Start the agent](/agent/faq/start-stop-restart-the-datadog-agent)
 
-Please see the following Github issues for more info on this matter as well as other potential methods of capturing this metric on Linux machines. 
+See the following Github issues for more info on this matter as well as other potential methods of capturing this metric on Linux machines. 
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
