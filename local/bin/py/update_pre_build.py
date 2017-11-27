@@ -30,6 +30,7 @@ def cache_by_sha(func):
         path_to_file = list_item.get('path', '')
         file_out = '{}{}'.format(dest_dir, path_to_file)
         p_file_out = '{}{}.pickle'.format(dest_dir, path_to_file)
+        makedirs(dirname(file_out), exist_ok=True)
         if exists(p_file_out) and exists(file_out):
             with open(p_file_out, 'rb') as pf:
                 cache = pickle.load(pf)
