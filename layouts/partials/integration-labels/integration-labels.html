@@ -2,17 +2,17 @@
 <div class="row integration-labels mb-40">
     {{ if eq .Params.ddtype "check" }}
         <div class="agent col-12">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_agent.png") }}" /><span>Agent Check</span>
+            <img alt="Agent Check"  class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_agent.png") }}" /><span>Agent Check</span>
         </div>
     {{ end }}
     {{ if eq .Params.ddtype "statsd" }}
         <div class="statsd col-12 ">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png") }}" /><span>StatsD Check</span>
+            <img alt="StatsD Check" class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png") }}" /><span>StatsD Check</span>
         </div>
     {{ end }}
     {{ if eq .Params.ddtype "crawler" }}
         <div class="crawler col-12">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png") }}" /><span>Crawler</span>
+            <img alt="Crawler" class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png") }}" /><span>Crawler</span>
         </div>
     {{ end }}
 </div>

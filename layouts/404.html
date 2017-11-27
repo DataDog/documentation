@@ -1,7 +1,7 @@
 {{ define "main" }}
     <h1>Uh oh, Something Went Wrong</h1>
 
-    <img src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
+    <img alt="sad" src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
     <p class="alert alert-error pull-left">
         Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
     </p>
