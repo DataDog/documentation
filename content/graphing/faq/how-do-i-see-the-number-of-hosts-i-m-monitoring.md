@@ -19,4 +19,4 @@ For setup, simply:
 
 **Disclaimer**: This should not be used for billing purposes, this is only a convenient option to count active instances and is not necessarily reflective of your invoice.
 
-If you're a customer and need detailed billing information, please reach directly to your Customer Success Manager or email success@datadog.com.
+If you're a customer and need detailed billing information, reach directly to your Customer Success Manager or email success@datadog.com.

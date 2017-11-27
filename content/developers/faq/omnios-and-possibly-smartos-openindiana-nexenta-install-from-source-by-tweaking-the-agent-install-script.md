@@ -10,4 +10,4 @@ A Datadog user managed to tweak the install from source script to have the agent
 
 In attachment are the instructions, courtesy of Joseph Boren, if this can help you install the datadog-agent.
 
-Please note that this is not supported by Datadog nor has not been tested by Datadog. OmnisOS remains an OS not supported by Datadog.
+Note that this is not supported by Datadog nor has not been tested by Datadog. OmnisOS remains an OS not supported by Datadog.

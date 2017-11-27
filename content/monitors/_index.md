@@ -16,18 +16,18 @@ availability, network endpoints, and more.
 
 Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
-Hipchat) or other custom endpoints via webhooks.
+Hipchat) or other custom endpoints via Webhooks.
 
 Triggered monitors will appear in the [event stream](/graphing/event_stream/), allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
 
-Monitors can be managed programatically, refer to the [Datadog API docs](/api/#monitors) for detailed information on managing monitors through the API using the available [libraries](/developers/libraries) or cURL.
+Monitors can be managed programmatically, refer to the [Datadog API docs](/api/#monitors) for detailed information on managing monitors through the API using the available [libraries](/developers/libraries) or cURL.
 
 In this section you can:
 
 * [Learn how to create a monitor](/monitors/monitor_types)
 * [Configure your monitor notifications](/monitors/notifications)
 * [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
+* [Schedule a downtime to mute a monitor](/monitors/downtimes)
 * [See all your checks into one place](/monitors/check_summary)
 * [Consult our FAQ](/monitors/faq)
 
@@ -47,7 +47,7 @@ Here is a quick overview of the different terms used:
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types on the left. See the [Monitoring Reference](/monitors/monitor_types) to learn more about all monitor types.
 
-{{< img src="monitors/index/nav.png" alt="nav" responsive="true" popup="true">}}
+{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
 
 ## Export your monitor
 

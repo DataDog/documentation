@@ -113,15 +113,9 @@ Here is a quick overview of the different terms used:
 
     - When you select the **change alert** option, you will have additional
     parameters you can adjust.
-      - *change* is an absolute change of the value whereas *% change* is the
-        percentage change of your value compared to its previous value (so if
-        it was a value of 2 and now 4, the *% change* will be 100%).
-      - You can compare the change of the value during a given timeframe by
-        selecting the period you want to compare against. This can range from 5
-        minutes to up to 2 days.
-      - Like the **threshold alert**, you will need to select the
-        *time aggregation* and a *time window* on which the change will be
-        calculated.
+      - *change* is an absolute change of the value whereas *% change* is the percentage change of your value compared to its previous value (so if it was a value of 2 and now 4, the *% change* will be 100%).
+      - You can compare the change of the value during a given timeframe by selecting the period you want to compare against. This can range from 5 minutes to up to 2 days.
+      - Like the **threshold alert**, select the *time aggregation* and a *time window* on which the change will be calculated.
 
     - For details on how to configure Anomaly Detection, see the [Anomaly Monitor](/monitors/monitor_types/anomaly)
 
@@ -159,12 +153,12 @@ Here is a quick overview of the different terms used:
    as well as Datadog's @-notification syntax. Note: you can notify any
    non-Datadog users via email by simply adding `@their-email` to the
    message.
-
-   A common use-case for the monitor message is to include a step-by-step way
-   to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
+  A common use-case for the monitor message is to include a step-by-step way to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
 4. Remind your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message will be included as well.
 
-Learn more about notifications settings [here](/monitors/notifications).
+Learn more about notifications settings [here](/monitors/notifications).  
+
+
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket will be sent as normal. All other notifications within that 20 seconds will be sent as a single message listing all of them after the first two.*

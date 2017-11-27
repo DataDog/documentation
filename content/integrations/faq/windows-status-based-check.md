@@ -28,6 +28,6 @@ Checks
 
 You should now have a monitor based on your Windows Service Integration.
 
-If you are looking at configuring the Windows Event Log Integration, please follow this article:
+If you are looking at configuring the Windows Event Log Integration, follow this article:
 
 [How to monitor events from the Windows Event Logs](/integrations/faq/how-to-monitor-events-from-the-windows-event-logs)

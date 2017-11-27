@@ -77,7 +77,7 @@ How to use the ['rollup' function](/graphing/miscellaneous/functions/#rollup).
 
 In our example rollup(avg,60) will define an aggregate period of 60 seconds. So our X minutes interval will be sliced into Y intervals of 1 minute each. Data within a given minute will be aggregated into a single point that will show up on your graph (after step 3, the space-aggregation).
 
-Please note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you will not get the one-minute granularity requested.
+Note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you will not get the one-minute granularity requested.
 
 ## Proceed to space-aggregation  
 
@@ -134,5 +134,5 @@ Arithmetic is applied after time and space aggregation as well (step 4).
 They are time aggregators specific to rates and counters submitted via statsd/dogstatsd, that make it possible to view metrics as a rate per second or to see them as raw counts.
 Syntax: instead of adding a rollup, you can use .as_count() or .as_rate().
  
-More information in [this blogpost](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
+More information in [this blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
 Documentation about [statsd/dogstatsd](/developers/dogstatsd).

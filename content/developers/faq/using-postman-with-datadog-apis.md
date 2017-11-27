@@ -70,7 +70,7 @@ After you have all of your JSON entered, you can SEND the request and you should
 
 ## API DELETE Calls
 
-If you need to delete any entity, it is a relatively easy process by using the Datadog API.  You will need to use the HTTP DELETE method along with the corresponding ID of the entity you are trying to delete.
+If you need to delete any entity, it is a relatively easy process by using the Datadog API: Use the HTTP DELETE method along with the corresponding ID of the entity you are trying to delete.
 
 Example Call:
 

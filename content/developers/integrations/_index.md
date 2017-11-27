@@ -10,7 +10,7 @@ aliases:
 
 Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 
-If you would like to propose an integration, please reach out to support@datadoghq.com and tell us what metrics you would like to see from that given source.
+If you would like to propose an integration, reach out to support@datadoghq.com and tell us what metrics you would like to see from that given source.
 
 If you manage or work with a service and would like to see Datadog integrate it, the following information is needed:
 

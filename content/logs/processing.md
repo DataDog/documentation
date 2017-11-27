@@ -6,12 +6,15 @@ customnav: lognav
 description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
 beta: true
 further_reading:
-- link: "/logs/explore"
-  tag: "Logs"
-  text: Learn how to explore your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+  tag: "FAQ"
+  text: How to investigate a log parsing issue?
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
 ---
 
 <div class="alert alert-info">
@@ -23,7 +26,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 To access the processing panel use the upper left menu:
 
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines pannel" responsive="true" popup="true">}}
+{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true">}}
 
 ## Processing Pipelines 
 ### Pipelines Goal 
@@ -93,9 +96,9 @@ As Datadog receives logs, it timestamps them using the value(s) from any of thes
 * `eventTime`
 * `published_date`
 
-If your logs put their dates in an attribute not in this list, use the log date remapper processor to define their date attribute as the official log timestamp:
+If your logs put their dates in an attribute not in this list, use the log date Remapper processor to define their date attribute as the official log timestamp:
 
-{{< img src="logs/processing/log_date_remapper.png" alt="Log date remapper" responsive="true" popup="true">}}
+{{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 
@@ -103,7 +106,7 @@ If your logs don't contain any of the default attributes and you haven't defined
 
 Use this processor if you want to assign some attributes as the official severity, just enter the attribute path in the processor tile as follow:
 
-{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity remapper processor tile" responsive="true" popup="true">}}
+{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity Remapper processor tile" responsive="true" popup="true">}}
 
 It transforms this log:
 
@@ -115,7 +118,7 @@ Into this log:
 
 However, beware that each incoming severity value is mapped as follows:
 
-* Integers from 0 to 7 map to the [syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
+* Integers from 0 to 7 map to the [Syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
 * Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
 * Strings beginning with **a** (case unsensitive) map to **alert (1)**
 * Strings beginning with **c** (case unsensitive) map to **critical (2)**

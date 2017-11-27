@@ -40,7 +40,7 @@ The ddtrace library includes support for the following web frameworks:
 *  [Ruby on Rails](http://rubyonrails.org/).
 *  [Sinatra](http://www.sinatrarb.com/).
 
-To learn how to instrument these frameworks, please reference [the RubyDoc documentation](http://www.rubydoc.info/gems/ddtrace)
+To learn how to instrument these frameworks, reference [the RubyDoc documentation](http://www.rubydoc.info/gems/ddtrace)
 
 It also includes support for the following libraries:
 

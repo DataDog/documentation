@@ -4,7 +4,7 @@ kind: faq
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 ---
 

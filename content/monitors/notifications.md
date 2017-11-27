@@ -5,20 +5,17 @@ autotocdepth: 2
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/manage_monitor"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
-- link: "/monitors/check_summary"
-  tag: "Monitors"
-  text: See all your checks into one place
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 ## Overview
@@ -116,10 +113,11 @@ You can use any of the available tag variables in your condition. A match
 will be made if the comparison string is anywhere in the resolved variable.
 
 The variable uses the following format:
-
+```
   {{#is_match "tag_variable" "comparison_string"}}
   This will show if comparison_string is in tag_variable.
   {{/is_match}}
+```
 
 Here is an example of how you can give a different message depending on the triggering context:
 
@@ -187,25 +185,25 @@ This will show if comparison_string is in tag_variable.
 
 ### {{is_recovery}} or {{is_alert_recovery}} 
 
-* {{is_recovery}} will trigger and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state. 
-* {{is_alert_recovery}} will trigger when a monitor recovers directly from an **ALERT** state to **OK** state. 
-* {{is_warning_recovery}} will trigger when a monitor recovers from a **WARNING** state to **OK** state
+* `{{is_recovery}}` will trigger and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state. 
+* `{{is_alert_recovery}}` will trigger when a monitor recovers directly from an **ALERT** state to **OK** state. 
+* `{{is_warning_recovery}}` will trigger when a monitor recovers from a **WARNING** state to **OK** state
 
 This means that if the monitor switches from ALERT to WARNING then OK state:
 
-* the {{is_recovery}} would trigger
-* the {{is_alert_recovery}} wouldn't trigger 
-* the {{is_warning_recovery}} would trigger. 
+* the `{{is_recovery}}` would trigger
+* the `{{is_alert_recovery}}` wouldn't trigger 
+* the `{{is_warning_recovery}}` would trigger. 
 
 The @ notification inside the template variables will follow the same rules. 
 
 ## Include links to appropriate dashboards in your Monitor Notifications
 
-Many organizations today would like to include additional context to their Alerts.  Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution. 
+Many organizations today would like to include additional context to their Alerts.  Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution.  
 
-Datadog makes message template variables available to each defined monitor.  Using these variables, you can dynamically build a URL that will link Datadog Users to an appropriate dashboard using the scope of the monitor.
+Datadog makes message template variables available to each defined monitor.  Using these variables, you can dynamically build a URL that will link Datadog Users to an appropriate dashboard using the scope of the monitor.  
 
-The are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages. 
+The are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.  
 
 First example to review is the most common.  Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold.  The message template variable that can be leveraged in this instance would be {{host.name}}.  Include the following URL as a part of your Monitor “Say What’s Happening” section: 
 
@@ -228,9 +226,9 @@ The above link has more customizable options than your standard System Dashboard
 **Fillby, sizeby, filter**: Fill by can be defined by adding fillby:avg:<MetricName>.  Size by can be defined by adding sizeby:avg:<SecondMetricName>.  Filter can be used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding filter=<integration_name>
 {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" >}}
 
-The above will color fill the hexagons by system.cpu.system, it will size the hexagons by system.cpu.stolen and add a filter to only include Cassandra hosts. 
+The above will color fill the hexagons by `system.cpu.system`, it will size the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts. 
 
-**Integration Dashboards**- If you are building Application or Integration specific Monitors, you can link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.  In the example below all that is necessary to populate is the <integration_name> section for something like Cassandra, apache, snmp, etc as well as providing the scope for the offending host:
+**Integration Dashboards**- If you are building Application or Integration specific Monitors, you can link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.  In the example below all that is necessary to populate is the *<integration_name> section for something like Cassandra, apache, SNMP, etc as well as providing the scope for the offending host:
 
 ```
 https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}

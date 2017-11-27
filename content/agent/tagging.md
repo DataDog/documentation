@@ -16,7 +16,7 @@ We recommend to use the format <code>key:value</code> when using tags, like <cod
 Tags must start with a letter, and after that may contain alphanumerics,
 underscores, minuses, colons, periods and slashes. Other characters will get
 converted to underscores. Tags can be up to 200 characters long and support
-unicode. Tags will be converted to lowercase as well.
+Unicode. Tags will be converted to lowercase as well.
 
 Note: An exception to this is with trailing underscores, which will be trimmed off of tags (e.g. path:thing_ becomes path:thing).
 
@@ -88,7 +88,10 @@ The following integration sources create tags automatically in Datadog:
 
 
 ### Assigning tags using the configuration files
-The Datadog integrations are all configured via the yaml configuration files located in the conf.d directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall]. You can define tags in the configuration file for the overall agent as well as for each integration, though the datadog.conf file is a more traditional ini file. In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
+The Datadog integrations are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].  
+
+Define tags in the configuration file for the overall agent as well as for each integration, though the `datadog.conf` file is a more traditional init file.  
+In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
@@ -101,7 +104,7 @@ or
       - key_second_tag:value_2
       - key_third_tag:value_3
 
-You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid.
+You will see both forms in the yaml configuration files, but for the `datadog.conf` init file only the first form is valid.
 
 Each tag can be anything you like but you will have the best success with tagging if your tags are key:value pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
 
@@ -131,7 +134,7 @@ After you have assigned tags at the host and integration level, you can start us
 
 ### Using tags in the Events List
 
-The [Events List](/graphing/event_stream/) will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is `tags:role:cassandra`.
+The [Events List](/graphing/event_stream/) will show you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
 
 {{< img src="agent/tagging/eventtags.png" alt="Events List and Tags" responsive="true" popup="true">}}
 
@@ -209,7 +212,7 @@ sum:page.views{domain:example.com} by {host}
 
 Further tagging info can be found [here](/integrations/amazon_web_services/).
 
-For information on AWS tagging, please see [here](/developers/metrics/).
+For information on AWS tagging, see [this tagging doc page](/agent/tagging/).
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

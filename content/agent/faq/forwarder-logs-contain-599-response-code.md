@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
 
@@ -14,7 +14,7 @@ further_reading:
 * The app is otherwise reachable from the browser.
 * The MTU on the main interface of the server is > 1500 (e.g. jumbo frames)
 
-If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us. If consistent please proceed.
+If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
 
 ## Cause
 
@@ -70,7 +70,7 @@ http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
 
 ## Changing the agent's Tornado Client
 
-Some customers experience these 599 tornado errors only when their datadog agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the datadog.conf on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93). 
+Some customers experience these 599 tornado errors only when their datadog agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.conf` on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93). 
 
 ## Windows
 
@@ -80,12 +80,12 @@ https://blogs.technet.microsoft.com/askpfeplat/2014/12/01/psa-incorrect-mtu-size
 
 ## I've done everything above!
 
-If you've done everything above and continue to have issues please send support@datadoghq.com the following information:
+If you've done everything above and continue to have issues, send support@datadoghq.com the following information:
 
 1. [Send a flare](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
-2. Let us know if you're seeing this across all instances or only a subset - if unique please help us understand what's different
+2. Let us know if you're seeing this across all instances or only a subset - if unique help us understand what's different.
 3. Where is this instances hosted physically? We've seen network issues with service providers upstream from our customers that have resulted in 599's
-4. Please also include the information listed in the "Diagnosis" section above.
+4. Include the information listed in the "Diagnosis" section above.
 
 ## Further Reading
 

@@ -4,10 +4,10 @@ kind: faq
 customnav: monitornav
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
 ---
 
@@ -26,6 +26,6 @@ This option is typically recommended for metrics being reported by the Datadog A
 3. The last option here is the Delay Evaluation.  
 Since Monitors perform an evaluation every minute, it is looking back on the past X minutes of data. For backfilled metrics, like those coming from AWS, the monitor may be looking at a period of time when the data is simply not in Datadog. This will cause false No Data alerts. Setting this field allows you to have the monitor wait, 900 seconds, so that the AWS metrics have 900 seconds to be available within Datadog before the monitor begins evaluation. 
 
-Please contact [us](/help) should you experience any issues. 
+Contact [us](/help) should you experience any issues. 
 
 {{< partial name="whats-next/whats-next.html" >}}

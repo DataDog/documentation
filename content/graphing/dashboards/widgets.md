@@ -154,7 +154,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 The Change graph will show you the change in a value over the time period chosen.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Changegraph" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" popup="true">}}
 
 
 ## Hostmap
@@ -276,7 +276,7 @@ Alert values are query values showing the current value of the metric in any mon
 ## Iframe
 *Supported on Screenboards only*
 
-The Iframe widget will allow you to embed a portion of any other webpage on your dashboard.
+The Iframe widget will allow you to embed a portion of any other web page on your dashboard.
 
 ## Check Status
 *Supported on Screenboards only*

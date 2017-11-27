@@ -4,10 +4,10 @@ kind: documentation
 autotocdepth: 3
 customnav: graphingnav
 ---
-## Change timeboard name
+## Change Timeboard name
 
 1. Click on the info icon on the top right corner of the Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timebaord name" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" popup="true">}}
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
@@ -19,7 +19,7 @@ customnav: graphingnav
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
-Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of admin privileges, can sign up to receive change notifications for a particular Timeboard.
+Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
 
 If a user decides to track changes for a Timeboard, the following Timeboard changes will be reported to the user through an event in the event stream:
 
@@ -28,9 +28,9 @@ If a user decides to track changes for a Timeboard, the following Timeboard chan
 3. Timeboard cloning
 4. Timeboard deletion
 
-In order to prevent the above listed changes, an admin (account admins + Timeboard creator) can activate read-only view disabling all non-admin user edits to any tiles or text in the Timeboard, as well as Timeboard deletion.  
+In order to prevent the above listed changes, an administrator (account administrators + Timeboard creator) can activate read-only view disabling all non-administrator user edits to any tiles or text in the Timeboard, as well as Timeboard deletion.  
 
-Even in read-only mode, non-admin users can still clone the Timeboard, rearrange the tiles, snapshot each tile, and view the tile in fullscreen. Any tile rearrangement by a non-admin user will not persist if the Timeboard is set to read-only.
+Even in read-only mode, non-administrator users can still clone the Timeboard, rearrange the tiles, snapshot each tile, and view the tile in full screen. Any tile rearrangement by a non-administrator user will not persist if the Timeboard is set to read-only.
 
 ## Tracking Changes
 

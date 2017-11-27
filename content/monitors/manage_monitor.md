@@ -5,20 +5,17 @@ autotocdepth: 2
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
-- link: "/monitors/check_summary"
-  tag: "Monitors"
-  text: See all your checks into one place
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.

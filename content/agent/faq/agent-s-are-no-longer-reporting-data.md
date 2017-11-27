@@ -4,11 +4,11 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
 
-If your Datadog account was disabled and then re-enabled your API key was likely reset, to confirm/reset this please do the following:
+If your Datadog account was disabled and then re-enabled your API key was likely reset, to confirm/reset this, do the following:
  
 1. Go to the [Integration->API's page](https://app.datadoghq.com/account/settings#api) and copy the key listed at the top.
  
@@ -24,6 +24,6 @@ If your Datadog account was disabled and then re-enabled your API key was likel
     * Windows: `Recycle the Datadog Service`
     * Other OS's reference [this link](/agent/faq/start-stop-restart-the-datadog-agent)
 
-If this doesn't help or appear to be applicable, please reach out to [us](/help)
+If this doesn't help or appear to be applicable, reach out to [us](/help).
 
 {{< partial name="whats-next/whats-next.html" >}}

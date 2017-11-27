@@ -13,7 +13,7 @@ To create a [TimeBoard](/graphing/dashboards/timeboard/) or a [ScreenBoard](/gra
 
 ## What is the difference between a ScreenBoard and a TimeBoard?
 
-At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards](/graphing/dashboards/screenboard) and [TimeBoards](/graphing/dashboards/timeboard). To more clearly understand the differences between the two, please consider the following:
+At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards](/graphing/dashboards/screenboard) and [TimeBoards](/graphing/dashboards/timeboard). To more clearly understand the differences between the two, consider the following:
 
 |  | Timeboards | Screenboards|
 |---|------------|-------------|
@@ -34,17 +34,17 @@ To create, edit, and delete template variables click the gear icon at the upper 
 
 This will open the template variable editing panel.
 
-{{< img src="graphing/dashboards/redis-template-var.png" alt="redis template var" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/redis-template-var.png" alt="Redis template var" responsive="true" popup="true">}}
 
 A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
 
 ## Using template variables in graph editors
 
-{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="redis-tpl graph editor" responsive="true"  >}}
+{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="Redis-tpl graph editor" responsive="true"  >}}
 
 Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` will be scoped to `redis_port:6379`.
 
-{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="redis tpl selected" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" popup="true">}}
 
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.

@@ -8,7 +8,7 @@ We have identified a specific scenario where unexpected spikes (often twice the
 
 Datadog engineering team has worked on a solution that works on specific accounts only and strongly reduce the presence of these artifacts. We are working on improving this fix and hope to generalize it soon.
 
-For a diagnosis, please read this article, and reach out to [us](/help) with a precise reference of the dashboard, the graph and the timeframe at which this problem occurs.
+For a diagnosis, read this article, and reach out to [us](/help) with a precise reference of the dashboard, the graph and the timeframe at which this problem occurs.
 
 ## The scenario
 

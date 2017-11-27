@@ -4,14 +4,14 @@ kind: faq
 customnav: lognav
 beta: true
 further_reading:
-- link: "/logs/explore"
-  tag: "Logs"
-  text: Learn how to explore your logs
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
 - link: "/logs/processing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to process your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 ---
 
@@ -26,7 +26,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     
     {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" popup="true">}}
     
-    For integration pipeline, you will need to clone them and troubleshoot on the clone.
+    For integration pipeline, clone them and troubleshoot on the clone.
 
 2. Spot obvious differences if any
     In most of the cases, you should have examples or log samples in your parsers. Compare your log with the sample to find simple differences such as a missing element, a different order or extra elements.
@@ -85,7 +85,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     In other situation it might be the rule expecting an "integer" whereas the values are double so the matcher should be changed to "number".
 
 5. Ask for help
-    We are always here to help you if you did not manage to find the cause of the parsing error. So please [contact us](/help).
+    We are always here to help you if you did not manage to find the cause of the parsing error, [contact us](/help).
 
 ## Further Reading
 

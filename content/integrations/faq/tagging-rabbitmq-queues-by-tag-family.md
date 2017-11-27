@@ -6,11 +6,11 @@ customnav: integrationsnav
 
 As of Datadog Agent version 5.8.0. it is now possible to apply a tag to specified groups of RabbitMQ queues for use in visualizations and alerting.
 
-In order to configure this, you'll need to provide the tag_families: true parameter in the rabbitmq.yaml file here: https://github.com/DataDog/dd-agent/blob/5.8.x/conf.d/rabbitmq.yaml.example
+In order to configure this, provide the tag_families: true parameter in the rabbitmq.yaml file here: https://github.com/DataDog/dd-agent/blob/5.8.x/conf.d/rabbitmq.yaml.example
 
 If you have this parameter set up, the first captured group in the queues_regexes provided will be used as the queue_family tag
 
-Consider the following example rabbitmq.yaml:
+Consider the following example `rabbitmq.yaml`:
 ```yaml
 init_config:
 

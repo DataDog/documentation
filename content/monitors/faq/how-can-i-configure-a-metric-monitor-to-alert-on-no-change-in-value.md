@@ -4,10 +4,10 @@ kind: faq
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 ---
 

@@ -21,9 +21,9 @@ customnav: graphingnav
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 
 Only [account Administrators](/account_management/team/#datadog-user-roles) and the Screenboard creator can activate read-only mode for a Screenboard.  
-Any user in the organization, regardless of admin privileges, can sign up to receive change notifications for a particular Screenboard.
+Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Screenboard.
 
-If a user decides to track changes for a screenboard, the following Screenboard changes will be reported to the user through an event in the [event stream](/graphing/event_stream/):
+If a user decides to track changes for a Screenboard, the following Screenboard changes will be reported to the user through an event in the [event stream](/graphing/event_stream/):
 
 1. Text changes (title, description)
 
@@ -34,8 +34,8 @@ If a user decides to track changes for a screenboard, the following Screenboard 
 
 4. Screenboard deletion
 
-In order to prevent the above listed changes, an admin (account admins + Screenboard creator) can activate read-only view disabling all non-admin user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.  
-Even in read-only mode, non-admin users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in fullscreen. Any tile rearrangement by a non-admin user will not persist if the Screenboard is set to read-only.
+In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.  
+Even in read-only mode, non-administrator users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in full-screen. Any tile rearrangement by a non-administrator user will not persist if the Screenboard is set to read-only.
 
 ## Tracking Changes
 A user can find all events related to Screenboard changes to the Screenboard they are following by searching `tags:audit, <Screenboard_name>` in the main [event stream](/graphing/event_stream/), as each notification event is tagged with those two tags.
@@ -60,7 +60,7 @@ This feature can be enabled by following these simple steps:
 
 ### Deluminate (Chrome)
 
-This Chrome plugin will help you change the Color Scheme for your browser (Contrast, Reverse Colors, Image colors, Luminance) [Deluminate](https://chrome.google.com/webstore/detail/deluminate/iebboopaeangfpceklajfohhbpkkfiaa?hl=en-US).
+This Chrome plug-in will help you change the Color Scheme for your browser (Contrast, Reverse Colors, Image colors, Luminance) [Deluminate](https://chrome.google.com/webstore/detail/deluminate/iebboopaeangfpceklajfohhbpkkfiaa?hl=en-US).
 
 Simple to setup and easily activated/unactivated, Deluminate is a good fit for Datadog Screenboards.
 {{< img src="developers/faq/deluminate.png" alt="deluminate" responsive="true" popup="true">}}
@@ -78,13 +78,13 @@ Here is how to proceed to enjoy this css style on Chrome using Stylebot:
 1. Install the Stylebot extension for Chrome: `https://chrome.google.com/webstore/detail/stylebot/oiaejidbmkiecgbjeifoejpgmdaleoha?hl=en`
 2. On the css page, `http://stylebot.me/styles/4320`, click the scissors "CSS" icon and copy all the css
 3. Click the Stylebot icon to open the menu, choose "Options"
-4. In the left colunm choose 'Styles', then click "Add a new Style"
+4. In the left column choose 'Styles', then click "Add a new Style"
 5. URL: p.datadoghq.com
 6. In the text zone, paste the whole css code previously copied from our css page
 7. Save
 8. Next time you will visit a shared dashboard, this new css style will be enabled.
 
-If you have any custom css style sheet that you would like to share, please [reach out to us](/help)
+If you have any custom css style sheet that you would like to share, [reach out to us](/help)!
 
 ## Backup my Screenboard
 

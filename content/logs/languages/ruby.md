@@ -6,13 +6,13 @@ customnav: lognav
 beta: true
 further_reading:
 - link: "/logs/processing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to process your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 - link: "/logs/explore"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to explore your logs
 ---
 
@@ -65,10 +65,10 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Please refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
+**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
 
 ## Disable log coloration
-As it would be weirdly displayed in your Datadog application please disable your log coloration:
+As it would be weirdly displayed in your Datadog application, disable your log coloration:
 
 ```ruby
 config.colorize_logging = false

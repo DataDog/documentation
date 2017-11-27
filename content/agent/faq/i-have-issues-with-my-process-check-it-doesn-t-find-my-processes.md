@@ -4,10 +4,10 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Logs
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/integrations/process"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about the Datadog-Process Agent
 ---
 

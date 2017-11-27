@@ -270,60 +270,66 @@ languages:
           url: "/monitors/monitor_types/"
           weight: 30
           parent: menu_references_monitoring
+
         - identifier: customnav_monitortypenav_anomaly
           name: "Anomaly"
           url: "/monitors/monitor_types/anomaly/"
-          weight: 20
+          weight: 310
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_apm
           name: "APM"
           url: "/monitors/monitor_types/apm/"
-          weight: 30
+          weight: 320
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_composite
           name: "Composite"
           url: "/monitors/monitor_types/composite/"
-          weight: 40
+          weight: 330
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_custom_check
           name: "Custom Check"
           url: "/monitors/monitor_types/custom_check/"
-          weight: 50
+          weight: 340
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_event
           name: "Event"
           url: "/monitors/monitor_types/event/"
-          weight: 60
+          weight: 350
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_host
           name: "Host"
           url: "/monitors/monitor_types/host/"
-          weight: 70
+          weight: 360
+          parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_forecasts
+          name: "Forecasts"
+          url: "/monitors/monitor_types/forecasts/"
+          weight: 370
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_integration
           name: "Integration"
           url: "/monitors/monitor_types/integration/"
-          weight: 80
+          weight: 380
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_metric
           name: "Metric"
           url: "/monitors/monitor_types/metric/"
-          weight: 90
+          weight: 390
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_network
           name: "Network"
           url: "/monitors/monitor_types/network/"
-          weight: 100
+          weight: 400
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_outlier
           name: "Outlier"
           url: "/monitors/monitor_types/outlier/"
-          weight: 110
+          weight: 410
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_process
           name: "Process"
           url: "/monitors/monitor_types/process/"
-          weight: 120
+          weight: 420
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"

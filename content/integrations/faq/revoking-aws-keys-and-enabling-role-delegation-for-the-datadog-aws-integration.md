@@ -39,7 +39,7 @@ Leave Require MFA disabled.
 9. Scroll down to the bottom of the configuration page and click Update Configuration. A green banner will be displayed once the configuration has been validated and applied. This process will also remove the previously used Access Key credentials.
     {{< img src="integrations/faq/A10.png" alt="A10" responsive="true" popup="true">}}
 
-10. Once you've setup Datadog for AWS Roles please revoke your AWS Keys per [this article](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html). This can be done from the AWS Console Security Credentials page by expanding the section for Access Keys and clicking the Make Inactive or Delete link for the appropriate Access Key ID.
+10. Once you've setup Datadog for AWS Roles, revoke your AWS Keys per [this article](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html). This can be done from the AWS Console Security Credentials page by expanding the section for Access Keys and clicking the Make Inactive or Delete link for the appropriate Access Key ID.
     {{< img src="integrations/faq/A11.png" alt="A11" responsive="true" popup="true">}}
 
-If you encounter any issues or have additional questions, please [contact us](/help)
+If you encounter any issues or have additional questions, [contact us](/help)!

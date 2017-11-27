@@ -11,7 +11,7 @@ Datadog's integrated APM tool eliminates the traditional separation between infr
 
 ## Getting started
 
-The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog app](https://app.datadoghq.com/trace/home) to get started.
+The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/trace/home) to get started.
 
 APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.  
 
@@ -34,24 +34,24 @@ Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#ag
 
 To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-For additional information, please reference [the Docker page](/tracing/docker)
+For additional information, reference [the Docker page](/tracing/docker)
 
 ### Instrument your application
 
-To instrument your application, please select one of the following supported languages.
+To instrument your application, select one of the following supported languages.
 
 - [Go](/tracing/go)
 - [Python](/tracing/python)
 - [Ruby](/tracing/ruby)
 
-To instrument an application written in a language that does not yet have official library support, please reference the [Tracing API](/api/?lang=console#traces).
+To instrument an application written in a language that does not yet have official library support, reference the [Tracing API](/api/?lang=console#traces).
 
 ## Configuration
 
 The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options.  
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
 
-| File setting | Env variable | Description |
+| File setting | Environment variable | Description |
 |---|---|---|
 | **main** |
 | `apm_enabled` | `DD_APM_ENABLED` | The Datadog Agent will accept trace metrics when the value is set to `true`. The default value is `false`. |

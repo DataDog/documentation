@@ -87,7 +87,7 @@ Let’s say you have 3 hosts:
 Across your 3 hosts, you’d have 13 distinct metrics, here is why :
 {{< img src="getting_started/custom_metrics/metric_count.png" alt="metric_count" responsive="true" popup="true">}}
 
-If you are an admin, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page](https://app.datadoghq.com/account/billing_history). You can also see this metric count on your [metric summary page](https://app.datadoghq.com/metric/summary), where you’d see, clicking on the service.request.count metric, the exact number of unique tag combinations:
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page](https://app.datadoghq.com/account/billing_history). You can also see this metric count on your [metric summary page](https://app.datadoghq.com/metric/summary), where you’d see, clicking on the service.request.count metric, the exact number of unique tag combinations:
 
 So if you only had the first host from the example above reporting, you’d have this:
 {{< img src="getting_started/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" popup="true">}}
@@ -109,5 +109,5 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 ## Custom metrics best practices
 
 * For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount will [slow down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
-* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, please [email us](/help) and we'll connect you with your Customer Success Manager.
+* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help) and we'll connect you with your Customer Success Manager.
 * Additional information about billing and custom metrics is available [here](/account_management/faq/).

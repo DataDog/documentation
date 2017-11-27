@@ -8,13 +8,13 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 beta: true
 further_reading:
 - link: "/logs/explore"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to explore your logs
-- link: "/logs/processing"
-  tag: "Logs"
-  text: Learn how to process your logs
+- link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
+  tag: "FAQ"
+  text: How to Send Logs to Datadog via External Log Shippers
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 ---
 
@@ -29,7 +29,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
+If you are not using it already, follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -85,7 +85,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
-Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
+Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
 ```yaml
 init_config:
@@ -113,7 +113,8 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
+
+If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
 init_config:
@@ -129,6 +130,38 @@ logs:
     sourcecategory: front
 
 ```
+
+
+### Docker log collection
+
+Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
+
+For containerized installation, mount those two repositories:
+
+* `/var/run/docker.sock`: to make sure the agent can access the Docker API.
+* `/opt/datadog-agent/run`: If the agent container is restarted or removed, the registry needs to know the last logs collected for each monitored container or file.
+
+To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
+Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+#Log section
+
+logs:    
+   - type: docker
+     image: httpd    #or label: mylabel:mylabelvalue
+     service: nginx
+     source: nginx
+     sourcecategory: http_web_access
+
+```
+
+If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
 
 ### Filter logs
 
@@ -185,7 +218,7 @@ logs:
 
 ## Reserved attributes 
 
-If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
+If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
 ### *date* attribute
 
