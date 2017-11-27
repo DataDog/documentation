@@ -13,7 +13,6 @@ customnav: accountmanagementnav
 
 * [How do I add new users to sub-organizations?](/account_management/faq/how-do-i-add-new-users-to-sub-organizations)
 * [As a parent account admin, how do I create new sub-organizations?](/account_management/faq/as-a-parent-account-admin-how-do-i-create-new-sub-organizations)
-* [Can I use an API to provision dashboards and monitors for my sub-organizations?](/account_management/faq/can-i-use-an-api-to-provision-dashboards-and-monitors-for-my-sub-organizations)
 * [Do you support custom domains for each of my sub-organizations?](/account_management/faq/do-you-support-custom-domains-for-each-of-my-sub-organizations)
 * [What data from my sub-organizations can I see in my parent account?](/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account)
 

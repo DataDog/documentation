@@ -29,7 +29,7 @@ However what you can do is control how this aggregation is performed by using th
 * .rollup(sum) will compute the SUM of all values submitted during the X min period
 * .rollup(avg,60) defines that graph points should be 1 min averages, etc.
 
-Please note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you will not get the one-minute granularity requested.
+Note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you will not get the one-minute granularity requested.
 
 ## Example
 {{< img src="graphing/faq/graph_granularity.png" alt="graph_granularity" responsive="true" popup="true">}}

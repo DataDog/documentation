@@ -8,17 +8,14 @@ aliases:
 description: "Detects anomalous behaviour for a metric based on historical data"
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/manage_monitor"
-  tag: "Monitors"
-  text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
@@ -27,7 +24,7 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 ## How to Use Anomaly Detection on Your Data
 
-We've added a new query function called `anomalies` to our query language. When you apply this function to series, it returns the usual results along with an expected "normal" range.
+There is an `anomalies` function in the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
@@ -41,7 +38,7 @@ For example, with the window size sets to 30 minutes, you can get alerted when a
 
 The chart below shows a dashboard chart that uses anomaly detection. The gray band represents the region where the metric is expected to be based on past behavior. The blue and red line is the actual observed value of the metric; the line is blue when within the expected range and red when it is outside of the expected range.
 
-**Please Note:** The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
+**Note:** The resolution at which you view the metric is the resolution that `anomalies` uses to calculate the band. If you would like to keep the resolution constant while zooming in and out, use the `rollup()` function. See the FAQ for more details.
 
 {{< img src="monitors/monitor_types/anomaly/dashboard_graph.png" alt="dashboard graph" responsive="true" popup="true">}}
 
@@ -55,7 +52,7 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
 
-The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
+The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the Grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
 
 {{< img src="monitors/monitor_types/anomaly/final_editor.png" alt="final editor" responsive="true" popup="true">}}
 
@@ -63,7 +60,7 @@ The function has two parameters. The first parameter is for selecting which algo
 
 In addition to viewing anomalies in dashboards, you may create monitors that trigger when metrics behave anomalously.
 
-Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Anomaly**. Then fill out the **Define the metric** section just as you would for any other monitor.
+Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Anomaly Detection**. Then fill out the **Define the metric** section just as you would for any other monitor.
 
 {{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" popup="true">}}
 
@@ -97,21 +94,21 @@ The figures below illustrate how and when these four algorithms behave different
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparision 1" responsive="true" popup="true">}}
 
-In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertaintly after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
+In the next figure, the metric exhibits a sudden level shift. _Agile_ and _adaptive_ adjust more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertainty after the level shift; the width of _agile_ and _adaptive_ bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="alg comparision 2" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2" responsive="true" popup="true">}}
 
 The next figure shows how the algorithms react to an hour-long anomaly. _Robust_ completely ignores this anomaly. All the other algorithms start to behave as if the anomaly is the new normal. _Agile_ and _adaptive_ even identify the metric's return to its original level as an anomaly.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="alg comparision 3" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3" responsive="true" popup="true">}}
 
 The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-insensitive, while _Agile_ and _Adaptive_ are not. In the graphs on the left-hand side we see both _Agile_ and _Robust_ mark the level-shift as being anomalous. On the right-hand side we add 1000 to the same metric, and _Agile_ no longer calls out the level-shift as being anomalous whereas robust continues do so.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="alg comparision scale" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" popup="true">}}
 
 Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="alg comparison new metric" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" popup="true">}}
 
 ## Anomaly Monitors via the API
 
@@ -126,7 +123,7 @@ Acceptable algorithm values are basic, agile, robust, or adaptive.
 
 ### Example
 
-If you wanted to create an anomaly detection monitor to notify you when your average cassandra node's cpu was three standard deviations above the ordinary value for 80% of the time over the last 5 minutes, you could use the following query in your API call:
+If you wanted to create an anomaly detection monitor to notify you when your average Cassandra node's CPU was three standard deviations above the ordinary value for 80% of the time over the last 5 minutes, you could use the following query in your API call:
 
 ```
 avg(last_5m):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above') >= 0.8
@@ -137,7 +134,8 @@ avg(last_5m):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 ###  Should I use anomaly detection for everything?
 
-No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` might be driven by user traffic and thus vary predictably by time of day and day of week. If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
+No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` might be driven by user traffic and thus vary predictably by time of day and day of week.  
+If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
 
 Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
 
@@ -150,7 +148,7 @@ Looking at many separate timeseries in a single graph can lead to [spaghettifica
 
 You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
 
-{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multilines" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines" responsive="true" popup="true" >}}
 
 ### Will past anomalies affect the current predictions?
 

@@ -15,7 +15,7 @@ If you're seeing unexpected results in the Datadog app such as missing data or b
 * Are you experiencing this from multiple locations? Can you send the output of:
     * traceroute app.datadoghq.com
     * tracepath app.datadoghq.com
-* Is this dashboard specific? Using Chrome browser, please do the following:
+* Is this dashboard specific? Using Chrome browser, do the following:
     * Select View->Developer->Developer Tools
     * Click on the Network tab of the new window that opens
     * Load the dashboard experiencing issues
@@ -24,7 +24,7 @@ If you're seeing unexpected results in the Datadog app such as missing data or b
 
 In most of the scenarios above, the root cause of the issue is very likely related to a browser extension, outdated browser, or something similar.
 
-If you continue to have issues, please contact [us](/help) for assistance, to help expedite your issue please include:
+If you continue to have issues,contact [us](/help) for assistance, to help expedite your issue include:
 
 * Results of the above tests
 * A screenshot of your issue

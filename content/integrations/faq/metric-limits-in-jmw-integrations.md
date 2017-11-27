@@ -4,7 +4,7 @@ kind: faq
 customnav: integrationsnav
 ---
 
-JMX integrations such as: [Cassandra](/integrations/cassandra), [Tomcat](/integrations/tomcat), [Kafka](/integrations/kafka), etc... can potentially generate thousands of metrics and by default, these integrations are limited to 350. If you'd like this number increased, please email [us](/help)
+JMX integrations such as: [Cassandra](/integrations/cassandra), [Tomcat](/integrations/tomcat), [Kafka](/integrations/kafka), etc... can potentially generate thousands of metrics and by default, these integrations are limited to 350. If you'd like this number increased, email [us](/help)
 
 To check the current metric list, run the JMX list_everything command that is provided via the agent:
 ```

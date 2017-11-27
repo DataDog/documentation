@@ -78,3 +78,11 @@ Logs for the subsystems are in the following files:
 * `/var/log/datadog/forwarder.log`
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+
+## Adding a custom python package to the agent
+
+The python version embedded with the agent is located here: /opt/datadog-agent/embedded/bin/python.
+The agent also comes with pip, and you can install python libraries using:
+```
+sudo /opt/datadog-agent/embedded/bin/pip install <package_name> .
+```

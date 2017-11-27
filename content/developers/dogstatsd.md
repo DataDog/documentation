@@ -4,6 +4,13 @@ kind: documentation
 customnav: developersnav
 aliases:
   - /guides/dogstatsd/
+further_reading:
+- link: "/developers/metrics"
+  tag: "Documentation"
+  text: Learn more about Metrics
+- link: "/developers/libraries"
+  tag: "Docuementation"
+  text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
 
 <p class="aside">
@@ -195,7 +202,7 @@ def handle_file(file, file_size):
   return
 ```
 
-Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since histograms are an extension to StatsD, use a [DogStatsD client library][2].
 
 #### Metric option: Sample Rates
 
@@ -261,7 +268,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since tagging is an extension to StatsD, use a [DogStatsD client library][2].
 
 ## Datagram Format
 

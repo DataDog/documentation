@@ -4,10 +4,10 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/graphing/infrastructure"
-  tag: Graphing
+  tag: "Documentation"
   text: Learn more about Infrastructure page
 ---
 
@@ -21,7 +21,7 @@ sudo /etc/init.d/datadog-agent stop
 ```
 ps aux | grep datadog-agent
 ```
-If there any processes, please kill them.
+If there any processes, kill them.
 
 3. Start the agent:
 ```

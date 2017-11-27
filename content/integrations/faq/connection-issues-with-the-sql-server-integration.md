@@ -46,11 +46,11 @@ In order to connect to SQL Server (either hosted on Linux or Windows) from a Lin
 
 https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
 
-Next, you will need to install the pyodbc module. This can be done by running pip install pyodbc within your Agent’s python environment. For example:
+Next, install the pyodbc module. This can be done by running pip install pyodbc within your Agent’s python environment. For example:
 ```
 $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
 ```
-Lastly, you will need to configure your sqlserver.yaml file to define the ODBC driver you installed and enable the ODBC connector.
+Lastly, configure your `sqlserver.yaml` file to define the ODBC driver you installed and enable the ODBC connector.
 
 ```yaml
 init_config:

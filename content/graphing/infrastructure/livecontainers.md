@@ -19,7 +19,7 @@ further_reading:
 
 [Datadog Live Containers](https://app.datadoghq.com/containers) enable real-time visibility into all containers across your environment.
 
-Taking inspiration from bedrock tools like htop and ctop, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.  
+Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.  
 Coupled with Datadog’s integrations with [Docker](/integrations/docker_daemon), [Kubernetes](/integrations/kubernetes), [ECS](/integrations/amazon_ecs), and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time:
 
 {{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}} 
@@ -29,7 +29,7 @@ Coupled with Datadog’s integrations with [Docker](/integrations/docker_daemon)
 **[Live Containers](https://app.datadoghq.com/containers) has been introduced in Datadog Agent version 5.17.2.**  
 After [updating](https://app.datadoghq.com/account/settings#agent) to this version of the Agent or later, no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [docker-dd-agent][1], the dd-agent user will need to have permissions to access docker.sock.
+Note that for collecting Container information in the standard install rather than with the [docker-dd-agent][1], the dd-agent user needs to have permissions to access **docker.sock**.
 
 ## Searching, Filtering, and Pivoting
 
@@ -67,7 +67,7 @@ Making sense of thousands or tens of thousands of containers can seem overwhelmi
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  
 RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
-Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
+Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
 {{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" popup="true">}}
 
@@ -93,7 +93,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
-- RBAC settings can restrict Kubernetes metadata collection.  Please refer to the [RBAC entites for the Datadog Agent][2].
+- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

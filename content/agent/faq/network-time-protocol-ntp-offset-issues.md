@@ -4,10 +4,10 @@ kind: faq
 customnav: main_references
 further_reading:
 - link: "/agent/"
-  tag: Logs
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 - link: "/integrations/ntp/"
-  tag: Integration
+  tag: "Integration"
   text: Learn more about the Datadog-NTP integration
 ---
 

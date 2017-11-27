@@ -4,18 +4,18 @@ kind: faq
 customnav: lognav
 beta: true
 further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Learn how to collect your logs
+- link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
+  tag: "FAQ"
+  text: How to Send Logs to Datadog via External Log Shippers?
 - link: "/logs/explore"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to explore your logs
-- link: "/logs/processing"
-  tag: "Logs"
-  text: Learn how to process your logs
-- link: "/logs/parsing"
-  tag: "Logs"
-  text: Learn more about parsing
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, please email [us](/help) for further assistance. 
+There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list will help you troubleshoot. If you continue to have trouble, email [us](/help) for further assistance. 
 
 ## The agent needs to be restarted
 
@@ -23,7 +23,7 @@ After you've made any configuration changes to the dd-agent, the changes will on
 
 ## No new logs have been written
 
-The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them. In order to confirm whether log collection has been successfully set up, please make sure that new logs have been written.
+The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them. In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
 ## Permission Issues While Tailing Log Files
 

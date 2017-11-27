@@ -11,7 +11,6 @@ customnav: developersnav
 
 ## Metrics
 
-* [How do I submit custom metrics?](/developers/faq/how-do-i-submit-custom-metrics)
 * [Why is my counter metric showing decimal values?](/developers/faq/why-is-my-counter-metric-showing-decimal-values)
 * [Characteristics of Datadog histograms.](/developers/faq/characteristics-of-datadog-histograms)
 * [Submitting Metrics via PowerShell](/developers/faq/submitting-metrics-via-powershell)

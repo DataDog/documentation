@@ -8,7 +8,7 @@ customnav: agentnav
 If your network configuration restricted outbound traffic, proxy all agent traffic through one or several hosts that have more permissive outbound policies.
 
 A few options are available to send traffic to Datadog over SSL/TLS for
-hosts that are not directly connected to the internet.
+hosts that are not directly connected to the Internet.
 
 1. Using the agent as a proxy (for **up to 16 agents** per proxy)
 2. Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
@@ -142,7 +142,7 @@ sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' SUP_FILE
 
 #### On Windows (Starting from agent 3.9.2):
 
-Edit your configuration file (datadog.conf) and add this option:
+Edit your configuration file `datadog.conf` and add this option:
 ```
 skip_ssl_validation: yes
 ```

@@ -10,7 +10,7 @@ further_reading:
   tag: "FAQ"
   text: How do I add custom template variables to my monitor message?
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a downtime to mute a monitor
 ---
 

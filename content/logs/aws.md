@@ -6,13 +6,13 @@ customnav: lognav
 beta: true
 further_reading:
 - link: "/logs/explore"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to explore your logs
 - link: "/logs/processing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to process your logs
 - link: "/logs/parsing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn more about parsing
 ---
 
@@ -102,7 +102,7 @@ Link the lambda function to this s3 bucket to send your logs to Datadog.
 
 ### ECS
 
-ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in you Docker Containers). 
+ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running application (in you Docker Containers). 
 
 Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the lambda to ship them to your Datadog platform.
 

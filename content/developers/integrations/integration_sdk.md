@@ -11,7 +11,7 @@ aliases:
 
 ## Requirements
 
-You will need a working [Ruby](https://www.ruby-lang.org) environment. For more information on installing Ruby, please reference [the Ruby installation documentation](https://www.ruby-lang.org/en/documentation/installation/).
+You will need a working [Ruby](https://www.ruby-lang.org) environment. For more information on installing Ruby, reference [the Ruby installation documentation](https://www.ruby-lang.org/en/documentation/installation/).
 
 You will also need [Wget](https://www.gnu.org/software/wget/). Wget is already installed on most Linux systems and is easy to install on Mac using [Homebrew](http://brew.sh/) or on Windows using [Chocolatey](https://chocolatey.org/).
 
@@ -109,7 +109,7 @@ namespace :ci do
       $(docker run -p 80:80 --name my_int_container -d my_docker)
 ```
 
-For more information about writing integration tests, please see [the documentation in the Datadog agent repository][3]. You can also reference the [ci common library][4] for helper functions such as `install_requirements` and `sleep_for`.
+For more information about writing integration tests, see [the documentation in the Datadog agent repository][3]. You can also reference the [ci common library][4] for helper functions such as `install_requirements` and `sleep_for`.
 
 A note about terminology: You may notice the variable `flavor` in this file and other areas of testing. *Flavor* is a term we use to denote variations of integrated software, typically versions. This allows you to write one set of tests, but target different *flavors*, variants or versions of the software you are integrating.
 
@@ -128,7 +128,7 @@ This JSON file provides metadata about your integration and should include:
 
 - **`maintainer`**: Provide a valid email address where you can be contacted regarding this integration.
 - **`manifest_version`**: The version of this manifest file.
-- **`max_agent_version`**: The maximum version of the Datadog agent that is compatible with your integration. We do our best to maintain integration stability within major versions, so you should leave this at the number generated for you. If your integration breaks with a new release of the Datadog agent, please set this number and [submit an issue on the Datadog Agent project][5].
+- **`max_agent_version`**: The maximum version of the Datadog agent that is compatible with your integration. We do our best to maintain integration stability within major versions, so you should leave this at the number generated for you. If your integration breaks with a new release of the Datadog agent, set this number and [submit an issue on the Datadog Agent project][5].
 - **`min_agent_version`**: The minimum version of the Datadog agent that is compatible with your integration.
 - **`name`**: The name of your integration.
 - **`short_description`**: Provide a short description of your integration.
@@ -168,7 +168,7 @@ The CSV should include a header row and the following columns:
   - **System**: `core`, `fault`, `host`, `instance`, `node`, `process`, `service`, `thread`
   - **Time**: `microsecond`, `millisecond`, `second`, `minute`, `hour`, `day`, `week`
 
-If the unit name is not listed above, please leave this value blank. To add a unit to this listing, please file an [issue][6]
+If the unit name is not listed above, leave this value blank. To add a unit to this listing, file an [issue][6]
 
 **`per_unit_name`**: If you are gathering a per unit metric, you may provide an additional unit name here and it will be combined with the `unit_name`. For example, providing a `unit_name` of "request" and a `per_unit_name` of "second" will result in a metric of "requests per second". If provided, this must be a value from the available units listed above.
 
@@ -196,8 +196,7 @@ Though we don't require test for each of the metrics collected by your integrati
 
 Here's an example `test_my_integration.py`:
 
-```python
-
+```
 # Example test_my_integraion.py
 from nose.plugins.attrib import attr
 from checks import AgentCheck
@@ -207,18 +206,16 @@ from tests.checks.common import AgentCheckTest
 Class TestMyIntegration(AgentCheckTest):
 
   def testMyIntegration(self):
-    self.assertServiceCheck('my_integration.can_connect',
-                            count=1,
-                            status=AgentCheck.OK,
-                            tags=[host:localhost', 'port:80'])
+    self.assertServiceCheck('my_integration.can_connect', count=1, status=AgentCheck.OK, tags=[host:localhost', 'port:80'])
     self.coverage_report()
 ```
 
-For more information about tests and available test methods, please reference the [AgentCheckTest class in the Datadog Agent repository][7]
+For more information about tests and available test methods, reference the [AgentCheckTest class in the Datadog Agent repository][7]
+
 
 ## Libraries
 
-The [Datadog Agent][8] provides a number of useful libraries in the [`utils` directory][9]. These libraries can be helpful when building your integration and we encourage you to use them, but please be aware that these libraries will be moved in the upcoming Datadog Agent version 6.0. We will provide more details regarding integrations and these libraries prior to the Datadog Agent 6.0 release.
+The [Datadog Agent][8] provides a number of useful libraries in the [`utils` directory][9]. These libraries can be helpful when building your integration and we encourage you to use them, but be aware that these libraries will be moved in the upcoming Datadog Agent version 6.0. We will provide more details regarding integrations and these libraries prior to the Datadog Agent 6.0 release.
 
 ## Testing your integration
 
@@ -228,7 +225,7 @@ As you build your check and test code, you can use the following to run your tes
 - `rake ci:run[my_integration]`: Run the tests that you have written in your `test_my_integration.py` file and that have an `@attr(requires='my_integration')` annotation.
 - `rake ci:run[default]`: Run the tests you have written written in your `test_my_integration.py` file (without the `@attr(requires='my_integration')` annotation) in addition to some additional generic tests we have written.
 
-Travis CI will automatically run tests when you create a pull request. Please ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
+Travis CI will automatically run tests when you create a pull request. Ensure that you have thorough test coverage and that you are passing all tests prior to submitting pull requests.
 
 Add the `@attr(requires='my_integration')` annotation on the test classes or methods that require a full docker testing environment (see next section).
 Don't add this annotation to your unit and mock tests ; those run via `rake ci:run[default]` on Travis CI.

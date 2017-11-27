@@ -19,7 +19,7 @@ The Agent enables, disables, and regenerates static check configurations from th
 ## How it Works
 
 In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.  
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.  
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.  
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -59,7 +59,7 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][5].
 
-Note that **if you want the Agent to autodiscover JMX-based checks, you MUST**:
+Note that **if you want the Agent to auto-discover JMX-based checks, you MUST**:
 
 1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
 1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
@@ -74,18 +74,18 @@ Storing templates as local files is easy to understand and doesn't require an ex
 
 The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
-- [apache](https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml)
-- [consul](https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml)
-- [couchdb](https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml)
-- [couchbase](https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml)
-- [elasticsearch](https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml)
-- [etcd](https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml)
-- [kubernetes_state](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml)
-- [kube_dns](https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml)
-- [kyototycoon](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml)
-- [memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml)
-- [redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
-- [riak](https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml)
+- [Apache](https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml)
+- [Consul](https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml)
+- [CouchDB](https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml)
+- [Couchbase](https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml)
+- [Elasticsearch](https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml)
+- [Etcd](https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml)
+- [Kubernetes_state](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml)
+- [Kube_dns](https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml)
+- [Kyototycoon](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml)
+- [Memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml)
+- [Redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
+- [Riak](https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml)
 
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
@@ -310,7 +310,7 @@ labels:
 
 #### Docker Example: NGINX Dockerfile
 
-The following Dockerfile will launch an NGINX container with autodiscovery enabled:
+The following Dockerfile will launch an NGINX container with Autodiscovery enabled:
 
 ```
 FROM nginx
@@ -349,7 +349,7 @@ So if you configure a `redisdb` template both in Consul and as a file (`conf.d/a
 
 ## Troubleshooting
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 
 ```
 # docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck

@@ -4,7 +4,8 @@ kind: faq
 customnav: developersnav
 ---
 
-This article will allow you to submit events from your AppDynamics Application into your Datadog Event stream.  Please note that this plugin was written by the team at AppDynamics and is not currently supported by Datadog.  Should you encounter any issues please contact their team [here](https://www.appdynamics.com/support/)
+This article will allow you to submit events from your AppDynamics Application into your Datadog Event stream.  
+Note that this plug-in was written by the team at AppDynamics and is not currently supported by Datadog.  Should you encounter any issues contact their team [here](https://www.appdynamics.com/support/)
 
 Prerequisites: You must be running AppDynamics 4.1 or later
 

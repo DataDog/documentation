@@ -6,12 +6,15 @@ customnav: lognav
 description: "Parse your logs using the Grok Processor"
 beta: true
 further_reading:
-- link: "/logs/explore"
-  tag: "Logs"
-  text: Learn how to explore your logs
 - link: "/logs/processing"
-  tag: "Logs"
+  tag: "Documentation"
   text: Learn how to process your logs
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+  tag: "FAQ"
+  text: How to investigate a log parsing issue?
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
 ---
 
 <div class="alert alert-info">
@@ -44,7 +47,7 @@ With the following parsing rule:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-You would have at the end this structued log:
+You would have at the end this structured log:
 
 {{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" popup="true">}}
 

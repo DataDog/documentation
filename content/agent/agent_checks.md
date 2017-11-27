@@ -12,7 +12,7 @@ AgentCheck requires an Agent version >= 3.2.0.
 
 ## Overview
 
-This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plugin to the Datadog Agent. We'll
+This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. We'll
 look at the `AgentCheck` interface, and then write a simple Agent Check
 that collects timing metrics and status events from HTTP services.
 
@@ -25,7 +25,7 @@ Agent Checks are a great way to collect metrics from custom applications or uniq
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and will make it easier for the wider Datadog community to use your integrations.
 
-For more information about how to write an Integration, please see the [Creating New Integrations][1] and check out the [Integrations-Extras Github repo][2] to see other contributed integrations.
+For more information about how to write an Integration, see the [Creating New Integrations][1] and check out the [Integrations-Extras Github repository][2] to see other contributed integrations.
 
 ## Setup
 
@@ -108,7 +108,7 @@ The service_check method will accept the following arguments:
   - `AgentCheck.CRITICAL` or `2` for failure
   - `AgentCheck.UNKNOWN` or `3` for indeterminate status
 - `tags`: (optional) A list of key:val tags for this check.
-- `timestamp`: (optional) The POSIX timestamp when the check occured.
+- `timestamp`: (optional) The POSIX timestamp when the check occurred.
 - `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
 - `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
 - `message`: (optional) Additional information or a description of why this status occured.
@@ -181,7 +181,8 @@ every check will support multiple instances out of the box.
 ## Directory Structure
 
 Before starting your first check it is worth understanding the checks directory
-structure. There are two places that you will need to add files for your check.
+structure. Add files for your check in two places:
+
 The first is the `checks.d` folder, which lives in your Agent root.
 
 For all Linux systems, this means you will find it at:
@@ -418,7 +419,7 @@ class HTTPCheck(AgentCheck):
             self.log.info("Skipping instance, no url found.")
             return
 
-        # Load values from the instance config
+        # Load values from the instance configuration
         url = instance['url']
         default_timeout = self.init_config.get('default_timeout', 5)
         timeout = float(instance.get('timeout', default_timeout))
@@ -478,7 +479,7 @@ To test this, run:
 
     sudo -u dd-agent dd-agent check <CHECK_NAME>
 
-If your issue continues, please reach out to Support with the help page that lists the paths it installs.
+If your issue continues, reach out to Support with the [help page](/help) that lists the paths it installs.
 
 ### Testing custom checks on Windows
 

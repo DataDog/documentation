@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 further_reading:
 - link: "/agent/"
-  tag: Agent
+  tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
 
@@ -15,7 +15,7 @@ Starting Datadog Agent (using supervisord) datadog-agent
 Error: Another program is already listening on a port that one of our HTTP servers is configured to use. Shut this program down first before starting supervisord.
 ```
 
-To resolve this issue, please take the following steps: 
+To resolve this issue, take the following steps: 
 
 1. Stop the agent:
     ```
@@ -26,13 +26,13 @@ To resolve this issue, please take the following steps: 
     top -U dd-agent
     ```
 
-If you do find processes running under dd-agent, please kill them.
+If you do find processes running under dd-agent, kill them.
 
-After the above steps, please start the agent:
+After the above steps, start the agent:
 ```
 sudo /etc/init.d/datadog-agent start
 ```
 
-If this doesn't solve your issue, please reach out to [us](/help).
+If this doesn't solve your issue, reach out to [us](/help)!
 
 {{< partial name="whats-next/whats-next.html" >}}

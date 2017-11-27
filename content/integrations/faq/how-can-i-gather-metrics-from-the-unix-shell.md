@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 To gather metrics from the UNIX command line, we can use the unannounced shell integration.
 
-This integration has not yet been merged into the master branch so you will need to install this check as a custom check in the appropriate Datadog agent [directories](/agent/agent_checks/#directory).
+This integration has not yet been merged into the master branch, install this check as a custom check in the appropriate Datadog agent [directories](/agent/agent_checks/#directory).
 
 You can find the integration files on GitHub:
 

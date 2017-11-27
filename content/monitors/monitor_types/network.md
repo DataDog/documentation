@@ -6,17 +6,14 @@ customnav: monitortypenav
 description: "Check the status of TCP/HTTP endpoints"
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/manage_monitor"
-  tag: "Monitors"
-  text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 {{< img src="monitors/monitor_types/network/network_monitor.png" alt="network monitor" responsive="true" popup="true">}}
@@ -41,7 +38,7 @@ configuration.
 
 2. Pick **monitor scope**. You will only see hosts or tags reporting the metric you have chosen.
 
-3. Select **alerting options**. Please refer to the [alert-conditions](#metrics-monitors) section for details on the available options.
+3. Select **alerting options**. Refer to the [alert-conditions](#metrics-monitors) section for details on the available options.
 
 4. Configure your **notification options** Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
@@ -52,13 +49,13 @@ configuration.
 
 To build a Network monitor on an http check you need to:
 
-1. Create a network monitor: Monitor > New monitor
+1. Create a network monitor: **Monitor > New monitor**
 2. Enter your network monitor setting:
     {{< img src="monitors/monitor_types/network/network_monitor_settings.png" alt="alert type"  responsive="true" popup="true">}}
 
     Don't forget to select the threshold values for your monitor
 
-3. Configure the 4 - "Say what's happening" section to receive the correct notification. Find more about this [here](/monitors/notifications)
+3. Configure the **4 - "Say what's happening"** section to receive the correct notification. Find more about this [here](/monitors/notifications)
 
 **Note**: Contrary to metric monitor it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the agent config, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
 

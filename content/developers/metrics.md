@@ -32,28 +32,28 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 There are a few rules to stick to when naming metrics:
 
 * Metric names must start with a letter 
-* Can only contain ascii alphanumerics, underscore and periods (other characters will get converted to underscores) 
-* Should not exceed 200 characters (though less than 100 is genearlly preferred from a UI perspective)
+* Can only contain ASCII alphanumerics, underscore and periods (other characters will get converted to underscores) 
+* Should not exceed 200 characters (though less than 100 is generally preferred from a UI perspective)
 * Unicode is not supported
 * We recommend avoiding spaces
 
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time). We say pseudo-hierarchical because we're not actually enforcing a hierarchy or doing anything with it, but we have aspirations to use it to infer things about servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those must be web frontends").
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). We say pseudo-hierarchical because we're not actually enforcing a hierarchy or doing anything with it, but we have aspirations to use it to infer things about servers (e.g. "hey, I see hostA and hostB are reporting `http.nginx.*`, those must be web frontends").
 
 ### Metric Types
 
-A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the app. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
+A metric's Datadog in-application type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-application type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
 
-In the web app there are 3 metric types: 
+In the Datadog web application there are 3 metric types: 
 
 * GAUGE
 * RATE
 * COUNT 
 * COUNTER (now deprecated)
 
-A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the app by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web App metric types.
+A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
-##### How do submission types relate to Datadog in-app types?
-Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
+##### How do submission types relate to Datadog in-application types?
+Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-application type:
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
@@ -72,7 +72,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 ##### What's a use case for changing a metric's type?
 
-1. A user has a metric `app.requests.served` that counts requests served, she accidently submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
+1. A user has a metric `app.requests.served` that counts requests served, she accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
 2. She realizes she should have submitted it as a dogstatsd `counter` metric, that way she can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
@@ -188,7 +188,7 @@ Here's an example:
 Note that StatsD counters are normalized over the flush interval to report
 per-second units. In the graph above, the marker is reporting
 35.33 web page views per second at ~15:24. In contrast, if one person visited
-the webpage each second, the graph would be a flat line at y = 1. To increment or measure values over time, please see [gauges](#gauges)
+the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges)
 
 We can also count by arbitrary numbers. Suppose we wanted to count the number
 of bytes processed by a file uploading service. We'll increment a metric
@@ -232,7 +232,7 @@ Gauges measure the value of a particular thing over time:
 
 |Method | Overview |
 |:---|:---|
-|self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample will be used.</li><li>Stored as a Web App GAUGE type</li></ul>|
+|self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample will be used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
 
 #### Dogstatsd Submission
 |Method | Overview |
@@ -260,7 +260,7 @@ while true do
 end
 ```
 
-### In-app modifiers
+### In-application modifiers
 * Effect of as_count(): None
 * Effect of as_rate(): None
 
@@ -275,12 +275,12 @@ https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
 
 It aggregates the values that are sent during the flush interval (usually defaults to 10 seconds). So if you send 20 values for a metric during the flush interval, it'll give you the aggregation of those values for the flush interval, i.e.:
 
-* my_metric.avg will give you the avg of those 20 values during the flush interval
-* my_metric.count will give you the count of the values (20 in this case) sent during the flush interval
-* my_metric.median will give you the median of those values in the flush interval
-* my_metric.95percentile will give you the 95th percentile value in the flush interval
-* my_metric.max will give you the max value sent during the flush interval
-* my_metric.min will give you the min value sent during the flush interval
+* `my_metric.avg`: gives you the avg of those 20 values during the flush interval
+* `my_metric.count`: gives you the count of the values (20 in this case) sent during the flush interval
+* `my_metric.median`: gives you the median of those values in the flush interval
+* `my_metric.95percentile`: gives you the 95th percentile value in the flush interval
+* `my_metric.max`: gives you the max value sent during the flush interval
+* `my_metric.min`: gives you the min value sent during the flush interval
 
 Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
 
@@ -331,11 +331,11 @@ end
 
 The above instrumentation will produce the following metrics:
 
-- `database.query.time.count` - the number of times this metric was sampled
-- `database.query.time.avg` - the average time of the sampled values
-- `database.query.time.median` - the median sampled value
-- `database.query.time.max` - the maximum sampled value
-- `database.query.time.95percentile` - the 95th percentile sampled value
+- `database.query.time.count`: number of times this metric was sampled
+- `database.query.time.avg`: average time of the sampled values
+- `database.query.time.median`: median sampled value
+- `database.query.time.max`: maximum sampled value
+- `database.query.time.95percentile`: 95th percentile sampled value
 
 These metrics give insight into how different each query time is. We can see
 how long the query usually takes by graphing the `median`. We can see how long

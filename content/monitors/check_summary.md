@@ -5,20 +5,20 @@ autotocdepth: 2
 customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Learn how to create a monitor
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
 - link: "/monitors/manage_monitor"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 ## Overview
@@ -26,7 +26,6 @@ further_reading:
 This page let you see the list of all your checks reporting to Datadog:
 
  {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true">}}
-
 
 You can click on a check in order to have more details:
 

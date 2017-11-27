@@ -6,17 +6,14 @@ customnav: monitortypenav
 description: "Check if a process is running on a host"
 further_reading:
 - link: "/monitors/notifications"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/manage_monitor"
-  tag: "Monitors"
-  text: Manage your monitors
 - link: "/monitors/downtimes"
-  tag: "Monitors"
+  tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
 - link: "/monitors/faq"
-  tag: "Monitors"
-  text: Consult our FAQ
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 {{< img src="monitors/monitor_types/process/process_monitor.png" alt="process monitor" responsive="true" popup="true">}}
@@ -40,7 +37,7 @@ point they should notify.
 
 2. Pick the **monitor scope**. You will only see hosts or tags that are reporting a status for the selected process.
 
-3. Select **alerting options**. Please refer to the [custom monitors](#custom-monitors) section for details on the available options.
+3. Select **alerting options**. Refer to the [custom monitors](#custom-monitors) section for details on the available options.
 
 4. Configure your **notification options** Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
