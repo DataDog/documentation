@@ -15,7 +15,8 @@
         "node_modules/mixitup/dist/mixitup.js",
         "node_modules/stickyfilljs/dist/stickyfill.js",
         "node_modules/algoliasearch/dist/algoliasearch.js",
-        "node_modules/mousetrap/mousetrap.js"
+        "node_modules/mousetrap/mousetrap.js",
+        "node_modules/picturefill/dist/picturefill.js"
       ],
       "main": true
     },
