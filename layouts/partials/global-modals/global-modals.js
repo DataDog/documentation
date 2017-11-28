@@ -103,7 +103,11 @@ $(document).ready(function () {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
                 el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
                 p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+            } else {
+                el.css('width', '' + w  + 'px').css('height', '' + h + 'px');
+                p.css('width', '' + w + 'px').css('height', '' + h + 'px');
             }
+
         }
     }
 
