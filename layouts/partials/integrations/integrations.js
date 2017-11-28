@@ -22,7 +22,7 @@ $(document).ready(function () {
         }
     });
 
-    $(window).on('hashchange', function(){
+    /*$(window).on('hashchange', function(){
         var current_cat = "#all";
         if (window.location.href.indexOf("#") > -1) {
             current_cat = window.location.href.substring(window.location.href.indexOf("#"));
@@ -38,7 +38,7 @@ $(document).ready(function () {
             }
         }
     });
-    $(window).trigger('hashchange');
+    $(window).trigger('hashchange');*/
 
 });
 
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
+    var currentFilter = "#all";
 
     if(!container) return;
 
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var mixer = mixitup(container, {
         animation: {
-            duration: 200
+            duration: 150
         },
         selectors: {
             target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes seperate
@@ -109,45 +110,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function grayOut(filter) {
-        if(filter) {
-            for(var i = 0; i < collection.length; i++) {
-                if(collection[i].classList.contains(filter.substr(1))) {
-                    collection[i].classList.remove('grayscale');
-                } else {
-                    collection[i].classList.add('grayscale');
-                }
-            }
-        } else {
-
-        }
-    }
-
-    function resetGray() {
-        for(var i = 0; i < collection.length; i++) {
-            collection[i].classList.remove('grayscale');
-        }
-    }
-
     function handleButtonClick(button, filters) {
         // If button is already active, or an operation is in progress, ignore the click
-        if (button.classList.contains('active') || mixer.isMixing()) return;
+        if (button.classList.contains('active')) return;
 
         var filter = button.getAttribute('data-filter');
+        currentFilter = filter;
         activateButton(button, filters);
-        if(filter === 'all') {
-            resetGray();
-        } else {
-            grayOut(filter);
-        }
-
         var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
-            if(filter && window.integrations[i].tags.indexOf(filter.substr(1)) !== -1) {
-                show.push(window.integrations[i]);
+            var item = window.integrations[i];
+            var domitem = document.getElementById('mixid_'+item.id);
+            if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+                domitem.classList.remove('grayscale');
+                show.push(item);
             } else {
-                hide.push(window.integrations[i]);
+                domitem.classList.add('grayscale');
+                hide.push(item);
             }
         }
         var items = [].concat(show, hide);
