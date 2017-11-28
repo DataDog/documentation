@@ -6,16 +6,6 @@ hideguides: true
 customnav: lognav
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 beta: true
-further_reading:
-- link: "/logs/explore"
-  tag: "Documentation"
-  text: Learn how to explore your logs
-- link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
-  tag: "FAQ"
-  text: How to Send Logs to Datadog via External Log Shippers
-- link: "/logs/parsing"
-  tag: "Documentation"
-  text: Learn more about parsing
 ---
 
 <div class="alert alert-info">
@@ -276,4 +266,8 @@ To change the default values for each of the reserved attributes, go to the pipe
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< whatsnext >}}
+    {{< nextlink href="/logs/explore" tag="Documentation" >}}Learn how to explore your logs{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
+    {{< nextlink href="/logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
+{{< /whatsnext >}}
