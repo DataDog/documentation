@@ -280,6 +280,10 @@ h1 {
 
 //@include media-breakpoint-up(md) { ... }
 @media (max-width: 991px) {
+
+  .main {
+    padding-left: 15px;
+  }
   .col-lg-7 {
     #pagetitle {
       margin-right: 0 !important;
