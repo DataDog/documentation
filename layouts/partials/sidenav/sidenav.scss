@@ -178,8 +178,8 @@ aside.sidenav-api {
     padding-left: 10px;
   }
   .toc_scrolled {
-    color: $ddpurple;
-    font-weight:600;
+    color: $ddpurple !important;
+    font-weight:600 !important;
   }
 }
 
