@@ -56,13 +56,13 @@ $(document).ready(function () {
 
     var naturalWidth = 0;
     var naturalHeight = 0;
+    var isShowing = false;
     $('#popupImageModal').on('show.bs.modal', function (e) {
-
+        $('#popupImageModal .modal-dialog').css('width', '500px').css('height', '500px');
     }).on('shown.bs.modal', function (e) {
         $('body').removeClass('modal-open');
-        $(window).on('scroll', detectScrollWhileOpen);
         var modal = $(this);
-        modal.hide();
+        //modal.hide();
         var url = e.relatedTarget.href;
         // try set modal popup imgix to cap out at browser width/height
         //url += '&w='+$(window).width() + '&h='+$(window).height();
@@ -74,17 +74,14 @@ $(document).ready(function () {
             naturalHeight = img.height;
             $('#popupImageModal .modal-body').html(imgEl);
             resize(naturalWidth, naturalHeight);
-            modal.fadeIn();
+            if($('#popupImageModal').is(':visible')) {
+                modal.fadeIn();
+            }
         };
         img.src = url;
     }).on('hide.bs.modal', function(e) {
         $('#popupImageModal .modal-body').empty();
     });
-
-    function detectScrollWhileOpen() {
-        $('#popupImageModal').modal('hide');
-        $(window).off('scroll', detectScrollWhileOpen);
-    }
 
     function resize(w, h) {
         var el = $('#popupImageModal .modal-body img');
@@ -114,8 +111,14 @@ $(document).ready(function () {
     }
 
     $(window).on('resize', function() {
-        if($('#popupImageModal').hasClass('show')) {
+        if($('#popupImageModal').is(':visible')) {
             resize(naturalWidth, naturalHeight);
+        }
+    });
+
+    $(window).on('scroll', function() {
+        if($('#popupImageModal').is(':visible')) {
+            $('#popupImageModal').modal('hide');
         }
     });
 
