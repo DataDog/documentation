@@ -146,7 +146,7 @@ The not (!) operator causes a status—individual or composite—to be either `O
 
 Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 | monitor A   | monitor B  | monitor C  | composite status        | alert triggered? |
 |-------------|------------|------------|-------------------------|-------------------------|
 | Unknown (T) | Warn (T)   | Unknown (T)| Warn (T)                |<i class="fa fa-check" aria-hidden="true"></i>
@@ -161,7 +161,7 @@ Two of the four scenarios will trigger an alert, even though not all of the indi
 
 Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor (specifically, they use the most severe status from the past five minutes for each component monitor). For example, if you have a composite monitor defined as `A && B`, and the component results look like this (where the timestamps are one minute apart):
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 |   | T0    | T1    | T2    |
 |---|-------|-------|-------|
 | A | Alert | OK    | OK    |
@@ -186,7 +186,7 @@ Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. 
 
 The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at one point in time:
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 |source | monitor A    | monitor B| monitor C | composite status (A && B && C) | alert triggered? |
 |-------|--------------|----------|-----------|--------------------------------|-------------------------|
 | web01 | Alert        | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
@@ -204,7 +204,7 @@ Now consider a scenario where monitor B is multi-alert, too, and is also grouped
 
 Here's an example cycle:
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 |source | monitor A | monitor B | monitor C  | composite status (A && B && C) |alert triggered?|
 |-------|-----------|-----------|------------|--------------------------------|----------------|
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>

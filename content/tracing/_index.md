@@ -51,7 +51,7 @@ To instrument an application written in a language that does not yet have offici
 The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options.  
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 | File setting | Environment variable | Description |
 |---|---|---|
 | **main** |

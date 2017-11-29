@@ -14,7 +14,7 @@ aliases:
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. 
 Note that filters perform an exact match search and will not work with partial strings.
 
-{{% table responsive="true" }}
+{{% table responsive="true" %}}
 | Filter | Description |
 |--------|-------------|
 |user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
