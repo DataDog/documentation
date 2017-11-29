@@ -1,9 +1,17 @@
 {{ define "main" }}
-    <h1>Uh oh, Something Went Wrong</h1>
-
-    <img alt="sad" src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
-    <p class="alert alert-error pull-left">
-        Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
-    </p>
+<div class="row page404">
+    <div class="d-none d-sm-flex col-sm-6 text-right">
+        <img class="img-fluid ml-auto" alt="sad" src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <h1>Arf.</h1>
+        <h2>404 Not Found</h2>
+    </div>
+    <div class="blurb col-12">
+        <h2>This is somewhat embarrassing, isn't it?</h2>
+        <p style="color:#333; text-align:center;">It seems we can't find what you're looking for.</p>
+        <br>
+    </div>
+</div>
 {{ end }}
 
