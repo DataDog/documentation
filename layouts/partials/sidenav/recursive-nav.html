@@ -5,13 +5,13 @@
         {{ $split_urls := split $ctx.RelPermalink "/" }}
         {{ $url_first := print "/" (index $split_urls 1) "/" }}
         {{ $url_first_second := print $url_first (index $split_urls 2) "/" }}
-        {{ $active_page := (eq $ctx.RelPermalink $element.URL) }}
+        <!-- if url matches then active link or if second part in url and no children --->
+        {{ $active_page := (or (eq $ctx.RelPermalink $element.URL) (and (eq $url_first_second $element.URL) (not $element.Children)) ) }}
         {{ $open_parent := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $url_first_second $element.URL) $active_page) }}
         <li class="{{if $open_parent }}open{{ end }}">
             <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}" {{if $active_page }}class="active"{{ end }}>
                 {{ if $element.Pre }}<img alt="icon" class="static" width="21" src="{{ partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png")) }}" /><img class="hover" width="21" src="{{ partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") ) }}" />{{ end }}<span>{{ $element.Name }}</span>
             </a>
-
             {{ if eq $element.Name "Integrations" }}
                 {{/* partial "sidenav/integrations-nav.html" (dict "context" $ctx) */}}
                 {{ if $element.Children }}
