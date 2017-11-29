@@ -1,5 +1,5 @@
 ---
-title: What is a custom metric and what is the limit on the number of custom metrics I can have?
+title: Custom Metrics
 kind: doc
 customnav: gettingstartednav
 ---
