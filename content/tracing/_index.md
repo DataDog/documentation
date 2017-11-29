@@ -51,6 +51,7 @@ To instrument an application written in a language that does not yet have offici
 The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options.  
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
 
+{{% table responsive="true" }}
 | File setting | Environment variable | Description |
 |---|---|---|
 | **main** |
@@ -63,6 +64,7 @@ Additionally, some configuration options may be set as environment variables. No
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
 | **trace.ignore** |
 | `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their Resource name. |
+{{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 

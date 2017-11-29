@@ -15,6 +15,7 @@ To create a [TimeBoard](/graphing/dashboards/timeboard/) or a [ScreenBoard](/gra
 
 At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards](/graphing/dashboards/screenboard) and [TimeBoards](/graphing/dashboards/timeboard). To more clearly understand the differences between the two, consider the following:
 
+{{% table responsive="true" %}}
 |  | Timeboards | Screenboards|
 |---|------------|-------------|
 |Time Scope | All graphs share same time scope | All graphs can have individual time scope|
@@ -22,6 +23,7 @@ At Datadog we give you the capability to create and customize two types of dashb
 | Can Share Graphs Individually | Yes | No |
 | Can Share the Entire Dashboard | No | Yes |
 | Sharing can be Read-Only | Yes | Yes |
+{{% /table %}}
 
 
 ## Editing template variables

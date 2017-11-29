@@ -103,6 +103,7 @@ h1 {
 }
 
 .main {
+  z-index:2;
   padding-left:29px;
   padding-top:29px;
   padding-bottom:100px;
@@ -202,6 +203,71 @@ h1 {
   }
 }
 
+// expand images
+.wide-parent {
+  width:130%;
+  display:block;
+  figure {
+    position:relative;
+    &:before {
+      height: 26px;
+      top: -26px;
+      background-image: linear-gradient(-179deg,hsla(0,0%,100%,0),#fff 77%);
+      content: "";
+      display: inline-block;
+      width: 300px;
+      position: absolute;
+      right: 0;
+      opacity: .85;
+    }
+    &:after {
+      height: 26px;
+      bottom: -26px;
+      background-image: linear-gradient(1turn,hsla(0,0%,100%,0),#fff 77%);
+      content: "";
+      display: inline-block;
+      width: 300px;
+      position: absolute;
+      right: 0;
+      opacity: .85;
+    }
+  }
+}
+// expand tables
+.table-wide {
+  width:130%;
+  background:#fff;
+  position:relative;
+  display: block;
+  overflow-x: auto;
+  overflow-y:hidden;
+  table {
+    display:table;
+  }
+  &:before {
+    height: 26px;
+    top: -26px;
+    background-image: linear-gradient(-179deg,hsla(0,0%,100%,0),#fff 77%);
+    content: "";
+    display: inline-block;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    opacity: .85;
+  }
+  &:after {
+    height: 26px;
+    bottom: -26px;
+    background-image: linear-gradient(1turn,hsla(0,0%,100%,0),#fff 77%);
+    content: "";
+    display: inline-block;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    opacity: .85;
+  }
+}
+
 
 // Breakpoint styles go here...
 
@@ -218,5 +284,8 @@ h1 {
     #pagetitle {
       margin-right: 0 !important;
     }
+  }
+  .wide-parent {
+    width:100%;
   }
 }
