@@ -60,6 +60,4 @@ In this article, we will walk through parsing a log from the Datadog agent’s c
     To do  that we simply need to remove the extract section of the rule:
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" popup="true">}}
 
-## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}

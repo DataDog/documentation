@@ -234,7 +234,4 @@ In order to get the best use out of your logs in Datadog, it is important to hav
     Open the service administrative tool:
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
 
-
-## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}

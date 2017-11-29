@@ -14,6 +14,9 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
@@ -215,7 +218,5 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
     grape_logger.info payload
 end
 ```
-
-## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

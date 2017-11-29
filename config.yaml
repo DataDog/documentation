@@ -446,35 +446,35 @@ languages:
           url: "/logs/languages/"
           weight: 80
           parent: menu_references_logs
-        - identifier: customnav_lognav_java
-          name: "Java"
-          url: "/logs/languages/java/"
-          weight: 90
-          parent: customnav_lognav_languages
         - identifier: customnav_lognav_csharp
           name: "Csharp"
           url: "/logs/languages/csharp/"
-          weight: 100
+          weight: 810
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_go
           name: "Go"
           url: "/logs/languages/go/"
-          weight: 110
+          weight: 820
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_java
+          name: "Java"
+          url: "/logs/languages/java/"
+          weight: 830
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_nodejs
           name: "Nodejs"
           url: "/logs/languages/nodejs/"
-          weight: 120
+          weight: 840
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_ruby
           name: "Ruby"
           url: "/logs/languages/ruby/"
-          weight: 130
+          weight: 850
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_faq
           name: "FAQ"
           url: "/logs/faq/"
-          weight: 99
+          weight: 90
           parent: menu_references_logs
         # LOGS - Subnav end
 
