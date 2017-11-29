@@ -65,6 +65,7 @@ To instrument these libraries, see [the library documentation](http://pypi.datad
 
 ## Further Reading
 
-The Python library [source code can be found on Github](https://github.com/DataDog/dd-trace-py).
-
-You can find additional documentation on [the library documentation page](http://pypi.datadoghq.com/trace/docs/).
+{{< whatsnext >}}
+    {{< nextlink href="https://github.com/DataDog/dd-trace-py" tag="Github" >}}Tracing Python library source code{{< /nextlink >}}
+    {{< nextlink href="http://pypi.datadoghq.com/trace/docs/" tag="Documentation" >}} Python library documentation page{{< /nextlink >}}
+{{< /whatsnext >}}
