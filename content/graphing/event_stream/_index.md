@@ -14,6 +14,7 @@ aliases:
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. 
 Note that filters perform an exact match search and will not work with partial strings.
 
+{{% table responsive="true" %}}
 | Filter | Description |
 |--------|-------------|
 |user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
@@ -24,6 +25,7 @@ Note that filters perform an exact match search and will not work with partial s
 |status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
 |priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
 |incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
+{{% /table %}}
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search will look inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.  
 

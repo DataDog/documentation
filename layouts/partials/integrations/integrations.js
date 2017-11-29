@@ -21,25 +21,6 @@ $(document).ready(function () {
             finder_state = 1;
         }
     });
-
-    /*$(window).on('hashchange', function(){
-        var current_cat = "#all";
-        if (window.location.href.indexOf("#") > -1) {
-            current_cat = window.location.href.substring(window.location.href.indexOf("#"));
-        }
-        var current_selected = $('.controls .active').attr('href');
-        if(current_selected) {
-            if (current_cat && current_selected && current_cat !== current_selected) {
-                $('a[href="' + current_cat + '"]:visible').get(0).click();
-            } else if(current_cat) {
-                $('a[href="' + current_cat + '"]:visible').get(0).click();
-            } else {
-                $('a[href="#all"]:visible').get(0).click();
-            }
-        }
-    });
-    $(window).trigger('hashchange');*/
-
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -51,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
     var items = window.integrations;
-    var currentFilter = "#all";
 
     if(!container) return;
 
@@ -112,22 +92,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleButtonClick(button, filters) {
         // If button is already active, or an operation is in progress, ignore the click
-        if (button.classList.contains('active')) return;
+        if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
-        currentFilter = filter;
         activateButton(button, filters);
+        updateData(filter);
+    }
+
+    function updateData(filter) {
         var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
             var item = window.integrations[i];
             var domitem = document.getElementById('mixid_'+item.id);
-            if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+            if(filter === 'all') {
                 domitem.classList.remove('grayscale');
                 show.push(item);
             } else {
-                domitem.classList.add('grayscale');
-                hide.push(item);
+                if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+                    domitem.classList.remove('grayscale');
+                    show.push(item);
+                } else {
+                    domitem.classList.add('grayscale');
+                    hide.push(item);
+                }
             }
         }
         var items = [].concat(show, hide);
@@ -137,4 +125,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
     activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
+
+    $(window).on('hashchange', function(){
+        var current_cat = "";
+        if (window.location.href.indexOf("#") > -1) {
+            current_cat = window.location.href.substring(window.location.href.indexOf("#"));
+        }
+        var current_selected = $('.controls .active').attr('href');
+        if(current_cat && current_selected) {
+            if (current_cat !== current_selected) {
+                $('a[href="' + current_cat + '"]:visible').get(0).click();
+            }
+        }
+        if(current_cat === "") {
+            activateButton(controls.querySelector('[data-filter="all"]'), filters);
+            activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
+            updateData("all");
+        }
+    });
+
+    if (window.location.href.indexOf("#") > -1) {
+        $(window).trigger('hashchange');
+    }
 });

@@ -55,6 +55,7 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 ##### How do submission types relate to Datadog in-application types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-application type:
 
+{{% table responsive="true" %}}
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
 | [API][3] | `api.Metric.send(...)` | gauge | gauge |
@@ -69,6 +70,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
 | [agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
 | [agent check][2] | `self.set(...)` | set | gauge |
+{{% /table %}}
 
 ##### What's a use case for changing a metric's type?
 
@@ -144,18 +146,22 @@ Counters are used to (ahem) count things.
 ### Submission
 #### Agent Check Submission
 
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 | self.increment(...) |  Used to modify a count of events identified by the metric key string: <ul><li>Can be called multiple times during a check's execution.</li><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
 |self.decrement(...) |Used to modify a count of events identified by the metric key string:<ul><li>Can be called multiple times during a check's execution.</li><li>Stored as RATE type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
 |self.monotonic_count(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting. If the value of your counter ever decreases between submissions the resulting stored value for that submission is 0:<ul><li>Should only be called once during a check. Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
 |self.count(...)|Submit the number of events that occurred during the check interval. If you're tracking a counter value that persists between checks, this means you must calculate the delta before submission:<ul><li>Should only be called once during a check.</li><li>Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
+{{% /table %}}
 
 #### Dogstatsd Submission
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 | dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>| 
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
+{{% /table %}}
 
 
 ### Example
@@ -230,14 +236,18 @@ Gauges measure the value of a particular thing over time:
 ### Submission methods
 #### Agent Check Submission
 
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample will be used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
+{{% /table %}}
 
 #### Dogstatsd Submission
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |dog.gauge(...)|Stored as a GAUGE type in the datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the statsd flush period.|
+{{% /table %}}
 
 ### Example
 Suppose a developer wanted to track the amount of free memory on a machine, we can periodically sample that value as the metric `system.mem.free`:
@@ -287,14 +297,18 @@ Each one of these becomes a value in their respective metric time series that ar
 ### Submission methods
 #### Agent Check Submission
 
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |self.histogram(...)|used to track the statistical distribution of a set of values.|
+{{% /table %}}
 
 #### Dogstatsd Submission
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |dog.histogram(...)|Used to track the statistical distribution of a set of values over a statsd flush period.|
+{{% /table %}}
 
 ### Example
 
@@ -387,9 +401,11 @@ After a service check has been reported, you can use it to trigger a [Custom Che
 ### Submission methods
 #### Agent Check Submission
 
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |self.rate(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the agent does both for you:<ul><li>Should only be called once during a check.</li><li>Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a GAUGE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.</li></ul>|
+{{% /table %}}
 
 ## Sets
 ### Overview 
@@ -399,14 +415,18 @@ Sets are used to count the number of unique elements in a group.
 ### Submission methods
 #### Agent Check Submission
 
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an agent check.</li><li>Stored as a GAUGE type in the datadog web application.</li></ul>|
+{{% /table %}}
 
 #### Dogstatsd Submission
+{{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
 |dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the datadog web application. Each value in the stored timeseries is the count of unique values submitted to statsd for a metric over that flush period.</li></ul>|
+{{% /table %}}
 
 ### Example
 If you want to track the number of unique visitors to your site, sets are a great way to do that.
@@ -444,9 +464,11 @@ end
 
 The following units may be associated with metrics submitted to Datadog.
 
+{{% table responsive="true" %}}
 |Bytes|Time|Percentage|Network|System|Disk|General|DB|Cache|Money|Memory|Frequency|Logging|
 |:----|:----|:----|:----|:---|:---|:----|:---|:---|:---|:---|:---|:---|
 |<ul><li>bit</li><li>byte</li><li>kibibyte</li><li>mebibyte</li><li>gibibyte</li><li>tebibyte</li><li>pebibyte</li><li>exbibyte</li></ul>|<ul><li>microsecond</li><li>millisecond</li><li>second</li><li>minute</li><li>hour</li><li>day</li><li>week</li><li>nanosecond</li></ul>|<ul><li>fraction</li><li>percent</li><li>percent_nano</li><li>apdex</li></ul>|<ul><li>connection</li><li>request</li><li>packet</li><li>segment</li><li>response</li><li>message</li><li>payload</li><li>timeout</li><li>datagram</li><li>route</li><li>session</li></ul>|<ul><li>process</li><li>core</li><li>thread</li><li>host</li><li>node</li><li>fault</li><li>service</li><li>instance</li><li>cpu</li></ul>|<ul><li>file</li><li>inode</li><li>sector</li><li>block</li></ul>|<ul><li>buffer</li><li>error</li><li>read</li><li>write</li><li>occurrence</li><li>event</li><li>time</li><li>unit</li><li>operation</li><li>item</li><li>task</li><li>worker</li><li>resource</li><li>garbage collection</li><li>email</li><li>sample</li><li>stage</li><li>monitor</li><li>location</li><li>check</li><li>attempt</li><li>device</li><li>update</li><li>method</li><li>job</li><li>container</li></ul>|<ul><li>table</li><li>index</li><li>lock</li><li>transaction</li><li>query</li><li>row</li><li>key</li><li>command</li><li>offset</li><li>record</li><li>object</li><li>cursor</li><li>assertion</li><li>scan</li><li>document</li><li>shard</li><li>flush</li><li>merge</li><li>refresh</li><li>fetch</li><li>column</li><li>commit</li><li>wait</li><li>ticket</li><li>question</li></ul>|<ul><li>hit</li><li>miss</li><li>eviction</li><li>get</li><li>set</li></ul>|<ul><li>dollar</li><li>cent</li></ul>|<ul><li>page</li><li>split</li></ul>|<ul><li>hertz</li><li>kilohertz</li><li>megahertz</li><li>gigahertz</li></ul>|<ul><li>entry</li></ul>|
+{{% /table %}}
 
 [1]: /developers/dogstatsd
 [2]: /agent/agent_checks

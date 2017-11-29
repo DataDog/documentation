@@ -64,6 +64,8 @@ $(document).ready(function () {
         var modal = $(this);
         modal.hide();
         var url = e.relatedTarget.href;
+        // try set modal popup imgix to cap out at browser width/height
+        //url += '&w='+$(window).width() + '&h='+$(window).height();
         var img = new Image();
         var imgEl = $('<img src="'+url+'" alt="" class="img-fluid" />');
         img.onload  = function() {
@@ -103,7 +105,11 @@ $(document).ready(function () {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
                 el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
                 p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+            } else {
+                el.css('width', '' + w  + 'px').css('height', '' + h + 'px');
+                p.css('width', '' + w + 'px').css('height', '' + h + 'px');
             }
+
         }
     }
 

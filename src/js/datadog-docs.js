@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    // ie
+    document.createElement('picture');
+
     // bring back size() for jquery pajinate
     // The number of elements contained in the matched element set
     jQuery.fn.size = function() {
