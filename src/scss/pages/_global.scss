@@ -91,6 +91,11 @@ a:focus {
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
+  text-align-last:center;
+  &:focus {
+    border-color: $ddpurple;
+    outline: none;
+  }
 }
 
 // standard code highlighting
