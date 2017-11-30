@@ -329,6 +329,15 @@ h1 {
   }
 }
 
+//@include media-breakpoint-up(sm) { ... }
+@media (max-width: 767px) {
+  table.table-vertical-mobile {
+    td {
+      display:block !important;
+    }
+  }
+}
+
 //@include media-breakpoint-up(md) { ... }
 @media (max-width: 991px) {
 
