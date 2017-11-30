@@ -11,9 +11,16 @@
 {{ $img_height := .height }}
 {{ $img_style := .style }}
 {{ $img_class := .class }}
+{{ $disable_lazy := .disable_lazy }}
 <img width="{{$img_width}}"
      alt=""
      height="{{$img_height}}"
-     class="{{ if $img_class }} {{ $img_class }} {{ end }}"
+     class="{{ if $img_class }} {{ $img_class }} {{ end }}{{ if not ($disable_lazy) }} lazyload {{ end }}"
+     {{ if not ($disable_lazy) }}
+        data-src="{{ $url | safeURL }}"
+     {{ end }}
+     {{ if  $disable_lazy }}
+        src="{{ $url | safeURL }}"
+     {{ end }}
      {{ if $img_style }} style="{{ $img_style | safeCSS }}" {{ end }}
-    src="{{ $url | safeURL }}">
+    >
