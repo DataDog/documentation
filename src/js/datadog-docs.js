@@ -434,6 +434,15 @@ $(document).ready(function () {
         }
     });
 
+    // api dropdown select
+    $('.api-select').on('change', function(e) {
+        var href = $(this).val();
+        if(href.substr(0, 1) === '#') {
+            moveToAnchor(href.substr(1));
+            return false;
+        }
+    });
+
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
         var id = $(this).attr('id');
