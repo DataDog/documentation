@@ -20,8 +20,8 @@
             </div>
             <div class="col-1 text-center">
                 <a href="https://www.datadoghq.com/" id="logo">
-                    <img alt="DataDog" class="logo-img" height="75" src="{{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png") }}">
-                    <img alt="DataDog" class="logo-text" src="{{ partial "img.html" (dict "root" . "src" "dd-logo-200.png") }}">
+                    {{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png" "class" "logo-img" "alt" "DataDog" "height" "75") }}
+                    {{ partial "img.html" (dict "root" . "src" "dd-logo-200.png" "class" "logo-text" "alt" "DataDog") }}
                 </a>
             </div>
             <div class="col">
@@ -47,7 +47,7 @@
     </div>
     <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
         <div class="container">
-            <a class="navbar-brand" href="/"><img alt="DataDog" src="{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png") }}" /></a>
+            <a class="navbar-brand" href="/">{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png" "alt" "DataDog") }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -1,1 +1,19 @@
-{{ .root.Site.Params.img_url }}images/{{ (index .root.Site.Data.manifests.images .src ) }}
+{{ if .img_param }}
+    {{ .root.Scratch.Set "img_param" .img_param }}
+{{ else }}
+    {{ .root.Scratch.Set "img_param" "?ch=Width,DPR&fit=max&auto=format" }}
+{{ end }}
+{{ $img_param := .root.Scratch.Get "img_param" }}
+{{ $url := print (.root.Site.Params.img_url) "images/" (index .root.Site.Data.manifests.images .src ) ($img_param) }}
+{{ $image_type_arr := split .src "." }}
+{{ $image_ext := index $image_type_arr 1 }}
+{{ $img_width := .width }}
+{{ $img_height := .height }}
+{{ $img_style := .style }}
+{{ $img_class := .class }}
+<img width="{{$img_width}}"
+     alt=""
+     height="{{$img_height}}"
+     class="{{ if $img_class }} {{ $img_class }} {{ end }}"
+     {{ if $img_style }} style="{{ $img_style | safeCSS }}" {{ end }}
+    src="{{ $url | safeURL }}">

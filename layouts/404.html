@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="row page404">
     <div class="d-none d-sm-flex col-sm-6 text-right">
-        <img class="img-fluid ml-auto" alt="sad" src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
+        {{ partial "img.html" (dict "root" . "src" "sad_bits.png" "class" "img-fluid ml-auto" "alt" "sad") }}
     </div>
     <div class="col-12 col-sm-6">
         <h1>Arf.</h1>

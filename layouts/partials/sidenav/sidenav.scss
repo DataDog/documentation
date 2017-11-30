@@ -201,7 +201,7 @@ aside.sidenav-api {
           &.active {
             color:$ddpurple;
             &> .hover {
-              display:inline;
+              display:inline-block;
             }
             &> .static {
               display:none;

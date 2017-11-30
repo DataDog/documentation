@@ -68,8 +68,8 @@
         {{ if $formatname }}
         <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <div class="card">
-                <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/"><img alt="integration" class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png")) }}"></a>
-                <a class="card-img-gray" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/"><img alt="integration" class="card-img" src="{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png")) }}?sat=-100"></a>
+                <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png") "class" "card-img" "alt" "integration") }}</a>
+                <a class="card-img-gray" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png") "class" "card-img" "alt" "integration" "img_param" "&sat=-100") }}</a>
                 <div class="text-center title" style="display: none;">{{ $formatname }}</div>
                 <div class="card-body">
                     <a class="card-button" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
