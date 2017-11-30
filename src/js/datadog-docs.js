@@ -456,9 +456,4 @@ $(document).ready(function () {
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
 
-    // fill the gap in larger browsers?
-    /*if($('body > .container').height() < ($(window).height() - $('body > header').height() - $('body > footer').height())) {
-        var h = parseInt($(window).height() - $('body > footer').height());
-        $('body').css('height', h+'px');
-    }*/
 });
