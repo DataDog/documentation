@@ -42,6 +42,7 @@
     "jshint": "^2.9",
     "jshint-stylish": "^2.0",
     "lazypipe": "^1.0",
+    "lazysizes": "^4.0.1",
     "merge-stream": "^1.0",
     "minimist": "^1.1",
     "mixitup": "^3.2.2",
