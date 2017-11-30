@@ -33,16 +33,6 @@ $ddpurple:    #774DA2;
       //float:left;
       margin:0 19px 19px 0;
       overflow:hidden;
-      &:hover {
-        border-color: $ddpurple;
-        & > .card-img,
-        & > .card-img-gray  {
-          display:none;
-        }
-        & > .card-body {
-          display:block;
-        }
-      }
       .card-body {
         padding:0;
         display:none;
@@ -108,26 +98,24 @@ $ddpurple:    #774DA2;
 @media (max-width: 575px) {
   .integration-tiles {
     .card {
-      /*width:auto;
-      height:auto;
-      &:hover {
-        & > .card-img {
-          display:block;
-        }
-      }
-      .card-body {
-        position: absolute;
-        background: #fff;
-      }*/
       width:auto;
       height:auto;
+    }
+  }
+}
+
+// do card hovers at desktop only
+@media (min-width: 576px) {
+  .integration-tiles {
+    .card {
       &:hover {
-        border-color:rgba(0,0,0,.125);
-        & > .card-img {
-          display: block;
+        border-color: $ddpurple;
+        & > .card-img,
+        & > .card-img-gray {
+          display: none;
         }
         & > .card-body {
-          display: none;
+          display: block;
         }
       }
     }
