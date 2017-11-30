@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="0;url={{ .Params.external_redirect }}">
+<meta http-equiv="refresh" content="0;url={{ if in .Params.external_redirect "http"}}{{ .Params.external_redirect }}{{ else }}{{.Site.BaseURL}}{{ .Params.external_redirect }}{{ end}}">
