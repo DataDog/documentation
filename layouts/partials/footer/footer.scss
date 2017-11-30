@@ -16,6 +16,7 @@ $footer-font-color: rgba(255,255,255,.5);
 $footer-font-color-hover: rgba(255,255,255,1);
 
 body > footer {
+  z-index:3;
   position: absolute;
   bottom: 0;
   width: 100%;
