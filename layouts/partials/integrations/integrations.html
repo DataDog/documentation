@@ -34,15 +34,12 @@
 </script>
 
 <div class="d-block d-sm-none mt-40 mb-40">
-    <div class="dropdown show">
-        <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL</a>
-        <div class="dropdown-menu" data-ref="mobilecontrols" aria-labelledby="dropdownMenuLink">
-            <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">ALL</a>
-            {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-                <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
-            {{ end }}
-        </div>
-    </div>
+    <select class="integrations-select custom-select" data-ref="mobilecontrols">
+        <option data-ref="filter" data-filter="all" value="#all" selected>ALL</option>
+        {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
+            <option data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" value="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</option>
+        {{ end }}
+    </select>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
