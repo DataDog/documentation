@@ -1,5 +1,5 @@
 ---
-title: Get Started with Datadog
+title: Datadog Docs
 kind: documentation
 customnav: main_references
 aliases:
