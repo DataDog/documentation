@@ -172,20 +172,28 @@ h1 {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    text-decoration:underline;
+    //text-decoration:underline;
+    border-bottom: 1px solid #c8c8c8;
     &:hover {
+      color: $ddpurple;
+      border-color: $ddpurple;
     }
   }
 
   ul {
     list-style-type: none;
-  }
-  ul li:before {
-    content: "–";
-    position: relative;
-    margin-right: 7px;
-    margin-left: -16px;
-    float: left;
+    li {
+      &:before {
+        content: "–";
+        position: relative;
+        margin-right: 7px;
+        margin-left: -16px;
+        float: left;
+      }
+      p {
+        margin-bottom:0;
+      }
+    }
   }
 }
 
@@ -319,6 +327,31 @@ h1 {
   }
 }
 
+// tables for integration metrics
+.table-metrics {
+  tr td:nth-child(1) {
+    word-break:break-all;
+  }
+}
+
+// responsive tables
+.table-responsive-container {
+  position:relative;
+  overflow: hidden;
+  width: 100%;
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50px;
+    height: 100%;
+    border-radius: 10px 0 0 10px/50% 0 0 50%;
+    box-shadow: -5px 0 10px rgba(0,0,0,.25);
+    content: "";
+    display:none;
+  }
+}
+
 // loader
 .loader,
 .loader:after {
@@ -363,12 +396,22 @@ h1 {
 }
 
 
+// modal background
+.modal-backdrop.show {
+    opacity: 0.3;
+}
+
 // Breakpoint styles go here...
 
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
   html {
     overflow-x: hidden;
+  }
+  .table-responsive-container {
+    &:after {
+      display:block;
+    }
   }
 }
 

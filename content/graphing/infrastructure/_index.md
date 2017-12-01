@@ -82,7 +82,7 @@ in Datadog. From the Inspect panel, you can see (among other things) the list of
 
 If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List. 
 
-{{< img src="graphing/infrastructure/index/inf_list.png" alt="inf list" responsive="true" popup="true" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" popup="true" >}}
 
 Clicking this link will provide you with a JSON formatted list of all your hosts.  
 
