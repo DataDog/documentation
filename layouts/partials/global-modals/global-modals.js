@@ -56,16 +56,17 @@ $(document).ready(function () {
 
     var naturalWidth = 0;
     var naturalHeight = 0;
+    var isShowing = false;
     $('#popupImageModal').on('show.bs.modal', function (e) {
-
+        $('#popupImageModal .modal-dialog').css('width', '600px').css('height','400px');
+        $('#popupImageModal .modal-body').html('<div class="loader" style="margin:100px 0;height:100px;width:100px;">Loading...</div>');
     }).on('shown.bs.modal', function (e) {
         $('body').removeClass('modal-open');
-        $(window).on('scroll', detectScrollWhileOpen);
         var modal = $(this);
-        modal.hide();
+        //modal.hide();
         var url = e.relatedTarget.href;
         // try set modal popup imgix to cap out at browser width/height
-        //url += '&w='+$(window).width() + '&h='+$(window).height();
+        url += '&w='+$(window).width() + '&h='+$(window).height();
         var img = new Image();
         var imgEl = $('<img src="'+url+'" alt="" class="img-fluid" />');
         img.onload  = function() {
@@ -74,17 +75,14 @@ $(document).ready(function () {
             naturalHeight = img.height;
             $('#popupImageModal .modal-body').html(imgEl);
             resize(naturalWidth, naturalHeight);
-            modal.fadeIn();
+            if($('#popupImageModal').is(':visible')) {
+                modal.fadeIn();
+            }
         };
         img.src = url;
     }).on('hide.bs.modal', function(e) {
         $('#popupImageModal .modal-body').empty();
     });
-
-    function detectScrollWhileOpen() {
-        $('#popupImageModal').modal('hide');
-        $(window).off('scroll', detectScrollWhileOpen);
-    }
 
     function resize(w, h) {
         var el = $('#popupImageModal .modal-body img');
@@ -105,17 +103,27 @@ $(document).ready(function () {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
                 el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
                 p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+                //el.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
+                //p.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
             } else {
                 el.css('width', '' + w  + 'px').css('height', '' + h + 'px');
                 p.css('width', '' + w + 'px').css('height', '' + h + 'px');
+                //el.animate({width: w+'px', height: h+'px'}, 200);
+                //p.animate({width: w+'px', height: h+'px'}, 200);
             }
 
         }
     }
 
     $(window).on('resize', function() {
-        if($('#popupImageModal').hasClass('show')) {
+        if($('#popupImageModal').is(':visible')) {
             resize(naturalWidth, naturalHeight);
+        }
+    });
+
+    $(window).on('scroll', function() {
+        if($('#popupImageModal').is(':visible')) {
+            $('#popupImageModal').modal('hide');
         }
     });
 

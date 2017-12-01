@@ -9,21 +9,16 @@
     <div class="row sticky api-nav no-gutters" style="">
         <div class="col-12 col-lg-6">
             <div class="d-lg-none" style="background:#fff;padding:10px;">
-                <div class="dropdown">
-                    <button class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" type="button" id="dropdownAPIMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        API
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownAPIMenuLink" style="padding:15px 30px">
-                        {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+                <select class="api-select custom-select">
+                    <option selected>API</option>
+                    {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
                         {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
 
                         {{ else }}
-
-                        <a class="dropdown-item" href="#{{ lower (replace $element.Title " " "-") }}">{{ $element.Title }}</a>
+                            <option value="#{{ lower (replace $element.Title " " "-") }}">{{ $element.Title }}</option>
                         {{ end }}
-                        {{ end }}
-                    </div>
-                </div>
+                    {{ end }}
+                </select>
             </div>
         </div>
         <div class="col-12 col-lg-6">

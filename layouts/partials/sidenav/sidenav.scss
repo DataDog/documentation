@@ -38,6 +38,12 @@ aside.sidenav {
   padding-right:15px;
   padding-bottom: 50px;
 
+  .sticky {
+    .col {
+      padding-right:0;
+    }
+  }
+
   &> .row {
     &:before,
     &:after {
@@ -65,6 +71,7 @@ aside.sidenav {
   }
 
   .sidenav-search {
+    padding-right: 15px;
     //margin-right: 30px;
     .input-group-addon {
       background:none;
@@ -194,7 +201,7 @@ aside.sidenav-api {
           &.active {
             color:$ddpurple;
             &> .hover {
-              display:inline;
+              display:inline-block;
             }
             &> .static {
               display:none;

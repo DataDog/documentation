@@ -57,67 +57,6 @@ $(document).ready(function () {
 
             return false;
         });
-
-        // set api row heights to keep height at any language
-        /*function apiRowHeights() {
-            $('.api-row').each(function() {
-                var el = $(this);
-                var code_block_classes = [];
-                $(this).find('.code-block').each(function() {
-                    var classes = $.trim($(this).attr("class").replace('code-block', ''));
-                    code_block_classes.push(classes);
-                });
-                code_block_classes = code_block_classes.filter(function(itm, i, a) {
-                    return i === a.indexOf(itm);
-                });
-
-                var heights = [];
-                for(var i=0; i < code_block_classes.length; i++)
-                {
-                    var item = code_block_classes[i];
-                    var height = 0;
-                    el.find('.'+item).each(function() {
-                        height += $(this).outerHeight();
-                    });
-                    heights.push(height);
-                }
-                var diff = el.find('.code-container').outerHeight();
-                for(var j=0; j < heights.length; j++) {
-                    diff -= heights[j];
-                }
-
-                var minHeight = Math.max.apply(null, heights);
-                $(this).css('minHeight', minHeight + diff + 'px');
-                $(this).find('.code-block').hide();
-            });
-        }
-        apiRowHeights();
-
-        var id;
-        $(window).resize(function() {
-            clearTimeout(id);
-            id = setTimeout(doneResizing, 500);
-
-        });
-
-        function doneResizing(){
-            apiRowHeights();
-        }*/
-
-        // determine from the url the language if we can
-        /*var sPageURL = decodeURIComponent(window.location.search.substring(1));
-        var sURLVariables = sPageURL.split('&');
-        var lang = sURLVariables.filter(function(item) {
-            return item.split('=')[0] === 'lang';
-        }).map(function(item) {
-            return item.split('=')[1];
-        }).toString();
-
-        // set a default
-        if(lang === '') lang = 'python';
-
-        // click the language nav we want
-        $('.codenav [data-lang="'+lang+'"]').click();*/
     }
 
     // algolia
@@ -434,6 +373,15 @@ $(document).ready(function () {
         }
     });
 
+    // api dropdown select
+    $('.api-select').on('change', function(e) {
+        var href = $(this).val();
+        if(href.substr(0, 1) === '#') {
+            moveToAnchor(href.substr(1));
+            return false;
+        }
+    });
+
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
         var id = $(this).attr('id');
@@ -446,4 +394,5 @@ $(document).ready(function () {
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
+
 });

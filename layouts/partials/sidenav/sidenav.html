@@ -2,14 +2,15 @@
 
 <div class="mobilequicknav row align-items-center no-gutters">
     <a href="https://www.datadoghq.com" class="col text-center">
-        <img alt="home" class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png") }}" />Home
+        {{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png" "class" "static" "alt" "home" "width" "21") }}
+        Home
     </a>
     <a href="/" class="col text-center">
-        <img alt="docs" class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png") }}" />
+        {{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png" "class" "static" "alt" "docs" "width" "21") }}
         Docs
     </a>
     <a href="/api/" class="col text-center">
-        <img alt="api" class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png") }}" />
+        {{ partial "img.html" (dict "root" $dot "src" "icons/nav_api.png" "class" "static" "alt" "api" "width" "21") }}
         API
     </a>
 </div>
@@ -21,7 +22,7 @@
             <form class="sidenav-search" action="{{.Site.BaseURL}}search/">
                 <div class="input-group">
                     <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search"/>
-                    <span class="input-group-addon"><img width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png") }}" /></span>
+                    <span class="input-group-addon">{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png" "alt" "search" "width" "21") }}</span>
                 </div>
             </form>
 

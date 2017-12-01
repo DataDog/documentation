@@ -24,7 +24,7 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var mobileBtn = document.querySelector('#dropdownMenuLink');
+    //var mobileBtn = document.querySelector('#dropdownMenuLink');
     var controls = document.querySelector('[data-ref="controls"]');
     var filters = null;
     var mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
@@ -63,18 +63,31 @@ document.addEventListener('DOMContentLoaded', function () {
         //e.preventDefault();
         handleButtonClick(e.target, filters);
         // trigger same active on mobile
-        var mobileBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
-        activateButton(mobileBtn, mobilefilters);
+        $('.integrations-select').val('#'+e.target.getAttribute('href').substr(1));
+        //var mobileBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
+        //activateButton(mobileBtn, mobilefilters);
         //return false;
     });
 
-    mobilecontrols.addEventListener('click', function(e) {
+    /*mobilecontrols.addEventListener('click', function(e) {
         //e.preventDefault();
         handleButtonClick(e.target, mobilefilters);
         // trigger same active on desktop
         var desktopBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
         activateButton(desktopBtn, filters);
         //return false;
+    });*/
+
+    // integrations dropdown select
+    $('.integrations-select').on('change', function(e) {
+        var filter = $(this).val();
+        updateData(filter);
+        // trigger same active on desktop
+        var desktopBtn = controls.querySelector('[data-filter=".'+filter.substr(1)+'"]');
+        activateButton(desktopBtn, filters);
+
+        var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+        history.pushState(null, null, url + filter)
     });
 
     function activateButton(activeButton, siblings) {
@@ -86,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 button = siblings[i];
                 button.classList[button === activeButton ? 'add' : 'remove']('active');
             }
-            mobileBtn.textContent = activeButton.textContent;
+            //mobileBtn.textContent = activeButton.textContent;
         }
     }
 
@@ -105,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for(var i = 0; i < window.integrations.length; i++) {
             var item = window.integrations[i];
             var domitem = document.getElementById('mixid_'+item.id);
-            if(filter === 'all') {
+            if(filter === 'all' || filter === '#all') {
                 domitem.classList.remove('grayscale');
                 show.push(item);
             } else {
