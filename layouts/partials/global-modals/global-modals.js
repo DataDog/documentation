@@ -58,7 +58,8 @@ $(document).ready(function () {
     var naturalHeight = 0;
     var isShowing = false;
     $('#popupImageModal').on('show.bs.modal', function (e) {
-        $('#popupImageModal .modal-dialog').css('width', '500px').css('height', '500px');
+        $('#popupImageModal .modal-dialog').css('width', '600px').css('height','400px');
+        $('#popupImageModal .modal-body').html('<div class="loader" style="margin:100px 0;height:100px;width:100px;">Loading...</div>');
     }).on('shown.bs.modal', function (e) {
         $('body').removeClass('modal-open');
         var modal = $(this);
@@ -102,9 +103,13 @@ $(document).ready(function () {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
                 el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
                 p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+                //el.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
+                //p.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
             } else {
                 el.css('width', '' + w  + 'px').css('height', '' + h + 'px');
                 p.css('width', '' + w + 'px').css('height', '' + h + 'px');
+                //el.animate({width: w+'px', height: h+'px'}, 200);
+                //p.animate({width: w+'px', height: h+'px'}, 200);
             }
 
         }
