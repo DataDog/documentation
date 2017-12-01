@@ -10,6 +10,10 @@ $tilecolors: (
 );
 
 .tile-nav {
+  p {
+    font-size:18px;
+    line-height:22px;
+  }
   div:nth-child(n+4) .card {
     margin-bottom:0px;
   }

@@ -172,20 +172,28 @@ h1 {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    text-decoration:underline;
+    //text-decoration:underline;
+    border-bottom: 1px solid #c8c8c8;
     &:hover {
+      color: $ddpurple;
+      border-color: $ddpurple;
     }
   }
 
   ul {
     list-style-type: none;
-  }
-  ul li:before {
-    content: "–";
-    position: relative;
-    margin-right: 7px;
-    margin-left: -16px;
-    float: left;
+    li {
+      &:before {
+        content: "–";
+        position: relative;
+        margin-right: 7px;
+        margin-left: -16px;
+        float: left;
+      }
+      p {
+        margin-bottom:0;
+      }
+    }
   }
 }
 
