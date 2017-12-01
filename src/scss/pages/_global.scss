@@ -396,6 +396,11 @@ h1 {
 }
 
 
+// modal background
+.modal-backdrop.show {
+    opacity: 0.3;
+}
+
 // Breakpoint styles go here...
 
 //@include media-breakpoint-up(xs) { ... }

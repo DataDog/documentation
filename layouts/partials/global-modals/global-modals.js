@@ -58,8 +58,9 @@ $(document).ready(function () {
     var naturalHeight = 0;
     var isShowing = false;
     $('#popupImageModal').on('show.bs.modal', function (e) {
-        $('#popupImageModal .modal-dialog').css('width', '600px').css('height','400px');
-        $('#popupImageModal .modal-body').html('<div class="loader" style="margin:100px 0;height:100px;width:100px;">Loading...</div>');
+        $('#popupImageModal .modal-content').css({'background': 'transparent', 'border': 'none'});
+        $('#popupImageModal .modal-body, #popupImageModal .modal-dialog, #popupImageModal .modal-content').css('height','100%');
+        $('#popupImageModal .modal-body').html('<div class="loader" style="position:absolute;top:50%;margin:-50px 0 0 -50px;height:100px;width:100px;"></div>');
     }).on('shown.bs.modal', function (e) {
         $('body').removeClass('modal-open');
         var modal = $(this);
@@ -73,6 +74,7 @@ $(document).ready(function () {
             /* Store naturalWidth & height for IE8 */
             naturalWidth = img.width;
             naturalHeight = img.height;
+            $('#popupImageModal .modal-content').css({'background': '', 'border': ''});
             $('#popupImageModal .modal-body').html(imgEl);
             resize(naturalWidth, naturalHeight);
             if($('#popupImageModal').is(':visible')) {
