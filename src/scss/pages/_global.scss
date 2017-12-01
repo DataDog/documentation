@@ -327,6 +327,31 @@ h1 {
   }
 }
 
+// tables for integration metrics
+.table-metrics {
+  tr td:nth-child(1) {
+    word-break:break-all;
+  }
+}
+
+// responsive tables
+.table-responsive-container {
+  position:relative;
+  overflow: hidden;
+  width: 100%;
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50px;
+    height: 100%;
+    border-radius: 10px 0 0 10px/50% 0 0 50%;
+    box-shadow: -5px 0 10px rgba(0,0,0,.25);
+    content: "";
+    display:none;
+  }
+}
+
 // loader
 .loader,
 .loader:after {
@@ -377,6 +402,11 @@ h1 {
 @media (max-width: 575px) {
   html {
     overflow-x: hidden;
+  }
+  .table-responsive-container {
+    &:after {
+      display:block;
+    }
   }
 }
 

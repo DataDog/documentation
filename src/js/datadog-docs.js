@@ -9,8 +9,10 @@ $(document).ready(function () {
         return this.length;
     };
 
-    $('table').each(function() {
-        $(this).addClass('table-responsive');
+    $('table, .table-responsive-container').each(function() {
+        if(!$(this).hasClass('table-responsive')) {
+            $(this).addClass('table-responsive');
+        }
     });
 
     // API page
