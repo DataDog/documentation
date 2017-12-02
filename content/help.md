@@ -13,21 +13,7 @@ Messages in the [event stream](http://app.datadoghq.com/graphing/event_stream) c
 
 ## By Email
 
-Contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com).
-
-### Access you support ticket
-
-If you already have opened at least one ticket to support@datadoghq.com follow this process to access all your Datadog support tickets:
-
-* Get a password from us by clicking this link on the sign in page of this website : `https://help.datadoghq.com`
-    {{< img src="faq/sing_in.png" alt="sing in" responsive="true" popup="true">}}
-
-Once you received the password, when you log in, you should be then directed to this location: `https://help.datadoghq.com/hc/en-us/requests`
-
-From here, you should be able to see your requests:
-    {{< img src="faq/my_activities.png" alt="my activities" responsive="true" popup="true">}}
-
-However, if you don't see this after logging in, click on your name in the upper right hand corner, and then select "My Activities" from there. 
+Contact our Support Team via email at [support@datadoghq.com](mailto:support@datadoghq.com). See [here](/developers/faq/access-your-support-ticket) to access your support ticket
 
 ## Over Slack
 

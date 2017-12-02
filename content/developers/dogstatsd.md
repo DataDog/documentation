@@ -409,12 +409,11 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 ## Further Reading
 
-[Libraries page][2] — find a DogStatsD client library to suit your needs.
-
-[DogStatsD source code][5] — DogStatsD is open-sourced under the BSD License.
+{{< whatsnext  >}}
+    {{< nextlink href="/developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}DogStatsD source code{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/dd-agent/pull/2104
-[2]: /developers/libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [4]: /developers/metrics/
-[5]: https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py

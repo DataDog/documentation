@@ -1,5 +1,5 @@
 ---
-title: Graphing with Datadog, from the query to the graph
+title: From the query to the graph
 kind: documentation
 customnav: gettingstartednav
 ---

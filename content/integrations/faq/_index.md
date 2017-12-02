@@ -52,7 +52,7 @@ customnav: integrationsnavv
 ## Elasticsearch 
 
 * [Why isn't Elasticsearch sending all my metrics?](/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics)
-* [Agent can't connect](https://docs.datadoghq.com/integrations/faq/elastic-agent-can-t-connect)
+* [Agent can't connect](/integrations/faq/elastic-agent-can-t-connect)
 
 ## Git & Github
 

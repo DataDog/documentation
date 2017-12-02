@@ -52,6 +52,7 @@ For information on tracing these libraries, see [the RubyDoc documentation](http
 
 ## Further Reading
 
-The Ruby integration [source code can be found on Github](https://github.com/DataDog/dd-trace-rb).
-
-You can find additional documentation on [the RubyDoc Gem page](http://www.rubydoc.info/gems/ddtrace/).
+{{< whatsnext >}}
+    {{< nextlink href="https://github.com/DataDog/dd-trace-rb" tag="Github" >}}Tracing Ruby integration source code{{< /nextlink >}}
+    {{< nextlink href="http://www.rubydoc.info/gems/ddtrace/" tag="Documentation" >}} RubyDoc Gem page{{< /nextlink >}}
+{{< /whatsnext >}}

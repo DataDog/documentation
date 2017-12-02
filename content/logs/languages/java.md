@@ -14,6 +14,9 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:

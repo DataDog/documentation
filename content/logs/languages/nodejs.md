@@ -14,6 +14,9 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 ## Overview 

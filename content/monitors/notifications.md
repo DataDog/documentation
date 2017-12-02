@@ -125,7 +125,10 @@ Here is an example of how you can give a different message depending on the trig
 
 ## Variable availability
 
-We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
+We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.  
+  
+  
+*(Scroll right to see all variable availability)*
 
 ||[host](/monitors/monitor_types/host)| [metric](/monitors/monitor_types/metric)| [integration](/monitors/monitor_types/integration)| [process](/monitors/monitor_types/process)| [network](/monitors/monitor_types/network)| [custom check](/monitors/monitor_types/custom_check)| [event](/monitors/monitor_types/event)|
 | :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
