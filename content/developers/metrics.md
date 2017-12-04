@@ -41,7 +41,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ### Metric Types
 
-A metric's Datadog in-application type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-application type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
+A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
 
 In the Datadog web application there are 3 metric types: 
 
@@ -52,8 +52,8 @@ In the Datadog web application there are 3 metric types:
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
-##### How do submission types relate to Datadog in-application types?
-Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-application type:
+#### How do submission types relate to Datadog in-app types?
+Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
 
 {{% table responsive="true" %}}
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
@@ -72,28 +72,28 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check][2] | `self.set(...)` | set | gauge |
 {{% /table %}}
 
-##### What's a use case for changing a metric's type?
+#### What's a use case for changing a metric's type?
 
-1. A user has a metric `app.requests.served` that counts requests served, she accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
+1. You have a metric `app.requests.served` that counts requests served, but accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
-2. She realizes she should have submitted it as a dogstatsd `counter` metric, that way she can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
+2. You realize you should have submitted it as a dogstatsd `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
-3. She likes the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, she'll change the type of `app.requests.served`.
+3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
 
-    a. She updates her submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
+    a. By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
 
-    b. She updates the Datadog in-app type via the metric summary page to `rate`.
+    b. By updating the Datadog in-app type via the metric summary page to `rate`.
 
-This will cause data submitted before the type change for `app.requests.served` to behave incorrectly because it
-was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
-will be interpreted properly. If she was not willing to lose the historical data submitted as a `gauge` she would
-have created a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
+This will cause data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
+will be interpreted properly.  
+
+If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
 ### Metric submission
 
-There is multiple ways to send metrics to your Datadog application:
+There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog agent directly: Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
+1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
 
 2. Using your StatsD server bundled with the Datadog Agent (Find more about our available libraries [here](/developers/libraries))
   Note: Because dogstatsd flushes at a regular interval (**default 10s**) all metrics submitted via this method will be stored with associated interval metadata.
@@ -141,7 +141,7 @@ This tutorial has examples for Python and Ruby, but check out the
 
 ## Count
 ### Overview
-Counters are used to (ahem) count things. 
+Counters are used to count things. 
 
 ### Submission
 #### Agent Check Submission

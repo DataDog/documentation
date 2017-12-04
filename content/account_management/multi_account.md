@@ -81,8 +81,7 @@ POST /api/v1/org?api_key=:api_key&application_key=:app_key
 Sample bash script:
 ```bash
 #!/bin/sh
-# Make sure you replace the API and/or APP key below
-# with the ones for your account
+# Replace the API and/or APP key below with the ones for your account
 
 api_key="MY_APY_KEY"
 app_key="MY_APP_KEY"
@@ -274,8 +273,7 @@ POST /api/v1/org:public_id/idp_metadata?api_key=:api_key&application_key=:app_k
 Sample bash script:
 ```bash
 #!/bin/sh
-# Make sure you replace the API & APP key below
-# with the ones for your account
+# Replace the API & APP key below with the ones for your account
 
 api_key="MY_APY_KEY"
 app_key="MY_APP_KEY"

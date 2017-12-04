@@ -10,7 +10,7 @@ For [create](/api/#create-a-screenboard)/[read](/api/#get-a-screenboard)/[update
 
 Base Payload :
 ```
-# Make sure you replace the API and/or APP key below
+# Replace the API and/or APP key below
 # with the ones for your account
 
 {
