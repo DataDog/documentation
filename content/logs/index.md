@@ -123,10 +123,14 @@ logs:
 
 Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
 
-For containerized installation, mount those two repositories:
+For containerized installation, here are the command related to log collection:
 
-* `/var/run/docker.sock`: to make sure the agent can access the Docker API.
-* `/opt/datadog-agent/run`: If the agent container is restarted or removed, the registry needs to know the last logs collected for each monitored container or file.
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Store on disk where to pick log file or container stdout when we restart
+* `--net=host`: Give access to the host network
+* `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
+* `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
+* `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
+* `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
 
 To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
 Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
