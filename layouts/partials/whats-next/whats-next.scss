@@ -17,10 +17,10 @@ $ddpurple:    #774DA2;
     }
     &:hover,
     &.active {
-      &> .hover {
+      & .hover {
         display:inline;
       }
-      &> .static {
+      & .static {
         display:none;
       }
     }

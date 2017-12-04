@@ -76,7 +76,7 @@ aside.sidenav {
     .input-group-addon {
       background:none;
       border:none;
-      padding:10px 0 0 3px;
+      padding:6px 0 0 3px;
       border-radius:0;
       position:absolute;
       left:0;
@@ -200,10 +200,10 @@ aside.sidenav-api {
           &:hover,
           &.active {
             color:$ddpurple;
-            &> .hover {
+            & .hover {
               display:inline-block;
             }
-            &> .static {
+            & .static {
               display:none;
             }
           }
