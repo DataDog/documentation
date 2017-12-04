@@ -26,6 +26,9 @@ Publish consul service counts into Datadog via dogstatsd with [this library][96]
 ### Dogscaler
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
+### Dynatrace
+This [plugin][101] sends any Dynatrace measure from a chart to Datadog.
+
 ### FreeSwitch
 This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
 
@@ -40,6 +43,9 @@ You can get data into Datadog from Google Analytics using our API with [this lib
   * Emit custom metrics directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
+### Moogsoft
+A [listener][102] that will ingest Datadog notifications.
+
 ### Phusion Passenger
 Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
@@ -49,6 +55,9 @@ This [library][51] will allow you to generate process information from StatsD, g
 ### Saltstack
   * [Datadog Saltstack Formula][43]
   * [Datadog Saltstack][44] written by [Luca Cipriani][45].
+
+### Sensu
+Datadog [handlers][103] for Sensu.
 
 ## Community Agent Ports
 
@@ -159,3 +168,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [98]: https://cran.r-project.org/package=datadogr
    [99]: https://github.com/urosgruber/dd-agent-FreeBSD
    [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
+   [101]: https://github.com/Dynatrace/Dynatrace-AppMon-Datadog-Plugin
+   [102]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
+   [103]: https://github.com/sensu-plugins/sensu-plugins-datadog
