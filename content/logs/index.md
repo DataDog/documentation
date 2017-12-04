@@ -126,7 +126,6 @@ Agent 6 is able to collect logs from containers. It can be installed [on the hos
 For containerized installation, here are the command related to log collection:
 
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Store on disk where to pick log file or container stdout when we restart
-* `--net=host`: Give access to the host network
 * `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
 * `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
 * `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
