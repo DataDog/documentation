@@ -70,19 +70,21 @@
             <div class="card">
                 <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
                     {{ $src := print "integrations_logos/" ($urlname | lower) ".png"}}
-                    {{ $url := print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max" }}
+                    {{ $url := print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images $src ) }}
                     <picture class="mx-auto">
-                        <source srcset="{{ $url }}&auto=format&h=128 1x, {{ $url }}&auto=format&h=128&dpr=2 2x" media="(min-width: 0px)">
+                        <source srcset="{{ $url }}?fit=max&auto=format&w=93 1x, {{ $url }}?fit=max&auto=format&w=93&dpr=2 2x" media="(min-width: 530px)">
+                        <source srcset="{{ $url }}?auto=format&h=128 1x, {{ $url }}?auto=format&h=128&dpr=2 2x" media="(min-width: 0px)">
                         <img class="img-fluid mx-auto"
-                             srcset="{{ $url }}&auto=format&h=128"
+                             srcset="{{ $url }}?auto=format&h=128"
                              alt="integration">
                     </picture>
                 </a>
                 <a class="card-img-gray" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
                     <picture class="mx-auto">
-                        <source srcset="{{ $url }}&auto=format&h=128&sat=-100 1x, {{ $url }}&auto=format&h=128&sat=-100&dpr=2 2x" media="(min-width: 0px)">
+                        <source srcset="{{ $url }}?fit=max&auto=format&w=93&sat=-100 1x, {{ $url }}?fit=max&auto=format&w=93&sat=-100&dpr=2 2x" media="(min-width: 530px)">
+                        <source srcset="{{ $url }}?auto=format&h=128&sat=-100 1x, {{ $url }}?auto=format&h=128&sat=-100&dpr=2 2x" media="(min-width: 0px)">
                         <img class="img-fluid mx-auto"
-                             srcset="{{ $url }}&auto=format&h=128&sat=-100"
+                             srcset="{{ $url }}?auto=format&h=128&sat=-100"
                              alt="integration">
                     </picture>
                 </a>
