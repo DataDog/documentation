@@ -47,10 +47,37 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 ## Collection
 
-Your lambda function is now ready to send logs to your Datadog platform.
-Setup the relevant triggers for each AWS service you want to monitor.
+Your lambda function is now ready to send logs to your Datadog platform. Setup the relevant triggers for each AWS service you want to monitor.
 
-### S3, Cloudwatch, API Gateway, Kinesis and SNS
+**The Lambda function you just created must be in the same region as the S3 bucket you are using as a trigger. If you have logs across multiple regions you must create additional Lambda funcions**
+
+### Automatically set up triggers
+If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
+
+1. Add the required permissions to your Datadog role in the [IAM Console](https://console.aws.amazon.com/iam/home#/roles). You may already have some of these permissions from our other AWS integrations. Information on how these permissions are used can be found in the [permissions](#permissions) section below
+
+{{< highlight json>}}
+"elasticloadbalancing:DescribeLoadBalancers",
+"elasticloadbalancing:DescribeLoadBalancerAttributes",
+"lambda:AddPermission",
+"lambda:GetPolicy",
+"lambda:RemovePermission",
+"s3:GetBucketLogging",
+"s3:GetBucketLocation",
+"s3:GetBucketNotification",
+"s3:ListAllMyBuckets",
+"s3:PutBucketNotification",
+{{< /highlight >}}
+
+2. Navigate to the "Collect Logs" tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
+3. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
+{{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda">}}
+4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
+{{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
+5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
+6. To stop collecting all AWS logs, press the "x" next to each Lamdba ARN. All triggers for that function will be removed. 
+
+### Manually set up triggers
 In your lambda, go in the triggers tab and select `Add Trigger`:
 {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
@@ -59,6 +86,7 @@ Select the log source and then follow the AWS instructions:
 
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
+
 
 ### ELB
 
@@ -109,6 +137,20 @@ If you're using Amazon S3 as your origin, we recommend that you do not use the s
 Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, to keep track of which log files are associated with which distributions, more information [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
 
 You can then collect the log from the s3 bucket thanks to the lambda function.
+
+## Permissions
+
+* `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
+* `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
+* `lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
+* `lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
+* `lambda:RemovePermission`: Remove permissions from a Lambda policy.
+* `s3:GetBucketLogging`: Get the name of the S3 bucket containing S3 access logs.
+* `s3:GetBucketLocation`: Get the region of the S3 bucket containing S3 access logs.
+* `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
+* `s3:ListAllMyBuckets`: List all S3 buckets.
+* `s3:PutBucketNotification`: Add or remove a Lambda trigger based on S3 bucket events.
+
 
 ## What's next
 
