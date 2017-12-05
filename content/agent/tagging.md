@@ -25,7 +25,7 @@ There are four primary ways to assign tags: inherited from the integration, in t
 
 ### Inheriting tags from an integration
 
-The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
+The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
 
 The following integration sources create tags automatically in Datadog:
 

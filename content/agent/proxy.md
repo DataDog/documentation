@@ -27,14 +27,14 @@ same proxy)
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
-3. Allow non-local traffic on `proxy-node` by changing the following line in `/etc/dd-agent/datadog.conf`.  
+3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.  
      `# non_local_traffic: no` should read `non_local_traffic: yes`.
 
 4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the agent on the `proxy-node` and run on the other nodes:
 
     `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
 
-5. Update non-proxy nodes to forward to `proxy-node`. Simply change the following line in `/etc/dd-agent/datadog.conf` from:
+5. Update non-proxy nodes to forward to `proxy-node`. Simply change the following line in `datadog.conf` from:
 
     `dd_url: https://app.datadoghq.com`
 to
@@ -147,7 +147,7 @@ Edit your configuration file `datadog.conf` and add this option:
 skip_ssl_validation: yes
 ```
 
-Finally [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent).
+Finally [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent/#windows).
 
 To verify that everything is working properly, review the
 HAProxy statistics at `http://haproxy.example.com:3835` as well as
