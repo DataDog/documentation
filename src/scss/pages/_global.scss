@@ -200,6 +200,17 @@ h2 {
       }
     }
   }
+
+  pre {
+    margin:0 0 24px 0;
+  }
+  p + .highlight {
+    position: relative;
+    margin-top: -0.8rem;
+  }
+  p + h2 {
+    padding-top:11px;
+  }
 }
 
 .sticky {
