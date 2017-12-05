@@ -9,11 +9,23 @@ $(document).ready(function () {
         return this.length;
     };
 
-    /*$('table, .table-responsive-container').each(function() {
+    $('.table-responsive-container table').each(function() {
         if(!$(this).hasClass('table-responsive')) {
             $(this).addClass('table-responsive');
         }
-    });*/
+    });
+
+    $('table').each(function() {
+        var emptyThead = true;
+        $(this).find('thead th').each(function() {
+            if(!$(this).is(':empty')) {
+                emptyThead = false;
+            }
+        });
+        if(emptyThead) {
+            $(this).find('thead').remove();
+        }
+    });
 
     // API page
     if($('.api').length) {

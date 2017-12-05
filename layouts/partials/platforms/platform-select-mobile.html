@@ -1,10 +1,10 @@
 {{ $dot := . }}
-<div class="d-block d-sm-none" style="margin-bottom:24px;">
-    <div class="dropdown show">
-        <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ if .Params.platform }}{{ .Params.platform }}{{ else }}Choose A Platform{{ end }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding:15px 30px">
+<div class="dropdown d-block d-sm-none" style="margin-bottom:24px;">
+    <a class="btn btn-lg btn-block btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ if .Params.platform }}{{ .Params.platform }}{{ else }}Choose A Platform{{ end }}
+    </a>
+    <div class="dropdown-menu" data-offset="0" aria-labelledby="dropdownMenuLink" style="max-height: 500px;overflow-y: auto;overflow-x: hidden;">
+        <div class="px-4 py-3">
             <h3 class="text-center">Choose A Platform</h3>
             <div class="row cards-dd platform-nav mt-4">
                 {{ range $dot.Page.Site.Data.partials.platforms.platforms }}
@@ -19,6 +19,5 @@
             </div>
         </div>
     </div>
-
 </div>
 

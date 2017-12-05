@@ -114,12 +114,14 @@ There are two types of terms:
 
 To combine multiple terms into a complex query, you can use any of the following boolean operators:
 
+{{% table responsive="true" %}}
 ||||
 |:----|:----|:----|
 | **Operator** | **Description ** | **Example **|
 | `AND` | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure |
 | `OR` | **Union**: either terms is contained in the selected events| authentication OR password|
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
+{{% /table %}}
 
 ### Facet search 
 To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searcing on a facet.
