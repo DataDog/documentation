@@ -176,12 +176,13 @@ aside.sidenav-api {
   .sidenav-nav {
     overflow-x: hidden;
     overflow-y: auto;
+    margin:0;
   }
   .sticky {
     top:65px;
   }
   ul li a {
-    line-height: 22px;
+    line-height: 24px;
     font-size:18px;
     font-weight:600;
     color: #000;
@@ -189,7 +190,7 @@ aside.sidenav-api {
     display: block;
   }
   ul:first-of-type {
-    margin-left:10px;
+    margin-left: 3px;
   }
   h4 {
     padding-left: 10px;

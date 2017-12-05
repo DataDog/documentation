@@ -208,7 +208,10 @@ h2 {
     position: relative;
     margin-top: -0.8rem;
   }
-  p + h2 {
+  p + h1,
+  p + h2,
+  p + h3,
+  p + h4 {
     padding-top:11px;
   }
 }
@@ -345,8 +348,14 @@ h2 {
 
 // tables for integration metrics
 .table-metrics {
-  tr td:nth-child(1) {
-    word-break:break-all;
+  tr td {
+    &:nth-child(1) {
+      word-break: break-all;
+    }
+    &:nth-child(1),
+    &:nth-child(2) {
+      width:50%;
+    }
   }
 }
 
@@ -442,6 +451,7 @@ h2 {
   table.table-vertical-mobile {
     td {
       display:block !important;
+      width:100% !important;
     }
   }
 }

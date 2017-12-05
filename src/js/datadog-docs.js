@@ -9,11 +9,11 @@ $(document).ready(function () {
         return this.length;
     };
 
-    $('table, .table-responsive-container').each(function() {
+    /*$('table, .table-responsive-container').each(function() {
         if(!$(this).hasClass('table-responsive')) {
             $(this).addClass('table-responsive');
         }
-    });
+    });*/
 
     // API page
     if($('.api').length) {
