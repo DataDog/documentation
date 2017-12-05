@@ -136,15 +136,20 @@ p {
   // todo: can i set this with a bootstrap variable?
   font-size:18px;
   color:#000;
-  line-height:22px;
+  line-height:24px;
 }
 
 h1 {
   line-height:42px;
-  padding-bottom:12px;
-  &~ p {
+  padding-bottom:15.5px;
+  /*&~ p {
     padding-top:10px;
-  }
+  }*/
+}
+
+h2 {
+  padding-bottom: 3px;
+  line-height:36px;
 }
 
 .col-lg-7 {
@@ -402,6 +407,12 @@ h1 {
 }
 
 // Breakpoint styles go here...
+
+@media (min-width: 1200px) {
+    .container {
+      max-width: 1170px !important;
+    }
+}
 
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
