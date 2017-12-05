@@ -183,7 +183,7 @@ logs:
 
 ### Search and replace content in your logs
 
-If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`
+If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
@@ -205,6 +205,42 @@ logs:
         replace_placeholder: "[masked_credit_card]"
         #One pattern that contains capture groups
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
+```
+
+### Multi-line
+
+If your logs are not sent in JSON and you want to aggregate several lines into one single log, you can configure the agent to detect a new log thanks to a specific pattern instead of one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
+
+This aggregates all log line into one single log until the pattern is detected again.
+Example: Every postgres log line starts with a timestamp YYYY-dd-mm. The below lines would be sent as two logs.
+
+```
+2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
+               pg_catalog.pg_get_userbyid(d.datdba) as “Owner”,
+               pg_catalog.pg_encoding_to_char(d.encoding) as “Encoding”,
+               d.datcollate as “Collate”,
+               d.datctype as “Ctype”,
+               pg_catalog.array_to_string(d.datacl, E’\n’) AS “Access privileges”
+        FROM pg_catalog.pg_database d
+        ORDER BY 1;
+2017-12-05 10:55:49.061 UTC [20535] postgres psql postgres [local] 5a0d60a5.5037 LOG:  incomplete startup packet
+```
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+logs:
+ - type: file
+   path: /var/log/pg_log.log
+   service: database
+   source: postgresql
+   log_processing_rules:
+      - type: multi_line
+        name: new_log_start_with_date
+        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 ## Reserved attributes 
