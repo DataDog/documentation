@@ -40,8 +40,8 @@ Navigate to the [New Monitor page](https://app.datadoghq.com/monitors#create/for
 There are three required options for setting up a forecast alert:
 
 <ol type="a">
-  <li> The threshold at which an alert is triggered. For a metric like `system.disk.in_use` this should be set to 1.0, whereas for a metric like `system.mem.pct_usable` this should be set to 0.0. A recovery threshold is also required.
-  <li> The condition on which an alert is triggered. For a metric like `system.disk.in_use` this should be set to “above or equal to”, whereas for a metric like `system.mem.pct_usable` this should be set to “below or equal to”.
+  <li> The threshold at which an alert is triggered. For a metric like <code>system.disk.in_use</code> this should be set to 1.0, whereas for a metric like <code>system.mem.pct_usable</code> this should be set to 0.0. A recovery threshold is also required.
+  <li> The condition on which an alert is triggered. For a metric like <code>system.disk.in_use</code> this should be set to “above or equal to”, whereas for a metric like <code>system.mem.pct_usable</code> this should be set to “below or equal to”.
   <li> Control how far in advance you would like to be alerted before your metric hits its critical threshold.
 </ol>
 
@@ -53,6 +53,7 @@ Datadog will automatically set the **Advanced** options for you by analyzing you
   <li> You can change the forecasting algorithm to be used here. See the next section of this guide for tips on how to choose the best algorithm for your use case. Each algorithm also has additional settings that will be described in the next section.
   <li> We recommend using larger intervals between points to avoid having noise influence the forecast too much.
   <li> The number of deviations controls the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most “normal” points.
+</ol>
 
 Complete all steps in the New Monitor form (**Say what’s happening**, etc.) and click **Save** to create the Forecast monitor.
 
