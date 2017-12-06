@@ -17,16 +17,16 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
 
 2. Select **Author from scratch** and give the function a unique name.
+3. Change the Runtime to **Python 2.7**
+4. For `Role`, select **Create new role from template(s)** and give the role a unique name
+5. Under Policy templates, search for and select **s3 object read-only permissions**
+6. Select **Create Function**
     {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" responsive="true" >}}
-3. For `Role`, select **Create new role from template(s)** and give the role a unique name
-4. Under Policy templates, search for and select **s3 object read-only permissions**
-    {{< img src="logs/aws/basic_information.png" alt="Basic Information" responsive="true" >}}
-5. Select **Create Function**
 
 ### Provide the code and configure the lambda
 
 1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
-2. Change the Runtime to **Python 2.7** and set the handler to **lambda_function.lambda_handler**
+2. Ensure the Handler reads **lambda_function.lambda_handler**
     {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" >}}
 3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
     
@@ -34,16 +34,19 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     * Edit the code directly with your Datadog API Key
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
-4. Set the memory to the highest possible value.
-5. Set the timeout limit. We recommend **120 seconds**
+4. Scroll down beyond the inline code area to "Basic Settings"
+5. Set the memory to the highest possible value.
+6. Set the timeout limit. We recommend **120 seconds**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
-6. Scroll back to the top of the page and hit **Save and test**
+7. Scroll back to the top of the page and hit **Save**
 
 ### Test your Lambda
 
-1. Configure the test event. Select **Cloudwatch Logs** as the sample event.
+1. Press "Test" 
+2. Search for and select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
-2. Save and test.
+2. Give the event a unique name and press Create.
+3. Press Test and ensure the test passes with no errors.
 
 ## Collection
 
@@ -76,6 +79,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
 5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
 6. To stop collecting all AWS logs, press the "x" next to each Lamdba ARN. All triggers for that function will be removed. 
+7. Within a few minutes you should see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs).
 
 ### Manually set up triggers
 In your lambda, go in the triggers tab and select `Add Trigger`:
