@@ -18,9 +18,9 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 2. Select **Author from scratch** and give the function a unique name.
 3. Change the Runtime to **Python 2.7**
-4. For `Role`, select **Create new role from template(s)** and give the role a unique name
-5. Under Policy templates, search for and select **s3 object read-only permissions**
-6. Select **Create Function**
+4. For `Role`, select **Create new role from template(s)** and give the role a unique name.
+5. Under Policy templates, search for and select **s3 object read-only permissions.**
+6. Select **Create Function.**
     {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" responsive="true" >}}
 
 ### Provide the code and configure the lambda
@@ -34,15 +34,15 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     * Edit the code directly with your Datadog API Key
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
-4. Scroll down beyond the inline code area to "Basic Settings"
+4. Scroll down beyond the inline code area to "Basic Settings".
 5. Set the memory to the highest possible value.
-6. Set the timeout limit. We recommend **120 seconds**
+6. Set the timeout limit. We recommend **120 seconds.**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
-7. Scroll back to the top of the page and hit **Save**
+7. Scroll back to the top of the page and hit **Save.**
 
 ### Test your Lambda
 
-1. Press "Test" 
+1. Press "Test". 
 2. Search for and select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
 2. Give the event a unique name and press Create.
@@ -52,12 +52,12 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 Your lambda function is now ready to send logs to your Datadog platform. Setup the relevant triggers for each AWS service you want to monitor.
 
-**The Lambda function you just created must be in the same region as the S3 bucket you are using as a trigger. If you have logs across multiple regions you must create additional Lambda funcions**
+**The Lambda function you just created must be in the same region as the S3 bucket you are using as a trigger. If you have logs across multiple regions you must create additional Lambda funcions.**
 
 ### Automatically set up triggers
 If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
 
-1. Add the required permissions to your Datadog role in the [IAM Console](https://console.aws.amazon.com/iam/home#/roles). You may already have some of these permissions from our other AWS integrations. Information on how these permissions are used can be found in the [permissions](#permissions) section below
+1. Add the required permissions to your Datadog role in the [IAM Console](https://console.aws.amazon.com/iam/home#/roles). You may already have some of these permissions from our other AWS integrations. Information on how these permissions are used can be found in the [permissions](#permissions) section below:
 
 {{< highlight json>}}
 "elasticloadbalancing:DescribeLoadBalancers",
