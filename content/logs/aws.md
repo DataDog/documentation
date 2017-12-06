@@ -8,7 +8,7 @@ beta: true
 
 ## Overview
 
-Push your AWS log information to Datadog using a Lambda function bound to an S3 bucket. First, configure your AWS services to push logs to S3. A Lambda function is then triggered and processes the log file, eliminating the need for additional services to poll for that information.
+Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that will invoke that Lambda and send logs to Datadog.
 
 ## Setup
 ### Create a new Lambda function
