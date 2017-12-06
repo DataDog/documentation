@@ -69,7 +69,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 "s3:GetBucketLocation",
 "s3:GetBucketNotification",
 "s3:ListAllMyBuckets",
-"s3:PutBucketNotification",
+"s3:PutBucketNotification"
 {{< /highlight >}}
 
 2. Navigate to the *Collect Logs* tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
