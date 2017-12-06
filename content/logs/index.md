@@ -209,10 +209,10 @@ logs:
 
 ### Multi-line
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single log, you can configure the agent to detect a new log thanks to a specific pattern instead of one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
+If your logs are not sent in JSON and you want to aggregate several lines into one single log, you can configure the agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
-This aggregates all log line into one single log until the pattern is detected again.
-Example: Every postgres log line starts with a timestamp YYYY-dd-mm. The below lines would be sent as two logs.
+This aggregates all lines into one single log until the given pattern is detected again. This is especially useful for database logs and stack traces.
+Example: Every postgres log line starts with a timestamp in `YYYY-dd-mm` format. The below lines would be sent as two logs.
 
 ```
 2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
