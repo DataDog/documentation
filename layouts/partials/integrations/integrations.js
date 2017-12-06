@@ -76,41 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         data: {
             uidKey: 'id' // Our data model must have a unique id. In this case, its key is 'id'
-        },
-        callbacks: {
-            onMixStart: function(state, futureState) {
-                //console.log('Starting operation...');
-                //console.log(futureState);
-                for(var i=0; i < futureState.show.length; i++) {
-                    var el = futureState.show[i];
-                    //el.parentNode.appendChild(el);
-                    el.classList.remove('grayscale');
-                }
-                for(var i=0; i < futureState.hide.length; i++) {
-                    var el = futureState.hide[i];
-                    //el.parentNode.appendChild(el);
-                    //el.style.display = '';
-                    el.classList.add('grayscale');
-                }
-            },
-            onMixEnd: function(state) {
-                //console.log('Operation complete');
-                //console.log(state);
-                //divs[0].parentNode.appendChild(divs[0]);
-                /*for(var i=0; i < state.hide.length; i++) {
-                    var el = state.hide[i];
-                    el.style.display = '';
-                }*/
-                for(var i=0; i < state.show.length; i++) {
-                    var el = state.show[i];
-                    el.parentNode.appendChild(el);
-                }
-                for(var i=0; i < state.hide.length; i++) {
-                    var el = state.hide[i];
-                    el.parentNode.appendChild(el);
-                    el.style.display = '';
-                }
-            }
         }
     };
 
@@ -177,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateData(filter) {
-        /*var show = [];
+        var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
             var item = window.integrations[i];
@@ -196,9 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         var items = [].concat(show, hide);
-        mixer.dataset(items);*/
-
-        mixer.filter(filter);
+        mixer.dataset(items);
     }
 
     // Set controls the active controls on startup
