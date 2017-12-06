@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
     }
 
-    var mixer = mixitup(container, {
+    var config = {
         animation: {
             duration: 150
         },
@@ -77,7 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             uidKey: 'id' // Our data model must have a unique id. In this case, its key is 'id'
         }
-    });
+    };
+
+    if(parseInt($(window).width()) <= 575) {
+        config['animation']['enable'] = false;
+    }
+
+    var mixer = mixitup(container, config);
 
     controls.addEventListener('click', function(e) {
         //e.preventDefault();
