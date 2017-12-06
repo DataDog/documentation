@@ -34,7 +34,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     * Edit the code directly with your Datadog API Key
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
-4. Scroll down beyond the inline code area to "Basic Settings".
+4. Scroll down beyond the inline code area to *Basic Settings*.
 5. Set the memory to the highest possible value.
 6. Set the timeout limit. We recommend **120 seconds.**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
@@ -42,7 +42,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 ### Test your Lambda
 
-1. Press "Test". 
+1. Press **Test**. 
 2. Search for and select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
 2. Give the event a unique name and press Create.
@@ -72,13 +72,13 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 "s3:PutBucketNotification",
 {{< /highlight >}}
 
-2. Navigate to the "Collect Logs" tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
+2. Navigate to the *Collect Logs* tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
 3. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
 {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda">}}
 4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
 5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
-6. To stop collecting all AWS logs, press the "x" next to each Lamdba ARN. All triggers for that function will be removed. 
+6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function will be removed. 
 7. Within a few minutes you should see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs).
 
 ### Manually set up triggers
