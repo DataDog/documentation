@@ -245,7 +245,7 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-## Reserved attributes
+## Reserved attributes 
 
 If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
 
