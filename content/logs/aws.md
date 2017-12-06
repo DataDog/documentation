@@ -13,8 +13,8 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
 ## Setup
 ### Create a new Lambda function
 
-1. Navigate to the [Lambda Console](https://console.aws.amazon.com/Lambda/home?region=us-east-1) and create a new function:
-    {{< img src="logs/aws/create_Lambda_function.png" alt="Create Lambda function" responsive="true" >}}
+1. Navigate to the [Lambda Console](https://console.aws.amazon.com/lambda/home?region=us-east-1) and create a new function:
+    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
 
 2. Select **Author from scratch** and give the function a unique name.
 3. Change the Runtime to **Python 2.7**
@@ -25,8 +25,8 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
 
 ### Provide the code and configure the Lambda
 
-1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-Lambda-functions/blob/master/Log/Lambda_function.py) into the function code area.
-2. Ensure the Handler reads **Lambda_function.Lambda_handler**
+1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
+2. Ensure the Handler reads **lambda_function.lambda_handler**
     {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" >}}
 3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
     
@@ -62,9 +62,9 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< highlight json>}}
 "elasticloadbalancing:DescribeLoadBalancers",
 "elasticloadbalancing:DescribeLoadBalancerAttributes",
-"Lambda:AddPermission",
-"Lambda:GetPolicy",
-"Lambda:RemovePermission",
+"lambda:AddPermission",
+"lambda:GetPolicy",
+"lambda:RemovePermission",
 "s3:GetBucketLogging",
 "s3:GetBucketLocation",
 "s3:GetBucketNotification",
@@ -86,7 +86,7 @@ In your Lambda, go in the triggers tab and select `Add Trigger`:
 {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
 Select the log source and then follow the AWS instructions: 
-{{< img src="logs/aws/integration_Lambda.png" alt="Integration Lambda" responsive="true" >}}
+{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" >}}
 
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
@@ -146,9 +146,9 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
 * `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
-* `Lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
-* `Lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
-* `Lambda:RemovePermission`: Remove permissions from a Lambda policy.
+* `lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
+* `lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
+* `lambda:RemovePermission`: Remove permissions from a Lambda policy.
 * `s3:GetBucketLogging`: Get the name of the S3 bucket containing S3 access logs.
 * `s3:GetBucketLocation`: Get the region of the S3 bucket containing S3 access logs.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
