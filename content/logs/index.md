@@ -18,7 +18,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
+If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade.
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -30,7 +30,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
 To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
-If an integration does not support logs by default, you may need to use use the custom file configuration below.
+If an integration does not support logs by default, you may need to use the custom file configuration below.
 
 <div class="alert alert-warning">
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
@@ -71,7 +71,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 ### Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
-Example: 
+Example:
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
 Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
@@ -101,7 +101,7 @@ logs:
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
-Example: 
+Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
@@ -143,7 +143,7 @@ instances:
 
 #Log section
 
-logs:    
+logs:
    - type: docker
      image: httpd    #or label: mylabel:mylabelvalue
      service: nginx
@@ -207,13 +207,13 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-## Reserved attributes 
+## Reserved attributes
 
 If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
 
 ### *date* attribute
 
-By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
+By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
 However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
 
 * `@timestamp`
