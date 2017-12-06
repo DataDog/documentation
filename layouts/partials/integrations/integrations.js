@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateData(filter) {
-        var show = [];
+        /*var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
             var item = window.integrations[i];
@@ -155,7 +155,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         var items = [].concat(show, hide);
-        mixer.dataset(items);
+        mixer.dataset(items);*/
+
+        mixer.filter(filter);
     }
 
     // Set controls the active controls on startup
