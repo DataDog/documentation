@@ -34,7 +34,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
     * Edit the code directly with your Datadog API Key
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
-4. Scroll down beyond the inline code area to *Basic Settings*.
+4. Scroll down beyond the inline code area to **Basic Settings**.
 5. Set the memory to the highest possible value.
 6. Set the timeout limit. We recommend **120 seconds.**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
@@ -45,7 +45,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 1. Press **Test**. 
 2. Search for and select **Cloudwatch Logs** as the sample event.
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" >}}
-2. Give the event a unique name and press Create.
+2. Give the event a unique name and press **Create**.
 3. Press Test and ensure the test passes with no errors.
 
 ## Collection
