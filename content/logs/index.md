@@ -226,6 +226,8 @@ Example: Every postgres log line starts with a timestamp in `YYYY-dd-mm` format.
 2017-12-05 10:55:49.061 UTC [20535] postgres psql postgres [local] 5a0d60a5.5037 LOG:  incomplete startup packet
 ```
 
+To achieve this, you need to use the following `log_processing_rules`:
+
 ```yaml
 init_config:
 
