@@ -11,10 +11,10 @@ beta: true
 Push your AWS log information to Datadog using a Lambda function bound to an S3 bucket. First, configure your AWS services to push logs to S3. A Lambda function is then triggered and processes the log file, eliminating the need for additional services to poll for that information.
 
 ## Setup
-### Create a new lambda function
+### Create a new Lambda function
 
-1. Navigate to the [Lambda Console](https://console.aws.amazon.com/lambda/home?region=us-east-1) and create a new function:
-    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
+1. Navigate to the [Lambda Console](https://console.aws.amazon.com/Lambda/home?region=us-east-1) and create a new function:
+    {{< img src="logs/aws/create_Lambda_function.png" alt="Create Lambda function" responsive="true" >}}
 
 2. Select **Author from scratch** and give the function a unique name.
 3. Change the Runtime to **Python 2.7**
@@ -23,10 +23,10 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 6. Select **Create Function.**
     {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" responsive="true" >}}
 
-### Provide the code and configure the lambda
+### Provide the code and configure the Lambda
 
-1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py) into the function code area.
-2. Ensure the Handler reads **lambda_function.lambda_handler**
+1. Copy and paste the code from [this repo](https://github.com/DataDog/dd-aws-Lambda-functions/blob/master/Log/Lambda_function.py) into the function code area.
+2. Ensure the Handler reads **Lambda_function.Lambda_handler**
     {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" >}}
 3. At the top of the script you'll find a section called `#Parameters`. You have two options for providing the API Key that the Lambda function requires:
     
@@ -50,7 +50,7 @@ Push your AWS log information to Datadog using a Lambda function bound to an S3 
 
 ## Collection
 
-Your lambda function is now ready to send logs to your Datadog platform. Setup the relevant triggers for each AWS service you want to monitor.
+Your Lambda function is now ready to send logs to the Datadog platform. Setup the relevant triggers for each AWS service you want to monitor.
 
 **The Lambda function you just created must be in the same region as the S3 bucket you are using as a trigger. If you have logs across multiple regions you must create additional Lambda funcions.**
 
@@ -62,9 +62,9 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< highlight json>}}
 "elasticloadbalancing:DescribeLoadBalancers",
 "elasticloadbalancing:DescribeLoadBalancerAttributes",
-"lambda:AddPermission",
-"lambda:GetPolicy",
-"lambda:RemovePermission",
+"Lambda:AddPermission",
+"Lambda:GetPolicy",
+"Lambda:RemovePermission",
 "s3:GetBucketLogging",
 "s3:GetBucketLocation",
 "s3:GetBucketNotification",
@@ -82,11 +82,11 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 7. Within a few minutes you should see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs).
 
 ### Manually set up triggers
-In your lambda, go in the triggers tab and select `Add Trigger`:
+In your Lambda, go in the triggers tab and select `Add Trigger`:
 {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
 Select the log source and then follow the AWS instructions: 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" >}}
+{{< img src="logs/aws/integration_Lambda.png" alt="Integration Lambda" responsive="true" >}}
 
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
@@ -104,7 +104,7 @@ Add ELB logs to Datadog to:
 * Determine how many connection peaks you have? and when did they occurred?
 * See how bots are going through your webpages (for SEO purposes for instance)
 
-ELB logs are written in a s3 bucket and consumed by a lambda function.
+ELB logs are written in a s3 bucket and consumed by a Lambda function.
 Enable the logging on your ELB first to collect your logs:
 {{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" responsive="true" >}}
 
@@ -120,13 +120,13 @@ AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS A
 When you define your Trails, select a s3 bucket to write the logs in:
 {{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" >}}
 
-Link the lambda function to this s3 bucket to send your logs to Datadog.
+Link the Lambda function to this s3 bucket to send your logs to Datadog.
 
 ### ECS
 
 ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in you Docker Containers). 
 
-Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the lambda to ship them to your Datadog platform.
+Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the Lambda to ship them to your Datadog platform.
 
 ### CloudFront
 
@@ -140,15 +140,15 @@ If you're using Amazon S3 as your origin, we recommend that you do not use the s
 
 Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, to keep track of which log files are associated with which distributions, more information [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
 
-You can then collect the log from the s3 bucket thanks to the lambda function.
+You can then collect the log from the s3 bucket thanks to the Lambda function.
 
 ## Permissions
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
 * `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
-* `lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
-* `lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
-* `lambda:RemovePermission`: Remove permissions from a Lambda policy.
+* `Lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
+* `Lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
+* `Lambda:RemovePermission`: Remove permissions from a Lambda policy.
 * `s3:GetBucketLogging`: Get the name of the S3 bucket containing S3 access logs.
 * `s3:GetBucketLocation`: Get the region of the S3 bucket containing S3 access logs.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
