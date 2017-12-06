@@ -32,7 +32,7 @@ The function has two parameters. The first parameter is for selecting which algo
 {{< img src="forecasts/query_editor.png" >}}
 
 ### Forecast Alerts
-In addition to viewing forecasts in dashboards, you can create monitors that trigger when metrics are forecast to reach a threshold. The alert will trigger when any part of the range of forecasted values crosses the threshold.
+In addition to viewing forecasts in dashboards, you can create monitors that trigger when metrics are forecast to reach a threshold. The alert will trigger when any part of the range of forecasted values crosses the threshold. The prototypical use-case is for monitoring a group of disks with similar usage patterns: `max:system.disk.in_use{service:service_name} by {host,device}`.
 
 Navigate to the [New Monitor page](https://app.datadoghq.com/monitors#create/forecast) for **Forecast Alerts**. Then fill out the **Define the metric** section just as you would for any other metric monitor.
 
