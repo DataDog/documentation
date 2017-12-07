@@ -68,29 +68,25 @@ Processes are by their nature extremely high cardinality objects.  Our fuzzy str
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `#user`. 
+Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
+First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
-{{< img src="infrastructure/process/overprovisioned.png" >}}
+<>
 
-Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.  
+Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
 
-{{< img src="infrastructure/process/hostxservice.png" >}}
+<>
 
-It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
-
-{{< img src="infrastructure/process/tasksxversion.png" >}}
-
-Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
+Below, we have searched for ssh processes and pivoted by `user` to understand who is logged into which hosts.
 
 {{< img src="infrastructure/process/sshusers.png" >}}
 
-Ok, so I guess that last one is less exciting after redaction!
+Ok, so I guess that one is less exciting after redaction!
 
 ## Enriched Live Containers view
 
-Live processes adds extra visibility to your container deployments.  In addition to aggregating on orchestrator metadata, like ECS `task` or Kubernetes `service`
+Live processes adds extra visibility to your container deployments.  In addition to aggregating on orchestrator metadata, like ECS `task` or Kubernetes `service`, and drilling down to the container level, when Live Processes is enabled, you can continue to drill down into the process tree inside each container.
 
 {{< img src="infrastructure/process/containerinspect.png" >}}
 
