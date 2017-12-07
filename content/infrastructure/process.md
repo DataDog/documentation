@@ -72,11 +72,11 @@ Making sense of hundreds of thousands or millions of processes can seem overwhel
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
-<>
+{{< img src="infrastructure/process/mcnultynginx.png" >}}
 
 Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics for voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
 
-<>
+{{< img src="infrastructure/process/burritoelasticsearch.png" >}}
 
 Below, we have searched for ssh processes and pivoted by `user` to understand who is logged into which hosts.
 
