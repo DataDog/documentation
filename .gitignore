@@ -16,7 +16,7 @@ content/integrations/*.md
 !content/integrations/tcprtt.md
 
 # Logs
-logs
+/logs/*
 *.log
 npm-debug.log*
 

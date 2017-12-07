@@ -8,6 +8,10 @@ body > header {
   width:100%;
   top:0;
 
+  & > .container {
+    padding-right: 0;
+  }
+
   &.scrolled {
     .mainnav {
       .logo-img {
@@ -39,8 +43,8 @@ body > header {
       margin-top: 13px;
     }
     .logo-text {
-      height: 14px;
-      margin-top: -8px;
+      //height: 14px;
+
     }
     .navbar-left li:first-child a.nav-link {
       //padding-left:0;
@@ -54,10 +58,11 @@ body > header {
         text-transform: uppercase;
         font-size: 18px;
         font-weight: 600;
-        letter-spacing: .4px;
+        letter-spacing: 0.3px;
         border-radius: 5px;
         border:1px solid transparent;
         padding:8.5px 8px 9.5px;
+        padding-right:12px;
         &:hover,
         &.active {
           //transition: all .2s;
@@ -238,8 +243,10 @@ body > header {
 @media (max-width: 1199px) {
   body > header {
     .mainnav {
-      .logo-text {
-        margin-left:-7px;
+      picture.logo-text {
+        //margin-left:-7px;
+        left: -7px;
+        position: relative;
       }
     }
   }

@@ -9,9 +9,21 @@ $(document).ready(function () {
         return this.length;
     };
 
-    $('table, .table-responsive-container').each(function() {
+    $('.table-responsive-container table').each(function() {
         if(!$(this).hasClass('table-responsive')) {
             $(this).addClass('table-responsive');
+        }
+    });
+
+    $('table').each(function() {
+        var emptyThead = true;
+        $(this).find('thead th').each(function() {
+            if(!$(this).is(':empty')) {
+                emptyThead = false;
+            }
+        });
+        if(emptyThead) {
+            $(this).find('thead').remove();
         }
     });
 
@@ -362,6 +374,10 @@ $(document).ready(function () {
         var href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1));
+            /*var pop = document.getElementById('api-popper')
+            if(pop) {
+                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
+            }*/
             return false;
         }
     });
@@ -383,6 +399,25 @@ $(document).ready(function () {
             return false;
         }
     });
+    /*if($('.api-nav').length) {
+        var ref = document.querySelector('.api-popper-button');
+        var pop = document.getElementById('api-popper');
+        if(ref && pop) {
+            ref.addEventListener('click', function(e) {
+                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
+                var p = new Popper(ref, pop, {
+                    placement: "start-bottom",
+                    modifiers: {
+                        preventOverflow: { enabled: false },
+                        hide: {
+                            enabled: false
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }*/
 
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {

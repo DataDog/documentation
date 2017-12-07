@@ -2,7 +2,12 @@
     <div class="col-6 col-md-4">
         <a class="card agent" href="{{ .Site.BaseURL }}agent/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/agent.png" "alt" "agent" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/agent.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="agent">
+                </picture>
                 <p class="title">Agent</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>
@@ -11,7 +16,12 @@
     <div class="col-6 col-md-4">
         <a class="card integrations" href="{{ .Site.BaseURL }}integrations/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/integrations.png" "alt" "integrations" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/integrations.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="integrations">
+                </picture>
                 <p class="title">Integrations</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>
@@ -20,7 +30,12 @@
     <div class="col-6 col-md-4">
         <a class="card graphing" href="{{ .Site.BaseURL }}graphing/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/graphing.png" "alt" "graphing" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/graphing.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="graphing">
+                </picture>
                 <p class="title">Graphing</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>
@@ -29,7 +44,12 @@
     <div class="col-6 col-md-4">
         <a class="card alerting" href="{{ .Site.BaseURL }}monitoring/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/alerting.png" "alt" "alerting" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/alerting.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="alerting">
+                </picture>
                 <p class="title">Alerting</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>
@@ -38,7 +58,12 @@
     <div class="col-6 col-md-4">
         <a class="card tracing" href="{{ .Site.BaseURL }}tracing/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/tracing_apm.png" "alt" "alerting" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/tracing_apm.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="tracing">
+                </picture>
                 <p class="title">APM (Tracing)</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>
@@ -47,7 +72,12 @@
     <div class="col-6 col-md-4">
         <a class="card developers" href="{{ .Site.BaseURL }}developers/">
             <div class="card-body text-center">
-                {{ partial "img.html" (dict "root" . "src" "icons/developers.png" "alt" "developers" "width" "80" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=80") }}
+                {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/developers.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                <picture class="mx-auto">
+                    <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
+                    <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
+                    <img class="img-fluid mx-auto" srcset="{{ $url }}&w=80" alt="developers">
+                </picture>
                 <p class="title">Developer tools</p>
                 <p class="desc d-none d-sm-inline-block">Install it, Configure it, <br/>Learn how it works</p>
             </div>

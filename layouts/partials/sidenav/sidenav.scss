@@ -64,13 +64,14 @@ aside.sidenav {
   }
 
   h4 {
-    padding:10px 0 10px 6px;
+    padding:10px 0 10px 15px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
   }
 
   .sidenav-search {
+    margin-left:7px;
     padding-right: 15px;
     //margin-right: 30px;
     .input-group-addon {
@@ -102,8 +103,15 @@ aside.sidenav {
   }
 
   .sidenav-nav {
+    margin-left:7px;
     overflow-x: hidden;
     overflow-y: auto;
+    ul {
+      padding-bottom:6px;
+    }
+    & > ul {
+      margin-top:5px;
+    }
     ul li > ul {
       display: none;
     }
@@ -125,7 +133,7 @@ aside.sidenav {
           color:#000;
           font-size:18px;
           font-weight: 600;
-          padding:6px 0 0 2px;
+          padding:3px 0 0 2px;
           display:block;
           &.active {
             color: $ddpurple;
@@ -150,11 +158,13 @@ aside.sidenav {
         ul li {
           a {
             font-weight:200;
+            line-height:24px;
           }
 
           // 3rd level
           ul li a {
             font-size:15px;
+            line-height:22px;
           }
         }
       }
@@ -166,12 +176,13 @@ aside.sidenav-api {
   .sidenav-nav {
     overflow-x: hidden;
     overflow-y: auto;
+    margin:0;
   }
   .sticky {
     top:65px;
   }
   ul li a {
-    line-height: 22px;
+    line-height: 24px;
     font-size:18px;
     font-weight:600;
     color: #000;
@@ -179,7 +190,7 @@ aside.sidenav-api {
     display: block;
   }
   ul:first-of-type {
-    margin-left:10px;
+    margin-left: 3px;
   }
   h4 {
     padding-left: 10px;
