@@ -133,7 +133,7 @@ languages:
           weight: 40
           parent: menu_references_agent
         - identifier: customnav_agentnav_installcoreextra
-          name: "Install Core Extra"
+          name: "Install Core & Extra"
           url: "/agent/installcoreextra/"
           weight: 50
           parent: menu_references_agent
