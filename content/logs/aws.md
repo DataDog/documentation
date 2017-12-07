@@ -35,7 +35,7 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
     {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
 
 4. Scroll down beyond the inline code area to **Basic Settings**.
-5. Set the memory to the highest possible value.
+5. Set the memory to **around 1GB**.
 6. Set the timeout limit. We recommend **120 seconds.**
     {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" >}}
 7. Scroll back to the top of the page and hit **Save.**
@@ -50,9 +50,9 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
 
 ## Collection
 
-Your Lambda function is now ready to send logs to the Datadog platform. Setup the relevant triggers for each AWS service you want to monitor.
+Your Lambda function is now ready to send logs to the Datadog platform. 
 
-**The Lambda function you just created must be in the same region as the S3 bucket you are using as a trigger. If you have logs across multiple regions you must create additional Lambda funcions.**
+There are two ways to configure the triggers that will cause the Lambda to execute and send logs to Datadog. We can [automatically](#automatically-set-up-triggers) manage them for you if you grant us a set of [permissions](#permissions), or you can [manually](#manually-set-up-triggers) set up each trigger yourself in the AWS console.
 
 ### Automatically set up triggers
 If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
@@ -79,7 +79,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
 5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
 6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function will be removed. 
-7. Within a few minutes you should see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs).
+7. Within a few minutes of this initial setup, you will see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs) in near real time.
 
 ### Manually set up triggers
 In your Lambda, go in the triggers tab and select `Add Trigger`:
