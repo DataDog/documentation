@@ -8,7 +8,7 @@ customnav: infrastructurenav
 
 ## Introduction
 
-Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+Datadog Process Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
 {{< img src="infrastructure/process/live_process_preview.png" >}}
 
@@ -68,7 +68,7 @@ Processes are by their nature extremely high cardinality objects.  Our fuzzy str
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
+Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
@@ -92,7 +92,7 @@ Live processes adds extra visibility to your container deployments.  In addition
 
 ## Real-time monitoring
 
-While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
+While actively working with the Live Processes, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
 
 ## Notes/known issues
 
