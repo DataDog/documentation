@@ -96,4 +96,4 @@ The start and end times to specify when using the API are the start and end time
 
 ### Limitations
 
-Not all functions may be nested inside of forecast. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `default()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`
+Not all functions may be nested inside of calls to the `forecast()` function. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `default()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`
