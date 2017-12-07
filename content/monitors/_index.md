@@ -5,6 +5,7 @@ autotocdepth: 2
 customnav: monitornav
 aliases:
     - /guides/monitors/
+description: Create & manage your notifications
 ---
 
 ## Overview
